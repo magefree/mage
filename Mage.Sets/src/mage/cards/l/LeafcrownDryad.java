@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.theros;
+package mage.cards.l;
 
 import java.util.UUID;
 import mage.MageInt;
@@ -37,9 +37,9 @@ import mage.abilities.effects.common.continuous.GainAbilityAttachedEffect;
 import mage.abilities.keyword.BestowAbility;
 import mage.abilities.keyword.ReachAbility;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.AttachmentType;
 import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.constants.Zone;
 
 /**
@@ -48,9 +48,8 @@ import mage.constants.Zone;
  */
 public class LeafcrownDryad extends CardImpl {
 
-    public LeafcrownDryad(UUID ownerId) {
-        super(ownerId, 161, "Leafcrown Dryad", Rarity.COMMON, new CardType[]{CardType.ENCHANTMENT, CardType.CREATURE}, "{1}{G}");
-        this.expansionSetCode = "THS";
+    public LeafcrownDryad(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.ENCHANTMENT,CardType.CREATURE},"{1}{G}");
         this.subtype.add("Nymph");
         this.subtype.add("Dryad");
 

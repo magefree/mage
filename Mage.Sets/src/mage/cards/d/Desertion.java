@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.visions;
+package mage.cards.d;
 
 import java.util.HashSet;
 import java.util.Set;
@@ -33,9 +33,9 @@ import java.util.UUID;
 import mage.abilities.Ability;
 import mage.abilities.effects.OneShotEffect;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Outcome;
-import mage.constants.Rarity;
 import mage.constants.Zone;
 import mage.constants.ZoneDetail;
 import mage.game.Game;
@@ -49,9 +49,8 @@ import mage.target.TargetSpell;
  */
 public class Desertion extends CardImpl {
 
-    public Desertion(UUID ownerId) {
-        super(ownerId, 30, "Desertion", Rarity.RARE, new CardType[]{CardType.INSTANT}, "{3}{U}{U}");
-        this.expansionSetCode = "VIS";
+    public Desertion(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.INSTANT},"{3}{U}{U}");
 
         // Counter target spell. If an artifact or creature spell is countered this way, put that card onto the battlefield under your control instead of into its owner's graveyard.
         this.getSpellAbility().addEffect(new DesertionEffect());

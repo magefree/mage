@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.fifthedition;
+package mage.cards.b;
 
 import java.util.UUID;
 
@@ -36,9 +36,9 @@ import mage.abilities.costs.mana.GenericManaCost;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.keyword.FlyingAbility;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Outcome;
-import mage.constants.Rarity;
 import mage.constants.Zone;
 import mage.game.Game;
 import mage.game.permanent.token.Token;
@@ -51,9 +51,8 @@ import mage.MageInt;
  */
 public class BottleOfSuleiman extends CardImpl {
 
-    public BottleOfSuleiman(UUID ownerId) {
-        super(ownerId, 354, "Bottle of Suleiman", Rarity.RARE, new CardType[]{CardType.ARTIFACT}, "{4}");
-        this.expansionSetCode = "5ED";
+    public BottleOfSuleiman(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.ARTIFACT},"{4}");
 
         // {1}, Sacrifice Bottle of Suleiman: Flip a coin. If you lose the flip, Bottle of Suleiman deals 5 damage to you. If you win the flip, put a 5/5 colorless Djinn artifact creature token with flying onto the battlefield.
         Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new BottleOfSuleimanEffect(), new GenericManaCost(1));

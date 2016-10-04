@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.avacynrestored;
+package mage.cards.c;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -45,10 +45,10 @@ import mage.abilities.mana.ConditionalAnyColorManaAbility;
 import mage.abilities.mana.builder.ConditionalManaBuilder;
 import mage.abilities.mana.conditional.CreatureCastManaCondition;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Duration;
 import mage.constants.Outcome;
-import mage.constants.Rarity;
 import mage.constants.WatcherScope;
 import mage.constants.Zone;
 import mage.game.Game;
@@ -63,9 +63,8 @@ import mage.watchers.Watcher;
  */
 public class CavernOfSouls extends CardImpl {
 
-    public CavernOfSouls(UUID ownerId) {
-        super(ownerId, 226, "Cavern of Souls", Rarity.RARE, new CardType[]{CardType.LAND}, "");
-        this.expansionSetCode = "AVR";
+    public CavernOfSouls(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.LAND},"");
 
         // As Cavern of Souls enters the battlefield, choose a creature type.
         this.addAbility(new AsEntersBattlefieldAbility(new ChooseCreatureTypeEffect(Outcome.BoostCreature)));

@@ -25,15 +25,15 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.shadowmoor;
+package mage.cards.p;
 
 import java.util.UUID;
 import mage.abilities.effects.Effect;
 import mage.abilities.effects.common.DamageTargetControllerEffect;
 import mage.abilities.effects.common.DestroyTargetEffect;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.target.common.TargetLandPermanent;
 
 /**
@@ -42,9 +42,8 @@ import mage.target.common.TargetLandPermanent;
  */
 public class PoisonTheWell extends CardImpl {
 
-    public PoisonTheWell(UUID ownerId) {
-        super(ownerId, 193, "Poison the Well", Rarity.COMMON, new CardType[]{CardType.SORCERY}, "{2}{B/R}{B/R}");
-        this.expansionSetCode = "SHM";
+    public PoisonTheWell(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{2}{B/R}{B/R}");
 
         // Destroy target land. Poison the Well deals 2 damage to that land's controller.
         this.getSpellAbility().addEffect(new DestroyTargetEffect());

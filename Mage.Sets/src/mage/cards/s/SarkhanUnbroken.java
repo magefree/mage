@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.dragonsoftarkir;
+package mage.cards.s;
 
 import java.util.LinkedHashSet;
 import java.util.Set;
@@ -38,11 +38,11 @@ import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.CreateTokenEffect;
 import mage.abilities.effects.common.search.SearchLibraryPutInPlayEffect;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.choices.Choice;
 import mage.choices.ChoiceImpl;
 import mage.constants.CardType;
 import mage.constants.Outcome;
-import mage.constants.Rarity;
 import mage.filter.FilterCard;
 import mage.filter.predicate.mageobject.SubtypePredicate;
 import mage.game.Game;
@@ -62,9 +62,8 @@ public class SarkhanUnbroken extends CardImpl {
         dragonFilter.add(new SubtypePredicate("Dragon"));
     }
 
-    public SarkhanUnbroken(UUID ownerId) {
-        super(ownerId, 230, "Sarkhan Unbroken", Rarity.MYTHIC, new CardType[]{CardType.PLANESWALKER}, "{2}{G}{U}{R}");
-        this.expansionSetCode = "DTK";
+    public SarkhanUnbroken(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.PLANESWALKER},"{2}{G}{U}{R}");
         this.subtype.add("Sarkhan");
 
         this.addAbility(new PlanswalkerEntersWithLoyalityCountersAbility(4));

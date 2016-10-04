@@ -25,14 +25,14 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.shardsofalara;
+package mage.cards.b;
 
 import java.util.UUID;
 import mage.abilities.costs.common.SacrificeTargetCost;
 import mage.abilities.effects.common.DestroyTargetEffect;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.filter.common.FilterControlledCreaturePermanent;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.target.common.TargetControlledCreaturePermanent;
@@ -44,9 +44,8 @@ import mage.target.common.TargetCreaturePermanent;
  */
 public class BoneSplinters extends CardImpl {
 
-    public BoneSplinters(UUID ownerId) {
-        super(ownerId, 67, "Bone Splinters", Rarity.COMMON, new CardType[]{CardType.SORCERY}, "{B}");
-        this.expansionSetCode = "ALA";
+    public BoneSplinters(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{B}");
 
         // As an additional cost to cast Bone Splinters, sacrifice a creature.
         this.getSpellAbility().addCost(new SacrificeTargetCost(new TargetControlledCreaturePermanent(new FilterControlledCreaturePermanent("a creature"))));

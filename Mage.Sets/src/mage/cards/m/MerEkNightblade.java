@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.khansoftarkir;
+package mage.cards.m;
 
 import java.util.UUID;
 import mage.MageInt;
@@ -35,9 +35,9 @@ import mage.abilities.effects.common.continuous.GainAbilityAllEffect;
 import mage.abilities.keyword.DeathtouchAbility;
 import mage.abilities.keyword.OutlastAbility;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Duration;
-import mage.constants.Rarity;
 import mage.constants.TargetController;
 import mage.constants.Zone;
 import mage.counters.CounterType;
@@ -59,9 +59,8 @@ public class MerEkNightblade extends CardImpl {
         filter.add(new CounterPredicate(CounterType.P1P1));
     }
 
-    public MerEkNightblade(UUID ownerId) {
-        super(ownerId, 79, "Mer-Ek Nightblade", Rarity.UNCOMMON, new CardType[]{CardType.CREATURE}, "{3}{B}");
-        this.expansionSetCode = "KTK";
+    public MerEkNightblade(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{3}{B}");
         this.subtype.add("Orc");
         this.subtype.add("Assassin");
 

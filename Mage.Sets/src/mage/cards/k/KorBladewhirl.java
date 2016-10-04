@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.battleforzendikar;
+package mage.cards.k;
 
 import java.util.UUID;
 import mage.MageInt;
@@ -33,9 +33,9 @@ import mage.abilities.common.AllyEntersBattlefieldTriggeredAbility;
 import mage.abilities.effects.common.continuous.GainAbilityControlledEffect;
 import mage.abilities.keyword.FirstStrikeAbility;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Duration;
-import mage.constants.Rarity;
 import mage.filter.common.FilterCreaturePermanent;
 
 /**
@@ -44,9 +44,8 @@ import mage.filter.common.FilterCreaturePermanent;
  */
 public class KorBladewhirl extends CardImpl {
 
-    public KorBladewhirl(UUID ownerId) {
-        super(ownerId, 34, "Kor Bladewhirl", Rarity.UNCOMMON, new CardType[]{CardType.CREATURE}, "{1}{W}");
-        this.expansionSetCode = "BFZ";
+    public KorBladewhirl(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{1}{W}");
         this.subtype.add("Kor");
         this.subtype.add("Soldier");
         this.subtype.add("Ally");

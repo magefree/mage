@@ -25,12 +25,11 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.newphyrexia;
+package mage.cards.p;
 
 import java.util.UUID;
 
 import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.abilities.Ability;
 import mage.abilities.common.BeginningOfUpkeepTriggeredAbility;
 import mage.abilities.effects.OneShotEffect;
@@ -38,6 +37,7 @@ import mage.abilities.effects.common.AttachEffect;
 import mage.abilities.effects.common.CreateTokenEffect;
 import mage.abilities.keyword.EnchantAbility;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.Outcome;
 import mage.constants.TargetController;
 import mage.game.Game;
@@ -52,9 +52,8 @@ import mage.target.common.TargetCreaturePermanent;
  */
 public class ParasiticImplant extends CardImpl {
 
-    public ParasiticImplant(UUID ownerId) {
-        super(ownerId, 67, "Parasitic Implant", Rarity.COMMON, new CardType[]{CardType.ENCHANTMENT}, "{3}{B}");
-        this.expansionSetCode = "NPH";
+    public ParasiticImplant(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.ENCHANTMENT},"{3}{B}");
         this.subtype.add("Aura");
 
 

@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.futuresight;
+package mage.cards.s;
 
 import java.util.UUID;
 import mage.MageInt;
@@ -36,8 +36,8 @@ import mage.abilities.effects.Effect;
 import mage.abilities.effects.common.counter.AddCountersSourceEffect;
 import mage.abilities.keyword.HasteAbility;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.counters.CounterType;
 import mage.game.Game;
 import mage.watchers.common.CastSpellLastTurnWatcher;
@@ -48,9 +48,8 @@ import mage.watchers.common.CastSpellLastTurnWatcher;
  */
 public class StormEntity extends CardImpl {
 
-    public StormEntity(UUID ownerId) {
-        super(ownerId, 122, "Storm Entity", Rarity.UNCOMMON, new CardType[]{CardType.CREATURE}, "{1}{R}");
-        this.expansionSetCode = "FUT";
+    public StormEntity(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{1}{R}");
         this.subtype.add("Elemental");
         this.power = new MageInt(1);
         this.toughness = new MageInt(1);

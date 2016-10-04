@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.ravnica;
+package mage.cards.d;
 
 import java.util.UUID;
 import mage.MageInt;
@@ -33,9 +33,9 @@ import mage.abilities.Ability;
 import mage.abilities.common.DealsCombatDamageToAPlayerTriggeredAbility;
 import mage.abilities.effects.OneShotEffect;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Outcome;
-import mage.constants.Rarity;
 import mage.game.Game;
 import mage.players.Player;
 
@@ -46,9 +46,8 @@ import mage.players.Player;
  */
 public class DimirCutpurse extends CardImpl {
 
-    public DimirCutpurse(UUID ownerId) {
-        super(ownerId, 201, "Dimir Cutpurse", Rarity.RARE, new CardType[]{CardType.CREATURE}, "{1}{U}{B}");
-        this.expansionSetCode = "RAV";
+    public DimirCutpurse(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{1}{U}{B}");
         this.subtype.add("Spirit");
 
         this.power = new MageInt(2);

@@ -25,15 +25,15 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.tempestremastered;
+package mage.cards.s;
 
 import java.util.UUID;
 import mage.abilities.TriggeredAbilityImpl;
 import mage.abilities.effects.Effect;
 import mage.abilities.effects.common.DamageTargetEffect;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.constants.Zone;
 import mage.game.Game;
 import mage.game.events.GameEvent;
@@ -47,9 +47,8 @@ import mage.target.targetpointer.FixedTarget;
  */
 public class Spellshock extends CardImpl {
 
-    public Spellshock(UUID ownerId) {
-        super(ownerId, 160, "Spellshock", Rarity.UNCOMMON, new CardType[]{CardType.ENCHANTMENT}, "{2}{R}");
-        this.expansionSetCode = "TPR";
+    public Spellshock(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.ENCHANTMENT},"{2}{R}");
 
         // Whenever a player casts a spell, Spellshock deals 2 damage to that player.
         this.addAbility(new SpellshockTriggeredAbility());

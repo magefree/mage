@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.saviorsofkamigawa;
+package mage.cards.s;
 
 import java.util.UUID;
 import mage.abilities.dynamicvalue.DynamicValue;
@@ -33,8 +33,8 @@ import mage.abilities.dynamicvalue.common.SweepNumber;
 import mage.abilities.effects.common.discard.DiscardTargetEffect;
 import mage.abilities.effects.keyword.SweepEffect;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.target.TargetPlayer;
 
 /**
@@ -43,9 +43,8 @@ import mage.target.TargetPlayer;
  */
 public class SinkIntoTakenuma extends CardImpl {
 
-    public SinkIntoTakenuma(UUID ownerId) {
-        super(ownerId, 89, "Sink into Takenuma", Rarity.COMMON, new CardType[]{CardType.SORCERY}, "{3}{B}");
-        this.expansionSetCode = "SOK";
+    public SinkIntoTakenuma(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{3}{B}");
         this.subtype.add("Arcane");
 
 

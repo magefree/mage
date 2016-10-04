@@ -26,7 +26,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.gatecrash;
+package mage.cards.c;
 
 import java.util.UUID;
 import mage.MageInt;
@@ -35,8 +35,8 @@ import mage.abilities.effects.common.BasicManaEffect;
 import mage.abilities.keyword.ExtortAbility;
 import mage.abilities.mana.TriggeredManaAbility;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.constants.Zone;
 import mage.filter.common.FilterControlledLandPermanent;
 import mage.filter.predicate.mageobject.SubtypePredicate;
@@ -51,9 +51,8 @@ import mage.game.permanent.Permanent;
  */
 public class CryptGhast extends CardImpl {
 
-    public CryptGhast(UUID ownerId) {
-        super(ownerId, 61, "Crypt Ghast", Rarity.RARE, new CardType[]{CardType.CREATURE}, "{3}{B}");
-        this.expansionSetCode = "GTC";
+    public CryptGhast(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{3}{B}");
         this.subtype.add("Spirit");
 
         this.power = new MageInt(2);

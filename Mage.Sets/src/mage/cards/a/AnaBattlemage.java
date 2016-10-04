@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.planarchaos;
+package mage.cards.a;
 
 import java.util.UUID;
 import mage.MageInt;
@@ -38,9 +38,9 @@ import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.discard.DiscardTargetEffect;
 import mage.abilities.keyword.KickerAbility;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Outcome;
-import mage.constants.Rarity;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.filter.predicate.Predicates;
 import mage.filter.predicate.permanent.TappedPredicate;
@@ -62,9 +62,8 @@ public class AnaBattlemage extends CardImpl {
         filter.add(Predicates.not(new TappedPredicate()));
     }
 
-    public AnaBattlemage(UUID ownerId) {
-        super(ownerId, 124, "Ana Battlemage", Rarity.UNCOMMON, new CardType[]{CardType.CREATURE}, "{2}{G}");
-        this.expansionSetCode = "PLC";
+    public AnaBattlemage(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{2}{G}");
         this.subtype.add("Human");
         this.subtype.add("Wizard");
         this.power = new MageInt(2);

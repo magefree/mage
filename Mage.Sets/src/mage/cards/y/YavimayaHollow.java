@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.urzasdestiny;
+package mage.cards.y;
 
 import java.util.UUID;
 import mage.abilities.Ability;
@@ -35,8 +35,8 @@ import mage.abilities.costs.mana.ManaCostsImpl;
 import mage.abilities.effects.common.RegenerateTargetEffect;
 import mage.abilities.mana.ColorlessManaAbility;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.constants.Zone;
 import mage.target.common.TargetCreaturePermanent;
 
@@ -46,9 +46,8 @@ import mage.target.common.TargetCreaturePermanent;
  */
 public class YavimayaHollow extends CardImpl {
 
-    public YavimayaHollow(UUID ownerId) {
-        super(ownerId, 143, "Yavimaya Hollow", Rarity.RARE, new CardType[]{CardType.LAND}, "");
-        this.expansionSetCode = "UDS";
+    public YavimayaHollow(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.LAND},"");
         this.supertype.add("Legendary");
 
         // {tap}: Add {C} to your mana pool.

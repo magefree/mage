@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.fifthedition;
+package mage.cards.d;
 
 import java.util.UUID;
 import mage.MageInt;
@@ -34,8 +34,8 @@ import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.costs.common.TapSourceCost;
 import mage.abilities.effects.common.DamageTargetEffect;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.constants.Zone;
 import mage.target.common.TargetAttackingOrBlockingCreature;
 
@@ -45,9 +45,8 @@ import mage.target.common.TargetAttackingOrBlockingCreature;
  */
 public class DAvenantArcher extends CardImpl {
 
-    public DAvenantArcher(UUID ownerId) {
-        super(ownerId, 299, "D'Avenant Archer", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{2}{W}");
-        this.expansionSetCode = "5ED";
+    public DAvenantArcher(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{2}{W}");
         this.subtype.add("Human");
         this.subtype.add("Soldier");
         this.subtype.add("Archer");

@@ -25,16 +25,16 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.worldwake;
+package mage.cards.s;
 
 import java.util.UUID;
 import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.EntersBattlefieldTriggeredAbility;
 import mage.abilities.effects.common.ReturnToHandTargetEffect;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.filter.predicate.permanent.TappedPredicate;
 import mage.target.common.TargetCreaturePermanent;
@@ -51,9 +51,8 @@ public class SurrakarBanisher extends CardImpl {
         filter.add(new TappedPredicate());
     }
 
-    public SurrakarBanisher(UUID ownerId) {
-        super(ownerId, 39, "Surrakar Banisher", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{4}{U}");
-        this.expansionSetCode = "WWK";
+    public SurrakarBanisher(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{4}{U}");
         this.subtype.add("Surrakar");
 
         this.power = new MageInt(3);

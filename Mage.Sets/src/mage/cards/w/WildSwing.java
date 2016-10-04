@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.shadowmoor;
+package mage.cards.w;
 
 import java.util.Random;
 import java.util.UUID;
@@ -33,9 +33,9 @@ import mage.MageObject;
 import mage.abilities.Ability;
 import mage.abilities.effects.OneShotEffect;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Outcome;
-import mage.constants.Rarity;
 import mage.filter.FilterPermanent;
 import mage.filter.predicate.Predicates;
 import mage.filter.predicate.mageobject.CardTypePredicate;
@@ -57,9 +57,8 @@ public class WildSwing extends CardImpl {
         filter.add(Predicates.not(new CardTypePredicate(CardType.ENCHANTMENT)));
     }
 
-    public WildSwing(UUID ownerId) {
-        super(ownerId, 108, "Wild Swing", Rarity.UNCOMMON, new CardType[]{CardType.SORCERY}, "{3}{R}");
-        this.expansionSetCode = "SHM";
+    public WildSwing(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{3}{R}");
 
         // Choose three target nonenchantment permanents. Destroy one of them at random.
         this.getSpellAbility().addEffect(new WildSwingEffect());

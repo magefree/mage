@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.newphyrexia;
+package mage.cards.c;
 
 import java.util.UUID;
 import mage.MageInt;
@@ -36,9 +36,9 @@ import mage.abilities.effects.OneShotEffect;
 import mage.abilities.keyword.FlyingAbility;
 import mage.abilities.keyword.LifelinkAbility;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Outcome;
-import mage.constants.Rarity;
 import mage.game.Game;
 import mage.game.events.GameEvent;
 import mage.game.events.GameEvent.EventType;
@@ -51,9 +51,8 @@ public class ChancellorOfTheDross extends CardImpl {
 
     private static String abilityText = "at the beginning of the first upkeep, each opponent loses 3 life, then you gain life equal to the life lost this way";
 
-    public ChancellorOfTheDross(UUID ownerId) {
-        super(ownerId, 54, "Chancellor of the Dross", Rarity.RARE, new CardType[]{CardType.CREATURE}, "{4}{B}{B}{B}");
-        this.expansionSetCode = "NPH";
+    public ChancellorOfTheDross(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{4}{B}{B}{B}");
         this.subtype.add("Vampire");
 
         this.power = new MageInt(6);

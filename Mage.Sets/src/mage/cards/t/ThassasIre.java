@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.journeyintonyx;
+package mage.cards.t;
 
 import java.util.UUID;
 import mage.abilities.Ability;
@@ -33,8 +33,8 @@ import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.costs.mana.ManaCostsImpl;
 import mage.abilities.effects.common.MayTapOrUntapTargetEffect;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.constants.Zone;
 import mage.target.common.TargetCreaturePermanent;
 
@@ -44,9 +44,8 @@ import mage.target.common.TargetCreaturePermanent;
  */
 public class ThassasIre extends CardImpl {
 
-    public ThassasIre(UUID ownerId) {
-        super(ownerId, 54, "Thassa's Ire", Rarity.UNCOMMON, new CardType[]{CardType.ENCHANTMENT}, "{U}");
-        this.expansionSetCode = "JOU";
+    public ThassasIre(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.ENCHANTMENT},"{U}");
 
 
         // {3}{U}: You may tap or untap target creature.

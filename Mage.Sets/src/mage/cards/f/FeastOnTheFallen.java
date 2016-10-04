@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.magic2015;
+package mage.cards.f;
 
 import java.util.UUID;
 import mage.abilities.Ability;
@@ -34,8 +34,8 @@ import mage.abilities.condition.Condition;
 import mage.abilities.decorator.ConditionalTriggeredAbility;
 import mage.abilities.effects.common.counter.AddCountersTargetEffect;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.constants.TargetController;
 import mage.constants.Zone;
 import mage.counters.CounterType;
@@ -49,9 +49,8 @@ import mage.watchers.common.PlayerLostLifeWatcher;
  */
 public class FeastOnTheFallen extends CardImpl {
 
-    public FeastOnTheFallen(UUID ownerId) {
-        super(ownerId, 96, "Feast on the Fallen", Rarity.UNCOMMON, new CardType[]{CardType.ENCHANTMENT}, "{2}{B}");
-        this.expansionSetCode = "M15";
+    public FeastOnTheFallen(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.ENCHANTMENT},"{2}{B}");
 
 
         // At the beginning of each upkeep, if an opponent lost life last turn, put a +1/+1 counter on target creature you control. 

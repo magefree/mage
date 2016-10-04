@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.vintagemasters;
+package mage.cards.y;
 
 import java.util.UUID;
 import mage.abilities.common.SimpleActivatedAbility;
@@ -34,8 +34,8 @@ import mage.abilities.costs.common.PayLifeCost;
 import mage.abilities.effects.common.DrawCardSourceControllerEffect;
 import mage.abilities.effects.common.SkipDrawStepEffect;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.constants.Zone;
 
 /**
@@ -44,9 +44,8 @@ import mage.constants.Zone;
  */
 public class YawgmothsBargain extends CardImpl {
 
-    public YawgmothsBargain(UUID ownerId) {
-        super(ownerId, 147, "Yawgmoth's Bargain", Rarity.MYTHIC, new CardType[]{CardType.ENCHANTMENT}, "{4}{B}{B}");
-        this.expansionSetCode = "VMA";
+    public YawgmothsBargain(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.ENCHANTMENT},"{4}{B}{B}");
 
 
         // Skip your draw step.

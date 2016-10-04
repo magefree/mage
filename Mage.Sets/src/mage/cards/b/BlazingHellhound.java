@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.magicorigins;
+package mage.cards.b;
 
 import java.util.UUID;
 import mage.MageInt;
@@ -35,8 +35,8 @@ import mage.abilities.costs.common.SacrificeTargetCost;
 import mage.abilities.costs.mana.ManaCostsImpl;
 import mage.abilities.effects.common.DamageTargetEffect;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.constants.Zone;
 import mage.filter.common.FilterControlledCreaturePermanent;
 import mage.filter.common.FilterControlledPermanent;
@@ -56,9 +56,8 @@ public class BlazingHellhound extends CardImpl {
         filter.add(new AnotherPredicate());
     }
 
-    public BlazingHellhound(UUID ownerId) {
-        super(ownerId, 210, "Blazing Hellhound", Rarity.UNCOMMON, new CardType[]{CardType.CREATURE}, "{2}{B}{R}");
-        this.expansionSetCode = "ORI";
+    public BlazingHellhound(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{2}{B}{R}");
         this.subtype.add("Elemental");
         this.subtype.add("Hound");
         this.power = new MageInt(4);

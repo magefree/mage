@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.limitedalpha;
+package mage.cards.s;
 
 import java.util.UUID;
 import mage.abilities.Ability;
@@ -33,12 +33,12 @@ import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.effects.AsThoughEffectImpl;
 import mage.abilities.effects.AsThoughManaEffect;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.AsThoughEffectType;
 import mage.constants.CardType;
 import mage.constants.Duration;
 import mage.constants.ManaType;
 import mage.constants.Outcome;
-import mage.constants.Rarity;
 import mage.constants.Zone;
 import mage.game.Game;
 import mage.players.ManaPoolItem;
@@ -49,9 +49,8 @@ import mage.players.ManaPoolItem;
  */
 public class SunglassesOfUrza extends CardImpl {
 
-    public SunglassesOfUrza(UUID ownerId) {
-        super(ownerId, 271, "Sunglasses of Urza", Rarity.RARE, new CardType[]{CardType.ARTIFACT}, "{3}");
-        this.expansionSetCode = "LEA";
+    public SunglassesOfUrza(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.ARTIFACT},"{3}");
 
         // You may spend white mana as though it were red mana.
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new SunglassesOfUrzaManaAsThoughtEffect()));

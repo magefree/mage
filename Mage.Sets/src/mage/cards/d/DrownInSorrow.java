@@ -25,15 +25,15 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.bornofthegods;
+package mage.cards.d;
 
 import java.util.UUID;
 import mage.abilities.effects.keyword.ScryEffect;
 import mage.abilities.effects.common.continuous.BoostAllEffect;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Duration;
-import mage.constants.Rarity;
 
 /**
  *
@@ -41,9 +41,8 @@ import mage.constants.Rarity;
  */
 public class DrownInSorrow extends CardImpl {
 
-    public DrownInSorrow(UUID ownerId) {
-        super(ownerId, 65, "Drown in Sorrow", Rarity.UNCOMMON, new CardType[]{CardType.SORCERY}, "{1}{B}{B}");
-        this.expansionSetCode = "BNG";
+    public DrownInSorrow(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{1}{B}{B}");
 
 
         // All creatures get -2/-2 until end of turn. Scry 1.

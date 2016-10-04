@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.weatherlight;
+package mage.cards.f;
 
 import java.util.UUID;
 import mage.MageInt;
@@ -33,8 +33,8 @@ import mage.abilities.common.EntersBattlefieldTriggeredAbility;
 import mage.abilities.costs.common.DiscardCardCost;
 import mage.abilities.effects.common.SacrificeSourceUnlessPaysEffect;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.filter.common.FilterLandCard;
 
 /**
@@ -43,9 +43,8 @@ import mage.filter.common.FilterLandCard;
  */
 public class FallowWurm extends CardImpl {
 
-    public FallowWurm(UUID ownerId) {
-        super(ownerId, 68, "Fallow Wurm", Rarity.UNCOMMON, new CardType[]{CardType.CREATURE}, "{2}{G}");
-        this.expansionSetCode = "WTH";
+    public FallowWurm(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{2}{G}");
         this.subtype.add("Wurm");
         this.power = new MageInt(4);
         this.toughness = new MageInt(4);

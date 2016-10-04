@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.starwars;
+package mage.cards.i;
 
 import java.util.UUID;
 import mage.abilities.Ability;
@@ -34,9 +34,9 @@ import mage.abilities.costs.common.PayLifeCost;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.discard.DiscardTargetEffect;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Outcome;
-import mage.constants.Rarity;
 import mage.game.Game;
 import mage.players.Player;
 import mage.target.TargetPlayer;
@@ -47,9 +47,8 @@ import mage.target.TargetPlayer;
  */
 public class Interrogation extends CardImpl {
 
-    public Interrogation(UUID ownerId) {
-        super(ownerId, 80, "Interrogation", Rarity.COMMON, new CardType[]{CardType.SORCERY}, "{1}{B}");
-        this.expansionSetCode = "SWS";
+    public Interrogation(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{1}{B}");
 
         // Target player discards a card. Then that player discards another card unless he or she pays 3 life.
         this.getSpellAbility().addTarget(new TargetPlayer());

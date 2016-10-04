@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.shadowsoverinnistrad;
+package mage.cards.h;
 
 import java.util.UUID;
 import mage.MageInt;
@@ -35,9 +35,10 @@ import mage.abilities.condition.common.NoSpellsWereCastLastTurnCondition;
 import mage.abilities.decorator.ConditionalTriggeredAbility;
 import mage.abilities.effects.common.TransformSourceEffect;
 import mage.abilities.keyword.TransformAbility;
+import mage.cards.t.TimberShredder;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.constants.TargetController;
 
 /**
@@ -46,16 +47,15 @@ import mage.constants.TargetController;
  */
 public class HinterlandLogger extends CardImpl {
 
-    public HinterlandLogger(UUID ownerId) {
-        super(ownerId, 210, "Hinterland Logger", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{1}{G}");
-        this.expansionSetCode = "SOI";
+    public HinterlandLogger(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{1}{G}");
         this.subtype.add("Human");
         this.subtype.add("Werewolf");
         this.power = new MageInt(2);
         this.toughness = new MageInt(1);
 
         this.transformable = true;
-        this.secondSideCard = new TimberShredder(ownerId);
+        this.secondSideCardClazz = TimberShredder.class;
 
         // At the beginning of each upkeep, if no spells were cast last turn, transform Hinterland Logger.
         this.addAbility(new TransformAbility());

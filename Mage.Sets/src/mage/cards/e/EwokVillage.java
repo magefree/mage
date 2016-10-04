@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.starwars;
+package mage.cards.e;
 
 import java.util.UUID;
 import mage.Mana;
@@ -35,8 +35,8 @@ import mage.abilities.effects.common.AddManaToManaPoolSourceControllerEffect;
 import mage.abilities.mana.RedManaAbility;
 import mage.abilities.mana.WhiteManaAbility;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.Rarity;
 
 /**
  *
@@ -44,9 +44,8 @@ import mage.constants.Rarity;
  */
 public class EwokVillage extends CardImpl {
 
-    public EwokVillage(UUID ownerId) {
-        super(ownerId, 241, "Ewok Village", Rarity.UNCOMMON, new CardType[]{CardType.LAND}, "");
-        this.expansionSetCode = "SWS";
+    public EwokVillage(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.LAND},"");
 
         // Ewok Village enters the battlefield tapped.
         this.addAbility(new EntersBattlefieldTappedAbility());

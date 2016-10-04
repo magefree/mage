@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.legends;
+package mage.cards.p;
 
 import java.util.UUID;
 import mage.abilities.Ability;
@@ -33,9 +33,9 @@ import mage.abilities.TriggeredAbilityImpl;
 import mage.abilities.effects.Effect;
 import mage.abilities.effects.OneShotEffect;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Outcome;
-import mage.constants.Rarity;
 import mage.constants.Zone;
 import mage.game.Game;
 import mage.game.events.GameEvent;
@@ -48,9 +48,8 @@ import mage.target.targetpointer.FixedTarget;
  */
 public class PresenceOfTheMaster extends CardImpl {
 
-    public PresenceOfTheMaster(UUID ownerId) {
-        super(ownerId, 200, "Presence of the Master", Rarity.UNCOMMON, new CardType[]{CardType.ENCHANTMENT}, "{3}{W}");
-        this.expansionSetCode = "LEG";
+    public PresenceOfTheMaster(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.ENCHANTMENT},"{3}{W}");
 
         // Whenever a player casts an enchantment spell, counter it.
         this.addAbility(new PresenceOfTheMasterTriggeredAbility());

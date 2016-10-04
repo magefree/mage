@@ -25,10 +25,9 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.innistrad;
+package mage.cards.h;
 
 import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.MageInt;
 import mage.abilities.TriggeredAbility;
 import mage.abilities.common.EntersBattlefieldTriggeredAbility;
@@ -36,6 +35,7 @@ import mage.abilities.condition.common.MorbidCondition;
 import mage.abilities.decorator.ConditionalTriggeredAbility;
 import mage.abilities.effects.common.GainLifeEffect;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 
 import java.util.UUID;
 
@@ -47,9 +47,8 @@ public class HollowhengeScavenger extends CardImpl {
 
     private static final String staticText = "Morbid - When {this} enters the battlefield, if a creature died this turn, you gain 5 life.";
 
-    public HollowhengeScavenger(UUID ownerId) {
-        super(ownerId, 188, "Hollowhenge Scavenger", Rarity.UNCOMMON, new CardType[]{CardType.CREATURE}, "{3}{G}{G}");
-        this.expansionSetCode = "ISD";
+    public HollowhengeScavenger(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{3}{G}{G}");
         this.color.setGreen(true);
         this.subtype.add("Elemental");
         this.power = new MageInt(4);

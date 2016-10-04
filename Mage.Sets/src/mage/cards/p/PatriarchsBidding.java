@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.onslaught;
+package mage.cards.p;
 
 import java.util.ArrayList;
 import java.util.HashSet;
@@ -36,12 +36,12 @@ import mage.MageObject;
 import mage.abilities.Ability;
 import mage.abilities.effects.OneShotEffect;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.cards.repository.CardRepository;
 import mage.choices.Choice;
 import mage.choices.ChoiceImpl;
 import mage.constants.CardType;
 import mage.constants.Outcome;
-import mage.constants.Rarity;
 import mage.constants.Zone;
 import mage.filter.FilterCard;
 import mage.filter.common.FilterCreatureCard;
@@ -55,9 +55,8 @@ import mage.players.Player;
  */
 public class PatriarchsBidding extends CardImpl {
 
-    public PatriarchsBidding(UUID ownerId) {
-        super(ownerId, 161, "Patriarch's Bidding", Rarity.RARE, new CardType[]{CardType.SORCERY}, "{3}{B}{B}");
-        this.expansionSetCode = "ONS";
+    public PatriarchsBidding(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{3}{B}{B}");
 
         // Each player chooses a creature type. Each player returns all creature cards of a type chosen this way from his or her graveyard to the battlefield.
         this.getSpellAbility().addEffect(new PatriarchsBiddingEffect());

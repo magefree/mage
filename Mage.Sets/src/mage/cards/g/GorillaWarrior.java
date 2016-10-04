@@ -26,13 +26,13 @@
  *  or implied, of BetaSteward_at_googlemail.com.
  */
 
-package mage.sets.urzassaga;
+package mage.cards.g;
 
 import java.util.UUID;
 import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.MageInt;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 
 /**
  *
@@ -40,9 +40,8 @@ import mage.cards.CardImpl;
  */
 public class GorillaWarrior extends CardImpl {
 
-    public GorillaWarrior (UUID ownerId) {
-        super(ownerId, 256, "Gorilla Warrior", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{2}{G}");
-        this.expansionSetCode = "USG";
+    public GorillaWarrior (UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{2}{G}");
         this.subtype.add("Ape");
         this.subtype.add("Warrior");
 

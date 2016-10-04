@@ -25,19 +25,19 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.darkascension;
+package mage.cards.b;
 
 import java.util.UUID;
 import mage.abilities.condition.LockedInCondition;
 import mage.constants.CardType;
 import mage.constants.Duration;
-import mage.constants.Rarity;
 import mage.abilities.condition.common.FatefulHourCondition;
 import mage.abilities.decorator.ConditionalContinuousEffect;
 import mage.abilities.effects.common.continuous.BoostControlledEffect;
 import mage.abilities.effects.common.continuous.GainAbilityAllEffect;
 import mage.abilities.keyword.IndestructibleAbility;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.filter.common.FilterControlledCreaturePermanent;
 
 /**
@@ -47,9 +47,8 @@ import mage.filter.common.FilterControlledCreaturePermanent;
  */
 public class BreakOfDay extends CardImpl {
 
-    public BreakOfDay(UUID ownerId) {
-        super(ownerId, 3, "Break of Day", Rarity.COMMON, new CardType[]{CardType.INSTANT}, "{1}{W}");
-        this.expansionSetCode = "DKA";
+    public BreakOfDay(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.INSTANT},"{1}{W}");
 
 
         // Creatures you control get +1/+1 until end of turn.

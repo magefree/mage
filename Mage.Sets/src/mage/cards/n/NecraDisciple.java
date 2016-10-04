@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.apocalypse;
+package mage.cards.n;
 
 import java.util.UUID;
 
@@ -38,6 +38,7 @@ import mage.abilities.costs.mana.ColoredManaCost;
 import mage.abilities.effects.common.PreventDamageToTargetEffect;
 import mage.abilities.mana.AnyColorManaAbility;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.target.common.TargetCreatureOrPlayer;
 
 /**
@@ -46,9 +47,8 @@ import mage.target.common.TargetCreatureOrPlayer;
  */
 public class NecraDisciple extends CardImpl {
 
-    public NecraDisciple(UUID ownerId) {
-        super(ownerId, 44, "Necra Disciple", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{B}");
-        this.expansionSetCode = "APC";
+    public NecraDisciple(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{B}");
         this.subtype.add("Human");
         this.subtype.add("Wizard");
 

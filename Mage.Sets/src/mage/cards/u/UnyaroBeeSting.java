@@ -25,13 +25,13 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.mirage;
+package mage.cards.u;
 
 import java.util.UUID;
 import mage.abilities.effects.common.DamageTargetEffect;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.target.common.TargetCreatureOrPlayer;
 
 /**
@@ -40,9 +40,8 @@ import mage.target.common.TargetCreatureOrPlayer;
  */
 public class UnyaroBeeSting extends CardImpl {
 
-    public UnyaroBeeSting(UUID ownerId) {
-        super(ownerId, 148, "Unyaro Bee Sting", Rarity.UNCOMMON, new CardType[]{CardType.SORCERY}, "{3}{G}");
-        this.expansionSetCode = "MIR";
+    public UnyaroBeeSting(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{3}{G}");
 
         // Unyaro Bee Sting deals 2 damage to target creature or player.
         this.getSpellAbility().addEffect(new DamageTargetEffect(2));

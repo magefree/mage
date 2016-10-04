@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.magicorigins;
+package mage.cards.c;
 
 import java.util.UUID;
 import mage.abilities.condition.common.SpellMasteryCondition;
@@ -34,8 +34,8 @@ import mage.abilities.decorator.ConditionalOneShotEffect;
 import mage.abilities.effects.common.CounterUnlessPaysEffect;
 import mage.abilities.effects.keyword.ScryEffect;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.target.TargetSpell;
 
 /**
@@ -44,9 +44,8 @@ import mage.target.TargetSpell;
  */
 public class CalculatedDismissal extends CardImpl {
 
-    public CalculatedDismissal(UUID ownerId) {
-        super(ownerId, 48, "Calculated Dismissal", Rarity.COMMON, new CardType[]{CardType.INSTANT}, "{2}{U}");
-        this.expansionSetCode = "ORI";
+    public CalculatedDismissal(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.INSTANT},"{2}{U}");
 
         // Counter target spell unless its controller pays {3}.
         this.getSpellAbility().addTarget(new TargetSpell());

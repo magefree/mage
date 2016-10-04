@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.saviorsofkamigawa;
+package mage.cards.r;
 
 import java.util.UUID;
 import mage.MageInt;
@@ -34,9 +34,9 @@ import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.CreateTokenEffect;
 import mage.cards.Card;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Outcome;
-import mage.constants.Rarity;
 import mage.constants.Zone;
 import mage.game.Game;
 import mage.game.permanent.token.Token;
@@ -48,9 +48,8 @@ import mage.players.Player;
  */
 public class RallyTheHorde extends CardImpl {
 
-    public RallyTheHorde(UUID ownerId) {
-        super(ownerId, 110, "Rally the Horde", Rarity.RARE, new CardType[]{CardType.SORCERY}, "{5}{R}");
-        this.expansionSetCode = "SOK";
+    public RallyTheHorde(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{5}{R}");
 
 
         // Exile the top card of your library. Exile the top card of your library. Exile the top card of your library. If the last card exiled isn't a land, repeat this process. Put a 1/1 red Warrior creature token onto the battlefield for each nonland card exiled this way.

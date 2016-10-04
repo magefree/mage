@@ -25,15 +25,15 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.eventide;
+package mage.cards.o;
 
 import java.util.UUID;
 
 import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.abilities.effects.common.DrawCardTargetEffect;
 import mage.abilities.keyword.RetraceAbility;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.target.TargetPlayer;
 
 /**
@@ -42,9 +42,8 @@ import mage.target.TargetPlayer;
  */
 public class OonasGrace extends CardImpl {
 
-    public OonasGrace(UUID ownerId) {
-        super(ownerId, 27, "Oona's Grace", Rarity.COMMON, new CardType[]{CardType.INSTANT}, "{2}{U}");
-        this.expansionSetCode = "EVE";
+    public OonasGrace(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.INSTANT},"{2}{U}");
 
         // Target player draws a card.
         this.getSpellAbility().addEffect(new DrawCardTargetEffect(1));

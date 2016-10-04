@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.onslaught;
+package mage.cards.w;
 
 import java.util.UUID;
 import mage.MageInt;
@@ -34,8 +34,8 @@ import mage.abilities.costs.common.TapSourceCost;
 import mage.abilities.dynamicvalue.common.PermanentsOnBattlefieldCount;
 import mage.abilities.effects.common.GainLifeEffect;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.constants.Zone;
 import mage.filter.FilterPermanent;
 import mage.filter.predicate.mageobject.SubtypePredicate;
@@ -52,9 +52,8 @@ public class Wellwisher extends CardImpl {
         filter.add(new SubtypePredicate("Elf"));
     }
 
-    public Wellwisher(UUID ownerId) {
-        super(ownerId, 300, "Wellwisher", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{1}{G}");
-        this.expansionSetCode = "ONS";
+    public Wellwisher(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{1}{G}");
         this.subtype.add("Elf");
 
         this.power = new MageInt(1);

@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.betrayersofkamigawa;
+package mage.cards.i;
 
 import java.util.UUID;
 import mage.MageInt;
@@ -35,11 +35,11 @@ import mage.abilities.effects.OneShotEffect;
 import mage.abilities.keyword.TrampleAbility;
 import mage.cards.Card;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.cards.Cards;
 import mage.cards.CardsImpl;
 import mage.constants.CardType;
 import mage.constants.Outcome;
-import mage.constants.Rarity;
 import mage.constants.Zone;
 import mage.filter.FilterCard;
 import mage.filter.predicate.mageobject.CardTypePredicate;
@@ -55,9 +55,8 @@ import mage.target.common.TargetCardInHand;
  */
 public class IwamoriOfTheOpenFist extends CardImpl {
 
-    public IwamoriOfTheOpenFist(UUID ownerId) {
-        super(ownerId, 130, "Iwamori of the Open Fist", Rarity.RARE, new CardType[]{CardType.CREATURE}, "{2}{G}{G}");
-        this.expansionSetCode = "BOK";
+    public IwamoriOfTheOpenFist(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{2}{G}{G}");
         this.supertype.add("Legendary");
         this.subtype.add("Human");
         this.subtype.add("Monk");

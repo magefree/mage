@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.torment;
+package mage.cards.k;
 
 import java.util.UUID;
 import mage.abilities.condition.common.CardsInControllerGraveCondition;
@@ -33,8 +33,8 @@ import mage.abilities.decorator.ConditionalOneShotEffect;
 import mage.abilities.effects.common.DamageTargetControllerEffect;
 import mage.abilities.effects.common.DamageTargetEffect;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.target.common.TargetCreaturePermanent;
 
 /**
@@ -43,9 +43,8 @@ import mage.target.common.TargetCreaturePermanent;
  */
 public class KamahlsSledge extends CardImpl {
 
-    public KamahlsSledge(UUID ownerId) {
-        super(ownerId, 102, "Kamahl's Sledge", Rarity.COMMON, new CardType[]{CardType.SORCERY}, "{5}{R}{R}");
-        this.expansionSetCode = "TOR";
+    public KamahlsSledge(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{5}{R}{R}");
 
         // Kamahl's Sledge deals 4 damage to target creature.
         this.getSpellAbility().addEffect(new DamageTargetEffect(4));

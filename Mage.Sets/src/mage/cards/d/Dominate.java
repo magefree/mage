@@ -25,16 +25,16 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.nemesis;
+package mage.cards.d;
 
 import java.util.UUID;
 import mage.abilities.Ability;
 import mage.abilities.SpellAbility;
 import mage.abilities.effects.common.continuous.GainControlTargetEffect;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Duration;
-import mage.constants.Rarity;
 import mage.filter.Filter;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.filter.predicate.Predicates;
@@ -48,9 +48,8 @@ import mage.target.common.TargetCreaturePermanent;
  */
 public class Dominate extends CardImpl {
 
-    public Dominate(UUID ownerId) {
-        super(ownerId, 31, "Dominate", Rarity.UNCOMMON, new CardType[]{CardType.INSTANT}, "{X}{1}{U}{U}");
-        this.expansionSetCode = "NEM";
+    public Dominate(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.INSTANT},"{X}{1}{U}{U}");
 
         // Gain control of target creature with converted mana cost X or less.
         this.getSpellAbility().addEffect(new GainControlTargetEffect(Duration.Custom, true));

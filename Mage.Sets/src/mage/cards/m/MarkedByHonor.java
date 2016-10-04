@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.magic2015;
+package mage.cards.m;
 
 import java.util.UUID;
 import mage.abilities.Ability;
@@ -37,11 +37,11 @@ import mage.abilities.effects.common.continuous.GainAbilityAttachedEffect;
 import mage.abilities.keyword.EnchantAbility;
 import mage.abilities.keyword.VigilanceAbility;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.AttachmentType;
 import mage.constants.CardType;
 import mage.constants.Duration;
 import mage.constants.Outcome;
-import mage.constants.Rarity;
 import mage.constants.Zone;
 import mage.target.TargetPermanent;
 import mage.target.common.TargetCreaturePermanent;
@@ -52,9 +52,8 @@ import mage.target.common.TargetCreaturePermanent;
  */
 public class MarkedByHonor extends CardImpl {
 
-    public MarkedByHonor(UUID ownerId) {
-        super(ownerId, 17, "Marked by Honor", Rarity.COMMON, new CardType[]{CardType.ENCHANTMENT}, "{3}{W}");
-        this.expansionSetCode = "M15";
+    public MarkedByHonor(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.ENCHANTMENT},"{3}{W}");
         this.subtype.add("Aura");
 
 

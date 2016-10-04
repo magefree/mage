@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.alarareborn;
+package mage.cards.n;
 
 import java.util.UUID;
 import mage.MageInt;
@@ -36,8 +36,8 @@ import mage.abilities.costs.mana.ManaCostsImpl;
 import mage.abilities.effects.common.counter.AddCountersTargetEffect;
 import mage.abilities.keyword.CyclingAbility;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.counters.CounterType;
 import mage.target.common.TargetCreaturePermanent;
 
@@ -47,9 +47,8 @@ import mage.target.common.TargetCreaturePermanent;
  */
 public class NayaSojourners extends CardImpl {
 
-    public NayaSojourners(UUID ownerId) {
-        super(ownerId, 122, "Naya Sojourners", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{2}{R}{G}{W}");
-        this.expansionSetCode = "ARB";
+    public NayaSojourners(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{2}{R}{G}{W}");
         this.subtype.add("Elf");
         this.subtype.add("Shaman");
 

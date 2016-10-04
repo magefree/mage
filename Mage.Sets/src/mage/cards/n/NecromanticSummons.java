@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.magicorigins;
+package mage.cards.n;
 
 import java.util.UUID;
 import mage.abilities.Ability;
@@ -35,9 +35,9 @@ import mage.abilities.effects.Effect;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.ReturnFromGraveyardToBattlefieldTargetEffect;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Outcome;
-import mage.constants.Rarity;
 import mage.counters.CounterType;
 import mage.filter.common.FilterCreatureCard;
 import mage.game.Game;
@@ -50,9 +50,8 @@ import mage.target.common.TargetCardInGraveyard;
  */
 public class NecromanticSummons extends CardImpl {
 
-    public NecromanticSummons(UUID ownerId) {
-        super(ownerId, 110, "Necromantic Summons", Rarity.UNCOMMON, new CardType[]{CardType.SORCERY}, "{4}{B}");
-        this.expansionSetCode = "ORI";
+    public NecromanticSummons(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{4}{B}");
 
         // Put target creature card from a graveyard onto the battlefield under your control.
         this.getSpellAbility().addEffect(new ReturnFromGraveyardToBattlefieldTargetEffect());

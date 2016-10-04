@@ -25,14 +25,14 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.limitedalpha;
+package mage.cards.b;
 
 import java.util.UUID;
 import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.abilities.mana.BlackManaAbility;
 import mage.abilities.mana.GreenManaAbility;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 
 /**
  *
@@ -40,9 +40,8 @@ import mage.cards.CardImpl;
  */
 public class Bayou extends CardImpl {
 
-    public Bayou(UUID ownerId) {
-        super(ownerId, 278, "Bayou", Rarity.RARE, new CardType[]{CardType.LAND}, "");
-        this.expansionSetCode = "LEA";
+    public Bayou(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.LAND},"");
         this.subtype.add("Swamp");
         this.subtype.add("Forest");
         this.addAbility(new BlackManaAbility());

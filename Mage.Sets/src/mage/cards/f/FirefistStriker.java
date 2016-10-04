@@ -26,17 +26,17 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.gatecrash;
+package mage.cards.f;
 
 import java.util.UUID;
 import mage.constants.CardType;
 import mage.constants.Duration;
-import mage.constants.Rarity;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.effects.common.combat.CantBlockTargetEffect;
 import mage.abilities.keyword.BattalionAbility;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.target.common.TargetCreaturePermanent;
 
 /**
@@ -45,9 +45,8 @@ import mage.target.common.TargetCreaturePermanent;
  */
 public class FirefistStriker extends CardImpl {
 
-    public FirefistStriker(UUID ownerId) {
-        super(ownerId, 90, "Firefist Striker", Rarity.UNCOMMON, new CardType[]{CardType.CREATURE}, "{1}{R}");
-        this.expansionSetCode = "GTC";
+    public FirefistStriker(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{1}{R}");
         this.subtype.add("Human");
         this.subtype.add("Soldier");
 

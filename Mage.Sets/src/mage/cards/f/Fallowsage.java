@@ -25,15 +25,15 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.lorwyn;
+package mage.cards.f;
 
 import java.util.UUID;
 import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.MageInt;
 import mage.abilities.common.BecomesTappedSourceTriggeredAbility;
 import mage.abilities.effects.common.DrawCardSourceControllerEffect;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 
 /**
  *
@@ -41,9 +41,8 @@ import mage.cards.CardImpl;
  */
 public class Fallowsage extends CardImpl {
 
-    public Fallowsage(UUID ownerId) {
-        super(ownerId, 63, "Fallowsage", Rarity.UNCOMMON, new CardType[]{CardType.CREATURE}, "{3}{U}");
-        this.expansionSetCode = "LRW";
+    public Fallowsage(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{3}{U}");
         this.subtype.add("Merfolk");
         this.subtype.add("Wizard");
 

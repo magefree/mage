@@ -25,15 +25,15 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.prereleaseevents;
+package mage.cards.d;
 
 import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.TriggeredAbilityImpl;
 import mage.abilities.effects.common.counter.AddCountersSourceEffect;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.constants.Zone;
 import mage.counters.CounterType;
 import mage.game.Game;
@@ -47,9 +47,8 @@ import mage.game.permanent.Permanent;
  */
 public class DirtcowlWurm extends CardImpl {
 
-    public DirtcowlWurm(UUID ownerId) {
-        super(ownerId, 1, "Dirtcowl Wurm", Rarity.SPECIAL, new CardType[]{CardType.CREATURE}, "{4}{G}");
-        this.expansionSetCode = "PTC";
+    public DirtcowlWurm(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{4}{G}");
         this.subtype.add("Wurm");
         this.power = new MageInt(3);
         this.toughness = new MageInt(4);

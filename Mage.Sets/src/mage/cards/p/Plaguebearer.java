@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.exodus;
+package mage.cards.p;
 
 import java.util.UUID;
 import mage.MageInt;
@@ -35,8 +35,8 @@ import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.costs.mana.ManaCostsImpl;
 import mage.abilities.effects.common.DestroyTargetEffect;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.constants.Zone;
 import mage.filter.Filter;
 import mage.filter.common.FilterCreaturePermanent;
@@ -60,9 +60,8 @@ public class Plaguebearer extends CardImpl {
         filter.add(Predicates.not(new ColorPredicate(ObjectColor.BLACK)));
     }
 
-    public Plaguebearer(UUID ownerId) {
-        super(ownerId, 71, "Plaguebearer", Rarity.RARE, new CardType[]{CardType.CREATURE}, "{1}{B}");
-        this.expansionSetCode = "EXO";
+    public Plaguebearer(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{1}{B}");
         this.subtype.add("Zombie");
         this.power = new MageInt(1);
         this.toughness = new MageInt(1);

@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.magic2015;
+package mage.cards.h;
 
 import java.util.UUID;
 import mage.MageInt;
@@ -37,9 +37,9 @@ import mage.abilities.keyword.DeathtouchAbility;
 import mage.abilities.keyword.DefenderAbility;
 import mage.abilities.keyword.FlyingAbility;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Outcome;
-import mage.constants.Rarity;
 import mage.constants.Zone;
 import mage.game.Game;
 import mage.game.permanent.token.Token;
@@ -51,9 +51,8 @@ import mage.players.Player;
  */
 public class HornetNest extends CardImpl {
 
-    public HornetNest(UUID ownerId) {
-        super(ownerId, 177, "Hornet Nest", Rarity.RARE, new CardType[]{CardType.CREATURE}, "{2}{G}");
-        this.expansionSetCode = "M15";
+    public HornetNest(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{2}{G}");
         this.subtype.add("Insect");
 
         this.power = new MageInt(0);

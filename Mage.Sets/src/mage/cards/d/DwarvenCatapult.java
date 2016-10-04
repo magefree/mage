@@ -25,16 +25,16 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.fifthedition;
+package mage.cards.d;
 
 import java.util.UUID;
 import mage.abilities.Ability;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.DamageAllControlledTargetEffect;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Outcome;
-import mage.constants.Rarity;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.game.Game;
 import mage.target.common.TargetOpponent;
@@ -45,9 +45,8 @@ import mage.target.common.TargetOpponent;
  */
 public class DwarvenCatapult extends CardImpl {
 
-    public DwarvenCatapult(UUID ownerId) {
-        super(ownerId, 220, "Dwarven Catapult", Rarity.UNCOMMON, new CardType[]{CardType.INSTANT}, "{X}{R}");
-        this.expansionSetCode = "5ED";
+    public DwarvenCatapult(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.INSTANT},"{X}{R}");
 
         // Dwarven Catapult deals X damage divided evenly, rounded down, among all creatures target opponent controls.
         this.getSpellAbility().addTarget(new TargetOpponent());

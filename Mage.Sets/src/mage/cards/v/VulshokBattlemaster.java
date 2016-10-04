@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.mirrodin;
+package mage.cards.v;
 
 import java.util.UUID;
 import mage.MageInt;
@@ -34,9 +34,9 @@ import mage.abilities.common.EntersBattlefieldTriggeredAbility;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.keyword.HasteAbility;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Outcome;
-import mage.constants.Rarity;
 import mage.filter.FilterPermanent;
 import mage.filter.predicate.mageobject.SubtypePredicate;
 import mage.game.Game;
@@ -48,9 +48,8 @@ import mage.game.permanent.Permanent;
  */
 public class VulshokBattlemaster extends CardImpl {
 
-    public VulshokBattlemaster(UUID ownerId) {
-        super(ownerId, 110, "Vulshok Battlemaster", Rarity.RARE, new CardType[]{CardType.CREATURE}, "{4}{R}");
-        this.expansionSetCode = "MRD";
+    public VulshokBattlemaster(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{4}{R}");
         this.subtype.add("Human");
         this.subtype.add("Warrior");
         this.power = new MageInt(2);

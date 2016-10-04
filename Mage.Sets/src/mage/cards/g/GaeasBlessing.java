@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.timeshifted;
+package mage.cards.g;
 
 import java.util.List;
 import java.util.UUID;
@@ -35,9 +35,9 @@ import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.DrawCardSourceControllerEffect;
 import mage.cards.Card;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Outcome;
-import mage.constants.Rarity;
 import mage.constants.Zone;
 import mage.filter.FilterCard;
 import mage.game.Game;
@@ -51,9 +51,8 @@ import mage.target.common.TargetCardInGraveyard;
  */
 public class GaeasBlessing extends CardImpl {
 
-    public GaeasBlessing(UUID ownerId) {
-        super(ownerId, 77, "Gaea's Blessing", Rarity.SPECIAL, new CardType[]{CardType.SORCERY}, "{1}{G}");
-        this.expansionSetCode = "TSB";
+    public GaeasBlessing(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{1}{G}");
 
         // Target player shuffles up to three target cards from his or her graveyard into his or her library.
         this.getSpellAbility().addEffect(new GaeasBlessingEffect());

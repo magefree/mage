@@ -25,13 +25,12 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.zendikar;
+package mage.cards.u;
 
 import java.util.UUID;
 
 import mage.constants.CardType;
 import mage.constants.Outcome;
-import mage.constants.Rarity;
 import mage.abilities.Ability;
 import mage.abilities.SpellAbility;
 import mage.abilities.condition.common.KickedCondition;
@@ -40,6 +39,7 @@ import mage.abilities.effects.ReplacementEffectImpl;
 import mage.abilities.effects.common.DamageTargetEffect;
 import mage.abilities.keyword.KickerAbility;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.Duration;
 import mage.game.Game;
 import mage.game.events.GameEvent;
@@ -52,9 +52,8 @@ import mage.target.TargetPlayer;
  */
 public class UnstableFooting extends CardImpl {
 
-    public UnstableFooting(UUID ownerId) {
-        super(ownerId, 153, "Unstable Footing", Rarity.UNCOMMON, new CardType[]{CardType.INSTANT}, "{R}");
-        this.expansionSetCode = "ZEN";
+    public UnstableFooting(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.INSTANT},"{R}");
 
         // Kicker {3}{R} (You may pay an additional {3}{R} as you cast this spell.)
         this.addAbility(new KickerAbility("{3}{R}"));

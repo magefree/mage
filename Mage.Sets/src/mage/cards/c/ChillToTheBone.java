@@ -25,13 +25,13 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.coldsnap;
+package mage.cards.c;
 
 import java.util.UUID;
 import mage.abilities.effects.common.DestroyTargetEffect;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.filter.predicate.Predicates;
 import mage.filter.predicate.mageobject.SupertypePredicate;
@@ -49,9 +49,8 @@ public class ChillToTheBone extends CardImpl {
         filter.add(Predicates.not(new SupertypePredicate("Snow")));
     }
 
-    public ChillToTheBone(UUID ownerId) {
-        super(ownerId, 52, "Chill to the Bone", Rarity.COMMON, new CardType[]{CardType.INSTANT}, "{3}{B}");
-        this.expansionSetCode = "CSP";
+    public ChillToTheBone(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.INSTANT},"{3}{B}");
 
         // Destroy target nonsnow creature.
         this.getSpellAbility().addEffect(new DestroyTargetEffect());

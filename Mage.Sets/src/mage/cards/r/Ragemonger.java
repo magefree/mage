@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.bornofthegods;
+package mage.cards.r;
 
 import java.util.UUID;
 import mage.MageInt;
@@ -33,8 +33,8 @@ import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.costs.mana.ManaCostsImpl;
 import mage.abilities.effects.common.cost.SpellsCostReductionControllerEffect;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.constants.Zone;
 import mage.filter.FilterCard;
 import mage.filter.predicate.mageobject.SubtypePredicate;
@@ -50,9 +50,8 @@ public class Ragemonger extends CardImpl {
         filter.add(new SubtypePredicate("Minotaur"));
     }
 
-    public Ragemonger(UUID ownerId) {
-        super(ownerId, 153, "Ragemonger", Rarity.UNCOMMON, new CardType[]{CardType.CREATURE}, "{1}{B}{R}");
-        this.expansionSetCode = "BNG";
+    public Ragemonger(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{1}{B}{R}");
         this.subtype.add("Minotaur");
         this.subtype.add("Shaman");
 

@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.urzasdestiny;
+package mage.cards.p;
 
 import java.util.UUID;
 import mage.abilities.Ability;
@@ -35,9 +35,9 @@ import mage.abilities.effects.common.AttachEffect;
 import mage.abilities.effects.common.search.SearchLibraryPutInPlayTargetPlayerEffect;
 import mage.abilities.keyword.EnchantAbility;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Outcome;
-import mage.constants.Rarity;
 import mage.constants.SetTargetPointer;
 import mage.filter.common.FilterCreatureCard;
 import mage.target.TargetPermanent;
@@ -50,9 +50,8 @@ import mage.target.common.TargetCreaturePermanent;
  */
 public class PatternOfRebirth extends CardImpl {
 
-    public PatternOfRebirth(UUID ownerId) {
-        super(ownerId, 115, "Pattern of Rebirth", Rarity.RARE, new CardType[]{CardType.ENCHANTMENT}, "{3}{G}");
-        this.expansionSetCode = "UDS";
+    public PatternOfRebirth(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.ENCHANTMENT},"{3}{G}");
         this.subtype.add("Aura");
 
         // Enchant creature

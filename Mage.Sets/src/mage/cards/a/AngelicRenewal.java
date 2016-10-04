@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.weatherlight;
+package mage.cards.a;
 
 import java.util.UUID;
 import mage.abilities.common.PutIntoGraveFromBattlefieldAllTriggeredAbility;
@@ -33,8 +33,8 @@ import mage.abilities.costs.common.SacrificeSourceCost;
 import mage.abilities.effects.common.DoIfCostPaid;
 import mage.abilities.effects.common.ReturnToBattlefieldUnderOwnerControlTargetEffect;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.filter.common.FilterCreaturePermanent;
 
 /**
@@ -43,9 +43,8 @@ import mage.filter.common.FilterCreaturePermanent;
  */
 public class AngelicRenewal extends CardImpl {
 
-    public AngelicRenewal(UUID ownerId) {
-        super(ownerId, 120, "Angelic Renewal", Rarity.COMMON, new CardType[]{CardType.ENCHANTMENT}, "{1}{W}");
-        this.expansionSetCode = "WTH";
+    public AngelicRenewal(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.ENCHANTMENT},"{1}{W}");
 
         // Whenever a creature is put into your graveyard from the battlefield, you may sacrifice Angelic Renewal. If you do, return that card to the battlefield.
         this.addAbility(new PutIntoGraveFromBattlefieldAllTriggeredAbility(new DoIfCostPaid(

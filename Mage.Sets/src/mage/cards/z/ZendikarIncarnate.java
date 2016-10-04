@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.magicorigins;
+package mage.cards.z;
 
 import java.util.UUID;
 import mage.MageInt;
@@ -34,9 +34,9 @@ import mage.abilities.dynamicvalue.DynamicValue;
 import mage.abilities.dynamicvalue.common.PermanentsOnBattlefieldCount;
 import mage.abilities.effects.common.continuous.SetPowerSourceEffect;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Duration;
-import mage.constants.Rarity;
 import mage.constants.Zone;
 import mage.filter.common.FilterControlledLandPermanent;
 import mage.filter.common.FilterControlledPermanent;
@@ -49,9 +49,8 @@ public class ZendikarIncarnate extends CardImpl {
     
     private static final FilterControlledPermanent filter = new FilterControlledLandPermanent("lands you control");
 
-    public ZendikarIncarnate(UUID ownerId) {
-        super(ownerId, 219, "Zendikar Incarnate", Rarity.UNCOMMON, new CardType[]{CardType.CREATURE}, "{2}{R}{G}");
-        this.expansionSetCode = "ORI";
+    public ZendikarIncarnate(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{2}{R}{G}");
         this.subtype.add("Elemental");
         this.power = new MageInt(0);
         this.toughness = new MageInt(4);

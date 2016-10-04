@@ -25,15 +25,15 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.alarareborn;
+package mage.cards.g;
 
 import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.common.EntersBattlefieldAllTriggeredAbility;
 import mage.abilities.effects.common.counter.AddCountersSourceEffect;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.constants.Zone;
 import mage.counters.CounterType;
 import mage.filter.Filter;
@@ -54,9 +54,8 @@ public class GodtrackerOfJund extends CardImpl {
     
     String rule = "Whenever a creature with power 5 or greater enters the battlefield under your control, you may put a +1/+1 counter on {this}.";
 
-    public GodtrackerOfJund(UUID ownerId) {
-        super(ownerId, 55, "Godtracker of Jund", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{1}{R}{G}");
-        this.expansionSetCode = "ARB";
+    public GodtrackerOfJund(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{1}{R}{G}");
         this.subtype.add("Elf");
         this.subtype.add("Shaman");
 

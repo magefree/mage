@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.eldritchmoon;
+package mage.cards.h;
 
 import mage.MageInt;
 import mage.abilities.common.AttacksTriggeredAbility;
@@ -45,11 +45,6 @@ import java.util.UUID;
  * @author LevelX2
  */
 public class HanweirTheWrithingTownship extends MeldCard {
-    // TODO: EJM - Remove this
-    public HanweirTheWrithingTownship(UUID ownerId) {
-        this(ownerId, new CardSetInfo("Hanweir, the Writhing Township", "EMN", "130", Rarity.RARE));
-    }
-
     public HanweirTheWrithingTownship(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "");
         this.supertype.add("Legendary");

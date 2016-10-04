@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.shadowmoor;
+package mage.cards.p;
 
 import java.util.HashSet;
 import java.util.Set;
@@ -35,10 +35,10 @@ import mage.abilities.Ability;
 import mage.abilities.common.BeginningOfUpkeepTriggeredAbility;
 import mage.abilities.effects.common.continuous.ExchangeControlTargetEffect;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Duration;
 import mage.constants.Outcome;
-import mage.constants.Rarity;
 import mage.constants.TargetController;
 import mage.filter.predicate.Predicates;
 import mage.filter.predicate.mageobject.CardTypePredicate;
@@ -56,9 +56,8 @@ public class PucasMischief extends CardImpl {
 
     private static final String rule = "you may exchange control of target nonland permanent you control and target nonland permanent an opponent controls with an equal or lesser converted mana cost";
 
-    public PucasMischief(UUID ownerId) {
-        super(ownerId, 47, "Puca's Mischief", Rarity.RARE, new CardType[]{CardType.ENCHANTMENT}, "{3}{U}");
-        this.expansionSetCode = "SHM";
+    public PucasMischief(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.ENCHANTMENT},"{3}{U}");
 
         // At the beginning of your upkeep, you may exchange control of target nonland permanent you control and target nonland permanent an opponent controls with an equal or lesser converted mana cost.
         Ability ability = new BeginningOfUpkeepTriggeredAbility(new ExchangeControlTargetEffect(Duration.EndOfGame, rule, false, true), TargetController.YOU, true);

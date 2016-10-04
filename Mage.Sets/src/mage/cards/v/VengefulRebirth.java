@@ -26,18 +26,18 @@
 * or implied, of BetaSteward_at_googlemail.com.
 */
 
-package mage.sets.alarareborn;
+package mage.cards.v;
 
 import java.util.UUID;
 import mage.constants.CardType;
 import mage.constants.Outcome;
-import mage.constants.Rarity;
 import mage.constants.Zone;
 import mage.abilities.Ability;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.ExileSpellEffect;
 import mage.cards.Card;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.players.Player;
@@ -50,9 +50,8 @@ import mage.target.common.TargetCreatureOrPlayer;
  */
 public class VengefulRebirth extends CardImpl {
 
-    public VengefulRebirth(UUID ownerId) {
-        super(ownerId, 62, "Vengeful Rebirth", Rarity.UNCOMMON, new CardType[]{CardType.SORCERY}, "{4}{R}{G}");
-        this.expansionSetCode = "ARB";
+    public VengefulRebirth(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{4}{R}{G}");
 
         // Return target card from your graveyard to your hand. If you return a nonland card to your hand this way, {this} deals damage equal to that card's converted mana cost to target creature or player
         this.getSpellAbility().addTarget(new TargetCardInYourGraveyard());

@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.dragonsoftarkir;
+package mage.cards.d;
 
 import java.util.UUID;
 import mage.MageInt;
@@ -39,10 +39,10 @@ import mage.abilities.effects.common.continuous.BoostSourceEffect;
 import mage.abilities.effects.common.continuous.GainAbilitySourceEffect;
 import mage.abilities.keyword.FlyingAbility;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.AbilityWord;
 import mage.constants.CardType;
 import mage.constants.Duration;
-import mage.constants.Rarity;
 import mage.constants.Zone;
 import mage.game.permanent.token.DragonToken;
 
@@ -52,9 +52,8 @@ import mage.game.permanent.token.DragonToken;
  */
 public class DragonWhisperer extends CardImpl {
 
-    public DragonWhisperer(UUID ownerId) {
-        super(ownerId, 137, "Dragon Whisperer", Rarity.MYTHIC, new CardType[]{CardType.CREATURE}, "{R}{R}");
-        this.expansionSetCode = "DTK";
+    public DragonWhisperer(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{R}{R}");
         this.subtype.add("Human");
         this.subtype.add("Shaman");
         this.power = new MageInt(2);

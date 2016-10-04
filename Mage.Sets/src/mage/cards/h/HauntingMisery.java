@@ -25,15 +25,15 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.weatherlight;
+package mage.cards.h;
 
 import java.util.UUID;
 import mage.abilities.costs.common.ExileXFromYourGraveCost;
 import mage.abilities.dynamicvalue.common.GetXValue;
 import mage.abilities.effects.common.DamageTargetEffect;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.filter.common.FilterCreatureCard;
 import mage.target.TargetPlayer;
 
@@ -43,9 +43,8 @@ import mage.target.TargetPlayer;
  */
 public class HauntingMisery extends CardImpl {
 
-    public HauntingMisery(UUID ownerId) {
-        super(ownerId, 13, "Haunting Misery", Rarity.COMMON, new CardType[]{CardType.SORCERY}, "{1}{B}{B}");
-        this.expansionSetCode = "WTH";
+    public HauntingMisery(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{1}{B}{B}");
 
         // As an additional cost to cast Haunting Misery, exile X creature cards from your graveyard.
         this.getSpellAbility().addCost(new ExileXFromYourGraveCost(new FilterCreatureCard()));

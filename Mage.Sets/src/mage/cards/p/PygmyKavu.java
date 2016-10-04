@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.planeshift;
+package mage.cards.p;
 
 import java.util.UUID;
 import mage.MageInt;
@@ -34,8 +34,8 @@ import mage.abilities.common.EntersBattlefieldTriggeredAbility;
 import mage.abilities.dynamicvalue.common.PermanentsOnBattlefieldCount;
 import mage.abilities.effects.common.DrawCardSourceControllerEffect;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.constants.TargetController;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.filter.predicate.mageobject.ColorPredicate;
@@ -54,9 +54,8 @@ public class PygmyKavu extends CardImpl {
         filter.add(new ControllerPredicate(TargetController.OPPONENT));
     }
 
-    public PygmyKavu(UUID ownerId) {
-        super(ownerId, 88, "Pygmy Kavu", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{3}{G}");
-        this.expansionSetCode = "PLS";
+    public PygmyKavu(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{3}{G}");
         this.subtype.add("Kavu");
         this.power = new MageInt(1);
         this.toughness = new MageInt(2);

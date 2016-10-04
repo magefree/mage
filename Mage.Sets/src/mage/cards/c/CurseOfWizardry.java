@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.riseoftheeldrazi;
+package mage.cards.c;
 
 import java.util.UUID;
 import mage.ObjectColor;
@@ -34,9 +34,9 @@ import mage.abilities.common.AsEntersBattlefieldAbility;
 import mage.abilities.effects.common.ChooseColorEffect;
 import mage.abilities.effects.common.LoseLifeTargetEffect;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Outcome;
-import mage.constants.Rarity;
 import mage.constants.Zone;
 import mage.game.Game;
 import mage.game.events.GameEvent;
@@ -50,9 +50,8 @@ import mage.target.targetpointer.FixedTarget;
  */
 public class CurseOfWizardry extends CardImpl {
 
-    public CurseOfWizardry(UUID ownerId) {
-        super(ownerId, 104, "Curse of Wizardry", Rarity.UNCOMMON, new CardType[]{CardType.ENCHANTMENT}, "{2}{B}{B}");
-        this.expansionSetCode = "ROE";
+    public CurseOfWizardry(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.ENCHANTMENT},"{2}{B}{B}");
 
         // As Curse of Wizardry enters the battlefield, choose a color.
         this.addAbility(new AsEntersBattlefieldAbility(new ChooseColorEffect(Outcome.Neutral)));

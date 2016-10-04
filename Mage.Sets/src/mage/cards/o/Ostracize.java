@@ -25,13 +25,13 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.urzaslegacy;
+package mage.cards.o;
 
 import java.util.UUID;
 import mage.abilities.effects.common.discard.DiscardCardYouChooseTargetEffect;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.filter.common.FilterCreatureCard;
 import mage.target.common.TargetOpponent;
 
@@ -41,9 +41,8 @@ import mage.target.common.TargetOpponent;
  */
 public class Ostracize extends CardImpl {
 
-    public Ostracize(UUID ownerId) {
-        super(ownerId, 57, "Ostracize", Rarity.COMMON, new CardType[]{CardType.SORCERY}, "{B}");
-        this.expansionSetCode = "ULG";
+    public Ostracize(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{B}");
 
 
         // Target opponent reveals his or her hand. You choose a creature card from it. That player discards that card.

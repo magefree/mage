@@ -25,11 +25,10 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.planechase2012;
+package mage.cards.n;
 
 import java.util.UUID;
 import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.constants.Zone;
 import mage.MageInt;
 import mage.abilities.Ability;
@@ -39,6 +38,7 @@ import mage.abilities.effects.Effect;
 import mage.abilities.effects.common.DestroyTargetEffect;
 import mage.abilities.effects.common.ReturnFromGraveyardToHandTargetEffect;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.filter.FilterCard;
 import mage.filter.common.FilterArtifactOrEnchantmentPermanent;
 import mage.target.TargetPermanent;
@@ -51,9 +51,8 @@ import mage.target.targetpointer.SecondTargetPointer;
  */
 public class NullmageAdvocate extends CardImpl {
 
-    public NullmageAdvocate(UUID ownerId) {
-        super(ownerId, 70, "Nullmage Advocate", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{2}{G}");
-        this.expansionSetCode = "PC2";
+    public NullmageAdvocate(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{2}{G}");
         this.subtype.add("Insect");
         this.subtype.add("Druid");
         this.power = new MageInt(2);

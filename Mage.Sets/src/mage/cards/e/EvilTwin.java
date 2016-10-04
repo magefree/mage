@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.innistrad;
+package mage.cards.e;
 
 import java.util.UUID;
 import mage.MageInt;
@@ -39,8 +39,8 @@ import mage.abilities.effects.Effect;
 import mage.abilities.effects.common.CopyPermanentEffect;
 import mage.abilities.effects.common.DestroyTargetEffect;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.constants.Zone;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.filter.predicate.ObjectSourcePlayer;
@@ -56,9 +56,8 @@ import mage.util.functions.ApplyToPermanent;
  */
 public class EvilTwin extends CardImpl {
 
-    public EvilTwin(UUID ownerId) {
-        super(ownerId, 212, "Evil Twin", Rarity.RARE, new CardType[]{CardType.CREATURE}, "{2}{U}{B}");
-        this.expansionSetCode = "ISD";
+    public EvilTwin(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{2}{U}{B}");
         this.subtype.add("Shapeshifter");
 
         this.power = new MageInt(0);

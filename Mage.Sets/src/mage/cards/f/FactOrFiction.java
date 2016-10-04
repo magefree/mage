@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.invasion;
+package mage.cards.f;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -34,12 +34,12 @@ import java.util.UUID;
 import mage.MageObject;
 import mage.constants.CardType;
 import mage.constants.Outcome;
-import mage.constants.Rarity;
 import mage.constants.Zone;
 import mage.abilities.Ability;
 import mage.abilities.effects.OneShotEffect;
 import mage.cards.Card;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.cards.Cards;
 import mage.cards.CardsImpl;
 import mage.filter.FilterCard;
@@ -53,9 +53,8 @@ import mage.target.TargetCard;
  */
 public class FactOrFiction extends CardImpl {
 
-    public FactOrFiction(UUID ownerId) {
-        super(ownerId, 57, "Fact or Fiction", Rarity.UNCOMMON, new CardType[]{CardType.INSTANT}, "{3}{U}");
-        this.expansionSetCode = "INV";
+    public FactOrFiction(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.INSTANT},"{3}{U}");
 
         // Reveal the top five cards of your library. An opponent separates those cards into two piles. Put one pile into your hand and the other into your graveyard.
         this.getSpellAbility().addEffect(new FactOrFictionEffect());

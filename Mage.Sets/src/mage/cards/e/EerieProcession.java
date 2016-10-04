@@ -26,14 +26,14 @@
  *  or implied, of BetaSteward_at_googlemail.com.
  */
 
-package mage.sets.championsofkamigawa;
+package mage.cards.e;
 
 import java.util.UUID;
 
 import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.abilities.effects.common.search.SearchLibraryPutInHandEffect;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.filter.FilterCard;
 import mage.filter.predicate.mageobject.SubtypePredicate;
 import mage.target.common.TargetCardInLibrary;
@@ -49,9 +49,8 @@ public class EerieProcession extends CardImpl {
         filter.add(new SubtypePredicate("Arcane"));
     }
 
-    public EerieProcession(UUID ownerId) {
-        super(ownerId, 58, "Eerie Procession", Rarity.UNCOMMON, new CardType[]{CardType.SORCERY}, "{2}{U}");
-        this.expansionSetCode = "CHK";
+    public EerieProcession(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{2}{U}");
         this.subtype.add("Arcane");
 
 

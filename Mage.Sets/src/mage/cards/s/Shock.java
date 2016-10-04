@@ -26,13 +26,13 @@
  *  or implied, of BetaSteward_at_googlemail.com.
  */
 
-package mage.sets.tenthedition;
+package mage.cards.s;
 
 import java.util.UUID;
 import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.abilities.effects.common.DamageTargetEffect;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.target.common.TargetCreatureOrPlayer;
 
 /**
@@ -41,9 +41,8 @@ import mage.target.common.TargetCreatureOrPlayer;
  */
 public class Shock extends CardImpl {
 
-    public Shock (UUID ownerId) {
-        super(ownerId, 232, "Shock", Rarity.COMMON, new CardType[]{CardType.INSTANT}, "{R}");
-        this.expansionSetCode = "10E";
+    public Shock (UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.INSTANT},"{R}");
 
         this.getSpellAbility().addEffect(new DamageTargetEffect(2));
         this.getSpellAbility().addTarget(new TargetCreatureOrPlayer());

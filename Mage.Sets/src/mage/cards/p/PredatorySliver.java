@@ -25,16 +25,16 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.magic2014;
+package mage.cards.p;
 
 import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.effects.common.continuous.BoostControlledEffect;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Duration;
-import mage.constants.Rarity;
 import mage.constants.Zone;
 import mage.filter.common.FilterCreaturePermanent;
 
@@ -44,9 +44,8 @@ import mage.filter.common.FilterCreaturePermanent;
  */
 public class PredatorySliver extends CardImpl {
 
-    public PredatorySliver(UUID ownerId) {
-        super(ownerId, 189, "Predatory Sliver", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{1}{G}");
-        this.expansionSetCode = "M14";
+    public PredatorySliver(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{1}{G}");
         this.subtype.add("Sliver");
 
         this.power = new MageInt(1);

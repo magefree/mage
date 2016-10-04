@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.bornofthegods;
+package mage.cards.h;
 
 import java.util.UUID;
 import mage.abilities.Ability;
@@ -39,12 +39,12 @@ import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.continuous.BoostControlledEffect;
 import mage.cards.Card;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.cards.Cards;
 import mage.cards.CardsImpl;
 import mage.constants.CardType;
 import mage.constants.Duration;
 import mage.constants.Outcome;
-import mage.constants.Rarity;
 import mage.constants.Zone;
 import mage.filter.common.FilterControlledCreaturePermanent;
 import mage.filter.common.FilterCreatureCard;
@@ -66,9 +66,8 @@ public class HeroesPodium extends CardImpl {
         filter.add(new SupertypePredicate("Legendary"));
     }
     
-    public HeroesPodium(UUID ownerId) {
-        super(ownerId, 159, "Heroes' Podium", Rarity.RARE, new CardType[]{CardType.ARTIFACT}, "{5}");
-        this.expansionSetCode = "BNG";
+    public HeroesPodium(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.ARTIFACT},"{5}");
         this.supertype.add("Legendary");
 
         // Each legendary creature you control gets +1/+1 for each other legendary creature you control.

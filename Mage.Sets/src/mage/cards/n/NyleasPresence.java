@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.theros;
+package mage.cards.n;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -45,11 +45,11 @@ import mage.abilities.mana.GreenManaAbility;
 import mage.abilities.mana.RedManaAbility;
 import mage.abilities.mana.WhiteManaAbility;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Duration;
 import mage.constants.Layer;
 import mage.constants.Outcome;
-import mage.constants.Rarity;
 import mage.constants.SubLayer;
 import mage.constants.Zone;
 import mage.game.Game;
@@ -63,9 +63,8 @@ import mage.target.common.TargetLandPermanent;
  */
 public class NyleasPresence extends CardImpl {
 
-    public NyleasPresence(UUID ownerId) {
-        super(ownerId, 169, "Nylea's Presence", Rarity.COMMON, new CardType[]{CardType.ENCHANTMENT}, "{1}{G}");
-        this.expansionSetCode = "THS";
+    public NyleasPresence(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.ENCHANTMENT},"{1}{G}");
         this.subtype.add("Aura");
 
 

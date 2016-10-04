@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.invasion;
+package mage.cards.d;
 
 import java.util.UUID;
 import mage.MageInt;
@@ -35,9 +35,9 @@ import mage.abilities.costs.common.TapSourceCost;
 import mage.abilities.effects.common.continuous.BecomesBasicLandTargetEffect;
 import mage.abilities.keyword.FlyingAbility;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Duration;
-import mage.constants.Rarity;
 import mage.constants.Zone;
 import mage.target.Target;
 import mage.target.common.TargetLandPermanent;
@@ -48,9 +48,8 @@ import mage.target.common.TargetLandPermanent;
  */
 public class DreamThrush extends CardImpl {
 
-    public DreamThrush(UUID ownerId) {
-        super(ownerId, 53, "Dream Thrush", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{1}{U}");
-        this.expansionSetCode = "INV";
+    public DreamThrush(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{1}{U}");
         this.subtype.add("Bird");
 
         this.power = new MageInt(1);

@@ -25,14 +25,14 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.timespiral;
+package mage.cards.r;
 
 import java.util.UUID;
 import mage.abilities.effects.common.CopyTargetSpellEffect;
 import mage.abilities.keyword.BuybackAbility;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.filter.FilterSpell;
 import mage.filter.predicate.Predicates;
 import mage.filter.predicate.mageobject.CardTypePredicate;
@@ -52,9 +52,8 @@ public class Reiterate extends CardImpl {
                 new CardTypePredicate(CardType.SORCERY)));
     }
 
-    public Reiterate(UUID ownerId) {
-        super(ownerId, 175, "Reiterate", Rarity.RARE, new CardType[]{CardType.INSTANT}, "{1}{R}{R}");
-        this.expansionSetCode = "TSP";
+    public Reiterate(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.INSTANT},"{1}{R}{R}");
 
         // Buyback {3}
         this.addAbility(new BuybackAbility("{3}"));

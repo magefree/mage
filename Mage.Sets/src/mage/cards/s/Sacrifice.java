@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.unlimitededition;
+package mage.cards.s;
 
 import java.util.UUID;
 import mage.Mana;
@@ -33,8 +33,8 @@ import mage.abilities.costs.common.SacrificeTargetCost;
 import mage.abilities.dynamicvalue.common.SacrificeCostConvertedMana;
 import mage.abilities.effects.common.DynamicManaEffect;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.target.common.TargetControlledCreaturePermanent;
 
 /**
@@ -43,9 +43,8 @@ import mage.target.common.TargetControlledCreaturePermanent;
  */
 public class Sacrifice extends CardImpl {
 
-    public Sacrifice(UUID ownerId) {
-        super(ownerId, 33, "Sacrifice", Rarity.UNCOMMON, new CardType[]{CardType.INSTANT}, "{B}");
-        this.expansionSetCode = "2ED";
+    public Sacrifice(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.INSTANT},"{B}");
 
         // As an additional cost to cast Sacrifice, sacrifice a creature.
         this.getSpellAbility().addCost(new SacrificeTargetCost(new TargetControlledCreaturePermanent()));

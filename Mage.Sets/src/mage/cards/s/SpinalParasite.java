@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.fifthdawn;
+package mage.cards.s;
 
 import java.util.UUID;
 import mage.MageInt;
@@ -35,8 +35,8 @@ import mage.abilities.costs.common.RemoveCountersSourceCost;
 import mage.abilities.effects.common.counter.RemoveCounterTargetEffect;
 import mage.abilities.keyword.SunburstAbility;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.constants.Zone;
 import mage.counters.CounterType;
 import mage.target.TargetPermanent;
@@ -47,9 +47,8 @@ import mage.target.TargetPermanent;
  */
 public class SpinalParasite extends CardImpl {
 
-    public SpinalParasite(UUID ownerId) {
-        super(ownerId, 155, "Spinal Parasite", Rarity.UNCOMMON, new CardType[]{CardType.ARTIFACT, CardType.CREATURE}, "{5}");
-        this.expansionSetCode = "5DN";
+    public SpinalParasite(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.ARTIFACT,CardType.CREATURE},"{5}");
         this.subtype.add("Insect");
         this.power = new MageInt(-1);
         this.toughness = new MageInt(-1);

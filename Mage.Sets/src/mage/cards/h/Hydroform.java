@@ -25,16 +25,16 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.gatecrash;
+package mage.cards.h;
 
 import java.util.UUID;
 
 import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.MageInt;
 import mage.abilities.effects.common.continuous.BecomesCreatureTargetEffect;
 import mage.abilities.keyword.FlyingAbility;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.Duration;
 import mage.game.permanent.token.Token;
 import mage.target.common.TargetLandPermanent;
@@ -45,9 +45,8 @@ import mage.target.common.TargetLandPermanent;
  */
 public class Hydroform extends CardImpl {
 
-    public Hydroform(UUID ownerId) {
-        super(ownerId, 172, "Hydroform", Rarity.COMMON, new CardType[]{CardType.INSTANT}, "{G}{U}");
-        this.expansionSetCode = "GTC";
+    public Hydroform(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.INSTANT},"{G}{U}");
 
 
         // Target land becomes a 3/3 Elemental creature with flying until end of turn. It's still a land.

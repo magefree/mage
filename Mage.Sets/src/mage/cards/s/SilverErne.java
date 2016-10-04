@@ -25,15 +25,15 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.iceage;
+package mage.cards.s;
 
 import java.util.UUID;
 import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.MageInt;
 import mage.abilities.keyword.FlyingAbility;
 import mage.abilities.keyword.TrampleAbility;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 
 /**
  *
@@ -41,9 +41,8 @@ import mage.cards.CardImpl;
  */
 public class SilverErne extends CardImpl {
 
-    public SilverErne(UUID ownerId) {
-        super(ownerId, 98, "Silver Erne", Rarity.UNCOMMON, new CardType[]{CardType.CREATURE}, "{3}{U}");
-        this.expansionSetCode = "ICE";
+    public SilverErne(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{3}{U}");
         this.subtype.add("Bird");
 
         this.power = new MageInt(2);

@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.journeyintonyx;
+package mage.cards.s;
 
 import java.util.UUID;
 import mage.MageInt;
@@ -33,11 +33,11 @@ import mage.abilities.Ability;
 import mage.abilities.common.EntersBattlefieldTriggeredAbility;
 import mage.abilities.effects.OneShotEffect;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.cards.Cards;
 import mage.cards.CardsImpl;
 import mage.constants.CardType;
 import mage.constants.Outcome;
-import mage.constants.Rarity;
 import mage.constants.TargetController;
 import mage.constants.Zone;
 import mage.filter.Filter;
@@ -57,9 +57,8 @@ import mage.players.Player;
  */
 public class ScourgeOfFleets extends CardImpl {
 
-    public ScourgeOfFleets(UUID ownerId) {
-        super(ownerId, 51, "Scourge of Fleets", Rarity.RARE, new CardType[]{CardType.CREATURE}, "{5}{U}{U}");
-        this.expansionSetCode = "JOU";
+    public ScourgeOfFleets(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{5}{U}{U}");
         this.subtype.add("Kraken");
 
         this.power = new MageInt(6);

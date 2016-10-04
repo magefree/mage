@@ -25,13 +25,13 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.dragonsoftarkir;
+package mage.cards.f;
 
 import java.util.UUID;
 import mage.abilities.effects.common.ExileTargetEffect;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.filter.FilterPermanent;
 import mage.filter.predicate.Predicates;
 import mage.filter.predicate.mageobject.CardTypePredicate;
@@ -51,9 +51,8 @@ public class FateForgotten extends CardImpl {
                 new CardTypePredicate(CardType.ENCHANTMENT)));
     }
 
-    public FateForgotten(UUID ownerId) {
-        super(ownerId, 17, "Fate Forgotten", Rarity.COMMON, new CardType[]{CardType.INSTANT}, "{2}{W}");
-        this.expansionSetCode = "DTK";
+    public FateForgotten(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.INSTANT},"{2}{W}");
 
         // Exile target artifact or enchantment.
         this.getSpellAbility().addEffect(new ExileTargetEffect());

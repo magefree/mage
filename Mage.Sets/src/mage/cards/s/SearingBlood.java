@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.bornofthegods;
+package mage.cards.s;
 
 import java.util.UUID;
 import mage.MageObject;
@@ -34,10 +34,10 @@ import mage.abilities.DelayedTriggeredAbility;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.DamageTargetEffect;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Duration;
 import mage.constants.Outcome;
-import mage.constants.Rarity;
 import mage.constants.Zone;
 import mage.game.Game;
 import mage.game.events.GameEvent;
@@ -53,9 +53,8 @@ import mage.target.common.TargetCreaturePermanent;
  */
 public class SearingBlood extends CardImpl {
 
-    public SearingBlood(UUID ownerId) {
-        super(ownerId, 111, "Searing Blood", Rarity.UNCOMMON, new CardType[]{CardType.INSTANT}, "{R}{R}");
-        this.expansionSetCode = "BNG";
+    public SearingBlood(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.INSTANT},"{R}{R}");
 
         // Searing Blood deals 2 damage to target creature. When that creature dies this turn, Searing Blood deals 3 damage to that creature's controller.
         this.getSpellAbility().addEffect(new SearingBloodEffect());

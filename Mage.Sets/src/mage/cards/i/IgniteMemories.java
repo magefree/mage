@@ -25,17 +25,17 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.timespiral;
+package mage.cards.i;
 
 import java.util.UUID;
 
 import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.abilities.Ability;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.keyword.StormAbility;
 import mage.cards.Card;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.cards.Cards;
 import mage.cards.CardsImpl;
 import mage.constants.Outcome;
@@ -49,9 +49,8 @@ import mage.target.TargetPlayer;
  */
 public class IgniteMemories extends CardImpl {
 
-    public IgniteMemories(UUID ownerId) {
-        super(ownerId, 164, "Ignite Memories", Rarity.UNCOMMON, new CardType[]{CardType.SORCERY}, "{4}{R}");
-        this.expansionSetCode = "TSP";
+    public IgniteMemories(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{4}{R}");
 
 
         // Target player reveals a card at random from his or her hand. Ignite Memories deals damage to that player equal to that card's converted mana cost.

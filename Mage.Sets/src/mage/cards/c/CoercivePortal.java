@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.conspiracy;
+package mage.cards.c;
 
 import java.util.UUID;
 import mage.abilities.Ability;
@@ -34,9 +34,9 @@ import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.DestroyAllEffect;
 import mage.abilities.effects.common.SacrificeSourceEffect;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Outcome;
-import mage.constants.Rarity;
 import mage.constants.TargetController;
 import mage.filter.common.FilterNonlandPermanent;
 import mage.game.Game;
@@ -48,9 +48,8 @@ import mage.players.Player;
  */
 public class CoercivePortal extends CardImpl {
 
-    public CoercivePortal(UUID ownerId) {
-        super(ownerId, 56, "Coercive Portal", Rarity.MYTHIC, new CardType[]{CardType.ARTIFACT}, "{4}");
-        this.expansionSetCode = "CNS";
+    public CoercivePortal(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.ARTIFACT},"{4}");
 
         // Will of the council - At the beginning of your upkeep, starting with you, each player votes for carnage or homage. If carnage gets more votes, sacrifice Coercive Portal and destroy all nonland permanents. If homage gets more votes or the vote is tied, draw a card.
         this.addAbility(new BeginningOfUpkeepTriggeredAbility(new CoercivePortalEffect(), TargetController.YOU, false));

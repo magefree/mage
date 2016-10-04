@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.starwars;
+package mage.cards.b;
 
 import java.util.UUID;
 import mage.MageInt;
@@ -36,8 +36,8 @@ import mage.abilities.effects.common.LoseLifeSourceControllerEffect;
 import mage.abilities.effects.common.ShuffleLibrarySourceEffect;
 import mage.abilities.effects.common.search.SearchLibraryPutOnLibraryEffect;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.target.common.TargetCardInLibrary;
 
 /**
@@ -46,9 +46,8 @@ import mage.target.common.TargetCardInLibrary;
  */
 public class BibFortuna extends CardImpl {
 
-    public BibFortuna(UUID ownerId) {
-        super(ownerId, 67, "Bib Fortuna", Rarity.UNCOMMON, new CardType[]{CardType.CREATURE}, "{1}{B}");
-        this.expansionSetCode = "SWS";
+    public BibFortuna(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{1}{B}");
         this.supertype.add("Legendary");
         this.subtype.add("Twi'lek");
         this.subtype.add("Advisor");

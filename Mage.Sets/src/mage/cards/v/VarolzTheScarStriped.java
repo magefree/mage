@@ -25,12 +25,11 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.dragonsmaze;
+package mage.cards.v;
 
 import java.util.UUID;
 
 import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.constants.Zone;
 import mage.MageInt;
 import mage.abilities.Ability;
@@ -43,6 +42,7 @@ import mage.abilities.effects.common.RegenerateSourceEffect;
 import mage.abilities.keyword.ScavengeAbility;
 import mage.cards.Card;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.Duration;
 import mage.constants.Layer;
 import mage.constants.Outcome;
@@ -65,9 +65,8 @@ public class VarolzTheScarStriped extends CardImpl {
         filter.add(new AnotherPredicate());
     }
 
-    public VarolzTheScarStriped(UUID ownerId) {
-        super(ownerId, 112, "Varolz, the Scar-Striped", Rarity.RARE, new CardType[]{CardType.CREATURE}, "{1}{B}{G}");
-        this.expansionSetCode = "DGM";
+    public VarolzTheScarStriped(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{1}{B}{G}");
         this.supertype.add("Legendary");
         this.subtype.add("Troll");
         this.subtype.add("Warrior");

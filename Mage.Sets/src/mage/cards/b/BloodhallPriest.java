@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.eldritchmoon;
+package mage.cards.b;
 
 import java.util.UUID;
 import mage.MageInt;
@@ -36,8 +36,8 @@ import mage.abilities.decorator.ConditionalTriggeredAbility;
 import mage.abilities.effects.common.DamageTargetEffect;
 import mage.abilities.keyword.MadnessAbility;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.constants.Zone;
 import mage.game.Game;
 import mage.game.events.GameEvent;
@@ -50,9 +50,8 @@ import mage.target.common.TargetCreatureOrPlayer;
  */
 public class BloodhallPriest extends CardImpl {
 
-    public BloodhallPriest(UUID ownerId) {
-        super(ownerId, 181, "Bloodhall Priest", Rarity.RARE, new CardType[]{CardType.CREATURE}, "{2}{B}{R}");
-        this.expansionSetCode = "EMN";
+    public BloodhallPriest(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{2}{B}{R}");
         this.subtype.add("Vampire");
         this.subtype.add("Cleric");
         this.power = new MageInt(4);

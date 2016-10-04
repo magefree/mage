@@ -25,10 +25,9 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.worldwake;
+package mage.cards.s;
 
 import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.constants.Zone;
 import mage.MageInt;
 import mage.abilities.common.SimpleStaticAbility;
@@ -38,6 +37,7 @@ import mage.abilities.effects.common.continuous.GainAbilitySourceEffect;
 import mage.abilities.keyword.FirstStrikeAbility;
 import mage.abilities.keyword.LifelinkAbility;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.filter.common.FilterControlledPermanent;
 import mage.filter.predicate.mageobject.SubtypePredicate;
 
@@ -57,9 +57,8 @@ public class SejiriMerfolk extends CardImpl {
         filter.add(new SubtypePredicate("Plains"));
     }
 
-    public SejiriMerfolk(UUID ownerId) {
-        super(ownerId, 36, "Sejiri Merfolk", Rarity.UNCOMMON, new CardType[]{CardType.CREATURE}, "{1}{U}");
-        this.expansionSetCode = "WWK";
+    public SejiriMerfolk(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{1}{U}");
         this.subtype.add("Merfolk");
         this.subtype.add("Soldier");
 

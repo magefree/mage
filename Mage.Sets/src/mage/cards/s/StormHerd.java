@@ -25,14 +25,14 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.guildpact;
+package mage.cards.s;
 
 import java.util.UUID;
 import mage.abilities.dynamicvalue.common.ControllerLifeCount;
 import mage.abilities.effects.common.CreateTokenEffect;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.game.permanent.token.PegasusToken;
 
 /**
@@ -41,9 +41,8 @@ import mage.game.permanent.token.PegasusToken;
  */
 public class StormHerd extends CardImpl {
 
-    public StormHerd(UUID ownerId) {
-        super(ownerId, 19, "Storm Herd", Rarity.RARE, new CardType[]{CardType.SORCERY}, "{8}{W}{W}");
-        this.expansionSetCode = "GPT";
+    public StormHerd(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{8}{W}{W}");
 
         // Put X 1/1 white Pegasus creature tokens with flying onto the battlefield, where X is your life total.
         this.getSpellAbility().addEffect(new CreateTokenEffect(new PegasusToken(), new ControllerLifeCount()));

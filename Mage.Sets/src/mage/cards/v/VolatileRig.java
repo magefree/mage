@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.returntoravnica;
+package mage.cards.v;
 
 import java.util.List;
 import java.util.UUID;
@@ -37,10 +37,10 @@ import mage.abilities.common.DiesTriggeredAbility;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.keyword.TrampleAbility;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Outcome;
 import mage.constants.PhaseStep;
-import mage.constants.Rarity;
 import mage.constants.Zone;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.game.Game;
@@ -55,9 +55,8 @@ import mage.players.Player;
  */
 public class VolatileRig extends CardImpl {
 
-    public VolatileRig(UUID ownerId) {
-        super(ownerId, 236, "Volatile Rig", Rarity.RARE, new CardType[]{CardType.ARTIFACT, CardType.CREATURE}, "{4}");
-        this.expansionSetCode = "RTR";
+    public VolatileRig(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.ARTIFACT,CardType.CREATURE},"{4}");
         this.subtype.add("Construct");
 
         this.power = new MageInt(4);

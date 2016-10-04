@@ -26,15 +26,15 @@
  *  or implied, of BetaSteward_at_googlemail.com.
  */
 
-package mage.sets.guildpact;
+package mage.cards.d;
 
 import java.util.UUID;
 import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.MageInt;
 import mage.abilities.common.CantBlockAbility;
 import mage.abilities.keyword.FlyingAbility;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 
 /**
  *
@@ -42,9 +42,8 @@ import mage.cards.CardImpl;
  */
 public class DaggerclawImp extends CardImpl {
 
-    public DaggerclawImp (UUID ownerId) {
-        super(ownerId, 48, "Daggerclaw Imp", Rarity.UNCOMMON, new CardType[]{CardType.CREATURE}, "{2}{B}");
-        this.expansionSetCode = "GPT";
+    public DaggerclawImp (UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{2}{B}");
         this.subtype.add("Imp");
 
         this.power = new MageInt(3);

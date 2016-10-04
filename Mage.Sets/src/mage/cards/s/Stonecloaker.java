@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.commander2013;
+package mage.cards.s;
 
 import java.util.UUID;
 import mage.MageInt;
@@ -36,8 +36,8 @@ import mage.abilities.effects.common.ReturnToHandChosenControlledPermanentEffect
 import mage.abilities.keyword.FlashAbility;
 import mage.abilities.keyword.FlyingAbility;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.filter.common.FilterControlledCreaturePermanent;
 import mage.target.common.TargetCardInGraveyard;
 
@@ -47,9 +47,8 @@ import mage.target.common.TargetCardInGraveyard;
  */
 public class Stonecloaker extends CardImpl {
 
-    public Stonecloaker(UUID ownerId) {
-        super(ownerId, 22, "Stonecloaker", Rarity.UNCOMMON, new CardType[]{CardType.CREATURE}, "{2}{W}");
-        this.expansionSetCode = "C13";
+    public Stonecloaker(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{2}{W}");
         this.subtype.add("Gargoyle");
 
         this.power = new MageInt(3);

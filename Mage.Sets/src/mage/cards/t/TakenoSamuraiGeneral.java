@@ -26,7 +26,7 @@
  *  or implied, of BetaSteward_at_googlemail.com.
  */
 
-package mage.sets.championsofkamigawa;
+package mage.cards.t;
 
 import java.util.Iterator;
 import mage.MageInt;
@@ -35,6 +35,7 @@ import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.effects.ContinuousEffectImpl;
 import mage.abilities.keyword.BushidoAbility;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.*;
 import mage.filter.common.FilterControlledCreaturePermanent;
 import mage.filter.predicate.mageobject.SubtypePredicate;
@@ -49,9 +50,8 @@ import mage.MageObjectReference;
  */
 public class TakenoSamuraiGeneral extends CardImpl {
 
-    public TakenoSamuraiGeneral(UUID ownerId) {
-        super(ownerId, 46, "Takeno, Samurai General", Rarity.RARE, new CardType[]{CardType.CREATURE}, "{5}{W}");
-        this.expansionSetCode = "CHK";
+    public TakenoSamuraiGeneral(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{5}{W}");
         this.supertype.add("Legendary");
         this.subtype.add("Human");
         this.subtype.add("Samurai");

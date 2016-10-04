@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.masterseditionii;
+package mage.cards.o;
 
 import java.util.UUID;
 import mage.MageInt;
@@ -35,10 +35,10 @@ import mage.abilities.costs.mana.GenericManaCost;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.continuous.BoostTargetEffect;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Duration;
 import mage.constants.Outcome;
-import mage.constants.Rarity;
 import mage.constants.Zone;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.filter.predicate.mageobject.SubtypePredicate;
@@ -59,9 +59,8 @@ public class OrcishCaptain extends CardImpl {
         filter.add(new SubtypePredicate("Orc"));
     }
 
-    public OrcishCaptain(UUID ownerId) {
-        super(ownerId, 139, "Orcish Captain", Rarity.UNCOMMON, new CardType[]{CardType.CREATURE}, "{R}");
-        this.expansionSetCode = "ME2";
+    public OrcishCaptain(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{R}");
         this.subtype.add("Orc");
         this.subtype.add("Warrior");
         this.power = new MageInt(1);

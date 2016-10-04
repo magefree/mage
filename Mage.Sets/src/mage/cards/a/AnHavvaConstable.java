@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.fifthedition;
+package mage.cards.a;
 
 import java.util.UUID;
 import mage.MageInt;
@@ -35,11 +35,11 @@ import mage.abilities.Ability;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.effects.ContinuousEffectImpl;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Duration;
 import mage.constants.Layer;
 import mage.constants.Outcome;
-import mage.constants.Rarity;
 import mage.constants.SubLayer;
 import mage.constants.Zone;
 import mage.filter.common.FilterCreaturePermanent;
@@ -53,9 +53,8 @@ import mage.players.Player;
  */
 public class AnHavvaConstable extends CardImpl {
 
-    public AnHavvaConstable(UUID ownerId) {
-        super(ownerId, 139, "An-Havva Constable", Rarity.RARE, new CardType[]{CardType.CREATURE}, "{1}{G}{G}");
-        this.expansionSetCode = "5ED";
+    public AnHavvaConstable(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{1}{G}{G}");
         this.subtype.add("Human");
         this.power = new MageInt(2);
         this.toughness = new MageInt(1);

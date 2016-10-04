@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.shardsofalara;
+package mage.cards.i;
 
 import java.util.UUID;
 import mage.abilities.Ability;
@@ -40,10 +40,10 @@ import mage.abilities.effects.common.DrawCardSourceControllerEffect;
 import mage.abilities.effects.common.SacrificeSourceEffect;
 import mage.cards.Card;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Duration;
 import mage.constants.Outcome;
-import mage.constants.Rarity;
 import mage.constants.Zone;
 import mage.filter.FilterCard;
 import mage.game.Game;
@@ -57,9 +57,8 @@ import mage.target.common.TargetCardInYourGraveyard;
  */
 public class ImmortalCoil extends CardImpl {
 
-    public ImmortalCoil(UUID ownerId) {
-        super(ownerId, 79, "Immortal Coil", Rarity.RARE, new CardType[]{CardType.ARTIFACT}, "{2}{B}{B}");
-        this.expansionSetCode = "ALA";
+    public ImmortalCoil(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.ARTIFACT},"{2}{B}{B}");
 
         // {tap}, Exile two cards from your graveyard: Draw a card.
         Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new DrawCardSourceControllerEffect(1), new TapSourceCost());

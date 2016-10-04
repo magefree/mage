@@ -26,13 +26,13 @@
  *  or implied, of BetaSteward_at_googlemail.com.
  */
 
-package mage.sets.mirrodin;
+package mage.cards.r;
 
 import java.util.UUID;
 import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.abilities.effects.common.ReturnToHandTargetEffect;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.target.TargetPermanent;
 
 /**
@@ -41,9 +41,8 @@ import mage.target.TargetPermanent;
  */
 public class Regress extends CardImpl {
 
-    public Regress (UUID ownerId) {
-        super(ownerId, 48, "Regress", Rarity.COMMON, new CardType[]{CardType.INSTANT}, "{2}{U}");
-        this.expansionSetCode = "MRD";
+    public Regress (UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.INSTANT},"{2}{U}");
 
         this.getSpellAbility().addEffect(new ReturnToHandTargetEffect());
         this.getSpellAbility().addTarget(new TargetPermanent());

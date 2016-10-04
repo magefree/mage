@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.magicorigins;
+package mage.cards.d;
 
 import java.util.UUID;
 import mage.MageInt;
@@ -36,9 +36,9 @@ import mage.abilities.decorator.ConditionalRestrictionEffect;
 import mage.abilities.effects.Effect;
 import mage.abilities.effects.common.combat.CantAttackAnyPlayerSourceEffect;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Duration;
-import mage.constants.Rarity;
 import mage.constants.Zone;
 
 /**
@@ -47,9 +47,8 @@ import mage.constants.Zone;
  */
 public class DeepSeaTerror extends CardImpl {
 
-    public DeepSeaTerror(UUID ownerId) {
-        super(ownerId, 52, "Deep-Sea Terror", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{4}{U}{U}");
-        this.expansionSetCode = "ORI";
+    public DeepSeaTerror(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{4}{U}{U}");
         this.subtype.add("Serpent");
         this.power = new MageInt(6);
         this.toughness = new MageInt(6);

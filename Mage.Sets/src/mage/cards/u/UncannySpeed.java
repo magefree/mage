@@ -25,16 +25,16 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.avacynrestored;
+package mage.cards.u;
 
 import java.util.UUID;
 import mage.constants.CardType;
 import mage.constants.Duration;
-import mage.constants.Rarity;
 import mage.abilities.effects.common.continuous.BoostTargetEffect;
 import mage.abilities.effects.common.continuous.GainAbilityTargetEffect;
 import mage.abilities.keyword.HasteAbility;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.target.common.TargetCreaturePermanent;
 
 /**
@@ -43,9 +43,8 @@ import mage.target.common.TargetCreaturePermanent;
  */
 public class UncannySpeed extends CardImpl {
 
-    public UncannySpeed(UUID ownerId) {
-        super(ownerId, 163, "Uncanny Speed", Rarity.COMMON, new CardType[]{CardType.INSTANT}, "{1}{R}");
-        this.expansionSetCode = "AVR";
+    public UncannySpeed(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.INSTANT},"{1}{R}");
 
 
         // Target creature gets +3/+0 and gains haste until end of turn.

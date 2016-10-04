@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.magic2015;
+package mage.cards.a;
 
 import java.util.UUID;
 import mage.MageInt;
@@ -35,9 +35,9 @@ import mage.abilities.decorator.ConditionalContinuousEffect;
 import mage.abilities.effects.common.continuous.GainAbilitySourceEffect;
 import mage.abilities.keyword.FlyingAbility;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Duration;
-import mage.constants.Rarity;
 import mage.constants.Zone;
 import mage.filter.common.FilterControlledArtifactPermanent;
 
@@ -49,9 +49,8 @@ public class AeronautTinkerer extends CardImpl {
     
     final static private String rule = "{this} has flying as long as you control an artifact";
 
-    public AeronautTinkerer(UUID ownerId) {
-        super(ownerId, 43, "Aeronaut Tinkerer", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{2}{U}");
-        this.expansionSetCode = "M15";
+    public AeronautTinkerer(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{2}{U}");
         this.subtype.add("Human");
         this.subtype.add("Artificer");
 

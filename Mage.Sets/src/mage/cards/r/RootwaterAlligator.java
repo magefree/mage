@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.exodus;
+package mage.cards.r;
 
 import java.util.UUID;
 import mage.MageInt;
@@ -33,8 +33,8 @@ import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.costs.common.SacrificeTargetCost;
 import mage.abilities.effects.common.RegenerateSourceEffect;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.constants.Zone;
 import mage.filter.common.FilterControlledPermanent;
 import mage.filter.predicate.mageobject.SubtypePredicate;
@@ -52,9 +52,8 @@ public class RootwaterAlligator extends CardImpl {
         filter.add(new SubtypePredicate("Forest"));
     }
 
-    public RootwaterAlligator(UUID ownerId) {
-        super(ownerId, 122, "Rootwater Alligator", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{3}{G}");
-        this.expansionSetCode = "EXO";
+    public RootwaterAlligator(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{3}{G}");
         this.subtype.add("Crocodile");
         this.power = new MageInt(3);
         this.toughness = new MageInt(2);

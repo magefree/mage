@@ -25,17 +25,17 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.innistrad;
+package mage.cards.n;
 
 import mage.abilities.condition.common.OpponentControlsPermanentCondition;
 import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.MageInt;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.decorator.ConditionalContinuousEffect;
 import mage.abilities.effects.common.continuous.GainAbilitySourceEffect;
 import mage.abilities.keyword.HasteAbility;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.Zone;
 import mage.filter.FilterPermanent;
 
@@ -49,9 +49,8 @@ public class NightRevelers extends CardImpl {
 
     private static final FilterPermanent filter = new FilterPermanent("Human", "Human");
 
-    public NightRevelers(UUID ownerId) {
-        super(ownerId, 153, "Night Revelers", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{4}{R}");
-        this.expansionSetCode = "ISD";
+    public NightRevelers(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{4}{R}");
         this.subtype.add("Vampire");
 
         this.color.setRed(true);

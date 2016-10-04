@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.championsofkamigawa;
+package mage.cards.c;
 
 import java.util.UUID;
 import mage.MageObject;
@@ -33,12 +33,12 @@ import mage.abilities.Ability;
 import mage.abilities.Mode;
 import mage.abilities.effects.common.search.SearchTargetGraveyardHandLibraryForCardNameAndExileEffect;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.cards.repository.CardRepository;
 import mage.choices.Choice;
 import mage.choices.ChoiceImpl;
 import mage.constants.CardType;
 import mage.constants.Outcome;
-import mage.constants.Rarity;
 import mage.game.Game;
 import mage.players.Player;
 import mage.target.TargetPlayer;
@@ -49,9 +49,8 @@ import mage.target.TargetPlayer;
  */
 public class CranialExtraction extends CardImpl {
 
-    public CranialExtraction(UUID ownerId) {
-        super(ownerId, 105, "Cranial Extraction", Rarity.RARE, new CardType[]{CardType.SORCERY}, "{3}{B}");
-        this.expansionSetCode = "CHK";
+    public CranialExtraction(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{3}{B}");
         this.subtype.add("Arcane");
 
         /* Name a nonland card. Search target player's graveyard, hand, and library for

@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.championsofkamigawa;
+package mage.cards.b;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -40,10 +40,10 @@ import mage.abilities.costs.common.TapSourceCost;
 import mage.abilities.effects.ContinuousRuleModifyingEffectImpl;
 import mage.abilities.mana.SimpleManaAbility;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Duration;
 import mage.constants.Outcome;
-import mage.constants.Rarity;
 import mage.constants.WatcherScope;
 import mage.constants.Zone;
 import mage.filter.FilterCard;
@@ -59,9 +59,8 @@ import mage.watchers.Watcher;
  */
 public class BoseijuWhoSheltersAll extends CardImpl {
 
-    public BoseijuWhoSheltersAll(UUID ownerId) {
-        super(ownerId, 273, "Boseiju, Who Shelters All", Rarity.RARE, new CardType[]{CardType.LAND}, "");
-        this.expansionSetCode = "CHK";
+    public BoseijuWhoSheltersAll(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.LAND},"");
         this.supertype.add("Legendary");
 
         // Boseiju, Who Shelters All enters the battlefield tapped.

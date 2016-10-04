@@ -25,13 +25,13 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.judgment;
+package mage.cards.s;
 
 import java.util.UUID;
 import mage.abilities.effects.common.DamageTargetEffect;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.target.common.TargetCreaturePermanent;
 
 /**
@@ -40,9 +40,8 @@ import mage.target.common.TargetCreaturePermanent;
  */
 public class Swelter extends CardImpl {
 
-    public Swelter(UUID ownerId) {
-        super(ownerId, 101, "Swelter", Rarity.UNCOMMON, new CardType[]{CardType.SORCERY}, "{3}{R}");
-        this.expansionSetCode = "JUD";
+    public Swelter(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{3}{R}");
 
         // Swelter deals 2 damage to each of two target creatures.
         this.getSpellAbility().addEffect(new DamageTargetEffect(2, true, "each of two target creatures"));

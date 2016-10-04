@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.apocalypse;
+package mage.cards.c;
 
 import java.util.UUID;
 
@@ -38,6 +38,7 @@ import mage.abilities.costs.mana.ColoredManaCost;
 import mage.abilities.effects.common.continuous.BoostTargetEffect;
 import mage.abilities.mana.AnyColorManaAbility;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.target.common.TargetCreaturePermanent;
 
 /**
@@ -45,9 +46,8 @@ import mage.target.common.TargetCreaturePermanent;
  */
 public class CetaDisciple extends CardImpl {
 
-    public CetaDisciple(UUID ownerId) {
-        super(ownerId, 19, "Ceta Disciple", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{U}");
-        this.expansionSetCode = "APC";
+    public CetaDisciple(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{U}");
         this.subtype.add("Merfolk");
         this.subtype.add("Wizard");
 

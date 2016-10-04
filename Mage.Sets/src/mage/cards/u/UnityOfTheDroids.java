@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.starwars;
+package mage.cards.u;
 
 import java.util.UUID;
 import mage.abilities.Mode;
@@ -34,9 +34,9 @@ import mage.abilities.effects.common.DestroyTargetEffect;
 import mage.abilities.effects.common.LookLibraryAndPickControllerEffect;
 import mage.abilities.effects.common.PreventDamageToTargetEffect;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Duration;
-import mage.constants.Rarity;
 import mage.constants.Zone;
 import mage.filter.FilterCard;
 import mage.filter.common.FilterCreaturePermanent;
@@ -59,9 +59,8 @@ public class UnityOfTheDroids extends CardImpl {
 
     }
 
-    public UnityOfTheDroids(UUID ownerId) {
-        super(ownerId, 221, "Unity of the Droids", Rarity.UNCOMMON, new CardType[]{CardType.INSTANT}, "{W}{U}{B}");
-        this.expansionSetCode = "SWS";
+    public UnityOfTheDroids(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.INSTANT},"{W}{U}{B}");
 
         // Choose one - Prevent all damage that would be dealt to target artifact creature this turn.
         this.getSpellAbility().addEffect(new PreventDamageToTargetEffect(Duration.EndOfTurn));

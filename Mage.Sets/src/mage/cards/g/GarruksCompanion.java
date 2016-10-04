@@ -26,14 +26,14 @@
  *  or implied, of BetaSteward_at_googlemail.com.
  */
 
-package mage.sets.magic2011;
+package mage.cards.g;
 
 import java.util.UUID;
 import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.MageInt;
 import mage.abilities.keyword.TrampleAbility;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 
 /**
  *
@@ -41,9 +41,8 @@ import mage.cards.CardImpl;
  */
 public class GarruksCompanion extends CardImpl {
 
-    public GarruksCompanion(UUID ownerId) {
-        super(ownerId, 176, "Garruk's Companion", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{G}{G}");
-        this.expansionSetCode = "M11";
+    public GarruksCompanion(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{G}{G}");
         this.subtype.add("Beast");
 
         this.power = new MageInt(3);

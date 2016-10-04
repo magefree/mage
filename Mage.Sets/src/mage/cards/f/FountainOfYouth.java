@@ -25,18 +25,18 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.tenthedition;
+package mage.cards.f;
 
 import java.util.UUID;
 
 import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.costs.common.TapSourceCost;
 import mage.abilities.costs.mana.GenericManaCost;
 import mage.abilities.effects.common.GainLifeEffect;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.Zone;
 
 /**
@@ -45,9 +45,8 @@ import mage.constants.Zone;
  */
 public class FountainOfYouth extends CardImpl {
 
-    public FountainOfYouth(UUID ownerId) {
-        super(ownerId, 323, "Fountain of Youth", Rarity.UNCOMMON, new CardType[]{CardType.ARTIFACT}, "{0}");
-        this.expansionSetCode = "10E";
+    public FountainOfYouth(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.ARTIFACT},"{0}");
         Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new GainLifeEffect(1), new GenericManaCost(2));
         ability.addCost(new TapSourceCost());
         this.addAbility(ability);

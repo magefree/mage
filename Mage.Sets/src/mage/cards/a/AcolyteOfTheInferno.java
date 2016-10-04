@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.magicorigins;
+package mage.cards.a;
 
 import java.util.UUID;
 import mage.MageInt;
@@ -33,8 +33,8 @@ import mage.abilities.common.BecomesBlockedByCreatureTriggeredAbility;
 import mage.abilities.effects.common.DamageTargetEffect;
 import mage.abilities.keyword.RenownAbility;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.Rarity;
 
 /**
  *
@@ -42,9 +42,8 @@ import mage.constants.Rarity;
  */
 public class AcolyteOfTheInferno extends CardImpl {
 
-    public AcolyteOfTheInferno(UUID ownerId) {
-        super(ownerId, 128, "Acolyte of the Inferno", Rarity.UNCOMMON, new CardType[]{CardType.CREATURE}, "{2}{R}");
-        this.expansionSetCode = "ORI";
+    public AcolyteOfTheInferno(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{2}{R}");
         this.subtype.add("Human");
         this.subtype.add("Monk");
         this.power = new MageInt(3);

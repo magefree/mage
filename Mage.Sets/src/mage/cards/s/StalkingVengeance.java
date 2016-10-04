@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.commander2013;
+package mage.cards.s;
 
 import java.util.UUID;
 import mage.MageInt;
@@ -34,9 +34,9 @@ import mage.abilities.common.DiesCreatureTriggeredAbility;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.keyword.HasteAbility;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Outcome;
-import mage.constants.Rarity;
 import mage.constants.TargetController;
 import mage.constants.Zone;
 import mage.filter.common.FilterCreaturePermanent;
@@ -59,9 +59,8 @@ public class StalkingVengeance extends CardImpl {
         filter.add(new AnotherPredicate());
     }
 
-    public StalkingVengeance(UUID ownerId) {
-        super(ownerId, 121, "Stalking Vengeance", Rarity.RARE, new CardType[]{CardType.CREATURE}, "{5}{R}{R}");
-        this.expansionSetCode = "C13";
+    public StalkingVengeance(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{5}{R}{R}");
         this.subtype.add("Avatar");
 
         this.power = new MageInt(5);

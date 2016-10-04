@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.magic2013;
+package mage.cards.a;
 
 import java.util.UUID;
 import mage.abilities.Ability;
@@ -40,9 +40,9 @@ import mage.abilities.effects.common.counter.AddCountersTargetEffect;
 import mage.abilities.keyword.DoubleStrikeAbility;
 import mage.abilities.keyword.FlyingAbility;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Duration;
-import mage.constants.Rarity;
 import mage.counters.CounterType;
 import mage.game.permanent.token.CatToken;
 import mage.target.common.TargetCreaturePermanent;
@@ -53,9 +53,8 @@ import mage.target.common.TargetCreaturePermanent;
  */
 public class AjaniCallerOfThePride extends CardImpl {
 
-    public AjaniCallerOfThePride(UUID ownerId) {
-        super(ownerId, 1, "Ajani, Caller of the Pride", Rarity.MYTHIC, new CardType[]{CardType.PLANESWALKER}, "{1}{W}{W}");
-        this.expansionSetCode = "M13";
+    public AjaniCallerOfThePride(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.PLANESWALKER},"{1}{W}{W}");
         this.subtype.add("Ajani");
 
     }

@@ -25,11 +25,10 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.zendikar;
+package mage.cards.m;
 
 import java.util.UUID;
 import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.MageInt;
 import mage.abilities.common.EntersBattlefieldTriggeredAbility;
 import mage.abilities.condition.common.KickedCondition;
@@ -37,6 +36,7 @@ import mage.abilities.decorator.ConditionalTriggeredAbility;
 import mage.abilities.effects.common.DestroyTargetEffect;
 import mage.abilities.keyword.KickerAbility;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.filter.FilterPermanent;
 import mage.filter.predicate.Predicates;
 import mage.filter.predicate.mageobject.CardTypePredicate;
@@ -55,9 +55,8 @@ public class MoldShambler extends CardImpl {
         filter.add(Predicates.not(new CardTypePredicate(CardType.CREATURE)));
     }
 
-    public MoldShambler(UUID ownerId) {
-        super(ownerId, 169, "Mold Shambler", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{3}{G}");
-        this.expansionSetCode = "ZEN";
+    public MoldShambler(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{3}{G}");
         this.subtype.add("Fungus");
         this.subtype.add("Beast");
 

@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.zendikar;
+package mage.cards.m;
 
 import java.util.Iterator;
 import java.util.UUID;
@@ -37,6 +37,7 @@ import mage.abilities.decorator.ConditionalContinuousEffect;
 import mage.abilities.effects.ContinuousEffectImpl;
 import mage.abilities.keyword.KickerAbility;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.*;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.game.Game;
@@ -51,9 +52,8 @@ public class MarshCasualties extends CardImpl {
 
     private static final String ruleText = "Creatures target player controls get -1/-1 until end of turn. If {this} was kicked, those creatures get -2/-2 until end of turn instead";
 
-    public MarshCasualties(UUID ownerId) {
-        super(ownerId, 101, "Marsh Casualties", Rarity.UNCOMMON, new CardType[]{CardType.SORCERY}, "{B}{B}");
-        this.expansionSetCode = "ZEN";
+    public MarshCasualties(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{B}{B}");
 
         this.color.setBlack(true);
 

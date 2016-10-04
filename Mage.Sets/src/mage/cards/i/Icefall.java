@@ -25,15 +25,15 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.coldsnap;
+package mage.cards.i;
 
 import java.util.UUID;
 import mage.abilities.costs.mana.ManaCostsImpl;
 import mage.abilities.effects.common.DestroyTargetEffect;
 import mage.abilities.keyword.RecoverAbility;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.filter.FilterPermanent;
 import mage.filter.predicate.Predicates;
 import mage.filter.predicate.mageobject.CardTypePredicate;
@@ -53,9 +53,8 @@ public class Icefall extends CardImpl {
                 new CardTypePredicate(CardType.LAND)));
     }
 
-    public Icefall(UUID ownerId) {
-        super(ownerId, 85, "Icefall", Rarity.COMMON, new CardType[]{CardType.SORCERY}, "{2}{R}{R}");
-        this.expansionSetCode = "CSP";
+    public Icefall(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{2}{R}{R}");
 
         // Destroy target artifact or land.
         this.getSpellAbility().addTarget(new TargetPermanent(filter));

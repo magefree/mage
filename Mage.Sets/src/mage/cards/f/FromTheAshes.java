@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.commander2013;
+package mage.cards.f;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -34,9 +34,9 @@ import mage.abilities.Ability;
 import mage.abilities.effects.OneShotEffect;
 import mage.cards.Card;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Outcome;
-import mage.constants.Rarity;
 import mage.constants.Zone;
 import mage.filter.common.FilterBasicLandCard;
 import mage.filter.common.FilterLandPermanent;
@@ -54,9 +54,8 @@ import mage.target.common.TargetCardInLibrary;
  */
 public class FromTheAshes extends CardImpl {
 
-    public FromTheAshes(UUID ownerId) {
-        super(ownerId, 108, "From the Ashes", Rarity.RARE, new CardType[]{CardType.SORCERY}, "{3}{R}");
-        this.expansionSetCode = "C13";
+    public FromTheAshes(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{3}{R}");
 
 
         // Destroy all nonbasic lands. For each land destroyed this way, its controller may search his or her library for a basic land card and put it onto the battlefield. Then each player who searched his or her library this way shuffles it.

@@ -25,14 +25,14 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.invasion;
+package mage.cards.r;
 
 import java.util.UUID;
 import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.abilities.effects.common.DrawCardSourceControllerEffect;
 import mage.abilities.effects.common.ReturnToHandTargetEffect;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.target.common.TargetCreaturePermanent;
 
 /**
@@ -41,9 +41,8 @@ import mage.target.common.TargetCreaturePermanent;
  */
 public class Repulse extends CardImpl {
 
-    public Repulse(UUID ownerId) {
-        super(ownerId, 70, "Repulse", Rarity.COMMON, new CardType[]{CardType.INSTANT}, "{2}{U}");
-        this.expansionSetCode = "INV";
+    public Repulse(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.INSTANT},"{2}{U}");
 
 
         // Return target creature to its owner's hand.

@@ -26,14 +26,14 @@
  *  or implied, of BetaSteward_at_googlemail.com.
  */
 
-package mage.sets.magic2012;
+package mage.cards.w;
 
 import java.util.UUID;
 
 import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.abilities.effects.common.continuous.BoostTargetEffect;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.Duration;
 import mage.target.common.TargetCreaturePermanent;
 
@@ -42,9 +42,8 @@ import mage.target.common.TargetCreaturePermanent;
  */
 public class WringFlesh extends CardImpl {
 
-    public WringFlesh(UUID ownerId) {
-        super(ownerId, 118, "Wring Flesh", Rarity.COMMON, new CardType[]{CardType.INSTANT}, "{B}");
-        this.expansionSetCode = "M12";
+    public WringFlesh(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.INSTANT},"{B}");
 
         this.getSpellAbility().addEffect(new BoostTargetEffect(-3, -1, Duration.EndOfTurn));
         this.getSpellAbility().addTarget(new TargetCreaturePermanent());

@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.mastersedition;
+package mage.cards.m;
 
 import java.util.UUID;
 import mage.MageInt;
@@ -33,9 +33,9 @@ import mage.abilities.common.AttacksTriggeredAbility;
 import mage.abilities.common.BlocksTriggeredAbility;
 import mage.abilities.effects.common.continuous.BoostAllEffect;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Duration;
-import mage.constants.Rarity;
 import mage.filter.common.FilterAttackingCreature;
 import mage.filter.common.FilterBlockingCreature;
 import mage.filter.predicate.permanent.AnotherPredicate;
@@ -55,9 +55,8 @@ public class MartonStromgald extends CardImpl {
         blockingFilter.add(new AnotherPredicate());
     }
         
-    public MartonStromgald(UUID ownerId) {
-        super(ownerId, 104, "Marton Stromgald", Rarity.RARE, new CardType[]{CardType.CREATURE}, "{2}{R}{R}");
-        this.expansionSetCode = "MED";
+    public MartonStromgald(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{2}{R}{R}");
         this.supertype.add("Legendary");
         this.subtype.add("Human");
         this.subtype.add("Knight");

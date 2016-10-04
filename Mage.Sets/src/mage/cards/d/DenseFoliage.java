@@ -25,15 +25,15 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.weatherlight;
+package mage.cards.d;
 
 import java.util.UUID;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.effects.common.CantBeTargetedAllEffect;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Duration;
-import mage.constants.Rarity;
 import mage.constants.Zone;
 import mage.filter.FilterSpell;
 import mage.filter.common.FilterCreaturePermanent;
@@ -44,9 +44,8 @@ import mage.filter.common.FilterCreaturePermanent;
  */
 public class DenseFoliage extends CardImpl {
 
-    public DenseFoliage(UUID ownerId) {
-        super(ownerId, 66, "Dense Foliage", Rarity.RARE, new CardType[]{CardType.ENCHANTMENT}, "{2}{G}");
-        this.expansionSetCode = "WTH";
+    public DenseFoliage(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.ENCHANTMENT},"{2}{G}");
 
 
         // Creatures can't be the targets of spells.

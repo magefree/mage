@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.invasion;
+package mage.cards.c;
 
 import java.util.UUID;
 import mage.abilities.condition.common.KickedCondition;
@@ -34,8 +34,8 @@ import mage.abilities.effects.common.DamageEverythingEffect;
 import mage.abilities.keyword.FlyingAbility;
 import mage.abilities.keyword.KickerAbility;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.filter.predicate.mageobject.AbilityPredicate;
 
@@ -51,9 +51,8 @@ public class CanopySurge extends CardImpl {
         filter.add(new AbilityPredicate(FlyingAbility.class));
     }
 
-    public CanopySurge(UUID ownerId) {
-        super(ownerId, 184, "Canopy Surge", Rarity.UNCOMMON, new CardType[]{CardType.SORCERY}, "{1}{G}");
-        this.expansionSetCode = "INV";
+    public CanopySurge(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{1}{G}");
 
         // Kicker {2}
         this.addAbility(new KickerAbility("{2}"));

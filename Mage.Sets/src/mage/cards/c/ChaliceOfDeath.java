@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.darkascension;
+package mage.cards.c;
 
 import java.util.UUID;
 import mage.abilities.Ability;
@@ -33,8 +33,8 @@ import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.costs.common.TapSourceCost;
 import mage.abilities.effects.common.LoseLifeTargetEffect;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.constants.Zone;
 import mage.target.TargetPlayer;
 
@@ -44,9 +44,8 @@ import mage.target.TargetPlayer;
  */
 public class ChaliceOfDeath extends CardImpl {
 
-    public ChaliceOfDeath(UUID ownerId) {
-        super(ownerId, 146, "Chalice of Death", Rarity.UNCOMMON, new CardType[]{CardType.ARTIFACT}, "");
-        this.expansionSetCode = "DKA";
+    public ChaliceOfDeath(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.ARTIFACT},"");
 
         // this card is the second face of double-faced card
         this.nightCard = true;

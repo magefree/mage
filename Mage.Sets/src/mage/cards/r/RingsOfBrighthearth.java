@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.lorwyn;
+package mage.cards.r;
 
 import java.util.UUID;
 import mage.abilities.Ability;
@@ -35,9 +35,9 @@ import mage.abilities.effects.Effect;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.mana.ManaAbility;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Outcome;
-import mage.constants.Rarity;
 import mage.constants.Zone;
 import mage.game.Game;
 import mage.game.events.GameEvent;
@@ -52,9 +52,8 @@ import mage.players.Player;
  */
 public class RingsOfBrighthearth extends CardImpl {
 
-    public RingsOfBrighthearth(UUID ownerId) {
-        super(ownerId, 259, "Rings of Brighthearth", Rarity.RARE, new CardType[]{CardType.ARTIFACT}, "{3}");
-        this.expansionSetCode = "LRW";
+    public RingsOfBrighthearth(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.ARTIFACT},"{3}");
 
         // Whenever you activate an ability, if it isn't a mana ability, you may pay {2}. If you do, copy that ability. You may choose new targets for the copy.
         this.addAbility(new RingsOfBrighthearthTriggeredAbility());

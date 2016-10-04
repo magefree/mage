@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.saviorsofkamigawa;
+package mage.cards.g;
 
 import java.util.UUID;
 import mage.MageInt;
@@ -34,8 +34,8 @@ import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.costs.mana.ManaCostsImpl;
 import mage.abilities.effects.common.DamageTargetEffect;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.constants.Zone;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.filter.predicate.permanent.BlockingAttackerIdPredicate;
@@ -47,9 +47,8 @@ import mage.target.common.TargetCreaturePermanent;
  */
 public class GodosIrregulars extends CardImpl {
 
-    public GodosIrregulars(UUID ownerId) {
-        super(ownerId, 101, "Godo's Irregulars", Rarity.UNCOMMON, new CardType[]{CardType.CREATURE}, "{R}");
-        this.expansionSetCode = "SOK";
+    public GodosIrregulars(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{R}");
         this.subtype.add("Human");
         this.subtype.add("Warrior");
 

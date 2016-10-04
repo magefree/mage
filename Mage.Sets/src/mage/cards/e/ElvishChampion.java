@@ -25,12 +25,11 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.tenthedition;
+package mage.cards.e;
 
 import java.util.UUID;
 import mage.constants.CardType;
 import mage.constants.Duration;
-import mage.constants.Rarity;
 import mage.constants.Zone;
 import mage.MageInt;
 import mage.abilities.common.SimpleStaticAbility;
@@ -38,6 +37,7 @@ import mage.abilities.effects.common.continuous.BoostAllEffect;
 import mage.abilities.effects.common.continuous.GainAbilityAllEffect;
 import mage.abilities.keyword.ForestwalkAbility;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.filter.predicate.mageobject.SubtypePredicate;
 
@@ -52,9 +52,8 @@ public class ElvishChampion extends CardImpl {
         filter.add(new SubtypePredicate("Elf"));
     }
 
-    public ElvishChampion(UUID ownerId) {
-        super(ownerId, 261, "Elvish Champion", Rarity.RARE, new CardType[]{CardType.CREATURE}, "{1}{G}{G}");
-        this.expansionSetCode = "10E";
+    public ElvishChampion(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{1}{G}{G}");
         this.subtype.add("Elf");
 
         this.power = new MageInt(2);

@@ -25,14 +25,14 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.newphyrexia;
+package mage.cards.p;
 
 import java.util.UUID;
 import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.abilities.effects.common.GainLifeEffect;
 import mage.abilities.mana.ColorlessManaAbility;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 
 /**
  *
@@ -40,9 +40,8 @@ import mage.cards.CardImpl;
  */
 public class PristineTalisman extends CardImpl {
 
-    public PristineTalisman(UUID ownerId) {
-        super(ownerId, 151, "Pristine Talisman", Rarity.COMMON, new CardType[]{CardType.ARTIFACT}, "{3}");
-        this.expansionSetCode = "NPH";
+    public PristineTalisman(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.ARTIFACT},"{3}");
 
         ColorlessManaAbility ability = new ColorlessManaAbility();
         ability.addEffect(new GainLifeEffect(1));

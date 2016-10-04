@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.betrayersofkamigawa;
+package mage.cards.l;
 
 import java.util.UUID;
 import mage.MageInt;
@@ -34,8 +34,8 @@ import mage.abilities.costs.common.SacrificeTargetCost;
 import mage.abilities.costs.common.TapSourceCost;
 import mage.abilities.effects.common.search.SearchLibraryPutInPlayEffect;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.constants.Zone;
 import mage.filter.common.FilterControlledCreaturePermanent;
 import mage.filter.common.FilterPermanentCard;
@@ -57,9 +57,8 @@ public class Lifespinner extends CardImpl {
         filter.add(new SubtypePredicate("Spirit"));
     }
 
-    public Lifespinner(UUID ownerId) {
-        super(ownerId, 133, "Lifespinner", Rarity.UNCOMMON, new CardType[]{CardType.CREATURE}, "{3}{G}");
-        this.expansionSetCode = "BOK";
+    public Lifespinner(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{3}{G}");
         this.subtype.add("Spirit");
 
         this.power = new MageInt(3);

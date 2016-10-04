@@ -25,15 +25,15 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.riseoftheeldrazi;
+package mage.cards.d;
 
 import java.util.UUID;
 import mage.constants.Zone;
 import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.MageInt;
 import mage.abilities.keyword.FlyingAbility;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.abilities.common.EntersBattlefieldTappedAbility;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.effects.common.DontUntapInControllersUntapStepSourceEffect;
@@ -46,9 +46,8 @@ import mage.abilities.common.BecomesTargetControllerSpellTriggeredAbility;
  */
 public class DormantGomazoa extends CardImpl {
 
-    public DormantGomazoa(UUID ownerId) {
-        super(ownerId, 62, "Dormant Gomazoa", Rarity.RARE, new CardType[]{CardType.CREATURE}, "{1}{U}{U}");
-        this.expansionSetCode = "ROE";
+    public DormantGomazoa(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{1}{U}{U}");
         this.subtype.add("Jellyfish");
 
         this.power = new MageInt(5);

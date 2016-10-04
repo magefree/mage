@@ -25,17 +25,17 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.elspethvstezzeret;
+package mage.cards.r;
 
 import java.util.UUID;
 import mage.abilities.Ability;
 import mage.abilities.effects.common.continuous.GainAbilityTargetEffect;
 import mage.abilities.keyword.ProtectionAbility;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.choices.ChoiceColorOrArtifact;
 import mage.constants.CardType;
 import mage.constants.Duration;
-import mage.constants.Rarity;
 import mage.filter.FilterCard;
 import mage.filter.predicate.mageobject.CardTypePredicate;
 import mage.filter.predicate.mageobject.ColorPredicate;
@@ -51,9 +51,8 @@ import mage.target.common.TargetControlledPermanent;
  */
 public class RazorBarrier extends CardImpl {
 
-    public RazorBarrier(UUID ownerId) {
-        super(ownerId, 26, "Razor Barrier", Rarity.COMMON, new CardType[]{CardType.INSTANT}, "{1}{W}");
-        this.expansionSetCode = "DDF";
+    public RazorBarrier(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.INSTANT},"{1}{W}");
 
 
         // Target permanent you control gains protection from artifacts or from the color of your choice until end of turn.

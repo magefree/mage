@@ -25,16 +25,16 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.magic2010;
+package mage.cards.s;
 
 import java.util.UUID;
 import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.MageInt;
 import mage.abilities.common.EntersBattlefieldTriggeredAbility;
 import mage.abilities.effects.common.LookLibraryControllerEffect;
 import mage.abilities.keyword.FlyingAbility;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 
 /**
  *
@@ -42,9 +42,8 @@ import mage.cards.CardImpl;
  */
 public class SageOwl extends CardImpl {
 
-    public SageOwl(UUID ownerId) {
-        super(ownerId, 69, "Sage Owl", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{1}{U}");
-        this.expansionSetCode = "M10";
+    public SageOwl(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{1}{U}");
         this.subtype.add("Bird");
 
         this.power = new MageInt(1);

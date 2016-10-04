@@ -25,15 +25,15 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.coldsnap;
+package mage.cards.s;
 
 import java.util.UUID;
 
 import mage.abilities.effects.common.discard.DiscardTargetEffect;
 import mage.abilities.keyword.RippleAbility;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.target.TargetPlayer;
 
 /**
@@ -42,9 +42,8 @@ import mage.target.TargetPlayer;
  */
 public class SurgingDementia extends CardImpl {
 
-    public SurgingDementia(UUID ownerId) {
-        super(ownerId, 72, "Surging Dementia", Rarity.COMMON, new CardType[]{CardType.SORCERY}, "{1}{B}");
-        this.expansionSetCode = "CSP";
+    public SurgingDementia(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{1}{B}");
 
         // Ripple 4
         this.addAbility(new RippleAbility(4));

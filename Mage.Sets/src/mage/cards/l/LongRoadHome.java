@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.eldritchmoon;
+package mage.cards.l;
 
 import java.util.UUID;
 import mage.MageObjectReference;
@@ -35,11 +35,12 @@ import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.ReplacementEffectImpl;
 import mage.cards.Card;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
+import mage.cards.CardSetInfo;
 import mage.cards.MeldCard;
 import mage.constants.CardType;
 import mage.constants.Duration;
 import mage.constants.Outcome;
-import mage.constants.Rarity;
 import mage.constants.Zone;
 import mage.counters.CounterType;
 import mage.game.ExileZone;
@@ -57,9 +58,8 @@ import mage.target.common.TargetCreaturePermanent;
  */
 public class LongRoadHome extends CardImpl {
 
-    public LongRoadHome(UUID ownerId) {
-        super(ownerId, 34, "Long Road Home", Rarity.UNCOMMON, new CardType[]{CardType.INSTANT}, "{1}{W}");
-        this.expansionSetCode = "EMN";
+    public LongRoadHome(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.INSTANT},"{1}{W}");
 
         // Exile target creature. At the beginning of the next end step, return that card to the battlefield under its owner's control with a +1/+1 counter on it.
         this.getSpellAbility().addEffect(new LongRoadHomeEffect());

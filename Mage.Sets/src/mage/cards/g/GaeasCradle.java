@@ -26,15 +26,15 @@
 * or implied, of BetaSteward_at_googlemail.com.
 */
 
-package mage.sets.urzassaga;
+package mage.cards.g;
 
 import java.util.UUID;
 import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.Mana;
 import mage.abilities.dynamicvalue.common.PermanentsOnBattlefieldCount;
 import mage.abilities.mana.DynamicManaAbility;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.filter.common.FilterControlledPermanent;
 import mage.filter.predicate.mageobject.CardTypePredicate;
 
@@ -51,9 +51,8 @@ public class GaeasCradle extends CardImpl {
         filter.add(new CardTypePredicate(CardType.CREATURE));
     }
 
-    public GaeasCradle(UUID ownerId) {
-        super(ownerId, 321, "Gaea's Cradle", Rarity.RARE, new CardType[]{CardType.LAND}, "");
-        this.expansionSetCode = "USG";
+    public GaeasCradle(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.LAND},"");
         this.supertype.add("Legendary");
 
         DynamicManaAbility ability = new DynamicManaAbility(Mana.GreenMana(1), new PermanentsOnBattlefieldCount(filter));

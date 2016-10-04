@@ -25,16 +25,16 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.darkascension;
+package mage.cards.f;
 
 import java.util.UUID;
 
 import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.abilities.costs.mana.ManaCostsImpl;
 import mage.abilities.effects.common.DrawDiscardControllerEffect;
 import mage.abilities.keyword.FlashbackAbility;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.TimingRule;
 
 /**
@@ -43,9 +43,8 @@ import mage.constants.TimingRule;
  */
 public class FaithlessLooting extends CardImpl {
 
-    public FaithlessLooting(UUID ownerId) {
-        super(ownerId, 87, "Faithless Looting", Rarity.COMMON, new CardType[]{CardType.SORCERY}, "{R}");
-        this.expansionSetCode = "DKA";
+    public FaithlessLooting(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{R}");
 
 
         // Draw two cards, then discard two cards.

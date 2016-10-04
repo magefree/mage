@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.mercadianmasques;
+package mage.cards.s;
 
 import java.util.UUID;
 
@@ -34,9 +34,9 @@ import mage.abilities.Ability;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.DestroyTargetEffect;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Outcome;
-import mage.constants.Rarity;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.filter.predicate.Predicates;
 import mage.filter.predicate.mageobject.ColorPredicate;
@@ -57,9 +57,8 @@ public class SeverSoul extends CardImpl {
         nonBlackCreature.add(Predicates.not(new ColorPredicate(ObjectColor.BLACK)));
     }
 
-    public SeverSoul(UUID ownerId) {
-        super(ownerId, 159, "Sever Soul", Rarity.COMMON, new CardType[]{CardType.SORCERY}, "{3}{B}{B}");
-        this.expansionSetCode = "MMQ";
+    public SeverSoul(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{3}{B}{B}");
 
 
         // Destroy target nonblack creature. It can't be regenerated.

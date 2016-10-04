@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.commander2015;
+package mage.cards.g;
 
 import java.util.UUID;
 import mage.abilities.Ability;
@@ -35,9 +35,9 @@ import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.CreateDelayedTriggeredAbilityEffect;
 import mage.abilities.effects.common.ExileTargetEffect;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Outcome;
-import mage.constants.Rarity;
 import mage.constants.Zone;
 import mage.filter.FilterPermanent;
 import mage.filter.predicate.Predicates;
@@ -56,9 +56,8 @@ import mage.util.CardUtil;
  */
 public class GraspOfFate extends CardImpl {
 
-    public GraspOfFate(UUID ownerId) {
-        super(ownerId, 3, "Grasp of Fate", Rarity.RARE, new CardType[]{CardType.ENCHANTMENT}, "{1}{W}{W}");
-        this.expansionSetCode = "C15";
+    public GraspOfFate(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.ENCHANTMENT},"{1}{W}{W}");
 
         // When Grasp of Fate enters the battlefield, for each opponent, exile up to one target nonland permanent that player controls until Grasp of Fate leaves the battlefield.
         Ability ability = new EntersBattlefieldTriggeredAbility(new GraspOfFateExileEffect());

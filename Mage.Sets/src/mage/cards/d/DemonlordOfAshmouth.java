@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.avacynrestored;
+package mage.cards.d;
 
 import java.util.UUID;
 import mage.MageInt;
@@ -35,8 +35,8 @@ import mage.abilities.effects.common.ExileSourceUnlessPaysEffect;
 import mage.abilities.keyword.FlyingAbility;
 import mage.abilities.keyword.UndyingAbility;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.filter.common.FilterControlledCreaturePermanent;
 import mage.filter.predicate.permanent.AnotherPredicate;
 import mage.target.common.TargetControlledPermanent;
@@ -52,9 +52,8 @@ public class DemonlordOfAshmouth extends CardImpl {
         filter.add(new AnotherPredicate());
     }
 
-    public DemonlordOfAshmouth(UUID ownerId) {
-        super(ownerId, 96, "Demonlord of Ashmouth", Rarity.RARE, new CardType[]{CardType.CREATURE}, "{2}{B}{B}");
-        this.expansionSetCode = "AVR";
+    public DemonlordOfAshmouth(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{2}{B}{B}");
         this.subtype.add("Demon");
 
         this.power = new MageInt(5);

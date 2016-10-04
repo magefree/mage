@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.dragonsmaze;
+package mage.cards.m;
 
 import java.util.UUID;
 
@@ -35,6 +35,7 @@ import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.costs.common.SacrificeTargetCost;
 import mage.abilities.effects.common.continuous.BoostAllEffect;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.filter.predicate.permanent.ControllerPredicate;
 import mage.target.common.TargetControlledCreaturePermanent;
@@ -51,9 +52,8 @@ public class MawOfTheObzedat extends CardImpl {
         filter.add(new ControllerPredicate(TargetController.YOU));
     }
 
-    public MawOfTheObzedat(UUID ownerId) {
-        super(ownerId, 83, "Maw of the Obzedat", Rarity.UNCOMMON, new CardType[]{CardType.CREATURE}, "{3}{W}{B}");
-        this.expansionSetCode = "DGM";
+    public MawOfTheObzedat(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{3}{W}{B}");
         this.subtype.add("Thrull");
 
         this.power = new MageInt(3);

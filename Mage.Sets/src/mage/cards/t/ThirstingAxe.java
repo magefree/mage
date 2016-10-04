@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.eldritchmoon;
+package mage.cards.t;
 
 import java.util.HashSet;
 import java.util.Set;
@@ -46,6 +46,7 @@ import mage.abilities.effects.common.SacrificeEquippedEffect;
 import mage.abilities.effects.common.continuous.BoostEquippedEffect;
 import mage.abilities.keyword.EquipAbility;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.*;
 import mage.game.Game;
 import mage.game.events.DamagedCreatureEvent;
@@ -60,9 +61,8 @@ import mage.watchers.Watcher;
  */
 public class ThirstingAxe extends CardImpl {
 
-    public ThirstingAxe(UUID ownerId) {
-        super(ownerId, 202, "Thirsting Axe", Rarity.UNCOMMON, new CardType[]{CardType.ARTIFACT}, "{3}");
-        this.expansionSetCode = "EMN";
+    public ThirstingAxe(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.ARTIFACT},"{3}");
         this.subtype.add("Equipment");
 
         // Equipped creature gets +4/+0.

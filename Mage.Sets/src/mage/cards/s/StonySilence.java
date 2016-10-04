@@ -25,17 +25,17 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.innistrad;
+package mage.cards.s;
 
 import java.util.UUID;
 import mage.constants.CardType;
 import mage.constants.Duration;
-import mage.constants.Rarity;
 import mage.constants.Zone;
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.effects.RestrictionEffect;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 
@@ -45,9 +45,8 @@ import mage.game.permanent.Permanent;
  */
 public class StonySilence extends CardImpl {
 
-    public StonySilence(UUID ownerId) {
-        super(ownerId, 36, "Stony Silence", Rarity.RARE, new CardType[]{CardType.ENCHANTMENT}, "{1}{W}");
-        this.expansionSetCode = "ISD";
+    public StonySilence(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.ENCHANTMENT},"{1}{W}");
 
 
         // Activated abilities of artifacts can't be activated.

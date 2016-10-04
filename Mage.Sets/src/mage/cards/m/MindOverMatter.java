@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.exodus;
+package mage.cards.m;
 
 import java.util.UUID;
 import mage.abilities.Ability;
@@ -33,8 +33,8 @@ import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.costs.common.DiscardCardCost;
 import mage.abilities.effects.common.MayTapOrUntapTargetEffect;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.constants.Zone;
 import mage.filter.FilterPermanent;
 import mage.filter.predicate.Predicates;
@@ -52,9 +52,8 @@ public class MindOverMatter extends CardImpl {
         filter.add(Predicates.or(new CardTypePredicate(CardType.ARTIFACT), new CardTypePredicate(CardType.CREATURE), new CardTypePredicate(CardType.LAND)));
     }
 
-    public MindOverMatter(UUID ownerId) {
-        super(ownerId, 40, "Mind Over Matter", Rarity.RARE, new CardType[]{CardType.ENCHANTMENT}, "{2}{U}{U}{U}{U}");
-        this.expansionSetCode = "EXO";
+    public MindOverMatter(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.ENCHANTMENT},"{2}{U}{U}{U}{U}");
 
 
         // Discard a card: You may tap or untap target artifact, creature, or land.

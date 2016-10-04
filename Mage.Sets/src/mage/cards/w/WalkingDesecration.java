@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.onslaught;
+package mage.cards.w;
 
 import java.util.UUID;
 import mage.MageInt;
@@ -38,13 +38,13 @@ import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.RequirementEffect;
 import mage.abilities.effects.common.combat.AttacksIfAbleAllEffect;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.cards.repository.CardRepository;
 import mage.choices.Choice;
 import mage.choices.ChoiceImpl;
 import mage.constants.CardType;
 import mage.constants.Duration;
 import mage.constants.Outcome;
-import mage.constants.Rarity;
 import mage.constants.Zone;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.filter.predicate.mageobject.SubtypePredicate;
@@ -57,9 +57,8 @@ import mage.players.Player;
  */
 public class WalkingDesecration extends CardImpl {
 
-    public WalkingDesecration(UUID ownerId) {
-        super(ownerId, 180, "Walking Desecration", Rarity.UNCOMMON, new CardType[]{CardType.CREATURE}, "{2}{B}");
-        this.expansionSetCode = "ONS";
+    public WalkingDesecration(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{2}{B}");
         this.subtype.add("Zombie");
         this.power = new MageInt(1);
         this.toughness = new MageInt(1);

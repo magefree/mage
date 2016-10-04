@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.tempest;
+package mage.cards.k;
 
 import java.util.UUID;
 import mage.abilities.Ability;
@@ -33,8 +33,8 @@ import mage.abilities.dynamicvalue.DynamicValue;
 import mage.abilities.effects.Effect;
 import mage.abilities.effects.common.DamageTargetEffect;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.filter.FilterCard;
 import mage.filter.predicate.mageobject.NamePredicate;
 import mage.game.Game;
@@ -54,9 +54,8 @@ public class Kindle extends CardImpl {
         filter.add(new NamePredicate("Kindle"));
     }
 
-    public Kindle(UUID ownerId) {
-        super(ownerId, 184, "Kindle", Rarity.COMMON, new CardType[]{CardType.INSTANT}, "{1}{R}");
-        this.expansionSetCode = "TMP";
+    public Kindle(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.INSTANT},"{1}{R}");
 
 
         // Kindle deals X damage to target creature or player, where X is 2 plus the number of cards named Kindle in all graveyards.

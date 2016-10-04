@@ -25,17 +25,17 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.tenthedition;
+package mage.cards.l;
 
 import java.util.UUID;
 
 import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.costs.mana.GenericManaCost;
 import mage.abilities.effects.common.continuous.BoostEquippedEffect;
 import mage.abilities.keyword.EquipAbility;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.Outcome;
 import mage.constants.Zone;
 
@@ -44,9 +44,8 @@ import mage.constants.Zone;
  */
 public class LeoninScimitar extends CardImpl {
 
-    public LeoninScimitar(UUID ownerId) {
-        super(ownerId, 331, "Leonin Scimitar", Rarity.UNCOMMON, new CardType[]{CardType.ARTIFACT}, "{1}");
-        this.expansionSetCode = "10E";
+    public LeoninScimitar(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.ARTIFACT},"{1}");
         this.subtype.add("Equipment");
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new BoostEquippedEffect(1, 1)));
         this.addAbility(new EquipAbility(Outcome.AddAbility, new GenericManaCost(1)));

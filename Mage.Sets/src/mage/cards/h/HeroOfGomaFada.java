@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.battleforzendikar;
+package mage.cards.h;
 
 import java.util.UUID;
 import mage.MageInt;
@@ -34,9 +34,9 @@ import mage.abilities.common.AllyEntersBattlefieldTriggeredAbility;
 import mage.abilities.effects.common.continuous.GainAbilityAllEffect;
 import mage.abilities.keyword.IndestructibleAbility;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Duration;
-import mage.constants.Rarity;
 import mage.filter.common.FilterControlledCreaturePermanent;
 
 /**
@@ -45,9 +45,8 @@ import mage.filter.common.FilterControlledCreaturePermanent;
  */
 public class HeroOfGomaFada extends CardImpl {
 
-    public HeroOfGomaFada(UUID ownerId) {
-        super(ownerId, 31, "Hero of Goma Fada", Rarity.RARE, new CardType[]{CardType.CREATURE}, "{4}{W}");
-        this.expansionSetCode = "BFZ";
+    public HeroOfGomaFada(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{4}{W}");
         this.subtype.add("Human");
         this.subtype.add("Knight");
         this.subtype.add("Ally");

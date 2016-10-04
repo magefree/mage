@@ -25,12 +25,11 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.newphyrexia;
+package mage.cards.i;
 
 import java.util.UUID;
 import mage.constants.CardType;
 import mage.constants.Outcome;
-import mage.constants.Rarity;
 import mage.constants.Zone;
 import mage.abilities.Ability;
 import mage.abilities.TriggeredAbilityImpl;
@@ -38,6 +37,7 @@ import mage.abilities.costs.mana.GenericManaCost;
 import mage.abilities.effects.OneShotEffect;
 import mage.cards.Card;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.game.Game;
 import mage.game.events.GameEvent;
 import mage.players.Player;
@@ -49,9 +49,8 @@ import mage.target.targetpointer.FixedTarget;
  */
 public class IsolationCell extends CardImpl {
 
-    public IsolationCell(UUID ownerId) {
-        super(ownerId, 141, "Isolation Cell", Rarity.UNCOMMON, new CardType[]{CardType.ARTIFACT}, "{4}");
-        this.expansionSetCode = "NPH";
+    public IsolationCell(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.ARTIFACT},"{4}");
 
         // Whenever an opponent casts a creature spell, that player loses 2 life unless he or she pays {2}.
         this.addAbility(new IsolationCellTriggeredAbility());

@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.returntoravnica;
+package mage.cards.v;
 
 import java.util.UUID;
 import mage.MageInt;
@@ -40,11 +40,11 @@ import mage.abilities.effects.common.CreateTokenEffect;
 import mage.abilities.effects.common.DestroyTargetEffect;
 import mage.abilities.effects.common.LoseGameTargetPlayerEffect;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Duration;
 import mage.constants.Layer;
 import mage.constants.Outcome;
-import mage.constants.Rarity;
 import mage.constants.SubLayer;
 import mage.constants.Zone;
 import mage.game.Game;
@@ -69,9 +69,8 @@ import mage.target.targetpointer.FixedTarget;
  */
 public class VraskaTheUnseen extends CardImpl {
 
-    public VraskaTheUnseen(UUID ownerId) {
-        super(ownerId, 208, "Vraska the Unseen", Rarity.MYTHIC, new CardType[]{CardType.PLANESWALKER}, "{3}{B}{G}");
-        this.expansionSetCode = "RTR";
+    public VraskaTheUnseen(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.PLANESWALKER},"{3}{B}{G}");
         this.subtype.add("Vraska");
 
         this.addAbility(new PlanswalkerEntersWithLoyalityCountersAbility(5));

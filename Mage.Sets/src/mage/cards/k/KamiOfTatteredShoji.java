@@ -25,17 +25,17 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.betrayersofkamigawa;
+package mage.cards.k;
 
 import java.util.UUID;
 
 import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.MageInt;
 import mage.abilities.common.SpellCastControllerTriggeredAbility;
 import mage.abilities.effects.common.continuous.GainAbilitySourceEffect;
 import mage.abilities.keyword.FlyingAbility;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.Duration;
 import mage.filter.common.FilterSpiritOrArcaneCard;
 
@@ -47,9 +47,8 @@ public class KamiOfTatteredShoji extends CardImpl {
 
     private static final FilterSpiritOrArcaneCard filter = new FilterSpiritOrArcaneCard();
 
-    public KamiOfTatteredShoji(UUID ownerId) {
-        super(ownerId, 11, "Kami of Tattered Shoji", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{4}{W}");
-        this.expansionSetCode = "BOK";
+    public KamiOfTatteredShoji(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{4}{W}");
         this.subtype.add("Spirit");
 
         this.power = new MageInt(2);

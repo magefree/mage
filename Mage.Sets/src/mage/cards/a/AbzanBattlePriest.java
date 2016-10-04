@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.khansoftarkir;
+package mage.cards.a;
 
 import java.util.UUID;
 import mage.MageInt;
@@ -35,9 +35,9 @@ import mage.abilities.effects.common.continuous.GainAbilityAllEffect;
 import mage.abilities.keyword.LifelinkAbility;
 import mage.abilities.keyword.OutlastAbility;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Duration;
-import mage.constants.Rarity;
 import mage.constants.TargetController;
 import mage.constants.Zone;
 import mage.counters.CounterType;
@@ -61,9 +61,8 @@ public class AbzanBattlePriest extends CardImpl {
 
     final String rule = "Each creature you control with a +1/+1 counter on it has lifelink";
 
-    public AbzanBattlePriest(UUID ownerId) {
-        super(ownerId, 1, "Abzan Battle Priest", Rarity.UNCOMMON, new CardType[]{CardType.CREATURE}, "{3}{W}");
-        this.expansionSetCode = "KTK";
+    public AbzanBattlePriest(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{3}{W}");
         this.subtype.add("Human");
         this.subtype.add("Cleric");
 

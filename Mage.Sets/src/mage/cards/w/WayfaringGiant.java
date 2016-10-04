@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.invasion;
+package mage.cards.w;
 
 import java.util.UUID;
 import mage.MageInt;
@@ -34,9 +34,9 @@ import mage.abilities.dynamicvalue.common.DomainValue;
 import mage.abilities.effects.Effect;
 import mage.abilities.effects.common.continuous.BoostSourceEffect;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Duration;
-import mage.constants.Rarity;
 import mage.constants.Zone;
 
 /**
@@ -46,9 +46,8 @@ import mage.constants.Zone;
  */
 public class WayfaringGiant extends CardImpl {
 
-    public WayfaringGiant(UUID ownerId) {
-        super(ownerId, 44, "Wayfaring Giant", Rarity.UNCOMMON, new CardType[]{CardType.CREATURE}, "{5}{W}");
-        this.expansionSetCode = "INV";
+    public WayfaringGiant(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{5}{W}");
         this.subtype.add("Giant");
         this.power = new MageInt(1);
         this.toughness = new MageInt(3);

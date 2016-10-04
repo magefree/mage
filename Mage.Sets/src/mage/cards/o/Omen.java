@@ -25,14 +25,14 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.portal;
+package mage.cards.o;
 
 import java.util.UUID;
 import mage.abilities.effects.common.DrawCardSourceControllerEffect;
 import mage.abilities.effects.common.LookLibraryControllerEffect;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.Rarity;
 
 /**
  *
@@ -40,9 +40,8 @@ import mage.constants.Rarity;
  */
 public class Omen extends CardImpl {
 
-    public Omen(UUID ownerId) {
-        super(ownerId, 63, "Omen", Rarity.COMMON, new CardType[]{CardType.SORCERY}, "{1}{U}");
-        this.expansionSetCode = "POR";
+    public Omen(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{1}{U}");
 
         // Look at the top three cards of your library, then put them back in any order. You may shuffle your library.
         this.getSpellAbility().addEffect(new LookLibraryControllerEffect(3, true));

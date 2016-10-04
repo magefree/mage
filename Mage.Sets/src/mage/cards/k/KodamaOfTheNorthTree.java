@@ -26,15 +26,15 @@
  *  or implied, of BetaSteward_at_googlemail.com.
  */
 
-package mage.sets.championsofkamigawa;
+package mage.cards.k;
 
 import java.util.UUID;
 import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.MageInt;
 import mage.abilities.keyword.ShroudAbility;
 import mage.abilities.keyword.TrampleAbility;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 
 /**
  *
@@ -42,9 +42,8 @@ import mage.cards.CardImpl;
  */
 public class KodamaOfTheNorthTree extends CardImpl {
 
-    public KodamaOfTheNorthTree (UUID ownerId) {
-        super(ownerId, 222, "Kodama of the North Tree", Rarity.RARE, new CardType[]{CardType.CREATURE}, "{2}{G}{G}{G}");
-        this.expansionSetCode = "CHK";
+    public KodamaOfTheNorthTree (UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{2}{G}{G}{G}");
         this.supertype.add("Legendary");
         this.subtype.add("Spirit");
 

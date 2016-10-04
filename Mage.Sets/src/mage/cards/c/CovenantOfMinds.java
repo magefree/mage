@@ -25,17 +25,17 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.shardsofalara;
+package mage.cards.c;
 
 import java.util.UUID;
 import mage.constants.CardType;
 import mage.constants.Outcome;
-import mage.constants.Rarity;
 import mage.constants.Zone;
 import mage.abilities.Ability;
 import mage.abilities.effects.OneShotEffect;
 import mage.cards.Card;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.cards.CardsImpl;
 import mage.game.Game;
 import mage.players.Player;
@@ -47,9 +47,8 @@ import mage.target.common.TargetOpponent;
  */
 public class CovenantOfMinds extends CardImpl {
 
-    public CovenantOfMinds(UUID ownerId) {
-        super(ownerId, 38, "Covenant of Minds", Rarity.RARE, new CardType[]{CardType.SORCERY}, "{4}{U}");
-        this.expansionSetCode = "ALA";
+    public CovenantOfMinds(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{4}{U}");
 
 
         // Reveal the top three cards of your library. Target opponent may choose to put those cards into your hand.

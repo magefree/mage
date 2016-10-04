@@ -25,11 +25,10 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.judgment;
+package mage.cards.b;
 
 import java.util.UUID;
 import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.MageInt;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.condition.common.PermanentsOnTheBattlefieldCondition;
@@ -38,6 +37,7 @@ import mage.abilities.effects.ContinuousEffect;
 import mage.abilities.effects.common.continuous.GainAbilityControlledEffect;
 import mage.abilities.keyword.TrampleAbility;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.Duration;
 import mage.constants.Zone;
 import mage.filter.common.FilterControlledPermanent;
@@ -60,9 +60,8 @@ public class Brawn extends CardImpl {
         filter.add(new SubtypePredicate("Forest"));
     }
 
-    public Brawn(UUID ownerId) {
-        super(ownerId, 107, "Brawn", Rarity.UNCOMMON, new CardType[]{CardType.CREATURE}, "{3}{G}");
-        this.expansionSetCode = "JUD";
+    public Brawn(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{3}{G}");
         this.subtype.add("Incarnation");
 
         this.power = new MageInt(3);

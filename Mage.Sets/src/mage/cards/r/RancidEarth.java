@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.torment;
+package mage.cards.r;
 
 import java.util.UUID;
 import mage.abilities.Ability;
@@ -36,9 +36,9 @@ import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.DamageEverythingEffect;
 import mage.abilities.effects.common.DestroyTargetEffect;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Outcome;
-import mage.constants.Rarity;
 import mage.game.Game;
 import mage.target.common.TargetLandPermanent;
 
@@ -48,9 +48,8 @@ import mage.target.common.TargetLandPermanent;
  */
 public class RancidEarth extends CardImpl {
 
-    public RancidEarth(UUID ownerId) {
-        super(ownerId, 78, "Rancid Earth", Rarity.COMMON, new CardType[]{CardType.SORCERY}, "{1}{B}{B}");
-        this.expansionSetCode = "TOR";
+    public RancidEarth(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{1}{B}{B}");
 
         // Destroy target land.
         // Threshold - If seven or more cards are in your graveyard, instead destroy that land and Rancid Earth deals 1 damage to each creature and each player.

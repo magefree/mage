@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.saviorsofkamigawa;
+package mage.cards.o;
 
 import java.util.UUID;
 import mage.abilities.Ability;
@@ -38,10 +38,10 @@ import mage.abilities.effects.common.continuous.GainAbilityAttachedEffect;
 import mage.abilities.keyword.EquipAbility;
 import mage.abilities.keyword.TrampleAbility;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.AttachmentType;
 import mage.constants.CardType;
 import mage.constants.Outcome;
-import mage.constants.Rarity;
 import mage.constants.Zone;
 import mage.filter.Filter;
 import mage.filter.common.FilterControlledCreaturePermanent;
@@ -61,9 +61,8 @@ public class ONaginata extends CardImpl {
         filter.add(new PowerPredicate(Filter.ComparisonType.GreaterThan, 2));
     }
 
-    public ONaginata(UUID ownerId) {
-        super(ownerId, 157, "O-Naginata", Rarity.UNCOMMON, new CardType[]{CardType.ARTIFACT}, "{1}");
-        this.expansionSetCode = "SOK";
+    public ONaginata(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.ARTIFACT},"{1}");
         this.subtype.add("Equipment");
 
         Target target = new TargetControlledCreaturePermanent(1, 1, filter, false);

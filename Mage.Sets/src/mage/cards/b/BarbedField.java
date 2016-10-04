@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.prophecy;
+package mage.cards.b;
 
 import java.util.UUID;
 import mage.abilities.Ability;
@@ -38,10 +38,10 @@ import mage.abilities.effects.common.DamageTargetEffect;
 import mage.abilities.effects.common.continuous.GainAbilityAttachedEffect;
 import mage.abilities.keyword.EnchantAbility;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.AttachmentType;
 import mage.constants.CardType;
 import mage.constants.Outcome;
-import mage.constants.Rarity;
 import mage.constants.Zone;
 import mage.target.TargetPermanent;
 import mage.target.common.TargetCreatureOrPlayer;
@@ -53,9 +53,8 @@ import mage.target.common.TargetLandPermanent;
  */
 public class BarbedField extends CardImpl {
 
-    public BarbedField(UUID ownerId) {
-        super(ownerId, 83, "Barbed Field", Rarity.UNCOMMON, new CardType[]{CardType.ENCHANTMENT}, "{2}{R}{R}");
-        this.expansionSetCode = "PCY";
+    public BarbedField(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.ENCHANTMENT},"{2}{R}{R}");
         this.subtype.add("Aura");
 
         // Enchant land

@@ -27,16 +27,16 @@
  *  or implied, of BetaSteward_at_googlemail.com.
  * 
  */
-package mage.sets.championsofkamigawa;
+package mage.cards.f;
 
 import java.util.UUID;
 import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.constants.Zone;
 import mage.abilities.TriggeredAbilityImpl;
 import mage.abilities.effects.common.CreateTokenTargetEffect;
 import mage.abilities.mana.AnyColorManaAbility;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.game.Game;
 import mage.game.events.GameEvent;
 import mage.game.permanent.token.SpiritToken;
@@ -48,9 +48,8 @@ import mage.target.common.TargetOpponent;
  */
 public class ForbiddenOrchard extends CardImpl {
 
-    public ForbiddenOrchard (UUID ownerId) {
-        super(ownerId, 276, "Forbidden Orchard", Rarity.RARE, new CardType[]{CardType.LAND}, null);
-        this.expansionSetCode = "CHK";
+    public ForbiddenOrchard (UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.LAND},null);
         
         // {T}: Add one mana of any color to your mana pool.
         this.addAbility(new AnyColorManaAbility());

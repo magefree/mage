@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.commander2013;
+package mage.cards.m;
 
 import java.util.Arrays;
 import java.util.HashSet;
@@ -37,12 +37,12 @@ import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.ReplacementEffectImpl;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.choices.Choice;
 import mage.choices.ChoiceImpl;
 import mage.constants.CardType;
 import mage.constants.Duration;
 import mage.constants.Outcome;
-import mage.constants.Rarity;
 import mage.constants.Zone;
 import mage.game.Game;
 import mage.game.events.GameEvent;
@@ -60,9 +60,8 @@ public class MysticBarrier extends CardImpl {
     public static final String ALLOW_ATTACKING_LEFT = "Allow attacking left";
     public static final String ALLOW_ATTACKING_RIGHT = "Allow attacking right";
 
-    public MysticBarrier(UUID ownerId) {
-        super(ownerId, 18, "Mystic Barrier", Rarity.RARE, new CardType[]{CardType.ENCHANTMENT}, "{4}{W}");
-        this.expansionSetCode = "C13";
+    public MysticBarrier(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.ENCHANTMENT},"{4}{W}");
 
         // When Mystic Barrier enters the battlefield or at the beginning of your upkeep, choose left or right.
         this.addAbility(new MysticBarrierTriggeredAbility());

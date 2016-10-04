@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.conspiracytakethecrown;
+package mage.cards.d;
 
 import java.util.UUID;
 import mage.MageInt;
@@ -37,9 +37,9 @@ import mage.abilities.effects.common.continuous.GainAbilitySourceEffect;
 import mage.abilities.keyword.MonstrosityAbility;
 import mage.abilities.keyword.TrampleAbility;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Duration;
-import mage.constants.Rarity;
 import mage.constants.Zone;
 
 /**
@@ -48,9 +48,8 @@ import mage.constants.Zone;
  */
 public class DomesticatedHydra extends CardImpl {
 
-    public DomesticatedHydra(UUID ownerId) {
-        super(ownerId, 63, "Domesticated Hydra", Rarity.UNCOMMON, new CardType[]{CardType.CREATURE}, "{2}{G}{G}");
-        this.expansionSetCode = "CN2";
+    public DomesticatedHydra(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{2}{G}{G}");
         this.subtype.add("Hydra");
         this.power = new MageInt(3);
         this.toughness = new MageInt(3);

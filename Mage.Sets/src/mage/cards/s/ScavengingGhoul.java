@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.limitedalpha;
+package mage.cards.s;
 
 import java.util.UUID;
 import mage.MageInt;
@@ -36,8 +36,8 @@ import mage.abilities.dynamicvalue.common.CreaturesDiedThisTurnCount;
 import mage.abilities.effects.common.RegenerateSourceEffect;
 import mage.abilities.effects.common.counter.AddCountersSourceEffect;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.constants.TargetController;
 import mage.constants.Zone;
 import mage.counters.CounterType;
@@ -49,9 +49,8 @@ import mage.watchers.common.CreaturesDiedWatcher;
  */
 public class ScavengingGhoul extends CardImpl {
 
-    public ScavengingGhoul(UUID ownerId) {
-        super(ownerId, 35, "Scavenging Ghoul", Rarity.UNCOMMON, new CardType[]{CardType.CREATURE}, "{3}{B}");
-        this.expansionSetCode = "LEA";
+    public ScavengingGhoul(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{3}{B}");
         this.subtype.add("Zombie");
         this.power = new MageInt(2);
         this.toughness = new MageInt(2);

@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.visions;
+package mage.cards.m;
 
 import java.util.UUID;
 import mage.MageInt;
@@ -38,8 +38,8 @@ import mage.abilities.costs.common.TapSourceCost;
 import mage.abilities.costs.mana.GenericManaCost;
 import mage.abilities.effects.common.CounterUnlessPaysEffect;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.constants.Zone;
 import mage.target.TargetSpell;
 
@@ -49,9 +49,8 @@ import mage.target.TargetSpell;
  */
 public class Mundungu extends CardImpl {
 
-    public Mundungu(UUID ownerId) {
-        super(ownerId, 132, "Mundungu", Rarity.UNCOMMON, new CardType[]{CardType.CREATURE}, "{1}{U}{B}");
-        this.expansionSetCode = "VIS";
+    public Mundungu(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{1}{U}{B}");
         this.subtype.add("Human");
         this.subtype.add("Wizard");
         this.power = new MageInt(1);

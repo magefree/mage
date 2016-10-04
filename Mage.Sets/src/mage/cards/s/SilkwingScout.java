@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.dissension;
+package mage.cards.s;
 
 import java.util.UUID;
 import mage.MageInt;
@@ -36,8 +36,8 @@ import mage.abilities.costs.mana.ManaCostsImpl;
 import mage.abilities.effects.common.search.SearchLibraryPutInPlayEffect;
 import mage.abilities.keyword.FlyingAbility;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.constants.Zone;
 import mage.filter.common.FilterBasicLandCard;
 import mage.target.common.TargetCardInLibrary;
@@ -48,9 +48,8 @@ import mage.target.common.TargetCardInLibrary;
  */
 public class SilkwingScout extends CardImpl {
 
-    public SilkwingScout(UUID ownerId) {
-        super(ownerId, 31, "Silkwing Scout", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{2}{U}");
-        this.expansionSetCode = "DIS";
+    public SilkwingScout(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{2}{U}");
         this.subtype.add("Faerie");
         this.subtype.add("Scout");
         this.power = new MageInt(2);

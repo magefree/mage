@@ -26,14 +26,14 @@
  *  or implied, of BetaSteward_at_googlemail.com.
  */
 
-package mage.sets.tenthedition;
+package mage.cards.l;
 
 import java.util.UUID;
 import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.MageInt;
 import mage.abilities.mana.GreenManaAbility;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 
 /**
  *
@@ -41,9 +41,8 @@ import mage.cards.CardImpl;
  */
 public class LlanowarElves extends CardImpl {
 
-    public LlanowarElves(UUID ownerId) {
-        super(ownerId, 274, "Llanowar Elves", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{G}");
-        this.expansionSetCode = "10E";
+    public LlanowarElves(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{G}");
         this.subtype.add("Elf");
         this.subtype.add("Druid");
 

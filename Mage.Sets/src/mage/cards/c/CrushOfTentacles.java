@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.oathofthegatewatch;
+package mage.cards.c;
 
 import java.util.UUID;
 import mage.MageInt;
@@ -36,8 +36,8 @@ import mage.abilities.effects.common.CreateTokenEffect;
 import mage.abilities.effects.common.ReturnToHandFromBattlefieldAllEffect;
 import mage.abilities.keyword.SurgeAbility;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.filter.common.FilterNonlandPermanent;
 import mage.game.permanent.token.Token;
 
@@ -47,9 +47,8 @@ import mage.game.permanent.token.Token;
  */
 public class CrushOfTentacles extends CardImpl {
 
-    public CrushOfTentacles(UUID ownerId) {
-        super(ownerId, 53, "Crush of Tentacles", Rarity.MYTHIC, new CardType[]{CardType.SORCERY}, "{4}{U}{U}");
-        this.expansionSetCode = "OGW";
+    public CrushOfTentacles(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{4}{U}{U}");
 
         // Return all nonland permanents to their owners' hands. If Crush of Tentacles surge cost was paid, put an 8/8 blue Octopus creature token onto the battlefield.
         getSpellAbility().addEffect(new ReturnToHandFromBattlefieldAllEffect(new FilterNonlandPermanent("nonland permanents")));

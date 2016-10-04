@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.iceage;
+package mage.cards.c;
 
 import java.util.UUID;
 
@@ -35,9 +35,9 @@ import mage.abilities.costs.mana.ManaCostsImpl;
 import mage.abilities.effects.Effect;
 import mage.abilities.effects.common.PreventNextDamageFromChosenSourceToYouEffect;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Duration;
-import mage.constants.Rarity;
 import mage.constants.Zone;
 import mage.filter.FilterObject;
 import mage.filter.predicate.mageobject.ColorPredicate;
@@ -54,9 +54,8 @@ public class CircleOfProtectionBlack extends CardImpl {
         filter.add(new ColorPredicate(ObjectColor.BLACK));
     }
     
-    public CircleOfProtectionBlack(UUID ownerId) {
-        super(ownerId, 236, "Circle of Protection: Black", Rarity.COMMON, new CardType[]{CardType.ENCHANTMENT}, "{1}{W}");
-        this.expansionSetCode = "ICE";
+    public CircleOfProtectionBlack(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.ENCHANTMENT},"{1}{W}");
 
 
         // {1}: The next time a black source of your choice would deal damage to you this turn, prevent that damage.

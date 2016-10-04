@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.commander2015;
+package mage.cards.s;
 
 import java.util.UUID;
 import mage.MageInt;
@@ -39,11 +39,11 @@ import mage.abilities.costs.mana.ManaCostsImpl;
 import mage.abilities.effects.AsThoughEffectImpl;
 import mage.abilities.keyword.FlyingAbility;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.AsThoughEffectType;
 import mage.constants.CardType;
 import mage.constants.Duration;
 import mage.constants.Outcome;
-import mage.constants.Rarity;
 import mage.constants.Zone;
 import mage.game.Game;
 import mage.players.Player;
@@ -55,9 +55,8 @@ import mage.target.common.TargetControlledCreaturePermanent;
  */
 public class ScourgeOfNelToth extends CardImpl {
 
-    public ScourgeOfNelToth(UUID ownerId) {
-        super(ownerId, 21, "Scourge of Nel Toth", Rarity.RARE, new CardType[]{CardType.CREATURE}, "{5}{B}{B}");
-        this.expansionSetCode = "C15";
+    public ScourgeOfNelToth(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{5}{B}{B}");
         this.subtype.add("Zombie");
         this.subtype.add("Dragon");
         this.power = new MageInt(6);

@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.battleforzendikar;
+package mage.cards.r;
 
 import java.util.UUID;
 import mage.abilities.Mode;
@@ -33,9 +33,9 @@ import mage.abilities.common.LandfallAbility;
 import mage.abilities.effects.common.combat.CantBlockTargetEffect;
 import mage.abilities.effects.common.continuous.BoostTargetEffect;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Duration;
-import mage.constants.Rarity;
 import mage.target.common.TargetCreaturePermanent;
 
 /**
@@ -44,9 +44,8 @@ import mage.target.common.TargetCreaturePermanent;
  */
 public class RetreatToValakut extends CardImpl {
 
-    public RetreatToValakut(UUID ownerId) {
-        super(ownerId, 153, "Retreat to Valakut", Rarity.UNCOMMON, new CardType[]{CardType.ENCHANTMENT}, "{2}{R}");
-        this.expansionSetCode = "BFZ";
+    public RetreatToValakut(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.ENCHANTMENT},"{2}{R}");
 
         // <i>Landfall</i>- Whenever a land enters the battlefield under your control, choose one - Target creature gets +2/+0 until end of turn;
         LandfallAbility ability = new LandfallAbility(new BoostTargetEffect(2, 0, Duration.EndOfTurn), false);

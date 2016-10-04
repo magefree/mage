@@ -25,16 +25,16 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.mirage;
+package mage.cards.w;
 
 import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.effects.OneShotEffect;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Outcome;
-import mage.constants.Rarity;
 import mage.filter.FilterPermanent;
 import mage.filter.predicate.Predicates;
 import mage.filter.predicate.mageobject.SubtypePredicate;
@@ -49,9 +49,8 @@ import mage.players.Player;
  */
 public class WaitingInTheWeeds extends CardImpl {
 
-    public WaitingInTheWeeds(UUID ownerId) {
-        super(ownerId, 150, "Waiting in the Weeds", Rarity.RARE, new CardType[]{CardType.SORCERY}, "{1}{G}{G}");
-        this.expansionSetCode = "MIR";
+    public WaitingInTheWeeds(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{1}{G}{G}");
 
 
         // Each player puts a 1/1 green Cat creature token onto the battlefield for each untapped Forest he or she controls.

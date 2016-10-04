@@ -25,16 +25,16 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.legends;
+package mage.cards.l;
 
 import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.effects.common.continuous.BecomesCreatureAllEffect;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Duration;
-import mage.constants.Rarity;
 import mage.constants.Zone;
 import mage.filter.common.FilterLandPermanent;
 import mage.game.permanent.token.Token;
@@ -45,9 +45,8 @@ import mage.game.permanent.token.Token;
  */
 public class LivingPlane extends CardImpl {
 
-    public LivingPlane(UUID ownerId) {
-        super(ownerId, 107, "Living Plane", Rarity.RARE, new CardType[]{CardType.ENCHANTMENT}, "{2}{G}{G}");
-        this.expansionSetCode = "LEG";
+    public LivingPlane(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.ENCHANTMENT},"{2}{G}{G}");
         this.supertype.add("World");
 
         // All lands are 1/1 creatures that are still lands.

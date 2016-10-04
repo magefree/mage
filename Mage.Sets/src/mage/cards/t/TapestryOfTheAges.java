@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.dragonsoftarkir;
+package mage.cards.t;
 
 import java.util.HashSet;
 import java.util.Set;
@@ -37,8 +37,8 @@ import mage.abilities.costs.common.TapSourceCost;
 import mage.abilities.costs.mana.ManaCostsImpl;
 import mage.abilities.effects.common.DrawCardSourceControllerEffect;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.constants.WatcherScope;
 import mage.constants.Zone;
 import mage.game.Game;
@@ -53,9 +53,8 @@ import mage.watchers.Watcher;
  */
 public class TapestryOfTheAges extends CardImpl {
 
-    public TapestryOfTheAges(UUID ownerId) {
-        super(ownerId, 246, "Tapestry of the Ages", Rarity.UNCOMMON, new CardType[]{CardType.ARTIFACT},"{4}" );
-        this.expansionSetCode = "DTK";
+    public TapestryOfTheAges(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.ARTIFACT},"{4}");
 
         // {2}, {T}: Draw a card. Activate this ability only if you've cast a noncreature spell this turn.
         Ability ability = new ActivateIfConditionActivatedAbility(

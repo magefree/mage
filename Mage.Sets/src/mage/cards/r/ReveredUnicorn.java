@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.weatherlight;
+package mage.cards.r;
 
 import java.util.UUID;
 import mage.MageInt;
@@ -35,8 +35,8 @@ import mage.abilities.dynamicvalue.common.CountersSourceCount;
 import mage.abilities.effects.common.GainLifeEffect;
 import mage.abilities.keyword.CumulativeUpkeepAbility;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.counters.CounterType;
 
 /**
@@ -45,9 +45,8 @@ import mage.counters.CounterType;
  */
 public class ReveredUnicorn extends CardImpl {
 
-    public ReveredUnicorn(UUID ownerId) {
-        super(ownerId, 139, "Revered Unicorn", Rarity.UNCOMMON, new CardType[]{CardType.CREATURE}, "{1}{W}");
-        this.expansionSetCode = "WTH";
+    public ReveredUnicorn(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{1}{W}");
         this.subtype.add("Unicorn");
         this.power = new MageInt(2);
         this.toughness = new MageInt(3);

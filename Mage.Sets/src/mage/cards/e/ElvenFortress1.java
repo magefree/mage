@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.fallenempires;
+package mage.cards.e;
 
 import java.util.UUID;
 import mage.abilities.Ability;
@@ -33,9 +33,9 @@ import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.costs.mana.ManaCostsImpl;
 import mage.abilities.effects.common.continuous.BoostTargetEffect;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Duration;
-import mage.constants.Rarity;
 import mage.constants.Zone;
 import mage.filter.common.FilterBlockingCreature;
 import mage.target.common.TargetCreaturePermanent;
@@ -46,9 +46,8 @@ import mage.target.common.TargetCreaturePermanent;
  */
 public class ElvenFortress1 extends CardImpl {
 
-    public ElvenFortress1(UUID ownerId) {
-        super(ownerId, 67, "Elven Fortress", Rarity.COMMON, new CardType[]{CardType.ENCHANTMENT}, "{G}");
-        this.expansionSetCode = "FEM";
+    public ElvenFortress1(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.ENCHANTMENT},"{G}");
 
         // {1}{G}: Target blocking creature gets +0/+1 until end of turn.
         Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new BoostTargetEffect(0, 1, Duration.EndOfTurn), new ManaCostsImpl("{1}{G}"));

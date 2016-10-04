@@ -26,17 +26,17 @@
  *  or implied, of BetaSteward_at_googlemail.com.
  */
 
-package mage.sets.championsofkamigawa;
+package mage.cards.o;
 
 import java.util.UUID;
 
 import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.SpellCastControllerTriggeredAbility;
 import mage.abilities.effects.common.DestroyTargetEffect;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.filter.common.FilterSpiritOrArcaneCard;
 import mage.target.common.TargetNonBasicLandPermanent;
 
@@ -47,9 +47,8 @@ public class OreGorger extends CardImpl {
 
     private static final FilterSpiritOrArcaneCard filter = new FilterSpiritOrArcaneCard();
 
-    public OreGorger(UUID ownerId) {
-        super(ownerId, 182, "Ore Gorger", Rarity.UNCOMMON, new CardType[]{CardType.CREATURE}, "{3}{R}{R}");
-        this.expansionSetCode = "CHK";
+    public OreGorger(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{3}{R}{R}");
         this.subtype.add("Spirit");
 
         this.power = new MageInt(3);

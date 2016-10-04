@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.kaladesh;
+package mage.cards.g;
 
 import java.util.UUID;
 import mage.MageInt;
@@ -35,9 +35,9 @@ import mage.abilities.effects.common.CrewsVehicleSourceTriggeredAbility;
 import mage.abilities.effects.common.continuous.GainAbilityTargetEffect;
 import mage.abilities.keyword.FirstStrikeAbility;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Duration;
-import mage.constants.Rarity;
 import mage.constants.Zone;
 import mage.game.Game;
 import mage.game.events.GameEvent;
@@ -49,9 +49,8 @@ import mage.target.targetpointer.FixedTarget;
  */
 public class GearshiftAce extends CardImpl {
 
-    public GearshiftAce(UUID ownerId) {
-        super(ownerId, 16, "Gearshift Ace", Rarity.UNCOMMON, new CardType[]{CardType.CREATURE}, "{1}{W}");
-        this.expansionSetCode = "KLD";
+    public GearshiftAce(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{1}{W}");
         this.subtype.add("Dwarf");
         this.subtype.add("Pilot");
         this.power = new MageInt(2);

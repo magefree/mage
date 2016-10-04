@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.masterseditionii;
+package mage.cards.j;
 
 import java.util.UUID;
 import mage.abilities.Ability;
@@ -36,8 +36,8 @@ import mage.abilities.costs.common.TapSourceCost;
 import mage.abilities.costs.mana.ManaCostsImpl;
 import mage.abilities.effects.common.ReplaceOpponentCardsInHandWithSelectedEffect;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.constants.Zone;
 import mage.target.common.TargetOpponent;
 
@@ -47,9 +47,8 @@ import mage.target.common.TargetOpponent;
  */
 public class JestersMask extends CardImpl {
 
-    public JestersMask(UUID ownerId) {
-        super(ownerId, 211, "Jester's Mask", Rarity.RARE, new CardType[]{CardType.ARTIFACT}, "{5}");
-        this.expansionSetCode = "ME2";
+    public JestersMask(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.ARTIFACT},"{5}");
 
         // Jester's Mask enters the battlefield tapped.
         this.addAbility(new EntersBattlefieldTappedAbility());

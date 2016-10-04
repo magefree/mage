@@ -25,14 +25,14 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.mirrodinbesieged;
+package mage.cards.i;
 
 import java.util.UUID;
 import mage.abilities.effects.Effect;
 import mage.abilities.effects.common.ExileTargetEffect;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.filter.common.FilterArtifactPermanent;
 import mage.target.TargetPermanent;
 
@@ -42,9 +42,8 @@ import mage.target.TargetPermanent;
  */
 public class IntoTheCore extends CardImpl {
 
-    public IntoTheCore(UUID ownerId) {
-        super(ownerId, 67, "Into the Core", Rarity.UNCOMMON, new CardType[]{CardType.INSTANT}, "{2}{R}{R}");
-        this.expansionSetCode = "MBS";
+    public IntoTheCore(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.INSTANT},"{2}{R}{R}");
 
         // Exile two target artifacts.
         this.getSpellAbility().addTarget(new TargetPermanent(2, 2, new FilterArtifactPermanent("artifacts"), false));

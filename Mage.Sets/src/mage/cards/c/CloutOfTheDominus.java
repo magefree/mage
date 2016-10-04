@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.eventide;
+package mage.cards.c;
 
 import java.util.UUID;
 import mage.ObjectColor;
@@ -40,8 +40,8 @@ import mage.abilities.keyword.EnchantAbility;
 import mage.abilities.keyword.HasteAbility;
 import mage.abilities.keyword.ShroudAbility;
 import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.AttachmentType;
 import mage.constants.Outcome;
 import mage.constants.Zone;
@@ -54,9 +54,8 @@ import mage.target.common.TargetCreaturePermanent;
  */
 public class CloutOfTheDominus extends CardImpl {
 
-    public CloutOfTheDominus(UUID ownerId) {
-        super(ownerId, 99, "Clout of the Dominus", Rarity.COMMON, new CardType[]{CardType.ENCHANTMENT}, "{U/R}");
-        this.expansionSetCode = "EVE";
+    public CloutOfTheDominus(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.ENCHANTMENT},"{U/R}");
         this.subtype.add("Aura");
 
 

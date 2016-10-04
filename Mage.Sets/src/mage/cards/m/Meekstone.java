@@ -25,15 +25,15 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.limitedalpha;
+package mage.cards.m;
 
 import java.util.UUID;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.effects.common.DontUntapInControllersUntapStepAllEffect;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Duration;
-import mage.constants.Rarity;
 import mage.constants.TargetController;
 import mage.constants.Zone;
 import mage.filter.Filter.ComparisonType;
@@ -52,9 +52,8 @@ public class Meekstone extends CardImpl {
         filter.add(new PowerPredicate(ComparisonType.GreaterThan, 2));
     }
     
-    public Meekstone(UUID ownerId) {
-        super(ownerId, 260, "Meekstone", Rarity.RARE, new CardType[]{CardType.ARTIFACT}, "{1}");
-        this.expansionSetCode = "LEA";
+    public Meekstone(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.ARTIFACT},"{1}");
 
         // Creatures with power 3 or greater don't untap during their controllers' untap steps.
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new DontUntapInControllersUntapStepAllEffect(Duration.WhileOnBattlefield, TargetController.ANY, filter)));

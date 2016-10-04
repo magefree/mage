@@ -26,13 +26,13 @@
  *  or implied, of BetaSteward_at_googlemail.com.
  */
 
-package mage.sets.worldwake;
+package mage.cards.g;
 
 import java.util.UUID;
 import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.MageInt;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 
 /**
  *
@@ -40,9 +40,8 @@ import mage.cards.CardImpl;
  */
 public class GoblinRoughrider extends CardImpl {
 
-    public GoblinRoughrider (UUID ownerId) {
-        super(ownerId, 82, "Goblin Roughrider", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{2}{R}");
-        this.expansionSetCode = "WWK";
+    public GoblinRoughrider (UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{2}{R}");
         this.subtype.add("Goblin");
         this.subtype.add("Knight");
         this.color.setRed(true);        

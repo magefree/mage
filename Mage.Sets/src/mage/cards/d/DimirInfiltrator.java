@@ -25,15 +25,15 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.ravnica;
+package mage.cards.d;
 
 import java.util.UUID;
 import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.MageInt;
 import mage.abilities.keyword.TransmuteAbility;
 import mage.abilities.keyword.CantBeBlockedSourceAbility;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 
 /**
  *
@@ -41,9 +41,8 @@ import mage.cards.CardImpl;
  */
 public class DimirInfiltrator extends CardImpl {
 
-    public DimirInfiltrator(UUID ownerId) {
-        super(ownerId, 203, "Dimir Infiltrator", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{U}{B}");
-        this.expansionSetCode = "RAV";
+    public DimirInfiltrator(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{U}{B}");
         this.subtype.add("Spirit");
 
         this.power = new MageInt(1);

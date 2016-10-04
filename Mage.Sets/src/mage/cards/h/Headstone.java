@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.homelands;
+package mage.cards.h;
 
 import java.util.UUID;
 import mage.abilities.common.delayed.AtTheBeginOfNextUpkeepDelayedTriggeredAbility;
@@ -33,8 +33,8 @@ import mage.abilities.effects.common.CreateDelayedTriggeredAbilityEffect;
 import mage.abilities.effects.common.DrawCardSourceControllerEffect;
 import mage.abilities.effects.common.ExileTargetEffect;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.target.common.TargetCardInGraveyard;
 
 /**
@@ -43,9 +43,8 @@ import mage.target.common.TargetCardInGraveyard;
  */
 public class Headstone extends CardImpl {
 
-    public Headstone(UUID ownerId) {
-        super(ownerId, 15, "Headstone", Rarity.COMMON, new CardType[]{CardType.INSTANT}, "{1}{B}");
-        this.expansionSetCode = "HML";
+    public Headstone(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.INSTANT},"{1}{B}");
 
         // Exile target card from a graveyard.
         this.getSpellAbility().addEffect(new ExileTargetEffect());

@@ -26,12 +26,11 @@
  *  or implied, of BetaSteward_at_googlemail.com.
  */
 
-package mage.sets.darksteel;
+package mage.cards.m;
 
 import java.util.UUID;
 
 import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.costs.mana.GenericManaCost;
@@ -39,6 +38,7 @@ import mage.abilities.effects.common.CreateTokenEffect;
 import mage.abilities.effects.common.continuous.BoostAllEffect;
 import mage.abilities.keyword.IndestructibleAbility;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.Duration;
 import mage.constants.Zone;
 import mage.filter.common.FilterCreaturePermanent;
@@ -57,9 +57,8 @@ public class MyrMatrix extends CardImpl {
            filter.add(new SubtypePredicate("Myr"));
        }
 
-        public MyrMatrix (UUID ownerId) {
-        super(ownerId, 132, "Myr Matrix", Rarity.RARE, new CardType[]{CardType.ARTIFACT}, "{5}");
-        this.expansionSetCode = "DST";
+        public MyrMatrix (UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.ARTIFACT},"{5}");
         this.addAbility(IndestructibleAbility.getInstance());
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new BoostAllEffect(1, 1, Duration.WhileOnBattlefield, filter, false)));
         this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new CreateTokenEffect(new MyrToken()), new GenericManaCost(5)));

@@ -26,13 +26,13 @@
  *  or implied, of BetaSteward_at_googlemail.com.
  */
 
-package mage.sets.urzassaga;
+package mage.cards.t;
 
 import java.util.UUID;
 import mage.constants.CardType;
 import mage.abilities.effects.common.counter.AddCountersAllEffect;
 import mage.cards.CardImpl;
-import mage.constants.Rarity;
+import mage.cards.CardSetInfo;
 import mage.counters.CounterType;
 import mage.filter.common.FilterControlledCreaturePermanent;
 
@@ -42,9 +42,8 @@ import mage.filter.common.FilterControlledCreaturePermanent;
  */
 public class TitaniasBoon extends CardImpl {
 
-    public TitaniasBoon(UUID ownerId) {
-        super(ownerId, 276, "Titania's Boon", Rarity.UNCOMMON, new CardType[]{CardType.SORCERY}, "{3}{G}");
-        this.expansionSetCode = "USG";
+    public TitaniasBoon(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{3}{G}");
 
 		
 		// Put a +1/+1 counter on each creature you control.

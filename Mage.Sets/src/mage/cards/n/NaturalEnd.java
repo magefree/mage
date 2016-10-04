@@ -25,14 +25,14 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.avacynrestored;
+package mage.cards.n;
 
 import java.util.UUID;
 import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.abilities.effects.common.DestroyTargetEffect;
 import mage.abilities.effects.common.GainLifeEffect;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.filter.common.FilterArtifactOrEnchantmentPermanent;
 import mage.target.TargetPermanent;
 
@@ -42,9 +42,8 @@ import mage.target.TargetPermanent;
  */
 public class NaturalEnd extends CardImpl {
 
-    public NaturalEnd(UUID ownerId) {
-        super(ownerId, 185, "Natural End", Rarity.COMMON, new CardType[]{CardType.INSTANT}, "{2}{G}");
-        this.expansionSetCode = "AVR";
+    public NaturalEnd(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.INSTANT},"{2}{G}");
 
         // Destroy target artifact or enchantment. You gain 3 life.
         this.getSpellAbility().addEffect(new DestroyTargetEffect());

@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.lorwyn;
+package mage.cards.m;
 
 import java.util.UUID;
 import mage.MageInt;
@@ -35,8 +35,8 @@ import mage.abilities.keyword.ChampionAbility;
 import mage.abilities.keyword.FlashAbility;
 import mage.abilities.keyword.FlyingAbility;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.constants.Zone;
 import mage.filter.common.FilterLandPermanent;
 import mage.game.Game;
@@ -50,9 +50,8 @@ import mage.target.TargetPlayer;
  */
 public class MistbindClique extends CardImpl {
 
-    public MistbindClique(UUID ownerId) {
-        super(ownerId, 75, "Mistbind Clique", Rarity.RARE, new CardType[]{CardType.CREATURE}, "{3}{U}");
-        this.expansionSetCode = "LRW";
+    public MistbindClique(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{3}{U}");
         this.subtype.add("Faerie");
         this.subtype.add("Wizard");
 

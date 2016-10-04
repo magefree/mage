@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.journeyintonyx;
+package mage.cards.s;
 
 import java.util.UUID;
 import mage.abilities.Ability;
@@ -37,9 +37,9 @@ import mage.abilities.effects.common.FightTargetSourceEffect;
 import mage.abilities.effects.common.continuous.BoostTargetEffect;
 import mage.abilities.effects.common.continuous.GainAbilityTargetEffect;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Duration;
-import mage.constants.Rarity;
 import mage.constants.Zone;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.filter.predicate.permanent.AnotherPredicate;
@@ -57,9 +57,8 @@ public class SetessanTactics extends CardImpl {
         filter.add(new AnotherPredicate());
     }
 
-    public SetessanTactics(UUID ownerId) {
-        super(ownerId, 140, "Setessan Tactics", Rarity.RARE, new CardType[]{CardType.INSTANT}, "{1}{G}");
-        this.expansionSetCode = "JOU";
+    public SetessanTactics(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.INSTANT},"{1}{G}");
 
 
         // Strive - Setessan Tactics costs G more to cast for each target beyond the first.

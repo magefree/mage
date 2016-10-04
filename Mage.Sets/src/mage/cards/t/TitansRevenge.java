@@ -25,15 +25,15 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.morningtide;
+package mage.cards.t;
 
 import java.util.UUID;
 import mage.abilities.dynamicvalue.common.ManacostVariableValue;
 import mage.abilities.effects.common.ClashWinReturnToHandSpellEffect;
 import mage.abilities.effects.common.DamageTargetEffect;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.target.common.TargetCreatureOrPlayer;
 
 /**
@@ -42,9 +42,8 @@ import mage.target.common.TargetCreatureOrPlayer;
  */
 public class TitansRevenge extends CardImpl {
 
-    public TitansRevenge(UUID ownerId) {
-        super(ownerId, 110, "Titan's Revenge", Rarity.RARE, new CardType[]{CardType.SORCERY}, "{X}{R}{R}");
-        this.expansionSetCode = "MOR";
+    public TitansRevenge(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{X}{R}{R}");
 
 
         // Titan's Revenge deals X damage to target creature or player. Clash with an opponent. If you win, return Titan's Revenge to its owner's hand.

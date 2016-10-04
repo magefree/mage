@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.apocalypse;
+package mage.cards.w;
 
 import java.util.UUID;
 import mage.MageObject;
@@ -35,11 +35,11 @@ import mage.abilities.costs.mana.ManaCostsImpl;
 import mage.abilities.effects.OneShotEffect;
 import mage.cards.Card;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.cards.Cards;
 import mage.cards.CardsImpl;
 import mage.constants.CardType;
 import mage.constants.Outcome;
-import mage.constants.Rarity;
 import mage.constants.Zone;
 import mage.filter.FilterCard;
 import mage.filter.predicate.mageobject.CardTypePredicate;
@@ -61,9 +61,8 @@ public class WildResearch extends CardImpl {
         filterInstant.add(new CardTypePredicate(CardType.INSTANT));
     }
 
-    public WildResearch(UUID ownerId) {
-        super(ownerId, 72, "Wild Research", Rarity.RARE, new CardType[]{CardType.ENCHANTMENT}, "{2}{R}");
-        this.expansionSetCode = "APC";
+    public WildResearch(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.ENCHANTMENT},"{2}{R}");
 
         // {1}{W}: Search your library for an enchantment card and reveal that card. Put it into your hand, then discard a card at random. Then shuffle your library.
         this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new WildResearchEffect(filterEnchantment), new ManaCostsImpl<>("{1}{W}")));

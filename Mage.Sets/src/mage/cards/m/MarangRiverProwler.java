@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.fatereforged;
+package mage.cards.m;
 
 import java.util.UUID;
 import mage.MageInt;
@@ -38,11 +38,11 @@ import mage.abilities.effects.common.combat.CantBlockSourceEffect;
 import mage.abilities.effects.common.combat.CantBeBlockedSourceEffect;
 import mage.cards.Card;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.AsThoughEffectType;
 import mage.constants.CardType;
 import mage.constants.Duration;
 import mage.constants.Outcome;
-import mage.constants.Rarity;
 import mage.constants.Zone;
 import mage.filter.common.FilterControlledPermanent;
 import mage.filter.predicate.Predicates;
@@ -55,9 +55,8 @@ import mage.game.Game;
  */
 public class MarangRiverProwler extends CardImpl {
 
-    public MarangRiverProwler(UUID ownerId) {
-        super(ownerId, 40, "Marang River Prowler", Rarity.UNCOMMON, new CardType[]{CardType.CREATURE}, "{2}{U}");
-        this.expansionSetCode = "FRF";
+    public MarangRiverProwler(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{2}{U}");
         this.subtype.add("Human");
         this.subtype.add("Rogue");
         this.power = new MageInt(2);

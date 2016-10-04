@@ -25,14 +25,13 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.fifthdawn;
+package mage.cards.p;
 
 import java.util.UUID;
 import mage.constants.AttachmentType;
 import mage.constants.CardType;
 import mage.constants.Duration;
 import mage.constants.Outcome;
-import mage.constants.Rarity;
 import mage.constants.Zone;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.costs.common.TapSourceCost;
@@ -41,6 +40,7 @@ import mage.abilities.effects.common.continuous.GainAbilityAttachedEffect;
 import mage.abilities.keyword.EquipAbility;
 import mage.abilities.mana.AnyColorManaAbility;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 
 /**
  *
@@ -48,9 +48,8 @@ import mage.cards.CardImpl;
  */
 public class ParadiseMantle extends CardImpl {
 
-    public ParadiseMantle(UUID ownerId) {
-        super(ownerId, 142, "Paradise Mantle", Rarity.UNCOMMON, new CardType[]{CardType.ARTIFACT}, "{0}");
-        this.expansionSetCode = "5DN";
+    public ParadiseMantle(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.ARTIFACT},"{0}");
         this.subtype.add("Equipment");
 
         // Equipped creature has "{tap}: Add one mana of any color to your mana pool."

@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.lorwyn;
+package mage.cards.r;
 
 import java.util.UUID;
 import mage.abilities.condition.common.PermanentsOnTheBattlefieldCondition;
@@ -33,8 +33,8 @@ import mage.abilities.decorator.ConditionalOneShotEffect;
 import mage.abilities.effects.common.DestroyTargetEffect;
 import mage.abilities.effects.common.DrawCardSourceControllerEffect;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.filter.FilterPermanent;
 import mage.filter.predicate.Predicates;
 import mage.filter.predicate.mageobject.CardTypePredicate;
@@ -55,9 +55,8 @@ public class Rootgrapple extends CardImpl {
         filterTreefolk.add(new SubtypePredicate("Treefolk"));
     }
 
-    public Rootgrapple(UUID ownerId) {
-        super(ownerId, 234, "Rootgrapple", Rarity.COMMON, new CardType[]{CardType.TRIBAL, CardType.INSTANT}, "{4}{G}");
-        this.expansionSetCode = "LRW";
+    public Rootgrapple(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.TRIBAL,CardType.INSTANT},"{4}{G}");
         this.subtype.add("Treefolk");
 
         // Destroy target noncreature permanent.

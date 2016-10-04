@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.tempestremastered;
+package mage.cards.h;
 
 import java.util.UUID;
 import mage.MageInt;
@@ -33,11 +33,11 @@ import mage.abilities.Ability;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.effects.AsThoughEffectImpl;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.AsThoughEffectType;
 import mage.constants.CardType;
 import mage.constants.Duration;
 import mage.constants.Outcome;
-import mage.constants.Rarity;
 import mage.constants.Zone;
 import mage.game.Game;
 
@@ -47,9 +47,8 @@ import mage.game.Game;
  */
 public class HeartwoodDryad extends CardImpl {
 
-    public HeartwoodDryad(UUID ownerId) {
-        super(ownerId, 173, "Heartwood Dryad", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{1}{G}");
-        this.expansionSetCode = "TPR";
+    public HeartwoodDryad(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{1}{G}");
         this.subtype.add("Dryad");
         this.power = new MageInt(2);
         this.toughness = new MageInt(1);

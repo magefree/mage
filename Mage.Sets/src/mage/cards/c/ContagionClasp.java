@@ -26,12 +26,11 @@
  *  or implied, of BetaSteward_at_googlemail.com.
  */
 
-package mage.sets.scarsofmirrodin;
+package mage.cards.c;
 
 import java.util.UUID;
 import mage.constants.CardType;
 import mage.constants.Outcome;
-import mage.constants.Rarity;
 import mage.constants.Zone;
 import mage.abilities.Ability;
 import mage.abilities.common.EntersBattlefieldTriggeredAbility;
@@ -41,6 +40,7 @@ import mage.abilities.costs.mana.GenericManaCost;
 import mage.abilities.effects.common.counter.AddCountersTargetEffect;
 import mage.abilities.effects.common.counter.ProliferateEffect;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.counters.CounterType;
 import mage.target.common.TargetCreaturePermanent;
 
@@ -50,9 +50,8 @@ import mage.target.common.TargetCreaturePermanent;
  */
 public class ContagionClasp extends CardImpl {
 
-    public ContagionClasp (UUID ownerId) {
-        super(ownerId, 144, "Contagion Clasp", Rarity.UNCOMMON, new CardType[]{CardType.ARTIFACT}, "{2}");
-        this.expansionSetCode = "SOM";
+    public ContagionClasp (UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.ARTIFACT},"{2}");
 
         // When Contagion Clasp enters the battlefield, put a -1/-1 counter on target creature.
         Ability ability = new EntersBattlefieldTriggeredAbility(new AddCountersTargetEffect(CounterType.M1M1.createInstance(), Outcome.UnboostCreature), false);

@@ -25,12 +25,11 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.urzaslegacy;
+package mage.cards.t;
 
 import java.util.UUID;
 import mage.constants.CardType;
 import mage.constants.Duration;
-import mage.constants.Rarity;
 import mage.constants.Zone;
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleActivatedAbility;
@@ -40,6 +39,7 @@ import mage.abilities.costs.mana.ManaCostsImpl;
 import mage.abilities.effects.common.continuous.BoostAllEffect;
 import mage.abilities.keyword.EchoAbility;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 
@@ -49,9 +49,8 @@ import mage.game.permanent.Permanent;
  */
 public class ThranWeaponry extends CardImpl {
 
-    public ThranWeaponry(UUID ownerId) {
-        super(ownerId, 135, "Thran Weaponry", Rarity.RARE, new CardType[]{CardType.ARTIFACT}, "{4}");
-        this.expansionSetCode = "ULG";
+    public ThranWeaponry(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.ARTIFACT},"{4}");
 
         // Echo {4}
         this.addAbility(new EchoAbility("{4}"));

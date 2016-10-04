@@ -26,12 +26,11 @@
  *  or implied, of BetaSteward_at_googlemail.com.
  */
 
-package mage.sets.shardsofalara;
+package mage.cards.b;
 
 import java.util.UUID;
 import mage.constants.CardType;
 import mage.constants.Duration;
-import mage.constants.Rarity;
 import mage.constants.Zone;
 import mage.MageInt;
 import mage.abilities.Ability;
@@ -42,6 +41,7 @@ import mage.abilities.effects.common.continuous.GainAbilityTargetEffect;
 import mage.abilities.keyword.FlyingAbility;
 import mage.abilities.keyword.TrampleAbility;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.target.common.TargetCreaturePermanent;
 
 /**
@@ -50,9 +50,8 @@ import mage.target.common.TargetCreaturePermanent;
  */
 public class BantBattlemage extends CardImpl {
 
-    public BantBattlemage (UUID ownerId) {
-        super(ownerId, 5, "Bant Battlemage", Rarity.UNCOMMON, new CardType[]{CardType.CREATURE}, "{2}{W}");
-        this.expansionSetCode = "ALA";
+    public BantBattlemage (UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{2}{W}");
         this.subtype.add("Human");
         this.subtype.add("Wizard");
 

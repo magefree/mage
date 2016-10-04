@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.magic2014;
+package mage.cards.w;
 
 import java.util.UUID;
 import mage.MageInt;
@@ -33,8 +33,8 @@ import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.effects.common.cost.SpellsCostReductionControllerEffect;
 import mage.abilities.keyword.FlyingAbility;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.constants.Zone;
 import mage.filter.FilterCard;
 import mage.filter.predicate.mageobject.AbilityPredicate;
@@ -52,9 +52,8 @@ public class WardenOfEvosIsle extends CardImpl {
         filter.add(new AbilityPredicate(FlyingAbility.class));
     }
 
-    public WardenOfEvosIsle(UUID ownerId) {
-        super(ownerId, 79, "Warden of Evos Isle", Rarity.UNCOMMON, new CardType[]{CardType.CREATURE}, "{2}{U}");
-        this.expansionSetCode = "M14";
+    public WardenOfEvosIsle(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{2}{U}");
         this.subtype.add("Bird");
         this.subtype.add("Wizard");
 

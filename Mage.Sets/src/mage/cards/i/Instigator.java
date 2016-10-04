@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.mercadianmasques;
+package mage.cards.i;
 
 import java.util.UUID;
 import mage.MageInt;
@@ -38,10 +38,10 @@ import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.RequirementEffect;
 import mage.abilities.effects.common.combat.AttacksIfAbleAllEffect;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Duration;
 import mage.constants.Outcome;
-import mage.constants.Rarity;
 import mage.constants.Zone;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.filter.predicate.permanent.ControllerIdPredicate;
@@ -56,9 +56,8 @@ import mage.watchers.common.AttackedThisTurnWatcher;
  */
 public class Instigator extends CardImpl {
 
-    public Instigator(UUID ownerId) {
-        super(ownerId, 140, "Instigator", Rarity.RARE, new CardType[]{CardType.CREATURE}, "{1}{B}");
-        this.expansionSetCode = "MMQ";
+    public Instigator(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{1}{B}");
         this.subtype.add("Human");
         this.subtype.add("Spellshaper");
         this.power = new MageInt(1);

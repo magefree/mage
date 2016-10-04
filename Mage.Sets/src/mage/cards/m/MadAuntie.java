@@ -25,10 +25,9 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.lorwyn;
+package mage.cards.m;
 
 import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleActivatedAbility;
@@ -37,6 +36,7 @@ import mage.abilities.costs.common.TapSourceCost;
 import mage.abilities.effects.common.RegenerateTargetEffect;
 import mage.abilities.effects.common.continuous.BoostControlledEffect;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.Duration;
 import mage.constants.Zone;
 import mage.filter.common.FilterCreaturePermanent;
@@ -61,9 +61,8 @@ public class MadAuntie extends CardImpl {
         filter2.add(new SubtypePredicate("Goblin"));
     }
 
-    public MadAuntie(UUID ownerId) {
-        super(ownerId, 123, "Mad Auntie", Rarity.RARE, new CardType[]{CardType.CREATURE}, "{2}{B}");
-        this.expansionSetCode = "LRW";
+    public MadAuntie(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{2}{B}");
         this.subtype.add("Goblin");
         this.subtype.add("Shaman");
 

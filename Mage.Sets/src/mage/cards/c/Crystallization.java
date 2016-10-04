@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.alarareborn;
+package mage.cards.c;
 
 import java.util.UUID;
 import mage.abilities.Ability;
@@ -36,10 +36,10 @@ import mage.abilities.effects.common.ExileTargetEffect;
 import mage.abilities.effects.common.combat.CantAttackBlockAttachedEffect;
 import mage.abilities.keyword.EnchantAbility;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.AttachmentType;
 import mage.constants.CardType;
 import mage.constants.Outcome;
-import mage.constants.Rarity;
 import mage.constants.Zone;
 import mage.game.Game;
 import mage.game.events.GameEvent;
@@ -55,9 +55,8 @@ import mage.target.targetpointer.FixedTarget;
  */
 public class Crystallization extends CardImpl {
 
-    public Crystallization(UUID ownerId) {
-        super(ownerId, 144, "Crystallization", Rarity.COMMON, new CardType[]{CardType.ENCHANTMENT}, "{G/U}{W}");
-        this.expansionSetCode = "ARB";
+    public Crystallization(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.ENCHANTMENT},"{G/U}{W}");
         this.subtype.add("Aura");
 
         // Enchant creature

@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.betrayersofkamigawa;
+package mage.cards.s;
 
 import java.util.UUID;
 import mage.MageObject;
@@ -37,9 +37,9 @@ import mage.abilities.dynamicvalue.DynamicValue;
 import mage.abilities.dynamicvalue.common.ExileFromHandCostCardConvertedMana;
 import mage.abilities.effects.PreventionEffectImpl;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Duration;
-import mage.constants.Rarity;
 import mage.filter.common.FilterOwnedCard;
 import mage.filter.predicate.Predicates;
 import mage.filter.predicate.mageobject.CardIdPredicate;
@@ -59,9 +59,8 @@ import mage.target.common.TargetCreatureOrPlayer;
  */
 public class ShiningShoal extends CardImpl {
 
-    public ShiningShoal(UUID ownerId) {
-        super(ownerId, 21, "Shining Shoal", Rarity.RARE, new CardType[]{CardType.INSTANT}, "{X}{W}{W}");
-        this.expansionSetCode = "BOK";
+    public ShiningShoal(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.INSTANT},"{X}{W}{W}");
         this.subtype.add("Arcane");
 
         // You may exile a white card with converted mana cost X from your hand rather than pay Shining Shoal's mana cost

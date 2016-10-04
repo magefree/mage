@@ -26,12 +26,11 @@
  *  or implied, of BetaSteward_at_googlemail.com.
  */
 
-package mage.sets.darksteel;
+package mage.cards.w;
 
 import java.util.UUID;
 
 import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.constants.Zone;
 import mage.MageInt;
 import mage.abilities.Ability;
@@ -41,6 +40,7 @@ import mage.abilities.costs.common.TapSourceCost;
 import mage.abilities.effects.common.CreateTokenEffect;
 import mage.abilities.keyword.FlyingAbility;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.filter.common.FilterControlledPermanent;
 import mage.filter.predicate.mageobject.SubtypePredicate;
 import mage.game.permanent.token.Token;
@@ -59,9 +59,8 @@ public class WandOfTheElements extends CardImpl {
         mountainFilter.add(new SubtypePredicate("Mountain"));
     }
 
-    public WandOfTheElements(UUID ownerId) {
-        super(ownerId, 158, "Wand of the Elements", Rarity.RARE, new CardType[]{CardType.ARTIFACT}, "{4}");
-        this.expansionSetCode = "DST";
+    public WandOfTheElements(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.ARTIFACT},"{4}");
         Ability firstAbility = new SimpleActivatedAbility(Zone.BATTLEFIELD, new CreateTokenEffect(new WandOfTheElementsFirstToken()), new TapSourceCost());
         firstAbility.addCost(new SacrificeTargetCost(new TargetControlledPermanent(islandFilter)));
         this.addAbility(firstAbility);

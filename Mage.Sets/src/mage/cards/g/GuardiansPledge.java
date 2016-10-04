@@ -26,15 +26,15 @@
  *  or implied, of BetaSteward_at_googlemail.com.
  */
 
-package mage.sets.magic2012;
+package mage.cards.g;
 
 import java.util.UUID;
 
 import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.ObjectColor;
 import mage.abilities.effects.common.continuous.BoostControlledEffect;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.Duration;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.filter.predicate.mageobject.ColorPredicate;
@@ -51,9 +51,8 @@ public class GuardiansPledge extends CardImpl {
             filter.add(new ColorPredicate(ObjectColor.WHITE));
         }
 
-        public GuardiansPledge (UUID ownerId) {
-        super(ownerId, 22, "Guardians' Pledge", Rarity.COMMON, new CardType[]{CardType.INSTANT}, "{1}{W}{W}");
-        this.expansionSetCode = "M12";
+        public GuardiansPledge (UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.INSTANT},"{1}{W}{W}");
 
         this.getSpellAbility().addEffect(new BoostControlledEffect(2, 2, Duration.EndOfTurn, filter, false));
     }

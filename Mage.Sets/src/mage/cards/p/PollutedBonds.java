@@ -25,16 +25,16 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.shadowmoor;
+package mage.cards.p;
 
 import java.util.UUID;
 import mage.abilities.Ability;
 import mage.abilities.common.EntersBattlefieldAllTriggeredAbility;
 import mage.abilities.effects.OneShotEffect;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Outcome;
-import mage.constants.Rarity;
 import mage.constants.SetTargetPointer;
 import mage.constants.TargetController;
 import mage.constants.Zone;
@@ -57,9 +57,8 @@ public class PollutedBonds extends CardImpl {
         filter.add(new ControllerPredicate(TargetController.OPPONENT));
     }
 
-    public PollutedBonds(UUID ownerId) {
-        super(ownerId, 74, "Polluted Bonds", Rarity.RARE, new CardType[]{CardType.ENCHANTMENT}, "{3}{B}{B}");
-        this.expansionSetCode = "SHM";
+    public PollutedBonds(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.ENCHANTMENT},"{3}{B}{B}");
 
 
         // Whenever a land enters the battlefield under an opponent's control, that player loses 2 life and you gain 2 life.

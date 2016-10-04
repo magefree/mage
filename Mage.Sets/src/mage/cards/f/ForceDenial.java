@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.starwars;
+package mage.cards.f;
 
 import java.util.UUID;
 import mage.abilities.condition.InvertCondition;
@@ -36,8 +36,8 @@ import mage.abilities.effects.common.CounterTargetEffect;
 import mage.abilities.effects.common.CounterUnlessPaysEffect;
 import mage.abilities.effects.keyword.ScryEffect;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.target.TargetSpell;
 import mage.watchers.common.LifeLossOtherFromCombatWatcher;
 
@@ -47,9 +47,8 @@ import mage.watchers.common.LifeLossOtherFromCombatWatcher;
  */
 public class ForceDenial extends CardImpl {
 
-    public ForceDenial(UUID ownerId) {
-        super(ownerId, 37, "Force Denial", Rarity.COMMON, new CardType[]{CardType.INSTANT}, "{1}{U}");
-        this.expansionSetCode = "SWS";
+    public ForceDenial(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.INSTANT},"{1}{U}");
 
         // Counter target  spell unless its controller pays {1}.
         this.getSpellAbility().addEffect(new ConditionalOneShotEffect(

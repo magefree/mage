@@ -25,14 +25,14 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.antiquities;
+package mage.cards.p;
 
 import java.util.UUID;
 import mage.abilities.TriggeredAbilityImpl;
 import mage.abilities.effects.common.GainLifeEffect;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.constants.Zone;
 import mage.game.Game;
 import mage.game.events.GameEvent;
@@ -44,9 +44,8 @@ import mage.game.permanent.Permanent;
  */
 public class Powerleech extends CardImpl {
 
-    public Powerleech(UUID ownerId) {
-        super(ownerId, 64, "Powerleech", Rarity.UNCOMMON, new CardType[]{CardType.ENCHANTMENT}, "{G}{G}");
-        this.expansionSetCode = "ATQ";
+    public Powerleech(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.ENCHANTMENT},"{G}{G}");
 
         // Whenever an artifact an opponent controls becomes tapped or an opponent activates an artifact's ability without {tap} in its activation cost, you gain 1 life.
         this.addAbility(new AbilityActivatedTriggeredAbility3());

@@ -25,15 +25,15 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.onslaught;
+package mage.cards.a;
 
 import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.common.EntersBattlefieldTriggeredAbility;
 import mage.abilities.effects.common.SacrificeControllerEffect;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.filter.common.FilterCreaturePermanent;
 
 /**
@@ -42,9 +42,8 @@ import mage.filter.common.FilterCreaturePermanent;
  */
 public class AccursedCentaur extends CardImpl {
 
-    public AccursedCentaur(UUID ownerId) {
-        super(ownerId, 123, "Accursed Centaur", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{B}");
-        this.expansionSetCode = "ONS";
+    public AccursedCentaur(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{B}");
         this.subtype.add("Zombie");
         this.subtype.add("Centaur");
         this.power = new MageInt(2);

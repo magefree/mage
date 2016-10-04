@@ -25,13 +25,13 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.conspiracy;
+package mage.cards.w;
 
 import java.util.UUID;
 import mage.abilities.effects.common.RegenerateAllEffect;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.filter.common.FilterControlledCreaturePermanent;
 
 /**
@@ -40,9 +40,8 @@ import mage.filter.common.FilterControlledCreaturePermanent;
  */
 public class WrapInVigor extends CardImpl {
     
-    public WrapInVigor(UUID ownerId) {
-        super(ownerId, 183, "Wrap in Vigor", Rarity.COMMON, new CardType[]{CardType.INSTANT}, "{1}{G}");
-        this.expansionSetCode = "CNS";
+    public WrapInVigor(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.INSTANT},"{1}{G}");
 
         // Regenerate each creature you control.
         this.getSpellAbility().addEffect(new RegenerateAllEffect(new FilterControlledCreaturePermanent()));

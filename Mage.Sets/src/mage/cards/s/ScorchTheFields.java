@@ -25,14 +25,14 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.darkascension;
+package mage.cards.s;
 
 import java.util.UUID;
 import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.abilities.effects.common.DamageAllEffect;
 import mage.abilities.effects.common.DestroyTargetEffect;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.filter.predicate.mageobject.SubtypePredicate;
 import mage.target.common.TargetLandPermanent;
@@ -49,9 +49,8 @@ public class ScorchTheFields extends CardImpl {
         filter.add(new SubtypePredicate("Human"));
     }
 
-    public ScorchTheFields(UUID ownerId) {
-        super(ownerId, 103, "Scorch the Fields", Rarity.COMMON, new CardType[]{CardType.SORCERY}, "{4}{R}");
-        this.expansionSetCode = "DKA";
+    public ScorchTheFields(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{4}{R}");
 
 
         // Destroy target land.

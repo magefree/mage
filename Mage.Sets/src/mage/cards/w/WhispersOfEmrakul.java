@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.eldritchmoon;
+package mage.cards.w;
 
 import java.util.UUID;
 import mage.abilities.condition.InvertCondition;
@@ -33,8 +33,8 @@ import mage.abilities.condition.common.DeliriumCondition;
 import mage.abilities.decorator.ConditionalOneShotEffect;
 import mage.abilities.effects.common.discard.DiscardTargetEffect;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.target.common.TargetOpponent;
 
 /**
@@ -43,9 +43,8 @@ import mage.target.common.TargetOpponent;
  */
 public class WhispersOfEmrakul extends CardImpl {
 
-    public WhispersOfEmrakul(UUID ownerId) {
-        super(ownerId, 114, "Whispers of Emrakul", Rarity.UNCOMMON, new CardType[]{CardType.SORCERY}, "{1}{B}");
-        this.expansionSetCode = "EMN";
+    public WhispersOfEmrakul(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{1}{B}");
 
         // Target opponent discards a card at random.
         this.getSpellAbility().addEffect(new ConditionalOneShotEffect(

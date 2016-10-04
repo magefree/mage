@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.invasion;
+package mage.cards.s;
 
 import java.util.UUID;
 import mage.MageInt;
@@ -36,8 +36,8 @@ import mage.abilities.costs.mana.ManaCostsImpl;
 import mage.abilities.effects.common.LoseLifeTargetEffect;
 import mage.abilities.effects.common.TapTargetEffect;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.constants.Zone;
 import mage.target.TargetPlayer;
 import mage.target.common.TargetCreaturePermanent;
@@ -49,9 +49,8 @@ import mage.target.common.TargetCreaturePermanent;
  */
 public class StormscapeApprentice extends CardImpl {
 
-    public StormscapeApprentice(UUID ownerId) {
-        super(ownerId, 75, "Stormscape Apprentice", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{U}");
-        this.expansionSetCode = "INV";
+    public StormscapeApprentice(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{U}");
         this.subtype.add("Human");
         this.subtype.add("Wizard");
         this.power = new MageInt(1);

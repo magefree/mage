@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.commander2014;
+package mage.cards.d;
 
 import java.util.UUID;
 import mage.MageInt;
@@ -34,8 +34,8 @@ import mage.abilities.common.EntersBattlefieldTriggeredAbility;
 import mage.abilities.effects.common.CopyTargetSpellEffect;
 import mage.abilities.keyword.FlashAbility;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.filter.FilterSpell;
 import mage.filter.predicate.Predicates;
 import mage.filter.predicate.mageobject.CardTypePredicate;
@@ -55,9 +55,8 @@ public class DualcasterMage extends CardImpl {
                 new CardTypePredicate(CardType.SORCERY)));
     }
 
-    public DualcasterMage(UUID ownerId) {
-        super(ownerId, 34, "Dualcaster Mage", Rarity.RARE, new CardType[]{CardType.CREATURE}, "{1}{R}{R}");
-        this.expansionSetCode = "C14";
+    public DualcasterMage(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{1}{R}{R}");
         this.subtype.add("Human");
         this.subtype.add("Wizard");
 

@@ -25,13 +25,13 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.starwars;
+package mage.cards.d;
 
 import java.util.UUID;
 import mage.abilities.effects.common.CreateTokenEffect;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.game.permanent.token.TrooperToken;
 
 /**
@@ -40,9 +40,8 @@ import mage.game.permanent.token.TrooperToken;
  */
 public class DeployTheTroops extends CardImpl {
 
-    public DeployTheTroops(UUID ownerId) {
-        super(ownerId, 8, "Deploy The Troops", Rarity.UNCOMMON, new CardType[]{CardType.INSTANT}, "{4}{W}");
-        this.expansionSetCode = "SWS";
+    public DeployTheTroops(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.INSTANT},"{4}{W}");
 
         // Create 3 1/1 white Trooper creature tokens.
         this.getSpellAbility().addEffect(new CreateTokenEffect(new TrooperToken(), 3));

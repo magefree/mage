@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.shardsofalara;
+package mage.cards.l;
 
 import java.util.UUID;
 
@@ -35,6 +35,7 @@ import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.effects.ReplacementEffectImpl;
 import mage.cards.Card;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.filter.common.FilterControlledPermanent;
 import mage.filter.predicate.other.OwnerIdPredicate;
 import mage.game.Game;
@@ -48,9 +49,8 @@ import mage.players.Player;
  */
 public class LichsMirror extends CardImpl {
 
-    public LichsMirror(UUID ownerId) {
-        super(ownerId, 210, "Lich's Mirror", Rarity.MYTHIC, new CardType[]{CardType.ARTIFACT}, "{5}");
-        this.expansionSetCode = "ALA";
+    public LichsMirror(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.ARTIFACT},"{5}");
 
         // If you would lose the game, instead shuffle your hand, your graveyard, and all permanents you own into your library, then draw seven cards and your life total becomes 20.
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new LichsMirrorEffect()));

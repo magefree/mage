@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.returntoravnica;
+package mage.cards.t;
 
 import java.util.UUID;
 import mage.ObjectColor;
@@ -34,10 +34,10 @@ import mage.abilities.common.AsEntersBattlefieldAbility;
 import mage.abilities.common.SpellCastControllerTriggeredAbility;
 import mage.abilities.effects.OneShotEffect;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.choices.ChoiceColor;
 import mage.constants.CardType;
 import mage.constants.Outcome;
-import mage.constants.Rarity;
 import mage.filter.FilterSpell;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
@@ -50,9 +50,8 @@ import mage.players.Player;
  */
 public class TabletOfTheGuilds extends CardImpl {
 
-    public TabletOfTheGuilds(UUID ownerId) {
-        super(ownerId, 235, "Tablet of the Guilds", Rarity.UNCOMMON, new CardType[]{CardType.ARTIFACT}, "{2}");
-        this.expansionSetCode = "RTR";
+    public TabletOfTheGuilds(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.ARTIFACT},"{2}");
 
         // As Tablet of the Guilds enters the battlefield, choose two colors.
         this.addAbility(new AsEntersBattlefieldAbility(new TabletOfTheGuildsEntersBattlefieldEffect()));

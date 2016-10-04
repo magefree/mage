@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.magic2011;
+package mage.cards.n;
 
 import java.util.UUID;
 import mage.abilities.Ability;
@@ -40,11 +40,11 @@ import mage.abilities.effects.common.continuous.GainAbilityAttachedEffect;
 import mage.abilities.keyword.EnchantAbility;
 import mage.cards.Card;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.AttachmentType;
 import mage.constants.CardType;
 import mage.constants.Duration;
 import mage.constants.Outcome;
-import mage.constants.Rarity;
 import mage.constants.TargetController;
 import mage.constants.Zone;
 import mage.filter.common.FilterCreaturePermanent;
@@ -67,9 +67,8 @@ public class NecroticPlague extends CardImpl {
         filter.add(new ControllerPredicate(TargetController.OPPONENT));
     }
 
-    public NecroticPlague(UUID ownerId) {
-        super(ownerId, 107, "Necrotic Plague", Rarity.RARE, new CardType[]{CardType.ENCHANTMENT}, "{2}{B}{B}");
-        this.expansionSetCode = "M11";
+    public NecroticPlague(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.ENCHANTMENT},"{2}{B}{B}");
 
         this.subtype.add("Aura");
 

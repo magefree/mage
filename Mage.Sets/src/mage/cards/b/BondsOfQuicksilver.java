@@ -26,12 +26,11 @@
  *  or implied, of BetaSteward_at_googlemail.com.
  */
 
-package mage.sets.scarsofmirrodin;
+package mage.cards.b;
 
 import java.util.UUID;
 
 import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.effects.common.AttachEffect;
@@ -39,6 +38,7 @@ import mage.abilities.effects.common.DontUntapInControllersUntapStepEnchantedEff
 import mage.abilities.keyword.EnchantAbility;
 import mage.abilities.keyword.FlashAbility;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.Outcome;
 import mage.constants.Zone;
 import mage.target.TargetPermanent;
@@ -50,9 +50,8 @@ import mage.target.common.TargetCreaturePermanent;
  */
 public class BondsOfQuicksilver extends CardImpl {
 
-    public BondsOfQuicksilver (UUID ownerId) {
-        super(ownerId, 29, "Bonds of Quicksilver", Rarity.COMMON, new CardType[]{CardType.ENCHANTMENT}, "{3}{U}");
-        this.expansionSetCode = "SOM";
+    public BondsOfQuicksilver (UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.ENCHANTMENT},"{3}{U}");
         this.subtype.add("Aura");
 
 

@@ -25,14 +25,14 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.shadowsoverinnistrad;
+package mage.cards.t;
 
 import java.util.UUID;
 import mage.abilities.common.SpellCastControllerTriggeredAbility;
 import mage.abilities.effects.keyword.InvestigateEffect;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.filter.FilterSpell;
 import mage.filter.predicate.Predicates;
 import mage.filter.predicate.mageobject.CardTypePredicate;
@@ -51,9 +51,8 @@ public class TrailOfEvidence extends CardImpl {
                 new CardTypePredicate(CardType.SORCERY)));
     }
 
-    public TrailOfEvidence(UUID ownerId) {
-        super(ownerId, 93, "Trail of Evidence", Rarity.UNCOMMON, new CardType[]{CardType.ENCHANTMENT}, "{2}{U}");
-        this.expansionSetCode = "SOI";
+    public TrailOfEvidence(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.ENCHANTMENT},"{2}{U}");
 
         // Whenever you cast an instant or sorcery spell, investigate.
         this.addAbility(new SpellCastControllerTriggeredAbility(new InvestigateEffect(), filter, false));

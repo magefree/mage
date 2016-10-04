@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.shadowsoverinnistrad;
+package mage.cards.a;
 
 import java.util.UUID;
 import mage.abilities.costs.mana.ManaCostsImpl;
@@ -34,8 +34,8 @@ import mage.abilities.effects.common.GainLifeEffect;
 import mage.abilities.effects.common.LoseLifeTargetEffect;
 import mage.abilities.keyword.MadnessAbility;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.target.common.TargetOpponent;
 
 /**
@@ -44,9 +44,8 @@ import mage.target.common.TargetOpponent;
  */
 public class AlmsOfTheVein extends CardImpl {
 
-    public AlmsOfTheVein(UUID ownerId) {
-        super(ownerId, 98, "Alms of the Vein", Rarity.COMMON, new CardType[]{CardType.SORCERY}, "{2}{B}");
-        this.expansionSetCode = "SOI";
+    public AlmsOfTheVein(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{2}{B}");
 
         // Target opponent loses 3 life and you gain 3 life.
         Effect effect = new LoseLifeTargetEffect(3);

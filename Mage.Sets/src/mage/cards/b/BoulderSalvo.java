@@ -25,14 +25,14 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.oathofthegatewatch;
+package mage.cards.b;
 
 import java.util.UUID;
 import mage.abilities.effects.common.DamageTargetEffect;
 import mage.abilities.keyword.SurgeAbility;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.target.common.TargetCreaturePermanent;
 
 /**
@@ -41,9 +41,8 @@ import mage.target.common.TargetCreaturePermanent;
  */
 public class BoulderSalvo extends CardImpl {
 
-    public BoulderSalvo(UUID ownerId) {
-        super(ownerId, 102, "Boulder Salvo", Rarity.COMMON, new CardType[]{CardType.SORCERY}, "{4}{R}");
-        this.expansionSetCode = "OGW";
+    public BoulderSalvo(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{4}{R}");
         
         // Boulder Salvo deals 4 damage to target creature.
         this.getSpellAbility().addEffect(new DamageTargetEffect(4));

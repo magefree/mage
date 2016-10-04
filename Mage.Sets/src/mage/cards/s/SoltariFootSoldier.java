@@ -25,14 +25,14 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.tempest;
+package mage.cards.s;
 
 import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.keyword.ShadowAbility;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.Rarity;
 
 /**
  *
@@ -40,9 +40,8 @@ import mage.constants.Rarity;
  */
 public class SoltariFootSoldier extends CardImpl {
 
-    public SoltariFootSoldier(UUID ownerId) {
-        super(ownerId, 255, "Soltari Foot Soldier", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{W}");
-        this.expansionSetCode = "TMP";
+    public SoltariFootSoldier(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{W}");
         this.subtype.add("Soltari");
         this.subtype.add("Soldier");
         this.power = new MageInt(1);

@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.magic2012;
+package mage.cards.w;
 
 import java.util.List;
 import java.util.UUID;
@@ -35,9 +35,9 @@ import mage.abilities.costs.mana.GenericManaCost;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.keyword.EquipAbility;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Outcome;
-import mage.constants.Rarity;
 import mage.constants.Zone;
 import mage.game.Game;
 import mage.game.events.DamagedPlayerEvent;
@@ -51,9 +51,8 @@ import mage.game.permanent.Permanent;
  */
 public class Worldslayer extends CardImpl {
 
-    public Worldslayer(UUID ownerId) {
-        super(ownerId, 222, "Worldslayer", Rarity.RARE, new CardType[]{CardType.ARTIFACT}, "{5}");
-        this.expansionSetCode = "M12";
+    public Worldslayer(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.ARTIFACT},"{5}");
         this.subtype.add("Equipment");
 
         // Whenever equipped creature deals combat damage to a player, destroy all permanents other than Worldslayer.

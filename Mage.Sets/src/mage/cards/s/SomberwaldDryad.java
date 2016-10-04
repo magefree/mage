@@ -25,14 +25,14 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.darkascension;
+package mage.cards.s;
 
 import java.util.UUID;
 import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.MageInt;
 import mage.abilities.keyword.ForestwalkAbility;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 
 /**
  *
@@ -40,9 +40,8 @@ import mage.cards.CardImpl;
  */
 public class SomberwaldDryad extends CardImpl {
 
-    public SomberwaldDryad(UUID ownerId) {
-        super(ownerId, 126, "Somberwald Dryad", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{1}{G}");
-        this.expansionSetCode = "DKA";
+    public SomberwaldDryad(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{1}{G}");
         this.subtype.add("Dryad");
 
         this.power = new MageInt(2);

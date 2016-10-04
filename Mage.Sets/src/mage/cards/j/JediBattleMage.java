@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.starwars;
+package mage.cards.j;
 
 import java.util.UUID;
 import mage.MageInt;
@@ -35,8 +35,8 @@ import mage.abilities.effects.common.DontUntapInControllersNextUntapStepTargetEf
 import mage.abilities.effects.common.TapTargetEffect;
 import mage.abilities.keyword.MeditateAbility;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.target.common.TargetOpponentsCreaturePermanent;
 
 /**
@@ -45,9 +45,8 @@ import mage.target.common.TargetOpponentsCreaturePermanent;
  */
 public class JediBattleMage extends CardImpl {
 
-    public JediBattleMage(UUID ownerId) {
-        super(ownerId, 42, "Jedi Battle Mage", Rarity.UNCOMMON, new CardType[]{CardType.CREATURE}, "{3}{U}");
-        this.expansionSetCode = "SWS";
+    public JediBattleMage(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{3}{U}");
         this.subtype.add("Human");
         this.subtype.add("Jedi");
         this.power = new MageInt(2);

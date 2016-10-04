@@ -25,15 +25,15 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.onslaught;
+package mage.cards.b;
 
 import java.util.UUID;
 import mage.Mana;
 import mage.abilities.dynamicvalue.common.PermanentsOnBattlefieldCount;
 import mage.abilities.effects.common.DynamicManaEffect;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.filter.FilterPermanent;
 import mage.filter.predicate.mageobject.SubtypePredicate;
 
@@ -49,9 +49,8 @@ public class BrightstoneRitual extends CardImpl {
         filter.add(new SubtypePredicate("Goblin"));
     }
 
-    public BrightstoneRitual(UUID ownerId) {
-        super(ownerId, 191, "Brightstone Ritual", Rarity.COMMON, new CardType[]{CardType.INSTANT}, "{R}");
-        this.expansionSetCode = "ONS";
+    public BrightstoneRitual(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.INSTANT},"{R}");
 
         // Add {R} to your mana pool for each Goblin on the battlefield.
         this.getSpellAbility().addEffect(new DynamicManaEffect(Mana.RedMana(1), new PermanentsOnBattlefieldCount(filter)));

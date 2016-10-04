@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.morningtide;
+package mage.cards.b;
 
 import java.util.HashSet;
 import java.util.Set;
@@ -37,9 +37,9 @@ import mage.abilities.effects.OneShotEffect;
 import mage.abilities.keyword.TrampleAbility;
 import mage.cards.Card;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Outcome;
-import mage.constants.Rarity;
 import mage.constants.Zone;
 import mage.filter.common.FilterCreatureCard;
 import mage.game.Game;
@@ -52,9 +52,8 @@ import mage.target.common.TargetCardInLibrary;
  */
 public class BoldwyrHeavyweights extends CardImpl {
 
-    public BoldwyrHeavyweights(UUID ownerId) {
-        super(ownerId, 85, "Boldwyr Heavyweights", Rarity.RARE, new CardType[]{CardType.CREATURE}, "{2}{R}{R}");
-        this.expansionSetCode = "MOR";
+    public BoldwyrHeavyweights(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{2}{R}{R}");
         this.subtype.add("Giant");
         this.subtype.add("Warrior");
         this.power = new MageInt(8);

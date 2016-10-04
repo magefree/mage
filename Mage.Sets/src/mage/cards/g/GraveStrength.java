@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.fatereforged;
+package mage.cards.g;
 
 import java.util.UUID;
 import mage.abilities.dynamicvalue.common.CardsInControllerGraveyardCount;
@@ -33,8 +33,8 @@ import mage.abilities.effects.Effect;
 import mage.abilities.effects.common.PutTopCardOfLibraryIntoGraveControllerEffect;
 import mage.abilities.effects.common.counter.AddCountersTargetEffect;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.counters.CounterType;
 import mage.filter.common.FilterCreatureCard;
 import mage.target.common.TargetCreaturePermanent;
@@ -45,9 +45,8 @@ import mage.target.common.TargetCreaturePermanent;
  */
 public class GraveStrength extends CardImpl {
 
-    public GraveStrength(UUID ownerId) {
-        super(ownerId, 71, "Grave Strength", Rarity.UNCOMMON, new CardType[]{CardType.SORCERY}, "{1}{B}");
-        this.expansionSetCode = "FRF";
+    public GraveStrength(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{1}{B}");
 
         // Choose target creature. Put the top three cards of your library into your graveyard, then put a +1/+1 counter on that creature for each creature card in your graveyard.
         this.getSpellAbility().addTarget(new TargetCreaturePermanent());

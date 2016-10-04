@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.vintagemasters;
+package mage.cards.d;
 
 import java.util.UUID;
 import mage.abilities.Ability;
@@ -39,9 +39,9 @@ import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.CreateTokenEffect;
 import mage.abilities.keyword.CyclingAbility;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Outcome;
-import mage.constants.Rarity;
 import mage.game.Game;
 import mage.game.permanent.token.AngelToken;
 import mage.game.permanent.token.SoldierToken;
@@ -54,9 +54,8 @@ import mage.players.Player;
  */
 public class DecreeOfJustice extends CardImpl {
 
-    public DecreeOfJustice(UUID ownerId) {
-        super(ownerId, 22, "Decree of Justice", Rarity.RARE, new CardType[]{CardType.SORCERY}, "{X}{X}{2}{W}{W}");
-        this.expansionSetCode = "VMA";
+    public DecreeOfJustice(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{X}{X}{2}{W}{W}");
 
 
         // Put X 4/4 white Angel creature tokens with flying onto the battlefield.

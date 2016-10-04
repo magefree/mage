@@ -25,14 +25,14 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.urzaslegacy;
+package mage.cards.f;
 
 import java.util.UUID;
 import mage.abilities.effects.common.DrawDiscardControllerEffect;
 import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.abilities.effects.common.UntapLandsEffect;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 
 /**
  *
@@ -40,9 +40,8 @@ import mage.cards.CardImpl;
  */
 public class FranticSearch extends CardImpl {
 
-    public FranticSearch(UUID ownerId) {
-        super(ownerId, 32, "Frantic Search", Rarity.COMMON, new CardType[]{CardType.INSTANT}, "{2}{U}");
-        this.expansionSetCode = "ULG";
+    public FranticSearch(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.INSTANT},"{2}{U}");
 
 
         // Draw two cards, then discard two cards. Untap up to three lands.

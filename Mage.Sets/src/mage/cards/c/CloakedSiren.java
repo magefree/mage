@@ -25,15 +25,15 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.journeyintonyx;
+package mage.cards.c;
 
 import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.keyword.FlashAbility;
 import mage.abilities.keyword.FlyingAbility;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.Rarity;
 
 /**
  *
@@ -41,9 +41,8 @@ import mage.constants.Rarity;
  */
 public class CloakedSiren extends CardImpl {
 
-    public CloakedSiren(UUID ownerId) {
-        super(ownerId, 32, "Cloaked Siren", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{3}{U}");
-        this.expansionSetCode = "JOU";
+    public CloakedSiren(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{3}{U}");
         this.subtype.add("Siren");
 
         this.power = new MageInt(3);

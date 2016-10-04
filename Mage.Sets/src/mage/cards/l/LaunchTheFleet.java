@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.journeyintonyx;
+package mage.cards.l;
 
 import java.util.UUID;
 import mage.abilities.abilityword.StriveAbility;
@@ -34,9 +34,9 @@ import mage.abilities.effects.Effect;
 import mage.abilities.effects.common.CreateTokenEffect;
 import mage.abilities.effects.common.continuous.GainAbilityTargetEffect;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Duration;
-import mage.constants.Rarity;
 import mage.game.permanent.token.SoldierToken;
 import mage.target.common.TargetCreaturePermanent;
 
@@ -46,9 +46,8 @@ import mage.target.common.TargetCreaturePermanent;
  */
 public class LaunchTheFleet extends CardImpl {
 
-    public LaunchTheFleet(UUID ownerId) {
-        super(ownerId, 15, "Launch the Fleet", Rarity.RARE, new CardType[]{CardType.SORCERY}, "{W}");
-        this.expansionSetCode = "JOU";
+    public LaunchTheFleet(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{W}");
 
 
         // Strive - Launch the Fleet costs 1 more to cast for each target beyond the first.

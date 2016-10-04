@@ -25,10 +25,9 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.riseoftheeldrazi;
+package mage.cards.b;
 
 import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.MageInt;
 import mage.abilities.Abilities;
 import mage.abilities.AbilitiesImpl;
@@ -37,6 +36,7 @@ import mage.abilities.costs.mana.ManaCostsImpl;
 import mage.abilities.keyword.LevelUpAbility;
 import mage.abilities.keyword.LevelerCardBuilder;
 import mage.abilities.keyword.TrampleAbility;
+import mage.cards.CardSetInfo;
 import mage.cards.LevelerCard;
 
 import java.util.UUID;
@@ -47,9 +47,8 @@ import java.util.UUID;
  */
 public class BeastbreakerOfBalaGed extends LevelerCard {
 
-    public BeastbreakerOfBalaGed(UUID ownerId) {
-        super(ownerId, 178, "Beastbreaker of Bala Ged", Rarity.UNCOMMON, new CardType[]{CardType.CREATURE}, "{1}{G}");
-        this.expansionSetCode = "ROE";
+    public BeastbreakerOfBalaGed(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{1}{G}");
         this.subtype.add("Human");
         this.subtype.add("Warrior");
 

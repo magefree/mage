@@ -25,14 +25,14 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.ravnica;
+package mage.cards.s;
 
 import java.util.UUID;
 import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.abilities.effects.common.DestroyTargetEffect;
 import mage.abilities.keyword.ConvokeAbility;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.filter.common.FilterArtifactOrEnchantmentPermanent;
 import mage.target.TargetPermanent;
 
@@ -42,9 +42,8 @@ import mage.target.TargetPermanent;
  */
 public class SunderingVitae extends CardImpl {
 
-    public SunderingVitae(UUID ownerId) {
-        super(ownerId, 185, "Sundering Vitae", Rarity.COMMON, new CardType[]{CardType.INSTANT}, "{2}{G}");
-        this.expansionSetCode = "RAV";
+    public SunderingVitae(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.INSTANT},"{2}{G}");
 
         // Convoke
         this.addAbility(new ConvokeAbility());

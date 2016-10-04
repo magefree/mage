@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.magic2014;
+package mage.cards.a;
 
 import java.util.UUID;
 import mage.abilities.Ability;
@@ -34,8 +34,8 @@ import mage.abilities.condition.Condition;
 import mage.abilities.condition.IntCompareCondition;
 import mage.abilities.effects.common.CreateTokenEffect;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.constants.TargetController;
 import mage.constants.Zone;
 import mage.game.Game;
@@ -48,9 +48,8 @@ import mage.watchers.common.PlayerGainedLifeWatcher;
  */
 public class AngelicAccord extends CardImpl {
 
-    public AngelicAccord(UUID ownerId) {
-        super(ownerId, 3, "Angelic Accord", Rarity.UNCOMMON, new CardType[]{CardType.ENCHANTMENT}, "{3}{W}");
-        this.expansionSetCode = "M14";
+    public AngelicAccord(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.ENCHANTMENT},"{3}{W}");
 
 
         // At the beginning of each end step, if you gained 4 or more life this turn, put a 4/4 white Angel creature token with flying onto the battlefield.

@@ -25,13 +25,13 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.kaladesh;
+package mage.cards.t;
 
 import java.util.UUID;
 import mage.MageInt;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.Rarity;
 
 /**
  *
@@ -39,9 +39,8 @@ import mage.constants.Rarity;
  */
 public class TerrorOfTheFairgrounds extends CardImpl {
 
-    public TerrorOfTheFairgrounds(UUID ownerId) {
-        super(ownerId, 137, "Terror of the Fairgrounds", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{3}{R}");
-        this.expansionSetCode = "KLD";
+    public TerrorOfTheFairgrounds(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{3}{R}");
         this.subtype.add("Gremlin");
         this.power = new MageInt(5);
         this.toughness = new MageInt(2);

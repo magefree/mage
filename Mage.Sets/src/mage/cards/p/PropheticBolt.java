@@ -25,15 +25,15 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.commander;
+package mage.cards.p;
 
 import java.util.UUID;
 import mage.abilities.dynamicvalue.common.StaticValue;
 import mage.abilities.effects.common.DamageTargetEffect;
 import mage.abilities.effects.common.LookLibraryAndPickControllerEffect;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.constants.Zone;
 import mage.filter.FilterCard;
 import mage.target.common.TargetCreatureOrPlayer;
@@ -44,9 +44,8 @@ import mage.target.common.TargetCreatureOrPlayer;
  */
 public class PropheticBolt extends CardImpl {
 
-    public PropheticBolt(UUID ownerId) {
-        super(ownerId, 219, "Prophetic Bolt", Rarity.RARE, new CardType[]{CardType.INSTANT}, "{3}{U}{R}");
-        this.expansionSetCode = "CMD";
+    public PropheticBolt(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.INSTANT},"{3}{U}{R}");
 
 
         // Prophetic Bolt deals 4 damage to target creature or player. Look at the top four cards of your library. Put one of those cards into your hand and the rest on the bottom of your library in any order.

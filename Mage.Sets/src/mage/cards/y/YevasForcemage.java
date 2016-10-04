@@ -25,17 +25,17 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.magic2013;
+package mage.cards.y;
 
 import java.util.UUID;
 import mage.constants.CardType;
 import mage.constants.Duration;
-import mage.constants.Rarity;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.EntersBattlefieldTriggeredAbility;
 import mage.abilities.effects.common.continuous.BoostTargetEffect;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.target.common.TargetCreaturePermanent;
 
 /**
@@ -44,9 +44,8 @@ import mage.target.common.TargetCreaturePermanent;
  */
 public class YevasForcemage extends CardImpl {
 
-    public YevasForcemage(UUID ownerId) {
-        super(ownerId, 198, "Yeva's Forcemage", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{2}{G}");
-        this.expansionSetCode = "M13";
+    public YevasForcemage(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{2}{G}");
         this.subtype.add("Elf");
         this.subtype.add("Shaman");
 

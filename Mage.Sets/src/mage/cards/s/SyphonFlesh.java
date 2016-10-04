@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.commander;
+package mage.cards.s;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -33,9 +33,9 @@ import java.util.UUID;
 import mage.abilities.Ability;
 import mage.abilities.effects.OneShotEffect;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Outcome;
-import mage.constants.Rarity;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.game.permanent.token.ZombieToken;
@@ -48,9 +48,8 @@ import mage.target.common.TargetControlledCreaturePermanent;
  */
 public class SyphonFlesh extends CardImpl {
 
-    public SyphonFlesh(UUID ownerId) {
-        super(ownerId, 103, "Syphon Flesh", Rarity.UNCOMMON, new CardType[]{CardType.SORCERY}, "{4}{B}");
-        this.expansionSetCode = "CMD";
+    public SyphonFlesh(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{4}{B}");
 
         // Each other player sacrifices a creature. You put a 2/2 black Zombie creature token onto the battlefield for each creature sacrificed this way.
         this.getSpellAbility().addEffect(new SyphonFleshEffect());

@@ -25,15 +25,15 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.jacevschandra;
+package mage.cards.s;
 
 import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.keyword.AffinityForLandTypeAbility;
 import mage.abilities.keyword.FlyingAbility;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.Rarity;
 
 /**
  *
@@ -41,9 +41,8 @@ import mage.constants.Rarity;
  */
 public class SpireGolem extends CardImpl {
 
-    public SpireGolem(UUID ownerId) {
-        super(ownerId, 16, "Spire Golem", Rarity.COMMON, new CardType[]{CardType.ARTIFACT, CardType.CREATURE}, "{6}");
-        this.expansionSetCode = "DD2";
+    public SpireGolem(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.ARTIFACT,CardType.CREATURE},"{6}");
         this.subtype.add("Golem");
 
         this.power = new MageInt(2);

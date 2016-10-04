@@ -25,10 +25,9 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.lorwyn;
+package mage.cards.b;
 
 import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.EntersBattlefieldTriggeredAbility;
@@ -39,6 +38,7 @@ import mage.abilities.effects.common.UntapSourceEffect;
 import mage.abilities.effects.common.continuous.GainAbilitySourceEffect;
 import mage.abilities.keyword.ShroudAbility;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.Duration;
 import mage.constants.Zone;
 import mage.filter.common.FilterControlledPermanent;
@@ -63,9 +63,8 @@ public class Benthicore extends CardImpl {
         filter.add(new SubtypePredicate("Merfolk"));
     }
 
-    public Benthicore(UUID ownerId) {
-        super(ownerId, 53, "Benthicore", Rarity.UNCOMMON, new CardType[]{CardType.CREATURE}, "{6}{U}");
-        this.expansionSetCode = "LRW";
+    public Benthicore(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{6}{U}");
         this.subtype.add("Elemental");
         this.power = new MageInt(5);
         this.toughness = new MageInt(5);

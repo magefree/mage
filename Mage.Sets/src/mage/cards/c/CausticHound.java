@@ -26,16 +26,16 @@
  *  or implied, of BetaSteward_at_googlemail.com.
  */
 
-package mage.sets.mirrodinbesieged;
+package mage.cards.c;
 
 import java.util.UUID;
 
 import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.MageInt;
 import mage.abilities.common.DiesTriggeredAbility;
 import mage.abilities.effects.common.LoseLifeAllPlayersEffect;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 
 /**
  *
@@ -43,9 +43,8 @@ import mage.cards.CardImpl;
  */
 public class CausticHound extends CardImpl {
 
-    public CausticHound (UUID ownerId) {
-        super(ownerId, 40, "Caustic Hound", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{5}{B}");
-        this.expansionSetCode = "MBS";
+    public CausticHound (UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{5}{B}");
         this.subtype.add("Hound");
 
         this.power = new MageInt(4);

@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.urzasdestiny;
+package mage.cards.o;
 
 import java.util.EnumSet;
 import java.util.HashSet;
@@ -37,12 +37,12 @@ import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.effects.ContinuousEffect;
 import mage.abilities.effects.ContinuousEffectImpl;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.DependencyType;
 import mage.constants.Duration;
 import mage.constants.Layer;
 import mage.constants.Outcome;
-import mage.constants.Rarity;
 import mage.constants.SubLayer;
 import mage.constants.Zone;
 import mage.filter.common.FilterEnchantmentPermanent;
@@ -58,9 +58,8 @@ import mage.game.permanent.Permanent;
  */
 public class Opalescence extends CardImpl {
 
-    public Opalescence(UUID ownerId) {
-        super(ownerId, 13, "Opalescence", Rarity.RARE, new CardType[]{CardType.ENCHANTMENT}, "{2}{W}{W}");
-        this.expansionSetCode = "UDS";
+    public Opalescence(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.ENCHANTMENT},"{2}{W}{W}");
 
         // Each other non-Aura enchantment is a creature with power and toughness each equal to its converted mana cost. It's still an enchantment.
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new OpalescenceEffect()));

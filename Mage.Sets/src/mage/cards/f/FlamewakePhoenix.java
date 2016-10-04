@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.fatereforged;
+package mage.cards.f;
 
 import java.util.UUID;
 import mage.MageInt;
@@ -39,8 +39,8 @@ import mage.abilities.effects.common.ReturnToBattlefieldUnderOwnerControlSourceE
 import mage.abilities.keyword.FlyingAbility;
 import mage.abilities.keyword.HasteAbility;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.constants.TargetController;
 import mage.constants.Zone;
 
@@ -50,9 +50,8 @@ import mage.constants.Zone;
  */
 public class FlamewakePhoenix extends CardImpl {
 
-    public FlamewakePhoenix(UUID ownerId) {
-        super(ownerId, 100, "Flamewake Phoenix", Rarity.RARE, new CardType[]{CardType.CREATURE}, "{1}{R}{R}");
-        this.expansionSetCode = "FRF";
+    public FlamewakePhoenix(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{1}{R}{R}");
         this.subtype.add("Phoenix");
         this.power = new MageInt(2);
         this.toughness = new MageInt(2);

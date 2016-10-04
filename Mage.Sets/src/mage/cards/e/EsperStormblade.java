@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.alarareborn;
+package mage.cards.e;
 
 import java.util.UUID;
 import mage.MageInt;
@@ -37,9 +37,9 @@ import mage.abilities.effects.common.continuous.BoostSourceEffect;
 import mage.abilities.effects.common.continuous.GainAbilitySourceEffect;
 import mage.abilities.keyword.FlyingAbility;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Duration;
-import mage.constants.Rarity;
 import mage.constants.Zone;
 import mage.filter.common.FilterControlledPermanent;
 import mage.filter.predicate.mageobject.MulticoloredPredicate;
@@ -58,9 +58,8 @@ public class EsperStormblade extends CardImpl {
         filter.add(new AnotherPredicate());
     }
 
-    public EsperStormblade(UUID ownerId) {
-        super(ownerId, 132, "Esper Stormblade", Rarity.COMMON, new CardType[]{CardType.ARTIFACT, CardType.CREATURE}, "{W/B}{U}");
-        this.expansionSetCode = "ARB";
+    public EsperStormblade(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.ARTIFACT,CardType.CREATURE},"{W/B}{U}");
         this.subtype.add("Vedalken");
         this.subtype.add("Wizard");
 

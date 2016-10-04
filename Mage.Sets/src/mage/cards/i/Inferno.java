@@ -25,13 +25,13 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.thedark;
+package mage.cards.i;
 
 import java.util.UUID;
 import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.abilities.effects.common.DamageEverythingEffect;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 
 /**
  *
@@ -39,9 +39,8 @@ import mage.cards.CardImpl;
  */
 public class Inferno extends CardImpl {
 
-    public Inferno(UUID ownerId) {
-        super(ownerId, 70, "Inferno", Rarity.RARE, new CardType[]{CardType.INSTANT}, "{5}{R}{R}");
-        this.expansionSetCode = "DRK";
+    public Inferno(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.INSTANT},"{5}{R}{R}");
 
 
         // Inferno deals 6 damage to each creature and each player.

@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.darksteel;
+package mage.cards.r;
 
 import java.util.UUID;
 import mage.abilities.Mode;
@@ -33,8 +33,8 @@ import mage.abilities.effects.common.DestroyTargetEffect;
 import mage.abilities.effects.common.search.SearchLibraryPutInPlayEffect;
 import mage.abilities.keyword.EntwineAbility;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.filter.common.FilterLandCard;
 import mage.target.common.TargetCardInLibrary;
 import mage.target.common.TargetLandPermanent;
@@ -45,9 +45,8 @@ import mage.target.common.TargetLandPermanent;
  */
 public class ReapAndSow extends CardImpl {
 
-    public ReapAndSow(UUID ownerId) {
-        super(ownerId, 81, "Reap and Sow", Rarity.COMMON, new CardType[]{CardType.SORCERY}, "{3}{G}");
-        this.expansionSetCode = "DST";
+    public ReapAndSow(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{3}{G}");
 
 
         // Choose one - 

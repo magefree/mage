@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.magic2015;
+package mage.cards.s;
 
 import java.util.UUID;
 import mage.MageInt;
@@ -35,9 +35,9 @@ import mage.abilities.common.SimpleEvasionAbility;
 import mage.abilities.effects.common.DamageTargetEffect;
 import mage.abilities.effects.common.combat.CantBeBlockedByCreaturesSourceEffect;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Duration;
-import mage.constants.Rarity;
 import mage.filter.Filter;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.filter.predicate.mageobject.PowerPredicate;
@@ -55,10 +55,9 @@ public class ScuttlingDoomEngine extends CardImpl {
         filter.add(new PowerPredicate(Filter.ComparisonType.LessThan, 3));
     }
 
-    public ScuttlingDoomEngine(UUID ownerId) {
+    public ScuttlingDoomEngine(UUID ownerId, CardSetInfo setInfo) {
 
-        super(ownerId, 229, "Scuttling Doom Engine", Rarity.RARE, new CardType[]{CardType.ARTIFACT, CardType.CREATURE}, "{6}");
-        this.expansionSetCode = "M15";
+        super(ownerId,setInfo,new CardType[]{CardType.ARTIFACT,CardType.CREATURE},"{6}");
         this.subtype.add("Construct");
 
         this.power = new MageInt(6);

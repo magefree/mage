@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.betrayersofkamigawa;
+package mage.cards.g;
 
 import java.util.UUID;
 import mage.MageInt;
@@ -39,10 +39,10 @@ import mage.abilities.effects.common.continuous.BecomesCreatureAttachedEffect;
 import mage.abilities.keyword.EnchantAbility;
 import mage.abilities.keyword.TrampleAbility;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Duration;
 import mage.constants.Outcome;
-import mage.constants.Rarity;
 import mage.constants.Zone;
 import mage.filter.common.FilterLandPermanent;
 import mage.game.permanent.token.Token;
@@ -57,9 +57,8 @@ public class GenjuOfTheRealm extends CardImpl {
 
     private static final FilterLandPermanent FILTER = new FilterLandPermanent();
 
-    public GenjuOfTheRealm(UUID ownerId) {
-        super(ownerId, 151, "Genju of the Realm", Rarity.RARE, new CardType[]{CardType.ENCHANTMENT}, "{W}{U}{B}{R}{G}");
-        this.expansionSetCode = "BOK";
+    public GenjuOfTheRealm(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.ENCHANTMENT},"{W}{U}{B}{R}{G}");
         this.subtype.add("Aura");
         this.supertype.add("Legendary");
 

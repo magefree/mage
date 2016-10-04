@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.ravnica;
+package mage.cards.c;
 
 import java.util.UUID;
 import mage.abilities.Ability;
@@ -41,10 +41,10 @@ import mage.abilities.keyword.ProtectionAbility;
 import mage.abilities.keyword.TrampleAbility;
 import mage.abilities.keyword.VigilanceAbility;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Duration;
 import mage.constants.Outcome;
-import mage.constants.Rarity;
 import mage.constants.TargetController;
 import mage.filter.common.FilterControlledCreaturePermanent;
 import mage.filter.predicate.mageobject.AbilityPredicate;
@@ -57,9 +57,8 @@ import mage.game.permanent.Permanent;
  */
 public class ConcertedEffort extends CardImpl {
 
-    public ConcertedEffort(UUID ownerId) {
-        super(ownerId, 8, "Concerted Effort", Rarity.RARE, new CardType[]{CardType.ENCHANTMENT}, "{2}{W}{W}");
-        this.expansionSetCode = "RAV";
+    public ConcertedEffort(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.ENCHANTMENT},"{2}{W}{W}");
 
         // At the beginning of each upkeep, creatures you control gain flying until end of turn if a creature you control has flying. The same is true for fear, first strike, double strike, landwalk, protection, trample, and vigilance.
         this.addAbility(new BeginningOfUpkeepTriggeredAbility(new ConcertedEffortEffect(), TargetController.ANY, false));

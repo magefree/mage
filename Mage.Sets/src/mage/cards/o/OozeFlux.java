@@ -25,12 +25,11 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.gatecrash;
+package mage.cards.o;
 
 import java.util.UUID;
 import mage.constants.CardType;
 import mage.constants.Outcome;
-import mage.constants.Rarity;
 import mage.constants.Zone;
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleActivatedAbility;
@@ -39,6 +38,7 @@ import mage.abilities.costs.common.RemoveVariableCountersTargetCost;
 import mage.abilities.costs.mana.ManaCostsImpl;
 import mage.abilities.effects.OneShotEffect;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.counters.CounterType;
 import mage.filter.common.FilterControlledCreaturePermanent;
 import mage.game.Game;
@@ -51,9 +51,8 @@ import mage.game.permanent.token.Token;
  */
 public class OozeFlux extends CardImpl {
 
-    public OozeFlux(UUID ownerId) {
-        super(ownerId, 128, "Ooze Flux", Rarity.RARE, new CardType[]{CardType.ENCHANTMENT}, "{3}{G}");
-        this.expansionSetCode = "GTC";
+    public OozeFlux(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.ENCHANTMENT},"{3}{G}");
 
         // {1}{G}, Remove one or more +1/+1 counters from among creatures you control: Put an X/X green Ooze creature token onto the battlefield, where X is the number of +1/+1 counters removed this way.
         Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new OozeFluxCreateTokenEffect(new OozeToken()),new ManaCostsImpl("{1}{G}"));

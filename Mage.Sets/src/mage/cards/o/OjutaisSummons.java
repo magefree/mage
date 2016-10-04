@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.dragonsoftarkir;
+package mage.cards.o;
 
 import java.util.UUID;
 import mage.MageInt;
@@ -33,8 +33,8 @@ import mage.abilities.effects.common.CreateTokenEffect;
 import mage.abilities.keyword.FlyingAbility;
 import mage.abilities.keyword.ReboundAbility;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.game.permanent.token.Token;
 
 /**
@@ -43,9 +43,8 @@ import mage.game.permanent.token.Token;
  */
 public class OjutaisSummons extends CardImpl {
 
-    public OjutaisSummons(UUID ownerId) {
-        super(ownerId, 68, "Ojutai's Summons", Rarity.COMMON, new CardType[]{CardType.SORCERY}, "{3}{U}{U}");
-        this.expansionSetCode = "DTK";
+    public OjutaisSummons(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{3}{U}{U}");
 
         // Put a 2/2 blue Djinn Monk creature token with flying onto the battlefield.
         this.getSpellAbility().addEffect(new CreateTokenEffect(new DjinnMonkToken()));

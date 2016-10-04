@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.futuresight;
+package mage.cards.w;
 
 import java.util.UUID;
 import mage.abilities.Ability;
@@ -36,8 +36,8 @@ import mage.abilities.dynamicvalue.common.ManacostVariableValue;
 import mage.abilities.effects.common.PutLibraryIntoGraveTargetEffect;
 import mage.abilities.keyword.MorphAbility;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.constants.Zone;
 import mage.target.TargetPlayer;
 
@@ -47,9 +47,8 @@ import mage.target.TargetPlayer;
  */
 public class Whetwheel extends CardImpl {
 
-    public Whetwheel(UUID ownerId) {
-        super(ownerId, 168, "Whetwheel", Rarity.RARE, new CardType[]{CardType.ARTIFACT}, "{4}");
-        this.expansionSetCode = "FUT";
+    public Whetwheel(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.ARTIFACT},"{4}");
 
         // {X}{X}, {tap}: Target player puts the top X cards of his or her library into his or her graveyard.
         Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new PutLibraryIntoGraveTargetEffect(

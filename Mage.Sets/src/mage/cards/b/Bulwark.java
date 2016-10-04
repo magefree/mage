@@ -25,17 +25,17 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.urzassaga;
+package mage.cards.b;
 
 import java.util.UUID;
 
 import mage.constants.CardType;
 import mage.constants.Outcome;
-import mage.constants.Rarity;
 import mage.abilities.Ability;
 import mage.abilities.common.BeginningOfUpkeepTriggeredAbility;
 import mage.abilities.effects.OneShotEffect;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.TargetController;
 import mage.game.Game;
 import mage.players.Player;
@@ -47,9 +47,8 @@ import mage.target.common.TargetOpponent;
  */
 public class Bulwark extends CardImpl {
 
-    public Bulwark(UUID ownerId) {
-        super(ownerId, 178, "Bulwark", Rarity.RARE, new CardType[]{CardType.ENCHANTMENT}, "{3}{R}{R}");
-        this.expansionSetCode = "USG";
+    public Bulwark(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.ENCHANTMENT},"{3}{R}{R}");
 
 		
         // At the beginning of your upkeep, Bulwark deals X damage to target opponent, where X is

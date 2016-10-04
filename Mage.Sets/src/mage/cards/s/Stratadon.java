@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.planeshift;
+package mage.cards.s;
 
 import java.util.UUID;
 import mage.MageInt;
@@ -35,11 +35,11 @@ import mage.abilities.dynamicvalue.common.DomainValue;
 import mage.abilities.effects.common.cost.CostModificationEffectImpl;
 import mage.abilities.keyword.TrampleAbility;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.CostModificationType;
 import mage.constants.Duration;
 import mage.constants.Outcome;
-import mage.constants.Rarity;
 import mage.constants.Zone;
 import mage.game.Game;
 import mage.util.CardUtil;
@@ -50,9 +50,8 @@ import mage.util.CardUtil;
  */
 public class Stratadon extends CardImpl {
 
-    public Stratadon(UUID ownerId) {
-        super(ownerId, 135, "Stratadon", Rarity.UNCOMMON, new CardType[]{CardType.ARTIFACT, CardType.CREATURE}, "{10}");
-        this.expansionSetCode = "PLS";
+    public Stratadon(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.ARTIFACT,CardType.CREATURE},"{10}");
         this.subtype.add("Beast");
         this.power = new MageInt(5);
         this.toughness = new MageInt(5);

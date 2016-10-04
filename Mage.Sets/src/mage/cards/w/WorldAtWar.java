@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.riseoftheeldrazi;
+package mage.cards.w;
 
 import java.util.Set;
 import java.util.UUID;
@@ -34,9 +34,9 @@ import mage.abilities.DelayedTriggeredAbility;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.keyword.ReboundAbility;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Outcome;
-import mage.constants.Rarity;
 import mage.constants.TurnPhase;
 import mage.game.Game;
 import mage.game.events.GameEvent;
@@ -51,9 +51,8 @@ import mage.watchers.common.AttackedThisTurnWatcher;
  */
 public class WorldAtWar extends CardImpl {
 
-    public WorldAtWar(UUID ownerId) {
-        super(ownerId, 172, "World at War", Rarity.RARE, new CardType[]{CardType.SORCERY}, "{3}{R}{R}");
-        this.expansionSetCode = "ROE";
+    public WorldAtWar(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{3}{R}{R}");
 
         // After the first postcombat main phase this turn, there's an additional combat phase followed by an additional main phase. At the beginning of that combat, untap all creatures that attacked this turn.
         this.getSpellAbility().addEffect(new WorldAtWarEffect());

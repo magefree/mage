@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.saviorsofkamigawa;
+package mage.cards.s;
 
 import java.util.UUID;
 import mage.MageInt;
@@ -35,9 +35,9 @@ import mage.abilities.effects.common.combat.CantBlockSourceEffect;
 import mage.abilities.effects.common.combat.CantBlockTargetEffect;
 import mage.abilities.keyword.ChannelAbility;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Duration;
-import mage.constants.Rarity;
 import mage.constants.Zone;
 import mage.target.common.TargetCreaturePermanent;
 
@@ -47,9 +47,8 @@ import mage.target.common.TargetCreaturePermanent;
  */
 public class ShinenOfFearsChill extends CardImpl {
 
-    public ShinenOfFearsChill(UUID ownerId) {
-        super(ownerId, 88, "Shinen of Fear's Chill", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{4}{B}");
-        this.expansionSetCode = "SOK";
+    public ShinenOfFearsChill(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{4}{B}");
         this.subtype.add("Spirit");
 
         this.power = new MageInt(3);

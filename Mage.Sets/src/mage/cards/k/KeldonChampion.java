@@ -25,11 +25,10 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.planechase;
+package mage.cards.k;
 
 import java.util.UUID;
 import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.EntersBattlefieldTriggeredAbility;
@@ -37,6 +36,7 @@ import mage.abilities.effects.common.DamageTargetEffect;
 import mage.abilities.keyword.EchoAbility;
 import mage.abilities.keyword.HasteAbility;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.target.TargetPlayer;
 
 /**
@@ -45,9 +45,8 @@ import mage.target.TargetPlayer;
  */
 public class KeldonChampion extends CardImpl {
 
-    public KeldonChampion(UUID ownerId) {
-        super(ownerId, 58, "Keldon Champion", Rarity.UNCOMMON, new CardType[]{CardType.CREATURE}, "{2}{R}{R}");
-        this.expansionSetCode = "HOP";
+    public KeldonChampion(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{2}{R}{R}");
         this.subtype.add("Human");
         this.subtype.add("Barbarian");
 

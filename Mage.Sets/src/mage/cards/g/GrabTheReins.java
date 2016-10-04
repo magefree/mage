@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.mirrodin;
+package mage.cards.g;
 
 import java.util.UUID;
 import mage.abilities.Ability;
@@ -37,10 +37,10 @@ import mage.abilities.effects.common.continuous.GainControlTargetEffect;
 import mage.abilities.keyword.EntwineAbility;
 import mage.abilities.keyword.HasteAbility;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Duration;
 import mage.constants.Outcome;
-import mage.constants.Rarity;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.players.Player;
@@ -55,9 +55,8 @@ import mage.target.common.TargetCreaturePermanent;
  */
 public class GrabTheReins extends CardImpl {
 
-    public GrabTheReins(UUID ownerId) {
-        super(ownerId, 95, "Grab the Reins", Rarity.UNCOMMON, new CardType[]{CardType.INSTANT}, "{3}{R}");
-        this.expansionSetCode = "MRD";
+    public GrabTheReins(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.INSTANT},"{3}{R}");
 
         // Choose one -
         this.getSpellAbility().getModes().setMinModes(1);

@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.khansoftarkir;
+package mage.cards.u;
 
 import java.util.UUID;
 import mage.MageObject;
@@ -34,10 +34,10 @@ import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.effects.ReplacementEffectImpl;
 import mage.abilities.effects.common.turn.AddExtraTurnControllerEffect;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Duration;
 import mage.constants.Outcome;
-import mage.constants.Rarity;
 import mage.constants.Zone;
 import mage.game.Game;
 import mage.game.events.GameEvent;
@@ -52,9 +52,8 @@ import mage.players.Player;
  */
 public class UginsNexus extends CardImpl {
 
-    public UginsNexus(UUID ownerId) {
-        super(ownerId, 227, "Ugin's Nexus", Rarity.MYTHIC, new CardType[]{CardType.ARTIFACT}, "{5}");
-        this.expansionSetCode = "KTK";
+    public UginsNexus(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.ARTIFACT},"{5}");
         this.supertype.add("Legendary");
 
         // If a player would begin an extra turn, that player skips that turn instead.

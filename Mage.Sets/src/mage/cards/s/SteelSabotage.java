@@ -25,15 +25,15 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.mirrodinbesieged;
+package mage.cards.s;
 
 import java.util.UUID;
 import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.abilities.Mode;
 import mage.abilities.effects.common.CounterTargetEffect;
 import mage.abilities.effects.common.ReturnToHandTargetEffect;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.target.TargetSpell;
 import mage.target.common.TargetArtifactPermanent;
 import mage.filter.common.FilterArtifactSpell;
@@ -43,9 +43,8 @@ import mage.filter.common.FilterArtifactSpell;
  * @author North
  */
 public class SteelSabotage extends CardImpl {
-    public SteelSabotage(UUID ownerId) {
-        super(ownerId, 33, "Steel Sabotage", Rarity.COMMON, new CardType[]{CardType.INSTANT}, "{U}");
-        this.expansionSetCode = "MBS";
+    public SteelSabotage(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.INSTANT},"{U}");
 
         // Choose one - Counter target artifact spell; or return target artifact to its owner's hand.
         this.getSpellAbility().addEffect(new CounterTargetEffect());

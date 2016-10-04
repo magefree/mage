@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.ravnica;
+package mage.cards.c;
 
 import java.util.UUID;
 import mage.abilities.Ability;
@@ -33,9 +33,9 @@ import mage.abilities.effects.OneShotEffect;
 import mage.abilities.keyword.ConvokeAbility;
 import mage.cards.Card;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Outcome;
-import mage.constants.Rarity;
 import mage.constants.Zone;
 import mage.filter.Filter;
 import mage.filter.FilterCard;
@@ -51,9 +51,8 @@ import mage.target.common.TargetCardInLibrary;
  */
 public class ChordOfCalling extends CardImpl {
 
-    public ChordOfCalling(UUID ownerId) {
-        super(ownerId, 156, "Chord of Calling", Rarity.RARE, new CardType[]{CardType.INSTANT}, "{X}{G}{G}{G}");
-        this.expansionSetCode = "RAV";
+    public ChordOfCalling(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.INSTANT},"{X}{G}{G}{G}");
 
         // Convoke (Your creatures can help cast this spell. Each creature you tap while casting this spell pays for {1} or one mana of that creature's color.)
         this.addAbility(new ConvokeAbility());

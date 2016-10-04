@@ -25,15 +25,15 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.betrayersofkamigawa;
+package mage.cards.d;
 
 import java.util.UUID;
 
 import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.effects.common.continuous.BoostControlledEffect;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.Duration;
 import mage.constants.Zone;
 import mage.filter.common.FilterCreaturePermanent;
@@ -51,9 +51,8 @@ public class DayOfDestiny extends CardImpl {
         filter.add(new SupertypePredicate("Legendary"));
     }
 
-    public DayOfDestiny(UUID ownerId) {
-        super(ownerId, 1, "Day of Destiny", Rarity.RARE, new CardType[]{CardType.ENCHANTMENT}, "{3}{W}");
-        this.expansionSetCode = "BOK";
+    public DayOfDestiny(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.ENCHANTMENT},"{3}{W}");
         this.supertype.add("Legendary");
 
         // Legendary creatures you control get +2/+2.

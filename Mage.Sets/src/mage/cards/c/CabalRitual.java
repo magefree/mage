@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.torment;
+package mage.cards.c;
 
 import java.util.UUID;
 import mage.Mana;
@@ -33,8 +33,8 @@ import mage.abilities.condition.common.CardsInControllerGraveCondition;
 import mage.abilities.decorator.ConditionalManaEffect;
 import mage.abilities.effects.common.BasicManaEffect;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.Rarity;
 
 /**
  *
@@ -42,9 +42,8 @@ import mage.constants.Rarity;
  */
 public class CabalRitual extends CardImpl {
 
-    public CabalRitual(UUID ownerId) {
-        super(ownerId, 51, "Cabal Ritual", Rarity.COMMON, new CardType[]{CardType.INSTANT}, "{1}{B}");
-        this.expansionSetCode = "TOR";
+    public CabalRitual(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.INSTANT},"{1}{B}");
 
 
         // Add {B}{B}{B} to your mana pool.

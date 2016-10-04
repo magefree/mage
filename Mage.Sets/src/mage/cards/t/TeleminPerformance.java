@@ -25,17 +25,17 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.conflux;
+package mage.cards.t;
 
 import java.util.UUID;
 import mage.abilities.Ability;
 import mage.abilities.effects.OneShotEffect;
 import mage.cards.Card;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.cards.CardsImpl;
 import mage.constants.CardType;
 import mage.constants.Outcome;
-import mage.constants.Rarity;
 import mage.constants.Zone;
 import mage.game.Game;
 import mage.players.Player;
@@ -47,9 +47,8 @@ import mage.target.common.TargetOpponent;
  */
 public class TeleminPerformance extends CardImpl {
 
-    public TeleminPerformance(UUID ownerId) {
-        super(ownerId, 35, "Telemin Performance", Rarity.RARE, new CardType[]{CardType.SORCERY}, "{3}{U}{U}");
-        this.expansionSetCode = "CON";
+    public TeleminPerformance(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{3}{U}{U}");
 
 
         // Target opponent reveals cards from the top of his or her library until he or she reveals a creature card. That player puts all noncreature cards revealed this way into his or her graveyard, then you put the creature card onto the battlefield under your control.

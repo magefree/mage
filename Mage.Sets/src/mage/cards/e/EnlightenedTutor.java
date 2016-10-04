@@ -25,13 +25,13 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.mirage;
+package mage.cards.e;
 
 import java.util.UUID;
 import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.abilities.effects.common.search.SearchLibraryPutOnLibraryEffect;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.filter.FilterCard;
 import mage.filter.predicate.Predicates;
 import mage.filter.predicate.mageobject.CardTypePredicate;
@@ -50,9 +50,8 @@ public class EnlightenedTutor extends CardImpl {
                 new CardTypePredicate(CardType.ENCHANTMENT)));
     }
     
-    public EnlightenedTutor(UUID ownerId) {
-        super(ownerId, 218, "Enlightened Tutor", Rarity.UNCOMMON, new CardType[]{CardType.INSTANT}, "{W}");
-        this.expansionSetCode = "MIR";
+    public EnlightenedTutor(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.INSTANT},"{W}");
 
 
         // Search your library for an artifact or enchantment card and reveal that card. Shuffle your library, then put the card on top of it.

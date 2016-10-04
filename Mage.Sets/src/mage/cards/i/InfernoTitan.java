@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.magic2011;
+package mage.cards.i;
 
 import java.util.UUID;
 import mage.MageInt;
@@ -35,9 +35,9 @@ import mage.abilities.costs.mana.ManaCostsImpl;
 import mage.abilities.effects.common.DamageMultiEffect;
 import mage.abilities.effects.common.continuous.BoostSourceEffect;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Duration;
-import mage.constants.Rarity;
 import mage.constants.Zone;
 import mage.game.Game;
 import mage.game.events.GameEvent;
@@ -50,9 +50,8 @@ import mage.target.common.TargetCreatureOrPlayerAmount;
  */
 public class InfernoTitan extends CardImpl {
 
-    public InfernoTitan(UUID ownerId) {
-        super(ownerId, 146, "Inferno Titan", Rarity.MYTHIC, new CardType[]{CardType.CREATURE}, "{4}{R}{R}");
-        this.expansionSetCode = "M11";
+    public InfernoTitan(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{4}{R}{R}");
         this.subtype.add("Giant");
 
         this.power = new MageInt(6);

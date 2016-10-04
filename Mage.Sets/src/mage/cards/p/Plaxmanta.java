@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.dissension;
+package mage.cards.p;
 
 import java.util.UUID;
 import mage.MageInt;
@@ -36,10 +36,10 @@ import mage.abilities.effects.common.continuous.GainAbilityControlledEffect;
 import mage.abilities.keyword.FlashAbility;
 import mage.abilities.keyword.ShroudAbility;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.ColoredManaSymbol;
 import mage.constants.Duration;
-import mage.constants.Rarity;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.watchers.common.ManaSpentToCastWatcher;
 
@@ -49,9 +49,8 @@ import mage.watchers.common.ManaSpentToCastWatcher;
  */
 public class Plaxmanta extends CardImpl {
 
-    public Plaxmanta(UUID ownerId) {
-        super(ownerId, 29, "Plaxmanta", Rarity.UNCOMMON, new CardType[]{CardType.CREATURE}, "{1}{U}");
-        this.expansionSetCode = "DIS";
+    public Plaxmanta(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{1}{U}");
         this.subtype.add("Beast");
         this.power = new MageInt(2);
         this.toughness = new MageInt(2);

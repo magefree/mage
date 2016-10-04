@@ -25,12 +25,11 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.shadowmoor;
+package mage.cards.p;
 
 import java.util.UUID;
 import mage.constants.CardType;
 import mage.constants.Duration;
-import mage.constants.Rarity;
 import mage.constants.Zone;
 import mage.MageInt;
 import mage.abilities.common.SimpleActivatedAbility;
@@ -38,6 +37,7 @@ import mage.abilities.costs.mana.ManaCostsImpl;
 import mage.abilities.effects.common.continuous.BoostSourceEffect;
 import mage.abilities.keyword.HasteAbility;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 
 /**
  *
@@ -45,9 +45,8 @@ import mage.cards.CardImpl;
  */
 public class PyreCharger extends CardImpl {
 
-    public PyreCharger(UUID ownerId) {
-        super(ownerId, 103, "Pyre Charger", Rarity.UNCOMMON, new CardType[]{CardType.CREATURE}, "{R}{R}");
-        this.expansionSetCode = "SHM";
+    public PyreCharger(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{R}{R}");
         this.subtype.add("Elemental");
         this.subtype.add("Warrior");
 

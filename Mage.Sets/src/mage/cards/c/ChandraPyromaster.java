@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.magic2014;
+package mage.cards.c;
 
 import java.util.HashSet;
 import java.util.Set;
@@ -40,13 +40,13 @@ import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.combat.CantBlockTargetEffect;
 import mage.cards.Card;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.cards.Cards;
 import mage.cards.CardsImpl;
 import mage.constants.AsThoughEffectType;
 import mage.constants.CardType;
 import mage.constants.Duration;
 import mage.constants.Outcome;
-import mage.constants.Rarity;
 import mage.constants.Zone;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.filter.common.FilterInstantOrSorceryCard;
@@ -67,9 +67,8 @@ import mage.target.targetpointer.FixedTarget;
  */
 public class ChandraPyromaster extends CardImpl {
 
-    public ChandraPyromaster(UUID ownerId) {
-        super(ownerId, 132, "Chandra, Pyromaster", Rarity.MYTHIC, new CardType[]{CardType.PLANESWALKER}, "{2}{R}{R}");
-        this.expansionSetCode = "M14";
+    public ChandraPyromaster(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.PLANESWALKER},"{2}{R}{R}");
         this.subtype.add("Chandra");
 
         this.addAbility(new PlanswalkerEntersWithLoyalityCountersAbility(4));

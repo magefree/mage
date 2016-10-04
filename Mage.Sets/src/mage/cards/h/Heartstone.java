@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.stronghold;
+package mage.cards.h;
 
 import java.util.UUID;
 import mage.Mana;
@@ -34,12 +34,12 @@ import mage.abilities.ActivatedAbility;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.effects.common.cost.CostModificationEffectImpl;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.AbilityType;
 import mage.constants.CardType;
 import mage.constants.CostModificationType;
 import mage.constants.Duration;
 import mage.constants.Outcome;
-import mage.constants.Rarity;
 import mage.constants.Zone;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.game.Game;
@@ -53,9 +53,8 @@ import mage.util.CardUtil;
  */
 public class Heartstone extends CardImpl {
 
-    public Heartstone(UUID ownerId) {
-        super(ownerId, 128, "Heartstone", Rarity.UNCOMMON, new CardType[]{CardType.ARTIFACT}, "{3}");
-        this.expansionSetCode = "STH";
+    public Heartstone(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.ARTIFACT},"{3}");
 
         // Activated abilities of creatures cost {1} less to activate. This effect can't reduce the amount of mana an ability costs to activate to less than one mana.
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new HeartstoneEffect()));

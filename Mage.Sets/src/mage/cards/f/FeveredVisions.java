@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.shadowsoverinnistrad;
+package mage.cards.f;
 
 import java.util.Set;
 import java.util.UUID;
@@ -33,9 +33,9 @@ import mage.abilities.Ability;
 import mage.abilities.common.BeginningOfEndStepTriggeredAbility;
 import mage.abilities.effects.OneShotEffect;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Outcome;
-import mage.constants.Rarity;
 import mage.constants.TargetController;
 import mage.game.Game;
 import mage.players.Player;
@@ -46,9 +46,8 @@ import mage.players.Player;
  */
 public class FeveredVisions extends CardImpl {
 
-    public FeveredVisions(UUID ownerId) {
-        super(ownerId, 244, "Fevered Visions", Rarity.RARE, new CardType[]{CardType.ENCHANTMENT}, "{1}{U}{R}");
-        this.expansionSetCode = "SOI";
+    public FeveredVisions(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.ENCHANTMENT},"{1}{U}{R}");
 
         // At the beginning of each player's end step, that player draws a card. If the player is your opponent and has four or more cards in hand,
         // Fevered Visions deals 2 damage to him or her.

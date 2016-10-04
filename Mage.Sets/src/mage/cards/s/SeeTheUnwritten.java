@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.khansoftarkir;
+package mage.cards.s;
 
 import java.util.UUID;
 import mage.MageObject;
@@ -36,11 +36,11 @@ import mage.abilities.decorator.ConditionalOneShotEffect;
 import mage.abilities.effects.OneShotEffect;
 import mage.cards.Card;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.cards.Cards;
 import mage.cards.CardsImpl;
 import mage.constants.CardType;
 import mage.constants.Outcome;
-import mage.constants.Rarity;
 import mage.constants.Zone;
 import mage.filter.common.FilterCreatureCard;
 import mage.game.Game;
@@ -53,9 +53,8 @@ import mage.target.TargetCard;
  */
 public class SeeTheUnwritten extends CardImpl {
 
-    public SeeTheUnwritten(UUID ownerId) {
-        super(ownerId, 149, "See the Unwritten", Rarity.MYTHIC, new CardType[]{CardType.SORCERY}, "{4}{G}{G}");
-        this.expansionSetCode = "KTK";
+    public SeeTheUnwritten(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{4}{G}{G}");
 
         // Reveal the top eight cards of your library. You may put a creature card from among them onto the battlefield. Put the rest into your graveyard.
         // <i>Ferocious</i> - If you control a creature with power 4 or greater, you may put two creature cards onto the battlefield instead of one.

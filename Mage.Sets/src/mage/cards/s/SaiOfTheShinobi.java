@@ -25,12 +25,11 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.planechase2012;
+package mage.cards.s;
 
 import java.util.UUID;
 import mage.constants.CardType;
 import mage.constants.Outcome;
-import mage.constants.Rarity;
 import mage.constants.TargetController;
 import mage.constants.Zone;
 import mage.abilities.common.EntersBattlefieldAllTriggeredAbility;
@@ -40,6 +39,7 @@ import mage.abilities.effects.common.AttachEffect;
 import mage.abilities.effects.common.continuous.BoostEquippedEffect;
 import mage.abilities.keyword.EquipAbility;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.SetTargetPointer;
 import mage.filter.FilterPermanent;
 import mage.filter.common.FilterCreaturePermanent;
@@ -56,9 +56,8 @@ public class SaiOfTheShinobi extends CardImpl {
         filter.add(new ControllerPredicate(TargetController.YOU));
     }
 
-    public SaiOfTheShinobi(UUID ownerId) {
-        super(ownerId, 113, "Sai of the Shinobi", Rarity.UNCOMMON, new CardType[]{CardType.ARTIFACT}, "{1}");
-        this.expansionSetCode = "PC2";
+    public SaiOfTheShinobi(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.ARTIFACT},"{1}");
         this.subtype.add("Equipment");
 
         // Equipped creature gets +1/+1.

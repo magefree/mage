@@ -26,15 +26,15 @@
  *  or implied, of BetaSteward_at_googlemail.com.
  */
 
-package mage.sets.scarsofmirrodin;
+package mage.cards.f;
 
 import java.util.UUID;
 import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.MageInt;
 import mage.abilities.common.AttacksEachTurnStaticAbility;
 import mage.abilities.keyword.HasteAbility;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 
 /**
  *
@@ -42,9 +42,8 @@ import mage.cards.CardImpl;
  */
 public class FlamebornHellion extends CardImpl {
 
-    public FlamebornHellion (UUID ownerId) {
-        super(ownerId, 89, "Flameborn Hellion", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{5}{R}");
-        this.expansionSetCode = "SOM";
+    public FlamebornHellion (UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{5}{R}");
         this.subtype.add("Hellion");
 
         this.power = new MageInt(5);

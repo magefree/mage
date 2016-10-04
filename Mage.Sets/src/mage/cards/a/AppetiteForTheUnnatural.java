@@ -25,14 +25,14 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.kaladesh;
+package mage.cards.a;
 
 import java.util.UUID;
 import mage.abilities.effects.common.DestroyTargetEffect;
 import mage.abilities.effects.common.GainLifeEffect;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.filter.common.FilterArtifactOrEnchantmentPermanent;
 import mage.target.TargetPermanent;
 
@@ -42,9 +42,8 @@ import mage.target.TargetPermanent;
  */
 public class AppetiteForTheUnnatural extends CardImpl {
 
-    public AppetiteForTheUnnatural(UUID ownerId) {
-        super(ownerId, 141, "Appetite for the Unnatural", Rarity.COMMON, new CardType[]{CardType.INSTANT}, "{2}{G}");
-        this.expansionSetCode = "KLD";
+    public AppetiteForTheUnnatural(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.INSTANT},"{2}{G}");
 
         // Destroy target artifact or enchantment. You gain 2 life.
         this.getSpellAbility().addEffect(new DestroyTargetEffect());

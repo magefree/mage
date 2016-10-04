@@ -25,15 +25,15 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.innistrad;
+package mage.cards.d;
 
 import java.util.UUID;
 import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.MageInt;
 import mage.abilities.common.DiesTriggeredAbility;
 import mage.abilities.effects.common.CreateTokenEffect;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.game.permanent.token.SpiritWhiteToken;
 
 /**
@@ -42,9 +42,8 @@ import mage.game.permanent.token.SpiritWhiteToken;
  */
 public class DoomedTraveler extends CardImpl {
 
-    public DoomedTraveler(UUID ownerId) {
-        super(ownerId, 11, "Doomed Traveler", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{W}");
-        this.expansionSetCode = "ISD";
+    public DoomedTraveler(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{W}");
         this.subtype.add("Human");
         this.subtype.add("Soldier");
 

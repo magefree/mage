@@ -25,15 +25,15 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.modernmasters;
+package mage.cards.d;
 
 import java.util.UUID;
 import mage.ObjectColor;
 import mage.abilities.effects.common.DestroyTargetEffect;
 import mage.abilities.keyword.DelveAbility;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.filter.predicate.Predicates;
 import mage.filter.predicate.mageobject.ColorPredicate;
@@ -50,9 +50,8 @@ public class DeathRattle extends CardImpl {
         filter.add(Predicates.not(new ColorPredicate(ObjectColor.GREEN)));
     }
 
-    public DeathRattle(UUID ownerId) {
-        super(ownerId, 78, "Death Rattle", Rarity.UNCOMMON, new CardType[]{CardType.INSTANT}, "{5}{B}");
-        this.expansionSetCode = "MMA";
+    public DeathRattle(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.INSTANT},"{5}{B}");
 
 
         // Delve

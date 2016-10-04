@@ -25,17 +25,17 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.championsofkamigawa;
+package mage.cards.l;
 
 import java.util.UUID;
 import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.abilities.Ability;
 import mage.abilities.effects.common.DontUntapInControllersNextUntapStepSourceEffect;
 import mage.abilities.mana.BlackManaAbility;
 import mage.abilities.mana.ColorlessManaAbility;
 import mage.abilities.mana.RedManaAbility;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 
 /**
  *
@@ -43,9 +43,8 @@ import mage.cards.CardImpl;
  */
 public class LanternLitGraveyard extends CardImpl {
 
-    public LanternLitGraveyard(UUID ownerId) {
-        super(ownerId, 278, "Lantern-Lit Graveyard", Rarity.UNCOMMON, new CardType[]{CardType.LAND}, "");
-        this.expansionSetCode = "CHK";
+    public LanternLitGraveyard(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.LAND},"");
         this.addAbility(new ColorlessManaAbility());
         Ability blackManaAbility = new BlackManaAbility();
         blackManaAbility.addEffect(new DontUntapInControllersNextUntapStepSourceEffect());

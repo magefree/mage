@@ -26,7 +26,7 @@
  *  or implied, of BetaSteward_at_googlemail.com.
  */
 
-package mage.sets.returntoravnica;
+package mage.cards.h;
 
 import java.util.UUID;
 import mage.abilities.Ability;
@@ -35,9 +35,9 @@ import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.continuous.CantGainLifeAllEffect;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Outcome;
-import mage.constants.Rarity;
 import mage.constants.TargetController;
 import mage.constants.Zone;
 import mage.game.Game;
@@ -51,9 +51,8 @@ public class HavocFestival extends CardImpl {
 
     static final String rule = "Mana Bloom enters the battlefield with X charge counters on it";
 
-    public HavocFestival (UUID ownerId) {
-        super(ownerId, 166, "Havoc Festival", Rarity.RARE, new CardType[]{CardType.ENCHANTMENT}, "{4}{B}{R}");
-        this.expansionSetCode = "RTR";
+    public HavocFestival (UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.ENCHANTMENT},"{4}{B}{R}");
 
 
         // Players can't gain life.

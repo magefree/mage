@@ -26,14 +26,14 @@
  *  or implied, of BetaSteward_at_googlemail.com.
  */
 
-package mage.sets.tenthedition;
+package mage.cards.f;
 
 import java.util.UUID;
 import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.ObjectColor;
 import mage.abilities.effects.common.CounterTargetEffect;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.filter.FilterSpell;
 import mage.filter.predicate.Predicates;
 import mage.filter.predicate.mageobject.ColorPredicate;
@@ -53,9 +53,8 @@ public class Flashfreeze extends CardImpl {
                 new ColorPredicate(ObjectColor.GREEN)));
     }
 
-    public Flashfreeze(UUID ownerId) {
-        super(ownerId, 84, "Flashfreeze", Rarity.UNCOMMON, new CardType[]{CardType.INSTANT}, "{1}{U}");
-        this.expansionSetCode = "10E";
+    public Flashfreeze(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.INSTANT},"{1}{U}");
 
         this.getSpellAbility().addTarget(new TargetSpell(filter));
         this.getSpellAbility().addEffect(new CounterTargetEffect());

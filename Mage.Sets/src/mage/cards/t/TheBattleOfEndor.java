@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.starwars;
+package mage.cards.t;
 
 import java.util.UUID;
 import mage.abilities.Ability;
@@ -37,10 +37,10 @@ import mage.abilities.effects.common.continuous.GainAbilityAllEffect;
 import mage.abilities.keyword.HasteAbility;
 import mage.abilities.keyword.TrampleAbility;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Duration;
 import mage.constants.Outcome;
-import mage.constants.Rarity;
 import mage.counters.CounterType;
 import mage.filter.common.FilterControlledCreaturePermanent;
 import mage.game.Game;
@@ -54,9 +54,8 @@ import mage.players.Player;
  */
 public class TheBattleOfEndor extends CardImpl {
 
-    public TheBattleOfEndor(UUID ownerId) {
-        super(ownerId, 130, "The Battle of Endor", Rarity.MYTHIC, new CardType[]{CardType.SORCERY}, "{X}{X}{G}{G}{G}");
-        this.expansionSetCode = "SWS";
+    public TheBattleOfEndor(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{X}{X}{G}{G}{G}");
 
         // Create X 1/1 green Ewok creature tokens.
         this.getSpellAbility().addEffect(new CreateTokenEffect(new EwokToken(), new ManacostVariableValue()));

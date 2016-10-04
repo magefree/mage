@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.bornofthegods;
+package mage.cards.p;
 
 import java.util.UUID;
 import mage.MageObject;
@@ -35,11 +35,11 @@ import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.keyword.ScryEffect;
 import mage.cards.Card;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.cards.Cards;
 import mage.cards.CardsImpl;
 import mage.constants.CardType;
 import mage.constants.Outcome;
-import mage.constants.Rarity;
 import mage.constants.Zone;
 import mage.filter.FilterCard;
 import mage.filter.common.FilterBasicLandCard;
@@ -54,9 +54,8 @@ import mage.target.common.TargetCardInLibrary;
  */
 public class Peregrination extends CardImpl {
 
-    public Peregrination(UUID ownerId) {
-        super(ownerId, 132, "Peregrination", Rarity.UNCOMMON, new CardType[]{CardType.SORCERY}, "{3}{G}");
-        this.expansionSetCode = "BNG";
+    public Peregrination(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{3}{G}");
 
         // Seach your library for up to two basic land cards, reveal those cards, and put one onto the battlefield tapped and the other into your hand. Shuffle your library, then scry 1.
         this.getSpellAbility().addEffect(new PeregrinationEffect());

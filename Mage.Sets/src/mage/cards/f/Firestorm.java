@@ -25,16 +25,16 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.weatherlight;
+package mage.cards.f;
 
 import mage.abilities.Ability;
 import mage.abilities.costs.common.DiscardXTargetCost;
 import mage.abilities.dynamicvalue.common.GetXValue;
 import mage.abilities.effects.OneShotEffect;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Outcome;
-import mage.constants.Rarity;
 import mage.filter.FilterCard;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
@@ -50,9 +50,8 @@ import java.util.UUID;
  */
 public class Firestorm extends CardImpl {
 
-    public Firestorm(UUID ownerId) {
-        super(ownerId, 101, "Firestorm", Rarity.RARE, new CardType[]{CardType.INSTANT}, "{R}");
-        this.expansionSetCode = "WTH";
+    public Firestorm(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.INSTANT},"{R}");
 
 
         // As an additional cost to cast Firestorm, discard X cards.

@@ -25,15 +25,15 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.starwars;
+package mage.cards.f;
 
 import java.util.UUID;
 import mage.abilities.effects.common.PreventDamageToTargetEffect;
 import mage.abilities.effects.keyword.ScryEffect;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Duration;
-import mage.constants.Rarity;
 import mage.target.common.TargetCreatureOrPlayer;
 
 /**
@@ -42,9 +42,8 @@ import mage.target.common.TargetCreatureOrPlayer;
  */
 public class ForceHealing extends CardImpl {
 
-    public ForceHealing(UUID ownerId) {
-        super(ownerId, 12, "Force Healing", Rarity.COMMON, new CardType[]{CardType.INSTANT}, "{W}");
-        this.expansionSetCode = "SWS";
+    public ForceHealing(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.INSTANT},"{W}");
 
         // Prevent the next 4 damage that would be dealt to target creature or player this turn.
         this.getSpellAbility().addEffect(new PreventDamageToTargetEffect(Duration.EndOfTurn, 4));

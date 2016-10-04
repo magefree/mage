@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.legions;
+package mage.cards.g;
 
 import java.util.UUID;
 import mage.MageInt;
@@ -37,8 +37,8 @@ import mage.abilities.effects.Effect;
 import mage.abilities.effects.common.LoseLifeTargetEffect;
 import mage.abilities.keyword.CyclingAbility;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.filter.FilterPermanent;
 import mage.filter.predicate.mageobject.SubtypePredicate;
 import mage.target.TargetPlayer;
@@ -55,9 +55,8 @@ public class GempalmPolluter extends CardImpl {
         filter.add(new SubtypePredicate("Zombie"));
     }
 
-    public GempalmPolluter(UUID ownerId) {
-        super(ownerId, 70, "Gempalm Polluter", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{5}{B}");
-        this.expansionSetCode = "LGN";
+    public GempalmPolluter(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{5}{B}");
         this.subtype.add("Zombie");
         this.power = new MageInt(4);
         this.toughness = new MageInt(3);

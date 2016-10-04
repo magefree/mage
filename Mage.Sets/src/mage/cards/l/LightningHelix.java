@@ -26,14 +26,14 @@
  *  or implied, of BetaSteward_at_googlemail.com.
  */
 
-package mage.sets.ravnica;
+package mage.cards.l;
 
 import java.util.UUID;
 import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.abilities.effects.common.DamageTargetEffect;
 import mage.abilities.effects.common.GainLifeEffect;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.target.common.TargetCreatureOrPlayer;
 
 /**
@@ -42,9 +42,8 @@ import mage.target.common.TargetCreatureOrPlayer;
  */
 public class LightningHelix extends CardImpl {
 
-    public LightningHelix (UUID ownerId) {
-        super(ownerId, 213, "Lightning Helix", Rarity.UNCOMMON, new CardType[]{CardType.INSTANT}, "{R}{W}");
-        this.expansionSetCode = "RAV";
+    public LightningHelix (UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.INSTANT},"{R}{W}");
 
 
         this.getSpellAbility().addTarget(new TargetCreatureOrPlayer());

@@ -25,11 +25,10 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.magic2013;
+package mage.cards.d;
 
 import java.util.UUID;
 import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.constants.Zone;
 import mage.MageInt;
 import mage.abilities.common.SimpleActivatedAbility;
@@ -37,6 +36,7 @@ import mage.abilities.costs.mana.ManaCostsImpl;
 import mage.abilities.effects.common.RegenerateSourceEffect;
 import mage.abilities.keyword.ExaltedAbility;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 
 /**
  *
@@ -44,9 +44,8 @@ import mage.cards.CardImpl;
  */
 public class DutyBoundDead extends CardImpl {
 
-    public DutyBoundDead(UUID ownerId) {
-        super(ownerId, 92, "Duty-Bound Dead", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{B}");
-        this.expansionSetCode = "M13";
+    public DutyBoundDead(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{B}");
         this.subtype.add("Skeleton");
 
         this.power = new MageInt(0);

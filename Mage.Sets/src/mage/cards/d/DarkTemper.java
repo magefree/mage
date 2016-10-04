@@ -25,15 +25,15 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.conflux;
+package mage.cards.d;
 
 import mage.constants.CardType;
 import mage.constants.Outcome;
-import mage.constants.Rarity;
 import mage.ObjectColor;
 import mage.abilities.Ability;
 import mage.abilities.effects.OneShotEffect;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.filter.FilterPermanent;
 import mage.filter.predicate.mageobject.ColorPredicate;
 import mage.game.Game;
@@ -48,9 +48,8 @@ import java.util.UUID;
  */
 public class DarkTemper extends CardImpl {
 
-    public DarkTemper(UUID ownerId) {
-        super(ownerId, 61, "Dark Temper", Rarity.COMMON, new CardType[]{CardType.INSTANT}, "{2}{R}");
-        this.expansionSetCode = "CON";
+    public DarkTemper(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.INSTANT},"{2}{R}");
 
 
         // Dark Temper deals 2 damage to target creature. If you control a black permanent, destroy the creature instead.

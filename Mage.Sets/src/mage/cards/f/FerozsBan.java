@@ -25,15 +25,15 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.fifthedition;
+package mage.cards.f;
 
 import java.util.UUID;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.effects.Effect;
 import mage.abilities.effects.common.cost.SpellsCostIncreasementAllEffect;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.constants.Zone;
 import mage.filter.common.FilterCreatureCard;
 
@@ -44,9 +44,8 @@ import mage.filter.common.FilterCreatureCard;
  */
 public class FerozsBan extends CardImpl {
 
-    public FerozsBan(UUID ownerId) {
-        super(ownerId, 370, "Feroz's Ban", Rarity.RARE, new CardType[]{CardType.ARTIFACT}, "{6}");
-        this.expansionSetCode = "5ED";
+    public FerozsBan(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.ARTIFACT},"{6}");
 
         // Creature spells cost {2} more to cast.
         Effect effect = new SpellsCostIncreasementAllEffect(new FilterCreatureCard(), 2);

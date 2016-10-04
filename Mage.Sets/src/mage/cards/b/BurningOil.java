@@ -25,16 +25,16 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.darkascension;
+package mage.cards.b;
 
 import java.util.UUID;
 import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.constants.TimingRule;
 import mage.abilities.costs.mana.ManaCostsImpl;
 import mage.abilities.effects.common.DamageTargetEffect;
 import mage.abilities.keyword.FlashbackAbility;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.target.common.TargetAttackingOrBlockingCreature;
 
 /**
@@ -43,9 +43,8 @@ import mage.target.common.TargetAttackingOrBlockingCreature;
  */
 public class BurningOil extends CardImpl {
 
-    public BurningOil(UUID ownerId) {
-        super(ownerId, 84, "Burning Oil", Rarity.UNCOMMON, new CardType[]{CardType.INSTANT}, "{1}{R}");
-        this.expansionSetCode = "DKA";
+    public BurningOil(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.INSTANT},"{1}{R}");
 
 
         // Burning Oil deals 3 damage to target attacking or blocking creature.

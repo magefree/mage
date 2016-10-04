@@ -25,15 +25,15 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.timespiral;
+package mage.cards.d;
 
 import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.ObjectColor;
 import mage.abilities.costs.mana.ManaCostsImpl;
 import mage.abilities.effects.common.DestroyTargetEffect;
 import mage.abilities.keyword.MadnessAbility;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.filter.predicate.Predicates;
 import mage.filter.predicate.mageobject.ColorPredicate;
@@ -53,9 +53,8 @@ public class DarkWithering extends CardImpl {
         filter.add(Predicates.not(new ColorPredicate(ObjectColor.BLACK)));
     }
 
-    public DarkWithering(UUID ownerId) {
-        super(ownerId, 101, "Dark Withering", Rarity.COMMON, new CardType[]{CardType.INSTANT}, "{4}{B}{B}");
-        this.expansionSetCode = "TSP";
+    public DarkWithering(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.INSTANT},"{4}{B}{B}");
 
 
         // Destroy target nonblack creature.

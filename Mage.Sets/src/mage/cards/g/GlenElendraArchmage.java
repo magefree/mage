@@ -25,12 +25,11 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.eventide;
+package mage.cards.g;
 
 import java.util.UUID;
 
 import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleActivatedAbility;
@@ -40,6 +39,7 @@ import mage.abilities.effects.common.CounterTargetEffect;
 import mage.abilities.keyword.FlyingAbility;
 import mage.abilities.keyword.PersistAbility;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.Zone;
 import mage.filter.FilterSpell;
 import mage.filter.predicate.Predicates;
@@ -58,9 +58,8 @@ public class GlenElendraArchmage extends CardImpl {
         filter.add(Predicates.not(new CardTypePredicate(CardType.CREATURE)));
     }
 
-    public GlenElendraArchmage(UUID ownerId) {
-        super(ownerId, 22, "Glen Elendra Archmage", Rarity.RARE, new CardType[]{CardType.CREATURE}, "{3}{U}");
-        this.expansionSetCode = "EVE";
+    public GlenElendraArchmage(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{3}{U}");
         this.subtype.add("Faerie");
         this.subtype.add("Wizard");
 

@@ -25,10 +25,9 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.riseoftheeldrazi;
+package mage.cards.s;
 
 import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.MageInt;
 import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.costs.mana.GenericManaCost;
@@ -36,6 +35,7 @@ import mage.abilities.effects.common.CastCardFromOutsideTheGameEffect;
 import mage.abilities.effects.common.CreateTokenEffect;
 import mage.abilities.keyword.AnnihilatorAbility;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.Zone;
 import mage.filter.FilterCard;
 import mage.filter.predicate.mageobject.SubtypePredicate;
@@ -56,9 +56,8 @@ public class SpawnsireOfUlamog extends CardImpl {
         filter.add(new SubtypePredicate("Eldrazi"));
     }
     
-    public SpawnsireOfUlamog(UUID ownerId) {
-        super(ownerId, 11, "Spawnsire of Ulamog", Rarity.RARE, new CardType[]{CardType.CREATURE}, "{10}");
-        this.expansionSetCode = "ROE";
+    public SpawnsireOfUlamog(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{10}");
         this.subtype.add("Eldrazi");
 
         this.power = new MageInt(7);

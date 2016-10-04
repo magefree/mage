@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.kaladesh;
+package mage.cards.w;
 
 import java.util.UUID;
 import mage.MageInt;
@@ -34,9 +34,9 @@ import mage.abilities.costs.mana.ManaCostsImpl;
 import mage.abilities.effects.common.continuous.GainAbilitySourceEffect;
 import mage.abilities.keyword.IndestructibleAbility;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Duration;
-import mage.constants.Rarity;
 import mage.constants.Zone;
 
 /**
@@ -45,9 +45,8 @@ import mage.constants.Zone;
  */
 public class WilyBandar extends CardImpl {
 
-    public WilyBandar(UUID ownerId) {
-        super(ownerId, 175, "Wily Bandar", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{G}");
-        this.expansionSetCode = "KLD";
+    public WilyBandar(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{G}");
         this.subtype.add("Cat");
         this.subtype.add("Monkey");
         this.power = new MageInt(1);

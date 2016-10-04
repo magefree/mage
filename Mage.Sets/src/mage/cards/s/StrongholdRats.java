@@ -25,16 +25,16 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.futuresight;
+package mage.cards.s;
 
 import java.util.UUID;
 import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.MageInt;
 import mage.abilities.common.DealsCombatDamageToAPlayerTriggeredAbility;
 import mage.abilities.effects.common.discard.DiscardEachPlayerEffect;
 import mage.abilities.keyword.ShadowAbility;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 
 /**
  *
@@ -42,9 +42,8 @@ import mage.cards.CardImpl;
  */
 public class StrongholdRats extends CardImpl {
 
-    public StrongholdRats(UUID ownerId) {
-        super(ownerId, 79, "Stronghold Rats", Rarity.UNCOMMON, new CardType[]{CardType.CREATURE}, "{2}{B}");
-        this.expansionSetCode = "FUT";
+    public StrongholdRats(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{2}{B}");
         this.subtype.add("Rat");
 
         this.power = new MageInt(2);

@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.scourge;
+package mage.cards.d;
 
 import java.util.UUID;
 import mage.MageInt;
@@ -36,8 +36,8 @@ import mage.abilities.effects.common.DrawCardAllEffect;
 import mage.abilities.effects.common.discard.DiscardHandAllEffect;
 import mage.abilities.keyword.FlyingAbility;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.Rarity;
 
 /**
  *
@@ -45,9 +45,8 @@ import mage.constants.Rarity;
  */
 public class DragonMage extends CardImpl {
 
-    public DragonMage(UUID ownerId) {
-        super(ownerId, 87, "Dragon Mage", Rarity.RARE, new CardType[]{CardType.CREATURE}, "{5}{R}{R}");
-        this.expansionSetCode = "SCG";
+    public DragonMage(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{5}{R}{R}");
         this.subtype.add("Dragon");
         this.subtype.add("Wizard");
         this.power = new MageInt(5);

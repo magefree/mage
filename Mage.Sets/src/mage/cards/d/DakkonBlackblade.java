@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.legends;
+package mage.cards.d;
 
 import java.util.UUID;
 import mage.MageInt;
@@ -34,9 +34,9 @@ import mage.abilities.dynamicvalue.DynamicValue;
 import mage.abilities.dynamicvalue.common.PermanentsOnBattlefieldCount;
 import mage.abilities.effects.common.continuous.SetPowerToughnessSourceEffect;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Duration;
-import mage.constants.Rarity;
 import mage.constants.Zone;
 import mage.filter.common.FilterControlledLandPermanent;
 import mage.filter.common.FilterControlledPermanent;
@@ -49,9 +49,8 @@ public class DakkonBlackblade extends CardImpl {
     
     private static final FilterControlledPermanent filter = new FilterControlledLandPermanent("lands you control");
 
-    public DakkonBlackblade(UUID ownerId) {
-        super(ownerId, 265, "Dakkon Blackblade", Rarity.RARE, new CardType[]{CardType.CREATURE}, "{2}{W}{U}{U}{B}");
-        this.expansionSetCode = "LEG";
+    public DakkonBlackblade(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{2}{W}{U}{U}{B}");
         this.supertype.add("Legendary");
         this.subtype.add("Human");
         this.subtype.add("Warrior");

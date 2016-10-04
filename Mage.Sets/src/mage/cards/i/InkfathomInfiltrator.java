@@ -25,15 +25,15 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.shadowmoor;
+package mage.cards.i;
 
 import java.util.UUID;
 import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.MageInt;
 import mage.abilities.common.CantBlockAbility;
 import mage.abilities.keyword.CantBeBlockedSourceAbility;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 
 /**
  *
@@ -41,9 +41,8 @@ import mage.cards.CardImpl;
  */
 public class InkfathomInfiltrator extends CardImpl {
 
-    public InkfathomInfiltrator(UUID ownerId) {
-        super(ownerId, 167, "Inkfathom Infiltrator", Rarity.UNCOMMON, new CardType[]{CardType.CREATURE}, "{U/B}{U/B}");
-        this.expansionSetCode = "SHM";
+    public InkfathomInfiltrator(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{U/B}{U/B}");
         this.subtype.add("Merfolk");
         this.subtype.add("Rogue");
 

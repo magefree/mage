@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.conspiracy;
+package mage.cards.d;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -42,11 +42,11 @@ import mage.abilities.effects.common.GetEmblemEffect;
 import mage.abilities.effects.common.continuous.GainControlTargetEffect;
 import mage.abilities.effects.common.discard.DiscardTargetEffect;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Duration;
 import mage.constants.Layer;
 import mage.constants.Outcome;
-import mage.constants.Rarity;
 import mage.constants.SubLayer;
 import mage.constants.Zone;
 import mage.game.Game;
@@ -66,9 +66,8 @@ import mage.target.common.TargetArtifactPermanent;
  */
 public class DackFayden extends CardImpl {
 
-    public DackFayden(UUID ownerId) {
-        super(ownerId, 42, "Dack Fayden", Rarity.MYTHIC, new CardType[]{CardType.PLANESWALKER}, "{1}{U}{R}");
-        this.expansionSetCode = "CNS";
+    public DackFayden(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.PLANESWALKER},"{1}{U}{R}");
         this.subtype.add("Dack");
 
         this.addAbility(new PlanswalkerEntersWithLoyalityCountersAbility(3));

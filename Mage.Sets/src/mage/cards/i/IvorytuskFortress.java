@@ -25,15 +25,15 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.khansoftarkir;
+package mage.cards.i;
 
 import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.effects.common.continuous.UntapAllDuringEachOtherPlayersUntapStepEffect;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.constants.Zone;
 import mage.counters.CounterType;
 import mage.filter.common.FilterCreaturePermanent;
@@ -51,9 +51,8 @@ public class IvorytuskFortress extends CardImpl {
         filter.add(new CounterPredicate(CounterType.P1P1));
     }
 
-    public IvorytuskFortress(UUID ownerId) {
-        super(ownerId, 179, "Ivorytusk Fortress", Rarity.RARE, new CardType[]{CardType.CREATURE}, "{2}{W}{B}{G}");
-        this.expansionSetCode = "KTK";
+    public IvorytuskFortress(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{2}{W}{B}{G}");
         this.subtype.add("Elephant");
 
         this.power = new MageInt(5);

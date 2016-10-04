@@ -26,25 +26,24 @@
  *  or implied, of BetaSteward_at_googlemail.com.
  */
 
-package mage.sets.darksteel;
+package mage.cards.d;
 
 import java.util.UUID;
 
 import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.MageInt;
 import mage.abilities.keyword.FlyingAbility;
 import mage.abilities.keyword.IndestructibleAbility;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 
 /**
  * @author Loki
  */
 public class DarksteelGargoyle extends CardImpl {
 
-    public DarksteelGargoyle(UUID ownerId) {
-        super(ownerId, 111, "Darksteel Gargoyle", Rarity.UNCOMMON, new CardType[]{CardType.ARTIFACT, CardType.CREATURE}, "{7}");
-        this.expansionSetCode = "DST";
+    public DarksteelGargoyle(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.ARTIFACT,CardType.CREATURE},"{7}");
         this.subtype.add("Gargoyle");
         this.power = new MageInt(3);
         this.toughness = new MageInt(3);

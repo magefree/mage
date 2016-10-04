@@ -25,16 +25,16 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.worldwake;
+package mage.cards.g;
 
 import java.util.UUID;
 
 import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.MageInt;
 import mage.abilities.common.AttacksTriggeredAbility;
 import mage.abilities.effects.common.combat.CantBlockTargetEffect;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.Duration;
 import mage.target.common.TargetCreaturePermanent;
 
@@ -44,9 +44,8 @@ import mage.target.common.TargetCreaturePermanent;
  */
 public class GrotagThrasher extends CardImpl {
 
-    public GrotagThrasher(UUID ownerId) {
-        super(ownerId, 83, "Grotag Thrasher", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{4}{R}");
-        this.expansionSetCode = "WWK";
+    public GrotagThrasher(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{4}{R}");
         this.subtype.add("Lizard");
 
         this.power = new MageInt(3);

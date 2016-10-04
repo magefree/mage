@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.oathofthegatewatch;
+package mage.cards.s;
 
 import java.util.UUID;
 import mage.abilities.Ability;
@@ -35,8 +35,8 @@ import mage.abilities.costs.mana.GenericManaCost;
 import mage.abilities.effects.keyword.ScryEffect;
 import mage.abilities.mana.ColorlessManaAbility;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.constants.Zone;
 
 /**
@@ -45,9 +45,8 @@ import mage.constants.Zone;
  */
 public class SeersLantern extends CardImpl {
 
-    public SeersLantern(UUID ownerId) {
-        super(ownerId, 165, "Seer's Lantern", Rarity.COMMON, new CardType[]{CardType.ARTIFACT}, "{3}");
-        this.expansionSetCode = "OGW";
+    public SeersLantern(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.ARTIFACT},"{3}");
 
         // {T}: Add {C} to your mana pool.
         this.addAbility(new ColorlessManaAbility());

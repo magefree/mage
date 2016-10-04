@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.lorwyn;
+package mage.cards.t;
 
 import java.util.UUID;
 import mage.MageInt;
@@ -35,8 +35,8 @@ import mage.abilities.keyword.ChampionAbility;
 import mage.abilities.keyword.FirstStrikeAbility;
 import mage.abilities.keyword.VigilanceAbility;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.constants.Zone;
 
 /**
@@ -45,9 +45,8 @@ import mage.constants.Zone;
  */
 public class ThoughtweftTrio extends CardImpl {
 
-    public ThoughtweftTrio(UUID ownerId) {
-        super(ownerId, 44, "Thoughtweft Trio", Rarity.RARE, new CardType[]{CardType.CREATURE}, "{2}{W}{W}");
-        this.expansionSetCode = "LRW";
+    public ThoughtweftTrio(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{2}{W}{W}");
         this.subtype.add("Kithkin");
         this.subtype.add("Soldier");
         this.power = new MageInt(5);

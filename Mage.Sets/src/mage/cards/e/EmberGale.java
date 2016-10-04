@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.shadowmoor;
+package mage.cards.e;
 
 import java.util.UUID;
 import mage.ObjectColor;
@@ -34,10 +34,10 @@ import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.RestrictionEffect;
 import mage.abilities.effects.common.combat.CantBlockAllEffect;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Duration;
 import mage.constants.Outcome;
-import mage.constants.Rarity;
 import mage.filter.FilterPermanent;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.filter.predicate.Predicates;
@@ -55,9 +55,8 @@ import mage.target.TargetPlayer;
  */
 public class EmberGale extends CardImpl {
 
-    public EmberGale(UUID ownerId) {
-        super(ownerId, 91, "Ember Gale", Rarity.COMMON, new CardType[]{CardType.SORCERY}, "{3}{R}");
-        this.expansionSetCode = "SHM";
+    public EmberGale(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{3}{R}");
 
 
         // Creatures target player controls can't block this turn. Ember Gale deals 1 damage to each white and/or blue creature that player controls.

@@ -25,12 +25,11 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.innistrad;
+package mage.cards.s;
 
 import java.util.UUID;
 import mage.constants.CardType;
 import mage.constants.Duration;
-import mage.constants.Rarity;
 import mage.constants.Zone;
 import mage.MageInt;
 import mage.abilities.common.OnEventTriggeredAbility;
@@ -40,6 +39,7 @@ import mage.abilities.effects.common.PutTopCardOfLibraryIntoGraveControllerEffec
 import mage.abilities.effects.common.continuous.SetPowerToughnessSourceEffect;
 import mage.abilities.keyword.TrampleAbility;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.filter.common.FilterCreatureCard;
 import mage.game.events.GameEvent.EventType;
 
@@ -49,9 +49,8 @@ import mage.game.events.GameEvent.EventType;
  */
 public class Splinterfright extends CardImpl {
 
-    public Splinterfright(UUID ownerId) {
-        super(ownerId, 205, "Splinterfright", Rarity.RARE, new CardType[]{CardType.CREATURE}, "{2}{G}");
-        this.expansionSetCode = "ISD";
+    public Splinterfright(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{2}{G}");
         this.subtype.add("Elemental");
 
         this.power = new MageInt(0);

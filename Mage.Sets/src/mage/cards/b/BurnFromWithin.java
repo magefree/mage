@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.shadowsoverinnistrad;
+package mage.cards.b;
 
 import java.util.UUID;
 import mage.abilities.Ability;
@@ -36,10 +36,10 @@ import mage.abilities.effects.common.continuous.LoseAbilityTargetEffect;
 import mage.abilities.effects.common.replacement.DealtDamageToCreatureBySourceDies;
 import mage.abilities.keyword.IndestructibleAbility;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Duration;
 import mage.constants.Outcome;
-import mage.constants.Rarity;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.players.Player;
@@ -53,9 +53,8 @@ import mage.watchers.common.DamagedByWatcher;
  */
 public class BurnFromWithin extends CardImpl {
 
-    public BurnFromWithin(UUID ownerId) {
-        super(ownerId, 148, "Burn from Within", Rarity.RARE, new CardType[]{CardType.SORCERY}, "{X}{R}");
-        this.expansionSetCode = "SOI";
+    public BurnFromWithin(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{X}{R}");
 
         // Burn from Within deals X damage to target creature or player. If a creature is dealt damage this way, it loses indestructible until end of turn.
         this.getSpellAbility().addEffect(new BurnFromWithinEffect());

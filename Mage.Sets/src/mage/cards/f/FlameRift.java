@@ -25,13 +25,13 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.nemesis;
+package mage.cards.f;
 
 import java.util.UUID;
 import mage.abilities.effects.common.DamagePlayersEffect;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.constants.TargetController;
 
 /**
@@ -40,9 +40,8 @@ import mage.constants.TargetController;
  */
 public class FlameRift extends CardImpl {
 
-    public FlameRift(UUID ownerId) {
-        super(ownerId, 80, "Flame Rift", Rarity.COMMON, new CardType[]{CardType.SORCERY}, "{1}{R}");
-        this.expansionSetCode = "NEM";
+    public FlameRift(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{1}{R}");
 
 
         // Flame Rift deals 4 damage to each player.

@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.commander;
+package mage.cards.s;
 
 import java.util.UUID;
 import mage.MageObject;
@@ -34,10 +34,10 @@ import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.effects.ContinuousRuleModifyingEffectImpl;
 import mage.abilities.effects.ReplacementEffectImpl;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Duration;
 import mage.constants.Outcome;
-import mage.constants.Rarity;
 import mage.constants.Zone;
 import mage.game.Game;
 import mage.game.events.GameEvent;
@@ -50,9 +50,8 @@ import mage.players.Player;
  */
 public class Stranglehold extends CardImpl {
 
-    public Stranglehold(UUID ownerId) {
-        super(ownerId, 136, "Stranglehold", Rarity.RARE, new CardType[]{CardType.ENCHANTMENT}, "{3}{R}");
-        this.expansionSetCode = "CMD";
+    public Stranglehold(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.ENCHANTMENT},"{3}{R}");
 
         // Your opponents can't search libraries.
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new OpponentsCantSearchLibarariesEffect()));

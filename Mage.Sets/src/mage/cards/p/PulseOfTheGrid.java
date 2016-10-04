@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.darksteel;
+package mage.cards.p;
 
 import java.util.UUID;
 import mage.abilities.Ability;
@@ -33,9 +33,9 @@ import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.DrawDiscardControllerEffect;
 import mage.cards.Card;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Outcome;
-import mage.constants.Rarity;
 import mage.constants.Zone;
 import mage.game.Game;
 import mage.players.Player;
@@ -46,9 +46,8 @@ import mage.players.Player;
  */
 public class PulseOfTheGrid extends CardImpl {
 
-    public PulseOfTheGrid(UUID ownerId) {
-        super(ownerId, 29, "Pulse of the Grid", Rarity.RARE, new CardType[]{CardType.INSTANT}, "{1}{U}{U}");
-        this.expansionSetCode = "DST";
+    public PulseOfTheGrid(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.INSTANT},"{1}{U}{U}");
 
         // Draw two cards, then discard a card. Then if an opponent has more cards in hand than you, return Pulse of the Grid to its owner's hand.
         this.getSpellAbility().addEffect(new DrawDiscardControllerEffect(2, 1));

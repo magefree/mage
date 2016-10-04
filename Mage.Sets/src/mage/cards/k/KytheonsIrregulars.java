@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.magicorigins;
+package mage.cards.k;
 
 import java.util.UUID;
 import mage.MageInt;
@@ -35,8 +35,8 @@ import mage.abilities.costs.mana.ManaCostsImpl;
 import mage.abilities.effects.common.TapTargetEffect;
 import mage.abilities.keyword.RenownAbility;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.constants.Zone;
 import mage.target.common.TargetCreaturePermanent;
 
@@ -46,9 +46,8 @@ import mage.target.common.TargetCreaturePermanent;
  */
 public class KytheonsIrregulars extends CardImpl {
 
-    public KytheonsIrregulars(UUID ownerId) {
-        super(ownerId, 24, "Kytheon's Irregulars", Rarity.RARE, new CardType[]{CardType.CREATURE}, "{2}{W}{W}");
-        this.expansionSetCode = "ORI";
+    public KytheonsIrregulars(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{2}{W}{W}");
         this.subtype.add("Human");
         this.subtype.add("Soldier");
         this.power = new MageInt(4);

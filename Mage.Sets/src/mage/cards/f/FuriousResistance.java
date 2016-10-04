@@ -25,12 +25,11 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.gatecrash;
+package mage.cards.f;
 
 import java.util.UUID;
 
 import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.abilities.Ability;
 import mage.abilities.effects.ContinuousEffect;
 import mage.abilities.effects.OneShotEffect;
@@ -38,6 +37,7 @@ import mage.abilities.effects.common.continuous.BoostTargetEffect;
 import mage.abilities.effects.common.continuous.GainAbilityTargetEffect;
 import mage.abilities.keyword.FirstStrikeAbility;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.Duration;
 import mage.constants.Outcome;
 import mage.filter.common.FilterBlockingCreature;
@@ -55,9 +55,8 @@ public class FuriousResistance extends CardImpl {
     
     private static final FilterCreaturePermanent filter = new FilterBlockingCreature("blocking creature");
 
-    public FuriousResistance(UUID ownerId) {
-        super(ownerId, 93, "Furious Resistance", Rarity.COMMON, new CardType[]{CardType.INSTANT}, "{R}");
-        this.expansionSetCode = "GTC";
+    public FuriousResistance(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.INSTANT},"{R}");
 
 
         // Target blocking creature gets +3/+0 and gains first strike until end of turn.

@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.thedark;
+package mage.cards.c;
 
 import java.util.UUID;
 import mage.Mana;
@@ -37,8 +37,8 @@ import mage.abilities.dynamicvalue.common.CountersSourceCount;
 import mage.abilities.effects.common.counter.AddCountersSourceEffect;
 import mage.abilities.mana.DynamicManaAbility;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.constants.Zone;
 import mage.counters.CounterType;
 import mage.target.common.TargetControlledCreaturePermanent;
@@ -49,9 +49,8 @@ import mage.target.common.TargetControlledCreaturePermanent;
  */
 public class CityOfShadows extends CardImpl {
 
-    public CityOfShadows(UUID ownerId) {
-        super(ownerId, 113, "City of Shadows", Rarity.RARE, new CardType[]{CardType.LAND}, "");
-        this.expansionSetCode = "DRK";
+    public CityOfShadows(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.LAND},"");
 
         // {T}, Exile a creature you control: Put a storage counter on City of Shadows.
         Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new AddCountersSourceEffect(CounterType.STORAGE.createInstance()), new TapSourceCost());

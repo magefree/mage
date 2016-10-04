@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.dragonsoftarkir;
+package mage.cards.i;
 
 import java.util.UUID;
 import mage.abilities.dynamicvalue.common.PermanentsOnBattlefieldCount;
@@ -34,9 +34,9 @@ import mage.abilities.effects.common.DrawCardSourceControllerEffect;
 import mage.abilities.effects.common.continuous.GainAbilityControlledEffect;
 import mage.abilities.keyword.IndestructibleAbility;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Duration;
-import mage.constants.Rarity;
 import mage.counters.CounterType;
 import mage.filter.common.FilterControlledCreaturePermanent;
 import mage.filter.predicate.permanent.CounterPredicate;
@@ -53,9 +53,8 @@ public class InspiringCall extends CardImpl {
         filter.add(new CounterPredicate(CounterType.P1P1));
     }
 
-    public InspiringCall(UUID ownerId) {
-        super(ownerId, 191, "Inspiring Call", Rarity.UNCOMMON, new CardType[]{CardType.INSTANT}, "{2}{G}");
-        this.expansionSetCode = "DTK";
+    public InspiringCall(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.INSTANT},"{2}{G}");
 
         // Draw a card for each creature you control with a +1/+1 counter on it. Those creatures gain indestructible until end of turn. <i>(Damage and effects that say "destroy" don't destroy them.)
         this.getSpellAbility().addEffect(new DrawCardSourceControllerEffect(new PermanentsOnBattlefieldCount(filter)));

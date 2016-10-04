@@ -25,12 +25,11 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.eventide;
+package mage.cards.c;
 
 import java.util.UUID;
 
 import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleActivatedAbility;
@@ -38,6 +37,7 @@ import mage.abilities.costs.mana.ManaCostsImpl;
 import mage.abilities.effects.common.ExileTargetEffect;
 import mage.abilities.effects.common.GainLifeEffect;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.Zone;
 import mage.target.common.TargetCardInGraveyard;
 
@@ -48,9 +48,8 @@ import mage.target.common.TargetCardInGraveyard;
  */
 public class CreakwoodGhoul extends CardImpl {
 
-    public CreakwoodGhoul(UUID ownerId) {
-        super(ownerId, 34, "Creakwood Ghoul", Rarity.UNCOMMON, new CardType[]{CardType.CREATURE}, "{4}{B}");
-        this.expansionSetCode = "EVE";
+    public CreakwoodGhoul(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{4}{B}");
         this.subtype.add("Plant");
         this.subtype.add("Zombie");
 

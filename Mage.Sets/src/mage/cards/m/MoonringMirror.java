@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.championsofkamigawa;
+package mage.cards.m;
 
 import java.util.HashSet;
 import java.util.Set;
@@ -37,11 +37,11 @@ import mage.abilities.common.DrawCardControllerTriggeredAbility;
 import mage.abilities.effects.OneShotEffect;
 import mage.cards.Card;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.cards.Cards;
 import mage.cards.CardsImpl;
 import mage.constants.CardType;
 import mage.constants.Outcome;
-import mage.constants.Rarity;
 import mage.constants.TargetController;
 import mage.constants.Zone;
 import mage.game.Game;
@@ -56,9 +56,8 @@ public class MoonringMirror extends CardImpl {
 
     protected static final String VALUE_PREFIX = "ExileZones";
 
-    public MoonringMirror(UUID ownerId) {
-        super(ownerId, 262, "Moonring Mirror", Rarity.RARE, new CardType[]{CardType.ARTIFACT}, "{5}");
-        this.expansionSetCode = "CHK";
+    public MoonringMirror(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.ARTIFACT},"{5}");
 
         // Whenever you draw a card, exile the top card of your library face down.
         this.addAbility(new DrawCardControllerTriggeredAbility(new MoonringMirrorExileEffect(), false));

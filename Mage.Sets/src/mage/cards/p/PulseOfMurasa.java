@@ -25,14 +25,14 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.oathofthegatewatch;
+package mage.cards.p;
 
 import java.util.UUID;
 import mage.abilities.effects.common.GainLifeEffect;
 import mage.abilities.effects.common.ReturnToHandTargetEffect;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.filter.FilterCard;
 import mage.filter.predicate.Predicates;
 import mage.filter.predicate.mageobject.CardTypePredicate;
@@ -52,9 +52,8 @@ public class PulseOfMurasa extends CardImpl {
                 new CardTypePredicate(CardType.LAND)));
     }
 
-    public PulseOfMurasa(UUID ownerId) {
-        super(ownerId, 141, "Pulse of Murasa", Rarity.COMMON, new CardType[]{CardType.INSTANT}, "{2}{G}");
-        this.expansionSetCode = "OGW";
+    public PulseOfMurasa(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.INSTANT},"{2}{G}");
 
         // Return target creature or land card from a graveyard to its owner's hand.
         this.getSpellAbility().addEffect(new ReturnToHandTargetEffect());

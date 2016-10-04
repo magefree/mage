@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.gatecrash;
+package mage.cards.d;
 
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleStaticAbility;
@@ -36,6 +36,7 @@ import mage.abilities.effects.common.AttachEffect;
 import mage.abilities.effects.common.continuous.BoostEnchantedEffect;
 import mage.abilities.keyword.EnchantAbility;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.*;
 import mage.filter.FilterCard;
 import mage.filter.common.FilterCreatureCard;
@@ -53,9 +54,8 @@ import java.util.UUID;
  */
 public class DeathsApproach extends CardImpl {
 
-    public DeathsApproach(UUID ownerId) {
-        super(ownerId, 62, "Death's Approach", Rarity.COMMON, new CardType[]{CardType.ENCHANTMENT}, "{B}");
-        this.expansionSetCode = "GTC";
+    public DeathsApproach(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.ENCHANTMENT},"{B}");
 
         this.subtype.add("Aura");
 

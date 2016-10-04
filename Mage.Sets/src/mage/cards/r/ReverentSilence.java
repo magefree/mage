@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.nemesis;
+package mage.cards.r;
 
 import java.util.UUID;
 import mage.abilities.condition.common.PermanentsOnTheBattlefieldCondition;
@@ -33,8 +33,8 @@ import mage.abilities.costs.AlternativeCostSourceAbility;
 import mage.abilities.costs.common.GainLifePlayersCost;
 import mage.abilities.effects.common.DestroyAllEffect;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.filter.FilterPermanent;
 import mage.filter.common.FilterEnchantmentPermanent;
 import mage.filter.predicate.mageobject.SubtypePredicate;
@@ -51,9 +51,8 @@ public class ReverentSilence extends CardImpl {
         filter.add(new SubtypePredicate("Forest"));
     }
     
-    public ReverentSilence(UUID ownerId) {
-        super(ownerId, 111, "Reverent Silence", Rarity.COMMON, new CardType[]{CardType.SORCERY}, "{3}{G}");
-        this.expansionSetCode = "NEM";
+    public ReverentSilence(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{3}{G}");
 
 
         // If you control a Forest, rather than pay Reverent Silence's mana cost, you may have each other player gain 6 life.

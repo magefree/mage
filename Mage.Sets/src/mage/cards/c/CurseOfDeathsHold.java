@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.innistrad;
+package mage.cards.c;
 
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleStaticAbility;
@@ -33,6 +33,7 @@ import mage.abilities.effects.ContinuousEffectImpl;
 import mage.abilities.effects.common.AttachEffect;
 import mage.abilities.keyword.EnchantAbility;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.*;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.game.Game;
@@ -48,9 +49,8 @@ import java.util.UUID;
  */
 public class CurseOfDeathsHold extends CardImpl {
 
-    public CurseOfDeathsHold(UUID ownerId) {
-        super(ownerId, 94, "Curse of Death's Hold", Rarity.RARE, new CardType[]{CardType.ENCHANTMENT}, "{3}{B}{B}");
-        this.expansionSetCode = "ISD";
+    public CurseOfDeathsHold(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.ENCHANTMENT},"{3}{B}{B}");
         this.subtype.add("Aura");
         this.subtype.add("Curse");
 

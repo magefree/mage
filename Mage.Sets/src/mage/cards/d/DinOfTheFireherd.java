@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.shadowmoor;
+package mage.cards.d;
 
 import java.util.UUID;
 import mage.MageInt;
@@ -35,9 +35,9 @@ import mage.abilities.effects.Effect;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.SacrificeEffect;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Outcome;
-import mage.constants.Rarity;
 import mage.filter.common.FilterControlledCreaturePermanent;
 import mage.filter.common.FilterControlledLandPermanent;
 import mage.filter.predicate.mageobject.ColorPredicate;
@@ -53,9 +53,8 @@ import mage.target.targetpointer.FixedTarget;
  */
 public class DinOfTheFireherd extends CardImpl {
 
-    public DinOfTheFireherd(UUID ownerId) {
-        super(ownerId, 184, "Din of the Fireherd", Rarity.RARE, new CardType[]{CardType.SORCERY}, "{5}{B/R}{B/R}{B/R}");
-        this.expansionSetCode = "SHM";
+    public DinOfTheFireherd(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{5}{B/R}{B/R}{B/R}");
 
         // Put a 5/5 black and red Elemental creature token onto the battlefield. Target opponent sacrifices a creature for each black creature you control, then sacrifices a land for each red creature you control.
         this.getSpellAbility().addEffect(new DinOfTheFireherdEffect());

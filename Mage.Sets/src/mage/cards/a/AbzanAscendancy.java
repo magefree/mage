@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.khansoftarkir;
+package mage.cards.a;
 
 import java.util.UUID;
 import mage.abilities.common.DiesCreatureTriggeredAbility;
@@ -33,8 +33,8 @@ import mage.abilities.common.EntersBattlefieldTriggeredAbility;
 import mage.abilities.effects.common.CreateTokenEffect;
 import mage.abilities.effects.common.counter.AddCountersAllEffect;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.constants.TargetController;
 import mage.counters.CounterType;
 import mage.filter.common.FilterControlledCreaturePermanent;
@@ -57,9 +57,8 @@ public class AbzanAscendancy extends CardImpl {
         filter.add(Predicates.not(new TokenPredicate()));
     }
 
-    public AbzanAscendancy(UUID ownerId) {
-        super(ownerId, 160, "Abzan Ascendancy", Rarity.RARE, new CardType[]{CardType.ENCHANTMENT}, "{W}{B}{G}");
-        this.expansionSetCode = "KTK";
+    public AbzanAscendancy(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.ENCHANTMENT},"{W}{B}{G}");
 
 
         // When Abzan Ascendancy enters the battlefield, put a +1/+1 counter on each creature you control.

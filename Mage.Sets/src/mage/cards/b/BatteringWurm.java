@@ -25,17 +25,17 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.guildpact;
+package mage.cards.b;
 
 import java.util.UUID;
 import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.constants.Zone;
 import mage.MageInt;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.effects.common.combat.CantBeBlockedByCreaturesWithLessPowerEffect;
 import mage.abilities.keyword.BloodthirstAbility;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 
 /**
  *
@@ -43,9 +43,8 @@ import mage.cards.CardImpl;
  */
 public class BatteringWurm extends CardImpl {
 
-    public BatteringWurm(UUID ownerId) {
-        super(ownerId, 79, "Battering Wurm", Rarity.UNCOMMON, new CardType[]{CardType.CREATURE}, "{6}{G}");
-        this.expansionSetCode = "GPT";
+    public BatteringWurm(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{6}{G}");
         this.subtype.add("Wurm");
 
         this.power = new MageInt(4);

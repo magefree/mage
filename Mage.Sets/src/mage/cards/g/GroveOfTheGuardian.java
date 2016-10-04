@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.returntoravnica;
+package mage.cards.g;
 
 import java.util.UUID;
 import mage.MageInt;
@@ -40,8 +40,8 @@ import mage.abilities.effects.common.CreateTokenEffect;
 import mage.abilities.keyword.VigilanceAbility;
 import mage.abilities.mana.SimpleManaAbility;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.constants.Zone;
 import mage.filter.common.FilterControlledCreaturePermanent;
 import mage.filter.predicate.Predicates;
@@ -60,9 +60,8 @@ public class GroveOfTheGuardian extends CardImpl {
         filter.add(Predicates.not(new TappedPredicate()));
     }
 
-    public GroveOfTheGuardian(UUID ownerId) {
-        super(ownerId, 240, "Grove of the Guardian", Rarity.RARE, new CardType[]{CardType.LAND}, "");
-        this.expansionSetCode = "RTR";
+    public GroveOfTheGuardian(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.LAND},"");
 
         // {T}: Add {C} to your mana pool.
         this.addAbility(new SimpleManaAbility(Zone.BATTLEFIELD, new Mana(0, 0, 0, 0, 0, 0, 0, 1), new TapSourceCost()));

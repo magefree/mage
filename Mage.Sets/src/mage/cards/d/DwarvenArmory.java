@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.iceage;
+package mage.cards.d;
 
 import java.util.UUID;
 import mage.abilities.Ability;
@@ -35,9 +35,9 @@ import mage.abilities.costs.mana.ManaCostsImpl;
 import mage.abilities.decorator.ConditionalActivatedAbility;
 import mage.abilities.effects.common.counter.AddCountersTargetEffect;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.PhaseStep;
-import mage.constants.Rarity;
 import mage.constants.Zone;
 import mage.counters.CounterType;
 import mage.filter.common.FilterControlledLandPermanent;
@@ -50,9 +50,8 @@ import mage.target.common.TargetCreaturePermanent;
  */
 public class DwarvenArmory extends CardImpl {
 
-    public DwarvenArmory(UUID ownerId) {
-        super(ownerId, 182, "Dwarven Armory", Rarity.RARE, new CardType[]{CardType.ENCHANTMENT}, "{2}{R}{R}");
-        this.expansionSetCode = "ICE";
+    public DwarvenArmory(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.ENCHANTMENT},"{2}{R}{R}");
 
         // {2}, Sacrifice a land: Put a +2/+2 counter on target creature. Activate this ability only during any upkeep step.
         Ability ability = new ConditionalActivatedAbility(Zone.BATTLEFIELD, 

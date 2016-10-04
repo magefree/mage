@@ -25,17 +25,17 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.ravnica;
+package mage.cards.m;
 
 import java.util.UUID;
 
 import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.MageInt;
 import mage.abilities.common.BeginningOfUpkeepTriggeredAbility;
 import mage.abilities.effects.common.LoseLifeSourceControllerEffect;
 import mage.abilities.keyword.FlyingAbility;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.TargetController;
 
 /**
@@ -44,9 +44,8 @@ import mage.constants.TargetController;
  */
 public class Moroii extends CardImpl {
 
-    public Moroii(UUID ownerId) {
-        super(ownerId, 216, "Moroii", Rarity.UNCOMMON, new CardType[]{CardType.CREATURE}, "{2}{U}{B}");
-        this.expansionSetCode = "RAV";
+    public Moroii(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{2}{U}{B}");
         this.subtype.add("Vampire");
 
         this.power = new MageInt(4);

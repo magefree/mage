@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.journeyintonyx;
+package mage.cards.r;
 
 import java.util.UUID;
 import mage.MageInt;
@@ -33,8 +33,8 @@ import mage.ObjectColor;
 import mage.abilities.effects.common.CreateTokenEffect;
 import mage.abilities.keyword.HasteAbility;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.game.permanent.token.Token;
 
 /**
@@ -43,9 +43,8 @@ import mage.game.permanent.token.Token;
  */
 public class RevelOfTheFallenGod extends CardImpl {
 
-    public RevelOfTheFallenGod(UUID ownerId) {
-        super(ownerId, 155, "Revel of the Fallen God", Rarity.RARE, new CardType[]{CardType.SORCERY}, "{3}{R}{R}{G}{G}");
-        this.expansionSetCode = "JOU";
+    public RevelOfTheFallenGod(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{3}{R}{R}{G}{G}");
 
 
         // Put four 2/2 red and green Satyr creature tokens with haste onto the battlefield.

@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.ravnica;
+package mage.cards.g;
 
 import java.util.UUID;
 import mage.MageInt;
@@ -39,12 +39,12 @@ import mage.abilities.keyword.DefenderAbility;
 import mage.abilities.keyword.TransmuteAbility;
 import mage.cards.Card;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.cards.Cards;
 import mage.cards.CardsImpl;
 import mage.constants.CardType;
 import mage.constants.Duration;
 import mage.constants.Outcome;
-import mage.constants.Rarity;
 import mage.constants.Zone;
 import mage.filter.Filter;
 import mage.filter.FilterCard;
@@ -59,9 +59,8 @@ import mage.target.common.TargetCardInLibrary;
  */
 public class Grozoth extends CardImpl {
 
-    public Grozoth(UUID ownerId) {
-        super(ownerId, 53, "Grozoth", Rarity.RARE, new CardType[]{CardType.CREATURE}, "{6}{U}{U}{U}");
-        this.expansionSetCode = "RAV";
+    public Grozoth(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{6}{U}{U}{U}");
         this.subtype.add("Leviathan");
         this.power = new MageInt(9);
         this.toughness = new MageInt(9);

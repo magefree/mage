@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.magic2014;
+package mage.cards.i;
 
 import java.util.UUID;
 import mage.abilities.Ability;
@@ -33,11 +33,11 @@ import mage.abilities.common.BeginningOfUpkeepTriggeredAbility;
 import mage.abilities.effects.OneShotEffect;
 import mage.cards.Card;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.cards.Cards;
 import mage.cards.CardsImpl;
 import mage.constants.CardType;
 import mage.constants.Outcome;
-import mage.constants.Rarity;
 import mage.constants.TargetController;
 import mage.constants.Zone;
 import mage.filter.common.FilterLandCard;
@@ -50,9 +50,8 @@ import mage.players.Player;
  */
 public class IntoTheWilds extends CardImpl {
 
-    public IntoTheWilds(UUID ownerId) {
-        super(ownerId, 180, "Into the Wilds", Rarity.RARE, new CardType[]{CardType.ENCHANTMENT}, "{3}{G}");
-        this.expansionSetCode = "M14";
+    public IntoTheWilds(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.ENCHANTMENT},"{3}{G}");
 
 
         // At the beginning of your upkeep, look at the top card of your library. If it's a land card, you may put it onto the battlefield. 

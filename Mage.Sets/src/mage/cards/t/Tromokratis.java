@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.bornofthegods;
+package mage.cards.t;
 
 import java.util.HashSet;
 import java.util.Map;
@@ -41,10 +41,10 @@ import mage.abilities.effects.RestrictionEffect;
 import mage.abilities.effects.common.continuous.GainAbilitySourceEffect;
 import mage.abilities.keyword.HexproofAbility;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.AsThoughEffectType;
 import mage.constants.CardType;
 import mage.constants.Duration;
-import mage.constants.Rarity;
 import mage.constants.Zone;
 import mage.filter.common.FilterAttackingOrBlockingCreature;
 import mage.filter.common.FilterCreaturePermanent;
@@ -59,9 +59,8 @@ import mage.game.permanent.Permanent;
 public class Tromokratis extends CardImpl {
 
 
-    public Tromokratis(UUID ownerId) {
-        super(ownerId, 55, "Tromokratis", Rarity.RARE, new CardType[]{CardType.CREATURE}, "{5}{U}{U}");
-        this.expansionSetCode = "BNG";
+    public Tromokratis(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{5}{U}{U}");
         this.supertype.add("Legendary");
         this.subtype.add("Kraken");
 

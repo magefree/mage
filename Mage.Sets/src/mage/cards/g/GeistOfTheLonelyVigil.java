@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.eldritchmoon;
+package mage.cards.g;
 
 import java.util.UUID;
 import mage.MageInt;
@@ -37,9 +37,9 @@ import mage.abilities.effects.common.combat.CanAttackAsThoughItDidntHaveDefender
 import mage.abilities.keyword.DefenderAbility;
 import mage.abilities.keyword.FlyingAbility;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Duration;
-import mage.constants.Rarity;
 import mage.constants.Zone;
 
 /**
@@ -48,9 +48,8 @@ import mage.constants.Zone;
  */
 public class GeistOfTheLonelyVigil extends CardImpl {
 
-    public GeistOfTheLonelyVigil(UUID ownerId) {
-        super(ownerId, 27, "Geist of the Lonely Vigil", Rarity.UNCOMMON, new CardType[]{CardType.CREATURE}, "{1}{W}");
-        this.expansionSetCode = "EMN";
+    public GeistOfTheLonelyVigil(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{1}{W}");
         this.subtype.add("Spirit");
         this.subtype.add("Cleric");
         this.power = new MageInt(2);

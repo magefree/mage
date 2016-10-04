@@ -26,16 +26,16 @@
  *  or implied, of BetaSteward_at_googlemail.com.
  */
 
-package mage.sets.zendikar;
+package mage.cards.k;
 
 import java.util.UUID;
 import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.abilities.common.EntersBattlefieldTappedAbility;
 import mage.abilities.common.EntersBattlefieldTriggeredAbility;
 import mage.abilities.effects.common.GainLifeEffect;
 import mage.abilities.mana.WhiteManaAbility;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 
 /**
  *
@@ -43,9 +43,8 @@ import mage.cards.CardImpl;
  */
 public class KabiraCrossroads extends CardImpl {
 
-    public KabiraCrossroads(UUID ownerId) {
-        super(ownerId, 216, "Kabira Crossroads", Rarity.COMMON, new CardType[]{CardType.LAND}, null);
-        this.expansionSetCode = "ZEN";
+    public KabiraCrossroads(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.LAND},null);
         this.addAbility(new EntersBattlefieldTappedAbility());
         this.addAbility(new EntersBattlefieldTriggeredAbility(new GainLifeEffect(2), false));
         this.addAbility(new WhiteManaAbility());

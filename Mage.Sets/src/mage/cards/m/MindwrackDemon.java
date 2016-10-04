@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.blessedvscursed;
+package mage.cards.m;
 
 import java.util.UUID;
 import mage.MageInt;
@@ -40,8 +40,8 @@ import mage.abilities.effects.common.PutTopCardOfLibraryIntoGraveControllerEffec
 import mage.abilities.keyword.FlyingAbility;
 import mage.abilities.keyword.TrampleAbility;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.constants.TargetController;
 
 /**
@@ -50,9 +50,8 @@ import mage.constants.TargetController;
  */
 public class MindwrackDemon extends CardImpl {
 
-    public MindwrackDemon(UUID ownerId) {
-        super(ownerId, 41, "Mindwrack Demon", Rarity.MYTHIC, new CardType[]{CardType.CREATURE}, "{2}{B}{B}");
-        this.expansionSetCode = "DDQ";
+    public MindwrackDemon(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{2}{B}{B}");
         this.subtype.add("Demon");
         this.power = new MageInt(4);
         this.toughness = new MageInt(5);

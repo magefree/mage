@@ -25,15 +25,15 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.apocalypse;
+package mage.cards.l;
 
 import java.util.UUID;
 import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.abilities.effects.common.DrawCardSourceControllerEffect;
 import mage.abilities.effects.common.GainLifeEffect;
 import mage.abilities.effects.common.LoseLifeTargetEffect;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.target.TargetPlayer;
 
 /**
@@ -42,9 +42,8 @@ import mage.target.TargetPlayer;
  */
 public class LastCaress extends CardImpl {
 
-    public LastCaress(UUID ownerId) {
-        super(ownerId, 41, "Last Caress", Rarity.COMMON, new CardType[]{CardType.SORCERY}, "{2}{B}");
-        this.expansionSetCode = "APC";
+    public LastCaress(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{2}{B}");
 
         this.getSpellAbility().addEffect(new LoseLifeTargetEffect(1));
         this.getSpellAbility().addTarget(new TargetPlayer());

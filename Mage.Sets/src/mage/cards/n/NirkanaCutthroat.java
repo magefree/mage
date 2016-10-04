@@ -26,10 +26,9 @@
  *  or implied, of BetaSteward_at_googlemail.com.
  */
 
-package mage.sets.riseoftheeldrazi;
+package mage.cards.n;
 
 import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.MageInt;
 import mage.abilities.Abilities;
 import mage.abilities.AbilitiesImpl;
@@ -39,6 +38,7 @@ import mage.abilities.keyword.DeathtouchAbility;
 import mage.abilities.keyword.FirstStrikeAbility;
 import mage.abilities.keyword.LevelUpAbility;
 import mage.abilities.keyword.LevelerCardBuilder;
+import mage.cards.CardSetInfo;
 import mage.cards.LevelerCard;
 
 import java.util.UUID;
@@ -49,9 +49,8 @@ import java.util.UUID;
  */
 public class NirkanaCutthroat extends LevelerCard {
 
-    public NirkanaCutthroat (UUID ownerId) {
-        super(ownerId, 119, "Nirkana Cutthroat", Rarity.UNCOMMON, new CardType[]{CardType.CREATURE}, "{2}{B}");
-        this.expansionSetCode = "ROE";
+    public NirkanaCutthroat (UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{2}{B}");
         this.subtype.add("Vampire");
         this.subtype.add("Warrior");
         this.color.setBlack(true);

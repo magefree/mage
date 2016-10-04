@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.commander2014;
+package mage.cards.w;
 
 import java.util.UUID;
 import mage.abilities.effects.Effect;
@@ -35,9 +35,9 @@ import mage.abilities.effects.common.continuous.GainControlTargetEffect;
 import mage.abilities.keyword.HasteAbility;
 import mage.abilities.keyword.SplitSecondAbility;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Duration;
-import mage.constants.Rarity;
 import mage.target.TargetPermanent;
 
 /**
@@ -46,9 +46,8 @@ import mage.target.TargetPermanent;
  */
 public class WordOfSeizing extends CardImpl {
 
-    public WordOfSeizing(UUID ownerId) {
-        super(ownerId, 185, "Word of Seizing", Rarity.RARE, new CardType[]{CardType.INSTANT}, "{3}{R}{R}");
-        this.expansionSetCode = "C14";
+    public WordOfSeizing(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.INSTANT},"{3}{R}{R}");
 
         // Split second
         this.addAbility(new SplitSecondAbility());

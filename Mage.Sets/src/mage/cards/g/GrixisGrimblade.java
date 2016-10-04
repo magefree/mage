@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.alarareborn;
+package mage.cards.g;
 
 import java.util.UUID;
 import mage.MageInt;
@@ -37,9 +37,9 @@ import mage.abilities.effects.common.continuous.BoostSourceEffect;
 import mage.abilities.effects.common.continuous.GainAbilitySourceEffect;
 import mage.abilities.keyword.DeathtouchAbility;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Duration;
-import mage.constants.Rarity;
 import mage.constants.Zone;
 import mage.filter.common.FilterControlledPermanent;
 import mage.filter.predicate.mageobject.MulticoloredPredicate;
@@ -58,9 +58,8 @@ public class GrixisGrimblade extends CardImpl {
         filter.add(new AnotherPredicate());
     }
 
-    public GrixisGrimblade(UUID ownerId) {
-        super(ownerId, 134, "Grixis Grimblade", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{U/R}{B}");
-        this.expansionSetCode = "ARB";
+    public GrixisGrimblade(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{U/R}{B}");
         this.subtype.add("Zombie");
         this.subtype.add("Warrior");
 

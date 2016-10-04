@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.arabiannights;
+package mage.cards.m;
 
 import java.util.UUID;
 import mage.ConditionalMana;
@@ -36,9 +36,9 @@ import mage.abilities.effects.OneShotEffect;
 import mage.abilities.mana.builder.ConditionalManaBuilder;
 import mage.abilities.mana.conditional.CreatureCastConditionalMana;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Outcome;
-import mage.constants.Rarity;
 import mage.game.Game;
 import mage.target.common.TargetControlledCreaturePermanent;
 import mage.abilities.effects.common.AddConditionalManaOfAnyColorEffect;
@@ -50,9 +50,8 @@ import mage.abilities.effects.common.AddConditionalManaOfAnyColorEffect;
  */
 public class Metamorphosis extends CardImpl {
 
-    public Metamorphosis(UUID ownerId) {
-        super(ownerId, 35, "Metamorphosis", Rarity.COMMON, new CardType[]{CardType.SORCERY}, "{G}");
-        this.expansionSetCode = "ARN";
+    public Metamorphosis(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{G}");
 
         // As an additional cost to cast Metamorphosis, sacrifice a creature.
         this.getSpellAbility().addCost(new SacrificeTargetCost(new TargetControlledCreaturePermanent()));

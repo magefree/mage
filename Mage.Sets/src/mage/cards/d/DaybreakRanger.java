@@ -25,11 +25,10 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.innistrad;
+package mage.cards.d;
 
 import java.util.UUID;
 import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.constants.TargetController;
 import mage.constants.Zone;
 import mage.MageInt;
@@ -44,7 +43,9 @@ import mage.abilities.effects.common.DamageTargetEffect;
 import mage.abilities.effects.common.TransformSourceEffect;
 import mage.abilities.keyword.FlyingAbility;
 import mage.abilities.keyword.TransformAbility;
+import mage.cards.n.NightfallPredator;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.filter.predicate.mageobject.AbilityPredicate;
 import mage.target.common.TargetCreaturePermanent;
@@ -61,15 +62,14 @@ public class DaybreakRanger extends CardImpl {
         filter.add(new AbilityPredicate(FlyingAbility.class));
     }
 
-    public DaybreakRanger(UUID ownerId) {
-        super(ownerId, 176, "Daybreak Ranger", Rarity.RARE, new CardType[]{CardType.CREATURE}, "{2}{G}");
-        this.expansionSetCode = "ISD";
+    public DaybreakRanger(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{2}{G}");
         this.subtype.add("Human");
         this.subtype.add("Archer");
         this.subtype.add("Werewolf");
 
         this.transformable = true;
-        this.secondSideCard = new NightfallPredator(ownerId);
+        this.secondSideCardClazz = NightfallPredator.class;
 
         this.power = new MageInt(2);
         this.toughness = new MageInt(2);

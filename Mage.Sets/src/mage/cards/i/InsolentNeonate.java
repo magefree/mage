@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.shadowsoverinnistrad;
+package mage.cards.i;
 
 import java.util.UUID;
 import mage.MageInt;
@@ -36,8 +36,8 @@ import mage.abilities.costs.common.SacrificeSourceCost;
 import mage.abilities.effects.common.DrawCardSourceControllerEffect;
 import mage.abilities.keyword.MenaceAbility;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.constants.Zone;
 
 /**
@@ -46,9 +46,8 @@ import mage.constants.Zone;
  */
 public class InsolentNeonate extends CardImpl {
 
-    public InsolentNeonate(UUID ownerId) {
-        super(ownerId, 168, "Insolent Neonate", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{R}");
-        this.expansionSetCode = "SOI";
+    public InsolentNeonate(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{R}");
         this.subtype.add("Vampire");
         this.power = new MageInt(1);
         this.toughness = new MageInt(1);

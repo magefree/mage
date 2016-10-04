@@ -25,12 +25,11 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.mirrodinbesieged;
+package mage.cards.s;
 
 import java.util.UUID;
 import mage.constants.CardType;
 import mage.constants.Duration;
-import mage.constants.Rarity;
 import mage.constants.Zone;
 import mage.MageInt;
 import mage.abilities.common.SimpleStaticAbility;
@@ -40,6 +39,7 @@ import mage.abilities.effects.ContinuousEffect;
 import mage.abilities.effects.common.continuous.GainAbilitySourceEffect;
 import mage.abilities.keyword.DoubleStrikeAbility;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 
 /**
  *
@@ -49,9 +49,8 @@ public class SpiralingDuelist extends CardImpl {
 
     private final String effectText = "Metalcraft - Spiraling Duelist has double strike as long as you control three or more artifacts.";
 
-    public SpiralingDuelist(UUID ownerId) {
-        super(ownerId, 76, "Spiraling Duelist", Rarity.UNCOMMON, new CardType[]{CardType.CREATURE}, "{2}{R}{R}");
-        this.expansionSetCode = "MBS";
+    public SpiralingDuelist(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{2}{R}{R}");
         this.subtype.add("Human");
         this.subtype.add("Berserker");
 

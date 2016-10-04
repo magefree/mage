@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.zendikar;
+package mage.cards.s;
 
 import java.util.Iterator;
 import java.util.UUID;
@@ -37,6 +37,7 @@ import mage.abilities.common.LandfallAbility;
 import mage.abilities.effects.ContinuousEffectImpl;
 import mage.abilities.keyword.DefenderAbility;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 
@@ -46,9 +47,8 @@ import mage.game.permanent.Permanent;
  */
 public class ShoalSerpent extends CardImpl {
     
-    public ShoalSerpent(UUID ownerId) {
-        super(ownerId, 65, "Shoal Serpent", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{5}{U}");
-        this.expansionSetCode = "ZEN";
+    public ShoalSerpent(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{5}{U}");
         this.subtype.add("Serpent");
 
         this.power = new MageInt(5);

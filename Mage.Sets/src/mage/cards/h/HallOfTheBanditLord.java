@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.championsofkamigawa;
+package mage.cards.h;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -43,9 +43,9 @@ import mage.abilities.effects.common.continuous.GainAbilityTargetEffect;
 import mage.abilities.keyword.HasteAbility;
 import mage.abilities.mana.SimpleManaAbility;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Duration;
-import mage.constants.Rarity;
 import mage.constants.WatcherScope;
 import mage.constants.Zone;
 import mage.game.Game;
@@ -62,9 +62,8 @@ import mage.watchers.Watcher;
  */
 public class HallOfTheBanditLord extends CardImpl {
 
-    public HallOfTheBanditLord(UUID ownerId) {
-        super(ownerId, 277, "Hall of the Bandit Lord", Rarity.RARE, new CardType[]{CardType.LAND}, "");
-        this.expansionSetCode = "CHK";
+    public HallOfTheBanditLord(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.LAND},"");
         this.supertype.add("Legendary");
 
         // Hall of the Bandit Lord enters the battlefield tapped.

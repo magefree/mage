@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.iceage;
+package mage.cards.n;
 
 import java.util.UUID;
 import mage.ObjectColor;
@@ -35,8 +35,8 @@ import mage.abilities.costs.mana.ManaCostsImpl;
 import mage.abilities.effects.common.DoIfCostPaid;
 import mage.abilities.effects.common.UntapTargetEffect;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.filter.FilterSpell;
 import mage.filter.predicate.mageobject.ColorPredicate;
 import mage.target.TargetPermanent;
@@ -53,9 +53,8 @@ public class NacreTalisman extends CardImpl {
         filter.add(new ColorPredicate(ObjectColor.WHITE));
     }
 
-    public NacreTalisman(UUID ownerId) {
-        super(ownerId, 304, "Nacre Talisman", Rarity.UNCOMMON, new CardType[]{CardType.ARTIFACT}, "{2}");
-        this.expansionSetCode = "ICE";
+    public NacreTalisman(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.ARTIFACT},"{2}");
 
         // Whenever a player casts a white spell, you may pay {3}. If you do, untap target permanent.
         Ability ability = new SpellCastAllTriggeredAbility(new DoIfCostPaid(new UntapTargetEffect(), new ManaCostsImpl("{3}")), filter, true);

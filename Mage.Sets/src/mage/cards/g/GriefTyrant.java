@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.shadowmoor;
+package mage.cards.g;
 
 import java.util.UUID;
 import mage.MageInt;
@@ -35,9 +35,9 @@ import mage.abilities.common.EntersBattlefieldAbility;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.counter.AddCountersSourceEffect;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Outcome;
-import mage.constants.Rarity;
 import mage.counters.CounterType;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
@@ -49,9 +49,8 @@ import mage.target.common.TargetCreaturePermanent;
  */
 public class GriefTyrant extends CardImpl {
     
-    public GriefTyrant(UUID ownerId) {
-        super(ownerId, 189, "Grief Tyrant", Rarity.UNCOMMON, new CardType[]{CardType.CREATURE}, "{5}{B/R}");
-        this.expansionSetCode = "SHM";
+    public GriefTyrant(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{5}{B/R}");
         this.subtype.add("Horror");
         this.power = new MageInt(8);
         this.toughness = new MageInt(8);

@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.shadowmoor;
+package mage.cards.d;
 
 import java.util.UUID;
 import mage.MageInt;
@@ -36,8 +36,8 @@ import mage.abilities.costs.mana.ManaCostsImpl;
 import mage.abilities.effects.common.DoIfCostPaid;
 import mage.abilities.effects.common.PutLibraryIntoGraveTargetEffect;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.filter.FilterSpell;
 import mage.filter.predicate.mageobject.ColorPredicate;
 import mage.target.TargetPlayer;
@@ -55,9 +55,8 @@ public class DrownerInitiate extends CardImpl {
         filter.add(new ColorPredicate(ObjectColor.BLUE));
     }
 
-    public DrownerInitiate(UUID ownerId) {
-        super(ownerId, 36, "Drowner Initiate", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{U}");
-        this.expansionSetCode = "SHM";
+    public DrownerInitiate(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{U}");
         this.subtype.add("Merfolk");
         this.subtype.add("Wizard");
 

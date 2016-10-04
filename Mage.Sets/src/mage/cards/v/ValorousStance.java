@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.fatereforged;
+package mage.cards.v;
 
 import java.util.UUID;
 import mage.abilities.Mode;
@@ -33,9 +33,9 @@ import mage.abilities.effects.common.DestroyTargetEffect;
 import mage.abilities.effects.common.continuous.GainAbilityTargetEffect;
 import mage.abilities.keyword.IndestructibleAbility;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Duration;
-import mage.constants.Rarity;
 import mage.filter.Filter;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.filter.predicate.mageobject.ToughnessPredicate;
@@ -53,9 +53,8 @@ public class ValorousStance extends CardImpl {
         filter.add(new ToughnessPredicate(Filter.ComparisonType.GreaterThan, 3));
     }
     
-    public ValorousStance(UUID ownerId) {
-        super(ownerId, 28, "Valorous Stance", Rarity.UNCOMMON, new CardType[]{CardType.INSTANT}, "{1}{W}");
-        this.expansionSetCode = "FRF";
+    public ValorousStance(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.INSTANT},"{1}{W}");
 
         
         //Choose one - Target creature gains Indestructible until end of turn

@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.ravnica;
+package mage.cards.c;
 
 import java.util.UUID;
 import mage.abilities.Ability;
@@ -35,9 +35,9 @@ import mage.abilities.effects.Effect;
 import mage.abilities.effects.common.AttachEffect;
 import mage.abilities.effects.common.CopyPermanentEffect;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Outcome;
-import mage.constants.Rarity;
 import mage.filter.FilterPermanent;
 import mage.filter.common.FilterEnchantmentPermanent;
 import mage.game.Game;
@@ -52,9 +52,8 @@ import mage.util.functions.EmptyApplyToPermanent;
  */
 public class CopyEnchantment extends CardImpl {
 
-    public CopyEnchantment(UUID ownerId) {
-        super(ownerId, 42, "Copy Enchantment", Rarity.RARE, new CardType[]{CardType.ENCHANTMENT}, "{2}{U}");
-        this.expansionSetCode = "RAV";
+    public CopyEnchantment(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.ENCHANTMENT},"{2}{U}");
 
         // You may have Copy Enchantment enter the battlefield as a copy of any enchantment on the battlefield.
         this.addAbility(new EntersBattlefieldAbility(new CopyEnchantmentEffect(new FilterEnchantmentPermanent("any enchantment")), true));

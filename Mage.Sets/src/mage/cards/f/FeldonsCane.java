@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.timeshifted;
+package mage.cards.f;
 
 import java.util.UUID;
 import mage.abilities.Ability;
@@ -35,9 +35,9 @@ import mage.abilities.costs.common.TapSourceCost;
 import mage.abilities.effects.OneShotEffect;
 import mage.cards.Card;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Outcome;
-import mage.constants.Rarity;
 import mage.constants.Zone;
 import mage.game.Game;
 import mage.players.Player;
@@ -48,9 +48,8 @@ import mage.players.Player;
  */
 public class FeldonsCane extends CardImpl {
 
-    public FeldonsCane(UUID ownerId) {
-        super(ownerId, 109, "Feldon's Cane", Rarity.SPECIAL, new CardType[]{CardType.ARTIFACT}, "{1}");
-        this.expansionSetCode = "TSB";
+    public FeldonsCane(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.ARTIFACT},"{1}");
 
         // {tap}, Exile Feldon's Cane: Shuffle your graveyard into your library.
         Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new FeldonsCaneEffect(), new TapSourceCost());

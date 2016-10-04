@@ -25,16 +25,16 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.magic2013;
+package mage.cards.c;
 
 import java.util.UUID;
 import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.constants.Zone;
 import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.costs.common.TapTargetCost;
 import mage.abilities.effects.common.UntapTargetEffect;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.filter.common.FilterControlledPermanent;
 import mage.filter.predicate.Predicates;
 import mage.filter.predicate.mageobject.CardTypePredicate;
@@ -55,9 +55,8 @@ public class ClockOfOmens extends CardImpl {
         filter.add(Predicates.not(new TappedPredicate()));
     }
 
-    public ClockOfOmens(UUID ownerId) {
-        super(ownerId, 202, "Clock of Omens", Rarity.UNCOMMON, new CardType[]{CardType.ARTIFACT}, "{4}");
-        this.expansionSetCode = "M13";
+    public ClockOfOmens(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.ARTIFACT},"{4}");
 
         // Tap two untapped artifacts you control: Untap target artifact.
         SimpleActivatedAbility ability = new SimpleActivatedAbility(Zone.BATTLEFIELD,

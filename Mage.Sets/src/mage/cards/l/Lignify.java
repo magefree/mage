@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.lorwyn;
+package mage.cards.l;
 
 import java.util.UUID;
 import mage.MageInt;
@@ -35,10 +35,10 @@ import mage.abilities.effects.common.AttachEffect;
 import mage.abilities.effects.common.continuous.BecomesCreatureAttachedEffect;
 import mage.abilities.keyword.EnchantAbility;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Duration;
 import mage.constants.Outcome;
-import mage.constants.Rarity;
 import mage.constants.Zone;
 import mage.game.permanent.token.Token;
 import mage.target.TargetPermanent;
@@ -50,9 +50,8 @@ import mage.target.common.TargetCreaturePermanent;
  */
 public class Lignify extends CardImpl {
 
-    public Lignify(UUID ownerId) {
-        super(ownerId, 228, "Lignify", Rarity.COMMON, new CardType[]{CardType.TRIBAL, CardType.ENCHANTMENT}, "{1}{G}");
-        this.expansionSetCode = "LRW";
+    public Lignify(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.TRIBAL,CardType.ENCHANTMENT},"{1}{G}");
         this.subtype.add("Treefolk");
         this.subtype.add("Aura");
 

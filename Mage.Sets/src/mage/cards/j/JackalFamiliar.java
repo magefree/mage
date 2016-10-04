@@ -25,24 +25,23 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.magic2010;
+package mage.cards.j;
 
 import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.keyword.CantAttackAloneAbility;
 import mage.abilities.keyword.CantBlockAloneAbility;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.Rarity;
 
 /**
  * @author magenoxx_at_gmail.com
  */
 public class JackalFamiliar extends CardImpl {
 
-    public JackalFamiliar(UUID ownerId) {
-        super(ownerId, 143, "Jackal Familiar", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{R}");
-        this.expansionSetCode = "M10";
+    public JackalFamiliar(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{R}");
         this.subtype.add("Hound");
 
         this.power = new MageInt(2);

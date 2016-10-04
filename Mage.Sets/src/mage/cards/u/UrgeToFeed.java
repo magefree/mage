@@ -25,17 +25,17 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.worldwake;
+package mage.cards.u;
 
 import java.util.UUID;
 import mage.abilities.Ability;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.continuous.BoostTargetEffect;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Duration;
 import mage.constants.Outcome;
-import mage.constants.Rarity;
 import mage.constants.TargetController;
 import mage.counters.CounterType;
 import mage.filter.common.FilterCreaturePermanent;
@@ -55,9 +55,8 @@ public class UrgeToFeed extends CardImpl {
 
     private static final FilterCreaturePermanent filter = new FilterCreaturePermanent();
 
-    public UrgeToFeed(UUID ownerId) {
-        super(ownerId, 70, "Urge to Feed", Rarity.UNCOMMON, new CardType[]{CardType.INSTANT}, "{B}{B}");
-        this.expansionSetCode = "WWK";
+    public UrgeToFeed(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.INSTANT},"{B}{B}");
 
         // Target creature gets -3/-3 until end of turn. You may tap any number of untapped Vampire creatures you control. If you do, put a +1/+1 counter on each of those Vampires.
         this.getSpellAbility().addEffect(new BoostTargetEffect(-3, -3, Duration.EndOfTurn));

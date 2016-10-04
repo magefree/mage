@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.prophecy;
+package mage.cards.t;
 
 import java.util.UUID;
 import mage.MageInt;
@@ -33,8 +33,8 @@ import mage.abilities.common.BeginningOfEndStepTriggeredAbility;
 import mage.abilities.effects.common.TapAllEffect;
 import mage.abilities.keyword.FlyingAbility;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.constants.TargetController;
 import mage.filter.common.FilterControlledLandPermanent;
 
@@ -44,9 +44,8 @@ import mage.filter.common.FilterControlledLandPermanent;
  */
 public class TroublesomeSpirit extends CardImpl {
 
-    public TroublesomeSpirit(UUID ownerId) {
-        super(ownerId, 52, "Troublesome Spirit", Rarity.RARE, new CardType[]{CardType.CREATURE}, "{2}{U}{U}");
-        this.expansionSetCode = "PCY";
+    public TroublesomeSpirit(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{2}{U}{U}");
         this.subtype.add("Spirit");
         this.power = new MageInt(3);
         this.toughness = new MageInt(4);

@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.riseoftheeldrazi;
+package mage.cards.e;
 
 import java.util.UUID;
 
@@ -38,6 +38,7 @@ import mage.abilities.keyword.EnchantAbility;
 import mage.abilities.keyword.FlashAbility;
 import mage.abilities.keyword.TotemArmorAbility;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.target.TargetPermanent;
 import mage.target.common.TargetCreaturePermanent;
 
@@ -47,9 +48,8 @@ import mage.target.common.TargetCreaturePermanent;
  */
 public class EelUmbra extends CardImpl {
 
-    public EelUmbra(UUID ownerId) {
-        super(ownerId, 65, "Eel Umbra", Rarity.COMMON, new CardType[]{CardType.ENCHANTMENT}, "{1}{U}");
-        this.expansionSetCode = "ROE";
+    public EelUmbra(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.ENCHANTMENT},"{1}{U}");
         this.subtype.add("Aura");
 
 

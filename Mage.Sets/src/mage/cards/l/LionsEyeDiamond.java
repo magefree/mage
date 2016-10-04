@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.mirage;
+package mage.cards.l;
 
 import java.util.UUID;
 import mage.Mana;
@@ -36,8 +36,8 @@ import mage.abilities.effects.common.AddManaOfAnyColorEffect;
 import mage.abilities.effects.common.BasicManaEffect;
 import mage.abilities.mana.ManaAbility;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.constants.Zone;
 import mage.game.Game;
 import mage.players.Player;
@@ -48,9 +48,8 @@ import mage.players.Player;
  */
 public class LionsEyeDiamond extends CardImpl {
 
-    public LionsEyeDiamond(UUID ownerId) {
-        super(ownerId, 272, "Lion's Eye Diamond", Rarity.RARE, new CardType[]{CardType.ARTIFACT}, "{0}");
-        this.expansionSetCode = "MIR";
+    public LionsEyeDiamond(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.ARTIFACT},"{0}");
 
         // Sacrifice Lion's Eye Diamond, Discard your hand: Add three mana of any one color to your mana pool. Activate this ability only any time you could cast an instant.
         this.addAbility(new LionsEyeDiamondAbility());

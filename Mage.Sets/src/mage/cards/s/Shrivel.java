@@ -25,14 +25,14 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.riseoftheeldrazi;
+package mage.cards.s;
 
 import java.util.UUID;
 import mage.abilities.effects.common.continuous.BoostAllEffect;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Duration;
-import mage.constants.Rarity;
 import mage.filter.common.FilterCreaturePermanent;
 
 /**
@@ -41,9 +41,8 @@ import mage.filter.common.FilterCreaturePermanent;
  */
 public class Shrivel extends CardImpl {
 
-    public Shrivel(UUID ownerId) {
-        super(ownerId, 126, "Shrivel", Rarity.COMMON, new CardType[]{CardType.SORCERY}, "{1}{B}");
-        this.expansionSetCode = "ROE";
+    public Shrivel(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{1}{B}");
 
 
         this.getSpellAbility().addEffect(new BoostAllEffect(-1, -1, Duration.EndOfTurn, new FilterCreaturePermanent("All creatures"), false));

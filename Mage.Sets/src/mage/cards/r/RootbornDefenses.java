@@ -25,17 +25,17 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.returntoravnica;
+package mage.cards.r;
 
 import java.util.UUID;
 import mage.constants.CardType;
 import mage.constants.Duration;
-import mage.constants.Rarity;
 import mage.abilities.effects.Effect;
 import mage.abilities.effects.common.PopulateEffect;
 import mage.abilities.effects.common.continuous.GainAbilityAllEffect;
 import mage.abilities.keyword.IndestructibleAbility;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.filter.common.FilterControlledCreaturePermanent;
 
 /**
@@ -44,9 +44,8 @@ import mage.filter.common.FilterControlledCreaturePermanent;
  */
 public class RootbornDefenses extends CardImpl {
 
-    public RootbornDefenses(UUID ownerId) {
-        super(ownerId, 19, "Rootborn Defenses", Rarity.COMMON, new CardType[]{CardType.INSTANT}, "{2}{W}");
-        this.expansionSetCode = "RTR";
+    public RootbornDefenses(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.INSTANT},"{2}{W}");
 
 
         // Populate. Creatures you control are indestructible this turn. 

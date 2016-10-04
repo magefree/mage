@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.eventide;
+package mage.cards.o;
 
 import java.util.UUID;
 import mage.MageInt;
@@ -36,9 +36,9 @@ import mage.abilities.dynamicvalue.common.CardsInControllerHandCount;
 import mage.abilities.effects.common.DrawCardSourceControllerEffect;
 import mage.abilities.effects.common.continuous.SetPowerToughnessSourceEffect;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Duration;
-import mage.constants.Rarity;
 import mage.constants.TargetController;
 import mage.constants.Zone;
 
@@ -49,9 +49,8 @@ import mage.constants.Zone;
  */
 public class OverbeingOfMyth extends CardImpl {
 
-    public OverbeingOfMyth(UUID ownerId) {
-        super(ownerId, 157, "Overbeing of Myth", Rarity.RARE, new CardType[]{CardType.CREATURE}, "{G/U}{G/U}{G/U}{G/U}{G/U}");
-        this.expansionSetCode = "EVE";
+    public OverbeingOfMyth(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{G/U}{G/U}{G/U}{G/U}{G/U}");
         this.subtype.add("Spirit");
         this.subtype.add("Avatar");
 

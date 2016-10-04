@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.legions;
+package mage.cards.w;
 
 import java.util.UUID;
 import mage.MageInt;
@@ -37,11 +37,11 @@ import mage.abilities.effects.ContinuousEffectImpl;
 import mage.abilities.effects.common.ChooseColorEffect;
 import mage.abilities.keyword.ProtectionAbility;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Duration;
 import mage.constants.Layer;
 import mage.constants.Outcome;
-import mage.constants.Rarity;
 import mage.constants.SubLayer;
 import mage.constants.Zone;
 import mage.filter.FilterPermanent;
@@ -60,9 +60,8 @@ public class WardSliver extends CardImpl {
     static FilterPermanent filter = new FilterPermanent("chosen color");
     
     
-    public WardSliver(UUID ownerId) {
-        super(ownerId, 25, "Ward Sliver", Rarity.UNCOMMON, new CardType[]{CardType.CREATURE}, "{4}{W}");
-        this.expansionSetCode = "LGN";
+    public WardSliver(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{4}{W}");
         this.subtype.add("Sliver");
 
         this.power = new MageInt(2);

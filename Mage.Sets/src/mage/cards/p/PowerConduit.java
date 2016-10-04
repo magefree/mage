@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.mirrodin;
+package mage.cards.p;
 
 import java.util.UUID;
 import mage.abilities.Ability;
@@ -35,8 +35,8 @@ import mage.abilities.costs.common.RemoveCounterCost;
 import mage.abilities.costs.common.TapSourceCost;
 import mage.abilities.effects.common.counter.AddCountersTargetEffect;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.constants.Zone;
 import mage.counters.CounterType;
 import mage.target.common.TargetArtifactPermanent;
@@ -49,9 +49,8 @@ import mage.target.common.TargetCreaturePermanent;
  */
 public class PowerConduit extends CardImpl {
 
-    public PowerConduit(UUID ownerId) {
-        super(ownerId, 229, "Power Conduit", Rarity.UNCOMMON, new CardType[]{CardType.ARTIFACT}, "{2}");
-        this.expansionSetCode = "MRD";
+    public PowerConduit(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.ARTIFACT},"{2}");
 
         // {tap}, Remove a counter from a permanent you control: Choose one - Put a charge counter on target artifact; or put a +1/+1 counter on target creature.
         Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new AddCountersTargetEffect(CounterType.CHARGE.createInstance()), new TapSourceCost());

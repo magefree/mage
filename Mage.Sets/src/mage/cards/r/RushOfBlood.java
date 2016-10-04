@@ -25,16 +25,16 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.avacynrestored;
+package mage.cards.r;
 
 import java.util.UUID;
 import mage.constants.CardType;
 import mage.constants.Duration;
-import mage.constants.Rarity;
 import mage.abilities.dynamicvalue.common.StaticValue;
 import mage.abilities.dynamicvalue.common.TargetPermanentPowerCount;
 import mage.abilities.effects.common.continuous.BoostTargetEffect;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.target.common.TargetCreaturePermanent;
 
 /**
@@ -43,9 +43,8 @@ import mage.target.common.TargetCreaturePermanent;
  */
 public class RushOfBlood extends CardImpl {
 
-    public RushOfBlood(UUID ownerId) {
-        super(ownerId, 154, "Rush of Blood", Rarity.UNCOMMON, new CardType[]{CardType.INSTANT}, "{2}{R}");
-        this.expansionSetCode = "AVR";
+    public RushOfBlood(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.INSTANT},"{2}{R}");
 
 
         // Target creature gets +X/+0 until end of turn, where X is its power.

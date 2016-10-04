@@ -25,10 +25,9 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.lorwyn;
+package mage.cards.w;
 
 import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.constants.Zone;
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleActivatedAbility;
@@ -36,6 +35,7 @@ import mage.abilities.costs.common.SacrificeSourceCost;
 import mage.abilities.costs.mana.GenericManaCost;
 import mage.abilities.effects.common.search.SearchLibraryPutInHandEffect;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.filter.common.FilterBasicLandCard;
 import mage.target.common.TargetCardInLibrary;
 
@@ -47,9 +47,8 @@ import java.util.UUID;
  */
 public class WanderersTwig extends CardImpl {
 
-    public WanderersTwig(UUID ownerId) {
-        super(ownerId, 265, "Wanderer's Twig", Rarity.COMMON, new CardType[]{CardType.ARTIFACT}, "{1}");
-        this.expansionSetCode = "LRW";
+    public WanderersTwig(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.ARTIFACT},"{1}");
 
         // {1}, Sacrifice Wanderer's Twig: Search your library for a basic land card, reveal it, and put it into your hand. Then shuffle your library.
         Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD,

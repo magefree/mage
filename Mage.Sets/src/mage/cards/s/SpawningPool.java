@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.tenthedition;
+package mage.cards.s;
 
 import java.util.UUID;
 
@@ -36,6 +36,7 @@ import mage.abilities.costs.mana.ManaCostsImpl;
 import mage.abilities.effects.common.continuous.BecomesCreatureSourceEffect;
 import mage.abilities.mana.BlackManaAbility;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.game.permanent.token.SkeletonToken;
 
 /**
@@ -44,9 +45,8 @@ import mage.game.permanent.token.SkeletonToken;
  */
 public class SpawningPool extends CardImpl {
 
-    public SpawningPool(UUID ownerId) {
-        super(ownerId, 358, "Spawning Pool", Rarity.UNCOMMON, new CardType[]{CardType.LAND}, "");
-        this.expansionSetCode = "10E";
+    public SpawningPool(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.LAND},"");
         this.addAbility(new EntersBattlefieldTappedAbility());
         this.addAbility(new BlackManaAbility());
         this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new BecomesCreatureSourceEffect(new SkeletonToken(), "land", Duration.EndOfTurn), new ManaCostsImpl("{1}{B}")));

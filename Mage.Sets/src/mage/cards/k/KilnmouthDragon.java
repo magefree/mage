@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.knightsvsdragons;
+package mage.cards.k;
 
 import java.util.UUID;
 import mage.MageInt;
@@ -38,8 +38,8 @@ import mage.abilities.effects.common.DamageTargetEffect;
 import mage.abilities.keyword.AmplifyAbility;
 import mage.abilities.keyword.FlyingAbility;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.constants.Zone;
 import mage.counters.CounterType;
 import mage.target.common.TargetCreatureOrPlayer;
@@ -50,9 +50,8 @@ import mage.target.common.TargetCreatureOrPlayer;
  */
 public class KilnmouthDragon extends CardImpl {
 
-    public KilnmouthDragon(UUID ownerId) {
-        super(ownerId, 59, "Kilnmouth Dragon", Rarity.RARE, new CardType[]{CardType.CREATURE}, "{5}{R}{R}");
-        this.expansionSetCode = "DDG";
+    public KilnmouthDragon(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{5}{R}{R}");
         this.subtype.add("Dragon");
         this.power = new MageInt(5);
         this.toughness = new MageInt(5);

@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.starwars;
+package mage.cards.g;
 
 import java.util.UUID;
 import mage.MageInt;
@@ -34,8 +34,8 @@ import mage.abilities.common.DealsDamageToACreatureTriggeredAbility;
 import mage.abilities.effects.common.DontUntapInControllersNextUntapStepTargetEffect;
 import mage.abilities.effects.common.TapTargetEffect;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.Rarity;
 
 /**
  *
@@ -43,9 +43,8 @@ import mage.constants.Rarity;
  */
 public class GunganCaptain extends CardImpl {
 
-    public GunganCaptain(UUID ownerId) {
-        super(ownerId, 39, "Gungan Captain", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{3}{U}");
-        this.expansionSetCode = "SWS";
+    public GunganCaptain(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{3}{U}");
         this.subtype.add("Gungan");
         this.subtype.add("Warrior");
         this.power = new MageInt(1);

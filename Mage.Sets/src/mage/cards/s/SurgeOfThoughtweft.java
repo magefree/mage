@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.lorwyn;
+package mage.cards.s;
 
 import java.util.UUID;
 import mage.abilities.condition.common.PermanentsOnTheBattlefieldCondition;
@@ -33,9 +33,9 @@ import mage.abilities.decorator.ConditionalOneShotEffect;
 import mage.abilities.effects.common.DrawCardSourceControllerEffect;
 import mage.abilities.effects.common.continuous.BoostControlledEffect;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Duration;
-import mage.constants.Rarity;
 import mage.filter.FilterPermanent;
 import mage.filter.predicate.mageobject.SubtypePredicate;
 
@@ -51,9 +51,8 @@ public class SurgeOfThoughtweft extends CardImpl {
         filter.add(new SubtypePredicate("Kithkin"));
     }
 
-    public SurgeOfThoughtweft(UUID ownerId) {
-        super(ownerId, 43, "Surge of Thoughtweft", Rarity.COMMON, new CardType[]{CardType.TRIBAL, CardType.INSTANT}, "{1}{W}");
-        this.expansionSetCode = "LRW";
+    public SurgeOfThoughtweft(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.TRIBAL,CardType.INSTANT},"{1}{W}");
         this.subtype.add("Kithkin");
 
         // Creatures you control get +1/+1 until end of turn.

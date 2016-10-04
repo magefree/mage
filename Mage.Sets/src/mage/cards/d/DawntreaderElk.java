@@ -25,12 +25,11 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.darkascension;
+package mage.cards.d;
 
 import java.util.UUID;
 import mage.constants.CardType;
 import mage.constants.ColoredManaSymbol;
-import mage.constants.Rarity;
 import mage.constants.Zone;
 import mage.MageInt;
 import mage.abilities.common.SimpleActivatedAbility;
@@ -38,6 +37,7 @@ import mage.abilities.costs.common.SacrificeSourceCost;
 import mage.abilities.costs.mana.ColoredManaCost;
 import mage.abilities.effects.common.search.SearchLibraryPutInPlayEffect;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.filter.common.FilterBasicLandCard;
 import mage.target.common.TargetCardInLibrary;
 
@@ -47,9 +47,8 @@ import mage.target.common.TargetCardInLibrary;
  */
 public class DawntreaderElk extends CardImpl {
 
-    public DawntreaderElk(UUID ownerId) {
-        super(ownerId, 111, "Dawntreader Elk", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{1}{G}");
-        this.expansionSetCode = "DKA";
+    public DawntreaderElk(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{1}{G}");
         this.subtype.add("Elk");
 
         this.power = new MageInt(2);

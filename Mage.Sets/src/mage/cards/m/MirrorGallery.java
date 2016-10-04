@@ -25,18 +25,18 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.betrayersofkamigawa;
+package mage.cards.m;
 
 import java.util.UUID;
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.effects.ContinuousEffectImpl;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Duration;
 import mage.constants.Layer;
 import mage.constants.Outcome;
-import mage.constants.Rarity;
 import mage.constants.SubLayer;
 import mage.constants.Zone;
 import mage.game.Game;
@@ -47,9 +47,8 @@ import mage.game.Game;
  */
 public class MirrorGallery extends CardImpl {
 
-    public MirrorGallery(UUID ownerId) {
-        super(ownerId, 154, "Mirror Gallery", Rarity.RARE, new CardType[]{CardType.ARTIFACT}, "{5}");
-        this.expansionSetCode = "BOK";
+    public MirrorGallery(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.ARTIFACT},"{5}");
 
         // The "legend rule" doesn't apply.
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new MirrorGalleryRuleEffect()));

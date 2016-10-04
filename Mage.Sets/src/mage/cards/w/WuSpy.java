@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.portalthreekingdoms;
+package mage.cards.w;
 
 import java.util.UUID;
 import mage.MageInt;
@@ -34,11 +34,11 @@ import mage.abilities.common.EntersBattlefieldTriggeredAbility;
 import mage.abilities.effects.OneShotEffect;
 import mage.cards.Card;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.cards.Cards;
 import mage.cards.CardsImpl;
 import mage.constants.CardType;
 import mage.constants.Outcome;
-import mage.constants.Rarity;
 import mage.constants.Zone;
 import mage.filter.FilterCard;
 import mage.game.Game;
@@ -53,9 +53,8 @@ import mage.target.common.TargetCardInLibrary;
  */
 public class WuSpy extends CardImpl {
 
-    public WuSpy(UUID ownerId) {
-        super(ownerId, 63, "Wu Spy", Rarity.UNCOMMON, new CardType[]{CardType.CREATURE}, "{1}{U}");
-        this.expansionSetCode = "PTK";
+    public WuSpy(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{1}{U}");
         this.subtype.add("Human");
         this.subtype.add("Soldier");
         this.subtype.add("Rogue");

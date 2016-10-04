@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.morningtide;
+package mage.cards.c;
 
 import java.util.UUID;
 import mage.abilities.Ability;
@@ -33,11 +33,11 @@ import mage.abilities.common.EntersBattlefieldControlledTriggeredAbility;
 import mage.abilities.effects.OneShotEffect;
 import mage.cards.Card;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.cards.Cards;
 import mage.cards.CardsImpl;
 import mage.constants.CardType;
 import mage.constants.Outcome;
-import mage.constants.Rarity;
 import mage.constants.SetTargetPointer;
 import mage.constants.Zone;
 import mage.filter.FilterCard;
@@ -54,9 +54,8 @@ import mage.target.common.TargetCardInHand;
  */
 public class CreamOfTheCrop extends CardImpl {
 
-    public CreamOfTheCrop(UUID ownerId) {
-        super(ownerId, 117, "Cream of the Crop", Rarity.RARE, new CardType[]{CardType.ENCHANTMENT}, "{1}{G}");
-        this.expansionSetCode = "MOR";
+    public CreamOfTheCrop(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.ENCHANTMENT},"{1}{G}");
 
 
         // Whenever a creature enters the battlefield under your control, you may look at the top X cards of your library, where X is that creature's power. If you do, put one of those cards on top of your library and the rest on the bottom of your library in any order.

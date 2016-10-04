@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.odyssey;
+package mage.cards.d;
 
 import java.util.UUID;
 import mage.MageInt;
@@ -35,9 +35,9 @@ import mage.abilities.costs.common.SacrificeSourceCost;
 import mage.abilities.costs.mana.ColoredManaCost;
 import mage.abilities.effects.common.GainLifeEffect;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.ColoredManaSymbol;
-import mage.constants.Rarity;
 import mage.constants.Zone;
 
 /**
@@ -46,9 +46,8 @@ import mage.constants.Zone;
  */
 public class DedicatedMartyr extends CardImpl {
 
-    public DedicatedMartyr(UUID ownerId) {
-        super(ownerId, 16, "Dedicated Martyr", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{W}");
-        this.expansionSetCode = "ODY";
+    public DedicatedMartyr(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{W}");
         this.subtype.add("Human");
         this.subtype.add("Cleric");
 

@@ -25,12 +25,11 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.returntoravnica;
+package mage.cards.o;
 
 import java.util.UUID;
 
 import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.MageInt;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.condition.common.NotMyTurnCondition;
@@ -38,6 +37,7 @@ import mage.abilities.decorator.ConditionalContinuousEffect;
 import mage.abilities.effects.common.continuous.GainAbilityControlledEffect;
 import mage.abilities.keyword.HexproofAbility;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.Duration;
 import mage.constants.Zone;
 import mage.filter.FilterPermanent;
@@ -55,9 +55,8 @@ public class OakStreetInnkeeper extends CardImpl {
         filter.add(new TappedPredicate());
     }
 
-    public OakStreetInnkeeper(UUID ownerId) {
-        super(ownerId, 131, "Oak Street Innkeeper", Rarity.UNCOMMON, new CardType[]{CardType.CREATURE}, "{2}{G}");
-        this.expansionSetCode = "RTR";
+    public OakStreetInnkeeper(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{2}{G}");
         this.subtype.add("Elf");
 
         this.power = new MageInt(1);

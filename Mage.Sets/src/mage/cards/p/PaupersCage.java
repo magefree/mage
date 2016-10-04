@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.mirage;
+package mage.cards.p;
 
 import java.util.UUID;
 import mage.abilities.TriggeredAbility;
@@ -34,8 +34,8 @@ import mage.abilities.condition.common.CardsInHandCondition;
 import mage.abilities.decorator.ConditionalTriggeredAbility;
 import mage.abilities.effects.common.DamageTargetEffect;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.constants.TargetController;
 import mage.constants.Zone;
 
@@ -45,9 +45,8 @@ import mage.constants.Zone;
  */
 public class PaupersCage extends CardImpl {
 
-    public PaupersCage(UUID ownerId) {
-        super(ownerId, 279, "Paupers' Cage", Rarity.RARE, new CardType[]{CardType.ARTIFACT}, "{3}");
-        this.expansionSetCode = "MIR";
+    public PaupersCage(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.ARTIFACT},"{3}");
 
         // At the beginning of each opponent's upkeep, if that player has two or fewer cards in hand, Paupers' Cage deals 2 damage to him or her.
         TriggeredAbility ability  = new BeginningOfUpkeepTriggeredAbility(Zone.BATTLEFIELD, 

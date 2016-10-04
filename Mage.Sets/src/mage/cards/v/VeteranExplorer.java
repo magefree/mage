@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.commander;
+package mage.cards.v;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -33,13 +33,13 @@ import java.util.UUID;
 
 import mage.constants.CardType;
 import mage.constants.Outcome;
-import mage.constants.Rarity;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.DiesTriggeredAbility;
 import mage.abilities.effects.OneShotEffect;
 import mage.cards.Card;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.Zone;
 import mage.filter.common.FilterBasicLandCard;
 import mage.game.Game;
@@ -52,9 +52,8 @@ import mage.target.common.TargetCardInLibrary;
  */
 public class VeteranExplorer extends CardImpl {
 
-    public VeteranExplorer(UUID ownerId) {
-        super(ownerId, 177, "Veteran Explorer", Rarity.UNCOMMON, new CardType[]{CardType.CREATURE}, "{G}");
-        this.expansionSetCode = "CMD";
+    public VeteranExplorer(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{G}");
         this.subtype.add("Human");
         this.subtype.add("Soldier");
         this.subtype.add("Scout");

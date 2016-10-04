@@ -25,13 +25,13 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.ninthedition;
+package mage.cards.b;
 
 import java.util.UUID;
 import mage.abilities.effects.common.DestroyAllEffect;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.filter.FilterPermanent;
 import mage.filter.predicate.mageobject.SubtypePredicate;
 
@@ -46,9 +46,8 @@ public class BoilingSeas extends CardImpl {
         filter.add(new SubtypePredicate("Island"));
     }
 
-    public BoilingSeas(UUID ownerId) {
-        super(ownerId, 178, "Boiling Seas", Rarity.UNCOMMON, new CardType[]{CardType.SORCERY}, "{3}{R}");
-        this.expansionSetCode = "9ED";
+    public BoilingSeas(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{3}{R}");
 
         // Destroy all Islands.
         this.getSpellAbility().addEffect(new DestroyAllEffect(filter));

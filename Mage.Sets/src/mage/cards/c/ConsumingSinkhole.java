@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.oathofthegatewatch;
+package mage.cards.c;
 
 import java.util.UUID;
 import mage.abilities.Mode;
@@ -34,8 +34,8 @@ import mage.abilities.effects.common.DamageTargetEffect;
 import mage.abilities.effects.common.ExileTargetEffect;
 import mage.abilities.keyword.DevoidAbility;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.filter.predicate.mageobject.CardTypePredicate;
 import mage.target.TargetPlayer;
@@ -53,9 +53,8 @@ public class ConsumingSinkhole extends CardImpl {
         filter.add(new CardTypePredicate(CardType.LAND));
     }
 
-    public ConsumingSinkhole(UUID ownerId) {
-        super(ownerId, 94, "Consuming Sinkhole", Rarity.COMMON, new CardType[]{CardType.INSTANT}, "{3}{R}");
-        this.expansionSetCode = "OGW";
+    public ConsumingSinkhole(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.INSTANT},"{3}{R}");
 
         // Devoid
         this.addAbility(new DevoidAbility(this.color));

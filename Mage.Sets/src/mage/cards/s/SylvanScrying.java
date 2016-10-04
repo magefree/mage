@@ -25,13 +25,13 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.tenthedition;
+package mage.cards.s;
 
 import java.util.UUID;
 import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.abilities.effects.common.search.SearchLibraryPutInHandEffect;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.filter.common.FilterLandCard;
 import mage.target.common.TargetCardInLibrary;
 
@@ -43,9 +43,8 @@ public class SylvanScrying extends CardImpl {
 
     private static final FilterLandCard filter = new FilterLandCard("land card");
 
-    public SylvanScrying(UUID ownerId) {
-        super(ownerId, 302, "Sylvan Scrying", Rarity.UNCOMMON, new CardType[]{CardType.SORCERY}, "{1}{G}");
-        this.expansionSetCode = "10E";
+    public SylvanScrying(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{1}{G}");
 
 
         // Search your library for a land card, reveal it, and put it into your hand. Then shuffle your library.

@@ -25,14 +25,14 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.commander;
+package mage.cards.a;
 
 import java.util.UUID;
 import mage.abilities.Mode;
 import mage.abilities.effects.common.DestroyAllEffect;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.filter.Filter;
 import mage.filter.common.FilterArtifactPermanent;
 import mage.filter.common.FilterCreaturePermanent;
@@ -52,9 +52,8 @@ public class AustereCommand extends CardImpl {
         filter4orMore.add(new ConvertedManaCostPredicate(Filter.ComparisonType.GreaterThan, 3));
     }
 
-    public AustereCommand(UUID ownerId) {
-        super(ownerId, 8, "Austere Command", Rarity.RARE, new CardType[]{CardType.SORCERY}, "{4}{W}{W}");
-        this.expansionSetCode = "CMD";
+    public AustereCommand(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{4}{W}{W}");
 
 
         // Choose two -

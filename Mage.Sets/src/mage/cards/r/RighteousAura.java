@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.visions;
+package mage.cards.r;
 
 import java.util.UUID;
 import mage.abilities.Ability;
@@ -34,9 +34,9 @@ import mage.abilities.costs.common.PayLifeCost;
 import mage.abilities.costs.mana.ManaCostsImpl;
 import mage.abilities.effects.common.PreventNextDamageFromChosenSourceToYouEffect;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Duration;
-import mage.constants.Rarity;
 import mage.constants.Zone;
 
 /**
@@ -45,9 +45,8 @@ import mage.constants.Zone;
  */
 public class RighteousAura extends CardImpl {
 
-    public RighteousAura(UUID ownerId) {
-        super(ownerId, 120, "Righteous Aura", Rarity.COMMON, new CardType[]{CardType.ENCHANTMENT}, "{1}{W}");
-        this.expansionSetCode = "VIS";
+    public RighteousAura(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.ENCHANTMENT},"{1}{W}");
 
         // {W}, Pay 2 life: The next time a source of your choice would deal damage to you this turn, prevent that damage.
         Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new PreventNextDamageFromChosenSourceToYouEffect(Duration.EndOfTurn), new ManaCostsImpl("{W}"));

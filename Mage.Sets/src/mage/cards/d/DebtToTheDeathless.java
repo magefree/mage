@@ -25,15 +25,15 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.dragonsmaze;
+package mage.cards.d;
 
 import java.util.UUID;
 import mage.constants.CardType;
 import mage.constants.Outcome;
-import mage.constants.Rarity;
 import mage.abilities.Ability;
 import mage.abilities.effects.OneShotEffect;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.game.Game;
 
 /**
@@ -42,9 +42,8 @@ import mage.game.Game;
  */
 public class DebtToTheDeathless extends CardImpl {
 
-    public DebtToTheDeathless(UUID ownerId) {
-        super(ownerId, 64, "Debt to the Deathless", Rarity.UNCOMMON, new CardType[]{CardType.SORCERY}, "{X}{W}{W}{B}{B}");
-        this.expansionSetCode = "DGM";
+    public DebtToTheDeathless(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{X}{W}{W}{B}{B}");
 
 
         // Each opponent loses two times X life. You gain life equal to the life lost this way.

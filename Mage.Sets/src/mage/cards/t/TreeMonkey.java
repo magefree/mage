@@ -25,14 +25,14 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.ninthedition;
+package mage.cards.t;
 
 import java.util.UUID;
 import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.MageInt;
 import mage.abilities.keyword.ReachAbility;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 
 /**
  *
@@ -40,9 +40,8 @@ import mage.cards.CardImpl;
  */
 public class TreeMonkey extends CardImpl {
 
-    public TreeMonkey(UUID ownerId) {
-        super(ownerId, 275, "Tree Monkey", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{G}");
-        this.expansionSetCode = "9ED";
+    public TreeMonkey(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{G}");
         this.subtype.add("Ape");
 
         this.power = new MageInt(1);

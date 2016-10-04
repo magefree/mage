@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.returntoravnica;
+package mage.cards.g;
 
 import java.util.UUID;
 import mage.MageObject;
@@ -34,11 +34,11 @@ import mage.abilities.common.BeginningOfUpkeepTriggeredAbility;
 import mage.abilities.effects.OneShotEffect;
 import mage.cards.Card;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.cards.Cards;
 import mage.cards.CardsImpl;
 import mage.constants.CardType;
 import mage.constants.Outcome;
-import mage.constants.Rarity;
 import mage.constants.TargetController;
 import mage.constants.Zone;
 import mage.filter.common.FilterCreatureCard;
@@ -54,9 +54,8 @@ import mage.target.common.TargetOpponent;
  */
 public class GuildFeud extends CardImpl {
 
-    public GuildFeud(UUID ownerId) {
-        super(ownerId, 97, "Guild Feud", Rarity.RARE, new CardType[]{CardType.ENCHANTMENT}, "{5}{R}");
-        this.expansionSetCode = "RTR";
+    public GuildFeud(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.ENCHANTMENT},"{5}{R}");
 
         // At the beginning of your upkeep, target opponent reveals the top three cards
         // of his or her library, may put a creature card from among them onto the battlefield,

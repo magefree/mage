@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.bornofthegods;
+package mage.cards.w;
 
 import java.util.HashMap;
 import java.util.LinkedHashMap;
@@ -37,9 +37,9 @@ import java.util.UUID;
 import mage.abilities.Ability;
 import mage.abilities.effects.OneShotEffect;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Outcome;
-import mage.constants.Rarity;
 import mage.filter.FilterPermanent;
 import mage.filter.predicate.permanent.ControllerIdPredicate;
 import mage.game.Game;
@@ -56,9 +56,8 @@ import mage.util.RandomUtil;
  */
 public class WhimsOfTheFates extends CardImpl {
 
-    public WhimsOfTheFates(UUID ownerId) {
-        super(ownerId, 115, "Whims of the Fates", Rarity.RARE, new CardType[]{CardType.SORCERY}, "{5}{R}");
-        this.expansionSetCode = "BNG";
+    public WhimsOfTheFates(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{5}{R}");
 
 
         // Starting with you, each player separates all permanents he or she controls into three piles. Then each player chooses one of his or her piles at random and sacrifices those permanents.

@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.eventide;
+package mage.cards.n;
 
 import java.util.UUID;
 import mage.MageInt;
@@ -35,9 +35,9 @@ import mage.abilities.effects.OneShotEffect;
 import mage.abilities.keyword.FlyingAbility;
 import mage.abilities.keyword.WitherAbility;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Outcome;
-import mage.constants.Rarity;
 import mage.game.Game;
 import mage.players.Player;
 
@@ -47,9 +47,8 @@ import mage.players.Player;
  */
 public class NeedleSpecter extends CardImpl {
 
-    public NeedleSpecter(UUID ownerId) {
-        super(ownerId, 39, "Needle Specter", Rarity.RARE, new CardType[]{CardType.CREATURE}, "{1}{B}{B}");
-        this.expansionSetCode = "EVE";
+    public NeedleSpecter(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{1}{B}{B}");
         this.subtype.add("Specter");
 
         this.power = new MageInt(1);

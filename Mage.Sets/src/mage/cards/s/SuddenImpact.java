@@ -25,14 +25,14 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.seventhedition;
+package mage.cards.s;
 
 import mage.abilities.dynamicvalue.common.CardsInTargetHandCount;
 import mage.abilities.effects.Effect;
 import mage.abilities.effects.common.DamageTargetEffect;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.target.TargetPlayer;
 
 import java.util.UUID;
@@ -43,9 +43,8 @@ import java.util.UUID;
  */
 public class SuddenImpact extends CardImpl {
 
-    public SuddenImpact(UUID ownerId) {
-        super(ownerId, 223, "Sudden Impact", Rarity.UNCOMMON, new CardType[]{CardType.INSTANT}, "{3}{R}");
-        this.expansionSetCode = "7ED";
+    public SuddenImpact(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.INSTANT},"{3}{R}");
 
 
         // Sudden Impact deals damage to target player equal to the number of cards in that player's hand.

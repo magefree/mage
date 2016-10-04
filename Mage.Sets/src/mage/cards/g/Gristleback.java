@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.guildpact;
+package mage.cards.g;
 
 import java.util.UUID;
 import mage.MageInt;
@@ -35,8 +35,8 @@ import mage.abilities.dynamicvalue.common.SourcePermanentPowerCount;
 import mage.abilities.effects.common.GainLifeEffect;
 import mage.abilities.keyword.BloodthirstAbility;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.constants.Zone;
 
 /**
@@ -45,9 +45,8 @@ import mage.constants.Zone;
  */
 public class Gristleback extends CardImpl {
 
-    public Gristleback(UUID ownerId) {
-        super(ownerId, 87, "Gristleback", Rarity.UNCOMMON, new CardType[]{CardType.CREATURE}, "{2}{G}");
-        this.expansionSetCode = "GPT";
+    public Gristleback(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{2}{G}");
         this.subtype.add("Boar");
         this.subtype.add("Beast");
         this.power = new MageInt(2);

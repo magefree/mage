@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.saviorsofkamigawa;
+package mage.cards.k;
 
 import java.util.UUID;
 import mage.MageInt;
@@ -36,8 +36,8 @@ import mage.abilities.condition.Condition;
 import mage.abilities.effects.common.FlipSourceEffect;
 import mage.abilities.effects.common.SacrificeEffect;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.constants.TargetController;
 import mage.constants.Zone;
 import mage.filter.common.FilterCreaturePermanent;
@@ -51,9 +51,8 @@ import mage.watchers.common.CreaturesDiedWatcher;
  */
 public class KuonOgreAscendant extends CardImpl {
 
-    public KuonOgreAscendant(UUID ownerId) {
-        super(ownerId, 78, "Kuon, Ogre Ascendant", Rarity.RARE, new CardType[]{CardType.CREATURE}, "{B}{B}{B}");
-        this.expansionSetCode = "SOK";
+    public KuonOgreAscendant(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{B}{B}{B}");
         this.supertype.add("Legendary");
         this.subtype.add("Ogre");
         this.subtype.add("Monk");

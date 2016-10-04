@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.urzassaga;
+package mage.cards.t;
 
 import java.util.UUID;
 import mage.MageInt;
@@ -33,9 +33,9 @@ import mage.abilities.common.SimpleEvasionAbility;
 import mage.abilities.effects.common.combat.CantBeBlockedByCreaturesSourceEffect;
 import mage.abilities.keyword.FlyingAbility;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Duration;
-import mage.constants.Rarity;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.filter.predicate.Predicates;
 import mage.filter.predicate.mageobject.AbilityPredicate;
@@ -53,9 +53,8 @@ public class TreetopRangers extends CardImpl {
         onlyFlyingCreatures.add(Predicates.not(new AbilityPredicate(FlyingAbility.class)));
     }
 
-    public TreetopRangers(UUID ownerId) {
-        super(ownerId, 279, "Treetop Rangers", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{2}{G}");
-        this.expansionSetCode = "USG";
+    public TreetopRangers(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{2}{G}");
         this.subtype.add("Elf");
         this.power = new MageInt(2);
         this.toughness = new MageInt(2);

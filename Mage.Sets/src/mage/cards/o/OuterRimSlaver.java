@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.starwars;
+package mage.cards.o;
 
 import java.util.UUID;
 import mage.MageInt;
@@ -33,8 +33,8 @@ import mage.abilities.Ability;
 import mage.abilities.common.EntersBattlefieldTriggeredAbility;
 import mage.abilities.effects.common.FightTargetsEffect;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.filter.common.FilterControlledCreaturePermanent;
 import mage.filter.predicate.permanent.AnotherPredicate;
 import mage.target.common.TargetControlledCreaturePermanent;
@@ -52,9 +52,8 @@ public class OuterRimSlaver extends CardImpl {
         controlledCreature.add(new AnotherPredicate());
     }
 
-    public OuterRimSlaver(UUID ownerId) {
-        super(ownerId, 209, "Outer Rim Slaver", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{B}{R}{G}");
-        this.expansionSetCode = "SWS";
+    public OuterRimSlaver(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{B}{R}{G}");
         this.subtype.add("Trandoshan");
         this.subtype.add("Hunter");
         this.power = new MageInt(2);

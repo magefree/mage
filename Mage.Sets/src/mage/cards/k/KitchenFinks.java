@@ -25,16 +25,16 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.shadowmoor;
+package mage.cards.k;
 
 import java.util.UUID;
 import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.MageInt;
 import mage.abilities.common.EntersBattlefieldTriggeredAbility;
 import mage.abilities.effects.common.GainLifeEffect;
 import mage.abilities.keyword.PersistAbility;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 
 /**
  *
@@ -42,9 +42,8 @@ import mage.cards.CardImpl;
  */
 public class KitchenFinks extends CardImpl {
 
-    public KitchenFinks(UUID ownerId) {
-        super(ownerId, 229, "Kitchen Finks", Rarity.UNCOMMON, new CardType[]{CardType.CREATURE}, "{1}{G/W}{G/W}");
-        this.expansionSetCode = "SHM";
+    public KitchenFinks(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{1}{G/W}{G/W}");
         this.subtype.add("Ouphe");
 
         this.power = new MageInt(3);

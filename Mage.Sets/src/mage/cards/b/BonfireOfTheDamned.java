@@ -25,15 +25,15 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.avacynrestored;
+package mage.cards.b;
 
 import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.abilities.Ability;
 import mage.abilities.costs.mana.ManaCostsImpl;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.keyword.MiracleAbility;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.Outcome;
 import mage.filter.FilterPermanent;
 import mage.filter.common.FilterCreaturePermanent;
@@ -50,9 +50,8 @@ import java.util.UUID;
  */
 public class BonfireOfTheDamned extends CardImpl {
 
-    public BonfireOfTheDamned(UUID ownerId) {
-        super(ownerId, 129, "Bonfire of the Damned", Rarity.MYTHIC, new CardType[]{CardType.SORCERY}, "{X}{X}{R}");
-        this.expansionSetCode = "AVR";
+    public BonfireOfTheDamned(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{X}{X}{R}");
 
 
         // Bonfire of the Damned deals X damage to target player and each creature he or she controls.

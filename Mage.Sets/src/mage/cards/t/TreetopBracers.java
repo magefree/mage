@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.nemesis;
+package mage.cards.t;
 
 import mage.abilities.Ability;
 import mage.abilities.effects.common.AttachEffect;
@@ -33,6 +33,7 @@ import mage.abilities.effects.common.continuous.BoostEnchantedEffect;
 import mage.abilities.keyword.EnchantAbility;
 import mage.abilities.keyword.FlyingAbility;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.*;
 import mage.target.TargetPermanent;
 import mage.target.common.TargetCreaturePermanent;
@@ -51,9 +52,8 @@ import mage.game.permanent.Permanent;
  */
 public class TreetopBracers extends CardImpl {
 
-    public TreetopBracers(UUID ownerId) {
-        super(ownerId, 123, "Treetop Bracers", Rarity.COMMON, new CardType[]{CardType.ENCHANTMENT}, "{1}{G}");
-        this.expansionSetCode = "NEM";
+    public TreetopBracers(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.ENCHANTMENT},"{1}{G}");
         this.subtype.add("Aura");
 
         // Enchant creature

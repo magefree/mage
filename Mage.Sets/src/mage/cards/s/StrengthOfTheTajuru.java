@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.worldwake;
+package mage.cards.s;
 
 import mage.abilities.Ability;
 import mage.abilities.SpellAbility;
@@ -33,9 +33,9 @@ import mage.abilities.dynamicvalue.common.MultikickerCount;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.keyword.MultikickerAbility;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Outcome;
-import mage.constants.Rarity;
 import mage.counters.Counter;
 import mage.counters.CounterType;
 import mage.game.Game;
@@ -50,9 +50,8 @@ import java.util.UUID;
  */
 public class StrengthOfTheTajuru extends CardImpl {
 
-    public StrengthOfTheTajuru(UUID ownerId) {
-        super(ownerId, 113, "Strength of the Tajuru", Rarity.RARE, new CardType[]{CardType.INSTANT}, "{X}{G}{G}");
-        this.expansionSetCode = "WWK";
+    public StrengthOfTheTajuru(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.INSTANT},"{X}{G}{G}");
 
         // Multikicker (You may pay an additional {1} any number of times as you cast this spell.)
         this.addAbility(new MultikickerAbility("{1}"));

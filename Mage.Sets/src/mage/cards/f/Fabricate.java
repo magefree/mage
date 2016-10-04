@@ -25,13 +25,13 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.magic2010;
+package mage.cards.f;
 
 import java.util.UUID;
 import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.abilities.effects.common.search.SearchLibraryPutInHandEffect;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.filter.FilterCard;
 import mage.filter.predicate.mageobject.CardTypePredicate;
 import mage.target.common.TargetCardInLibrary;
@@ -48,9 +48,8 @@ public class Fabricate extends CardImpl {
         filter.add(new CardTypePredicate(CardType.ARTIFACT));
     }
 
-    public Fabricate(UUID ownerId) {
-        super(ownerId, 52, "Fabricate", Rarity.UNCOMMON, new CardType[]{CardType.SORCERY}, "{2}{U}");
-        this.expansionSetCode = "M10";
+    public Fabricate(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{2}{U}");
 
 
         // Search your library for an artifact card, reveal it, and put it into your hand. Then shuffle your library.

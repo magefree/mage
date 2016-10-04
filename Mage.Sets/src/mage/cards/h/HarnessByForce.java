@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.journeyintonyx;
+package mage.cards.h;
 
 import java.util.UUID;
 import mage.abilities.abilityword.StriveAbility;
@@ -35,9 +35,9 @@ import mage.abilities.effects.common.continuous.GainAbilityTargetEffect;
 import mage.abilities.effects.common.continuous.GainControlTargetEffect;
 import mage.abilities.keyword.HasteAbility;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Duration;
-import mage.constants.Rarity;
 import mage.target.common.TargetCreaturePermanent;
 
 /**
@@ -46,9 +46,8 @@ import mage.target.common.TargetCreaturePermanent;
  */
 public class HarnessByForce extends CardImpl {
 
-    public HarnessByForce(UUID ownerId) {
-        super(ownerId, 100, "Harness by Force", Rarity.RARE, new CardType[]{CardType.SORCERY}, "{1}{R}{R}");
-        this.expansionSetCode = "JOU";
+    public HarnessByForce(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{1}{R}{R}");
 
 
         // Strive - Harness by Force costs {2}{R} more to cast for each target beyond the first.

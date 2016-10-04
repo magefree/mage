@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.saviorsofkamigawa;
+package mage.cards.k;
 
 import java.util.UUID;
 
@@ -39,6 +39,7 @@ import mage.abilities.effects.Effect;
 import mage.abilities.effects.common.SacrificeSourceUnlessPaysEffect;
 import mage.abilities.effects.common.continuous.GainAbilityAllEffect;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.filter.FilterPermanent;
 import mage.filter.predicate.mageobject.CardTypePredicate;
 
@@ -54,9 +55,8 @@ public class KatakiWarsWage extends CardImpl {
         filter.add(new CardTypePredicate(CardType.ARTIFACT));
     }
 
-    public KatakiWarsWage(UUID ownerId) {
-        super(ownerId, 14, "Kataki, War's Wage", Rarity.RARE, new CardType[]{CardType.CREATURE}, "{1}{W}");
-        this.expansionSetCode = "SOK";
+    public KatakiWarsWage(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{1}{W}");
         this.supertype.add("Legendary");
         this.subtype.add("Spirit");
 

@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.onslaught;
+package mage.cards.f;
 
 import java.util.UUID;
 import mage.MageInt;
@@ -33,8 +33,8 @@ import mage.abilities.costs.mana.ManaCostsImpl;
 import mage.abilities.keyword.MorphAbility;
 import mage.abilities.keyword.ProtectionAbility;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.filter.FilterCard;
 import mage.filter.predicate.mageobject.SubtypePredicate;
 
@@ -50,9 +50,8 @@ public class FoothillGuide extends CardImpl {
         filter.add(new SubtypePredicate("Goblin"));
     }
 
-    public FoothillGuide(UUID ownerId) {
-        super(ownerId, 29, "Foothill Guide", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{W}");
-        this.expansionSetCode = "ONS";
+    public FoothillGuide(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{W}");
         this.subtype.add("Human");
         this.subtype.add("Cleric");
         this.power = new MageInt(1);

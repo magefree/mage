@@ -26,16 +26,16 @@
  *  or implied, of BetaSteward_at_googlemail.com.
  */
 
-package mage.sets.scarsofmirrodin;
+package mage.cards.t;
 
 import java.util.UUID;
 
 import mage.constants.CardType;
 import mage.constants.Duration;
-import mage.constants.Rarity;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.effects.common.continuous.BoostControlledEffect;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.Zone;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.filter.predicate.mageobject.CardTypePredicate;
@@ -51,9 +51,8 @@ public class TemperedSteel extends CardImpl {
         filter.add(new CardTypePredicate(CardType.ARTIFACT));
     }
 
-    public TemperedSteel (UUID ownerId) {
-        super(ownerId, 24, "Tempered Steel", Rarity.RARE, new CardType[]{CardType.ENCHANTMENT}, "{1}{W}{W}");
-        this.expansionSetCode = "SOM";
+    public TemperedSteel (UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.ENCHANTMENT},"{1}{W}{W}");
 
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new BoostControlledEffect(2, 2, Duration.WhileOnBattlefield, filter, false)));
     }

@@ -25,14 +25,14 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.starwars;
+package mage.cards.o;
 
 import java.util.UUID;
 import mage.abilities.effects.common.DestroyAllEffect;
 import mage.abilities.effects.common.counter.AddCountersAllEffect;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.constants.TargetController;
 import mage.counters.CounterType;
 import mage.filter.common.FilterCreaturePermanent;
@@ -50,9 +50,8 @@ public class Order66 extends CardImpl {
         filter.add(new ControllerPredicate(TargetController.NOT_YOU));
     }
 
-    public Order66(UUID ownerId) {
-        super(ownerId, 82, "Order 66", Rarity.RARE, new CardType[]{CardType.SORCERY}, "{7}{B}{B}");
-        this.expansionSetCode = "SWS";
+    public Order66(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{7}{B}{B}");
 
         // Put a bounty counter on each creature you don't control, then destroy all creatures you don't control.
         this.getSpellAbility().addEffect(new AddCountersAllEffect(CounterType.BOUNTY.createInstance(), filter));

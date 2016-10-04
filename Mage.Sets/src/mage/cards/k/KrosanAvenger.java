@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.odyssey;
+package mage.cards.k;
 
 import java.util.UUID;
 import mage.MageInt;
@@ -36,9 +36,9 @@ import mage.abilities.decorator.ConditionalActivatedAbility;
 import mage.abilities.effects.common.RegenerateSourceEffect;
 import mage.abilities.keyword.TrampleAbility;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.AbilityWord;
 import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.constants.Zone;
 
 /**
@@ -47,9 +47,8 @@ import mage.constants.Zone;
  */
 public class KrosanAvenger extends CardImpl {
 
-    public KrosanAvenger(UUID ownerId) {
-        super(ownerId, 247, "Krosan Avenger", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{2}{G}");
-        this.expansionSetCode = "ODY";
+    public KrosanAvenger(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{2}{G}");
         this.subtype.add("Human");
         this.subtype.add("Druid");
 

@@ -25,14 +25,14 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.magicorigins;
+package mage.cards.m;
 
 import java.util.UUID;
 import mage.abilities.costs.common.DiscardTargetCost;
 import mage.abilities.effects.common.DrawCardSourceControllerEffect;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.filter.common.FilterLandCard;
 import mage.target.common.TargetCardInHand;
 
@@ -42,9 +42,8 @@ import mage.target.common.TargetCardInHand;
  */
 public class MagmaticInsight extends CardImpl {
 
-    public MagmaticInsight(UUID ownerId) {
-        super(ownerId, 155, "Magmatic Insight", Rarity.UNCOMMON, new CardType[]{CardType.SORCERY}, "{R}");
-        this.expansionSetCode = "ORI";
+    public MagmaticInsight(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{R}");
 
         // As an additional cost to cast Magmatic Insight, discard a land card.
         this.getSpellAbility().addCost(new DiscardTargetCost(new TargetCardInHand(new FilterLandCard())));

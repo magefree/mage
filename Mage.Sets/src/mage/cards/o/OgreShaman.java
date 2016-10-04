@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.exodus;
+package mage.cards.o;
 
 import java.util.UUID;
 import mage.MageInt;
@@ -35,8 +35,8 @@ import mage.abilities.costs.common.DiscardCardCost;
 import mage.abilities.costs.mana.GenericManaCost;
 import mage.abilities.effects.common.DamageTargetEffect;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.constants.Zone;
 import mage.target.common.TargetCreatureOrPlayer;
 
@@ -46,9 +46,8 @@ import mage.target.common.TargetCreatureOrPlayer;
  */
 public class OgreShaman extends CardImpl {
 
-    public OgreShaman(UUID ownerId) {
-        super(ownerId, 91, "Ogre Shaman", Rarity.RARE, new CardType[]{CardType.CREATURE}, "{3}{R}{R}");
-        this.expansionSetCode = "EXO";
+    public OgreShaman(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{3}{R}{R}");
         this.subtype.add("Ogre");
         this.subtype.add("Shaman");
         this.power = new MageInt(3);

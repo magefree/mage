@@ -26,13 +26,13 @@
  * or implied, of BetaSteward_at_googlemail.com.
  */
 
-package mage.sets.returntoravnica;
+package mage.cards.e;
 
 import java.util.UUID;
 import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.abilities.effects.common.DamageTargetEffect;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.target.common.TargetCreatureOrPlayer;
 
 /**
@@ -41,9 +41,8 @@ import mage.target.common.TargetCreatureOrPlayer;
  */
 public class ExplosiveImpact extends CardImpl {
 
-    public ExplosiveImpact(UUID ownerId) {
-        super(ownerId, 94, "Explosive Impact", Rarity.COMMON, new CardType[]{CardType.INSTANT}, "{5}{R}");
-        this.expansionSetCode = "RTR";
+    public ExplosiveImpact(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.INSTANT},"{5}{R}");
 
 
         // Explosive Impact deals 5 damage to target creature or player.

@@ -25,12 +25,11 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.shadowmoor;
+package mage.cards.r;
 
 import java.util.UUID;
 import mage.constants.CardType;
 import mage.constants.Duration;
-import mage.constants.Rarity;
 import mage.constants.Zone;
 import mage.MageInt;
 import mage.abilities.Ability;
@@ -39,6 +38,7 @@ import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.effects.common.DestroyTargetEffect;
 import mage.abilities.effects.common.continuous.BoostControlledEffect;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.filter.predicate.mageobject.SubtypePredicate;
 import mage.filter.predicate.permanent.AnotherPredicate;
@@ -59,9 +59,8 @@ public class ReaperKing extends CardImpl {
         filterTrigger.add(new SubtypePredicate("Scarecrow"));
     }
 
-    public ReaperKing(UUID ownerId) {
-        super(ownerId, 260, "Reaper King", Rarity.RARE, new CardType[]{CardType.ARTIFACT, CardType.CREATURE}, "{2/W}{2/U}{2/B}{2/R}{2/G}");
-        this.expansionSetCode = "SHM";
+    public ReaperKing(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.ARTIFACT,CardType.CREATURE},"{2/W}{2/U}{2/B}{2/R}{2/G}");
         this.supertype.add("Legendary");
         this.subtype.add("Scarecrow");
 

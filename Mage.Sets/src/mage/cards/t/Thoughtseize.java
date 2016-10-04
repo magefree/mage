@@ -25,14 +25,14 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.lorwyn;
+package mage.cards.t;
 
 import java.util.UUID;
 import mage.abilities.effects.common.LoseLifeSourceControllerEffect;
 import mage.abilities.effects.common.discard.DiscardCardYouChooseTargetEffect;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.constants.TargetController;
 import mage.filter.FilterCard;
 import mage.filter.predicate.Predicates;
@@ -51,9 +51,8 @@ public class Thoughtseize extends CardImpl {
         filter.add(Predicates.not(new CardTypePredicate(CardType.LAND)));
     }
 
-    public Thoughtseize(UUID ownerId) {
-        super(ownerId, 145, "Thoughtseize", Rarity.RARE, new CardType[]{CardType.SORCERY}, "{B}");
-        this.expansionSetCode = "LRW";
+    public Thoughtseize(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{B}");
 
 
         // Target player reveals his or her hand. You choose a nonland card from it. That player discards that card. You lose 2 life.

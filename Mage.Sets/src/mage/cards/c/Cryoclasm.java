@@ -25,15 +25,15 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.tenthedition;
+package mage.cards.c;
 
 import java.util.UUID;
 import mage.abilities.effects.Effect;
 import mage.abilities.effects.common.DamageTargetControllerEffect;
 import mage.abilities.effects.common.DestroyTargetEffect;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.filter.common.FilterLandPermanent;
 import mage.filter.predicate.Predicates;
 import mage.filter.predicate.mageobject.SubtypePredicate;
@@ -51,9 +51,8 @@ public class Cryoclasm extends CardImpl {
         filter.add(Predicates.or(new SubtypePredicate("Plains"), new SubtypePredicate("Island")));
     }
 
-    public Cryoclasm(UUID ownerId) {
-        super(ownerId, 195, "Cryoclasm", Rarity.UNCOMMON, new CardType[]{CardType.SORCERY}, "{2}{R}");
-        this.expansionSetCode = "10E";
+    public Cryoclasm(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{2}{R}");
 
         // Destroy target Plains or Island. Cryoclasm deals 3 damage to that land's controller.
         this.getSpellAbility().addEffect(new DestroyTargetEffect());

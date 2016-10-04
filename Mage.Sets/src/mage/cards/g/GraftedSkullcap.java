@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.urzassaga;
+package mage.cards.g;
 
 import java.util.UUID;
 import mage.abilities.common.BeginningOfDrawTriggeredAbility;
@@ -33,8 +33,8 @@ import mage.abilities.common.BeginningOfEndStepTriggeredAbility;
 import mage.abilities.effects.common.DrawCardSourceControllerEffect;
 import mage.abilities.effects.common.discard.DiscardHandControllerEffect;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.constants.TargetController;
 
 /**
@@ -44,9 +44,8 @@ import mage.constants.TargetController;
  */
 public class GraftedSkullcap extends CardImpl {
 
-    public GraftedSkullcap(UUID ownerId) {
-        super(ownerId, 296, "Grafted Skullcap", Rarity.RARE, new CardType[]{CardType.ARTIFACT}, "{4}");
-        this.expansionSetCode = "USG";
+    public GraftedSkullcap(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.ARTIFACT},"{4}");
 
         // At the beginning of your draw step, draw an additional card.
         this.addAbility(new BeginningOfDrawTriggeredAbility(new DrawCardSourceControllerEffect(1),

@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.commander2014;
+package mage.cards.l;
 
 import java.util.UUID;
 import mage.abilities.Ability;
@@ -36,11 +36,11 @@ import mage.abilities.costs.mana.GenericManaCost;
 import mage.abilities.effects.common.DrawCardSourceControllerEffect;
 import mage.abilities.effects.common.cost.CostModificationEffectImpl;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.CostModificationType;
 import mage.constants.Duration;
 import mage.constants.Outcome;
-import mage.constants.Rarity;
 import mage.constants.Zone;
 import mage.game.Game;
 import mage.players.Player;
@@ -52,9 +52,8 @@ import mage.util.CardUtil;
  */
 public class LoreseekersStone extends CardImpl {
 
-    public LoreseekersStone(UUID ownerId) {
-        super(ownerId, 56, "Loreseeker's Stone", Rarity.UNCOMMON, new CardType[]{CardType.ARTIFACT}, "{6}");
-        this.expansionSetCode = "C14";
+    public LoreseekersStone(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.ARTIFACT},"{6}");
 
         // {3}, {T}: Draw three cards. This ability costs {1} more to activate for each card in your hand.
         Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new DrawCardSourceControllerEffect(3), new GenericManaCost(3));

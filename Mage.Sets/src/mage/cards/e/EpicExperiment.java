@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.returntoravnica;
+package mage.cards.e;
 
 import java.util.UUID;
 import mage.MageObject;
@@ -33,11 +33,11 @@ import mage.abilities.Ability;
 import mage.abilities.effects.OneShotEffect;
 import mage.cards.Card;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.cards.Cards;
 import mage.cards.CardsImpl;
 import mage.constants.CardType;
 import mage.constants.Outcome;
-import mage.constants.Rarity;
 import mage.constants.Zone;
 import mage.filter.Filter;
 import mage.filter.FilterCard;
@@ -54,9 +54,8 @@ import mage.target.TargetCard;
  */
 public class EpicExperiment extends CardImpl {
 
-    public EpicExperiment(UUID ownerId) {
-        super(ownerId, 159, "Epic Experiment", Rarity.MYTHIC, new CardType[]{CardType.SORCERY}, "{X}{U}{R}");
-        this.expansionSetCode = "RTR";
+    public EpicExperiment(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{X}{U}{R}");
 
         // Exile the top X cards of your library. For each instant and sorcery card with
         // converted mana cost X or less among them, you may cast that card without paying

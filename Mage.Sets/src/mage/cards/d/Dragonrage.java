@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.fatereforged;
+package mage.cards.d;
 
 import java.util.UUID;
 import mage.Mana;
@@ -38,9 +38,9 @@ import mage.abilities.effects.common.DynamicManaEffect;
 import mage.abilities.effects.common.continuous.BoostSourceEffect;
 import mage.abilities.effects.common.continuous.GainAbilityAllEffect;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Duration;
-import mage.constants.Rarity;
 import mage.constants.Zone;
 import mage.filter.common.FilterControlledCreaturePermanent;
 import mage.filter.predicate.permanent.AttackingPredicate;
@@ -58,9 +58,8 @@ public class Dragonrage extends CardImpl {
     }
     
     
-    public Dragonrage(UUID ownerId) {
-        super(ownerId, 97, "Dragonrage", Rarity.UNCOMMON, new CardType[]{CardType.INSTANT}, "{2}{R}");
-        this.expansionSetCode = "FRF";
+    public Dragonrage(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.INSTANT},"{2}{R}");
 
         // Add {R} to your mana pool for each attacking creature you control. 
         this.getSpellAbility().addEffect(new DynamicManaEffect(Mana.RedMana(1),

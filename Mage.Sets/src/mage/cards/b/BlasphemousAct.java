@@ -25,18 +25,18 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.innistrad;
+package mage.cards.b;
 
 import java.util.UUID;
 
 import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.abilities.Ability;
 import mage.abilities.SpellAbility;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.effects.common.DamageAllEffect;
 import mage.abilities.effects.common.cost.CostModificationEffectImpl;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CostModificationType;
 import mage.constants.Duration;
 import mage.constants.Outcome;
@@ -52,9 +52,8 @@ import mage.util.CardUtil;
  */
 public class BlasphemousAct extends CardImpl {
 
-    public BlasphemousAct(UUID ownerId) {
-        super(ownerId, 130, "Blasphemous Act", Rarity.RARE, new CardType[]{CardType.SORCERY}, "{8}{R}");
-        this.expansionSetCode = "ISD";
+    public BlasphemousAct(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{8}{R}");
         
         // Blasphemous Act costs {1} less to cast for each creature on the battlefield.
         Ability ability = new SimpleStaticAbility(Zone.ALL, new BlasphemousCostReductionEffect());

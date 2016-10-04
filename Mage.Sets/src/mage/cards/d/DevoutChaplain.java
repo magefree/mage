@@ -25,11 +25,10 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.avacynrestored;
+package mage.cards.d;
 
 import java.util.UUID;
 import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.constants.Zone;
 import mage.MageInt;
 import mage.abilities.Ability;
@@ -38,6 +37,7 @@ import mage.abilities.costs.common.TapSourceCost;
 import mage.abilities.costs.common.TapTargetCost;
 import mage.abilities.effects.common.ExileTargetEffect;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.filter.FilterPermanent;
 import mage.filter.common.FilterControlledPermanent;
 import mage.filter.predicate.Predicates;
@@ -68,9 +68,8 @@ public class DevoutChaplain extends CardImpl {
         humanFilter.add(new SubtypePredicate("Human"));
     }
 
-    public DevoutChaplain(UUID ownerId) {
-        super(ownerId, 17, "Devout Chaplain", Rarity.UNCOMMON, new CardType[]{CardType.CREATURE}, "{2}{W}");
-        this.expansionSetCode = "AVR";
+    public DevoutChaplain(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{2}{W}");
         this.subtype.add("Human");
         this.subtype.add("Cleric");
 

@@ -25,13 +25,13 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.starter2000;
+package mage.cards.w;
 
 import java.util.UUID;
 import mage.MageInt;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.Rarity;
 
 /**
  *
@@ -39,9 +39,8 @@ import mage.constants.Rarity;
  */
 public class WillowElf extends CardImpl {
 
-    public WillowElf(UUID ownerId) {
-        super(ownerId, 20, "Willow Elf", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{G}");
-        this.expansionSetCode = "S00";
+    public WillowElf(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{G}");
         this.subtype.add("Elf");
 
         this.power = new MageInt(1);

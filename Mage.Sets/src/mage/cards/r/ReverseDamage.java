@@ -25,17 +25,17 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.limitedalpha;
+package mage.cards.r;
 
 import java.util.UUID;
 import mage.abilities.Ability;
 import mage.abilities.effects.PreventionEffectData;
 import mage.abilities.effects.PreventionEffectImpl;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Duration;
 import mage.constants.Outcome;
-import mage.constants.Rarity;
 import mage.game.Game;
 import mage.game.events.GameEvent;
 import mage.players.Player;
@@ -47,9 +47,8 @@ import mage.target.TargetSource;
  */
 public class ReverseDamage extends CardImpl {
 
-    public ReverseDamage(UUID ownerId) {
-        super(ownerId, 219, "Reverse Damage", Rarity.RARE, new CardType[]{CardType.INSTANT}, "{1}{W}{W}");
-        this.expansionSetCode = "LEA";
+    public ReverseDamage(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.INSTANT},"{1}{W}{W}");
 
 
         // The next time a source of your choice would deal damage to you this turn, prevent that damage. You gain life equal to the damage prevented this way.

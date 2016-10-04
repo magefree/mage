@@ -25,13 +25,13 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.tempest;
+package mage.cards.l;
 
 import java.util.UUID;
 import mage.abilities.effects.common.DamageTargetEffect;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.target.common.TargetCreatureOrPlayer;
 
 /**
@@ -40,9 +40,8 @@ import mage.target.common.TargetCreatureOrPlayer;
  */
 public class LightningBlast extends CardImpl {
 
-    public LightningBlast(UUID ownerId) {
-        super(ownerId, 185, "Lightning Blast", Rarity.COMMON, new CardType[]{CardType.INSTANT}, "{3}{R}");
-        this.expansionSetCode = "TMP";
+    public LightningBlast(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.INSTANT},"{3}{R}");
 
         // Lightning Blast deals 4 damage to target creature.
         this.getSpellAbility().addEffect(new DamageTargetEffect(4));

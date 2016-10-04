@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.magic2012;
+package mage.cards.s;
 
 import java.util.Random;
 import java.util.UUID;
@@ -34,10 +34,10 @@ import mage.abilities.effects.ContinuousEffect;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.continuous.GainControlTargetEffect;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Duration;
 import mage.constants.Outcome;
-import mage.constants.Rarity;
 import mage.filter.common.FilterNonlandPermanent;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
@@ -51,9 +51,8 @@ import mage.util.RandomUtil;
  */
 public class Scrambleverse extends CardImpl {
 
-    public Scrambleverse(UUID ownerId) {
-        super(ownerId, 153, "Scrambleverse", Rarity.RARE, new CardType[]{CardType.SORCERY}, "{6}{R}{R}");
-        this.expansionSetCode = "M12";
+    public Scrambleverse(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{6}{R}{R}");
 
         // For each nonland permanent, choose a player at random. Then each player gains control of each permanent for which he or she was chosen. Untap those permanents.
         this.getSpellAbility().addEffect(new ScrambleverseEffect());

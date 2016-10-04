@@ -25,14 +25,14 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.commander2013;
+package mage.cards.s;
 
 import java.util.UUID;
 import mage.abilities.dynamicvalue.common.ManacostVariableValue;
 import mage.abilities.effects.common.DamageAllEffect;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.filter.common.FilterCreaturePermanent;
 
 /**
@@ -41,9 +41,8 @@ import mage.filter.common.FilterCreaturePermanent;
  */
 public class SavageTwister extends CardImpl {
 
-    public SavageTwister(UUID ownerId) {
-        super(ownerId, 208, "Savage Twister", Rarity.UNCOMMON, new CardType[]{CardType.SORCERY}, "{X}{R}{G}");
-        this.expansionSetCode = "C13";
+    public SavageTwister(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{X}{R}{G}");
 
 
         // Savage Twister deals X damage to each creature.

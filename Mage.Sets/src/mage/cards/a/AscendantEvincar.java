@@ -25,18 +25,18 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.planechase;
+package mage.cards.a;
 
 import java.util.UUID;
 
 import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.MageInt;
 import mage.ObjectColor;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.effects.common.continuous.BoostAllEffect;
 import mage.abilities.keyword.FlyingAbility;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.Duration;
 import mage.constants.Zone;
 import mage.filter.common.FilterCreaturePermanent;
@@ -57,9 +57,8 @@ public class AscendantEvincar extends CardImpl {
         filterNonBlack.add(Predicates.not(new ColorPredicate(ObjectColor.BLACK)));
     }
 
-    public AscendantEvincar(UUID ownerId) {
-        super(ownerId, 17, "Ascendant Evincar", Rarity.RARE, new CardType[]{CardType.CREATURE}, "{4}{B}{B}");
-        this.expansionSetCode = "HOP";
+    public AscendantEvincar(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{4}{B}{B}");
         this.supertype.add("Legendary");
         this.subtype.add("Vampire");
 

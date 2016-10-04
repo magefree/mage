@@ -26,13 +26,13 @@
  *  or implied, of BetaSteward_at_googlemail.com.
  */
 
-package mage.sets.conflux;
+package mage.cards.v;
 
 import java.util.UUID;
 import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.MageInt;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 
 /**
  *
@@ -40,9 +40,8 @@ import mage.cards.CardImpl;
  */
 public class ValiantGuard extends CardImpl {
 
-    public ValiantGuard(UUID ownerId) {
-        super(ownerId, 19, "Valiant Guard", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{W}");
-        this.expansionSetCode = "CON";
+    public ValiantGuard(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{W}");
 
         this.subtype.add("Human");
         this.subtype.add("Soldier");

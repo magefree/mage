@@ -25,14 +25,14 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.urzassaga;
+package mage.cards.r;
 
 import java.util.UUID;
 import mage.abilities.costs.common.SacrificeTargetCost;
 import mage.abilities.effects.common.DestroyTargetEffect;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.filter.common.FilterControlledLandPermanent;
 import mage.target.common.TargetControlledPermanent;
 import mage.target.common.TargetLandPermanent;
@@ -43,9 +43,8 @@ import mage.target.common.TargetLandPermanent;
  */
 public class Raze extends CardImpl {
 
-    public Raze(UUID ownerId) {
-        super(ownerId, 207, "Raze", Rarity.COMMON, new CardType[]{CardType.SORCERY}, "{R}");
-        this.expansionSetCode = "USG";
+    public Raze(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{R}");
 
 
         // As an additional cost to cast Raze, sacrifice a land.

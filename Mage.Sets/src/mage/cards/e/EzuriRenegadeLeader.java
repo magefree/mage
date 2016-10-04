@@ -25,12 +25,11 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.scarsofmirrodin;
+package mage.cards.e;
 
 import java.util.UUID;
 import mage.constants.CardType;
 import mage.constants.Duration;
-import mage.constants.Rarity;
 import mage.constants.Zone;
 import mage.MageInt;
 import mage.abilities.Ability;
@@ -41,6 +40,7 @@ import mage.abilities.effects.common.continuous.BoostControlledEffect;
 import mage.abilities.effects.common.continuous.GainAbilityControlledEffect;
 import mage.abilities.keyword.TrampleAbility;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.filter.common.FilterControlledCreaturePermanent;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.filter.predicate.Predicates;
@@ -64,9 +64,8 @@ public class EzuriRenegadeLeader extends CardImpl {
         notEzuri.add(Predicates.not(new NamePredicate("Ezuri, Renegade Leader")));
     }
 
-    public EzuriRenegadeLeader(UUID ownerId) {
-        super(ownerId, 119, "Ezuri, Renegade Leader", Rarity.RARE, new CardType[]{CardType.CREATURE}, "{1}{G}{G}");
-        this.expansionSetCode = "SOM";
+    public EzuriRenegadeLeader(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{1}{G}{G}");
         this.supertype.add("Legendary");
         this.subtype.add("Elf");
         this.subtype.add("Warrior");

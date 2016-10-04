@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.alarareborn;
+package mage.cards.u;
 
 import java.util.UUID;
 import mage.MageInt;
@@ -34,9 +34,9 @@ import mage.abilities.dynamicvalue.common.AuraAttachedCount;
 import mage.abilities.effects.common.continuous.BoostSourceEffect;
 import mage.abilities.keyword.HexproofAbility;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Duration;
-import mage.constants.Rarity;
 import mage.constants.Zone;
 
 /**
@@ -45,9 +45,8 @@ import mage.constants.Zone;
  */
 public class UrilTheMiststalker extends CardImpl {
 
-    public UrilTheMiststalker(UUID ownerId) {
-        super(ownerId, 124, "Uril, the Miststalker", Rarity.MYTHIC, new CardType[]{CardType.CREATURE}, "{2}{R}{G}{W}");
-        this.expansionSetCode = "ARB";
+    public UrilTheMiststalker(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{2}{R}{G}{W}");
         this.supertype.add("Legendary");
         this.subtype.add("Beast");
 

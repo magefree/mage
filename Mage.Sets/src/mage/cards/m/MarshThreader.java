@@ -26,14 +26,14 @@
  *  or implied, of BetaSteward_at_googlemail.com.
  */
 
-package mage.sets.worldwake;
+package mage.cards.m;
 
 import java.util.UUID;
 import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.MageInt;
 import mage.abilities.keyword.SwampwalkAbility;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 
 /**
  *
@@ -41,9 +41,8 @@ import mage.cards.CardImpl;
  */
 public class MarshThreader extends CardImpl {
 
-    public MarshThreader (UUID ownerId) {
-        super(ownerId, 14, "Marsh Threader", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{1}{W}");
-        this.expansionSetCode = "WWK";
+    public MarshThreader (UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{1}{W}");
         this.subtype.add("Kor");
         this.subtype.add("Scout");
         this.color.setWhite(true);        

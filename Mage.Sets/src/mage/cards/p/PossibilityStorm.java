@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.dragonsmaze;
+package mage.cards.p;
 
 import java.util.List;
 import java.util.UUID;
@@ -36,9 +36,9 @@ import mage.abilities.effects.Effect;
 import mage.abilities.effects.OneShotEffect;
 import mage.cards.Card;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Outcome;
-import mage.constants.Rarity;
 import mage.constants.Zone;
 import mage.game.ExileZone;
 import mage.game.Game;
@@ -55,9 +55,8 @@ import mage.target.targetpointer.FixedTarget;
  */
 public class PossibilityStorm extends CardImpl {
 
-    public PossibilityStorm(UUID ownerId) {
-        super(ownerId, 34, "Possibility Storm", Rarity.RARE, new CardType[]{CardType.ENCHANTMENT}, "{3}{R}{R}");
-        this.expansionSetCode = "DGM";
+    public PossibilityStorm(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.ENCHANTMENT},"{3}{R}{R}");
 
         // Whenever a player casts a spell from his or her hand, that player exiles it, then exiles cards from
         // the top of his or her library until he or she exiles a card that shares a card type with it. That

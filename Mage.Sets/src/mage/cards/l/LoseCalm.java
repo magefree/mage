@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.dragonsoftarkir;
+package mage.cards.l;
 
 import java.util.UUID;
 import mage.abilities.effects.Effect;
@@ -35,9 +35,9 @@ import mage.abilities.effects.common.continuous.GainControlTargetEffect;
 import mage.abilities.keyword.HasteAbility;
 import mage.abilities.keyword.MenaceAbility;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Duration;
-import mage.constants.Rarity;
 import mage.target.common.TargetCreaturePermanent;
 
 /**
@@ -46,9 +46,8 @@ import mage.target.common.TargetCreaturePermanent;
  */
 public class LoseCalm extends CardImpl {
 
-    public LoseCalm(UUID ownerId) {
-        super(ownerId, 147, "Lose Calm", Rarity.COMMON, new CardType[]{CardType.SORCERY}, "{3}{R}");
-        this.expansionSetCode = "DTK";
+    public LoseCalm(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{3}{R}");
 
         // Gain control of target creature until end of turn. Untap that creature. It gains haste and menace until end of turn. (A creature with menace can't be blocked except by two or more creatures.)
         this.getSpellAbility().addEffect(new GainControlTargetEffect(Duration.EndOfTurn));

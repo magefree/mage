@@ -25,14 +25,14 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.magic2012;
+package mage.cards.g;
 
 import java.util.UUID;
 import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.MageInt;
 import mage.abilities.keyword.BloodthirstAbility;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 
 /**
  *
@@ -40,9 +40,8 @@ import mage.cards.CardImpl;
  */
 public class GorehornMinotaurs extends CardImpl {
 
-    public GorehornMinotaurs(UUID ownerId) {
-        super(ownerId, 144, "Gorehorn Minotaurs", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{2}{R}{R}");
-        this.expansionSetCode = "M12";
+    public GorehornMinotaurs(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{2}{R}{R}");
         this.subtype.add("Minotaur");
         this.subtype.add("Warrior");
 

@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.riseoftheeldrazi;
+package mage.cards.t;
 
 import java.util.UUID;
 
@@ -34,6 +34,7 @@ import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.effects.ContinuousEffect;
 import mage.abilities.effects.common.continuous.BoostAllEffect;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.counters.CounterType;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.filter.predicate.permanent.ControllerPredicate;
@@ -52,9 +53,8 @@ public class TimeOfHeroes extends CardImpl {
         filter.add(new CounterPredicate(CounterType.LEVEL));
     }
 
-    public TimeOfHeroes(UUID ownerId) {
-        super(ownerId, 49, "Time of Heroes", Rarity.UNCOMMON, new CardType[]{CardType.ENCHANTMENT}, "{1}{W}");
-        this.expansionSetCode = "ROE";
+    public TimeOfHeroes(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.ENCHANTMENT},"{1}{W}");
 
 
         // Each creature you control with a level counter on it gets +2/+2.

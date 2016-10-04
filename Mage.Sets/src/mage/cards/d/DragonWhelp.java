@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.magic2010;
+package mage.cards.d;
 
 import java.util.UUID;
 import mage.MageInt;
@@ -40,10 +40,10 @@ import mage.abilities.effects.common.SacrificeSourceEffect;
 import mage.abilities.effects.common.continuous.BoostSourceEffect;
 import mage.abilities.keyword.FlyingAbility;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Duration;
 import mage.constants.Outcome;
-import mage.constants.Rarity;
 import mage.constants.Zone;
 import mage.game.Game;
 
@@ -53,9 +53,8 @@ import mage.game.Game;
  */
 public class DragonWhelp extends CardImpl {
 
-    public DragonWhelp(UUID ownerId) {
-        super(ownerId, 133, "Dragon Whelp", Rarity.UNCOMMON, new CardType[]{CardType.CREATURE}, "{2}{R}{R}");
-        this.expansionSetCode = "M10";
+    public DragonWhelp(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{2}{R}{R}");
         this.subtype.add("Dragon");
 
         this.power = new MageInt(2);

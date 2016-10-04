@@ -25,13 +25,12 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.coldsnap;
+package mage.cards.d;
 
 import java.util.UUID;
 
 import mage.abilities.Ability;
 import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.MageInt;
 import mage.abilities.StateTriggeredAbility;
 import mage.abilities.common.EntersBattlefieldAbility;
@@ -44,6 +43,7 @@ import mage.abilities.effects.common.counter.RemoveCounterSourceEffect;
 import mage.abilities.keyword.FlyingAbility;
 import mage.abilities.keyword.IndestructibleAbility;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.Zone;
 import mage.counters.CounterType;
 import mage.game.Game;
@@ -57,9 +57,8 @@ import mage.game.permanent.token.Token;
  */
 public class DarkDepths extends CardImpl {
 
-    public DarkDepths(UUID ownerId) {
-        super(ownerId, 145, "Dark Depths", Rarity.RARE, new CardType[]{CardType.LAND}, "");
-        this.expansionSetCode = "CSP";
+    public DarkDepths(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.LAND},"");
         this.supertype.add("Legendary");
         this.supertype.add("Snow");
 

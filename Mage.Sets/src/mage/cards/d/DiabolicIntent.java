@@ -25,14 +25,14 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.planeshift;
+package mage.cards.d;
 
 import java.util.UUID;
 import mage.abilities.costs.common.SacrificeTargetCost;
 import mage.abilities.effects.common.search.SearchLibraryPutInHandEffect;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.filter.common.FilterControlledCreaturePermanent;
 import mage.target.common.TargetCardInLibrary;
 import mage.target.common.TargetControlledCreaturePermanent;
@@ -43,9 +43,8 @@ import mage.target.common.TargetControlledCreaturePermanent;
  */
 public class DiabolicIntent extends CardImpl {
 
-    public DiabolicIntent(UUID ownerId) {
-        super(ownerId, 42, "Diabolic Intent", Rarity.RARE, new CardType[]{CardType.SORCERY}, "{1}{B}");
-        this.expansionSetCode = "PLS";
+    public DiabolicIntent(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{1}{B}");
 
 
         // As an additional cost to cast Diabolic Intent, sacrifice a creature.

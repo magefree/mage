@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.kaladesh;
+package mage.cards.f;
 
 import java.util.UUID;
 import mage.abilities.Ability;
@@ -36,8 +36,8 @@ import mage.abilities.costs.mana.GenericManaCost;
 import mage.abilities.effects.common.counter.AddCountersTargetEffect;
 import mage.abilities.effects.common.counter.GetEnergyCountersControllerEffect;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.constants.Zone;
 import mage.counters.CounterType;
 import mage.game.Game;
@@ -50,9 +50,8 @@ import mage.target.common.TargetControlledCreaturePermanent;
  */
 public class FabricationModule extends CardImpl {
 
-    public FabricationModule(UUID ownerId) {
-        super(ownerId, 211, "Fabrication Module", Rarity.UNCOMMON, new CardType[]{CardType.ARTIFACT}, "{3}");
-        this.expansionSetCode = "KLD";
+    public FabricationModule(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.ARTIFACT},"{3}");
 
         // Whenever you get one or more {E}, put a +1/+1 counter on target creature you control.
         Ability ability = new FabricationModuleTriggeredAbility();

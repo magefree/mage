@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.oathofthegatewatch;
+package mage.cards.h;
 
 import java.util.UUID;
 import mage.MageInt;
@@ -38,9 +38,9 @@ import mage.abilities.keyword.DeathtouchAbility;
 import mage.abilities.mana.BlackManaAbility;
 import mage.abilities.mana.GreenManaAbility;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Duration;
-import mage.constants.Rarity;
 import mage.constants.Zone;
 import mage.game.permanent.token.Token;
 
@@ -50,9 +50,8 @@ import mage.game.permanent.token.Token;
  */
 public class HissingQuagmire extends CardImpl {
 
-    public HissingQuagmire(UUID ownerId) {
-        super(ownerId, 171, "Hissing Quagmire", Rarity.RARE, new CardType[]{CardType.LAND}, "");
-        this.expansionSetCode = "OGW";
+    public HissingQuagmire(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.LAND},"");
 
         // Hissing Quagmire enters the battlefield tapped.
         this.addAbility(new EntersBattlefieldTappedAbility());

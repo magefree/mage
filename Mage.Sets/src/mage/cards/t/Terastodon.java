@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.worldwake;
+package mage.cards.t;
 
 import java.util.HashMap;
 import java.util.Map.Entry;
@@ -35,9 +35,9 @@ import mage.abilities.Ability;
 import mage.abilities.common.EntersBattlefieldTriggeredAbility;
 import mage.abilities.effects.OneShotEffect;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Outcome;
-import mage.constants.Rarity;
 import mage.constants.Zone;
 import mage.filter.FilterPermanent;
 import mage.filter.predicate.Predicates;
@@ -59,9 +59,8 @@ public class Terastodon extends CardImpl {
         filter.add(Predicates.not(new CardTypePredicate(CardType.CREATURE)));
     }
 
-    public Terastodon(UUID ownerId) {
-        super(ownerId, 115, "Terastodon", Rarity.RARE, new CardType[]{CardType.CREATURE}, "{6}{G}{G}");
-        this.expansionSetCode = "WWK";
+    public Terastodon(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{6}{G}{G}");
         this.subtype.add("Elephant");
 
         this.power = new MageInt(9);

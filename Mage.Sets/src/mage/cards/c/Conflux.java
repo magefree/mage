@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.conflux;
+package mage.cards.c;
 
 import java.util.List;
 import java.util.UUID;
@@ -34,11 +34,11 @@ import mage.abilities.Ability;
 import mage.abilities.effects.OneShotEffect;
 import mage.cards.Card;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.cards.Cards;
 import mage.cards.CardsImpl;
 import mage.constants.CardType;
 import mage.constants.Outcome;
-import mage.constants.Rarity;
 import mage.constants.Zone;
 import mage.filter.FilterCard;
 import mage.filter.predicate.mageobject.ColorPredicate;
@@ -52,9 +52,8 @@ import mage.target.common.TargetCardInLibrary;
  */
 public class Conflux extends CardImpl {
 
-    public Conflux(UUID ownerId) {
-        super(ownerId, 102, "Conflux", Rarity.MYTHIC, new CardType[]{CardType.SORCERY}, "{3}{W}{U}{B}{R}{G}");
-        this.expansionSetCode = "CON";
+    public Conflux(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{3}{W}{U}{B}{R}{G}");
 
 
         // Search your library for a white card, a blue card, a black card, a red card, and a green card. Reveal those cards and put them into your hand. Then shuffle your library.

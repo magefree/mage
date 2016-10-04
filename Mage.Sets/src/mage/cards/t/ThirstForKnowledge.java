@@ -25,18 +25,18 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.planechase;
+package mage.cards.t;
 
 import java.util.UUID;
 
 import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.abilities.Ability;
 import mage.abilities.costs.Cost;
 import mage.abilities.costs.common.DiscardTargetCost;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.DrawCardSourceControllerEffect;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.Outcome;
 import mage.filter.FilterCard;
 import mage.filter.predicate.mageobject.CardTypePredicate;
@@ -50,9 +50,8 @@ import mage.target.common.TargetCardInHand;
  */
 public class ThirstForKnowledge extends CardImpl {
 
-    public ThirstForKnowledge(UUID ownerId) {
-        super(ownerId, 14, "Thirst for Knowledge", Rarity.UNCOMMON, new CardType[]{CardType.INSTANT}, "{2}{U}");
-        this.expansionSetCode = "HOP";
+    public ThirstForKnowledge(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.INSTANT},"{2}{U}");
 
 
         // Draw three cards. Then discard two cards unless you discard an artifact card.

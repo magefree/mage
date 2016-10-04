@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.shadowmoor;
+package mage.cards.f;
 
 import java.util.UUID;
 import mage.abilities.condition.common.ManaWasSpentCondition;
@@ -34,9 +34,9 @@ import mage.abilities.effects.common.DamageAllEffect;
 import mage.abilities.effects.common.InfoEffect;
 import mage.abilities.keyword.FlyingAbility;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.ColoredManaSymbol;
-import mage.constants.Rarity;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.filter.predicate.Predicates;
 import mage.filter.predicate.mageobject.AbilityPredicate;
@@ -55,9 +55,8 @@ public class Firespout extends CardImpl {
         filter2.add(new AbilityPredicate(FlyingAbility.class));
     }
 
-    public Firespout(UUID ownerId) {
-        super(ownerId, 205, "Firespout", Rarity.UNCOMMON, new CardType[]{CardType.SORCERY}, "{2}{R/G}");
-        this.expansionSetCode = "SHM";
+    public Firespout(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{2}{R/G}");
 
 
         // Firespout deals 3 damage to each creature without flying if {R} was spent to cast Firespout and 3 damage to each creature with flying if {G} was spent to cast it.

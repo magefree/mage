@@ -25,15 +25,15 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.mirrodin;
+package mage.cards.g;
 
 import java.util.UUID;
 import mage.abilities.TriggeredAbilityImpl;
 import mage.abilities.effects.common.SacrificeSourceEffect;
 import mage.abilities.mana.AnyColorManaAbility;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.constants.Zone;
 import mage.filter.common.FilterArtifactPermanent;
 import mage.game.Game;
@@ -46,9 +46,8 @@ import mage.game.events.GameEvent.EventType;
  */
 public class Glimmervoid extends CardImpl {
 
-    public Glimmervoid(UUID ownerId) {
-        super(ownerId, 281, "Glimmervoid", Rarity.RARE, new CardType[]{CardType.LAND}, "");
-        this.expansionSetCode = "MRD";
+    public Glimmervoid(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.LAND},"");
 
         // At the beginning of the end step, if you control no artifacts, sacrifice Glimmervoid.
         this.addAbility(new GlimmervoidTriggeredAbility());

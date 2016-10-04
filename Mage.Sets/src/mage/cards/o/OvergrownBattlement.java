@@ -25,17 +25,17 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.riseoftheeldrazi;
+package mage.cards.o;
 
 import java.util.UUID;
 import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.MageInt;
 import mage.Mana;
 import mage.abilities.dynamicvalue.common.PermanentsOnBattlefieldCount;
 import mage.abilities.keyword.DefenderAbility;
 import mage.abilities.mana.DynamicManaAbility;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.filter.common.FilterControlledCreaturePermanent;
 import mage.filter.predicate.mageobject.AbilityPredicate;
 
@@ -51,9 +51,8 @@ public class OvergrownBattlement extends CardImpl {
         filter.add(new AbilityPredicate(DefenderAbility.class));
     }
 
-    public OvergrownBattlement(UUID ownerId) {
-        super(ownerId, 203, "Overgrown Battlement", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{1}{G}");
-        this.expansionSetCode = "ROE";
+    public OvergrownBattlement(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{1}{G}");
         this.subtype.add("Wall");
 
         this.power = new MageInt(0);

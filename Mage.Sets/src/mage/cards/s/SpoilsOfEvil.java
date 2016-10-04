@@ -25,16 +25,16 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.iceage;
+package mage.cards.s;
 
 import java.util.UUID;
 import mage.Mana;
 import mage.abilities.Ability;
 import mage.abilities.effects.OneShotEffect;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Outcome;
-import mage.constants.Rarity;
 import mage.filter.FilterCard;
 import mage.filter.predicate.Predicates;
 import mage.filter.predicate.mageobject.CardTypePredicate;
@@ -54,9 +54,8 @@ public class SpoilsOfEvil extends CardImpl {
                 new CardTypePredicate(CardType.CREATURE)));
     }
     
-    public SpoilsOfEvil(UUID ownerId) {
-        super(ownerId, 51, "Spoils of Evil", Rarity.RARE, new CardType[]{CardType.INSTANT}, "{2}{B}");
-        this.expansionSetCode = "ICE";
+    public SpoilsOfEvil(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.INSTANT},"{2}{B}");
 
         // For each artifact or creature card in target opponent's graveyard, add {C} to your mana pool and you gain 1 life.
         this.getSpellAbility().addEffect(new SpoilsOfEvilEffect());

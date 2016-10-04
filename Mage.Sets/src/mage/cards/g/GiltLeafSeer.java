@@ -25,10 +25,9 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.lorwyn;
+package mage.cards.g;
 
 import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.constants.Zone;
 import mage.MageInt;
 import mage.abilities.Ability;
@@ -37,6 +36,7 @@ import mage.abilities.costs.common.TapSourceCost;
 import mage.abilities.costs.mana.ManaCostsImpl;
 import mage.abilities.effects.common.LookLibraryControllerEffect;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 
 import java.util.UUID;
 
@@ -46,9 +46,8 @@ import java.util.UUID;
  */
 public class GiltLeafSeer extends CardImpl {
 
-    public GiltLeafSeer(UUID ownerId) {
-        super(ownerId, 215, "Gilt-Leaf Seer", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{2}{G}");
-        this.expansionSetCode = "LRW";
+    public GiltLeafSeer(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{2}{G}");
         this.subtype.add("Elf");
         this.subtype.add("Shaman");
 

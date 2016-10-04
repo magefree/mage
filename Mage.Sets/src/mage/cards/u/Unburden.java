@@ -25,15 +25,15 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.scourge;
+package mage.cards.u;
 
 import java.util.UUID;
 import mage.abilities.costs.mana.ManaCostsImpl;
 import mage.abilities.effects.common.discard.DiscardTargetEffect;
 import mage.abilities.keyword.CyclingAbility;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.target.TargetPlayer;
 
 /**
@@ -42,9 +42,8 @@ import mage.target.TargetPlayer;
  */
 public class Unburden extends CardImpl {
 
-    public Unburden(UUID ownerId) {
-        super(ownerId, 77, "Unburden", Rarity.COMMON, new CardType[]{CardType.SORCERY}, "{1}{B}{B}");
-        this.expansionSetCode = "SCG";
+    public Unburden(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{1}{B}{B}");
 
         // Target player discards two cards.
         this.getSpellAbility().addEffect(new DiscardTargetEffect(2));

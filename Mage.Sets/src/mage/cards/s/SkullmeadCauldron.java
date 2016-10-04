@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.dissension;
+package mage.cards.s;
 
 import java.util.UUID;
 import mage.abilities.Ability;
@@ -34,8 +34,8 @@ import mage.abilities.costs.common.DiscardCardCost;
 import mage.abilities.costs.common.TapSourceCost;
 import mage.abilities.effects.common.GainLifeEffect;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.constants.Zone;
 
 /**
@@ -44,9 +44,8 @@ import mage.constants.Zone;
  */
 public class SkullmeadCauldron extends CardImpl {
 
-    public SkullmeadCauldron(UUID ownerId) {
-        super(ownerId, 167, "Skullmead Cauldron", Rarity.UNCOMMON, new CardType[]{CardType.ARTIFACT}, "{4}");
-        this.expansionSetCode = "DIS";
+    public SkullmeadCauldron(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.ARTIFACT},"{4}");
 
         // {tap}: You gain 1 life.
         Ability ability1 = new SimpleActivatedAbility(Zone.BATTLEFIELD, new GainLifeEffect(1), new TapSourceCost());

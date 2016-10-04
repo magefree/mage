@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.shadowmoor;
+package mage.cards.h;
 
 import java.util.UUID;
 import mage.MageInt;
@@ -34,9 +34,9 @@ import mage.abilities.common.BeginningOfUpkeepTriggeredAbility;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.keyword.PersistAbility;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Outcome;
-import mage.constants.Rarity;
 import mage.constants.TargetController;
 import mage.counters.Counter;
 import mage.counters.CounterType;
@@ -50,9 +50,8 @@ import mage.game.permanent.Permanent;
  */
 public class Heartmender extends CardImpl {
 
-    public Heartmender(UUID ownerId) {
-        super(ownerId, 228, "Heartmender", Rarity.RARE, new CardType[]{CardType.CREATURE}, "{2}{G/W}{G/W}");
-        this.expansionSetCode = "SHM";
+    public Heartmender(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{2}{G/W}{G/W}");
         this.subtype.add("Elemental");
         this.power = new MageInt(2);
         this.toughness = new MageInt(2);

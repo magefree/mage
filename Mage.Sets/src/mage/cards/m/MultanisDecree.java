@@ -25,15 +25,15 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.urzasdestiny;
+package mage.cards.m;
 
 import java.util.UUID;
 import mage.constants.CardType;
 import mage.constants.Outcome;
-import mage.constants.Rarity;
 import mage.abilities.Ability;
 import mage.abilities.effects.OneShotEffect;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.filter.FilterPermanent;
 import mage.filter.predicate.mageobject.CardTypePredicate;
 import mage.game.Game;
@@ -46,9 +46,8 @@ import mage.players.Player;
  */
 public class MultanisDecree extends CardImpl {
 
-    public MultanisDecree(UUID ownerId) {
-        super(ownerId, 114, "Multani's Decree", Rarity.COMMON, new CardType[]{CardType.SORCERY}, "{3}{G}");
-        this.expansionSetCode = "UDS";
+    public MultanisDecree(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{3}{G}");
 
 
         // Destroy all enchantments. You gain 2 life for each enchantment destroyed this way.

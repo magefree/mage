@@ -25,15 +25,15 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.gatecrash;
+package mage.cards.e;
 
 import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.keyword.CantAttackAloneAbility;
 import mage.abilities.keyword.CantBlockAloneAbility;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.Rarity;
 
 /**
  *
@@ -41,9 +41,8 @@ import mage.constants.Rarity;
  */
 public class EmberBeast extends CardImpl {
 
-    public EmberBeast(UUID ownerId) {
-        super(ownerId, 89, "Ember Beast", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{2}{R}");
-        this.expansionSetCode = "GTC";
+    public EmberBeast(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{2}{R}");
         this.subtype.add("Beast");
 
         this.power = new MageInt(3);

@@ -25,14 +25,14 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.mirrodinbesieged;
+package mage.cards.h;
 
 import java.util.UUID;
 import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.abilities.effects.common.discard.DiscardTargetEffect;
 import mage.abilities.effects.common.PutLibraryIntoGraveTargetEffect;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.target.TargetPlayer;
 
 /**
@@ -41,9 +41,8 @@ import mage.target.TargetPlayer;
  */
 public class HorrifyingRevelation extends CardImpl {
 
-    public HorrifyingRevelation(UUID ownerId) {
-        super(ownerId, 45, "Horrifying Revelation", Rarity.COMMON, new CardType[]{CardType.SORCERY}, "{B}");
-        this.expansionSetCode = "MBS";
+    public HorrifyingRevelation(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{B}");
 
 
         this.getSpellAbility().addTarget(new TargetPlayer());

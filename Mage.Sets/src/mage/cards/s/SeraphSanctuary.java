@@ -25,16 +25,16 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.avacynrestored;
+package mage.cards.s;
 
 import java.util.UUID;
 import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.abilities.common.EntersBattlefieldControlledTriggeredAbility;
 import mage.abilities.common.EntersBattlefieldTriggeredAbility;
 import mage.abilities.effects.common.GainLifeEffect;
 import mage.abilities.mana.ColorlessManaAbility;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.filter.FilterPermanent;
 import mage.filter.common.FilterControlledCreaturePermanent;
 import mage.filter.predicate.mageobject.SubtypePredicate;
@@ -49,9 +49,8 @@ public class SeraphSanctuary extends CardImpl {
     static {
         filter.add(new SubtypePredicate("Angel"));
     }
-    public SeraphSanctuary(UUID ownerId) {
-        super(ownerId, 228, "Seraph Sanctuary", Rarity.COMMON, new CardType[]{CardType.LAND}, "");
-        this.expansionSetCode = "AVR";
+    public SeraphSanctuary(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.LAND},"");
 
         // When Seraph Sanctuary enters the battlefield, you gain 1 life.
         this.addAbility(new EntersBattlefieldTriggeredAbility(new GainLifeEffect(1)));

@@ -25,15 +25,15 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.riseoftheeldrazi;
+package mage.cards.m;
 
 import java.util.UUID;
 import mage.constants.CardType;
 import mage.constants.Duration;
-import mage.constants.Rarity;
 import mage.abilities.dynamicvalue.common.PermanentsOnBattlefieldCount;
 import mage.abilities.effects.common.continuous.BoostTargetEffect;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.filter.common.FilterControlledCreaturePermanent;
 import mage.target.common.TargetCreaturePermanent;
 
@@ -43,9 +43,8 @@ import mage.target.common.TargetCreaturePermanent;
  */
 public class MightOfTheMasses extends CardImpl {
 
-    public MightOfTheMasses(UUID ownerId) {
-        super(ownerId, 196, "Might of the Masses", Rarity.COMMON, new CardType[]{CardType.INSTANT}, "{G}");
-        this.expansionSetCode = "ROE";
+    public MightOfTheMasses(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.INSTANT},"{G}");
 
 
         PermanentsOnBattlefieldCount value = new PermanentsOnBattlefieldCount(new FilterControlledCreaturePermanent());

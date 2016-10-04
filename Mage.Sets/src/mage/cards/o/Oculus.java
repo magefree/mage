@@ -26,15 +26,15 @@
  *  or implied, of BetaSteward_at_googlemail.com.
  */
 
-package mage.sets.mirrodinbesieged;
+package mage.cards.o;
 
 import java.util.UUID;
 import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.MageInt;
 import mage.abilities.common.DiesTriggeredAbility;
 import mage.abilities.effects.common.DrawCardSourceControllerEffect;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 
 /**
  *
@@ -42,9 +42,8 @@ import mage.cards.CardImpl;
  */
 public class Oculus extends CardImpl {
 
-    public Oculus (UUID ownerId) {
-        super(ownerId, 29, "Oculus", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{1}{U}");
-        this.expansionSetCode = "MBS";
+    public Oculus (UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{1}{U}");
         this.subtype.add("Homunculus");
 
         this.power = new MageInt(1);

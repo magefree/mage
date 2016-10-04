@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.knightsvsdragons;
+package mage.cards.e;
 
 import java.util.UUID;
 import mage.abilities.Ability;
@@ -35,8 +35,8 @@ import mage.abilities.decorator.ConditionalOneShotEffect;
 import mage.abilities.effects.common.search.SearchLibraryPutInPlayEffect;
 import mage.abilities.keyword.CyclingAbility;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.filter.common.FilterBasicLandCard;
 import mage.filter.common.FilterControlledLandPermanent;
 import mage.filter.common.FilterControlledPermanent;
@@ -52,9 +52,8 @@ public class EdgeOfAutumn extends CardImpl {
     private static final FilterControlledPermanent filter = new FilterControlledLandPermanent("a land");
     private static final FilterBasicLandCard basiclandfilter = new FilterBasicLandCard();
 
-    public EdgeOfAutumn(UUID ownerId) {
-        super(ownerId, 25, "Edge of Autumn", Rarity.COMMON, new CardType[]{CardType.SORCERY}, "{1}{G}");
-        this.expansionSetCode = "DDG";
+    public EdgeOfAutumn(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{1}{G}");
 
         // If you control four or fewer lands, search your library for a basic land card, put it onto the battlefield tapped, then shuffle your library.
         this.getSpellAbility().addEffect(new ConditionalOneShotEffect(new SearchLibraryPutInPlayEffect(new TargetCardInLibrary(basiclandfilter), true),

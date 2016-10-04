@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.theros;
+package mage.cards.b;
 
 import java.util.UUID;
 import mage.MageInt;
@@ -34,9 +34,9 @@ import mage.abilities.effects.common.continuous.BoostEnchantedEffect;
 import mage.abilities.keyword.BestowAbility;
 import mage.abilities.keyword.FlashAbility;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Duration;
-import mage.constants.Rarity;
 import mage.constants.Zone;
 
 /**
@@ -45,9 +45,8 @@ import mage.constants.Zone;
  */
 public class BoonSatyr extends CardImpl {
 
-    public BoonSatyr(UUID ownerId) {
-        super(ownerId, 152, "Boon Satyr", Rarity.RARE, new CardType[]{CardType.ENCHANTMENT, CardType.CREATURE}, "{1}{G}{G}");
-        this.expansionSetCode = "THS";
+    public BoonSatyr(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.ENCHANTMENT,CardType.CREATURE},"{1}{G}{G}");
         this.subtype.add("Satyr");
 
         this.power = new MageInt(4);

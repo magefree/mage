@@ -25,15 +25,15 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.dragonsoftarkir;
+package mage.cards.s;
 
 import java.util.UUID;
 import mage.abilities.dynamicvalue.common.StaticValue;
 import mage.abilities.effects.common.LookLibraryAndPickControllerEffect;
 import mage.abilities.keyword.ReboundAbility;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.constants.Zone;
 import mage.filter.FilterCard;
 
@@ -43,9 +43,8 @@ import mage.filter.FilterCard;
  */
 public class SightBeyondSight extends CardImpl {
 
-    public SightBeyondSight(UUID ownerId) {
-        super(ownerId, 75, "Sight Beyond Sight", Rarity.UNCOMMON, new CardType[]{CardType.SORCERY}, "{3}{U}");
-        this.expansionSetCode = "DTK";
+    public SightBeyondSight(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{3}{U}");
 
         // Look at the top two cards of your library. Put of them into your hand and the other on the bottom of your library.
         this.getSpellAbility().addEffect(new LookLibraryAndPickControllerEffect(new StaticValue(2), false, new StaticValue(1), new FilterCard(), Zone.LIBRARY, false, false));

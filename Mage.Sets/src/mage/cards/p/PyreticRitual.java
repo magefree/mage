@@ -25,14 +25,14 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.magic2011;
+package mage.cards.p;
 
 import java.util.UUID;
 import mage.Mana;
 import mage.abilities.effects.common.BasicManaEffect;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.Rarity;
 
 /**
  *
@@ -40,9 +40,8 @@ import mage.constants.Rarity;
  */
 public class PyreticRitual extends CardImpl {
 
-    public PyreticRitual(UUID ownerId) {
-        super(ownerId, 153, "Pyretic Ritual", Rarity.COMMON, new CardType[]{CardType.INSTANT}, "{1}{R}");
-        this.expansionSetCode = "M11";
+    public PyreticRitual(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.INSTANT},"{1}{R}");
 
         // Add {R}{R}{R} to your mana pool.
         this.getSpellAbility().addEffect(new BasicManaEffect(Mana.RedMana(3)));

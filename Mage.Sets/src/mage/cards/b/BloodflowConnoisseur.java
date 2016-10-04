@@ -25,10 +25,9 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.avacynrestored;
+package mage.cards.b;
 
 import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleActivatedAbility;
@@ -36,6 +35,7 @@ import mage.abilities.costs.common.SacrificeTargetCost;
 import mage.abilities.costs.mana.ManaCostsImpl;
 import mage.abilities.effects.common.counter.AddCountersSourceEffect;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.Zone;
 import mage.counters.CounterType;
 import mage.target.common.TargetControlledCreaturePermanent;
@@ -48,9 +48,8 @@ import java.util.UUID;
  */
 public class BloodflowConnoisseur extends CardImpl {
 
-    public BloodflowConnoisseur(UUID ownerId) {
-        super(ownerId, 87, "Bloodflow Connoisseur", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{2}{B}");
-        this.expansionSetCode = "AVR";
+    public BloodflowConnoisseur(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{2}{B}");
         this.subtype.add("Vampire");
 
         this.power = new MageInt(1);

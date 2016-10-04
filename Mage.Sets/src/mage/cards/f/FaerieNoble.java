@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.masterseditioniii;
+package mage.cards.f;
 
 import java.util.UUID;
 import mage.MageInt;
@@ -37,9 +37,9 @@ import mage.abilities.effects.Effect;
 import mage.abilities.effects.common.continuous.BoostControlledEffect;
 import mage.abilities.keyword.FlyingAbility;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Duration;
-import mage.constants.Rarity;
 import mage.constants.Zone;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.filter.predicate.mageobject.SubtypePredicate;
@@ -56,9 +56,8 @@ public class FaerieNoble extends CardImpl {
         filter.add(new SubtypePredicate("Faerie"));
     }
 
-    public FaerieNoble(UUID ownerId) {
-        super(ownerId, 117, "Faerie Noble", Rarity.UNCOMMON, new CardType[]{CardType.CREATURE}, "{2}{G}");
-        this.expansionSetCode = "ME3";
+    public FaerieNoble(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{2}{G}");
         this.subtype.add("Faerie");
         this.power = new MageInt(1);
         this.toughness = new MageInt(2);

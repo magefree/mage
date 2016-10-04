@@ -25,15 +25,15 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.ninthedition;
+package mage.cards.e;
 
 import java.util.UUID;
 import mage.abilities.Ability;
 import mage.abilities.effects.OneShotEffect;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Outcome;
-import mage.constants.Rarity;
 import mage.filter.common.FilterLandPermanent;
 import mage.filter.predicate.mageobject.SupertypePredicate;
 import mage.game.Game;
@@ -47,9 +47,8 @@ import mage.target.TargetPlayer;
  */
 public class EarlyHarvest extends CardImpl {
 
-    public EarlyHarvest(UUID ownerId) {
-        super(ownerId, 235, "Early Harvest", Rarity.RARE, new CardType[]{CardType.INSTANT}, "{1}{G}{G}");
-        this.expansionSetCode = "9ED";
+    public EarlyHarvest(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.INSTANT},"{1}{G}{G}");
 
         // Target player untaps all basic lands he or she controls.
         this.getSpellAbility().addEffect(new UntapAllLandsTargetEffect());

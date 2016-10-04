@@ -25,18 +25,18 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.gatecrash;
+package mage.cards.i;
 
 import java.util.Set;
 import java.util.UUID;
 import mage.constants.CardType;
 import mage.constants.Outcome;
-import mage.constants.Rarity;
 import mage.constants.Zone;
 import mage.abilities.Ability;
 import mage.abilities.effects.OneShotEffect;
 import mage.cards.Card;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.filter.common.FilterCreatureCard;
 import mage.game.Game;
 import mage.players.Player;
@@ -47,9 +47,8 @@ import mage.players.Player;
  */
 public class ImmortalServitude extends CardImpl {
 
-    public ImmortalServitude(UUID ownerId) {
-        super(ownerId, 220, "Immortal Servitude", Rarity.RARE, new CardType[]{CardType.SORCERY}, "{X}{W/B}{W/B}{W/B}");
-        this.expansionSetCode = "GTC";
+    public ImmortalServitude(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{X}{W/B}{W/B}{W/B}");
 
 
         // Return each creature card with converted mana cost X from your graveyard to the battlefield.

@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.magic2014;
+package mage.cards.r;
 
 import java.util.UUID;
 import mage.abilities.Ability;
@@ -37,8 +37,8 @@ import mage.abilities.costs.mana.ManaCostsImpl;
 import mage.abilities.effects.common.counter.AddCountersSourceEffect;
 import mage.abilities.effects.common.search.SearchLibraryPutInHandEffect;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.constants.Zone;
 import mage.counters.CounterType;
 import mage.target.common.TargetCardInLibrary;
@@ -49,9 +49,8 @@ import mage.target.common.TargetCardInLibrary;
  */
 public class RingOfThreeWishes extends CardImpl {
 
-    public RingOfThreeWishes(UUID ownerId) {
-        super(ownerId, 216, "Ring of Three Wishes", Rarity.MYTHIC, new CardType[]{CardType.ARTIFACT}, "{5}");
-        this.expansionSetCode = "M14";
+    public RingOfThreeWishes(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.ARTIFACT},"{5}");
 
         // Ring of Three Wishes enters the battlefield with three wish counters on it.
         this.addAbility(new EntersBattlefieldAbility(new AddCountersSourceEffect(CounterType.WISH.createInstance(3)), "with three wish counters on it"));

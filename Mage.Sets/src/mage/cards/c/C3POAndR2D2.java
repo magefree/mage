@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.starwars;
+package mage.cards.c;
 
 import java.util.UUID;
 import mage.MageInt;
@@ -36,8 +36,8 @@ import mage.abilities.effects.common.DrawCardSourceControllerEffect;
 import mage.abilities.effects.common.GainLifeEffect;
 import mage.abilities.keyword.RepairAbility;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.Rarity;
 
 /**
  *
@@ -45,9 +45,8 @@ import mage.constants.Rarity;
  */
 public class C3POAndR2D2 extends CardImpl {
 
-    public C3POAndR2D2(UUID ownerId) {
-        super(ownerId, 160, "C-3PO and R2D2", Rarity.RARE, new CardType[]{CardType.ARTIFACT, CardType.CREATURE}, "{2}{W}{U}");
-        this.expansionSetCode = "SWS";
+    public C3POAndR2D2(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.ARTIFACT,CardType.CREATURE},"{2}{W}{U}");
         this.supertype.add("Legendary");
         this.subtype.add("Droid");
         this.power = new MageInt(2);

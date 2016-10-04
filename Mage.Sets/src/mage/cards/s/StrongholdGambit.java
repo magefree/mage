@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.nemesis;
+package mage.cards.s;
 
 import java.util.LinkedHashMap;
 import java.util.Map;
@@ -35,11 +35,11 @@ import mage.abilities.Ability;
 import mage.abilities.effects.OneShotEffect;
 import mage.cards.Card;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.cards.Cards;
 import mage.cards.CardsImpl;
 import mage.constants.CardType;
 import mage.constants.Outcome;
-import mage.constants.Rarity;
 import mage.constants.Zone;
 import mage.game.Game;
 import mage.players.Player;
@@ -51,9 +51,8 @@ import mage.target.common.TargetCardInHand;
  */
 public class StrongholdGambit extends CardImpl {
 
-    public StrongholdGambit(UUID ownerId) {
-        super(ownerId, 100, "Stronghold Gambit", Rarity.RARE, new CardType[]{CardType.SORCERY}, "{1}{R}");
-        this.expansionSetCode = "NEM";
+    public StrongholdGambit(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{1}{R}");
 
         // Each player chooses a card in his or her hand. Then each player reveals his or her chosen card. The owner of each creature card revealed this way with the lowest converted mana cost puts it onto the battlefield.
         getSpellAbility().addEffect(new StrongholdGambitEffect());

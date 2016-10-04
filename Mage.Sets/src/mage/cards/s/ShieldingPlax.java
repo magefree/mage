@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.dissension;
+package mage.cards.s;
 
 import java.util.UUID;
 import mage.abilities.Ability;
@@ -36,11 +36,11 @@ import mage.abilities.effects.common.CantBeTargetedAttachedEffect;
 import mage.abilities.effects.common.DrawCardSourceControllerEffect;
 import mage.abilities.keyword.EnchantAbility;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.AttachmentType;
 import mage.constants.CardType;
 import mage.constants.Duration;
 import mage.constants.Outcome;
-import mage.constants.Rarity;
 import mage.constants.TargetController;
 import mage.constants.Zone;
 import mage.filter.FilterObject;
@@ -56,9 +56,8 @@ public class ShieldingPlax extends CardImpl {
 
     private static final FilterObject filter = new FilterStackObject("spells or abilities your opponents control");
 
-    public ShieldingPlax(UUID ownerId) {
-        super(ownerId, 147, "Shielding Plax", Rarity.COMMON, new CardType[]{CardType.ENCHANTMENT}, "{2}{G/U}");
-        this.expansionSetCode = "DIS";
+    public ShieldingPlax(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.ENCHANTMENT},"{2}{G/U}");
         this.subtype.add("Aura");
 
         // Enchant creature

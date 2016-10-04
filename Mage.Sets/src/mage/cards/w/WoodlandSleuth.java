@@ -25,13 +25,12 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.innistrad;
+package mage.cards.w;
 
 import java.util.Random;
 import java.util.UUID;
 import mage.constants.CardType;
 import mage.constants.Outcome;
-import mage.constants.Rarity;
 import mage.constants.Zone;
 import mage.MageInt;
 import mage.abilities.Ability;
@@ -42,6 +41,7 @@ import mage.abilities.decorator.ConditionalTriggeredAbility;
 import mage.abilities.effects.OneShotEffect;
 import mage.cards.Card;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.filter.common.FilterCreatureCard;
 import mage.game.Game;
 import mage.players.Player;
@@ -55,9 +55,8 @@ public class WoodlandSleuth extends CardImpl {
 
     private static final String staticText = "Morbid - When {this} enters the battlefield, if a creature died this turn, return a creature card at random from your graveyard to your hand.";
 
-    public WoodlandSleuth(UUID ownerId) {
-        super(ownerId, 210, "Woodland Sleuth", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{3}{G}");
-        this.expansionSetCode = "ISD";
+    public WoodlandSleuth(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{3}{G}");
         this.subtype.add("Human");
         this.subtype.add("Scout");
 

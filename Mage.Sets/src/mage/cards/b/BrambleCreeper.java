@@ -25,16 +25,16 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.magic2010;
+package mage.cards.b;
 
 import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.common.AttacksTriggeredAbility;
 import mage.abilities.effects.common.continuous.BoostSourceEffect;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Duration;
-import mage.constants.Rarity;
 
 /**
  *
@@ -42,9 +42,8 @@ import mage.constants.Rarity;
  */
 public class BrambleCreeper extends CardImpl {
 
-    public BrambleCreeper(UUID ownerId) {
-        super(ownerId, 171, "Bramble Creeper", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{4}{G}");
-        this.expansionSetCode = "M10";
+    public BrambleCreeper(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{4}{G}");
         this.subtype.add("Elemental");
 
         this.power = new MageInt(0);

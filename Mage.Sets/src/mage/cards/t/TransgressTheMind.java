@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.battleforzendikar;
+package mage.cards.t;
 
 import java.util.UUID;
 import mage.abilities.Ability;
@@ -33,8 +33,8 @@ import mage.abilities.effects.Effect;
 import mage.abilities.effects.common.ExileCardYouChooseTargetOpponentEffect;
 import mage.abilities.keyword.DevoidAbility;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.filter.Filter;
 import mage.filter.FilterCard;
 import mage.filter.predicate.mageobject.ConvertedManaCostPredicate;
@@ -52,9 +52,8 @@ public class TransgressTheMind extends CardImpl {
         filter.add(new ConvertedManaCostPredicate(Filter.ComparisonType.GreaterThan, 2));
     }
 
-    public TransgressTheMind(UUID ownerId) {
-        super(ownerId, 101, "Transgress the Mind", Rarity.UNCOMMON, new CardType[]{CardType.SORCERY}, "{1}{B}");
-        this.expansionSetCode = "BFZ";
+    public TransgressTheMind(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{1}{B}");
 
         // Devoid
         Ability ability = new DevoidAbility(this.color);

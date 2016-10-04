@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.ravnica;
+package mage.cards.v;
 
 import java.util.UUID;
 import mage.MageInt;
@@ -34,9 +34,9 @@ import mage.abilities.common.SimpleEvasionAbility;
 import mage.abilities.effects.common.SacrificeControllerEffect;
 import mage.abilities.effects.common.combat.CantBeBlockedByCreaturesSourceEffect;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Duration;
-import mage.constants.Rarity;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.filter.predicate.mageobject.SubtypePredicate;
 
@@ -52,9 +52,8 @@ public class VindictiveMob extends CardImpl {
         filter.add(new SubtypePredicate("Saproling"));
     }
 
-    public VindictiveMob(UUID ownerId) {
-        super(ownerId, 112, "Vindictive Mob", Rarity.UNCOMMON, new CardType[]{CardType.CREATURE}, "{4}{B}{B}");
-        this.expansionSetCode = "RAV";
+    public VindictiveMob(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{4}{B}{B}");
         this.subtype.add("Human");
         this.subtype.add("Berserker");
         this.power = new MageInt(5);

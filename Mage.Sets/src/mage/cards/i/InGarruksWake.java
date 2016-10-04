@@ -25,12 +25,12 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.magic2015;
+package mage.cards.i;
 
 import mage.abilities.effects.common.DestroyAllEffect;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.constants.TargetController;
 import mage.filter.FilterPermanent;
 import mage.filter.common.FilterCreatureOrPlaneswalkerPermanent;
@@ -49,9 +49,8 @@ public class InGarruksWake extends CardImpl {
         filter.add(new ControllerPredicate(TargetController.NOT_YOU));
     }
 
-    public InGarruksWake(UUID ownerId) {
-        super(ownerId, 100, "In Garruk's Wake", Rarity.RARE, new CardType[]{CardType.SORCERY}, "{7}{B}{B}");
-        this.expansionSetCode = "M15";
+    public InGarruksWake(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{7}{B}{B}");
 
 
         // Destroy all creatures you don't control and all planeswalkers you don't control.

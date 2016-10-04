@@ -25,15 +25,15 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.gatecrash;
+package mage.cards.s;
 
 import mage.abilities.effects.common.DamageTargetEffect;
 import mage.abilities.effects.common.continuous.CantGainLifeAllEffect;
 import mage.abilities.effects.common.continuous.DamageCantBePreventedEffect;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Duration;
-import mage.constants.Rarity;
 import mage.target.TargetPlayer;
 
 import java.util.UUID;
@@ -44,9 +44,8 @@ import java.util.UUID;
  */
 public class Skullcrack extends CardImpl {
 
-    public Skullcrack (UUID ownerId) {
-        super(ownerId, 106, "Skullcrack", Rarity.UNCOMMON, new CardType[]{CardType.INSTANT}, "{1}{R}");
-        this.expansionSetCode = "GTC";
+    public Skullcrack (UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.INSTANT},"{1}{R}");
 
 
         // Players can't gain life this turn. Damage can't be prevented this turn. Skullcrack deals 3 damage to target player.

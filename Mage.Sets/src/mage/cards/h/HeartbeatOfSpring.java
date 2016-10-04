@@ -25,14 +25,14 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.championsofkamigawa;
+package mage.cards.h;
 
 import java.util.UUID;
 import mage.abilities.common.TapForManaAllTriggeredManaAbility;
 import mage.abilities.effects.common.AddManaOfAnyTypeProducedEffect;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.constants.SetTargetPointer;
 import mage.filter.common.FilterLandPermanent;
 
@@ -42,9 +42,8 @@ import mage.filter.common.FilterLandPermanent;
  */
 public class HeartbeatOfSpring extends CardImpl {
 
-    public HeartbeatOfSpring(UUID ownerId) {
-        super(ownerId, 212, "Heartbeat of Spring", Rarity.RARE, new CardType[]{CardType.ENCHANTMENT}, "{2}{G}");
-        this.expansionSetCode = "CHK";
+    public HeartbeatOfSpring(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.ENCHANTMENT},"{2}{G}");
 
         
         // Whenever a player taps a land for mana, that player adds one mana to his or her mana pool of any type that land produced.

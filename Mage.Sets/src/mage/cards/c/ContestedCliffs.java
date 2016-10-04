@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.onslaught;
+package mage.cards.c;
 
 import java.util.UUID;
 import mage.abilities.Ability;
@@ -36,8 +36,8 @@ import mage.abilities.effects.Effect;
 import mage.abilities.effects.common.FightTargetsEffect;
 import mage.abilities.mana.ColorlessManaAbility;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.constants.TargetController;
 import mage.constants.Zone;
 import mage.filter.common.FilterCreaturePermanent;
@@ -60,9 +60,8 @@ public class ContestedCliffs extends CardImpl {
         filter2.add(new ControllerPredicate(TargetController.OPPONENT));
     }
 
-    public ContestedCliffs(UUID ownerId) {
-        super(ownerId, 314, "Contested Cliffs", Rarity.RARE, new CardType[]{CardType.LAND}, "");
-        this.expansionSetCode = "ONS";
+    public ContestedCliffs(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.LAND},"");
 
         // {tap}: Add {C} to your mana pool.
         this.addAbility(new ColorlessManaAbility());

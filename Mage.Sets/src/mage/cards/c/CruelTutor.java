@@ -25,15 +25,15 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.portal;
+package mage.cards.c;
 
 import java.util.UUID;
 
 import mage.abilities.effects.common.LoseLifeSourceControllerEffect;
 import mage.abilities.effects.common.search.SearchLibraryPutOnLibraryEffect;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.target.common.TargetCardInLibrary;
 
 /**
@@ -42,9 +42,8 @@ import mage.target.common.TargetCardInLibrary;
  */
 public class CruelTutor extends CardImpl {
 
-    public CruelTutor(UUID ownerId) {
-        super(ownerId, 9, "Cruel Tutor", Rarity.RARE, new CardType[]{CardType.SORCERY}, "{2}{B}");
-        this.expansionSetCode = "POR";
+    public CruelTutor(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{2}{B}");
 
 
         // Search your library for a card, then shuffle your library and put that card on top of it. You lose 2 life.

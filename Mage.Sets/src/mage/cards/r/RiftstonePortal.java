@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.judgment;
+package mage.cards.r;
 
 import java.util.UUID;
 import mage.abilities.Ability;
@@ -36,9 +36,9 @@ import mage.abilities.mana.ColorlessManaAbility;
 import mage.abilities.mana.GreenManaAbility;
 import mage.abilities.mana.WhiteManaAbility;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Duration;
-import mage.constants.Rarity;
 import mage.constants.Zone;
 import mage.filter.common.FilterControlledLandPermanent;
 
@@ -48,9 +48,8 @@ import mage.filter.common.FilterControlledLandPermanent;
  */
 public class RiftstonePortal extends CardImpl {
 
-    public RiftstonePortal(UUID ownerId) {
-        super(ownerId, 143, "Riftstone Portal", Rarity.UNCOMMON, new CardType[]{CardType.LAND}, "");
-        this.expansionSetCode = "JUD";
+    public RiftstonePortal(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.LAND},"");
 
         // {tap}: Add {C} to your mana pool.
         this.addAbility(new ColorlessManaAbility());

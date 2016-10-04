@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.coldsnap;
+package mage.cards.m;
 
 import java.util.UUID;
 import mage.abilities.common.delayed.AtTheBeginOfNextUpkeepDelayedTriggeredAbility;
@@ -33,8 +33,8 @@ import mage.abilities.effects.common.CreateDelayedTriggeredAbilityEffect;
 import mage.abilities.effects.common.DestroyTargetEffect;
 import mage.abilities.effects.common.DrawCardSourceControllerEffect;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.filter.common.FilterArtifactOrEnchantmentPermanent;
 import mage.target.TargetPermanent;
 
@@ -44,9 +44,8 @@ import mage.target.TargetPermanent;
  */
 public class MysticMelting extends CardImpl {
 
-    public MysticMelting(UUID ownerId) {
-        super(ownerId, 114, "Mystic Melting", Rarity.UNCOMMON, new CardType[]{CardType.INSTANT}, "{3}{G}");
-        this.expansionSetCode = "CSP";
+    public MysticMelting(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.INSTANT},"{3}{G}");
 
         // Destroy target artifact or enchantment.
         this.getSpellAbility().addEffect(new DestroyTargetEffect());

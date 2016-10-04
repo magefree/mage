@@ -26,14 +26,14 @@
  *  or implied, of BetaSteward_at_googlemail.com.
  */
 
-package mage.sets.ravnica;
+package mage.cards.s;
 
 import java.util.UUID;
 import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.MageInt;
 import mage.abilities.keyword.FlyingAbility;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 
 /**
  *
@@ -41,9 +41,8 @@ import mage.cards.CardImpl;
  */
 public class SnappingDrake extends CardImpl {
 
-    public SnappingDrake (UUID ownerId) {
-        super(ownerId, 64, "Snapping Drake", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{3}{U}");
-        this.expansionSetCode = "RAV";
+    public SnappingDrake (UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{3}{U}");
         this.subtype.add("Drake");
 
         this.power = new MageInt(3);

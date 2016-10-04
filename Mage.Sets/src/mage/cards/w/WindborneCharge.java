@@ -25,16 +25,16 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.zendikar;
+package mage.cards.w;
 
 import java.util.UUID;
 import mage.constants.CardType;
 import mage.constants.Duration;
-import mage.constants.Rarity;
 import mage.abilities.effects.common.continuous.BoostTargetEffect;
 import mage.abilities.effects.common.continuous.GainAbilityTargetEffect;
 import mage.abilities.keyword.FlyingAbility;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.target.common.TargetControlledCreaturePermanent;
 
 /**
@@ -43,9 +43,8 @@ import mage.target.common.TargetControlledCreaturePermanent;
  */
 public class WindborneCharge extends CardImpl {
 
-    public WindborneCharge(UUID ownerId) {
-        super(ownerId, 38, "Windborne Charge", Rarity.UNCOMMON, new CardType[]{CardType.SORCERY}, "{2}{W}{W}");
-        this.expansionSetCode = "ZEN";
+    public WindborneCharge(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{2}{W}{W}");
 
 
         // Two target creatures you control each get +2/+2 and gain flying until end of turn.

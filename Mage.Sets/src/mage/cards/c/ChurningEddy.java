@@ -25,14 +25,14 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.torment;
+package mage.cards.c;
 
 import java.util.UUID;
 import mage.abilities.effects.Effect;
 import mage.abilities.effects.common.ReturnToHandTargetEffect;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.target.common.TargetCreaturePermanent;
 import mage.target.common.TargetLandPermanent;
 
@@ -42,9 +42,8 @@ import mage.target.common.TargetLandPermanent;
  */
 public class ChurningEddy extends CardImpl {
 
-    public ChurningEddy(UUID ownerId) {
-        super(ownerId, 32, "Churning Eddy", Rarity.COMMON, new CardType[]{CardType.SORCERY}, "{3}{U}");
-        this.expansionSetCode = "TOR";
+    public ChurningEddy(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{3}{U}");
 
         // Return target creature and target land to their owners' hands.
         Effect effect = new ReturnToHandTargetEffect(true);

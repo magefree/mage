@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.magic2015;
+package mage.cards.n;
 
 import java.util.UUID;
 import mage.abilities.Ability;
@@ -38,9 +38,9 @@ import mage.abilities.effects.common.CreateTokenEffect;
 import mage.abilities.effects.common.DrawCardSourceControllerEffect;
 import mage.cards.Card;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Outcome;
-import mage.constants.Rarity;
 import mage.constants.Zone;
 import mage.filter.FilterCard;
 import mage.filter.common.FilterCreatureCard;
@@ -56,9 +56,8 @@ public class NecromancersStockpile extends CardImpl {
 
     private final FilterCard filter = new FilterCreatureCard();
 
-    public NecromancersStockpile(UUID ownerId) {
-        super(ownerId, 108, "Necromancer's Stockpile", Rarity.RARE, new CardType[]{CardType.ENCHANTMENT}, "{1}{B}");
-        this.expansionSetCode = "M15";
+    public NecromancersStockpile(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.ENCHANTMENT},"{1}{B}");
 
         // {1}{B}, Discard a creature card: Draw a card.
         // If the discarded card was a Zombie card, put a 2/2 black Zombie creature token onto the battlefield tapped.

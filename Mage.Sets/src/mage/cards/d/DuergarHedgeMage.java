@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.commander;
+package mage.cards.d;
 
 import java.util.UUID;
 import mage.MageInt;
@@ -36,8 +36,8 @@ import mage.abilities.condition.common.PermanentsOnTheBattlefieldCondition.Count
 import mage.abilities.decorator.ConditionalTriggeredAbility;
 import mage.abilities.effects.common.DestroyTargetEffect;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.filter.FilterPermanent;
 import mage.filter.common.FilterLandPermanent;
 import mage.filter.predicate.mageobject.CardTypePredicate;
@@ -63,9 +63,8 @@ public class DuergarHedgeMage extends CardImpl {
     private final String rule1 = "When {this} enters the battlefield, if you control two or more Mountains, you may destroy target artifact.";
     private final String rule2 = "When {this} enters the battlefield, if you control two or more Plains, you may destroy target enchantment.";
 
-    public DuergarHedgeMage(UUID ownerId) {
-        super(ownerId, 195, "Duergar Hedge-Mage", Rarity.UNCOMMON, new CardType[]{CardType.CREATURE}, "{2}{R/W}");
-        this.expansionSetCode = "CMD";
+    public DuergarHedgeMage(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{2}{R/W}");
         this.subtype.add("Dwarf");
         this.subtype.add("Shaman");
 

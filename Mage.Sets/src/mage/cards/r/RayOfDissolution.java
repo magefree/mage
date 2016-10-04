@@ -25,14 +25,14 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.theros;
+package mage.cards.r;
 
 import java.util.UUID;
 import mage.abilities.effects.common.DestroyTargetEffect;
 import mage.abilities.effects.common.GainLifeEffect;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.filter.common.FilterEnchantmentPermanent;
 import mage.target.Target;
 import mage.target.TargetPermanent;
@@ -43,9 +43,8 @@ import mage.target.TargetPermanent;
  */
 public class RayOfDissolution extends CardImpl {
 
-    public RayOfDissolution(UUID ownerId) {
-        super(ownerId, 27, "Ray of Dissolution", Rarity.COMMON, new CardType[]{CardType.INSTANT}, "{2}{W}");
-        this.expansionSetCode = "THS";
+    public RayOfDissolution(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.INSTANT},"{2}{W}");
 
 
         // Destroy target enchantment. You gain 3 life.

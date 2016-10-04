@@ -26,17 +26,17 @@
  *  or implied, of BetaSteward_at_googlemail.com.
  */
 
-package mage.sets.scarsofmirrodin;
+package mage.cards.a;
 
 import java.io.ObjectStreamException;
 import java.util.UUID;
 import mage.constants.CardType;
 import mage.constants.Outcome;
-import mage.constants.Rarity;
 import mage.abilities.Ability;
 import mage.abilities.effects.Effect;
 import mage.abilities.effects.OneShotEffect;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.filter.common.FilterCreatureOrPlayer;
 import mage.filter.predicate.mageobject.AnotherTargetPredicate;
 import mage.game.Game;
@@ -51,9 +51,8 @@ import mage.target.common.TargetCreatureOrPlayer;
  */
 public class ArcTrail extends CardImpl {
 
-    public ArcTrail (UUID ownerId) {
-        super(ownerId, 81, "Arc Trail", Rarity.UNCOMMON, new CardType[] { CardType.SORCERY }, "{1}{R}");
-        this.expansionSetCode = "SOM";
+    public ArcTrail (UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{1}{R}");
 
         // Arc Trail deals 2 damage to target creature or player and 1 damage to another target creature or player
         FilterCreatureOrPlayer filter1 = new FilterCreatureOrPlayer("creature or player to deal 2 damage");

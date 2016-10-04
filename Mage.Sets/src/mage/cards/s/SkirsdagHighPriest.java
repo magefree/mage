@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.innistrad;
+package mage.cards.s;
 
 import java.util.UUID;
 import mage.MageInt;
@@ -36,9 +36,9 @@ import mage.abilities.costs.common.TapTargetCost;
 import mage.abilities.decorator.ConditionalActivatedAbility;
 import mage.abilities.effects.common.CreateTokenEffect;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.AbilityWord;
 import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.constants.Zone;
 import mage.filter.common.FilterControlledCreaturePermanent;
 import mage.filter.predicate.Predicates;
@@ -58,9 +58,8 @@ public class SkirsdagHighPriest extends CardImpl {
         filter.add(Predicates.not(new TappedPredicate()));
     }
 
-    public SkirsdagHighPriest(UUID ownerId) {
-        super(ownerId, 117, "Skirsdag High Priest", Rarity.RARE, new CardType[]{CardType.CREATURE}, "{1}{B}");
-        this.expansionSetCode = "ISD";
+    public SkirsdagHighPriest(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{1}{B}");
         this.subtype.add("Human");
         this.subtype.add("Cleric");
 

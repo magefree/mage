@@ -26,18 +26,18 @@
  *  or implied, of BetaSteward_at_googlemail.com.
  */
 
-package mage.sets.championsofkamigawa;
+package mage.cards.k;
 
 import java.util.UUID;
 
 import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.costs.common.SacrificeSourceCost;
 import mage.abilities.effects.common.ReturnToHandTargetEffect;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.Zone;
 import mage.target.common.TargetControlledCreaturePermanent;
 
@@ -46,9 +46,8 @@ import mage.target.common.TargetControlledCreaturePermanent;
  */
 public class KamiOfTwistedReflection extends CardImpl {
 
-    public KamiOfTwistedReflection(UUID ownerId) {
-        super(ownerId, 71, "Kami of Twisted Reflection", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{1}{U}{U}");
-        this.expansionSetCode = "CHK";
+    public KamiOfTwistedReflection(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{1}{U}{U}");
         this.subtype.add("Spirit");
 
         this.power = new MageInt(2);

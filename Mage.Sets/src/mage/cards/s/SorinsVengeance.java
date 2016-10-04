@@ -26,14 +26,14 @@
  *  or implied, of BetaSteward_at_googlemail.com.
  */
 
-package mage.sets.magic2012;
+package mage.cards.s;
 
 import java.util.UUID;
 import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.abilities.effects.common.DamageTargetEffect;
 import mage.abilities.effects.common.GainLifeEffect;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.target.TargetPlayer;
 
 /**
@@ -42,9 +42,8 @@ import mage.target.TargetPlayer;
  */
 public class SorinsVengeance extends CardImpl {
 
-    public SorinsVengeance (UUID ownerId) {
-        super(ownerId, 111, "Sorin's Vengeance", Rarity.RARE, new CardType[]{CardType.SORCERY}, "{4}{B}{B}{B}");
-        this.expansionSetCode = "M12";
+    public SorinsVengeance (UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{4}{B}{B}{B}");
 
         this.getSpellAbility().addEffect(new DamageTargetEffect(10));
         this.getSpellAbility().addEffect(new GainLifeEffect(10));

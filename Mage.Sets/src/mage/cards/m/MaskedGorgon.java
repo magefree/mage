@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.judgment;
+package mage.cards.m;
 
 import java.util.UUID;
 import mage.MageInt;
@@ -38,10 +38,10 @@ import mage.abilities.effects.common.continuous.GainAbilityAllEffect;
 import mage.abilities.effects.common.continuous.GainAbilitySourceEffect;
 import mage.abilities.keyword.ProtectionAbility;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.AbilityWord;
 import mage.constants.CardType;
 import mage.constants.Duration;
-import mage.constants.Rarity;
 import mage.constants.Zone;
 import mage.filter.FilterCard;
 import mage.filter.common.FilterCreaturePermanent;
@@ -65,9 +65,8 @@ public class MaskedGorgon extends CardImpl {
         filter3.add(Predicates.or(new ColorPredicate(ObjectColor.GREEN), new ColorPredicate(ObjectColor.WHITE)));
     }
 
-    public MaskedGorgon(UUID ownerId) {
-        super(ownerId, 69, "Masked Gorgon", Rarity.RARE, new CardType[]{CardType.CREATURE}, "{4}{B}");
-        this.expansionSetCode = "JUD";
+    public MaskedGorgon(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{4}{B}");
         this.subtype.add("Gorgon");
         this.power = new MageInt(5);
         this.toughness = new MageInt(5);

@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.mirrodinbesieged;
+package mage.cards.p;
 
 import java.util.UUID;
 import mage.MageInt;
@@ -36,10 +36,10 @@ import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.effects.ContinuousRuleModifyingEffectImpl;
 import mage.abilities.effects.common.NameACardEffect;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Duration;
 import mage.constants.Outcome;
-import mage.constants.Rarity;
 import mage.constants.Zone;
 import mage.game.Game;
 import mage.game.events.GameEvent;
@@ -51,9 +51,8 @@ import mage.game.events.GameEvent.EventType;
  */
 public class PhyrexianRevoker extends CardImpl {
 
-    public PhyrexianRevoker(UUID ownerId) {
-        super(ownerId, 122, "Phyrexian Revoker", Rarity.RARE, new CardType[]{CardType.ARTIFACT, CardType.CREATURE}, "{2}");
-        this.expansionSetCode = "MBS";
+    public PhyrexianRevoker(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.ARTIFACT,CardType.CREATURE},"{2}");
         this.subtype.add("Horror");
         this.power = new MageInt(2);
         this.toughness = new MageInt(1);

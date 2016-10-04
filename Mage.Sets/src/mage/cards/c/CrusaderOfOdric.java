@@ -25,17 +25,17 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.magic2013;
+package mage.cards.c;
 
 import java.util.UUID;
 
 import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.MageInt;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.dynamicvalue.common.PermanentsOnBattlefieldCount;
 import mage.abilities.effects.common.continuous.SetPowerToughnessSourceEffect;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.Duration;
 import mage.constants.Zone;
 import mage.filter.common.FilterControlledCreaturePermanent;
@@ -46,9 +46,8 @@ import mage.filter.common.FilterControlledCreaturePermanent;
  */
 public class CrusaderOfOdric extends CardImpl {
 
-    public CrusaderOfOdric(UUID ownerId) {
-        super(ownerId, 10, "Crusader of Odric", Rarity.UNCOMMON, new CardType[]{CardType.CREATURE}, "{2}{W}");
-        this.expansionSetCode = "M13";
+    public CrusaderOfOdric(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{2}{W}");
         this.subtype.add("Human");
         this.subtype.add("Soldier");
 

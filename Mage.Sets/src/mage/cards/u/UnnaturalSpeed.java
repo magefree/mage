@@ -26,15 +26,15 @@
  *  or implied, of BetaSteward_at_googlemail.com.
  */
 
-package mage.sets.championsofkamigawa;
+package mage.cards.u;
 
 import java.util.UUID;
 
 import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.abilities.effects.common.continuous.GainAbilityTargetEffect;
 import mage.abilities.keyword.HasteAbility;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.Duration;
 import mage.target.common.TargetCreaturePermanent;
 
@@ -44,9 +44,8 @@ import mage.target.common.TargetCreaturePermanent;
  */
 public class UnnaturalSpeed extends CardImpl {
 
-    public UnnaturalSpeed (UUID ownerId) {
-        super(ownerId, 197, "Unnatural Speed", Rarity.COMMON, new CardType[]{CardType.INSTANT}, "{R}");
-        this.expansionSetCode = "CHK";
+    public UnnaturalSpeed (UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.INSTANT},"{R}");
         this.subtype.add("Arcane");
 
         this.getSpellAbility().addEffect(new GainAbilityTargetEffect(HasteAbility.getInstance(), Duration.EndOfTurn));

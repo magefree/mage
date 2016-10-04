@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.ravnica;
+package mage.cards.t;
 
 import java.util.UUID;
 import mage.MageInt;
@@ -36,11 +36,11 @@ import mage.abilities.costs.mana.GenericManaCost;
 import mage.abilities.effects.OneShotEffect;
 import mage.cards.Card;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.cards.Cards;
 import mage.cards.CardsImpl;
 import mage.constants.CardType;
 import mage.constants.Outcome;
-import mage.constants.Rarity;
 import mage.constants.Zone;
 import mage.filter.FilterCard;
 import mage.filter.common.FilterControlledCreaturePermanent;
@@ -57,9 +57,8 @@ import mage.target.common.TargetOpponent;
  */
 public class ThoughtpickerWitch extends CardImpl {
 
-    public ThoughtpickerWitch(UUID ownerId) {
-        super(ownerId, 109, "Thoughtpicker Witch", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{B}");
-        this.expansionSetCode = "RAV";
+    public ThoughtpickerWitch(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{B}");
         this.subtype.add("Human");
         this.subtype.add("Wizard");
 

@@ -25,13 +25,13 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.odyssey;
+package mage.cards.u;
 
 import java.util.UUID;
 import mage.abilities.effects.common.ReturnToHandFromBattlefieldAllEffect;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.filter.FilterPermanent;
 
 /**
@@ -43,9 +43,8 @@ public class Upheaval extends CardImpl {
     
     private static final FilterPermanent filter = new FilterPermanent("permanents");
 
-    public Upheaval(UUID ownerId) {
-        super(ownerId, 113, "Upheaval", Rarity.RARE, new CardType[]{CardType.SORCERY}, "{4}{U}{U}");
-        this.expansionSetCode = "ODY";
+    public Upheaval(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{4}{U}{U}");
 
 
         // Return all permanents to their owners' hands.

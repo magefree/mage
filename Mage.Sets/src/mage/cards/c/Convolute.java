@@ -25,14 +25,14 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.ravnica;
+package mage.cards.c;
 
 import java.util.UUID;
 import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.abilities.costs.mana.GenericManaCost;
 import mage.abilities.effects.common.CounterUnlessPaysEffect;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.target.TargetSpell;
 
 /**
@@ -41,9 +41,8 @@ import mage.target.TargetSpell;
  */
 public class Convolute extends CardImpl {
 
-    public Convolute(UUID ownerId) {
-        super(ownerId, 41, "Convolute", Rarity.COMMON, new CardType[]{CardType.INSTANT}, "{2}{U}");
-        this.expansionSetCode = "RAV";
+    public Convolute(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.INSTANT},"{2}{U}");
 
 
         // Counter target spell unless its controller pays {4}.

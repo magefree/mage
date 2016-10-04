@@ -25,14 +25,14 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.dragonsoftarkir;
+package mage.cards.r;
 
 import java.util.UUID;
 import mage.abilities.effects.common.DamageTargetEffect;
 import mage.abilities.keyword.FlyingAbility;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.filter.predicate.Predicates;
 import mage.filter.predicate.mageobject.AbilityPredicate;
@@ -50,9 +50,8 @@ public class Roast extends CardImpl {
         filter.add(Predicates.not(new AbilityPredicate(FlyingAbility.class)));
     }
 
-    public Roast(UUID ownerId) {
-        super(ownerId, 151, "Roast", Rarity.UNCOMMON, new CardType[]{CardType.SORCERY}, "{1}{R}");
-        this.expansionSetCode = "DTK";
+    public Roast(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{1}{R}");
 
         // Roast deals 5 damage to target creature without flying.
         this.getSpellAbility().addEffect(new DamageTargetEffect(5));

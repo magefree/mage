@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.commander2013;
+package mage.cards.h;
 
 import java.util.Iterator;
 import java.util.UUID;
@@ -36,11 +36,11 @@ import mage.abilities.costs.common.TapSourceCost;
 import mage.abilities.effects.ContinuousEffectImpl;
 import mage.abilities.mana.ColorlessManaAbility;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Duration;
 import mage.constants.Layer;
 import mage.constants.Outcome;
-import mage.constants.Rarity;
 import mage.constants.SubLayer;
 import mage.constants.Zone;
 import mage.filter.FilterPermanent;
@@ -56,9 +56,8 @@ import mage.players.Player;
  */
 public class HomewardPath extends CardImpl {
 
-    public HomewardPath(UUID ownerId) {
-        super(ownerId, 295, "Homeward Path", Rarity.RARE, new CardType[]{CardType.LAND}, "");
-        this.expansionSetCode = "C13";
+    public HomewardPath(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.LAND},"");
 
         // {tap}: Add {C} to your mana pool.
         this.addAbility(new ColorlessManaAbility());

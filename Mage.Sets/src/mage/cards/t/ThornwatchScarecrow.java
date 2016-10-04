@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.shadowmoor;
+package mage.cards.t;
 
 import java.util.UUID;
 import mage.MageInt;
@@ -38,9 +38,9 @@ import mage.abilities.effects.common.continuous.GainAbilitySourceEffect;
 import mage.abilities.keyword.VigilanceAbility;
 import mage.abilities.keyword.WitherAbility;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Duration;
-import mage.constants.Rarity;
 import mage.constants.Zone;
 import mage.filter.common.FilterControlledCreaturePermanent;
 import mage.filter.predicate.mageobject.ColorPredicate;
@@ -62,9 +62,8 @@ public class ThornwatchScarecrow extends CardImpl {
     private static final String rule = "{this} has wither as long as you control a green creature";
     private static final String rule2 = "{this} has vigilance as long as you control a white creature";
 
-    public ThornwatchScarecrow(UUID ownerId) {
-        super(ownerId, 265, "Thornwatch Scarecrow", Rarity.COMMON, new CardType[]{CardType.ARTIFACT, CardType.CREATURE}, "{6}");
-        this.expansionSetCode = "SHM";
+    public ThornwatchScarecrow(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.ARTIFACT,CardType.CREATURE},"{6}");
         this.subtype.add("Scarecrow");
         this.power = new MageInt(4);
         this.toughness = new MageInt(4);

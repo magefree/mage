@@ -25,13 +25,13 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.fourthedition;
+package mage.cards.s;
 
 import java.util.UUID;
 import mage.MageInt;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.costs.common.TapSourceCost;
@@ -51,9 +51,8 @@ import mage.players.Player;
  */
 public class Sindbad extends CardImpl {
 
-    public Sindbad(UUID ownerId) {
-        super(ownerId, 100, "Sindbad", Rarity.UNCOMMON, new CardType[]{CardType.CREATURE}, "{1}{U}");
-        this.expansionSetCode = "4ED";
+    public Sindbad(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{1}{U}");
         this.subtype.add("Human");
         this.power = new MageInt(1);
         this.toughness = new MageInt(1);

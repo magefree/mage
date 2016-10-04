@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.zendikarvseldrazi;
+package mage.cards.r;
 
 import java.util.UUID;
 import mage.abilities.Mode;
@@ -33,8 +33,8 @@ import mage.abilities.common.LandfallAbility;
 import mage.abilities.effects.common.GainLifeEffect;
 import mage.abilities.effects.common.counter.AddCountersTargetEffect;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.counters.CounterType;
 import mage.target.common.TargetCreaturePermanent;
 
@@ -44,9 +44,8 @@ import mage.target.common.TargetCreaturePermanent;
  */
 public class RetreatToKazandu extends CardImpl {
 
-    public RetreatToKazandu(UUID ownerId) {
-        super(ownerId, 21, "Retreat to Kazandu", Rarity.UNCOMMON, new CardType[]{CardType.ENCHANTMENT}, "{2}{G}");
-        this.expansionSetCode = "DDP";
+    public RetreatToKazandu(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.ENCHANTMENT},"{2}{G}");
 
         // <i>Landfall</i>-Whenever a land enters the battlefield under your control, choose one - Put a +1/+1 counter on target creature; or You gain 2 life.
         LandfallAbility ability = new LandfallAbility(new AddCountersTargetEffect(CounterType.P1P1.createInstance()), false);

@@ -26,11 +26,10 @@
  *  or implied, of BetaSteward_at_googlemail.com.
  */
 
-package mage.sets.worldwake;
+package mage.cards.b;
 
 import java.util.UUID;
 import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.EntersBattlefieldTriggeredAbility;
@@ -38,6 +37,7 @@ import mage.abilities.dynamicvalue.common.MultikickerCount;
 import mage.abilities.effects.common.discard.DiscardTargetEffect;
 import mage.abilities.keyword.MultikickerAbility;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.target.common.TargetOpponent;
 
 /**
@@ -46,9 +46,8 @@ import mage.target.common.TargetOpponent;
  */
 public class BloodhuskRitualist extends CardImpl {
 
-    public BloodhuskRitualist (UUID ownerId) {
-        super(ownerId, 50, "Bloodhusk Ritualist", Rarity.UNCOMMON, new CardType[]{CardType.CREATURE}, "{2}{B}");
-        this.expansionSetCode = "WWK";
+    public BloodhuskRitualist (UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{2}{B}");
         this.subtype.add("Vampire");
         this.subtype.add("Shaman");
 

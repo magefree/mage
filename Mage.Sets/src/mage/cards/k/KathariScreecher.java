@@ -26,16 +26,16 @@
  *  or implied, of BetaSteward_at_googlemail.com.
  */
 
-package mage.sets.shardsofalara;
+package mage.cards.k;
 
 import java.util.UUID;
 import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.MageInt;
 import mage.abilities.costs.mana.ManaCostsImpl;
 import mage.abilities.keyword.FlyingAbility;
 import mage.abilities.keyword.UnearthAbility;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 
 /**
  *
@@ -43,9 +43,8 @@ import mage.cards.CardImpl;
  */
 public class KathariScreecher extends CardImpl {
 
-    public KathariScreecher (UUID ownerId) {
-        super(ownerId, 47, "Kathari Screecher", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{2}{U}");
-        this.expansionSetCode = "ALA";
+    public KathariScreecher (UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{2}{U}");
         this.subtype.add("Bird");
         this.subtype.add("Soldier");
 

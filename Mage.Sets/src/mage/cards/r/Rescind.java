@@ -25,15 +25,15 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.urzassaga;
+package mage.cards.r;
 
 import java.util.UUID;
 import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.abilities.costs.mana.ManaCostsImpl;
 import mage.abilities.effects.common.ReturnToHandTargetEffect;
 import mage.abilities.keyword.CyclingAbility;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.target.TargetPermanent;
 
 /**
@@ -42,9 +42,8 @@ import mage.target.TargetPermanent;
  */
 public class Rescind extends CardImpl {
 
-    public Rescind(UUID ownerId) {
-        super(ownerId, 92, "Rescind", Rarity.COMMON, new CardType[]{CardType.INSTANT}, "{1}{U}{U}");
-        this.expansionSetCode = "USG";
+    public Rescind(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.INSTANT},"{1}{U}{U}");
 
         this.getSpellAbility().addEffect(new ReturnToHandTargetEffect());
         this.getSpellAbility().addTarget(new TargetPermanent());

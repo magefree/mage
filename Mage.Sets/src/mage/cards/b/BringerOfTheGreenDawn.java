@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.fifthdawn;
+package mage.cards.b;
 
 import java.util.UUID;
 import mage.MageInt;
@@ -36,8 +36,8 @@ import mage.abilities.costs.mana.ManaCostsImpl;
 import mage.abilities.effects.common.CreateTokenEffect;
 import mage.abilities.keyword.TrampleAbility;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.constants.TargetController;
 import mage.constants.Zone;
 import mage.game.permanent.token.BeastToken;
@@ -48,9 +48,8 @@ import mage.game.permanent.token.BeastToken;
  */
 public class BringerOfTheGreenDawn extends CardImpl {
 
-    public BringerOfTheGreenDawn(UUID ownerId) {
-        super(ownerId, 83, "Bringer of the Green Dawn", Rarity.RARE, new CardType[]{CardType.CREATURE}, "{7}{G}{G}");
-        this.expansionSetCode = "5DN";
+    public BringerOfTheGreenDawn(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{7}{G}{G}");
         this.subtype.add("Bringer");
 
         this.power = new MageInt(5);

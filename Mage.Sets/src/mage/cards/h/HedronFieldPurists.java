@@ -25,12 +25,11 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.riseoftheeldrazi;
+package mage.cards.h;
 
 import java.util.UUID;
 import mage.constants.CardType;
 import mage.constants.Duration;
-import mage.constants.Rarity;
 import mage.constants.Zone;
 import mage.MageInt;
 import mage.abilities.Abilities;
@@ -41,6 +40,7 @@ import mage.abilities.costs.mana.ManaCostsImpl;
 import mage.abilities.effects.PreventionEffectImpl;
 import mage.abilities.keyword.LevelUpAbility;
 import mage.abilities.keyword.LevelerCardBuilder;
+import mage.cards.CardSetInfo;
 import mage.cards.LevelerCard;
 import mage.game.Game;
 import mage.game.events.GameEvent;
@@ -52,9 +52,8 @@ import mage.game.permanent.Permanent;
  */
 public class HedronFieldPurists extends LevelerCard {
 
-    public HedronFieldPurists(UUID ownerId) {
-        super(ownerId, 25, "Hedron-Field Purists", Rarity.RARE, new CardType[]{CardType.CREATURE}, "{2}{W}");
-        this.expansionSetCode = "ROE";
+    public HedronFieldPurists(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{2}{W}");
         this.subtype.add("Human");
         this.subtype.add("Cleric");
 

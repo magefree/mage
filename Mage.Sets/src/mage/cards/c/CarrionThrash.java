@@ -25,17 +25,17 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.shardsofalara;
+package mage.cards.c;
 
 import java.util.UUID;
 import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.MageInt;
 import mage.abilities.common.DiesTriggeredAbility;
 import mage.abilities.costs.mana.GenericManaCost;
 import mage.abilities.effects.common.DoIfCostPaid;
 import mage.abilities.effects.common.ReturnToHandTargetEffect;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.filter.common.FilterCreatureCard;
 import mage.filter.predicate.permanent.AnotherPredicate;
 import mage.target.common.TargetCardInYourGraveyard;
@@ -51,9 +51,8 @@ public class CarrionThrash extends CardImpl {
         filter.add(new AnotherPredicate());
     }
 
-    public CarrionThrash(UUID ownerId) {
-        super(ownerId, 162, "Carrion Thrash", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{2}{B}{R}{G}");
-        this.expansionSetCode = "ALA";
+    public CarrionThrash(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{2}{B}{R}{G}");
         this.subtype.add("Viashino");
         this.subtype.add("Warrior");
 

@@ -25,15 +25,15 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.bornofthegods;
+package mage.cards.f;
 
 import java.util.UUID;
 import mage.abilities.Ability;
 import mage.abilities.effects.OneShotEffect;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Outcome;
-import mage.constants.Rarity;
 import mage.filter.common.FilterControlledCreaturePermanent;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.filter.predicate.mageobject.AnotherTargetPredicate;
@@ -57,9 +57,8 @@ import mage.target.common.TargetCreaturePermanent;
  */
 public class FallOfTheHammer extends CardImpl {
 
-    public FallOfTheHammer(UUID ownerId) {
-        super(ownerId, 93, "Fall of the Hammer", Rarity.COMMON, new CardType[]{CardType.INSTANT}, "{1}{R}");
-        this.expansionSetCode = "BNG";
+    public FallOfTheHammer(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.INSTANT},"{1}{R}");
 
 
         // Target creature you control deals damage equal to its power to another target creature.

@@ -25,16 +25,16 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.riseoftheeldrazi;
+package mage.cards.s;
 
 import java.util.UUID;
 import mage.constants.CardType;
 import mage.constants.Outcome;
-import mage.constants.Rarity;
 import mage.abilities.Ability;
 import mage.abilities.common.SpellCastControllerTriggeredAbility;
 import mage.abilities.effects.OneShotEffect;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.counters.CounterType;
 import mage.filter.FilterSpell;
 import mage.filter.predicate.Predicates;
@@ -58,9 +58,8 @@ public class SphinxBoneWand extends CardImpl {
                 new CardTypePredicate(CardType.SORCERY)));
     }
 
-    public SphinxBoneWand(UUID ownerId) {
-        super(ownerId, 225, "Sphinx-Bone Wand", Rarity.RARE, new CardType[]{CardType.ARTIFACT}, "{7}");
-        this.expansionSetCode = "ROE";
+    public SphinxBoneWand(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.ARTIFACT},"{7}");
 
         // Whenever you cast an instant or sorcery spell, you may put a charge counter on Sphinx-Bone Wand. If you do, Sphinx-Bone Wand deals damage equal to the number of charge counters on it to target creature or player.
         SpellCastControllerTriggeredAbility ability = new SpellCastControllerTriggeredAbility(new SphinxBoneWandEffect(), filter, true);

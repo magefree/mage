@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.magic2015;
+package mage.cards.i;
 
 import java.util.UUID;
 import mage.MageInt;
@@ -37,9 +37,9 @@ import mage.abilities.costs.common.SacrificeTargetCost;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.keyword.FlyingAbility;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Outcome;
-import mage.constants.Rarity;
 import mage.constants.TargetController;
 import mage.game.Game;
 import mage.players.Player;
@@ -52,9 +52,8 @@ import mage.target.common.TargetOpponent;
  */
 public class IndulgentTormentor extends CardImpl {
 
-    public IndulgentTormentor(UUID ownerId) {
-        super(ownerId, 101, "Indulgent Tormentor", Rarity.RARE, new CardType[]{CardType.CREATURE}, "{3}{B}{B}");
-        this.expansionSetCode = "M15";
+    public IndulgentTormentor(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{3}{B}{B}");
         this.subtype.add("Demon");
 
         this.power = new MageInt(5);

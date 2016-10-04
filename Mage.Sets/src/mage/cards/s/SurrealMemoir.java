@@ -25,19 +25,19 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.riseoftheeldrazi;
+package mage.cards.s;
 
 import java.util.Random;
 import java.util.UUID;
 import mage.constants.CardType;
 import mage.constants.Outcome;
-import mage.constants.Rarity;
 import mage.constants.Zone;
 import mage.abilities.Ability;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.keyword.ReboundAbility;
 import mage.cards.Card;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.filter.FilterCard;
 import mage.filter.predicate.mageobject.CardTypePredicate;
 import mage.game.Game;
@@ -50,9 +50,8 @@ import mage.util.RandomUtil;
  */
 public class SurrealMemoir extends CardImpl {
 
-    public SurrealMemoir(UUID ownerId) {
-        super(ownerId, 167, "Surreal Memoir", Rarity.UNCOMMON, new CardType[]{CardType.SORCERY}, "{3}{R}");
-        this.expansionSetCode = "ROE";
+    public SurrealMemoir(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{3}{R}");
 
 
         // Return an instant card at random from your graveyard to your hand.

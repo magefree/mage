@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.battleforzendikar;
+package mage.cards.v;
 
 import java.util.UUID;
 import mage.MageInt;
@@ -37,8 +37,8 @@ import mage.abilities.effects.Effect;
 import mage.abilities.effects.common.CreateTokenEffect;
 import mage.abilities.keyword.DevoidAbility;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.constants.Zone;
 import mage.game.permanent.token.EldraziScionToken;
 
@@ -48,9 +48,8 @@ import mage.game.permanent.token.EldraziScionToken;
  */
 public class VoidAttendant extends CardImpl {
 
-    public VoidAttendant(UUID ownerId) {
-        super(ownerId, 169, "Void Attendant", Rarity.UNCOMMON, new CardType[]{CardType.CREATURE}, "{2}{G}");
-        this.expansionSetCode = "BFZ";
+    public VoidAttendant(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{2}{G}");
         this.subtype.add("Eldrazi");
         this.subtype.add("Processor");
         this.power = new MageInt(2);

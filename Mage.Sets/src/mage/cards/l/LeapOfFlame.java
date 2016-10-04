@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.guildpact;
+package mage.cards.l;
 
 import java.util.UUID;
 import mage.abilities.effects.Effect;
@@ -35,9 +35,9 @@ import mage.abilities.keyword.FirstStrikeAbility;
 import mage.abilities.keyword.FlyingAbility;
 import mage.abilities.keyword.ReplicateAbility;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Duration;
-import mage.constants.Rarity;
 import mage.target.common.TargetCreaturePermanent;
 
 /**
@@ -46,9 +46,8 @@ import mage.target.common.TargetCreaturePermanent;
  */
 public class LeapOfFlame extends CardImpl {
 
-    public LeapOfFlame(UUID ownerId) {
-        super(ownerId, 121, "Leap of Flame", Rarity.COMMON, new CardType[]{CardType.INSTANT}, "{U}{R}");
-        this.expansionSetCode = "GPT";
+    public LeapOfFlame(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.INSTANT},"{U}{R}");
 
 
         // Replicate {U}{R}

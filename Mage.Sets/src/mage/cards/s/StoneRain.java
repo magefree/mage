@@ -26,13 +26,13 @@
  *  or implied, of BetaSteward_at_googlemail.com.
  */
 
-package mage.sets.tempest;
+package mage.cards.s;
 
 import java.util.UUID;
 import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.abilities.effects.common.DestroyTargetEffect;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.filter.common.FilterLandPermanent;
 import mage.target.TargetPermanent;
 
@@ -42,9 +42,8 @@ import mage.target.TargetPermanent;
  */
 public class StoneRain extends CardImpl {
 
-    public StoneRain (UUID ownerId) {
-        super(ownerId, 206, "Stone Rain", Rarity.COMMON, new CardType[]{CardType.SORCERY}, "{2}{R}");
-        this.expansionSetCode = "TMP";
+    public StoneRain (UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{2}{R}");
 
         this.getSpellAbility().addTarget(new TargetPermanent(new FilterLandPermanent()));
         this.getSpellAbility().addEffect(new DestroyTargetEffect());

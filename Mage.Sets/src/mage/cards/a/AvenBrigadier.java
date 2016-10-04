@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.onslaught;
+package mage.cards.a;
 
 import java.util.UUID;
 import mage.MageInt;
@@ -33,9 +33,9 @@ import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.effects.common.continuous.BoostAllEffect;
 import mage.abilities.keyword.FlyingAbility;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Duration;
-import mage.constants.Rarity;
 import mage.constants.Zone;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.filter.predicate.mageobject.SubtypePredicate;
@@ -54,9 +54,8 @@ public class AvenBrigadier extends CardImpl {
         filter2.add(new SubtypePredicate("Soldier"));
     }
 
-    public AvenBrigadier(UUID ownerId) {
-        super(ownerId, 7, "Aven Brigadier", Rarity.RARE, new CardType[]{CardType.CREATURE}, "{3}{W}{W}{W}");
-        this.expansionSetCode = "ONS";
+    public AvenBrigadier(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{3}{W}{W}{W}");
         this.subtype.add("Bird");
         this.subtype.add("Soldier");
         this.power = new MageInt(3);

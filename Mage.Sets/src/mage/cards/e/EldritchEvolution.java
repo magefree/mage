@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.eldritchmoon;
+package mage.cards.e;
 
 import java.util.UUID;
 import mage.abilities.Ability;
@@ -35,9 +35,9 @@ import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.ExileSpellEffect;
 import mage.cards.Card;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Outcome;
-import mage.constants.Rarity;
 import mage.constants.Zone;
 import mage.filter.Filter;
 import mage.filter.FilterCard;
@@ -56,9 +56,8 @@ import mage.target.common.TargetControlledCreaturePermanent;
  */
 public class EldritchEvolution extends CardImpl {
 
-    public EldritchEvolution(UUID ownerId) {
-        super(ownerId, 155, "Eldritch Evolution", Rarity.RARE, new CardType[]{CardType.SORCERY}, "{1}{G}{G}");
-        this.expansionSetCode = "EMN";
+    public EldritchEvolution(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{1}{G}{G}");
 
         // As an additional cost to cast Eldritch Evolution, sacrifice a creature.
         this.getSpellAbility().addCost(new SacrificeTargetCost(new TargetControlledCreaturePermanent(1, 1, new FilterControlledCreaturePermanent("a creature"), true)));

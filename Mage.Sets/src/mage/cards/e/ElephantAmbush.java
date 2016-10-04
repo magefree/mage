@@ -25,15 +25,15 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.odyssey;
+package mage.cards.e;
 
 import java.util.UUID;
 import mage.abilities.costs.mana.ManaCostsImpl;
 import mage.abilities.effects.common.CreateTokenEffect;
 import mage.abilities.keyword.FlashbackAbility;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.constants.TimingRule;
 import mage.game.permanent.token.ElephantToken;
 
@@ -43,9 +43,8 @@ import mage.game.permanent.token.ElephantToken;
  */
 public class ElephantAmbush extends CardImpl {
 
-    public ElephantAmbush(UUID ownerId) {
-        super(ownerId, 240, "Elephant Ambush", Rarity.COMMON, new CardType[]{CardType.INSTANT}, "{2}{G}{G}");
-        this.expansionSetCode = "ODY";
+    public ElephantAmbush(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.INSTANT},"{2}{G}{G}");
 
 
         // Put a 3/3 green Elephant creature token onto the battlefield.

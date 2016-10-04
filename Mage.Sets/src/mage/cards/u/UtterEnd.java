@@ -25,13 +25,13 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.khansoftarkir;
+package mage.cards.u;
 
 import java.util.UUID;
 import mage.abilities.effects.common.ExileTargetEffect;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.target.common.TargetNonlandPermanent;
 
 /**
@@ -40,9 +40,8 @@ import mage.target.common.TargetNonlandPermanent;
  */
 public class UtterEnd extends CardImpl {
 
-    public UtterEnd(UUID ownerId) {
-        super(ownerId, 210, "Utter End", Rarity.RARE, new CardType[]{CardType.INSTANT}, "{2}{W}{B}");
-        this.expansionSetCode = "KTK";
+    public UtterEnd(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.INSTANT},"{2}{W}{B}");
 
 
         // Exile target nonland permanent.

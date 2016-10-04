@@ -25,13 +25,13 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.ravnica;
+package mage.cards.g;
 
 import java.util.UUID;
 import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.abilities.effects.common.PutLibraryIntoGraveTargetEffect;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.target.TargetPlayer;
 
 /**
@@ -40,9 +40,8 @@ import mage.target.TargetPlayer;
  */
 public class GlimpseTheUnthinkable extends CardImpl {
 
-    public GlimpseTheUnthinkable(UUID ownerId) {
-        super(ownerId, 208, "Glimpse the Unthinkable", Rarity.RARE, new CardType[]{CardType.SORCERY}, "{U}{B}");
-        this.expansionSetCode = "RAV";
+    public GlimpseTheUnthinkable(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{U}{B}");
 
 
         // Target player puts the top ten cards of his or her library into his or her graveyard.

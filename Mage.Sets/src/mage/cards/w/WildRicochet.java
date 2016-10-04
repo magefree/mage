@@ -25,15 +25,15 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.commander;
+package mage.cards.w;
 
 import java.util.UUID;
 import mage.abilities.effects.Effect;
 import mage.abilities.effects.common.ChooseNewTargetsTargetEffect;
 import mage.abilities.effects.common.CopyTargetSpellEffect;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.filter.FilterStackObject;
 import mage.filter.predicate.Predicates;
 import mage.filter.predicate.mageobject.CardTypePredicate;
@@ -53,9 +53,8 @@ public class WildRicochet extends CardImpl {
                 new CardTypePredicate(CardType.SORCERY)));
     }
 
-    public WildRicochet(UUID ownerId) {
-        super(ownerId, 139, "Wild Ricochet", Rarity.RARE, new CardType[]{CardType.INSTANT}, "{2}{R}{R}");
-        this.expansionSetCode = "CMD";
+    public WildRicochet(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.INSTANT},"{2}{R}{R}");
 
         // You may choose new targets for target instant or sorcery spell. Then copy that spell. You may choose new targets for the copy.
         this.getSpellAbility().addEffect(new ChooseNewTargetsTargetEffect());

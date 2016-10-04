@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.urzassaga;
+package mage.cards.t;
 
 import java.util.UUID;
 import mage.abilities.Ability;
@@ -37,8 +37,8 @@ import mage.abilities.dynamicvalue.common.CountersSourceCount;
 import mage.abilities.effects.common.DamageTargetEffect;
 import mage.abilities.effects.common.counter.AddCountersSourceEffect;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.constants.TargetController;
 import mage.constants.Zone;
 import mage.counters.CounterType;
@@ -50,9 +50,8 @@ import mage.target.common.TargetCreatureOrPlayer;
  */
 public class TorchSong extends CardImpl {
 
-    public TorchSong(UUID ownerId) {
-        super(ownerId, 222, "Torch Song", Rarity.UNCOMMON, new CardType[]{CardType.ENCHANTMENT}, "{2}{R}");
-        this.expansionSetCode = "USG";
+    public TorchSong(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.ENCHANTMENT},"{2}{R}");
 
         // At the beginning of your upkeep, you may put a verse counter on Torch Song.
         this.addAbility(new BeginningOfUpkeepTriggeredAbility(Zone.BATTLEFIELD,

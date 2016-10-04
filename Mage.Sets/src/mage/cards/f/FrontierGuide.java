@@ -25,11 +25,10 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.zendikar;
+package mage.cards.f;
 
 import java.util.UUID;
 import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.constants.Zone;
 import mage.MageInt;
 import mage.abilities.common.SimpleActivatedAbility;
@@ -37,6 +36,7 @@ import mage.abilities.costs.common.TapSourceCost;
 import mage.abilities.costs.mana.ManaCostsImpl;
 import mage.abilities.effects.common.search.SearchLibraryPutInPlayEffect;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.filter.common.FilterBasicLandCard;
 import mage.target.common.TargetCardInLibrary;
 
@@ -48,9 +48,8 @@ public class FrontierGuide extends CardImpl {
 
     private static final FilterBasicLandCard filter = new FilterBasicLandCard();
 
-    public FrontierGuide(UUID ownerId) {
-        super(ownerId, 161, "Frontier Guide", Rarity.UNCOMMON, new CardType[]{CardType.CREATURE}, "{1}{G}");
-        this.expansionSetCode = "ZEN";
+    public FrontierGuide(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{1}{G}");
         this.subtype.add("Elf");
         this.subtype.add("Scout");
 

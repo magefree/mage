@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.khansoftarkir;
+package mage.cards.b;
 
 import java.util.UUID;
 import mage.abilities.DelayedTriggeredAbility;
@@ -33,9 +33,9 @@ import mage.abilities.effects.common.CreateDelayedTriggeredAbilityEffect;
 import mage.abilities.effects.common.DamageTargetEffect;
 import mage.abilities.effects.common.ExileGraveyardAllTargetPlayerEffect;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Duration;
-import mage.constants.Rarity;
 import mage.game.Game;
 import mage.game.events.GameEvent;
 import mage.game.events.ZoneChangeEvent;
@@ -49,9 +49,8 @@ import mage.target.common.TargetCreaturePermanent;
  */
 public class BurnAway extends CardImpl {
 
-    public BurnAway(UUID ownerId) {
-        super(ownerId, 104, "Burn Away", Rarity.UNCOMMON, new CardType[]{CardType.INSTANT}, "{4}{R}");
-        this.expansionSetCode = "KTK";
+    public BurnAway(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.INSTANT},"{4}{R}");
 
 
         // Burn Away deals 6 damage to target creature. When that creature dies this turn, exile all cards from its controller's graveyard.

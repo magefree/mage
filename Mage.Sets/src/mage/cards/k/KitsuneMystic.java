@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.championsofkamigawa;
+package mage.cards.k;
 
 import java.util.UUID;
 import mage.MageInt;
@@ -38,9 +38,9 @@ import mage.abilities.decorator.ConditionalTriggeredAbility;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.FlipSourceEffect;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Outcome;
-import mage.constants.Rarity;
 import mage.constants.Zone;
 import mage.filter.common.FilterEnchantmentPermanent;
 import mage.filter.predicate.Predicate;
@@ -58,9 +58,8 @@ import mage.target.common.TargetCreaturePermanent;
  */
 public class KitsuneMystic extends CardImpl {
 
-    public KitsuneMystic(UUID ownerId) {
-        super(ownerId, 28, "Kitsune Mystic", Rarity.RARE, new CardType[]{CardType.CREATURE}, "{3}{W}");
-        this.expansionSetCode = "CHK";
+    public KitsuneMystic(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{3}{W}");
         this.subtype.add("Fox");
         this.subtype.add("Wizard");
 

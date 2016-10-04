@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.magic2010;
+package mage.cards.w;
 
 import java.util.Collection;
 import java.util.HashMap;
@@ -38,10 +38,10 @@ import mage.abilities.Ability;
 import mage.abilities.effects.OneShotEffect;
 import mage.cards.Card;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.cards.CardsImpl;
 import mage.constants.CardType;
 import mage.constants.Outcome;
-import mage.constants.Rarity;
 import mage.constants.Zone;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
@@ -53,9 +53,8 @@ import mage.players.Player;
  */
 public class WarpWorld extends CardImpl {
 
-    public WarpWorld(UUID ownerId) {
-        super(ownerId, 163, "Warp World", Rarity.RARE, new CardType[]{CardType.SORCERY}, "{5}{R}{R}{R}");
-        this.expansionSetCode = "M10";
+    public WarpWorld(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{5}{R}{R}{R}");
 
         // Each player shuffles all permanents he or she owns into his or her library, then reveals that many cards from the top of his or her library. Each player puts all artifact, creature, and land cards revealed this way onto the battlefield, then does the same for enchantment cards, then puts all cards revealed this way that weren't put onto the battlefield on the bottom of his or her library.
         this.getSpellAbility().addEffect(new WarpWorldEffect());

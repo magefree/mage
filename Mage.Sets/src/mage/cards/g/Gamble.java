@@ -25,15 +25,15 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.urzassaga;
+package mage.cards.g;
 
 import java.util.UUID;
 import mage.abilities.effects.Effect;
 import mage.abilities.effects.common.discard.DiscardControllerEffect;
 import mage.abilities.effects.common.search.SearchLibraryPutInHandEffect;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.target.common.TargetCardInLibrary;
 
 /**
@@ -42,9 +42,8 @@ import mage.target.common.TargetCardInLibrary;
  */
 public class Gamble extends CardImpl {
 
-    public Gamble(UUID ownerId) {
-        super(ownerId, 188, "Gamble", Rarity.RARE, new CardType[]{CardType.SORCERY}, "{R}");
-        this.expansionSetCode = "USG";
+    public Gamble(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{R}");
 
 
         // Search your library for a card, put that card into your hand, discard a card at random, then shuffle your library.

@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.lorwyn;
+package mage.cards.a;
 
 import java.util.UUID;
 import mage.MageInt;
@@ -36,10 +36,10 @@ import mage.abilities.effects.common.continuous.GainAbilityTargetEffect;
 import mage.abilities.effects.common.continuous.LoseAllCreatureTypesTargetEffect;
 import mage.abilities.keyword.ChangelingAbility;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Duration;
 import mage.constants.Layer;
-import mage.constants.Rarity;
 import mage.constants.SubLayer;
 import mage.constants.Zone;
 import mage.target.common.TargetCreaturePermanent;
@@ -50,9 +50,8 @@ import mage.target.common.TargetCreaturePermanent;
  */
 public class AmoeboidChangeling extends CardImpl {
 
-    public AmoeboidChangeling(UUID ownerId) {
-        super(ownerId, 51, "Amoeboid Changeling", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{1}{U}");
-        this.expansionSetCode = "LRW";
+    public AmoeboidChangeling(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{1}{U}");
         this.subtype.add("Shapeshifter");
         this.power = new MageInt(1);
         this.toughness = new MageInt(1);

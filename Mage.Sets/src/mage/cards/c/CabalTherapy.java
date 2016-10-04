@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.judgment;
+package mage.cards.c;
 
 import java.util.UUID;
 import mage.MageObject;
@@ -36,10 +36,10 @@ import mage.abilities.effects.common.NameACardEffect;
 import mage.abilities.keyword.FlashbackAbility;
 import mage.cards.Card;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.cards.Cards;
 import mage.constants.CardType;
 import mage.constants.Outcome;
-import mage.constants.Rarity;
 import mage.constants.TimingRule;
 import mage.filter.common.FilterControlledCreaturePermanent;
 import mage.game.Game;
@@ -53,9 +53,8 @@ import mage.target.common.TargetControlledCreaturePermanent;
  */
 public class CabalTherapy extends CardImpl {
 
-    public CabalTherapy(UUID ownerId) {
-        super(ownerId, 62, "Cabal Therapy", Rarity.UNCOMMON, new CardType[]{CardType.SORCERY}, "{B}");
-        this.expansionSetCode = "JUD";
+    public CabalTherapy(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{B}");
 
         // Name a nonland card. Target player reveals his or her hand and discards all cards with that name.
         this.getSpellAbility().addEffect((new NameACardEffect(NameACardEffect.TypeOfName.NON_LAND_NAME)));

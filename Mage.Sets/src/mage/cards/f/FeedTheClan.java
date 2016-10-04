@@ -25,15 +25,15 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.khansoftarkir;
+package mage.cards.f;
 
 import java.util.UUID;
 import mage.abilities.condition.common.FerociousCondition;
 import mage.abilities.decorator.ConditionalOneShotEffect;
 import mage.abilities.effects.common.GainLifeEffect;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.Rarity;
 
 /**
  *
@@ -41,9 +41,8 @@ import mage.constants.Rarity;
  */
 public class FeedTheClan extends CardImpl {
 
-    public FeedTheClan(UUID ownerId) {
-        super(ownerId, 132, "Feed the Clan", Rarity.COMMON, new CardType[]{CardType.INSTANT}, "{1}{G}");
-        this.expansionSetCode = "KTK";
+    public FeedTheClan(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.INSTANT},"{1}{G}");
 
         // You gain 5 life.
         // Ferocious - You gain 10 life instead if you control a creature with power 4 or greater

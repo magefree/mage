@@ -25,13 +25,13 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.tenthedition;
+package mage.cards.b;
 
 import java.util.UUID;
 import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.abilities.effects.common.ReturnToHandTargetEffect;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.target.TargetPermanent;
 
 /**
@@ -40,9 +40,8 @@ import mage.target.TargetPermanent;
  */
 public class Boomerang extends CardImpl {
 
-    public Boomerang(UUID ownerId) {
-        super(ownerId, 70, "Boomerang", Rarity.COMMON, new CardType[]{CardType.INSTANT}, "{U}{U}");
-        this.expansionSetCode = "10E";
+    public Boomerang(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.INSTANT},"{U}{U}");
 
         
         // Return target permanent to its owner's hand. 

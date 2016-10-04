@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.magic2012;
+package mage.cards.v;
 
 import java.util.UUID;
 import mage.MageInt;
@@ -36,9 +36,9 @@ import mage.abilities.effects.OneShotEffect;
 import mage.abilities.keyword.DeathtouchAbility;
 import mage.cards.Card;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Outcome;
-import mage.constants.Rarity;
 import mage.constants.Zone;
 import mage.game.Game;
 import mage.game.events.DamagedEvent;
@@ -55,9 +55,8 @@ import mage.target.common.TargetAttackingCreature;
  */
 public class VengefulPharaoh extends CardImpl {
 
-    public VengefulPharaoh(UUID ownerId) {
-        super(ownerId, 116, "Vengeful Pharaoh", Rarity.RARE, new CardType[]{CardType.CREATURE}, "{2}{B}{B}{B}");
-        this.expansionSetCode = "M12";
+    public VengefulPharaoh(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{2}{B}{B}{B}");
         this.subtype.add("Zombie");
 
         this.power = new MageInt(5);

@@ -26,11 +26,10 @@
 * or implied, of BetaSteward_at_googlemail.com.
 */
 
-package mage.sets.magic2010;
+package mage.cards.g;
 
 import java.util.UUID;
 import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.constants.Zone;
 import mage.MageInt;
 import mage.ObjectColor;
@@ -38,6 +37,7 @@ import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.effects.common.CantBeCounteredSourceEffect;
 import mage.abilities.keyword.ProtectionAbility;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.filter.FilterCard;
 import mage.filter.predicate.mageobject.ColorPredicate;
 
@@ -54,9 +54,8 @@ public class GreatSableStag extends CardImpl {
         filter2.add(new ColorPredicate(ObjectColor.BLACK));
     }
 
-    public GreatSableStag(UUID ownerId) {
-        super(ownerId, 186, "Great Sable Stag", Rarity.RARE, new CardType[]{CardType.CREATURE}, "{1}{G}{G}");
-        this.expansionSetCode = "M10";
+    public GreatSableStag(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{1}{G}{G}");
         this.subtype.add("Elk");
 
         this.power = new MageInt(3);

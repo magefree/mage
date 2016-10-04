@@ -26,12 +26,11 @@
  *  or implied, of BetaSteward_at_googlemail.com.
  */
 
-package mage.sets.magic2012;
+package mage.cards.a;
 
 import java.util.UUID;
 
 import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleActivatedAbility;
@@ -39,6 +38,7 @@ import mage.abilities.costs.mana.ManaCostsImpl;
 import mage.abilities.effects.common.continuous.GainAbilityTargetEffect;
 import mage.abilities.keyword.LifelinkAbility;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.Duration;
 import mage.constants.Zone;
 import mage.target.common.TargetControlledCreaturePermanent;
@@ -48,9 +48,8 @@ import mage.target.common.TargetControlledCreaturePermanent;
  */
 public class AlabasterMage extends CardImpl {
 
-    public AlabasterMage(UUID ownerId) {
-        super(ownerId, 2, "Alabaster Mage", Rarity.UNCOMMON, new CardType[]{CardType.CREATURE}, "{1}{W}");
-        this.expansionSetCode = "M12";
+    public AlabasterMage(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{1}{W}");
         this.subtype.add("Human");
         this.subtype.add("Wizard");
 

@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.kaladesh;
+package mage.cards.i;
 
 import java.util.UUID;
 import mage.abilities.Ability;
@@ -39,8 +39,8 @@ import mage.abilities.effects.common.GainLifeEffect;
 import mage.abilities.effects.common.search.SearchLibraryPutInHandEffect;
 import mage.abilities.mana.ColorlessManaAbility;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.constants.Zone;
 import mage.filter.FilterCard;
 import mage.filter.common.FilterArtifactPermanent;
@@ -62,9 +62,8 @@ public class InventorsFair extends CardImpl {
         filter.add(new CardTypePredicate(CardType.ARTIFACT));
     }
 
-    public InventorsFair(UUID ownerId) {
-        super(ownerId, 247, "Inventors' Fair", Rarity.RARE, new CardType[]{CardType.LAND}, "");
-        this.expansionSetCode = "KLD";
+    public InventorsFair(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.LAND},"");
         this.supertype.add("Legendary");
 
         // At the beginning of your upkeep, if you control three or more artifacts, you gain 1 life.

@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.gatecrash;
+package mage.cards.r;
 
 import java.util.UUID;
 import mage.MageInt;
@@ -33,8 +33,8 @@ import mage.abilities.TriggeredAbilityImpl;
 import mage.abilities.effects.Effect;
 import mage.abilities.effects.common.DestroyTargetEffect;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.constants.Zone;
 import mage.filter.FilterPermanent;
 import mage.filter.predicate.Predicates;
@@ -52,9 +52,8 @@ import mage.target.TargetPermanent;
  */
 public class RustScarab extends CardImpl {
 
-    public RustScarab(UUID ownerId) {
-        super(ownerId, 130, "Rust Scarab", Rarity.UNCOMMON, new CardType[]{CardType.CREATURE}, "{4}{G}");
-        this.expansionSetCode = "GTC";
+    public RustScarab(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{4}{G}");
         this.subtype.add("Insect");
 
         this.power = new MageInt(4);

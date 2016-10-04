@@ -25,11 +25,10 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.tempest;
+package mage.cards.p;
 
 import java.util.UUID;
 import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.abilities.Ability;
 import mage.abilities.common.EntersBattlefieldTappedAbility;
 import mage.abilities.effects.common.DamageControllerEffect;
@@ -37,6 +36,7 @@ import mage.abilities.mana.BlackManaAbility;
 import mage.abilities.mana.ColorlessManaAbility;
 import mage.abilities.mana.GreenManaAbility;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 
 /**
  *
@@ -44,9 +44,8 @@ import mage.cards.CardImpl;
  */
 public class PineBarrens extends CardImpl {
 
-    public PineBarrens(UUID ownerId) {
-        super(ownerId, 323, "Pine Barrens", Rarity.RARE, new CardType[]{CardType.LAND}, "");
-        this.expansionSetCode = "TMP";
+    public PineBarrens(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.LAND},"");
 
         // Pine Barrens enters the battlefield tapped.
         this.addAbility(new EntersBattlefieldTappedAbility());

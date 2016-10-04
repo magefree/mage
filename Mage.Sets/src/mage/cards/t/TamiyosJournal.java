@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.shadowsoverinnistrad;
+package mage.cards.t;
 
 import java.util.UUID;
 import mage.abilities.Ability;
@@ -36,8 +36,8 @@ import mage.abilities.costs.common.TapSourceCost;
 import mage.abilities.effects.common.search.SearchLibraryPutInHandEffect;
 import mage.abilities.effects.keyword.InvestigateEffect;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.constants.TargetController;
 import mage.constants.Zone;
 import mage.filter.common.FilterControlledPermanent;
@@ -57,9 +57,8 @@ public class TamiyosJournal extends CardImpl {
         filter.add(new SubtypePredicate("Clue"));
     }
 
-    public TamiyosJournal(UUID ownerId) {
-        super(ownerId, 265, "Tamiyo's Journal", Rarity.RARE, new CardType[]{CardType.ARTIFACT}, "{5}");
-        this.expansionSetCode = "SOI";
+    public TamiyosJournal(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.ARTIFACT},"{5}");
         this.supertype.add("Legendary");
 
         // At the beginning of your upkeep, investigate.

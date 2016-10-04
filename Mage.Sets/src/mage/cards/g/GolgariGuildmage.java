@@ -26,12 +26,11 @@
  *  or implied, of BetaSteward_at_googlemail.com.
  */
 
-package mage.sets.ravnica;
+package mage.cards.g;
 
 import java.util.UUID;
 
 import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleActivatedAbility;
@@ -40,6 +39,7 @@ import mage.abilities.costs.mana.ManaCostsImpl;
 import mage.abilities.effects.common.ReturnToHandTargetEffect;
 import mage.abilities.effects.common.counter.AddCountersTargetEffect;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.Zone;
 import mage.counters.CounterType;
 import mage.filter.common.FilterCreatureCard;
@@ -53,9 +53,8 @@ import mage.target.common.TargetCreaturePermanent;
  */
 public class GolgariGuildmage extends CardImpl {
 
-    public GolgariGuildmage (UUID ownerId) {
-        super(ownerId, 248, "Golgari Guildmage", Rarity.UNCOMMON, new CardType[]{CardType.CREATURE}, "{B/G}{B/G}");
-        this.expansionSetCode = "RAV";
+    public GolgariGuildmage (UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{B/G}{B/G}");
         this.subtype.add("Elf");
         this.subtype.add("Shaman");
 

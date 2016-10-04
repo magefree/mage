@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.urzassaga;
+package mage.cards.f;
 
 import java.util.LinkedHashSet;
 import java.util.Set;
@@ -37,13 +37,13 @@ import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.effects.common.cost.CostModificationEffectImpl;
 import mage.abilities.keyword.CyclingAbility;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.choices.ChoiceImpl;
 import mage.constants.AbilityType;
 import mage.constants.CardType;
 import mage.constants.CostModificationType;
 import mage.constants.Duration;
 import mage.constants.Outcome;
-import mage.constants.Rarity;
 import mage.constants.Zone;
 import mage.game.Game;
 import mage.players.Player;
@@ -55,9 +55,8 @@ import mage.util.CardUtil;
  */
 public class Fluctuator extends CardImpl {
 
-    public Fluctuator(UUID ownerId) {
-        super(ownerId, 295, "Fluctuator", Rarity.RARE, new CardType[]{CardType.ARTIFACT}, "{2}");
-        this.expansionSetCode = "USG";
+    public Fluctuator(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.ARTIFACT},"{2}");
 
         // Cycling abilities you activate cost you up to {2} less to activate.
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new FluctuatorEffect()));

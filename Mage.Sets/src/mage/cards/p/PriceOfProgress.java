@@ -25,15 +25,15 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.exodus;
+package mage.cards.p;
 
 import java.util.UUID;
 import mage.abilities.Ability;
 import mage.abilities.effects.OneShotEffect;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Outcome;
-import mage.constants.Rarity;
 import mage.filter.common.FilterLandPermanent;
 import mage.filter.predicate.Predicates;
 import mage.filter.predicate.mageobject.SupertypePredicate;
@@ -46,9 +46,8 @@ import mage.players.Player;
  */
 public class PriceOfProgress extends CardImpl {
 
-    public PriceOfProgress(UUID ownerId) {
-        super(ownerId, 95, "Price of Progress", Rarity.UNCOMMON, new CardType[]{CardType.INSTANT}, "{1}{R}");
-        this.expansionSetCode = "EXO";
+    public PriceOfProgress(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.INSTANT},"{1}{R}");
 
 
         // Price of Progress deals damage to each player equal to twice the number of nonbasic lands that player controls.

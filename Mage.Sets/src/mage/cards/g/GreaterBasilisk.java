@@ -26,14 +26,14 @@
  *  or implied, of BetaSteward_at_googlemail.com.
  */
 
-package mage.sets.magic2011;
+package mage.cards.g;
 
 import java.util.UUID;
 import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.MageInt;
 import mage.abilities.keyword.DeathtouchAbility;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 
 /**
  *
@@ -41,9 +41,8 @@ import mage.cards.CardImpl;
  */
 public class GreaterBasilisk extends CardImpl {
 
-    public GreaterBasilisk(UUID ownerId) {
-        super(ownerId, 180, "Greater Basilisk", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{3}{G}{G}");
-        this.expansionSetCode = "M11";
+    public GreaterBasilisk(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{3}{G}{G}");
         this.subtype.add("Basilisk");
 
         this.power = new MageInt(3);

@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.magic2012;
+package mage.cards.c;
 
 import java.util.UUID;
 import mage.MageInt;
@@ -38,9 +38,9 @@ import mage.abilities.effects.common.CreateTokenEffect;
 import mage.abilities.effects.common.ExileTargetEffect;
 import mage.abilities.effects.common.continuous.BoostControlledEffect;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Duration;
-import mage.constants.Rarity;
 import mage.constants.Zone;
 import mage.filter.common.FilterCreatureCard;
 import mage.filter.common.FilterCreaturePermanent;
@@ -59,9 +59,8 @@ public class CemeteryReaper extends CardImpl {
         filter.add(new SubtypePredicate("Zombie"));
     }
 
-    public CemeteryReaper(UUID ownerId) {
-        super(ownerId, 86, "Cemetery Reaper", Rarity.RARE, new CardType[]{CardType.CREATURE}, "{1}{B}{B}");
-        this.expansionSetCode = "M12";
+    public CemeteryReaper(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{1}{B}{B}");
         this.subtype.add("Zombie");
         this.power = new MageInt(2);
         this.toughness = new MageInt(2);

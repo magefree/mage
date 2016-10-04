@@ -26,17 +26,17 @@
  *  or implied, of BetaSteward_at_googlemail.com.
  */
 
-package mage.sets.magic2012;
+package mage.cards.r;
 
 import java.util.UUID;
 import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.EntersBattlefieldTriggeredAbility;
 import mage.abilities.effects.common.search.SearchLibraryPutInHandEffect;
 import mage.abilities.keyword.FlyingAbility;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.target.common.TargetCardInLibrary;
 
 /**
@@ -45,9 +45,8 @@ import mage.target.common.TargetCardInLibrary;
  */
 public class RuneScarredDemon extends CardImpl {
 
-    public RuneScarredDemon (UUID ownerId) {
-        super(ownerId, 106, "Rune-Scarred Demon", Rarity.RARE, new CardType[]{CardType.CREATURE}, "{5}{B}{B}");
-        this.expansionSetCode = "M12";
+    public RuneScarredDemon (UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{5}{B}{B}");
         this.subtype.add("Demon");
 
 

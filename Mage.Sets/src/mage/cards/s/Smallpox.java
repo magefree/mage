@@ -25,16 +25,16 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.magic2012;
+package mage.cards.s;
 
 import java.util.UUID;
 import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.abilities.effects.Effect;
 import mage.abilities.effects.common.discard.DiscardEachPlayerEffect;
 import mage.abilities.effects.common.LoseLifeAllPlayersEffect;
 import mage.abilities.effects.common.SacrificeAllEffect;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.filter.common.FilterControlledCreaturePermanent;
 import mage.filter.common.FilterControlledLandPermanent;
 import mage.filter.common.FilterControlledPermanent;
@@ -48,9 +48,8 @@ public class Smallpox extends CardImpl {
     private static final FilterControlledPermanent filterCreature = new FilterControlledCreaturePermanent();
     private static final FilterControlledPermanent filterLand = new FilterControlledLandPermanent();
     
-    public Smallpox(UUID ownerId) {
-        super(ownerId, 108, "Smallpox", Rarity.UNCOMMON, new CardType[]{CardType.SORCERY}, "{B}{B}");
-        this.expansionSetCode = "M12";
+    public Smallpox(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{B}{B}");
 
 
         // Each player loses 1 life, discards a card, sacrifices a creature, then sacrifices a land.

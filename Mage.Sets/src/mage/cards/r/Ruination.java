@@ -25,13 +25,13 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.stronghold;
+package mage.cards.r;
 
 import java.util.UUID;
 import mage.abilities.effects.common.DestroyAllEffect;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.filter.common.FilterLandPermanent;
 import mage.filter.predicate.Predicates;
 import mage.filter.predicate.mageobject.CardTypePredicate;
@@ -49,9 +49,8 @@ public class Ruination extends CardImpl {
         filter.add(Predicates.not(new SupertypePredicate("Basic")));
     }
 
-    public Ruination(UUID ownerId) {
-        super(ownerId, 95, "Ruination", Rarity.RARE, new CardType[]{CardType.SORCERY}, "{3}{R}");
-        this.expansionSetCode = "STH";
+    public Ruination(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{3}{R}");
 
 
         // Destroy all nonbasic lands.

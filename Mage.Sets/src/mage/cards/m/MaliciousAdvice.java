@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.planeshift;
+package mage.cards.m;
 
 import java.util.UUID;
 import mage.abilities.Ability;
@@ -35,8 +35,8 @@ import mage.abilities.effects.Effect;
 import mage.abilities.effects.common.LoseLifeSourceControllerEffect;
 import mage.abilities.effects.common.TapTargetEffect;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.filter.FilterPermanent;
 import mage.filter.predicate.Predicates;
 import mage.filter.predicate.mageobject.CardTypePredicate;
@@ -58,9 +58,8 @@ public class MaliciousAdvice extends CardImpl {
                 new CardTypePredicate(CardType.LAND)));
     }
 
-    public MaliciousAdvice(UUID ownerId) {
-        super(ownerId, 114, "Malicious Advice", Rarity.COMMON, new CardType[]{CardType.INSTANT}, "{X}{U}{B}");
-        this.expansionSetCode = "PLS";
+    public MaliciousAdvice(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.INSTANT},"{X}{U}{B}");
 
         // Tap X target artifacts, creatures, and/or lands. You lose X life.
         Effect effect = new TapTargetEffect();

@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.battleforzendikar;
+package mage.cards.h;
 
 import java.util.UUID;
 import mage.MageInt;
@@ -33,8 +33,8 @@ import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.effects.common.cost.SpellsCostReductionControllerEffect;
 import mage.abilities.keyword.DevoidAbility;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.constants.Zone;
 import mage.filter.FilterCard;
 import mage.filter.predicate.mageobject.ColorlessPredicate;
@@ -51,9 +51,8 @@ public class HeraldOfKozilek extends CardImpl {
         filter.add(new ColorlessPredicate());
     }
 
-    public HeraldOfKozilek(UUID ownerId) {
-        super(ownerId, 205, "Herald of Kozilek", Rarity.UNCOMMON, new CardType[]{CardType.CREATURE}, "{1}{U}{R}");
-        this.expansionSetCode = "BFZ";
+    public HeraldOfKozilek(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{1}{U}{R}");
         this.subtype.add("Eldrazi");
         this.subtype.add("Drone");
         this.power = new MageInt(2);

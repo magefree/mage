@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.antiquities;
+package mage.cards.a;
 
 import java.util.UUID;
 import mage.abilities.Ability;
@@ -34,9 +34,9 @@ import mage.abilities.effects.common.AttachEffect;
 import mage.abilities.effects.common.DamageAttachedControllerEffect;
 import mage.abilities.keyword.EnchantAbility;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Outcome;
-import mage.constants.Rarity;
 import mage.constants.Zone;
 import mage.game.Game;
 import mage.game.events.GameEvent;
@@ -50,9 +50,8 @@ import mage.target.common.TargetArtifactPermanent;
  */
 public class ArtifactPossession extends CardImpl {
 
-    public ArtifactPossession(UUID ownerId) {
-        super(ownerId, 45, "Artifact Possession", Rarity.COMMON, new CardType[]{CardType.ENCHANTMENT}, "{2}{B}");
-        this.expansionSetCode = "ATQ";
+    public ArtifactPossession(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.ENCHANTMENT},"{2}{B}");
         this.subtype.add("Aura");
 
         // Enchant artifact

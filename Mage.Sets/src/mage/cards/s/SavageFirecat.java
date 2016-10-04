@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.odyssey;
+package mage.cards.s;
 
 import java.util.UUID;
 import mage.MageInt;
@@ -36,8 +36,8 @@ import mage.abilities.effects.common.counter.AddCountersSourceEffect;
 import mage.abilities.effects.common.counter.RemoveCounterSourceEffect;
 import mage.abilities.keyword.TrampleAbility;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.constants.Zone;
 import mage.counters.CounterType;
 import mage.game.Game;
@@ -50,9 +50,8 @@ import mage.game.events.GameEvent.EventType;
  */
 public class SavageFirecat extends CardImpl {
 
-    public SavageFirecat(UUID ownerId) {
-        super(ownerId, 218, "Savage Firecat", Rarity.RARE, new CardType[]{CardType.CREATURE}, "{3}{R}{R}");
-        this.expansionSetCode = "ODY";
+    public SavageFirecat(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{3}{R}{R}");
         this.subtype.add("Elemental");
         this.subtype.add("Cat");
 

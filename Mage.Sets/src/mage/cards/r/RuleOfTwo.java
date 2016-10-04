@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.starwars;
+package mage.cards.r;
 
 import java.util.UUID;
 import mage.abilities.Ability;
@@ -39,9 +39,9 @@ import mage.abilities.effects.common.continuous.GainAbilityControlledEffect;
 import mage.abilities.keyword.DeathtouchAbility;
 import mage.abilities.keyword.LifelinkAbility;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Duration;
-import mage.constants.Rarity;
 import mage.constants.TargetController;
 import mage.constants.Zone;
 import mage.filter.common.FilterCreaturePermanent;
@@ -52,9 +52,8 @@ import mage.filter.common.FilterCreaturePermanent;
  */
 public class RuleOfTwo extends CardImpl {
 
-    public RuleOfTwo(UUID ownerId) {
-        super(ownerId, 85, "Rule of two", Rarity.UNCOMMON, new CardType[]{CardType.ENCHANTMENT}, "{3}{B}{B}");
-        this.expansionSetCode = "SWS";
+    public RuleOfTwo(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.ENCHANTMENT},"{3}{B}{B}");
 
         // As long as you control exatly two creatures, those creatures get +2/+0 and have deathtouch and lifelink.
         ContinuousEffect boostEffect = new BoostControlledEffect(2, 0, Duration.WhileOnBattlefield);

@@ -25,15 +25,15 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.legions;
+package mage.cards.t;
 
 import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.common.EntersBattlefieldAllTriggeredAbility;
 import mage.abilities.effects.common.GainLifeEffect;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.constants.Zone;
 import mage.filter.FilterPermanent;
 import mage.filter.predicate.mageobject.SubtypePredicate;
@@ -50,9 +50,8 @@ public class TotemSpeaker extends CardImpl {
         filter.add(new SubtypePredicate("Beast"));
     }    
     
-    public TotemSpeaker(UUID ownerId) {
-        super(ownerId, 141, "Totem Speaker", Rarity.UNCOMMON, new CardType[]{CardType.CREATURE}, "{4}{G}");
-        this.expansionSetCode = "LGN";
+    public TotemSpeaker(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{4}{G}");
         this.subtype.add("Elf");
         this.subtype.add("Druid");
         this.power = new MageInt(3);

@@ -25,15 +25,15 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.betrayersofkamigawa;
+package mage.cards.a;
 
 import java.util.UUID;
 
 import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.abilities.Ability;
 import mage.abilities.effects.OneShotEffect;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.Outcome;
 import mage.filter.FilterPermanent;
 import mage.filter.predicate.mageobject.CardTypePredicate;
@@ -48,9 +48,8 @@ import mage.players.Player;
  */
 public class AuraBarbs extends CardImpl {
 
-    public AuraBarbs(UUID ownerId) {
-        super(ownerId, 94, "Aura Barbs", Rarity.UNCOMMON, new CardType[]{CardType.INSTANT}, "{2}{R}");
-        this.expansionSetCode = "BOK";
+    public AuraBarbs(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.INSTANT},"{2}{R}");
         this.subtype.add("Arcane");
 
 

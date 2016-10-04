@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.commander2013;
+package mage.cards.t;
 
 import java.util.UUID;
 import mage.abilities.costs.common.PayVariableLifeCost;
@@ -34,9 +34,9 @@ import mage.abilities.dynamicvalue.common.GetXValue;
 import mage.abilities.dynamicvalue.common.SignInversionDynamicValue;
 import mage.abilities.effects.common.continuous.BoostAllEffect;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Duration;
-import mage.constants.Rarity;
 import mage.filter.common.FilterCreaturePermanent;
 
 /**
@@ -45,9 +45,8 @@ import mage.filter.common.FilterCreaturePermanent;
  */
 public class ToxicDeluge extends CardImpl {
 
-    public ToxicDeluge(UUID ownerId) {
-        super(ownerId, 96, "Toxic Deluge", Rarity.RARE, new CardType[]{CardType.SORCERY}, "{2}{B}");
-        this.expansionSetCode = "C13";
+    public ToxicDeluge(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{2}{B}");
 
 
         // As an additional cost to cast Toxic Deluge, pay X life.

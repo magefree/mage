@@ -25,13 +25,13 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.khansoftarkir;
+package mage.cards.w;
 
 import java.util.UUID;
 import mage.abilities.effects.common.ReturnToHandTargetEffect;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.target.common.TargetCreaturePermanent;
 
 /**
@@ -40,9 +40,8 @@ import mage.target.common.TargetCreaturePermanent;
  */
 public class Waterwhirl extends CardImpl {
 
-    public Waterwhirl(UUID ownerId) {
-        super(ownerId, 60, "Waterwhirl", Rarity.UNCOMMON, new CardType[]{CardType.INSTANT}, "{4}{U}{U}");
-        this.expansionSetCode = "KTK";
+    public Waterwhirl(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.INSTANT},"{4}{U}{U}");
 
 
         // Return up to two target creatures to their owners' hands.

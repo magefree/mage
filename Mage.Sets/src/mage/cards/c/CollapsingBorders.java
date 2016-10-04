@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.invasion;
+package mage.cards.c;
 
 import java.util.UUID;
 import mage.abilities.Ability;
@@ -35,8 +35,8 @@ import mage.abilities.effects.Effect;
 import mage.abilities.effects.common.DamageTargetEffect;
 import mage.abilities.effects.common.GainLifeTargetEffect;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.constants.TargetController;
 
 /**
@@ -46,9 +46,8 @@ import mage.constants.TargetController;
  */
 public class CollapsingBorders extends CardImpl {
 
-    public CollapsingBorders(UUID ownerId) {
-        super(ownerId, 141, "Collapsing Borders", Rarity.RARE, new CardType[]{CardType.ENCHANTMENT}, "{3}{R}");
-        this.expansionSetCode = "INV";
+    public CollapsingBorders(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.ENCHANTMENT},"{3}{R}");
 
         // Domain - At the beginning of each player's upkeep, that player gains 1 life for each basic land type among lands he or she controls. Then Collapsing Borders deals 3 damage to him or her.
         Effect effect = new GainLifeTargetEffect(new DomainValue(true));

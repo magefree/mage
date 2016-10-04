@@ -25,11 +25,10 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.scarsofmirrodin;
+package mage.cards.a;
 
 import mage.constants.CardType;
 import mage.constants.Duration;
-import mage.constants.Rarity;
 import mage.constants.Zone;
 import mage.MageInt;
 import mage.abilities.Ability;
@@ -37,6 +36,7 @@ import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.costs.common.TapSourceCost;
 import mage.abilities.effects.common.PreventDamageToTargetEffect;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.filter.predicate.mageobject.CardTypePredicate;
 import mage.target.common.TargetCreatureOrPlayer;
@@ -56,9 +56,8 @@ public class AbunaAcolyte extends CardImpl {
         filter.add(new CardTypePredicate(CardType.ARTIFACT));
     }
 
-    public AbunaAcolyte(UUID ownerId) {
-        super(ownerId, 1, "Abuna Acolyte", Rarity.UNCOMMON,  new CardType[]{CardType.CREATURE}, "{1}{W}");
-        this.expansionSetCode = "SOM";
+    public AbunaAcolyte(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{1}{W}");
         this.subtype.add("Cat");
         this.subtype.add("Cleric");
 

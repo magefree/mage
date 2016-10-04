@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.khansoftarkir;
+package mage.cards.d;
 
 import java.util.UUID;
 import mage.abilities.Ability;
@@ -41,11 +41,11 @@ import mage.abilities.effects.common.continuous.GainAbilityAttachedEffect;
 import mage.abilities.keyword.EnchantAbility;
 import mage.abilities.keyword.FirstStrikeAbility;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.AttachmentType;
 import mage.constants.CardType;
 import mage.constants.Duration;
 import mage.constants.Outcome;
-import mage.constants.Rarity;
 import mage.constants.Zone;
 import mage.target.TargetPermanent;
 import mage.target.common.TargetCreaturePermanent;
@@ -56,9 +56,8 @@ import mage.target.common.TargetCreaturePermanent;
  */
 public class DragonGrip extends CardImpl {
 
-    public DragonGrip(UUID ownerId) {
-        super(ownerId, 107, "Dragon Grip", Rarity.UNCOMMON, new CardType[]{CardType.ENCHANTMENT}, "{2}{R}");
-        this.expansionSetCode = "KTK";
+    public DragonGrip(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.ENCHANTMENT},"{2}{R}");
         this.subtype.add("Aura");
 
         // Ferocious - If you control a creature with power 4 or greater, you may cast Dragon Grip as though it had flash.

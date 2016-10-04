@@ -25,11 +25,10 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.modernmasters;
+package mage.cards.a;
 
 import java.util.UUID;
 import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.constants.Zone;
 import mage.MageInt;
 import mage.abilities.Ability;
@@ -37,6 +36,7 @@ import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.costs.mana.ManaCostsImpl;
 import mage.abilities.effects.common.ReturnToHandTargetEffect;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.filter.Filter;
 import mage.filter.common.FilterArtifactCard;
 import mage.filter.predicate.mageobject.ConvertedManaCostPredicate;
@@ -53,9 +53,8 @@ public class AuriokSalvagers extends CardImpl {
         filter.add(new ConvertedManaCostPredicate(Filter.ComparisonType.LessThan, 2));
     }
     
-    public AuriokSalvagers(UUID ownerId) {
-        super(ownerId, 5, "Auriok Salvagers", Rarity.RARE, new CardType[]{CardType.CREATURE}, "{3}{W}");
-        this.expansionSetCode = "MMA";
+    public AuriokSalvagers(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{3}{W}");
         this.subtype.add("Human");
         this.subtype.add("Soldier");
 

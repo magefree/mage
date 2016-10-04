@@ -25,17 +25,17 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.tempest;
+package mage.cards.f;
 
 import java.util.UUID;
 
 import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.costs.mana.ManaCostsImpl;
 import mage.abilities.effects.common.counter.AddCountersTargetEffect;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.Zone;
 import mage.counters.CounterType;
 import mage.target.common.TargetCreaturePermanent;
@@ -46,9 +46,8 @@ import mage.target.common.TargetCreaturePermanent;
  */
 public class FeveredConvulsions extends CardImpl {
 
-    public FeveredConvulsions(UUID ownerId) {
-        super(ownerId, 30, "Fevered Convulsions", Rarity.RARE, new CardType[]{CardType.ENCHANTMENT}, "{B}{B}");
-        this.expansionSetCode = "TMP";
+    public FeveredConvulsions(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.ENCHANTMENT},"{B}{B}");
 
         Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new AddCountersTargetEffect(CounterType.M1M1.createInstance(1)), new ManaCostsImpl("{2}{B}{B}"));
         ability.addTarget(new TargetCreaturePermanent());

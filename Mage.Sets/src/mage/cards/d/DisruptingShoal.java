@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.betrayersofkamigawa;
+package mage.cards.d;
 
 import java.util.UUID;
 import mage.ObjectColor;
@@ -37,10 +37,11 @@ import mage.abilities.costs.common.ExileFromHandCost;
 import mage.abilities.effects.OneShotEffect;
 import mage.cards.Card;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
+import mage.cards.CardSetInfo;
 import mage.cards.SplitCard;
 import mage.constants.CardType;
 import mage.constants.Outcome;
-import mage.constants.Rarity;
 import mage.filter.common.FilterOwnedCard;
 import mage.filter.predicate.Predicates;
 import mage.filter.predicate.mageobject.CardIdPredicate;
@@ -56,9 +57,8 @@ import mage.target.common.TargetCardInHand;
  */
 public class DisruptingShoal extends CardImpl {
 
-    public DisruptingShoal(UUID ownerId) {
-        super(ownerId, 33, "Disrupting Shoal", Rarity.RARE, new CardType[]{CardType.INSTANT}, "{X}{U}{U}");
-        this.expansionSetCode = "BOK";
+    public DisruptingShoal(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.INSTANT},"{X}{U}{U}");
         this.subtype.add("Arcane");
 
         // You may exile a blue card with converted mana cost X from your hand rather than pay Disrupting Shoal's mana cost.

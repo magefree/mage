@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.vintagemasters;
+package mage.cards.t;
 
 import java.util.UUID;
 import mage.abilities.Ability;
@@ -34,8 +34,8 @@ import mage.abilities.costs.common.SacrificeSourceCost;
 import mage.abilities.costs.mana.ManaCostsImpl;
 import mage.abilities.effects.common.FightTargetsEffect;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.constants.TargetController;
 import mage.constants.Zone;
 import mage.filter.common.FilterCreaturePermanent;
@@ -55,9 +55,8 @@ public class TriangleOfWar extends CardImpl {
         filter.add(new ControllerPredicate(TargetController.OPPONENT));
     }
 
-    public TriangleOfWar(UUID ownerId) {
-        super(ownerId, 288, "Triangle of War", Rarity.UNCOMMON, new CardType[]{CardType.ARTIFACT}, "{1}");
-        this.expansionSetCode = "VMA";
+    public TriangleOfWar(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.ARTIFACT},"{1}");
 
         // {2}, Sacrifice Triangle of War: Target creature you control fights target creature an opponent controls.
         Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD,

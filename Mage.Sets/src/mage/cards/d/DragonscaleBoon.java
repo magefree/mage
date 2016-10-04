@@ -25,15 +25,15 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.khansoftarkir;
+package mage.cards.d;
 
 import java.util.UUID;
 import mage.abilities.effects.Effect;
 import mage.abilities.effects.common.UntapTargetEffect;
 import mage.abilities.effects.common.counter.AddCountersTargetEffect;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.counters.CounterType;
 import mage.target.common.TargetCreaturePermanent;
 
@@ -43,9 +43,8 @@ import mage.target.common.TargetCreaturePermanent;
  */
 public class DragonscaleBoon extends CardImpl {
 
-    public DragonscaleBoon(UUID ownerId) {
-        super(ownerId, 131, "Dragonscale Boon", Rarity.COMMON, new CardType[]{CardType.INSTANT}, "{3}{G}");
-        this.expansionSetCode = "KTK";
+    public DragonscaleBoon(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.INSTANT},"{3}{G}");
 
 
         // Put two +1/+1 counters on target creature and untap it

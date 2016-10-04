@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.urzasdestiny;
+package mage.cards.b;
 
 import java.util.UUID;
 import mage.MageInt;
@@ -38,8 +38,8 @@ import mage.abilities.effects.common.ExileSourceEffect;
 import mage.abilities.effects.common.ExileSourceUnlessPaysEffect;
 import mage.abilities.effects.common.ReturnFromGraveyardToBattlefieldTargetEffect;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.filter.common.FilterCreatureCard;
 import mage.target.common.TargetCardInHand;
 import mage.target.common.TargetCardInYourGraveyard;
@@ -50,9 +50,8 @@ import mage.target.common.TargetCardInYourGraveyard;
  */
 public class BodySnatcher extends CardImpl {
 
-    public BodySnatcher(UUID ownerId) {
-        super(ownerId, 53, "Body Snatcher", Rarity.RARE, new CardType[]{CardType.CREATURE}, "{2}{B}{B}");
-        this.expansionSetCode = "UDS";
+    public BodySnatcher(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{2}{B}{B}");
         this.subtype.add("Minion");
         this.power = new MageInt(2);
         this.toughness = new MageInt(2);

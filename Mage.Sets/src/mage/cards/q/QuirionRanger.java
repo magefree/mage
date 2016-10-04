@@ -25,11 +25,10 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.visions;
+package mage.cards.q;
 
 import java.util.UUID;
 import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.constants.Zone;
 import mage.MageInt;
 import mage.abilities.Ability;
@@ -37,6 +36,7 @@ import mage.abilities.common.LimitedTimesPerTurnActivatedAbility;
 import mage.abilities.costs.common.ReturnToHandChosenControlledPermanentCost;
 import mage.abilities.effects.common.UntapTargetEffect;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.filter.common.FilterControlledPermanent;
 import mage.filter.predicate.mageobject.SubtypePredicate;
 import mage.target.common.TargetControlledPermanent;
@@ -54,9 +54,8 @@ public class QuirionRanger extends CardImpl {
         filter.add(new SubtypePredicate("Forest"));
     }
 
-    public QuirionRanger(UUID ownerId) {
-        super(ownerId, 67, "Quirion Ranger", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{G}");
-        this.expansionSetCode = "VIS";
+    public QuirionRanger(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{G}");
         this.subtype.add("Elf");
 
         this.power = new MageInt(1);

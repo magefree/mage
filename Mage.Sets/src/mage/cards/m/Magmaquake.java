@@ -25,15 +25,15 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.magic2013;
+package mage.cards.m;
 
 import java.util.UUID;
 import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.abilities.dynamicvalue.common.ManacostVariableValue;
 import mage.abilities.effects.common.DamageAllEffect;
 import mage.abilities.keyword.FlyingAbility;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.filter.FilterPermanent;
 import mage.filter.predicate.Predicates;
 import mage.filter.predicate.mageobject.AbilityPredicate;
@@ -55,9 +55,8 @@ public class Magmaquake extends CardImpl {
                 new CardTypePredicate(CardType.PLANESWALKER)));
     }
 
-    public Magmaquake(UUID ownerId) {
-        super(ownerId, 140, "Magmaquake", Rarity.RARE, new CardType[]{CardType.INSTANT}, "{X}{R}{R}");
-        this.expansionSetCode = "M13";
+    public Magmaquake(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.INSTANT},"{X}{R}{R}");
 
 
         // Magmaquake deals X damage to each creature without flying and each planeswalker.

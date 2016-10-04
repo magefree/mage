@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.dragonsoftarkir;
+package mage.cards.f;
 
 import java.util.UUID;
 
@@ -35,10 +35,10 @@ import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.InfoEffect;
 import mage.abilities.effects.common.SacrificeEffect;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.AbilityType;
 import mage.constants.CardType;
 import mage.constants.Outcome;
-import mage.constants.Rarity;
 import mage.filter.FilterCard;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.filter.predicate.mageobject.SubtypePredicate;
@@ -60,9 +60,8 @@ public class FoulTongueInvocation extends CardImpl {
         filter.add(new SubtypePredicate("Dragon"));
     }
 
-    public FoulTongueInvocation(UUID ownerId) {
-        super(ownerId, 102, "Foul-Tongue Invocation", Rarity.UNCOMMON, new CardType[]{CardType.INSTANT}, "{2}{B}");
-        this.expansionSetCode = "DTK";
+    public FoulTongueInvocation(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.INSTANT},"{2}{B}");
 
         // As an additional cost to cast Foul-Tongue Invocation, you may reveal a Dragon card from your hand.
         this.getSpellAbility().addEffect(new InfoEffect("As an additional cost to cast {this}, you may reveal a Dragon card from your hand"));

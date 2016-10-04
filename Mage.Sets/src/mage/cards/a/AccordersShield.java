@@ -26,12 +26,11 @@
  *  or implied, of BetaSteward_at_googlemail.com.
  */
 
-package mage.sets.scarsofmirrodin;
+package mage.cards.a;
 
 import java.util.UUID;
 
 import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.constants.Zone;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.costs.mana.GenericManaCost;
@@ -40,6 +39,7 @@ import mage.abilities.effects.common.continuous.GainAbilityAttachedEffect;
 import mage.abilities.keyword.EquipAbility;
 import mage.abilities.keyword.VigilanceAbility;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.AttachmentType;
 import mage.constants.Outcome;
 
@@ -49,9 +49,8 @@ import mage.constants.Outcome;
  */
 public class AccordersShield extends CardImpl {
 
-    public AccordersShield (UUID ownerId) {
-        super(ownerId, 136, "Accorder's Shield", Rarity.COMMON, new CardType[]{CardType.ARTIFACT}, "{0}");
-        this.expansionSetCode = "SOM";
+    public AccordersShield (UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.ARTIFACT},"{0}");
         this.subtype.add("Equipment");
         this.addAbility(new EquipAbility(Outcome.AddAbility, new GenericManaCost(3)));
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new GainAbilityAttachedEffect(VigilanceAbility.getInstance(), AttachmentType.EQUIPMENT)));

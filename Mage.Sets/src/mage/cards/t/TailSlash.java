@@ -25,15 +25,15 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.dragonsoftarkir;
+package mage.cards.t;
 
 import java.util.UUID;
 import mage.abilities.Ability;
 import mage.abilities.effects.OneShotEffect;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Outcome;
-import mage.constants.Rarity;
 import mage.constants.TargetController;
 import mage.constants.Zone;
 import mage.filter.common.FilterCreaturePermanent;
@@ -54,9 +54,8 @@ public class TailSlash extends CardImpl {
     static {
         filter.add(new ControllerPredicate(TargetController.NOT_YOU));
     }
-    public TailSlash(UUID ownerId) {
-        super(ownerId, 161, "Tail Slash", Rarity.COMMON, new CardType[]{CardType.INSTANT}, "{2}{R}");
-        this.expansionSetCode = "DTK";
+    public TailSlash(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.INSTANT},"{2}{R}");
 
         // Target creature you control deals damage equal to its power to target creature you don't control.
         this.getSpellAbility().addTarget(new TargetControlledCreaturePermanent());

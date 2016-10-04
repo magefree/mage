@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.scourge;
+package mage.cards.s;
 
 import java.util.UUID;
 import mage.abilities.Ability;
@@ -34,10 +34,10 @@ import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.effects.ReplacementEffectImpl;
 import mage.abilities.effects.common.DamageTargetEffect;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Duration;
 import mage.constants.Outcome;
-import mage.constants.Rarity;
 import mage.constants.TargetController;
 import mage.constants.Zone;
 import mage.game.Game;
@@ -49,9 +49,8 @@ import mage.game.events.GameEvent;
  */
 public class SulfuricVortex extends CardImpl {
 
-    public SulfuricVortex(UUID ownerId) {
-        super(ownerId, 106, "Sulfuric Vortex", Rarity.RARE, new CardType[]{CardType.ENCHANTMENT}, "{1}{R}{R}");
-        this.expansionSetCode = "SCG";
+    public SulfuricVortex(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.ENCHANTMENT},"{1}{R}{R}");
 
 
         // At the beginning of each player's upkeep, Sulfuric Vortex deals 2 damage to that player.

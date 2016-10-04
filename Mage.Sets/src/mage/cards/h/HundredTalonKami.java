@@ -26,15 +26,15 @@
  *  or implied, of BetaSteward_at_googlemail.com.
  */
 
-package mage.sets.championsofkamigawa;
+package mage.cards.h;
 
 import java.util.UUID;
 import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.MageInt;
 import mage.abilities.keyword.FlyingAbility;
 import mage.abilities.keyword.SoulshiftAbility;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 
 /**
  *
@@ -42,9 +42,8 @@ import mage.cards.CardImpl;
  */
 public class HundredTalonKami extends CardImpl {
 
-    public HundredTalonKami (UUID ownerId) {
-        super(ownerId, 16, "Hundred-Talon Kami", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{4}{W}");
-        this.expansionSetCode = "CHK";
+    public HundredTalonKami (UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{4}{W}");
         this.subtype.add("Spirit");
 
         this.power = new MageInt(2);

@@ -25,13 +25,13 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.shadowsoverinnistrad;
+package mage.cards.s;
 
 import java.util.UUID;
 import mage.MageInt;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.Rarity;
 
 /**
  *
@@ -39,9 +39,8 @@ import mage.constants.Rarity;
  */
 public class SeagrafSkaab extends CardImpl {
 
-    public SeagrafSkaab(UUID ownerId) {
-        super(ownerId, 84, "Seagraf Skaab", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{1}{U}");
-        this.expansionSetCode = "SOI";
+    public SeagrafSkaab(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{1}{U}");
         this.subtype.add("Zombie");
         this.power = new MageInt(1);
         this.toughness = new MageInt(3);

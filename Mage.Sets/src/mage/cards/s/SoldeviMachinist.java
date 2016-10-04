@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.masterseditioniv;
+package mage.cards.s;
 
 import java.util.UUID;
 import mage.ConditionalMana;
@@ -40,9 +40,9 @@ import mage.abilities.mana.ConditionalColorlessManaAbility;
 import mage.abilities.mana.builder.ConditionalManaBuilder;
 import mage.abilities.mana.conditional.ManaCondition;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.AbilityType;
 import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.game.Game;
 
 /**
@@ -51,9 +51,8 @@ import mage.game.Game;
  */
 public class SoldeviMachinist extends CardImpl {
 
-    public SoldeviMachinist(UUID ownerId) {
-        super(ownerId, 63, "Soldevi Machinist", Rarity.UNCOMMON, new CardType[]{CardType.CREATURE}, "{1}{U}");
-        this.expansionSetCode = "ME4";
+    public SoldeviMachinist(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{1}{U}");
         this.subtype.add("Human");
         this.subtype.add("Wizard");
         this.subtype.add("Artificer");

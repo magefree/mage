@@ -25,16 +25,16 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.riseoftheeldrazi;
+package mage.cards.r;
 
 import java.util.UUID;
 
 import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.abilities.Ability;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.keyword.ReboundAbility;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.Outcome;
 import mage.game.Game;
 import mage.players.Player;
@@ -46,9 +46,8 @@ import mage.target.common.TargetOpponent;
  */
 public class RecurringInsight extends CardImpl {
 
-    public RecurringInsight(UUID ownerId) {
-        super(ownerId, 82, "Recurring Insight", Rarity.RARE, new CardType[]{CardType.SORCERY}, "{4}{U}{U}");
-        this.expansionSetCode = "ROE";
+    public RecurringInsight(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{4}{U}{U}");
         
         // Rebound
         this.addAbility(new ReboundAbility());

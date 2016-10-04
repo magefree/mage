@@ -26,7 +26,7 @@
  *  or implied, of BetaSteward_at_googlemail.com.
  */
 
-package mage.sets.shardsofalara;
+package mage.cards.u;
 
 import java.util.UUID;
 import mage.MageInt;
@@ -35,9 +35,9 @@ import mage.abilities.costs.mana.ManaCostsImpl;
 import mage.abilities.effects.common.continuous.BoostSourceEffect;
 import mage.abilities.keyword.UnearthAbility;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Duration;
-import mage.constants.Rarity;
 import mage.constants.Zone;
 
 /**
@@ -46,9 +46,8 @@ import mage.constants.Zone;
  */
 public class UndeadLeotau extends CardImpl {
 
-    public UndeadLeotau (UUID ownerId) {
-        super(ownerId, 90, "Undead Leotau", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{5}{B}");
-        this.expansionSetCode = "ALA";
+    public UndeadLeotau (UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{5}{B}");
         this.subtype.add("Zombie");
         this.subtype.add("Cat");
 

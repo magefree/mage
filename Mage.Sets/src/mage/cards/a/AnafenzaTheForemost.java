@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.khansoftarkir;
+package mage.cards.a;
 
 import java.util.UUID;
 import mage.MageInt;
@@ -36,10 +36,10 @@ import mage.abilities.effects.ReplacementEffectImpl;
 import mage.abilities.effects.common.counter.AddCountersTargetEffect;
 import mage.cards.Card;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Duration;
 import mage.constants.Outcome;
-import mage.constants.Rarity;
 import mage.constants.Zone;
 import mage.counters.CounterType;
 import mage.filter.common.FilterControlledCreaturePermanent;
@@ -65,9 +65,8 @@ public class AnafenzaTheForemost extends CardImpl {
         filter.add(new TappedPredicate());
     }
 
-    public AnafenzaTheForemost(UUID ownerId) {
-        super(ownerId, 163, "Anafenza, the Foremost", Rarity.MYTHIC, new CardType[]{CardType.CREATURE}, "{W}{B}{G}");
-        this.expansionSetCode = "KTK";
+    public AnafenzaTheForemost(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{W}{B}{G}");
         this.supertype.add("Legendary");
         this.subtype.add("Human");
         this.subtype.add("Soldier");

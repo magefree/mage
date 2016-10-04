@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.torment;
+package mage.cards.c;
 
 import java.util.UUID;
 import mage.MageInt;
@@ -37,9 +37,9 @@ import mage.abilities.decorator.ConditionalContinuousEffect;
 import mage.abilities.effects.common.DrawDiscardControllerEffect;
 import mage.abilities.effects.common.continuous.GainAbilitySourceEffect;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.AbilityWord;
 import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.constants.Zone;
 
 /**
@@ -48,9 +48,8 @@ import mage.constants.Zone;
  */
 public class CephalidSage extends CardImpl {
 
-    public CephalidSage(UUID ownerId) {
-        super(ownerId, 29, "Cephalid Sage", Rarity.UNCOMMON, new CardType[]{CardType.CREATURE}, "{3}{U}");
-        this.expansionSetCode = "TOR";
+    public CephalidSage(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{3}{U}");
         this.subtype.add("Cephalid");
         this.power = new MageInt(2);
         this.toughness = new MageInt(3);

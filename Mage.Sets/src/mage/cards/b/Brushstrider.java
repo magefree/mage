@@ -25,14 +25,14 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.returntoravnica;
+package mage.cards.b;
 
 import java.util.UUID;
 import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.MageInt;
 import mage.abilities.keyword.VigilanceAbility;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 
 /**
  *
@@ -40,9 +40,8 @@ import mage.cards.CardImpl;
  */
 public class Brushstrider extends CardImpl {
 
-    public Brushstrider(UUID ownerId) {
-        super(ownerId, 117, "Brushstrider", Rarity.UNCOMMON, new CardType[]{CardType.CREATURE}, "{1}{G}");
-        this.expansionSetCode = "RTR";
+    public Brushstrider(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{1}{G}");
         this.subtype.add("Beast");
 
         this.power = new MageInt(3);

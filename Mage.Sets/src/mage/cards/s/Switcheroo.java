@@ -25,12 +25,12 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.magic2013;
+package mage.cards.s;
 
 import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.abilities.effects.common.continuous.ExchangeControlTargetEffect;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.Duration;
 import mage.target.common.TargetCreaturePermanent;
 
@@ -43,9 +43,8 @@ public class Switcheroo extends CardImpl {
 
     private static final String rule = "Exchange control of two target creatures";
 
-    public Switcheroo(UUID ownerId) {
-        super(ownerId, 71, "Switcheroo", Rarity.UNCOMMON, new CardType[]{CardType.SORCERY}, "{4}{U}");
-        this.expansionSetCode = "M13";
+    public Switcheroo(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{4}{U}");
 
 
         // Exchange control of two target creatures.

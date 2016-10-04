@@ -26,18 +26,18 @@
  *  or implied, of BetaSteward_at_googlemail.com.
  */
 
-package mage.sets.dragonsmaze;
+package mage.cards.l;
 
 import java.util.UUID;
 
 import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.MageInt;
 import mage.ObjectColor;
 import mage.abilities.common.EntersBattlefieldTriggeredAbility;
 import mage.abilities.effects.common.DetainAllEffect;
 import mage.abilities.keyword.ProtectionAbility;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.TargetController;
 import mage.filter.Filter;
 import mage.filter.FilterObject;
@@ -65,9 +65,8 @@ public class LaviniaOfTheTenth  extends CardImpl {
         filterDetain.add(new ConvertedManaCostPredicate(Filter.ComparisonType.LessThan, 5));
     }
 
-    public LaviniaOfTheTenth (UUID ownerId) {
-        super(ownerId, 80, "Lavinia of the Tenth", Rarity.RARE, new CardType[]{CardType.CREATURE}, "{3}{W}{U}");
-        this.expansionSetCode = "DGM";
+    public LaviniaOfTheTenth (UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{3}{W}{U}");
         this.subtype.add("Human");
         this.subtype.add("Soldier");
         this.supertype.add("Legendary");

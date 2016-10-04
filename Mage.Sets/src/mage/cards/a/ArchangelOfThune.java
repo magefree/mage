@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.magic2014;
+package mage.cards.a;
 
 import java.util.UUID;
 import mage.MageInt;
@@ -34,8 +34,8 @@ import mage.abilities.effects.common.counter.AddCountersAllEffect;
 import mage.abilities.keyword.FlyingAbility;
 import mage.abilities.keyword.LifelinkAbility;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.constants.Zone;
 import mage.counters.CounterType;
 import mage.filter.common.FilterControlledCreaturePermanent;
@@ -49,9 +49,8 @@ import mage.game.events.GameEvent.EventType;
  */
 public class ArchangelOfThune extends CardImpl {
 
-    public ArchangelOfThune(UUID ownerId) {
-        super(ownerId, 5, "Archangel of Thune", Rarity.MYTHIC, new CardType[]{CardType.CREATURE}, "{3}{W}{W}");
-        this.expansionSetCode = "M14";
+    public ArchangelOfThune(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{3}{W}{W}");
         this.subtype.add("Angel");
 
         this.power = new MageInt(3);

@@ -25,15 +25,15 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.darkascension;
+package mage.cards.n;
 
 import java.util.UUID;
 import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.MageInt;
 import mage.abilities.keyword.FlashAbility;
 import mage.abilities.keyword.FlyingAbility;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 
 /**
  *
@@ -41,9 +41,8 @@ import mage.cards.CardImpl;
  */
 public class NephaliaSeakite extends CardImpl {
 
-    public NephaliaSeakite(UUID ownerId) {
-        super(ownerId, 43, "Nephalia Seakite", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{3}{U}");
-        this.expansionSetCode = "DKA";
+    public NephaliaSeakite(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{3}{U}");
         this.subtype.add("Bird");
 
         this.power = new MageInt(2);

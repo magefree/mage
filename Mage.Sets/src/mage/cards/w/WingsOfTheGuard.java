@@ -25,15 +25,15 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.conspiracytakethecrown;
+package mage.cards.w;
 
 import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.keyword.FlyingAbility;
 import mage.abilities.keyword.MeleeAbility;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.Rarity;
 
 /**
  *
@@ -41,9 +41,8 @@ import mage.constants.Rarity;
  */
 public class WingsOfTheGuard extends CardImpl {
 
-    public WingsOfTheGuard(UUID ownerId) {
-        super(ownerId, 26, "Wings of the Guard", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{1}{W}");
-        this.expansionSetCode = "CN2";
+    public WingsOfTheGuard(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{1}{W}");
         this.subtype.add("Bird");
         this.power = new MageInt(1);
         this.toughness = new MageInt(1);

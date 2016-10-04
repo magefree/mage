@@ -25,15 +25,15 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.shadowsoverinnistrad;
+package mage.cards.d;
 
 import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.common.EntersBattlefieldTriggeredAbility;
 import mage.abilities.effects.keyword.InvestigateEffect;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.Rarity;
 
 /**
  *
@@ -41,9 +41,8 @@ import mage.constants.Rarity;
  */
 public class DrownyardExplorers extends CardImpl {
 
-    public DrownyardExplorers(UUID ownerId) {
-        super(ownerId, 56, "Drownyard Explorers", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{3}{U}");
-        this.expansionSetCode = "SOI";
+    public DrownyardExplorers(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{3}{U}");
         this.subtype.add("Human");
         this.subtype.add("Wizard");
         this.power = new MageInt(2);

@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.saviorsofkamigawa;
+package mage.cards.p;
 
 import java.util.UUID;
 import mage.abilities.DelayedTriggeredAbility;
@@ -37,9 +37,9 @@ import mage.abilities.effects.common.ReturnFromGraveyardToHandTargetEffect;
 import mage.abilities.effects.common.ReturnSourceFromGraveyardToHandEffect;
 import mage.cards.Card;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Duration;
-import mage.constants.Rarity;
 import mage.constants.Zone;
 import mage.game.Game;
 import mage.game.events.GameEvent;
@@ -53,9 +53,8 @@ import mage.target.targetpointer.FixedTarget;
  */
 public class PureIntentions extends CardImpl {
 
-    public PureIntentions(UUID ownerId) {
-        super(ownerId, 25, "Pure Intentions", Rarity.RARE, new CardType[]{CardType.INSTANT}, "{W}");
-        this.expansionSetCode = "SOK";
+    public PureIntentions(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.INSTANT},"{W}");
         this.subtype.add("Arcane");
 
         // Whenever a spell or ability an opponent controls causes you to discard cards this turn, return those cards from your graveyard to your hand.

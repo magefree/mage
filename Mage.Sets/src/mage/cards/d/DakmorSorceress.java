@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.starter1999;
+package mage.cards.d;
 
 import java.util.UUID;
 import mage.MageInt;
@@ -33,9 +33,9 @@ import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.dynamicvalue.common.PermanentsOnBattlefieldCount;
 import mage.abilities.effects.common.continuous.SetPowerSourceEffect;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Duration;
-import mage.constants.Rarity;
 import mage.constants.Zone;
 import mage.filter.common.FilterControlledPermanent;
 import mage.filter.predicate.mageobject.SubtypePredicate;
@@ -52,9 +52,8 @@ public class DakmorSorceress extends CardImpl {
         filter.add(new SubtypePredicate("Swamp"));
     }
 
-    public DakmorSorceress(UUID ownerId) {
-        super(ownerId, 74, "Dakmor Sorceress", Rarity.RARE, new CardType[]{CardType.CREATURE}, "{5}{B}");
-        this.expansionSetCode = "S99";
+    public DakmorSorceress(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{5}{B}");
         this.subtype.add("Human");
         this.subtype.add("Wizard");
         this.power = new MageInt(0);

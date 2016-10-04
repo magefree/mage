@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.shadowsoverinnistrad;
+package mage.cards.s;
 
 import java.util.UUID;
 import mage.MageInt;
@@ -33,8 +33,8 @@ import mage.abilities.Ability;
 import mage.abilities.common.EntersBattlefieldTriggeredAbility;
 import mage.abilities.effects.common.ReturnFromGraveyardToHandTargetEffect;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.filter.common.FilterLandCard;
 import mage.target.common.TargetCardInYourGraveyard;
 
@@ -44,9 +44,8 @@ import mage.target.common.TargetCardInYourGraveyard;
  */
 public class StoicBuilder extends CardImpl {
 
-    public StoicBuilder(UUID ownerId) {
-        super(ownerId, 231, "Stoic Builder", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{2}{G}");
-        this.expansionSetCode = "SOI";
+    public StoicBuilder(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{2}{G}");
         this.subtype.add("Human");
         this.power = new MageInt(2);
         this.toughness = new MageInt(3);

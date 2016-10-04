@@ -25,13 +25,13 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.gatecrash;
+package mage.cards.w;
 
 import java.util.UUID;
 import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.abilities.effects.common.ReturnFromGraveyardToHandTargetEffect;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.filter.common.FilterCreatureCard;
 import mage.target.common.TargetCardInGraveyard;
 
@@ -41,9 +41,8 @@ import mage.target.common.TargetCardInGraveyard;
  */
 public class WildwoodRebirth extends CardImpl {
 
-    public WildwoodRebirth(UUID ownerId) {
-        super(ownerId, 140, "Wildwood Rebirth", Rarity.COMMON, new CardType[]{CardType.INSTANT}, "{1}{G}");
-        this.expansionSetCode = "GTC";
+    public WildwoodRebirth(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.INSTANT},"{1}{G}");
 
 
         // Return target creature card from your graveyard to your hand.

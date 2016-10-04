@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.scarsofmirrodin;
+package mage.cards.g;
 
 import java.util.UUID;
 import mage.ConditionalMana;
@@ -44,11 +44,11 @@ import mage.abilities.effects.common.BasicManaEffect;
 import mage.abilities.effects.common.continuous.BoostControlledEffect;
 import mage.abilities.mana.ManaAbility;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Duration;
 import mage.constants.Layer;
 import mage.constants.Outcome;
-import mage.constants.Rarity;
 import mage.constants.SubLayer;
 import mage.constants.Zone;
 import mage.filter.common.FilterControlledCreaturePermanent;
@@ -76,9 +76,8 @@ public class GrandArchitect extends CardImpl {
         targetFilter.add(new CardTypePredicate(CardType.ARTIFACT));
     }
 
-    public GrandArchitect(UUID ownerId) {
-        super(ownerId, 33, "Grand Architect", Rarity.RARE, new CardType[]{CardType.CREATURE}, "{1}{U}{U}");
-        this.expansionSetCode = "SOM";
+    public GrandArchitect(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{1}{U}{U}");
         this.subtype.add("Vedalken");
         this.subtype.add("Artificer");
 

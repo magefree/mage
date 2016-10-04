@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.shadowsoverinnistrad;
+package mage.cards.f;
 
 import java.util.UUID;
 import mage.MageInt;
@@ -38,8 +38,8 @@ import mage.abilities.effects.common.DamageTargetEffect;
 import mage.abilities.effects.common.TransformSourceEffect;
 import mage.abilities.keyword.TransformAbility;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.constants.TargetController;
 
 /**
@@ -48,9 +48,8 @@ import mage.constants.TargetController;
  */
 public class FlameheartWerewolf extends CardImpl {
 
-    public FlameheartWerewolf(UUID ownerId) {
-        super(ownerId, 169, "Flameheart Werewolf", Rarity.UNCOMMON, new CardType[]{CardType.CREATURE}, "");
-        this.expansionSetCode = "SOI";
+    public FlameheartWerewolf(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"");
         this.subtype.add("Werewolf");
         this.power = new MageInt(3);
         this.toughness = new MageInt(2);

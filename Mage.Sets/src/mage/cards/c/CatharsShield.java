@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.eldritchmoon;
+package mage.cards.c;
 
 import java.util.UUID;
 import mage.abilities.common.SimpleStaticAbility;
@@ -35,10 +35,10 @@ import mage.abilities.effects.common.continuous.GainAbilityAttachedEffect;
 import mage.abilities.keyword.EquipAbility;
 import mage.abilities.keyword.VigilanceAbility;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.AttachmentType;
 import mage.constants.CardType;
 import mage.constants.Outcome;
-import mage.constants.Rarity;
 import mage.constants.Zone;
 import mage.target.common.TargetControlledCreaturePermanent;
 
@@ -48,9 +48,8 @@ import mage.target.common.TargetControlledCreaturePermanent;
  */
 public class CatharsShield extends CardImpl {
 
-    public CatharsShield(UUID ownerId) {
-        super(ownerId, 192, "Cathar's Shield", Rarity.COMMON, new CardType[]{CardType.ARTIFACT}, "{0}");
-        this.expansionSetCode = "EMN";
+    public CatharsShield(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.ARTIFACT},"{0}");
         this.subtype.add("Equipment");
 
         // Equipped creature gets +0/+3 and has vigilance.

@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.magicorigins;
+package mage.cards.m;
 
 import java.util.UUID;
 import mage.MageInt;
@@ -33,8 +33,8 @@ import mage.abilities.common.SpellCastAllTriggeredAbility;
 import mage.abilities.effects.common.counter.AddCountersSourceEffect;
 import mage.abilities.keyword.TrampleAbility;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.counters.CounterType;
 
 /**
@@ -43,9 +43,8 @@ import mage.counters.CounterType;
  */
 public class ManagorgerHydra extends CardImpl {
 
-    public ManagorgerHydra(UUID ownerId) {
-        super(ownerId, 186, "Managorger Hydra", Rarity.RARE, new CardType[]{CardType.CREATURE}, "{2}{G}");
-        this.expansionSetCode = "ORI";
+    public ManagorgerHydra(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{2}{G}");
         this.subtype.add("Hydra");
         this.power = new MageInt(1);
         this.toughness = new MageInt(1);

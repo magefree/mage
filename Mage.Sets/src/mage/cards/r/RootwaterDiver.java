@@ -25,11 +25,10 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.tempest;
+package mage.cards.r;
 
 import java.util.UUID;
 import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.abilities.Ability;
 import mage.MageInt;
 import mage.abilities.common.SimpleActivatedAbility;
@@ -37,6 +36,7 @@ import mage.abilities.costs.common.SacrificeSourceCost;
 import mage.abilities.costs.common.TapSourceCost;
 import mage.abilities.effects.common.ReturnToHandTargetEffect;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.Zone;
 import mage.filter.common.FilterArtifactCard;
 import mage.target.common.TargetCardInYourGraveyard;
@@ -47,9 +47,8 @@ import mage.target.common.TargetCardInYourGraveyard;
  */
 public class RootwaterDiver extends CardImpl {
 
-    public RootwaterDiver(UUID ownerId) {
-        super(ownerId, 81, "Rootwater Diver", Rarity.UNCOMMON, new CardType[]{CardType.CREATURE}, "{U}");
-        this.expansionSetCode = "TMP";
+    public RootwaterDiver(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{U}");
         this.subtype.add("Merfolk");
         this.power = new MageInt(1);
         this.toughness = new MageInt(1);

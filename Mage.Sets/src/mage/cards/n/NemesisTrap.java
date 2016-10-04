@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.worldwake;
+package mage.cards.n;
 
 import java.util.UUID;
 import mage.ObjectColor;
@@ -40,9 +40,9 @@ import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.ExileTargetEffect;
 import mage.abilities.effects.common.PutTokenOntoBattlefieldCopyTargetEffect;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Outcome;
-import mage.constants.Rarity;
 import mage.constants.Zone;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.filter.predicate.mageobject.ColorPredicate;
@@ -66,9 +66,8 @@ public class NemesisTrap extends CardImpl {
         filter.add(new AttackingPredicate());
     }
 
-    public NemesisTrap(UUID ownerId) {
-        super(ownerId, 61, "Nemesis Trap", Rarity.UNCOMMON, new CardType[]{CardType.INSTANT}, "{4}{B}{B}");
-        this.expansionSetCode = "WWK";
+    public NemesisTrap(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.INSTANT},"{4}{B}{B}");
         this.subtype.add("Trap");
 
         // If a white creature is attacking, you may pay {B}{B} rather than pay Nemesis Trap's mana cost.

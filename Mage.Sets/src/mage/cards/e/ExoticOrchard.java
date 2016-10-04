@@ -25,13 +25,13 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.conflux;
+package mage.cards.e;
 
 import java.util.UUID;
 import mage.abilities.mana.AnyColorLandsProduceManaAbility;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.constants.TargetController;
 
 /**
@@ -40,9 +40,8 @@ import mage.constants.TargetController;
  */
 public class ExoticOrchard extends CardImpl {
 
-    public ExoticOrchard(UUID ownerId) {
-        super(ownerId, 142, "Exotic Orchard", Rarity.RARE, new CardType[]{CardType.LAND}, "");
-        this.expansionSetCode = "CON";
+    public ExoticOrchard(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.LAND},"");
 
         // {T}: Add to your mana pool one mana of any color that a land an opponent controls could produce.
         this.addAbility(new AnyColorLandsProduceManaAbility(TargetController.OPPONENT));

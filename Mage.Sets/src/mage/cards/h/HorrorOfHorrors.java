@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.legends;
+package mage.cards.h;
 
 import java.util.UUID;
 import mage.ObjectColor;
@@ -34,8 +34,8 @@ import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.costs.common.SacrificeTargetCost;
 import mage.abilities.effects.common.RegenerateTargetEffect;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.constants.Zone;
 import mage.filter.common.FilterControlledPermanent;
 import mage.filter.common.FilterCreaturePermanent;
@@ -58,9 +58,8 @@ public class HorrorOfHorrors extends CardImpl {
         filter2.add(new ColorPredicate(ObjectColor.BLACK));
     }
 
-    public HorrorOfHorrors(UUID ownerId) {
-        super(ownerId, 20, "Horror of Horrors", Rarity.UNCOMMON, new CardType[]{CardType.ENCHANTMENT}, "{3}{B}{B}");
-        this.expansionSetCode = "LEG";
+    public HorrorOfHorrors(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.ENCHANTMENT},"{3}{B}{B}");
 
         // Sacrifice a Swamp: Regenerate target black creature.
         Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new RegenerateTargetEffect(),

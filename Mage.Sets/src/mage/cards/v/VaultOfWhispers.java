@@ -26,13 +26,13 @@
  *  or implied, of BetaSteward_at_googlemail.com.
  */
 
-package mage.sets.mirrodin;
+package mage.cards.v;
 
 import java.util.UUID;
 import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.abilities.mana.BlackManaAbility;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 
 /**
  *
@@ -40,9 +40,8 @@ import mage.cards.CardImpl;
  */
 public class VaultOfWhispers extends CardImpl {
 
-    public VaultOfWhispers (UUID ownerId) {
-        super(ownerId, 286, "Vault of Whispers", Rarity.COMMON, new CardType[]{CardType.ARTIFACT, CardType.LAND}, null);
-        this.expansionSetCode = "MRD";
+    public VaultOfWhispers (UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.ARTIFACT,CardType.LAND},null);
         this.addAbility(new BlackManaAbility());
     }
 

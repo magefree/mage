@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.ravnica;
+package mage.cards.b;
 
 import java.util.UUID;
 
@@ -35,8 +35,8 @@ import mage.abilities.costs.common.SacrificeSourceCost;
 import mage.abilities.costs.mana.ManaCostsImpl;
 import mage.abilities.effects.common.DamageEverythingEffect;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.constants.Zone;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.filter.predicate.permanent.TappedPredicate;
@@ -53,9 +53,8 @@ public class Blockbuster extends CardImpl {
         filter.add(new TappedPredicate());
     }
 
-    public Blockbuster(UUID ownerId) {
-        super(ownerId, 115, "Blockbuster", Rarity.UNCOMMON, new CardType[]{CardType.ENCHANTMENT}, "{3}{R}{R}");
-        this.expansionSetCode = "RAV";
+    public Blockbuster(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.ENCHANTMENT},"{3}{R}{R}");
 
         // {1}{R}, Sacrifice Blockbuster: Blockbuster deals 3 damage to each tapped creature and each player.
         Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new DamageEverythingEffect(3, filter), new ManaCostsImpl("{1}{R}"));

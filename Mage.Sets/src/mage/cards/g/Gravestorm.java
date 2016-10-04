@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.odyssey;
+package mage.cards.g;
 
 import java.util.UUID;
 import mage.abilities.Ability;
@@ -33,9 +33,9 @@ import mage.abilities.common.BeginningOfUpkeepTriggeredAbility;
 import mage.abilities.effects.OneShotEffect;
 import mage.cards.Card;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Outcome;
-import mage.constants.Rarity;
 import mage.constants.TargetController;
 import mage.constants.Zone;
 import mage.filter.FilterCard;
@@ -51,9 +51,8 @@ import mage.target.common.TargetOpponent;
  */
 public class Gravestorm extends CardImpl {
 
-    public Gravestorm(UUID ownerId) {
-        super(ownerId, 141, "Gravestorm", Rarity.RARE, new CardType[]{CardType.ENCHANTMENT}, "{B}{B}{B}");
-        this.expansionSetCode = "ODY";
+    public Gravestorm(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.ENCHANTMENT},"{B}{B}{B}");
 
         // At the beginning of your upkeep, target opponent may exile a card from his or her graveyard. If that player doesn't, you may draw a card.
         Ability ability = new BeginningOfUpkeepTriggeredAbility(Zone.BATTLEFIELD, new GravestormEffect(), TargetController.YOU, false);

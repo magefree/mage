@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.torment;
+package mage.cards.h;
 
 import java.util.UUID;
 import mage.MageInt;
@@ -34,8 +34,8 @@ import mage.ObjectColor;
 import mage.abilities.keyword.FirstStrikeAbility;
 import mage.abilities.keyword.HasteAbility;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.abilities.costs.common.DiscardCardCost;
 import mage.abilities.effects.common.continuous.GainAbilitySourceEffect;
 import mage.constants.Zone;
@@ -55,9 +55,8 @@ public class HellBentRaider extends CardImpl {
         protectionFilter.add(new ColorPredicate(ObjectColor.WHITE));    
     }
     
-    public HellBentRaider(UUID ownerId) {
-        super(ownerId, 101, "Hell-Bent Raider", Rarity.RARE, new CardType[]{CardType.CREATURE}, "{1}{R}{R}");
-        this.expansionSetCode = "TOR";
+    public HellBentRaider(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{1}{R}{R}");
         this.subtype.add("Human");
         this.subtype.add("Barbarian");
         this.power = new MageInt(2);

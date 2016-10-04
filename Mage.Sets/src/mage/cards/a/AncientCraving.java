@@ -25,14 +25,14 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.starter1999;
+package mage.cards.a;
 
 import java.util.UUID;
 import mage.abilities.effects.common.DrawCardSourceControllerEffect;
 import mage.abilities.effects.common.LoseLifeSourceControllerEffect;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.Rarity;
 
 /**
  *
@@ -40,9 +40,8 @@ import mage.constants.Rarity;
  */
 public class AncientCraving extends CardImpl {
 
-    public AncientCraving(UUID ownerId) {
-        super(ownerId, 64, "Ancient Craving", Rarity.RARE, new CardType[]{CardType.SORCERY}, "{3}{B}");
-        this.expansionSetCode = "S99";
+    public AncientCraving(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{3}{B}");
 
         // You draw three cards and you lose 3 life.
         this.getSpellAbility().addEffect(new DrawCardSourceControllerEffect(3));

@@ -25,13 +25,13 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.magic2010;
+package mage.cards.t;
 
 import java.util.UUID;
 import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.abilities.effects.common.CopyTargetSpellEffect;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.filter.FilterSpell;
 import mage.filter.predicate.Predicates;
 import mage.filter.predicate.mageobject.CardTypePredicate;
@@ -51,9 +51,8 @@ public class Twincast extends CardImpl {
                 new CardTypePredicate(CardType.SORCERY)));
     }
 
-    public Twincast(UUID ownerId) {
-        super(ownerId, 78, "Twincast", Rarity.RARE, new CardType[]{CardType.INSTANT}, "{U}{U}");
-        this.expansionSetCode = "M10";
+    public Twincast(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.INSTANT},"{U}{U}");
 
         // Copy target instant or sorcery spell. You may choose new targets for the copy.
         this.getSpellAbility().addEffect(new CopyTargetSpellEffect());

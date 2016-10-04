@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.ravnica;
+package mage.cards.n;
 
 import java.util.UUID;
 import mage.MageInt;
@@ -34,9 +34,9 @@ import mage.abilities.common.EntersBattlefieldTriggeredAbility;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.keyword.TransmuteAbility;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Outcome;
-import mage.constants.Rarity;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.game.Game;
 import mage.players.Player;
@@ -47,9 +47,8 @@ import mage.players.Player;
  */
 public class NetherbornPhalanx extends CardImpl {
 
-    public NetherbornPhalanx(UUID ownerId) {
-        super(ownerId, 99, "Netherborn Phalanx", Rarity.UNCOMMON, new CardType[]{CardType.CREATURE}, "{5}{B}");
-        this.expansionSetCode = "RAV";
+    public NetherbornPhalanx(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{5}{B}");
         this.subtype.add("Horror");
         this.power = new MageInt(2);
         this.toughness = new MageInt(4);

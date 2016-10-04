@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.theros;
+package mage.cards.n;
 
 import java.util.UUID;
 import mage.MageInt;
@@ -36,11 +36,11 @@ import mage.abilities.effects.Effect;
 import mage.abilities.effects.common.cost.CostModificationEffectImpl;
 import mage.abilities.keyword.MonstrosityAbility;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.CostModificationType;
 import mage.constants.Duration;
 import mage.constants.Outcome;
-import mage.constants.Rarity;
 import mage.constants.Zone;
 import mage.filter.common.FilterCreatureCard;
 import mage.game.Game;
@@ -53,9 +53,8 @@ import mage.util.CardUtil;
  */
 public class NemesisOfMortals extends CardImpl {
 
-    public NemesisOfMortals(UUID ownerId) {
-        super(ownerId, 163, "Nemesis of Mortals", Rarity.UNCOMMON, new CardType[]{CardType.CREATURE}, "{4}{G}{G}");
-        this.expansionSetCode = "THS";
+    public NemesisOfMortals(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{4}{G}{G}");
         this.subtype.add("Snake");
 
         this.power = new MageInt(5);

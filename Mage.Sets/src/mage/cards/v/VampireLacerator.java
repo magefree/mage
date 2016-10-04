@@ -25,12 +25,11 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.zendikar;
+package mage.cards.v;
 
 import java.util.UUID;
 
 import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.MageInt;
 import mage.abilities.common.BeginningOfUpkeepTriggeredAbility;
 import mage.abilities.condition.common.TenOrLessLifeCondition;
@@ -38,6 +37,7 @@ import mage.abilities.condition.InvertCondition;
 import mage.abilities.decorator.ConditionalOneShotEffect;
 import mage.abilities.effects.common.LoseLifeSourceControllerEffect;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.TargetController;
 
 /**
@@ -46,9 +46,8 @@ import mage.constants.TargetController;
  */
 public class VampireLacerator extends CardImpl {
 
-    public VampireLacerator(UUID ownerId) {
-        super(ownerId, 115, "Vampire Lacerator", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{B}");
-        this.expansionSetCode = "ZEN";
+    public VampireLacerator(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{B}");
         this.subtype.add("Vampire");
         this.subtype.add("Warrior");
 

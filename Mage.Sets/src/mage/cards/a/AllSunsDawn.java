@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.modernmasters2015;
+package mage.cards.a;
 
 import java.util.UUID;
 import mage.ObjectColor;
@@ -34,11 +34,11 @@ import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.ExileSpellEffect;
 import mage.cards.Card;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.cards.Cards;
 import mage.cards.CardsImpl;
 import mage.constants.CardType;
 import mage.constants.Outcome;
-import mage.constants.Rarity;
 import mage.constants.Zone;
 import mage.filter.FilterCard;
 import mage.filter.predicate.mageobject.ColorPredicate;
@@ -67,9 +67,8 @@ public class AllSunsDawn extends CardImpl {
         filterWhite.add(new ColorPredicate(ObjectColor.WHITE));
     }
 
-    public AllSunsDawn(UUID ownerId) {
-        super(ownerId, 138, "All Suns' Dawn", Rarity.RARE, new CardType[]{CardType.SORCERY}, "{4}{G}");
-        this.expansionSetCode = "MM2";
+    public AllSunsDawn(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{4}{G}");
 
         // For each color, return up to one target card of that color from your graveyard to your hand.
         this.getSpellAbility().addEffect(new AllSunsDawnEffect());

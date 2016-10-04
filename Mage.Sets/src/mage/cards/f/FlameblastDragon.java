@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.shardsofalara;
+package mage.cards.f;
 
 import java.util.UUID;
 import mage.MageInt;
@@ -37,9 +37,9 @@ import mage.abilities.costs.mana.ManaCostsImpl;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.keyword.FlyingAbility;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Outcome;
-import mage.constants.Rarity;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.players.Player;
@@ -50,9 +50,8 @@ import mage.target.common.TargetCreatureOrPlayer;
  */
 public class FlameblastDragon extends CardImpl {
 
-    public FlameblastDragon(UUID ownerId) {
-        super(ownerId, 100, "Flameblast Dragon", Rarity.RARE, new CardType[]{CardType.CREATURE}, "{4}{R}{R}");
-        this.expansionSetCode = "ALA";
+    public FlameblastDragon(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{4}{R}{R}");
         this.subtype.add("Dragon");
 
         this.power = new MageInt(5);

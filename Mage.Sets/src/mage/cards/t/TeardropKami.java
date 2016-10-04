@@ -25,18 +25,18 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.betrayersofkamigawa;
+package mage.cards.t;
 
 import java.util.UUID;
 
 import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.costs.common.SacrificeSourceCost;
 import mage.abilities.effects.common.MayTapOrUntapTargetEffect;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.Zone;
 import mage.target.common.TargetCreaturePermanent;
 
@@ -46,9 +46,8 @@ import mage.target.common.TargetCreaturePermanent;
  */
 public class TeardropKami extends CardImpl {
 
-    public TeardropKami(UUID ownerId) {
-        super(ownerId, 55, "Teardrop Kami", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{U}");
-        this.expansionSetCode = "BOK";
+    public TeardropKami(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{U}");
         this.subtype.add("Spirit");
 
         this.power = new MageInt(1);

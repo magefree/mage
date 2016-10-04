@@ -26,16 +26,16 @@
  *  or implied, of BetaSteward_at_googlemail.com.
  */
 
-package mage.sets.magic2010;
+package mage.cards.p;
 
 import java.util.UUID;
 import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.constants.Zone;
 import mage.MageInt;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.effects.common.combat.CanBlockAdditionalCreatureEffect;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 
 /**
  *
@@ -43,9 +43,8 @@ import mage.cards.CardImpl;
  */
 public class PalaceGuard extends CardImpl {
 
-    public PalaceGuard(UUID ownerId) {
-        super(ownerId, 23, "Palace Guard", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{2}{W}");
-        this.expansionSetCode = "M10";
+    public PalaceGuard(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{2}{W}");
         this.subtype.add("Human");
         this.subtype.add("Soldier");
 

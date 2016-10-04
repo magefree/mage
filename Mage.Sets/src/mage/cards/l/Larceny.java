@@ -25,15 +25,15 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.mercadianmasques;
+package mage.cards.l;
 
 import java.util.UUID;
 import mage.abilities.TriggeredAbilityImpl;
 import mage.abilities.effects.Effect;
 import mage.abilities.effects.common.discard.DiscardTargetEffect;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.constants.Zone;
 import mage.game.Game;
 import mage.game.events.DamagedPlayerEvent;
@@ -48,9 +48,8 @@ import mage.target.targetpointer.FixedTarget;
  */
 public class Larceny extends CardImpl {
 
-    public Larceny(UUID ownerId) {
-        super(ownerId, 143, "Larceny", Rarity.UNCOMMON, new CardType[]{CardType.ENCHANTMENT}, "{3}{B}{B}");
-        this.expansionSetCode = "MMQ";
+    public Larceny(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.ENCHANTMENT},"{3}{B}{B}");
 
 
         // Whenever a creature you control deals combat damage to a player, that player discards a card.

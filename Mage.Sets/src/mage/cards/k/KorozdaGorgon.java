@@ -25,12 +25,11 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.dragonsmaze;
+package mage.cards.k;
 
 import java.util.UUID;
 import mage.constants.CardType;
 import mage.constants.Duration;
-import mage.constants.Rarity;
 import mage.constants.Zone;
 import mage.MageInt;
 import mage.abilities.Ability;
@@ -40,6 +39,7 @@ import mage.abilities.costs.mana.GenericManaCost;
 import mage.abilities.effects.common.continuous.BoostTargetEffect;
 import mage.abilities.keyword.DeathtouchAbility;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.counters.CounterType;
 import mage.target.common.TargetControlledCreaturePermanent;
 import mage.target.common.TargetCreaturePermanent;
@@ -50,9 +50,8 @@ import mage.target.common.TargetCreaturePermanent;
  */
 public class KorozdaGorgon extends CardImpl {
 
-    public KorozdaGorgon(UUID ownerId) {
-        super(ownerId, 78, "Korozda Gorgon", Rarity.UNCOMMON, new CardType[]{CardType.CREATURE}, "{3}{B}{G}");
-        this.expansionSetCode = "DGM";
+    public KorozdaGorgon(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{3}{B}{G}");
         this.subtype.add("Gorgon");
 
         this.power = new MageInt(2);

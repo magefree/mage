@@ -25,13 +25,13 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.magic2013;
+package mage.cards.k;
 
 import java.util.UUID;
 import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.abilities.effects.common.CreateTokenEffect;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.game.permanent.token.GoblinToken;
 
 /**
@@ -40,9 +40,8 @@ import mage.game.permanent.token.GoblinToken;
  */
 public class KrenkosCommand extends CardImpl {
 
-    public KrenkosCommand(UUID ownerId) {
-        super(ownerId, 139, "Krenko's Command", Rarity.COMMON, new CardType[]{CardType.SORCERY}, "{1}{R}");
-        this.expansionSetCode = "M13";
+    public KrenkosCommand(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{1}{R}");
 
 
         // Put two 1/1 red Goblin creature tokens onto the battlefield.

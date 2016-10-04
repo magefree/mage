@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.newphyrexia;
+package mage.cards.j;
 
 import java.util.UUID;
 import mage.MageInt;
@@ -35,9 +35,9 @@ import mage.abilities.decorator.ConditionalContinuousEffect;
 import mage.abilities.effects.common.continuous.BoostControlledEffect;
 import mage.abilities.keyword.FirstStrikeAbility;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Duration;
-import mage.constants.Rarity;
 import mage.constants.Zone;
 import mage.filter.common.FilterCreaturePermanent;
 
@@ -49,9 +49,8 @@ public class JorKadeenThePrevailer extends CardImpl {
 
     private final String effectText = "Metalcraft - Creatures you control get +3/+0 as long as you control three or more artifacts.";
 
-    public JorKadeenThePrevailer(UUID ownerId) {
-        super(ownerId, 128, "Jor Kadeen, the Prevailer", Rarity.RARE, new CardType[]{CardType.CREATURE}, "{3}{R}{W}");
-        this.expansionSetCode = "NPH";
+    public JorKadeenThePrevailer(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{3}{R}{W}");
         this.supertype.add("Legendary");
         this.subtype.add("Human");
         this.subtype.add("Warrior");

@@ -25,13 +25,13 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.urzaslegacy;
+package mage.cards.r;
 
 import java.util.UUID;
 import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.abilities.effects.common.DestroyTargetEffect;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.target.common.TargetArtifactPermanent;
 
 /**
@@ -40,9 +40,8 @@ import mage.target.common.TargetArtifactPermanent;
  */
 public class RackAndRuin extends CardImpl {
 
-    public RackAndRuin(UUID ownerId) {
-        super(ownerId, 89, "Rack and Ruin", Rarity.UNCOMMON, new CardType[]{CardType.INSTANT}, "{2}{R}");
-        this.expansionSetCode = "ULG";
+    public RackAndRuin(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.INSTANT},"{2}{R}");
 
 
         // Destroy two target artifacts.

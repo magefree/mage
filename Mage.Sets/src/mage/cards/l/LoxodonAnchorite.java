@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.fifthdawn;
+package mage.cards.l;
 
 import java.util.UUID;
 import mage.MageInt;
@@ -34,9 +34,9 @@ import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.costs.common.TapSourceCost;
 import mage.abilities.effects.common.PreventDamageToTargetEffect;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Duration;
-import mage.constants.Rarity;
 import mage.constants.Zone;
 import mage.target.common.TargetCreatureOrPlayer;
 
@@ -46,9 +46,8 @@ import mage.target.common.TargetCreatureOrPlayer;
  */
 public class LoxodonAnchorite extends CardImpl {
 
-    public LoxodonAnchorite(UUID ownerId) {
-        super(ownerId, 10, "Loxodon Anchorite", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{2}{W}{W}");
-        this.expansionSetCode = "5DN";
+    public LoxodonAnchorite(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{2}{W}{W}");
         this.subtype.add("Elephant");
         this.subtype.add("Cleric");
 

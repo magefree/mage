@@ -26,12 +26,11 @@
  *  or implied, of BetaSteward_at_googlemail.com.
  */
 
-package mage.sets.apocalypse;
+package mage.cards.a;
 
 import java.util.UUID;
 import mage.constants.CardType;
 import mage.constants.Duration;
-import mage.constants.Rarity;
 import mage.constants.Zone;
 import mage.MageInt;
 import mage.abilities.common.EntersBattlefieldAbility;
@@ -45,6 +44,7 @@ import mage.abilities.effects.common.counter.AddCountersSourceEffect;
 import mage.abilities.keyword.FlyingAbility;
 import mage.abilities.keyword.KickerAbility;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.counters.CounterType;
 
 /**
@@ -52,9 +52,8 @@ import mage.counters.CounterType;
  */
 public class Anavolver extends CardImpl {
 
-    public Anavolver(UUID ownerId) {
-        super(ownerId, 75, "Anavolver", Rarity.RARE, new CardType[]{CardType.CREATURE}, "{3}{G}");
-        this.expansionSetCode = "APC";
+    public Anavolver(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{3}{G}");
         this.subtype.add("Volver");
 
         this.power = new MageInt(3);

@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.legions;
+package mage.cards.s;
 
 import java.util.UUID;
 import mage.MageInt;
@@ -33,8 +33,8 @@ import mage.abilities.common.DealsDamageToAPlayerAllTriggeredAbility;
 import mage.abilities.effects.Effect;
 import mage.abilities.effects.common.DrawCardTargetEffect;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.constants.SetTargetPointer;
 import mage.filter.common.FilterCreaturePermanent;
 
@@ -44,9 +44,8 @@ import mage.filter.common.FilterCreaturePermanent;
  */
 public class SynapseSliver extends CardImpl {
 
-    public SynapseSliver(UUID ownerId) {
-        super(ownerId, 53, "Synapse Sliver", Rarity.RARE, new CardType[]{CardType.CREATURE}, "{4}{U}");
-        this.expansionSetCode = "LGN";
+    public SynapseSliver(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{4}{U}");
         this.subtype.add("Sliver");
 
         this.power = new MageInt(3);

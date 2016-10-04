@@ -25,13 +25,12 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.innistrad;
+package mage.cards.b;
 
 import java.util.UUID;
 
 import mage.constants.CardType;
 import mage.constants.Outcome;
-import mage.constants.Rarity;
 import mage.constants.Zone;
 import mage.MageInt;
 import mage.abilities.Ability;
@@ -40,6 +39,7 @@ import mage.abilities.effects.OneShotEffect;
 import mage.abilities.keyword.DeathtouchAbility;
 import mage.cards.Card;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.filter.FilterCard;
 import mage.filter.predicate.mageobject.SubtypePredicate;
 import mage.game.Game;
@@ -53,9 +53,8 @@ import mage.target.common.TargetCardInLibrary;
  */
 public class BitterheartWitch extends CardImpl {
 
-    public BitterheartWitch(UUID ownerId) {
-        super(ownerId, 88, "Bitterheart Witch", Rarity.UNCOMMON, new CardType[]{CardType.CREATURE}, "{4}{B}");
-        this.expansionSetCode = "ISD";
+    public BitterheartWitch(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{4}{B}");
         this.subtype.add("Human");
         this.subtype.add("Shaman");
 

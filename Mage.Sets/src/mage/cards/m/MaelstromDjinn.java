@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.futuresight;
+package mage.cards.m;
 
 import java.util.UUID;
 import mage.MageInt;
@@ -40,9 +40,9 @@ import mage.abilities.keyword.MorphAbility;
 import mage.abilities.keyword.VanishingSacrificeAbility;
 import mage.abilities.keyword.VanishingUpkeepAbility;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Duration;
-import mage.constants.Rarity;
 import mage.counters.CounterType;
 
 /**
@@ -51,9 +51,8 @@ import mage.counters.CounterType;
  */
 public class MaelstromDjinn extends CardImpl {
 
-    public MaelstromDjinn(UUID ownerId) {
-        super(ownerId, 39, "Maelstrom Djinn", Rarity.RARE, new CardType[]{CardType.CREATURE}, "{7}{U}");
-        this.expansionSetCode = "FUT";
+    public MaelstromDjinn(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{7}{U}");
         this.subtype.add("Djinn");
         this.power = new MageInt(5);
         this.toughness = new MageInt(6);

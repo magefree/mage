@@ -25,12 +25,12 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.lorwyn;
+package mage.cards.m;
 
 import java.util.UUID;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.abilities.TriggeredAbilityImpl;
 import mage.abilities.costs.mana.ManaCostsImpl;
 import mage.abilities.effects.common.CreateTokenEffect;
@@ -51,9 +51,8 @@ import mage.game.permanent.token.KithkinToken;
  */
 public class MilitiasPride extends CardImpl {
 
-    public MilitiasPride(UUID ownerId) {
-        super(ownerId, 30, "Militia's Pride", Rarity.RARE, new CardType[]{CardType.TRIBAL, CardType.ENCHANTMENT}, "{1}{W}");
-        this.expansionSetCode = "LRW";
+    public MilitiasPride(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.TRIBAL,CardType.ENCHANTMENT},"{1}{W}");
         this.subtype.add("Kithkin");
 
         // Whenever a creature you control attacks, you may pay {W}. If you do put a 1/1 white Kithkin Soldier creature token in play tapped and attacking

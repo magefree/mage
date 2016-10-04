@@ -25,16 +25,16 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.avacynrestored;
+package mage.cards.o;
 
 import java.util.HashSet;
 import java.util.Set;
 import java.util.UUID;
 
 import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.abilities.Ability;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.Zone;
 import mage.game.Game;
 import mage.game.stack.StackObject;
@@ -56,9 +56,8 @@ public class Outwit extends CardImpl {
 
     private static FilterSpell filter = new FilterSpell("spell that targets a player");
 
-    public Outwit(UUID ownerId) {
-        super(ownerId, 70, "Outwit", Rarity.COMMON, new CardType[]{CardType.INSTANT}, "{U}");
-        this.expansionSetCode = "AVR";
+    public Outwit(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.INSTANT},"{U}");
 
 
         // Counter target spell that targets a player.

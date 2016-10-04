@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.saviorsofkamigawa;
+package mage.cards.r;
 
 import java.util.UUID;
 import mage.MageInt;
@@ -34,9 +34,9 @@ import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.effects.common.FlipSourceEffect;
 import mage.abilities.effects.common.PreventAllDamageToAllEffect;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Duration;
-import mage.constants.Rarity;
 import mage.constants.Zone;
 import mage.filter.common.FilterControlledCreatureInPlay;
 import mage.game.Game;
@@ -50,9 +50,8 @@ import mage.players.Player;
  */
 public class RuneTailKitsuneAscendant extends CardImpl {
 
-    public RuneTailKitsuneAscendant(UUID ownerId) {
-        super(ownerId, 27, "Rune-Tail, Kitsune Ascendant", Rarity.RARE, new CardType[]{CardType.CREATURE}, "{2}{W}");
-        this.expansionSetCode = "SOK";
+    public RuneTailKitsuneAscendant(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{2}{W}");
         this.supertype.add("Legendary");
         this.subtype.add("Fox");
         this.subtype.add("Monk");

@@ -25,14 +25,14 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.portalthreekingdoms;
+package mage.cards.y;
 
 import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.common.CantBlockAbility;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.Rarity;
 
 /**
  *
@@ -40,9 +40,8 @@ import mage.constants.Rarity;
  */
 public class YellowScarvesTroops extends CardImpl {
 
-    public YellowScarvesTroops(UUID ownerId) {
-        super(ownerId, 127, "Yellow Scarves Troops", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{1}{R}");
-        this.expansionSetCode = "PTK";
+    public YellowScarvesTroops(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{1}{R}");
         this.subtype.add("Human");
         this.subtype.add("Soldier");
         this.power = new MageInt(2);

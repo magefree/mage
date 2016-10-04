@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.shardsofalara;
+package mage.cards.m;
 
 import java.util.UUID;
 
@@ -36,6 +36,7 @@ import mage.abilities.dynamicvalue.common.PermanentsOnBattlefieldCount;
 import mage.abilities.effects.common.continuous.BoostControlledEffect;
 import mage.abilities.effects.common.continuous.SetPowerToughnessSourceEffect;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.filter.common.FilterControlledPermanent;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.filter.predicate.mageobject.CardTypePredicate;
@@ -56,9 +57,8 @@ public class MasterOfEtherium extends CardImpl {
         filterBoosted.add(new ControllerPredicate(TargetController.YOU));
     }
 
-    public MasterOfEtherium(UUID ownerId) {
-        super(ownerId, 49, "Master of Etherium", Rarity.RARE, new CardType[]{CardType.ARTIFACT, CardType.CREATURE}, "{2}{U}");
-        this.expansionSetCode = "ALA";
+    public MasterOfEtherium(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.ARTIFACT,CardType.CREATURE},"{2}{U}");
         this.subtype.add("Vedalken");
         this.subtype.add("Wizard");
 

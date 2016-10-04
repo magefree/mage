@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.fatereforged;
+package mage.cards.s;
 
 import java.util.UUID;
 import mage.MageInt;
@@ -35,8 +35,8 @@ import mage.abilities.common.EntersBattlefieldTriggeredAbility;
 import mage.abilities.effects.common.CreateTokenEffect;
 import mage.abilities.effects.common.counter.AddCountersSourceEffect;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.counters.CounterType;
 import mage.game.permanent.token.SpiritWhiteToken;
 
@@ -46,9 +46,8 @@ import mage.game.permanent.token.SpiritWhiteToken;
  */
 public class SandsteppeOutcast extends CardImpl {
 
-    public SandsteppeOutcast(UUID ownerId) {
-        super(ownerId, 25, "Sandsteppe Outcast", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{2}{W}");
-        this.expansionSetCode = "FRF";
+    public SandsteppeOutcast(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{2}{W}");
         this.subtype.add("Human");
         this.subtype.add("Warrior");
         this.power = new MageInt(2);

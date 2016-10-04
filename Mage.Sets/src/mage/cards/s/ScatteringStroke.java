@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.commander;
+package mage.cards.s;
 
 import java.util.UUID;
 import mage.Mana;
@@ -36,9 +36,9 @@ import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.AddManaToManaPoolSourceControllerEffect;
 import mage.abilities.effects.common.ClashEffect;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Outcome;
-import mage.constants.Rarity;
 import mage.constants.TargetController;
 import mage.game.Game;
 import mage.game.stack.Spell;
@@ -51,9 +51,8 @@ import mage.target.TargetSpell;
  */
 public class ScatteringStroke extends CardImpl {
 
-    public ScatteringStroke(UUID ownerId) {
-        super(ownerId, 60, "Scattering Stroke", Rarity.UNCOMMON, new CardType[]{CardType.INSTANT}, "{2}{U}{U}");
-        this.expansionSetCode = "CMD";
+    public ScatteringStroke(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.INSTANT},"{2}{U}{U}");
 
         // Counter target spell. Clash with an opponent. If you win, at the beginning of your next main phase, you may add {X} to your mana pool, where X is that spell's converted mana cost.
         this.getSpellAbility().addEffect(new ScatteringStrokeEffect());

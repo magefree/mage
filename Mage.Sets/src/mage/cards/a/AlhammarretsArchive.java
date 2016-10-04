@@ -25,18 +25,18 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.magicorigins;
+package mage.cards.a;
 
 import java.util.UUID;
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.effects.ReplacementEffectImpl;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Duration;
 import mage.constants.Outcome;
 import mage.constants.PhaseStep;
-import mage.constants.Rarity;
 import mage.constants.Zone;
 import mage.game.Game;
 import mage.game.events.GameEvent;
@@ -49,9 +49,8 @@ import mage.watchers.common.CardsDrawnDuringDrawStepWatcher;
  */
 public class AlhammarretsArchive extends CardImpl {
 
-    public AlhammarretsArchive(UUID ownerId) {
-        super(ownerId, 221, "Alhammarret's Archive", Rarity.MYTHIC, new CardType[]{CardType.ARTIFACT}, "{5}");
-        this.expansionSetCode = "ORI";
+    public AlhammarretsArchive(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.ARTIFACT},"{5}");
         this.supertype.add("Legendary");
 
         // If you would gain life, you gain twice that much life instead.

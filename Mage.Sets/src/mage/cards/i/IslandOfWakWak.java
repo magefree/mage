@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.arabiannights;
+package mage.cards.i;
 
 import java.util.UUID;
 import mage.MageInt;
@@ -37,10 +37,10 @@ import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.continuous.SetPowerToughnessTargetEffect;
 import mage.abilities.keyword.FlyingAbility;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Duration;
 import mage.constants.Outcome;
-import mage.constants.Rarity;
 import mage.constants.Zone;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.filter.predicate.mageobject.AbilityPredicate;
@@ -60,9 +60,8 @@ public class IslandOfWakWak extends CardImpl {
         filterWithFlying.add(new AbilityPredicate(FlyingAbility.class));
     }
     
-    public IslandOfWakWak(UUID ownerId) {
-        super(ownerId, 89, "Island of Wak-Wak", Rarity.RARE, new CardType[]{CardType.LAND}, "");
-        this.expansionSetCode = "ARN";
+    public IslandOfWakWak(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.LAND},"");
 
         // {tap}: The power of target creature with flying becomes 0 until end of turn.
         Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new IslandOfWakWakEffect(), new TapSourceCost());

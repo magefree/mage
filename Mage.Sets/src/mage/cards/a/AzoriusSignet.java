@@ -25,18 +25,18 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.dissension;
+package mage.cards.a;
 
 import java.util.UUID;
 
 import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.Mana;
 import mage.abilities.Ability;
 import mage.abilities.costs.common.TapSourceCost;
 import mage.abilities.costs.mana.GenericManaCost;
 import mage.abilities.mana.SimpleManaAbility;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.Zone;
 
 /**
@@ -45,9 +45,8 @@ import mage.constants.Zone;
  */
 public class AzoriusSignet extends CardImpl {
 
-    public AzoriusSignet(UUID ownerId) {
-        super(ownerId, 159, "Azorius Signet", Rarity.COMMON, new CardType[]{CardType.ARTIFACT}, "{2}");
-        this.expansionSetCode = "DIS";
+    public AzoriusSignet(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.ARTIFACT},"{2}");
 
         // {1}, {tap}: Add {W}{U} to your mana pool.
         Ability ability = new SimpleManaAbility(Zone.BATTLEFIELD, new Mana(0, 0, 1, 1, 0, 0, 0, 0), new GenericManaCost(1));

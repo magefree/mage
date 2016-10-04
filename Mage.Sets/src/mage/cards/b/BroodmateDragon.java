@@ -26,7 +26,7 @@
 * or implied, of BetaSteward_at_googlemail.com.
 */
 
-package mage.sets.shardsofalara;
+package mage.cards.b;
 
 import java.util.UUID;
 import mage.MageInt;
@@ -34,8 +34,8 @@ import mage.abilities.common.EntersBattlefieldTriggeredAbility;
 import mage.abilities.effects.common.CreateTokenEffect;
 import mage.abilities.keyword.FlyingAbility;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.game.permanent.token.DragonToken;
 
 /**
@@ -46,9 +46,8 @@ public class BroodmateDragon extends CardImpl {
 
     private static DragonToken dragonToken = new DragonToken();
 
-    public BroodmateDragon(UUID ownerId) {
-        super(ownerId, 160, "Broodmate Dragon", Rarity.RARE, new CardType[]{CardType.CREATURE}, "{3}{B}{R}{G}");
-        this.expansionSetCode = "ALA";
+    public BroodmateDragon(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{3}{B}{R}{G}");
         this.subtype.add("Dragon");
 
 

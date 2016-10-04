@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.eventide;
+package mage.cards.r;
 
 import java.util.UUID;
 import mage.MageInt;
@@ -35,8 +35,8 @@ import mage.abilities.costs.common.TapSourceCost;
 import mage.abilities.costs.mana.ManaCostsImpl;
 import mage.abilities.effects.common.ReturnToHandTargetEffect;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.constants.Zone;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.filter.predicate.permanent.CounterAnyPredicate;
@@ -55,9 +55,8 @@ public class RazorfinAbolisher extends CardImpl {
         filter.add(new CounterAnyPredicate());
     }
 
-    public RazorfinAbolisher(UUID ownerId) {
-        super(ownerId, 28, "Razorfin Abolisher", Rarity.UNCOMMON, new CardType[]{CardType.CREATURE}, "{2}{U}");
-        this.expansionSetCode = "EVE";
+    public RazorfinAbolisher(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{2}{U}");
         this.subtype.add("Merfolk");
         this.subtype.add("Wizard");
 

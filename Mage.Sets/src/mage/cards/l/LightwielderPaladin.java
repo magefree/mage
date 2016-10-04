@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.magic2010;
+package mage.cards.l;
 
 import java.util.UUID;
 import mage.MageInt;
@@ -34,8 +34,8 @@ import mage.abilities.TriggeredAbilityImpl;
 import mage.abilities.effects.common.ExileTargetEffect;
 import mage.abilities.keyword.FirstStrikeAbility;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.constants.Zone;
 import mage.filter.FilterPermanent;
 import mage.filter.predicate.Predicates;
@@ -54,9 +54,8 @@ import mage.target.TargetPermanent;
  */
 public class LightwielderPaladin extends CardImpl {
 
-    public LightwielderPaladin(UUID ownerId) {
-        super(ownerId, 19, "Lightwielder Paladin", Rarity.RARE, new CardType[]{CardType.CREATURE}, "{3}{W}{W}");
-        this.expansionSetCode = "M10";
+    public LightwielderPaladin(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{3}{W}{W}");
         this.subtype.add("Human");
         this.subtype.add("Knight");
 

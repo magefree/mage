@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.saviorsofkamigawa;
+package mage.cards.t;
 
 import java.util.UUID;
 import mage.MageInt;
@@ -36,9 +36,9 @@ import mage.abilities.effects.common.ReturnToHandChosenControlledPermanentEffect
 import mage.abilities.effects.common.continuous.MaximumHandSizeControllerEffect;
 import mage.abilities.effects.common.continuous.MaximumHandSizeControllerEffect.HandSizeModification;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Duration;
-import mage.constants.Rarity;
 import mage.constants.TargetController;
 import mage.constants.Zone;
 import mage.filter.common.FilterControlledCreaturePermanent;
@@ -56,9 +56,8 @@ public class TrustedAdvisor extends CardImpl {
         filter.add(new ColorPredicate(ObjectColor.BLUE));
     }
 
-    public TrustedAdvisor(UUID ownerId) {
-        super(ownerId, 59, "Trusted Advisor", Rarity.UNCOMMON, new CardType[]{CardType.CREATURE}, "{U}");
-        this.expansionSetCode = "SOK";
+    public TrustedAdvisor(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{U}");
         this.subtype.add("Human");
         this.subtype.add("Advisor");
 

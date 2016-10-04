@@ -25,15 +25,15 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.timespiral;
+package mage.cards.s;
 
 import java.util.UUID;
 import mage.abilities.condition.common.MyMainPhaseCondition;
 import mage.abilities.decorator.ConditionalOneShotEffect;
 import mage.abilities.effects.common.DamageEverythingEffect;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.Rarity;
 
 /**
  *
@@ -41,9 +41,8 @@ import mage.constants.Rarity;
  */
 public class SulfurousBlast extends CardImpl {
 
-    public SulfurousBlast(UUID ownerId) {
-        super(ownerId, 180, "Sulfurous Blast", Rarity.UNCOMMON, new CardType[]{CardType.INSTANT}, "{2}{R}{R}");
-        this.expansionSetCode = "TSP";
+    public SulfurousBlast(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.INSTANT},"{2}{R}{R}");
 
         // Sulfurous Blast deals 2 damage to each creature and each player. If you cast this spell during your main phase, Sulfurous Blast deals 3 damage to each creature and each player instead.
         this.getSpellAbility().addEffect(new ConditionalOneShotEffect(

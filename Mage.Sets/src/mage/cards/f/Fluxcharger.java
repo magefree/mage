@@ -25,17 +25,17 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.dragonsmaze;
+package mage.cards.f;
 
 import java.util.UUID;
 
 import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.MageInt;
 import mage.abilities.common.SpellCastControllerTriggeredAbility;
 import mage.abilities.effects.common.continuous.SwitchPowerToughnessSourceEffect;
 import mage.abilities.keyword.FlyingAbility;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.Duration;
 import mage.filter.FilterSpell;
 import mage.filter.predicate.Predicates;
@@ -54,9 +54,8 @@ public class Fluxcharger extends CardImpl {
                 new CardTypePredicate(CardType.SORCERY)));
     }
 
-    public Fluxcharger(UUID ownerId) {
-        super(ownerId, 71, "Fluxcharger", Rarity.UNCOMMON, new CardType[]{CardType.CREATURE}, "{2}{U}{R}");
-        this.expansionSetCode = "DGM";
+    public Fluxcharger(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{2}{U}{R}");
         this.subtype.add("Weird");
 
         this.power = new MageInt(1);

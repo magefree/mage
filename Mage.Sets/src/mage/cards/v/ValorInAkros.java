@@ -25,15 +25,15 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.magicorigins;
+package mage.cards.v;
 
 import java.util.UUID;
 import mage.abilities.common.CreatureEntersBattlefieldTriggeredAbility;
 import mage.abilities.effects.common.continuous.BoostControlledEffect;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Duration;
-import mage.constants.Rarity;
 
 /**
  *
@@ -41,9 +41,8 @@ import mage.constants.Rarity;
  */
 public class ValorInAkros extends CardImpl {
 
-    public ValorInAkros(UUID ownerId) {
-        super(ownerId, 39, "Valor in Akros", Rarity.UNCOMMON, new CardType[]{CardType.ENCHANTMENT}, "{3}{W}");
-        this.expansionSetCode = "ORI";
+    public ValorInAkros(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.ENCHANTMENT},"{3}{W}");
 
         // Whenever a creature enters the battlefield under your control, creatures you control get +1/+1 until end of turn.
         this.addAbility(new CreatureEntersBattlefieldTriggeredAbility(new BoostControlledEffect(1,1,Duration.EndOfTurn)));        

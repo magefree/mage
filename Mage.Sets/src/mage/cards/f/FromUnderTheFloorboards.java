@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.shadowsoverinnistrad;
+package mage.cards.f;
 
 import java.util.UUID;
 import mage.abilities.Ability;
@@ -37,8 +37,8 @@ import mage.abilities.effects.common.CreateTokenEffect;
 import mage.abilities.effects.common.GainLifeEffect;
 import mage.abilities.keyword.MadnessAbility;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.game.Game;
 import mage.game.permanent.token.ZombieToken;
 
@@ -48,9 +48,8 @@ import mage.game.permanent.token.ZombieToken;
  */
 public class FromUnderTheFloorboards extends CardImpl {
 
-    public FromUnderTheFloorboards(UUID ownerId) {
-        super(ownerId, 111, "From Under the Floorboards", Rarity.RARE, new CardType[]{CardType.SORCERY}, "{3}{B}{B}");
-        this.expansionSetCode = "SOI";
+    public FromUnderTheFloorboards(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{3}{B}{B}");
 
         // Madness {X}{B}{B} <i>(If you discard this card discard it into exile. When you do cast it for its madness cost or put it into your graveyard.
         Ability ability = (new MadnessAbility(this, new ManaCostsImpl("{X}{B}{B}")));

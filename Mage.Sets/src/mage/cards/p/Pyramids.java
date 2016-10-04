@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.arabiannights;
+package mage.cards.p;
 
 import java.util.UUID;
 import mage.abilities.Ability;
@@ -36,9 +36,9 @@ import mage.abilities.effects.Effect;
 import mage.abilities.effects.common.DestroyTargetEffect;
 import mage.abilities.effects.common.PreventDamageToTargetEffect;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Duration;
-import mage.constants.Rarity;
 import mage.constants.Zone;
 import mage.filter.common.FilterEnchantmentPermanent;
 import mage.filter.predicate.ObjectPlayer;
@@ -61,9 +61,8 @@ public class Pyramids extends CardImpl {
         filter.add(new PyramidsPredicate());
     }
     
-    public Pyramids(UUID ownerId) {
-        super(ownerId, 81, "Pyramids", Rarity.RARE, new CardType[]{CardType.ARTIFACT}, "{6}");
-        this.expansionSetCode = "ARN";
+    public Pyramids(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.ARTIFACT},"{6}");
 
         // {2}: Choose one - Destroy target Aura attached to a land; 
         Effect effect = new DestroyTargetEffect();

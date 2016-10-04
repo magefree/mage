@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.tempest;
+package mage.cards.d;
 
 import java.util.UUID;
 import mage.MageInt;
@@ -34,9 +34,9 @@ import mage.abilities.common.SimpleEvasionAbility;
 import mage.abilities.effects.common.combat.CantBeBlockedByCreaturesSourceEffect;
 import mage.abilities.keyword.ShadowAbility;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Duration;
-import mage.constants.Rarity;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.filter.predicate.mageobject.ColorPredicate;
 
@@ -51,9 +51,8 @@ public class DauthiHorror extends CardImpl {
         filter.add(new ColorPredicate(ObjectColor.WHITE));
     }
 
-    public DauthiHorror(UUID ownerId) {
-        super(ownerId, 16, "Dauthi Horror", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{1}{B}");
-        this.expansionSetCode = "TMP";
+    public DauthiHorror(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{1}{B}");
         this.subtype.add("Dauthi");
         this.subtype.add("Horror");
 

@@ -26,18 +26,18 @@
  *  or implied, of BetaSteward_at_googlemail.com.
  */
 
-package mage.sets.darksteel;
+package mage.cards.v;
 
 import java.util.UUID;
 
 import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.costs.mana.GenericManaCost;
 import mage.abilities.effects.common.UntapTargetEffect;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.Zone;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.filter.predicate.mageobject.CardTypePredicate;
@@ -54,9 +54,8 @@ public class VoltaicConstruct extends CardImpl {
         filter.add(new CardTypePredicate(CardType.ARTIFACT));
     }
 
-    public VoltaicConstruct(UUID ownerId) {
-        super(ownerId, 156, "Voltaic Construct", Rarity.UNCOMMON, new CardType[]{CardType.ARTIFACT, CardType.CREATURE}, "{4}");
-        this.expansionSetCode = "DST";
+    public VoltaicConstruct(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.ARTIFACT,CardType.CREATURE},"{4}");
         this.subtype.add("Golem");
         this.subtype.add("Construct");
         this.power = new MageInt(2);

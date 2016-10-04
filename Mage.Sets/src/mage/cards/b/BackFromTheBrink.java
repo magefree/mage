@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.innistrad;
+package mage.cards.b;
 
 import java.util.UUID;
 import mage.abilities.Ability;
@@ -36,9 +36,9 @@ import mage.abilities.effects.Effect;
 import mage.abilities.effects.common.PutTokenOntoBattlefieldCopyTargetEffect;
 import mage.cards.Card;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Outcome;
-import mage.constants.Rarity;
 import mage.constants.Zone;
 import mage.filter.common.FilterCreatureCard;
 import mage.game.Game;
@@ -53,9 +53,8 @@ import mage.target.targetpointer.FixedTarget;
  */
 public class BackFromTheBrink extends CardImpl {
 
-    public BackFromTheBrink(UUID ownerId) {
-        super(ownerId, 44, "Back from the Brink", Rarity.RARE, new CardType[]{CardType.ENCHANTMENT}, "{4}{U}{U}");
-        this.expansionSetCode = "ISD";
+    public BackFromTheBrink(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.ENCHANTMENT},"{4}{U}{U}");
 
         // Exile a creature card from your graveyard and pay its mana cost: Put a token onto the battlefield that's a copy of that card. Activate this ability only any time you could cast a sorcery.
         Effect effect = new PutTokenOntoBattlefieldCopyTargetEffect();

@@ -25,14 +25,14 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.darkascension;
+package mage.cards.h;
 
 import java.util.UUID;
 import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.abilities.effects.common.DrawCardTargetEffect;
 import mage.abilities.effects.common.LoseLifeTargetEffect;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.target.TargetPlayer;
 
 /**
@@ -41,9 +41,8 @@ import mage.target.TargetPlayer;
  */
 public class HarrowingJourney extends CardImpl {
 
-    public HarrowingJourney(UUID ownerId) {
-        super(ownerId, 67, "Harrowing Journey", Rarity.UNCOMMON, new CardType[]{CardType.SORCERY}, "{4}{B}");
-        this.expansionSetCode = "DKA";
+    public HarrowingJourney(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{4}{B}");
 
 
         // Target player draws three cards and loses 3 life.

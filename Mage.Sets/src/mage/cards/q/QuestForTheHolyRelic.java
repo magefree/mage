@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.zendikar;
+package mage.cards.q;
 
 import java.util.UUID;
 import mage.abilities.Ability;
@@ -37,9 +37,9 @@ import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.counter.AddCountersSourceEffect;
 import mage.cards.Card;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Outcome;
-import mage.constants.Rarity;
 import mage.constants.Zone;
 import mage.counters.CounterType;
 import mage.filter.FilterCard;
@@ -65,9 +65,8 @@ public class QuestForTheHolyRelic extends CardImpl {
         filter.add(new CardTypePredicate(CardType.CREATURE));
     }
 
-    public QuestForTheHolyRelic(UUID ownerId) {
-        super(ownerId, 33, "Quest for the Holy Relic", Rarity.UNCOMMON, new CardType[]{CardType.ENCHANTMENT}, "{W}");
-        this.expansionSetCode = "ZEN";
+    public QuestForTheHolyRelic(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.ENCHANTMENT},"{W}");
 
         // Whenever you cast a creature spell, you may put a quest counter on Quest for the Holy Relic.
         this.addAbility(new SpellCastControllerTriggeredAbility(new AddCountersSourceEffect(CounterType.QUEST.createInstance()), filter, true));

@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.lorwyn;
+package mage.cards.a;
 
 import java.util.UUID;
 import mage.abilities.Ability;
@@ -35,10 +35,10 @@ import mage.abilities.effects.common.DrawCardSourceControllerEffect;
 import mage.abilities.effects.common.continuous.BecomesBasicLandTargetEffect;
 import mage.abilities.effects.common.counter.AddCountersTargetEffect;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Duration;
 import mage.constants.Layer;
-import mage.constants.Rarity;
 import mage.constants.SubLayer;
 import mage.counters.CounterType;
 import mage.filter.common.FilterControlledPermanent;
@@ -59,9 +59,8 @@ public class AquitectsWill extends CardImpl {
         filter.add(new SubtypePredicate("Merfolk"));
     }
 
-    public AquitectsWill(UUID ownerId) {
-        super(ownerId, 52, "Aquitect's Will", Rarity.COMMON, new CardType[]{CardType.TRIBAL, CardType.SORCERY}, "{U}");
-        this.expansionSetCode = "LRW";
+    public AquitectsWill(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.TRIBAL,CardType.SORCERY},"{U}");
         this.subtype.add("Merfolk");
 
         // Put a flood counter on target land.

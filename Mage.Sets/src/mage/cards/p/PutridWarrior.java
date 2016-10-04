@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.apocalypse;
+package mage.cards.p;
 
 import java.util.UUID;
 import mage.MageInt;
@@ -36,9 +36,9 @@ import mage.abilities.effects.Effect;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.LoseLifeAllPlayersEffect;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Outcome;
-import mage.constants.Rarity;
 import mage.constants.Zone;
 import mage.game.Game;
 import mage.game.events.GameEvent.EventType;
@@ -52,9 +52,8 @@ import mage.players.Player;
  */
 public class PutridWarrior extends CardImpl {
 
-    public PutridWarrior(UUID ownerId) {
-        super(ownerId, 117, "Putrid Warrior", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{W}{B}");
-        this.expansionSetCode = "APC";
+    public PutridWarrior(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{W}{B}");
         this.subtype.add("Zombie");
         this.subtype.add("Soldier");
         this.subtype.add("Warrior");

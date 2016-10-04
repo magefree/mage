@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.shadowmoor;
+package mage.cards.t;
 
 import java.util.UUID;
 import mage.abilities.Ability;
@@ -38,10 +38,10 @@ import mage.abilities.effects.common.continuous.GainAbilityTargetEffect;
 import mage.abilities.keyword.TrampleAbility;
 import mage.abilities.keyword.WitherAbility;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Duration;
 import mage.constants.Outcome;
-import mage.constants.Rarity;
 import mage.constants.Zone;
 import mage.game.Game;
 import mage.game.events.GameEvent;
@@ -56,9 +56,8 @@ import mage.target.targetpointer.FixedTarget;
  */
 public class TowerAbove extends CardImpl {
 
-    public TowerAbove(UUID ownerId) {
-        super(ownerId, 131, "Tower Above", Rarity.UNCOMMON, new CardType[]{CardType.SORCERY}, "{2/G}{2/G}{2/G}");
-        this.expansionSetCode = "SHM";
+    public TowerAbove(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{2/G}{2/G}{2/G}");
 
 
         // <i>({2G} can be paid with any two mana or with {G}. This card's converted mana cost is 6.)</i>

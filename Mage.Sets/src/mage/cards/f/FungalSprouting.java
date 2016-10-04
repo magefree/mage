@@ -25,15 +25,15 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.magic2013;
+package mage.cards.f;
 
 import java.util.UUID;
 
 import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.abilities.Ability;
 import mage.abilities.effects.OneShotEffect;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.Outcome;
 import mage.constants.TargetController;
 import mage.filter.FilterPermanent;
@@ -51,9 +51,8 @@ import mage.players.Player;
  */
 public class FungalSprouting extends CardImpl {
 
-    public FungalSprouting(UUID ownerId) {
-        super(ownerId, 173, "Fungal Sprouting", Rarity.UNCOMMON, new CardType[]{CardType.SORCERY}, "{3}{G}");
-        this.expansionSetCode = "M13";
+    public FungalSprouting(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{3}{G}");
 
 
         // Put X 1/1 green Saproling creature tokens onto the battlefield, where X is the greatest power among creatures you control.

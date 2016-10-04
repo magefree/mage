@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.worldwake;
+package mage.cards.q;
 
 import java.util.UUID;
 import mage.abilities.Ability;
@@ -34,11 +34,11 @@ import mage.abilities.common.BeginningOfUpkeepTriggeredAbility;
 import mage.abilities.effects.OneShotEffect;
 import mage.cards.Card;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.cards.Cards;
 import mage.cards.CardsImpl;
 import mage.constants.CardType;
 import mage.constants.Outcome;
-import mage.constants.Rarity;
 import mage.constants.TargetController;
 import mage.constants.Zone;
 import mage.counters.CounterType;
@@ -58,9 +58,8 @@ import mage.target.common.TargetCardInHand;
  */
 public class QuestForUlasTemple extends CardImpl {
 
-    public QuestForUlasTemple(UUID ownerId) {
-        super(ownerId, 35, "Quest for Ula's Temple", Rarity.RARE, new CardType[]{CardType.ENCHANTMENT}, "{U}");
-        this.expansionSetCode = "WWK";
+    public QuestForUlasTemple(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.ENCHANTMENT},"{U}");
 
         // At the beginning of your upkeep, you may look at the top card of your library. If it's a creature card, you may reveal it and put a quest counter on Quest for Ula's Temple.
         this.addAbility(new BeginningOfUpkeepTriggeredAbility(Zone.BATTLEFIELD, new QuestForUlasTempleEffect(), TargetController.YOU, true));

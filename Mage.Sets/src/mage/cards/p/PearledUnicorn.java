@@ -25,13 +25,13 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.fifthedition;
+package mage.cards.p;
 
 import java.util.UUID;
 import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.MageInt;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 
 /**
  *
@@ -39,9 +39,8 @@ import mage.cards.CardImpl;
  */
 public class PearledUnicorn extends CardImpl {
 
-    public PearledUnicorn(UUID ownerId) {
-        super(ownerId, 326, "Pearled Unicorn", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{2}{W}");
-        this.expansionSetCode = "5ED";
+    public PearledUnicorn(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{2}{W}");
         this.subtype.add("Unicorn");
 
         this.power = new MageInt(2);

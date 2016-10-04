@@ -25,18 +25,18 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.ravnica;
+package mage.cards.h;
 
 import java.util.UUID;
 
 import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.EntersBattlefieldTriggeredAbility;
 import mage.abilities.effects.common.CreateTokenTargetEffect;
 import mage.abilities.keyword.FlyingAbility;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.game.permanent.token.Token;
 import mage.target.Target;
 import mage.target.common.TargetOpponent;
@@ -46,9 +46,8 @@ import mage.target.common.TargetOpponent;
  */
 public class HuntedLammasu extends CardImpl {
 
-    public HuntedLammasu(UUID ownerId) {
-        super(ownerId, 22, "Hunted Lammasu", Rarity.RARE, new CardType[]{CardType.CREATURE}, "{2}{W}{W}");
-        this.expansionSetCode = "RAV";
+    public HuntedLammasu(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{2}{W}{W}");
         this.subtype.add("Lammasu");
 
         this.power = new MageInt(5);

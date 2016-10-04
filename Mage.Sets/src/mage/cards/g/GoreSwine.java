@@ -25,13 +25,13 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.fatereforged;
+package mage.cards.g;
 
 import java.util.UUID;
 import mage.MageInt;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.Rarity;
 
 /**
  *
@@ -39,9 +39,8 @@ import mage.constants.Rarity;
  */
 public class GoreSwine extends CardImpl {
 
-    public GoreSwine(UUID ownerId) {
-        super(ownerId, 103, "Gore Swine", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{2}{R}");
-        this.expansionSetCode = "FRF";
+    public GoreSwine(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{2}{R}");
         this.subtype.add("Boar");
         this.power = new MageInt(4);
         this.toughness = new MageInt(1);

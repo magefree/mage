@@ -25,17 +25,17 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.zendikar;
+package mage.cards.h;
 
 import java.util.UUID;
 import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.EntersBattlefieldTriggeredAbility;
 import mage.abilities.effects.common.DestroyTargetEffect;
 import mage.abilities.keyword.IntimidateAbility;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.filter.predicate.mageobject.SubtypePredicate;
 import mage.target.common.TargetCreaturePermanent;
@@ -52,9 +52,8 @@ public class HaloHunter extends CardImpl {
         filter.add(new SubtypePredicate("Angel"));
     }
 
-    public HaloHunter(UUID ownerId) {
-        super(ownerId, 96, "Halo Hunter", Rarity.RARE, new CardType[]{CardType.CREATURE}, "{2}{B}{B}{B}");
-        this.expansionSetCode = "ZEN";
+    public HaloHunter(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{2}{B}{B}{B}");
         this.subtype.add("Demon");
 
         this.power = new MageInt(6);

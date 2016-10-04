@@ -26,14 +26,14 @@
  *  or implied, of BetaSteward_at_googlemail.com.
  */
 
-package mage.sets.magic2010;
+package mage.cards.k;
 
 import java.util.UUID;
 import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.MageInt;
 import mage.abilities.keyword.FlyingAbility;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 
 /**
  *
@@ -41,9 +41,8 @@ import mage.cards.CardImpl;
  */
 public class KelinoreBat extends CardImpl {
 
-    public KelinoreBat(UUID ownerId) {
-        super(ownerId, 101, "Kelinore Bat", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{2}{B}");
-        this.expansionSetCode = "M10";
+    public KelinoreBat(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{2}{B}");
         this.subtype.add("Bat");
 
         this.power = new MageInt(2);

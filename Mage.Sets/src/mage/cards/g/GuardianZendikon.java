@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.worldwake;
+package mage.cards.g;
 
 import java.util.UUID;
 
@@ -40,6 +40,7 @@ import mage.abilities.effects.common.continuous.BecomesCreatureAttachedEffect;
 import mage.abilities.keyword.DefenderAbility;
 import mage.abilities.keyword.EnchantAbility;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.game.permanent.token.Token;
 import mage.target.TargetPermanent;
 import mage.target.common.TargetLandPermanent;
@@ -50,9 +51,8 @@ import mage.target.common.TargetLandPermanent;
  */
 public class GuardianZendikon extends CardImpl {
 
-    public GuardianZendikon(UUID ownerId) {
-        super(ownerId, 6, "Guardian Zendikon", Rarity.COMMON, new CardType[]{CardType.ENCHANTMENT}, "{2}{W}");
-        this.expansionSetCode = "WWK";
+    public GuardianZendikon(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.ENCHANTMENT},"{2}{W}");
         this.subtype.add("Aura");
 
 

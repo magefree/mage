@@ -25,14 +25,14 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.riseoftheeldrazi;
+package mage.cards.s;
 
 import java.util.UUID;
 import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.abilities.effects.common.DamageTargetEffect;
 import mage.abilities.keyword.ReboundAbility;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.target.common.TargetCreatureOrPlayer;
 
 /**
@@ -41,9 +41,8 @@ import mage.target.common.TargetCreatureOrPlayer;
  */
 public class Staggershock extends CardImpl {
 
-    public Staggershock(UUID ownerId) {
-        super(ownerId, 166, "Staggershock", Rarity.COMMON, new CardType[]{CardType.INSTANT}, "{2}{R}");
-        this.expansionSetCode = "ROE";
+    public Staggershock(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.INSTANT},"{2}{R}");
 
         this.getSpellAbility().addTarget(new TargetCreatureOrPlayer());
         this.getSpellAbility().addEffect(new DamageTargetEffect(2));

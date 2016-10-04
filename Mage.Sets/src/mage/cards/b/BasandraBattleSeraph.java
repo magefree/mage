@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.commander;
+package mage.cards.b;
 
 import java.util.UUID;
 import mage.MageInt;
@@ -39,10 +39,10 @@ import mage.abilities.effects.common.continuous.GainAbilityTargetEffect;
 import mage.abilities.keyword.AttacksThisTurnMarkerAbility;
 import mage.abilities.keyword.FlyingAbility;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Duration;
 import mage.constants.Outcome;
-import mage.constants.Rarity;
 import mage.constants.TurnPhase;
 import mage.constants.Zone;
 import mage.game.Game;
@@ -55,9 +55,8 @@ import mage.target.common.TargetCreaturePermanent;
  */
 public class BasandraBattleSeraph extends CardImpl {
 
-    public BasandraBattleSeraph(UUID ownerId) {
-        super(ownerId, 184, "Basandra, Battle Seraph", Rarity.RARE, new CardType[]{CardType.CREATURE}, "{3}{R}{W}");
-        this.expansionSetCode = "CMD";
+    public BasandraBattleSeraph(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{3}{R}{W}");
         this.supertype.add("Legendary");
         this.subtype.add("Angel");
 

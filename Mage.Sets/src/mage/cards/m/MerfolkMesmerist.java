@@ -26,12 +26,11 @@
  *  or implied, of BetaSteward_at_googlemail.com.
  */
 
-package mage.sets.magic2012;
+package mage.cards.m;
 
 import java.util.UUID;
 
 import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleActivatedAbility;
@@ -39,6 +38,7 @@ import mage.abilities.costs.common.TapSourceCost;
 import mage.abilities.costs.mana.ColoredManaCost;
 import mage.abilities.effects.common.PutLibraryIntoGraveTargetEffect;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.ColoredManaSymbol;
 import mage.constants.Zone;
 import mage.target.TargetPlayer;
@@ -48,9 +48,8 @@ import mage.target.TargetPlayer;
  */
 public class MerfolkMesmerist extends CardImpl {
 
-    public MerfolkMesmerist(UUID ownerId) {
-        super(ownerId, 66, "Merfolk Mesmerist", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{1}{U}");
-        this.expansionSetCode = "M12";
+    public MerfolkMesmerist(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{1}{U}");
         this.subtype.add("Merfolk");
         this.subtype.add("Wizard");
 

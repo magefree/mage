@@ -25,11 +25,10 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.urzasdestiny;
+package mage.cards.b;
 
 import java.util.UUID;
 import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.constants.Zone;
 import mage.MageInt;
 import mage.abilities.common.SimpleStaticAbility;
@@ -38,6 +37,7 @@ import mage.abilities.decorator.ConditionalRestrictionEffect;
 import mage.abilities.effects.Effect;
 import mage.abilities.effects.common.combat.CantBeBlockedSourceEffect;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.filter.FilterPermanent;
 import mage.filter.predicate.mageobject.CardTypePredicate;
 
@@ -52,9 +52,8 @@ public class BubblingBeebles extends CardImpl {
         filter.add(new CardTypePredicate(CardType.ENCHANTMENT));
     }
 
-    public BubblingBeebles(UUID ownerId) {
-        super(ownerId, 29, "Bubbling Beebles", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{4}{U}");
-        this.expansionSetCode = "UDS";
+    public BubblingBeebles(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{4}{U}");
         this.subtype.add("Beeble");
 
         this.power = new MageInt(3);

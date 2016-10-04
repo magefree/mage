@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.starwars;
+package mage.cards.i;
 
 import java.util.UUID;
 import mage.abilities.Ability;
@@ -37,8 +37,8 @@ import mage.abilities.effects.common.CreateTokenEffect;
 import mage.abilities.effects.common.GainLifeEffect;
 import mage.abilities.keyword.FirstStrikeAbility;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.constants.TargetController;
 import mage.game.permanent.token.Token;
 import mage.watchers.common.LifeLossOtherFromCombatWatcher;
@@ -49,9 +49,8 @@ import mage.watchers.common.LifeLossOtherFromCombatWatcher;
  */
 public class IronFistOfTheEmpire extends CardImpl {
 
-    public IronFistOfTheEmpire(UUID ownerId) {
-        super(ownerId, 202, "Iron Fist of the Empire", Rarity.RARE, new CardType[]{CardType.ENCHANTMENT}, "{U}{B}{R}");
-        this.expansionSetCode = "SWS";
+    public IronFistOfTheEmpire(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.ENCHANTMENT},"{U}{B}{R}");
 
         // <i>Hate</i> &mdash; At the beggining of each end step, if opponent lost life from a source other than combat damage this turn, you gain 1 life and create a 2/2 red Soldier creature token with first strike name Royal Guard.
         TriggeredAbility triggeredAbility = new BeginningOfEndStepTriggeredAbility(new GainLifeEffect(1), TargetController.ANY, false);

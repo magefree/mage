@@ -25,15 +25,15 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.commander2013;
+package mage.cards.t;
 
 import java.util.UUID;
 import mage.abilities.Ability;
 import mage.abilities.effects.OneShotEffect;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Outcome;
-import mage.constants.Rarity;
 import mage.counters.Counter;
 import mage.counters.CounterType;
 import mage.filter.common.FilterCreaturePermanent;
@@ -47,9 +47,8 @@ import mage.players.Player;
  */
 public class TemptWithGlory extends CardImpl {
 
-    public TemptWithGlory(UUID ownerId) {
-        super(ownerId, 24, "Tempt with Glory", Rarity.RARE, new CardType[]{CardType.SORCERY}, "{5}{W}");
-        this.expansionSetCode = "C13";
+    public TemptWithGlory(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{5}{W}");
 
 
         // Tempting offer - Put a +1/+1 counter on each creature you control. Each opponent may put a +1/+1 counter on each creature he or she controls. For each opponent who does, put a +1/+1 counter on each creature you control.

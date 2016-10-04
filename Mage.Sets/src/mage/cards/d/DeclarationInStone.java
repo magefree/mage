@@ -25,16 +25,16 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.shadowsoverinnistrad;
+package mage.cards.d;
 
 import java.util.UUID;
 import mage.MageObject;
 import mage.abilities.Ability;
 import mage.abilities.effects.OneShotEffect;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Outcome;
-import mage.constants.Rarity;
 import mage.constants.Zone;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.filter.predicate.Predicates;
@@ -52,9 +52,8 @@ import mage.target.common.TargetCreaturePermanent;
  */
 public class DeclarationInStone extends CardImpl {
     
-    public DeclarationInStone(UUID ownerId) {
-        super(ownerId, 12, "Declaration in Stone", Rarity.RARE, new CardType[]{CardType.SORCERY}, "{1}{W}");
-        this.expansionSetCode = "SOI";
+    public DeclarationInStone(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{1}{W}");
 
         // Exile target creature and all other creatures its controller controls with the same name as that creature.
         // That player investigates for each nontoken creature exiled this way.

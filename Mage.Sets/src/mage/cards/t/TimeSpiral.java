@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.urzassaga;
+package mage.cards.t;
 
 import java.util.UUID;
 import mage.abilities.Ability;
@@ -36,9 +36,9 @@ import mage.abilities.effects.common.ExileSpellEffect;
 import mage.abilities.effects.common.UntapLandsEffect;
 import mage.cards.Card;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Outcome;
-import mage.constants.Rarity;
 import mage.constants.Zone;
 import mage.game.Game;
 import mage.players.Player;
@@ -49,9 +49,8 @@ import mage.players.Player;
  */
 public class TimeSpiral extends CardImpl {
 
-    public TimeSpiral(UUID ownerId) {
-        super(ownerId, 103, "Time Spiral", Rarity.RARE, new CardType[]{CardType.SORCERY}, "{4}{U}{U}");
-        this.expansionSetCode = "USG";
+    public TimeSpiral(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{4}{U}{U}");
 
         // Exile Time Spiral. Each player shuffles his or her graveyard and hand into his or her library, then draws seven cards. You untap up to six lands.
         this.getSpellAbility().addEffect(ExileSpellEffect.getInstance());

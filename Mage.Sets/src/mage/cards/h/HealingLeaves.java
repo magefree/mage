@@ -25,16 +25,16 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.planarchaos;
+package mage.cards.h;
 
 import java.util.UUID;
 import mage.abilities.Mode;
 import mage.abilities.effects.common.GainLifeTargetEffect;
 import mage.abilities.effects.common.PreventDamageToTargetEffect;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Duration;
-import mage.constants.Rarity;
 import mage.target.TargetPlayer;
 import mage.target.common.TargetCreatureOrPlayer;
 
@@ -44,9 +44,8 @@ import mage.target.common.TargetCreatureOrPlayer;
  */
 public class HealingLeaves extends CardImpl {
 
-    public HealingLeaves(UUID ownerId) {
-        super(ownerId, 150, "Healing Leaves", Rarity.COMMON, new CardType[]{CardType.INSTANT}, "{G}");
-        this.expansionSetCode = "PLC";
+    public HealingLeaves(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.INSTANT},"{G}");
 
         // Choose one - Target player gains 3 life; or prevent the next 3 damage that would be dealt to target creature or player this turn.
         this.getSpellAbility().addEffect(new GainLifeTargetEffect(3));

@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.scourge;
+package mage.cards.c;
 
 import java.util.UUID;
 import mage.MageInt;
@@ -35,9 +35,9 @@ import mage.abilities.costs.mana.ManaCostsImpl;
 import mage.abilities.effects.common.continuous.BoostTargetEffect;
 import mage.abilities.effects.common.counter.AddCountersSourceEffect;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Duration;
-import mage.constants.Rarity;
 import mage.constants.Zone;
 import mage.counters.CounterType;
 import mage.target.common.TargetCreaturePermanent;
@@ -48,9 +48,8 @@ import mage.target.common.TargetCreaturePermanent;
  */
 public class ConsumptiveGoo extends CardImpl {
 
-    public ConsumptiveGoo(UUID ownerId) {
-        super(ownerId, 62, "Consumptive Goo", Rarity.RARE, new CardType[]{CardType.CREATURE}, "{B}{B}");
-        this.expansionSetCode = "SCG";
+    public ConsumptiveGoo(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{B}{B}");
         this.subtype.add("Ooze");
         this.power = new MageInt(1);
         this.toughness = new MageInt(1);

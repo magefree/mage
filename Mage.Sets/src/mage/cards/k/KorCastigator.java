@@ -25,16 +25,16 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.battleforzendikar;
+package mage.cards.k;
 
 import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.common.SimpleEvasionAbility;
 import mage.abilities.effects.common.combat.CantBeBlockedByCreaturesSourceEffect;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Duration;
-import mage.constants.Rarity;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.filter.predicate.mageobject.SubtypePredicate;
 
@@ -51,9 +51,8 @@ public class KorCastigator extends CardImpl {
         FILTER.add(new SubtypePredicate("Scion"));
     }
 
-    public KorCastigator(UUID ownerId) {
-        super(ownerId, 35, "Kor Castigator", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{1}{W}");
-        this.expansionSetCode = "BFZ";
+    public KorCastigator(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{1}{W}");
         this.subtype.add("Kor");
         this.subtype.add("Wizard");
         this.subtype.add("Ally");

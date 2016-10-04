@@ -25,12 +25,11 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.shadowmoor;
+package mage.cards.p;
 
 import java.util.UUID;
 
 import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.constants.Zone;
 import mage.abilities.Ability;
 import mage.abilities.common.EntersBattlefieldAllTriggeredAbility;
@@ -40,6 +39,7 @@ import mage.abilities.effects.common.AttachEffect;
 import mage.abilities.effects.common.combat.CantBlockAttackActivateAttachedEffect;
 import mage.abilities.keyword.EnchantAbility;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.Outcome;
 import mage.constants.SetTargetPointer;
 import mage.constants.TargetController;
@@ -64,9 +64,8 @@ public class PrisonTerm extends CardImpl {
         filter.add(new ControllerPredicate(TargetController.OPPONENT));
     }
 
-    public PrisonTerm(UUID ownerId) {
-        super(ownerId, 18, "Prison Term", Rarity.UNCOMMON, new CardType[]{CardType.ENCHANTMENT}, "{1}{W}{W}");
-        this.expansionSetCode = "SHM";
+    public PrisonTerm(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.ENCHANTMENT},"{1}{W}{W}");
         this.subtype.add("Aura");
 
 

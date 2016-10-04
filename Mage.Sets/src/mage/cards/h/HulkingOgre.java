@@ -25,14 +25,14 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.starter1999;
+package mage.cards.h;
 
 import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.common.CantBlockAbility;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.Rarity;
 
 /**
  *
@@ -40,9 +40,8 @@ import mage.constants.Rarity;
  */
 public class HulkingOgre extends CardImpl {
 
-    public HulkingOgre(UUID ownerId) {
-        super(ownerId, 108, "Hulking Ogre", Rarity.UNCOMMON, new CardType[]{CardType.CREATURE}, "{2}{R}");
-        this.expansionSetCode = "S99";
+    public HulkingOgre(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{2}{R}");
         this.subtype.add("Ogre");
         this.power = new MageInt(3);
         this.toughness = new MageInt(3);

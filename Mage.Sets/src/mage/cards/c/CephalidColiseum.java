@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.odyssey;
+package mage.cards.c;
 
 import java.util.UUID;
 import mage.abilities.Ability;
@@ -38,9 +38,9 @@ import mage.abilities.effects.common.DamageControllerEffect;
 import mage.abilities.effects.common.DrawDiscardTargetEffect;
 import mage.abilities.mana.BlueManaAbility;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.AbilityWord;
 import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.constants.Zone;
 import mage.target.TargetPlayer;
 
@@ -50,9 +50,8 @@ import mage.target.TargetPlayer;
  */
 public class CephalidColiseum extends CardImpl {
 
-    public CephalidColiseum(UUID ownerId) {
-        super(ownerId, 317, "Cephalid Coliseum", Rarity.UNCOMMON, new CardType[]{CardType.LAND}, "");
-        this.expansionSetCode = "ODY";
+    public CephalidColiseum(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.LAND},"");
 
         // {tap}: Add {U} to your mana pool. Cephalid Coliseum deals 1 damage to you.
         Ability manaAbility = new BlueManaAbility();

@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.fatereforged;
+package mage.cards.s;
 
 import java.util.UUID;
 import mage.MageInt;
@@ -34,8 +34,8 @@ import mage.abilities.common.EntersBattlefieldTriggeredAbility;
 import mage.abilities.effects.common.ReturnToHandTargetEffect;
 import mage.abilities.keyword.DelveAbility;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.filter.common.FilterCreatureCard;
 import mage.target.common.TargetCardInYourGraveyard;
 
@@ -45,9 +45,8 @@ import mage.target.common.TargetCardInYourGraveyard;
  */
 public class SibsigMuckdraggers extends CardImpl {
 
-    public SibsigMuckdraggers(UUID ownerId) {
-        super(ownerId, 83, "Sibsig Muckdraggers", Rarity.UNCOMMON, new CardType[]{CardType.CREATURE}, "{8}{B}");
-        this.expansionSetCode = "FRF";
+    public SibsigMuckdraggers(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{8}{B}");
         this.subtype.add("Zombie");
         this.power = new MageInt(3);
         this.toughness = new MageInt(6);

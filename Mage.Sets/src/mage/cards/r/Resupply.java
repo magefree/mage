@@ -25,14 +25,14 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.dragonsoftarkir;
+package mage.cards.r;
 
 import java.util.UUID;
 import mage.abilities.effects.common.DrawCardSourceControllerEffect;
 import mage.abilities.effects.common.GainLifeEffect;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.Rarity;
 
 /**
  *
@@ -40,9 +40,8 @@ import mage.constants.Rarity;
  */
 public class Resupply extends CardImpl {
 
-    public Resupply(UUID ownerId) {
-        super(ownerId, 32, "Resupply", Rarity.COMMON, new CardType[]{CardType.INSTANT}, "{5}{W}");
-        this.expansionSetCode = "DTK";
+    public Resupply(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.INSTANT},"{5}{W}");
 
         // You gain 6 life.
         this.getSpellAbility().addEffect(new GainLifeEffect(6));

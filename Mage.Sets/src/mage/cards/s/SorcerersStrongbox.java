@@ -26,12 +26,11 @@
  *  or implied, of BetaSteward_at_googlemail.com.
  */
 
-package mage.sets.magic2011;
+package mage.cards.s;
 
 import java.util.UUID;
 import mage.constants.CardType;
 import mage.constants.Outcome;
-import mage.constants.Rarity;
 import mage.constants.Zone;
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleActivatedAbility;
@@ -39,6 +38,7 @@ import mage.abilities.costs.common.TapSourceCost;
 import mage.abilities.costs.mana.GenericManaCost;
 import mage.abilities.effects.OneShotEffect;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.players.Player;
@@ -49,9 +49,8 @@ import mage.players.Player;
  */
 public class SorcerersStrongbox extends CardImpl {
 
-    public SorcerersStrongbox(UUID ownerId) {
-        super(ownerId, 213, "Sorcerer's Strongbox", Rarity.UNCOMMON, new CardType[]{CardType.ARTIFACT}, "{4}");
-        this.expansionSetCode = "M11";
+    public SorcerersStrongbox(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.ARTIFACT},"{4}");
         Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new SorcerersStrongboxEffect(), new TapSourceCost());
         ability.addManaCost(new GenericManaCost(2));
         this.addAbility(ability);

@@ -25,11 +25,10 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.ninthedition;
+package mage.cards.b;
 
 import java.util.UUID;
 import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.constants.TargetController;
 import mage.abilities.Ability;
 import mage.abilities.TriggeredAbility;
@@ -38,6 +37,7 @@ import mage.abilities.condition.Condition;
 import mage.abilities.decorator.ConditionalTriggeredAbility;
 import mage.abilities.effects.common.WinGameSourceControllerEffect;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.game.Game;
 import mage.players.Player;
 
@@ -47,9 +47,8 @@ import mage.players.Player;
  */
 public class BattleOfWits extends CardImpl {
 
-    public BattleOfWits(UUID ownerId) {
-        super(ownerId, 65, "Battle of Wits", Rarity.RARE, new CardType[]{CardType.ENCHANTMENT}, "{3}{U}{U}");
-        this.expansionSetCode = "9ED";
+    public BattleOfWits(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.ENCHANTMENT},"{3}{U}{U}");
 
 
         // At the beginning of your upkeep, if you have 200 or more cards in your library, you win the game.

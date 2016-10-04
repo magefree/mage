@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.avacynrestored;
+package mage.cards.g;
 
 import mage.constants.*;
 import mage.abilities.Ability;
@@ -36,6 +36,7 @@ import mage.abilities.effects.common.MayTapOrUntapTargetEffect;
 import mage.abilities.effects.common.continuous.GainAbilityAttachedEffect;
 import mage.abilities.keyword.EnchantAbility;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.target.TargetPermanent;
 import mage.target.common.TargetCreaturePermanent;
 
@@ -48,9 +49,8 @@ import java.util.UUID;
  */
 public class GhostlyTouch extends CardImpl {
 
-    public GhostlyTouch(UUID ownerId) {
-        super(ownerId, 58, "Ghostly Touch", Rarity.UNCOMMON, new CardType[]{CardType.ENCHANTMENT}, "{1}{U}");
-        this.expansionSetCode = "AVR";
+    public GhostlyTouch(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.ENCHANTMENT},"{1}{U}");
         this.subtype.add("Aura");
 
 

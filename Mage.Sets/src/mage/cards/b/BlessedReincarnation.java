@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.dragonsoftarkir;
+package mage.cards.b;
 
 import java.util.Set;
 import java.util.UUID;
@@ -35,11 +35,11 @@ import mage.abilities.effects.common.ExileTargetEffect;
 import mage.abilities.keyword.ReboundAbility;
 import mage.cards.Card;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.cards.Cards;
 import mage.cards.CardsImpl;
 import mage.constants.CardType;
 import mage.constants.Outcome;
-import mage.constants.Rarity;
 import mage.constants.TargetController;
 import mage.constants.Zone;
 import mage.filter.common.FilterCreaturePermanent;
@@ -62,9 +62,8 @@ public class BlessedReincarnation extends CardImpl {
         filter.add(new ControllerPredicate(TargetController.OPPONENT));
     }
 
-    public BlessedReincarnation(UUID ownerId) {
-        super(ownerId, 47, "Blessed Reincarnation", Rarity.RARE, new CardType[]{CardType.INSTANT}, "{3}{U}");
-        this.expansionSetCode = "DTK";
+    public BlessedReincarnation(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.INSTANT},"{3}{U}");
 
         // Exile target creature an opponent controls. 
         this.getSpellAbility().addTarget(new TargetCreaturePermanent(filter));

@@ -25,14 +25,14 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.weatherlight;
+package mage.cards.s;
 
 import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.keyword.FlankingAbility;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.Rarity;
 
 /**
  *
@@ -40,9 +40,8 @@ import mage.constants.Rarity;
  */
 public class ShadowRider extends CardImpl {
 
-    public ShadowRider(UUID ownerId) {
-        super(ownerId, 21, "Shadow Rider", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{2}{B}{B}");
-        this.expansionSetCode = "WTH";
+    public ShadowRider(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{2}{B}{B}");
         this.subtype.add("Knight");
 
         this.power = new MageInt(3);

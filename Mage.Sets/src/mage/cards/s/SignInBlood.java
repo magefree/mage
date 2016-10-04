@@ -26,15 +26,15 @@
  *  or implied, of BetaSteward_at_googlemail.com.
  */
 
-package mage.sets.magic2010;
+package mage.cards.s;
 
 import java.util.UUID;
 import mage.abilities.effects.Effect;
 import mage.abilities.effects.common.DrawCardTargetEffect;
 import mage.abilities.effects.common.LoseLifeTargetEffect;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.target.TargetPlayer;
 
 /**
@@ -43,9 +43,8 @@ import mage.target.TargetPlayer;
  */
 public class SignInBlood extends CardImpl {
 
-    public SignInBlood(UUID ownerId) {
-        super(ownerId, 112, "Sign in Blood", Rarity.COMMON, new CardType[]{CardType.SORCERY}, "{B}{B}");
-        this.expansionSetCode = "M10";
+    public SignInBlood(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{B}{B}");
 
 
         // Target player draws two cards and loses 2 life.

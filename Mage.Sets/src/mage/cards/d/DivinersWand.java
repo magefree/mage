@@ -25,14 +25,13 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.morningtide;
+package mage.cards.d;
 
 import java.util.UUID;
 import mage.constants.AttachmentType;
 import mage.constants.CardType;
 import mage.constants.Duration;
 import mage.constants.Outcome;
-import mage.constants.Rarity;
 import mage.constants.Zone;
 import mage.abilities.Ability;
 import mage.abilities.common.DrawCardControllerTriggeredAbility;
@@ -49,6 +48,7 @@ import mage.abilities.effects.common.continuous.GainAbilitySourceEffect;
 import mage.abilities.keyword.EquipAbility;
 import mage.abilities.keyword.FlyingAbility;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.SetTargetPointer;
 import mage.filter.FilterPermanent;
 import mage.filter.common.FilterCreaturePermanent;
@@ -65,9 +65,8 @@ public class DivinersWand extends CardImpl {
         filter.add(new SubtypePredicate("Wizard"));
     }
 
-    public DivinersWand(UUID ownerId) {
-        super(ownerId, 142, "Diviner's Wand", Rarity.UNCOMMON, new CardType[]{CardType.TRIBAL, CardType.ARTIFACT}, "{3}");
-        this.expansionSetCode = "MOR";
+    public DivinersWand(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.TRIBAL,CardType.ARTIFACT},"{3}");
         this.subtype.add("Wizard");
         this.subtype.add("Equipment");
 

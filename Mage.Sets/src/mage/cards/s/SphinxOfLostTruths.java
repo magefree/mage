@@ -25,11 +25,10 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.zendikar;
+package mage.cards.s;
 
 import java.util.UUID;
 import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.EntersBattlefieldTriggeredAbility;
@@ -41,6 +40,7 @@ import mage.abilities.effects.common.DrawCardSourceControllerEffect;
 import mage.abilities.keyword.FlyingAbility;
 import mage.abilities.keyword.KickerAbility;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 
 /**
  *
@@ -48,9 +48,8 @@ import mage.cards.CardImpl;
  */
 public class SphinxOfLostTruths extends CardImpl {
 
-    public SphinxOfLostTruths(UUID ownerId) {
-        super(ownerId, 69, "Sphinx of Lost Truths", Rarity.RARE, new CardType[]{CardType.CREATURE}, "{3}{U}{U}");
-        this.expansionSetCode = "ZEN";
+    public SphinxOfLostTruths(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{3}{U}{U}");
         this.subtype.add("Sphinx");
 
         this.power = new MageInt(3);

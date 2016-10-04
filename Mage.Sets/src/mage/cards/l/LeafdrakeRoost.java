@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.commander2013;
+package mage.cards.l;
 
 import java.util.UUID;
 import mage.MageInt;
@@ -40,11 +40,11 @@ import mage.abilities.effects.common.continuous.GainAbilityAttachedEffect;
 import mage.abilities.keyword.EnchantAbility;
 import mage.abilities.keyword.FlyingAbility;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.AttachmentType;
 import mage.constants.CardType;
 import mage.constants.Duration;
 import mage.constants.Outcome;
-import mage.constants.Rarity;
 import mage.constants.Zone;
 import mage.game.permanent.token.Token;
 import mage.target.TargetPermanent;
@@ -56,9 +56,8 @@ import mage.target.common.TargetLandPermanent;
  */
 public class LeafdrakeRoost extends CardImpl {
 
-    public LeafdrakeRoost(UUID ownerId) {
-        super(ownerId, 196, "Leafdrake Roost", Rarity.UNCOMMON, new CardType[]{CardType.ENCHANTMENT}, "{3}{G}{U}");
-        this.expansionSetCode = "C13";
+    public LeafdrakeRoost(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.ENCHANTMENT},"{3}{G}{U}");
         this.subtype.add("Aura");
 
 

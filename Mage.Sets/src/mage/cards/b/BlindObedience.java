@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.gatecrash;
+package mage.cards.b;
 
 import java.util.UUID;
 import mage.abilities.Ability;
@@ -33,10 +33,10 @@ import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.effects.ReplacementEffectImpl;
 import mage.abilities.keyword.ExtortAbility;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Duration;
 import mage.constants.Outcome;
-import mage.constants.Rarity;
 import mage.constants.Zone;
 import mage.game.Game;
 import mage.game.events.EntersTheBattlefieldEvent;
@@ -49,9 +49,8 @@ import mage.game.permanent.Permanent;
  */
 public class BlindObedience extends CardImpl {
 
-    public BlindObedience(UUID ownerId) {
-        super(ownerId, 6, "Blind Obedience", Rarity.RARE, new CardType[]{CardType.ENCHANTMENT}, "{1}{W}");
-        this.expansionSetCode = "GTC";
+    public BlindObedience(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.ENCHANTMENT},"{1}{W}");
 
         // Extort (Whenever you cast a spell, you may pay {WB}. If you do, each opponent loses 1 life and you gain that much life.)
         this.addAbility(new ExtortAbility());

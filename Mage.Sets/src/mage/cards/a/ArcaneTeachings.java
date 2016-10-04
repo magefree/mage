@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.tenthedition;
+package mage.cards.a;
 
 import java.util.UUID;
 
@@ -40,6 +40,7 @@ import mage.abilities.effects.common.continuous.BoostEnchantedEffect;
 import mage.abilities.effects.common.continuous.GainAbilityAttachedEffect;
 import mage.abilities.keyword.EnchantAbility;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.target.TargetPermanent;
 import mage.target.common.TargetCreatureOrPlayer;
 import mage.target.common.TargetCreaturePermanent;
@@ -50,9 +51,8 @@ import mage.target.common.TargetCreaturePermanent;
  */
 public class ArcaneTeachings extends CardImpl {
 
-    public ArcaneTeachings(UUID ownerId) {
-        super(ownerId, 188, "Arcane Teachings", Rarity.UNCOMMON, new CardType[]{CardType.ENCHANTMENT}, "{2}{R}");
-        this.expansionSetCode = "10E";
+    public ArcaneTeachings(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.ENCHANTMENT},"{2}{R}");
         this.subtype.add("Aura");
 
         TargetPermanent auraTarget = new TargetCreaturePermanent();

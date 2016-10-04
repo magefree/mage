@@ -25,11 +25,10 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.tenthedition;
+package mage.cards.r;
 
 import java.util.UUID;
 import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.constants.Zone;
 import mage.MageInt;
 import mage.abilities.common.DamageAsThoughNotBlockedAbility;
@@ -37,6 +36,7 @@ import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.costs.mana.ManaCostsImpl;
 import mage.abilities.effects.common.RegenerateSourceEffect;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 
 /**
  *
@@ -44,9 +44,8 @@ import mage.cards.CardImpl;
  */
 public class Rhox extends CardImpl {
 
-    public Rhox(UUID ownerId) {
-        super(ownerId, 291, "Rhox", Rarity.RARE, new CardType[]{CardType.CREATURE}, "{4}{G}{G}");
-        this.expansionSetCode = "10E";
+    public Rhox(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{4}{G}{G}");
         this.subtype.add("Rhino");
         this.subtype.add("Beast");
 

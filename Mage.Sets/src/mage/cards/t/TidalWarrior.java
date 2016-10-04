@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.stronghold;
+package mage.cards.t;
 
 import java.util.UUID;
 import mage.MageInt;
@@ -34,9 +34,9 @@ import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.costs.common.TapSourceCost;
 import mage.abilities.effects.common.continuous.BecomesBasicLandTargetEffect;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Duration;
-import mage.constants.Rarity;
 import mage.constants.Zone;
 import mage.target.common.TargetLandPermanent;
 
@@ -47,9 +47,8 @@ import mage.target.common.TargetLandPermanent;
  */
 public class TidalWarrior extends CardImpl {
 
-    public TidalWarrior(UUID ownerId) {
-        super(ownerId, 47, "Tidal Warrior", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{U}");
-        this.expansionSetCode = "STH";
+    public TidalWarrior(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{U}");
         this.subtype.add("Merfolk");
         this.subtype.add("Warrior");
         this.power = new MageInt(1);

@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.kaladesh;
+package mage.cards.m;
 
 import java.util.UUID;
 import mage.abilities.Ability;
@@ -37,8 +37,8 @@ import mage.abilities.effects.Effect;
 import mage.abilities.effects.common.DrawCardSourceControllerEffect;
 import mage.abilities.effects.common.LoseLifeSourceControllerEffect;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.constants.Zone;
 
 /**
@@ -47,9 +47,8 @@ import mage.constants.Zone;
  */
 public class MetalspinnersPuzzleknot extends CardImpl {
 
-    public MetalspinnersPuzzleknot(UUID ownerId) {
-        super(ownerId, 221, "Metalspinner's Puzzleknot", Rarity.COMMON, new CardType[]{CardType.ARTIFACT}, "{2}");
-        this.expansionSetCode = "KLD";
+    public MetalspinnersPuzzleknot(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.ARTIFACT},"{2}");
 
         // When Metalspinner's Puzzleknot enters the battlefield, you draw a card and you lose 1 life.
         Effect drawEffect = new DrawCardSourceControllerEffect(1);

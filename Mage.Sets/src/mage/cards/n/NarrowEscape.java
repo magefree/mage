@@ -26,14 +26,14 @@
  *  or implied, of BetaSteward_at_googlemail.com.
  */
 
-package mage.sets.zendikar;
+package mage.cards.n;
 
 import java.util.UUID;
 import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.abilities.effects.common.GainLifeEffect;
 import mage.abilities.effects.common.ReturnToHandTargetEffect;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.target.common.TargetControlledPermanent;
 
 /**
@@ -42,9 +42,8 @@ import mage.target.common.TargetControlledPermanent;
  */
 public class NarrowEscape extends CardImpl {
 
-    public NarrowEscape (UUID ownerId) {
-        super(ownerId, 27, "Narrow Escape", Rarity.COMMON, new CardType[]{CardType.INSTANT}, "{2}{W}");
-        this.expansionSetCode = "ZEN";
+    public NarrowEscape (UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.INSTANT},"{2}{W}");
         
         // Return target permanent you control to its owner's hand. You gain 4 life.
         this.getSpellAbility().addTarget(new TargetControlledPermanent());

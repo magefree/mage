@@ -25,15 +25,15 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.returntoravnica;
+package mage.cards.l;
 
 import java.util.UUID;
 import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.abilities.costs.common.SacrificeTargetCost;
 import mage.abilities.effects.common.DestroyTargetEffect;
 import mage.abilities.effects.common.LoseLifeTargetControllerEffect;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.target.common.TargetControlledCreaturePermanent;
 import mage.target.common.TargetCreaturePermanent;
 
@@ -43,9 +43,8 @@ import mage.target.common.TargetCreaturePermanent;
  */
 public class LaunchParty extends CardImpl {
 
-    public LaunchParty(UUID ownerId) {
-        super(ownerId, 69, "Launch Party", Rarity.COMMON, new CardType[]{CardType.INSTANT}, "{3}{B}");
-        this.expansionSetCode = "RTR";
+    public LaunchParty(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.INSTANT},"{3}{B}");
 
 
         // As an additional cost to cast Launch Party, sacrifice a creature.

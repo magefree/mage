@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.lorwyn;
+package mage.cards.e;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -35,8 +35,8 @@ import mage.abilities.TriggeredAbilityImpl;
 import mage.abilities.effects.common.DontUntapInControllersNextUntapStepTargetEffect;
 import mage.abilities.effects.common.TapTargetEffect;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.constants.TargetController;
 import mage.constants.Zone;
 import mage.filter.common.FilterCreaturePermanent;
@@ -59,9 +59,8 @@ public class EntanglingTrap extends CardImpl {
         filter.add(new ControllerPredicate(TargetController.OPPONENT));
     }
 
-    public EntanglingTrap(UUID ownerId) {
-        super(ownerId, 13, "Entangling Trap", Rarity.UNCOMMON, new CardType[]{CardType.ENCHANTMENT}, "{1}{W}");
-        this.expansionSetCode = "LRW";
+    public EntanglingTrap(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.ENCHANTMENT},"{1}{W}");
 
         // Whenever you clash, tap target creature an opponent controls. If you won, that creature doesn't untap during its controller's next untap step.
         Ability ability = new EntanglingTrapTriggeredAbility();

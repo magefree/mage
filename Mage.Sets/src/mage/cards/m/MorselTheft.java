@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.morningtide;
+package mage.cards.m;
 
 import java.util.UUID;
 import mage.abilities.condition.common.ProwlCondition;
@@ -36,8 +36,8 @@ import mage.abilities.effects.common.GainLifeEffect;
 import mage.abilities.effects.common.LoseLifeTargetEffect;
 import mage.abilities.keyword.ProwlAbility;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.target.TargetPlayer;
 
 /**
@@ -46,9 +46,8 @@ import mage.target.TargetPlayer;
  */
 public class MorselTheft extends CardImpl {
 
-    public MorselTheft(UUID ownerId) {
-        super(ownerId, 68, "Morsel Theft", Rarity.COMMON, new CardType[]{CardType.TRIBAL, CardType.SORCERY}, "{2}{B}{B}");
-        this.expansionSetCode = "MOR";
+    public MorselTheft(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.TRIBAL,CardType.SORCERY},"{2}{B}{B}");
         this.subtype.add("Rogue");
 
         // Prowl {1}{B}

@@ -26,15 +26,15 @@
  *  or implied, of BetaSteward_at_googlemail.com.
  */
 
-package mage.sets.scarsofmirrodin;
+package mage.cards.t;
 
 import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.MageInt;
 import mage.abilities.common.EntersBattlefieldTriggeredAbility;
 import mage.abilities.effects.SearchEffect;
 import mage.abilities.effects.common.search.SearchLibraryPutInHandEffect;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.filter.Filter;
 import mage.filter.FilterCard;
 import mage.filter.predicate.mageobject.CardTypePredicate;
@@ -55,9 +55,8 @@ public class TrinketMage extends CardImpl {
         filter.add(new ConvertedManaCostPredicate(Filter.ComparisonType.LessThan, 2));
     }
 
-    public TrinketMage(UUID ownerId) {
-        super(ownerId, 48, "Trinket Mage", Rarity.UNCOMMON, new CardType[]{CardType.CREATURE}, "{2}{U}");
-        this.expansionSetCode = "SOM";
+    public TrinketMage(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{2}{U}");
         this.subtype.add("Human");
         this.subtype.add("Wizard");
 

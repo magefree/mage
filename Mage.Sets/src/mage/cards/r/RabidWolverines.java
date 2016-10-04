@@ -25,16 +25,16 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.exodus;
+package mage.cards.r;
 
 import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.common.BecomesBlockedByCreatureTriggeredAbility;
 import mage.abilities.effects.common.continuous.BoostSourceEffect;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Duration;
-import mage.constants.Rarity;
 
 /**
  *
@@ -42,9 +42,8 @@ import mage.constants.Rarity;
  */
 public class RabidWolverines extends CardImpl {
 
-    public RabidWolverines(UUID ownerId) {
-        super(ownerId, 119, "Rabid Wolverines", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{3}{G}{G}");
-        this.expansionSetCode = "EXO";
+    public RabidWolverines(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{3}{G}{G}");
         this.subtype.add("Wolverine");
         this.power = new MageInt(4);
         this.toughness = new MageInt(4);

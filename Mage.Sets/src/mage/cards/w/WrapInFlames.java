@@ -25,15 +25,15 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.riseoftheeldrazi;
+package mage.cards.w;
 
 import java.util.UUID;
 import mage.constants.CardType;
 import mage.constants.Duration;
-import mage.constants.Rarity;
 import mage.abilities.effects.common.combat.CantBlockTargetEffect;
 import mage.abilities.effects.common.DamageTargetEffect;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.target.common.TargetCreaturePermanent;
 
 /**
@@ -42,9 +42,8 @@ import mage.target.common.TargetCreaturePermanent;
  */
 public class WrapInFlames extends CardImpl {
 
-    public WrapInFlames(UUID ownerId) {
-        super(ownerId, 173, "Wrap in Flames", Rarity.COMMON, new CardType[]{CardType.SORCERY}, "{3}{R}");
-        this.expansionSetCode = "ROE";
+    public WrapInFlames(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{3}{R}");
 
 
         // Wrap in Flames deals 1 damage to each of up to three target creatures. Those creatures can't block this turn.

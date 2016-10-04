@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package mage.sets.antiquities;
+package mage.cards.p;
 
 import java.util.UUID;
 import mage.Mana;
@@ -14,12 +14,12 @@ import mage.abilities.effects.common.AttachEffect;
 import mage.abilities.effects.common.cost.CostModificationEffectImpl;
 import mage.abilities.keyword.EnchantAbility;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.AbilityType;
 import mage.constants.CardType;
 import mage.constants.CostModificationType;
 import mage.constants.Duration;
 import mage.constants.Outcome;
-import mage.constants.Rarity;
 import mage.constants.Zone;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
@@ -34,9 +34,8 @@ import mage.util.CardUtil;
  */
 public class PowerArtifact extends CardImpl {
 
-    public PowerArtifact(UUID ownerId) {
-        super(ownerId, 55, "Power Artifact", Rarity.UNCOMMON, new CardType[]{CardType.ENCHANTMENT}, "{U}{U}");
-        this.expansionSetCode = "ATQ";
+    public PowerArtifact(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.ENCHANTMENT},"{U}{U}");
         this.subtype.add("Aura");
 
         // Enchant artifact

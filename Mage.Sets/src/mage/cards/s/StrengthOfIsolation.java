@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.torment;
+package mage.cards.s;
 
 import java.util.UUID;
 import mage.ObjectColor;
@@ -40,11 +40,11 @@ import mage.abilities.keyword.EnchantAbility;
 import mage.abilities.keyword.MadnessAbility;
 import mage.abilities.keyword.ProtectionAbility;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.AttachmentType;
 import mage.constants.CardType;
 import mage.constants.Duration;
 import mage.constants.Outcome;
-import mage.constants.Rarity;
 import mage.constants.Zone;
 import mage.filter.FilterCard;
 import mage.filter.predicate.mageobject.ColorPredicate;
@@ -62,9 +62,8 @@ public class StrengthOfIsolation extends CardImpl {
         filter.add(new ColorPredicate(ObjectColor.BLACK));
     }
 
-    public StrengthOfIsolation(UUID ownerId) {
-        super(ownerId, 17, "Strength of Isolation", Rarity.UNCOMMON, new CardType[]{CardType.ENCHANTMENT}, "{1}{W}");
-        this.expansionSetCode = "TOR";
+    public StrengthOfIsolation(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.ENCHANTMENT},"{1}{W}");
         this.subtype.add("Aura");
 
         // Enchant creature

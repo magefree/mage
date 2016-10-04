@@ -25,18 +25,18 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.tempest;
+package mage.cards.a;
 
 import java.util.UUID;
 
 import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.costs.Cost;
 import mage.abilities.costs.common.SacrificeTargetCost;
 import mage.abilities.effects.OneShotEffect;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.Outcome;
 import mage.constants.Zone;
 import mage.filter.common.FilterControlledPermanent;
@@ -58,9 +58,8 @@ public class AltarOfDementia extends CardImpl {
         filter.add(new CardTypePredicate(CardType.CREATURE));
     }
 
-    public AltarOfDementia(UUID ownerId) {
-        super(ownerId, 266, "Altar of Dementia", Rarity.RARE, new CardType[]{CardType.ARTIFACT}, "{2}");
-        this.expansionSetCode = "TMP";
+    public AltarOfDementia(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.ARTIFACT},"{2}");
 
         // Sacrifice a creature: Target player puts a number of cards equal to the sacrificed creature's power from the top of his or her library into his or her graveyard.
         Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new AltarOfDementiaEffect(), new SacrificeTargetCost(new TargetControlledPermanent(filter)));

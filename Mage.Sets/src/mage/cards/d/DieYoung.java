@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.kaladesh;
+package mage.cards.d;
 
 import java.util.UUID;
 import mage.abilities.Ability;
@@ -36,10 +36,10 @@ import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.continuous.BoostTargetEffect;
 import mage.abilities.effects.common.counter.GetEnergyCountersControllerEffect;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Duration;
 import mage.constants.Outcome;
-import mage.constants.Rarity;
 import mage.counters.CounterType;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
@@ -53,9 +53,8 @@ import mage.target.targetpointer.FixedTarget;
  */
 public class DieYoung extends CardImpl {
 
-    public DieYoung(UUID ownerId) {
-        super(ownerId, 76, "Die Young", Rarity.COMMON, new CardType[]{CardType.SORCERY}, "{1}{B}");
-        this.expansionSetCode = "KLD";
+    public DieYoung(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{1}{B}");
 
         // Choose target creature. You get {E}{E}, then you may pay any amount of {E}. The creature gets -1/-1 until end of turn for each {E} paid this way.
         this.getSpellAbility().addEffect(new DieYoungEffect());

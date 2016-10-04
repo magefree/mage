@@ -26,7 +26,7 @@
  *  or implied, of BetaSteward_at_googlemail.com.
  */
 
-package mage.sets.scarsofmirrodin;
+package mage.cards.e;
 
 import java.util.UUID;
 import mage.MageInt;
@@ -35,9 +35,9 @@ import mage.abilities.common.BlocksOrBecomesBlockedByCreatureTriggeredAbility;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.DestroyTargetEffect;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Outcome;
-import mage.constants.Rarity;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.players.Player;
@@ -48,9 +48,8 @@ import mage.players.Player;
  */
 public class EngulfingSlagwurm extends CardImpl {
 
-    public EngulfingSlagwurm (UUID ownerId) {
-        super(ownerId, 118, "Engulfing Slagwurm", Rarity.RARE, new CardType[]{CardType.CREATURE}, "{5}{G}{G}");
-        this.expansionSetCode = "SOM";
+    public EngulfingSlagwurm (UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{5}{G}{G}");
         this.subtype.add("Wurm");
 
         this.power = new MageInt(7);

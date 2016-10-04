@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.scarsofmirrodin;
+package mage.cards.p;
 
 import java.util.UUID;
 import mage.MageInt;
@@ -33,8 +33,8 @@ import mage.Mana;
 import mage.abilities.effects.common.BasicManaEffect;
 import mage.abilities.mana.BasicManaAbility;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.Rarity;
 
 /**
  *
@@ -42,9 +42,8 @@ import mage.constants.Rarity;
  */
 public class PalladiumMyr extends CardImpl {
 
-    public PalladiumMyr(UUID ownerId) {
-        super(ownerId, 190, "Palladium Myr", Rarity.UNCOMMON, new CardType[]{CardType.ARTIFACT, CardType.CREATURE}, "{3}");
-        this.expansionSetCode = "SOM";
+    public PalladiumMyr(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.ARTIFACT,CardType.CREATURE},"{3}");
         this.subtype.add("Myr");
         this.power = new MageInt(2);
         this.toughness = new MageInt(2);

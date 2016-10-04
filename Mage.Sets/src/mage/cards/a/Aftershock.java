@@ -25,14 +25,14 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.tempest;
+package mage.cards.a;
 
 import java.util.UUID;
 import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.abilities.effects.common.DamageControllerEffect;
 import mage.abilities.effects.common.DestroyTargetEffect;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.filter.FilterPermanent;
 import mage.filter.predicate.Predicates;
 import mage.filter.predicate.mageobject.CardTypePredicate;
@@ -53,9 +53,8 @@ public class Aftershock extends CardImpl {
                 new CardTypePredicate(CardType.LAND)));
     }
 
-    public Aftershock(UUID ownerId) {
-        super(ownerId, 160, "Aftershock", Rarity.COMMON, new CardType[]{CardType.SORCERY}, "{2}{R}{R}");
-        this.expansionSetCode = "TMP";
+    public Aftershock(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{2}{R}{R}");
 
         this.getSpellAbility().addEffect(new DestroyTargetEffect());
         this.getSpellAbility().addTarget(new TargetPermanent(filter));

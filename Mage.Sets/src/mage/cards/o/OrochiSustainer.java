@@ -26,24 +26,23 @@
  *  or implied, of BetaSteward_at_googlemail.com.
  */
 
-package mage.sets.championsofkamigawa;
+package mage.cards.o;
 
 import java.util.UUID;
 
 import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.MageInt;
 import mage.abilities.mana.GreenManaAbility;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 
 /**
  * @author Loki
  */
 public class OrochiSustainer extends CardImpl {
 
-    public OrochiSustainer(UUID ownerId) {
-        super(ownerId, 236, "Orochi Sustainer", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{1}{G}");
-        this.expansionSetCode = "CHK";
+    public OrochiSustainer(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{1}{G}");
         this.subtype.add("Snake");
         this.subtype.add("Shaman");
 

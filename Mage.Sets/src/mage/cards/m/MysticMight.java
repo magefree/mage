@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.iceage;
+package mage.cards.m;
 
 import java.util.UUID;
 import mage.abilities.Ability;
@@ -39,11 +39,11 @@ import mage.abilities.effects.common.continuous.GainAbilityAttachedEffect;
 import mage.abilities.keyword.CumulativeUpkeepAbility;
 import mage.abilities.keyword.EnchantAbility;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.AttachmentType;
 import mage.constants.CardType;
 import mage.constants.Duration;
 import mage.constants.Outcome;
-import mage.constants.Rarity;
 import mage.constants.Zone;
 import mage.filter.common.FilterControlledLandPermanent;
 import mage.target.TargetPermanent;
@@ -56,9 +56,8 @@ import mage.target.common.TargetCreaturePermanent;
  */
 public class MysticMight extends CardImpl {
 
-    public MysticMight(UUID ownerId) {
-        super(ownerId, 86, "Mystic Might", Rarity.RARE, new CardType[]{CardType.ENCHANTMENT}, "{U}");
-        this.expansionSetCode = "ICE";
+    public MysticMight(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.ENCHANTMENT},"{U}");
         this.subtype.add("Aura");
 
         // Enchant land you control

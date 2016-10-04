@@ -25,14 +25,14 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.shadowsoverinnistrad;
+package mage.cards.h;
 
 import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.keyword.FlyingAbility;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.Rarity;
 
 /**
  *
@@ -40,9 +40,8 @@ import mage.constants.Rarity;
  */
 public class HeirToTheNight extends CardImpl {
 
-    public HeirToTheNight(UUID ownerId) {
-        super(ownerId, 116, "Heir to the Night", Rarity.UNCOMMON, new CardType[]{CardType.CREATURE}, "");
-        this.expansionSetCode = "SOI";
+    public HeirToTheNight(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"");
         this.subtype.add("Vampire");
         this.subtype.add("Berserker");
         this.power = new MageInt(3);

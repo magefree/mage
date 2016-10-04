@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.magicorigins;
+package mage.cards.r;
 
 import java.util.UUID;
 import mage.MageInt;
@@ -37,9 +37,9 @@ import mage.abilities.condition.common.PermanentsOnTheBattlefieldCondition;
 import mage.abilities.decorator.ConditionalContinuousEffect;
 import mage.abilities.effects.common.continuous.BoostSourceEffect;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Duration;
-import mage.constants.Rarity;
 import mage.constants.Zone;
 import mage.filter.common.FilterControlledArtifactPermanent;
 import mage.filter.predicate.permanent.AnotherPredicate;
@@ -57,9 +57,8 @@ public class Ramroller extends CardImpl {
         filter.add(new AnotherPredicate());
     }
 
-    public Ramroller(UUID ownerId) {
-        super(ownerId, 237, "Ramroller", Rarity.UNCOMMON, new CardType[]{CardType.ARTIFACT, CardType.CREATURE}, "{3}");
-        this.expansionSetCode = "ORI";
+    public Ramroller(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.ARTIFACT,CardType.CREATURE},"{3}");
         this.subtype.add("Juggernaut");
         this.power = new MageInt(2);
         this.toughness = new MageInt(3);

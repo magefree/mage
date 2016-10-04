@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.gatecrash;
+package mage.cards.d;
 
 import java.util.UUID;
 import mage.MageInt;
@@ -33,9 +33,9 @@ import mage.abilities.Ability;
 import mage.abilities.common.EntersBattlefieldTriggeredAbility;
 import mage.abilities.effects.OneShotEffect;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Outcome;
-import mage.constants.Rarity;
 import mage.constants.Zone;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
@@ -48,9 +48,8 @@ import mage.target.TargetPermanent;
  */
 public class DinrovaHorror extends CardImpl {
 
-    public DinrovaHorror(UUID ownerId) {
-        super(ownerId, 155, "Dinrova Horror", Rarity.UNCOMMON, new CardType[]{CardType.CREATURE}, "{4}{U}{B}");
-        this.expansionSetCode = "GTC";
+    public DinrovaHorror(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{4}{U}{B}");
         this.subtype.add("Horror");
 
         this.power = new MageInt(4);

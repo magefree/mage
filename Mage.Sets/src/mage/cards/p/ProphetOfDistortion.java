@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.oathofthegatewatch;
+package mage.cards.p;
 
 import java.util.UUID;
 import mage.MageInt;
@@ -34,8 +34,8 @@ import mage.abilities.costs.mana.ManaCostsImpl;
 import mage.abilities.effects.common.DrawCardSourceControllerEffect;
 import mage.abilities.keyword.DevoidAbility;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.constants.Zone;
 
 /**
@@ -44,9 +44,8 @@ import mage.constants.Zone;
  */
 public class ProphetOfDistortion extends CardImpl {
 
-    public ProphetOfDistortion(UUID ownerId) {
-        super(ownerId, 46, "Prophet of Distortion", Rarity.UNCOMMON, new CardType[]{CardType.CREATURE}, "{U}");
-        this.expansionSetCode = "OGW";
+    public ProphetOfDistortion(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{U}");
         this.subtype.add("Eldrazi");
         this.subtype.add("Drone");
         this.power = new MageInt(1);

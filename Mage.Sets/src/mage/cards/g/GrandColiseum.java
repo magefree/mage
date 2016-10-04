@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.onslaught;
+package mage.cards.g;
 
 import java.util.UUID;
 import mage.abilities.Ability;
@@ -34,8 +34,8 @@ import mage.abilities.effects.common.DamageControllerEffect;
 import mage.abilities.mana.AnyColorManaAbility;
 import mage.abilities.mana.ColorlessManaAbility;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.Rarity;
 
 /**
  *
@@ -43,9 +43,8 @@ import mage.constants.Rarity;
  */
 public class GrandColiseum extends CardImpl {
 
-    public GrandColiseum(UUID ownerId) {
-        super(ownerId, 319, "Grand Coliseum", Rarity.RARE, new CardType[]{CardType.LAND}, "");
-        this.expansionSetCode = "ONS";
+    public GrandColiseum(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.LAND},"");
 
         // Grand Coliseum enters the battlefield tapped.
         this.addAbility(new EntersBattlefieldTappedAbility());

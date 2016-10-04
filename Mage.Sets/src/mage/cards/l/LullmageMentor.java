@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.zendikar;
+package mage.cards.l;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -38,8 +38,8 @@ import mage.abilities.costs.common.TapTargetCost;
 import mage.abilities.effects.common.CounterTargetEffect;
 import mage.abilities.effects.common.CreateTokenEffect;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.constants.WatcherScope;
 import mage.constants.Zone;
 import mage.filter.common.FilterControlledCreaturePermanent;
@@ -67,9 +67,8 @@ public class LullmageMentor extends CardImpl {
         filter.add(new SubtypePredicate("Merfolk"));
         filter.add(Predicates.not(new TappedPredicate()));
     }
-    public LullmageMentor(UUID ownerId) {
-        super(ownerId, 54, "Lullmage Mentor", Rarity.RARE, new CardType[]{CardType.CREATURE}, "{1}{U}{U}");
-        this.expansionSetCode = "ZEN";
+    public LullmageMentor(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{1}{U}{U}");
         this.subtype.add("Merfolk");
         this.subtype.add("Wizard");
 

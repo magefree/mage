@@ -25,17 +25,17 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.nemesis;
+package mage.cards.s;
 
 import java.util.UUID;
 import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.EntersBattlefieldTriggeredAbility;
 import mage.abilities.effects.common.TapAllEffect;
 import mage.abilities.keyword.HasteAbility;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.filter.predicate.permanent.AnotherPredicate;
 
@@ -51,9 +51,8 @@ public class ShriekingMogg extends CardImpl {
         filter.add(new AnotherPredicate());
     }
     
-    public ShriekingMogg(UUID ownerId) {
-        super(ownerId, 99, "Shrieking Mogg", Rarity.RARE, new CardType[]{CardType.CREATURE}, "{1}{R}");
-        this.expansionSetCode = "NEM";
+    public ShriekingMogg(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{1}{R}");
         this.subtype.add("Goblin");
 
         this.power = new MageInt(1);

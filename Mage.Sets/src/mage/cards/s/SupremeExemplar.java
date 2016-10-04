@@ -25,15 +25,15 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.morningtide;
+package mage.cards.s;
 
 import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.keyword.ChampionAbility;
 import mage.abilities.keyword.FlyingAbility;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.filter.common.FilterControlledPermanent;
 import mage.filter.predicate.mageobject.SubtypePredicate;
 
@@ -49,9 +49,8 @@ public class SupremeExemplar extends CardImpl {
         filter.add(new SubtypePredicate("Elemental"));
     }
 
-    public SupremeExemplar(UUID ownerId) {
-        super(ownerId, 53, "Supreme Exemplar", Rarity.RARE, new CardType[]{CardType.CREATURE}, "{6}{U}");
-        this.expansionSetCode = "MOR";
+    public SupremeExemplar(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{6}{U}");
         this.subtype.add("Elemental");
         this.power = new MageInt(10);
         this.toughness = new MageInt(10);

@@ -25,15 +25,15 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.invasion;
+package mage.cards.r;
 
 import java.util.UUID;
 import mage.abilities.effects.Effect;
 import mage.abilities.effects.common.ExileSpellEffect;
 import mage.abilities.effects.common.ReturnFromGraveyardToHandTargetEffect;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.filter.FilterCard;
 import mage.target.common.TargetCardInYourGraveyard;
 
@@ -43,9 +43,8 @@ import mage.target.common.TargetCardInYourGraveyard;
  */
 public class Restock extends CardImpl {
 
-    public Restock(UUID ownerId) {
-        super(ownerId, 206, "Restock", Rarity.RARE, new CardType[]{CardType.SORCERY}, "{3}{G}{G}");
-        this.expansionSetCode = "INV";
+    public Restock(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{3}{G}{G}");
 
 
         // Return two target cards from your graveyard to your hand. Exile Restock.

@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.onslaught;
+package mage.cards.b;
 
 import java.util.UUID;
 import mage.MageInt;
@@ -34,8 +34,8 @@ import mage.abilities.costs.mana.ManaCostsImpl;
 import mage.abilities.keyword.MorphAbility;
 import mage.abilities.mana.AnyColorManaAbility;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.filter.common.FilterControlledCreaturePermanent;
 import mage.filter.predicate.Predicates;
 import mage.filter.predicate.mageobject.SubtypePredicate;
@@ -55,9 +55,8 @@ public class BirchloreRangers extends CardImpl {
         filter.add(new SubtypePredicate("Elf"));
     }
 
-    public BirchloreRangers(UUID ownerId) {
-        super(ownerId, 248, "Birchlore Rangers", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{G}");
-        this.expansionSetCode = "ONS";
+    public BirchloreRangers(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{G}");
         this.subtype.add("Elf");
         this.subtype.add("Druid");
 

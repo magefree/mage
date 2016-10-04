@@ -25,13 +25,13 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.mercadianmasques;
+package mage.cards.s;
 
 import java.util.UUID;
 import mage.abilities.effects.common.GainLifeTargetEffect;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.target.TargetPlayer;
 
 /**
@@ -40,9 +40,8 @@ import mage.target.TargetPlayer;
  */
 public class SoothingBalm extends CardImpl {
 
-    public SoothingBalm(UUID ownerId) {
-        super(ownerId, 48, "Soothing Balm", Rarity.COMMON, new CardType[]{CardType.INSTANT}, "{1}{W}");
-        this.expansionSetCode = "MMQ";
+    public SoothingBalm(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.INSTANT},"{1}{W}");
 
         // Target player gains 5 life.
         this.getSpellAbility().addTarget(new TargetPlayer());

@@ -25,16 +25,16 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.morningtide;
+package mage.cards.a;
 
 import java.util.UUID;
 
 import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.MageInt;
 import mage.abilities.common.EntersBattlefieldTriggeredAbility;
 import mage.abilities.effects.common.CreateTokenEffect;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.game.permanent.token.ElfToken;
 
 /**
@@ -43,9 +43,8 @@ import mage.game.permanent.token.ElfToken;
  */
 public class AmbassadorOak extends CardImpl {
 
-    public AmbassadorOak(UUID ownerId) {
-        super(ownerId, 113, "Ambassador Oak", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{3}{G}");
-        this.expansionSetCode = "MOR";
+    public AmbassadorOak(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{3}{G}");
         this.subtype.add("Treefolk");
         this.subtype.add("Warrior");
 

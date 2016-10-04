@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.onslaught;
+package mage.cards.c;
 
 import java.util.UUID;
 import mage.abilities.Ability;
@@ -37,8 +37,8 @@ import mage.abilities.effects.Effect;
 import mage.abilities.effects.common.DrawCardSourceControllerEffect;
 import mage.abilities.effects.common.GainLifeEffect;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.constants.TargetController;
 import mage.game.Game;
 
@@ -48,9 +48,8 @@ import mage.game.Game;
  */
 public class ConvalescentCare extends CardImpl {
 
-    public ConvalescentCare(UUID ownerId) {
-        super(ownerId, 14, "Convalescent Care", Rarity.RARE, new CardType[]{CardType.ENCHANTMENT}, "{1}{W}{W}");
-        this.expansionSetCode = "ONS";
+    public ConvalescentCare(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.ENCHANTMENT},"{1}{W}{W}");
 
         // At the beginning of your upkeep, if you have 5 or less life, you gain 3 life and draw a card.
         Effect effect = new DrawCardSourceControllerEffect(1);

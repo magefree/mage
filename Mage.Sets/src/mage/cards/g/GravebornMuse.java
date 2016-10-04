@@ -25,12 +25,11 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.tenthedition;
+package mage.cards.g;
 
 import java.util.UUID;
 
 import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.BeginningOfUpkeepTriggeredAbility;
@@ -38,6 +37,7 @@ import mage.abilities.dynamicvalue.common.PermanentsOnBattlefieldCount;
 import mage.abilities.effects.common.DrawCardSourceControllerEffect;
 import mage.abilities.effects.common.LoseLifeSourceControllerEffect;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.TargetController;
 import mage.filter.common.FilterControlledPermanent;
 import mage.filter.predicate.mageobject.SubtypePredicate;
@@ -53,9 +53,8 @@ public class GravebornMuse extends CardImpl {
         filter.add(new SubtypePredicate("Zombie"));
     }
 
-    public GravebornMuse(UUID ownerId) {
-        super(ownerId, 145, "Graveborn Muse", Rarity.RARE, new CardType[]{CardType.CREATURE}, "{2}{B}{B}");
-        this.expansionSetCode = "10E";
+    public GravebornMuse(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{2}{B}{B}");
         this.subtype.add("Zombie");
         this.subtype.add("Spirit");
 

@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.newphyrexia;
+package mage.cards.m;
 
 import java.util.Set;
 import java.util.UUID;
@@ -36,11 +36,11 @@ import mage.abilities.effects.ContinuousEffectImpl;
 import mage.abilities.effects.ReplacementEffectImpl;
 import mage.abilities.keyword.InfectAbility;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Duration;
 import mage.constants.Layer;
 import mage.constants.Outcome;
-import mage.constants.Rarity;
 import mage.constants.SubLayer;
 import mage.constants.Zone;
 import mage.counters.CounterType;
@@ -56,9 +56,8 @@ import mage.game.permanent.Permanent;
  */
 public class MeliraSylvokOutcast extends CardImpl {
 
-    public MeliraSylvokOutcast(UUID ownerId) {
-        super(ownerId, 115, "Melira, Sylvok Outcast", Rarity.RARE, new CardType[]{CardType.CREATURE}, "{1}{G}");
-        this.expansionSetCode = "NPH";
+    public MeliraSylvokOutcast(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{1}{G}");
         this.supertype.add("Legendary");
         this.subtype.add("Human");
         this.subtype.add("Scout");

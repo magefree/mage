@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.commander2013;
+package mage.cards.p;
 
 import java.util.UUID;
 import mage.abilities.Ability;
@@ -38,9 +38,9 @@ import mage.abilities.effects.common.DestroyAllEffect;
 import mage.abilities.effects.common.counter.AddCountersSourceEffect;
 import mage.abilities.effects.common.counter.RemoveCounterSourceEffect;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Outcome;
-import mage.constants.Rarity;
 import mage.constants.TargetController;
 import mage.constants.Zone;
 import mage.counters.CounterType;
@@ -57,9 +57,8 @@ import mage.players.Player;
  */
 public class PlagueBoiler extends CardImpl {
 
-    public PlagueBoiler(UUID ownerId) {
-        super(ownerId, 254, "Plague Boiler", Rarity.RARE, new CardType[]{CardType.ARTIFACT}, "{3}");
-        this.expansionSetCode = "C13";
+    public PlagueBoiler(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.ARTIFACT},"{3}");
 
         // At the beginning of your upkeep, put a plague counter on Plague Boiler.
         this.addAbility(new BeginningOfUpkeepTriggeredAbility(Zone.BATTLEFIELD, new AddCountersSourceEffect(CounterType.PLAGUE.createInstance()), TargetController.YOU, false));

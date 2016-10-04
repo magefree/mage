@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.shadowsoverinnistrad;
+package mage.cards.g;
 
 import java.util.UUID;
 import mage.MageInt;
@@ -42,9 +42,9 @@ import mage.abilities.effects.common.ReturnSourceFromGraveyardToBattlefieldEffec
 import mage.abilities.effects.common.continuous.BoostSourceEffect;
 import mage.abilities.keyword.FlyingAbility;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Duration;
-import mage.constants.Rarity;
 import mage.constants.Zone;
 import mage.filter.FilterCard;
 import mage.target.common.TargetCardInHand;
@@ -55,9 +55,8 @@ import mage.target.common.TargetCardInHand;
  */
 public class GeralfsMasterpiece extends CardImpl {
 
-    public GeralfsMasterpiece(UUID ownerId) {
-        super(ownerId, 65, "Geralf's Masterpiece", Rarity.MYTHIC, new CardType[]{CardType.CREATURE}, "{3}{U}{U}");
-        this.expansionSetCode = "SOI";
+    public GeralfsMasterpiece(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{3}{U}{U}");
         this.subtype.add("Zombie");
         this.subtype.add("Horror");
         this.power = new MageInt(7);

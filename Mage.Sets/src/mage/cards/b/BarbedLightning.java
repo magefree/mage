@@ -25,15 +25,15 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.darksteel;
+package mage.cards.b;
 
 import java.util.UUID;
 import mage.abilities.Mode;
 import mage.abilities.effects.common.DamageTargetEffect;
 import mage.abilities.keyword.EntwineAbility;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.target.TargetPlayer;
 import mage.target.common.TargetCreaturePermanent;
 
@@ -43,9 +43,8 @@ import mage.target.common.TargetCreaturePermanent;
  */
 public class BarbedLightning extends CardImpl {
 
-    public BarbedLightning(UUID ownerId) {
-        super(ownerId, 55, "Barbed Lightning", Rarity.COMMON, new CardType[]{CardType.INSTANT}, "{2}{R}");
-        this.expansionSetCode = "DST";
+    public BarbedLightning(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.INSTANT},"{2}{R}");
 
         // Choose one - Barbed Lightning deals 3 damage to target creature;
         this.getSpellAbility().addEffect(new DamageTargetEffect(3));

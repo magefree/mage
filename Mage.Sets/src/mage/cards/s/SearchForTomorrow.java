@@ -25,16 +25,16 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.timespiral;
+package mage.cards.s;
 
 import java.util.UUID;
 import mage.constants.CardType;
 import mage.constants.Outcome;
-import mage.constants.Rarity;
 import mage.abilities.costs.mana.ManaCostsImpl;
 import mage.abilities.effects.common.search.SearchLibraryPutInPlayEffect;
 import mage.abilities.keyword.SuspendAbility;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.filter.common.FilterBasicLandCard;
 import mage.target.common.TargetCardInLibrary;
 
@@ -44,9 +44,8 @@ import mage.target.common.TargetCardInLibrary;
  */
 public class SearchForTomorrow extends CardImpl {
 
-    public SearchForTomorrow(UUID ownerId) {
-        super(ownerId, 216, "Search for Tomorrow", Rarity.COMMON, new CardType[]{CardType.SORCERY}, "{2}{G}");
-        this.expansionSetCode = "TSP";
+    public SearchForTomorrow(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{2}{G}");
 
 
         // Search your library for a basic land card and put it onto the battlefield. Then shuffle your library.

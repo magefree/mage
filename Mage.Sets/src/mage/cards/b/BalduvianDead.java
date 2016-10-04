@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.masterseditionii;
+package mage.cards.b;
 
 import java.util.UUID;
 import mage.MageInt;
@@ -40,9 +40,9 @@ import mage.abilities.effects.common.CreateTokenEffect;
 import mage.abilities.effects.common.SacrificeTargetEffect;
 import mage.abilities.keyword.HasteAbility;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Outcome;
-import mage.constants.Rarity;
 import mage.constants.Zone;
 import mage.filter.common.FilterCreatureCard;
 import mage.game.Game;
@@ -57,9 +57,8 @@ import mage.target.targetpointer.FixedTarget;
  */
 public class BalduvianDead extends CardImpl {
 
-    public BalduvianDead(UUID ownerId) {
-        super(ownerId, 79, "Balduvian Dead", Rarity.UNCOMMON, new CardType[]{CardType.CREATURE}, "{3}{B}");
-        this.expansionSetCode = "ME2";
+    public BalduvianDead(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{3}{B}");
         this.subtype.add("Zombie");
         this.power = new MageInt(2);
         this.toughness = new MageInt(3);

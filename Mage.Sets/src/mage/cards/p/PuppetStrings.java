@@ -25,18 +25,18 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.tempest;
+package mage.cards.p;
 
 import java.util.UUID;
 
 import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.costs.common.TapSourceCost;
 import mage.abilities.costs.mana.GenericManaCost;
 import mage.abilities.effects.common.MayTapOrUntapTargetEffect;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.Zone;
 import mage.target.common.TargetCreaturePermanent;
 
@@ -46,9 +46,8 @@ import mage.target.common.TargetCreaturePermanent;
  */
 public class PuppetStrings extends CardImpl {
 
-    public PuppetStrings(UUID ownerId) {
-        super(ownerId, 294, "Puppet Strings", Rarity.UNCOMMON, new CardType[]{CardType.ARTIFACT}, "{3}");
-        this.expansionSetCode = "TMP";
+    public PuppetStrings(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.ARTIFACT},"{3}");
 
         // {2}, {tap}: You may tap or untap target creature.
         Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new MayTapOrUntapTargetEffect(), new GenericManaCost(2));

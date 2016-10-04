@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.odyssey;
+package mage.cards.a;
 
 import java.util.UUID;
 import mage.MageInt;
@@ -35,9 +35,9 @@ import mage.abilities.dynamicvalue.DynamicValue;
 import mage.abilities.dynamicvalue.common.SacrificeCostCreaturesPower;
 import mage.abilities.effects.common.continuous.BoostSourceEffect;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Duration;
-import mage.constants.Rarity;
 import mage.constants.TargetController;
 import mage.constants.Zone;
 import mage.filter.common.FilterControlledCreaturePermanent;
@@ -58,9 +58,8 @@ public class Atogatog extends CardImpl {
         filter.add(new SubtypePredicate("Atog"));
     }
 
-    public Atogatog(UUID ownerId) {
-        super(ownerId, 286, "Atogatog", Rarity.RARE, new CardType[]{CardType.CREATURE}, "{W}{U}{B}{R}{G}");
-        this.expansionSetCode = "ODY";
+    public Atogatog(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{W}{U}{B}{R}{G}");
         this.supertype.add("Legendary");
         this.subtype.add("Atog");
 

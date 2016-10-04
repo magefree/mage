@@ -25,15 +25,15 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.invasion;
+package mage.cards.p;
 
 import java.util.UUID;
 import mage.ObjectColor;
 import mage.abilities.effects.Effect;
 import mage.abilities.effects.common.DestroyTargetEffect;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.filter.predicate.Predicates;
 import mage.filter.predicate.mageobject.ColorPredicate;
@@ -53,9 +53,8 @@ public class PlagueSpores extends CardImpl {
         filter.add(Predicates.not(new ColorPredicate(ObjectColor.BLACK)));
     }
 
-    public PlagueSpores(UUID ownerId) {
-        super(ownerId, 260, "Plague Spores", Rarity.COMMON, new CardType[]{CardType.SORCERY}, "{4}{B}{R}");
-        this.expansionSetCode = "INV";
+    public PlagueSpores(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{4}{B}{R}");
 
         // Destroy target nonblack creature and target land. They can't be regenerated.
         Effect effect = new DestroyTargetEffect(true, true);

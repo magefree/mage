@@ -25,15 +25,15 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.dissension;
+package mage.cards.p;
 
 import java.util.UUID;
 import mage.abilities.TriggeredAbilityImpl;
 import mage.abilities.effects.Effect;
 import mage.abilities.effects.common.discard.DiscardTargetEffect;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.constants.Zone;
 import mage.game.Game;
 import mage.game.events.GameEvent;
@@ -45,9 +45,8 @@ import mage.target.targetpointer.FixedTarget;
  */
 public class PainMagnification extends CardImpl {
 
-    public PainMagnification(UUID ownerId) {
-        super(ownerId, 121, "Pain Magnification", Rarity.UNCOMMON, new CardType[]{CardType.ENCHANTMENT}, "{1}{B}{R}");
-        this.expansionSetCode = "DIS";
+    public PainMagnification(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.ENCHANTMENT},"{1}{B}{R}");
 
         // Whenever an opponent is dealt 3 or more damage by a single source, that player discards a card.
         this.addAbility(new PainMagnificationTriggeredAbility());

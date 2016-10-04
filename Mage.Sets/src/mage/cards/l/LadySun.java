@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.portalthreekingdoms;
+package mage.cards.l;
 
 import java.util.UUID;
 import mage.MageInt;
@@ -37,8 +37,8 @@ import mage.abilities.effects.Effect;
 import mage.abilities.effects.common.ReturnToHandSourceEffect;
 import mage.abilities.effects.common.ReturnToHandTargetEffect;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.constants.Zone;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.filter.predicate.permanent.AnotherPredicate;
@@ -55,9 +55,8 @@ public class LadySun extends CardImpl {
         filter.add(new AnotherPredicate());
     }
 
-    public LadySun(UUID ownerId) {
-        super(ownerId, 45, "Lady Sun", Rarity.RARE, new CardType[]{CardType.CREATURE}, "{1}{U}{U}");
-        this.expansionSetCode = "PTK";
+    public LadySun(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{1}{U}{U}");
         this.supertype.add("Legendary");
         this.subtype.add("Human");
         this.subtype.add("Advisor");

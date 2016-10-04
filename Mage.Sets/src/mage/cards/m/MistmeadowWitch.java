@@ -25,19 +25,19 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.shadowmoor;
+package mage.cards.m;
 
 import java.util.UUID;
 
 import mage.abilities.effects.common.MistmeadowWitchEffect;
 import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.constants.Zone;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.costs.mana.ManaCostsImpl;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.target.common.TargetCreaturePermanent;
 
 /**
@@ -46,9 +46,8 @@ import mage.target.common.TargetCreaturePermanent;
  */
 public class MistmeadowWitch extends CardImpl {
 
-    public MistmeadowWitch(UUID ownerId) {
-        super(ownerId, 144, "Mistmeadow Witch", Rarity.UNCOMMON, new CardType[]{CardType.CREATURE}, "{1}{W/U}");
-        this.expansionSetCode = "SHM";
+    public MistmeadowWitch(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{1}{W/U}");
         this.subtype.add("Kithkin");
         this.subtype.add("Wizard");
 

@@ -26,10 +26,9 @@
  *  or implied, of BetaSteward_at_googlemail.com.
  */
 
-package mage.sets.riseoftheeldrazi;
+package mage.cards.b;
 
 import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.constants.Zone;
 import mage.MageInt;
 import mage.abilities.Abilities;
@@ -41,6 +40,7 @@ import mage.abilities.costs.mana.ManaCostsImpl;
 import mage.abilities.effects.common.DamageTargetEffect;
 import mage.abilities.keyword.LevelUpAbility;
 import mage.abilities.keyword.LevelerCardBuilder;
+import mage.cards.CardSetInfo;
 import mage.cards.LevelerCard;
 import mage.target.common.TargetCreatureOrPlayer;
 
@@ -52,9 +52,8 @@ import java.util.UUID;
  */
 public class BrimstoneMage extends LevelerCard {
 
-    public BrimstoneMage (UUID ownerId) {
-        super(ownerId, 137, "Brimstone Mage", Rarity.UNCOMMON, new CardType[]{CardType.CREATURE}, "{2}{R}");
-        this.expansionSetCode = "ROE";
+    public BrimstoneMage (UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{2}{R}");
         this.subtype.add("Human");
         this.subtype.add("Shaman");
         this.color.setRed(true);

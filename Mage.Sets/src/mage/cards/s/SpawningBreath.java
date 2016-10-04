@@ -25,14 +25,14 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.riseoftheeldrazi;
+package mage.cards.s;
 
 import java.util.UUID;
 import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.abilities.effects.common.CreateTokenEffect;
 import mage.abilities.effects.common.DamageTargetEffect;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.game.permanent.token.EldraziSpawnToken;
 import mage.target.common.TargetCreatureOrPlayer;
 
@@ -42,9 +42,8 @@ import mage.target.common.TargetCreatureOrPlayer;
  */
 public class SpawningBreath extends CardImpl {
 
-    public SpawningBreath(UUID ownerId) {
-        super(ownerId, 164, "Spawning Breath", Rarity.COMMON, new CardType[]{CardType.INSTANT}, "{1}{R}");
-        this.expansionSetCode = "ROE";
+    public SpawningBreath(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.INSTANT},"{1}{R}");
 
 
         this.getSpellAbility().addEffect(new DamageTargetEffect(1));

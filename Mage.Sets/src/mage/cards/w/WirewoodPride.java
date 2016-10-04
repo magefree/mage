@@ -25,16 +25,16 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.onslaught;
+package mage.cards.w;
 
 import java.util.UUID;
 import mage.abilities.dynamicvalue.common.PermanentsOnBattlefieldCount;
 import mage.abilities.effects.Effect;
 import mage.abilities.effects.common.continuous.BoostTargetEffect;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Duration;
-import mage.constants.Rarity;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.filter.predicate.mageobject.SubtypePredicate;
 import mage.target.common.TargetCreaturePermanent;
@@ -50,9 +50,8 @@ public class WirewoodPride extends CardImpl {
         elfCount.add(new SubtypePredicate("Elf"));
     }
     
-    public WirewoodPride(UUID ownerId) {
-        super(ownerId, 303, "Wirewood Pride", Rarity.COMMON, new CardType[]{CardType.INSTANT}, "{G}");
-        this.expansionSetCode = "ONS";
+    public WirewoodPride(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.INSTANT},"{G}");
 
         // Target creature gets +X/+X until end of turn, where X is the number of Elves on the battlefield.
         PermanentsOnBattlefieldCount amount = new PermanentsOnBattlefieldCount(elfCount);

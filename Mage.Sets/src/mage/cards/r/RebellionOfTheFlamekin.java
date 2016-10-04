@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.lorwyn;
+package mage.cards.r;
 
 import java.util.UUID;
 import mage.abilities.Ability;
@@ -39,10 +39,10 @@ import mage.abilities.effects.common.DoIfCostPaid;
 import mage.abilities.effects.common.continuous.GainAbilityTargetEffect;
 import mage.abilities.keyword.HasteAbility;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Duration;
 import mage.constants.Outcome;
-import mage.constants.Rarity;
 import mage.constants.Zone;
 import mage.game.Game;
 import mage.game.events.GameEvent;
@@ -57,9 +57,8 @@ import mage.target.targetpointer.FixedTarget;
  */
 public class RebellionOfTheFlamekin extends CardImpl {
 
-    public RebellionOfTheFlamekin(UUID ownerId) {
-        super(ownerId, 188, "Rebellion of the Flamekin", Rarity.UNCOMMON, new CardType[]{CardType.TRIBAL, CardType.ENCHANTMENT}, "{3}{R}");
-        this.expansionSetCode = "LRW";
+    public RebellionOfTheFlamekin(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.TRIBAL,CardType.ENCHANTMENT},"{3}{R}");
         this.subtype.add("Elemental");
 
         // Whenever you clash, you may pay {1}. If you do put a 3/1 Red Elemental Shaman creature token in play. If you won that token gains haste

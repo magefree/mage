@@ -26,14 +26,14 @@
  *  or implied, of BetaSteward_at_googlemail.com.
  */
 
-package mage.sets.magic2012;
+package mage.cards.m;
 
 import java.util.UUID;
 
 import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.abilities.mana.AnyColorManaAbility;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 
 /**
  *
@@ -41,9 +41,8 @@ import mage.cards.CardImpl;
  */
 public class Manalith extends CardImpl {
 
-    public Manalith (UUID ownerId) {
-        super(ownerId, 212, "Manalith", Rarity.COMMON, new CardType[]{CardType.ARTIFACT}, "{3}");
-        this.expansionSetCode = "M12";
+    public Manalith (UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.ARTIFACT},"{3}");
         this.addAbility(new AnyColorManaAbility());
     }
 

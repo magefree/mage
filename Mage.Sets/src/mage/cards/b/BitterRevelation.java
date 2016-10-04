@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.khansoftarkir;
+package mage.cards.b;
 
 import java.util.UUID;
 import mage.abilities.Ability;
@@ -33,11 +33,11 @@ import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.LoseLifeSourceControllerEffect;
 import mage.cards.Card;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.cards.Cards;
 import mage.cards.CardsImpl;
 import mage.constants.CardType;
 import mage.constants.Outcome;
-import mage.constants.Rarity;
 import mage.constants.Zone;
 import mage.filter.FilterCard;
 import mage.game.Game;
@@ -50,9 +50,8 @@ import mage.target.TargetCard;
  */
 public class BitterRevelation extends CardImpl {
 
-    public BitterRevelation(UUID ownerId) {
-        super(ownerId, 65, "Bitter Revelation", Rarity.COMMON, new CardType[]{CardType.SORCERY}, "{3}{B}");
-        this.expansionSetCode = "KTK";
+    public BitterRevelation(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{3}{B}");
 
 
         // Look at the top four cards of your library. Put two of them into your hand and the rest into your graveyard. You lose 2 life.

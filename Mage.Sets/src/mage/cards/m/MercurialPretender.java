@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.magic2015;
+package mage.cards.m;
 
 import java.util.UUID;
 import mage.MageInt;
@@ -36,8 +36,8 @@ import mage.abilities.effects.Effect;
 import mage.abilities.effects.common.CopyPermanentEffect;
 import mage.abilities.effects.common.ReturnToHandSourceEffect;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.constants.Zone;
 import mage.filter.common.FilterControlledCreaturePermanent;
 import mage.util.functions.AbilityApplier;
@@ -50,9 +50,8 @@ public class MercurialPretender extends CardImpl {
 
     private static final String effectText = "as a copy of any creature you control except it gains \"{2}{U}{U}: Return this creature to its owner's hand.\"";
 
-    public MercurialPretender(UUID ownerId) {
-        super(ownerId, 68, "Mercurial Pretender", Rarity.RARE, new CardType[]{CardType.CREATURE}, "{4}{U}");
-        this.expansionSetCode = "M15";
+    public MercurialPretender(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{4}{U}");
         this.subtype.add("Shapeshifter");
 
         this.color.setBlue(true);

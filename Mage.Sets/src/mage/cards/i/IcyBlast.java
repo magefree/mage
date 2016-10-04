@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.khansoftarkir;
+package mage.cards.i;
 
 import java.util.UUID;
 import mage.abilities.Ability;
@@ -37,8 +37,8 @@ import mage.abilities.effects.Effect;
 import mage.abilities.effects.common.DontUntapInControllersNextUntapStepTargetEffect;
 import mage.abilities.effects.common.TapTargetEffect;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.game.Game;
 import mage.target.common.TargetCreaturePermanent;
@@ -49,9 +49,8 @@ import mage.target.common.TargetCreaturePermanent;
  */
 public class IcyBlast extends CardImpl {
 
-    public IcyBlast(UUID ownerId) {
-        super(ownerId, 42, "Icy Blast", Rarity.RARE, new CardType[]{CardType.INSTANT}, "{X}{U}");
-        this.expansionSetCode = "KTK";
+    public IcyBlast(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.INSTANT},"{X}{U}");
 
 
         // Tap X target creatures.

@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.mercadianmasques;
+package mage.cards.l;
 
 import java.util.UUID;
 import mage.abilities.Ability;
@@ -35,8 +35,8 @@ import mage.abilities.costs.Cost;
 import mage.abilities.costs.CostImpl;
 import mage.abilities.effects.common.search.SearchLibraryPutInHandEffect;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.filter.common.FilterLandCard;
 import mage.filter.predicate.mageobject.SubtypePredicate;
 import mage.game.Game;
@@ -55,9 +55,8 @@ public class LandGrant extends CardImpl {
         filter.add(new SubtypePredicate("Forest"));
     }
     
-    public LandGrant(UUID ownerId) {
-        super(ownerId, 255, "Land Grant", Rarity.COMMON, new CardType[]{CardType.SORCERY}, "{1}{G}");
-        this.expansionSetCode = "MMQ";
+    public LandGrant(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{1}{G}");
 
 
         // If you have no land cards in hand, you may reveal your hand rather than pay Land Grant's mana cost.

@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.commander2015;
+package mage.cards.s;
 
 import java.util.UUID;
 import mage.MageInt;
@@ -35,9 +35,9 @@ import mage.abilities.common.EntersBattlefieldTriggeredAbility;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.keyword.FlyingAbility;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Outcome;
-import mage.constants.Rarity;
 import mage.game.Game;
 import mage.players.Player;
 import mage.target.common.TargetOpponent;
@@ -48,9 +48,8 @@ import mage.target.common.TargetOpponent;
  */
 public class SandstoneOracle extends CardImpl {
 
-    public SandstoneOracle(UUID ownerId) {
-        super(ownerId, 52, "Sandstone Oracle", Rarity.UNCOMMON, new CardType[]{CardType.ARTIFACT, CardType.CREATURE}, "{7}");
-        this.expansionSetCode = "C15";
+    public SandstoneOracle(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.ARTIFACT,CardType.CREATURE},"{7}");
         this.subtype.add("Sphinx");
         this.power = new MageInt(4);
         this.toughness = new MageInt(4);

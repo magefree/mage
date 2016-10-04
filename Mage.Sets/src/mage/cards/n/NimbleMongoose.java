@@ -25,12 +25,11 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.odyssey;
+package mage.cards.n;
 
 import java.util.UUID;
 
 import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleStaticAbility;
@@ -39,6 +38,7 @@ import mage.abilities.decorator.ConditionalContinuousEffect;
 import mage.abilities.effects.common.continuous.BoostSourceEffect;
 import mage.abilities.keyword.ShroudAbility;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.AbilityWord;
 import mage.constants.Duration;
 import mage.constants.Zone;
@@ -49,9 +49,8 @@ import mage.constants.Zone;
  */
 public class NimbleMongoose extends CardImpl {
 
-    public NimbleMongoose(UUID ownerId) {
-        super(ownerId, 258, "Nimble Mongoose", Rarity.UNCOMMON, new CardType[]{CardType.CREATURE}, "{G}");
-        this.expansionSetCode = "ODY";
+    public NimbleMongoose(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{G}");
         this.subtype.add("Mongoose");
 
         this.power = new MageInt(1);

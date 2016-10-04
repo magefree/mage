@@ -25,15 +25,15 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.kaladesh;
+package mage.cards.a;
 
 import java.util.UUID;
 import mage.abilities.effects.Effect;
 import mage.abilities.effects.common.counter.GetEnergyCountersControllerEffect;
 import mage.abilities.effects.common.search.SearchLibraryPutInHandEffect;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.filter.common.FilterBasicLandCard;
 import mage.target.common.TargetCardInLibrary;
 
@@ -43,9 +43,8 @@ import mage.target.common.TargetCardInLibrary;
  */
 public class AttuneWithAether extends CardImpl {
 
-    public AttuneWithAether(UUID ownerId) {
-        super(ownerId, 145, "Attune with Aether", Rarity.COMMON, new CardType[]{CardType.SORCERY}, "{G}");
-        this.expansionSetCode = "KLD";
+    public AttuneWithAether(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{G}");
 
         // Search you library for a basic land card, reveal it, put it into your hand, then shuffle your library. You get {E}{E}.
         Effect effect = new SearchLibraryPutInHandEffect(new TargetCardInLibrary(1, 1, new FilterBasicLandCard()), true);

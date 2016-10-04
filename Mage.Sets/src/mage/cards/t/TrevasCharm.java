@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.planeshift;
+package mage.cards.t;
 
 import java.util.UUID;
 import mage.abilities.Mode;
@@ -33,8 +33,8 @@ import mage.abilities.effects.common.DestroyTargetEffect;
 import mage.abilities.effects.common.DrawDiscardControllerEffect;
 import mage.abilities.effects.common.ExileTargetEffect;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.target.common.TargetAttackingCreature;
 import mage.target.common.TargetEnchantmentPermanent;
 
@@ -44,9 +44,8 @@ import mage.target.common.TargetEnchantmentPermanent;
  */
 public class TrevasCharm extends CardImpl {
 
-    public TrevasCharm(UUID ownerId) {
-        super(ownerId, 129, "Treva's Charm", Rarity.UNCOMMON, new CardType[]{CardType.INSTANT}, "{G}{W}{U}");
-        this.expansionSetCode = "PLS";
+    public TrevasCharm(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.INSTANT},"{G}{W}{U}");
 
         // Choose one - Destroy target enchantment;
         this.getSpellAbility().addEffect(new DestroyTargetEffect());

@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.innistrad;
+package mage.cards.s;
 
 import java.util.UUID;
 import mage.abilities.costs.mana.ManaCostsImpl;
@@ -33,8 +33,8 @@ import mage.abilities.dynamicvalue.common.CardsInControllerGraveyardCount;
 import mage.abilities.effects.common.CreateTokenEffect;
 import mage.abilities.keyword.FlashbackAbility;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.constants.TimingRule;
 import mage.filter.common.FilterCreatureCard;
 import mage.game.permanent.token.SpiderToken;
@@ -45,9 +45,8 @@ import mage.game.permanent.token.SpiderToken;
  */
 public class SpiderSpawning extends CardImpl {
 
-    public SpiderSpawning(UUID ownerId) {
-        super(ownerId, 203, "Spider Spawning", Rarity.UNCOMMON, new CardType[]{CardType.SORCERY}, "{4}{G}");
-        this.expansionSetCode = "ISD";
+    public SpiderSpawning(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{4}{G}");
 
 
         // Put a 1/2 green Spider creature token with reach onto the battlefield for each creature card in your graveyard.

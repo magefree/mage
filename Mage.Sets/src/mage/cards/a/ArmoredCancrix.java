@@ -26,13 +26,13 @@
  *  or implied, of BetaSteward_at_googlemail.com.
  */
 
-package mage.sets.magic2011;
+package mage.cards.a;
 
 import java.util.UUID;
 import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.MageInt;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 
 /**
  *
@@ -40,9 +40,8 @@ import mage.cards.CardImpl;
  */
 public class ArmoredCancrix extends CardImpl {
 
-    public ArmoredCancrix(UUID ownerId) {
-        super(ownerId, 44, "Armored Cancrix", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{4}{U}");
-        this.expansionSetCode = "M11";
+    public ArmoredCancrix(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{4}{U}");
 
         this.subtype.add("Crab");
         this.power = new MageInt(2);

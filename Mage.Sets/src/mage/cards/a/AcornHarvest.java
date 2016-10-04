@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.torment;
+package mage.cards.a;
 
 import java.util.UUID;
 import mage.abilities.costs.common.PayLifeCost;
@@ -33,8 +33,8 @@ import mage.abilities.costs.mana.ManaCostsImpl;
 import mage.abilities.effects.common.CreateTokenEffect;
 import mage.abilities.keyword.FlashbackAbility;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.constants.TimingRule;
 import mage.game.permanent.token.SquirrelToken;
 
@@ -44,9 +44,8 @@ import mage.game.permanent.token.SquirrelToken;
  */
 public class AcornHarvest extends CardImpl {
 
-    public AcornHarvest(UUID ownerId) {
-        super(ownerId, 118, "Acorn Harvest", Rarity.COMMON, new CardType[]{CardType.SORCERY}, "{3}{G}");
-        this.expansionSetCode = "TOR";
+    public AcornHarvest(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{3}{G}");
 
 
         // Put two 1/1 green Squirrel creature tokens onto the battlefield.

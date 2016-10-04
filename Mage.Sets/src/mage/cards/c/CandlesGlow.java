@@ -25,16 +25,16 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.championsofkamigawa;
+package mage.cards.c;
 
 import java.util.UUID;
 import mage.abilities.Ability;
 import mage.abilities.effects.PreventionEffectImpl;
 import mage.abilities.keyword.SpliceOntoArcaneAbility;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Duration;
-import mage.constants.Rarity;
 import mage.game.Game;
 import mage.game.events.GameEvent;
 import mage.players.Player;
@@ -46,9 +46,8 @@ import mage.target.common.TargetCreatureOrPlayer;
  */
 public class CandlesGlow extends CardImpl {
 
-    public CandlesGlow(UUID ownerId) {
-        super(ownerId, 5, "Candles' Glow", Rarity.UNCOMMON, new CardType[]{CardType.INSTANT}, "{1}{W}");
-        this.expansionSetCode = "CHK";
+    public CandlesGlow(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.INSTANT},"{1}{W}");
         this.subtype.add("Arcane");
 
 

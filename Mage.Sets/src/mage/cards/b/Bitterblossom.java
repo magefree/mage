@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.morningtide;
+package mage.cards.b;
 
 import java.util.UUID;
 import mage.abilities.Ability;
@@ -33,8 +33,8 @@ import mage.abilities.common.BeginningOfUpkeepTriggeredAbility;
 import mage.abilities.effects.common.CreateTokenEffect;
 import mage.abilities.effects.common.LoseLifeSourceControllerEffect;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.constants.TargetController;
 import mage.game.permanent.token.FaerieRogueToken;
 
@@ -44,9 +44,8 @@ import mage.game.permanent.token.FaerieRogueToken;
  */
 public class Bitterblossom extends CardImpl {
 
-    public Bitterblossom(UUID ownerId) {
-        super(ownerId, 58, "Bitterblossom", Rarity.RARE, new CardType[]{CardType.TRIBAL, CardType.ENCHANTMENT}, "{1}{B}");
-        this.expansionSetCode = "MOR";
+    public Bitterblossom(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.TRIBAL,CardType.ENCHANTMENT},"{1}{B}");
         this.subtype.add("Faerie");
 
         // At the beginning of your upkeep, you lose 1 life and put a 1/1 black Faerie Rogue creature token with flying onto the battlefield.

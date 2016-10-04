@@ -25,14 +25,14 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.battleforzendikar;
+package mage.cards.m;
 
 import java.util.UUID;
 import mage.abilities.effects.common.discard.DiscardTargetEffect;
 import mage.abilities.keyword.AwakenAbility;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.target.common.TargetOpponent;
 
 /**
@@ -41,9 +41,8 @@ import mage.target.common.TargetOpponent;
  */
 public class MiresMalice extends CardImpl {
 
-    public MiresMalice(UUID ownerId) {
-        super(ownerId, 117, "Mire's Malice", Rarity.COMMON, new CardType[]{CardType.SORCERY}, "{3}{B}");
-        this.expansionSetCode = "BFZ";
+    public MiresMalice(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{3}{B}");
 
         // Target opponent discards two cards.
         this.getSpellAbility().addEffect(new DiscardTargetEffect(2));

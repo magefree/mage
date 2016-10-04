@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.avacynrestored;
+package mage.cards.g;
 
 import mage.constants.*;
 import mage.abilities.Ability;
@@ -34,6 +34,7 @@ import mage.abilities.effects.common.AttachEffect;
 import mage.abilities.effects.common.continuous.BoostEnchantedEffect;
 import mage.abilities.keyword.EnchantAbility;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.target.TargetPermanent;
 import mage.target.common.TargetCreaturePermanent;
 
@@ -46,9 +47,8 @@ import mage.abilities.effects.common.combat.AttacksIfAbleAttachedEffect;
  */
 public class GuiseOfFire extends CardImpl {
 
-    public GuiseOfFire(UUID ownerId) {
-        super(ownerId, 137, "Guise of Fire", Rarity.COMMON, new CardType[]{CardType.ENCHANTMENT}, "{R}");
-        this.expansionSetCode = "AVR";
+    public GuiseOfFire(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.ENCHANTMENT},"{R}");
         this.subtype.add("Aura");
 
         // Enchant creature

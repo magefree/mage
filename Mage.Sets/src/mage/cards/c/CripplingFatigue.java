@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.torment;
+package mage.cards.c;
 
 import java.util.UUID;
 import mage.abilities.Ability;
@@ -34,9 +34,9 @@ import mage.abilities.costs.mana.ManaCostsImpl;
 import mage.abilities.effects.common.continuous.BoostTargetEffect;
 import mage.abilities.keyword.FlashbackAbility;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Duration;
-import mage.constants.Rarity;
 import mage.constants.TimingRule;
 import mage.target.common.TargetCreaturePermanent;
 
@@ -46,9 +46,8 @@ import mage.target.common.TargetCreaturePermanent;
  */
 public class CripplingFatigue extends CardImpl {
 
-    public CripplingFatigue(UUID ownerId) {
-        super(ownerId, 58, "Crippling Fatigue", Rarity.COMMON, new CardType[]{CardType.SORCERY}, "{1}{B}{B}");
-        this.expansionSetCode = "TOR";
+    public CripplingFatigue(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{1}{B}{B}");
 
         // Target creature gets -2/-2 until end of turn.
         this.getSpellAbility().addTarget(new TargetCreaturePermanent());

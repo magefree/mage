@@ -25,16 +25,16 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.seventhedition;
+package mage.cards.a;
 
 import java.util.UUID;
 import mage.abilities.Ability;
 import mage.abilities.effects.OneShotEffect;
 import mage.cards.Card;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Outcome;
-import mage.constants.Rarity;
 import mage.constants.Zone;
 import mage.filter.FilterCard;
 import mage.game.Game;
@@ -48,9 +48,8 @@ import mage.target.TargetPlayer;
  */
 public class AgonizingMemories extends CardImpl {
 
-    public AgonizingMemories(UUID ownerId) {
-        super(ownerId, 117, "Agonizing Memories", Rarity.UNCOMMON, new CardType[]{CardType.SORCERY}, "{2}{B}{B}");
-        this.expansionSetCode = "7ED";
+    public AgonizingMemories(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{2}{B}{B}");
 
 
         // Look at target player's hand and choose two cards from it. Put them on top of that player's library in any order.

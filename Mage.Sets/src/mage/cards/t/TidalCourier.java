@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.apocalypse;
+package mage.cards.t;
 
 import java.util.UUID;
 import mage.MageInt;
@@ -34,9 +34,9 @@ import mage.abilities.costs.mana.ManaCostsImpl;
 import mage.abilities.effects.common.continuous.GainAbilitySourceEffect;
 import mage.abilities.keyword.FlyingAbility;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Duration;
-import mage.constants.Rarity;
 import mage.constants.Zone;
 import mage.abilities.common.EntersBattlefieldTriggeredAbility;
 import mage.abilities.effects.common.EnvoyEffect;
@@ -55,9 +55,8 @@ public class TidalCourier extends CardImpl {
         filter.add(new SubtypePredicate("Merfolk"));
     }
 
-    public TidalCourier(UUID ownerId) {
-        super(ownerId, 31, "Tidal Courier", Rarity.UNCOMMON, new CardType[]{CardType.CREATURE}, "{3}{U}");
-        this.expansionSetCode = "APC";
+    public TidalCourier(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{3}{U}");
         this.subtype.add("Merfolk");
         this.power = new MageInt(1);
         this.toughness = new MageInt(2);

@@ -26,11 +26,10 @@
  *  or implied, of BetaSteward_at_googlemail.com.
  */
 
-package mage.sets.magic2010;
+package mage.cards.w;
 
 import java.util.UUID;
 import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.constants.Zone;
 import mage.MageInt;
 import mage.abilities.common.SimpleActivatedAbility;
@@ -38,6 +37,7 @@ import mage.abilities.costs.mana.ManaCostsImpl;
 import mage.abilities.effects.common.RegenerateSourceEffect;
 import mage.abilities.keyword.DefenderAbility;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 
 /**
  *
@@ -45,9 +45,8 @@ import mage.cards.CardImpl;
  */
 public class WallOfBone extends CardImpl {
 
-    public WallOfBone(UUID ownerId) {
-        super(ownerId, 119, "Wall of Bone", Rarity.UNCOMMON, new CardType[]{CardType.CREATURE}, "{2}{B}");
-        this.expansionSetCode = "M10";
+    public WallOfBone(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{2}{B}");
         this.subtype.add("Skeleton");
         this.subtype.add("Wall");
 

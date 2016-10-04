@@ -25,11 +25,10 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.shadowmoor;
+package mage.cards.f;
 
 import java.util.UUID;
 import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.constants.Zone;
 import mage.MageInt;
 import mage.abilities.Ability;
@@ -37,6 +36,7 @@ import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.costs.common.SacrificeSourceCost;
 import mage.abilities.effects.common.DestroyTargetEffect;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.target.common.TargetNonBasicLandPermanent;
 
 /**
@@ -45,9 +45,8 @@ import mage.target.common.TargetNonBasicLandPermanent;
  */
 public class FulminatorMage extends CardImpl {
 
-    public FulminatorMage(UUID ownerId) {
-        super(ownerId, 188, "Fulminator Mage", Rarity.RARE, new CardType[]{CardType.CREATURE}, "{1}{B/R}{B/R}");
-        this.expansionSetCode = "SHM";
+    public FulminatorMage(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{1}{B/R}{B/R}");
         this.subtype.add("Elemental");
         this.subtype.add("Shaman");
 

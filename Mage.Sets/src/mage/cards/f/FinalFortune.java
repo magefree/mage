@@ -25,13 +25,13 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.seventhedition;
+package mage.cards.f;
 
 import java.util.UUID;
 import mage.abilities.effects.common.turn.AddExtraTurnControllerEffect;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.Rarity;
 
 /**
  *
@@ -39,9 +39,8 @@ import mage.constants.Rarity;
  */
 public class FinalFortune extends CardImpl {
 
-    public FinalFortune(UUID ownerId) {
-        super(ownerId, 182, "Final Fortune", Rarity.RARE, new CardType[]{CardType.INSTANT}, "{R}{R}");
-        this.expansionSetCode = "7ED";
+    public FinalFortune(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.INSTANT},"{R}{R}");
 
         // Take an extra turn after this one. At the beginning of that turn's end step, you lose the game.
         this.getSpellAbility().addEffect(new AddExtraTurnControllerEffect(true));

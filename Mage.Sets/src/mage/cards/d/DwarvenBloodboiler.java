@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.judgment;
+package mage.cards.d;
 
 import java.util.UUID;
 import mage.MageInt;
@@ -34,9 +34,9 @@ import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.costs.common.TapTargetCost;
 import mage.abilities.effects.common.continuous.BoostTargetEffect;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Duration;
-import mage.constants.Rarity;
 import mage.constants.Zone;
 import mage.filter.common.FilterControlledPermanent;
 import mage.filter.predicate.Predicates;
@@ -58,9 +58,8 @@ public class DwarvenBloodboiler extends CardImpl {
         filter.add(new SubtypePredicate("Dwarf"));
     }
 
-    public DwarvenBloodboiler(UUID ownerId) {
-        super(ownerId, 84, "Dwarven Bloodboiler", Rarity.RARE, new CardType[]{CardType.CREATURE}, "{R}{R}{R}");
-        this.expansionSetCode = "JUD";
+    public DwarvenBloodboiler(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{R}{R}{R}");
         this.subtype.add("Dwarf");
         this.power = new MageInt(2);
         this.toughness = new MageInt(2);

@@ -25,17 +25,17 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.betrayersofkamigawa;
+package mage.cards.e;
 
 import java.util.ArrayList;
 import java.util.UUID;
 import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.MageInt;
 import mage.MageObject;
 import mage.ObjectColor;
 import mage.abilities.keyword.ProtectionAbility;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.filter.Filter;
 import mage.filter.FilterCard;
 import mage.filter.FilterObject;
@@ -51,9 +51,8 @@ import mage.game.permanent.Permanent;
  */
 public class EmptyShrineKannushi extends CardImpl {
 
-    public EmptyShrineKannushi(UUID ownerId) {
-        super(ownerId, 2, "Empty-Shrine Kannushi", Rarity.UNCOMMON, new CardType[]{CardType.CREATURE}, "{W}");
-        this.expansionSetCode = "BOK";
+    public EmptyShrineKannushi(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{W}");
         this.subtype.add("Human");
         this.subtype.add("Cleric");
 

@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.conflux;
+package mage.cards.y;
 
 import java.util.UUID;
 import mage.abilities.Ability;
@@ -34,9 +34,9 @@ import mage.abilities.effects.common.AttachEffect;
 import mage.abilities.effects.common.DestroyAttachedEffect;
 import mage.abilities.keyword.EnchantAbility;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Outcome;
-import mage.constants.Rarity;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.target.TargetPermanent;
 import mage.target.common.TargetCreaturePermanent;
@@ -49,9 +49,8 @@ public class YokeOfTheDamned extends CardImpl {
 
     private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("a creature");
 
-    public YokeOfTheDamned(UUID ownerId) {
-        super(ownerId, 57, "Yoke of the Damned", Rarity.COMMON, new CardType[]{CardType.ENCHANTMENT}, "{1}{B}");
-        this.expansionSetCode = "CON";
+    public YokeOfTheDamned(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.ENCHANTMENT},"{1}{B}");
         this.subtype.add("Aura");
 
 

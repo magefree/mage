@@ -25,14 +25,14 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.urzassaga;
+package mage.cards.w;
 
 import java.util.UUID;
 import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.abilities.effects.common.DamageAllEffect;
 import mage.abilities.effects.common.SacrificeAllEffect;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.filter.common.FilterControlledLandPermanent;
 import mage.filter.common.FilterControlledPermanent;
 import mage.filter.common.FilterCreaturePermanent;
@@ -45,9 +45,8 @@ public class Wildfire extends CardImpl {
 
     private static final FilterControlledPermanent filter = new FilterControlledLandPermanent("land");
 
-    public Wildfire(UUID ownerId) {
-        super(ownerId, 228, "Wildfire", Rarity.RARE, new CardType[]{CardType.SORCERY}, "{4}{R}{R}");
-        this.expansionSetCode = "USG";
+    public Wildfire(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{4}{R}{R}");
 
 
         //Each player sacrifices four lands.

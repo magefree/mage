@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.betrayersofkamigawa;
+package mage.cards.s;
 
 import java.util.UUID;
 
@@ -37,6 +37,7 @@ import mage.abilities.costs.common.TapSourceCost;
 import mage.abilities.costs.mana.ColoredManaCost;
 import mage.abilities.effects.common.PreventDamageToTargetEffect;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.target.common.TargetCreatureOrPlayer;
 
 /**
@@ -45,9 +46,8 @@ import mage.target.common.TargetCreatureOrPlayer;
  */
 public class SplitTailMiko extends CardImpl {
 
-    public SplitTailMiko(UUID ownerId) {
-        super(ownerId, 23, "Split-Tail Miko", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{1}{W}");
-        this.expansionSetCode = "BOK";
+    public SplitTailMiko(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{1}{W}");
         this.subtype.add("Fox");
         this.subtype.add("Cleric");
 

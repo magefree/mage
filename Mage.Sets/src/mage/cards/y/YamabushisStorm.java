@@ -27,15 +27,15 @@
  *  or implied, of BetaSteward_at_googlemail.com.
  *
  */
-package mage.sets.championsofkamigawa;
+package mage.cards.y;
 
 import java.util.UUID;
 import mage.constants.CardType;
 import mage.constants.Duration;
-import mage.constants.Rarity;
 import mage.abilities.effects.common.DamageAllEffect;
 import mage.abilities.effects.common.replacement.DealtDamageToCreatureBySourceDies;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.watchers.common.DamagedByWatcher;
 
@@ -45,9 +45,8 @@ import mage.watchers.common.DamagedByWatcher;
  */
 public class YamabushisStorm extends CardImpl {
 
-    public YamabushisStorm(UUID ownerId) {
-        super(ownerId, 199, "Yamabushi's Storm", Rarity.COMMON, new CardType[]{CardType.SORCERY}, "{1}{R}");
-        this.expansionSetCode = "CHK";
+    public YamabushisStorm(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{1}{R}");
 
         // Yamabushi's Storm deals 1 damage to each creature.
         this.getSpellAbility().addEffect(new DamageAllEffect(1, new FilterCreaturePermanent()));

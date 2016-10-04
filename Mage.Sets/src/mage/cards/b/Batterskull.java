@@ -26,7 +26,7 @@
  *  or implied, of BetaSteward_at_googlemail.com.
  */
 
-package mage.sets.newphyrexia;
+package mage.cards.b;
 
 import java.util.UUID;
 
@@ -42,6 +42,7 @@ import mage.abilities.keyword.LifelinkAbility;
 import mage.abilities.keyword.LivingWeaponAbility;
 import mage.abilities.keyword.VigilanceAbility;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 
 /**
  *
@@ -49,9 +50,8 @@ import mage.cards.CardImpl;
  */
 public class Batterskull extends CardImpl {
 
-    public Batterskull (UUID ownerId) {
-        super(ownerId, 130, "Batterskull", Rarity.MYTHIC, new CardType[]{CardType.ARTIFACT}, "{5}");
-        this.expansionSetCode = "NPH";
+    public Batterskull (UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.ARTIFACT},"{5}");
         this.subtype.add("Equipment");
 
         // Living weapon (When this Equipment enters the battlefield, put a 0/0 black Germ creature token onto the battlefield, then attach this to it.)

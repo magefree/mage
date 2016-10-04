@@ -25,17 +25,17 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.returntoravnica;
+package mage.cards.m;
 
 import java.util.UUID;
 
 import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.abilities.costs.mana.ManaCostsImpl;
 import mage.abilities.effects.common.DamageAllEffect;
 import mage.abilities.effects.common.DamageTargetEffect;
 import mage.abilities.keyword.OverloadAbility;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.TargetController;
 import mage.constants.TimingRule;
 import mage.filter.common.FilterCreaturePermanent;
@@ -54,9 +54,8 @@ public class MizziumMortars extends CardImpl {
         filter.add(new ControllerPredicate(TargetController.NOT_YOU));
     }
 
-    public MizziumMortars(UUID ownerId) {
-        super(ownerId, 101, "Mizzium Mortars", Rarity.RARE, new CardType[]{CardType.SORCERY}, "{1}{R}");
-        this.expansionSetCode = "RTR";
+    public MizziumMortars(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{1}{R}");
 
 
         // MizziumMortars deals 4 damage to target creature you don't control.

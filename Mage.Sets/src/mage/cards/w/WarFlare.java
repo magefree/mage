@@ -25,15 +25,15 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.fatereforged;
+package mage.cards.w;
 
 import java.util.UUID;
 import mage.abilities.effects.common.UntapAllControllerEffect;
 import mage.abilities.effects.common.continuous.BoostControlledEffect;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Duration;
-import mage.constants.Rarity;
 import mage.filter.common.FilterCreaturePermanent;
 
 /**
@@ -42,9 +42,8 @@ import mage.filter.common.FilterCreaturePermanent;
  */
 public class WarFlare extends CardImpl {
 
-    public WarFlare(UUID ownerId) {
-        super(ownerId, 158, "War Flare", Rarity.COMMON, new CardType[]{CardType.INSTANT}, "{2}{R}{W}");
-        this.expansionSetCode = "FRF";
+    public WarFlare(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.INSTANT},"{2}{R}{W}");
 
         // Creatures you control get +2/+1 until end of turn.  Untap those creatures.
         this.getSpellAbility().addEffect(new BoostControlledEffect(2, 1, Duration.EndOfTurn));

@@ -25,14 +25,14 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.dragonsoftarkir;
+package mage.cards.s;
 
 import java.util.UUID;
 import mage.abilities.dynamicvalue.common.ManacostVariableValue;
 import mage.abilities.effects.common.CreateTokenEffect;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.game.permanent.token.WarriorToken;
 
 /**
@@ -41,9 +41,8 @@ import mage.game.permanent.token.WarriorToken;
  */
 public class SecureTheWastes extends CardImpl {
 
-    public SecureTheWastes(UUID ownerId) {
-        super(ownerId, 36, "Secure the Wastes", Rarity.RARE, new CardType[]{CardType.INSTANT}, "{X}{W}");
-        this.expansionSetCode = "DTK";
+    public SecureTheWastes(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.INSTANT},"{X}{W}");
 
         // Put X 1/1 white Warrior creature tokens onto the battlefield.
         this.getSpellAbility().addEffect(new CreateTokenEffect(new WarriorToken(), new ManacostVariableValue()));

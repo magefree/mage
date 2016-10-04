@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.antiquities;
+package mage.cards.t;
 
 import java.util.UUID;
 import mage.abilities.Ability;
@@ -34,8 +34,8 @@ import mage.abilities.costs.common.TapSourceCost;
 import mage.abilities.costs.mana.ManaCostsImpl;
 import mage.abilities.effects.common.combat.CantBeBlockedTargetEffect;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.constants.Zone;
 import mage.filter.Filter;
 import mage.filter.common.FilterCreaturePermanent;
@@ -54,9 +54,8 @@ public class TawnossWand extends CardImpl {
         filter.add(new PowerPredicate(Filter.ComparisonType.LessThan, 3));
     }
 
-    public TawnossWand(UUID ownerId) {
-        super(ownerId, 34, "Tawnos's Wand", Rarity.UNCOMMON, new CardType[]{CardType.ARTIFACT}, "{4}");
-        this.expansionSetCode = "ATQ";
+    public TawnossWand(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.ARTIFACT},"{4}");
 
         // {2}, {tap}: Target creature with power 2 or less is unblockable this turn.
         Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new CantBeBlockedTargetEffect(), new TapSourceCost());

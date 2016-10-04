@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.starwars;
+package mage.cards.p;
 
 import java.util.UUID;
 import mage.abilities.Ability;
@@ -34,9 +34,9 @@ import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.counter.AddCountersTargetEffect;
 import mage.abilities.keyword.BountyAbility;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Outcome;
-import mage.constants.Rarity;
 import mage.counters.CounterType;
 import mage.game.Game;
 import mage.players.Player;
@@ -49,9 +49,8 @@ import mage.target.common.TargetOpponentsCreaturePermanent;
  */
 public class PublicArrangement extends CardImpl {
 
-    public PublicArrangement(UUID ownerId) {
-        super(ownerId, 83, "Public Arrangement", Rarity.UNCOMMON, new CardType[]{CardType.ENCHANTMENT}, "{1}{B}");
-        this.expansionSetCode = "SWS";
+    public PublicArrangement(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.ENCHANTMENT},"{1}{B}");
 
         // When Public Arrangement enters the battlefield, put a bounty counter on up to two target creatures your opponents control.
         Ability ability = new EntersBattlefieldTriggeredAbility(new AddCountersTargetEffect(CounterType.BOUNTY.createInstance()));

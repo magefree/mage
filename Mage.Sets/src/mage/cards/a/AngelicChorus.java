@@ -25,17 +25,17 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.urzassaga;
+package mage.cards.a;
 
 import java.util.UUID;
 import mage.constants.CardType;
 import mage.constants.Outcome;
-import mage.constants.Rarity;
 import mage.constants.Zone;
 import mage.abilities.Ability;
 import mage.abilities.TriggeredAbilityImpl;
 import mage.abilities.effects.OneShotEffect;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.game.Game;
 import mage.game.events.GameEvent;
 import mage.game.events.GameEvent.EventType;
@@ -48,9 +48,8 @@ import mage.players.Player;
  */
 public class AngelicChorus extends CardImpl {
 
-    public AngelicChorus(UUID ownerId) {
-        super(ownerId, 3, "Angelic Chorus", Rarity.RARE, new CardType[]{CardType.ENCHANTMENT}, "{3}{W}{W}");
-        this.expansionSetCode = "USG";
+    public AngelicChorus(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.ENCHANTMENT},"{3}{W}{W}");
 
         // Whenever a creature enters the battlefield under your control, you gain life equal to its toughness.
         this.addAbility(new AngelicChorusTriggeredAbility());

@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.starwars;
+package mage.cards.t;
 
 import java.util.UUID;
 import mage.MageInt;
@@ -35,8 +35,8 @@ import mage.abilities.common.EntersBattlefieldOrDiesSourceTriggeredAbility;
 import mage.abilities.effects.common.CreateTokenEffect;
 import mage.abilities.keyword.RepairAbility;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.game.permanent.token.DroidToken;
 
 /**
@@ -45,9 +45,8 @@ import mage.game.permanent.token.DroidToken;
  */
 public class TankDroid extends CardImpl {
 
-    public TankDroid(UUID ownerId) {
-        super(ownerId, 219, "Tank Droid", Rarity.RARE, new CardType[]{CardType.ARTIFACT, CardType.CREATURE}, "{4}{W}{U}{B}");
-        this.expansionSetCode = "SWS";
+    public TankDroid(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.ARTIFACT,CardType.CREATURE},"{4}{W}{U}{B}");
         this.subtype.add("Droid");
         this.power = new MageInt(5);
         this.toughness = new MageInt(5);

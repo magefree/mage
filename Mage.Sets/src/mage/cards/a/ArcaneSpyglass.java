@@ -26,12 +26,11 @@
  *  or implied, of BetaSteward_at_googlemail.com.
  */
 
-package mage.sets.darksteel;
+package mage.cards.a;
 
 import java.util.UUID;
 
 import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.costs.common.RemoveCountersSourceCost;
@@ -41,6 +40,7 @@ import mage.abilities.costs.mana.GenericManaCost;
 import mage.abilities.effects.common.DrawCardSourceControllerEffect;
 import mage.abilities.effects.common.counter.AddCountersSourceEffect;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.Zone;
 import mage.counters.CounterType;
 import mage.filter.common.FilterControlledLandPermanent;
@@ -55,9 +55,8 @@ public class ArcaneSpyglass extends CardImpl {
 
     private static final FilterControlledPermanent filter = new FilterControlledLandPermanent("a land");
 
-    public ArcaneSpyglass (UUID ownerId) {
-        super(ownerId, 93, "Arcane Spyglass", Rarity.COMMON, new CardType[]{CardType.ARTIFACT}, "{4}");
-        this.expansionSetCode = "DST";
+    public ArcaneSpyglass (UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.ARTIFACT},"{4}");
 
         // {2}, {T} , Sacrifice a land: Draw a card and put a charge counter on Arcane Spyglass.
         Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new DrawCardSourceControllerEffect(1), new GenericManaCost(2));

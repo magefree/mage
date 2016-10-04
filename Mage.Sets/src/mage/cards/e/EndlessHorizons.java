@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.eventide;
+package mage.cards.e;
 
 import java.util.UUID;
 import mage.abilities.Ability;
@@ -35,9 +35,9 @@ import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.SearchEffect;
 import mage.cards.Card;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Outcome;
-import mage.constants.Rarity;
 import mage.constants.TargetController;
 import mage.constants.Zone;
 import mage.filter.FilterCard;
@@ -56,9 +56,8 @@ import mage.util.CardUtil;
  */
 public class EndlessHorizons extends CardImpl {
 
-    public EndlessHorizons(UUID ownerId) {
-        super(ownerId, 4, "Endless Horizons", Rarity.RARE, new CardType[]{CardType.ENCHANTMENT}, "{3}{W}");
-        this.expansionSetCode = "EVE";
+    public EndlessHorizons(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.ENCHANTMENT},"{3}{W}");
 
         // When Endless Horizons enters the battlefield, search your library for any number of Plains cards and exile them. Then shuffle your library.
         this.addAbility(new EntersBattlefieldTriggeredAbility(new EndlessHorizonsEffect(), false));

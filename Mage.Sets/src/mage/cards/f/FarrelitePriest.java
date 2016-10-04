@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.fallenempires;
+package mage.cards.f;
 
 import java.util.UUID;
 import mage.MageInt;
@@ -40,9 +40,9 @@ import mage.abilities.effects.common.BasicManaEffect;
 import mage.abilities.effects.common.SacrificeSourceEffect;
 import mage.abilities.mana.SimpleManaAbility;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Outcome;
-import mage.constants.Rarity;
 import mage.constants.Zone;
 import mage.game.Game;
 
@@ -52,9 +52,8 @@ import mage.game.Game;
  */
 public class FarrelitePriest extends CardImpl {
 
-    public FarrelitePriest(UUID ownerId) {
-        super(ownerId, 137, "Farrelite Priest", Rarity.UNCOMMON, new CardType[]{CardType.CREATURE}, "{1}{W}{W}");
-        this.expansionSetCode = "FEM";
+    public FarrelitePriest(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{1}{W}{W}");
         this.subtype.add("Human");
         this.subtype.add("Cleric");
         this.power = new MageInt(1);

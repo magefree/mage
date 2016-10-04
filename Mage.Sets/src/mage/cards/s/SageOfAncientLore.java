@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.shadowsoverinnistrad;
+package mage.cards.s;
 
 import java.util.UUID;
 import mage.MageInt;
@@ -43,10 +43,11 @@ import mage.abilities.effects.common.DrawCardSourceControllerEffect;
 import mage.abilities.effects.common.TransformSourceEffect;
 import mage.abilities.effects.common.continuous.SetPowerToughnessSourceEffect;
 import mage.abilities.keyword.TransformAbility;
+import mage.cards.w.WerewolfOfAncientHunger;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Duration;
-import mage.constants.Rarity;
 import mage.constants.TargetController;
 import mage.constants.Zone;
 
@@ -56,9 +57,8 @@ import mage.constants.Zone;
  */
 public class SageOfAncientLore extends CardImpl {
 
-    public SageOfAncientLore(UUID ownerId) {
-        super(ownerId, 225, "Sage of Ancient Lore", Rarity.RARE, new CardType[]{CardType.CREATURE}, "{4}{G}");
-        this.expansionSetCode = "SOI";
+    public SageOfAncientLore(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{4}{G}");
         this.subtype.add("Human");
         this.subtype.add("Shaman");
         this.subtype.add("Werewolf");
@@ -66,7 +66,7 @@ public class SageOfAncientLore extends CardImpl {
         this.toughness = new MageInt(0);
 
         this.transformable = true;
-        this.secondSideCard = new WerewolfOfAncientHunger(ownerId);
+        this.secondSideCardClazz = WerewolfOfAncientHunger.class;
 
         // Sage of Ancient Lore's power and toughness are each equal to the number of cards in your hand.
         DynamicValue xValue= new CardsInControllerHandCount();

@@ -26,13 +26,12 @@
  *  or implied, of BetaSteward_at_googlemail.com.
  */
 
-package mage.sets.betrayersofkamigawa;
+package mage.cards.w;
 
 import java.util.List;
 import java.util.UUID;
 
 import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.constants.Zone;
 import mage.MageInt;
 import mage.abilities.Ability;
@@ -44,6 +43,7 @@ import mage.abilities.costs.mana.GenericManaCost;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.counter.AddCountersSourceEffect;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.Outcome;
 import mage.counters.CounterType;
 import mage.filter.FilterPermanent;
@@ -60,9 +60,8 @@ public class WaxmaneBaku extends CardImpl {
 
     private static final FilterSpiritOrArcaneCard filter = new FilterSpiritOrArcaneCard();
 
-    public WaxmaneBaku(UUID ownerId) {
-        super(ownerId, 29, "Waxmane Baku", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{2}{W}");
-        this.expansionSetCode = "BOK";
+    public WaxmaneBaku(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{2}{W}");
         this.subtype.add("Spirit");
 
         this.power = new MageInt(2);

@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.magicorigins;
+package mage.cards.j;
 
 import java.util.UUID;
 import mage.MageInt;
@@ -33,8 +33,8 @@ import mage.abilities.common.DealsCombatDamageToAPlayerTriggeredAbility;
 import mage.abilities.effects.common.DrawCardSourceControllerEffect;
 import mage.abilities.keyword.ProwessAbility;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.Rarity;
 
 /**
  *
@@ -42,9 +42,8 @@ import mage.constants.Rarity;
  */
 public class JhessianThief extends CardImpl {
 
-    public JhessianThief(UUID ownerId) {
-        super(ownerId, 62, "Jhessian Thief", Rarity.UNCOMMON, new CardType[]{CardType.CREATURE}, "{2}{U}");
-        this.expansionSetCode = "ORI";
+    public JhessianThief(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{2}{U}");
         this.subtype.add("Human");
         this.subtype.add("Rogue");
         this.power = new MageInt(1);

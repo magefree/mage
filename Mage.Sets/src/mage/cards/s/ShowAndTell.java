@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.urzassaga;
+package mage.cards.s;
 
 import java.util.ArrayList;
 import java.util.LinkedHashSet;
@@ -36,9 +36,9 @@ import mage.abilities.Ability;
 import mage.abilities.effects.OneShotEffect;
 import mage.cards.Card;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Outcome;
-import mage.constants.Rarity;
 import mage.constants.Zone;
 import mage.filter.FilterCard;
 import mage.filter.predicate.Predicates;
@@ -53,9 +53,8 @@ import mage.target.common.TargetCardInHand;
  */
 public class ShowAndTell extends CardImpl {
 
-    public ShowAndTell(UUID ownerId) {
-        super(ownerId, 96, "Show and Tell", Rarity.RARE, new CardType[]{CardType.SORCERY}, "{2}{U}");
-        this.expansionSetCode = "USG";
+    public ShowAndTell(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{2}{U}");
 
         // Each player may put an artifact, creature, enchantment, or land card from his or her hand onto the battlefield.
         this.getSpellAbility().addEffect(new ShowAndTellEffect());

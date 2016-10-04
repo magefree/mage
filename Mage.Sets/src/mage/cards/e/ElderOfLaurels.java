@@ -25,12 +25,11 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.innistrad;
+package mage.cards.e;
 
 import java.util.UUID;
 import mage.constants.CardType;
 import mage.constants.Duration;
-import mage.constants.Rarity;
 import mage.constants.Zone;
 import mage.MageInt;
 import mage.abilities.common.SimpleActivatedAbility;
@@ -38,6 +37,7 @@ import mage.abilities.costs.mana.ManaCostsImpl;
 import mage.abilities.dynamicvalue.common.PermanentsOnBattlefieldCount;
 import mage.abilities.effects.common.continuous.BoostTargetEffect;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.filter.common.FilterControlledCreaturePermanent;
 import mage.target.common.TargetCreaturePermanent;
 
@@ -47,9 +47,8 @@ import mage.target.common.TargetCreaturePermanent;
  */
 public class ElderOfLaurels extends CardImpl {
 
-    public ElderOfLaurels(UUID ownerId) {
-        super(ownerId, 177, "Elder of Laurels", Rarity.RARE, new CardType[]{CardType.CREATURE}, "{2}{G}");
-        this.expansionSetCode = "ISD";
+    public ElderOfLaurels(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{2}{G}");
         this.subtype.add("Human");
         this.subtype.add("Advisor");
 

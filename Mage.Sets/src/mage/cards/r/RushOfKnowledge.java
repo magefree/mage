@@ -25,14 +25,14 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.commander2014;
+package mage.cards.r;
 
 import java.util.UUID;
 import mage.abilities.dynamicvalue.common.HighestConvertedManaCostValue;
 import mage.abilities.effects.common.DrawCardSourceControllerEffect;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.Rarity;
 
 /**
  *
@@ -40,9 +40,8 @@ import mage.constants.Rarity;
  */
 public class RushOfKnowledge extends CardImpl {
 
-    public RushOfKnowledge(UUID ownerId) {
-        super(ownerId, 123, "Rush of Knowledge", Rarity.COMMON, new CardType[]{CardType.SORCERY}, "{4}{U}");
-        this.expansionSetCode = "C14";
+    public RushOfKnowledge(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{4}{U}");
 
         // Draw cards equal to the highest converted mana cost among permanents you control.
         DrawCardSourceControllerEffect effect = new DrawCardSourceControllerEffect(new HighestConvertedManaCostValue());

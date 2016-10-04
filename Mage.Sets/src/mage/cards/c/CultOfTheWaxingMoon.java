@@ -25,15 +25,15 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.shadowsoverinnistrad;
+package mage.cards.c;
 
 import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.TriggeredAbilityImpl;
 import mage.abilities.effects.common.CreateTokenEffect;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.constants.Zone;
 import mage.filter.common.FilterControlledCreaturePermanent;
 import mage.filter.predicate.Predicates;
@@ -49,9 +49,8 @@ import mage.game.permanent.token.WolfToken;
  */
 public class CultOfTheWaxingMoon extends CardImpl {
 
-    public CultOfTheWaxingMoon(UUID ownerId) {
-        super(ownerId, 201, "Cult of the Waxing Moon", Rarity.UNCOMMON, new CardType[]{CardType.CREATURE}, "{4}{G}");
-        this.expansionSetCode = "SOI";
+    public CultOfTheWaxingMoon(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{4}{G}");
         this.subtype.add("Human");
         this.subtype.add("Shaman");
         this.power = new MageInt(5);

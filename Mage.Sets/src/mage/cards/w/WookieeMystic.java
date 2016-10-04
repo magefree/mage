@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.starwars;
+package mage.cards.w;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -39,8 +39,8 @@ import mage.abilities.effects.common.BasicManaEffect;
 import mage.abilities.effects.common.ManaEffect;
 import mage.abilities.mana.SimpleManaAbility;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.constants.WatcherScope;
 import mage.constants.Zone;
 import mage.counters.CounterType;
@@ -57,9 +57,8 @@ import mage.watchers.Watcher;
  */
 public class WookieeMystic extends CardImpl {
 
-    public WookieeMystic(UUID ownerId) {
-        super(ownerId, 223, "Wookiee Mystic", Rarity.UNCOMMON, new CardType[]{CardType.CREATURE}, "{R}{G}{W}");
-        this.expansionSetCode = "SWS";
+    public WookieeMystic(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{R}{G}{W}");
         this.subtype.add("Wookiee");
         this.subtype.add("Shaman");
         this.power = new MageInt(2);

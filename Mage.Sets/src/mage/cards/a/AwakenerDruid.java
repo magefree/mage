@@ -26,18 +26,18 @@
  *  or implied, of BetaSteward_at_googlemail.com.
  */
 
-package mage.sets.magic2010;
+package mage.cards.a;
 
 import java.util.UUID;
 import mage.constants.CardType;
 import mage.constants.Duration;
-import mage.constants.Rarity;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.Mode;
 import mage.abilities.common.EntersBattlefieldTriggeredAbility;
 import mage.abilities.effects.common.continuous.BecomesCreatureTargetEffect;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.Layer;
 import mage.constants.SubLayer;
 import mage.filter.common.FilterLandPermanent;
@@ -59,9 +59,8 @@ public class AwakenerDruid extends CardImpl {
         filter.add(new SubtypePredicate("Forest"));
     }
 
-    public AwakenerDruid(UUID ownerId) {
-        super(ownerId, 167, "Awakener Druid", Rarity.UNCOMMON, new CardType[]{CardType.CREATURE}, "{2}{G}");
-        this.expansionSetCode = "M10";
+    public AwakenerDruid(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{2}{G}");
 
         this.subtype.add("Human");
         this.subtype.add("Druid");

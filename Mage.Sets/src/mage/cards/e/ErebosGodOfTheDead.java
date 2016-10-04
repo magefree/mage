@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.theros;
+package mage.cards.e;
 
 import java.util.UUID;
 import mage.MageInt;
@@ -41,12 +41,12 @@ import mage.abilities.effects.common.DrawCardSourceControllerEffect;
 import mage.abilities.effects.common.continuous.LoseCreatureTypeSourceEffect;
 import mage.abilities.keyword.IndestructibleAbility;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.ColoredManaSymbol;
 import mage.constants.Duration;
 import mage.constants.Layer;
 import mage.constants.Outcome;
-import mage.constants.Rarity;
 import mage.constants.SubLayer;
 import mage.constants.Zone;
 import mage.game.Game;
@@ -58,9 +58,8 @@ import mage.players.Player;
  */
 public class ErebosGodOfTheDead extends CardImpl {
 
-    public ErebosGodOfTheDead(UUID ownerId) {
-        super(ownerId, 85, "Erebos, God of the Dead", Rarity.MYTHIC, new CardType[]{CardType.ENCHANTMENT, CardType.CREATURE}, "{3}{B}");
-        this.expansionSetCode = "THS";
+    public ErebosGodOfTheDead(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.ENCHANTMENT,CardType.CREATURE},"{3}{B}");
         this.supertype.add("Legendary");
         this.subtype.add("God");
 

@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.magicorigins;
+package mage.cards.h;
 
 import java.util.UUID;
 import mage.abilities.common.SimpleStaticAbility;
@@ -35,9 +35,9 @@ import mage.abilities.effects.Effect;
 import mage.abilities.effects.common.continuous.BoostEquippedEffect;
 import mage.abilities.keyword.EquipAbility;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Outcome;
-import mage.constants.Rarity;
 import mage.constants.TargetController;
 import mage.constants.Zone;
 import mage.filter.common.FilterEnchantmentPermanent;
@@ -55,9 +55,8 @@ public class HelmOfTheGods extends CardImpl {
         filter.add(new ControllerPredicate(TargetController.YOU));
     }
 
-    public HelmOfTheGods(UUID ownerId) {
-        super(ownerId, 230, "Helm of the Gods", Rarity.RARE, new CardType[]{CardType.ARTIFACT}, "{1}");
-        this.expansionSetCode = "ORI";
+    public HelmOfTheGods(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.ARTIFACT},"{1}");
         this.subtype.add("Equipment");
 
         // Equipped creature gets +1/+1 for each enchantment you control.

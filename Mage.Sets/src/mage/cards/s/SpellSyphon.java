@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.shadowmoor;
+package mage.cards.s;
 
 import java.util.UUID;
 import mage.ObjectColor;
@@ -34,9 +34,9 @@ import mage.abilities.Mode;
 import mage.abilities.costs.mana.GenericManaCost;
 import mage.abilities.effects.OneShotEffect;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Outcome;
-import mage.constants.Rarity;
 import mage.constants.TargetController;
 import mage.filter.FilterPermanent;
 import mage.filter.predicate.mageobject.ColorPredicate;
@@ -52,9 +52,8 @@ import mage.target.TargetSpell;
  */
 public class SpellSyphon extends CardImpl {
 
-    public SpellSyphon(UUID ownerId) {
-        super(ownerId, 52, "Spell Syphon", Rarity.COMMON, new CardType[]{CardType.INSTANT}, "{1}{U}");
-        this.expansionSetCode = "SHM";
+    public SpellSyphon(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.INSTANT},"{1}{U}");
 
 
         // Counter target spell unless its controller pays {1} for each blue permanent you control.

@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.coldsnap;
+package mage.cards.h;
 
 import java.util.UUID;
 import mage.MageInt;
@@ -37,8 +37,8 @@ import mage.abilities.costs.common.TapSourceCost;
 import mage.abilities.costs.mana.GenericManaCost;
 import mage.abilities.effects.common.ReturnToHandTargetEffect;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.constants.Zone;
 import mage.filter.common.FilterControlledPermanent;
 import mage.filter.predicate.mageobject.SupertypePredicate;
@@ -56,9 +56,8 @@ public class HeidarRimewindMaster extends CardImpl {
         filter.add(new SupertypePredicate("Snow"));
     }
 
-    public HeidarRimewindMaster(UUID ownerId) {
-        super(ownerId, 36, "Heidar, Rimewind Master", Rarity.RARE, new CardType[]{CardType.CREATURE}, "{4}{U}");
-        this.expansionSetCode = "CSP";
+    public HeidarRimewindMaster(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{4}{U}");
         this.supertype.add("Legendary");
         this.subtype.add("Human");
         this.subtype.add("Wizard");

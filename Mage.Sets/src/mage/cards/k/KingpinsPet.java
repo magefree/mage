@@ -25,15 +25,15 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.gatecrash;
+package mage.cards.k;
 
 import java.util.UUID;
 import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.MageInt;
 import mage.abilities.keyword.FlyingAbility;
 import mage.abilities.keyword.ExtortAbility;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 
 /**
  *
@@ -41,9 +41,8 @@ import mage.cards.CardImpl;
  */
 public class KingpinsPet extends CardImpl {
 
-    public KingpinsPet(UUID ownerId) {
-        super(ownerId, 173, "Kingpin's Pet", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{1}{W}{B}");
-        this.expansionSetCode = "GTC";
+    public KingpinsPet(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{1}{W}{B}");
         this.subtype.add("Thrull");
 
         this.power = new MageInt(2);

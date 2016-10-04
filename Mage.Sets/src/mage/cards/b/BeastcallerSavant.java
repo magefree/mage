@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.battleforzendikar;
+package mage.cards.b;
 
 import java.util.UUID;
 import mage.MageInt;
@@ -33,8 +33,8 @@ import mage.abilities.keyword.HasteAbility;
 import mage.abilities.mana.ConditionalAnyColorManaAbility;
 import mage.abilities.mana.conditional.ConditionalSpellManaBuilder;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.filter.common.FilterCreatureSpell;
 
 /**
@@ -43,9 +43,8 @@ import mage.filter.common.FilterCreatureSpell;
  */
 public class BeastcallerSavant extends CardImpl {
 
-    public BeastcallerSavant(UUID ownerId) {
-        super(ownerId, 170, "Beastcaller Savant", Rarity.RARE, new CardType[]{CardType.CREATURE}, "{1}{G}");
-        this.expansionSetCode = "BFZ";
+    public BeastcallerSavant(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{1}{G}");
         this.subtype.add("Elf");
         this.subtype.add("Shaman");
         this.subtype.add("Ally");

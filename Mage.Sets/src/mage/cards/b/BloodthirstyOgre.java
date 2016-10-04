@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.championsofkamigawa;
+package mage.cards.b;
 
 import java.util.UUID;
 import mage.MageInt;
@@ -40,9 +40,9 @@ import mage.abilities.dynamicvalue.common.SignInversionDynamicValue;
 import mage.abilities.effects.common.continuous.BoostTargetEffect;
 import mage.abilities.effects.common.counter.AddCountersSourceEffect;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Duration;
-import mage.constants.Rarity;
 import mage.constants.Zone;
 import mage.counters.CounterType;
 import mage.filter.common.FilterControlledPermanent;
@@ -61,9 +61,8 @@ public class BloodthirstyOgre extends CardImpl {
         filter.add(new SubtypePredicate("Demon"));
     }
 
-    public BloodthirstyOgre(UUID ownerId) {
-        super(ownerId, 104, "Bloodthirsty Ogre", Rarity.UNCOMMON, new CardType[]{CardType.CREATURE}, "{2}{B}");
-        this.expansionSetCode = "CHK";
+    public BloodthirstyOgre(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{2}{B}");
         this.subtype.add("Ogre");
         this.subtype.add("Warrior");
         this.subtype.add("Shaman");

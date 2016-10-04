@@ -26,12 +26,11 @@
  *  or implied, of BetaSteward_at_googlemail.com.
  */
 
-package mage.sets.championsofkamigawa;
+package mage.cards.m;
 
 import java.util.UUID;
 
 import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.constants.Zone;
 import mage.MageInt;
 import mage.abilities.Ability;
@@ -44,6 +43,7 @@ import mage.abilities.effects.common.CreateTokenEffect;
 import mage.abilities.effects.common.continuous.GainAbilityAllEffect;
 import mage.abilities.keyword.FearAbility;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.Duration;
 import mage.filter.common.FilterControlledCreaturePermanent;
 import mage.filter.common.FilterCreaturePermanent;
@@ -68,9 +68,8 @@ public class MarrowGnawer extends CardImpl {
         filter3.add(ratPredicate);
     }
 
-    public MarrowGnawer (UUID ownerId) {
-        super(ownerId, 124, "Marrow-Gnawer", Rarity.RARE, new CardType[]{CardType.CREATURE}, "{3}{B}{B}");
-        this.expansionSetCode = "CHK";
+    public MarrowGnawer (UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{3}{B}{B}");
         this.supertype.add("Legendary");
         this.subtype.add("Rat");
         this.subtype.add("Rogue");

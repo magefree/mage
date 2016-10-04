@@ -25,11 +25,10 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.planeshift;
+package mage.cards.n;
 
 import java.util.UUID;
 import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.constants.Zone;
 import mage.MageInt;
 import mage.ObjectColor;
@@ -39,6 +38,7 @@ import mage.abilities.costs.mana.ManaCostsImpl;
 import mage.abilities.effects.common.RegenerateSourceEffect;
 import mage.abilities.effects.common.cost.SpellsCostReductionControllerEffect;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.filter.FilterCard;
 import mage.filter.predicate.Predicates;
 import mage.filter.predicate.mageobject.ColorPredicate;
@@ -57,9 +57,8 @@ public class NightscapeFamiliar extends CardImpl {
                 new ColorPredicate(ObjectColor.RED)));
     }
 
-    public NightscapeFamiliar(UUID ownerId) {
-        super(ownerId, 48, "Nightscape Familiar", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{1}{B}");
-        this.expansionSetCode = "PLS";
+    public NightscapeFamiliar(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{1}{B}");
         this.subtype.add("Zombie");
 
         this.power = new MageInt(1);

@@ -25,15 +25,15 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.ravnica;
+package mage.cards.s;
 
 import java.util.UUID;
 import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.MageInt;
 import mage.abilities.keyword.ConvokeAbility;
 import mage.abilities.keyword.TrampleAbility;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 
 /**
  *
@@ -41,9 +41,8 @@ import mage.cards.CardImpl;
  */
 public class SiegeWurm extends CardImpl {
 
-    public SiegeWurm(UUID ownerId) {
-        super(ownerId, 183, "Siege Wurm", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{5}{G}{G}");
-        this.expansionSetCode = "RAV";
+    public SiegeWurm(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{5}{G}{G}");
         this.subtype.add("Wurm");
 
         this.power = new MageInt(5);

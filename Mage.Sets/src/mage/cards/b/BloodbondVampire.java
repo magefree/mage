@@ -25,15 +25,15 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.battleforzendikar;
+package mage.cards.b;
 
 import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.common.GainLifeControllerTriggeredAbility;
 import mage.abilities.effects.common.counter.AddCountersSourceEffect;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.counters.CounterType;
 
 /**
@@ -42,9 +42,8 @@ import mage.counters.CounterType;
  */
 public class BloodbondVampire extends CardImpl {
 
-    public BloodbondVampire(UUID ownerId) {
-        super(ownerId, 104, "Bloodbond Vampire", Rarity.UNCOMMON, new CardType[]{CardType.CREATURE}, "{2}{B}{B}");
-        this.expansionSetCode = "BFZ";
+    public BloodbondVampire(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{2}{B}{B}");
         this.subtype.add("Vampire");
         this.subtype.add("Shaman");
         this.subtype.add("Ally");

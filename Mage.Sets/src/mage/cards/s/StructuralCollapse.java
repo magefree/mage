@@ -25,14 +25,14 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.gatecrash;
+package mage.cards.s;
 
 import java.util.UUID;
 import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.abilities.effects.common.DamageTargetEffect;
 import mage.abilities.effects.common.SacrificeEffect;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.filter.common.FilterArtifactPermanent;
 import mage.filter.common.FilterLandPermanent;
 import mage.target.TargetPlayer;
@@ -43,9 +43,8 @@ import mage.target.TargetPlayer;
  */
 public class StructuralCollapse extends CardImpl {
 
-    public StructuralCollapse(UUID ownerId) {
-        super(ownerId, 107, "Structural Collapse", Rarity.COMMON, new CardType[]{CardType.SORCERY}, "{5}{R}");
-        this.expansionSetCode = "GTC";
+    public StructuralCollapse(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{5}{R}");
 
 
         // Target player sacrifices an artifact and a land. Structural Collapse deals 2 damage to that player.

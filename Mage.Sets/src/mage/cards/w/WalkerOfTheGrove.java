@@ -25,16 +25,16 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.morningtide;
+package mage.cards.w;
 
 import java.util.UUID;
 import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.MageInt;
 import mage.abilities.common.LeavesBattlefieldTriggeredAbility;
 import mage.abilities.effects.common.CreateTokenEffect;
 import mage.abilities.keyword.EvokeAbility;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.game.permanent.token.Token;
 
 /**
@@ -43,9 +43,8 @@ import mage.game.permanent.token.Token;
  */
 public class WalkerOfTheGrove extends CardImpl {
 
-    public WalkerOfTheGrove(UUID ownerId) {
-        super(ownerId, 138, "Walker of the Grove", Rarity.UNCOMMON, new CardType[]{CardType.CREATURE}, "{6}{G}{G}");
-        this.expansionSetCode = "MOR";
+    public WalkerOfTheGrove(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{6}{G}{G}");
         this.subtype.add("Elemental");
 
         this.power = new MageInt(7);

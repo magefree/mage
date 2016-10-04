@@ -25,14 +25,14 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.portal;
+package mage.cards.w;
 
 import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.keyword.DefenderAbility;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.Rarity;
 
 /**
  *
@@ -40,9 +40,8 @@ import mage.constants.Rarity;
  */
 public class WallOfGranite extends CardImpl {
 
-    public WallOfGranite(UUID ownerId) {
-        super(ownerId, 161, "Wall of Granite", Rarity.UNCOMMON, new CardType[]{CardType.CREATURE}, "{2}{R}");
-        this.expansionSetCode = "POR";
+    public WallOfGranite(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{2}{R}");
         this.subtype.add("Wall");
 
         this.power = new MageInt(0);

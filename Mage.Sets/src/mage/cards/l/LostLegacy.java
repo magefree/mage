@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.kaladesh;
+package mage.cards.l;
 
 import java.util.UUID;
 import mage.abilities.Ability;
@@ -33,8 +33,8 @@ import mage.abilities.Mode;
 import mage.abilities.effects.common.NameACardEffect;
 import mage.abilities.effects.common.search.SearchTargetGraveyardHandLibraryForCardNameAndExileEffect;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.filter.FilterCard;
 import mage.filter.predicate.mageobject.NamePredicate;
 import mage.game.Game;
@@ -47,9 +47,8 @@ import mage.target.TargetPlayer;
  */
 public class LostLegacy extends CardImpl {
 
-    public LostLegacy(UUID ownerId) {
-        super(ownerId, 88, "Lost Legacy", Rarity.RARE, new CardType[]{CardType.SORCERY}, "{1}{B}{B}");
-        this.expansionSetCode = "KLD";
+    public LostLegacy(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{1}{B}{B}");
 
         // Name a nonartifact, nonland card. Search target player's graveyard, hand and library for any number of cards with that name and exile them. That player shuffles his or her library, then draws a card for each card exiled from hand this way.
         this.getSpellAbility().addEffect((new NameACardEffect(NameACardEffect.TypeOfName.NON_ARTFIACT_AND_NON_LAND_NAME)));

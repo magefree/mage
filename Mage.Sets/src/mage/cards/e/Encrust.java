@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.magic2013;
+package mage.cards.e;
 
 import java.util.UUID;
 import mage.abilities.Ability;
@@ -36,9 +36,9 @@ import mage.abilities.effects.common.CantActivateAbilitiesAttachedEffect;
 import mage.abilities.effects.common.DontUntapInControllersUntapStepEnchantedEffect;
 import mage.abilities.keyword.EnchantAbility;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Outcome;
-import mage.constants.Rarity;
 import mage.constants.Zone;
 import mage.filter.FilterPermanent;
 import mage.filter.predicate.Predicates;
@@ -59,9 +59,8 @@ public class Encrust extends CardImpl {
         new CardTypePredicate(CardType.ARTIFACT)));
     }
 
-    public Encrust(UUID ownerId) {
-        super(ownerId, 49, "Encrust", Rarity.COMMON, new CardType[]{CardType.ENCHANTMENT}, "{1}{U}{U}");
-        this.expansionSetCode = "M13";
+    public Encrust(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.ENCHANTMENT},"{1}{U}{U}");
         this.subtype.add("Aura");
 
 

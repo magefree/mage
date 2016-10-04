@@ -25,16 +25,16 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.returntoravnica;
+package mage.cards.p;
 
 import java.util.UUID;
 import mage.abilities.Ability;
 import mage.abilities.effects.OneShotEffect;
 import mage.cards.Card;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Outcome;
-import mage.constants.Rarity;
 import mage.constants.Zone;
 import mage.game.Game;
 import mage.players.Player;
@@ -46,9 +46,8 @@ import mage.target.TargetPlayer;
  */
 public class PsychicSpiral extends CardImpl {
 
-    public PsychicSpiral(UUID ownerId) {
-        super(ownerId, 47, "Psychic Spiral", Rarity.UNCOMMON, new CardType[]{CardType.INSTANT}, "{4}{U}");
-        this.expansionSetCode = "RTR";
+    public PsychicSpiral(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.INSTANT},"{4}{U}");
 
 
         // Shuffle all cards from your graveyard into your library. Target player puts that many cards from the top of his or her library into his or her graveyard.

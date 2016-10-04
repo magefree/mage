@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.shadowmoor;
+package mage.cards.m;
 
 import java.util.UUID;
 import mage.ObjectColor;
@@ -39,8 +39,8 @@ import mage.abilities.decorator.ConditionalActivatedAbility;
 import mage.abilities.effects.common.ShuffleLibrarySourceEffect;
 import mage.abilities.mana.RedManaAbility;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.constants.Zone;
 import mage.filter.common.FilterControlledPermanent;
 import mage.filter.predicate.mageobject.ColorPredicate;
@@ -57,9 +57,8 @@ public class MadblindMountain extends CardImpl {
         filter.add(new ColorPredicate(ObjectColor.RED));
     }
 
-    public MadblindMountain(UUID ownerId) {
-        super(ownerId, 274, "Madblind Mountain", Rarity.UNCOMMON, new CardType[]{CardType.LAND}, "");
-        this.expansionSetCode = "SHM";
+    public MadblindMountain(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.LAND},"");
         this.subtype.add("Mountain");
 
         // <i>({tap}: Add {R} to your mana pool.)</i>

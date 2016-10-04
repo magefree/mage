@@ -25,11 +25,10 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.newphyrexia;
+package mage.cards.v;
 
 import java.util.UUID;
 import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.constants.TargetController;
 import mage.constants.Zone;
 import mage.MageInt;
@@ -40,6 +39,7 @@ import mage.abilities.costs.mana.ManaCostsImpl;
 import mage.abilities.effects.common.CreateTokenEffect;
 import mage.abilities.effects.common.RegenerateTargetEffect;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.filter.predicate.mageobject.CardTypePredicate;
 import mage.filter.predicate.mageobject.SubtypePredicate;
@@ -61,9 +61,8 @@ public class VitalSplicer extends CardImpl {
         filter.add(new ControllerPredicate(TargetController.YOU));
     }
 
-    public VitalSplicer(UUID ownerId) {
-        super(ownerId, 126, "Vital Splicer", Rarity.UNCOMMON, new CardType[]{CardType.CREATURE}, "{3}{G}");
-        this.expansionSetCode = "NPH";
+    public VitalSplicer(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{3}{G}");
         this.subtype.add("Human");
         this.subtype.add("Artificer");
 

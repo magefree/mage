@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.onslaught;
+package mage.cards.r;
 
 import java.util.UUID;
 import mage.abilities.Ability;
@@ -35,8 +35,8 @@ import mage.abilities.costs.mana.ManaCostsImpl;
 import mage.abilities.effects.common.ReturnToHandTargetEffect;
 import mage.abilities.mana.ColorlessManaAbility;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.constants.Zone;
 import mage.filter.common.FilterControlledPermanent;
 import mage.filter.predicate.mageobject.SubtypePredicate;
@@ -54,9 +54,8 @@ public class RiptideLaboratory extends CardImpl {
         filter.add(new SubtypePredicate("Wizard"));
     }
 
-    public RiptideLaboratory(UUID ownerId) {
-        super(ownerId, 322, "Riptide Laboratory", Rarity.RARE, new CardType[]{CardType.LAND}, "");
-        this.expansionSetCode = "ONS";
+    public RiptideLaboratory(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.LAND},"");
 
         // {tap}: Add {C} to your mana pool.
         this.addAbility(new ColorlessManaAbility());

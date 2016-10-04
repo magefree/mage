@@ -26,15 +26,15 @@
  *  or implied, of BetaSteward_at_googlemail.com.
  */
 
-package mage.sets.shardsofalara;
+package mage.cards.o;
 
 import java.util.UUID;
 import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.abilities.mana.BlackManaAbility;
 import mage.abilities.mana.BlueManaAbility;
 import mage.abilities.mana.RedManaAbility;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 
 /**
  *
@@ -42,9 +42,8 @@ import mage.cards.CardImpl;
  */
 public class ObeliskOfGrixis extends CardImpl {
 
-    public ObeliskOfGrixis (UUID ownerId) {
-        super(ownerId, 214, "Obelisk of Grixis", Rarity.COMMON, new CardType[]{CardType.ARTIFACT}, "{3}");
-        this.expansionSetCode = "ALA";
+    public ObeliskOfGrixis (UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.ARTIFACT},"{3}");
         this.addAbility(new BlueManaAbility());
         this.addAbility(new BlackManaAbility());
         this.addAbility(new RedManaAbility());

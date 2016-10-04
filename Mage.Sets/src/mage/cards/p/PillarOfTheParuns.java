@@ -25,14 +25,14 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.dissension;
+package mage.cards.p;
 
 import java.util.UUID;
 import mage.abilities.mana.ConditionalAnyColorManaAbility;
 import mage.abilities.mana.conditional.ConditionalSpellManaBuilder;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.filter.FilterSpell;
 import mage.filter.predicate.mageobject.MulticoloredPredicate;
 
@@ -48,9 +48,8 @@ public class PillarOfTheParuns extends CardImpl {
         filter.add(new MulticoloredPredicate());
     }
 
-    public PillarOfTheParuns(UUID ownerId) {
-        super(ownerId, 176, "Pillar of the Paruns", Rarity.RARE, new CardType[]{CardType.LAND}, "");
-        this.expansionSetCode = "DIS";
+    public PillarOfTheParuns(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.LAND},"");
 
         // {T}: Add one mana of any color to your mana pool. Spend this mana only to cast a multicolored spell.
         this.addAbility(new ConditionalAnyColorManaAbility(1, new ConditionalSpellManaBuilder(filter)));

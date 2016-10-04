@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.prophecy;
+package mage.cards.c;
 
 import java.util.UUID;
 import mage.MageInt;
@@ -35,9 +35,9 @@ import mage.abilities.costs.mana.ManaCostsImpl;
 import mage.abilities.effects.common.TapAllEffect;
 import mage.abilities.effects.common.continuous.BecomesCreatureSourceEffect;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Duration;
-import mage.constants.Rarity;
 import mage.constants.Zone;
 import mage.filter.common.FilterControlledLandPermanent;
 import mage.game.permanent.token.Token;
@@ -48,9 +48,8 @@ import mage.game.permanent.token.Token;
  */
 public class ChimericIdol extends CardImpl {
 
-    public ChimericIdol(UUID ownerId) {
-        super(ownerId, 136, "Chimeric Idol", Rarity.UNCOMMON, new CardType[]{CardType.ARTIFACT}, "{3}");
-        this.expansionSetCode = "PCY";
+    public ChimericIdol(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.ARTIFACT},"{3}");
 
         // {0}: Tap all lands you control. Chimeric Idol becomes a 3/3 Turtle artifact creature until end of turn.
         Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new TapAllEffect(new FilterControlledLandPermanent("lands you control")), new ManaCostsImpl("{0}"));

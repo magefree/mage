@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.urzassaga;
+package mage.cards.r;
 
 import java.util.UUID;
 
@@ -37,6 +37,7 @@ import mage.abilities.effects.common.continuous.GainAbilityAttachedEffect;
 import mage.abilities.keyword.EnchantAbility;
 import mage.abilities.keyword.FirstStrikeAbility;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.target.TargetPermanent;
 import mage.target.common.TargetCreaturePermanent;
 
@@ -46,9 +47,8 @@ import mage.target.common.TargetCreaturePermanent;
  */
 public class Reflexes extends CardImpl {
 
-    public Reflexes(UUID ownerId) {
-        super(ownerId, 208, "Reflexes", Rarity.COMMON, new CardType[]{CardType.ENCHANTMENT}, "{R}");
-        this.expansionSetCode = "USG";
+    public Reflexes(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.ENCHANTMENT},"{R}");
         this.subtype.add("Aura");
 
 

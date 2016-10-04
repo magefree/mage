@@ -25,13 +25,13 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.starwars;
+package mage.cards.f;
 
 import java.util.UUID;
 import mage.abilities.effects.common.DestroyTargetEffect;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.counters.CounterType;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.filter.predicate.permanent.CounterPredicate;
@@ -49,9 +49,8 @@ public class FulfillContract extends CardImpl {
         filter.add(new CounterPredicate(CounterType.BOUNTY));
     }
 
-    public FulfillContract(UUID ownerId) {
-        super(ownerId, 226, "Fulfill Contract", Rarity.COMMON, new CardType[]{CardType.INSTANT}, "{B/R}{B/R}");
-        this.expansionSetCode = "SWS";
+    public FulfillContract(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.INSTANT},"{B/R}{B/R}");
 
         // Destroy target creature with a bounty counter on it.
         this.getSpellAbility().addEffect(new DestroyTargetEffect());

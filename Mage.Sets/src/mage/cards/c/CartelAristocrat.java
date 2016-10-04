@@ -25,17 +25,17 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.gatecrash;
+package mage.cards.c;
 
 import java.util.UUID;
 import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.constants.Zone;
 import mage.MageInt;
 import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.costs.common.SacrificeTargetCost;
 import mage.abilities.effects.common.continuous.GainProtectionFromColorSourceEffect;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.Duration;
 import mage.filter.common.FilterControlledCreaturePermanent;
 import mage.filter.common.FilterControlledPermanent;
@@ -55,9 +55,8 @@ public class CartelAristocrat extends CardImpl {
         filter.add(new AnotherPredicate());
     }
 
-    public CartelAristocrat(UUID ownerId) {
-        super(ownerId, 150, "Cartel Aristocrat", Rarity.UNCOMMON, new CardType[]{CardType.CREATURE}, "{W}{B}");
-        this.expansionSetCode = "GTC";
+    public CartelAristocrat(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{W}{B}");
         this.subtype.add("Human");
         this.subtype.add("Advisor");
 

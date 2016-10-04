@@ -25,11 +25,10 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.urzaslegacy;
+package mage.cards.p;
 
 import java.util.UUID;
 import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.constants.Zone;
 import mage.MageInt;
 import mage.abilities.common.EntersBattlefieldTriggeredAbility;
@@ -39,6 +38,7 @@ import mage.abilities.effects.common.ReturnToHandSourceEffect;
 import mage.abilities.effects.common.UntapLandsEffect;
 import mage.abilities.keyword.FlyingAbility;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 
 /**
  *
@@ -46,9 +46,8 @@ import mage.cards.CardImpl;
  */
 public class Palinchron extends CardImpl {
 
-    public Palinchron(UUID ownerId) {
-        super(ownerId, 38, "Palinchron", Rarity.RARE, new CardType[]{CardType.CREATURE}, "{5}{U}{U}");
-        this.expansionSetCode = "ULG";
+    public Palinchron(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{5}{U}{U}");
         this.subtype.add("Illusion");
 
         this.power = new MageInt(4);

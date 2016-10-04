@@ -26,11 +26,10 @@
  *  or implied, of BetaSteward_at_googlemail.com.
  */
 
-package mage.sets.shardsofalara;
+package mage.cards.h;
 
 import java.util.UUID;
 import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.MageInt;
 import mage.abilities.common.OnEventTriggeredAbility;
 import mage.abilities.costs.mana.ManaCostsImpl;
@@ -39,6 +38,7 @@ import mage.abilities.keyword.FlyingAbility;
 import mage.abilities.keyword.HasteAbility;
 import mage.abilities.keyword.UnearthAbility;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.game.events.GameEvent.EventType;
 
 /**
@@ -47,9 +47,8 @@ import mage.game.events.GameEvent.EventType;
  */
 public class HellsThunder extends CardImpl {
 
-    public HellsThunder(UUID ownerId) {
-        super(ownerId, 103, "Hell's Thunder", Rarity.RARE, new CardType[]{CardType.CREATURE}, "{1}{R}{R}");
-        this.expansionSetCode = "ALA";
+    public HellsThunder(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{1}{R}{R}");
         this.subtype.add("Elemental");
 
         this.power = new MageInt(4);

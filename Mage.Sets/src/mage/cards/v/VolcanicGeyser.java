@@ -25,14 +25,14 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.magic2013;
+package mage.cards.v;
 
 import java.util.UUID;
 import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.abilities.dynamicvalue.common.ManacostVariableValue;
 import mage.abilities.effects.common.DamageTargetEffect;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.target.common.TargetCreatureOrPlayer;
 
 /**
@@ -41,9 +41,8 @@ import mage.target.common.TargetCreatureOrPlayer;
  */
 public class VolcanicGeyser extends CardImpl {
 
-    public VolcanicGeyser(UUID ownerId) {
-        super(ownerId, 154, "Volcanic Geyser", Rarity.UNCOMMON, new CardType[]{CardType.INSTANT}, "{X}{R}{R}");
-        this.expansionSetCode = "M13";
+    public VolcanicGeyser(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.INSTANT},"{X}{R}{R}");
 
 
         // Volcanic Geyser deals X damage to target creature or player.

@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.legends;
+package mage.cards.p;
 
 import java.util.UUID;
 import mage.abilities.Ability;
@@ -34,9 +34,9 @@ import mage.abilities.effects.Effect;
 import mage.abilities.effects.common.continuous.GainAbilityTargetEffect;
 import mage.abilities.keyword.IslandwalkAbility;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Duration;
-import mage.constants.Rarity;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.game.Game;
 import mage.target.common.TargetCreaturePermanent;
@@ -47,9 +47,8 @@ import mage.target.common.TargetCreaturePermanent;
  */
 public class PartWater extends CardImpl {
 
-    public PartWater(UUID ownerId) {
-        super(ownerId, 66, "Part Water", Rarity.UNCOMMON, new CardType[]{CardType.SORCERY}, "{X}{X}{U}");
-        this.expansionSetCode = "LEG";
+    public PartWater(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{X}{X}{U}");
 
         // X target creatures gain islandwalk until end of turn.
         Effect effect = new GainAbilityTargetEffect(new IslandwalkAbility(false), Duration.EndOfTurn);

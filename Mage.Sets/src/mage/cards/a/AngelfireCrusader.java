@@ -26,7 +26,7 @@
  *  or implied, of BetaSteward_at_googlemail.com.
  */
 
-package mage.sets.apocalypse;
+package mage.cards.a;
 
 import java.util.UUID;
 
@@ -36,15 +36,15 @@ import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.costs.mana.ColoredManaCost;
 import mage.abilities.effects.common.continuous.BoostSourceEffect;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 
 /**
  * @author Loki
  */
 public class AngelfireCrusader extends CardImpl {
 
-    public AngelfireCrusader(UUID ownerId) {
-        super(ownerId, 1, "Angelfire Crusader", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{3}{W}");
-        this.expansionSetCode = "APC";
+    public AngelfireCrusader(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{3}{W}");
         this.subtype.add("Human");
         this.subtype.add("Soldier");
         this.subtype.add("Knight");

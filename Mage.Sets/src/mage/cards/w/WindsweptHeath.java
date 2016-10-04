@@ -25,14 +25,14 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.onslaught;
+package mage.cards.w;
 
 import java.util.UUID;
 import mage.ObjectColor;
 import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.abilities.common.FetchLandActivatedAbility;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 
 /**
  *
@@ -40,9 +40,8 @@ import mage.cards.CardImpl;
  */
 public class WindsweptHeath extends CardImpl {
 
-    public WindsweptHeath(UUID ownerId) {
-        super(ownerId, 328, "Windswept Heath", Rarity.RARE, new CardType[]{CardType.LAND}, "");
-        this.expansionSetCode = "ONS";
+    public WindsweptHeath(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.LAND},"");
         this.frameColor = new ObjectColor("GW");
 
         // {tap}, Pay 1 life, Sacrifice Windswept Heath: Search your library for a Forest or Plains card and put it onto the battlefield. Then shuffle your library.

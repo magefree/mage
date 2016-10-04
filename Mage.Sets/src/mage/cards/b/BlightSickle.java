@@ -25,13 +25,12 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.shadowmoor;
+package mage.cards.b;
 
 import java.util.UUID;
 import mage.constants.AttachmentType;
 import mage.constants.CardType;
 import mage.constants.Outcome;
-import mage.constants.Rarity;
 import mage.constants.Zone;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.costs.mana.GenericManaCost;
@@ -40,6 +39,7 @@ import mage.abilities.effects.common.continuous.GainAbilityAttachedEffect;
 import mage.abilities.keyword.EquipAbility;
 import mage.abilities.keyword.WitherAbility;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 
 /**
  *
@@ -47,9 +47,8 @@ import mage.cards.CardImpl;
  */
 public class BlightSickle extends CardImpl {
 
-    public BlightSickle(UUID ownerId) {
-        super(ownerId, 247, "Blight Sickle", Rarity.COMMON, new CardType[]{CardType.ARTIFACT}, "{2}");
-        this.expansionSetCode = "SHM";
+    public BlightSickle(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.ARTIFACT},"{2}");
         this.subtype.add("Equipment");
 
         // Equipped creature gets +1/+0 and has wither.

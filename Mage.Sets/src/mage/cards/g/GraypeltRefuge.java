@@ -25,17 +25,17 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.zendikar;
+package mage.cards.g;
 
 import java.util.UUID;
 import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.abilities.common.EntersBattlefieldTappedAbility;
 import mage.abilities.common.EntersBattlefieldTriggeredAbility;
 import mage.abilities.effects.common.GainLifeEffect;
 import mage.abilities.mana.GreenManaAbility;
 import mage.abilities.mana.WhiteManaAbility;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 
 /**
  *
@@ -43,9 +43,8 @@ import mage.cards.CardImpl;
  */
 public class GraypeltRefuge extends CardImpl {
 
-    public GraypeltRefuge(UUID ownerId) {
-        super(ownerId, 214, "Graypelt Refuge", Rarity.UNCOMMON, new CardType[]{CardType.LAND}, "");
-        this.expansionSetCode = "ZEN";
+    public GraypeltRefuge(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.LAND},"");
 
         this.addAbility(new EntersBattlefieldTappedAbility());
         this.addAbility(new GreenManaAbility());

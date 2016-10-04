@@ -25,12 +25,11 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.darkascension;
+package mage.cards.w;
 
 import java.util.UUID;
 
 import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.MageInt;
 import mage.abilities.common.EntersBattlefieldTappedAbility;
 import mage.abilities.common.SimpleStaticAbility;
@@ -40,6 +39,7 @@ import mage.abilities.effects.common.continuous.BecomesCreatureSourceEffect;
 import mage.abilities.keyword.FlyingAbility;
 import mage.abilities.mana.ColorlessManaAbility;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.Duration;
 import mage.constants.Zone;
 import mage.game.permanent.token.Token;
@@ -50,9 +50,8 @@ import mage.game.permanent.token.Token;
  */
 public class WardenOfTheWall extends CardImpl {
 
-    public WardenOfTheWall(UUID ownerId) {
-        super(ownerId, 153, "Warden of the Wall", Rarity.UNCOMMON, new CardType[]{CardType.ARTIFACT}, "{3}");
-        this.expansionSetCode = "DKA";
+    public WardenOfTheWall(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.ARTIFACT},"{3}");
 
         // Warden of the Wall enters the battlefield tapped.
         this.addAbility(new EntersBattlefieldTappedAbility());

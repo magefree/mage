@@ -25,14 +25,14 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.tenthedition;
+package mage.cards.r;
 
 import java.util.UUID;
 import mage.constants.CardType;
 import mage.constants.Duration;
-import mage.constants.Rarity;
 import mage.abilities.effects.common.continuous.BoostTargetEffect;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.filter.common.FilterBlockingCreature;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.target.common.TargetCreaturePermanent;
@@ -45,9 +45,8 @@ public class Righteousness extends CardImpl {
 
     private static final FilterCreaturePermanent filter = new FilterBlockingCreature("blocking creature");
 
-    public Righteousness(UUID ownerId) {
-        super(ownerId, 36, "Righteousness", Rarity.RARE, new CardType[]{CardType.INSTANT}, "{W}");
-        this.expansionSetCode = "10E";
+    public Righteousness(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.INSTANT},"{W}");
 
 
         this.getSpellAbility().addEffect(new BoostTargetEffect(7, 7, Duration.EndOfTurn));

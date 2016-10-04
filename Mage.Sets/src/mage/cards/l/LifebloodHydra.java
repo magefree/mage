@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.commander2014;
+package mage.cards.l;
 
 import java.util.UUID;
 import mage.MageInt;
@@ -36,9 +36,9 @@ import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.EntersBattlefieldWithXCountersEffect;
 import mage.abilities.keyword.TrampleAbility;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Outcome;
-import mage.constants.Rarity;
 import mage.counters.CounterType;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
@@ -50,9 +50,8 @@ import mage.players.Player;
  */
 public class LifebloodHydra extends CardImpl {
 
-    public LifebloodHydra(UUID ownerId) {
-        super(ownerId, 45, "Lifeblood Hydra", Rarity.RARE, new CardType[]{CardType.CREATURE}, "{X}{G}{G}{G}");
-        this.expansionSetCode = "C14";
+    public LifebloodHydra(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{X}{G}{G}{G}");
         this.subtype.add("Hydra");
 
         this.power = new MageInt(0);

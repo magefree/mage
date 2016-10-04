@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.urzassaga;
+package mage.cards.e;
 
 import java.util.UUID;
 import mage.abilities.Ability;
@@ -34,9 +34,9 @@ import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.effects.PreventionEffectImpl;
 import mage.abilities.effects.common.SacrificeSourceEffect;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Duration;
-import mage.constants.Rarity;
 import mage.constants.TargetController;
 import mage.constants.Zone;
 import mage.game.Game;
@@ -48,9 +48,8 @@ import mage.game.events.GameEvent;
  */
 public class EnergyField extends CardImpl {
 
-    public EnergyField(UUID ownerId) {
-        super(ownerId, 73, "Energy Field", Rarity.RARE, new CardType[]{CardType.ENCHANTMENT}, "{1}{U}");
-        this.expansionSetCode = "USG";
+    public EnergyField(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.ENCHANTMENT},"{1}{U}");
 
 
         // Prevent all damage that would be dealt to you by sources you don't control.

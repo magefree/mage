@@ -25,12 +25,11 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.magic2011;
+package mage.cards.h;
 
 import java.util.UUID;
 import mage.constants.CardType;
 import mage.constants.Duration;
-import mage.constants.Rarity;
 import mage.constants.Zone;
 import mage.MageInt;
 import mage.abilities.Ability;
@@ -38,6 +37,7 @@ import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.effects.RestrictionEffect;
 import mage.abilities.keyword.IslandwalkAbility;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.filter.common.FilterLandPermanent;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
@@ -49,9 +49,8 @@ import mage.game.permanent.Permanent;
  */
 public class HarborSerpent extends CardImpl {
 
-    public HarborSerpent(UUID ownerId) {
-        super(ownerId, 56, "Harbor Serpent", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{4}{U}{U}");
-        this.expansionSetCode = "M11";
+    public HarborSerpent(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{4}{U}{U}");
         this.subtype.add("Serpent");
 
         this.power = new MageInt(5);

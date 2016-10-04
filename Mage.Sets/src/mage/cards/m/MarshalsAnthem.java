@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.worldwake;
+package mage.cards.m;
 
 import java.util.UUID;
 import mage.abilities.Ability;
@@ -38,9 +38,9 @@ import mage.abilities.effects.common.ReturnFromGraveyardToBattlefieldTargetEffec
 import mage.abilities.effects.common.continuous.BoostAllEffect;
 import mage.abilities.keyword.MultikickerAbility;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Duration;
-import mage.constants.Rarity;
 import mage.constants.TargetController;
 import mage.constants.Zone;
 import mage.filter.FilterCard;
@@ -67,9 +67,8 @@ public class MarshalsAnthem extends CardImpl {
 
     private final UUID originalId;
 
-    public MarshalsAnthem(UUID ownerId) {
-        super(ownerId, 15, "Marshal's Anthem", Rarity.RARE, new CardType[]{CardType.ENCHANTMENT}, "{2}{W}{W}");
-        this.expansionSetCode = "WWK";
+    public MarshalsAnthem(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.ENCHANTMENT},"{2}{W}{W}");
 
         // Multikicker {1}{W}
         this.addAbility(new MultikickerAbility("{1}{W}"));

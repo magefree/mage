@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.theros;
+package mage.cards.r;
 
 import java.util.UUID;
 import mage.MageInt;
@@ -37,9 +37,9 @@ import mage.abilities.effects.common.continuous.GainAbilitySourceEffect;
 import mage.abilities.keyword.DeathtouchAbility;
 import mage.abilities.keyword.HexproofAbility;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Duration;
-import mage.constants.Rarity;
 import mage.constants.Zone;
 
 /**
@@ -48,9 +48,8 @@ import mage.constants.Zone;
  */
 public class ReaperOfTheWilds extends CardImpl {
 
-    public ReaperOfTheWilds(UUID ownerId) {
-        super(ownerId, 201, "Reaper of the Wilds", Rarity.RARE, new CardType[]{CardType.CREATURE}, "{2}{B}{G}");
-        this.expansionSetCode = "THS";
+    public ReaperOfTheWilds(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{2}{B}{G}");
         this.subtype.add("Gorgon");
 
         this.power = new MageInt(4);

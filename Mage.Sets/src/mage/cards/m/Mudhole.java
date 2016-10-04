@@ -25,16 +25,16 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.odyssey;
+package mage.cards.m;
 
 import java.util.UUID;
 import mage.abilities.Ability;
 import mage.abilities.effects.OneShotEffect;
 import mage.cards.Card;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Outcome;
-import mage.constants.Rarity;
 import mage.filter.FilterCard;
 import mage.filter.common.FilterLandCard;
 import mage.game.Game;
@@ -47,9 +47,8 @@ import mage.target.TargetPlayer;
  */
 public class Mudhole extends CardImpl {
 
-    public Mudhole(UUID ownerId) {
-        super(ownerId, 208, "Mudhole", Rarity.RARE, new CardType[]{CardType.INSTANT}, "{2}{R}");
-        this.expansionSetCode = "ODY";
+    public Mudhole(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.INSTANT},"{2}{R}");
 
 
         // Target player exiles all land cards from his or her graveyard.

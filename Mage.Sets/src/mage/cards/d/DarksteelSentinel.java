@@ -26,16 +26,16 @@
  *  or implied, of BetaSteward_at_googlemail.com.
  */
 
-package mage.sets.scarsofmirrodin;
+package mage.cards.d;
 
 import java.util.UUID;
 import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.MageInt;
 import mage.abilities.keyword.FlashAbility;
 import mage.abilities.keyword.IndestructibleAbility;
 import mage.abilities.keyword.VigilanceAbility;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 
 /**
  *
@@ -43,9 +43,8 @@ import mage.cards.CardImpl;
  */
 public class DarksteelSentinel extends CardImpl {
 
-    public DarksteelSentinel (UUID ownerId) {
-        super(ownerId, 152, "Darksteel Sentinel", Rarity.UNCOMMON, new CardType[]{CardType.ARTIFACT, CardType.CREATURE}, "{6}");
-        this.expansionSetCode = "SOM";
+    public DarksteelSentinel (UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.ARTIFACT,CardType.CREATURE},"{6}");
         this.subtype.add("Golem");
         this.power = new MageInt(3);
         this.toughness = new MageInt(3);

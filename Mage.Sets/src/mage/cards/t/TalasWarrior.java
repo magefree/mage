@@ -25,14 +25,14 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.portalsecondage;
+package mage.cards.t;
 
 import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.keyword.CantBeBlockedSourceAbility;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.Rarity;
 
 /**
  *
@@ -40,9 +40,8 @@ import mage.constants.Rarity;
  */
 public class TalasWarrior extends CardImpl {
 
-    public TalasWarrior(UUID ownerId) {
-        super(ownerId, 53, "Talas Warrior", Rarity.RARE, new CardType[]{CardType.CREATURE}, "{1}{U}{U}");
-        this.expansionSetCode = "PO2";
+    public TalasWarrior(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{1}{U}{U}");
         this.subtype.add("Human");
         this.subtype.add("Pirate");
         this.subtype.add("Warrior");

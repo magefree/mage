@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.legends;
+package mage.cards.m;
 
 import java.util.UUID;
 import mage.MageInt;
@@ -33,8 +33,8 @@ import mage.ObjectColor;
 import mage.abilities.keyword.MountainwalkAbility;
 import mage.abilities.keyword.ProtectionAbility;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.filter.FilterCard;
 import mage.filter.predicate.mageobject.ColorPredicate;
 
@@ -51,9 +51,8 @@ public class MountainYeti extends CardImpl {
         filter.add(new ColorPredicate(ObjectColor.WHITE));
     }
 
-    public MountainYeti(UUID ownerId) {
-        super(ownerId, 156, "Mountain Yeti", Rarity.UNCOMMON, new CardType[]{CardType.CREATURE}, "{2}{R}{R}");
-        this.expansionSetCode = "LEG";
+    public MountainYeti(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{2}{R}{R}");
         this.subtype.add("Yeti");
         this.power = new MageInt(3);
         this.toughness = new MageInt(3);

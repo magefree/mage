@@ -25,16 +25,16 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.tempestremastered;
+package mage.cards.c;
 
 import java.util.UUID;
 import mage.MageObject;
 import mage.abilities.Ability;
 import mage.abilities.effects.OneShotEffect;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Outcome;
-import mage.constants.Rarity;
 import mage.constants.Zone;
 import mage.counters.CounterType;
 import mage.filter.common.FilterCreaturePermanent;
@@ -49,9 +49,8 @@ import mage.target.common.TargetCreaturePermanent;
  */
 public class Cannibalize extends CardImpl {
 
-    public Cannibalize(UUID ownerId) {
-        super(ownerId, 83, "Cannibalize", Rarity.UNCOMMON, new CardType[]{CardType.SORCERY}, "{1}{B}");
-        this.expansionSetCode = "TPR";
+    public Cannibalize(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{1}{B}");
 
         // Choose two target creatures controlled by the same player. Exile one of the creatures and put two +1/+1 counters on the other.
         this.getSpellAbility().addEffect(new CannibalizeEffect());

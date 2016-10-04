@@ -25,14 +25,14 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.eldritchmoon;
+package mage.cards.f;
 
 import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.keyword.LifelinkAbility;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.Rarity;
 
 /**
  *
@@ -40,9 +40,8 @@ import mage.constants.Rarity;
  */
 public class FaithbearerPaladin extends CardImpl {
 
-    public FaithbearerPaladin(UUID ownerId) {
-        super(ownerId, 25, "Faithbearer Paladin", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{4}{W}");
-        this.expansionSetCode = "EMN";
+    public FaithbearerPaladin(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{4}{W}");
         this.subtype.add("Human");
         this.subtype.add("Knight");
         this.power = new MageInt(3);

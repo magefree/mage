@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.dragonsoftarkir;
+package mage.cards.g;
 
 import java.util.UUID;
 import mage.MageInt;
@@ -36,10 +36,10 @@ import mage.abilities.costs.mana.ManaCostsImpl;
 import mage.abilities.effects.common.combat.CanAttackAsThoughItDidntHaveDefenderSourceEffect;
 import mage.abilities.keyword.DefenderAbility;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.AbilityWord;
 import mage.constants.CardType;
 import mage.constants.Duration;
-import mage.constants.Rarity;
 import mage.constants.Zone;
 
 /**
@@ -48,9 +48,8 @@ import mage.constants.Zone;
  */
 public class GladeWatcher extends CardImpl {
 
-    public GladeWatcher(UUID ownerId) {
-        super(ownerId, 188, "Glade Watcher", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{1}{G}");
-        this.expansionSetCode = "DTK";
+    public GladeWatcher(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{1}{G}");
         this.subtype.add("Elemental");
         this.power = new MageInt(3);
         this.toughness = new MageInt(3);

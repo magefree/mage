@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.kaladesh;
+package mage.cards.s;
 
 import java.util.UUID;
 import mage.abilities.Ability;
@@ -42,10 +42,10 @@ import mage.abilities.effects.common.search.SearchLibraryPutInPlayEffect;
 import mage.abilities.effects.keyword.ScryEffect;
 import mage.cards.Card;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.cards.Cards;
 import mage.constants.CardType;
 import mage.constants.Outcome;
-import mage.constants.Rarity;
 import mage.constants.TargetController;
 import mage.filter.StaticFilters;
 import mage.filter.common.FilterArtifactCard;
@@ -61,9 +61,8 @@ import mage.target.targetpointer.FixedTarget;
  */
 public class SaheeliRai extends CardImpl {
 
-    public SaheeliRai(UUID ownerId) {
-        super(ownerId, 186, "Saheeli Rai", Rarity.MYTHIC, new CardType[]{CardType.PLANESWALKER}, "{1}{U}{R}");
-        this.expansionSetCode = "KLD";
+    public SaheeliRai(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.PLANESWALKER},"{1}{U}{R}");
         this.subtype.add("Saheeli");
 
         this.addAbility(new PlanswalkerEntersWithLoyalityCountersAbility(3));

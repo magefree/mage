@@ -25,15 +25,15 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.commander;
+package mage.cards.d;
 
 import java.util.UUID;
 import mage.abilities.Ability;
 import mage.abilities.effects.OneShotEffect;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Outcome;
-import mage.constants.Rarity;
 import mage.game.Game;
 import mage.game.permanent.token.DragonToken2;
 import mage.game.permanent.token.Token;
@@ -46,9 +46,8 @@ import mage.target.TargetPlayer;
  */
 public class DeathByDragons extends CardImpl {
 
-    public DeathByDragons(UUID ownerId) {
-        super(ownerId, 118, "Death by Dragons", Rarity.UNCOMMON, new CardType[]{CardType.SORCERY}, "{4}{R}{R}");
-        this.expansionSetCode = "CMD";
+    public DeathByDragons(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{4}{R}{R}");
 
 
         // Each player other than target player puts a 5/5 red Dragon creature token with flying onto the battlefield.

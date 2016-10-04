@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.magicorigins;
+package mage.cards.z;
 
 import java.util.UUID;
 import mage.MageInt;
@@ -33,8 +33,8 @@ import mage.abilities.common.EntersBattlefieldControlledTriggeredAbility;
 import mage.abilities.effects.Effect;
 import mage.abilities.effects.common.CreateTokenEffect;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.filter.common.FilterLandPermanent;
 import mage.game.permanent.token.Token;
 
@@ -44,9 +44,8 @@ import mage.game.permanent.token.Token;
  */
 public class ZendikarsRoil extends CardImpl {
 
-    public ZendikarsRoil(UUID ownerId) {
-        super(ownerId, 209, "Zendikar's Roil", Rarity.UNCOMMON, new CardType[]{CardType.ENCHANTMENT}, "{3}{G}{G}");
-        this.expansionSetCode = "ORI";
+    public ZendikarsRoil(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.ENCHANTMENT},"{3}{G}{G}");
 
         // Whenever a land enters the battlefield under your control, put a 2/2 green Elemental creature token onto the battlefield.
         Effect effect = new CreateTokenEffect(new ZendikarsRoilElementalToken());

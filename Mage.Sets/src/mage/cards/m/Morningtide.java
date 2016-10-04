@@ -25,13 +25,13 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.torment;
+package mage.cards.m;
 
 import java.util.UUID;
 import mage.abilities.effects.common.ExileGraveyardAllPlayersEffect;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.Rarity;
 
 /**
  *
@@ -39,9 +39,8 @@ import mage.constants.Rarity;
  */
 public class Morningtide extends CardImpl {
 
-    public Morningtide(UUID ownerId) {
-        super(ownerId, 10, "Morningtide", Rarity.RARE, new CardType[]{CardType.SORCERY}, "{1}{W}");
-        this.expansionSetCode = "TOR";
+    public Morningtide(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{1}{W}");
 
         // Exile all cards from all graveyards.
         this.getSpellAbility().addEffect(new ExileGraveyardAllPlayersEffect());

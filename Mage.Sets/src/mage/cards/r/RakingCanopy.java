@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.shadowmoor;
+package mage.cards.r;
 
 import java.util.UUID;
 import mage.abilities.TriggeredAbilityImpl;
@@ -33,8 +33,8 @@ import mage.abilities.effects.Effect;
 import mage.abilities.effects.common.DamageTargetEffect;
 import mage.abilities.keyword.FlyingAbility;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.constants.Zone;
 import mage.game.Game;
 import mage.game.events.GameEvent;
@@ -48,9 +48,8 @@ import mage.target.targetpointer.FixedTarget;
  */
 public class RakingCanopy extends CardImpl {
 
-    public RakingCanopy(UUID ownerId) {
-        super(ownerId, 127, "Raking Canopy", Rarity.UNCOMMON, new CardType[]{CardType.ENCHANTMENT}, "{1}{G}{G}");
-        this.expansionSetCode = "SHM";
+    public RakingCanopy(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.ENCHANTMENT},"{1}{G}{G}");
 
 
         // Whenever a creature with flying attacks you, Raking Canopy deals 4 damage to it.

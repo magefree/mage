@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.timespiral;
+package mage.cards.f;
 
 import java.util.UUID;
 import mage.MageInt;
@@ -38,9 +38,9 @@ import mage.abilities.effects.common.continuous.BoostTargetEffect;
 import mage.abilities.effects.common.continuous.GainAbilityAllEffect;
 import mage.abilities.keyword.HasteAbility;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Duration;
-import mage.constants.Rarity;
 import mage.constants.Zone;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.filter.predicate.mageobject.SubtypePredicate;
@@ -60,9 +60,8 @@ public class FirewakeSliver extends CardImpl {
         targetSliverFilter.add(new SubtypePredicate("Sliver"));
     }
     
-    public FirewakeSliver(UUID ownerId) {
-        super(ownerId, 238, "Firewake Sliver", Rarity.UNCOMMON, new CardType[]{CardType.CREATURE}, "{1}{R}{G}");
-        this.expansionSetCode = "TSP";
+    public FirewakeSliver(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{1}{R}{G}");
         this.subtype.add("Sliver");
 
         this.power = new MageInt(1);

@@ -25,13 +25,13 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.thedark;
+package mage.cards.t;
 
 import java.util.UUID;
 import mage.abilities.effects.common.DestroyAllEffect;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.filter.FilterPermanent;
 import mage.filter.predicate.mageobject.SubtypePredicate;
 
@@ -47,9 +47,8 @@ public class TivadarsCrusade extends CardImpl {
         filter.add(new SubtypePredicate("Goblin"));
     }
 
-    public TivadarsCrusade(UUID ownerId) {
-        super(ownerId, 91, "Tivadar's Crusade", Rarity.UNCOMMON, new CardType[]{CardType.SORCERY}, "{1}{W}{W}");
-        this.expansionSetCode = "DRK";
+    public TivadarsCrusade(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{1}{W}{W}");
 
         // Destroy all Goblins.
         this.getSpellAbility().addEffect(new DestroyAllEffect(filter));

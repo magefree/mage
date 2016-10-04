@@ -25,14 +25,14 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.tempest;
+package mage.cards.b;
 
 import java.util.UUID;
 import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.MageInt;
 import mage.abilities.keyword.IslandwalkAbility;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 
 /**
  *
@@ -40,9 +40,8 @@ import mage.cards.CardImpl;
  */
 public class BenthicBehemoth extends CardImpl {
 
-    public BenthicBehemoth(UUID ownerId) {
-        super(ownerId, 54, "Benthic Behemoth", Rarity.RARE, new CardType[]{CardType.CREATURE}, "{5}{U}{U}{U}");
-        this.expansionSetCode = "TMP";
+    public BenthicBehemoth(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{5}{U}{U}{U}");
         this.subtype.add("Serpent");
 
         this.power = new MageInt(7);

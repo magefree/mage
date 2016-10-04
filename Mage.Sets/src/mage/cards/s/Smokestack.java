@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.urzassaga;
+package mage.cards.s;
 
 import java.util.UUID;
 import mage.abilities.Ability;
@@ -33,9 +33,9 @@ import mage.abilities.common.BeginningOfUpkeepTriggeredAbility;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.counter.AddCountersSourceEffect;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Outcome;
-import mage.constants.Rarity;
 import mage.constants.TargetController;
 import mage.counters.Counter;
 import mage.filter.common.FilterControlledPermanent;
@@ -51,9 +51,8 @@ import mage.target.common.TargetControlledPermanent;
  */
 public class Smokestack extends CardImpl {
 
-    public Smokestack(UUID ownerId) {
-        super(ownerId, 309, "Smokestack", Rarity.RARE, new CardType[]{CardType.ARTIFACT}, "{4}");
-        this.expansionSetCode = "USG";
+    public Smokestack(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.ARTIFACT},"{4}");
 
         // At the beginning of your upkeep, you may put a soot counter on Smokestack.
         this.addAbility(new BeginningOfUpkeepTriggeredAbility(new AddCountersSourceEffect(new Counter("Soot")), TargetController.YOU, true));

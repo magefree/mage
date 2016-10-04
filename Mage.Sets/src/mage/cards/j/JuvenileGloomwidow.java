@@ -25,15 +25,15 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.shadowmoor;
+package mage.cards.j;
 
 import java.util.UUID;
 import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.MageInt;
 import mage.abilities.keyword.ReachAbility;
 import mage.abilities.keyword.WitherAbility;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 
 /**
  *
@@ -41,9 +41,8 @@ import mage.cards.CardImpl;
  */
 public class JuvenileGloomwidow extends CardImpl {
 
-    public JuvenileGloomwidow(UUID ownerId) {
-        super(ownerId, 121, "Juvenile Gloomwidow", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{G}{G}");
-        this.expansionSetCode = "SHM";
+    public JuvenileGloomwidow(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{G}{G}");
         this.subtype.add("Spider");
 
         this.power = new MageInt(1);

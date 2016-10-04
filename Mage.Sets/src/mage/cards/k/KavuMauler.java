@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.apocalypse;
+package mage.cards.k;
 
 import java.util.UUID;
 import mage.MageInt;
@@ -34,9 +34,9 @@ import mage.abilities.dynamicvalue.common.PermanentsOnBattlefieldCount;
 import mage.abilities.effects.common.continuous.BoostSourceEffect;
 import mage.abilities.keyword.TrampleAbility;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Duration;
-import mage.constants.Rarity;
 import mage.filter.common.FilterAttackingCreature;
 import mage.filter.predicate.mageobject.SubtypePredicate;
 import mage.filter.predicate.permanent.AnotherPredicate;
@@ -54,9 +54,8 @@ public class KavuMauler extends CardImpl {
         filter.add(new AnotherPredicate());
     }
 
-    public KavuMauler(UUID ownerId) {
-        super(ownerId, 80, "Kavu Mauler", Rarity.RARE, new CardType[]{CardType.CREATURE}, "{4}{G}{G}");
-        this.expansionSetCode = "APC";
+    public KavuMauler(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{4}{G}{G}");
         this.subtype.add("Kavu");
         this.power = new MageInt(4);
         this.toughness = new MageInt(4);

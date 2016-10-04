@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.timespiral;
+package mage.cards.s;
 
 import java.util.UUID;
 import mage.abilities.dynamicvalue.common.AttackingCreatureCount;
@@ -33,9 +33,9 @@ import mage.abilities.effects.common.continuous.BoostTargetEffect;
 import mage.abilities.effects.common.continuous.GainAbilityTargetEffect;
 import mage.abilities.keyword.TrampleAbility;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Duration;
-import mage.constants.Rarity;
 import mage.target.common.TargetCreaturePermanent;
 
 /**
@@ -44,9 +44,8 @@ import mage.target.common.TargetCreaturePermanent;
  */
 public class StrengthInNumbers extends CardImpl {
 
-    public StrengthInNumbers(UUID ownerId) {
-        super(ownerId, 224, "Strength in Numbers", Rarity.COMMON, new CardType[]{CardType.INSTANT}, "{1}{G}");
-        this.expansionSetCode = "TSP";
+    public StrengthInNumbers(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.INSTANT},"{1}{G}");
 
         // Until end of turn, target creature gains trample and gets +X/+X, where X is the number of attacking creatures.
         this.getSpellAbility().addEffect(new GainAbilityTargetEffect(TrampleAbility.getInstance(), Duration.EndOfTurn));

@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.starwars;
+package mage.cards.i;
 
 import java.util.UUID;
 import mage.MageInt;
@@ -36,9 +36,9 @@ import mage.abilities.effects.common.continuous.LoseAbilityTargetEffect;
 import mage.abilities.keyword.DefenderAbility;
 import mage.abilities.keyword.SpaceflightAbility;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Duration;
-import mage.constants.Rarity;
 import mage.constants.Zone;
 import mage.target.common.TargetOpponentsCreaturePermanent;
 
@@ -48,9 +48,8 @@ import mage.target.common.TargetOpponentsCreaturePermanent;
  */
 public class IonCannon extends CardImpl {
 
-    public IonCannon(UUID ownerId) {
-        super(ownerId, 14, "Ion Cannon", Rarity.COMMON, new CardType[]{CardType.ARTIFACT, CardType.CREATURE}, "{3}{W}");
-        this.expansionSetCode = "SWS";
+    public IonCannon(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.ARTIFACT,CardType.CREATURE},"{3}{W}");
         this.subtype.add("Construct");
         this.power = new MageInt(4);
         this.toughness = new MageInt(4);

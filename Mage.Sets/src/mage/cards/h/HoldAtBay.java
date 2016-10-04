@@ -25,14 +25,14 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.bornofthegods;
+package mage.cards.h;
 
 import java.util.UUID;
 import mage.abilities.effects.common.PreventDamageToTargetEffect;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Duration;
-import mage.constants.Rarity;
 import mage.target.common.TargetCreatureOrPlayer;
 
 /**
@@ -41,9 +41,8 @@ import mage.target.common.TargetCreatureOrPlayer;
  */
 public class HoldAtBay extends CardImpl {
 
-    public HoldAtBay(UUID ownerId) {
-        super(ownerId, 18, "Hold at Bay", Rarity.COMMON, new CardType[]{CardType.INSTANT}, "{1}{W}");
-        this.expansionSetCode = "BNG";
+    public HoldAtBay(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.INSTANT},"{1}{W}");
 
 
         // Prevent the next 7 damage that would be dealt to target creature or player this turn.

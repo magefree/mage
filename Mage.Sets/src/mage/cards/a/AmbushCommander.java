@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.elvesvsgoblins;
+package mage.cards.a;
 
 import java.util.UUID;
 import mage.MageInt;
@@ -38,10 +38,10 @@ import mage.abilities.effects.ContinuousEffect;
 import mage.abilities.effects.common.continuous.BecomesCreatureAllEffect;
 import mage.abilities.effects.common.continuous.BoostTargetEffect;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.DependencyType;
 import mage.constants.Duration;
-import mage.constants.Rarity;
 import mage.constants.Zone;
 import mage.filter.common.FilterControlledCreaturePermanent;
 import mage.filter.common.FilterControlledPermanent;
@@ -63,9 +63,8 @@ public class AmbushCommander extends CardImpl {
         filter2.add(new SubtypePredicate("Forest"));
     }
 
-    public AmbushCommander(UUID ownerId) {
-        super(ownerId, 1, "Ambush Commander", Rarity.RARE, new CardType[]{CardType.CREATURE}, "{3}{G}{G}");
-        this.expansionSetCode = "EVG";
+    public AmbushCommander(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{3}{G}{G}");
         this.subtype.add("Elf");
 
         this.power = new MageInt(2);

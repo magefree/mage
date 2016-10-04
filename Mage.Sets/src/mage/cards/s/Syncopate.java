@@ -25,11 +25,11 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.returntoravnica;
+package mage.cards.s;
 
 import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.Outcome;
 import mage.constants.Zone;
 import mage.target.TargetSpell;
@@ -51,9 +51,8 @@ import mage.players.Player;
  */
 public class Syncopate extends CardImpl {
 
-    public Syncopate(UUID ownerId) {
-        super(ownerId, 54, "Syncopate", Rarity.UNCOMMON, new CardType[]{CardType.INSTANT}, "{X}{U}");
-        this.expansionSetCode = "RTR";
+    public Syncopate(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.INSTANT},"{X}{U}");
 
         // Counter target spell unless its controller pays {X}. If that spell is countered this way, exile it instead of putting it into its owner's graveyard.
         this.getSpellAbility().addEffect(new SyncopateCounterUnlessPaysEffect());

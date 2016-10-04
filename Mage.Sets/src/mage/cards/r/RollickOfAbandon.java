@@ -25,14 +25,14 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.journeyintonyx;
+package mage.cards.r;
 
 import java.util.UUID;
 import mage.abilities.effects.common.continuous.BoostAllEffect;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Duration;
-import mage.constants.Rarity;
 
 /**
  *
@@ -40,9 +40,8 @@ import mage.constants.Rarity;
  */
 public class RollickOfAbandon extends CardImpl {
 
-    public RollickOfAbandon(UUID ownerId) {
-        super(ownerId, 108, "Rollick of Abandon", Rarity.UNCOMMON, new CardType[]{CardType.SORCERY}, "{3}{R}{R}");
-        this.expansionSetCode = "JOU";
+    public RollickOfAbandon(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{3}{R}{R}");
 
 
         // All creatures get +2/-2 until end of turn.

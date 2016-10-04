@@ -25,14 +25,14 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.shadowsoverinnistrad;
+package mage.cards.m;
 
 import java.util.UUID;
 import mage.abilities.costs.common.SacrificeTargetCost;
 import mage.abilities.effects.common.DrawCardSourceControllerEffect;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.filter.common.FilterControlledPermanent;
 import mage.filter.predicate.Predicates;
 import mage.filter.predicate.mageobject.CardTypePredicate;
@@ -50,9 +50,8 @@ public class MercilessResolve extends CardImpl {
         filter.add(Predicates.or(new CardTypePredicate(CardType.CREATURE), new CardTypePredicate(CardType.LAND)));
     }
 
-    public MercilessResolve(UUID ownerId) {
-        super(ownerId, 123, "Merciless Resolve", Rarity.COMMON, new CardType[]{CardType.INSTANT}, "{2}{B}");
-        this.expansionSetCode = "SOI";
+    public MercilessResolve(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.INSTANT},"{2}{B}");
 
         // As an additional cost to cast Merciless Resolve, sacrifice a creature or land.
         this.getSpellAbility().addCost(new SacrificeTargetCost(new TargetControlledPermanent(filter)));

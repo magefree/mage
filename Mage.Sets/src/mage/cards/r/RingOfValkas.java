@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.magic2013;
+package mage.cards.r;
 
 import java.util.UUID;
 
@@ -42,6 +42,7 @@ import mage.abilities.effects.common.counter.AddPlusOneCountersAttachedEffect;
 import mage.abilities.keyword.EquipAbility;
 import mage.abilities.keyword.HasteAbility;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.filter.predicate.mageobject.ColorPredicate;
 
@@ -57,9 +58,8 @@ public class RingOfValkas extends CardImpl {
         filter.add(new ColorPredicate(ObjectColor.RED));
     }
 
-    public RingOfValkas(UUID ownerId) {
-        super(ownerId, 214, "Ring of Valkas", Rarity.UNCOMMON, new CardType[]{CardType.ARTIFACT}, "{2}");
-        this.expansionSetCode = "M13";
+    public RingOfValkas(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.ARTIFACT},"{2}");
         this.subtype.add("Equipment");
 
         // Equipped creature has haste.

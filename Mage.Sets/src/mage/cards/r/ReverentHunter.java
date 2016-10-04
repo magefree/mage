@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.theros;
+package mage.cards.r;
 
 import java.util.UUID;
 import mage.MageInt;
@@ -33,9 +33,9 @@ import mage.abilities.common.EntersBattlefieldTriggeredAbility;
 import mage.abilities.dynamicvalue.common.DevotionCount;
 import mage.abilities.effects.common.counter.AddCountersSourceEffect;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.ColoredManaSymbol;
-import mage.constants.Rarity;
 import mage.counters.CounterType;
 
 /**
@@ -44,9 +44,8 @@ import mage.counters.CounterType;
  */
 public class ReverentHunter extends CardImpl {
 
-    public ReverentHunter(UUID ownerId) {
-        super(ownerId, 173, "Reverent Hunter", Rarity.RARE, new CardType[]{CardType.CREATURE}, "{2}{G}");
-        this.expansionSetCode = "THS";
+    public ReverentHunter(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{2}{G}");
         this.subtype.add("Human");
         this.subtype.add("Archer");
 

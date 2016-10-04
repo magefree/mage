@@ -25,14 +25,14 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.onslaught;
+package mage.cards.e;
 
 import java.util.UUID;
 import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.abilities.common.SpellCastControllerTriggeredAbility;
 import mage.abilities.effects.common.DrawCardSourceControllerEffect;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.filter.FilterSpell;
 import mage.filter.predicate.mageobject.CardTypePredicate;
 
@@ -49,9 +49,8 @@ public class EnchantresssPresence extends CardImpl {
     }
 
     
-    public EnchantresssPresence(UUID ownerId) {
-        super(ownerId, 261, "Enchantress's Presence", Rarity.RARE, new CardType[]{CardType.ENCHANTMENT}, "{2}{G}");
-        this.expansionSetCode = "ONS";
+    public EnchantresssPresence(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.ENCHANTMENT},"{2}{G}");
 
 
         // Whenever you cast an enchantment spell, draw a card.

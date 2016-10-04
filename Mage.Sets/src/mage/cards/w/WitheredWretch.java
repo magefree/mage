@@ -25,18 +25,18 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.planechase;
+package mage.cards.w;
 
 import java.util.UUID;
 
 import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.costs.mana.GenericManaCost;
 import mage.abilities.effects.common.ExileTargetEffect;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.Zone;
 import mage.target.common.TargetCardInGraveyard;
 
@@ -46,9 +46,8 @@ import mage.target.common.TargetCardInGraveyard;
  */
 public class WitheredWretch extends CardImpl {
 
-    public WitheredWretch(UUID ownerId) {
-        super(ownerId, 45, "Withered Wretch", Rarity.UNCOMMON, new CardType[]{CardType.CREATURE}, "{B}{B}");
-        this.expansionSetCode = "HOP";
+    public WitheredWretch(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{B}{B}");
         this.subtype.add("Zombie");
         this.subtype.add("Cleric");
 

@@ -25,13 +25,13 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.bornofthegods;
+package mage.cards.e;
 
 import java.util.UUID;
 import mage.abilities.effects.common.ExileTargetEffect;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.filter.predicate.permanent.TappedPredicate;
 import mage.target.common.TargetCreaturePermanent;
@@ -48,9 +48,8 @@ public class Excoriate extends CardImpl {
         filter.add(new TappedPredicate());
     }
     
-    public Excoriate(UUID ownerId) {
-        super(ownerId, 10, "Excoriate", Rarity.COMMON, new CardType[]{CardType.SORCERY}, "{3}{W}");
-        this.expansionSetCode = "BNG";
+    public Excoriate(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{3}{W}");
 
 
         // Exile target tapped creature.

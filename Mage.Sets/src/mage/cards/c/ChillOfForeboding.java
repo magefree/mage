@@ -25,19 +25,19 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.darkascension;
+package mage.cards.c;
 
 import java.util.UUID;
 
 import mage.constants.CardType;
 import mage.constants.Outcome;
-import mage.constants.Rarity;
 import mage.constants.Zone;
 import mage.abilities.Ability;
 import mage.abilities.costs.mana.ManaCostsImpl;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.keyword.FlashbackAbility;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.TimingRule;
 import mage.game.Game;
 import mage.players.Player;
@@ -48,9 +48,8 @@ import mage.players.Player;
  */
 public class ChillOfForeboding extends CardImpl {
 
-    public ChillOfForeboding(UUID ownerId) {
-        super(ownerId, 32, "Chill of Foreboding", Rarity.UNCOMMON, new CardType[]{CardType.SORCERY}, "{2}{U}");
-        this.expansionSetCode = "DKA";
+    public ChillOfForeboding(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{2}{U}");
 
         // Each player puts the top five cards of his or her library into his or her graveyard.
         this.getSpellAbility().addEffect(new ChillOfForebodingEffect());

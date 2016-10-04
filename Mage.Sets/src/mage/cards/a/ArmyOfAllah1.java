@@ -25,14 +25,14 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.arabiannights;
+package mage.cards.a;
 
 import java.util.UUID;
 import mage.abilities.effects.common.continuous.BoostAllEffect;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Duration;
-import mage.constants.Rarity;
 import mage.filter.common.FilterAttackingCreature;
 
 /**
@@ -43,9 +43,8 @@ public class ArmyOfAllah1 extends CardImpl {
     
     private static final FilterAttackingCreature filter = new FilterAttackingCreature("Attacking creatures");
 
-    public ArmyOfAllah1(UUID ownerId) {
-        super(ownerId, 56, "Army of Allah", Rarity.COMMON, new CardType[]{CardType.INSTANT}, "{1}{W}{W}");
-        this.expansionSetCode = "ARN";
+    public ArmyOfAllah1(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.INSTANT},"{1}{W}{W}");
 
         // Attacking creatures get +2/+0 until end of turn.
         this.getSpellAbility().addEffect(new BoostAllEffect(2, 0, Duration.EndOfTurn, filter, false));

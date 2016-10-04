@@ -25,14 +25,14 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.urzaslegacy;
+package mage.cards.s;
 
 import java.util.UUID;
 import mage.abilities.effects.common.ReturnToHandTargetEffect;
 import mage.abilities.effects.common.UntapLandsEffect;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.target.common.TargetCreaturePermanent;
 
 /**
@@ -41,9 +41,8 @@ import mage.target.common.TargetCreaturePermanent;
  */
 public class Snap extends CardImpl {
 
-    public Snap(UUID ownerId) {
-        super(ownerId, 43, "Snap", Rarity.COMMON, new CardType[]{CardType.INSTANT}, "{1}{U}");
-        this.expansionSetCode = "ULG";
+    public Snap(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.INSTANT},"{1}{U}");
 
 
         // Return target creature to its owner's hand. Untap up to two lands.

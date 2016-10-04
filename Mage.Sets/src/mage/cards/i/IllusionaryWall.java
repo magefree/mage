@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.mastersedition;
+package mage.cards.i;
 
 import java.util.UUID;
 import mage.MageInt;
@@ -35,8 +35,8 @@ import mage.abilities.keyword.FirstStrikeAbility;
 import mage.abilities.costs.mana.ManaCostsImpl;
 import mage.abilities.keyword.CumulativeUpkeepAbility;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.Rarity;
 
 /**
  *
@@ -44,9 +44,8 @@ import mage.constants.Rarity;
  */
 public class IllusionaryWall extends CardImpl {
 
-    public IllusionaryWall(UUID ownerId) {
-        super(ownerId, 39, "Illusionary Wall", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{4}{U}");
-        this.expansionSetCode = "MED";
+    public IllusionaryWall(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{4}{U}");
         this.subtype.add("Illusion");
         this.subtype.add("Wall");
         this.power = new MageInt(7);

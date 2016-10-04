@@ -25,14 +25,14 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.mercadianmasques;
+package mage.cards.c;
 
 import java.util.UUID;
 import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.abilities.dynamicvalue.common.PermanentsOnBattlefieldCount;
 import mage.abilities.effects.common.DrawCardSourceControllerEffect;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.filter.common.FilterControlledCreaturePermanent;
 
 /**
@@ -41,9 +41,8 @@ import mage.filter.common.FilterControlledCreaturePermanent;
  */
 public class CollectiveUnconscious extends CardImpl {
 
-    public CollectiveUnconscious(UUID ownerId) {
-        super(ownerId, 236, "Collective Unconscious", Rarity.RARE, new CardType[]{CardType.SORCERY}, "{4}{G}{G}");
-        this.expansionSetCode = "MMQ";
+    public CollectiveUnconscious(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{4}{G}{G}");
 
 
         // Draw a card for each creature you control.

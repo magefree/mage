@@ -25,15 +25,15 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.tenthedition;
+package mage.cards.s;
 
 import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.MageInt;
 import mage.abilities.common.DiesAndDealtDamageThisTurnTriggeredAbility;
 import mage.abilities.effects.common.counter.AddCountersSourceEffect;
 import mage.abilities.keyword.FlyingAbility;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.counters.CounterType;
 
 import java.util.UUID;
@@ -43,9 +43,8 @@ import java.util.UUID;
  */
 public class SengirVampire extends CardImpl {
 
-    public SengirVampire(UUID ownerId) {
-        super(ownerId, 176, "Sengir Vampire", Rarity.RARE, new CardType[]{CardType.CREATURE}, "{3}{B}{B}");
-        this.expansionSetCode = "10E";
+    public SengirVampire(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{3}{B}{B}");
         this.subtype.add("Vampire");
 
         this.power = new MageInt(4);

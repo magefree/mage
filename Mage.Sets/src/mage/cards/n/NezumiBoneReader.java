@@ -26,11 +26,10 @@
  *  or implied, of BetaSteward_at_googlemail.com.
  */
 
-package mage.sets.championsofkamigawa;
+package mage.cards.n;
 
 import java.util.UUID;
 import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.constants.Zone;
 import mage.MageInt;
 import mage.abilities.Ability;
@@ -39,6 +38,7 @@ import mage.abilities.costs.common.SacrificeTargetCost;
 import mage.abilities.costs.mana.ManaCostsImpl;
 import mage.abilities.effects.common.discard.DiscardTargetEffect;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.target.TargetPlayer;
 import mage.target.common.TargetControlledCreaturePermanent;
 
@@ -48,9 +48,8 @@ import mage.target.common.TargetControlledCreaturePermanent;
  */
 public class NezumiBoneReader extends CardImpl {
 
-    public NezumiBoneReader (UUID ownerId) {
-        super(ownerId, 127, "Nezumi Bone-Reader", Rarity.UNCOMMON, new CardType[]{CardType.CREATURE}, "{1}{B}");
-        this.expansionSetCode = "CHK";
+    public NezumiBoneReader (UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{1}{B}");
         this.subtype.add("Rat");
         this.subtype.add("Shaman");
 

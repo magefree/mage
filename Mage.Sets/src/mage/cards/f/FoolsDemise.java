@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.commander2014;
+package mage.cards.f;
 
 import java.util.UUID;
 import mage.abilities.Ability;
@@ -36,9 +36,9 @@ import mage.abilities.effects.common.ReturnToBattlefieldUnderYourControlAttached
 import mage.abilities.effects.common.ReturnToHandSourceEffect;
 import mage.abilities.keyword.EnchantAbility;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Outcome;
-import mage.constants.Rarity;
 import mage.target.TargetPermanent;
 import mage.target.common.TargetCreaturePermanent;
 
@@ -48,9 +48,8 @@ import mage.target.common.TargetCreaturePermanent;
  */
 public class FoolsDemise extends CardImpl {
 
-    public FoolsDemise(UUID ownerId) {
-        super(ownerId, 111, "Fool's Demise", Rarity.UNCOMMON, new CardType[]{CardType.ENCHANTMENT}, "{4}{U}");
-        this.expansionSetCode = "C14";
+    public FoolsDemise(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.ENCHANTMENT},"{4}{U}");
         this.subtype.add("Aura");
 
 

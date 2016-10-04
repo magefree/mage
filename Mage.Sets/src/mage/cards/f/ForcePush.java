@@ -25,14 +25,14 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.starwars;
+package mage.cards.f;
 
 import java.util.UUID;
 import mage.abilities.effects.common.PutOnLibraryTargetEffect;
 import mage.abilities.effects.keyword.ScryEffect;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.target.common.TargetCreaturePermanent;
 
 /**
@@ -41,9 +41,8 @@ import mage.target.common.TargetCreaturePermanent;
  */
 public class ForcePush extends CardImpl {
 
-    public ForcePush(UUID ownerId) {
-        super(ownerId, 38, "Force Push", Rarity.UNCOMMON, new CardType[]{CardType.INSTANT}, "{3}{U}");
-        this.expansionSetCode = "SWS";
+    public ForcePush(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.INSTANT},"{3}{U}");
 
         // Put target creature on top of its owner's library.
         this.getSpellAbility().addEffect(new PutOnLibraryTargetEffect(true));

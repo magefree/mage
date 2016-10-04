@@ -26,17 +26,17 @@
  *  or implied, of BetaSteward_at_googlemail.com.
  */
 
-package mage.sets.magic2010;
+package mage.cards.b;
 
 import java.util.UUID;
 import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.MageInt;
 import mage.abilities.common.OnEventTriggeredAbility;
 import mage.abilities.effects.common.SacrificeSourceEffect;
 import mage.abilities.keyword.HasteAbility;
 import mage.abilities.keyword.TrampleAbility;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.game.events.GameEvent.EventType;
 
 /**
@@ -45,9 +45,8 @@ import mage.game.events.GameEvent.EventType;
  */
 public class BallLightning extends CardImpl {
 
-    public BallLightning(UUID ownerId) {
-        super(ownerId, 125, "Ball Lightning", Rarity.RARE, new CardType[]{CardType.CREATURE}, "{R}{R}{R}");
-        this.expansionSetCode = "M10";
+    public BallLightning(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{R}{R}{R}");
         this.subtype.add("Elemental");
 
         this.power = new MageInt(6);

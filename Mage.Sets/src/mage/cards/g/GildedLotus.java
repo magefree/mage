@@ -25,17 +25,17 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.magic2013;
+package mage.cards.g;
 
 import java.util.UUID;
 
 import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.abilities.Ability;
 import mage.abilities.costs.common.TapSourceCost;
 import mage.abilities.effects.common.AddManaOfAnyColorEffect;
 import mage.abilities.mana.SimpleManaAbility;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.Zone;
 
 /**
@@ -44,9 +44,8 @@ import mage.constants.Zone;
  */
 public class GildedLotus extends CardImpl {
 
-    public GildedLotus(UUID ownerId) {
-        super(ownerId, 206, "Gilded Lotus", Rarity.RARE, new CardType[]{CardType.ARTIFACT}, "{5}");
-        this.expansionSetCode = "M13";
+    public GildedLotus(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.ARTIFACT},"{5}");
 
         // {tap}: Add three mana of any one color to your mana pool.
         Ability ability = new SimpleManaAbility(Zone.BATTLEFIELD, new AddManaOfAnyColorEffect(3), new TapSourceCost());

@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.fifthedition;
+package mage.cards.w;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -33,9 +33,9 @@ import java.util.UUID;
 import mage.abilities.Ability;
 import mage.abilities.effects.OneShotEffect;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Outcome;
-import mage.constants.Rarity;
 import mage.constants.Zone;
 import mage.game.Game;
 import mage.players.Player;
@@ -46,9 +46,8 @@ import mage.players.Player;
  */
 public class WindsOfChange extends CardImpl {
 
-    public WindsOfChange(UUID ownerId) {
-        super(ownerId, 275, "Winds of Change", Rarity.RARE, new CardType[]{CardType.SORCERY}, "{R}");
-        this.expansionSetCode = "5ED";
+    public WindsOfChange(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{R}");
 
         // Each player shuffles the cards from his or her hand into his or her library, then draws that many cards.
         this.getSpellAbility().addEffect(new WindsOfChangeEffect());

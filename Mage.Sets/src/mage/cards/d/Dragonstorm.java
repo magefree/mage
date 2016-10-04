@@ -25,14 +25,14 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.timeshifted;
+package mage.cards.d;
 
 import java.util.UUID;
 import mage.abilities.effects.common.search.SearchLibraryPutInPlayEffect;
 import mage.abilities.keyword.StormAbility;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.filter.common.FilterPermanentCard;
 import mage.filter.predicate.mageobject.SubtypePredicate;
 import mage.target.common.TargetCardInLibrary;
@@ -49,9 +49,8 @@ public class Dragonstorm extends CardImpl {
         filter.add(new SubtypePredicate("Dragon"));
     }
 
-    public Dragonstorm(UUID ownerId) {
-        super(ownerId, 60, "Dragonstorm", Rarity.SPECIAL, new CardType[]{CardType.SORCERY}, "{8}{R}");
-        this.expansionSetCode = "TSB";
+    public Dragonstorm(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{8}{R}");
 
         // Search your library for a Dragon permanent card and put it onto the battlefield. Then shuffle your library.
         this.getSpellAbility().addEffect(new SearchLibraryPutInPlayEffect(new TargetCardInLibrary(filter), false));

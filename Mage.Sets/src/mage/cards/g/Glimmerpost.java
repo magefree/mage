@@ -26,17 +26,17 @@
  *  or implied, of BetaSteward_at_googlemail.com.
  */
 
-package mage.sets.scarsofmirrodin;
+package mage.cards.g;
 
 import java.util.UUID;
 
 import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.abilities.Ability;
 import mage.abilities.common.EntersBattlefieldTriggeredAbility;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.mana.ColorlessManaAbility;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.Outcome;
 import mage.filter.FilterPermanent;
 import mage.filter.predicate.mageobject.SubtypePredicate;
@@ -49,9 +49,8 @@ import mage.players.Player;
  */
 public class Glimmerpost extends CardImpl {
 
-    public Glimmerpost (UUID ownerId) {
-        super(ownerId, 227, "Glimmerpost", Rarity.COMMON, new CardType[]{CardType.LAND}, null);
-        this.expansionSetCode = "SOM";
+    public Glimmerpost (UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.LAND},null);
         this.subtype.add("Locus");
         
         // When Glimmerpost enters the battlefield, you gain 1 life for each Locus on the battlefield.

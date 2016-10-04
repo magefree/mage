@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.commander2013;
+package mage.cards.a;
 
 import java.util.UUID;
 import mage.MageInt;
@@ -35,9 +35,9 @@ import mage.abilities.effects.common.GainLifeEffect;
 import mage.abilities.effects.common.SacrificeSourceUnlessConditionEffect;
 import mage.abilities.keyword.CantBeBlockedSourceAbility;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.ColoredManaSymbol;
-import mage.constants.Rarity;
 import mage.watchers.common.ManaSpentToCastWatcher;
 
 /**
@@ -46,9 +46,8 @@ import mage.watchers.common.ManaSpentToCastWatcher;
  */
 public class AzoriusHerald extends CardImpl {
 
-    public AzoriusHerald(UUID ownerId) {
-        super(ownerId, 6, "Azorius Herald", Rarity.UNCOMMON, new CardType[]{CardType.CREATURE}, "{2}{W}");
-        this.expansionSetCode = "C13";
+    public AzoriusHerald(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{2}{W}");
         this.subtype.add("Spirit");
 
         this.power = new MageInt(2);

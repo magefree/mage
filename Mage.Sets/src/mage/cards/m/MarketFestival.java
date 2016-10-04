@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.journeyintonyx;
+package mage.cards.m;
 
 import java.util.UUID;
 import mage.MageObject;
@@ -36,10 +36,10 @@ import mage.abilities.effects.common.ManaEffect;
 import mage.abilities.keyword.EnchantAbility;
 import mage.abilities.mana.TriggeredManaAbility;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.choices.ChoiceColor;
 import mage.constants.CardType;
 import mage.constants.Outcome;
-import mage.constants.Rarity;
 import mage.constants.Zone;
 import mage.game.Game;
 import mage.game.events.GameEvent;
@@ -55,9 +55,8 @@ import mage.target.common.TargetLandPermanent;
  */
 public class MarketFestival extends CardImpl {
 
-    public MarketFestival(UUID ownerId) {
-        super(ownerId, 130, "Market Festival", Rarity.COMMON, new CardType[]{CardType.ENCHANTMENT}, "{3}{G}");
-        this.expansionSetCode = "JOU";
+    public MarketFestival(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.ENCHANTMENT},"{3}{G}");
         this.subtype.add("Aura");
 
 

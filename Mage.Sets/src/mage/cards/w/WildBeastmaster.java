@@ -25,18 +25,18 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.returntoravnica;
+package mage.cards.w;
 
 import java.util.UUID;
 import mage.constants.CardType;
 import mage.constants.Duration;
-import mage.constants.Rarity;
 import mage.MageInt;
 import mage.abilities.common.AttacksTriggeredAbility;
 import mage.abilities.dynamicvalue.common.SourcePermanentPowerCount;
 import mage.abilities.effects.Effect;
 import mage.abilities.effects.common.continuous.BoostControlledEffect;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.filter.common.FilterCreaturePermanent;
 
 /**
@@ -47,9 +47,8 @@ public class WildBeastmaster extends CardImpl {
 
     private static final String EFFECT_TEXT ="each other creature you control gets +X/+X until end of turn, where X is {this}'s power";
 
-    public WildBeastmaster(UUID ownerId) {
-        super(ownerId, 139, "Wild Beastmaster", Rarity.RARE, new CardType[]{CardType.CREATURE}, "{2}{G}");
-        this.expansionSetCode = "RTR";
+    public WildBeastmaster(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{2}{G}");
         this.subtype.add("Human");
         this.subtype.add("Shaman");
         this.color.setGreen(true);

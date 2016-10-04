@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.shadowsoverinnistrad;
+package mage.cards.r;
 
 import java.util.UUID;
 import mage.MageInt;
@@ -40,9 +40,9 @@ import mage.abilities.effects.common.ReturnToHandSourceEffect;
 import mage.abilities.keyword.MenaceAbility;
 import mage.cards.Card;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Outcome;
-import mage.constants.Rarity;
 import mage.constants.Zone;
 import mage.filter.Filter;
 import mage.filter.FilterCard;
@@ -59,9 +59,8 @@ import mage.target.common.TargetCardInYourGraveyard;
  */
 public class RelentlessDead extends CardImpl {
 
-    public RelentlessDead(UUID ownerId) {
-        super(ownerId, 131, "Relentless Dead", Rarity.MYTHIC, new CardType[]{CardType.CREATURE}, "{B}{B}");
-        this.expansionSetCode = "SOI";
+    public RelentlessDead(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{B}{B}");
         this.subtype.add("Zombie");
         this.power = new MageInt(2);
         this.toughness = new MageInt(2);

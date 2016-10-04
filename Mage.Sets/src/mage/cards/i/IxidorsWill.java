@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.onslaught;
+package mage.cards.i;
 
 import java.util.UUID;
 
@@ -33,8 +33,8 @@ import mage.abilities.dynamicvalue.common.PermanentsOnBattlefieldCount;
 import mage.abilities.effects.Effect;
 import mage.abilities.effects.common.CounterUnlessPaysEffect;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.target.TargetSpell;
 
@@ -46,9 +46,8 @@ public class IxidorsWill extends CardImpl {
 
     private static final FilterCreaturePermanent FILTER = new FilterCreaturePermanent("Wizard", "Wizard");
 
-    public IxidorsWill(UUID ownerId) {
-        super(ownerId, 90, "Ixidor's Will", Rarity.COMMON, new CardType[]{CardType.INSTANT}, "{2}{U}");
-        this.expansionSetCode = "ONS";
+    public IxidorsWill(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.INSTANT},"{2}{U}");
 
         // Counter target spell unless its controller pays {2} for each Wizard on the battlefield.
         Effect effect = new CounterUnlessPaysEffect(new PermanentsOnBattlefieldCount(FILTER, 2));

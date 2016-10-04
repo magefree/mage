@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.dissension;
+package mage.cards.t;
 
 import java.util.HashSet;
 import java.util.Set;
@@ -34,10 +34,10 @@ import mage.abilities.Ability;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.CounterTargetEffect;
 import mage.cards.Card;
+import mage.cards.CardSetInfo;
 import mage.cards.SplitCard;
 import mage.constants.CardType;
 import mage.constants.Outcome;
-import mage.constants.Rarity;
 import mage.constants.Zone;
 import mage.filter.FilterSpell;
 import mage.filter.predicate.mageobject.MulticoloredPredicate;
@@ -60,9 +60,8 @@ public class TrialError extends SplitCard {
         filter.add(new MulticoloredPredicate());
     }
 
-    public TrialError(UUID ownerId) {
-        super(ownerId, 158, "Trial", "Error", Rarity.UNCOMMON, new CardType[]{CardType.INSTANT}, "{W}{U}", "{U}{B}", false);
-        this.expansionSetCode = "DIS";
+    public TrialError(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.INSTANT},"{W}{U}","{U}{B}",false);
 
         // Trial
         // Return all creatures blocking or blocked by target creature to their owner's hand.

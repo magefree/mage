@@ -25,15 +25,15 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.sorinvstibalt;
+package mage.cards.s;
 
 import java.util.UUID;
 import mage.abilities.costs.mana.ManaCostsImpl;
 import mage.abilities.effects.common.DestroyTargetEffect;
 import mage.abilities.keyword.FlashbackAbility;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.constants.TimingRule;
 import mage.filter.Filter;
 import mage.filter.common.FilterCreaturePermanent;
@@ -52,9 +52,8 @@ public class StranglingSoot extends CardImpl {
         filter.add(new ToughnessPredicate(Filter.ComparisonType.LessThan, 4));
     }
 
-    public StranglingSoot(UUID ownerId) {
-        super(ownerId, 65, "Strangling Soot", Rarity.COMMON, new CardType[]{CardType.INSTANT}, "{2}{B}");
-        this.expansionSetCode = "DDK";
+    public StranglingSoot(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.INSTANT},"{2}{B}");
 
         // Destroy target creature with toughness 3 or less.
         this.getSpellAbility().addTarget(new TargetCreaturePermanent(filter));

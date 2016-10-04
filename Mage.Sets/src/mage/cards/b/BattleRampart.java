@@ -25,12 +25,11 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.riseoftheeldrazi;
+package mage.cards.b;
 
 import java.util.UUID;
 import mage.constants.CardType;
 import mage.constants.Duration;
-import mage.constants.Rarity;
 import mage.constants.Zone;
 import mage.MageInt;
 import mage.abilities.common.SimpleActivatedAbility;
@@ -39,6 +38,7 @@ import mage.abilities.effects.common.continuous.GainAbilityTargetEffect;
 import mage.abilities.keyword.DefenderAbility;
 import mage.abilities.keyword.HasteAbility;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.target.common.TargetCreaturePermanent;
 
 /**
@@ -47,9 +47,8 @@ import mage.target.common.TargetCreaturePermanent;
  */
 public class BattleRampart extends CardImpl {
 
-    public BattleRampart(UUID ownerId) {
-        super(ownerId, 135, "Battle Rampart", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{2}{R}");
-        this.expansionSetCode = "ROE";
+    public BattleRampart(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{2}{R}");
         this.subtype.add("Wall");
 
         this.power = new MageInt(1);

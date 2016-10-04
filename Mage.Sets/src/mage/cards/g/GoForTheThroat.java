@@ -25,13 +25,13 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.mirrodinbesieged;
+package mage.cards.g;
 
 import java.util.UUID;
 import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.abilities.effects.common.DestroyTargetEffect;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.filter.predicate.Predicates;
 import mage.filter.predicate.mageobject.CardTypePredicate;
@@ -50,9 +50,8 @@ public class GoForTheThroat extends CardImpl {
         filter.add(Predicates.not(new CardTypePredicate(CardType.ARTIFACT)));
     }
 
-    public GoForTheThroat(UUID ownerId) {
-        super(ownerId, 43, "Go for the Throat", Rarity.UNCOMMON, new CardType[]{CardType.INSTANT}, "{1}{B}");
-        this.expansionSetCode = "MBS";
+    public GoForTheThroat(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.INSTANT},"{1}{B}");
 
 
         Target target = new TargetCreaturePermanent(filter);

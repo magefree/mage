@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.masterseditionii;
+package mage.cards.b;
 
 import java.util.UUID;
 import mage.ObjectColor;
@@ -33,8 +33,8 @@ import mage.abilities.costs.AlternativeCostSourceAbility;
 import mage.abilities.costs.common.ExileFromHandCost;
 import mage.abilities.effects.common.counter.DistributeCountersEffect;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.counters.CounterType;
 import mage.filter.common.FilterOwnedCard;
 import mage.filter.predicate.Predicates;
@@ -49,9 +49,8 @@ import mage.target.common.TargetCreaturePermanentAmount;
  */
 public class BountyOfTheHunt extends CardImpl {
 
-    public BountyOfTheHunt(UUID ownerId) {
-        super(ownerId, 154, "Bounty of the Hunt", Rarity.RARE, new CardType[]{CardType.INSTANT}, "{3}{G}{G}");
-        this.expansionSetCode = "ME2";
+    public BountyOfTheHunt(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.INSTANT},"{3}{G}{G}");
 
         // You may exile a green card from your hand rather than pay Bounty of the Hunt's mana cost.
         FilterOwnedCard filter = new FilterOwnedCard("green card from your hand");

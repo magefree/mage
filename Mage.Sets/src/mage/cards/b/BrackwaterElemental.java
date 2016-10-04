@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.conflux;
+package mage.cards.b;
 
 import java.util.UUID;
 import mage.MageInt;
@@ -37,9 +37,9 @@ import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.SacrificeTargetEffect;
 import mage.abilities.keyword.UnearthAbility;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Outcome;
-import mage.constants.Rarity;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.target.targetpointer.FixedTarget;
@@ -50,9 +50,8 @@ import mage.target.targetpointer.FixedTarget;
  */
 public class BrackwaterElemental extends CardImpl {
 
-    public BrackwaterElemental(UUID ownerId) {
-        super(ownerId, 21, "Brackwater Elemental", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{2}{U}");
-        this.expansionSetCode = "CON";
+    public BrackwaterElemental(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{2}{U}");
         this.subtype.add("Elemental");
 
         this.power = new MageInt(4);

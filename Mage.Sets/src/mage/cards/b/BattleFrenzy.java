@@ -25,15 +25,15 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.iceage;
+package mage.cards.b;
 
 import java.util.UUID;
 import mage.ObjectColor;
 import mage.abilities.effects.common.continuous.BoostControlledEffect;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Duration;
-import mage.constants.Rarity;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.filter.predicate.Predicates;
 import mage.filter.predicate.mageobject.ColorPredicate;
@@ -53,9 +53,8 @@ public class BattleFrenzy extends CardImpl {
     }
 
 
-    public BattleFrenzy(UUID ownerId) {
-        super(ownerId, 175, "Battle Frenzy", Rarity.COMMON, new CardType[]{CardType.INSTANT}, "{2}{R}");
-        this.expansionSetCode = "ICE";
+    public BattleFrenzy(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.INSTANT},"{2}{R}");
 
         // Green creatures you control get +1/+1 until end of turn.
         this.getSpellAbility().addEffect(new BoostControlledEffect(1, 1, Duration.EndOfTurn, filter1));

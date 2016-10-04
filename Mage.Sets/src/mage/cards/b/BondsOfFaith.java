@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.innistrad;
+package mage.cards.b;
 
 import java.util.UUID;
 import mage.abilities.Ability;
@@ -40,10 +40,10 @@ import mage.abilities.effects.common.combat.CantAttackBlockAttachedEffect;
 import mage.abilities.effects.common.continuous.BoostEquippedEffect;
 import mage.abilities.keyword.EnchantAbility;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.AttachmentType;
 import mage.constants.CardType;
 import mage.constants.Outcome;
-import mage.constants.Rarity;
 import mage.constants.Zone;
 import mage.target.TargetPermanent;
 import mage.target.common.TargetCreaturePermanent;
@@ -55,9 +55,8 @@ public class BondsOfFaith extends CardImpl {
 
     private static final String rule = "Enchanted creature gets +2/+2 as long as it's a Human";
 
-    public BondsOfFaith(UUID ownerId) {
-        super(ownerId, 5, "Bonds of Faith", Rarity.COMMON, new CardType[]{CardType.ENCHANTMENT}, "{1}{W}");
-        this.expansionSetCode = "ISD";
+    public BondsOfFaith(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.ENCHANTMENT},"{1}{W}");
         this.subtype.add("Aura");
 
 

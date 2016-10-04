@@ -25,13 +25,13 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.tenthedition;
+package mage.cards.w;
 
 import java.util.UUID;
 import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.abilities.effects.common.DestroyAllEffect;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.filter.common.FilterCreaturePermanent;
 
 /**
@@ -40,9 +40,8 @@ import mage.filter.common.FilterCreaturePermanent;
  */
 public class WrathOfGod extends CardImpl {
 
-    public WrathOfGod(UUID ownerId) {
-        super(ownerId, 61, "Wrath of God", Rarity.RARE, new CardType[]{CardType.SORCERY}, "{2}{W}{W}");
-        this.expansionSetCode = "10E";
+    public WrathOfGod(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{2}{W}{W}");
 
 
         // Destroy all creatures. They can't be regenerated.

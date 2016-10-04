@@ -26,15 +26,15 @@
  *  or implied, of BetaSteward_at_googlemail.com.
  */
 
-package mage.sets.mirrodinbesieged;
+package mage.cards.m;
 
 import java.util.UUID;
 import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.MageInt;
 import mage.abilities.common.DiesTriggeredAbility;
 import mage.abilities.effects.common.CreateTokenEffect;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.game.permanent.token.MyrToken;
 
 /**
@@ -43,9 +43,8 @@ import mage.game.permanent.token.MyrToken;
  */
 public class MyrSire extends CardImpl {
 
-    public MyrSire (UUID ownerId) {
-        super(ownerId, 116, "Myr Sire", Rarity.COMMON, new CardType[]{CardType.ARTIFACT, CardType.CREATURE}, "{2}");
-        this.expansionSetCode = "MBS";
+    public MyrSire (UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.ARTIFACT,CardType.CREATURE},"{2}");
         this.subtype.add("Myr");
         this.power = new MageInt(1);
         this.toughness = new MageInt(1);

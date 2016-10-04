@@ -25,13 +25,13 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.magic2014;
+package mage.cards.p;
 
 import java.util.UUID;
 import mage.abilities.effects.common.PreventDamageBySourceEffect;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.Rarity;
 
 /**
  *
@@ -39,9 +39,8 @@ import mage.constants.Rarity;
  */
 public class PayNoHeed extends CardImpl {
 
-    public PayNoHeed(UUID ownerId) {
-        super(ownerId, 27, "Pay No Heed", Rarity.COMMON, new CardType[]{CardType.INSTANT}, "{W}");
-        this.expansionSetCode = "M14";
+    public PayNoHeed(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.INSTANT},"{W}");
 
 
         // Prevent all damage a source of your choice would deal this turn.

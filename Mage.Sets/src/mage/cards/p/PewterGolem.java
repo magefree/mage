@@ -25,17 +25,17 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.mirrodin;
+package mage.cards.p;
 
 import java.util.UUID;
 
 import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.MageInt;
 import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.costs.mana.ManaCostsImpl;
 import mage.abilities.effects.common.RegenerateSourceEffect;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.Zone;
 
 /**
@@ -44,9 +44,8 @@ import mage.constants.Zone;
  */
 public class PewterGolem extends CardImpl {
 
-    public PewterGolem(UUID ownerId) {
-        super(ownerId, 227, "Pewter Golem", Rarity.COMMON, new CardType[]{CardType.ARTIFACT, CardType.CREATURE}, "{5}");
-        this.expansionSetCode = "MRD";
+    public PewterGolem(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.ARTIFACT,CardType.CREATURE},"{5}");
         this.subtype.add("Golem");
         this.power = new MageInt(4);
         this.toughness = new MageInt(2);

@@ -26,14 +26,14 @@
 * or implied, of BetaSteward_at_googlemail.com.
 */
 
-package mage.sets.zendikar;
+package mage.cards.s;
 
 import java.util.UUID;
 import mage.abilities.costs.mana.GenericManaCost;
 import mage.abilities.effects.common.CounterUnlessPaysEffect;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.filter.FilterSpell;
 import mage.filter.predicate.Predicates;
 import mage.filter.predicate.mageobject.CardTypePredicate;
@@ -52,9 +52,8 @@ public class SpellPierce extends CardImpl {
         filter.add(Predicates.not(new CardTypePredicate(CardType.CREATURE)));
     }
 
-    public SpellPierce(UUID ownerId) {
-        super(ownerId, 67, "Spell Pierce", Rarity.COMMON, new CardType[]{CardType.INSTANT}, "{U}");
-        this.expansionSetCode = "ZEN";
+    public SpellPierce(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.INSTANT},"{U}");
 
 
         // Counter target noncreature spell unless its controller pays .

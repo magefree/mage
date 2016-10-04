@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.eldritchmoon;
+package mage.cards.s;
 
 import java.util.UUID;
 import mage.abilities.Ability;
@@ -35,10 +35,10 @@ import mage.abilities.effects.RequirementEffect;
 import mage.abilities.effects.common.continuous.BoostEquippedEffect;
 import mage.abilities.keyword.EquipAbility;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Duration;
 import mage.constants.Outcome;
-import mage.constants.Rarity;
 import mage.constants.Zone;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
@@ -49,9 +49,8 @@ import mage.game.permanent.Permanent;
  */
 public class SlayersCleaver extends CardImpl {
 
-    public SlayersCleaver(UUID ownerId) {
-        super(ownerId, 198, "Slayer's Cleaver", Rarity.UNCOMMON, new CardType[]{CardType.ARTIFACT}, "{3}");
-        this.expansionSetCode = "EMN";
+    public SlayersCleaver(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.ARTIFACT},"{3}");
         this.subtype.add("Equipment");
 
         // Equipped creature gets +3/+1 and must be blocked by an Eldrazi if able.

@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.invasion;
+package mage.cards.s;
 
 import java.util.UUID;
 import mage.abilities.Ability;
@@ -34,8 +34,8 @@ import mage.abilities.costs.common.SacrificeTargetCost;
 import mage.abilities.costs.mana.ManaCostsImpl;
 import mage.abilities.effects.common.DestroyTargetEffect;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.constants.Zone;
 import mage.target.common.TargetControlledCreaturePermanent;
 import mage.target.common.TargetNonBasicLandPermanent;
@@ -46,9 +46,8 @@ import mage.target.common.TargetNonBasicLandPermanent;
  */
 public class ShivanHarvest extends CardImpl {
     
-    public ShivanHarvest(UUID ownerId) {
-        super(ownerId, 167, "Shivan Harvest", Rarity.UNCOMMON, new CardType[]{CardType.ENCHANTMENT}, "{1}{R}");
-        this.expansionSetCode = "INV";
+    public ShivanHarvest(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.ENCHANTMENT},"{1}{R}");
 
         // {1}{R}, Sacrifice a creature: Destroy target nonbasic land.
         Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new DestroyTargetEffect(), new ManaCostsImpl("{1}{R}"));

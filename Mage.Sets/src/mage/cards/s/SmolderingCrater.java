@@ -26,16 +26,16 @@
 * or implied, of BetaSteward_at_googlemail.com.
 */
 
-package mage.sets.urzassaga;
+package mage.cards.s;
 
 import java.util.UUID;
 import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.abilities.common.EntersBattlefieldTappedAbility;
 import mage.abilities.costs.mana.ManaCostsImpl;
 import mage.abilities.keyword.CyclingAbility;
 import mage.abilities.mana.RedManaAbility;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 
 /**
  *
@@ -43,9 +43,8 @@ import mage.cards.CardImpl;
  */
 public class SmolderingCrater extends CardImpl {
 
-    public SmolderingCrater(UUID ownerId) {
-        super(ownerId, 328, "Smoldering Crater", Rarity.COMMON, new CardType[]{CardType.LAND}, "");
-        this.expansionSetCode = "USG";
+    public SmolderingCrater(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.LAND},"");
 
         this.addAbility(new EntersBattlefieldTappedAbility());
         this.addAbility(new RedManaAbility());

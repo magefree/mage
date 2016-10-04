@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.conspiracy;
+package mage.cards.m;
 
 import java.util.List;
 import java.util.UUID;
@@ -37,11 +37,11 @@ import mage.abilities.costs.mana.ManaCostsImpl;
 import mage.abilities.effects.OneShotEffect;
 import mage.cards.Card;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.cards.Cards;
 import mage.cards.CardsImpl;
 import mage.constants.CardType;
 import mage.constants.Outcome;
-import mage.constants.Rarity;
 import mage.constants.Zone;
 import mage.filter.common.FilterArtifactCard;
 import mage.filter.common.FilterArtifactPermanent;
@@ -56,9 +56,8 @@ import mage.target.TargetCard;
  */
 public class MuzzioVisionaryArchitect extends CardImpl {
 
-    public MuzzioVisionaryArchitect(UUID ownerId) {
-        super(ownerId, 23, "Muzzio, Visionary Architect", Rarity.MYTHIC, new CardType[]{CardType.CREATURE}, "{1}{U}{U}");
-        this.expansionSetCode = "CNS";
+    public MuzzioVisionaryArchitect(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{1}{U}{U}");
         this.supertype.add("Legendary");
         this.subtype.add("Human");
         this.subtype.add("Artificer");

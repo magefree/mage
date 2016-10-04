@@ -26,18 +26,18 @@
  *  or implied, of BetaSteward_at_googlemail.com.
  */
 
-package mage.sets.championsofkamigawa;
+package mage.cards.k;
 
 import java.util.UUID;
 
 import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.DiesTriggeredAbility;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.keyword.FlyingAbility;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.Outcome;
 import mage.game.Game;
 
@@ -46,9 +46,8 @@ import mage.game.Game;
  */
 public class KokushoTheEveningStar extends CardImpl {
 
-    public KokushoTheEveningStar(UUID ownerId) {
-        super(ownerId, 122, "Kokusho, the Evening Star", Rarity.RARE, new CardType[]{CardType.CREATURE}, "{4}{B}{B}");
-        this.expansionSetCode = "CHK";
+    public KokushoTheEveningStar(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{4}{B}{B}");
         this.supertype.add("Legendary");
         this.subtype.add("Dragon");
         this.subtype.add("Spirit");

@@ -25,16 +25,16 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.urzaslegacy;
+package mage.cards.w;
 
 import java.util.UUID;
 import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.MageInt;
 import mage.abilities.common.DiesTriggeredAbility;
 import mage.abilities.effects.common.ReturnToHandSourceEffect;
 import mage.abilities.keyword.TrampleAbility;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 
 /**
  *
@@ -42,9 +42,8 @@ import mage.cards.CardImpl;
  */
 public class WeatherseedTreefolk extends CardImpl {
 
-    public WeatherseedTreefolk(UUID ownerId) {
-        super(ownerId, 116, "Weatherseed Treefolk", Rarity.RARE, new CardType[]{CardType.CREATURE}, "{2}{G}{G}{G}");
-        this.expansionSetCode = "ULG";
+    public WeatherseedTreefolk(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{2}{G}{G}{G}");
         this.subtype.add("Treefolk");
 
         this.power = new MageInt(5);

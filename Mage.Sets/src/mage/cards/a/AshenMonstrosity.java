@@ -25,15 +25,15 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.betrayersofkamigawa;
+package mage.cards.a;
 
 import java.util.UUID;
 import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.MageInt;
 import mage.abilities.common.AttacksEachTurnStaticAbility;
 import mage.abilities.keyword.HasteAbility;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 
 /**
  *
@@ -41,9 +41,8 @@ import mage.cards.CardImpl;
  */
 public class AshenMonstrosity extends CardImpl {
 
-    public AshenMonstrosity(UUID ownerId) {
-        super(ownerId, 93, "Ashen Monstrosity", Rarity.UNCOMMON, new CardType[]{CardType.CREATURE}, "{5}{R}{R}");
-        this.expansionSetCode = "BOK";
+    public AshenMonstrosity(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{5}{R}{R}");
         this.subtype.add("Spirit");
 
         this.power = new MageInt(7);

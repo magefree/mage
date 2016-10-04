@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.invasion;
+package mage.cards.s;
 
 import java.util.UUID;
 import mage.abilities.condition.LockedInCondition;
@@ -37,9 +37,9 @@ import mage.abilities.effects.common.continuous.GainAbilityAllEffect;
 import mage.abilities.keyword.FirstStrikeAbility;
 import mage.abilities.keyword.KickerAbility;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Duration;
-import mage.constants.Rarity;
 import mage.constants.TargetController;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.filter.predicate.permanent.ControllerPredicate;
@@ -56,9 +56,8 @@ public class SavageOffensive extends CardImpl {
         filter.add(new ControllerPredicate(TargetController.YOU));
     }
 
-    public SavageOffensive(UUID ownerId) {
-        super(ownerId, 162, "Savage Offensive", Rarity.COMMON, new CardType[]{CardType.SORCERY}, "{1}{R}");
-        this.expansionSetCode = "INV";
+    public SavageOffensive(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{1}{R}");
 
         // Kicker {G}
         this.addAbility(new KickerAbility("{G}"));

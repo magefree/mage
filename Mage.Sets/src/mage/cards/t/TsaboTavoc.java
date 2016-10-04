@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.invasion;
+package mage.cards.t;
 
 import java.util.UUID;
 import mage.MageInt;
@@ -37,8 +37,8 @@ import mage.abilities.effects.common.DestroyTargetEffect;
 import mage.abilities.keyword.FirstStrikeAbility;
 import mage.abilities.keyword.ProtectionAbility;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.constants.Zone;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.filter.predicate.mageobject.SupertypePredicate;
@@ -58,9 +58,8 @@ public class TsaboTavoc extends CardImpl {
         filterDestroy.add(new SupertypePredicate("Legendary"));
     }
     
-    public TsaboTavoc(UUID ownerId) {
-        super(ownerId, 281, "Tsabo Tavoc", Rarity.RARE, new CardType[]{CardType.CREATURE}, "{5}{B}{R}");
-        this.expansionSetCode = "INV";
+    public TsaboTavoc(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{5}{B}{R}");
         this.supertype.add("Legendary");
         this.subtype.add("Horror");
 

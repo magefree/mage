@@ -25,11 +25,10 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.gatecrash;
+package mage.cards.c;
 
 import java.util.UUID;
 import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.constants.TargetController;
 import mage.constants.Zone;
 import mage.MageInt;
@@ -38,6 +37,7 @@ import mage.abilities.Ability;
 import mage.abilities.common.EntersBattlefieldAllTriggeredAbility;
 import mage.abilities.effects.common.TapTargetEffect;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.filter.FilterPermanent;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.filter.predicate.mageobject.ColorPredicate;
@@ -59,9 +59,8 @@ public class CourtStreetDenizen extends CardImpl {
         filter.add(new ControllerPredicate(TargetController.YOU));
         filterOpponentCreature.add(new ControllerPredicate(TargetController.OPPONENT));
     }
-    public CourtStreetDenizen(UUID ownerId) {
-        super(ownerId, 8, "Court Street Denizen", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{2}{W}");
-        this.expansionSetCode = "GTC";
+    public CourtStreetDenizen(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{2}{W}");
         this.subtype.add("Human");
         this.subtype.add("Soldier");
 

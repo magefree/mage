@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.dragonsoftarkir;
+package mage.cards.c;
 
 import java.util.UUID;
 import mage.MageInt;
@@ -37,9 +37,9 @@ import mage.abilities.costs.mana.ManaCostsImpl;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.CreateTokenEffect;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Outcome;
-import mage.constants.Rarity;
 import mage.constants.Zone;
 import mage.filter.common.FilterCreatureCard;
 import mage.game.Game;
@@ -53,9 +53,8 @@ import mage.target.common.TargetCardInYourGraveyard;
  */
 public class Corpseweft extends CardImpl {
 
-    public Corpseweft(UUID ownerId) {
-        super(ownerId, 92, "Corpseweft", Rarity.RARE, new CardType[]{CardType.ENCHANTMENT}, "{2}{B}");
-        this.expansionSetCode = "DTK";
+    public Corpseweft(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.ENCHANTMENT},"{2}{B}");
 
         // {1}{B}, Exile one or more creature cards from your graveyard: Put an X/X black Zombie Horror creature token onto the battlefield tapped, where X is twice the number of cards exiled this way.
         Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new CorpseweftEffect(), new ManaCostsImpl("{1}{B}"));

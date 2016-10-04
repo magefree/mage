@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.avacynrestored;
+package mage.cards.h;
 
 import java.util.UUID;
 import mage.abilities.Ability;
@@ -38,9 +38,9 @@ import mage.abilities.effects.common.continuous.BoostControlledEffect;
 import mage.abilities.effects.common.continuous.GainAbilityControlledEffect;
 import mage.abilities.keyword.LifelinkAbility;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Duration;
-import mage.constants.Rarity;
 import mage.constants.TargetController;
 import mage.constants.Zone;
 
@@ -51,9 +51,8 @@ public class HomicidalSeclusion extends CardImpl {
 
     private static final String rule = "As long as you control exactly one creature, that creature gets +3/+1";
 
-    public HomicidalSeclusion(UUID ownerId) {
-        super(ownerId, 108, "Homicidal Seclusion", Rarity.UNCOMMON, new CardType[]{CardType.ENCHANTMENT}, "{4}{B}");
-        this.expansionSetCode = "AVR";
+    public HomicidalSeclusion(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.ENCHANTMENT},"{4}{B}");
 
         // As long as you control exactly one creature, that creature gets +3/+1 and has lifelink.
         ContinuousEffect boostEffect = new BoostControlledEffect(3, 1, Duration.WhileOnBattlefield);

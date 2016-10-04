@@ -25,15 +25,15 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.oathofthegatewatch;
+package mage.cards.r;
 
 import java.util.UUID;
 import mage.abilities.Ability;
 import mage.abilities.effects.OneShotEffect;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Outcome;
-import mage.constants.Rarity;
 import mage.filter.common.FilterControlledPermanent;
 import mage.filter.predicate.Predicates;
 import mage.filter.predicate.mageobject.CardTypePredicate;
@@ -49,9 +49,8 @@ import mage.target.common.TargetOpponent;
  */
 public class RemorselessPunishment extends CardImpl {
 
-    public RemorselessPunishment(UUID ownerId) {
-        super(ownerId, 89, "Remorseless Punishment", Rarity.RARE, new CardType[]{CardType.SORCERY}, "{3}{B}{B}");
-        this.expansionSetCode = "OGW";
+    public RemorselessPunishment(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{3}{B}{B}");
 
         // Target opponent loses 5 life unless that player discards two cards or sacrifices a creature or planeswalker. Repeat this process once.
         getSpellAbility().addEffect(new RemorselessPunishmentEffect());

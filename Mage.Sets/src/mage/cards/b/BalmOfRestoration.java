@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.fallenempires;
+package mage.cards.b;
 
 import java.util.UUID;
 import mage.abilities.Ability;
@@ -37,9 +37,9 @@ import mage.abilities.costs.mana.GenericManaCost;
 import mage.abilities.effects.common.GainLifeEffect;
 import mage.abilities.effects.common.PreventDamageToTargetEffect;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Duration;
-import mage.constants.Rarity;
 import mage.constants.Zone;
 import mage.target.common.TargetCreatureOrPlayer;
 
@@ -49,9 +49,8 @@ import mage.target.common.TargetCreatureOrPlayer;
  */
 public class BalmOfRestoration extends CardImpl {
 
-    public BalmOfRestoration(UUID ownerId) {
-        super(ownerId, 167, "Balm of Restoration", Rarity.RARE, new CardType[]{CardType.ARTIFACT}, "{2}");
-        this.expansionSetCode = "FEM";
+    public BalmOfRestoration(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.ARTIFACT},"{2}");
 
         // {1}, {tap}, Sacrifice Balm of Restoration: Choose one - You gain 2 life;
         Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new GainLifeEffect(2), new GenericManaCost(1));

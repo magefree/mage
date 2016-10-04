@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.commander;
+package mage.cards.s;
 
 import java.util.UUID;
 import mage.MageInt;
@@ -39,6 +39,7 @@ import mage.abilities.effects.ReplacementEffectImpl;
 import mage.abilities.effects.common.counter.AddCountersSourceEffect;
 import mage.abilities.keyword.HasteAbility;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.*;
 import mage.counters.Counter;
 import mage.counters.CounterType;
@@ -54,9 +55,8 @@ import mage.game.events.ZoneChangeEvent;
 public class SkullbriarTheWalkingGrave extends CardImpl {
     private Counters counters;
 
-    public SkullbriarTheWalkingGrave(UUID ownerId) {
-        super(ownerId, 227, "Skullbriar, the Walking Grave", Rarity.RARE, new CardType[]{CardType.CREATURE}, "{B}{G}");
-        this.expansionSetCode = "CMD";
+    public SkullbriarTheWalkingGrave(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{B}{G}");
         this.supertype.add("Legendary");
         this.subtype.add("Zombie");
         this.subtype.add("Elemental");

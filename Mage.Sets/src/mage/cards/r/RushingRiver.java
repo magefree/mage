@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.planeshift;
+package mage.cards.r;
 
 import java.util.UUID;
 import mage.abilities.Ability;
@@ -37,8 +37,8 @@ import mage.abilities.effects.Effect;
 import mage.abilities.effects.common.ReturnToHandTargetEffect;
 import mage.abilities.keyword.KickerAbility;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.filter.common.FilterControlledLandPermanent;
 import mage.filter.common.FilterNonlandPermanent;
 import mage.game.Game;
@@ -52,9 +52,8 @@ import mage.target.targetpointer.SecondTargetPointer;
  */
 public class RushingRiver extends CardImpl {
 
-    public RushingRiver(UUID ownerId) {
-        super(ownerId, 30, "Rushing River", Rarity.COMMON, new CardType[]{CardType.INSTANT}, "{2}{U}");
-        this.expansionSetCode = "PLS";
+    public RushingRiver(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.INSTANT},"{2}{U}");
 
 
         // Kicker-Sacrifice a land.

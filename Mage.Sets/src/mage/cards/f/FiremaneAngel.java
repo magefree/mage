@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.ravnica;
+package mage.cards.f;
 
 import java.util.UUID;
 import mage.MageInt;
@@ -41,9 +41,9 @@ import mage.abilities.effects.common.ReturnSourceFromGraveyardToBattlefieldEffec
 import mage.abilities.keyword.FirstStrikeAbility;
 import mage.abilities.keyword.FlyingAbility;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.PhaseStep;
-import mage.constants.Rarity;
 import mage.constants.TargetController;
 import mage.constants.Zone;
 import mage.game.Game;
@@ -54,9 +54,8 @@ import mage.game.Game;
  */
 public class FiremaneAngel extends CardImpl {
 
-    public FiremaneAngel(UUID ownerId) {
-        super(ownerId, 205, "Firemane Angel", Rarity.RARE, new CardType[]{CardType.CREATURE}, "{3}{R}{W}{W}");
-        this.expansionSetCode = "RAV";
+    public FiremaneAngel(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{3}{R}{W}{W}");
         this.subtype.add("Angel");
 
         this.power = new MageInt(4);

@@ -26,14 +26,14 @@
  *  or implied, of BetaSteward_at_googlemail.com.
  */
 
-package mage.sets.dragonsmaze;
+package mage.cards.c;
 
 import java.util.UUID;
 import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.abilities.effects.common.DestroyTargetEffect;
 import mage.abilities.keyword.DefenderAbility;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.filter.predicate.mageobject.AbilityPredicate;
 import mage.target.Target;
@@ -52,9 +52,8 @@ public class ClearAPath extends CardImpl {
         filter.add(new AbilityPredicate(DefenderAbility.class));
     }
 
-    public ClearAPath(UUID ownerId) {
-        super(ownerId, 32, "Clear a Path", Rarity.COMMON, new CardType[]{CardType.SORCERY}, "{R}");
-        this.expansionSetCode = "DGM";
+    public ClearAPath(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{R}");
 
 
         // Destroy target creature with defender.

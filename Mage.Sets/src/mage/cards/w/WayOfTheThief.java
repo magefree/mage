@@ -25,14 +25,13 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.gatecrash;
+package mage.cards.w;
 
 import java.util.UUID;
 
 import mage.constants.AttachmentType;
 import mage.constants.CardType;
 import mage.constants.Duration;
-import mage.constants.Rarity;
 import mage.constants.Zone;
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleStaticAbility;
@@ -44,6 +43,7 @@ import mage.abilities.effects.common.combat.CantBeBlockedAttachedEffect;
 import mage.abilities.effects.common.continuous.BoostEnchantedEffect;
 import mage.abilities.keyword.EnchantAbility;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.Outcome;
 import mage.filter.FilterPermanent;
 import mage.filter.predicate.mageobject.SubtypePredicate;
@@ -63,9 +63,8 @@ public class WayOfTheThief extends CardImpl {
     }    
     private final String rule = "Enchanted creature can't be blocked as long as you control a Gate";
 
-    public WayOfTheThief(UUID ownerId) {
-        super(ownerId, 56, "Way of the Thief", Rarity.COMMON, new CardType[]{CardType.ENCHANTMENT}, "{3}{U}");
-        this.expansionSetCode = "GTC";
+    public WayOfTheThief(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.ENCHANTMENT},"{3}{U}");
         this.subtype.add("Aura");
 
 

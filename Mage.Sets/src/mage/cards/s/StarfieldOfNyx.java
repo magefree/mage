@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.magicorigins;
+package mage.cards.s;
 
 import java.util.HashSet;
 import java.util.List;
@@ -40,12 +40,12 @@ import mage.abilities.effects.ContinuousEffect;
 import mage.abilities.effects.ContinuousEffectImpl;
 import mage.abilities.effects.common.ReturnFromGraveyardToBattlefieldTargetEffect;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.DependencyType;
 import mage.constants.Duration;
 import mage.constants.Layer;
 import mage.constants.Outcome;
-import mage.constants.Rarity;
 import mage.constants.SubLayer;
 import mage.constants.TargetController;
 import mage.constants.Zone;
@@ -81,9 +81,8 @@ public class StarfieldOfNyx extends CardImpl {
         filterGraveyardEnchantment.add(new OwnerPredicate(TargetController.YOU));
     }
 
-    public StarfieldOfNyx(UUID ownerId) {
-        super(ownerId, 33, "Starfield of Nyx", Rarity.MYTHIC, new CardType[]{CardType.ENCHANTMENT}, "{4}{W}");
-        this.expansionSetCode = "ORI";
+    public StarfieldOfNyx(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.ENCHANTMENT},"{4}{W}");
 
         // At the beginning of your upkeep, you may return target enchantment card from your graveyard to the battlefield.
         Ability ability = new BeginningOfUpkeepTriggeredAbility(Zone.BATTLEFIELD,

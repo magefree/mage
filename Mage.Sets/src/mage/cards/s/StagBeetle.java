@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.onslaught;
+package mage.cards.s;
 
 import java.util.UUID;
 import mage.MageInt;
@@ -33,8 +33,8 @@ import mage.abilities.common.EntersBattlefieldAbility;
 import mage.abilities.dynamicvalue.common.PermanentsOnBattlefieldCount;
 import mage.abilities.effects.common.counter.AddCountersSourceEffect;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.counters.CounterType;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.filter.predicate.permanent.AnotherPredicate;
@@ -51,9 +51,8 @@ public class StagBeetle extends CardImpl {
         filter.add(new AnotherPredicate());
     }
 
-    public StagBeetle(UUID ownerId) {
-        super(ownerId, 285, "Stag Beetle", Rarity.RARE, new CardType[]{CardType.CREATURE}, "{3}{G}{G}");
-        this.expansionSetCode = "ONS";
+    public StagBeetle(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{3}{G}{G}");
         this.subtype.add("Insect");
         this.power = new MageInt(0);
         this.toughness = new MageInt(0);

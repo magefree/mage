@@ -25,16 +25,16 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.zendikar;
+package mage.cards.t;
 
 import java.util.UUID;
 import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.MageInt;
 import mage.abilities.common.LandfallAbility;
 import mage.abilities.effects.common.combat.MustBeBlockedByTargetSourceEffect;
 import mage.abilities.keyword.DeathtouchAbility;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.target.common.TargetCreaturePermanent;
 
 /**
@@ -43,9 +43,8 @@ import mage.target.common.TargetCreaturePermanent;
  */
 public class TurntimberBasilisk extends CardImpl {
 
-    public TurntimberBasilisk(UUID ownerId) {
-        super(ownerId, 190, "Turntimber Basilisk", Rarity.UNCOMMON, new CardType[]{CardType.CREATURE}, "{1}{G}{G}");
-        this.expansionSetCode = "ZEN";
+    public TurntimberBasilisk(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{1}{G}{G}");
         this.subtype.add("Basilisk");
 
         this.power = new MageInt(2);

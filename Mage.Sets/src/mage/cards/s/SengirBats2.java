@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.homelands;
+package mage.cards.s;
 
 import java.util.UUID;
 import mage.MageInt;
@@ -33,8 +33,8 @@ import mage.abilities.common.DiesAndDealtDamageThisTurnTriggeredAbility;
 import mage.abilities.effects.common.counter.AddCountersSourceEffect;
 import mage.abilities.keyword.FlyingAbility;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.counters.CounterType;
 
 /**
@@ -43,9 +43,8 @@ import mage.counters.CounterType;
  */
 public class SengirBats2 extends CardImpl {
 
-    public SengirBats2(UUID ownerId) {
-        super(ownerId, 21, "Sengir Bats", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{1}{B}{B}");
-        this.expansionSetCode = "HML";
+    public SengirBats2(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{1}{B}{B}");
         this.subtype.add("Bat");
         this.power = new MageInt(1);
         this.toughness = new MageInt(2);

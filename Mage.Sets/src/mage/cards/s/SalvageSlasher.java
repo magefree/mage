@@ -25,12 +25,11 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.conflux;
+package mage.cards.s;
 
 import java.util.UUID;
 import mage.constants.CardType;
 import mage.constants.Duration;
-import mage.constants.Rarity;
 import mage.constants.Zone;
 import mage.MageInt;
 import mage.abilities.common.SimpleStaticAbility;
@@ -38,6 +37,7 @@ import mage.abilities.dynamicvalue.common.CardsInControllerGraveyardCount;
 import mage.abilities.dynamicvalue.common.StaticValue;
 import mage.abilities.effects.common.continuous.BoostSourceEffect;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.filter.common.FilterArtifactCard;
 
 /**
@@ -46,9 +46,8 @@ import mage.filter.common.FilterArtifactCard;
  */
 public class SalvageSlasher extends CardImpl {
 
-    public SalvageSlasher(UUID ownerId) {
-        super(ownerId, 52, "Salvage Slasher", Rarity.COMMON, new CardType[]{CardType.ARTIFACT, CardType.CREATURE}, "{1}{B}");
-        this.expansionSetCode = "CON";
+    public SalvageSlasher(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.ARTIFACT,CardType.CREATURE},"{1}{B}");
         this.subtype.add("Human");
         this.subtype.add("Rogue");
 

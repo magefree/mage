@@ -25,17 +25,17 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.dragonsmaze;
+package mage.cards.t;
 
 import java.util.UUID;
 import mage.constants.CardType;
 import mage.constants.Duration;
-import mage.constants.Rarity;
 import mage.MageInt;
 import mage.abilities.effects.common.continuous.BoostSourceEffect;
 import mage.abilities.keyword.BattalionAbility;
 import mage.abilities.keyword.IndestructibleAbility;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 
 /**
  *
@@ -43,9 +43,8 @@ import mage.cards.CardImpl;
  */
 public class TajicBladeOfTheLegion extends CardImpl {
 
-    public TajicBladeOfTheLegion(UUID ownerId) {
-        super(ownerId, 107, "Tajic, Blade of the Legion", Rarity.RARE, new CardType[]{CardType.CREATURE}, "{2}{R}{W}");
-        this.expansionSetCode = "DGM";
+    public TajicBladeOfTheLegion(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{2}{R}{W}");
         this.supertype.add("Legendary");
         this.subtype.add("Human");
         this.subtype.add("Soldier");

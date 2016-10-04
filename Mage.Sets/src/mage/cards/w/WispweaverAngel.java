@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.kaladesh;
+package mage.cards.w;
 
 import java.util.UUID;
 import mage.MageInt;
@@ -37,12 +37,13 @@ import mage.abilities.effects.common.ExileTargetForSourceEffect;
 import mage.abilities.keyword.FlyingAbility;
 import mage.cards.Card;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.cards.Cards;
 import mage.cards.CardsImpl;
+import mage.cards.CardSetInfo;
 import mage.cards.MeldCard;
 import mage.constants.CardType;
 import mage.constants.Outcome;
-import mage.constants.Rarity;
 import mage.constants.Zone;
 import mage.filter.common.FilterControlledCreaturePermanent;
 import mage.filter.predicate.permanent.AnotherPredicate;
@@ -64,9 +65,8 @@ public class WispweaverAngel extends CardImpl {
         filter.add(new AnotherPredicate());
     }
 
-    public WispweaverAngel(UUID ownerId) {
-        super(ownerId, 35, "Wispweaver Angel", Rarity.UNCOMMON, new CardType[]{CardType.CREATURE}, "{4}{W}{W}");
-        this.expansionSetCode = "KLD";
+    public WispweaverAngel(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{4}{W}{W}");
         this.subtype.add("Angel");
         this.power = new MageInt(4);
         this.toughness = new MageInt(4);

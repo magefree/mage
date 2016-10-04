@@ -25,12 +25,11 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.returntoravnica;
+package mage.cards.k;
 
 import java.util.UUID;
 
 import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleActivatedAbility;
@@ -42,6 +41,7 @@ import mage.abilities.effects.common.continuous.BoostTargetEffect;
 import mage.abilities.effects.common.continuous.GainAbilityTargetEffect;
 import mage.abilities.keyword.IntimidateAbility;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.Duration;
 import mage.constants.Zone;
 import mage.filter.common.FilterControlledCreaturePermanent;
@@ -63,9 +63,8 @@ public class KorozdaGuildmage extends CardImpl {
         filter.add(Predicates.not(new TokenPredicate()));
     }
 
-    public KorozdaGuildmage(UUID ownerId) {
-        super(ownerId, 176, "Korozda Guildmage", Rarity.UNCOMMON, new CardType[]{CardType.CREATURE}, "{B}{G}");
-        this.expansionSetCode = "RTR";
+    public KorozdaGuildmage(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{B}{G}");
         this.subtype.add("Elf");
         this.subtype.add("Shaman");
 

@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.returntoravnica;
+package mage.cards.a;
 
 import java.util.UUID;
 import mage.MageInt;
@@ -38,9 +38,9 @@ import mage.abilities.effects.common.ReturnFromExileForSourceEffect;
 import mage.abilities.keyword.FlyingAbility;
 import mage.cards.Card;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Outcome;
-import mage.constants.Rarity;
 import mage.constants.Zone;
 import mage.filter.FilterCard;
 import mage.filter.common.FilterCreatureCard;
@@ -61,9 +61,8 @@ import mage.util.CardUtil;
  */
 public class AngelOfSerenity extends CardImpl {
 
-    public AngelOfSerenity(UUID ownerId) {
-        super(ownerId, 1, "Angel of Serenity", Rarity.MYTHIC, new CardType[]{CardType.CREATURE}, "{4}{W}{W}{W}");
-        this.expansionSetCode = "RTR";
+    public AngelOfSerenity(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{4}{W}{W}{W}");
         this.subtype.add("Angel");
 
         this.power = new MageInt(5);

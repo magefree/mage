@@ -26,18 +26,18 @@
  *  or implied, of BetaSteward_at_googlemail.com.
  */
 
-package mage.sets.scarsofmirrodin;
+package mage.cards.f;
 
 import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
 import mage.constants.CardType;
 import mage.constants.Outcome;
-import mage.constants.Rarity;
 import mage.abilities.Ability;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.keyword.EquipAbility;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.target.common.TargetCreaturePermanent;
@@ -48,9 +48,8 @@ import mage.target.common.TargetCreaturePermanent;
  */
 public class FulgentDistraction extends CardImpl {
 
-    public FulgentDistraction (UUID ownerId) {
-        super(ownerId, 7, "Fulgent Distraction", Rarity.COMMON, new CardType[]{CardType.INSTANT}, "{2}{W}");
-        this.expansionSetCode = "SOM";
+    public FulgentDistraction (UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.INSTANT},"{2}{W}");
 
 
         this.getSpellAbility().addEffect(new FulgentDistractionEffect());

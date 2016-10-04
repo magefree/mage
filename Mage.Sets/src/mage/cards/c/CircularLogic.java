@@ -25,10 +25,9 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.torment;
+package mage.cards.c;
 
 import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.abilities.Ability;
 import mage.abilities.Mode;
 import mage.abilities.costs.mana.GenericManaCost;
@@ -36,6 +35,7 @@ import mage.abilities.costs.mana.ManaCostsImpl;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.keyword.MadnessAbility;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.Outcome;
 import mage.game.Game;
 import mage.game.stack.StackObject;
@@ -50,9 +50,8 @@ import java.util.UUID;
  */
 public class CircularLogic extends CardImpl {
 
-    public CircularLogic(UUID ownerId) {
-        super(ownerId, 33, "Circular Logic", Rarity.UNCOMMON, new CardType[]{CardType.INSTANT}, "{2}{U}");
-        this.expansionSetCode = "TOR";
+    public CircularLogic(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.INSTANT},"{2}{U}");
 
 
         // Counter target spell unless its controller pays {1} for each card in your graveyard.

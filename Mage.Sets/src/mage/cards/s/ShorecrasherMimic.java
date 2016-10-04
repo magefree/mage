@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.eventide;
+package mage.cards.s;
 
 import java.util.UUID;
 import mage.MageInt;
@@ -36,9 +36,9 @@ import mage.abilities.effects.common.continuous.GainAbilitySourceEffect;
 import mage.abilities.effects.common.continuous.SetPowerToughnessSourceEffect;
 import mage.abilities.keyword.TrampleAbility;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Duration;
-import mage.constants.Rarity;
 import mage.constants.SubLayer;
 import mage.filter.FilterSpell;
 import mage.filter.predicate.mageobject.ColorPredicate;
@@ -59,9 +59,8 @@ public class ShorecrasherMimic extends CardImpl {
 
     private String rule = "Whenever you cast a spell that's both green and blue, {this} has base power and toughness 5/3 until end of turn and gains trample until end of turn";
 
-    public ShorecrasherMimic(UUID ownerId) {
-        super(ownerId, 159, "Shorecrasher Mimic", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{1}{G/U}");
-        this.expansionSetCode = "EVE";
+    public ShorecrasherMimic(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{1}{G/U}");
         this.subtype.add("Shapeshifter");
 
         this.color.setBlue(true);

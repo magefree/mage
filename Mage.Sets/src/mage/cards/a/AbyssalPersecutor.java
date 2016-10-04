@@ -25,13 +25,12 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.worldwake;
+package mage.cards.a;
 
 import java.util.UUID;
 import mage.constants.CardType;
 import mage.constants.Duration;
 import mage.constants.Outcome;
-import mage.constants.Rarity;
 import mage.constants.Zone;
 import mage.MageInt;
 import mage.abilities.Ability;
@@ -40,6 +39,7 @@ import mage.abilities.effects.ContinuousRuleModifyingEffectImpl;
 import mage.abilities.keyword.FlyingAbility;
 import mage.abilities.keyword.TrampleAbility;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.game.Game;
 import mage.game.events.GameEvent;
 import mage.game.events.GameEvent.EventType;
@@ -50,9 +50,8 @@ import mage.game.events.GameEvent.EventType;
  */
 public class AbyssalPersecutor extends CardImpl {
 
-    public AbyssalPersecutor(UUID ownerId) {
-        super(ownerId, 47, "Abyssal Persecutor", Rarity.MYTHIC, new CardType[]{CardType.CREATURE}, "{2}{B}{B}");
-        this.expansionSetCode = "WWK";
+    public AbyssalPersecutor(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{2}{B}{B}");
         this.subtype.add("Demon");
 
         this.power = new MageInt(6);

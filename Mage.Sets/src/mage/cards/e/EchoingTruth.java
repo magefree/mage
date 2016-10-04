@@ -25,18 +25,18 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.elspethvstezzeret;
+package mage.cards.e;
 
 import java.util.UUID;
 import mage.abilities.Ability;
 import mage.abilities.Mode;
 import mage.abilities.effects.OneShotEffect;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.cards.Cards;
 import mage.cards.CardsImpl;
 import mage.constants.CardType;
 import mage.constants.Outcome;
-import mage.constants.Rarity;
 import mage.constants.Zone;
 import mage.filter.FilterPermanent;
 import mage.filter.predicate.mageobject.NamePredicate;
@@ -53,9 +53,8 @@ import mage.target.common.TargetNonlandPermanent;
  */
 public class EchoingTruth extends CardImpl {
 
-    public EchoingTruth(UUID ownerId) {
-        super(ownerId, 66, "Echoing Truth", Rarity.COMMON, new CardType[]{CardType.INSTANT}, "{1}{U}");
-        this.expansionSetCode = "DDF";
+    public EchoingTruth(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.INSTANT},"{1}{U}");
 
         // Return target nonland permanent and all other permanents with the same name as that permanent to their owners' hands.
         Target target = new TargetNonlandPermanent();

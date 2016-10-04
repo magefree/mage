@@ -25,13 +25,13 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.returntoravnica;
+package mage.cards.i;
 
 import java.util.UUID;
 import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.abilities.effects.common.DrawCardTargetEffect;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.target.TargetPlayer;
 
 /**
@@ -40,9 +40,8 @@ import mage.target.TargetPlayer;
  */
 public class Inspiration extends CardImpl {
 
-    public Inspiration(UUID ownerId) {
-        super(ownerId, 42, "Inspiration", Rarity.COMMON, new CardType[]{CardType.INSTANT}, "{3}{U}");
-        this.expansionSetCode = "RTR";
+    public Inspiration(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.INSTANT},"{3}{U}");
 
 
         // Target player draws two cards.

@@ -25,14 +25,14 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.masterseditionii;
+package mage.cards.w;
 
 import java.util.UUID;
 import mage.abilities.effects.common.PreventDamageByTargetEffect;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Duration;
-import mage.constants.Rarity;
 import mage.target.common.TargetAttackingCreature;
 
 /**
@@ -41,9 +41,8 @@ import mage.target.common.TargetAttackingCreature;
  */
 public class Warning extends CardImpl {
 
-    public Warning(UUID ownerId) {
-        super(ownerId, 38, "Warning", Rarity.COMMON, new CardType[]{CardType.INSTANT}, "{W}");
-        this.expansionSetCode = "ME2";
+    public Warning(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.INSTANT},"{W}");
 
         // Prevent all combat damage that would be dealt by target attacking creature this turn.
         this.getSpellAbility().addEffect(new PreventDamageByTargetEffect(Duration.EndOfTurn, true));

@@ -25,12 +25,11 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.innistrad;
+package mage.cards.a;
 
 import java.util.UUID;
 
 import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleStaticAbility;
@@ -39,6 +38,7 @@ import mage.abilities.decorator.ConditionalContinuousEffect;
 import mage.abilities.effects.common.continuous.GainAbilitySourceEffect;
 import mage.abilities.keyword.*;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.Zone;
 import mage.filter.common.FilterControlledPermanent;
 import mage.filter.predicate.mageobject.SubtypePredicate;
@@ -57,9 +57,8 @@ public class AngelicOverseer extends CardImpl {
         filter.add(new SubtypePredicate("Human"));
     }
 
-    public AngelicOverseer(UUID ownerId) {
-        super(ownerId, 3, "Angelic Overseer", Rarity.MYTHIC, new CardType[]{CardType.CREATURE}, "{3}{W}{W}");
-        this.expansionSetCode = "ISD";
+    public AngelicOverseer(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{3}{W}{W}");
         this.subtype.add("Angel");
 
         this.color.setWhite(true);

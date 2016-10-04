@@ -25,12 +25,11 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.returntoravnica;
+package mage.cards.m;
 
 import java.util.UUID;
 import mage.constants.CardType;
 import mage.constants.Duration;
-import mage.constants.Rarity;
 import mage.constants.TargetController;
 import mage.abilities.costs.mana.ManaCostsImpl;
 import mage.abilities.effects.common.continuous.BoostAllEffect;
@@ -40,6 +39,7 @@ import mage.abilities.effects.common.continuous.GainAbilityTargetEffect;
 import mage.abilities.keyword.HexproofAbility;
 import mage.abilities.keyword.OverloadAbility;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.filter.predicate.permanent.ControllerPredicate;
 import mage.target.common.TargetCreaturePermanent;
@@ -57,9 +57,8 @@ public class MizziumSkin extends CardImpl {
         filter.add(new ControllerPredicate(TargetController.YOU));
     }
 
-    public MizziumSkin(UUID ownerId) {
-        super(ownerId, 45, "Mizzium Skin", Rarity.COMMON, new CardType[]{CardType.INSTANT}, "{U}");
-        this.expansionSetCode = "RTR";
+    public MizziumSkin(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.INSTANT},"{U}");
 
 
         // Target creature you control gets +0/+1 and gains hexproof until end of turn.

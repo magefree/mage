@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.exodus;
+package mage.cards.w;
 
 import java.util.UUID;
 import mage.MageInt;
@@ -35,8 +35,8 @@ import mage.abilities.costs.common.RemoveCountersSourceCost;
 import mage.abilities.effects.common.counter.AddCountersSourceEffect;
 import mage.abilities.mana.SimpleManaAbility;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.constants.Zone;
 import mage.counters.CounterType;
 
@@ -46,9 +46,8 @@ import mage.counters.CounterType;
  */
 public class Workhorse extends CardImpl {
 
-    public Workhorse(UUID ownerId) {
-        super(ownerId, 142, "Workhorse", Rarity.RARE, new CardType[]{CardType.ARTIFACT, CardType.CREATURE}, "{6}");
-        this.expansionSetCode = "EXO";
+    public Workhorse(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.ARTIFACT,CardType.CREATURE},"{6}");
         this.subtype.add("Horse");
         this.power = new MageInt(0);
         this.toughness = new MageInt(0);

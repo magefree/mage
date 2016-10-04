@@ -25,17 +25,17 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.shardsofalara;
+package mage.cards.r;
 
 import java.util.UUID;
 import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.abilities.Ability;
 import mage.abilities.common.CycleTriggeredAbility;
 import mage.abilities.costs.mana.ManaCostsImpl;
 import mage.abilities.effects.common.ExileTargetEffect;
 import mage.abilities.keyword.CyclingAbility;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.filter.common.FilterAttackingCreature;
 import mage.target.TargetPermanent;
 import mage.target.common.TargetAttackingCreature;
@@ -46,9 +46,8 @@ import mage.target.common.TargetAttackingCreature;
  */
 public class ResoundingSilence extends CardImpl {
 
-    public ResoundingSilence(UUID ownerId) {
-        super(ownerId, 22, "Resounding Silence", Rarity.COMMON, new CardType[]{CardType.INSTANT}, "{3}{W}");
-        this.expansionSetCode = "ALA";
+    public ResoundingSilence(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.INSTANT},"{3}{W}");
 
 
         // Exile target attacking creature.

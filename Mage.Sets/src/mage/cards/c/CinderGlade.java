@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.battleforzendikar;
+package mage.cards.c;
 
 import java.util.UUID;
 import mage.abilities.common.EntersBattlefieldAbility;
@@ -37,8 +37,8 @@ import mage.abilities.effects.common.TapSourceEffect;
 import mage.abilities.mana.GreenManaAbility;
 import mage.abilities.mana.RedManaAbility;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.filter.common.FilterLandPermanent;
 import mage.filter.predicate.mageobject.SupertypePredicate;
 
@@ -54,9 +54,8 @@ public class CinderGlade extends CardImpl {
         filter.add(new SupertypePredicate("Basic"));
     }
 
-    public CinderGlade(UUID ownerId) {
-        super(ownerId, 235, "Cinder Glade", Rarity.RARE, new CardType[]{CardType.LAND}, "");
-        this.expansionSetCode = "BFZ";
+    public CinderGlade(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.LAND},"");
         this.subtype.add("Mountain");
         this.subtype.add("Forest");
 

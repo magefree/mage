@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.theros;
+package mage.cards.s;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -36,11 +36,11 @@ import mage.abilities.Ability;
 import mage.abilities.effects.OneShotEffect;
 import mage.cards.Card;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.cards.Cards;
 import mage.cards.CardsImpl;
 import mage.constants.CardType;
 import mage.constants.Outcome;
-import mage.constants.Rarity;
 import mage.constants.Zone;
 import mage.filter.FilterCard;
 import mage.game.Game;
@@ -56,9 +56,8 @@ import mage.util.GameLog;
  */
 public class SteamAugury extends CardImpl {
 
-    public SteamAugury(UUID ownerId) {
-        super(ownerId, 205, "Steam Augury", Rarity.RARE, new CardType[]{CardType.INSTANT}, "{2}{U}{R}");
-        this.expansionSetCode = "THS";
+    public SteamAugury(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.INSTANT},"{2}{U}{R}");
 
         // Reveal the top five cards of your library and separate them into two piles. An opponent chooses one of those piles. Put that pile into your hand and the other into your graveyard.
         this.getSpellAbility().addEffect(new SteamAuguryEffect());

@@ -25,15 +25,15 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.planeshift;
+package mage.cards.e;
 
 import java.util.UUID;
 import mage.abilities.Ability;
 import mage.abilities.condition.common.KickedCondition;
 import mage.abilities.effects.common.CounterTargetEffect;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.game.Game;
 import mage.game.stack.Spell;
 import mage.target.TargetSpell;
@@ -44,9 +44,8 @@ import mage.target.TargetSpell;
  */
 public class ErtaisTrickery extends CardImpl {
 
-    public ErtaisTrickery(UUID ownerId) {
-        super(ownerId, 24, "Ertai's Trickery", Rarity.UNCOMMON, new CardType[]{CardType.INSTANT}, "{U}");
-        this.expansionSetCode = "PLS";
+    public ErtaisTrickery(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.INSTANT},"{U}");
 
         // Counter target spell if it was kicked.
         this.getSpellAbility().addEffect(new ErtaisTrickeryEffect());

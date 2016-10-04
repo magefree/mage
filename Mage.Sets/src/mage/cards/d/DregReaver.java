@@ -26,13 +26,13 @@
  *  or implied, of BetaSteward_at_googlemail.com.
  */
 
-package mage.sets.shardsofalara;
+package mage.cards.d;
 
 import java.util.UUID;
 import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.MageInt;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 
 /**
  *
@@ -40,9 +40,8 @@ import mage.cards.CardImpl;
  */
 public class DregReaver extends CardImpl {
 
-    public DregReaver (UUID ownerId) {
-        super(ownerId, 73, "Dreg Reaver", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{4}{B}");
-        this.expansionSetCode = "ALA";
+    public DregReaver (UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{4}{B}");
         this.subtype.add("Zombie");
         this.subtype.add("Beast");
 

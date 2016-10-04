@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.shardsofalara;
+package mage.cards.c;
 
 import java.util.UUID;
 
@@ -33,6 +33,7 @@ import mage.constants.*;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.effects.common.continuous.BoostControlledEffect;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.filter.predicate.mageobject.SubtypePredicate;
 import mage.filter.predicate.permanent.ControllerPredicate;
@@ -49,9 +50,8 @@ public class CrucibleOfFire extends CardImpl {
         filter.add(new SubtypePredicate("Dragon"));
     }
     
-    public CrucibleOfFire(UUID ownerId) {
-        super(ownerId, 96, "Crucible of Fire", Rarity.RARE, new CardType[]{CardType.ENCHANTMENT}, "{3}{R}");
-        this.expansionSetCode = "ALA";
+    public CrucibleOfFire(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.ENCHANTMENT},"{3}{R}");
 
 
         // Dragon creatures you control get +3/+3.

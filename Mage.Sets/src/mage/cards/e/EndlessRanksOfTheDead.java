@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.innistrad;
+package mage.cards.e;
 
 import java.util.UUID;
 import mage.abilities.Ability;
@@ -34,8 +34,8 @@ import mage.abilities.dynamicvalue.DynamicValue;
 import mage.abilities.effects.Effect;
 import mage.abilities.effects.common.CreateTokenEffect;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.filter.predicate.mageobject.SubtypePredicate;
 import mage.game.Game;
@@ -48,9 +48,8 @@ import mage.game.permanent.token.ZombieToken;
  */
 public class EndlessRanksOfTheDead extends CardImpl {
 
-    public EndlessRanksOfTheDead(UUID ownerId) {
-        super(ownerId, 99, "Endless Ranks of the Dead", Rarity.RARE, new CardType[]{CardType.ENCHANTMENT}, "{2}{B}{B}");
-        this.expansionSetCode = "ISD";
+    public EndlessRanksOfTheDead(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.ENCHANTMENT},"{2}{B}{B}");
 
         // At the beginning of your upkeep, put X 2/2 black Zombie creature tokens onto the battlefield,
         // where X is half the number of Zombies you control, rounded down.

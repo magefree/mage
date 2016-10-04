@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.journeyintonyx;
+package mage.cards.w;
 
 import java.util.UUID;
 import mage.MageInt;
@@ -33,9 +33,9 @@ import mage.abilities.Ability;
 import mage.abilities.abilityword.ConstellationAbility;
 import mage.abilities.effects.common.combat.CantBeBlockedTargetEffect;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Duration;
-import mage.constants.Rarity;
 import mage.target.common.TargetCreaturePermanent;
 
 /**
@@ -44,9 +44,8 @@ import mage.target.common.TargetCreaturePermanent;
  */
 public class WhitewaterNaiads extends CardImpl {
 
-    public WhitewaterNaiads(UUID ownerId) {
-        super(ownerId, 58, "Whitewater Naiads", Rarity.UNCOMMON, new CardType[]{CardType.ENCHANTMENT, CardType.CREATURE}, "{3}{U}{U}");
-        this.expansionSetCode = "JOU";
+    public WhitewaterNaiads(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.ENCHANTMENT,CardType.CREATURE},"{3}{U}{U}");
         this.subtype.add("Nymph");
 
         this.power = new MageInt(4);

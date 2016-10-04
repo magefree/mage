@@ -25,16 +25,16 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.homelands;
+package mage.cards.s;
 
 import java.util.UUID;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.effects.common.continuous.BoostAllEffect;
 import mage.abilities.keyword.FlyingAbility;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Duration;
-import mage.constants.Rarity;
 import mage.constants.Zone;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.filter.predicate.mageobject.AbilityPredicate;
@@ -51,9 +51,8 @@ public class SerraAviary extends CardImpl {
         filter1.add(new AbilityPredicate(FlyingAbility.class));
     }
 
-    public SerraAviary(UUID ownerId) {
-        super(ownerId, 118, "Serra Aviary", Rarity.RARE, new CardType[]{CardType.ENCHANTMENT}, "{3}{W}");
-        this.expansionSetCode = "HML";
+    public SerraAviary(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.ENCHANTMENT},"{3}{W}");
         this.supertype.add("World");
 
         // Creatures with flying get +1/+1.

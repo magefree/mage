@@ -26,15 +26,15 @@
  *  or implied, of BetaSteward_at_googlemail.com.
  */
 
-package mage.sets.newphyrexia;
+package mage.cards.v;
 
 import java.util.UUID;
 
 import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.abilities.effects.common.LoseLifeTargetControllerEffect;
 import mage.abilities.effects.common.ReturnToHandTargetEffect;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.target.common.TargetCreaturePermanent;
 
 /**
@@ -43,9 +43,8 @@ import mage.target.common.TargetCreaturePermanent;
  */
 public class VaporSnag extends CardImpl {
 
-    public VaporSnag (UUID ownerId) {
-        super(ownerId, 48, "Vapor Snag", Rarity.COMMON, new CardType[]{CardType.INSTANT}, "{U}");
-        this.expansionSetCode = "NPH";
+    public VaporSnag (UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.INSTANT},"{U}");
 
         
         // Return target creature to its owner's hand. Its controller loses 1 life.

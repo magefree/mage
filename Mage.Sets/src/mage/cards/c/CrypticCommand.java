@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.lorwyn;
+package mage.cards.c;
 
 import java.util.UUID;
 import mage.abilities.Ability;
@@ -35,9 +35,9 @@ import mage.abilities.effects.common.CounterTargetEffect;
 import mage.abilities.effects.common.DrawCardSourceControllerEffect;
 import mage.abilities.effects.common.ReturnToHandTargetEffect;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Outcome;
-import mage.constants.Rarity;
 import mage.constants.TargetController;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.filter.predicate.permanent.ControllerPredicate;
@@ -53,9 +53,8 @@ import mage.target.TargetSpell;
  */
 public class CrypticCommand extends CardImpl {
 
-    public CrypticCommand(UUID ownerId) {
-        super(ownerId, 56, "Cryptic Command", Rarity.RARE, new CardType[]{CardType.INSTANT}, "{1}{U}{U}{U}");
-        this.expansionSetCode = "LRW";
+    public CrypticCommand(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.INSTANT},"{1}{U}{U}{U}");
 
 
         // Choose two -

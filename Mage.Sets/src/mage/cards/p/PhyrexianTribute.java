@@ -25,15 +25,15 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.mirage;
+package mage.cards.p;
 
 import java.util.UUID;
 
 import mage.abilities.costs.common.SacrificeTargetCost;
 import mage.abilities.effects.common.DestroyTargetEffect;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.filter.common.FilterArtifactPermanent;
 import mage.target.TargetPermanent;
 import mage.target.common.TargetControlledCreaturePermanent;
@@ -44,9 +44,8 @@ import mage.target.common.TargetControlledCreaturePermanent;
  */
 public class PhyrexianTribute extends CardImpl {
 
-    public PhyrexianTribute(UUID ownerId) {
-        super(ownerId, 32, "Phyrexian Tribute", Rarity.RARE, new CardType[]{CardType.SORCERY}, "{2}{B}");
-        this.expansionSetCode = "MIR";
+    public PhyrexianTribute(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{2}{B}");
 
         // As an additional cost to cast Phyrexian Tribute, sacrifice two creatures.
         this.getSpellAbility().addCost(new SacrificeTargetCost(new TargetControlledCreaturePermanent(2)));

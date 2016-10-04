@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.mercadianmasques;
+package mage.cards.s;
 
 import java.util.UUID;
 import mage.ObjectColor;
@@ -35,8 +35,8 @@ import mage.abilities.costs.AlternativeCostSourceAbility;
 import mage.abilities.costs.common.PayLifeCost;
 import mage.abilities.effects.common.DestroyTargetEffect;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.filter.common.FilterLandPermanent;
 import mage.filter.predicate.Predicates;
@@ -58,9 +58,8 @@ public class SnuffOut extends CardImpl {
         filterSwamp.add(new SubtypePredicate("Swamp"));
     }
 
-    public SnuffOut(UUID ownerId) {
-        super(ownerId, 162, "Snuff Out", Rarity.COMMON, new CardType[]{CardType.INSTANT}, "{3}{B}");
-        this.expansionSetCode = "MMQ";
+    public SnuffOut(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.INSTANT},"{3}{B}");
 
 
         // If you control a Swamp, you may pay 4 life rather than pay Snuff Out's mana cost.

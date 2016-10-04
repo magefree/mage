@@ -25,15 +25,15 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.saviorsofkamigawa;
+package mage.cards.r;
 
 import java.util.UUID;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.effects.common.combat.CantAttackYouAllEffect;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Duration;
-import mage.constants.Rarity;
 import mage.constants.Zone;
 import mage.filter.Filter;
 import mage.filter.common.FilterCreaturePermanent;
@@ -51,9 +51,8 @@ public class Reverence extends CardImpl {
         filter.add(new PowerPredicate(Filter.ComparisonType.LessThan, 3));
     }
 
-    public Reverence(UUID ownerId) {
-        super(ownerId, 26, "Reverence", Rarity.RARE, new CardType[]{CardType.ENCHANTMENT}, "{2}{W}{W}");
-        this.expansionSetCode = "SOK";
+    public Reverence(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.ENCHANTMENT},"{2}{W}{W}");
 
         // Creatures with power 2 or less can't attack you.
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new CantAttackYouAllEffect(Duration.WhileOnBattlefield, filter)));

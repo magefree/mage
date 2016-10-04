@@ -25,16 +25,16 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.lorwyn;
+package mage.cards.g;
 
 import java.util.UUID;
 import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.MageInt;
 import mage.abilities.costs.OrCost;
 import mage.abilities.costs.common.RevealTargetFromHandCost;
 import mage.abilities.costs.mana.GenericManaCost;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.filter.FilterCard;
 import mage.filter.predicate.mageobject.SubtypePredicate;
 import mage.target.common.TargetCardInHand;
@@ -50,9 +50,8 @@ public class GoldmeadowStalwart extends CardImpl {
         filter.add(new SubtypePredicate("Kithkin"));
     }
 
-    public GoldmeadowStalwart(UUID ownerId) {
-        super(ownerId, 18, "Goldmeadow Stalwart", Rarity.UNCOMMON, new CardType[]{CardType.CREATURE}, "{W}");
-        this.expansionSetCode = "LRW";
+    public GoldmeadowStalwart(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{W}");
         this.subtype.add("Kithkin");
         this.subtype.add("Soldier");
 

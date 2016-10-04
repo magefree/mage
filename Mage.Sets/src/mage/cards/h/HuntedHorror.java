@@ -25,12 +25,11 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.ravnica;
+package mage.cards.h;
 
 import java.util.UUID;
 
 import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.MageInt;
 import mage.ObjectColor;
 import mage.abilities.Ability;
@@ -39,6 +38,7 @@ import mage.abilities.effects.common.CreateTokenTargetEffect;
 import mage.abilities.keyword.ProtectionAbility;
 import mage.abilities.keyword.TrampleAbility;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.filter.FilterCard;
 import mage.filter.predicate.mageobject.ColorPredicate;
 import mage.game.permanent.token.Token;
@@ -51,9 +51,8 @@ import mage.target.common.TargetOpponent;
  */
 public class HuntedHorror extends CardImpl {
 
-    public HuntedHorror(UUID ownerId) {
-        super(ownerId, 90, "Hunted Horror", Rarity.RARE, new CardType[]{CardType.CREATURE}, "{B}{B}");
-        this.expansionSetCode = "RAV";
+    public HuntedHorror(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{B}{B}");
         this.subtype.add("Horror");
 
         this.power = new MageInt(7);

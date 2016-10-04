@@ -25,12 +25,11 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.tenthedition;
+package mage.cards.d;
 
 import java.util.UUID;
 
 import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleActivatedAbility;
@@ -39,6 +38,7 @@ import mage.abilities.costs.common.TapSourceCost;
 import mage.abilities.costs.mana.ColoredManaCost;
 import mage.abilities.effects.common.ReturnFromGraveyardToBattlefieldTargetEffect;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.ColoredManaSymbol;
 import mage.constants.Zone;
 import mage.filter.common.FilterCreatureCard;
@@ -50,9 +50,8 @@ import mage.target.common.TargetCardInYourGraveyard;
  */
 public class DoomedNecromancer extends CardImpl {
 
-    public DoomedNecromancer(UUID ownerId) {
-        super(ownerId, 137, "Doomed Necromancer", Rarity.RARE, new CardType[]{CardType.CREATURE}, "{2}{B}");
-        this.expansionSetCode = "10E";
+    public DoomedNecromancer(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{2}{B}");
         this.subtype.add("Human");
         this.subtype.add("Cleric");
         this.subtype.add("Mercenary");

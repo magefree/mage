@@ -26,7 +26,7 @@
  *  or implied, of BetaSteward_at_googlemail.com.
  */
 
-package mage.sets.urzasdestiny;
+package mage.cards.r;
 
 import java.util.UUID;
 import mage.MageInt;
@@ -34,8 +34,8 @@ import mage.Mana;
 import mage.abilities.dynamicvalue.common.PermanentsOnBattlefieldCount;
 import mage.abilities.mana.DynamicManaAbility;
 import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.filter.common.FilterControlledPermanent;
 import mage.filter.predicate.mageobject.SubtypePredicate;
 
@@ -51,9 +51,8 @@ public class RofellosLlanowarEmissary extends CardImpl {
         filter.add(new SubtypePredicate("Forest"));
     }
 
-    public RofellosLlanowarEmissary(UUID ownerId) {
-        super(ownerId, 118, "Rofellos, Llanowar Emissary", Rarity.RARE, new CardType[]{CardType.CREATURE}, "{G}{G}");
-        this.expansionSetCode = "UDS";
+    public RofellosLlanowarEmissary(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{G}{G}");
         this.supertype.add("Legendary");
         this.subtype.add("Elf");
         this.subtype.add("Druid");

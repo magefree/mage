@@ -25,17 +25,17 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.shardsofalara;
+package mage.cards.k;
 
 import java.util.UUID;
 import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.MageInt;
 import mage.abilities.common.EntersBattlefieldTriggeredAbility;
 import mage.abilities.costs.mana.ManaCostsImpl;
 import mage.abilities.effects.common.ReturnToHandFromBattlefieldAllEffect;
 import mage.abilities.keyword.UnearthAbility;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.filter.common.FilterNonlandPermanent;
 import mage.filter.predicate.permanent.AnotherPredicate;
 
@@ -50,9 +50,8 @@ public class KederektLeviathan extends CardImpl {
         filter.add(new AnotherPredicate());
     }
 
-    public KederektLeviathan(UUID ownerId) {
-        super(ownerId, 48, "Kederekt Leviathan", Rarity.RARE, new CardType[]{CardType.CREATURE}, "{6}{U}{U}");
-        this.expansionSetCode = "ALA";
+    public KederektLeviathan(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{6}{U}{U}");
         this.subtype.add("Leviathan");
 
         this.power = new MageInt(5);

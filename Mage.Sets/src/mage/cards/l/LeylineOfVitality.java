@@ -26,12 +26,11 @@
  *  or implied, of BetaSteward_at_googlemail.com.
  */
 
-package mage.sets.magic2011;
+package mage.cards.l;
 
 import java.util.UUID;
 import mage.constants.CardType;
 import mage.constants.Duration;
-import mage.constants.Rarity;
 import mage.constants.Zone;
 import mage.abilities.common.CreatureEntersBattlefieldTriggeredAbility;
 import mage.abilities.common.SimpleStaticAbility;
@@ -39,6 +38,7 @@ import mage.abilities.effects.common.continuous.BoostControlledEffect;
 import mage.abilities.effects.common.GainLifeEffect;
 import mage.abilities.keyword.LeylineAbility;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.filter.common.FilterCreaturePermanent;
 
 /**
@@ -47,9 +47,8 @@ import mage.filter.common.FilterCreaturePermanent;
  */
 public class LeylineOfVitality extends CardImpl {
 
-    public LeylineOfVitality(UUID ownerId) {
-        super(ownerId, 183, "Leyline of Vitality", Rarity.RARE, new CardType[]{CardType.ENCHANTMENT}, "{2}{G}{G}");
-        this.expansionSetCode = "M11";
+    public LeylineOfVitality(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.ENCHANTMENT},"{2}{G}{G}");
 
         this.addAbility(LeylineAbility.getInstance());
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new BoostControlledEffect(0, 1, Duration.WhileOnBattlefield, new FilterCreaturePermanent(), false)));

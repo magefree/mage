@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.iceage;
+package mage.cards.a;
 
 import java.util.UUID;
 import mage.abilities.Ability;
@@ -35,9 +35,9 @@ import mage.abilities.effects.common.continuous.GainAbilityTargetEffect;
 import mage.abilities.keyword.CumulativeUpkeepAbility;
 import mage.abilities.keyword.FlyingAbility;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Duration;
-import mage.constants.Rarity;
 import mage.constants.Zone;
 import mage.target.common.TargetCreaturePermanent;
 
@@ -47,9 +47,8 @@ import mage.target.common.TargetCreaturePermanent;
  */
 public class ArnjlotsAscent extends CardImpl {
 
-    public ArnjlotsAscent(UUID ownerId) {
-        super(ownerId, 57, "Arnjlot's Ascent", Rarity.COMMON, new CardType[]{CardType.ENCHANTMENT}, "{1}{U}{U}");
-        this.expansionSetCode = "ICE";
+    public ArnjlotsAscent(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.ENCHANTMENT},"{1}{U}{U}");
 
         // Cumulative upkeep {U}
         this.addAbility(new CumulativeUpkeepAbility(new ManaCostsImpl("{U}")));

@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.timespiral;
+package mage.cards.u;
 
 import java.util.UUID;
 import mage.MageInt;
@@ -37,9 +37,9 @@ import mage.abilities.effects.common.DamageTargetEffect;
 import mage.abilities.effects.common.continuous.BoostSourceEffect;
 import mage.abilities.keyword.FlyingAbility;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Duration;
-import mage.constants.Rarity;
 import mage.constants.Zone;
 import mage.target.common.TargetCreatureOrPlayer;
 
@@ -49,9 +49,8 @@ import mage.target.common.TargetCreatureOrPlayer;
  */
 public class UnyaroBees extends CardImpl {
 
-    public UnyaroBees(UUID ownerId) {
-        super(ownerId, 231, "Unyaro Bees", Rarity.RARE, new CardType[]{CardType.CREATURE}, "{G}{G}{G}");
-        this.expansionSetCode = "TSP";
+    public UnyaroBees(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{G}{G}{G}");
         this.subtype.add("Insect");
         this.power = new MageInt(0);
         this.toughness = new MageInt(1);

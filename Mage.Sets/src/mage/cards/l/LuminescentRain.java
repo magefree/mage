@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.morningtide;
+package mage.cards.l;
 
 import java.util.UUID;
 import mage.abilities.Ability;
@@ -33,12 +33,12 @@ import mage.abilities.dynamicvalue.common.PermanentsOnBattlefieldCount;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.GainLifeEffect;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.cards.repository.CardRepository;
 import mage.choices.Choice;
 import mage.choices.ChoiceImpl;
 import mage.constants.CardType;
 import mage.constants.Outcome;
-import mage.constants.Rarity;
 import mage.filter.common.FilterControlledPermanent;
 import mage.filter.predicate.mageobject.SubtypePredicate;
 import mage.game.Game;
@@ -50,9 +50,8 @@ import mage.players.Player;
  */
 public class LuminescentRain extends CardImpl {
 
-    public LuminescentRain(UUID ownerId) {
-        super(ownerId, 129, "Luminescent Rain", Rarity.COMMON, new CardType[]{CardType.INSTANT}, "{2}{G}");
-        this.expansionSetCode = "MOR";
+    public LuminescentRain(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.INSTANT},"{2}{G}");
         
         // Choose a creature type. You gain 2 life for each permanent you control of that type.
         this.getSpellAbility().addEffect(new LuminescentRainEffect());

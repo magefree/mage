@@ -25,16 +25,16 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.ravnica;
+package mage.cards.s;
 
 import java.util.UUID;
 import mage.abilities.condition.common.ManaWasSpentCondition;
 import mage.abilities.decorator.ConditionalOneShotEffect;
 import mage.abilities.effects.common.DestroyTargetEffect;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.ColoredManaSymbol;
-import mage.constants.Rarity;
 import mage.filter.common.FilterArtifactOrEnchantmentPermanent;
 import mage.game.permanent.token.SaprolingToken;
 import mage.target.TargetPermanent;
@@ -46,9 +46,8 @@ import mage.abilities.effects.common.CreateTokenEffect;
  */
 public class SeedSpark extends CardImpl {
 
-    public SeedSpark(UUID ownerId) {
-        super(ownerId, 30, "Seed Spark", Rarity.UNCOMMON, new CardType[]{CardType.INSTANT}, "{3}{W}");
-        this.expansionSetCode = "RAV";
+    public SeedSpark(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.INSTANT},"{3}{W}");
 
         // Destroy target artifact or enchantment. 
         this.getSpellAbility().addTarget(new TargetPermanent(new FilterArtifactOrEnchantmentPermanent()));

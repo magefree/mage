@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.khansoftarkir;
+package mage.cards.r;
 
 import java.util.UUID;
 import mage.abilities.effects.Effect;
@@ -33,9 +33,9 @@ import mage.abilities.effects.common.continuous.BoostControlledEffect;
 import mage.abilities.effects.common.continuous.GainAbilityControlledEffect;
 import mage.abilities.keyword.LifelinkAbility;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Duration;
-import mage.constants.Rarity;
 import mage.filter.common.FilterControlledCreaturePermanent;
 import mage.filter.predicate.mageobject.SubtypePredicate;
 
@@ -50,9 +50,8 @@ public class RushOfBattle extends CardImpl {
         filter.add(new SubtypePredicate("Warrior"));
     }
     
-    public RushOfBattle(UUID ownerId) {
-        super(ownerId, 19, "Rush of Battle", Rarity.COMMON, new CardType[]{CardType.SORCERY}, "{3}{W}");
-        this.expansionSetCode = "KTK";
+    public RushOfBattle(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{3}{W}");
 
 
         // Creatures you control get +2/+1 until end of turn. Warrior creatures you control gain lifelink until end of turn.

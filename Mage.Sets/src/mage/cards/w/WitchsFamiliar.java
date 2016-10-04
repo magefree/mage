@@ -25,13 +25,13 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.magic2015;
+package mage.cards.w;
 
 import java.util.UUID;
 import mage.MageInt;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.Rarity;
 
 /**
  *
@@ -39,9 +39,8 @@ import mage.constants.Rarity;
  */
 public class WitchsFamiliar extends CardImpl {
 
-    public WitchsFamiliar(UUID ownerId) {
-        super(ownerId, 123, "Witch's Familiar", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{2}{B}");
-        this.expansionSetCode = "M15";
+    public WitchsFamiliar(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{2}{B}");
         this.subtype.add("Frog");
 
         this.power = new MageInt(2);

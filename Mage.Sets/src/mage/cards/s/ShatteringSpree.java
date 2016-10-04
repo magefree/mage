@@ -25,14 +25,14 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.guildpact;
+package mage.cards.s;
 
 import java.util.UUID;
 import mage.abilities.effects.common.DestroyTargetEffect;
 import mage.abilities.keyword.ReplicateAbility;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.filter.common.FilterArtifactPermanent;
 import mage.target.TargetPermanent;
 
@@ -42,9 +42,8 @@ import mage.target.TargetPermanent;
  */
 public class ShatteringSpree extends CardImpl {
 
-    public ShatteringSpree(UUID ownerId) {
-        super(ownerId, 75, "Shattering Spree", Rarity.UNCOMMON, new CardType[]{CardType.SORCERY}, "{R}");
-        this.expansionSetCode = "GPT";
+    public ShatteringSpree(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{R}");
 
         // Replicate {R}
         this.addAbility(new ReplicateAbility(this, "{R}"));

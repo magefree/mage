@@ -25,16 +25,16 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.zendikar;
+package mage.cards.u;
 
 import java.util.UUID;
 import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.MageInt;
 import mage.abilities.common.AllyEntersBattlefieldTriggeredAbility;
 import mage.abilities.effects.common.counter.AddCountersSourceEffect;
 import mage.abilities.keyword.FlyingAbility;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.counters.CounterType;
 
 /**
@@ -43,9 +43,8 @@ import mage.counters.CounterType;
  */
 public class UmaraRaptor extends CardImpl {
 
-    public UmaraRaptor(UUID ownerId) {
-        super(ownerId, 75, "Umara Raptor", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{2}{U}");
-        this.expansionSetCode = "ZEN";
+    public UmaraRaptor(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{2}{U}");
         this.subtype.add("Bird");
         this.subtype.add("Ally");
 

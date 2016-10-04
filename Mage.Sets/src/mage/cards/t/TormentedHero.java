@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.theros;
+package mage.cards.t;
 
 import java.util.UUID;
 import mage.MageInt;
@@ -34,9 +34,9 @@ import mage.abilities.common.EntersBattlefieldTappedAbility;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.keyword.HeroicAbility;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Outcome;
-import mage.constants.Rarity;
 import mage.game.Game;
 
 /**
@@ -45,9 +45,8 @@ import mage.game.Game;
  */
 public class TormentedHero extends CardImpl {
 
-    public TormentedHero(UUID ownerId) {
-        super(ownerId, 108, "Tormented Hero", Rarity.UNCOMMON, new CardType[]{CardType.CREATURE}, "{B}");
-        this.expansionSetCode = "THS";
+    public TormentedHero(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{B}");
         this.subtype.add("Human");
         this.subtype.add("Warrior");
 

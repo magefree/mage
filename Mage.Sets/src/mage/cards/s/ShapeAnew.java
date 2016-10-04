@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.scarsofmirrodin;
+package mage.cards.s;
 
 import java.util.UUID;
 import mage.abilities.Ability;
@@ -33,11 +33,11 @@ import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.SacrificeTargetEffect;
 import mage.cards.Card;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.cards.Cards;
 import mage.cards.CardsImpl;
 import mage.constants.CardType;
 import mage.constants.Outcome;
-import mage.constants.Rarity;
 import mage.constants.Zone;
 import mage.filter.FilterPermanent;
 import mage.filter.predicate.mageobject.CardTypePredicate;
@@ -58,9 +58,8 @@ public class ShapeAnew extends CardImpl {
         filter.add(new CardTypePredicate(CardType.ARTIFACT));
     }
 
-    public ShapeAnew(UUID ownerId) {
-        super(ownerId, 43, "Shape Anew", Rarity.RARE, new CardType[]{CardType.SORCERY}, "{3}{U}");
-        this.expansionSetCode = "SOM";
+    public ShapeAnew(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{3}{U}");
 
         // The controller of target artifact sacrifices it, then reveals cards from the top
         // of his or her library until he or she reveals an artifact card. That player puts

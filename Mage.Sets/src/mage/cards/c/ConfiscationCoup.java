@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.kaladesh;
+package mage.cards.c;
 
 import java.util.UUID;
 import mage.abilities.Ability;
@@ -36,10 +36,10 @@ import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.continuous.GainControlTargetEffect;
 import mage.abilities.effects.common.counter.GetEnergyCountersControllerEffect;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Duration;
 import mage.constants.Outcome;
-import mage.constants.Rarity;
 import mage.filter.FilterPermanent;
 import mage.filter.predicate.Predicates;
 import mage.filter.predicate.mageobject.CardTypePredicate;
@@ -61,9 +61,8 @@ public class ConfiscationCoup extends CardImpl {
         filter.add(Predicates.or(new CardTypePredicate(CardType.CREATURE), new CardTypePredicate(CardType.ARTIFACT)));
     }
 
-    public ConfiscationCoup(UUID ownerId) {
-        super(ownerId, 41, "Confiscation Coup", Rarity.RARE, new CardType[]{CardType.SORCERY}, "{3}{U}{U}");
-        this.expansionSetCode = "KLD";
+    public ConfiscationCoup(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{3}{U}{U}");
 
         // Choose target creature or artifact. You get {E}{E}{E}{E}, then you may pay an amount of {E} equal to that permanent's converted mana cost. If you do, gain control of it.
         this.getSpellAbility().addEffect(new ConfiscationCoupEffect());

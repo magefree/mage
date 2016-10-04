@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.shadowmoor;
+package mage.cards.h;
 
 import java.util.UUID;
 import mage.MageInt;
@@ -35,9 +35,9 @@ import mage.abilities.dynamicvalue.common.PermanentsOnBattlefieldCount;
 import mage.abilities.effects.common.continuous.SetPowerToughnessSourceEffect;
 import mage.abilities.keyword.MenaceAbility;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Duration;
-import mage.constants.Rarity;
 import mage.constants.Zone;
 import mage.filter.common.FilterControlledPermanent;
 import mage.filter.predicate.mageobject.ColorPredicate;
@@ -54,9 +54,8 @@ public class HordeOfBoggarts extends CardImpl {
         filter.add(new ColorPredicate(ObjectColor.RED));
     }
 
-    public HordeOfBoggarts(UUID ownerId) {
-        super(ownerId, 94, "Horde of Boggarts", Rarity.UNCOMMON, new CardType[]{CardType.CREATURE}, "{3}{R}");
-        this.expansionSetCode = "SHM";
+    public HordeOfBoggarts(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{3}{R}");
         this.subtype.add("Goblin");
 
         this.power = new MageInt(0);

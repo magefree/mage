@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.fatereforged;
+package mage.cards.d;
 
 import java.util.UUID;
 import mage.MageInt;
@@ -35,8 +35,8 @@ import mage.abilities.common.EntersBattlefieldTriggeredAbility;
 import mage.abilities.effects.common.DestroyTargetEffect;
 import mage.abilities.effects.common.counter.AddCountersSourceEffect;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.counters.CounterType;
 import mage.target.common.TargetArtifactPermanent;
 
@@ -46,9 +46,8 @@ import mage.target.common.TargetArtifactPermanent;
  */
 public class DefiantOgre extends CardImpl {
 
-    public DefiantOgre(UUID ownerId) {
-        super(ownerId, 96, "Defiant Ogre", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{5}{R}");
-        this.expansionSetCode = "FRF";
+    public DefiantOgre(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{5}{R}");
         this.subtype.add("Ogre");
         this.subtype.add("Warrior");
         this.power = new MageInt(3);

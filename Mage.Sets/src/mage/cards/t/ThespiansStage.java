@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.gatecrash;
+package mage.cards.t;
 
 import java.util.UUID;
 import mage.abilities.Ability;
@@ -35,9 +35,9 @@ import mage.abilities.costs.mana.GenericManaCost;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.mana.ColorlessManaAbility;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Outcome;
-import mage.constants.Rarity;
 import mage.constants.Zone;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
@@ -50,9 +50,8 @@ import mage.util.functions.EmptyApplyToPermanent;
  */
 public class ThespiansStage extends CardImpl {
 
-    public ThespiansStage(UUID ownerId) {
-        super(ownerId, 248, "Thespian's Stage", Rarity.RARE, new CardType[]{CardType.LAND}, "");
-        this.expansionSetCode = "GTC";
+    public ThespiansStage(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.LAND},"");
 
         // {T}: Add 1 to your mana pool.
         this.addAbility(new ColorlessManaAbility());

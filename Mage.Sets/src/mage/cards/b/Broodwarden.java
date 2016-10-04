@@ -25,17 +25,17 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.riseoftheeldrazi;
+package mage.cards.b;
 
 import java.util.UUID;
 import mage.constants.CardType;
 import mage.constants.Duration;
-import mage.constants.Rarity;
 import mage.constants.Zone;
 import mage.MageInt;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.effects.common.continuous.BoostControlledEffect;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.filter.predicate.mageobject.SubtypePredicate;
 
@@ -52,9 +52,8 @@ public class Broodwarden extends CardImpl {
         filter.add(new SubtypePredicate("Spawn"));
     }
 
-    public Broodwarden(UUID ownerId) {
-        super(ownerId, 181, "Broodwarden", Rarity.UNCOMMON, new CardType[]{CardType.CREATURE}, "{3}{G}{G}");
-        this.expansionSetCode = "ROE";
+    public Broodwarden(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{3}{G}{G}");
         this.subtype.add("Eldrazi");
         this.subtype.add("Drone");
 

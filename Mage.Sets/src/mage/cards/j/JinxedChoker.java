@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.mirrodin;
+package mage.cards.j;
 
 import mage.abilities.Ability;
 import mage.abilities.common.BeginningOfYourEndStepTriggeredAbility;
@@ -40,6 +40,7 @@ import mage.abilities.effects.common.DamageControllerEffect;
 import mage.abilities.effects.common.counter.AddCountersSourceEffect;
 import mage.abilities.effects.common.counter.RemoveCounterSourceEffect;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.*;
 import mage.counters.CounterType;
 import mage.game.Game;
@@ -58,9 +59,8 @@ import java.util.UUID;
 
 public class JinxedChoker extends CardImpl {
 
-    public JinxedChoker(UUID ownerId) {
-        super(ownerId, 189, "Jinxed Choker", Rarity.RARE, new CardType[]{CardType.ARTIFACT}, "{3}");
-        this.expansionSetCode = "MRD";
+    public JinxedChoker(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.ARTIFACT},"{3}");
 
         // At the beginning of your end step, target opponent gains control of Jinxed Choker and puts a charge counter on it.
         Ability endStepAbility = new BeginningOfYourEndStepTriggeredAbility(new JinxedChokerChangeControllerEffect(), false);

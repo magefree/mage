@@ -27,14 +27,14 @@
  *  or implied, of BetaSteward_at_googlemail.com.
  *
  */
-package mage.sets.championsofkamigawa;
+package mage.cards.c;
 
 import java.util.UUID;
 
 import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.abilities.effects.common.DamageTargetEffect;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.filter.predicate.permanent.WasDealtDamageThisTurnPredicate;
 import mage.target.common.TargetCreaturePermanent;
@@ -51,9 +51,8 @@ public class CrushingPain extends CardImpl {
         filter.add(new WasDealtDamageThisTurnPredicate());
     }
 
-    public CrushingPain (UUID ownerId) {
-        super(ownerId, 162, "Crushing Pain", Rarity.COMMON, new CardType[]{CardType.INSTANT}, "{1}{R}");
-        this.expansionSetCode = "CHK";
+    public CrushingPain (UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.INSTANT},"{1}{R}");
         this.subtype.add("Arcane");
 
         // Crushing Pain deals 6 damage to target creature that was dealt damage this turn.

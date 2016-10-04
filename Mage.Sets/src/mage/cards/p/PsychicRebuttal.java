@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.magicorigins;
+package mage.cards.p;
 
 import java.util.UUID;
 import mage.abilities.Ability;
@@ -33,9 +33,9 @@ import mage.abilities.Mode;
 import mage.abilities.condition.common.SpellMasteryCondition;
 import mage.abilities.effects.OneShotEffect;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Outcome;
-import mage.constants.Rarity;
 import mage.filter.FilterSpell;
 import mage.filter.predicate.ObjectPlayer;
 import mage.filter.predicate.ObjectPlayerPredicate;
@@ -61,9 +61,8 @@ public class PsychicRebuttal extends CardImpl {
         filter.add(new PsychicRebuttalPredicate());
     }
 
-    public PsychicRebuttal(UUID ownerId) {
-        super(ownerId, 67, "Psychic Rebuttal", Rarity.UNCOMMON, new CardType[]{CardType.INSTANT}, "{1}{U}");
-        this.expansionSetCode = "ORI";
+    public PsychicRebuttal(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.INSTANT},"{1}{U}");
 
         // Counter target instant or sorcery spell that targets you.
         this.getSpellAbility().addEffect(new PsychicRebuttalEffect());

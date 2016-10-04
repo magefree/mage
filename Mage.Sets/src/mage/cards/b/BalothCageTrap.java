@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.zendikar;
+package mage.cards.b;
 
 import java.util.List;
 import java.util.UUID;
@@ -35,8 +35,8 @@ import mage.abilities.costs.AlternativeCostSourceAbility;
 import mage.abilities.costs.mana.ManaCostsImpl;
 import mage.abilities.effects.common.CreateTokenEffect;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.game.permanent.token.BeastToken2;
@@ -48,9 +48,8 @@ import mage.watchers.common.PermanentsEnteredBattlefieldWatcher;
  */
 public class BalothCageTrap extends CardImpl {
 
-    public BalothCageTrap(UUID ownerId) {
-        super(ownerId, 156, "Baloth Cage Trap", Rarity.UNCOMMON, new CardType[]{CardType.INSTANT}, "{3}{G}{G}");
-        this.expansionSetCode = "ZEN";
+    public BalothCageTrap(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.INSTANT},"{3}{G}{G}");
         this.subtype.add("Trap");
 
         // If an opponent had an artifact enter the battlefield under his or her control this turn, you may pay {1}{G} rather than pay Baloth Cage Trap's mana cost.

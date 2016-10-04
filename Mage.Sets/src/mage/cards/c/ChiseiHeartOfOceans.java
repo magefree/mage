@@ -25,12 +25,11 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.betrayersofkamigawa;
+package mage.cards.c;
 
 import java.util.UUID;
 
 import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.constants.TargetController;
 import mage.MageInt;
 import mage.abilities.common.BeginningOfUpkeepTriggeredAbility;
@@ -38,6 +37,7 @@ import mage.abilities.costs.common.RemoveCounterCost;
 import mage.abilities.effects.common.SacrificeSourceUnlessPaysEffect;
 import mage.abilities.keyword.FlyingAbility;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.filter.FilterPermanent;
 import mage.filter.common.FilterControlledPermanent;
 import mage.filter.predicate.permanent.ControllerPredicate;
@@ -57,9 +57,8 @@ public class ChiseiHeartOfOceans extends CardImpl {
         filter.add(new CounterAnyPredicate());
     }       
     
-    public ChiseiHeartOfOceans(UUID ownerId) {
-        super(ownerId, 32, "Chisei, Heart of Oceans", Rarity.RARE, new CardType[]{CardType.CREATURE}, "{2}{U}{U}");
-        this.expansionSetCode = "BOK";
+    public ChiseiHeartOfOceans(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{2}{U}{U}");
         this.supertype.add("Legendary");
         this.subtype.add("Spirit");
 

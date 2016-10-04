@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.eventide;
+package mage.cards.u;
 
 import java.util.UUID;
 import mage.abilities.Ability;
@@ -35,10 +35,10 @@ import mage.abilities.effects.common.continuous.GainAbilityTargetEffect;
 import mage.abilities.effects.common.continuous.GainControlTargetEffect;
 import mage.abilities.keyword.HasteAbility;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Duration;
 import mage.constants.Outcome;
-import mage.constants.Rarity;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.target.common.TargetCreaturePermanent;
@@ -50,9 +50,8 @@ import mage.target.targetpointer.FixedTarget;
  */
 public class UnwillingRecruit extends CardImpl {
 
-    public UnwillingRecruit(UUID ownerId) {
-        super(ownerId, 64, "Unwilling Recruit", Rarity.UNCOMMON, new CardType[]{CardType.SORCERY}, "{X}{R}{R}{R}");
-        this.expansionSetCode = "EVE";
+    public UnwillingRecruit(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{X}{R}{R}{R}");
 
 
         // Gain control of target creature until end of turn. Untap that creature. It gets +X/+0 and gains haste until end of turn.

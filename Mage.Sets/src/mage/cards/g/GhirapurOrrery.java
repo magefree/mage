@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.kaladesh;
+package mage.cards.g;
 
 import java.util.UUID;
 import mage.abilities.Ability;
@@ -36,8 +36,8 @@ import mage.abilities.decorator.ConditionalTriggeredAbility;
 import mage.abilities.effects.common.DrawCardTargetEffect;
 import mage.abilities.effects.common.continuous.PlayAdditionalLandsAllEffect;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.constants.TargetController;
 import mage.constants.Zone;
 import mage.game.Game;
@@ -49,9 +49,8 @@ import mage.players.Player;
  */
 public class GhirapurOrrery extends CardImpl {
 
-    public GhirapurOrrery(UUID ownerId) {
-        super(ownerId, 216, "Ghirapur Orrery", Rarity.RARE, new CardType[]{CardType.ARTIFACT}, "{4}");
-        this.expansionSetCode = "KLD";
+    public GhirapurOrrery(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.ARTIFACT},"{4}");
 
         // Each player may play an additional land on each of his or her turns.
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new PlayAdditionalLandsAllEffect()));

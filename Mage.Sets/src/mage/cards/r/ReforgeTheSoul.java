@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.avacynrestored;
+package mage.cards.r;
 
 import java.util.UUID;
 import mage.abilities.costs.mana.ManaCostsImpl;
@@ -34,8 +34,8 @@ import mage.abilities.effects.common.DrawCardAllEffect;
 import mage.abilities.effects.common.discard.DiscardHandAllEffect;
 import mage.abilities.keyword.MiracleAbility;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.Rarity;
 
 /**
  *
@@ -43,9 +43,8 @@ import mage.constants.Rarity;
  */
 public class ReforgeTheSoul extends CardImpl {
 
-    public ReforgeTheSoul(UUID ownerId) {
-        super(ownerId, 151, "Reforge the Soul", Rarity.RARE, new CardType[]{CardType.SORCERY}, "{3}{R}{R}");
-        this.expansionSetCode = "AVR";
+    public ReforgeTheSoul(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{3}{R}{R}");
 
         // Each player discards his or her hand, then draws seven cards.
         this.getSpellAbility().addEffect(new DiscardHandAllEffect());

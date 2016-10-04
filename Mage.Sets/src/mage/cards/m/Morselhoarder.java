@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.shadowmoor;
+package mage.cards.m;
 
 import java.util.UUID;
 import mage.MageInt;
@@ -37,8 +37,8 @@ import mage.abilities.effects.common.AddManaOfAnyColorEffect;
 import mage.abilities.effects.common.counter.AddCountersSourceEffect;
 import mage.abilities.mana.ManaAbility;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.constants.Zone;
 import mage.counters.CounterType;
 
@@ -48,9 +48,8 @@ import mage.counters.CounterType;
  */
 public class Morselhoarder extends CardImpl {
 
-    public Morselhoarder(UUID ownerId) {
-        super(ownerId, 212, "Morselhoarder", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{4}{R/G}{R/G}");
-        this.expansionSetCode = "SHM";
+    public Morselhoarder(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{4}{R/G}{R/G}");
         this.subtype.add("Elemental");
         this.power = new MageInt(6);
         this.toughness = new MageInt(4);

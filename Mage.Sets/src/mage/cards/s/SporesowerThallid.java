@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.timespiral;
+package mage.cards.s;
 
 import java.util.UUID;
 import mage.MageInt;
@@ -35,8 +35,8 @@ import mage.abilities.costs.common.RemoveCountersSourceCost;
 import mage.abilities.effects.common.CreateTokenEffect;
 import mage.abilities.effects.common.counter.AddCountersAllEffect;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.constants.TargetController;
 import mage.constants.Zone;
 import mage.counters.CounterType;
@@ -57,9 +57,8 @@ public class SporesowerThallid extends CardImpl {
         filter.add(new SubtypePredicate("Fungus"));
     }
 
-    public SporesowerThallid(UUID ownerId) {
-        super(ownerId, 220, "Sporesower Thallid", Rarity.UNCOMMON, new CardType[]{CardType.CREATURE}, "{2}{G}{G}");
-        this.expansionSetCode = "TSP";
+    public SporesowerThallid(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{2}{G}{G}");
         this.subtype.add("Fungus");
 
         this.power = new MageInt(4);

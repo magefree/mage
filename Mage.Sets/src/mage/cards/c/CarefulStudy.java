@@ -25,22 +25,21 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.odyssey;
+package mage.cards.c;
 
 import java.util.UUID;
 import mage.abilities.effects.common.DrawDiscardControllerEffect;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.Rarity;
 
 /**
  * @author magenoxx_at_gmail.com
  */
 public class CarefulStudy extends CardImpl {
 
-    public CarefulStudy(UUID ownerId) {
-        super(ownerId, 70, "Careful Study", Rarity.COMMON, new CardType[]{CardType.SORCERY}, "{U}");
-        this.expansionSetCode = "ODY";
+    public CarefulStudy(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{U}");
 
 
         // Draw two cards, then discard two cards.

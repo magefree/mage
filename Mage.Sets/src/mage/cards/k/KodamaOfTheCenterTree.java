@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.betrayersofkamigawa;
+package mage.cards.k;
 
 import java.util.UUID;
 import mage.MageInt;
@@ -34,9 +34,9 @@ import mage.abilities.dynamicvalue.common.PermanentsOnBattlefieldCount;
 import mage.abilities.effects.common.continuous.SetPowerToughnessSourceEffect;
 import mage.abilities.keyword.SoulshiftAbility;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Duration;
-import mage.constants.Rarity;
 import mage.constants.Zone;
 import mage.filter.common.FilterControlledPermanent;
 import mage.filter.predicate.mageobject.SubtypePredicate;
@@ -53,9 +53,8 @@ public class KodamaOfTheCenterTree extends CardImpl {
         filter.add(new SubtypePredicate("Spirit"));
     }
 
-    public KodamaOfTheCenterTree(UUID ownerId) {
-        super(ownerId, 131, "Kodama of the Center Tree", Rarity.RARE, new CardType[]{CardType.CREATURE}, "{4}{G}");
-        this.expansionSetCode = "BOK";
+    public KodamaOfTheCenterTree(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{4}{G}");
         this.supertype.add("Legendary");
         this.subtype.add("Spirit");
 

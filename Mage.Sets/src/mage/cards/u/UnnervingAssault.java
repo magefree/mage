@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.eventide;
+package mage.cards.u;
 
 import java.util.UUID;
 import mage.abilities.condition.common.ManaWasSpentCondition;
@@ -33,10 +33,10 @@ import mage.abilities.decorator.ConditionalContinuousEffect;
 import mage.abilities.effects.common.InfoEffect;
 import mage.abilities.effects.common.continuous.BoostAllEffect;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.ColoredManaSymbol;
 import mage.constants.Duration;
-import mage.constants.Rarity;
 import mage.constants.TargetController;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.filter.predicate.permanent.ControllerPredicate;
@@ -57,9 +57,8 @@ public class UnnervingAssault extends CardImpl {
         filter2.add(new ControllerPredicate(TargetController.YOU));
     }
 
-    public UnnervingAssault(UUID ownerId) {
-        super(ownerId, 114, "Unnerving Assault", Rarity.UNCOMMON, new CardType[]{CardType.INSTANT}, "{2}{U/R}");
-        this.expansionSetCode = "EVE";
+    public UnnervingAssault(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.INSTANT},"{2}{U/R}");
 
 
         // Creatures your opponents control get -1/-0 until end of turn if {U} was spent to cast Unnerving Assault, and creatures you control get +1/+0 until end of turn if {R} was spent to cast it.

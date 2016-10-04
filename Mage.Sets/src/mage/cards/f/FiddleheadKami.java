@@ -25,15 +25,15 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.saviorsofkamigawa;
+package mage.cards.f;
 
 import java.util.UUID;
 import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.MageInt;
 import mage.abilities.common.SpellCastControllerTriggeredAbility;
 import mage.abilities.effects.common.RegenerateSourceEffect;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.filter.common.FilterSpiritOrArcaneCard;
 
 /**
@@ -44,9 +44,8 @@ public class FiddleheadKami extends CardImpl {
 
     private static final FilterSpiritOrArcaneCard filter = new FilterSpiritOrArcaneCard();
 
-    public FiddleheadKami(UUID ownerId) {
-        super(ownerId, 130, "Fiddlehead Kami", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{4}{G}");
-        this.expansionSetCode = "SOK";
+    public FiddleheadKami(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{4}{G}");
         this.subtype.add("Spirit");
 
         this.power = new MageInt(3);

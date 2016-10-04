@@ -25,14 +25,14 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.ravnica;
+package mage.cards.h;
 
 import java.util.UUID;
 import mage.abilities.effects.common.DestroyAllEffect;
 import mage.abilities.keyword.ConvokeAbility;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.filter.predicate.Predicates;
 import mage.filter.predicate.permanent.TokenPredicate;
@@ -49,9 +49,8 @@ public class HourOfReckoning extends CardImpl {
         filter.add(Predicates.not(new TokenPredicate()));
     }
     
-    public HourOfReckoning(UUID ownerId) {
-        super(ownerId, 21, "Hour of Reckoning", Rarity.RARE, new CardType[]{CardType.SORCERY}, "{4}{W}{W}{W}");
-        this.expansionSetCode = "RAV";
+    public HourOfReckoning(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{4}{W}{W}{W}");
 
         // Convoke
         this.addAbility(new ConvokeAbility());

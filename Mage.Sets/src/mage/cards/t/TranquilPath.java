@@ -25,15 +25,15 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.apocalypse;
+package mage.cards.t;
 
 import java.util.UUID;
 
 import mage.abilities.effects.common.DestroyAllEffect;
 import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.abilities.effects.common.DrawCardSourceControllerEffect;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.filter.common.FilterEnchantmentPermanent;
 
 /**
@@ -42,9 +42,8 @@ import mage.filter.common.FilterEnchantmentPermanent;
  */
 public class TranquilPath extends CardImpl {
 
-    public TranquilPath(UUID ownerId) {
-        super(ownerId, 89, "Tranquil Path", Rarity.COMMON, new CardType[]{CardType.SORCERY}, "{4}{G}");
-        this.expansionSetCode = "APC";
+    public TranquilPath(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{4}{G}");
 
 
         // Destroy all enchantments.

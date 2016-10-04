@@ -25,16 +25,16 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.commander2013;
+package mage.cards.r;
 
 import java.util.UUID;
 import mage.abilities.Ability;
 import mage.abilities.effects.OneShotEffect;
 import mage.cards.Card;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Outcome;
-import mage.constants.Rarity;
 import mage.constants.Zone;
 import mage.filter.common.FilterLandCard;
 import mage.game.Game;
@@ -50,9 +50,8 @@ public class Restore extends CardImpl {
 
     private static final FilterLandCard filter = new FilterLandCard();
 
-    public Restore(UUID ownerId) {
-        super(ownerId, 167, "Restore", Rarity.UNCOMMON, new CardType[]{CardType.SORCERY}, "{1}{G}");
-        this.expansionSetCode = "C13";
+    public Restore(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{1}{G}");
 
 
         // Put target land card from a graveyard onto the battlefield under your control.

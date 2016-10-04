@@ -25,14 +25,14 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.zendikar;
+package mage.cards.z;
 
 import java.util.UUID;
 import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.MageInt;
 import mage.abilities.keyword.ForestwalkAbility;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 
 /**
  *
@@ -40,9 +40,8 @@ import mage.cards.CardImpl;
  */
 public class ZendikarFarguide extends CardImpl {
 
-    public ZendikarFarguide(UUID ownerId) {
-        super(ownerId, 194, "Zendikar Farguide", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{4}{G}");
-        this.expansionSetCode = "ZEN";
+    public ZendikarFarguide(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{4}{G}");
         this.subtype.add("Elemental");
 
         this.power = new MageInt(3);

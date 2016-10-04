@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.alarareborn;
+package mage.cards.s;
 
 import java.util.UUID;
 import mage.abilities.common.SimpleStaticAbility;
@@ -36,10 +36,10 @@ import mage.abilities.effects.common.continuous.BoostEnchantedEffect;
 import mage.abilities.keyword.CyclingAbility;
 import mage.abilities.keyword.EnchantAbility;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Duration;
 import mage.constants.Outcome;
-import mage.constants.Rarity;
 import mage.constants.Zone;
 import mage.filter.common.FilterControlledCreaturePermanent;
 import mage.target.TargetPermanent;
@@ -53,9 +53,8 @@ public class SigilOfTheNayanGods extends CardImpl {
 
     private static final FilterControlledCreaturePermanent filter = new FilterControlledCreaturePermanent();
 
-    public SigilOfTheNayanGods(UUID ownerId) {
-        super(ownerId, 78, "Sigil of the Nayan Gods", Rarity.COMMON, new CardType[]{CardType.ENCHANTMENT}, "{1}{G}{W}");
-        this.expansionSetCode = "ARB";
+    public SigilOfTheNayanGods(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.ENCHANTMENT},"{1}{G}{W}");
         this.subtype.add("Aura");
 
         // Enchant creature

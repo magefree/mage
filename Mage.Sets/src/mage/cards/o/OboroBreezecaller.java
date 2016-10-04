@@ -25,11 +25,10 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.saviorsofkamigawa;
+package mage.cards.o;
 
 import java.util.UUID;
 import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.constants.Zone;
 import mage.MageInt;
 import mage.abilities.Ability;
@@ -39,6 +38,7 @@ import mage.abilities.costs.mana.GenericManaCost;
 import mage.abilities.effects.common.UntapTargetEffect;
 import mage.abilities.keyword.FlyingAbility;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.filter.common.FilterControlledLandPermanent;
 import mage.filter.common.FilterControlledPermanent;
 import mage.target.common.TargetControlledPermanent;
@@ -52,9 +52,8 @@ public class OboroBreezecaller extends CardImpl {
 
     private static final FilterControlledPermanent filter = new FilterControlledLandPermanent("land");
 
-    public OboroBreezecaller(UUID ownerId) {
-        super(ownerId, 48, "Oboro Breezecaller", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{1}{U}");
-        this.expansionSetCode = "SOK";
+    public OboroBreezecaller(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{1}{U}");
         this.subtype.add("Moonfolk");
         this.subtype.add("Wizard");
 

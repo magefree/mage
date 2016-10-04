@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.legends;
+package mage.cards.f;
 
 import java.util.UUID;
 import mage.ObjectColor;
@@ -33,8 +33,8 @@ import mage.abilities.Mode;
 import mage.abilities.effects.common.DestroyTargetEffect;
 import mage.abilities.effects.common.ReturnToHandTargetEffect;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.filter.FilterPermanent;
 import mage.filter.predicate.mageobject.ColorPredicate;
 import mage.filter.predicate.mageobject.SubtypePredicate;
@@ -54,9 +54,8 @@ public class FlashFlood extends CardImpl {
         filter2.add(new SubtypePredicate("Mountain"));
     }
 
-    public FlashFlood(UUID ownerId) {
-        super(ownerId, 57, "Flash Flood", Rarity.COMMON, new CardType[]{CardType.INSTANT}, "{U}");
-        this.expansionSetCode = "LEG";
+    public FlashFlood(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.INSTANT},"{U}");
 
         // Choose one - Destroy target red permanent;
         this.getSpellAbility().addEffect(new DestroyTargetEffect());

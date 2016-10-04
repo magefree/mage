@@ -25,15 +25,15 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.urzassaga;
+package mage.cards.g;
 
 import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.common.DealsDamageToAPlayerTriggeredAbility;
 import mage.abilities.effects.common.PutPermanentOnBattlefieldEffect;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.filter.common.FilterPermanentCard;
 import mage.filter.predicate.mageobject.SubtypePredicate;
 
@@ -49,9 +49,8 @@ public class GoblinLackey extends CardImpl {
         filter.add(new SubtypePredicate("Goblin"));
     }
 
-    public GoblinLackey(UUID ownerId) {
-        super(ownerId, 190, "Goblin Lackey", Rarity.UNCOMMON, new CardType[]{CardType.CREATURE}, "{R}");
-        this.expansionSetCode = "USG";
+    public GoblinLackey(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{R}");
         this.subtype.add("Goblin");
 
         this.power = new MageInt(1);

@@ -25,15 +25,15 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.urzassaga;
+package mage.cards.s;
 
 import java.util.UUID;
 import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.MageInt;
 import mage.abilities.costs.mana.ManaCostsImpl;
 import mage.abilities.keyword.CyclingAbility;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 
 /**
  *
@@ -41,9 +41,8 @@ import mage.cards.CardImpl;
  */
 public class SandbarSerpent extends CardImpl {
 
-    public SandbarSerpent(UUID ownerId) {
-        super(ownerId, 95, "Sandbar Serpent", Rarity.UNCOMMON, new CardType[]{CardType.CREATURE}, "{4}{U}");
-        this.expansionSetCode = "USG";
+    public SandbarSerpent(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{4}{U}");
         this.subtype.add("Serpent");
 
         this.power = new MageInt(3);

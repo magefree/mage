@@ -25,16 +25,16 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.innistrad;
+package mage.cards.i;
 
 import java.util.UUID;
 import mage.constants.CardType;
 import mage.constants.Outcome;
-import mage.constants.Rarity;
 import mage.abilities.Ability;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.DestroyTargetEffect;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.target.common.TargetCreaturePermanent;
@@ -46,9 +46,8 @@ import mage.target.common.TargetLandPermanent;
  */
 public class IntoTheMawOfHell extends CardImpl {
 
-    public IntoTheMawOfHell(UUID ownerId) {
-        super(ownerId, 150, "Into the Maw of Hell", Rarity.UNCOMMON, new CardType[]{CardType.SORCERY}, "{4}{R}{R}");
-        this.expansionSetCode = "ISD";
+    public IntoTheMawOfHell(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{4}{R}{R}");
 
 
         // Destroy target land. Into the Maw of Hell deals 13 damage to target creature.

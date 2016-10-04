@@ -25,12 +25,11 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.scourge;
+package mage.cards.g;
 
 import java.util.UUID;
 import mage.constants.CardType;
 import mage.constants.Duration;
-import mage.constants.Rarity;
 import mage.constants.Zone;
 import mage.MageInt;
 import mage.abilities.common.SimpleStaticAbility;
@@ -38,6 +37,7 @@ import mage.abilities.effects.common.continuous.GainAbilityControlledEffect;
 import mage.abilities.effects.common.cost.SpellsCostReductionControllerEffect;
 import mage.abilities.keyword.HasteAbility;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.filter.FilterCard;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.filter.predicate.mageobject.SubtypePredicate;
@@ -56,9 +56,8 @@ public class GoblinWarchief extends CardImpl {
         filter.add(new SubtypePredicate("Goblin"));
     }
 
-    public GoblinWarchief(UUID ownerId) {
-        super(ownerId, 97, "Goblin Warchief", Rarity.UNCOMMON, new CardType[]{CardType.CREATURE}, "{1}{R}{R}");
-        this.expansionSetCode = "SCG";
+    public GoblinWarchief(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{1}{R}{R}");
         this.subtype.add("Goblin");
         this.subtype.add("Warrior");
 

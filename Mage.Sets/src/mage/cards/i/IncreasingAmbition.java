@@ -25,13 +25,12 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.darkascension;
+package mage.cards.i;
 
 import java.util.List;
 import java.util.UUID;
 
 import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.constants.Zone;
 import mage.abilities.Ability;
 import mage.abilities.costs.mana.ManaCostsImpl;
@@ -39,6 +38,7 @@ import mage.abilities.effects.SearchEffect;
 import mage.abilities.keyword.FlashbackAbility;
 import mage.cards.Card;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.Outcome;
 import mage.constants.TimingRule;
 import mage.filter.FilterCard;
@@ -53,9 +53,8 @@ import mage.target.common.TargetCardInLibrary;
  */
 public class IncreasingAmbition extends CardImpl {
 
-    public IncreasingAmbition(UUID ownerId) {
-        super(ownerId, 69, "Increasing Ambition", Rarity.RARE, new CardType[]{CardType.SORCERY}, "{4}{B}");
-        this.expansionSetCode = "DKA";
+    public IncreasingAmbition(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{4}{B}");
 
 
         // Search your library for a card and put that card into your hand. If Increasing Ambition was cast from a graveyard, instead search your library for two cards and put those cards into your hand. Then shuffle your library.

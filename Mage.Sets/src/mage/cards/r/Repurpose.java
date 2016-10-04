@@ -25,15 +25,15 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.starwars;
+package mage.cards.r;
 
 import java.util.UUID;
 import mage.abilities.effects.Effect;
 import mage.abilities.effects.common.DestroyTargetEffect;
 import mage.abilities.effects.common.ReturnFromGraveyardToHandTargetEffect;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.filter.common.FilterCreatureCard;
 import mage.target.common.TargetCardInYourGraveyard;
 import mage.target.common.TargetCreaturePermanent;
@@ -45,9 +45,8 @@ import mage.target.targetpointer.SecondTargetPointer;
  */
 public class Repurpose extends CardImpl {
 
-    public Repurpose(UUID ownerId) {
-        super(ownerId, 84, "Repurpose", Rarity.COMMON, new CardType[]{CardType.SORCERY}, "{3}{B}{B}");
-        this.expansionSetCode = "SWS";
+    public Repurpose(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{3}{B}{B}");
 
         // Destroy target creature.
         this.getSpellAbility().addEffect(new DestroyTargetEffect());

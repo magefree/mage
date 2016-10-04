@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.magic2014;
+package mage.cards.o;
 
 import java.util.UUID;
 import mage.abilities.Ability;
@@ -33,8 +33,8 @@ import mage.abilities.common.EntersBattlefieldAllTriggeredAbility;
 import mage.abilities.effects.Effect;
 import mage.abilities.effects.common.counter.AddCountersTargetEffect;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.constants.SetTargetPointer;
 import mage.constants.TargetController;
 import mage.constants.Zone;
@@ -55,9 +55,8 @@ public class OathOfTheAncientWood extends CardImpl {
         filter.add(new ControllerPredicate(TargetController.YOU));
     }
 
-    public OathOfTheAncientWood(UUID ownerId) {
-        super(ownerId, 187, "Oath of the Ancient Wood", Rarity.RARE, new CardType[]{CardType.ENCHANTMENT}, "{2}{G}");
-        this.expansionSetCode = "M14";
+    public OathOfTheAncientWood(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.ENCHANTMENT},"{2}{G}");
 
         // Whenever Oath of the Ancient Wood or another enchantment enters the battlefield under your control, you may put a +1/+1 counter on target creature.
         Effect effect = new AddCountersTargetEffect(CounterType.P1P1.createInstance());

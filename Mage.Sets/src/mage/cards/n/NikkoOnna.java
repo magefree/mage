@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.saviorsofkamigawa;
+package mage.cards.n;
 
 import java.util.UUID;
 import mage.MageInt;
@@ -35,8 +35,8 @@ import mage.abilities.common.SpellCastControllerTriggeredAbility;
 import mage.abilities.effects.common.DestroyTargetEffect;
 import mage.abilities.effects.common.ReturnToHandSourceEffect;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.filter.common.FilterEnchantmentPermanent;
 import mage.filter.common.FilterSpiritOrArcaneCard;
 import mage.target.TargetPermanent;
@@ -47,9 +47,8 @@ import mage.target.TargetPermanent;
  */
 public class NikkoOnna extends CardImpl {
 
-    public NikkoOnna(UUID ownerId) {
-        super(ownerId, 21, "Nikko-Onna", Rarity.UNCOMMON, new CardType[]{CardType.CREATURE}, "{2}{W}");
-        this.expansionSetCode = "SOK";
+    public NikkoOnna(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{2}{W}");
         this.subtype.add("Spirit");
 
         this.power = new MageInt(2);

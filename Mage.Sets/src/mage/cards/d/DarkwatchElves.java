@@ -25,16 +25,16 @@
  * authors and should not be interpreted as representing official policies, either expressed
  * or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.urzaslegacy;
+package mage.cards.d;
 
 import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.MageInt;
 import mage.ObjectColor;
 import mage.abilities.costs.mana.ManaCostsImpl;
 import mage.abilities.keyword.CyclingAbility;
 import mage.abilities.keyword.ProtectionAbility;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.filter.FilterCard;
 import mage.filter.predicate.mageobject.ColorPredicate;
 
@@ -51,9 +51,8 @@ public class DarkwatchElves extends CardImpl {
         filter.add(new ColorPredicate(ObjectColor.BLACK));
     }
 
-    public DarkwatchElves(UUID ownerId) {
-        super(ownerId, 99, "Darkwatch Elves", Rarity.UNCOMMON, new CardType[]{CardType.CREATURE}, "{2}{G}");
-        this.expansionSetCode = "ULG";
+    public DarkwatchElves(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{2}{G}");
         this.subtype.add("Elf");
 
         this.power = new MageInt(2);

@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.urzasdestiny;
+package mage.cards.r;
 
 import java.util.UUID;
 import mage.MageObjectReference;
@@ -36,9 +36,9 @@ import mage.abilities.effects.Effect;
 import mage.abilities.effects.OneShotEffect;
 
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Outcome;
-import mage.constants.Rarity;
 import mage.constants.Zone;
 import mage.game.Game;
 import mage.game.events.GameEvent;
@@ -51,9 +51,8 @@ import mage.players.Player;
  */
 public class Repercussion extends CardImpl {
 
-    public Repercussion(UUID ownerId) {
-        super(ownerId, 95, "Repercussion", Rarity.RARE, new CardType[]{CardType.ENCHANTMENT}, "{1}{R}{R}");
-        this.expansionSetCode = "UDS";
+    public Repercussion(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.ENCHANTMENT},"{1}{R}{R}");
 
         // Whenever a creature is dealt damage, Repercussion deals that much damage to that creature's controller.
         this.addAbility(new RepercussionTriggeredAbility(new RepercussionEffect()));

@@ -25,16 +25,16 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.gatecrash;
+package mage.cards.b;
 
 import java.util.UUID;
 import mage.MageItem;
 
 import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.abilities.Ability;
 import mage.abilities.effects.OneShotEffect;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.Outcome;
 import mage.counters.CounterType;
 import mage.filter.common.FilterCreaturePermanent;
@@ -53,9 +53,8 @@ import mage.target.common.TargetCreaturePermanent;
  */
 public class Bioshift extends CardImpl {
 
-    public Bioshift(UUID ownerId) {
-        super(ownerId, 214, "Bioshift", Rarity.COMMON, new CardType[]{CardType.INSTANT}, "{G/U}");
-        this.expansionSetCode = "GTC";
+    public Bioshift(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.INSTANT},"{G/U}");
 
         // Move any number of +1/+1 counters from target creature onto another target creature with the same controller.
         getSpellAbility().addEffect(new MoveCounterFromTargetToTargetEffect());

@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.riseoftheeldrazi;
+package mage.cards.r;
 
 import java.util.UUID;
 import mage.MageInt;
@@ -33,8 +33,8 @@ import mage.abilities.TriggeredAbilityImpl;
 import mage.abilities.effects.common.CreateTokenEffect;
 import mage.abilities.keyword.TrampleAbility;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.constants.Zone;
 import mage.game.Game;
 import mage.game.events.DamagedPlayerEvent;
@@ -48,9 +48,8 @@ import mage.game.permanent.token.EldraziSpawnToken;
  */
 public class RapaciousOne extends CardImpl {
 
-    public RapaciousOne(UUID ownerId) {
-        super(ownerId, 162, "Rapacious One", Rarity.UNCOMMON, new CardType[]{CardType.CREATURE}, "{5}{R}");
-        this.expansionSetCode = "ROE";
+    public RapaciousOne(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{5}{R}");
         this.subtype.add("Eldrazi");
         this.subtype.add("Drone");
 

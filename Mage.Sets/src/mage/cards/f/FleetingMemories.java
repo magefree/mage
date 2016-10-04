@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.shadowsoverinnistrad;
+package mage.cards.f;
 
 import java.util.UUID;
 import mage.abilities.Ability;
@@ -34,8 +34,8 @@ import mage.abilities.common.EntersBattlefieldTriggeredAbility;
 import mage.abilities.effects.common.PutTopCardOfLibraryIntoGraveTargetEffect;
 import mage.abilities.effects.keyword.InvestigateEffect;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.constants.Zone;
 import mage.filter.common.FilterControlledPermanent;
 import mage.filter.predicate.mageobject.SubtypePredicate;
@@ -56,9 +56,8 @@ public class FleetingMemories extends CardImpl {
         filter.add(new SubtypePredicate("Clue"));
     }
 
-    public FleetingMemories(UUID ownerId) {
-        super(ownerId, 62, "Fleeting Memories", Rarity.UNCOMMON, new CardType[]{CardType.ENCHANTMENT}, "{2}{U}");
-        this.expansionSetCode = "SOI";
+    public FleetingMemories(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.ENCHANTMENT},"{2}{U}");
 
         // When Fleeting Memories enters the battlefield, investigate.
         this.addAbility(new EntersBattlefieldTriggeredAbility(new InvestigateEffect(), false));

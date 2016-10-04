@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.portalsecondage;
+package mage.cards.b;
 
 import java.util.UUID;
 import mage.MageInt;
@@ -33,8 +33,8 @@ import mage.abilities.Ability;
 import mage.abilities.common.EntersBattlefieldTriggeredAbility;
 import mage.abilities.effects.common.discard.DiscardTargetEffect;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.target.common.TargetOpponent;
 
 /**
@@ -43,9 +43,8 @@ import mage.target.common.TargetOpponent;
  */
 public class BrutalNightstalker extends CardImpl {
 
-    public BrutalNightstalker(UUID ownerId) {
-        super(ownerId, 4, "Brutal Nightstalker", Rarity.UNCOMMON, new CardType[]{CardType.CREATURE}, "{3}{B}{B}");
-        this.expansionSetCode = "PO2";
+    public BrutalNightstalker(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{3}{B}{B}");
         this.subtype.add("Nightstalker");
         this.power = new MageInt(3);
         this.toughness = new MageInt(2);

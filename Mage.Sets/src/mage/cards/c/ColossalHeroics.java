@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.journeyintonyx;
+package mage.cards.c;
 
 import java.util.UUID;
 import mage.abilities.abilityword.StriveAbility;
@@ -33,9 +33,9 @@ import mage.abilities.effects.Effect;
 import mage.abilities.effects.common.UntapTargetEffect;
 import mage.abilities.effects.common.continuous.BoostTargetEffect;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Duration;
-import mage.constants.Rarity;
 import mage.target.common.TargetCreaturePermanent;
 
 /**
@@ -44,9 +44,8 @@ import mage.target.common.TargetCreaturePermanent;
  */
 public class ColossalHeroics extends CardImpl {
 
-    public ColossalHeroics(UUID ownerId) {
-        super(ownerId, 118, "Colossal Heroics", Rarity.UNCOMMON, new CardType[]{CardType.INSTANT}, "{2}{G}");
-        this.expansionSetCode = "JOU";
+    public ColossalHeroics(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.INSTANT},"{2}{G}");
 
 
         // Strive - Colossal Heroics costs {1}{G} more to cast for each target beyond the first.

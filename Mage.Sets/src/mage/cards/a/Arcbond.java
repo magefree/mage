@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.fatereforged;
+package mage.cards.a;
 
 import java.util.UUID;
 import mage.MageObject;
@@ -38,10 +38,10 @@ import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.CreateDelayedTriggeredAbilityEffect;
 import mage.abilities.effects.common.DamageEverythingEffect;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Duration;
 import mage.constants.Outcome;
-import mage.constants.Rarity;
 import mage.filter.FilterPermanent;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.filter.predicate.Predicates;
@@ -57,9 +57,8 @@ import mage.target.common.TargetCreaturePermanent;
  */
 public class Arcbond extends CardImpl {
 
-    public Arcbond(UUID ownerId) {
-        super(ownerId, 91, "Arcbond", Rarity.RARE, new CardType[]{CardType.INSTANT}, "{2}{R}");
-        this.expansionSetCode = "FRF";
+    public Arcbond(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.INSTANT},"{2}{R}");
 
         // Choose target creature. Whenever that creature is dealt damage this turn, it deals that much damage to each other creature and each player.
         this.getSpellAbility().addEffect(new CreateDelayedTriggeredAbilityEffect(new ArcbondDelayedTriggeredAbility(), true, true));

@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.magicorigins;
+package mage.cards.s;
 
 import java.util.UUID;
 import mage.abilities.condition.common.SpellMasteryCondition;
@@ -35,8 +35,8 @@ import mage.abilities.effects.common.AddContinuousEffectToGame;
 import mage.abilities.effects.common.DontUntapInControllersNextUntapStepTargetEffect;
 import mage.abilities.effects.common.TapTargetEffect;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.target.common.TargetCreaturePermanent;
 
 /**
@@ -45,9 +45,8 @@ import mage.target.common.TargetCreaturePermanent;
  */
 public class SendToSleep extends CardImpl {
 
-    public SendToSleep(UUID ownerId) {
-        super(ownerId, 71, "Send to Sleep", Rarity.COMMON, new CardType[]{CardType.INSTANT}, "{1}{U}");
-        this.expansionSetCode = "ORI";
+    public SendToSleep(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.INSTANT},"{1}{U}");
 
         // Tap up to two target creatures.
         this.getSpellAbility().addEffect(new TapTargetEffect());

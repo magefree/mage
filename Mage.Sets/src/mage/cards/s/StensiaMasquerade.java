@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.shadowsoverinnistrad;
+package mage.cards.s;
 
 import java.util.UUID;
 import mage.abilities.TriggeredAbilityImpl;
@@ -37,9 +37,9 @@ import mage.abilities.effects.common.counter.AddCountersTargetEffect;
 import mage.abilities.keyword.FirstStrikeAbility;
 import mage.abilities.keyword.MadnessAbility;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Duration;
-import mage.constants.Rarity;
 import mage.constants.Zone;
 import mage.counters.CounterType;
 import mage.filter.common.FilterControlledCreaturePermanent;
@@ -63,9 +63,8 @@ public class StensiaMasquerade extends CardImpl {
         filter.add(new AttackingPredicate());
     }
 
-    public StensiaMasquerade(UUID ownerId) {
-        super(ownerId, 184, "Stensia Masquerade", Rarity.UNCOMMON, new CardType[]{CardType.ENCHANTMENT}, "{2}{R}");
-        this.expansionSetCode = "SOI";
+    public StensiaMasquerade(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.ENCHANTMENT},"{2}{R}");
 
         // Attacking creatures you control have first strike.
         Effect effect = new GainAbilityControlledEffect(FirstStrikeAbility.getInstance(), Duration.WhileOnBattlefield, filter);

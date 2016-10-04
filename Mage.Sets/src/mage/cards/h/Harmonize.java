@@ -25,13 +25,13 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.planarchaos;
+package mage.cards.h;
 
 import java.util.UUID;
 import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.abilities.effects.common.DrawCardSourceControllerEffect;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 
 /**
  *
@@ -39,9 +39,8 @@ import mage.cards.CardImpl;
  */
 public class Harmonize extends CardImpl {
 
-    public Harmonize(UUID ownerId) {
-        super(ownerId, 149, "Harmonize", Rarity.UNCOMMON, new CardType[]{CardType.SORCERY}, "{2}{G}{G}");
-        this.expansionSetCode = "PLC";
+    public Harmonize(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{2}{G}{G}");
 
 
         // Draw three cards.

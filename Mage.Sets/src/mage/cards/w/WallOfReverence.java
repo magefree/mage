@@ -26,13 +26,12 @@
  *  or implied, of BetaSteward_at_googlemail.com.
  */
 
-package mage.sets.conflux;
+package mage.cards.w;
 
 import java.util.UUID;
 
 import mage.constants.CardType;
 import mage.constants.Outcome;
-import mage.constants.Rarity;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.BeginningOfYourEndStepTriggeredAbility;
@@ -40,6 +39,7 @@ import mage.abilities.effects.OneShotEffect;
 import mage.abilities.keyword.DefenderAbility;
 import mage.abilities.keyword.FlyingAbility;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.players.Player;
@@ -51,9 +51,8 @@ import mage.target.common.TargetControlledCreaturePermanent;
  */
 public class WallOfReverence extends CardImpl {
 
-    public WallOfReverence (UUID ownerId) {
-        super(ownerId, 20, "Wall of Reverence", Rarity.RARE, new CardType[]{CardType.CREATURE}, "{3}{W}");
-        this.expansionSetCode = "CON";
+    public WallOfReverence (UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{3}{W}");
         this.subtype.add("Spirit");
         this.subtype.add("Wall");
 

@@ -25,17 +25,17 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.betrayersofkamigawa;
+package mage.cards.o;
 
 import java.util.UUID;
 import mage.abilities.Ability;
 import mage.abilities.effects.ReplacementEffectImpl;
 import mage.abilities.keyword.SpliceOntoArcaneAbility;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Duration;
 import mage.constants.Outcome;
-import mage.constants.Rarity;
 import mage.game.Game;
 import mage.game.events.GameEvent;
 import mage.target.TargetPermanent;
@@ -46,9 +46,8 @@ import mage.target.TargetPermanent;
  */
 public class Overblaze extends CardImpl {
 
-    public Overblaze(UUID ownerId) {
-        super(ownerId, 114, "Overblaze", Rarity.UNCOMMON, new CardType[]{CardType.INSTANT}, "{3}{R}");
-        this.expansionSetCode = "BOK";
+    public Overblaze(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.INSTANT},"{3}{R}");
         this.subtype.add("Arcane");
 
 

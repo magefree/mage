@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.lorwyn;
+package mage.cards.n;
 
 import mage.constants.*;
 import mage.MageInt;
@@ -37,6 +37,7 @@ import mage.abilities.effects.common.continuous.GainAbilityTargetEffect;
 import mage.abilities.keyword.FlyingAbility;
 import mage.abilities.keyword.LifelinkAbility;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.filter.FilterPermanent;
 import mage.filter.predicate.Predicates;
 import mage.filter.predicate.mageobject.SubtypePredicate;
@@ -56,9 +57,8 @@ public class NectarFaerie extends CardImpl {
         filter.add(Predicates.or(new SubtypePredicate("Faerie"),new SubtypePredicate("Elf")));
     }
 
-    public NectarFaerie(UUID ownerId) {
-        super(ownerId, 130, "Nectar Faerie", Rarity.UNCOMMON, new CardType[]{CardType.CREATURE}, "{1}{B}");
-        this.expansionSetCode = "LRW";
+    public NectarFaerie(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{1}{B}");
         this.subtype.add("Faerie");
         this.subtype.add("Wizard");
 

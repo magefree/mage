@@ -25,15 +25,15 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.scourge;
+package mage.cards.v;
 
 import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.common.DiesThisOrAnotherCreatureTriggeredAbility;
 import mage.abilities.effects.common.LoseLifeOpponentsEffect;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.filter.predicate.mageobject.SubtypePredicate;
 
@@ -49,9 +49,8 @@ public class VengefulDead extends CardImpl {
         filter.add(new SubtypePredicate("Zombie"));
     }
 
-    public VengefulDead(UUID ownerId) {
-        super(ownerId, 80, "Vengeful Dead", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{3}{B}");
-        this.expansionSetCode = "SCG";
+    public VengefulDead(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{3}{B}");
         this.subtype.add("Zombie");
         this.power = new MageInt(3);
         this.toughness = new MageInt(2);

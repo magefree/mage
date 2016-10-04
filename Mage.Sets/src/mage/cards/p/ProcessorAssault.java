@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.battleforzendikar;
+package mage.cards.p;
 
 import java.util.UUID;
 import mage.abilities.Ability;
@@ -33,8 +33,8 @@ import mage.abilities.costs.common.ExileOpponentsCardFromExileToGraveyardCost;
 import mage.abilities.effects.common.DamageTargetEffect;
 import mage.abilities.keyword.DevoidAbility;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.target.common.TargetCreaturePermanent;
 
 /**
@@ -43,9 +43,8 @@ import mage.target.common.TargetCreaturePermanent;
  */
 public class ProcessorAssault extends CardImpl {
 
-    public ProcessorAssault(UUID ownerId) {
-        super(ownerId, 132, "Processor Assault", Rarity.UNCOMMON, new CardType[]{CardType.SORCERY}, "{1}{R}");
-        this.expansionSetCode = "BFZ";
+    public ProcessorAssault(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{1}{R}");
 
         // Devoid
         Ability ability = new DevoidAbility(this.color);

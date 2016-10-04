@@ -26,7 +26,7 @@
  *  or implied, of BetaSteward_at_googlemail.com.
  */
 
-package mage.sets.mirrodinbesieged;
+package mage.cards.s;
 
 import java.util.UUID;
 import mage.ObjectColor;
@@ -41,10 +41,10 @@ import mage.abilities.effects.common.discard.DiscardTargetEffect;
 import mage.abilities.keyword.EquipAbility;
 import mage.abilities.keyword.ProtectionAbility;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.AttachmentType;
 import mage.constants.CardType;
 import mage.constants.Outcome;
-import mage.constants.Rarity;
 import mage.constants.Zone;
 import mage.filter.FilterCard;
 import mage.filter.predicate.Predicates;
@@ -70,9 +70,8 @@ public class SwordOfFeastAndFamine extends CardImpl {
     }
 
 
-    public SwordOfFeastAndFamine (UUID ownerId) {
-        super(ownerId, 138, "Sword of Feast and Famine", Rarity.MYTHIC, new CardType[]{CardType.ARTIFACT}, "{3}");
-        this.expansionSetCode = "MBS";
+    public SwordOfFeastAndFamine (UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.ARTIFACT},"{3}");
         this.subtype.add("Equipment");
         this.addAbility(new EquipAbility(Outcome.AddAbility, new GenericManaCost(2)));
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new BoostEquippedEffect(2, 2)));

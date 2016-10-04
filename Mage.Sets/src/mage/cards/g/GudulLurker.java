@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.dragonsoftarkir;
+package mage.cards.g;
 
 import java.util.UUID;
 import mage.MageInt;
@@ -33,8 +33,8 @@ import mage.abilities.costs.mana.ManaCostsImpl;
 import mage.abilities.keyword.MorphAbility;
 import mage.abilities.keyword.CantBeBlockedSourceAbility;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.Rarity;
 
 /**
  *
@@ -42,9 +42,8 @@ import mage.constants.Rarity;
  */
 public class GudulLurker extends CardImpl {
 
-    public GudulLurker(UUID ownerId) {
-        super(ownerId, 56, "Gudul Lurker", Rarity.UNCOMMON, new CardType[]{CardType.CREATURE}, "{U}");
-        this.expansionSetCode = "DTK";
+    public GudulLurker(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{U}");
         this.subtype.add("Salamander");
         this.power = new MageInt(1);
         this.toughness = new MageInt(1);

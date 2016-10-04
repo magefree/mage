@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.timespiral;
+package mage.cards.s;
 
 import java.util.UUID;
 import mage.MageInt;
@@ -37,9 +37,9 @@ import mage.abilities.effects.common.continuous.BoostAllEffect;
 import mage.abilities.keyword.FlyingAbility;
 import mage.abilities.keyword.ShadowAbility;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Duration;
-import mage.constants.Rarity;
 import mage.constants.Zone;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.filter.predicate.Predicates;
@@ -59,9 +59,8 @@ public class StrongholdOverseer extends CardImpl {
         filter2.add(Predicates.not(new AbilityPredicate(ShadowAbility.class)));
     }
 
-    public StrongholdOverseer(UUID ownerId) {
-        super(ownerId, 133, "Stronghold Overseer", Rarity.RARE, new CardType[]{CardType.CREATURE}, "{3}{B}{B}{B}");
-        this.expansionSetCode = "TSP";
+    public StrongholdOverseer(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{3}{B}{B}{B}");
         this.subtype.add("Demon");
         this.power = new MageInt(5);
         this.toughness = new MageInt(5);

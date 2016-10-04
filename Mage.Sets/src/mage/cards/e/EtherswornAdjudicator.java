@@ -26,11 +26,10 @@
  *  or implied, of BetaSteward_at_googlemail.com.
  */
 
-package mage.sets.conflux;
+package mage.cards.e;
 
 import java.util.UUID;
 import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.constants.Zone;
 import mage.MageInt;
 import mage.abilities.Ability;
@@ -41,6 +40,7 @@ import mage.abilities.effects.common.DestroyTargetEffect;
 import mage.abilities.effects.common.UntapSourceEffect;
 import mage.abilities.keyword.FlyingAbility;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.filter.FilterPermanent;
 import mage.filter.predicate.Predicates;
 import mage.filter.predicate.mageobject.CardTypePredicate;
@@ -60,9 +60,8 @@ public class EtherswornAdjudicator extends CardImpl {
                 new CardTypePredicate(CardType.ENCHANTMENT)));
     }
 
-    public EtherswornAdjudicator(UUID ownerId) {
-        super(ownerId, 26, "Ethersworn Adjudicator", Rarity.MYTHIC, new CardType[]{CardType.ARTIFACT, CardType.CREATURE}, "{4}{U}");
-        this.expansionSetCode = "CON";
+    public EtherswornAdjudicator(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.ARTIFACT,CardType.CREATURE},"{4}{U}");
         this.subtype.add("Vedalken");
         this.subtype.add("Knight");
 

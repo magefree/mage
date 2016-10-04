@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.lorwyn;
+package mage.cards.f;
 
 import java.util.UUID;
 import mage.MageInt;
@@ -34,8 +34,8 @@ import mage.abilities.effects.common.search.SearchLibraryPutOnLibraryEffect;
 import mage.abilities.keyword.FlashAbility;
 import mage.abilities.keyword.FlyingAbility;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.filter.FilterCard;
 import mage.filter.predicate.mageobject.SubtypePredicate;
 import mage.target.common.TargetCardInLibrary;
@@ -51,9 +51,8 @@ public class FaerieHarbinger extends CardImpl {
         filter.add(new SubtypePredicate("Faerie"));
     }
 
-    public FaerieHarbinger(UUID ownerId) {
-        super(ownerId, 61, "Faerie Harbinger", Rarity.UNCOMMON, new CardType[]{CardType.CREATURE}, "{3}{U}");
-        this.expansionSetCode = "LRW";
+    public FaerieHarbinger(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{3}{U}");
         this.subtype.add("Faerie");
         this.subtype.add("Wizard");
         this.power = new MageInt(2);

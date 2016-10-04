@@ -25,14 +25,14 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.avacynrestored;
+package mage.cards.g;
 
 import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.abilities.Ability;
 import mage.abilities.effects.OneShotEffect;
 import mage.cards.Card;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.Outcome;
 import mage.constants.Zone;
 import mage.filter.common.FilterControlledPermanent;
@@ -58,9 +58,8 @@ public class GhostlyFlicker extends CardImpl {
                 new CardTypePredicate(CardType.ARTIFACT)));
     }
 
-    public GhostlyFlicker(UUID ownerId) {
-        super(ownerId, 57, "Ghostly Flicker", Rarity.COMMON, new CardType[]{CardType.INSTANT}, "{2}{U}");
-        this.expansionSetCode = "AVR";
+    public GhostlyFlicker(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.INSTANT},"{2}{U}");
 
 
         // Exile two target artifacts, creatures, and/or lands you control, then return those cards to the battlefield under your control.

@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.stronghold;
+package mage.cards.s;
 
 import java.util.UUID;
 import mage.MageInt;
@@ -33,8 +33,8 @@ import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.costs.mana.ManaCostsImpl;
 import mage.abilities.effects.common.CreateTokenEffect;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.constants.Zone;
 import mage.game.permanent.token.SliverToken;
 
@@ -44,9 +44,8 @@ import mage.game.permanent.token.SliverToken;
  */
 public class SliverQueen extends CardImpl {
 
-    public SliverQueen(UUID ownerId) {
-        super(ownerId, 141, "Sliver Queen", Rarity.RARE, new CardType[]{CardType.CREATURE}, "{W}{U}{B}{R}{G}");
-        this.expansionSetCode = "STH";
+    public SliverQueen(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{W}{U}{B}{R}{G}");
         this.supertype.add("Legendary");
         this.subtype.add("Sliver");
 

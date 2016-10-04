@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.newphyrexia;
+package mage.cards.k;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -40,11 +40,11 @@ import mage.abilities.effects.common.ExileFromZoneTargetEffect;
 import mage.abilities.effects.common.ExileTargetEffect;
 import mage.cards.Card;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.cards.Cards;
 import mage.cards.CardsImpl;
 import mage.constants.CardType;
 import mage.constants.Outcome;
-import mage.constants.Rarity;
 import mage.constants.Zone;
 import mage.filter.FilterCard;
 import mage.game.ExileZone;
@@ -67,9 +67,8 @@ public class KarnLiberated extends CardImpl {
 
     private UUID exileId = UUID.randomUUID();
 
-    public KarnLiberated(UUID ownerId) {
-        super(ownerId, 1, "Karn Liberated", Rarity.MYTHIC, new CardType[]{CardType.PLANESWALKER}, "{7}");
-        this.expansionSetCode = "NPH";
+    public KarnLiberated(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.PLANESWALKER},"{7}");
         this.subtype.add("Karn");
         this.addAbility(new PlanswalkerEntersWithLoyalityCountersAbility(6));
 

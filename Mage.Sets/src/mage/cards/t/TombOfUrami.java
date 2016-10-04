@@ -25,12 +25,11 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.saviorsofkamigawa;
+package mage.cards.t;
 
 import java.util.UUID;
 
 import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleActivatedAbility;
@@ -43,6 +42,7 @@ import mage.abilities.effects.common.DamageControllerEffect;
 import mage.abilities.keyword.FlyingAbility;
 import mage.abilities.mana.BlackManaAbility;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.Zone;
 import mage.filter.common.FilterControlledLandPermanent;
 import mage.game.Game;
@@ -55,9 +55,8 @@ import mage.game.permanent.token.Token;
  */
 public class TombOfUrami extends CardImpl {
 
-    public TombOfUrami(UUID ownerId) {
-        super(ownerId, 165, "Tomb of Urami", Rarity.RARE, new CardType[]{CardType.LAND}, "");
-        this.expansionSetCode = "SOK";
+    public TombOfUrami(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.LAND},"");
         this.supertype.add("Legendary");
 
         // {tap}: Add {B} to your mana pool. Tomb of Urami deals 1 damage to you if you don't control an Ogre.

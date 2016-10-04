@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.stronghold;
+package mage.cards.t;
 
 import java.util.UUID;
 import mage.MageInt;
@@ -36,9 +36,9 @@ import mage.abilities.effects.common.DoIfCostPaid;
 import mage.abilities.effects.common.continuous.GainControlTargetEffect;
 import mage.abilities.keyword.ShadowAbility;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Duration;
-import mage.constants.Rarity;
 import mage.target.common.TargetCreaturePermanent;
 
 /**
@@ -47,9 +47,8 @@ import mage.target.common.TargetCreaturePermanent;
  */
 public class ThalakosDeceiver extends CardImpl {
 
-    public ThalakosDeceiver(UUID ownerId) {
-        super(ownerId, 45, "Thalakos Deceiver", Rarity.RARE, new CardType[]{CardType.CREATURE}, "{3}{U}");
-        this.expansionSetCode = "STH";
+    public ThalakosDeceiver(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{3}{U}");
         this.subtype.add("Thalakos");
         this.subtype.add("Wizard");
         this.power = new MageInt(1);

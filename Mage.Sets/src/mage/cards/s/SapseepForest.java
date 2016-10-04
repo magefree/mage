@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.shadowmoor;
+package mage.cards.s;
 
 import java.util.UUID;
 import mage.ObjectColor;
@@ -39,8 +39,8 @@ import mage.abilities.decorator.ConditionalActivatedAbility;
 import mage.abilities.effects.common.GainLifeEffect;
 import mage.abilities.mana.GreenManaAbility;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.constants.Zone;
 import mage.filter.common.FilterControlledPermanent;
 import mage.filter.predicate.mageobject.ColorPredicate;
@@ -57,9 +57,8 @@ public class SapseepForest extends CardImpl {
         filter.add(new ColorPredicate(ObjectColor.GREEN));
     }
 
-    public SapseepForest(UUID ownerId) {
-        super(ownerId, 279, "Sapseep Forest", Rarity.UNCOMMON, new CardType[]{CardType.LAND}, "");
-        this.expansionSetCode = "SHM";
+    public SapseepForest(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.LAND},"");
         this.subtype.add("Forest");
 
         // <i>({tap}: Add {G} to your mana pool.)</i>

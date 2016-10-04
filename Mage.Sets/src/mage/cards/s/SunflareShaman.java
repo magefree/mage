@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.morningtide;
+package mage.cards.s;
 
 import java.util.UUID;
 import mage.MageInt;
@@ -37,9 +37,9 @@ import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.DamageSelfEffect;
 import mage.abilities.effects.common.DamageTargetEffect;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Outcome;
-import mage.constants.Rarity;
 import mage.constants.Zone;
 import mage.filter.FilterCard;
 import mage.filter.predicate.mageobject.SubtypePredicate;
@@ -53,9 +53,8 @@ import mage.target.common.TargetCreatureOrPlayer;
  */
 public class SunflareShaman extends CardImpl {
 
-    public SunflareShaman(UUID ownerId) {
-        super(ownerId, 108, "Sunflare Shaman", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{1}{R}");
-        this.expansionSetCode = "MOR";
+    public SunflareShaman(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{1}{R}");
         this.subtype.add("Elemental");
         this.subtype.add("Shaman");
         this.power = new MageInt(2);

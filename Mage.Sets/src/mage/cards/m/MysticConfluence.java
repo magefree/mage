@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.commander2015;
+package mage.cards.m;
 
 import java.util.UUID;
 import mage.abilities.Mode;
@@ -34,8 +34,8 @@ import mage.abilities.effects.common.CounterUnlessPaysEffect;
 import mage.abilities.effects.common.DrawCardSourceControllerEffect;
 import mage.abilities.effects.common.ReturnToHandTargetEffect;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.target.TargetSpell;
 import mage.target.common.TargetCreaturePermanent;
 
@@ -45,9 +45,8 @@ import mage.target.common.TargetCreaturePermanent;
  */
 public class MysticConfluence extends CardImpl {
 
-    public MysticConfluence(UUID ownerId) {
-        super(ownerId, 14, "Mystic Confluence", Rarity.RARE, new CardType[]{CardType.INSTANT}, "{3}{U}{U}");
-        this.expansionSetCode = "C15";
+    public MysticConfluence(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.INSTANT},"{3}{U}{U}");
 
         // Choose three. You may choose the same mode more than once. 
         this.getSpellAbility().getModes().setMinModes(3);

@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.vintagemasters;
+package mage.cards.f;
 
 import java.util.HashSet;
 import java.util.UUID;
@@ -41,12 +41,12 @@ import mage.abilities.keyword.FirstStrikeAbility;
 import mage.abilities.keyword.FlyingAbility;
 import mage.abilities.keyword.TrampleAbility;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.choices.Choice;
 import mage.choices.ChoiceImpl;
 import mage.constants.CardType;
 import mage.constants.Duration;
 import mage.constants.Outcome;
-import mage.constants.Rarity;
 import mage.constants.Zone;
 import mage.counters.CounterType;
 import mage.game.Game;
@@ -58,9 +58,8 @@ import mage.players.Player;
  */
 public class FlowstoneSculpture extends CardImpl {
 
-    public FlowstoneSculpture(UUID ownerId) {
-        super(ownerId, 268, "Flowstone Sculpture", Rarity.RARE, new CardType[]{CardType.ARTIFACT, CardType.CREATURE}, "{6}");
-        this.expansionSetCode = "VMA";
+    public FlowstoneSculpture(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.ARTIFACT,CardType.CREATURE},"{6}");
         this.subtype.add("Shapeshifter");
         this.power = new MageInt(4);
         this.toughness = new MageInt(4);

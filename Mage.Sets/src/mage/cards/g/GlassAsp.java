@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.timespiral;
+package mage.cards.g;
 
 import java.util.UUID;
 import mage.MageInt;
@@ -34,9 +34,9 @@ import mage.abilities.costs.mana.ManaCostsImpl;
 import mage.abilities.effects.common.LoseLifeTargetEffect;
 import mage.abilities.effects.common.UnlessPaysDelayedEffect;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.PhaseStep;
-import mage.constants.Rarity;
 
 /**
  *
@@ -44,9 +44,8 @@ import mage.constants.Rarity;
  */
 public class GlassAsp extends CardImpl {
 
-    public GlassAsp(UUID ownerId) {
-        super(ownerId, 197, "Glass Asp", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{1}{G}{G}");
-        this.expansionSetCode = "TSP";
+    public GlassAsp(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{1}{G}{G}");
         this.subtype.add("Snake");
         this.power = new MageInt(2);
         this.toughness = new MageInt(1);

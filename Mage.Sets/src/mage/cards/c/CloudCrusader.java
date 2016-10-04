@@ -26,15 +26,15 @@
  *  or implied, of BetaSteward_at_googlemail.com.
  */
 
-package mage.sets.magic2011;
+package mage.cards.c;
 
 import java.util.UUID;
 import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.MageInt;
 import mage.abilities.keyword.FirstStrikeAbility;
 import mage.abilities.keyword.FlyingAbility;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 
 /**
  *
@@ -42,9 +42,8 @@ import mage.cards.CardImpl;
  */
 public class CloudCrusader extends CardImpl {
 
-    public CloudCrusader(UUID ownerId) {
-        super(ownerId, 10, "Cloud Crusader", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{2}{W}{W}");
-        this.expansionSetCode = "M11";
+    public CloudCrusader(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{2}{W}{W}");
         this.subtype.add("Human");
         this.subtype.add("Knight");
 

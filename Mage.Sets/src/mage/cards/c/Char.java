@@ -25,15 +25,15 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.ravnica;
+package mage.cards.c;
 
 import java.util.UUID;
 import mage.abilities.effects.Effect;
 import mage.abilities.effects.common.DamageControllerEffect;
 import mage.abilities.effects.common.DamageTargetEffect;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.target.common.TargetCreatureOrPlayer;
 
 /**
@@ -42,9 +42,8 @@ import mage.target.common.TargetCreatureOrPlayer;
  */
 public class Char extends CardImpl {
 
-    public Char(UUID ownerId) {
-        super(ownerId, 117, "Char", Rarity.RARE, new CardType[]{CardType.INSTANT}, "{2}{R}");
-        this.expansionSetCode = "RAV";
+    public Char(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.INSTANT},"{2}{R}");
 
 
         // Char deals 4 damage to target creature or player and 2 damage to you.

@@ -25,18 +25,18 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.planechase2012;
+package mage.cards.d;
 
 import java.util.UUID;
 
 import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.MageInt;
 import mage.abilities.common.BeginningOfUpkeepTriggeredAbility;
 import mage.abilities.condition.common.EnchantedSourceCondition;
 import mage.abilities.decorator.ConditionalTriggeredAbility;
 import mage.abilities.effects.common.CreateTokenEffect;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.TargetController;
 import mage.constants.Zone;
 import mage.game.permanent.token.SaprolingToken;
@@ -47,9 +47,8 @@ import mage.game.permanent.token.SaprolingToken;
  */
 public class DreampodDruid extends CardImpl {
 
-    public DreampodDruid(UUID ownerId) {
-        super(ownerId, 64, "Dreampod Druid", Rarity.RARE, new CardType[]{CardType.CREATURE}, "{1}{G}");
-        this.expansionSetCode = "PC2";
+    public DreampodDruid(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{1}{G}");
         this.subtype.add("Human");
         this.subtype.add("Druid");
 

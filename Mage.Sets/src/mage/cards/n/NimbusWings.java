@@ -26,7 +26,7 @@
  *  or implied, of BetaSteward_at_googlemail.com.
  */
 
-package mage.sets.zendikar;
+package mage.cards.n;
 
 import java.util.UUID;
 
@@ -34,7 +34,6 @@ import mage.constants.AttachmentType;
 import mage.constants.CardType;
 import mage.constants.Duration;
 import mage.constants.Outcome;
-import mage.constants.Rarity;
 import mage.constants.Zone;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.effects.common.AttachEffect;
@@ -43,6 +42,7 @@ import mage.abilities.effects.common.continuous.GainAbilityAttachedEffect;
 import mage.abilities.keyword.EnchantAbility;
 import mage.abilities.keyword.FlyingAbility;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.target.TargetPermanent;
 import mage.target.common.TargetCreaturePermanent;
 
@@ -52,9 +52,8 @@ import mage.target.common.TargetCreaturePermanent;
  */
 public class NimbusWings extends CardImpl {
 
-    public NimbusWings (UUID ownerId) {
-        super(ownerId, 28, "Nimbus Wings", Rarity.COMMON, new CardType[]{CardType.ENCHANTMENT}, "{1}{W}");
-        this.expansionSetCode = "ZEN";
+    public NimbusWings (UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.ENCHANTMENT},"{1}{W}");
         this.subtype.add("Aura");
 
 

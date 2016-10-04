@@ -26,12 +26,11 @@
  *  or implied, of BetaSteward_at_googlemail.com.
  */
 
-package mage.sets.magic2011;
+package mage.cards.a;
 
 import java.util.UUID;
 import mage.constants.CardType;
 import mage.constants.ColoredManaSymbol;
-import mage.constants.Rarity;
 import mage.constants.Zone;
 import mage.MageInt;
 import mage.abilities.Ability;
@@ -42,6 +41,7 @@ import mage.abilities.costs.mana.ColoredManaCost;
 import mage.abilities.effects.common.DamageTargetEffect;
 import mage.abilities.keyword.FlyingAbility;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.filter.predicate.permanent.ControllerIdPredicate;
 import mage.game.Game;
@@ -54,9 +54,8 @@ import mage.target.common.TargetCreaturePermanent;
  */
 public class AncientHellkite extends CardImpl {
 
-    public AncientHellkite(UUID ownerId) {
-        super(ownerId, 122, "Ancient Hellkite", Rarity.RARE, new CardType[]{CardType.CREATURE}, "{4}{R}{R}{R}");
-        this.expansionSetCode = "M11";
+    public AncientHellkite(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{4}{R}{R}{R}");
         this.subtype.add("Dragon");
 
         this.power = new MageInt(6);

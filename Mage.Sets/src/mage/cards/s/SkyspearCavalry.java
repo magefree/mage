@@ -25,15 +25,15 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.journeyintonyx;
+package mage.cards.s;
 
 import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.keyword.FlyingAbility;
 import mage.abilities.keyword.DoubleStrikeAbility;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.Rarity;
 
 /**
  *
@@ -41,9 +41,8 @@ import mage.constants.Rarity;
  */
 public class SkyspearCavalry extends CardImpl {
 
-    public SkyspearCavalry(UUID ownerId) {
-        super(ownerId, 26, "Skyspear Cavalry", Rarity.UNCOMMON, new CardType[]{CardType.CREATURE}, "{3}{W}{W}");
-        this.expansionSetCode = "JOU";
+    public SkyspearCavalry(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{3}{W}{W}");
         this.subtype.add("Human");
         this.subtype.add("Soldier");
 

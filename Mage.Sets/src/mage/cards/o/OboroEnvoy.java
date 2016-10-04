@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.saviorsofkamigawa;
+package mage.cards.o;
 
 import java.util.UUID;
 import mage.MageInt;
@@ -40,9 +40,9 @@ import mage.abilities.effects.Effect;
 import mage.abilities.effects.common.continuous.BoostTargetEffect;
 import mage.abilities.keyword.FlyingAbility;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Duration;
-import mage.constants.Rarity;
 import mage.constants.Zone;
 import mage.filter.common.FilterControlledLandPermanent;
 import mage.target.common.TargetControlledPermanent;
@@ -54,9 +54,8 @@ import mage.target.common.TargetCreaturePermanent;
  */
 public class OboroEnvoy extends CardImpl {
 
-    public OboroEnvoy(UUID ownerId) {
-        super(ownerId, 49, "Oboro Envoy", Rarity.UNCOMMON, new CardType[]{CardType.CREATURE}, "{3}{U}");
-        this.expansionSetCode = "SOK";
+    public OboroEnvoy(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{3}{U}");
         this.subtype.add("Moonfolk");
         this.subtype.add("Wizard");
         this.power = new MageInt(1);

@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.mercadianmasques;
+package mage.cards.t;
 
 import java.util.UUID;
 import mage.abilities.Ability;
@@ -35,10 +35,10 @@ import mage.abilities.costs.common.SacrificeTargetCost;
 import mage.abilities.effects.ContinuousRuleModifyingEffectImpl;
 import mage.abilities.effects.common.SacrificeSourceUnlessPaysEffect;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Duration;
 import mage.constants.Outcome;
-import mage.constants.Rarity;
 import mage.constants.TargetController;
 import mage.constants.Zone;
 import mage.filter.common.FilterControlledLandPermanent;
@@ -52,9 +52,8 @@ import mage.target.common.TargetControlledPermanent;
  */
 public class TerritorialDispute extends CardImpl {
 
-    public TerritorialDispute(UUID ownerId) {
-        super(ownerId, 217, "Territorial Dispute", Rarity.RARE, new CardType[]{CardType.ENCHANTMENT}, "{4}{R}{R}");
-        this.expansionSetCode = "MMQ";
+    public TerritorialDispute(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.ENCHANTMENT},"{4}{R}{R}");
 
         // At the beginning of your upkeep, sacrifice Territorial Dispute unless you sacrifice a land.
         this.addAbility(new BeginningOfUpkeepTriggeredAbility(Zone.BATTLEFIELD, 

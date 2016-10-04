@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.betrayersofkamigawa;
+package mage.cards.t;
 
 import java.util.UUID;
 import mage.abilities.Ability;
@@ -35,8 +35,8 @@ import mage.abilities.effects.common.counter.AddCountersSourceEffect;
 import mage.abilities.mana.AnyColorManaAbility;
 import mage.abilities.mana.ColorlessManaAbility;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.counters.CounterType;
 
 /**
@@ -45,9 +45,8 @@ import mage.counters.CounterType;
  */
 public class TendoIceBridge extends CardImpl {
 
-    public TendoIceBridge(UUID ownerId) {
-        super(ownerId, 165, "Tendo Ice Bridge", Rarity.RARE, new CardType[]{CardType.LAND}, "");
-        this.expansionSetCode = "BOK";
+    public TendoIceBridge(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.LAND},"");
         // Tendo Ice Bridge enters the battlefield with a charge counter on it.
         this.addAbility(new EntersBattlefieldAbility(
                 new AddCountersSourceEffect(CounterType.CHARGE.createInstance(1)), "with a charge counter on it"));

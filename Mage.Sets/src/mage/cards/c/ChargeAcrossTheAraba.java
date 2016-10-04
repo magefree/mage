@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.saviorsofkamigawa;
+package mage.cards.c;
 
 import java.util.UUID;
 import mage.abilities.dynamicvalue.DynamicValue;
@@ -33,9 +33,9 @@ import mage.abilities.dynamicvalue.common.SweepNumber;
 import mage.abilities.effects.common.continuous.BoostControlledEffect;
 import mage.abilities.effects.keyword.SweepEffect;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Duration;
-import mage.constants.Rarity;
 
 /**
  *
@@ -43,9 +43,8 @@ import mage.constants.Rarity;
  */
 public class ChargeAcrossTheAraba extends CardImpl {
 
-    public ChargeAcrossTheAraba(UUID ownerId) {
-        super(ownerId, 4, "Charge Across the Araba", Rarity.UNCOMMON, new CardType[]{CardType.INSTANT}, "{4}{W}");
-        this.expansionSetCode = "SOK";
+    public ChargeAcrossTheAraba(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.INSTANT},"{4}{W}");
         this.subtype.add("Arcane");
 
 

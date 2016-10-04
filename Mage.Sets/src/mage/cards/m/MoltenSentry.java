@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.ravnica;
+package mage.cards.m;
 
 import java.util.UUID;
 import mage.MageInt;
@@ -36,10 +36,10 @@ import mage.abilities.effects.common.continuous.GainAbilitySourceEffect;
 import mage.abilities.keyword.DefenderAbility;
 import mage.abilities.keyword.HasteAbility;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Duration;
 import mage.constants.Outcome;
-import mage.constants.Rarity;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.players.Player;
@@ -53,9 +53,8 @@ public class MoltenSentry extends CardImpl {
     private final static String rule = "As {this} enters the battlefield, flip a coin. If the coin comes up heads, {this} enters the battlefield as a "
             + "5/2 creature with haste. If it comes up tails, {this} enters the battlefield as a 2/5 creature with defender.";
 
-    public MoltenSentry(UUID ownerId) {
-        super(ownerId, 136, "Molten Sentry", Rarity.RARE, new CardType[]{CardType.CREATURE}, "{3}{R}");
-        this.expansionSetCode = "RAV";
+    public MoltenSentry(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{3}{R}");
         this.subtype.add("Elemental");
         this.power = new MageInt(0);
         this.toughness = new MageInt(0);

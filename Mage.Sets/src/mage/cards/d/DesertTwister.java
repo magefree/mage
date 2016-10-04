@@ -25,13 +25,13 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.revisededition;
+package mage.cards.d;
 
 import java.util.UUID;
 import mage.abilities.effects.common.DestroyTargetEffect;
 import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.target.TargetPermanent;
 
 /**
@@ -40,9 +40,8 @@ import mage.target.TargetPermanent;
  */
 public class DesertTwister extends CardImpl {
 
-    public DesertTwister(UUID ownerId) {
-        super(ownerId, 99, "Desert Twister", Rarity.UNCOMMON, new CardType[]{CardType.SORCERY}, "{4}{G}{G}");
-        this.expansionSetCode = "3ED";
+    public DesertTwister(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{4}{G}{G}");
 
 
         // Destroy target permanent.

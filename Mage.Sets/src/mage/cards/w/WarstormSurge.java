@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.magic2012;
+package mage.cards.w;
 
 import java.util.UUID;
 import mage.abilities.Ability;
@@ -33,9 +33,9 @@ import mage.abilities.TriggeredAbilityImpl;
 import mage.abilities.effects.Effect;
 import mage.abilities.effects.OneShotEffect;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Outcome;
-import mage.constants.Rarity;
 import mage.constants.Zone;
 import mage.game.Game;
 import mage.game.events.GameEvent;
@@ -50,9 +50,8 @@ import mage.target.common.TargetCreatureOrPlayer;
  */
 public class WarstormSurge extends CardImpl {
 
-    public WarstormSurge(UUID ownerId) {
-        super(ownerId, 160, "Warstorm Surge", Rarity.RARE, new CardType[]{CardType.ENCHANTMENT}, "{5}{R}");
-        this.expansionSetCode = "M12";
+    public WarstormSurge(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.ENCHANTMENT},"{5}{R}");
 
         // Whenever a creature enters the battlefield under your control, it deals damage equal to its power to target creature or player.
         Ability ability = new WarstormSurgeTriggeredAbility();

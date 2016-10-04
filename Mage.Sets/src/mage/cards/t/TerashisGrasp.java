@@ -25,15 +25,15 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.betrayersofkamigawa;
+package mage.cards.t;
 
 import java.util.UUID;
 import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.abilities.Ability;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.DestroyTargetEffect;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.Outcome;
 import mage.filter.common.FilterArtifactOrEnchantmentPermanent;
 import mage.game.Game;
@@ -47,9 +47,8 @@ import mage.target.TargetPermanent;
  */
 public class TerashisGrasp extends CardImpl {
 
-    public TerashisGrasp(UUID ownerId) {
-        super(ownerId, 26, "Terashi's Grasp", Rarity.COMMON, new CardType[]{CardType.SORCERY}, "{2}{W}");
-        this.expansionSetCode = "BOK";
+    public TerashisGrasp(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{2}{W}");
         this.subtype.add("Arcane");
 
         // Destroy target artifact or enchantment. 

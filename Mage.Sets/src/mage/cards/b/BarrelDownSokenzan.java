@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.saviorsofkamigawa;
+package mage.cards.b;
 
 import java.util.UUID;
 import mage.abilities.dynamicvalue.DynamicValue;
@@ -34,8 +34,8 @@ import mage.abilities.dynamicvalue.common.SweepNumber;
 import mage.abilities.effects.common.DamageTargetEffect;
 import mage.abilities.effects.keyword.SweepEffect;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.target.common.TargetCreaturePermanent;
 
 /**
@@ -44,9 +44,8 @@ import mage.target.common.TargetCreaturePermanent;
  */
 public class BarrelDownSokenzan extends CardImpl {
 
-    public BarrelDownSokenzan(UUID ownerId) {
-        super(ownerId, 94, "Barrel Down Sokenzan", Rarity.COMMON, new CardType[]{CardType.INSTANT}, "{2}{R}");
-        this.expansionSetCode = "SOK";
+    public BarrelDownSokenzan(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.INSTANT},"{2}{R}");
         this.subtype.add("Arcane");
 
 

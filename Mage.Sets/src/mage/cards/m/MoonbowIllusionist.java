@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.saviorsofkamigawa;
+package mage.cards.m;
 
 import java.util.UUID;
 import mage.MageInt;
@@ -36,9 +36,9 @@ import mage.abilities.costs.mana.GenericManaCost;
 import mage.abilities.effects.common.continuous.BecomesBasicLandTargetEffect;
 import mage.abilities.keyword.FlyingAbility;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Duration;
-import mage.constants.Rarity;
 import mage.constants.Zone;
 import mage.filter.common.FilterControlledLandPermanent;
 import mage.target.common.TargetControlledPermanent;
@@ -50,9 +50,8 @@ import mage.target.common.TargetLandPermanent;
  */
 public class MoonbowIllusionist extends CardImpl {
 
-    public MoonbowIllusionist(UUID ownerId) {
-        super(ownerId, 46, "Moonbow Illusionist", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{2}{U}");
-        this.expansionSetCode = "SOK";
+    public MoonbowIllusionist(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{2}{U}");
         this.subtype.add("Moonfolk");
         this.subtype.add("Wizard");
 

@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.kaladesh;
+package mage.cards.h;
 
 import java.util.UUID;
 import mage.MageInt;
@@ -36,9 +36,9 @@ import mage.abilities.effects.common.combat.CanAttackAsThoughItDidntHaveDefender
 import mage.abilities.effects.common.counter.GetEnergyCountersControllerEffect;
 import mage.abilities.keyword.DefenderAbility;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Duration;
-import mage.constants.Rarity;
 import mage.constants.Zone;
 
 /**
@@ -47,9 +47,8 @@ import mage.constants.Zone;
  */
 public class HightideHermit extends CardImpl {
 
-    public HightideHermit(UUID ownerId) {
-        super(ownerId, 51, "Hightide Hermit", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{4}{U}");
-        this.expansionSetCode = "KLD";
+    public HightideHermit(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{4}{U}");
         this.subtype.add("Crab");
         this.power = new MageInt(4);
         this.toughness = new MageInt(4);

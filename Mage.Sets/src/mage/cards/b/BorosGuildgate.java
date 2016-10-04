@@ -25,15 +25,15 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.gatecrash;
+package mage.cards.b;
 
 import java.util.UUID;
 import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.abilities.common.EntersBattlefieldTappedAbility;
 import mage.abilities.mana.RedManaAbility;
 import mage.abilities.mana.WhiteManaAbility;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 
 /**
  *
@@ -41,9 +41,8 @@ import mage.cards.CardImpl;
  */
 public class BorosGuildgate extends CardImpl {
 
-    public BorosGuildgate(UUID ownerId) {
-        super(ownerId, 239, "Boros Guildgate", Rarity.COMMON, new CardType[]{CardType.LAND}, "");
-        this.expansionSetCode = "GTC";
+    public BorosGuildgate(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.LAND},"");
         this.subtype.add("Gate");
 
         // Boros Guildgate enters the battlefield tapped.

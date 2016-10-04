@@ -26,12 +26,11 @@
  *  or implied, of BetaSteward_at_googlemail.com.
  */
 
-package mage.sets.betrayersofkamigawa;
+package mage.cards.t;
 
 import java.util.UUID;
 import mage.constants.CardType;
 import mage.constants.Outcome;
-import mage.constants.Rarity;
 import mage.constants.Zone;
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleStaticAbility;
@@ -39,6 +38,7 @@ import mage.abilities.effects.common.AttachEffect;
 import mage.abilities.effects.common.continuous.ControlEnchantedEffect;
 import mage.abilities.keyword.EnchantAbility;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.filter.Filter;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.filter.predicate.mageobject.ConvertedManaCostPredicate;
@@ -57,9 +57,8 @@ public class ThreadsOfDisloyalty extends CardImpl {
           filter.add(new ConvertedManaCostPredicate(Filter.ComparisonType.LessThan, 3));
     }
 
-    public ThreadsOfDisloyalty(UUID ownerId) {
-        super(ownerId, 56, "Threads of Disloyalty", Rarity.RARE, new CardType[]{CardType.ENCHANTMENT}, "{1}{U}{U}");
-        this.expansionSetCode = "BOK";
+    public ThreadsOfDisloyalty(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.ENCHANTMENT},"{1}{U}{U}");
 
         this.subtype.add("Aura");
 

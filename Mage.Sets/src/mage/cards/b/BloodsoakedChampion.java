@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.khansoftarkir;
+package mage.cards.b;
 
 import java.util.UUID;
 import mage.MageInt;
@@ -36,8 +36,8 @@ import mage.abilities.costs.mana.ManaCostsImpl;
 import mage.abilities.decorator.ConditionalActivatedAbility;
 import mage.abilities.effects.common.ReturnSourceFromGraveyardToBattlefieldEffect;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.constants.Zone;
 import mage.watchers.common.PlayerAttackedWatcher;
 
@@ -47,9 +47,8 @@ import mage.watchers.common.PlayerAttackedWatcher;
  */
 public class BloodsoakedChampion extends CardImpl {
 
-    public BloodsoakedChampion(UUID ownerId) {
-        super(ownerId, 66, "Bloodsoaked Champion", Rarity.RARE, new CardType[]{CardType.CREATURE}, "{B}");
-        this.expansionSetCode = "KTK";
+    public BloodsoakedChampion(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{B}");
         this.subtype.add("Human");
         this.subtype.add("Warrior");
 

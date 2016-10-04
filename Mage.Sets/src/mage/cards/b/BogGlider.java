@@ -25,11 +25,10 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.prophecy;
+package mage.cards.b;
 
 import java.util.UUID;
 import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.constants.Zone;
 import mage.MageInt;
 import mage.abilities.Ability;
@@ -39,6 +38,7 @@ import mage.abilities.costs.common.TapSourceCost;
 import mage.abilities.effects.common.search.SearchLibraryPutInPlayEffect;
 import mage.abilities.keyword.FlyingAbility;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.filter.Filter.ComparisonType;
 import mage.filter.common.FilterControlledLandPermanent;
 import mage.filter.common.FilterControlledPermanent;
@@ -62,9 +62,8 @@ public class BogGlider extends CardImpl {
         filter.add(new ConvertedManaCostPredicate(ComparisonType.LessThan, 3));
     }
 
-    public BogGlider(UUID ownerId) {
-        super(ownerId, 58, "Bog Glider", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{2}{B}");
-        this.expansionSetCode = "PCY";
+    public BogGlider(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{2}{B}");
         this.subtype.add("Human");
         this.subtype.add("Mercenary");
 

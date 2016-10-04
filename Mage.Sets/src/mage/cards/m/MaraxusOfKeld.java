@@ -25,15 +25,15 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.weatherlight;
+package mage.cards.m;
 
 import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.MageInt;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.dynamicvalue.common.PermanentsOnBattlefieldCount;
 import mage.abilities.effects.common.continuous.SetPowerToughnessSourceEffect;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.Duration;
 import mage.constants.Zone;
 import mage.filter.common.FilterControlledPermanent;
@@ -59,9 +59,8 @@ public class MaraxusOfKeld extends CardImpl {
                 new CardTypePredicate(CardType.LAND)));
     }
 
-    public MaraxusOfKeld(UUID ownerId) {
-        super(ownerId, 111, "Maraxus of Keld", Rarity.RARE, new CardType[]{CardType.CREATURE}, "{4}{R}{R}");
-        this.expansionSetCode = "WTH";
+    public MaraxusOfKeld(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{4}{R}{R}");
         this.supertype.add("Legendary");
         this.subtype.add("Human");
         this.subtype.add("Warrior");

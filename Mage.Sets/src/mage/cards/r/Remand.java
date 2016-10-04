@@ -25,15 +25,15 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.ravnica;
+package mage.cards.r;
 
 import java.util.UUID;
 import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.constants.Zone;
 import mage.abilities.effects.common.CounterTargetWithReplacementEffect;
 import mage.abilities.effects.common.DrawCardSourceControllerEffect;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.target.TargetSpell;
 
 /**
@@ -42,9 +42,8 @@ import mage.target.TargetSpell;
  */
 public class Remand extends CardImpl {
 
-    public Remand(UUID ownerId) {
-        super(ownerId, 63, "Remand", Rarity.UNCOMMON, new CardType[]{CardType.INSTANT}, "{1}{U}");
-        this.expansionSetCode = "RAV";
+    public Remand(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.INSTANT},"{1}{U}");
 
 
         // Counter target spell. If that spell is countered this way, put it into its owner's hand instead of into that player's graveyard.

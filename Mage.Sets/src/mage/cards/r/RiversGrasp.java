@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.shadowmoor;
+package mage.cards.r;
 
 import java.util.UUID;
 import mage.abilities.Ability;
@@ -36,10 +36,10 @@ import mage.abilities.effects.common.InfoEffect;
 import mage.abilities.effects.common.ReturnToHandTargetEffect;
 import mage.cards.Card;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.ColoredManaSymbol;
 import mage.constants.Outcome;
-import mage.constants.Rarity;
 import mage.constants.Zone;
 import mage.filter.FilterCard;
 import mage.filter.predicate.Predicates;
@@ -58,9 +58,8 @@ import mage.watchers.common.ManaSpentToCastWatcher;
  */
 public class RiversGrasp extends CardImpl {
 
-    public RiversGrasp(UUID ownerId) {
-        super(ownerId, 174, "River's Grasp", Rarity.UNCOMMON, new CardType[]{CardType.SORCERY}, "{3}{U/B}");
-        this.expansionSetCode = "SHM";
+    public RiversGrasp(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{3}{U/B}");
 
         // If {U} was spent to cast River's Grasp, return up to one target creature to its owner's hand. If {B} was spent to cast River's Grasp, target player reveals his or her hand, you choose a nonland card from it, then that player discards that card.
         Target targetCreature = new TargetCreaturePermanent(0, 1);

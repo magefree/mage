@@ -25,15 +25,15 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.tenthedition;
+package mage.cards.g;
 
 import java.util.UUID;
 import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.abilities.effects.Effect;
 import mage.abilities.effects.common.DrawCardSourceControllerEffect;
 import mage.abilities.effects.common.discard.DiscardControllerEffect;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 
 /**
  *
@@ -41,9 +41,8 @@ import mage.cards.CardImpl;
  */
 public class GoblinLore extends CardImpl {
 
-    public GoblinLore(UUID ownerId) {
-        super(ownerId, 208, "Goblin Lore", Rarity.UNCOMMON, new CardType[]{CardType.SORCERY}, "{1}{R}");
-        this.expansionSetCode = "10E";
+    public GoblinLore(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{1}{R}");
 
 
         // Draw four cards, then discard three cards at random.

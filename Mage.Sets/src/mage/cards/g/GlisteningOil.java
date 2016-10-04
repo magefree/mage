@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.newphyrexia;
+package mage.cards.g;
 
 import java.util.UUID;
 
@@ -41,6 +41,7 @@ import mage.abilities.effects.common.continuous.GainAbilityAttachedEffect;
 import mage.abilities.keyword.EnchantAbility;
 import mage.abilities.keyword.InfectAbility;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.counters.CounterType;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
@@ -53,9 +54,8 @@ import mage.target.common.TargetCreaturePermanent;
  */
 public class GlisteningOil extends CardImpl {
 
-    public GlisteningOil(UUID ownerId) {
-        super(ownerId, 62, "Glistening Oil", Rarity.RARE, new CardType[]{CardType.ENCHANTMENT}, "{B}{B}");
-        this.expansionSetCode = "NPH";
+    public GlisteningOil(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.ENCHANTMENT},"{B}{B}");
         this.subtype.add("Aura");
 
         

@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.exodus;
+package mage.cards.m;
 
 import java.util.LinkedHashSet;
 import java.util.Set;
@@ -36,9 +36,9 @@ import mage.abilities.common.BeginningOfYourEndStepTriggeredAbility;
 import mage.abilities.effects.OneShotEffect;
 import mage.cards.Card;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Outcome;
-import mage.constants.Rarity;
 import mage.constants.Zone;
 import mage.game.Game;
 import mage.players.Player;
@@ -49,9 +49,8 @@ import mage.players.Player;
  */
 public class Manabond extends CardImpl {
 
-    public Manabond(UUID ownerId) {
-        super(ownerId, 113, "Manabond", Rarity.RARE, new CardType[]{CardType.ENCHANTMENT}, "{G}");
-        this.expansionSetCode = "EXO";
+    public Manabond(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.ENCHANTMENT},"{G}");
 
         // At the beginning of your end step, reveal your hand and put all land cards from it onto the battlefield. If you do, discard your hand.
         this.addAbility(new BeginningOfYourEndStepTriggeredAbility(new ManabondEffect(), true));

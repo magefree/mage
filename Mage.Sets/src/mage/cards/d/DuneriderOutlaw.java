@@ -25,11 +25,10 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.planarchaos;
+package mage.cards.d;
 
 import java.util.UUID;
 import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.MageInt;
 import mage.ObjectColor;
 import mage.abilities.TriggeredAbility;
@@ -39,6 +38,7 @@ import mage.abilities.decorator.ConditionalTriggeredAbility;
 import mage.abilities.effects.common.counter.AddCountersSourceEffect;
 import mage.abilities.keyword.ProtectionAbility;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.counters.CounterType;
 import mage.filter.FilterCard;
 import mage.filter.predicate.mageobject.ColorPredicate;
@@ -57,9 +57,8 @@ public class DuneriderOutlaw extends CardImpl {
         filter.add(new ColorPredicate(ObjectColor.GREEN));
     }
 
-    public DuneriderOutlaw(UUID ownerId) {
-        super(ownerId, 86, "Dunerider Outlaw", Rarity.UNCOMMON, new CardType[]{CardType.CREATURE}, "{B}{B}");
-        this.expansionSetCode = "PLC";
+    public DuneriderOutlaw(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{B}{B}");
         this.subtype.add("Human");
         this.subtype.add("Rebel");
         this.subtype.add("Rogue");

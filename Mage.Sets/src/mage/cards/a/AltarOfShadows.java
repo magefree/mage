@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.mirrodin;
+package mage.cards.a;
 
 import java.util.UUID;
 import mage.Mana;
@@ -38,9 +38,9 @@ import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.DestroyTargetEffect;
 import mage.abilities.effects.common.counter.AddCountersSourceEffect;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Outcome;
-import mage.constants.Rarity;
 import mage.constants.TargetController;
 import mage.constants.Zone;
 import mage.counters.CounterType;
@@ -55,9 +55,8 @@ import mage.target.common.TargetCreaturePermanent;
  */
 public class AltarOfShadows extends CardImpl {
 
-    public AltarOfShadows(UUID ownerId) {
-        super(ownerId, 143, "Altar of Shadows", Rarity.RARE, new CardType[]{CardType.ARTIFACT}, "{7}");
-        this.expansionSetCode = "MRD";
+    public AltarOfShadows(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.ARTIFACT},"{7}");
 
         // At the beginning of your precombat main phase, add {B} to your mana pool for each charge counter on Altar of Shadows.
         this.addAbility(new BeginningOfPreCombatMainTriggeredAbility(new AltarOfShadowsEffect(), TargetController.YOU, false));

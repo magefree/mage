@@ -25,13 +25,13 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.oathofthegatewatch;
+package mage.cards.l;
 
 import java.util.UUID;
 import mage.abilities.effects.keyword.SupportEffect;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.Rarity;
 
 /**
  *
@@ -39,9 +39,8 @@ import mage.constants.Rarity;
  */
 public class LeadByExample extends CardImpl {
 
-    public LeadByExample(UUID ownerId) {
-        super(ownerId, 134, "Lead by Example", Rarity.COMMON, new CardType[]{CardType.INSTANT}, "{1}{G}");
-        this.expansionSetCode = "OGW";
+    public LeadByExample(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.INSTANT},"{1}{G}");
 
         // Support 2.
         getSpellAbility().addEffect(new SupportEffect(this, 2, false));

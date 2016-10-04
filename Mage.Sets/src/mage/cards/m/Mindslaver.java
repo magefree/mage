@@ -25,12 +25,11 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.scarsofmirrodin;
+package mage.cards.m;
 
 import java.util.UUID;
 
 import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.costs.common.SacrificeSourceCost;
@@ -38,6 +37,7 @@ import mage.abilities.costs.common.TapSourceCost;
 import mage.abilities.costs.mana.GenericManaCost;
 import mage.abilities.effects.common.turn.ControlTargetPlayerNextTurnEffect;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.Zone;
 import mage.target.TargetPlayer;
 
@@ -47,9 +47,8 @@ import mage.target.TargetPlayer;
  */
 public class Mindslaver extends CardImpl {
 
-    public Mindslaver(UUID ownerId) {
-        super(ownerId, 176, "Mindslaver", Rarity.MYTHIC, new CardType[]{CardType.ARTIFACT}, "{6}");
-        this.expansionSetCode = "SOM";
+    public Mindslaver(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.ARTIFACT},"{6}");
         this.supertype.add("Legendary");
 
         // {4}, {tap}, Sacrifice Mindslaver: You control target player during that player's next turn.

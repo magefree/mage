@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.fatereforged;
+package mage.cards.h;
 
 import java.util.UUID;
 import mage.MageInt;
@@ -36,9 +36,9 @@ import mage.abilities.decorator.ConditionalAsThoughEffect;
 import mage.abilities.effects.AsThoughEffect;
 import mage.abilities.effects.common.continuous.CastAsThoughItHadFlashSourceEffect;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Duration;
-import mage.constants.Rarity;
 import mage.constants.Zone;
 import mage.filter.common.FilterControlledPermanent;
 import mage.filter.predicate.Predicates;
@@ -56,9 +56,8 @@ public class HungeringYeti extends CardImpl {
         filter.add(Predicates.or(new ColorPredicate(ObjectColor.GREEN), new ColorPredicate(ObjectColor.BLUE)));
     }
 
-    public HungeringYeti(UUID ownerId) {
-        super(ownerId, 105, "Hungering Yeti", Rarity.UNCOMMON, new CardType[]{CardType.CREATURE}, "{4}{R}");
-        this.expansionSetCode = "FRF";
+    public HungeringYeti(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{4}{R}");
         this.subtype.add("Yeti");
         this.power = new MageInt(4);
         this.toughness = new MageInt(4);

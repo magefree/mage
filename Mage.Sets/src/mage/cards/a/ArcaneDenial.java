@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.commander2013;
+package mage.cards.a;
 
 import java.util.UUID;
 import mage.abilities.Ability;
@@ -38,9 +38,9 @@ import mage.abilities.effects.common.CreateDelayedTriggeredAbilityEffect;
 import mage.abilities.effects.common.DrawCardSourceControllerEffect;
 import mage.abilities.effects.common.DrawCardTargetEffect;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Outcome;
-import mage.constants.Rarity;
 import mage.game.Game;
 import mage.players.Player;
 import mage.target.TargetSpell;
@@ -52,9 +52,8 @@ import mage.target.targetpointer.FixedTarget;
  */
 public class ArcaneDenial extends CardImpl {
 
-    public ArcaneDenial(UUID ownerId) {
-        super(ownerId, 28, "Arcane Denial", Rarity.COMMON, new CardType[]{CardType.INSTANT}, "{1}{U}");
-        this.expansionSetCode = "C13";
+    public ArcaneDenial(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.INSTANT},"{1}{U}");
 
         // Counter target spell. Its controller may draw up to two cards at the beginning of the next turn's upkeep.
         this.getSpellAbility().addEffect(new ArcaneDenialEffect());

@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.magic2012;
+package mage.cards.s;
 
 import java.util.UUID;
 import mage.MageInt;
@@ -37,9 +37,9 @@ import mage.abilities.effects.common.continuous.BecomesCreatureSourceEffect;
 import mage.abilities.keyword.FlyingAbility;
 import mage.abilities.keyword.TrampleAbility;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Duration;
-import mage.constants.Rarity;
 import mage.constants.Zone;
 import mage.game.permanent.token.Token;
 
@@ -49,9 +49,8 @@ import mage.game.permanent.token.Token;
  */
 public class Skinshifter extends CardImpl {
 
-    public Skinshifter(UUID ownerId) {
-        super(ownerId, 195, "Skinshifter", Rarity.RARE, new CardType[]{CardType.CREATURE}, "{1}{G}");
-        this.expansionSetCode = "M12";
+    public Skinshifter(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{1}{G}");
         this.subtype.add("Human");
         this.subtype.add("Shaman");
 

@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.eldritchmoon;
+package mage.cards.o;
 
 import java.util.UUID;
 import mage.abilities.Ability;
@@ -34,10 +34,10 @@ import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.CreateTokenEffect;
 import mage.abilities.effects.common.continuous.BoostTargetEffect;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Duration;
 import mage.constants.Outcome;
-import mage.constants.Rarity;
 import mage.constants.Zone;
 import mage.game.Game;
 import mage.game.events.GameEvent;
@@ -52,9 +52,8 @@ import mage.target.common.TargetCreaturePermanent;
  */
 public class OtherworldlyOutburst extends CardImpl {
 
-    public OtherworldlyOutburst(UUID ownerId) {
-        super(ownerId, 138, "Otherworldly Outburst", Rarity.COMMON, new CardType[]{CardType.INSTANT}, "{R}");
-        this.expansionSetCode = "EMN";
+    public OtherworldlyOutburst(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.INSTANT},"{R}");
 
         // Target creature gets +1/+0 until end of turn. When that creature dies this turn, put a 3/2 colorless Eldrazi Horror creature token onto the battlefield.
         this.getSpellAbility().addTarget(new TargetCreaturePermanent());

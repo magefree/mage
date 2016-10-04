@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.shadowsoverinnistrad;
+package mage.cards.g;
 
 import java.util.UUID;
 import mage.MageInt;
@@ -36,9 +36,10 @@ import mage.abilities.decorator.ConditionalTriggeredAbility;
 import mage.abilities.effects.common.TransformSourceEffect;
 import mage.abilities.keyword.HasteAbility;
 import mage.abilities.keyword.TransformAbility;
+import mage.cards.v.VildinPackAlpha;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.constants.TargetController;
 
 /**
@@ -47,9 +48,8 @@ import mage.constants.TargetController;
  */
 public class GeierReachBandit extends CardImpl {
 
-    public GeierReachBandit(UUID ownerId) {
-        super(ownerId, 159, "Geier Reach Bandit", Rarity.RARE, new CardType[]{CardType.CREATURE}, "{2}{R}");
-        this.expansionSetCode = "SOI";
+    public GeierReachBandit(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{2}{R}");
         this.subtype.add("Human");
         this.subtype.add("Rogue");
         this.subtype.add("Werewolf");
@@ -57,7 +57,7 @@ public class GeierReachBandit extends CardImpl {
         this.toughness = new MageInt(2);
 
         this.transformable = true;
-        this.secondSideCard = new VildinPackAlpha(ownerId);
+        this.secondSideCardClazz = VildinPackAlpha.class;
 
         // Haste
         this.addAbility(HasteAbility.getInstance());

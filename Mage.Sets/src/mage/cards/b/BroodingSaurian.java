@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.commander2013;
+package mage.cards.b;
 
 import java.util.Iterator;
 import java.util.UUID;
@@ -35,11 +35,11 @@ import mage.abilities.Ability;
 import mage.abilities.common.BeginningOfEndStepTriggeredAbility;
 import mage.abilities.effects.ContinuousEffectImpl;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Duration;
 import mage.constants.Layer;
 import mage.constants.Outcome;
-import mage.constants.Rarity;
 import mage.constants.SubLayer;
 import mage.constants.TargetController;
 import mage.filter.FilterPermanent;
@@ -57,9 +57,8 @@ import mage.players.Player;
  */
 public class BroodingSaurian extends CardImpl {
 
-    public BroodingSaurian(UUID ownerId) {
-        super(ownerId, 138, "Brooding Saurian", Rarity.RARE, new CardType[]{CardType.CREATURE}, "{2}{G}{G}");
-        this.expansionSetCode = "C13";
+    public BroodingSaurian(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{2}{G}{G}");
         this.subtype.add("Lizard");
 
         this.power = new MageInt(4);

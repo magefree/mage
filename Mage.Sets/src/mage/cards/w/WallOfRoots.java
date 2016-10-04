@@ -25,11 +25,10 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.timeshifted;
+package mage.cards.w;
 
 import java.util.UUID;
 import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.constants.Zone;
 import mage.MageInt;
 import mage.Mana;
@@ -40,6 +39,7 @@ import mage.abilities.effects.common.BasicManaEffect;
 import mage.abilities.keyword.DefenderAbility;
 import mage.abilities.mana.ActivateOncePerTurnManaAbility;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.counters.BoostCounter;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
@@ -50,9 +50,8 @@ import mage.game.permanent.Permanent;
  */
 public class WallOfRoots extends CardImpl {
 
-    public WallOfRoots(UUID ownerId) {
-        super(ownerId, 89, "Wall of Roots", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{1}{G}");
-        this.expansionSetCode = "TSB";
+    public WallOfRoots(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{1}{G}");
         this.subtype.add("Plant");
         this.subtype.add("Wall");
 

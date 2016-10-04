@@ -26,11 +26,10 @@
  *  or implied, of BetaSteward_at_googlemail.com.
  */
 
-package mage.sets.scarsofmirrodin;
+package mage.cards.n;
 
 import java.util.UUID;
 import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.constants.Zone;
 import mage.abilities.Ability;
 import mage.abilities.common.EntersBattlefieldAbility;
@@ -40,6 +39,7 @@ import mage.abilities.costs.common.TapSourceCost;
 import mage.abilities.effects.common.counter.AddCountersSourceEffect;
 import mage.abilities.effects.common.LoseLifeTargetEffect;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.counters.CounterType;
 import mage.target.TargetPlayer;
 
@@ -49,9 +49,8 @@ import mage.target.TargetPlayer;
  */
 public class NecrogenCenser extends CardImpl {
 
-    public NecrogenCenser (UUID ownerId) {
-        super(ownerId, 184, "Necrogen Censer", Rarity.COMMON, new CardType[]{CardType.ARTIFACT}, "{3}");
-        this.expansionSetCode = "SOM";
+    public NecrogenCenser (UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.ARTIFACT},"{3}");
         this.addAbility(new EntersBattlefieldAbility(new AddCountersSourceEffect(CounterType.CHARGE.createInstance(2)), "Necrogen Censer enters the battlefield with two charge counters on it"));
         Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new LoseLifeTargetEffect(2), new TapSourceCost());
         ability.addCost(new RemoveCountersSourceCost(CounterType.CHARGE.createInstance(1)));

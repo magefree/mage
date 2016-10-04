@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.commander2014;
+package mage.cards.g;
 
 import java.util.UUID;
 import mage.MageInt;
@@ -39,8 +39,8 @@ import mage.abilities.dynamicvalue.common.SacrificeCostCreaturesPower;
 import mage.abilities.effects.Effect;
 import mage.abilities.effects.common.CreateTokenEffect;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.constants.Zone;
 import mage.filter.common.FilterControlledCreaturePermanent;
 import mage.filter.predicate.permanent.AnotherPredicate;
@@ -60,9 +60,8 @@ public class GhoulcallerGisa extends CardImpl {
         filter.add(new AnotherPredicate());
     }
 
-    public GhoulcallerGisa(UUID ownerId) {
-        super(ownerId, 23, "Ghoulcaller Gisa", Rarity.MYTHIC, new CardType[]{CardType.CREATURE}, "{3}{B}{B}");
-        this.expansionSetCode = "C14";
+    public GhoulcallerGisa(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{3}{B}{B}");
         this.supertype.add("Legendary");
         this.subtype.add("Human");
         this.subtype.add("Wizard");

@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.conflux;
+package mage.cards.b;
 
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleStaticAbility;
@@ -36,6 +36,7 @@ import mage.abilities.effects.ContinuousRuleModifyingEffectImpl;
 import mage.abilities.effects.OneShotEffect;
 import mage.cards.Card;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.*;
 import mage.game.Game;
 import mage.game.events.GameEvent;
@@ -53,9 +54,8 @@ import java.util.UUID;
  */
 public class Banefire extends CardImpl {
 
-    public Banefire(UUID ownerId) {
-        super(ownerId, 58, "Banefire", Rarity.RARE, new CardType[]{CardType.SORCERY}, "{X}{R}");
-        this.expansionSetCode = "CON";
+    public Banefire(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{X}{R}");
 
         // Banefire deals X damage to target creature or player.       
         this.getSpellAbility().addEffect(new BaneFireEffect());

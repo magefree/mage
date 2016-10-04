@@ -25,15 +25,15 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.returntoravnica;
+package mage.cards.c;
 
 import java.util.UUID;
 
 import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.abilities.Ability;
 import mage.abilities.effects.OneShotEffect;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.Outcome;
 import mage.counters.CounterType;
 import mage.filter.common.FilterCreaturePermanent;
@@ -48,9 +48,8 @@ import mage.target.common.TargetCreaturePermanent;
  */
 public class CommonBond extends CardImpl {
 
-    public CommonBond(UUID ownerId) {
-        super(ownerId, 151, "Common Bond", Rarity.COMMON, new CardType[]{CardType.INSTANT}, "{1}{G}{W}");
-        this.expansionSetCode = "RTR";
+    public CommonBond(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.INSTANT},"{1}{G}{W}");
 
 
         // Put a +1/+1 counter on target creature. Put a +1/+1 counter on target creature.

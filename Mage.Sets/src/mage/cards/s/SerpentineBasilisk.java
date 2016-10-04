@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.onslaught;
+package mage.cards.s;
 
 import java.util.UUID;
 import mage.MageInt;
@@ -36,8 +36,8 @@ import mage.abilities.effects.common.CreateDelayedTriggeredAbilityEffect;
 import mage.abilities.effects.common.DestroyTargetEffect;
 import mage.abilities.keyword.MorphAbility;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.Rarity;
 
 /**
  *
@@ -45,9 +45,8 @@ import mage.constants.Rarity;
  */
 public class SerpentineBasilisk extends CardImpl {
 
-    public SerpentineBasilisk(UUID ownerId) {
-        super(ownerId, 280, "Serpentine Basilisk", Rarity.UNCOMMON, new CardType[]{CardType.CREATURE}, "{2}{G}{G}");
-        this.expansionSetCode = "ONS";
+    public SerpentineBasilisk(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{2}{G}{G}");
         this.subtype.add("Basilisk");
         this.power = new MageInt(2);
         this.toughness = new MageInt(3);

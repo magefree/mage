@@ -25,16 +25,16 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.gatecrash;
+package mage.cards.t;
 
 import java.util.UUID;
 
 import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.abilities.effects.common.continuous.BoostAllEffect;
 import mage.abilities.effects.common.continuous.GainAbilityAllEffect;
 import mage.abilities.keyword.ReachAbility;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.Duration;
 import mage.constants.TargetController;
 import mage.filter.common.FilterCreaturePermanent;
@@ -51,9 +51,8 @@ public class TowerDefense extends CardImpl {
         filter.add(new ControllerPredicate(TargetController.YOU));
     }
 
-    public TowerDefense(UUID ownerId) {
-        super(ownerId, 137, "Tower Defense", Rarity.UNCOMMON, new CardType[]{CardType.INSTANT}, "{1}{G}");
-        this.expansionSetCode = "GTC";
+    public TowerDefense(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.INSTANT},"{1}{G}");
 
 
         // Creatures you control get +0/+5 and gain reach until end of turn.

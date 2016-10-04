@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.darksteel;
+package mage.cards.d;
 
 import java.util.UUID;
 import mage.abilities.Ability;
@@ -35,8 +35,8 @@ import mage.abilities.costs.mana.GenericManaCost;
 import mage.abilities.effects.keyword.ScryEffect;
 import mage.abilities.keyword.IndestructibleAbility;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.constants.Zone;
 
 /**
@@ -45,9 +45,8 @@ import mage.constants.Zone;
  */
 public class DarksteelPendant extends CardImpl {
 
-    public DarksteelPendant(UUID ownerId) {
-        super(ownerId, 113, "Darksteel Pendant", Rarity.COMMON, new CardType[]{CardType.ARTIFACT}, "{2}");
-        this.expansionSetCode = "DST";
+    public DarksteelPendant(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.ARTIFACT},"{2}");
 
         // Darksteel Pendant is indestructible.
         this.addAbility(IndestructibleAbility.getInstance());

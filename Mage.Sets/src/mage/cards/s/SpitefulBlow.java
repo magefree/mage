@@ -25,14 +25,14 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.journeyintonyx;
+package mage.cards.s;
 
 import java.util.UUID;
 import mage.abilities.effects.Effect;
 import mage.abilities.effects.common.DestroyTargetEffect;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.target.common.TargetCreaturePermanent;
 import mage.target.common.TargetLandPermanent;
 
@@ -42,9 +42,8 @@ import mage.target.common.TargetLandPermanent;
  */
 public class SpitefulBlow extends CardImpl {
 
-    public SpitefulBlow(UUID ownerId) {
-        super(ownerId, 83, "Spiteful Blow", Rarity.UNCOMMON, new CardType[]{CardType.SORCERY}, "{4}{B}{B}");
-        this.expansionSetCode = "JOU";
+    public SpitefulBlow(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{4}{B}{B}");
 
         // Destroy target creature and target land.
         Effect effect = new DestroyTargetEffect(false, true);

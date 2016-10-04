@@ -25,13 +25,13 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.magic2014;
+package mage.cards.c;
 
 import java.util.UUID;
 import mage.abilities.effects.common.SacrificeEffect;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.filter.common.FilterAttackingOrBlockingCreature;
 import mage.target.TargetPlayer;
 
@@ -43,9 +43,8 @@ public class CelestialFlare extends CardImpl {
 
     private static final FilterAttackingOrBlockingCreature filter = new FilterAttackingOrBlockingCreature("attacking or blocking creature");
 
-    public CelestialFlare(UUID ownerId) {
-        super(ownerId, 12, "Celestial Flare", Rarity.COMMON, new CardType[]{CardType.INSTANT}, "{W}{W}");
-        this.expansionSetCode = "M14";
+    public CelestialFlare(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.INSTANT},"{W}{W}");
 
 
         // Target player sacrifices an attacking or blocking creature.

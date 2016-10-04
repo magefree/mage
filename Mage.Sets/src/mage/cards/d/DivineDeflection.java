@@ -25,16 +25,16 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.avacynrestored;
+package mage.cards.d;
 
 import java.util.UUID;
 import mage.abilities.Ability;
 import mage.abilities.effects.PreventionEffectData;
 import mage.abilities.effects.PreventionEffectImpl;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Duration;
-import mage.constants.Rarity;
 import mage.game.Game;
 import mage.game.events.GameEvent;
 import mage.game.permanent.Permanent;
@@ -46,9 +46,8 @@ import mage.target.common.TargetCreatureOrPlayer;
  */
 public class DivineDeflection extends CardImpl {
 
-    public DivineDeflection(UUID ownerId) {
-        super(ownerId, 18, "Divine Deflection", Rarity.RARE, new CardType[]{CardType.INSTANT}, "{X}{W}");
-        this.expansionSetCode = "AVR";
+    public DivineDeflection(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.INSTANT},"{X}{W}");
 
 
         // Prevent the next X damage that would be dealt to you and/or permanents you control this turn. If damage is prevented this way, Divine Deflection deals that much damage to target creature or player.

@@ -26,13 +26,13 @@
  *  or implied, of BetaSteward_at_googlemail.com.
  */
 
-package mage.sets.darksteel;
+package mage.cards.n;
 
 import java.util.UUID;
 import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.abilities.effects.common.GainLifeEffect;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 
 /**
  *
@@ -40,9 +40,8 @@ import mage.cards.CardImpl;
  */
 public class Nourish extends CardImpl {
 
-    public Nourish (UUID ownerId) {
-        super(ownerId, 78, "Nourish", Rarity.COMMON, new CardType[]{CardType.INSTANT}, "{G}{G}");
-        this.expansionSetCode = "DST";
+    public Nourish (UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.INSTANT},"{G}{G}");
 
         this.getSpellAbility().addEffect(new GainLifeEffect(6));
     }

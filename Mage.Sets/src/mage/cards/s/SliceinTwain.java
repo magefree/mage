@@ -26,14 +26,14 @@
  *  or implied, of BetaSteward_at_googlemail.com.
  */
 
-package mage.sets.scarsofmirrodin;
+package mage.cards.s;
 
 import java.util.UUID;
 import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.abilities.effects.common.DestroyTargetEffect;
 import mage.abilities.effects.common.DrawCardSourceControllerEffect;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.filter.common.FilterArtifactOrEnchantmentPermanent;
 import mage.target.TargetPermanent;
 
@@ -43,9 +43,8 @@ import mage.target.TargetPermanent;
  */
 public class SliceinTwain extends CardImpl {
 
-    public SliceinTwain (UUID ownerId) {
-        super(ownerId, 127, "Slice in Twain", Rarity.UNCOMMON, new CardType[]{CardType.INSTANT}, "{2}{G}{G}");
-        this.expansionSetCode = "SOM";
+    public SliceinTwain (UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.INSTANT},"{2}{G}{G}");
 
         this.getSpellAbility().addEffect(new DestroyTargetEffect());
         this.getSpellAbility().addEffect(new DrawCardSourceControllerEffect(1));

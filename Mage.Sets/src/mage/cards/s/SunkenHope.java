@@ -25,19 +25,19 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.planeshift;
+package mage.cards.s;
 
 import java.util.UUID;
 
 import mage.constants.CardType;
 import mage.constants.Outcome;
-import mage.constants.Rarity;
 import mage.constants.TargetController;
 import mage.constants.Zone;
 import mage.abilities.Ability;
 import mage.abilities.common.BeginningOfUpkeepTriggeredAbility;
 import mage.abilities.effects.OneShotEffect;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.filter.common.FilterControlledCreaturePermanent;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
@@ -51,9 +51,8 @@ import mage.target.common.TargetControlledPermanent;
  */
 public class SunkenHope extends CardImpl {
 
-    public SunkenHope(UUID ownerId) {
-        super(ownerId, 37, "Sunken Hope", Rarity.RARE, new CardType[]{CardType.ENCHANTMENT}, "{3}{U}{U}");
-        this.expansionSetCode = "PLS";
+    public SunkenHope(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.ENCHANTMENT},"{3}{U}{U}");
 
 
         // At the beginning of each player's upkeep, that player returns a creature he or she controls to its owner's hand.

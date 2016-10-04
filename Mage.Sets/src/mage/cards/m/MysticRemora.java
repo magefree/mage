@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.iceage;
+package mage.cards.m;
 
 import java.util.UUID;
 import mage.MageObject;
@@ -33,13 +33,13 @@ import mage.abilities.costs.mana.ManaCostsImpl;
 import mage.abilities.keyword.CumulativeUpkeepAbility;
 import mage.game.stack.Spell;
 import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.abilities.Ability;
 import mage.abilities.TriggeredAbilityImpl;
 import mage.abilities.costs.Cost;
 import mage.abilities.costs.mana.GenericManaCost;
 import mage.abilities.effects.OneShotEffect;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.Outcome;
 import mage.constants.Zone;
 import mage.game.Game;
@@ -54,9 +54,8 @@ import mage.target.targetpointer.FixedTarget;
  */
 public class MysticRemora extends CardImpl {
 
-    public MysticRemora(UUID ownerId) {
-        super(ownerId, 87, "Mystic Remora", Rarity.COMMON, new CardType[]{CardType.ENCHANTMENT}, "{U}");
-        this.expansionSetCode = "ICE";
+    public MysticRemora(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.ENCHANTMENT},"{U}");
 
         // Cumulative upkeep {1}
         this.addAbility(new CumulativeUpkeepAbility(new ManaCostsImpl("{1}")));

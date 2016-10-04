@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.odyssey;
+package mage.cards.s;
 
 import java.util.UUID;
 import mage.MageInt;
@@ -40,9 +40,9 @@ import mage.abilities.effects.common.CreateDelayedTriggeredAbilityEffect;
 import mage.abilities.effects.common.DestroyTargetEffect;
 import mage.abilities.effects.common.combat.MustBeBlockedByAllSourceEffect;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.AbilityWord;
 import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.constants.Zone;
 
 /**
@@ -51,9 +51,8 @@ import mage.constants.Zone;
  */
 public class StoneTongueBasilisk extends CardImpl {
 
-    public StoneTongueBasilisk(UUID ownerId) {
-        super(ownerId, 276, "Stone-Tongue Basilisk", Rarity.RARE, new CardType[]{CardType.CREATURE}, "{4}{G}{G}{G}");
-        this.expansionSetCode = "ODY";
+    public StoneTongueBasilisk(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{4}{G}{G}{G}");
         this.subtype.add("Basilisk");
         this.power = new MageInt(4);
         this.toughness = new MageInt(5);

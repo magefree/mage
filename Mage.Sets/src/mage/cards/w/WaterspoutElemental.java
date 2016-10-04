@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.planeshift;
+package mage.cards.w;
 
 import java.util.UUID;
 import mage.MageInt;
@@ -37,8 +37,8 @@ import mage.abilities.effects.common.turn.SkipNextTurnSourceEffect;
 import mage.abilities.keyword.FlyingAbility;
 import mage.abilities.keyword.KickerAbility;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.filter.predicate.permanent.AnotherPredicate;
 
@@ -54,9 +54,8 @@ public class WaterspoutElemental extends CardImpl {
         filter.add(new AnotherPredicate());
     }
 
-    public WaterspoutElemental(UUID ownerId) {
-        super(ownerId, 38, "Waterspout Elemental", Rarity.RARE, new CardType[]{CardType.CREATURE}, "{3}{U}{U}");
-        this.expansionSetCode = "PLS";
+    public WaterspoutElemental(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{3}{U}{U}");
         this.subtype.add("Elemental");
         this.power = new MageInt(3);
         this.toughness = new MageInt(4);

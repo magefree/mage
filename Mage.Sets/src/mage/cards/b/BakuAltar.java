@@ -25,12 +25,11 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.betrayersofkamigawa;
+package mage.cards.b;
 
 import java.util.UUID;
 
 import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.common.SpellCastControllerTriggeredAbility;
@@ -40,6 +39,7 @@ import mage.abilities.costs.mana.GenericManaCost;
 import mage.abilities.effects.common.CreateTokenEffect;
 import mage.abilities.effects.common.counter.AddCountersSourceEffect;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.Zone;
 import mage.counters.CounterType;
 import mage.filter.common.FilterSpiritOrArcaneCard;
@@ -53,9 +53,8 @@ public class BakuAltar extends CardImpl {
 
     private static final FilterSpiritOrArcaneCard filter = new FilterSpiritOrArcaneCard();
 
-    public BakuAltar(UUID ownerId) {
-        super(ownerId, 152, "Baku Altar", Rarity.RARE, new CardType[]{CardType.ARTIFACT}, "{2}");
-        this.expansionSetCode = "BOK";
+    public BakuAltar(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.ARTIFACT},"{2}");
         // Whenever you cast a Spirit or Arcane spell, you may put a ki counter on Baku Altar.
         this.addAbility(new SpellCastControllerTriggeredAbility(new AddCountersSourceEffect(CounterType.KI.createInstance(1)), filter, true));
         // {2}, {tap}, Remove a ki counter from Baku Altar: Put a 1/1 colorless Spirit creature token onto the battlefield.

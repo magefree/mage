@@ -26,17 +26,17 @@
  *  or implied, of BetaSteward_at_googlemail.com.
  */
 
-package mage.sets.scarsofmirrodin;
+package mage.cards.b;
 
 import java.util.UUID;
 
 import mage.abilities.effects.common.LoseLifeOpponentsEffect;
 import mage.abilities.keyword.SwampwalkAbility;
 import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.MageInt;
 import mage.abilities.common.DiesTriggeredAbility;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 
 /**
  *
@@ -44,9 +44,8 @@ import mage.cards.CardImpl;
  */
 public class Blistergrub extends CardImpl {
 
-    public Blistergrub (UUID ownerId) {
-        super(ownerId, 56, "Blistergrub", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{2}{B}");
-        this.expansionSetCode = "SOM";
+    public Blistergrub (UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{2}{B}");
         this.subtype.add("Horror");
 
         this.power = new MageInt(2);

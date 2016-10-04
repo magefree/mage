@@ -25,12 +25,11 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.urzassaga;
+package mage.cards.b;
 
 import java.util.UUID;
 
 import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.constants.Zone;
 import mage.abilities.Ability;
 import mage.abilities.common.BeginningOfUpkeepTriggeredAbility;
@@ -42,6 +41,7 @@ import mage.abilities.effects.common.counter.AddCountersSourceEffect;
 import mage.abilities.effects.common.DrawCardSourceControllerEffect;
 import mage.abilities.dynamicvalue.common.CountersSourceCount;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.TargetController;
 import mage.counters.CounterType;
 
@@ -51,9 +51,8 @@ import mage.counters.CounterType;
  */
 public class BarrinsCodex extends CardImpl {
 
-    public BarrinsCodex(UUID ownerId) {
-        super(ownerId, 286, "Barrin's Codex", Rarity.RARE, new CardType[]{CardType.ARTIFACT}, "{4}");
-        this.expansionSetCode = "USG";
+    public BarrinsCodex(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.ARTIFACT},"{4}");
 
         //At the beginning of your upkeep, you may put a page counter on Barrin's Codex.
         this.addAbility(new BeginningOfUpkeepTriggeredAbility(new AddCountersSourceEffect(CounterType.PAGE.createInstance()), TargetController.YOU, true));

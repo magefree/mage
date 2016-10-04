@@ -25,12 +25,11 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.magic2012;
+package mage.cards.a;
 
 import java.util.UUID;
 import mage.constants.CardType;
 import mage.constants.Outcome;
-import mage.constants.Rarity;
 import mage.constants.Zone;
 import mage.abilities.Ability;
 import mage.abilities.common.OnEventTriggeredAbility;
@@ -40,6 +39,7 @@ import mage.abilities.effects.common.AttachEffect;
 import mage.abilities.effects.common.combat.CantBlockAttackActivateAttachedEffect;
 import mage.abilities.keyword.EnchantAbility;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.game.Game;
 import mage.game.events.GameEvent.EventType;
 import mage.game.permanent.Permanent;
@@ -52,9 +52,8 @@ import mage.target.common.TargetCreaturePermanent;
  */
 public class ArachnusWeb extends CardImpl {
 
-    public ArachnusWeb(UUID ownerId) {
-        super(ownerId, 163, "Arachnus Web", Rarity.COMMON, new CardType[]{CardType.ENCHANTMENT}, "{2}{G}");
-        this.expansionSetCode = "M12";
+    public ArachnusWeb(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.ENCHANTMENT},"{2}{G}");
         this.subtype.add("Aura");
 
 

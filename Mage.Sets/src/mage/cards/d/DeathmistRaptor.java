@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.dragonsoftarkir;
+package mage.cards.d;
 
 import java.util.UUID;
 import mage.MageInt;
@@ -38,9 +38,9 @@ import mage.abilities.keyword.DeathtouchAbility;
 import mage.abilities.keyword.MorphAbility;
 import mage.cards.Card;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Outcome;
-import mage.constants.Rarity;
 import mage.constants.Zone;
 import mage.filter.common.FilterControlledPermanent;
 import mage.game.Game;
@@ -52,9 +52,8 @@ import mage.players.Player;
  */
 public class DeathmistRaptor extends CardImpl {
 
-    public DeathmistRaptor(UUID ownerId) {
-        super(ownerId, 180, "Deathmist Raptor", Rarity.MYTHIC, new CardType[]{CardType.CREATURE}, "{1}{G}{G}");
-        this.expansionSetCode = "DTK";
+    public DeathmistRaptor(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{1}{G}{G}");
         this.subtype.add("Lizard");
         this.subtype.add("Beast");
         this.power = new MageInt(3);

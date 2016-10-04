@@ -26,16 +26,16 @@
 * or implied, of BetaSteward_at_googlemail.com.
 */
 
-package mage.sets.urzassaga;
+package mage.cards.r;
 
 import java.util.UUID;
 import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.abilities.common.EntersBattlefieldTappedAbility;
 import mage.abilities.costs.mana.ManaCostsImpl;
 import mage.abilities.keyword.CyclingAbility;
 import mage.abilities.mana.BlueManaAbility;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 
 /**
  *
@@ -43,9 +43,8 @@ import mage.cards.CardImpl;
  */
 public class RemoteIsle extends CardImpl {
 
-    public RemoteIsle(UUID ownerId) {
-        super(ownerId, 324, "Remote Isle", Rarity.COMMON, new CardType[]{CardType.LAND}, "");
-        this.expansionSetCode = "USG";
+    public RemoteIsle(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.LAND},"");
 
         this.addAbility(new EntersBattlefieldTappedAbility());
         this.addAbility(new BlueManaAbility());

@@ -25,17 +25,17 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.riseoftheeldrazi;
+package mage.cards.j;
 
 import java.util.UUID;
 
 import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.EntersBattlefieldTriggeredAbility;
 import mage.abilities.effects.OneShotEffect;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.Outcome;
 import mage.constants.TargetController;
 import mage.filter.common.FilterCreaturePermanent;
@@ -52,9 +52,8 @@ import mage.target.common.TargetCreaturePermanent;
  */
 public class JaddiLifestrider extends CardImpl {
 
-    public JaddiLifestrider(UUID ownerId) {
-        super(ownerId, 189, "Jaddi Lifestrider", Rarity.UNCOMMON, new CardType[]{CardType.CREATURE}, "{4}{G}");
-        this.expansionSetCode = "ROE";
+    public JaddiLifestrider(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{4}{G}");
         this.subtype.add("Elemental");
 
         this.power = new MageInt(2);

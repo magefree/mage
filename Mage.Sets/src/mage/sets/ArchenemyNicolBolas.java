@@ -30,6 +30,8 @@ package mage.sets;
 import java.util.GregorianCalendar;
 import mage.cards.ExpansionSet;
 import mage.constants.SetType;
+import mage.constants.Rarity;
+import java.util.List;
 
 /**
  *
@@ -38,7 +40,7 @@ import mage.constants.SetType;
 
 public class ArchenemyNicolBolas extends ExpansionSet {
 
-    private static final ArchenemyNicolBolas fINSTANCE =  new ArchenemyNicolBolas();
+    private static final ArchenemyNicolBolas fINSTANCE = new ArchenemyNicolBolas();
 
     public static ArchenemyNicolBolas getInstance() {
         return fINSTANCE;

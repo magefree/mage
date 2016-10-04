@@ -26,12 +26,11 @@
  *  or implied, of BetaSteward_at_googlemail.com.
  */
 
-package mage.sets.newphyrexia;
+package mage.cards.s;
 
 import java.util.UUID;
 
 import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.abilities.Ability;
 import mage.abilities.common.EntersBattlefieldAbility;
 import mage.abilities.common.SimpleActivatedAbility;
@@ -41,6 +40,7 @@ import mage.abilities.costs.mana.GenericManaCost;
 import mage.abilities.effects.common.counter.AddCountersSourceEffect;
 import mage.abilities.effects.common.counter.AddCountersTargetEffect;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.Zone;
 import mage.counters.CounterType;
 import mage.target.common.TargetArtifactPermanent;
@@ -51,9 +51,8 @@ import mage.target.common.TargetArtifactPermanent;
  */
 public class SurgeNode extends CardImpl {
 
-    public SurgeNode (UUID ownerId) {
-        super(ownerId, 160, "Surge Node", Rarity.UNCOMMON, new CardType[]{CardType.ARTIFACT}, "{1}");
-        this.expansionSetCode = "NPH";
+    public SurgeNode (UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.ARTIFACT},"{1}");
         this.addAbility(new EntersBattlefieldAbility(new AddCountersSourceEffect(new AddCountersSourceEffect(CounterType.CHARGE.createInstance(6))), "{this} gets six charge counters"));
         Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new AddCountersTargetEffect(CounterType.CHARGE.createInstance()), new GenericManaCost(1));
         ability.addCost(new TapSourceCost());

@@ -26,14 +26,14 @@
  *  or implied, of BetaSteward_at_googlemail.com.
  */
 
-package mage.sets.magic2012;
+package mage.cards.t;
 
 import java.util.UUID;
 import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.abilities.effects.common.DamageTargetEffect;
 import mage.abilities.effects.common.GainLifeEffect;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.target.TargetPlayer;
 
 /**
@@ -42,9 +42,8 @@ import mage.target.TargetPlayer;
  */
 public class TasteOfBlood extends CardImpl {
 
-    public TasteOfBlood (UUID ownerId) {
-        super(ownerId, 113, "Taste of Blood", Rarity.COMMON, new CardType[]{CardType.SORCERY}, "{B}");
-        this.expansionSetCode = "M12";
+    public TasteOfBlood (UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{B}");
 
         this.getSpellAbility().addEffect(new DamageTargetEffect(1));
         this.getSpellAbility().addEffect(new GainLifeEffect(1));

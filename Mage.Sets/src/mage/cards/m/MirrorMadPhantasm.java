@@ -25,12 +25,11 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.innistrad;
+package mage.cards.m;
 
 import java.util.UUID;
 import mage.constants.CardType;
 import mage.constants.Outcome;
-import mage.constants.Rarity;
 import mage.constants.Zone;
 import mage.MageInt;
 import mage.abilities.Ability;
@@ -40,6 +39,7 @@ import mage.abilities.effects.OneShotEffect;
 import mage.abilities.keyword.FlyingAbility;
 import mage.cards.Card;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.cards.Cards;
 import mage.cards.CardsImpl;
 import mage.game.Game;
@@ -52,9 +52,8 @@ import mage.players.Player;
  */
 public class MirrorMadPhantasm extends CardImpl {
 
-    public MirrorMadPhantasm(UUID ownerId) {
-        super(ownerId, 68, "Mirror-Mad Phantasm", Rarity.MYTHIC, new CardType[]{CardType.CREATURE}, "{3}{U}{U}");
-        this.expansionSetCode = "ISD";
+    public MirrorMadPhantasm(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{3}{U}{U}");
         this.subtype.add("Spirit");
 
         this.power = new MageInt(5);

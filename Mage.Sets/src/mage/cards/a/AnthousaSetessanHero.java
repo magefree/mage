@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.theros;
+package mage.cards.a;
 
 import java.util.UUID;
 import mage.MageInt;
@@ -33,9 +33,9 @@ import mage.abilities.Ability;
 import mage.abilities.effects.common.continuous.BecomesCreatureTargetEffect;
 import mage.abilities.keyword.HeroicAbility;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Duration;
-import mage.constants.Rarity;
 import mage.filter.common.FilterControlledLandPermanent;
 import mage.game.permanent.token.Token;
 import mage.target.common.TargetControlledPermanent;
@@ -46,9 +46,8 @@ import mage.target.common.TargetControlledPermanent;
  */
 public class AnthousaSetessanHero extends CardImpl {
 
-    public AnthousaSetessanHero(UUID ownerId) {
-        super(ownerId, 149, "Anthousa, Setessan Hero", Rarity.RARE, new CardType[]{CardType.CREATURE}, "{3}{G}{G}");
-        this.expansionSetCode = "THS";
+    public AnthousaSetessanHero(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{3}{G}{G}");
         this.supertype.add("Legendary");
         this.subtype.add("Human");
         this.subtype.add("Warrior");

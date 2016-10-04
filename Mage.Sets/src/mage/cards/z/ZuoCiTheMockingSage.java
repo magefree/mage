@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.portalthreekingdoms;
+package mage.cards.z;
 
 import java.util.UUID;
 import mage.MageInt;
@@ -34,9 +34,9 @@ import mage.abilities.effects.common.combat.CantBeBlockedByCreaturesSourceEffect
 import mage.abilities.keyword.HexproofAbility;
 import mage.abilities.keyword.HorsemanshipAbility;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Duration;
-import mage.constants.Rarity;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.filter.predicate.mageobject.AbilityPredicate;
 
@@ -52,9 +52,8 @@ public class ZuoCiTheMockingSage extends CardImpl {
         filter.add(new AbilityPredicate(HorsemanshipAbility.class));
     }
 
-    public ZuoCiTheMockingSage(UUID ownerId) {
-        super(ownerId, 165, "Zuo Ci, the Mocking Sage", Rarity.RARE, new CardType[]{CardType.CREATURE}, "{1}{G}{G}");
-        this.expansionSetCode = "PTK";
+    public ZuoCiTheMockingSage(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{1}{G}{G}");
         this.supertype.add("Legendary");
         this.subtype.add("Human");
         this.subtype.add("Advisor");

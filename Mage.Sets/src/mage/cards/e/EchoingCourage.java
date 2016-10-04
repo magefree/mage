@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.modernmasters;
+package mage.cards.e;
 
 import java.util.UUID;
 import mage.abilities.Ability;
@@ -33,10 +33,10 @@ import mage.abilities.effects.ContinuousEffect;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.continuous.BoostAllEffect;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Duration;
 import mage.constants.Outcome;
-import mage.constants.Rarity;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.filter.predicate.mageobject.NamePredicate;
 import mage.filter.predicate.permanent.PermanentIdPredicate;
@@ -50,9 +50,8 @@ import mage.target.common.TargetCreaturePermanent;
  */
 public class EchoingCourage extends CardImpl {
 
-    public EchoingCourage(UUID ownerId) {
-        super(ownerId, 143, "Echoing Courage", Rarity.COMMON, new CardType[]{CardType.INSTANT}, "{1}{G}");
-        this.expansionSetCode = "MMA";
+    public EchoingCourage(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.INSTANT},"{1}{G}");
 
 
         // Target creature and all other creatures with the same name as that creature get +2/+2 until end of turn.

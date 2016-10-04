@@ -25,15 +25,15 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.eldritchmoon;
+package mage.cards.d;
 
 import java.util.UUID;
 import mage.abilities.effects.Effect;
 import mage.abilities.effects.common.ExileTargetForSourceEffect;
 import mage.abilities.effects.common.ReturnToBattlefieldUnderYourControlTargetEffect;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.filter.common.FilterControlledCreaturePermanent;
 import mage.target.common.TargetControlledCreaturePermanent;
 
@@ -43,9 +43,8 @@ import mage.target.common.TargetControlledCreaturePermanent;
  */
 public class Displace extends CardImpl {
 
-    public Displace(UUID ownerId) {
-        super(ownerId, 55, "Displace", Rarity.COMMON, new CardType[]{CardType.INSTANT}, "{2}{U}");
-        this.expansionSetCode = "EMN";
+    public Displace(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.INSTANT},"{2}{U}");
 
         // Exile up to two target creatures you control, then return those cards to the battlefield under their owner's control.
         this.getSpellAbility().addTarget(new TargetControlledCreaturePermanent(0, 2, new FilterControlledCreaturePermanent("creatures you control"), false));

@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.commander;
+package mage.cards.d;
 
 import java.util.UUID;
 import mage.MageInt;
@@ -36,8 +36,8 @@ import mage.abilities.decorator.ConditionalTriggeredAbility;
 import mage.abilities.effects.common.DestroyAllEffect;
 import mage.abilities.effects.common.TapAllEffect;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.constants.TargetController;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.filter.predicate.permanent.AnotherPredicate;
@@ -60,9 +60,8 @@ public class DreadCacodemon extends CardImpl {
         otherCreaturesYouControl.add(new AnotherPredicate());
     }
 	
-    public DreadCacodemon(UUID ownerId) {        
-        super(ownerId, 79, "Dread Cacodemon", Rarity.RARE, new CardType[]{CardType.CREATURE}, "{7}{B}{B}{B}");
-        this.expansionSetCode = "CMD";
+    public DreadCacodemon(UUID ownerId, CardSetInfo setInfo) {        
+        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{7}{B}{B}{B}");
         this.subtype.add("Demon");
         this.power = new MageInt(8);
         this.toughness = new MageInt(8);

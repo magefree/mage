@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.dragonsoftarkir;
+package mage.cards.s;
 
 import java.util.UUID;
 import mage.MageInt;
@@ -37,8 +37,8 @@ import mage.abilities.effects.common.CounterTargetEffect;
 import mage.abilities.keyword.FlyingAbility;
 import mage.abilities.keyword.MorphAbility;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.filter.FilterSpell;
 import mage.filter.predicate.Predicates;
 import mage.filter.predicate.mageobject.CardTypePredicate;
@@ -57,9 +57,8 @@ public class StratusDancer extends CardImpl {
                 new CardTypePredicate(CardType.SORCERY)));
     }
 
-    public StratusDancer(UUID ownerId) {
-        super(ownerId, 80, "Stratus Dancer", Rarity.RARE, new CardType[]{CardType.CREATURE}, "{1}{U}");
-        this.expansionSetCode = "DTK";
+    public StratusDancer(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{1}{U}");
         this.subtype.add("Djinn");
         this.subtype.add("Monk");
         this.power = new MageInt(2);

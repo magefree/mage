@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.gatecrash;
+package mage.cards.v;
 
 import java.util.UUID;
 import mage.abilities.Ability;
@@ -34,9 +34,9 @@ import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.CipherEffect;
 import mage.abilities.effects.common.ReturnToBattlefieldUnderOwnerControlSourceEffect;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Outcome;
-import mage.constants.Rarity;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.players.Player;
@@ -48,9 +48,8 @@ import mage.target.common.TargetCreaturePermanent;
  */
 public class Voidwalk extends CardImpl {
 
-    public Voidwalk(UUID ownerId) {
-        super(ownerId, 55, "Voidwalk", Rarity.UNCOMMON, new CardType[]{CardType.SORCERY}, "{3}{U}");
-        this.expansionSetCode = "GTC";
+    public Voidwalk(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{3}{U}");
 
         // Exile target creature. Return it to the battlefield under its owner's control at the beginning of the next end step.
         this.getSpellAbility().addEffect(new VoidwalkEffect());

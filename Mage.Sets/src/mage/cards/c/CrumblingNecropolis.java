@@ -26,16 +26,16 @@
 * or implied, of BetaSteward_at_googlemail.com.
 */
 
-package mage.sets.shardsofalara;
+package mage.cards.c;
 
 import java.util.UUID;
 import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.abilities.common.EntersBattlefieldTappedAbility;
 import mage.abilities.mana.BlackManaAbility;
 import mage.abilities.mana.BlueManaAbility;
 import mage.abilities.mana.RedManaAbility;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 
 /**
  *
@@ -43,9 +43,8 @@ import mage.cards.CardImpl;
  */
 public class CrumblingNecropolis extends CardImpl {
 
-    public CrumblingNecropolis(UUID ownerId) {
-        super(ownerId, 222, "Crumbling Necropolis", Rarity.UNCOMMON, new CardType[]{CardType.LAND}, null);
-        this.expansionSetCode = "ALA";
+    public CrumblingNecropolis(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.LAND},null);
         this.addAbility(new EntersBattlefieldTappedAbility());
         this.addAbility(new RedManaAbility());
         this.addAbility(new BlueManaAbility());

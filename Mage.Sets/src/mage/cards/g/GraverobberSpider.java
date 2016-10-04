@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.bornofthegods;
+package mage.cards.g;
 
 import java.util.UUID;
 import mage.MageInt;
@@ -37,9 +37,9 @@ import mage.abilities.dynamicvalue.common.CardsInControllerGraveyardCount;
 import mage.abilities.effects.common.continuous.BoostSourceEffect;
 import mage.abilities.keyword.ReachAbility;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Duration;
-import mage.constants.Rarity;
 import mage.constants.Zone;
 import mage.filter.common.FilterCreatureCard;
 
@@ -49,9 +49,8 @@ import mage.filter.common.FilterCreatureCard;
  */
 public class GraverobberSpider extends CardImpl {
 
-    public GraverobberSpider(UUID ownerId) {
-        super(ownerId, 122, "Graverobber Spider", Rarity.UNCOMMON, new CardType[]{CardType.CREATURE}, "{3}{G}");
-        this.expansionSetCode = "BNG";
+    public GraverobberSpider(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{3}{G}");
         this.subtype.add("Spider");
 
         this.power = new MageInt(2);

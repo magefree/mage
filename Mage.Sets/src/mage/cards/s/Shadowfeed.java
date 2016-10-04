@@ -25,14 +25,14 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.shardsofalara;
+package mage.cards.s;
 
 import java.util.UUID;
 import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.abilities.effects.common.ExileTargetEffect;
 import mage.abilities.effects.common.GainLifeEffect;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.target.common.TargetCardInGraveyard;
 
 /**
@@ -41,9 +41,8 @@ import mage.target.common.TargetCardInGraveyard;
  */
 public class Shadowfeed extends CardImpl {
 
-    public Shadowfeed(UUID ownerId) {
-        super(ownerId, 86, "Shadowfeed", Rarity.COMMON, new CardType[]{CardType.INSTANT}, "{B}");
-        this.expansionSetCode = "ALA";
+    public Shadowfeed(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.INSTANT},"{B}");
 
 
         // Exile target card from a graveyard.

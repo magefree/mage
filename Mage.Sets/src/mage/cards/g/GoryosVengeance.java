@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.betrayersofkamigawa;
+package mage.cards.g;
 
 import java.util.UUID;
 import mage.abilities.Ability;
@@ -40,10 +40,10 @@ import mage.abilities.keyword.HasteAbility;
 import mage.abilities.keyword.SpliceOntoArcaneAbility;
 import mage.cards.Card;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Duration;
 import mage.constants.Outcome;
-import mage.constants.Rarity;
 import mage.constants.Zone;
 import mage.filter.FilterCard;
 import mage.filter.predicate.mageobject.SupertypePredicate;
@@ -65,9 +65,8 @@ public class GoryosVengeance extends CardImpl {
         filter.add(new SupertypePredicate("Legendary"));
     }
 
-    public GoryosVengeance(UUID ownerId) {
-        super(ownerId, 67, "Goryo's Vengeance", Rarity.RARE, new CardType[]{CardType.INSTANT}, "{1}{B}");
-        this.expansionSetCode = "BOK";
+    public GoryosVengeance(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.INSTANT},"{1}{B}");
         this.subtype.add("Arcane");
 
         // Return target legendary creature card from your graveyard to the battlefield. That creature gains haste. Exile it at the beginning of the next end step.

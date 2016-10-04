@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.betrayersofkamigawa;
+package mage.cards.y;
 
 import java.util.List;
 import java.util.UUID;
@@ -34,9 +34,9 @@ import mage.abilities.Ability;
 import mage.abilities.common.LeavesBattlefieldTriggeredAbility;
 import mage.abilities.effects.OneShotEffect;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Outcome;
-import mage.constants.Rarity;
 import mage.filter.common.FilterControlledCreaturePermanent;
 import mage.filter.predicate.Predicates;
 import mage.filter.predicate.mageobject.SubtypePredicate;
@@ -55,9 +55,8 @@ public class YukoraThePrisoner extends CardImpl {
         filter.add(Predicates.not(new SubtypePredicate("Ogre")));
     }
 
-    public YukoraThePrisoner(UUID ownerId) {
-        super(ownerId, 90, "Yukora, the Prisoner", Rarity.RARE, new CardType[]{CardType.CREATURE}, "{2}{B}{B}");
-        this.expansionSetCode = "BOK";
+    public YukoraThePrisoner(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{2}{B}{B}");
         this.supertype.add("Legendary");
         this.subtype.add("Demon");
         this.subtype.add("Spirit");

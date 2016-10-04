@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.shadowsoverinnistrad;
+package mage.cards.p;
 
 import java.util.UUID;
 import mage.MageInt;
@@ -35,8 +35,8 @@ import mage.abilities.effects.Effect;
 import mage.abilities.effects.common.CreateDelayedTriggeredAbilityEffect;
 import mage.abilities.effects.common.ReturnSourceFromGraveyardToBattlefieldEffect;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.constants.TargetController;
 import mage.constants.Zone;
 import mage.filter.FilterPermanent;
@@ -59,9 +59,8 @@ public class PrizedAmalgam extends CardImpl {
         filter.add(new OwnerPredicate(TargetController.YOU));
     }
 
-    public PrizedAmalgam(UUID ownerId) {
-        super(ownerId, 249, "Prized Amalgam", Rarity.RARE, new CardType[]{CardType.CREATURE}, "{1}{U}{B}");
-        this.expansionSetCode = "SOI";
+    public PrizedAmalgam(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{1}{U}{B}");
         this.subtype.add("Zombie");
         this.power = new MageInt(3);
         this.toughness = new MageInt(3);

@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.dragonsoftarkir;
+package mage.cards.r;
 
 import java.util.UUID;
 import mage.MageInt;
@@ -33,8 +33,8 @@ import mage.abilities.common.ExploitCreatureTriggeredAbility;
 import mage.abilities.effects.common.CreateTokenEffect;
 import mage.abilities.keyword.ExploitAbility;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.game.permanent.token.ZombieToken;
 
 /**
@@ -43,9 +43,8 @@ import mage.game.permanent.token.ZombieToken;
  */
 public class RakshasaGravecaller extends CardImpl {
 
-    public RakshasaGravecaller(UUID ownerId) {
-        super(ownerId, 114, "Rakshasa Gravecaller", Rarity.UNCOMMON, new CardType[]{CardType.CREATURE}, "{4}{B}");
-        this.expansionSetCode = "DTK";
+    public RakshasaGravecaller(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{4}{B}");
         this.subtype.add("Cat");
         this.subtype.add("Demon");
         this.power = new MageInt(3);

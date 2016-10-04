@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.magicorigins;
+package mage.cards.a;
 
 import java.util.UUID;
 import mage.MageInt;
@@ -37,11 +37,11 @@ import mage.abilities.effects.OneShotEffect;
 import mage.abilities.keyword.ProwessAbility;
 import mage.cards.Card;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.AsThoughEffectType;
 import mage.constants.CardType;
 import mage.constants.Duration;
 import mage.constants.Outcome;
-import mage.constants.Rarity;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.players.Library;
@@ -54,9 +54,8 @@ import mage.target.targetpointer.FixedTarget;
  */
 public class AbbotOfKeralKeep extends CardImpl {
 
-    public AbbotOfKeralKeep(UUID ownerId) {
-        super(ownerId, 127, "Abbot of Keral Keep", Rarity.RARE, new CardType[]{CardType.CREATURE}, "{1}{R}");
-        this.expansionSetCode = "ORI";
+    public AbbotOfKeralKeep(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{1}{R}");
         this.subtype.add("Human");
         this.subtype.add("Monk");
         this.power = new MageInt(2);

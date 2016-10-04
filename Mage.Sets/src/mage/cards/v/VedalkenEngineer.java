@@ -25,12 +25,11 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.planechase;
+package mage.cards.v;
 
 import java.util.UUID;
 import mage.ConditionalMana;
 import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.MageInt;
 import mage.MageObject;
 import mage.Mana;
@@ -42,6 +41,7 @@ import mage.abilities.effects.common.ManaEffect;
 import mage.abilities.mana.ManaAbility;
 import mage.abilities.mana.builder.ConditionalManaBuilder;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.choices.ChoiceColor;
 import mage.constants.Outcome;
 import mage.constants.Zone;
@@ -54,9 +54,8 @@ import mage.players.Player;
  */
 public class VedalkenEngineer extends CardImpl {
 
-    public VedalkenEngineer(UUID ownerId) {
-        super(ownerId, 15, "Vedalken Engineer", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{1}{U}");
-        this.expansionSetCode = "HOP";
+    public VedalkenEngineer(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{1}{U}");
         this.subtype.add("Vedalken");
         this.subtype.add("Artificer");
 

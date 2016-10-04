@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.portalthreekingdoms;
+package mage.cards.w;
 
 import java.util.UUID;
 import mage.MageInt;
@@ -35,8 +35,8 @@ import mage.abilities.condition.common.MyTurnBeforeAttackersDeclaredCondition;
 import mage.abilities.costs.common.TapSourceCost;
 import mage.abilities.effects.common.DamageTargetEffect;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.constants.Zone;
 import mage.target.common.TargetCreatureOrPlayer;
 
@@ -46,9 +46,8 @@ import mage.target.common.TargetCreatureOrPlayer;
  */
 public class WuLongbowman extends CardImpl {
 
-    public WuLongbowman(UUID ownerId) {
-        super(ownerId, 61, "Wu Longbowman", Rarity.UNCOMMON, new CardType[]{CardType.CREATURE}, "{2}{U}");
-        this.expansionSetCode = "PTK";
+    public WuLongbowman(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{2}{U}");
         this.subtype.add("Human");
         this.subtype.add("Soldier");
         this.subtype.add("Archer");

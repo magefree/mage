@@ -25,15 +25,15 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.timespiral;
+package mage.cards.s;
 
 import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.common.SpellCastControllerTriggeredAbility;
 import mage.abilities.effects.common.SacrificeSourceEffect;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.filter.FilterSpell;
 import mage.filter.predicate.mageobject.CardTypePredicate;
 
@@ -49,9 +49,8 @@ public class SkitteringMonstrosity extends CardImpl {
         filter.add(new CardTypePredicate(CardType.CREATURE));
     }
 
-    public SkitteringMonstrosity(UUID ownerId) {
-        super(ownerId, 129, "Skittering Monstrosity", Rarity.UNCOMMON, new CardType[]{CardType.CREATURE}, "{3}{B}{B}");
-        this.expansionSetCode = "TSP";
+    public SkitteringMonstrosity(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{3}{B}{B}");
         this.subtype.add("Horror");
         this.power = new MageInt(5);
         this.toughness = new MageInt(5);

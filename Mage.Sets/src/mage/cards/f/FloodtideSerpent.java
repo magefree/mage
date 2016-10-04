@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.bornofthegods;
+package mage.cards.f;
 
 import java.util.UUID;
 import mage.MageInt;
@@ -34,8 +34,8 @@ import mage.abilities.costs.common.ReturnToHandChosenControlledPermanentCost;
 import mage.abilities.effects.PayCostToAttackBlockEffectImpl;
 import mage.abilities.effects.common.combat.CantAttackBlockUnlessPaysSourceEffect;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.constants.Zone;
 import mage.filter.common.FilterControlledPermanent;
 import mage.filter.predicate.mageobject.CardTypePredicate;
@@ -53,9 +53,8 @@ public class FloodtideSerpent extends CardImpl {
         filter.add(new CardTypePredicate(CardType.ENCHANTMENT));
     }
 
-    public FloodtideSerpent(UUID ownerId) {
-        super(ownerId, 41, "Floodtide Serpent", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{4}{U}");
-        this.expansionSetCode = "BNG";
+    public FloodtideSerpent(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{4}{U}");
         this.subtype.add("Serpent");
 
         this.power = new MageInt(4);

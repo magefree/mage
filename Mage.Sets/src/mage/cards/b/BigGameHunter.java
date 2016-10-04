@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.planarchaos;
+package mage.cards.b;
 
 import java.util.UUID;
 import mage.MageInt;
@@ -35,8 +35,8 @@ import mage.abilities.costs.mana.ManaCostsImpl;
 import mage.abilities.effects.common.DestroyTargetEffect;
 import mage.abilities.keyword.MadnessAbility;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.filter.Filter;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.filter.predicate.mageobject.PowerPredicate;
@@ -54,9 +54,8 @@ public class BigGameHunter extends CardImpl {
         filter.add(new PowerPredicate(Filter.ComparisonType.GreaterThan, 3));
     }
 
-    public BigGameHunter(UUID ownerId) {
-        super(ownerId, 63, "Big Game Hunter", Rarity.UNCOMMON, new CardType[]{CardType.CREATURE}, "{1}{B}{B}");
-        this.expansionSetCode = "PLC";
+    public BigGameHunter(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{1}{B}{B}");
         this.subtype.add("Human");
         this.subtype.add("Rebel");
         this.subtype.add("Assassin");

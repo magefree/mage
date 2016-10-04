@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.visions;
+package mage.cards.d;
 
 import java.util.UUID;
 import mage.abilities.Ability;
@@ -36,8 +36,8 @@ import mage.abilities.costs.mana.GenericManaCost;
 import mage.abilities.effects.common.CreateTokenEffect;
 import mage.abilities.mana.AnyColorManaAbility;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.constants.Zone;
 import mage.filter.common.FilterControlledPermanent;
 import mage.filter.predicate.mageobject.SubtypePredicate;
@@ -58,9 +58,8 @@ public class DiamondKaleidoscope extends CardImpl {
         filter.add(new SubtypePredicate("Prism"));
     }
 
-    public DiamondKaleidoscope(UUID ownerId) {
-        super(ownerId, 143, "Diamond Kaleidoscope", Rarity.RARE, new CardType[]{CardType.ARTIFACT}, "{4}");
-        this.expansionSetCode = "VIS";
+    public DiamondKaleidoscope(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.ARTIFACT},"{4}");
 
         // {3}, {tap}: Put a 0/1 colorless Prism artifact creature token onto the battlefield.
         Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new CreateTokenEffect(new PrismToken(), 1), new GenericManaCost(3));

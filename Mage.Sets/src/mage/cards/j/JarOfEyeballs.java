@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.darkascension;
+package mage.cards.j;
 
 import java.util.UUID;
 import mage.abilities.Ability;
@@ -39,11 +39,11 @@ import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.counter.AddCountersSourceEffect;
 import mage.cards.Card;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.cards.Cards;
 import mage.cards.CardsImpl;
 import mage.constants.CardType;
 import mage.constants.Outcome;
-import mage.constants.Rarity;
 import mage.constants.Zone;
 import mage.counters.CounterType;
 import mage.filter.FilterCard;
@@ -61,9 +61,8 @@ import mage.target.TargetCard;
  */
 public class JarOfEyeballs extends CardImpl {
 
-    public JarOfEyeballs(UUID ownerId) {
-        super(ownerId, 152, "Jar of Eyeballs", Rarity.RARE, new CardType[]{CardType.ARTIFACT}, "{3}");
-        this.expansionSetCode = "DKA";
+    public JarOfEyeballs(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.ARTIFACT},"{3}");
 
         // Whenever a creature you control dies, put two eyeball counters on Jar of Eyeballs.
         this.addAbility(new JarOfEyeballsTriggeredAbility());

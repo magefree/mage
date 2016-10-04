@@ -25,14 +25,14 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.invasion;
+package mage.cards.o;
 
 import java.util.UUID;
 import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.abilities.common.CantBeCounteredAbility;
 import mage.abilities.effects.common.DestroyAllEffect;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.filter.FilterPermanent;
 import mage.filter.predicate.Predicates;
 import mage.filter.predicate.mageobject.CardTypePredicate;
@@ -52,9 +52,8 @@ public class Obliterate extends CardImpl {
                 new CardTypePredicate(CardType.LAND)));
     }
     
-    public Obliterate(UUID ownerId) {
-        super(ownerId, 156, "Obliterate", Rarity.RARE, new CardType[]{CardType.SORCERY}, "{6}{R}{R}");
-        this.expansionSetCode = "INV";
+    public Obliterate(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{6}{R}{R}");
 
 
         // Obliterate can't be countered.

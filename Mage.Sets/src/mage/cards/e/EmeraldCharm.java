@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.visions;
+package mage.cards.e;
 
 import java.util.UUID;
 import mage.abilities.Mode;
@@ -34,9 +34,9 @@ import mage.abilities.effects.common.UntapTargetEffect;
 import mage.abilities.effects.common.continuous.LoseAbilityTargetEffect;
 import mage.abilities.keyword.FlyingAbility;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Duration;
-import mage.constants.Rarity;
 import mage.filter.common.FilterEnchantmentPermanent;
 import mage.filter.predicate.Predicates;
 import mage.filter.predicate.mageobject.SubtypePredicate;
@@ -56,9 +56,8 @@ public class EmeraldCharm extends CardImpl {
         filter.add(Predicates.not(new SubtypePredicate("Aura")));
     }
 
-    public EmeraldCharm(UUID ownerId) {
-        super(ownerId, 56, "Emerald Charm", Rarity.COMMON, new CardType[]{CardType.INSTANT}, "{G}");
-        this.expansionSetCode = "VIS";
+    public EmeraldCharm(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.INSTANT},"{G}");
 
         // Choose one - Untap target permanent;
         this.getSpellAbility().addEffect(new UntapTargetEffect());

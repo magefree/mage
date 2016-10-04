@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.odyssey;
+package mage.cards.s;
 
 import java.util.UUID;
 import mage.Mana;
@@ -36,8 +36,8 @@ import mage.abilities.effects.common.DrawCardSourceControllerEffect;
 import mage.abilities.mana.ManaAbility;
 import mage.abilities.mana.SimpleManaAbility;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.constants.Zone;
 
 /**
@@ -46,9 +46,8 @@ import mage.constants.Zone;
  */
 public class SungrassEgg extends CardImpl {
 
-    public SungrassEgg(UUID ownerId) {
-        super(ownerId, 311, "Sungrass Egg", Rarity.UNCOMMON, new CardType[]{CardType.ARTIFACT}, "{1}");
-        this.expansionSetCode = "ODY";
+    public SungrassEgg(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.ARTIFACT},"{1}");
 
         // {2}, {tap}, Sacrifice Sungrass Egg: Add {G}{W} to your mana pool. Draw a card.
         ManaAbility ability = new SimpleManaAbility(Zone.BATTLEFIELD, new Mana(0, 1, 0, 1, 0, 0, 0, 0), new ManaCostsImpl("{2}"));

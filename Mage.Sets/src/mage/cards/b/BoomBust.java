@@ -25,15 +25,15 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.planarchaos;
+package mage.cards.b;
 
 import java.util.UUID;
 import mage.abilities.effects.Effect;
 import mage.abilities.effects.common.DestroyAllEffect;
 import mage.abilities.effects.common.DestroyTargetEffect;
+import mage.cards.CardSetInfo;
 import mage.cards.SplitCard;
 import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.constants.TargetController;
 import mage.filter.common.FilterLandPermanent;
 import mage.filter.predicate.permanent.ControllerPredicate;
@@ -49,9 +49,8 @@ public class BoomBust extends SplitCard {
         filter2.add(new ControllerPredicate(TargetController.NOT_YOU));
     }
 
-    public BoomBust(UUID ownerId) {
-        super(ownerId, 112, "Boom", "Bust", Rarity.RARE, new CardType[]{CardType.SORCERY}, "{1}{R}", "{5}{R}", false);
-        this.expansionSetCode = "PLC";
+    public BoomBust(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{1}{R}","{5}{R}",false);
 
         // Boom
         // Destroy target land you control and target land you don't control.

@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.thedark;
+package mage.cards.d;
 
 import java.util.List;
 import java.util.UUID;
@@ -43,12 +43,12 @@ import mage.abilities.effects.common.SacrificeSourceUnlessPaysEffect;
 import mage.abilities.effects.common.SacrificeTargetEffect;
 import mage.abilities.effects.common.continuous.GainAbilityTargetEffect;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.cards.Cards;
 import mage.cards.CardsImpl;
 import mage.constants.CardType;
 import mage.constants.Duration;
 import mage.constants.Outcome;
-import mage.constants.Rarity;
 import mage.constants.TargetController;
 import mage.constants.Zone;
 import mage.filter.common.FilterCreaturePermanent;
@@ -72,9 +72,8 @@ public class DanceOfMany extends CardImpl {
         filter.add(Predicates.not(new TokenPredicate()));
     }
 
-    public DanceOfMany(UUID ownerId) {
-        super(ownerId, 21, "Dance of Many", Rarity.RARE, new CardType[]{CardType.ENCHANTMENT}, "{U}{U}");
-        this.expansionSetCode = "DRK";
+    public DanceOfMany(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.ENCHANTMENT},"{U}{U}");
 
         // When Dance of Many enters the battlefield, put a token that's a copy of target nontoken creature onto the battlefield.
         Ability ability = new EntersBattlefieldTriggeredAbility(new DanceOfManyCreateTokenCopyEffect(), false);

@@ -25,12 +25,11 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.championsofkamigawa;
+package mage.cards.m;
 
 import java.util.UUID;
 
 import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.MageInt;
 import mage.abilities.common.EntersBattlefieldAbility;
 import mage.abilities.common.SimpleActivatedAbility;
@@ -45,6 +44,7 @@ import mage.abilities.effects.common.continuous.GainAbilitySourceEffect;
 import mage.abilities.effects.common.counter.AddCountersSourceEffect;
 import mage.abilities.keyword.IndestructibleAbility;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.Duration;
 import mage.constants.Zone;
 import mage.counters.CounterType;
@@ -58,9 +58,8 @@ public class MyojinOfInfiniteRage extends CardImpl {
 
     private static final FilterLandPermanent filter = new FilterLandPermanent("lands");
 
-    public MyojinOfInfiniteRage(UUID ownerId) {
-        super(ownerId, 181, "Myojin of Infinite Rage", Rarity.RARE, new CardType[]{CardType.CREATURE}, "{7}{R}{R}{R}");
-        this.expansionSetCode = "CHK";
+    public MyojinOfInfiniteRage(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{7}{R}{R}{R}");
         this.supertype.add("Legendary");
         this.subtype.add("Spirit");
 

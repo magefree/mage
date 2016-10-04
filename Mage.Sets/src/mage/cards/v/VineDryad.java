@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.mercadianmasques;
+package mage.cards.v;
 
 import java.util.UUID;
 import mage.MageInt;
@@ -35,8 +35,8 @@ import mage.abilities.costs.common.ExileFromHandCost;
 import mage.abilities.keyword.FlashAbility;
 import mage.abilities.keyword.ForestwalkAbility;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.filter.common.FilterOwnedCard;
 import mage.filter.predicate.Predicates;
 import mage.filter.predicate.mageobject.CardIdPredicate;
@@ -49,9 +49,8 @@ import mage.target.common.TargetCardInHand;
  */
 public class VineDryad extends CardImpl {
 
-    public VineDryad(UUID ownerId) {
-        super(ownerId, 284, "Vine Dryad", Rarity.RARE, new CardType[]{CardType.CREATURE}, "{3}{G}");
-        this.expansionSetCode = "MMQ";
+    public VineDryad(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{3}{G}");
         this.subtype.add("Dryad");
         this.power = new MageInt(1);
         this.toughness = new MageInt(3);

@@ -25,17 +25,17 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.apocalypse;
+package mage.cards.m;
 
 import java.util.UUID;
 
 import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.costs.common.PayLifeCost;
 import mage.abilities.effects.common.PreventDamageToTargetEffect;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.Duration;
 import mage.constants.Zone;
 import mage.target.common.TargetCreaturePermanent;
@@ -46,9 +46,8 @@ import mage.target.common.TargetCreaturePermanent;
  */
 public class MartyrsTomb extends CardImpl {
 
-    public MartyrsTomb(UUID ownerId) {
-        super(ownerId, 110, "Martyrs' Tomb", Rarity.UNCOMMON, new CardType[]{CardType.ENCHANTMENT}, "{2}{W}{B}");
-        this.expansionSetCode = "APC";
+    public MartyrsTomb(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.ENCHANTMENT},"{2}{W}{B}");
 
 
         Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new PreventDamageToTargetEffect(Duration.EndOfTurn, 1), new PayLifeCost(2));

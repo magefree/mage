@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.battleforzendikar;
+package mage.cards.r;
 
 import java.util.UUID;
 import mage.abilities.Mode;
@@ -37,9 +37,9 @@ import mage.abilities.effects.common.continuous.BoostTargetEffect;
 import mage.abilities.effects.common.continuous.GainAbilityTargetEffect;
 import mage.abilities.keyword.DeathtouchAbility;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Duration;
-import mage.constants.Rarity;
 import mage.target.common.TargetCreaturePermanent;
 
 /**
@@ -48,9 +48,8 @@ import mage.target.common.TargetCreaturePermanent;
  */
 public class RetreatToHagra extends CardImpl {
 
-    public RetreatToHagra(UUID ownerId) {
-        super(ownerId, 121, "Retreat to Hagra", Rarity.UNCOMMON, new CardType[]{CardType.ENCHANTMENT}, "{2}{B}");
-        this.expansionSetCode = "BFZ";
+    public RetreatToHagra(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.ENCHANTMENT},"{2}{B}");
 
         // <i>Landfall</i>- Whenever a land enters the battlefield under your control, choose one - Target creature gets +1/+0 and gains deathtouch until end of turn;
         LandfallAbility ability = new LandfallAbility(new BoostTargetEffect(1, 0, Duration.EndOfTurn), false);

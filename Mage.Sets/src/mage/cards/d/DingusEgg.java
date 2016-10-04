@@ -25,15 +25,15 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.limitedalpha;
+package mage.cards.d;
 
 import java.util.UUID;
 import mage.abilities.TriggeredAbilityImpl;
 import mage.abilities.effects.Effect;
 import mage.abilities.effects.common.DamageTargetEffect;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.constants.Zone;
 import mage.game.Game;
 import mage.game.events.GameEvent;
@@ -47,9 +47,8 @@ import mage.target.targetpointer.FixedTarget;
  */
 public class DingusEgg extends CardImpl {
 
-    public DingusEgg(UUID ownerId) {
-        super(ownerId, 241, "Dingus Egg", Rarity.RARE, new CardType[]{CardType.ARTIFACT}, "{4}");
-        this.expansionSetCode = "LEA";
+    public DingusEgg(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.ARTIFACT},"{4}");
 
         // Whenever a land is put into a graveyard from the battlefield, Dingus Egg deals 2 damage to that land's controller.
         this.addAbility(new DingusEggTriggeredAbility());

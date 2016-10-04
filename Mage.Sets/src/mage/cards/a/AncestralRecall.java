@@ -25,13 +25,13 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.limitedalpha;
+package mage.cards.a;
 
 import java.util.UUID;
 import mage.abilities.effects.common.DrawCardTargetEffect;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.target.TargetPlayer;
 
 /**
@@ -40,9 +40,8 @@ import mage.target.TargetPlayer;
  */
 public class AncestralRecall extends CardImpl {
 
-    public AncestralRecall(UUID ownerId) {
-        super(ownerId, 48, "Ancestral Recall", Rarity.RARE, new CardType[]{CardType.INSTANT}, "{U}");
-        this.expansionSetCode = "LEA";
+    public AncestralRecall(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.INSTANT},"{U}");
 
 
         // Target player draws three cards.

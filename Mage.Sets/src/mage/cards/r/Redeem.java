@@ -25,14 +25,14 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.urzassaga;
+package mage.cards.r;
 
 import java.util.UUID;
 import mage.abilities.effects.common.PreventDamageToTargetEffect;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Duration;
-import mage.constants.Rarity;
 import mage.target.common.TargetCreaturePermanent;
 
 /**
@@ -41,9 +41,8 @@ import mage.target.common.TargetCreaturePermanent;
  */
 public class Redeem extends CardImpl {
 
-    public Redeem(UUID ownerId) {
-        super(ownerId, 33, "Redeem", Rarity.UNCOMMON, new CardType[]{CardType.INSTANT}, "{1}{W}");
-        this.expansionSetCode = "USG";
+    public Redeem(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.INSTANT},"{1}{W}");
 
 
         // Prevent all damage that would be dealt this turn to up to two target creatures.

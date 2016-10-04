@@ -25,12 +25,11 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.avacynrestored;
+package mage.cards.s;
 
 import java.util.UUID;
 
 import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.condition.common.PermanentsOnTheBattlefieldCondition;
@@ -40,6 +39,7 @@ import mage.abilities.decorator.ConditionalOneShotEffect;
 import mage.abilities.effects.common.discard.DiscardTargetEffect;
 import mage.abilities.effects.common.LoseLifeTargetEffect;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.Zone;
 import mage.filter.FilterPermanent;
 import mage.filter.predicate.mageobject.SubtypePredicate;
@@ -56,9 +56,8 @@ public class ScrollOfGriselbrand extends CardImpl {
         filter.add(new SubtypePredicate("Demon"));
     }
 
-    public ScrollOfGriselbrand(UUID ownerId) {
-        super(ownerId, 221, "Scroll of Griselbrand", Rarity.COMMON, new CardType[]{CardType.ARTIFACT}, "{1}");
-        this.expansionSetCode = "AVR";
+    public ScrollOfGriselbrand(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.ARTIFACT},"{1}");
 
         // {1}, Sacrifice Scroll of Griselbrand: Target opponent discards a card. If you control a Demon, that player loses 3 life.
         Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new DiscardTargetEffect(1), new GenericManaCost(1));

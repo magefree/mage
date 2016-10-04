@@ -25,15 +25,15 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.starter1999;
+package mage.cards.a;
 
 import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.keyword.FlyingAbility;
 import mage.abilities.keyword.VigilanceAbility;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.Rarity;
 
 /**
  *
@@ -41,9 +41,8 @@ import mage.constants.Rarity;
  */
 public class AngelOfLight extends CardImpl {
 
-    public AngelOfLight(UUID ownerId) {
-        super(ownerId, 1, "Angel of Light", Rarity.UNCOMMON, new CardType[]{CardType.CREATURE}, "{4}{W}");
-        this.expansionSetCode = "S99";
+    public AngelOfLight(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{4}{W}");
         this.subtype.add("Angel");
 
         this.power = new MageInt(3);

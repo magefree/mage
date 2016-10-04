@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.journeyintonyx;
+package mage.cards.n;
 
 import java.util.UUID;
 import mage.abilities.dynamicvalue.DynamicValue;
@@ -34,9 +34,9 @@ import mage.abilities.dynamicvalue.common.SignInversionDynamicValue;
 import mage.abilities.effects.Effect;
 import mage.abilities.effects.common.continuous.BoostTargetEffect;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Duration;
-import mage.constants.Rarity;
 import mage.target.common.TargetCreaturePermanent;
 
 /**
@@ -45,9 +45,8 @@ import mage.target.common.TargetCreaturePermanent;
  */
 public class NightmarishEnd extends CardImpl {
 
-    public NightmarishEnd(UUID ownerId) {
-        super(ownerId, 76, "Nightmarish End", Rarity.UNCOMMON, new CardType[]{CardType.INSTANT}, "{2}{B}");
-        this.expansionSetCode = "JOU";
+    public NightmarishEnd(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.INSTANT},"{2}{B}");
 
 
         // Target creature gets -X/-X until end of turn, where X is the number of cards in your hand.

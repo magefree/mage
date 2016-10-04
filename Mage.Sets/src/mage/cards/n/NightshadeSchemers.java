@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.morningtide;
+package mage.cards.n;
 
 import java.util.UUID;
 import mage.MageInt;
@@ -33,8 +33,8 @@ import mage.abilities.abilityword.KinshipAbility;
 import mage.abilities.effects.common.LoseLifeOpponentsEffect;
 import mage.abilities.keyword.FlyingAbility;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.Rarity;
 
 /**
  *
@@ -42,9 +42,8 @@ import mage.constants.Rarity;
  */
 public class NightshadeSchemers extends CardImpl {
 
-    public NightshadeSchemers(UUID ownerId) {
-        super(ownerId, 69, "Nightshade Schemers", Rarity.UNCOMMON, new CardType[]{CardType.CREATURE}, "{4}{B}");
-        this.expansionSetCode = "MOR";
+    public NightshadeSchemers(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{4}{B}");
         this.subtype.add("Faerie");
         this.subtype.add("Wizard");
 

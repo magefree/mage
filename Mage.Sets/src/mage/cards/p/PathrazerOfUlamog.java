@@ -25,17 +25,17 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.riseoftheeldrazi;
+package mage.cards.p;
 
 import java.util.UUID;
 import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.constants.Zone;
 import mage.MageInt;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.effects.common.combat.CantBeBlockedByOneEffect;
 import mage.abilities.keyword.AnnihilatorAbility;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 
 /**
  *
@@ -43,9 +43,8 @@ import mage.cards.CardImpl;
  */
 public class PathrazerOfUlamog extends CardImpl {
 
-    public PathrazerOfUlamog(UUID ownerId) {
-        super(ownerId, 9, "Pathrazer of Ulamog", Rarity.UNCOMMON, new CardType[]{CardType.CREATURE}, "{11}");
-        this.expansionSetCode = "ROE";
+    public PathrazerOfUlamog(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{11}");
         this.subtype.add("Eldrazi");
 
         this.power = new MageInt(9);

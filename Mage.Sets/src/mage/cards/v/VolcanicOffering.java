@@ -25,16 +25,16 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.commander2014;
+package mage.cards.v;
 
 import java.util.UUID;
 import mage.abilities.Ability;
 import mage.abilities.SpellAbility;
 import mage.abilities.effects.OneShotEffect;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Outcome;
-import mage.constants.Rarity;
 import mage.constants.TargetController;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.filter.common.FilterLandPermanent;
@@ -61,9 +61,8 @@ public class VolcanicOffering extends CardImpl {
         filterLand.add(Predicates.not(new SupertypePredicate("Basic")));
         filterCreature.add(new ControllerPredicate(TargetController.NOT_YOU));
     }
-    public VolcanicOffering(UUID ownerId) {
-        super(ownerId, 40, "Volcanic Offering", Rarity.RARE, new CardType[]{CardType.INSTANT}, "{4}{R}");
-        this.expansionSetCode = "C14";
+    public VolcanicOffering(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.INSTANT},"{4}{R}");
 
 
         // Destroy target nonbasic land you don't control and target nonbasic land of an opponent's choice you don't control.

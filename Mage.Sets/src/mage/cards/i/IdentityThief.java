@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.eldritchmoon;
+package mage.cards.i;
 
 import java.util.UUID;
 import mage.MageInt;
@@ -36,10 +36,10 @@ import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.CopyEffect;
 import mage.abilities.effects.common.ReturnFromExileEffect;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Duration;
 import mage.constants.Outcome;
-import mage.constants.Rarity;
 import mage.constants.Zone;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.filter.predicate.Predicates;
@@ -63,9 +63,8 @@ public class IdentityThief extends CardImpl {
         filter.add(Predicates.not(new TokenPredicate()));
     }
 
-    public IdentityThief(UUID ownerId) {
-        super(ownerId, 64, "Identity Thief", Rarity.RARE, new CardType[]{CardType.CREATURE}, "{2}{U}{U}");
-        this.expansionSetCode = "EMN";
+    public IdentityThief(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{2}{U}{U}");
         this.subtype.add("Shapeshifter");
         this.power = new MageInt(0);
         this.toughness = new MageInt(3);

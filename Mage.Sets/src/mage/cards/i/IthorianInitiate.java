@@ -25,17 +25,17 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.starwars;
+package mage.cards.i;
 
 import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.costs.mana.ManaCostsImpl;
 import mage.abilities.keyword.MeditateAbility;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.abilities.common.EntersBattlefieldTriggeredAbility;
 import mage.abilities.effects.common.search.SearchLibraryPutInHandEffect;
 import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.filter.common.FilterBasicLandCard;
 import mage.target.common.TargetCardInLibrary;
 
@@ -45,9 +45,8 @@ import mage.target.common.TargetCardInLibrary;
  */
 public class IthorianInitiate extends CardImpl {
 
-    public IthorianInitiate(UUID ownerId) {
-        super(ownerId, 141, "Ithorian Initiate", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{2}{G}");
-        this.expansionSetCode = "SWS";
+    public IthorianInitiate(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{2}{G}");
         this.subtype.add("Ithorian");
         this.subtype.add("Jedi");
         this.power = new MageInt(2);

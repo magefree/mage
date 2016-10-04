@@ -25,11 +25,10 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.timeshifted;
+package mage.cards.s;
 
 import java.util.UUID;
 import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.constants.Zone;
 import mage.MageInt;
 import mage.ObjectColor;
@@ -37,6 +36,7 @@ import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.effects.common.cost.SpellsCostReductionControllerEffect;
 import mage.abilities.keyword.FlyingAbility;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.filter.FilterCard;
 import mage.filter.predicate.Predicates;
 import mage.filter.predicate.mageobject.ColorPredicate;
@@ -55,9 +55,8 @@ public class StormscapeFamiliar extends CardImpl {
                 new ColorPredicate(ObjectColor.BLACK)));
     }
 
-    public StormscapeFamiliar(UUID ownerId) {
-        super(ownerId, 32, "Stormscape Familiar", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{1}{U}");
-        this.expansionSetCode = "TSB";
+    public StormscapeFamiliar(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{1}{U}");
         this.subtype.add("Bird");
 
         this.power = new MageInt(1);

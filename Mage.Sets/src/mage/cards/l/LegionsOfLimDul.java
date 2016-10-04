@@ -25,14 +25,14 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.iceage;
+package mage.cards.l;
 
 import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.keyword.LandwalkAbility;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.filter.common.FilterLandPermanent;
 import mage.filter.predicate.mageobject.SubtypePredicate;
 import mage.filter.predicate.mageobject.SupertypePredicate;
@@ -50,9 +50,8 @@ public class LegionsOfLimDul extends CardImpl {
         filter.add(new SubtypePredicate("Swamp"));
     }
 
-    public LegionsOfLimDul(UUID ownerId) {
-        super(ownerId, 30, "Legions of Lim-Dul", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{1}{B}{B}");
-        this.expansionSetCode = "ICE";
+    public LegionsOfLimDul(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{1}{B}{B}");
         this.subtype.add("Zombie");
         this.power = new MageInt(2);
         this.toughness = new MageInt(3);

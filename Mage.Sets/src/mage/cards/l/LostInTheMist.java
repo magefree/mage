@@ -25,17 +25,17 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.innistrad;
+package mage.cards.l;
 
 import java.util.UUID;
 import mage.constants.CardType;
 import mage.constants.Outcome;
-import mage.constants.Rarity;
 import mage.constants.Zone;
 import mage.abilities.Ability;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.CounterTargetEffect;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.target.TargetPermanent;
@@ -47,9 +47,8 @@ import mage.target.TargetSpell;
  */
 public class LostInTheMist extends CardImpl {
 
-    public LostInTheMist(UUID ownerId) {
-        super(ownerId, 63, "Lost in the Mist", Rarity.COMMON, new CardType[]{CardType.INSTANT}, "{3}{U}{U}");
-        this.expansionSetCode = "ISD";
+    public LostInTheMist(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.INSTANT},"{3}{U}{U}");
 
 
         // Counter target spell. Return target permanent to its owner's hand.

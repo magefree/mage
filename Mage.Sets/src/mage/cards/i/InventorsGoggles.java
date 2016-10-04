@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.kaladesh;
+package mage.cards.i;
 
 import java.util.UUID;
 import mage.abilities.common.EntersBattlefieldControlledTriggeredAbility;
@@ -35,10 +35,10 @@ import mage.abilities.effects.common.AttachEffect;
 import mage.abilities.effects.common.continuous.BoostEquippedEffect;
 import mage.abilities.keyword.EquipAbility;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Duration;
 import mage.constants.Outcome;
-import mage.constants.Rarity;
 import mage.constants.SetTargetPointer;
 import mage.constants.Zone;
 import mage.filter.FilterPermanent;
@@ -49,9 +49,8 @@ import mage.filter.FilterPermanent;
  */
 public class InventorsGoggles extends CardImpl {
 
-    public InventorsGoggles(UUID ownerId) {
-        super(ownerId, 218, "Inventor's Goggles", Rarity.COMMON, new CardType[]{CardType.ARTIFACT}, "{1}");
-        this.expansionSetCode = "KLD";
+    public InventorsGoggles(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.ARTIFACT},"{1}");
         this.subtype.add("Equipment");
 
         // Equipped creature gets +1/+2.

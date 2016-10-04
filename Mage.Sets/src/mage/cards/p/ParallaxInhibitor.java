@@ -25,12 +25,12 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.nemesis;
+package mage.cards.p;
 
 import java.util.UUID;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.abilities.keyword.FadingAbility;
 import mage.abilities.common.SimpleActivatedAbility;
 import mage.counters.CounterType;
@@ -55,9 +55,8 @@ public class ParallaxInhibitor extends CardImpl {
         filter.add(new AbilityPredicate(FadingAbility.class));
     }
 
-    public ParallaxInhibitor(UUID ownerId) {
-        super(ownerId, 134, "Parallax Inhibitor", Rarity.RARE, new CardType[]{CardType.ARTIFACT}, "{2}");
-        this.expansionSetCode = "NEM";
+    public ParallaxInhibitor(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.ARTIFACT},"{2}");
 
         // {1}, {tap}, Sacrifice Parallax Inhibitor: Put a fade counter on each permanent with fading you control.
         Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD,

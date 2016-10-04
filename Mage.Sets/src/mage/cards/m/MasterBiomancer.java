@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.gatecrash;
+package mage.cards.m;
 
 import java.util.UUID;
 import mage.MageInt;
@@ -35,10 +35,10 @@ import mage.abilities.effects.ContinuousEffect;
 import mage.abilities.effects.ReplacementEffectImpl;
 import mage.abilities.effects.common.continuous.AddCardSubTypeTargetEffect;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Duration;
 import mage.constants.Outcome;
-import mage.constants.Rarity;
 import mage.constants.Zone;
 import mage.counters.CounterType;
 import mage.game.Game;
@@ -54,9 +54,8 @@ import mage.target.targetpointer.FixedTarget;
  */
 public class MasterBiomancer extends CardImpl {
 
-    public MasterBiomancer(UUID ownerId) {
-        super(ownerId, 176, "Master Biomancer", Rarity.MYTHIC, new CardType[]{CardType.CREATURE}, "{2}{G}{U}");
-        this.expansionSetCode = "GTC";
+    public MasterBiomancer(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{2}{G}{U}");
         this.subtype.add("Elf");
         this.subtype.add("Wizard");
 

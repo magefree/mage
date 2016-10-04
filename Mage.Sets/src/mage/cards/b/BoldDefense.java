@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.zendikar;
+package mage.cards.b;
 
 import java.util.UUID;
 import mage.abilities.condition.LockedInCondition;
@@ -37,9 +37,9 @@ import mage.abilities.effects.common.continuous.GainAbilityControlledEffect;
 import mage.abilities.keyword.FirstStrikeAbility;
 import mage.abilities.keyword.KickerAbility;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Duration;
-import mage.constants.Rarity;
 import mage.filter.common.FilterCreaturePermanent;
 
 /**
@@ -47,9 +47,8 @@ import mage.filter.common.FilterCreaturePermanent;
  */
 public class BoldDefense extends CardImpl {
 
-    public BoldDefense(UUID ownerId) {
-        super(ownerId, 3, "Bold Defense", Rarity.COMMON, new CardType[]{CardType.INSTANT}, "{2}{W}");
-        this.expansionSetCode = "ZEN";
+    public BoldDefense(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.INSTANT},"{2}{W}");
 
         // Kicker {3}{W} (You may pay an additional {3}{W} as you cast this spell.)
         this.addAbility(new KickerAbility("{3}{W}"));

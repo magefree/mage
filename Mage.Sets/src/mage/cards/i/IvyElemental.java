@@ -25,15 +25,15 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.planechase;
+package mage.cards.i;
 
 import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.common.EntersBattlefieldAbility;
 import mage.abilities.effects.common.EntersBattlefieldWithXCountersEffect;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.counters.CounterType;
 
 /**
@@ -42,9 +42,8 @@ import mage.counters.CounterType;
  */
 public class IvyElemental extends CardImpl {
 
-    public IvyElemental(UUID ownerId) {
-        super(ownerId, 74, "Ivy Elemental", Rarity.RARE, new CardType[]{CardType.CREATURE}, "{X}{G}");
-        this.expansionSetCode = "HOP";
+    public IvyElemental(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{X}{G}");
         this.subtype.add("Elemental");
 
         this.power = new MageInt(0);

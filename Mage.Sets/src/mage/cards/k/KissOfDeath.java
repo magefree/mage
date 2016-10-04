@@ -25,14 +25,14 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.portalsecondage;
+package mage.cards.k;
 
 import java.util.UUID;
 import mage.abilities.effects.common.DamageTargetEffect;
 import mage.abilities.effects.common.GainLifeEffect;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.target.TargetPlayer;
 
 /**
@@ -41,9 +41,8 @@ import mage.target.TargetPlayer;
  */
 public class KissOfDeath extends CardImpl {
 
-    public KissOfDeath(UUID ownerId) {
-        super(ownerId, 16, "Kiss of Death", Rarity.UNCOMMON, new CardType[]{CardType.SORCERY}, "{4}{B}{B}");
-        this.expansionSetCode = "PO2";
+    public KissOfDeath(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{4}{B}{B}");
 
         // Kiss of Death deals 4 damage to target opponent. You gain 4 life.
             this.getSpellAbility().addEffect(new DamageTargetEffect(4));

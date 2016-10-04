@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.tempest;
+package mage.cards.a;
 
 import java.util.UUID;
 import mage.abilities.Ability;
@@ -35,9 +35,9 @@ import mage.abilities.dynamicvalue.common.ManacostVariableValue;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.discard.DiscardCardYouChooseTargetEffect;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Outcome;
-import mage.constants.Rarity;
 import mage.constants.TargetController;
 import mage.constants.Zone;
 import mage.filter.FilterCard;
@@ -51,9 +51,8 @@ import mage.target.common.TargetCardInHand;
  */
 public class AbandonHope extends CardImpl {
 
-    public AbandonHope(UUID ownerId) {
-        super(ownerId, 1, "Abandon Hope", Rarity.UNCOMMON, new CardType[]{CardType.SORCERY}, "{X}{1}{B}");
-        this.expansionSetCode = "TMP";
+    public AbandonHope(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{X}{1}{B}");
 
         // As an additional cost to cast Abandon Hope, discard X cards.
         Ability ability = new SimpleStaticAbility(Zone.ALL, new AbandonHopeRuleEffect());

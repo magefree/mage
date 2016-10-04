@@ -26,15 +26,15 @@
  *  or implied, of BetaSteward_at_googlemail.com.
  */
 
-package mage.sets.worldwake;
+package mage.cards.v;
 
 import java.util.UUID;
 import mage.constants.CardType;
 import mage.constants.Duration;
-import mage.constants.Rarity;
 import mage.abilities.effects.common.continuous.BoostTargetEffect;
 import mage.abilities.effects.common.UntapTargetEffect;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.target.common.TargetCreaturePermanent;
 
 /**
@@ -43,9 +43,8 @@ import mage.target.common.TargetCreaturePermanent;
  */
 public class VeteransReflexes extends CardImpl {
 
-    public VeteransReflexes (UUID ownerId) {
-        super(ownerId, 23, "Veteran's Reflexes", Rarity.COMMON, new CardType[]{CardType.INSTANT}, "{W}");
-        this.expansionSetCode = "WWK";
+    public VeteransReflexes (UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.INSTANT},"{W}");
 
         this.getSpellAbility().addEffect(new BoostTargetEffect(1, 1, Duration.EndOfTurn));
         this.getSpellAbility().addEffect(new UntapTargetEffect());

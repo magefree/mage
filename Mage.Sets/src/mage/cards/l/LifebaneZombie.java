@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.magic2014;
+package mage.cards.l;
 
 import java.util.UUID;
 import mage.MageInt;
@@ -35,8 +35,8 @@ import mage.abilities.common.EntersBattlefieldTriggeredAbility;
 import mage.abilities.effects.common.ExileCardYouChooseTargetOpponentEffect;
 import mage.abilities.keyword.IntimidateAbility;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.filter.common.FilterCreatureCard;
 import mage.filter.predicate.Predicates;
 import mage.filter.predicate.mageobject.ColorPredicate;
@@ -55,9 +55,8 @@ public class LifebaneZombie extends CardImpl {
                 new ColorPredicate(ObjectColor.WHITE)));
     }
 
-    public LifebaneZombie(UUID ownerId) {
-        super(ownerId, 101, "Lifebane Zombie", Rarity.RARE, new CardType[]{CardType.CREATURE}, "{1}{B}{B}");
-        this.expansionSetCode = "M14";
+    public LifebaneZombie(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{1}{B}{B}");
         this.subtype.add("Zombie");
         this.subtype.add("Warrior");
 

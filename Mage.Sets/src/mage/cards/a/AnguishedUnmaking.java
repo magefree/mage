@@ -25,14 +25,14 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.shadowsoverinnistrad;
+package mage.cards.a;
 
 import java.util.UUID;
 import mage.abilities.effects.common.ExileTargetEffect;
 import mage.abilities.effects.common.LoseLifeSourceControllerEffect;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.target.common.TargetNonlandPermanent;
 
 /**
@@ -41,9 +41,8 @@ import mage.target.common.TargetNonlandPermanent;
  */
 public class AnguishedUnmaking extends CardImpl {
 
-    public AnguishedUnmaking(UUID ownerId) {
-        super(ownerId, 242, "Anguished Unmaking", Rarity.RARE, new CardType[]{CardType.INSTANT}, "{1}{W}{B}");
-        this.expansionSetCode = "SOI";
+    public AnguishedUnmaking(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.INSTANT},"{1}{W}{B}");
 
         // Exile target nonland permanent. You lose 3 life.
         getSpellAbility().addEffect(new ExileTargetEffect());

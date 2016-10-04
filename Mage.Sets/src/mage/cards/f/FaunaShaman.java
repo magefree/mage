@@ -26,12 +26,11 @@
  *  or implied, of BetaSteward_at_googlemail.com.
  */
 
-package mage.sets.magic2011;
+package mage.cards.f;
 
 import java.util.UUID;
 import mage.constants.CardType;
 import mage.constants.ColoredManaSymbol;
-import mage.constants.Rarity;
 import mage.constants.Zone;
 import mage.MageInt;
 import mage.abilities.Ability;
@@ -41,6 +40,7 @@ import mage.abilities.costs.common.TapSourceCost;
 import mage.abilities.costs.mana.ColoredManaCost;
 import mage.abilities.effects.common.search.SearchLibraryPutInHandEffect;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.filter.common.FilterCreatureCard;
 import mage.target.common.TargetCardInHand;
 import mage.target.common.TargetCardInLibrary;
@@ -51,9 +51,8 @@ import mage.target.common.TargetCardInLibrary;
  */
 public class FaunaShaman extends CardImpl {
 
-    public FaunaShaman(UUID ownerId) {
-        super(ownerId, 172, "Fauna Shaman", Rarity.RARE, new CardType[]{CardType.CREATURE}, "{1}{G}");
-        this.expansionSetCode = "M11";
+    public FaunaShaman(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{1}{G}");
         this.subtype.add("Elf");
         this.subtype.add("Shaman");
 

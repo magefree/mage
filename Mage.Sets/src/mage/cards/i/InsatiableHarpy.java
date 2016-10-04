@@ -25,15 +25,15 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.theros;
+package mage.cards.i;
 
 import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.keyword.FlyingAbility;
 import mage.abilities.keyword.LifelinkAbility;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.Rarity;
 
 /**
  *
@@ -41,9 +41,8 @@ import mage.constants.Rarity;
  */
 public class InsatiableHarpy extends CardImpl {
 
-    public InsatiableHarpy(UUID ownerId) {
-        super(ownerId, 92, "Insatiable Harpy", Rarity.UNCOMMON, new CardType[]{CardType.CREATURE}, "{2}{B}{B}");
-        this.expansionSetCode = "THS";
+    public InsatiableHarpy(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{2}{B}{B}");
         this.subtype.add("Harpy");
 
         this.power = new MageInt(2);

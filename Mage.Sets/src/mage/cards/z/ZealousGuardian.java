@@ -25,14 +25,14 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.shadowmoor;
+package mage.cards.z;
 
 import java.util.UUID;
 import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.MageInt;
 import mage.abilities.keyword.FlashAbility;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 
 /**
  *
@@ -40,9 +40,8 @@ import mage.cards.CardImpl;
  */
 public class ZealousGuardian extends CardImpl {
 
-    public ZealousGuardian(UUID ownerId) {
-        super(ownerId, 157, "Zealous Guardian", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{W/U}");
-        this.expansionSetCode = "SHM";
+    public ZealousGuardian(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{W/U}");
         this.subtype.add("Kithkin");
         this.subtype.add("Soldier");
 

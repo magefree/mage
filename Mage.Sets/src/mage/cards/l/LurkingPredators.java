@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.magic2010;
+package mage.cards.l;
 
 import java.util.UUID;
 import mage.MageObject;
@@ -34,11 +34,11 @@ import mage.abilities.common.SpellCastOpponentTriggeredAbility;
 import mage.abilities.effects.OneShotEffect;
 import mage.cards.Card;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.cards.Cards;
 import mage.cards.CardsImpl;
 import mage.constants.CardType;
 import mage.constants.Outcome;
-import mage.constants.Rarity;
 import mage.constants.Zone;
 import mage.game.Game;
 import mage.players.Player;
@@ -49,9 +49,8 @@ import mage.players.Player;
  */
 public class LurkingPredators extends CardImpl {
 
-    public LurkingPredators(UUID ownerId) {
-        super(ownerId, 190, "Lurking Predators", Rarity.RARE, new CardType[]{CardType.ENCHANTMENT}, "{4}{G}{G}");
-        this.expansionSetCode = "M10";
+    public LurkingPredators(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.ENCHANTMENT},"{4}{G}{G}");
 
         // Whenever an opponent casts a spell, reveal the top card of your library. If it's a creature card, put it onto the battlefield. Otherwise, you may put that card on the bottom of your library.
         this.addAbility(new SpellCastOpponentTriggeredAbility(new LurkingPredatorsEffect(), false));

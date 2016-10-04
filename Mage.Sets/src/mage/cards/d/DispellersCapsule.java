@@ -25,11 +25,10 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.shardsofalara;
+package mage.cards.d;
 
 import java.util.UUID;
 import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.constants.Zone;
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleActivatedAbility;
@@ -37,6 +36,7 @@ import mage.abilities.costs.common.SacrificeSourceCost;
 import mage.abilities.costs.mana.ManaCostsImpl;
 import mage.abilities.effects.common.DestroyTargetEffect;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.filter.common.FilterArtifactOrEnchantmentPermanent;
 import mage.target.TargetPermanent;
 
@@ -46,9 +46,8 @@ import mage.target.TargetPermanent;
  */
 public class DispellersCapsule extends CardImpl {
     
-    public DispellersCapsule (UUID ownerId) {
-        super(ownerId, 8, "Dispeller's Capsule", Rarity.COMMON, new CardType[]{CardType.ARTIFACT}, "{W}");
-        this.expansionSetCode = "ALA";
+    public DispellersCapsule (UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.ARTIFACT},"{W}");
 
         Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new DestroyTargetEffect(), new ManaCostsImpl("{2}{W}"));
         ability.addCost(new SacrificeSourceCost());

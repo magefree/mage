@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.shadowsoverinnistrad;
+package mage.cards.a;
 
 import java.util.List;
 import java.util.UUID;
@@ -35,9 +35,9 @@ import mage.abilities.TriggeredAbilityImpl;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.keyword.FlyingAbility;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Outcome;
-import mage.constants.Rarity;
 import mage.constants.Zone;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.filter.predicate.permanent.AnotherPredicate;
@@ -52,9 +52,8 @@ import mage.players.Player;
  */
 public class AvacynThePurifier extends CardImpl {
 
-    public AvacynThePurifier(UUID ownerId) {
-        super(ownerId, 5, "Avacyn, the Purifier", Rarity.MYTHIC, new CardType[]{CardType.CREATURE}, "");
-        this.expansionSetCode = "SOI";
+    public AvacynThePurifier(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"");
         this.supertype.add("Legendary");
         this.subtype.add("Angel");
         this.power = new MageInt(6);

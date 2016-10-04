@@ -26,14 +26,14 @@
  *  or implied, of BetaSteward_at_googlemail.com.
  */
 
-package mage.sets.championsofkamigawa;
+package mage.cards.h;
 
 import java.util.UUID;
 
 import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.abilities.effects.common.CounterTargetEffect;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.filter.FilterSpell;
 import mage.filter.predicate.Predicates;
 import mage.filter.predicate.mageobject.SubtypePredicate;
@@ -50,9 +50,8 @@ public class HisokasDefiance extends CardImpl {
         filter.add(Predicates.or(new SubtypePredicate("Spirit"), new SubtypePredicate("Arcane")));
     }
 
-    public HisokasDefiance(UUID ownerId) {
-        super(ownerId, 67, "Hisoka's Defiance", Rarity.COMMON, new CardType[]{CardType.INSTANT}, "{1}{U}");
-        this.expansionSetCode = "CHK";
+    public HisokasDefiance(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.INSTANT},"{1}{U}");
 
         this.getSpellAbility().addTarget(new TargetSpell(filter));
         this.getSpellAbility().addEffect(new CounterTargetEffect());

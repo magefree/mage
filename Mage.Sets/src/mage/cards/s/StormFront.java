@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.tempest;
+package mage.cards.s;
 
 import java.util.UUID;
 import mage.abilities.Ability;
@@ -34,8 +34,8 @@ import mage.abilities.costs.mana.ManaCostsImpl;
 import mage.abilities.effects.common.TapTargetEffect;
 import mage.abilities.keyword.FlyingAbility;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.constants.Zone;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.filter.predicate.mageobject.AbilityPredicate;
@@ -53,9 +53,8 @@ public class StormFront extends CardImpl {
         filter.add(new AbilityPredicate(FlyingAbility.class));
     }
 
-    public StormFront(UUID ownerId) {
-        super(ownerId, 153, "Storm Front", Rarity.UNCOMMON, new CardType[]{CardType.ENCHANTMENT}, "{G}");
-        this.expansionSetCode = "TMP";
+    public StormFront(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.ENCHANTMENT},"{G}");
 
         // {G}{G}: Tap target creature with flying.
         Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new TapTargetEffect(), new ManaCostsImpl("{G}{G}"));

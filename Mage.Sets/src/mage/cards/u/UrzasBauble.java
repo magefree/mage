@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.mastersedition;
+package mage.cards.u;
 
 import java.util.UUID;
 import mage.MageObject;
@@ -39,11 +39,11 @@ import mage.abilities.effects.common.CreateDelayedTriggeredAbilityEffect;
 import mage.abilities.effects.common.DrawCardSourceControllerEffect;
 import mage.cards.Card;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.cards.Cards;
 import mage.cards.CardsImpl;
 import mage.constants.CardType;
 import mage.constants.Outcome;
-import mage.constants.Rarity;
 import mage.constants.Zone;
 import mage.game.Game;
 import mage.players.Player;
@@ -55,9 +55,8 @@ import mage.target.TargetPlayer;
  */
 public class UrzasBauble extends CardImpl {
 
-    public UrzasBauble(UUID ownerId) {
-        super(ownerId, 170, "Urza's Bauble", Rarity.UNCOMMON, new CardType[]{CardType.ARTIFACT}, "{0}");
-        this.expansionSetCode = "MED";
+    public UrzasBauble(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.ARTIFACT},"{0}");
 
         // {tap}, Sacrifice Urza's Bauble: Look at a card at random in target player's hand. You draw a card at the beginning of the next turn's upkeep.
         Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new LookAtRandomCardEffect(), new TapSourceCost());

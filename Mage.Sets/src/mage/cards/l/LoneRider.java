@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.eldritchmoon;
+package mage.cards.l;
 
 import java.util.UUID;
 import mage.MageInt;
@@ -39,9 +39,10 @@ import mage.abilities.effects.common.TransformSourceEffect;
 import mage.abilities.keyword.FirstStrikeAbility;
 import mage.abilities.keyword.LifelinkAbility;
 import mage.abilities.keyword.TransformAbility;
+import mage.cards.i.ItThatRidesAsOne;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.game.Game;
 import mage.game.events.GameEvent;
 import mage.watchers.common.PlayerGainedLifeWatcher;
@@ -54,16 +55,15 @@ public class LoneRider extends CardImpl {
 
     private static final String ruleText = "At the beginning of the end step, if you gained 3 or more life this turn, transform {this}";
 
-    public LoneRider(UUID ownerId) {
-        super(ownerId, 33, "Lone Rider", Rarity.UNCOMMON, new CardType[]{CardType.CREATURE}, "{1}{W}");
-        this.expansionSetCode = "EMN";
+    public LoneRider(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{1}{W}");
         this.subtype.add("Human");
         this.subtype.add("Knight");
         this.power = new MageInt(1);
         this.toughness = new MageInt(1);
 
         this.transformable = true;
-        this.secondSideCard = new ItThatRidesAsOne(ownerId);
+        this.secondSideCardClazz = ItThatRidesAsOne.class;
 
         // First strike
         this.addAbility(FirstStrikeAbility.getInstance());

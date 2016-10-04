@@ -25,18 +25,18 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.invasion;
+package mage.cards.p;
 
 import java.util.UUID;
 
 import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.costs.common.TapSourceCost;
 import mage.abilities.costs.mana.ManaCostsImpl;
 import mage.abilities.effects.common.search.SearchLibraryPutInHandEffect;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.Zone;
 import mage.target.common.TargetCardInLibrary;
 
@@ -46,9 +46,8 @@ import mage.target.common.TargetCardInLibrary;
  */
 public class PlanarPortal extends CardImpl {
 
-    public PlanarPortal(UUID ownerId) {
-        super(ownerId, 308, "Planar Portal", Rarity.RARE, new CardType[]{CardType.ARTIFACT}, "{6}");
-        this.expansionSetCode = "INV";
+    public PlanarPortal(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.ARTIFACT},"{6}");
 
         // {6}, {tap}: Search your library for a card and put that card into your hand. Then shuffle your library.
         Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new SearchLibraryPutInHandEffect(new TargetCardInLibrary(), false, true), new ManaCostsImpl("{6}"));

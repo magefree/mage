@@ -26,14 +26,14 @@
  *  or implied, of BetaSteward_at_googlemail.com.
  */
 
-package mage.sets.riseoftheeldrazi;
+package mage.cards.a;
 
 import java.util.UUID;
 import mage.abilities.common.BeginningOfUpkeepTriggeredAbility;
 import mage.abilities.effects.common.CreateTokenEffect;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.constants.TargetController;
 import mage.game.permanent.token.EldraziSpawnToken;
 
@@ -43,9 +43,8 @@ import mage.game.permanent.token.EldraziSpawnToken;
  */
 public class AwakeningZone extends CardImpl {
 
-    public AwakeningZone(UUID ownerId) {
-        super(ownerId, 176, "Awakening Zone", Rarity.RARE, new CardType[]{CardType.ENCHANTMENT}, "{2}{G}");
-        this.expansionSetCode = "ROE";
+    public AwakeningZone(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.ENCHANTMENT},"{2}{G}");
         this.addAbility(new BeginningOfUpkeepTriggeredAbility(new CreateTokenEffect(new EldraziSpawnToken()), TargetController.YOU, true));
     }
 

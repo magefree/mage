@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.magicorigins;
+package mage.cards.t;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -34,8 +34,8 @@ import mage.abilities.TriggeredAbilityImpl;
 import mage.abilities.effects.common.CreateTokenEffect;
 import mage.abilities.effects.common.DrawCardSourceControllerEffect;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.constants.Zone;
 import mage.filter.common.FilterArtifactPermanent;
 import mage.game.Game;
@@ -50,9 +50,8 @@ import mage.game.permanent.token.ThopterColorlessToken;
  */
 public class ThopterSpyNetwork extends CardImpl {
 
-    public ThopterSpyNetwork(UUID ownerId) {
-        super(ownerId, 79, "Thopter Spy Network", Rarity.RARE, new CardType[]{CardType.ENCHANTMENT}, "{2}{U}{U}");
-        this.expansionSetCode = "ORI";
+    public ThopterSpyNetwork(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.ENCHANTMENT},"{2}{U}{U}");
 
         // At the beginning of your upkeep, if you control an artifact, put a 1/1 colorless Thopter artifact creature token with flying onto the battlefield.
         this.addAbility(new ThopterSpyNetworkUpkeepTriggeredAbility());

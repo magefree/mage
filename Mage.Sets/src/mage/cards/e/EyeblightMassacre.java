@@ -25,14 +25,14 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.magicorigins;
+package mage.cards.e;
 
 import java.util.UUID;
 import mage.abilities.effects.common.continuous.BoostAllEffect;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Duration;
-import mage.constants.Rarity;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.filter.predicate.Predicates;
 import mage.filter.predicate.mageobject.SubtypePredicate;
@@ -50,9 +50,8 @@ public class EyeblightMassacre extends CardImpl {
         filter.add(Predicates.not(new SubtypePredicate("Elf")));
     }
 
-    public EyeblightMassacre(UUID ownerId) {
-        super(ownerId, 96, "Eyeblight Massacre", Rarity.UNCOMMON, new CardType[]{CardType.SORCERY}, "{2}{B}{B}");
-        this.expansionSetCode = "ORI";
+    public EyeblightMassacre(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{2}{B}{B}");
 
         // Non-Elf creatures get -2/-2 until end of turn.
         this.getSpellAbility().addEffect(new BoostAllEffect(-2, -2, Duration.EndOfTurn, filter, false));

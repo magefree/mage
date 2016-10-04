@@ -25,13 +25,13 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.gatecrash;
+package mage.cards.k;
 
 import java.util.UUID;
 import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.abilities.effects.common.CreateTokenEffect;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.game.permanent.token.KnightToken;
 
 /**
@@ -40,9 +40,8 @@ import mage.game.permanent.token.KnightToken;
  */
 public class KnightWatch extends CardImpl {
 
-    public KnightWatch (UUID ownerId) {
-        super(ownerId, 19, "Knight Watch", Rarity.COMMON, new CardType[]{CardType.SORCERY}, "{4}{W}");
-        this.expansionSetCode = "GTC";
+    public KnightWatch (UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{4}{W}");
 
 
         //Put two 2/2 white Knight creature tokens with vigilance onto the battlefield.

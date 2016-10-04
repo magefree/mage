@@ -25,12 +25,11 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.alarareborn;
+package mage.cards.l;
 
 import java.util.UUID;
 import mage.constants.CardType;
 import mage.constants.Outcome;
-import mage.constants.Rarity;
 import mage.constants.TargetController;
 import mage.MageInt;
 import mage.abilities.Ability;
@@ -43,6 +42,7 @@ import mage.abilities.effects.common.counter.AddCountersSourceEffect;
 import mage.abilities.keyword.FearAbility;
 import mage.abilities.keyword.HasteAbility;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.counters.CounterType;
 import mage.game.Game;
 import mage.players.Player;
@@ -53,9 +53,8 @@ import mage.players.Player;
  */
 public class LightningReaver extends CardImpl {
 
-    public LightningReaver(UUID ownerId) {
-        super(ownerId, 42, "Lightning Reaver", Rarity.RARE, new CardType[]{CardType.CREATURE}, "{3}{B}{R}");
-        this.expansionSetCode = "ARB";
+    public LightningReaver(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{3}{B}{R}");
         this.subtype.add("Zombie");
         this.subtype.add("Beast");
 

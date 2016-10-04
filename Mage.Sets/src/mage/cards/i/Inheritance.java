@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.alliances;
+package mage.cards.i;
 
 import java.util.UUID;
 import mage.abilities.Ability;
@@ -34,8 +34,8 @@ import mage.abilities.costs.mana.ManaCostsImpl;
 import mage.abilities.effects.common.DoIfCostPaid;
 import mage.abilities.effects.common.DrawCardSourceControllerEffect;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.Rarity;
 
 /**
  *
@@ -43,9 +43,8 @@ import mage.constants.Rarity;
  */
 public class Inheritance extends CardImpl {
 
-    public Inheritance(UUID ownerId) {
-        super(ownerId, 130, "Inheritance", Rarity.UNCOMMON, new CardType[]{CardType.ENCHANTMENT}, "{W}");
-        this.expansionSetCode = "ALL";
+    public Inheritance(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.ENCHANTMENT},"{W}");
 
         // Whenever a creature dies, you may pay {3}. If you do, draw a card.
         Ability ability = new DiesCreatureTriggeredAbility(new DoIfCostPaid(new DrawCardSourceControllerEffect(1), new ManaCostsImpl("{3}")), false);

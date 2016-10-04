@@ -25,14 +25,14 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.fatereforged;
+package mage.cards.c;
 
 import java.util.UUID;
 import mage.abilities.costs.common.SacrificeTargetCost;
 import mage.abilities.effects.common.DamageTargetEffect;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.filter.common.FilterControlledCreaturePermanent;
 import mage.target.common.TargetControlledCreaturePermanent;
 import mage.target.common.TargetCreatureOrPlayer;
@@ -43,9 +43,8 @@ import mage.target.common.TargetCreatureOrPlayer;
  */
 public class CollateralDamage extends CardImpl {
 
-    public CollateralDamage(UUID ownerId) {
-        super(ownerId, 95, "Collateral Damage", Rarity.COMMON, new CardType[]{CardType.INSTANT}, "{R}");
-        this.expansionSetCode = "FRF";
+    public CollateralDamage(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.INSTANT},"{R}");
 
         // As an additional cost to cast Collateral Damge, sacrifice a creature.
         this.getSpellAbility().addCost(new SacrificeTargetCost(new TargetControlledCreaturePermanent(new FilterControlledCreaturePermanent("a creature"))));

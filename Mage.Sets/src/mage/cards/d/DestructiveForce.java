@@ -26,14 +26,14 @@
  *  or implied, of BetaSteward_at_googlemail.com.
  */
 
-package mage.sets.magic2011;
+package mage.cards.d;
 
 import java.util.UUID;
 import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.abilities.effects.common.DamageAllEffect;
 import mage.abilities.effects.common.SacrificeAllEffect;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.filter.FilterPermanent;
 import mage.filter.common.FilterControlledLandPermanent;
 import mage.filter.common.FilterControlledPermanent;
@@ -49,9 +49,8 @@ public class DestructiveForce extends CardImpl {
     private static final FilterPermanent filterCreature = new FilterCreaturePermanent();
 
 
-    public DestructiveForce(UUID ownerId) {
-        super(ownerId, 133, "Destructive Force", Rarity.RARE, new CardType[]{CardType.SORCERY}, "{5}{R}{R}");
-        this.expansionSetCode = "M11";
+    public DestructiveForce(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{5}{R}{R}");
 
 
         // Each player sacrifices five lands.

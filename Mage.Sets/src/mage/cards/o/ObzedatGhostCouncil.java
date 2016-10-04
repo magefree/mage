@@ -26,7 +26,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.gatecrash;
+package mage.cards.o;
 
 import java.util.UUID;
 import mage.MageInt;
@@ -43,10 +43,10 @@ import mage.abilities.effects.common.continuous.GainAbilitySourceEffect;
 import mage.abilities.keyword.HasteAbility;
 import mage.cards.Card;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Duration;
 import mage.constants.Outcome;
-import mage.constants.Rarity;
 import mage.constants.TargetController;
 import mage.constants.Zone;
 import mage.game.ExileZone;
@@ -63,9 +63,8 @@ import mage.target.common.TargetOpponent;
  */
 public class ObzedatGhostCouncil extends CardImpl {
 
-    public ObzedatGhostCouncil(UUID ownerId) {
-        super(ownerId, 182, "Obzedat, Ghost Council", Rarity.MYTHIC, new CardType[]{CardType.CREATURE}, "{1}{W}{W}{B}{B}");
-        this.expansionSetCode = "GTC";
+    public ObzedatGhostCouncil(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{1}{W}{W}{B}{B}");
         this.subtype.add("Spirit");
         this.subtype.add("Advisor");
         this.supertype.add("Legendary");

@@ -26,14 +26,14 @@
  *  or implied, of BetaSteward_at_googlemail.com.
  */
 
-package mage.sets.magic2012;
+package mage.cards.r;
 
 import java.util.UUID;
 
 import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.abilities.effects.common.PutOnLibraryTargetEffect;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.target.common.TargetCardInYourGraveyard;
 
 /**
@@ -41,9 +41,8 @@ import mage.target.common.TargetCardInYourGraveyard;
  */
 public class Reclaim extends CardImpl {
 
-    public Reclaim(UUID ownerId) {
-        super(ownerId, 191, "Reclaim", Rarity.COMMON, new CardType[]{CardType.INSTANT}, "{G}");
-        this.expansionSetCode = "M12";
+    public Reclaim(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.INSTANT},"{G}");
 
         this.getSpellAbility().addEffect(new PutOnLibraryTargetEffect(true));
         this.getSpellAbility().addTarget(new TargetCardInYourGraveyard());

@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.eighthedition;
+package mage.cards.d;
 
 import java.util.UUID;
 import mage.abilities.Ability;
@@ -35,10 +35,10 @@ import mage.abilities.effects.ContinuousEffect;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.continuous.BecomesColorTargetEffect;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Duration;
 import mage.constants.Outcome;
-import mage.constants.Rarity;
 import mage.constants.Zone;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
@@ -52,9 +52,8 @@ import mage.target.targetpointer.FixedTarget;
  */
 public class DistortingLens extends CardImpl {
 
-    public DistortingLens(UUID ownerId) {
-        super(ownerId, 299, "Distorting Lens", Rarity.RARE, new CardType[]{CardType.ARTIFACT}, "{2}");
-        this.expansionSetCode = "8ED";
+    public DistortingLens(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.ARTIFACT},"{2}");
 
         // {tap}: Target permanent becomes the color of your choice until end of turn.
         Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new ChangeColorEffect(), new TapSourceCost());

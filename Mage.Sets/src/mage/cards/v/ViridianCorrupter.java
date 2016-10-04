@@ -25,17 +25,17 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.mirrodinbesieged;
+package mage.cards.v;
 
 import java.util.UUID;
 import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.EntersBattlefieldTriggeredAbility;
 import mage.abilities.effects.common.DestroyTargetEffect;
 import mage.abilities.keyword.InfectAbility;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.filter.common.FilterArtifactPermanent;
 import mage.target.Target;
 import mage.target.TargetPermanent;
@@ -46,9 +46,8 @@ import mage.target.TargetPermanent;
  */
 public class ViridianCorrupter extends CardImpl {
 
-    public ViridianCorrupter (UUID ownerId) {
-        super(ownerId, 94, "Viridian Corrupter", Rarity.UNCOMMON, new CardType[]{CardType.CREATURE}, "{1}{G}{G}");
-        this.expansionSetCode = "MBS";
+    public ViridianCorrupter (UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{1}{G}{G}");
         this.subtype.add("Elf");
         this.subtype.add("Shaman");
 

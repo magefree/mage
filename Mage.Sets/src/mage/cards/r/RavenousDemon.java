@@ -25,18 +25,19 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.darkascension;
+package mage.cards.r;
 
 import java.util.UUID;
 
 import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.MageInt;
 import mage.abilities.common.ActivateAsSorceryActivatedAbility;
 import mage.abilities.costs.common.SacrificeTargetCost;
 import mage.abilities.effects.common.TransformSourceEffect;
 import mage.abilities.keyword.TransformAbility;
+import mage.cards.a.ArchdemonOfGreed;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.Zone;
 import mage.filter.common.FilterControlledPermanent;
 import mage.filter.predicate.mageobject.SubtypePredicate;
@@ -53,13 +54,12 @@ public class RavenousDemon extends CardImpl {
         filter.add(new SubtypePredicate("Human"));
     }
 
-    public RavenousDemon(UUID ownerId) {
-        super(ownerId, 71, "Ravenous Demon", Rarity.RARE, new CardType[]{CardType.CREATURE}, "{3}{B}{B}");
-        this.expansionSetCode = "DKA";
+    public RavenousDemon(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{3}{B}{B}");
         this.subtype.add("Demon");
 
         this.transformable = true;
-        this.secondSideCard = new ArchdemonOfGreed(ownerId);
+        this.secondSideCardClazz = ArchdemonOfGreed.class;
 
         this.power = new MageInt(4);
         this.toughness = new MageInt(4);

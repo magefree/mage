@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.antiquities;
+package mage.cards.d;
 
 import java.util.HashSet;
 import java.util.Set;
@@ -35,11 +35,11 @@ import mage.abilities.Ability;
 import mage.abilities.effects.OneShotEffect;
 import mage.cards.Card;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.cards.Cards;
 import mage.cards.CardsImpl;
 import mage.constants.CardType;
 import mage.constants.Outcome;
-import mage.constants.Rarity;
 import mage.filter.common.FilterArtifactCard;
 import mage.game.Game;
 import mage.game.events.GameEvent;
@@ -54,9 +54,8 @@ import mage.target.common.TargetCardInGraveyard;
  */
 public class DrafnasRestoration extends CardImpl {
 
-    public DrafnasRestoration(UUID ownerId) {
-        super(ownerId, 52, "Drafna's Restoration", Rarity.COMMON, new CardType[]{CardType.SORCERY}, "{U}");
-        this.expansionSetCode = "ATQ";
+    public DrafnasRestoration(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{U}");
 
         // Return any number of target artifact cards from target player's graveyard to the top of his or her library in any order.
         this.getSpellAbility().addEffect(new DrafnasRestorationEffect());

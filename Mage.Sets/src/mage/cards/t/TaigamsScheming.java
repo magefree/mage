@@ -25,14 +25,14 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.khansoftarkir;
+package mage.cards.t;
 
 import java.util.UUID;
 import mage.abilities.dynamicvalue.common.StaticValue;
 import mage.abilities.effects.common.LookLibraryAndPickControllerEffect;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.constants.Zone;
 import mage.filter.FilterCard;
 
@@ -42,9 +42,8 @@ import mage.filter.FilterCard;
  */
 public class TaigamsScheming extends CardImpl {
 
-    public TaigamsScheming(UUID ownerId) {
-        super(ownerId, 57, "Taigam's Scheming", Rarity.COMMON, new CardType[]{CardType.SORCERY}, "{1}{U}");
-        this.expansionSetCode = "KTK";
+    public TaigamsScheming(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{1}{U}");
 
         // Look at the top five cards of your library. Put any number of them into your graveyard and the rest back on top of your library in any order
         this.getSpellAbility().addEffect(new LookLibraryAndPickControllerEffect(new StaticValue(5), false, new StaticValue(5),

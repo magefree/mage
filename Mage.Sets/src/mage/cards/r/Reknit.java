@@ -25,13 +25,13 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.shadowmoor;
+package mage.cards.r;
 
 import java.util.UUID;
 import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.abilities.effects.common.RegenerateTargetEffect;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.target.TargetPermanent;
 
 /**
@@ -40,9 +40,8 @@ import mage.target.TargetPermanent;
  */
 public class Reknit extends CardImpl {
 
-    public Reknit(UUID ownerId) {
-        super(ownerId, 236, "Reknit", Rarity.UNCOMMON, new CardType[]{CardType.INSTANT}, "{1}{G/W}");
-        this.expansionSetCode = "SHM";
+    public Reknit(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.INSTANT},"{1}{G/W}");
 
 
         // Regenerate target permanent.

@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.stronghold;
+package mage.cards.s;
 
 import java.util.UUID;
 import mage.MageInt;
@@ -33,8 +33,8 @@ import mage.abilities.common.EntersBattlefieldAbility;
 import mage.abilities.effects.common.EntersBattlefieldWithXCountersEffect;
 import mage.abilities.keyword.DefenderAbility;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.counters.CounterType;
 
 /**
@@ -43,9 +43,8 @@ import mage.counters.CounterType;
  */
 public class ShiftingWall extends CardImpl {
 
-    public ShiftingWall(UUID ownerId) {
-        super(ownerId, 134, "Shifting Wall", Rarity.UNCOMMON, new CardType[]{CardType.ARTIFACT, CardType.CREATURE}, "{X}");
-        this.expansionSetCode = "STH";
+    public ShiftingWall(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.ARTIFACT,CardType.CREATURE},"{X}");
         this.subtype.add("Wall");
         this.power = new MageInt(0);
         this.toughness = new MageInt(0);

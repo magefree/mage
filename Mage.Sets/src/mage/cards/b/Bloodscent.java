@@ -25,14 +25,14 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.mirrodin;
+package mage.cards.b;
 
 import java.util.UUID;
 import mage.abilities.effects.common.combat.MustBeBlockedByAllTargetEffect;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Duration;
-import mage.constants.Rarity;
 import mage.target.common.TargetCreaturePermanent;
 
 /**
@@ -41,9 +41,8 @@ import mage.target.common.TargetCreaturePermanent;
  */
 public class Bloodscent extends CardImpl {
 
-    public Bloodscent(UUID ownerId) {
-        super(ownerId, 114, "Bloodscent", Rarity.UNCOMMON, new CardType[]{CardType.INSTANT}, "{3}{G}");
-        this.expansionSetCode = "MRD";
+    public Bloodscent(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.INSTANT},"{3}{G}");
 
 
         // All creatures able to block target creature this turn do so.

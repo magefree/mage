@@ -25,15 +25,15 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.fallenempires;
+package mage.cards.b;
 
 import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.effects.common.combat.CantBlockCreaturesSourceEffect;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.constants.Zone;
 import mage.filter.Filter;
 import mage.filter.common.FilterCreaturePermanent;
@@ -50,9 +50,8 @@ public class BrassclawOrcs1 extends CardImpl {
         filter.add(new PowerPredicate(Filter.ComparisonType.GreaterThan, 1));
     }
 
-    public BrassclawOrcs1(UUID ownerId) {
-        super(ownerId, 100, "Brassclaw Orcs", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{2}{R}");
-        this.expansionSetCode = "FEM";
+    public BrassclawOrcs1(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{2}{R}");
         this.subtype.add("Orc");
 
         this.power = new MageInt(3);

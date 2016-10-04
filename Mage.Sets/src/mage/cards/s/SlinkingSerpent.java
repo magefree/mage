@@ -25,14 +25,14 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.invasion;
+package mage.cards.s;
 
 import java.util.UUID;
 import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.MageInt;
 import mage.abilities.keyword.ForestwalkAbility;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 
 /**
  *
@@ -40,9 +40,8 @@ import mage.cards.CardImpl;
  */
 public class SlinkingSerpent extends CardImpl {
 
-    public SlinkingSerpent(UUID ownerId) {
-        super(ownerId, 274, "Slinking Serpent", Rarity.UNCOMMON, new CardType[]{CardType.CREATURE}, "{2}{U}{B}");
-        this.expansionSetCode = "INV";
+    public SlinkingSerpent(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{2}{U}{B}");
         this.subtype.add("Serpent");
 
         this.power = new MageInt(2);

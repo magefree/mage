@@ -26,13 +26,13 @@
  *  or implied, of BetaSteward_at_googlemail.com.
  */
 
-package mage.sets.worldwake;
+package mage.cards.b;
 
 import java.util.UUID;
 import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.abilities.effects.common.CreateTokenEffect;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.game.permanent.token.ElephantToken;
 import mage.game.permanent.token.SnakeToken;
 import mage.game.permanent.token.WolfToken;
@@ -43,9 +43,8 @@ import mage.game.permanent.token.WolfToken;
  */
 public class BestialMenace extends CardImpl {
 
-    public BestialMenace(UUID ownerId) {
-        super(ownerId, 97, "Bestial Menace", Rarity.UNCOMMON, new CardType[]{CardType.SORCERY}, "{3}{G}{G}");
-        this.expansionSetCode = "WWK";
+    public BestialMenace(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{3}{G}{G}");
 
         this.getSpellAbility().addEffect(new CreateTokenEffect(new SnakeToken()));
         this.getSpellAbility().addEffect(new CreateTokenEffect(new WolfToken()));

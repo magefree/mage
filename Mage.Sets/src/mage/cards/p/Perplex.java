@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.ravnica;
+package mage.cards.p;
 
 import java.util.UUID;
 import mage.abilities.costs.common.DiscardHandCost;
@@ -33,8 +33,8 @@ import mage.abilities.effects.Effect;
 import mage.abilities.effects.common.CounterUnlessPaysEffect;
 import mage.abilities.keyword.TransmuteAbility;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.target.TargetSpell;
 
 /**
@@ -43,9 +43,8 @@ import mage.target.TargetSpell;
  */
 public class Perplex extends CardImpl {
 
-    public Perplex(UUID ownerId) {
-        super(ownerId, 217, "Perplex", Rarity.COMMON, new CardType[]{CardType.INSTANT}, "{1}{U}{B}");
-        this.expansionSetCode = "RAV";
+    public Perplex(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.INSTANT},"{1}{U}{B}");
 
 
         // Counter target spell unless its controller discards his or her hand.

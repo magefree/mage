@@ -25,12 +25,12 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.lorwyn;
+package mage.cards.b;
 
 import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.abilities.effects.common.ReturnToHandTargetEffect;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.filter.FilterCard;
 import mage.target.common.TargetCardInYourGraveyard;
 import mage.filter.predicate.mageobject.SubtypePredicate;
@@ -49,9 +49,8 @@ public class BoggartBirthRite extends CardImpl {
         filter.add(new SubtypePredicate("Goblin"));
     }
 
-    public BoggartBirthRite(UUID ownerId) {
-        super(ownerId, 101, "Boggart Birth Rite", Rarity.COMMON, new CardType[]{CardType.TRIBAL, CardType.SORCERY}, "{B}");
-        this.expansionSetCode = "LRW";
+    public BoggartBirthRite(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.TRIBAL,CardType.SORCERY},"{B}");
         this.subtype.add("Goblin");
 
         this.getSpellAbility().addEffect(new ReturnToHandTargetEffect());

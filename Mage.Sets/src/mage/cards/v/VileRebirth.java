@@ -25,14 +25,14 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.magic2013;
+package mage.cards.v;
 
 import java.util.UUID;
 import mage.abilities.effects.common.CreateTokenEffect;
 import mage.abilities.effects.common.ExileTargetEffect;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.filter.common.FilterCreatureCard;
 import mage.game.permanent.token.ZombieToken;
 import mage.target.common.TargetCardInGraveyard;
@@ -43,9 +43,8 @@ import mage.target.common.TargetCardInGraveyard;
  */
 public class VileRebirth extends CardImpl {
 
-    public VileRebirth(UUID ownerId) {
-        super(ownerId, 115, "Vile Rebirth", Rarity.COMMON, new CardType[]{CardType.INSTANT}, "{B}");
-        this.expansionSetCode = "M13";
+    public VileRebirth(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.INSTANT},"{B}");
 
         // Exile target creature card from a graveyard.
         this.getSpellAbility().addEffect(new ExileTargetEffect());

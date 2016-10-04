@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.starwars;
+package mage.cards.h;
 
 import java.util.UUID;
 import mage.abilities.dynamicvalue.common.ManacostVariableValue;
@@ -33,8 +33,8 @@ import mage.abilities.effects.Effect;
 import mage.abilities.effects.common.DamageAllEffect;
 import mage.abilities.effects.common.counter.AddCountersTargetEffect;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.counters.CounterType;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.filter.predicate.permanent.CounterPredicate;
@@ -52,9 +52,8 @@ public class HuntToExtinction extends CardImpl {
         filter.add(new CounterPredicate(CounterType.BOUNTY));
     }
 
-    public HuntToExtinction(UUID ownerId) {
-        super(ownerId, 201, "Hunt to Extinction", Rarity.RARE, new CardType[]{CardType.SORCERY}, "{X}{B}{R}{G}");
-        this.expansionSetCode = "SWS";
+    public HuntToExtinction(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{X}{B}{R}{G}");
 
         // Put a bounty counter on up to one target creature an opponent controls.
         this.getSpellAbility().addEffect(new AddCountersTargetEffect(CounterType.BOUNTY.createInstance()));

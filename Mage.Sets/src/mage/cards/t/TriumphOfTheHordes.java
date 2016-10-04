@@ -25,17 +25,17 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.newphyrexia;
+package mage.cards.t;
 
 import java.util.UUID;
 import mage.constants.CardType;
 import mage.constants.Duration;
-import mage.constants.Rarity;
 import mage.abilities.effects.common.continuous.BoostControlledEffect;
 import mage.abilities.effects.common.continuous.GainAbilityControlledEffect;
 import mage.abilities.keyword.InfectAbility;
 import mage.abilities.keyword.TrampleAbility;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 
 /**
  *
@@ -43,9 +43,8 @@ import mage.cards.CardImpl;
  */
 public class TriumphOfTheHordes extends CardImpl {
 
-    public TriumphOfTheHordes(UUID ownerId) {
-        super(ownerId, 123, "Triumph of the Hordes", Rarity.UNCOMMON, new CardType[]{CardType.SORCERY}, "{2}{G}{G}");
-        this.expansionSetCode = "NPH";
+    public TriumphOfTheHordes(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{2}{G}{G}");
 
 
         this.getSpellAbility().addEffect(new BoostControlledEffect(1, 1, Duration.EndOfTurn));

@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.alarareborn;
+package mage.cards.k;
 
 import java.util.UUID;
 import mage.MageInt;
@@ -37,8 +37,8 @@ import mage.abilities.effects.common.SacrificeSourceEffect;
 import mage.abilities.keyword.FlyingAbility;
 import mage.abilities.keyword.UnearthAbility;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.game.permanent.token.GoblinToken;
 
 /**
@@ -47,9 +47,8 @@ import mage.game.permanent.token.GoblinToken;
  */
 public class KathariBomber extends CardImpl {
 
-    public KathariBomber(UUID ownerId) {
-        super(ownerId, 41, "Kathari Bomber", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{1}{B}{R}");
-        this.expansionSetCode = "ARB";
+    public KathariBomber(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{1}{B}{R}");
         this.subtype.add("Bird");
         this.subtype.add("Shaman");
 

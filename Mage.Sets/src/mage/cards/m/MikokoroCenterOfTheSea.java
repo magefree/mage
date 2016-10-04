@@ -25,12 +25,11 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.saviorsofkamigawa;
+package mage.cards.m;
 
 import java.util.UUID;
 
 import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.costs.common.TapSourceCost;
@@ -38,6 +37,7 @@ import mage.abilities.costs.mana.GenericManaCost;
 import mage.abilities.effects.common.DrawCardAllEffect;
 import mage.abilities.mana.ColorlessManaAbility;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.Zone;
 
 /**
@@ -46,9 +46,8 @@ import mage.constants.Zone;
  */
 public class MikokoroCenterOfTheSea extends CardImpl {
 
-    public MikokoroCenterOfTheSea(UUID ownerId) {
-        super(ownerId, 162, "Mikokoro, Center of the Sea", Rarity.RARE, new CardType[]{CardType.LAND}, "");
-        this.expansionSetCode = "SOK";
+    public MikokoroCenterOfTheSea(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.LAND},"");
         this.supertype.add("Legendary");
         // {tap}: Add {C} to your mana pool.
         this.addAbility(new ColorlessManaAbility());

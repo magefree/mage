@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.guildpact;
+package mage.cards.s;
 
 import java.util.UUID;
 import mage.MageInt;
@@ -36,9 +36,9 @@ import mage.abilities.decorator.ConditionalTriggeredAbility;
 import mage.abilities.effects.common.discard.DiscardTargetEffect;
 import mage.abilities.keyword.FlyingAbility;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.ColoredManaSymbol;
-import mage.constants.Rarity;
 import mage.target.TargetPlayer;
 import mage.watchers.common.ManaSpentToCastWatcher;
 
@@ -49,9 +49,8 @@ import mage.watchers.common.ManaSpentToCastWatcher;
  */
 public class ShriekingGrotesque extends CardImpl {
 
-    public ShriekingGrotesque(UUID ownerId) {
-        super(ownerId, 15, "Shrieking Grotesque", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{2}{W}");
-        this.expansionSetCode = "GPT";
+    public ShriekingGrotesque(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{2}{W}");
         this.subtype.add("Gargoyle");
         this.power = new MageInt(2);
         this.toughness = new MageInt(1);

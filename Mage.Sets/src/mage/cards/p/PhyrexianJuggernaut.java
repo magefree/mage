@@ -26,15 +26,15 @@
  *  or implied, of BetaSteward_at_googlemail.com.
  */
 
-package mage.sets.mirrodinbesieged;
+package mage.cards.p;
 
 import java.util.UUID;
 import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.MageInt;
 import mage.abilities.common.AttacksEachTurnStaticAbility;
 import mage.abilities.keyword.InfectAbility;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 
 /**
  *
@@ -42,9 +42,8 @@ import mage.cards.CardImpl;
  */
 public class PhyrexianJuggernaut extends CardImpl {
 
-    public PhyrexianJuggernaut (UUID ownerId) {
-        super(ownerId, 121, "Phyrexian Juggernaut", Rarity.UNCOMMON, new CardType[]{CardType.ARTIFACT, CardType.CREATURE}, "{6}");
-        this.expansionSetCode = "MBS";
+    public PhyrexianJuggernaut (UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.ARTIFACT,CardType.CREATURE},"{6}");
         this.subtype.add("Juggernaut");
         this.power = new MageInt(5);
         this.toughness = new MageInt(5);

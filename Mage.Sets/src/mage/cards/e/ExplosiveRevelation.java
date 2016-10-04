@@ -25,16 +25,16 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.riseoftheeldrazi;
+package mage.cards.e;
 
 import java.util.UUID;
 
 import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.abilities.Ability;
 import mage.abilities.effects.OneShotEffect;
 import mage.cards.Card;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.cards.CardsImpl;
 import mage.constants.Outcome;
 import mage.constants.Zone;
@@ -50,9 +50,8 @@ import mage.target.common.TargetCreatureOrPlayer;
  */
 public class ExplosiveRevelation extends CardImpl {
 
-    public ExplosiveRevelation(UUID ownerId) {
-        super(ownerId, 143, "Explosive Revelation", Rarity.UNCOMMON, new CardType[]{CardType.SORCERY}, "{3}{R}{R}");
-        this.expansionSetCode = "ROE";
+    public ExplosiveRevelation(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{3}{R}{R}");
 
 
         // Choose target creature or player. Reveal cards from the top of your library until you reveal a nonland card. Explosive Revelation deals damage equal to that card's converted mana cost to that creature or player. Put the nonland card into your hand and the rest on the bottom of your library in any order.

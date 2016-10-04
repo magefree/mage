@@ -25,15 +25,15 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.fifthdawn;
+package mage.cards.a;
 
 import java.util.UUID;
 import mage.abilities.dynamicvalue.common.PermanentsOnBattlefieldCount;
 import mage.abilities.effects.Effect;
 import mage.abilities.effects.common.DamageTargetEffect;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.filter.common.FilterControlledArtifactPermanent;
 import mage.filter.predicate.mageobject.SubtypePredicate;
 import mage.target.common.TargetAttackingCreature;
@@ -51,9 +51,8 @@ public class ArmedResponse extends CardImpl {
     }
 
 
-    public ArmedResponse(UUID ownerId) {
-        super(ownerId, 2, "Armed Response", Rarity.COMMON, new CardType[]{CardType.INSTANT}, "{2}{W}");
-        this.expansionSetCode = "5DN";
+    public ArmedResponse(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.INSTANT},"{2}{W}");
 
         // Armed Response deals damage to target attacking creature equal to the number of Equipment you control.
         Effect effect = new DamageTargetEffect(new PermanentsOnBattlefieldCount(filter));

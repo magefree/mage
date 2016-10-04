@@ -25,15 +25,15 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.lorwyn;
+package mage.cards.e;
 
 import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.common.DiesTriggeredAbility;
 import mage.abilities.effects.common.discard.DiscardControllerEffect;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.Rarity;
 
 /**
  *
@@ -41,9 +41,8 @@ import mage.constants.Rarity;
  */
 public class ExiledBoggart extends CardImpl {
 
-    public ExiledBoggart(UUID ownerId) {
-        super(ownerId, 109, "Exiled Boggart", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{1}{B}");
-        this.expansionSetCode = "LRW";
+    public ExiledBoggart(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{1}{B}");
         this.subtype.add("Goblin");
         this.subtype.add("Rogue");
         this.power = new MageInt(2);

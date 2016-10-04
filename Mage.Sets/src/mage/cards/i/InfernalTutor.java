@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.dissension;
+package mage.cards.i;
 
 import java.util.UUID;
 import mage.MageObject;
@@ -37,10 +37,10 @@ import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.search.SearchLibraryPutInHandEffect;
 import mage.cards.Card;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.cards.CardsImpl;
 import mage.constants.CardType;
 import mage.constants.Outcome;
-import mage.constants.Rarity;
 import mage.filter.FilterCard;
 import mage.filter.predicate.mageobject.NamePredicate;
 import mage.game.Game;
@@ -55,9 +55,8 @@ import mage.target.common.TargetCardInLibrary;
  */
 public class InfernalTutor extends CardImpl {
 
-    public InfernalTutor(UUID ownerId) {
-        super(ownerId, 46, "Infernal Tutor", Rarity.RARE, new CardType[]{CardType.SORCERY}, "{1}{B}");
-        this.expansionSetCode = "DIS";
+    public InfernalTutor(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{1}{B}");
 
 
         // Reveal a card from your hand. Search your library for a card with the same name as that card, reveal it, put it into your hand, then shuffle your library.

@@ -25,15 +25,15 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.invasion;
+package mage.cards.s;
 
 import java.util.UUID;
 import mage.abilities.effects.common.PreventDamageToTargetEffect;
 import mage.abilities.effects.common.ReturnToHandTargetEffect;
+import mage.cards.CardSetInfo;
 import mage.cards.SplitCard;
 import mage.constants.CardType;
 import mage.constants.Duration;
-import mage.constants.Rarity;
 import mage.target.TargetPermanent;
 import mage.target.common.TargetCreaturePermanent;
 
@@ -43,9 +43,8 @@ import mage.target.common.TargetCreaturePermanent;
  */
 public class StandDeliver extends SplitCard {
 
-    public StandDeliver(UUID ownerId) {
-        super(ownerId, 292, "Stand", "Deliver", Rarity.UNCOMMON, new CardType[]{CardType.INSTANT}, "{W}", "{2}{U}", false);
-        this.expansionSetCode = "INV";
+    public StandDeliver(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.INSTANT},"{W}","{2}{U}",false);
 
         // Stand
         // Prevent the next 2 damage that would be dealt to target creature this turn.

@@ -26,7 +26,7 @@
  *  or implied, of BetaSteward_at_googlemail.com.
  */
 
-package mage.sets.magic2011;
+package mage.cards.b;
 
 import java.util.UUID;
 import mage.MageInt;
@@ -34,9 +34,9 @@ import mage.abilities.Ability;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.effects.RestrictionEffect;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Duration;
-import mage.constants.Rarity;
 import mage.constants.Zone;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
@@ -49,9 +49,8 @@ import mage.watchers.common.BloodthirstWatcher;
  */
 public class BloodcrazedGoblin extends CardImpl {
 
-    public BloodcrazedGoblin(UUID ownerId) {
-        super(ownerId, 125, "Bloodcrazed Goblin", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{R}");
-        this.expansionSetCode = "M11";
+    public BloodcrazedGoblin(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{R}");
         this.subtype.add("Goblin");
         this.subtype.add("Berserker");
 

@@ -25,15 +25,15 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.lorwyn;
+package mage.cards.e;
 
 import java.util.UUID;
 import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.MageInt;
 import mage.abilities.common.SpellCastAllTriggeredAbility;
 import mage.abilities.effects.common.counter.AddCountersSourceEffect;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.counters.CounterType;
 import mage.filter.FilterSpell;
 import mage.filter.predicate.mageobject.SubtypePredicate;
@@ -50,9 +50,8 @@ public class ElvishHandservant extends CardImpl {
         filter.add(new SubtypePredicate("Giant"));
     }
 
-    public ElvishHandservant(UUID ownerId) {
-        super(ownerId, 206, "Elvish Handservant", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{G}");
-        this.expansionSetCode = "LRW";
+    public ElvishHandservant(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{G}");
         this.subtype.add("Elf");
         this.subtype.add("Warrior");
 

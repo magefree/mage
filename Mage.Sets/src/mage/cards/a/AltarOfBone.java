@@ -25,14 +25,14 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.iceage;
+package mage.cards.a;
 
 import java.util.UUID;
 import mage.abilities.costs.common.SacrificeTargetCost;
 import mage.abilities.effects.common.search.SearchLibraryPutInHandEffect;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.filter.common.FilterCreatureCard;
 import mage.target.common.TargetCardInLibrary;
 import mage.target.common.TargetControlledCreaturePermanent;
@@ -43,9 +43,8 @@ import mage.target.common.TargetControlledCreaturePermanent;
  */
 public class AltarOfBone extends CardImpl {
 
-    public AltarOfBone(UUID ownerId) {
-        super(ownerId, 359, "Altar of Bone", Rarity.RARE, new CardType[]{CardType.SORCERY}, "{G}{W}");
-        this.expansionSetCode = "ICE";
+    public AltarOfBone(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{G}{W}");
 
 
         // As an additional cost to cast Altar of Bone, sacrifice a creature.

@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.fifthedition;
+package mage.cards.d;
 
 import java.util.UUID;
 import mage.Mana;
@@ -44,8 +44,8 @@ import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.counter.AddCountersSourceEffect;
 import mage.abilities.mana.DynamicManaAbility;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.constants.TargetController;
 import mage.constants.Zone;
 import mage.counters.CounterType;
@@ -56,9 +56,8 @@ import mage.counters.CounterType;
  */
 public class DwarvenHold extends CardImpl {
 
-    public DwarvenHold(UUID ownerId) {
-        super(ownerId, 414, "Dwarven Hold", Rarity.RARE, new CardType[]{CardType.LAND}, "");
-        this.expansionSetCode = "5ED";
+    public DwarvenHold(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.LAND},"");
 
         // Dwarven Hold enters the battlefield tapped.
         this.addAbility(new EntersBattlefieldTappedAbility());

@@ -25,12 +25,11 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.planarchaos;
+package mage.cards.s;
 
 import java.util.UUID;
 import mage.constants.CardType;
 import mage.constants.Duration;
-import mage.constants.Rarity;
 import mage.constants.Zone;
 import mage.MageInt;
 import mage.ObjectColor;
@@ -39,6 +38,7 @@ import mage.abilities.effects.common.continuous.BoostAllEffect;
 import mage.abilities.keyword.FlashAbility;
 import mage.abilities.keyword.SplitSecondAbility;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.filter.predicate.mageobject.ColorPredicate;
 
@@ -53,9 +53,8 @@ public class SulfurElemental extends CardImpl {
         filter.add(new ColorPredicate(ObjectColor.WHITE));
     }
 
-    public SulfurElemental(UUID ownerId) {
-        super(ownerId, 108, "Sulfur Elemental", Rarity.UNCOMMON, new CardType[]{CardType.CREATURE}, "{2}{R}");
-        this.expansionSetCode = "PLC";
+    public SulfurElemental(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{2}{R}");
         this.subtype.add("Elemental");
 
         this.power = new MageInt(3);

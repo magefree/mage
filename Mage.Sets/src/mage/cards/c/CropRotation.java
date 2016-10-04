@@ -25,15 +25,15 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.urzaslegacy;
+package mage.cards.c;
 
 import java.util.UUID;
 import mage.constants.CardType;
 import mage.constants.Outcome;
-import mage.constants.Rarity;
 import mage.abilities.costs.common.SacrificeTargetCost;
 import mage.abilities.effects.common.search.SearchLibraryPutInPlayEffect;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.filter.common.FilterControlledLandPermanent;
 import mage.filter.common.FilterControlledPermanent;
 import mage.filter.common.FilterLandCard;
@@ -48,9 +48,8 @@ public class CropRotation extends CardImpl {
 
     private static final FilterControlledPermanent filter = new FilterControlledLandPermanent();
 
-    public CropRotation(UUID ownerId) {
-        super(ownerId, 98, "Crop Rotation", Rarity.COMMON, new CardType[]{CardType.INSTANT}, "{G}");
-        this.expansionSetCode = "ULG";
+    public CropRotation(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.INSTANT},"{G}");
 
 
         // As an additional cost to cast Crop Rotation, sacrifice a land.

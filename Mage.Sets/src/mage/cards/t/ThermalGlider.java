@@ -26,16 +26,16 @@
 * or implied, of BetaSteward_at_googlemail.com.
 */
 
-package mage.sets.mercadianmasques;
+package mage.cards.t;
 
 import java.util.UUID;
 import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.MageInt;
 import mage.ObjectColor;
 import mage.abilities.keyword.FlyingAbility;
 import mage.abilities.keyword.ProtectionAbility;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.filter.FilterCard;
 import mage.filter.predicate.mageobject.ColorPredicate;
 
@@ -51,9 +51,8 @@ public class ThermalGlider extends CardImpl {
         filter.add(new ColorPredicate(ObjectColor.RED));
     }
 
-    public ThermalGlider(UUID ownerId) {
-        super(ownerId, 53, "Thermal Glider", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{2}{W}");
-        this.expansionSetCode = "MMQ";
+    public ThermalGlider(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{2}{W}");
         this.subtype.add("Human");
         this.subtype.add("Rebel");
 

@@ -25,16 +25,16 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.timespiral;
+package mage.cards.m;
 
 import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.effects.common.continuous.BoostAllEffect;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Duration;
-import mage.constants.Rarity;
 import mage.constants.Zone;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.filter.predicate.mageobject.SubtypePredicate;
@@ -51,9 +51,8 @@ public class MightSliver extends CardImpl {
         filter.add(new SubtypePredicate("Sliver"));
     }
 
-    public MightSliver(UUID ownerId) {
-        super(ownerId, 205, "Might Sliver", Rarity.UNCOMMON, new CardType[]{CardType.CREATURE}, "{4}{G}");
-        this.expansionSetCode = "TSP";
+    public MightSliver(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{4}{G}");
         this.subtype.add("Sliver");
 
         this.power = new MageInt(2);

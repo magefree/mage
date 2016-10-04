@@ -25,15 +25,15 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.kaladesh;
+package mage.cards.m;
 
 import java.util.UUID;
 import mage.abilities.costs.common.SacrificeTargetCost;
 import mage.abilities.dynamicvalue.common.SacrificeCostConvertedMana;
 import mage.abilities.effects.common.DrawCardSourceControllerEffect;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.filter.common.FilterControlledPermanent;
 import mage.filter.predicate.Predicates;
 import mage.filter.predicate.mageobject.CardTypePredicate;
@@ -53,9 +53,8 @@ public class MorbidCuriosity extends CardImpl {
                 new CardTypePredicate(CardType.CREATURE)));
     }
 
-    public MorbidCuriosity(UUID ownerId) {
-        super(ownerId, 94, "Morbid Curiosity", Rarity.UNCOMMON, new CardType[]{CardType.SORCERY}, "{1}{B}{B}");
-        this.expansionSetCode = "KLD";
+    public MorbidCuriosity(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{1}{B}{B}");
 
         // As an additional cost to cast Morbid Curiosity, sacrifice an artifact or creature.
         this.getSpellAbility().addCost(new SacrificeTargetCost(new TargetControlledPermanent(filter)));

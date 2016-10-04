@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.mirrodin;
+package mage.cards.t;
 
 import java.util.List;
 import java.util.UUID;
@@ -37,9 +37,9 @@ import mage.abilities.effects.Effect;
 import mage.abilities.effects.OneShotEffect;
 import mage.cards.Card;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Outcome;
-import mage.constants.Rarity;
 import mage.constants.Zone;
 import mage.filter.FilterCard;
 import mage.filter.FilterSpell;
@@ -63,9 +63,8 @@ public class ThoughtPrison extends CardImpl {
 
     private static final FilterSpell filter = new FilterSpell("spell cast");
 
-    public ThoughtPrison(UUID ownerId) {
-        super(ownerId, 261, "Thought Prison", Rarity.UNCOMMON, new CardType[]{CardType.ARTIFACT}, "{5}");
-        this.expansionSetCode = "MRD";
+    public ThoughtPrison(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.ARTIFACT},"{5}");
 
         // Imprint - When Thought Prison enters the battlefield, you may have target player reveal his or her hand. If you do, choose a nonland card from it and exile that card.
         EntersBattlefieldTriggeredAbility ability = new EntersBattlefieldTriggeredAbility(new ThoughtPrisonImprintEffect(), true, "<i>Imprint - </i>");

@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.prophecy;
+package mage.cards.o;
 
 import java.util.UUID;
 import mage.abilities.Ability;
@@ -35,13 +35,13 @@ import mage.abilities.effects.ContinuousEffect;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.continuous.BoostAllEffect;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.cards.repository.CardRepository;
 import mage.choices.Choice;
 import mage.choices.ChoiceImpl;
 import mage.constants.CardType;
 import mage.constants.Duration;
 import mage.constants.Outcome;
-import mage.constants.Rarity;
 import mage.filter.FilterCard;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.filter.predicate.mageobject.SubtypePredicate;
@@ -61,9 +61,8 @@ public class Outbreak extends CardImpl {
         filterLand.add(new SubtypePredicate("Swamp"));
     }
 
-    public Outbreak(UUID ownerId) {
-        super(ownerId, 71, "Outbreak", Rarity.UNCOMMON, new CardType[]{CardType.SORCERY}, "{3}{B}");
-        this.expansionSetCode = "PCY";
+    public Outbreak(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{3}{B}");
 
         // You may discard a Swamp card rather than pay Outbreak's mana cost.
         this.addAbility(new AlternativeCostSourceAbility(new DiscardTargetCost(new TargetCardInHand(filterLand))));

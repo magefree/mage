@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.oathofthegatewatch;
+package mage.cards.r;
 
 import java.util.UUID;
 import mage.MageObject;
@@ -34,11 +34,11 @@ import mage.abilities.effects.OneShotEffect;
 import mage.abilities.keyword.DevoidAbility;
 import mage.cards.Card;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.cards.Cards;
 import mage.cards.CardsImpl;
 import mage.constants.CardType;
 import mage.constants.Outcome;
-import mage.constants.Rarity;
 import mage.constants.Zone;
 import mage.filter.common.FilterBasicLandCard;
 import mage.filter.common.FilterLandPermanent;
@@ -53,9 +53,8 @@ import mage.target.common.TargetCardInLibrary;
  */
 public class RuinInTheirWake extends CardImpl {
 
-    public RuinInTheirWake(UUID ownerId) {
-        super(ownerId, 122, "Ruin in Their Wake", Rarity.UNCOMMON, new CardType[]{CardType.SORCERY}, "{1}{G}");
-        this.expansionSetCode = "OGW";
+    public RuinInTheirWake(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{1}{G}");
 
         // Devoid
         this.addAbility(new DevoidAbility(this.color));

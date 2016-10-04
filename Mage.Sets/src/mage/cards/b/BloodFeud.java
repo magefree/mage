@@ -25,13 +25,13 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.darkascension;
+package mage.cards.b;
 
 import java.util.UUID;
 import mage.abilities.effects.common.FightTargetsEffect;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.filter.predicate.mageobject.AnotherTargetPredicate;
 import mage.target.common.TargetCreaturePermanent;
@@ -42,9 +42,8 @@ import mage.target.common.TargetCreaturePermanent;
  */
 public class BloodFeud extends CardImpl {
 
-    public BloodFeud(UUID ownerId) {
-        super(ownerId, 83, "Blood Feud", Rarity.UNCOMMON, new CardType[]{CardType.SORCERY}, "{4}{R}{R}");
-        this.expansionSetCode = "DKA";
+    public BloodFeud(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{4}{R}{R}");
 
         // Target creature fights another target creature.
         this.getSpellAbility().addEffect(new FightTargetsEffect());

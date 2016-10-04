@@ -25,15 +25,15 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.tenthedition;
+package mage.cards.t;
 
 import java.util.UUID;
 import mage.abilities.Ability;
 import mage.abilities.effects.OneShotEffect;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Outcome;
-import mage.constants.Rarity;
 import mage.game.Game;
 import mage.game.turn.TurnMod;
 import mage.target.TargetPlayer;
@@ -44,9 +44,8 @@ import mage.target.TargetPlayer;
  */
 public class TimeStretch extends CardImpl {
 
-    public TimeStretch(UUID ownerId) {
-        super(ownerId, 118, "Time Stretch", Rarity.RARE, new CardType[]{CardType.SORCERY}, "{8}{U}{U}");
-        this.expansionSetCode = "10E";
+    public TimeStretch(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{8}{U}{U}");
 
 
         // Target player takes two extra turns after this one.

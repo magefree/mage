@@ -25,11 +25,10 @@
 *  authors and should not be interpreted as representing official policies, either expressed
 *  or implied, of BetaSteward_at_googlemail.com.
 */
-package mage.sets.invasion;
+package mage.cards.u;
 
 import java.util.UUID;
 import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.constants.Zone;
 import mage.MageInt;
 import mage.abilities.Ability;
@@ -41,6 +40,7 @@ import mage.abilities.effects.common.RegenerateSourceEffect;
 import mage.abilities.effects.common.counter.AddCountersSourceEffect;
 import mage.abilities.keyword.KickerAbility;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.counters.CounterType;
 
 /**
@@ -51,9 +51,8 @@ public class UrborgSkeleton extends CardImpl {
 
     private static final String staticText = "If Urborg Skeleton was kicked, it enters the battlefield with a +1/+1 counter on it";
 
-    public UrborgSkeleton(UUID ownerId) {
-        super(ownerId, 134, "Urborg Skeleton", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{B}");
-        this.expansionSetCode = "INV";
+    public UrborgSkeleton(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{B}");
         this.subtype.add("Skeleton");
 
         this.power = new MageInt(0);

@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.planarchaos;
+package mage.cards.r;
 
 import java.util.UUID;
 import mage.abilities.Ability;
@@ -39,9 +39,9 @@ import mage.abilities.keyword.EnchantAbility;
 import mage.abilities.keyword.VanishingSacrificeAbility;
 import mage.abilities.keyword.VanishingUpkeepAbility;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Outcome;
-import mage.constants.Rarity;
 import mage.constants.Zone;
 import mage.counters.CounterType;
 import mage.game.Game;
@@ -56,9 +56,8 @@ import mage.target.targetpointer.FixedTarget;
  */
 public class RealityAcid extends CardImpl {
 
-    public RealityAcid(UUID ownerId) {
-        super(ownerId, 45, "Reality Acid", Rarity.COMMON, new CardType[]{CardType.ENCHANTMENT}, "{2}{U}");
-        this.expansionSetCode = "PLC";
+    public RealityAcid(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.ENCHANTMENT},"{2}{U}");
         this.subtype.add("Aura");
 
         // Enchant permanent

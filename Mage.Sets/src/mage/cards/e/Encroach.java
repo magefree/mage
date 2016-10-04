@@ -25,13 +25,13 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.urzasdestiny;
+package mage.cards.e;
 
 import java.util.UUID;
 import mage.abilities.effects.common.discard.DiscardCardYouChooseTargetEffect;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.filter.FilterCard;
 import mage.filter.predicate.Predicates;
 import mage.filter.predicate.mageobject.CardTypePredicate;
@@ -51,9 +51,8 @@ public class Encroach extends CardImpl {
         filter.add(new CardTypePredicate(CardType.LAND));
     }
 
-    public Encroach(UUID ownerId) {
-        super(ownerId, 59, "Encroach", Rarity.UNCOMMON, new CardType[]{CardType.SORCERY}, "{B}");
-        this.expansionSetCode = "UDS";
+    public Encroach(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{B}");
 
         // Target player reveals his or her hand. You choose a nonbasic land card from it. That player discards that card.
         this.getSpellAbility().addEffect(new DiscardCardYouChooseTargetEffect(filter));

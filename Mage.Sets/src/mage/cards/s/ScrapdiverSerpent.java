@@ -26,12 +26,11 @@
  *  or implied, of BetaSteward_at_googlemail.com.
  */
 
-package mage.sets.scarsofmirrodin;
+package mage.cards.s;
 
 import java.util.UUID;
 
 import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.constants.Zone;
 import mage.MageInt;
 import mage.abilities.common.SimpleStaticAbility;
@@ -40,6 +39,7 @@ import mage.abilities.decorator.ConditionalRestrictionEffect;
 import mage.abilities.effects.Effect;
 import mage.abilities.effects.common.combat.CantBeBlockedSourceEffect;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.filter.common.FilterArtifactPermanent;
 
 /**
@@ -48,9 +48,8 @@ import mage.filter.common.FilterArtifactPermanent;
  */
 public class ScrapdiverSerpent extends CardImpl {
 
-    public ScrapdiverSerpent (UUID ownerId) {
-        super(ownerId, 41, "Scrapdiver Serpent", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{5}{U}{U}");
-        this.expansionSetCode = "SOM";
+    public ScrapdiverSerpent (UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{5}{U}{U}");
         this.subtype.add("Serpent");
 
         this.power = new MageInt(5);

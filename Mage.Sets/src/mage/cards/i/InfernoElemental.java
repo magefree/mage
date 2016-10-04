@@ -25,15 +25,15 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.magic2010;
+package mage.cards.i;
 
 import java.util.UUID;
 import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.MageInt;
 import mage.abilities.common.BlocksOrBecomesBlockedByCreatureTriggeredAbility;
 import mage.abilities.effects.common.DamageTargetEffect;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 
 /**
  *
@@ -41,9 +41,8 @@ import mage.cards.CardImpl;
  */
 public class InfernoElemental extends CardImpl {
 
-    public InfernoElemental(UUID ownerId) {
-        super(ownerId, 142, "Inferno Elemental", Rarity.UNCOMMON, new CardType[]{CardType.CREATURE}, "{4}{R}{R}");
-        this.expansionSetCode = "M10";
+    public InfernoElemental(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{4}{R}{R}");
         this.subtype.add("Elemental");
 
         this.power = new MageInt(4);

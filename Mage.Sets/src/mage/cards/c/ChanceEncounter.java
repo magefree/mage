@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.odyssey;
+package mage.cards.c;
 
 import java.util.UUID;
 import mage.abilities.TriggeredAbility;
@@ -36,8 +36,8 @@ import mage.abilities.decorator.ConditionalTriggeredAbility;
 import mage.abilities.effects.common.WinGameSourceControllerEffect;
 import mage.abilities.effects.common.counter.AddCountersSourceEffect;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.constants.TargetController;
 import mage.constants.Zone;
 import mage.counters.CounterType;
@@ -50,9 +50,8 @@ import mage.game.events.GameEvent;
  */
 public class ChanceEncounter extends CardImpl {
 
-    public ChanceEncounter(UUID ownerId) {
-        super(ownerId, 182, "Chance Encounter", Rarity.RARE, new CardType[]{CardType.ENCHANTMENT}, "{2}{R}{R}");
-        this.expansionSetCode = "ODY";
+    public ChanceEncounter(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.ENCHANTMENT},"{2}{R}{R}");
 
         // Whenever you win a coin flip, put a luck counter on Chance Encounter.
         this.addAbility(new ChanceEncounterTriggeredAbility());

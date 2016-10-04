@@ -26,15 +26,15 @@
  *  or implied, of BetaSteward_at_googlemail.com.
  */
 
-package mage.sets.returntoravnica;
+package mage.cards.s;
 
 import java.util.UUID;
 import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.abilities.dynamicvalue.common.ManacostVariableValue;
 import mage.abilities.effects.common.DrawCardSourceControllerEffect;
 import mage.abilities.effects.common.GainLifeEffect;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 
 /**
  *
@@ -42,9 +42,8 @@ import mage.cards.CardImpl;
  */
 public class SphinxsRevelation extends CardImpl {
 
-    public SphinxsRevelation (UUID ownerId) {
-        super(ownerId, 200, "Sphinx's Revelation", Rarity.MYTHIC, new CardType[]{CardType.INSTANT}, "{X}{W}{U}{U}");
-        this.expansionSetCode = "RTR";
+    public SphinxsRevelation (UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.INSTANT},"{X}{W}{U}{U}");
 
 
         // You gain X life and draw X cards.

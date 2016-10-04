@@ -25,15 +25,15 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.avacynrestored;
+package mage.cards.m;
 
 import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.common.DiesTriggeredAbility;
 import mage.abilities.effects.common.CreateTokenEffect;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.game.permanent.token.ZombieToken;
 
 /**
@@ -42,9 +42,8 @@ import mage.game.permanent.token.ZombieToken;
  */
 public class MaalfeldTwins extends CardImpl {
 
-    public MaalfeldTwins(UUID ownerId) {
-        super(ownerId, 112, "Maalfeld Twins", Rarity.UNCOMMON, new CardType[]{CardType.CREATURE}, "{5}{B}");
-        this.expansionSetCode = "AVR";
+    public MaalfeldTwins(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{5}{B}");
         this.subtype.add("Zombie");
 
         this.power = new MageInt(4);

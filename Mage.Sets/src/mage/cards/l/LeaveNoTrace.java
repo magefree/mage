@@ -25,16 +25,16 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.ravnica;
+package mage.cards.l;
 
 import java.util.UUID;
 
 import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.ObjectColor;
 import mage.abilities.Ability;
 import mage.abilities.effects.OneShotEffect;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.Outcome;
 import mage.filter.FilterPermanent;
 import mage.filter.predicate.mageobject.CardTypePredicate;
@@ -52,9 +52,8 @@ public class LeaveNoTrace extends CardImpl {
         filter.add(new CardTypePredicate(CardType.ENCHANTMENT));
     }
 
-    public LeaveNoTrace(UUID ownerId) {
-        super(ownerId, 23, "Leave No Trace", Rarity.COMMON, new CardType[]{CardType.INSTANT}, "{1}{W}");
-        this.expansionSetCode = "RAV";
+    public LeaveNoTrace(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.INSTANT},"{1}{W}");
 
 
         // Radiance - Destroy target enchantment and each other enchantment that shares a color with it.

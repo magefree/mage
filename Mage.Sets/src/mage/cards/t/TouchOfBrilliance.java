@@ -25,13 +25,13 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.portalsecondage;
+package mage.cards.t;
 
 import java.util.UUID;
 import mage.abilities.effects.common.DrawCardSourceControllerEffect;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.Rarity;
 
 /**
  *
@@ -39,9 +39,8 @@ import mage.constants.Rarity;
  */
 public class TouchOfBrilliance extends CardImpl {
 
-    public TouchOfBrilliance(UUID ownerId) {
-        super(ownerId, 58, "Touch of Brilliance", Rarity.COMMON, new CardType[]{CardType.SORCERY}, "{3}{U}");
-        this.expansionSetCode = "PO2";
+    public TouchOfBrilliance(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{3}{U}");
 
         // Draw two cards.
         this.getSpellAbility().addEffect(new DrawCardSourceControllerEffect(2));

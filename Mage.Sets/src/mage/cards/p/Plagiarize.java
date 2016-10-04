@@ -25,16 +25,16 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.ninthedition;
+package mage.cards.p;
 
 import java.util.UUID;
 import mage.abilities.Ability;
 import mage.abilities.effects.ReplacementEffectImpl;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Duration;
 import mage.constants.Outcome;
-import mage.constants.Rarity;
 import mage.game.Game;
 import mage.game.events.GameEvent;
 import mage.players.Player;
@@ -46,9 +46,8 @@ import mage.target.TargetPlayer;
  */
 public class Plagiarize extends CardImpl {
 
-    public Plagiarize(UUID ownerId) {
-        super(ownerId, 89, "Plagiarize", Rarity.RARE, new CardType[]{CardType.INSTANT}, "{3}{U}");
-        this.expansionSetCode = "9ED";
+    public Plagiarize(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.INSTANT},"{3}{U}");
 
         // Until end of turn, if target player would draw a card, instead that player skips that draw and you draw a card.
         this.getSpellAbility().addTarget(new TargetPlayer());

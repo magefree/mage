@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.venservskoth;
+package mage.cards.v;
 
 import java.util.UUID;
 import mage.MageObject;
@@ -36,10 +36,10 @@ import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.ReplacementEffectImpl;
 import mage.cards.Card;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Duration;
 import mage.constants.Outcome;
-import mage.constants.Rarity;
 import mage.constants.Zone;
 import mage.game.ExileZone;
 import mage.game.Game;
@@ -56,9 +56,8 @@ import mage.target.common.TargetCreaturePermanent;
  */
 public class VanishIntoMemory extends CardImpl {
 
-    public VanishIntoMemory(UUID ownerId) {
-        super(ownerId, 31, "Vanish into Memory", Rarity.UNCOMMON, new CardType[]{CardType.INSTANT}, "{2}{W}{U}");
-        this.expansionSetCode = "DDI";
+    public VanishIntoMemory(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.INSTANT},"{2}{W}{U}");
 
         // Exile target creature. You draw cards equal to that creature's power.
         // At the beginning of your next upkeep, return that card to the battlefield under its owner's control. If you do, discard cards equal to that creature's toughness.

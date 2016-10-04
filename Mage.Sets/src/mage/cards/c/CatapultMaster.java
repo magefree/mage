@@ -25,18 +25,18 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.onslaught;
+package mage.cards.c;
 
 import java.util.UUID;
 
 import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.costs.common.TapTargetCost;
 import mage.abilities.effects.common.ExileTargetEffect;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.Zone;
 import mage.filter.common.FilterControlledPermanent;
 import mage.filter.predicate.Predicates;
@@ -57,9 +57,8 @@ public class CatapultMaster extends CardImpl {
         filter.add(Predicates.not(new TappedPredicate()));
         filter.add(new SubtypePredicate("Soldier"));
     }
-    public CatapultMaster(UUID ownerId) {
-        super(ownerId, 10, "Catapult Master", Rarity.RARE, new CardType[]{CardType.CREATURE}, "{3}{W}{W}");
-        this.expansionSetCode = "ONS";
+    public CatapultMaster(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{3}{W}{W}");
         this.subtype.add("Human");
         this.subtype.add("Soldier");
 

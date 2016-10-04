@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.timespiral;
+package mage.cards.w;
 
 import java.util.UUID;
 import mage.MageInt;
@@ -33,9 +33,9 @@ import mage.abilities.Ability;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.keyword.BuybackAbility;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Outcome;
-import mage.constants.Rarity;
 import mage.game.Game;
 import mage.game.permanent.token.Token;
 
@@ -45,9 +45,8 @@ import mage.game.permanent.token.Token;
  */
 public class Wurmcalling extends CardImpl {
 
-    public Wurmcalling(UUID ownerId) {
-        super(ownerId, 234, "Wurmcalling", Rarity.RARE, new CardType[]{CardType.SORCERY}, "{X}{G}");
-        this.expansionSetCode = "TSP";
+    public Wurmcalling(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{X}{G}");
 
         // Buyback {2}{G}
         this.addAbility(new BuybackAbility("{2}{G}"));

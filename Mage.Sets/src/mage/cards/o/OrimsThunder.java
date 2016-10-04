@@ -25,12 +25,11 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.apocalypse;
+package mage.cards.o;
 
 import java.util.UUID;
 import mage.constants.CardType;
 import mage.constants.Outcome;
-import mage.constants.Rarity;
 import mage.MageObject;
 import mage.abilities.Ability;
 import mage.abilities.SpellAbility;
@@ -39,6 +38,7 @@ import mage.abilities.decorator.ConditionalOneShotEffect;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.keyword.KickerAbility;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.Zone;
 import mage.filter.common.FilterArtifactOrEnchantmentPermanent;
 import mage.game.Game;
@@ -52,9 +52,8 @@ import mage.target.common.TargetCreaturePermanent;
  */
 public class OrimsThunder extends CardImpl {
 
-    public OrimsThunder(UUID ownerId) {
-        super(ownerId, 15, "Orim's Thunder", Rarity.COMMON, new CardType[]{CardType.INSTANT}, "{2}{W}");
-        this.expansionSetCode = "APC";
+    public OrimsThunder(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.INSTANT},"{2}{W}");
 
         // Kicker {R}
         this.addAbility(new KickerAbility("{R}"));

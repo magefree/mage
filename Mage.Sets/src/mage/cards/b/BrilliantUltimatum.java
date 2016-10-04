@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.shardsofalara;
+package mage.cards.b;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -35,11 +35,11 @@ import mage.abilities.Ability;
 import mage.abilities.effects.OneShotEffect;
 import mage.cards.Card;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.cards.Cards;
 import mage.cards.CardsImpl;
 import mage.constants.CardType;
 import mage.constants.Outcome;
-import mage.constants.Rarity;
 import mage.constants.Zone;
 import mage.filter.FilterCard;
 import mage.game.Game;
@@ -53,9 +53,8 @@ import mage.target.common.TargetOpponent;
  */
 public class BrilliantUltimatum extends CardImpl {
 
-    public BrilliantUltimatum(UUID ownerId) {
-        super(ownerId, 159, "Brilliant Ultimatum", Rarity.RARE, new CardType[]{CardType.SORCERY}, "{W}{W}{U}{U}{U}{B}{B}");
-        this.expansionSetCode = "ALA";
+    public BrilliantUltimatum(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{W}{W}{U}{U}{U}{B}{B}");
 
         // Exile the top five cards of your library. An opponent separates those cards into two piles. You may play any number of cards from one of those piles without paying their mana costs.
         this.getSpellAbility().addEffect(new BrilliantUltimatumEffect());

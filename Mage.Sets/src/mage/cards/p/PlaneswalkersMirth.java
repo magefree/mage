@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.planeshift;
+package mage.cards.p;
 
 import java.util.UUID;
 import mage.abilities.Ability;
@@ -34,11 +34,11 @@ import mage.abilities.costs.mana.ManaCostsImpl;
 import mage.abilities.effects.OneShotEffect;
 import mage.cards.Card;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.cards.Cards;
 import mage.cards.CardsImpl;
 import mage.constants.CardType;
 import mage.constants.Outcome;
-import mage.constants.Rarity;
 import mage.constants.Zone;
 import mage.game.Game;
 import mage.players.Player;
@@ -50,9 +50,8 @@ import mage.target.common.TargetOpponent;
  */
 public class PlaneswalkersMirth extends CardImpl {
 
-    public PlaneswalkersMirth(UUID ownerId) {
-        super(ownerId, 12, "Planeswalker's Mirth", Rarity.RARE, new CardType[]{CardType.ENCHANTMENT}, "{2}{W}");
-        this.expansionSetCode = "PLS";
+    public PlaneswalkersMirth(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.ENCHANTMENT},"{2}{W}");
 
         // {3}{W}: Target opponent reveals a card at random from his or her hand. You gain life equal to that card's converted mana cost.
         Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new PlaneswalkersMirthEffect(), new ManaCostsImpl("{3}{W}"));

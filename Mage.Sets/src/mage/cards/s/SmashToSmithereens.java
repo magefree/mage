@@ -25,15 +25,15 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.shadowmoor;
+package mage.cards.s;
 
 import java.util.UUID;
 import mage.abilities.effects.Effect;
 import mage.abilities.effects.common.DamageTargetControllerEffect;
 import mage.abilities.effects.common.DestroyTargetEffect;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.target.common.TargetArtifactPermanent;
 
 /**
@@ -42,9 +42,8 @@ import mage.target.common.TargetArtifactPermanent;
  */
 public class SmashToSmithereens extends CardImpl {
 
-    public SmashToSmithereens(UUID ownerId) {
-        super(ownerId, 107, "Smash to Smithereens", Rarity.COMMON, new CardType[]{CardType.INSTANT}, "{1}{R}");
-        this.expansionSetCode = "SHM";
+    public SmashToSmithereens(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.INSTANT},"{1}{R}");
 
         // Destroy target artifact. Smash to Smithereens deals 3 damage to that artifact's controller.
         this.getSpellAbility().addEffect(new DestroyTargetEffect());

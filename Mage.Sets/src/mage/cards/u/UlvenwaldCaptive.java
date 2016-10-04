@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.eldritchmoon;
+package mage.cards.u;
 
 import java.util.UUID;
 import mage.MageInt;
@@ -36,8 +36,8 @@ import mage.abilities.keyword.DefenderAbility;
 import mage.abilities.keyword.TransformAbility;
 import mage.abilities.mana.GreenManaAbility;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.constants.Zone;
 
 /**
@@ -46,16 +46,15 @@ import mage.constants.Zone;
  */
 public class UlvenwaldCaptive extends CardImpl {
 
-    public UlvenwaldCaptive(UUID ownerId) {
-        super(ownerId, 175, "Ulvenwald Captive", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{1}{G}");
-        this.expansionSetCode = "EMN";
+    public UlvenwaldCaptive(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{1}{G}");
         this.subtype.add("Werewolf");
         this.subtype.add("Horror");
         this.power = new MageInt(1);
         this.toughness = new MageInt(2);
 
         this.transformable = true;
-        this.secondSideCard = new UlvenwaldAbomination(ownerId);
+        this.secondSideCardClazz = UlvenwaldAbomination.class;
 
         // Defender
         this.addAbility(DefenderAbility.getInstance());

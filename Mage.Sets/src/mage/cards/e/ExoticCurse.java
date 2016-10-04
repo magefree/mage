@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.phyrexiavsthecoalition;
+package mage.cards.e;
 
 import java.util.UUID;
 import mage.abilities.common.SimpleStaticAbility;
@@ -36,10 +36,10 @@ import mage.abilities.effects.common.AttachEffect;
 import mage.abilities.effects.common.continuous.BoostEnchantedEffect;
 import mage.abilities.keyword.EnchantAbility;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Duration;
 import mage.constants.Outcome;
-import mage.constants.Rarity;
 import mage.constants.Zone;
 import mage.target.TargetPermanent;
 
@@ -49,9 +49,8 @@ import mage.target.TargetPermanent;
  */
 public class ExoticCurse extends CardImpl {
 
-    public ExoticCurse(UUID ownerId) {
-        super(ownerId, 56, "Exotic Curse", Rarity.COMMON, new CardType[]{CardType.ENCHANTMENT}, "{2}{B}");
-        this.expansionSetCode = "DDE";
+    public ExoticCurse(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.ENCHANTMENT},"{2}{B}");
         this.subtype.add("Aura");
 
         // Enchant creature

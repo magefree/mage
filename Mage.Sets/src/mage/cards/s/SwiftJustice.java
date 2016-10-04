@@ -26,18 +26,18 @@
  * or implied, of BetaSteward_at_googlemail.com.
  */
 
-package mage.sets.returntoravnica;
+package mage.cards.s;
 
 import java.util.UUID;
 import mage.abilities.effects.Effect;
 import mage.constants.CardType;
 import mage.constants.Duration;
-import mage.constants.Rarity;
 import mage.abilities.effects.common.continuous.BoostTargetEffect;
 import mage.abilities.effects.common.continuous.GainAbilityTargetEffect;
 import mage.abilities.keyword.FirstStrikeAbility;
 import mage.abilities.keyword.LifelinkAbility;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.target.common.TargetCreaturePermanent;
 
 /**
@@ -46,9 +46,8 @@ import mage.target.common.TargetCreaturePermanent;
  */
 public class SwiftJustice extends CardImpl {
 
-    public SwiftJustice(UUID ownerId) {
-        super(ownerId, 26, "Swift Justice", Rarity.COMMON, new CardType[]{CardType.INSTANT}, "{W}");
-        this.expansionSetCode = "RTR";
+    public SwiftJustice(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.INSTANT},"{W}");
 
 
         // Until end of turn, target creature gets +1/+0 and gains first strike and lifelink.

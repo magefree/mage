@@ -25,15 +25,15 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.ninthedition;
+package mage.cards.s;
 
 import java.util.UUID;
 import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.ObjectColor;
 import mage.abilities.effects.common.DestroyTargetEffect;
 import mage.abilities.effects.common.DrawCardSourceControllerEffect;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.filter.predicate.mageobject.ColorPredicate;
 import mage.target.common.TargetCreaturePermanent;
@@ -49,9 +49,8 @@ public class Slay extends CardImpl {
         filter.add(new ColorPredicate(ObjectColor.GREEN));
     }
     
-    public Slay(UUID ownerId) {
-        super(ownerId, 163, "Slay", Rarity.UNCOMMON, new CardType[]{CardType.INSTANT}, "{2}{B}");
-        this.expansionSetCode = "9ED";
+    public Slay(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.INSTANT},"{2}{B}");
 
 
         // Destroy target green creature. It can't be regenerated.

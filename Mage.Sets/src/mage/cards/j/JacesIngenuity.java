@@ -26,13 +26,13 @@
  *  or implied, of BetaSteward_at_googlemail.com.
  */
 
-package mage.sets.magic2011;
+package mage.cards.j;
 
 import java.util.UUID;
 import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.abilities.effects.common.DrawCardSourceControllerEffect;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 
 /**
  *
@@ -40,9 +40,8 @@ import mage.cards.CardImpl;
  */
 public class JacesIngenuity extends CardImpl {
 
-    public JacesIngenuity(UUID ownerId) {
-        super(ownerId, 60, "Jace's Ingenuity", Rarity.UNCOMMON, new CardType[]{CardType.INSTANT}, "{3}{U}{U}");
-        this.expansionSetCode = "M11";
+    public JacesIngenuity(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.INSTANT},"{3}{U}{U}");
 
         this.getSpellAbility().addEffect(new DrawCardSourceControllerEffect(3));
     }

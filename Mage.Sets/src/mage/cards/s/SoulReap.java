@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.eventide;
+package mage.cards.s;
 
 import java.util.UUID;
 import mage.ObjectColor;
@@ -35,9 +35,9 @@ import mage.abilities.decorator.ConditionalOneShotEffect;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.DestroyTargetEffect;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Outcome;
-import mage.constants.Rarity;
 import mage.constants.WatcherScope;
 import mage.filter.FilterSpell;
 import mage.filter.common.FilterCreaturePermanent;
@@ -66,9 +66,8 @@ public class SoulReap extends CardImpl {
 
     private String rule = "Its controller loses 3 life if you've cast another black spell this turn";
 
-    public SoulReap(UUID ownerId) {
-        super(ownerId, 44, "Soul Reap", Rarity.COMMON, new CardType[]{CardType.SORCERY}, "{1}{B}");
-        this.expansionSetCode = "EVE";
+    public SoulReap(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{1}{B}");
 
         // Destroy target nongreen creature. Its controller loses 3 life if you've cast another black spell this turn.
         this.getSpellAbility().addEffect(new DestroyTargetEffect());

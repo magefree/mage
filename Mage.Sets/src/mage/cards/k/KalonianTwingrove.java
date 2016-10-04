@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.magic2015;
+package mage.cards.k;
 
 import java.util.UUID;
 import mage.MageInt;
@@ -36,14 +36,15 @@ import mage.abilities.effects.Effect;
 import mage.abilities.effects.common.CreateTokenEffect;
 import mage.abilities.effects.common.continuous.SetPowerToughnessSourceEffect;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Duration;
-import mage.constants.Rarity;
 import mage.constants.Zone;
 import mage.filter.common.FilterControlledPermanent;
 import mage.filter.predicate.mageobject.SubtypePredicate;
 import mage.game.permanent.token.Token;
-import static mage.sets.magic2015.KalonianTwingrove.filterLands;
+
+import static mage.cards.k.KalonianTwingrove.filterLands;
 
 /**
  *
@@ -57,9 +58,8 @@ public class KalonianTwingrove extends CardImpl {
         filterLands.add(new SubtypePredicate("Forest"));
     }
 
-    public KalonianTwingrove(UUID ownerId) {
-        super(ownerId, 182, "Kalonian Twingrove", Rarity.RARE, new CardType[]{CardType.CREATURE}, "{5}{G}");
-        this.expansionSetCode = "M15";
+    public KalonianTwingrove(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{5}{G}");
         this.subtype.add("Treefolk");
         this.subtype.add("Warrior");
 

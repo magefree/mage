@@ -25,11 +25,10 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.modernmasters;
+package mage.cards.d;
 
 import java.util.UUID;
 import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.abilities.dynamicvalue.DynamicValue;
 import mage.abilities.dynamicvalue.common.ManacostVariableValue;
 import mage.abilities.effects.Effect;
@@ -37,6 +36,7 @@ import mage.abilities.effects.common.discard.DiscardEachPlayerEffect;
 import mage.abilities.effects.common.LoseLifeAllPlayersEffect;
 import mage.abilities.effects.common.SacrificeAllEffect;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.filter.common.FilterControlledCreaturePermanent;
 import mage.filter.common.FilterControlledLandPermanent;
 
@@ -46,9 +46,8 @@ import mage.filter.common.FilterControlledLandPermanent;
  */
 public class DeathCloud extends CardImpl {
 
-    public DeathCloud(UUID ownerId) {
-        super(ownerId, 76, "Death Cloud", Rarity.RARE, new CardType[]{CardType.SORCERY}, "{X}{B}{B}{B}");
-        this.expansionSetCode = "MMA";
+    public DeathCloud(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{X}{B}{B}{B}");
 
 
         // Each player loses X life, discards X cards, sacrifices X creatures, then sacrifices X lands.

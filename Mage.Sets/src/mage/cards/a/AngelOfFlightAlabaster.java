@@ -1,4 +1,4 @@
-package mage.sets.innistrad;
+package mage.cards.a;
 
 import mage.MageInt;
 import mage.abilities.Ability;
@@ -6,8 +6,8 @@ import mage.abilities.common.BeginningOfUpkeepTriggeredAbility;
 import mage.abilities.effects.common.ReturnToHandTargetEffect;
 import mage.abilities.keyword.FlyingAbility;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.constants.TargetController;
 import mage.filter.FilterCard;
 import mage.filter.predicate.mageobject.SubtypePredicate;
@@ -23,9 +23,8 @@ public class AngelOfFlightAlabaster extends CardImpl {
         filter.add(new SubtypePredicate("Spirit"));
     }
 
-    public AngelOfFlightAlabaster(UUID ownerId) {
-        super(ownerId, 2, "Angel of Flight Alabaster", Rarity.RARE, new CardType[]{CardType.CREATURE}, "{4}{W}");
-        this.expansionSetCode = "ISD";
+    public AngelOfFlightAlabaster(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{4}{W}");
         this.subtype.add("Angel");
 
         this.power = new MageInt(4);

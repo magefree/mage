@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.commander2014;
+package mage.cards.m;
 
 import java.util.UUID;
 import mage.MageInt;
@@ -36,8 +36,8 @@ import mage.abilities.costs.mana.GenericManaCost;
 import mage.abilities.dynamicvalue.common.PermanentsOnBattlefieldCount;
 import mage.abilities.mana.DynamicManaAbility;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.filter.common.FilterControlledPermanent;
 import mage.filter.predicate.mageobject.SubtypePredicate;
 
@@ -53,9 +53,8 @@ public class MagusOfTheCoffers extends CardImpl {
         filter.add(new SubtypePredicate("Swamp"));
     }
 
-    public MagusOfTheCoffers(UUID ownerId) {
-        super(ownerId, 148, "Magus of the Coffers", Rarity.RARE, new CardType[]{CardType.CREATURE}, "{4}{B}");
-        this.expansionSetCode = "C14";
+    public MagusOfTheCoffers(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{4}{B}");
         this.subtype.add("Human");
         this.subtype.add("Wizard");
 

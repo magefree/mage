@@ -26,11 +26,10 @@
  *  or implied, of BetaSteward_at_googlemail.com.
  */
 
-package mage.sets.magic2011;
+package mage.cards.s;
 
 import java.util.UUID;
 import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.constants.TargetController;
 import mage.constants.Zone;
 import mage.MageInt;
@@ -38,6 +37,7 @@ import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.costs.common.TapSourceCost;
 import mage.abilities.effects.common.counter.AddCountersAllEffect;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.counters.CounterType;
 import mage.filter.FilterPermanent;
 import mage.filter.predicate.mageobject.CardTypePredicate;
@@ -57,9 +57,8 @@ public class SteelOverseer extends CardImpl {
         filter.add(new ControllerPredicate(TargetController.YOU));
     }
 
-    public SteelOverseer(UUID ownerId) {
-        super(ownerId, 214, "Steel Overseer", Rarity.RARE, new CardType[]{CardType.ARTIFACT, CardType.CREATURE}, "{2}");
-        this.expansionSetCode = "M11";
+    public SteelOverseer(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.ARTIFACT,CardType.CREATURE},"{2}");
         this.subtype.add("Construct");
         this.power = new MageInt(1);
         this.toughness = new MageInt(1);

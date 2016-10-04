@@ -25,7 +25,7 @@
  * authors and should not be interpreted as representing official policies, either expressed
  * or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.magic2010;
+package mage.cards.m;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -38,9 +38,9 @@ import mage.abilities.costs.common.TapSourceCost;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.CreateTokenEffect;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Outcome;
-import mage.constants.Rarity;
 import mage.constants.Zone;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.filter.predicate.Predicates;
@@ -61,9 +61,8 @@ public class MasterOfTheWildHunt extends CardImpl {
 
     private static WolfToken wolfToken = new WolfToken();
 
-    public MasterOfTheWildHunt(UUID ownerId) {
-        super(ownerId, 191, "Master of the Wild Hunt", Rarity.MYTHIC, new CardType[]{CardType.CREATURE}, "{2}{G}{G}");
-        this.expansionSetCode = "M10";
+    public MasterOfTheWildHunt(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{2}{G}{G}");
         this.subtype.add("Human");
         this.subtype.add("Shaman");
 

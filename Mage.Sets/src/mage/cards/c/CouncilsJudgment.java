@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.vintagemasters;
+package mage.cards.c;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -34,9 +34,9 @@ import java.util.UUID;
 import mage.abilities.Ability;
 import mage.abilities.effects.OneShotEffect;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Outcome;
-import mage.constants.Rarity;
 import mage.constants.Zone;
 import mage.filter.common.FilterNonlandPermanent;
 import mage.filter.predicate.Predicates;
@@ -53,9 +53,8 @@ import mage.target.common.TargetNonlandPermanent;
  */
 public class CouncilsJudgment extends CardImpl {
 
-    public CouncilsJudgment(UUID ownerId) {
-        super(ownerId, 20, "Council's Judgment", Rarity.RARE, new CardType[]{CardType.SORCERY}, "{1}{W}{W}");
-        this.expansionSetCode = "VMA";
+    public CouncilsJudgment(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{1}{W}{W}");
 
         // Will of the council - Starting with you, each player votes for a nonland permanent you don't control. Exile each permanent with the most votes or tied for most votes.
         this.getSpellAbility().addEffect(new CouncilsJudgmentEffect());

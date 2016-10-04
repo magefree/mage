@@ -25,13 +25,13 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.magic2013;
+package mage.cards.f;
 
 import java.util.UUID;
 import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.abilities.effects.common.DamageMultiEffect;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.target.common.TargetCreatureOrPlayerAmount;
 
 /**
@@ -40,9 +40,8 @@ import mage.target.common.TargetCreatureOrPlayerAmount;
  */
 public class FlamesOfTheFirebrand extends CardImpl {
 
-    public FlamesOfTheFirebrand(UUID ownerId) {
-        super(ownerId, 132, "Flames of the Firebrand", Rarity.UNCOMMON, new CardType[]{CardType.SORCERY}, "{2}{R}");
-        this.expansionSetCode = "M13";
+    public FlamesOfTheFirebrand(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{2}{R}");
 
 
         // Flames of the Firebrand deals 3 damage divided as you choose among one, two, or three target creatures and/or players.

@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.zendikar;
+package mage.cards.l;
 
 import java.util.List;
 import java.util.UUID;
@@ -36,8 +36,8 @@ import mage.abilities.costs.mana.ManaCostsImpl;
 import mage.abilities.effects.common.DamageAllEffect;
 import mage.abilities.effects.common.DestroyTargetEffect;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.filter.common.FilterLandPermanent;
 import mage.game.Game;
@@ -51,9 +51,8 @@ import mage.watchers.common.PermanentsEnteredBattlefieldWatcher;
  */
 public class LavaballTrap extends CardImpl {
 
-    public LavaballTrap(UUID ownerId) {
-        super(ownerId, 135, "Lavaball Trap", Rarity.RARE, new CardType[]{CardType.INSTANT}, "{6}{R}{R}");
-        this.expansionSetCode = "ZEN";
+    public LavaballTrap(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.INSTANT},"{6}{R}{R}");
         this.subtype.add("Trap");
 
         // If an opponent had two or more lands enter the battlefield under his or her control this turn, you may pay {3}{R}{R} rather than pay Lavaball Trap's mana cost.

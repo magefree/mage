@@ -26,15 +26,15 @@
  *  or implied, of BetaSteward_at_googlemail.com.
  */
 
-package mage.sets.returntoravnica;
+package mage.cards.m;
 
 import java.util.UUID;
 import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.MageInt;
 import mage.abilities.keyword.FirstStrikeAbility;
 import mage.abilities.keyword.HasteAbility;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 
 /**
  *
@@ -42,9 +42,8 @@ import mage.cards.CardImpl;
  */
 public class MinotaurAggressor extends CardImpl {
 
-    public MinotaurAggressor (UUID ownerId) {
-        super(ownerId, 100, "Minotaur Aggressor", Rarity.UNCOMMON, new CardType[]{CardType.CREATURE}, "{6}{R}");
-        this.expansionSetCode = "RTR";
+    public MinotaurAggressor (UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{6}{R}");
         this.subtype.add("Minotaur");
         this.subtype.add("Berserker");
 

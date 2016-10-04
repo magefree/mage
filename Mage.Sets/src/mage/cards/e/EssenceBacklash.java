@@ -25,15 +25,15 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.returntoravnica;
+package mage.cards.e;
 
 import java.util.UUID;
 
 import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.abilities.Ability;
 import mage.abilities.effects.OneShotEffect;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.Outcome;
 import mage.filter.FilterSpell;
 import mage.filter.predicate.mageobject.CardTypePredicate;
@@ -54,9 +54,8 @@ public class EssenceBacklash extends CardImpl {
         filter.add(new CardTypePredicate(CardType.CREATURE));
     }
 
-    public EssenceBacklash(UUID ownerId) {
-        super(ownerId, 160, "Essence Backlash", Rarity.COMMON, new CardType[]{CardType.INSTANT}, "{2}{U}{R}");
-        this.expansionSetCode = "RTR";
+    public EssenceBacklash(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.INSTANT},"{2}{U}{R}");
 
 
         // Counter target creature spell. Essence Backlash deals damage equal to that spell's power to its controller.

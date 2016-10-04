@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.kaladesh;
+package mage.cards.d;
 
 import java.util.UUID;
 import mage.abilities.Ability;
@@ -36,8 +36,8 @@ import mage.abilities.costs.common.TapSourceCost;
 import mage.abilities.effects.common.DamageTargetEffect;
 import mage.abilities.effects.common.counter.GetEnergyCountersControllerEffect;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.constants.Zone;
 import mage.filter.common.FilterInstantOrSorcerySpell;
 import mage.target.common.TargetCreatureOrPlayer;
@@ -48,9 +48,8 @@ import mage.target.common.TargetCreatureOrPlayer;
  */
 public class DynavoltTower extends CardImpl {
 
-    public DynavoltTower(UUID ownerId) {
-        super(ownerId, 208, "Dynavolt Tower", Rarity.RARE, new CardType[]{CardType.ARTIFACT}, "{3}");
-        this.expansionSetCode = "KLD";
+    public DynavoltTower(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.ARTIFACT},"{3}");
 
         // Whenever you cast an instant or sorcery spell, you get {E}{E}.
         this.addAbility(new SpellCastControllerTriggeredAbility(new GetEnergyCountersControllerEffect(2), new FilterInstantOrSorcerySpell(), false));

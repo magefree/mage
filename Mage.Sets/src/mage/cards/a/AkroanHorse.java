@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.theros;
+package mage.cards.a;
 
 import java.util.UUID;
 import mage.MageInt;
@@ -38,11 +38,11 @@ import mage.abilities.effects.ContinuousEffectImpl;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.keyword.DefenderAbility;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Duration;
 import mage.constants.Layer;
 import mage.constants.Outcome;
-import mage.constants.Rarity;
 import mage.constants.SubLayer;
 import mage.constants.TargetController;
 import mage.constants.Zone;
@@ -61,9 +61,8 @@ import mage.target.targetpointer.FixedTarget;
  */
 public class AkroanHorse extends CardImpl {
 
-    public AkroanHorse(UUID ownerId) {
-        super(ownerId, 210, "Akroan Horse", Rarity.RARE, new CardType[]{CardType.ARTIFACT, CardType.CREATURE}, "{4}");
-        this.expansionSetCode = "THS";
+    public AkroanHorse(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.ARTIFACT,CardType.CREATURE},"{4}");
         this.subtype.add("Horse");
         this.power = new MageInt(0);
         this.toughness = new MageInt(4);

@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.mirrodinbesieged;
+package mage.cards.m;
 
 import java.util.UUID;
 import mage.abilities.common.EntersBattlefieldControlledTriggeredAbility;
@@ -34,8 +34,8 @@ import mage.abilities.effects.Effect;
 import mage.abilities.effects.common.DoIfCostPaid;
 import mage.abilities.effects.common.PutTokenOntoBattlefieldCopyTargetEffect;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.constants.SetTargetPointer;
 import mage.constants.Zone;
 import mage.filter.common.FilterArtifactPermanent;
@@ -56,9 +56,8 @@ public class Mirrorworks extends CardImpl {
         filter.add(Predicates.not(new TokenPredicate()));
     }
 
-    public Mirrorworks(UUID ownerId) {
-        super(ownerId, 114, "Mirrorworks", Rarity.RARE, new CardType[]{CardType.ARTIFACT}, "{5}");
-        this.expansionSetCode = "MBS";
+    public Mirrorworks(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.ARTIFACT},"{5}");
 
         // Whenever another nontoken artifact enters the battlefield under your control, you may pay {2}.
         // If you do, put a token that's a copy of that artifact onto the battlefield.

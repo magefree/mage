@@ -25,15 +25,15 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.odyssey;
+package mage.cards.m;
 
 import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.costs.common.PutTopCardOfYourLibraryToGraveyardCost;
 import mage.abilities.mana.ColorlessManaAbility;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.Rarity;
 
 /**
  *
@@ -41,9 +41,8 @@ import mage.constants.Rarity;
  */
 public class Millikin extends CardImpl {
 
-    public Millikin(UUID ownerId) {
-        super(ownerId, 302, "Millikin", Rarity.UNCOMMON, new CardType[]{CardType.ARTIFACT, CardType.CREATURE}, "{2}");
-        this.expansionSetCode = "ODY";
+    public Millikin(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.ARTIFACT,CardType.CREATURE},"{2}");
         this.subtype.add("Construct");
         this.power = new MageInt(0);
         this.toughness = new MageInt(1);

@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.fallenempires;
+package mage.cards.t;
 
 import java.util.UUID;
 import mage.MageInt;
@@ -36,9 +36,9 @@ import mage.abilities.costs.common.SacrificeTargetCost;
 import mage.abilities.costs.common.TapSourceCost;
 import mage.abilities.effects.common.continuous.BecomesBasicLandTargetEffect;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Duration;
-import mage.constants.Rarity;
 import mage.constants.Zone;
 import mage.filter.common.FilterControlledCreaturePermanent;
 import mage.filter.predicate.mageobject.ColorPredicate;
@@ -57,9 +57,8 @@ public class TheloniteMonk extends CardImpl {
         filter.add(new ColorPredicate(ObjectColor.GREEN));
     }
 
-    public TheloniteMonk(UUID ownerId) {
-        super(ownerId, 93, "Thelonite Monk", Rarity.RARE, new CardType[]{CardType.CREATURE}, "{2}{G}{G}");
-        this.expansionSetCode = "FEM";
+    public TheloniteMonk(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{2}{G}{G}");
         this.subtype.add("Insect");
         this.subtype.add("Monk");
         this.subtype.add("Cleric");

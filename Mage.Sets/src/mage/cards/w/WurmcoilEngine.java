@@ -26,10 +26,9 @@
  *  or implied, of BetaSteward_at_googlemail.com.
  */
 
-package mage.sets.scarsofmirrodin;
+package mage.cards.w;
 
 import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.DiesTriggeredAbility;
@@ -37,6 +36,7 @@ import mage.abilities.effects.common.CreateTokenEffect;
 import mage.abilities.keyword.DeathtouchAbility;
 import mage.abilities.keyword.LifelinkAbility;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.game.permanent.token.Token;
 
 import java.util.UUID;
@@ -47,9 +47,8 @@ import java.util.UUID;
  */
 public class WurmcoilEngine extends CardImpl {
 
-    public WurmcoilEngine (UUID ownerId) {
-        super(ownerId, 223, "Wurmcoil Engine", Rarity.MYTHIC, new CardType[]{CardType.ARTIFACT, CardType.CREATURE}, "{6}");
-        this.expansionSetCode = "SOM";
+    public WurmcoilEngine (UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.ARTIFACT,CardType.CREATURE},"{6}");
         this.subtype.add("Wurm");
         this.power = new MageInt(6);
         this.toughness = new MageInt(6);

@@ -25,13 +25,13 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.betrayersofkamigawa;
+package mage.cards.q;
 
 import java.util.UUID;
 import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.abilities.effects.common.CounterTargetAndSearchGraveyardHandLibraryEffect;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.filter.FilterSpell;
 import mage.filter.predicate.Predicates;
 import mage.filter.predicate.mageobject.CardTypePredicate;
@@ -51,9 +51,8 @@ public class Quash extends CardImpl {
                 new CardTypePredicate(CardType.SORCERY));
     }
     
-    public Quash(UUID ownerId) {
-        super(ownerId, 47, "Quash", Rarity.UNCOMMON, new CardType[]{CardType.INSTANT}, "{2}{U}{U}");
-        this.expansionSetCode = "BOK";
+    public Quash(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.INSTANT},"{2}{U}{U}");
 
 
         // Counter target instant or sorcery spell. 

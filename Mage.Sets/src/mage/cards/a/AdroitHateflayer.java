@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.starwars;
+package mage.cards.a;
 
 import java.util.UUID;
 import mage.MageInt;
@@ -33,8 +33,8 @@ import mage.abilities.common.AttacksTriggeredAbility;
 import mage.abilities.effects.common.LoseLifeOpponentsEffect;
 import mage.abilities.keyword.MenaceAbility;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.Rarity;
 
 /**
  *
@@ -42,9 +42,8 @@ import mage.constants.Rarity;
  */
 public class AdroitHateflayer extends CardImpl {
 
-    public AdroitHateflayer(UUID ownerId) {
-        super(ownerId, 181, "Adroit Hateflayer", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{U}{B}{R}");
-        this.expansionSetCode = "SWS";
+    public AdroitHateflayer(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{U}{B}{R}");
         this.subtype.add("Nautolan");
         this.subtype.add("Sith");
         this.power = new MageInt(3);

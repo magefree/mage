@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.kaladesh;
+package mage.cards.l;
 
 import java.util.UUID;
 import mage.abilities.effects.Effect;
@@ -33,8 +33,8 @@ import mage.abilities.effects.common.DrawCardSourceControllerEffect;
 import mage.abilities.effects.common.LoseLifeSourceControllerEffect;
 import mage.abilities.effects.common.counter.GetEnergyCountersControllerEffect;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.Rarity;
 
 /**
  *
@@ -42,9 +42,8 @@ import mage.constants.Rarity;
  */
 public class LiveFast extends CardImpl {
 
-    public LiveFast(UUID ownerId) {
-        super(ownerId, 87, "Live Fast", Rarity.COMMON, new CardType[]{CardType.SORCERY}, "{2}{B}");
-        this.expansionSetCode = "KLD";
+    public LiveFast(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{2}{B}");
 
         // You draw two cards, lose 2 life, and get {E}{E}.
         Effect effect = new DrawCardSourceControllerEffect(2);

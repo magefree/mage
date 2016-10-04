@@ -25,14 +25,14 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.innistrad;
+package mage.cards.d;
 
 import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.abilities.costs.mana.ManaCostsImpl;
 import mage.abilities.effects.common.PutLibraryIntoGraveTargetEffect;
 import mage.abilities.keyword.FlashbackAbility;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.TimingRule;
 import mage.target.TargetPlayer;
 
@@ -43,9 +43,8 @@ import java.util.UUID;
  */
 public class DreamTwist extends CardImpl {
 
-    public DreamTwist(UUID ownerId) {
-        super(ownerId, 54, "Dream Twist", Rarity.COMMON, new CardType[]{CardType.INSTANT}, "{U}");
-        this.expansionSetCode = "ISD";
+    public DreamTwist(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.INSTANT},"{U}");
 
 
         // Target player puts the top three cards of his or her library into his or her graveyard.

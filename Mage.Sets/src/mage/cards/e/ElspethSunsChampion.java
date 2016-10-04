@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.theros;
+package mage.cards.e;
 
 import java.util.UUID;
 import mage.abilities.Ability;
@@ -39,9 +39,9 @@ import mage.abilities.effects.common.continuous.BoostControlledEffect;
 import mage.abilities.effects.common.continuous.GainAbilityControlledEffect;
 import mage.abilities.keyword.FlyingAbility;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Duration;
-import mage.constants.Rarity;
 import mage.constants.Zone;
 import mage.filter.Filter;
 import mage.filter.common.FilterCreaturePermanent;
@@ -61,9 +61,8 @@ public class ElspethSunsChampion extends CardImpl {
         filter.add(new PowerPredicate(Filter.ComparisonType.GreaterThan, 3));
     }
 
-    public ElspethSunsChampion(UUID ownerId) {
-        super(ownerId, 9, "Elspeth, Sun's Champion", Rarity.MYTHIC, new CardType[]{CardType.PLANESWALKER}, "{4}{W}{W}");
-        this.expansionSetCode = "THS";
+    public ElspethSunsChampion(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.PLANESWALKER},"{4}{W}{W}");
         this.subtype.add("Elspeth");
 
         this.addAbility(new PlanswalkerEntersWithLoyalityCountersAbility(4));

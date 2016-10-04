@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.betrayersofkamigawa;
+package mage.cards.h;
 
 import java.util.UUID;
 import mage.ObjectColor;
@@ -35,8 +35,8 @@ import mage.abilities.decorator.ConditionalOneShotEffect;
 import mage.abilities.effects.common.DestroyTargetEffect;
 import mage.abilities.keyword.SpliceOntoArcaneAbility;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.filter.FilterCard;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.filter.common.FilterLandPermanent;
@@ -60,9 +60,8 @@ public class HorobisWhisper extends CardImpl {
         filterCondition.add(new SubtypePredicate("Swamp"));
     }
 
-    public HorobisWhisper(UUID ownerId) {
-        super(ownerId, 70, "Horobi's Whisper", Rarity.COMMON, new CardType[]{CardType.INSTANT}, "{1}{B}{B}");
-        this.expansionSetCode = "BOK";
+    public HorobisWhisper(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.INSTANT},"{1}{B}{B}");
         this.subtype.add("Arcane");
 
 

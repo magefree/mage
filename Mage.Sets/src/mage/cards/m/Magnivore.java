@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.ninthedition;
+package mage.cards.m;
 
 import java.util.UUID;
 import mage.MageInt;
@@ -34,9 +34,9 @@ import mage.abilities.dynamicvalue.common.CardsInAllGraveyardsCount;
 import mage.abilities.effects.common.continuous.SetPowerToughnessSourceEffect;
 import mage.abilities.keyword.HasteAbility;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Duration;
-import mage.constants.Rarity;
 import mage.constants.Zone;
 import mage.filter.FilterCard;
 import mage.filter.predicate.mageobject.CardTypePredicate;
@@ -52,9 +52,8 @@ public class Magnivore extends CardImpl {
         filter.add(new CardTypePredicate(CardType.SORCERY));
     }
 
-    public Magnivore(UUID ownerId) {
-        super(ownerId, 202, "Magnivore", Rarity.RARE, new CardType[]{CardType.CREATURE}, "{2}{R}{R}");
-        this.expansionSetCode = "9ED";
+    public Magnivore(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{2}{R}{R}");
         this.subtype.add("Lhurgoyf");
 
         this.power = new MageInt(0);

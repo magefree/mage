@@ -25,15 +25,15 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.tenthedition;
+package mage.cards.c;
 
 import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.common.EntersBattlefieldAbility;
 import mage.abilities.effects.common.CopyPermanentEffect;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.Rarity;
 
 /**
  *
@@ -41,9 +41,8 @@ import mage.constants.Rarity;
  */
 public class Clone extends CardImpl {
 
-    public Clone(UUID ownerId) {
-        super(ownerId, 73, "Clone", Rarity.RARE, new CardType[]{CardType.CREATURE}, "{3}{U}");
-        this.expansionSetCode = "10E";
+    public Clone(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{3}{U}");
 
         this.subtype.add("Shapeshifter");
         this.power = new MageInt(0);

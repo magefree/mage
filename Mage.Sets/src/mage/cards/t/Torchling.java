@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.venservskoth;
+package mage.cards.t;
 
 import java.util.UUID;
 import mage.MageInt;
@@ -41,10 +41,10 @@ import mage.abilities.effects.common.UntapSourceEffect;
 import mage.abilities.effects.common.combat.MustBeBlockedByTargetSourceEffect;
 import mage.abilities.effects.common.continuous.BoostSourceEffect;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.ColoredManaSymbol;
 import mage.constants.Duration;
-import mage.constants.Rarity;
 import mage.constants.Zone;
 import mage.filter.FilterSpell;
 import mage.filter.predicate.Predicate;
@@ -60,9 +60,8 @@ import mage.target.common.TargetCreaturePermanent;
  */
 public class Torchling extends CardImpl {
 
-    public Torchling(UUID ownerId) {
-        super(ownerId, 58, "Torchling", Rarity.RARE, new CardType[]{CardType.CREATURE}, "{3}{R}{R}");
-        this.expansionSetCode = "DDI";
+    public Torchling(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{3}{R}{R}");
         this.subtype.add("Shapeshifter");
         this.power = new MageInt(3);
         this.toughness = new MageInt(3);

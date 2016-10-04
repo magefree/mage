@@ -25,13 +25,13 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.bornofthegods;
+package mage.cards.u;
 
 import java.util.UUID;
 import mage.abilities.effects.common.ShuffleIntoLibraryTargetEffect;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.filter.FilterPermanent;
 import mage.filter.predicate.Predicates;
 import mage.filter.predicate.mageobject.CardTypePredicate;
@@ -49,9 +49,8 @@ public class UnravelTheAether extends CardImpl {
         filter.add(Predicates.or(new CardTypePredicate(CardType.ARTIFACT), new CardTypePredicate(CardType.ENCHANTMENT)));
     }
 
-    public UnravelTheAether(UUID ownerId) {
-        super(ownerId, 143, "Unravel the Aether", Rarity.UNCOMMON, new CardType[]{CardType.INSTANT}, "{1}{G}");
-        this.expansionSetCode = "BNG";
+    public UnravelTheAether(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.INSTANT},"{1}{G}");
 
         // Choose target artifact or enchantment. Its owner shuffles it into his or her library.
         this.getSpellAbility().addEffect(new ShuffleIntoLibraryTargetEffect());

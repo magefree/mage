@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.oathofthegatewatch;
+package mage.cards.s;
 
 import java.util.UUID;
 import mage.abilities.Ability;
@@ -33,9 +33,9 @@ import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.PutOnLibraryTargetEffect;
 import mage.abilities.effects.common.ReturnToHandTargetEffect;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Outcome;
-import mage.constants.Rarity;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.players.Player;
@@ -47,9 +47,8 @@ import mage.target.common.TargetCreaturePermanent;
  */
 public class SweepAway extends CardImpl {
 
-    public SweepAway(UUID ownerId) {
-        super(ownerId, 64, "Sweep Away", Rarity.COMMON, new CardType[]{CardType.INSTANT}, "{2}{U}");
-        this.expansionSetCode = "OGW";
+    public SweepAway(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.INSTANT},"{2}{U}");
 
         // Return target creature to its owner's hand. If that creature is attacking, you may put it on top of its owner's library instead.
         this.getSpellAbility().addTarget(new TargetCreaturePermanent());

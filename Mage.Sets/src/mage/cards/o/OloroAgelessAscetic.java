@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.commander2013;
+package mage.cards.o;
 
 import java.util.UUID;
 import mage.MageInt;
@@ -39,8 +39,8 @@ import mage.abilities.effects.common.DrawCardSourceControllerEffect;
 import mage.abilities.effects.common.GainLifeEffect;
 import mage.abilities.effects.common.LoseLifeOpponentsEffect;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.constants.TargetController;
 import mage.constants.Zone;
 
@@ -50,9 +50,8 @@ import mage.constants.Zone;
  */
 public class OloroAgelessAscetic extends CardImpl {
 
-    public OloroAgelessAscetic(UUID ownerId) {
-        super(ownerId, 203, "Oloro, Ageless Ascetic", Rarity.MYTHIC, new CardType[]{CardType.CREATURE}, "{3}{W}{U}{B}");
-        this.expansionSetCode = "C13";
+    public OloroAgelessAscetic(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{3}{W}{U}{B}");
         this.supertype.add("Legendary");
         this.subtype.add("Giant");
         this.subtype.add("Soldier");

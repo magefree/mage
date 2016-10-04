@@ -26,17 +26,17 @@
  *  or implied, of BetaSteward_at_googlemail.com.
  */
 
-package mage.sets.championsofkamigawa;
+package mage.cards.s;
 
 import java.util.UUID;
 
 import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.MageInt;
 import mage.abilities.common.SpellCastControllerTriggeredAbility;
 import mage.abilities.effects.common.DrawCardSourceControllerEffect;
 import mage.abilities.keyword.FlyingAbility;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.filter.common.FilterSpiritOrArcaneCard;
 
 /**
@@ -46,9 +46,8 @@ public class SireOfTheStorm extends CardImpl {
 
     private static final FilterSpiritOrArcaneCard filter = new FilterSpiritOrArcaneCard();
 
-    public SireOfTheStorm(UUID ownerId) {
-        super(ownerId, 85, "Sire of the Storm", Rarity.UNCOMMON, new CardType[]{CardType.CREATURE}, "{4}{U}{U}");
-        this.expansionSetCode = "CHK";
+    public SireOfTheStorm(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{4}{U}{U}");
         this.subtype.add("Spirit");
 
 

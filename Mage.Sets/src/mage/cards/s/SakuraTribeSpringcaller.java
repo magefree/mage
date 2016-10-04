@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.betrayersofkamigawa;
+package mage.cards.s;
 
 import java.util.UUID;
 import mage.MageInt;
@@ -34,8 +34,8 @@ import mage.abilities.common.BeginningOfUpkeepTriggeredAbility;
 import mage.abilities.effects.Effect;
 import mage.abilities.effects.common.AddManaToManaPoolTargetControllerEffect;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.constants.TargetController;
 import mage.constants.Zone;
 
@@ -45,9 +45,8 @@ import mage.constants.Zone;
  */
 public class SakuraTribeSpringcaller extends CardImpl {
 
-    public SakuraTribeSpringcaller(UUID ownerId) {
-        super(ownerId, 142, "Sakura-Tribe Springcaller", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{3}{G}");
-        this.expansionSetCode = "BOK";
+    public SakuraTribeSpringcaller(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{3}{G}");
         this.subtype.add("Snake");
         this.subtype.add("Shaman");
 

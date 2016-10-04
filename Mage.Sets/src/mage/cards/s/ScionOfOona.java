@@ -25,12 +25,11 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.lorwyn;
+package mage.cards.s;
 
 import java.util.UUID;
 import mage.constants.CardType;
 import mage.constants.Duration;
-import mage.constants.Rarity;
 import mage.constants.TargetController;
 import mage.constants.Zone;
 import mage.MageInt;
@@ -41,6 +40,7 @@ import mage.abilities.keyword.FlashAbility;
 import mage.abilities.keyword.FlyingAbility;
 import mage.abilities.keyword.ShroudAbility;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.filter.FilterPermanent;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.filter.predicate.mageobject.SubtypePredicate;
@@ -62,9 +62,8 @@ public class ScionOfOona extends CardImpl {
         filterCreature.add(new ControllerPredicate(TargetController.YOU));
     }
 
-    public ScionOfOona(UUID ownerId) {
-        super(ownerId, 83, "Scion of Oona", Rarity.RARE, new CardType[]{CardType.CREATURE}, "{2}{U}");
-        this.expansionSetCode = "LRW";
+    public ScionOfOona(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{2}{U}");
         this.subtype.add("Faerie");
         this.subtype.add("Soldier");
 

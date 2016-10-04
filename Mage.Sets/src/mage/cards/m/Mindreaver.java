@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.bornofthegods;
+package mage.cards.m;
 
 import java.util.HashSet;
 import java.util.Set;
@@ -41,10 +41,11 @@ import mage.abilities.effects.common.CounterTargetEffect;
 import mage.abilities.keyword.HeroicAbility;
 import mage.cards.Card;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
+import mage.cards.CardSetInfo;
 import mage.cards.SplitCard;
 import mage.constants.CardType;
 import mage.constants.Outcome;
-import mage.constants.Rarity;
 import mage.constants.SpellAbilityType;
 import mage.constants.Zone;
 import mage.filter.FilterSpell;
@@ -63,9 +64,8 @@ import mage.util.CardUtil;
  */
 public class Mindreaver extends CardImpl {
 
-    public Mindreaver(UUID ownerId) {
-        super(ownerId, 44, "Mindreaver", Rarity.RARE, new CardType[]{CardType.CREATURE}, "{U}{U}");
-        this.expansionSetCode = "BNG";
+    public Mindreaver(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{U}{U}");
         this.subtype.add("Human");
         this.subtype.add("Wizard");
 

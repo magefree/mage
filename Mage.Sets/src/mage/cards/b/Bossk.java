@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.starwars;
+package mage.cards.b;
 
 import java.util.UUID;
 import mage.MageInt;
@@ -35,8 +35,8 @@ import mage.abilities.effects.common.search.SearchLibraryPutInHandEffect;
 import mage.abilities.keyword.BountyAbility;
 import mage.abilities.keyword.DeathtouchAbility;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.constants.Zone;
 import mage.counters.CounterType;
 import mage.filter.common.FilterBasicLandCard;
@@ -53,9 +53,8 @@ import mage.target.common.TargetOpponentsCreaturePermanent;
  */
 public class Bossk extends CardImpl {
 
-    public Bossk(UUID ownerId) {
-        super(ownerId, 131, "Bossk", Rarity.RARE, new CardType[]{CardType.CREATURE}, "{1}{G}{G}");
-        this.expansionSetCode = "SWS";
+    public Bossk(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{1}{G}{G}");
         this.supertype.add("Legendary");
         this.subtype.add("Trandoshan");
         this.subtype.add("Hunter");

@@ -25,15 +25,15 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.knightsvsdragons;
+package mage.cards.c;
 
 import java.util.UUID;
 import mage.abilities.Ability;
 import mage.abilities.effects.OneShotEffect;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Outcome;
-import mage.constants.Rarity;
 import mage.filter.common.FilterCreatureOrPlayer;
 import mage.filter.predicate.mageobject.AnotherTargetPredicate;
 import mage.game.Game;
@@ -48,9 +48,8 @@ import mage.target.common.TargetCreatureOrPlayer;
  */
 public class ConeOfFlame extends CardImpl {
 
-    public ConeOfFlame(UUID ownerId) {
-        super(ownerId, 75, "Cone of Flame", Rarity.UNCOMMON, new CardType[]{CardType.SORCERY}, "{3}{R}{R}");
-        this.expansionSetCode = "DDG";
+    public ConeOfFlame(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{3}{R}{R}");
 
 
         // Cone of Flame deals 1 damage to target creature or player, 2 damage to another target creature or player, and 3 damage to a third target creature or player.

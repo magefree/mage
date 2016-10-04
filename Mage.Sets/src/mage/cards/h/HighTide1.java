@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.fallenempires;
+package mage.cards.h;
 
 import java.util.UUID;
 import mage.Mana;
@@ -34,10 +34,10 @@ import mage.abilities.effects.common.AddManaToManaPoolTargetControllerEffect;
 import mage.abilities.effects.common.CreateDelayedTriggeredAbilityEffect;
 import mage.abilities.mana.DelayedTriggeredManaAbility;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.ColoredManaSymbol;
 import mage.constants.Duration;
-import mage.constants.Rarity;
 import mage.filter.common.FilterLandPermanent;
 import mage.filter.predicate.mageobject.SubtypePredicate;
 import mage.game.Game;
@@ -52,9 +52,8 @@ import mage.target.targetpointer.FixedTarget;
  */
 public class HighTide1 extends CardImpl {
 
-    public HighTide1(UUID ownerId) {
-        super(ownerId, 35, "High Tide", Rarity.COMMON, new CardType[]{CardType.INSTANT}, "{U}");
-        this.expansionSetCode = "FEM";
+    public HighTide1(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.INSTANT},"{U}");
 
         // Until end of turn, whenever a player taps an Island for mana, that player adds {U} to his or her mana pool.
         this.getSpellAbility().addEffect(new CreateDelayedTriggeredAbilityEffect(new HighTideTriggeredAbility()));

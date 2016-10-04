@@ -26,7 +26,7 @@
  *  or implied, of BetaSteward_at_googlemail.com.
  */
 
-package mage.sets.mirrodinbesieged;
+package mage.cards.m;
 
 import java.util.UUID;
 
@@ -34,7 +34,6 @@ import mage.constants.CardType;
 import mage.constants.Duration;
 import mage.constants.Layer;
 import mage.constants.Outcome;
-import mage.constants.Rarity;
 import mage.constants.SubLayer;
 import mage.constants.Zone;
 import mage.MageInt;
@@ -47,6 +46,7 @@ import mage.abilities.effects.ContinuousEffectImpl;
 import mage.abilities.effects.OneShotEffect;
 import mage.cards.Card;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.filter.common.FilterArtifactCard;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
@@ -58,9 +58,8 @@ import mage.target.common.TargetCardInGraveyard;
  */
 public class MyrWelder extends CardImpl {
 
-    public MyrWelder(UUID ownerId) {
-        super(ownerId, 118, "Myr Welder", Rarity.RARE, new CardType[]{CardType.ARTIFACT, CardType.CREATURE}, "{3}");
-        this.expansionSetCode = "MBS";
+    public MyrWelder(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.ARTIFACT,CardType.CREATURE},"{3}");
         this.subtype.add("Myr");
         this.power = new MageInt(1);
         this.toughness = new MageInt(4);

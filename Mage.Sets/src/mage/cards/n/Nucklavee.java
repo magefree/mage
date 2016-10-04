@@ -25,17 +25,17 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.eventide;
+package mage.cards.n;
 
 import java.util.UUID;
 import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.MageInt;
 import mage.ObjectColor;
 import mage.abilities.Ability;
 import mage.abilities.common.EntersBattlefieldTriggeredAbility;
 import mage.abilities.effects.common.ReturnToHandTargetEffect;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.filter.FilterCard;
 import mage.filter.predicate.mageobject.CardTypePredicate;
 import mage.filter.predicate.mageobject.ColorPredicate;
@@ -56,9 +56,8 @@ public class Nucklavee extends CardImpl {
         filterBlue.add(new CardTypePredicate(CardType.INSTANT));
     }
 
-    public Nucklavee(UUID ownerId) {
-        super(ownerId, 110, "Nucklavee", Rarity.UNCOMMON, new CardType[]{CardType.CREATURE}, "{4}{U/R}{U/R}");
-        this.expansionSetCode = "EVE";
+    public Nucklavee(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{4}{U/R}{U/R}");
         this.subtype.add("Beast");
 
         this.power = new MageInt(4);

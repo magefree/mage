@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.futuresight;
+package mage.cards.m;
 
 import java.util.UUID;
 import mage.MageInt;
@@ -34,13 +34,13 @@ import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.effects.ContinuousEffectImpl;
 import mage.abilities.mana.RedManaAbility;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.cards.repository.CardRepository;
 import mage.constants.CardType;
 import mage.constants.DependencyType;
 import mage.constants.Duration;
 import mage.constants.Layer;
 import mage.constants.Outcome;
-import mage.constants.Rarity;
 import mage.constants.SubLayer;
 import mage.constants.Zone;
 import mage.filter.common.FilterLandPermanent;
@@ -61,9 +61,8 @@ public class MagusOfTheMoon extends CardImpl {
         filter.add(Predicates.not(new SupertypePredicate("Basic")));
     }
 
-    public MagusOfTheMoon(UUID ownerId) {
-        super(ownerId, 101, "Magus of the Moon", Rarity.RARE, new CardType[]{CardType.CREATURE}, "{2}{R}");
-        this.expansionSetCode = "FUT";
+    public MagusOfTheMoon(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{2}{R}");
         this.subtype.add("Human");
         this.subtype.add("Wizard");
 

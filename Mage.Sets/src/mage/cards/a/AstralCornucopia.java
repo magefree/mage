@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.bornofthegods;
+package mage.cards.a;
 
 import java.util.List;
 import java.util.UUID;
@@ -37,9 +37,9 @@ import mage.abilities.effects.common.EntersBattlefieldWithXCountersEffect;
 import mage.abilities.effects.common.ManaEffect;
 import mage.abilities.mana.ManaAbility;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.choices.ChoiceColor;
 import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.constants.Zone;
 import mage.counters.CounterType;
 import mage.game.Game;
@@ -52,9 +52,8 @@ import mage.players.Player;
  */
 public class AstralCornucopia extends CardImpl {
 
-    public AstralCornucopia(UUID ownerId) {
-        super(ownerId, 157, "Astral Cornucopia", Rarity.RARE, new CardType[]{CardType.ARTIFACT}, "{X}{X}{X}");
-        this.expansionSetCode = "BNG";
+    public AstralCornucopia(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.ARTIFACT},"{X}{X}{X}");
 
         // Astral Cornucopia enters the battlefield with X charge counters on it.
         this.addAbility(new EntersBattlefieldAbility(new EntersBattlefieldWithXCountersEffect(CounterType.CHARGE.createInstance())));

@@ -26,7 +26,7 @@
  *  or implied, of BetaSteward_at_googlemail.com.
  */
 
-package mage.sets.championsofkamigawa;
+package mage.cards.n;
 
 import java.util.UUID;
 
@@ -37,6 +37,7 @@ import mage.abilities.effects.common.continuous.BoostEquippedEffect;
 import mage.abilities.effects.common.continuous.GainAbilityAttachedEffect;
 import mage.abilities.keyword.*;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 
 /**
  *
@@ -44,9 +45,8 @@ import mage.cards.CardImpl;
  */
 public class NoDachi extends CardImpl {
 
-    public NoDachi (UUID ownerId) {
-        super(ownerId, 264, "No-Dachi", Rarity.UNCOMMON, new CardType[]{CardType.ARTIFACT}, "{2}");
-        this.expansionSetCode = "CHK";
+    public NoDachi (UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.ARTIFACT},"{2}");
         this.subtype.add("Equipment");
         this.addAbility(new EquipAbility(Outcome.AddAbility, new GenericManaCost(3)));
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new GainAbilityAttachedEffect(FirstStrikeAbility.getInstance(), AttachmentType.EQUIPMENT)));

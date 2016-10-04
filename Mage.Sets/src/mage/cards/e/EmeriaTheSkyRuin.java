@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.zendikar;
+package mage.cards.e;
 
 import java.util.UUID;
 import mage.abilities.TriggeredAbilityImpl;
@@ -33,8 +33,8 @@ import mage.abilities.common.EntersBattlefieldTappedAbility;
 import mage.abilities.effects.common.ReturnFromGraveyardToBattlefieldTargetEffect;
 import mage.abilities.mana.WhiteManaAbility;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.constants.Zone;
 import mage.filter.common.FilterCreatureCard;
 import mage.filter.common.FilterLandPermanent;
@@ -51,9 +51,8 @@ import mage.target.common.TargetCardInYourGraveyard;
  */
 public class EmeriaTheSkyRuin extends CardImpl {
 
-    public EmeriaTheSkyRuin(UUID ownerId) {
-        super(ownerId, 213, "Emeria, the Sky Ruin", Rarity.RARE, new CardType[]{CardType.LAND}, "");
-        this.expansionSetCode = "ZEN";
+    public EmeriaTheSkyRuin(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.LAND},"");
 
         // Emeria, the Sky Ruin enters the battlefield tapped.
         this.addAbility(new EntersBattlefieldTappedAbility());

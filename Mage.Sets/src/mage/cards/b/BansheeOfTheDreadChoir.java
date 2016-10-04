@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.commander2015;
+package mage.cards.b;
 
 import java.util.UUID;
 import mage.MageInt;
@@ -33,8 +33,8 @@ import mage.abilities.common.DealsCombatDamageToAPlayerTriggeredAbility;
 import mage.abilities.effects.common.discard.DiscardTargetEffect;
 import mage.abilities.keyword.MyriadAbility;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.Rarity;
 
 /**
  *
@@ -42,9 +42,8 @@ import mage.constants.Rarity;
  */
 public class BansheeOfTheDreadChoir extends CardImpl {
 
-    public BansheeOfTheDreadChoir(UUID ownerId) {
-        super(ownerId, 16, "Banshee of the Dread Choir", Rarity.UNCOMMON, new CardType[]{CardType.CREATURE}, "{3}{B}{B}");
-        this.expansionSetCode = "C15";
+    public BansheeOfTheDreadChoir(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{3}{B}{B}");
         this.subtype.add("Spirit");
         this.power = new MageInt(4);
         this.toughness = new MageInt(4);

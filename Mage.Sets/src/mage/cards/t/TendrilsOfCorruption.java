@@ -25,15 +25,15 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.magic2010;
+package mage.cards.t;
 
 import java.util.UUID;
 import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.abilities.dynamicvalue.common.PermanentsOnBattlefieldCount;
 import mage.abilities.effects.common.DamageTargetEffect;
 import mage.abilities.effects.common.GainLifeEffect;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.filter.common.FilterControlledPermanent;
 import mage.filter.predicate.mageobject.SubtypePredicate;
 import mage.target.common.TargetCreaturePermanent;
@@ -50,9 +50,8 @@ public class TendrilsOfCorruption extends CardImpl {
         filter.add(new SubtypePredicate("Swamp"));
     }
 
-    public TendrilsOfCorruption(UUID ownerId) {
-        super(ownerId, 114, "Tendrils of Corruption", Rarity.COMMON, new CardType[]{CardType.INSTANT}, "{3}{B}");
-        this.expansionSetCode = "M10";
+    public TendrilsOfCorruption(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.INSTANT},"{3}{B}");
 
         this.getSpellAbility().addEffect(new DamageTargetEffect(new PermanentsOnBattlefieldCount(filter)));
         this.getSpellAbility().addTarget(new TargetCreaturePermanent());

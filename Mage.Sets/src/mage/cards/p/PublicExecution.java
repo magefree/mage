@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.magic2013;
+package mage.cards.p;
 
 import java.util.UUID;
 
@@ -36,6 +36,7 @@ import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.DestroyTargetEffect;
 import mage.abilities.effects.common.continuous.BoostAllEffect;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.filter.predicate.Predicates;
 import mage.filter.predicate.permanent.ControllerIdPredicate;
@@ -57,9 +58,8 @@ public class PublicExecution extends CardImpl {
         filter.add(new ControllerPredicate(TargetController.NOT_YOU));
     }
 
-    public PublicExecution(UUID ownerId) {
-        super(ownerId, 105, "Public Execution", Rarity.UNCOMMON, new CardType[]{CardType.INSTANT}, "{5}{B}");
-        this.expansionSetCode = "M13";
+    public PublicExecution(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.INSTANT},"{5}{B}");
 
         // Destroy target creature an opponent controls. Each other creature that player controls gets -2/-0 until end of turn.
         this.getSpellAbility().addEffect(new DestroyTargetEffect());

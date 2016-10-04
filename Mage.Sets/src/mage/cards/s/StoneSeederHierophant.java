@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.ravnica;
+package mage.cards.s;
 
 import java.util.UUID;
 import mage.MageInt;
@@ -36,8 +36,8 @@ import mage.abilities.costs.common.TapSourceCost;
 import mage.abilities.effects.common.UntapSourceEffect;
 import mage.abilities.effects.common.UntapTargetEffect;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.constants.Zone;
 import mage.filter.common.FilterControlledLandPermanent;
 import mage.target.Target;
@@ -49,9 +49,8 @@ import mage.target.common.TargetLandPermanent;
  */
 public class StoneSeederHierophant extends CardImpl {
 
-    public StoneSeederHierophant(UUID ownerId) {
-        super(ownerId, 184, "Stone-Seeder Hierophant", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{2}{G}{G}");
-        this.expansionSetCode = "RAV";
+    public StoneSeederHierophant(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{2}{G}{G}");
         this.subtype.add("Human");
         this.subtype.add("Druid");
         this.power = new MageInt(1);

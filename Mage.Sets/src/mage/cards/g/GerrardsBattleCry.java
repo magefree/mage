@@ -25,16 +25,16 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.tempest;
+package mage.cards.g;
 
 import java.util.UUID;
 
 import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.costs.mana.ManaCostsImpl;
 import mage.abilities.effects.common.continuous.BoostControlledEffect;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.Duration;
 import mage.constants.Zone;
 import mage.filter.common.FilterCreaturePermanent;
@@ -45,9 +45,8 @@ import mage.filter.common.FilterCreaturePermanent;
  */
 public class GerrardsBattleCry extends CardImpl {
 
-    public GerrardsBattleCry(UUID ownerId) {
-        super(ownerId, 233, "Gerrard's Battle Cry", Rarity.RARE, new CardType[]{CardType.ENCHANTMENT}, "{W}");
-        this.expansionSetCode = "TMP";
+    public GerrardsBattleCry(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.ENCHANTMENT},"{W}");
 
         this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new BoostControlledEffect(1, 1, Duration.EndOfTurn, new FilterCreaturePermanent(), false), new ManaCostsImpl("{2}{W}")));
     }

@@ -25,13 +25,12 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.zendikar;
+package mage.cards.k;
 
 import java.util.List;
 import java.util.UUID;
 import mage.constants.CardType;
 import mage.constants.Duration;
-import mage.constants.Rarity;
 import mage.constants.Zone;
 import mage.MageInt;
 import mage.abilities.Ability;
@@ -41,6 +40,7 @@ import mage.abilities.decorator.ConditionalContinuousEffect;
 import mage.abilities.effects.common.continuous.GainAbilitySourceEffect;
 import mage.abilities.keyword.DoubleStrikeAbility;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 
@@ -52,9 +52,8 @@ public class KorDuelist extends CardImpl {
 
     private static final String ruleText = "As long as Kor Duelist is equipped, it has double strike";
 
-    public KorDuelist(UUID ownerId) {
-        super(ownerId, 19, "Kor Duelist", Rarity.UNCOMMON, new CardType[]{CardType.CREATURE}, "{W}");
-        this.expansionSetCode = "ZEN";
+    public KorDuelist(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{W}");
         this.subtype.add("Kor");
         this.subtype.add("Soldier");
 

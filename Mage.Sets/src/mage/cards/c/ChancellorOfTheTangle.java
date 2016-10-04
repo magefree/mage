@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.newphyrexia;
+package mage.cards.c;
 
 import java.util.UUID;
 import mage.MageInt;
@@ -36,8 +36,8 @@ import mage.abilities.effects.common.BasicManaEffect;
 import mage.abilities.keyword.ReachAbility;
 import mage.abilities.keyword.VigilanceAbility;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.game.Game;
 import mage.game.events.GameEvent;
 import mage.game.events.GameEvent.EventType;
@@ -50,9 +50,8 @@ public class ChancellorOfTheTangle extends CardImpl {
 
     private static String abilityText = "at the beginning of your first main phase, add {G} to your mana pool";
 
-    public ChancellorOfTheTangle(UUID ownerId) {
-        super(ownerId, 106, "Chancellor of the Tangle", Rarity.RARE, new CardType[]{CardType.CREATURE}, "{4}{G}{G}{G}");
-        this.expansionSetCode = "NPH";
+    public ChancellorOfTheTangle(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{4}{G}{G}{G}");
         this.subtype.add("Beast");
 
         this.color.setGreen(true);

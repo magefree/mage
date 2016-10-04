@@ -31,8 +31,8 @@ package mage.sets;
 import java.util.GregorianCalendar;
 import mage.cards.ExpansionSet;
 import mage.constants.SetType;
-
-
+import mage.constants.Rarity;
+import java.util.List;
 
 /**
  *
@@ -40,7 +40,7 @@ import mage.constants.SetType;
  */
 public class ModernMasters2017 extends ExpansionSet {
 
-    private static final ModernMasters2017 fINSTANCE =  new ModernMasters2017();
+    private static final ModernMasters2017 fINSTANCE = new ModernMasters2017();
 
     public static ModernMasters2017 getInstance() {
         return fINSTANCE;

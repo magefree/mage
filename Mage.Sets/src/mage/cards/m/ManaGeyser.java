@@ -25,15 +25,15 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.conspiracy;
+package mage.cards.m;
 
 import java.util.UUID;
 import mage.Mana;
 import mage.abilities.dynamicvalue.common.PermanentsOnBattlefieldCount;
 import mage.abilities.effects.common.DynamicManaEffect;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.constants.TargetController;
 import mage.filter.common.FilterLandPermanent;
 import mage.filter.predicate.permanent.ControllerPredicate;
@@ -50,9 +50,8 @@ public class ManaGeyser extends CardImpl {
         filter.add(new TappedPredicate());
         filter.add(new ControllerPredicate(TargetController.OPPONENT));
     }
-    public ManaGeyser(UUID ownerId) {
-        super(ownerId, 147, "Mana Geyser", Rarity.COMMON, new CardType[]{CardType.SORCERY}, "{3}{R}{R}");
-        this.expansionSetCode = "CNS";
+    public ManaGeyser(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{3}{R}{R}");
 
 
         // Add {R} to your mana pool for each tapped land your opponents control.

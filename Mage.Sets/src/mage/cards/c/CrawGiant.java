@@ -25,15 +25,15 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.legends;
+package mage.cards.c;
 
 import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.keyword.RampageAbility;
 import mage.abilities.keyword.TrampleAbility;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.Rarity;
 
 /**
  *
@@ -41,9 +41,8 @@ import mage.constants.Rarity;
  */
 public class CrawGiant extends CardImpl {
 
-    public CrawGiant(UUID ownerId) {
-        super(ownerId, 94, "Craw Giant", Rarity.UNCOMMON, new CardType[]{CardType.CREATURE}, "{3}{G}{G}{G}{G}");
-        this.expansionSetCode = "LEG";
+    public CrawGiant(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{3}{G}{G}{G}{G}");
         this.subtype.add("Giant");
         this.power = new MageInt(6);
         this.toughness = new MageInt(4);

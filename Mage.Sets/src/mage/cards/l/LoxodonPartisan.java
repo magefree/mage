@@ -26,14 +26,14 @@
  *  or implied, of BetaSteward_at_googlemail.com.
  */
 
-package mage.sets.mirrodinbesieged;
+package mage.cards.l;
 
 import java.util.UUID;
 import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.MageInt;
 import mage.abilities.keyword.BattleCryAbility;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 
 /**
  *
@@ -41,9 +41,8 @@ import mage.cards.CardImpl;
  */
 public class LoxodonPartisan extends CardImpl {
 
-    public LoxodonPartisan (UUID ownerId) {
-        super(ownerId, 12, "Loxodon Partisan", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{4}{W}");
-        this.expansionSetCode = "MBS";
+    public LoxodonPartisan (UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{4}{W}");
         this.subtype.add("Elephant");
         this.subtype.add("Soldier");
 

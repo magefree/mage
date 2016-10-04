@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.fatereforged;
+package mage.cards.t;
 
 import java.util.UUID;
 import mage.MageInt;
@@ -37,9 +37,9 @@ import mage.abilities.effects.common.PutTopCardOfLibraryIntoGraveControllerEffec
 import mage.abilities.keyword.DelveAbility;
 import mage.cards.Card;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Outcome;
-import mage.constants.Rarity;
 import mage.constants.Zone;
 import mage.filter.common.FilterNonlandCard;
 import mage.filter.predicate.other.OwnerIdPredicate;
@@ -55,9 +55,8 @@ import mage.target.common.TargetOpponent;
  */
 public class TasigurTheGoldenFang extends CardImpl {
 
-    public TasigurTheGoldenFang(UUID ownerId) {
-        super(ownerId, 87, "Tasigur, the Golden Fang", Rarity.RARE, new CardType[]{CardType.CREATURE}, "{5}{B}");
-        this.expansionSetCode = "FRF";
+    public TasigurTheGoldenFang(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{5}{B}");
         this.supertype.add("Legendary");
         this.subtype.add("Human");
         this.subtype.add("Shaman");

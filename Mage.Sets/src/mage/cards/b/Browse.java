@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.alliances;
+package mage.cards.b;
 
 import java.util.UUID;
 import mage.abilities.Ability;
@@ -34,11 +34,11 @@ import mage.abilities.costs.mana.ManaCostsImpl;
 import mage.abilities.effects.OneShotEffect;
 import mage.cards.Card;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.cards.Cards;
 import mage.cards.CardsImpl;
 import mage.constants.CardType;
 import mage.constants.Outcome;
-import mage.constants.Rarity;
 import mage.constants.Zone;
 import mage.filter.FilterCard;
 import mage.game.Game;
@@ -51,9 +51,8 @@ import mage.target.TargetCard;
  */
 public class Browse extends CardImpl {
 
-    public Browse(UUID ownerId) {
-        super(ownerId, 38, "Browse", Rarity.UNCOMMON, new CardType[]{CardType.ENCHANTMENT}, "{2}{U}{U}");
-        this.expansionSetCode = "ALL";
+    public Browse(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.ENCHANTMENT},"{2}{U}{U}");
 
         // {2}{U}{U}: Look at the top five cards of your library, put one of them into your hand, and exile the rest.
         SimpleActivatedAbility ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new BrowseEffect(), new ManaCostsImpl("{2}{U}{U}"));

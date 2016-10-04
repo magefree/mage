@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.darksteel;
+package mage.cards.f;
 
 import java.util.UUID;
 import mage.MageInt;
@@ -36,8 +36,8 @@ import mage.abilities.effects.common.ExileAllEffect;
 import mage.abilities.keyword.AffinityForArtifactsAbility;
 import mage.abilities.keyword.FlyingAbility;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.filter.FilterPermanent;
 import mage.filter.predicate.mageobject.CardTypePredicate;
 import mage.watchers.common.CastFromHandWatcher;
@@ -54,9 +54,8 @@ public class FurnaceDragon extends CardImpl {
         filter.add(new CardTypePredicate(CardType.ARTIFACT));
     }
 
-    public FurnaceDragon(UUID ownerId) {
-        super(ownerId, 62, "Furnace Dragon", Rarity.RARE, new CardType[]{CardType.CREATURE}, "{6}{R}{R}{R}");
-        this.expansionSetCode = "DST";
+    public FurnaceDragon(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{6}{R}{R}{R}");
         this.subtype.add("Dragon");
         this.power = new MageInt(5);
         this.toughness = new MageInt(5);

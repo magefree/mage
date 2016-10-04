@@ -25,12 +25,11 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.betrayersofkamigawa;
+package mage.cards.h;
 
 import java.util.UUID;
 
 import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.DealsCombatDamageToAPlayerTriggeredAbility;
@@ -41,6 +40,7 @@ import mage.abilities.effects.common.combat.CantBeBlockedTargetEffect;
 import mage.abilities.effects.common.search.SearchLibraryPutInHandEffect;
 import mage.abilities.keyword.NinjutsuAbility;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.Zone;
 import mage.filter.FilterCard;
 import mage.filter.common.FilterCreaturePermanent;
@@ -61,9 +61,8 @@ public class HigureTheStillWind extends CardImpl {
         filterCreature.add((new SubtypePredicate("Ninja")));
     }
 
-    public HigureTheStillWind(UUID ownerId) {
-        super(ownerId, 37, "Higure, the Still Wind", Rarity.RARE, new CardType[]{CardType.CREATURE}, "{3}{U}{U}");
-        this.expansionSetCode = "BOK";
+    public HigureTheStillWind(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{3}{U}{U}");
         this.subtype.add("Human");
         this.subtype.add("Ninja");
         this.supertype.add("Legendary");

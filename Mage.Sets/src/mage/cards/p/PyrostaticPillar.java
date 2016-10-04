@@ -25,15 +25,15 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.scourge;
+package mage.cards.p;
 
 import java.util.UUID;
 import mage.abilities.TriggeredAbilityImpl;
 import mage.abilities.effects.Effect;
 import mage.abilities.effects.common.DamageTargetEffect;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.constants.Zone;
 import mage.game.Game;
 import mage.game.events.GameEvent;
@@ -47,9 +47,8 @@ import mage.target.targetpointer.FixedTarget;
  */
 public class PyrostaticPillar extends CardImpl {
 
-    public PyrostaticPillar(UUID ownerId) {
-        super(ownerId, 100, "Pyrostatic Pillar", Rarity.UNCOMMON, new CardType[]{CardType.ENCHANTMENT}, "{1}{R}");
-        this.expansionSetCode = "SCG";
+    public PyrostaticPillar(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.ENCHANTMENT},"{1}{R}");
 
 
         // Whenever a player casts a spell with converted mana cost 3 or less, Pyrostatic Pillar deals 2 damage to that player.

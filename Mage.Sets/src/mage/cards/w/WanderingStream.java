@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.invasion;
+package mage.cards.w;
 
 import java.util.UUID;
 import mage.abilities.dynamicvalue.MultipliedValue;
@@ -33,8 +33,8 @@ import mage.abilities.dynamicvalue.common.DomainValue;
 import mage.abilities.effects.Effect;
 import mage.abilities.effects.common.GainLifeEffect;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.Rarity;
 
 /**
  *
@@ -42,9 +42,8 @@ import mage.constants.Rarity;
  */
 public class WanderingStream extends CardImpl {
 
-    public WanderingStream(UUID ownerId) {
-        super(ownerId, 224, "Wandering Stream", Rarity.COMMON, new CardType[]{CardType.SORCERY}, "{2}{G}");
-        this.expansionSetCode = "INV";
+    public WanderingStream(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{2}{G}");
 
         // Domain - You gain 2 life for each basic land type among lands you control.
         Effect effect = new GainLifeEffect(new MultipliedValue(new DomainValue(), 2));

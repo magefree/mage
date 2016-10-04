@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.riseoftheeldrazi;
+package mage.cards.k;
 
 import java.util.UUID;
 import mage.MageInt;
@@ -35,8 +35,8 @@ import mage.abilities.effects.common.DrawCardSourceControllerEffect;
 import mage.abilities.effects.common.ShuffleIntoLibraryGraveOfSourceOwnerEffect;
 import mage.abilities.keyword.AnnihilatorAbility;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.Rarity;
 
 /**
  *
@@ -44,9 +44,8 @@ import mage.constants.Rarity;
  */
 public class KozilekButcherOfTruth extends CardImpl {
 
-    public KozilekButcherOfTruth(UUID ownerId) {
-        super(ownerId, 6, "Kozilek, Butcher of Truth", Rarity.MYTHIC, new CardType[]{CardType.CREATURE}, "{10}");
-        this.expansionSetCode = "ROE";
+    public KozilekButcherOfTruth(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{10}");
         this.supertype.add("Legendary");
         this.subtype.add("Eldrazi");
         this.power = new MageInt(12);

@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.championsofkamigawa;
+package mage.cards.j;
 
 import java.util.UUID;
 import mage.abilities.Ability;
@@ -37,10 +37,10 @@ import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.SacrificeTargetEffect;
 import mage.abilities.effects.common.continuous.BoostTargetEffect;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Duration;
 import mage.constants.Outcome;
-import mage.constants.Rarity;
 import mage.constants.TargetController;
 import mage.filter.common.FilterControlledCreaturePermanent;
 import mage.game.Game;
@@ -53,9 +53,8 @@ import mage.target.targetpointer.FixedTarget;
  */
 public class JunkyoBell extends CardImpl {
 
-    public JunkyoBell(UUID ownerId) {
-        super(ownerId, 258, "Junkyo Bell", Rarity.RARE, new CardType[]{CardType.ARTIFACT}, "{4}");
-        this.expansionSetCode = "CHK";
+    public JunkyoBell(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.ARTIFACT},"{4}");
 
         // At the beginning of your upkeep, you may have target creature you control get +X/+X until end of turn,
         // where X is the number of creatures you control. If you do, sacrifice that creature at the beginning of the next end step.

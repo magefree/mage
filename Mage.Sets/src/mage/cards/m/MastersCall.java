@@ -26,13 +26,13 @@
  *  or implied, of BetaSteward_at_googlemail.com.
  */
 
-package mage.sets.mirrodinbesieged;
+package mage.cards.m;
 
 import java.util.UUID;
 import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.abilities.effects.common.CreateTokenEffect;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.game.permanent.token.MyrToken;
 
 /**
@@ -41,9 +41,8 @@ import mage.game.permanent.token.MyrToken;
  */
 public class MastersCall extends CardImpl {
 
-    public MastersCall (UUID ownerId) {
-        super(ownerId, 13, "Master's Call", Rarity.COMMON, new CardType[]{CardType.INSTANT}, "{2}{W}");
-        this.expansionSetCode = "MBS";
+    public MastersCall (UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.INSTANT},"{2}{W}");
 
         this.getSpellAbility().addEffect(new CreateTokenEffect(new MyrToken(), 2));
     }

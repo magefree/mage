@@ -26,12 +26,11 @@
  *  or implied, of BetaSteward_at_googlemail.com.
  */
 
-package mage.sets.riseoftheeldrazi;
+package mage.cards.d;
 
 import java.util.UUID;
 import mage.constants.CardType;
 import mage.constants.Duration;
-import mage.constants.Rarity;
 import mage.constants.Zone;
 import mage.MageInt;
 import mage.abilities.Ability;
@@ -42,6 +41,7 @@ import mage.abilities.effects.common.continuous.GainAbilityTargetEffect;
 import mage.abilities.keyword.FlyingAbility;
 import mage.abilities.keyword.IndestructibleAbility;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.target.common.TargetCreaturePermanent;
 
 /**
@@ -50,9 +50,8 @@ import mage.target.common.TargetCreaturePermanent;
  */
 public class DeathlessAngel extends CardImpl {
 
-    public DeathlessAngel (UUID ownerId) {
-        super(ownerId, 17, "Deathless Angel", Rarity.RARE, new CardType[]{CardType.CREATURE}, "{4}{W}{W}");
-        this.expansionSetCode = "ROE";
+    public DeathlessAngel (UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{4}{W}{W}");
         this.subtype.add("Angel");
 
         this.power = new MageInt(5);

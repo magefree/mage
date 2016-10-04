@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.visions;
+package mage.cards.s;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -39,11 +39,11 @@ import mage.abilities.costs.common.SacrificeTargetCost;
 import mage.abilities.effects.common.ManaEffect;
 import mage.abilities.mana.ManaAbility;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.choices.Choice;
 import mage.choices.ChoiceImpl;
 import mage.constants.CardType;
 import mage.constants.ColoredManaSymbol;
-import mage.constants.Rarity;
 import mage.constants.Zone;
 import mage.filter.common.FilterControlledLandPermanent;
 import mage.filter.common.FilterControlledPermanent;
@@ -61,9 +61,8 @@ public class SquanderedResources extends CardImpl {
     
     private static final FilterControlledPermanent filter = new FilterControlledLandPermanent("a land");
 
-    public SquanderedResources(UUID ownerId) {
-        super(ownerId, 137, "Squandered Resources", Rarity.RARE, new CardType[]{CardType.ENCHANTMENT}, "{B}{G}");
-        this.expansionSetCode = "VIS";
+    public SquanderedResources(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.ENCHANTMENT},"{B}{G}");
 
         // Sacrifice a land: Add to your mana pool one mana of any type the sacrificed land could produce.
         this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new SquanderedResourcesEffect(), new SacrificeTargetCost(new TargetControlledPermanent(filter))));

@@ -25,12 +25,11 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.exodus;
+package mage.cards.e;
 
 import java.util.UUID;
 
 import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleActivatedAbility;
@@ -38,6 +37,7 @@ import mage.abilities.costs.common.TapSourceCost;
 import mage.abilities.costs.mana.ManaCostsImpl;
 import mage.abilities.effects.common.CounterTargetEffect;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.Zone;
 import mage.target.TargetSpell;
 
@@ -47,9 +47,8 @@ import mage.target.TargetSpell;
  */
 public class ErtaiWizardAdept extends CardImpl {
 
-    public ErtaiWizardAdept(UUID ownerId) {
-        super(ownerId, 33, "Ertai, Wizard Adept", Rarity.RARE, new CardType[]{CardType.CREATURE}, "{2}{U}");
-        this.expansionSetCode = "EXO";
+    public ErtaiWizardAdept(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{2}{U}");
         this.supertype.add("Legendary");
         this.subtype.add("Human");
         this.subtype.add("Wizard");

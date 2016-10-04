@@ -25,13 +25,13 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.eighthedition;
+package mage.cards.s;
 
 import java.util.UUID;
 import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.MageInt;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 
 /**
  *
@@ -39,9 +39,8 @@ import mage.cards.CardImpl;
  */
 public class SavannahLions extends CardImpl {
 
-    public SavannahLions(UUID ownerId) {
-        super(ownerId, 43, "Savannah Lions", Rarity.RARE, new CardType[]{CardType.CREATURE}, "{W}");
-        this.expansionSetCode = "8ED";
+    public SavannahLions(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{W}");
         this.subtype.add("Cat");
 
         this.power = new MageInt(2);

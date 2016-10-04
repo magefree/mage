@@ -26,12 +26,11 @@
  *  or implied, of BetaSteward_at_googlemail.com.
  */
 
-package mage.sets.mirrodinbesieged;
+package mage.cards.b;
 
 import java.util.UUID;
 
 import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.MageInt;
 import mage.abilities.common.PutIntoGraveFromAnywhereSourceAbility;
 import mage.abilities.effects.common.RevealAndShuffleIntoLibrarySourceEffect;
@@ -39,15 +38,15 @@ import mage.abilities.keyword.IndestructibleAbility;
 import mage.abilities.keyword.InfectAbility;
 import mage.abilities.keyword.TrampleAbility;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 
 /**
  * @author Loki
  */
 public class BlightsteelColossus extends CardImpl {
 
-    public BlightsteelColossus(UUID ownerId) {
-        super(ownerId, 99, "Blightsteel Colossus", Rarity.MYTHIC, new CardType[]{CardType.ARTIFACT, CardType.CREATURE}, "{12}");
-        this.expansionSetCode = "MBS";
+    public BlightsteelColossus(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.ARTIFACT,CardType.CREATURE},"{12}");
         this.subtype.add("Golem");
         this.power = new MageInt(11);
         this.toughness = new MageInt(11);

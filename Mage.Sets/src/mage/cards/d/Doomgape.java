@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.eventide;
+package mage.cards.d;
 
 import java.util.UUID;
 import mage.MageInt;
@@ -34,9 +34,9 @@ import mage.abilities.common.BeginningOfUpkeepTriggeredAbility;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.keyword.TrampleAbility;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Outcome;
-import mage.constants.Rarity;
 import mage.constants.TargetController;
 import mage.constants.Zone;
 import mage.game.Game;
@@ -52,9 +52,8 @@ import mage.target.common.TargetControlledCreaturePermanent;
  */
 public class Doomgape extends CardImpl {
 
-    public Doomgape(UUID ownerId) {
-        super(ownerId, 120, "Doomgape", Rarity.RARE, new CardType[]{CardType.CREATURE}, "{4}{B/G}{B/G}{B/G}");
-        this.expansionSetCode = "EVE";
+    public Doomgape(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{4}{B/G}{B/G}{B/G}");
         this.subtype.add("Elemental");
 
         this.power = new MageInt(10);

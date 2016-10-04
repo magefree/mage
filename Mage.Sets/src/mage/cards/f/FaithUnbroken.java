@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.eldritchmoon;
+package mage.cards.f;
 
 import java.util.UUID;
 import mage.abilities.Ability;
@@ -39,10 +39,10 @@ import mage.abilities.effects.common.ExileTargetEffect;
 import mage.abilities.effects.common.continuous.BoostEnchantedEffect;
 import mage.abilities.keyword.EnchantAbility;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Duration;
 import mage.constants.Outcome;
-import mage.constants.Rarity;
 import mage.constants.TargetController;
 import mage.constants.Zone;
 import mage.filter.common.FilterCreaturePermanent;
@@ -66,9 +66,8 @@ public class FaithUnbroken extends CardImpl {
         filterTarget.add(new ControllerPredicate(TargetController.OPPONENT));
     }
 
-    public FaithUnbroken(UUID ownerId) {
-        super(ownerId, 24, "Faith Unbroken", Rarity.UNCOMMON, new CardType[]{CardType.ENCHANTMENT}, "{3}{W}");
-        this.expansionSetCode = "EMN";
+    public FaithUnbroken(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.ENCHANTMENT},"{3}{W}");
         this.subtype.add("Aura");
 
         // Enchant creature you control

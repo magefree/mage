@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.riseoftheeldrazi;
+package mage.cards.g;
 
 import java.util.UUID;
 import mage.MageInt;
@@ -39,9 +39,9 @@ import mage.abilities.effects.common.DestroyTargetEffect;
 import mage.abilities.effects.common.PreventAllDamageToSourceEffect;
 import mage.abilities.effects.common.continuous.BecomesCreatureSourceEffect;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Duration;
-import mage.constants.Rarity;
 import mage.constants.TurnPhase;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.filter.predicate.permanent.TappedPredicate;
@@ -63,9 +63,8 @@ public class GideonJura extends CardImpl {
         filter.add(new TappedPredicate());
     }
 
-    public GideonJura(UUID ownerId) {
-        super(ownerId, 21, "Gideon Jura", Rarity.MYTHIC, new CardType[]{CardType.PLANESWALKER}, "{3}{W}{W}");
-        this.expansionSetCode = "ROE";
+    public GideonJura(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.PLANESWALKER},"{3}{W}{W}");
         this.subtype.add("Gideon");
 
         this.addAbility(new PlanswalkerEntersWithLoyalityCountersAbility(6));

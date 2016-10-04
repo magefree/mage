@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.visions;
+package mage.cards.h;
 
 import java.util.UUID;
 import mage.abilities.Mode;
@@ -34,9 +34,9 @@ import mage.abilities.effects.common.GainLifeTargetEffect;
 import mage.abilities.effects.common.continuous.GainAbilityTargetEffect;
 import mage.abilities.keyword.FirstStrikeAbility;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Duration;
-import mage.constants.Rarity;
 import mage.filter.FilterPermanent;
 import mage.filter.predicate.mageobject.SubtypePredicate;
 import mage.target.TargetPermanent;
@@ -55,9 +55,8 @@ public class HopeCharm extends CardImpl {
         filter.add(new SubtypePredicate("Aura"));
     }
 
-    public HopeCharm(UUID ownerId) {
-        super(ownerId, 108, "Hope Charm", Rarity.COMMON, new CardType[]{CardType.INSTANT}, "{W}");
-        this.expansionSetCode = "VIS";
+    public HopeCharm(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.INSTANT},"{W}");
 
         // Choose one - Target creature gains first strike until end of turn
         this.getSpellAbility().addEffect(new GainAbilityTargetEffect(FirstStrikeAbility.getInstance(), Duration.EndOfTurn));

@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.eldritchmoon;
+package mage.cards.o;
 
 import java.util.HashSet;
 import java.util.Set;
@@ -38,8 +38,8 @@ import mage.abilities.decorator.ConditionalTriggeredAbility;
 import mage.abilities.effects.common.CreateTokenEffect;
 import mage.abilities.effects.common.SacrificeOpponentsEffect;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.constants.TargetController;
 import mage.constants.WatcherScope;
 import mage.constants.Zone;
@@ -56,9 +56,8 @@ import mage.watchers.Watcher;
  */
 public class OathOfLiliana extends CardImpl {
 
-    public OathOfLiliana(UUID ownerId) {
-        super(ownerId, 99, "Oath of Liliana", Rarity.RARE, new CardType[]{CardType.ENCHANTMENT}, "{2}{B}");
-        this.expansionSetCode = "EMN";
+    public OathOfLiliana(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.ENCHANTMENT},"{2}{B}");
         this.supertype.add("Legendary");
 
         // When Oath of Liliana enters the battlefield, each opponent sacrifices a creature.

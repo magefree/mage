@@ -25,15 +25,15 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.coldsnap;
+package mage.cards.p;
 
 import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.costs.common.SacrificeTargetCost;
 import mage.abilities.keyword.CumulativeUpkeepAbility;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.filter.common.FilterControlledCreaturePermanent;
 import mage.target.common.TargetControlledCreaturePermanent;
 
@@ -43,9 +43,8 @@ import mage.target.common.TargetControlledCreaturePermanent;
  */
 public class PhyrexianSoulgorger extends CardImpl {
 
-    public PhyrexianSoulgorger(UUID ownerId) {
-        super(ownerId, 141, "Phyrexian Soulgorger", Rarity.RARE, new CardType[]{CardType.ARTIFACT, CardType.CREATURE}, "{3}");
-        this.expansionSetCode = "CSP";
+    public PhyrexianSoulgorger(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.ARTIFACT,CardType.CREATURE},"{3}");
         this.supertype.add("Snow");
         this.subtype.add("Construct");
         this.power = new MageInt(8);

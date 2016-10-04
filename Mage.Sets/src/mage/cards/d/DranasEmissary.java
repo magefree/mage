@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.battleforzendikar;
+package mage.cards.d;
 
 import java.util.UUID;
 import mage.MageInt;
@@ -36,8 +36,8 @@ import mage.abilities.effects.common.GainLifeEffect;
 import mage.abilities.effects.common.LoseLifeOpponentsEffect;
 import mage.abilities.keyword.FlyingAbility;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.constants.TargetController;
 
 /**
@@ -46,9 +46,8 @@ import mage.constants.TargetController;
  */
 public class DranasEmissary extends CardImpl {
 
-    public DranasEmissary(UUID ownerId) {
-        super(ownerId, 210, "Drana's Emissary", Rarity.UNCOMMON, new CardType[]{CardType.CREATURE}, "{1}{W}{B}");
-        this.expansionSetCode = "BFZ";
+    public DranasEmissary(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{1}{W}{B}");
         this.subtype.add("Vampire");
         this.subtype.add("Cleric");
         this.subtype.add("Ally");

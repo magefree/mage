@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.avacynrestored;
+package mage.cards.m;
 
 import mage.constants.*;
 import mage.abilities.Ability;
@@ -37,6 +37,7 @@ import mage.abilities.effects.common.combat.CantBlockTargetEffect;
 import mage.abilities.effects.common.continuous.GainAbilityAttachedEffect;
 import mage.abilities.keyword.EnchantAbility;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.target.TargetPermanent;
 import mage.target.common.TargetCreaturePermanent;
 
@@ -49,9 +50,8 @@ import java.util.UUID;
  */
 public class MaliciousIntent extends CardImpl {
 
-    public MaliciousIntent(UUID ownerId) {
-        super(ownerId, 147, "Malicious Intent", Rarity.COMMON, new CardType[]{CardType.ENCHANTMENT}, "{1}{R}");
-        this.expansionSetCode = "AVR";
+    public MaliciousIntent(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.ENCHANTMENT},"{1}{R}");
         this.subtype.add("Aura");
 
 

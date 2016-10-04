@@ -26,7 +26,7 @@
  *  or implied, of BetaSteward_at_googlemail.com.
  */
 
-package mage.sets.magic2011;
+package mage.cards.o;
 
 import java.util.UUID;
 import mage.MageInt;
@@ -35,8 +35,8 @@ import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.effects.common.DiscardOntoBattlefieldEffect;
 import mage.abilities.effects.common.GainLifeEffect;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.constants.Zone;
 
 /**
@@ -45,9 +45,8 @@ import mage.constants.Zone;
  */
 public class ObstinateBaloth extends CardImpl {
 
-    public ObstinateBaloth(UUID ownerId) {
-        super(ownerId, 188, "Obstinate Baloth", Rarity.RARE, new CardType[]{CardType.CREATURE}, "{2}{G}{G}");
-        this.expansionSetCode = "M11";
+    public ObstinateBaloth(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{2}{G}{G}");
         this.subtype.add("Beast");
 
         this.power = new MageInt(4);

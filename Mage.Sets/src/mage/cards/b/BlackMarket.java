@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.mercadianmasques;
+package mage.cards.b;
 
 import java.util.UUID;
 import mage.Mana;
@@ -35,9 +35,9 @@ import mage.abilities.common.DiesCreatureTriggeredAbility;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.counter.AddCountersSourceEffect;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Outcome;
-import mage.constants.Rarity;
 import mage.constants.TargetController;
 import mage.counters.CounterType;
 import mage.game.Game;
@@ -50,9 +50,8 @@ import mage.players.Player;
  */
 public class BlackMarket extends CardImpl {
 
-    public BlackMarket(UUID ownerId) {
-        super(ownerId, 116, "Black Market", Rarity.RARE, new CardType[]{CardType.ENCHANTMENT}, "{3}{B}{B}");
-        this.expansionSetCode = "MMQ";
+    public BlackMarket(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.ENCHANTMENT},"{3}{B}{B}");
 
         // Whenever a creature dies, put a charge counter on Black Market.
         this.addAbility(new DiesCreatureTriggeredAbility(new AddCountersSourceEffect(CounterType.CHARGE.createInstance()),false ));

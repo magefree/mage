@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.blessedvscursed;
+package mage.cards.e;
 
 import java.util.HashSet;
 import java.util.Set;
@@ -38,12 +38,13 @@ import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.ReturnToBattlefieldUnderOwnerControlTargetEffect;
 import mage.cards.Card;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.cards.Cards;
 import mage.cards.CardsImpl;
+import mage.cards.CardSetInfo;
 import mage.cards.MeldCard;
 import mage.constants.CardType;
 import mage.constants.Outcome;
-import mage.constants.Rarity;
 import mage.filter.common.FilterControlledCreaturePermanent;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
@@ -60,9 +61,8 @@ import mage.util.CardUtil;
  */
 public class EerieInterlude extends CardImpl {
 
-    public EerieInterlude(UUID ownerId) {
-        super(ownerId, 8, "Eerie Interlude", Rarity.RARE, new CardType[]{CardType.INSTANT}, "{2}{W}");
-        this.expansionSetCode = "DDQ";
+    public EerieInterlude(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.INSTANT},"{2}{W}");
 
         // Exile any number of target creatures you control. Return those cards to the battlefield under their owner's control at the beginning of the next end step.
         this.getSpellAbility().addEffect(new EerieInterludeEffect());

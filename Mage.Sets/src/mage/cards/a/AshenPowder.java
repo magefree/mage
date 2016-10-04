@@ -25,13 +25,13 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.mirage;
+package mage.cards.a;
 
 import java.util.UUID;
 import mage.abilities.effects.common.ReturnFromGraveyardToBattlefieldTargetEffect;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.filter.common.FilterCreatureCard;
 import mage.target.common.TargetCardInOpponentsGraveyard;
 
@@ -41,9 +41,8 @@ import mage.target.common.TargetCardInOpponentsGraveyard;
  */
 public class AshenPowder extends CardImpl {
 
-    public AshenPowder(UUID ownerId) {
-        super(ownerId, 2, "Ashen Powder", Rarity.RARE, new CardType[]{CardType.SORCERY}, "{2}{B}{B}");
-        this.expansionSetCode = "MIR";
+    public AshenPowder(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{2}{B}{B}");
 
 
         // Put target creature card from an opponent's graveyard onto the battlefield under your control.

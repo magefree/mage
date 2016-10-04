@@ -26,13 +26,13 @@
  *  or implied, of BetaSteward_at_googlemail.com.
  */
 
-package mage.sets.championsofkamigawa;
+package mage.cards.i;
 
 import java.util.UUID;
 import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.MageInt;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 
 /**
  *
@@ -40,9 +40,8 @@ import mage.cards.CardImpl;
  */
 public class IsamaruHoundofKonda extends CardImpl {
 
-    public IsamaruHoundofKonda (UUID ownerId) {
-        super(ownerId, 19, "Isamaru, Hound of Konda", Rarity.RARE, new CardType[]{CardType.CREATURE}, "{W}");
-        this.expansionSetCode = "CHK";
+    public IsamaruHoundofKonda (UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{W}");
         this.supertype.add("Legendary");
         this.subtype.add("Hound");
 

@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.tempest;
+package mage.cards.m;
 
 import java.util.UUID;
 import mage.MageInt;
@@ -37,9 +37,9 @@ import mage.abilities.effects.common.DamageEverythingEffect;
 import mage.abilities.effects.common.counter.AddCountersSourceEffect;
 import mage.abilities.keyword.FlyingAbility;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Outcome;
-import mage.constants.Rarity;
 import mage.constants.TargetController;
 import mage.constants.Zone;
 import mage.counters.CounterType;
@@ -56,9 +56,8 @@ import mage.players.Player;
  */
 public class Magmasaur extends CardImpl {
 
-    public Magmasaur(UUID ownerId) {
-        super(ownerId, 188, "Magmasaur", Rarity.RARE, new CardType[]{CardType.CREATURE}, "{3}{R}{R}");
-        this.expansionSetCode = "TMP";
+    public Magmasaur(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{3}{R}{R}");
         this.subtype.add("Elemental");
         this.subtype.add("Lizard");
         this.power = new MageInt(0);

@@ -25,11 +25,10 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.avacynrestored;
+package mage.cards.c;
 
 import java.util.UUID;
 import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.constants.Zone;
 import mage.MageInt;
 import mage.abilities.Ability;
@@ -40,6 +39,7 @@ import mage.abilities.costs.mana.ManaCostsImpl;
 import mage.abilities.effects.common.MayTapOrUntapTargetEffect;
 import mage.abilities.effects.common.UntapSourceEffect;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.filter.FilterPermanent;
 import mage.filter.common.FilterControlledCreaturePermanent;
 import mage.filter.predicate.mageobject.SubtypePredicate;
@@ -60,9 +60,8 @@ public class CaptainOfTheMists extends CardImpl {
         filter.add(new SubtypePredicate("Human"));
     }
 
-    public CaptainOfTheMists(UUID ownerId) {
-        super(ownerId, 45, "Captain of the Mists", Rarity.RARE, new CardType[]{CardType.CREATURE}, "{2}{U}");
-        this.expansionSetCode = "AVR";
+    public CaptainOfTheMists(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{2}{U}");
         this.subtype.add("Human");
         this.subtype.add("Wizard");
 

@@ -25,19 +25,19 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.morningtide;
+package mage.cards.k;
 
 import java.util.UUID;
 
 import mage.constants.CardType;
 import mage.constants.Duration;
-import mage.constants.Rarity;
 import mage.constants.Zone;
 import mage.MageInt;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.effects.common.continuous.GainAbilityControlledEffect;
 import mage.abilities.keyword.DoubleStrikeAbility;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.filter.common.FilterControlledCreaturePermanent;
 import mage.filter.predicate.mageobject.SubtypePredicate;
 
@@ -53,9 +53,8 @@ public class KinsbaileCavalier extends CardImpl {
         filter.add(new SubtypePredicate("Knight"));
     }
 
-    public KinsbaileCavalier(UUID ownerId) {
-        super(ownerId, 15, "Kinsbaile Cavalier", Rarity.RARE, new CardType[]{CardType.CREATURE}, "{3}{W}");
-        this.expansionSetCode = "MOR";
+    public KinsbaileCavalier(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{3}{W}");
         this.subtype.add("Kithkin");
         this.subtype.add("Knight");
 

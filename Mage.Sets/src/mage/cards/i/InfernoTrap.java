@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.zendikar;
+package mage.cards.i;
 
 import java.util.HashMap;
 import java.util.HashSet;
@@ -39,8 +39,8 @@ import mage.abilities.costs.AlternativeCostSourceAbility;
 import mage.abilities.costs.mana.ManaCostsImpl;
 import mage.abilities.effects.common.DamageTargetEffect;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.constants.WatcherScope;
 import mage.game.Game;
 import mage.game.events.GameEvent;
@@ -54,9 +54,8 @@ import mage.watchers.Watcher;
  */
 public class InfernoTrap extends CardImpl {
 
-    public InfernoTrap(UUID ownerId) {
-        super(ownerId, 133, "Inferno Trap", Rarity.UNCOMMON, new CardType[]{CardType.INSTANT}, "{3}{R}");
-        this.expansionSetCode = "ZEN";
+    public InfernoTrap(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.INSTANT},"{3}{R}");
         this.subtype.add("Trap");
 
         // If you've been dealt damage by two or more creatures this turn, you may pay {R} rather than pay Inferno Trap's mana cost.

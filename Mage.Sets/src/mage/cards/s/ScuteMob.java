@@ -26,15 +26,15 @@
 * or implied, of BetaSteward_at_googlemail.com.
 */
 
-package mage.sets.zendikar;
+package mage.cards.s;
 
 import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.TriggeredAbilityImpl;
 import mage.abilities.effects.common.counter.AddCountersSourceEffect;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.constants.Zone;
 import mage.counters.CounterType;
 import mage.filter.common.FilterLandPermanent;
@@ -48,9 +48,8 @@ import mage.game.events.GameEvent.EventType;
  */
 public class ScuteMob extends CardImpl {
 
-    public ScuteMob(UUID ownerId) {
-        super(ownerId, 182, "Scute Mob", Rarity.RARE, new CardType[]{CardType.CREATURE}, "{G}");
-        this.expansionSetCode = "ZEN";
+    public ScuteMob(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{G}");
 
         this.subtype.add("Insect");
         this.power = new MageInt(1);

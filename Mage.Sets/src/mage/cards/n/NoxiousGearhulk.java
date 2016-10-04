@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.kaladesh;
+package mage.cards.n;
 
 import java.util.UUID;
 import mage.MageInt;
@@ -34,6 +34,7 @@ import mage.abilities.common.EntersBattlefieldTriggeredAbility;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.keyword.MenaceAbility;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Outcome;
 import mage.constants.Rarity;
@@ -56,9 +57,8 @@ public class NoxiousGearhulk extends CardImpl {
         filter.add(new AnotherPredicate());
     }
 
-    public NoxiousGearhulk(UUID ownerId) {
-        super(ownerId, 96, "Noxious Gearhulk", Rarity.MYTHIC, new CardType[]{CardType.ARTIFACT, CardType.CREATURE}, "{4}{B}{B}");
-        this.expansionSetCode = "KLD";
+    public NoxiousGearhulk(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.ARTIFACT,CardType.CREATURE},"{4}{B}{B}");
         this.subtype.add("Construct");
         this.power = new MageInt(5);
         this.toughness = new MageInt(4);

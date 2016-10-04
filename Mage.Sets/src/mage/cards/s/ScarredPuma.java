@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.invasion;
+package mage.cards.s;
 
 import java.util.UUID;
 import mage.MageInt;
@@ -34,9 +34,9 @@ import mage.abilities.Ability;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.effects.RestrictionEffect;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Duration;
-import mage.constants.Rarity;
 import mage.constants.Zone;
 import mage.filter.common.FilterAttackingCreature;
 import mage.game.Game;
@@ -48,9 +48,8 @@ import mage.game.permanent.Permanent;
  */
 public class ScarredPuma extends CardImpl {
 
-    public ScarredPuma(UUID ownerId) {
-        super(ownerId, 163, "Scarred Puma", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{R}");
-        this.expansionSetCode = "INV";
+    public ScarredPuma(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{R}");
         this.subtype.add("Cat");
         this.power = new MageInt(2);
         this.toughness = new MageInt(1);

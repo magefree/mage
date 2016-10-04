@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.journeyintonyx;
+package mage.cards.h;
 
 import java.util.UUID;
 import mage.MageInt;
@@ -33,9 +33,9 @@ import mage.abilities.abilityword.ConstellationAbility;
 import mage.abilities.effects.common.continuous.GainAbilityControlledEffect;
 import mage.abilities.keyword.TrampleAbility;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Duration;
-import mage.constants.Rarity;
 import mage.filter.common.FilterControlledCreaturePermanent;
 
 /**
@@ -44,9 +44,8 @@ import mage.filter.common.FilterControlledCreaturePermanent;
  */
 public class HumblerOfMortals extends CardImpl {
 
-    public HumblerOfMortals(UUID ownerId) {
-        super(ownerId, 127, "Humbler of Mortals", Rarity.COMMON, new CardType[]{CardType.ENCHANTMENT, CardType.CREATURE}, "{4}{G}{G}");
-        this.expansionSetCode = "JOU";
+    public HumblerOfMortals(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.ENCHANTMENT,CardType.CREATURE},"{4}{G}{G}");
         this.subtype.add("Elemental");
 
         this.power = new MageInt(5);

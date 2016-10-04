@@ -26,7 +26,7 @@
  *  or implied, of BetaSteward_at_googlemail.com.
  */
 
-package mage.sets.magic2011;
+package mage.cards.s;
 
 import java.util.UUID;
 import mage.MageInt;
@@ -38,11 +38,11 @@ import mage.abilities.keyword.FlyingAbility;
 import mage.abilities.keyword.IslandwalkAbility;
 import mage.abilities.mana.BlueManaAbility;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Duration;
 import mage.constants.Layer;
 import mage.constants.Outcome;
-import mage.constants.Rarity;
 import mage.constants.SubLayer;
 import mage.constants.Zone;
 import mage.filter.common.FilterCreaturePermanent;
@@ -65,9 +65,8 @@ public class StormtideLeviathan extends CardImpl {
         filter.add(Predicates.not(new AbilityPredicate(IslandwalkAbility.class)));
     }
 
-    public StormtideLeviathan(UUID ownerId) {
-        super(ownerId, 74, "Stormtide Leviathan", Rarity.RARE, new CardType[]{CardType.CREATURE}, "{5}{U}{U}{U}");
-        this.expansionSetCode = "M11";
+    public StormtideLeviathan(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{5}{U}{U}{U}");
         this.subtype.add("Leviathan");
 
         this.power = new MageInt(8);

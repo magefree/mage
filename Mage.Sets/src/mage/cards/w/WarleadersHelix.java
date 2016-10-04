@@ -25,16 +25,16 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.dragonsmaze;
+package mage.cards.w;
 
 import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
 import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.abilities.effects.common.DamageTargetEffect;
 import mage.abilities.effects.common.GainLifeEffect;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.target.common.TargetCreatureOrPlayer;
 
 /**
@@ -43,9 +43,8 @@ import mage.target.common.TargetCreatureOrPlayer;
  */
 public class WarleadersHelix extends CardImpl {
 
-    public WarleadersHelix(UUID ownerId) {
-        super(ownerId, 116, "Warleader's Helix", Rarity.UNCOMMON, new CardType[]{CardType.INSTANT}, "{2}{R}{W}");
-        this.expansionSetCode = "DGM";
+    public WarleadersHelix(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.INSTANT},"{2}{R}{W}");
 
 
         // Warleader's Helix deals 4 damage to target creature or player and you gain 4 life.

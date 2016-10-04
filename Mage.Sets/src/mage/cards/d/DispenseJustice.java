@@ -26,17 +26,17 @@
  *  or implied, of BetaSteward_at_googlemail.com.
  */
 
-package mage.sets.scarsofmirrodin;
+package mage.cards.d;
 
 import java.util.UUID;
 import mage.constants.CardType;
 import mage.constants.Outcome;
-import mage.constants.Rarity;
 import mage.abilities.Ability;
 import mage.abilities.condition.common.MetalcraftCondition;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.SacrificeEffect;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.filter.common.FilterAttackingCreature;
 import mage.game.Game;
 import mage.target.TargetPlayer;
@@ -47,9 +47,8 @@ import mage.target.TargetPlayer;
  */
 public class DispenseJustice extends CardImpl {
 
-    public DispenseJustice (UUID ownerId) {
-        super(ownerId, 5, "Dispense Justice", Rarity.UNCOMMON, new CardType[]{CardType.INSTANT}, "{2}{W}");
-        this.expansionSetCode = "SOM";
+    public DispenseJustice (UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.INSTANT},"{2}{W}");
 
 
         this.getSpellAbility().addEffect(new DispenseJusticeEffect());

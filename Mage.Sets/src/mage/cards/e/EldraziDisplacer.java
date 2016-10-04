@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.oathofthegatewatch;
+package mage.cards.e;
 
 import java.util.UUID;
 import mage.MageInt;
@@ -37,8 +37,8 @@ import mage.abilities.effects.common.ExileTargetForSourceEffect;
 import mage.abilities.effects.common.ReturnToBattlefieldUnderOwnerControlTargetEffect;
 import mage.abilities.keyword.DevoidAbility;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.constants.Zone;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.filter.predicate.permanent.AnotherPredicate;
@@ -56,9 +56,8 @@ public class EldraziDisplacer extends CardImpl {
         FILTER.add(new AnotherPredicate());
     }
 
-    public EldraziDisplacer(UUID ownerId) {
-        super(ownerId, 13, "Eldrazi Displacer", Rarity.RARE, new CardType[]{CardType.CREATURE}, "{2}{W}");
-        this.expansionSetCode = "OGW";
+    public EldraziDisplacer(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{2}{W}");
         this.subtype.add("Eldrazi");
         this.power = new MageInt(3);
         this.toughness = new MageInt(3);

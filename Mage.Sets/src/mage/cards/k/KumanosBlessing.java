@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.betrayersofkamigawa;
+package mage.cards.k;
 
 import java.util.HashSet;
 import java.util.Set;
@@ -38,6 +38,7 @@ import mage.abilities.effects.common.AttachEffect;
 import mage.abilities.keyword.EnchantAbility;
 import mage.abilities.keyword.FlashAbility;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.*;
 import mage.game.Game;
 import mage.game.events.GameEvent;
@@ -56,9 +57,8 @@ import mage.watchers.Watcher;
  */
 public class KumanosBlessing extends CardImpl {
 
-    public KumanosBlessing(UUID ownerId) {
-        super(ownerId, 111, "Kumano's Blessing", Rarity.COMMON, new CardType[]{CardType.ENCHANTMENT}, "{2}{R}");
-        this.expansionSetCode = "BOK";
+    public KumanosBlessing(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.ENCHANTMENT},"{2}{R}");
         this.subtype.add("Aura");
 
         // Flash

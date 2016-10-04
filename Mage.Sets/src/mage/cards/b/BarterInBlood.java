@@ -25,13 +25,13 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.avacynrestored;
+package mage.cards.b;
 
 import java.util.UUID;
 import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.abilities.effects.common.SacrificeAllEffect;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.filter.common.FilterControlledPermanent;
 import mage.filter.predicate.mageobject.CardTypePredicate;
 
@@ -47,9 +47,8 @@ public class BarterInBlood extends CardImpl {
         filter.add(new CardTypePredicate(CardType.CREATURE));
     }
 
-    public BarterInBlood(UUID ownerId) {
-        super(ownerId, 85, "Barter in Blood", Rarity.UNCOMMON, new CardType[]{CardType.SORCERY}, "{2}{B}{B}");
-        this.expansionSetCode = "AVR";
+    public BarterInBlood(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{2}{B}{B}");
 
 
         // Each player sacrifices two creatures.

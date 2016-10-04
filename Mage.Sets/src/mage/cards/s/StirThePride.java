@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.modernmasters;
+package mage.cards.s;
 
 import java.util.UUID;
 import mage.abilities.Mode;
@@ -35,9 +35,9 @@ import mage.abilities.effects.common.continuous.BoostControlledEffect;
 import mage.abilities.effects.common.continuous.GainAbilityControlledEffect;
 import mage.abilities.keyword.EntwineAbility;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Duration;
-import mage.constants.Rarity;
 
 /**
  *
@@ -45,9 +45,8 @@ import mage.constants.Rarity;
  */
 public class StirThePride extends CardImpl {
 
-    public StirThePride(UUID ownerId) {
-        super(ownerId, 30, "Stir the Pride", Rarity.UNCOMMON, new CardType[]{CardType.INSTANT}, "{4}{W}");
-        this.expansionSetCode = "MMA";
+    public StirThePride(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.INSTANT},"{4}{W}");
 
 
         // Choose one - 

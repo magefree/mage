@@ -25,15 +25,15 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.starwars;
+package mage.cards.h;
 
 import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.common.EntersBattlefieldAbility;
 import mage.abilities.effects.common.counter.AddCountersSourceEffect;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.counters.CounterType;
 
 /**
@@ -42,9 +42,8 @@ import mage.counters.CounterType;
  */
 public class HuttCrimeLord extends CardImpl {
 
-    public HuttCrimeLord(UUID ownerId) {
-        super(ownerId, 140, "Hutt Crime Lord", Rarity.UNCOMMON, new CardType[]{CardType.CREATURE}, "{2}{G}{G}");
-        this.expansionSetCode = "SWS";
+    public HuttCrimeLord(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{2}{G}{G}");
         this.subtype.add("Hutt");
         this.subtype.add("Rogue");
         this.power = new MageInt(5);

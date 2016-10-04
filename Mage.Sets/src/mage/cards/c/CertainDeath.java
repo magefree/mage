@@ -25,15 +25,15 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.eldritchmoon;
+package mage.cards.c;
 
 import java.util.UUID;
 import mage.abilities.Ability;
 import mage.abilities.effects.OneShotEffect;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Outcome;
-import mage.constants.Rarity;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.players.Player;
@@ -45,9 +45,8 @@ import mage.target.common.TargetCreaturePermanent;
  */
 public class CertainDeath extends CardImpl {
 
-    public CertainDeath(UUID ownerId) {
-        super(ownerId, 84, "Certain Death", Rarity.COMMON, new CardType[]{CardType.SORCERY}, "{5}{B}");
-        this.expansionSetCode = "EMN";
+    public CertainDeath(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{5}{B}");
 
         // Destroy target creature. Its controller loses 2 life and you gain 2 life.
         this.getSpellAbility().addTarget(new TargetCreaturePermanent());

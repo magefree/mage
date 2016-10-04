@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.commander2015;
+package mage.cards.m;
 
 import java.util.UUID;
 import mage.abilities.Ability;
@@ -35,10 +35,10 @@ import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.ExileTargetEffect;
 import mage.abilities.effects.common.PutTokenOntoBattlefieldCopyTargetEffect;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Outcome;
 import mage.constants.PhaseStep;
-import mage.constants.Rarity;
 import mage.game.Game;
 import mage.game.combat.CombatGroup;
 import mage.game.permanent.Permanent;
@@ -52,9 +52,8 @@ import mage.target.targetpointer.FixedTargets;
  */
 public class MirrorMatch extends CardImpl {
 
-    public MirrorMatch(UUID ownerId) {
-        super(ownerId, 13, "Mirror Match", Rarity.UNCOMMON, new CardType[]{CardType.INSTANT}, "{4}{U}{U}");
-        this.expansionSetCode = "C15";
+    public MirrorMatch(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.INSTANT},"{4}{U}{U}");
 
         // Cast Mirror Match only during the declare blockers step.
         this.addAbility(new CastOnlyDuringPhaseStepSourceAbility(PhaseStep.DECLARE_BLOCKERS));

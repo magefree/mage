@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.betrayersofkamigawa;
+package mage.cards.y;
 
 import java.util.UUID;
 import mage.MageInt;
@@ -33,8 +33,8 @@ import mage.abilities.common.PutIntoGraveFromBattlefieldAllTriggeredAbility;
 import mage.abilities.effects.Effect;
 import mage.abilities.effects.common.ReturnToHandTargetEffect;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.filter.FilterPermanent;
 import mage.filter.predicate.mageobject.SupertypePredicate;
 import mage.filter.predicate.permanent.AnotherPredicate;
@@ -45,9 +45,8 @@ import mage.filter.predicate.permanent.AnotherPredicate;
  */
 public class YomijiWhoBarsTheWay extends CardImpl {
 
-    public YomijiWhoBarsTheWay(UUID ownerId) {
-        super(ownerId, 30, "Yomiji, Who Bars the Way", Rarity.RARE, new CardType[]{CardType.CREATURE}, "{5}{W}{W}");
-        this.expansionSetCode = "BOK";
+    public YomijiWhoBarsTheWay(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{5}{W}{W}");
         this.supertype.add("Legendary");
         this.subtype.add("Spirit");
 

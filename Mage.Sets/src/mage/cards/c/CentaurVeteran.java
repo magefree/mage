@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.torment;
+package mage.cards.c;
 
 import java.util.UUID;
 import mage.MageInt;
@@ -36,8 +36,8 @@ import mage.abilities.costs.mana.ManaCostsImpl;
 import mage.abilities.effects.common.RegenerateSourceEffect;
 import mage.abilities.keyword.TrampleAbility;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.constants.Zone;
 
 /**
@@ -46,9 +46,8 @@ import mage.constants.Zone;
  */
 public class CentaurVeteran extends CardImpl {
 
-    public CentaurVeteran(UUID ownerId) {
-        super(ownerId, 123, "Centaur Veteran", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{5}{G}");
-        this.expansionSetCode = "TOR";
+    public CentaurVeteran(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{5}{G}");
         this.subtype.add("Centaur");
         this.power = new MageInt(3);
         this.toughness = new MageInt(3);

@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.torment;
+package mage.cards.i;
 
 import java.util.UUID;
 import mage.MageObject;
@@ -34,10 +34,10 @@ import mage.abilities.effects.ContinuousRuleModifyingEffectImpl;
 import mage.abilities.effects.Effect;
 import mage.abilities.effects.common.DrawCardSourceControllerEffect;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Duration;
 import mage.constants.Outcome;
-import mage.constants.Rarity;
 import mage.constants.WatcherScope;
 import mage.game.Game;
 import mage.game.events.GameEvent;
@@ -50,9 +50,8 @@ import mage.watchers.Watcher;
  */
 public class Insist extends CardImpl {
 
-    public Insist(UUID ownerId) {
-        super(ownerId, 127, "Insist", Rarity.RARE, new CardType[]{CardType.SORCERY}, "{G}");
-        this.expansionSetCode = "TOR";
+    public Insist(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{G}");
 
         // The next creature spell you cast this turn can't be countered by spells or abilities.
         this.getSpellAbility().addEffect(new InsistEffect());

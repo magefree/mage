@@ -25,18 +25,18 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.gatecrash;
+package mage.cards.s;
 
 import java.util.UUID;
 
 import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.abilities.Mode;
 import mage.abilities.effects.common.ReturnToHandTargetEffect;
 import mage.abilities.effects.common.continuous.BoostTargetEffect;
 import mage.abilities.effects.common.continuous.GainAbilityAllEffect;
 import mage.abilities.keyword.HexproofAbility;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.Duration;
 import mage.filter.common.FilterControlledPermanent;
 import mage.target.common.TargetCreaturePermanent;
@@ -47,9 +47,8 @@ import mage.target.common.TargetCreaturePermanent;
  */
 public class SimicCharm extends CardImpl {
 
-    public SimicCharm (UUID ownerId) {
-        super(ownerId, 195, "Simic Charm", Rarity.UNCOMMON, new CardType[]{CardType.INSTANT}, "{G}{U}");
-        this.expansionSetCode = "GTC";
+    public SimicCharm (UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.INSTANT},"{G}{U}");
 
         //Choose one - Target creature gets +3/+3 until end of turn
         this.getSpellAbility().addEffect(new BoostTargetEffect(3, 3, Duration.EndOfTurn));

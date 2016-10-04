@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.commander2014;
+package mage.cards.i;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -37,9 +37,9 @@ import mage.abilities.Ability;
 import mage.abilities.effects.OneShotEffect;
 import mage.cards.Card;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Outcome;
-import mage.constants.Rarity;
 import mage.constants.Zone;
 import mage.filter.common.FilterControlledCreaturePermanent;
 import mage.filter.common.FilterCreatureCard;
@@ -57,9 +57,8 @@ import mage.target.common.TargetOpponent;
  */
 public class InfernalOffering extends CardImpl {
 
-    public InfernalOffering(UUID ownerId) {
-        super(ownerId, 24, "Infernal Offering", Rarity.RARE, new CardType[]{CardType.SORCERY}, "{4}{B}");
-        this.expansionSetCode = "C14";
+    public InfernalOffering(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{4}{B}");
 
         // Choose an opponent. You and that player each sacrifice a creature. Each player who sacrificed a creature this way draws two cards.
         this.getSpellAbility().addEffect(new InfernalOfferingSacrificeEffect());

@@ -25,16 +25,16 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.shadowmoor;
+package mage.cards.c;
 
 import java.util.UUID;
 import mage.ObjectColor;
 import mage.abilities.Ability;
 import mage.abilities.effects.OneShotEffect;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Outcome;
-import mage.constants.Rarity;
 import mage.constants.Zone;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
@@ -47,9 +47,8 @@ import mage.target.TargetPermanent;
  */
 public class ConsignToDream extends CardImpl {
 
-    public ConsignToDream(UUID ownerId) {
-        super(ownerId, 32, "Consign to Dream", Rarity.COMMON, new CardType[]{CardType.INSTANT}, "{2}{U}");
-        this.expansionSetCode = "SHM";
+    public ConsignToDream(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.INSTANT},"{2}{U}");
 
 
         // Return target permanent to its owner's hand. If that permanent is red or green, put it on top of its owner's library instead.

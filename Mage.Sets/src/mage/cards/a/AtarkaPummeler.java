@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.dragonsoftarkir;
+package mage.cards.a;
 
 import java.util.UUID;
 import mage.MageInt;
@@ -36,10 +36,10 @@ import mage.abilities.costs.mana.ManaCostsImpl;
 import mage.abilities.effects.common.continuous.GainAbilityAllEffect;
 import mage.abilities.keyword.MenaceAbility;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.AbilityWord;
 import mage.constants.CardType;
 import mage.constants.Duration;
-import mage.constants.Rarity;
 import mage.constants.TargetController;
 import mage.constants.Zone;
 import mage.filter.common.FilterCreaturePermanent;
@@ -57,9 +57,8 @@ public class AtarkaPummeler extends CardImpl {
         filter.add(new ControllerPredicate(TargetController.YOU));
     }
 
-    public AtarkaPummeler(UUID ownerId) {
-        super(ownerId, 129, "Atarka Pummeler", Rarity.UNCOMMON, new CardType[]{CardType.CREATURE}, "{4}{R}");
-        this.expansionSetCode = "DTK";
+    public AtarkaPummeler(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{4}{R}");
         this.subtype.add("Ogre");
         this.subtype.add("Warrior");
         this.power = new MageInt(4);

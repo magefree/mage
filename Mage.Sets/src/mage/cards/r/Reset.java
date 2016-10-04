@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.legends;
+package mage.cards.r;
 
 import java.util.UUID;
 import mage.abilities.common.CastOnlyDuringPhaseStepSourceAbility;
@@ -34,8 +34,8 @@ import mage.abilities.condition.common.AfterUpkeepStepCondtion;
 import mage.abilities.condition.common.OnOpponentsTurnCondition;
 import mage.abilities.effects.common.UntapAllLandsControllerEffect;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.Rarity;
 
 /**
  *
@@ -43,9 +43,8 @@ import mage.constants.Rarity;
  */
 public class Reset extends CardImpl {
 
-    public Reset(UUID ownerId) {
-        super(ownerId, 73, "Reset", Rarity.UNCOMMON, new CardType[]{CardType.INSTANT}, "{U}{U}");
-        this.expansionSetCode = "LEG";
+    public Reset(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.INSTANT},"{U}{U}");
 
         // Cast Reset only during an opponent's turn after his or her upkeep step.
         this.addAbility(new CastOnlyDuringPhaseStepSourceAbility(null, null,

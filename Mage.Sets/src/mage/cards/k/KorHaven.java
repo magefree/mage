@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.nemesis;
+package mage.cards.k;
 
 import java.util.UUID;
 import mage.abilities.Ability;
@@ -36,9 +36,9 @@ import mage.abilities.effects.Effect;
 import mage.abilities.effects.common.PreventDamageByTargetEffect;
 import mage.abilities.mana.ColorlessManaAbility;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Duration;
-import mage.constants.Rarity;
 import mage.constants.Zone;
 import mage.target.common.TargetAttackingCreature;
 
@@ -48,9 +48,8 @@ import mage.target.common.TargetAttackingCreature;
  */
 public class KorHaven extends CardImpl {
 
-    public KorHaven(UUID ownerId) {
-        super(ownerId, 141, "Kor Haven", Rarity.RARE, new CardType[]{CardType.LAND}, "");
-        this.expansionSetCode = "NEM";
+    public KorHaven(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.LAND},"");
         this.supertype.add("Legendary");
 
         // {tap}: Add {C} to your mana pool.

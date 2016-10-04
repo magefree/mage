@@ -25,14 +25,14 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.invasion;
+package mage.cards.k;
 
 import java.util.UUID;
 import mage.abilities.common.EntersBattlefieldAllTriggeredAbility;
 import mage.abilities.effects.common.DrawCardTargetEffect;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.constants.SetTargetPointer;
 import mage.constants.Zone;
 import mage.filter.Filter;
@@ -51,9 +51,8 @@ public class KavuLair extends CardImpl {
         filter.add(new PowerPredicate(Filter.ComparisonType.GreaterThan, 3));
     }
     
-    public KavuLair(UUID ownerId) {
-        super(ownerId, 193, "Kavu Lair", Rarity.RARE, new CardType[]{CardType.ENCHANTMENT}, "{2}{G}");
-        this.expansionSetCode = "INV";
+    public KavuLair(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.ENCHANTMENT},"{2}{G}");
 
         // Whenever a creature with power 4 or greater enters the battlefield, its controller draws a card.
         this.addAbility(new EntersBattlefieldAllTriggeredAbility(Zone.BATTLEFIELD,

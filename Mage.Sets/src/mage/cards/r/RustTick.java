@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.scarsofmirrodin;
+package mage.cards.r;
 
 import java.util.UUID;
 import mage.MageInt;
@@ -36,8 +36,8 @@ import mage.abilities.costs.common.TapSourceCost;
 import mage.abilities.costs.mana.GenericManaCost;
 import mage.abilities.effects.common.TapTargetEffect;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.constants.Zone;
 import mage.target.common.TargetArtifactPermanent;
 import mage.abilities.effects.common.DontUntapAsLongAsSourceTappedEffect;
@@ -47,9 +47,8 @@ import mage.abilities.effects.common.DontUntapAsLongAsSourceTappedEffect;
  */
 public class RustTick extends CardImpl {
 
-    public RustTick(UUID ownerId) {
-        super(ownerId, 198, "Rust Tick", Rarity.UNCOMMON, new CardType[]{CardType.ARTIFACT, CardType.CREATURE}, "{3}");
-        this.expansionSetCode = "SOM";
+    public RustTick(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.ARTIFACT,CardType.CREATURE},"{3}");
         this.subtype.add("Insect");
 
         this.power = new MageInt(1);

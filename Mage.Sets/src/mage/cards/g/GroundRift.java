@@ -25,16 +25,16 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.timespiral;
+package mage.cards.g;
 
 import java.util.UUID;
 
 import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.abilities.effects.common.combat.CantBlockTargetEffect;
 import mage.abilities.keyword.FlyingAbility;
 import mage.abilities.keyword.StormAbility;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.Duration;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.filter.predicate.Predicates;
@@ -53,9 +53,8 @@ public class GroundRift extends CardImpl {
         filter.add(Predicates.not(new AbilityPredicate(FlyingAbility.class)));
     }
     
-    public GroundRift(UUID ownerId) {
-        super(ownerId, 162, "Ground Rift", Rarity.COMMON, new CardType[]{CardType.SORCERY}, "{R}");
-        this.expansionSetCode = "TSP";
+    public GroundRift(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{R}");
 
 
         // Target creature without flying can't block this turn.

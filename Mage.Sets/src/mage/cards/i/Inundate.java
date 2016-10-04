@@ -25,14 +25,14 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.eventide;
+package mage.cards.i;
 
 import java.util.UUID;
 import mage.ObjectColor;
 import mage.abilities.effects.common.ReturnToHandFromBattlefieldAllEffect;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.filter.predicate.Predicates;
 import mage.filter.predicate.mageobject.ColorPredicate;
@@ -49,9 +49,8 @@ public class Inundate extends CardImpl {
         filter.add(Predicates.not(new ColorPredicate(ObjectColor.BLUE)));
     }
 
-    public Inundate(UUID ownerId) {
-        super(ownerId, 25, "Inundate", Rarity.RARE, new CardType[]{CardType.SORCERY}, "{3}{U}{U}{U}");
-        this.expansionSetCode = "EVE";
+    public Inundate(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{3}{U}{U}{U}");
 
 
         // Return all nonblue creatures to their owners' hands.

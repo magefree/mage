@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.alarareborn;
+package mage.cards.u;
 
 import java.util.UUID;
 import mage.MageObjectReference;
@@ -41,10 +41,10 @@ import mage.abilities.keyword.EquipAbility;
 import mage.abilities.keyword.FirstStrikeAbility;
 import mage.cards.Card;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.AttachmentType;
 import mage.constants.CardType;
 import mage.constants.Outcome;
-import mage.constants.Rarity;
 import mage.constants.Zone;
 import mage.game.Game;
 import mage.game.events.GameEvent;
@@ -62,9 +62,8 @@ import mage.target.targetpointer.FixedTarget;
  */
 public class UnscytheKillerOfKings extends CardImpl {
 
-    public UnscytheKillerOfKings(UUID ownerId) {
-        super(ownerId, 114, "Unscythe, Killer of Kings", Rarity.RARE, new CardType[]{CardType.ARTIFACT}, "{U}{B}{B}{R}");
-        this.expansionSetCode = "ARB";
+    public UnscytheKillerOfKings(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.ARTIFACT},"{U}{B}{B}{R}");
         this.supertype.add("Legendary");
         this.subtype.add("Equipment");
 

@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.magic2015;
+package mage.cards.a;
 
 import java.util.UUID;
 import mage.abilities.Ability;
@@ -42,9 +42,9 @@ import mage.abilities.keyword.FirstStrikeAbility;
 import mage.abilities.keyword.LifelinkAbility;
 import mage.abilities.keyword.VigilanceAbility;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Duration;
-import mage.constants.Rarity;
 import mage.constants.TargetController;
 import mage.constants.Zone;
 import mage.counters.CounterType;
@@ -71,9 +71,8 @@ public class AjaniSteadfast extends CardImpl {
         filter.add(new ControllerPredicate(TargetController.YOU));
     }
 
-    public AjaniSteadfast(UUID ownerId) {
-        super(ownerId, 1, "Ajani Steadfast", Rarity.MYTHIC, new CardType[]{CardType.PLANESWALKER}, "{3}{W}");
-        this.expansionSetCode = "M15";
+    public AjaniSteadfast(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.PLANESWALKER},"{3}{W}");
         this.subtype.add("Ajani");
 
         this.addAbility(new PlanswalkerEntersWithLoyalityCountersAbility(4));

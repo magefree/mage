@@ -25,11 +25,10 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.apocalypse;
+package mage.cards.g;
 
 import java.util.UUID;
 import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.constants.Zone;
 import mage.MageInt;
 import mage.abilities.Ability;
@@ -38,6 +37,7 @@ import mage.abilities.costs.common.SacrificeTargetCost;
 import mage.abilities.costs.mana.GenericManaCost;
 import mage.abilities.effects.common.CreateTokenEffect;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.filter.common.FilterControlledLandPermanent;
 import mage.filter.common.FilterControlledPermanent;
 import mage.game.permanent.token.Token;
@@ -51,9 +51,8 @@ public class GoblinTrenches extends CardImpl {
 
     final static FilterControlledPermanent filter = new FilterControlledLandPermanent("a land");
 
-        public GoblinTrenches(UUID ownerId) {
-        super(ownerId, 104, "Goblin Trenches", Rarity.RARE, new CardType[]{CardType.ENCHANTMENT}, "{1}{R}{W}");
-        this.expansionSetCode = "APC";
+        public GoblinTrenches(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.ENCHANTMENT},"{1}{R}{W}");
 
 
 

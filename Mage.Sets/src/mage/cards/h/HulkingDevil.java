@@ -25,13 +25,13 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.shadowsoverinnistrad;
+package mage.cards.h;
 
 import java.util.UUID;
 import mage.MageInt;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.Rarity;
 
 /**
  *
@@ -39,9 +39,8 @@ import mage.constants.Rarity;
  */
 public class HulkingDevil extends CardImpl {
 
-    public HulkingDevil(UUID ownerId) {
-        super(ownerId, 165, "Hulking Devil", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{3}{R}");
-        this.expansionSetCode = "SOI";
+    public HulkingDevil(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{3}{R}");
         this.subtype.add("Devil");
         this.power = new MageInt(5);
         this.toughness = new MageInt(2);

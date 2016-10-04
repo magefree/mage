@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.shadowsoverinnistrad;
+package mage.cards.k;
 
 import java.util.UUID;
 import mage.MageInt;
@@ -37,9 +37,10 @@ import mage.abilities.decorator.ConditionalTriggeredAbility;
 import mage.abilities.effects.common.DamageTargetEffect;
 import mage.abilities.effects.common.TransformSourceEffect;
 import mage.abilities.keyword.TransformAbility;
+import mage.cards.f.FlameheartWerewolf;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.constants.TargetController;
 
 /**
@@ -48,9 +49,8 @@ import mage.constants.TargetController;
  */
 public class KessigForgemaster extends CardImpl {
 
-    public KessigForgemaster(UUID ownerId) {
-        super(ownerId, 169, "Kessig Forgemaster", Rarity.UNCOMMON, new CardType[]{CardType.CREATURE}, "{1}{R}");
-        this.expansionSetCode = "SOI";
+    public KessigForgemaster(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{1}{R}");
         this.subtype.add("Human");
         this.subtype.add("Shaman");
         this.subtype.add("Werewolf");
@@ -58,7 +58,7 @@ public class KessigForgemaster extends CardImpl {
         this.toughness = new MageInt(1);
 
         this.transformable = true;
-        this.secondSideCard = new FlameheartWerewolf(ownerId);
+        this.secondSideCardClazz = FlameheartWerewolf.class;
 
         // Whenever Kessig Forgemaster blocks or becomes blocked by a creature, Kessig Forgemaster deals 1 damage to that creature.
         this.addAbility(new BlocksOrBecomesBlockedByCreatureTriggeredAbility(new DamageTargetEffect(1, true, "that creature"), false));

@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.heroesvsmonsters;
+package mage.cards.o;
 
 import java.util.LinkedHashSet;
 import java.util.Set;
@@ -38,11 +38,11 @@ import mage.abilities.costs.common.TapSourceCost;
 import mage.abilities.effects.common.ManaEffect;
 import mage.abilities.mana.SimpleManaAbility;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.choices.Choice;
 import mage.choices.ChoiceImpl;
 import mage.constants.CardType;
 import mage.constants.Outcome;
-import mage.constants.Rarity;
 import mage.constants.Zone;
 import mage.filter.common.FilterControlledPermanent;
 import mage.filter.predicate.mageobject.SubtypePredicate;
@@ -62,9 +62,8 @@ public class OrcishLumberjack extends CardImpl {
         filter.add(new SubtypePredicate("Forest"));
     }
 
-    public OrcishLumberjack(UUID ownerId) {
-        super(ownerId, 44, "Orcish Lumberjack", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{R}");
-        this.expansionSetCode = "DDL";
+    public OrcishLumberjack(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{R}");
         this.subtype.add("Orc");
 
         this.power = new MageInt(1);

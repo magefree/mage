@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.saviorsofkamigawa;
+package mage.cards.g;
 
 import java.util.UUID;
 import mage.MageInt;
@@ -33,8 +33,8 @@ import mage.abilities.common.BeginningOfEndStepTriggeredAbility;
 import mage.abilities.effects.common.ReturnToHandSourceEffect;
 import mage.abilities.keyword.HasteAbility;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.constants.TargetController;
 
 /**
@@ -43,9 +43,8 @@ import mage.constants.TargetController;
  */
 public class Glitterfang extends CardImpl {
 
-    public Glitterfang(UUID ownerId) {
-        super(ownerId, 100, "Glitterfang", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{R}");
-        this.expansionSetCode = "SOK";
+    public Glitterfang(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{R}");
         this.subtype.add("Spirit");
 
         this.power = new MageInt(1);

@@ -26,10 +26,9 @@
  *  or implied, of BetaSteward_at_googlemail.com.
  */
 
-package mage.sets.riseoftheeldrazi;
+package mage.cards.g;
 
 import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.MageInt;
 import mage.abilities.Abilities;
 import mage.abilities.AbilitiesImpl;
@@ -40,6 +39,7 @@ import mage.abilities.costs.mana.ManaCostsImpl;
 import mage.abilities.effects.common.continuous.BoostTargetEffect;
 import mage.abilities.keyword.LevelUpAbility;
 import mage.abilities.keyword.LevelerCardBuilder;
+import mage.cards.CardSetInfo;
 import mage.cards.LevelerCard;
 import mage.constants.Duration;
 import mage.constants.Zone;
@@ -53,9 +53,8 @@ import java.util.UUID;
  */
 public class GuulDrazAssassin extends LevelerCard {
 
-    public GuulDrazAssassin (UUID ownerId) {
-        super(ownerId, 112, "Guul Draz Assassin", Rarity.RARE, new CardType[]{CardType.CREATURE}, "{B}");
-        this.expansionSetCode = "ROE";
+    public GuulDrazAssassin (UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{B}");
         this.subtype.add("Vampire");
         this.subtype.add("Assassin");
         this.color.setBlack(true);

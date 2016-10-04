@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.nemesis;
+package mage.cards.r;
 
 import java.util.UUID;
 import mage.MageInt;
@@ -39,10 +39,10 @@ import mage.abilities.effects.common.continuous.GainAbilitySourceEffect;
 import mage.abilities.keyword.FlyingAbility;
 import mage.cards.Card;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Duration;
 import mage.constants.Outcome;
-import mage.constants.Rarity;
 import mage.constants.Zone;
 import mage.game.Game;
 import mage.players.Player;
@@ -55,9 +55,8 @@ import mage.target.common.TargetCardInLibrary;
  */
 public class RootwaterThief extends CardImpl {
 
-    public RootwaterThief(UUID ownerId) {
-        super(ownerId, 40, "Rootwater Thief", Rarity.RARE, new CardType[]{CardType.CREATURE}, "{1}{U}");
-        this.expansionSetCode = "NEM";
+    public RootwaterThief(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{1}{U}");
         this.subtype.add("Merfolk");
         this.subtype.add("Rogue");
         this.power = new MageInt(1);

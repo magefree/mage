@@ -26,14 +26,14 @@
 * or implied, of BetaSteward_at_googlemail.com.
 */
 
-package mage.sets.zendikar;
+package mage.cards.v;
 
 import java.util.UUID;
 import mage.ObjectColor;
 import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.abilities.common.FetchLandActivatedAbility;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 
 /**
  *
@@ -41,9 +41,8 @@ import mage.cards.CardImpl;
  */
 public class VerdantCatacombs extends CardImpl {
 
-    public VerdantCatacombs(UUID ownerId) {
-        super(ownerId, 229, "Verdant Catacombs", Rarity.RARE, new CardType[]{CardType.LAND}, null);
-        this.expansionSetCode = "ZEN";
+    public VerdantCatacombs(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.LAND},null);
         this.frameColor = new ObjectColor("BG");
         this.addAbility(new FetchLandActivatedAbility(new String[] {"Forest", "Swamp"}));
     }

@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.shadowsoverinnistrad;
+package mage.cards.c;
 
 import java.util.UUID;
 import mage.abilities.common.AsEntersBattlefieldAbility;
@@ -34,8 +34,8 @@ import mage.abilities.effects.common.TapSourceUnlessPaysEffect;
 import mage.abilities.mana.BlackManaAbility;
 import mage.abilities.mana.BlueManaAbility;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.filter.FilterCard;
 import mage.filter.predicate.Predicates;
 import mage.filter.predicate.mageobject.SubtypePredicate;
@@ -54,9 +54,8 @@ public class ChokedEstuary extends CardImpl {
                 new SubtypePredicate("Swamp")));
     }
 
-    public ChokedEstuary(UUID ownerId) {
-        super(ownerId, 270, "Choked Estuary", Rarity.RARE, new CardType[]{CardType.LAND}, "");
-        this.expansionSetCode = "SOI";
+    public ChokedEstuary(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.LAND},"");
 
         // As Choked Estuary enters the battlefield, you may reveal an Island or Swamp card from your hand. If you don't, Choked Estuary enters the battlefield tapped.
         this.addAbility(new AsEntersBattlefieldAbility(new TapSourceUnlessPaysEffect(new RevealTargetFromHandCost(new TargetCardInHand(filter))),

@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.planarchaos;
+package mage.cards.j;
 
 import java.util.UUID;
 import mage.MageInt;
@@ -33,8 +33,8 @@ import mage.abilities.common.AttacksOrBlocksTriggeredAbility;
 import mage.abilities.effects.common.CreateTokenEffect;
 import mage.abilities.keyword.ForestwalkAbility;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.game.permanent.token.Token;
 
 /**
@@ -43,9 +43,8 @@ import mage.game.permanent.token.Token;
  */
 public class JeditOjanenOfEfrava extends CardImpl {
 
-    public JeditOjanenOfEfrava(UUID ownerId) {
-        super(ownerId, 131, "Jedit Ojanen of Efrava", Rarity.RARE, new CardType[]{CardType.CREATURE}, "{3}{G}{G}{G}");
-        this.expansionSetCode = "PLC";
+    public JeditOjanenOfEfrava(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{3}{G}{G}{G}");
         this.supertype.add("Legendary");
         this.subtype.add("Cat");
         this.subtype.add("Warrior");

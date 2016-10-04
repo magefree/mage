@@ -26,17 +26,17 @@
  *  or implied, of BetaSteward_at_googlemail.com.
  */
 
-package mage.sets.magic2011;
+package mage.cards.m;
 
 import mage.constants.CardType;
 import mage.constants.Outcome;
-import mage.constants.Rarity;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.DealsCombatDamageToAPlayerTriggeredAbility;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.keyword.IslandwalkAbility;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.cards.Cards;
 import mage.cards.CardsImpl;
 import mage.game.Game;
@@ -50,9 +50,8 @@ import java.util.UUID;
  */
 public class MerfolkSpy extends CardImpl {
 
-    public MerfolkSpy(UUID ownerId) {
-        super(ownerId, 66, "Merfolk Spy", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{U}");
-        this.expansionSetCode = "M11";
+    public MerfolkSpy(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{U}");
         this.subtype.add("Merfolk");
         this.subtype.add("Rogue");
 

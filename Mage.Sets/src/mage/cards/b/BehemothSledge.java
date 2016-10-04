@@ -26,13 +26,12 @@
  *  or implied, of BetaSteward_at_googlemail.com.
  */
 
-package mage.sets.alarareborn;
+package mage.cards.b;
 
 import java.util.UUID;
 
 import mage.constants.CardType;
 import mage.constants.Outcome;
-import mage.constants.Rarity;
 import mage.constants.Zone;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.costs.mana.GenericManaCost;
@@ -42,6 +41,7 @@ import mage.abilities.keyword.EquipAbility;
 import mage.abilities.keyword.LifelinkAbility;
 import mage.abilities.keyword.TrampleAbility;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.AttachmentType;
 
 
@@ -51,9 +51,8 @@ import mage.constants.AttachmentType;
  */
 public class BehemothSledge extends CardImpl {
 
-    public BehemothSledge(UUID ownerId) {
-        super(ownerId, 65, "Behemoth Sledge", Rarity.UNCOMMON, new CardType[]{CardType.ARTIFACT}, "{1}{G}{W}");
-        this.expansionSetCode = "ARB";
+    public BehemothSledge(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.ARTIFACT},"{1}{G}{W}");
         this.subtype.add("Equipment");
 
 

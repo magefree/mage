@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.odyssey;
+package mage.cards.a;
 
 import java.util.UUID;
 import mage.abilities.Ability;
@@ -40,11 +40,11 @@ import mage.abilities.effects.common.AttachEffect;
 import mage.abilities.effects.common.continuous.GainAbilityAttachedEffect;
 import mage.abilities.keyword.EnchantAbility;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.AttachmentType;
 import mage.constants.CardType;
 import mage.constants.Duration;
 import mage.constants.Outcome;
-import mage.constants.Rarity;
 import mage.constants.Zone;
 import mage.game.Game;
 import mage.players.Player;
@@ -58,9 +58,8 @@ import mage.target.common.TargetLandPermanent;
  */
 public class AnimalBoneyard extends CardImpl {
 
-    public AnimalBoneyard(UUID ownerId) {
-        super(ownerId, 4, "Animal Boneyard", Rarity.UNCOMMON, new CardType[]{CardType.ENCHANTMENT}, "{2}{W}");
-        this.expansionSetCode = "ODY";
+    public AnimalBoneyard(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.ENCHANTMENT},"{2}{W}");
         this.subtype.add("Aura");
 
         // Enchant land

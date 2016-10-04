@@ -25,14 +25,14 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.urzassaga;
+package mage.cards.o;
 
 import java.util.UUID;
 import mage.abilities.common.SpellCastAllTriggeredAbility;
 import mage.abilities.effects.common.discard.DiscardTargetEffect;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.game.Game;
 import mage.game.events.GameEvent;
 import mage.game.stack.Spell;
@@ -44,9 +44,8 @@ import mage.target.targetpointer.FixedTarget;
  */
 public class Oppression extends CardImpl {
 
-    public Oppression(UUID ownerId) {
-        super(ownerId, 143, "Oppression", Rarity.RARE, new CardType[]{CardType.ENCHANTMENT}, "{1}{B}{B}");
-        this.expansionSetCode = "USG";
+    public Oppression(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.ENCHANTMENT},"{1}{B}{B}");
 
         // Whenever a player casts a spell, that player discards a card.
         this.addAbility(new OppressionTriggeredAbility());

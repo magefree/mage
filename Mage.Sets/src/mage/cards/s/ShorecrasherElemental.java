@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.dragonsoftarkir;
+package mage.cards.s;
 
 import java.util.UUID;
 import mage.MageInt;
@@ -41,12 +41,12 @@ import mage.abilities.effects.common.continuous.BoostSourceEffect;
 import mage.abilities.keyword.MorphAbility;
 import mage.cards.Card;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.choices.Choice;
 import mage.choices.ChoiceImpl;
 import mage.constants.CardType;
 import mage.constants.Duration;
 import mage.constants.Outcome;
-import mage.constants.Rarity;
 import mage.constants.Zone;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
@@ -58,9 +58,8 @@ import mage.players.Player;
  */
 public class ShorecrasherElemental extends CardImpl {
 
-    public ShorecrasherElemental(UUID ownerId) {
-        super(ownerId, 73, "Shorecrasher Elemental", Rarity.MYTHIC, new CardType[]{CardType.CREATURE}, "{U}{U}{U}");
-        this.expansionSetCode = "DTK";
+    public ShorecrasherElemental(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{U}{U}{U}");
         this.subtype.add("Elemental");
         this.power = new MageInt(3);
         this.toughness = new MageInt(3);

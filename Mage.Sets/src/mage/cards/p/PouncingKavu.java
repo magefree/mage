@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.invasion;
+package mage.cards.p;
 
 
 import java.util.UUID;
@@ -39,9 +39,9 @@ import mage.abilities.keyword.FirstStrikeAbility;
 import mage.abilities.keyword.HasteAbility;
 import mage.abilities.keyword.KickerAbility;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Duration;
-import mage.constants.Rarity;
 import mage.counters.CounterType;
 
 /**
@@ -51,9 +51,8 @@ import mage.counters.CounterType;
  */
 public class PouncingKavu extends CardImpl {
 
-    public PouncingKavu(UUID ownerId) {
-        super(ownerId, 158, "Pouncing Kavu", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{1}{R}");
-        this.expansionSetCode = "INV";
+    public PouncingKavu(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{1}{R}");
         this.subtype.add("Kavu");
         this.power = new MageInt(1);
         this.toughness = new MageInt(1);

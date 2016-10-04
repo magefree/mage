@@ -25,14 +25,14 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.legends;
+package mage.cards.f;
 
 import java.util.UUID;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.effects.common.continuous.PlayWithTheTopCardRevealedEffect;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.constants.Zone;
 
 /**
@@ -41,9 +41,8 @@ import mage.constants.Zone;
  */
 public class FieldOfDreams extends CardImpl {
 
-    public FieldOfDreams(UUID ownerId) {
-        super(ownerId, 55, "Field of Dreams", Rarity.RARE, new CardType[]{CardType.ENCHANTMENT}, "{U}");
-        this.expansionSetCode = "LEG";
+    public FieldOfDreams(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.ENCHANTMENT},"{U}");
         this.supertype.add("World");
 
         // Players play with the top card of their libraries revealed.

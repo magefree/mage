@@ -26,12 +26,11 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.gatecrash;
+package mage.cards.l;
 
 import java.util.UUID;
 
 import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.MageInt;
 import mage.MageObjectReference;
 import mage.abilities.Ability;
@@ -42,6 +41,7 @@ import mage.abilities.keyword.FirstStrikeAbility;
 import mage.abilities.keyword.HasteAbility;
 import mage.abilities.keyword.TrampleAbility;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.Duration;
 import mage.filter.common.FilterControlledCreaturePermanent;
 import mage.game.Game;
@@ -54,9 +54,8 @@ import mage.game.permanent.PermanentToken;
  */
 public class LegionLoyalist extends CardImpl {
 
-    public LegionLoyalist(UUID ownerId) {
-        super(ownerId, 97, "Legion Loyalist", Rarity.RARE, new CardType[]{CardType.CREATURE}, "{R}");
-        this.expansionSetCode = "GTC";
+    public LegionLoyalist(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{R}");
         this.subtype.add("Goblin");
         this.subtype.add("Soldier");
 

@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.shardsofalara;
+package mage.cards.r;
 
 import java.util.UUID;
 import mage.abilities.Ability;
@@ -38,9 +38,9 @@ import mage.abilities.effects.common.DrawCardSourceControllerEffect;
 import mage.abilities.effects.common.ExileGraveyardAllPlayersEffect;
 import mage.cards.Card;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Outcome;
-import mage.constants.Rarity;
 import mage.constants.Zone;
 import mage.filter.FilterCard;
 import mage.filter.predicate.other.OwnerIdPredicate;
@@ -55,9 +55,8 @@ import mage.target.common.TargetCardInGraveyard;
  */
 public class RelicOfProgenitus extends CardImpl {
 
-    public RelicOfProgenitus(UUID ownerId) {
-        super(ownerId, 218, "Relic of Progenitus", Rarity.COMMON, new CardType[]{CardType.ARTIFACT}, "{1}");
-        this.expansionSetCode = "ALA";
+    public RelicOfProgenitus(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.ARTIFACT},"{1}");
 
         // {tap}: Target player exiles a card from his or her graveyard.
         Ability firstAbility = new SimpleActivatedAbility(Zone.BATTLEFIELD, new RelicOfProgenitusEffect(), new TapSourceCost());

@@ -26,16 +26,16 @@
  *  or implied, of BetaSteward_at_googlemail.com.
  */
 
-package mage.sets.shardsofalara;
+package mage.cards.j;
 
 import java.util.UUID;
 import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.MageInt;
 import mage.abilities.costs.mana.ManaCostsImpl;
 import mage.abilities.keyword.CyclingAbility;
 import mage.abilities.keyword.ReachAbility;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 
 /**
  *
@@ -43,9 +43,8 @@ import mage.cards.CardImpl;
  */
 public class JungleWeaver extends CardImpl {
 
-    public JungleWeaver (UUID ownerId) {
-        super(ownerId, 134, "Jungle Weaver", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{5}{G}{G}");
-        this.expansionSetCode = "ALA";
+    public JungleWeaver (UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{5}{G}{G}");
         this.subtype.add("Spider");
 
         this.power = new MageInt(5);

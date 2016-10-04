@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.shadowsoverinnistrad;
+package mage.cards.d;
 
 import java.util.UUID;
 import mage.MageInt;
@@ -36,8 +36,8 @@ import mage.abilities.effects.common.CreateTokenEffect;
 import mage.abilities.effects.common.GainLifeEffect;
 import mage.abilities.keyword.FlyingAbility;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.constants.Zone;
 import mage.filter.FilterPermanent;
 import mage.filter.predicate.mageobject.SubtypePredicate;
@@ -57,9 +57,8 @@ public class DrogskolCavalry extends CardImpl {
         filter.add(new SubtypePredicate("Spirit"));
     }
 
-    public DrogskolCavalry(UUID ownerId) {
-        super(ownerId, 15, "Drogskol Cavalry", Rarity.RARE, new CardType[]{CardType.CREATURE}, "{5}{W}{W}");
-        this.expansionSetCode = "SOI";
+    public DrogskolCavalry(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{5}{W}{W}");
         this.subtype.add("Spirit");
         this.subtype.add("Knight");
         this.power = new MageInt(4);

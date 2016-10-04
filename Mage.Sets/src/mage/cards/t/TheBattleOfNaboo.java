@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.starwars;
+package mage.cards.t;
 
 import java.util.UUID;
 import mage.abilities.Ability;
@@ -33,9 +33,9 @@ import mage.abilities.effects.Effect;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.ReturnToHandTargetEffect;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Outcome;
-import mage.constants.Rarity;
 import mage.game.Game;
 import mage.players.Player;
 import mage.target.common.TargetCreaturePermanent;
@@ -46,9 +46,8 @@ import mage.target.common.TargetCreaturePermanent;
  */
 public class TheBattleOfNaboo extends CardImpl {
 
-    public TheBattleOfNaboo(UUID ownerId) {
-        super(ownerId, 35, "The Battle of Naboo", Rarity.MYTHIC, new CardType[]{CardType.SORCERY}, "{X}{X}{U}{U}");
-        this.expansionSetCode = "SWS";
+    public TheBattleOfNaboo(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{X}{X}{U}{U}");
 
         // Return X target creatures to their owner's hands. Draw twice that many cards.
         Effect effect = new ReturnToHandTargetEffect();

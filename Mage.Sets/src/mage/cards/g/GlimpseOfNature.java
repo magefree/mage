@@ -25,16 +25,16 @@
 * authors and should not be interpreted as representing official policies, either expressed
 * or implied, of BetaSteward_at_googlemail.com.
 */
-package mage.sets.championsofkamigawa;
+package mage.cards.g;
 
 import java.util.UUID;
 import mage.abilities.DelayedTriggeredAbility;
 import mage.abilities.effects.common.CreateDelayedTriggeredAbilityEffect;
 import mage.abilities.effects.common.DrawCardSourceControllerEffect;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Duration;
-import mage.constants.Rarity;
 import mage.filter.FilterSpell;
 import mage.filter.predicate.mageobject.CardTypePredicate;
 import mage.game.Game;
@@ -44,9 +44,8 @@ import mage.game.stack.Spell;
 
 public class GlimpseOfNature extends CardImpl {
 
-    public GlimpseOfNature (UUID ownerId) {
-        super(ownerId, 210, "Glimpse of Nature", Rarity.RARE, new CardType[]{CardType.SORCERY}, "{G}");
-        this.expansionSetCode = "CHK";
+    public GlimpseOfNature (UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{G}");
 
 
         // Whenever you cast a creature spell this turn, draw a card.

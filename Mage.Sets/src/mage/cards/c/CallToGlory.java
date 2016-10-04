@@ -26,16 +26,16 @@
  *  or implied, of BetaSteward_at_googlemail.com.
  */
 
-package mage.sets.championsofkamigawa;
+package mage.cards.c;
 
 import java.util.UUID;
 
 import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.abilities.Ability;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.continuous.BoostControlledEffect;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.Duration;
 import mage.constants.Outcome;
 import mage.filter.common.FilterCreaturePermanent;
@@ -56,9 +56,8 @@ private static final FilterCreaturePermanent filter = new FilterCreaturePermanen
         filter.add(new SubtypePredicate("Samurai"));
     }
 
-        public CallToGlory(UUID ownerId) {
-        super(ownerId, 4, "Call to Glory", Rarity.COMMON, new CardType[]{CardType.INSTANT}, "{1}{W}");
-        this.expansionSetCode = "CHK";
+        public CallToGlory(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.INSTANT},"{1}{W}");
 
         this.getSpellAbility().addEffect(new CalltoGloryFirstEffect());
         this.getSpellAbility().addEffect(new BoostControlledEffect(1, 1, Duration.EndOfTurn, filter, false));

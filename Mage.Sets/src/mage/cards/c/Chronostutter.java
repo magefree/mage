@@ -25,16 +25,16 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.magic2015;
+package mage.cards.c;
 
 import java.util.UUID;
 import mage.abilities.Ability;
 import mage.abilities.effects.OneShotEffect;
 import mage.cards.Card;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Outcome;
-import mage.constants.Rarity;
 import mage.constants.Zone;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
@@ -47,9 +47,8 @@ import mage.target.common.TargetCreaturePermanent;
  */
 public class Chronostutter extends CardImpl {
 
-    public Chronostutter(UUID ownerId) {
-        super(ownerId, 48, "Chronostutter", Rarity.COMMON, new CardType[]{CardType.INSTANT}, "{5}{U}");
-        this.expansionSetCode = "M15";
+    public Chronostutter(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.INSTANT},"{5}{U}");
 
 
         // Put target creature into its owner's library second from the top.

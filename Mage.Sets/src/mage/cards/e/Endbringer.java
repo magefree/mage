@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.oathofthegatewatch;
+package mage.cards.e;
 
 import java.util.UUID;
 import mage.MageInt;
@@ -39,9 +39,9 @@ import mage.abilities.effects.common.DrawCardSourceControllerEffect;
 import mage.abilities.effects.common.combat.CantAttackBlockTargetEffect;
 import mage.abilities.effects.common.continuous.UntapSourceDuringEachOtherPlayersUntapStepEffect;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Duration;
-import mage.constants.Rarity;
 import mage.constants.Zone;
 import mage.target.common.TargetCreatureOrPlayer;
 import mage.target.common.TargetCreaturePermanent;
@@ -52,9 +52,8 @@ import mage.target.common.TargetCreaturePermanent;
  */
 public class Endbringer extends CardImpl {
 
-    public Endbringer(UUID ownerId) {
-        super(ownerId, 3, "Endbringer", Rarity.RARE, new CardType[]{CardType.CREATURE}, "{5}{C}");
-        this.expansionSetCode = "OGW";
+    public Endbringer(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{5}{C}");
         this.subtype.add("Eldrazi");
         this.power = new MageInt(5);
         this.toughness = new MageInt(5);

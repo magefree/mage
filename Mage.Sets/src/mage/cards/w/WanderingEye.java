@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.nemesis;
+package mage.cards.w;
 
 import java.util.UUID;
 import mage.MageInt;
@@ -33,8 +33,8 @@ import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.effects.common.continuous.PlayWithHandRevealedEffect;
 import mage.abilities.keyword.FlyingAbility;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.constants.TargetController;
 import mage.constants.Zone;
 
@@ -44,9 +44,8 @@ import mage.constants.Zone;
  */
 public class WanderingEye extends CardImpl {
 
-    public WanderingEye(UUID ownerId) {
-        super(ownerId, 50, "Wandering Eye", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{2}{U}");
-        this.expansionSetCode = "NEM";
+    public WanderingEye(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{2}{U}");
         this.subtype.add("Illusion");
         this.power = new MageInt(1);
         this.toughness = new MageInt(3);

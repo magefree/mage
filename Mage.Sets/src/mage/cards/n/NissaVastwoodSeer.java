@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.magicorigins;
+package mage.cards.n;
 
 import java.util.UUID;
 import mage.MageInt;
@@ -39,8 +39,8 @@ import mage.abilities.effects.common.ExileAndReturnTransformedSourceEffect.Gende
 import mage.abilities.effects.common.search.SearchLibraryPutInHandEffect;
 import mage.abilities.keyword.TransformAbility;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.filter.FilterCard;
 import mage.filter.common.FilterLandPermanent;
 import mage.filter.predicate.mageobject.SubtypePredicate;
@@ -59,9 +59,8 @@ public class NissaVastwoodSeer extends CardImpl {
         filter.add(new SubtypePredicate("Forest"));
     }
 
-    public NissaVastwoodSeer(UUID ownerId) {
-        super(ownerId, 189, "Nissa, Vastwood Seer", Rarity.MYTHIC, new CardType[]{CardType.CREATURE}, "{2}{G}");
-        this.expansionSetCode = "ORI";
+    public NissaVastwoodSeer(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{2}{G}");
         this.supertype.add("Legendary");
         this.subtype.add("Elf");
         this.subtype.add("Scout");
@@ -69,7 +68,7 @@ public class NissaVastwoodSeer extends CardImpl {
         this.toughness = new MageInt(2);
         
         this.transformable = true;
-        this.secondSideCard = new NissaSageAnimist(ownerId);
+        this.secondSideCardClazz = NissaSageAnimist.class;
 
         // When Nissa, Vastwood Seer enters the battlefield, you may search your library for a basic Forest card, reveal it, put it into your hand, then shuffle your library.
         this.addAbility(new EntersBattlefieldTriggeredAbility(new SearchLibraryPutInHandEffect(new TargetCardInLibrary(0, 1, filter), true, true), true));

@@ -25,16 +25,16 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.shardsofalara;
+package mage.cards.p;
 
 import java.util.UUID;
 import mage.abilities.effects.Effect;
 import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.abilities.effects.common.CounterTargetEffect;
 import mage.abilities.effects.common.GainLifeEffect;
 import mage.abilities.effects.common.LoseLifeTargetControllerEffect;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.filter.FilterSpell;
 import mage.target.TargetSpell;
 
@@ -44,9 +44,8 @@ import mage.target.TargetSpell;
  */
 public class PunishIgnorance extends CardImpl {
 
-    public PunishIgnorance(UUID ownerId) {
-        super(ownerId, 183, "Punish Ignorance", Rarity.RARE, new CardType[]{CardType.INSTANT}, "{W}{U}{U}{B}");
-        this.expansionSetCode = "ALA";
+    public PunishIgnorance(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.INSTANT},"{W}{U}{U}{B}");
 
 
         // Counter target spell. Its controller loses 3 life and you gain 3 life.

@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.commander2013;
+package mage.cards.u;
 
 import java.util.Deque;
 import java.util.LinkedList;
@@ -34,11 +34,11 @@ import mage.abilities.Ability;
 import mage.abilities.effects.OneShotEffect;
 import mage.cards.Card;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.cards.Cards;
 import mage.cards.CardsImpl;
 import mage.constants.CardType;
 import mage.constants.Outcome;
-import mage.constants.Rarity;
 import mage.constants.Zone;
 import mage.filter.FilterPermanent;
 import mage.filter.predicate.Predicates;
@@ -59,9 +59,8 @@ public class UnexpectedlyAbsent extends CardImpl {
         filter.add(Predicates.not(new CardTypePredicate(CardType.LAND)));
     }
 
-    public UnexpectedlyAbsent(UUID ownerId) {
-        super(ownerId, 25, "Unexpectedly Absent", Rarity.RARE, new CardType[]{CardType.INSTANT}, "{X}{W}{W}");
-        this.expansionSetCode = "C13";
+    public UnexpectedlyAbsent(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.INSTANT},"{X}{W}{W}");
 
 
         // Put target nonland permanent into its owner's library just beneath the top X cards of that library.

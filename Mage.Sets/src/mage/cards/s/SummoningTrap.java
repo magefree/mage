@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.zendikar;
+package mage.cards.s;
 
 import java.util.HashSet;
 import java.util.Set;
@@ -37,11 +37,11 @@ import mage.abilities.costs.mana.ManaCostsImpl;
 import mage.abilities.effects.OneShotEffect;
 import mage.cards.Card;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.cards.Cards;
 import mage.cards.CardsImpl;
 import mage.constants.CardType;
 import mage.constants.Outcome;
-import mage.constants.Rarity;
 import mage.constants.WatcherScope;
 import mage.constants.Zone;
 import mage.filter.common.FilterCreatureCard;
@@ -60,10 +60,8 @@ import mage.watchers.Watcher;
  */
 public class SummoningTrap extends CardImpl {
 
-    public SummoningTrap(UUID ownerId) {
-        super(ownerId, 184, "Summoning Trap", Rarity.RARE,
-                new CardType[]{CardType.INSTANT}, "{4}{G}{G}");
-        this.expansionSetCode = "ZEN";
+    public SummoningTrap(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.INSTANT},"{4}{G}{G}");
         this.subtype.add("Trap");
 
         // If a creature spell you cast this turn was countered by a spell or ability an opponent controlled, you may pay {0} rather than pay Summoning Trap's mana cost.

@@ -25,14 +25,13 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.betrayersofkamigawa;
+package mage.cards.t;
 
 import java.util.UUID;
 
 import mage.constants.CardType;
 import mage.constants.Duration;
 import mage.constants.Outcome;
-import mage.constants.Rarity;
 import mage.constants.Zone;
 import mage.MageInt;
 import mage.abilities.Ability;
@@ -42,6 +41,7 @@ import mage.abilities.effects.ReplacementEffectImpl;
 import mage.abilities.keyword.BushidoAbility;
 import mage.cards.Card;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.TargetController;
 import mage.filter.FilterCard;
 import mage.filter.common.FilterCreaturePermanent;
@@ -69,9 +69,8 @@ public class ToshiroUmezawa extends CardImpl {
         filterInstant.add(new CardTypePredicate(CardType.INSTANT));
     }
 
-    public ToshiroUmezawa(UUID ownerId) {
-        super(ownerId, 89, "Toshiro Umezawa", Rarity.RARE, new CardType[]{CardType.CREATURE}, "{1}{B}{B}");
-        this.expansionSetCode = "BOK";
+    public ToshiroUmezawa(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{1}{B}{B}");
         this.supertype.add("Legendary");
         this.subtype.add("Human");
         this.subtype.add("Samurai");

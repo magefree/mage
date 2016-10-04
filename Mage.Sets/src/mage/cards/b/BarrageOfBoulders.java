@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.khansoftarkir;
+package mage.cards.b;
 
 import java.util.UUID;
 import mage.abilities.condition.LockedInCondition;
@@ -35,9 +35,9 @@ import mage.abilities.effects.Effect;
 import mage.abilities.effects.common.DamageAllEffect;
 import mage.abilities.effects.common.combat.CantBlockAllEffect;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Duration;
-import mage.constants.Rarity;
 import mage.constants.TargetController;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.filter.predicate.permanent.ControllerPredicate;
@@ -54,9 +54,8 @@ public class BarrageOfBoulders extends CardImpl {
         filter.add(new ControllerPredicate(TargetController.NOT_YOU));
     }
 
-    public BarrageOfBoulders(UUID ownerId) {
-        super(ownerId, 100, "Barrage of Boulders", Rarity.COMMON, new CardType[]{CardType.SORCERY}, "{2}{R}");
-        this.expansionSetCode = "KTK";
+    public BarrageOfBoulders(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{2}{R}");
 
 
         // Barrage of Boulders deals 1 damage to each creature you don't control.

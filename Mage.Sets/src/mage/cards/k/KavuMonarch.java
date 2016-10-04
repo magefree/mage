@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.invasion;
+package mage.cards.k;
 
 import java.util.UUID;
 import mage.MageInt;
@@ -35,9 +35,9 @@ import mage.abilities.effects.common.continuous.GainAbilityAllEffect;
 import mage.abilities.effects.common.counter.AddCountersSourceEffect;
 import mage.abilities.keyword.TrampleAbility;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Duration;
-import mage.constants.Rarity;
 import mage.constants.Zone;
 import mage.counters.CounterType;
 import mage.filter.common.FilterCreaturePermanent;
@@ -59,9 +59,8 @@ public class KavuMonarch extends CardImpl {
         filter2.add(new AnotherPredicate());
     }
 
-    public KavuMonarch(UUID ownerId) {
-        super(ownerId, 149, "Kavu Monarch", Rarity.RARE, new CardType[]{CardType.CREATURE}, "{2}{R}{R}");
-        this.expansionSetCode = "INV";
+    public KavuMonarch(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{2}{R}{R}");
         this.subtype.add("Kavu");
         this.power = new MageInt(3);
         this.toughness = new MageInt(3);

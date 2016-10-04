@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.kaladesh;
+package mage.cards.k;
 
 import java.util.UUID;
 import mage.MageInt;
@@ -33,8 +33,8 @@ import mage.abilities.Ability;
 import mage.abilities.common.EntersBattlefieldTriggeredAbility;
 import mage.abilities.effects.common.counter.AddCountersTargetEffect;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.counters.CounterType;
 import mage.target.common.TargetControlledCreaturePermanent;
 
@@ -44,9 +44,8 @@ import mage.target.common.TargetControlledCreaturePermanent;
  */
 public class KujarSeedsculptor extends CardImpl {
 
-    public KujarSeedsculptor(UUID ownerId) {
-        super(ownerId, 159, "Kujar Seedsculptor", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{1}{G}");
-        this.expansionSetCode = "KLD";
+    public KujarSeedsculptor(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{1}{G}");
         this.subtype.add("Elf");
         this.subtype.add("Druid");
         this.power = new MageInt(1);

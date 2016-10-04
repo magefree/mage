@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.tenthedition;
+package mage.cards.s;
 
 import java.util.UUID;
 import mage.MageInt;
@@ -34,9 +34,9 @@ import mage.abilities.common.BeginningOfUpkeepTriggeredAbility;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.ReturnToHandSourceEffect;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Outcome;
-import mage.constants.Rarity;
 import mage.constants.TargetController;
 import mage.constants.Zone;
 import mage.game.Game;
@@ -49,9 +49,8 @@ import mage.players.Player;
  */
 public class ScoriaWurm extends CardImpl {
 
-    public ScoriaWurm(UUID ownerId) {
-        super(ownerId, 227, "Scoria Wurm", Rarity.RARE, new CardType[]{CardType.CREATURE}, "{4}{R}");
-        this.expansionSetCode = "10E";
+    public ScoriaWurm(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{4}{R}");
         this.subtype.add("Wurm");
         this.power = new MageInt(7);
         this.toughness = new MageInt(7);

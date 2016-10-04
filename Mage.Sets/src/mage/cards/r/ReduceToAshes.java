@@ -25,16 +25,16 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.shadowsoverinnistrad;
+package mage.cards.r;
 
 import java.util.UUID;
 import mage.abilities.effects.Effect;
 import mage.abilities.effects.common.DamageTargetEffect;
 import mage.abilities.effects.common.replacement.DealtDamageToCreatureBySourceDies;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Duration;
-import mage.constants.Rarity;
 import mage.target.common.TargetCreaturePermanent;
 import mage.watchers.common.DamagedByWatcher;
 
@@ -44,9 +44,8 @@ import mage.watchers.common.DamagedByWatcher;
  */
 public class ReduceToAshes extends CardImpl {
 
-    public ReduceToAshes(UUID ownerId) {
-        super(ownerId, 176, "Reduce to Ashes", Rarity.COMMON, new CardType[]{CardType.SORCERY}, "{4}{R}");
-        this.expansionSetCode = "SOI";
+    public ReduceToAshes(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{4}{R}");
 
         // Reduce to Ashes deals 5 damage to target creature. If that creature would die this turn, exile it instead.
         this.getSpellAbility().addEffect(new DamageTargetEffect(5));

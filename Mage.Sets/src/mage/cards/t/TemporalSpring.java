@@ -25,14 +25,14 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.apocalypse;
+package mage.cards.t;
 
 import java.util.UUID;
 
 import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.abilities.effects.common.PutOnLibraryTargetEffect;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.target.TargetPermanent;
 
 /**
@@ -40,9 +40,8 @@ import mage.target.TargetPermanent;
  */
 public class TemporalSpring extends CardImpl {
 
-    public TemporalSpring(UUID ownerId) {
-        super(ownerId, 125, "Temporal Spring", Rarity.COMMON, new CardType[]{CardType.SORCERY}, "{1}{G}{U}");
-        this.expansionSetCode = "APC";
+    public TemporalSpring(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{1}{G}{U}");
 
 
 

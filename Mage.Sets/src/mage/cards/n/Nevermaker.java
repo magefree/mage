@@ -25,12 +25,11 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.morningtide;
+package mage.cards.n;
 
 import java.util.UUID;
 
 import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.LeavesBattlefieldTriggeredAbility;
@@ -38,6 +37,7 @@ import mage.abilities.effects.common.PutOnLibraryTargetEffect;
 import mage.abilities.keyword.FlyingAbility;
 import mage.abilities.keyword.EvokeAbility;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.target.Target;
 import mage.target.common.TargetNonlandPermanent;
 
@@ -47,9 +47,8 @@ import mage.target.common.TargetNonlandPermanent;
  */
 public class Nevermaker extends CardImpl {
 
-    public Nevermaker(UUID ownerId) {
-        super(ownerId, 44, "Nevermaker", Rarity.UNCOMMON, new CardType[]{CardType.CREATURE}, "{3}{U}");
-        this.expansionSetCode = "MOR";
+    public Nevermaker(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{3}{U}");
         this.subtype.add("Elemental");
 
         this.power = new MageInt(2);

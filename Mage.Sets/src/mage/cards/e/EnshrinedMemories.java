@@ -25,14 +25,14 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.betrayersofkamigawa;
+package mage.cards.e;
 
 import java.util.UUID;
 import mage.abilities.dynamicvalue.common.ManacostVariableValue;
 import mage.abilities.effects.common.RevealLibraryPutIntoHandEffect;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.filter.common.FilterCreatureCard;
 
 /**
@@ -41,9 +41,8 @@ import mage.filter.common.FilterCreatureCard;
  */
 public class EnshrinedMemories extends CardImpl {
 
-    public EnshrinedMemories(UUID ownerId) {
-        super(ownerId, 124, "Enshrined Memories", Rarity.RARE, new CardType[]{CardType.SORCERY}, "{X}{G}");
-        this.expansionSetCode = "BOK";
+    public EnshrinedMemories(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{X}{G}");
 
 
         // Reveal the top X cards of your library. Put all creature cards revealed this way into your hand and the rest on the bottom of your library in any order.

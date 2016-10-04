@@ -25,14 +25,14 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.ravnica;
+package mage.cards.l;
 
 import java.util.UUID;
 import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.abilities.effects.common.ReturnToHandTargetEffect;
 import mage.abilities.keyword.DredgeAbility;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.filter.common.FilterLandCard;
 import mage.target.common.TargetCardInYourGraveyard;
 
@@ -42,9 +42,8 @@ import mage.target.common.TargetCardInYourGraveyard;
  */
 public class LifeFromTheLoam extends CardImpl {
 
-    public LifeFromTheLoam(UUID ownerId) {
-        super(ownerId, 172, "Life from the Loam", Rarity.RARE, new CardType[]{CardType.SORCERY}, "{1}{G}");
-        this.expansionSetCode = "RAV";
+    public LifeFromTheLoam(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{1}{G}");
 
 
         // Return up to three target land cards from your graveyard to your hand.

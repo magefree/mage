@@ -25,15 +25,15 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.limitedalpha;
+package mage.cards.i;
 
 import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.effects.common.combat.CantBlockCreaturesSourceEffect;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.constants.Zone;
 import mage.filter.Filter;
 import mage.filter.common.FilterCreaturePermanent;
@@ -50,9 +50,8 @@ public class IronclawOrcs extends CardImpl {
         filter.add(new PowerPredicate(Filter.ComparisonType.GreaterThan, 1));
     }
 
-    public IronclawOrcs(UUID ownerId) {
-        super(ownerId, 160, "Ironclaw Orcs", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{1}{R}");
-        this.expansionSetCode = "LEA";
+    public IronclawOrcs(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{1}{R}");
         this.subtype.add("Orc");
 
         this.power = new MageInt(2);

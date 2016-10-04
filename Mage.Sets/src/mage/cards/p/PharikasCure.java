@@ -25,14 +25,14 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.theros;
+package mage.cards.p;
 
 import java.util.UUID;
 import mage.abilities.effects.common.DamageTargetEffect;
 import mage.abilities.effects.common.GainLifeEffect;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.target.common.TargetCreaturePermanent;
 
 /**
@@ -41,9 +41,8 @@ import mage.target.common.TargetCreaturePermanent;
  */
 public class PharikasCure extends CardImpl {
 
-    public PharikasCure(UUID ownerId) {
-        super(ownerId, 100, "Pharika's Cure", Rarity.COMMON, new CardType[]{CardType.INSTANT}, "{B}{B}");
-        this.expansionSetCode = "THS";
+    public PharikasCure(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.INSTANT},"{B}{B}");
 
 
         // Pharika's Cure deals 2 damage to target creature and you gain 2 life.

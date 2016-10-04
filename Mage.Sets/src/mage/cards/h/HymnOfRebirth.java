@@ -25,13 +25,13 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.mastersedition;
+package mage.cards.h;
 
 import java.util.UUID;
 import mage.abilities.effects.common.ReturnFromGraveyardToBattlefieldTargetEffect;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.filter.common.FilterCreatureCard;
 import mage.target.common.TargetCardInGraveyard;
 
@@ -41,9 +41,8 @@ import mage.target.common.TargetCardInGraveyard;
  */
 public class HymnOfRebirth extends CardImpl {
 
-    public HymnOfRebirth(UUID ownerId) {
-        super(ownerId, 146, "Hymn of Rebirth", Rarity.UNCOMMON, new CardType[]{CardType.SORCERY}, "{3}{G}{W}");
-        this.expansionSetCode = "MED";
+    public HymnOfRebirth(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{3}{G}{W}");
 
         // Put target creature card from a graveyard onto the battlefield under your control.
         this.getSpellAbility().addTarget(new TargetCardInGraveyard(new FilterCreatureCard("creature card from a graveyard")));

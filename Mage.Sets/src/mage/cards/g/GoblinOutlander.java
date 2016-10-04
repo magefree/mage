@@ -26,15 +26,15 @@
  *  or implied, of BetaSteward_at_googlemail.com.
  */
 
-package mage.sets.conflux;
+package mage.cards.g;
 
 import java.util.UUID;
 import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.MageInt;
 import mage.ObjectColor;
 import mage.abilities.keyword.ProtectionAbility;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.filter.FilterCard;
 import mage.filter.predicate.mageobject.ColorPredicate;
 
@@ -49,9 +49,8 @@ public class GoblinOutlander extends CardImpl {
         filter.add(new ColorPredicate(ObjectColor.WHITE));
     }
 
-    public GoblinOutlander(UUID ownerId) {
-        super(ownerId, 109, "Goblin Outlander", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{B}{R}");
-        this.expansionSetCode = "CON";
+    public GoblinOutlander(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{B}{R}");
 
 
         this.subtype.add("Goblin");

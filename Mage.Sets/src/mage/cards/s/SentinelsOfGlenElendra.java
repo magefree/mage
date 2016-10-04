@@ -25,14 +25,14 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.lorwyn;
+package mage.cards.s;
 
 import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.MageInt;
 import mage.abilities.keyword.FlashAbility;
 import mage.abilities.keyword.FlyingAbility;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 
 import java.util.UUID;
 
@@ -42,9 +42,8 @@ import java.util.UUID;
  */
 public class SentinelsOfGlenElendra extends CardImpl {
 
-    public SentinelsOfGlenElendra(UUID ownerId) {
-        super(ownerId, 84, "Sentinels of Glen Elendra", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{3}{U}");
-        this.expansionSetCode = "LRW";
+    public SentinelsOfGlenElendra(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{3}{U}");
         this.subtype.add("Faerie");
         this.subtype.add("Soldier");
 

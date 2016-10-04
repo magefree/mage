@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.alarareborn;
+package mage.cards.s;
 
 import java.util.UUID;
 import mage.MageInt;
@@ -36,10 +36,10 @@ import mage.abilities.effects.common.continuous.BoostSourceEffect;
 import mage.abilities.keyword.FlyingAbility;
 import mage.cards.Card;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Duration;
 import mage.constants.Outcome;
-import mage.constants.Rarity;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.players.Player;
@@ -51,9 +51,8 @@ import mage.target.common.TargetDiscard;
  */
 public class SpellboundDragon extends CardImpl {
 
-    public SpellboundDragon(UUID ownerId) {
-        super(ownerId, 90, "Spellbound Dragon", Rarity.RARE, new CardType[]{CardType.CREATURE}, "{3}{U}{R}");
-        this.expansionSetCode = "ARB";
+    public SpellboundDragon(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{3}{U}{R}");
         this.subtype.add("Dragon");
         this.power = new MageInt(3);
         this.toughness = new MageInt(5);

@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.starwars;
+package mage.cards.c;
 
 import java.util.UUID;
 import mage.MageObject;
@@ -36,12 +36,12 @@ import mage.abilities.effects.ContinuousEffect;
 import mage.abilities.effects.OneShotEffect;
 import mage.cards.Card;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.AsThoughEffectType;
 import mage.constants.CardType;
 import mage.constants.Duration;
 import mage.constants.ManaType;
 import mage.constants.Outcome;
-import mage.constants.Rarity;
 import mage.constants.Zone;
 import mage.filter.common.FilterNonlandCard;
 import mage.game.Game;
@@ -58,9 +58,8 @@ import mage.util.CardUtil;
  */
 public class CunningAbduction extends CardImpl {
 
-    public CunningAbduction(UUID ownerId) {
-        super(ownerId, 165, "Cunning Abduction", Rarity.RARE, new CardType[]{CardType.SORCERY}, "{1}{U}{B}");
-        this.expansionSetCode = "SWS";
+    public CunningAbduction(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{1}{U}{B}");
 
         // Target opponent reveals his or her hand. You choose a nonland card from that player's hand and exile it. You may cast that card for as long as it remains exiled, and you may spend mana as though it were mana of any color to cast that spell.
         this.getSpellAbility().addTarget(new TargetOpponent());

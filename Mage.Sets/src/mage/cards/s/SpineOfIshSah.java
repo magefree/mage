@@ -25,16 +25,16 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.mirrodinbesieged;
+package mage.cards.s;
 
 import java.util.UUID;
 import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.abilities.common.EntersBattlefieldTriggeredAbility;
 import mage.abilities.common.PutIntoGraveFromBattlefieldSourceTriggeredAbility;
 import mage.abilities.effects.common.DestroyTargetEffect;
 import mage.abilities.effects.common.ReturnToHandSourceEffect;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.target.TargetPermanent;
 
 /**
@@ -43,9 +43,8 @@ import mage.target.TargetPermanent;
  */
 public class SpineOfIshSah extends CardImpl {
 
-    public SpineOfIshSah(UUID ownerId) {
-        super(ownerId, 136, "Spine of Ish Sah", Rarity.RARE, new CardType[]{CardType.ARTIFACT}, "{7}");
-        this.expansionSetCode = "MBS";
+    public SpineOfIshSah(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.ARTIFACT},"{7}");
 
         // When Spine of Ish Sah enters the battlefield, destroy target permanent.        
         EntersBattlefieldTriggeredAbility ability = new EntersBattlefieldTriggeredAbility(new DestroyTargetEffect());

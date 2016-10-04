@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.innistrad;
+package mage.cards.m;
 
 import mage.MageInt;
 import mage.abilities.TriggeredAbility;
@@ -39,7 +39,9 @@ import mage.abilities.effects.Effect;
 import mage.abilities.effects.common.TransformSourceEffect;
 import mage.abilities.effects.common.continuous.BoostControlledEffect;
 import mage.abilities.keyword.TransformAbility;
+import mage.cards.h.HowlpackAlpha;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.*;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.filter.predicate.mageobject.SubtypePredicate;
@@ -61,15 +63,14 @@ public class MayorOfAvabruck extends CardImpl {
         filter.add(new SubtypePredicate("Human"));
     }
 
-    public MayorOfAvabruck(UUID ownerId) {
-        super(ownerId, 193, "Mayor of Avabruck", Rarity.RARE, new CardType[]{CardType.CREATURE}, "{1}{G}");
-        this.expansionSetCode = "ISD";
+    public MayorOfAvabruck(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{1}{G}");
         this.subtype.add("Human");
         this.subtype.add("Advisor");
         this.subtype.add("Werewolf");
 
         this.transformable = true;
-        this.secondSideCard = new HowlpackAlpha(ownerId);
+        this.secondSideCardClazz = HowlpackAlpha.class;
 
         this.power = new MageInt(1);
         this.toughness = new MageInt(1);

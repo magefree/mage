@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.commander2014;
+package mage.cards.k;
 
 import java.util.UUID;
 import mage.Mana;
@@ -36,8 +36,8 @@ import mage.abilities.costs.common.TapSourceCost;
 import mage.abilities.effects.common.SacrificeSourceUnlessPaysEffect;
 import mage.abilities.mana.SimpleManaAbility;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.constants.Zone;
 import mage.filter.common.FilterControlledLandPermanent;
 import mage.filter.predicate.Predicates;
@@ -58,9 +58,8 @@ public class Karoo extends CardImpl {
         filter.add(Predicates.not(new TappedPredicate()));
     }
 
-    public Karoo(UUID ownerId) {
-        super(ownerId, 303, "Karoo", Rarity.UNCOMMON, new CardType[]{CardType.LAND}, "");
-        this.expansionSetCode = "C14";
+    public Karoo(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.LAND},"");
 
         // Karoo enters the battlefield tapped.
         this.addAbility(new EntersBattlefieldTappedAbility());

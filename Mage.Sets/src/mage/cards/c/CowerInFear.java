@@ -25,15 +25,15 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.magic2013;
+package mage.cards.c;
 
 import java.util.UUID;
 
 import mage.constants.CardType;
 import mage.constants.Duration;
-import mage.constants.Rarity;
 import mage.abilities.effects.common.continuous.BoostAllEffect;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.TargetController;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.filter.predicate.permanent.ControllerPredicate;
@@ -50,9 +50,8 @@ public class CowerInFear extends CardImpl {
         filter.add(new ControllerPredicate(TargetController.OPPONENT));
     }
 
-    public CowerInFear(UUID ownerId) {
-        super(ownerId, 84, "Cower in Fear", Rarity.UNCOMMON, new CardType[]{CardType.INSTANT}, "{1}{B}{B}");
-        this.expansionSetCode = "M13";
+    public CowerInFear(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.INSTANT},"{1}{B}{B}");
 
 
         // Creatures your opponents control get -1/-1 until end of turn.

@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.chronicles;
+package mage.cards.l;
 
 import java.util.UUID;
 import mage.abilities.Ability;
@@ -34,9 +34,9 @@ import mage.abilities.costs.common.SacrificeSourceCost;
 import mage.abilities.costs.common.TapSourceCost;
 import mage.abilities.effects.OneShotEffect;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Outcome;
-import mage.constants.Rarity;
 import mage.constants.Zone;
 import mage.counters.BoostCounter;
 import mage.game.Game;
@@ -49,9 +49,8 @@ import mage.target.common.TargetCreaturePermanent;
  */
 public class LivingArmor extends CardImpl {
 
-    public LivingArmor(UUID ownerId) {
-        super(ownerId, 83, "Living Armor", Rarity.COMMON, new CardType[]{CardType.ARTIFACT}, "{4}");
-        this.expansionSetCode = "CHR";
+    public LivingArmor(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.ARTIFACT},"{4}");
 
         // {tap}, Sacrifice Living Armor: Put X +0/+1 counters on target creature, where X is that creature's converted mana cost.
         Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new LivingArmorEffect(), new TapSourceCost());

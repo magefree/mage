@@ -25,19 +25,19 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.mirrodinbesieged;
+package mage.cards.c;
 
 import java.util.UUID;
 import mage.constants.CardType;
 import mage.constants.Duration;
 import mage.constants.Outcome;
-import mage.constants.Rarity;
 import mage.abilities.Ability;
 import mage.abilities.condition.common.MetalcraftCondition;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.RestrictionEffect;
 import mage.abilities.effects.common.DamageTargetEffect;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.target.TargetPlayer;
@@ -48,9 +48,8 @@ import mage.target.TargetPlayer;
  */
 public class ConcussiveBolt extends CardImpl {
 
-    public ConcussiveBolt(UUID ownerId) {
-        super(ownerId, 60, "Concussive Bolt", Rarity.COMMON, new CardType[]{CardType.SORCERY}, "{3}{R}{R}");
-        this.expansionSetCode = "MBS";
+    public ConcussiveBolt(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{3}{R}{R}");
 
 
         // Concussive Bolt deals 4 damage to target player.

@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.judgment;
+package mage.cards.w;
 
 import java.util.UUID;
 import mage.MageInt;
@@ -39,9 +39,9 @@ import mage.abilities.effects.common.ReturnFromExileForSourceEffect;
 import mage.abilities.effects.common.SacrificeSourceUnlessPaysEffect;
 import mage.abilities.keyword.FlyingAbility;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Outcome;
-import mage.constants.Rarity;
 import mage.constants.Zone;
 import mage.filter.common.FilterControlledCreaturePermanent;
 import mage.filter.predicate.permanent.AnotherPredicate;
@@ -57,9 +57,8 @@ import mage.util.CardUtil;
  */
 public class WormfangDrake extends CardImpl {
 
-    public WormfangDrake(UUID ownerId) {
-        super(ownerId, 57, "Wormfang Drake", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{2}{U}");
-        this.expansionSetCode = "JUD";
+    public WormfangDrake(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{2}{U}");
         this.subtype.add("Nightmare");
         this.subtype.add("Drake");
         this.power = new MageInt(3);

@@ -25,11 +25,10 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.magic2013;
+package mage.cards.r;
 
 import java.util.UUID;
 import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.constants.Zone;
 import mage.MageInt;
 import mage.abilities.common.SimpleActivatedAbility;
@@ -37,6 +36,7 @@ import mage.abilities.costs.common.DiscardTargetCost;
 import mage.abilities.costs.common.TapSourceCost;
 import mage.abilities.effects.common.DrawCardSourceControllerEffect;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.target.common.TargetCardInHand;
 
 /**
@@ -45,9 +45,8 @@ import mage.target.common.TargetCardInHand;
  */
 public class RummagingGoblin extends CardImpl {
 
-    public RummagingGoblin(UUID ownerId) {
-        super(ownerId, 146, "Rummaging Goblin", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{2}{R}");
-        this.expansionSetCode = "M13";
+    public RummagingGoblin(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{2}{R}");
         this.subtype.add("Goblin");
         this.subtype.add("Rogue");
 

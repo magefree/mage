@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.conspiracytakethecrown;
+package mage.cards.s;
 
 import java.util.UUID;
 import mage.MageInt;
@@ -33,8 +33,8 @@ import mage.abilities.common.BecomesMonstrousSourceTriggeredAbility;
 import mage.abilities.effects.PutTokenOntoBattlefieldCopySourceEffect;
 import mage.abilities.keyword.MonstrosityAbility;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.Rarity;
 
 /**
  *
@@ -42,9 +42,8 @@ import mage.constants.Rarity;
  */
 public class SplittingSlime extends CardImpl {
 
-    public SplittingSlime(UUID ownerId) {
-        super(ownerId, 72, "Splitting Slime", Rarity.RARE, new CardType[]{CardType.CREATURE}, "{3}{G}{G}");
-        this.expansionSetCode = "CN2";
+    public SplittingSlime(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{3}{G}{G}");
         this.subtype.add("Ooze");
         this.power = new MageInt(3);
         this.toughness = new MageInt(3);

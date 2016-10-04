@@ -25,15 +25,15 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.zendikar;
+package mage.cards.h;
 
 import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.common.LandfallAbility;
 import mage.abilities.effects.common.PutLibraryIntoGraveTargetEffect;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.target.TargetPlayer;
 
 /**
@@ -42,9 +42,8 @@ import mage.target.TargetPlayer;
  */
 public class HedronCrab extends CardImpl {
 
-    public HedronCrab(UUID ownerId) {
-        super(ownerId, 47, "Hedron Crab", Rarity.UNCOMMON, new CardType[]{CardType.CREATURE}, "{U}");
-        this.expansionSetCode = "ZEN";
+    public HedronCrab(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{U}");
         this.subtype.add("Crab");
 
         this.power = new MageInt(0);

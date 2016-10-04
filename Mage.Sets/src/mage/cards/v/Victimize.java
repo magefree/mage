@@ -25,17 +25,17 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.conspiracy;
+package mage.cards.v;
 
 import java.util.UUID;
 import mage.abilities.Ability;
 import mage.abilities.costs.common.SacrificeTargetCost;
 import mage.abilities.effects.OneShotEffect;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.cards.CardsImpl;
 import mage.constants.CardType;
 import mage.constants.Outcome;
-import mage.constants.Rarity;
 import mage.constants.Zone;
 import mage.filter.common.FilterControlledCreaturePermanent;
 import mage.filter.common.FilterCreatureCard;
@@ -50,9 +50,8 @@ import mage.target.common.TargetControlledCreaturePermanent;
  */
 public class Victimize extends CardImpl {
 
-    public Victimize(UUID ownerId) {
-        super(ownerId, 133, "Victimize", Rarity.UNCOMMON, new CardType[]{CardType.SORCERY}, "{2}{B}");
-        this.expansionSetCode = "CNS";
+    public Victimize(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{2}{B}");
 
         // Choose two target creature cards in your graveyard. Sacrifice a creature. If you do, return the chosen cards to the battlefield tapped.
         this.getSpellAbility().addEffect(new VictimizeEffect());

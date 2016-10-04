@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.magic2015;
+package mage.cards.s;
 
 import java.util.UUID;
 import mage.abilities.Ability;
@@ -33,8 +33,8 @@ import mage.abilities.effects.common.NameACardEffect;
 import mage.abilities.effects.common.search.SearchTargetGraveyardHandLibraryForCardNameAndExileEffect;
 import mage.abilities.keyword.ConvokeAbility;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.game.Game;
 import mage.target.TargetPlayer;
 
@@ -44,9 +44,8 @@ import mage.target.TargetPlayer;
  */
 public class StainTheMind extends CardImpl {
 
-    public StainTheMind(UUID ownerId) {
-        super(ownerId, 117, "Stain the Mind", Rarity.RARE, new CardType[]{CardType.SORCERY}, "{4}{B}");
-        this.expansionSetCode = "M15";
+    public StainTheMind(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{4}{B}");
 
         // Convoke
         this.addAbility(new ConvokeAbility());

@@ -25,10 +25,9 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.iceage;
+package mage.cards.t;
 
 import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.MageInt;
 import mage.Mana;
 import mage.abilities.Ability;
@@ -40,6 +39,7 @@ import mage.abilities.effects.common.DamageTargetEffect;
 import mage.abilities.keyword.DefenderAbility;
 import mage.abilities.mana.SimpleManaAbility;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.WatcherScope;
 import mage.constants.Zone;
 import mage.filter.common.FilterAttackingCreature;
@@ -59,9 +59,8 @@ import mage.filter.predicate.permanent.BlockedByIdPredicate;
  */
 public class TinderWall extends CardImpl {
 
-    public TinderWall(UUID ownerId) {
-        super(ownerId, 158, "Tinder Wall", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{G}");
-        this.expansionSetCode = "ICE";
+    public TinderWall(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{G}");
         this.subtype.add("Plant");
         this.subtype.add("Wall");
 

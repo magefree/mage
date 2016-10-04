@@ -26,17 +26,17 @@
  *  or implied, of BetaSteward_at_googlemail.com.
  */
 
-package mage.sets.magic2010;
+package mage.cards.a;
 
 import java.util.UUID;
 import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.EntersBattlefieldTriggeredAbility;
 import mage.abilities.effects.common.DestroyTargetEffect;
 import mage.abilities.keyword.DeathtouchAbility;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.filter.FilterPermanent;
 import mage.filter.predicate.Predicates;
 import mage.filter.predicate.mageobject.CardTypePredicate;
@@ -58,9 +58,8 @@ public class AcidicSlime extends CardImpl {
                 new CardTypePredicate(CardType.LAND)));
     }
 
-    public AcidicSlime(UUID ownerId) {
-        super(ownerId, 165, "Acidic Slime", Rarity.UNCOMMON, new CardType[]{CardType.CREATURE}, "{3}{G}{G}");
-        this.expansionSetCode = "M10";
+    public AcidicSlime(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{3}{G}{G}");
         this.subtype.add("Ooze");
 
         this.power = new MageInt(2);

@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.futuresight;
+package mage.cards.c;
 
 import java.util.UUID;
 import mage.Mana;
@@ -37,10 +37,10 @@ import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.counter.AddCountersSourceEffect;
 import mage.abilities.mana.AnyColorManaAbility;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.choices.ChoiceColor;
 import mage.constants.CardType;
 import mage.constants.Outcome;
-import mage.constants.Rarity;
 import mage.constants.TargetController;
 import mage.constants.Zone;
 import mage.counters.CounterType;
@@ -54,9 +54,8 @@ import mage.players.Player;
  */
 public class CoalitionRelic extends CardImpl {
 
-    public CoalitionRelic(UUID ownerId) {
-        super(ownerId, 161, "Coalition Relic", Rarity.RARE, new CardType[]{CardType.ARTIFACT}, "{3}");
-        this.expansionSetCode = "FUT";
+    public CoalitionRelic(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.ARTIFACT},"{3}");
 
         // {tap}: Add one mana of any color to your mana pool.
         this.addAbility(new AnyColorManaAbility());

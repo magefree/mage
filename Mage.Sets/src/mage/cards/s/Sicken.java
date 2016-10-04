@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.urzassaga;
+package mage.cards.s;
 
 import java.util.UUID;
 
@@ -38,6 +38,7 @@ import mage.abilities.costs.mana.ManaCostsImpl;
 import mage.abilities.keyword.CyclingAbility;
 import mage.abilities.keyword.EnchantAbility;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.target.TargetPermanent;
 import mage.target.common.TargetCreaturePermanent;
 
@@ -47,9 +48,8 @@ import mage.target.common.TargetCreaturePermanent;
  */
 public class Sicken extends CardImpl {
 
-    public Sicken(UUID ownerId) {
-        super(ownerId, 156, "Sicken", Rarity.COMMON, new CardType[]{CardType.ENCHANTMENT}, "{B}");
-        this.expansionSetCode = "USG";
+    public Sicken(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.ENCHANTMENT},"{B}");
         this.subtype.add("Aura");
 
 

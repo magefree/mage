@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.odyssey;
+package mage.cards.c;
 
 import java.util.UUID;
 import mage.MageObject;
@@ -33,10 +33,10 @@ import mage.abilities.Ability;
 import mage.abilities.effects.ContinuousRuleModifyingEffectImpl;
 import mage.abilities.effects.common.DrawCardSourceControllerEffect;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Duration;
 import mage.constants.Outcome;
-import mage.constants.Rarity;
 import mage.filter.common.FilterCreatureSpell;
 import mage.game.Game;
 import mage.game.events.GameEvent;
@@ -49,9 +49,8 @@ import mage.target.TargetPlayer;
  */
 public class CeaseFire extends CardImpl {
 
-    public CeaseFire(UUID ownerId) {
-        super(ownerId, 14, "Cease-Fire", Rarity.COMMON, new CardType[]{CardType.INSTANT}, "{2}{W}");
-        this.expansionSetCode = "ODY";
+    public CeaseFire(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.INSTANT},"{2}{W}");
 
         // Target player can't cast creature spells this turn.
         this.getSpellAbility().addEffect(new CeaseFireEffect());

@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.legends;
+package mage.cards.h;
 
 import java.util.UUID;
 import mage.MageInt;
@@ -40,9 +40,9 @@ import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.CreateTokenEffect;
 import mage.abilities.effects.common.ExileAllEffect;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Outcome;
-import mage.constants.Rarity;
 import mage.filter.common.FilterControlledLandPermanent;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.filter.predicate.mageobject.SubtypePredicate;
@@ -63,9 +63,8 @@ public class HazezonTamar extends CardImpl {
         filter.add(new SubtypePredicate("Warrior"));
     }
 
-    public HazezonTamar(UUID ownerId) {
-        super(ownerId, 270, "Hazezon Tamar", Rarity.RARE, new CardType[]{CardType.CREATURE}, "{4}{R}{G}{W}");
-        this.expansionSetCode = "LEG";
+    public HazezonTamar(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{4}{R}{G}{W}");
         this.supertype.add("Legendary");
         this.subtype.add("Human");
         this.subtype.add("Warrior");

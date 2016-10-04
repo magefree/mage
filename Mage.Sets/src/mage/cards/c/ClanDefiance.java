@@ -25,16 +25,16 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.gatecrash;
+package mage.cards.c;
 
 import java.util.UUID;
 import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.abilities.Mode;
 import mage.abilities.dynamicvalue.common.ManacostVariableValue;
 import mage.abilities.effects.common.DamageTargetEffect;
 import mage.abilities.keyword.FlyingAbility;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.filter.predicate.Predicates;
 import mage.filter.predicate.mageobject.AbilityPredicate;
@@ -55,9 +55,8 @@ public class ClanDefiance extends CardImpl {
         filter2.add(Predicates.not(new AbilityPredicate(FlyingAbility.class)));
     }
 
-    public ClanDefiance(UUID ownerId) {
-        super(ownerId, 151, "Clan Defiance", Rarity.RARE, new CardType[]{CardType.SORCERY}, "{X}{R}{G}");
-        this.expansionSetCode = "GTC";
+    public ClanDefiance(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{X}{R}{G}");
 
 
         // Choose one or more - 

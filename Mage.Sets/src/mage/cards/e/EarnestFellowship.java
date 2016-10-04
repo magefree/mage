@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.odyssey;
+package mage.cards.e;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -36,11 +36,11 @@ import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.effects.ContinuousEffectImpl;
 import mage.abilities.keyword.ProtectionAbility;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Duration;
 import mage.constants.Layer;
 import mage.constants.Outcome;
-import mage.constants.Rarity;
 import mage.constants.SubLayer;
 import mage.constants.Zone;
 import mage.filter.FilterCard;
@@ -56,9 +56,8 @@ import mage.game.permanent.Permanent;
  */
 public class EarnestFellowship extends CardImpl {
 
-    public EarnestFellowship(UUID ownerId) {
-        super(ownerId, 21, "Earnest Fellowship", Rarity.RARE, new CardType[]{CardType.ENCHANTMENT}, "{1}{W}");
-        this.expansionSetCode = "ODY";
+    public EarnestFellowship(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.ENCHANTMENT},"{1}{W}");
 
 
         // Each creature has protection from its colors.

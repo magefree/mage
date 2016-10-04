@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.fatereforged;
+package mage.cards.w;
 
 import java.util.UUID;
 import mage.MageInt;
@@ -40,9 +40,9 @@ import mage.abilities.effects.common.counter.AddCountersSourceEffect;
 import mage.abilities.keyword.LifelinkAbility;
 import mage.abilities.keyword.TrampleAbility;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Duration;
-import mage.constants.Rarity;
 import mage.constants.Zone;
 import mage.counters.CounterType;
 import mage.filter.common.FilterCreaturePermanent;
@@ -63,9 +63,8 @@ public class WardenOfTheFirstTree extends CardImpl {
         FILTER2.add(new SubtypePredicate("Spirit"));
     }
 
-    public WardenOfTheFirstTree(UUID ownerId) {
-        super(ownerId, 143, "Warden of the First Tree", Rarity.MYTHIC, new CardType[]{CardType.CREATURE}, "{G}");
-        this.expansionSetCode = "FRF";
+    public WardenOfTheFirstTree(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{G}");
         this.subtype.add("Human");
         this.power = new MageInt(1);
         this.toughness = new MageInt(1);

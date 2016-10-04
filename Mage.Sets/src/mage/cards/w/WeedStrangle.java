@@ -25,16 +25,16 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.lorwyn;
+package mage.cards.w;
 
 import java.util.UUID;
 import mage.abilities.Ability;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.ClashEffect;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Outcome;
-import mage.constants.Rarity;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.players.Player;
@@ -46,9 +46,8 @@ import mage.target.common.TargetCreaturePermanent;
  */
 public class WeedStrangle extends CardImpl {
 
-    public WeedStrangle(UUID ownerId) {
-        super(ownerId, 147, "Weed Strangle", Rarity.COMMON, new CardType[]{CardType.SORCERY}, "{3}{B}{B}");
-        this.expansionSetCode = "LRW";
+    public WeedStrangle(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{3}{B}{B}");
 
 
         // Destroy target creature. Clash with an opponent. If you win, you gain life equal to that creature's toughness.

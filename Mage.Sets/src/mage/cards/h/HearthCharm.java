@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.visions;
+package mage.cards.h;
 
 import java.util.UUID;
 import mage.abilities.Mode;
@@ -33,9 +33,9 @@ import mage.abilities.effects.common.DestroyTargetEffect;
 import mage.abilities.effects.common.combat.CantBeBlockedTargetEffect;
 import mage.abilities.effects.common.continuous.BoostAllEffect;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Duration;
-import mage.constants.Rarity;
 import mage.filter.Filter;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.filter.predicate.mageobject.CardTypePredicate;
@@ -58,9 +58,8 @@ public class HearthCharm extends CardImpl {
         filter3.add(new PowerPredicate(Filter.ComparisonType.LessThan, 3));
     }
 
-    public HearthCharm(UUID ownerId) {
-        super(ownerId, 82, "Hearth Charm", Rarity.COMMON, new CardType[]{CardType.INSTANT}, "{R}");
-        this.expansionSetCode = "VIS";
+    public HearthCharm(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.INSTANT},"{R}");
 
         // Choose one - Destroy target artifact creature
         this.getSpellAbility().addEffect(new DestroyTargetEffect());

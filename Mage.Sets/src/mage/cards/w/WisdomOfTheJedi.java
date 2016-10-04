@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.starwars;
+package mage.cards.w;
 
 import java.util.UUID;
 import mage.abilities.Mode;
@@ -35,9 +35,9 @@ import mage.abilities.effects.common.PreventAllDamageToPlayersEffect;
 import mage.abilities.effects.common.continuous.BoostTargetEffect;
 import mage.abilities.effects.common.continuous.GainProtectionFromColorTargetEffect;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Duration;
-import mage.constants.Rarity;
 import mage.filter.Filter;
 import mage.filter.FilterSpell;
 import mage.filter.predicate.mageobject.ConvertedManaCostPredicate;
@@ -56,9 +56,8 @@ public class WisdomOfTheJedi extends CardImpl {
         filterSpell.add(new ConvertedManaCostPredicate(Filter.ComparisonType.LessThan, 4));
     }
 
-    public WisdomOfTheJedi(UUID ownerId) {
-        super(ownerId, 222, "Wisdom of the Jedi", Rarity.UNCOMMON, new CardType[]{CardType.INSTANT}, "{G}{W}{U}");
-        this.expansionSetCode = "SWS";
+    public WisdomOfTheJedi(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.INSTANT},"{G}{W}{U}");
 
         // Choose one - Prevent all damage that would be dealt to players this turn.
         this.getSpellAbility().addEffect(new PreventAllDamageToPlayersEffect(Duration.EndOfTurn, false));

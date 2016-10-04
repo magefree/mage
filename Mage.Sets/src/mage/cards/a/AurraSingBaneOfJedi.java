@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.starwars;
+package mage.cards.a;
 
 import java.util.HashSet;
 import java.util.List;
@@ -43,11 +43,11 @@ import mage.abilities.effects.common.SetPlayerLifeAllEffect;
 import mage.abilities.effects.common.discard.DiscardControllerEffect;
 import mage.abilities.effects.common.discard.DiscardHandAllEffect;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.choices.Choice;
 import mage.choices.ChoiceImpl;
 import mage.constants.CardType;
 import mage.constants.Outcome;
-import mage.constants.Rarity;
 import mage.constants.TargetController;
 import mage.constants.Zone;
 import mage.filter.common.FilterControlledCreaturePermanent;
@@ -67,9 +67,8 @@ import mage.target.common.TargetCreaturePermanent;
  */
 public class AurraSingBaneOfJedi extends CardImpl {
 
-    public AurraSingBaneOfJedi(UUID ownerId) {
-        super(ownerId, 168, "Aurra Sing, Bane of Jedi", Rarity.MYTHIC, new CardType[]{CardType.PLANESWALKER}, "{2}{B}{R}");
-        this.expansionSetCode = "SWS";
+    public AurraSingBaneOfJedi(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.PLANESWALKER},"{2}{B}{R}");
         this.subtype.add("Aurra");
 
         this.addAbility(new PlanswalkerEntersWithLoyalityCountersAbility(3));

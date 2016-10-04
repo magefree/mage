@@ -25,14 +25,14 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.morningtide;
+package mage.cards.r;
 
 import java.util.UUID;
 import mage.abilities.effects.common.ClashWinReturnToHandSpellEffect;
 import mage.abilities.effects.common.ReturnToHandTargetEffect;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.filter.common.FilterCreatureCard;
 import mage.target.common.TargetCardInGraveyard;
 
@@ -42,9 +42,8 @@ import mage.target.common.TargetCardInGraveyard;
  */
 public class ReviveTheFallen extends CardImpl {
 
-    public ReviveTheFallen(UUID ownerId) {
-        super(ownerId, 76, "Revive the Fallen", Rarity.UNCOMMON, new CardType[]{CardType.SORCERY}, "{1}{B}");
-        this.expansionSetCode = "MOR";
+    public ReviveTheFallen(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{1}{B}");
 
         // Return target creature card from a graveyard to its owner's hand.
          this.getSpellAbility().addEffect(new ReturnToHandTargetEffect());

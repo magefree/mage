@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.prophecy;
+package mage.cards.f;
 
 import java.util.UUID;
 import mage.MageInt;
@@ -36,9 +36,9 @@ import mage.abilities.decorator.ConditionalContinuousEffect;
 import mage.abilities.effects.common.continuous.GainAbilitySourceEffect;
 import mage.abilities.keyword.FearAbility;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Duration;
-import mage.constants.Rarity;
 import mage.constants.Zone;
 import mage.filter.common.FilterControlledLandPermanent;
 import mage.filter.predicate.Predicates;
@@ -56,9 +56,8 @@ public class FenStalker extends CardImpl {
         filter.add(Predicates.not(new TappedPredicate()));
     }
 
-    public FenStalker(UUID ownerId) {
-        super(ownerId, 64, "Fen Stalker", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{3}{B}");
-        this.expansionSetCode = "PCY";
+    public FenStalker(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{3}{B}");
         this.subtype.add("Nightstalker");
         this.power = new MageInt(3);
         this.toughness = new MageInt(2);

@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.oathofthegatewatch;
+package mage.cards.s;
 
 import java.util.UUID;
 import mage.MageInt;
@@ -33,8 +33,8 @@ import mage.abilities.Ability;
 import mage.abilities.common.EntersBattlefieldTriggeredAbility;
 import mage.abilities.effects.keyword.SupportEffect;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.filter.predicate.permanent.AnotherPredicate;
 import mage.target.common.TargetCreaturePermanent;
@@ -51,9 +51,8 @@ public class SaddlebackLagac extends CardImpl {
         FILTER.add(new AnotherPredicate());
     }
 
-    public SaddlebackLagac(UUID ownerId) {
-        super(ownerId, 142, "Saddleback Lagac", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{3}{G}");
-        this.expansionSetCode = "OGW";
+    public SaddlebackLagac(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{3}{G}");
         this.subtype.add("Lizard");
         this.power = new MageInt(3);
         this.toughness = new MageInt(1);

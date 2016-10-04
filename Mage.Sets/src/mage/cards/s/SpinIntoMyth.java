@@ -25,15 +25,15 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.archenemy;
+package mage.cards.s;
 
 import java.util.UUID;
 import mage.abilities.effects.Effect;
 import mage.abilities.effects.common.PutOnLibraryTargetEffect;
 import mage.abilities.effects.keyword.FatesealEffect;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.target.common.TargetCreaturePermanent;
 
 /**
@@ -42,9 +42,8 @@ import mage.target.common.TargetCreaturePermanent;
  */
 public class SpinIntoMyth extends CardImpl {
 
-    public SpinIntoMyth(UUID ownerId) {
-        super(ownerId, 8, "Spin into Myth", Rarity.UNCOMMON, new CardType[]{CardType.INSTANT}, "{4}{U}");
-        this.expansionSetCode = "ARC";
+    public SpinIntoMyth(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.INSTANT},"{4}{U}");
 
         // Put target creature on top of its owner's library, then fateseal 2.
         this.getSpellAbility().addEffect(new PutOnLibraryTargetEffect(true));

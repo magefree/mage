@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.prophecy;
+package mage.cards.w;
 
 import java.util.UUID;
 import mage.abilities.common.BeginningOfEndStepTriggeredAbility;
@@ -34,8 +34,8 @@ import mage.abilities.condition.common.PermanentsOnTheBattlefieldCondition;
 import mage.abilities.decorator.ConditionalTriggeredAbility;
 import mage.abilities.effects.common.GainLifeEffect;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.constants.TargetController;
 import mage.filter.common.FilterControlledLandPermanent;
 import mage.filter.predicate.Predicates;
@@ -53,9 +53,8 @@ public class WellOfLife extends CardImpl {
         filter.add(Predicates.not(new TappedPredicate()));
     }
 
-    public WellOfLife(UUID ownerId) {
-        super(ownerId, 141, "Well of Life", Rarity.UNCOMMON, new CardType[]{CardType.ARTIFACT}, "{4}");
-        this.expansionSetCode = "PCY";
+    public WellOfLife(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.ARTIFACT},"{4}");
 
         // At the beginning of your end step, if you control no untapped lands, you gain 2 life.
         this.addAbility(new ConditionalTriggeredAbility(new BeginningOfEndStepTriggeredAbility(

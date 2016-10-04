@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.eventide;
+package mage.cards.b;
 
 import java.util.UUID;
 import mage.abilities.Ability;
@@ -38,11 +38,11 @@ import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.InfoEffect;
 import mage.abilities.effects.common.PreventAllDamageByAllPermanentsEffect;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.ColoredManaSymbol;
 import mage.constants.Duration;
 import mage.constants.Outcome;
-import mage.constants.Rarity;
 import mage.filter.common.FilterAttackingCreature;
 import mage.game.Game;
 import mage.players.Player;
@@ -55,9 +55,8 @@ import mage.watchers.common.ManaSpentToCastWatcher;
  */
 public class BatwingBrume extends CardImpl {
 
-    public BatwingBrume(UUID ownerId) {
-        super(ownerId, 81, "Batwing Brume", Rarity.UNCOMMON, new CardType[]{CardType.INSTANT}, "{1}{W/B}");
-        this.expansionSetCode = "EVE";
+    public BatwingBrume(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.INSTANT},"{1}{W/B}");
 
 
         // Prevent all combat damage that would be dealt this turn if {W} was spent to cast Batwing Brume. Each player loses 1 life for each attacking creature he or she controls if {B} was spent to cast Batwing Brume.

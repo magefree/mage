@@ -25,16 +25,16 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.dissension;
+package mage.cards.c;
 
 import java.util.UUID;
 import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.MageInt;
 import mage.abilities.common.SpellCastControllerTriggeredAbility;
 import mage.abilities.effects.common.counter.AddCountersAllEffect;
 import mage.abilities.keyword.FlyingAbility;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.counters.CounterType;
 import mage.filter.FilterSpell;
 import mage.filter.common.FilterControlledCreaturePermanent;
@@ -50,9 +50,8 @@ public class CelestialAncient extends CardImpl {
     static {
         filter.add(new CardTypePredicate(CardType.ENCHANTMENT));
     }
-    public CelestialAncient(UUID ownerId) {
-        super(ownerId, 7, "Celestial Ancient", Rarity.RARE, new CardType[]{CardType.CREATURE}, "{3}{W}{W}");
-        this.expansionSetCode = "DIS";
+    public CelestialAncient(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{3}{W}{W}");
         this.subtype.add("Elemental");
 
         this.power = new MageInt(3);

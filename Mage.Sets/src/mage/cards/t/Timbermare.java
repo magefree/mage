@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.planarchaos;
+package mage.cards.t;
 
 import java.util.UUID;
 import mage.MageInt;
@@ -34,8 +34,8 @@ import mage.abilities.effects.common.TapAllEffect;
 import mage.abilities.keyword.EchoAbility;
 import mage.abilities.keyword.HasteAbility;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.filter.predicate.permanent.AnotherPredicate;
 
@@ -51,9 +51,8 @@ public class Timbermare extends CardImpl {
         filter.add(new AnotherPredicate());
     }
 
-    public Timbermare(UUID ownerId) {
-        super(ownerId, 140, "Timbermare", Rarity.RARE, new CardType[]{CardType.CREATURE}, "{3}{G}");
-        this.expansionSetCode = "PLC";
+    public Timbermare(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{3}{G}");
         this.subtype.add("Elemental");
         this.subtype.add("Horse");
         this.power = new MageInt(5);

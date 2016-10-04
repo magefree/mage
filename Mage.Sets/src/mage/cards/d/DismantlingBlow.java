@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.invasion;
+package mage.cards.d;
 
 import java.util.UUID;
 import mage.abilities.condition.common.KickedCondition;
@@ -34,8 +34,8 @@ import mage.abilities.effects.common.DestroyTargetEffect;
 import mage.abilities.effects.common.DrawCardSourceControllerEffect;
 import mage.abilities.keyword.KickerAbility;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.filter.common.FilterArtifactOrEnchantmentPermanent;
 import mage.target.TargetPermanent;
 
@@ -45,9 +45,8 @@ import mage.target.TargetPermanent;
  */
 public class DismantlingBlow extends CardImpl {
 
-    public DismantlingBlow(UUID ownerId) {
-        super(ownerId, 14, "Dismantling Blow", Rarity.COMMON, new CardType[]{CardType.INSTANT}, "{2}{W}");
-        this.expansionSetCode = "INV";
+    public DismantlingBlow(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.INSTANT},"{2}{W}");
 
         // Kicker {2}{U}
         this.addAbility(new KickerAbility("{2}{U}"));

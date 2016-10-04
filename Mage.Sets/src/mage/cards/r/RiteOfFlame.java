@@ -25,15 +25,15 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.coldsnap;
+package mage.cards.r;
 
 import java.util.UUID;
 import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.Mana;
 import mage.abilities.Ability;
 import mage.abilities.effects.common.ManaEffect;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.filter.FilterCard;
 import mage.filter.predicate.mageobject.NamePredicate;
 import mage.game.Game;
@@ -45,9 +45,8 @@ import mage.players.Player;
  */
 public class RiteOfFlame extends CardImpl {
 
-    public RiteOfFlame(UUID ownerId) {
-        super(ownerId, 96, "Rite of Flame", Rarity.COMMON, new CardType[]{CardType.SORCERY}, "{R}");
-        this.expansionSetCode = "CSP";
+    public RiteOfFlame(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{R}");
 
 
         // Add {R}{R} to your mana pool, then add {R} to your mana pool for each card named Rite of Flame in each graveyard.

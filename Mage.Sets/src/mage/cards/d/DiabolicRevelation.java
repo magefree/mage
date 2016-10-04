@@ -25,18 +25,18 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.magic2013;
+package mage.cards.d;
 
 import java.util.UUID;
 
 import mage.constants.CardType;
 import mage.constants.Outcome;
-import mage.constants.Rarity;
 import mage.abilities.Ability;
 import mage.abilities.dynamicvalue.common.ManacostVariableValue;
 import mage.abilities.effects.OneShotEffect;
 import mage.cards.Card;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.Zone;
 import mage.filter.FilterCard;
 import mage.game.Game;
@@ -49,9 +49,8 @@ import mage.target.common.TargetCardInLibrary;
  */
 public class DiabolicRevelation extends CardImpl {
 
-    public DiabolicRevelation(UUID ownerId) {
-        super(ownerId, 87, "Diabolic Revelation", Rarity.RARE, new CardType[]{CardType.SORCERY}, "{X}{3}{B}{B}");
-        this.expansionSetCode = "M13";
+    public DiabolicRevelation(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{X}{3}{B}{B}");
 
 
         // Search your library for up to X cards and put those cards into your hand. Then shuffle your library.

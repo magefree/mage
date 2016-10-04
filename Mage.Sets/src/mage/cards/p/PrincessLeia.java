@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.starwars;
+package mage.cards.p;
 
 import java.util.UUID;
 import mage.MageInt;
@@ -37,9 +37,9 @@ import mage.abilities.effects.common.CreateTokenEffect;
 import mage.abilities.effects.common.continuous.BoostControlledEffect;
 import mage.abilities.effects.common.continuous.BoostSourceEffect;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Duration;
-import mage.constants.Rarity;
 import mage.constants.Zone;
 import mage.filter.common.FilterControlledCreaturePermanent;
 import mage.filter.common.FilterCreaturePermanent;
@@ -63,9 +63,8 @@ public class PrincessLeia extends CardImpl {
         filter2.add(rebel);
     }
 
-    public PrincessLeia(UUID ownerId) {
-        super(ownerId, 211, "Princess Leia", Rarity.RARE, new CardType[]{CardType.CREATURE}, "{3}{G}{U}{W}");
-        this.expansionSetCode = "SWS";
+    public PrincessLeia(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{3}{G}{U}{W}");
         this.supertype.add("Legendary");
         this.subtype.add("Human");
         this.subtype.add("Rebel");

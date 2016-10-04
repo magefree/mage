@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.saviorsofkamigawa;
+package mage.cards.d;
 
 import java.util.UUID;
 import mage.abilities.Ability;
@@ -37,8 +37,8 @@ import mage.abilities.effects.common.GainLifeEffect;
 import mage.abilities.effects.common.LoseLifeTargetEffect;
 import mage.abilities.effects.common.ReturnSourceFromGraveyardToHandEffect;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.constants.TargetController;
 import mage.constants.Zone;
 import mage.target.TargetPlayer;
@@ -49,9 +49,8 @@ import mage.target.TargetPlayer;
  */
 public class DeathOfAThousandStings extends CardImpl {
 
-    public DeathOfAThousandStings(UUID ownerId) {
-        super(ownerId, 64, "Death of a Thousand Stings", Rarity.COMMON, new CardType[]{CardType.INSTANT}, "{4}{B}");
-        this.expansionSetCode = "SOK";
+    public DeathOfAThousandStings(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.INSTANT},"{4}{B}");
         this.subtype.add("Arcane");
 
         // Target player loses 1 life and you gain 1 life.

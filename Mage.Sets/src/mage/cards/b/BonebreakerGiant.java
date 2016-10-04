@@ -26,23 +26,22 @@
  *  or implied, of BetaSteward_at_googlemail.com.
  */
 
-package mage.sets.magic2012;
+package mage.cards.b;
 
 import java.util.UUID;
 
 import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.MageInt;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 
 /**
  * @author Loki
  */
 public class BonebreakerGiant extends CardImpl {
 
-    public BonebreakerGiant(UUID ownerId) {
-        super(ownerId, 123, "Bonebreaker Giant", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{4}{R}");
-        this.expansionSetCode = "M12";
+    public BonebreakerGiant(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{4}{R}");
         this.subtype.add("Giant");
 
         this.power = new MageInt(4);

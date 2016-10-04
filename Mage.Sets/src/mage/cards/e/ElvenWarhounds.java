@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.tempest;
+package mage.cards.e;
 
 import java.util.UUID;
 import mage.MageInt;
@@ -33,8 +33,8 @@ import mage.abilities.common.BecomesBlockedByCreatureTriggeredAbility;
 import mage.abilities.effects.Effect;
 import mage.abilities.effects.common.PutOnLibraryTargetEffect;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.Rarity;
 
 /**
  *
@@ -42,9 +42,8 @@ import mage.constants.Rarity;
  */
 public class ElvenWarhounds extends CardImpl {
 
-    public ElvenWarhounds(UUID ownerId) {
-        super(ownerId, 119, "Elven Warhounds", Rarity.RARE, new CardType[]{CardType.CREATURE}, "{3}{G}");
-        this.expansionSetCode = "TMP";
+    public ElvenWarhounds(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{3}{G}");
         this.subtype.add("Hound");
         this.power = new MageInt(2);
         this.toughness = new MageInt(2);

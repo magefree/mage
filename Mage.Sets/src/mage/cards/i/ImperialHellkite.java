@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.archenemy;
+package mage.cards.i;
 
 import java.util.UUID;
 import mage.MageInt;
@@ -36,8 +36,8 @@ import mage.abilities.effects.common.search.SearchLibraryPutInHandEffect;
 import mage.abilities.keyword.FlyingAbility;
 import mage.abilities.keyword.MorphAbility;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.filter.common.FilterBySubtypeCard;
 import mage.target.common.TargetCardInLibrary;
 
@@ -47,9 +47,8 @@ import mage.target.common.TargetCardInLibrary;
  */
 public class ImperialHellkite extends CardImpl {
     
-    public ImperialHellkite(UUID ownerId) {
-        super(ownerId, 42, "Imperial Hellkite", Rarity.RARE, new CardType[]{CardType.CREATURE}, "{5}{R}{R}");
-        this.expansionSetCode = "ARC";
+    public ImperialHellkite(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{5}{R}{R}");
         this.subtype.add("Dragon");
         this.power = new MageInt(6);
         this.toughness = new MageInt(6);

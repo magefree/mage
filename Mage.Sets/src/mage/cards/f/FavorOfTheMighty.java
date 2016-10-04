@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.lorwyn;
+package mage.cards.f;
 
 import java.util.UUID;
 import mage.ObjectColor;
@@ -34,11 +34,11 @@ import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.effects.ContinuousEffectImpl;
 import mage.abilities.keyword.ProtectionAbility;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Duration;
 import mage.constants.Layer;
 import mage.constants.Outcome;
-import mage.constants.Rarity;
 import mage.constants.SubLayer;
 import mage.constants.Zone;
 import mage.filter.Filter.ComparisonType;
@@ -57,9 +57,8 @@ import mage.game.permanent.Permanent;
  */
 public class FavorOfTheMighty extends CardImpl {
 
-    public FavorOfTheMighty(UUID ownerId) {
-        super(ownerId, 14, "Favor of the Mighty", Rarity.RARE, new CardType[]{CardType.TRIBAL, CardType.ENCHANTMENT}, "{1}{W}");
-        this.expansionSetCode = "LRW";
+    public FavorOfTheMighty(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.TRIBAL,CardType.ENCHANTMENT},"{1}{W}");
         this.subtype.add("Giant");
 
 

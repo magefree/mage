@@ -26,13 +26,13 @@
  *  or implied, of BetaSteward_at_googlemail.com.
  */
 
-package mage.sets.riseoftheeldrazi;
+package mage.cards.u;
 
 import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.abilities.Ability;
 import mage.abilities.effects.common.CounterTargetEffect;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.game.Game;
 import mage.game.stack.StackObject;
@@ -46,9 +46,8 @@ import java.util.UUID;
  */
 public class UnifiedWill extends CardImpl {
 
-    public UnifiedWill(UUID ownerId) {
-        super(ownerId, 92, "Unified Will", Rarity.UNCOMMON, new CardType[]{CardType.INSTANT}, "{1}{U}");
-        this.expansionSetCode = "ROE";
+    public UnifiedWill(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.INSTANT},"{1}{U}");
 
         this.getSpellAbility().addTarget(new TargetSpell());
         this.getSpellAbility().addEffect(new UnifiedWillEffect());

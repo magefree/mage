@@ -25,15 +25,15 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.dragonsoftarkir;
+package mage.cards.a;
 
 import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.common.EntersBattlefieldControlledTriggeredAbility;
 import mage.abilities.effects.keyword.BolsterEffect;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.constants.Zone;
 import mage.filter.common.FilterControlledCreaturePermanent;
 import mage.filter.predicate.Predicates;
@@ -53,9 +53,8 @@ public class AnafenzaKinTreeSpirit extends CardImpl {
         filter.add(new AnotherPredicate());
     }
 
-    public AnafenzaKinTreeSpirit(UUID ownerId) {
-        super(ownerId, 2, "Anafenza, Kin-Tree Spirit", Rarity.RARE, new CardType[]{CardType.CREATURE}, "{W}{W}");
-        this.expansionSetCode = "DTK";
+    public AnafenzaKinTreeSpirit(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{W}{W}");
         this.supertype.add("Legendary");
         this.subtype.add("Spirit");
         this.subtype.add("Soldier");

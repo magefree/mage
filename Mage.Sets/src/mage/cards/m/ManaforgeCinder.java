@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.shadowmoor;
+package mage.cards.m;
 
 import java.util.LinkedHashSet;
 import java.util.Set;
@@ -37,11 +37,11 @@ import mage.abilities.common.LimitedTimesPerTurnActivatedAbility;
 import mage.abilities.costs.mana.ManaCostsImpl;
 import mage.abilities.effects.OneShotEffect;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.choices.Choice;
 import mage.choices.ChoiceImpl;
 import mage.constants.CardType;
 import mage.constants.Outcome;
-import mage.constants.Rarity;
 import mage.constants.Zone;
 import mage.game.Game;
 import mage.players.Player;
@@ -52,9 +52,8 @@ import mage.players.Player;
  */
 public class ManaforgeCinder extends CardImpl {
 
-    public ManaforgeCinder(UUID ownerId) {
-        super(ownerId, 191, "Manaforge Cinder", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{B/R}");
-        this.expansionSetCode = "SHM";
+    public ManaforgeCinder(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{B/R}");
         this.subtype.add("Elemental");
         this.subtype.add("Shaman");
         this.power = new MageInt(1);

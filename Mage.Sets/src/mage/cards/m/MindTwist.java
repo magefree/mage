@@ -25,14 +25,14 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.limitedalpha;
+package mage.cards.m;
 
 import java.util.UUID;
 import mage.abilities.dynamicvalue.common.ManacostVariableValue;
 import mage.abilities.effects.common.discard.DiscardTargetEffect;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.target.TargetPlayer;
 
 /**
@@ -41,9 +41,8 @@ import mage.target.TargetPlayer;
  */
 public class MindTwist extends CardImpl {
 
-    public MindTwist(UUID ownerId) {
-        super(ownerId, 24, "Mind Twist", Rarity.RARE, new CardType[]{CardType.SORCERY}, "{X}{B}");
-        this.expansionSetCode = "LEA";
+    public MindTwist(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{X}{B}");
 
 
         // Target player discards X cards at random.

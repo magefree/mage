@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.thedark;
+package mage.cards.v;
 
 import java.util.UUID;
 import mage.abilities.Ability;
@@ -37,9 +37,9 @@ import mage.abilities.effects.common.CreateDelayedTriggeredAbilityEffect;
 import mage.abilities.effects.common.DestroyTargetEffect;
 import mage.abilities.keyword.EnchantAbility;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Outcome;
-import mage.constants.Rarity;
 import mage.constants.Zone;
 import mage.game.Game;
 import mage.game.events.GameEvent;
@@ -54,9 +54,8 @@ import mage.target.targetpointer.FixedTarget;
  */
 public class Venom extends CardImpl {
 
-    public Venom(UUID ownerId) {
-        super(ownerId, 53, "Venom", Rarity.COMMON, new CardType[]{CardType.ENCHANTMENT}, "{1}{G}{G}");
-        this.expansionSetCode = "DRK";
+    public Venom(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.ENCHANTMENT},"{1}{G}{G}");
         this.subtype.add("Aura");
 
         // Enchant creature

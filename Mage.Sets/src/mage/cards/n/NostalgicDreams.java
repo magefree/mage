@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.torment;
+package mage.cards.n;
 
 import mage.abilities.Ability;
 import mage.abilities.costs.common.DiscardXTargetCost;
@@ -34,8 +34,8 @@ import mage.abilities.effects.Effect;
 import mage.abilities.effects.common.ExileSpellEffect;
 import mage.abilities.effects.common.ReturnFromGraveyardToHandTargetEffect;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.filter.FilterCard;
 import mage.game.Game;
 import mage.target.Target;
@@ -49,9 +49,8 @@ import java.util.UUID;
  */
 public class NostalgicDreams extends CardImpl {
 
-    public NostalgicDreams(UUID ownerId) {
-        super(ownerId, 135, "Nostalgic Dreams", Rarity.RARE, new CardType[]{CardType.SORCERY}, "{G}{G}");
-        this.expansionSetCode = "TOR";
+    public NostalgicDreams(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{G}{G}");
 
 
         // As an additional cost to cast Nostalgic Dreams, discard X cards.

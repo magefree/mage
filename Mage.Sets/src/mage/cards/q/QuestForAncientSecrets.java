@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.zendikar;
+package mage.cards.q;
 
 import java.util.UUID;
 import mage.abilities.Ability;
@@ -37,9 +37,9 @@ import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.counter.AddCountersSourceEffect;
 import mage.cards.Card;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Outcome;
-import mage.constants.Rarity;
 import mage.constants.TargetController;
 import mage.constants.Zone;
 import mage.counters.CounterType;
@@ -53,9 +53,8 @@ import mage.target.TargetPlayer;
  */
 public class QuestForAncientSecrets extends CardImpl {
 
-    public QuestForAncientSecrets(UUID ownerId) {
-        super(ownerId, 59, "Quest for Ancient Secrets", Rarity.UNCOMMON, new CardType[]{CardType.ENCHANTMENT}, "{U}");
-        this.expansionSetCode = "ZEN";
+    public QuestForAncientSecrets(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.ENCHANTMENT},"{U}");
 
 
         // Whenever a card is put into your graveyard from anywhere, you may put a quest counter on Quest for Ancient Secrets.

@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.gatecrash;
+package mage.cards.s;
 
 import mage.MageObject;
 import mage.abilities.Ability;
@@ -35,9 +35,9 @@ import mage.abilities.dynamicvalue.DynamicValue;
 import mage.abilities.effects.Effect;
 import mage.abilities.effects.OneShotEffect;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Outcome;
-import mage.constants.Rarity;
 import mage.filter.common.FilterControlledCreaturePermanent;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
@@ -53,9 +53,8 @@ import java.util.UUID;
  */
 public class SpellRupture extends CardImpl {
 
-    public SpellRupture(UUID ownerId) {
-        super(ownerId, 52, "Spell Rupture", Rarity.COMMON, new CardType[]{CardType.INSTANT}, "{1}{U}");
-        this.expansionSetCode = "GTC";
+    public SpellRupture(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.INSTANT},"{1}{U}");
 
 
         // Counter target spell unless its controller pays {X}, where X is the greatest power among creatures you control.

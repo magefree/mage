@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.dissension;
+package mage.cards.b;
 
 import java.util.UUID;
 
@@ -39,6 +39,7 @@ import mage.abilities.effects.common.UntapTargetEffect;
 import mage.abilities.effects.common.continuous.BoostSourceEffect;
 import mage.abilities.keyword.FlyingAbility;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.target.common.TargetCreaturePermanent;
 
 /**
@@ -47,9 +48,8 @@ import mage.target.common.TargetCreaturePermanent;
  */
 public class BeaconHawk extends CardImpl {
 
-    public BeaconHawk(UUID ownerId) {
-        super(ownerId, 3, "Beacon Hawk", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{1}{W}");
-        this.expansionSetCode = "DIS";
+    public BeaconHawk(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{1}{W}");
         this.subtype.add("Bird");
 
         this.power = new MageInt(1);

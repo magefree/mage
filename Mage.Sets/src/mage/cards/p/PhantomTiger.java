@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.judgment;
+package mage.cards.p;
 
 import java.util.UUID;
 import mage.MageInt;
@@ -35,10 +35,10 @@ import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.effects.PreventionEffectImpl;
 import mage.abilities.effects.common.counter.AddCountersSourceEffect;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Duration;
 import mage.constants.PhaseStep;
-import mage.constants.Rarity;
 import mage.constants.Zone;
 import mage.counters.CounterType;
 import mage.game.Game;
@@ -52,9 +52,8 @@ import mage.game.turn.Step;
  */
 public class PhantomTiger extends CardImpl {
 
-    public PhantomTiger(UUID ownerId) {
-        super(ownerId, 129, "Phantom Tiger", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{2}{G}");
-        this.expansionSetCode = "JUD";
+    public PhantomTiger(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{2}{G}");
         this.subtype.add("Cat");
         this.subtype.add("Spirit");
         this.power = new MageInt(1);

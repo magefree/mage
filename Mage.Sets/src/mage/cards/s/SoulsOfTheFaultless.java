@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.guildpact;
+package mage.cards.s;
 
 import java.util.UUID;
 import mage.MageInt;
@@ -35,9 +35,9 @@ import mage.abilities.effects.Effect;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.keyword.DefenderAbility;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Outcome;
-import mage.constants.Rarity;
 import mage.constants.Zone;
 import mage.game.Game;
 import mage.game.events.DamagedCreatureEvent;
@@ -52,9 +52,8 @@ import mage.players.Player;
  */
 public class SoulsOfTheFaultless extends CardImpl {
 
-    public SoulsOfTheFaultless(UUID ownerId) {
-        super(ownerId, 131, "Souls of the Faultless", Rarity.UNCOMMON, new CardType[]{CardType.CREATURE}, "{W}{B}{B}");
-        this.expansionSetCode = "GPT";
+    public SoulsOfTheFaultless(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{W}{B}{B}");
         this.subtype.add("Spirit");
 
         this.power = new MageInt(0);

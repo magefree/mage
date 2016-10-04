@@ -26,15 +26,15 @@
 * or implied, of BetaSteward_at_googlemail.com.
 */
 
-package mage.sets.zendikar;
+package mage.cards.b;
 
 import java.util.UUID;
 import mage.ObjectColor;
 import mage.abilities.effects.common.continuous.GainProtectionFromColorAllEffect;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Duration;
-import mage.constants.Rarity;
 import mage.filter.common.FilterControlledCreaturePermanent;
 import mage.filter.predicate.mageobject.ColorPredicate;
 
@@ -50,9 +50,8 @@ public class BraveTheElements extends CardImpl {
         filter.add(new ColorPredicate(ObjectColor.WHITE));
     }
 
-    public BraveTheElements(UUID ownerId) {
-        super(ownerId, 4, "Brave the Elements", Rarity.UNCOMMON, new CardType[]{CardType.INSTANT}, "{W}");
-        this.expansionSetCode = "ZEN";
+    public BraveTheElements(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.INSTANT},"{W}");
 
 
         // Choose a color. White creatures you control gain protection from the chosen color until end of turn.

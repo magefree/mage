@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.magic2014;
+package mage.cards.r;
 
 import java.util.LinkedHashSet;
 import java.util.Set;
@@ -34,9 +34,9 @@ import mage.abilities.Ability;
 import mage.abilities.effects.OneShotEffect;
 import mage.cards.Card;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Outcome;
-import mage.constants.Rarity;
 import mage.constants.Zone;
 import mage.game.Game;
 import mage.players.Player;
@@ -47,9 +47,8 @@ import mage.players.Player;
  */
 public class RiseOfTheDarkRealms extends CardImpl {
 
-    public RiseOfTheDarkRealms(UUID ownerId) {
-        super(ownerId, 111, "Rise of the Dark Realms", Rarity.MYTHIC, new CardType[]{CardType.SORCERY}, "{7}{B}{B}");
-        this.expansionSetCode = "M14";
+    public RiseOfTheDarkRealms(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{7}{B}{B}");
 
         // Put all creature cards from all graveyards onto the battlefield under your control.
         this.getSpellAbility().addEffect(new RiseOfTheDarkRealmsEffect());

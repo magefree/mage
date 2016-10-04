@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.battleforzendikar;
+package mage.cards.l;
 
 import java.util.UUID;
 import mage.abilities.Ability;
@@ -37,9 +37,9 @@ import mage.abilities.effects.common.continuous.GainAbilityTargetEffect;
 import mage.abilities.keyword.FirstStrikeAbility;
 import mage.abilities.mana.RedManaAbility;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Duration;
-import mage.constants.Rarity;
 import mage.target.common.TargetCreaturePermanent;
 
 /**
@@ -48,9 +48,8 @@ import mage.target.common.TargetCreaturePermanent;
  */
 public class LoomingSpires extends CardImpl {
 
-    public LoomingSpires(UUID ownerId) {
-        super(ownerId, 238, "Looming Spires", Rarity.COMMON, new CardType[]{CardType.LAND}, "");
-        this.expansionSetCode = "BFZ";
+    public LoomingSpires(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.LAND},"");
 
         // Looming Spires enters the battlefield tapped.
         this.addAbility(new EntersBattlefieldTappedAbility());

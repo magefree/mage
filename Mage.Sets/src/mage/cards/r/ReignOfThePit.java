@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.vintagemasters;
+package mage.cards.r;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -36,9 +36,9 @@ import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.CreateTokenEffect;
 import mage.abilities.keyword.FlyingAbility;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Outcome;
-import mage.constants.Rarity;
 import mage.filter.common.FilterControlledCreaturePermanent;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
@@ -52,9 +52,8 @@ import mage.target.common.TargetControlledCreaturePermanent;
  */
 public class ReignOfThePit extends CardImpl {
 
-    public ReignOfThePit(UUID ownerId) {
-        super(ownerId, 138, "Reign of the Pit", Rarity.RARE, new CardType[]{CardType.SORCERY}, "{4}{B}{B}");
-        this.expansionSetCode = "VMA";
+    public ReignOfThePit(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{4}{B}{B}");
 
         // Each player sacrifices a creature. Put an X/X black Demon creature token with flying onto the battlefield, where X is the total power of the creatures sacrificed this way.
         this.getSpellAbility().addEffect(new ReignOfThePitEffect());

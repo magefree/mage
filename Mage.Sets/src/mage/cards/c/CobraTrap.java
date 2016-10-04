@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.zendikar;
+package mage.cards.c;
 
 import java.util.HashSet;
 import java.util.Set;
@@ -36,8 +36,8 @@ import mage.abilities.costs.AlternativeCostSourceAbility;
 import mage.abilities.costs.mana.ManaCostsImpl;
 import mage.abilities.effects.common.CreateTokenEffect;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.constants.WatcherScope;
 import mage.game.Game;
 import mage.game.events.GameEvent;
@@ -53,9 +53,8 @@ import mage.watchers.Watcher;
  */
 public class CobraTrap extends CardImpl {
 
-    public CobraTrap(UUID ownerId) {
-        super(ownerId, 160, "Cobra Trap", Rarity.UNCOMMON, new CardType[]{CardType.INSTANT}, "{4}{G}{G}");
-        this.expansionSetCode = "ZEN";
+    public CobraTrap(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.INSTANT},"{4}{G}{G}");
         this.subtype.add("Trap");
 
         // If a noncreature permanent under your control was destroyed this turn by a spell or ability an opponent controlled, you may pay {G} rather than pay Cobra Trap's mana cost.

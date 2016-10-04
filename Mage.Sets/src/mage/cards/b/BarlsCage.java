@@ -25,16 +25,16 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.thedark;
+package mage.cards.b;
 
 import java.util.UUID;
 import mage.abilities.Ability;
 import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.costs.mana.GenericManaCost;
 import mage.abilities.effects.common.DontUntapInControllersNextUntapStepTargetEffect;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.Zone;
 import mage.target.common.TargetCreaturePermanent;
 
@@ -43,9 +43,8 @@ import mage.target.common.TargetCreaturePermanent;
  */
 public class BarlsCage extends CardImpl {
 
-    public BarlsCage(UUID ownerId) {
-        super(ownerId, 93, "Barl's Cage", Rarity.RARE, new CardType[]{CardType.ARTIFACT}, "{4}");
-        this.expansionSetCode = "DRK";
+    public BarlsCage(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.ARTIFACT},"{4}");
 
 		// {3}: Target creature doesn't untap during its controller's next untap step.
         Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new DontUntapInControllersNextUntapStepTargetEffect("Target creature"), new GenericManaCost(3));

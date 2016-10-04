@@ -25,17 +25,17 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.magic2013;
+package mage.cards.b;
 
 import java.util.UUID;
 import mage.abilities.Ability;
 import mage.abilities.dynamicvalue.common.PermanentsOnBattlefieldCount;
 import mage.abilities.effects.OneShotEffect;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.cards.CardsImpl;
 import mage.constants.CardType;
 import mage.constants.Outcome;
-import mage.constants.Rarity;
 import mage.constants.TargetController;
 import mage.constants.Zone;
 import mage.filter.common.FilterBasicLandCard;
@@ -51,9 +51,8 @@ import mage.target.common.TargetCardInLibrary;
  */
 public class BoundlessRealms extends CardImpl {
 
-    public BoundlessRealms(UUID ownerId) {
-        super(ownerId, 162, "Boundless Realms", Rarity.RARE, new CardType[]{CardType.SORCERY}, "{6}{G}");
-        this.expansionSetCode = "M13";
+    public BoundlessRealms(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{6}{G}");
 
         // Search your library for up to X basic land cards, where X is the number of lands you control, and put them onto the battlefield tapped. Then shuffle your library.
         this.getSpellAbility().addEffect(new BoundlessRealmsEffect());

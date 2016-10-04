@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.starwars;
+package mage.cards.d;
 
 import java.util.UUID;
 import mage.abilities.Ability;
@@ -34,8 +34,8 @@ import mage.abilities.condition.common.HateCondition;
 import mage.abilities.decorator.ConditionalTriggeredAbility;
 import mage.abilities.effects.common.DamageTargetEffect;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.constants.TargetController;
 import mage.target.TargetPlayer;
 import mage.watchers.common.LifeLossOtherFromCombatWatcher;
@@ -46,9 +46,8 @@ import mage.watchers.common.LifeLossOtherFromCombatWatcher;
  */
 public class DarkApprenticeship extends CardImpl {
 
-    public DarkApprenticeship(UUID ownerId) {
-        super(ownerId, 101, "Dark Apprenticeship", Rarity.UNCOMMON, new CardType[]{CardType.ENCHANTMENT}, "{1}{R}");
-        this.expansionSetCode = "SWS";
+    public DarkApprenticeship(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.ENCHANTMENT},"{1}{R}");
 
         // <i>Hate</i> &mdash; At the beggining of each end step, if an opponent lost life from source other than combat damage this turn, Dark Apprenticeship deals 2 damage to target player.
         Ability ability = new ConditionalTriggeredAbility(

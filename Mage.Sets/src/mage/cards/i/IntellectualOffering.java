@@ -25,15 +25,15 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.commander2014;
+package mage.cards.i;
 
 import java.util.UUID;
 import mage.abilities.Ability;
 import mage.abilities.effects.OneShotEffect;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Outcome;
-import mage.constants.Rarity;
 import mage.filter.common.FilterNonlandPermanent;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
@@ -47,9 +47,8 @@ import mage.target.common.TargetOpponent;
  */
 public class IntellectualOffering extends CardImpl {
 
-    public IntellectualOffering(UUID ownerId) {
-        super(ownerId, 15, "Intellectual Offering", Rarity.RARE, new CardType[]{CardType.INSTANT}, "{4}{U}");
-        this.expansionSetCode = "C14";
+    public IntellectualOffering(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.INSTANT},"{4}{U}");
 
 
         // Choose an opponent. You and that player each draw three cards.

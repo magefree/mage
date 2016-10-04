@@ -26,16 +26,16 @@
  *  or implied, of BetaSteward_at_googlemail.com.
  */
 
-package mage.sets.championsofkamigawa;
+package mage.cards.h;
 
 import java.util.UUID;
 
 import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.abilities.common.BeginningOfUpkeepTriggeredAbility;
 import mage.abilities.dynamicvalue.common.PermanentsOnBattlefieldCount;
 import mage.abilities.effects.common.DrawCardSourceControllerEffect;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.TargetController;
 import mage.filter.common.FilterControlledPermanent;
 import mage.filter.predicate.mageobject.SubtypePredicate;
@@ -51,9 +51,8 @@ public class HondenOfSeeingWinds extends CardImpl {
         filter.add(new SubtypePredicate("Shrine"));
     }
 
-    public HondenOfSeeingWinds(UUID ownerId) {
-        super(ownerId, 69, "Honden of Seeing Winds", Rarity.UNCOMMON, new CardType[]{CardType.ENCHANTMENT}, "{4}{U}");
-        this.expansionSetCode = "CHK";
+    public HondenOfSeeingWinds(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.ENCHANTMENT},"{4}{U}");
         this.supertype.add("Legendary");
         this.subtype.add("Shrine");
 

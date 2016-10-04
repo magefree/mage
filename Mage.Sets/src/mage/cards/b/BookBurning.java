@@ -25,16 +25,16 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.judgment;
+package mage.cards.b;
 
 import java.util.UUID;
 import mage.MageObject;
 import mage.abilities.Ability;
 import mage.abilities.effects.OneShotEffect;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Outcome;
-import mage.constants.Rarity;
 import mage.constants.Zone;
 import mage.game.Game;
 import mage.players.Player;
@@ -46,9 +46,8 @@ import mage.target.TargetPlayer;
  */
 public class BookBurning extends CardImpl {
 
-    public BookBurning(UUID ownerId) {
-        super(ownerId, 80, "Book Burning", Rarity.COMMON, new CardType[]{CardType.SORCERY}, "{1}{R}");
-        this.expansionSetCode = "JUD";
+    public BookBurning(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{1}{R}");
 
         // Any player may have Book Burning deal 6 damage to him or her. If no one does, target player puts the top six cards of his or her library into his or her graveyard.
         this.getSpellAbility().addEffect(new BookBurningMillEffect());

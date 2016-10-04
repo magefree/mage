@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.innistrad;
+package mage.cards.g;
 
 import mage.abilities.Ability;
 import mage.abilities.LoyaltyAbility;
@@ -39,6 +39,7 @@ import mage.abilities.effects.common.continuous.GainAbilityControlledEffect;
 import mage.abilities.keyword.TrampleAbility;
 import mage.cards.Card;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.cards.Cards;
 import mage.cards.CardsImpl;
 import mage.constants.*;
@@ -60,9 +61,8 @@ import mage.filter.common.FilterControlledCreaturePermanent;
  */
 public class GarrukTheVeilCursed extends CardImpl {
 
-    public GarrukTheVeilCursed(UUID ownerId) {
-        super(ownerId, 1181, "Garruk, the Veil-Cursed", Rarity.MYTHIC, new CardType[]{CardType.PLANESWALKER}, "");
-        this.expansionSetCode = "ISD";
+    public GarrukTheVeilCursed(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.PLANESWALKER},"");
         this.subtype.add("Garruk");
 
         // this card is the second face of double-faced card

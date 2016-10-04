@@ -26,7 +26,7 @@
  *  or implied, of BetaSteward_at_googlemail.com.
  */
 
-package mage.sets.conflux;
+package mage.cards.b;
 
 import java.util.UUID;
 import mage.MageInt;
@@ -34,8 +34,8 @@ import mage.ObjectColor;
 import mage.abilities.TriggeredAbilityImpl;
 import mage.abilities.effects.common.counter.AddCountersSourceEffect;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.constants.Zone;
 import mage.counters.CounterType;
 import mage.filter.FilterPermanent;
@@ -51,9 +51,8 @@ import mage.game.events.GameEvent.EventType;
  */
 public class BloodhallOoze extends CardImpl {
 
-    public BloodhallOoze(UUID ownerId) {
-        super(ownerId, 59, "Bloodhall Ooze", Rarity.RARE, new CardType[]{CardType.CREATURE}, "{R}");
-        this.expansionSetCode = "CON";
+    public BloodhallOoze(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{R}");
 
         this.subtype.add("Ooze");
         this.power = new MageInt(1);

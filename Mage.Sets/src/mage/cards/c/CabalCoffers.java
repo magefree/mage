@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.planechase;
+package mage.cards.c;
 
 import java.util.UUID;
 import mage.Mana;
@@ -35,8 +35,8 @@ import mage.abilities.costs.mana.GenericManaCost;
 import mage.abilities.dynamicvalue.common.PermanentsOnBattlefieldCount;
 import mage.abilities.mana.DynamicManaAbility;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.filter.common.FilterControlledPermanent;
 import mage.filter.predicate.mageobject.SubtypePredicate;
 
@@ -52,9 +52,8 @@ public class CabalCoffers extends CardImpl {
         filter.add(new SubtypePredicate("Swamp"));
     }
 
-    public CabalCoffers(UUID ownerId) {
-        super(ownerId, 132, "Cabal Coffers", Rarity.UNCOMMON, new CardType[]{CardType.LAND}, "");
-        this.expansionSetCode = "HOP";
+    public CabalCoffers(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.LAND},"");
 
         // {2}, {tap}: Add {B} to your mana pool for each Swamp you control.
         Ability ability = new DynamicManaAbility(Mana.BlackMana(1), new PermanentsOnBattlefieldCount(filter), new GenericManaCost(2));

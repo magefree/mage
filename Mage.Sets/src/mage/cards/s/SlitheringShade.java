@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.dissension;
+package mage.cards.s;
 
 import java.util.UUID;
 import mage.MageInt;
@@ -39,9 +39,9 @@ import mage.abilities.effects.common.combat.CanAttackAsThoughItDidntHaveDefender
 import mage.abilities.effects.common.continuous.BoostSourceEffect;
 import mage.abilities.keyword.DefenderAbility;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Duration;
-import mage.constants.Rarity;
 import mage.constants.Zone;
 
 /**
@@ -50,9 +50,8 @@ import mage.constants.Zone;
  */
 public class SlitheringShade extends CardImpl {
 
-    public SlitheringShade(UUID ownerId) {
-        super(ownerId, 55, "Slithering Shade", Rarity.UNCOMMON, new CardType[]{CardType.CREATURE}, "{B}");
-        this.expansionSetCode = "DIS";
+    public SlitheringShade(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{B}");
         this.subtype.add("Shade");
 
         this.power = new MageInt(0);

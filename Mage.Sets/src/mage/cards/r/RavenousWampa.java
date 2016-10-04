@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.starwars;
+package mage.cards.r;
 
 import java.util.UUID;
 import mage.MageInt;
@@ -36,17 +36,18 @@ import mage.abilities.costs.common.SacrificeTargetCost;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.keyword.MonstrosityAbility;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Outcome;
-import mage.constants.Rarity;
 import mage.filter.common.FilterControlledCreaturePermanent;
 import mage.filter.predicate.permanent.AnotherPredicate;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.players.Player;
-import static mage.sets.starwars.RavenousWampa.RAVENOUS_WAMPA_STATE_VALUE_KEY_PREFIX;
 import mage.target.common.TargetControlledCreaturePermanent;
 import mage.target.common.TargetControlledPermanent;
+
+import static mage.cards.r.RavenousWampa.RAVENOUS_WAMPA_STATE_VALUE_KEY_PREFIX;
 
 /**
  *
@@ -62,9 +63,8 @@ public class RavenousWampa extends CardImpl {
 
     public static final String RAVENOUS_WAMPA_STATE_VALUE_KEY_PREFIX = "TOU_SAC_CRE";
 
-    public RavenousWampa(UUID ownerId) {
-        super(ownerId, 229, "Ravenous Wampa", Rarity.UNCOMMON, new CardType[]{CardType.CREATURE}, "{2}{R/W}{R/W}");
-        this.expansionSetCode = "SWS";
+    public RavenousWampa(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{2}{R/W}{R/W}");
         this.subtype.add("Beast");
         this.power = new MageInt(4);
         this.toughness = new MageInt(4);

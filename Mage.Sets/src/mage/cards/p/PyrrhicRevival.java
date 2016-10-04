@@ -25,17 +25,17 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.eventide;
+package mage.cards.p;
 
 import java.util.UUID;
 import mage.abilities.Ability;
 import mage.abilities.effects.OneShotEffect;
 import mage.cards.Card;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.cards.Cards;
 import mage.constants.CardType;
 import mage.constants.Outcome;
-import mage.constants.Rarity;
 import mage.constants.Zone;
 import mage.counters.CounterType;
 import mage.game.Game;
@@ -49,9 +49,8 @@ import mage.players.Player;
  */
 public class PyrrhicRevival extends CardImpl {
 
-    public PyrrhicRevival(UUID ownerId) {
-        super(ownerId, 93, "Pyrrhic Revival", Rarity.RARE, new CardType[]{CardType.SORCERY}, "{3}{W/B}{W/B}{W/B}");
-        this.expansionSetCode = "EVE";
+    public PyrrhicRevival(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{3}{W/B}{W/B}{W/B}");
 
 
         // Each player returns each creature card from his or her graveyard to the battlefield with an additional -1/-1 counter on it.

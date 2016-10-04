@@ -26,18 +26,18 @@
  *  or implied, of BetaSteward_at_googlemail.com.
  */
 
-package mage.sets.tenthedition;
+package mage.cards.t;
 
 import java.util.UUID;
 import mage.constants.CardType;
 import mage.constants.Outcome;
-import mage.constants.Rarity;
 import mage.constants.Zone;
 import mage.abilities.ActivatedAbilityImpl;
 import mage.abilities.costs.common.SacrificeSourceCost;
 import mage.abilities.costs.common.TapSourceCost;
 import mage.abilities.effects.common.search.SearchLibraryPutInPlayEffect;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.filter.common.FilterBasicLandCard;
 import mage.target.common.TargetCardInLibrary;
 
@@ -47,9 +47,8 @@ import mage.target.common.TargetCardInLibrary;
  */
 public class TerramorphicExpanse extends CardImpl {
 
-    public TerramorphicExpanse(UUID ownerId) {
-        super(ownerId, 360, "Terramorphic Expanse", Rarity.COMMON, new CardType[]{CardType.LAND}, null);
-        this.expansionSetCode = "10E";
+    public TerramorphicExpanse(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.LAND},null);
         this.addAbility(new TerramorphicExpanseAbility());
     }
 

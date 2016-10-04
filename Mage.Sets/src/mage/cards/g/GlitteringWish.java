@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.futuresight;
+package mage.cards.g;
 
 import java.util.Set;
 import java.util.UUID;
@@ -34,11 +34,11 @@ import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.ExileSpellEffect;
 import mage.cards.Card;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.cards.Cards;
 import mage.cards.CardsImpl;
 import mage.constants.CardType;
 import mage.constants.Outcome;
-import mage.constants.Rarity;
 import mage.constants.Zone;
 import mage.filter.FilterCard;
 import mage.filter.predicate.mageobject.MulticoloredPredicate;
@@ -52,9 +52,8 @@ import mage.target.TargetCard;
  */
 public class GlitteringWish extends CardImpl {
 
-    public GlitteringWish(UUID ownerId) {
-        super(ownerId, 156, "Glittering Wish", Rarity.RARE, new CardType[]{CardType.SORCERY}, "{G}{W}");
-        this.expansionSetCode = "FUT";
+    public GlitteringWish(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{G}{W}");
 
         // You may choose a multicolored card you own from outside the game, reveal that card, and put it into your hand. Exile Glittering Wish.
         this.getSpellAbility().addEffect(new GlitteringWishEffect());

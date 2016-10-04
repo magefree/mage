@@ -25,15 +25,15 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.fifthdawn;
+package mage.cards.i;
 
 import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.common.CantBlockAbility;
 import mage.abilities.keyword.HasteAbility;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.Rarity;
 
 /**
  *
@@ -41,9 +41,8 @@ import mage.constants.Rarity;
  */
 public class IronBarbHellion extends CardImpl {
 
-    public IronBarbHellion(UUID ownerId) {
-        super(ownerId, 69, "Iron-Barb Hellion", Rarity.UNCOMMON, new CardType[]{CardType.CREATURE}, "{5}{R}");
-        this.expansionSetCode = "5DN";
+    public IronBarbHellion(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{5}{R}");
         this.subtype.add("Hellion");
         this.subtype.add("Beast");
 

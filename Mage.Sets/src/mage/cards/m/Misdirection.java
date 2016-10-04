@@ -25,17 +25,17 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.mercadianmasques;
+package mage.cards.m;
 
 import java.util.UUID;
 
 import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.ObjectColor;
 import mage.abilities.costs.AlternativeCostSourceAbility;
 import mage.abilities.costs.common.ExileFromHandCost;
 import mage.abilities.effects.common.ChooseNewTargetsTargetEffect;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.filter.FilterSpell;
 import mage.filter.common.FilterOwnedCard;
 import mage.filter.predicate.Predicates;
@@ -56,9 +56,8 @@ public class Misdirection extends CardImpl {
         filter2.add(new NumberOfTargetsPredicate(1));
     }
 
-    public Misdirection(UUID ownerId) {
-        super(ownerId, 87, "Misdirection", Rarity.RARE, new CardType[]{CardType.INSTANT}, "{3}{U}{U}");
-        this.expansionSetCode = "MMQ";
+    public Misdirection(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.INSTANT},"{3}{U}{U}");
 
         // You may exile a blue card from your hand rather than pay Misdirection's mana cost.
         FilterOwnedCard filterCardInHand = new FilterOwnedCard("a blue card from your hand");

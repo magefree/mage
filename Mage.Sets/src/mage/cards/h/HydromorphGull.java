@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.torment;
+package mage.cards.h;
 
 import java.util.UUID;
 import mage.MageInt;
@@ -36,9 +36,9 @@ import mage.abilities.costs.mana.ColoredManaCost;
 import mage.abilities.effects.common.CounterTargetEffect;
 import mage.abilities.keyword.FlyingAbility;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.ColoredManaSymbol;
-import mage.constants.Rarity;
 import mage.constants.Zone;
 import mage.filter.FilterSpell;
 import mage.filter.common.FilterControlledCreaturePermanent;
@@ -57,9 +57,8 @@ public class HydromorphGull extends CardImpl {
         filter.add(new TargetsPermanentPredicate(new FilterControlledCreaturePermanent()));
     }
 
-    public HydromorphGull(UUID ownerId) {
-        super(ownerId, 40, "Hydromorph Gull", Rarity.UNCOMMON, new CardType[]{CardType.CREATURE}, "{3}{U}{U}");
-        this.expansionSetCode = "TOR";
+    public HydromorphGull(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{3}{U}{U}");
         this.subtype.add("Elemental");
         this.subtype.add("Bird");
         this.power = new MageInt(3);

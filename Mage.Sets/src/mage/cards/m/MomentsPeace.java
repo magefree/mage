@@ -25,16 +25,16 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.odyssey;
+package mage.cards.m;
 
 import java.util.UUID;
 import mage.abilities.costs.mana.ManaCostsImpl;
 import mage.abilities.effects.common.PreventAllDamageByAllPermanentsEffect;
 import mage.abilities.keyword.FlashbackAbility;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Duration;
-import mage.constants.Rarity;
 import mage.constants.TimingRule;
 
 /**
@@ -43,9 +43,8 @@ import mage.constants.TimingRule;
  */
 public class MomentsPeace extends CardImpl {
 
-    public MomentsPeace(UUID ownerId) {
-        super(ownerId, 251, "Moment's Peace", Rarity.COMMON, new CardType[]{CardType.INSTANT}, "{1}{G}");
-        this.expansionSetCode = "ODY";
+    public MomentsPeace(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.INSTANT},"{1}{G}");
 
         // Prevent all combat damage that would be dealt this turn.
         this.getSpellAbility().addEffect(new PreventAllDamageByAllPermanentsEffect(Duration.EndOfTurn, true));

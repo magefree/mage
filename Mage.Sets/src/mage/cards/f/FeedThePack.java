@@ -25,17 +25,17 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.darkascension;
+package mage.cards.f;
 
 import java.util.UUID;
 
 import mage.constants.CardType;
 import mage.constants.Outcome;
-import mage.constants.Rarity;
 import mage.abilities.Ability;
 import mage.abilities.common.BeginningOfYourEndStepTriggeredAbility;
 import mage.abilities.effects.OneShotEffect;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.filter.common.FilterControlledCreaturePermanent;
 import mage.filter.predicate.Predicates;
 import mage.filter.predicate.permanent.TokenPredicate;
@@ -52,9 +52,8 @@ import mage.target.TargetPermanent;
  */
 public class FeedThePack extends CardImpl {
 
-    public FeedThePack(UUID ownerId) {
-        super(ownerId, 114, "Feed the Pack", Rarity.RARE, new CardType[]{CardType.ENCHANTMENT}, "{5}{G}");
-        this.expansionSetCode = "DKA";
+    public FeedThePack(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.ENCHANTMENT},"{5}{G}");
 
 
         // At the beginning of your end step, you may sacrifice a nontoken creature. If you do, put X 2/2 green Wolf creature tokens onto the battlefield, where X is the sacrificed creature's toughness.

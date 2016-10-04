@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.magic2013;
+package mage.cards.y;
 
 import java.util.UUID;
 import mage.MageInt;
@@ -34,9 +34,9 @@ import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.effects.common.continuous.CastAsThoughItHadFlashAllEffect;
 import mage.abilities.keyword.FlashAbility;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Duration;
-import mage.constants.Rarity;
 import mage.constants.Zone;
 import mage.filter.common.FilterCreatureCard;
 import mage.filter.predicate.mageobject.ColorPredicate;
@@ -52,9 +52,8 @@ public class YevaNaturesHerald extends CardImpl {
         filter.add(new ColorPredicate(ObjectColor.GREEN));
     }
 
-    public YevaNaturesHerald(UUID ownerId) {
-        super(ownerId, 197, "Yeva, Nature's Herald", Rarity.RARE, new CardType[]{CardType.CREATURE}, "{2}{G}{G}");
-        this.expansionSetCode = "M13";
+    public YevaNaturesHerald(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{2}{G}{G}");
         this.supertype.add("Legendary");
         this.subtype.add("Elf");
         this.subtype.add("Shaman");

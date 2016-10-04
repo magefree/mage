@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.shadowsoverinnistrad;
+package mage.cards.o;
 
 import java.util.UUID;
 import mage.MageInt;
@@ -37,9 +37,9 @@ import mage.abilities.effects.common.continuous.GainAbilityTargetEffect;
 import mage.abilities.keyword.FlyingAbility;
 import mage.abilities.keyword.HasteAbility;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Duration;
-import mage.constants.Rarity;
 import mage.constants.Zone;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.filter.predicate.mageobject.SubtypePredicate;
@@ -57,9 +57,8 @@ public class OliviasBloodsworn extends CardImpl {
         filter.add(new SubtypePredicate("Vampire"));
     }
 
-    public OliviasBloodsworn(UUID ownerId) {
-        super(ownerId, 127, "Olivia's Bloodsworn", Rarity.UNCOMMON, new CardType[]{CardType.CREATURE}, "{1}{B}");
-        this.expansionSetCode = "SOI";
+    public OliviasBloodsworn(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{1}{B}");
         this.subtype.add("Vampire");
         this.subtype.add("Soldier");
         this.power = new MageInt(2);

@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.futuresight;
+package mage.cards.g;
 
 import java.util.UUID;
 import mage.ObjectColor;
@@ -35,9 +35,9 @@ import mage.abilities.effects.Effect;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.DestroyTargetEffect;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Outcome;
-import mage.constants.Rarity;
 import mage.constants.SetTargetPointer;
 import mage.constants.Zone;
 import mage.filter.common.FilterCreaturePermanent;
@@ -57,9 +57,8 @@ public class GravePeril extends CardImpl {
         filter.add(Predicates.not(new ColorPredicate(ObjectColor.BLACK)));
     }
 
-    public GravePeril(UUID ownerId) {
-        super(ownerId, 67, "Grave Peril", Rarity.COMMON, new CardType[]{CardType.ENCHANTMENT}, "{1}{B}");
-        this.expansionSetCode = "FUT";
+    public GravePeril(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.ENCHANTMENT},"{1}{B}");
 
         // When a nonblack creature enters the battlefield, sacrifice Grave Peril. If you do, destroy that creature.
         this.addAbility(new EntersBattlefieldAllTriggeredAbility(Zone.BATTLEFIELD, new GravePerilEffect(), filter, false, SetTargetPointer.PERMANENT, null));

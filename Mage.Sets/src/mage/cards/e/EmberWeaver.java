@@ -25,12 +25,11 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.conflux;
+package mage.cards.e;
 
 import java.util.UUID;
 
 import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.MageInt;
 import mage.ObjectColor;
 import mage.abilities.common.SimpleStaticAbility;
@@ -41,6 +40,7 @@ import mage.abilities.effects.common.continuous.GainAbilitySourceEffect;
 import mage.abilities.keyword.FirstStrikeAbility;
 import mage.abilities.keyword.ReachAbility;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.Duration;
 import mage.constants.Zone;
 import mage.filter.FilterPermanent;
@@ -56,9 +56,8 @@ public class EmberWeaver extends CardImpl {
         redPermanentFilter.add(new ColorPredicate(ObjectColor.RED));
     }
 
-    public EmberWeaver(UUID ownerId) {
-        super(ownerId, 81, "Ember Weaver", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{2}{G}");
-        this.expansionSetCode = "CON";
+    public EmberWeaver(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{2}{G}");
         this.subtype.add("Spider");
 
         this.power = new MageInt(2);

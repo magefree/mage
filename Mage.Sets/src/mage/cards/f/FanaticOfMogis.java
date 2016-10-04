@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.theros;
+package mage.cards.f;
 
 import java.util.UUID;
 import mage.MageInt;
@@ -34,10 +34,10 @@ import mage.abilities.dynamicvalue.common.DevotionCount;
 import mage.abilities.effects.Effect;
 import mage.abilities.effects.common.DamagePlayersEffect;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.ColoredManaSymbol;
 import mage.constants.Outcome;
-import mage.constants.Rarity;
 import mage.constants.TargetController;
 
 /**
@@ -46,9 +46,8 @@ import mage.constants.TargetController;
  */
 public class FanaticOfMogis extends CardImpl {
 
-    public FanaticOfMogis(UUID ownerId) {
-        super(ownerId, 121, "Fanatic of Mogis", Rarity.UNCOMMON, new CardType[]{CardType.CREATURE}, "{3}{R}");
-        this.expansionSetCode = "THS";
+    public FanaticOfMogis(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{3}{R}");
         this.subtype.add("Minotaur");
         this.subtype.add("Shaman");
 

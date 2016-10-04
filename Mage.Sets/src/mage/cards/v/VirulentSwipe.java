@@ -25,18 +25,18 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.riseoftheeldrazi;
+package mage.cards.v;
 
 import java.util.UUID;
 import mage.abilities.effects.Effect;
 import mage.constants.CardType;
 import mage.constants.Duration;
-import mage.constants.Rarity;
 import mage.abilities.effects.common.continuous.BoostTargetEffect;
 import mage.abilities.effects.common.continuous.GainAbilityTargetEffect;
 import mage.abilities.keyword.DeathtouchAbility;
 import mage.abilities.keyword.ReboundAbility;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.target.common.TargetCreaturePermanent;
 
 /**
@@ -45,9 +45,8 @@ import mage.target.common.TargetCreaturePermanent;
  */
 public class VirulentSwipe extends CardImpl {
 
-    public VirulentSwipe(UUID ownerId) {
-        super(ownerId, 131, "Virulent Swipe", Rarity.UNCOMMON, new CardType[]{CardType.INSTANT}, "{B}");
-        this.expansionSetCode = "ROE";
+    public VirulentSwipe(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.INSTANT},"{B}");
 
 
         // Target creature gets +2/+0 and gains deathtouch until end of turn.

@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.bornofthegods;
+package mage.cards.h;
 
 import java.util.UUID;
 import mage.MageInt;
@@ -39,9 +39,9 @@ import mage.abilities.effects.common.continuous.GainAbilityAttachedEffect;
 import mage.abilities.keyword.BestowAbility;
 import mage.abilities.keyword.FlyingAbility;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.AttachmentType;
 import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.constants.TargetController;
 import mage.constants.Zone;
 
@@ -51,9 +51,8 @@ import mage.constants.Zone;
  */
 public class HeraldOfTorment extends CardImpl {
 
-    public HeraldOfTorment(UUID ownerId) {
-        super(ownerId, 75, "Herald of Torment", Rarity.RARE, new CardType[]{CardType.ENCHANTMENT, CardType.CREATURE}, "{1}{B}{B}");
-        this.expansionSetCode = "BNG";
+    public HeraldOfTorment(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.ENCHANTMENT,CardType.CREATURE},"{1}{B}{B}");
         this.subtype.add("Demon");
 
         this.power = new MageInt(3);

@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.antiquities;
+package mage.cards.u;
 
 import java.util.UUID;
 import mage.abilities.TriggeredAbilityImpl;
@@ -33,8 +33,8 @@ import mage.abilities.costs.mana.GenericManaCost;
 import mage.abilities.effects.common.DoIfCostPaid;
 import mage.abilities.effects.common.GainLifeEffect;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.constants.Zone;
 import mage.game.Game;
 import mage.game.events.GameEvent;
@@ -46,9 +46,8 @@ import mage.game.stack.Spell;
  */
 public class UrzasChalice extends CardImpl {
 
-    public UrzasChalice(UUID ownerId) {
-        super(ownerId, 40, "Urza's Chalice", Rarity.COMMON, new CardType[]{CardType.ARTIFACT}, "{1}");
-        this.expansionSetCode = "ATQ";
+    public UrzasChalice(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.ARTIFACT},"{1}");
 
         // Whenever a player casts an artifact spell, you may pay {1}. If you do, you gain 1 life.
         this.addAbility(new UrzasChaliceAbility());

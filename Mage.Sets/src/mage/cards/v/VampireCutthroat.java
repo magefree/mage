@@ -25,15 +25,15 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.eldritchmoon;
+package mage.cards.v;
 
 import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.keyword.SkulkAbility;
 import mage.abilities.keyword.LifelinkAbility;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.Rarity;
 
 /**
  *
@@ -41,9 +41,8 @@ import mage.constants.Rarity;
  */
 public class VampireCutthroat extends CardImpl {
 
-    public VampireCutthroat(UUID ownerId) {
-        super(ownerId, 110, "Vampire Cutthroat", Rarity.UNCOMMON, new CardType[]{CardType.CREATURE}, "{B}");
-        this.expansionSetCode = "EMN";
+    public VampireCutthroat(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{B}");
         this.subtype.add("Vampire");
         this.subtype.add("Rogue");
         this.power = new MageInt(1);

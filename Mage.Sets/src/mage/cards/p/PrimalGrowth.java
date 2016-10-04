@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.planeshift;
+package mage.cards.p;
 
 import java.util.UUID;
 import mage.abilities.condition.common.KickedCondition;
@@ -34,8 +34,8 @@ import mage.abilities.decorator.ConditionalOneShotEffect;
 import mage.abilities.effects.common.search.SearchLibraryPutInPlayEffect;
 import mage.abilities.keyword.KickerAbility;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.filter.common.FilterBasicLandCard;
 import mage.target.common.TargetCardInLibrary;
 import mage.target.common.TargetControlledCreaturePermanent;
@@ -46,9 +46,8 @@ import mage.target.common.TargetControlledCreaturePermanent;
  */
 public class PrimalGrowth extends CardImpl {
 
-    public PrimalGrowth(UUID ownerId) {
-        super(ownerId, 87, "Primal Growth", Rarity.COMMON, new CardType[]{CardType.SORCERY}, "{2}{G}");
-        this.expansionSetCode = "PLS";
+    public PrimalGrowth(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{2}{G}");
 
         // Kicker-Sacrifice a creature.
         this.addAbility(new KickerAbility(new SacrificeTargetCost(new TargetControlledCreaturePermanent())));

@@ -25,16 +25,16 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.apocalypse;
+package mage.cards.l;
 
 import java.util.UUID;
 import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.MageInt;
 import mage.abilities.keyword.FlyingAbility;
 import mage.abilities.keyword.HasteAbility;
 import mage.abilities.keyword.VigilanceAbility;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 
 /**
  *
@@ -42,9 +42,8 @@ import mage.cards.CardImpl;
  */
 public class LightningAngel extends CardImpl {
 
-    public LightningAngel(UUID ownerId) {
-        super(ownerId, 108, "Lightning Angel", Rarity.RARE, new CardType[]{CardType.CREATURE}, "{1}{R}{W}{U}");
-        this.expansionSetCode = "APC";
+    public LightningAngel(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{1}{R}{W}{U}");
         this.subtype.add("Angel");
 
         this.power = new MageInt(3);

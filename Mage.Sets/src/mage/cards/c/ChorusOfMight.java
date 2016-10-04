@@ -26,17 +26,17 @@
  *  or implied, of BetaSteward_at_googlemail.com.
  */
 
-package mage.sets.returntoravnica;
+package mage.cards.c;
 
 import java.util.UUID;
 
 import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.abilities.dynamicvalue.common.PermanentsOnBattlefieldCount;
 import mage.abilities.effects.common.continuous.BoostTargetEffect;
 import mage.abilities.effects.common.continuous.GainAbilityTargetEffect;
 import mage.abilities.keyword.TrampleAbility;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.Duration;
 import mage.filter.common.FilterControlledCreaturePermanent;
 import mage.target.common.TargetCreaturePermanent;
@@ -47,9 +47,8 @@ import mage.target.common.TargetCreaturePermanent;
  */
 public class ChorusOfMight extends CardImpl {
 
-    public ChorusOfMight(UUID ownerId) {
-        super(ownerId, 119, "Chorus of Might", Rarity.COMMON, new CardType[]{CardType.INSTANT}, "{3}{G}");
-        this.expansionSetCode = "RTR";
+    public ChorusOfMight(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.INSTANT},"{3}{G}");
 
         
         // Until end of turn, target creature gets +1/+1 for each creature you control and gains trample.

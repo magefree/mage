@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.shardsofalara;
+package mage.cards.v;
 
 import java.util.UUID;
 
@@ -39,8 +39,8 @@ import mage.abilities.effects.common.DamageEachOtherEffect;
 import mage.abilities.effects.common.counter.AddCountersSourceEffect;
 import mage.abilities.keyword.FlyingAbility;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.constants.Zone;
 import mage.counters.CounterType;
 import mage.target.common.TargetCreaturePermanent;
@@ -51,9 +51,8 @@ import mage.target.common.TargetCreaturePermanent;
  */
 public class VeinDrinker extends CardImpl {
 
-    public VeinDrinker(UUID ownerId) {
-        super(ownerId, 91, "Vein Drinker", Rarity.RARE, new CardType[]{CardType.CREATURE}, "{4}{B}{B}");
-        this.expansionSetCode = "ALA";
+    public VeinDrinker(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{4}{B}{B}");
         this.subtype.add("Vampire");
 
         this.power = new MageInt(4);

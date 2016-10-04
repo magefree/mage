@@ -25,16 +25,16 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.timespiral;
+package mage.cards.s;
 
 import java.util.UUID;
 import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.abilities.Ability;
 import mage.abilities.SpellAbility;
 import mage.abilities.effects.common.CounterTargetEffect;
 import mage.abilities.keyword.BuybackAbility;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.filter.Filter;
 import mage.filter.FilterSpell;
 import mage.filter.predicate.mageobject.ConvertedManaCostPredicate;
@@ -47,9 +47,8 @@ import mage.target.TargetSpell;
  */
 public class SpellBurst extends CardImpl {
 
-    public SpellBurst(UUID ownerId) {
-        super(ownerId, 79, "Spell Burst", Rarity.UNCOMMON, new CardType[]{CardType.INSTANT}, "{X}{U}");
-        this.expansionSetCode = "TSP";
+    public SpellBurst(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.INSTANT},"{X}{U}");
 
 
         // Buyback {3}

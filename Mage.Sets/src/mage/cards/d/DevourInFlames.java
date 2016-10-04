@@ -25,14 +25,14 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.oathofthegatewatch;
+package mage.cards.d;
 
 import java.util.UUID;
 import mage.abilities.costs.common.ReturnToHandChosenControlledPermanentCost;
 import mage.abilities.effects.common.DamageTargetEffect;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.filter.common.FilterControlledLandPermanent;
 import mage.target.common.TargetControlledPermanent;
 import mage.target.common.TargetCreatureOrPlaneswalker;
@@ -43,9 +43,8 @@ import mage.target.common.TargetCreatureOrPlaneswalker;
  */
 public class DevourInFlames extends CardImpl {
 
-    public DevourInFlames(UUID ownerId) {
-        super(ownerId, 106, "Devour in Flames", Rarity.UNCOMMON, new CardType[]{CardType.SORCERY}, "{2}{R}");
-        this.expansionSetCode = "OGW";
+    public DevourInFlames(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{2}{R}");
 
         // As an additional cost to cast Devour in Flames, return a land you control to its owner's hand.
         this.getSpellAbility().addCost(new ReturnToHandChosenControlledPermanentCost(new TargetControlledPermanent(new FilterControlledLandPermanent("land"))));

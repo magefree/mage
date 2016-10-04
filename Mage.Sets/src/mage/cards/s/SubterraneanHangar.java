@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.mercadianmasques;
+package mage.cards.s;
 
 import java.util.UUID;
 import mage.Mana;
@@ -39,8 +39,8 @@ import mage.abilities.dynamicvalue.common.RemovedCountersForCostValue;
 import mage.abilities.effects.common.counter.AddCountersSourceEffect;
 import mage.abilities.mana.DynamicManaAbility;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.constants.Zone;
 import mage.counters.CounterType;
 
@@ -50,9 +50,8 @@ import mage.counters.CounterType;
  */
 public class SubterraneanHangar extends CardImpl {
 
-    public SubterraneanHangar(UUID ownerId) {
-        super(ownerId, 329, "Subterranean Hangar", Rarity.UNCOMMON, new CardType[]{CardType.LAND}, "");
-        this.expansionSetCode = "MMQ";
+    public SubterraneanHangar(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.LAND},"");
 
         // Subterranean Hangar enters the battlefield tapped.
         this.addAbility(new EntersBattlefieldTappedAbility());

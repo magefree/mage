@@ -26,15 +26,15 @@
  *  or implied, of BetaSteward_at_googlemail.com.
  */
 
-package mage.sets.apocalypse;
+package mage.cards.f;
 
 import java.util.UUID;
 import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.abilities.effects.Effect;
 import mage.abilities.effects.common.DamageMultiEffect;
 import mage.abilities.effects.common.DrawCardSourceControllerEffect;
 import mage.abilities.effects.common.TapTargetEffect;
+import mage.cards.CardSetInfo;
 import mage.cards.SplitCard;
 import mage.target.TargetPermanent;
 import mage.target.common.TargetCreatureOrPlayerAmount;
@@ -47,9 +47,8 @@ import mage.target.common.TargetCreatureOrPlayerAmount;
 
 public class FireIce extends SplitCard {
 
-    public FireIce(UUID ownerId) {
-        super(ownerId, 128, "Fire", "Ice", Rarity.UNCOMMON, new CardType[]{CardType.INSTANT}, "{1}{R}", "{1}{U}", false);
-        this.expansionSetCode = "APC";
+    public FireIce(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.INSTANT},"{1}{R}","{1}{U}",false);
 
         // Fire
         // Fire deals 2 damage divided as you choose among one or two target creatures and/or players.

@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.magic2015;
+package mage.cards.s;
 
 import java.util.UUID;
 import mage.MageInt;
@@ -33,9 +33,9 @@ import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.effects.common.continuous.GainAbilityControlledEffect;
 import mage.abilities.keyword.IndestructibleAbility;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Duration;
-import mage.constants.Rarity;
 import mage.constants.Zone;
 import mage.filter.common.FilterCreaturePermanent;
 
@@ -45,9 +45,8 @@ import mage.filter.common.FilterCreaturePermanent;
  */
 public class SliverHivelord extends CardImpl {
 
-    public SliverHivelord(UUID ownerId) {
-        super(ownerId, 211, "Sliver Hivelord", Rarity.MYTHIC, new CardType[]{CardType.CREATURE}, "{W}{U}{B}{R}{G}");
-        this.expansionSetCode = "M15";
+    public SliverHivelord(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{W}{U}{B}{R}{G}");
         this.supertype.add("Legendary");
         this.subtype.add("Sliver");
 

@@ -25,11 +25,10 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.championsofkamigawa;
+package mage.cards.j;
 
 import java.util.UUID;
 import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.constants.Zone;
 import mage.MageInt;
 import mage.abilities.Ability;
@@ -44,6 +43,7 @@ import mage.abilities.effects.common.DrawCardSourceControllerEffect;
 import mage.abilities.effects.common.DrawCardTargetEffect;
 import mage.abilities.effects.common.FlipSourceEffect;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.game.permanent.token.Token;
 import mage.target.TargetPlayer;
 
@@ -53,9 +53,8 @@ import mage.target.TargetPlayer;
  */
 public class JushiApprentice extends CardImpl {
 
-    public JushiApprentice(UUID ownerId) {
-        super(ownerId, 70, "Jushi Apprentice", Rarity.RARE, new CardType[]{CardType.CREATURE}, "{1}{U}");
-        this.expansionSetCode = "CHK";
+    public JushiApprentice(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{1}{U}");
         this.subtype.add("Human");
         this.subtype.add("Wizard");
 

@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.odyssey;
+package mage.cards.s;
 
 import java.util.UUID;
 import mage.MageInt;
@@ -36,9 +36,9 @@ import mage.abilities.costs.mana.ManaCostsImpl;
 import mage.abilities.effects.common.continuous.BoostSourceEffect;
 import mage.abilities.keyword.FlyingAbility;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Duration;
-import mage.constants.Rarity;
 import mage.constants.Zone;
 
 /**
@@ -47,9 +47,8 @@ import mage.constants.Zone;
  */
 public class StalkingBloodsucker extends CardImpl {
 
-    public StalkingBloodsucker(UUID ownerId) {
-        super(ownerId, 163, "Stalking Bloodsucker", Rarity.RARE, new CardType[]{CardType.CREATURE}, "{4}{B}{B}");
-        this.expansionSetCode = "ODY";
+    public StalkingBloodsucker(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{4}{B}{B}");
         this.subtype.add("Vampire");
 
         this.power = new MageInt(4);

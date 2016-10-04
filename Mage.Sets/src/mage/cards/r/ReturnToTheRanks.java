@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.magic2015;
+package mage.cards.r;
 
 import java.util.UUID;
 import mage.abilities.Ability;
@@ -33,8 +33,8 @@ import mage.abilities.effects.Effect;
 import mage.abilities.effects.common.ReturnFromGraveyardToBattlefieldTargetEffect;
 import mage.abilities.keyword.ConvokeAbility;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.filter.Filter;
 import mage.filter.common.FilterCreatureCard;
 import mage.filter.predicate.mageobject.ConvertedManaCostPredicate;
@@ -53,9 +53,8 @@ public class ReturnToTheRanks extends CardImpl {
         filter.add(new ConvertedManaCostPredicate(Filter.ComparisonType.LessThan, 3));
     }
 
-    public ReturnToTheRanks(UUID ownerId) {
-        super(ownerId, 29, "Return to the Ranks", Rarity.RARE, new CardType[]{CardType.SORCERY}, "{X}{W}{W}");
-        this.expansionSetCode = "M15";
+    public ReturnToTheRanks(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{X}{W}{W}");
 
         // Convoke
         this.addAbility(new ConvokeAbility());

@@ -25,9 +25,8 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.eldritchmoon;
+package mage.cards.g;
 
-import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.common.BeginningOfEndStepTriggeredAbility;
 import mage.abilities.condition.common.MeldCondition;
@@ -38,9 +37,12 @@ import mage.abilities.keyword.FlyingAbility;
 import mage.abilities.keyword.LifelinkAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
+import mage.cards.b.BriselaVoiceOfNightmares;
 import mage.constants.CardType;
 import mage.constants.Rarity;
 import mage.constants.TargetController;
+
+import java.util.UUID;
 
 /**
  *
@@ -48,9 +50,8 @@ import mage.constants.TargetController;
  */
 public class GiselaTheBrokenBlade extends CardImpl {
 
-    public GiselaTheBrokenBlade(UUID ownerId) {
-        super(ownerId, 28, "Gisela, the Broken Blade", Rarity.MYTHIC, new CardType[]{CardType.CREATURE}, "{2}{W}{W}");
-        this.expansionSetCode = "EMN";
+    public GiselaTheBrokenBlade(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{2}{W}{W}");
         this.supertype.add("Legendary");
         this.subtype.add("Angel");
         this.subtype.add("Horror");

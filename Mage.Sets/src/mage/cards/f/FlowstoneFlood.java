@@ -25,16 +25,16 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.exodus;
+package mage.cards.f;
 
 import java.util.UUID;
 import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.abilities.costs.common.DiscardCardCost;
 import mage.abilities.costs.common.PayLifeCost;
 import mage.abilities.effects.common.DestroyTargetEffect;
 import mage.abilities.keyword.BuybackAbility;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.target.common.TargetLandPermanent;
 
 /**
@@ -43,9 +43,8 @@ import mage.target.common.TargetLandPermanent;
  */
 public class FlowstoneFlood extends CardImpl {
 
-    public FlowstoneFlood(UUID ownerId) {
-        super(ownerId, 83, "Flowstone Flood", Rarity.UNCOMMON, new CardType[]{CardType.SORCERY}, "{3}{R}");
-        this.expansionSetCode = "EXO";
+    public FlowstoneFlood(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{3}{R}");
 
 
         // Buyback—Pay 3 life, Discard a card at random. (You may pay 3 life and discard a card at random in addition to any other costs as you cast this spell. If you do, put this card into your hand as it resolves.)

@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.magic2013;
+package mage.cards.t;
 
 import java.util.UUID;
 
@@ -34,6 +34,7 @@ import mage.abilities.Ability;
 import mage.abilities.common.BeginningOfUpkeepTriggeredAbility;
 import mage.abilities.effects.OneShotEffect;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.filter.common.FilterControlledPermanent;
 import mage.game.Game;
 import mage.players.Player;
@@ -44,9 +45,8 @@ import mage.players.Player;
  */
 public class TouchOfTheEternal extends CardImpl {
 
-    public TouchOfTheEternal(UUID ownerId) {
-        super(ownerId, 37, "Touch of the Eternal", Rarity.RARE, new CardType[]{CardType.ENCHANTMENT}, "{5}{W}{W}");
-        this.expansionSetCode = "M13";
+    public TouchOfTheEternal(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.ENCHANTMENT},"{5}{W}{W}");
 
 
         // At the beginning of your upkeep, count the number of permanents you control. Your life total becomes that number.

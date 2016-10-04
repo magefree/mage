@@ -25,15 +25,15 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.elspethvstezzeret;
+package mage.cards.q;
 
 import java.util.UUID;
 import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.MageInt;
 import mage.abilities.keyword.AffinityForArtifactsAbility;
 import mage.abilities.keyword.FlyingAbility;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 
 /**
  *
@@ -41,9 +41,8 @@ import mage.cards.CardImpl;
  */
 public class Qumulox extends CardImpl {
 
-    public Qumulox(UUID ownerId) {
-        super(ownerId, 59, "Qumulox", Rarity.UNCOMMON, new CardType[]{CardType.CREATURE}, "{6}{U}{U}");
-        this.expansionSetCode = "DDF";
+    public Qumulox(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{6}{U}{U}");
         this.subtype.add("Beast");
 
         this.power = new MageInt(5);

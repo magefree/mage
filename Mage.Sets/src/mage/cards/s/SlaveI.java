@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.starwars;
+package mage.cards.s;
 
 import java.util.UUID;
 import mage.MageInt;
@@ -34,8 +34,8 @@ import mage.abilities.effects.common.counter.AddCountersSourceEffect;
 import mage.abilities.keyword.FirstStrikeAbility;
 import mage.abilities.keyword.SpaceflightAbility;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.counters.CounterType;
 
 /**
@@ -44,9 +44,8 @@ import mage.counters.CounterType;
  */
 public class SlaveI extends CardImpl {
 
-    public SlaveI(UUID ownerId) {
-        super(ownerId, 217, "Slave I", Rarity.RARE, new CardType[]{CardType.ARTIFACT, CardType.CREATURE}, "{B}{R}{G}");
-        this.expansionSetCode = "SWS";
+    public SlaveI(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.ARTIFACT,CardType.CREATURE},"{B}{R}{G}");
         this.supertype.add("Legendary");
         this.subtype.add("Starship");
         this.power = new MageInt(3);

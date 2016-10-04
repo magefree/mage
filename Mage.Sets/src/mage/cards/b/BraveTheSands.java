@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.khansoftarkir;
+package mage.cards.b;
 
 import java.util.UUID;
 import mage.abilities.common.SimpleStaticAbility;
@@ -33,9 +33,9 @@ import mage.abilities.effects.common.combat.CanBlockAdditionalCreatureAllEffect;
 import mage.abilities.effects.common.continuous.GainAbilityControlledEffect;
 import mage.abilities.keyword.VigilanceAbility;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Duration;
-import mage.constants.Rarity;
 import mage.constants.Zone;
 import mage.filter.common.FilterControlledCreaturePermanent;
 
@@ -45,9 +45,8 @@ import mage.filter.common.FilterControlledCreaturePermanent;
  */
 public class BraveTheSands extends CardImpl {
 
-    public BraveTheSands(UUID ownerId) {
-        super(ownerId, 5, "Brave the Sands", Rarity.UNCOMMON, new CardType[]{CardType.ENCHANTMENT}, "{1}{W}");
-        this.expansionSetCode = "KTK";
+    public BraveTheSands(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.ENCHANTMENT},"{1}{W}");
 
 
         // Creatures you control have vigilance.

@@ -25,14 +25,14 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.returntoravnica;
+package mage.cards.e;
 
 import java.util.UUID;
 import mage.abilities.effects.common.CreateTokenEffect;
 import mage.abilities.effects.common.PopulateEffect;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.game.permanent.token.BirdToken;
 
 /**
@@ -41,9 +41,8 @@ import mage.game.permanent.token.BirdToken;
  */
 public class EyesInTheSkies extends CardImpl {
 
-    public EyesInTheSkies(UUID ownerId) {
-        super(ownerId, 10, "Eyes in the Skies", Rarity.COMMON, new CardType[]{CardType.INSTANT}, "{3}{W}");
-        this.expansionSetCode = "RTR";
+    public EyesInTheSkies(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.INSTANT},"{3}{W}");
 
         // Put a 1/1 white Bird creature token with flying onto the battlefield, then populate.
         // (Put a token onto the battlefield that's a copy of a creature token you control.)

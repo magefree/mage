@@ -25,16 +25,16 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.urzassaga;
+package mage.cards.f;
 
 import java.util.UUID;
 import mage.abilities.Ability;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.keyword.FlyingAbility;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Outcome;
-import mage.constants.Rarity;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.filter.predicate.Predicates;
 import mage.filter.predicate.mageobject.AbilityPredicate;
@@ -48,9 +48,8 @@ import mage.players.Player;
  */
 public class FaultLine extends CardImpl {
 
-    public FaultLine(UUID ownerId) {
-        super(ownerId, 185, "Fault Line", Rarity.RARE, new CardType[]{CardType.INSTANT}, "{X}{R}{R}");
-        this.expansionSetCode = "USG";
+    public FaultLine(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.INSTANT},"{X}{R}{R}");
 
         // Fault Line deals X damage to each creature without flying and each player.
         this.getSpellAbility().addEffect(new FaultLineEffect());

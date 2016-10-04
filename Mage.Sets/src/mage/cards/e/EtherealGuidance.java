@@ -25,14 +25,14 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.shadowsoverinnistrad;
+package mage.cards.e;
 
 import java.util.UUID;
 import mage.abilities.effects.common.continuous.BoostControlledEffect;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Duration;
-import mage.constants.Rarity;
 import mage.filter.common.FilterCreaturePermanent;
 
 /**
@@ -41,9 +41,8 @@ import mage.filter.common.FilterCreaturePermanent;
  */
 public class EtherealGuidance extends CardImpl {
 
-    public EtherealGuidance(UUID ownerId) {
-        super(ownerId, 18, "Ethereal Guidance", Rarity.COMMON, new CardType[]{CardType.SORCERY}, "{2}{W}");
-        this.expansionSetCode = "SOI";
+    public EtherealGuidance(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{2}{W}");
 
         // Creatures you control get +2/+1 until end of turn.
         this.getSpellAbility().addEffect(new BoostControlledEffect(2, 1, Duration.EndOfTurn, new FilterCreaturePermanent()));

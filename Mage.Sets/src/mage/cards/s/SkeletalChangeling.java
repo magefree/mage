@@ -25,16 +25,16 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.lorwyn;
+package mage.cards.s;
 
 import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.MageInt;
 import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.costs.mana.ManaCostsImpl;
 import mage.abilities.effects.common.RegenerateSourceEffect;
 import mage.abilities.keyword.ChangelingAbility;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.Zone;
 
 import java.util.UUID;
@@ -45,9 +45,8 @@ import java.util.UUID;
  */
 public class SkeletalChangeling extends CardImpl {
 
-    public SkeletalChangeling(UUID ownerId) {
-        super(ownerId, 140, "Skeletal Changeling", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{1}{B}");
-        this.expansionSetCode = "LRW";
+    public SkeletalChangeling(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{1}{B}");
         this.subtype.add("Shapeshifter");
 
         this.power = new MageInt(1);

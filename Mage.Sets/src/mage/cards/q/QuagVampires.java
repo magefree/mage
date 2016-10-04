@@ -25,11 +25,10 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.worldwake;
+package mage.cards.q;
 
 import java.util.UUID;
 import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.MageInt;
 import mage.abilities.common.EntersBattlefieldAbility;
 import mage.abilities.dynamicvalue.common.MultikickerCount;
@@ -37,6 +36,7 @@ import mage.abilities.effects.common.counter.AddCountersSourceEffect;
 import mage.abilities.keyword.MultikickerAbility;
 import mage.abilities.keyword.SwampwalkAbility;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.counters.CounterType;
 
 /**
@@ -45,9 +45,8 @@ import mage.counters.CounterType;
  */
 public class QuagVampires extends CardImpl {
 
-    public QuagVampires(UUID ownerId) {
-        super(ownerId, 63, "Quag Vampires", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{B}");
-        this.expansionSetCode = "WWK";
+    public QuagVampires(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{B}");
         this.subtype.add("Vampire");
         this.subtype.add("Rogue");
 

@@ -25,15 +25,15 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.dragonsmaze;
+package mage.cards.g;
 
 import java.util.UUID;
 import mage.constants.CardType;
 import mage.constants.Outcome;
-import mage.constants.Rarity;
 import mage.abilities.Ability;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.counter.AddCountersTargetEffect;
+import mage.cards.CardSetInfo;
 import mage.cards.SplitCard;
 import mage.counters.CounterType;
 import mage.game.Game;
@@ -48,9 +48,8 @@ import mage.target.common.TargetCreaturePermanent;
  */
 public class GiveTake extends SplitCard {
 
-    public GiveTake(UUID ownerId) {
-        super(ownerId, 129, "Give", "Take", Rarity.UNCOMMON, new CardType[]{CardType.SORCERY}, "{2}{G}","{2}{U}", true);
-        this.expansionSetCode = "DGM";
+    public GiveTake(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{2}{G}","{2}{U}",true);
 
         // Give
         // Put three +1/+1 counters on target creature.

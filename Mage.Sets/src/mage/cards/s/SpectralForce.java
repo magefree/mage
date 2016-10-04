@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.timespiral;
+package mage.cards.s;
 
 import java.util.UUID;
 import mage.MageInt;
@@ -34,8 +34,8 @@ import mage.abilities.TriggeredAbilityImpl;
 import mage.abilities.effects.common.DontUntapInControllersNextUntapStepSourceEffect;
 import mage.abilities.keyword.TrampleAbility;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.constants.Zone;
 import mage.filter.FilterPermanent;
 import mage.filter.predicate.mageobject.ColorPredicate;
@@ -49,9 +49,8 @@ import mage.game.events.GameEvent.EventType;
  */
 public class SpectralForce extends CardImpl {
 
-    public SpectralForce(UUID ownerId) {
-        super(ownerId, 217, "Spectral Force", Rarity.RARE, new CardType[]{CardType.CREATURE}, "{3}{G}{G}");
-        this.expansionSetCode = "TSP";
+    public SpectralForce(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{3}{G}{G}");
         this.subtype.add("Elemental");
         this.subtype.add("Spirit");
         this.power = new MageInt(8);

@@ -25,15 +25,15 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.shardsofalara;
+package mage.cards.v;
 
 import mage.abilities.Ability;
 import mage.abilities.common.DiesCreatureTriggeredAbility;
 import mage.abilities.dynamicvalue.common.CardsInTargetHandCount;
 import mage.abilities.effects.common.DamageTargetEffect;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.target.TargetPlayer;
 
 import java.util.UUID;
@@ -44,9 +44,8 @@ import java.util.UUID;
  */
 public class ViciousShadows extends CardImpl {
 
-    public ViciousShadows(UUID ownerId) {
-        super(ownerId, 119, "Vicious Shadows", Rarity.RARE, new CardType[]{CardType.ENCHANTMENT}, "{6}{R}");
-        this.expansionSetCode = "ALA";
+    public ViciousShadows(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.ENCHANTMENT},"{6}{R}");
 
 
         // Whenever a creature dies, you may have Vicious Shadows deal damage to target player equal to the number of cards in that player's hand.

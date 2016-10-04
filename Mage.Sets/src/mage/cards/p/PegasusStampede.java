@@ -25,15 +25,15 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.exodus;
+package mage.cards.p;
 
 import java.util.UUID;
 import mage.abilities.costs.common.SacrificeTargetCost;
 import mage.abilities.effects.common.CreateTokenEffect;
 import mage.abilities.keyword.BuybackAbility;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.filter.common.FilterControlledLandPermanent;
 import mage.game.permanent.token.PegasusToken;
 import mage.target.common.TargetControlledPermanent;
@@ -44,9 +44,8 @@ import mage.target.common.TargetControlledPermanent;
  */
 public class PegasusStampede extends CardImpl {
 
-    public PegasusStampede(UUID ownerId) {
-        super(ownerId, 14, "Pegasus Stampede", Rarity.UNCOMMON, new CardType[]{CardType.SORCERY}, "{1}{W}");
-        this.expansionSetCode = "EXO";
+    public PegasusStampede(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{1}{W}");
 
         // Buyback-Sacrifice a land.
         this.addAbility(new BuybackAbility(new SacrificeTargetCost(new TargetControlledPermanent(1,1, new FilterControlledLandPermanent(), true))));

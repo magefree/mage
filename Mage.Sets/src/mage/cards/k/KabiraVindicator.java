@@ -25,11 +25,10 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.riseoftheeldrazi;
+package mage.cards.k;
 
 import mage.constants.CardType;
 import mage.constants.Duration;
-import mage.constants.Rarity;
 import mage.constants.Zone;
 import mage.MageInt;
 import mage.abilities.Abilities;
@@ -40,6 +39,7 @@ import mage.abilities.costs.mana.ManaCostsImpl;
 import mage.abilities.effects.common.continuous.BoostControlledEffect;
 import mage.abilities.keyword.LevelUpAbility;
 import mage.abilities.keyword.LevelerCardBuilder;
+import mage.cards.CardSetInfo;
 import mage.cards.LevelerCard;
 import mage.filter.common.FilterCreaturePermanent;
 
@@ -51,9 +51,8 @@ import java.util.UUID;
  */
 public class KabiraVindicator extends LevelerCard {
 
-    public KabiraVindicator(UUID ownerId) {
-        super(ownerId, 28, "Kabira Vindicator", Rarity.UNCOMMON, new CardType[]{CardType.CREATURE}, "{3}{W}");
-        this.expansionSetCode = "ROE";
+    public KabiraVindicator(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{3}{W}");
         this.subtype.add("Human");
         this.subtype.add("Knight");
 

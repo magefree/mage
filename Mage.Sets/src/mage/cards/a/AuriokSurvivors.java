@@ -25,18 +25,18 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.newphyrexia;
+package mage.cards.a;
 
 import java.util.UUID;
 
 import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.EntersBattlefieldTriggeredAbility;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.ReturnFromGraveyardToBattlefieldTargetEffect;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.Outcome;
 import mage.filter.FilterCard;
 import mage.filter.predicate.mageobject.SubtypePredicate;
@@ -56,9 +56,8 @@ public class AuriokSurvivors extends CardImpl {
         filter.add(new SubtypePredicate("Equipment"));
     }
 
-    public AuriokSurvivors(UUID ownerId) {
-        super(ownerId, 3, "Auriok Survivors", Rarity.UNCOMMON, new CardType[]{CardType.CREATURE}, "{5}{W}");
-        this.expansionSetCode = "NPH";
+    public AuriokSurvivors(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{5}{W}");
         this.subtype.add("Human");
         this.subtype.add("Soldier");
 

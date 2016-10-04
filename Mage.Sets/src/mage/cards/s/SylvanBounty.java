@@ -25,15 +25,15 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.conflux;
+package mage.cards.s;
 
 import java.util.UUID;
 import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.abilities.costs.mana.ManaCostsImpl;
 import mage.abilities.effects.common.GainLifeTargetEffect;
 import mage.abilities.keyword.BasicLandcyclingAbility;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.target.TargetPlayer;
 
 /**
@@ -42,9 +42,8 @@ import mage.target.TargetPlayer;
  */
 public class SylvanBounty extends CardImpl {
 
-    public SylvanBounty(UUID ownerId) {
-        super(ownerId, 94, "Sylvan Bounty", Rarity.COMMON, new CardType[]{CardType.INSTANT}, "{5}{G}");
-        this.expansionSetCode = "CON";
+    public SylvanBounty(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.INSTANT},"{5}{G}");
 
 
         // Target player gains 8 life.

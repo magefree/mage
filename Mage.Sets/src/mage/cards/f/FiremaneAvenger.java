@@ -25,11 +25,10 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.gatecrash;
+package mage.cards.f;
 
 import java.util.UUID;
 import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.effects.common.DamageTargetEffect;
@@ -37,6 +36,7 @@ import mage.abilities.effects.common.GainLifeEffect;
 import mage.abilities.keyword.BattalionAbility;
 import mage.abilities.keyword.FlyingAbility;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.target.common.TargetCreatureOrPlayer;
 
 /**
@@ -45,9 +45,8 @@ import mage.target.common.TargetCreatureOrPlayer;
  */
 public class FiremaneAvenger extends CardImpl {
 
-    public FiremaneAvenger(UUID ownerId) {
-        super(ownerId, 163, "Firemane Avenger", Rarity.RARE, new CardType[]{CardType.CREATURE}, "{2}{R}{W}");
-        this.expansionSetCode = "GTC";
+    public FiremaneAvenger(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{2}{R}{W}");
         this.subtype.add("Angel");
 
 

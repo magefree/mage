@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.nemesis;
+package mage.cards.s;
 
 import java.util.UUID;
 import mage.abilities.common.SimpleActivatedAbility;
@@ -34,8 +34,8 @@ import mage.abilities.costs.mana.GenericManaCost;
 import mage.abilities.effects.common.CreateTokenEffect;
 import mage.abilities.effects.common.InfoEffect;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.constants.TargetController;
 import mage.constants.Zone;
 import mage.game.permanent.token.SaprolingToken;
@@ -46,9 +46,8 @@ import mage.game.permanent.token.SaprolingToken;
  */
 public class SaprolingCluster extends CardImpl {
 
-    public SaprolingCluster(UUID ownerId) {
-        super(ownerId, 114, "Saproling Cluster", Rarity.RARE, new CardType[]{CardType.ENCHANTMENT}, "{1}{G}");
-        this.expansionSetCode = "NEM";
+    public SaprolingCluster(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.ENCHANTMENT},"{1}{G}");
 
         // {1}, Discard a card: Put a 1/1 green Saproling creature token onto the battlefield. Any player may activate this ability.
         SimpleActivatedAbility ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new CreateTokenEffect(new SaprolingToken()) , new GenericManaCost(1));

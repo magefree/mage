@@ -25,12 +25,11 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.fifthdawn;
+package mage.cards.c;
 
 import java.util.UUID;
 
 import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.constants.Zone;
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleActivatedAbility;
@@ -39,6 +38,7 @@ import mage.abilities.costs.common.TapSourceCost;
 import mage.abilities.effects.common.DrawCardSourceControllerEffect;
 import mage.abilities.effects.common.PutOnLibraryTargetEffect;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.TargetController;
 import mage.filter.FilterCard;
 import mage.filter.predicate.other.OwnerPredicate;
@@ -58,9 +58,8 @@ public class ConjurersBauble extends CardImpl {
     
     static final String rule = "Put up to one target card from your graveyard on the bottom of your library";
 
-    public ConjurersBauble(UUID ownerId) {
-        super(ownerId, 112, "Conjurer's Bauble", Rarity.COMMON, new CardType[]{CardType.ARTIFACT}, "{1}");
-        this.expansionSetCode = "5DN";
+    public ConjurersBauble(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.ARTIFACT},"{1}");
         
         // {tap}, Sacrifice Conjurer's Bauble: Put up to one target card from your graveyard on the bottom of your library. Draw a card.
         Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new PutOnLibraryTargetEffect(false, rule), new TapSourceCost());

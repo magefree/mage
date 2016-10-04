@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.revisededition;
+package mage.cards.d;
 
 import java.util.UUID;
 import mage.MageInt;
@@ -36,9 +36,9 @@ import mage.abilities.costs.common.TapSourceCost;
 import mage.abilities.decorator.ConditionalActivatedAbility;
 import mage.abilities.effects.common.counter.AddCountersTargetEffect;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.PhaseStep;
-import mage.constants.Rarity;
 import mage.constants.Zone;
 import mage.counters.CounterType;
 import mage.filter.common.FilterControlledArtifactPermanent;
@@ -51,9 +51,8 @@ import mage.target.common.TargetCreaturePermanent;
  */
 public class DwarvenWeaponsmith extends CardImpl {
 
-    public DwarvenWeaponsmith(UUID ownerId) {
-        super(ownerId, 144, "Dwarven Weaponsmith", Rarity.UNCOMMON, new CardType[]{CardType.CREATURE}, "{1}{R}");
-        this.expansionSetCode = "3ED";
+    public DwarvenWeaponsmith(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{1}{R}");
         this.subtype.add("Dwarf");
         this.subtype.add("Artificer");
         this.power = new MageInt(1);

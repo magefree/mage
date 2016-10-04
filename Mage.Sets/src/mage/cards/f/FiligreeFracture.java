@@ -25,17 +25,17 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.conflux;
+package mage.cards.f;
 
 import java.util.UUID;
 import mage.constants.CardType;
 import mage.constants.Outcome;
-import mage.constants.Rarity;
 import mage.constants.Zone;
 import mage.abilities.Ability;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.DestroyTargetEffect;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.filter.common.FilterArtifactOrEnchantmentPermanent;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
@@ -48,9 +48,8 @@ import mage.target.TargetPermanent;
  */
 public class FiligreeFracture extends CardImpl {
 
-    public FiligreeFracture(UUID ownerId) {
-        super(ownerId, 82, "Filigree Fracture", Rarity.UNCOMMON, new CardType[]{CardType.INSTANT}, "{2}{G}");
-        this.expansionSetCode = "CON";
+    public FiligreeFracture(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.INSTANT},"{2}{G}");
 
         // Destroy target artifact or enchantment. If that permanent was blue or black, draw a card.
         this.getSpellAbility().addTarget(new TargetPermanent(new FilterArtifactOrEnchantmentPermanent()));

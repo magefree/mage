@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.scourge;
+package mage.cards.a;
 
 import java.util.UUID;
 
@@ -33,9 +33,9 @@ import mage.abilities.dynamicvalue.DynamicValue;
 import mage.abilities.dynamicvalue.common.HighestConvertedManaCostValue;
 import mage.abilities.effects.common.continuous.BoostTargetEffect;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Duration;
-import mage.constants.Rarity;
 import mage.target.common.TargetCreaturePermanent;
 
 /**
@@ -44,9 +44,8 @@ import mage.target.common.TargetCreaturePermanent;
  */
 public class AcceleratedMutation extends CardImpl {
 
-    public AcceleratedMutation(UUID ownerId) {
-        super(ownerId, 109, "Accelerated Mutation", Rarity.COMMON, new CardType[]{CardType.INSTANT}, "{3}{G}{G}");
-        this.expansionSetCode = "SCG";
+    public AcceleratedMutation(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.INSTANT},"{3}{G}{G}");
 
         // Target creature gets +X/+X until end of turn, where X is the highest converted mana cost among permanents you control.
         DynamicValue amount = new HighestConvertedManaCostValue();

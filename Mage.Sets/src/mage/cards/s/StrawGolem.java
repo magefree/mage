@@ -25,15 +25,15 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.weatherlight;
+package mage.cards.s;
 
 import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.common.SpellCastOpponentTriggeredAbility;
 import mage.abilities.effects.common.SacrificeSourceEffect;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.filter.common.FilterCreatureSpell;
 
 /**
@@ -42,9 +42,8 @@ import mage.filter.common.FilterCreatureSpell;
  */
 public class StrawGolem extends CardImpl {
 
-    public StrawGolem(UUID ownerId) {
-        super(ownerId, 158, "Straw Golem", Rarity.UNCOMMON, new CardType[]{CardType.ARTIFACT, CardType.CREATURE}, "{1}");
-        this.expansionSetCode = "WTH";
+    public StrawGolem(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.ARTIFACT,CardType.CREATURE},"{1}");
         this.subtype.add("Golem");
         this.power = new MageInt(2);
         this.toughness = new MageInt(3);

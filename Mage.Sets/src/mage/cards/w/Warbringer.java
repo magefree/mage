@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.dragonsoftarkir;
+package mage.cards.w;
 
 import java.util.UUID;
 import mage.MageInt;
@@ -36,11 +36,11 @@ import mage.abilities.condition.common.DashedCondition;
 import mage.abilities.effects.common.cost.CostModificationEffectImpl;
 import mage.abilities.keyword.DashAbility;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.CostModificationType;
 import mage.constants.Duration;
 import mage.constants.Outcome;
-import mage.constants.Rarity;
 import mage.constants.Zone;
 import mage.game.Game;
 import mage.game.stack.Spell;
@@ -52,9 +52,8 @@ import mage.util.CardUtil;
  */
 public class Warbringer extends CardImpl {
 
-    public Warbringer(UUID ownerId) {
-        super(ownerId, 168, "Warbringer", Rarity.UNCOMMON, new CardType[]{CardType.CREATURE}, "{3}{R}");
-        this.expansionSetCode = "DTK";
+    public Warbringer(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{3}{R}");
         this.subtype.add("Orc");
         this.subtype.add("Berserker");
         this.power = new MageInt(3);

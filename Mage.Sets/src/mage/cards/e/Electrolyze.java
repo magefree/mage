@@ -25,15 +25,15 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.guildpact;
+package mage.cards.e;
 
 import java.util.UUID;
 import mage.abilities.effects.Effect;
 import mage.abilities.effects.common.DamageMultiEffect;
 import mage.abilities.effects.common.DrawCardSourceControllerEffect;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.target.common.TargetCreatureOrPlayerAmount;
 
 /**
@@ -42,9 +42,8 @@ import mage.target.common.TargetCreatureOrPlayerAmount;
  */
 public class Electrolyze extends CardImpl {
 
-    public Electrolyze(UUID ownerId) {
-        super(ownerId, 111, "Electrolyze", Rarity.UNCOMMON, new CardType[]{CardType.INSTANT}, "{1}{U}{R}");
-        this.expansionSetCode = "GPT";
+    public Electrolyze(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.INSTANT},"{1}{U}{R}");
 
 
         // Electrolyze deals 2 damage divided as you choose among one or two target creatures and/or players.

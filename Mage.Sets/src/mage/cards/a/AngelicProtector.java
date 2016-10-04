@@ -25,17 +25,17 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.tempest;
+package mage.cards.a;
 
 import java.util.UUID;
 import mage.constants.CardType;
 import mage.constants.Duration;
-import mage.constants.Rarity;
 import mage.MageInt;
 import mage.abilities.common.BecomesTargetTriggeredAbility;
 import mage.abilities.effects.common.continuous.BoostSourceEffect;
 import mage.abilities.keyword.FlyingAbility;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 
 /**
  *
@@ -43,9 +43,8 @@ import mage.cards.CardImpl;
  */
 public class AngelicProtector extends CardImpl {
 
-    public AngelicProtector(UUID ownerId) {
-        super(ownerId, 214, "Angelic Protector", Rarity.UNCOMMON, new CardType[]{CardType.CREATURE}, "{3}{W}");
-        this.expansionSetCode = "TMP";
+    public AngelicProtector(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{3}{W}");
         this.subtype.add("Angel");
 
         this.power = new MageInt(2);

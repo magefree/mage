@@ -26,23 +26,22 @@
  *  or implied, of BetaSteward_at_googlemail.com.
  */
 
-package mage.sets.magic2012;
+package mage.cards.z;
 
 import java.util.UUID;
 
 import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.MageInt;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 
 /**
  * @author Loki
  */
 public class ZombieGoliath extends CardImpl {
 
-    public ZombieGoliath(UUID ownerId) {
-        super(ownerId, 119, "Zombie Goliath", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{4}{B}");
-        this.expansionSetCode = "M12";
+    public ZombieGoliath(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{4}{B}");
         this.subtype.add("Zombie");
         this.subtype.add("Giant");
 

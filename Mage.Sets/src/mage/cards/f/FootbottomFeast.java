@@ -25,14 +25,14 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.commander;
+package mage.cards.f;
 
 import java.util.UUID;
 import mage.abilities.effects.common.DrawCardSourceControllerEffect;
 import mage.abilities.effects.common.PutOnLibraryTargetEffect;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.filter.common.FilterCreatureCard;
 import mage.target.common.TargetCardInYourGraveyard;
 
@@ -42,9 +42,8 @@ import mage.target.common.TargetCardInYourGraveyard;
  */
 public class FootbottomFeast extends CardImpl {
 
-    public FootbottomFeast(UUID ownerId) {
-        super(ownerId, 84, "Footbottom Feast", Rarity.COMMON, new CardType[]{CardType.INSTANT}, "{2}{B}");
-        this.expansionSetCode = "CMD";
+    public FootbottomFeast(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.INSTANT},"{2}{B}");
 
         // Put any number of target creature cards from your graveyard on top of your library.
         this.getSpellAbility().addEffect(new PutOnLibraryTargetEffect(true));

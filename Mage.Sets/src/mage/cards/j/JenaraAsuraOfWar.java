@@ -26,11 +26,10 @@
  *  or implied, of BetaSteward_at_googlemail.com.
  */
 
-package mage.sets.alarareborn;
+package mage.cards.j;
 
 import java.util.UUID;
 import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.constants.Zone;
 import mage.MageInt;
 import mage.abilities.common.SimpleActivatedAbility;
@@ -38,6 +37,7 @@ import mage.abilities.costs.mana.ManaCostsImpl;
 import mage.abilities.effects.common.counter.AddCountersSourceEffect;
 import mage.abilities.keyword.FlyingAbility;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.counters.CounterType;
 
 /**
@@ -46,9 +46,8 @@ import mage.counters.CounterType;
  */
 public class JenaraAsuraOfWar extends CardImpl {
 
-    public JenaraAsuraOfWar (UUID ownerId) {
-        super(ownerId, 128, "Jenara, Asura of War", Rarity.MYTHIC, new CardType[]{CardType.CREATURE}, "{G}{W}{U}");
-        this.expansionSetCode = "ARB";
+    public JenaraAsuraOfWar (UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{G}{W}{U}");
         this.subtype.add("Angel");
         this.supertype.add("Legendary");
 

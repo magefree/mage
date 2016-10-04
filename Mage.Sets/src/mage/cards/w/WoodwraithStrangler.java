@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.ravnica;
+package mage.cards.w;
 
 import java.util.UUID;
 import mage.MageInt;
@@ -33,8 +33,8 @@ import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.costs.common.ExileFromGraveCost;
 import mage.abilities.effects.common.RegenerateSourceEffect;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.constants.Zone;
 import mage.filter.common.FilterCreatureCard;
 import mage.target.common.TargetCardInYourGraveyard;
@@ -45,9 +45,8 @@ import mage.target.common.TargetCardInYourGraveyard;
  */
 public class WoodwraithStrangler extends CardImpl {
 
-    public WoodwraithStrangler(UUID ownerId) {
-        super(ownerId, 241, "Woodwraith Strangler", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{2}{B}{G}");
-        this.expansionSetCode = "RAV";
+    public WoodwraithStrangler(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{2}{B}{G}");
         this.subtype.add("Plant");
         this.subtype.add("Zombie");
         this.power = new MageInt(2);

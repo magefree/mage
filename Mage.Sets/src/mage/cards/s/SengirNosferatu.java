@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.timespiral;
+package mage.cards.s;
 
 import java.util.UUID;
 import mage.MageInt;
@@ -40,9 +40,9 @@ import mage.abilities.effects.common.CreateTokenEffect;
 import mage.abilities.keyword.FlyingAbility;
 import mage.cards.Card;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Outcome;
-import mage.constants.Rarity;
 import mage.constants.Zone;
 import mage.filter.FilterCard;
 import mage.filter.predicate.mageobject.NamePredicate;
@@ -59,9 +59,8 @@ import mage.target.common.TargetCardInExile;
  */
 public class SengirNosferatu extends CardImpl {
 
-    public SengirNosferatu(UUID ownerId) {
-        super(ownerId, 128, "Sengir Nosferatu", Rarity.RARE, new CardType[]{CardType.CREATURE}, "{3}{B}{B}");
-        this.expansionSetCode = "TSP";
+    public SengirNosferatu(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{3}{B}{B}");
         this.subtype.add("Vampire");
         this.power = new MageInt(4);
         this.toughness = new MageInt(4);

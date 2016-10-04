@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.ravnica;
+package mage.cards.b;
 
 import java.util.UUID;
 import mage.abilities.common.SimpleStaticAbility;
@@ -35,8 +35,8 @@ import mage.abilities.effects.Effect;
 import mage.abilities.effects.common.CounterUnlessPaysEffect;
 import mage.abilities.effects.common.cost.SpellsCostReductionControllerEffect;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.constants.Zone;
 import mage.filter.FilterCard;
 import mage.filter.FilterSpell;
@@ -58,9 +58,8 @@ public class BloodFunnel extends CardImpl {
         filterNoncreature.add(Predicates.not(new CardTypePredicate(CardType.CREATURE)));
     }
 
-    public BloodFunnel(UUID ownerId) {
-        super(ownerId, 77, "Blood Funnel", Rarity.RARE, new CardType[]{CardType.ENCHANTMENT}, "{1}{B}");
-        this.expansionSetCode = "RAV";
+    public BloodFunnel(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.ENCHANTMENT},"{1}{B}");
 
         // Noncreature spells you cast cost {2} less to cast.
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new SpellsCostReductionControllerEffect(filter, 2)));

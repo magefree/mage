@@ -25,9 +25,8 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.eldritchmoon;
+package mage.cards.g;
 
-import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.common.BeginningOfCombatTriggeredAbility;
 import mage.abilities.condition.common.MeldCondition;
@@ -35,9 +34,12 @@ import mage.abilities.decorator.ConditionalTriggeredAbility;
 import mage.abilities.effects.common.MeldEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
+import mage.cards.c.ChitteringHost;
 import mage.constants.CardType;
 import mage.constants.Rarity;
 import mage.constants.TargetController;
+
+import java.util.UUID;
 
 /**
  *
@@ -45,9 +47,8 @@ import mage.constants.TargetController;
  */
 public class GrafRats extends CardImpl {
 
-    public GrafRats(UUID ownerId) {
-        super(ownerId, 91, "Graf Rats", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{1}{B}");
-        this.expansionSetCode = "EMN";
+    public GrafRats(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{1}{B}");
         this.subtype.add("Rat");
         this.power = new MageInt(2);
         this.toughness = new MageInt(1);

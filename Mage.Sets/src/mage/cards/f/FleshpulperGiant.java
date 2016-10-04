@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.magic2014;
+package mage.cards.f;
 
 import java.util.UUID;
 import mage.MageInt;
@@ -33,8 +33,8 @@ import mage.abilities.Ability;
 import mage.abilities.common.EntersBattlefieldTriggeredAbility;
 import mage.abilities.effects.common.DestroyTargetEffect;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.filter.Filter.ComparisonType;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.filter.predicate.mageobject.ToughnessPredicate;
@@ -52,9 +52,8 @@ public class FleshpulperGiant extends CardImpl {
         filter.add(new ToughnessPredicate(ComparisonType.LessThan, 3));
     }
 
-    public FleshpulperGiant(UUID ownerId) {
-        super(ownerId, 140, "Fleshpulper Giant", Rarity.UNCOMMON, new CardType[]{CardType.CREATURE}, "{5}{R}{R}");
-        this.expansionSetCode = "M14";
+    public FleshpulperGiant(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{5}{R}{R}");
         this.subtype.add("Giant");
 
         this.power = new MageInt(4);

@@ -25,15 +25,15 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.shadowsoverinnistrad;
+package mage.cards.o;
 
 import java.util.UUID;
 import mage.abilities.effects.common.search.SearchLibraryPutInHandEffect;
 import mage.cards.Card;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.cards.Cards;
 import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.filter.FilterCard;
 import mage.filter.predicate.Predicates;
 import mage.filter.predicate.mageobject.SubtypePredicate;
@@ -46,9 +46,8 @@ import mage.target.common.TargetCardInLibrary;
  */
 public class OpenTheArmory extends CardImpl {
 
-    public OpenTheArmory(UUID ownerId) {
-        super(ownerId, 32, "Open the Armory", Rarity.UNCOMMON, new CardType[]{CardType.SORCERY}, "{1}{W}");
-        this.expansionSetCode = "SOI";
+    public OpenTheArmory(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{1}{W}");
 
         // Search your library for an Aura or Equipment card, reveal it, and put it into your hand. Then shuffle your library.
         this.getSpellAbility().addEffect(new SearchLibraryPutInHandEffect(new OpenTheArmoryTarget(), true, true));

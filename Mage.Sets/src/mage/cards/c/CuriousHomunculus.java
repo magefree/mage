@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.eldritchmoon;
+package mage.cards.c;
 
 import java.util.UUID;
 import mage.ConditionalMana;
@@ -44,9 +44,10 @@ import mage.abilities.keyword.TransformAbility;
 import mage.abilities.mana.ConditionalColorlessManaAbility;
 import mage.abilities.mana.builder.ConditionalManaBuilder;
 import mage.abilities.mana.conditional.ManaCondition;
+import mage.cards.v.VoraciousReader;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.constants.TargetController;
 import mage.filter.common.FilterInstantOrSorceryCard;
 import mage.game.Game;
@@ -58,15 +59,14 @@ import mage.players.Player;
  */
 public class CuriousHomunculus extends CardImpl {
 
-    public CuriousHomunculus(UUID ownerId) {
-        super(ownerId, 54, "Curious Homunculus", Rarity.UNCOMMON, new CardType[]{CardType.CREATURE}, "{1}{U}");
-        this.expansionSetCode = "EMN";
+    public CuriousHomunculus(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{1}{U}");
         this.subtype.add("Homunculus");
         this.power = new MageInt(1);
         this.toughness = new MageInt(1);
 
         this.transformable = true;
-        this.secondSideCard = new VoraciousReader(ownerId);
+        this.secondSideCardClazz = VoraciousReader.class;
 
         // {T}: Add {C} to your mana pool. Spend this mana only to cast an instant or sorcery spell.
         this.addAbility(new ConditionalColorlessManaAbility(new TapSourceCost(), 1, new InstantOrSorcerySpellManaBuilder()));

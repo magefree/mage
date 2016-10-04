@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.lorwyn;
+package mage.cards.f;
 
 import java.util.UUID;
 import mage.MageObject;
@@ -33,11 +33,11 @@ import mage.abilities.Ability;
 import mage.abilities.effects.OneShotEffect;
 import mage.cards.Card;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.cards.Cards;
 import mage.cards.CardsImpl;
 import mage.constants.CardType;
 import mage.constants.Outcome;
-import mage.constants.Rarity;
 import mage.constants.Zone;
 import mage.game.Game;
 import mage.players.Player;
@@ -48,9 +48,8 @@ import mage.players.Player;
  */
 public class FathomTrawl extends CardImpl {
 
-    public FathomTrawl(UUID ownerId) {
-        super(ownerId, 65, "Fathom Trawl", Rarity.RARE, new CardType[]{CardType.SORCERY}, "{3}{U}{U}");
-        this.expansionSetCode = "LRW";
+    public FathomTrawl(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{3}{U}{U}");
 
         // Reveal cards from the top of your library until you reveal three nonland cards. Put the nonland cards revealed this way into your hand, then put the rest of the revealed cards on the bottom of your library in any order.
         this.getSpellAbility().addEffect(new FathomTrawlEffect());

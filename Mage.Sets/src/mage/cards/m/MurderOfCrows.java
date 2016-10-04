@@ -25,18 +25,18 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.innistrad;
+package mage.cards.m;
 
 import java.util.UUID;
 import mage.constants.CardType;
 import mage.constants.Outcome;
-import mage.constants.Rarity;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.DiesCreatureTriggeredAbility;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.keyword.FlyingAbility;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.game.Game;
 import mage.players.Player;
 
@@ -46,9 +46,8 @@ import mage.players.Player;
  */
 public class MurderOfCrows extends CardImpl {
 
-    public MurderOfCrows(UUID ownerId) {
-        super(ownerId, 70, "Murder of Crows", Rarity.UNCOMMON, new CardType[]{CardType.CREATURE}, "{3}{U}{U}");
-        this.expansionSetCode = "ISD";
+    public MurderOfCrows(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{3}{U}{U}");
         this.subtype.add("Bird");
 
         this.power = new MageInt(4);

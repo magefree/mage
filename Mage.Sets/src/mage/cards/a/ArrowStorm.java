@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.khansoftarkir;
+package mage.cards.a;
 
 import java.util.UUID;
 import mage.abilities.condition.InvertCondition;
@@ -33,8 +33,8 @@ import mage.abilities.condition.common.RaidCondition;
 import mage.abilities.decorator.ConditionalOneShotEffect;
 import mage.abilities.effects.common.DamageTargetEffect;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.target.common.TargetCreatureOrPlayer;
 import mage.watchers.common.PlayerAttackedWatcher;
 
@@ -44,9 +44,8 @@ import mage.watchers.common.PlayerAttackedWatcher;
  */
 public class ArrowStorm extends CardImpl {
 
-    public ArrowStorm(UUID ownerId) {
-        super(ownerId, 98, "Arrow Storm", Rarity.COMMON, new CardType[]{CardType.SORCERY}, "{3}{R}{R}");
-        this.expansionSetCode = "KTK";
+    public ArrowStorm(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{3}{R}{R}");
 
 
         // Arrow Storm deals 4 damage to target creature or player.

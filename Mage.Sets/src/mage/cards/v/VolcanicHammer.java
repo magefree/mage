@@ -25,12 +25,12 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.ninthedition;
+package mage.cards.v;
 
 import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.abilities.effects.common.DamageTargetEffect;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.target.common.TargetCreatureOrPlayer;
 
 import java.util.UUID;
@@ -40,9 +40,8 @@ import java.util.UUID;
  */
 public class VolcanicHammer extends CardImpl {
 
-    public VolcanicHammer(UUID ownerId) {
-        super(ownerId, 226, "Volcanic Hammer", Rarity.COMMON, new CardType[]{CardType.SORCERY}, "{1}{R}");
-        this.expansionSetCode = "9ED";
+    public VolcanicHammer(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{1}{R}");
 
 
         // Volcanic Hammer deals 3 damage to target creature or player.

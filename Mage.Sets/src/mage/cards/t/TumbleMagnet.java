@@ -26,11 +26,10 @@
  *  or implied, of BetaSteward_at_googlemail.com.
  */
 
-package mage.sets.scarsofmirrodin;
+package mage.cards.t;
 
 import java.util.UUID;
 import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.constants.Zone;
 import mage.abilities.Ability;
 import mage.abilities.common.EntersBattlefieldAbility;
@@ -40,6 +39,7 @@ import mage.abilities.costs.common.TapSourceCost;
 import mage.abilities.effects.common.TapTargetEffect;
 import mage.abilities.effects.common.counter.AddCountersSourceEffect;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.counters.CounterType;
 import mage.filter.FilterPermanent;
 import mage.filter.predicate.Predicates;
@@ -59,9 +59,8 @@ public class TumbleMagnet extends CardImpl {
                 new CardTypePredicate(CardType.CREATURE)));
     }
 
-    public TumbleMagnet (UUID ownerId) {
-        super(ownerId, 218, "Tumble Magnet", Rarity.COMMON, new CardType[]{CardType.ARTIFACT}, "{3}");
-        this.expansionSetCode = "SOM";
+    public TumbleMagnet (UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.ARTIFACT},"{3}");
         this.addAbility(new EntersBattlefieldAbility(new AddCountersSourceEffect(CounterType.CHARGE.createInstance(3)), "Tumble Magnet enters the battlefield with three charge counters on it"));
         Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new TapTargetEffect(), new TapSourceCost());
         ability.addCost(new RemoveCountersSourceCost(CounterType.CHARGE.createInstance()));

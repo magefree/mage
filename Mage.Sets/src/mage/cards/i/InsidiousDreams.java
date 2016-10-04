@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.torment;
+package mage.cards.i;
 
 import java.util.List;
 import java.util.UUID;
@@ -39,11 +39,11 @@ import mage.abilities.dynamicvalue.common.GetXValue;
 import mage.abilities.effects.OneShotEffect;
 import mage.cards.Card;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.cards.Cards;
 import mage.cards.CardsImpl;
 import mage.constants.CardType;
 import mage.constants.Outcome;
-import mage.constants.Rarity;
 import mage.constants.Zone;
 import mage.filter.FilterCard;
 import mage.game.Game;
@@ -58,9 +58,8 @@ import mage.target.common.TargetCardInLibrary;
  */
 public class InsidiousDreams extends CardImpl {
 
-    public InsidiousDreams(UUID ownerId) {
-        super(ownerId, 66, "Insidious Dreams", Rarity.RARE, new CardType[]{CardType.INSTANT}, "{3}{B}");
-        this.expansionSetCode = "TOR";
+    public InsidiousDreams(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.INSTANT},"{3}{B}");
 
         // As an additional cost to cast Insidious Dreams, discard X cards.
         this.getSpellAbility().addCost(new InsidiousDreamsAdditionalCost());

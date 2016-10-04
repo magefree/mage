@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.commander2013;
+package mage.cards.s;
 
 import java.util.UUID;
 import mage.MageInt;
@@ -38,8 +38,8 @@ import mage.abilities.effects.common.DestroyTargetEffect;
 import mage.abilities.effects.common.GainLifeEffect;
 import mage.abilities.keyword.KickerAbility;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.filter.predicate.Predicates;
 import mage.filter.predicate.mageobject.ColorPredicate;
@@ -56,9 +56,8 @@ public class StormscapeBattlemage extends CardImpl {
         filter.add(Predicates.not(new ColorPredicate(ObjectColor.BLACK)));
     }
 
-    public StormscapeBattlemage(UUID ownerId) {
-        super(ownerId, 58, "Stormscape Battlemage", Rarity.UNCOMMON, new CardType[]{CardType.CREATURE}, "{2}{U}");
-        this.expansionSetCode = "C13";
+    public StormscapeBattlemage(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{2}{U}");
         this.subtype.add("Metathran");
         this.subtype.add("Wizard");
 

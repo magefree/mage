@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.coldsnap;
+package mage.cards.j;
 
 import java.util.Set;
 import java.util.UUID;
@@ -42,13 +42,14 @@ import mage.abilities.effects.AsThoughEffectImpl;
 import mage.abilities.effects.OneShotEffect;
 import mage.cards.Card;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.cards.Cards;
+import mage.cards.CardSetInfo;
 import mage.cards.SplitCard;
 import mage.constants.AsThoughEffectType;
 import mage.constants.CardType;
 import mage.constants.Duration;
 import mage.constants.Outcome;
-import mage.constants.Rarity;
 import mage.constants.Zone;
 import mage.filter.FilterCard;
 import mage.game.ExileZone;
@@ -66,9 +67,8 @@ import mage.util.CardUtil;
  */
 public class JestersScepter extends CardImpl {
 
-    public JestersScepter(UUID ownerId) {
-        super(ownerId, 137, "Jester's Scepter", Rarity.RARE, new CardType[]{CardType.ARTIFACT}, "{3}");
-        this.expansionSetCode = "CSP";
+    public JestersScepter(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.ARTIFACT},"{3}");
 
         // When Jester's Scepter enters the battlefield, exile the top five cards of target player's library face down.
         Ability ability = new EntersBattlefieldTriggeredAbility(new JestersScepterEffect(), false);

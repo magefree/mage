@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.kaladesh;
+package mage.cards.f;
 
 import java.util.UUID;
 import mage.abilities.dynamicvalue.common.CardsInControllerHandCount;
@@ -33,8 +33,8 @@ import mage.abilities.effects.Effect;
 import mage.abilities.effects.common.DamageTargetEffect;
 import mage.abilities.effects.common.discard.DiscardHandDrawSameNumberSourceEffect;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.target.common.TargetCreatureOrPlayer;
 
 /**
@@ -43,9 +43,8 @@ import mage.target.common.TargetCreatureOrPlayer;
  */
 public class FatefulShowdown extends CardImpl {
 
-    public FatefulShowdown(UUID ownerId) {
-        super(ownerId, 114, "Fateful Showdown", Rarity.RARE, new CardType[]{CardType.INSTANT}, "{2}{R}{R}");
-        this.expansionSetCode = "KLD";
+    public FatefulShowdown(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.INSTANT},"{2}{R}{R}");
 
         // Fateful Showdown deals damage to target creature or player equal to the number of cards in your hand. Discard all the cards in your hand, then draw that many cards.
         Effect effect = new DamageTargetEffect(new CardsInControllerHandCount());

@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.antiquities;
+package mage.cards.p;
 
 import java.util.UUID;
 import mage.MageInt;
@@ -36,8 +36,8 @@ import mage.abilities.costs.common.TapSourceCost;
 import mage.abilities.dynamicvalue.common.SacrificeCostConvertedMana;
 import mage.abilities.mana.DynamicManaAbility;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.filter.common.FilterControlledArtifactPermanent;
 import mage.target.common.TargetControlledPermanent;
 
@@ -47,9 +47,8 @@ import mage.target.common.TargetControlledPermanent;
  */
 public class PriestOfYawgmoth extends CardImpl {
 
-    public PriestOfYawgmoth(UUID ownerId) {
-        super(ownerId, 49, "Priest of Yawgmoth", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{1}{B}");
-        this.expansionSetCode = "ATQ";
+    public PriestOfYawgmoth(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{1}{B}");
         this.subtype.add("Human");
         this.subtype.add("Cleric");
         this.power = new MageInt(1);

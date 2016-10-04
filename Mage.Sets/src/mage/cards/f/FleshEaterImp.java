@@ -26,12 +26,11 @@
  *  or implied, of BetaSteward_at_googlemail.com.
  */
 
-package mage.sets.mirrodinbesieged;
+package mage.cards.f;
 
 import java.util.UUID;
 
 import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.MageInt;
 import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.costs.common.SacrificeTargetCost;
@@ -39,6 +38,7 @@ import mage.abilities.effects.common.continuous.BoostSourceEffect;
 import mage.abilities.keyword.FlyingAbility;
 import mage.abilities.keyword.InfectAbility;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.Duration;
 import mage.constants.Zone;
 import mage.target.common.TargetControlledCreaturePermanent;
@@ -49,9 +49,8 @@ import mage.target.common.TargetControlledCreaturePermanent;
  */
 public class FleshEaterImp extends CardImpl {
 
-    public FleshEaterImp (UUID ownerId) {
-        super(ownerId, 42, "Flesh-Eater Imp", Rarity.UNCOMMON, new CardType[]{CardType.CREATURE}, "{3}{B}");
-        this.expansionSetCode = "MBS";
+    public FleshEaterImp (UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{3}{B}");
         this.subtype.add("Imp");
 
         this.power = new MageInt(2);

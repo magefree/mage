@@ -25,16 +25,16 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.shadowmoor;
+package mage.cards.w;
 
 import java.util.UUID;
 import mage.abilities.Ability;
 import mage.abilities.common.BeginningOfEndStepTriggeredAbility;
 import mage.abilities.effects.OneShotEffect;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Outcome;
-import mage.constants.Rarity;
 import mage.constants.TargetController;
 import mage.game.Game;
 import mage.players.Player;
@@ -46,9 +46,8 @@ import mage.watchers.common.PlayerLostLifeWatcher;
  */
 public class WoundReflection extends CardImpl {
 
-    public WoundReflection(UUID ownerId) {
-        super(ownerId, 81, "Wound Reflection", Rarity.RARE, new CardType[]{CardType.ENCHANTMENT}, "{5}{B}");
-        this.expansionSetCode = "SHM";
+    public WoundReflection(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.ENCHANTMENT},"{5}{B}");
 
 
         // At the beginning of each end step, each opponent loses life equal to the life he or she lost this turn.

@@ -25,18 +25,18 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.gatecrash;
+package mage.cards.a;
 
 import java.util.UUID;
 import mage.constants.CardType;
 import mage.constants.Duration;
-import mage.constants.Rarity;
 import mage.constants.Zone;
 import mage.MageInt;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.effects.common.continuous.GainAbilityAllEffect;
 import mage.abilities.keyword.LifelinkAbility;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.filter.predicate.Predicates;
 import mage.filter.predicate.permanent.BlockedByIdPredicate;
@@ -48,9 +48,8 @@ import mage.filter.predicate.permanent.BlockingAttackerIdPredicate;
  */
 public class AlmsBeast extends CardImpl {
 
-    public AlmsBeast(UUID ownerId) {
-        super(ownerId, 141, "Alms Beast", Rarity.RARE, new CardType[]{CardType.CREATURE}, "{2}{W}{B}");
-        this.expansionSetCode = "GTC";
+    public AlmsBeast(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{2}{W}{B}");
         this.subtype.add("Beast");
 
         this.power = new MageInt(6);

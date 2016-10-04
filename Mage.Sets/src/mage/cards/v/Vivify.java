@@ -25,16 +25,16 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.odyssey;
+package mage.cards.v;
 
 import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.effects.common.DrawCardSourceControllerEffect;
 import mage.abilities.effects.common.continuous.BecomesCreatureTargetEffect;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Duration;
-import mage.constants.Rarity;
 import mage.game.permanent.token.Token;
 import mage.target.common.TargetLandPermanent;
 
@@ -44,9 +44,8 @@ import mage.target.common.TargetLandPermanent;
  */
 public class Vivify extends CardImpl {
 
-    public Vivify(UUID ownerId) {
-        super(ownerId, 281, "Vivify", Rarity.UNCOMMON, new CardType[]{CardType.INSTANT}, "{2}{G}");
-        this.expansionSetCode = "ODY";
+    public Vivify(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.INSTANT},"{2}{G}");
 
         // Target land becomes a 3/3 creature until end of turn. It's still a land.
         this.getSpellAbility().addEffect(new BecomesCreatureTargetEffect(new AnimatedLand(), false, true, Duration.EndOfTurn));

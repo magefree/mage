@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.urzaslegacy;
+package mage.cards.h;
 
 import java.util.UUID;
 import mage.MageInt;
@@ -35,9 +35,9 @@ import mage.abilities.condition.common.SourceMatchesFilterCondition;
 import mage.abilities.decorator.ConditionalTriggeredAbility;
 import mage.abilities.effects.common.continuous.BecomesCreatureSourceEffect;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Duration;
-import mage.constants.Rarity;
 import mage.filter.FilterSpell;
 import mage.filter.common.FilterEnchantmentPermanent;
 import mage.filter.predicate.mageobject.CardTypePredicate;
@@ -56,9 +56,8 @@ public class HiddenGibbons extends CardImpl {
         filter.add(new CardTypePredicate(CardType.INSTANT));
     }
 
-    public HiddenGibbons(UUID ownerId) {
-        super(ownerId, 104, "Hidden Gibbons", Rarity.RARE, new CardType[]{CardType.ENCHANTMENT}, "{G}");
-        this.expansionSetCode = "ULG";
+    public HiddenGibbons(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.ENCHANTMENT},"{G}");
 
         // When an opponent casts an instant spell, if Hidden Gibbons is an enchantment, Hidden Gibbons becomes a 4/4 Ape creature.
         TriggeredAbility ability = new SpellCastOpponentTriggeredAbility(new BecomesCreatureSourceEffect(new HiddenGibbonsApe(), "", Duration.WhileOnBattlefield, true, false),

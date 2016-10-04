@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.homelands;
+package mage.cards.a;
 
 import java.util.UUID;
 import mage.ObjectColor;
@@ -33,9 +33,9 @@ import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.effects.common.continuous.GainAbilityAllEffect;
 import mage.abilities.keyword.PlainswalkAbility;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Duration;
-import mage.constants.Rarity;
 import mage.constants.Zone;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.filter.predicate.mageobject.ColorPredicate;
@@ -52,9 +52,8 @@ public class AysenHighway extends CardImpl {
         filter.add(new ColorPredicate(ObjectColor.WHITE));
     }
 
-    public AysenHighway(UUID ownerId) {
-        super(ownerId, 107, "Aysen Highway", Rarity.RARE, new CardType[]{CardType.ENCHANTMENT}, "{3}{W}{W}{W}");
-        this.expansionSetCode = "HML";
+    public AysenHighway(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.ENCHANTMENT},"{3}{W}{W}{W}");
 
         // White creatures have plainswalk.
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, 

@@ -25,17 +25,17 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.shadowmoor;
+package mage.cards.s;
 
 import java.util.UUID;
 import mage.abilities.Ability;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.turn.AddExtraTurnControllerEffect;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Outcome;
 import mage.constants.PhaseStep;
-import mage.constants.Rarity;
 import mage.game.Game;
 import mage.game.turn.TurnMod;
 import mage.players.Player;
@@ -46,9 +46,8 @@ import mage.players.Player;
  */
 public class SavorTheMoment extends CardImpl {
 
-    public SavorTheMoment(UUID ownerId) {
-        super(ownerId, 50, "Savor the Moment", Rarity.RARE, new CardType[]{CardType.SORCERY}, "{1}{U}{U}");
-        this.expansionSetCode = "SHM";
+    public SavorTheMoment(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{1}{U}{U}");
 
 
         // Take an extra turn after this one. Skip the untap step of that turn.

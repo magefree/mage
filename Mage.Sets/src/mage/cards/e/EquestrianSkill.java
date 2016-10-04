@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.shadowsoverinnistrad;
+package mage.cards.e;
 
 import java.util.UUID;
 import mage.abilities.Ability;
@@ -38,11 +38,11 @@ import mage.abilities.effects.common.continuous.GainAbilityAttachedEffect;
 import mage.abilities.keyword.EnchantAbility;
 import mage.abilities.keyword.TrampleAbility;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.AttachmentType;
 import mage.constants.CardType;
 import mage.constants.Duration;
 import mage.constants.Outcome;
-import mage.constants.Rarity;
 import mage.constants.Zone;
 import mage.target.TargetPermanent;
 import mage.target.common.TargetCreaturePermanent;
@@ -53,9 +53,8 @@ import mage.target.common.TargetCreaturePermanent;
  */
 public class EquestrianSkill extends CardImpl {
 
-    public EquestrianSkill(UUID ownerId) {
-        super(ownerId, 204, "Equestrian Skill", Rarity.COMMON, new CardType[]{CardType.ENCHANTMENT}, "{3}{G}");
-        this.expansionSetCode = "SOI";
+    public EquestrianSkill(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.ENCHANTMENT},"{3}{G}");
         this.subtype.add("Aura");
 
         // Enchant creature

@@ -25,13 +25,13 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.magic2010;
+package mage.cards.y;
 
 import java.util.UUID;
 import mage.abilities.effects.common.SacrificeOpponentsEffect;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.filter.common.FilterControlledLandPermanent;
 
 /**
@@ -40,9 +40,8 @@ import mage.filter.common.FilterControlledLandPermanent;
  */
 public class YawningFissure extends CardImpl {
 
-    public YawningFissure(UUID ownerId) {
-        super(ownerId, 164, "Yawning Fissure", Rarity.COMMON, new CardType[]{CardType.SORCERY}, "{4}{R}");
-        this.expansionSetCode = "M10";
+    public YawningFissure(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{4}{R}");
 
 
         // Each opponent sacrifices a land.

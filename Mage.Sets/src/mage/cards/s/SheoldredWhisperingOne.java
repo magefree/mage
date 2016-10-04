@@ -26,12 +26,11 @@
  *  or implied, of BetaSteward_at_googlemail.com.
  */
 
-package mage.sets.newphyrexia;
+package mage.cards.s;
 
 import java.util.UUID;
 
 import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.BeginningOfUpkeepTriggeredAbility;
@@ -39,6 +38,7 @@ import mage.abilities.effects.common.ReturnFromGraveyardToBattlefieldTargetEffec
 import mage.abilities.effects.common.SacrificeEffect;
 import mage.abilities.keyword.SwampwalkAbility;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.TargetController;
 import mage.filter.common.FilterCreatureCard;
 import mage.filter.common.FilterCreaturePermanent;
@@ -50,9 +50,8 @@ import mage.target.common.TargetCardInYourGraveyard;
  */
 public class SheoldredWhisperingOne extends CardImpl {
 
-    public SheoldredWhisperingOne (UUID ownerId) {
-        super(ownerId, 73, "Sheoldred, Whispering One", Rarity.MYTHIC, new CardType[]{CardType.CREATURE}, "{5}{B}{B}");
-        this.expansionSetCode = "NPH";
+    public SheoldredWhisperingOne (UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{5}{B}{B}");
         this.supertype.add("Legendary");
         this.subtype.add("Praetor");
 

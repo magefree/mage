@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.limitedalpha;
+package mage.cards.j;
 
 import java.util.UUID;
 import mage.MageObject;
@@ -34,10 +34,10 @@ import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.costs.mana.GenericManaCost;
 import mage.abilities.effects.ReplacementEffectImpl;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Duration;
 import mage.constants.Outcome;
-import mage.constants.Rarity;
 import mage.constants.Zone;
 import mage.filter.FilterObject;
 import mage.game.Game;
@@ -55,9 +55,8 @@ import mage.target.common.TargetCreaturePermanent;
  */
 public class JadeMonolith extends CardImpl {
 
-    public JadeMonolith(UUID ownerId) {
-        super(ownerId, 252, "Jade Monolith", Rarity.RARE, new CardType[]{CardType.ARTIFACT}, "{4}");
-        this.expansionSetCode = "LEA";
+    public JadeMonolith(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.ARTIFACT},"{4}");
 
         // {1}: The next time a source of your choice would deal damage to target creature this turn, that source deals that damage to you instead.
         Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new JadeMonolithRedirectionEffect(), new GenericManaCost(1));

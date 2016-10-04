@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.alarareborn;
+package mage.cards.g;
 
 import java.util.UUID;
 import mage.MageInt;
@@ -36,9 +36,9 @@ import mage.abilities.effects.common.combat.CantBeBlockedSourceEffect;
 import mage.abilities.effects.common.continuous.BoostSourceEffect;
 import mage.abilities.keyword.CyclingAbility;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Duration;
-import mage.constants.Rarity;
 import mage.constants.TargetController;
 import mage.filter.FilterPermanent;
 import mage.filter.common.FilterArtifactPermanent;
@@ -58,9 +58,8 @@ public class GlassdustHulk extends CardImpl {
         filter.add(new AnotherPredicate());
     }
 
-    public GlassdustHulk(UUID ownerId) {
-        super(ownerId, 7, "Glassdust Hulk", Rarity.COMMON, new CardType[]{CardType.ARTIFACT, CardType.CREATURE}, "{3}{W}{U}");
-        this.expansionSetCode = "ARB";
+    public GlassdustHulk(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.ARTIFACT,CardType.CREATURE},"{3}{W}{U}");
         this.subtype.add("Golem");
 
         this.power = new MageInt(3);

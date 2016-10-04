@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.dissension;
+package mage.cards.m;
 
 import java.util.UUID;
 import mage.MageObject;
@@ -38,9 +38,9 @@ import mage.abilities.costs.mana.ManaCostsImpl;
 import mage.abilities.effects.common.UntapTargetEffect;
 import mage.cards.Card;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.AbilityType;
 import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.constants.Zone;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.filter.predicate.Predicate;
@@ -59,9 +59,8 @@ public class MagewrightsStone extends CardImpl {
         filter.add(new HasAbilityWithTapSymbolPredicate());
     }
 
-    public MagewrightsStone(UUID ownerId) {
-        super(ownerId, 162, "Magewright's Stone", Rarity.UNCOMMON, new CardType[]{CardType.ARTIFACT}, "{2}");
-        this.expansionSetCode = "DIS";
+    public MagewrightsStone(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.ARTIFACT},"{2}");
 
         // {1}, {T}: Untap target creature that has an activated ability with {T} in its cost.
         Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new UntapTargetEffect(), new ManaCostsImpl("{1}"));

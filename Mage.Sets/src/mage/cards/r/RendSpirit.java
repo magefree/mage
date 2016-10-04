@@ -26,14 +26,14 @@
  *  or implied, of BetaSteward_at_googlemail.com.
  */
 
-package mage.sets.championsofkamigawa;
+package mage.cards.r;
 
 import java.util.UUID;
 
 import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.abilities.effects.common.DestroyTargetEffect;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.filter.FilterPermanent;
 import mage.filter.predicate.mageobject.SubtypePredicate;
 import mage.target.TargetPermanent;
@@ -49,9 +49,8 @@ public class RendSpirit extends CardImpl {
         filter.add(new SubtypePredicate("Spirit"));
     }
 
-    public RendSpirit(UUID ownerId) {
-        super(ownerId, 141, "Rend Spirit", Rarity.COMMON, new CardType[]{CardType.INSTANT}, "{2}{B}");
-        this.expansionSetCode = "CHK";
+    public RendSpirit(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.INSTANT},"{2}{B}");
 
         this.getSpellAbility().addTarget(new TargetPermanent(filter));
         this.getSpellAbility().addEffect(new DestroyTargetEffect());

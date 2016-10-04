@@ -27,7 +27,7 @@
  *  or implied, of BetaSteward_at_googlemail.com.
  *
  */
-package mage.sets.betrayersofkamigawa;
+package mage.cards.f;
 
 import java.util.UUID;
 import mage.MageInt;
@@ -43,9 +43,9 @@ import mage.abilities.effects.common.PreventDamageToTargetEffect;
 import mage.abilities.effects.common.counter.AddCountersSourceEffect;
 import mage.abilities.keyword.FlyingAbility;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Duration;
-import mage.constants.Rarity;
 import mage.constants.Zone;
 import mage.counters.CounterType;
 import mage.filter.common.FilterSpiritOrArcaneCard;
@@ -60,9 +60,8 @@ public class FaithfulSquire extends CardImpl {
 
     private static final FilterSpiritOrArcaneCard filter = new FilterSpiritOrArcaneCard();
 
-    public FaithfulSquire(UUID ownerId) {
-        super(ownerId, 3, "Faithful Squire", Rarity.UNCOMMON, new CardType[]{CardType.CREATURE}, "{1}{W}{W}");
-        this.expansionSetCode = "BOK";
+    public FaithfulSquire(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{1}{W}{W}");
         this.subtype.add("Human");
         this.subtype.add("Soldier");
 

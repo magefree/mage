@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.ravnica;
+package mage.cards.d;
 
 import java.util.UUID;
 
@@ -35,9 +35,9 @@ import mage.abilities.effects.common.AttachEffect;
 import mage.abilities.effects.common.continuous.ControlEnchantedEffect;
 import mage.abilities.keyword.EnchantAbility;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Outcome;
-import mage.constants.Rarity;
 import mage.constants.Zone;
 import mage.filter.FilterPermanent;
 import mage.filter.predicate.permanent.TappedPredicate;
@@ -52,9 +52,8 @@ import mage.target.common.TargetCreaturePermanent;
  */
 public class DreamLeash extends CardImpl {
 
-    public DreamLeash(UUID ownerId) {
-        super(ownerId, 45, "Dream Leash", Rarity.RARE, new CardType[]{CardType.ENCHANTMENT}, "{3}{U}{U}");
-        this.expansionSetCode = "RAV";
+    public DreamLeash(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.ENCHANTMENT},"{3}{U}{U}");
         this.subtype.add("Aura");
 
         // Enchant permanent

@@ -25,14 +25,14 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.dragonsmaze;
+package mage.cards.b;
 
 import java.util.UUID;
 import mage.abilities.TriggeredAbilityImpl;
 import mage.abilities.effects.common.DrawCardSourceControllerEffect;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.constants.Zone;
 import mage.counters.CounterType;
 import mage.game.Game;
@@ -45,9 +45,8 @@ import mage.game.permanent.Permanent;
 
 public class BredForTheHunt extends CardImpl {
 
-    public BredForTheHunt(UUID ownerId) {
-        super(ownerId, 59, "Bred for the Hunt", Rarity.UNCOMMON, new CardType[]{CardType.ENCHANTMENT}, "{1}{G}{U}");
-        this.expansionSetCode = "DGM";
+    public BredForTheHunt(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.ENCHANTMENT},"{1}{G}{U}");
 
 
         // Whenever a creature you control with a +1/+1 counter on it deals combat damage to a player, you may draw a card.

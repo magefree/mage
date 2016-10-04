@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.magic2010;
+package mage.cards.s;
 
 import java.util.Collection;
 import java.util.TreeSet;
@@ -37,11 +37,11 @@ import mage.abilities.effects.OneShotEffect;
 import mage.abilities.keyword.FlyingAbility;
 import mage.cards.Card;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.choices.Choice;
 import mage.choices.ChoiceImpl;
 import mage.constants.CardType;
 import mage.constants.Outcome;
-import mage.constants.Rarity;
 import mage.constants.Zone;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
@@ -54,9 +54,8 @@ import mage.target.common.TargetCardInLibrary;
  */
 public class SphinxAmbassador extends CardImpl {
 
-    public SphinxAmbassador(UUID ownerId) {
-        super(ownerId, 73, "Sphinx Ambassador", Rarity.MYTHIC, new CardType[]{CardType.CREATURE}, "{5}{U}{U}");
-        this.expansionSetCode = "M10";
+    public SphinxAmbassador(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{5}{U}{U}");
         this.subtype.add("Sphinx");
 
         this.power = new MageInt(5);

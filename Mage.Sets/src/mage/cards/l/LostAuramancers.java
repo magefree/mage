@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.futuresight;
+package mage.cards.l;
 
 import java.util.UUID;
 
@@ -38,8 +38,8 @@ import mage.abilities.effects.common.search.SearchLibraryPutInPlayEffect;
 import mage.abilities.keyword.VanishingSacrificeAbility;
 import mage.abilities.keyword.VanishingUpkeepAbility;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.constants.Zone;
 import mage.counters.CounterType;
 import mage.filter.common.FilterEnchantmentCard;
@@ -54,9 +54,8 @@ import mage.target.common.TargetCardInLibrary;
  */
 public class LostAuramancers extends CardImpl {
 
-    public LostAuramancers(UUID ownerId) {
-        super(ownerId, 11, "Lost Auramancers", Rarity.UNCOMMON, new CardType[]{CardType.CREATURE}, "{2}{W}{W}");
-        this.expansionSetCode = "FUT";
+    public LostAuramancers(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{2}{W}{W}");
         this.subtype.add("Human");
         this.subtype.add("Wizard");
         this.power = new MageInt(3);

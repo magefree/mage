@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.innistrad;
+package mage.cards.h;
 
 import mage.MageInt;
 import mage.abilities.TriggeredAbility;
@@ -40,6 +40,7 @@ import mage.abilities.effects.common.TransformSourceEffect;
 import mage.abilities.effects.common.continuous.BoostControlledEffect;
 import mage.abilities.keyword.TransformAbility;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.*;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.filter.predicate.Predicates;
@@ -64,9 +65,8 @@ public class HowlpackAlpha extends CardImpl {
         filter.add(Predicates.or(new SubtypePredicate("Werewolf"), new SubtypePredicate("Wolf")));
     }
 
-    public HowlpackAlpha(UUID ownerId) {
-        super(ownerId, 193, "Howlpack Alpha", Rarity.RARE, new CardType[]{CardType.CREATURE}, "");
-        this.expansionSetCode = "ISD";
+    public HowlpackAlpha(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"");
         this.subtype.add("Werewolf");
 
         // this card is the second face of double-faced card

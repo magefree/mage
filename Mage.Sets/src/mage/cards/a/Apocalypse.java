@@ -25,16 +25,16 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.tempest;
+package mage.cards.a;
 
 import java.util.UUID;
 import mage.abilities.Ability;
 import mage.abilities.effects.OneShotEffect;
 import mage.cards.Card;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Outcome;
-import mage.constants.Rarity;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.players.Player;
@@ -45,9 +45,8 @@ import mage.players.Player;
  */
 public class Apocalypse extends CardImpl {
 
-    public Apocalypse(UUID ownerId) {
-        super(ownerId, 162, "Apocalypse", Rarity.RARE, new CardType[]{CardType.SORCERY}, "{2}{R}{R}{R}");
-        this.expansionSetCode = "TMP";
+    public Apocalypse(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{2}{R}{R}{R}");
 
         // Exile all permanents. You discard your hand.
         this.getSpellAbility().addEffect(new ApocalypseExileAllPermanentsEffect());

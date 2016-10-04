@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.masterseditioniv;
+package mage.cards.g;
 
 import java.util.UUID;
 import mage.abilities.common.delayed.AtTheBeginOfNextUpkeepDelayedTriggeredAbility;
@@ -33,9 +33,9 @@ import mage.abilities.effects.common.CantBeRegeneratedTargetEffect;
 import mage.abilities.effects.common.CreateDelayedTriggeredAbilityEffect;
 import mage.abilities.effects.common.DrawCardSourceControllerEffect;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Duration;
-import mage.constants.Rarity;
 import mage.target.common.TargetCreaturePermanent;
 
 /**
@@ -44,9 +44,8 @@ import mage.target.common.TargetCreaturePermanent;
  */
 public class Gravebind extends CardImpl {
 
-    public Gravebind(UUID ownerId) {
-        super(ownerId, 84, "Gravebind", Rarity.COMMON, new CardType[]{CardType.INSTANT}, "{B}");
-        this.expansionSetCode = "ME4";
+    public Gravebind(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.INSTANT},"{B}");
 
         // Target creature can't be regenerated this turn.
         getSpellAbility().addEffect(new CantBeRegeneratedTargetEffect(Duration.EndOfTurn));

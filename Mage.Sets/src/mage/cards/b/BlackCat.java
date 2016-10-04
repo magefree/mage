@@ -27,15 +27,15 @@
  *  or implied, of BetaSteward_at_googlemail.com.
  * 
  */
-package mage.sets.darkascension;
+package mage.cards.b;
 
 import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.DiesTriggeredAbility;
 import mage.abilities.effects.common.discard.DiscardTargetEffect;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.target.common.TargetOpponent;
 
 import java.util.UUID;
@@ -46,9 +46,8 @@ import java.util.UUID;
  */
 public class BlackCat extends CardImpl {
 
-    public BlackCat(UUID ownerId) {
-        super(ownerId, 54, "Black Cat", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{1}{B}");
-        this.expansionSetCode = "DKA";
+    public BlackCat(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{1}{B}");
         this.subtype.add("Zombie");
         this.subtype.add("Cat");
 

@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.journeyintonyx;
+package mage.cards.r;
 
 import java.util.UUID;
 import mage.MageInt;
@@ -34,9 +34,9 @@ import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.CreateTokenEffect;
 import mage.cards.Card;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Outcome;
-import mage.constants.Rarity;
 import mage.constants.Zone;
 import mage.filter.common.FilterCreatureCard;
 import mage.game.Game;
@@ -50,9 +50,8 @@ import mage.target.common.TargetCardInYourGraveyard;
  */
 public class RitualOfTheReturned extends CardImpl {
 
-    public RitualOfTheReturned(UUID ownerId) {
-        super(ownerId, 80, "Ritual of the Returned", Rarity.UNCOMMON, new CardType[]{CardType.INSTANT}, "{3}{B}");
-        this.expansionSetCode = "JOU";
+    public RitualOfTheReturned(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.INSTANT},"{3}{B}");
 
 
         // Exile target creature card from your graveyard. Put a black Zombie creature token onto the battlefield with power equal to the exiled card's power and toughness equal to the exiled card's toughness.

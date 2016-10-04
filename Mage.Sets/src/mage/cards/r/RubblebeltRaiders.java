@@ -25,16 +25,16 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.gatecrash;
+package mage.cards.r;
 
 import java.util.UUID;
 import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.MageInt;
 import mage.abilities.common.AttacksTriggeredAbility;
 import mage.abilities.dynamicvalue.common.AttackingCreatureCount;
 import mage.abilities.effects.common.counter.AddCountersSourceEffect;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.counters.CounterType;
 
 /**
@@ -43,9 +43,8 @@ import mage.counters.CounterType;
  */
 public class RubblebeltRaiders extends CardImpl {
 
-    public RubblebeltRaiders(UUID ownerId) {
-        super(ownerId, 224, "Rubblebelt Raiders", Rarity.RARE, new CardType[]{CardType.CREATURE}, "{1}{R/G}{R/G}{R/G}");
-        this.expansionSetCode = "GTC";
+    public RubblebeltRaiders(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{1}{R/G}{R/G}{R/G}");
         this.subtype.add("Human");
         this.subtype.add("Warrior");
 

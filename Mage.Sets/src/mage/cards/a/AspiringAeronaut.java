@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.magicorigins;
+package mage.cards.a;
 
 import java.util.UUID;
 import mage.MageInt;
@@ -33,8 +33,8 @@ import mage.abilities.common.EntersBattlefieldTriggeredAbility;
 import mage.abilities.effects.common.CreateTokenEffect;
 import mage.abilities.keyword.FlyingAbility;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.game.permanent.token.ThopterColorlessToken;
 
 /**
@@ -43,9 +43,8 @@ import mage.game.permanent.token.ThopterColorlessToken;
  */
 public class AspiringAeronaut extends CardImpl {
 
-    public AspiringAeronaut(UUID ownerId) {
-        super(ownerId, 46, "Aspiring Aeronaut", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{3}{U}");
-        this.expansionSetCode = "ORI";
+    public AspiringAeronaut(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{3}{U}");
         this.subtype.add("Human");
         this.subtype.add("Artificer");
         this.power = new MageInt(1);

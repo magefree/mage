@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.magicorigins;
+package mage.cards.g;
 
 import java.util.UUID;
 import mage.abilities.condition.common.SpellMasteryCondition;
@@ -36,9 +36,9 @@ import mage.abilities.effects.common.CreateTokenEffect;
 import mage.abilities.effects.common.continuous.GainAbilityAllEffect;
 import mage.abilities.keyword.IndestructibleAbility;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Duration;
-import mage.constants.Rarity;
 import mage.filter.common.FilterControlledCreaturePermanent;
 import mage.game.permanent.token.KnightToken;
 
@@ -48,9 +48,8 @@ import mage.game.permanent.token.KnightToken;
  */
 public class GideonsPhalanx extends CardImpl {
 
-    public GideonsPhalanx(UUID ownerId) {
-        super(ownerId, 14, "Gideon's Phalanx", Rarity.RARE, new CardType[]{CardType.INSTANT}, "{5}{W}{W}");
-        this.expansionSetCode = "ORI";
+    public GideonsPhalanx(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.INSTANT},"{5}{W}{W}");
 
         // Put four 2/2 white Knight creature tokens with vigilance onto the battlefield.
         this.getSpellAbility().addEffect(new CreateTokenEffect(new KnightToken(), 4));

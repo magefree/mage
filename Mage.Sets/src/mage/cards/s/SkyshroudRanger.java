@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.tempest;
+package mage.cards.s;
 
 import java.util.UUID;
 import mage.MageInt;
@@ -34,8 +34,8 @@ import mage.abilities.common.ActivateAsSorceryActivatedAbility;
 import mage.abilities.costs.common.TapSourceCost;
 import mage.abilities.effects.common.PutLandFromHandOntoBattlefieldEffect;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.constants.Zone;
 import mage.filter.common.FilterLandCard;
 import mage.target.common.TargetCardInHand;
@@ -46,9 +46,8 @@ import mage.target.common.TargetCardInHand;
  */
 public class SkyshroudRanger extends CardImpl {
 
-    public SkyshroudRanger(UUID ownerId) {
-        super(ownerId, 150, "Skyshroud Ranger", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{G}");
-        this.expansionSetCode = "TMP";
+    public SkyshroudRanger(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{G}");
         this.subtype.add("Elf");
 
         this.power = new MageInt(1);

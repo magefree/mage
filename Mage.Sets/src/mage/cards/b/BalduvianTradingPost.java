@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.alliances;
+package mage.cards.b;
 
 import java.util.UUID;
 import mage.Mana;
@@ -39,8 +39,8 @@ import mage.abilities.effects.common.DamageTargetEffect;
 import mage.abilities.effects.common.EnterBattlefieldPayCostOrPutGraveyardEffect;
 import mage.abilities.mana.SimpleManaAbility;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.constants.Zone;
 import mage.filter.common.FilterControlledPermanent;
 import mage.filter.predicate.Predicates;
@@ -62,9 +62,8 @@ public class BalduvianTradingPost extends CardImpl {
         filter.add(Predicates.not(new TappedPredicate()));
     }
 
-    public BalduvianTradingPost(UUID ownerId) {
-        super(ownerId, 182, "Balduvian Trading Post", Rarity.RARE, new CardType[]{CardType.LAND}, "");
-        this.expansionSetCode = "ALL";
+    public BalduvianTradingPost(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.LAND},"");
 
         // If Balduvian Trading Post would enter the battlefield, sacrifice an untapped Mountain instead. If you do, put Balduvian Trading Post onto the battlefield. If you don't, put it into its owner's graveyard.
         this.addAbility(new SimpleStaticAbility(Zone.ALL, new EnterBattlefieldPayCostOrPutGraveyardEffect(new SacrificeTargetCost(new TargetControlledPermanent(filter)))));

@@ -25,15 +25,15 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.apocalypse;
+package mage.cards.a;
 
 import java.util.UUID;
 import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.abilities.dynamicvalue.common.TargetConvertedManaCost;
 import mage.abilities.effects.common.CreateTokenEffect;
 import mage.abilities.effects.common.ReturnToHandTargetEffect;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.game.permanent.token.SaprolingToken;
 import mage.target.common.TargetCreaturePermanent;
 
@@ -43,9 +43,8 @@ import mage.target.common.TargetCreaturePermanent;
  */
 public class AetherMutation extends CardImpl {
 
-    public AetherMutation(UUID ownerId) {
-        super(ownerId, 91, "Aether Mutation", Rarity.UNCOMMON, new CardType[]{CardType.SORCERY}, "{3}{G}{U}");
-        this.expansionSetCode = "APC";
+    public AetherMutation(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{3}{G}{U}");
 
 
         // Return target creature to its owner's hand.

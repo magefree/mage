@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.prophecy;
+package mage.cards.i;
 
 import java.util.UUID;
 
@@ -36,6 +36,7 @@ import mage.abilities.common.BeginningOfUpkeepTriggeredAbility;
 import mage.abilities.effects.OneShotEffect;
 import mage.cards.Card;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.game.Game;
 import mage.game.permanent.token.Token;
 import mage.players.Player;
@@ -46,9 +47,8 @@ import mage.players.Player;
  */
 public class InfernalGenesis extends CardImpl {
 
-    public InfernalGenesis(UUID ownerId) {
-        super(ownerId, 68, "Infernal Genesis", Rarity.RARE, new CardType[]{CardType.ENCHANTMENT}, "{4}{B}{B}");
-        this.expansionSetCode = "PCY";
+    public InfernalGenesis(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.ENCHANTMENT},"{4}{B}{B}");
 
         // At the beginning of each player's upkeep, that player puts the top card of his or her library into his or her graveyard. Then he or she puts X 1/1 black Minion creature tokens onto the battlefield, where X is that card's converted mana cost.
         this.addAbility(new BeginningOfUpkeepTriggeredAbility(new InfernalGenesisEffect(), TargetController.ANY, false));

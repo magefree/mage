@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.innistrad;
+package mage.cards.m;
 
 import java.util.UUID;
 import mage.MageInt;
@@ -36,8 +36,8 @@ import mage.abilities.effects.Effect;
 import mage.abilities.effects.common.DoIfCostPaid;
 import mage.abilities.effects.common.DrawCardSourceControllerEffect;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.constants.Zone;
 import mage.filter.Filter;
 import mage.filter.FilterPermanent;
@@ -57,9 +57,8 @@ public class MentorOfTheMeek extends CardImpl {
         filter.add(new PowerPredicate(Filter.ComparisonType.LessThan, 3));
     }
 
-    public MentorOfTheMeek(UUID ownerId) {
-        super(ownerId, 21, "Mentor of the Meek", Rarity.RARE, new CardType[]{CardType.CREATURE}, "{2}{W}");
-        this.expansionSetCode = "ISD";
+    public MentorOfTheMeek(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{2}{W}");
         this.subtype.add("Human");
         this.subtype.add("Soldier");
 

@@ -26,17 +26,17 @@
  *  or implied, of BetaSteward_at_googlemail.com.
  */
 
-package mage.sets.worldwake;
+package mage.cards.w;
 
 import java.util.UUID;
 import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.MageInt;
 import mage.abilities.common.EntersBattlefieldTriggeredAbility;
 import mage.abilities.dynamicvalue.common.MultikickerCount;
 import mage.abilities.effects.common.CreateTokenEffect;
 import mage.abilities.keyword.MultikickerAbility;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.game.permanent.token.WolfToken;
 
 /**
@@ -45,9 +45,8 @@ import mage.game.permanent.token.WolfToken;
  */
 public class WolfbriarElemental extends CardImpl {
 
-    public WolfbriarElemental(UUID ownerId) {
-        super(ownerId, 118, "Wolfbriar Elemental", Rarity.RARE, new CardType[]{CardType.CREATURE}, "{2}{G}{G}");
-        this.expansionSetCode = "WWK";
+    public WolfbriarElemental(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{2}{G}{G}");
         this.subtype.add("Elemental");
 
         this.power = new MageInt(4);

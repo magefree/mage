@@ -25,14 +25,14 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.newphyrexia;
+package mage.cards.g;
 
 import java.util.UUID;
 import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.abilities.effects.common.counter.AddCountersTargetEffect;
 import mage.abilities.effects.common.counter.ProliferateEffect;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.counters.CounterType;
 import mage.target.common.TargetCreaturePermanent;
 
@@ -42,9 +42,8 @@ import mage.target.common.TargetCreaturePermanent;
  */
 public class GrimAffliction extends CardImpl {
 
-    public GrimAffliction(UUID ownerId) {
-        super(ownerId, 63, "Grim Affliction", Rarity.COMMON, new CardType[]{CardType.INSTANT}, "{2}{B}");
-        this.expansionSetCode = "NPH";
+    public GrimAffliction(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.INSTANT},"{2}{B}");
 
 
         this.getSpellAbility().addTarget(new TargetCreaturePermanent());

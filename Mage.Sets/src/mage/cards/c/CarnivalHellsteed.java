@@ -25,16 +25,16 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.returntoravnica;
+package mage.cards.c;
  
 import java.util.UUID;
 import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.MageInt;
 import mage.abilities.keyword.FirstStrikeAbility;
 import mage.abilities.keyword.HasteAbility;
 import mage.abilities.keyword.UnleashAbility;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
  
 /**
  *
@@ -42,9 +42,8 @@ import mage.cards.CardImpl;
  */
 public class CarnivalHellsteed extends CardImpl {
  
-    public CarnivalHellsteed(UUID ownerId) {
-        super(ownerId, 147, "Carnival Hellsteed", Rarity.RARE, new CardType[]{CardType.CREATURE}, "{4}{B}{R}");
-        this.expansionSetCode = "RTR";
+    public CarnivalHellsteed(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{4}{B}{R}");
         this.subtype.add("Nightmare");
         this.subtype.add("Horse");
  

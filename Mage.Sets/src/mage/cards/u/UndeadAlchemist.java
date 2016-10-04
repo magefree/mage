@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.innistrad;
+package mage.cards.u;
 
 import java.util.UUID;
 import mage.MageInt;
@@ -37,10 +37,10 @@ import mage.abilities.effects.common.CreateTokenEffect;
 import mage.abilities.effects.common.ExileTargetEffect;
 import mage.cards.Card;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Duration;
 import mage.constants.Outcome;
-import mage.constants.Rarity;
 import mage.constants.Zone;
 import mage.game.Game;
 import mage.game.events.DamagePlayerEvent;
@@ -57,9 +57,8 @@ import mage.target.targetpointer.FixedTarget;
  */
 public class UndeadAlchemist extends CardImpl {
 
-    public UndeadAlchemist(UUID ownerId) {
-        super(ownerId, 84, "Undead Alchemist", Rarity.RARE, new CardType[]{CardType.CREATURE}, "{3}{U}");
-        this.expansionSetCode = "ISD";
+    public UndeadAlchemist(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{3}{U}");
         this.subtype.add("Zombie");
 
         this.power = new MageInt(4);

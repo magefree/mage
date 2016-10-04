@@ -25,12 +25,11 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.scarsofmirrodin;
+package mage.cards.p;
 
 import java.util.UUID;
 import mage.constants.CardType;
 import mage.constants.Duration;
-import mage.constants.Rarity;
 import mage.constants.Zone;
 import mage.abilities.Ability;
 import mage.abilities.common.PutIntoGraveFromBattlefieldSourceTriggeredAbility;
@@ -42,6 +41,7 @@ import mage.abilities.effects.common.combat.CantBlockTargetEffect;
 import mage.abilities.effects.common.DoIfCostPaid;
 import mage.abilities.effects.common.DrawCardSourceControllerEffect;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.target.common.TargetCreaturePermanent;
 
 /**
@@ -50,9 +50,8 @@ import mage.target.common.TargetCreaturePermanent;
  */
 public class PanicSpellbomb extends CardImpl {
 
-    public PanicSpellbomb(UUID ownerId) {
-        super(ownerId, 191, "Panic Spellbomb", Rarity.COMMON, new CardType[]{CardType.ARTIFACT}, "{1}");
-        this.expansionSetCode = "SOM";
+    public PanicSpellbomb(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.ARTIFACT},"{1}");
 
         // Tap, Sacrifice Panic Spellbomb: Target creature can't block this turn.
         Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new CantBlockTargetEffect(Duration.EndOfTurn), new TapSourceCost());

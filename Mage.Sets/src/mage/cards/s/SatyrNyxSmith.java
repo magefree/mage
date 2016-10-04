@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.bornofthegods;
+package mage.cards.s;
 
 import java.util.UUID;
 import mage.MageInt;
@@ -35,8 +35,8 @@ import mage.abilities.effects.common.DoIfCostPaid;
 import mage.abilities.keyword.HasteAbility;
 import mage.abilities.keyword.InspiredAbility;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.game.permanent.token.Token;
 
 /**
@@ -45,9 +45,8 @@ import mage.game.permanent.token.Token;
  */
 public class SatyrNyxSmith extends CardImpl {
 
-    public SatyrNyxSmith(UUID ownerId) {
-        super(ownerId, 109, "Satyr Nyx-Smith", Rarity.UNCOMMON, new CardType[]{CardType.CREATURE}, "{2}{R}");
-        this.expansionSetCode = "BNG";
+    public SatyrNyxSmith(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{2}{R}");
         this.subtype.add("Satyr");
         this.subtype.add("Shaman");
 

@@ -26,13 +26,13 @@
  *  or implied, of BetaSteward_at_googlemail.com.
  */
 
-package mage.sets.returntoravnica;
+package mage.cards.c;
 
 import java.util.UUID;
 import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.MageInt;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 
 /**
  *
@@ -40,9 +40,8 @@ import mage.cards.CardImpl;
  */
 public class Cobblebrute extends CardImpl {
 
-    public Cobblebrute (UUID ownerId) {
-        super(ownerId, 91, "Cobblebrute", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{3}{R}");
-        this.expansionSetCode = "RTR";
+    public Cobblebrute (UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{3}{R}");
         this.subtype.add("Elemental");
 
         this.power = new MageInt(5);

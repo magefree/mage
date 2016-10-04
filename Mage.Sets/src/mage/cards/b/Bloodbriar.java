@@ -25,15 +25,15 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.eldritchmoon;
+package mage.cards.b;
 
 import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.common.SacrificeAllTriggeredAbility;
 import mage.abilities.effects.common.counter.AddCountersSourceEffect;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.constants.TargetController;
 import mage.counters.CounterType;
 import mage.filter.FilterPermanent;
@@ -53,9 +53,8 @@ public class Bloodbriar extends CardImpl {
         filter.add(new AnotherPredicate());
     }
 
-    public Bloodbriar(UUID ownerId) {
-        super(ownerId, 151, "Bloodbriar", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{2}{G}");
-        this.expansionSetCode = "EMN";
+    public Bloodbriar(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{2}{G}");
         this.subtype.add("Plant");
         this.subtype.add("Elemental");
         this.power = new MageInt(2);

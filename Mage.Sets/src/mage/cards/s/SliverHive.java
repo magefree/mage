@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.magic2015;
+package mage.cards.s;
 
 import java.util.UUID;
 import mage.ConditionalMana;
@@ -44,8 +44,8 @@ import mage.abilities.mana.builder.ConditionalManaBuilder;
 import mage.abilities.mana.conditional.ConditionalSpellManaBuilder;
 import mage.abilities.mana.conditional.CreatureCastManaCondition;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.constants.Zone;
 import mage.filter.FilterSpell;
 import mage.filter.common.FilterControlledPermanent;
@@ -70,9 +70,8 @@ public class SliverHive extends CardImpl {
         filterSpell.add(new SubtypePredicate("Sliver"));
     }
 
-    public SliverHive(UUID ownerId) {
-        super(ownerId, 247, "Sliver Hive", Rarity.RARE, new CardType[]{CardType.LAND}, "");
-        this.expansionSetCode = "M15";
+    public SliverHive(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.LAND},"");
 
         // {T}: Add {C} to your mana pool.
         this.addAbility(new ColorlessManaAbility());

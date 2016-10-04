@@ -25,14 +25,14 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.prophecy;
+package mage.cards.d;
 
 import java.util.UUID;
 import mage.abilities.effects.common.DestroyTargetEffect;
 import mage.abilities.effects.common.LoseLifeTargetControllerEffect;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.target.common.TargetLandPermanent;
 
 /**
@@ -41,9 +41,8 @@ import mage.target.common.TargetLandPermanent;
  */
 public class Despoil extends CardImpl {
 
-    public Despoil(UUID ownerId) {
-        super(ownerId, 62, "Despoil", Rarity.COMMON, new CardType[]{CardType.SORCERY}, "{3}{B}");
-        this.expansionSetCode = "PCY";
+    public Despoil(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{3}{B}");
 
         // Destroy target land. Its controller loses 2 life.
         this.getSpellAbility().addEffect(new DestroyTargetEffect());

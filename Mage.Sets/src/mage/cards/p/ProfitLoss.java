@@ -26,15 +26,15 @@
  *  or implied, of BetaSteward_at_googlemail.com.
  */
 
-package mage.sets.dragonsmaze;
+package mage.cards.p;
 
 import java.util.UUID;
 
 import mage.constants.CardType;
 import mage.constants.Duration;
-import mage.constants.Rarity;
 import mage.abilities.effects.common.continuous.BoostAllEffect;
 import mage.abilities.effects.common.continuous.BoostControlledEffect;
+import mage.cards.CardSetInfo;
 import mage.cards.SplitCard;
 import mage.constants.TargetController;
 import mage.filter.common.FilterCreaturePermanent;
@@ -53,9 +53,8 @@ public class ProfitLoss extends SplitCard {
         filter.add(new ControllerPredicate(TargetController.OPPONENT));
     }
 
-    public ProfitLoss(UUID ownerId) {
-        super(ownerId, 130, "Profit", "Loss", Rarity.UNCOMMON, new CardType[]{CardType.INSTANT}, "{1}{W}", "{2}{B}", true);
-        this.expansionSetCode = "DGM";
+    public ProfitLoss(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.INSTANT},"{1}{W}","{2}{B}",true);
 
         // Profit
         // Creatures you control get +1/+1 until end of turn.

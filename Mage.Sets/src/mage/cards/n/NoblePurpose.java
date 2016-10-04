@@ -25,14 +25,14 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.mercadianmasques;
+package mage.cards.n;
 
 import java.util.UUID;
 import mage.abilities.TriggeredAbilityImpl;
 import mage.abilities.effects.common.GainLifeEffect;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.constants.Zone;
 import mage.game.Game;
 import mage.game.events.DamagedEvent;
@@ -46,9 +46,8 @@ import mage.game.permanent.Permanent;
  */
 public class NoblePurpose extends CardImpl {
 
-    public NoblePurpose(UUID ownerId) {
-        super(ownerId, 32, "Noble Purpose", Rarity.UNCOMMON, new CardType[]{CardType.ENCHANTMENT}, "{3}{W}{W}");
-        this.expansionSetCode = "MMQ";
+    public NoblePurpose(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.ENCHANTMENT},"{3}{W}{W}");
 
 
         // Whenever a creature you control deals combat damage, you gain that much life.

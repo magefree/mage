@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.ravnica;
+package mage.cards.s;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -38,9 +38,9 @@ import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.DoIfCostPaid;
 import mage.abilities.effects.common.GainLifeEffect;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Outcome;
-import mage.constants.Rarity;
 import mage.constants.Zone;
 import mage.game.Game;
 import mage.game.events.GameEvent;
@@ -56,9 +56,8 @@ import mage.target.common.TargetCreatureOrPlayer;
  */
 public class SavraQueenOfTheGolgari extends CardImpl {
 
-    public SavraQueenOfTheGolgari(UUID ownerId) {
-        super(ownerId, 225, "Savra, Queen of the Golgari", Rarity.RARE, new CardType[]{CardType.CREATURE}, "{2}{B}{G}");
-        this.expansionSetCode = "RAV";
+    public SavraQueenOfTheGolgari(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{2}{B}{G}");
         this.supertype.add("Legendary");
         this.subtype.add("Elf");
         this.subtype.add("Shaman");

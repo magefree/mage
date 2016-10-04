@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.legions;
+package mage.cards.b;
 
 import java.util.UUID;
 import mage.MageInt;
@@ -34,9 +34,9 @@ import mage.abilities.costs.common.PayLifeCost;
 import mage.abilities.costs.mana.ColoredManaCost;
 import mage.abilities.mana.AnyColorManaAbility;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.ColoredManaSymbol;
-import mage.constants.Rarity;
 
 /**
  *
@@ -44,9 +44,8 @@ import mage.constants.Rarity;
  */
 public class BloodCelebrant extends CardImpl {
 
-    public BloodCelebrant(UUID ownerId) {
-        super(ownerId, 61, "Blood Celebrant", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{B}");
-        this.expansionSetCode = "LGN";
+    public BloodCelebrant(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{B}");
         this.subtype.add("Human");
         this.subtype.add("Cleric");
         this.power = new MageInt(1);

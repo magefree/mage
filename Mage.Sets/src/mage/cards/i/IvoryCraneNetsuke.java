@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.saviorsofkamigawa;
+package mage.cards.i;
 
 import java.util.UUID;
 import mage.abilities.TriggeredAbility;
@@ -34,8 +34,8 @@ import mage.abilities.condition.common.CardsInHandCondition;
 import mage.abilities.decorator.ConditionalTriggeredAbility;
 import mage.abilities.effects.common.GainLifeEffect;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.constants.TargetController;
 import mage.constants.Zone;
 
@@ -45,9 +45,8 @@ import mage.constants.Zone;
  */
 public class IvoryCraneNetsuke extends CardImpl {
 
-    public IvoryCraneNetsuke(UUID ownerId) {
-        super(ownerId, 155, "Ivory Crane Netsuke", Rarity.UNCOMMON, new CardType[]{CardType.ARTIFACT}, "{2}");
-        this.expansionSetCode = "SOK";
+    public IvoryCraneNetsuke(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.ARTIFACT},"{2}");
 
         // At the beginning of your upkeep, if you have seven or more cards in hand, you gain 4 life.
         TriggeredAbility ability  = new BeginningOfUpkeepTriggeredAbility(Zone.BATTLEFIELD, new GainLifeEffect(4), TargetController.YOU, false);

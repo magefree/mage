@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.eldritchmoon;
+package mage.cards.b;
 
 import java.util.UUID;
 import mage.abilities.Ability;
@@ -33,9 +33,9 @@ import mage.abilities.common.BeginningOfCombatTriggeredAbility;
 import mage.abilities.effects.common.continuous.GainAbilityTargetEffect;
 import mage.abilities.keyword.DoubleStrikeAbility;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Duration;
-import mage.constants.Rarity;
 import mage.constants.TargetController;
 import mage.target.common.TargetControlledCreaturePermanent;
 
@@ -45,9 +45,8 @@ import mage.target.common.TargetControlledCreaturePermanent;
  */
 public class BloodMist extends CardImpl {
 
-    public BloodMist(UUID ownerId) {
-        super(ownerId, 119, "Blood Mist", Rarity.UNCOMMON, new CardType[]{CardType.ENCHANTMENT}, "{3}{R}");
-        this.expansionSetCode = "EMN";
+    public BloodMist(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.ENCHANTMENT},"{3}{R}");
 
         // At the beginning of combat on your turn, target creature you control gains double strike until end of turn.
         Ability ability = new BeginningOfCombatTriggeredAbility(new GainAbilityTargetEffect(DoubleStrikeAbility.getInstance(), Duration.EndOfTurn), TargetController.YOU, false);

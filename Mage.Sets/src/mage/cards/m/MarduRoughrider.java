@@ -25,16 +25,16 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.khansoftarkir;
+package mage.cards.m;
 
 import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.common.AttacksTriggeredAbility;
 import mage.abilities.effects.common.combat.CantBlockTargetEffect;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Duration;
-import mage.constants.Rarity;
 import mage.target.common.TargetCreaturePermanent;
 
 /**
@@ -43,9 +43,8 @@ import mage.target.common.TargetCreaturePermanent;
  */
 public class MarduRoughrider extends CardImpl {
 
-    public MarduRoughrider(UUID ownerId) {
-        super(ownerId, 187, "Mardu Roughrider", Rarity.UNCOMMON, new CardType[]{CardType.CREATURE}, "{2}{R}{W}{B}");
-        this.expansionSetCode = "KTK";
+    public MarduRoughrider(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{2}{R}{W}{B}");
         this.subtype.add("Orc");
         this.subtype.add("Warrior");
 

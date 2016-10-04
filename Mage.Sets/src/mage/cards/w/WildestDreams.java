@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.kaladesh;
+package mage.cards.w;
 
 import java.util.UUID;
 import mage.abilities.Ability;
@@ -34,8 +34,8 @@ import mage.abilities.effects.Effect;
 import mage.abilities.effects.common.ExileSpellEffect;
 import mage.abilities.effects.common.ReturnFromGraveyardToHandTargetEffect;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.filter.FilterCard;
 import mage.game.Game;
 import mage.target.common.TargetCardInYourGraveyard;
@@ -46,9 +46,8 @@ import mage.target.common.TargetCardInYourGraveyard;
  */
 public class WildestDreams extends CardImpl {
 
-    public WildestDreams(UUID ownerId) {
-        super(ownerId, 174, "Wildest Dreams", Rarity.RARE, new CardType[]{CardType.SORCERY}, "{X}{X}{G}");
-        this.expansionSetCode = "KLD";
+    public WildestDreams(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{X}{X}{G}");
 
         // Return X target cards from your graveyard to your hand.
         // Exile Wildest Dreams.

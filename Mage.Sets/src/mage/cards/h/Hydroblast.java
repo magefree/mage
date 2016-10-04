@@ -25,16 +25,16 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.fifthedition;
+package mage.cards.h;
 
 import java.util.UUID;
 import mage.abilities.Ability;
 import mage.abilities.Mode;
 import mage.abilities.effects.OneShotEffect;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Outcome;
-import mage.constants.Rarity;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.target.TargetPermanent;
@@ -46,9 +46,8 @@ import mage.target.TargetSpell;
  */
 public class Hydroblast extends CardImpl {
 
-    public Hydroblast(UUID ownerId) {
-        super(ownerId, 94, "Hydroblast", Rarity.UNCOMMON, new CardType[]{CardType.INSTANT}, "{U}");
-        this.expansionSetCode = "5ED";
+    public Hydroblast(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.INSTANT},"{U}");
 
 
         // Choose one - Counter target spell if it's red;

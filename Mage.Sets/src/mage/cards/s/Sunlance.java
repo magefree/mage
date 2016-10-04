@@ -25,14 +25,14 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.planarchaos;
+package mage.cards.s;
 
 import java.util.UUID;
 import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.ObjectColor;
 import mage.abilities.effects.common.DamageTargetEffect;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.filter.predicate.Predicates;
 import mage.filter.predicate.mageobject.ColorPredicate;
@@ -50,9 +50,8 @@ public class Sunlance extends CardImpl {
     }
 
 
-    public Sunlance(UUID ownerId) {
-        super(ownerId, 31, "Sunlance", Rarity.COMMON, new CardType[]{CardType.SORCERY}, "{W}");
-        this.expansionSetCode = "PLC";
+    public Sunlance(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{W}");
 
 
         // Sunlance deals 3 damage to target nonwhite creature.

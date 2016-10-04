@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.zendikar;
+package mage.cards.e;
 
 import java.util.UUID;
 import mage.abilities.Ability;
@@ -33,9 +33,9 @@ import mage.abilities.common.EntersBattlefieldAbility;
 import mage.abilities.common.LandfallAbility;
 import mage.abilities.effects.OneShotEffect;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Outcome;
-import mage.constants.Rarity;
 import mage.constants.Zone;
 import mage.counters.CounterType;
 import mage.game.Game;
@@ -48,9 +48,8 @@ import mage.players.Player;
  */
 public class EternityVessel extends CardImpl {
 
-    public EternityVessel(UUID ownerId) {
-        super(ownerId, 200, "Eternity Vessel", Rarity.MYTHIC, new CardType[]{CardType.ARTIFACT}, "{6}");
-        this.expansionSetCode = "ZEN";
+    public EternityVessel(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.ARTIFACT},"{6}");
 
         // Eternity Vessel enters the battlefield with X charge counters on it, where X is your life total.
         this.addAbility(new EntersBattlefieldAbility(new EternityVesselEffect()));

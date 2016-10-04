@@ -25,15 +25,15 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.commander;
+package mage.cards.f;
 
 import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.common.EntersBattlefieldTriggeredAbility;
 import mage.abilities.effects.common.search.SearchLibraryPutInHandEffect;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.filter.Filter;
 import mage.filter.common.FilterCreatureCard;
 import mage.filter.predicate.mageobject.ConvertedManaCostPredicate;
@@ -49,9 +49,8 @@ public class FierceEmpath extends CardImpl {
     static {
         filter.add(new ConvertedManaCostPredicate(Filter.ComparisonType.GreaterThan, 5));
     }
-    public FierceEmpath(UUID ownerId) {
-        super(ownerId, 155, "Fierce Empath", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{2}{G}");
-        this.expansionSetCode = "CMD";
+    public FierceEmpath(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{2}{G}");
         this.subtype.add("Elf");
 
         this.power = new MageInt(1);

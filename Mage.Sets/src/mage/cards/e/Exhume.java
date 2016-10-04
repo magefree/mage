@@ -25,16 +25,16 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.urzassaga;
+package mage.cards.e;
 
 import java.util.UUID;
 import mage.abilities.Ability;
 import mage.abilities.effects.OneShotEffect;
 import mage.cards.Card;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Outcome;
-import mage.constants.Rarity;
 import mage.constants.Zone;
 import mage.filter.common.FilterCreatureCard;
 import mage.filter.predicate.other.OwnerIdPredicate;
@@ -48,9 +48,8 @@ import mage.target.common.TargetCardInGraveyard;
  */
 public class Exhume extends CardImpl {
 
-    public Exhume(UUID ownerId) {
-        super(ownerId, 134, "Exhume", Rarity.COMMON, new CardType[]{CardType.SORCERY}, "{1}{B}");
-        this.expansionSetCode = "USG";
+    public Exhume(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{1}{B}");
 
         // Each player puts a creature card from his or her graveyard onto the battlefield.
         this.getSpellAbility().addEffect(new ExhumeEffect());

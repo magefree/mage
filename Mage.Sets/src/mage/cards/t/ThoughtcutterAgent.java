@@ -25,12 +25,11 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.shardsofalara;
+package mage.cards.t;
 
 import java.util.UUID;
 
 import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleActivatedAbility;
@@ -40,6 +39,7 @@ import mage.abilities.effects.Effect;
 import mage.abilities.effects.common.LoseLifeTargetEffect;
 import mage.abilities.effects.common.RevealHandTargetEffect;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.TargetController;
 import mage.constants.Zone;
 import mage.target.TargetPlayer;
@@ -50,9 +50,8 @@ import mage.target.TargetPlayer;
  */
 public class ThoughtcutterAgent extends CardImpl {
 
-    public ThoughtcutterAgent(UUID ownerId) {
-        super(ownerId, 201, "Thoughtcutter Agent", Rarity.UNCOMMON, new CardType[]{CardType.ARTIFACT, CardType.CREATURE}, "{U}{B}");
-        this.expansionSetCode = "ALA";
+    public ThoughtcutterAgent(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.ARTIFACT,CardType.CREATURE},"{U}{B}");
         this.subtype.add("Human");
         this.subtype.add("Rogue");
 

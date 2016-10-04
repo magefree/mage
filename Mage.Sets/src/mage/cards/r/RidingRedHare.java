@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.portalthreekingdoms;
+package mage.cards.r;
 
 import java.util.UUID;
 import mage.abilities.effects.Effect;
@@ -33,9 +33,9 @@ import mage.abilities.effects.common.continuous.BoostTargetEffect;
 import mage.abilities.effects.common.continuous.GainAbilityTargetEffect;
 import mage.abilities.keyword.HorsemanshipAbility;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Duration;
-import mage.constants.Rarity;
 import mage.target.common.TargetCreaturePermanent;
 
 /**
@@ -44,9 +44,8 @@ import mage.target.common.TargetCreaturePermanent;
  */
 public class RidingRedHare extends CardImpl {
 
-    public RidingRedHare(UUID ownerId) {
-        super(ownerId, 18, "Riding Red Hare", Rarity.COMMON, new CardType[]{CardType.SORCERY}, "{2}{W}");
-        this.expansionSetCode = "PTK";
+    public RidingRedHare(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{2}{W}");
 
         // Target creature gets +3/+3 and gains horsemanship until end of turn.
         Effect effect = new BoostTargetEffect(3, 3, Duration.EndOfTurn);

@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.starwars;
+package mage.cards.g;
 
 import java.util.UUID;
 import mage.MageInt;
@@ -35,8 +35,8 @@ import mage.abilities.effects.common.DrawCardSourceControllerEffect;
 import mage.abilities.keyword.MonstrosityAbility;
 import mage.abilities.keyword.TrampleAbility;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.counters.CounterType;
 import mage.filter.common.FilterControlledCreaturePermanent;
 
@@ -46,9 +46,8 @@ import mage.filter.common.FilterControlledCreaturePermanent;
  */
 public class GreaterKraytDragon extends CardImpl {
 
-    public GreaterKraytDragon(UUID ownerId) {
-        super(ownerId, 198, "Greater Krayt Dragon", Rarity.MYTHIC, new CardType[]{CardType.CREATURE}, "{3}{R}{G}{W}");
-        this.expansionSetCode = "SWS";
+    public GreaterKraytDragon(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{3}{R}{G}{W}");
         this.subtype.add("Dragon");
         this.power = new MageInt(6);
         this.toughness = new MageInt(7);

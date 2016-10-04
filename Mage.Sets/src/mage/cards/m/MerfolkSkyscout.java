@@ -25,16 +25,16 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.riseoftheeldrazi;
+package mage.cards.m;
 
 import java.util.UUID;
 import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.MageInt;
 import mage.abilities.common.AttacksOrBlocksTriggeredAbility;
 import mage.abilities.effects.common.UntapTargetEffect;
 import mage.abilities.keyword.FlyingAbility;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.target.TargetPermanent;
 
 /**
@@ -43,9 +43,8 @@ import mage.target.TargetPermanent;
  */
 public class MerfolkSkyscout extends CardImpl {
 
-    public MerfolkSkyscout(UUID ownerId) {
-        super(ownerId, 77, "Merfolk Skyscout", Rarity.UNCOMMON, new CardType[]{CardType.CREATURE}, "{2}{U}{U}");
-        this.expansionSetCode = "ROE";
+    public MerfolkSkyscout(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{2}{U}{U}");
         this.subtype.add("Merfolk");
         this.subtype.add("Scout");
 

@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.shadowsoverinnistrad;
+package mage.cards.h;
 
 import java.util.UUID;
 import mage.abilities.Ability;
@@ -34,9 +34,9 @@ import mage.abilities.effects.Effect;
 import mage.abilities.effects.OneShotEffect;
 import mage.cards.Card;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Outcome;
-import mage.constants.Rarity;
 import mage.filter.FilterCard;
 import mage.filter.FilterSpell;
 import mage.filter.common.FilterInstantOrSorcerySpell;
@@ -54,9 +54,8 @@ import mage.watchers.common.CastFromHandWatcher;
  */
 public class HarnessTheStorm extends CardImpl {
 
-    public HarnessTheStorm(UUID ownerId) {
-        super(ownerId, 163, "Harness the Storm", Rarity.RARE, new CardType[]{CardType.ENCHANTMENT}, "{2}{R}");
-        this.expansionSetCode = "SOI";
+    public HarnessTheStorm(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.ENCHANTMENT},"{2}{R}");
 
         // Whenever you cast an instant or sorcery spell from your hand, you may cast target card with the same name as that spell from your graveyard.
         this.addAbility(new HarnessTheStormTriggeredAbility(new HarnessTheStormEffect(),

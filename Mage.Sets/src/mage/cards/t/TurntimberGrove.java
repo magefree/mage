@@ -25,17 +25,17 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.zendikar;
+package mage.cards.t;
 
 import java.util.UUID;
 import mage.constants.CardType;
 import mage.constants.Duration;
-import mage.constants.Rarity;
 import mage.abilities.common.EntersBattlefieldTappedAbility;
 import mage.abilities.common.EntersBattlefieldTriggeredAbility;
 import mage.abilities.effects.common.continuous.BoostTargetEffect;
 import mage.abilities.mana.GreenManaAbility;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.target.common.TargetCreaturePermanent;
 
 /**
@@ -44,9 +44,8 @@ import mage.target.common.TargetCreaturePermanent;
  */
 public class TurntimberGrove extends CardImpl {
 
-    public TurntimberGrove(UUID ownerId) {
-        super(ownerId, 227, "Turntimber Grove", Rarity.COMMON, new CardType[]{CardType.LAND}, "");
-        this.expansionSetCode = "ZEN";
+    public TurntimberGrove(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.LAND},"");
 
         this.addAbility(new EntersBattlefieldTappedAbility());
         this.addAbility(new GreenManaAbility());

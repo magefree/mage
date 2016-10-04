@@ -25,15 +25,15 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.zendikar;
+package mage.cards.m;
 
 import java.util.UUID;
 import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.constants.TargetController;
 import mage.abilities.dynamicvalue.common.PermanentsOnBattlefieldCount;
 import mage.abilities.effects.common.discard.DiscardTargetEffect;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.filter.common.FilterLandPermanent;
 import mage.filter.predicate.mageobject.SubtypePredicate;
 import mage.filter.predicate.permanent.ControllerPredicate;
@@ -52,9 +52,8 @@ public class MindSludge extends CardImpl {
         filter.add(new ControllerPredicate(TargetController.YOU));
     }
 
-    public MindSludge(UUID ownerId) {
-        super(ownerId, 102, "Mind Sludge", Rarity.UNCOMMON, new CardType[]{CardType.SORCERY}, "{4}{B}");
-        this.expansionSetCode = "ZEN";
+    public MindSludge(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{4}{B}");
 
 
         this.getSpellAbility().addTarget(new TargetPlayer());

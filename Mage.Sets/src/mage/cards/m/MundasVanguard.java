@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.oathofthegatewatch;
+package mage.cards.m;
 
 import java.util.UUID;
 import mage.MageInt;
@@ -35,9 +35,9 @@ import mage.abilities.costs.common.TapSourceCost;
 import mage.abilities.costs.common.TapTargetCost;
 import mage.abilities.effects.common.counter.AddCountersAllEffect;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.AbilityWord;
 import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.constants.Zone;
 import mage.counters.CounterType;
 import mage.filter.common.FilterControlledCreaturePermanent;
@@ -60,9 +60,8 @@ public class MundasVanguard extends CardImpl {
         filter.add(Predicates.not(new TappedPredicate()));
     }
 
-    public MundasVanguard(UUID ownerId) {
-        super(ownerId, 29, "Munda's Vanguard", Rarity.RARE, new CardType[]{CardType.CREATURE}, "{4}{W}");
-        this.expansionSetCode = "OGW";
+    public MundasVanguard(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{4}{W}");
         this.subtype.add("Kor");
         this.subtype.add("Knight");
         this.subtype.add("Ally");

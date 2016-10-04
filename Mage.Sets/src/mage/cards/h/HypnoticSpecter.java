@@ -25,15 +25,15 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.magic2010;
+package mage.cards.h;
 
 import mage.MageInt;
 import mage.abilities.common.DealsDamageToOpponentTriggeredAbility;
 import mage.abilities.effects.common.discard.DiscardTargetEffect;
 import mage.abilities.keyword.FlyingAbility;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.Rarity;
 
 import java.util.UUID;
 
@@ -43,9 +43,8 @@ import java.util.UUID;
  */
 public class HypnoticSpecter extends CardImpl {
 
-    public HypnoticSpecter(UUID ownerId) {
-        super(ownerId, 100, "Hypnotic Specter", Rarity.RARE, new CardType[]{CardType.CREATURE}, "{1}{B}{B}");
-        this.expansionSetCode = "M10";
+    public HypnoticSpecter(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{1}{B}{B}");
         this.subtype.add("Specter");
 
         this.power = new MageInt(2);

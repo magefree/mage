@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.alarareborn;
+package mage.cards.t;
 
 import java.util.UUID;
 import mage.abilities.Ability;
@@ -37,11 +37,11 @@ import mage.abilities.keyword.EnchantAbility;
 import mage.abilities.keyword.ShroudAbility;
 import mage.abilities.mana.TriggeredManaAbility;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.AttachmentType;
 import mage.constants.CardType;
 import mage.constants.Duration;
 import mage.constants.Outcome;
-import mage.constants.Rarity;
 import mage.constants.Zone;
 import mage.game.Game;
 import mage.game.events.GameEvent;
@@ -58,9 +58,8 @@ public class TraceOfAbundance extends CardImpl {
 
     private String rule = "Enchanted land has shroud";
 
-    public TraceOfAbundance(UUID ownerId) {
-        super(ownerId, 142, "Trace of Abundance", Rarity.COMMON, new CardType[]{CardType.ENCHANTMENT}, "{R/W}{G}");
-        this.expansionSetCode = "ARB";
+    public TraceOfAbundance(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.ENCHANTMENT},"{R/W}{G}");
         this.subtype.add("Aura");
 
         // Enchant land

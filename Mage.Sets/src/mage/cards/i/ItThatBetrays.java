@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.riseoftheeldrazi;
+package mage.cards.i;
 
 import java.util.UUID;
 import mage.MageInt;
@@ -33,8 +33,8 @@ import mage.abilities.common.OpponentSacrificesNonTokenPermanentTriggeredAbility
 import mage.abilities.effects.common.ReturnToBattlefieldUnderYourControlTargetEffect;
 import mage.abilities.keyword.AnnihilatorAbility;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.filter.FilterPermanent;
 import mage.filter.predicate.Predicates;
 import mage.filter.predicate.permanent.TokenPredicate;
@@ -51,9 +51,8 @@ public class ItThatBetrays extends CardImpl {
         FILTER.add(Predicates.not(new TokenPredicate()));
     }
 
-    public ItThatBetrays(UUID ownerId) {
-        super(ownerId, 7, "It That Betrays", Rarity.RARE, new CardType[]{CardType.CREATURE}, "{12}");
-        this.expansionSetCode = "ROE";
+    public ItThatBetrays(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{12}");
         this.subtype.add("Eldrazi");
 
         this.power = new MageInt(11);

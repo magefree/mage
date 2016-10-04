@@ -25,15 +25,15 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.jacevsvraska;
+package mage.cards.d;
 
 import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.common.EntersBattlefieldTriggeredAbility;
 import mage.abilities.effects.common.ReturnToHandChosenControlledPermanentEffect;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.filter.common.FilterControlledPermanent;
 
 /**
@@ -42,9 +42,8 @@ import mage.filter.common.FilterControlledPermanent;
  */
 public class DreamStalker extends CardImpl {
 
-    public DreamStalker(UUID ownerId) {
-        super(ownerId, 7, "Dream Stalker", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{1}{U}");
-        this.expansionSetCode = "DDM";
+    public DreamStalker(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{1}{U}");
         this.subtype.add("Illusion");
 
         this.power = new MageInt(1);

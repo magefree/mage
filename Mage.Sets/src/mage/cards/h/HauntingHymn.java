@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.timespiral;
+package mage.cards.h;
 
 import java.util.UUID;
 
@@ -33,8 +33,8 @@ import mage.abilities.condition.common.MyMainPhaseCondition;
 import mage.abilities.decorator.ConditionalOneShotEffect;
 import mage.abilities.effects.common.discard.DiscardTargetEffect;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.target.TargetPlayer;
 
 /**
@@ -43,9 +43,8 @@ import mage.target.TargetPlayer;
  */
 public class HauntingHymn extends CardImpl {
 
-    public HauntingHymn(UUID ownerId) {
-        super(ownerId, 112, "Haunting Hymn", Rarity.UNCOMMON, new CardType[]{CardType.INSTANT}, "{4}{B}{B}");
-        this.expansionSetCode = "TSP";
+    public HauntingHymn(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.INSTANT},"{4}{B}{B}");
 
         // Target player discards two cards. If you cast this spell during your main phase, that player discards four cards instead.
         this.getSpellAbility().addEffect(new ConditionalOneShotEffect(

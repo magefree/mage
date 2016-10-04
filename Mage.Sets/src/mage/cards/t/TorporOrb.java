@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.newphyrexia;
+package mage.cards.t;
 
 import java.util.UUID;
 import mage.MageObject;
@@ -33,11 +33,11 @@ import mage.abilities.Ability;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.effects.ContinuousRuleModifyingEffectImpl;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.AbilityType;
 import mage.constants.CardType;
 import mage.constants.Duration;
 import mage.constants.Outcome;
-import mage.constants.Rarity;
 import mage.constants.Zone;
 import mage.game.Game;
 import mage.game.events.EntersTheBattlefieldEvent;
@@ -50,9 +50,8 @@ import mage.game.permanent.Permanent;
  */
 public class TorporOrb extends CardImpl {
 
-    public TorporOrb(UUID ownerId) {
-        super(ownerId, 162, "Torpor Orb", Rarity.RARE, new CardType[]{CardType.ARTIFACT}, "{2}");
-        this.expansionSetCode = "NPH";
+    public TorporOrb(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.ARTIFACT},"{2}");
 
         // Creatures entering the battlefield don't cause abilities to trigger.
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new TorporOrbEffect()));

@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.eldritchmoon;
+package mage.cards.h;
 
 import java.util.UUID;
 import mage.MageInt;
@@ -37,9 +37,9 @@ import mage.abilities.effects.common.continuous.GainAbilityControlledEffect;
 import mage.abilities.keyword.FlashAbility;
 import mage.abilities.keyword.LifelinkAbility;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Duration;
-import mage.constants.Rarity;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.filter.predicate.mageobject.SubtypePredicate;
 
@@ -55,9 +55,8 @@ public class HeronsGraceChampion extends CardImpl {
         filter.add(new SubtypePredicate("Human"));
     }
 
-    public HeronsGraceChampion(UUID ownerId) {
-        super(ownerId, 185, "Heron's Grace Champion", Rarity.RARE, new CardType[]{CardType.CREATURE}, "{2}{G}{W}");
-        this.expansionSetCode = "EMN";
+    public HeronsGraceChampion(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{2}{G}{W}");
         this.subtype.add("Human");
         this.subtype.add("Knight");
         this.power = new MageInt(3);

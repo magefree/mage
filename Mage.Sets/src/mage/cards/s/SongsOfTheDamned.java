@@ -25,15 +25,15 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.iceage;
+package mage.cards.s;
 
 import java.util.UUID;
 import mage.Mana;
 import mage.abilities.dynamicvalue.common.CardsInControllerGraveyardCount;
 import mage.abilities.effects.common.DynamicManaEffect;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.filter.common.FilterCreatureCard;
 
 /**
@@ -42,9 +42,8 @@ import mage.filter.common.FilterCreatureCard;
  */
 public class SongsOfTheDamned extends CardImpl {
 
-    public SongsOfTheDamned(UUID ownerId) {
-        super(ownerId, 48, "Songs of the Damned", Rarity.COMMON, new CardType[]{CardType.INSTANT}, "{B}");
-        this.expansionSetCode = "ICE";
+    public SongsOfTheDamned(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.INSTANT},"{B}");
 
         // Add {B} to your mana pool for each creature card in your graveyard.
         DynamicManaEffect effect = new DynamicManaEffect(Mana.BlackMana(1), new CardsInControllerGraveyardCount(new FilterCreatureCard()));

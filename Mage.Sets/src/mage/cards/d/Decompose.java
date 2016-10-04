@@ -25,13 +25,13 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.odyssey;
+package mage.cards.d;
 
 import java.util.UUID;
 import mage.abilities.effects.common.ExileTargetEffect;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.filter.FilterCard;
 import mage.target.common.TargetCardInASingleGraveyard;
 
@@ -41,9 +41,8 @@ import mage.target.common.TargetCardInASingleGraveyard;
  */
 public class Decompose extends CardImpl {
 
-    public Decompose(UUID ownerId) {
-        super(ownerId, 128, "Decompose", Rarity.UNCOMMON, new CardType[]{CardType.SORCERY}, "{1}{B}");
-        this.expansionSetCode = "ODY";
+    public Decompose(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{1}{B}");
 
         // Exile up to three target cards from a single graveyard.
         this.getSpellAbility().addEffect(new ExileTargetEffect());

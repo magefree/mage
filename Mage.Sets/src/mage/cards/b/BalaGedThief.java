@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.zendikar;
+package mage.cards.b;
 
 import java.util.List;
 import java.util.UUID;
@@ -35,11 +35,11 @@ import mage.abilities.common.AllyEntersBattlefieldTriggeredAbility;
 import mage.abilities.effects.OneShotEffect;
 import mage.cards.Card;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.cards.Cards;
 import mage.cards.CardsImpl;
 import mage.constants.CardType;
 import mage.constants.Outcome;
-import mage.constants.Rarity;
 import mage.constants.Zone;
 import mage.filter.FilterCard;
 import mage.filter.common.FilterControlledPermanent;
@@ -55,9 +55,8 @@ import mage.target.TargetPlayer;
  */
 public class BalaGedThief extends CardImpl {
 
-    public BalaGedThief(UUID ownerId) {
-        super(ownerId, 79, "Bala Ged Thief", Rarity.RARE, new CardType[]{CardType.CREATURE}, "{3}{B}");
-        this.expansionSetCode = "ZEN";
+    public BalaGedThief(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{3}{B}");
         this.subtype.add("Human");
         this.subtype.add("Rogue");
         this.subtype.add("Ally");

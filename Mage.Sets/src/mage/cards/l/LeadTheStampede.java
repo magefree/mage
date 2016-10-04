@@ -25,13 +25,13 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.mirrodinbesieged;
+package mage.cards.l;
 
 import java.util.UUID;
 import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.abilities.effects.common.LookLibraryAndPickControllerEffect;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.filter.FilterCard;
 import mage.filter.predicate.mageobject.CardTypePredicate;
 
@@ -46,9 +46,8 @@ public class LeadTheStampede extends CardImpl {
         filter.add(new CardTypePredicate(CardType.CREATURE));
     }
 
-    public LeadTheStampede(UUID ownerId) {
-        super(ownerId, 82, "Lead the Stampede", Rarity.UNCOMMON, new CardType[]{CardType.SORCERY}, "{2}{G}");
-        this.expansionSetCode = "MBS";
+    public LeadTheStampede(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{2}{G}");
 
         // Look at the top five cards of your library. You may reveal any number of creature cards from among them and put the revealed cards into your hand. Put the rest on the bottom of your library in any order.
         this.getSpellAbility().addEffect(new LookLibraryAndPickControllerEffect(5, 5, filter, true));

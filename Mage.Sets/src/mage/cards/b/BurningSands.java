@@ -25,15 +25,15 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.odyssey;
+package mage.cards.b;
 
 import java.util.UUID;
 import mage.abilities.Ability;
 import mage.abilities.common.DiesCreatureTriggeredAbility;
 import mage.abilities.effects.common.SacrificeEffect;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.constants.Zone;
 import mage.filter.common.FilterLandPermanent;
 import mage.game.Game;
@@ -49,9 +49,8 @@ public class BurningSands extends CardImpl {
     private final UUID originalId;
     private static final FilterLandPermanent filter = new FilterLandPermanent("a land");
 
-    public BurningSands(UUID ownerId) {
-        super(ownerId, 180, "Burning Sands", Rarity.RARE, new CardType[]{CardType.ENCHANTMENT}, "{3}{R}{R}");
-        this.expansionSetCode = "ODY";
+    public BurningSands(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.ENCHANTMENT},"{3}{R}{R}");
 
         // Whenever a creature dies, that creature's controller sacrifices a land.
         Ability ability = new DiesCreatureTriggeredAbility(new SacrificeEffect(filter, 1, "that creature's controller"), false, false, true);

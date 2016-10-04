@@ -26,13 +26,13 @@
  *  or implied, of BetaSteward_at_googlemail.com.
  */
 
-package mage.sets.worldwake;
+package mage.cards.i;
 
 import java.util.UUID;
 import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.abilities.effects.common.ExileTargetEffect;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.filter.FilterPermanent;
 import mage.filter.predicate.Predicates;
 import mage.filter.predicate.mageobject.CardTypePredicate;
@@ -51,9 +51,8 @@ public class IonasJudgment extends CardImpl {
                 new CardTypePredicate(CardType.ENCHANTMENT)));
     }
 
-    public IonasJudgment (UUID ownerId) {
-        super(ownerId, 8, "Iona's Judgment", Rarity.COMMON, new CardType[]{CardType.SORCERY}, "{4}{W}");
-        this.expansionSetCode = "WWK";
+    public IonasJudgment (UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{4}{W}");
 
         this.getSpellAbility().addEffect(new ExileTargetEffect());
         this.getSpellAbility().addTarget(new TargetPermanent(filter));

@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.homelands;
+package mage.cards.k;
 
 import java.util.UUID;
 import mage.abilities.common.BeginningOfUpkeepTriggeredAbility;
@@ -36,8 +36,8 @@ import mage.abilities.effects.Effect;
 import mage.abilities.effects.common.SacrificeSourceUnlessPaysEffect;
 import mage.abilities.effects.common.combat.CantAttackYouUnlessPayManaAllEffect;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.constants.TargetController;
 import mage.constants.Zone;
 import mage.filter.common.FilterControlledCreaturePermanent;
@@ -57,9 +57,8 @@ public class KoskunFalls extends CardImpl {
         filterCreature.add(Predicates.not(new TappedPredicate()));
     }
 
-    public KoskunFalls(UUID ownerId) {
-        super(ownerId, 18, "Koskun Falls", Rarity.RARE, new CardType[]{CardType.ENCHANTMENT}, "{2}{B}{B}");
-        this.expansionSetCode = "HML";
+    public KoskunFalls(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.ENCHANTMENT},"{2}{B}{B}");
         this.supertype.add("World");
 
         // At the beginning of your upkeep, sacrifice Koskun Falls unless you tap an untapped creature you control.

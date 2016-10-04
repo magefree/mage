@@ -25,19 +25,19 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.avacynrestored;
+package mage.cards.t;
 
 import java.util.List;
 import java.util.UUID;
 import mage.constants.CardType;
 import mage.constants.Outcome;
-import mage.constants.Rarity;
 import mage.constants.Zone;
 import mage.abilities.Ability;
 import mage.abilities.costs.mana.ManaCostsImpl;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.keyword.MiracleAbility;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
@@ -48,9 +48,8 @@ import mage.game.permanent.Permanent;
  */
 public class Terminus extends CardImpl {
 
-    public Terminus(UUID ownerId) {
-        super(ownerId, 38, "Terminus", Rarity.RARE, new CardType[]{CardType.SORCERY}, "{4}{W}{W}");
-        this.expansionSetCode = "AVR";
+    public Terminus(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{4}{W}{W}");
 
 
 

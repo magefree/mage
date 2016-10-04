@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.innistrad;
+package mage.cards.f;
 
 import mage.constants.*;
 import mage.abilities.Ability;
@@ -39,6 +39,7 @@ import mage.abilities.effects.common.continuous.BoostControlledEffect;
 import mage.abilities.effects.common.continuous.GainAbilityControlledEffect;
 import mage.abilities.keyword.TrampleAbility;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.filter.FilterPermanent;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.filter.predicate.mageobject.SubtypePredicate;
@@ -60,9 +61,8 @@ public class FullMoonsRise extends CardImpl {
         filter.add(new SubtypePredicate("Werewolf"));
     }
 
-    public FullMoonsRise(UUID ownerId) {
-        super(ownerId, 180, "Full Moon's Rise", Rarity.UNCOMMON, new CardType[]{CardType.ENCHANTMENT}, "{1}{G}");
-        this.expansionSetCode = "ISD";
+    public FullMoonsRise(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.ENCHANTMENT},"{1}{G}");
 
 
         // Werewolf creatures you control get +1/+0 and have trample.

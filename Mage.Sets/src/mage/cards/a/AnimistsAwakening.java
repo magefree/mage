@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.magicorigins;
+package mage.cards.a;
 
 import java.util.LinkedHashSet;
 import java.util.Set;
@@ -36,11 +36,11 @@ import mage.abilities.condition.common.SpellMasteryCondition;
 import mage.abilities.effects.OneShotEffect;
 import mage.cards.Card;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.cards.Cards;
 import mage.cards.CardsImpl;
 import mage.constants.CardType;
 import mage.constants.Outcome;
-import mage.constants.Rarity;
 import mage.constants.Zone;
 import mage.filter.common.FilterLandCard;
 import mage.game.Game;
@@ -53,9 +53,8 @@ import mage.players.Player;
  */
 public class AnimistsAwakening extends CardImpl {
 
-    public AnimistsAwakening(UUID ownerId) {
-        super(ownerId, 169, "Animist's Awakening", Rarity.RARE, new CardType[]{CardType.SORCERY}, "{X}{G}");
-        this.expansionSetCode = "ORI";
+    public AnimistsAwakening(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{X}{G}");
 
         // Reveal the top X cards of your library. Put all land cards from among them onto the battlefield tapped and the rest on the bottom of your library in any order.
         // <i>Spell mastery</i> — If there are two or more instant and/or sorcery cards in your graveyard, untap those lands.

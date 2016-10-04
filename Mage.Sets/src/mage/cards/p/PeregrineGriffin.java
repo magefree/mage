@@ -26,25 +26,24 @@
  *  or implied, of BetaSteward_at_googlemail.com.
  */
 
-package mage.sets.magic2012;
+package mage.cards.p;
 
 import java.util.UUID;
 
 import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.MageInt;
 import mage.abilities.keyword.FirstStrikeAbility;
 import mage.abilities.keyword.FlyingAbility;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 
 /**
  * @author Loki
  */
 public class PeregrineGriffin extends CardImpl {
 
-    public PeregrineGriffin(UUID ownerId) {
-        super(ownerId, 29, "Peregrine Griffin", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{4}{W}");
-        this.expansionSetCode = "M12";
+    public PeregrineGriffin(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{4}{W}");
         this.subtype.add("Griffin");
 
         this.power = new MageInt(2);

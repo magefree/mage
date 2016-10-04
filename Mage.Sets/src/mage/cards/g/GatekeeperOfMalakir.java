@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.zendikar;
+package mage.cards.g;
 
 import java.util.UUID;
 import mage.MageInt;
@@ -36,8 +36,8 @@ import mage.abilities.decorator.ConditionalTriggeredAbility;
 import mage.abilities.effects.common.SacrificeEffect;
 import mage.abilities.keyword.KickerAbility;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.filter.common.FilterControlledPermanent;
 import mage.filter.predicate.mageobject.CardTypePredicate;
 import mage.target.TargetPlayer;
@@ -55,9 +55,8 @@ public class GatekeeperOfMalakir extends CardImpl {
         filter.add(new CardTypePredicate(CardType.CREATURE));
     }
 
-    public GatekeeperOfMalakir(UUID ownerId) {
-        super(ownerId, 89, "Gatekeeper of Malakir", Rarity.UNCOMMON, new CardType[]{CardType.CREATURE}, "{B}{B}");
-        this.expansionSetCode = "ZEN";
+    public GatekeeperOfMalakir(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{B}{B}");
         this.subtype.add("Vampire");
         this.subtype.add("Warrior");
 

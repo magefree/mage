@@ -25,14 +25,14 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.morningtide;
+package mage.cards.s;
 
 import java.util.UUID;
 import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.abilities.costs.common.SacrificeTargetCost;
 import mage.abilities.effects.common.DamageTargetEffect;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.filter.common.FilterControlledLandPermanent;
 import mage.filter.common.FilterControlledPermanent;
 import mage.target.common.TargetControlledPermanent;
@@ -46,9 +46,8 @@ public class ShardVolley extends CardImpl {
 
     private static final FilterControlledPermanent filter = new FilterControlledLandPermanent();
 
-    public ShardVolley(UUID ownerId) {
-        super(ownerId, 103, "Shard Volley", Rarity.COMMON, new CardType[]{CardType.INSTANT}, "{R}");
-        this.expansionSetCode = "MOR";
+    public ShardVolley(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.INSTANT},"{R}");
 
 
         // As an additional cost to cast Shard Volley, sacrifice a land.

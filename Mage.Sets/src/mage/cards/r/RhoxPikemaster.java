@@ -26,18 +26,18 @@
  *  or implied, of BetaSteward_at_googlemail.com.
  */
 
-package mage.sets.magic2010;
+package mage.cards.r;
 
 import java.util.UUID;
 import mage.constants.CardType;
 import mage.constants.Duration;
-import mage.constants.Rarity;
 import mage.constants.Zone;
 import mage.MageInt;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.effects.common.continuous.GainAbilityControlledEffect;
 import mage.abilities.keyword.FirstStrikeAbility;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.filter.predicate.mageobject.SubtypePredicate;
 
@@ -53,9 +53,8 @@ public class RhoxPikemaster extends CardImpl {
         filter.add(new SubtypePredicate("Soldier"));
     }
 
-    public RhoxPikemaster(UUID ownerId) {
-        super(ownerId, 26, "Rhox Pikemaster", Rarity.UNCOMMON, new CardType[]{CardType.CREATURE}, "{2}{W}{W}");
-        this.expansionSetCode = "M10";
+    public RhoxPikemaster(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{2}{W}{W}");
 
         this.subtype.add("Rhino");
         this.subtype.add("Soldier");

@@ -25,13 +25,13 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.revisededition;
+package mage.cards.t;
 
 import java.util.UUID;
 import mage.abilities.effects.common.DestroyTargetEffect;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.filter.FilterPermanent;
 import mage.filter.predicate.mageobject.SubtypePredicate;
 import mage.target.TargetPermanent;
@@ -48,9 +48,8 @@ public class Tunnel extends CardImpl {
         filter.add(new SubtypePredicate("Wall"));
     }
 
-    public Tunnel(UUID ownerId) {
-        super(ownerId, 180, "Tunnel", Rarity.UNCOMMON, new CardType[]{CardType.INSTANT}, "{R}");
-        this.expansionSetCode = "3ED";
+    public Tunnel(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.INSTANT},"{R}");
 
         // Destroy target Wall. It can't be regenerated.
         this.getSpellAbility().addEffect(new DestroyTargetEffect(true));

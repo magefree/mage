@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.antiquities;
+package mage.cards.g;
 
 import java.util.UUID;
 import mage.abilities.Ability;
@@ -34,9 +34,9 @@ import mage.abilities.costs.common.TapSourceCost;
 import mage.abilities.costs.mana.ManaCostsImpl;
 import mage.abilities.effects.OneShotEffect;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Outcome;
-import mage.constants.Rarity;
 import mage.constants.Zone;
 import mage.filter.FilterPermanent;
 import mage.filter.predicate.Predicates;
@@ -51,9 +51,8 @@ import mage.game.permanent.Permanent;
  */
 public class GolgothianSylex extends CardImpl {
 
-    public GolgothianSylex(UUID ownerId) {
-        super(ownerId, 16, "Golgothian Sylex", Rarity.RARE, new CardType[]{CardType.ARTIFACT}, "{4}");
-        this.expansionSetCode = "ATQ";
+    public GolgothianSylex(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.ARTIFACT},"{4}");
 
         // {1}, {tap}: Each nontoken permanent from the Antiquities expansion is sacrificed by its controller.
         Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new GolgothianSylexEffect(), new ManaCostsImpl("{1}"));

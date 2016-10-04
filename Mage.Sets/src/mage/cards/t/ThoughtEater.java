@@ -25,12 +25,11 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.odyssey;
+package mage.cards.t;
 
 import java.util.UUID;
 import mage.constants.CardType;
 import mage.constants.Duration;
-import mage.constants.Rarity;
 import mage.constants.Zone;
 import mage.MageInt;
 import mage.abilities.common.SimpleStaticAbility;
@@ -38,6 +37,7 @@ import mage.abilities.effects.common.continuous.MaximumHandSizeControllerEffect;
 import mage.abilities.effects.common.continuous.MaximumHandSizeControllerEffect.HandSizeModification;
 import mage.abilities.keyword.FlyingAbility;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 
 /**
  *
@@ -45,9 +45,8 @@ import mage.cards.CardImpl;
  */
 public class ThoughtEater extends CardImpl {
 
-    public ThoughtEater(UUID ownerId) {
-        super(ownerId, 106, "Thought Eater", Rarity.UNCOMMON, new CardType[]{CardType.CREATURE}, "{1}{U}");
-        this.expansionSetCode = "ODY";
+    public ThoughtEater(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{1}{U}");
         this.subtype.add("Beast");
 
         this.power = new MageInt(2);

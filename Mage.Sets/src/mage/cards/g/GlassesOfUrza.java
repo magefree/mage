@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.limitedalpha;
+package mage.cards.g;
 
 import java.util.UUID;
 import mage.abilities.Ability;
@@ -33,8 +33,8 @@ import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.costs.common.TapSourceCost;
 import mage.abilities.effects.common.LookAtTargetPlayerHandEffect;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.constants.Zone;
 import mage.target.TargetPlayer;
 
@@ -44,9 +44,8 @@ import mage.target.TargetPlayer;
  */
 public class GlassesOfUrza extends CardImpl {
 
-    public GlassesOfUrza(UUID ownerId) {
-        super(ownerId, 245, "Glasses of Urza", Rarity.UNCOMMON, new CardType[]{CardType.ARTIFACT}, "{1}");
-        this.expansionSetCode = "LEA";
+    public GlassesOfUrza(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.ARTIFACT},"{1}");
 
         // {tap}: Look at target player's hand.
         Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new LookAtTargetPlayerHandEffect(), new TapSourceCost());

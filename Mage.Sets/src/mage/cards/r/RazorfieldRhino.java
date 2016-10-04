@@ -26,12 +26,11 @@
  *  or implied, of BetaSteward_at_googlemail.com.
  */
 
-package mage.sets.mirrodinbesieged;
+package mage.cards.r;
 
 import java.util.UUID;
 
 import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.MageInt;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.condition.common.MetalcraftCondition;
@@ -39,6 +38,7 @@ import mage.abilities.decorator.ConditionalContinuousEffect;
 import mage.abilities.effects.ContinuousEffect;
 import mage.abilities.effects.common.continuous.BoostSourceEffect;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.Duration;
 import mage.constants.Zone;
 
@@ -48,9 +48,8 @@ import mage.constants.Zone;
  */
 public class RazorfieldRhino extends CardImpl {
 
-    public RazorfieldRhino (UUID ownerId) {
-        super(ownerId, 127, "Razorfield Rhino", Rarity.COMMON, new CardType[]{CardType.ARTIFACT, CardType.CREATURE}, "{6}");
-        this.expansionSetCode = "MBS";
+    public RazorfieldRhino (UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.ARTIFACT,CardType.CREATURE},"{6}");
         this.subtype.add("Rhino");
         this.power = new MageInt(4);
         this.toughness = new MageInt(4);

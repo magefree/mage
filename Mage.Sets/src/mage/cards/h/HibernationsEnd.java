@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.coldsnap;
+package mage.cards.h;
 
 import java.util.UUID;
 import mage.abilities.Ability;
@@ -35,9 +35,9 @@ import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.search.SearchLibraryPutInPlayEffect;
 import mage.abilities.keyword.CumulativeUpkeepAbility;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Outcome;
-import mage.constants.Rarity;
 import mage.constants.Zone;
 import mage.filter.Filter;
 import mage.filter.FilterCard;
@@ -56,9 +56,8 @@ import mage.target.common.TargetCardInLibrary;
  */
 public class HibernationsEnd extends CardImpl {
 
-    public HibernationsEnd(UUID ownerId) {
-        super(ownerId, 110, "Hibernation's End", Rarity.RARE, new CardType[]{CardType.ENCHANTMENT}, "{4}{G}");
-        this.expansionSetCode = "CSP";
+    public HibernationsEnd(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.ENCHANTMENT},"{4}{G}");
 
         // Cumulative upkeep {1}
         this.addAbility(new CumulativeUpkeepAbility(new ManaCostsImpl("{1}")));

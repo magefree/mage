@@ -25,15 +25,15 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.mercadianmasques;
+package mage.cards.s;
 
 import java.util.UUID;
 import mage.ObjectColor;
 import mage.abilities.common.SpellCastOpponentTriggeredAbility;
 import mage.abilities.effects.common.CreateTokenEffect;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.filter.FilterSpell;
 import mage.filter.predicate.Predicates;
 import mage.filter.predicate.mageobject.ColorPredicate;
@@ -51,9 +51,8 @@ public class SnakePit extends CardImpl {
         filter.add(Predicates.or(new ColorPredicate(ObjectColor.BLUE), new ColorPredicate(ObjectColor.BLACK)));
     }
 
-    public SnakePit(UUID ownerId) {
-        super(ownerId, 271, "Snake Pit", Rarity.UNCOMMON, new CardType[]{CardType.ENCHANTMENT}, "{3}{G}");
-        this.expansionSetCode = "MMQ";
+    public SnakePit(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.ENCHANTMENT},"{3}{G}");
 
         // Whenever an opponent casts a blue or black spell, you may put a 1/1 green Snake creature token onto the battlefield.
         this.addAbility(new SpellCastOpponentTriggeredAbility(new CreateTokenEffect(new SnakeToken()), filter, true));

@@ -25,14 +25,14 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.scourge;
+package mage.cards.w;
 
 import java.util.UUID;
 import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.abilities.effects.common.SacrificeEffect;
 import mage.abilities.keyword.StormAbility;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.filter.common.FilterAttackingCreature;
 import mage.target.TargetPlayer;
 
@@ -42,9 +42,8 @@ import mage.target.TargetPlayer;
  */
 public class WingShards extends CardImpl {
 
-    public WingShards(UUID ownerId) {
-        super(ownerId, 25, "Wing Shards", Rarity.UNCOMMON, new CardType[]{CardType.INSTANT}, "{1}{W}{W}");
-        this.expansionSetCode = "SCG";
+    public WingShards(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.INSTANT},"{1}{W}{W}");
 
 
         // Target player sacrifices an attacking creature.

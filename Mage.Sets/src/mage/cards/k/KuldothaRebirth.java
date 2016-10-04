@@ -25,14 +25,14 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.scarsofmirrodin;
+package mage.cards.k;
 
 import java.util.UUID;
 import mage.abilities.costs.common.SacrificeTargetCost;
 import mage.abilities.effects.common.CreateTokenEffect;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.filter.common.FilterControlledPermanent;
 import mage.filter.predicate.mageobject.CardTypePredicate;
 import mage.game.permanent.token.GoblinToken;
@@ -50,9 +50,8 @@ public class KuldothaRebirth extends CardImpl {
         filter.add(new CardTypePredicate(CardType.ARTIFACT));
     }
 
-    public KuldothaRebirth(UUID ownerId) {
-        super(ownerId, 96, "Kuldotha Rebirth", Rarity.COMMON, new CardType[]{CardType.SORCERY}, "{R}");
-        this.expansionSetCode = "SOM";
+    public KuldothaRebirth(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{R}");
 
         this.getSpellAbility().addEffect(new CreateTokenEffect(new GoblinToken(), 3));
         this.getSpellAbility().addCost(new SacrificeTargetCost(new TargetControlledPermanent(filter)));

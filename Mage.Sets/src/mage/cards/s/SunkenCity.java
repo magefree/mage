@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.mastersedition;
+package mage.cards.s;
 
 import java.util.UUID;
 import mage.ObjectColor;
@@ -35,9 +35,9 @@ import mage.abilities.costs.mana.ManaCostsImpl;
 import mage.abilities.effects.common.SacrificeSourceUnlessPaysEffect;
 import mage.abilities.effects.common.continuous.BoostAllEffect;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Duration;
-import mage.constants.Rarity;
 import mage.constants.TargetController;
 import mage.constants.Zone;
 import mage.filter.common.FilterCreaturePermanent;
@@ -55,9 +55,8 @@ public class SunkenCity extends CardImpl {
         filter.add(new ColorPredicate(ObjectColor.BLUE));
     }
 
-    public SunkenCity(UUID ownerId) {
-        super(ownerId, 51, "Sunken City", Rarity.UNCOMMON, new CardType[]{CardType.ENCHANTMENT}, "{U}{U}");
-        this.expansionSetCode = "MED";
+    public SunkenCity(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.ENCHANTMENT},"{U}{U}");
 
         // At the beginning of your upkeep, sacrifice Sunken City unless you pay {U}{U}.
         this.addAbility(new BeginningOfUpkeepTriggeredAbility(new SacrificeSourceUnlessPaysEffect(new ManaCostsImpl("{U}{U}")), TargetController.YOU, false));

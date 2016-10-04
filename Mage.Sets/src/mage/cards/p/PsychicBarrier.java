@@ -25,14 +25,14 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.newphyrexia;
+package mage.cards.p;
 
 import java.util.UUID;
 import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.abilities.effects.common.CounterTargetEffect;
 import mage.abilities.effects.common.LoseLifeTargetControllerEffect;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.filter.FilterSpell;
 import mage.filter.predicate.mageobject.CardTypePredicate;
 import mage.target.TargetSpell;
@@ -49,9 +49,8 @@ public class PsychicBarrier extends CardImpl {
         filter.add(new CardTypePredicate(CardType.CREATURE));
     }
 
-    public PsychicBarrier(UUID ownerId) {
-        super(ownerId, 43, "Psychic Barrier", Rarity.COMMON, new CardType[]{CardType.INSTANT}, "{U}{U}");
-        this.expansionSetCode = "NPH";
+    public PsychicBarrier(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.INSTANT},"{U}{U}");
 
         // Counter target creature spell. Its controller loses 1 life.
         this.getSpellAbility().addTarget(new TargetSpell(filter));

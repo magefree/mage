@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.returntoravnica;
+package mage.cards.g;
 
 import java.util.UUID;
 import mage.abilities.Ability;
@@ -38,11 +38,11 @@ import mage.abilities.effects.Effect;
 import mage.abilities.effects.OneShotEffect;
 import mage.cards.Card;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Duration;
 import mage.constants.Layer;
 import mage.constants.Outcome;
-import mage.constants.Rarity;
 import mage.constants.SubLayer;
 import mage.constants.Zone;
 import mage.counters.CounterType;
@@ -59,9 +59,8 @@ import mage.target.targetpointer.FixedTarget;
  */
 public class GraveBetrayal extends CardImpl {
 
-    public GraveBetrayal(UUID ownerId) {
-        super(ownerId, 67, "Grave Betrayal", Rarity.RARE, new CardType[]{CardType.ENCHANTMENT}, "{5}{B}{B}");
-        this.expansionSetCode = "RTR";
+    public GraveBetrayal(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.ENCHANTMENT},"{5}{B}{B}");
 
         // Whenever a creature you don't control dies, return it to the battlefield under
         // your control with an additional +1/+1 counter on it at the beginning of the

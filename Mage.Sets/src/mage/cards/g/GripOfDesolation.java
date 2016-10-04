@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.battleforzendikar;
+package mage.cards.g;
 
 import java.util.UUID;
 import mage.abilities.Ability;
@@ -33,8 +33,8 @@ import mage.abilities.effects.Effect;
 import mage.abilities.effects.common.ExileTargetEffect;
 import mage.abilities.keyword.DevoidAbility;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.target.common.TargetCreaturePermanent;
 import mage.target.common.TargetLandPermanent;
 import mage.target.targetpointer.SecondTargetPointer;
@@ -45,9 +45,8 @@ import mage.target.targetpointer.SecondTargetPointer;
  */
 public class GripOfDesolation extends CardImpl {
 
-    public GripOfDesolation(UUID ownerId) {
-        super(ownerId, 94, "Grip of Desolation", Rarity.UNCOMMON, new CardType[]{CardType.INSTANT}, "{4}{B}{B}");
-        this.expansionSetCode = "BFZ";
+    public GripOfDesolation(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.INSTANT},"{4}{B}{B}");
 
         // Devoid
         Ability ability = new DevoidAbility(this.color);

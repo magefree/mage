@@ -25,12 +25,11 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.ravnica;
+package mage.cards.d;
 
 import java.util.UUID;
 
 import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.costs.common.TapSourceCost;
@@ -38,6 +37,7 @@ import mage.abilities.costs.mana.ManaCostsImpl;
 import mage.abilities.effects.common.PutLibraryIntoGraveTargetEffect;
 import mage.abilities.mana.ColorlessManaAbility;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.Zone;
 import mage.target.TargetPlayer;
 
@@ -47,9 +47,8 @@ import mage.target.TargetPlayer;
  */
 public class DuskmantleHouseOfShadow extends CardImpl {
 
-    public DuskmantleHouseOfShadow(UUID ownerId) {
-        super(ownerId, 277, "Duskmantle, House of Shadow", Rarity.UNCOMMON, new CardType[]{CardType.LAND}, null);
-        this.expansionSetCode = "RAV";
+    public DuskmantleHouseOfShadow(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.LAND},null);
 
         // {tap}: Add {C} to your mana pool.
         this.addAbility(new ColorlessManaAbility());

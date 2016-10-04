@@ -25,24 +25,23 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.onslaught;
+package mage.cards.w;
 
 import java.util.UUID;
 
 import mage.MageInt;
 import mage.abilities.mana.GreenManaAbility;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.Rarity;
 
 /**
  *
  * @author Melkhior
  */
 public class WirewoodElf extends CardImpl {
-    public WirewoodElf(UUID ownerId) {
-        super(ownerId, 301, "Wirewood Elf", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{1}{G}");
-        this.expansionSetCode = "ONS";
+    public WirewoodElf(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{1}{G}");
         this.subtype.add("Elf");
         this.subtype.add("Druid");
 

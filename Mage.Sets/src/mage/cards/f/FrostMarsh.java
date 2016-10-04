@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.coldsnap;
+package mage.cards.f;
 
 import java.util.UUID;
 
@@ -33,8 +33,8 @@ import mage.abilities.common.EntersBattlefieldTappedAbility;
 import mage.abilities.mana.BlackManaAbility;
 import mage.abilities.mana.BlueManaAbility;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.Rarity;
 
 /**
  *
@@ -42,9 +42,8 @@ import mage.constants.Rarity;
  */
 public class FrostMarsh extends CardImpl {
 
-    public FrostMarsh(UUID ownerId) {
-        super(ownerId, 146, "Frost Marsh", Rarity.UNCOMMON, new CardType[]{CardType.LAND}, "");
-        this.expansionSetCode = "CSP";
+    public FrostMarsh(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.LAND},"");
         this.supertype.add("Snow");
 
         // Frost Marsh enters the battlefield tapped.

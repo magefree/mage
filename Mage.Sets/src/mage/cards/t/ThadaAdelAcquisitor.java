@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.worldwake;
+package mage.cards.t;
 
 import java.util.UUID;
 import mage.MageInt;
@@ -38,11 +38,11 @@ import mage.abilities.effects.OneShotEffect;
 import mage.abilities.keyword.IslandwalkAbility;
 import mage.cards.Card;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.AsThoughEffectType;
 import mage.constants.CardType;
 import mage.constants.Duration;
 import mage.constants.Outcome;
-import mage.constants.Rarity;
 import mage.constants.Zone;
 import mage.filter.common.FilterArtifactCard;
 import mage.game.Game;
@@ -56,9 +56,8 @@ import mage.target.targetpointer.FixedTarget;
  */
 public class ThadaAdelAcquisitor extends CardImpl {
 
-    public ThadaAdelAcquisitor(UUID ownerId) {
-        super(ownerId, 40, "Thada Adel, Acquisitor", Rarity.RARE, new CardType[]{CardType.CREATURE}, "{1}{U}{U}");
-        this.expansionSetCode = "WWK";
+    public ThadaAdelAcquisitor(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{1}{U}{U}");
         this.supertype.add("Legendary");
         this.subtype.add("Merfolk");
         this.subtype.add("Rogue");

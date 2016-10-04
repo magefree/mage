@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.battleforzendikar;
+package mage.cards.p;
 
 import java.util.UUID;
 import mage.abilities.Ability;
@@ -38,8 +38,8 @@ import mage.abilities.effects.common.TapTargetEffect;
 import mage.abilities.effects.common.counter.AddCountersSourceEffect;
 import mage.abilities.effects.keyword.ScryEffect;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.constants.Zone;
 import mage.counters.CounterType;
 import mage.target.common.TargetCreaturePermanent;
@@ -50,9 +50,8 @@ import mage.target.common.TargetCreaturePermanent;
  */
 public class PrismArray extends CardImpl {
 
-    public PrismArray(UUID ownerId) {
-        super(ownerId, 81, "Prism Array", Rarity.RARE, new CardType[]{CardType.ENCHANTMENT}, "{4}{U}");
-        this.expansionSetCode = "BFZ";
+    public PrismArray(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.ENCHANTMENT},"{4}{U}");
 
         // <i>Converge</i> - Prism Array enters the battlefield with a crystal counter on it for each color of mana spent to cast it.
         this.addAbility(new EntersBattlefieldAbility(

@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.revisededition;
+package mage.cards.r;
 
 import java.util.UUID;
 import mage.abilities.Ability;
@@ -37,8 +37,8 @@ import mage.abilities.effects.common.CreateDelayedTriggeredAbilityEffect;
 import mage.abilities.effects.common.DamageTargetEffect;
 import mage.abilities.effects.common.DestroySourceEffect;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.constants.WatcherScope;
 import mage.constants.Zone;
 import mage.game.Game;
@@ -52,9 +52,8 @@ import mage.watchers.Watcher;
  */
 public class RocketLauncher extends CardImpl {
 
-    public RocketLauncher(UUID ownerId) {
-        super(ownerId, 272, "Rocket Launcher", Rarity.RARE, new CardType[]{CardType.ARTIFACT}, "{4}");
-        this.expansionSetCode = "3ED";
+    public RocketLauncher(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.ARTIFACT},"{4}");
 
         Watcher watcher = new RocketLauncherWatcher(this.getId());        
         // {2}: Rocket Launcher deals 1 damage to target creature or player. Destroy Rocket Launcher at the beginning of the next end step. Activate this ability only if you've controlled Rocket Launcher continuously since the beginning of your most recent turn.

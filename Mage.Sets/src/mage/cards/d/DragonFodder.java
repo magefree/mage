@@ -25,13 +25,13 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.shardsofalara;
+package mage.cards.d;
 
 import java.util.UUID;
 import mage.abilities.effects.common.CreateTokenEffect;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.game.permanent.token.GoblinToken;
 
 /**
@@ -40,9 +40,8 @@ import mage.game.permanent.token.GoblinToken;
  */
 public class DragonFodder extends CardImpl {
 
-    public DragonFodder(UUID ownerId) {
-        super(ownerId, 97, "Dragon Fodder", Rarity.COMMON, new CardType[]{CardType.SORCERY}, "{1}{R}");
-        this.expansionSetCode = "ALA";
+    public DragonFodder(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{1}{R}");
 
         // Put two 1/1 red Goblin creature tokens onto the battlefield.
         this.getSpellAbility().addEffect(new CreateTokenEffect(new GoblinToken(), 2));

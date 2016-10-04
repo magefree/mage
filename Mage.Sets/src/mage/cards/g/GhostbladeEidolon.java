@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.bornofthegods;
+package mage.cards.g;
 
 import java.util.UUID;
 import mage.MageInt;
@@ -37,10 +37,10 @@ import mage.abilities.effects.common.continuous.GainAbilityAttachedEffect;
 import mage.abilities.keyword.BestowAbility;
 import mage.abilities.keyword.DoubleStrikeAbility;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.AttachmentType;
 import mage.constants.CardType;
 import mage.constants.Duration;
-import mage.constants.Rarity;
 import mage.constants.Zone;
 
 /**
@@ -49,9 +49,8 @@ import mage.constants.Zone;
  */
 public class GhostbladeEidolon extends CardImpl {
 
-    public GhostbladeEidolon(UUID ownerId) {
-        super(ownerId, 12, "Ghostblade Eidolon", Rarity.UNCOMMON, new CardType[]{CardType.ENCHANTMENT, CardType.CREATURE}, "{2}{W}");
-        this.expansionSetCode = "BNG";
+    public GhostbladeEidolon(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.ENCHANTMENT,CardType.CREATURE},"{2}{W}");
         this.subtype.add("Spirit");
 
         this.power = new MageInt(1);

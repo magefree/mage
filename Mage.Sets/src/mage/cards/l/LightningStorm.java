@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.coldsnap;
+package mage.cards.l;
 
 import java.util.UUID;
 import mage.abilities.Ability;
@@ -38,9 +38,9 @@ import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.DamageTargetEffect;
 import mage.abilities.effects.common.InfoEffect;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Outcome;
-import mage.constants.Rarity;
 import mage.constants.TargetController;
 import mage.constants.Zone;
 import mage.counters.CounterType;
@@ -56,9 +56,8 @@ import mage.target.common.TargetCreatureOrPlayer;
  */
 public class LightningStorm extends CardImpl {
 
-    public LightningStorm(UUID ownerId) {
-        super(ownerId, 89, "Lightning Storm", Rarity.UNCOMMON, new CardType[]{CardType.INSTANT}, "{1}{R}{R}");
-        this.expansionSetCode = "CSP";
+    public LightningStorm(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.INSTANT},"{1}{R}{R}");
 
         // Lightning Storm deals X damage to target creature or player, where X is 3 plus the number of charge counters on it.
         Effect effect = new DamageTargetEffect(new LightningStormCountCondition(CounterType.CHARGE));

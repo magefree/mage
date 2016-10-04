@@ -26,16 +26,16 @@
  *  or implied, of BetaSteward_at_googlemail.com.
  */
 
-package mage.sets.championsofkamigawa;
+package mage.cards.h;
 
 import java.util.UUID;
 
 import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.abilities.effects.common.DamageTargetEffect;
 import mage.abilities.effects.common.discard.DiscardControllerEffect;
 import mage.abilities.effects.common.ReturnToHandSpellEffect;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.target.common.TargetCreatureOrPlayer;
 
 /**
@@ -44,9 +44,8 @@ import mage.target.common.TargetCreatureOrPlayer;
  */
 public class HanabiBlast extends CardImpl {
 
-    public HanabiBlast (UUID ownerId) {
-        super(ownerId, 170, "Hanabi Blast", Rarity.UNCOMMON, new CardType[]{CardType.INSTANT}, "{1}{R}{R}");
-        this.expansionSetCode = "CHK";
+    public HanabiBlast (UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.INSTANT},"{1}{R}{R}");
 
         this.getSpellAbility().addEffect(new DamageTargetEffect(2));
         this.getSpellAbility().addTarget(new TargetCreatureOrPlayer());

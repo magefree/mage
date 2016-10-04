@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.championsofkamigawa;
+package mage.cards.o;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -41,11 +41,11 @@ import mage.abilities.effects.common.continuous.SetCardSubtypeAttachedEffect;
 import mage.abilities.keyword.EnchantAbility;
 import mage.abilities.keyword.TrampleAbility;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.AttachmentType;
 import mage.constants.CardType;
 import mage.constants.Duration;
 import mage.constants.Outcome;
-import mage.constants.Rarity;
 import mage.constants.TargetController;
 import mage.constants.Zone;
 import mage.filter.common.FilterControlledCreaturePermanent;
@@ -65,9 +65,8 @@ public class OniPossession extends CardImpl {
         setSubtypes.add("Spirit");
     }
 
-    public OniPossession(UUID ownerId) {
-        super(ownerId, 135, "Oni Possession", Rarity.UNCOMMON, new CardType[]{CardType.ENCHANTMENT}, "{2}{B}");
-        this.expansionSetCode = "CHK";
+    public OniPossession(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.ENCHANTMENT},"{2}{B}");
         this.subtype.add("Aura");
 
         // Enchant creature

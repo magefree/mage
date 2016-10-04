@@ -25,13 +25,13 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.tenthedition;
+package mage.cards.u;
 
 import java.util.UUID;
 import mage.abilities.effects.common.ReturnToHandTargetEffect;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.target.common.TargetCreaturePermanent;
 
 /**
@@ -40,9 +40,8 @@ import mage.target.common.TargetCreaturePermanent;
  */
 public class Unsummon extends CardImpl {
 
-    public Unsummon(UUID ownerId) {
-        super(ownerId, 122, "Unsummon", Rarity.COMMON, new CardType[]{CardType.INSTANT}, "{U}");
-        this.expansionSetCode = "10E";
+    public Unsummon(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.INSTANT},"{U}");
 
         // Return target creature to its owner's hand.
         this.getSpellAbility().addTarget(new TargetCreaturePermanent());

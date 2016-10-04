@@ -25,15 +25,15 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.scourge;
+package mage.cards.k;
 
 import java.util.UUID;
 import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.MageInt;
 import mage.abilities.common.SpellCastControllerTriggeredAbility;
 import mage.abilities.effects.common.counter.AddCountersSourceEffect;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.counters.CounterType;
 import mage.filter.Filter.ComparisonType;
 import mage.filter.FilterSpell;
@@ -53,9 +53,8 @@ public class Kurgadon extends CardImpl {
 		filterSpell.add(new ConvertedManaCostPredicate(ComparisonType.GreaterThan, 5));
     }
 
-    public Kurgadon(UUID ownerId) {
-        super(ownerId, 124, "Kurgadon", Rarity.UNCOMMON, new CardType[]{CardType.CREATURE}, "{4}{G}");
-        this.expansionSetCode = "SCG";
+    public Kurgadon(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{4}{G}");
         this.subtype.add("Beast");
 
         this.power = new MageInt(3);

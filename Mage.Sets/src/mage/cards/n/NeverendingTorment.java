@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.saviorsofkamigawa;
+package mage.cards.n;
 
 import java.util.UUID;
 import mage.abilities.Ability;
@@ -33,9 +33,9 @@ import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.EpicEffect;
 import mage.cards.Card;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Outcome;
-import mage.constants.Rarity;
 import mage.constants.Zone;
 import mage.filter.FilterCard;
 import mage.game.Game;
@@ -50,9 +50,8 @@ import mage.target.common.TargetCardInLibrary;
  */
 public class NeverendingTorment extends CardImpl {
 
-    public NeverendingTorment(UUID ownerId) {
-        super(ownerId, 83, "Neverending Torment", Rarity.RARE, new CardType[]{CardType.SORCERY}, "{4}{B}{B}");
-        this.expansionSetCode = "SOK";
+    public NeverendingTorment(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{4}{B}{B}");
 
 
         // Search target player's library for X cards, where X is the number of cards in your hand, and exile them. Then that player shuffles his or her library.

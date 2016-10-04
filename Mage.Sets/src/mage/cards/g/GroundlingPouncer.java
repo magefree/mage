@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.eventide;
+package mage.cards.g;
 
 import java.util.UUID;
 import mage.MageInt;
@@ -41,10 +41,10 @@ import mage.abilities.effects.common.continuous.BoostSourceEffect;
 import mage.abilities.effects.common.continuous.GainAbilitySourceEffect;
 import mage.abilities.keyword.FlyingAbility;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Duration;
 import mage.constants.EffectType;
-import mage.constants.Rarity;
 import mage.constants.Zone;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.filter.predicate.mageobject.AbilityPredicate;
@@ -63,9 +63,8 @@ public class GroundlingPouncer extends CardImpl {
         filter.add(new AbilityPredicate(FlyingAbility.class));
     }
 
-    public GroundlingPouncer(UUID ownerId) {
-        super(ownerId, 154, "Groundling Pouncer", Rarity.UNCOMMON, new CardType[]{CardType.CREATURE}, "{1}{G/U}");
-        this.expansionSetCode = "EVE";
+    public GroundlingPouncer(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{1}{G/U}");
         this.subtype.add("Faerie");
 
         this.power = new MageInt(2);

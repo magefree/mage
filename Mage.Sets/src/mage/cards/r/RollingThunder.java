@@ -25,15 +25,15 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.tempestremastered;
+package mage.cards.r;
 
 import java.util.UUID;
 import mage.abilities.dynamicvalue.DynamicValue;
 import mage.abilities.dynamicvalue.common.ManacostVariableValue;
 import mage.abilities.effects.common.DamageMultiEffect;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.target.common.TargetCreatureOrPlayerAmount;
 
 /**
@@ -42,9 +42,8 @@ import mage.target.common.TargetCreatureOrPlayerAmount;
  */
 public class RollingThunder extends CardImpl {
 
-    public RollingThunder(UUID ownerId) {
-        super(ownerId, 152, "Rolling Thunder", Rarity.UNCOMMON, new CardType[]{CardType.SORCERY}, "{X}{R}{R}");
-        this.expansionSetCode = "TPR";
+    public RollingThunder(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{X}{R}{R}");
 
         // Rolling Thunder deals X damage divided as you choose among any number of target creatures and/or players.
         DynamicValue xValue = new ManacostVariableValue();

@@ -26,12 +26,11 @@
  *  or implied, of BetaSteward_at_googlemail.com.
  */
 
-package mage.sets.alarareborn;
+package mage.cards.l;
 
 import java.util.UUID;
 
 import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleActivatedAbility;
@@ -42,6 +41,7 @@ import mage.abilities.effects.common.CreateTokenEffect;
 import mage.abilities.effects.common.LoseLifeTargetEffect;
 import mage.abilities.effects.common.PutLibraryIntoGraveTargetEffect;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.Zone;
 import mage.filter.common.FilterControlledCreaturePermanent;
 import mage.filter.predicate.mageobject.SubtypePredicate;
@@ -59,9 +59,8 @@ public class LichLordOfUnx extends CardImpl {
         filter.add(new SubtypePredicate("Zombie"));
     }
 
-    public LichLordOfUnx (UUID ownerId) {
-        super(ownerId, 24, "Lich Lord of Unx", Rarity.RARE, new CardType[]{CardType.CREATURE}, "{1}{U}{B}");
-        this.expansionSetCode = "ARB";
+    public LichLordOfUnx (UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{1}{U}{B}");
         this.subtype.add("Zombie");
         this.subtype.add("Wizard");
 

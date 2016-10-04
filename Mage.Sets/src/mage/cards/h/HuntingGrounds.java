@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.judgment;
+package mage.cards.h;
 
 import java.util.UUID;
 import mage.abilities.Ability;
@@ -36,10 +36,10 @@ import mage.abilities.decorator.ConditionalContinuousEffect;
 import mage.abilities.effects.common.PutPermanentOnBattlefieldEffect;
 import mage.abilities.effects.common.continuous.GainAbilitySourceEffect;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.AbilityWord;
 import mage.constants.CardType;
 import mage.constants.Duration;
-import mage.constants.Rarity;
 import mage.constants.Zone;
 import mage.filter.common.FilterCreatureCard;
 
@@ -49,9 +49,8 @@ import mage.filter.common.FilterCreatureCard;
  */
 public class HuntingGrounds extends CardImpl {
 
-    public HuntingGrounds(UUID ownerId) {
-        super(ownerId, 138, "Hunting Grounds", Rarity.RARE, new CardType[]{CardType.ENCHANTMENT}, "{G}{W}");
-        this.expansionSetCode = "JUD";
+    public HuntingGrounds(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.ENCHANTMENT},"{G}{W}");
 
         // Threshold - As long as seven or more cards are in your graveyard, Hunting Grounds has "Whenever an opponent casts a spell, you may put a creature card from your hand onto the battlefield."
         Ability gainedAbility = new SpellCastOpponentTriggeredAbility(new PutPermanentOnBattlefieldEffect(

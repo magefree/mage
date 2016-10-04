@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.shadowsoverinnistrad;
+package mage.cards.t;
 
 import java.util.UUID;
 import mage.MageInt;
@@ -35,9 +35,10 @@ import mage.abilities.costs.common.TapSourceCost;
 import mage.abilities.costs.common.TapTargetCost;
 import mage.abilities.effects.common.TransformSourceEffect;
 import mage.abilities.keyword.TransformAbility;
+import mage.cards.i.IncitedRabble;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.constants.Zone;
 import mage.filter.common.FilterControlledCreaturePermanent;
 import mage.filter.predicate.Predicates;
@@ -56,15 +57,14 @@ public class TownGossipmonger extends CardImpl {
         filter.add(Predicates.not(new TappedPredicate()));
     }
 
-    public TownGossipmonger(UUID ownerId) {
-        super(ownerId, 46, "Town Gossipmonger", Rarity.UNCOMMON, new CardType[]{CardType.CREATURE}, "{W}");
-        this.expansionSetCode = "SOI";
+    public TownGossipmonger(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{W}");
         this.subtype.add("Human");
         this.power = new MageInt(1);
         this.toughness = new MageInt(1);
         
         this.transformable = true;
-        this.secondSideCard = new IncitedRabble(ownerId);
+        this.secondSideCardClazz = IncitedRabble.class;
 
         // {T}, Tap an untapped creature you control: Transform Town Gossipmonger.
         this.addAbility(new TransformAbility());

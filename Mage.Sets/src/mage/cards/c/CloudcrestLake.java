@@ -25,27 +25,26 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.championsofkamigawa;
+package mage.cards.c;
 
 import java.util.UUID;
 
 import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.abilities.Ability;
 import mage.abilities.effects.common.DontUntapInControllersNextUntapStepSourceEffect;
 import mage.abilities.mana.BlueManaAbility;
 import mage.abilities.mana.ColorlessManaAbility;
 import mage.abilities.mana.WhiteManaAbility;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 
 /**
  * @author Loki
  */
 public class CloudcrestLake extends CardImpl {
 
-    public CloudcrestLake(UUID ownerId) {
-        super(ownerId, 274, "Cloudcrest Lake", Rarity.UNCOMMON, new CardType[]{CardType.LAND}, "");
-        this.expansionSetCode = "CHK";
+    public CloudcrestLake(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.LAND},"");
         
         // {T}: Add {C} to your mana pool.
         // {T}: Add {W} or {U} to your mana pool. Cloudcrest Lake doesn't untap during your next untap step.

@@ -26,15 +26,15 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.gatecrash;
+package mage.cards.u;
 
 import java.util.UUID;
 
 import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.abilities.effects.common.DrawCardSourceControllerEffect;
 import mage.abilities.effects.common.continuous.PlayAdditionalLandsControllerEffect;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.Duration;
 
 /**
@@ -43,9 +43,8 @@ import mage.constants.Duration;
  */
 public class UrbanEvolution extends CardImpl {
 
-    public UrbanEvolution(UUID ownerId) {
-        super(ownerId, 204, "Urban Evolution", Rarity.UNCOMMON, new CardType[]{CardType.SORCERY}, "{3}{G}{U}");
-        this.expansionSetCode = "GTC";
+    public UrbanEvolution(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{3}{G}{U}");
 
         //Draw three cards. 
         this.getSpellAbility().addEffect(new DrawCardSourceControllerEffect(3));

@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.planeshift;
+package mage.cards.f;
 
 import java.util.UUID;
 import mage.abilities.common.BeginningOfUpkeepTriggeredAbility;
@@ -36,8 +36,8 @@ import mage.abilities.effects.common.DontUntapInControllersUntapStepSourceEffect
 import mage.abilities.effects.common.UntapSourceEffect;
 import mage.abilities.mana.AnyColorManaAbility;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.constants.TargetController;
 import mage.constants.Zone;
 import mage.filter.FilterCard;
@@ -51,9 +51,8 @@ public class ForsakenCity extends CardImpl {
     
      private static final FilterCard filter = new FilterCard("a card from your hand");
 
-    public ForsakenCity(UUID ownerId) {
-        super(ownerId, 139, "Forsaken City", Rarity.RARE, new CardType[]{CardType.LAND}, "");
-        this.expansionSetCode = "PLS";
+    public ForsakenCity(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.LAND},"");
 
         // Forsaken City doesn't untap during your untap step.
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new DontUntapInControllersUntapStepSourceEffect()));

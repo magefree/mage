@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.coldsnap;
+package mage.cards.c;
 
 import java.util.UUID;
 import mage.Mana;
@@ -38,10 +38,10 @@ import mage.abilities.effects.common.ChooseColorEffect;
 import mage.abilities.effects.common.ManaEffect;
 import mage.abilities.mana.SimpleManaAbility;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.ColoredManaSymbol;
 import mage.constants.Outcome;
-import mage.constants.Rarity;
 import mage.constants.Zone;
 import mage.game.Game;
 import mage.players.Player;
@@ -52,9 +52,8 @@ import mage.players.Player;
  */
 public class ColdsteelHeart extends CardImpl {
 
-    public ColdsteelHeart(UUID ownerId) {
-        super(ownerId, 136, "Coldsteel Heart", Rarity.UNCOMMON, new CardType[]{CardType.ARTIFACT}, "{2}");
-        this.expansionSetCode = "CSP";
+    public ColdsteelHeart(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.ARTIFACT},"{2}");
         this.supertype.add("Snow");
 
         // Coldsteel Heart enters the battlefield tapped.

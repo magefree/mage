@@ -25,18 +25,18 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.magicorigins;
+package mage.cards.n;
 
 import java.util.UUID;
 import mage.abilities.Ability;
 import mage.abilities.effects.OneShotEffect;
 import mage.cards.Card;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.cards.Cards;
 import mage.cards.CardsImpl;
 import mage.constants.CardType;
 import mage.constants.Outcome;
-import mage.constants.Rarity;
 import mage.constants.Zone;
 import mage.filter.common.FilterNonlandCard;
 import mage.game.Game;
@@ -50,9 +50,8 @@ import mage.target.common.TargetOpponent;
  */
 public class Nightsnare extends CardImpl {
 
-    public Nightsnare(UUID ownerId) {
-        super(ownerId, 111, "Nightsnare", Rarity.COMMON, new CardType[]{CardType.SORCERY}, "{3}{B}");
-        this.expansionSetCode = "ORI";
+    public Nightsnare(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{3}{B}");
 
         // Target opponent reveals his or her hand. You may choose a nonland card from it. If you do, that player discards that card. If you don't, that player discards two cards.
         this.getSpellAbility().addTarget(new TargetOpponent());

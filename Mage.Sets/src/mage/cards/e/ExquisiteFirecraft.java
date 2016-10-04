@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.magicorigins;
+package mage.cards.e;
 
 import java.util.UUID;
 import mage.abilities.Ability;
@@ -36,8 +36,8 @@ import mage.abilities.effects.ContinuousRuleModifyingEffect;
 import mage.abilities.effects.common.CantBeCounteredSourceEffect;
 import mage.abilities.effects.common.DamageTargetEffect;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.constants.Zone;
 import mage.target.common.TargetCreatureOrPlayer;
 
@@ -47,9 +47,8 @@ import mage.target.common.TargetCreatureOrPlayer;
  */
 public class ExquisiteFirecraft extends CardImpl {
 
-    public ExquisiteFirecraft(UUID ownerId) {
-        super(ownerId, 143, "Exquisite Firecraft", Rarity.RARE, new CardType[]{CardType.SORCERY}, "{1}{R}{R}");
-        this.expansionSetCode = "ORI";
+    public ExquisiteFirecraft(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{1}{R}{R}");
 
         // Exquisite Firecraft deals 4 damage to target creature or player.        
         this.getSpellAbility().addTarget(new TargetCreatureOrPlayer());

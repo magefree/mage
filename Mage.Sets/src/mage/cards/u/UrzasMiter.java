@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.masterseditioniv;
+package mage.cards.u;
 
 import java.util.ArrayList;
 import java.util.UUID;
@@ -37,8 +37,8 @@ import mage.abilities.effects.Effect;
 import mage.abilities.effects.common.DoIfCostPaid;
 import mage.abilities.effects.common.GainLifeEffect;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.constants.WatcherScope;
 import mage.constants.Zone;
 import mage.filter.common.FilterControlledArtifactPermanent;
@@ -52,9 +52,8 @@ import mage.watchers.Watcher;
  */
 public class UrzasMiter extends CardImpl {
 
-    public UrzasMiter(UUID ownerId) {
-        super(ownerId, 237, "Urza's Miter", Rarity.RARE, new CardType[]{CardType.ARTIFACT}, "{3}");
-        this.expansionSetCode = "ME4";
+    public UrzasMiter(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.ARTIFACT},"{3}");
 
         Watcher watcher = new UrzasMiterWatcher();        
         // Whenever an artifact you control is put into a graveyard from the battlefield, if it wasn't sacrificed, you may pay {3}. If you do, draw a card.

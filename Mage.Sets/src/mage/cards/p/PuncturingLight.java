@@ -25,13 +25,13 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.riseoftheeldrazi;
+package mage.cards.p;
 
 import java.util.UUID;
 import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.abilities.effects.common.DestroyTargetEffect;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.filter.Filter.ComparisonType;
 import mage.filter.common.FilterAttackingOrBlockingCreature;
 import mage.filter.common.FilterCreaturePermanent;
@@ -50,9 +50,8 @@ public class PuncturingLight extends CardImpl {
         filter.add(new PowerPredicate(ComparisonType.LessThan, 4));
     }
 
-    public PuncturingLight(UUID ownerId) {
-        super(ownerId, 41, "Puncturing Light", Rarity.COMMON, new CardType[]{CardType.INSTANT}, "{1}{W}");
-        this.expansionSetCode = "ROE";
+    public PuncturingLight(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.INSTANT},"{1}{W}");
 
 
         this.getSpellAbility().addTarget(new TargetCreaturePermanent(filter));

@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.timespiral;
+package mage.cards.n;
 
 import java.util.UUID;
 import mage.MageInt;
@@ -36,9 +36,9 @@ import mage.abilities.effects.common.ReturnSourceFromGraveyardToBattlefieldEffec
 import mage.abilities.keyword.HasteAbility;
 import mage.abilities.keyword.ShadowAbility;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.ColoredManaSymbol;
-import mage.constants.Rarity;
 import mage.constants.Zone;
 import mage.game.Game;
 import mage.game.events.GameEvent;
@@ -50,9 +50,8 @@ import mage.game.events.ZoneChangeEvent;
  */
 public class NetherTraitor extends CardImpl {
 
-    public NetherTraitor(UUID ownerId) {
-        super(ownerId, 120, "Nether Traitor", Rarity.RARE, new CardType[]{CardType.CREATURE}, "{B}{B}");
-        this.expansionSetCode = "TSP";
+    public NetherTraitor(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{B}{B}");
         this.subtype.add("Spirit");
         this.power = new MageInt(1);
         this.toughness = new MageInt(1);

@@ -26,14 +26,13 @@
  *  or implied, of BetaSteward_at_googlemail.com.
  */
 
-package mage.sets.dragonsmaze;
+package mage.cards.b;
 
 import java.util.UUID;
 
 import mage.constants.CardType;
 import mage.constants.Duration;
 import mage.constants.Outcome;
-import mage.constants.Rarity;
 import mage.constants.Zone;
 import mage.MageInt;
 import mage.abilities.Ability;
@@ -48,6 +47,7 @@ import mage.abilities.effects.common.continuous.GainAbilityTargetEffect;
 import mage.abilities.keyword.AttacksThisTurnMarkerAbility;
 import mage.abilities.keyword.BlocksThisTurnMarkerAbility;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.TargetController;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.game.Game;
@@ -63,9 +63,8 @@ import mage.target.targetpointer.FixedTarget;
 
 public class BorosBattleshaper extends CardImpl {
 
-    public BorosBattleshaper (UUID ownerId) {
-        super(ownerId, 58, "Boros Battleshaper", Rarity.RARE, new CardType[]{CardType.CREATURE}, "{5}{R}{W}");
-        this.expansionSetCode = "DGM";
+    public BorosBattleshaper (UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{5}{R}{W}");
         this.subtype.add("Minotaur");
         this.subtype.add("Soldier");
 

@@ -25,16 +25,16 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.fifthedition;
+package mage.cards.a;
 
 import java.util.UUID;
 import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.MageInt;
 import mage.abilities.common.DealsDamageToAPlayerTriggeredAbility;
 import mage.abilities.effects.common.discard.DiscardTargetEffect;
 import mage.abilities.keyword.FlyingAbility;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 
 /**
  *
@@ -42,9 +42,8 @@ import mage.cards.CardImpl;
  */
 public class AbyssalSpecter extends CardImpl {
 
-    public AbyssalSpecter(UUID ownerId) {
-        super(ownerId, 1, "Abyssal Specter", Rarity.UNCOMMON, new CardType[]{CardType.CREATURE}, "{2}{B}{B}");
-        this.expansionSetCode = "5ED";
+    public AbyssalSpecter(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{2}{B}{B}");
         this.subtype.add("Specter");
 
         this.power = new MageInt(2);

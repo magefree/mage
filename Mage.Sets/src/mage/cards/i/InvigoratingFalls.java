@@ -25,15 +25,15 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.torment;
+package mage.cards.i;
 
 import java.util.UUID;
 import mage.abilities.dynamicvalue.common.CardsInAllGraveyardsCount;
 import mage.abilities.effects.Effect;
 import mage.abilities.effects.common.GainLifeEffect;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.filter.common.FilterCreatureCard;
 
 /**
@@ -42,9 +42,8 @@ import mage.filter.common.FilterCreatureCard;
  */
 public class InvigoratingFalls extends CardImpl {
 
-    public InvigoratingFalls(UUID ownerId) {
-        super(ownerId, 128, "Invigorating Falls", Rarity.COMMON, new CardType[]{CardType.SORCERY}, "{2}{G}{G}");
-        this.expansionSetCode = "TOR";
+    public InvigoratingFalls(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{2}{G}{G}");
 
         // You gain life equal to the number of creature cards in all graveyards.
         Effect effect = new GainLifeEffect(new CardsInAllGraveyardsCount(new FilterCreatureCard()));

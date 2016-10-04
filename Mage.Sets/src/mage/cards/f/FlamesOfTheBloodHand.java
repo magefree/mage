@@ -25,17 +25,17 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.betrayersofkamigawa;
+package mage.cards.f;
 
 import java.util.UUID;
 import mage.abilities.Ability;
 import mage.abilities.effects.ReplacementEffectImpl;
 import mage.abilities.effects.common.DamageTargetEffect;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Duration;
 import mage.constants.Outcome;
-import mage.constants.Rarity;
 import mage.game.Game;
 import mage.game.events.GameEvent;
 import mage.target.TargetPlayer;
@@ -46,9 +46,8 @@ import mage.target.TargetPlayer;
  */
 public class FlamesOfTheBloodHand extends CardImpl {
 
-    public FlamesOfTheBloodHand(UUID ownerId) {
-        super(ownerId, 101, "Flames of the Blood Hand", Rarity.UNCOMMON, new CardType[]{CardType.INSTANT}, "{2}{R}");
-        this.expansionSetCode = "BOK";
+    public FlamesOfTheBloodHand(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.INSTANT},"{2}{R}");
 
 
         // Flames of the Blood Hand deals 4 damage to target player. The damage can't be prevented.

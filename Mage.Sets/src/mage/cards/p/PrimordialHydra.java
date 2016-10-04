@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.magic2012;
+package mage.cards.p;
 
 import java.util.UUID;
 import mage.MageInt;
@@ -40,9 +40,9 @@ import mage.abilities.effects.common.EntersBattlefieldWithXCountersEffect;
 import mage.abilities.effects.common.continuous.GainAbilitySourceEffect;
 import mage.abilities.keyword.TrampleAbility;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Outcome;
-import mage.constants.Rarity;
 import mage.constants.TargetController;
 import mage.constants.Zone;
 import mage.counters.CounterType;
@@ -57,9 +57,8 @@ public class PrimordialHydra extends CardImpl {
 
     private static final String staticText = "{this} has trample as long as it has ten or more +1/+1 counters on it";
 
-    public PrimordialHydra(UUID ownerId) {
-        super(ownerId, 189, "Primordial Hydra", Rarity.MYTHIC, new CardType[]{CardType.CREATURE}, "{X}{G}{G}");
-        this.expansionSetCode = "M12";
+    public PrimordialHydra(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{X}{G}{G}");
         this.subtype.add("Hydra");
 
         this.color.setGreen(true);

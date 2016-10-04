@@ -25,19 +25,19 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.tempest;
+package mage.cards.s;
 
 import java.util.UUID;
 
 import mage.constants.CardType;
 import mage.constants.Duration;
-import mage.constants.Rarity;
 import mage.MageInt;
 import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.costs.mana.GenericManaCost;
 import mage.abilities.effects.common.continuous.BecomesCreatureSourceEffect;
 import mage.abilities.mana.ColorlessManaAbility;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.Zone;
 import mage.game.permanent.token.Token;
 
@@ -47,9 +47,8 @@ import mage.game.permanent.token.Token;
  */
 public class StalkingStones extends CardImpl {
 
-    public StalkingStones(UUID ownerId) {
-        super(ownerId, 333, "Stalking Stones", Rarity.UNCOMMON, new CardType[]{CardType.LAND}, "");
-        this.expansionSetCode = "TMP";
+    public StalkingStones(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.LAND},"");
         this.addAbility(new ColorlessManaAbility());
         this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new BecomesCreatureSourceEffect(new StalkingStonesToken(), "land", Duration.WhileOnBattlefield), new GenericManaCost(6)));
     }

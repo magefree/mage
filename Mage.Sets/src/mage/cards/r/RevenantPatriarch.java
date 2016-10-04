@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.sorinvstibalt;
+package mage.cards.r;
 
 import java.util.UUID;
 import mage.MageInt;
@@ -35,9 +35,9 @@ import mage.abilities.common.EntersBattlefieldTriggeredAbility;
 import mage.abilities.condition.common.ManaWasSpentCondition;
 import mage.abilities.decorator.ConditionalTriggeredAbility;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.ColoredManaSymbol;
-import mage.constants.Rarity;
 import mage.target.TargetPlayer;
 import mage.watchers.common.ManaSpentToCastWatcher;
 import mage.abilities.effects.common.SkipNextCombatEffect;
@@ -48,9 +48,8 @@ import mage.abilities.effects.common.SkipNextCombatEffect;
  */
 public class RevenantPatriarch extends CardImpl {
 
-    public RevenantPatriarch(UUID ownerId) {
-        super(ownerId, 16, "Revenant Patriarch", Rarity.UNCOMMON, new CardType[]{CardType.CREATURE}, "{4}{B}");
-        this.expansionSetCode = "DDK";
+    public RevenantPatriarch(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{4}{B}");
         this.subtype.add("Spirit");
         this.power = new MageInt(4);
         this.toughness = new MageInt(3);

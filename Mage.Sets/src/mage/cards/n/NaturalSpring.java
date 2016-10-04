@@ -25,13 +25,13 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.tempest;
+package mage.cards.n;
 
 import java.util.UUID;
 import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.abilities.effects.common.GainLifeTargetEffect;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.target.TargetPlayer;
 
 /**
@@ -40,9 +40,8 @@ import mage.target.TargetPlayer;
  */
 public class NaturalSpring extends CardImpl {
 
-    public NaturalSpring(UUID ownerId) {
-        super(ownerId, 133, "Natural Spring", Rarity.COMMON, new CardType[]{CardType.SORCERY}, "{3}{G}{G}");
-        this.expansionSetCode = "TMP";
+    public NaturalSpring(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{3}{G}{G}");
 
 
         // Target player gains 8 life.

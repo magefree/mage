@@ -26,17 +26,17 @@
  *  or implied, of BetaSteward_at_googlemail.com.
  */
 
-package mage.sets.guildpact;
+package mage.cards.s;
 
 import java.util.UUID;
 import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.abilities.common.AsEntersBattlefieldAbility;
 import mage.abilities.costs.common.PayLifeCost;
 import mage.abilities.effects.common.TapSourceUnlessPaysEffect;
 import mage.abilities.mana.BlueManaAbility;
 import mage.abilities.mana.RedManaAbility;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 
 /**
  *
@@ -44,9 +44,8 @@ import mage.cards.CardImpl;
  */
 public class SteamVents extends CardImpl {
 
-    public SteamVents (UUID ownerId) {
-        super(ownerId, 164, "Steam Vents", Rarity.RARE, new CardType[]{CardType.LAND}, null);
-        this.expansionSetCode = "GPT";
+    public SteamVents (UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.LAND},null);
         this.subtype.add("Island");
         this.subtype.add("Mountain");
         this.addAbility(new BlueManaAbility());

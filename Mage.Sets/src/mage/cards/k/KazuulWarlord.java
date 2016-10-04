@@ -25,17 +25,17 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.zendikar;
+package mage.cards.k;
 
 import java.util.UUID;
 
 import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.constants.TargetController;
 import mage.MageInt;
 import mage.abilities.common.AllyEntersBattlefieldTriggeredAbility;
 import mage.abilities.effects.common.counter.AddCountersAllEffect;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.counters.CounterType;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.filter.predicate.mageobject.SubtypePredicate;
@@ -54,9 +54,8 @@ public class KazuulWarlord extends CardImpl {
         filter.add(new ControllerPredicate(TargetController.YOU));
     }
 
-    public KazuulWarlord(UUID ownerId) {
-        super(ownerId, 134, "Kazuul Warlord", Rarity.RARE, new CardType[]{CardType.CREATURE}, "{4}{R}");
-        this.expansionSetCode = "ZEN";
+    public KazuulWarlord(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{4}{R}");
         this.subtype.add("Minotaur");
         this.subtype.add("Warrior");
         this.subtype.add("Ally");

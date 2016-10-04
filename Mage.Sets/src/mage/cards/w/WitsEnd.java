@@ -25,17 +25,17 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.magic2013;
+package mage.cards.w;
 
 import java.util.Set;
 import java.util.UUID;
 import mage.constants.CardType;
 import mage.constants.Outcome;
-import mage.constants.Rarity;
 import mage.abilities.Ability;
 import mage.abilities.effects.OneShotEffect;
 import mage.cards.Card;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.game.Game;
 import mage.players.Player;
 import mage.target.TargetPlayer;
@@ -46,9 +46,8 @@ import mage.target.TargetPlayer;
  */
 public class WitsEnd extends CardImpl {
 
-    public WitsEnd(UUID ownerId) {
-        super(ownerId, 117, "Wit's End", Rarity.RARE, new CardType[]{CardType.SORCERY}, "{5}{B}{B}");
-        this.expansionSetCode = "M13";
+    public WitsEnd(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{5}{B}{B}");
 
 
         // Target player discards his or her hand.

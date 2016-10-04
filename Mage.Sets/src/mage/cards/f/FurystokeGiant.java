@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.shadowmoor;
+package mage.cards.f;
 
 import java.util.UUID;
 import mage.MageInt;
@@ -37,9 +37,9 @@ import mage.abilities.effects.common.DamageTargetEffect;
 import mage.abilities.effects.common.continuous.GainAbilityAllEffect;
 import mage.abilities.keyword.PersistAbility;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Duration;
-import mage.constants.Rarity;
 import mage.constants.Zone;
 import mage.filter.common.FilterControlledCreaturePermanent;
 import mage.target.common.TargetCreatureOrPlayer;
@@ -50,9 +50,8 @@ import mage.target.common.TargetCreatureOrPlayer;
  */
 public class FurystokeGiant extends CardImpl {
 
-    public FurystokeGiant(UUID ownerId) {
-        super(ownerId, 93, "Furystoke Giant", Rarity.RARE, new CardType[]{CardType.CREATURE}, "{3}{R}{R}");
-        this.expansionSetCode = "SHM";
+    public FurystokeGiant(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{3}{R}{R}");
         this.subtype.add("Giant");
         this.subtype.add("Warrior");
         this.power = new MageInt(3);

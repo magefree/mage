@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.avacynrestored;
+package mage.cards.w;
 
 import java.util.UUID;
 import mage.MageObject;
@@ -34,9 +34,9 @@ import mage.abilities.effects.Effect;
 import mage.abilities.effects.common.continuous.BoostTargetEffect;
 import mage.cards.Card;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Duration;
-import mage.constants.Rarity;
 import mage.constants.Zone;
 import mage.game.Game;
 import mage.game.events.GameEvent;
@@ -49,9 +49,8 @@ import mage.target.targetpointer.FixedTarget;
  */
 public class WildDefiance extends CardImpl {
 
-    public WildDefiance(UUID ownerId) {
-        super(ownerId, 203, "Wild Defiance", Rarity.RARE, new CardType[]{CardType.ENCHANTMENT}, "{2}{G}");
-        this.expansionSetCode = "AVR";
+    public WildDefiance(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.ENCHANTMENT},"{2}{G}");
 
         // Whenever a creature you control becomes the target of an instant or sorcery spell, that creature gets +3/+3 until end of turn.
         this.addAbility(new CreaturesYouControlBecomesTargetTriggeredAbility(new BoostTargetEffect(3, 3, Duration.EndOfTurn)));

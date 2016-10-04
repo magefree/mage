@@ -25,13 +25,13 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.dragonsoftarkir;
+package mage.cards.d;
 
 import java.util.UUID;
 import mage.abilities.effects.keyword.BolsterEffect;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.Rarity;
 
 /**
  *
@@ -39,9 +39,8 @@ import mage.constants.Rarity;
  */
 public class DromokasGift extends CardImpl {
 
-    public DromokasGift(UUID ownerId) {
-        super(ownerId, 184, "Dromoka's Gift", Rarity.UNCOMMON, new CardType[]{CardType.INSTANT}, "{4}{G}");
-        this.expansionSetCode = "DTK";
+    public DromokasGift(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.INSTANT},"{4}{G}");
 
         // Bolster 4.
         this.getSpellAbility().addEffect(new BolsterEffect(4));

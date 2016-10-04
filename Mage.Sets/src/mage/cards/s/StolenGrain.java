@@ -25,14 +25,14 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.masterseditioniii;
+package mage.cards.s;
 
 import java.util.UUID;
 import mage.abilities.effects.common.DamageTargetEffect;
 import mage.abilities.effects.common.GainLifeEffect;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.target.common.TargetOpponent;
 
 /**
@@ -41,9 +41,8 @@ import mage.target.common.TargetOpponent;
  */
 public class StolenGrain extends CardImpl {
 
-    public StolenGrain(UUID ownerId) {
-        super(ownerId, 75, "Stolen Grain", Rarity.UNCOMMON, new CardType[]{CardType.SORCERY}, "{4}{B}{B}");
-        this.expansionSetCode = "ME3";
+    public StolenGrain(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{4}{B}{B}");
 
         // Stolen Grain deals 5 damage to target opponent. You gain 5 life.
         this.getSpellAbility().addEffect(new DamageTargetEffect(5));

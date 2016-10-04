@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.weatherlight;
+package mage.cards.u;
 
 import java.util.Set;
 import java.util.UUID;
@@ -37,8 +37,8 @@ import mage.abilities.effects.Effect;
 import mage.abilities.effects.common.SacrificeEffect;
 import mage.cards.Card;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.game.Game;
 import mage.players.Player;
@@ -51,9 +51,8 @@ import mage.watchers.common.CardsPutIntoGraveyardWatcher;
  */
 public class UrborgJustice extends CardImpl {
 
-    public UrborgJustice(UUID ownerId) {
-        super(ownerId, 26, "Urborg Justice", Rarity.RARE, new CardType[]{CardType.INSTANT}, "{B}{B}");
-        this.expansionSetCode = "WTH";
+    public UrborgJustice(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.INSTANT},"{B}{B}");
 
         // Target opponent sacrifices a creature for each creature put into your graveyard from the battlefield this turn.
         this.getSpellAbility().addWatcher(new CardsPutIntoGraveyardWatcher());

@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.eventide;
+package mage.cards.n;
 
 import java.util.List;
 import java.util.UUID;
@@ -35,9 +35,9 @@ import mage.abilities.effects.Effect;
 import mage.abilities.effects.OneShotEffect;
 import mage.cards.Card;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Outcome;
-import mage.constants.Rarity;
 import mage.constants.TargetController;
 import mage.constants.Zone;
 import mage.filter.FilterCard;
@@ -55,9 +55,8 @@ import mage.target.common.TargetCardInLibrary;
  */
 public class NightmareIncursion extends CardImpl {
 
-    public NightmareIncursion(UUID ownerId) {
-        super(ownerId, 40, "Nightmare Incursion", Rarity.RARE, new CardType[]{CardType.SORCERY}, "{5}{B}");
-        this.expansionSetCode = "EVE";
+    public NightmareIncursion(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{5}{B}");
 
 
         // Search target player's library for up to X cards, where X is the number of Swamps you control, and exile them. Then that player shuffles his or her library.

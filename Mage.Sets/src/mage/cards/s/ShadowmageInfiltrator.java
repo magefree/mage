@@ -25,16 +25,16 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.timeshifted;
+package mage.cards.s;
 
 import java.util.UUID;
 import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.MageInt;
 import mage.abilities.common.DealsCombatDamageToAPlayerTriggeredAbility;
 import mage.abilities.effects.common.DrawCardSourceControllerEffect;
 import mage.abilities.keyword.FearAbility;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 
 /**
  *
@@ -42,9 +42,8 @@ import mage.cards.CardImpl;
  */
 public class ShadowmageInfiltrator extends CardImpl {
 
-    public ShadowmageInfiltrator(UUID ownerId) {
-        super(ownerId, 99, "Shadowmage Infiltrator", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{1}{U}{B}");
-        this.expansionSetCode = "TSB";
+    public ShadowmageInfiltrator(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{1}{U}{B}");
         this.subtype.add("Human");
         this.subtype.add("Wizard");
 

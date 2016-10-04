@@ -25,7 +25,7 @@
 *  authors and should not be interpreted as representing official policies, either expressed
 *  or implied, of BetaSteward_at_googlemail.com.
 */
-package mage.sets.planechase2012;
+package mage.cards.i;
 
 import java.util.UUID;
 import mage.MageInt;
@@ -33,8 +33,8 @@ import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.effects.common.ruleModifying.CastOnlyIfYouHaveCastAnotherSpellEffect;
 import mage.abilities.keyword.FlyingAbility;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.constants.Zone;
 
 /**
@@ -43,9 +43,8 @@ import mage.constants.Zone;
 */
 public class IllusoryAngel extends CardImpl {
 
-    public IllusoryAngel(UUID ownerId) {
-        super(ownerId, 19, "Illusory Angel", Rarity.UNCOMMON, new CardType[]{CardType.CREATURE}, "{2}{U}");
-        this.expansionSetCode = "PC2";
+    public IllusoryAngel(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{2}{U}");
         this.subtype.add("Angel");
         this.subtype.add("Illusion");
         this.power = new MageInt(4);

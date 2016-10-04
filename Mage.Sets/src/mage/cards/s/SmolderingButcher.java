@@ -26,14 +26,14 @@
  *  or implied, of BetaSteward_at_googlemail.com.
  */
 
-package mage.sets.eventide;
+package mage.cards.s;
 
 import java.util.UUID;
 import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.MageInt;
 import mage.abilities.keyword.WitherAbility;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 
 /**
  *
@@ -41,9 +41,8 @@ import mage.cards.CardImpl;
  */
 public class SmolderingButcher extends CardImpl {
 
-    public SmolderingButcher (UUID ownerId) {
-        super(ownerId, 42, "Smoldering Butcher", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{3}{B}");
-        this.expansionSetCode = "EVE";
+    public SmolderingButcher (UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{3}{B}");
         this.subtype.add("Elemental");
         this.subtype.add("Warrior");
 

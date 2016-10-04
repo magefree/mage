@@ -25,7 +25,7 @@
  * authors and should not be interpreted as representing official policies, either expressed
  * or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.morningtide;
+package mage.cards.p;
 
 import java.util.UUID;
 import mage.abilities.Ability;
@@ -35,13 +35,13 @@ import mage.abilities.effects.ContinuousEffect;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.continuous.BoostTargetEffect;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.cards.repository.CardRepository;
 import mage.choices.Choice;
 import mage.choices.ChoiceImpl;
 import mage.constants.CardType;
 import mage.constants.Duration;
 import mage.constants.Outcome;
-import mage.constants.Rarity;
 import mage.filter.common.FilterControlledCreaturePermanent;
 import mage.filter.predicate.mageobject.SubtypePredicate;
 import mage.game.Game;
@@ -55,9 +55,8 @@ import mage.target.targetpointer.FixedTarget;
  */
 public class PacksDisdain extends CardImpl {
 
-    public PacksDisdain(UUID ownerId) {
-        super(ownerId, 73, "Pack's Disdain", Rarity.COMMON, new CardType[]{CardType.INSTANT}, "{1}{B}");
-        this.expansionSetCode = "MOR";
+    public PacksDisdain(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.INSTANT},"{1}{B}");
 
         // Choose a creature type. Target creature gets -1/-1 until end of turn for each permanent of the chosen type you control.
         this.getSpellAbility().addEffect(new PacksDisdainEffect());

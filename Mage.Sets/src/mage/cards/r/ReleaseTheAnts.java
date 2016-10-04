@@ -25,14 +25,14 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.morningtide;
+package mage.cards.r;
 
 import java.util.UUID;
 import mage.abilities.effects.common.DamageTargetEffect;
 import mage.abilities.effects.common.ClashWinReturnToHandSpellEffect;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.target.common.TargetCreatureOrPlayer;
 
 /**
@@ -41,9 +41,8 @@ import mage.target.common.TargetCreatureOrPlayer;
  */
 public class ReleaseTheAnts extends CardImpl {
 
-    public ReleaseTheAnts(UUID ownerId) {
-        super(ownerId, 98, "Release the Ants", Rarity.UNCOMMON, new CardType[]{CardType.INSTANT}, "{1}{R}");
-        this.expansionSetCode = "MOR";
+    public ReleaseTheAnts(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.INSTANT},"{1}{R}");
 
 
         // Release the Ants deals 1 damage to target creature or player. Clash with an opponent. If you win, return Release the Ants to its owner's hand.

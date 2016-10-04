@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.masterseditioniii;
+package mage.cards.c;
 
 import java.util.UUID;
 import mage.MageInt;
@@ -35,8 +35,8 @@ import mage.abilities.effects.common.SacrificeSourceUnlessPaysEffect;
 import mage.abilities.keyword.FlyingAbility;
 import mage.abilities.keyword.RampageAbility;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.constants.TargetController;
 
 /**
@@ -45,9 +45,8 @@ import mage.constants.TargetController;
  */
 public class Chromium extends CardImpl {
 
-    public Chromium(UUID ownerId) {
-        super(ownerId, 147, "Chromium", Rarity.RARE, new CardType[]{CardType.CREATURE}, "{2}{W}{W}{U}{U}{B}{B}");
-        this.expansionSetCode = "ME3";
+    public Chromium(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{2}{W}{W}{U}{U}{B}{B}");
         this.supertype.add("Legendary");
         this.subtype.add("Elder");
         this.subtype.add("Dragon");

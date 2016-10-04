@@ -25,14 +25,14 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.shadowmoor;
+package mage.cards.m;
 
 import java.util.UUID;
 import mage.abilities.effects.common.PutLibraryIntoGraveTargetEffect;
 import mage.abilities.keyword.ConspireAbility;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.target.TargetPlayer;
 
 /**
@@ -41,9 +41,8 @@ import mage.target.TargetPlayer;
  */
 public class MemorySluice extends CardImpl {
 
-    public MemorySluice(UUID ownerId) {
-        super(ownerId, 170, "Memory Sluice", Rarity.COMMON, new CardType[]{CardType.SORCERY}, "{U/B}");
-        this.expansionSetCode = "SHM";
+    public MemorySluice(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{U/B}");
 
         // Target player puts the top four cards of his or her library into his or her graveyard.
         this.getSpellAbility().addEffect(new PutLibraryIntoGraveTargetEffect(4));

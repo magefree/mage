@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.timespiral;
+package mage.cards.d;
 
 import java.util.UUID;
 import mage.MageInt;
@@ -37,8 +37,8 @@ import mage.abilities.effects.common.counter.RemoveCounterSourceEffect;
 import mage.abilities.keyword.CantBeBlockedSourceAbility;
 import mage.abilities.keyword.SuspendAbility;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.constants.SetTargetPointer;
 import mage.constants.TargetController;
 import mage.constants.Zone;
@@ -58,9 +58,8 @@ public class DeepSeaKraken extends CardImpl {
         filter.add(new ControllerPredicate(TargetController.OPPONENT));
     }
 
-    public DeepSeaKraken(UUID ownerId) {
-        super(ownerId, 56, "Deep-Sea Kraken", Rarity.RARE, new CardType[]{CardType.CREATURE}, "{7}{U}{U}{U}");
-        this.expansionSetCode = "TSP";
+    public DeepSeaKraken(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{7}{U}{U}{U}");
         this.subtype.add("Kraken");
 
         this.power = new MageInt(6);

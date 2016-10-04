@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.limitedalpha;
+package mage.cards.c;
 
 import java.util.HashSet;
 import java.util.List;
@@ -40,12 +40,12 @@ import mage.abilities.effects.ContinuousEffectImpl;
 import mage.abilities.effects.common.SacrificeSourceUnlessPaysEffect;
 import mage.abilities.mana.WhiteManaAbility;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.DependencyType;
 import mage.constants.Duration;
 import mage.constants.Layer;
 import mage.constants.Outcome;
-import mage.constants.Rarity;
 import mage.constants.SubLayer;
 import mage.constants.TargetController;
 import mage.constants.Zone;
@@ -61,9 +61,8 @@ public class Conversion extends CardImpl {
 
     private static final FilterLandPermanent filter = new FilterLandPermanent("Mountain", "Mountains");
 
-    public Conversion(UUID ownerId) {
-        super(ownerId, 199, "Conversion", Rarity.UNCOMMON, new CardType[]{CardType.ENCHANTMENT}, "{2}{W}{W}");
-        this.expansionSetCode = "LEA";
+    public Conversion(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.ENCHANTMENT},"{2}{W}{W}");
 
         // At the beginning of your upkeep, sacrifice Conversion unless you pay {W}{W}.
         this.addAbility(new BeginningOfUpkeepTriggeredAbility(new SacrificeSourceUnlessPaysEffect(new ManaCostsImpl("{W}{W}")), TargetController.YOU, false));

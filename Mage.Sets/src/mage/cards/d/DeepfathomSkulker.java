@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.oathofthegatewatch;
+package mage.cards.d;
 
 import java.util.UUID;
 import mage.MageInt;
@@ -37,8 +37,8 @@ import mage.abilities.effects.common.DrawCardSourceControllerEffect;
 import mage.abilities.effects.common.combat.CantBeBlockedTargetEffect;
 import mage.abilities.keyword.DevoidAbility;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.constants.Zone;
 import mage.game.Game;
 import mage.game.events.DamagedPlayerEvent;
@@ -53,9 +53,8 @@ import mage.target.common.TargetCreaturePermanent;
  */
 public class DeepfathomSkulker extends CardImpl {
 
-    public DeepfathomSkulker(UUID ownerId) {
-        super(ownerId, 43, "Deepfathom Skulker", Rarity.RARE, new CardType[]{CardType.CREATURE}, "{5}{U}");
-        this.expansionSetCode = "OGW";
+    public DeepfathomSkulker(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{5}{U}");
         this.subtype.add("Eldrazi");
         this.power = new MageInt(4);
         this.toughness = new MageInt(4);

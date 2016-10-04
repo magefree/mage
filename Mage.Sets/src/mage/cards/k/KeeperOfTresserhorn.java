@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.alliances;
+package mage.cards.k;
 
 import java.util.UUID;
 import mage.MageInt;
@@ -35,9 +35,9 @@ import mage.abilities.effects.Effect;
 import mage.abilities.effects.common.LoseLifeTargetEffect;
 import mage.abilities.effects.common.continuous.AssignNoCombatDamageSourceEffect;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Duration;
-import mage.constants.Rarity;
 
 /**
  *
@@ -45,9 +45,8 @@ import mage.constants.Rarity;
  */
 public class KeeperOfTresserhorn extends CardImpl {
 
-    public KeeperOfTresserhorn(UUID ownerId) {
-        super(ownerId, 14, "Keeper of Tresserhorn", Rarity.RARE, new CardType[]{CardType.CREATURE}, "{5}{B}");
-        this.expansionSetCode = "ALL";
+    public KeeperOfTresserhorn(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{5}{B}");
         this.subtype.add("Avatar");
         this.power = new MageInt(6);
         this.toughness = new MageInt(6);

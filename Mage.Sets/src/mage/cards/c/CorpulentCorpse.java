@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.timespiral;
+package mage.cards.c;
 
 import java.util.UUID;
 import mage.MageInt;
@@ -33,8 +33,8 @@ import mage.abilities.costs.mana.ManaCostsImpl;
 import mage.abilities.keyword.FearAbility;
 import mage.abilities.keyword.SuspendAbility;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.Rarity;
 
 /**
  *
@@ -42,9 +42,8 @@ import mage.constants.Rarity;
  */
 public class CorpulentCorpse extends CardImpl {
 
-    public CorpulentCorpse(UUID ownerId) {
-        super(ownerId, 98, "Corpulent Corpse", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{5}{B}");
-        this.expansionSetCode = "TSP";
+    public CorpulentCorpse(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{5}{B}");
         this.subtype.add("Zombie");
         this.power = new MageInt(3);
         this.toughness = new MageInt(3);

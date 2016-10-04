@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.khansoftarkir;
+package mage.cards.a;
 
 import java.util.UUID;
 import mage.abilities.Mode;
@@ -34,8 +34,8 @@ import mage.abilities.effects.common.ExileTargetEffect;
 import mage.abilities.effects.common.LoseLifeSourceControllerEffect;
 import mage.abilities.effects.common.counter.DistributeCountersEffect;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.counters.CounterType;
 import mage.filter.Filter;
 import mage.filter.common.FilterCreaturePermanent;
@@ -55,9 +55,8 @@ public class AbzanCharm extends CardImpl {
         FILTER.add(new PowerPredicate(Filter.ComparisonType.GreaterThan, 2));
     }
 
-    public AbzanCharm(UUID ownerId) {
-        super(ownerId, 161, "Abzan Charm", Rarity.UNCOMMON, new CardType[]{CardType.INSTANT}, "{W}{B}{G}");
-        this.expansionSetCode = "KTK";
+    public AbzanCharm(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.INSTANT},"{W}{B}{G}");
 
         // Choose one -
         // *Exile target creature with power 3 or greater

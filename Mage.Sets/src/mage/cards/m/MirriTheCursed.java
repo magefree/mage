@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.planarchaos;
+package mage.cards.m;
 
 import java.util.UUID;
 import mage.MageInt;
@@ -36,8 +36,8 @@ import mage.abilities.keyword.FlyingAbility;
 import mage.abilities.keyword.FirstStrikeAbility;
 import mage.abilities.keyword.HasteAbility;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.counters.CounterType;
 
 /**
@@ -46,9 +46,8 @@ import mage.counters.CounterType;
  */
 public class MirriTheCursed extends CardImpl {
 
-    public MirriTheCursed(UUID ownerId) {
-        super(ownerId, 75, "Mirri the Cursed", Rarity.RARE, new CardType[]{CardType.CREATURE}, "{2}{B}{B}");
-        this.expansionSetCode = "PLC";
+    public MirriTheCursed(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{2}{B}{B}");
         this.supertype.add("Legendary");
         this.subtype.add("Vampire");
         this.subtype.add("Cat");

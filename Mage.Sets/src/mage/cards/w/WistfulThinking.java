@@ -25,15 +25,15 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.planarchaos;
+package mage.cards.w;
 
 import java.util.UUID;
 import mage.abilities.effects.Effect;
 import mage.abilities.effects.common.DrawCardTargetEffect;
 import mage.abilities.effects.common.discard.DiscardTargetEffect;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.target.TargetPlayer;
 
 /**
@@ -42,9 +42,8 @@ import mage.target.TargetPlayer;
  */
 public class WistfulThinking extends CardImpl {
 
-    public WistfulThinking(UUID ownerId) {
-        super(ownerId, 53, "Wistful Thinking", Rarity.COMMON, new CardType[]{CardType.SORCERY}, "{2}{U}");
-        this.expansionSetCode = "PLC";
+    public WistfulThinking(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{2}{U}");
 
         // Target player draws two cards, then discards four cards.
         this.getSpellAbility().addEffect(new DrawCardTargetEffect(2));

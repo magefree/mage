@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.conspiracytakethecrown;
+package mage.cards.k;
 
 import java.util.UUID;
 import mage.abilities.Ability;
@@ -40,9 +40,9 @@ import mage.abilities.effects.common.LoseLifeOpponentsEffect;
 import mage.abilities.effects.common.ReturnToBattlefieldUnderOwnerControlTargetEffect;
 import mage.abilities.effects.common.discard.DiscardEachPlayerEffect;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Outcome;
-import mage.constants.Rarity;
 import mage.constants.TargetController;
 import mage.constants.Zone;
 import mage.filter.common.FilterCreaturePermanent;
@@ -60,9 +60,8 @@ public class KayaGhostAssassin extends CardImpl {
 
     private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("target creature to exile. Choose no targets to exile Kaya.");
 
-    public KayaGhostAssassin(UUID ownerId) {
-        super(ownerId, 75, "Kaya, Ghost Assassin", Rarity.MYTHIC, new CardType[]{CardType.PLANESWALKER}, "{2}{W}{B}");
-        this.expansionSetCode = "CN2";
+    public KayaGhostAssassin(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.PLANESWALKER},"{2}{W}{B}");
         this.subtype.add("Kaya");
 
         this.addAbility(new PlanswalkerEntersWithLoyalityCountersAbility(5));

@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.magicorigins;
+package mage.cards.r;
 
 import java.util.UUID;
 import mage.MageInt;
@@ -35,8 +35,8 @@ import mage.abilities.dynamicvalue.common.PermanentsOnBattlefieldCount;
 import mage.abilities.effects.common.DamageTargetEffect;
 import mage.abilities.keyword.HasteAbility;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.filter.common.FilterControlledPermanent;
 import mage.filter.predicate.mageobject.CardTypePredicate;
 import mage.target.common.TargetCreaturePermanent;
@@ -53,9 +53,8 @@ public class ReclusiveArtificer extends CardImpl {
         filter.add(new CardTypePredicate(CardType.ARTIFACT));
     }
 
-    public ReclusiveArtificer(UUID ownerId) {
-        super(ownerId, 216, "Reclusive Artificer", Rarity.UNCOMMON, new CardType[]{CardType.CREATURE}, "{2}{U}{R}");
-        this.expansionSetCode = "ORI";
+    public ReclusiveArtificer(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{2}{U}{R}");
         this.subtype.add("Human");
         this.subtype.add("Artificer");
         this.power = new MageInt(2);

@@ -26,15 +26,15 @@
  *  or implied, of BetaSteward_at_googlemail.com.
  */
 
-package mage.sets.magic2011;
+package mage.cards.c;
 
 import java.util.UUID;
 import mage.abilities.effects.Effect;
 import mage.abilities.effects.common.DamageTargetControllerEffect;
 import mage.abilities.effects.common.DamageTargetEffect;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.target.common.TargetCreaturePermanent;
 
 /**
@@ -43,9 +43,8 @@ import mage.target.common.TargetCreaturePermanent;
  */
 public class ChandrasOutrage extends CardImpl {
 
-    public ChandrasOutrage(UUID ownerId) {
-        super(ownerId, 128, "Chandra's Outrage", Rarity.COMMON, new CardType[]{CardType.INSTANT}, "{2}{R}{R}");
-        this.expansionSetCode = "M11";
+    public ChandrasOutrage(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.INSTANT},"{2}{R}{R}");
 
         // Chandra's Outrage deals 4 damage to target creature and 2 damage to that creature's controller.
         this.getSpellAbility().addEffect(new DamageTargetEffect(4));

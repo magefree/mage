@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.starwars;
+package mage.cards.i;
 
 import java.util.UUID;
 import mage.MageInt;
@@ -37,8 +37,8 @@ import mage.abilities.effects.common.LoseLifeTargetEffect;
 import mage.abilities.keyword.DeathtouchAbility;
 import mage.abilities.keyword.RepairAbility;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.counters.CounterType;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.game.Game;
@@ -50,9 +50,8 @@ import mage.game.permanent.Permanent;
  */
 public class IG88B extends CardImpl {
 
-    public IG88B(UUID ownerId) {
-        super(ownerId, 78, "IG-88B", Rarity.RARE, new CardType[]{CardType.ARTIFACT, CardType.CREATURE}, "{2}{B}");
-        this.expansionSetCode = "SWS";
+    public IG88B(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.ARTIFACT,CardType.CREATURE},"{2}{B}");
         this.supertype.add("Legendary");
         this.subtype.add("Droid");
         this.subtype.add("Hunter");

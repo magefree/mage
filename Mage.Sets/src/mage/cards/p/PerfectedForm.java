@@ -25,14 +25,14 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.shadowsoverinnistrad;
+package mage.cards.p;
 
 import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.keyword.FlyingAbility;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.Rarity;
 
 /**
  *
@@ -40,9 +40,8 @@ import mage.constants.Rarity;
  */
 public class PerfectedForm extends CardImpl {
 
-    public PerfectedForm(UUID ownerId) {
-        super(ownerId, 49, "Perfected Form", Rarity.UNCOMMON, new CardType[]{CardType.CREATURE}, "");
-        this.expansionSetCode = "SOI";
+    public PerfectedForm(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"");
         this.subtype.add("Insect");
         this.subtype.add("Horror");
         this.power = new MageInt(5);

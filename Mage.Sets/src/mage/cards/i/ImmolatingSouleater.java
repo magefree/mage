@@ -25,19 +25,19 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.newphyrexia;
+package mage.cards.i;
 
 import java.util.UUID;
 import mage.constants.CardType;
 import mage.constants.ColoredManaSymbol;
 import mage.constants.Duration;
-import mage.constants.Rarity;
 import mage.constants.Zone;
 import mage.MageInt;
 import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.costs.mana.PhyrexianManaCost;
 import mage.abilities.effects.common.continuous.BoostSourceEffect;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 
 /**
  *
@@ -45,9 +45,8 @@ import mage.cards.CardImpl;
  */
 public class ImmolatingSouleater extends CardImpl {
 
-    public ImmolatingSouleater(UUID ownerId) {
-        super(ownerId, 139, "Immolating Souleater", Rarity.COMMON, new CardType[]{CardType.ARTIFACT, CardType.CREATURE}, "{2}");
-        this.expansionSetCode = "NPH";
+    public ImmolatingSouleater(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.ARTIFACT,CardType.CREATURE},"{2}");
         this.subtype.add("Hound");
 
         this.power = new MageInt(1);

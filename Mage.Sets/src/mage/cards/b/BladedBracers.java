@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.avacynrestored;
+package mage.cards.b;
 
 import mage.constants.*;
 import mage.abilities.common.SimpleStaticAbility;
@@ -37,6 +37,7 @@ import mage.abilities.effects.common.continuous.GainAbilityAttachedEffect;
 import mage.abilities.keyword.EquipAbility;
 import mage.abilities.keyword.VigilanceAbility;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 
 import java.util.UUID;
 
@@ -47,9 +48,8 @@ public class BladedBracers extends CardImpl {
 
     private static final String ruleText = "As long as equipped creature is a Human or an Angel, it has vigilance";
 
-    public BladedBracers(UUID ownerId) {
-        super(ownerId, 213, "Bladed Bracers", Rarity.COMMON, new CardType[]{CardType.ARTIFACT}, "{1}");
-        this.expansionSetCode = "AVR";
+    public BladedBracers(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.ARTIFACT},"{1}");
         this.subtype.add("Equipment");
 
         // Equipped creature gets +1/+1.

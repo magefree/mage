@@ -25,15 +25,15 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.ninthedition;
+package mage.cards.e;
 
 import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.StateTriggeredAbility;
 import mage.abilities.effects.common.SacrificeSourceEffect;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.constants.Zone;
 import mage.game.Game;
 import mage.game.events.GameEvent;
@@ -45,9 +45,8 @@ import mage.game.permanent.Permanent;
  */
 public class EmperorCrocodile extends CardImpl {
 
-    public EmperorCrocodile(UUID ownerId) {
-        super(ownerId, 241, "Emperor Crocodile", Rarity.RARE, new CardType[]{CardType.CREATURE}, "{3}{G}");
-        this.expansionSetCode = "9ED";
+    public EmperorCrocodile(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{3}{G}");
         this.subtype.add("Crocodile");
         this.power = new MageInt(5);
         this.toughness = new MageInt(5);

@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.oathofthegatewatch;
+package mage.cards.e;
 
 import java.util.UUID;
 import mage.MageInt;
@@ -35,10 +35,10 @@ import mage.abilities.effects.ContinuousEffect;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.continuous.SetPowerToughnessTargetEffect;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Duration;
 import mage.constants.Outcome;
-import mage.constants.Rarity;
 import mage.constants.SetTargetPointer;
 import mage.constants.Zone;
 import mage.filter.common.FilterCreaturePermanent;
@@ -62,9 +62,8 @@ public class EldraziMimic extends CardImpl {
         FILTER.add(new ColorlessPredicate());
     }
 
-    public EldraziMimic(UUID ownerId) {
-        super(ownerId, 2, "Eldrazi Mimic", Rarity.RARE, new CardType[]{CardType.CREATURE}, "{2}");
-        this.expansionSetCode = "OGW";
+    public EldraziMimic(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{2}");
         this.subtype.add("Eldrazi");
         this.power = new MageInt(2);
         this.toughness = new MageInt(1);

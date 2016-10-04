@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.planarchaos;
+package mage.cards.i;
 
 import java.util.HashSet;
 import java.util.Set;
@@ -42,11 +42,11 @@ import mage.abilities.effects.common.DoIfCostPaid;
 import mage.abilities.keyword.FlyingAbility;
 import mage.cards.Card;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.AsThoughEffectType;
 import mage.constants.CardType;
 import mage.constants.Duration;
 import mage.constants.Outcome;
-import mage.constants.Rarity;
 import mage.constants.Zone;
 import mage.game.ExileZone;
 import mage.game.Game;
@@ -61,9 +61,8 @@ public class IntetTheDreamer extends CardImpl {
 
     protected static final String VALUE_PREFIX = "ExileZones";
 
-    public IntetTheDreamer(UUID ownerId) {
-        super(ownerId, 158, "Intet, the Dreamer", Rarity.RARE, new CardType[]{CardType.CREATURE}, "{3}{U}{R}{G}");
-        this.expansionSetCode = "PLC";
+    public IntetTheDreamer(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{3}{U}{R}{G}");
         this.supertype.add("Legendary");
         this.subtype.add("Dragon");
         this.power = new MageInt(6);

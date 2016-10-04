@@ -1,4 +1,4 @@
-package mage.sets.futuresight;
+package mage.cards.g;
 
 import java.util.UUID;
 import mage.MageInt;
@@ -12,17 +12,16 @@ import mage.abilities.effects.common.ReturnToHandTargetEffect;
 import mage.abilities.keyword.MadnessAbility;
 import mage.cards.Card;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.filter.common.FilterCreatureCard;
 import mage.game.Game;
 import mage.target.common.TargetCardInGraveyard;
 
 public class GraveScrabbler extends CardImpl {
 
-    public GraveScrabbler(UUID ownerId) {
-        super(ownerId, 86, "Grave Scrabbler", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{3}{B}");
-        this.expansionSetCode = "FUT";
+    public GraveScrabbler(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{3}{B}");
         this.subtype.add("Zombie");
 
         this.power = new MageInt(2);

@@ -25,10 +25,10 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.thedark;
+package mage.cards.g;
 
 import mage.cards.CardImpl;
-import mage.constants.Rarity;
+import mage.cards.CardSetInfo;
 import mage.Mana;
 import mage.abilities.costs.common.SacrificeSourceCost;
 import mage.abilities.mana.SimpleManaAbility;
@@ -57,9 +57,8 @@ import mage.target.common.TargetCardInHand;
  */
 public class GaeasTouch extends CardImpl {
 
-    public GaeasTouch(UUID ownerId) {
-        super(ownerId, 40, "Gaea's Touch", Rarity.COMMON, new CardType[]{CardType.ENCHANTMENT}, "{G}{G}");
-        this.expansionSetCode = "DRK";
+    public GaeasTouch(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.ENCHANTMENT},"{G}{G}");
 
         // You may put a basic Forest card from your hand onto the battlefield. Activate this ability only any time you could cast a sorcery and only once each turn.
         LimitedTimesPerTurnActivatedAbility ability = new LimitedTimesPerTurnActivatedAbility(Zone.BATTLEFIELD, new PutBasicForestOnBattlefieldEffect(), new GenericManaCost(0), 1);

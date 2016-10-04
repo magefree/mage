@@ -25,14 +25,14 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.shadowsoverinnistrad;
+package mage.cards.r;
 
 import java.util.UUID;
 import mage.abilities.dynamicvalue.common.CardsInControllerGraveyardCount;
 import mage.abilities.effects.common.CreateTokenEffect;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.filter.common.FilterInstantOrSorceryCard;
 import mage.game.permanent.token.ZombieToken;
 
@@ -42,9 +42,8 @@ import mage.game.permanent.token.ZombieToken;
  */
 public class RiseFromTheTides extends CardImpl {
 
-    public RiseFromTheTides(UUID ownerId) {
-        super(ownerId, 83, "Rise from the Tides", Rarity.UNCOMMON, new CardType[]{CardType.SORCERY}, "{5}{U}");
-        this.expansionSetCode = "SOI";
+    public RiseFromTheTides(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{5}{U}");
 
         // Put a 2/2 black Zombie creature token onto the battlefield tapped for each instant and sorcery card in your graveyard.
         CardsInControllerGraveyardCount value = new CardsInControllerGraveyardCount(new FilterInstantOrSorceryCard());

@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.guildpact;
+package mage.cards.s;
 
 import java.util.UUID;
 import mage.MageInt;
@@ -33,9 +33,9 @@ import mage.abilities.effects.Effect;
 import mage.abilities.effects.common.continuous.BecomesCreatureTargetEffect;
 import mage.abilities.keyword.ReplicateAbility;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Duration;
-import mage.constants.Rarity;
 import mage.filter.common.FilterLandPermanent;
 import mage.filter.predicate.mageobject.SubtypePredicate;
 import mage.game.permanent.token.Token;
@@ -53,9 +53,8 @@ public class SiegeOfTowers extends CardImpl {
         filter.add(new SubtypePredicate("Mountain"));
     }
 
-    public SiegeOfTowers(UUID ownerId) {
-        super(ownerId, 76, "Siege of Towers", Rarity.RARE, new CardType[]{CardType.SORCERY}, "{1}{R}");
-        this.expansionSetCode = "GPT";
+    public SiegeOfTowers(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{1}{R}");
 
 
         // Replicate {1}{R}

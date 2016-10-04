@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.dragonsoftarkir;
+package mage.cards.h;
 
 import java.util.UUID;
 import mage.MageInt;
@@ -34,11 +34,11 @@ import mage.abilities.SpellAbility;
 import mage.abilities.common.AttacksTriggeredAbility;
 import mage.abilities.effects.common.cost.CostModificationEffectImpl;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.CostModificationType;
 import mage.constants.Duration;
 import mage.constants.Outcome;
-import mage.constants.Rarity;
 import mage.game.Game;
 import mage.util.CardUtil;
 import mage.watchers.common.CastSpellLastTurnWatcher;
@@ -49,9 +49,8 @@ import mage.watchers.common.CastSpellLastTurnWatcher;
  */
 public class HardenedBerserker extends CardImpl {
 
-    public HardenedBerserker(UUID ownerId) {
-        super(ownerId, 139, "Hardened Berserker", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{2}{R}");
-        this.expansionSetCode = "DTK";
+    public HardenedBerserker(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{2}{R}");
         this.subtype.add("Human");
         this.subtype.add("Berserker");
         this.power = new MageInt(3);

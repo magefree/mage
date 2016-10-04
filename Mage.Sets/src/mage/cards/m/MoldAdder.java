@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.magic2010;
+package mage.cards.m;
 
 import java.util.UUID;
 import mage.MageInt;
@@ -33,8 +33,8 @@ import mage.ObjectColor;
 import mage.abilities.common.SpellCastOpponentTriggeredAbility;
 import mage.abilities.effects.common.counter.AddCountersSourceEffect;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.counters.CounterType;
 import mage.filter.FilterSpell;
 import mage.filter.predicate.Predicates;
@@ -53,9 +53,8 @@ public class MoldAdder extends CardImpl {
                 new ColorPredicate(ObjectColor.BLACK)));
     }
 
-    public MoldAdder(UUID ownerId) {
-        super(ownerId, 194, "Mold Adder", Rarity.UNCOMMON, new CardType[]{CardType.CREATURE}, "{G}");
-        this.expansionSetCode = "M10";
+    public MoldAdder(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{G}");
         this.subtype.add("Fungus");
         this.subtype.add("Snake");
 

@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.dragonsoftarkir;
+package mage.cards.r;
 
 import java.util.UUID;
 import mage.abilities.Ability;
@@ -34,11 +34,11 @@ import mage.abilities.effects.ContinuousEffectImpl;
 import mage.abilities.effects.common.AttachEffect;
 import mage.abilities.keyword.EnchantAbility;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Duration;
 import mage.constants.Layer;
 import mage.constants.Outcome;
-import mage.constants.Rarity;
 import mage.constants.SubLayer;
 import mage.constants.Zone;
 import mage.game.Game;
@@ -52,9 +52,8 @@ import mage.target.common.TargetCreaturePermanent;
  */
 public class ReduceInStature extends CardImpl {
 
-    public ReduceInStature(UUID ownerId) {
-        super(ownerId, 72, "Reduce in Stature", Rarity.COMMON, new CardType[]{CardType.ENCHANTMENT}, "{2}{U}");
-        this.expansionSetCode = "DTK";
+    public ReduceInStature(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.ENCHANTMENT},"{2}{U}");
         this.subtype.add("Aura");
 
         // Enchant creature

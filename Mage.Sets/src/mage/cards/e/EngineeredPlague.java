@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.urzaslegacy;
+package mage.cards.e;
 
 import java.util.UUID;
 import mage.abilities.common.AsEntersBattlefieldAbility;
@@ -33,10 +33,10 @@ import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.effects.common.ChooseCreatureTypeEffect;
 import mage.abilities.effects.common.continuous.BoostAllOfChosenSubtypeEffect;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Duration;
 import mage.constants.Outcome;
-import mage.constants.Rarity;
 import mage.constants.Zone;
 
 /**
@@ -45,9 +45,8 @@ import mage.constants.Zone;
  */
 public class EngineeredPlague extends CardImpl {
 
-    public EngineeredPlague(UUID ownerId) {
-        super(ownerId, 51, "Engineered Plague", Rarity.UNCOMMON, new CardType[]{CardType.ENCHANTMENT}, "{2}{B}");
-        this.expansionSetCode = "ULG";
+    public EngineeredPlague(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.ENCHANTMENT},"{2}{B}");
 
         // As Engineered Plague enters the battlefield, choose a creature type.
         this.addAbility(new AsEntersBattlefieldAbility(new ChooseCreatureTypeEffect(Outcome.UnboostCreature)));

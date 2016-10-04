@@ -25,12 +25,11 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.urzaslegacy;
+package mage.cards.d;
 
 import java.util.UUID;
 import mage.constants.CardType;
 import mage.constants.Duration;
-import mage.constants.Rarity;
 import mage.constants.Zone;
 import mage.MageInt;
 import mage.abilities.common.EntersBattlefieldTriggeredAbility;
@@ -39,6 +38,7 @@ import mage.abilities.effects.common.CreateTokenEffect;
 import mage.abilities.effects.common.continuous.BoostAllEffect;
 import mage.abilities.keyword.EchoAbility;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.filter.predicate.mageobject.SubtypePredicate;
 import mage.game.permanent.token.SquirrelToken;
@@ -55,9 +55,8 @@ public class DerangedHermit extends CardImpl {
         filter.add(new SubtypePredicate("Squirrel"));
     }
 
-    public DerangedHermit(UUID ownerId) {
-        super(ownerId, 101, "Deranged Hermit", Rarity.RARE, new CardType[]{CardType.CREATURE}, "{3}{G}{G}");
-        this.expansionSetCode = "ULG";
+    public DerangedHermit(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{3}{G}{G}");
         this.subtype.add("Elf");
 
         this.power = new MageInt(1);

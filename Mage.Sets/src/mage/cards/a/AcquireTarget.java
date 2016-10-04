@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.starwars;
+package mage.cards.a;
 
 import java.util.UUID;
 import mage.abilities.effects.Effect;
@@ -33,8 +33,8 @@ import mage.abilities.effects.common.DrawCardTargetEffect;
 import mage.abilities.effects.common.LoseLifeTargetEffect;
 import mage.abilities.effects.common.counter.AddCountersTargetEffect;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.counters.CounterType;
 import mage.target.TargetPlayer;
 import mage.target.common.TargetOpponentsCreaturePermanent;
@@ -46,9 +46,8 @@ import mage.target.targetpointer.SecondTargetPointer;
  */
 public class AcquireTarget extends CardImpl {
 
-    public AcquireTarget(UUID ownerId) {
-        super(ownerId, 64, "Acquire Target", Rarity.COMMON, new CardType[]{CardType.SORCERY}, "{2}{B}");
-        this.expansionSetCode = "SWS";
+    public AcquireTarget(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{2}{B}");
 
         // Target player draws two cards and loses 2 life. 
         this.getSpellAbility().addTarget(new TargetPlayer());

@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.innistrad;
+package mage.cards.w;
 
 import java.util.UUID;
 import mage.abilities.Ability;
@@ -35,9 +35,9 @@ import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.continuous.GainAbilityControllerEffect;
 import mage.abilities.keyword.HexproofAbility;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Outcome;
-import mage.constants.Rarity;
 import mage.constants.Zone;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
@@ -49,9 +49,8 @@ import mage.players.Player;
  */
 public class WitchbaneOrb extends CardImpl {
 
-    public WitchbaneOrb(UUID ownerId) {
-        super(ownerId, 236, "Witchbane Orb", Rarity.RARE, new CardType[]{CardType.ARTIFACT}, "{4}");
-        this.expansionSetCode = "ISD";
+    public WitchbaneOrb(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.ARTIFACT},"{4}");
 
         // When Witchbane Orb enters the battlefield, destroy all Curses attached to you.
         this.addAbility(new EntersBattlefieldTriggeredAbility(new WitchbaneOrbEffect()));

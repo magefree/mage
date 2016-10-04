@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.bornofthegods;
+package mage.cards.f;
 
 import java.util.UUID;
 import mage.MageInt;
@@ -41,9 +41,9 @@ import mage.abilities.keyword.FlyingAbility;
 import mage.abilities.keyword.HasteAbility;
 import mage.abilities.keyword.TributeAbility;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Duration;
-import mage.constants.Rarity;
 
 /**
  *
@@ -51,9 +51,8 @@ import mage.constants.Rarity;
  */
 public class FlameWreathedPhoenix extends CardImpl {
 
-    public FlameWreathedPhoenix(UUID ownerId) {
-        super(ownerId, 97, "Flame-Wreathed Phoenix", Rarity.MYTHIC, new CardType[]{CardType.CREATURE}, "{2}{R}{R}");
-        this.expansionSetCode = "BNG";
+    public FlameWreathedPhoenix(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{2}{R}{R}");
         this.subtype.add("Phoenix");
 
         this.power = new MageInt(3);

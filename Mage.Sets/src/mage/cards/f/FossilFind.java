@@ -25,16 +25,16 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.shadowmoor;
+package mage.cards.f;
 
 import java.util.UUID;
 import mage.abilities.Ability;
 import mage.abilities.effects.OneShotEffect;
 import mage.cards.Card;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Outcome;
-import mage.constants.Rarity;
 import mage.constants.Zone;
 import mage.game.Game;
 import mage.players.Player;
@@ -45,9 +45,8 @@ import mage.players.Player;
  */
 public class FossilFind extends CardImpl {
 
-    public FossilFind(UUID ownerId) {
-        super(ownerId, 206, "Fossil Find", Rarity.UNCOMMON, new CardType[]{CardType.SORCERY}, "{R/G}");
-        this.expansionSetCode = "SHM";
+    public FossilFind(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{R/G}");
 
         // Return a card at random from your graveyard to your hand, then reorder your graveyard as you choose.
         this.getSpellAbility().addEffect(new FossilFindEffect());

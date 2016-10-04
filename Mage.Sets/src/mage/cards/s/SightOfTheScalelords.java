@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.dragonsoftarkir;
+package mage.cards.s;
 
 import java.util.UUID;
 import mage.abilities.Ability;
@@ -35,9 +35,9 @@ import mage.abilities.effects.common.continuous.BoostControlledEffect;
 import mage.abilities.effects.common.continuous.GainAbilityControlledEffect;
 import mage.abilities.keyword.VigilanceAbility;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Duration;
-import mage.constants.Rarity;
 import mage.constants.TargetController;
 import mage.constants.Zone;
 import mage.filter.Filter;
@@ -58,9 +58,8 @@ public class SightOfTheScalelords extends CardImpl {
         filter.add(new ToughnessPredicate(Filter.ComparisonType.GreaterThan, 3));
     }
 
-    public SightOfTheScalelords(UUID ownerId) {
-        super(ownerId, 207, "Sight of the Scalelords", Rarity.UNCOMMON, new CardType[]{CardType.ENCHANTMENT}, "{4}{G}");
-        this.expansionSetCode = "DTK";
+    public SightOfTheScalelords(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.ENCHANTMENT},"{4}{G}");
 
         // At the beginning of combat on your turn, creature you control with toughness 4 or greater get +2/+2 and gain vigilance until end of turn.
         Effect effect = new BoostControlledEffect(2,2,Duration.EndOfTurn, filter, false);

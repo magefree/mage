@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.tempest;
+package mage.cards.c;
 
 import java.util.UUID;
 
@@ -38,6 +38,7 @@ import mage.abilities.effects.common.ReturnToHandSourceEffect;
 import mage.abilities.effects.common.continuous.BoostEnchantedEffect;
 import mage.abilities.keyword.EnchantAbility;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.target.TargetPermanent;
 import mage.target.common.TargetCreaturePermanent;
 
@@ -47,9 +48,8 @@ import mage.target.common.TargetCreaturePermanent;
  */
 public class CrownOfFlames extends CardImpl {
 
-    public CrownOfFlames(UUID ownerId) {
-        super(ownerId, 169, "Crown of Flames", Rarity.COMMON, new CardType[]{CardType.ENCHANTMENT}, "{R}");
-        this.expansionSetCode = "TMP";
+    public CrownOfFlames(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.ENCHANTMENT},"{R}");
         this.subtype.add("Aura");
         
         // Enchant creature

@@ -25,13 +25,12 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.gatecrash;
+package mage.cards.d;
 
 import java.util.UUID;
 
 import mage.constants.CardType;
 import mage.constants.Outcome;
-import mage.constants.Rarity;
 import mage.constants.Zone;
 import mage.MageInt;
 import mage.abilities.Ability;
@@ -40,6 +39,7 @@ import mage.abilities.effects.OneShotEffect;
 import mage.abilities.keyword.FlyingAbility;
 import mage.cards.Card;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.cards.Cards;
 import mage.cards.CardsImpl;
 import mage.constants.TargetController;
@@ -52,9 +52,8 @@ import mage.players.Player;
  */
 public class DuskmantleSeer extends CardImpl {
 
-    public DuskmantleSeer(UUID ownerId) {
-        super(ownerId, 159, "Duskmantle Seer", Rarity.MYTHIC, new CardType[]{CardType.CREATURE}, "{2}{U}{B}");
-        this.expansionSetCode = "GTC";
+    public DuskmantleSeer(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{2}{U}{B}");
         this.subtype.add("Vampire");
         this.subtype.add("Wizard");
 

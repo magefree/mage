@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.portal;
+package mage.cards.t;
 
 import java.util.UUID;
 import mage.MageInt;
@@ -33,8 +33,8 @@ import mage.abilities.common.EntersBattlefieldTriggeredAbility;
 import mage.abilities.effects.common.TapAllEffect;
 import mage.abilities.keyword.HasteAbility;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.filter.predicate.permanent.AnotherPredicate;
 
@@ -50,9 +50,8 @@ public class Thundermare extends CardImpl {
         filter.add(new AnotherPredicate());
     }
 
-    public Thundermare(UUID ownerId) {
-        super(ownerId, 158, "Thundermare", Rarity.RARE, new CardType[]{CardType.CREATURE}, "{5}{R}");
-        this.expansionSetCode = "POR";
+    public Thundermare(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{5}{R}");
         this.subtype.add("Elemental");
         this.subtype.add("Horse");
         this.power = new MageInt(5);

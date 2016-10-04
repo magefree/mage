@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.commander2015;
+package mage.cards.g;
 
 import java.util.UUID;
 import mage.MageInt;
@@ -40,9 +40,9 @@ import mage.abilities.effects.Effect;
 import mage.abilities.effects.common.CopyPermanentEffect;
 import mage.abilities.effects.common.continuous.SetPowerToughnessSourceEffect;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Duration;
-import mage.constants.Rarity;
 import mage.constants.SubLayer;
 import mage.constants.Zone;
 import mage.filter.common.FilterCreaturePermanent;
@@ -56,9 +56,8 @@ import mage.util.functions.ApplyToPermanent;
  */
 public class Gigantoplasm extends CardImpl {
 
-    public Gigantoplasm(UUID ownerId) {
-        super(ownerId, 11, "Gigantoplasm", Rarity.RARE, new CardType[]{CardType.CREATURE}, "{3}{U}");
-        this.expansionSetCode = "C15";
+    public Gigantoplasm(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{3}{U}");
         this.subtype.add("Shapeshifter");
         this.power = new MageInt(0);
         this.toughness = new MageInt(0);

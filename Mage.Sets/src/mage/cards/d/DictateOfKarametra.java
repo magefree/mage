@@ -25,15 +25,15 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.journeyintonyx;
+package mage.cards.d;
 
 import java.util.UUID;
 import mage.abilities.common.TapForManaAllTriggeredManaAbility;
 import mage.abilities.effects.common.AddManaOfAnyTypeProducedEffect;
 import mage.abilities.keyword.FlashAbility;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.constants.SetTargetPointer;
 import mage.filter.common.FilterLandPermanent;
 
@@ -43,9 +43,8 @@ import mage.filter.common.FilterLandPermanent;
  */
 public class DictateOfKarametra extends CardImpl {
 
-    public DictateOfKarametra(UUID ownerId) {
-        super(ownerId, 121, "Dictate of Karametra", Rarity.RARE, new CardType[]{CardType.ENCHANTMENT}, "{3}{G}{G}");
-        this.expansionSetCode = "JOU";
+    public DictateOfKarametra(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.ENCHANTMENT},"{3}{G}{G}");
 
 
         // Flash

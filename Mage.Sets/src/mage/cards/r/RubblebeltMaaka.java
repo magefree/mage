@@ -26,16 +26,16 @@
  *  or implied, of BetaSteward_at_googlemail.com.
  */
 
-package mage.sets.dragonsmaze;
+package mage.cards.r;
 
 import java.util.UUID;
 
 import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.MageInt;
 import mage.abilities.effects.common.continuous.BoostTargetEffect;
 import mage.abilities.keyword.BloodrushAbility;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.Duration;
 
 /**
@@ -46,9 +46,8 @@ import mage.constants.Duration;
 
 public class RubblebeltMaaka extends CardImpl {
 
-    public RubblebeltMaaka (UUID ownerId) {
-        super(ownerId, 38, "Rubblebelt Maaka", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{3}{R}");
-        this.expansionSetCode = "DGM";
+    public RubblebeltMaaka (UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{3}{R}");
         this.subtype.add("Cat");
 
         this.power = new MageInt(3);

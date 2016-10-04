@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.eventide;
+package mage.cards.w;
 
 import java.util.UUID;
 import mage.MageInt;
@@ -33,8 +33,8 @@ import mage.abilities.dynamicvalue.common.CardsInControllerGraveyardCount;
 import mage.abilities.effects.common.CreateTokenEffect;
 import mage.abilities.keyword.RetraceAbility;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.filter.common.FilterLandCard;
 import mage.game.permanent.token.Token;
 
@@ -44,9 +44,8 @@ import mage.game.permanent.token.Token;
  */
 public class WormHarvest extends CardImpl {
 
-    public WormHarvest(UUID ownerId) {
-        super(ownerId, 131, "Worm Harvest", Rarity.RARE, new CardType[]{CardType.SORCERY}, "{2}{B/G}{B/G}{B/G}");
-        this.expansionSetCode = "EVE";
+    public WormHarvest(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{2}{B/G}{B/G}{B/G}");
 
         // Put a 1/1 black and green Worm creature token onto the battlefield for each land card in your graveyard.
         CardsInControllerGraveyardCount value = new CardsInControllerGraveyardCount(new FilterLandCard());

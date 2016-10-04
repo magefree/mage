@@ -25,15 +25,15 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.limitedalpha;
+package mage.cards.s;
 
 import java.util.UUID;
 import mage.abilities.Ability;
 import mage.abilities.SpellAbility;
 import mage.abilities.effects.common.CounterTargetEffect;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.filter.Filter;
 import mage.filter.FilterSpell;
 import mage.filter.predicate.mageobject.ConvertedManaCostPredicate;
@@ -49,9 +49,8 @@ public class SpellBlast extends CardImpl {
 
     private static final FilterSpell filter = new FilterSpell("spell with converted mana cost X");
 
-    public SpellBlast(UUID ownerId) {
-        super(ownerId, 80, "Spell Blast", Rarity.COMMON, new CardType[]{CardType.INSTANT}, "{X}{U}");
-        this.expansionSetCode = "LEA";
+    public SpellBlast(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.INSTANT},"{X}{U}");
 
 
         // Counter target spell with converted mana cost X.

@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.planarchaos;
+package mage.cards.d;
 
 import java.util.UUID;
 import mage.MageObject;
@@ -35,9 +35,9 @@ import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.CastSourceTriggeredAbility;
 import mage.abilities.effects.common.CounterTargetEffect;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Outcome;
-import mage.constants.Rarity;
 import mage.game.Game;
 import mage.game.stack.Spell;
 import mage.players.Player;
@@ -49,9 +49,8 @@ import mage.target.TargetSpell;
  */
 public class DashHopes extends CardImpl {
 
-    public DashHopes(UUID ownerId) {
-        super(ownerId, 68, "Dash Hopes", Rarity.COMMON, new CardType[]{CardType.INSTANT}, "{B}{B}");
-        this.expansionSetCode = "PLC";
+    public DashHopes(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.INSTANT},"{B}{B}");
 
         // When you cast Dash Hopes, any player may pay 5 life. If a player does, counter Dash Hopes.
         this.addAbility(new CastSourceTriggeredAbility(new DashHopesCounterSourceEffect()));

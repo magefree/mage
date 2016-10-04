@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.masterseditioniv;
+package mage.cards.a;
 
 import java.util.UUID;
 import mage.abilities.ActivatedAbilityImpl;
@@ -38,8 +38,8 @@ import mage.abilities.dynamicvalue.common.CountersSourceCount;
 import mage.abilities.dynamicvalue.common.StaticValue;
 import mage.abilities.effects.common.DamagePlayersEffect;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.counters.CounterType;
 import mage.abilities.effects.common.counter.AddCountersSourceEffect;
 import mage.abilities.effects.common.counter.RemoveCounterSourceEffect;
@@ -55,9 +55,8 @@ import mage.constants.Zone;
  */
 public class ArmageddonClock extends CardImpl {
 
-    public ArmageddonClock(UUID ownerId) {
-        super(ownerId, 180, "Armageddon Clock", Rarity.RARE, new CardType[]{CardType.ARTIFACT}, "{6}");
-        this.expansionSetCode = "ME4";
+    public ArmageddonClock(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.ARTIFACT},"{6}");
 
         // At the beginning of your upkeep, put a doom counter on Armageddon Clock.
         this.addAbility(new BeginningOfUpkeepTriggeredAbility(new AddCountersSourceEffect(CounterType.DOOM.createInstance(), new StaticValue(1), true, true), TargetController.YOU, false));

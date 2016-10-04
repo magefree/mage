@@ -25,11 +25,10 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.gatecrash;
+package mage.cards.s;
 
 import java.util.UUID;
 import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.constants.TargetController;
 import mage.MageInt;
 import mage.abilities.common.BeginningOfEndStepTriggeredAbility;
@@ -38,6 +37,7 @@ import mage.abilities.keyword.HasteAbility;
 import mage.abilities.keyword.LifelinkAbility;
 import mage.abilities.keyword.TrampleAbility;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 
 /**
  *
@@ -45,9 +45,8 @@ import mage.cards.CardImpl;
  */
 public class SparkTrooper extends CardImpl {
 
-    public SparkTrooper(UUID ownerId) {
-        super(ownerId, 199, "Spark Trooper", Rarity.RARE, new CardType[]{CardType.CREATURE}, "{1}{R}{R}{W}");
-        this.expansionSetCode = "GTC";
+    public SparkTrooper(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{1}{R}{R}{W}");
         this.subtype.add("Elemental");
         this.subtype.add("Soldier");
 

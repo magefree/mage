@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.khansoftarkir;
+package mage.cards.s;
 
 import java.util.UUID;
 import mage.MageInt;
@@ -42,9 +42,9 @@ import mage.abilities.effects.common.continuous.GainAbilityControlledEffect;
 import mage.abilities.keyword.FlyingAbility;
 import mage.abilities.keyword.LifelinkAbility;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Duration;
-import mage.constants.Rarity;
 import mage.constants.TargetController;
 import mage.constants.Zone;
 import mage.filter.common.FilterCreaturePermanent;
@@ -57,9 +57,8 @@ import mage.game.permanent.token.Token;
  */
 public class SorinSolemnVisitor extends CardImpl {
 
-    public SorinSolemnVisitor(UUID ownerId) {
-        super(ownerId, 202, "Sorin, Solemn Visitor", Rarity.MYTHIC, new CardType[]{CardType.PLANESWALKER}, "{2}{W}{B}");
-        this.expansionSetCode = "KTK";
+    public SorinSolemnVisitor(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.PLANESWALKER},"{2}{W}{B}");
         this.subtype.add("Sorin");
 
         this.addAbility(new PlanswalkerEntersWithLoyalityCountersAbility(4));

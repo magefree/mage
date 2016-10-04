@@ -26,14 +26,14 @@
  *  or implied, of BetaSteward_at_googlemail.com.
  */
 
-package mage.sets.scarsofmirrodin;
+package mage.cards.i;
 
 import java.util.UUID;
 import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.abilities.effects.common.counter.AddCountersTargetEffect;
 import mage.abilities.effects.common.DrawCardSourceControllerEffect;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.counters.CounterType;
 import mage.target.common.TargetCreaturePermanent;
 
@@ -43,9 +43,8 @@ import mage.target.common.TargetCreaturePermanent;
  */
 public class InstillInfection extends CardImpl {
 
-    public InstillInfection (UUID ownerId) {
-        super(ownerId, 68, "Instill Infection", Rarity.COMMON, new CardType[]{CardType.INSTANT}, "{3}{B}");
-        this.expansionSetCode = "SOM";
+    public InstillInfection (UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.INSTANT},"{3}{B}");
 
         this.getSpellAbility().addEffect(new AddCountersTargetEffect(CounterType.M1M1.createInstance()));
         this.getSpellAbility().addEffect(new DrawCardSourceControllerEffect(1));

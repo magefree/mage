@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.oathofthegatewatch;
+package mage.cards.c;
 
 import java.util.UUID;
 import mage.ConditionalMana;
@@ -44,8 +44,8 @@ import mage.abilities.mana.ConditionalColorlessManaAbility;
 import mage.abilities.mana.builder.ConditionalManaBuilder;
 import mage.abilities.mana.conditional.ManaCondition;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 
@@ -55,9 +55,8 @@ import mage.game.permanent.Permanent;
  */
 public class CultivatorDrone extends CardImpl {
 
-    public CultivatorDrone(UUID ownerId) {
-        super(ownerId, 42, "Cultivator Drone", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{2}{U}");
-        this.expansionSetCode = "OGW";
+    public CultivatorDrone(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{2}{U}");
         this.subtype.add("Eldrazi");
         this.subtype.add("Drone");
         this.power = new MageInt(2);

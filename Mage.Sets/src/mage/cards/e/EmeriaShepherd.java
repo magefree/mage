@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.battleforzendikar;
+package mage.cards.e;
 
 import java.util.UUID;
 import mage.MageInt;
@@ -34,10 +34,10 @@ import mage.abilities.common.LandfallAbility;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.keyword.FlyingAbility;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.cards.CardsImpl;
 import mage.constants.CardType;
 import mage.constants.Outcome;
-import mage.constants.Rarity;
 import mage.constants.Zone;
 import mage.filter.common.FilterPermanentCard;
 import mage.filter.predicate.Predicates;
@@ -59,9 +59,8 @@ public class EmeriaShepherd extends CardImpl {
         filter.add(Predicates.not(new CardTypePredicate(CardType.LAND)));
     }
 
-    public EmeriaShepherd(UUID ownerId) {
-        super(ownerId, 22, "Emeria Shepherd", Rarity.RARE, new CardType[]{CardType.CREATURE}, "{5}{W}{W}");
-        this.expansionSetCode = "BFZ";
+    public EmeriaShepherd(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{5}{W}{W}");
         this.subtype.add("Angel");
         this.power = new MageInt(4);
         this.toughness = new MageInt(4);

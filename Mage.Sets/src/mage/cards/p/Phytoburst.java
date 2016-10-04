@@ -26,14 +26,14 @@
  *  or implied, of BetaSteward_at_googlemail.com.
  */
 
-package mage.sets.dragonsmaze;
+package mage.cards.p;
 
 import java.util.UUID;
 
 import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.abilities.effects.common.continuous.BoostTargetEffect;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.Duration;
 import mage.target.common.TargetCreaturePermanent;
 
@@ -45,9 +45,8 @@ import mage.target.common.TargetCreaturePermanent;
 
 public class Phytoburst extends CardImpl {
 
-    public Phytoburst(UUID ownerId) {
-        super(ownerId, 46, "Phytoburst", Rarity.COMMON, new CardType[]{CardType.SORCERY}, "{1}{G}");
-        this.expansionSetCode = "DGM";
+    public Phytoburst(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{1}{G}");
 
 
         // Target creature gets +5/+5 until end of turn.

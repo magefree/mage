@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.iceage;
+package mage.cards.w;
 
 import java.util.UUID;
 import mage.Mana;
@@ -36,10 +36,10 @@ import mage.abilities.effects.common.AttachEffect;
 import mage.abilities.keyword.EnchantAbility;
 import mage.abilities.mana.TriggeredManaAbility;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.ColoredManaSymbol;
 import mage.constants.Outcome;
-import mage.constants.Rarity;
 import mage.constants.Zone;
 import mage.game.Game;
 import mage.game.events.GameEvent;
@@ -55,9 +55,8 @@ import mage.target.targetpointer.FixedTarget;
  */
 public class WildGrowth extends CardImpl {
 
-    public WildGrowth(UUID ownerId) {
-        super(ownerId, 165, "Wild Growth", Rarity.COMMON, new CardType[]{CardType.ENCHANTMENT}, "{G}");
-        this.expansionSetCode = "ICE";
+    public WildGrowth(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.ENCHANTMENT},"{G}");
         this.subtype.add("Aura");
 
 

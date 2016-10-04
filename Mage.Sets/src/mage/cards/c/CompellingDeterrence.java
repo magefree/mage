@@ -25,15 +25,15 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.shadowsoverinnistrad;
+package mage.cards.c;
 
 import java.util.UUID;
 import mage.abilities.Ability;
 import mage.abilities.effects.OneShotEffect;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Outcome;
-import mage.constants.Rarity;
 import mage.constants.Zone;
 import mage.filter.FilterPermanent;
 import mage.filter.predicate.mageobject.SubtypePredicate;
@@ -48,9 +48,8 @@ import mage.target.common.TargetNonlandPermanent;
  */
 public class CompellingDeterrence extends CardImpl {
 
-    public CompellingDeterrence(UUID ownerId) {
-        super(ownerId, 52, "Compelling Deterrence", Rarity.UNCOMMON, new CardType[]{CardType.INSTANT}, "{1}{U}");
-        this.expansionSetCode = "SOI";
+    public CompellingDeterrence(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.INSTANT},"{1}{U}");
 
         // Return target nonland permanent to its owner's hand. Then that player discards a card if you control a Zombie.
         this.getSpellAbility().addEffect(new CompellingDeterrenceEffect());

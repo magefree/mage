@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.tenthedition;
+package mage.cards.s;
 
 import java.util.UUID;
 
@@ -36,6 +36,7 @@ import mage.abilities.costs.mana.ColoredManaCost;
 import mage.abilities.effects.common.continuous.BoostSourceEffect;
 import mage.abilities.keyword.FlyingAbility;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 
 /**
  *
@@ -43,9 +44,8 @@ import mage.cards.CardImpl;
  */
 public class ShivanDragon extends CardImpl {
 
-    public ShivanDragon(UUID ownerId) {
-        super(ownerId, 230, "Shivan Dragon", Rarity.RARE, new CardType[]{CardType.CREATURE}, "{4}{R}{R}");
-        this.expansionSetCode = "10E";
+    public ShivanDragon(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{4}{R}{R}");
         this.subtype.add("Dragon");
 
         this.power = new MageInt(5);

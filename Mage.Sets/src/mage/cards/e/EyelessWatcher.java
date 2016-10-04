@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.battleforzendikar;
+package mage.cards.e;
 
 import java.util.UUID;
 import mage.MageInt;
@@ -34,8 +34,8 @@ import mage.abilities.effects.Effect;
 import mage.abilities.effects.common.CreateTokenEffect;
 import mage.abilities.keyword.DevoidAbility;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.game.permanent.token.EldraziScionToken;
 
 /**
@@ -44,9 +44,8 @@ import mage.game.permanent.token.EldraziScionToken;
  */
 public class EyelessWatcher extends CardImpl {
 
-    public EyelessWatcher(UUID ownerId) {
-        super(ownerId, 166, "Eyeless Watcher", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{3}{G}");
-        this.expansionSetCode = "BFZ";
+    public EyelessWatcher(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{3}{G}");
         this.subtype.add("Eldrazi");
         this.subtype.add("Drone");
         this.power = new MageInt(1);

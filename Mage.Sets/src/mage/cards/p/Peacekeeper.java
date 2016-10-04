@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.weatherlight;
+package mage.cards.p;
 
 import java.util.UUID;
 import mage.MageInt;
@@ -36,9 +36,9 @@ import mage.abilities.costs.mana.ManaCostsImpl;
 import mage.abilities.effects.RestrictionEffect;
 import mage.abilities.effects.common.SacrificeSourceUnlessPaysEffect;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Duration;
-import mage.constants.Rarity;
 import mage.constants.TargetController;
 import mage.constants.Zone;
 import mage.game.Game;
@@ -50,9 +50,8 @@ import mage.game.permanent.Permanent;
  */
 public class Peacekeeper extends CardImpl {
 
-    public Peacekeeper(UUID ownerId) {
-        super(ownerId, 138, "Peacekeeper", Rarity.RARE, new CardType[]{CardType.CREATURE}, "{2}{W}");
-        this.expansionSetCode = "WTH";
+    public Peacekeeper(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{2}{W}");
         this.subtype.add("Human");
 
         this.power = new MageInt(1);

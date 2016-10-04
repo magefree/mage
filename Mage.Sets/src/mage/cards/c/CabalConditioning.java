@@ -25,15 +25,15 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.scourge;
+package mage.cards.c;
 
 import java.util.UUID;
 
 import mage.abilities.dynamicvalue.common.HighestConvertedManaCostValue;
 import mage.abilities.effects.common.discard.DiscardTargetEffect;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.target.TargetPlayer;
 
 /**
@@ -42,9 +42,8 @@ import mage.target.TargetPlayer;
  */
 public class CabalConditioning extends CardImpl {
 
-    public CabalConditioning(UUID ownerId) {
-        super(ownerId, 56, "Cabal Conditioning", Rarity.RARE, new CardType[]{CardType.SORCERY}, "{6}{B}");
-        this.expansionSetCode = "SCG";
+    public CabalConditioning(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{6}{B}");
 
         // Any number of target players each discard a number of cards equal to the highest converted mana cost among permanents you control.
         this.getSpellAbility().addEffect(new DiscardTargetEffect(new HighestConvertedManaCostValue()));

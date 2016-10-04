@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.shadowsoverinnistrad;
+package mage.cards.c;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -39,11 +39,11 @@ import mage.abilities.effects.common.ManaEffect;
 import mage.abilities.mana.ManaAbility;
 import mage.cards.Card;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.choices.Choice;
 import mage.choices.ChoiceImpl;
 import mage.constants.CardType;
 import mage.constants.ColoredManaSymbol;
-import mage.constants.Rarity;
 import mage.constants.Zone;
 import mage.game.Game;
 import mage.players.Player;
@@ -54,9 +54,8 @@ import mage.players.Player;
  */
 public class CorruptedGrafstone extends CardImpl {
 
-    public CorruptedGrafstone(UUID ownerId) {
-        super(ownerId, 253, "Corrupted Grafstone", Rarity.RARE, new CardType[]{CardType.ARTIFACT}, "{2}");
-        this.expansionSetCode = "SOI";
+    public CorruptedGrafstone(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.ARTIFACT},"{2}");
 
         // Corrupted Grafstone enters the battlefield tapped.
         this.addAbility(new EntersBattlefieldTappedAbility());

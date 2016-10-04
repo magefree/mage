@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.apocalypse;
+package mage.cards.r;
 
 import java.util.UUID;
 import mage.MageInt;
@@ -38,9 +38,9 @@ import mage.abilities.effects.common.counter.AddCountersSourceEffect;
 import mage.abilities.keyword.KickerAbility;
 import mage.abilities.keyword.FlyingAbility;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Duration;
-import mage.constants.Rarity;
 import mage.counters.CounterType;
 
 /**
@@ -50,9 +50,8 @@ import mage.counters.CounterType;
  */
 public class Rakavolver extends CardImpl {
 
-    public Rakavolver(UUID ownerId) {
-        super(ownerId, 68, "Rakavolver", Rarity.RARE, new CardType[]{CardType.CREATURE}, "{2}{R}");
-        this.expansionSetCode = "APC";
+    public Rakavolver(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{2}{R}");
         this.subtype.add("Volver");
         this.power = new MageInt(2);
         this.toughness = new MageInt(2);

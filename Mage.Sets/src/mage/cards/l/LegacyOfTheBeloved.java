@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.starwars;
+package mage.cards.l;
 
 import java.util.UUID;
 import mage.abilities.Ability;
@@ -33,10 +33,10 @@ import mage.abilities.costs.common.SacrificeTargetCost;
 import mage.abilities.effects.OneShotEffect;
 import mage.cards.Card;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.cards.CardsImpl;
 import mage.constants.CardType;
 import mage.constants.Outcome;
-import mage.constants.Rarity;
 import mage.constants.Zone;
 import mage.filter.Filter;
 import mage.filter.common.FilterCreatureCard;
@@ -53,9 +53,8 @@ import mage.target.common.TargetControlledCreaturePermanent;
  */
 public class LegacyOfTheBeloved extends CardImpl {
 
-    public LegacyOfTheBeloved(UUID ownerId) {
-        super(ownerId, 144, "Legacy of the Beloved", Rarity.RARE, new CardType[]{CardType.SORCERY}, "{3}{G}{G}");
-        this.expansionSetCode = "SWS";
+    public LegacyOfTheBeloved(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{3}{G}{G}");
 
         // As an additional cost to cast Legacy of the Beloved, sacrifice a creature.
         this.getSpellAbility().addCost(new SacrificeTargetCost(new TargetControlledCreaturePermanent()));

@@ -25,12 +25,11 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.innistrad;
+package mage.cards.n;
 
 import java.util.UUID;
 import mage.constants.CardType;
 import mage.constants.Outcome;
-import mage.constants.Rarity;
 import mage.constants.TargetController;
 import mage.constants.Zone;
 import mage.MageInt;
@@ -46,6 +45,7 @@ import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.TransformSourceEffect;
 import mage.abilities.keyword.TransformAbility;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.target.common.TargetCreaturePermanent;
@@ -56,9 +56,8 @@ import mage.target.common.TargetCreaturePermanent;
  */
 public class NightfallPredator extends CardImpl {
 
-    public NightfallPredator(UUID ownerId) {
-        super(ownerId, 176, "Nightfall Predator", Rarity.RARE, new CardType[]{CardType.CREATURE}, "");
-        this.expansionSetCode = "ISD";
+    public NightfallPredator(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"");
         this.subtype.add("Werewolf");
 
         this.color.setGreen(true);

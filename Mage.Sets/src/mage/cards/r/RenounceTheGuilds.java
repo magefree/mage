@@ -26,13 +26,13 @@
  *  or implied, of BetaSteward_at_googlemail.com.
  */
 
-package mage.sets.dragonsmaze;
+package mage.cards.r;
 
 import java.util.UUID;
 import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.abilities.effects.common.SacrificeAllEffect;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.filter.common.FilterControlledPermanent;
 import mage.filter.predicate.mageobject.MulticoloredPredicate;
 
@@ -49,9 +49,8 @@ public class RenounceTheGuilds extends CardImpl {
         filter.add(new MulticoloredPredicate());
     }
 
-    public RenounceTheGuilds(UUID ownerId) {
-        super(ownerId, 5, "Renounce the Guilds", Rarity.RARE, new CardType[]{CardType.INSTANT}, "{1}{W}");
-        this.expansionSetCode = "DGM";
+    public RenounceTheGuilds(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.INSTANT},"{1}{W}");
 
 
         // Each player sacrifices a multicolored permanent.

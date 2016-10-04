@@ -25,12 +25,11 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.gatecrash;
+package mage.cards.s;
 
 import java.util.UUID;
 import mage.constants.CardType;
 import mage.constants.Duration;
-import mage.constants.Rarity;
 import mage.constants.TargetController;
 import mage.constants.Zone;
 import mage.MageInt;
@@ -41,6 +40,7 @@ import mage.abilities.effects.common.continuous.BecomesCreatureTargetEffect;
 import mage.abilities.effects.common.continuous.GainAbilityAllEffect;
 import mage.abilities.keyword.TrampleAbility;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.filter.common.FilterControlledCreaturePermanent;
 import mage.filter.common.FilterLandPermanent;
 import mage.filter.predicate.permanent.ControllerPredicate;
@@ -59,9 +59,8 @@ public class SkarrgGuildmage extends CardImpl {
         filter.add(new ControllerPredicate(TargetController.YOU));
     }
 
-    public SkarrgGuildmage(UUID ownerId) {
-        super(ownerId, 196, "Skarrg Guildmage", Rarity.UNCOMMON, new CardType[]{CardType.CREATURE}, "{R}{G}");
-        this.expansionSetCode = "GTC";
+    public SkarrgGuildmage(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{R}{G}");
         this.subtype.add("Human");
         this.subtype.add("Shaman");
 

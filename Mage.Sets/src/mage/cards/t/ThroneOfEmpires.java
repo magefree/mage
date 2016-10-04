@@ -25,16 +25,16 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.magic2012;
+package mage.cards.t;
 
 import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.costs.common.TapSourceCost;
 import mage.abilities.costs.mana.GenericManaCost;
 import mage.abilities.effects.OneShotEffect;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.Outcome;
 import mage.constants.Zone;
 import mage.game.Game;
@@ -49,9 +49,8 @@ import java.util.UUID;
  */
 public class ThroneOfEmpires extends CardImpl {
 
-    public ThroneOfEmpires(UUID ownerId) {
-        super(ownerId, 221, "Throne of Empires", Rarity.RARE, new CardType[]{CardType.ARTIFACT}, "{4}");
-        this.expansionSetCode = "M12";
+    public ThroneOfEmpires(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.ARTIFACT},"{4}");
 
         // {1}, {tap}: Put a 1/1 white Soldier creature token onto the battlefield. Put five of those tokens onto the battlefield instead if you control artifacts named Crown of Empires and Scepter of Empires.
         Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new ThroneOfEmpiresEffect(), new GenericManaCost(1));

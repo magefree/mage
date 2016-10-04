@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.urzassaga;
+package mage.cards.m;
 
 import java.util.UUID;
 import mage.MageInt;
@@ -36,8 +36,8 @@ import mage.abilities.costs.common.TapSourceCost;
 import mage.abilities.costs.mana.ManaCostsImpl;
 import mage.abilities.effects.common.CreateTokenEffect;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.constants.Zone;
 import mage.game.Game;
 import mage.game.events.GameEvent.EventType;
@@ -51,9 +51,8 @@ import mage.game.stack.StackObject;
  */
 public class Metrognome extends CardImpl {
 
-    public Metrognome(UUID ownerId) {
-        super(ownerId, 301, "Metrognome", Rarity.RARE, new CardType[]{CardType.ARTIFACT}, "{4}");
-        this.expansionSetCode = "USG";
+    public Metrognome(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.ARTIFACT},"{4}");
 
         // When a spell or ability an opponent controls causes you to discard Metrognome, put four 1/1 colorless Gnome artifact creature tokens onto the battlefield.
         this.addAbility(new MetrognomeTriggeredAbility());

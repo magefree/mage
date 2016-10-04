@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.commander2014;
+package mage.cards.g;
 
 import java.util.UUID;
 import mage.MageInt;
@@ -33,13 +33,13 @@ import mage.abilities.Ability;
 import mage.abilities.common.EntersBattlefieldTriggeredAbility;
 import mage.abilities.effects.OneShotEffect;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.cards.CardsImpl;
 import mage.cards.repository.CardRepository;
 import mage.choices.Choice;
 import mage.choices.ChoiceImpl;
 import mage.constants.CardType;
 import mage.constants.Outcome;
-import mage.constants.Rarity;
 import mage.constants.Zone;
 import mage.filter.FilterCard;
 import mage.filter.common.FilterCreatureCard;
@@ -55,9 +55,8 @@ import mage.target.common.TargetCardInYourGraveyard;
  */
 public class GraveSifter extends CardImpl {
 
-    public GraveSifter(UUID ownerId) {
-        super(ownerId, 44, "Grave Sifter", Rarity.RARE, new CardType[]{CardType.CREATURE}, "{5}{G}");
-        this.expansionSetCode = "C14";
+    public GraveSifter(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{5}{G}");
         this.subtype.add("Elemental");
         this.subtype.add("Beast");
 

@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.shadowsoverinnistrad;
+package mage.cards.v;
 
 import java.util.UUID;
 import mage.MageObject;
@@ -36,11 +36,11 @@ import mage.abilities.costs.mana.ManaCostsImpl;
 import mage.abilities.effects.OneShotEffect;
 import mage.cards.Card;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.cards.Cards;
 import mage.cards.CardsImpl;
 import mage.constants.CardType;
 import mage.constants.Outcome;
-import mage.constants.Rarity;
 import mage.constants.Zone;
 import mage.filter.FilterCard;
 import mage.filter.predicate.Predicates;
@@ -55,9 +55,8 @@ import mage.target.TargetCard;
  */
 public class VesselOfNascency extends CardImpl {
 
-    public VesselOfNascency(UUID ownerId) {
-        super(ownerId, 237, "Vessel of Nascency", Rarity.COMMON, new CardType[]{CardType.ENCHANTMENT}, "{G}");
-        this.expansionSetCode = "SOI";
+    public VesselOfNascency(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.ENCHANTMENT},"{G}");
 
         // {1}{G}, Sacrifice Vessel of Nascency: Reveal the top four cards of your library. You may put an artifact, creature, enchantment, land, or
         // planeswalker card from among them into your hand. Put the rest into your graveyard.

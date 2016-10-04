@@ -25,15 +25,15 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.dragonsoftarkir;
+package mage.cards.d;
 
 import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.effects.common.cost.SpellsCostReductionControllerEffect;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.constants.Zone;
 import mage.filter.FilterCard;
 import mage.filter.predicate.mageobject.SubtypePredicate;
@@ -50,9 +50,8 @@ public class DragonlordsServant extends CardImpl {
         filter.add(new SubtypePredicate("Dragon"));
     }
 
-    public DragonlordsServant(UUID ownerId) {
-        super(ownerId, 138, "Dragonlord's Servant", Rarity.UNCOMMON, new CardType[]{CardType.CREATURE}, "{1}{R}");
-        this.expansionSetCode = "DTK";
+    public DragonlordsServant(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{1}{R}");
         this.subtype.add("Goblin");
         this.subtype.add("Shaman");
         this.power = new MageInt(1);

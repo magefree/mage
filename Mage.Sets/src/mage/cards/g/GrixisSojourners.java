@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.alarareborn;
+package mage.cards.g;
 
 import java.util.UUID;
 import mage.MageInt;
@@ -36,8 +36,8 @@ import mage.abilities.costs.mana.ManaCostsImpl;
 import mage.abilities.effects.common.ExileTargetEffect;
 import mage.abilities.keyword.CyclingAbility;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.filter.FilterCard;
 import mage.target.common.TargetCardInASingleGraveyard;
 
@@ -47,9 +47,8 @@ import mage.target.common.TargetCardInASingleGraveyard;
  */
 public class GrixisSojourners extends CardImpl {
 
-    public GrixisSojourners(UUID ownerId) {
-        super(ownerId, 112, "Grixis Sojourners", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{1}{U}{B}{R}");
-        this.expansionSetCode = "ARB";
+    public GrixisSojourners(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{1}{U}{B}{R}");
         this.subtype.add("Zombie");
         this.subtype.add("Ogre");
 

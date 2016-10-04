@@ -25,11 +25,8 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.vintagemasters;
+package mage.cards.c;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.UUID;
 import mage.abilities.Ability;
 import mage.abilities.StateTriggeredAbility;
 import mage.abilities.common.SimpleStaticAbility;
@@ -37,10 +34,10 @@ import mage.abilities.effects.ContinuousRuleModifyingEffectImpl;
 import mage.abilities.effects.OneShotEffect;
 import mage.cards.Card;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Duration;
 import mage.constants.Outcome;
-import mage.constants.Rarity;
 import mage.constants.Zone;
 import mage.filter.FilterCard;
 import mage.filter.FilterPermanent;
@@ -51,7 +48,12 @@ import mage.game.Game;
 import mage.game.events.GameEvent;
 import mage.game.events.GameEvent.EventType;
 import mage.game.permanent.Permanent;
-import static mage.sets.vintagemasters.CityInABottle.getArabianNightsNamePredicates;
+
+import java.util.ArrayList;
+import java.util.List;
+import java.util.UUID;
+
+import static mage.cards.c.CityInABottle.getArabianNightsNamePredicates;
 
 /**
  *
@@ -59,9 +61,8 @@ import static mage.sets.vintagemasters.CityInABottle.getArabianNightsNamePredica
  */
 public class CityInABottle extends CardImpl {
 
-    public CityInABottle(UUID ownerId) {
-        super(ownerId, 265, "City in a Bottle", Rarity.MYTHIC, new CardType[]{CardType.ARTIFACT}, "{2}");
-        this.expansionSetCode = "VMA";
+    public CityInABottle(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.ARTIFACT},"{2}");
 
         // Whenever a nontoken permanent originally printed in the Arabian Nights expansion other than City in a Bottle is on the battlefield, its controller sacrifices it.
         this.addAbility(new CityInABottleStateTriggeredAbility());

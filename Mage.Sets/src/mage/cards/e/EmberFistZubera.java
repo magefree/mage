@@ -26,18 +26,18 @@
  *  or implied, of BetaSteward_at_googlemail.com.
  */
 
-package mage.sets.championsofkamigawa;
+package mage.cards.e;
 
 import java.util.UUID;
 
 import mage.abilities.dynamicvalue.common.ZuberasDiedDynamicValue;
 import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.DiesTriggeredAbility;
 import mage.abilities.effects.common.DamageTargetEffect;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.target.common.TargetCreatureOrPlayer;
 import mage.watchers.common.ZuberasDiedWatcher;
 
@@ -47,9 +47,8 @@ import mage.watchers.common.ZuberasDiedWatcher;
  */
 public class EmberFistZubera extends CardImpl {
 
-    public EmberFistZubera (UUID ownerId) {
-        super(ownerId, 166, "Ember-Fist Zubera", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{1}{R}");
-        this.expansionSetCode = "CHK";
+    public EmberFistZubera (UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{1}{R}");
         this.subtype.add("Zubera");
         this.subtype.add("Spirit");
 

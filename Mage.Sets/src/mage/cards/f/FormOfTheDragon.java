@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.scourge;
+package mage.cards.f;
 
 import java.util.UUID;
 import mage.abilities.Ability;
@@ -37,9 +37,9 @@ import mage.abilities.effects.common.SetPlayerLifeSourceEffect;
 import mage.abilities.effects.common.combat.CantAttackYouAllEffect;
 import mage.abilities.keyword.FlyingAbility;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Duration;
-import mage.constants.Rarity;
 import mage.constants.TargetController;
 import mage.constants.Zone;
 import mage.filter.common.FilterCreaturePermanent;
@@ -59,9 +59,8 @@ public class FormOfTheDragon extends CardImpl {
         filter.add(Predicates.not(new AbilityPredicate(FlyingAbility.class)));
     }
 
-    public FormOfTheDragon(UUID ownerId) {
-        super(ownerId, 93, "Form of the Dragon", Rarity.RARE, new CardType[]{CardType.ENCHANTMENT}, "{4}{R}{R}{R}");
-        this.expansionSetCode = "SCG";
+    public FormOfTheDragon(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.ENCHANTMENT},"{4}{R}{R}{R}");
 
         // At the beginning of your upkeep, Form of the Dragon deals 5 damage to target creature or player.
         Ability ability = new BeginningOfUpkeepTriggeredAbility(new DamageTargetEffect(5), TargetController.YOU, false);

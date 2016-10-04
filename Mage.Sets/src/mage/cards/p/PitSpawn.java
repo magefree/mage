@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.exodus;
+package mage.cards.p;
 
 import java.util.UUID;
 import mage.MageInt;
@@ -36,8 +36,8 @@ import mage.abilities.effects.common.ExileTargetEffect;
 import mage.abilities.effects.common.SacrificeSourceUnlessPaysEffect;
 import mage.abilities.keyword.FirstStrikeAbility;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.constants.TargetController;
 
 /**
@@ -46,9 +46,8 @@ import mage.constants.TargetController;
  */
 public class PitSpawn extends CardImpl {
 
-    public PitSpawn(UUID ownerId) {
-        super(ownerId, 70, "Pit Spawn", Rarity.RARE, new CardType[]{CardType.CREATURE}, "{4}{B}{B}{B}");
-        this.expansionSetCode = "EXO";
+    public PitSpawn(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{4}{B}{B}{B}");
         this.subtype.add("Demon");
         this.power = new MageInt(6);
         this.toughness = new MageInt(4);

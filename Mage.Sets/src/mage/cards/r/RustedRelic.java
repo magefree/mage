@@ -26,13 +26,12 @@
  *  or implied, of BetaSteward_at_googlemail.com.
  */
 
-package mage.sets.scarsofmirrodin;
+package mage.cards.r;
 
 import java.util.UUID;
 
 import mage.constants.CardType;
 import mage.constants.Duration;
-import mage.constants.Rarity;
 import mage.constants.Zone;
 import mage.MageInt;
 import mage.abilities.common.SimpleStaticAbility;
@@ -40,6 +39,7 @@ import mage.abilities.condition.common.MetalcraftCondition;
 import mage.abilities.decorator.ConditionalContinuousEffect;
 import mage.abilities.effects.common.continuous.BecomesCreatureSourceEffect;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.game.permanent.token.Token;
 
 /**
@@ -48,9 +48,8 @@ import mage.game.permanent.token.Token;
  */
 public class RustedRelic extends CardImpl {
 
-    public RustedRelic (UUID ownerId) {
-        super(ownerId, 199, "Rusted Relic", Rarity.UNCOMMON, new CardType[]{CardType.ARTIFACT}, "{4}");
-        this.expansionSetCode = "SOM";
+    public RustedRelic (UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.ARTIFACT},"{4}");
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD,
                         new ConditionalContinuousEffect(
                                 new BecomesCreatureSourceEffect(new RustedRelicToken(), "artifact", Duration.WhileOnBattlefield),

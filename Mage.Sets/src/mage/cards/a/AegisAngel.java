@@ -26,13 +26,12 @@
  *  or implied, of BetaSteward_at_googlemail.com.
  */
 
-package mage.sets.magic2012;
+package mage.cards.a;
 
 import java.util.UUID;
 
 import mage.constants.CardType;
 import mage.constants.Duration;
-import mage.constants.Rarity;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.EntersBattlefieldTriggeredAbility;
@@ -42,6 +41,7 @@ import mage.abilities.effects.common.continuous.GainAbilityTargetEffect;
 import mage.abilities.keyword.FlyingAbility;
 import mage.abilities.keyword.IndestructibleAbility;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.filter.FilterPermanent;
 import mage.filter.predicate.permanent.AnotherPredicate;
 import mage.target.Target;
@@ -58,9 +58,8 @@ public class AegisAngel extends CardImpl {
         filter.add(new AnotherPredicate());
     }
 
-    public AegisAngel(UUID ownerId) {
-        super(ownerId, 1, "Aegis Angel", Rarity.RARE, new CardType[]{CardType.CREATURE}, "{4}{W}{W}");
-        this.expansionSetCode = "M12";
+    public AegisAngel(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{4}{W}{W}");
         this.subtype.add("Angel");
 
         this.power = new MageInt(5);

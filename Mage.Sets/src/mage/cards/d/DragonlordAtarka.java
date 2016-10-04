@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.dragonsoftarkir;
+package mage.cards.d;
 
 import java.util.UUID;
 import mage.MageInt;
@@ -35,8 +35,8 @@ import mage.abilities.effects.common.DamageMultiEffect;
 import mage.abilities.keyword.FlyingAbility;
 import mage.abilities.keyword.TrampleAbility;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.constants.TargetController;
 import mage.filter.common.FilterCreatureOrPlaneswalkerPermanent;
 import mage.filter.predicate.permanent.ControllerPredicate;
@@ -54,9 +54,8 @@ public class DragonlordAtarka extends CardImpl {
         filter.add(new ControllerPredicate(TargetController.OPPONENT));
     }
 
-    public DragonlordAtarka(UUID ownerId) {
-        super(ownerId, 216, "Dragonlord Atarka", Rarity.MYTHIC, new CardType[]{CardType.CREATURE}, "{5}{R}{G}");
-        this.expansionSetCode = "DTK";
+    public DragonlordAtarka(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{5}{R}{G}");
         this.supertype.add("Legendary");
         this.subtype.add("Elder");
         this.subtype.add("Dragon");

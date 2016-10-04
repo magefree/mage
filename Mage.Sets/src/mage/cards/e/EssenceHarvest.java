@@ -25,16 +25,16 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.avacynrestored;
+package mage.cards.e;
 
 import java.util.List;
 import java.util.UUID;
 import mage.constants.CardType;
 import mage.constants.Outcome;
-import mage.constants.Rarity;
 import mage.abilities.Ability;
 import mage.abilities.effects.OneShotEffect;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
@@ -47,9 +47,8 @@ import mage.target.TargetPlayer;
  */
 public class EssenceHarvest extends CardImpl {
 
-    public EssenceHarvest(UUID ownerId) {
-        super(ownerId, 100, "Essence Harvest", Rarity.COMMON, new CardType[]{CardType.SORCERY}, "{2}{B}");
-        this.expansionSetCode = "AVR";
+    public EssenceHarvest(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{2}{B}");
 
 
         // Target player loses X life and you gain X life, where X is the greatest power among creatures you control.

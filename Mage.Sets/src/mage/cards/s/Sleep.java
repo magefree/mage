@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.magic2010;
+package mage.cards.s;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -35,9 +35,9 @@ import mage.abilities.effects.ContinuousEffect;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.DontUntapInControllersNextUntapStepTargetEffect;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Outcome;
-import mage.constants.Rarity;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
@@ -51,9 +51,8 @@ import mage.target.targetpointer.FixedTargets;
  */
 public class Sleep extends CardImpl {
 
-    public Sleep(UUID ownerId) {
-        super(ownerId, 71, "Sleep", Rarity.UNCOMMON, new CardType[]{CardType.SORCERY}, "{2}{U}{U}");
-        this.expansionSetCode = "M10";
+    public Sleep(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{2}{U}{U}");
 
         this.getSpellAbility().addTarget(new TargetPlayer());
         this.getSpellAbility().addEffect(new SleepEffect());

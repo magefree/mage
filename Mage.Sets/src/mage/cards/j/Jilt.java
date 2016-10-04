@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.apocalypse;
+package mage.cards.j;
 
 import java.util.UUID;
 import mage.abilities.Ability;
@@ -37,8 +37,8 @@ import mage.abilities.effects.common.DamageTargetEffect;
 import mage.abilities.effects.common.ReturnToHandTargetEffect;
 import mage.abilities.keyword.KickerAbility;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.filter.predicate.mageobject.AnotherTargetPredicate;
 import mage.game.Game;
@@ -52,9 +52,8 @@ import mage.target.targetpointer.SecondTargetPointer;
  */
 public class Jilt extends CardImpl {
 
-    public Jilt(UUID ownerId) {
-        super(ownerId, 27, "Jilt", Rarity.COMMON, new CardType[]{CardType.INSTANT}, "{1}{U}");
-        this.expansionSetCode = "APC";
+    public Jilt(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.INSTANT},"{1}{U}");
 
         // Kicker {1}{R}
         this.addAbility(new KickerAbility("{1}{R}"));

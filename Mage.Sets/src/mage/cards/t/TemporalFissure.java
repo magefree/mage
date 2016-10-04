@@ -25,14 +25,14 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.scourge;
+package mage.cards.t;
 
 import java.util.UUID;
 import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.abilities.effects.common.ReturnToHandTargetEffect;
 import mage.abilities.keyword.StormAbility;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.target.TargetPermanent;
 
 /**
@@ -41,9 +41,8 @@ import mage.target.TargetPermanent;
  */
 public class TemporalFissure extends CardImpl {
 
-    public TemporalFissure(UUID ownerId) {
-        super(ownerId, 53, "Temporal Fissure", Rarity.COMMON, new CardType[]{CardType.SORCERY}, "{4}{U}");
-        this.expansionSetCode = "SCG";
+    public TemporalFissure(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{4}{U}");
 
 
         // Return target permanent to its owner's hand.

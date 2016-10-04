@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.tempest;
+package mage.cards.w;
 
 import java.util.UUID;
 import mage.abilities.costs.common.SacrificeTargetCost;
@@ -34,8 +34,8 @@ import mage.abilities.effects.Effect;
 import mage.abilities.effects.common.GainLifeEffect;
 import mage.abilities.keyword.BuybackAbility;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.target.common.TargetControlledCreaturePermanent;
 
 /**
@@ -44,9 +44,8 @@ import mage.target.common.TargetControlledCreaturePermanent;
  */
 public class WorthyCause extends CardImpl {
 
-    public WorthyCause(UUID ownerId) {
-        super(ownerId, 265, "Worthy Cause", Rarity.UNCOMMON, new CardType[]{CardType.INSTANT}, "{W}");
-        this.expansionSetCode = "TMP";
+    public WorthyCause(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.INSTANT},"{W}");
 
         // Buyback {2}
         this.addAbility(new BuybackAbility("{2}"));

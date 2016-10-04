@@ -25,13 +25,12 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.tenthedition;
+package mage.cards.f;
 
 import java.util.UUID;
 
 import mage.constants.CardType;
 import mage.constants.Duration;
-import mage.constants.Rarity;
 import mage.MageInt;
 import mage.abilities.common.EntersBattlefieldTappedAbility;
 import mage.abilities.common.SimpleActivatedAbility;
@@ -40,6 +39,7 @@ import mage.abilities.effects.common.continuous.BecomesCreatureSourceEffect;
 import mage.abilities.keyword.FlyingAbility;
 import mage.abilities.mana.BlueManaAbility;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.Zone;
 import mage.game.permanent.token.Token;
 
@@ -49,9 +49,8 @@ import mage.game.permanent.token.Token;
  */
 public class FaerieConclave extends CardImpl {
 
-    public FaerieConclave(UUID ownerId) {
-        super(ownerId, 351, "Faerie Conclave", Rarity.UNCOMMON, new CardType[]{CardType.LAND}, "");
-        this.expansionSetCode = "10E";
+    public FaerieConclave(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.LAND},"");
         this.addAbility(new EntersBattlefieldTappedAbility());
         this.addAbility(new BlueManaAbility());
         this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new BecomesCreatureSourceEffect(new FaerieConclaveToken(), "land", Duration.EndOfTurn), new ManaCostsImpl("{1}{U}")));

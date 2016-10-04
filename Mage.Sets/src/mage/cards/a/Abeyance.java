@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.weatherlight;
+package mage.cards.a;
 
 import java.util.UUID;
 import mage.MageObject;
@@ -34,10 +34,10 @@ import mage.abilities.effects.ContinuousRuleModifyingEffectImpl;
 import mage.abilities.effects.common.DrawCardSourceControllerEffect;
 import mage.abilities.mana.ManaAbility;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Duration;
 import mage.constants.Outcome;
-import mage.constants.Rarity;
 import mage.game.Game;
 import mage.game.events.GameEvent;
 import mage.target.TargetPlayer;
@@ -48,9 +48,8 @@ import mage.target.TargetPlayer;
  */
 public class Abeyance extends CardImpl {
 
-    public Abeyance(UUID ownerId) {
-        super(ownerId, 117, "Abeyance", Rarity.RARE, new CardType[]{CardType.INSTANT}, "{1}{W}");
-        this.expansionSetCode = "WTH";
+    public Abeyance(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.INSTANT},"{1}{W}");
 
         // Until end of turn, target player can't cast instant or sorcery spells, and that player can't activate abilities that aren't mana abilities.
         this.getSpellAbility().addEffect(new AbeyanceEffect());

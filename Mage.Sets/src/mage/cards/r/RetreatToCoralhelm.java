@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.battleforzendikar;
+package mage.cards.r;
 
 import java.util.UUID;
 import mage.abilities.Mode;
@@ -33,8 +33,8 @@ import mage.abilities.common.LandfallAbility;
 import mage.abilities.effects.common.MayTapOrUntapTargetEffect;
 import mage.abilities.effects.keyword.ScryEffect;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.target.common.TargetCreaturePermanent;
 
 /**
@@ -43,9 +43,8 @@ import mage.target.common.TargetCreaturePermanent;
  */
 public class RetreatToCoralhelm extends CardImpl {
 
-    public RetreatToCoralhelm(UUID ownerId) {
-        super(ownerId, 82, "Retreat to Coralhelm", Rarity.UNCOMMON, new CardType[]{CardType.ENCHANTMENT}, "{2}{U}");
-        this.expansionSetCode = "BFZ";
+    public RetreatToCoralhelm(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.ENCHANTMENT},"{2}{U}");
 
         // <i>Landfall</i>- Whenever a land enters the battlefield under your control, choose one - You may tap or untap target creature; or Scry 1.
         LandfallAbility ability = new LandfallAbility(new MayTapOrUntapTargetEffect(), false);

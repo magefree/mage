@@ -26,23 +26,22 @@
  *  or implied, of BetaSteward_at_googlemail.com.
  */
 
-package mage.sets.magic2012;
+package mage.cards.a;
 
 import java.util.UUID;
 
 import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.MageInt;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 
 /**
  * @author Loki
  */
 public class ArmoredWarhorse extends CardImpl {
 
-    public ArmoredWarhorse(UUID ownerId) {
-        super(ownerId, 7, "Armored Warhorse", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{W}{W}");
-        this.expansionSetCode = "M12";
+    public ArmoredWarhorse(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{W}{W}");
         this.subtype.add("Horse");
 
         this.power = new MageInt(2);

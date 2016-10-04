@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.khansoftarkir;
+package mage.cards.d;
 
 import java.util.UUID;
 import mage.abilities.DelayedTriggeredAbility;
@@ -33,9 +33,9 @@ import mage.abilities.effects.common.CreateDelayedTriggeredAbilityEffect;
 import mage.abilities.effects.common.GainLifeEffect;
 import mage.abilities.effects.common.continuous.BoostAllEffect;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Duration;
-import mage.constants.Rarity;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.game.Game;
 import mage.game.events.GameEvent;
@@ -47,9 +47,8 @@ import mage.game.events.ZoneChangeEvent;
  */
 public class DeathFrenzy extends CardImpl {
 
-    public DeathFrenzy(UUID ownerId) {
-        super(ownerId, 172, "Death Frenzy", Rarity.UNCOMMON, new CardType[]{CardType.SORCERY}, "{3}{B}{G}");
-        this.expansionSetCode = "KTK";
+    public DeathFrenzy(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{3}{B}{G}");
 
 
         // All creatures get -2/-2 until end of turn. Whenever a creature dies this turn, you gain 1 life.

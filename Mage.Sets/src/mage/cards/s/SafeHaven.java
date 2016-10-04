@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.thedark;
+package mage.cards.s;
 
 import java.util.UUID;
 import mage.abilities.Ability;
@@ -37,8 +37,8 @@ import mage.abilities.effects.common.ExileTargetEffect;
 import mage.abilities.effects.common.ReturnFromExileEffect;
 import mage.abilities.effects.common.SacrificeSourceEffect;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.constants.TargetController;
 import mage.constants.Zone;
 import mage.target.common.TargetControlledCreaturePermanent;
@@ -49,9 +49,8 @@ import mage.target.common.TargetControlledCreaturePermanent;
  */
 public class SafeHaven extends CardImpl {
 
-    public SafeHaven(UUID ownerId) {
-        super(ownerId, 115, "Safe Haven", Rarity.RARE, new CardType[]{CardType.LAND}, "");
-        this.expansionSetCode = "DRK";
+    public SafeHaven(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.LAND},"");
 
         // {2}, {tap}: Exile target creature you control.
         Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new ExileTargetEffect(this.getId(),

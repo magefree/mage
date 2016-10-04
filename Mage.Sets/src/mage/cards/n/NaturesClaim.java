@@ -25,16 +25,16 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.worldwake;
+package mage.cards.n;
 
 import java.util.UUID;
 import mage.abilities.Ability;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.DestroyTargetEffect;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Outcome;
-import mage.constants.Rarity;
 import mage.filter.common.FilterArtifactOrEnchantmentPermanent;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
@@ -47,9 +47,8 @@ import mage.target.TargetPermanent;
  */
 public class NaturesClaim extends CardImpl {
 
-    public NaturesClaim(UUID ownerId) {
-        super(ownerId, 108, "Nature's Claim", Rarity.COMMON, new CardType[]{CardType.INSTANT}, "{G}");
-        this.expansionSetCode = "WWK";
+    public NaturesClaim(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.INSTANT},"{G}");
 
         // Destroy target artifact or enchantment. Its controller gains 4 life.
         this.getSpellAbility().addEffect(new DestroyTargetEffect());

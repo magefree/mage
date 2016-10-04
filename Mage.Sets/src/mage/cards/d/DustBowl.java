@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.mercadianmasques;
+package mage.cards.d;
 
 import java.util.UUID;
 import mage.abilities.Ability;
@@ -36,8 +36,8 @@ import mage.abilities.costs.mana.GenericManaCost;
 import mage.abilities.effects.common.DestroyTargetEffect;
 import mage.abilities.mana.ColorlessManaAbility;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.constants.Zone;
 import mage.filter.common.FilterControlledLandPermanent;
 import mage.target.Target;
@@ -50,9 +50,8 @@ import mage.target.common.TargetNonBasicLandPermanent;
  */
 public class DustBowl extends CardImpl {
             
-    public DustBowl(UUID ownerId) {
-        super(ownerId, 316, "Dust Bowl", Rarity.RARE, new CardType[]{CardType.LAND}, "");
-        this.expansionSetCode = "MMQ";
+    public DustBowl(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.LAND},"");
 
         // {tap}: Add {C} to your mana pool.
         this.addAbility(new ColorlessManaAbility());

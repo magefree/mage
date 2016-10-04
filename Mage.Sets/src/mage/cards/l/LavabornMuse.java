@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.sorinvstibalt;
+package mage.cards.l;
 
 import java.util.UUID;
 import mage.MageInt;
@@ -35,8 +35,8 @@ import mage.abilities.condition.Condition;
 import mage.abilities.decorator.ConditionalTriggeredAbility;
 import mage.abilities.effects.common.DamageTargetEffect;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.constants.TargetController;
 import mage.constants.Zone;
 import mage.game.Game;
@@ -48,9 +48,8 @@ import mage.players.Player;
  */
 public class LavabornMuse extends CardImpl {
 
-    public LavabornMuse(UUID ownerId) {
-        super(ownerId, 50, "Lavaborn Muse", Rarity.RARE, new CardType[]{CardType.CREATURE}, "{3}{R}");
-        this.expansionSetCode = "DDK";
+    public LavabornMuse(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{3}{R}");
         this.subtype.add("Spirit");
         this.power = new MageInt(3);
         this.toughness = new MageInt(3);

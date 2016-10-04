@@ -25,13 +25,13 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.commander;
+package mage.cards.t;
 
 import java.util.UUID;
 import mage.abilities.effects.common.SacrificeOpponentsEffect;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.filter.FilterPermanent;
 import mage.filter.predicate.Predicates;
 import mage.filter.predicate.mageobject.CardTypePredicate;
@@ -50,9 +50,8 @@ public class TributeToTheWild extends CardImpl {
                 new CardTypePredicate(CardType.ENCHANTMENT)));
     }
 
-    public TributeToTheWild(UUID ownerId) {
-        super(ownerId, 175, "Tribute to the Wild", Rarity.UNCOMMON, new CardType[]{CardType.INSTANT}, "{1}{G}");
-        this.expansionSetCode = "CMD";
+    public TributeToTheWild(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.INSTANT},"{1}{G}");
 
 
         // Each opponent sacrifices an artifact or enchantment.

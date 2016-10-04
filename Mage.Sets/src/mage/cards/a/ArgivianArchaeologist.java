@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.antiquities;
+package mage.cards.a;
 
 import java.util.UUID;
 import mage.MageInt;
@@ -35,8 +35,8 @@ import mage.abilities.costs.common.TapSourceCost;
 import mage.abilities.costs.mana.ManaCostsImpl;
 import mage.abilities.effects.common.ReturnToHandTargetEffect;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.constants.Zone;
 import mage.filter.common.FilterArtifactCard;
 import mage.target.Target;
@@ -50,9 +50,8 @@ public class ArgivianArchaeologist extends CardImpl {
     
     private static final FilterArtifactCard filter = new FilterArtifactCard("artifact card from your graveyard");
 
-    public ArgivianArchaeologist(UUID ownerId) {
-        super(ownerId, 94, "Argivian Archaeologist", Rarity.RARE, new CardType[]{CardType.CREATURE}, "{1}{W}{W}");
-        this.expansionSetCode = "ATQ";
+    public ArgivianArchaeologist(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{1}{W}{W}");
         this.subtype.add("Human");
         this.subtype.add("Artificer");
         this.power = new MageInt(1);

@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.darkascension;
+package mage.cards.s;
 
 import java.util.List;
 import java.util.UUID;
@@ -35,9 +35,9 @@ import mage.abilities.common.delayed.AtTheBeginOfNextEndStepDelayedTriggeredAbil
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.ReturnFromExileEffect;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Outcome;
-import mage.constants.Rarity;
 import mage.constants.Zone;
 import mage.filter.common.FilterNonlandPermanent;
 import mage.game.Game;
@@ -51,9 +51,8 @@ import mage.target.TargetPlayer;
  */
 public class SuddenDisappearance extends CardImpl {
 
-    public SuddenDisappearance(UUID ownerId) {
-        super(ownerId, 23, "Sudden Disappearance", Rarity.RARE, new CardType[]{CardType.SORCERY}, "{5}{W}");
-        this.expansionSetCode = "DKA";
+    public SuddenDisappearance(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{5}{W}");
 
         // Exile all nonland permanents target player controls. Return the exiled cards to the battlefield under their owner's control at the beginning of the next end step.
         this.getSpellAbility().addEffect(new SuddenDisappearanceEffect());

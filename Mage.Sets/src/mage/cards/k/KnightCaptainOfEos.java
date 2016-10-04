@@ -25,12 +25,11 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.shardsofalara;
+package mage.cards.k;
 
 import java.util.UUID;
 import mage.constants.CardType;
 import mage.constants.Duration;
-import mage.constants.Rarity;
 import mage.constants.Zone;
 import mage.MageInt;
 import mage.abilities.common.EntersBattlefieldTriggeredAbility;
@@ -40,6 +39,7 @@ import mage.abilities.costs.mana.ManaCostsImpl;
 import mage.abilities.effects.common.CreateTokenEffect;
 import mage.abilities.effects.common.PreventAllDamageByAllPermanentsEffect;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.filter.common.FilterControlledCreaturePermanent;
 import mage.filter.predicate.mageobject.SubtypePredicate;
 import mage.game.permanent.token.SoldierToken;
@@ -57,9 +57,8 @@ public class KnightCaptainOfEos extends CardImpl {
         filter.add(new SubtypePredicate("Soldier"));
     }
 
-    public KnightCaptainOfEos(UUID ownerId) {
-        super(ownerId, 17, "Knight-Captain of Eos", Rarity.RARE, new CardType[]{CardType.CREATURE}, "{4}{W}");
-        this.expansionSetCode = "ALA";
+    public KnightCaptainOfEos(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{4}{W}");
         this.subtype.add("Human");
         this.subtype.add("Knight");
 

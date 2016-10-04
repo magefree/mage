@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.odyssey;
+package mage.cards.t;
 
 import java.util.UUID;
 import mage.abilities.Ability;
@@ -33,9 +33,9 @@ import mage.abilities.effects.OneShotEffect;
 import mage.abilities.keyword.FlashbackAbility;
 import mage.cards.Card;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Outcome;
-import mage.constants.Rarity;
 import mage.filter.FilterCard;
 import mage.filter.predicate.mageobject.AbilityPredicate;
 import mage.game.Game;
@@ -48,9 +48,8 @@ import mage.target.TargetPlayer;
  */
 public class Tombfire extends CardImpl {
 
-    public Tombfire(UUID ownerId) {
-        super(ownerId, 165, "Tombfire", Rarity.RARE, new CardType[]{CardType.SORCERY}, "{B}");
-        this.expansionSetCode = "ODY";
+    public Tombfire(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{B}");
 
 
         // Target player exiles all cards with flashback from his or her graveyard.

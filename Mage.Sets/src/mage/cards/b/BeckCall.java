@@ -25,17 +25,17 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.dragonsmaze;
+package mage.cards.b;
 
 import java.util.UUID;
 import mage.abilities.DelayedTriggeredAbility;
 import mage.abilities.effects.common.CreateDelayedTriggeredAbilityEffect;
 import mage.abilities.effects.common.CreateTokenEffect;
 import mage.abilities.effects.common.DrawCardSourceControllerEffect;
+import mage.cards.CardSetInfo;
 import mage.cards.SplitCard;
 import mage.constants.CardType;
 import mage.constants.Duration;
-import mage.constants.Rarity;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.game.Game;
 import mage.game.events.GameEvent;
@@ -45,9 +45,8 @@ import mage.game.permanent.token.BirdToken;
 
 public class BeckCall extends SplitCard {
 
-    public BeckCall(UUID ownerId) {
-        super(ownerId, 123, "Beck", "Call", Rarity.RARE, new CardType[]{CardType.SORCERY}, "{G}{U}", "{4}{W}{U}", true);
-        this.expansionSetCode = "DGM";
+    public BeckCall(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{G}{U}","{4}{W}{U}",true);
 
         // Beck
         // Whenever a creature enters the battlefield this turn, you may draw a card.

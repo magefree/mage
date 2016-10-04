@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.riseoftheeldrazi;
+package mage.cards.h;
 
 import java.util.UUID;
 import mage.MageInt;
@@ -37,9 +37,9 @@ import mage.abilities.keyword.LevelUpAbility;
 import mage.abilities.keyword.LevelerCardBuilder;
 import mage.abilities.keyword.ShroudAbility;
 import mage.abilities.keyword.CantBeBlockedSourceAbility;
+import mage.cards.CardSetInfo;
 import mage.cards.LevelerCard;
 import mage.constants.CardType;
-import mage.constants.Rarity;
 
 /**
  *
@@ -47,9 +47,8 @@ import mage.constants.Rarity;
  */
 public class HadaSpyPatrol extends LevelerCard {
 
-    public HadaSpyPatrol(UUID ownerId) {
-        super(ownerId, 71, "Hada Spy Patrol", Rarity.UNCOMMON, new CardType[]{CardType.CREATURE}, "{1}{U}");
-        this.expansionSetCode = "ROE";
+    public HadaSpyPatrol(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{1}{U}");
         this.subtype.add("Human");
         this.subtype.add("Rogue");
 

@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.timespiral;
+package mage.cards.t;
 
 import java.util.UUID;
 import mage.ObjectColor;
@@ -37,9 +37,9 @@ import mage.abilities.effects.common.continuous.BecomesColorTargetEffect;
 import mage.abilities.keyword.FlashbackAbility;
 import mage.abilities.keyword.ShadowAbility;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Duration;
-import mage.constants.Rarity;
 import mage.constants.TimingRule;
 import mage.target.common.TargetCreaturePermanent;
 
@@ -49,9 +49,8 @@ import mage.target.common.TargetCreaturePermanent;
  */
 public class TraitorsClutch extends CardImpl {
 
-    public TraitorsClutch(UUID ownerId) {
-        super(ownerId, 137, "Traitor's Clutch", Rarity.COMMON, new CardType[]{CardType.INSTANT}, "{4}{B}");
-        this.expansionSetCode = "TSP";
+    public TraitorsClutch(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.INSTANT},"{4}{B}");
 
 
         // Target creature gets +1/+0, becomes black, and gains shadow until end of turn.

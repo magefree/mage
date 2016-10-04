@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.coldsnap;
+package mage.cards.h;
 
 import java.util.UUID;
 
@@ -33,8 +33,8 @@ import mage.abilities.common.EntersBattlefieldTappedAbility;
 import mage.abilities.mana.GreenManaAbility;
 import mage.abilities.mana.RedManaAbility;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.Rarity;
 
 /**
  *
@@ -42,9 +42,8 @@ import mage.constants.Rarity;
  */
 public class HighlandWeald extends CardImpl {
 
-    public HighlandWeald(UUID ownerId) {
-        super(ownerId, 147, "Highland Weald", Rarity.UNCOMMON, new CardType[]{CardType.LAND}, "");
-        this.expansionSetCode = "CSP";
+    public HighlandWeald(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.LAND},"");
         this.supertype.add("Snow");
 
         // Highland Weald enters the battlefield tapped.

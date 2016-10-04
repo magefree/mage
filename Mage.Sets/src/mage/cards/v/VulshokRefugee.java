@@ -25,15 +25,15 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.newphyrexia;
+package mage.cards.v;
 
 import java.util.UUID;
 import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.MageInt;
 import mage.ObjectColor;
 import mage.abilities.keyword.ProtectionAbility;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.filter.FilterCard;
 import mage.filter.predicate.mageobject.ColorPredicate;
 
@@ -49,9 +49,8 @@ public class VulshokRefugee extends CardImpl {
         filter.add(new ColorPredicate(ObjectColor.RED));
     }
 
-    public VulshokRefugee(UUID ownerId) {
-        super(ownerId, 101, "Vulshok Refugee", Rarity.UNCOMMON, new CardType[]{CardType.CREATURE}, "{1}{R}{R}");
-        this.expansionSetCode = "NPH";
+    public VulshokRefugee(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{1}{R}{R}");
         this.subtype.add("Human");
         this.subtype.add("Warrior");
 

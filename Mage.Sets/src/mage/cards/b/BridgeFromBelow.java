@@ -25,17 +25,17 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.futuresight;
+package mage.cards.b;
 
 import java.util.UUID;
 
 import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.abilities.TriggeredAbilityImpl;
 import mage.abilities.effects.Effect;
 import mage.abilities.effects.common.CreateTokenEffect;
 import mage.abilities.effects.common.ExileSourceEffect;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.TargetController;
 import mage.constants.Zone;
 import mage.filter.common.FilterCreaturePermanent;
@@ -65,9 +65,8 @@ public class BridgeFromBelow extends CardImpl {
         filter2.add(new ControllerPredicate(TargetController.OPPONENT));
     }
     
-    public BridgeFromBelow(UUID ownerId) {
-        super(ownerId, 81, "Bridge from Below", Rarity.RARE, new CardType[]{CardType.ENCHANTMENT}, "{B}{B}{B}");
-        this.expansionSetCode = "FUT";
+    public BridgeFromBelow(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.ENCHANTMENT},"{B}{B}{B}");
 
         // Whenever a nontoken creature is put into your graveyard from the battlefield, if Bridge from Below is in your graveyard, put a 2/2 black Zombie creature token onto the battlefield.
         this.addAbility(new BridgeFromBelowAbility(new CreateTokenEffect(new ZombieToken()), filter1));

@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.tempest;
+package mage.cards.r;
 
 import java.util.UUID;
 import mage.abilities.dynamicvalue.common.TargetConvertedManaCost;
@@ -33,8 +33,8 @@ import mage.abilities.effects.Effect;
 import mage.abilities.effects.common.LoseLifeSourceControllerEffect;
 import mage.abilities.effects.common.ReturnFromGraveyardToBattlefieldTargetEffect;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.filter.common.FilterCreatureCard;
 import mage.target.common.TargetCardInGraveyard;
 
@@ -44,9 +44,8 @@ import mage.target.common.TargetCardInGraveyard;
  */
 public class Reanimate extends CardImpl {
 
-    public Reanimate(UUID ownerId) {
-        super(ownerId, 45, "Reanimate", Rarity.UNCOMMON, new CardType[]{CardType.SORCERY}, "{B}");
-        this.expansionSetCode = "TMP";
+    public Reanimate(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{B}");
 
 
         // Put target creature card from a graveyard onto the battlefield under your control. You lose life equal to its converted mana cost.

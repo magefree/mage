@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.fifthdawn;
+package mage.cards.s;
 
 import java.util.UUID;
 import mage.abilities.Ability;
@@ -35,9 +35,9 @@ import mage.abilities.effects.common.AttachEffect;
 import mage.abilities.effects.common.combat.CantBlockAttackActivateAttachedEffect;
 import mage.abilities.keyword.EnchantAbility;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Outcome;
-import mage.constants.Rarity;
 import mage.constants.Zone;
 import mage.target.TargetPermanent;
 import mage.target.common.TargetArtifactPermanent;
@@ -48,9 +48,8 @@ import mage.target.common.TargetArtifactPermanent;
  */
 public class StasisCocoon extends CardImpl {
 
-    public StasisCocoon(UUID ownerId) {
-        super(ownerId, 18, "Stasis Cocoon", Rarity.COMMON, new CardType[]{CardType.ENCHANTMENT}, "{1}{W}");
-        this.expansionSetCode = "5DN";
+    public StasisCocoon(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.ENCHANTMENT},"{1}{W}");
         this.subtype.add("Aura");
 
         // Enchant artifact

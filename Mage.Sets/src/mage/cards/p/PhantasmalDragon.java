@@ -25,16 +25,16 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.magic2012;
+package mage.cards.p;
 
 import java.util.UUID;
 import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.MageInt;
 import mage.abilities.common.BecomesTargetTriggeredAbility;
 import mage.abilities.effects.common.SacrificeSourceEffect;
 import mage.abilities.keyword.FlyingAbility;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 
 /**
  *
@@ -42,9 +42,8 @@ import mage.cards.CardImpl;
  */
 public class PhantasmalDragon extends CardImpl {
 
-    public PhantasmalDragon(UUID ownerId) {
-        super(ownerId, 71, "Phantasmal Dragon", Rarity.UNCOMMON, new CardType[]{CardType.CREATURE}, "{2}{U}{U}");
-        this.expansionSetCode = "M12";
+    public PhantasmalDragon(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{2}{U}{U}");
         this.subtype.add("Dragon");
         this.subtype.add("Illusion");
 

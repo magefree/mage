@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.ravnica;
+package mage.cards.s;
 
 import java.util.LinkedList;
 import java.util.UUID;
@@ -38,10 +38,10 @@ import mage.abilities.effects.common.ExileTargetEffect;
 import mage.abilities.effects.common.combat.MustBeBlockedByTargetSourceEffect;
 import mage.cards.Card;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.cards.CardsImpl;
 import mage.constants.CardType;
 import mage.constants.Outcome;
-import mage.constants.Rarity;
 import mage.constants.Zone;
 import mage.filter.common.FilterCreatureCard;
 import mage.filter.common.FilterCreaturePermanent;
@@ -62,9 +62,8 @@ public class SistersOfStoneDeath extends CardImpl {
 
     private UUID exileId = UUID.randomUUID();
 
-    public SistersOfStoneDeath(UUID ownerId) {
-        super(ownerId, 231, "Sisters of Stone Death", Rarity.RARE, new CardType[]{CardType.CREATURE}, "{4}{B}{B}{G}{G}");
-        this.expansionSetCode = "RAV";
+    public SistersOfStoneDeath(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{4}{B}{B}{G}{G}");
         this.supertype.add("Legendary");
         this.subtype.add("Gorgon");
 

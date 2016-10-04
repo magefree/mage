@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.starwars;
+package mage.cards.t;
 
 import java.util.UUID;
 import mage.abilities.dynamicvalue.common.ManacostVariableValue;
@@ -35,10 +35,10 @@ import mage.abilities.effects.common.DamageAllEffect;
 import mage.abilities.effects.common.DamagePlayersEffect;
 import mage.abilities.effects.common.continuous.BoostControlledEffect;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Duration;
 import mage.constants.Outcome;
-import mage.constants.Rarity;
 import mage.constants.TargetController;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.filter.predicate.permanent.ControllerPredicate;
@@ -55,9 +55,8 @@ public class TheBattleOfGeonosis extends CardImpl {
         filter.add(new ControllerPredicate(TargetController.NOT_YOU));
     }
 
-    public TheBattleOfGeonosis(UUID ownerId) {
-        super(ownerId, 97, "The Battle of Geonosis", Rarity.MYTHIC, new CardType[]{CardType.SORCERY}, "{X}{X}{R}{R}");
-        this.expansionSetCode = "SWS";
+    public TheBattleOfGeonosis(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{X}{X}{R}{R}");
 
         // The Battle of Geonosis deals X damage to each opponent and each creature you don't control.
         Effect effect = new DamagePlayersEffect(Outcome.Damage, new ManacostVariableValue(), TargetController.OPPONENT);

@@ -26,16 +26,16 @@
  *  or implied, of BetaSteward_at_googlemail.com.
  */
 
-package mage.sets.magic2010;
+package mage.cards.h;
 
 import java.util.UUID;
 import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.MageInt;
 import mage.abilities.common.EntersBattlefieldTriggeredAbility;
 import mage.abilities.effects.common.LoseLifeAllPlayersEffect;
 import mage.abilities.keyword.FlyingAbility;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 
 /**
  *
@@ -43,9 +43,8 @@ import mage.cards.CardImpl;
  */
 public class HowlingBanshee extends CardImpl {
 
-    public HowlingBanshee(UUID ownerId) {
-        super(ownerId, 99, "Howling Banshee", Rarity.UNCOMMON, new CardType[]{CardType.CREATURE}, "{2}{B}{B}");
-        this.expansionSetCode = "M10";
+    public HowlingBanshee(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{2}{B}{B}");
         this.subtype.add("Spirit");
 
         this.power = new MageInt(3);

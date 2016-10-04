@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.starwars;
+package mage.cards.e;
 
 import java.util.UUID;
 import mage.abilities.Ability;
@@ -35,10 +35,10 @@ import mage.abilities.effects.common.CreateTokenEffect;
 import mage.abilities.effects.common.continuous.GainAbilityTargetEffect;
 import mage.abilities.keyword.HasteAbility;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Duration;
 import mage.constants.Outcome;
-import mage.constants.Rarity;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.game.permanent.token.EwokToken;
@@ -51,9 +51,8 @@ import mage.target.targetpointer.FixedTarget;
  */
 public class EwokAmbush extends CardImpl {
 
-    public EwokAmbush(UUID ownerId) {
-        super(ownerId, 134, "Ewok Ambush", Rarity.COMMON, new CardType[]{CardType.INSTANT}, "{2}{G}");
-        this.expansionSetCode = "SWS";
+    public EwokAmbush(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.INSTANT},"{2}{G}");
 
         // Create two 1/1 green Ewok creature tokens. Those tokens gain haste until end of turn. 
         this.getSpellAbility().addEffect(new EwokAmbushCreateTokenEffect());

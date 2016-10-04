@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.eventide;
+package mage.cards.m;
 
 import java.util.UUID;
 import mage.abilities.Ability;
@@ -33,8 +33,8 @@ import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.costs.mana.ManaCostsImpl;
 import mage.abilities.effects.common.CopyTargetSpellEffect;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.constants.Zone;
 import mage.filter.FilterSpell;
 import mage.filter.predicate.ObjectPlayer;
@@ -60,9 +60,8 @@ public class MirrorSheen extends CardImpl {
         filter.add(new TargetYouPredicate());
     }
 
-    public MirrorSheen(UUID ownerId) {
-        super(ownerId, 105, "Mirror Sheen", Rarity.RARE, new CardType[]{CardType.ENCHANTMENT}, "{1}{U/R}{U/R}");
-        this.expansionSetCode = "EVE";
+    public MirrorSheen(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.ENCHANTMENT},"{1}{U/R}{U/R}");
 
         // {1}{UR}{UR}: Copy target instant or sorcery spell that targets you. You may choose new targets for the copy.
         Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new CopyTargetSpellEffect(), new ManaCostsImpl("{1}{U/R}{U/R}"));

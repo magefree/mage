@@ -25,13 +25,13 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.urzasdestiny;
+package mage.cards.r;
 
 import java.util.UUID;
 import mage.abilities.effects.common.ReturnToHandTargetEffect;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.target.common.TargetControlledPermanent;
 
 /**
@@ -40,9 +40,8 @@ import mage.target.common.TargetControlledPermanent;
  */
 public class Rescue extends CardImpl {
 
-    public Rescue(UUID ownerId) {
-        super(ownerId, 44, "Rescue", Rarity.COMMON, new CardType[]{CardType.INSTANT}, "{U}");
-        this.expansionSetCode = "UDS";
+    public Rescue(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.INSTANT},"{U}");
 
         // Return target permanent you control to its owner's hand.
         this.getSpellAbility().addEffect(new ReturnToHandTargetEffect());

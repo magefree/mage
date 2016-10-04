@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.legends;
+package mage.cards.i;
 
 import java.util.UUID;
 import mage.ObjectColor;
@@ -35,8 +35,8 @@ import mage.abilities.costs.mana.GenericManaCost;
 import mage.abilities.effects.Effect;
 import mage.abilities.effects.common.CounterUnlessPaysEffect;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.constants.Zone;
 import mage.filter.common.FilterControlledCreaturePermanent;
 import mage.game.Game;
@@ -52,9 +52,8 @@ import mage.target.targetpointer.FixedTarget;
  */
 public class InvokePrejudice extends CardImpl {
 
-    public InvokePrejudice(UUID ownerId) {
-        super(ownerId, 62, "Invoke Prejudice", Rarity.RARE, new CardType[]{CardType.ENCHANTMENT}, "{U}{U}{U}{U}");
-        this.expansionSetCode = "LEG";
+    public InvokePrejudice(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.ENCHANTMENT},"{U}{U}{U}{U}");
 
         // Whenever an opponent casts a creature spell that doesn't share a color with a creature you control, counter that spell unless that player pays {X}, where X is its converted mana cost.
         this.addAbility(new InvokePrejudiceTriggeredAbility());

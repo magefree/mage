@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.darkascension;
+package mage.cards.f;
 
 import java.util.UUID;
 import mage.abilities.Ability;
@@ -36,11 +36,11 @@ import mage.abilities.effects.common.continuous.GainAbilityControllerEffect;
 import mage.abilities.effects.common.continuous.GainProtectionFromColorTargetEffect;
 import mage.abilities.keyword.ProtectionAbility;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.choices.ChoiceColor;
 import mage.constants.CardType;
 import mage.constants.Duration;
 import mage.constants.Outcome;
-import mage.constants.Rarity;
 import mage.filter.FilterCard;
 import mage.filter.predicate.mageobject.ColorPredicate;
 import mage.game.Game;
@@ -53,9 +53,8 @@ import mage.target.common.TargetControlledPermanent;
  */
 public class FaithsShield extends CardImpl {
 
-    public FaithsShield(UUID ownerId) {
-        super(ownerId, 7, "Faith's Shield", Rarity.UNCOMMON, new CardType[]{CardType.INSTANT}, "{W}");
-        this.expansionSetCode = "DKA";
+    public FaithsShield(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.INSTANT},"{W}");
 
 
         // Target permanent you control gains protection from the color of your choice until end of turn.

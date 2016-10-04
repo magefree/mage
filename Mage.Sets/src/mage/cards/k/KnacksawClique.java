@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.shadowmoor;
+package mage.cards.k;
 
 import java.util.UUID;
 import mage.MageInt;
@@ -40,11 +40,11 @@ import mage.abilities.effects.OneShotEffect;
 import mage.abilities.keyword.FlyingAbility;
 import mage.cards.Card;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.AsThoughEffectType;
 import mage.constants.CardType;
 import mage.constants.Duration;
 import mage.constants.Outcome;
-import mage.constants.Rarity;
 import mage.constants.Zone;
 import mage.game.Game;
 import mage.players.Library;
@@ -58,9 +58,8 @@ import mage.target.targetpointer.FixedTarget;
  */
 public class KnacksawClique extends CardImpl {
 
-    public KnacksawClique(UUID ownerId) {
-        super(ownerId, 42, "Knacksaw Clique", Rarity.RARE, new CardType[]{CardType.CREATURE}, "{3}{U}");
-        this.expansionSetCode = "SHM";
+    public KnacksawClique(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{3}{U}");
         this.subtype.add("Faerie");
         this.subtype.add("Rogue");
 

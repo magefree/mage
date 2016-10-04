@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.scarsofmirrodin;
+package mage.cards.e;
 
 import java.util.UUID;
 
@@ -36,6 +36,7 @@ import mage.abilities.costs.mana.GenericManaCost;
 import mage.abilities.effects.ContinuousEffectImpl;
 import mage.abilities.keyword.EquipAbility;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 
@@ -45,9 +46,8 @@ import mage.game.permanent.Permanent;
  */
 public class EchoCirclet extends CardImpl {
 
-    public EchoCirclet(UUID ownerId) {
-        super(ownerId, 153, "Echo Circlet", Rarity.COMMON, new CardType[]{CardType.ARTIFACT}, "{2}");
-        this.expansionSetCode = "SOM";
+    public EchoCirclet(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.ARTIFACT},"{2}");
         this.subtype.add("Equipment");
 
         // Equipped creature can block an additional creature each combat. (static abilit of equipment, no ability that will be gained to equiped creature!)

@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.khansoftarkir;
+package mage.cards.m;
 
 import java.util.UUID;
 import mage.abilities.common.AttacksCreatureYouControlTriggeredAbility;
@@ -34,9 +34,9 @@ import mage.abilities.costs.common.SacrificeSourceCost;
 import mage.abilities.effects.common.CreateTokenEffect;
 import mage.abilities.effects.common.continuous.BoostAllEffect;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Duration;
-import mage.constants.Rarity;
 import mage.constants.TargetController;
 import mage.constants.Zone;
 import mage.filter.common.FilterControlledCreaturePermanent;
@@ -60,9 +60,8 @@ public class MarduAscendancy extends CardImpl {
         filter.add(new ControllerPredicate(TargetController.YOU));
     }
 
-    public MarduAscendancy(UUID ownerId) {
-        super(ownerId, 185, "Mardu Ascendancy", Rarity.RARE, new CardType[]{CardType.ENCHANTMENT}, "{R}{W}{B}");
-        this.expansionSetCode = "KTK";
+    public MarduAscendancy(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.ENCHANTMENT},"{R}{W}{B}");
 
         // Whenever a nontoken creature you control attacks, put a 1/1 red Goblin creature token onto the battlefield tapped and attacking.
         this.addAbility(new AttacksCreatureYouControlTriggeredAbility(new CreateTokenEffect(new GoblinToken(), 1, true, true), false, attackFilter));

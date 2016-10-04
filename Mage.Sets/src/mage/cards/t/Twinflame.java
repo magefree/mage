@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.journeyintonyx;
+package mage.cards.t;
 
 import java.util.ArrayList;
 import java.util.UUID;
@@ -37,9 +37,9 @@ import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.ExileTargetEffect;
 import mage.abilities.effects.common.PutTokenOntoBattlefieldCopyTargetEffect;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Outcome;
-import mage.constants.Rarity;
 import mage.filter.common.FilterControlledCreaturePermanent;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
@@ -54,9 +54,8 @@ import mage.target.targetpointer.FixedTargets;
  */
 public class Twinflame extends CardImpl {
 
-    public Twinflame(UUID ownerId) {
-        super(ownerId, 115, "Twinflame", Rarity.RARE, new CardType[]{CardType.SORCERY}, "{1}{R}");
-        this.expansionSetCode = "JOU";
+    public Twinflame(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{1}{R}");
 
         // Strive - Twinflame costs 2R more to cast for each target beyond the first.
         this.addAbility(new StriveAbility("{2}{R}"));

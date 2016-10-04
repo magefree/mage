@@ -25,14 +25,14 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.magic2014;
+package mage.cards.b;
 
 import java.util.UUID;
 import mage.abilities.common.TapForManaAllTriggeredAbility;
 import mage.abilities.effects.common.DamageTargetEffect;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.constants.SetTargetPointer;
 import mage.filter.common.FilterLandPermanent;
 import mage.filter.predicate.Predicates;
@@ -50,9 +50,8 @@ public class BurningEarth extends CardImpl {
         filter.add(Predicates.not(new SupertypePredicate("Basic")));
     }
     
-    public BurningEarth(UUID ownerId) {
-        super(ownerId, 130, "Burning Earth", Rarity.RARE, new CardType[]{CardType.ENCHANTMENT}, "{3}{R}");
-        this.expansionSetCode = "M14";
+    public BurningEarth(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.ENCHANTMENT},"{3}{R}");
 
         // Whenever a player taps a nonbasic land for mana, Burning Earth deals 1 damage to that player.
         this.addAbility(new TapForManaAllTriggeredAbility(

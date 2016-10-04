@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.saviorsofkamigawa;
+package mage.cards.o;
 
 import java.util.UUID;
 import mage.MageObject;
@@ -34,9 +34,9 @@ import mage.abilities.Mode;
 import mage.abilities.costs.mana.GenericManaCost;
 import mage.abilities.effects.OneShotEffect;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Outcome;
-import mage.constants.Rarity;
 import mage.game.Game;
 import mage.game.stack.StackObject;
 import mage.players.Player;
@@ -48,9 +48,8 @@ import mage.target.TargetSpell;
  */
 public class OppressiveWill extends CardImpl {
 
-    public OppressiveWill(UUID ownerId) {
-        super(ownerId, 50, "Oppressive Will", Rarity.COMMON, new CardType[]{CardType.INSTANT}, "{2}{U}");
-        this.expansionSetCode = "SOK";
+    public OppressiveWill(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.INSTANT},"{2}{U}");
 
         // Counter target spell unless its controller pays {1} for each card in your hand.
         this.getSpellAbility().addEffect(new SpellSyphonEffect());

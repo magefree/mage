@@ -25,14 +25,14 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.shadowmoor;
+package mage.cards.p;
 
 import java.util.UUID;
 import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.abilities.effects.common.DamageTargetEffect;
 import mage.abilities.effects.common.counter.AddCountersTargetEffect;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.counters.CounterType;
 import mage.target.common.TargetCreaturePermanent;
 
@@ -42,9 +42,8 @@ import mage.target.common.TargetCreaturePermanent;
  */
 public class PunctureBolt extends CardImpl {
 
-    public PunctureBolt(UUID ownerId) {
-        super(ownerId, 102, "Puncture Bolt", Rarity.COMMON, new CardType[]{CardType.INSTANT}, "{1}{R}");
-        this.expansionSetCode = "SHM";
+    public PunctureBolt(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.INSTANT},"{1}{R}");
 
 
         // Puncture Bolt deals 1 damage to target creature. Put a -1/-1 counter on that creature.

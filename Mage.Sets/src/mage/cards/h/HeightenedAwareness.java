@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.prophecy;
+package mage.cards.h;
 
 import java.util.UUID;
 import mage.abilities.common.BeginningOfDrawTriggeredAbility;
@@ -33,8 +33,8 @@ import mage.abilities.common.EntersBattlefieldTriggeredAbility;
 import mage.abilities.effects.common.DrawCardSourceControllerEffect;
 import mage.abilities.effects.common.discard.DiscardHandControllerEffect;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.constants.TargetController;
 
 /**
@@ -43,9 +43,8 @@ import mage.constants.TargetController;
  */
 public class HeightenedAwareness extends CardImpl {
 
-    public HeightenedAwareness(UUID ownerId) {
-        super(ownerId, 37, "Heightened Awareness", Rarity.RARE, new CardType[]{CardType.ENCHANTMENT}, "{3}{U}{U}");
-        this.expansionSetCode = "PCY";
+    public HeightenedAwareness(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.ENCHANTMENT},"{3}{U}{U}");
 
         // As Heightened Awareness enters the battlefield, discard your hand.
         this.addAbility(new EntersBattlefieldTriggeredAbility(new DiscardHandControllerEffect()));

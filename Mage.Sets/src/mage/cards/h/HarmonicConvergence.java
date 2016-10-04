@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.urzaslegacy;
+package mage.cards.h;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -34,10 +34,10 @@ import java.util.UUID;
 import mage.abilities.Ability;
 import mage.abilities.effects.OneShotEffect;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.cards.CardsImpl;
 import mage.constants.CardType;
 import mage.constants.Outcome;
-import mage.constants.Rarity;
 import mage.constants.Zone;
 import mage.filter.FilterCard;
 import mage.filter.common.FilterEnchantmentPermanent;
@@ -52,9 +52,8 @@ import mage.target.TargetCard;
  */
 public class HarmonicConvergence extends CardImpl {
 
-    public HarmonicConvergence(UUID ownerId) {
-        super(ownerId, 103, "Harmonic Convergence", Rarity.UNCOMMON, new CardType[]{CardType.INSTANT}, "{2}{G}");
-        this.expansionSetCode = "ULG";
+    public HarmonicConvergence(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.INSTANT},"{2}{G}");
 
 
         // Put all enchantments on top of their owners' libraries.

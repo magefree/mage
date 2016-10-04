@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.journeyintonyx;
+package mage.cards.t;
 
 import java.util.UUID;
 import mage.MageInt;
@@ -33,8 +33,8 @@ import mage.abilities.Ability;
 import mage.abilities.abilityword.ConstellationAbility;
 import mage.abilities.effects.common.PutTopCardOfLibraryIntoGraveTargetEffect;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.target.TargetPlayer;
 
 /**
@@ -43,9 +43,8 @@ import mage.target.TargetPlayer;
  */
 public class ThassasDevourer extends CardImpl {
 
-    public ThassasDevourer(UUID ownerId) {
-        super(ownerId, 53, "Thassa's Devourer", Rarity.COMMON, new CardType[]{CardType.ENCHANTMENT, CardType.CREATURE}, "{4}{U}");
-        this.expansionSetCode = "JOU";
+    public ThassasDevourer(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.ENCHANTMENT,CardType.CREATURE},"{4}{U}");
         this.subtype.add("Elemental");
 
         this.power = new MageInt(2);

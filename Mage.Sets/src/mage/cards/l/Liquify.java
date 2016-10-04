@@ -25,13 +25,13 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.torment;
+package mage.cards.l;
 
 import java.util.UUID;
 import mage.abilities.effects.common.CounterTargetWithReplacementEffect;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.constants.Zone;
 import mage.filter.Filter;
 import mage.filter.FilterSpell;
@@ -50,9 +50,8 @@ public class Liquify extends CardImpl {
         filter.add(new ConvertedManaCostPredicate(Filter.ComparisonType.LessThan, 4));
     }
 
-    public Liquify(UUID ownerId) {
-        super(ownerId, 41, "Liquify", Rarity.COMMON, new CardType[]{CardType.INSTANT}, "{2}{U}");
-        this.expansionSetCode = "TOR";
+    public Liquify(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.INSTANT},"{2}{U}");
 
         // Counter target spell with converted mana cost 3 or less. If that spell is countered this way, exile it instead of putting it into its owner's graveyard.
         this.getSpellAbility().addEffect(new CounterTargetWithReplacementEffect(Zone.EXILED));

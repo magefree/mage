@@ -25,13 +25,13 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.fifthedition;
+package mage.cards.s;
 
 import java.util.UUID;
 import mage.abilities.effects.common.DestroyAllEffect;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.filter.common.FilterArtifactPermanent;
 
 /**
@@ -40,9 +40,8 @@ import mage.filter.common.FilterArtifactPermanent;
  */
 public class Shatterstorm extends CardImpl {
 
-    public Shatterstorm(UUID ownerId) {
-        super(ownerId, 266, "Shatterstorm", Rarity.UNCOMMON, new CardType[]{CardType.SORCERY}, "{2}{R}{R}");
-        this.expansionSetCode = "5ED";
+    public Shatterstorm(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{2}{R}{R}");
 
         // Destroy all artifacts. They can't be regenerated.
         this.getSpellAbility().addEffect(new DestroyAllEffect(new FilterArtifactPermanent("artifacts"), true));

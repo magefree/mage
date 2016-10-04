@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.mirage;
+package mage.cards.a;
 
 import java.util.UUID;
 import mage.MageInt;
@@ -38,8 +38,8 @@ import mage.abilities.effects.common.counter.AddCountersSourceEffect;
 import mage.abilities.keyword.FlyingAbility;
 import mage.cards.Card;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.constants.TargetController;
 import mage.constants.WatcherScope;
 import mage.constants.Zone;
@@ -55,9 +55,8 @@ import mage.watchers.Watcher;
  */
 public class AsmiraHolyAvenger extends CardImpl {
 
-    public AsmiraHolyAvenger(UUID ownerId) {
-        super(ownerId, 316, "Asmira, Holy Avenger", Rarity.RARE, new CardType[]{CardType.CREATURE}, "{2}{G}{W}");
-        this.expansionSetCode = "MIR";
+    public AsmiraHolyAvenger(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{2}{G}{W}");
         this.supertype.add("Legendary");
         this.subtype.add("Human");
         this.subtype.add("Cleric");

@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.newphyrexia;
+package mage.cards.c;
 
 import java.util.UUID;
 import mage.MageInt;
@@ -34,9 +34,9 @@ import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.effects.RestrictionEffect;
 import mage.abilities.keyword.InfectAbility;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Duration;
-import mage.constants.Rarity;
 import mage.constants.Zone;
 import mage.counters.CounterType;
 import mage.game.Game;
@@ -49,9 +49,8 @@ import mage.players.Player;
  */
 public class ChainedThroatseeker extends CardImpl {
 
-    public ChainedThroatseeker(UUID ownerId) {
-        super(ownerId, 30, "Chained Throatseeker", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{5}{U}");
-        this.expansionSetCode = "NPH";
+    public ChainedThroatseeker(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{5}{U}");
         this.subtype.add("Horror");
 
         this.power = new MageInt(5);

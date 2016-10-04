@@ -25,13 +25,13 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.visions;
+package mage.cards.c;
 
 import java.util.UUID;
 import mage.abilities.effects.common.discard.DiscardCardYouChooseTargetEffect;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.target.common.TargetOpponent;
 
 /**
@@ -40,9 +40,8 @@ import mage.target.common.TargetOpponent;
  */
 public class Coercion extends CardImpl {
 
-    public Coercion(UUID ownerId) {
-        super(ownerId, 4, "Coercion", Rarity.COMMON, new CardType[]{CardType.SORCERY}, "{2}{B}");
-        this.expansionSetCode = "VIS";
+    public Coercion(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{2}{B}");
 
 
         // Target opponent reveals his or her hand. You choose a card from it. That player discards that card.

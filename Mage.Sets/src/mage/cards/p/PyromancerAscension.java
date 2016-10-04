@@ -26,7 +26,7 @@
  *  or implied, of BetaSteward_at_googlemail.com.
  */
 
-package mage.sets.zendikar;
+package mage.cards.p;
 
 import java.util.UUID;
 import mage.abilities.TriggeredAbilityImpl;
@@ -34,8 +34,8 @@ import mage.abilities.effects.common.CopyTargetSpellEffect;
 import mage.abilities.effects.common.counter.AddCountersSourceEffect;
 import mage.cards.Card;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.constants.Zone;
 import mage.counters.CounterType;
 import mage.game.Game;
@@ -50,9 +50,8 @@ import mage.target.targetpointer.FixedTarget;
  */
 public class PyromancerAscension extends CardImpl {
 
-    public PyromancerAscension(UUID ownerId) {
-        super(ownerId, 143, "Pyromancer Ascension", Rarity.RARE, new CardType[] { CardType.ENCHANTMENT }, "{1}{R}");
-        this.expansionSetCode = "ZEN";
+    public PyromancerAscension(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.ENCHANTMENT},"{1}{R}");
 
         // Whenever you cast an instant or sorcery spell that has the same name as a card in your graveyard, you may put a quest counter on Pyromancer Ascension.
         this.addAbility(new PyromancerAscensionQuestTriggeredAbility());

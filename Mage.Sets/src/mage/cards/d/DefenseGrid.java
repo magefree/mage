@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.ninthedition;
+package mage.cards.d;
 
 import mage.constants.*;
 import mage.abilities.Ability;
@@ -35,6 +35,7 @@ import mage.abilities.costs.mana.GenericManaCost;
 import mage.abilities.effects.common.cost.CostModificationEffectImpl;
 import mage.abilities.keyword.FlashbackAbility;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.game.Game;
 
 import java.util.UUID;
@@ -45,9 +46,8 @@ import java.util.UUID;
  */
 public class DefenseGrid extends CardImpl {
 
-    public DefenseGrid(UUID ownerId) {
-        super(ownerId, 293, "Defense Grid", Rarity.RARE, new CardType[]{CardType.ARTIFACT}, "{2}");
-        this.expansionSetCode = "9ED";
+    public DefenseGrid(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.ARTIFACT},"{2}");
 
         // Each spell costs {3} more to cast except during its controller's turn.
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new DefenseGridCostModificationEffect()));

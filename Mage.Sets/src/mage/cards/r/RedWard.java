@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.revisededition;
+package mage.cards.r;
 
 import java.util.UUID;
 import mage.ObjectColor;
@@ -36,10 +36,10 @@ import mage.abilities.effects.common.continuous.GainAbilityAttachedEffect;
 import mage.abilities.keyword.EnchantAbility;
 import mage.abilities.keyword.ProtectionAbility;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.AttachmentType;
 import mage.constants.CardType;
 import mage.constants.Outcome;
-import mage.constants.Rarity;
 import mage.constants.Zone;
 import mage.filter.FilterCard;
 import mage.filter.predicate.mageobject.ColorPredicate;
@@ -58,9 +58,8 @@ public class RedWard extends CardImpl {
         filter.add(new ColorPredicate(ObjectColor.RED));
     }
 
-    public RedWard(UUID ownerId) {
-        super(ownerId, 217, "Red Ward", Rarity.UNCOMMON, new CardType[]{CardType.ENCHANTMENT}, "{W}");
-        this.expansionSetCode = "3ED";
+    public RedWard(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.ENCHANTMENT},"{W}");
         this.subtype.add("Aura");
 
         // Enchant creature

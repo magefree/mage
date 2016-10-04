@@ -25,13 +25,13 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.darksteel;
+package mage.cards.m;
 
 import java.util.UUID;
 import mage.abilities.effects.common.TapAllEffect;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.filter.common.FilterArtifactPermanent;
 
 /**
@@ -41,9 +41,8 @@ import mage.filter.common.FilterArtifactPermanent;
 public class MetalFatigue extends CardImpl {
     
 
-    public MetalFatigue(UUID ownerId) {
-        super(ownerId, 8, "Metal Fatigue", Rarity.COMMON, new CardType[]{CardType.INSTANT}, "{2}{W}");
-        this.expansionSetCode = "DST";
+    public MetalFatigue(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.INSTANT},"{2}{W}");
 
         // Tap all artifacts.
         this.getSpellAbility().addEffect(new TapAllEffect(new FilterArtifactPermanent("artifacts")));

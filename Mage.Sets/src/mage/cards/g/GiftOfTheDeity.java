@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.eventide;
+package mage.cards.g;
 
 import java.util.UUID;
 import mage.ObjectColor;
@@ -42,10 +42,10 @@ import mage.abilities.effects.common.continuous.GainAbilityAttachedEffect;
 import mage.abilities.keyword.DeathtouchAbility;
 import mage.abilities.keyword.EnchantAbility;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.AttachmentType;
 import mage.constants.CardType;
 import mage.constants.Outcome;
-import mage.constants.Rarity;
 import mage.constants.Zone;
 import mage.target.TargetPermanent;
 import mage.target.common.TargetCreaturePermanent;
@@ -56,9 +56,8 @@ import mage.target.common.TargetCreaturePermanent;
  */
 public class GiftOfTheDeity extends CardImpl {
 
-    public GiftOfTheDeity(UUID ownerId) {
-        super(ownerId, 122, "Gift of the Deity", Rarity.COMMON, new CardType[]{CardType.ENCHANTMENT}, "{4}{B/G}");
-        this.expansionSetCode = "EVE";
+    public GiftOfTheDeity(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.ENCHANTMENT},"{4}{B/G}");
         this.subtype.add("Aura");
 
 

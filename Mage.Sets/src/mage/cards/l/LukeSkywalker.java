@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.starwars;
+package mage.cards.l;
 
 import java.util.UUID;
 import mage.MageInt;
@@ -40,9 +40,9 @@ import mage.abilities.keyword.HexproofAbility;
 import mage.abilities.keyword.LifelinkAbility;
 import mage.abilities.keyword.VigilanceAbility;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Duration;
-import mage.constants.Rarity;
 import mage.constants.Zone;
 import mage.counters.CounterType;
 import mage.filter.common.FilterControlledCreaturePermanent;
@@ -62,9 +62,8 @@ public class LukeSkywalker extends CardImpl {
         filter.add(new AnotherPredicate());
     }
 
-    public LukeSkywalker(UUID ownerId) {
-        super(ownerId, 205, "Luke Skywalker", Rarity.MYTHIC, new CardType[]{CardType.CREATURE}, "{G}{W}{U}");
-        this.expansionSetCode = "SWS";
+    public LukeSkywalker(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{G}{W}{U}");
         this.supertype.add("Legendary");
         this.subtype.add("Human");
         this.subtype.add("Jedi");

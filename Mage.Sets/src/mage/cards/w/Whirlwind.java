@@ -25,14 +25,14 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.commander2014;
+package mage.cards.w;
 
 import java.util.UUID;
 import mage.abilities.effects.common.DestroyAllEffect;
 import mage.abilities.keyword.FlyingAbility;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.filter.predicate.mageobject.AbilityPredicate;
 
@@ -48,9 +48,8 @@ public class Whirlwind extends CardImpl {
         filter.add(new AbilityPredicate(FlyingAbility.class));
     }
 
-    public Whirlwind(UUID ownerId) {
-        super(ownerId, 224, "Whirlwind", Rarity.RARE, new CardType[]{CardType.SORCERY}, "{2}{G}{G}");
-        this.expansionSetCode = "C14";
+    public Whirlwind(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{2}{G}{G}");
 
 
         // Destroy all creatures with flying.

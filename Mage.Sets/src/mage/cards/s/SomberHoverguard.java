@@ -25,15 +25,15 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.mirrodin;
+package mage.cards.s;
 
 import java.util.UUID;
 import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.MageInt;
 import mage.abilities.keyword.AffinityForArtifactsAbility;
 import mage.abilities.keyword.FlyingAbility;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 
 /**
  *
@@ -41,9 +41,8 @@ import mage.cards.CardImpl;
  */
 public class SomberHoverguard extends CardImpl {
 
-    public SomberHoverguard(UUID ownerId) {
-        super(ownerId, 51, "Somber Hoverguard", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{5}{U}");
-        this.expansionSetCode = "MRD";
+    public SomberHoverguard(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{5}{U}");
         this.subtype.add("Drone");
 
         this.power = new MageInt(3);

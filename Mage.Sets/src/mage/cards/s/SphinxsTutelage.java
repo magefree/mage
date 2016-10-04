@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.magicorigins;
+package mage.cards.s;
 
 import java.util.UUID;
 import mage.abilities.Ability;
@@ -36,11 +36,11 @@ import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.DrawDiscardControllerEffect;
 import mage.cards.Card;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.cards.Cards;
 import mage.cards.CardsImpl;
 import mage.constants.CardType;
 import mage.constants.Outcome;
-import mage.constants.Rarity;
 import mage.constants.Zone;
 import mage.game.Game;
 import mage.players.Player;
@@ -52,9 +52,8 @@ import mage.target.common.TargetOpponent;
  */
 public class SphinxsTutelage extends CardImpl {
 
-    public SphinxsTutelage(UUID ownerId) {
-        super(ownerId, 76, "Sphinx's Tutelage", Rarity.UNCOMMON, new CardType[]{CardType.ENCHANTMENT}, "{2}{U}");
-        this.expansionSetCode = "ORI";
+    public SphinxsTutelage(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.ENCHANTMENT},"{2}{U}");
 
         // Whenever you draw a card, target opponent puts the top two cards of his or her library into his or her graveyard. If they're both nonland cards that share a color, repeat this process.
         Ability ability = new DrawCardControllerTriggeredAbility(new SphinxsTutelageEffect(), false);

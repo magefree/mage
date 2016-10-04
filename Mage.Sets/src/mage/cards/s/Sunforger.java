@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.ravnica;
+package mage.cards.s;
 
 import java.util.UUID;
 import mage.ObjectColor;
@@ -41,10 +41,10 @@ import mage.abilities.effects.common.continuous.BoostEquippedEffect;
 import mage.abilities.keyword.EquipAbility;
 import mage.cards.Card;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Duration;
 import mage.constants.Outcome;
-import mage.constants.Rarity;
 import mage.constants.Zone;
 import mage.filter.Filter.ComparisonType;
 import mage.filter.FilterCard;
@@ -64,9 +64,8 @@ import mage.target.common.TargetCardInLibrary;
  */
 public class Sunforger extends CardImpl {
 
-    public Sunforger(UUID ownerId) {
-        super(ownerId, 272, "Sunforger", Rarity.RARE, new CardType[]{CardType.ARTIFACT}, "{3}");
-        this.expansionSetCode = "RAV";
+    public Sunforger(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.ARTIFACT},"{3}");
         this.subtype.add("Equipment");
 
         // Equipped creature gets +4/+0.

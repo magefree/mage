@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.odyssey;
+package mage.cards.c;
 
 import java.util.UUID;
 import mage.MageInt;
@@ -41,10 +41,10 @@ import mage.abilities.effects.Effect;
 import mage.abilities.effects.Effects;
 import mage.abilities.effects.common.discard.DiscardTargetEffect;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.AbilityWord;
 import mage.constants.CardType;
 import mage.constants.EffectType;
-import mage.constants.Rarity;
 import mage.constants.TimingRule;
 import mage.constants.Zone;
 import mage.filter.FilterCard;
@@ -59,9 +59,8 @@ import mage.target.common.TargetCardInYourGraveyard;
 
 public class CabalInquisitor extends CardImpl {
 
-    public CabalInquisitor(UUID ownerId) {
-        super(ownerId, 119, "Cabal Inquisitor", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{1}{B}");
-        this.expansionSetCode = "ODY";
+    public CabalInquisitor(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{1}{B}");
         this.subtype.add("Human");
         this.subtype.add("Minion");
 

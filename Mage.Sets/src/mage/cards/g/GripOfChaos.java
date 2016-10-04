@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.scourge;
+package mage.cards.g;
 
 import java.util.Iterator;
 import java.util.Set;
@@ -36,9 +36,9 @@ import mage.abilities.TriggeredAbilityImpl;
 import mage.abilities.effects.Effect;
 import mage.abilities.effects.OneShotEffect;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Outcome;
-import mage.constants.Rarity;
 import mage.constants.Zone;
 import mage.game.Game;
 import mage.game.events.GameEvent;
@@ -54,9 +54,8 @@ import mage.util.RandomUtil;
  */
 public class GripOfChaos extends CardImpl {
 
-    public GripOfChaos(UUID ownerId) {
-        super(ownerId, 98, "Grip of Chaos", Rarity.RARE, new CardType[]{CardType.ENCHANTMENT}, "{4}{R}{R}");
-        this.expansionSetCode = "SCG";
+    public GripOfChaos(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.ENCHANTMENT},"{4}{R}{R}");
 
         // Whenever a spell or ability is put onto the stack, if it has a single target, reselect its target at random.
         this.addAbility(new GripOfChaosTriggeredAbility());

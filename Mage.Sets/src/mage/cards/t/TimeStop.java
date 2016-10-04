@@ -25,13 +25,13 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.tenthedition;
+package mage.cards.t;
 
 import java.util.UUID;
 import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.abilities.effects.common.EndTurnEffect;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 
 /**
  *
@@ -39,9 +39,8 @@ import mage.cards.CardImpl;
  */
 public class TimeStop extends CardImpl {
 
-    public TimeStop(UUID ownerId) {
-        super(ownerId, 117, "Time Stop", Rarity.RARE, new CardType[]{CardType.INSTANT}, "{4}{U}{U}");
-        this.expansionSetCode = "10E";
+    public TimeStop(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.INSTANT},"{4}{U}{U}");
 
 
         // End the turn.

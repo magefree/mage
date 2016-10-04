@@ -25,14 +25,14 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.alarareborn;
+package mage.cards.d;
 
 import java.util.UUID;
 import mage.abilities.effects.Effect;
 import mage.abilities.effects.common.CounterTargetEffect;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.filter.FilterSpell;
 import mage.target.TargetSpell;
 
@@ -42,9 +42,8 @@ import mage.target.TargetSpell;
  */
 public class DoubleNegative extends CardImpl {
 
-    public DoubleNegative(UUID ownerId) {
-        super(ownerId, 87, "Double Negative", Rarity.UNCOMMON, new CardType[]{CardType.INSTANT}, "{U}{U}{R}");
-        this.expansionSetCode = "ARB";
+    public DoubleNegative(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.INSTANT},"{U}{U}{R}");
 
 
 

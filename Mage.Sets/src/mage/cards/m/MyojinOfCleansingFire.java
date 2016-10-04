@@ -25,12 +25,11 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.championsofkamigawa;
+package mage.cards.m;
 
 import java.util.UUID;
 
 import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.MageInt;
 import mage.abilities.common.EntersBattlefieldAbility;
 import mage.abilities.common.SimpleActivatedAbility;
@@ -45,6 +44,7 @@ import mage.abilities.effects.common.continuous.GainAbilitySourceEffect;
 import mage.abilities.effects.common.counter.AddCountersSourceEffect;
 import mage.abilities.keyword.IndestructibleAbility;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.Duration;
 import mage.constants.Zone;
 import mage.counters.CounterType;
@@ -62,9 +62,8 @@ public class MyojinOfCleansingFire extends CardImpl {
         filter.add(new AnotherPredicate());
     }
 
-    public MyojinOfCleansingFire(UUID ownerId) {
-        super(ownerId, 35, "Myojin of Cleansing Fire", Rarity.RARE, new CardType[]{CardType.CREATURE}, "{5}{W}{W}{W}");
-        this.expansionSetCode = "CHK";
+    public MyojinOfCleansingFire(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{5}{W}{W}{W}");
         this.supertype.add("Legendary");
         this.subtype.add("Spirit");
 

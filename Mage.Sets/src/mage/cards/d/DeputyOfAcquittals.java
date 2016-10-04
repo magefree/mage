@@ -25,11 +25,10 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.dragonsmaze;
+package mage.cards.d;
 
 import java.util.UUID;
 import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.constants.TargetController;
 import mage.MageInt;
 import mage.abilities.Ability;
@@ -37,6 +36,7 @@ import mage.abilities.common.EntersBattlefieldTriggeredAbility;
 import mage.abilities.effects.common.ReturnToHandTargetEffect;
 import mage.abilities.keyword.FlashAbility;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.filter.predicate.permanent.AnotherPredicate;
 import mage.filter.predicate.permanent.ControllerPredicate;
@@ -55,9 +55,8 @@ public class DeputyOfAcquittals extends CardImpl {
         filter.add(new ControllerPredicate(TargetController.YOU));
     }
 
-    public DeputyOfAcquittals(UUID ownerId) {
-        super(ownerId, 65, "Deputy of Acquittals", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{W}{U}");
-        this.expansionSetCode = "DGM";
+    public DeputyOfAcquittals(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{W}{U}");
         this.subtype.add("Human");
         this.subtype.add("Wizard");
 

@@ -25,15 +25,15 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.invasion;
+package mage.cards.l;
 
 import java.util.UUID;
 import mage.MageInt;
 import mage.ObjectColor;
 import mage.abilities.keyword.ProtectionAbility;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.filter.FilterCard;
 import mage.filter.predicate.mageobject.ColorPredicate;
 
@@ -49,9 +49,8 @@ public class LlanowarKnight extends CardImpl {
       protectionFilter.add(new ColorPredicate(ObjectColor.BLACK));
     }
     
-    public LlanowarKnight(UUID ownerId) {
-        super(ownerId, 254, "Llanowar Knight", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{G}{W}");
-        this.expansionSetCode = "INV";
+    public LlanowarKnight(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{G}{W}");
         this.subtype.add("Elf");
         this.subtype.add("Knight");
         this.power = new MageInt(2);

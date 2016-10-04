@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.oathofthegatewatch;
+package mage.cards.t;
 
 import java.util.UUID;
 import mage.MageInt;
@@ -36,8 +36,8 @@ import mage.abilities.effects.common.DamageTargetEffect;
 import mage.abilities.keyword.FlyingAbility;
 import mage.abilities.keyword.SurgeAbility;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.target.common.TargetCreatureOrPlayer;
 
 /**
@@ -46,9 +46,8 @@ import mage.target.common.TargetCreatureOrPlayer;
  */
 public class TyrantOfValakut extends CardImpl {
 
-    public TyrantOfValakut(UUID ownerId) {
-        super(ownerId, 119, "Tyrant of Valakut", Rarity.RARE, new CardType[]{CardType.CREATURE}, "{5}{R}{R}");
-        this.expansionSetCode = "OGW";
+    public TyrantOfValakut(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{5}{R}{R}");
         this.subtype.add("Dragon");
         this.power = new MageInt(5);
         this.toughness = new MageInt(4);

@@ -25,14 +25,14 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.urzassaga;
+package mage.cards.t;
 
 import java.util.UUID;
 import mage.abilities.common.EntersBattlefieldAllTriggeredAbility;
 import mage.abilities.effects.common.SacrificeEffect;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.constants.Zone;
 import mage.filter.common.FilterControlledPermanent;
 import mage.filter.common.FilterCreaturePermanent;
@@ -53,9 +53,8 @@ public class TaintedAether extends CardImpl {
         filter.add(Predicates.or(new CardTypePredicate(CardType.CREATURE), new CardTypePredicate(CardType.LAND)));
     }
 
-    public TaintedAether(UUID ownerId) {
-        super(ownerId, 161, "Tainted Aether", Rarity.RARE, new CardType[]{CardType.ENCHANTMENT}, "{2}{B}{B}");
-        this.expansionSetCode = "USG";
+    public TaintedAether(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.ENCHANTMENT},"{2}{B}{B}");
 
         // Whenever a creature enters the battlefield, its controller sacrifices a creature or land.
         this.addAbility(new EntersBattlefieldAllTriggeredAbility(Zone.BATTLEFIELD, new SacrificeEffect(filter, 1, ""),

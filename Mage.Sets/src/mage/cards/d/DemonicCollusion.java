@@ -25,15 +25,15 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.timespiral;
+package mage.cards.d;
 
 import java.util.UUID;
 import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.abilities.costs.common.DiscardTargetCost;
 import mage.abilities.effects.common.search.SearchLibraryPutInHandEffect;
 import mage.abilities.keyword.BuybackAbility;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.filter.FilterCard;
 import mage.target.common.TargetCardInHand;
 import mage.target.common.TargetCardInLibrary;
@@ -44,9 +44,8 @@ import mage.target.common.TargetCardInLibrary;
  */
 public class DemonicCollusion extends CardImpl {
 
-    public DemonicCollusion(UUID ownerId) {
-        super(ownerId, 103, "Demonic Collusion", Rarity.RARE, new CardType[]{CardType.SORCERY}, "{3}{B}{B}");
-        this.expansionSetCode = "TSP";
+    public DemonicCollusion(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{3}{B}{B}");
 
         // Buyback—Discard two cards. (You may discard two cards in addition to any other costs as you cast this spell. If you do, put this card into your hand as it resolves.)
         this.addAbility(new BuybackAbility(new DiscardTargetCost(new TargetCardInHand(2, new FilterCard("two cards")))));

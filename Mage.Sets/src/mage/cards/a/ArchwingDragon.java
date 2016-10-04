@@ -25,17 +25,17 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.avacynrestored;
+package mage.cards.a;
 
 import java.util.UUID;
 import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.MageInt;
 import mage.abilities.common.OnEventTriggeredAbility;
 import mage.abilities.effects.common.ReturnToHandSourceEffect;
 import mage.abilities.keyword.FlyingAbility;
 import mage.abilities.keyword.HasteAbility;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.game.events.GameEvent;
 
 /**
@@ -44,9 +44,8 @@ import mage.game.events.GameEvent;
  */
 public class ArchwingDragon extends CardImpl {
 
-    public ArchwingDragon(UUID ownerId) {
-        super(ownerId, 126, "Archwing Dragon", Rarity.RARE, new CardType[]{CardType.CREATURE}, "{2}{R}{R}");
-        this.expansionSetCode = "AVR";
+    public ArchwingDragon(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{2}{R}{R}");
         this.subtype.add("Dragon");
 
         this.power = new MageInt(4);

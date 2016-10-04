@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.urzassaga;
+package mage.cards.m;
 
 import java.util.UUID;
 import mage.MageInt;
@@ -38,6 +38,7 @@ import mage.abilities.effects.common.continuous.GainAbilitySourceEffect;
 import mage.abilities.keyword.FlyingAbility;
 import mage.abilities.keyword.ShroudAbility;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.*;
 
 /**
@@ -46,9 +47,8 @@ import mage.constants.*;
  */
 public class Morphling extends CardImpl {
 
-    public Morphling(UUID ownerId) {
-        super(ownerId, 85, "Morphling", Rarity.RARE, new CardType[]{CardType.CREATURE}, "{3}{U}{U}");
-        this.expansionSetCode = "USG";
+    public Morphling(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{3}{U}{U}");
         this.subtype.add("Shapeshifter");
 
         this.power = new MageInt(3);

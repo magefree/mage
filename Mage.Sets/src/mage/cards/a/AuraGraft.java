@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.tenthedition;
+package mage.cards.a;
 
 import java.util.UUID;
 import mage.abilities.Ability;
@@ -33,8 +33,8 @@ import mage.abilities.effects.Effect;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.continuous.GainControlTargetEffect;
 import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.Duration;
 import mage.constants.Outcome;
 import mage.filter.Filter;
@@ -55,9 +55,8 @@ import mage.util.TargetAddress;
  */
 public class AuraGraft extends CardImpl {
 
-    public AuraGraft(UUID ownerId) {
-        super(ownerId, 67, "Aura Graft", Rarity.UNCOMMON, new CardType[]{CardType.INSTANT}, "{1}{U}");
-        this.expansionSetCode = "10E";
+    public AuraGraft(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.INSTANT},"{1}{U}");
 
         // Gain control of target Aura that's attached to a permanent. Attach it to another permanent it can enchant.
         FilterPermanent filter = new FilterPermanent("Aura that's attached to a permanent");

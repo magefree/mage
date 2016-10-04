@@ -25,18 +25,18 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.eldritchmoon;
+package mage.cards.d;
 
 import java.util.UUID;
 import mage.abilities.Ability;
 import mage.abilities.effects.OneShotEffect;
 import mage.cards.Card;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.cards.Cards;
 import mage.cards.CardsImpl;
 import mage.constants.CardType;
 import mage.constants.Outcome;
-import mage.constants.Rarity;
 import mage.constants.Zone;
 import mage.filter.FilterCard;
 import mage.filter.predicate.mageobject.CardTypePredicate;
@@ -50,9 +50,8 @@ import mage.target.TargetCard;
  */
 public class DeployTheGatewatch extends CardImpl {
 
-    public DeployTheGatewatch(UUID ownerId) {
-        super(ownerId, 20, "Deploy the Gatewatch", Rarity.MYTHIC, new CardType[]{CardType.SORCERY}, "{4}{W}{W}");
-        this.expansionSetCode = "EMN";
+    public DeployTheGatewatch(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{4}{W}{W}");
 
         // Look at the top seven cards of your library. Put up to two planeswalker cards from among them onto the battlefield.
         // Put the rest on the bottom of your library in a random order.

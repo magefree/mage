@@ -25,10 +25,9 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.innistrad;
+package mage.cards.g;
 
 import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.MageInt;
 import mage.abilities.TriggeredAbility;
 import mage.abilities.common.BeginningOfUpkeepTriggeredAbility;
@@ -36,7 +35,9 @@ import mage.abilities.condition.common.NoSpellsWereCastLastTurnCondition;
 import mage.abilities.decorator.ConditionalTriggeredAbility;
 import mage.abilities.effects.common.TransformSourceEffect;
 import mage.abilities.keyword.TransformAbility;
+import mage.cards.k.KrallenhordeWantons;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.TargetController;
 
 import java.util.UUID;
@@ -46,14 +47,13 @@ import java.util.UUID;
  */
 public class GrizzledOutcasts extends CardImpl {
 
-    public GrizzledOutcasts(UUID ownerId) {
-        super(ownerId, 185, "Grizzled Outcasts", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{4}{G}");
-        this.expansionSetCode = "ISD";
+    public GrizzledOutcasts(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{4}{G}");
         this.subtype.add("Human");
         this.subtype.add("Werewolf");
 
         this.transformable = true;
-        this.secondSideCard = new KrallenhordeWantons(ownerId);
+        this.secondSideCardClazz = KrallenhordeWantons.class;
 
         this.power = new MageInt(4);
         this.toughness = new MageInt(4);

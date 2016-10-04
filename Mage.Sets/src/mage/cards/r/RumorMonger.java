@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.starwars;
+package mage.cards.r;
 
 import java.util.UUID;
 import mage.MageInt;
@@ -35,8 +35,8 @@ import mage.abilities.effects.common.counter.AddCountersTargetEffect;
 import mage.abilities.effects.common.counter.MoveCountersTargetsEffect;
 import mage.abilities.keyword.BountyAbility;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.counters.CounterType;
 import mage.target.common.TargetOpponentsCreaturePermanent;
 
@@ -46,9 +46,8 @@ import mage.target.common.TargetOpponentsCreaturePermanent;
  */
 public class RumorMonger extends CardImpl {
 
-    public RumorMonger(UUID ownerId) {
-        super(ownerId, 213, "Rumor Monger", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{1}{B}{R}{G}");
-        this.expansionSetCode = "SWS";
+    public RumorMonger(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{1}{B}{R}{G}");
         this.subtype.add("Arcona");
         this.subtype.add("Hunter");
         this.power = new MageInt(3);

@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.dragonsoftarkir;
+package mage.cards.r;
 
 import java.util.UUID;
 import mage.MageObject;
@@ -34,12 +34,12 @@ import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.PreventAllDamageByAllPermanentsEffect;
 import mage.cards.Card;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.cards.Cards;
 import mage.cards.CardsImpl;
 import mage.constants.CardType;
 import mage.constants.Duration;
 import mage.constants.Outcome;
-import mage.constants.Rarity;
 import mage.filter.common.FilterAttackingOrBlockingCreature;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.filter.predicate.other.FaceDownPredicate;
@@ -54,9 +54,8 @@ import mage.target.common.TargetCreaturePermanent;
  */
 public class RevealingWind extends CardImpl {
 
-    public RevealingWind(UUID ownerId) {
-        super(ownerId, 197, "Revealing Wind", Rarity.COMMON, new CardType[]{CardType.INSTANT}, "{2}{G}");
-        this.expansionSetCode = "DTK";
+    public RevealingWind(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.INSTANT},"{2}{G}");
 
         // Prevent all combat damage that would be dealt this turn. You may look at each face-down creature that's attacking or blocking.
         this.getSpellAbility().addEffect(new PreventAllDamageByAllPermanentsEffect(Duration.EndOfTurn, true));

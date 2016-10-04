@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.scarsofmirrodin;
+package mage.cards.c;
 
 import java.util.UUID;
 import mage.MageInt;
@@ -38,9 +38,9 @@ import mage.abilities.effects.common.EntersBattlefieldWithXCountersEffect;
 import mage.abilities.effects.common.continuous.BecomesCreatureSourceEffect;
 import mage.abilities.effects.common.continuous.SetPowerToughnessSourceEffect;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Duration;
-import mage.constants.Rarity;
 import mage.constants.Zone;
 import mage.counters.CounterType;
 import mage.game.permanent.token.Token;
@@ -50,9 +50,8 @@ import mage.game.permanent.token.Token;
  */
 public class ChimericMass extends CardImpl {
 
-    public ChimericMass(UUID ownerId) {
-        super(ownerId, 141, "Chimeric Mass", Rarity.RARE, new CardType[]{CardType.ARTIFACT}, "{X}");
-        this.expansionSetCode = "SOM";
+    public ChimericMass(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.ARTIFACT},"{X}");
 
         // Chimeric Mass enters the battlefield with X charge counters on it.
         this.addAbility(new EntersBattlefieldAbility(new EntersBattlefieldWithXCountersEffect(CounterType.CHARGE.createInstance())));

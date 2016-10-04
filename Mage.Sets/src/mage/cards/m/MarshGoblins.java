@@ -25,14 +25,14 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.thedark;
+package mage.cards.m;
 
 import java.util.UUID;
 import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.MageInt;
 import mage.abilities.keyword.SwampwalkAbility;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 
 /**
  *
@@ -40,9 +40,8 @@ import mage.cards.CardImpl;
  */
 public class MarshGoblins extends CardImpl {
 
-    public MarshGoblins(UUID ownerId) {
-        super(ownerId, 118, "Marsh Goblins", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{B}{R}");
-        this.expansionSetCode = "DRK";
+    public MarshGoblins(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{B}{R}");
         this.subtype.add("Goblin");
 
         this.power = new MageInt(1);

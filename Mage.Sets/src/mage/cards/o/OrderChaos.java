@@ -26,13 +26,13 @@
  *  or implied, of BetaSteward_at_googlemail.com.
  */
 
-package mage.sets.apocalypse;
+package mage.cards.o;
 
 import java.util.UUID;
 import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.abilities.effects.common.ExileTargetEffect;
 import mage.abilities.effects.common.combat.CantBlockAllEffect;
+import mage.cards.CardSetInfo;
 import mage.cards.SplitCard;
 import mage.constants.Duration;
 import mage.filter.common.FilterCreaturePermanent;
@@ -47,9 +47,8 @@ import mage.target.common.TargetAttackingCreature;
 
 public class OrderChaos extends SplitCard {
 
-    public OrderChaos(UUID ownerId) {
-        super(ownerId, 132, "Order", "Chaos", Rarity.UNCOMMON, new CardType[]{CardType.INSTANT}, "{3}{W}", "{2}{R}", false);
-        this.expansionSetCode = "APC";
+    public OrderChaos(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.INSTANT},"{3}{W}","{2}{R}",false);
 
         // Order
         // Exile target attacking creature.

@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.conspiracy;
+package mage.cards.m;
 
 import java.util.UUID;
 import mage.MageInt;
@@ -36,10 +36,10 @@ import mage.abilities.costs.common.TapSourceCost;
 import mage.abilities.decorator.ConditionalActivatedAbility;
 import mage.abilities.effects.OneShotEffect;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Outcome;
 import mage.constants.PhaseStep;
-import mage.constants.Rarity;
 import mage.constants.Zone;
 import mage.game.Game;
 import mage.players.Player;
@@ -51,9 +51,8 @@ import mage.target.common.TargetOpponent;
  */
 public class MagusOfTheMirror extends CardImpl {
 
-    public MagusOfTheMirror(UUID ownerId) {
-        super(ownerId, 117, "Magus of the Mirror", Rarity.RARE, new CardType[]{CardType.CREATURE}, "{4}{B}{B}");
-        this.expansionSetCode = "CNS";
+    public MagusOfTheMirror(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{4}{B}{B}");
         this.subtype.add("Human");
         this.subtype.add("Wizard");
         this.power = new MageInt(4);

@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.guildpact;
+package mage.cards.t;
 
 import java.util.UUID;
 import mage.MageInt;
@@ -37,8 +37,8 @@ import mage.abilities.costs.common.SacrificeTargetCost;
 import mage.abilities.effects.common.CreateTokenEffect;
 import mage.abilities.effects.common.ExileTargetEffect;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.constants.TargetController;
 import mage.constants.Zone;
 import mage.filter.common.FilterControlledCreaturePermanent;
@@ -65,9 +65,8 @@ public class TeysaOrzhovScion extends CardImpl {
         filterBlack.add(new ControllerPredicate(TargetController.YOU));
     }
 
-    public TeysaOrzhovScion(UUID ownerId) {
-        super(ownerId, 134, "Teysa, Orzhov Scion", Rarity.RARE, new CardType[]{CardType.CREATURE}, "{1}{W}{B}");
-        this.expansionSetCode = "GPT";
+    public TeysaOrzhovScion(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{1}{W}{B}");
         this.supertype.add("Legendary");
         this.subtype.add("Human");
         this.subtype.add("Advisor");

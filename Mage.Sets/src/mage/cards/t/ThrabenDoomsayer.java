@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.darkascension;
+package mage.cards.t;
 
 import java.util.UUID;
 import mage.MageInt;
@@ -37,9 +37,9 @@ import mage.abilities.decorator.ConditionalContinuousEffect;
 import mage.abilities.effects.common.CreateTokenEffect;
 import mage.abilities.effects.common.continuous.BoostControlledEffect;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Duration;
-import mage.constants.Rarity;
 import mage.constants.Zone;
 import mage.game.permanent.token.HumanToken;
 
@@ -49,9 +49,8 @@ import mage.game.permanent.token.HumanToken;
  */
 public class ThrabenDoomsayer extends CardImpl {
 
-    public ThrabenDoomsayer(UUID ownerId) {
-        super(ownerId, 25, "Thraben Doomsayer", Rarity.RARE, new CardType[]{CardType.CREATURE}, "{1}{W}{W}");
-        this.expansionSetCode = "DKA";
+    public ThrabenDoomsayer(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{1}{W}{W}");
         this.subtype.add("Human");
         this.subtype.add("Cleric");
 

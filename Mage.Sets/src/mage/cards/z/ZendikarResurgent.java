@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.oathofthegatewatch;
+package mage.cards.z;
 
 import java.util.UUID;
 import mage.abilities.common.SpellCastControllerTriggeredAbility;
@@ -33,8 +33,8 @@ import mage.abilities.common.TapForManaAllTriggeredManaAbility;
 import mage.abilities.effects.common.AddManaOfAnyTypeProducedEffect;
 import mage.abilities.effects.common.DrawCardSourceControllerEffect;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.constants.SetTargetPointer;
 import mage.filter.FilterSpell;
 import mage.filter.common.FilterControlledLandPermanent;
@@ -52,9 +52,8 @@ public class ZendikarResurgent extends CardImpl {
         FILTER.add(new CardTypePredicate(CardType.CREATURE));
     }
 
-    public ZendikarResurgent(UUID ownerId) {
-        super(ownerId, 147, "Zendikar Resurgent", Rarity.RARE, new CardType[]{CardType.ENCHANTMENT}, "{5}{G}{G}");
-        this.expansionSetCode = "OGW";
+    public ZendikarResurgent(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.ENCHANTMENT},"{5}{G}{G}");
 
         // Whenever you tap a land for mana, add one mana to your mana pool of any type that land produced. (<i>The types of mana are white, blue, black, red, green, and colorless.)</i>
         AddManaOfAnyTypeProducedEffect effect = new AddManaOfAnyTypeProducedEffect();

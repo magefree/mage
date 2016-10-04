@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.dissension;
+package mage.cards.g;
 
 import java.util.UUID;
 import mage.MageInt;
@@ -39,9 +39,9 @@ import mage.abilities.effects.common.RegenerateSourceEffect;
 import mage.abilities.effects.common.continuous.BoostSourceEffect;
 import mage.abilities.effects.common.continuous.GainAbilitySourceEffect;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Duration;
-import mage.constants.Rarity;
 import mage.constants.Zone;
 
 /**
@@ -50,9 +50,8 @@ import mage.constants.Zone;
  */
 public class GobhobblerRats extends CardImpl {
 
-    public GobhobblerRats(UUID ownerId) {
-        super(ownerId, 111, "Gobhobbler Rats", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{B}{R}");
-        this.expansionSetCode = "DIS";
+    public GobhobblerRats(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{B}{R}");
         this.subtype.add("Rat");
 
         this.power = new MageInt(2);

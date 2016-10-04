@@ -25,14 +25,14 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.ravnica;
+package mage.cards.f;
 
 import java.util.UUID;
 
 import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.abilities.effects.common.search.SearchLibraryPutInPlayEffect;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.Outcome;
 import mage.filter.FilterCard;
 import mage.filter.predicate.Predicates;
@@ -55,9 +55,8 @@ public class Farseek extends CardImpl {
                 new SubtypePredicate("Mountain")));
     }
 
-    public Farseek(UUID ownerId) {
-        super(ownerId, 163, "Farseek", Rarity.COMMON, new CardType[]{CardType.SORCERY}, "{1}{G}");
-        this.expansionSetCode = "RAV";
+    public Farseek(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{1}{G}");
 
 
         // Search your library for a Plains, Island, Swamp, or Mountain card and put it onto the battlefield tapped. Then shuffle your library.

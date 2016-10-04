@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.odyssey;
+package mage.cards.a;
 
 import java.util.UUID;
 import mage.MageInt;
@@ -37,8 +37,8 @@ import mage.abilities.effects.common.TapAllEffect;
 import mage.abilities.effects.common.TapTargetEffect;
 import mage.abilities.keyword.FlyingAbility;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.constants.Zone;
 import mage.filter.common.FilterControlledCreaturePermanent;
 import mage.filter.common.FilterCreaturePermanent;
@@ -62,9 +62,8 @@ static {
     filter2.add(Predicates.not(new AbilityPredicate(FlyingAbility.class)));
 }
 
-    public AboshanCephalidEmperor(UUID ownerId) {
-        super(ownerId, 58, "Aboshan, Cephalid Emperor", Rarity.RARE, new CardType[]{CardType.CREATURE}, "{4}{U}{U}");
-        this.expansionSetCode = "ODY";
+    public AboshanCephalidEmperor(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{4}{U}{U}");
         this.supertype.add("Legendary");
         this.subtype.add("Cephalid");
 

@@ -25,17 +25,17 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.darkascension;
+package mage.cards.r;
 
 import java.util.UUID;
 import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.constants.TargetController;
 import mage.MageInt;
 import mage.abilities.common.DiesCreatureTriggeredAbility;
 import mage.abilities.effects.common.CreateTokenEffect;
 import mage.abilities.keyword.FlyingAbility;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.filter.predicate.Predicates;
 import mage.filter.predicate.mageobject.SubtypePredicate;
@@ -56,9 +56,8 @@ public class RequiemAngel extends CardImpl {
         filter.add(new ControllerPredicate(TargetController.YOU));
     }
 
-    public RequiemAngel(UUID ownerId) {
-        super(ownerId, 18, "Requiem Angel", Rarity.RARE, new CardType[]{CardType.CREATURE}, "{5}{W}");
-        this.expansionSetCode = "DKA";
+    public RequiemAngel(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{5}{W}");
         this.subtype.add("Angel");
 
         this.power = new MageInt(5);

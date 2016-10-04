@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.eldritchmoon;
+package mage.cards.g;
 
 import java.util.UUID;
 import mage.abilities.Ability;
@@ -33,9 +33,9 @@ import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.PutTopCardOfLibraryIntoGraveControllerEffect;
 import mage.cards.Card;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Outcome;
-import mage.constants.Rarity;
 import mage.constants.Zone;
 import mage.filter.FilterCard;
 import mage.filter.predicate.Predicates;
@@ -50,9 +50,8 @@ import mage.target.common.TargetCardInYourGraveyard;
  */
 public class GrappleWithThePast extends CardImpl {
 
-    public GrappleWithThePast(UUID ownerId) {
-        super(ownerId, 160, "Grapple with the Past", Rarity.COMMON, new CardType[]{CardType.INSTANT}, "{1}{G}");
-        this.expansionSetCode = "EMN";
+    public GrappleWithThePast(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.INSTANT},"{1}{G}");
 
         // Put the top three cards of your library into your graveyard, then you may return a creature or land card from your graveyard to your hand.
         getSpellAbility().addEffect(new PutTopCardOfLibraryIntoGraveControllerEffect(3));

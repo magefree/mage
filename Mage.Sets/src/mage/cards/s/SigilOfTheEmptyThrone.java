@@ -26,14 +26,14 @@
  *  or implied, of BetaSteward_at_googlemail.com.
  */
 
-package mage.sets.conflux;
+package mage.cards.s;
 
 import java.util.UUID;
 import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.abilities.common.SpellCastControllerTriggeredAbility;
 import mage.abilities.effects.common.CreateTokenEffect;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.filter.FilterSpell;
 import mage.filter.predicate.mageobject.CardTypePredicate;
 import mage.game.permanent.token.AngelToken;
@@ -50,9 +50,8 @@ public class SigilOfTheEmptyThrone extends CardImpl {
         filter.add(new CardTypePredicate(CardType.ENCHANTMENT));
     }
 
-    public SigilOfTheEmptyThrone(UUID ownerId) {
-        super(ownerId, 18, "Sigil of the Empty Throne", Rarity.RARE, new CardType[]{CardType.ENCHANTMENT}, "{3}{W}{W}");
-        this.expansionSetCode = "CON";
+    public SigilOfTheEmptyThrone(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.ENCHANTMENT},"{3}{W}{W}");
 
 
         this.addAbility(new SpellCastControllerTriggeredAbility(new CreateTokenEffect(new AngelToken()), filter, false));

@@ -25,15 +25,15 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.darksteel;
+package mage.cards.g;
 
 import java.util.UUID;
 import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.abilities.effects.common.DrawCardSourceControllerEffect;
 import mage.abilities.common.DiscardsACardOpponentTriggeredAbility;
 import mage.abilities.effects.Effect;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 
 /**
  *
@@ -41,9 +41,8 @@ import mage.cards.CardImpl;
  */
 public class GethsGrimoire extends CardImpl {
 
-    public GethsGrimoire(UUID ownerId) {
-        super(ownerId, 123, "Geth's Grimoire", Rarity.UNCOMMON, new CardType[]{CardType.ARTIFACT}, "{4}");
-        this.expansionSetCode = "DST";
+    public GethsGrimoire(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.ARTIFACT},"{4}");
 
         Effect drawTrigger = new DrawCardSourceControllerEffect(1);
         drawTrigger.setText("You may draw a card.");

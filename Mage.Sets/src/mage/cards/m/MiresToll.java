@@ -25,14 +25,14 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.worldwake;
+package mage.cards.m;
 
 import java.util.UUID;
 import mage.abilities.dynamicvalue.common.PermanentsOnBattlefieldCount;
 import mage.abilities.effects.common.discard.DiscardCardYouChooseTargetEffect;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.constants.TargetController;
 import mage.filter.common.FilterLandPermanent;
 import mage.filter.predicate.mageobject.SubtypePredicate;
@@ -52,9 +52,8 @@ public class MiresToll extends CardImpl {
         filter.add(new ControllerPredicate(TargetController.YOU));
     }
     
-    public MiresToll(UUID ownerId) {
-        super(ownerId, 60, "Mire's Toll", Rarity.COMMON, new CardType[]{CardType.SORCERY}, "{B}");
-        this.expansionSetCode = "WWK";
+    public MiresToll(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{B}");
 
 
         // Target player reveals a number of cards from his or her hand equal to the number of Swamps you control. You choose one of them. That player discards that card.

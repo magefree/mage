@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.darkascension;
+package mage.cards.h;
 
 import java.util.UUID;
 import mage.MageInt;
@@ -39,12 +39,12 @@ import mage.abilities.effects.ContinuousEffectImpl;
 import mage.abilities.effects.OneShotEffect;
 import mage.cards.Card;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.AsThoughEffectType;
 import mage.constants.CardType;
 import mage.constants.Duration;
 import mage.constants.Layer;
 import mage.constants.Outcome;
-import mage.constants.Rarity;
 import mage.constants.SubLayer;
 import mage.constants.Zone;
 import mage.filter.FilterCard;
@@ -63,9 +63,8 @@ public class HavengulLich extends CardImpl {
 
     private static final FilterCard filter = new FilterCreatureCard("creature card in a graveyard");
 
-    public HavengulLich(UUID ownerId) {
-        super(ownerId, 139, "Havengul Lich", Rarity.MYTHIC, new CardType[]{CardType.CREATURE}, "{3}{U}{B}");
-        this.expansionSetCode = "DKA";
+    public HavengulLich(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{3}{U}{B}");
         this.subtype.add("Zombie");
         this.subtype.add("Wizard");
 

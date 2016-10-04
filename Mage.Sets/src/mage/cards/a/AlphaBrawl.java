@@ -25,13 +25,13 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.darkascension;
+package mage.cards.a;
 
 import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.abilities.Ability;
 import mage.abilities.effects.OneShotEffect;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.Outcome;
 import mage.constants.TargetController;
 import mage.filter.common.FilterCreaturePermanent;
@@ -55,9 +55,8 @@ public class AlphaBrawl extends CardImpl {
         filter.add(new ControllerPredicate(TargetController.OPPONENT));
     }
 
-    public AlphaBrawl(UUID ownerId) {
-        super(ownerId, 82, "Alpha Brawl", Rarity.RARE, new CardType[]{CardType.SORCERY}, "{6}{R}{R}");
-        this.expansionSetCode = "DKA";
+    public AlphaBrawl(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{6}{R}{R}");
 
 
         // Target creature an opponent controls deals damage equal to its power to each other creature that player controls, then each of those creatures deals damage equal to its power to that creature.

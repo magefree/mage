@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.sorinvstibalt;
+package mage.cards.t;
 
 import java.util.UUID;
 import mage.abilities.Ability;
@@ -39,11 +39,11 @@ import mage.abilities.effects.common.continuous.BoostAllEffect;
 import mage.abilities.effects.common.continuous.GainAbilityAllEffect;
 import mage.abilities.keyword.HasteAbility;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.ColoredManaSymbol;
 import mage.constants.Duration;
 import mage.constants.Outcome;
-import mage.constants.Rarity;
 import mage.filter.common.FilterCreatureCard;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.filter.predicate.permanent.ControllerIdPredicate;
@@ -60,9 +60,8 @@ import mage.watchers.common.ManaSpentToCastWatcher;
  */
 public class TorrentOfSouls extends CardImpl {
 
-    public TorrentOfSouls(UUID ownerId) {
-        super(ownerId, 71, "Torrent of Souls", Rarity.UNCOMMON, new CardType[]{CardType.SORCERY}, "{4}{B/R}");
-        this.expansionSetCode = "DDK";
+    public TorrentOfSouls(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{4}{B/R}");
 
         // Return up to one target creature card from your graveyard to the battlefield if {B} was spent to cast Torrent of Souls. Creatures target player controls get +2/+0 and gain haste until end of turn if {R} was spent to cast Torrent of Souls.
         Target targetCreature = new TargetCardInYourGraveyard(0, 1, new FilterCreatureCard("target creature card in your graveyard"));

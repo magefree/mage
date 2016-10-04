@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.timespiral;
+package mage.cards.t;
 
 import java.util.UUID;
 import mage.abilities.Ability;
@@ -33,10 +33,10 @@ import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.RestrictionEffect;
 import mage.abilities.keyword.SplitSecondAbility;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Duration;
 import mage.constants.Outcome;
-import mage.constants.Rarity;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.game.stack.StackObject;
@@ -49,9 +49,8 @@ import mage.target.targetpointer.FixedTarget;
  */
 public class Trickbind extends CardImpl {
 
-    public Trickbind(UUID ownerId) {
-        super(ownerId, 88, "Trickbind", Rarity.RARE, new CardType[]{CardType.INSTANT}, "{1}{U}");
-        this.expansionSetCode = "TSP";
+    public Trickbind(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.INSTANT},"{1}{U}");
 
 
         // Split second

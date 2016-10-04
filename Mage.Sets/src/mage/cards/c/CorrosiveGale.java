@@ -25,15 +25,15 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.newphyrexia;
+package mage.cards.c;
 
 import java.util.UUID;
 import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.abilities.dynamicvalue.common.ManacostVariableValue;
 import mage.abilities.effects.common.DamageAllEffect;
 import mage.abilities.keyword.FlyingAbility;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.filter.predicate.mageobject.AbilityPredicate;
 
@@ -49,9 +49,8 @@ public class CorrosiveGale extends CardImpl {
         filter.add(new AbilityPredicate(FlyingAbility.class));
     }
 
-    public CorrosiveGale(UUID ownerId) {
-        super(ownerId, 107, "Corrosive Gale", Rarity.UNCOMMON, new CardType[]{CardType.SORCERY}, "{X}{GP}");
-        this.expansionSetCode = "NPH";
+    public CorrosiveGale(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{X}{GP}");
 
 
         this.getSpellAbility().addEffect(new DamageAllEffect(new ManacostVariableValue(), filter));

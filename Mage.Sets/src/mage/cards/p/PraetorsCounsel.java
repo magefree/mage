@@ -25,13 +25,12 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.mirrodinbesieged;
+package mage.cards.p;
 
 import java.util.UUID;
 import mage.constants.CardType;
 import mage.constants.Duration;
 import mage.constants.Outcome;
-import mage.constants.Rarity;
 import mage.abilities.Ability;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.ExileSpellEffect;
@@ -39,6 +38,7 @@ import mage.abilities.effects.common.continuous.MaximumHandSizeControllerEffect;
 import mage.abilities.effects.common.continuous.MaximumHandSizeControllerEffect.HandSizeModification;
 import mage.cards.Card;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.game.Game;
 import mage.players.Player;
 
@@ -48,9 +48,8 @@ import mage.players.Player;
  */
 public class PraetorsCounsel extends CardImpl {
 
-    public PraetorsCounsel(UUID ownerId) {
-        super(ownerId, 88, "Praetor's Counsel", Rarity.MYTHIC, new CardType[]{CardType.SORCERY}, "{5}{G}{G}{G}");
-        this.expansionSetCode = "MBS";
+    public PraetorsCounsel(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{5}{G}{G}{G}");
 
         this.getSpellAbility().addEffect(new PraetorsCounselEffect());
         this.getSpellAbility().addEffect(ExileSpellEffect.getInstance());

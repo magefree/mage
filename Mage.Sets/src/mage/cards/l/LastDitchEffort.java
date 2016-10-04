@@ -25,15 +25,15 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.urzaslegacy;
+package mage.cards.l;
 
 import java.util.UUID;
 import mage.abilities.Ability;
 import mage.abilities.effects.OneShotEffect;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Outcome;
-import mage.constants.Rarity;
 import mage.filter.common.FilterControlledCreaturePermanent;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
@@ -48,9 +48,8 @@ import mage.target.common.TargetCreatureOrPlayer;
  */
 public class LastDitchEffort extends CardImpl {
 
-    public LastDitchEffort(UUID ownerId) {
-        super(ownerId, 83, "Last-Ditch Effort", Rarity.UNCOMMON, new CardType[]{CardType.INSTANT}, "{R}");
-        this.expansionSetCode = "ULG";
+    public LastDitchEffort(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.INSTANT},"{R}");
 
         // Sacrifice any number of creatures. Last-Ditch Effort deals that much damage to target creature or player.
         this.getSpellAbility().addEffect(new LastDitchEffortEffect());

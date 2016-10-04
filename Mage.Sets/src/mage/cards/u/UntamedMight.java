@@ -26,13 +26,13 @@
  *  or implied, of BetaSteward_at_googlemail.com.
  */
 
-package mage.sets.scarsofmirrodin;
+package mage.cards.u;
 
 import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.abilities.dynamicvalue.common.ManacostVariableValue;
 import mage.abilities.effects.common.continuous.BoostTargetEffect;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.Duration;
 import mage.target.common.TargetCreaturePermanent;
 
@@ -43,9 +43,8 @@ import java.util.UUID;
  */
 public class UntamedMight extends CardImpl {
 
-    public UntamedMight(UUID ownerId) {
-        super(ownerId, 131, "Untamed Might", Rarity.COMMON, new CardType[]{CardType.INSTANT}, "{X}{G}");
-        this.expansionSetCode = "SOM";
+    public UntamedMight(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.INSTANT},"{X}{G}");
 
         this.getSpellAbility().addTarget(new TargetCreaturePermanent());
         this.getSpellAbility().addEffect(new BoostTargetEffect(new ManacostVariableValue(), new ManacostVariableValue(), Duration.EndOfTurn));

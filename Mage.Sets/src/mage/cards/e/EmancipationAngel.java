@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.avacynrestored;
+package mage.cards.e;
 
 import java.util.UUID;
 import mage.MageInt;
@@ -33,8 +33,8 @@ import mage.abilities.common.EntersBattlefieldTriggeredAbility;
 import mage.abilities.effects.common.ReturnToHandChosenControlledPermanentEffect;
 import mage.abilities.keyword.FlyingAbility;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.filter.common.FilterControlledPermanent;
 
 /**
@@ -43,9 +43,8 @@ import mage.filter.common.FilterControlledPermanent;
  */
 public class EmancipationAngel extends CardImpl {
 
-    public EmancipationAngel(UUID ownerId) {
-        super(ownerId, 19, "Emancipation Angel", Rarity.UNCOMMON, new CardType[]{CardType.CREATURE}, "{1}{W}{W}");
-        this.expansionSetCode = "AVR";
+    public EmancipationAngel(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{1}{W}{W}");
         this.subtype.add("Angel");
 
         this.power = new MageInt(3);

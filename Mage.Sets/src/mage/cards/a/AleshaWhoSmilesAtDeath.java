@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.fatereforged;
+package mage.cards.a;
 
 import java.util.UUID;
 import mage.MageInt;
@@ -37,9 +37,9 @@ import mage.abilities.effects.common.DoIfCostPaid;
 import mage.abilities.keyword.FirstStrikeAbility;
 import mage.cards.Card;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Outcome;
-import mage.constants.Rarity;
 import mage.constants.Zone;
 import mage.filter.Filter;
 import mage.filter.common.FilterCreatureCard;
@@ -60,9 +60,8 @@ public class AleshaWhoSmilesAtDeath extends CardImpl {
         filter.add(new PowerPredicate(Filter.ComparisonType.LessThan, 3));
     }
 
-    public AleshaWhoSmilesAtDeath(UUID ownerId) {
-        super(ownerId, 90, "Alesha, Who Smiles at Death", Rarity.RARE, new CardType[]{CardType.CREATURE}, "{2}{R}");
-        this.expansionSetCode = "FRF";
+    public AleshaWhoSmilesAtDeath(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{2}{R}");
         this.supertype.add("Legendary");
         this.subtype.add("Human");
         this.subtype.add("Warrior");

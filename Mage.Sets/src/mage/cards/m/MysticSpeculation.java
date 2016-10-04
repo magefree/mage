@@ -25,14 +25,14 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.futuresight;
+package mage.cards.m;
 
 import java.util.UUID;
 import mage.abilities.effects.keyword.ScryEffect;
 import mage.abilities.keyword.BuybackAbility;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.Rarity;
 
 /**
  *
@@ -40,9 +40,8 @@ import mage.constants.Rarity;
  */
 public class MysticSpeculation extends CardImpl {
 
-    public MysticSpeculation(UUID ownerId) {
-        super(ownerId, 41, "Mystic Speculation", Rarity.UNCOMMON, new CardType[]{CardType.SORCERY}, "{U}");
-        this.expansionSetCode = "FUT";
+    public MysticSpeculation(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{U}");
 
         // Buyback {2}
         this.addAbility(new BuybackAbility("{2}"));

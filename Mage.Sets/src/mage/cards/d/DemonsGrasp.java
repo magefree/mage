@@ -25,14 +25,14 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.battleforzendikar;
+package mage.cards.d;
 
 import java.util.UUID;
 import mage.abilities.effects.common.continuous.BoostTargetEffect;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Duration;
-import mage.constants.Rarity;
 import mage.target.common.TargetCreaturePermanent;
 
 /**
@@ -41,9 +41,8 @@ import mage.target.common.TargetCreaturePermanent;
  */
 public class DemonsGrasp extends CardImpl {
 
-    public DemonsGrasp(UUID ownerId) {
-        super(ownerId, 108, "Demon's Grasp", Rarity.COMMON, new CardType[]{CardType.SORCERY}, "{4}{B}");
-        this.expansionSetCode = "BFZ";
+    public DemonsGrasp(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{4}{B}");
 
         // Target creature gets -5/-5 until end of turn.
         this.getSpellAbility().addTarget(new TargetCreaturePermanent());

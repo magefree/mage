@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.dragonsmaze;
+package mage.cards.m;
 
 import java.util.UUID;
 import mage.MageInt;
@@ -37,10 +37,10 @@ import mage.abilities.keyword.CanAttackOnlyAloneAbility;
 import mage.abilities.keyword.DeathtouchAbility;
 import mage.abilities.keyword.FirstStrikeAbility;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Duration;
 import mage.constants.Outcome;
-import mage.constants.Rarity;
 import mage.constants.Zone;
 import mage.game.Game;
 import mage.game.combat.CombatGroup;
@@ -56,9 +56,8 @@ import mage.players.Player;
  */
 public class MasterOfCruelties extends CardImpl {
 
-    public MasterOfCruelties(UUID ownerId) {
-        super(ownerId, 82, "Master of Cruelties", Rarity.MYTHIC, new CardType[]{CardType.CREATURE}, "{3}{B}{R}");
-        this.expansionSetCode = "DGM";
+    public MasterOfCruelties(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{3}{B}{R}");
         this.subtype.add("Demon");
 
         this.power = new MageInt(1);

@@ -26,12 +26,11 @@
  *  or implied, of BetaSteward_at_googlemail.com.
  */
 
-package mage.sets.championsofkamigawa;
+package mage.cards.s;
 
 import java.util.UUID;
 
 import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleActivatedAbility;
@@ -39,6 +38,7 @@ import mage.abilities.costs.common.SacrificeSourceCost;
 import mage.abilities.effects.common.continuous.BoostTargetEffect;
 import mage.abilities.keyword.SoulshiftAbility;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.Duration;
 import mage.constants.Zone;
 import mage.target.common.TargetCreaturePermanent;
@@ -48,9 +48,8 @@ import mage.target.common.TargetCreaturePermanent;
  */
 public class ScuttlingDeath extends CardImpl {
 
-    public ScuttlingDeath(UUID ownerId) {
-        super(ownerId, 142, "Scuttling Death", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{4}{B}");
-        this.expansionSetCode = "CHK";
+    public ScuttlingDeath(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{4}{B}");
         this.subtype.add("Spirit");
 
         this.power = new MageInt(4);

@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.battleforzendikar;
+package mage.cards.t;
 
 import java.util.UUID;
 import mage.abilities.Ability;
@@ -34,9 +34,9 @@ import mage.abilities.effects.common.DamageTargetEffect;
 import mage.abilities.effects.common.replacement.DealtDamageToCreatureBySourceDies;
 import mage.abilities.keyword.DevoidAbility;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Duration;
-import mage.constants.Rarity;
 import mage.target.common.TargetCreatureOrPlayer;
 import mage.watchers.common.DamagedByWatcher;
 
@@ -46,9 +46,8 @@ import mage.watchers.common.DamagedByWatcher;
  */
 public class TouchOfTheVoid extends CardImpl {
 
-    public TouchOfTheVoid(UUID ownerId) {
-        super(ownerId, 134, "Touch of the Void", Rarity.COMMON, new CardType[]{CardType.SORCERY}, "{2}{R}");
-        this.expansionSetCode = "BFZ";
+    public TouchOfTheVoid(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{2}{R}");
 
         // Devoid
         Ability ability = new DevoidAbility(this.color);

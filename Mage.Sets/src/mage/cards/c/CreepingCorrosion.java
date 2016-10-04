@@ -26,13 +26,13 @@
  *  or implied, of BetaSteward_at_googlemail.com.
  */
 
-package mage.sets.mirrodinbesieged;
+package mage.cards.c;
 
 import java.util.UUID;
 import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.abilities.effects.common.DestroyAllEffect;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.filter.common.FilterArtifactPermanent;
 
 /**
@@ -41,9 +41,8 @@ import mage.filter.common.FilterArtifactPermanent;
  */
 public class CreepingCorrosion extends CardImpl {
 
-    public CreepingCorrosion(UUID ownerId) {
-        super(ownerId, 78, "Creeping Corrosion", Rarity.RARE, new CardType[]{CardType.SORCERY}, "{2}{G}{G}");
-        this.expansionSetCode = "MBS";
+    public CreepingCorrosion(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{2}{G}{G}");
 
         this.getSpellAbility().addEffect(new DestroyAllEffect(new FilterArtifactPermanent()));
     }

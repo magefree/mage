@@ -25,13 +25,13 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.shadowsoverinnistrad;
+package mage.cards.c;
 
 import java.util.UUID;
 import mage.abilities.effects.common.GainLifeEffect;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.Rarity;
 
 /**
  *
@@ -39,9 +39,8 @@ import mage.constants.Rarity;
  */
 public class ChaplainsBlessing extends CardImpl {
 
-    public ChaplainsBlessing(UUID ownerId) {
-        super(ownerId, 10, "Chaplain's Blessing", Rarity.COMMON, new CardType[]{CardType.SORCERY}, "{W}");
-        this.expansionSetCode = "SOI";
+    public ChaplainsBlessing(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{W}");
 
         // You gain 5 life.
         this.getSpellAbility().addEffect(new GainLifeEffect(5));        

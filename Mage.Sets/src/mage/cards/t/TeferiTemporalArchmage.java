@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.commander2014;
+package mage.cards.t;
 
 import java.util.UUID;
 import mage.abilities.LoyaltyAbility;
@@ -38,8 +38,8 @@ import mage.abilities.effects.common.LookLibraryAndPickControllerEffect;
 import mage.abilities.effects.common.UntapTargetEffect;
 import mage.abilities.effects.common.continuous.ActivateAbilitiesAnyTimeYouCouldCastInstantEffect;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.constants.Zone;
 import mage.filter.FilterCard;
 import mage.filter.FilterPermanent;
@@ -52,9 +52,8 @@ import mage.target.TargetPermanent;
  */
 public class TeferiTemporalArchmage extends CardImpl {
 
-    public TeferiTemporalArchmage(UUID ownerId) {
-        super(ownerId, 19, "Teferi, Temporal Archmage", Rarity.MYTHIC, new CardType[]{CardType.PLANESWALKER}, "{4}{U}{U}");
-        this.expansionSetCode = "C14";
+    public TeferiTemporalArchmage(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.PLANESWALKER},"{4}{U}{U}");
         this.subtype.add("Teferi");
 
         this.addAbility(new PlanswalkerEntersWithLoyalityCountersAbility(5));

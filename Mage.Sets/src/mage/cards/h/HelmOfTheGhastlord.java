@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.shadowmoor;
+package mage.cards.h;
 
 import java.util.UUID;
 import mage.ObjectColor;
@@ -41,10 +41,10 @@ import mage.abilities.effects.common.continuous.BoostEnchantedEffect;
 import mage.abilities.effects.common.continuous.GainAbilityAttachedEffect;
 import mage.abilities.keyword.EnchantAbility;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.AttachmentType;
 import mage.constants.CardType;
 import mage.constants.Outcome;
-import mage.constants.Rarity;
 import mage.constants.Zone;
 import mage.target.TargetPermanent;
 import mage.target.common.TargetCreaturePermanent;
@@ -55,9 +55,8 @@ import mage.target.common.TargetCreaturePermanent;
  */
 public class HelmOfTheGhastlord extends CardImpl {
 
-    public HelmOfTheGhastlord(UUID ownerId) {
-        super(ownerId, 166, "Helm of the Ghastlord", Rarity.COMMON, new CardType[]{CardType.ENCHANTMENT}, "{3}{U/B}");
-        this.expansionSetCode = "SHM";
+    public HelmOfTheGhastlord(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.ENCHANTMENT},"{3}{U/B}");
         this.subtype.add("Aura");
 
 

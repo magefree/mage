@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.starwars;
+package mage.cards.a;
 
 import java.util.UUID;
 import mage.MageInt;
@@ -39,8 +39,8 @@ import mage.abilities.effects.common.DrawCardSourceControllerEffect;
 import mage.abilities.effects.common.UntapAllControllerEffect;
 import mage.abilities.keyword.SpaceflightAbility;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.constants.TargetController;
 import mage.constants.Zone;
 import mage.filter.common.FilterCreaturePermanent;
@@ -61,9 +61,8 @@ public class AdmiralAckbar extends CardImpl {
         filter.add(new SubtypePredicate("Starship"));
     }
 
-    public AdmiralAckbar(UUID ownerId) {
-        super(ownerId, 34, "Admiral Ackbar", Rarity.RARE, new CardType[]{CardType.CREATURE}, "{4}{U}{U}");
-        this.expansionSetCode = "SWS";
+    public AdmiralAckbar(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{4}{U}{U}");
         this.supertype.add("Legendary");
         this.subtype.add("Calamari");
         this.subtype.add("Rebel");

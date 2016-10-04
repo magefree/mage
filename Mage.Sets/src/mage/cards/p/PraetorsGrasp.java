@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.newphyrexia;
+package mage.cards.p;
 
 import java.util.UUID;
 import mage.MageObject;
@@ -34,11 +34,11 @@ import mage.abilities.effects.AsThoughEffectImpl;
 import mage.abilities.effects.OneShotEffect;
 import mage.cards.Card;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.AsThoughEffectType;
 import mage.constants.CardType;
 import mage.constants.Duration;
 import mage.constants.Outcome;
-import mage.constants.Rarity;
 import mage.constants.Zone;
 import mage.game.ExileZone;
 import mage.game.Game;
@@ -53,9 +53,8 @@ import mage.util.CardUtil;
  */
 public class PraetorsGrasp extends CardImpl {
 
-    public PraetorsGrasp(UUID ownerId) {
-        super(ownerId, 71, "Praetor's Grasp", Rarity.RARE, new CardType[]{CardType.SORCERY}, "{1}{B}{B}");
-        this.expansionSetCode = "NPH";
+    public PraetorsGrasp(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{1}{B}{B}");
 
         // Search target opponent's library for a card and exile it face down. Then that player shuffles his or her library. You may look at and play that card for as long as it remains exiled.
         this.getSpellAbility().addEffect(new PraetorsGraspEffect());

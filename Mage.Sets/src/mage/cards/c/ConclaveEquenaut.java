@@ -25,15 +25,15 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.elspethvstezzeret;
+package mage.cards.c;
 
 import java.util.UUID;
 import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.MageInt;
 import mage.abilities.keyword.ConvokeAbility;
 import mage.abilities.keyword.FlyingAbility;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 
 /**
  *
@@ -41,9 +41,8 @@ import mage.cards.CardImpl;
  */
 public class ConclaveEquenaut extends CardImpl {
 
-    public ConclaveEquenaut(UUID ownerId) {
-        super(ownerId, 19, "Conclave Equenaut", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{4}{W}{W}");
-        this.expansionSetCode = "DDF";
+    public ConclaveEquenaut(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{4}{W}{W}");
         this.subtype.add("Human");
         this.subtype.add("Soldier");
 

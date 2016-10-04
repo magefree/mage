@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.commander;
+package mage.cards.c;
 
 import java.util.UUID;
 import mage.MageInt;
@@ -33,8 +33,8 @@ import mage.abilities.effects.common.CreateTokenEffect;
 import mage.abilities.keyword.FlyingAbility;
 import mage.abilities.keyword.RetraceAbility;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.game.permanent.token.Token;
 
 /**
@@ -44,9 +44,8 @@ import mage.game.permanent.token.Token;
  */
 public class CallTheSkybreaker extends CardImpl {
 
-    public CallTheSkybreaker(UUID ownerId) {
-        super(ownerId, 188, "Call the Skybreaker", Rarity.RARE, new CardType[]{CardType.SORCERY}, "{5}{U/R}{U/R}");
-        this.expansionSetCode = "CMD";
+    public CallTheSkybreaker(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{5}{U/R}{U/R}");
 
         // Put a 5/5 blue and red Elemental creature token with flying onto the battlefield.
         this.getSpellAbility().addEffect(new CreateTokenEffect(new ElementalToken()));

@@ -25,15 +25,15 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.urzasdestiny;
+package mage.cards.f;
 
 import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.common.DiesTriggeredAbility;
 import mage.abilities.effects.common.ExileAllEffect;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.filter.common.FilterCreaturePermanent;
 
 /**
@@ -43,9 +43,8 @@ import mage.filter.common.FilterCreaturePermanent;
  */
 public class FalseProphet extends CardImpl {
 
-    public FalseProphet(UUID ownerId) {
-        super(ownerId, 6, "False Prophet", Rarity.RARE, new CardType[]{CardType.CREATURE}, "{2}{W}{W}");
-        this.expansionSetCode = "UDS";
+    public FalseProphet(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{2}{W}{W}");
         this.subtype.add("Human");
         this.subtype.add("Cleric");
         this.power = new MageInt(2);

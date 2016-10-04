@@ -25,13 +25,13 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.visions;
+package mage.cards.p;
 
 import java.util.UUID;
 import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.MageInt;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 
 /**
  *
@@ -39,9 +39,8 @@ import mage.cards.CardImpl;
  */
 public class PhyrexianWalker extends CardImpl {
 
-    public PhyrexianWalker(UUID ownerId) {
-        super(ownerId, 152, "Phyrexian Walker", Rarity.COMMON, new CardType[]{CardType.ARTIFACT, CardType.CREATURE}, "{0}");
-        this.expansionSetCode = "VIS";
+    public PhyrexianWalker(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.ARTIFACT,CardType.CREATURE},"{0}");
         this.subtype.add("Construct");
         this.power = new MageInt(0);
         this.toughness = new MageInt(3);

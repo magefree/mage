@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.starwars;
+package mage.cards.m;
 
 import java.util.UUID;
 import mage.abilities.Mode;
@@ -34,9 +34,9 @@ import mage.abilities.effects.common.combat.CantBlockAllEffect;
 import mage.abilities.effects.common.continuous.GainAbilityControlledEffect;
 import mage.abilities.keyword.IndestructibleAbility;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Duration;
-import mage.constants.Rarity;
 import mage.filter.Filter;
 import mage.filter.FilterPermanent;
 import mage.filter.common.FilterControlledCreaturePermanent;
@@ -60,9 +60,8 @@ public class MightOfTheWild extends CardImpl {
         filterMode2.add(Predicates.or(new CardTypePredicate(CardType.ARTIFACT), new CardTypePredicate(CardType.ENCHANTMENT)));
     }
 
-    public MightOfTheWild(UUID ownerId) {
-        super(ownerId, 207, "Might of the Wild", Rarity.UNCOMMON, new CardType[]{CardType.INSTANT}, "{R}{G}{W}");
-        this.expansionSetCode = "SWS";
+    public MightOfTheWild(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.INSTANT},"{R}{G}{W}");
 
         // Choose one - Creatures with power 3 or less can't block this turn.
         this.getSpellAbility().addEffect(new CantBlockAllEffect(filterMode1, Duration.EndOfTurn));

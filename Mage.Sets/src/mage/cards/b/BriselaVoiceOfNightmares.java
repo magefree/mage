@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.eldritchmoon;
+package mage.cards.b;
 
 import mage.MageInt;
 import mage.MageObject;
@@ -51,11 +51,6 @@ import java.util.UUID;
  * @author LevelX2
  */
 public class BriselaVoiceOfNightmares extends MeldCard {
-    // TODO: EJM - Remove this
-    public BriselaVoiceOfNightmares(UUID ownerId) {
-        this(ownerId, new CardSetInfo("Brisela, Voice of Nightmares", "EMN", "15", Rarity.MYTHIC));
-    }
-
     public BriselaVoiceOfNightmares(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "");
         this.supertype.add("Legendary");

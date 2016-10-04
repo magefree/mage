@@ -25,16 +25,16 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.ninthedition;
+package mage.cards.p;
 
 import java.util.UUID;
 import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.MageInt;
 import mage.ObjectColor;
 import mage.abilities.keyword.FirstStrikeAbility;
 import mage.abilities.keyword.ProtectionAbility;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.filter.FilterCard;
 import mage.filter.predicate.Predicates;
 import mage.filter.predicate.mageobject.ColorPredicate;
@@ -50,9 +50,8 @@ public class PaladinEnVec extends CardImpl {
         protectionFilter.add(Predicates.or(new ColorPredicate(ObjectColor.BLACK),new ColorPredicate(ObjectColor.RED)));
     }
 
-    public PaladinEnVec(UUID ownerId) {
-        super(ownerId, 32, "Paladin en-Vec", Rarity.RARE, new CardType[]{CardType.CREATURE}, "{1}{W}{W}");
-        this.expansionSetCode = "9ED";
+    public PaladinEnVec(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{1}{W}{W}");
         this.subtype.add("Human");
         this.subtype.add("Knight");
 

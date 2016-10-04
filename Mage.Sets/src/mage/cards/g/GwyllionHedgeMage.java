@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.commander;
+package mage.cards.g;
 
 import java.util.UUID;
 import mage.MageInt;
@@ -37,8 +37,8 @@ import mage.abilities.decorator.ConditionalTriggeredAbility;
 import mage.abilities.effects.common.CreateTokenEffect;
 import mage.abilities.effects.common.counter.AddCountersTargetEffect;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.counters.CounterType;
 import mage.filter.common.FilterLandPermanent;
 import mage.filter.predicate.mageobject.SubtypePredicate;
@@ -63,9 +63,8 @@ public class GwyllionHedgeMage extends CardImpl {
     private final String rule1 = "When {this} enters the battlefield, if you control two or more Plains, you may put a 1/1 white Kithkin Soldier creature token onto the battlefield.";
     private final String rule2 = "When {this} enters the battlefield, if you control two or more Swamps, you may put a -1/-1 counter on target creature.";
 
-    public GwyllionHedgeMage(UUID ownerId) {
-        super(ownerId, 202, "Gwyllion Hedge-Mage", Rarity.UNCOMMON, new CardType[]{CardType.CREATURE}, "{2}{W/B}");
-        this.expansionSetCode = "CMD";
+    public GwyllionHedgeMage(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{2}{W/B}");
         this.subtype.add("Hag");
         this.subtype.add("Wizard");
 

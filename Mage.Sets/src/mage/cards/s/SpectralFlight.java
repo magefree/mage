@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.innistrad;
+package mage.cards.s;
 
 import java.util.UUID;
 
@@ -38,6 +38,7 @@ import mage.abilities.effects.common.continuous.GainAbilityAttachedEffect;
 import mage.abilities.keyword.EnchantAbility;
 import mage.abilities.keyword.FlyingAbility;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.target.TargetPermanent;
 import mage.target.common.TargetCreaturePermanent;
 
@@ -47,9 +48,8 @@ import mage.target.common.TargetCreaturePermanent;
  */
 public class SpectralFlight extends CardImpl {
 
-    public SpectralFlight(UUID ownerId) {
-        super(ownerId, 79, "Spectral Flight", Rarity.COMMON, new CardType[]{CardType.ENCHANTMENT}, "{1}{U}");
-        this.expansionSetCode = "ISD";
+    public SpectralFlight(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.ENCHANTMENT},"{1}{U}");
         this.subtype.add("Aura");
 
 

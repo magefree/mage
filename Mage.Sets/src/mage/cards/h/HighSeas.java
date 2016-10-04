@@ -25,15 +25,15 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.mercadianmasques;
+package mage.cards.h;
 
 import java.util.UUID;
 import mage.ObjectColor;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.effects.common.cost.SpellsCostIncreasementAllEffect;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.constants.Zone;
 import mage.filter.common.FilterCreatureCard;
 import mage.filter.predicate.Predicates;
@@ -51,9 +51,8 @@ public class HighSeas extends CardImpl {
                 (new ColorPredicate(ObjectColor.GREEN))));
     }
 
-    public HighSeas(UUID ownerId) {
-        super(ownerId, 83, "High Seas", Rarity.UNCOMMON, new CardType[]{CardType.ENCHANTMENT}, "{2}{U}");
-        this.expansionSetCode = "MMQ";
+    public HighSeas(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.ENCHANTMENT},"{2}{U}");
 
         // Red creature spells and green creature spells cost {1} more to cast.
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new SpellsCostIncreasementAllEffect(filter, 1)));

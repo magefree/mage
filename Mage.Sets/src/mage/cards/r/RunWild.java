@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.onslaught;
+package mage.cards.r;
 
 import java.util.UUID;
 import mage.abilities.common.SimpleActivatedAbility;
@@ -35,9 +35,9 @@ import mage.abilities.effects.common.RegenerateSourceEffect;
 import mage.abilities.effects.common.continuous.GainAbilityTargetEffect;
 import mage.abilities.keyword.TrampleAbility;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Duration;
-import mage.constants.Rarity;
 import mage.constants.Zone;
 import mage.target.common.TargetCreaturePermanent;
 
@@ -47,9 +47,8 @@ import mage.target.common.TargetCreaturePermanent;
  */
 public class RunWild extends CardImpl {
 
-    public RunWild(UUID ownerId) {
-        super(ownerId, 279, "Run Wild", Rarity.UNCOMMON, new CardType[]{CardType.INSTANT}, "{G}");
-        this.expansionSetCode = "ONS";
+    public RunWild(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.INSTANT},"{G}");
 
         // Until end of turn, target creature gains trample and "{G}: Regenerate this creature."
         this.getSpellAbility().addTarget(new TargetCreaturePermanent());

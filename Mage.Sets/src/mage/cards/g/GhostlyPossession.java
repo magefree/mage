@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.innistrad;
+package mage.cards.g;
 
 import java.util.UUID;
 
@@ -38,6 +38,7 @@ import mage.abilities.effects.common.continuous.GainAbilityAttachedEffect;
 import mage.abilities.keyword.EnchantAbility;
 import mage.abilities.keyword.FlyingAbility;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.game.Game;
 import mage.game.events.DamageEvent;
 import mage.game.events.GameEvent;
@@ -51,9 +52,8 @@ import mage.target.common.TargetCreaturePermanent;
  */
 public class GhostlyPossession extends CardImpl {
 
-    public GhostlyPossession(UUID ownerId) {
-        super(ownerId, 18, "Ghostly Possession", Rarity.COMMON, new CardType[]{CardType.ENCHANTMENT}, "{2}{W}");
-        this.expansionSetCode = "ISD";
+    public GhostlyPossession(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.ENCHANTMENT},"{2}{W}");
         this.subtype.add("Aura");
 
 

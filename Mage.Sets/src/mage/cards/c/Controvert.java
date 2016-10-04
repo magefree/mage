@@ -25,15 +25,15 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.coldsnap;
+package mage.cards.c;
 
 import java.util.UUID;
 import mage.abilities.costs.mana.ManaCostsImpl;
 import mage.abilities.effects.common.CounterTargetEffect;
 import mage.abilities.keyword.RecoverAbility;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.target.TargetSpell;
 
 /**
@@ -42,9 +42,8 @@ import mage.target.TargetSpell;
  */
 public class Controvert extends CardImpl {
 
-    public Controvert(UUID ownerId) {
-        super(ownerId, 30, "Controvert", Rarity.UNCOMMON, new CardType[]{CardType.INSTANT}, "{2}{U}{U}");
-        this.expansionSetCode = "CSP";
+    public Controvert(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.INSTANT},"{2}{U}{U}");
 
         // Counter target spell.
         this.getSpellAbility().addEffect(new CounterTargetEffect());

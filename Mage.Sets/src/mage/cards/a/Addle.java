@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.vintagemasters;
+package mage.cards.a;
 
 import java.util.UUID;
 import mage.ObjectColor;
@@ -34,10 +34,10 @@ import mage.abilities.effects.Effect;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.discard.DiscardCardYouChooseTargetEffect;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.choices.ChoiceColor;
 import mage.constants.CardType;
 import mage.constants.Outcome;
-import mage.constants.Rarity;
 import mage.filter.FilterCard;
 import mage.filter.predicate.mageobject.ColorPredicate;
 import mage.game.Game;
@@ -50,9 +50,8 @@ import mage.target.TargetPlayer;
  */
 public class Addle extends CardImpl {
 
-    public Addle(UUID ownerId) {
-        super(ownerId, 103, "Addle", Rarity.COMMON, new CardType[]{CardType.SORCERY}, "{1}{B}");
-        this.expansionSetCode = "VMA";
+    public Addle(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{1}{B}");
 
         // Choose a color. Target player reveals his or her hand and you choose a card of that color from it. That player discards that card.
         this.getSpellAbility().addEffect(new AddleEffect());

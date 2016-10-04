@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.kaladesh;
+package mage.cards.s;
 
 import java.util.UUID;
 import mage.MageObject;
@@ -35,11 +35,11 @@ import mage.abilities.effects.AsThoughEffectImpl;
 import mage.abilities.effects.OneShotEffect;
 import mage.cards.Card;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.AsThoughEffectType;
 import mage.constants.CardType;
 import mage.constants.Duration;
 import mage.constants.Outcome;
-import mage.constants.Rarity;
 import mage.constants.Zone;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
@@ -52,9 +52,8 @@ import mage.target.common.TargetCreaturePermanent;
  */
 public class SparkOfCreativity extends CardImpl {
 
-    public SparkOfCreativity(UUID ownerId) {
-        super(ownerId, 131, "Spark of Creativity", Rarity.UNCOMMON, new CardType[]{CardType.SORCERY}, "{R}");
-        this.expansionSetCode = "KLD";
+    public SparkOfCreativity(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{R}");
 
         // Choose target creature. Exile the top card of your library. You may have Spark of Creativity deal damage to that creature equal to the converted mana cost of the exiled card. If you don't, you may play that card until end of turn.
         this.getSpellAbility().addEffect(new SparkOfCreativityEffect());

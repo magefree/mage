@@ -26,18 +26,18 @@
 * or implied, of BetaSteward_at_googlemail.com.
 */
 
-package mage.sets.alarareborn;
+package mage.cards.p;
 
 import java.util.UUID;
 import mage.constants.CardType;
 import mage.constants.Duration;
-import mage.constants.Rarity;
 import mage.constants.Zone;
 import mage.MageInt;
 import mage.abilities.common.LimitedTimesPerTurnActivatedAbility;
 import mage.abilities.costs.common.PayLifeCost;
 import mage.abilities.effects.common.continuous.BoostSourceEffect;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 
 
 /**
@@ -46,9 +46,8 @@ import mage.cards.CardImpl;
  */
 public class PutridLeech extends CardImpl {
 
-    public PutridLeech(UUID ownerId) {
-        super(ownerId, 95, "Putrid Leech", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{B}{G}");
-        this.expansionSetCode = "ARB";
+    public PutridLeech(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{B}{G}");
         
 
         this.subtype.add("Zombie");

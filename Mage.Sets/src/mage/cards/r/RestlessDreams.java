@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.torment;
+package mage.cards.r;
 
 import java.util.UUID;
 import mage.abilities.Ability;
@@ -34,8 +34,8 @@ import mage.abilities.dynamicvalue.common.GetXValue;
 import mage.abilities.effects.Effect;
 import mage.abilities.effects.common.ReturnFromGraveyardToHandTargetEffect;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.filter.FilterCard;
 import mage.filter.common.FilterCreatureCard;
 import mage.game.Game;
@@ -48,9 +48,8 @@ import mage.target.common.TargetCardInYourGraveyard;
  */
 public class RestlessDreams extends CardImpl {
 
-    public RestlessDreams(UUID ownerId) {
-        super(ownerId, 79, "Restless Dreams", Rarity.COMMON, new CardType[]{CardType.SORCERY}, "{B}");
-        this.expansionSetCode = "TOR";
+    public RestlessDreams(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{B}");
 
         // As an additional cost to cast Restless Dreams, discard X cards.
         this.getSpellAbility().addCost(new DiscardXTargetCost(new FilterCard("cards"), true));

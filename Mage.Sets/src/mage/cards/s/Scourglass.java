@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.shardsofalara;
+package mage.cards.s;
 
 import java.util.UUID;
 import mage.abilities.Ability;
@@ -35,9 +35,9 @@ import mage.abilities.costs.common.TapSourceCost;
 import mage.abilities.decorator.ConditionalActivatedAbility;
 import mage.abilities.effects.common.DestroyAllEffect;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.PhaseStep;
-import mage.constants.Rarity;
 import mage.constants.Zone;
 import mage.filter.FilterPermanent;
 import mage.filter.predicate.Predicates;
@@ -55,9 +55,8 @@ public class Scourglass extends CardImpl {
         filter.add(Predicates.not(Predicates.or(new CardTypePredicate(CardType.ARTIFACT), new CardTypePredicate(CardType.LAND))));
     }
 
-    public Scourglass(UUID ownerId) {
-        super(ownerId, 25, "Scourglass", Rarity.RARE, new CardType[]{CardType.ARTIFACT}, "{3}{W}{W}");
-        this.expansionSetCode = "ALA";
+    public Scourglass(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.ARTIFACT},"{3}{W}{W}");
 
         // {T}, Sacrifice Scourglass: Destroy all permanents except for artifacts and lands. Activate this ability only during your upkeep.
         Ability ability = new ConditionalActivatedAbility(Zone.BATTLEFIELD,

@@ -25,12 +25,11 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.zendikar;
+package mage.cards.l;
 
 import java.util.UUID;
 
 import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.constants.TargetController;
 import mage.MageInt;
 import mage.abilities.common.BeginningOfUpkeepTriggeredAbility;
@@ -38,6 +37,7 @@ import mage.abilities.costs.common.ReturnToHandChosenControlledPermanentCost;
 import mage.abilities.effects.common.SacrificeSourceUnlessPaysEffect;
 import mage.abilities.keyword.FlyingAbility;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.Zone;
 import mage.filter.common.FilterControlledPermanent;
 import mage.filter.predicate.mageobject.CardTypePredicate;
@@ -55,9 +55,8 @@ public class LivingTsunami extends CardImpl {
         filter.add(new CardTypePredicate(CardType.LAND));
     }
 
-    public LivingTsunami(UUID ownerId) {
-        super(ownerId, 52, "Living Tsunami", Rarity.UNCOMMON, new CardType[]{CardType.CREATURE}, "{2}{U}{U}");
-        this.expansionSetCode = "ZEN";
+    public LivingTsunami(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{2}{U}{U}");
         this.subtype.add("Elemental");
 
         this.power = new MageInt(4);

@@ -26,14 +26,14 @@
  *  or implied, of BetaSteward_at_googlemail.com.
  */
 
-package mage.sets.dragonsmaze;
+package mage.cards.m;
 
 import java.util.UUID;
 
 import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.abilities.effects.common.FightTargetsEffect;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.TargetController;
 import mage.counters.CounterType;
 import mage.filter.common.FilterCreaturePermanent;
@@ -57,9 +57,8 @@ public class MutantsPrey extends CardImpl {
         filter2.add(new ControllerPredicate(TargetController.OPPONENT));
     }
 
-    public MutantsPrey(UUID ownerId) {
-        super(ownerId, 45, "Mutant's Prey", Rarity.COMMON, new CardType[]{CardType.INSTANT}, "{G}");
-        this.expansionSetCode = "DGM";
+    public MutantsPrey(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.INSTANT},"{G}");
 
 
         // Target creature you control with a +1/+1 counter on it fights target creature an opponent controls.

@@ -26,15 +26,15 @@
  *  or implied, of BetaSteward_at_googlemail.com.
  */
 
-package mage.sets.urzassaga;
+package mage.cards.c;
 
 import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.common.EntersBattlefieldTriggeredAbility;
 import mage.abilities.effects.common.discard.DiscardEachPlayerEffect;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.constants.TargetController;
 
 /**
@@ -43,9 +43,8 @@ import mage.constants.TargetController;
  */
 public class CacklingFiend extends CardImpl {
 
-    public CacklingFiend(UUID ownerId) {
-        super(ownerId, 121, "Cackling Fiend", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{2}{B}{B}");
-        this.expansionSetCode = "USG";
+    public CacklingFiend(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{2}{B}{B}");
         this.subtype.add("Zombie");
 
         this.power = new MageInt(2);

@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.dissension;
+package mage.cards.s;
 
 import java.util.UUID;
 import mage.abilities.Ability;
@@ -34,9 +34,9 @@ import mage.abilities.effects.common.continuous.BoostControlledEffect;
 import mage.abilities.effects.common.continuous.BoostTargetEffect;
 import mage.abilities.keyword.ForecastAbility;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Duration;
-import mage.constants.Rarity;
 import mage.target.common.TargetCreaturePermanent;
 
 /**
@@ -45,9 +45,8 @@ import mage.target.common.TargetCreaturePermanent;
  */
 public class SteelingStance extends CardImpl {
 
-    public SteelingStance(UUID ownerId) {
-        super(ownerId, 18, "Steeling Stance", Rarity.COMMON, new CardType[]{CardType.INSTANT}, "{1}{W}{W}");
-        this.expansionSetCode = "DIS";
+    public SteelingStance(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.INSTANT},"{1}{W}{W}");
 
 
         // Creatures you control get +1/+1 until end of turn.

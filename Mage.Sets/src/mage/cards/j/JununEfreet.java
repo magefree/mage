@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.fourthedition;
+package mage.cards.j;
 
 import java.util.UUID;
 import mage.MageInt;
@@ -34,8 +34,8 @@ import mage.abilities.costs.mana.ManaCostsImpl;
 import mage.abilities.effects.common.SacrificeSourceUnlessPaysEffect;
 import mage.abilities.keyword.FlyingAbility;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.constants.TargetController;
 
 /**
@@ -44,9 +44,8 @@ import mage.constants.TargetController;
  */
 public class JununEfreet extends CardImpl {
 
-    public JununEfreet(UUID ownerId) {
-        super(ownerId, 27, "Junún Efreet", Rarity.UNCOMMON, new CardType[]{CardType.CREATURE}, "{1}{B}{B}");
-        this.expansionSetCode = "4ED";
+    public JununEfreet(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{1}{B}{B}");
         this.subtype.add("Efreet");
         this.power = new MageInt(3);
         this.toughness = new MageInt(3);

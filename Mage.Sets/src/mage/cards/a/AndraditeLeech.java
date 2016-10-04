@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.invasion;
+package mage.cards.a;
 
 import java.util.UUID;
 import mage.MageInt;
@@ -36,9 +36,9 @@ import mage.abilities.costs.mana.ManaCostsImpl;
 import mage.abilities.effects.common.continuous.BoostSourceEffect;
 import mage.abilities.effects.common.cost.SpellsCostIncreasementControllerEffect;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Duration;
-import mage.constants.Rarity;
 import mage.constants.Zone;
 import mage.filter.FilterCard;
 import mage.filter.predicate.mageobject.ColorPredicate;
@@ -55,9 +55,8 @@ public class AndraditeLeech extends CardImpl {
         filter.add(new ColorPredicate(ObjectColor.BLACK));
     }
 
-    public AndraditeLeech(UUID ownerId) {
-        super(ownerId, 93, "Andradite Leech", Rarity.RARE, new CardType[]{CardType.CREATURE}, "{2}{B}");
-        this.expansionSetCode = "INV";
+    public AndraditeLeech(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{2}{B}");
         this.subtype.add("Leech");
         this.power = new MageInt(2);
         this.toughness = new MageInt(2);

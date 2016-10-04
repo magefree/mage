@@ -25,17 +25,17 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.mirrodin;
+package mage.cards.l;
 
 import java.util.UUID;
 import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.EntersBattlefieldTriggeredAbility;
 import mage.abilities.effects.common.PutOnLibraryTargetEffect;
 import mage.abilities.keyword.FlyingAbility;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.filter.FilterPermanent;
 import mage.filter.predicate.mageobject.CardTypePredicate;
 import mage.target.TargetPermanent;
@@ -52,9 +52,8 @@ public class LoomingHoverguard extends CardImpl {
         filter.add(new CardTypePredicate(CardType.ARTIFACT));
     }
 
-    public LoomingHoverguard(UUID ownerId) {
-        super(ownerId, 38, "Looming Hoverguard", Rarity.UNCOMMON, new CardType[]{CardType.CREATURE}, "{4}{U}{U}");
-        this.expansionSetCode = "MRD";
+    public LoomingHoverguard(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{4}{U}{U}");
         this.subtype.add("Drone");
 
         this.power = new MageInt(3);

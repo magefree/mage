@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.eldritchmoon;
+package mage.cards.i;
 
 import java.util.UUID;
 import mage.MageInt;
@@ -40,8 +40,8 @@ import mage.abilities.effects.common.CreateTokenEffect;
 import mage.abilities.effects.common.LoseLifeTargetEffect;
 import mage.abilities.keyword.ReachAbility;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.constants.Zone;
 import mage.filter.common.FilterControlledCreaturePermanent;
 import mage.filter.predicate.mageobject.SubtypePredicate;
@@ -60,9 +60,8 @@ public class IshkanahGrafwidow extends CardImpl {
         filter.add(new SubtypePredicate("Spider"));
     }
 
-    public IshkanahGrafwidow(UUID ownerId) {
-        super(ownerId, 162, "Ishkanah, Grafwidow", Rarity.MYTHIC, new CardType[]{CardType.CREATURE}, "{4}{G}");
-        this.expansionSetCode = "EMN";
+    public IshkanahGrafwidow(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{4}{G}");
         this.supertype.add("Legendary");
         this.subtype.add("Spider");
         this.power = new MageInt(3);

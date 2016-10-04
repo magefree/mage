@@ -25,14 +25,14 @@
 *  authors and should not be interpreted as representing official policies, either expressed
 *  or implied, of BetaSteward_at_googlemail.com.
 */
-package mage.sets.planechase2012;
+package mage.cards.s;
 
 import java.util.UUID;
 import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.MageInt;
 import mage.abilities.keyword.CascadeAbility;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 
 /**
 *
@@ -40,9 +40,8 @@ import mage.cards.CardImpl;
 */
 public class ShardlessAgent extends CardImpl {
 
-    public ShardlessAgent(UUID ownerId) {
-        super(ownerId, 104, "Shardless Agent", Rarity.UNCOMMON, new CardType[]{CardType.ARTIFACT,CardType.CREATURE}, "{1}{G}{U}");
-        this.expansionSetCode = "PC2";
+    public ShardlessAgent(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.ARTIFACT,CardType.CREATURE},"{1}{G}{U}");
         this.subtype.add("Human");
         this.subtype.add("Rogue");
 

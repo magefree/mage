@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.scourge;
+package mage.cards.u;
 
 import java.util.UUID;
 import mage.abilities.Ability;
@@ -33,8 +33,8 @@ import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.costs.common.PayLifeCost;
 import mage.abilities.effects.common.counter.AddCountersTargetEffect;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.constants.Zone;
 import mage.counters.CounterType;
 import mage.target.common.TargetCreaturePermanent;
@@ -45,9 +45,8 @@ import mage.target.common.TargetCreaturePermanent;
  */
 public class UnspeakableSymbol extends CardImpl {
 
-    public UnspeakableSymbol(UUID ownerId) {
-        super(ownerId, 79, "Unspeakable Symbol", Rarity.UNCOMMON, new CardType[]{CardType.ENCHANTMENT}, "{1}{B}{B}");
-        this.expansionSetCode = "SCG";
+    public UnspeakableSymbol(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.ENCHANTMENT},"{1}{B}{B}");
 
 
         // Pay 3 life: Put a +1/+1 counter on target creature.

@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.magic2014;
+package mage.cards.l;
 
 import java.util.UUID;
 import mage.MageInt;
@@ -35,8 +35,8 @@ import mage.abilities.effects.common.CreateTokenEffect;
 import mage.abilities.effects.common.discard.DiscardTargetEffect;
 import mage.abilities.keyword.DeathtouchAbility;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.game.permanent.token.ZombieToken;
 
 /**
@@ -45,9 +45,8 @@ import mage.game.permanent.token.ZombieToken;
  */
 public class LilianasReaver extends CardImpl {
 
-    public LilianasReaver(UUID ownerId) {
-        super(ownerId, 103, "Liliana's Reaver", Rarity.RARE, new CardType[]{CardType.CREATURE}, "{2}{B}{B}");
-        this.expansionSetCode = "M14";
+    public LilianasReaver(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{2}{B}{B}");
         this.subtype.add("Zombie");
 
         this.power = new MageInt(4);

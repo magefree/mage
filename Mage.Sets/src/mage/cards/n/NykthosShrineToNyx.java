@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.theros;
+package mage.cards.n;
 
 import java.util.List;
 import java.util.UUID;
@@ -38,10 +38,10 @@ import mage.abilities.effects.common.ManaEffect;
 import mage.abilities.mana.ColorlessManaAbility;
 import mage.abilities.mana.ManaAbility;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.choices.ChoiceColor;
 import mage.constants.CardType;
 import mage.constants.ColoredManaSymbol;
-import mage.constants.Rarity;
 import mage.constants.Zone;
 import mage.game.Game;
 import mage.players.Player;
@@ -52,9 +52,8 @@ import mage.players.Player;
  */
 public class NykthosShrineToNyx extends CardImpl {
 
-    public NykthosShrineToNyx(UUID ownerId) {
-        super(ownerId, 223, "Nykthos, Shrine to Nyx", Rarity.RARE, new CardType[]{CardType.LAND}, "");
-        this.expansionSetCode = "THS";
+    public NykthosShrineToNyx(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.LAND},"");
         this.supertype.add("Legendary");
 
         // {T}: Add {C} to your mana pool.

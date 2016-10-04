@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.dragonsoftarkir;
+package mage.cards.a;
 
 import java.util.UUID;
 import mage.abilities.Ability;
@@ -37,11 +37,11 @@ import mage.abilities.effects.common.combat.CanAttackAsThoughItDidntHaveDefender
 import mage.abilities.effects.common.continuous.BoostControlledEffect;
 import mage.abilities.keyword.DefenderAbility;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Duration;
 import mage.constants.Layer;
 import mage.constants.Outcome;
-import mage.constants.Rarity;
 import mage.constants.SubLayer;
 import mage.constants.Zone;
 import mage.filter.common.FilterCreaturePermanent;
@@ -62,9 +62,8 @@ public class AssaultFormation extends CardImpl {
         filter.add(new AbilityPredicate(DefenderAbility.class));
     }
 
-    public AssaultFormation(UUID ownerId) {
-        super(ownerId, 173, "Assault Formation", Rarity.RARE, new CardType[]{CardType.ENCHANTMENT}, "{1}{G}");
-        this.expansionSetCode = "DTK";
+    public AssaultFormation(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.ENCHANTMENT},"{1}{G}");
 
         // Each creature you control assigns combat damage equal to its toughness rather than its power.
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new AssaultFormationCombatDamageRuleEffect()));

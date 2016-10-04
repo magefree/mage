@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.urzassaga;
+package mage.cards.r;
 
 import java.util.UUID;
 import mage.abilities.Ability;
@@ -34,10 +34,10 @@ import mage.abilities.costs.mana.ManaCostsImpl;
 import mage.abilities.effects.PreventionEffectImpl;
 import mage.abilities.keyword.CyclingAbility;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Duration;
 import mage.constants.Outcome;
-import mage.constants.Rarity;
 import mage.constants.Zone;
 import mage.filter.FilterObject;
 import mage.filter.predicate.mageobject.CardTypePredicate;
@@ -51,9 +51,8 @@ import mage.target.TargetSource;
  */
 public class RuneOfProtectionLands extends CardImpl {
 
-    public RuneOfProtectionLands(UUID ownerId) {
-        super(ownerId, 39, "Rune of Protection: Lands", Rarity.RARE, new CardType[]{CardType.ENCHANTMENT}, "{1}{W}");
-        this.expansionSetCode = "USG";
+    public RuneOfProtectionLands(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.ENCHANTMENT},"{1}{W}");
 
 
 		// {W}: The next time a black source of your choice would deal damage to you this turn, prevent that damage.

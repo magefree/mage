@@ -25,12 +25,11 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.darkascension;
+package mage.cards.g;
 
 import java.util.UUID;
 import mage.constants.CardType;
 import mage.constants.Outcome;
-import mage.constants.Rarity;
 import mage.constants.Zone;
 import mage.MageInt;
 import mage.abilities.Ability;
@@ -38,6 +37,7 @@ import mage.abilities.SpellAbility;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.effects.common.cost.CostModificationEffectImpl;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CostModificationType;
 import mage.constants.Duration;
 import mage.filter.common.FilterCreatureCard;
@@ -51,9 +51,8 @@ import mage.util.CardUtil;
  */
 public class Ghoultree extends CardImpl {
 
-    public Ghoultree(UUID ownerId) {
-        super(ownerId, 115, "Ghoultree", Rarity.RARE, new CardType[]{CardType.CREATURE}, "{7}{G}");
-        this.expansionSetCode = "DKA";
+    public Ghoultree(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{7}{G}");
         this.subtype.add("Zombie");
         this.subtype.add("Treefolk");
 

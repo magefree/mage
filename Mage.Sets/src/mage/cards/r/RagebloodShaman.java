@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.theros;
+package mage.cards.r;
 
 import java.util.UUID;
 import mage.MageInt;
@@ -35,9 +35,9 @@ import mage.abilities.effects.common.continuous.BoostControlledEffect;
 import mage.abilities.effects.common.continuous.GainAbilityControlledEffect;
 import mage.abilities.keyword.TrampleAbility;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Duration;
-import mage.constants.Rarity;
 import mage.constants.TargetController;
 import mage.constants.Zone;
 import mage.filter.common.FilterCreaturePermanent;
@@ -54,9 +54,8 @@ public class RagebloodShaman extends CardImpl {
         filter.add(new ControllerPredicate(TargetController.YOU));
     }
     
-    public RagebloodShaman(UUID ownerId) {
-        super(ownerId, 138, "Rageblood Shaman", Rarity.RARE, new CardType[]{CardType.CREATURE}, "{1}{R}{R}");
-        this.expansionSetCode = "THS";
+    public RagebloodShaman(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{1}{R}{R}");
         this.subtype.add("Minotaur");
         this.subtype.add("Shaman");
 

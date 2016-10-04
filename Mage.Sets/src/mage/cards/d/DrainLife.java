@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.limitedalpha;
+package mage.cards.d;
 
 import java.util.UUID;
 
@@ -34,9 +34,9 @@ import mage.abilities.costs.VariableCost;
 import mage.abilities.costs.mana.VariableManaCost;
 import mage.abilities.effects.OneShotEffect;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Outcome;
-import mage.constants.Rarity;
 import mage.filter.FilterMana;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
@@ -57,9 +57,8 @@ public class DrainLife extends CardImpl {
     }
 
 
-    public DrainLife(UUID ownerId) {
-        super(ownerId, 14, "Drain Life", Rarity.COMMON, new CardType[]{CardType.SORCERY}, "{X}{1}{B}");
-        this.expansionSetCode = "LEA";
+    public DrainLife(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{X}{1}{B}");
 
 
         // Spend only black mana on X.

@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.commander2014;
+package mage.cards.j;
 
 import java.util.UUID;
 import mage.MageInt;
@@ -36,9 +36,9 @@ import mage.abilities.dynamicvalue.common.AttackingCreatureCount;
 import mage.abilities.effects.common.continuous.BoostControlledEffect;
 import mage.abilities.keyword.FirstStrikeAbility;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Duration;
-import mage.constants.Rarity;
 import mage.constants.Zone;
 import mage.filter.common.FilterAttackingCreature;
 
@@ -48,9 +48,8 @@ import mage.filter.common.FilterAttackingCreature;
  */
 public class JazalGoldmane extends CardImpl {
 
-    public JazalGoldmane(UUID ownerId) {
-        super(ownerId, 9, "Jazal Goldmane", Rarity.MYTHIC, new CardType[]{CardType.CREATURE}, "{2}{W}{W}");
-        this.expansionSetCode = "C14";
+    public JazalGoldmane(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{2}{W}{W}");
         this.supertype.add("Legendary");
         this.subtype.add("Cat");
         this.subtype.add("Warrior");

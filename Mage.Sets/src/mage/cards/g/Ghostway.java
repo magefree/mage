@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.guildpact;
+package mage.cards.g;
 
 import java.util.HashSet;
 import java.util.Set;
@@ -38,11 +38,11 @@ import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.ReturnToBattlefieldUnderOwnerControlTargetEffect;
 import mage.cards.Card;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.cards.Cards;
 import mage.cards.CardsImpl;
 import mage.constants.CardType;
 import mage.constants.Outcome;
-import mage.constants.Rarity;
 import mage.constants.TargetController;
 import mage.filter.FilterPermanent;
 import mage.filter.predicate.mageobject.CardTypePredicate;
@@ -59,9 +59,8 @@ import mage.util.CardUtil;
  */
 public class Ghostway extends CardImpl {
 
-    public Ghostway(UUID ownerId) {
-        super(ownerId, 6, "Ghostway", Rarity.RARE, new CardType[]{CardType.INSTANT}, "{2}{W}");
-        this.expansionSetCode = "GPT";
+    public Ghostway(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.INSTANT},"{2}{W}");
 
         // Exile each creature you control. Return those cards to the battlefield under their owner's control at the beginning of the next end step.
         this.getSpellAbility().addEffect(new GhostwayEffect());

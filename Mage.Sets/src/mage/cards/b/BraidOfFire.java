@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.coldsnap;
+package mage.cards.b;
 
 import java.util.UUID;
 import mage.Mana;
@@ -34,8 +34,8 @@ import mage.abilities.costs.Cost;
 import mage.abilities.costs.CostImpl;
 import mage.abilities.keyword.CumulativeUpkeepAbility;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.game.Game;
 import mage.players.Player;
 
@@ -45,9 +45,8 @@ import mage.players.Player;
  */
 public class BraidOfFire extends CardImpl {
 
-    public BraidOfFire(UUID ownerId) {
-        super(ownerId, 78, "Braid of Fire", Rarity.RARE, new CardType[]{CardType.ENCHANTMENT}, "{1}{R}");
-        this.expansionSetCode = "CSP";
+    public BraidOfFire(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.ENCHANTMENT},"{1}{R}");
 
         // Cumulative upkeep-Add {R} to your mana pool.
         this.addAbility(new CumulativeUpkeepAbility(new BraidOfFireCost()));

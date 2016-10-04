@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.urzaslegacy;
+package mage.cards.a;
 
 import java.util.UUID;
 
@@ -37,6 +37,7 @@ import mage.abilities.costs.mana.GenericManaCost;
 import mage.abilities.effects.common.SacrificeSourceUnlessPaysEffect;
 import mage.abilities.effects.common.continuous.GainAbilityAllEffect;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.filter.FilterPermanent;
 import mage.filter.predicate.mageobject.CardTypePredicate;
 
@@ -51,9 +52,8 @@ public class AuraFlux extends CardImpl {
         filter.add(new CardTypePredicate(CardType.ENCHANTMENT));
     }
     
-    public AuraFlux(UUID ownerId) {
-        super(ownerId, 27, "Aura Flux", Rarity.COMMON, new CardType[]{CardType.ENCHANTMENT}, "{2}{U}");
-        this.expansionSetCode = "ULG";
+    public AuraFlux(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.ENCHANTMENT},"{2}{U}");
 
 
         // Other enchantments have "At the beginning of your upkeep, sacrifice this enchantment unless you pay {2}."

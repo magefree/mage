@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.eldritchmoon;
+package mage.cards.n;
 
 import java.util.UUID;
 import mage.abilities.Ability;
@@ -37,8 +37,8 @@ import mage.abilities.dynamicvalue.common.DiscardCostCardConvertedMana;
 import mage.abilities.effects.Effect;
 import mage.abilities.effects.common.DamageTargetEffect;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.filter.FilterCard;
 import mage.filter.common.FilterCreatureOrPlaneswalkerPermanent;
 import mage.game.Game;
@@ -52,9 +52,8 @@ import mage.target.common.TargetCreatureOrPlaneswalker;
  */
 public class NahirisWrath extends CardImpl {
 
-    public NahirisWrath(UUID ownerId) {
-        super(ownerId, 137, "Nahiri's Wrath", Rarity.MYTHIC, new CardType[]{CardType.SORCERY}, "{2}{R}");
-        this.expansionSetCode = "EMN";
+    public NahirisWrath(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{2}{R}");
 
         // As an additional cost to cast Nahiri's Wrath, discard X cards.
         this.getSpellAbility().addCost(new NahirisWrathAdditionalCost());

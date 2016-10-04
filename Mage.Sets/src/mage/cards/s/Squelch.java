@@ -25,14 +25,14 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.championsofkamigawa;
+package mage.cards.s;
 
 import java.util.UUID;
 import mage.abilities.effects.common.CounterTargetEffect;
 import mage.abilities.effects.common.DrawCardSourceControllerEffect;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.target.common.TargetActivatedAbility;
 
 /**
@@ -41,9 +41,8 @@ import mage.target.common.TargetActivatedAbility;
  */
 public class Squelch extends CardImpl {
 
-    public Squelch(UUID ownerId) {
-        super(ownerId, 92, "Squelch", Rarity.UNCOMMON, new CardType[]{CardType.INSTANT}, "{1}{U}");
-        this.expansionSetCode = "CHK";
+    public Squelch(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.INSTANT},"{1}{U}");
 
 
         // Counter target activated ability.

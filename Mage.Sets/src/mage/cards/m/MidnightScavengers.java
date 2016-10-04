@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.eldritchmoon;
+package mage.cards.m;
 
 import java.util.UUID;
 import mage.MageInt;
@@ -35,8 +35,8 @@ import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.effects.common.InfoEffect;
 import mage.abilities.effects.common.ReturnFromGraveyardToHandTargetEffect;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.constants.Zone;
 import mage.filter.Filter;
 import mage.filter.common.FilterCreatureCard;
@@ -56,9 +56,8 @@ public class MidnightScavengers extends CardImpl {
         filter.add(new ConvertedManaCostPredicate(Filter.ComparisonType.LessThan, 4));
     }
 
-    public MidnightScavengers(UUID ownerId) {
-        super(ownerId, 96, "Midnight Scavengers", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{4}{B}");
-        this.expansionSetCode = "EMN";
+    public MidnightScavengers(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{4}{B}");
         this.subtype.add("Human");
         this.subtype.add("Rogue");
         this.power = new MageInt(3);

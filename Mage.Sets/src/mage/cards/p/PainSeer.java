@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.bornofthegods;
+package mage.cards.p;
 
 import java.util.UUID;
 import mage.MageInt;
@@ -34,11 +34,11 @@ import mage.abilities.effects.OneShotEffect;
 import mage.abilities.keyword.InspiredAbility;
 import mage.cards.Card;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.cards.Cards;
 import mage.cards.CardsImpl;
 import mage.constants.CardType;
 import mage.constants.Outcome;
-import mage.constants.Rarity;
 import mage.constants.Zone;
 import mage.game.Game;
 import mage.players.Player;
@@ -49,9 +49,8 @@ import mage.players.Player;
  */
 public class PainSeer extends CardImpl {
 
-    public PainSeer(UUID ownerId) {
-        super(ownerId, 80, "Pain Seer", Rarity.RARE, new CardType[]{CardType.CREATURE}, "{1}{B}");
-        this.expansionSetCode = "BNG";
+    public PainSeer(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{1}{B}");
         this.subtype.add("Human");
         this.subtype.add("Wizard");
 

@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.oathofthegatewatch;
+package mage.cards.n;
 
 import java.util.UUID;
 import mage.abilities.Ability;
@@ -33,9 +33,9 @@ import mage.abilities.effects.Effect;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.keyword.SupportEffect;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Outcome;
-import mage.constants.Rarity;
 import mage.constants.TargetController;
 import mage.counters.CounterType;
 import mage.filter.common.FilterCreaturePermanent;
@@ -59,9 +59,8 @@ public class NissasJudgment extends CardImpl {
         FILTER.add(new ControllerPredicate(TargetController.OPPONENT));
     }
 
-    public NissasJudgment(UUID ownerId) {
-        super(ownerId, 139, "Nissa's Judgment", Rarity.UNCOMMON, new CardType[]{CardType.SORCERY}, "{4}{G}");
-        this.expansionSetCode = "OGW";
+    public NissasJudgment(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{4}{G}");
 
         // Support 2.
         Effect effect = new SupportEffect(this, 2, false);

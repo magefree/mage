@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.fatereforged;
+package mage.cards.s;
 
 import java.util.UUID;
 import mage.MageInt;
@@ -37,9 +37,9 @@ import mage.abilities.effects.common.continuous.GainAbilityTargetEffect;
 import mage.abilities.keyword.DoubleStrikeAbility;
 import mage.abilities.keyword.ProwessAbility;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Duration;
-import mage.constants.Rarity;
 import mage.filter.FilterSpell;
 import mage.filter.predicate.Predicates;
 import mage.filter.predicate.mageobject.CardTypePredicate;
@@ -57,9 +57,8 @@ public class ShuYunTheSilentTempest extends CardImpl {
         filter.add(Predicates.not(new CardTypePredicate(CardType.CREATURE)));
     }
 
-    public ShuYunTheSilentTempest(UUID ownerId) {
-        super(ownerId, 52, "Shu Yun, the Silent Tempest", Rarity.RARE, new CardType[]{CardType.CREATURE}, "{2}{U}");
-        this.expansionSetCode = "FRF";
+    public ShuYunTheSilentTempest(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{2}{U}");
         this.supertype.add("Legendary");
         this.subtype.add("Human");
         this.subtype.add("Monk");

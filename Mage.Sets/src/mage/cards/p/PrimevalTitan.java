@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.magic2011;
+package mage.cards.p;
 
 import java.util.UUID;
 import mage.MageInt;
@@ -33,9 +33,9 @@ import mage.abilities.TriggeredAbilityImpl;
 import mage.abilities.effects.common.search.SearchLibraryPutInPlayEffect;
 import mage.abilities.keyword.TrampleAbility;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Outcome;
-import mage.constants.Rarity;
 import mage.constants.Zone;
 import mage.filter.common.FilterLandCard;
 import mage.game.Game;
@@ -49,9 +49,8 @@ import mage.target.common.TargetCardInLibrary;
  */
 public class PrimevalTitan extends CardImpl {
 
-    public PrimevalTitan(UUID ownerId) {
-        super(ownerId, 192, "Primeval Titan", Rarity.MYTHIC, new CardType[]{CardType.CREATURE}, "{4}{G}{G}");
-        this.expansionSetCode = "M11";
+    public PrimevalTitan(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{4}{G}{G}");
         this.subtype.add("Giant");
 
         this.power = new MageInt(6);

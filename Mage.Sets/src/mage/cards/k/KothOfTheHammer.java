@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.scarsofmirrodin;
+package mage.cards.k;
 
 import java.util.UUID;
 import mage.MageInt;
@@ -44,11 +44,11 @@ import mage.abilities.effects.common.GetEmblemEffect;
 import mage.abilities.effects.common.UntapTargetEffect;
 import mage.abilities.effects.common.continuous.BecomesCreatureTargetEffect;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Duration;
 import mage.constants.Layer;
 import mage.constants.Outcome;
-import mage.constants.Rarity;
 import mage.constants.SubLayer;
 import mage.constants.TargetController;
 import mage.constants.Zone;
@@ -78,9 +78,8 @@ public class KothOfTheHammer extends CardImpl {
         filterCount.add(new ControllerPredicate(TargetController.YOU));
     }
 
-    public KothOfTheHammer(UUID ownerId) {
-        super(ownerId, 94, "Koth of the Hammer", Rarity.MYTHIC, new CardType[]{CardType.PLANESWALKER}, "{2}{R}{R}");
-        this.expansionSetCode = "SOM";
+    public KothOfTheHammer(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.PLANESWALKER},"{2}{R}{R}");
         this.subtype.add("Koth");
 
         this.addAbility(new PlanswalkerEntersWithLoyalityCountersAbility(3));

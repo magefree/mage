@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.mirrodin;
+package mage.cards.w;
 
 import java.util.UUID;
 import mage.abilities.Mode;
@@ -33,8 +33,8 @@ import mage.abilities.effects.common.DamageEverythingEffect;
 import mage.abilities.effects.common.RegenerateAllEffect;
 import mage.abilities.keyword.EntwineAbility;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.filter.common.FilterControlledCreaturePermanent;
 
 /**
@@ -43,9 +43,8 @@ import mage.filter.common.FilterControlledCreaturePermanent;
  */
 public class WailOfTheNim extends CardImpl {
 
-    public WailOfTheNim(UUID ownerId) {
-        super(ownerId, 81, "Wail of the Nim", Rarity.COMMON, new CardType[]{CardType.INSTANT}, "{2}{B}");
-        this.expansionSetCode = "MRD";
+    public WailOfTheNim(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.INSTANT},"{2}{B}");
 
         // Choose one - Regenerate each creature you control;
         this.getSpellAbility().addEffect(new RegenerateAllEffect(new FilterControlledCreaturePermanent()));

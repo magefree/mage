@@ -25,17 +25,17 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.riseoftheeldrazi;
+package mage.cards.l;
 
 import java.util.UUID;
 
 import mage.constants.CardType;
 import mage.constants.Outcome;
-import mage.constants.Rarity;
 import mage.abilities.Ability;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.CounterTargetEffect;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.Zone;
 import mage.game.Game;
 import mage.players.Player;
@@ -48,9 +48,8 @@ import mage.cards.Card;
  */
 public class LayBare extends CardImpl {
 
-    public LayBare(UUID ownerId) {
-        super(ownerId, 74, "Lay Bare", Rarity.COMMON, new CardType[]{CardType.INSTANT}, "{2}{U}{U}");
-        this.expansionSetCode = "ROE";
+    public LayBare(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.INSTANT},"{2}{U}{U}");
 
 
         // Counter target spell. Look at its controller's hand.

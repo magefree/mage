@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.antiquities;
+package mage.cards.e;
 
 import java.util.UUID;
 import mage.abilities.common.BeginningOfUpkeepTriggeredAbility;
@@ -34,9 +34,9 @@ import mage.abilities.costs.mana.GenericManaCost;
 import mage.abilities.effects.common.SacrificeSourceUnlessPaysEffect;
 import mage.abilities.effects.common.continuous.GainAbilityAllEffect;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Duration;
-import mage.constants.Rarity;
 import mage.constants.TargetController;
 import mage.constants.Zone;
 import mage.filter.common.FilterArtifactPermanent;
@@ -47,9 +47,8 @@ import mage.filter.common.FilterArtifactPermanent;
  */
 public class EnergyFlux extends CardImpl {
 
-    public EnergyFlux(UUID ownerId) {
-        super(ownerId, 53, "Energy Flux", Rarity.UNCOMMON, new CardType[]{CardType.ENCHANTMENT}, "{2}{U}");
-        this.expansionSetCode = "ATQ";
+    public EnergyFlux(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.ENCHANTMENT},"{2}{U}");
 
 
         // All artifacts have "At the beginning of your upkeep, sacrifice this artifact unless you pay {2}."

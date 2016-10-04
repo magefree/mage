@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.magicorigins;
+package mage.cards.d;
 
 import java.util.UUID;
 import mage.MageInt;
@@ -39,9 +39,9 @@ import mage.abilities.effects.common.TapTargetEffect;
 import mage.abilities.effects.common.UntapTargetEffect;
 import mage.abilities.effects.common.continuous.BoostSourceEffect;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Duration;
-import mage.constants.Rarity;
 import mage.constants.Zone;
 import mage.filter.FilterSpell;
 import mage.filter.common.FilterInstantOrSorceryCard;
@@ -63,9 +63,8 @@ public class DiscipleOfTheRing extends CardImpl {
         filterSpell.add(Predicates.not(new CardTypePredicate(CardType.CREATURE)));
     }
 
-    public DiscipleOfTheRing(UUID ownerId) {
-        super(ownerId, 53, "Disciple of the Ring", Rarity.MYTHIC, new CardType[]{CardType.CREATURE}, "{3}{U}{U}");
-        this.expansionSetCode = "ORI";
+    public DiscipleOfTheRing(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{3}{U}{U}");
         this.subtype.add("Human");
         this.subtype.add("Wizard");
         this.power = new MageInt(3);

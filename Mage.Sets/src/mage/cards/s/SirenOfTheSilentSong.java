@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.bornofthegods;
+package mage.cards.s;
 
 import java.util.UUID;
 import mage.MageInt;
@@ -36,8 +36,8 @@ import mage.abilities.effects.common.PutTopCardOfLibraryIntoGraveEachPlayerEffec
 import mage.abilities.keyword.FlyingAbility;
 import mage.abilities.keyword.InspiredAbility;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.constants.TargetController;
 
 /**
@@ -46,9 +46,8 @@ import mage.constants.TargetController;
  */
 public class SirenOfTheSilentSong extends CardImpl {
 
-    public SirenOfTheSilentSong(UUID ownerId) {
-        super(ownerId, 155, "Siren of the Silent Song", Rarity.UNCOMMON, new CardType[]{CardType.CREATURE}, "{1}{U}{B}");
-        this.expansionSetCode = "BNG";
+    public SirenOfTheSilentSong(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{1}{U}{B}");
         this.subtype.add("Zombie");
         this.subtype.add("Siren");
 

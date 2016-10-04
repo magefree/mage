@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.riseoftheeldrazi;
+package mage.cards.i;
 
 import java.util.UUID;
 import mage.abilities.Ability;
@@ -34,10 +34,10 @@ import mage.abilities.effects.ContinuousEffect;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.continuous.BoostTargetEffect;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Duration;
 import mage.constants.Outcome;
-import mage.constants.Rarity;
 import mage.filter.common.FilterCreatureCard;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
@@ -53,9 +53,8 @@ public class InduceDespair extends CardImpl {
 
     private static final FilterCreatureCard filter = new FilterCreatureCard("creature card from your hand");
 
-    public InduceDespair(UUID ownerId) {
-        super(ownerId, 114, "Induce Despair", Rarity.COMMON, new CardType[]{CardType.INSTANT}, "{2}{B}");
-        this.expansionSetCode = "ROE";
+    public InduceDespair(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.INSTANT},"{2}{B}");
 
         // As an additional cost to cast Induce Despair, reveal a creature card from your hand.
         // Target creature gets -X/-X until end of turn, where X is the revealed card's converted mana cost.

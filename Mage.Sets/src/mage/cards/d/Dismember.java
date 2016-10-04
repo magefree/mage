@@ -26,15 +26,15 @@
  *  or implied, of BetaSteward_at_googlemail.com.
  */
 
-package mage.sets.newphyrexia;
+package mage.cards.d;
 
 import java.util.UUID;
 
 import mage.constants.CardType;
 import mage.constants.Duration;
-import mage.constants.Rarity;
 import mage.abilities.effects.common.continuous.BoostTargetEffect;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.target.common.TargetCreaturePermanent;
 
 /**
@@ -43,9 +43,8 @@ import mage.target.common.TargetCreaturePermanent;
  */
 public class Dismember extends CardImpl {
 
-    public Dismember (UUID ownerId) {
-        super(ownerId, 57, "Dismember", Rarity.UNCOMMON, new CardType[]{CardType.INSTANT}, "{1}{BP}{BP}");
-        this.expansionSetCode = "NPH";
+    public Dismember (UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.INSTANT},"{1}{BP}{BP}");
 
         
         // Target creature gets -5/-5 until end of turn.

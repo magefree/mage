@@ -25,15 +25,15 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.homelands;
+package mage.cards.d;
 
 import java.util.UUID;
 import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.costs.mana.ManaCostsImpl;
 import mage.abilities.effects.common.PutPermanentOnBattlefieldEffect;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.constants.Zone;
 import mage.filter.common.FilterPermanentCard;
 import mage.filter.predicate.mageobject.SubtypePredicate;
@@ -50,9 +50,8 @@ public class Didgeridoo extends CardImpl {
         filter.add(new SubtypePredicate("Minotaur"));
     }
 
-    public Didgeridoo(UUID ownerId) {
-        super(ownerId, 130, "Didgeridoo", Rarity.RARE, new CardType[]{CardType.ARTIFACT}, "{1}");
-        this.expansionSetCode = "HML";
+    public Didgeridoo(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.ARTIFACT},"{1}");
 
         // {3}: You may put a Minotaur permanent card from your hand onto the battlefield.
         this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new PutPermanentOnBattlefieldEffect(filter), new ManaCostsImpl("{3}")));

@@ -25,15 +25,15 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.innistrad;
+package mage.cards.g;
 
 import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.MageInt;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.effects.common.continuous.BoostControlledEffect;
 import mage.abilities.keyword.FlyingAbility;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.Duration;
 import mage.constants.Zone;
 import mage.filter.common.FilterCreaturePermanent;
@@ -52,9 +52,8 @@ public class GallowsWarden extends CardImpl {
         filter.add(new SubtypePredicate("Spirit"));
     }
 
-    public GallowsWarden(UUID ownerId) {
-        super(ownerId, 16, "Gallows Warden", Rarity.UNCOMMON, new CardType[]{CardType.CREATURE}, "{4}{W}");
-        this.expansionSetCode = "ISD";
+    public GallowsWarden(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{4}{W}");
         this.subtype.add("Spirit");
 
         this.power = new MageInt(3);

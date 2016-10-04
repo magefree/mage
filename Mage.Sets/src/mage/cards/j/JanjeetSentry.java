@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.kaladesh;
+package mage.cards.j;
 
 import java.util.UUID;
 import mage.MageInt;
@@ -37,8 +37,8 @@ import mage.abilities.costs.common.TapSourceCost;
 import mage.abilities.effects.common.MayTapOrUntapTargetEffect;
 import mage.abilities.effects.common.counter.GetEnergyCountersControllerEffect;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.constants.Zone;
 import mage.filter.StaticFilters;
 import mage.target.TargetPermanent;
@@ -49,9 +49,8 @@ import mage.target.TargetPermanent;
  */
 public class JanjeetSentry extends CardImpl {
 
-    public JanjeetSentry(UUID ownerId) {
-        super(ownerId, 53, "Janjeet Sentry", Rarity.UNCOMMON, new CardType[]{CardType.CREATURE}, "{2}{U}");
-        this.expansionSetCode = "KLD";
+    public JanjeetSentry(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{2}{U}");
         this.subtype.add("Vedalken");
         this.subtype.add("Soldier");
         this.power = new MageInt(2);

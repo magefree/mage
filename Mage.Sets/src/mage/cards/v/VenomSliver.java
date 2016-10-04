@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.magic2015;
+package mage.cards.v;
 
 import java.util.UUID;
 import mage.MageInt;
@@ -33,9 +33,9 @@ import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.effects.common.continuous.GainAbilityControlledEffect;
 import mage.abilities.keyword.DeathtouchAbility;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Duration;
-import mage.constants.Rarity;
 import mage.constants.Zone;
 import mage.filter.common.FilterCreaturePermanent;
 
@@ -45,9 +45,8 @@ import mage.filter.common.FilterCreaturePermanent;
  */
 public class VenomSliver extends CardImpl {
 
-    public VenomSliver(UUID ownerId) {
-        super(ownerId, 205, "Venom Sliver", Rarity.UNCOMMON, new CardType[]{CardType.CREATURE}, "{1}{G}");
-        this.expansionSetCode = "M15";
+    public VenomSliver(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{1}{G}");
         this.subtype.add("Sliver");
 
         this.power = new MageInt(1);

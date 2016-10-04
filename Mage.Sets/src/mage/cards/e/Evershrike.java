@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.eventide;
+package mage.cards.e;
 
 import java.util.UUID;
 import mage.MageInt;
@@ -39,10 +39,10 @@ import mage.abilities.effects.common.continuous.BoostSourceEffect;
 import mage.abilities.keyword.FlyingAbility;
 import mage.cards.Card;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Duration;
 import mage.constants.Outcome;
-import mage.constants.Rarity;
 import mage.constants.Zone;
 import mage.filter.Filter.ComparisonType;
 import mage.filter.FilterCard;
@@ -62,9 +62,8 @@ import mage.target.TargetCard;
  */
 public class Evershrike extends CardImpl {
 
-    public Evershrike(UUID ownerId) {
-        super(ownerId, 88, "Evershrike", Rarity.RARE, new CardType[]{CardType.CREATURE}, "{3}{W/B}{W/B}");
-        this.expansionSetCode = "EVE";
+    public Evershrike(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{3}{W/B}{W/B}");
         this.subtype.add("Elemental");
         this.subtype.add("Spirit");
 

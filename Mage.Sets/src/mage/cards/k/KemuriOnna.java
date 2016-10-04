@@ -25,11 +25,10 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.saviorsofkamigawa;
+package mage.cards.k;
 
 import java.util.UUID;
 import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.EntersBattlefieldTriggeredAbility;
@@ -37,6 +36,7 @@ import mage.abilities.common.SpellCastControllerTriggeredAbility;
 import mage.abilities.effects.common.discard.DiscardTargetEffect;
 import mage.abilities.effects.common.ReturnToHandSourceEffect;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.filter.common.FilterSpiritOrArcaneCard;
 import mage.target.TargetPlayer;
 
@@ -48,9 +48,8 @@ public class KemuriOnna extends CardImpl {
 
     private static final FilterSpiritOrArcaneCard filter = new FilterSpiritOrArcaneCard();
 
-    public KemuriOnna(UUID ownerId) {
-        super(ownerId, 76, "Kemuri-Onna", Rarity.UNCOMMON, new CardType[]{CardType.CREATURE}, "{4}{B}");
-        this.expansionSetCode = "SOK";
+    public KemuriOnna(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{4}{B}");
         this.subtype.add("Spirit");
 
         this.power = new MageInt(3);

@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.khansoftarkir;
+package mage.cards.s;
 
 import java.util.UUID;
 import mage.MageInt;
@@ -36,9 +36,9 @@ import mage.abilities.effects.common.continuous.GainAbilityControlledEffect;
 import mage.abilities.keyword.FlashAbility;
 import mage.abilities.keyword.TrampleAbility;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Duration;
-import mage.constants.Rarity;
 import mage.constants.Zone;
 import mage.filter.FilterSpell;
 import mage.filter.common.FilterCreaturePermanent;
@@ -57,9 +57,8 @@ public class SurrakDragonclaw extends CardImpl {
         filterTarget.add(new CardTypePredicate(CardType.CREATURE));
     }
 
-    public SurrakDragonclaw(UUID ownerId) {
-        super(ownerId, 206, "Surrak Dragonclaw", Rarity.MYTHIC, new CardType[]{CardType.CREATURE}, "{2}{G}{U}{R}");
-        this.expansionSetCode = "KTK";
+    public SurrakDragonclaw(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{2}{G}{U}{R}");
         this.supertype.add("Legendary");
         this.subtype.add("Human");
         this.subtype.add("Warrior");

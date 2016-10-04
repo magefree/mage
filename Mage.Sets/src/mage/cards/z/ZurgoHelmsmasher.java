@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.khansoftarkir;
+package mage.cards.z;
 
 import java.util.UUID;
 import mage.MageInt;
@@ -39,9 +39,9 @@ import mage.abilities.effects.common.counter.AddCountersSourceEffect;
 import mage.abilities.keyword.HasteAbility;
 import mage.abilities.keyword.IndestructibleAbility;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Duration;
-import mage.constants.Rarity;
 import mage.constants.Zone;
 import mage.counters.CounterType;
 
@@ -51,9 +51,8 @@ import mage.counters.CounterType;
  */
 public class ZurgoHelmsmasher extends CardImpl {
 
-    public ZurgoHelmsmasher(UUID ownerId) {
-        super(ownerId, 214, "Zurgo Helmsmasher", Rarity.MYTHIC, new CardType[]{CardType.CREATURE}, "{2}{R}{W}{B}");
-        this.expansionSetCode = "KTK";
+    public ZurgoHelmsmasher(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{2}{R}{W}{B}");
         this.supertype.add("Legendary");
         this.subtype.add("Orc");
         this.subtype.add("Warrior");

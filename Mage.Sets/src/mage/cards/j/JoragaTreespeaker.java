@@ -26,12 +26,11 @@
  *  or implied, of BetaSteward_at_googlemail.com.
  */
 
-package mage.sets.riseoftheeldrazi;
+package mage.cards.j;
 
 import java.util.UUID;
 import mage.constants.CardType;
 import mage.constants.Duration;
-import mage.constants.Rarity;
 import mage.constants.Zone;
 import mage.MageInt;
 import mage.Mana;
@@ -46,6 +45,7 @@ import mage.abilities.effects.common.continuous.GainAbilityControlledEffect;
 import mage.abilities.keyword.LevelUpAbility;
 import mage.abilities.keyword.LevelerCardBuilder;
 import mage.abilities.mana.SimpleManaAbility;
+import mage.cards.CardSetInfo;
 import mage.cards.LevelerCard;
 import mage.filter.common.FilterControlledCreaturePermanent;
 import mage.filter.predicate.mageobject.SubtypePredicate;
@@ -63,9 +63,8 @@ public class JoragaTreespeaker extends LevelerCard {
         filter.add(new SubtypePredicate("Elf"));
     }
 
-    public JoragaTreespeaker(UUID ownerId) {
-        super(ownerId, 190, "Joraga Treespeaker", Rarity.UNCOMMON, new CardType[]{CardType.CREATURE}, "{G}");
-        this.expansionSetCode = "ROE";
+    public JoragaTreespeaker(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{G}");
         this.subtype.add("Elf");
         this.subtype.add("Druid");
 

@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.stronghold;
+package mage.cards.c;
 
 import java.util.UUID;
 import mage.MageInt;
@@ -33,9 +33,9 @@ import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.effects.common.continuous.GainAbilityAllEffect;
 import mage.abilities.keyword.ShroudAbility;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Duration;
-import mage.constants.Rarity;
 import mage.constants.Zone;
 import mage.filter.FilterPermanent;
 
@@ -45,9 +45,8 @@ import mage.filter.FilterPermanent;
  */
 public class CrystallineSliver extends CardImpl {
 
-    public CrystallineSliver(UUID ownerId) {
-        super(ownerId, 139, "Crystalline Sliver", Rarity.UNCOMMON, new CardType[]{CardType.CREATURE}, "{W}{U}");
-        this.expansionSetCode = "STH";
+    public CrystallineSliver(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{W}{U}");
         this.subtype.add("Sliver");
 
         this.power = new MageInt(2);

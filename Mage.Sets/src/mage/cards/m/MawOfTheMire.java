@@ -25,14 +25,14 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.innistrad;
+package mage.cards.m;
 
 import java.util.UUID;
 import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.abilities.effects.common.DestroyTargetEffect;
 import mage.abilities.effects.common.GainLifeEffect;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.target.common.TargetLandPermanent;
 
 /**
@@ -41,9 +41,8 @@ import mage.target.common.TargetLandPermanent;
  */
 public class MawOfTheMire extends CardImpl {
 
-    public MawOfTheMire(UUID ownerId) {
-        super(ownerId, 108, "Maw of the Mire", Rarity.COMMON, new CardType[]{CardType.SORCERY}, "{4}{B}");
-        this.expansionSetCode = "ISD";
+    public MawOfTheMire(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{4}{B}");
 
 
         // Destroy target land. You gain 4 life.

@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.vintagemasters;
+package mage.cards.s;
 
 import java.util.UUID;
 import mage.abilities.common.SimpleTriggeredAbility;
@@ -33,8 +33,8 @@ import mage.abilities.costs.mana.ManaCostsImpl;
 import mage.abilities.effects.common.CreateTokenEffect;
 import mage.abilities.effects.common.DoIfCostPaid;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.constants.Zone;
 import mage.game.events.GameEvent;
 import mage.game.permanent.token.SpiritWhiteToken;
@@ -45,9 +45,8 @@ import mage.game.permanent.token.SpiritWhiteToken;
  */
 public class SpiritCairn extends CardImpl {
 
-    public SpiritCairn(UUID ownerId) {
-        super(ownerId, 48, "Spirit Cairn", Rarity.RARE, new CardType[]{CardType.ENCHANTMENT}, "{2}{W}");
-        this.expansionSetCode = "VMA";
+    public SpiritCairn(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.ENCHANTMENT},"{2}{W}");
 
         // Whenever a player discards a card, you may pay {W}. If you do, put a 1/1 white Spirit creature token with flying onto the battlefield.
         this.addAbility(new SimpleTriggeredAbility(Zone.BATTLEFIELD, GameEvent.EventType.DISCARDED_CARD, 

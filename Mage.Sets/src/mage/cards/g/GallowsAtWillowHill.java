@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.avacynrestored;
+package mage.cards.g;
 
 import java.util.UUID;
 import mage.abilities.Ability;
@@ -36,9 +36,9 @@ import mage.abilities.costs.mana.GenericManaCost;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.CreateTokenEffect;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Outcome;
-import mage.constants.Rarity;
 import mage.constants.Zone;
 import mage.filter.common.FilterControlledPermanent;
 import mage.filter.predicate.Predicates;
@@ -63,9 +63,8 @@ public class GallowsAtWillowHill extends CardImpl {
         humanFilter.add(new SubtypePredicate("Human"));
     }
 
-    public GallowsAtWillowHill(UUID ownerId) {
-        super(ownerId, 215, "Gallows at Willow Hill", Rarity.RARE, new CardType[]{CardType.ARTIFACT}, "{3}");
-        this.expansionSetCode = "AVR";
+    public GallowsAtWillowHill(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.ARTIFACT},"{3}");
 
         // {3}, {tap}, Tap three untapped Humans you control: Destroy target creature. Its controller puts a 1/1 white Spirit creature token with flying onto the battlefield.
         Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new GallowsAtWillowHillEffect(), new GenericManaCost(3));

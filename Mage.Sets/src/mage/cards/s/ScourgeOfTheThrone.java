@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.vintagemasters;
+package mage.cards.s;
 
 import mage.MageInt;
 import mage.abilities.Ability;
@@ -36,8 +36,8 @@ import mage.abilities.effects.common.UntapAllControllerEffect;
 import mage.abilities.keyword.DethroneAbility;
 import mage.abilities.keyword.FlyingAbility;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.constants.Zone;
 import mage.filter.common.FilterControlledCreaturePermanent;
 import mage.game.Game;
@@ -54,9 +54,8 @@ import java.util.UUID;
  */
 public class ScourgeOfTheThrone extends CardImpl {
 
-    public ScourgeOfTheThrone(UUID ownerId) {
-        super(ownerId, 184, "Scourge of the Throne", Rarity.MYTHIC, new CardType[]{CardType.CREATURE}, "{4}{R}{R}");
-        this.expansionSetCode = "VMA";
+    public ScourgeOfTheThrone(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{4}{R}{R}");
         this.subtype.add("Dragon");
 
         this.power = new MageInt(5);

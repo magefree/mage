@@ -25,16 +25,16 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.ravnica;
+package mage.cards.m;
 
 import java.util.UUID;
 import mage.abilities.Ability;
 import mage.abilities.common.SpellCastControllerTriggeredAbility;
 import mage.abilities.effects.OneShotEffect;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Outcome;
-import mage.constants.Rarity;
 import mage.game.Game;
 import mage.players.Player;
 
@@ -44,9 +44,8 @@ import mage.players.Player;
  */
 public class Mindmoil extends CardImpl {
 
-    public Mindmoil(UUID ownerId) {
-        super(ownerId, 135, "Mindmoil", Rarity.RARE, new CardType[]{CardType.ENCHANTMENT}, "{4}{R}");
-        this.expansionSetCode = "RAV";
+    public Mindmoil(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.ENCHANTMENT},"{4}{R}");
 
 
         // Whenever you cast a spell, put the cards in your hand on the bottom of your library in any order, then draw that many cards.

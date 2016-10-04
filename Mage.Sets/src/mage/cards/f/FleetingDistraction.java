@@ -26,15 +26,15 @@
  *  or implied, of BetaSteward_at_googlemail.com.
  */
 
-package mage.sets.riseoftheeldrazi;
+package mage.cards.f;
 
 import java.util.UUID;
 
 import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.abilities.effects.common.DrawCardSourceControllerEffect;
 import mage.abilities.effects.common.continuous.BoostTargetEffect;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.Duration;
 import mage.target.common.TargetCreaturePermanent;
 
@@ -44,9 +44,8 @@ import mage.target.common.TargetCreaturePermanent;
  */
 public class FleetingDistraction extends CardImpl {
 
-    public FleetingDistraction (UUID ownerId) {
-        super(ownerId, 67, "Fleeting Distraction", Rarity.COMMON, new CardType[]{CardType.INSTANT}, "{U}");
-        this.expansionSetCode = "ROE";
+    public FleetingDistraction (UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.INSTANT},"{U}");
 
         this.getSpellAbility().addEffect(new BoostTargetEffect(-1, 0, Duration.EndOfTurn));
         this.getSpellAbility().addEffect(new DrawCardSourceControllerEffect(1));

@@ -25,14 +25,13 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.urzassaga;
+package mage.cards.c;
 
 import java.util.UUID;
 import mage.constants.CardType;
 import mage.constants.Duration;
 import mage.constants.Layer;
 import mage.constants.Outcome;
-import mage.constants.Rarity;
 import mage.constants.SubLayer;
 import mage.constants.Zone;
 import mage.abilities.Ability;
@@ -40,6 +39,7 @@ import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.costs.mana.ManaCostsImpl;
 import mage.abilities.effects.ContinuousEffectImpl;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 
@@ -49,9 +49,8 @@ import mage.game.permanent.Permanent;
  */
 public class ChimericStaff extends CardImpl {
 
-    public ChimericStaff(UUID ownerId) {
-        super(ownerId, 288, "Chimeric Staff", Rarity.RARE, new CardType[]{CardType.ARTIFACT}, "{4}");
-        this.expansionSetCode = "USG";
+    public ChimericStaff(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.ARTIFACT},"{4}");
 
         // {X}: Chimeric Staff becomes an X/X Construct artifact creature until end of turn.
         this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new ChimericStaffEffect(), new ManaCostsImpl("{X}")));

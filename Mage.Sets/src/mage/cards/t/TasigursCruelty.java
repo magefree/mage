@@ -25,15 +25,15 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.fatereforged;
+package mage.cards.t;
 
 import java.util.UUID;
 import mage.abilities.dynamicvalue.common.StaticValue;
 import mage.abilities.effects.common.discard.DiscardEachPlayerEffect;
 import mage.abilities.keyword.DelveAbility;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.constants.TargetController;
 
 /**
@@ -42,9 +42,8 @@ import mage.constants.TargetController;
  */
 public class TasigursCruelty extends CardImpl {
 
-    public TasigursCruelty(UUID ownerId) {
-        super(ownerId, 88, "Tasigur's Cruelty", Rarity.COMMON, new CardType[]{CardType.SORCERY}, "{5}{B}");
-        this.expansionSetCode = "FRF";
+    public TasigursCruelty(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{5}{B}");
 
         // Delve
         this.addAbility(new DelveAbility());

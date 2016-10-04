@@ -25,16 +25,16 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.odyssey;
+package mage.cards.e;
 
 import java.util.UUID;
 import mage.abilities.Ability;
 import mage.abilities.effects.OneShotEffect;
 import mage.cards.Card;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Outcome;
-import mage.constants.Rarity;
 import mage.constants.Zone;
 import mage.filter.FilterCard;
 import mage.game.Game;
@@ -48,9 +48,8 @@ import mage.target.common.TargetCardInLibrary;
  */
 public class Extract extends CardImpl {
 
-    public Extract(UUID ownerId) {
-        super(ownerId, 85, "Extract", Rarity.RARE, new CardType[]{CardType.SORCERY}, "{U}");
-        this.expansionSetCode = "ODY";
+    public Extract(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{U}");
 
 
         // Search target player's library for a card and exile it. Then that player shuffles his or her library.

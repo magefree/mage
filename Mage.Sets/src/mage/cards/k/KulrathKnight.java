@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.shadowmoor;
+package mage.cards.k;
 
 import java.util.UUID;
 import mage.MageInt;
@@ -35,9 +35,9 @@ import mage.abilities.effects.RestrictionEffect;
 import mage.abilities.keyword.FlyingAbility;
 import mage.abilities.keyword.WitherAbility;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Duration;
-import mage.constants.Rarity;
 import mage.constants.TargetController;
 import mage.constants.Zone;
 import mage.filter.common.FilterCreaturePermanent;
@@ -52,9 +52,8 @@ import mage.game.permanent.Permanent;
  */
 public class KulrathKnight extends CardImpl {
 
-    public KulrathKnight(UUID ownerId) {
-        super(ownerId, 190, "Kulrath Knight", Rarity.UNCOMMON, new CardType[]{CardType.CREATURE}, "{3}{B/R}{B/R}");
-        this.expansionSetCode = "SHM";
+    public KulrathKnight(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{3}{B/R}{B/R}");
         this.subtype.add("Elemental");
         this.subtype.add("Knight");
         this.power = new MageInt(3);

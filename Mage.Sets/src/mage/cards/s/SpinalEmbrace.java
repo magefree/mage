@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.invasion;
+package mage.cards.s;
 
 import java.util.UUID;
 import mage.abilities.Ability;
@@ -39,10 +39,10 @@ import mage.abilities.effects.common.continuous.GainAbilityTargetEffect;
 import mage.abilities.effects.common.continuous.GainControlTargetEffect;
 import mage.abilities.keyword.HasteAbility;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Duration;
 import mage.constants.Outcome;
-import mage.constants.Rarity;
 import mage.constants.TargetController;
 import mage.constants.TurnPhase;
 import mage.filter.common.FilterCreaturePermanent;
@@ -65,9 +65,8 @@ public class SpinalEmbrace extends CardImpl {
         filter.add(new ControllerPredicate(TargetController.NOT_YOU));
     }
 
-    public SpinalEmbrace(UUID ownerId) {
-        super(ownerId, 276, "Spinal Embrace", Rarity.RARE, new CardType[]{CardType.INSTANT}, "{3}{U}{U}{B}");
-        this.expansionSetCode = "INV";
+    public SpinalEmbrace(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.INSTANT},"{3}{U}{U}{B}");
 
         // Cast Spinal Embrace only during combat.
         this.addAbility(new CastOnlyDuringPhaseStepSourceAbility(TurnPhase.COMBAT));

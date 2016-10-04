@@ -25,18 +25,18 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.exodus;
+package mage.cards.e;
 
 import java.util.UUID;
 
 import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.MageInt;
 import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.costs.common.DiscardTargetCost;
 import mage.abilities.effects.common.ReturnToHandSourceEffect;
 import mage.abilities.keyword.FlyingAbility;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.Zone;
 import mage.target.common.TargetCardInHand;
 
@@ -46,9 +46,8 @@ import mage.target.common.TargetCardInHand;
  */
 public class Ephemeron extends CardImpl {
 
-    public Ephemeron(UUID ownerId) {
-        super(ownerId, 31, "Ephemeron", Rarity.RARE, new CardType[]{CardType.CREATURE}, "{4}{U}{U}");
-        this.expansionSetCode = "EXO";
+    public Ephemeron(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{4}{U}{U}");
         this.subtype.add("Illusion");
 
         this.power = new MageInt(4);

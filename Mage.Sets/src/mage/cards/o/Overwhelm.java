@@ -25,15 +25,15 @@
 *  authors and should not be interpreted as representing official policies, either expressed
 *  or implied, of BetaSteward_at_googlemail.com.
 */
-package mage.sets.ravnica;
+package mage.cards.o;
 
 import java.util.UUID;
 import mage.constants.CardType;
 import mage.constants.Duration;
-import mage.constants.Rarity;
 import mage.abilities.effects.common.continuous.BoostControlledEffect;
 import mage.abilities.keyword.ConvokeAbility;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 
 /**
 *
@@ -41,9 +41,8 @@ import mage.cards.CardImpl;
 */
 public class Overwhelm extends CardImpl {
 
-    public Overwhelm(UUID ownerId) {
-        super(ownerId, 175, "Overwhelm", Rarity.UNCOMMON, new CardType[]{CardType.SORCERY}, "{5}{G}{G}");      
-        this.expansionSetCode = "RAV";
+    public Overwhelm(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{5}{G}{G}");      
       
         // Convoke (Each creature you tap while casting this spell reduces its cost by {1} or by one mana of that creature's color.)
         this.addAbility(new ConvokeAbility());

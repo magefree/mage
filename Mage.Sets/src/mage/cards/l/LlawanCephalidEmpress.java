@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.torment;
+package mage.cards.l;
 
 import java.util.UUID;
 import mage.MageInt;
@@ -38,10 +38,10 @@ import mage.abilities.effects.ContinuousRuleModifyingEffectImpl;
 import mage.abilities.effects.common.ReturnToHandFromBattlefieldAllEffect;
 import mage.cards.Card;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Duration;
 import mage.constants.Outcome;
-import mage.constants.Rarity;
 import mage.constants.TargetController;
 import mage.constants.Zone;
 import mage.filter.FilterCard;
@@ -67,9 +67,8 @@ public class LlawanCephalidEmpress extends CardImpl {
         filter.add(new CardTypePredicate(CardType.CREATURE));
     }
 
-    public LlawanCephalidEmpress(UUID ownerId) {
-        super(ownerId, 42, "Llawan, Cephalid Empress", Rarity.RARE, new CardType[]{CardType.CREATURE}, "{3}{U}");
-        this.expansionSetCode = "TOR";
+    public LlawanCephalidEmpress(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{3}{U}");
         this.supertype.add("Legendary");
         this.subtype.add("Cephalid");
 

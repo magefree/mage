@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.oathofthegatewatch;
+package mage.cards.o;
 
 import java.util.HashSet;
 import java.util.Set;
@@ -39,9 +39,9 @@ import mage.abilities.dynamicvalue.common.StaticValue;
 import mage.abilities.effects.common.DamagePlayersEffect;
 import mage.abilities.effects.common.DamageTargetEffect;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Outcome;
-import mage.constants.Rarity;
 import mage.constants.TargetController;
 import mage.constants.WatcherScope;
 import mage.constants.Zone;
@@ -65,9 +65,8 @@ public class OathOfChandra extends CardImpl {
         filter.add(new ControllerPredicate(TargetController.OPPONENT));
     }
 
-    public OathOfChandra(UUID ownerId) {
-        super(ownerId, 113, "Oath of Chandra", Rarity.RARE, new CardType[]{CardType.ENCHANTMENT}, "{1}{R}");
-        this.expansionSetCode = "OGW";
+    public OathOfChandra(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.ENCHANTMENT},"{1}{R}");
         this.supertype.add("Legendary");
 
         // When Oath of Chandra enters the battlefield, it deals 3 damage to target creature an opponent controls.

@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.mercadianmasques;
+package mage.cards.u;
 
 import java.util.UUID;
 import mage.ObjectColor;
@@ -33,8 +33,8 @@ import mage.abilities.costs.AlternativeCostSourceAbility;
 import mage.abilities.costs.common.ExileFromHandCost;
 import mage.abilities.effects.common.discard.DiscardCardYouChooseTargetEffect;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.constants.TargetController;
 import mage.filter.FilterCard;
 import mage.filter.predicate.Predicates;
@@ -57,9 +57,8 @@ public class Unmask extends CardImpl {
         filter.add(new ColorPredicate(ObjectColor.BLACK));
     }
     
-    public Unmask(UUID ownerId) {
-        super(ownerId, 168, "Unmask", Rarity.RARE, new CardType[]{CardType.SORCERY}, "{3}{B}");
-        this.expansionSetCode = "MMQ";
+    public Unmask(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{3}{B}");
 
 
         // You may exile a black card from your hand rather than pay Unmask's mana cost.

@@ -25,15 +25,15 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.fatereforged;
+package mage.cards.g;
 
 import java.util.UUID;
 import mage.abilities.Ability;
 import mage.abilities.effects.OneShotEffect;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Outcome;
-import mage.constants.Rarity;
 import mage.constants.TargetController;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.filter.predicate.permanent.ControllerPredicate;
@@ -55,9 +55,8 @@ public class GrimContest extends CardImpl {
         filter.add(new ControllerPredicate(TargetController.OPPONENT));
     }
 
-    public GrimContest(UUID ownerId) {
-        super(ownerId, 153, "Grim Contest", Rarity.COMMON, new CardType[]{CardType.INSTANT}, "{1}{B}{G}");
-        this.expansionSetCode = "FRF";
+    public GrimContest(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.INSTANT},"{1}{B}{G}");
 
         // Choose target creature you control and target creature an opponent controls. Each of those creatures deals damage equal to its toughness to the other.
         this.getSpellAbility().addEffect(new GrimContestEffect());

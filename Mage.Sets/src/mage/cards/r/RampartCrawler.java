@@ -26,16 +26,16 @@
  *  or implied, of BetaSteward_at_googlemail.com.
  */
 
-package mage.sets.mercadianmasques;
+package mage.cards.r;
 
 import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.common.SimpleEvasionAbility;
 import mage.abilities.effects.common.combat.CantBeBlockedByCreaturesSourceEffect;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Duration;
-import mage.constants.Rarity;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.filter.predicate.mageobject.SubtypePredicate;
 
@@ -51,9 +51,8 @@ public class RampartCrawler extends CardImpl {
         filter.add(new SubtypePredicate("Wall"));
     }
 
-    public RampartCrawler(UUID ownerId) {
-        super(ownerId, 156, "Rampart Crawler", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{B}");
-        this.expansionSetCode = "MMQ";
+    public RampartCrawler(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{B}");
         this.subtype.add("Lizard");
         this.subtype.add("Mercenary");
 

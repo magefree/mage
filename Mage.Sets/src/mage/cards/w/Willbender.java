@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.commander2014;
+package mage.cards.w;
 
 import java.util.UUID;
 import mage.MageInt;
@@ -35,8 +35,8 @@ import mage.abilities.costs.mana.ManaCostsImpl;
 import mage.abilities.effects.common.ChooseNewTargetsTargetEffect;
 import mage.abilities.keyword.MorphAbility;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.filter.FilterStackObject;
 import mage.filter.predicate.mageobject.NumberOfTargetsPredicate;
 import mage.target.TargetStackObject;
@@ -53,9 +53,8 @@ public class Willbender extends CardImpl {
         FILTER.add(new NumberOfTargetsPredicate(1));
     }
 
-    public Willbender(UUID ownerId) {
-        super(ownerId, 131, "Willbender", Rarity.UNCOMMON, new CardType[]{CardType.CREATURE}, "{1}{U}");
-        this.expansionSetCode = "C14";
+    public Willbender(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{1}{U}");
         this.subtype.add("Human");
         this.subtype.add("Wizard");
 

@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.homelands;
+package mage.cards.c;
 
 import java.util.UUID;
 import mage.ObjectColor;
@@ -40,8 +40,8 @@ import mage.abilities.effects.Effect;
 import mage.abilities.effects.common.counter.AddCountersSourceEffect;
 import mage.abilities.effects.common.counter.AddCountersTargetEffect;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.constants.Zone;
 import mage.counters.CounterType;
 import mage.filter.common.FilterControlledCreaturePermanent;
@@ -69,9 +69,8 @@ public class CoralReef extends CardImpl {
         untappedBlueCreatureFilter.add(new ColorPredicate(ObjectColor.BLUE));
     }
 
-    public CoralReef(UUID ownerId) {
-        super(ownerId, 29, "Coral Reef", Rarity.COMMON, new CardType[]{CardType.ENCHANTMENT}, "{U}{U}");
-        this.expansionSetCode = "HML";
+    public CoralReef(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.ENCHANTMENT},"{U}{U}");
 
         // Coral Reef enters the battlefield with four polyp counters on it.
         Effect effect = new AddCountersSourceEffect(CounterType.POLYP.createInstance(4));

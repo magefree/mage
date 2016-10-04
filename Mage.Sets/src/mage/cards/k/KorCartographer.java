@@ -25,15 +25,15 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.zendikar;
+package mage.cards.k;
 
 import java.util.UUID;
 import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.MageInt;
 import mage.abilities.common.EntersBattlefieldTriggeredAbility;
 import mage.abilities.effects.common.search.SearchLibraryPutInPlayEffect;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.filter.common.FilterBySubtypeCard;
 import mage.target.common.TargetCardInLibrary;
 
@@ -43,9 +43,8 @@ import mage.target.common.TargetCardInLibrary;
  */
 public class KorCartographer extends CardImpl {
 
-    public KorCartographer(UUID ownerId) {
-        super(ownerId, 18, "Kor Cartographer", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{3}{W}");
-        this.expansionSetCode = "ZEN";
+    public KorCartographer(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{3}{W}");
         this.subtype.add("Kor");
         this.subtype.add("Scout");
 

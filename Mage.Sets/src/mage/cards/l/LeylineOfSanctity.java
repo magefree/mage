@@ -26,11 +26,10 @@
  *  or implied, of BetaSteward_at_googlemail.com.
  */
 
-package mage.sets.magic2011;
+package mage.cards.l;
 
 import java.util.UUID;
 import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.constants.TargetController;
 import mage.constants.Zone;
 import mage.abilities.common.SimpleStaticAbility;
@@ -38,6 +37,7 @@ import mage.abilities.effects.common.continuous.GainAbilityControllerEffect;
 import mage.abilities.keyword.HexproofAbility;
 import mage.abilities.keyword.LeylineAbility;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.filter.FilterStackObject;
 import mage.filter.predicate.permanent.ControllerPredicate;
 
@@ -53,9 +53,8 @@ public class LeylineOfSanctity extends CardImpl {
         filter.add(new ControllerPredicate(TargetController.OPPONENT));
     }
 
-    public LeylineOfSanctity(UUID ownerId) {
-        super(ownerId, 21, "Leyline of Sanctity", Rarity.RARE, new CardType[]{CardType.ENCHANTMENT}, "{2}{W}{W}");
-        this.expansionSetCode = "M11";
+    public LeylineOfSanctity(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.ENCHANTMENT},"{2}{W}{W}");
 
 
         // If Leyline of Sanctity is in your opening hand, you may begin the game with it on the battlefield.

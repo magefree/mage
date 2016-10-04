@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.invasion;
+package mage.cards.g;
 
 import java.util.HashSet;
 import java.util.Set;
@@ -33,9 +33,9 @@ import java.util.UUID;
 import mage.abilities.Ability;
 import mage.abilities.effects.OneShotEffect;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Outcome;
-import mage.constants.Rarity;
 import mage.filter.common.FilterControlledLandPermanent;
 import mage.filter.common.FilterLandPermanent;
 import mage.filter.predicate.mageobject.SubtypePredicate;
@@ -51,9 +51,8 @@ import mage.target.common.TargetControlledPermanent;
  */
 public class GlobalRuin extends CardImpl {
 
-    public GlobalRuin(UUID ownerId) {
-        super(ownerId, 18, "Global Ruin", Rarity.RARE, new CardType[]{CardType.SORCERY}, "{4}{W}");
-        this.expansionSetCode = "INV";
+    public GlobalRuin(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{4}{W}");
 
         // Each player chooses from the lands he or she controls a land of each basic land type, then sacrifices the rest.
         this.getSpellAbility().addEffect(new GlobalRuinDestroyLandEffect());

@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.mirage;
+package mage.cards.v;
 
 import java.util.UUID;
 import mage.MageInt;
@@ -37,8 +37,8 @@ import mage.abilities.costs.mana.ManaCostsImpl;
 import mage.abilities.effects.common.CounterTargetEffect;
 import mage.abilities.effects.common.RegenerateTargetEffect;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.constants.Zone;
 import mage.filter.FilterSpell;
 import mage.filter.common.FilterEnchantmentPermanent;
@@ -58,9 +58,8 @@ public class VigilantMartyr extends CardImpl {
         filter.add(new TargetsPermanentPredicate(new FilterEnchantmentPermanent()));
     }
 
-    public VigilantMartyr(UUID ownerId) {
-        super(ownerId, 249, "Vigilant Martyr", Rarity.UNCOMMON, new CardType[]{CardType.CREATURE}, "{W}");
-        this.expansionSetCode = "MIR";
+    public VigilantMartyr(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{W}");
         this.subtype.add("Human");
         this.subtype.add("Cleric");
         this.power = new MageInt(1);

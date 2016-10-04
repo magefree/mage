@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.lorwyn;
+package mage.cards.q;
 
 import java.util.UUID;
 import mage.MageInt;
@@ -33,8 +33,8 @@ import mage.abilities.Ability;
 import mage.abilities.common.SpellCastAllTriggeredAbility;
 import mage.abilities.effects.common.LoseLifeTargetEffect;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.filter.FilterSpell;
 import mage.filter.predicate.mageobject.SubtypePredicate;
 import mage.target.TargetPlayer;
@@ -51,9 +51,8 @@ public class QuillSlingerBoggart extends CardImpl {
         filter.add(new SubtypePredicate("Kithkin"));
     }
 
-    public QuillSlingerBoggart(UUID ownerId) {
-        super(ownerId, 137, "Quill-Slinger Boggart", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{3}{B}");
-        this.expansionSetCode = "LRW";
+    public QuillSlingerBoggart(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{3}{B}");
         this.subtype.add("Goblin");
         this.subtype.add("Warrior");
 

@@ -25,14 +25,14 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.stronghold;
+package mage.cards.a;
 
 import java.util.UUID;
 import mage.abilities.common.BeginningOfUpkeepTriggeredAbility;
 import mage.abilities.effects.common.UntapAllEffect;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.constants.TargetController;
 import mage.filter.FilterPermanent;
 import mage.filter.predicate.Predicates;
@@ -53,9 +53,8 @@ public class Awakening extends CardImpl {
         ));
     }
 
-    public Awakening(UUID ownerId) {
-        super(ownerId, 51, "Awakening", Rarity.RARE, new CardType[]{CardType.ENCHANTMENT}, "{2}{G}{G}");
-        this.expansionSetCode = "STH";
+    public Awakening(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.ENCHANTMENT},"{2}{G}{G}");
 
         // At the beginning of each upkeep, untap all creatures and lands.
         this.addAbility(new BeginningOfUpkeepTriggeredAbility(new UntapAllEffect(filter), TargetController.ANY, false));

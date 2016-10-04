@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.kaladesh;
+package mage.cards.r;
 
 import java.util.UUID;
 import mage.MageObject;
@@ -37,11 +37,11 @@ import mage.abilities.effects.common.AttachEffect;
 import mage.abilities.effects.common.combat.CantAttackBlockAttachedEffect;
 import mage.abilities.keyword.EnchantAbility;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.AttachmentType;
 import mage.constants.CardType;
 import mage.constants.Duration;
 import mage.constants.Outcome;
-import mage.constants.Rarity;
 import mage.constants.Zone;
 import mage.game.Game;
 import mage.game.events.GameEvent;
@@ -56,9 +56,8 @@ import mage.target.common.TargetCreaturePermanent;
  */
 public class RevokePrivileges extends CardImpl {
 
-    public RevokePrivileges(UUID ownerId) {
-        super(ownerId, 26, "Revoke Privileges", Rarity.COMMON, new CardType[]{CardType.ENCHANTMENT}, "{2}{W}");
-        this.expansionSetCode = "KLD";
+    public RevokePrivileges(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.ENCHANTMENT},"{2}{W}");
         this.subtype.add("Aura");
 
         // Enchant creature.

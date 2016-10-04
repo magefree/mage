@@ -25,13 +25,13 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.battleforzendikar;
+package mage.cards.r;
 
 import java.util.UUID;
 import mage.abilities.effects.common.DamageMultiEffect;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.filter.common.FilterAttackingOrBlockingCreature;
 import mage.target.common.TargetCreaturePermanentAmount;
 
@@ -41,9 +41,8 @@ import mage.target.common.TargetCreaturePermanentAmount;
  */
 public class RoilsRetribution extends CardImpl {
 
-    public RoilsRetribution(UUID ownerId) {
-        super(ownerId, 45, "Roil's Retribution", Rarity.UNCOMMON, new CardType[]{CardType.INSTANT}, "{3}{W}{W}");
-        this.expansionSetCode = "BFZ";
+    public RoilsRetribution(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.INSTANT},"{3}{W}{W}");
 
         // Roil's Retribution deals 5 damage divided as you choose among any number of target attacking or blocking creatures.
         this.getSpellAbility().addEffect(new DamageMultiEffect(5));

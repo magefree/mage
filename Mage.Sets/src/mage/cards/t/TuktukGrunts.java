@@ -25,16 +25,16 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.zendikar;
+package mage.cards.t;
 
 import java.util.UUID;
 import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.MageInt;
 import mage.abilities.common.AllyEntersBattlefieldTriggeredAbility;
 import mage.abilities.effects.common.counter.AddCountersSourceEffect;
 import mage.abilities.keyword.HasteAbility;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.counters.CounterType;
 
 /**
@@ -43,9 +43,8 @@ import mage.counters.CounterType;
  */
 public class TuktukGrunts extends CardImpl {
 
-    public TuktukGrunts(UUID ownerId) {
-        super(ownerId, 152, "Tuktuk Grunts", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{4}{R}");
-        this.expansionSetCode = "ZEN";
+    public TuktukGrunts(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{4}{R}");
         this.subtype.add("Goblin");
         this.subtype.add("Warrior");
         this.subtype.add("Ally");

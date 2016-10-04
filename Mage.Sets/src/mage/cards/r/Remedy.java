@@ -25,14 +25,14 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.visions;
+package mage.cards.r;
 
 import java.util.UUID;
 import mage.abilities.effects.common.PreventDamageToTargetMultiAmountEffect;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Duration;
-import mage.constants.Rarity;
 import mage.target.common.TargetCreatureOrPlayerAmount;
 
 /**
@@ -41,9 +41,8 @@ import mage.target.common.TargetCreatureOrPlayerAmount;
  */
 public class Remedy extends CardImpl {
 
-    public Remedy(UUID ownerId) {
-        super(ownerId, 117, "Remedy", Rarity.COMMON, new CardType[]{CardType.INSTANT}, "{1}{W}");
-        this.expansionSetCode = "VIS";
+    public Remedy(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.INSTANT},"{1}{W}");
 
 
         // Prevent the next 5 damage that would be dealt this turn to any number of target creatures and/or players, divided as you choose.

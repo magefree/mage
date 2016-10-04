@@ -26,14 +26,14 @@
  *  or implied, of BetaSteward_at_googlemail.com.
  */
 
-package mage.sets.mirrodinbesieged;
+package mage.cards.f;
 
 import java.util.UUID;
 import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.abilities.effects.common.CounterTargetEffect;
 import mage.abilities.effects.common.counter.ProliferateEffect;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.target.TargetSpell;
 
 /**
@@ -42,9 +42,8 @@ import mage.target.TargetSpell;
  */
 public class FuelForTheCause extends CardImpl {
 
-    public FuelForTheCause (UUID ownerId) {
-        super(ownerId, 25, "Fuel for the Cause", Rarity.COMMON, new CardType[]{CardType.INSTANT}, "{2}{U}{U}");
-        this.expansionSetCode = "MBS";
+    public FuelForTheCause (UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.INSTANT},"{2}{U}{U}");
 
         this.getSpellAbility().addTarget(new TargetSpell());
         this.getSpellAbility().addEffect(new CounterTargetEffect());

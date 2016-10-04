@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.khansoftarkir;
+package mage.cards.k;
 
 import java.util.ArrayList;
 import java.util.UUID;
@@ -34,9 +34,9 @@ import mage.abilities.AbilitiesImpl;
 import mage.abilities.Ability;
 import mage.abilities.effects.OneShotEffect;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Outcome;
-import mage.constants.Rarity;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
@@ -48,9 +48,8 @@ import mage.game.permanent.token.Token;
  */
 public class KinTreeInvocation extends CardImpl {
 
-    public KinTreeInvocation(UUID ownerId) {
-        super(ownerId, 183, "Kin-Tree Invocation", Rarity.UNCOMMON, new CardType[]{CardType.SORCERY}, "{B}{G}");
-        this.expansionSetCode = "KTK";
+    public KinTreeInvocation(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{B}{G}");
 
 
         // Put an X/X black and green Spirit Warrior creature token onto the battlefield, where X is the greatest toughness among creatures you control.

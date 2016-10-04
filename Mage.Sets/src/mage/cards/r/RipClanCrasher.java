@@ -25,14 +25,14 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.shardsofalara;
+package mage.cards.r;
 
 import java.util.UUID;
 import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.MageInt;
 import mage.abilities.keyword.HasteAbility;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 
 /**
  *
@@ -40,9 +40,8 @@ import mage.cards.CardImpl;
  */
 public class RipClanCrasher extends CardImpl {
 
-    public RipClanCrasher(UUID ownerId) {
-        super(ownerId, 189, "Rip-Clan Crasher", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{R}{G}");
-        this.expansionSetCode = "ALA";
+    public RipClanCrasher(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{R}{G}");
         this.subtype.add("Human");
         this.subtype.add("Warrior");
 

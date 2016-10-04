@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.worldwake;
+package mage.cards.g;
 
 import java.util.UUID;
 import mage.abilities.condition.common.LandfallCondition;
@@ -33,9 +33,9 @@ import mage.abilities.decorator.ConditionalOneShotEffect;
 import mage.abilities.effects.common.AddContinuousEffectToGame;
 import mage.abilities.effects.common.continuous.BoostTargetEffect;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Duration;
-import mage.constants.Rarity;
 import mage.target.common.TargetCreaturePermanent;
 import mage.watchers.common.LandfallWatcher;
 
@@ -45,9 +45,8 @@ import mage.watchers.common.LandfallWatcher;
  */
 public class Groundswell extends CardImpl {
 
-    public Groundswell(UUID ownerId) {
-        super(ownerId, 104, "Groundswell", Rarity.COMMON, new CardType[]{CardType.INSTANT}, "{G}");
-        this.expansionSetCode = "WWK";
+    public Groundswell(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.INSTANT},"{G}");
 
         // Target creature gets +2/+2 until end of turn.
         // Landfall - If you had a land enter the battlefield under your control this turn, that creature gets +4/+4 until end of turn instead.

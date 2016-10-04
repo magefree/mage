@@ -25,15 +25,15 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.fourthedition;
+package mage.cards.w;
 
 import java.util.UUID;
 import mage.abilities.Ability;
 import mage.abilities.SpellAbility;
 import mage.abilities.effects.common.TapTargetEffect;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.game.Game;
 import mage.target.common.TargetCreaturePermanent;
@@ -46,9 +46,8 @@ public class WordOfBinding extends CardImpl {
     
     private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("creatures");
 
-    public WordOfBinding(UUID ownerId) {
-        super(ownerId, 56, "Word of Binding", Rarity.COMMON, new CardType[]{CardType.SORCERY}, "{X}{B}{B}");
-        this.expansionSetCode = "4ED";
+    public WordOfBinding(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{X}{B}{B}");
 
         // Tap X target creatures.
         this.getSpellAbility().addEffect(new TapTargetEffect("X target creatures"));

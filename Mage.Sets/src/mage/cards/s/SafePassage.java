@@ -26,15 +26,15 @@
  *  or implied, of BetaSteward_at_googlemail.com.
  */
 
-package mage.sets.magic2010;
+package mage.cards.s;
 
 import java.util.UUID;
 import mage.constants.CardType;
 import mage.constants.Duration;
-import mage.constants.Rarity;
 import mage.constants.TargetController;
 import mage.abilities.effects.common.PreventAllDamageToAllEffect;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.filter.common.FilterCreatureOrPlayer;
 import mage.filter.predicate.other.PlayerPredicate;
 import mage.filter.predicate.permanent.ControllerPredicate;
@@ -52,9 +52,8 @@ public class SafePassage  extends CardImpl {
         filter.getPlayerFilter().add(new PlayerPredicate(TargetController.YOU));
     }
 
-    public SafePassage(UUID ownerId) {
-        super(ownerId, 28, "Safe Passage", Rarity.COMMON, new CardType[]{CardType.INSTANT}, "{2}{W}");
-        this.expansionSetCode = "M10";
+    public SafePassage(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.INSTANT},"{2}{W}");
 
         this.getSpellAbility().addEffect(new PreventAllDamageToAllEffect(Duration.EndOfTurn, filter));
     }

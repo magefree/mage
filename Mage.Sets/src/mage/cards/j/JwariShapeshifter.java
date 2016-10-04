@@ -25,15 +25,15 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.worldwake;
+package mage.cards.j;
 
 import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.common.EntersBattlefieldAbility;
 import mage.abilities.effects.common.CopyPermanentEffect;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.filter.FilterPermanent;
 import mage.filter.predicate.mageobject.CardTypePredicate;
 import mage.filter.predicate.mageobject.SubtypePredicate;
@@ -53,9 +53,8 @@ public class JwariShapeshifter extends CardImpl {
         filter.add(new AnotherPredicate()); // needed because during enters_the_battlefield event the creature is already targetable although it shouldn't
     }
 
-    public JwariShapeshifter(UUID ownerId) {
-        super(ownerId, 32, "Jwari Shapeshifter", Rarity.RARE, new CardType[]{CardType.CREATURE}, "{1}{U}");
-        this.expansionSetCode = "WWK";
+    public JwariShapeshifter(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{1}{U}");
         this.subtype.add("Shapeshifter");
         this.subtype.add("Ally");
 

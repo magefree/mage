@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.iceage;
+package mage.cards.c;
 
 import java.util.UUID;
 
@@ -41,9 +41,9 @@ import mage.abilities.effects.common.SacrificeTargetEffect;
 import mage.abilities.effects.common.continuous.BoostTargetEffect;
 import mage.abilities.effects.common.continuous.GainAbilityTargetEffect;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Duration;
-import mage.constants.Rarity;
 import mage.constants.Zone;
 import mage.game.events.GameEvent;
 import mage.target.common.TargetControlledCreaturePermanent;
@@ -54,9 +54,8 @@ import mage.target.common.TargetControlledCreaturePermanent;
  */
 public class CelestialSword extends CardImpl {
 
-    public CelestialSword(UUID ownerId) {
-        super(ownerId, 289, "Celestial Sword", Rarity.RARE, new CardType[]{CardType.ARTIFACT}, "{6}");
-        this.expansionSetCode = "ICE";
+    public CelestialSword(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.ARTIFACT},"{6}");
 
         // {3}, {tap}: Target creature you control gets +3/+3 until end of turn. Its controller sacrifices it at the beginning of the next end step.
         Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new BoostTargetEffect(3, 3, Duration.EndOfTurn), new GenericManaCost(3));

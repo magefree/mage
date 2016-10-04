@@ -26,12 +26,11 @@
  *  or implied, of BetaSteward_at_googlemail.com.
  */
 
-package mage.sets.championsofkamigawa;
+package mage.cards.a;
 
 import java.util.UUID;
 
 import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.costs.common.TapTargetCost;
@@ -40,6 +39,7 @@ import mage.abilities.effects.common.AttachEffect;
 import mage.abilities.effects.common.UntapEnchantedEffect;
 import mage.abilities.keyword.EnchantAbility;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.Outcome;
 import mage.constants.Zone;
 import mage.filter.common.FilterControlledCreaturePermanent;
@@ -61,9 +61,8 @@ public class AuraOfDominion extends CardImpl {
     }
 
 
-    public AuraOfDominion(UUID ownerId) {
-        super(ownerId, 51, "Aura of Dominion", Rarity.UNCOMMON, new CardType[]{CardType.ENCHANTMENT}, "{U}{U}");
-        this.expansionSetCode = "CHK";
+    public AuraOfDominion(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.ENCHANTMENT},"{U}{U}");
         this.subtype.add("Aura");
 
         TargetPermanent auraTarget = new TargetCreaturePermanent();

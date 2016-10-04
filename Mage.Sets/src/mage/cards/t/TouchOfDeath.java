@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.iceage;
+package mage.cards.t;
 
 import java.util.UUID;
 import mage.abilities.common.delayed.AtTheBeginOfNextUpkeepDelayedTriggeredAbility;
@@ -34,8 +34,8 @@ import mage.abilities.effects.common.DamageTargetEffect;
 import mage.abilities.effects.common.DrawCardSourceControllerEffect;
 import mage.abilities.effects.common.GainLifeEffect;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.target.TargetPlayer;
 
 /**
@@ -44,9 +44,8 @@ import mage.target.TargetPlayer;
  */
 public class TouchOfDeath extends CardImpl {
 
-    public TouchOfDeath(UUID ownerId) {
-        super(ownerId, 55, "Touch of Death", Rarity.COMMON, new CardType[]{CardType.SORCERY}, "{2}{B}");
-        this.expansionSetCode = "ICE";
+    public TouchOfDeath(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{2}{B}");
 
         // Touch of Death deals 1 damage to target player. You gain 1 life.
         this.getSpellAbility().addEffect(new DamageTargetEffect(1));

@@ -26,15 +26,15 @@
  *  or implied, of BetaSteward_at_googlemail.com.
  */
 
-package mage.sets.championsofkamigawa;
+package mage.cards.f;
 
 import mage.MageInt;
 import mage.abilities.common.DiesTriggeredAbility;
 import mage.abilities.dynamicvalue.common.ZuberasDiedDynamicValue;
 import mage.abilities.effects.common.DrawCardSourceControllerEffect;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.watchers.common.ZuberasDiedWatcher;
 
 import java.util.UUID;
@@ -44,9 +44,8 @@ import java.util.UUID;
  */
 public class FloatingDreamZubera extends CardImpl {
 
-    public FloatingDreamZubera(UUID ownerId) {
-        super(ownerId, 61, "Floating-Dream Zubera", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{1}{U}");
-        this.expansionSetCode = "CHK";
+    public FloatingDreamZubera(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{1}{U}");
         this.subtype.add("Zubera");
         this.subtype.add("Spirit");
 

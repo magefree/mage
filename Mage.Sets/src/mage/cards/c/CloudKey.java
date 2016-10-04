@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package mage.sets.futuresight;
+package mage.cards.c;
 
 import java.util.UUID;
 import mage.MageObject;
@@ -14,12 +14,12 @@ import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.cost.CostModificationEffectImpl;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.choices.ChoiceImpl;
 import mage.constants.CardType;
 import mage.constants.CostModificationType;
 import mage.constants.Duration;
 import mage.constants.Outcome;
-import mage.constants.Rarity;
 import mage.constants.Zone;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
@@ -33,9 +33,8 @@ import mage.util.CardUtil;
  */
 public class CloudKey extends CardImpl {
 
-    public CloudKey(UUID ownerId) {
-        super(ownerId, 160, "Cloud Key", Rarity.RARE, new CardType[]{CardType.ARTIFACT}, "{3}");
-        this.expansionSetCode = "FUT";
+    public CloudKey(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.ARTIFACT},"{3}");
 
         // As Cloud Key enters the battlefield, choose artifact, creature,
         // enchantment, instant, or sorcery.

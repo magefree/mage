@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.prophecy;
+package mage.cards.j;
 
 import java.util.UUID;
 import mage.MageInt;
@@ -38,11 +38,11 @@ import mage.abilities.effects.common.continuous.GainAbilitySourceEffect;
 import mage.abilities.keyword.FlyingAbility;
 import mage.abilities.keyword.ProtectionAbility;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.choices.ChoiceColorOrArtifact;
 import mage.constants.CardType;
 import mage.constants.Duration;
 import mage.constants.Outcome;
-import mage.constants.Rarity;
 import mage.constants.Zone;
 import mage.filter.FilterCard;
 import mage.filter.common.FilterControlledLandPermanent;
@@ -58,9 +58,8 @@ import mage.target.common.TargetControlledPermanent;
  */
 public class JeweledSpirit extends CardImpl {
 
-    public JeweledSpirit(UUID ownerId) {
-        super(ownerId, 12, "Jeweled Spirit", Rarity.RARE, new CardType[]{CardType.CREATURE}, "{3}{W}{W}");
-        this.expansionSetCode = "PCY";
+    public JeweledSpirit(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{3}{W}{W}");
         this.subtype.add("Spirit");
         this.power = new MageInt(3);
         this.toughness = new MageInt(3);

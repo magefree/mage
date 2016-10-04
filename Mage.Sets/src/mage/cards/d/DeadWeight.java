@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.innistrad;
+package mage.cards.d;
 
 import java.util.UUID;
 
@@ -36,6 +36,7 @@ import mage.abilities.effects.common.AttachEffect;
 import mage.abilities.effects.common.continuous.BoostEnchantedEffect;
 import mage.abilities.keyword.EnchantAbility;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.target.TargetPermanent;
 import mage.target.common.TargetCreaturePermanent;
 
@@ -45,9 +46,8 @@ import mage.target.common.TargetCreaturePermanent;
  */
 public class DeadWeight extends CardImpl {
 
-    public DeadWeight(UUID ownerId) {
-        super(ownerId, 96, "Dead Weight", Rarity.COMMON, new CardType[]{CardType.ENCHANTMENT}, "{B}");
-        this.expansionSetCode = "ISD";
+    public DeadWeight(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.ENCHANTMENT},"{B}");
         this.subtype.add("Aura");
 
 

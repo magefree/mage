@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.fifthdawn;
+package mage.cards.d;
 
 import java.util.UUID;
 import mage.Mana;
@@ -35,10 +35,10 @@ import mage.abilities.effects.common.ManaEffect;
 import mage.abilities.keyword.EnchantAbility;
 import mage.abilities.mana.TriggeredManaAbility;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.choices.ChoiceColor;
 import mage.constants.CardType;
 import mage.constants.Outcome;
-import mage.constants.Rarity;
 import mage.constants.Zone;
 import mage.game.Game;
 import mage.game.events.GameEvent;
@@ -54,9 +54,8 @@ import mage.target.common.TargetLandPermanent;
  */
 public class DawnsReflection extends CardImpl {
 
-    public DawnsReflection(UUID ownerId) {
-        super(ownerId, 85, "Dawn's Reflection", Rarity.COMMON, new CardType[]{CardType.ENCHANTMENT}, "{3}{G}");
-        this.expansionSetCode = "5DN";
+    public DawnsReflection(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.ENCHANTMENT},"{3}{G}");
         this.subtype.add("Aura");
 
 

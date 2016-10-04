@@ -27,18 +27,18 @@
  *  or implied, of BetaSteward_at_googlemail.com.
  * 
  */
-package mage.sets.championsofkamigawa;
+package mage.cards.l;
 
 import java.util.UUID;
 
 import mage.constants.CardType;
 import mage.constants.Duration;
-import mage.constants.Rarity;
 import mage.constants.Zone;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.effects.common.continuous.BoostControlledEffect;
 import mage.abilities.effects.common.cost.SpellsCostReductionControllerEffect;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.filter.FilterCard;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.filter.predicate.mageobject.SubtypePredicate;
@@ -58,9 +58,8 @@ public class LongForgottenGohei extends CardImpl {
         spiritFilter.add(new SubtypePredicate("Spirit"));
     }
 
-    public LongForgottenGohei(UUID ownerId) {
-        super(ownerId, 261, "Long-Forgotten Gohei", Rarity.RARE, new CardType[]{CardType.ARTIFACT}, "{3}");
-        this.expansionSetCode = "CHK";
+    public LongForgottenGohei(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.ARTIFACT},"{3}");
 
         // Arcane spells you cast cost {1} less to cast.
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new SpellsCostReductionControllerEffect(arcaneFilter, 1)));

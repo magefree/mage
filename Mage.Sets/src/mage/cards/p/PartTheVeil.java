@@ -26,15 +26,15 @@
  *  or implied, of BetaSteward_at_googlemail.com.
  */
 
-package mage.sets.championsofkamigawa;
+package mage.cards.p;
 
 import java.util.UUID;
 import mage.abilities.effects.Effect;
 
 import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.abilities.effects.common.ReturnToHandFromBattlefieldAllEffect;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.filter.common.FilterControlledCreaturePermanent;
 
 /**
@@ -42,9 +42,8 @@ import mage.filter.common.FilterControlledCreaturePermanent;
  */
 public class PartTheVeil extends CardImpl {
 
-    public PartTheVeil(UUID ownerId) {
-        super(ownerId, 77, "Part the Veil", Rarity.RARE, new CardType[]{CardType.INSTANT}, "{3}{U}");
-        this.expansionSetCode = "CHK";
+    public PartTheVeil(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.INSTANT},"{3}{U}");
         this.subtype.add("Arcane");
         
         // Return all creatures you control to their owner's hand.

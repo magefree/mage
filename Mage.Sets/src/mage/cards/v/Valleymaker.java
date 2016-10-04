@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.shadowmoor;
+package mage.cards.v;
 
 import java.util.UUID;
 import mage.MageInt;
@@ -38,8 +38,8 @@ import mage.abilities.effects.common.AddManaToManaPoolTargetControllerEffect;
 import mage.abilities.effects.common.DamageTargetEffect;
 import mage.abilities.mana.SimpleManaAbility;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.constants.Zone;
 import mage.filter.common.FilterControlledPermanent;
 import mage.filter.predicate.mageobject.SubtypePredicate;
@@ -60,9 +60,8 @@ public class Valleymaker extends CardImpl {
         filter2.add(new SubtypePredicate("Forest"));
     }
 
-    public Valleymaker(UUID ownerId) {
-        super(ownerId, 221, "Valleymaker", Rarity.RARE, new CardType[]{CardType.CREATURE}, "{5}{R/G}");
-        this.expansionSetCode = "SHM";
+    public Valleymaker(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{5}{R/G}");
         this.subtype.add("Giant");
         this.subtype.add("Shaman");
         this.power = new MageInt(5);

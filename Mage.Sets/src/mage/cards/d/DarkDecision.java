@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.starwars;
+package mage.cards.d;
 
 import java.util.UUID;
 import mage.MageObject;
@@ -36,11 +36,11 @@ import mage.abilities.effects.ContinuousEffect;
 import mage.abilities.effects.OneShotEffect;
 import mage.cards.Card;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.AsThoughEffectType;
 import mage.constants.CardType;
 import mage.constants.Duration;
 import mage.constants.Outcome;
-import mage.constants.Rarity;
 import mage.filter.common.FilterNonlandCard;
 import mage.game.ExileZone;
 import mage.game.Game;
@@ -54,9 +54,8 @@ import mage.target.targetpointer.FixedTarget;
  */
 public class DarkDecision extends CardImpl {
 
-    public DarkDecision(UUID ownerId) {
-        super(ownerId, 169, "Dark Decision", Rarity.COMMON, new CardType[]{CardType.SORCERY}, "{B}{R}");
-        this.expansionSetCode = "SWS";
+    public DarkDecision(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{B}{R}");
 
         // As an additional cost to cast Dark Decision, pay 1 life.
         this.getSpellAbility().addCost(new PayLifeCost(1));

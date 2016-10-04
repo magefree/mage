@@ -25,14 +25,14 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.magic2010;
+package mage.cards.p;
 
 import java.util.UUID;
 import mage.constants.CardType;
 import mage.constants.Duration;
-import mage.constants.Rarity;
 import mage.abilities.effects.common.combat.CantBlockTargetEffect;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.target.common.TargetCreaturePermanent;
 
 /**
@@ -41,9 +41,8 @@ import mage.target.common.TargetCreaturePermanent;
  */
 public class PanicAttack extends CardImpl {
 
-    public PanicAttack(UUID ownerId) {
-        super(ownerId, 150, "Panic Attack", Rarity.COMMON, new CardType[]{CardType.SORCERY}, "{2}{R}");
-        this.expansionSetCode = "M10";
+    public PanicAttack(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{2}{R}");
 
 
         // Up to three target creatures can't block this turn.

@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.magicorigins;
+package mage.cards.c;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -38,9 +38,9 @@ import mage.abilities.effects.Effect;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.DamageTargetEffect;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Outcome;
-import mage.constants.Rarity;
 import mage.constants.TargetController;
 import mage.constants.Zone;
 import mage.game.Game;
@@ -55,9 +55,8 @@ import mage.target.common.TargetCreaturePermanent;
  */
 public class ChandraRoaringFlame extends CardImpl {
 
-    public ChandraRoaringFlame(UUID ownerId) {
-        super(ownerId, 135, "Chandra, Roaring Flame", Rarity.MYTHIC, new CardType[]{CardType.PLANESWALKER}, "");
-        this.expansionSetCode = "ORI";
+    public ChandraRoaringFlame(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.PLANESWALKER},"");
         this.subtype.add("Chandra");
         this.color.setRed(true);
 

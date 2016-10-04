@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.gatecrash;
+package mage.cards.d;
 
 import java.util.UUID;
 import mage.abilities.Ability;
@@ -35,11 +35,11 @@ import mage.abilities.effects.common.CounterTargetEffect;
 import mage.abilities.effects.common.DestroyTargetEffect;
 import mage.cards.Card;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.cards.Cards;
 import mage.cards.CardsImpl;
 import mage.constants.CardType;
 import mage.constants.Outcome;
-import mage.constants.Rarity;
 import mage.constants.Zone;
 import mage.filter.Filter;
 import mage.filter.FilterCard;
@@ -68,9 +68,8 @@ public class DimirCharm extends CardImpl {
         filterSorcery.add(new CardTypePredicate(CardType.SORCERY));
     }
 
-    public DimirCharm (UUID ownerId) {
-        super(ownerId, 154, "Dimir Charm", Rarity.UNCOMMON, new CardType[]{CardType.INSTANT}, "{U}{B}");
-        this.expansionSetCode = "GTC";
+    public DimirCharm (UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.INSTANT},"{U}{B}");
 
 
         //Choose one - Counter target sorcery spell

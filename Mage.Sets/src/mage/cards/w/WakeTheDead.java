@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.commander2014;
+package mage.cards.w;
 
 import java.util.ArrayList;
 import java.util.UUID;
@@ -39,11 +39,11 @@ import mage.abilities.effects.Effect;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.SacrificeTargetEffect;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.cards.Cards;
 import mage.cards.CardsImpl;
 import mage.constants.CardType;
 import mage.constants.Outcome;
-import mage.constants.Rarity;
 import mage.constants.TurnPhase;
 import mage.constants.Zone;
 import mage.filter.common.FilterCreatureCard;
@@ -59,9 +59,8 @@ import mage.target.targetpointer.FixedTargets;
  */
 public class WakeTheDead extends CardImpl {
 
-    public WakeTheDead(UUID ownerId) {
-        super(ownerId, 31, "Wake the Dead", Rarity.RARE, new CardType[]{CardType.INSTANT}, "{X}{B}{B}");
-        this.expansionSetCode = "C14";
+    public WakeTheDead(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.INSTANT},"{X}{B}{B}");
 
         // Cast Wake the Dead only during combat on an opponent's turn.
         this.addAbility(new CastOnlyDuringPhaseStepSourceAbility(TurnPhase.COMBAT, OnOpponentsTurnCondition.getInstance()));

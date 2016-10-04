@@ -25,15 +25,15 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.lorwyn;
+package mage.cards.s;
 
 import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.costs.common.TapTargetCost;
 import mage.abilities.effects.common.CreateTokenEffect;
 import mage.abilities.effects.common.ReturnToHandSourceEffect;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.Zone;
 import mage.filter.common.FilterControlledPermanent;
 import mage.filter.predicate.Predicates;
@@ -57,9 +57,8 @@ public class SummonTheSchool extends CardImpl {
         filter.add(new SubtypePredicate("Merfolk"));
     }
 
-    public SummonTheSchool(UUID ownerId) {
-        super(ownerId, 42, "Summon the School", Rarity.UNCOMMON, new CardType[]{CardType.TRIBAL, CardType.SORCERY}, "{3}{W}");
-        this.expansionSetCode = "LRW";
+    public SummonTheSchool(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.TRIBAL,CardType.SORCERY},"{3}{W}");
         this.subtype.add("Merfolk");
         
         // Put two 1/1 blue Merfolk Wizard creature tokens onto the battlefield.

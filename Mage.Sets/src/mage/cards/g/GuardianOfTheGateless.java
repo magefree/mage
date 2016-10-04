@@ -25,12 +25,11 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.gatecrash;
+package mage.cards.g;
 
 import java.util.UUID;
 import mage.constants.CardType;
 import mage.constants.Duration;
-import mage.constants.Rarity;
 import mage.constants.Zone;
 import mage.MageInt;
 import mage.abilities.common.BlocksTriggeredAbility;
@@ -39,6 +38,7 @@ import mage.abilities.effects.common.continuous.BoostSourceEffect;
 import mage.abilities.effects.common.combat.CanBlockAdditionalCreatureEffect;
 import mage.abilities.keyword.FlyingAbility;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 
 /**
  *
@@ -46,9 +46,8 @@ import mage.cards.CardImpl;
  */
 public class GuardianOfTheGateless extends CardImpl {
 
-    public GuardianOfTheGateless(UUID ownerId) {
-        super(ownerId, 14, "Guardian of the Gateless", Rarity.UNCOMMON, new CardType[]{CardType.CREATURE}, "{4}{W}");
-        this.expansionSetCode = "GTC";
+    public GuardianOfTheGateless(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{4}{W}");
         this.subtype.add("Angel");
 
         this.power = new MageInt(3);

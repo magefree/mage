@@ -26,18 +26,18 @@
  *  or implied, of BetaSteward_at_googlemail.com.
  */
 
-package mage.sets.championsofkamigawa;
+package mage.cards.k;
 
 import java.util.UUID;
 
 import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.DiesTriggeredAbility;
 import mage.abilities.effects.common.continuous.GainControlTargetEffect;
 import mage.abilities.keyword.FlyingAbility;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.Duration;
 import mage.target.common.TargetCreaturePermanent;
 
@@ -46,9 +46,8 @@ import mage.target.common.TargetCreaturePermanent;
  */
 public class KeigaTheTideStar extends CardImpl {
 
-    public KeigaTheTideStar(UUID ownerId) {
-        super(ownerId, 72, "Keiga, the Tide Star", Rarity.RARE, new CardType[]{CardType.CREATURE}, "{5}{U}");
-        this.expansionSetCode = "CHK";
+    public KeigaTheTideStar(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{5}{U}");
         this.supertype.add("Legendary");
         this.subtype.add("Dragon");
         this.subtype.add("Spirit");

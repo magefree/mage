@@ -26,13 +26,12 @@
  *  or implied, of BetaSteward_at_googlemail.com.
  */
 
-package mage.sets.worldwake;
+package mage.cards.c;
 
 import java.util.UUID;
 
 import mage.constants.CardType;
 import mage.constants.Duration;
-import mage.constants.Rarity;
 import mage.constants.Zone;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.dynamicvalue.common.PermanentsOnBattlefieldCount;
@@ -42,6 +41,7 @@ import mage.abilities.effects.common.continuous.GainAbilityAttachedEffect;
 import mage.abilities.keyword.EnchantAbility;
 import mage.abilities.keyword.FirstStrikeAbility;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.AttachmentType;
 import mage.constants.Outcome;
 import mage.constants.TargetController;
@@ -64,9 +64,8 @@ public class ClawsOfValakut extends CardImpl {
         filter.add(new ControllerPredicate(TargetController.YOU));
     }
 
-    public ClawsOfValakut (UUID ownerId) {
-        super(ownerId, 75, "Claws of Valakut", Rarity.COMMON, new CardType[]{CardType.ENCHANTMENT}, "{1}{R}{R}");
-        this.expansionSetCode = "WWK";
+    public ClawsOfValakut (UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.ENCHANTMENT},"{1}{R}{R}");
         this.subtype.add("Aura");
 
 

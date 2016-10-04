@@ -25,14 +25,14 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.saviorsofkamigawa;
+package mage.cards.a;
 
 import java.util.UUID;
 import mage.abilities.Mode;
 import mage.abilities.effects.common.TapAllEffect;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.filter.predicate.Predicates;
 import mage.filter.predicate.mageobject.SubtypePredicate;
@@ -50,9 +50,8 @@ public class AetherShockwave extends CardImpl {
         filterNonSpirit.add(Predicates.not(new SubtypePredicate("Spirit")));
     }
 
-    public AetherShockwave(UUID ownerId) {
-        super(ownerId, 1, "Aether Shockwave", Rarity.UNCOMMON, new CardType[]{CardType.INSTANT}, "{3}{W}");
-        this.expansionSetCode = "SOK";
+    public AetherShockwave(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.INSTANT},"{3}{W}");
 
 
         // Choose one - Tap all Spirits; or tap all non-Spirit creatures.

@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.darkascension;
+package mage.cards.s;
 
 import java.util.UUID;
 import mage.abilities.Ability;
@@ -37,9 +37,9 @@ import mage.abilities.effects.common.ExileTargetEffect;
 import mage.abilities.effects.common.PutTokenOntoBattlefieldCopyTargetEffect;
 import mage.cards.Card;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Outcome;
-import mage.constants.Rarity;
 import mage.constants.TargetController;
 import mage.constants.Zone;
 import mage.filter.common.FilterCreatureCard;
@@ -55,9 +55,8 @@ import mage.target.targetpointer.FixedTargets;
  */
 public class Seance extends CardImpl {
 
-    public Seance(UUID ownerId) {
-        super(ownerId, 20, "Seance", Rarity.RARE, new CardType[]{CardType.ENCHANTMENT}, "{2}{W}{W}");
-        this.expansionSetCode = "DKA";
+    public Seance(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.ENCHANTMENT},"{2}{W}{W}");
 
         // At the beginning of each upkeep, you may exile target creature card from your graveyard. If you do, put a token onto the battlefield that's a copy of that card except it's a Spirit in addition to its other types. Exile it at the beginning of the next end step.
         Ability ability = new BeginningOfUpkeepTriggeredAbility(new SeanceEffect(), TargetController.ANY, true);

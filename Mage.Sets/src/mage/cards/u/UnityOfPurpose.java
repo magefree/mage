@@ -25,14 +25,14 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.oathofthegatewatch;
+package mage.cards.u;
 
 import java.util.UUID;
 import mage.abilities.effects.common.UntapAllControllerEffect;
 import mage.abilities.effects.keyword.SupportEffect;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.counters.CounterType;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.filter.predicate.permanent.CounterPredicate;
@@ -49,9 +49,8 @@ public class UnityOfPurpose extends CardImpl {
         filter.add(new CounterPredicate(CounterType.P1P1));
     }
 
-    public UnityOfPurpose(UUID ownerId) {
-        super(ownerId, 66, "Unity of Purpose", Rarity.UNCOMMON, new CardType[]{CardType.INSTANT}, "{3}{U}");
-        this.expansionSetCode = "OGW";
+    public UnityOfPurpose(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.INSTANT},"{3}{U}");
 
         // Support 2.
         getSpellAbility().addEffect(new SupportEffect(this, 2, false));

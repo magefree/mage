@@ -26,7 +26,7 @@
  *  or implied, of BetaSteward_at_googlemail.com.
  */
 
-package mage.sets.magic2012;
+package mage.cards.d;
 
 import java.util.UUID;
 
@@ -39,6 +39,7 @@ import mage.abilities.effects.common.LoseLifeSourceControllerEffect;
 import mage.abilities.effects.common.continuous.BoostEnchantedEffect;
 import mage.abilities.keyword.EnchantAbility;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.target.TargetPermanent;
 import mage.target.common.TargetCreaturePermanent;
 
@@ -47,9 +48,8 @@ import mage.target.common.TargetCreaturePermanent;
  */
 public class DarkFavor extends CardImpl {
 
-    public DarkFavor(UUID ownerId) {
-        super(ownerId, 89, "Dark Favor", Rarity.COMMON, new CardType[]{CardType.ENCHANTMENT}, "{1}{B}");
-        this.expansionSetCode = "M12";
+    public DarkFavor(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.ENCHANTMENT},"{1}{B}");
         this.subtype.add("Aura");
 
         TargetPermanent auraTarget = new TargetCreaturePermanent();

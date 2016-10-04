@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.innistrad;
+package mage.cards.b;
 
 import java.util.UUID;
 import mage.MageInt;
@@ -40,9 +40,10 @@ import mage.abilities.effects.common.CreateTokenEffect;
 import mage.abilities.effects.common.TransformSourceEffect;
 import mage.abilities.keyword.FlyingAbility;
 import mage.abilities.keyword.TransformAbility;
+import mage.cards.l.LordOfLineage;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.constants.Zone;
 import mage.filter.common.FilterControlledPermanent;
 import mage.filter.predicate.mageobject.SubtypePredicate;
@@ -60,16 +61,15 @@ public class BloodlineKeeper extends CardImpl {
         filter.add(new SubtypePredicate("Vampire"));
     }
 
-    public BloodlineKeeper(UUID ownerId) {
-        super(ownerId, 90, "Bloodline Keeper", Rarity.RARE, new CardType[]{CardType.CREATURE}, "{2}{B}{B}");
-        this.expansionSetCode = "ISD";
+    public BloodlineKeeper(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{2}{B}{B}");
         this.subtype.add("Vampire");
 
         this.power = new MageInt(3);
         this.toughness = new MageInt(3);
 
         this.transformable = true;
-        this.secondSideCard = new LordOfLineage(ownerId);
+        this.secondSideCardClazz = LordOfLineage.class;
 
         this.addAbility(FlyingAbility.getInstance());
         // {T}: Put a 2/2 black Vampire creature token with flying onto the battlefield.

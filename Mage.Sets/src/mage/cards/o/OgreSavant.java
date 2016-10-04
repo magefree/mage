@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.ajanivsnicolbolas;
+package mage.cards.o;
 
 import java.util.UUID;
 import mage.MageInt;
@@ -35,9 +35,9 @@ import mage.abilities.condition.common.ManaWasSpentCondition;
 import mage.abilities.decorator.ConditionalTriggeredAbility;
 import mage.abilities.effects.common.ReturnToHandTargetEffect;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.ColoredManaSymbol;
-import mage.constants.Rarity;
 import mage.target.common.TargetCreaturePermanent;
 import mage.watchers.common.ManaSpentToCastWatcher;
 
@@ -47,9 +47,8 @@ import mage.watchers.common.ManaSpentToCastWatcher;
  */
 public class OgreSavant extends CardImpl {
 
-    public OgreSavant(UUID ownerId) {
-        super(ownerId, 55, "Ogre Savant", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{4}{R}");
-        this.expansionSetCode = "DDH";
+    public OgreSavant(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{4}{R}");
         this.subtype.add("Ogre");
         this.subtype.add("Wizard");
         this.power = new MageInt(3);

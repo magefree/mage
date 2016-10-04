@@ -25,16 +25,16 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.battleforzendikar;
+package mage.cards.r;
 
 import mage.abilities.Mode;
 import mage.abilities.common.LandfallAbility;
 import mage.abilities.effects.common.CreateTokenEffect;
 import mage.abilities.effects.common.continuous.BoostControlledEffect;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Duration;
-import mage.constants.Rarity;
 import mage.game.permanent.token.KorAllyToken;
 
 import java.util.UUID;
@@ -45,9 +45,8 @@ import java.util.UUID;
  */
 public class RetreatToEmeria extends CardImpl {
 
-    public RetreatToEmeria(UUID ownerId) {
-        super(ownerId, 44, "Retreat to Emeria", Rarity.UNCOMMON, new CardType[]{CardType.ENCHANTMENT}, "{3}{W}");
-        this.expansionSetCode = "BFZ";
+    public RetreatToEmeria(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.ENCHANTMENT},"{3}{W}");
 
         // <i>Landfall</i> - Whenever a land enters the battlefield under you control, choose one - Put a 1/1 white Kor Ally creature token onto the battlefield; or Creatures you control get +1/+1 until end of turn.
         LandfallAbility ability = new LandfallAbility(new CreateTokenEffect(new KorAllyToken()), false);

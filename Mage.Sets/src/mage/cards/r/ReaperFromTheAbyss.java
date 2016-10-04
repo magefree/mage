@@ -26,7 +26,7 @@
  *  or implied, of BetaSteward_at_googlemail.com.
  */
 
-package mage.sets.innistrad;
+package mage.cards.r;
 
 import java.util.UUID;
 import mage.MageInt;
@@ -35,8 +35,8 @@ import mage.abilities.TriggeredAbilityImpl;
 import mage.abilities.effects.common.DestroyTargetEffect;
 import mage.abilities.keyword.FlyingAbility;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.constants.Zone;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.filter.predicate.Predicates;
@@ -59,9 +59,8 @@ public class ReaperFromTheAbyss extends CardImpl {
         filter.add(Predicates.not(new SubtypePredicate("Demon")));
     }
 
-    public ReaperFromTheAbyss(UUID ownerId) {
-        super(ownerId, 112, "Reaper from the Abyss", Rarity.MYTHIC, new CardType[]{CardType.CREATURE}, "{3}{B}{B}{B}");
-        this.expansionSetCode = "ISD";
+    public ReaperFromTheAbyss(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{3}{B}{B}{B}");
         this.subtype.add("Demon");
 
         this.power = new MageInt(6);

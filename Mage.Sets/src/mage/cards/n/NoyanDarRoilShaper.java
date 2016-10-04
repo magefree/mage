@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.battleforzendikar;
+package mage.cards.n;
 
 import java.util.UUID;
 import mage.MageInt;
@@ -38,10 +38,10 @@ import mage.abilities.effects.common.continuous.BecomesCreatureTargetEffect;
 import mage.abilities.effects.common.counter.AddCountersTargetEffect;
 import mage.abilities.keyword.HasteAbility;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Duration;
 import mage.constants.Outcome;
-import mage.constants.Rarity;
 import mage.counters.CounterType;
 import mage.filter.FilterSpell;
 import mage.filter.common.FilterControlledLandPermanent;
@@ -67,9 +67,8 @@ public class NoyanDarRoilShaper extends CardImpl {
                 new CardTypePredicate(CardType.SORCERY)));
     }
 
-    public NoyanDarRoilShaper(UUID ownerId) {
-        super(ownerId, 216, "Noyan Dar, Roil Shaper", Rarity.RARE, new CardType[]{CardType.CREATURE}, "{3}{W}{U}");
-        this.expansionSetCode = "BFZ";
+    public NoyanDarRoilShaper(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{3}{W}{U}");
         this.supertype.add("Legendary");
         this.subtype.add("Merfolk");
         this.subtype.add("Ally");

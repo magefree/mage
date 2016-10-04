@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.iceage;
+package mage.cards.s;
 
 import java.util.UUID;
 import mage.MageInt;
@@ -36,8 +36,8 @@ import mage.abilities.costs.common.PayLifeCost;
 import mage.abilities.costs.common.TapSourceCost;
 import mage.abilities.effects.common.CounterTargetEffect;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.constants.Zone;
 import mage.filter.FilterSpell;
 import mage.filter.predicate.mageobject.ColorPredicate;
@@ -55,9 +55,8 @@ public class StromgaldCabal extends CardImpl {
         filter.add(new ColorPredicate(ObjectColor.WHITE));
     }
     
-    public StromgaldCabal(UUID ownerId) {
-        super(ownerId, 54, "Stromgald Cabal", Rarity.RARE, new CardType[]{CardType.CREATURE}, "{1}{B}{B}");
-        this.expansionSetCode = "ICE";
+    public StromgaldCabal(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{1}{B}{B}");
         this.subtype.add("Human");
         this.subtype.add("Knight");
 

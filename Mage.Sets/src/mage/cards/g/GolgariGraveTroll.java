@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.ravnica;
+package mage.cards.g;
 
 import java.util.UUID;
 import mage.MageInt;
@@ -38,9 +38,9 @@ import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.RegenerateSourceEffect;
 import mage.abilities.keyword.DredgeAbility;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Outcome;
-import mage.constants.Rarity;
 import mage.constants.Zone;
 import mage.counters.CounterType;
 import mage.filter.common.FilterCreatureCard;
@@ -55,9 +55,8 @@ import mage.players.Player;
  */
 public class GolgariGraveTroll extends CardImpl {
 
-    public GolgariGraveTroll(UUID ownerId) {
-        super(ownerId, 167, "Golgari Grave-Troll", Rarity.RARE, new CardType[]{CardType.CREATURE}, "{4}{G}");
-        this.expansionSetCode = "RAV";
+    public GolgariGraveTroll(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{4}{G}");
         this.subtype.add("Troll");
         this.subtype.add("Skeleton");
 

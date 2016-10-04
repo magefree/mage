@@ -25,13 +25,13 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.oathofthegatewatch;
+package mage.cards.s;
 
 import java.util.UUID;
 import mage.abilities.effects.common.DestroyTargetEffect;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.Rarity;
 import static mage.filter.Filter.ComparisonType.LessThan;
 import mage.filter.common.FilterAttackingOrBlockingCreature;
 import mage.filter.predicate.mageobject.PowerPredicate;
@@ -49,9 +49,8 @@ public class SearingLight extends CardImpl {
         filter.add(new PowerPredicate(LessThan, 3));
     }
 
-    public SearingLight(UUID ownerId) {
-        super(ownerId, 33, "Searing Light", Rarity.COMMON, new CardType[]{CardType.INSTANT}, "{W}");
-        this.expansionSetCode = "OGW";
+    public SearingLight(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.INSTANT},"{W}");
 
         // Destroying target attacking or blocking creature with power 2 or less.
         this.getSpellAbility().addTarget(new TargetCreaturePermanent(filter));

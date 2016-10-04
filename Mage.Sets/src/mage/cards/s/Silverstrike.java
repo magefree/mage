@@ -25,14 +25,14 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.shadowsoverinnistrad;
+package mage.cards.s;
 
 import java.util.UUID;
 import mage.abilities.effects.common.DestroyTargetEffect;
 import mage.abilities.effects.common.GainLifeEffect;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.target.common.TargetAttackingCreature;
 
 /**
@@ -41,9 +41,8 @@ import mage.target.common.TargetAttackingCreature;
  */
 public class Silverstrike extends CardImpl {
 
-    public Silverstrike(UUID ownerId) {
-        super(ownerId, 37, "Silverstrike", Rarity.UNCOMMON, new CardType[]{CardType.INSTANT}, "{3}{W}");
-        this.expansionSetCode = "SOI";
+    public Silverstrike(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.INSTANT},"{3}{W}");
 
         // Destroy target attacking creature. You gain 3 life.
         this.getSpellAbility().addEffect(new DestroyTargetEffect());

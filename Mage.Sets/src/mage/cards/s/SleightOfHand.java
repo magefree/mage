@@ -25,15 +25,15 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.ninthedition;
+package mage.cards.s;
 
 import java.util.UUID;
 import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.constants.Zone;
 import mage.abilities.dynamicvalue.common.StaticValue;
 import mage.abilities.effects.common.LookLibraryAndPickControllerEffect;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.filter.FilterCard;
 
 /**
@@ -42,9 +42,8 @@ import mage.filter.FilterCard;
  */
 public class SleightOfHand extends CardImpl {
 
-    public SleightOfHand(UUID ownerId) {
-        super(ownerId, 99, "Sleight of Hand", Rarity.COMMON, new CardType[]{CardType.SORCERY}, "{U}");
-        this.expansionSetCode = "9ED";
+    public SleightOfHand(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{U}");
 
 
         // Look at the top two cards of your library. Put one of them into your hand and the other on the bottom of your library.

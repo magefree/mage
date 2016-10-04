@@ -25,13 +25,13 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.dragonsoftarkir;
+package mage.cards.c;
 
 import java.util.UUID;
 import mage.abilities.effects.common.LookLibraryAndPickControllerEffect;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.constants.Zone;
 import mage.filter.Filter.ComparisonType;
 import mage.filter.FilterCard;
@@ -51,9 +51,8 @@ public class CollectedCompany extends CardImpl {
         filter.add(new ConvertedManaCostPredicate(ComparisonType.LessThan, 4));
     }
 
-    public CollectedCompany(UUID ownerId) {
-        super(ownerId, 177, "Collected Company", Rarity.RARE, new CardType[]{CardType.INSTANT}, "{3}{G}");
-        this.expansionSetCode = "DTK";
+    public CollectedCompany(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.INSTANT},"{3}{G}");
 
         // Look at the top six cards of your library. Put up to two creature cards with converted mana cost 3 or less from among them onto the battlefield.
         // Put the rest on the bottom of your library in any order.

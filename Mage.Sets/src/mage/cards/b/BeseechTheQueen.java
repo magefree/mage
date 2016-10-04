@@ -25,14 +25,14 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.shadowmoor;
+package mage.cards.b;
 
 import java.util.UUID;
 import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.abilities.effects.common.search.SearchLibraryPutInHandEffect;
 import mage.cards.Card;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.filter.FilterCard;
 import mage.filter.common.FilterControlledLandPermanent;
 import mage.filter.predicate.Predicate;
@@ -49,9 +49,8 @@ public class BeseechTheQueen extends CardImpl {
     static{
         filter.add(new BeseechTheQueenPredicate());
     }
-    public BeseechTheQueen(UUID ownerId) {
-        super(ownerId, 57, "Beseech the Queen", Rarity.UNCOMMON, new CardType[]{CardType.SORCERY}, "{2/B}{2/B}{2/B}");
-        this.expansionSetCode = "SHM";
+    public BeseechTheQueen(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{2/B}{2/B}{2/B}");
 
 
         // <i>({2B} can be paid with any two mana or with {B}. This card's converted mana cost is 6.)</i>

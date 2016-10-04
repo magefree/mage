@@ -25,15 +25,15 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.lorwyn;
+package mage.cards.k;
 
 import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.common.DiesCreatureTriggeredAbility;
 import mage.abilities.effects.common.counter.AddCountersSourceEffect;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.constants.TargetController;
 import mage.counters.CounterType;
 import mage.filter.common.FilterCreaturePermanent;
@@ -53,9 +53,8 @@ public class KnuckleboneWitch extends CardImpl {
         filter.add(new SubtypePredicate("Goblin"));
     }
     
-    public KnuckleboneWitch(UUID ownerId) {
-        super(ownerId, 120, "Knucklebone Witch", Rarity.RARE, new CardType[]{CardType.CREATURE}, "{B}");
-        this.expansionSetCode = "LRW";
+    public KnuckleboneWitch(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{B}");
         this.subtype.add("Goblin");
         this.subtype.add("Shaman");
         this.power = new MageInt(1);

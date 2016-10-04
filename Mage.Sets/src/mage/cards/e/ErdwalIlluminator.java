@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.shadowsoverinnistrad;
+package mage.cards.e;
 
 import java.util.HashMap;
 import java.util.UUID;
@@ -34,8 +34,8 @@ import mage.abilities.TriggeredAbilityImpl;
 import mage.abilities.effects.keyword.InvestigateEffect;
 import mage.abilities.keyword.FlyingAbility;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.constants.WatcherScope;
 import mage.constants.Zone;
 import mage.game.Game;
@@ -49,9 +49,8 @@ import mage.watchers.Watcher;
  */
 public class ErdwalIlluminator extends CardImpl {
 
-    public ErdwalIlluminator(UUID ownerId) {
-        super(ownerId, 60, "Erdwal Illuminator", Rarity.UNCOMMON, new CardType[]{CardType.CREATURE}, "{1}{U}");
-        this.expansionSetCode = "SOI";
+    public ErdwalIlluminator(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{1}{U}");
         this.subtype.add("Spirit");
         this.power = new MageInt(1);
         this.toughness = new MageInt(3);

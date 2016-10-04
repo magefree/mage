@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.torment;
+package mage.cards.r;
 
 import java.util.UUID;
 import mage.MageItem;
@@ -33,8 +33,8 @@ import mage.abilities.Ability;
 import mage.abilities.Mode;
 import mage.abilities.effects.common.CopySpellForEachItCouldTargetEffect;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.filter.FilterInPlay;
 import mage.filter.FilterSpell;
 import mage.filter.common.FilterInstantOrSorcerySpell;
@@ -62,9 +62,8 @@ public class Radiate extends CardImpl {
         filter.setMessage("instant or sorcery spell that targets only a single permanent or player");
     }
 
-    public Radiate(UUID ownerId) {
-        super(ownerId, 113, "Radiate", Rarity.RARE, new CardType[]{CardType.INSTANT}, "{3}{R}{R}");
-        this.expansionSetCode = "TOR";
+    public Radiate(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.INSTANT},"{3}{R}{R}");
 
         // Choose target instant or sorcery spell that targets only a single permanent or player. Copy that spell for each other permanent or player the spell could target. Each copy targets a different one of those permanents and players.
         this.getSpellAbility().addEffect(new RadiateEffect());

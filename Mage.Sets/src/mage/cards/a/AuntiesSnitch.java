@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.modernmasters;
+package mage.cards.a;
 
 import java.util.UUID;
 import mage.MageInt;
@@ -34,8 +34,8 @@ import mage.abilities.common.CantBlockAbility;
 import mage.abilities.effects.common.ReturnToHandSourceEffect;
 import mage.abilities.keyword.ProwlAbility;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.constants.TargetController;
 import mage.constants.Zone;
 import mage.filter.common.FilterCreaturePermanent;
@@ -54,9 +54,8 @@ import mage.game.permanent.Permanent;
  */
 public class AuntiesSnitch extends CardImpl {
 
-    public AuntiesSnitch(UUID ownerId) {
-        super(ownerId, 72, "Auntie's Snitch", Rarity.UNCOMMON, new CardType[]{CardType.CREATURE}, "{2}{B}");
-        this.expansionSetCode = "MMA";
+    public AuntiesSnitch(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{2}{B}");
         this.subtype.add("Goblin");
         this.subtype.add("Rogue");
 

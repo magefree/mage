@@ -26,14 +26,14 @@
 * or implied, of BetaSteward_at_googlemail.com.
 */
 
-package mage.sets.magic2010;
+package mage.cards.z;
 
 import java.util.UUID;
 import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.MageInt;
 import mage.abilities.keyword.FlyingAbility;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 
 /**
  *
@@ -41,9 +41,8 @@ import mage.cards.CardImpl;
  */
 public class ZephyrSprite extends CardImpl {
 
-    public ZephyrSprite(UUID ownerId) {
-        super(ownerId, 82, "Zephyr Sprite", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{U}");
-        this.expansionSetCode = "M10";
+    public ZephyrSprite(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{U}");
         this.subtype.add("Faerie");
 
         this.power = new MageInt(1);

@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.starwars;
+package mage.cards.r;
 
 import java.util.UUID;
 import mage.abilities.Ability;
@@ -36,10 +36,10 @@ import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.FightTargetsEffect;
 import mage.abilities.effects.common.continuous.BoostTargetEffect;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Duration;
 import mage.constants.Outcome;
-import mage.constants.Rarity;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.target.common.TargetControlledCreaturePermanent;
@@ -53,9 +53,8 @@ import mage.watchers.common.PlayerLostLifeWatcher;
  */
 public class Revenge extends CardImpl {
 
-    public Revenge(UUID ownerId) {
-        super(ownerId, 118, "Revenge", Rarity.COMMON, new CardType[]{CardType.INSTANT}, "{1}{R}");
-        this.expansionSetCode = "SWS";
+    public Revenge(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.INSTANT},"{1}{R}");
 
         // Target creature you control fights target creature an opponent controls.
         this.getSpellAbility().addEffect(new FightTargetsEffect());

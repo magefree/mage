@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.judgment;
+package mage.cards.j;
 
 import java.util.UUID;
 import mage.MageInt;
@@ -36,8 +36,8 @@ import mage.abilities.effects.common.DamageTargetEffect;
 import mage.abilities.keyword.FirstStrikeAbility;
 import mage.abilities.keyword.HasteAbility;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.constants.Zone;
 import mage.target.common.TargetCreatureOrPlayer;
 
@@ -47,9 +47,8 @@ import mage.target.common.TargetCreatureOrPlayer;
  */
 public class JeskaWarriorAdept extends CardImpl {
 
-    public JeskaWarriorAdept(UUID ownerId) {
-        super(ownerId, 93, "Jeska, Warrior Adept", Rarity.RARE, new CardType[]{CardType.CREATURE}, "{2}{R}{R}");
-        this.expansionSetCode = "JUD";
+    public JeskaWarriorAdept(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{2}{R}{R}");
         this.supertype.add("Legendary");
         this.subtype.add("Human");
         this.subtype.add("Barbarian");

@@ -25,14 +25,14 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.theros;
+package mage.cards.v;
 
 import java.util.UUID;
 import mage.abilities.effects.common.DestroyTargetEffect;
 import mage.abilities.effects.keyword.ScryEffect;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.filter.Filter;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.filter.predicate.mageobject.PowerPredicate;
@@ -50,9 +50,8 @@ public class VanquishTheFoul extends CardImpl {
         filter.add(new PowerPredicate(Filter.ComparisonType.GreaterThan, 3));
     }
 
-    public VanquishTheFoul(UUID ownerId) {
-        super(ownerId, 35, "Vanquish the Foul", Rarity.UNCOMMON, new CardType[]{CardType.SORCERY}, "{5}{W}");
-        this.expansionSetCode = "THS";
+    public VanquishTheFoul(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{5}{W}");
 
 
         // Destroy target creature with power 4 or greater. Scry 1.

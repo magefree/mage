@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.nemesis;
+package mage.cards.s;
 
 import java.util.UUID;
 import mage.abilities.condition.CompoundCondition;
@@ -35,9 +35,9 @@ import mage.abilities.condition.common.PermanentsOnTheBattlefieldCondition;
 import mage.abilities.costs.AlternativeCostSourceAbility;
 import mage.abilities.effects.common.PreventAllDamageToAllEffect;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Duration;
-import mage.constants.Rarity;
 import mage.filter.FilterPermanent;
 import mage.filter.common.FilterControlledCreatureInPlay;
 import mage.filter.predicate.mageobject.SubtypePredicate;
@@ -56,9 +56,8 @@ public class SivvisRuse extends CardImpl {
         filterPlains.add(new SubtypePredicate(("Plains")));
     }
 
-    public SivvisRuse(UUID ownerId) {
-        super(ownerId, 21, "Sivvi's Ruse", Rarity.UNCOMMON, new CardType[]{CardType.INSTANT}, "{2}{W}{W}");
-        this.expansionSetCode = "NEM";
+    public SivvisRuse(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.INSTANT},"{2}{W}{W}");
 
         // If an opponent controls a Mountain and you control a Plains, you may cast Sivvi's Ruse without paying its mana cost.
         Condition condition = new CompoundCondition("If an opponent controls a Mountain and you control a Plains",

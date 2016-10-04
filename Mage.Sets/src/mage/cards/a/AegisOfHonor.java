@@ -28,7 +28,7 @@
 
 
 
-package mage.sets.odyssey;
+package mage.cards.a;
 
 import java.util.UUID;
 import mage.abilities.Ability;
@@ -36,9 +36,9 @@ import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.costs.mana.ManaCostsImpl;
 import mage.abilities.effects.RedirectionEffect;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Duration;
-import mage.constants.Rarity;
 import mage.constants.Zone;
 import mage.filter.common.FilterInstantOrSorceryCard;
 import mage.game.Game;
@@ -52,9 +52,8 @@ import mage.target.TargetPlayer;
  */
 public class AegisOfHonor extends CardImpl {
 
-    public AegisOfHonor(UUID ownerId) {
-        super(ownerId, 1, "Aegis of Honor", Rarity.RARE, new CardType[]{CardType.ENCHANTMENT}, "{W}");
-        this.expansionSetCode = "ODY";
+    public AegisOfHonor(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.ENCHANTMENT},"{W}");
 
 	// {1}: The next time an instant or sorcery spell would deal damage to you this
         //turn, that spell deals that damage to its controller instead.

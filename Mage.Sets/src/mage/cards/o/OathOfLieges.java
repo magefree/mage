@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.exodus;
+package mage.cards.o;
 
 import java.util.UUID;
 import mage.abilities.Ability;
@@ -34,9 +34,9 @@ import mage.abilities.effects.Effect;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.search.SearchLibraryPutInPlayTargetPlayerEffect;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Outcome;
-import mage.constants.Rarity;
 import mage.constants.TargetController;
 import mage.filter.FilterPlayer;
 import mage.filter.common.FilterBasicLandCard;
@@ -63,9 +63,8 @@ public class OathOfLieges extends CardImpl {
 
     private final UUID originalId;
 
-    public OathOfLieges(UUID ownerId) {
-        super(ownerId, 11, "Oath of Lieges", Rarity.RARE, new CardType[]{CardType.ENCHANTMENT}, "{1}{W}");
-        this.expansionSetCode = "EXO";
+    public OathOfLieges(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.ENCHANTMENT},"{1}{W}");
 
         // At the beginning of each player's upkeep, that player chooses target player who controls more lands than he or she does and is his or her opponent. The first player may search his or her library for a basic land card, put that card onto the battlefield, then shuffle his or her library.
         Ability ability = new BeginningOfUpkeepTriggeredAbility(new OathOfLiegesEffect(), TargetController.ANY, false);

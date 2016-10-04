@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.bornofthegods;
+package mage.cards.f;
 
 import java.util.UUID;
 import mage.abilities.condition.common.MyTurnCondition;
@@ -33,8 +33,8 @@ import mage.abilities.decorator.ConditionalOneShotEffect;
 import mage.abilities.effects.common.CreateTokenEffect;
 import mage.abilities.effects.keyword.ScryEffect;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.game.permanent.token.CentaurEnchantmentCreatureToken;
 
 /**
@@ -43,9 +43,8 @@ import mage.game.permanent.token.CentaurEnchantmentCreatureToken;
  */
 public class FatedIntervention extends CardImpl {
 
-    public FatedIntervention(UUID ownerId) {
-        super(ownerId, 121, "Fated Intervention", Rarity.RARE, new CardType[]{CardType.INSTANT}, "{2}{G}{G}{G}");
-        this.expansionSetCode = "BNG";
+    public FatedIntervention(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.INSTANT},"{2}{G}{G}{G}");
 
 
         // Put two 3/3 green Centaur enchantment creature tokens onto the battlefield. If it's your turn, scry 2.

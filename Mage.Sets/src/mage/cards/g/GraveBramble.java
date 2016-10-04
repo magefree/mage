@@ -25,15 +25,15 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.innistrad;
+package mage.cards.g;
 
 import java.util.UUID;
 import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.MageInt;
 import mage.abilities.keyword.DefenderAbility;
 import mage.abilities.keyword.ProtectionAbility;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.filter.FilterPermanent;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.filter.predicate.mageobject.SubtypePredicate;
@@ -50,9 +50,8 @@ public class GraveBramble extends CardImpl {
         filter.add(new SubtypePredicate("Zombie"));
     }
 
-    public GraveBramble(UUID ownerId) {
-        super(ownerId, 184, "Grave Bramble", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{1}{G}{G}");
-        this.expansionSetCode = "ISD";
+    public GraveBramble(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{1}{G}{G}");
         this.subtype.add("Plant");
 
         this.power = new MageInt(3);

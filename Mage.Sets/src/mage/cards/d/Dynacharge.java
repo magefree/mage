@@ -25,17 +25,17 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.returntoravnica;
+package mage.cards.d;
 
 import java.util.UUID;
 import mage.constants.CardType;
 import mage.constants.Duration;
-import mage.constants.Rarity;
 import mage.abilities.costs.mana.ManaCostsImpl;
 import mage.abilities.effects.common.continuous.BoostControlledEffect;
 import mage.abilities.effects.common.continuous.BoostTargetEffect;
 import mage.abilities.keyword.OverloadAbility;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.target.common.TargetControlledCreaturePermanent;
 
 /**
@@ -44,9 +44,8 @@ import mage.target.common.TargetControlledCreaturePermanent;
  */
 public class Dynacharge extends CardImpl {
 
-    public Dynacharge(UUID ownerId) {
-        super(ownerId, 92, "Dynacharge", Rarity.COMMON, new CardType[]{CardType.INSTANT}, "{R}");
-        this.expansionSetCode = "RTR";
+    public Dynacharge(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.INSTANT},"{R}");
 
 
         // Target creature you control gets +2/+0 until end of turn.

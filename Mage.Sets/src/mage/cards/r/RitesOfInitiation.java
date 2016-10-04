@@ -25,17 +25,17 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.odyssey;
+package mage.cards.r;
 
 import java.util.UUID;
 import mage.abilities.Ability;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.continuous.BoostControlledEffect;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Duration;
 import mage.constants.Outcome;
-import mage.constants.Rarity;
 import mage.game.Game;
 import mage.players.Player;
 
@@ -45,9 +45,8 @@ import mage.players.Player;
  */
 public class RitesOfInitiation extends CardImpl {
 
-    public RitesOfInitiation(UUID ownerId) {
-        super(ownerId, 217, "Rites of Initiation", Rarity.COMMON, new CardType[]{CardType.INSTANT}, "{R}");
-        this.expansionSetCode = "ODY";
+    public RitesOfInitiation(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.INSTANT},"{R}");
 
         // Discard any number of cards at random. Creatures you control get +1/+0 until end of turn for each card discarded this way.
         this.getSpellAbility().addEffect(new RitesOfInitiationEffect());

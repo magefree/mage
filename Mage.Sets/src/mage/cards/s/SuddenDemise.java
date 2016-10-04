@@ -25,16 +25,16 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.commander2013;
+package mage.cards.s;
 
 import java.util.UUID;
 import mage.abilities.Ability;
 import mage.abilities.effects.OneShotEffect;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.choices.ChoiceColor;
 import mage.constants.CardType;
 import mage.constants.Outcome;
-import mage.constants.Rarity;
 import mage.filter.FilterPermanent;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.filter.predicate.mageobject.ColorPredicate;
@@ -48,9 +48,8 @@ import mage.players.Player;
  */
 public class SuddenDemise extends CardImpl {
 
-    public SuddenDemise(UUID ownerId) {
-        super(ownerId, 124, "Sudden Demise", Rarity.RARE, new CardType[]{CardType.SORCERY}, "{X}{R}");
-        this.expansionSetCode = "C13";
+    public SuddenDemise(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{X}{R}");
 
 
         // Choose a color. Sudden Demise deals X damage to each creature of the chosen color.       

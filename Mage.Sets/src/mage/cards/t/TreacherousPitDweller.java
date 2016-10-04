@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.avacynrestored;
+package mage.cards.t;
 
 import mage.constants.*;
 import mage.MageInt;
@@ -33,6 +33,7 @@ import mage.abilities.Ability;
 import mage.abilities.effects.ContinuousEffectImpl;
 import mage.abilities.keyword.UndyingAbility;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.target.common.TargetOpponent;
@@ -48,9 +49,8 @@ import mage.players.Player;
  */
 public class TreacherousPitDweller extends CardImpl {
 
-    public TreacherousPitDweller(UUID ownerId) {
-        super(ownerId, 121, "Treacherous Pit-Dweller", Rarity.RARE, new CardType[]{CardType.CREATURE}, "{B}{B}");
-        this.expansionSetCode = "AVR";
+    public TreacherousPitDweller(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{B}{B}");
         this.subtype.add("Demon");
 
         this.power = new MageInt(4);

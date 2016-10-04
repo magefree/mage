@@ -25,11 +25,10 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.scarsofmirrodin;
+package mage.cards.k;
 
 import java.util.UUID;
 import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.constants.Zone;
 import mage.MageInt;
 import mage.abilities.common.SimpleActivatedAbility;
@@ -37,6 +36,7 @@ import mage.abilities.costs.common.SacrificeTargetCost;
 import mage.abilities.costs.common.TapSourceCost;
 import mage.abilities.effects.common.search.SearchLibraryPutInPlayEffect;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.filter.common.FilterArtifactCard;
 import mage.filter.common.FilterControlledArtifactPermanent;
 import mage.target.common.TargetCardInLibrary;
@@ -51,9 +51,8 @@ public class KuldothaForgemaster extends CardImpl {
     private static final FilterArtifactCard filterArtifactCard = new FilterArtifactCard();
     private static final FilterControlledArtifactPermanent filterArtifactPermanent = new FilterControlledArtifactPermanent("three artifacts you control");
 
-    public KuldothaForgemaster(UUID ownerId) {
-        super(ownerId, 169, "Kuldotha Forgemaster", Rarity.RARE, new CardType[]{CardType.ARTIFACT, CardType.CREATURE}, "{5}");
-        this.expansionSetCode = "SOM";
+    public KuldothaForgemaster(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.ARTIFACT,CardType.CREATURE},"{5}");
         this.subtype.add("Construct");
 
         this.power = new MageInt(3);

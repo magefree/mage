@@ -25,15 +25,15 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.eventide;
+package mage.cards.t;
 
 import java.util.UUID;
 import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.MageInt;
 import mage.abilities.keyword.FlashAbility;
 import mage.abilities.keyword.PersistAbility;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 
 /**
  *
@@ -41,9 +41,8 @@ import mage.cards.CardImpl;
  */
 public class TrapjawKelpie extends CardImpl {
 
-    public TrapjawKelpie(UUID ownerId) {
-        super(ownerId, 164, "Trapjaw Kelpie", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{4}{G/U}{G/U}");
-        this.expansionSetCode = "EVE";
+    public TrapjawKelpie(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{4}{G/U}{G/U}");
         this.subtype.add("Beast");
 
         this.power = new MageInt(3);

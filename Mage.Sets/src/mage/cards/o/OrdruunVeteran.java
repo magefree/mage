@@ -25,17 +25,17 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.gatecrash;
+package mage.cards.o;
 
 import java.util.UUID;
 import mage.constants.CardType;
 import mage.constants.Duration;
-import mage.constants.Rarity;
 import mage.MageInt;
 import mage.abilities.effects.common.continuous.GainAbilitySourceEffect;
 import mage.abilities.keyword.BattalionAbility;
 import mage.abilities.keyword.DoubleStrikeAbility;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 
 /**
  *
@@ -43,9 +43,8 @@ import mage.cards.CardImpl;
  */
 public class OrdruunVeteran extends CardImpl {
 
-    public OrdruunVeteran(UUID ownerId) {
-        super(ownerId, 184, "Ordruun Veteran", Rarity.UNCOMMON, new CardType[]{CardType.CREATURE}, "{2}{R}{W}");
-        this.expansionSetCode = "GTC";
+    public OrdruunVeteran(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{2}{R}{W}");
         this.subtype.add("Minotaur");
         this.subtype.add("Soldier");
 

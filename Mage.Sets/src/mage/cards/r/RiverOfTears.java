@@ -25,11 +25,10 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.futuresight;
+package mage.cards.r;
 
 import java.util.UUID;
 import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.constants.Zone;
 import mage.Mana;
 import mage.abilities.condition.common.LandfallCondition;
@@ -38,6 +37,7 @@ import mage.abilities.decorator.ConditionalManaEffect;
 import mage.abilities.effects.common.BasicManaEffect;
 import mage.abilities.mana.ConditionalManaAbility;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.watchers.common.LandfallWatcher;
 
 /**
@@ -46,9 +46,8 @@ import mage.watchers.common.LandfallWatcher;
  */
 public class RiverOfTears extends CardImpl {
 
-    public RiverOfTears(UUID ownerId) {
-        super(ownerId, 179, "River of Tears", Rarity.RARE, new CardType[]{CardType.LAND}, "");
-        this.expansionSetCode = "FUT";
+    public RiverOfTears(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.LAND},"");
 
         // {T}: Add {U} to your mana pool. If you played a land this turn, add {B} to your mana pool instead.
         this.addAbility(new ConditionalManaAbility(Zone.BATTLEFIELD, new ConditionalManaEffect(

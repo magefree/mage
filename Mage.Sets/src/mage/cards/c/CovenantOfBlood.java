@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.magic2015;
+package mage.cards.c;
 
 import java.util.UUID;
 import mage.abilities.effects.Effect;
@@ -33,8 +33,8 @@ import mage.abilities.effects.common.DamageTargetEffect;
 import mage.abilities.effects.common.GainLifeEffect;
 import mage.abilities.keyword.ConvokeAbility;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.target.common.TargetCreatureOrPlayer;
 
 /**
@@ -43,9 +43,8 @@ import mage.target.common.TargetCreatureOrPlayer;
  */
 public class CovenantOfBlood extends CardImpl {
 
-    public CovenantOfBlood(UUID ownerId) {
-        super(ownerId, 91, "Covenant of Blood", Rarity.COMMON, new CardType[]{CardType.SORCERY}, "{6}{B}");
-        this.expansionSetCode = "M15";
+    public CovenantOfBlood(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{6}{B}");
 
 
         // Convoke

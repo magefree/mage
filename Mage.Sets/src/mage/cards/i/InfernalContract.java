@@ -25,13 +25,13 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.seventhedition;
+package mage.cards.i;
 
 import mage.abilities.effects.common.DrawCardSourceControllerEffect;
 import mage.abilities.effects.common.LoseHalfLifeEffect;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.Rarity;
 
 import java.util.UUID;
 
@@ -41,9 +41,8 @@ import java.util.UUID;
  */
 public class InfernalContract extends CardImpl {
 
-    public InfernalContract(UUID ownerId) {
-        super(ownerId, 143, "Infernal Contract", Rarity.RARE, new CardType[]{CardType.SORCERY}, "{B}{B}{B}");
-        this.expansionSetCode = "7ED";
+    public InfernalContract(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{B}{B}{B}");
 
 
         // Draw four cards. You lose half your life, rounded up.

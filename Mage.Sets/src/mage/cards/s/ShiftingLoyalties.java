@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.fatereforged;
+package mage.cards.s;
 
 import java.util.HashSet;
 import java.util.Set;
@@ -34,9 +34,9 @@ import mage.MageObject;
 import mage.abilities.Ability;
 import mage.abilities.effects.common.continuous.ExchangeControlTargetEffect;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Duration;
-import mage.constants.Rarity;
 import mage.filter.FilterPermanent;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
@@ -49,9 +49,8 @@ import mage.util.CardUtil;
  */
 public class ShiftingLoyalties extends CardImpl {
 
-    public ShiftingLoyalties(UUID ownerId) {
-        super(ownerId, 51, "Shifting Loyalties", Rarity.UNCOMMON, new CardType[]{CardType.SORCERY}, "{5}{U}");
-        this.expansionSetCode = "FRF";
+    public ShiftingLoyalties(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{5}{U}");
 
         // Exchange control of two target permanents that share a card type. <i>(Artifact, creature, enchantment, land, and planeswalker are card types.)</i>
         this.getSpellAbility().addEffect(new ExchangeControlTargetEffect(Duration.EndOfGame, "Exchange control of two target permanents that share a card type. <i>(Artifact, creature, enchantment, land, and planeswalker are card types.)</i>"));

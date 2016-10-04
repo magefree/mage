@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.fatereforged;
+package mage.cards.f;
 
 import java.util.UUID;
 import mage.MageInt;
@@ -39,9 +39,9 @@ import mage.abilities.effects.common.ExileTargetEffect;
 import mage.abilities.effects.common.PutTokenOntoBattlefieldCopyTargetEffect;
 import mage.abilities.keyword.DashAbility;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Outcome;
-import mage.constants.Rarity;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.filter.predicate.permanent.AnotherPredicate;
 import mage.filter.predicate.permanent.AttackingPredicate;
@@ -64,9 +64,8 @@ public class FlamerushRider extends CardImpl {
         filter.add(new AttackingPredicate());
     }
 
-    public FlamerushRider(UUID ownerId) {
-        super(ownerId, 99, "Flamerush Rider", Rarity.RARE, new CardType[]{CardType.CREATURE}, "{4}{R}");
-        this.expansionSetCode = "FRF";
+    public FlamerushRider(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{4}{R}");
         this.subtype.add("Human");
         this.subtype.add("Warrior");
         this.power = new MageInt(3);

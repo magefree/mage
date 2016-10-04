@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.kaladesh;
+package mage.cards.c;
 
 import java.util.UUID;
 import mage.MageInt;
@@ -38,9 +38,9 @@ import mage.abilities.effects.common.continuous.GainAbilityTargetEffect;
 import mage.abilities.effects.common.counter.GetEnergyCountersControllerEffect;
 import mage.abilities.keyword.IndestructibleAbility;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Duration;
-import mage.constants.Rarity;
 import mage.filter.common.FilterAttackingCreature;
 import mage.filter.predicate.permanent.AnotherPredicate;
 import mage.target.common.TargetCreaturePermanent;
@@ -57,9 +57,8 @@ public class ConsulsShieldguard extends CardImpl {
         filter.add(new AnotherPredicate());
     }
 
-    public ConsulsShieldguard(UUID ownerId) {
-        super(ownerId, 11, "Consul's Shieldguard", Rarity.UNCOMMON, new CardType[]{CardType.CREATURE}, "{3}{W}");
-        this.expansionSetCode = "KLD";
+    public ConsulsShieldguard(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{3}{W}");
         this.subtype.add("Dwarf");
         this.subtype.add("Soldier");
         this.power = new MageInt(3);

@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.oathofthegatewatch;
+package mage.cards.w;
 
 import java.util.UUID;
 import mage.MageInt;
@@ -34,9 +34,9 @@ import mage.abilities.condition.common.PermanentsOnTheBattlefieldCondition;
 import mage.abilities.decorator.ConditionalContinuousEffect;
 import mage.abilities.effects.common.continuous.BoostControlledEffect;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Duration;
-import mage.constants.Rarity;
 import mage.constants.Zone;
 import mage.filter.common.FilterControlledPermanent;
 import mage.filter.predicate.mageobject.SubtypePredicate;
@@ -54,9 +54,8 @@ public class WeaponsTrainer extends CardImpl {
         filter.add(new SubtypePredicate("Equipment"));
     }
 
-    public WeaponsTrainer(UUID ownerId) {
-        super(ownerId, 160, "Weapons Trainer", Rarity.UNCOMMON, new CardType[]{CardType.CREATURE}, "{R}{W}");
-        this.expansionSetCode = "OGW";
+    public WeaponsTrainer(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{R}{W}");
         this.subtype.add("Human");
         this.subtype.add("Soldier");
         this.subtype.add("Ally");

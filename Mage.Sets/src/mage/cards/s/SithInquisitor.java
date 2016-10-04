@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.starwars;
+package mage.cards.s;
 
 import java.util.UUID;
 import mage.MageInt;
@@ -35,8 +35,8 @@ import mage.abilities.condition.common.HateCondition;
 import mage.abilities.decorator.ConditionalTriggeredAbility;
 import mage.abilities.effects.common.discard.DiscardTargetEffect;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.target.TargetPlayer;
 import mage.watchers.common.LifeLossOtherFromCombatWatcher;
 
@@ -46,9 +46,8 @@ import mage.watchers.common.LifeLossOtherFromCombatWatcher;
  */
 public class SithInquisitor extends CardImpl {
 
-    public SithInquisitor(UUID ownerId) {
-        super(ownerId, 88, "Sith Inquisitor", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{3}{B}");
-        this.expansionSetCode = "SWS";
+    public SithInquisitor(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{3}{B}");
         this.subtype.add("Human");
         this.subtype.add("Sith");
         this.power = new MageInt(5);

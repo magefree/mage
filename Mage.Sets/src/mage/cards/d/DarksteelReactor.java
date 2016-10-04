@@ -25,11 +25,10 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.darksteel;
+package mage.cards.d;
 
 import java.util.UUID;
 import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.constants.TargetController;
 import mage.constants.Zone;
 import mage.abilities.StateTriggeredAbility;
@@ -38,6 +37,7 @@ import mage.abilities.effects.common.WinGameSourceControllerEffect;
 import mage.abilities.effects.common.counter.AddCountersSourceEffect;
 import mage.abilities.keyword.IndestructibleAbility;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.counters.CounterType;
 import mage.game.Game;
 import mage.game.events.GameEvent;
@@ -49,9 +49,8 @@ import mage.game.permanent.Permanent;
  */
 public class DarksteelReactor extends CardImpl {
 
-    public DarksteelReactor(UUID ownerId) {
-        super(ownerId, 114, "Darksteel Reactor", Rarity.RARE, new CardType[]{CardType.ARTIFACT}, "{4}");
-        this.expansionSetCode = "DST";
+    public DarksteelReactor(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.ARTIFACT},"{4}");
 
         // Darksteel Reactor is indestructible.
         this.addAbility(IndestructibleAbility.getInstance());

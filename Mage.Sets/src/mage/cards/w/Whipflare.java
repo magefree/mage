@@ -25,13 +25,13 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.newphyrexia;
+package mage.cards.w;
 
 import java.util.UUID;
 import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.abilities.effects.common.DamageAllEffect;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.filter.predicate.Predicates;
 import mage.filter.predicate.mageobject.CardTypePredicate;
@@ -48,9 +48,8 @@ public class Whipflare extends CardImpl {
         filter.add(Predicates.not(new CardTypePredicate(CardType.ARTIFACT)));
     }
 
-    public Whipflare(UUID ownerId) {
-        super(ownerId, 102, "Whipflare", Rarity.UNCOMMON, new CardType[]{CardType.SORCERY}, "{1}{R}");
-        this.expansionSetCode = "NPH";
+    public Whipflare(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{1}{R}");
 
 
         // Whipflare deals 2 damage to each nonartifact creature.

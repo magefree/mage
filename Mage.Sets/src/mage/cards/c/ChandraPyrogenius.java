@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.kaladesh;
+package mage.cards.c;
 
 import java.util.UUID;
 import mage.abilities.LoyaltyAbility;
@@ -36,9 +36,9 @@ import mage.abilities.effects.common.DamageAllControlledTargetEffect;
 import mage.abilities.effects.common.DamagePlayersEffect;
 import mage.abilities.effects.common.DamageTargetEffect;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Outcome;
-import mage.constants.Rarity;
 import mage.constants.TargetController;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.target.TargetPlayer;
@@ -50,9 +50,8 @@ import mage.target.common.TargetCreaturePermanent;
  */
 public class ChandraPyrogenius extends CardImpl {
 
-    public ChandraPyrogenius(UUID ownerId) {
-        super(ownerId, 265, "Chandra, Pyrogenius", Rarity.MYTHIC, new CardType[]{CardType.PLANESWALKER}, "{4}{R}{R}");
-        this.expansionSetCode = "KLD";
+    public ChandraPyrogenius(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.PLANESWALKER},"{4}{R}{R}");
         this.subtype.add("Chandra");
 
         this.addAbility(new PlanswalkerEntersWithLoyalityCountersAbility(5));

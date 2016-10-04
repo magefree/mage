@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.oathofthegatewatch;
+package mage.cards.m;
 
 import java.util.UUID;
 import mage.MageInt;
@@ -37,8 +37,8 @@ import mage.abilities.effects.common.ExileFromZoneTargetEffect;
 import mage.abilities.keyword.CantBeBlockedSourceAbility;
 import mage.abilities.keyword.DevoidAbility;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.constants.Zone;
 import mage.filter.FilterCard;
 import mage.target.common.TargetOpponent;
@@ -49,9 +49,8 @@ import mage.target.common.TargetOpponent;
  */
 public class Mindmelter extends CardImpl {
 
-    public Mindmelter(UUID ownerId) {
-        super(ownerId, 149, "Mindmelter", Rarity.UNCOMMON, new CardType[]{CardType.CREATURE}, "{1}{U}{B}");
-        this.expansionSetCode = "OGW";
+    public Mindmelter(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{1}{U}{B}");
         this.subtype.add("Eldrazi");
         this.subtype.add("Drone");
         this.power = new MageInt(2);

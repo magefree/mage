@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.riseoftheeldrazi;
+package mage.cards.n;
 
 import java.util.HashSet;
 import java.util.Set;
@@ -36,8 +36,8 @@ import mage.abilities.condition.Condition;
 import mage.abilities.effects.common.CounterTargetEffect;
 import mage.abilities.effects.common.cost.SpellCostReductionSourceEffect;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.constants.TargetController;
 import mage.constants.Zone;
 import mage.filter.Filter;
@@ -59,9 +59,8 @@ import mage.target.Targets;
  */
 public class NotOfThisWorld extends CardImpl {
 
-    public NotOfThisWorld(UUID ownerId) {
-        super(ownerId, 8, "Not of This World", Rarity.UNCOMMON, new CardType[]{CardType.TRIBAL, CardType.INSTANT}, "{7}");
-        this.expansionSetCode = "ROE";
+    public NotOfThisWorld(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.TRIBAL,CardType.INSTANT},"{7}");
         this.subtype.add("Eldrazi");
 
         // Counter target spell or ability that targets a permanent you control.

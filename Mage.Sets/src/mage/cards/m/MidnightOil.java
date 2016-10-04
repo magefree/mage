@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.kaladesh;
+package mage.cards.m;
 
 import java.util.UUID;
 import mage.abilities.Ability;
@@ -42,9 +42,9 @@ import mage.abilities.effects.common.continuous.MaximumHandSizeControllerEffect.
 import mage.abilities.effects.common.counter.AddCountersSourceEffect;
 import mage.abilities.effects.common.counter.RemoveCounterSourceEffect;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Duration;
-import mage.constants.Rarity;
 import mage.constants.TargetController;
 import mage.constants.Zone;
 import mage.counters.Counter;
@@ -59,9 +59,8 @@ import mage.game.events.GameEvent.EventType;
  */
 public class MidnightOil extends CardImpl {
 
-    public MidnightOil(UUID ownerId) {
-        super(ownerId, 92, "Midnight Oil", Rarity.RARE, new CardType[]{CardType.ENCHANTMENT}, "{2}{B}{B}");
-        this.expansionSetCode = "KLD";
+    public MidnightOil(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.ENCHANTMENT},"{2}{B}{B}");
 
         // Midnight Oil enters the battlefield with seven hour counters on it.
         this.addAbility(new EntersBattlefieldAbility(new AddCountersSourceEffect(new Counter(CounterType.HOUR.createInstance(7))),

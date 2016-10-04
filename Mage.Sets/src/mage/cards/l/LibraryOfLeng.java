@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.limitedbeta;
+package mage.cards.l;
 
 import java.util.UUID;
 import mage.abilities.Ability;
@@ -35,12 +35,12 @@ import mage.abilities.effects.ReplacementEffectImpl;
 import mage.abilities.effects.common.continuous.MaximumHandSizeControllerEffect;
 import mage.cards.Card;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.cards.Cards;
 import mage.cards.CardsImpl;
 import mage.constants.CardType;
 import mage.constants.Duration;
 import mage.constants.Outcome;
-import mage.constants.Rarity;
 import mage.constants.Zone;
 import mage.game.Game;
 import mage.game.events.GameEvent;
@@ -54,9 +54,8 @@ import mage.players.Player;
  */
 public class LibraryOfLeng extends CardImpl {
 
-    public LibraryOfLeng(UUID ownerId) {
-        super(ownerId, 259, "Library of Leng", Rarity.UNCOMMON, new CardType[]{CardType.ARTIFACT}, "{1}");
-        this.expansionSetCode = "LEB";
+    public LibraryOfLeng(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.ARTIFACT},"{1}");
 
         // You have no maximum hand size.
         Effect effect = new MaximumHandSizeControllerEffect(Integer.MAX_VALUE, Duration.WhileOnBattlefield, MaximumHandSizeControllerEffect.HandSizeModification.SET);

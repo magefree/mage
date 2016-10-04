@@ -25,13 +25,13 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.legends;
+package mage.cards.s;
 
 import java.util.UUID;
 import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.MageInt;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 
 /**
  *
@@ -39,9 +39,8 @@ import mage.cards.CardImpl;
  */
 public class SivitriScarzam extends CardImpl {
 
-    public SivitriScarzam(UUID ownerId) {
-        super(ownerId, 298, "Sivitri Scarzam", Rarity.UNCOMMON, new CardType[]{CardType.CREATURE}, "{5}{U}{B}");
-        this.expansionSetCode = "LEG";
+    public SivitriScarzam(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{5}{U}{B}");
         this.supertype.add("Legendary");
         this.subtype.add("Human");
 

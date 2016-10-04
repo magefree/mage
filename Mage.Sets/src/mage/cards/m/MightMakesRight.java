@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.magic2015;
+package mage.cards.m;
 
 import java.util.List;
 import java.util.UUID;
@@ -39,9 +39,9 @@ import mage.abilities.effects.common.continuous.GainAbilityTargetEffect;
 import mage.abilities.effects.common.continuous.GainControlTargetEffect;
 import mage.abilities.keyword.HasteAbility;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Duration;
-import mage.constants.Rarity;
 import mage.constants.TargetController;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.filter.predicate.permanent.ControllerPredicate;
@@ -64,9 +64,8 @@ public class MightMakesRight extends CardImpl {
         filter.add(new ControllerPredicate(TargetController.OPPONENT));
     }
     
-    public MightMakesRight(UUID ownerId) {
-        super(ownerId, 156, "Might Makes Right", Rarity.UNCOMMON, new CardType[]{CardType.ENCHANTMENT}, "{5}{R}");
-        this.expansionSetCode = "M15";
+    public MightMakesRight(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.ENCHANTMENT},"{5}{R}");
 
 
         // At the beginning of combat on your turn, if you control each creature on the battlefield with the greatest power, gain control

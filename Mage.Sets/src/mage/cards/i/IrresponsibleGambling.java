@@ -25,14 +25,14 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.starwars;
+package mage.cards.i;
 
 import java.util.UUID;
 import mage.abilities.costs.common.DiscardCardCost;
 import mage.abilities.effects.common.DrawCardSourceControllerEffect;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.Rarity;
 
 /**
  *
@@ -40,9 +40,8 @@ import mage.constants.Rarity;
  */
 public class IrresponsibleGambling extends CardImpl {
 
-    public IrresponsibleGambling(UUID ownerId) {
-        super(ownerId, 111, "Irresponsible Gambling", Rarity.COMMON, new CardType[]{CardType.SORCERY}, "{R}");
-        this.expansionSetCode = "SWS";
+    public IrresponsibleGambling(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{R}");
 
         // As an additional cost to cast Irresponsible Gambling, discard a card at random.
         this.getSpellAbility().addCost(new DiscardCardCost(true));

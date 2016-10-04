@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.commander2014;
+package mage.cards.m;
 
 import java.util.UUID;
 import mage.ObjectColor;
@@ -37,9 +37,9 @@ import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.CastSourceTriggeredAbility;
 import mage.abilities.effects.common.DestroyTargetEffect;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Outcome;
-import mage.constants.Rarity;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.filter.predicate.Predicates;
 import mage.filter.predicate.mageobject.ColorPredicate;
@@ -61,9 +61,8 @@ public class MaliciousAffliction extends CardImpl {
         filter.add(Predicates.not(new ColorPredicate(ObjectColor.BLACK)));
     }
 
-    public MaliciousAffliction(UUID ownerId) {
-        super(ownerId, 25, "Malicious Affliction", Rarity.RARE, new CardType[]{CardType.INSTANT}, "{B}{B}");
-        this.expansionSetCode = "C14";
+    public MaliciousAffliction(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.INSTANT},"{B}{B}");
 
         // Morbid - When you cast Malicious Affliction, if a creature died this turn, you may copy Malicious Affliction and may choose a new target for the copy.
         Ability ability = new ConditionalTriggeredAbility(

@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.vintagemasters;
+package mage.cards.d;
 
 import java.util.UUID;
 import mage.MageInt;
@@ -36,8 +36,8 @@ import mage.abilities.effects.common.CopyPermanentEffect;
 import mage.abilities.keyword.DethroneAbility;
 import mage.abilities.keyword.HasteAbility;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
@@ -49,9 +49,8 @@ import mage.util.functions.ApplyToPermanent;
  */
 public class DacksDuplicate extends CardImpl {
 
-    public DacksDuplicate(UUID ownerId) {
-        super(ownerId, 248, "Dack's Duplicate", Rarity.RARE, new CardType[]{CardType.CREATURE}, "{2}{U}{R}");
-        this.expansionSetCode = "VMA";
+    public DacksDuplicate(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{2}{U}{R}");
         this.subtype.add("Shapeshifter");
 
         this.power = new MageInt(0);

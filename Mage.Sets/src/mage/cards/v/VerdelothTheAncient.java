@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.invasion;
+package mage.cards.v;
 
 import mage.MageInt;
 import mage.abilities.Ability;
@@ -40,9 +40,9 @@ import mage.abilities.effects.common.continuous.BoostAllEffect;
 import mage.abilities.keyword.KickerAbility;
 import mage.cards.Card;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Duration;
-import mage.constants.Rarity;
 import mage.constants.Zone;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.filter.predicate.Predicates;
@@ -59,9 +59,8 @@ import java.util.UUID;
  */
 public class VerdelothTheAncient extends CardImpl {
 
-    public VerdelothTheAncient(UUID ownerId) {
-        super(ownerId, 220, "Verdeloth the Ancient", Rarity.RARE, new CardType[]{CardType.CREATURE}, "{4}{G}{G}");
-        this.expansionSetCode = "INV";
+    public VerdelothTheAncient(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{4}{G}{G}");
         this.supertype.add("Legendary");
         this.subtype.add("Treefolk");
 

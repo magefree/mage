@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.conflux;
+package mage.cards.r;
 
 import java.util.UUID;
 import mage.MageInt;
@@ -36,8 +36,8 @@ import mage.abilities.condition.common.PermanentsOnTheBattlefieldCondition;
 import mage.abilities.decorator.ConditionalTriggeredAbility;
 import mage.abilities.effects.common.DrawCardSourceControllerEffect;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.filter.common.FilterControlledPermanent;
 import mage.filter.predicate.mageobject.ColorPredicate;
 
@@ -55,9 +55,8 @@ public class RhoxMeditant extends CardImpl {
     
     private static final String rule = "When {this} enters the battlefield, if you control a green permanent, draw a card.";
 
-    public RhoxMeditant(UUID ownerId) {
-        super(ownerId, 16, "Rhox Meditant", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{3}{W}");
-        this.expansionSetCode = "CON";
+    public RhoxMeditant(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{3}{W}");
         this.subtype.add("Rhino");
         this.subtype.add("Monk");
 

@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.torment;
+package mage.cards.b;
 
 import java.util.UUID;
 import mage.MageInt;
@@ -40,10 +40,10 @@ import mage.abilities.effects.common.continuous.BoostSourceEffect;
 import mage.abilities.effects.common.continuous.GainAbilitySourceEffect;
 import mage.abilities.keyword.FlyingAbility;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.AbilityWord;
 import mage.constants.CardType;
 import mage.constants.Duration;
-import mage.constants.Rarity;
 import mage.constants.Zone;
 
 /**
@@ -52,9 +52,8 @@ import mage.constants.Zone;
  */
 public class BoneshardSlasher extends CardImpl {
 
-    public BoneshardSlasher(UUID ownerId) {
-        super(ownerId, 50, "Boneshard Slasher", Rarity.UNCOMMON, new CardType[]{CardType.CREATURE}, "{1}{B}");
-        this.expansionSetCode = "TOR";
+    public BoneshardSlasher(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{1}{B}");
         this.subtype.add("Horror");
         this.power = new MageInt(1);
         this.toughness = new MageInt(1);

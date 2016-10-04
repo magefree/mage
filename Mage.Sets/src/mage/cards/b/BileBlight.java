@@ -25,16 +25,16 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.bornofthegods;
+package mage.cards.b;
 
 import java.util.UUID;
 import mage.MageObjectReference;
 import mage.abilities.Ability;
 import mage.abilities.effects.common.continuous.BoostAllEffect;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Duration;
-import mage.constants.Rarity;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.target.common.TargetCreaturePermanent;
@@ -45,9 +45,8 @@ import mage.target.common.TargetCreaturePermanent;
  */
 public class BileBlight extends CardImpl {
 
-    public BileBlight(UUID ownerId) {
-        super(ownerId, 61, "Bile Blight", Rarity.UNCOMMON, new CardType[]{CardType.INSTANT}, "{B}{B}");
-        this.expansionSetCode = "BNG";
+    public BileBlight(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.INSTANT},"{B}{B}");
 
 
         // Target creature and all creatures with the same name as that creature get -3/-3 until end of turn.

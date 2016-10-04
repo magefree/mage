@@ -25,13 +25,13 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.antiquities;
+package mage.cards.a;
 
 import java.util.UUID;
 import mage.abilities.effects.common.CounterTargetEffect;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.target.TargetSpell;
 import mage.filter.common.FilterArtifactSpell;
 
@@ -40,9 +40,8 @@ import mage.filter.common.FilterArtifactSpell;
  * @author Jgod
  */
 public class ArtifactBlast extends CardImpl {
-    public ArtifactBlast(UUID ownerId) {
-        super(ownerId, 87, "Artifact Blast", Rarity.COMMON, new CardType[]{CardType.INSTANT}, "{R}");
-        this.expansionSetCode = "ATQ";
+    public ArtifactBlast(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.INSTANT},"{R}");
 
         // Counter target artifact spell.
         this.getSpellAbility().addTarget(new TargetSpell(new FilterArtifactSpell()));

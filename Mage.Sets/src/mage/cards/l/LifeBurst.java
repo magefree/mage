@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.odyssey;
+package mage.cards.l;
 
 import java.util.UUID;
 import mage.abilities.dynamicvalue.MultipliedValue;
@@ -33,8 +33,8 @@ import mage.abilities.dynamicvalue.common.CardsInAllGraveyardsCount;
 import mage.abilities.effects.Effect;
 import mage.abilities.effects.common.GainLifeTargetEffect;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.filter.FilterCard;
 import mage.filter.predicate.mageobject.NamePredicate;
 import mage.target.TargetPlayer;
@@ -51,9 +51,8 @@ public class LifeBurst extends CardImpl {
         filter.add(new NamePredicate("Life Burst"));
     }
 
-    public LifeBurst(UUID ownerId) {
-        super(ownerId, 30, "Life Burst", Rarity.COMMON, new CardType[]{CardType.INSTANT}, "{1}{W}");
-        this.expansionSetCode = "ODY";
+    public LifeBurst(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.INSTANT},"{1}{W}");
 
         // Target player gains 4 life, then gains 4 life for each card named Life Burst in each graveyard.
         this.getSpellAbility().addEffect(new GainLifeTargetEffect(4));

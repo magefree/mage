@@ -25,12 +25,11 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.conflux;
+package mage.cards.s;
 
 import java.util.UUID;
 
 import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.abilities.Ability;
 import mage.abilities.common.ActivateIfConditionActivatedAbility;
 import mage.abilities.condition.common.MyTurnCondition;
@@ -38,6 +37,7 @@ import mage.abilities.costs.common.TapSourceCost;
 import mage.abilities.costs.mana.ManaCostsImpl;
 import mage.abilities.effects.common.discard.DiscardTargetEffect;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.Zone;
 import mage.target.TargetPlayer;
 
@@ -47,9 +47,8 @@ import mage.target.TargetPlayer;
  */
 public class ScepterOfFugue extends CardImpl {
 
-    public ScepterOfFugue(UUID ownerId) {
-        super(ownerId, 53, "Scepter of Fugue", Rarity.RARE, new CardType[]{CardType.ARTIFACT}, "{B}{B}");
-        this.expansionSetCode = "CON";
+    public ScepterOfFugue(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.ARTIFACT},"{B}{B}");
 
 
         // {1}{B}, {tap}: Target player discards a card. Activate this ability only during your turn.

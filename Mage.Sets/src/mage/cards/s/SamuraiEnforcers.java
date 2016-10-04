@@ -26,14 +26,14 @@
  *  or implied, of BetaSteward_at_googlemail.com.
  */
 
-package mage.sets.championsofkamigawa;
+package mage.cards.s;
 
 import java.util.UUID;
 import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.MageInt;
 import mage.abilities.keyword.BushidoAbility;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 
 /**
  *
@@ -41,9 +41,8 @@ import mage.cards.CardImpl;
  */
 public class SamuraiEnforcers extends CardImpl {
 
-    public SamuraiEnforcers (UUID ownerId) {
-        super(ownerId, 42, "Samurai Enforcers", Rarity.UNCOMMON, new CardType[]{CardType.CREATURE}, "{4}{W}{W}");
-        this.expansionSetCode = "CHK";
+    public SamuraiEnforcers (UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{4}{W}{W}");
         this.subtype.add("Human");
         this.subtype.add("Samurai");
 

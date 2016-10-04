@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package mage.sets.mirage;
+package mage.cards.d;
 
 import java.util.UUID;
 import mage.MageInt;
@@ -13,8 +13,8 @@ import mage.abilities.costs.common.TapSourceCost;
 import mage.abilities.costs.mana.ManaCostsImpl;
 import mage.abilities.effects.common.DestroyTargetEffect;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.constants.Zone;
 import mage.target.common.TargetNonBasicLandPermanent;
 
@@ -24,9 +24,8 @@ import mage.target.common.TargetNonBasicLandPermanent;
  */
 public class DwarvenMiner extends CardImpl {
     
-    public DwarvenMiner(UUID ownerId) {
-        super(ownerId, 169, "Dwarven Miner", Rarity.UNCOMMON, new CardType[]{CardType.CREATURE}, "{1}{R}");
-        this.expansionSetCode = "MIR";
+    public DwarvenMiner(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{1}{R}");
         this.subtype.add("Dwarf");
         
         this.power = new MageInt(1);

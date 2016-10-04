@@ -25,14 +25,14 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.magic2015;
+package mage.cards.n;
 
 import java.util.UUID;
 import mage.abilities.effects.common.search.SearchLibraryPutInPlayEffect;
 import mage.abilities.keyword.ConvokeAbility;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.filter.common.FilterBasicLandCard;
 import mage.target.common.TargetCardInLibrary;
 
@@ -42,9 +42,8 @@ import mage.target.common.TargetCardInLibrary;
  */
 public class NissasExpedition extends CardImpl {
 
-    public NissasExpedition(UUID ownerId) {
-        super(ownerId, 188, "Nissa's Expedition", Rarity.UNCOMMON, new CardType[]{CardType.SORCERY}, "{4}{G}");
-        this.expansionSetCode = "M15";
+    public NissasExpedition(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{4}{G}");
 
 
         // Convoke

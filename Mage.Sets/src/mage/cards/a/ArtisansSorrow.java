@@ -25,14 +25,14 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.theros;
+package mage.cards.a;
 
 import java.util.UUID;
 import mage.abilities.effects.common.DestroyTargetEffect;
 import mage.abilities.effects.keyword.ScryEffect;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.filter.common.FilterArtifactOrEnchantmentPermanent;
 import mage.target.TargetPermanent;
 
@@ -41,9 +41,8 @@ import mage.target.TargetPermanent;
  * @author LevelX2
  */
 public class ArtisansSorrow extends CardImpl {
-    public ArtisansSorrow(UUID ownerId) {
-        super(ownerId, 151, "Artisan's Sorrow", Rarity.UNCOMMON, new CardType[]{CardType.INSTANT}, "{3}{G}");
-        this.expansionSetCode = "THS";
+    public ArtisansSorrow(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.INSTANT},"{3}{G}");
 
         // Destroy target artifact or enchantment. Scry 2.
         this.getSpellAbility().addEffect(new DestroyTargetEffect());

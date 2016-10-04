@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package mage.sets.planeshift;
+package mage.cards.s;
 
 import java.util.UUID;
 import mage.MageObject;
@@ -16,9 +16,9 @@ import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.SearchEffect;
 import mage.cards.Card;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Outcome;
-import mage.constants.Rarity;
 import mage.constants.Zone;
 import mage.filter.FilterCard;
 import mage.filter.predicate.Predicates;
@@ -35,9 +35,8 @@ import mage.util.CardUtil;
  */
 public class SkyshipWeatherlight1 extends CardImpl {
 
-    public SkyshipWeatherlight1(UUID ownerId) {
-        super(ownerId, "133a", "Skyship Weatherlight", Rarity.RARE, new CardType[]{CardType.ARTIFACT}, "{4}");
-        this.expansionSetCode = "PLS";
+    public SkyshipWeatherlight1(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.ARTIFACT},"{4}");
         this.supertype.add("Legendary");
 
         // When Skyship Weatherlight enters the battlefield, search your library for any number of artifact and/or creature cards and exile them. Then shuffle your library.

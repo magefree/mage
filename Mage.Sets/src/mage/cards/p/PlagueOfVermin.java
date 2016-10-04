@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.shadowmoor;
+package mage.cards.p;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -34,9 +34,9 @@ import mage.abilities.Ability;
 import mage.abilities.effects.OneShotEffect;
 import mage.cards.Card;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Outcome;
-import mage.constants.Rarity;
 import mage.game.Game;
 import mage.game.permanent.token.RatToken;
 import mage.players.Player;
@@ -48,9 +48,8 @@ import mage.players.PlayerList;
  */
 public class PlagueOfVermin extends CardImpl {
 
-    public PlagueOfVermin(UUID ownerId) {
-        super(ownerId, 73, "Plague of Vermin", Rarity.RARE, new CardType[]{CardType.SORCERY}, "{6}{B}");
-        this.expansionSetCode = "SHM";
+    public PlagueOfVermin(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{6}{B}");
 
 
         // Starting with you, each player may pay any amount of life. Repeat this process until no one pays life. Each player puts a 1/1 black Rat creature token onto the battlefield for each 1 life he or she paid this way.

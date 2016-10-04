@@ -25,11 +25,10 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.eventide;
+package mage.cards.n;
 
 import java.util.UUID;
 import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.constants.Zone;
 import mage.MageInt;
 import mage.ObjectColor;
@@ -38,6 +37,7 @@ import mage.abilities.common.SpellCastControllerTriggeredAbility;
 import mage.abilities.effects.common.DontUntapInControllersUntapStepSourceEffect;
 import mage.abilities.effects.common.UntapSourceEffect;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.filter.FilterSpell;
 import mage.filter.predicate.mageobject.ColorPredicate;
 
@@ -53,9 +53,8 @@ public class NettleSentinel extends CardImpl {
         filter.add(new ColorPredicate(ObjectColor.GREEN));
     }
 
-    public NettleSentinel(UUID ownerId) {
-        super(ownerId, 71, "Nettle Sentinel", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{G}");
-        this.expansionSetCode = "EVE";
+    public NettleSentinel(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{G}");
         this.subtype.add("Elf");
         this.subtype.add("Warrior");
 

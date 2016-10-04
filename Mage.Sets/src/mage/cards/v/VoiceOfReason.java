@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.urzasdestiny;
+package mage.cards.v;
 
 import java.util.UUID;
 import mage.MageInt;
@@ -33,8 +33,8 @@ import mage.ObjectColor;
 import mage.abilities.keyword.FlyingAbility;
 import mage.abilities.keyword.ProtectionAbility;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.filter.FilterCard;
 import mage.filter.predicate.mageobject.ColorPredicate;
 
@@ -50,9 +50,8 @@ public class VoiceOfReason extends CardImpl {
         filter.add(new ColorPredicate(ObjectColor.BLUE));
     }
 
-    public VoiceOfReason(UUID ownerId) {
-        super(ownerId, 24, "Voice of Reason", Rarity.UNCOMMON, new CardType[]{CardType.CREATURE}, "{3}{W}");
-        this.expansionSetCode = "UDS";
+    public VoiceOfReason(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{3}{W}");
         this.subtype.add("Angel");
         this.power = new MageInt(2);
         this.toughness = new MageInt(2);

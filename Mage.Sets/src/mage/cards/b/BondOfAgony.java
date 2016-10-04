@@ -25,15 +25,15 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.dissension;
+package mage.cards.b;
 
 import mage.abilities.costs.common.PayLifeCost;
 import mage.abilities.dynamicvalue.DynamicValue;
 import mage.abilities.dynamicvalue.common.ManacostVariableValue;
 import mage.abilities.effects.common.LoseLifeOpponentsEffect;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.Rarity;
 
 import java.util.UUID;
 
@@ -42,9 +42,8 @@ import java.util.UUID;
  */
 public class BondOfAgony extends CardImpl {
 
-    public BondOfAgony(UUID ownerId) {
-        super(ownerId, 38, "Bond of Agony", Rarity.UNCOMMON, new CardType[]{CardType.SORCERY}, "{X}{B}");
-        this.expansionSetCode = "DIS";
+    public BondOfAgony(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{X}{B}");
 
         DynamicValue xValue = new ManacostVariableValue();
 

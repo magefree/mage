@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.onslaught;
+package mage.cards.d;
 
 import java.util.UUID;
 import mage.abilities.Ability;
@@ -33,10 +33,10 @@ import mage.abilities.common.EntersBattlefieldAllTriggeredAbility;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.continuous.BoostTargetEffect;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Duration;
 import mage.constants.Outcome;
-import mage.constants.Rarity;
 import mage.constants.SetTargetPointer;
 import mage.constants.Zone;
 import mage.filter.common.FilterCreaturePermanent;
@@ -54,9 +54,8 @@ public class DeathMatch extends CardImpl {
 
     private final UUID originalId;
 
-    public DeathMatch(UUID ownerId) {
-        super(ownerId, 136, "Death Match", Rarity.RARE, new CardType[]{CardType.ENCHANTMENT}, "{3}{B}");
-        this.expansionSetCode = "ONS";
+    public DeathMatch(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.ENCHANTMENT},"{3}{B}");
 
         // Whenever a creature enters the battlefield, that creature's controller may have target creature of his or her choice get -3/-3 until end of turn.
         // NOTE: The ability being optional is implemented in the subclass to give the choice to correct player.

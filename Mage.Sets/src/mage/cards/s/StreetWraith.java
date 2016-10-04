@@ -25,16 +25,16 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.futuresight;
+package mage.cards.s;
 
 import java.util.UUID;
 import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.MageInt;
 import mage.abilities.costs.common.PayLifeCost;
 import mage.abilities.keyword.CyclingAbility;
 import mage.abilities.keyword.SwampwalkAbility;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 
 /**
  *
@@ -42,9 +42,8 @@ import mage.cards.CardImpl;
  */
 public class StreetWraith extends CardImpl {
 
-    public StreetWraith(UUID ownerId) {
-        super(ownerId, 90, "Street Wraith", Rarity.UNCOMMON, new CardType[]{CardType.CREATURE}, "{3}{B}{B}");
-        this.expansionSetCode = "FUT";
+    public StreetWraith(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{3}{B}{B}");
         this.subtype.add("Wraith");
 
         this.power = new MageInt(3);

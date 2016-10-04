@@ -26,17 +26,17 @@
  *  or implied, of BetaSteward_at_googlemail.com.
  */
 
-package mage.sets.riseoftheeldrazi;
+package mage.cards.s;
 
 import java.util.UUID;
 import mage.constants.CardType;
 import mage.constants.Outcome;
-import mage.constants.Rarity;
 import mage.constants.Zone;
 import mage.abilities.Ability;
 import mage.abilities.effects.OneShotEffect;
 import mage.cards.Card;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.filter.FilterCard;
 import mage.game.Game;
 import mage.players.Player;
@@ -48,9 +48,8 @@ import mage.target.TargetCard;
  */
 public class SeeBeyond extends CardImpl {
 
-    public SeeBeyond(UUID ownerId) {
-        super(ownerId, 86, "See Beyond", Rarity.COMMON, new CardType[]{CardType.SORCERY}, "{1}{U}");
-        this.expansionSetCode = "ROE";
+    public SeeBeyond(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{1}{U}");
 
         this.getSpellAbility().addEffect(new SeeBeyondEffect());
     }

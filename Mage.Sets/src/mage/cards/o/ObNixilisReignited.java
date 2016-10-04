@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.battleforzendikar;
+package mage.cards.o;
 
 import java.util.UUID;
 import mage.abilities.LoyaltyAbility;
@@ -37,8 +37,8 @@ import mage.abilities.effects.common.DrawCardSourceControllerEffect;
 import mage.abilities.effects.common.GetEmblemTargetPlayerEffect;
 import mage.abilities.effects.common.LoseLifeSourceControllerEffect;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.constants.Zone;
 import mage.game.Game;
 import mage.game.command.Emblem;
@@ -53,9 +53,8 @@ import mage.target.common.TargetOpponent;
  */
 public class ObNixilisReignited extends CardImpl {
 
-    public ObNixilisReignited(UUID ownerId) {
-        super(ownerId, 119, "Ob Nixilis Reignited", Rarity.MYTHIC, new CardType[]{CardType.PLANESWALKER}, "{3}{B}{B}");
-        this.expansionSetCode = "BFZ";
+    public ObNixilisReignited(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.PLANESWALKER},"{3}{B}{B}");
         this.subtype.add("Nixilis");
 
         this.addAbility(new PlanswalkerEntersWithLoyalityCountersAbility(5));

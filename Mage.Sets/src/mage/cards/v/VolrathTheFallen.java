@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.nemesis;
+package mage.cards.v;
 
 import java.util.UUID;
 import mage.MageInt;
@@ -37,9 +37,9 @@ import mage.abilities.dynamicvalue.common.DiscardCostCardConvertedMana;
 import mage.abilities.effects.Effect;
 import mage.abilities.effects.common.continuous.BoostSourceEffect;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Duration;
-import mage.constants.Rarity;
 import mage.constants.Zone;
 import mage.filter.common.FilterCreatureCard;
 
@@ -49,9 +49,8 @@ import mage.filter.common.FilterCreatureCard;
  */
 public class VolrathTheFallen extends CardImpl {
 
-    public VolrathTheFallen(UUID ownerId) {
-        super(ownerId, 75, "Volrath the Fallen", Rarity.RARE, new CardType[]{CardType.CREATURE}, "{3}{B}{B}{B}");
-        this.expansionSetCode = "NEM";
+    public VolrathTheFallen(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{3}{B}{B}{B}");
         this.supertype.add("Legendary");
         this.subtype.add("Shapeshifter");
         this.power = new MageInt(6);

@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.theros;
+package mage.cards.h;
 
 import java.util.UUID;
 import mage.MageInt;
@@ -33,8 +33,8 @@ import mage.abilities.common.EntersBattlefieldTriggeredAbility;
 import mage.abilities.effects.keyword.ScryEffect;
 import mage.abilities.keyword.FlyingAbility;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.Rarity;
 
 /**
  *
@@ -42,9 +42,8 @@ import mage.constants.Rarity;
  */
 public class HorizonScholar extends CardImpl {
 
-    public HorizonScholar(UUID ownerId) {
-        super(ownerId, 51, "Horizon Scholar", Rarity.UNCOMMON, new CardType[]{CardType.CREATURE}, "{5}{U}");
-        this.expansionSetCode = "THS";
+    public HorizonScholar(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{5}{U}");
         this.subtype.add("Sphinx");
 
         this.power = new MageInt(4);

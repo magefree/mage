@@ -25,15 +25,15 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.avacynrestored;
+package mage.cards.e;
 
 import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.abilities.costs.mana.ManaCostsImpl;
 import mage.abilities.dynamicvalue.common.ManacostVariableValue;
 import mage.abilities.effects.common.CreateTokenEffect;
 import mage.abilities.keyword.MiracleAbility;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.game.permanent.token.AngelToken;
 
 import java.util.UUID;
@@ -45,9 +45,8 @@ import java.util.UUID;
  */
 public class EntreatTheAngels extends CardImpl {
 
-    public EntreatTheAngels(UUID ownerId) {
-        super(ownerId, 20, "Entreat the Angels", Rarity.MYTHIC, new CardType[]{CardType.SORCERY}, "{X}{X}{W}{W}{W}");
-        this.expansionSetCode = "AVR";
+    public EntreatTheAngels(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{X}{X}{W}{W}{W}");
 
 
         // Put X 4/4 white Angel creature tokens with flying onto the battlefield.

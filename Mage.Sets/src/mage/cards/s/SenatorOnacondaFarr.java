@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.starwars;
+package mage.cards.s;
 
 import java.util.UUID;
 import mage.MageInt;
@@ -33,9 +33,9 @@ import mage.abilities.Ability;
 import mage.abilities.common.BeginningOfCombatTriggeredAbility;
 import mage.abilities.effects.common.continuous.BoostTargetEffect;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Duration;
-import mage.constants.Rarity;
 import mage.constants.TargetController;
 import mage.target.common.TargetControlledCreaturePermanent;
 
@@ -45,9 +45,8 @@ import mage.target.common.TargetControlledCreaturePermanent;
  */
 public class SenatorOnacondaFarr extends CardImpl {
 
-    public SenatorOnacondaFarr(UUID ownerId) {
-        super(ownerId, 174, "Senator Onaconda Farr", Rarity.UNCOMMON, new CardType[]{CardType.CREATURE}, "{R}{G}");
-        this.expansionSetCode = "SWS";
+    public SenatorOnacondaFarr(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{R}{G}");
         this.supertype.add("Legendary");
         this.subtype.add("Rodian");
         this.subtype.add("Advisor");

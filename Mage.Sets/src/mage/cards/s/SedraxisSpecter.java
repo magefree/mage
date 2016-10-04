@@ -25,11 +25,10 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.shardsofalara;
+package mage.cards.s;
 
 import java.util.UUID;
 import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.MageInt;
 import mage.abilities.common.DealsCombatDamageToAPlayerTriggeredAbility;
 import mage.abilities.costs.mana.ManaCostsImpl;
@@ -37,6 +36,7 @@ import mage.abilities.effects.common.discard.DiscardTargetEffect;
 import mage.abilities.keyword.FlyingAbility;
 import mage.abilities.keyword.UnearthAbility;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 
 /**
  *
@@ -44,9 +44,8 @@ import mage.cards.CardImpl;
  */
 public class SedraxisSpecter extends CardImpl {
 
-    public SedraxisSpecter(UUID ownerId) {
-        super(ownerId, 192, "Sedraxis Specter", Rarity.RARE, new CardType[]{CardType.CREATURE}, "{U}{B}{R}");
-        this.expansionSetCode = "ALA";
+    public SedraxisSpecter(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{U}{B}{R}");
         this.subtype.add("Specter");
 
         this.power = new MageInt(3);

@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.zendikar;
+package mage.cards.r;
 
 import java.util.UUID;
 import mage.abilities.Ability;
@@ -34,8 +34,8 @@ import mage.abilities.costs.AlternativeCostSourceAbility;
 import mage.abilities.costs.mana.ManaCostsImpl;
 import mage.abilities.effects.common.ExileGraveyardAllTargetPlayerEffect;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.game.Game;
 import mage.target.TargetPlayer;
 import mage.watchers.common.CardsPutIntoGraveyardWatcher;
@@ -46,9 +46,8 @@ import mage.watchers.common.CardsPutIntoGraveyardWatcher;
  */
 public class RavenousTrap extends CardImpl {
 
-    public RavenousTrap(UUID ownerId) {
-        super(ownerId, 109, "Ravenous Trap", Rarity.UNCOMMON, new CardType[]{CardType.INSTANT}, "{2}{B}{B}");
-        this.expansionSetCode = "ZEN";
+    public RavenousTrap(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.INSTANT},"{2}{B}{B}");
         this.subtype.add("Trap");
 
         // If an opponent had three or more cards put into his or her graveyard from anywhere this turn, you may pay {0} rather than pay Ravenous Trap's mana cost.

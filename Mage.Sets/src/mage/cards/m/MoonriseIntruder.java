@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.shadowsoverinnistrad;
+package mage.cards.m;
 
 import java.util.UUID;
 import mage.MageInt;
@@ -37,8 +37,8 @@ import mage.abilities.effects.common.TransformSourceEffect;
 import mage.abilities.keyword.MenaceAbility;
 import mage.abilities.keyword.TransformAbility;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.constants.TargetController;
 
 /**
@@ -47,9 +47,8 @@ import mage.constants.TargetController;
  */
 public class MoonriseIntruder extends CardImpl {
 
-    public MoonriseIntruder(UUID ownerId) {
-        super(ownerId, 190, "Moonrise Intruder", Rarity.UNCOMMON, new CardType[]{CardType.CREATURE}, "");
-        this.expansionSetCode = "SOI";
+    public MoonriseIntruder(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"");
         this.subtype.add("Werewolf");
         this.power = new MageInt(2);
         this.toughness = new MageInt(2);

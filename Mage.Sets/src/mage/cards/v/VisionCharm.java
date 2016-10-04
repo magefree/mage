@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.visions;
+package mage.cards.v;
 
 import java.util.UUID;
 import mage.abilities.Ability;
@@ -39,6 +39,7 @@ import mage.abilities.mana.GreenManaAbility;
 import mage.abilities.mana.RedManaAbility;
 import mage.abilities.mana.WhiteManaAbility;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.choices.Choice;
 import mage.choices.ChoiceBasicLandType;
 import mage.choices.ChoiceLandType;
@@ -46,7 +47,6 @@ import mage.constants.CardType;
 import mage.constants.Duration;
 import mage.constants.Layer;
 import mage.constants.Outcome;
-import mage.constants.Rarity;
 import mage.constants.SubLayer;
 import mage.filter.FilterPermanent;
 import mage.filter.common.FilterLandPermanent;
@@ -63,9 +63,8 @@ import mage.target.common.TargetArtifactPermanent;
  */
 public class VisionCharm extends CardImpl {
 
-    public VisionCharm(UUID ownerId) {
-        super(ownerId, 49, "Vision Charm", Rarity.COMMON, new CardType[]{CardType.INSTANT}, "{U}");
-        this.expansionSetCode = "VIS";
+    public VisionCharm(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.INSTANT},"{U}");
 
 
         // Choose one - Target player puts the top four cards of his or her library into his or her graveyard;

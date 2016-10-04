@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.magicorigins;
+package mage.cards.t;
 
 import java.util.UUID;
 import mage.MageObjectReference;
@@ -38,10 +38,10 @@ import mage.abilities.effects.common.continuous.BoostTargetEffect;
 import mage.abilities.effects.common.continuous.GainAbilityTargetEffect;
 import mage.abilities.keyword.DeathtouchAbility;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Duration;
 import mage.constants.Outcome;
-import mage.constants.Rarity;
 import mage.constants.Zone;
 import mage.game.Game;
 import mage.game.events.GameEvent;
@@ -57,9 +57,8 @@ import mage.target.targetpointer.FixedTarget;
  */
 public class TouchOfMoonglove extends CardImpl {
 
-    public TouchOfMoonglove(UUID ownerId) {
-        super(ownerId, 123, "Touch of Moonglove", Rarity.COMMON, new CardType[]{CardType.INSTANT}, "{B}");
-        this.expansionSetCode = "ORI";
+    public TouchOfMoonglove(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.INSTANT},"{B}");
 
         // Target creature you control gets +1/+0 and gains deathtouch until end of turn.
         Effect effect = new BoostTargetEffect(1, 0, Duration.EndOfTurn);

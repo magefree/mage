@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.shadowmoor;
+package mage.cards.d;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -34,9 +34,9 @@ import java.util.UUID;
 import mage.abilities.Ability;
 import mage.abilities.effects.OneShotEffect;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Outcome;
-import mage.constants.Rarity;
 import mage.constants.WatcherScope;
 import mage.game.Game;
 import mage.game.events.GameEvent;
@@ -50,9 +50,8 @@ import mage.watchers.Watcher;
  */
 public class DreamSalvage extends CardImpl {
 
-    public DreamSalvage(UUID ownerId) {
-        super(ownerId, 160, "Dream Salvage", Rarity.UNCOMMON, new CardType[]{CardType.INSTANT}, "{U/B}");
-        this.expansionSetCode = "SHM";
+    public DreamSalvage(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.INSTANT},"{U/B}");
 
 
         // Draw cards equal to the number of cards target opponent discarded this turn.

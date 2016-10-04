@@ -25,16 +25,16 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.masterseditionii;
+package mage.cards.r;
 
 import java.util.UUID;
 import mage.ObjectColor;
 import mage.abilities.costs.common.SacrificeTargetCost;
 import mage.abilities.effects.common.continuous.GainControlTargetEffect;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Duration;
-import mage.constants.Rarity;
 import mage.filter.common.FilterControlledCreaturePermanent;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.filter.predicate.Predicates;
@@ -56,9 +56,8 @@ public class RitualOfTheMachine extends CardImpl {
         filter.add(Predicates.not(new ColorPredicate(ObjectColor.BLACK)));
     }
 
-    public RitualOfTheMachine(UUID ownerId) {
-        super(ownerId, 109, "Ritual of the Machine", Rarity.RARE, new CardType[]{CardType.SORCERY}, "{2}{B}{B}");
-        this.expansionSetCode = "ME2";
+    public RitualOfTheMachine(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{2}{B}{B}");
 
         // As an additional cost to cast Ritual of the Machine, sacrifice a creature.
         this.getSpellAbility().addCost(new SacrificeTargetCost(new TargetControlledCreaturePermanent(new FilterControlledCreaturePermanent("a creature"))));

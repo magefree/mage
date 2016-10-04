@@ -26,7 +26,7 @@
  *  or implied, of BetaSteward_at_googlemail.com.
  */
 
-package mage.sets.scarsofmirrodin;
+package mage.cards.s;
 
 import mage.abilities.Ability;
 import mage.abilities.common.EntersBattlefieldTriggeredAbility;
@@ -39,9 +39,9 @@ import mage.abilities.effects.common.continuous.BoostEquippedEffect;
 import mage.abilities.keyword.EquipAbility;
 import mage.cards.Card;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Outcome;
-import mage.constants.Rarity;
 import mage.constants.Zone;
 import mage.filter.FilterPermanent;
 import mage.filter.common.FilterLandCard;
@@ -59,9 +59,8 @@ import java.util.UUID;
  */
 public class StrataScythe extends CardImpl {
 
-    public StrataScythe (UUID ownerId) {
-        super(ownerId, 206, "Strata Scythe", Rarity.RARE, new CardType[]{CardType.ARTIFACT}, "{3}");
-        this.expansionSetCode = "SOM";
+    public StrataScythe (UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.ARTIFACT},"{3}");
         this.subtype.add("Equipment");
         this.addAbility(new EntersBattlefieldTriggeredAbility(new StrataScytheImprintEffect()));
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new BoostEquippedEffect(SameNameAsExiledCountValue.getInstance(), SameNameAsExiledCountValue.getInstance())));

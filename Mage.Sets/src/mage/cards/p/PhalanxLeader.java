@@ -25,15 +25,15 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.theros;
+package mage.cards.p;
 
 import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.effects.common.counter.AddCountersAllEffect;
 import mage.abilities.keyword.HeroicAbility;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.counters.CounterType;
 import mage.filter.common.FilterControlledCreaturePermanent;
 
@@ -43,9 +43,8 @@ import mage.filter.common.FilterControlledCreaturePermanent;
  */
 public class PhalanxLeader extends CardImpl {
 
-    public PhalanxLeader(UUID ownerId) {
-        super(ownerId, 26, "Phalanx Leader", Rarity.UNCOMMON, new CardType[]{CardType.CREATURE}, "{W}{W}");
-        this.expansionSetCode = "THS";
+    public PhalanxLeader(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{W}{W}");
         this.subtype.add("Human");
         this.subtype.add("Soldier");
 

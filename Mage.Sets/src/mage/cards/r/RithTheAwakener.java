@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.invasion;
+package mage.cards.r;
 
 import java.util.UUID;
 import mage.MageInt;
@@ -37,10 +37,10 @@ import mage.abilities.effects.common.CreateTokenEffect;
 import mage.abilities.effects.common.DoIfCostPaid;
 import mage.abilities.keyword.FlyingAbility;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.choices.ChoiceColor;
 import mage.constants.CardType;
 import mage.constants.Outcome;
-import mage.constants.Rarity;
 import mage.filter.FilterPermanent;
 import mage.filter.predicate.mageobject.ColorPredicate;
 import mage.game.Game;
@@ -53,9 +53,8 @@ import mage.players.Player;
  */
 public class RithTheAwakener extends CardImpl {
 
-    public RithTheAwakener(UUID ownerId) {
-        super(ownerId, 267, "Rith, the Awakener", Rarity.RARE, new CardType[]{CardType.CREATURE}, "{3}{R}{G}{W}");
-        this.expansionSetCode = "INV";
+    public RithTheAwakener(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{3}{R}{G}{W}");
         this.supertype.add("Legendary");
         this.subtype.add("Dragon");
 

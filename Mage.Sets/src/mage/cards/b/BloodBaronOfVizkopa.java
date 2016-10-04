@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.dragonsmaze;
+package mage.cards.b;
 
 import java.util.UUID;
 import mage.MageInt;
@@ -37,11 +37,11 @@ import mage.abilities.keyword.FlyingAbility;
 import mage.abilities.keyword.LifelinkAbility;
 import mage.abilities.keyword.ProtectionAbility;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Duration;
 import mage.constants.Layer;
 import mage.constants.Outcome;
-import mage.constants.Rarity;
 import mage.constants.SubLayer;
 import mage.constants.Zone;
 import mage.filter.FilterCard;
@@ -61,9 +61,8 @@ public class BloodBaronOfVizkopa extends CardImpl {
                 new ColorPredicate(ObjectColor.BLACK)));
     }
 
-    public BloodBaronOfVizkopa(UUID ownerId) {
-        super(ownerId, 57, "Blood Baron of Vizkopa", Rarity.MYTHIC, new CardType[]{CardType.CREATURE}, "{3}{W}{B}");
-        this.expansionSetCode = "DGM";
+    public BloodBaronOfVizkopa(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{3}{W}{B}");
         this.subtype.add("Vampire");
 
         this.power = new MageInt(4);

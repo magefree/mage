@@ -25,15 +25,15 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.darkascension;
+package mage.cards.g;
 
 import java.util.UUID;
 import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.abilities.condition.common.FatefulHourCondition;
 import mage.abilities.decorator.ConditionalOneShotEffect;
 import mage.abilities.effects.common.CreateTokenEffect;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.game.permanent.token.HumanToken;
 
 /**
@@ -42,9 +42,8 @@ import mage.game.permanent.token.HumanToken;
  */
 public class GatherTheTownsfolk extends CardImpl {
 
-    public GatherTheTownsfolk(UUID ownerId) {
-        super(ownerId, 8, "Gather the Townsfolk", Rarity.COMMON, new CardType[]{CardType.SORCERY}, "{1}{W}");
-        this.expansionSetCode = "DKA";
+    public GatherTheTownsfolk(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{1}{W}");
 
 
         // Put two 1/1 white Human creature tokens onto the battlefield.

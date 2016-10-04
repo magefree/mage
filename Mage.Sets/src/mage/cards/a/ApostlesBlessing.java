@@ -26,19 +26,19 @@
  *  or implied, of BetaSteward_at_googlemail.com.
  */
 
-package mage.sets.newphyrexia;
+package mage.cards.a;
 
 import java.util.UUID;
 
 import mage.constants.CardType;
 import mage.constants.Duration;
-import mage.constants.Rarity;
 import mage.abilities.Ability;
 import mage.abilities.effects.ContinuousEffect;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.continuous.GainAbilityTargetEffect;
 import mage.abilities.keyword.ProtectionAbility;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.choices.ChoiceColorOrArtifact;
 import mage.constants.Outcome;
 import mage.filter.FilterCard;
@@ -62,9 +62,8 @@ public class ApostlesBlessing extends CardImpl {
                 new CardTypePredicate(CardType.CREATURE)));
     }
 
-    public ApostlesBlessing(UUID ownerId) {
-        super(ownerId, 2, "Apostle's Blessing", Rarity.COMMON, new CardType[]{CardType.INSTANT}, "{1}{WP}");
-        this.expansionSetCode = "NPH";
+    public ApostlesBlessing(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.INSTANT},"{1}{WP}");
         
         // ({WP} can be paid with either {W} or 2 life.)
         // Target artifact or creature you control gains protection from artifacts or from the color of your choice until end of turn.

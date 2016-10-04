@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.futuresight;
+package mage.cards.g;
 
 import java.util.UUID;
 import mage.abilities.Ability;
@@ -40,10 +40,10 @@ import mage.abilities.effects.common.LoseLifeTargetEffect;
 import mage.abilities.effects.common.discard.DiscardTargetEffect;
 import mage.abilities.keyword.MadnessAbility;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Duration;
 import mage.constants.Outcome;
-import mage.constants.Rarity;
 import mage.constants.TargetController;
 import mage.constants.Zone;
 import mage.game.Game;
@@ -56,9 +56,8 @@ import mage.game.events.GameEvent.EventType;
  */
 public class GibberingDescent extends CardImpl {
 
-    public GibberingDescent(UUID ownerId) {
-        super(ownerId, 66, "Gibbering Descent", Rarity.RARE, new CardType[]{CardType.ENCHANTMENT}, "{4}{B}{B}");
-        this.expansionSetCode = "FUT";
+    public GibberingDescent(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.ENCHANTMENT},"{4}{B}{B}");
 
 
         // At the beginning of each player's upkeep, that player loses 1 life and discards a card.

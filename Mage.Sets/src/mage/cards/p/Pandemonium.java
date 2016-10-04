@@ -25,16 +25,16 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.timeshifted;
+package mage.cards.p;
 
 import java.util.UUID;
 import mage.abilities.Ability;
 import mage.abilities.common.EntersBattlefieldAllTriggeredAbility;
 import mage.abilities.effects.OneShotEffect;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Outcome;
-import mage.constants.Rarity;
 import mage.constants.SetTargetPointer;
 import mage.constants.Zone;
 import mage.filter.common.FilterCreaturePermanent;
@@ -51,9 +51,8 @@ public class Pandemonium extends CardImpl {
 
     private final UUID originalId;
 
-    public Pandemonium(UUID ownerId) {
-        super(ownerId, 68, "Pandemonium", Rarity.SPECIAL, new CardType[]{CardType.ENCHANTMENT}, "{3}{R}");
-        this.expansionSetCode = "TSB";
+    public Pandemonium(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.ENCHANTMENT},"{3}{R}");
 
         // Whenever a creature enters the battlefield, that creature's controller may have it deal damage equal to its power to target creature or player of his or her choice.
         Ability ability = new EntersBattlefieldAllTriggeredAbility(Zone.BATTLEFIELD, new PandemoniumEffect(), new FilterCreaturePermanent(), false, SetTargetPointer.PERMANENT, "");

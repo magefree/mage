@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.antiquities;
+package mage.cards.t;
 
 import java.util.UUID;
 import mage.abilities.Ability;
@@ -35,8 +35,8 @@ import mage.abilities.effects.Effect;
 import mage.abilities.effects.common.DoIfCostPaid;
 import mage.abilities.effects.common.GainLifeEffect;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.constants.Zone;
 import mage.filter.common.FilterControlledArtifactPermanent;
 
@@ -47,9 +47,8 @@ import mage.filter.common.FilterControlledArtifactPermanent;
 public class TabletOfEpityr extends CardImpl {
 
     
-    public TabletOfEpityr(UUID ownerId) {
-        super(ownerId, 32, "Tablet of Epityr", Rarity.COMMON, new CardType[]{CardType.ARTIFACT}, "{1}");
-        this.expansionSetCode = "ATQ";
+    public TabletOfEpityr(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.ARTIFACT},"{1}");
 
         // Whenever an artifact you control is put into a graveyard from the battlefield, you may pay {1}. If you do, you gain 1 life.
         Effect effect = new DoIfCostPaid(new GainLifeEffect(1), new GenericManaCost(1));

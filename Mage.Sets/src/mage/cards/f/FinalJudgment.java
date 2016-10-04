@@ -25,13 +25,13 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.betrayersofkamigawa;
+package mage.cards.f;
 
 import java.util.UUID;
 import mage.abilities.effects.common.ExileAllEffect;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.filter.common.FilterCreaturePermanent;
 
 /**
@@ -40,9 +40,8 @@ import mage.filter.common.FilterCreaturePermanent;
  */
 public class FinalJudgment extends CardImpl {
 
-    public FinalJudgment(UUID ownerId) {
-        super(ownerId, 4, "Final Judgment", Rarity.RARE, new CardType[]{CardType.SORCERY}, "{4}{W}{W}");
-        this.expansionSetCode = "BOK";
+    public FinalJudgment(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{4}{W}{W}");
 
         // Exile all creatures.
         this.getSpellAbility().addEffect(new ExileAllEffect(new FilterCreaturePermanent()));

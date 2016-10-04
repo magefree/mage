@@ -26,12 +26,11 @@
  *  or implied, of BetaSteward_at_googlemail.com.
  */
 
-package mage.sets.scarsofmirrodin;
+package mage.cards.c;
 
 import java.util.UUID;
 import mage.constants.CardType;
 import mage.constants.Duration;
-import mage.constants.Rarity;
 import mage.constants.Zone;
 import mage.MageInt;
 import mage.abilities.common.SimpleStaticAbility;
@@ -40,6 +39,7 @@ import mage.abilities.decorator.ConditionalContinuousEffect;
 import mage.abilities.effects.ContinuousEffect;
 import mage.abilities.effects.common.continuous.BoostSourceEffect;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 
 /**
  *
@@ -48,9 +48,8 @@ import mage.cards.CardImpl;
 public class CarapaceForger extends CardImpl {
     private static final String text = "Metalcraft - Carapace Forger gets +2/+2 as long as you control three or more artifacts";
 
-    public CarapaceForger (UUID ownerId) {
-        super(ownerId, 114, "Carapace Forger", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{1}{G}");
-        this.expansionSetCode = "SOM";
+    public CarapaceForger (UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{1}{G}");
         this.subtype.add("Elf");
         this.subtype.add("Artificer");
 

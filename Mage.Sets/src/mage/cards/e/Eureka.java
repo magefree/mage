@@ -25,16 +25,16 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.vintagemasters;
+package mage.cards.e;
 
 import java.util.UUID;
 import mage.abilities.Ability;
 import mage.abilities.effects.OneShotEffect;
 import mage.cards.Card;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Outcome;
-import mage.constants.Rarity;
 import mage.constants.Zone;
 import mage.filter.common.FilterPermanentCard;
 import mage.game.Game;
@@ -49,9 +49,8 @@ import mage.target.common.TargetCardInHand;
  */
 public class Eureka extends CardImpl {
 
-    public Eureka(UUID ownerId) {
-        super(ownerId, 208, "Eureka", Rarity.MYTHIC, new CardType[]{CardType.SORCERY}, "{2}{G}{G}");
-        this.expansionSetCode = "VMA";
+    public Eureka(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{2}{G}{G}");
 
         // Starting with you, each player may put a permanent card from his or her hand onto the battlefield. Repeat this process until no one puts a card onto the battlefield.
         this.getSpellAbility().addEffect(new EurekaEffect());

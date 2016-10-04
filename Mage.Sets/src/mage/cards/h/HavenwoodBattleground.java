@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.fallenempires;
+package mage.cards.h;
 
 import java.util.UUID;
 import mage.Mana;
@@ -37,8 +37,8 @@ import mage.abilities.effects.common.BasicManaEffect;
 import mage.abilities.mana.GreenManaAbility;
 import mage.abilities.mana.SimpleManaAbility;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.constants.Zone;
 
 /**
@@ -47,9 +47,8 @@ import mage.constants.Zone;
  */
 public class HavenwoodBattleground extends CardImpl {
 
-    public HavenwoodBattleground(UUID ownerId) {
-        super(ownerId, 181, "Havenwood Battleground", Rarity.UNCOMMON, new CardType[]{CardType.LAND}, "");
-        this.expansionSetCode = "FEM";
+    public HavenwoodBattleground(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.LAND},"");
 
         // Havenwood Battleground enters the battlefield tapped.
         this.addAbility(new EntersBattlefieldTappedAbility());

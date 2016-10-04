@@ -26,18 +26,18 @@
  *  or implied, of BetaSteward_at_googlemail.com.
  */
 
-package mage.sets.championsofkamigawa;
+package mage.cards.h;
 
 import java.util.UUID;
 
 import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.costs.common.TapTargetCost;
 import mage.abilities.effects.common.UntapSourceEffect;
 import mage.abilities.mana.ColorlessManaAbility;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.Zone;
 import mage.filter.common.FilterControlledPermanent;
 import mage.filter.predicate.Predicates;
@@ -57,9 +57,8 @@ public class HonorWornShaku extends CardImpl {
         filter.add(new SupertypePredicate("Legendary"));
     }
 
-    public HonorWornShaku(UUID ownerId) {
-        super(ownerId, 254, "Honor-Worn Shaku", Rarity.UNCOMMON, new CardType[]{CardType.ARTIFACT}, "{3}");
-        this.expansionSetCode = "CHK";
+    public HonorWornShaku(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.ARTIFACT},"{3}");
         this.addAbility(new ColorlessManaAbility());
         Ability ability = new SimpleActivatedAbility(
                 Zone.BATTLEFIELD,

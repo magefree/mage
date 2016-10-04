@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.battleforzendikar;
+package mage.cards.u;
 
 import java.util.UUID;
 import mage.MageInt;
@@ -36,8 +36,8 @@ import mage.abilities.effects.common.DoIfCostPaid;
 import mage.abilities.effects.common.ReturnFromGraveyardToHandTargetEffect;
 import mage.abilities.keyword.DevoidAbility;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.filter.common.FilterInstantOrSorceryCard;
 import mage.target.common.TargetCardInYourGraveyard;
 
@@ -47,9 +47,8 @@ import mage.target.common.TargetCardInYourGraveyard;
  */
 public class UlamogsReclaimer extends CardImpl {
 
-    public UlamogsReclaimer(UUID ownerId) {
-        super(ownerId, 68, "Ulamog's Reclaimer", Rarity.UNCOMMON, new CardType[]{CardType.CREATURE}, "{4}{U}");
-        this.expansionSetCode = "BFZ";
+    public UlamogsReclaimer(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{4}{U}");
         this.subtype.add("Eldrazi");
         this.subtype.add("Processor");
         this.power = new MageInt(2);

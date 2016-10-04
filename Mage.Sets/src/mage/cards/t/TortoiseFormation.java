@@ -25,15 +25,15 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.shardsofalara;
+package mage.cards.t;
 
 import java.util.UUID;
 import mage.abilities.effects.common.continuous.GainAbilityControlledEffect;
 import mage.abilities.keyword.ShroudAbility;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Duration;
-import mage.constants.Rarity;
 import mage.filter.common.FilterCreaturePermanent;
 
 /**
@@ -42,9 +42,8 @@ import mage.filter.common.FilterCreaturePermanent;
  */
 public class TortoiseFormation extends CardImpl {
 
-    public TortoiseFormation(UUID ownerId) {
-        super(ownerId, 61, "Tortoise Formation", Rarity.COMMON, new CardType[]{CardType.INSTANT}, "{3}{U}");
-        this.expansionSetCode = "ALA";
+    public TortoiseFormation(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.INSTANT},"{3}{U}");
 
 
         // Creatures you control gain shroud until end of turn.

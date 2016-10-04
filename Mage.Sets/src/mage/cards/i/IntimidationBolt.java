@@ -25,16 +25,16 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.alarareborn;
+package mage.cards.i;
 
 import java.util.UUID;
 import mage.abilities.Ability;
 import mage.abilities.effects.RestrictionEffect;
 import mage.abilities.effects.common.DamageTargetEffect;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Duration;
-import mage.constants.Rarity;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.target.common.TargetCreaturePermanent;
@@ -45,9 +45,8 @@ import mage.target.common.TargetCreaturePermanent;
  */
 public class IntimidationBolt extends CardImpl {
 
-    public IntimidationBolt(UUID ownerId) {
-        super(ownerId, 99, "Intimidation Bolt", Rarity.UNCOMMON, new CardType[]{CardType.INSTANT}, "{1}{R}{W}");
-        this.expansionSetCode = "ARB";
+    public IntimidationBolt(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.INSTANT},"{1}{R}{W}");
 
 
 

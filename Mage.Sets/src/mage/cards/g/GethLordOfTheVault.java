@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.scarsofmirrodin;
+package mage.cards.g;
 
 import java.util.UUID;
 import mage.MageInt;
@@ -36,9 +36,9 @@ import mage.abilities.effects.OneShotEffect;
 import mage.abilities.keyword.IntimidateAbility;
 import mage.cards.Card;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Outcome;
-import mage.constants.Rarity;
 import mage.constants.Zone;
 import mage.filter.Filter;
 import mage.filter.FilterCard;
@@ -58,9 +58,8 @@ public class GethLordOfTheVault extends CardImpl {
 
     private final UUID originalId;
 
-    public GethLordOfTheVault(UUID ownerId) {
-        super(ownerId, 64, "Geth, Lord of the Vault", Rarity.MYTHIC, new CardType[]{CardType.CREATURE}, "{4}{B}{B}");
-        this.expansionSetCode = "SOM";
+    public GethLordOfTheVault(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{4}{B}{B}");
         this.supertype.add("Legendary");
         this.subtype.add("Zombie");
 

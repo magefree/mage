@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.bornofthegods;
+package mage.cards.b;
 
 import java.util.UUID;
 import mage.MageInt;
@@ -36,9 +36,9 @@ import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.CreateTokenEffect;
 import mage.abilities.keyword.VigilanceAbility;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Outcome;
-import mage.constants.Rarity;
 import mage.game.Game;
 import mage.game.combat.CombatGroup;
 import mage.game.permanent.Permanent;
@@ -52,9 +52,8 @@ import mage.game.permanent.token.CatSoldierCreatureToken;
  */
 public class BrimazKingOfOreskos extends CardImpl {
 
-    public BrimazKingOfOreskos(UUID ownerId) {
-        super(ownerId, 5, "Brimaz, King of Oreskos", Rarity.MYTHIC, new CardType[]{CardType.CREATURE}, "{1}{W}{W}");
-        this.expansionSetCode = "BNG";
+    public BrimazKingOfOreskos(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{1}{W}{W}");
         this.supertype.add("Legendary");
         this.subtype.add("Cat");
         this.subtype.add("Soldier");

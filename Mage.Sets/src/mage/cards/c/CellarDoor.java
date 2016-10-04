@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.innistrad;
+package mage.cards.c;
 
 import java.util.UUID;
 import mage.abilities.Ability;
@@ -35,9 +35,9 @@ import mage.abilities.costs.mana.GenericManaCost;
 import mage.abilities.effects.OneShotEffect;
 import mage.cards.Card;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Outcome;
-import mage.constants.Rarity;
 import mage.constants.Zone;
 import mage.game.Game;
 import mage.game.permanent.token.ZombieToken;
@@ -50,9 +50,8 @@ import mage.target.TargetPlayer;
  */
 public class CellarDoor extends CardImpl {
 
-    public CellarDoor(UUID ownerId) {
-        super(ownerId, 218, "Cellar Door", Rarity.UNCOMMON, new CardType[]{CardType.ARTIFACT}, "{2}");
-        this.expansionSetCode = "ISD";
+    public CellarDoor(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.ARTIFACT},"{2}");
 
         // {3}, {tap}: Target player puts the bottom card of his or her library into his or her graveyard. If it's a creature card, you put a 2/2 black Zombie creature token onto the battlefield.
         SimpleActivatedAbility ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new CellarDoorEffect(), new GenericManaCost(3));

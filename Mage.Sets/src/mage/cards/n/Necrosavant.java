@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.visions;
+package mage.cards.n;
 
 import java.util.UUID;
 import mage.MageInt;
@@ -36,9 +36,9 @@ import mage.abilities.costs.mana.ManaCostsImpl;
 import mage.abilities.decorator.ConditionalActivatedAbility;
 import mage.abilities.effects.common.ReturnSourceFromGraveyardToBattlefieldEffect;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.PhaseStep;
-import mage.constants.Rarity;
 import mage.constants.Zone;
 import mage.target.common.TargetControlledCreaturePermanent;
 
@@ -48,9 +48,8 @@ import mage.target.common.TargetControlledCreaturePermanent;
  */
 public class Necrosavant extends CardImpl {
 
-    public Necrosavant(UUID ownerId) {
-        super(ownerId, 15, "Necrosavant", Rarity.RARE, new CardType[]{CardType.CREATURE}, "{3}{B}{B}{B}");
-        this.expansionSetCode = "VIS";
+    public Necrosavant(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{3}{B}{B}{B}");
         this.subtype.add("Zombie");
         this.subtype.add("Giant");
 

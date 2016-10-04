@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.bornofthegods;
+package mage.cards.m;
 
 import java.util.UUID;
 import mage.MageInt;
@@ -36,12 +36,12 @@ import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.dynamicvalue.common.DevotionCount;
 import mage.abilities.effects.common.cost.CostModificationEffectImpl;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.ColoredManaSymbol;
 import mage.constants.CostModificationType;
 import mage.constants.Duration;
 import mage.constants.Outcome;
-import mage.constants.Rarity;
 import mage.constants.Zone;
 import mage.game.Game;
 
@@ -51,9 +51,8 @@ import mage.game.Game;
  */
 public class MarshmistTitan extends CardImpl {
 
-    public MarshmistTitan(UUID ownerId) {
-        super(ownerId, 76, "Marshmist Titan", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{6}{B}");
-        this.expansionSetCode = "BNG";
+    public MarshmistTitan(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{6}{B}");
         this.subtype.add("Giant");
 
         this.power = new MageInt(4);

@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.kaladesh;
+package mage.cards.l;
 
 import java.util.UUID;
 import mage.MageInt;
@@ -38,8 +38,8 @@ import mage.abilities.effects.common.SacrificeSourceUnlessPaysEffect;
 import mage.abilities.effects.common.counter.GetEnergyCountersControllerEffect;
 import mage.abilities.keyword.HasteAbility;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.constants.TargetController;
 
 /**
@@ -48,9 +48,8 @@ import mage.constants.TargetController;
  */
 public class LathnuHellion extends CardImpl {
 
-    public LathnuHellion(UUID ownerId) {
-        super(ownerId, 121, "Lathnu Hellion", Rarity.RARE, new CardType[]{CardType.CREATURE}, "{2}{R}");
-        this.expansionSetCode = "KLD";
+    public LathnuHellion(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{2}{R}");
         this.subtype.add("Hellion");
         this.power = new MageInt(4);
         this.toughness = new MageInt(4);

@@ -25,15 +25,15 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.tenthedition;
+package mage.cards.s;
 
 import java.util.UUID;
 import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.MageInt;
 import mage.abilities.keyword.FlyingAbility;
 import mage.abilities.keyword.DoubleStrikeAbility;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 
 /**
  *
@@ -41,9 +41,8 @@ import mage.cards.CardImpl;
  */
 public class SkyhunterSkirmisher extends CardImpl {
 
-    public SkyhunterSkirmisher(UUID ownerId) {
-        super(ownerId, 43, "Skyhunter Skirmisher", Rarity.UNCOMMON, new CardType[]{CardType.CREATURE}, "{1}{W}{W}");
-        this.expansionSetCode = "10E";
+    public SkyhunterSkirmisher(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{1}{W}{W}");
         this.subtype.add("Cat");
         this.subtype.add("Knight");
 

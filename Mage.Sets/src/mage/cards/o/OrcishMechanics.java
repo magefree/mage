@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.antiquities;
+package mage.cards.o;
 
 import java.util.UUID;
 import mage.MageInt;
@@ -35,8 +35,8 @@ import mage.abilities.costs.common.SacrificeTargetCost;
 import mage.abilities.costs.common.TapSourceCost;
 import mage.abilities.effects.common.DamageTargetEffect;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.constants.Zone;
 import mage.filter.common.FilterControlledArtifactPermanent;
 import mage.target.common.TargetControlledPermanent;
@@ -48,9 +48,8 @@ import mage.target.common.TargetCreatureOrPlayer;
  */
 public class OrcishMechanics extends CardImpl {
 
-    public OrcishMechanics(UUID ownerId) {
-        super(ownerId, 92, "Orcish Mechanics", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{2}{R}");
-        this.expansionSetCode = "ATQ";
+    public OrcishMechanics(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{2}{R}");
         this.subtype.add("Orc");
         this.power = new MageInt(1);
         this.toughness = new MageInt(1);

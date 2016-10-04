@@ -26,7 +26,7 @@
  *  or implied, of BetaSteward_at_googlemail.com.
  */
 
-package mage.sets.returntoravnica;
+package mage.cards.d;
 
 import java.util.UUID;
 import mage.abilities.Ability;
@@ -40,11 +40,11 @@ import mage.abilities.effects.common.continuous.GainAbilitySourceEffect;
 import mage.abilities.keyword.EnchantAbility;
 import mage.abilities.keyword.TrampleAbility;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.AttachmentType;
 import mage.constants.CardType;
 import mage.constants.Duration;
 import mage.constants.Outcome;
-import mage.constants.Rarity;
 import mage.constants.Zone;
 import mage.target.TargetPermanent;
 import mage.target.common.TargetCreaturePermanent;
@@ -57,9 +57,8 @@ public class DeviantGlee extends CardImpl {
 
     static final String rule = "and has \"{R}: This creature gains trample until end of turn.\"";
 
-    public DeviantGlee (UUID ownerId) {
-        super(ownerId, 65, "Deviant Glee", Rarity.COMMON, new CardType[]{CardType.ENCHANTMENT}, "{B}");
-        this.expansionSetCode = "RTR";
+    public DeviantGlee (UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.ENCHANTMENT},"{B}");
         this.subtype.add("Aura");
         this.color.setBlack(true);
 

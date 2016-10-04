@@ -25,10 +25,9 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.lorwyn;
+package mage.cards.g;
 
 import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.EntersBattlefieldTriggeredAbility;
@@ -38,6 +37,7 @@ import mage.abilities.costs.mana.ColoredManaCost;
 import mage.abilities.effects.common.CreateTokenEffect;
 import mage.abilities.effects.common.GainLifeEffect;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.ColoredManaSymbol;
 import mage.constants.Zone;
 import mage.filter.common.FilterControlledPermanent;
@@ -59,9 +59,8 @@ public class GuardianOfCloverdell extends CardImpl {
         filter.add(new SubtypePredicate("Kithkin"));
     }
 
-    public GuardianOfCloverdell(UUID ownerId) {
-        super(ownerId, 216, "Guardian of Cloverdell", Rarity.UNCOMMON, new CardType[]{CardType.CREATURE}, "{5}{G}{G}");
-        this.expansionSetCode = "LRW";
+    public GuardianOfCloverdell(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{5}{G}{G}");
         this.subtype.add("Treefolk");
         this.subtype.add("Shaman");
 

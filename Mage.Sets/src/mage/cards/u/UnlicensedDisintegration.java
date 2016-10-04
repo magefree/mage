@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.kaladesh;
+package mage.cards.u;
 
 import java.util.UUID;
 import mage.abilities.condition.common.PermanentsOnTheBattlefieldCondition;
@@ -33,8 +33,8 @@ import mage.abilities.decorator.ConditionalOneShotEffect;
 import mage.abilities.effects.common.DamageTargetControllerEffect;
 import mage.abilities.effects.common.DestroyTargetEffect;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.filter.common.FilterControlledArtifactPermanent;
 import mage.target.common.TargetCreaturePermanent;
 
@@ -44,9 +44,8 @@ import mage.target.common.TargetCreaturePermanent;
  */
 public class UnlicensedDisintegration extends CardImpl {
 
-    public UnlicensedDisintegration(UUID ownerId) {
-        super(ownerId, 187, "Unlicensed Disintegration", Rarity.UNCOMMON, new CardType[]{CardType.INSTANT}, "{1}{B}{R}");
-        this.expansionSetCode = "KLD";
+    public UnlicensedDisintegration(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.INSTANT},"{1}{B}{R}");
 
         // Destroy target creature. If you control an artifact, Unlicensed Disintegration deals 3 damage to that creature's controller.
         this.getSpellAbility().addTarget(new TargetCreaturePermanent());

@@ -25,10 +25,9 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.riseoftheeldrazi;
+package mage.cards.k;
 
 import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.MageInt;
 import mage.abilities.Abilities;
 import mage.abilities.AbilitiesImpl;
@@ -38,6 +37,7 @@ import mage.abilities.keyword.FlyingAbility;
 import mage.abilities.keyword.LevelUpAbility;
 import mage.abilities.keyword.LevelerCardBuilder;
 import mage.abilities.keyword.VigilanceAbility;
+import mage.cards.CardSetInfo;
 import mage.cards.LevelerCard;
 
 import java.util.UUID;
@@ -48,9 +48,8 @@ import java.util.UUID;
  */
 public class KnightOfCliffhaven extends LevelerCard {
 
-    public KnightOfCliffhaven(UUID ownerId) {
-        super(ownerId, 29, "Knight of Cliffhaven", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{1}{W}");
-        this.expansionSetCode = "ROE";
+    public KnightOfCliffhaven(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{1}{W}");
         this.subtype.add("Kor");
         this.subtype.add("Knight");
 

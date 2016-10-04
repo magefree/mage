@@ -25,14 +25,14 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.ninthedition;
+package mage.cards.f;
 
 import java.util.UUID;
 import mage.abilities.effects.common.DamageAllControlledTargetEffect;
 import mage.abilities.effects.common.DamageTargetEffect;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.target.TargetPlayer;
 
@@ -42,9 +42,8 @@ import mage.target.TargetPlayer;
  */
 public class FlameWave extends CardImpl {
 
-    public FlameWave(UUID ownerId) {
-        super(ownerId, 182, "Flame Wave", Rarity.UNCOMMON, new CardType[]{CardType.SORCERY}, "{3}{R}{R}{R}{R}");
-        this.expansionSetCode = "9ED";
+    public FlameWave(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{3}{R}{R}{R}{R}");
 
         // Flame Wave deals 4 damage to target player and each creature he or she controls.
         this.getSpellAbility().addEffect(new DamageTargetEffect(4));

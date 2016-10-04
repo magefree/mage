@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.fatereforged;
+package mage.cards.f;
 
 import java.util.UUID;
 import mage.Mana;
@@ -40,9 +40,9 @@ import mage.abilities.effects.common.AddManaToManaPoolSourceControllerEffect;
 import mage.abilities.effects.common.ChooseModeEffect;
 import mage.abilities.keyword.FlyingAbility;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Outcome;
-import mage.constants.Rarity;
 import mage.constants.SetTargetPointer;
 import mage.constants.TargetController;
 import mage.constants.Zone;
@@ -71,9 +71,8 @@ public class FrontierSiege extends CardImpl {
     private final static String ruleTrigger1 = "&bull Khans &mdash; At the beginning of each of your main phases, add {G}{G} to your mana pool.";
     private final static String ruleTrigger2 = "&bull Dragons &mdash; Whenever a creature with flying enters the battlefield under your control, you may have it fight target creature you don't control.";
 
-    public FrontierSiege(UUID ownerId) {
-        super(ownerId, 131, "Frontier Siege", Rarity.RARE, new CardType[]{CardType.ENCHANTMENT}, "{3}{G}");
-        this.expansionSetCode = "FRF";
+    public FrontierSiege(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.ENCHANTMENT},"{3}{G}");
 
         // As Frontier Siege enters the battlefield, choose Khans or Dragons.
         this.addAbility(new EntersBattlefieldAbility(new ChooseModeEffect("Khans or Dragons?", "Khans", "Dragons"), null,

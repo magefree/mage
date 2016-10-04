@@ -25,13 +25,13 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.magic2013;
+package mage.cards.r;
 
 import java.util.UUID;
 import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.abilities.effects.common.DamageAllEffect;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.filter.common.FilterAttackingCreature;
 
 /**
@@ -40,9 +40,8 @@ import mage.filter.common.FilterAttackingCreature;
  */
 public class RainOfBlades extends CardImpl {
 
-    public RainOfBlades(UUID ownerId) {
-        super(ownerId, 28, "Rain of Blades", Rarity.UNCOMMON, new CardType[]{CardType.INSTANT}, "{W}");
-        this.expansionSetCode = "M13";
+    public RainOfBlades(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.INSTANT},"{W}");
 
 
         // Rain of Blades deals 1 damage to each attacking creature.

@@ -25,19 +25,19 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.worldwake;
+package mage.cards.s;
 
 import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
 import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.abilities.costs.mana.GenericManaCost;
 import mage.abilities.dynamicvalue.common.MultikickerCount;
 import mage.abilities.effects.common.CounterUnlessPaysEffect;
 import mage.abilities.effects.common.DrawCardSourceControllerEffect;
 import mage.abilities.keyword.MultikickerAbility;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.target.TargetSpell;
 
 /**
@@ -46,9 +46,8 @@ import mage.target.TargetSpell;
  */
 public class SpellContortion extends CardImpl {
 
-    public SpellContortion(UUID ownerId) {
-        super(ownerId, 38, "Spell Contortion", Rarity.UNCOMMON, new CardType[]{CardType.INSTANT}, "{2}{U}");
-        this.expansionSetCode = "WWK";
+    public SpellContortion(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.INSTANT},"{2}{U}");
 
 
         // Multikicker {1}{U}

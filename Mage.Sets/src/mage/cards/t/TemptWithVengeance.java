@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.commander2013;
+package mage.cards.t;
 
 import java.util.UUID;
 import mage.MageInt;
@@ -33,9 +33,9 @@ import mage.abilities.Ability;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.keyword.HasteAbility;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Outcome;
-import mage.constants.Rarity;
 import mage.game.Game;
 import mage.game.permanent.token.Token;
 import mage.players.Player;
@@ -46,9 +46,8 @@ import mage.players.Player;
  */
 public class TemptWithVengeance extends CardImpl {
 
-    public TemptWithVengeance(UUID ownerId) {
-        super(ownerId, 125, "Tempt with Vengeance", Rarity.RARE, new CardType[]{CardType.SORCERY}, "{X}{R}");
-        this.expansionSetCode = "C13";
+    public TemptWithVengeance(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{X}{R}");
 
 
         // Tempting offer - Put X 1/1 red Elemental creature tokens with haste onto the battlefield. Each opponent may put X 1/1 red Elemental creature tokens with haste onto the battlefield. For each player who does, put X 1/1 red Elemental creature tokens with haste onto the battlefield.

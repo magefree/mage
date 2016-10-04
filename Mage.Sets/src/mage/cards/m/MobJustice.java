@@ -25,15 +25,15 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.stronghold;
+package mage.cards.m;
 
 import java.util.UUID;
 import mage.abilities.dynamicvalue.common.PermanentsOnBattlefieldCount;
 import mage.abilities.effects.Effect;
 import mage.abilities.effects.common.DamageTargetEffect;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.filter.common.FilterControlledCreaturePermanent;
 import mage.target.TargetPlayer;
 
@@ -43,9 +43,8 @@ import mage.target.TargetPlayer;
  */
 public class MobJustice extends CardImpl {
 
-    public MobJustice(UUID ownerId) {
-        super(ownerId, 90, "Mob Justice", Rarity.COMMON, new CardType[]{CardType.SORCERY}, "{1}{R}");
-        this.expansionSetCode = "STH";
+    public MobJustice(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{1}{R}");
 
         // Mob Justice deals damage to target player equal to the number of creatures you control.
         Effect effect = new DamageTargetEffect(new PermanentsOnBattlefieldCount(new FilterControlledCreaturePermanent()));

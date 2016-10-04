@@ -25,15 +25,15 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.scourge;
+package mage.cards.k;
 
 import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.effects.common.cost.SpellsCostReductionControllerEffect;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.constants.Zone;
 import mage.filter.Filter.ComparisonType;
 import mage.filter.FilterCard;
@@ -53,9 +53,8 @@ public class KrosanDrover extends CardImpl {
         filter.add(new ConvertedManaCostPredicate(ComparisonType.GreaterThan, 5));
     }
     
-    public KrosanDrover(UUID ownerId) {
-        super(ownerId, 122, "Krosan Drover", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{3}{G}");
-        this.expansionSetCode = "SCG";
+    public KrosanDrover(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{3}{G}");
         this.subtype.add("Elf");
         this.power = new MageInt(2);
         this.toughness = new MageInt(2);

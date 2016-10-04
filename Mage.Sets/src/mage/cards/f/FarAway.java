@@ -26,13 +26,13 @@
  *  or implied, of BetaSteward_at_googlemail.com.
  */
 
-package mage.sets.dragonsmaze;
+package mage.cards.f;
 
 import java.util.UUID;
 import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.abilities.effects.common.ReturnToHandTargetEffect;
 import mage.abilities.effects.common.SacrificeEffect;
+import mage.cards.CardSetInfo;
 import mage.cards.SplitCard;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.target.TargetPlayer;
@@ -46,9 +46,8 @@ import mage.target.common.TargetCreaturePermanent;
 
 public class FarAway extends SplitCard {
 
-    public FarAway(UUID ownerId) {
-        super(ownerId, 127, "Far", "Away", Rarity.UNCOMMON, new CardType[]{CardType.INSTANT}, "{1}{U}", "{2}{B}", true);
-        this.expansionSetCode = "DGM";
+    public FarAway(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.INSTANT},"{1}{U}","{2}{B}",true);
 
         // Far
         // Return target creature to its owner's hand.

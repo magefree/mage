@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.modernmasters;
+package mage.cards.p;
 
 import java.util.UUID;
 import mage.MageObject;
@@ -35,10 +35,10 @@ import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.effects.ReplacementEffectImpl;
 import mage.abilities.effects.common.discard.DiscardHandControllerEffect;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Duration;
 import mage.constants.Outcome;
-import mage.constants.Rarity;
 import mage.constants.Zone;
 import mage.game.Game;
 import mage.game.events.GameEvent;
@@ -49,9 +49,8 @@ import mage.game.events.GameEvent;
  */
 public class PyromancersSwath extends CardImpl {
 
-    public PyromancersSwath(UUID ownerId) {
-        super(ownerId, 125, "Pyromancer's Swath", Rarity.RARE, new CardType[]{CardType.ENCHANTMENT}, "{2}{R}");
-        this.expansionSetCode = "MMA";
+    public PyromancersSwath(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.ENCHANTMENT},"{2}{R}");
 
         // If an instant or sorcery source you control would deal damage to a creature or player, it deals that much damage plus 2 to that creature or player instead.
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new PyromancersSwathReplacementEffect()));

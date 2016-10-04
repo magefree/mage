@@ -25,15 +25,15 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.fatereforged;
+package mage.cards.d;
 
 import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.keyword.VigilanceAbility;
 import mage.abilities.keyword.ProwessAbility;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.Rarity;
 
 /**
  *
@@ -41,9 +41,8 @@ import mage.constants.Rarity;
  */
 public class DragonBellMonk extends CardImpl {
 
-    public DragonBellMonk(UUID ownerId) {
-        super(ownerId, 10, "Dragon Bell Monk", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{2}{W}");
-        this.expansionSetCode = "FRF";
+    public DragonBellMonk(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{2}{W}");
         this.subtype.add("Human");
         this.subtype.add("Monk");
         this.power = new MageInt(2);

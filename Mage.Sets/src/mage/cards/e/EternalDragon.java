@@ -25,12 +25,11 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.scourge;
+package mage.cards.e;
 
 import java.util.UUID;
 
 import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.condition.common.IsStepCondition;
@@ -40,6 +39,7 @@ import mage.abilities.effects.common.ReturnToHandSourceEffect;
 import mage.abilities.keyword.FlyingAbility;
 import mage.abilities.keyword.PlainscyclingAbility;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.PhaseStep;
 import mage.constants.Zone;
 
@@ -49,9 +49,8 @@ import mage.constants.Zone;
  */
 public class EternalDragon extends CardImpl {
 
-    public EternalDragon(UUID ownerId) {
-        super(ownerId, 12, "Eternal Dragon", Rarity.RARE, new CardType[]{CardType.CREATURE}, "{5}{W}{W}");
-        this.expansionSetCode = "SCG";
+    public EternalDragon(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{5}{W}{W}");
         this.subtype.add("Dragon");
         this.subtype.add("Spirit");
 

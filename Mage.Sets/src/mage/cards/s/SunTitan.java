@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.magic2011;
+package mage.cards.s;
 
 import java.util.UUID;
 import mage.MageInt;
@@ -33,8 +33,8 @@ import mage.abilities.TriggeredAbilityImpl;
 import mage.abilities.effects.common.ReturnFromGraveyardToBattlefieldTargetEffect;
 import mage.abilities.keyword.VigilanceAbility;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.constants.Zone;
 import mage.filter.Filter.ComparisonType;
 import mage.filter.FilterCard;
@@ -53,9 +53,8 @@ import mage.target.common.TargetCardInYourGraveyard;
  */
 public class SunTitan extends CardImpl {
 
-    public SunTitan(UUID ownerId) {
-        super(ownerId, 35, "Sun Titan", Rarity.MYTHIC, new CardType[]{CardType.CREATURE}, "{4}{W}{W}");
-        this.expansionSetCode = "M11";
+    public SunTitan(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{4}{W}{W}");
         this.subtype.add("Giant");
 
         this.power = new MageInt(6);

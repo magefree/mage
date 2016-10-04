@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.tempest;
+package mage.cards.l;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -36,9 +36,9 @@ import mage.abilities.Ability;
 import mage.abilities.effects.OneShotEffect;
 import mage.cards.Card;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Outcome;
-import mage.constants.Rarity;
 import mage.constants.Zone;
 import mage.filter.common.FilterCreatureCard;
 import mage.filter.common.FilterCreaturePermanent;
@@ -52,9 +52,8 @@ import mage.players.Player;
  */
 public class LivingDeath extends CardImpl {
 
-    public LivingDeath(UUID ownerId) {
-        super(ownerId, 36, "Living Death", Rarity.RARE, new CardType[]{CardType.SORCERY}, "{3}{B}{B}");
-        this.expansionSetCode = "TMP";
+    public LivingDeath(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{3}{B}{B}");
 
         // Each player exiles all creature cards from his or her graveyard, then sacrifices all creatures he or she controls, then puts all cards he or she exiled this way onto the battlefield.
         this.getSpellAbility().addEffect(new LivingDeathEffect());

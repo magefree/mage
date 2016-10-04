@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.mirrodin;
+package mage.cards.t;
 
 import java.util.UUID;
 import mage.MageInt;
@@ -36,9 +36,9 @@ import mage.abilities.costs.mana.GenericManaCost;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.search.SearchLibraryPutInPlayEffect;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Outcome;
-import mage.constants.Rarity;
 import mage.filter.Filter.ComparisonType;
 import mage.filter.FilterCard;
 import mage.filter.predicate.mageobject.ConvertedManaCostPredicate;
@@ -53,9 +53,8 @@ import mage.target.common.TargetCardInLibrary;
  */
 public class TajNarSwordsmith extends CardImpl {
 
-    public TajNarSwordsmith(UUID ownerId) {
-        super(ownerId, 27, "Taj-Nar Swordsmith", Rarity.UNCOMMON, new CardType[]{CardType.CREATURE}, "{3}{W}");
-        this.expansionSetCode = "MRD";
+    public TajNarSwordsmith(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{3}{W}");
         this.subtype.add("Cat");
         this.subtype.add("Soldier");
         this.power = new MageInt(2);

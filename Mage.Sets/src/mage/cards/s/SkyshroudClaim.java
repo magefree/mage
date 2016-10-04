@@ -25,13 +25,13 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.nemesis;
+package mage.cards.s;
 
 import java.util.UUID;
 import mage.abilities.effects.common.search.SearchLibraryPutInPlayEffect;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.filter.common.FilterLandCard;
 import mage.filter.predicate.mageobject.SubtypePredicate;
 import mage.target.common.TargetCardInLibrary;
@@ -46,9 +46,8 @@ public class SkyshroudClaim extends CardImpl {
     static {
         filter.add(new SubtypePredicate("Forest"));
     }
-    public SkyshroudClaim(UUID ownerId) {
-        super(ownerId, 117, "Skyshroud Claim", Rarity.COMMON, new CardType[]{CardType.SORCERY}, "{3}{G}");
-        this.expansionSetCode = "NEM";
+    public SkyshroudClaim(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{3}{G}");
 
 
         // Search your library for up to two Forest cards and put them onto the battlefield. Then shuffle your library.

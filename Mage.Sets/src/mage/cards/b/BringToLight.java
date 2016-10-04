@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.battleforzendikar;
+package mage.cards.b;
 
 import java.util.UUID;
 import mage.abilities.Ability;
@@ -33,9 +33,9 @@ import mage.abilities.dynamicvalue.common.ColorsOfManaSpentToCastCount;
 import mage.abilities.effects.OneShotEffect;
 import mage.cards.Card;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Outcome;
-import mage.constants.Rarity;
 import mage.constants.Zone;
 import mage.filter.Filter;
 import mage.filter.FilterCard;
@@ -53,9 +53,8 @@ import org.apache.log4j.Logger;
  */
 public class BringToLight extends CardImpl {
 
-    public BringToLight(UUID ownerId) {
-        super(ownerId, 209, "Bring to Light", Rarity.RARE, new CardType[]{CardType.SORCERY}, "{3}{G}{U}");
-        this.expansionSetCode = "BFZ";
+    public BringToLight(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{3}{G}{U}");
 
         // <i>Converge</i>-Search your library for a creature, instant, or sorcery card with converted mana
         // cost less than or equal to the number of colors of mana spent to cast Bring to Light, exile that card,

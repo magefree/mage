@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.khansoftarkir;
+package mage.cards.r;
 
 import java.util.UUID;
 import mage.abilities.TriggeredAbilityImpl;
@@ -35,9 +35,9 @@ import mage.abilities.effects.common.DoIfCostPaid;
 import mage.abilities.effects.common.DrawCardSourceControllerEffect;
 import mage.abilities.effects.common.continuous.BoostControlledEffect;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Duration;
-import mage.constants.Rarity;
 import mage.constants.Zone;
 import mage.game.Game;
 import mage.game.events.DamagedPlayerEvent;
@@ -50,9 +50,8 @@ import mage.game.permanent.Permanent;
  */
 public class RaidersSpoils extends CardImpl {
 
-    public RaidersSpoils(UUID ownerId) {
-        super(ownerId, 83, "Raiders' Spoils", Rarity.UNCOMMON, new CardType[]{CardType.ENCHANTMENT}, "{3}{B}");
-        this.expansionSetCode = "KTK";
+    public RaidersSpoils(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.ENCHANTMENT},"{3}{B}");
 
 
         // Creatures you control get +1/+0.

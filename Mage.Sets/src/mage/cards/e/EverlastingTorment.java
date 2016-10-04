@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.shadowmoor;
+package mage.cards.e;
 
 import java.util.UUID;
 import mage.abilities.Ability;
@@ -34,10 +34,10 @@ import mage.abilities.effects.ReplacementEffectImpl;
 import mage.abilities.effects.common.continuous.CantGainLifeAllEffect;
 import mage.abilities.effects.common.continuous.DamageCantBePreventedEffect;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Duration;
 import mage.constants.Outcome;
-import mage.constants.Rarity;
 import mage.constants.Zone;
 import mage.counters.Counter;
 import mage.counters.CounterType;
@@ -52,9 +52,8 @@ import mage.game.permanent.Permanent;
  */
 public class EverlastingTorment extends CardImpl {
 
-    public EverlastingTorment(UUID ownerId) {
-        super(ownerId, 186, "Everlasting Torment", Rarity.RARE, new CardType[]{CardType.ENCHANTMENT}, "{2}{B/R}");
-        this.expansionSetCode = "SHM";
+    public EverlastingTorment(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.ENCHANTMENT},"{2}{B/R}");
 
         // Players can't gain life.
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new CantGainLifeAllEffect()));

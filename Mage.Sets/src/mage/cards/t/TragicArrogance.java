@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.magicorigins;
+package mage.cards.t;
 
 import java.util.HashSet;
 import java.util.Set;
@@ -33,9 +33,9 @@ import java.util.UUID;
 import mage.abilities.Ability;
 import mage.abilities.effects.OneShotEffect;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Outcome;
-import mage.constants.Rarity;
 import mage.filter.common.FilterArtifactPermanent;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.filter.common.FilterEnchantmentPermanent;
@@ -55,9 +55,8 @@ import mage.target.common.TargetArtifactPermanent;
  */
 public class TragicArrogance extends CardImpl {
 
-    public TragicArrogance(UUID ownerId) {
-        super(ownerId, 38, "Tragic Arrogance", Rarity.RARE, new CardType[]{CardType.SORCERY}, "{3}{W}{W}");
-        this.expansionSetCode = "ORI";
+    public TragicArrogance(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{3}{W}{W}");
 
         // For each player, you choose from among the permanents that player controls an artifact, a creature, an enchantment, and a planeswalker. Then each player sacrifices all other nonland permanents he or she controls.
         this.getSpellAbility().addEffect(new TragicArroganceffect());

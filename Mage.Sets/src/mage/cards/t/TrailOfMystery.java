@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.khansoftarkir;
+package mage.cards.t;
 
 import java.util.UUID;
 import mage.abilities.common.EntersBattlefieldControlledTriggeredAbility;
@@ -34,9 +34,9 @@ import mage.abilities.effects.Effect;
 import mage.abilities.effects.common.continuous.BoostTargetEffect;
 import mage.abilities.effects.common.search.SearchLibraryPutInHandEffect;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Duration;
-import mage.constants.Rarity;
 import mage.constants.Zone;
 import mage.filter.common.FilterBasicLandCard;
 import mage.filter.common.FilterControlledCreaturePermanent;
@@ -55,9 +55,8 @@ public class TrailOfMystery extends CardImpl {
         filter.add(new FaceDownPredicate());
     }
 
-    public TrailOfMystery(UUID ownerId) {
-        super(ownerId, 154, "Trail of Mystery", Rarity.RARE, new CardType[]{CardType.ENCHANTMENT}, "{1}{G}");
-        this.expansionSetCode = "KTK";
+    public TrailOfMystery(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.ENCHANTMENT},"{1}{G}");
 
         // Whenever a face-down creature enters the battlefield under your control, you may search your library for a basic land card, reveal it, put it into your hand, then shuffle your library.
         Effect effect = new SearchLibraryPutInHandEffect(new TargetCardInLibrary(0,1, new FilterBasicLandCard()), true, true);

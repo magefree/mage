@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.commander2015;
+package mage.cards.m;
 
 import java.util.Set;
 import java.util.UUID;
@@ -36,11 +36,11 @@ import mage.abilities.effects.common.ExileSpellEffect;
 import mage.abilities.keyword.OverloadAbility;
 import mage.cards.Card;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.cards.Cards;
 import mage.cards.CardsImpl;
 import mage.constants.CardType;
 import mage.constants.Outcome;
-import mage.constants.Rarity;
 import mage.constants.TimingRule;
 import mage.constants.Zone;
 import mage.filter.FilterCard;
@@ -56,9 +56,8 @@ import mage.target.common.TargetCardInYourGraveyard;
  */
 public class MizzixsMastery extends CardImpl {
 
-    public MizzixsMastery(UUID ownerId) {
-        super(ownerId, 29, "Mizzix's Mastery", Rarity.RARE, new CardType[]{CardType.SORCERY}, "{3}{R}");
-        this.expansionSetCode = "C15";
+    public MizzixsMastery(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{3}{R}");
 
         // Exile target card that's an instant or sorcery from your graveyard. For each card exiled this way, copy it, and you may cast the copy without paying its mana cost. Exile Mizzix's Mastery.
         this.getSpellAbility().addEffect(new MizzixsMasteryEffect());

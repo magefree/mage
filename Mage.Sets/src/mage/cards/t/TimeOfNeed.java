@@ -26,14 +26,14 @@
  *  or implied, of BetaSteward_at_googlemail.com.
  */
 
-package mage.sets.championsofkamigawa;
+package mage.cards.t;
 
 import java.util.UUID;
 
 import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.abilities.effects.common.search.SearchLibraryPutInHandEffect;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.filter.FilterCard;
 import mage.filter.predicate.mageobject.CardTypePredicate;
 import mage.filter.predicate.mageobject.SupertypePredicate;
@@ -51,9 +51,8 @@ public class TimeOfNeed extends CardImpl {
         filter.add(new SupertypePredicate("Legendary"));
     }
 
-    public TimeOfNeed(UUID ownerId) {
-        super(ownerId, 247, "Time of Need", Rarity.UNCOMMON, new CardType[]{CardType.SORCERY}, "{1}{G}");
-        this.expansionSetCode = "CHK";
+    public TimeOfNeed(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{1}{G}");
 
 
         // Search your library for a legendary creature card, reveal it, and put it into your hand. Then shuffle your library.

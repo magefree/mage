@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.tempestremastered;
+package mage.cards.v;
 
 import java.util.UUID;
 import mage.MageInt;
@@ -40,9 +40,9 @@ import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.ChooseColorEffect;
 import mage.abilities.effects.common.ChooseCreatureTypeEffect;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Outcome;
-import mage.constants.Rarity;
 import mage.constants.Zone;
 import mage.game.Game;
 import mage.game.permanent.token.Token;
@@ -53,9 +53,8 @@ import mage.game.permanent.token.Token;
  */
 public class VolrathsLaboratory extends CardImpl {
 
-    public VolrathsLaboratory(UUID ownerId) {
-        super(ownerId, 234, "Volrath's Laboratory", Rarity.RARE, new CardType[]{CardType.ARTIFACT}, "{5}");
-        this.expansionSetCode = "TPR";
+    public VolrathsLaboratory(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.ARTIFACT},"{5}");
 
         // As Volrath's Laboratory enters the battlefield, choose a color and a creature type.
         Ability ability = new EntersBattlefieldAbility(new ChooseColorEffect(Outcome.Neutral));

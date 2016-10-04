@@ -25,15 +25,15 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.starwars;
+package mage.cards.c;
 
 import java.util.UUID;
 import mage.abilities.effects.Effect;
 import mage.abilities.effects.common.DamageTargetControllerEffect;
 import mage.abilities.effects.common.DamageTargetEffect;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.target.common.TargetCreaturePermanent;
 
 /**
@@ -42,9 +42,8 @@ import mage.target.common.TargetCreaturePermanent;
  */
 public class Crossfire extends CardImpl {
 
-    public Crossfire(UUID ownerId) {
-        super(ownerId, 100, "Crossfire", Rarity.COMMON, new CardType[]{CardType.INSTANT}, "{2}{R}{R}");
-        this.expansionSetCode = "SWS";
+    public Crossfire(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.INSTANT},"{2}{R}{R}");
 
         // Crossfire deals 4 damge to target creature and 2 damage to that creature's controller.
         this.getSpellAbility().addEffect(new DamageTargetEffect(4));

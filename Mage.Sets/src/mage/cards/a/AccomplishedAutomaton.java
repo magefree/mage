@@ -25,14 +25,14 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.kaladesh;
+package mage.cards.a;
 
 import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.keyword.FabricateAbility;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.Rarity;
 
 /**
  *
@@ -40,9 +40,8 @@ import mage.constants.Rarity;
  */
 public class AccomplishedAutomaton extends CardImpl {
 
-    public AccomplishedAutomaton(UUID ownerId) {
-        super(ownerId, 191, "Accomplished Automaton", Rarity.COMMON, new CardType[]{CardType.ARTIFACT, CardType.CREATURE}, "{7}");
-        this.expansionSetCode = "KLD";
+    public AccomplishedAutomaton(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.ARTIFACT,CardType.CREATURE},"{7}");
         this.subtype.add("Construct");
         this.power = new MageInt(5);
         this.toughness = new MageInt(7);

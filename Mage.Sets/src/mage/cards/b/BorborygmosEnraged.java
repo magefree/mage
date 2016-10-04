@@ -25,12 +25,11 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.gatecrash;
+package mage.cards.b;
 
 import java.util.UUID;
 
 import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.DealsCombatDamageToAPlayerTriggeredAbility;
@@ -41,6 +40,7 @@ import mage.abilities.effects.common.DamageTargetEffect;
 import mage.abilities.keyword.TrampleAbility;
 import mage.cards.Card;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.cards.Cards;
 import mage.cards.CardsImpl;
 import mage.constants.Outcome;
@@ -57,9 +57,8 @@ import mage.target.common.TargetCreatureOrPlayer;
  */
 public class BorborygmosEnraged extends CardImpl {
 
-    public BorborygmosEnraged(UUID ownerId) {
-        super(ownerId, 147, "Borborygmos Enraged", Rarity.MYTHIC, new CardType[]{CardType.CREATURE}, "{4}{R}{R}{G}{G}");
-        this.expansionSetCode = "GTC";
+    public BorborygmosEnraged(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{4}{R}{R}{G}{G}");
         this.subtype.add("Cyclops");
         
         this.supertype.add("Legendary");

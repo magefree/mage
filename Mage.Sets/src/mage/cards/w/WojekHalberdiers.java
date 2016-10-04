@@ -25,17 +25,17 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.gatecrash;
+package mage.cards.w;
 
 import java.util.UUID;
 
 import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.MageInt;
 import mage.abilities.effects.common.continuous.GainAbilitySourceEffect;
 import mage.abilities.keyword.BattalionAbility;
 import mage.abilities.keyword.FirstStrikeAbility;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.Duration;
 
 /**
@@ -44,9 +44,8 @@ import mage.constants.Duration;
  */
 public class WojekHalberdiers extends CardImpl {
 
-    public WojekHalberdiers(UUID ownerId) {
-        super(ownerId, 208, "Wojek Halberdiers", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{R}{W}");
-        this.expansionSetCode = "GTC";
+    public WojekHalberdiers(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{R}{W}");
         this.subtype.add("Human");
         this.subtype.add("Soldier");
 

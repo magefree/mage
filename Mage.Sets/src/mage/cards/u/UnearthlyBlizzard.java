@@ -27,14 +27,14 @@
  *  or implied, of BetaSteward_at_googlemail.com.
  * 
  */
-package mage.sets.championsofkamigawa;
+package mage.cards.u;
 
 import java.util.UUID;
 import mage.constants.CardType;
 import mage.constants.Duration;
-import mage.constants.Rarity;
 import mage.abilities.effects.common.combat.CantBlockTargetEffect;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.target.common.TargetCreaturePermanent;
 
 /**
@@ -42,9 +42,8 @@ import mage.target.common.TargetCreaturePermanent;
  */
 public class UnearthlyBlizzard extends CardImpl {
 
-    public UnearthlyBlizzard(UUID ownerId) {
-        super(ownerId, 196, "Unearthly Blizzard", Rarity.COMMON, new CardType[]{CardType.SORCERY}, "{2}{R}");
-        this.expansionSetCode = "CHK";
+    public UnearthlyBlizzard(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{2}{R}");
         this.subtype.add("Arcane");
 
 

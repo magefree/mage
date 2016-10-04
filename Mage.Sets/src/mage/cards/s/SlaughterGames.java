@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.returntoravnica;
+package mage.cards.s;
 
 import java.util.UUID;
 import mage.abilities.Ability;
@@ -35,8 +35,8 @@ import mage.abilities.effects.common.CantBeCounteredSourceEffect;
 import mage.abilities.effects.common.NameACardEffect;
 import mage.abilities.effects.common.search.SearchTargetGraveyardHandLibraryForCardNameAndExileEffect;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.constants.Zone;
 import mage.game.Game;
 import mage.target.common.TargetOpponent;
@@ -47,9 +47,8 @@ import mage.target.common.TargetOpponent;
  */
 public class SlaughterGames extends CardImpl {
 
-    public SlaughterGames(UUID ownerId) {
-        super(ownerId, 197, "Slaughter Games", Rarity.RARE, new CardType[]{CardType.SORCERY}, "{2}{B}{R}");
-        this.expansionSetCode = "RTR";
+    public SlaughterGames(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{2}{B}{R}");
 
         // Slaughter Games can't be countered by spells or abilities.
         Effect effect = new CantBeCounteredSourceEffect();

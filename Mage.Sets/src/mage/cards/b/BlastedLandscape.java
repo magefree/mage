@@ -26,15 +26,15 @@
 * or implied, of BetaSteward_at_googlemail.com.
 */
 
-package mage.sets.urzassaga;
+package mage.cards.b;
 
 import java.util.UUID;
 import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.abilities.costs.mana.ManaCostsImpl;
 import mage.abilities.keyword.CyclingAbility;
 import mage.abilities.mana.ColorlessManaAbility;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 
 /**
  *
@@ -42,9 +42,8 @@ import mage.cards.CardImpl;
  */
 public class BlastedLandscape extends CardImpl {
 
-    public BlastedLandscape(UUID ownerId) {
-        super(ownerId, 319, "Blasted Landscape", Rarity.UNCOMMON, new CardType[]{CardType.LAND}, "");
-        this.expansionSetCode = "USG";
+    public BlastedLandscape(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.LAND},"");
 
         this.addAbility(new ColorlessManaAbility());
         this.addAbility(new CyclingAbility(new ManaCostsImpl("{2}")));

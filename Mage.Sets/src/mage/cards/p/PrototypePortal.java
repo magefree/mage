@@ -25,12 +25,11 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.scarsofmirrodin;
+package mage.cards.p;
 
 import java.util.UUID;
 import mage.constants.CardType;
 import mage.constants.Outcome;
-import mage.constants.Rarity;
 import mage.constants.Zone;
 import mage.abilities.Ability;
 import mage.abilities.common.EntersBattlefieldTriggeredAbility;
@@ -43,6 +42,7 @@ import mage.abilities.costs.mana.ManaCostsImpl;
 import mage.abilities.effects.OneShotEffect;
 import mage.cards.Card;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.filter.FilterCard;
 import mage.filter.common.FilterArtifactCard;
 import mage.game.Game;
@@ -58,9 +58,8 @@ import mage.util.CardUtil;
  */
 public class PrototypePortal extends CardImpl {
 
-    public PrototypePortal(UUID ownerId) {
-        super(ownerId, 195, "Prototype Portal", Rarity.RARE, new CardType[]{CardType.ARTIFACT}, "{4}");
-        this.expansionSetCode = "SOM";
+    public PrototypePortal(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.ARTIFACT},"{4}");
 
         // Imprint - When Prototype Portal enters the battlefield, you may exile an artifact card from your hand.
         this.addAbility(new EntersBattlefieldTriggeredAbility(new PrototypePortalEffect(), true));

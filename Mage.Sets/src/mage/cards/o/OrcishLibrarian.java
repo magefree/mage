@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.iceage;
+package mage.cards.o;
 
 import java.util.UUID;
 import mage.MageInt;
@@ -36,12 +36,12 @@ import mage.abilities.costs.mana.ColoredManaCost;
 import mage.abilities.effects.OneShotEffect;
 import mage.cards.Card;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.cards.Cards;
 import mage.cards.CardsImpl;
 import mage.constants.CardType;
 import mage.constants.ColoredManaSymbol;
 import mage.constants.Outcome;
-import mage.constants.Rarity;
 import mage.constants.Zone;
 import mage.filter.FilterCard;
 import mage.game.Game;
@@ -54,9 +54,8 @@ import mage.target.TargetCard;
  */
 public class OrcishLibrarian extends CardImpl {
 
-    public OrcishLibrarian(UUID ownerId) {
-        super(ownerId, 209, "Orcish Librarian", Rarity.RARE, new CardType[]{CardType.CREATURE}, "{1}{R}");
-        this.expansionSetCode = "ICE";
+    public OrcishLibrarian(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{1}{R}");
         this.subtype.add("Orc");
 
         this.power = new MageInt(1);

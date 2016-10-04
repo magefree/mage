@@ -25,15 +25,15 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.torment;
+package mage.cards.a;
 
 import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.MageInt;
 import mage.abilities.costs.mana.ManaCostsImpl;
 import mage.abilities.keyword.MadnessAbility;
 import mage.abilities.keyword.TrampleAbility;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 
 import java.util.UUID;
 
@@ -43,9 +43,8 @@ import java.util.UUID;
  */
 public class ArrogantWurm extends CardImpl {
 
-    public ArrogantWurm(UUID ownerId) {
-        super(ownerId, 120, "Arrogant Wurm", Rarity.UNCOMMON, new CardType[]{CardType.CREATURE}, "{3}{G}{G}");
-        this.expansionSetCode = "TOR";
+    public ArrogantWurm(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{3}{G}{G}");
         this.subtype.add("Wurm");
 
         this.power = new MageInt(4);

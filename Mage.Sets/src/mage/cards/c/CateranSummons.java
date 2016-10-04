@@ -26,13 +26,13 @@
  *  or implied, of BetaSteward_at_googlemail.com.
  */
 
-package mage.sets.mercadianmasques;
+package mage.cards.c;
 
 import java.util.UUID;
 import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.abilities.effects.common.search.SearchLibraryPutInHandEffect;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.filter.FilterCard;
 import mage.filter.common.FilterCreatureCard;
 import mage.filter.predicate.mageobject.SubtypePredicate;
@@ -50,9 +50,8 @@ public class CateranSummons extends CardImpl {
         filter.add(new SubtypePredicate("Mercenary"));
     }
 
-    public CateranSummons(UUID ownerId) {
-        super(ownerId, 126, "Cateran Summons", Rarity.UNCOMMON, new CardType[]{CardType.SORCERY}, "{B}");
-        this.expansionSetCode = "MMQ";
+    public CateranSummons(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{B}");
 
         // Search your library for a Mercenary card, reveal that card, and put it into your hand. Then shuffle your library.
         this.getSpellAbility().addEffect(new SearchLibraryPutInHandEffect(new TargetCardInLibrary(filter), true));

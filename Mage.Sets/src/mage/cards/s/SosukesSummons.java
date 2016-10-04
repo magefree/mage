@@ -25,16 +25,16 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.betrayersofkamigawa;
+package mage.cards.s;
 
 import java.util.UUID;
 import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.constants.Zone;
 import mage.abilities.common.CreatureEntersBattlefieldTriggeredAbility;
 import mage.abilities.effects.common.CreateTokenEffect;
 import mage.abilities.effects.common.ReturnSourceFromGraveyardToHandEffect;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.filter.predicate.Predicates;
 import mage.filter.predicate.mageobject.SubtypePredicate;
@@ -54,9 +54,8 @@ public class SosukesSummons extends CardImpl {
             filter.add(Predicates.not(new TokenPredicate()));
     }
 
-    public SosukesSummons(UUID ownerId) {
-        super(ownerId, 145, "Sosuke's Summons", Rarity.UNCOMMON, new CardType[]{CardType.SORCERY}, "{2}{G}");
-        this.expansionSetCode = "BOK";
+    public SosukesSummons(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{2}{G}");
 
 
         // Put two 1/1 green Snake creature tokens onto the battlefield.

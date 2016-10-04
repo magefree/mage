@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.innistrad;
+package mage.cards.m;
 
 import java.util.UUID;
 import mage.abilities.Ability;
@@ -37,6 +37,7 @@ import mage.abilities.effects.common.continuous.GainAbilityAttachedEffect;
 import mage.abilities.keyword.EquipAbility;
 import mage.abilities.keyword.HexproofAbility;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.*;
 
 /**
@@ -44,9 +45,8 @@ import mage.constants.*;
  */
 public class MaskOfAvacyn extends CardImpl {
 
-    public MaskOfAvacyn(UUID ownerId) {
-        super(ownerId, 229, "Mask of Avacyn", Rarity.UNCOMMON, new CardType[]{CardType.ARTIFACT}, "{2}");
-        this.expansionSetCode = "ISD";
+    public MaskOfAvacyn(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.ARTIFACT},"{2}");
         this.subtype.add("Equipment");
 
         // Equip {3}

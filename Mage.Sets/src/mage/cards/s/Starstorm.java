@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.onslaught;
+package mage.cards.s;
 
 import java.util.UUID;
 import mage.abilities.costs.mana.ManaCostsImpl;
@@ -33,8 +33,8 @@ import mage.abilities.dynamicvalue.common.ManacostVariableValue;
 import mage.abilities.effects.common.DamageAllEffect;
 import mage.abilities.keyword.CyclingAbility;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.filter.common.FilterCreaturePermanent;
 
 /**
@@ -43,9 +43,8 @@ import mage.filter.common.FilterCreaturePermanent;
  */
 public class Starstorm extends CardImpl {
 
-    public Starstorm(UUID ownerId) {
-        super(ownerId, 238, "Starstorm", Rarity.RARE, new CardType[]{CardType.INSTANT}, "{X}{R}{R}");
-        this.expansionSetCode = "ONS";
+    public Starstorm(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.INSTANT},"{X}{R}{R}");
 
 
         // Starstorm deals X damage to each creature.

@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.oathofthegatewatch;
+package mage.cards.a;
 
 import java.util.UUID;
 import mage.MageInt;
@@ -35,11 +35,11 @@ import mage.abilities.costs.common.TapSourceCost;
 import mage.abilities.costs.common.TapTargetCost;
 import mage.abilities.effects.OneShotEffect;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.cards.Cards;
 import mage.constants.AbilityWord;
 import mage.constants.CardType;
 import mage.constants.Outcome;
-import mage.constants.Rarity;
 import mage.constants.Zone;
 import mage.filter.common.FilterControlledPermanent;
 import mage.filter.predicate.Predicates;
@@ -62,9 +62,8 @@ public class AkoumFlameseeker extends CardImpl {
         filter.add(Predicates.not(new TappedPredicate()));
     }
 
-    public AkoumFlameseeker(UUID ownerId) {
-        super(ownerId, 101, "Akoum Flameseeker", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{2}{R}");
-        this.expansionSetCode = "OGW";
+    public AkoumFlameseeker(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{2}{R}");
         this.subtype.add("Human");
         this.subtype.add("Shaman");
         this.subtype.add("Ally");

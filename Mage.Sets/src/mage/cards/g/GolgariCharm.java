@@ -25,17 +25,17 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.returntoravnica;
+package mage.cards.g;
 
 import java.util.UUID;
 import mage.constants.CardType;
 import mage.constants.Duration;
-import mage.constants.Rarity;
 import mage.abilities.Mode;
 import mage.abilities.effects.common.DestroyTargetEffect;
 import mage.abilities.effects.common.RegenerateAllEffect;
 import mage.abilities.effects.common.continuous.BoostAllEffect;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.filter.common.FilterControlledCreaturePermanent;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.filter.common.FilterEnchantmentPermanent;
@@ -47,9 +47,8 @@ import mage.target.TargetPermanent;
  */
 public class GolgariCharm extends CardImpl {
 
-    public GolgariCharm(UUID ownerId) {
-        super(ownerId, 164, "Golgari Charm", Rarity.UNCOMMON, new CardType[]{CardType.INSTANT}, "{B}{G}");
-        this.expansionSetCode = "RTR";
+    public GolgariCharm(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.INSTANT},"{B}{G}");
 
 
         // Choose one — All creatures get -1/-1 until end of turn;

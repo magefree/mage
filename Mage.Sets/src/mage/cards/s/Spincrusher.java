@@ -26,13 +26,12 @@
  *  or implied, of BetaSteward_at_googlemail.com.
  */
 
-package mage.sets.darksteel;
+package mage.cards.s;
 
 import java.util.UUID;
 
 import mage.constants.CardType;
 import mage.constants.Duration;
-import mage.constants.Rarity;
 import mage.constants.Zone;
 import mage.MageInt;
 import mage.abilities.common.BlocksTriggeredAbility;
@@ -41,6 +40,7 @@ import mage.abilities.costs.common.RemoveCountersSourceCost;
 import mage.abilities.effects.common.combat.CantBeBlockedSourceEffect;
 import mage.abilities.effects.common.counter.AddCountersSourceEffect;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.counters.CounterType;
 
 /**
@@ -48,9 +48,8 @@ import mage.counters.CounterType;
  */
 public class Spincrusher extends CardImpl {
 
-    public Spincrusher(UUID ownerId) {
-        super(ownerId, 144, "Spincrusher", Rarity.UNCOMMON, new CardType[]{CardType.ARTIFACT, CardType.CREATURE}, "{2}");
-        this.expansionSetCode = "DST";
+    public Spincrusher(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.ARTIFACT,CardType.CREATURE},"{2}");
         this.subtype.add("Construct");
         this.power = new MageInt(0);
         this.toughness = new MageInt(2);

@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.betrayersofkamigawa;
+package mage.cards.h;
 
 import java.util.UUID;
 import mage.MageInt;
@@ -41,9 +41,9 @@ import mage.abilities.effects.common.continuous.GainAbilityTargetEffect;
 import mage.abilities.effects.common.counter.AddCountersSourceEffect;
 import mage.abilities.keyword.FearAbility;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Duration;
-import mage.constants.Rarity;
 import mage.constants.Zone;
 import mage.counters.CounterType;
 import mage.filter.common.FilterSpiritOrArcaneCard;
@@ -59,9 +59,8 @@ public class HiredMuscle extends CardImpl {
 
     private static final FilterSpiritOrArcaneCard filter = new FilterSpiritOrArcaneCard();
 
-    public HiredMuscle(UUID ownerId) {
-        super(ownerId, 69, "Hired Muscle", Rarity.UNCOMMON, new CardType[]{CardType.CREATURE}, "{1}{B}{B}");
-        this.expansionSetCode = "BOK";
+    public HiredMuscle(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{1}{B}{B}");
         this.subtype.add("Human");
         this.subtype.add("Warrior");
 

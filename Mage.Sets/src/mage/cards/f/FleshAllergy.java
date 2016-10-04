@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.scarsofmirrodin;
+package mage.cards.f;
 
 import java.util.UUID;
 import mage.MageObject;
@@ -34,9 +34,9 @@ import mage.abilities.costs.common.SacrificeTargetCost;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.DestroyTargetEffect;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Outcome;
-import mage.constants.Rarity;
 import mage.constants.WatcherScope;
 import mage.constants.Zone;
 import mage.game.Game;
@@ -55,9 +55,8 @@ import mage.watchers.Watcher;
  */
 public class FleshAllergy extends CardImpl {
 
-    public FleshAllergy(UUID ownerId) {
-        super(ownerId, 62, "Flesh Allergy", Rarity.UNCOMMON, new CardType[]{CardType.SORCERY}, "{2}{B}{B}");
-        this.expansionSetCode = "SOM";
+    public FleshAllergy(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{2}{B}{B}");
 
         // As an additional cost to cast Flesh Allergy, sacrifice a creature.
         // Destroy target creature. Its controller loses life equal to the number of creatures that died this turn.

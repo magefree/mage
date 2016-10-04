@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.kaladesh;
+package mage.cards.b;
 
 import java.util.UUID;
 import mage.abilities.condition.LockedInCondition;
@@ -35,9 +35,9 @@ import mage.abilities.effects.common.continuous.BoostTargetEffect;
 import mage.abilities.effects.common.continuous.GainAbilityTargetEffect;
 import mage.abilities.keyword.TrampleAbility;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Duration;
-import mage.constants.Rarity;
 import mage.target.common.TargetAttackingCreature;
 
 /**
@@ -46,9 +46,8 @@ import mage.target.common.TargetAttackingCreature;
  */
 public class BuiltToSmash extends CardImpl {
 
-    public BuiltToSmash(UUID ownerId) {
-        super(ownerId, 108, "Built to Smash", Rarity.COMMON, new CardType[]{CardType.INSTANT}, "{R}");
-        this.expansionSetCode = "KLD";
+    public BuiltToSmash(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.INSTANT},"{R}");
 
         // Target attacking creature gets +3/+3 until end of turn. If it's an artifact creature, it gains trample until end of turn.
         this.getSpellAbility().addEffect(new BoostTargetEffect(3, 3, Duration.EndOfTurn));

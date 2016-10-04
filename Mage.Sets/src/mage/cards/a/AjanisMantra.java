@@ -26,14 +26,14 @@
  *  or implied, of BetaSteward_at_googlemail.com.
  */
 
-package mage.sets.magic2011;
+package mage.cards.a;
 
 import java.util.UUID;
 import mage.abilities.common.OnEventTriggeredAbility;
 import mage.abilities.effects.common.GainLifeEffect;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.game.events.GameEvent.EventType;
 
 /**
@@ -42,9 +42,8 @@ import mage.game.events.GameEvent.EventType;
  */
 public class AjanisMantra extends CardImpl {
 
-    public AjanisMantra(UUID ownerId) {
-        super(ownerId, 2, "Ajani's Mantra", Rarity.COMMON, new CardType[]{CardType.ENCHANTMENT}, "{1}{W}");
-        this.expansionSetCode = "M11";
+    public AjanisMantra(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.ENCHANTMENT},"{1}{W}");
         this.addAbility(new OnEventTriggeredAbility(EventType.UPKEEP_STEP_PRE, "beginning of your upkeep", new GainLifeEffect(1), true));
     }
 

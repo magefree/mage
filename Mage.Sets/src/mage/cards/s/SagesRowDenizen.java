@@ -25,11 +25,10 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.gatecrash;
+package mage.cards.s;
 
 import java.util.UUID;
 import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.constants.TargetController;
 import mage.constants.Zone;
 import mage.MageInt;
@@ -38,6 +37,7 @@ import mage.abilities.Ability;
 import mage.abilities.common.EntersBattlefieldAllTriggeredAbility;
 import mage.abilities.effects.common.PutLibraryIntoGraveTargetEffect;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.filter.predicate.mageobject.ColorPredicate;
 import mage.filter.predicate.permanent.AnotherPredicate;
@@ -56,9 +56,8 @@ public class SagesRowDenizen extends CardImpl {
         filter.add(new AnotherPredicate());
         filter.add(new ControllerPredicate(TargetController.YOU));
     }
-    public SagesRowDenizen(UUID ownerId) {
-        super(ownerId, 46, "Sage's Row Denizen", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{2}{U}");
-        this.expansionSetCode = "GTC";
+    public SagesRowDenizen(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{2}{U}");
         this.subtype.add("Vedalken");
         this.subtype.add("Wizard");
 

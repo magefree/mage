@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.eldritchmoon;
+package mage.cards.c;
 
 import mage.MageInt;
 import mage.abilities.Ability;
@@ -49,11 +49,6 @@ import java.util.UUID;
  * @author LevelX2
  */
 public class ChitteringHost extends MeldCard {
-    // TODO: EJM - Remove this
-    public ChitteringHost(UUID ownerId) {
-        this(ownerId, new CardSetInfo("Chittering Host", "EMN", "96", Rarity.COMMON));
-    }
-
     public ChitteringHost(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "");
         this.subtype.add("Eldrazi");

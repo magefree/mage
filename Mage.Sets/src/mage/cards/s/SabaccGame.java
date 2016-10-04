@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.starwars;
+package mage.cards.s;
 
 import java.util.UUID;
 import mage.abilities.Ability;
@@ -33,10 +33,10 @@ import mage.abilities.effects.ContinuousEffect;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.continuous.GainControlTargetEffect;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Duration;
 import mage.constants.Outcome;
-import mage.constants.Rarity;
 import mage.constants.TargetController;
 import mage.filter.FilterPermanent;
 import mage.filter.predicate.other.PlayerIdPredicate;
@@ -59,9 +59,8 @@ public class SabaccGame extends CardImpl {
         filter.add(new ControllerPredicate(TargetController.OPPONENT));
     }
 
-    public SabaccGame(UUID ownerId) {
-        super(ownerId, 54, "Sabacc Game", Rarity.UNCOMMON, new CardType[]{CardType.SORCERY}, "{1}{U}");
-        this.expansionSetCode = "SWS";
+    public SabaccGame(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{1}{U}");
 
         // Almost the same as unimplemented Mogg Assassin from Exodus
         // Not exactly. Because the permanent choosen by opponent does not have the target word in rule text it is chosen during resolution.

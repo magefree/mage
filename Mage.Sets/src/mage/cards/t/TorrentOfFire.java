@@ -25,15 +25,15 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.scourge;
+package mage.cards.t;
 
 import java.util.UUID;
 
 import mage.abilities.dynamicvalue.common.HighestConvertedManaCostValue;
 import mage.abilities.effects.common.DamageTargetEffect;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.target.common.TargetCreatureOrPlayer;
 
 /**
@@ -42,9 +42,8 @@ import mage.target.common.TargetCreatureOrPlayer;
  */
 public class TorrentOfFire extends CardImpl {
 
-    public TorrentOfFire(UUID ownerId) {
-        super(ownerId, 107, "Torrent of Fire", Rarity.COMMON, new CardType[]{CardType.SORCERY}, "{3}{R}{R}");
-        this.expansionSetCode = "SCG";
+    public TorrentOfFire(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{3}{R}{R}");
 
         // Torrent of Fire deals damage equal to the highest converted mana cost among permanents you control to target creature or player.
         this.getSpellAbility().addEffect(new DamageTargetEffect(new HighestConvertedManaCostValue()));

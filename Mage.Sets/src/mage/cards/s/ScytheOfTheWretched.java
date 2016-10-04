@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.mirrodin;
+package mage.cards.s;
 
 import java.util.UUID;
 import mage.MageObjectReference;
@@ -40,10 +40,10 @@ import mage.abilities.effects.common.continuous.BoostEquippedEffect;
 import mage.abilities.keyword.EquipAbility;
 import mage.cards.Card;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Duration;
 import mage.constants.Outcome;
-import mage.constants.Rarity;
 import mage.constants.Zone;
 import mage.game.Game;
 import mage.game.events.GameEvent;
@@ -60,9 +60,8 @@ import mage.target.targetpointer.TargetPointer;
  */
 public class ScytheOfTheWretched extends CardImpl {
 
-    public ScytheOfTheWretched(UUID ownerId) {
-        super(ownerId, 239, "Scythe of the Wretched", Rarity.RARE, new CardType[]{CardType.ARTIFACT}, "{2}");
-        this.expansionSetCode = "MRD";
+    public ScytheOfTheWretched(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.ARTIFACT},"{2}");
         this.subtype.add("Equipment");
 
         // Equipped creature gets +2/+2.

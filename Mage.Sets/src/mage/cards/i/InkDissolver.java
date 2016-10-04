@@ -25,15 +25,15 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.morningtide;
+package mage.cards.i;
 
 import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.abilityword.KinshipAbility;
 import mage.abilities.effects.common.PutTopCardOfLibraryIntoGraveEachPlayerEffect;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.constants.TargetController;
 
 /**
@@ -42,9 +42,8 @@ import mage.constants.TargetController;
  */
 public class InkDissolver extends CardImpl {
 
-    public InkDissolver(UUID ownerId) {
-        super(ownerId, 36, "Ink Dissolver", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{1}{U}");
-        this.expansionSetCode = "MOR";
+    public InkDissolver(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{1}{U}");
         this.subtype.add("Merfolk");
         this.subtype.add("Wizard");
 

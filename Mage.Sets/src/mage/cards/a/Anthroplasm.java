@@ -25,13 +25,12 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.urzaslegacy;
+package mage.cards.a;
 
 import java.util.UUID;
 
 import mage.constants.CardType;
 import mage.constants.Outcome;
-import mage.constants.Rarity;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.EntersBattlefieldAbility;
@@ -41,6 +40,7 @@ import mage.abilities.costs.mana.ManaCostsImpl;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.counter.AddCountersSourceEffect;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.Zone;
 import mage.counters.CounterType;
 import mage.game.Game;
@@ -52,9 +52,8 @@ import mage.game.permanent.Permanent;
  */
 public class Anthroplasm extends CardImpl {
 
-    public Anthroplasm(UUID ownerId) {
-        super(ownerId, 25, "Anthroplasm", Rarity.RARE, new CardType[]{CardType.CREATURE}, "{2}{U}{U}");
-        this.expansionSetCode = "ULG";
+    public Anthroplasm(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{2}{U}{U}");
         this.subtype.add("Shapeshifter");
 
         this.power = new MageInt(0);

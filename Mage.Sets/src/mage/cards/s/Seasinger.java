@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.fallenempires;
+package mage.cards.s;
 
 import java.util.UUID;
 
@@ -42,6 +42,7 @@ import mage.abilities.decorator.ConditionalContinuousEffect;
 import mage.abilities.effects.common.SacrificeSourceEffect;
 import mage.abilities.effects.common.continuous.GainControlTargetEffect;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.filter.Filter;
 import mage.filter.FilterPermanent;
 import mage.filter.common.FilterCreaturePermanent;
@@ -67,9 +68,8 @@ public class Seasinger extends CardImpl {
         islandYouControl.add(new ControllerPredicate(TargetController.YOU));
     }
 
-    public Seasinger(UUID ownerId) {
-        super(ownerId, 52, "Seasinger", Rarity.UNCOMMON, new CardType[]{CardType.CREATURE}, "{1}{U}{U}");
-        this.expansionSetCode = "FEM";
+    public Seasinger(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{1}{U}{U}");
         this.subtype.add("Merfolk");
 
         this.power = new MageInt(0);

@@ -25,14 +25,14 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.gatecrash;
+package mage.cards.s;
 
 import java.util.UUID;
 import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.abilities.effects.common.CipherEffect;
 import mage.abilities.effects.common.LoseLifeTargetEffect;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.target.common.TargetOpponent;
 
 /**
@@ -41,9 +41,8 @@ import mage.target.common.TargetOpponent;
  */
 public class ShadowSlice extends CardImpl {
 
-    public ShadowSlice (UUID ownerId) {
-        super(ownerId, 77, "Shadow Slice", Rarity.COMMON, new CardType[]{CardType.SORCERY}, "{4}{B}");
-        this.expansionSetCode = "GTC";
+    public ShadowSlice (UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{4}{B}");
 
 
         // Target Opponent loses 3 life.

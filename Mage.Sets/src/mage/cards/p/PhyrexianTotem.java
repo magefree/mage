@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.phyrexiavsthecoalition;
+package mage.cards.p;
 
 import java.util.UUID;
 import mage.MageInt;
@@ -38,9 +38,9 @@ import mage.abilities.effects.common.continuous.BecomesCreatureSourceEffect;
 import mage.abilities.keyword.TrampleAbility;
 import mage.abilities.mana.BlackManaAbility;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Duration;
-import mage.constants.Rarity;
 import mage.constants.Zone;
 import mage.filter.common.FilterControlledPermanent;
 import mage.game.Game;
@@ -55,9 +55,8 @@ import mage.target.targetpointer.FixedTarget;
  */
 public class PhyrexianTotem extends CardImpl {
 
-    public PhyrexianTotem(UUID ownerId) {
-        super(ownerId, 20, "Phyrexian Totem", Rarity.UNCOMMON, new CardType[]{CardType.ARTIFACT}, "{3}");
-        this.expansionSetCode = "DDE";
+    public PhyrexianTotem(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.ARTIFACT},"{3}");
 
         // {tap}: Add {B} to your mana pool.
         this.addAbility(new BlackManaAbility());

@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.kaladesh;
+package mage.cards.a;
 
 import java.util.UUID;
 import mage.abilities.Ability;
@@ -37,8 +37,8 @@ import mage.abilities.effects.Effect;
 import mage.abilities.effects.common.DamageTargetEffect;
 import mage.abilities.effects.common.GainLifeEffect;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.constants.Zone;
 import mage.game.Game;
 import mage.target.common.TargetCreatureOrPlayer;
@@ -50,9 +50,8 @@ import mage.watchers.common.CastSpellLastTurnWatcher;
  */
 public class AetherfluxReservoir extends CardImpl {
 
-    public AetherfluxReservoir(UUID ownerId) {
-        super(ownerId, 192, "Aetherflux Reservoir", Rarity.RARE, new CardType[]{CardType.ARTIFACT}, "{4}");
-        this.expansionSetCode = "KLD";
+    public AetherfluxReservoir(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.ARTIFACT},"{4}");
 
         // Whenever you cast a spell, you gain 1 life for each spell you've cast this turn.
         this.addAbility(new SpellCastControllerTriggeredAbility(new GainLifeEffect(new AetherfluxReservoirDynamicValue()), false));

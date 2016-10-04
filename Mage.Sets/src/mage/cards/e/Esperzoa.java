@@ -26,7 +26,7 @@
  *  or implied, of BetaSteward_at_googlemail.com.
  */
 
-package mage.sets.conflux;
+package mage.cards.e;
 
 import java.util.UUID;
 import mage.MageInt;
@@ -34,8 +34,8 @@ import mage.abilities.common.BeginningOfUpkeepTriggeredAbility;
 import mage.abilities.effects.common.ReturnToHandChosenControlledPermanentEffect;
 import mage.abilities.keyword.FlyingAbility;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.constants.TargetController;
 import mage.filter.common.FilterControlledArtifactPermanent;
 
@@ -46,9 +46,8 @@ import mage.filter.common.FilterControlledArtifactPermanent;
 public class Esperzoa extends CardImpl {
 
     
-    public Esperzoa (UUID ownerId) {
-        super(ownerId, 25, "Esperzoa", Rarity.UNCOMMON, new CardType[]{CardType.ARTIFACT, CardType.CREATURE}, "{2}{U}");
-        this.expansionSetCode = "CON";
+    public Esperzoa (UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.ARTIFACT,CardType.CREATURE},"{2}{U}");
         this.subtype.add("Jellyfish");
 
         this.power = new MageInt(4);

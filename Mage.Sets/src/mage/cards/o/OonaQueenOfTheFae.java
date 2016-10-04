@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.shadowmoor;
+package mage.cards.o;
 
 import java.util.UUID;
 import mage.MageInt;
@@ -37,10 +37,10 @@ import mage.abilities.effects.common.CreateTokenEffect;
 import mage.abilities.keyword.FlyingAbility;
 import mage.cards.Card;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.choices.ChoiceColor;
 import mage.constants.CardType;
 import mage.constants.Outcome;
-import mage.constants.Rarity;
 import mage.constants.Zone;
 import mage.game.Game;
 import mage.game.permanent.token.Token;
@@ -53,9 +53,8 @@ import mage.target.common.TargetOpponent;
  */
 public class OonaQueenOfTheFae extends CardImpl {
 
-    public OonaQueenOfTheFae(UUID ownerId) {
-        super(ownerId, 172, "Oona, Queen of the Fae", Rarity.RARE, new CardType[]{CardType.CREATURE}, "{3}{U/B}{U/B}{U/B}");
-        this.expansionSetCode = "SHM";
+    public OonaQueenOfTheFae(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{3}{U/B}{U/B}{U/B}");
         this.supertype.add("Legendary");
         this.subtype.add("Faerie");
         this.subtype.add("Wizard");

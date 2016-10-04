@@ -25,16 +25,16 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.darkascension;
+package mage.cards.v;
 
 import java.util.UUID;
 import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.MageInt;
 import mage.abilities.keyword.TrampleAbility;
 import mage.abilities.keyword.UndyingAbility;
 import mage.abilities.keyword.VigilanceAbility;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 
 /**
  *
@@ -42,9 +42,8 @@ import mage.cards.CardImpl;
  */
 public class Vorapede extends CardImpl {
 
-    public Vorapede(UUID ownerId) {
-        super(ownerId, 131, "Vorapede", Rarity.MYTHIC, new CardType[]{CardType.CREATURE}, "{2}{G}{G}{G}");
-        this.expansionSetCode = "DKA";
+    public Vorapede(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{2}{G}{G}{G}");
         this.subtype.add("Insect");
 
         this.power = new MageInt(5);

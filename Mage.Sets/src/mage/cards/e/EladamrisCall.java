@@ -25,13 +25,13 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.planeshift;
+package mage.cards.e;
 
 import java.util.UUID;
 import mage.abilities.effects.common.search.SearchLibraryPutInHandEffect;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.filter.FilterCard;
 import mage.filter.predicate.mageobject.CardTypePredicate;
 import mage.target.common.TargetCardInLibrary;
@@ -48,9 +48,8 @@ public class EladamrisCall extends CardImpl {
         filter.add(new CardTypePredicate(CardType.CREATURE));
     }
     
-    public EladamrisCall(UUID ownerId) {
-        super(ownerId, 106, "Eladamri's Call", Rarity.RARE, new CardType[]{CardType.INSTANT}, "{G}{W}");
-        this.expansionSetCode = "PLS";
+    public EladamrisCall(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.INSTANT},"{G}{W}");
 
         // Search your library for a creature card, reveal that card, and put it into your hand. Then shuffle your library.
         this.getSpellAbility().addEffect(new SearchLibraryPutInHandEffect(new TargetCardInLibrary(filter), true, true));

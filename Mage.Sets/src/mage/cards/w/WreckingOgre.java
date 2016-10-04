@@ -25,12 +25,11 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.gatecrash;
+package mage.cards.w;
 
 import java.util.UUID;
 import mage.constants.CardType;
 import mage.constants.Duration;
-import mage.constants.Rarity;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.effects.common.continuous.BoostTargetEffect;
@@ -38,6 +37,7 @@ import mage.abilities.effects.common.continuous.GainAbilityTargetEffect;
 import mage.abilities.keyword.BloodrushAbility;
 import mage.abilities.keyword.DoubleStrikeAbility;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 
 /**
  *
@@ -45,9 +45,8 @@ import mage.cards.CardImpl;
  */
 public class WreckingOgre extends CardImpl {
 
-    public WreckingOgre(UUID ownerId) {
-        super(ownerId, 112, "Wrecking Ogre", Rarity.RARE, new CardType[]{CardType.CREATURE}, "{4}{R}");
-        this.expansionSetCode = "GTC";
+    public WreckingOgre(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{4}{R}");
         this.subtype.add("Ogre");
         this.subtype.add("Warrior");
 

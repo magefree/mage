@@ -25,12 +25,11 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.ravnica;
+package mage.cards.g;
 
 import java.util.UUID;
 
 import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.MageInt;
 import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.common.SimpleStaticAbility;
@@ -39,6 +38,7 @@ import mage.abilities.effects.common.combat.MustBeBlockedByAtLeastOneSourceEffec
 import mage.abilities.effects.common.continuous.BoostSourceEffect;
 import mage.abilities.keyword.HasteAbility;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.Duration;
 import mage.constants.Zone;
 
@@ -48,9 +48,8 @@ import mage.constants.Zone;
  */
 public class GoblinFireFiend extends CardImpl {
 
-    public GoblinFireFiend(UUID ownerId) {
-        super(ownerId, 127, "Goblin Fire Fiend", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{3}{R}");
-        this.expansionSetCode = "RAV";
+    public GoblinFireFiend(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{3}{R}");
         this.subtype.add("Goblin");
         this.subtype.add("Berserker");
 

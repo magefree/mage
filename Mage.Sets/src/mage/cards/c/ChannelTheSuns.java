@@ -25,14 +25,14 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.fifthdawn;
+package mage.cards.c;
 
 import mage.Mana;
 import mage.abilities.effects.Effect;
 import mage.abilities.effects.common.AddManaToManaPoolSourceControllerEffect;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.Rarity;
 
 import java.util.UUID;
 
@@ -42,9 +42,8 @@ import java.util.UUID;
  */
 public class ChannelTheSuns extends CardImpl {
 
-    public ChannelTheSuns(UUID ownerId) {
-        super(ownerId, 84, "Channel the Suns", Rarity.UNCOMMON, new CardType[]{CardType.SORCERY}, "{3}{G}");
-        this.expansionSetCode = "5DN";
+    public ChannelTheSuns(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{3}{G}");
 
 
         // Add {W}{U}{B}{R}{G} to your mana pool.

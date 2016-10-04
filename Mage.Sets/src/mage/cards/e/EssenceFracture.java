@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.onslaught;
+package mage.cards.e;
 
 import java.util.UUID;
 import mage.abilities.costs.mana.ManaCostsImpl;
@@ -33,8 +33,8 @@ import mage.abilities.effects.Effect;
 import mage.abilities.effects.common.ReturnToHandTargetEffect;
 import mage.abilities.keyword.CyclingAbility;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.target.common.TargetCreaturePermanent;
 
 /**
@@ -43,9 +43,8 @@ import mage.target.common.TargetCreaturePermanent;
  */
 public class EssenceFracture extends CardImpl {
 
-    public EssenceFracture(UUID ownerId) {
-        super(ownerId, 82, "Essence Fracture", Rarity.UNCOMMON, new CardType[]{CardType.SORCERY}, "{3}{U}{U}");
-        this.expansionSetCode = "ONS";
+    public EssenceFracture(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{3}{U}{U}");
 
         // Return two target creatures to their owners' hands.
         Effect effect = new ReturnToHandTargetEffect();

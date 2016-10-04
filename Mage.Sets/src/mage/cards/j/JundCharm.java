@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.shardsofalara;
+package mage.cards.j;
 
 import java.util.UUID;
 import mage.abilities.Mode;
@@ -33,9 +33,9 @@ import mage.abilities.effects.common.DamageAllEffect;
 import mage.abilities.effects.common.ExileGraveyardAllTargetPlayerEffect;
 import mage.abilities.effects.common.counter.AddCountersTargetEffect;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Outcome;
-import mage.constants.Rarity;
 import mage.counters.CounterType;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.target.TargetPlayer;
@@ -47,9 +47,8 @@ import mage.target.common.TargetCreaturePermanent;
  */
 public class JundCharm extends CardImpl {
 
-    public JundCharm(UUID ownerId) {
-        super(ownerId, 175, "Jund Charm", Rarity.UNCOMMON, new CardType[]{CardType.INSTANT}, "{B}{R}{G}");
-        this.expansionSetCode = "ALA";
+    public JundCharm(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.INSTANT},"{B}{R}{G}");
 
 
         // Choose one - Exile all cards from target player's graveyard;

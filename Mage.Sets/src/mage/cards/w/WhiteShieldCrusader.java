@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.coldsnap;
+package mage.cards.w;
 
 import java.util.UUID;
 import mage.MageInt;
@@ -37,9 +37,9 @@ import mage.abilities.effects.common.continuous.GainAbilitySourceEffect;
 import mage.abilities.keyword.FlyingAbility;
 import mage.abilities.keyword.ProtectionAbility;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Duration;
-import mage.constants.Rarity;
 import mage.constants.Zone;
 import mage.filter.FilterCard;
 import mage.filter.predicate.mageobject.ColorPredicate;
@@ -57,9 +57,8 @@ public class WhiteShieldCrusader extends CardImpl {
         filter.add(new ColorPredicate(ObjectColor.BLACK));
     }
 
-    public WhiteShieldCrusader(UUID ownerId) {
-        super(ownerId, 24, "White Shield Crusader", Rarity.UNCOMMON, new CardType[]{CardType.CREATURE}, "{W}{W}");
-        this.expansionSetCode = "CSP";
+    public WhiteShieldCrusader(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{W}{W}");
         this.subtype.add("Human");
         this.subtype.add("Knight");
         this.power = new MageInt(2);

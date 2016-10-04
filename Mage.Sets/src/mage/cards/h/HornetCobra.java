@@ -25,14 +25,14 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.legends;
+package mage.cards.h;
 
 import java.util.UUID;
 import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.MageInt;
 import mage.abilities.keyword.FirstStrikeAbility;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 
 /**
  *
@@ -40,9 +40,8 @@ import mage.cards.CardImpl;
  */
 public class HornetCobra extends CardImpl {
 
-    public HornetCobra(UUID ownerId) {
-        super(ownerId, 104, "Hornet Cobra", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{1}{G}{G}");
-        this.expansionSetCode = "LEG";
+    public HornetCobra(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{1}{G}{G}");
         this.subtype.add("Snake");
 
         this.power = new MageInt(2);

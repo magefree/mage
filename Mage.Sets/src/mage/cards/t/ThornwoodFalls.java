@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.khansoftarkir;
+package mage.cards.t;
 
 import java.util.UUID;
 import mage.abilities.common.EntersBattlefieldTappedAbility;
@@ -34,8 +34,8 @@ import mage.abilities.effects.common.GainLifeEffect;
 import mage.abilities.mana.BlueManaAbility;
 import mage.abilities.mana.GreenManaAbility;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.Rarity;
 
 /**
  *
@@ -43,9 +43,8 @@ import mage.constants.Rarity;
  */
 public class ThornwoodFalls extends CardImpl {
 
-    public ThornwoodFalls(UUID ownerId) {
-        super(ownerId, 244, "Thornwood Falls", Rarity.COMMON, new CardType[]{CardType.LAND}, "");
-        this.expansionSetCode = "KTK";
+    public ThornwoodFalls(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.LAND},"");
 
         // Thornwood Falls enters the battlefield tapped.
         this.addAbility(new EntersBattlefieldTappedAbility());

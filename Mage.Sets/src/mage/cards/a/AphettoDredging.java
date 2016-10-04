@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.onslaught;
+package mage.cards.a;
 
 import java.util.UUID;
 import mage.abilities.Ability;
@@ -33,12 +33,12 @@ import mage.abilities.SpellAbility;
 import mage.abilities.effects.Effect;
 import mage.abilities.effects.common.ReturnFromGraveyardToHandTargetEffect;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.cards.repository.CardRepository;
 import mage.choices.Choice;
 import mage.choices.ChoiceImpl;
 import mage.constants.CardType;
 import mage.constants.Outcome;
-import mage.constants.Rarity;
 import mage.filter.common.FilterCreatureCard;
 import mage.filter.predicate.mageobject.SubtypePredicate;
 import mage.game.Game;
@@ -51,9 +51,8 @@ import mage.target.common.TargetCardInYourGraveyard;
  */
 public class AphettoDredging extends CardImpl {
 
-    public AphettoDredging(UUID ownerId) {
-        super(ownerId, 125, "Aphetto Dredging", Rarity.COMMON, new CardType[]{CardType.SORCERY}, "{3}{B}");
-        this.expansionSetCode = "ONS";
+    public AphettoDredging(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{3}{B}");
 
         // Return up to three target creature cards of the creature type of your choice from your graveyard to your hand.
         Effect effect = new ReturnFromGraveyardToHandTargetEffect();

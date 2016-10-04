@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.newphyrexia;
+package mage.cards.u;
 
 import java.util.UUID;
 import mage.abilities.Ability;
@@ -33,12 +33,12 @@ import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.effects.ContinuousEffectImpl;
 import mage.abilities.effects.RestrictionEffect;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Duration;
 import mage.constants.Layer;
 import mage.constants.Outcome;
 import mage.constants.PhaseStep;
-import mage.constants.Rarity;
 import mage.constants.SubLayer;
 import mage.constants.Zone;
 import mage.filter.common.FilterArtifactPermanent;
@@ -51,9 +51,8 @@ import mage.game.permanent.Permanent;
  */
 public class UnwindingClock extends CardImpl {
 
-    public UnwindingClock(UUID ownerId) {
-        super(ownerId, 164, "Unwinding Clock", Rarity.RARE, new CardType[]{CardType.ARTIFACT}, "{4}");
-        this.expansionSetCode = "NPH";
+    public UnwindingClock(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.ARTIFACT},"{4}");
 
         // Untap all artifacts you control during each other player's untap step.
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new UnwindingClockEffect()));

@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.zendikar;
+package mage.cards.w;
 
 import java.util.ArrayList;
 import java.util.HashSet;
@@ -35,7 +35,6 @@ import java.util.UUID;
 
 import mage.constants.CardType;
 import mage.constants.Outcome;
-import mage.constants.Rarity;
 import mage.constants.TargetController;
 import mage.MageInt;
 import mage.abilities.Ability;
@@ -43,6 +42,7 @@ import mage.abilities.common.BeginningOfUpkeepTriggeredAbility;
 import mage.abilities.effects.OneShotEffect;
 import mage.cards.Card;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.choices.Choice;
 import mage.choices.ChoiceImpl;
 import mage.filter.common.FilterControlledPermanent;
@@ -59,9 +59,8 @@ import mage.target.common.TargetControlledPermanent;
  */
 public class WorldQueller extends CardImpl {
 
-    public WorldQueller(UUID ownerId) {
-        super(ownerId, 39, "World Queller", Rarity.RARE, new CardType[]{CardType.CREATURE}, "{3}{W}{W}");
-        this.expansionSetCode = "ZEN";
+    public WorldQueller(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{3}{W}{W}");
         this.subtype.add("Avatar");
 
         this.power = new MageInt(4);

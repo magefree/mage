@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.fifthedition;
+package mage.cards.t;
 
 import java.util.UUID;
 import mage.abilities.Ability;
@@ -37,9 +37,9 @@ import mage.abilities.costs.mana.ManaCostsImpl;
 import mage.abilities.decorator.ConditionalContinuousEffect;
 import mage.abilities.effects.common.continuous.BoostTargetEffect;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Duration;
-import mage.constants.Rarity;
 import mage.constants.Zone;
 import mage.target.common.TargetCreaturePermanent;
 
@@ -49,9 +49,8 @@ import mage.target.common.TargetCreaturePermanent;
  */
 public class TawnossWeaponry extends CardImpl {
 
-    public TawnossWeaponry(UUID ownerId) {
-        super(ownerId, 401, "Tawnos's Weaponry", Rarity.UNCOMMON, new CardType[]{CardType.ARTIFACT}, "{2}");
-        this.expansionSetCode = "5ED";
+    public TawnossWeaponry(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.ARTIFACT},"{2}");
 
         // You may choose not to untap Tawnos's Weaponry during your untap step.
         this.addAbility(new SkipUntapOptionalAbility());

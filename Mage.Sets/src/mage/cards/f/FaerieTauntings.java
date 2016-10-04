@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.lorwyn;
+package mage.cards.f;
 
 import java.util.UUID;
 import mage.abilities.common.SpellCastControllerTriggeredAbility;
@@ -33,8 +33,8 @@ import mage.abilities.condition.common.OnOpponentsTurnCondition;
 import mage.abilities.decorator.ConditionalTriggeredAbility;
 import mage.abilities.effects.common.LoseLifeOpponentsEffect;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.Rarity;
 
 /**
  *
@@ -42,9 +42,8 @@ import mage.constants.Rarity;
  */
 public class FaerieTauntings extends CardImpl {
 
-    public FaerieTauntings(UUID ownerId) {
-        super(ownerId, 112, "Faerie Tauntings", Rarity.UNCOMMON, new CardType[]{CardType.TRIBAL, CardType.ENCHANTMENT}, "{2}{B}");
-        this.expansionSetCode = "LRW";
+    public FaerieTauntings(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.TRIBAL,CardType.ENCHANTMENT},"{2}{B}");
         this.subtype.add("Faerie");
 
         // Whenever you cast a spell during an opponent's turn, you may have each opponent lose 1 life

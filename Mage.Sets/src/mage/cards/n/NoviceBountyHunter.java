@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.starwars;
+package mage.cards.n;
 
 import java.util.UUID;
 import mage.MageInt;
@@ -33,8 +33,8 @@ import mage.abilities.Ability;
 import mage.abilities.effects.common.DamageTargetEffect;
 import mage.abilities.keyword.BountyAbility;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.target.TargetPlayer;
 
 /**
@@ -43,9 +43,8 @@ import mage.target.TargetPlayer;
  */
 public class NoviceBountyHunter extends CardImpl {
 
-    public NoviceBountyHunter(UUID ownerId) {
-        super(ownerId, 115, "Novice Bounty Hunter", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{1}{R}");
-        this.expansionSetCode = "SWS";
+    public NoviceBountyHunter(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{1}{R}");
         this.subtype.add("Human");
         this.subtype.add("Hunter");
         this.power = new MageInt(2);

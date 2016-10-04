@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.commander;
+package mage.cards.n;
 
 import java.util.UUID;
 import mage.MageInt;
@@ -35,9 +35,9 @@ import mage.abilities.costs.common.TapSourceCost;
 import mage.abilities.costs.mana.ManaCostsImpl;
 import mage.abilities.effects.OneShotEffect;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Outcome;
-import mage.constants.Rarity;
 import mage.constants.Zone;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
@@ -50,9 +50,8 @@ import mage.target.common.TargetCreaturePermanent;
  */
 public class NinThePainArtist extends CardImpl {
 
-    public NinThePainArtist(UUID ownerId) {
-        super(ownerId, 213, "Nin, the Pain Artist", Rarity.RARE, new CardType[]{CardType.CREATURE}, "{U}{R}");
-        this.expansionSetCode = "CMD";
+    public NinThePainArtist(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{U}{R}");
         this.supertype.add("Legendary");
         this.subtype.add("Vedalken");
         this.subtype.add("Wizard");

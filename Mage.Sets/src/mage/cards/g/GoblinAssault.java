@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.shardsofalara;
+package mage.cards.g;
 
 import java.util.UUID;
 import mage.abilities.common.BeginningOfUpkeepTriggeredAbility;
@@ -33,9 +33,9 @@ import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.effects.common.CreateTokenEffect;
 import mage.abilities.effects.common.combat.AttacksIfAbleAllEffect;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Duration;
-import mage.constants.Rarity;
 import mage.constants.TargetController;
 import mage.constants.Zone;
 import mage.filter.common.FilterCreaturePermanent;
@@ -55,9 +55,8 @@ public class GoblinAssault extends CardImpl {
         filter.add(new SubtypePredicate("Goblin"));
     }
 
-    public GoblinAssault(UUID ownerId) {
-        super(ownerId, 101, "Goblin Assault", Rarity.RARE, new CardType[]{CardType.ENCHANTMENT}, "{2}{R}");
-        this.expansionSetCode = "ALA";
+    public GoblinAssault(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.ENCHANTMENT},"{2}{R}");
 
         // At the beginning of your upkeep, put a 1/1 red Goblin creature token with haste onto the battlefield.
         this.addAbility(new BeginningOfUpkeepTriggeredAbility(new CreateTokenEffect(new GoblinTokenWithHaste()), TargetController.YOU, false));

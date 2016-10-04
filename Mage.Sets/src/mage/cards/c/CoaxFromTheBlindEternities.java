@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.eldritchmoon;
+package mage.cards.c;
 
 import java.util.List;
 import java.util.Set;
@@ -35,11 +35,11 @@ import mage.abilities.Ability;
 import mage.abilities.effects.OneShotEffect;
 import mage.cards.Card;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.cards.Cards;
 import mage.cards.CardsImpl;
 import mage.constants.CardType;
 import mage.constants.Outcome;
-import mage.constants.Rarity;
 import mage.constants.Zone;
 import mage.filter.FilterCard;
 import mage.filter.predicate.mageobject.SubtypePredicate;
@@ -53,9 +53,8 @@ import mage.target.TargetCard;
  */
 public class CoaxFromTheBlindEternities extends CardImpl {
 
-    public CoaxFromTheBlindEternities(UUID ownerId) {
-        super(ownerId, 51, "Coax from the Blind Eternities", Rarity.RARE, new CardType[]{CardType.SORCERY}, "{2}{U}");
-        this.expansionSetCode = "EMN";
+    public CoaxFromTheBlindEternities(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{2}{U}");
 
         // You may choose an Eldrazi card you own from outside the game or in exile, reveal that card, and put it into your hand.
         this.getSpellAbility().addEffect(new CoaxFromTheBlindEternitiesEffect());

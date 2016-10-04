@@ -25,15 +25,15 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.portalsecondage;
+package mage.cards.f;
 
 import java.util.UUID;
 import mage.abilities.dynamicvalue.DynamicValue;
 import mage.abilities.dynamicvalue.common.PermanentsOnBattlefieldCount;
 import mage.abilities.effects.common.GainLifeEffect;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.filter.common.FilterControlledCreaturePermanent;
 
 /**
@@ -42,9 +42,8 @@ import mage.filter.common.FilterControlledCreaturePermanent;
  */
 public class FestivalOfTrokin extends CardImpl {
 
-    public FestivalOfTrokin(UUID ownerId) {
-        super(ownerId, 136, "Festival of Trokin", Rarity.COMMON, new CardType[]{CardType.SORCERY}, "{W}");
-        this.expansionSetCode = "PO2";
+    public FestivalOfTrokin(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{W}");
 
         // You gain 2 life for each creature you control.
         DynamicValue amount = new PermanentsOnBattlefieldCount(new FilterControlledCreaturePermanent(), 2);

@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.tempest;
+package mage.cards.p;
 
 import java.util.UUID;
 import mage.abilities.Ability;
@@ -33,11 +33,11 @@ import mage.abilities.common.BeginningOfUpkeepTriggeredAbility;
 import mage.abilities.effects.OneShotEffect;
 import mage.cards.Card;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.cards.Cards;
 import mage.cards.CardsImpl;
 import mage.constants.CardType;
 import mage.constants.Outcome;
-import mage.constants.Rarity;
 import mage.constants.TargetController;
 import mage.constants.Zone;
 import mage.game.Game;
@@ -52,9 +52,8 @@ public class Precognition extends CardImpl {
     
     private static final String rule = "At the beginning of your upkeep, you may look at the top card of target opponent's library. You may put that card on the bottom of that player's library.";
 
-    public Precognition(UUID ownerId) {
-        super(ownerId, 79, "Precognition", Rarity.RARE, new CardType[]{CardType.ENCHANTMENT}, "{4}{U}");
-        this.expansionSetCode = "TMP";
+    public Precognition(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.ENCHANTMENT},"{4}{U}");
 
         // At the beginning of your upkeep, you may look at the top card of target opponent's library. If you do, you may put that card on the bottom of that player's library.
         Ability ability = new BeginningOfUpkeepTriggeredAbility(Zone.BATTLEFIELD, new PrecognitionEffect(), TargetController.YOU, true, false, rule);

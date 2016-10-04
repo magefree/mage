@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.urzassaga;
+package mage.cards.r;
 
 import java.util.UUID;
 
@@ -37,6 +37,7 @@ import mage.abilities.costs.mana.ManaCostsImpl;
 import mage.abilities.effects.PreventionEffectImpl;
 import mage.abilities.keyword.CyclingAbility;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.filter.FilterObject;
 import mage.filter.predicate.mageobject.ColorPredicate;
 import mage.game.Game;
@@ -49,9 +50,8 @@ import mage.target.TargetSource;
  */
 public class RuneOfProtectionBlack extends CardImpl {
 
-    public RuneOfProtectionBlack(UUID ownerId) {
-        super(ownerId, 36, "Rune of Protection: Black", Rarity.COMMON, new CardType[]{CardType.ENCHANTMENT}, "{1}{W}");
-        this.expansionSetCode = "USG";
+    public RuneOfProtectionBlack(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.ENCHANTMENT},"{1}{W}");
 
 
 		// {W}: The next time a black source of your choice would deal damage to you this turn, prevent that damage.

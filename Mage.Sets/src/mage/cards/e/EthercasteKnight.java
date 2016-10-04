@@ -26,14 +26,14 @@
  *  or implied, of BetaSteward_at_googlemail.com.
  */
 
-package mage.sets.alarareborn;
+package mage.cards.e;
 
 import java.util.UUID;
 import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.MageInt;
 import mage.abilities.keyword.ExaltedAbility;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 
 /**
  *
@@ -41,9 +41,8 @@ import mage.cards.CardImpl;
  */
 public class EthercasteKnight extends CardImpl {
 
-    public EthercasteKnight (UUID ownerId) {
-        super(ownerId, 3, "Ethercaste Knight", Rarity.COMMON, new CardType[]{CardType.ARTIFACT, CardType.CREATURE}, "{W}{U}");
-        this.expansionSetCode = "ARB";
+    public EthercasteKnight (UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.ARTIFACT,CardType.CREATURE},"{W}{U}");
         this.subtype.add("Human");
         this.subtype.add("Knight");
 

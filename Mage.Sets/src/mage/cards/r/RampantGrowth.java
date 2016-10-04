@@ -26,13 +26,13 @@
  *  or implied, of BetaSteward_at_googlemail.com.
  */
 
-package mage.sets.magic2010;
+package mage.cards.r;
 
 import java.util.UUID;
 import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.abilities.effects.common.search.SearchLibraryPutInPlayEffect;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.filter.common.FilterBasicLandCard;
 import mage.target.common.TargetCardInLibrary;
 
@@ -42,9 +42,8 @@ import mage.target.common.TargetCardInLibrary;
  */
 public class RampantGrowth extends CardImpl {
 
-    public RampantGrowth(UUID ownerId){
-        super(ownerId, 201, "Rampant Growth", Rarity.COMMON, new CardType[]{CardType.SORCERY}, "{1}{G}");
-        this.expansionSetCode = "M10";
+    public RampantGrowth(UUID ownerId, CardSetInfo setInfo){
+        super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{1}{G}");
 
         TargetCardInLibrary target = new TargetCardInLibrary(new FilterBasicLandCard());
         this.getSpellAbility().addEffect(new SearchLibraryPutInPlayEffect(target, true));

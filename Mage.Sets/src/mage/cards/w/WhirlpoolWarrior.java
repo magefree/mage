@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.planechase2012;
+package mage.cards.w;
 
 import java.util.LinkedHashMap;
 import java.util.Map;
@@ -40,9 +40,9 @@ import mage.abilities.costs.mana.ManaCostsImpl;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.ShuffleHandIntoLibraryDrawThatManySourceEffect;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Outcome;
-import mage.constants.Rarity;
 import mage.constants.Zone;
 import mage.game.Game;
 import mage.players.Player;
@@ -53,9 +53,8 @@ import mage.players.Player;
  */
 public class WhirlpoolWarrior extends CardImpl {
 
-    public WhirlpoolWarrior(UUID ownerId) {
-        super(ownerId, 29, "Whirlpool Warrior", Rarity.RARE, new CardType[]{CardType.CREATURE}, "{2}{U}");
-        this.expansionSetCode = "PC2";
+    public WhirlpoolWarrior(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{2}{U}");
         this.subtype.add("Merfolk");
         this.subtype.add("Warrior");
 

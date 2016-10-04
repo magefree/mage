@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.odyssey;
+package mage.cards.n;
 
 import java.util.HashSet;
 import java.util.Set;
@@ -37,10 +37,10 @@ import mage.abilities.effects.ReplacementEffectImpl;
 import mage.abilities.effects.common.LoseGameSourceControllerEffect;
 import mage.cards.Card;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Duration;
 import mage.constants.Outcome;
-import mage.constants.Rarity;
 import mage.constants.Zone;
 import mage.filter.FilterCard;
 import mage.game.Game;
@@ -56,9 +56,8 @@ import mage.target.common.TargetCardInYourGraveyard;
  */
 public class NefariousLich extends CardImpl {
 
-    public NefariousLich(UUID ownerId) {
-        super(ownerId, 153, "Nefarious Lich", Rarity.RARE, new CardType[]{CardType.ENCHANTMENT}, "{B}{B}{B}{B}");
-        this.expansionSetCode = "ODY";
+    public NefariousLich(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.ENCHANTMENT},"{B}{B}{B}{B}");
 
         // If damage would be dealt to you, exile that many cards from your graveyard instead. If you can't, you lose the game.
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new NefariousLichDamageReplacementEffect()));

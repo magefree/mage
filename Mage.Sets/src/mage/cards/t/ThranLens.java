@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.urzaslegacy;
+package mage.cards.t;
 
 import java.util.UUID;
 
@@ -35,6 +35,7 @@ import mage.abilities.Ability;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.effects.ContinuousEffectImpl;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 
@@ -44,9 +45,8 @@ import mage.game.permanent.Permanent;
  */
 public class ThranLens extends CardImpl {
 
-    public ThranLens(UUID ownerId) {
-        super(ownerId, 133, "Thran Lens", Rarity.RARE, new CardType[]{CardType.ARTIFACT}, "{2}");
-        this.expansionSetCode = "ULG";
+    public ThranLens(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.ARTIFACT},"{2}");
         // All permanents are colorless.
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new ThranLensEffect()));
     }

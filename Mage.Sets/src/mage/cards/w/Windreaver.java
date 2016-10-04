@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.dissension;
+package mage.cards.w;
 
 import java.util.UUID;
 import mage.MageInt;
@@ -38,9 +38,9 @@ import mage.abilities.effects.common.continuous.SwitchPowerToughnessSourceEffect
 import mage.abilities.keyword.FlyingAbility;
 import mage.abilities.keyword.VigilanceAbility;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Duration;
-import mage.constants.Rarity;
 import mage.constants.Zone;
 
 /**
@@ -49,9 +49,8 @@ import mage.constants.Zone;
  */
 public class Windreaver extends CardImpl {
 
-    public Windreaver(UUID ownerId) {
-        super(ownerId, 138, "Windreaver", Rarity.RARE, new CardType[]{CardType.CREATURE}, "{3}{W}{U}");
-        this.expansionSetCode = "DIS";
+    public Windreaver(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{3}{W}{U}");
         this.subtype.add("Elemental");
 
         this.power = new MageInt(1);

@@ -25,12 +25,11 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.gatecrash;
+package mage.cards.m;
 
 import java.util.UUID;
 import mage.constants.CardType;
 import mage.constants.Outcome;
-import mage.constants.Rarity;
 import mage.constants.Zone;
 import mage.abilities.Ability;
 import mage.abilities.costs.VariableCost;
@@ -38,6 +37,7 @@ import mage.abilities.costs.mana.VariableManaCost;
 import mage.abilities.effects.OneShotEffect;
 import mage.cards.Card;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.cards.Cards;
 import mage.cards.CardsImpl;
 import mage.game.Game;
@@ -49,9 +49,8 @@ import mage.players.Player;
  */
 public class MindGrind extends CardImpl {
 
-    public MindGrind(UUID ownerId) {
-        super(ownerId, 178, "Mind Grind", Rarity.RARE, new CardType[]{CardType.SORCERY}, "{X}{U}{B}");
-        this.expansionSetCode = "GTC";
+    public MindGrind(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{X}{U}{B}");
 
 
         // Each opponent reveals cards from the top of his or her library until he or she reveals X land cards, then puts all cards revealed this way into his or her graveyard. X can't be 0.

@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.exodus;
+package mage.cards.t;
 
 import java.util.UUID;
 import mage.MageInt;
@@ -37,10 +37,10 @@ import mage.abilities.effects.Effect;
 import mage.abilities.effects.common.continuous.AddCardTypeAttachedEffect;
 import mage.abilities.effects.common.continuous.BoostEnchantedEffect;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.AttachmentType;
 import mage.constants.CardType;
 import mage.constants.Duration;
-import mage.constants.Rarity;
 import mage.constants.Zone;
 
 /**
@@ -49,9 +49,8 @@ import mage.constants.Zone;
  */
 public class TransmogrifyingLicid extends CardImpl {
 
-    public TransmogrifyingLicid(UUID ownerId) {
-        super(ownerId, 141, "Transmogrifying Licid", Rarity.UNCOMMON, new CardType[]{CardType.ARTIFACT, CardType.CREATURE}, "{3}");
-        this.expansionSetCode = "EXO";
+    public TransmogrifyingLicid(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.ARTIFACT,CardType.CREATURE},"{3}");
         this.subtype.add("Licid");
         this.power = new MageInt(2);
         this.toughness = new MageInt(2);

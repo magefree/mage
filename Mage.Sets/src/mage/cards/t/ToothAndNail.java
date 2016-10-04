@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.modernmasters;
+package mage.cards.t;
 
 import java.util.UUID;
 import mage.abilities.Ability;
@@ -34,10 +34,10 @@ import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.search.SearchLibraryPutInHandEffect;
 import mage.abilities.keyword.EntwineAbility;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.cards.CardsImpl;
 import mage.constants.CardType;
 import mage.constants.Outcome;
-import mage.constants.Rarity;
 import mage.constants.Zone;
 import mage.filter.common.FilterCreatureCard;
 import mage.game.Game;
@@ -51,9 +51,8 @@ import mage.target.common.TargetCardInLibrary;
  */
 public class ToothAndNail extends CardImpl {
 
-    public ToothAndNail(UUID ownerId) {
-        super(ownerId, 170, "Tooth and Nail", Rarity.RARE, new CardType[]{CardType.SORCERY}, "{5}{G}{G}");
-        this.expansionSetCode = "MMA";
+    public ToothAndNail(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{5}{G}{G}");
 
         // Choose one -
         // Search your library for up to two creature cards, reveal them, put them into your hand, then shuffle your library;

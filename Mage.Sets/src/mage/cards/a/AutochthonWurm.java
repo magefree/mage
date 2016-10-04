@@ -25,16 +25,16 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.ravnica;
+package mage.cards.a;
 
 import java.util.UUID;
 
 import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.MageInt;
 import mage.abilities.keyword.ConvokeAbility;
 import mage.abilities.keyword.TrampleAbility;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 
 /**
  *
@@ -42,9 +42,8 @@ import mage.cards.CardImpl;
  */
 public class AutochthonWurm extends CardImpl {
 
-    public AutochthonWurm(UUID ownerId) {
-        super(ownerId, 191, "Autochthon Wurm", Rarity.RARE, new CardType[]{CardType.CREATURE}, "{10}{G}{G}{G}{W}{W}");
-        this.expansionSetCode = "RAV";
+    public AutochthonWurm(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{10}{G}{G}{G}{W}{W}");
         this.subtype.add("Wurm");
 
 

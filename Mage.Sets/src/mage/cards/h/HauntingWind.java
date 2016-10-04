@@ -25,14 +25,14 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.antiquities;
+package mage.cards.h;
 
 import java.util.UUID;
 import mage.abilities.TriggeredAbilityImpl;
 import mage.abilities.effects.common.DamageControllerEffect;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.constants.Zone;
 import mage.game.Game;
 import mage.game.events.GameEvent;
@@ -44,9 +44,8 @@ import mage.game.permanent.Permanent;
  */
 public class HauntingWind extends CardImpl {
 
-    public HauntingWind(UUID ownerId) {
-        super(ownerId, 47, "Haunting Wind", Rarity.UNCOMMON, new CardType[]{CardType.ENCHANTMENT}, "{3}{B}");
-        this.expansionSetCode = "ATQ";
+    public HauntingWind(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.ENCHANTMENT},"{3}{B}");
 
         // Whenever an artifact becomes tapped or a player activates an artifact's ability without {tap} in its activation cost, Haunting Wind deals 1 damage to that artifact's controller.
         

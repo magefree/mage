@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.starwars;
+package mage.cards.s;
 
 import java.util.UUID;
 import mage.MageInt;
@@ -34,8 +34,8 @@ import mage.abilities.costs.common.SacrificeTargetCost;
 import mage.abilities.effects.common.DoIfCostPaid;
 import mage.abilities.effects.common.DrawCardSourceControllerEffect;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.filter.common.FilterControlledArtifactPermanent;
 import mage.target.common.TargetControlledPermanent;
 
@@ -45,9 +45,8 @@ import mage.target.common.TargetControlledPermanent;
  */
 public class SalvageSquad extends CardImpl {
 
-    public SalvageSquad(UUID ownerId) {
-        super(ownerId, 214, "Salvage Squad", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{W}{U}{B}");
-        this.expansionSetCode = "SWS";
+    public SalvageSquad(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{W}{U}{B}");
         this.subtype.add("Jawa");
         this.subtype.add("Artificier");
         this.power = new MageInt(2);

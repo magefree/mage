@@ -26,7 +26,7 @@
  *  or implied, of BetaSteward_at_googlemail.com.
  */
 
-package mage.sets.championsofkamigawa;
+package mage.cards.s;
 
 import java.util.UUID;
 
@@ -39,6 +39,7 @@ import mage.abilities.effects.common.continuous.GainAbilityTargetEffect;
 import mage.abilities.keyword.FirstStrikeAbility;
 import mage.abilities.mana.RedManaAbility;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.filter.predicate.mageobject.SupertypePredicate;
 import mage.target.TargetPermanent;
@@ -54,9 +55,8 @@ public class ShinkaTheBloodsoakedKeep extends CardImpl {
         filter.add(new SupertypePredicate("Legendary"));
     }
 
-    public ShinkaTheBloodsoakedKeep(UUID ownerId) {
-        super(ownerId, 282, "Shinka, the Bloodsoaked Keep", Rarity.RARE, new CardType[]{CardType.LAND}, null);
-        this.expansionSetCode = "CHK";
+    public ShinkaTheBloodsoakedKeep(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.LAND},null);
         this.supertype.add("Legendary");
         this.addAbility(new RedManaAbility());
         Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new GainAbilityTargetEffect(FirstStrikeAbility.getInstance(), Duration.EndOfTurn), new ColoredManaCost(ColoredManaSymbol.R));

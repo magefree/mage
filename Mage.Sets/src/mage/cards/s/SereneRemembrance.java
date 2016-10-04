@@ -25,17 +25,17 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.gatecrash;
+package mage.cards.s;
 
 import java.util.UUID;
 
 import mage.constants.CardType;
 import mage.constants.Outcome;
-import mage.constants.Rarity;
 import mage.abilities.Ability;
 import mage.abilities.effects.OneShotEffect;
 import mage.cards.Card;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.Zone;
 import mage.filter.FilterCard;
 import mage.game.Game;
@@ -48,9 +48,8 @@ import mage.target.common.TargetCardInASingleGraveyard;
  */
 public class SereneRemembrance extends CardImpl {
 
-    public SereneRemembrance (UUID ownerId) {
-        super(ownerId, 132, "Serene Remembrance", Rarity.UNCOMMON, new CardType[]{CardType.SORCERY}, "{G}");
-        this.expansionSetCode = "GTC";
+    public SereneRemembrance (UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{G}");
 
 
         // Shuffle Serene Remembrance and up to three target cards from a single graveyard into their owners' libraries.

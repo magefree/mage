@@ -25,14 +25,14 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.seventhedition;
+package mage.cards.v;
 
 import java.util.UUID;
 
 import mage.MageInt;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.Rarity;
 
 /**
  *
@@ -40,9 +40,8 @@ import mage.constants.Rarity;
  */
 public class Vizzerdrix extends CardImpl {
 
-    public Vizzerdrix(UUID ownerId) {
-        super(ownerId, 110, "Vizzerdrix", Rarity.RARE, new CardType[]{CardType.CREATURE}, "{6}{U}");
-        this.expansionSetCode = "7ED";
+    public Vizzerdrix(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{6}{U}");
         this.subtype.add("Rabbit");
         this.subtype.add("Beast");
 

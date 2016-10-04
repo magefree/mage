@@ -25,10 +25,9 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.torment;
+package mage.cards.d;
 
 import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.abilities.costs.Costs;
 import mage.abilities.costs.CostsImpl;
 import mage.abilities.costs.common.PayLifeCost;
@@ -36,6 +35,7 @@ import mage.abilities.costs.mana.ManaCostsImpl;
 import mage.abilities.effects.common.DrawCardTargetEffect;
 import mage.abilities.keyword.FlashbackAbility;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.TimingRule;
 import mage.target.TargetPlayer;
 
@@ -48,9 +48,8 @@ import mage.abilities.costs.Cost;
  */
 public class DeepAnalysis extends CardImpl {
 
-    public DeepAnalysis(UUID ownerId) {
-        super(ownerId, 36, "Deep Analysis", Rarity.COMMON, new CardType[]{CardType.SORCERY}, "{3}{U}");
-        this.expansionSetCode = "TOR";
+    public DeepAnalysis(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{3}{U}");
 
 
         // Target player draws two cards.

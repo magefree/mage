@@ -25,22 +25,21 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.returntoravnica;
+package mage.cards.t;
 
 import java.util.UUID;
 import mage.abilities.effects.common.DrawDiscardControllerEffect;
 import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 
 /**
  * @author LevelX2
  */
 public class Thoughtflare extends CardImpl {
 
-    public Thoughtflare(UUID ownerId) {
-        super(ownerId, 203, "Thoughtflare", Rarity.UNCOMMON, new CardType[]{CardType.INSTANT}, "{3}{U}{R}");
-        this.expansionSetCode = "RTR";
+    public Thoughtflare(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.INSTANT},"{3}{U}{R}");
 
 
         // Draw four cards, then discard two cards.

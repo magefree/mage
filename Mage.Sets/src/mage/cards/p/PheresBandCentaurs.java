@@ -25,13 +25,13 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.theros;
+package mage.cards.p;
 
 import java.util.UUID;
 import mage.MageInt;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.Rarity;
 
 /**
  *
@@ -39,9 +39,8 @@ import mage.constants.Rarity;
  */
 public class PheresBandCentaurs extends CardImpl {
 
-    public PheresBandCentaurs(UUID ownerId) {
-        super(ownerId, 171, "Pheres-Band Centaurs", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{4}{G}");
-        this.expansionSetCode = "THS";
+    public PheresBandCentaurs(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{4}{G}");
         this.subtype.add("Centaur");
         this.subtype.add("Warrior");
 

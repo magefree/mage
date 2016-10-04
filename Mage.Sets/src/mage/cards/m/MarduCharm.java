@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.khansoftarkir;
+package mage.cards.m;
 
 import java.util.UUID;
 import mage.abilities.Ability;
@@ -38,10 +38,10 @@ import mage.abilities.effects.common.continuous.GainAbilityTargetEffect;
 import mage.abilities.effects.common.discard.DiscardCardYouChooseTargetEffect;
 import mage.abilities.keyword.FirstStrikeAbility;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Duration;
 import mage.constants.Outcome;
-import mage.constants.Rarity;
 import mage.filter.FilterCard;
 import mage.filter.predicate.Predicates;
 import mage.filter.predicate.mageobject.CardTypePredicate;
@@ -66,9 +66,8 @@ public class MarduCharm extends CardImpl {
         filter.add(Predicates.not(new CardTypePredicate(CardType.LAND)));
     }
 
-    public MarduCharm(UUID ownerId) {
-        super(ownerId, 186, "Mardu Charm", Rarity.UNCOMMON, new CardType[]{CardType.INSTANT}, "{R}{W}{B}");
-        this.expansionSetCode = "KTK";
+    public MarduCharm(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.INSTANT},"{R}{W}{B}");
 
 
         // Choose one -

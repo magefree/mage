@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.theros;
+package mage.cards.a;
 
 import java.util.UUID;
 import mage.MageInt;
@@ -34,8 +34,8 @@ import mage.abilities.common.EntersBattlefieldOrDiesSourceTriggeredAbility;
 import mage.abilities.effects.common.ExileTargetEffect;
 import mage.abilities.keyword.FlyingAbility;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.target.TargetPermanent;
 
 /**
@@ -44,9 +44,8 @@ import mage.target.TargetPermanent;
  */
 public class AshenRider extends CardImpl {
 
-    public AshenRider(UUID ownerId) {
-        super(ownerId, 187, "Ashen Rider", Rarity.MYTHIC, new CardType[]{CardType.CREATURE}, "{4}{W}{W}{B}{B}");
-        this.expansionSetCode = "THS";
+    public AshenRider(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{4}{W}{W}{B}{B}");
         this.subtype.add("Archon");
 
         this.power = new MageInt(5);

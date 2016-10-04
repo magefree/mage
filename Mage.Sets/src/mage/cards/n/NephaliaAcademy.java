@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.eldritchmoon;
+package mage.cards.n;
 
 import java.util.UUID;
 import mage.MageObject;
@@ -35,12 +35,12 @@ import mage.abilities.effects.ReplacementEffectImpl;
 import mage.abilities.mana.ColorlessManaAbility;
 import mage.cards.Card;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.cards.Cards;
 import mage.cards.CardsImpl;
 import mage.constants.CardType;
 import mage.constants.Duration;
 import mage.constants.Outcome;
-import mage.constants.Rarity;
 import mage.constants.Zone;
 import mage.game.Game;
 import mage.game.events.GameEvent;
@@ -55,9 +55,8 @@ import mage.players.Player;
  */
 public class NephaliaAcademy extends CardImpl {
 
-    public NephaliaAcademy(UUID ownerId) {
-        super(ownerId, 205, "Nephalia Academy", Rarity.UNCOMMON, new CardType[]{CardType.LAND}, "");
-        this.expansionSetCode = "EMN";
+    public NephaliaAcademy(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.LAND},"");
 
         // If a spell or ability an opponent controls causes you to discard a card, you may reveal that card and put it on top of your library instead of putting it anywhere else.
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new NephaliaAcademyEffect()));

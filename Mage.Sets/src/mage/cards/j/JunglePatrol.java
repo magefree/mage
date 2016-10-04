@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.mirage;
+package mage.cards.j;
 
 import java.util.UUID;
 import mage.MageInt;
@@ -39,8 +39,8 @@ import mage.abilities.effects.common.BasicManaEffect;
 import mage.abilities.effects.common.CreateTokenEffect;
 import mage.abilities.keyword.DefenderAbility;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.constants.Zone;
 import mage.filter.common.FilterControlledPermanent;
 import mage.filter.predicate.mageobject.NamePredicate;
@@ -61,9 +61,8 @@ public class JunglePatrol extends CardImpl {
         filter.add(new TokenPredicate());
     }
 
-    public JunglePatrol(UUID ownerId) {
-        super(ownerId, 121, "Jungle Patrol", Rarity.RARE, new CardType[]{CardType.CREATURE}, "{3}{G}");
-        this.expansionSetCode = "MIR";
+    public JunglePatrol(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{3}{G}");
         this.subtype.add("Human");
         this.subtype.add("Soldier");
         this.power = new MageInt(3);

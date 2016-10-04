@@ -25,14 +25,14 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.newphyrexia;
+package mage.cards.v;
 
 import java.util.UUID;
 import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.abilities.effects.common.DestroyTargetEffect;
 import mage.abilities.effects.common.LoseLifeTargetControllerEffect;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.filter.FilterPermanent;
 import mage.filter.predicate.Predicates;
 import mage.filter.predicate.mageobject.CardTypePredicate;
@@ -52,9 +52,8 @@ public class VictoriousDestruction extends CardImpl {
                 new CardTypePredicate(CardType.LAND)));
     }
 
-    public VictoriousDestruction(UUID ownerId) {
-        super(ownerId, 99, "Victorious Destruction", Rarity.COMMON, new CardType[]{CardType.SORCERY}, "{4}{R}");
-        this.expansionSetCode = "NPH";
+    public VictoriousDestruction(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{4}{R}");
 
 
         // Destroy target artifact or land. Its controller loses 1 life.

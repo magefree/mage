@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.futuresight;
+package mage.cards.s;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -35,11 +35,11 @@ import mage.abilities.effects.AsThoughEffectImpl;
 import mage.abilities.effects.common.DrawCardSourceControllerEffect;
 import mage.cards.Card;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.AsThoughEffectType;
 import mage.constants.CardType;
 import mage.constants.Duration;
 import mage.constants.Outcome;
-import mage.constants.Rarity;
 import mage.constants.WatcherScope;
 import mage.game.Game;
 import mage.game.events.GameEvent;
@@ -52,9 +52,8 @@ import mage.watchers.Watcher;
  */
 public class ScoutsWarning extends CardImpl {
 
-    public ScoutsWarning(UUID ownerId) {
-        super(ownerId, 16, "Scout's Warning", Rarity.RARE, new CardType[]{CardType.INSTANT}, "{W}");
-        this.expansionSetCode = "FUT";
+    public ScoutsWarning(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.INSTANT},"{W}");
 
         // The next creature card you play this turn can be played as though it had flash.
         this.getSpellAbility().addEffect(new ScoutsWarningAsThoughEffect());

@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.betrayersofkamigawa;
+package mage.cards.k;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -39,9 +39,9 @@ import mage.abilities.effects.common.CounterTargetEffect;
 import mage.abilities.effects.common.continuous.GainAbilityControlledEffect;
 import mage.abilities.keyword.FlyingAbility;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Duration;
-import mage.constants.Rarity;
 import mage.constants.WatcherScope;
 import mage.constants.Zone;
 import mage.filter.common.FilterCreaturePermanent;
@@ -58,9 +58,8 @@ import mage.watchers.Watcher;
  */
 public class KiraGreatGlassSpinner extends CardImpl {
 
-    public KiraGreatGlassSpinner(UUID ownerId) {
-        super(ownerId, 40, "Kira, Great Glass-Spinner", Rarity.RARE, new CardType[]{CardType.CREATURE}, "{1}{U}{U}");
-        this.expansionSetCode = "BOK";
+    public KiraGreatGlassSpinner(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{1}{U}{U}");
         this.subtype.add("Spirit");
         this.supertype.add("Legendary");
 

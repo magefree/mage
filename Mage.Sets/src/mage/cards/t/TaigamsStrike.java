@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.dragonsoftarkir;
+package mage.cards.t;
 
 import java.util.UUID;
 import mage.abilities.effects.Effect;
@@ -33,9 +33,9 @@ import mage.abilities.effects.common.combat.CantBeBlockedTargetEffect;
 import mage.abilities.effects.common.continuous.BoostTargetEffect;
 import mage.abilities.keyword.ReboundAbility;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Duration;
-import mage.constants.Rarity;
 import mage.target.common.TargetCreaturePermanent;
 
 /**
@@ -44,9 +44,8 @@ import mage.target.common.TargetCreaturePermanent;
  */
 public class TaigamsStrike extends CardImpl {
 
-    public TaigamsStrike(UUID ownerId) {
-        super(ownerId, 81, "Taigam's Strike", Rarity.COMMON, new CardType[]{CardType.SORCERY}, "{3}{U}");
-        this.expansionSetCode = "DTK";
+    public TaigamsStrike(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{3}{U}");
 
         // Target creature gets +2/+0 until end of turn and can't be blocked this turn.
         this.getSpellAbility().addTarget(new TargetCreaturePermanent());

@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.magic2010;
+package mage.cards.p;
 
 import java.util.Set;
 import java.util.UUID;
@@ -34,11 +34,11 @@ import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.DestroyTargetEffect;
 import mage.cards.Card;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.cards.Cards;
 import mage.cards.CardsImpl;
 import mage.constants.CardType;
 import mage.constants.Outcome;
-import mage.constants.Rarity;
 import mage.constants.Zone;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
@@ -52,9 +52,8 @@ import mage.target.common.TargetCreaturePermanent;
  */
 public class Polymorph extends CardImpl {
 
-    public Polymorph(UUID ownerId) {
-        super(ownerId, 67, "Polymorph", Rarity.RARE, new CardType[]{CardType.SORCERY}, "{3}{U}");
-        this.expansionSetCode = "M10";
+    public Polymorph(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{3}{U}");
 
         // Destroy target creature. It can't be regenerated.
         this.getSpellAbility().addTarget(new TargetCreaturePermanent());

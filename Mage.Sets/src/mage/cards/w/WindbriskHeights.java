@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.lorwyn;
+package mage.cards.w;
 
 import java.util.UUID;
 import mage.abilities.Ability;
@@ -37,8 +37,8 @@ import mage.abilities.effects.common.HideawayPlayEffect;
 import mage.abilities.keyword.HideawayAbility;
 import mage.abilities.mana.WhiteManaAbility;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.constants.Zone;
 import mage.game.Game;
 import mage.watchers.common.PlayerAttackedWatcher;
@@ -49,9 +49,8 @@ import mage.watchers.common.PlayerAttackedWatcher;
  */
 public class WindbriskHeights extends CardImpl {
 
-    public WindbriskHeights(UUID ownerId) {
-        super(ownerId, 281, "Windbrisk Heights", Rarity.RARE, new CardType[]{CardType.LAND}, "");
-        this.expansionSetCode = "LRW";
+    public WindbriskHeights(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.LAND},"");
 
         // Hideaway (This land enters the battlefield tapped. When it does, look at the top four cards of your library, exile one face down, then put the rest on the bottom of your library.)
         this.addAbility(new HideawayAbility());

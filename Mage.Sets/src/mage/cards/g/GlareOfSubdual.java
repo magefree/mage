@@ -25,17 +25,17 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.ravnica;
+package mage.cards.g;
 
 import java.util.UUID;
 
 import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.costs.common.TapTargetCost;
 import mage.abilities.effects.common.TapTargetEffect;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.Zone;
 import mage.filter.FilterPermanent;
 import mage.filter.common.FilterControlledCreaturePermanent;
@@ -61,9 +61,8 @@ public class GlareOfSubdual extends CardImpl {
                 new CardTypePredicate(CardType.CREATURE)));
     }
 
-    public GlareOfSubdual(UUID ownerId) {
-        super(ownerId, 207, "Glare of Subdual", Rarity.RARE, new CardType[]{CardType.ENCHANTMENT}, "{2}{G}{W}");
-        this.expansionSetCode = "RAV";
+    public GlareOfSubdual(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.ENCHANTMENT},"{2}{G}{W}");
 
 
         // Tap an untapped creature you control: Tap target artifact or creature.

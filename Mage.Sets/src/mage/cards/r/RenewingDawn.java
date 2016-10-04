@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.portal;
+package mage.cards.r;
 
 import java.util.UUID;
 import mage.abilities.dynamicvalue.DynamicValue;
@@ -34,8 +34,8 @@ import mage.abilities.dynamicvalue.common.PermanentsTargetOpponentControlsCount;
 import mage.abilities.effects.Effect;
 import mage.abilities.effects.common.GainLifeEffect;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.filter.FilterPermanent;
 import mage.filter.predicate.mageobject.SubtypePredicate;
 import mage.target.common.TargetOpponent;
@@ -52,9 +52,8 @@ public class RenewingDawn extends CardImpl {
         filter.add(new SubtypePredicate("Mountain"));
     }
 
-    public RenewingDawn(UUID ownerId) {
-        super(ownerId, 185, "Renewing Dawn", Rarity.UNCOMMON, new CardType[]{CardType.SORCERY}, "{1}{W}");
-        this.expansionSetCode = "POR";
+    public RenewingDawn(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{1}{W}");
 
         // You gain 2 life for each Mountain target opponent controls.
         DynamicValue amount = new MultipliedValue(new PermanentsTargetOpponentControlsCount(filter), 2);

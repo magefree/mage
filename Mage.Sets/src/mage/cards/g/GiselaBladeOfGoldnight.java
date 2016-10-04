@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.avacynrestored;
+package mage.cards.g;
 
 import java.util.UUID;
 import mage.MageInt;
@@ -35,10 +35,10 @@ import mage.abilities.effects.ReplacementEffectImpl;
 import mage.abilities.keyword.FirstStrikeAbility;
 import mage.abilities.keyword.FlyingAbility;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Duration;
 import mage.constants.Outcome;
-import mage.constants.Rarity;
 import mage.constants.Zone;
 import mage.game.Game;
 import mage.game.events.GameEvent;
@@ -51,9 +51,8 @@ import mage.game.permanent.Permanent;
  */
 public class GiselaBladeOfGoldnight extends CardImpl {
 
-    public GiselaBladeOfGoldnight(UUID ownerId) {
-        super(ownerId, 209, "Gisela, Blade of Goldnight", Rarity.MYTHIC, new CardType[]{CardType.CREATURE}, "{4}{R}{W}{W}");
-        this.expansionSetCode = "AVR";
+    public GiselaBladeOfGoldnight(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{4}{R}{W}{W}");
         this.supertype.add("Legendary");
         this.subtype.add("Angel");
 

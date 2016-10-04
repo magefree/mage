@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.commander;
+package mage.cards.v;
 
 import mage.MageInt;
 import mage.abilities.Ability;
@@ -42,9 +42,9 @@ import mage.abilities.effects.common.counter.AddCountersSourceEffect;
 import mage.abilities.keyword.FlyingAbility;
 import mage.abilities.keyword.LifelinkAbility;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Duration;
-import mage.constants.Rarity;
 import mage.constants.Zone;
 import mage.counters.Counter;
 import mage.counters.CounterType;
@@ -62,9 +62,8 @@ import java.util.UUID;
  */
 public class VishKalBloodArbiter extends CardImpl {
 
-    public VishKalBloodArbiter(UUID ownerId) {
-        super(ownerId, 234, "Vish Kal, Blood Arbiter", Rarity.RARE, new CardType[]{CardType.CREATURE}, "{4}{W}{B}{B}");
-        this.expansionSetCode = "CMD";
+    public VishKalBloodArbiter(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{4}{W}{B}{B}");
         this.supertype.add("Legendary");
         this.subtype.add("Vampire");
 

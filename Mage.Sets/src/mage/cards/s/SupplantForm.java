@@ -25,15 +25,15 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.fatereforged;
+package mage.cards.s;
 
 import java.util.UUID;
 import mage.abilities.effects.Effect;
 import mage.abilities.effects.common.PutTokenOntoBattlefieldCopyTargetEffect;
 import mage.abilities.effects.common.ReturnToHandTargetEffect;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.target.common.TargetCreaturePermanent;
 
 /**
@@ -42,9 +42,8 @@ import mage.target.common.TargetCreaturePermanent;
  */
 public class SupplantForm extends CardImpl {
 
-    public SupplantForm(UUID ownerId) {
-        super(ownerId, 54, "Supplant Form", Rarity.RARE, new CardType[]{CardType.INSTANT}, "{4}{U}{U}");
-        this.expansionSetCode = "FRF";
+    public SupplantForm(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.INSTANT},"{4}{U}{U}");
 
         // Return target creature to its owner's hand. You put a token onto the battlefield that's a copy of that creature.
         this.getSpellAbility().addEffect(new ReturnToHandTargetEffect());

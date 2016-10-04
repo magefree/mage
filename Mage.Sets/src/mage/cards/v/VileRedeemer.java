@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.oathofthegatewatch;
+package mage.cards.v;
 
 import java.util.HashMap;
 import java.util.UUID;
@@ -39,9 +39,9 @@ import mage.abilities.effects.common.DoIfCostPaid;
 import mage.abilities.keyword.DevoidAbility;
 import mage.abilities.keyword.FlashAbility;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Outcome;
-import mage.constants.Rarity;
 import mage.constants.WatcherScope;
 import mage.game.Game;
 import mage.game.events.GameEvent;
@@ -57,9 +57,8 @@ import mage.watchers.Watcher;
  */
 public class VileRedeemer extends CardImpl {
 
-    public VileRedeemer(UUID ownerId) {
-        super(ownerId, 125, "Vile Redeemer", Rarity.RARE, new CardType[]{CardType.CREATURE}, "{2}{G}");
-        this.expansionSetCode = "OGW";
+    public VileRedeemer(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{2}{G}");
         this.subtype.add("Eldrazi");
         this.power = new MageInt(3);
         this.toughness = new MageInt(3);

@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.fallenempires;
+package mage.cards.i;
 
 import java.util.UUID;
 import mage.abilities.costs.common.SacrificeSourceCost;
@@ -34,8 +34,8 @@ import mage.abilities.costs.mana.ManaCostsImpl;
 import mage.abilities.effects.common.AddManaOfAnyColorEffect;
 import mage.abilities.mana.SimpleManaAbility;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.constants.Zone;
 
 /**
@@ -44,9 +44,8 @@ import mage.constants.Zone;
  */
 public class ImplementsOfSacrifice extends CardImpl {
 
-    public ImplementsOfSacrifice(UUID ownerId) {
-        super(ownerId, 173, "Implements of Sacrifice", Rarity.RARE, new CardType[]{CardType.ARTIFACT}, "{2}");
-        this.expansionSetCode = "FEM";
+    public ImplementsOfSacrifice(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.ARTIFACT},"{2}");
 
         // {1}, {tap}, Sacrifice Implements of Sacrifice: Add two mana of any one color to your mana pool.
         SimpleManaAbility ability = new SimpleManaAbility(Zone.BATTLEFIELD, new AddManaOfAnyColorEffect(2), new ManaCostsImpl("{1}"));

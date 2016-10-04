@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.mirrodinbesieged;
+package mage.cards.g;
 
 import java.util.UUID;
 import mage.ObjectColor;
@@ -34,9 +34,9 @@ import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.ShuffleSpellEffect;
 import mage.cards.Card;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Outcome;
-import mage.constants.Rarity;
 import mage.constants.Zone;
 import mage.filter.Filter;
 import mage.filter.FilterCard;
@@ -52,9 +52,8 @@ import mage.target.common.TargetCardInLibrary;
  */
 public class GreenSunsZenith extends CardImpl {
 
-    public GreenSunsZenith(UUID ownerId) {
-        super(ownerId, 81, "Green Sun's Zenith", Rarity.RARE, new CardType[]{CardType.SORCERY}, "{X}{G}");
-        this.expansionSetCode = "MBS";
+    public GreenSunsZenith(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{X}{G}");
 
         // Search your library for a green creature card with converted mana cost X or less,
         // put it onto the battlefield, then shuffle your library.

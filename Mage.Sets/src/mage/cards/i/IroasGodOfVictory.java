@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.journeyintonyx;
+package mage.cards.i;
 
 import java.util.UUID;
 import mage.MageInt;
@@ -38,10 +38,10 @@ import mage.abilities.effects.common.continuous.LoseCreatureTypeSourceEffect;
 import mage.abilities.keyword.IndestructibleAbility;
 import mage.abilities.keyword.MenaceAbility;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.ColoredManaSymbol;
 import mage.constants.Duration;
-import mage.constants.Rarity;
 import mage.constants.TargetController;
 import mage.constants.Zone;
 import mage.filter.common.FilterControlledCreatureInPlay;
@@ -62,9 +62,8 @@ public class IroasGodOfVictory extends CardImpl {
         filterAttacking.getCreatureFilter().add(new AttackingPredicate());
     }
     
-    public IroasGodOfVictory(UUID ownerId) {
-        super(ownerId, 150, "Iroas, God of Victory", Rarity.MYTHIC, new CardType[]{CardType.ENCHANTMENT, CardType.CREATURE}, "{2}{R}{W}");
-        this.expansionSetCode = "JOU";
+    public IroasGodOfVictory(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.ENCHANTMENT,CardType.CREATURE},"{2}{R}{W}");
         this.supertype.add("Legendary");        
         this.subtype.add("God");
 

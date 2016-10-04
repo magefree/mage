@@ -25,15 +25,15 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.journeyintonyx;
+package mage.cards.n;
 
 import java.util.UUID;
 import mage.abilities.abilityword.StriveAbility;
 import mage.abilities.effects.Effect;
 import mage.abilities.effects.common.counter.AddCountersTargetEffect;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.counters.CounterType;
 import mage.target.common.TargetCreaturePermanent;
 
@@ -43,9 +43,8 @@ import mage.target.common.TargetCreaturePermanent;
  */
 public class NaturesPanoply extends CardImpl {
 
-    public NaturesPanoply(UUID ownerId) {
-        super(ownerId, 131, "Nature's Panoply", Rarity.COMMON, new CardType[]{CardType.INSTANT}, "{G}");
-        this.expansionSetCode = "JOU";
+    public NaturesPanoply(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.INSTANT},"{G}");
 
 
         // Strive - Nature's Panoply costs {2}{G} more to cast for each target beyond the first.

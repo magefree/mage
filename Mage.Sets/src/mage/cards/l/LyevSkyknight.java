@@ -25,18 +25,18 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.returntoravnica;
+package mage.cards.l;
 
 import java.util.UUID;
 
 import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.EntersBattlefieldTriggeredAbility;
 import mage.abilities.effects.common.DetainTargetEffect;
 import mage.abilities.keyword.FlyingAbility;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.TargetController;
 import mage.filter.common.FilterNonlandPermanent;
 import mage.filter.predicate.permanent.ControllerPredicate;
@@ -54,9 +54,8 @@ public class LyevSkyknight extends CardImpl {
         filter.add(new ControllerPredicate(TargetController.OPPONENT));
     }
     
-    public LyevSkyknight(UUID ownerId) {
-        super(ownerId, 179, "Lyev Skyknight", Rarity.UNCOMMON, new CardType[]{CardType.CREATURE}, "{1}{W}{U}");
-        this.expansionSetCode = "RTR";
+    public LyevSkyknight(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{1}{W}{U}");
         this.subtype.add("Human");
         this.subtype.add("Knight");
         

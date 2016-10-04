@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.magic2014;
+package mage.cards.m;
 
 import java.util.Random;
 import java.util.UUID;
@@ -34,9 +34,9 @@ import mage.abilities.Ability;
 import mage.abilities.effects.OneShotEffect;
 import mage.cards.Card;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Outcome;
-import mage.constants.Rarity;
 import mage.constants.Zone;
 import mage.game.Game;
 import mage.game.permanent.token.Token;
@@ -49,9 +49,8 @@ import mage.util.RandomUtil;
  */
 public class MoltenBirth extends CardImpl {
 
-    public MoltenBirth(UUID ownerId) {
-        super(ownerId, 147, "Molten Birth", Rarity.UNCOMMON, new CardType[]{CardType.SORCERY}, "{1}{R}{R}");
-        this.expansionSetCode = "M14";
+    public MoltenBirth(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{1}{R}{R}");
 
 
         // Put two 1/1 red Elemental creature tokens onto the battlefield. Then flip a coin. If you win the flip, return Molten Birth to its owner's hand.

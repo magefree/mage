@@ -25,15 +25,15 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.championsofkamigawa;
+package mage.cards.b;
 
 import java.util.UUID;
 import mage.abilities.effects.common.continuous.GainProtectionFromColorTargetEffect;
 import mage.abilities.keyword.SpliceOntoArcaneAbility;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Duration;
-import mage.constants.Rarity;
 import mage.target.common.TargetControlledCreaturePermanent;
 
 /**
@@ -42,9 +42,8 @@ import mage.target.common.TargetControlledCreaturePermanent;
  */
 public class BlessedBreath extends CardImpl {
 
-    public BlessedBreath(UUID ownerId) {
-        super(ownerId, 1, "Blessed Breath", Rarity.COMMON, new CardType[]{CardType.INSTANT}, "{W}");
-        this.expansionSetCode = "CHK";
+    public BlessedBreath(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.INSTANT},"{W}");
         this.subtype.add("Arcane");
 
 

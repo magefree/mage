@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.judgment;
+package mage.cards.a;
 
 import java.util.UUID;
 import mage.MageInt;
@@ -33,8 +33,8 @@ import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.costs.common.DiscardTargetCost;
 import mage.abilities.effects.common.ExileReturnBattlefieldOwnerNextEndStepSourceEffect;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.constants.Zone;
 import mage.filter.FilterCard;
 import mage.target.common.TargetCardInHand;
@@ -45,9 +45,8 @@ import mage.target.common.TargetCardInHand;
  */
 public class AnuridBrushhopper extends CardImpl {
 
-    public AnuridBrushhopper(UUID ownerId) {
-        super(ownerId, 137, "Anurid Brushhopper", Rarity.RARE, new CardType[]{CardType.CREATURE}, "{1}{G}{W}");
-        this.expansionSetCode = "JUD";
+    public AnuridBrushhopper(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{1}{G}{W}");
         this.subtype.add("Frog");
         this.subtype.add("Beast");
         this.power = new MageInt(3);

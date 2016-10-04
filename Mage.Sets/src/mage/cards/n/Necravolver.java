@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.apocalypse;
+package mage.cards.n;
 
 import java.util.UUID;
 import mage.MageInt;
@@ -38,9 +38,9 @@ import mage.abilities.effects.common.counter.AddCountersSourceEffect;
 import mage.abilities.keyword.KickerAbility;
 import mage.abilities.keyword.TrampleAbility;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Duration;
-import mage.constants.Rarity;
 import mage.counters.CounterType;
 
 /**
@@ -50,9 +50,8 @@ import mage.counters.CounterType;
  */
 public class Necravolver extends CardImpl {
 
-    public Necravolver(UUID ownerId) {
-        super(ownerId, 46, "Necravolver", Rarity.RARE, new CardType[]{CardType.CREATURE}, "{2}{B}");
-        this.expansionSetCode = "APC";
+    public Necravolver(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{2}{B}");
         this.subtype.add("Volver");
         this.power = new MageInt(2);
         this.toughness = new MageInt(2);

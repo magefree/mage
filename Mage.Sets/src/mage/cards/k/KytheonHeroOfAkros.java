@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.magicorigins;
+package mage.cards.k;
 
 import java.util.UUID;
 import mage.MageInt;
@@ -41,10 +41,11 @@ import mage.abilities.effects.common.ExileAndReturnTransformedSourceEffect.Gende
 import mage.abilities.effects.common.continuous.GainAbilitySourceEffect;
 import mage.abilities.keyword.IndestructibleAbility;
 import mage.abilities.keyword.TransformAbility;
+import mage.cards.g.GideonBattleForged;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Duration;
-import mage.constants.Rarity;
 import mage.constants.Zone;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
@@ -56,9 +57,8 @@ import mage.watchers.common.AttackedThisCombatWatcher;
  */
 public class KytheonHeroOfAkros extends CardImpl {
 
-    public KytheonHeroOfAkros(UUID ownerId) {
-        super(ownerId, 23, "Kytheon, Hero of Akros", Rarity.MYTHIC, new CardType[]{CardType.CREATURE}, "{W}");
-        this.expansionSetCode = "ORI";
+    public KytheonHeroOfAkros(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{W}");
         this.supertype.add("Legendary");
         this.subtype.add("Human");
         this.subtype.add("Soldier");
@@ -66,7 +66,7 @@ public class KytheonHeroOfAkros extends CardImpl {
         this.toughness = new MageInt(1);
         
         this.transformable = true;
-        this.secondSideCard = new GideonBattleForged(ownerId);
+        this.secondSideCardClazz = GideonBattleForged.class;
 
         // At end of combat, if Kytheon, Hero of Akros and at least two other creatures attacked this combat, exile Kytheon, 
         // then return him to the battlefield transformed under his owner's control.

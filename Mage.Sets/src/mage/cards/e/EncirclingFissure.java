@@ -25,16 +25,16 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.battleforzendikar;
+package mage.cards.e;
 
 import java.util.UUID;
 import mage.abilities.Ability;
 import mage.abilities.effects.PreventionEffectImpl;
 import mage.abilities.keyword.AwakenAbility;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Duration;
-import mage.constants.Rarity;
 import mage.game.Game;
 import mage.game.events.DamageEvent;
 import mage.game.events.GameEvent;
@@ -47,9 +47,8 @@ import mage.target.common.TargetOpponent;
  */
 public class EncirclingFissure extends CardImpl {
 
-    public EncirclingFissure(UUID ownerId) {
-        super(ownerId, 23, "Encircling Fissure", Rarity.UNCOMMON, new CardType[]{CardType.INSTANT}, "{2}{W}");
-        this.expansionSetCode = "BFZ";
+    public EncirclingFissure(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.INSTANT},"{2}{W}");
 
         // Prevent all combat damage that would be dealt this turn by creatures target opponent controls.
         this.getSpellAbility().addEffect(new EncirclingFissurePreventEffect());

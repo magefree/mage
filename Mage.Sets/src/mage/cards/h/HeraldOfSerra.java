@@ -26,16 +26,16 @@
  *  or implied, of BetaSteward_at_googlemail.com.
  */
 
-package mage.sets.urzassaga;
+package mage.cards.h;
 
 import java.util.UUID;
 import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.MageInt;
 import mage.abilities.keyword.EchoAbility;
 import mage.abilities.keyword.FlyingAbility;
 import mage.abilities.keyword.VigilanceAbility;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 
 /**
  *
@@ -43,9 +43,8 @@ import mage.cards.CardImpl;
  */
 public class HeraldOfSerra extends CardImpl {
 
-    public HeraldOfSerra(UUID ownerId) {
-        super(ownerId, 17, "Herald of Serra", Rarity.RARE, new CardType[]{CardType.CREATURE}, "{2}{W}{W}");
-        this.expansionSetCode = "USG";
+    public HeraldOfSerra(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{2}{W}{W}");
         this.subtype.add("Angel");
 
         this.power = new MageInt(3);

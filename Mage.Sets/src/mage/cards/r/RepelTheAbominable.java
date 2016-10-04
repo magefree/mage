@@ -25,14 +25,14 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.eldritchmoon;
+package mage.cards.r;
 
 import java.util.UUID;
 import mage.abilities.effects.common.PreventAllDamageByAllObjectsEffect;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Duration;
-import mage.constants.Rarity;
 import mage.filter.FilterObject;
 import mage.filter.predicate.Predicates;
 import mage.filter.predicate.mageobject.SubtypePredicate;
@@ -49,9 +49,8 @@ public class RepelTheAbominable extends CardImpl {
         filter.add(Predicates.not(new SubtypePredicate("Human")));
     }
 
-    public RepelTheAbominable(UUID ownerId) {
-        super(ownerId, 38, "Repel the Abominable", Rarity.UNCOMMON, new CardType[]{CardType.INSTANT}, "{1}{W}");
-        this.expansionSetCode = "EMN";
+    public RepelTheAbominable(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.INSTANT},"{1}{W}");
 
         // Prevent all damage that would be dealt this turn by non-Human sources.
         this.getSpellAbility().addEffect(new PreventAllDamageByAllObjectsEffect(filter, Duration.EndOfTurn, false));

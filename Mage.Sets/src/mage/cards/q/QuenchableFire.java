@@ -26,16 +26,16 @@
  *  or implied, of BetaSteward_at_googlemail.com.
  */
 
-package mage.sets.conflux;
+package mage.cards.q;
 
 import java.util.UUID;
 import mage.abilities.costs.mana.ManaCostsImpl;
 import mage.abilities.effects.common.DamageTargetEffect;
 import mage.abilities.effects.common.UnlessPaysDelayedEffect;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.PhaseStep;
-import mage.constants.Rarity;
 import mage.target.TargetPlayer;
 
 /**
@@ -44,9 +44,8 @@ import mage.target.TargetPlayer;
  */
 public class QuenchableFire extends CardImpl {
 
-    public QuenchableFire(UUID ownerId) {
-        super(ownerId, 70, "Quenchable Fire", Rarity.COMMON, new CardType[]{CardType.SORCERY}, "{3}{R}");
-        this.expansionSetCode = "CON";
+    public QuenchableFire(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{3}{R}");
 
         // Quenchable Fire deals 3 damage to target player.
         this.getSpellAbility().addTarget(new TargetPlayer());

@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.shardsofalara;
+package mage.cards.q;
 
 import java.util.UUID;
 import mage.MageInt;
@@ -37,9 +37,9 @@ import mage.abilities.effects.OneShotEffect;
 import mage.abilities.keyword.ReachAbility;
 import mage.cards.Card;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Outcome;
-import mage.constants.Rarity;
 import mage.constants.TimingRule;
 import mage.constants.Zone;
 import mage.filter.common.FilterControlledLandPermanent;
@@ -54,9 +54,8 @@ import mage.players.Player;
  */
 public class QasaliAmbusher extends CardImpl {
 
-    public QasaliAmbusher(UUID ownerId) {
-        super(ownerId, 184, "Qasali Ambusher", Rarity.UNCOMMON, new CardType[]{CardType.CREATURE}, "{1}{G}{W}");
-        this.expansionSetCode = "ALA";
+    public QasaliAmbusher(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{1}{G}{W}");
         this.subtype.add("Cat");
         this.subtype.add("Warrior");
 

@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.dissension;
+package mage.cards.g;
 
 import java.util.UUID;
 import mage.abilities.costs.mana.ManaCostsImpl;
@@ -33,9 +33,9 @@ import mage.abilities.effects.common.continuous.BecomesColorTargetEffect;
 import mage.abilities.effects.common.continuous.GainControlTargetEffect;
 import mage.abilities.keyword.ForecastAbility;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Duration;
-import mage.constants.Rarity;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.filter.predicate.mageobject.MonocoloredPredicate;
 import mage.target.common.TargetCreaturePermanent;
@@ -52,9 +52,8 @@ public class GovernTheGuildless extends CardImpl {
         filter.add(new MonocoloredPredicate());
     }
 
-    public GovernTheGuildless(UUID ownerId) {
-        super(ownerId, 25, "Govern the Guildless", Rarity.RARE, new CardType[]{CardType.SORCERY}, "{5}{U}");
-        this.expansionSetCode = "DIS";
+    public GovernTheGuildless(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{5}{U}");
 
         // Gain control of target monocolored creature.
         this.getSpellAbility().addEffect(new GainControlTargetEffect(Duration.EndOfGame));

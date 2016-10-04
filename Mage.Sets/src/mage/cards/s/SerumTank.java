@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.mirrodin;
+package mage.cards.s;
 
 import java.util.UUID;
 import mage.abilities.Ability;
@@ -38,8 +38,8 @@ import mage.abilities.effects.Effect;
 import mage.abilities.effects.common.DrawCardSourceControllerEffect;
 import mage.abilities.effects.common.counter.AddCountersSourceEffect;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.constants.Zone;
 import mage.counters.CounterType;
 import mage.game.Game;
@@ -53,9 +53,8 @@ import mage.target.targetpointer.FixedTarget;
  */
 public class SerumTank extends CardImpl {
 
-    public SerumTank(UUID ownerId) {
-        super(ownerId, 240, "Serum Tank", Rarity.UNCOMMON, new CardType[]{CardType.ARTIFACT}, "{3}");
-        this.expansionSetCode = "MRD";
+    public SerumTank(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.ARTIFACT},"{3}");
 
         // Whenever {this} or another artifact comes into play, put a charge counter on {this}.
         Effect effect = new AddCountersSourceEffect(CounterType.CHARGE.createInstance());

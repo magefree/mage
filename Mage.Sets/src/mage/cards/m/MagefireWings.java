@@ -26,13 +26,12 @@
  *  or implied, of BetaSteward_at_googlemail.com.
  */
 
-package mage.sets.alarareborn;
+package mage.cards.m;
 
 import java.util.UUID;
 
 import mage.constants.CardType;
 import mage.constants.Duration;
-import mage.constants.Rarity;
 import mage.constants.Zone;
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleStaticAbility;
@@ -42,6 +41,7 @@ import mage.abilities.effects.common.continuous.GainAbilityAttachedEffect;
 import mage.abilities.keyword.EnchantAbility;
 import mage.abilities.keyword.FlyingAbility;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.AttachmentType;
 import mage.constants.Outcome;
 import mage.target.TargetPermanent;
@@ -53,9 +53,8 @@ import mage.target.common.TargetCreaturePermanent;
  */
 public class MagefireWings extends CardImpl {
 
-    public MagefireWings (UUID ownerId) {
-        super(ownerId, 88, "Magefire Wings", Rarity.COMMON, new CardType[]{CardType.ENCHANTMENT}, "{U}{R}");
-        this.expansionSetCode = "ARB";
+    public MagefireWings (UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.ENCHANTMENT},"{U}{R}");
         this.subtype.add("Aura");
 
 

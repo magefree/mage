@@ -26,13 +26,13 @@
  *  or implied, of BetaSteward_at_googlemail.com.
  */
 
-package mage.sets.tenthedition;
+package mage.cards.a;
 
 import java.util.UUID;
 import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.abilities.effects.common.DestroyTargetEffect;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.filter.predicate.permanent.TappedPredicate;
 import mage.target.common.TargetCreaturePermanent;
@@ -49,9 +49,8 @@ public class Assassinate extends CardImpl {
         filter.add(new TappedPredicate());
     }
 
-    public Assassinate(UUID ownerId) {
-        super(ownerId, 128, "Assassinate", Rarity.COMMON, new CardType[]{CardType.SORCERY}, "{2}{B}");
-        this.expansionSetCode = "10E";
+    public Assassinate(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{2}{B}");
 
         this.getSpellAbility().addTarget(new TargetCreaturePermanent(filter));
         this.getSpellAbility().addEffect(new DestroyTargetEffect());

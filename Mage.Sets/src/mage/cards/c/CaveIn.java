@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.mercadianmasques;
+package mage.cards.c;
 
 import java.util.UUID;
 import mage.ObjectColor;
@@ -33,8 +33,8 @@ import mage.abilities.costs.AlternativeCostSourceAbility;
 import mage.abilities.costs.common.ExileFromHandCost;
 import mage.abilities.effects.common.DamageEverythingEffect;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.filter.common.FilterOwnedCard;
 import mage.filter.predicate.Predicates;
 import mage.filter.predicate.mageobject.CardIdPredicate;
@@ -47,9 +47,8 @@ import mage.target.common.TargetCardInHand;
  */
 public class CaveIn extends CardImpl {
 
-    public CaveIn(UUID ownerId) {
-        super(ownerId, 180, "Cave-In", Rarity.RARE, new CardType[]{CardType.SORCERY}, "{3}{R}{R}");
-        this.expansionSetCode = "MMQ";
+    public CaveIn(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{3}{R}{R}");
 
 
         // You may exile a red card from your hand rather than pay Cave-In's mana cost.

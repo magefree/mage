@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.morningtide;
+package mage.cards.s;
 
 import java.util.UUID;
 import mage.abilities.Ability;
@@ -34,11 +34,11 @@ import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.DamageTargetEffect;
 import mage.cards.Card;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.cards.Cards;
 import mage.cards.CardsImpl;
 import mage.constants.CardType;
 import mage.constants.Outcome;
-import mage.constants.Rarity;
 import mage.game.Game;
 import mage.players.Player;
 import mage.target.common.TargetCreatureOrPlayer;
@@ -50,9 +50,8 @@ import mage.target.targetpointer.FixedTarget;
  */
 public class StompingSlabs extends CardImpl {
 
-    public StompingSlabs(UUID ownerId) {
-        super(ownerId, 107, "Stomping Slabs", Rarity.UNCOMMON, new CardType[]{CardType.SORCERY}, "{2}{R}");
-        this.expansionSetCode = "MOR";
+    public StompingSlabs(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{2}{R}");
 
         // Reveal the top seven cards of your library, then put those cards on the bottom of your library in any order. If a card named Stomping Slabs was revealed this way, Stomping Slabs deals 7 damage to target creature or player.
         this.getSpellAbility().addEffect(new StompingSlabsEffect());

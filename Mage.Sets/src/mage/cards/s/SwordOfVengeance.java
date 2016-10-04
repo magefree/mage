@@ -26,7 +26,7 @@
  *  or implied, of BetaSteward_at_googlemail.com.
  */
 
-package mage.sets.magic2011;
+package mage.cards.s;
 
 import java.util.UUID;
 import mage.abilities.Ability;
@@ -34,7 +34,6 @@ import mage.abilities.Ability;
 import mage.constants.AttachmentType;
 import mage.constants.CardType;
 import mage.constants.Outcome;
-import mage.constants.Rarity;
 import mage.constants.Zone;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.costs.mana.GenericManaCost;
@@ -47,6 +46,7 @@ import mage.abilities.keyword.HasteAbility;
 import mage.abilities.keyword.TrampleAbility;
 import mage.abilities.keyword.VigilanceAbility;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 
 
 /**
@@ -55,9 +55,8 @@ import mage.cards.CardImpl;
  */
 public class SwordOfVengeance extends CardImpl {
 
-    public SwordOfVengeance(UUID ownerId) {
-        super(ownerId, 216, "Sword of Vengeance", Rarity.RARE, new CardType[]{CardType.ARTIFACT}, "{3}");
-        this.expansionSetCode = "M11";
+    public SwordOfVengeance(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.ARTIFACT},"{3}");
         this.subtype.add("Equipment");
         
         

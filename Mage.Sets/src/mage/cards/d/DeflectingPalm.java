@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.khansoftarkir;
+package mage.cards.d;
 
 import java.util.UUID;
 import mage.MageObject;
@@ -33,10 +33,10 @@ import mage.abilities.Ability;
 import mage.abilities.effects.PreventionEffectData;
 import mage.abilities.effects.PreventionEffectImpl;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Duration;
 import mage.constants.Outcome;
-import mage.constants.Rarity;
 import mage.game.Game;
 import mage.game.events.GameEvent;
 import mage.game.permanent.Permanent;
@@ -50,9 +50,8 @@ import mage.target.TargetSource;
  */
 public class DeflectingPalm extends CardImpl {
 
-    public DeflectingPalm(UUID ownerId) {
-        super(ownerId, 173, "Deflecting Palm", Rarity.RARE, new CardType[]{CardType.INSTANT}, "{R}{W}");
-        this.expansionSetCode = "KTK";
+    public DeflectingPalm(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.INSTANT},"{R}{W}");
 
         // The next time a source of your choice would deal damage to you this turn, prevent that damage. If damage is prevented this way, Deflecting Palm deals that much damage to that source's controller.
         this.getSpellAbility().addEffect(new DeflectingPalmEffect());

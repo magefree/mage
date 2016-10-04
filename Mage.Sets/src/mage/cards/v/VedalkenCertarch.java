@@ -26,11 +26,10 @@
  *  or implied, of BetaSteward_at_googlemail.com.
  */
 
-package mage.sets.scarsofmirrodin;
+package mage.cards.v;
 
 import java.util.UUID;
 import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.constants.Zone;
 import mage.MageInt;
 import mage.abilities.Ability;
@@ -39,6 +38,7 @@ import mage.abilities.condition.common.MetalcraftCondition;
 import mage.abilities.costs.common.TapSourceCost;
 import mage.abilities.effects.common.TapTargetEffect;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.AbilityWord;
 import mage.filter.FilterPermanent;
 import mage.filter.predicate.Predicates;
@@ -60,9 +60,8 @@ public class VedalkenCertarch extends CardImpl {
                 new CardTypePredicate(CardType.LAND)));
     }
 
-    public VedalkenCertarch (UUID ownerId) {
-        super(ownerId, 52, "Vedalken Certarch", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{U}");
-        this.expansionSetCode = "SOM";
+    public VedalkenCertarch (UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{U}");
         this.subtype.add("Vedalken");
         this.subtype.add("Wizard");
 

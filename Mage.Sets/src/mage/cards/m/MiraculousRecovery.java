@@ -25,16 +25,16 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.visions;
+package mage.cards.m;
 
 import java.util.UUID;
 import mage.abilities.Ability;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.ReturnFromGraveyardToBattlefieldTargetEffect;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Outcome;
-import mage.constants.Rarity;
 import mage.counters.CounterType;
 import mage.filter.common.FilterCreatureCard;
 import mage.game.Game;
@@ -48,9 +48,8 @@ import mage.target.common.TargetCardInYourGraveyard;
  */
 public class MiraculousRecovery extends CardImpl {
 
-    public MiraculousRecovery(UUID ownerId) {
-        super(ownerId, 113, "Miraculous Recovery", Rarity.UNCOMMON, new CardType[]{CardType.INSTANT}, "{4}{W}");
-        this.expansionSetCode = "VIS";
+    public MiraculousRecovery(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.INSTANT},"{4}{W}");
 
 
         // Return target creature card from your graveyard to the battlefield. Put a +1/+1 counter on it.

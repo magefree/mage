@@ -26,17 +26,17 @@
  *  or implied, of BetaSteward_at_googlemail.com.
  */
 
-package mage.sets.guildpact;
+package mage.cards.a;
 
 import java.util.UUID;
 import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.EntersBattlefieldTriggeredAbility;
 import mage.abilities.effects.common.DestroyTargetEffect;
 import mage.abilities.keyword.FlyingAbility;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.target.TargetPermanent;
 
 /**
@@ -45,9 +45,8 @@ import mage.target.TargetPermanent;
  */
 public class AngelOfDespair extends CardImpl {
 
-    public AngelOfDespair (UUID ownerId) {
-        super(ownerId, 101, "Angel of Despair", Rarity.RARE, new CardType[]{CardType.CREATURE}, "{3}{W}{W}{B}{B}");
-        this.expansionSetCode = "GPT";
+    public AngelOfDespair (UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{3}{W}{W}{B}{B}");
         this.subtype.add("Angel");
 
 

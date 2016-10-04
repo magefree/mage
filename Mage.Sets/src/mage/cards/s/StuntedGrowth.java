@@ -25,18 +25,18 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.iceage;
+package mage.cards.s;
 
 import java.util.UUID;
 import mage.abilities.Ability;
 import mage.abilities.effects.OneShotEffect;
 import mage.cards.Card;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.cards.Cards;
 import mage.cards.CardsImpl;
 import mage.constants.CardType;
 import mage.constants.Outcome;
-import mage.constants.Rarity;
 import mage.filter.FilterCard;
 import mage.game.Game;
 import mage.players.Player;
@@ -50,9 +50,8 @@ import mage.target.common.TargetCardInHand;
  */
 public class StuntedGrowth extends CardImpl {
 
-    public StuntedGrowth(UUID ownerId) {
-        super(ownerId, 154, "Stunted Growth", Rarity.RARE, new CardType[]{CardType.SORCERY}, "{3}{G}{G}");
-        this.expansionSetCode = "ICE";
+    public StuntedGrowth(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{3}{G}{G}");
 
 
         // Target player chooses three cards from his or her hand and puts them on top of his or her library in any order.

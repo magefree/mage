@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.shadowsoverinnistrad;
+package mage.cards.p;
 
 import java.util.UUID;
 import mage.abilities.Ability;
@@ -34,9 +34,9 @@ import mage.abilities.condition.common.DeliriumCondition;
 import mage.abilities.effects.common.search.SearchTargetGraveyardHandLibraryForCardNameAndExileEffect;
 import mage.cards.Card;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Outcome;
-import mage.constants.Rarity;
 import mage.constants.Zone;
 import mage.filter.FilterCard;
 import mage.filter.predicate.Predicates;
@@ -52,9 +52,8 @@ import mage.target.common.TargetOpponent;
  */
 public class PickTheBrain extends CardImpl {
     
-    public PickTheBrain(UUID ownerId) {
-        super(ownerId, 129, "Pick the Brain", Rarity.UNCOMMON, new CardType[]{CardType.SORCERY}, "{2}{B}");
-        this.expansionSetCode = "SOI";
+    public PickTheBrain(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{2}{B}");
 
         // Target opponent reveals his or her hand. You choose a nonland card from it and exile that card.
         // <i>Delirium</i> &mdash; If there are four or more card types among cards in your graveyard, search that player's graveyard, hand, and library for any number of cards with the same name as the exiled card, exile those cards, then that player shuffles his or her library.

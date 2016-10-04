@@ -25,15 +25,15 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.theros;
+package mage.cards.a;
 
 import java.util.UUID;
 import mage.abilities.effects.common.DamageAllEffect;
 import mage.abilities.effects.common.replacement.DealtDamageToCreatureBySourceDies;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Duration;
-import mage.constants.Rarity;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.watchers.common.DamagedByWatcher;
 
@@ -43,9 +43,8 @@ import mage.watchers.common.DamagedByWatcher;
  */
 public class AngerOfTheGods extends CardImpl {
 
-    public AngerOfTheGods(UUID ownerId) {
-        super(ownerId, 112, "Anger of the Gods", Rarity.RARE, new CardType[]{CardType.SORCERY}, "{1}{R}{R}");
-        this.expansionSetCode = "THS";
+    public AngerOfTheGods(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{1}{R}{R}");
 
 
         // Anger of the Gods deals 3 damage to each creature. 

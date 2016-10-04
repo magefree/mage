@@ -25,14 +25,14 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.seventhedition;
+package mage.cards.f;
 
 import java.util.UUID;
 import mage.abilities.common.EntersBattlefieldTappedAbility;
 import mage.abilities.mana.RedManaAbility;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.Rarity;
 
 /**
  *
@@ -40,9 +40,8 @@ import mage.constants.Rarity;
  */
 public class FireDiamond extends CardImpl {
 
-    public FireDiamond(UUID ownerId) {
-        super(ownerId, 296, "Fire Diamond", Rarity.UNCOMMON, new CardType[]{CardType.ARTIFACT}, "{2}");
-        this.expansionSetCode = "7ED";
+    public FireDiamond(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.ARTIFACT},"{2}");
 
         // Fire Diamond enters the battlefield tapped.
         this.addAbility(new EntersBattlefieldTappedAbility());

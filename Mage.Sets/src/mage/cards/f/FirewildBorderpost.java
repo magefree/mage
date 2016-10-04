@@ -26,7 +26,7 @@
  *  or implied, of BetaSteward_at_googlemail.com.
  */
 
-package mage.sets.alarareborn;
+package mage.cards.f;
 
 import java.util.UUID;
 import mage.abilities.Ability;
@@ -37,8 +37,8 @@ import mage.abilities.costs.mana.GenericManaCost;
 import mage.abilities.mana.GreenManaAbility;
 import mage.abilities.mana.RedManaAbility;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.filter.common.FilterControlledLandPermanent;
 import mage.filter.common.FilterControlledPermanent;
 import mage.filter.predicate.mageobject.SupertypePredicate;
@@ -56,9 +56,8 @@ public class FirewildBorderpost extends CardImpl {
         filter.add(new SupertypePredicate("Basic"));
     }
 
-    public FirewildBorderpost (UUID ownerId) {
-        super(ownerId, 54, "Firewild Borderpost", Rarity.COMMON, new CardType[]{CardType.ARTIFACT}, "{1}{R}{G}");
-        this.expansionSetCode = "ARB";
+    public FirewildBorderpost (UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.ARTIFACT},"{1}{R}{G}");
 
 
 

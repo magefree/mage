@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.magic2011;
+package mage.cards.m;
 
 import java.util.HashSet;
 import java.util.LinkedHashSet;
@@ -37,11 +37,11 @@ import mage.abilities.Ability;
 import mage.abilities.effects.OneShotEffect;
 import mage.cards.Card;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.cards.Cards;
 import mage.cards.CardsImpl;
 import mage.constants.CardType;
 import mage.constants.Outcome;
-import mage.constants.Rarity;
 import mage.constants.Zone;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.game.Game;
@@ -54,9 +54,8 @@ import mage.players.Player;
  */
 public class MassPolymorph extends CardImpl {
 
-    public MassPolymorph(UUID ownerId) {
-        super(ownerId, 64, "Mass Polymorph", Rarity.RARE, new CardType[]{CardType.SORCERY}, "{5}{U}");
-        this.expansionSetCode = "M11";
+    public MassPolymorph(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{5}{U}");
 
         // Exile all creatures you control, then reveal cards from the top of your library until you reveal that many creature cards.
         // Put all creature cards revealed this way onto the battlefield, then shuffle the rest of the revealed cards into your library.

@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.mirrodin;
+package mage.cards.s;
 
 import java.util.UUID;
 import mage.abilities.Ability;
@@ -34,11 +34,11 @@ import mage.abilities.effects.AsThoughEffectImpl;
 import mage.abilities.effects.ReplacementEffectImpl;
 import mage.cards.Card;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.AsThoughEffectType;
 import mage.constants.CardType;
 import mage.constants.Duration;
 import mage.constants.Outcome;
-import mage.constants.Rarity;
 import mage.constants.Zone;
 import mage.game.ExileZone;
 import mage.game.Game;
@@ -55,9 +55,8 @@ import mage.util.CardUtil;
  */
 public class SharedFate extends CardImpl {
 
-    public SharedFate(UUID ownerId) {
-        super(ownerId, 49, "Shared Fate", Rarity.RARE, new CardType[]{CardType.ENCHANTMENT}, "{4}{U}");
-        this.expansionSetCode = "MRD";
+    public SharedFate(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.ENCHANTMENT},"{4}{U}");
 
         // If a player would draw a card, that player exiles the top card of one of his or her opponents' libraries face down instead.
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new SharedFateReplacementEffect()));

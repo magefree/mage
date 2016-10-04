@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.kaladesh;
+package mage.cards.a;
 
 import java.util.HashSet;
 import java.util.Set;
@@ -39,11 +39,11 @@ import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.CreateTokenEffect;
 import mage.abilities.effects.common.DoIfCostPaid;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.choices.Choice;
 import mage.choices.ChoiceImpl;
 import mage.constants.CardType;
 import mage.constants.Outcome;
-import mage.constants.Rarity;
 import mage.constants.Zone;
 import mage.counters.Counter;
 import mage.counters.CounterType;
@@ -60,9 +60,8 @@ import mage.target.common.TargetPermanentOrPlayer;
  */
 public class AnimationModule extends CardImpl {
 
-    public AnimationModule(UUID ownerId) {
-        super(ownerId, 194, "Animation Module", Rarity.RARE, new CardType[]{CardType.ARTIFACT}, "{1}");
-        this.expansionSetCode = "KLD";
+    public AnimationModule(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.ARTIFACT},"{1}");
 
         // Whenever one or more +1/+1 counters are placed on a permanent you control, you may pay {1}. If you do, create a 1/1 colorless Servo artifact creature token.
         this.addAbility(new AnimationModuleTriggeredAbility());

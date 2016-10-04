@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.starwars;
+package mage.cards.g;
 
 import java.util.UUID;
 import mage.MageInt;
@@ -34,8 +34,8 @@ import mage.abilities.common.DealsCombatDamageToAPlayerTriggeredAbility;
 import mage.abilities.effects.common.counter.AddCountersTargetEffect;
 import mage.abilities.keyword.HasteAbility;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.counters.CounterType;
 import mage.target.common.TargetOpponentsCreaturePermanent;
 
@@ -45,9 +45,8 @@ import mage.target.common.TargetOpponentsCreaturePermanent;
  */
 public class GamorreanEnforcer extends CardImpl {
 
-    public GamorreanEnforcer(UUID ownerId) {
-        super(ownerId, 106, "Gamorrean Enforcer", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{2}{R}");
-        this.expansionSetCode = "SWS";
+    public GamorreanEnforcer(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{2}{R}");
         this.subtype.add("Gamorrean");
         this.subtype.add("Warrior");
         this.power = new MageInt(3);

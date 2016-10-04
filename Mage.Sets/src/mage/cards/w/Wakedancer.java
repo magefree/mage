@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.darkascension;
+package mage.cards.w;
 
 import java.util.UUID;
 import mage.MageInt;
@@ -35,8 +35,8 @@ import mage.abilities.condition.common.MorbidCondition;
 import mage.abilities.decorator.ConditionalTriggeredAbility;
 import mage.abilities.effects.common.CreateTokenEffect;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.game.permanent.token.ZombieToken;
 
 /**
@@ -47,9 +47,8 @@ public class Wakedancer extends CardImpl {
 
     private static final String staticText = "Morbid - When {this} enters the battlefield, if a creature died this turn, put a 2/2 black Zombie creature token onto the battlefield.";
 
-    public Wakedancer(UUID ownerId) {
-        super(ownerId, 79, "Wakedancer", Rarity.UNCOMMON, new CardType[]{CardType.CREATURE}, "{2}{B}");
-        this.expansionSetCode = "DKA";
+    public Wakedancer(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{2}{B}");
         this.subtype.add("Human");
         this.subtype.add("Shaman");
 

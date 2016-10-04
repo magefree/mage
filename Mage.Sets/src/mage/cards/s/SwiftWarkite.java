@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.dragonsoftarkir;
+package mage.cards.s;
 
 import java.util.UUID;
 import mage.MageInt;
@@ -42,10 +42,10 @@ import mage.abilities.keyword.FlyingAbility;
 import mage.abilities.keyword.HasteAbility;
 import mage.cards.Card;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Duration;
 import mage.constants.Outcome;
-import mage.constants.Rarity;
 import mage.constants.Zone;
 import mage.filter.Filter.ComparisonType;
 import mage.filter.FilterCard;
@@ -65,9 +65,8 @@ import mage.target.targetpointer.FixedTarget;
  */
 public class SwiftWarkite extends CardImpl {
 
-    public SwiftWarkite(UUID ownerId) {
-        super(ownerId, 233, "Swift Warkite", Rarity.UNCOMMON, new CardType[]{CardType.CREATURE}, "{4}{B}{R}");
-        this.expansionSetCode = "DTK";
+    public SwiftWarkite(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{4}{B}{R}");
         this.subtype.add("Dragon");
         this.power = new MageInt(4);
         this.toughness = new MageInt(4);

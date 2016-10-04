@@ -25,14 +25,14 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.mercadianmasques;
+package mage.cards.s;
 
 import java.util.UUID;
 
 import mage.abilities.effects.common.DamagePlayersEffect;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.constants.TargetController;
 
 /**
@@ -41,9 +41,8 @@ import mage.constants.TargetController;
  */
 public class Sizzle extends CardImpl {
 
-    public Sizzle(UUID ownerId) {
-        super(ownerId, 213, "Sizzle", Rarity.COMMON, new CardType[]{CardType.SORCERY}, "{2}{R}");
-        this.expansionSetCode = "MMQ";
+    public Sizzle(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{2}{R}");
 
 
         // Sizzle deals 3 damage to each opponent.

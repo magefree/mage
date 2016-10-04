@@ -25,12 +25,11 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.saviorsofkamigawa;
+package mage.cards.g;
 
 import java.util.UUID;
 import mage.constants.CardType;
 import mage.constants.Duration;
-import mage.constants.Rarity;
 import mage.constants.TargetController;
 import mage.constants.Zone;
 import mage.MageInt;
@@ -38,6 +37,7 @@ import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.effects.common.continuous.MaximumHandSizeControllerEffect;
 import mage.abilities.effects.common.continuous.MaximumHandSizeControllerEffect.HandSizeModification;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.filter.common.FilterControlledCreaturePermanent;
 import mage.filter.predicate.mageobject.CardTypePredicate;
 
@@ -53,9 +53,8 @@ public class GnatMiser extends CardImpl {
         filter.add(new CardTypePredicate(CardType.ARTIFACT));
     }
 
-    public GnatMiser(UUID ownerId) {
-        super(ownerId, 70, "Gnat Miser", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{B}");
-        this.expansionSetCode = "SOK";
+    public GnatMiser(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{B}");
         this.subtype.add("Rat");
         this.subtype.add("Shaman");
 

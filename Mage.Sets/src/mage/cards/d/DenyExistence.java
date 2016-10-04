@@ -25,13 +25,13 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.shadowsoverinnistrad;
+package mage.cards.d;
 
 import java.util.UUID;
 import mage.abilities.effects.common.CounterTargetWithReplacementEffect;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.constants.Zone;
 import mage.filter.common.FilterCreatureSpell;
 import mage.target.TargetSpell;
@@ -42,9 +42,8 @@ import mage.target.TargetSpell;
  */
 public class DenyExistence extends CardImpl {
 
-    public DenyExistence(UUID ownerId) {
-        super(ownerId, 55, "Deny Existence", Rarity.COMMON, new CardType[]{CardType.INSTANT}, "{2}{U}");
-        this.expansionSetCode = "SOI";
+    public DenyExistence(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.INSTANT},"{2}{U}");
 
         // Counter target creature spell. If that spell is countered this way, exile it instead of putting it into its owner's graveyard.
         this.getSpellAbility().addEffect(new CounterTargetWithReplacementEffect(Zone.EXILED));

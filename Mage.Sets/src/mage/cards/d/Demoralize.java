@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.odyssey;
+package mage.cards.d;
 
 import java.util.UUID;
 import mage.abilities.condition.common.CardsInControllerGraveCondition;
@@ -35,9 +35,9 @@ import mage.abilities.effects.common.combat.CantBlockAllEffect;
 import mage.abilities.effects.common.continuous.GainAbilityAllEffect;
 import mage.abilities.keyword.MenaceAbility;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Duration;
-import mage.constants.Rarity;
 import mage.filter.common.FilterCreaturePermanent;
 
 
@@ -47,9 +47,8 @@ import mage.filter.common.FilterCreaturePermanent;
  */
 public class Demoralize extends CardImpl {
 
-    public Demoralize(UUID ownerId) {
-        super(ownerId, 184, "Demoralize", Rarity.COMMON, new CardType[]{CardType.INSTANT}, "{2}{R}");
-        this.expansionSetCode = "ODY";
+    public Demoralize(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.INSTANT},"{2}{R}");
 
 
         // All creatures gain menace until end of turn. (They can't be blocked except by two or more creatures.)

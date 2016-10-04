@@ -25,15 +25,15 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.apocalypse;
+package mage.cards.s;
 
 import java.util.UUID;
 import mage.abilities.effects.common.DrawCardSourceControllerEffect;
 import mage.abilities.effects.common.continuous.BecomesBasicLandTargetEffect;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Duration;
-import mage.constants.Rarity;
 import mage.target.common.TargetLandPermanent;
 
 /**
@@ -42,9 +42,8 @@ import mage.target.common.TargetLandPermanent;
  */
 public class ShimmeringMirage extends CardImpl {
 
-    public ShimmeringMirage(UUID ownerId) {
-        super(ownerId, 30, "Shimmering Mirage", Rarity.COMMON, new CardType[]{CardType.INSTANT}, "{1}{U}");
-        this.expansionSetCode = "APC";
+    public ShimmeringMirage(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.INSTANT},"{1}{U}");
 
         // Target land becomes the basic land type of your choice until end of turn.
         this.getSpellAbility().addEffect(new BecomesBasicLandTargetEffect(Duration.EndOfTurn));

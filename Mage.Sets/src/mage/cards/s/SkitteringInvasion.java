@@ -26,13 +26,13 @@
  *  or implied, of BetaSteward_at_googlemail.com.
  */
 
-package mage.sets.riseoftheeldrazi;
+package mage.cards.s;
 
 import java.util.UUID;
 import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.abilities.effects.common.CreateTokenEffect;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.game.permanent.token.EldraziSpawnToken;
 
 /**
@@ -41,9 +41,8 @@ import mage.game.permanent.token.EldraziSpawnToken;
  */
 public class SkitteringInvasion extends CardImpl {
 
-    public SkitteringInvasion (UUID ownerId) {
-        super(ownerId, 10, "Skittering Invasion", Rarity.UNCOMMON, new CardType[]{CardType.TRIBAL, CardType.SORCERY}, "{7}");
-        this.expansionSetCode = "ROE";
+    public SkitteringInvasion (UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.TRIBAL,CardType.SORCERY},"{7}");
         this.subtype.add("Eldrazi");
         this.getSpellAbility().addEffect(new CreateTokenEffect(new EldraziSpawnToken(), 5));
     }

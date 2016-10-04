@@ -25,15 +25,15 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.saviorsofkamigawa;
+package mage.cards.r;
 
 import java.util.UUID;
 import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.MageInt;
 import mage.abilities.common.SpellCastControllerTriggeredAbility;
 import mage.abilities.effects.common.DrawCardSourceControllerEffect;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.filter.FilterSpell;
 import mage.filter.predicate.mageobject.SupertypePredicate;
 
@@ -49,9 +49,8 @@ public class RekiTheHistoryOfKamigawa extends CardImpl {
         filter.add(new SupertypePredicate("Legendary"));
     }
 
-    public RekiTheHistoryOfKamigawa(UUID ownerId) {
-        super(ownerId, 142, "Reki, the History of Kamigawa", Rarity.RARE, new CardType[]{CardType.CREATURE}, "{2}{G}");
-        this.expansionSetCode = "SOK";
+    public RekiTheHistoryOfKamigawa(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{2}{G}");
         this.supertype.add("Legendary");
         this.subtype.add("Human");
         this.subtype.add("Shaman");

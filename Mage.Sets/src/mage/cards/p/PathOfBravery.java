@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.magic2014;
+package mage.cards.p;
 
 import java.util.UUID;
 import mage.abilities.Ability;
@@ -36,10 +36,10 @@ import mage.abilities.decorator.ConditionalContinuousEffect;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.continuous.BoostAllEffect;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Duration;
 import mage.constants.Outcome;
-import mage.constants.Rarity;
 import mage.constants.TargetController;
 import mage.constants.Zone;
 import mage.filter.common.FilterCreaturePermanent;
@@ -60,9 +60,8 @@ public class PathOfBravery extends CardImpl {
     }
     final String rule = "As long as your life total is greater than or equal to your starting life total, creatures you control get +1/+1";
 
-    public PathOfBravery(UUID ownerId) {
-        super(ownerId, 26, "Path of Bravery", Rarity.RARE, new CardType[]{CardType.ENCHANTMENT}, "{2}{W}");
-        this.expansionSetCode = "M14";
+    public PathOfBravery(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.ENCHANTMENT},"{2}{W}");
 
         // As long as your life total is greater than or equal to your starting life total, creatures you control get +1/+1.
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new ConditionalContinuousEffect(new BoostAllEffect(1, 1, Duration.WhileOnBattlefield, filter, true), new LifeCondition(), rule)));

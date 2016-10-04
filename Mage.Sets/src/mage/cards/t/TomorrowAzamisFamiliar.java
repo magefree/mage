@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.betrayersofkamigawa;
+package mage.cards.t;
 
 import java.util.UUID;
 import mage.MageInt;
@@ -35,10 +35,10 @@ import mage.abilities.dynamicvalue.common.StaticValue;
 import mage.abilities.effects.ReplacementEffectImpl;
 import mage.abilities.effects.common.LookLibraryAndPickControllerEffect;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Duration;
 import mage.constants.Outcome;
-import mage.constants.Rarity;
 import mage.constants.Zone;
 import mage.filter.FilterCard;
 import mage.game.Game;
@@ -50,9 +50,8 @@ import mage.game.events.GameEvent;
  */
 public class TomorrowAzamisFamiliar extends CardImpl {
 
-    public TomorrowAzamisFamiliar(UUID ownerId) {
-        super(ownerId, 58, "Tomorrow, Azami's Familiar", Rarity.RARE, new CardType[]{CardType.CREATURE}, "{5}{U}");
-        this.expansionSetCode = "BOK";
+    public TomorrowAzamisFamiliar(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{5}{U}");
         this.supertype.add("Legendary");
         this.subtype.add("Spirit");
 

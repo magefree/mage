@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.starwars;
+package mage.cards.s;
 
 import java.util.UUID;
 import mage.abilities.Ability;
@@ -44,10 +44,10 @@ import mage.abilities.keyword.HasteAbility;
 import mage.abilities.keyword.LifelinkAbility;
 import mage.cards.Card;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Duration;
 import mage.constants.Outcome;
-import mage.constants.Rarity;
 import mage.constants.TargetController;
 import mage.constants.Zone;
 import mage.filter.common.FilterCreatureCard;
@@ -66,9 +66,8 @@ import mage.watchers.common.LifeLossOtherFromCombatWatcher;
  */
 public class SithMagic extends CardImpl {
 
-    public SithMagic(UUID ownerId) {
-        super(ownerId, 215, "Sith Magic", Rarity.RARE, new CardType[]{CardType.ENCHANTMENT}, "{U}{B}{R}");
-        this.expansionSetCode = "SWS";
+    public SithMagic(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.ENCHANTMENT},"{U}{B}{R}");
 
         // <i>Hate</i> &mdash; At the beggining of each combat, if opponent lost life from a source other than combat damage this turn, you may return target card from a graveyard to the battlefield under your control. It gains lifelink and haste. Exile it at the beginning of the next end step or if it would leave the battlefield.
         TriggeredAbility triggeredAbility = new BeginningOfCombatTriggeredAbility(new SithMagicEffect(), TargetController.ANY, true);

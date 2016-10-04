@@ -26,17 +26,17 @@
  *  or implied, of BetaSteward_at_googlemail.com.
  */
 
-package mage.sets.mirrodin;
+package mage.cards.w;
 
 import java.util.UUID;
 
 import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.costs.common.SacrificeSourceCost;
 import mage.abilities.effects.common.RegenerateTargetEffect;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.Zone;
 import mage.target.common.TargetArtifactPermanent;
 
@@ -46,9 +46,8 @@ import mage.target.common.TargetArtifactPermanent;
  */
 public class WeldingJar extends CardImpl {
 
-    public WeldingJar (UUID ownerId) {
-        super(ownerId, 274, "Welding Jar", Rarity.COMMON, new CardType[]{CardType.ARTIFACT}, "{0}");
-        this.expansionSetCode = "MRD";
+    public WeldingJar (UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.ARTIFACT},"{0}");
         Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new RegenerateTargetEffect(), new SacrificeSourceCost());
         ability.addTarget(new TargetArtifactPermanent());
         this.addAbility(ability);

@@ -25,15 +25,15 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.bornofthegods;
+package mage.cards.s;
 
 import java.util.UUID;
 import mage.abilities.effects.common.DontUntapInControllersNextUntapStepTargetEffect;
 import mage.abilities.effects.common.TapTargetEffect;
 import mage.abilities.effects.keyword.ScryEffect;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.target.common.TargetCreaturePermanent;
 
 /**
@@ -42,9 +42,8 @@ import mage.target.common.TargetCreaturePermanent;
  */
 public class SuddenStorm extends CardImpl {
 
-    public SuddenStorm(UUID ownerId) {
-        super(ownerId, 53, "Sudden Storm", Rarity.COMMON, new CardType[]{CardType.INSTANT}, "{3}{U}");
-        this.expansionSetCode = "BNG";
+    public SuddenStorm(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.INSTANT},"{3}{U}");
 
 
         // Tap up to two target creatures. Those creatures don't untap during their controllers' next untap steps. Scry 1.

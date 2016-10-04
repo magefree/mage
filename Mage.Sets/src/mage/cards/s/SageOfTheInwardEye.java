@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.khansoftarkir;
+package mage.cards.s;
 
 import java.util.UUID;
 import mage.MageInt;
@@ -34,9 +34,9 @@ import mage.abilities.effects.common.continuous.GainAbilityControlledEffect;
 import mage.abilities.keyword.FlyingAbility;
 import mage.abilities.keyword.LifelinkAbility;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Duration;
-import mage.constants.Rarity;
 import mage.filter.FilterSpell;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.filter.predicate.Predicates;
@@ -54,9 +54,8 @@ public class SageOfTheInwardEye extends CardImpl {
         filterNonCreature.add(Predicates.not(new CardTypePredicate(CardType.CREATURE)));
     }
 
-    public SageOfTheInwardEye(UUID ownerId) {
-        super(ownerId, 195, "Sage of the Inward Eye", Rarity.RARE, new CardType[]{CardType.CREATURE}, "{2}{U}{R}{W}");
-        this.expansionSetCode = "KTK";
+    public SageOfTheInwardEye(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{2}{U}{R}{W}");
         this.subtype.add("Djinn");
         this.subtype.add("Wizard");
 

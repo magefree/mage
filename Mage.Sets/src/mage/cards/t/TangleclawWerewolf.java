@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.eldritchmoon;
+package mage.cards.t;
 
 import java.util.UUID;
 import mage.MageInt;
@@ -35,10 +35,11 @@ import mage.abilities.costs.mana.ManaCostsImpl;
 import mage.abilities.effects.common.TransformSourceEffect;
 import mage.abilities.effects.common.combat.CanBlockAdditionalCreatureEffect;
 import mage.abilities.keyword.TransformAbility;
+import mage.cards.f.FibrousEntangler;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Duration;
-import mage.constants.Rarity;
 import mage.constants.Zone;
 
 /**
@@ -47,16 +48,15 @@ import mage.constants.Zone;
  */
 public class TangleclawWerewolf extends CardImpl {
 
-    public TangleclawWerewolf(UUID ownerId) {
-        super(ownerId, 174, "Tangleclaw Werewolf", Rarity.UNCOMMON, new CardType[]{CardType.CREATURE}, "{2}{G}{G}");
-        this.expansionSetCode = "EMN";
+    public TangleclawWerewolf(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{2}{G}{G}");
         this.subtype.add("Werewolf");
         this.subtype.add("Horror");
         this.power = new MageInt(2);
         this.toughness = new MageInt(4);
 
         this.transformable = true;
-        this.secondSideCard = new FibrousEntangler(ownerId);
+        this.secondSideCardClazz = FibrousEntangler.class;
 
         // Tangleclaw Werewolf can block an additional creature each combat.
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new CanBlockAdditionalCreatureEffect(Duration.WhileOnBattlefield, 1)));

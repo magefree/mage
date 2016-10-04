@@ -25,15 +25,15 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.starwars;
+package mage.cards.r;
 
 import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.common.AttacksEachTurnStaticAbility;
 import mage.abilities.keyword.MonstrosityAbility;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.Rarity;
 
 /**
  *
@@ -41,9 +41,8 @@ import mage.constants.Rarity;
  */
 public class RagingReek extends CardImpl {
 
-    public RagingReek(UUID ownerId) {
-        super(ownerId, 116, "Raging Reek", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{4}{R}");
-        this.expansionSetCode = "SWS";
+    public RagingReek(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{4}{R}");
         this.subtype.add("Beast");
         this.power = new MageInt(4);
         this.toughness = new MageInt(4);

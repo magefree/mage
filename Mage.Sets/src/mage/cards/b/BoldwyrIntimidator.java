@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.morningtide;
+package mage.cards.b;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -39,9 +39,9 @@ import mage.abilities.effects.Effect;
 import mage.abilities.effects.RestrictionEffect;
 import mage.abilities.effects.common.continuous.BecomesCreatureTypeTargetEffect;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Duration;
-import mage.constants.Rarity;
 import mage.constants.Zone;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
@@ -53,9 +53,8 @@ import mage.target.common.TargetCreaturePermanent;
  */
 public class BoldwyrIntimidator extends CardImpl {
 
-    public BoldwyrIntimidator(UUID ownerId) {
-        super(ownerId, 86, "Boldwyr Intimidator", Rarity.UNCOMMON, new CardType[]{CardType.CREATURE}, "{5}{R}{R}");
-        this.expansionSetCode = "MOR";
+    public BoldwyrIntimidator(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{5}{R}{R}");
         this.subtype.add("Giant");
         this.subtype.add("Warrior");
         this.power = new MageInt(5);

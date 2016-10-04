@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.commander2015;
+package mage.cards.h;
 
 import java.util.UUID;
 import mage.MageInt;
@@ -33,8 +33,8 @@ import mage.abilities.keyword.FlyingAbility;
 import mage.abilities.keyword.VigilanceAbility;
 import mage.abilities.keyword.MyriadAbility;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.Rarity;
 
 /**
  *
@@ -42,9 +42,8 @@ import mage.constants.Rarity;
  */
 public class HeraldOfTheHost extends CardImpl {
 
-    public HeraldOfTheHost(UUID ownerId) {
-        super(ownerId, 4, "Herald of the Host", Rarity.UNCOMMON, new CardType[]{CardType.CREATURE}, "{3}{W}{W}");
-        this.expansionSetCode = "C15";
+    public HeraldOfTheHost(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{3}{W}{W}");
         this.subtype.add("Angel");
         this.power = new MageInt(4);
         this.toughness = new MageInt(4);

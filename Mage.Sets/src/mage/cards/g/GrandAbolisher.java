@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.magic2012;
+package mage.cards.g;
 
 import java.util.UUID;
 import mage.MageInt;
@@ -34,10 +34,10 @@ import mage.abilities.Ability;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.effects.ContinuousRuleModifyingEffectImpl;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Duration;
 import mage.constants.Outcome;
-import mage.constants.Rarity;
 import mage.constants.Zone;
 import mage.game.Game;
 import mage.game.events.GameEvent;
@@ -49,9 +49,8 @@ import mage.players.Player;
  */
 public class GrandAbolisher extends CardImpl {
 
-    public GrandAbolisher(UUID ownerId) {
-        super(ownerId, 19, "Grand Abolisher", Rarity.RARE, new CardType[]{CardType.CREATURE}, "{W}{W}");
-        this.expansionSetCode = "M12";
+    public GrandAbolisher(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{W}{W}");
         this.subtype.add("Human");
         this.subtype.add("Cleric");
 

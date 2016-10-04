@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.theros;
+package mage.cards.a;
 
 import java.util.UUID;
 import mage.MageInt;
@@ -38,9 +38,9 @@ import mage.abilities.keyword.HeroicAbility;
 import mage.abilities.keyword.TrampleAbility;
 import mage.abilities.keyword.VigilanceAbility;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Duration;
-import mage.constants.Rarity;
 import mage.filter.common.FilterCreaturePermanent;
 
 /**
@@ -51,9 +51,8 @@ public class AnaxAndCymede extends CardImpl {
 
     private static final FilterCreaturePermanent filter = new FilterCreaturePermanent();
 
-    public AnaxAndCymede(UUID ownerId) {
-        super(ownerId, 186, "Anax and Cymede", Rarity.RARE, new CardType[]{CardType.CREATURE}, "{1}{R}{W}");
-        this.expansionSetCode = "THS";
+    public AnaxAndCymede(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{1}{R}{W}");
         this.supertype.add("Legendary");
         this.subtype.add("Human");
         this.subtype.add("Soldier");

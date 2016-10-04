@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.starwars;
+package mage.cards.f;
 
 import java.util.UUID;
 import mage.abilities.Mode;
@@ -33,8 +33,8 @@ import mage.abilities.effects.common.CopyTargetSpellEffect;
 import mage.abilities.effects.common.DestroyTargetEffect;
 import mage.abilities.effects.common.ReturnFromGraveyardToHandTargetEffect;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.filter.Filter;
 import mage.filter.FilterSpell;
 import mage.filter.common.FilterNonlandPermanent;
@@ -59,9 +59,8 @@ public class FerocityOfTheUnderworld extends CardImpl {
         filterMode2.add(Predicates.or(new CardTypePredicate(CardType.INSTANT), new CardTypePredicate(CardType.SORCERY)));
     }
 
-    public FerocityOfTheUnderworld(UUID ownerId) {
-        super(ownerId, 194, "Ferocity of the Underworld", Rarity.UNCOMMON, new CardType[]{CardType.INSTANT}, "{B}{R}{G}");
-        this.expansionSetCode = "SWS";
+    public FerocityOfTheUnderworld(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.INSTANT},"{B}{R}{G}");
 
         // Choose one - Destroy target nonland permanent with converted mana cost 3 or less.
         this.getSpellAbility().addEffect(new DestroyTargetEffect());

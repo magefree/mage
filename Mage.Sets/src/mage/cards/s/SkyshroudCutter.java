@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.nemesis;
+package mage.cards.s;
 
 import java.util.UUID;
 import mage.MageInt;
@@ -33,8 +33,8 @@ import mage.abilities.condition.common.PermanentsOnTheBattlefieldCondition;
 import mage.abilities.costs.AlternativeCostSourceAbility;
 import mage.abilities.costs.common.GainLifePlayersCost;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.filter.FilterPermanent;
 import mage.filter.predicate.mageobject.SubtypePredicate;
 
@@ -50,9 +50,8 @@ public class SkyshroudCutter extends CardImpl {
         filter.add(new SubtypePredicate("Forest"));
     }
     
-    public SkyshroudCutter(UUID ownerId) {
-        super(ownerId, 118, "Skyshroud Cutter", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{3}{G}");
-        this.expansionSetCode = "NEM";
+    public SkyshroudCutter(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{3}{G}");
         this.subtype.add("Beast");
 
         this.power = new MageInt(2);

@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.betrayersofkamigawa;
+package mage.cards.g;
 
 import java.util.UUID;
 import mage.MageInt;
@@ -39,10 +39,10 @@ import mage.abilities.effects.common.continuous.BecomesCreatureAttachedEffect;
 import mage.abilities.keyword.EnchantAbility;
 import mage.abilities.keyword.FlyingAbility;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Duration;
 import mage.constants.Outcome;
-import mage.constants.Rarity;
 import mage.constants.Zone;
 import mage.filter.common.FilterLandPermanent;
 import mage.filter.predicate.mageobject.SubtypePredicate;
@@ -62,9 +62,8 @@ public class GenjuOfTheFalls extends CardImpl {
         FILTER.add(new SubtypePredicate("Island"));
     }
 
-    public GenjuOfTheFalls(UUID ownerId) {
-        super(ownerId, 35, "Genju of the Falls", Rarity.UNCOMMON, new CardType[]{CardType.ENCHANTMENT}, "{U}");
-        this.expansionSetCode = "BOK";
+    public GenjuOfTheFalls(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.ENCHANTMENT},"{U}");
         this.subtype.add("Aura");
 
         // Enchant Island

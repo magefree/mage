@@ -25,14 +25,14 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.shadowsoverinnistrad;
+package mage.cards.g;
 
 import java.util.UUID;
 import mage.abilities.effects.common.PutOnLibraryTargetEffect;
 import mage.abilities.effects.keyword.InvestigateEffect;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.target.TargetPermanent;
 
 /**
@@ -41,9 +41,8 @@ import mage.target.TargetPermanent;
  */
 public class GoneMissing extends CardImpl {
 
-    public GoneMissing(UUID ownerId) {
-        super(ownerId, 67, "Gone Missing", Rarity.COMMON, new CardType[]{CardType.SORCERY}, "{4}{U}");
-        this.expansionSetCode = "SOI";
+    public GoneMissing(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{4}{U}");
 
         // Put target permanent on top of its owner's library.
         this.getSpellAbility().addEffect(new PutOnLibraryTargetEffect(true));

@@ -25,16 +25,16 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.shadowmoor;
+package mage.cards.t;
 
 import java.util.Set;
 import java.util.UUID;
 import mage.abilities.Ability;
 import mage.abilities.effects.OneShotEffect;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Outcome;
-import mage.constants.Rarity;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
@@ -46,9 +46,8 @@ import mage.players.Player;
  */
 public class ThoughtweftGambit extends CardImpl {
 
-    public ThoughtweftGambit(UUID ownerId) {
-        super(ownerId, 154, "Thoughtweft Gambit", Rarity.UNCOMMON, new CardType[]{CardType.INSTANT}, "{4}{W/U}{W/U}");
-        this.expansionSetCode = "SHM";
+    public ThoughtweftGambit(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.INSTANT},"{4}{W/U}{W/U}");
 
         // Tap all creatures your opponents control and untap all creatures you control.
         this.getSpellAbility().addEffect(new ThoughtweftGambitEffect());

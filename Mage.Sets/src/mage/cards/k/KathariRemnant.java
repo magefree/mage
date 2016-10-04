@@ -26,11 +26,10 @@
  *  or implied, of BetaSteward_at_googlemail.com.
  */
 
-package mage.sets.alarareborn;
+package mage.cards.k;
 
 import java.util.UUID;
 import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.constants.Zone;
 import mage.MageInt;
 import mage.abilities.common.SimpleActivatedAbility;
@@ -39,6 +38,7 @@ import mage.abilities.effects.common.RegenerateSourceEffect;
 import mage.abilities.keyword.CascadeAbility;
 import mage.abilities.keyword.FlyingAbility;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 
 /**
  *
@@ -46,9 +46,8 @@ import mage.cards.CardImpl;
  */
 public class KathariRemnant extends CardImpl {
 
-    public KathariRemnant (UUID ownerId) {
-        super(ownerId, 23, "Kathari Remnant", Rarity.UNCOMMON, new CardType[]{CardType.CREATURE}, "{2}{U}{B}");
-        this.expansionSetCode = "ARB";
+    public KathariRemnant (UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{2}{U}{B}");
         this.subtype.add("Bird");
         this.subtype.add("Skeleton");
 

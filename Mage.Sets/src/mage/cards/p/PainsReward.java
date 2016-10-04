@@ -25,15 +25,15 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.saviorsofkamigawa;
+package mage.cards.p;
 
 import java.util.UUID;
 import mage.abilities.Ability;
 import mage.abilities.effects.OneShotEffect;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Outcome;
-import mage.constants.Rarity;
 import mage.game.Game;
 import mage.players.Player;
 import mage.players.PlayerList;
@@ -44,9 +44,8 @@ import mage.players.PlayerList;
  */
 public class PainsReward extends CardImpl {
 
-    public PainsReward(UUID ownerId) {
-        super(ownerId, 85, "Pain's Reward", Rarity.RARE, new CardType[]{CardType.SORCERY}, "{2}{B}");
-        this.expansionSetCode = "SOK";
+    public PainsReward(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{2}{B}");
 
 
         // Each player may bid life. You start the bidding with a bid of any number. In turn order, each player may top the high bid. The bidding ends if the high bid stands. The high bidder loses life equal to the high bid and draws four cards.

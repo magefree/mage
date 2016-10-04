@@ -26,14 +26,14 @@
  *  or implied, of BetaSteward_at_googlemail.com.
  */
 
-package mage.sets.mirrodinbesieged;
+package mage.cards.t;
 
 import java.util.UUID;
 
 import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.abilities.effects.common.continuous.BoostOpponentsEffect;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.Duration;
 
 /**
@@ -42,9 +42,8 @@ import mage.constants.Duration;
  */
 public class TurnTheTide extends CardImpl {
 
-    public TurnTheTide (UUID ownerId) {
-        super(ownerId, 35, "Turn the Tide", Rarity.COMMON, new CardType[]{CardType.INSTANT}, "{1}{U}");
-        this.expansionSetCode = "MBS";
+    public TurnTheTide (UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.INSTANT},"{1}{U}");
 
         this.getSpellAbility().addEffect(new BoostOpponentsEffect(-2, 0, Duration.EndOfTurn));
     }

@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.planechase2012;
+package mage.cards.s;
 
 import java.util.UUID;
 import mage.MageInt;
@@ -36,11 +36,11 @@ import mage.abilities.effects.OneShotEffect;
 import mage.abilities.keyword.NinjutsuAbility;
 import mage.cards.Card;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.cards.Cards;
 import mage.cards.CardsImpl;
 import mage.constants.CardType;
 import mage.constants.Outcome;
-import mage.constants.Rarity;
 import mage.constants.Zone;
 import mage.filter.common.FilterNonlandCard;
 import mage.game.Game;
@@ -53,9 +53,8 @@ import mage.target.TargetCard;
  */
 public class SilentBladeOni extends CardImpl {
 
-    public SilentBladeOni(UUID ownerId) {
-        super(ownerId, 105, "Silent-Blade Oni", Rarity.RARE, new CardType[]{CardType.CREATURE}, "{3}{U}{U}{B}{B}");
-        this.expansionSetCode = "PC2";
+    public SilentBladeOni(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{3}{U}{U}{B}{B}");
         this.subtype.add("Demon");
         this.subtype.add("Ninja");
 

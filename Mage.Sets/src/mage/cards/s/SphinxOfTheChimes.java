@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.returntoravnica;
+package mage.cards.s;
 
 import java.util.HashSet;
 import java.util.Map;
@@ -33,7 +33,6 @@ import java.util.Set;
 import java.util.UUID;
 
 import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleActivatedAbility;
@@ -42,6 +41,7 @@ import mage.abilities.effects.common.DrawCardSourceControllerEffect;
 import mage.abilities.keyword.FlyingAbility;
 import mage.cards.Card;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.cards.Cards;
 import mage.cards.CardsImpl;
 import mage.constants.Zone;
@@ -58,9 +58,8 @@ import mage.target.common.TargetCardInHand;
  */
 public class SphinxOfTheChimes extends CardImpl {
 
-    public SphinxOfTheChimes(UUID ownerId) {
-        super(ownerId, 52, "Sphinx of the Chimes", Rarity.RARE, new CardType[]{CardType.CREATURE}, "{4}{U}{U}");
-        this.expansionSetCode = "RTR";
+    public SphinxOfTheChimes(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{4}{U}{U}");
         this.subtype.add("Sphinx");
 
         this.power = new MageInt(5);

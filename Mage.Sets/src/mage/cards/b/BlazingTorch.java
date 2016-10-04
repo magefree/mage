@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.zendikar;
+package mage.cards.b;
 
 import java.util.List;
 import java.util.UUID;
@@ -33,7 +33,6 @@ import mage.constants.AttachmentType;
 import mage.constants.CardType;
 import mage.constants.Duration;
 import mage.constants.Outcome;
-import mage.constants.Rarity;
 import mage.constants.Zone;
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleActivatedAbility;
@@ -47,6 +46,7 @@ import mage.abilities.effects.RestrictionEffect;
 import mage.abilities.effects.common.continuous.GainAbilityAttachedEffect;
 import mage.abilities.keyword.EquipAbility;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.players.Player;
@@ -58,9 +58,8 @@ import mage.target.common.TargetCreatureOrPlayer;
  */
 public class BlazingTorch extends CardImpl {
 
-    public BlazingTorch(UUID ownerId) {
-        super(ownerId, 197, "Blazing Torch", Rarity.UNCOMMON, new CardType[]{CardType.ARTIFACT}, "{1}");
-        this.expansionSetCode = "ZEN";
+    public BlazingTorch(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.ARTIFACT},"{1}");
         this.subtype.add("Equipment");
 
         // Equipped creature can't be blocked by Vampires or Zombies. (!this is a static ability of the equipment)

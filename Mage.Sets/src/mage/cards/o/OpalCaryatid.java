@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.urzassaga;
+package mage.cards.o;
 
 import java.util.UUID;
 import mage.MageInt;
@@ -35,9 +35,9 @@ import mage.abilities.condition.common.SourceMatchesFilterCondition;
 import mage.abilities.decorator.ConditionalTriggeredAbility;
 import mage.abilities.effects.common.continuous.BecomesCreatureSourceEffect;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Duration;
-import mage.constants.Rarity;
 import mage.filter.common.FilterCreatureSpell;
 import mage.filter.common.FilterEnchantmentPermanent;
 import mage.game.permanent.token.Token;
@@ -49,9 +49,8 @@ import mage.game.permanent.token.Token;
  */
 public class OpalCaryatid extends CardImpl {
 
-    public OpalCaryatid(UUID ownerId) {
-        super(ownerId, 24, "Opal Caryatid", Rarity.COMMON, new CardType[]{CardType.ENCHANTMENT}, "{W}");
-        this.expansionSetCode = "USG";
+    public OpalCaryatid(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.ENCHANTMENT},"{W}");
 
         // When an opponent casts a creature spell, if Opal Caryatid is an enchantment, Opal Caryatid becomes a 2/2 Soldier creature.
         TriggeredAbility ability = new SpellCastOpponentTriggeredAbility(new BecomesCreatureSourceEffect(new OpalCaryatidSoldier(), "", Duration.WhileOnBattlefield, true, false),

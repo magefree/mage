@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.futuresight;
+package mage.cards.n;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -40,9 +40,9 @@ import mage.abilities.effects.common.ExileTargetEffect;
 import mage.abilities.effects.common.combat.CantBeBlockedByMoreThanOneSourceEffect;
 import mage.abilities.effects.common.combat.MustBeBlockedByAtLeastOneSourceEffect;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Outcome;
-import mage.constants.Rarity;
 import mage.constants.Zone;
 import mage.filter.common.FilterControlledCreaturePermanent;
 import mage.game.Game;
@@ -57,9 +57,8 @@ import mage.util.CardUtil;
  */
 public class NacatlWarPride extends CardImpl {
 
-    public NacatlWarPride(UUID ownerId) {
-        super(ownerId, 147, "Nacatl War-Pride", Rarity.UNCOMMON, new CardType[]{CardType.CREATURE}, "{3}{G}{G}{G}");
-        this.expansionSetCode = "FUT";
+    public NacatlWarPride(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{3}{G}{G}{G}");
         this.subtype.add("Cat");
         this.subtype.add("Warrior");
         this.power = new MageInt(3);

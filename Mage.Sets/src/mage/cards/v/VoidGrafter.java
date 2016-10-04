@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.oathofthegatewatch;
+package mage.cards.v;
 
 import java.util.UUID;
 import mage.MageInt;
@@ -36,9 +36,9 @@ import mage.abilities.keyword.DevoidAbility;
 import mage.abilities.keyword.FlashAbility;
 import mage.abilities.keyword.HexproofAbility;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Duration;
-import mage.constants.Rarity;
 import mage.filter.common.FilterControlledCreaturePermanent;
 import mage.filter.predicate.permanent.AnotherPredicate;
 import mage.target.common.TargetControlledCreaturePermanent;
@@ -55,9 +55,8 @@ public class VoidGrafter extends CardImpl {
         filter.add(new AnotherPredicate());
     }
 
-    public VoidGrafter(UUID ownerId) {
-        super(ownerId, 150, "Void Grafter", Rarity.UNCOMMON, new CardType[]{CardType.CREATURE}, "{1}{G}{U}");
-        this.expansionSetCode = "OGW";
+    public VoidGrafter(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{1}{G}{U}");
         this.subtype.add("Eldrazi");
         this.subtype.add("Drone");
         this.power = new MageInt(2);

@@ -25,15 +25,15 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.guildpact;
+package mage.cards.w;
 
 import java.util.UUID;
 
 import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.abilities.effects.common.DrawCardSourceControllerEffect;
 import mage.abilities.effects.common.PreventDamageToTargetEffect;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.Duration;
 import mage.target.common.TargetCreatureOrPlayer;
 
@@ -43,9 +43,8 @@ import mage.target.common.TargetCreatureOrPlayer;
  */
 public class Withstand extends CardImpl {
 
-    public Withstand(UUID ownerId) {
-        super(ownerId, 21, "Withstand", Rarity.COMMON, new CardType[]{CardType.INSTANT}, "{2}{W}");
-        this.expansionSetCode = "GPT";
+    public Withstand(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.INSTANT},"{2}{W}");
 
         this.getSpellAbility().addEffect(new PreventDamageToTargetEffect(Duration.EndOfTurn, 3));
         this.getSpellAbility().addTarget(new TargetCreatureOrPlayer());

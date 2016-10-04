@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.zendikar;
+package mage.cards.w;
 
 import java.util.UUID;
 import mage.MageInt;
@@ -33,8 +33,8 @@ import mage.abilities.common.DealsDamageToOpponentTriggeredAbility;
 import mage.abilities.effects.common.PutPermanentOnBattlefieldEffect;
 import mage.abilities.keyword.DoubleStrikeAbility;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.filter.common.FilterCreatureCard;
 import mage.filter.predicate.mageobject.SubtypePredicate;
 
@@ -50,9 +50,8 @@ public class WarrenInstigator extends CardImpl {
         filter.add(new SubtypePredicate("Goblin"));
     }
 
-    public WarrenInstigator(UUID ownerId) {
-        super(ownerId, 154, "Warren Instigator", Rarity.MYTHIC, new CardType[]{CardType.CREATURE}, "{R}{R}");
-        this.expansionSetCode = "ZEN";
+    public WarrenInstigator(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{R}{R}");
         this.subtype.add("Goblin");
         this.subtype.add("Berserker");
 

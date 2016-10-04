@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.championsofkamigawa;
+package mage.cards.t;
 
 import java.util.UUID;
 import mage.MageInt;
@@ -43,10 +43,10 @@ import mage.abilities.effects.common.continuous.BoostEquippedEffect;
 import mage.abilities.keyword.EquipAbility;
 import mage.abilities.keyword.FlyingAbility;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Duration;
 import mage.constants.Outcome;
-import mage.constants.Rarity;
 import mage.constants.Zone;
 import mage.game.Game;
 import mage.game.events.GameEvent;
@@ -62,9 +62,8 @@ import mage.target.targetpointer.FixedTarget;
  */
 public class TatsumasaTheDragonsFang extends CardImpl {
 
-    public TatsumasaTheDragonsFang(UUID ownerId) {
-        super(ownerId, 270, "Tatsumasa, the Dragon's Fang", Rarity.RARE, new CardType[]{CardType.ARTIFACT}, "{6}");
-        this.expansionSetCode = "CHK";
+    public TatsumasaTheDragonsFang(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.ARTIFACT},"{6}");
         this.supertype.add("Legendary");
         this.subtype.add("Equipment");
 

@@ -25,15 +25,15 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.shadowsoverinnistrad;
+package mage.cards.s;
 
 import java.util.UUID;
 import mage.abilities.effects.common.CreateTokenEffect;
 import mage.abilities.effects.common.ExileTargetEffect;
 import mage.abilities.effects.common.GainLifeEffect;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.filter.common.FilterCreatureCard;
 import mage.game.permanent.token.ZombieToken;
 import mage.target.common.TargetCardInGraveyard;
@@ -44,9 +44,8 @@ import mage.target.common.TargetCardInGraveyard;
  */
 public class ShambleBack extends CardImpl {
 
-    public ShambleBack(UUID ownerId) {
-        super(ownerId, 134, "Shamble Back", Rarity.COMMON, new CardType[]{CardType.SORCERY}, "{B}");
-        this.expansionSetCode = "SOI";
+    public ShambleBack(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{B}");
 
         // Exile target creature card from a graveyard. Put a 2/2 black Zombie creature token onto the battlefield. You gain 2 life.
         this.getSpellAbility().addEffect(new ExileTargetEffect());

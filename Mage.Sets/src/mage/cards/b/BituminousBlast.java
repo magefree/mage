@@ -26,14 +26,14 @@
 * or implied, of BetaSteward_at_googlemail.com.
 */
 
-package mage.sets.alarareborn;
+package mage.cards.b;
 
 import java.util.UUID;
 import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.abilities.effects.common.DamageTargetEffect;
 import mage.abilities.keyword.CascadeAbility;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.target.common.TargetCreaturePermanent;
 
 /**
@@ -42,9 +42,8 @@ import mage.target.common.TargetCreaturePermanent;
  */
 public class BituminousBlast extends CardImpl {
 
-    public BituminousBlast(UUID ownerId) {
-        super(ownerId, 34, "Bituminous Blast", Rarity.UNCOMMON, new CardType[]{CardType.INSTANT}, "{3}{B}{R}");
-        this.expansionSetCode = "ARB";
+    public BituminousBlast(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.INSTANT},"{3}{B}{R}");
         
 
         this.getSpellAbility().addTarget(new TargetCreaturePermanent());

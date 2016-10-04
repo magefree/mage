@@ -25,15 +25,15 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.darkascension;
+package mage.cards.l;
 
 import java.util.UUID;
 import mage.abilities.costs.mana.ManaCostsImpl;
 import mage.abilities.effects.common.CreateTokenEffect;
 import mage.abilities.keyword.FlashbackAbility;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.constants.TimingRule;
 import mage.game.permanent.token.SpiritWhiteToken;
 
@@ -43,9 +43,8 @@ import mage.game.permanent.token.SpiritWhiteToken;
  */
 public class LingeringSouls extends CardImpl {
 
-    public LingeringSouls(UUID ownerId) {
-        super(ownerId, 12, "Lingering Souls", Rarity.UNCOMMON, new CardType[]{CardType.SORCERY}, "{2}{W}");
-        this.expansionSetCode = "DKA";
+    public LingeringSouls(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{2}{W}");
 
 
         // Put two 1/1 white Spirit creature tokens with flying onto the battlefield.

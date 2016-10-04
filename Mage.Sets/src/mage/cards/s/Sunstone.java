@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.iceage;
+package mage.cards.s;
 
 import java.util.UUID;
 import mage.abilities.Ability;
@@ -35,9 +35,9 @@ import mage.abilities.costs.mana.ManaCostsImpl;
 import mage.abilities.effects.Effect;
 import mage.abilities.effects.common.PreventAllDamageByAllPermanentsEffect;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Duration;
-import mage.constants.Rarity;
 import mage.constants.Zone;
 import mage.filter.common.FilterControlledLandPermanent;
 import mage.filter.predicate.mageobject.SupertypePredicate;
@@ -55,9 +55,8 @@ public class Sunstone extends CardImpl {
         filter.add(new SupertypePredicate("Snow"));
     }
 
-    public Sunstone(UUID ownerId) {
-        super(ownerId, 316, "Sunstone", Rarity.UNCOMMON, new CardType[]{CardType.ARTIFACT}, "{3}");
-        this.expansionSetCode = "ICE";
+    public Sunstone(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.ARTIFACT},"{3}");
 
         // {2}, Sacrifice a snow land: Prevent all combat damage that would be dealt this turn.
         Effect effect = new PreventAllDamageByAllPermanentsEffect(Duration.EndOfTurn, true);

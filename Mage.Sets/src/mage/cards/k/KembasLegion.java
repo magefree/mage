@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.mirrodinbesieged;
+package mage.cards.k;
 
 import java.util.List;
 import java.util.UUID;
@@ -33,7 +33,6 @@ import mage.constants.CardType;
 import mage.constants.Duration;
 import mage.constants.Layer;
 import mage.constants.Outcome;
-import mage.constants.Rarity;
 import mage.constants.SubLayer;
 import mage.constants.Zone;
 import mage.MageInt;
@@ -42,6 +41,7 @@ import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.effects.ContinuousEffectImpl;
 import mage.abilities.keyword.VigilanceAbility;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 
@@ -51,9 +51,8 @@ import mage.game.permanent.Permanent;
  */
 public class KembasLegion extends CardImpl {
 
-    public KembasLegion(UUID ownerId) {
-        super(ownerId, 9, "Kemba's Legion", Rarity.UNCOMMON, new CardType[]{CardType.CREATURE}, "{5}{W}{W}");
-        this.expansionSetCode = "MBS";
+    public KembasLegion(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{5}{W}{W}");
         this.subtype.add("Cat");
         this.subtype.add("Soldier");
 

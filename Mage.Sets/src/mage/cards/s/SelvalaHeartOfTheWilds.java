@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.conspiracytakethecrown;
+package mage.cards.s;
 
 import java.util.UUID;
 import mage.MageInt;
@@ -39,6 +39,7 @@ import mage.abilities.effects.Effect;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.mana.DynamicManaAbility;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.*;
 import mage.filter.common.FilterControlledCreaturePermanent;
 import mage.filter.common.FilterCreaturePermanent;
@@ -64,9 +65,8 @@ public class SelvalaHeartOfTheWilds extends CardImpl {
 
     private static final String rule = "Whenever another creature enters the battlefield, its controller may draw a card if its power is greater than each other creature's power";
 
-    public SelvalaHeartOfTheWilds(UUID ownerId) {
-        super(ownerId, 70, "Selvala, Heart of the Wilds", Rarity.MYTHIC, new CardType[]{CardType.CREATURE}, "{1}{G}{G}");
-        this.expansionSetCode = "CN2";
+    public SelvalaHeartOfTheWilds(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{1}{G}{G}");
         this.supertype.add("Legendary");
         this.subtype.add("Elf");
         this.subtype.add("Scout");

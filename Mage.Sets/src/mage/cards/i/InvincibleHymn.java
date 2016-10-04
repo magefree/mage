@@ -25,15 +25,15 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.shardsofalara;
+package mage.cards.i;
 
 import java.util.UUID;
 import mage.constants.CardType;
 import mage.constants.Outcome;
-import mage.constants.Rarity;
 import mage.abilities.Ability;
 import mage.abilities.effects.OneShotEffect;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.game.Game;
 import mage.players.Player;
 
@@ -43,9 +43,8 @@ import mage.players.Player;
  */
 public class InvincibleHymn extends CardImpl {
 
-    public InvincibleHymn(UUID ownerId) {
-        super(ownerId, 14, "Invincible Hymn", Rarity.RARE, new CardType[]{CardType.SORCERY}, "{6}{W}{W}");
-        this.expansionSetCode = "ALA";
+    public InvincibleHymn(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{6}{W}{W}");
 
 
         // Count the number of cards in your library. Your life total becomes that number.

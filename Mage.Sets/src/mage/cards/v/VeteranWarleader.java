@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.zendikarvseldrazi;
+package mage.cards.v;
 
 import java.util.HashSet;
 import java.util.Set;
@@ -45,12 +45,12 @@ import mage.abilities.keyword.FirstStrikeAbility;
 import mage.abilities.keyword.TrampleAbility;
 import mage.abilities.keyword.VigilanceAbility;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.choices.Choice;
 import mage.choices.ChoiceImpl;
 import mage.constants.CardType;
 import mage.constants.Duration;
 import mage.constants.Outcome;
-import mage.constants.Rarity;
 import mage.constants.Zone;
 import mage.filter.common.FilterControlledCreaturePermanent;
 import mage.filter.predicate.mageobject.SubtypePredicate;
@@ -72,9 +72,8 @@ public class VeteranWarleader extends CardImpl {
         filter.add(new SubtypePredicate("Ally"));
     }
 
-    public VeteranWarleader(UUID ownerId) {
-        super(ownerId, 27, "Veteran Warleader", Rarity.RARE, new CardType[]{CardType.CREATURE}, "{1}{G}{W}");
-        this.expansionSetCode = "DDP";
+    public VeteranWarleader(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{1}{G}{W}");
         this.subtype.add("Human");
         this.subtype.add("Soldier");
         this.subtype.add("Ally");

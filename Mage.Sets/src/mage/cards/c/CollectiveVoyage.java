@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.commander;
+package mage.cards.c;
 
 import java.util.UUID;
 import mage.abilities.Ability;
@@ -34,9 +34,9 @@ import mage.abilities.costs.mana.GenericManaCost;
 import mage.abilities.effects.OneShotEffect;
 import mage.cards.Card;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Outcome;
-import mage.constants.Rarity;
 import mage.constants.Zone;
 import mage.filter.common.FilterBasicLandCard;
 import mage.game.Game;
@@ -49,9 +49,8 @@ import mage.target.common.TargetCardInLibrary;
  */
 public class CollectiveVoyage extends CardImpl {
 
-    public CollectiveVoyage(UUID ownerId) {
-        super(ownerId, 147, "Collective Voyage", Rarity.RARE, new CardType[]{CardType.SORCERY}, "{G}");
-        this.expansionSetCode = "CMD";
+    public CollectiveVoyage(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{G}");
 
 
         // Join forces - Starting with you, each player may pay any amount of mana. Each player searches his or her library for up to X basic land cards, where X is the total amount of mana paid this way, puts them onto the battlefield tapped, then shuffles his or her library.

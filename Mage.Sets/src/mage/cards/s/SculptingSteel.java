@@ -25,14 +25,14 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.tenthedition;
+package mage.cards.s;
 
 import java.util.UUID;
 import mage.abilities.common.EntersBattlefieldAbility;
 import mage.abilities.effects.common.CopyPermanentEffect;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.filter.FilterPermanent;
 import mage.filter.predicate.mageobject.CardTypePredicate;
 
@@ -48,9 +48,8 @@ public class SculptingSteel extends CardImpl {
         filter.add(new CardTypePredicate(CardType.ARTIFACT));
     }
 
-    public SculptingSteel(UUID ownerId) {
-        super(ownerId, 342, "Sculpting Steel", Rarity.RARE, new CardType[]{CardType.ARTIFACT}, "{3}");
-        this.expansionSetCode = "10E";
+    public SculptingSteel(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.ARTIFACT},"{3}");
 
         // You may have Sculpting Steel enter the battlefield as a copy of any artifact on the battlefield.
         this.addAbility(new EntersBattlefieldAbility(new CopyPermanentEffect(filter), true));

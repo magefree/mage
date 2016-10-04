@@ -25,14 +25,14 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.morningtide;
+package mage.cards.f;
 
 import java.util.UUID;
 import mage.abilities.effects.common.PreventAllDamageToAllEffect;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Duration;
-import mage.constants.Rarity;
 import mage.filter.common.FilterCreaturePermanent;
 
 /**
@@ -41,9 +41,8 @@ import mage.filter.common.FilterCreaturePermanent;
  */
 public class Forfend extends CardImpl {
 
-    public Forfend(UUID ownerId) {
-        super(ownerId, 10, "Forfend", Rarity.COMMON, new CardType[]{CardType.INSTANT}, "{1}{W}");
-        this.expansionSetCode = "MOR";
+    public Forfend(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.INSTANT},"{1}{W}");
 
         // Prevent all damage that would be dealt to creatures this turn.
         this.getSpellAbility().addEffect(new PreventAllDamageToAllEffect(Duration.EndOfTurn, new FilterCreaturePermanent("creatures")));

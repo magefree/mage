@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.fifthdawn;
+package mage.cards.d;
 
 import java.util.UUID;
 import mage.MageInt;
@@ -33,8 +33,8 @@ import mage.abilities.common.SpellCastAllTriggeredAbility;
 import mage.abilities.effects.common.SacrificeControllerEffect;
 import mage.abilities.keyword.FearAbility;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.filter.common.FilterCreaturePermanent;
 
 /**
@@ -43,9 +43,8 @@ import mage.filter.common.FilterCreaturePermanent;
  */
 public class DesecrationElemental extends CardImpl {
 
-    public DesecrationElemental(UUID ownerId) {
-        super(ownerId, 45, "Desecration Elemental", Rarity.RARE, new CardType[]{CardType.CREATURE}, "{3}{B}");
-        this.expansionSetCode = "5DN";
+    public DesecrationElemental(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{3}{B}");
         this.subtype.add("Elemental");
 
         this.power = new MageInt(8);

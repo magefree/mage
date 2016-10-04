@@ -25,13 +25,13 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.nemesis;
+package mage.cards.i;
 
 import java.util.UUID;
 import mage.abilities.effects.common.combat.CantBeBlockedTargetEffect;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.target.common.TargetCreaturePermanent;
 
 /**
@@ -40,9 +40,8 @@ import mage.target.common.TargetCreaturePermanent;
  */
 public class Infiltrate extends CardImpl {
 
-    public Infiltrate(UUID ownerId) {
-        super(ownerId, 33, "Infiltrate", Rarity.COMMON, new CardType[]{CardType.INSTANT}, "{U}");
-        this.expansionSetCode = "NEM";
+    public Infiltrate(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.INSTANT},"{U}");
 
         // Target creature is unblockable this turn.
         this.getSpellAbility().addEffect(new CantBeBlockedTargetEffect());

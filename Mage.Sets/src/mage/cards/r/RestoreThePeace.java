@@ -25,16 +25,16 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.dragonsmaze;
+package mage.cards.r;
 
 import java.util.UUID;
 import mage.constants.CardType;
 import mage.constants.Outcome;
-import mage.constants.Rarity;
 import mage.constants.Zone;
 import mage.abilities.Ability;
 import mage.abilities.effects.OneShotEffect;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.watchers.common.SourceDidDamageWatcher;
@@ -45,9 +45,8 @@ import mage.watchers.common.SourceDidDamageWatcher;
  */
 public class RestoreThePeace extends CardImpl {
 
-    public RestoreThePeace(UUID ownerId) {
-        super(ownerId, 97, "Restore the Peace", Rarity.UNCOMMON, new CardType[]{CardType.INSTANT}, "{1}{W}{U}");
-        this.expansionSetCode = "DGM";
+    public RestoreThePeace(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.INSTANT},"{1}{W}{U}");
 
 
         // Return each creature that dealt damage this turn to its owner's hand.

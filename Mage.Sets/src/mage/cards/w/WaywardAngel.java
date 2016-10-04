@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.odyssey;
+package mage.cards.w;
 
 import java.util.UUID;
 import mage.MageInt;
@@ -43,10 +43,10 @@ import mage.abilities.keyword.FlyingAbility;
 import mage.abilities.keyword.TrampleAbility;
 import mage.abilities.keyword.VigilanceAbility;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.AbilityWord;
 import mage.constants.CardType;
 import mage.constants.Duration;
-import mage.constants.Rarity;
 import mage.constants.TargetController;
 import mage.constants.Zone;
 import mage.filter.common.FilterControlledCreaturePermanent;
@@ -57,9 +57,8 @@ import mage.filter.common.FilterControlledCreaturePermanent;
  */
 public class WaywardAngel extends CardImpl {
 
-    public WaywardAngel(UUID ownerId) {
-        super(ownerId, 57, "Wayward Angel", Rarity.RARE, new CardType[]{CardType.CREATURE}, "{4}{W}{W}");
-        this.expansionSetCode = "ODY";
+    public WaywardAngel(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{4}{W}{W}");
         this.subtype.add("Angel");
         this.subtype.add("Horror");
 

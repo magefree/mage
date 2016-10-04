@@ -25,17 +25,17 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.darkascension;
+package mage.cards.g;
 
 import java.util.UUID;
 import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.EntersBattlefieldTriggeredAbility;
 import mage.abilities.effects.common.PutLibraryIntoGraveTargetEffect;
 import mage.abilities.keyword.UndyingAbility;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.target.TargetPlayer;
 
 /**
@@ -44,9 +44,8 @@ import mage.target.TargetPlayer;
  */
 public class GeralfsMindcrusher extends CardImpl {
 
-    public GeralfsMindcrusher(UUID ownerId) {
-        super(ownerId, 37, "Geralf's Mindcrusher", Rarity.RARE, new CardType[]{CardType.CREATURE}, "{4}{U}{U}");
-        this.expansionSetCode = "DKA";
+    public GeralfsMindcrusher(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{4}{U}{U}");
         this.subtype.add("Zombie");
         this.subtype.add("Horror");
 

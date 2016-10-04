@@ -26,7 +26,7 @@
  *  or implied, of BetaSteward_at_googlemail.com.
  */
 
-package mage.sets.scarsofmirrodin;
+package mage.cards.d;
 
 import java.util.UUID;
 
@@ -38,6 +38,7 @@ import mage.abilities.effects.common.continuous.SetPowerToughnessSourceEffect;
 import mage.abilities.dynamicvalue.common.PermanentsOnBattlefieldCount;
 import mage.abilities.keyword.IndestructibleAbility;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.filter.common.FilterArtifactPermanent;
 import mage.filter.predicate.permanent.ControllerPredicate;
 
@@ -52,9 +53,8 @@ public class DarksteelJuggernaut extends CardImpl {
         filter.add(new ControllerPredicate(TargetController.YOU));
     }
 
-    public DarksteelJuggernaut (UUID ownerId) {
-        super(ownerId, 150, "Darksteel Juggernaut", Rarity.RARE, new CardType[]{CardType.ARTIFACT, CardType.CREATURE}, "{5}");
-        this.expansionSetCode = "SOM";
+    public DarksteelJuggernaut (UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.ARTIFACT,CardType.CREATURE},"{5}");
         this.subtype.add("Juggernaut");
         this.power = new MageInt(0);
         this.toughness = new MageInt(0);

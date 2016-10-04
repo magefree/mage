@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.alarareborn;
+package mage.cards.t;
 
 import java.util.UUID;
 import mage.MageObject;
@@ -34,9 +34,9 @@ import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.NameACardEffect;
 import mage.cards.Card;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Outcome;
-import mage.constants.Rarity;
 import mage.constants.Zone;
 import mage.filter.FilterCard;
 import mage.filter.predicate.mageobject.NamePredicate;
@@ -52,9 +52,8 @@ import mage.target.common.TargetCardInLibrary;
  */
 public class ThoughtHemorrhage extends CardImpl {
 
-    public ThoughtHemorrhage(UUID ownerId) {
-        super(ownerId, 47, "Thought Hemorrhage", Rarity.RARE, new CardType[]{CardType.SORCERY}, "{2}{B}{R}");
-        this.expansionSetCode = "ARB";
+    public ThoughtHemorrhage(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{2}{B}{R}");
 
         // Name a nonland card. Target player reveals his or her hand. Thought Hemorrhage deals 3 damage to that player for each card with that name revealed this way. Search that player's graveyard, hand, and library for all cards with that name and exile them. Then that player shuffles his or her library.
         this.getSpellAbility().addTarget(new TargetPlayer());

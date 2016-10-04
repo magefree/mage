@@ -26,16 +26,16 @@
  *  or implied, of BetaSteward_at_googlemail.com.
  */
 
-package mage.sets.mirrodinbesieged;
+package mage.cards.m;
 
 import java.util.UUID;
 import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.MageInt;
 import mage.ObjectColor;
 import mage.abilities.keyword.DoubleStrikeAbility;
 import mage.abilities.keyword.ProtectionAbility;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.filter.FilterCard;
 import mage.filter.predicate.mageobject.ColorPredicate;
 
@@ -52,9 +52,8 @@ public class MirranCrusader extends CardImpl {
         filter2.add(new ColorPredicate(ObjectColor.GREEN));
     }
 
-    public MirranCrusader (UUID ownerId) {
-        super(ownerId, 14, "Mirran Crusader", Rarity.RARE, new CardType[]{CardType.CREATURE}, "{1}{W}{W}");
-        this.expansionSetCode = "MBS";
+    public MirranCrusader (UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{1}{W}{W}");
         this.subtype.add("Human");
         this.subtype.add("Knight");
 

@@ -25,12 +25,11 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.ravnica;
+package mage.cards.g;
 
 import java.util.UUID;
 
 import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleActivatedAbility;
@@ -38,6 +37,7 @@ import mage.abilities.costs.common.SacrificeTargetCost;
 import mage.abilities.costs.mana.ColoredManaCost;
 import mage.abilities.effects.common.LoseLifeTargetEffect;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.ColoredManaSymbol;
 import mage.constants.Zone;
 import mage.target.TargetPlayer;
@@ -49,9 +49,8 @@ import mage.target.common.TargetControlledCreaturePermanent;
  */
 public class GolgariRotwurm extends CardImpl {
 
-    public GolgariRotwurm(UUID ownerId) {
-        super(ownerId, 210, "Golgari Rotwurm", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{3}{B}{G}");
-        this.expansionSetCode = "RAV";
+    public GolgariRotwurm(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{3}{B}{G}");
         this.subtype.add("Zombie");
         this.subtype.add("Wurm");
 

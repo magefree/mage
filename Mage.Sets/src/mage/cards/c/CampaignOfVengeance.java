@@ -25,15 +25,15 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.eldritchmoon;
+package mage.cards.c;
 
 import java.util.UUID;
 import mage.abilities.TriggeredAbilityImpl;
 import mage.abilities.effects.common.GainLifeEffect;
 import mage.abilities.effects.common.LoseLifeTargetEffect;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.constants.Zone;
 import mage.game.Game;
 import mage.game.events.GameEvent;
@@ -46,9 +46,8 @@ import mage.target.targetpointer.FixedTarget;
  */
 public class CampaignOfVengeance extends CardImpl {
 
-    public CampaignOfVengeance(UUID ownerId) {
-        super(ownerId, 182, "Campaign of Vengeance", Rarity.UNCOMMON, new CardType[]{CardType.ENCHANTMENT}, "{3}{W}{B}");
-        this.expansionSetCode = "EMN";
+    public CampaignOfVengeance(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.ENCHANTMENT},"{3}{W}{B}");
 
         // Whenever a creature you control attacks, defending player loses 1 life and you gain 1 life.
         this.addAbility(new CampaignOfVengeanceTriggeredAbility());

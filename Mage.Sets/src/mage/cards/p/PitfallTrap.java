@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.zendikar;
+package mage.cards.p;
 
 import java.util.UUID;
 import mage.abilities.Ability;
@@ -35,8 +35,8 @@ import mage.abilities.costs.mana.ManaCostsImpl;
 import mage.abilities.effects.common.DestroyTargetEffect;
 import mage.abilities.keyword.FlyingAbility;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.filter.common.FilterAttackingCreature;
 import mage.filter.predicate.Predicates;
 import mage.filter.predicate.mageobject.AbilityPredicate;
@@ -55,9 +55,8 @@ public class PitfallTrap extends CardImpl {
         filter.add(Predicates.not(new AbilityPredicate(FlyingAbility.class)));
     }
 
-    public PitfallTrap(UUID ownerId) {
-        super(ownerId, 32, "Pitfall Trap", Rarity.UNCOMMON, new CardType[]{CardType.INSTANT}, "{2}{W}");
-        this.expansionSetCode = "ZEN";
+    public PitfallTrap(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.INSTANT},"{2}{W}");
         this.subtype.add("Trap");
 
         // If exactly one creature is attacking, you may pay {W} rather than pay Pitfall Trap's mana cost.

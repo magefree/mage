@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.commander2013;
+package mage.cards.s;
 
 import java.util.UUID;
 import mage.abilities.Ability;
@@ -41,10 +41,10 @@ import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.continuous.BoostControlledEffect;
 import mage.abilities.keyword.EquipAbility;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Duration;
 import mage.constants.Outcome;
-import mage.constants.Rarity;
 import mage.constants.Zone;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.filter.predicate.Predicates;
@@ -66,9 +66,8 @@ public class SwordOfTheParuns extends CardImpl {
         filterUntapped.add(Predicates.not(new TappedPredicate()));
     }
 
-    public SwordOfTheParuns(UUID ownerId) {
-        super(ownerId, 264, "Sword of the Paruns", Rarity.RARE, new CardType[]{CardType.ARTIFACT}, "{4}");
-        this.expansionSetCode = "C13";
+    public SwordOfTheParuns(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.ARTIFACT},"{4}");
         this.subtype.add("Equipment");
 
         // As long as equipped creature is tapped, tapped creatures you control get +2/+0.

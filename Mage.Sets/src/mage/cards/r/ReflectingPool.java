@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.tempest;
+package mage.cards.r;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -37,11 +37,11 @@ import mage.abilities.costs.common.TapSourceCost;
 import mage.abilities.effects.common.ManaEffect;
 import mage.abilities.mana.ManaAbility;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.choices.Choice;
 import mage.choices.ChoiceImpl;
 import mage.constants.CardType;
 import mage.constants.ColoredManaSymbol;
-import mage.constants.Rarity;
 import mage.constants.Zone;
 import mage.filter.common.FilterControlledLandPermanent;
 import mage.filter.common.FilterControlledPermanent;
@@ -55,9 +55,8 @@ import mage.players.Player;
  */
 public class ReflectingPool extends CardImpl {
 
-    public ReflectingPool(UUID ownerId) {
-        super(ownerId, 328, "Reflecting Pool", Rarity.RARE, new CardType[]{CardType.LAND}, "");
-        this.expansionSetCode = "TMP";
+    public ReflectingPool(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.LAND},"");
 
         // {T}: Add to your mana pool one mana of any type that a land you control could produce.
         this.addAbility(new ReflectingPoolManaAbility());

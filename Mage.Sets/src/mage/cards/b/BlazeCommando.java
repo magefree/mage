@@ -26,7 +26,7 @@
  *  or implied, of BetaSteward_at_googlemail.com.
  */
 
-package mage.sets.dragonsmaze;
+package mage.cards.b;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -36,8 +36,8 @@ import mage.MageObject;
 import mage.abilities.TriggeredAbilityImpl;
 import mage.abilities.effects.common.CreateTokenEffect;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.constants.Zone;
 import mage.game.Game;
 import mage.game.events.GameEvent.EventType;
@@ -52,9 +52,8 @@ import mage.game.permanent.token.SoldierTokenWithHaste;
 
 public class BlazeCommando extends CardImpl {
 
-    public BlazeCommando (UUID ownerId) {
-        super(ownerId, 56, "Blaze Commando", Rarity.UNCOMMON, new CardType[]{CardType.CREATURE}, "{3}{R}{W}");
-        this.expansionSetCode = "DGM";
+    public BlazeCommando (UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{3}{R}{W}");
         this.subtype.add("Minotaur");
         this.subtype.add("Soldier");
 

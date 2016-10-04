@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.stronghold;
+package mage.cards.c;
 
 import java.util.UUID;
 import mage.MageInt;
@@ -40,10 +40,10 @@ import mage.abilities.effects.common.continuous.GainAbilitySourceEffect;
 import mage.abilities.effects.common.counter.AddCountersSourceEffect;
 import mage.abilities.keyword.FlyingAbility;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Duration;
 import mage.constants.Outcome;
-import mage.constants.Rarity;
 import mage.constants.TargetController;
 import mage.constants.Zone;
 import mage.counters.CounterType;
@@ -58,9 +58,8 @@ import mage.players.Player;
  */
 public class CrovaxTheCursed extends CardImpl {
 
-    public CrovaxTheCursed(UUID ownerId) {
-        super(ownerId, 5, "Crovax the Cursed", Rarity.RARE, new CardType[]{CardType.CREATURE}, "{2}{B}{B}");
-        this.expansionSetCode = "STH";
+    public CrovaxTheCursed(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{2}{B}{B}");
         this.supertype.add("Legendary");
         this.subtype.add("Vampire");
         this.power = new MageInt(0);

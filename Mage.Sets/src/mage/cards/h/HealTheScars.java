@@ -25,16 +25,16 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.lorwyn;
+package mage.cards.h;
 
 import java.util.UUID;
 import mage.abilities.Ability;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.RegenerateTargetEffect;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Outcome;
-import mage.constants.Rarity;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.players.Player;
@@ -46,9 +46,8 @@ import mage.target.common.TargetCreaturePermanent;
  */
 public class HealTheScars extends CardImpl {
 
-    public HealTheScars(UUID ownerId) {
-        super(ownerId, 217, "Heal the Scars", Rarity.COMMON, new CardType[]{CardType.INSTANT}, "{3}{G}");
-        this.expansionSetCode = "LRW";
+    public HealTheScars(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.INSTANT},"{3}{G}");
 
         // Regenerate target creature. You gain life equal to that creature's toughness. 
         this.getSpellAbility().addEffect(new RegenerateTargetEffect());

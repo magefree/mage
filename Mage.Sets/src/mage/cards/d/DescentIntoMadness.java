@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.avacynrestored;
+package mage.cards.d;
 
 import java.util.ArrayList;
 import java.util.LinkedList;
@@ -36,6 +36,7 @@ import mage.abilities.common.BeginningOfUpkeepTriggeredAbility;
 import mage.abilities.effects.OneShotEffect;
 import mage.cards.Card;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.counters.CounterType;
 import mage.filter.FilterCard;
 import mage.filter.common.FilterControlledPermanent;
@@ -71,9 +72,8 @@ import mage.players.PlayerList;
  */
 public class DescentIntoMadness extends CardImpl {
 
-    public DescentIntoMadness(UUID ownerId) {
-        super(ownerId, 97, "Descent into Madness", Rarity.MYTHIC, new CardType[]{CardType.ENCHANTMENT}, "{3}{B}{B}");
-        this.expansionSetCode = "AVR";
+    public DescentIntoMadness(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.ENCHANTMENT},"{3}{B}{B}");
 
 
         // At the beginning of your upkeep, put a despair counter on Descent into Madness, then each player exiles X permanents he or she controls and/or cards from his or her hand, where X is the number of despair counters on Descent into Madness.

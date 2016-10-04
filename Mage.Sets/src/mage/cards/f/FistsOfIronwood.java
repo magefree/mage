@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.ravnica;
+package mage.cards.f;
 
 import java.util.UUID;
 
@@ -39,6 +39,7 @@ import mage.abilities.effects.common.continuous.GainAbilityAttachedEffect;
 import mage.abilities.keyword.EnchantAbility;
 import mage.abilities.keyword.TrampleAbility;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.game.permanent.token.SaprolingToken;
 import mage.target.TargetPermanent;
 import mage.target.common.TargetCreaturePermanent;
@@ -49,9 +50,8 @@ import mage.target.common.TargetCreaturePermanent;
  */
 public class FistsOfIronwood extends CardImpl {
 
-    public FistsOfIronwood(UUID ownerId) {
-        super(ownerId, 164, "Fists of Ironwood", Rarity.COMMON, new CardType[]{CardType.ENCHANTMENT}, "{1}{G}");
-        this.expansionSetCode = "RAV";
+    public FistsOfIronwood(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.ENCHANTMENT},"{1}{G}");
         this.subtype.add("Aura");
 
 

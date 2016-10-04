@@ -26,15 +26,15 @@
  *  or implied, of BetaSteward_at_googlemail.com.
  */
 
-package mage.sets.zendikar;
+package mage.cards.h;
 
 import java.util.UUID;
 import mage.abilities.costs.common.SacrificeTargetCost;
 import mage.abilities.effects.common.search.SearchLibraryPutInPlayEffect;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Outcome;
-import mage.constants.Rarity;
 import mage.filter.common.FilterBasicLandCard;
 import mage.filter.common.FilterControlledLandPermanent;
 import mage.target.common.TargetCardInLibrary;
@@ -46,9 +46,8 @@ import mage.target.common.TargetControlledPermanent;
  */
 public class Harrow extends CardImpl {
 
-    public Harrow(UUID ownerId){
-        super(ownerId, 165, "Harrow", Rarity.COMMON, new CardType[]{CardType.INSTANT}, "{2}{G}");
-        this.expansionSetCode = "ZEN";
+    public Harrow(UUID ownerId, CardSetInfo setInfo){
+        super(ownerId,setInfo,new CardType[]{CardType.INSTANT},"{2}{G}");
         this.color.setGreen(true);        
 
         // As an additional cost to cast Harrow, sacrifice a land.

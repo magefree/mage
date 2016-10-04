@@ -25,12 +25,11 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.shadowmoor;
+package mage.cards.d;
 
 import java.util.UUID;
 
 import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.abilities.condition.common.ManaWasSpentCondition;
 import mage.abilities.decorator.ConditionalOneShotEffect;
 import mage.abilities.dynamicvalue.DynamicValue;
@@ -38,6 +37,7 @@ import mage.abilities.dynamicvalue.common.ManacostVariableValue;
 import mage.abilities.effects.common.GainLifeEffect;
 import mage.abilities.effects.common.InfoEffect;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.ColoredManaSymbol;
 import mage.watchers.common.ManaSpentToCastWatcher;
 
@@ -47,9 +47,8 @@ import mage.watchers.common.ManaSpentToCastWatcher;
  */
 public class DawnglowInfusion extends CardImpl {
 
-    public DawnglowInfusion(UUID ownerId) {
-        super(ownerId, 225, "Dawnglow Infusion", Rarity.UNCOMMON, new CardType[]{CardType.SORCERY}, "{X}{G/W}");
-        this.expansionSetCode = "SHM";
+    public DawnglowInfusion(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{X}{G/W}");
 
 
         // You gain X life if {G} was spent to cast Dawnglow Infusion and X life if {W} was spent to cast it.

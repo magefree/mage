@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.returntoravnica;
+package mage.cards.o;
 
 import java.util.UUID;
 
@@ -37,6 +37,7 @@ import mage.abilities.condition.common.PermanentsOnTheBattlefieldCondition;
 import mage.abilities.effects.AsThoughEffectImpl;
 import mage.abilities.keyword.DefenderAbility;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.filter.FilterPermanent;
 import mage.filter.predicate.mageobject.SubtypePredicate;
 import mage.game.Game;
@@ -47,9 +48,8 @@ import mage.game.Game;
  */
 public class OgreJailbreaker extends CardImpl {
 
-    public OgreJailbreaker(UUID ownerId) {
-        super(ownerId, 72, "Ogre Jailbreaker", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{3}{B}");
-        this.expansionSetCode = "RTR";
+    public OgreJailbreaker(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{3}{B}");
         this.subtype.add("Ogre");
         this.subtype.add("Rogue");
 

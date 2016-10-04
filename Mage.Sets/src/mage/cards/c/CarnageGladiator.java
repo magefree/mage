@@ -26,7 +26,7 @@
  *  or implied, of BetaSteward_at_googlemail.com.
  */
 
-package mage.sets.dragonsmaze;
+package mage.cards.c;
 
 import java.util.UUID;
 import mage.MageInt;
@@ -36,8 +36,8 @@ import mage.abilities.costs.mana.ManaCostsImpl;
 import mage.abilities.effects.common.LoseLifeTargetEffect;
 import mage.abilities.effects.common.RegenerateSourceEffect;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.constants.Zone;
 import mage.game.Game;
 import mage.game.events.GameEvent;
@@ -49,9 +49,8 @@ import mage.target.targetpointer.FixedTarget;
 
 public class CarnageGladiator extends CardImpl {
 
-    public CarnageGladiator (UUID ownerId) {
-        super(ownerId, 61, "Carnage Gladiator", Rarity.UNCOMMON, new CardType[]{CardType.CREATURE}, "{2}{B}{R}");
-        this.expansionSetCode = "DGM";
+    public CarnageGladiator (UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{2}{B}{R}");
         this.subtype.add("Skeleton");
         this.subtype.add("Warrior");
 

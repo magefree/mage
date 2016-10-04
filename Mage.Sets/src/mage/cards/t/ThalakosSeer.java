@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.tempestremastered;
+package mage.cards.t;
 
 import java.util.UUID;
 import mage.MageInt;
@@ -33,8 +33,8 @@ import mage.abilities.common.LeavesBattlefieldTriggeredAbility;
 import mage.abilities.effects.common.DrawCardSourceControllerEffect;
 import mage.abilities.keyword.ShadowAbility;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.Rarity;
 
 /**
  *
@@ -42,9 +42,8 @@ import mage.constants.Rarity;
  */
 public class ThalakosSeer extends CardImpl {
 
-    public ThalakosSeer(UUID ownerId) {
-        super(ownerId, 72, "Thalakos Seer", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{U}{U}");
-        this.expansionSetCode = "TPR";
+    public ThalakosSeer(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{U}{U}");
         this.subtype.add("Thalakos");
         this.subtype.add("Wizard");
         this.power = new MageInt(1);

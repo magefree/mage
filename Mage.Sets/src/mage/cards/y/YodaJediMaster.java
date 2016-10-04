@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.starwars;
+package mage.cards.y;
 
 import java.util.UUID;
 import mage.abilities.Ability;
@@ -43,10 +43,10 @@ import mage.abilities.effects.common.continuous.GainAbilityControlledEffect;
 import mage.abilities.effects.common.continuous.GainAbilityControllerEffect;
 import mage.abilities.keyword.HexproofAbility;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Duration;
 import mage.constants.Outcome;
-import mage.constants.Rarity;
 import mage.constants.TargetController;
 import mage.constants.Zone;
 import mage.filter.FilterCard;
@@ -72,9 +72,8 @@ public class YodaJediMaster extends CardImpl {
         filter.add(new OwnerPredicate(TargetController.YOU));
     }
 
-    public YodaJediMaster(UUID ownerId) {
-        super(ownerId, 178, "Yoda, Jedi Master", Rarity.MYTHIC, new CardType[]{CardType.PLANESWALKER}, "{1}{G}{U}");
-        this.expansionSetCode = "SWS";
+    public YodaJediMaster(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.PLANESWALKER},"{1}{G}{U}");
         this.subtype.add("Yoda");
 
         this.addAbility(new PlanswalkerEntersWithLoyalityCountersAbility(3));

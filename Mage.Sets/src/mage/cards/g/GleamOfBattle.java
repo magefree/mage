@@ -25,14 +25,14 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.dragonsmaze;
+package mage.cards.g;
 
 import java.util.UUID;
 import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.abilities.common.AttacksCreatureYouControlTriggeredAbility;
 import mage.abilities.effects.common.counter.AddCountersTargetEffect;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.counters.CounterType;
 
 /**
@@ -41,9 +41,8 @@ import mage.counters.CounterType;
  */
 public class GleamOfBattle extends CardImpl {
 
-    public GleamOfBattle(UUID ownerId) {
-        super(ownerId, 73, "Gleam of Battle", Rarity.UNCOMMON, new CardType[]{CardType.ENCHANTMENT}, "{4}{R}{W}");
-        this.expansionSetCode = "DGM";
+    public GleamOfBattle(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.ENCHANTMENT},"{4}{R}{W}");
 
 
         // Whenever a creature you control attacks, put a +1/+1 counter on it.

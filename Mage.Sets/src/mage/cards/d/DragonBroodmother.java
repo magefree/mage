@@ -25,12 +25,11 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.alarareborn;
+package mage.cards.d;
 
 import java.util.UUID;
 
 import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.MageInt;
 import mage.abilities.common.BeginningOfUpkeepTriggeredAbility;
 import mage.abilities.effects.common.CreateTokenEffect;
@@ -38,6 +37,7 @@ import mage.abilities.effects.common.DevourEffect;
 import mage.abilities.keyword.DevourAbility;
 import mage.abilities.keyword.FlyingAbility;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.TargetController;
 import mage.game.permanent.token.Token;
 
@@ -47,9 +47,8 @@ import mage.game.permanent.token.Token;
  */
 public class DragonBroodmother extends CardImpl {
 
-    public DragonBroodmother(UUID ownerId) {
-        super(ownerId, 53, "Dragon Broodmother", Rarity.MYTHIC, new CardType[]{CardType.CREATURE}, "{2}{R}{R}{R}{G}");
-        this.expansionSetCode = "ARB";
+    public DragonBroodmother(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{2}{R}{R}{R}{G}");
         this.subtype.add("Dragon");
 
 

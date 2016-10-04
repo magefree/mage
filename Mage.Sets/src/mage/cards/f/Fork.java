@@ -25,16 +25,16 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.limitedbeta;
+package mage.cards.f;
 
 import java.util.UUID;
 import mage.abilities.Ability;
 import mage.abilities.Mode;
 import mage.abilities.effects.OneShotEffect;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Outcome;
-import mage.constants.Rarity;
 import mage.filter.FilterSpell;
 import mage.filter.predicate.Predicates;
 import mage.filter.predicate.mageobject.CardTypePredicate;
@@ -57,9 +57,8 @@ public class Fork extends CardImpl {
                 new CardTypePredicate(CardType.SORCERY)));
     }
 
-    public Fork(UUID ownerId) {
-        super(ownerId, 154, "Fork", Rarity.RARE, new CardType[]{CardType.INSTANT}, "{R}{R}");
-        this.expansionSetCode = "LEB";
+    public Fork(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.INSTANT},"{R}{R}");
 
         // Copy target instant or sorcery spell, except that the copy is red. You may choose new targets for the copy.
         this.getSpellAbility().addEffect(new ForkEffect());

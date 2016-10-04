@@ -25,15 +25,15 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.shardsofalara;
+package mage.cards.c;
 
 import java.util.UUID;
 import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.MageInt;
 import mage.abilities.common.OnEventTriggeredAbility;
 import mage.abilities.effects.common.discard.DiscardEachPlayerEffect;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.game.events.GameEvent.EventType;
 
 /**
@@ -42,9 +42,8 @@ import mage.game.events.GameEvent.EventType;
  */
 public class CunningLethemancer extends CardImpl {
 
-    public CunningLethemancer(UUID ownerId) {
-        super(ownerId, 69, "Cunning Lethemancer", Rarity.RARE, new CardType[]{CardType.CREATURE}, "{2}{B}");
-        this.expansionSetCode = "ALA";
+    public CunningLethemancer(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{2}{B}");
         this.subtype.add("Human");
         this.subtype.add("Wizard");
 

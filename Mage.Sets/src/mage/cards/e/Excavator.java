@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.tempest;
+package mage.cards.e;
 
 import java.util.UUID;
 import mage.abilities.Abilities;
@@ -43,11 +43,11 @@ import mage.abilities.keyword.MountainwalkAbility;
 import mage.abilities.keyword.PlainswalkAbility;
 import mage.abilities.keyword.SwampwalkAbility;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Duration;
 import mage.constants.Layer;
 import mage.constants.Outcome;
-import mage.constants.Rarity;
 import mage.constants.SubLayer;
 import mage.constants.Zone;
 import mage.filter.common.FilterControlledLandPermanent;
@@ -69,9 +69,8 @@ public class Excavator extends CardImpl {
         filter.add(new SupertypePredicate("Basic"));
     }
    
-    public Excavator(UUID ownerId) {
-        super(ownerId, 277, "Excavator", Rarity.UNCOMMON, new CardType[]{CardType.ARTIFACT}, "{2}");
-        this.expansionSetCode = "TMP";
+    public Excavator(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.ARTIFACT},"{2}");
 
         // {tap}, Sacrifice a basic land: Target creature gains landwalk of each of the land types of the sacrificed land until end of turn.
         Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new ExcavatorEffect(), new TapSourceCost());

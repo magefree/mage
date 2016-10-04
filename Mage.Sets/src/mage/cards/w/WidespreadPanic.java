@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.commander2013;
+package mage.cards.w;
 
 import java.util.UUID;
 import mage.abilities.Ability;
@@ -34,9 +34,9 @@ import mage.abilities.effects.Effect;
 import mage.abilities.effects.OneShotEffect;
 import mage.cards.Card;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Outcome;
-import mage.constants.Rarity;
 import mage.constants.Zone;
 import mage.game.Game;
 import mage.game.events.GameEvent;
@@ -51,9 +51,8 @@ import mage.target.targetpointer.FixedTarget;
  */
 public class WidespreadPanic extends CardImpl {
 
-    public WidespreadPanic(UUID ownerId) {
-        super(ownerId, 131, "Widespread Panic", Rarity.RARE, new CardType[]{CardType.ENCHANTMENT}, "{2}{R}");
-        this.expansionSetCode = "C13";
+    public WidespreadPanic(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.ENCHANTMENT},"{2}{R}");
 
         // Whenever a spell or ability causes its controller to shuffle his or her library, that player puts a card from his or her hand on top of his or her library.
         this.addAbility(new WidespreadPanicTriggeredAbility());

@@ -25,17 +25,17 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.gatecrash;
+package mage.cards.m;
 
 import java.util.UUID;
 import mage.constants.CardType;
 import mage.constants.Outcome;
-import mage.constants.Rarity;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.CreateTokenEffect;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.game.Game;
 import mage.game.permanent.token.Token;
 import mage.game.stack.StackObject;
@@ -47,9 +47,8 @@ import mage.target.TargetSpell;
  */
 public class MysticGenesis extends CardImpl {
 
-    public MysticGenesis(UUID ownerId) {
-        super(ownerId, 180, "Mystic Genesis", Rarity.RARE, new CardType[]{CardType.INSTANT}, "{2}{G}{U}{U}");
-        this.expansionSetCode = "GTC";
+    public MysticGenesis(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.INSTANT},"{2}{G}{U}{U}");
 
         // Counter target spell. Put an X/X green Ooze creature token onto the battlefield, where X is that spell's converted mana cost.
         this.getSpellAbility().addTarget(new TargetSpell());

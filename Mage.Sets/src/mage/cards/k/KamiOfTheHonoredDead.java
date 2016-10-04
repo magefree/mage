@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.betrayersofkamigawa;
+package mage.cards.k;
 
 import java.util.UUID;
 import mage.MageInt;
@@ -35,9 +35,9 @@ import mage.abilities.effects.OneShotEffect;
 import mage.abilities.keyword.FlyingAbility;
 import mage.abilities.keyword.SoulshiftAbility;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Outcome;
-import mage.constants.Rarity;
 import mage.constants.Zone;
 import mage.game.Game;
 import mage.game.events.GameEvent;
@@ -50,9 +50,8 @@ import mage.players.Player;
  */
 public class KamiOfTheHonoredDead extends CardImpl {
 
-    public KamiOfTheHonoredDead(UUID ownerId) {
-        super(ownerId, 12, "Kami of the Honored Dead", Rarity.UNCOMMON, new CardType[]{CardType.CREATURE}, "{5}{W}{W}");
-        this.expansionSetCode = "BOK";
+    public KamiOfTheHonoredDead(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{5}{W}{W}");
         this.subtype.add("Spirit");
 
         this.power = new MageInt(3);

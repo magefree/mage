@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.eldritchmoon;
+package mage.cards.s;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -33,9 +33,9 @@ import java.util.UUID;
 import mage.abilities.Ability;
 import mage.abilities.effects.OneShotEffect;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Outcome;
-import mage.constants.Rarity;
 import mage.game.Game;
 import mage.game.stack.Spell;
 import mage.game.stack.StackObject;
@@ -46,9 +46,8 @@ import mage.game.stack.StackObject;
  */
 public class SummaryDismissal extends CardImpl {
 
-    public SummaryDismissal(UUID ownerId) {
-        super(ownerId, 75, "Summary Dismissal", Rarity.RARE, new CardType[]{CardType.INSTANT}, "{2}{U}{U}");
-        this.expansionSetCode = "EMN";
+    public SummaryDismissal(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.INSTANT},"{2}{U}{U}");
 
         // Exile all other spells and counter all abilities.
         this.getSpellAbility().addEffect(new SummaryDismissalEffect());

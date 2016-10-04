@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.dragonsoftarkir;
+package mage.cards.z;
 
 import java.util.UUID;
 import mage.MageInt;
@@ -33,8 +33,8 @@ import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.effects.common.combat.CantBlockCreaturesSourceEffect;
 import mage.abilities.keyword.DashAbility;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.constants.Zone;
 import mage.filter.Filter;
 import mage.filter.common.FilterCreaturePermanent;
@@ -52,9 +52,8 @@ public class ZurgoBellstriker extends CardImpl {
         filter.add(new PowerPredicate(Filter.ComparisonType.GreaterThan, 1));
     }
 
-    public ZurgoBellstriker(UUID ownerId) {
-        super(ownerId, 169, "Zurgo Bellstriker", Rarity.RARE, new CardType[]{CardType.CREATURE}, "{R}");
-        this.expansionSetCode = "DTK";
+    public ZurgoBellstriker(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{R}");
         this.supertype.add("Legendary");
         this.subtype.add("Orc");
         this.subtype.add("Warrior");

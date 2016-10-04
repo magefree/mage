@@ -25,14 +25,14 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.iceage;
+package mage.cards.a;
 
 import java.util.UUID;
 import mage.ObjectColor;
 import mage.abilities.effects.common.DestroyAllEffect;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.filter.FilterPermanent;
 import mage.filter.predicate.mageobject.ColorPredicate;
 
@@ -48,9 +48,8 @@ public class Anarchy extends CardImpl {
         filter.add(new ColorPredicate(ObjectColor.WHITE));
     }
 
-    public Anarchy(UUID ownerId) {
-        super(ownerId, 170, "Anarchy", Rarity.UNCOMMON, new CardType[]{CardType.SORCERY}, "{2}{R}{R}");
-        this.expansionSetCode = "ICE";
+    public Anarchy(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{2}{R}{R}");
 
 
         // Destroy all white permanents.

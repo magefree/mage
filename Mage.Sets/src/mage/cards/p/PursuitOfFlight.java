@@ -26,7 +26,7 @@
  *  or implied, of BetaSteward_at_googlemail.com.
  */
 
-package mage.sets.returntoravnica;
+package mage.cards.p;
 
 import java.util.UUID;
 
@@ -42,6 +42,7 @@ import mage.abilities.effects.common.continuous.GainAbilitySourceEffect;
 import mage.abilities.keyword.EnchantAbility;
 import mage.abilities.keyword.FlyingAbility;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.target.TargetPermanent;
 import mage.target.common.TargetCreaturePermanent;
 
@@ -53,9 +54,8 @@ public class PursuitOfFlight extends CardImpl {
 
     static final String rule = "and has \"{U}: This creature gains flying until end of turn.\"";
 
-    public PursuitOfFlight(UUID ownerId) {
-        super(ownerId, 102, "Pursuit of Flight", Rarity.COMMON, new CardType[]{CardType.ENCHANTMENT}, "{1}{R}");
-        this.expansionSetCode = "RTR";
+    public PursuitOfFlight(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.ENCHANTMENT},"{1}{R}");
         this.color.setRed(true);
         this.subtype.add("Aura");
 

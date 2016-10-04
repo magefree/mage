@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.zendikar;
+package mage.cards.g;
 
 import java.util.UUID;
 import mage.abilities.Ability;
@@ -43,11 +43,11 @@ import mage.abilities.keyword.KickerAbility;
 import mage.abilities.keyword.TrampleAbility;
 import mage.cards.Card;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.AttachmentType;
 import mage.constants.CardType;
 import mage.constants.Duration;
 import mage.constants.Outcome;
-import mage.constants.Rarity;
 import mage.constants.SubLayer;
 import mage.constants.Zone;
 import mage.filter.FilterCard;
@@ -64,9 +64,8 @@ import mage.target.common.TargetCreaturePermanent;
  */
 public class Gigantiform extends CardImpl {
 
-    public Gigantiform(UUID ownerId) {
-        super(ownerId, 162, "Gigantiform", Rarity.RARE, new CardType[]{CardType.ENCHANTMENT}, "{3}{G}{G}");
-        this.expansionSetCode = "ZEN";
+    public Gigantiform(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.ENCHANTMENT},"{3}{G}{G}");
         this.subtype.add("Aura");
 
         // Kicker {4}

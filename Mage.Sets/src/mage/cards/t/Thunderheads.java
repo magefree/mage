@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.guildpact;
+package mage.cards.t;
 
 import java.util.UUID;
 import mage.MageInt;
@@ -37,9 +37,9 @@ import mage.abilities.keyword.DefenderAbility;
 import mage.abilities.keyword.FlyingAbility;
 import mage.abilities.keyword.ReplicateAbility;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Outcome;
-import mage.constants.Rarity;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.game.permanent.token.Token;
@@ -51,9 +51,8 @@ import mage.target.targetpointer.FixedTarget;
  */
 public class Thunderheads extends CardImpl {
 
-    public Thunderheads(UUID ownerId) {
-        super(ownerId, 37, "Thunderheads", Rarity.UNCOMMON, new CardType[]{CardType.INSTANT}, "{2}{U}");
-        this.expansionSetCode = "GPT";
+    public Thunderheads(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.INSTANT},"{2}{U}");
 
         // Replicate {2}{U}
         this.addAbility(new ReplicateAbility(this, "{2}{U}"));

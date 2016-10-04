@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.khansoftarkir;
+package mage.cards.f;
 
 import java.util.UUID;
 import mage.abilities.effects.Effect;
@@ -34,9 +34,9 @@ import mage.abilities.effects.common.continuous.GainAbilityControlledEffect;
 import mage.abilities.keyword.DoubleStrikeAbility;
 import mage.abilities.keyword.FlyingAbility;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Duration;
-import mage.constants.Rarity;
 import mage.filter.common.FilterCreaturePermanent;
 
 /**
@@ -45,9 +45,8 @@ import mage.filter.common.FilterCreaturePermanent;
  */
 public class FlyingCraneTechnique extends CardImpl {
 
-    public FlyingCraneTechnique(UUID ownerId) {
-        super(ownerId, 176, "Flying Crane Technique", Rarity.RARE, new CardType[]{CardType.INSTANT}, "{3}{U}{R}{W}");
-        this.expansionSetCode = "KTK";
+    public FlyingCraneTechnique(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.INSTANT},"{3}{U}{R}{W}");
 
 
         // Untap all creatures you control.  They gain flying and double strike until end of turn.

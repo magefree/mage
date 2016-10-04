@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.newphyrexia;
+package mage.cards.c;
 
 import java.util.UUID;
 import mage.MageInt;
@@ -37,9 +37,9 @@ import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.PlayTargetWithoutPayingManaEffect;
 import mage.abilities.keyword.FlyingAbility;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Outcome;
-import mage.constants.Rarity;
 import mage.constants.Zone;
 import mage.filter.FilterCard;
 import mage.filter.predicate.Predicates;
@@ -66,9 +66,8 @@ public class ChancellorOfTheSpires extends CardImpl {
                 new CardTypePredicate(CardType.SORCERY)));
     }
 
-    public ChancellorOfTheSpires(UUID ownerId) {
-        super(ownerId, 31, "Chancellor of the Spires", Rarity.RARE, new CardType[]{CardType.CREATURE}, "{4}{U}{U}{U}");
-        this.expansionSetCode = "NPH";
+    public ChancellorOfTheSpires(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{4}{U}{U}{U}");
         this.subtype.add("Sphinx");
 
         this.power = new MageInt(5);

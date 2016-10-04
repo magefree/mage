@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.exodus;
+package mage.cards.h;
 
 import mage.abilities.costs.common.PayVariableLifeCost;
 import mage.abilities.dynamicvalue.DynamicValue;
@@ -33,9 +33,9 @@ import mage.abilities.dynamicvalue.common.GetXValue;
 import mage.abilities.dynamicvalue.common.StaticValue;
 import mage.abilities.effects.common.continuous.BoostTargetEffect;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Duration;
-import mage.constants.Rarity;
 import mage.target.common.TargetCreaturePermanent;
 
 import java.util.UUID;
@@ -45,9 +45,8 @@ import java.util.UUID;
  */
 public class Hatred extends CardImpl {
 
-    public Hatred(UUID ownerId) {
-        super(ownerId, 64, "Hatred", Rarity.RARE, new CardType[]{CardType.INSTANT}, "{3}{B}{B}");
-        this.expansionSetCode = "EXO";
+    public Hatred(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.INSTANT},"{3}{B}{B}");
 
 
         // As an additional cost to cast Hatred, pay X life.

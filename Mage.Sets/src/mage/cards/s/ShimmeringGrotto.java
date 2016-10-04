@@ -25,16 +25,16 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.lorwyn;
+package mage.cards.s;
 
 import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.abilities.Ability;
 import mage.abilities.costs.common.TapSourceCost;
 import mage.abilities.costs.mana.GenericManaCost;
 import mage.abilities.mana.AnyColorManaAbility;
 import mage.abilities.mana.ColorlessManaAbility;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 
 import java.util.UUID;
 
@@ -44,9 +44,8 @@ import java.util.UUID;
  */
 public class ShimmeringGrotto extends CardImpl {
 
-    public ShimmeringGrotto(UUID ownerId) {
-        super(ownerId, 273, "Shimmering Grotto", Rarity.COMMON, new CardType[]{CardType.LAND}, "");
-        this.expansionSetCode = "LRW";
+    public ShimmeringGrotto(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.LAND},"");
         // {tap}: Add {C} to your mana pool.
         this.addAbility(new ColorlessManaAbility());
         // {1}, {tap}: Add one mana of any color to your mana pool.

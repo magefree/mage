@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.prereleaseevents;
+package mage.cards.d;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -37,11 +37,11 @@ import mage.abilities.effects.ContinuousEffectImpl;
 import mage.abilities.keyword.FlyingAbility;
 import mage.abilities.keyword.ReplicateAbility;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Duration;
 import mage.constants.Layer;
 import mage.constants.Outcome;
-import mage.constants.Rarity;
 import mage.constants.SubLayer;
 import mage.constants.Zone;
 import mage.filter.common.FilterInstantOrSorcerySpell;
@@ -55,9 +55,8 @@ import mage.game.stack.StackObject;
  */
 public class DjinnIlluminatus extends CardImpl {
 
-    public DjinnIlluminatus(UUID ownerId) {
-        super(ownerId, 28, "Djinn Illuminatus", Rarity.SPECIAL, new CardType[]{CardType.CREATURE}, "{5}{U/R}{U/R}");
-        this.expansionSetCode = "PTC";
+    public DjinnIlluminatus(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{5}{U/R}{U/R}");
         this.subtype.add("Djinn");
         this.power = new MageInt(3);
         this.toughness = new MageInt(5);

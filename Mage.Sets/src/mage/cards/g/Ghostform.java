@@ -25,13 +25,13 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.avacynrestored;
+package mage.cards.g;
 
 import java.util.UUID;
 import mage.abilities.effects.common.combat.CantBeBlockedTargetEffect;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.target.common.TargetCreaturePermanent;
 
 /**
@@ -40,9 +40,8 @@ import mage.target.common.TargetCreaturePermanent;
  */
 public class Ghostform extends CardImpl {
 
-    public Ghostform(UUID ownerId) {
-        super(ownerId, 56, "Ghostform", Rarity.COMMON, new CardType[]{CardType.SORCERY}, "{1}{U}");
-        this.expansionSetCode = "AVR";
+    public Ghostform(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{1}{U}");
 
 
         // Up to two target creatures can't be blocked this turn..

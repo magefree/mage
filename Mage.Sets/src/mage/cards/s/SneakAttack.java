@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.urzassaga;
+package mage.cards.s;
 
 import java.util.UUID;
 import mage.abilities.Ability;
@@ -40,10 +40,10 @@ import mage.abilities.effects.common.continuous.GainAbilityTargetEffect;
 import mage.abilities.keyword.HasteAbility;
 import mage.cards.Card;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Duration;
 import mage.constants.Outcome;
-import mage.constants.Rarity;
 import mage.constants.Zone;
 import mage.filter.common.FilterCreatureCard;
 import mage.game.Game;
@@ -58,9 +58,8 @@ import mage.target.targetpointer.FixedTarget;
  */
 public class SneakAttack extends CardImpl {
 
-    public SneakAttack(UUID ownerId) {
-        super(ownerId, 218, "Sneak Attack", Rarity.RARE, new CardType[]{CardType.ENCHANTMENT}, "{3}{R}");
-        this.expansionSetCode = "USG";
+    public SneakAttack(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.ENCHANTMENT},"{3}{R}");
 
         // {R}: You may put a creature card from your hand onto the battlefield. That creature gains haste. Sacrifice the creature at the beginning of the next end step.
         this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new SneakAttackEffect(), new ManaCostsImpl("{R}")));

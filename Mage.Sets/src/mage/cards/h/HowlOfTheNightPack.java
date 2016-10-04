@@ -25,14 +25,14 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.magic2010;
+package mage.cards.h;
 
 import java.util.UUID;
 import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.abilities.dynamicvalue.common.PermanentsOnBattlefieldCount;
 import mage.abilities.effects.common.CreateTokenEffect;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.filter.common.FilterControlledPermanent;
 import mage.filter.predicate.mageobject.SubtypePredicate;
 import mage.game.permanent.token.WolfToken;
@@ -49,9 +49,8 @@ public class HowlOfTheNightPack extends CardImpl {
         filter.add(new SubtypePredicate("Forest"));
     }
 
-    public HowlOfTheNightPack(UUID ownerId) {
-        super(ownerId, 187, "Howl of the Night Pack", Rarity.UNCOMMON, new CardType[]{CardType.SORCERY}, "{6}{G}");
-        this.expansionSetCode = "M10";
+    public HowlOfTheNightPack(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{6}{G}");
 
         this.getSpellAbility().addEffect(new CreateTokenEffect(new WolfToken(), new PermanentsOnBattlefieldCount(filter)));
     }

@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.odyssey;
+package mage.cards.m;
 
 import java.util.UUID;
 import mage.abilities.Ability;
@@ -34,8 +34,8 @@ import mage.abilities.costs.common.SacrificeTargetCost;
 import mage.abilities.costs.mana.ManaCostsImpl;
 import mage.abilities.effects.common.ReturnFromGraveyardToHandTargetEffect;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.constants.Zone;
 import mage.filter.FilterCard;
 import mage.filter.predicate.mageobject.CardTypePredicate;
@@ -54,9 +54,8 @@ public class MalevolentAwakening extends CardImpl {
         filter.add(new CardTypePredicate(CardType.CREATURE));
     }
 
-    public MalevolentAwakening(UUID ownerId) {
-        super(ownerId, 147, "Malevolent Awakening", Rarity.UNCOMMON, new CardType[]{CardType.ENCHANTMENT}, "{1}{B}{B}");
-        this.expansionSetCode = "ODY";
+    public MalevolentAwakening(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.ENCHANTMENT},"{1}{B}{B}");
 
 
         // {1}{B}{B}, Sacrifice a creature: Return target creature card from your graveyard to your hand.

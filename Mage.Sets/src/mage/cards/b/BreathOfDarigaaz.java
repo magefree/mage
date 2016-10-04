@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.commander;
+package mage.cards.b;
 
 import java.util.UUID;
 import mage.abilities.condition.common.KickedCondition;
@@ -34,8 +34,8 @@ import mage.abilities.effects.common.DamageEverythingEffect;
 import mage.abilities.keyword.FlyingAbility;
 import mage.abilities.keyword.KickerAbility;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.filter.predicate.Predicates;
 import mage.filter.predicate.mageobject.AbilityPredicate;
@@ -52,9 +52,8 @@ public class BreathOfDarigaaz extends CardImpl {
         filter.add(Predicates.not(new AbilityPredicate(FlyingAbility.class)));
     }
 
-    public BreathOfDarigaaz(UUID ownerId) {
-        super(ownerId, 112, "Breath of Darigaaz", Rarity.UNCOMMON, new CardType[]{CardType.SORCERY}, "{1}{R}");
-        this.expansionSetCode = "CMD";
+    public BreathOfDarigaaz(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{1}{R}");
 
         // Kicker {2}
         this.addAbility(new KickerAbility("{2}"));

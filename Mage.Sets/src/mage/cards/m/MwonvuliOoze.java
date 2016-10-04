@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.weatherlight;
+package mage.cards.m;
 
 import java.util.UUID;
 import mage.MageInt;
@@ -37,9 +37,9 @@ import mage.abilities.effects.Effect;
 import mage.abilities.effects.common.continuous.SetPowerToughnessSourceEffect;
 import mage.abilities.keyword.CumulativeUpkeepAbility;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Duration;
-import mage.constants.Rarity;
 import mage.constants.Zone;
 import mage.counters.CounterType;
 import mage.game.Game;
@@ -50,9 +50,8 @@ import mage.game.Game;
  */
 public class MwonvuliOoze extends CardImpl {
 
-    public MwonvuliOoze(UUID ownerId) {
-        super(ownerId, 77, "Mwonvuli Ooze", Rarity.RARE, new CardType[]{CardType.CREATURE}, "{G}");
-        this.expansionSetCode = "WTH";
+    public MwonvuliOoze(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{G}");
         this.subtype.add("Ooze");
         this.power = new MageInt(1);
         this.toughness = new MageInt(1);

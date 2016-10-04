@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.starwars;
+package mage.cards.i;
 
 import java.util.UUID;
 import mage.MageInt;
@@ -33,9 +33,9 @@ import mage.abilities.Ability;
 import mage.abilities.common.EntersBattlefieldAbility;
 import mage.abilities.effects.OneShotEffect;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Outcome;
-import mage.constants.Rarity;
 import mage.constants.WatcherScope;
 import mage.counters.CounterType;
 import mage.game.Game;
@@ -51,9 +51,8 @@ import mage.watchers.Watcher;
  */
 public class InsatiableRakghoul extends CardImpl {
 
-    public InsatiableRakghoul(UUID ownerId) {
-        super(ownerId, 79, "Insatiable Rakghoul", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{5}{B}");
-        this.expansionSetCode = "SWS";
+    public InsatiableRakghoul(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{5}{B}");
         this.subtype.add("Zombie");
         this.subtype.add("Mutant");
         this.power = new MageInt(5);

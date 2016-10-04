@@ -25,13 +25,13 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.innistrad;
+package mage.cards.b;
 
 import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.abilities.Ability;
 import mage.abilities.effects.OneShotEffect;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.Outcome;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
@@ -46,9 +46,8 @@ import java.util.UUID;
  */
 public class BrimstoneVolley extends CardImpl {
 
-    public BrimstoneVolley(UUID ownerId) {
-        super(ownerId, 132, "Brimstone Volley", Rarity.COMMON, new CardType[]{CardType.INSTANT}, "{2}{R}");
-        this.expansionSetCode = "ISD";
+    public BrimstoneVolley(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.INSTANT},"{2}{R}");
 
 
         // Brimstone Volley deals 3 damage to target creature or player.

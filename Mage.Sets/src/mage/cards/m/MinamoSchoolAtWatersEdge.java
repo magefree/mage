@@ -26,12 +26,11 @@
  *  or implied, of BetaSteward_at_googlemail.com.
  */
 
-package mage.sets.championsofkamigawa;
+package mage.cards.m;
 
 import java.util.UUID;
 
 import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.costs.common.TapSourceCost;
@@ -39,6 +38,7 @@ import mage.abilities.costs.mana.ColoredManaCost;
 import mage.abilities.effects.common.UntapTargetEffect;
 import mage.abilities.mana.BlueManaAbility;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.ColoredManaSymbol;
 import mage.constants.Zone;
 import mage.filter.FilterPermanent;
@@ -58,9 +58,8 @@ public class MinamoSchoolAtWatersEdge extends CardImpl {
     }
 
 
-    public MinamoSchoolAtWatersEdge (UUID ownerId) {
-        super(ownerId, 279, "Minamo, School at Water's Edge", Rarity.RARE, new CardType[]{CardType.LAND}, null);
-        this.expansionSetCode = "CHK";
+    public MinamoSchoolAtWatersEdge (UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.LAND},null);
         this.supertype.add("Legendary");
         this.addAbility(new BlueManaAbility());
         Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new UntapTargetEffect(),  new ColoredManaCost(ColoredManaSymbol.U));

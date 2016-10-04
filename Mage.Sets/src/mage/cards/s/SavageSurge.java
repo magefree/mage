@@ -25,16 +25,16 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.returntoravnica;
+package mage.cards.s;
 
 import java.util.UUID;
 import mage.abilities.effects.Effect;
 
 import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.abilities.effects.common.UntapTargetEffect;
 import mage.abilities.effects.common.continuous.BoostTargetEffect;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.Duration;
 import mage.target.common.TargetCreaturePermanent;
 
@@ -44,9 +44,8 @@ import mage.target.common.TargetCreaturePermanent;
  */
 public class SavageSurge extends CardImpl {
 
-    public SavageSurge(UUID ownerId) {
-        super(ownerId, 133, "Savage Surge", Rarity.UNCOMMON, new CardType[]{CardType.INSTANT}, "{1}{G}");
-        this.expansionSetCode = "RTR";
+    public SavageSurge(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.INSTANT},"{1}{G}");
 
 
         // Target creature gets +2/+2 until end of turn. Untap that creature.

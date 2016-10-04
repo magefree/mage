@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.eventide;
+package mage.cards.n;
 
 import java.util.UUID;
 import mage.MageInt;
@@ -33,9 +33,9 @@ import mage.abilities.common.SimpleEvasionAbility;
 import mage.abilities.effects.common.combat.CantBeBlockedByCreaturesSourceEffect;
 import mage.abilities.keyword.DefenderAbility;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Duration;
-import mage.constants.Rarity;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.filter.predicate.Predicates;
 import mage.filter.predicate.mageobject.AbilityPredicate;
@@ -53,9 +53,8 @@ public class NoggleBandit extends CardImpl {
         filter.add(Predicates.not(new AbilityPredicate(DefenderAbility.class)));
     }
 
-    public NoggleBandit(UUID ownerId) {
-        super(ownerId, 106, "Noggle Bandit", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{1}{U/R}{U/R}");
-        this.expansionSetCode = "EVE";
+    public NoggleBandit(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{1}{U/R}{U/R}");
         this.subtype.add("Noggle");
         this.subtype.add("Rogue");
 

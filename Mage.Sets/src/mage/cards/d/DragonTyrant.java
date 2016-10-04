@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.scourge;
+package mage.cards.d;
 
 import java.util.UUID;
 import mage.MageInt;
@@ -38,9 +38,9 @@ import mage.abilities.keyword.DoubleStrikeAbility;
 import mage.abilities.keyword.FlyingAbility;
 import mage.abilities.keyword.TrampleAbility;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Duration;
-import mage.constants.Rarity;
 import mage.constants.TargetController;
 import mage.constants.Zone;
 
@@ -50,9 +50,8 @@ import mage.constants.Zone;
  */
 public class DragonTyrant extends CardImpl {
 
-    public DragonTyrant(UUID ownerId) {
-        super(ownerId, 88, "Dragon Tyrant", Rarity.RARE, new CardType[]{CardType.CREATURE}, "{8}{R}{R}");
-        this.expansionSetCode = "SCG";
+    public DragonTyrant(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{8}{R}{R}");
         this.subtype.add("Dragon");
         this.power = new MageInt(6);
         this.toughness = new MageInt(6);

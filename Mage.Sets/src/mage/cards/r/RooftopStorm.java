@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.innistrad;
+package mage.cards.r;
 
 import mage.constants.*;
 import mage.abilities.Ability;
@@ -36,6 +36,7 @@ import mage.abilities.effects.common.cost.CostModificationEffectImpl;
 import mage.abilities.keyword.FlashbackAbility;
 import mage.cards.Card;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.game.Game;
 import mage.players.Player;
 import mage.util.CardUtil;
@@ -48,9 +49,8 @@ import java.util.UUID;
  */
 public class RooftopStorm extends CardImpl {
 
-    public RooftopStorm(UUID ownerId) {
-        super(ownerId, 71, "Rooftop Storm", Rarity.RARE, new CardType[]{CardType.ENCHANTMENT}, "{5}{U}");
-        this.expansionSetCode = "ISD";
+    public RooftopStorm(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.ENCHANTMENT},"{5}{U}");
 
         // You may pay {0} rather than pay the mana cost for Zombie creature spells you cast.
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new RooftopStormCostReductionEffect()));

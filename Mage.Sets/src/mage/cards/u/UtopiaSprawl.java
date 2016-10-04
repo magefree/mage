@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.dissension;
+package mage.cards.u;
 
 import java.util.UUID;
 import mage.Mana;
@@ -38,10 +38,10 @@ import mage.abilities.effects.common.ManaEffect;
 import mage.abilities.keyword.EnchantAbility;
 import mage.abilities.mana.TriggeredManaAbility;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.ColoredManaSymbol;
 import mage.constants.Outcome;
-import mage.constants.Rarity;
 import mage.constants.Zone;
 import mage.filter.common.FilterLandPermanent;
 import mage.game.Game;
@@ -60,9 +60,8 @@ public class UtopiaSprawl extends CardImpl {
 
     private static final FilterLandPermanent filter = new FilterLandPermanent("Forest", "Forest");
 
-    public UtopiaSprawl(UUID ownerId) {
-        super(ownerId, 99, "Utopia Sprawl", Rarity.COMMON, new CardType[]{CardType.ENCHANTMENT}, "{G}");
-        this.expansionSetCode = "DIS";
+    public UtopiaSprawl(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.ENCHANTMENT},"{G}");
         this.subtype.add("Aura");
 
         // Enchant Forest

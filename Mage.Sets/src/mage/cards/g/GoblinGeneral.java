@@ -25,16 +25,16 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.vintagemasters;
+package mage.cards.g;
 
 import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.common.AttacksTriggeredAbility;
 import mage.abilities.effects.common.continuous.BoostControlledEffect;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Duration;
-import mage.constants.Rarity;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.filter.predicate.mageobject.SubtypePredicate;
 
@@ -50,9 +50,8 @@ public class GoblinGeneral extends CardImpl {
         filter.add(new SubtypePredicate("Goblin"));
     }
 
-    public GoblinGeneral(UUID ownerId) {
-        super(ownerId, 165, "Goblin General", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{1}{R}{R}");
-        this.expansionSetCode = "VMA";
+    public GoblinGeneral(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{1}{R}{R}");
         this.subtype.add("Goblin");
         this.subtype.add("Warrior");
 

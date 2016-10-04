@@ -25,14 +25,14 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.magic2010;
+package mage.cards.g;
 
 import java.util.UUID;
 
 import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.abilities.effects.common.continuous.BoostControlledEffect;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.Duration;
 import mage.filter.common.FilterCreaturePermanent;
 
@@ -42,9 +42,8 @@ import mage.filter.common.FilterCreaturePermanent;
  */
 public class GloriousCharge extends CardImpl {
 
-    public GloriousCharge(UUID ownerId) {
-        super(ownerId, 11, "Glorious Charge", Rarity.COMMON, new CardType[]{CardType.INSTANT}, "{1}{W}");
-        this.expansionSetCode = "M10";
+    public GloriousCharge(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.INSTANT},"{1}{W}");
 
         
         // Creatures you control get +1/+1 until end of turn.

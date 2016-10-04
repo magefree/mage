@@ -25,14 +25,14 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.gatecrash;
+package mage.cards.m;
 
 import java.util.UUID;
 import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.abilities.Mode;
 import mage.abilities.effects.common.ExileAllEffect;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.filter.common.FilterArtifactPermanent;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.filter.common.FilterEnchantmentPermanent;
@@ -44,9 +44,8 @@ import mage.filter.common.FilterPlaneswalkerPermanent;
  */
 public class MercilessEviction extends CardImpl {
 
-    public MercilessEviction(UUID ownerId) {
-        super(ownerId, 177, "Merciless Eviction", Rarity.RARE, new CardType[]{CardType.SORCERY}, "{4}{W}{B}");
-        this.expansionSetCode = "GTC";
+    public MercilessEviction(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{4}{W}{B}");
 
 
         // Choose one - Exile all artifacts

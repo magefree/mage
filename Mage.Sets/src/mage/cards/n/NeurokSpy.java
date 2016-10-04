@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.mirrodin;
+package mage.cards.n;
 
 import java.util.UUID;
 import mage.MageInt;
@@ -35,8 +35,8 @@ import mage.abilities.decorator.ConditionalRestrictionEffect;
 import mage.abilities.effects.Effect;
 import mage.abilities.effects.common.combat.CantBeBlockedSourceEffect;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.constants.Zone;
 import mage.filter.common.FilterArtifactPermanent;
 
@@ -46,9 +46,8 @@ import mage.filter.common.FilterArtifactPermanent;
  */
 public class NeurokSpy extends CardImpl {
 
-    public NeurokSpy(UUID ownerId) {
-        super(ownerId, 44, "Neurok Spy", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{2}{U}");
-        this.expansionSetCode = "MRD";
+    public NeurokSpy(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{2}{U}");
         this.subtype.add("Human");
         this.subtype.add("Rogue");
 

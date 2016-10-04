@@ -26,15 +26,15 @@
  *  or implied, of BetaSteward_at_googlemail.com.
  */
 
-package mage.sets.scarsofmirrodin;
+package mage.cards.m;
 
 import java.util.UUID;
 import mage.abilities.effects.Effect;
 import mage.abilities.effects.common.DamageTargetControllerEffect;
 import mage.abilities.effects.common.DestroyTargetEffect;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.target.common.TargetLandPermanent;
 
 /**
@@ -43,9 +43,8 @@ import mage.target.common.TargetLandPermanent;
  */
 public class MeltTerrain extends CardImpl {
 
-    public MeltTerrain (UUID ownerId) {
-        super(ownerId, 97, "Melt Terrain", Rarity.COMMON, new CardType[]{CardType.SORCERY}, "{2}{R}{R}");
-        this.expansionSetCode = "SOM";
+    public MeltTerrain (UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{2}{R}{R}");
 
         // Destroy target land. Melt Terrain deals 2 damage to that land's controller.
         this.getSpellAbility().addEffect(new DestroyTargetEffect());

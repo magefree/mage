@@ -26,11 +26,10 @@
  *  or implied, of BetaSteward_at_googlemail.com.
  */
 
-package mage.sets.scarsofmirrodin;
+package mage.cards.p;
 
 import java.util.UUID;
 import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.MageInt;
 import mage.abilities.common.OnEventTriggeredAbility;
 import mage.abilities.effects.common.SacrificeSourceEffect;
@@ -38,6 +37,7 @@ import mage.abilities.keyword.HasteAbility;
 import mage.abilities.keyword.InfectAbility;
 import mage.abilities.keyword.TrampleAbility;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.game.events.GameEvent;
 
 /**
@@ -46,9 +46,8 @@ import mage.game.events.GameEvent;
  */
 public class Putrefax extends CardImpl {
 
-    public Putrefax (UUID ownerId) {
-        super(ownerId, 126, "Putrefax", Rarity.RARE, new CardType[]{CardType.CREATURE}, "{3}{G}{G}");
-        this.expansionSetCode = "SOM";
+    public Putrefax (UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{3}{G}{G}");
         this.subtype.add("Horror");
 
         this.power = new MageInt(5);

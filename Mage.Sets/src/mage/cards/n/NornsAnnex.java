@@ -25,15 +25,15 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.newphyrexia;
+package mage.cards.n;
 
 import java.util.UUID;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.costs.mana.ManaCostsImpl;
 import mage.abilities.effects.common.combat.CantAttackYouUnlessPayManaAllEffect;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.constants.Zone;
 
 /**
@@ -41,9 +41,8 @@ import mage.constants.Zone;
  */
 public class NornsAnnex extends CardImpl {
 
-    public NornsAnnex(UUID ownerId) {
-        super(ownerId, 17, "Norn's Annex", Rarity.RARE, new CardType[]{CardType.ARTIFACT}, "{3}{WP}{WP}");
-        this.expansionSetCode = "NPH";
+    public NornsAnnex(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.ARTIFACT},"{3}{WP}{WP}");
 
         // {WP} ({WP} can be paid with either or 2 life.)
         // Creatures can't attack you or a planeswalker you control unless their controller pays {WP} for each of those creatures.

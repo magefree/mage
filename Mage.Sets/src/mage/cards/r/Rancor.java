@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.urzaslegacy;
+package mage.cards.r;
 
 import mage.constants.*;
 import mage.abilities.Ability;
@@ -38,6 +38,7 @@ import mage.abilities.effects.common.continuous.GainAbilityAttachedEffect;
 import mage.abilities.keyword.EnchantAbility;
 import mage.abilities.keyword.TrampleAbility;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.target.TargetPermanent;
 import mage.target.common.TargetCreaturePermanent;
 
@@ -49,9 +50,8 @@ import mage.abilities.effects.Effect;
  */
 public class Rancor extends CardImpl {
 
-    public Rancor(UUID ownerId) {
-        super(ownerId, 110, "Rancor", Rarity.COMMON, new CardType[]{CardType.ENCHANTMENT}, "{G}");
-        this.expansionSetCode = "ULG";
+    public Rancor(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.ENCHANTMENT},"{G}");
         this.subtype.add("Aura");
 
 

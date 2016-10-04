@@ -26,18 +26,18 @@
  *  or implied, of BetaSteward_at_googlemail.com.
  */
 
-package mage.sets.championsofkamigawa;
+package mage.cards.b;
 
 import java.util.UUID;
 
 import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.costs.common.SacrificeTargetCost;
 import mage.abilities.costs.mana.ManaCostsImpl;
 import mage.abilities.effects.common.DamageTargetEffect;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.Zone;
 import mage.target.common.TargetControlledCreaturePermanent;
 import mage.target.common.TargetCreatureOrPlayer;
@@ -46,9 +46,8 @@ import mage.target.common.TargetCreatureOrPlayer;
  * @author Loki
  */
 public class BloodRites extends CardImpl {
-    public BloodRites(UUID ownerId) {
-        super(ownerId, 159, "Blood Rites", Rarity.UNCOMMON, new CardType[]{CardType.ENCHANTMENT}, "{3}{R}{R}");
-        this.expansionSetCode = "CHK";
+    public BloodRites(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.ENCHANTMENT},"{3}{R}{R}");
 
         Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new DamageTargetEffect(2), new ManaCostsImpl("{1}{R}"));
         ability.addCost(new SacrificeTargetCost(new TargetControlledCreaturePermanent()));

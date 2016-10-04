@@ -25,18 +25,18 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.darkascension;
+package mage.cards.c;
 
 import java.util.UUID;
 
 import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.costs.common.TapSourceCost;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.keyword.TransformAbility;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.Outcome;
 import mage.constants.Zone;
 import mage.game.Game;
@@ -49,12 +49,11 @@ import mage.players.Player;
  */
 public class ChaliceOfLife extends CardImpl {
 
-    public ChaliceOfLife(UUID ownerId) {
-        super(ownerId, 146, "Chalice of Life", Rarity.UNCOMMON, new CardType[]{CardType.ARTIFACT}, "{3}");
-        this.expansionSetCode = "DKA";
+    public ChaliceOfLife(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.ARTIFACT},"{3}");
 
         this.transformable = true;
-        this.secondSideCard = new ChaliceOfDeath(ownerId);
+        this.secondSideCardClazz = ChaliceOfDeath.class;
         this.addAbility(new TransformAbility());
 
 

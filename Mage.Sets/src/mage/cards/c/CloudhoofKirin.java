@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.saviorsofkamigawa;
+package mage.cards.c;
 
 import java.util.UUID;
 import mage.MageInt;
@@ -34,9 +34,9 @@ import mage.abilities.common.SpellCastControllerTriggeredAbility;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.keyword.FlyingAbility;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Outcome;
-import mage.constants.Rarity;
 import mage.constants.Zone;
 import mage.filter.common.FilterSpiritOrArcaneCard;
 import mage.game.Game;
@@ -51,9 +51,8 @@ import mage.target.TargetPlayer;
  */
 public class CloudhoofKirin extends CardImpl {
 
-    public CloudhoofKirin(UUID ownerId) {
-        super(ownerId, 31, "Cloudhoof Kirin", Rarity.RARE, new CardType[]{CardType.CREATURE}, "{3}{U}{U}");
-        this.expansionSetCode = "SOK";
+    public CloudhoofKirin(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{3}{U}{U}");
         this.supertype.add("Legendary");
         this.subtype.add("Kirin");
         this.subtype.add("Spirit");

@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.eventide;
+package mage.cards.n;
 
 import java.util.UUID;
 import mage.MageInt;
@@ -37,8 +37,8 @@ import mage.abilities.decorator.ConditionalTriggeredAbility;
 import mage.abilities.effects.common.DamageTargetEffect;
 import mage.abilities.effects.common.TapTargetEffect;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.filter.FilterPermanent;
 import mage.filter.common.FilterLandPermanent;
 import mage.filter.predicate.mageobject.SubtypePredicate;
@@ -63,9 +63,8 @@ public class NoggleHedgeMage extends CardImpl {
     private String rule = "When {this} enters the battlefield, if you control two or more Islands, you may tap two target permanents.";
     private String rule2 = "When {this} enters the battlefield, if you control two or more Mountains, you may have {this} deal 2 damage to target player.";
 
-    public NoggleHedgeMage(UUID ownerId) {
-        super(ownerId, 108, "Noggle Hedge-Mage", Rarity.UNCOMMON, new CardType[]{CardType.CREATURE}, "{2}{U/R}");
-        this.expansionSetCode = "EVE";
+    public NoggleHedgeMage(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{2}{U/R}");
         this.subtype.add("Noggle");
         this.subtype.add("Wizard");
 

@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.commander2014;
+package mage.cards.n;
 
 import java.util.ArrayList;
 import java.util.UUID;
@@ -37,13 +37,13 @@ import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.ExileSpellEffect;
 import mage.cards.Card;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.cards.Cards;
 import mage.cards.CardsImpl;
 import mage.constants.CardType;
 import mage.constants.Duration;
 import mage.constants.Layer;
 import mage.constants.Outcome;
-import mage.constants.Rarity;
 import mage.constants.SubLayer;
 import mage.constants.Zone;
 import mage.filter.FilterCard;
@@ -65,9 +65,8 @@ import mage.target.targetpointer.FixedTarget;
  */
 public class NecromanticSelection extends CardImpl {
 
-    public NecromanticSelection(UUID ownerId) {
-        super(ownerId, 26, "Necromantic Selection", Rarity.RARE, new CardType[]{CardType.SORCERY}, "{4}{B}{B}{B}");
-        this.expansionSetCode = "C14";
+    public NecromanticSelection(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{4}{B}{B}{B}");
 
         // Destroy all creatures, then return a creature card put into a graveyard this way to the battlefield under your control. It's a black Zombie in addition to its other colors and types. Exile Necromantic Selection.
         this.getSpellAbility().addEffect(new NecromanticSelectionEffect());

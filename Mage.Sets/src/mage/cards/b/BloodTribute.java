@@ -25,12 +25,11 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.zendikar;
+package mage.cards.b;
 
 import java.util.UUID;
 import mage.constants.CardType;
 import mage.constants.Outcome;
-import mage.constants.Rarity;
 import mage.abilities.Ability;
 import mage.abilities.condition.common.KickedCondition;
 import mage.abilities.costs.common.TapTargetCost;
@@ -39,6 +38,7 @@ import mage.abilities.effects.Effect;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.keyword.KickerAbility;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.filter.common.FilterControlledCreaturePermanent;
 import mage.filter.predicate.Predicates;
 import mage.filter.predicate.mageobject.SubtypePredicate;
@@ -61,9 +61,8 @@ public class BloodTribute extends CardImpl {
         filter.add(new SubtypePredicate("Vampire"));
     }
 
-    public BloodTribute(UUID ownerId) {
-        super(ownerId, 81, "Blood Tribute", Rarity.RARE, new CardType[]{CardType.SORCERY}, "{4}{B}{B}");
-        this.expansionSetCode = "ZEN";
+    public BloodTribute(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{4}{B}{B}");
 
         // Kicker - Tap an untapped Vampire you control.
         this.addAbility(new KickerAbility(new TapTargetCost(new TargetControlledCreaturePermanent(1, 1, filter, true))));

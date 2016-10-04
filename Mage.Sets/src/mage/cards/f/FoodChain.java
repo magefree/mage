@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.mercadianmasques;
+package mage.cards.f;
 
 import java.util.UUID;
 import mage.ConditionalMana;
@@ -40,10 +40,10 @@ import mage.abilities.mana.builder.ConditionalManaBuilder;
 import mage.abilities.mana.conditional.CreatureCastConditionalMana;
 import mage.cards.Card;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.choices.ChoiceColor;
 import mage.constants.CardType;
 import mage.constants.Outcome;
-import mage.constants.Rarity;
 import mage.constants.Zone;
 import mage.filter.common.FilterControlledCreaturePermanent;
 import mage.game.Game;
@@ -56,9 +56,8 @@ import mage.target.common.TargetControlledCreaturePermanent;
  */
 public class FoodChain extends CardImpl {
 
-    public FoodChain(UUID ownerId) {
-        super(ownerId, 246, "Food Chain", Rarity.RARE, new CardType[]{CardType.ENCHANTMENT}, "{2}{G}");
-        this.expansionSetCode = "MMQ";
+    public FoodChain(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.ENCHANTMENT},"{2}{G}");
 
         // Exile a creature you control: Add X mana of any one color to your mana pool, where X is the exiled creature's converted mana cost plus one. Spend this mana only to cast creature spells.
         Ability ability = new SimpleManaAbility(Zone.BATTLEFIELD, new FoodChainManaEffect(), new ExileTargetCost(new TargetControlledCreaturePermanent(1, 1, new FilterControlledCreaturePermanent("a creature you control"), true)));

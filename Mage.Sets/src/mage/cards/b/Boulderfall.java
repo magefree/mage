@@ -25,13 +25,13 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.theros;
+package mage.cards.b;
 
 import java.util.UUID;
 import mage.abilities.effects.common.DamageMultiEffect;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.target.common.TargetCreatureOrPlayerAmount;
 
 /**
@@ -40,9 +40,8 @@ import mage.target.common.TargetCreatureOrPlayerAmount;
  */
 public class Boulderfall extends CardImpl {
 
-    public Boulderfall(UUID ownerId) {
-        super(ownerId, 115, "Boulderfall", Rarity.COMMON, new CardType[]{CardType.INSTANT}, "{6}{R}{R}");
-        this.expansionSetCode = "THS";
+    public Boulderfall(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.INSTANT},"{6}{R}{R}");
 
 
         // Boulderfall deals 5 damage divided as you choose among any number of target creatures and/or players.

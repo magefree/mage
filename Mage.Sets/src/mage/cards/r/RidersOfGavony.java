@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.avacynrestored;
+package mage.cards.r;
 
 import java.util.UUID;
 import mage.MageInt;
@@ -37,11 +37,11 @@ import mage.abilities.effects.common.ChooseCreatureTypeEffect;
 import mage.abilities.keyword.ProtectionAbility;
 import mage.abilities.keyword.VigilanceAbility;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Duration;
 import mage.constants.Layer;
 import mage.constants.Outcome;
-import mage.constants.Rarity;
 import mage.constants.SubLayer;
 import mage.constants.Zone;
 import mage.filter.FilterPermanent;
@@ -55,9 +55,8 @@ import mage.game.permanent.Permanent;
  */
 public class RidersOfGavony extends CardImpl {
 
-    public RidersOfGavony(UUID ownerId) {
-        super(ownerId, 33, "Riders of Gavony", Rarity.RARE, new CardType[]{CardType.CREATURE}, "{2}{W}{W}");
-        this.expansionSetCode = "AVR";
+    public RidersOfGavony(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{2}{W}{W}");
         this.subtype.add("Human");
         this.subtype.add("Knight");
 

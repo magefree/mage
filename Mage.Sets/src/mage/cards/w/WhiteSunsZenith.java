@@ -26,15 +26,15 @@
  *  or implied, of BetaSteward_at_googlemail.com.
  */
 
-package mage.sets.mirrodinbesieged;
+package mage.cards.w;
 
 import java.util.UUID;
 import mage.abilities.dynamicvalue.common.ManacostVariableValue;
 import mage.abilities.effects.common.CreateTokenEffect;
 import mage.abilities.effects.common.ShuffleSpellEffect;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.game.permanent.token.CatToken;
 
 /**
@@ -42,9 +42,8 @@ import mage.game.permanent.token.CatToken;
  * @author Loki
  */
 public class WhiteSunsZenith extends CardImpl {
-    public WhiteSunsZenith (UUID ownerId) {
-        super(ownerId, 19, "White Sun's Zenith", Rarity.RARE, new CardType[]{CardType.INSTANT}, "{X}{W}{W}{W}");
-        this.expansionSetCode = "MBS";
+    public WhiteSunsZenith (UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.INSTANT},"{X}{W}{W}{W}");
 
         // Put X 2/2 white Cat creature tokens onto the battlefield. Shuffle White Sun's Zenith into its owner's library.
         this.getSpellAbility().addEffect(new CreateTokenEffect(new CatToken(), new ManacostVariableValue()));

@@ -25,15 +25,15 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.fifthedition;
+package mage.cards.p;
 
 import java.util.UUID;
 import mage.abilities.Ability;
 import mage.abilities.effects.OneShotEffect;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Outcome;
-import mage.constants.Rarity;
 import mage.filter.common.FilterControlledCreaturePermanent;
 import mage.filter.common.FilterControlledLandPermanent;
 import mage.game.Game;
@@ -49,9 +49,8 @@ import mage.target.common.TargetControlledPermanent;
  */
 public class Pox extends CardImpl {
 
-    public Pox(UUID ownerId) {
-        super(ownerId, 51, "Pox", Rarity.RARE, new CardType[]{CardType.SORCERY}, "{B}{B}{B}");
-        this.expansionSetCode = "5ED";
+    public Pox(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{B}{B}{B}");
 
 
         // Each player loses a third of his or her life, then discards a third of the cards in his or her hand, then sacrifices a third of the creatures he or she controls, then sacrifices a third of the lands he or she controls. Round up each time.

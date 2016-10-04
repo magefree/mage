@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.venservskoth;
+package mage.cards.g;
 
 import java.util.UUID;
 import mage.MageInt;
@@ -39,9 +39,9 @@ import mage.abilities.effects.common.ReturnToBattlefieldUnderOwnerControlTargetE
 import mage.abilities.keyword.FlyingAbility;
 import mage.cards.Card;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Outcome;
-import mage.constants.Rarity;
 import mage.constants.Zone;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.filter.predicate.permanent.AnotherPredicate;
@@ -63,9 +63,8 @@ public class GalepowderMage extends CardImpl {
         filter.add(new AnotherPredicate());
     }
 
-    public GalepowderMage(UUID ownerId) {
-        super(ownerId, 12, "Galepowder Mage", Rarity.RARE, new CardType[]{CardType.CREATURE}, "{3}{W}");
-        this.expansionSetCode = "DDI";
+    public GalepowderMage(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{3}{W}");
         this.subtype.add("Kithkin");
         this.subtype.add("Wizard");
 

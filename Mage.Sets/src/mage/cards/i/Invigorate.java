@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.commander;
+package mage.cards.i;
 
 import java.util.UUID;
 import mage.abilities.condition.common.PermanentsOnTheBattlefieldCondition;
@@ -33,9 +33,9 @@ import mage.abilities.costs.AlternativeCostSourceAbility;
 import mage.abilities.costs.common.GainLifeOpponentCost;
 import mage.abilities.effects.common.continuous.BoostTargetEffect;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Duration;
-import mage.constants.Rarity;
 import mage.filter.FilterPermanent;
 import mage.filter.predicate.mageobject.SubtypePredicate;
 import mage.target.common.TargetCreaturePermanent;
@@ -52,9 +52,8 @@ public class Invigorate extends CardImpl {
         filter.add(new SubtypePredicate("Forest"));
     }
     
-    public Invigorate(UUID ownerId) {
-        super(ownerId, 162, "Invigorate", Rarity.COMMON, new CardType[]{CardType.INSTANT}, "{2}{G}");
-        this.expansionSetCode = "CMD";
+    public Invigorate(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.INSTANT},"{2}{G}");
 
 
         // If you control a Forest, rather than pay Invigorate's mana cost, you may have an opponent gain 3 life.

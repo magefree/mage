@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.kaladesh;
+package mage.cards.p;
 
 import java.util.UUID;
 import mage.abilities.Ability;
@@ -35,11 +35,11 @@ import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.DrawCardSourceControllerEffect;
 import mage.cards.Card;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.cards.Cards;
 import mage.cards.CardsImpl;
 import mage.constants.CardType;
 import mage.constants.Outcome;
-import mage.constants.Rarity;
 import mage.constants.Zone;
 import mage.filter.common.FilterControlledPermanent;
 import mage.filter.predicate.Predicates;
@@ -63,9 +63,8 @@ public class ParadoxicalOutcome extends CardImpl {
         filter.add(Predicates.not(new TokenPredicate()));
     }
 
-    public ParadoxicalOutcome(UUID ownerId) {
-        super(ownerId, 60, "Paradoxical Outcome", Rarity.RARE, new CardType[]{CardType.INSTANT}, "{3}{U}");
-        this.expansionSetCode = "KLD";
+    public ParadoxicalOutcome(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.INSTANT},"{3}{U}");
 
         // Return any number of target nonland, nontoken permanents you control to their owners' hands. Draw a card for each card returned to your hand this way.
         this.getSpellAbility().addEffect(new ParadoxicalOutcomeEffect());

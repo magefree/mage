@@ -25,13 +25,13 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.fatereforged;
+package mage.cards.s;
 
 import java.util.UUID;
 import mage.abilities.effects.keyword.ManifestEffect;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.Rarity;
 
 /**
  *
@@ -39,9 +39,8 @@ import mage.constants.Rarity;
  */
 public class SoulSummons extends CardImpl {
 
-    public SoulSummons(UUID ownerId) {
-        super(ownerId, 26, "Soul Summons", Rarity.COMMON, new CardType[]{CardType.SORCERY}, "{1}{W}");
-        this.expansionSetCode = "FRF";
+    public SoulSummons(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{1}{W}");
 
         // Manifest the top card of your library. (Put it onto the battlefield face down as a 2/2 creature. Turn it face up at any time for its mana cost if it's a creature card.)
         this.getSpellAbility().addEffect(new ManifestEffect(1));

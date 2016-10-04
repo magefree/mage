@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.theros;
+package mage.cards.d;
 
 import java.util.UUID;
 import mage.MageInt;
@@ -40,12 +40,12 @@ import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.combat.CantBeBlockedByCreaturesSourceEffect;
 import mage.cards.Card;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.AsThoughEffectType;
 import mage.constants.CardType;
 import mage.constants.Duration;
 import mage.constants.ManaType;
 import mage.constants.Outcome;
-import mage.constants.Rarity;
 import mage.constants.Zone;
 import mage.filter.Filter;
 import mage.filter.common.FilterCreaturePermanent;
@@ -69,9 +69,8 @@ public class DaxosOfMeletis extends CardImpl {
         filter.add(new PowerPredicate(Filter.ComparisonType.GreaterThan, 2));
     }
 
-    public DaxosOfMeletis(UUID ownerId) {
-        super(ownerId, 191, "Daxos of Meletis", Rarity.RARE, new CardType[]{CardType.CREATURE}, "{1}{W}{U}");
-        this.expansionSetCode = "THS";
+    public DaxosOfMeletis(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{1}{W}{U}");
         this.supertype.add("Legendary");
         this.subtype.add("Human");
         this.subtype.add("Soldier");

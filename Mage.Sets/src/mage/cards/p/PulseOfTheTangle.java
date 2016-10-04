@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.darksteel;
+package mage.cards.p;
 
 import java.util.UUID;
 import mage.abilities.Ability;
@@ -34,9 +34,9 @@ import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.CreateTokenEffect;
 import mage.cards.Card;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Outcome;
-import mage.constants.Rarity;
 import mage.constants.Zone;
 import mage.filter.common.FilterControlledCreaturePermanent;
 import mage.filter.common.FilterCreaturePermanent;
@@ -53,9 +53,8 @@ import mage.target.common.TargetOpponent;
  */
 public class PulseOfTheTangle extends CardImpl {
 
-    public PulseOfTheTangle(UUID ownerId) {
-        super(ownerId, 80, "Pulse of the Tangle", Rarity.RARE, new CardType[]{CardType.SORCERY}, "{1}{G}{G}");
-        this.expansionSetCode = "DST";
+    public PulseOfTheTangle(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{1}{G}{G}");
 
         // Put a 3/3 green Beast creature token onto the battlefield. Then if an opponent controls more creatures than you, return Pulse of the Tangle to its owner's hand.
         this.getSpellAbility().addEffect(new CreateTokenEffect(new BeastToken()));

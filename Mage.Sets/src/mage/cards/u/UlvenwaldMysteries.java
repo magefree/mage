@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.shadowsoverinnistrad;
+package mage.cards.u;
 
 import java.util.UUID;
 import mage.abilities.TriggeredAbilityImpl;
@@ -33,8 +33,8 @@ import mage.abilities.common.DiesCreatureTriggeredAbility;
 import mage.abilities.effects.common.CreateTokenEffect;
 import mage.abilities.effects.keyword.InvestigateEffect;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.constants.TargetController;
 import mage.constants.Zone;
 import mage.filter.common.FilterControlledPermanent;
@@ -63,9 +63,8 @@ public class UlvenwaldMysteries extends CardImpl {
         filterClue.add(new SubtypePredicate("Clue"));
     }
 
-    public UlvenwaldMysteries(UUID ownerId) {
-        super(ownerId, 236, "Ulvenwald Mysteries", Rarity.UNCOMMON, new CardType[]{CardType.ENCHANTMENT}, "{2}{G}");
-        this.expansionSetCode = "SOI";
+    public UlvenwaldMysteries(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.ENCHANTMENT},"{2}{G}");
 
         // Whenever a nontoken creature you control dies, investigate. <i>(Put a colorless Clue artifact token onto the battlefield with "{2}, Sacrifice this artifact: Draw a card.")</i>
         this.addAbility(new DiesCreatureTriggeredAbility(new InvestigateEffect(), false, filter));

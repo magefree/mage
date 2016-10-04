@@ -25,15 +25,15 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.stronghold;
+package mage.cards.b;
 
 import java.util.UUID;
 
 import mage.abilities.common.BeginningOfUpkeepTriggeredAbility;
 import mage.abilities.effects.common.discard.DiscardTargetEffect;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.constants.TargetController;
 
 /**
@@ -42,9 +42,8 @@ import mage.constants.TargetController;
  */
 public class BottomlessPit extends CardImpl {
 
-    public BottomlessPit(UUID ownerId) {
-        super(ownerId, 1, "Bottomless Pit", Rarity.UNCOMMON, new CardType[]{CardType.ENCHANTMENT}, "{1}{B}{B}");
-        this.expansionSetCode = "STH";
+    public BottomlessPit(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.ENCHANTMENT},"{1}{B}{B}");
 
 
         // At the beginning of each player's upkeep, that player discards a card at random.

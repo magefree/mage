@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.ravnica;
+package mage.cards.t;
 
 import java.util.UUID;
 import mage.abilities.Ability;
@@ -38,8 +38,8 @@ import mage.abilities.effects.common.AddManaInAnyCombinationEffect;
 import mage.abilities.effects.common.DrawCardSourceControllerEffect;
 import mage.abilities.mana.SimpleManaAbility;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.constants.Zone;
 
 /**
@@ -48,9 +48,8 @@ import mage.constants.Zone;
  */
 public class Terrarion extends CardImpl {
 
-    public Terrarion(UUID ownerId) {
-        super(ownerId, 273, "Terrarion", Rarity.COMMON, new CardType[]{CardType.ARTIFACT}, "{1}");
-        this.expansionSetCode = "RAV";
+    public Terrarion(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.ARTIFACT},"{1}");
 
         // Terrarion enters the battlefield tapped.
         this.addAbility(new EntersBattlefieldTappedAbility());

@@ -25,12 +25,11 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.dragonsmaze;
+package mage.cards.r;
 
 import java.util.UUID;
 
 import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.constants.Zone;
 import mage.abilities.Ability;
 import mage.abilities.common.EntersBattlefieldTriggeredAbility;
@@ -40,6 +39,7 @@ import mage.abilities.effects.common.AttachEffect;
 import mage.abilities.effects.common.DontUntapInControllersUntapStepEnchantedEffect;
 import mage.abilities.keyword.EnchantAbility;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.Outcome;
 import mage.filter.Filter;
 import mage.filter.common.FilterCreaturePermanent;
@@ -61,9 +61,8 @@ public class RunnersBane extends CardImpl {
     static {
         filter.add(new PowerPredicate(Filter.ComparisonType.LessThan, 4));
     }
-    public RunnersBane(UUID ownerId) {
-        super(ownerId, 17, "Runner's Bane", Rarity.COMMON, new CardType[]{CardType.ENCHANTMENT}, "{1}{U}");
-        this.expansionSetCode = "DGM";
+    public RunnersBane(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.ENCHANTMENT},"{1}{U}");
         this.subtype.add("Aura");
 
 

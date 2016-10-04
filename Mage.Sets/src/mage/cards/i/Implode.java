@@ -25,12 +25,12 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.planeshift;
+package mage.cards.i;
 
 import java.util.UUID;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.abilities.effects.common.DestroyTargetEffect;
 import mage.abilities.effects.common.DrawCardSourceControllerEffect;
 import mage.target.common.TargetLandPermanent;
@@ -42,9 +42,8 @@ import mage.target.common.TargetLandPermanent;
  */
 public class Implode extends CardImpl {
 
-    public Implode(UUID ownerId) {
-        super(ownerId, 62, "Implode", Rarity.UNCOMMON, new CardType[]{CardType.SORCERY}, "{4}{R}");
-        this.expansionSetCode = "PLS";
+    public Implode(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{4}{R}");
 
         // Destroy target land.
         this.getSpellAbility().addEffect(new DestroyTargetEffect());

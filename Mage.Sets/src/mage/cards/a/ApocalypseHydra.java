@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.conflux;
+package mage.cards.a;
 
 import java.util.UUID;
 import mage.MageInt;
@@ -39,9 +39,9 @@ import mage.abilities.effects.EntersBattlefieldEffect;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.DamageTargetEffect;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Outcome;
-import mage.constants.Rarity;
 import mage.constants.Zone;
 import mage.counters.CounterType;
 import mage.game.Game;
@@ -54,9 +54,8 @@ import mage.target.common.TargetCreatureOrPlayer;
  */
 public class ApocalypseHydra extends CardImpl {
 
-    public ApocalypseHydra(UUID ownerId) {
-        super(ownerId, 98, "Apocalypse Hydra", Rarity.MYTHIC, new CardType[]{CardType.CREATURE}, "{X}{R}{G}");
-        this.expansionSetCode = "CON";
+    public ApocalypseHydra(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{X}{R}{G}");
         this.subtype.add("Hydra");
 
         this.power = new MageInt(0);

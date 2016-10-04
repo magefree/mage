@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.stronghold;
+package mage.cards.v;
 
 import java.util.UUID;
 import mage.MageInt;
@@ -37,9 +37,9 @@ import mage.abilities.costs.mana.GenericManaCost;
 import mage.abilities.effects.common.GainLifeEffect;
 import mage.abilities.effects.common.continuous.GainAbilityAllEffect;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Duration;
-import mage.constants.Rarity;
 import mage.constants.Zone;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.filter.predicate.mageobject.SubtypePredicate;
@@ -56,9 +56,8 @@ public class VictualSliver extends CardImpl {
         filter.add(new SubtypePredicate("Sliver"));
     }
 
-    public VictualSliver(UUID ownerId) {
-        super(ownerId, 143, "Victual Sliver", Rarity.UNCOMMON, new CardType[]{CardType.CREATURE}, "{G}{W}");
-        this.expansionSetCode = "STH";
+    public VictualSliver(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{G}{W}");
         this.subtype.add("Sliver");
 
         this.power = new MageInt(2);

@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.commander2013;
+package mage.cards.t;
 
 import java.util.HashSet;
 import java.util.Set;
@@ -35,9 +35,9 @@ import mage.abilities.effects.Effect;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.PutTokenOntoBattlefieldCopyTargetEffect;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Outcome;
-import mage.constants.Rarity;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.players.Player;
@@ -50,9 +50,8 @@ import mage.target.common.TargetControlledCreaturePermanent;
  */
 public class TemptWithReflections extends CardImpl {
 
-    public TemptWithReflections(UUID ownerId) {
-        super(ownerId, 60, "Tempt with Reflections", Rarity.RARE, new CardType[]{CardType.SORCERY}, "{3}{U}");
-        this.expansionSetCode = "C13";
+    public TemptWithReflections(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{3}{U}");
 
         // Tempting offer - Choose target creature you control. Put a token onto the battlefield that's a copy of that creature. Each opponent may put a token onto the battlefield that's a copy of that creature. For each opponent who does, put a token onto the battlefield that's a copy of that creature.
         this.getSpellAbility().addEffect(new TemptWithReflectionsEffect());

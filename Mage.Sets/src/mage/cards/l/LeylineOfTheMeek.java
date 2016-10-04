@@ -25,16 +25,16 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.guildpact;
+package mage.cards.l;
 
 import java.util.UUID;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.effects.common.continuous.BoostAllEffect;
 import mage.abilities.keyword.LeylineAbility;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Duration;
-import mage.constants.Rarity;
 import mage.constants.Zone;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.filter.predicate.permanent.TokenPredicate;
@@ -50,9 +50,8 @@ public class LeylineOfTheMeek extends CardImpl {
         filter.add(new TokenPredicate());
     }
 
-    public LeylineOfTheMeek(UUID ownerId) {
-        super(ownerId, 10, "Leyline of the Meek", Rarity.RARE, new CardType[]{CardType.ENCHANTMENT}, "{2}{W}{W}");
-        this.expansionSetCode = "GPT";
+    public LeylineOfTheMeek(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.ENCHANTMENT},"{2}{W}{W}");
 
 
         // If Leyline of the Meek is in your opening hand, you may begin the game with it on the battlefield.

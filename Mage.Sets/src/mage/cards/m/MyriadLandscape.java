@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.commander2014;
+package mage.cards.m;
 
 import java.util.HashSet;
 import java.util.Iterator;
@@ -41,9 +41,9 @@ import mage.abilities.effects.common.search.SearchLibraryPutInPlayEffect;
 import mage.abilities.mana.ColorlessManaAbility;
 import mage.cards.Card;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.cards.Cards;
 import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.constants.Zone;
 import mage.filter.FilterCard;
 import mage.filter.common.FilterBasicLandCard;
@@ -58,9 +58,8 @@ public class MyriadLandscape extends CardImpl {
 
     private static final FilterBasicLandCard filter = new FilterBasicLandCard();
 
-    public MyriadLandscape(UUID ownerId) {
-        super(ownerId, 61, "Myriad Landscape", Rarity.UNCOMMON, new CardType[]{CardType.LAND}, "");
-        this.expansionSetCode = "C14";
+    public MyriadLandscape(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.LAND},"");
 
         // Myriad Landscape enters the battlefield tapped.
         this.addAbility(new EntersBattlefieldTappedAbility());

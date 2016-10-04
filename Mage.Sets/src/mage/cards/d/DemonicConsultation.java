@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.iceage;
+package mage.cards.d;
 
 import java.util.UUID;
 import mage.MageObject;
@@ -33,6 +33,7 @@ import mage.abilities.Ability;
 import mage.abilities.effects.OneShotEffect;
 import mage.cards.Card;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.cards.Cards;
 import mage.cards.CardsImpl;
 import mage.cards.repository.CardRepository;
@@ -40,7 +41,6 @@ import mage.choices.Choice;
 import mage.choices.ChoiceImpl;
 import mage.constants.CardType;
 import mage.constants.Outcome;
-import mage.constants.Rarity;
 import mage.constants.Zone;
 import mage.game.Game;
 import mage.players.Player;
@@ -51,9 +51,8 @@ import mage.players.Player;
  */
 public class DemonicConsultation extends CardImpl {
 
-    public DemonicConsultation(UUID ownerId) {
-        super(ownerId, 9, "Demonic Consultation", Rarity.UNCOMMON, new CardType[]{CardType.INSTANT}, "{B}");
-        this.expansionSetCode = "ICE";
+    public DemonicConsultation(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.INSTANT},"{B}");
 
         // Name a card. Exile the top six cards of your library, then reveal cards from the top of your library until you reveal the named card. Put that card into your hand and exile all other cards revealed this way.
         this.getSpellAbility().addEffect(new DemonicConsultationEffect());

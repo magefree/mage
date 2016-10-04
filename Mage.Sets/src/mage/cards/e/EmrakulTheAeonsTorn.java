@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.riseoftheeldrazi;
+package mage.cards.e;
 
 import java.util.UUID;
 import mage.MageInt;
@@ -38,8 +38,8 @@ import mage.abilities.keyword.AnnihilatorAbility;
 import mage.abilities.keyword.FlyingAbility;
 import mage.abilities.keyword.ProtectionAbility;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.filter.FilterSpell;
 import mage.filter.predicate.Predicates;
 import mage.filter.predicate.mageobject.ColorlessPredicate;
@@ -55,9 +55,8 @@ public class EmrakulTheAeonsTorn extends CardImpl {
         filter.add(Predicates.not(new ColorlessPredicate()));
     }
 
-    public EmrakulTheAeonsTorn(UUID ownerId) {
-        super(ownerId, 4, "Emrakul, the Aeons Torn", Rarity.MYTHIC, new CardType[]{CardType.CREATURE}, "{15}");
-        this.expansionSetCode = "ROE";
+    public EmrakulTheAeonsTorn(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{15}");
         this.supertype.add("Legendary");
         this.subtype.add("Eldrazi");
         this.power = new MageInt(15);

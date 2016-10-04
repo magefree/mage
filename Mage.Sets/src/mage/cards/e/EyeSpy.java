@@ -25,13 +25,13 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.starter1999;
+package mage.cards.e;
 
 import java.util.UUID;
 import mage.abilities.effects.common.LookLibraryTopCardTargetPlayerEffect;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.target.TargetPlayer;
 
 /**
@@ -40,9 +40,8 @@ import mage.target.TargetPlayer;
  */
 public class EyeSpy extends CardImpl {
 
-    public EyeSpy(UUID ownerId) {
-        super(ownerId, 38, "Eye Spy", Rarity.UNCOMMON, new CardType[]{CardType.SORCERY}, "{U}");
-        this.expansionSetCode = "S99";
+    public EyeSpy(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{U}");
 
         // Look at the top card of target player's library. You may put that card into his or her graveyard.
         this.getSpellAbility().addEffect(new LookLibraryTopCardTargetPlayerEffect(1, true));

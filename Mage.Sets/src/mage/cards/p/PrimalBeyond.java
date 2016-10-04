@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.morningtide;
+package mage.cards.p;
 
 import java.util.UUID;
 import mage.ConditionalMana;
@@ -41,8 +41,8 @@ import mage.abilities.mana.ColorlessManaAbility;
 import mage.abilities.mana.ConditionalAnyColorManaAbility;
 import mage.abilities.mana.builder.ConditionalManaBuilder;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.filter.FilterCard;
 import mage.filter.predicate.mageobject.SubtypePredicate;
 import mage.game.Game;
@@ -60,9 +60,8 @@ public class PrimalBeyond extends CardImpl {
         filter.add(new SubtypePredicate("Elemental"));
     }
 
-    public PrimalBeyond(UUID ownerId) {
-        super(ownerId, 149, "Primal Beyond", Rarity.RARE, new CardType[]{CardType.LAND}, "");
-        this.expansionSetCode = "MOR";
+    public PrimalBeyond(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.LAND},"");
 
         // As Primal Beyond enters the battlefield, you may reveal an Elemental card from your hand. If you don't, Primal Beyond enters the battlefield tapped.
         this.addAbility(new AsEntersBattlefieldAbility(new TapSourceUnlessPaysEffect(new RevealTargetFromHandCost(new TargetCardInHand(filter))), "you may reveal a Elemental card from your hand. If you don't, {this} enters the battlefield tapped"));

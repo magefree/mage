@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.mercadianmasques;
+package mage.cards.s;
 
 import java.util.UUID;
 import mage.ObjectColor;
@@ -36,10 +36,10 @@ import mage.abilities.costs.mana.ManaCostsImpl;
 import mage.abilities.effects.common.ChooseColorEffect;
 import mage.abilities.effects.common.PreventNextDamageFromChosenSourceToYouEffect;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Duration;
 import mage.constants.Outcome;
-import mage.constants.Rarity;
 import mage.constants.Zone;
 import mage.filter.FilterObject;
 import mage.filter.predicate.mageobject.ColorPredicate;
@@ -52,9 +52,8 @@ import mage.game.Game;
  */
 public class StoryCircle extends CardImpl {
 
-    public StoryCircle(UUID ownerId) {
-        super(ownerId, 51, "Story Circle", Rarity.UNCOMMON, new CardType[]{CardType.ENCHANTMENT}, "{1}{W}{W}");
-        this.expansionSetCode = "MMQ";
+    public StoryCircle(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.ENCHANTMENT},"{1}{W}{W}");
 
         // As Story Circle enters the battlefield, choose a color.
         this.addAbility(new EntersBattlefieldAbility(new ChooseColorEffect(Outcome.Neutral)));

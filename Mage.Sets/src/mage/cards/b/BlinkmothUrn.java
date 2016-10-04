@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package mage.sets.mirrodin;
+package mage.cards.b;
 
 import java.util.UUID;
 import mage.Mana;
@@ -11,9 +11,9 @@ import mage.abilities.Ability;
 import mage.abilities.common.BeginningOfPreCombatMainTriggeredAbility;
 import mage.abilities.effects.OneShotEffect;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Outcome;
-import mage.constants.Rarity;
 import mage.constants.TargetController;
 import mage.filter.common.FilterArtifactPermanent;
 import mage.filter.predicate.permanent.ControllerIdPredicate;
@@ -27,9 +27,8 @@ import mage.players.Player;
  */
 public class BlinkmothUrn extends CardImpl {
 
-    public BlinkmothUrn(UUID ownerId) {
-        super(ownerId, 145, "Blinkmoth Urn", Rarity.RARE, new CardType[]{CardType.ARTIFACT}, "{5}");
-        this.expansionSetCode = "MRD";
+    public BlinkmothUrn(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.ARTIFACT},"{5}");
 
         // At the beginning of each player's precombat main phase, if
         // Blinkmoth Urn is untapped, that player adds {1} to his or her

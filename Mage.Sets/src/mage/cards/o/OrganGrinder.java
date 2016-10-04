@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.torment;
+package mage.cards.o;
 
 import java.util.UUID;
 import mage.MageInt;
@@ -35,8 +35,8 @@ import mage.abilities.costs.common.ExileFromGraveCost;
 import mage.abilities.costs.common.TapSourceCost;
 import mage.abilities.effects.common.LoseLifeTargetEffect;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.constants.Zone;
 import mage.filter.FilterCard;
 import mage.target.TargetPlayer;
@@ -48,9 +48,8 @@ import mage.target.common.TargetCardInYourGraveyard;
  */
 public class OrganGrinder extends CardImpl {
 
-    public OrganGrinder(UUID ownerId) {
-        super(ownerId, 75, "Organ Grinder", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{2}{B}");
-        this.expansionSetCode = "TOR";
+    public OrganGrinder(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{2}{B}");
         this.subtype.add("Zombie");
         this.power = new MageInt(3);
         this.toughness = new MageInt(1);

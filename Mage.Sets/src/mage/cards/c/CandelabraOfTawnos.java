@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.antiquities;
+package mage.cards.c;
 
 import java.util.UUID;
 import mage.abilities.Ability;
@@ -35,8 +35,8 @@ import mage.abilities.costs.mana.ManaCostsImpl;
 import mage.abilities.effects.Effect;
 import mage.abilities.effects.common.UntapTargetEffect;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.constants.Zone;
 import mage.filter.common.FilterLandPermanent;
 import mage.game.Game;
@@ -50,9 +50,8 @@ public class CandelabraOfTawnos extends CardImpl {
 
     private final UUID originalId;
 
-    public CandelabraOfTawnos(UUID ownerId) {
-        super(ownerId, 8, "Candelabra of Tawnos", Rarity.RARE, new CardType[]{CardType.ARTIFACT}, "{1}");
-        this.expansionSetCode = "ATQ";
+    public CandelabraOfTawnos(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.ARTIFACT},"{1}");
 
         // {X}, {T}: Untap X target lands.
         Effect effect = new UntapTargetEffect();

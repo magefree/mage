@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.prophecy;
+package mage.cards.t;
 
 import java.util.UUID;
 import mage.abilities.Ability;
@@ -33,8 +33,8 @@ import mage.abilities.SpellAbility;
 import mage.abilities.effects.Effect;
 import mage.abilities.effects.common.counter.AddCountersTargetEffect;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.counters.CounterType;
 import mage.game.Game;
 import mage.target.common.TargetCreaturePermanent;
@@ -45,9 +45,8 @@ import mage.target.common.TargetCreaturePermanent;
  */
 public class Thrive extends CardImpl {
 
-    public Thrive(UUID ownerId) {
-        super(ownerId, 129, "Thrive", Rarity.COMMON, new CardType[]{CardType.SORCERY}, "{X}{G}");
-        this.expansionSetCode = "PCY";
+    public Thrive(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{X}{G}");
 
         // Put a +1/+1 counter on each of X target creatures.
         Effect effect = new AddCountersTargetEffect(CounterType.P1P1.createInstance());

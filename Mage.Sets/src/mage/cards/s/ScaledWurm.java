@@ -25,13 +25,13 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.ninthedition;
+package mage.cards.s;
 
 import java.util.UUID;
 import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.MageInt;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 
 /**
  *
@@ -39,9 +39,8 @@ import mage.cards.CardImpl;
  */
 public class ScaledWurm extends CardImpl {
 
-    public ScaledWurm(UUID ownerId) {
-        super(ownerId, 269, "Scaled Wurm", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{7}{G}");
-        this.expansionSetCode = "9ED";
+    public ScaledWurm(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{7}{G}");
         this.subtype.add("Wurm");
 
         this.power = new MageInt(7);

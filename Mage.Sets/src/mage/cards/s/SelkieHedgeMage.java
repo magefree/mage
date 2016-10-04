@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.eventide;
+package mage.cards.s;
 
 import java.util.UUID;
 import mage.MageInt;
@@ -37,8 +37,8 @@ import mage.abilities.decorator.ConditionalTriggeredAbility;
 import mage.abilities.effects.common.GainLifeEffect;
 import mage.abilities.effects.common.ReturnToHandTargetEffect;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.filter.common.FilterLandPermanent;
 import mage.filter.predicate.mageobject.SubtypePredicate;
@@ -65,9 +65,8 @@ public class SelkieHedgeMage extends CardImpl {
     private final String rule1 = "When {this} enters the battlefield, if you control two or more Forests, you may gain 3 life.";
     private final String rule2 = "When {this} enters the battlefield, if you control two or more Islands, you may return target tapped creature to its owner's hand.";
 
-    public SelkieHedgeMage(UUID ownerId) {
-        super(ownerId, 158, "Selkie Hedge-Mage", Rarity.UNCOMMON, new CardType[]{CardType.CREATURE}, "{2}{G/U}");
-        this.expansionSetCode = "EVE";
+    public SelkieHedgeMage(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{2}{G/U}");
         this.subtype.add("Merfolk");
         this.subtype.add("Wizard");
 

@@ -25,12 +25,11 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.returntoravnica;
+package mage.cards.n;
 
 import java.util.UUID;
 
 import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.constants.Zone;
 import mage.MageInt;
 import mage.abilities.Ability;
@@ -38,6 +37,7 @@ import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.costs.common.ExileFromStackCost;
 import mage.abilities.effects.common.counter.AddCountersSourceEffect;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.TargetController;
 import mage.counters.CounterType;
 import mage.filter.FilterSpell;
@@ -61,9 +61,8 @@ public class NivmagusElemental extends CardImpl {
             new CardTypePredicate(CardType.SORCERY)));
     }
 
-    public NivmagusElemental(UUID ownerId) {
-        super(ownerId, 219, "Nivmagus Elemental", Rarity.RARE, new CardType[]{CardType.CREATURE}, "{U/R}");
-        this.expansionSetCode = "RTR";
+    public NivmagusElemental(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{U/R}");
         this.subtype.add("Elemental");
 
 

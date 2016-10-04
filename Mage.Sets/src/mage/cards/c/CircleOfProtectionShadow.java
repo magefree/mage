@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.tempest;
+package mage.cards.c;
 
 import java.util.UUID;
 import mage.abilities.common.SimpleActivatedAbility;
@@ -34,9 +34,9 @@ import mage.abilities.effects.Effect;
 import mage.abilities.effects.common.PreventNextDamageFromChosenSourceToYouEffect;
 import mage.abilities.keyword.ShadowAbility;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Duration;
-import mage.constants.Rarity;
 import mage.constants.Zone;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.filter.predicate.mageobject.AbilityPredicate;
@@ -53,9 +53,8 @@ public class CircleOfProtectionShadow extends CardImpl {
         filter.add(new AbilityPredicate(ShadowAbility.class));
     }
 
-    public CircleOfProtectionShadow(UUID ownerId) {
-        super(ownerId, 224, "Circle of Protection: Shadow", Rarity.COMMON, new CardType[]{CardType.ENCHANTMENT}, "{1}{W}");
-        this.expansionSetCode = "TMP";
+    public CircleOfProtectionShadow(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.ENCHANTMENT},"{1}{W}");
 
         // {1}: The next time a creature of your choice with shadow would deal damage to you this turn, prevent that damage.
         Effect effect = new PreventNextDamageFromChosenSourceToYouEffect(Duration.EndOfTurn, filter);

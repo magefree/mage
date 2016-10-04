@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.theros;
+package mage.cards.f;
 
 import java.util.UUID;
 import mage.abilities.Ability;
@@ -36,11 +36,11 @@ import mage.abilities.keyword.EquipAbility;
 import mage.abilities.keyword.FlyingAbility;
 import mage.abilities.keyword.HasteAbility;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.AttachmentType;
 import mage.constants.CardType;
 import mage.constants.Duration;
 import mage.constants.Outcome;
-import mage.constants.Rarity;
 import mage.constants.Zone;
 
 /**
@@ -49,9 +49,8 @@ import mage.constants.Zone;
  */
 public class FleetfeatherSandals extends CardImpl {
 
-    public FleetfeatherSandals(UUID ownerId) {
-        super(ownerId, 216, "Fleetfeather Sandals", Rarity.COMMON, new CardType[]{CardType.ARTIFACT}, "{2}");
-        this.expansionSetCode = "THS";
+    public FleetfeatherSandals(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.ARTIFACT},"{2}");
         this.subtype.add("Equipment");
 
         // Equipped creature has flying and haste.

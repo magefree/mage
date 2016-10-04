@@ -25,15 +25,15 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.shardsofalara;
+package mage.cards.a;
 
 import java.util.UUID;
 import mage.constants.CardType;
 import mage.constants.Duration;
-import mage.constants.Rarity;
 import mage.abilities.effects.Effect;
 import mage.abilities.effects.common.continuous.BoostTargetEffect;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.target.Target;
 import mage.target.common.TargetCreaturePermanent;
@@ -45,9 +45,8 @@ import mage.target.targetpointer.SecondTargetPointer;
  */
 public class AgonyWarp extends CardImpl {
 
-    public AgonyWarp(UUID ownerId) {
-        super(ownerId, 153, "Agony Warp", Rarity.COMMON, new CardType[]{CardType.INSTANT}, "{U}{B}");
-        this.expansionSetCode = "ALA";
+    public AgonyWarp(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.INSTANT},"{U}{B}");
 
 
         // Target creature gets -3/-0 until end of turn.

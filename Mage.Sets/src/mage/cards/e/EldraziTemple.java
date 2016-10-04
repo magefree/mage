@@ -25,13 +25,12 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.riseoftheeldrazi;
+package mage.cards.e;
 
 import java.util.UUID;
 
 import mage.ConditionalMana;
 import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.MageObject;
 import mage.Mana;
 import mage.abilities.Ability;
@@ -41,6 +40,7 @@ import mage.abilities.mana.ColorlessManaAbility;
 import mage.abilities.mana.ConditionalColorlessManaAbility;
 import mage.abilities.mana.builder.ConditionalManaBuilder;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.game.Game;
 
 /**
@@ -49,9 +49,8 @@ import mage.game.Game;
  */
 public class EldraziTemple extends CardImpl {
 
-    public EldraziTemple(UUID ownerId) {
-        super(ownerId, 227, "Eldrazi Temple", Rarity.RARE, new CardType[]{ CardType.LAND }, null);
-        this.expansionSetCode = "ROE";
+    public EldraziTemple(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.LAND},null);
 
         // {T}: Add {C} to your mana pool.
         this.addAbility(new ColorlessManaAbility());

@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.darksteel;
+package mage.cards.l;
 
 import java.util.UUID;
 import mage.abilities.TriggeredAbilityImpl;
@@ -35,9 +35,9 @@ import mage.abilities.effects.common.SacrificeControllerEffect;
 import mage.abilities.effects.common.SacrificeEffect;
 import mage.abilities.effects.common.continuous.DontLoseByZeroOrLessLifeEffect;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Duration;
-import mage.constants.Rarity;
 import mage.constants.Zone;
 import mage.filter.FilterPermanent;
 import mage.game.Game;
@@ -50,9 +50,8 @@ import mage.game.events.GameEvent.EventType;
  */
 public class LichsTomb extends CardImpl {
 
-    public LichsTomb(UUID ownerId) {
-        super(ownerId, 128, "Lich's Tomb", Rarity.RARE, new CardType[]{CardType.ARTIFACT}, "{4}");
-        this.expansionSetCode = "DST";
+    public LichsTomb(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.ARTIFACT},"{4}");
 
         // You don't lose the game for having 0 or less life.
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new DontLoseByZeroOrLessLifeEffect(Duration.WhileOnBattlefield)));

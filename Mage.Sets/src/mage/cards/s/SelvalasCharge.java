@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.conspiracy;
+package mage.cards.s;
 
 import java.util.UUID;
 import mage.abilities.Ability;
@@ -35,9 +35,9 @@ import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.CreateTokenEffect;
 import mage.abilities.effects.common.DrawCardAllEffect;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Outcome;
-import mage.constants.Rarity;
 import mage.game.Game;
 import mage.game.permanent.token.ElephantToken;
 import mage.players.Player;
@@ -48,9 +48,8 @@ import mage.players.Player;
  */
 public class SelvalasCharge extends CardImpl {
 
-    public SelvalasCharge(UUID ownerId) {
-        super(ownerId, 39, "Selvala's Charge", Rarity.UNCOMMON, new CardType[]{CardType.SORCERY}, "{4}{G}");
-        this.expansionSetCode = "CNS";
+    public SelvalasCharge(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{4}{G}");
 
         // Parley - Each player reveals the top card of his or her library. For each nonland card revealed this way, you put a 3/3 green Elephant creature token onto the battlefield. Then each player draws a card.
         this.getSpellAbility().addEffect(new SelvalasChargeEffect());

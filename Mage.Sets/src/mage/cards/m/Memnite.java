@@ -26,12 +26,12 @@
  *  or implied, of BetaSteward_at_googlemail.com.
  */
 
-package mage.sets.scarsofmirrodin;
+package mage.cards.m;
 
 import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.MageInt;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 
 import java.util.UUID;
 
@@ -41,9 +41,8 @@ import java.util.UUID;
  */
 public class Memnite extends CardImpl {
 
-    public Memnite (UUID ownerId) {
-        super(ownerId, 174, "Memnite", Rarity.UNCOMMON, new CardType[]{CardType.ARTIFACT, CardType.CREATURE}, "{0}");
-        this.expansionSetCode = "SOM";
+    public Memnite (UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.ARTIFACT,CardType.CREATURE},"{0}");
         this.subtype.add("Construct");
         this.power = new MageInt(1);
         this.toughness = new MageInt(1);

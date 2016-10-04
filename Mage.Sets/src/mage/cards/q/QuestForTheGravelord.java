@@ -25,11 +25,10 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.zendikar;
+package mage.cards.q;
 
 import java.util.UUID;
 import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.constants.Zone;
 import mage.MageInt;
 import mage.abilities.common.DiesCreatureTriggeredAbility;
@@ -39,6 +38,7 @@ import mage.abilities.costs.common.SacrificeSourceCost;
 import mage.abilities.effects.common.CreateTokenEffect;
 import mage.abilities.effects.common.counter.AddCountersSourceEffect;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.counters.CounterType;
 import mage.game.permanent.token.Token;
 
@@ -48,9 +48,8 @@ import mage.game.permanent.token.Token;
  */
 public class QuestForTheGravelord extends CardImpl {
 
-    public QuestForTheGravelord(UUID ownerId) {
-        super(ownerId, 108, "Quest for the Gravelord", Rarity.UNCOMMON, new CardType[]{CardType.ENCHANTMENT}, "{B}");
-        this.expansionSetCode = "ZEN";
+    public QuestForTheGravelord(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.ENCHANTMENT},"{B}");
 
         // Whenever a creature dies, you may put a quest counter on Quest for the Gravelord.
         this.addAbility(new DiesCreatureTriggeredAbility(new AddCountersSourceEffect(CounterType.QUEST.createInstance()), true));

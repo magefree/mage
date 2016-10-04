@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.betrayersofkamigawa;
+package mage.cards.s;
 
 import java.util.UUID;
 
@@ -37,6 +37,7 @@ import mage.abilities.costs.common.DiscardTargetCost;
 import mage.abilities.costs.mana.ManaCostsImpl;
 import mage.abilities.effects.ContinuousEffectImpl;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.filter.FilterCard;
 import mage.filter.predicate.Predicates;
 import mage.filter.predicate.mageobject.SubtypePredicate;
@@ -56,9 +57,8 @@ public class SlumberingTora extends CardImpl {
         filter.add(Predicates.or(new SubtypePredicate("Spirit"),new SubtypePredicate("Arcane")));
     }    
 
-    public SlumberingTora(UUID ownerId) {
-        super(ownerId, 161, "Slumbering Tora", Rarity.RARE, new CardType[]{CardType.ARTIFACT}, "{3}");
-        this.expansionSetCode = "BOK";
+    public SlumberingTora(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.ARTIFACT},"{3}");
         // {2}, Discard a Spirit or Arcane card: Slumbering Tora becomes an X/X Cat artifact creature until end of turn,
         // where X is the discarded card's converted mana cost.
         Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new SlumberingToraEffect(), new ManaCostsImpl("{2}"));

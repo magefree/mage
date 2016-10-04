@@ -25,14 +25,14 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.fifthdawn;
+package mage.cards.i;
 
 import java.util.UUID;
 import mage.abilities.effects.common.ReturnToHandTargetEffect;
 import mage.abilities.keyword.AffinityForArtifactsAbility;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.target.common.TargetArtifactPermanent;
 
 /**
@@ -41,9 +41,8 @@ import mage.target.common.TargetArtifactPermanent;
  */
 public class IntoThinAir extends CardImpl {
 
-    public IntoThinAir(UUID ownerId) {
-        super(ownerId, 33, "Into Thin Air", Rarity.COMMON, new CardType[]{CardType.INSTANT}, "{5}{U}");
-        this.expansionSetCode = "5DN";
+    public IntoThinAir(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.INSTANT},"{5}{U}");
 
 
         // Affinity for artifacts

@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.scourge;
+package mage.cards.p;
 
 import java.util.UUID;
 import mage.abilities.TriggeredAbilityImpl;
@@ -33,9 +33,9 @@ import mage.abilities.effects.common.DrawCardSourceControllerEffect;
 import mage.abilities.effects.common.InfoEffect;
 import mage.cards.Card;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.cards.CardsImpl;
 import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.constants.Zone;
 import mage.game.Game;
 import mage.game.events.GameEvent;
@@ -49,9 +49,8 @@ import mage.players.Player;
  */
 public class PrimitiveEtchings extends CardImpl {
 
-    public PrimitiveEtchings(UUID ownerId) {
-        super(ownerId, 126, "Primitive Etchings", Rarity.RARE, new CardType[]{CardType.ENCHANTMENT}, "{2}{G}{G}");
-        this.expansionSetCode = "SCG";
+    public PrimitiveEtchings(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.ENCHANTMENT},"{2}{G}{G}");
 
         // Reveal the first card you draw each turn. Whenever you reveal a creature card this way, draw a card.
         this.addAbility(new PrimitiveEtchingsAbility());

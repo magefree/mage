@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.fatereforged;
+package mage.cards.w;
 
 import java.util.UUID;
 import mage.MageObject;
@@ -34,11 +34,11 @@ import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.keyword.ManifestEffect;
 import mage.cards.Card;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.cards.Cards;
 import mage.cards.CardsImpl;
 import mage.constants.CardType;
 import mage.constants.Outcome;
-import mage.constants.Rarity;
 import mage.constants.Zone;
 import mage.filter.FilterCard;
 import mage.game.Game;
@@ -51,9 +51,8 @@ import mage.target.TargetCard;
  */
 public class WriteIntoBeing extends CardImpl {
 
-    public WriteIntoBeing(UUID ownerId) {
-        super(ownerId, 59, "Write into Being", Rarity.COMMON, new CardType[]{CardType.SORCERY}, "{2}{U}");
-        this.expansionSetCode = "FRF";
+    public WriteIntoBeing(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{2}{U}");
 
         // Look at the top two cards of your library. Manifest one of those cards, then put the other on the top or bottom of your library.
         this.getSpellAbility().addEffect(new WriteIntoBeingEffect());

@@ -25,15 +25,15 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.khansoftarkir;
+package mage.cards.m;
 
 import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.keyword.HasteAbility;
 import mage.abilities.keyword.ProwessAbility;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.Rarity;
 
 /**
  *
@@ -41,9 +41,8 @@ import mage.constants.Rarity;
  */
 public class MonasterySwiftspear extends CardImpl {
 
-    public MonasterySwiftspear(UUID ownerId) {
-        super(ownerId, 118, "Monastery Swiftspear", Rarity.UNCOMMON, new CardType[]{CardType.CREATURE}, "{R}");
-        this.expansionSetCode = "KTK";
+    public MonasterySwiftspear(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{R}");
         this.subtype.add("Human");
         this.subtype.add("Monk");
 

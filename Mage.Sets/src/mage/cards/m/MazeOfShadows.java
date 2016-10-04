@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.tempest;
+package mage.cards.m;
 
 import java.util.UUID;
 import mage.abilities.Ability;
@@ -38,9 +38,9 @@ import mage.abilities.effects.common.UntapTargetEffect;
 import mage.abilities.keyword.ShadowAbility;
 import mage.abilities.mana.ColorlessManaAbility;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Duration;
-import mage.constants.Rarity;
 import mage.constants.Zone;
 import mage.filter.common.FilterAttackingCreature;
 import mage.filter.predicate.mageobject.AbilityPredicate;
@@ -57,9 +57,8 @@ public class MazeOfShadows extends CardImpl {
         filter.add(new AbilityPredicate(ShadowAbility.class));
     }
 
-    public MazeOfShadows(UUID ownerId) {
-        super(ownerId, 317, "Maze of Shadows", Rarity.UNCOMMON, new CardType[]{CardType.LAND}, "");
-        this.expansionSetCode = "TMP";
+    public MazeOfShadows(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.LAND},"");
 
         // {tap}: Add {C} to your mana pool.
         this.addAbility(new ColorlessManaAbility());

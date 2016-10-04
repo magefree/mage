@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.ravnica;
+package mage.cards.p;
 
 import java.util.UUID;
 
@@ -39,6 +39,7 @@ import mage.abilities.keyword.EquipAbility;
 import mage.abilities.keyword.FirstStrikeAbility;
 import mage.abilities.keyword.FlyingAbility;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 
 /**
  *
@@ -46,9 +47,8 @@ import mage.cards.CardImpl;
  */
 public class PeregrineMask extends CardImpl {
 
-    public PeregrineMask(UUID ownerId) {
-        super(ownerId, 268, "Peregrine Mask", Rarity.UNCOMMON, new CardType[]{CardType.ARTIFACT}, "{1}");
-        this.expansionSetCode = "RAV";
+    public PeregrineMask(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.ARTIFACT},"{1}");
         this.subtype.add("Equipment");
         // Equipped creature has defender, flying, and first strike.
         Ability ability = new SimpleStaticAbility(Zone.BATTLEFIELD, new GainAbilityAttachedEffect(DefenderAbility.getInstance(), AttachmentType.EQUIPMENT));

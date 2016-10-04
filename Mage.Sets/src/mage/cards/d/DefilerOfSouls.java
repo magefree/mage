@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.alarareborn;
+package mage.cards.d;
 
 import java.util.UUID;
 
@@ -36,6 +36,7 @@ import mage.abilities.common.BeginningOfUpkeepTriggeredAbility;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.keyword.FlyingAbility;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.filter.common.FilterControlledCreaturePermanent;
 import mage.filter.predicate.mageobject.MonocoloredPredicate;
 import mage.game.Game;
@@ -50,9 +51,8 @@ import mage.target.common.TargetControlledPermanent;
  */
 public class DefilerOfSouls extends CardImpl {
 
-    public DefilerOfSouls(UUID ownerId) {
-        super(ownerId, 37, "Defiler of Souls", Rarity.MYTHIC, new CardType[]{CardType.CREATURE}, "{3}{B}{B}{R}");
-        this.expansionSetCode = "ARB";
+    public DefilerOfSouls(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{3}{B}{B}{R}");
         this.subtype.add("Demon");
 
 

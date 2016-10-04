@@ -25,15 +25,15 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.returntoravnica;
+package mage.cards.i;
  
 import java.util.UUID;
 
 import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.abilities.effects.common.DetainTargetEffect;
 import mage.abilities.effects.common.DrawCardSourceControllerEffect;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.TargetController;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.filter.predicate.permanent.ControllerPredicate;
@@ -51,9 +51,8 @@ public class InactionInjunction extends CardImpl {
         filter.add(new ControllerPredicate(TargetController.OPPONENT));
     }
  
-    public InactionInjunction(UUID ownerId) {
-        super(ownerId, 41, "Inaction Injunction", Rarity.COMMON, new CardType[]{CardType.SORCERY}, "{1}{U}");
-        this.expansionSetCode = "RTR";
+    public InactionInjunction(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{1}{U}");
  
 
  

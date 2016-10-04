@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.odyssey;
+package mage.cards.c;
 
 import java.util.UUID;
 import mage.MageInt;
@@ -34,8 +34,8 @@ import mage.abilities.costs.common.DiscardTargetCost;
 import mage.abilities.effects.common.SacrificeSourceUnlessPaysEffect;
 import mage.abilities.keyword.FlyingAbility;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.filter.common.FilterLandCard;
 import mage.target.common.TargetCardInHand;
 
@@ -45,9 +45,8 @@ import mage.target.common.TargetCardInHand;
  */
 public class CursedMonstrosity extends CardImpl {
 
-    public CursedMonstrosity(UUID ownerId) {
-        super(ownerId, 126, "Cursed Monstrosity", Rarity.RARE, new CardType[]{CardType.CREATURE}, "{4}{B}");
-        this.expansionSetCode = "ODY";
+    public CursedMonstrosity(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{4}{B}");
         this.subtype.add("Horror");
 
         this.power = new MageInt(4);

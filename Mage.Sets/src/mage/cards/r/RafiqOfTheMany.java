@@ -26,7 +26,7 @@
  *  or implied, of BetaSteward_at_googlemail.com.
  */
 
-package mage.sets.shardsofalara;
+package mage.cards.r;
 
 import java.util.UUID;
 import mage.MageInt;
@@ -36,9 +36,9 @@ import mage.abilities.effects.common.continuous.GainAbilityTargetEffect;
 import mage.abilities.keyword.DoubleStrikeAbility;
 import mage.abilities.keyword.ExaltedAbility;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Duration;
-import mage.constants.Rarity;
 import mage.constants.Zone;
 import mage.game.Game;
 import mage.game.events.GameEvent;
@@ -51,9 +51,8 @@ import mage.target.targetpointer.FixedTarget;
  */
 public class RafiqOfTheMany extends CardImpl {
 
-    public RafiqOfTheMany(UUID ownerId) {
-        super(ownerId, 185, "Rafiq of the Many", Rarity.MYTHIC, new CardType[]{CardType.CREATURE}, "{1}{G}{W}{U}");
-        this.expansionSetCode = "ALA";
+    public RafiqOfTheMany(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{1}{G}{W}{U}");
 
 
         this.supertype.add("Legendary");

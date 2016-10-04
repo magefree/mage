@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.planarchaos;
+package mage.cards.e;
 
 import java.util.UUID;
 
@@ -33,13 +33,13 @@ import mage.MageObject;
 import mage.constants.CardType;
 import mage.constants.Duration;
 import mage.constants.Outcome;
-import mage.constants.Rarity;
 import mage.abilities.Ability;
 import mage.abilities.effects.ContinuousEffect;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.continuous.BoostTargetEffect;
 import mage.cards.Card;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.cards.CardsImpl;
 import mage.game.Game;
 import mage.players.Player;
@@ -52,9 +52,8 @@ import mage.target.targetpointer.FixedTarget;
  */
 public class ErraticMutation extends CardImpl {
 
-    public ErraticMutation(UUID ownerId) {
-        super(ownerId, 41, "Erratic Mutation", Rarity.COMMON, new CardType[]{CardType.INSTANT}, "{2}{U}");
-        this.expansionSetCode = "PLC";
+    public ErraticMutation(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.INSTANT},"{2}{U}");
 
         // Choose target creature. Reveal cards from the top of your library until you reveal a nonland card. That creature gets +X/-X until end of turn, where X is that card's converted mana cost. Put all cards revealed this way on the bottom of your library in any order.
         this.getSpellAbility().addTarget(new TargetCreaturePermanent());

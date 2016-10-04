@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.commander2013;
+package mage.cards.n;
 
 import java.util.UUID;
 import mage.MageInt;
@@ -38,11 +38,11 @@ import mage.abilities.effects.common.CastSourceTriggeredAbility;
 import mage.abilities.keyword.TrampleAbility;
 import mage.cards.Card;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.cards.CardsImpl;
 import mage.constants.CardType;
 import mage.constants.Duration;
 import mage.constants.Outcome;
-import mage.constants.Rarity;
 import mage.counters.CounterType;
 import mage.game.Game;
 import mage.game.events.GameEvent;
@@ -56,9 +56,8 @@ import mage.players.Player;
  */
 public class NayaSoulbeast extends CardImpl {
 
-    public NayaSoulbeast(UUID ownerId) {
-        super(ownerId, 157, "Naya Soulbeast", Rarity.RARE, new CardType[]{CardType.CREATURE}, "{6}{G}{G}");
-        this.expansionSetCode = "C13";
+    public NayaSoulbeast(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{6}{G}{G}");
         this.subtype.add("Beast");
 
         this.power = new MageInt(0);

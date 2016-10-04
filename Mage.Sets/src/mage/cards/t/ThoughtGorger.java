@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.riseoftheeldrazi;
+package mage.cards.t;
 
 import mage.abilities.common.EntersBattlefieldTriggeredAbility;
 import mage.abilities.common.LeavesBattlefieldTriggeredAbility;
@@ -36,12 +36,12 @@ import mage.constants.Outcome;
 import mage.constants.Zone;
 import mage.abilities.effects.OneShotEffect;
 import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.counters.CounterType;
 
 /**
@@ -50,9 +50,8 @@ import mage.counters.CounterType;
  */
 public class ThoughtGorger extends CardImpl {
 
-    public ThoughtGorger(UUID ownerId) {
-        super(ownerId, 129, "Thought Gorger", Rarity.RARE, new CardType[]{CardType.CREATURE}, "{2}{B}{B}");
-        this.expansionSetCode = "ROE";
+    public ThoughtGorger(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{2}{B}{B}");
         this.subtype.add("Horror");
 
         this.power = new MageInt(2);

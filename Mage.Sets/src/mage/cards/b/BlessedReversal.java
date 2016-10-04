@@ -25,15 +25,15 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.urzaslegacy;
+package mage.cards.b;
 
 import mage.abilities.Ability;
 import mage.abilities.dynamicvalue.DynamicValue;
 import mage.abilities.effects.Effect;
 import mage.abilities.effects.common.GainLifeEffect;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.game.Game;
 import mage.game.combat.CombatGroup;
 
@@ -45,9 +45,8 @@ import java.util.UUID;
  */
 public class BlessedReversal extends CardImpl {
 
-    public BlessedReversal(UUID ownerId) {
-        super(ownerId, 2, "Blessed Reversal", Rarity.RARE, new CardType[]{CardType.INSTANT}, "{1}{W}");
-        this.expansionSetCode = "ULG";
+    public BlessedReversal(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.INSTANT},"{1}{W}");
 
 
         // You gain 3 life for each creature attacking you.

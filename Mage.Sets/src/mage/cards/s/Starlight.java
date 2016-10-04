@@ -25,15 +25,15 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.seventhedition;
+package mage.cards.s;
 
 import java.util.UUID;
 import mage.ObjectColor;
 import mage.abilities.dynamicvalue.common.PermanentsTargetOpponentControlsCount;
 import mage.abilities.effects.common.GainLifeEffect;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.filter.predicate.mageobject.ColorPredicate;
 import mage.target.common.TargetOpponent;
@@ -52,9 +52,8 @@ public class Starlight extends CardImpl {
         filter.add(new ColorPredicate(ObjectColor.BLACK));
     }
 
-    public Starlight(UUID ownerId) {
-        super(ownerId, 49, "Starlight", Rarity.UNCOMMON, new CardType[]{CardType.SORCERY}, "{1}{W}");
-        this.expansionSetCode = "7ED";
+    public Starlight(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{1}{W}");
 
         // You gain 3 life for each black creature target opponent controls.
         this.getSpellAbility().addEffect(new GainLifeEffect(new PermanentsTargetOpponentControlsCount(filter, 3)));

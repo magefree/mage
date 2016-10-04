@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.invasion;
+package mage.cards.t;
 
 import java.util.UUID;
 import mage.MageObject;
@@ -33,10 +33,10 @@ import mage.abilities.Ability;
 import mage.abilities.effects.ContinuousRuleModifyingEffectImpl;
 import mage.abilities.effects.common.DrawCardSourceControllerEffect;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Duration;
 import mage.constants.Outcome;
-import mage.constants.Rarity;
 import mage.game.Game;
 import mage.game.events.GameEvent;
 import mage.target.TargetPlayer;
@@ -47,9 +47,8 @@ import mage.target.TargetPlayer;
  */
 public class TurfWound extends CardImpl {
 
-    public TurfWound(UUID ownerId) {
-        super(ownerId, 177, "Turf Wound", Rarity.COMMON, new CardType[]{CardType.INSTANT}, "{2}{R}");
-        this.expansionSetCode = "INV";
+    public TurfWound(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.INSTANT},"{2}{R}");
 
         // Target player can't play land cards this turn.
         this.getSpellAbility().addEffect(new TurfWoundEffect());

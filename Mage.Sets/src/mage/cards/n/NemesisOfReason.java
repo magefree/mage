@@ -26,17 +26,17 @@
  *  or implied, of BetaSteward_at_googlemail.com.
  */
 
-package mage.sets.alarareborn;
+package mage.cards.n;
 
 import java.util.UUID;
 
 import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.MageInt;
 import mage.abilities.TriggeredAbilityImpl;
 import mage.abilities.effects.Effect;
 import mage.abilities.effects.common.PutLibraryIntoGraveTargetEffect;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.Zone;
 import mage.game.Game;
 import mage.game.events.GameEvent;
@@ -48,9 +48,8 @@ import mage.target.targetpointer.FixedTarget;
  */
 public class NemesisOfReason extends CardImpl {
 
-    public NemesisOfReason (UUID ownerId) {
-        super(ownerId, 28, "Nemesis of Reason", Rarity.RARE, new CardType[]{CardType.CREATURE}, "{3}{U}{B}");
-        this.expansionSetCode = "ARB";
+    public NemesisOfReason (UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{3}{U}{B}");
         this.subtype.add("Leviathan");
         this.subtype.add("Horror");
         

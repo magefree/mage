@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.prereleaseevents;
+package mage.cards.q;
 
 import java.util.UUID;
 import mage.MageInt;
@@ -41,9 +41,9 @@ import mage.abilities.effects.common.continuous.GainAbilitySourceEffect;
 import mage.abilities.keyword.FlyingAbility;
 import mage.abilities.keyword.ProtectionAbility;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Duration;
-import mage.constants.Rarity;
 import mage.constants.Zone;
 import mage.filter.FilterCard;
 import mage.filter.predicate.Predicates;
@@ -64,9 +64,8 @@ public class QuestingPhelddagrif extends CardImpl {
         filter.add(Predicates.or(new ColorPredicate(ObjectColor.BLACK), new ColorPredicate(ObjectColor.RED)));
     }
 
-    public QuestingPhelddagrif(UUID ownerId) {
-        super(ownerId, 13, "Questing Phelddagrif", Rarity.SPECIAL, new CardType[]{CardType.CREATURE}, "{1}{G}{W}{U}");
-        this.expansionSetCode = "PTC";
+    public QuestingPhelddagrif(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{1}{G}{W}{U}");
         this.subtype.add("Phelddagrif");
         this.power = new MageInt(4);
         this.toughness = new MageInt(4);

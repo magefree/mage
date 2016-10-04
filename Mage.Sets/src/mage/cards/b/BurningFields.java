@@ -25,13 +25,13 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.portalthreekingdoms;
+package mage.cards.b;
 
 import java.util.UUID;
 import mage.abilities.effects.common.DamageTargetEffect;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.target.common.TargetOpponent;
 
 /**
@@ -40,9 +40,8 @@ import mage.target.common.TargetOpponent;
  */
 public class BurningFields extends CardImpl {
 
-    public BurningFields(UUID ownerId) {
-        super(ownerId, 103, "Burning Fields", Rarity.COMMON, new CardType[]{CardType.SORCERY}, "{4}{R}");
-        this.expansionSetCode = "PTK";
+    public BurningFields(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{4}{R}");
 
         // Burning Fields deals 5 damage to target opponent.
         this.getSpellAbility().addTarget(new TargetOpponent());

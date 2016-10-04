@@ -25,16 +25,16 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.prophecy;
+package mage.cards.r;
 
 import java.util.UUID;
 import mage.abilities.Ability;
 import mage.abilities.costs.mana.GenericManaCost;
 import mage.abilities.effects.OneShotEffect;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Outcome;
-import mage.constants.Rarity;
 import mage.game.Game;
 import mage.game.stack.StackObject;
 import mage.players.Player;
@@ -46,9 +46,8 @@ import mage.target.TargetSpell;
  */
 public class Rethink extends CardImpl {
 
-    public Rethink(UUID ownerId) {
-        super(ownerId, 42, "Rethink", Rarity.COMMON, new CardType[]{CardType.INSTANT}, "{2}{U}");
-        this.expansionSetCode = "PCY";
+    public Rethink(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.INSTANT},"{2}{U}");
 
         // Counter target spell unless its controller pays {X}, where X is its converted mana cost.
         this.getSpellAbility().addEffect(new RethinkEffect());

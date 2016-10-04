@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.lorwyn;
+package mage.cards.z;
 
 import mage.constants.*;
 import mage.abilities.Ability;
@@ -36,6 +36,7 @@ import mage.abilities.keyword.DefenderAbility;
 import mage.abilities.keyword.EnchantAbility;
 import mage.abilities.keyword.FlyingAbility;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.target.TargetPermanent;
 import mage.target.common.TargetCreaturePermanent;
 
@@ -47,9 +48,8 @@ import java.util.UUID;
  */
 public class ZephyrNet extends CardImpl {
 
-    public ZephyrNet(UUID ownerId) {
-        super(ownerId, 98, "Zephyr Net", Rarity.COMMON, new CardType[]{CardType.ENCHANTMENT}, "{1}{U}");
-        this.expansionSetCode = "LRW";
+    public ZephyrNet(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.ENCHANTMENT},"{1}{U}");
         this.subtype.add("Aura");
 
         // Enchant creature

@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.darkascension;
+package mage.cards.i;
 
 import java.util.UUID;
 
@@ -35,6 +35,7 @@ import mage.abilities.costs.mana.ManaCostsImpl;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.keyword.FlashbackAbility;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.counters.CounterType;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
@@ -47,9 +48,8 @@ import mage.target.common.TargetCreaturePermanent;
  */
 public class IncreasingSavagery extends CardImpl {
 
-    public IncreasingSavagery(UUID ownerId) {
-        super(ownerId, 120, "Increasing Savagery", Rarity.RARE, new CardType[]{CardType.SORCERY}, "{2}{G}{G}");
-        this.expansionSetCode = "DKA";
+    public IncreasingSavagery(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{2}{G}{G}");
 
 
         // Put five +1/+1 counters on target creature. If Increasing Savagery was cast from a graveyard, put ten +1/+1 counters on that creature instead.

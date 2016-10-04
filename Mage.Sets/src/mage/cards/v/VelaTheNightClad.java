@@ -25,12 +25,11 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.planechase2012;
+package mage.cards.v;
 
 import java.util.UUID;
 import mage.constants.CardType;
 import mage.constants.Duration;
-import mage.constants.Rarity;
 import mage.constants.TargetController;
 import mage.constants.Zone;
 import mage.MageInt;
@@ -41,6 +40,7 @@ import mage.abilities.effects.common.LoseLifeOpponentsEffect;
 import mage.abilities.effects.common.continuous.GainAbilityControlledEffect;
 import mage.abilities.keyword.IntimidateAbility;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.filter.predicate.permanent.ControllerPredicate;
 
@@ -56,9 +56,8 @@ public class VelaTheNightClad extends CardImpl {
         filter.add(new ControllerPredicate(TargetController.YOU));
     }
 
-    public VelaTheNightClad(UUID ownerId) {
-        super(ownerId, 107, "Vela the Night-Clad", Rarity.MYTHIC, new CardType[]{CardType.CREATURE}, "{4}{U}{B}");
-        this.expansionSetCode = "PC2";
+    public VelaTheNightClad(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{4}{U}{B}");
         this.supertype.add("Legendary");
         this.subtype.add("Human");
         this.subtype.add("Wizard");

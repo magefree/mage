@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.starwars;
+package mage.cards.n;
 
 import java.util.UUID;
 import mage.MageInt;
@@ -38,8 +38,8 @@ import mage.abilities.effects.common.ExileTargetForSourceEffect;
 import mage.abilities.effects.common.ReturnToBattlefieldUnderOwnerControlTargetEffect;
 import mage.abilities.keyword.SpaceflightAbility;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.filter.common.FilterControlledCreaturePermanent;
 import mage.filter.predicate.permanent.AnotherPredicate;
 import mage.target.common.TargetControlledCreaturePermanent;
@@ -56,9 +56,8 @@ public class N1Starfighter extends CardImpl {
         filter.add(new AnotherPredicate());
     }
 
-    public N1Starfighter(UUID ownerId) {
-        super(ownerId, 224, "N-1 Starfighter", Rarity.COMMON, new CardType[]{CardType.ARTIFACT, CardType.CREATURE}, "{1}{W/U}{W/U}");
-        this.expansionSetCode = "SWS";
+    public N1Starfighter(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.ARTIFACT,CardType.CREATURE},"{1}{W/U}{W/U}");
         this.subtype.add("Starship");
         this.power = new MageInt(2);
         this.toughness = new MageInt(2);

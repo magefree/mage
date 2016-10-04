@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.magicorigins;
+package mage.cards.k;
 
 import java.util.UUID;
 import mage.MageInt;
@@ -38,8 +38,8 @@ import mage.abilities.effects.common.LoseLifeSourceControllerEffect;
 import mage.abilities.keyword.FlyingAbility;
 import mage.cards.Card;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.constants.TargetController;
 import mage.constants.Zone;
 import mage.filter.FilterPermanent;
@@ -61,9 +61,8 @@ public class KothophedSoulHoarder extends CardImpl {
         filter.add(new OwnerPredicate(TargetController.NOT_YOU));
     }
 
-    public KothophedSoulHoarder(UUID ownerId) {
-        super(ownerId, 104, "Kothophed, Soul Hoarder", Rarity.RARE, new CardType[]{CardType.CREATURE}, "{4}{B}{B}");
-        this.expansionSetCode = "ORI";
+    public KothophedSoulHoarder(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{4}{B}{B}");
         this.supertype.add("Legendary");
         this.subtype.add("Demon");
         this.power = new MageInt(6);

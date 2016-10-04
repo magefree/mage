@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.magic2012;
+package mage.cards.s;
 
 import java.util.UUID;
 import mage.abilities.Ability;
@@ -37,10 +37,10 @@ import mage.abilities.keyword.EquipAbility;
 import mage.abilities.keyword.HasteAbility;
 import mage.abilities.keyword.HexproofAbility;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.AttachmentType;
 import mage.constants.CardType;
 import mage.constants.Outcome;
-import mage.constants.Rarity;
 import mage.constants.Zone;
 
 /**
@@ -49,9 +49,8 @@ import mage.constants.Zone;
  */
 public class SwiftfootBoots extends CardImpl {
 
-    public SwiftfootBoots(UUID ownerId) {
-        super(ownerId, 219, "Swiftfoot Boots", Rarity.UNCOMMON, new CardType[]{CardType.ARTIFACT}, "{2}");
-        this.expansionSetCode = "M12";
+    public SwiftfootBoots(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.ARTIFACT},"{2}");
         this.subtype.add("Equipment");
 
         // Equipped creature has hexproof and haste.

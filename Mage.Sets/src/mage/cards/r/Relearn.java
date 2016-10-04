@@ -25,13 +25,13 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.weatherlight;
+package mage.cards.r;
 
 import java.util.UUID;
 import mage.abilities.effects.common.ReturnFromGraveyardToHandTargetEffect;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.filter.FilterCard;
 import mage.filter.predicate.Predicates;
 import mage.filter.predicate.mageobject.CardTypePredicate;
@@ -51,9 +51,8 @@ public class Relearn extends CardImpl {
                 new CardTypePredicate(CardType.SORCERY)));
     }
     
-    public Relearn(UUID ownerId) {
-        super(ownerId, 51, "Relearn", Rarity.UNCOMMON, new CardType[]{CardType.SORCERY}, "{1}{U}{U}");
-        this.expansionSetCode = "WTH";
+    public Relearn(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{1}{U}{U}");
 
 
         // Return target instant or sorcery card from your graveyard to your hand.

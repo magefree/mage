@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.planarchaos;
+package mage.cards.s;
 
 import java.util.UUID;
 import mage.MageInt;
@@ -35,8 +35,8 @@ import mage.abilities.effects.common.CreateTokenEffect;
 import mage.abilities.effects.common.ReturnToHandChosenControlledPermanentEffect;
 import mage.abilities.keyword.FlyingAbility;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.constants.TargetController;
 import mage.constants.Zone;
 import mage.filter.common.FilterControlledCreaturePermanent;
@@ -56,9 +56,8 @@ public class StormfrontRiders extends CardImpl {
         filter.add(new OwnerPredicate(TargetController.YOU));
     }
 
-    public StormfrontRiders(UUID ownerId) {
-        super(ownerId, 20, "Stormfront Riders", Rarity.UNCOMMON, new CardType[]{CardType.CREATURE}, "{4}{W}");
-        this.expansionSetCode = "PLC";
+    public StormfrontRiders(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{4}{W}");
         this.subtype.add("Human");
         this.subtype.add("Soldier");
 

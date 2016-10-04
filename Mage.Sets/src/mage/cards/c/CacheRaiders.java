@@ -25,15 +25,15 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.eventide;
+package mage.cards.c;
 
 import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.common.BeginningOfUpkeepTriggeredAbility;
 import mage.abilities.effects.common.ReturnToHandChosenControlledPermanentEffect;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.constants.TargetController;
 import mage.filter.common.FilterControlledPermanent;
 
@@ -43,9 +43,8 @@ import mage.filter.common.FilterControlledPermanent;
  */
 public class CacheRaiders extends CardImpl {
 
-    public CacheRaiders(UUID ownerId) {
-        super(ownerId, 18, "Cache Raiders", Rarity.UNCOMMON, new CardType[]{CardType.CREATURE}, "{3}{U}{U}");
-        this.expansionSetCode = "EVE";
+    public CacheRaiders(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{3}{U}{U}");
         this.subtype.add("Merfolk");
         this.subtype.add("Rogue");
 

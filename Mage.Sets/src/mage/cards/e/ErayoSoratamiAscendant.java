@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.saviorsofkamigawa;
+package mage.cards.e;
 
 import java.util.UUID;
 import mage.MageInt;
@@ -35,8 +35,8 @@ import mage.abilities.effects.common.CounterTargetEffect;
 import mage.abilities.effects.common.FlipSourceEffect;
 import mage.abilities.keyword.FlyingAbility;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.constants.Zone;
 import mage.game.Game;
 import mage.game.events.GameEvent;
@@ -51,9 +51,8 @@ import mage.watchers.common.CastSpellLastTurnWatcher;
  */
 public class ErayoSoratamiAscendant extends CardImpl {
 
-    public ErayoSoratamiAscendant(UUID ownerId) {
-        super(ownerId, 35, "Erayo, Soratami Ascendant", Rarity.RARE, new CardType[]{CardType.CREATURE}, "{1}{U}");
-        this.expansionSetCode = "SOK";
+    public ErayoSoratamiAscendant(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{1}{U}");
         this.supertype.add("Legendary");
         this.subtype.add("Moonfolk");
         this.subtype.add("Monk");

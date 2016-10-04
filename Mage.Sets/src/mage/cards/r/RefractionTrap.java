@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.worldwake;
+package mage.cards.r;
 
 import java.util.List;
 import java.util.UUID;
@@ -37,10 +37,10 @@ import mage.abilities.costs.mana.ManaCostsImpl;
 import mage.abilities.effects.PreventionEffectData;
 import mage.abilities.effects.PreventionEffectImpl;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Duration;
 import mage.constants.Outcome;
-import mage.constants.Rarity;
 import mage.game.Game;
 import mage.game.events.GameEvent;
 import mage.game.permanent.Permanent;
@@ -57,9 +57,8 @@ import mage.watchers.common.SpellsCastWatcher;
  */
 public class RefractionTrap extends CardImpl {
 
-    public RefractionTrap(UUID ownerId) {
-        super(ownerId, 17, "Refraction Trap", Rarity.UNCOMMON, new CardType[]{CardType.INSTANT}, "{3}{W}");
-        this.expansionSetCode = "WWK";
+    public RefractionTrap(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.INSTANT},"{3}{W}");
         this.subtype.add("Trap");
 
         // If an opponent cast a red instant or sorcery spell this turn, you may pay {W} rather than pay Refraction Trap's mana cost.

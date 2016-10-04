@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.mercadianmasques;
+package mage.cards.m;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -34,9 +34,9 @@ import mage.abilities.Ability;
 import mage.abilities.effects.ContinuousEffect;
 import mage.abilities.effects.OneShotEffect;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Outcome;
-import mage.constants.Rarity;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.abilities.effects.common.DontUntapInControllersNextUntapStepTargetEffect;
 import mage.game.Game;
@@ -51,9 +51,8 @@ import mage.target.targetpointer.FixedTargets;
  */
 public class Misstep extends CardImpl {
     
-    public Misstep(UUID ownerId) {
-        super(ownerId, 88, "Misstep", Rarity.COMMON, new CardType[]{CardType.SORCERY}, "{1}{U}");
-        this.expansionSetCode = "MMQ";
+    public Misstep(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{1}{U}");
 
         // Creatures target player controls don't untap during that player's next untap step.
         this.getSpellAbility().addEffect(new MisstepEffect());

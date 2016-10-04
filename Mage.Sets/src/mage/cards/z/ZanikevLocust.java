@@ -25,16 +25,16 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.returntoravnica;
+package mage.cards.z;
 
 import java.util.UUID;
 import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.MageInt;
 import mage.abilities.costs.mana.ManaCostsImpl;
 import mage.abilities.keyword.FlyingAbility;
 import mage.abilities.keyword.ScavengeAbility;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 
 /**
  *
@@ -42,9 +42,8 @@ import mage.cards.CardImpl;
  */
 public class ZanikevLocust extends CardImpl {
 
-    public ZanikevLocust(UUID ownerId) {
-        super(ownerId, 84, "Zanikev Locust", Rarity.UNCOMMON, new CardType[]{CardType.CREATURE}, "{5}{B}");
-        this.expansionSetCode = "RTR";
+    public ZanikevLocust(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{5}{B}");
         this.subtype.add("Insect");
 
         this.power = new MageInt(3);

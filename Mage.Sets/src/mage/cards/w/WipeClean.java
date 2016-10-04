@@ -25,15 +25,15 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.scourge;
+package mage.cards.w;
 
 import java.util.UUID;
 import mage.abilities.costs.mana.ManaCostsImpl;
 import mage.abilities.effects.common.ExileTargetEffect;
 import mage.abilities.keyword.CyclingAbility;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.filter.FilterPermanent;
 import mage.filter.predicate.mageobject.CardTypePredicate;
 import mage.target.TargetPermanent;
@@ -48,9 +48,8 @@ public class WipeClean extends CardImpl {
     static {
         filter.add(new CardTypePredicate(CardType.ENCHANTMENT));
     }
-    public WipeClean(UUID ownerId) {
-        super(ownerId, 26, "Wipe Clean", Rarity.COMMON, new CardType[]{CardType.INSTANT}, "{1}{W}");
-        this.expansionSetCode = "SCG";
+    public WipeClean(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.INSTANT},"{1}{W}");
 
         // Exile target enchantment.
         this.getSpellAbility().addTarget(new TargetPermanent(filter)); 

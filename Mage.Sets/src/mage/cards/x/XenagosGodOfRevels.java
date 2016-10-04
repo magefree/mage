@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.bornofthegods;
+package mage.cards.x;
 
 import java.util.UUID;
 import mage.MageInt;
@@ -42,11 +42,11 @@ import mage.abilities.effects.common.continuous.LoseCreatureTypeSourceEffect;
 import mage.abilities.keyword.HasteAbility;
 import mage.abilities.keyword.IndestructibleAbility;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.ColoredManaSymbol;
 import mage.constants.Duration;
 import mage.constants.Outcome;
-import mage.constants.Rarity;
 import mage.constants.TargetController;
 import mage.constants.Zone;
 import mage.filter.common.FilterControlledCreaturePermanent;
@@ -66,9 +66,8 @@ public class XenagosGodOfRevels extends CardImpl {
         filter.add(new AnotherPredicate());
     }
 
-    public XenagosGodOfRevels(UUID ownerId) {
-        super(ownerId, 156, "Xenagos, God of Revels", Rarity.MYTHIC, new CardType[]{CardType.ENCHANTMENT, CardType.CREATURE}, "{3}{R}{G}");
-        this.expansionSetCode = "BNG";
+    public XenagosGodOfRevels(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.ENCHANTMENT,CardType.CREATURE},"{3}{R}{G}");
         this.supertype.add("Legendary");
         this.subtype.add("God");
 

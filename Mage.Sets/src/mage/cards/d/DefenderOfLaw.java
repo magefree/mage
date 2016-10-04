@@ -25,15 +25,15 @@
  * authors and should not be interpreted as representing official policies, either expressed
  * or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.urzaslegacy;
+package mage.cards.d;
 
 import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.MageInt;
 import mage.ObjectColor;
 import mage.abilities.keyword.FlashAbility;
 import mage.abilities.keyword.ProtectionAbility;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.filter.FilterCard;
 import mage.filter.predicate.mageobject.ColorPredicate;
 
@@ -50,9 +50,8 @@ public class DefenderOfLaw extends CardImpl {
         filter.add(new ColorPredicate(ObjectColor.RED));
     }
 
-    public DefenderOfLaw(UUID ownerId) {
-        super(ownerId, 5, "Defender of Law", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{2}{W}");
-        this.expansionSetCode = "ULG";
+    public DefenderOfLaw(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{2}{W}");
         this.subtype.add("Human");
         this.subtype.add("Knight");
 

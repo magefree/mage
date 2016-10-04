@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.fallenempires;
+package mage.cards.i;
 
 import java.util.UUID;
 import mage.MageInt;
@@ -40,9 +40,9 @@ import mage.abilities.effects.common.BasicManaEffect;
 import mage.abilities.effects.common.SacrificeSourceEffect;
 import mage.abilities.mana.SimpleManaAbility;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Outcome;
-import mage.constants.Rarity;
 import mage.constants.Zone;
 import mage.game.Game;
 
@@ -52,9 +52,8 @@ import mage.game.Game;
  */
 public class InitiatesOfTheEbonHand1 extends CardImpl {
 
-    public InitiatesOfTheEbonHand1(UUID ownerId) {
-        super(ownerId, 16, "Initiates of the Ebon Hand", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{B}");
-        this.expansionSetCode = "FEM";
+    public InitiatesOfTheEbonHand1(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{B}");
         this.subtype.add("Cleric");
         this.power = new MageInt(1);
         this.toughness = new MageInt(1);

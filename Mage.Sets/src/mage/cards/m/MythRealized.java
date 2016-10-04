@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.dragonsoftarkir;
+package mage.cards.m;
 
 import java.util.UUID;
 import mage.MageInt;
@@ -39,11 +39,11 @@ import mage.abilities.effects.Effect;
 import mage.abilities.effects.common.continuous.BecomesCreatureSourceEffect;
 import mage.abilities.effects.common.counter.AddCountersSourceEffect;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Duration;
 import mage.constants.Layer;
 import mage.constants.Outcome;
-import mage.constants.Rarity;
 import mage.constants.SubLayer;
 import mage.constants.Zone;
 import mage.counters.CounterType;
@@ -67,9 +67,8 @@ public class MythRealized extends CardImpl {
         filterNonCreature.add(Predicates.not(new CardTypePredicate(CardType.CREATURE)));
     }
     
-    public MythRealized(UUID ownerId) {
-        super(ownerId, 26, "Myth Realized", Rarity.RARE, new CardType[]{CardType.ENCHANTMENT}, "{W}");
-        this.expansionSetCode = "DTK";
+    public MythRealized(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.ENCHANTMENT},"{W}");
 
         // Whenever you cast a noncreature spell, put a lore counter on Myth Realized.
         this.addAbility(new SpellCastControllerTriggeredAbility(new AddCountersSourceEffect(CounterType.LORE.createInstance()), filterNonCreature, false));

@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.shadowmoor;
+package mage.cards.d;
 
 import java.util.UUID;
 import mage.MageInt;
@@ -35,9 +35,9 @@ import mage.abilities.effects.common.CastSourceTriggeredAbility;
 import mage.abilities.keyword.FlyingAbility;
 import mage.abilities.keyword.HasteAbility;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Outcome;
-import mage.constants.Rarity;
 import mage.constants.Zone;
 import mage.filter.FilterCard;
 import mage.filter.predicate.mageobject.NamePredicate;
@@ -50,9 +50,8 @@ import mage.players.Player;
  */
 public class DemigodOfRevenge extends CardImpl {
 
-    public DemigodOfRevenge(UUID ownerId) {
-        super(ownerId, 183, "Demigod of Revenge", Rarity.RARE, new CardType[]{CardType.CREATURE}, "{B/R}{B/R}{B/R}{B/R}{B/R}");
-        this.expansionSetCode = "SHM";
+    public DemigodOfRevenge(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{B/R}{B/R}{B/R}{B/R}{B/R}");
         this.subtype.add("Spirit");
         this.subtype.add("Avatar");
 

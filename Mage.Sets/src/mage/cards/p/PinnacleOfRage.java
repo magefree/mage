@@ -25,14 +25,14 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.bornofthegods;
+package mage.cards.p;
 
 import java.util.UUID;
 import mage.abilities.effects.Effect;
 import mage.abilities.effects.common.DamageTargetEffect;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.target.common.TargetCreatureOrPlayer;
 
 /**
@@ -41,9 +41,8 @@ import mage.target.common.TargetCreatureOrPlayer;
  */
 public class PinnacleOfRage extends CardImpl {
 
-    public PinnacleOfRage(UUID ownerId) {
-        super(ownerId, 105, "Pinnacle of Rage", Rarity.UNCOMMON, new CardType[]{CardType.SORCERY}, "{4}{R}{R}");
-        this.expansionSetCode = "BNG";
+    public PinnacleOfRage(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{4}{R}{R}");
 
 
         // Pinnacle of Rage deals 3 damage to each of two target creatures and/or players.

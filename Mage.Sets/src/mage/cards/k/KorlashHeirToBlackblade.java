@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.futuresight;
+package mage.cards.k;
 
 import java.util.UUID;
 import mage.MageInt;
@@ -39,9 +39,9 @@ import mage.abilities.effects.common.RegenerateSourceEffect;
 import mage.abilities.effects.common.continuous.SetPowerToughnessSourceEffect;
 import mage.abilities.effects.common.search.SearchLibraryPutInPlayEffect;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Duration;
-import mage.constants.Rarity;
 import mage.constants.Zone;
 import mage.filter.FilterCard;
 import mage.filter.common.FilterControlledPermanent;
@@ -62,9 +62,8 @@ public class KorlashHeirToBlackblade extends CardImpl {
         filterCard.add(new SubtypePredicate("Swamp"));
     }
 
-    public KorlashHeirToBlackblade(UUID ownerId) {
-        super(ownerId, 87, "Korlash, Heir to Blackblade", Rarity.RARE, new CardType[]{CardType.CREATURE}, "{2}{B}{B}");
-        this.expansionSetCode = "FUT";
+    public KorlashHeirToBlackblade(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{2}{B}{B}");
         this.supertype.add("Legendary");
         this.subtype.add("Zombie");
         this.subtype.add("Warrior");

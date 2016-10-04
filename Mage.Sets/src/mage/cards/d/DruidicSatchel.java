@@ -25,12 +25,11 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.magic2012;
+package mage.cards.d;
 
 import java.util.UUID;
 import mage.constants.CardType;
 import mage.constants.Outcome;
-import mage.constants.Rarity;
 import mage.constants.Zone;
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleActivatedAbility;
@@ -39,6 +38,7 @@ import mage.abilities.costs.mana.ManaCostsImpl;
 import mage.abilities.effects.OneShotEffect;
 import mage.cards.Card;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.cards.Cards;
 import mage.cards.CardsImpl;
 import mage.game.Game;
@@ -52,9 +52,8 @@ import mage.players.Player;
  */
 public class DruidicSatchel extends CardImpl {
 
-    public DruidicSatchel(UUID ownerId) {
-        super(ownerId, 207, "Druidic Satchel", Rarity.RARE, new CardType[]{CardType.ARTIFACT}, "{3}");
-        this.expansionSetCode = "M12";
+    public DruidicSatchel(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.ARTIFACT},"{3}");
 
         Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new DruidicSatchelEffect(), new ManaCostsImpl("{2}"));
         ability.addCost(new TapSourceCost());

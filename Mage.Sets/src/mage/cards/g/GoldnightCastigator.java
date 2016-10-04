@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.shadowsoverinnistrad;
+package mage.cards.g;
 
 import java.util.UUID;
 import mage.MageInt;
@@ -35,10 +35,10 @@ import mage.abilities.effects.ReplacementEffectImpl;
 import mage.abilities.keyword.FlyingAbility;
 import mage.abilities.keyword.HasteAbility;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Duration;
 import mage.constants.Outcome;
-import mage.constants.Rarity;
 import mage.constants.Zone;
 import mage.game.Game;
 import mage.game.events.GameEvent;
@@ -51,9 +51,8 @@ import mage.game.permanent.Permanent;
  */
 public class GoldnightCastigator extends CardImpl {
 
-    public GoldnightCastigator(UUID ownerId) {
-        super(ownerId, 162, "Goldnight Castigator", Rarity.MYTHIC, new CardType[]{CardType.CREATURE}, "{2}{R}{R}");
-        this.expansionSetCode = "SOI";
+    public GoldnightCastigator(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{2}{R}{R}");
         this.subtype.add("Angel");
         this.power = new MageInt(4);
         this.toughness = new MageInt(9);

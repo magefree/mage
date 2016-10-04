@@ -25,17 +25,17 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.shadowmoor;
+package mage.cards.m;
 
 import java.util.UUID;
 
 import mage.constants.CardType;
 import mage.constants.Outcome;
-import mage.constants.Rarity;
 import mage.abilities.Ability;
 import mage.abilities.effects.OneShotEffect;
 import mage.cards.Card;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.filter.FilterCard;
 import mage.filter.predicate.Predicates;
 import mage.filter.predicate.mageobject.CardTypePredicate;
@@ -56,9 +56,8 @@ public class MemoryPlunder extends CardImpl {
                 new CardTypePredicate(CardType.SORCERY)));
     }
 
-    public MemoryPlunder(UUID ownerId) {
-        super(ownerId, 169, "Memory Plunder", Rarity.RARE, new CardType[]{CardType.INSTANT}, "{U/B}{U/B}{U/B}{U/B}");
-        this.expansionSetCode = "SHM";
+    public MemoryPlunder(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.INSTANT},"{U/B}{U/B}{U/B}{U/B}");
 
 
         // You may cast target instant or sorcery card from an opponent's graveyard without paying its mana cost.

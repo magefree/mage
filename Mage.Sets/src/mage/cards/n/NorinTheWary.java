@@ -25,15 +25,15 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.timespiral;
+package mage.cards.n;
 
 import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.TriggeredAbilityImpl;
 import mage.abilities.effects.common.ExileReturnBattlefieldOwnerNextEndStepSourceEffect;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.constants.Zone;
 import mage.game.Game;
 import mage.game.events.GameEvent;
@@ -45,9 +45,8 @@ import mage.game.events.GameEvent.EventType;
  */
 public class NorinTheWary extends CardImpl {
 
-    public NorinTheWary(UUID ownerId) {
-        super(ownerId, 171, "Norin the Wary", Rarity.RARE, new CardType[]{CardType.CREATURE}, "{R}");
-        this.expansionSetCode = "TSP";
+    public NorinTheWary(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{R}");
         this.supertype.add("Legendary");
         this.subtype.add("Human");
         this.subtype.add("Warrior");

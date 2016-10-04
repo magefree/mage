@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.tempest;
+package mage.cards.p;
 
 import java.util.UUID;
 import mage.MageInt;
@@ -37,10 +37,10 @@ import mage.abilities.effects.Effect;
 import mage.abilities.effects.common.ChooseOpponentEffect;
 import mage.abilities.effects.common.continuous.SetPowerSourceEffect;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Duration;
 import mage.constants.Outcome;
-import mage.constants.Rarity;
 import mage.constants.Zone;
 import mage.filter.common.FilterLandPermanent;
 import mage.filter.predicate.permanent.ControllerIdPredicate;
@@ -54,9 +54,8 @@ import mage.players.Player;
  */
 public class Pallimud extends CardImpl {
 
-    public Pallimud(UUID ownerId) {
-        super(ownerId, 195, "Pallimud", Rarity.RARE, new CardType[]{CardType.CREATURE}, "{2}{R}");
-        this.expansionSetCode = "TMP";
+    public Pallimud(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{2}{R}");
         this.subtype.add("Beast");
         this.power = new MageInt(0);
         this.toughness = new MageInt(3);

@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.magic2015;
+package mage.cards.g;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -42,11 +42,11 @@ import mage.abilities.effects.ContinuousEffectImpl;
 import mage.abilities.keyword.HasteAbility;
 import mage.abilities.mana.SimpleManaAbility;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Duration;
 import mage.constants.Layer;
 import mage.constants.Outcome;
-import mage.constants.Rarity;
 import mage.constants.SubLayer;
 import mage.constants.WatcherScope;
 import mage.constants.Zone;
@@ -62,9 +62,8 @@ import mage.watchers.Watcher;
  */
 public class GeneratorServant extends CardImpl {
 
-    public GeneratorServant(UUID ownerId) {
-        super(ownerId, 143, "Generator Servant", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{1}{R}");
-        this.expansionSetCode = "M15";
+    public GeneratorServant(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{1}{R}");
         this.subtype.add("Elemental");
 
         this.power = new MageInt(2);

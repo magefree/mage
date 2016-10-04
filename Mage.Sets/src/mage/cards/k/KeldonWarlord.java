@@ -25,13 +25,13 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.unlimitededition;
+package mage.cards.k;
 
 import java.util.UUID;
 import mage.MageInt;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.filter.predicate.Predicates;
 import mage.filter.predicate.mageobject.SubtypePredicate;
 import mage.abilities.common.SimpleStaticAbility;
@@ -53,9 +53,8 @@ public class KeldonWarlord extends CardImpl {
     filter.add(Predicates.not(new SubtypePredicate("Wall")));
             }
 
-    public KeldonWarlord(UUID ownerId) {
-        super(ownerId, 161, "Keldon Warlord", Rarity.UNCOMMON, new CardType[]{CardType.CREATURE}, "{2}{R}{R}");
-        this.expansionSetCode = "2ED";
+    public KeldonWarlord(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{2}{R}{R}");
         this.subtype.add("Human");
         this.subtype.add("Barbarian");
         this.power = new MageInt(0);

@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.riseoftheeldrazi;
+package mage.cards.c;
 
 import java.util.Iterator;
 import java.util.UUID;
@@ -35,11 +35,11 @@ import mage.abilities.effects.ContinuousEffectImpl;
 import mage.abilities.keyword.ReboundAbility;
 import mage.cards.Card;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Duration;
 import mage.constants.Layer;
 import mage.constants.Outcome;
-import mage.constants.Rarity;
 import mage.constants.SubLayer;
 import mage.constants.Zone;
 import mage.filter.FilterCard;
@@ -63,9 +63,8 @@ public class CastThroughTime extends CardImpl {
         filter.add(Predicates.or(new CardTypePredicate(CardType.INSTANT), new CardTypePredicate(CardType.SORCERY)));
     }
 
-    public CastThroughTime(UUID ownerId) {
-        super(ownerId, 55, "Cast Through Time", Rarity.MYTHIC, new CardType[]{CardType.ENCHANTMENT}, "{4}{U}{U}{U}");
-        this.expansionSetCode = "ROE";
+    public CastThroughTime(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.ENCHANTMENT},"{4}{U}{U}{U}");
 
         // Instant and sorcery spells you control have rebound.
         //  (Exile the spell as it resolves if you cast it from your hand. At the beginning of your next upkeep, you may cast that card from exile without paying its mana cost.)

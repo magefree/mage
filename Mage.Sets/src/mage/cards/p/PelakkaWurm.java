@@ -25,11 +25,10 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.riseoftheeldrazi;
+package mage.cards.p;
 
 import java.util.UUID;
 import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.MageInt;
 import mage.abilities.common.EntersBattlefieldTriggeredAbility;
 import mage.abilities.common.DiesTriggeredAbility;
@@ -37,6 +36,7 @@ import mage.abilities.effects.common.DrawCardSourceControllerEffect;
 import mage.abilities.effects.common.GainLifeEffect;
 import mage.abilities.keyword.TrampleAbility;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 
 /**
  *
@@ -44,9 +44,8 @@ import mage.cards.CardImpl;
  */
 public class PelakkaWurm extends CardImpl {
 
-    public PelakkaWurm(UUID ownerId) {
-        super(ownerId, 204, "Pelakka Wurm", Rarity.UNCOMMON, new CardType[]{CardType.CREATURE}, "{4}{G}{G}{G}");
-        this.expansionSetCode = "ROE";
+    public PelakkaWurm(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{4}{G}{G}{G}");
         this.subtype.add("Wurm");
 
         this.power = new MageInt(7);

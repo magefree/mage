@@ -25,14 +25,14 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.tenthedition;
+package mage.cards.s;
 
 import java.util.UUID;
 import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.MageInt;
 import mage.abilities.keyword.VigilanceAbility;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 
 /**
  *
@@ -40,9 +40,8 @@ import mage.cards.CardImpl;
  */
 public class SteadfastGuard extends CardImpl {
 
-    public SteadfastGuard(UUID ownerId) {
-        super(ownerId, 48, "Steadfast Guard", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{W}{W}");
-        this.expansionSetCode = "10E";
+    public SteadfastGuard(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{W}{W}");
         this.subtype.add("Human");
         this.subtype.add("Rebel");
 

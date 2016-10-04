@@ -25,16 +25,16 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.apocalypse;
+package mage.cards.f;
 
 import java.util.UUID;
 
 import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.MageInt;
 import mage.abilities.common.AttacksTriggeredAbility;
 import mage.abilities.effects.common.continuous.BoostSourceEffect;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.Duration;
 
 /**
@@ -43,9 +43,8 @@ import mage.constants.Duration;
  */
 public class FlowstoneCharger extends CardImpl {
 
-    public FlowstoneCharger(UUID ownerId) {
-        super(ownerId, 99, "Flowstone Charger", Rarity.UNCOMMON, new CardType[]{CardType.CREATURE}, "{2}{R}{W}");
-        this.expansionSetCode = "APC";
+    public FlowstoneCharger(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{2}{R}{W}");
         this.subtype.add("Beast");
 
 

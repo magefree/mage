@@ -25,15 +25,15 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.portal;
+package mage.cards.v;
 
 import java.util.UUID;
 
 import mage.ObjectColor;
 import mage.abilities.effects.common.DestroyAllEffect;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.filter.predicate.mageobject.ColorPredicate;
 
@@ -49,9 +49,8 @@ public class VirtuesRuin extends CardImpl {
         filter.add(new ColorPredicate(ObjectColor.WHITE));
     }
 
-    public VirtuesRuin(UUID ownerId) {
-        super(ownerId, 39, "Virtue's Ruin", Rarity.UNCOMMON, new CardType[]{CardType.SORCERY}, "{2}{B}");
-        this.expansionSetCode = "POR";
+    public VirtuesRuin(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{2}{B}");
 
 
         // Destroy all white creatures.

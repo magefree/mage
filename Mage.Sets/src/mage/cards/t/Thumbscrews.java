@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.tempest;
+package mage.cards.t;
 
 import java.util.UUID;
 import mage.abilities.TriggeredAbility;
@@ -34,8 +34,8 @@ import mage.abilities.condition.common.CardsInHandCondition;
 import mage.abilities.decorator.ConditionalTriggeredAbility;
 import mage.abilities.effects.common.DamageTargetEffect;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.constants.TargetController;
 import mage.constants.Zone;
 import mage.target.common.TargetOpponent;
@@ -46,9 +46,8 @@ import mage.target.common.TargetOpponent;
  */
 public class Thumbscrews extends CardImpl {
 
-    public Thumbscrews(UUID ownerId) {
-        super(ownerId, 302, "Thumbscrews", Rarity.RARE, new CardType[]{CardType.ARTIFACT}, "{2}");
-        this.expansionSetCode = "TMP";
+    public Thumbscrews(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.ARTIFACT},"{2}");
 
         // At the beginning of your upkeep, if you have five or more cards in hand, Thumbscrews deals 1 damage to target opponent.
         TriggeredAbility ability  = new BeginningOfUpkeepTriggeredAbility(Zone.BATTLEFIELD, 

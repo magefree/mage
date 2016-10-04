@@ -26,13 +26,12 @@
  *  or implied, of BetaSteward_at_googlemail.com.
  */
 
-package mage.sets.darksteel;
+package mage.cards.s;
 
 import java.util.UUID;
 
 import mage.constants.CardType;
 import mage.constants.Duration;
-import mage.constants.Rarity;
 import mage.constants.Zone;
 import mage.MageInt;
 import mage.abilities.Ability;
@@ -42,6 +41,7 @@ import mage.abilities.effects.Effect;
 import mage.abilities.effects.common.continuous.GainAbilityTargetEffect;
 import mage.abilities.keyword.IndestructibleAbility;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.filter.FilterPermanent;
 import mage.filter.common.FilterControlledPermanent;
 import mage.filter.predicate.mageobject.CardTypePredicate;
@@ -61,9 +61,8 @@ public class SlobadGoblinTinkerer extends CardImpl {
         filterControlled.add(new CardTypePredicate(CardType.ARTIFACT));
     }
 
-    public SlobadGoblinTinkerer(UUID ownerId) {
-        super(ownerId, 69, "Slobad, Goblin Tinkerer", Rarity.RARE, new CardType[]{CardType.CREATURE}, "{1}{R}");
-        this.expansionSetCode = "DST";
+    public SlobadGoblinTinkerer(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{1}{R}");
         this.supertype.add("Legendary");
         this.subtype.add("Goblin");
         this.subtype.add("Artificer");

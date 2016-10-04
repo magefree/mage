@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.magicorigins;
+package mage.cards.s;
 
 import java.util.UUID;
 import mage.abilities.common.SimpleStaticAbility;
@@ -35,9 +35,9 @@ import mage.abilities.effects.AsThoughEffect;
 import mage.abilities.effects.common.DestroyTargetEffect;
 import mage.abilities.effects.common.continuous.CastAsThoughItHadFlashSourceEffect;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Duration;
-import mage.constants.Rarity;
 import mage.constants.Zone;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.filter.predicate.permanent.TappedPredicate;
@@ -55,9 +55,8 @@ public class SwiftReckoning extends CardImpl {
         filter.add(new TappedPredicate());
     }
 
-    public SwiftReckoning(UUID ownerId) {
-        super(ownerId, 35, "Swift Reckoning", Rarity.UNCOMMON, new CardType[]{CardType.SORCERY}, "{1}{W}");
-        this.expansionSetCode = "ORI";
+    public SwiftReckoning(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{1}{W}");
 
         // <i>Spell mastery</i> — If there are two or more instant and/or sorcery cards in your graveyard, you may cast Swift Reckoning as though it had flash.
         AsThoughEffect effect = new CastAsThoughItHadFlashSourceEffect(Duration.EndOfGame);

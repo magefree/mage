@@ -25,15 +25,15 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.shadowsoverinnistrad;
+package mage.cards.g;
 
 import java.util.UUID;
 import mage.abilities.costs.mana.ManaCostsImpl;
 import mage.abilities.effects.common.CreateTokenEffect;
 import mage.abilities.keyword.MadnessAbility;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.game.permanent.token.ZombieToken;
 
 /**
@@ -42,9 +42,8 @@ import mage.game.permanent.token.ZombieToken;
  */
 public class GisasBidding extends CardImpl {
 
-    public GisasBidding(UUID ownerId) {
-        super(ownerId, 114, "Gisa's Bidding", Rarity.UNCOMMON, new CardType[]{CardType.SORCERY}, "{2}{B}{B}");
-        this.expansionSetCode = "SOI";
+    public GisasBidding(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{2}{B}{B}");
 
         // Put two 2/2 black Zombie creature tokens onto the battlefield.
         this.getSpellAbility().addEffect(new CreateTokenEffect(new ZombieToken(), 2));

@@ -25,13 +25,13 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.magic2015;
+package mage.cards.v;
 
 import java.util.UUID;
 import mage.abilities.effects.common.ReturnToHandTargetEffect;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.target.common.TargetNonlandPermanent;
 
 /**
@@ -40,9 +40,8 @@ import mage.target.common.TargetNonlandPermanent;
  */
 public class VoidSnare extends CardImpl {
 
-    public VoidSnare(UUID ownerId) {
-        super(ownerId, 82, "Void Snare", Rarity.COMMON, new CardType[]{CardType.SORCERY}, "{U}");
-        this.expansionSetCode = "M15";
+    public VoidSnare(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{U}");
 
 
         // Return target nonland permanent to its owner's hand.

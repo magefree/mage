@@ -25,19 +25,19 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.returntoravnica;
+package mage.cards.p;
 
 import java.util.UUID;
 
 import mage.constants.CardType;
 import mage.constants.Outcome;
-import mage.constants.Rarity;
 import mage.constants.Zone;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.effects.ReplacementEffectImpl;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.Duration;
 import mage.game.Game;
 import mage.game.events.DamageEvent;
@@ -68,9 +68,8 @@ import mage.players.Player;
 
 public class PalisadeGiant extends CardImpl {
 
-    public PalisadeGiant(UUID ownerId) {
-        super(ownerId, 15, "Palisade Giant", Rarity.RARE, new CardType[]{CardType.CREATURE}, "{4}{W}{W}");
-        this.expansionSetCode = "RTR";
+    public PalisadeGiant(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{4}{W}{W}");
         this.subtype.add("Giant");
         this.subtype.add("Soldier");
 

@@ -25,16 +25,16 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.vintagemasters;
+package mage.cards.c;
 
 import java.util.UUID;
 import mage.abilities.Ability;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.DestroyTargetEffect;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Outcome;
-import mage.constants.Rarity;
 import mage.constants.Zone;
 import mage.filter.common.FilterLandPermanent;
 import mage.filter.predicate.Predicates;
@@ -56,9 +56,8 @@ public class ChokingSands extends CardImpl {
         filter.add(Predicates.not(new SubtypePredicate("Swamp")));
     }
 
-    public ChokingSands(UUID ownerId) {
-        super(ownerId, 109, "Choking Sands", Rarity.COMMON, new CardType[]{CardType.SORCERY}, "{1}{B}{B}");
-        this.expansionSetCode = "VMA";
+    public ChokingSands(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{1}{B}{B}");
 
         // Destroy target non-Swamp land.
         this.getSpellAbility().addEffect(new DestroyTargetEffect());

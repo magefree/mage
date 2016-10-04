@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.judgment;
+package mage.cards.g;
 
 import java.util.UUID;
 import mage.abilities.condition.common.CardsInControllerGraveCondition;
@@ -35,8 +35,8 @@ import mage.abilities.effects.Effect;
 import mage.abilities.effects.common.CreateTokenEffect;
 import mage.abilities.keyword.FlashbackAbility;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.constants.TimingRule;
 import mage.game.permanent.token.BearToken;
 
@@ -46,9 +46,8 @@ import mage.game.permanent.token.BearToken;
  */
 public class GrizzlyFate extends CardImpl {
 
-    public GrizzlyFate(UUID ownerId) {
-        super(ownerId, 119, "Grizzly Fate", Rarity.UNCOMMON, new CardType[]{CardType.SORCERY}, "{3}{G}{G}");
-        this.expansionSetCode = "JUD";
+    public GrizzlyFate(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{3}{G}{G}");
 
 
         // Put two 2/2 green Bear creature tokens onto the battlefield.

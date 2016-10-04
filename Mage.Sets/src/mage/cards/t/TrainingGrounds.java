@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.riseoftheeldrazi;
+package mage.cards.t;
 
 import java.util.LinkedHashSet;
 import java.util.Set;
@@ -36,13 +36,13 @@ import mage.abilities.ActivatedAbility;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.effects.common.cost.CostModificationEffectImpl;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.choices.ChoiceImpl;
 import mage.constants.AbilityType;
 import mage.constants.CardType;
 import mage.constants.CostModificationType;
 import mage.constants.Duration;
 import mage.constants.Outcome;
-import mage.constants.Rarity;
 import mage.constants.Zone;
 import mage.filter.common.FilterControlledCreaturePermanent;
 import mage.game.Game;
@@ -56,9 +56,8 @@ import mage.util.CardUtil;
  */
 public class TrainingGrounds extends CardImpl {
 
-    public TrainingGrounds(UUID ownerId) {
-        super(ownerId, 91, "Training Grounds", Rarity.RARE, new CardType[]{CardType.ENCHANTMENT}, "{U}");
-        this.expansionSetCode = "ROE";
+    public TrainingGrounds(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.ENCHANTMENT},"{U}");
 
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new TrainingGroundsEffect()));
     }

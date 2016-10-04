@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.eldritchmoon;
+package mage.cards.h;
 
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleActivatedAbility;
@@ -53,9 +53,8 @@ import java.util.UUID;
  */
 public class HanweirBattlements extends CardImpl {
 
-    public HanweirBattlements(UUID ownerId) {
-        super(ownerId, 204, "Hanweir Battlements", Rarity.RARE, new CardType[]{CardType.LAND}, "");
-        this.expansionSetCode = "EMN";
+    public HanweirBattlements(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.LAND},"");
 
         // {T}: Add {C} to your mana pool.
         this.addAbility(new ColorlessManaAbility());

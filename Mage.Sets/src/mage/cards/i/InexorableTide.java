@@ -26,14 +26,14 @@
  *  or implied, of BetaSteward_at_googlemail.com.
  */
 
-package mage.sets.scarsofmirrodin;
+package mage.cards.i;
 
 import java.util.UUID;
 import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.abilities.common.SpellCastControllerTriggeredAbility;
 import mage.abilities.effects.common.counter.ProliferateEffect;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 
 /**
  *
@@ -41,9 +41,8 @@ import mage.cards.CardImpl;
  */
 public class InexorableTide extends CardImpl {
 
-    public InexorableTide (UUID ownerId) {
-        super(ownerId, 35, "Inexorable Tide", Rarity.RARE, new CardType[]{CardType.ENCHANTMENT}, "{3}{U}{U}");
-        this.expansionSetCode = "SOM";
+    public InexorableTide (UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.ENCHANTMENT},"{3}{U}{U}");
 
 
         this.addAbility(new SpellCastControllerTriggeredAbility(new ProliferateEffect(), false));

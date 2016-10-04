@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.odyssey;
+package mage.cards.e;
 
 import java.util.UUID;
 import mage.abilities.costs.mana.ManaCostsImpl;
@@ -33,9 +33,9 @@ import mage.abilities.effects.common.DamageTargetEffect;
 import mage.abilities.effects.common.ruleModifying.CantRegenerateTargetEffect;
 import mage.abilities.keyword.FlashbackAbility;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Duration;
-import mage.constants.Rarity;
 import mage.constants.TimingRule;
 import mage.target.common.TargetCreaturePermanent;
 
@@ -45,9 +45,8 @@ import mage.target.common.TargetCreaturePermanent;
  */
 public class EngulfingFlames extends CardImpl {
 
-    public EngulfingFlames(UUID ownerId) {
-        super(ownerId, 191, "Engulfing Flames", Rarity.UNCOMMON, new CardType[]{CardType.INSTANT}, "{R}");
-        this.expansionSetCode = "ODY";
+    public EngulfingFlames(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.INSTANT},"{R}");
 
 
         // Engulfing Flames deals 1 damage to target creature. It can't be regenerated this turn.

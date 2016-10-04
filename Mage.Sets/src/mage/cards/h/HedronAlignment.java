@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.oathofthegatewatch;
+package mage.cards.h;
 
 import java.util.UUID;
 import mage.MageObject;
@@ -37,11 +37,11 @@ import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.keyword.ScryEffect;
 import mage.abilities.keyword.HexproofAbility;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.cards.Cards;
 import mage.cards.CardsImpl;
 import mage.constants.CardType;
 import mage.constants.Outcome;
-import mage.constants.Rarity;
 import mage.constants.TargetController;
 import mage.constants.Zone;
 import mage.filter.FilterCard;
@@ -57,9 +57,8 @@ import mage.players.Player;
  */
 public class HedronAlignment extends CardImpl {
 
-    public HedronAlignment(UUID ownerId) {
-        super(ownerId, 57, "Hedron Alignment", Rarity.RARE, new CardType[]{CardType.ENCHANTMENT}, "{2}{U}");
-        this.expansionSetCode = "OGW";
+    public HedronAlignment(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.ENCHANTMENT},"{2}{U}");
 
         // Hexproof
         this.addAbility(HexproofAbility.getInstance());

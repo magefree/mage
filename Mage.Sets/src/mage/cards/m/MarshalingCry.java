@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.futuresight;
+package mage.cards.m;
 
 import java.util.UUID;
 import mage.abilities.costs.mana.ManaCostsImpl;
@@ -36,9 +36,9 @@ import mage.abilities.keyword.CyclingAbility;
 import mage.abilities.keyword.FlashbackAbility;
 import mage.abilities.keyword.VigilanceAbility;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Duration;
-import mage.constants.Rarity;
 import mage.constants.TimingRule;
 
 /**
@@ -47,9 +47,8 @@ import mage.constants.TimingRule;
  */
 public class MarshalingCry extends CardImpl {
     
-    public MarshalingCry(UUID ownerId) {
-        super(ownerId, 13, "Marshaling Cry", Rarity.COMMON, new CardType[]{CardType.SORCERY}, "{1}{W}{W}");
-        this.expansionSetCode = "FUT";
+    public MarshalingCry(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{1}{W}{W}");
 
         // Creatures you control get +1/+1 and gain vigilance until end of turn.
         Effect effect = new BoostControlledEffect(1, 1, Duration.EndOfTurn);

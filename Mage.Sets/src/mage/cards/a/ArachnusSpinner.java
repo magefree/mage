@@ -25,12 +25,11 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.magic2012;
+package mage.cards.a;
 
 import java.util.UUID;
 import mage.constants.CardType;
 import mage.constants.Outcome;
-import mage.constants.Rarity;
 import mage.constants.Zone;
 import mage.MageInt;
 import mage.abilities.Ability;
@@ -40,6 +39,7 @@ import mage.abilities.effects.OneShotEffect;
 import mage.abilities.keyword.ReachAbility;
 import mage.cards.Card;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.filter.FilterCard;
 import mage.filter.common.FilterControlledCreaturePermanent;
 import mage.filter.predicate.Predicates;
@@ -67,9 +67,8 @@ public class ArachnusSpinner extends CardImpl {
         filter.add(Predicates.not(new TappedPredicate()));
     }
 
-    public ArachnusSpinner(UUID ownerId) {
-        super(ownerId, 162, "Arachnus Spinner", Rarity.RARE, new CardType[]{CardType.CREATURE}, "{5}{G}");
-        this.expansionSetCode = "M12";
+    public ArachnusSpinner(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{5}{G}");
         this.subtype.add("Spider");
 
         this.power = new MageInt(5);

@@ -25,12 +25,11 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.riseoftheeldrazi;
+package mage.cards.k;
 
 import java.util.UUID;
 import mage.constants.CardType;
 import mage.constants.Outcome;
-import mage.constants.Rarity;
 import mage.constants.Zone;
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleActivatedAbility;
@@ -38,6 +37,7 @@ import mage.abilities.costs.common.TapSourceCost;
 import mage.abilities.costs.mana.GenericManaCost;
 import mage.abilities.effects.OneShotEffect;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.game.Game;
 import mage.players.Player;
 import mage.target.TargetPlayer;
@@ -48,9 +48,8 @@ import mage.target.TargetPlayer;
  */
 public class KeeningStone extends CardImpl {
 
-    public KeeningStone(UUID ownerId) {
-        super(ownerId, 219, "Keening Stone", Rarity.RARE, new CardType[]{CardType.ARTIFACT}, "{6}");
-        this.expansionSetCode = "ROE";
+    public KeeningStone(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.ARTIFACT},"{6}");
 
         // {5}, {tap}: Target player puts the top X cards of his or her library into his or her graveyard, where X is the number of cards in that player's graveyard.
         Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new KeeningStoneEffect(), new GenericManaCost(5));

@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.conflux;
+package mage.cards.g;
 
 import java.util.HashSet;
 import java.util.Set;
@@ -38,8 +38,8 @@ import mage.abilities.costs.common.TapSourceCost;
 import mage.abilities.effects.common.DestroyTargetEffect;
 import mage.abilities.keyword.ExaltedAbility;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.constants.Zone;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.game.Game;
@@ -53,9 +53,8 @@ import mage.watchers.common.PlayerDamagedBySourceWatcher;
  */
 public class GiltspireAvenger extends CardImpl {
 
-    public GiltspireAvenger(UUID ownerId) {
-        super(ownerId, 108, "Giltspire Avenger", Rarity.RARE, new CardType[]{CardType.CREATURE}, "{G}{W}{U}");
-        this.expansionSetCode = "CON";
+    public GiltspireAvenger(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{G}{W}{U}");
         this.subtype.add("Human");
         this.subtype.add("Soldier");
 

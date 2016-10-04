@@ -26,7 +26,7 @@
  *  or implied, of BetaSteward_at_googlemail.com.
  */
 
-package mage.sets.shardsofalara;
+package mage.cards.g;
 
 import java.util.UUID;
 import mage.MageInt;
@@ -35,8 +35,8 @@ import mage.abilities.costs.common.TapSourceCost;
 import mage.abilities.effects.common.CreateTokenEffect;
 import mage.abilities.keyword.VigilanceAbility;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.constants.Zone;
 import mage.game.permanent.token.Token;
 
@@ -46,9 +46,8 @@ import mage.game.permanent.token.Token;
  */
 public class Godsire extends CardImpl {
 
-    public Godsire (UUID ownerId) {
-        super(ownerId, 170, "Godsire", Rarity.MYTHIC, new CardType[]{CardType.CREATURE}, "{4}{R}{G}{G}{W}");
-        this.expansionSetCode = "ALA";
+    public Godsire (UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{4}{R}{G}{G}{W}");
         this.subtype.add("Beast");
 
 

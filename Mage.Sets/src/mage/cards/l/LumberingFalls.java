@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.battleforzendikar;
+package mage.cards.l;
 
 import java.util.UUID;
 import mage.MageInt;
@@ -37,9 +37,9 @@ import mage.abilities.keyword.HexproofAbility;
 import mage.abilities.mana.BlueManaAbility;
 import mage.abilities.mana.GreenManaAbility;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Duration;
-import mage.constants.Rarity;
 import mage.constants.Zone;
 import mage.game.permanent.token.Token;
 
@@ -49,9 +49,8 @@ import mage.game.permanent.token.Token;
  */
 public class LumberingFalls extends CardImpl {
 
-    public LumberingFalls(UUID ownerId) {
-        super(ownerId, 239, "Lumbering Falls", Rarity.RARE, new CardType[]{CardType.LAND}, "");
-        this.expansionSetCode = "BFZ";
+    public LumberingFalls(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.LAND},"");
 
         // Lumbering Falls enters the battlefield tapped.
         this.addAbility(new EntersBattlefieldTappedAbility());

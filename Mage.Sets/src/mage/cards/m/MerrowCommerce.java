@@ -25,14 +25,14 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.lorwyn;
+package mage.cards.m;
 
 import java.util.UUID;
 import mage.abilities.common.BeginningOfYourEndStepTriggeredAbility;
 import mage.abilities.effects.common.UntapAllControllerEffect;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.filter.common.FilterControlledPermanent;
 import mage.filter.predicate.mageobject.SubtypePredicate;
 
@@ -48,9 +48,8 @@ public class MerrowCommerce extends CardImpl {
         filter.add(new SubtypePredicate("Merfolk"));
     }
 
-    public MerrowCommerce(UUID ownerId) {
-        super(ownerId, 72, "Merrow Commerce", Rarity.UNCOMMON, new CardType[]{CardType.TRIBAL, CardType.ENCHANTMENT}, "{1}{U}");
-        this.expansionSetCode = "LRW";
+    public MerrowCommerce(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.TRIBAL,CardType.ENCHANTMENT},"{1}{U}");
         this.subtype.add("Merfolk");
 
 

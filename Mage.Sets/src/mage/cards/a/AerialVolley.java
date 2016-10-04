@@ -25,15 +25,15 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.magicorigins;
+package mage.cards.a;
 
 import java.util.UUID;
 import mage.abilities.effects.Effect;
 import mage.abilities.effects.common.DamageMultiEffect;
 import mage.abilities.keyword.FlyingAbility;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.filter.predicate.mageobject.AbilityPredicate;
 import mage.target.common.TargetCreaturePermanentAmount;
@@ -50,9 +50,8 @@ public class AerialVolley extends CardImpl {
         filter.add(new AbilityPredicate(FlyingAbility.class));
     }
 
-    public AerialVolley(UUID ownerId) {
-        super(ownerId, 168, "Aerial Volley", Rarity.COMMON, new CardType[]{CardType.INSTANT}, "{G}");
-        this.expansionSetCode = "ORI";
+    public AerialVolley(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.INSTANT},"{G}");
 
         // Aerial Volley deals 3 damage divided as you choose among one, two, or three target creatures with flying.
         Effect effect = new DamageMultiEffect(3);

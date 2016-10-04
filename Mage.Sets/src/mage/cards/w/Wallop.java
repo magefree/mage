@@ -25,15 +25,15 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.invasion;
+package mage.cards.w;
 
 import java.util.UUID;
 import mage.ObjectColor;
 import mage.abilities.effects.common.DestroyTargetEffect;
 import mage.abilities.keyword.FlyingAbility;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.filter.predicate.Predicates;
 import mage.filter.predicate.mageobject.AbilityPredicate;
@@ -54,9 +54,8 @@ public class Wallop extends CardImpl {
         filter.add(new AbilityPredicate(FlyingAbility.class));
     }
 
-    public Wallop(UUID ownerId) {
-        super(ownerId, 223, "Wallop", Rarity.UNCOMMON, new CardType[]{CardType.SORCERY}, "{1}{G}");
-        this.expansionSetCode = "INV";
+    public Wallop(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{1}{G}");
 
         // Destroy target blue or black creature with flying.
         this.getSpellAbility().addEffect(new DestroyTargetEffect());

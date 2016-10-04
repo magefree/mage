@@ -25,18 +25,18 @@
 * authors and should not be interpreted as representing official policies, either expressed
 * or implied, of BetaSteward_at_googlemail.com.
 */
-package mage.sets.lorwyn;
+package mage.cards.a;
 
 import java.util.UUID;
 
 import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.EntersBattlefieldTriggeredAbility;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.keyword.VigilanceAbility;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.Outcome;
 import mage.game.Game;
 import mage.players.Player;
@@ -48,9 +48,8 @@ import mage.players.PlayerList;
  */
 public class ArbiterOfKnollridge extends CardImpl {
 
-    public ArbiterOfKnollridge(UUID ownerId) {
-        super(ownerId, 2, "Arbiter of Knollridge", Rarity.RARE, new CardType[]{CardType.CREATURE}, "{6}{W}");
-        this.expansionSetCode = "LRW";
+    public ArbiterOfKnollridge(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{6}{W}");
         this.subtype.add("Giant");
         this.subtype.add("Wizard");
 

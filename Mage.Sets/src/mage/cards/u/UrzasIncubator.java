@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.urzasdestiny;
+package mage.cards.u;
 
 import java.util.UUID;
 import mage.abilities.common.AsEntersBattlefieldAbility;
@@ -33,9 +33,9 @@ import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.effects.common.ChooseCreatureTypeEffect;
 import mage.abilities.effects.common.cost.SpellsCostReductionAllOfChosenSubtypeEffect;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Outcome;
-import mage.constants.Rarity;
 import mage.constants.Zone;
 import mage.filter.common.FilterCreatureCard;
 
@@ -45,9 +45,8 @@ import mage.filter.common.FilterCreatureCard;
  */
 public class UrzasIncubator extends CardImpl {
 
-    public UrzasIncubator(UUID ownerId) {
-        super(ownerId, 142, "Urza's Incubator", Rarity.RARE, new CardType[]{CardType.ARTIFACT}, "{3}");
-        this.expansionSetCode = "UDS";
+    public UrzasIncubator(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.ARTIFACT},"{3}");
 
         // As Urza's Incubator enters the battlefield, choose a creature type.
         this.addAbility(new AsEntersBattlefieldAbility(new ChooseCreatureTypeEffect(Outcome.BoostCreature)));

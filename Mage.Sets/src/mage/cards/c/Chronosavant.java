@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.timespiral;
+package mage.cards.c;
 
 import java.util.UUID;
 import mage.MageInt;
@@ -35,8 +35,8 @@ import mage.abilities.costs.mana.ManaCostsImpl;
 import mage.abilities.effects.common.ReturnSourceFromGraveyardToBattlefieldEffect;
 import mage.abilities.effects.common.turn.SkipNextTurnSourceEffect;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.constants.Zone;
 
 /**
@@ -45,9 +45,8 @@ import mage.constants.Zone;
  */
 public class Chronosavant extends CardImpl {
 
-    public Chronosavant(UUID ownerId) {
-        super(ownerId, 9, "Chronosavant", Rarity.RARE, new CardType[]{CardType.CREATURE}, "{5}{W}");
-        this.expansionSetCode = "TSP";
+    public Chronosavant(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{5}{W}");
         this.subtype.add("Giant");
         this.power = new MageInt(5);
         this.toughness = new MageInt(5);

@@ -25,14 +25,14 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.urzassaga;
+package mage.cards.u;
 
 import java.util.UUID;
 import mage.abilities.dynamicvalue.common.StaticValue;
 import mage.abilities.effects.common.discard.DiscardEachPlayerEffect;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.constants.TargetController;
 
 /**
@@ -41,9 +41,8 @@ import mage.constants.TargetController;
  */
 public class Unnerve extends CardImpl {
 
-    public Unnerve(UUID ownerId) {
-        super(ownerId, 162, "Unnerve", Rarity.COMMON, new CardType[]{CardType.SORCERY}, "{3}{B}");
-        this.expansionSetCode = "USG";
+    public Unnerve(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{3}{B}");
 
         // Each opponent discards two cards.
         this.getSpellAbility().addEffect(new DiscardEachPlayerEffect(new StaticValue(2), false, TargetController.OPPONENT));

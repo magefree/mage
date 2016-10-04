@@ -25,15 +25,15 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.fifthdawn;
+package mage.cards.p;
 
 import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.effects.common.combat.CantBeBlockedSourceEffect;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.constants.Zone;
 
 /**
@@ -42,9 +42,8 @@ import mage.constants.Zone;
  */
 public class PlasmaElemental extends CardImpl {
 
-    public PlasmaElemental(UUID ownerId) {
-        super(ownerId, 34, "Plasma Elemental", Rarity.UNCOMMON, new CardType[]{CardType.CREATURE}, "{5}{U}");
-        this.expansionSetCode = "5DN";
+    public PlasmaElemental(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{5}{U}");
         this.subtype.add("Elemental");
 
         this.power = new MageInt(4);

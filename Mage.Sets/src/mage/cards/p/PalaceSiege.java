@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.fatereforged;
+package mage.cards.p;
 
 import java.util.UUID;
 import mage.abilities.Ability;
@@ -39,8 +39,8 @@ import mage.abilities.effects.common.GainLifeEffect;
 import mage.abilities.effects.common.LoseLifeOpponentsEffect;
 import mage.abilities.effects.common.ReturnFromGraveyardToHandTargetEffect;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.constants.TargetController;
 import mage.filter.common.FilterCreatureCard;
 import mage.target.common.TargetCardInYourGraveyard;
@@ -54,9 +54,8 @@ public class PalaceSiege extends CardImpl {
     private final static String ruleTrigger1 = "&bull Khans &mdash; At the beginning of your upkeep, return target creature card from your graveyard to your hand.";
     private final static String ruleTrigger2 = "&bull Dragons &mdash; At the beginning of your upkeep, each opponent loses 2 life and you gain 2 life.";
     
-    public PalaceSiege(UUID ownerId) {
-        super(ownerId, 79, "Palace Siege", Rarity.RARE, new CardType[]{CardType.ENCHANTMENT}, "{3}{B}{B}");
-        this.expansionSetCode = "FRF";
+    public PalaceSiege(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.ENCHANTMENT},"{3}{B}{B}");
 
         // As Palace Siege enters the battlefield, choose Khans or Dragons.
         this.addAbility(new EntersBattlefieldAbility(new ChooseModeEffect("Khans or Dragons?","Khans", "Dragons"),null,

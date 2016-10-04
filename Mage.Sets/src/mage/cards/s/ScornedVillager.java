@@ -25,11 +25,10 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.darkascension;
+package mage.cards.s;
 
 import java.util.UUID;
 import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.constants.TargetController;
 import mage.MageInt;
 import mage.abilities.TriggeredAbility;
@@ -39,7 +38,9 @@ import mage.abilities.decorator.ConditionalTriggeredAbility;
 import mage.abilities.effects.common.TransformSourceEffect;
 import mage.abilities.keyword.TransformAbility;
 import mage.abilities.mana.GreenManaAbility;
+import mage.cards.m.MoonscarredWerewolf;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 
 /**
  *
@@ -47,9 +48,8 @@ import mage.cards.CardImpl;
  */
 public class ScornedVillager extends CardImpl {
 
-    public ScornedVillager(UUID ownerId) {
-        super(ownerId, 125, "Scorned Villager", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{1}{G}");
-        this.expansionSetCode = "DKA";
+    public ScornedVillager(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{1}{G}");
         this.subtype.add("Human");
         this.subtype.add("Werewolf");
 
@@ -57,7 +57,7 @@ public class ScornedVillager extends CardImpl {
         this.toughness = new MageInt(1);
 
         this.transformable = true;
-        this.secondSideCard = new MoonscarredWerewolf(ownerId);
+        this.secondSideCardClazz = MoonscarredWerewolf.class;
 
         // {tap}: Add {G} to your mana pool.
         this.addAbility(new GreenManaAbility());

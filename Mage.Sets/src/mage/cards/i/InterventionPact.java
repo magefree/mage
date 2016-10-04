@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.futuresight;
+package mage.cards.i;
 
 import java.util.UUID;
 import mage.abilities.Ability;
@@ -37,10 +37,10 @@ import mage.abilities.effects.PreventionEffectData;
 import mage.abilities.effects.PreventionEffectImpl;
 import mage.abilities.effects.common.CreateDelayedTriggeredAbilityEffect;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Duration;
 import mage.constants.Outcome;
-import mage.constants.Rarity;
 import mage.game.Game;
 import mage.game.events.GameEvent;
 import mage.players.Player;
@@ -54,9 +54,8 @@ import mage.target.targetpointer.FixedTarget;
  */
 public class InterventionPact extends CardImpl {
 
-    public InterventionPact(UUID ownerId) {
-        super(ownerId, 8, "Intervention Pact", Rarity.RARE, new CardType[]{CardType.INSTANT}, "{0}");
-        this.expansionSetCode = "FUT";
+    public InterventionPact(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.INSTANT},"{0}");
 
         this.color.setWhite(true);
         

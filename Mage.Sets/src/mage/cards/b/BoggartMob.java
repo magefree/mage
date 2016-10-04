@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.lorwyn;
+package mage.cards.b;
 
 import java.util.UUID;
 import mage.MageInt;
@@ -33,8 +33,8 @@ import mage.abilities.common.DealsDamageToAPlayerAllTriggeredAbility;
 import mage.abilities.effects.common.CreateTokenEffect;
 import mage.abilities.keyword.ChampionAbility;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.constants.SetTargetPointer;
 import mage.filter.common.FilterControlledPermanent;
 import mage.filter.predicate.mageobject.SubtypePredicate;
@@ -52,9 +52,8 @@ public class BoggartMob extends CardImpl {
         filter.add(new SubtypePredicate("Goblin"));
     }
 
-    public BoggartMob(UUID ownerId) {
-        super(ownerId, 104, "Boggart Mob", Rarity.RARE, new CardType[]{CardType.CREATURE}, "{3}{B}");
-        this.expansionSetCode = "LRW";
+    public BoggartMob(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{3}{B}");
         this.subtype.add("Goblin");
         this.subtype.add("Warrior");
         this.power = new MageInt(5);

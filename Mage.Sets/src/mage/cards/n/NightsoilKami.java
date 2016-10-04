@@ -25,14 +25,14 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.saviorsofkamigawa;
+package mage.cards.n;
 
 import java.util.UUID;
 import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.MageInt;
 import mage.abilities.keyword.SoulshiftAbility;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 
 /**
  *
@@ -40,9 +40,8 @@ import mage.cards.CardImpl;
  */
 public class NightsoilKami extends CardImpl {
 
-    public NightsoilKami(UUID ownerId) {
-        super(ownerId, 139, "Nightsoil Kami", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{4}{G}{G}");
-        this.expansionSetCode = "SOK";
+    public NightsoilKami(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{4}{G}{G}");
         this.subtype.add("Spirit");
 
         this.power = new MageInt(6);

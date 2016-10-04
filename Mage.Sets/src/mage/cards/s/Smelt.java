@@ -25,13 +25,13 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.magic2013;
+package mage.cards.s;
 
 import java.util.UUID;
 import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.abilities.effects.common.DestroyTargetEffect;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.target.common.TargetArtifactPermanent;
 
 /**
@@ -40,9 +40,8 @@ import mage.target.common.TargetArtifactPermanent;
  */
 public class Smelt extends CardImpl {
 
-    public Smelt(UUID ownerId) {
-        super(ownerId, 149, "Smelt", Rarity.COMMON, new CardType[]{CardType.INSTANT}, "{R}");
-        this.expansionSetCode = "M13";
+    public Smelt(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.INSTANT},"{R}");
 
         // Destroy target artifact.
         this.getSpellAbility().addEffect(new DestroyTargetEffect());

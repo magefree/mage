@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.timeshifted;
+package mage.cards.c;
 
 import java.util.UUID;
 import mage.ObjectColor;
@@ -34,8 +34,8 @@ import mage.abilities.condition.Condition;
 import mage.abilities.decorator.ConditionalOneShotEffect;
 import mage.abilities.effects.common.WinGameSourceControllerEffect;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.filter.common.FilterControlledCreaturePermanent;
 import mage.filter.common.FilterControlledLandPermanent;
 import mage.filter.predicate.mageobject.ColorPredicate;
@@ -72,9 +72,8 @@ public class CoalitionVictory extends CardImpl {
         filterGreen.add(new ColorPredicate(ObjectColor.GREEN));
     }
 
-    public CoalitionVictory(UUID ownerId) {
-        super(ownerId, 91, "Coalition Victory", Rarity.RARE, new CardType[]{CardType.SORCERY}, "{3}{W}{U}{B}{R}{G}");
-        this.expansionSetCode = "TSB";
+    public CoalitionVictory(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{3}{W}{U}{B}{R}{G}");
 
         // You win the game if you control a land of each basic land type and a creature of each color.
         this.getSpellAbility().addEffect(new ConditionalOneShotEffect(new WinGameSourceControllerEffect(),

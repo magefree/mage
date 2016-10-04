@@ -25,14 +25,14 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.dragonsoftarkir;
+package mage.cards.v;
 
 import java.util.UUID;
 import mage.abilities.effects.common.ReturnToHandTargetEffect;
 import mage.abilities.keyword.ReboundAbility;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.target.common.TargetNonlandPermanent;
 
 /**
@@ -41,9 +41,8 @@ import mage.target.common.TargetNonlandPermanent;
  */
 public class VoidSquall extends CardImpl {
 
-    public VoidSquall(UUID ownerId) {
-        super(ownerId, 83, "Void Squall", Rarity.UNCOMMON, new CardType[]{CardType.SORCERY}, "{4}{U}");
-        this.expansionSetCode = "DTK";
+    public VoidSquall(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{4}{U}");
 
         // Return target nonland permanent to its owner's hand.
         this.getSpellAbility().addTarget(new TargetNonlandPermanent());

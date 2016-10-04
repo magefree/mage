@@ -26,14 +26,14 @@
  *  or implied, of BetaSteward_at_googlemail.com.
  */
 
-package mage.sets.newphyrexia;
+package mage.cards.g;
 
 import java.util.UUID;
 import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.abilities.effects.common.LoseLifeTargetEffect;
 import mage.abilities.effects.common.SacrificeEffect;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.target.TargetPlayer;
 
@@ -43,9 +43,8 @@ import mage.target.TargetPlayer;
  */
 public class GethsVerdict extends CardImpl {
 
-    public GethsVerdict (UUID ownerId) {
-        super(ownerId, 61, "Geth's Verdict", Rarity.COMMON, new CardType[]{CardType.INSTANT}, "{B}{B}");
-        this.expansionSetCode = "NPH";
+    public GethsVerdict (UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.INSTANT},"{B}{B}");
 
         this.getSpellAbility().addEffect(new SacrificeEffect(new FilterCreaturePermanent(), 1, "Target player"));
         this.getSpellAbility().addEffect(new LoseLifeTargetEffect(1));

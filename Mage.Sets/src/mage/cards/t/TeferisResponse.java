@@ -25,16 +25,16 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.invasion;
+package mage.cards.t;
 
 import java.util.UUID;
 import mage.abilities.Ability;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.DrawCardSourceControllerEffect;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Outcome;
-import mage.constants.Rarity;
 import mage.filter.FilterStackObject;
 import mage.filter.common.FilterControlledLandPermanent;
 import mage.filter.predicate.other.TargetsPermanentPredicate;
@@ -55,9 +55,8 @@ public class TeferisResponse extends CardImpl {
         filter.add(new TargetsPermanentPredicate(new FilterControlledLandPermanent()));
     }
     
-    public TeferisResponse(UUID ownerId) {
-        super(ownerId, 78, "Teferi's Response", Rarity.RARE, new CardType[]{CardType.INSTANT}, "{1}{U}");
-        this.expansionSetCode = "INV";
+    public TeferisResponse(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.INSTANT},"{1}{U}");
 
         // Counter target spell or ability an opponent controls that targets a land you control. If a permanent's ability is countered this way, destroy that permanent.
         this.getSpellAbility().addEffect(new TeferisResponseEffect());

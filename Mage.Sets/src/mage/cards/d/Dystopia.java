@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.alliances;
+package mage.cards.d;
 
 import java.util.UUID;
 import mage.ObjectColor;
@@ -34,8 +34,8 @@ import mage.abilities.costs.common.PayLifeCost;
 import mage.abilities.effects.common.SacrificeEffect;
 import mage.abilities.keyword.CumulativeUpkeepAbility;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.constants.TargetController;
 import mage.filter.FilterPermanent;
 import mage.filter.predicate.Predicates;
@@ -52,9 +52,8 @@ public class Dystopia extends CardImpl {
         filter.add(Predicates.or(new ColorPredicate(ObjectColor.GREEN), new ColorPredicate(ObjectColor.WHITE)));
     }
 
-    public Dystopia(UUID ownerId) {
-        super(ownerId, 6, "Dystopia", Rarity.RARE, new CardType[]{CardType.ENCHANTMENT}, "{1}{B}{B}");
-        this.expansionSetCode = "ALL";
+    public Dystopia(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.ENCHANTMENT},"{1}{B}{B}");
 
         // Cumulative upkeep-Pay 1 life.
         this.addAbility(new CumulativeUpkeepAbility(new PayLifeCost(1)));

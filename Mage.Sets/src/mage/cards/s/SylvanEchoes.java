@@ -25,14 +25,14 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.lorwyn;
+package mage.cards.s;
 
 import java.util.UUID;
 import mage.abilities.TriggeredAbilityImpl;
 import mage.abilities.effects.common.DrawCardSourceControllerEffect;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.constants.Zone;
 import mage.game.Game;
 import mage.game.events.GameEvent;
@@ -43,9 +43,8 @@ import mage.game.events.GameEvent;
  */
 public class SylvanEchoes extends CardImpl {
 
-    public SylvanEchoes(UUID ownerId) {
-        super(ownerId, 237, "Sylvan Echoes", Rarity.UNCOMMON, new CardType[]{CardType.ENCHANTMENT}, "{G}");
-        this.expansionSetCode = "LRW";
+    public SylvanEchoes(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.ENCHANTMENT},"{G}");
 
         // Whenever you clahs and you win, you may draw a card
         this.addAbility(new SylvanEchoesTriggeredAbility());

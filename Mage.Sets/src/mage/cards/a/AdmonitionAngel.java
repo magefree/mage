@@ -25,12 +25,11 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.worldwake;
+package mage.cards.a;
 
 import java.util.UUID;
 
 import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.TriggeredAbility;
@@ -40,6 +39,7 @@ import mage.abilities.effects.common.ExileTargetForSourceEffect;
 import mage.abilities.effects.common.ReturnFromExileForSourceEffect;
 import mage.abilities.keyword.FlyingAbility;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.Zone;
 import mage.filter.FilterPermanent;
 import mage.filter.predicate.Predicates;
@@ -60,9 +60,8 @@ public class AdmonitionAngel extends CardImpl {
         filter.add(Predicates.not(new CardTypePredicate(CardType.LAND)));
     }
 
-    public AdmonitionAngel(UUID ownerId) {
-        super(ownerId, 1, "Admonition Angel", Rarity.MYTHIC, new CardType[]{CardType.CREATURE}, "{3}{W}{W}{W}");
-        this.expansionSetCode = "WWK";
+    public AdmonitionAngel(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{3}{W}{W}{W}");
         this.subtype.add("Angel");
 
         this.power = new MageInt(6);

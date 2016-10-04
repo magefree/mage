@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.urzaslegacy;
+package mage.cards.m;
 
 import java.util.Iterator;
 import java.util.UUID;
@@ -38,11 +38,11 @@ import mage.abilities.effects.Effect;
 import mage.abilities.effects.OneShotEffect;
 import mage.cards.Card;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.cards.Cards;
 import mage.cards.CardsImpl;
 import mage.constants.CardType;
 import mage.constants.Outcome;
-import mage.constants.Rarity;
 import mage.constants.Zone;
 import mage.game.Game;
 import mage.game.events.GameEvent;
@@ -55,9 +55,8 @@ import mage.players.Player;
  */
 public class MemoryJar extends CardImpl {
 
-    public MemoryJar(UUID ownerId) {
-        super(ownerId, 129, "Memory Jar", Rarity.RARE, new CardType[]{CardType.ARTIFACT}, "{5}");
-        this.expansionSetCode = "ULG";
+    public MemoryJar(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.ARTIFACT},"{5}");
 
         // {T}, Sacrifice Memory Jar: Each player exiles all cards from his or her hand face down and draws seven cards.
         // At the beginning of the next end step, each player discards his or her hand and returns to his or her hand each

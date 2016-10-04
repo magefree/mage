@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.urzasdestiny;
+package mage.cards.r;
 
 import java.util.UUID;
 import mage.abilities.Ability;
@@ -34,9 +34,9 @@ import mage.abilities.effects.OneShotEffect;
 import mage.abilities.keyword.CyclingAbility;
 import mage.cards.Card;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Outcome;
-import mage.constants.Rarity;
 import mage.filter.FilterCard;
 import mage.game.Game;
 import mage.target.common.TargetCardInASingleGraveyard;
@@ -47,9 +47,8 @@ import mage.target.common.TargetCardInASingleGraveyard;
  */
 public class RapidDecay extends CardImpl {
 
-    public RapidDecay(UUID ownerId) {
-        super(ownerId, 67, "Rapid Decay", Rarity.RARE, new CardType[]{CardType.INSTANT}, "{1}{B}");
-        this.expansionSetCode = "UDS";
+    public RapidDecay(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.INSTANT},"{1}{B}");
 
         // Exile up to three target cards from a single graveyard.
         this.getSpellAbility().addEffect(new RapidDecayExileEffect());

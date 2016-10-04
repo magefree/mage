@@ -25,12 +25,11 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.darkascension;
+package mage.cards.h;
 
 import java.util.UUID;
 
 import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.MageInt;
 import mage.abilities.TriggeredAbility;
 import mage.abilities.common.BeginningOfUpkeepTriggeredAbility;
@@ -39,6 +38,7 @@ import mage.abilities.decorator.ConditionalTriggeredAbility;
 import mage.abilities.effects.common.TransformSourceEffect;
 import mage.abilities.keyword.TransformAbility;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.TargetController;
 
 /**
@@ -47,14 +47,13 @@ import mage.constants.TargetController;
  */
 public class HinterlandHermit extends CardImpl {
 
-    public HinterlandHermit(UUID ownerId) {
-        super(ownerId, 94, "Hinterland Hermit", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{1}{R}");
-        this.expansionSetCode = "DKA";
+    public HinterlandHermit(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{1}{R}");
         this.subtype.add("Human");
         this.subtype.add("Werewolf");
 
         this.transformable = true;
-        this.secondSideCard = new HinterlandScourge(ownerId);
+        this.secondSideCardClazz = HinterlandScourge.class;
 
         this.power = new MageInt(2);
         this.toughness = new MageInt(1);

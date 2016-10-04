@@ -25,17 +25,17 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.returntoravnica;
+package mage.cards.f;
 
 import java.util.UUID;
 
 import mage.constants.CardType;
 import mage.constants.Outcome;
-import mage.constants.Rarity;
 import mage.abilities.Ability;
 import mage.abilities.effects.OneShotEffect;
 import mage.cards.Card;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.cards.Cards;
 import mage.cards.CardsImpl;
 import mage.constants.Zone;
@@ -53,9 +53,8 @@ import mage.target.common.TargetCardInLibrary;
  */
 public class FiremindsForesight extends CardImpl {
 
-    public FiremindsForesight(UUID ownerId) {
-        super(ownerId, 162, "Firemind's Foresight", Rarity.RARE, new CardType[]{CardType.INSTANT}, "{5}{U}{R}");
-        this.expansionSetCode = "RTR";
+    public FiremindsForesight(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.INSTANT},"{5}{U}{R}");
 
 
         // Search your library for an instant card with converted mana cost 3, reveal it,

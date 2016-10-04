@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.homelands;
+package mage.cards.m;
 
 import java.util.UUID;
 import mage.abilities.Ability;
@@ -35,9 +35,9 @@ import mage.abilities.effects.common.continuous.LoseAbilityAllEffect;
 import mage.abilities.keyword.FlyingAbility;
 import mage.abilities.keyword.IslandwalkAbility;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Duration;
-import mage.constants.Rarity;
 import mage.constants.Zone;
 import mage.filter.common.FilterCreaturePermanent;
 
@@ -47,9 +47,8 @@ import mage.filter.common.FilterCreaturePermanent;
  */
 public class MysticDecree extends CardImpl {
 
-    public MysticDecree(UUID ownerId) {
-        super(ownerId, 43, "Mystic Decree", Rarity.RARE, new CardType[]{CardType.ENCHANTMENT}, "{2}{U}{U}");
-        this.expansionSetCode = "HML";
+    public MysticDecree(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.ENCHANTMENT},"{2}{U}{U}");
         this.supertype.add("World");
 
         // All creatures lose flying and islandwalk.

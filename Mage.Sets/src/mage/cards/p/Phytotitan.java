@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.magic2015;
+package mage.cards.p;
 
 import java.util.UUID;
 import mage.MageInt;
@@ -37,9 +37,9 @@ import mage.abilities.effects.Effect;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.ReturnSourceFromGraveyardToBattlefieldEffect;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Outcome;
-import mage.constants.Rarity;
 import mage.game.Game;
 
 /**
@@ -48,9 +48,8 @@ import mage.game.Game;
  */
 public class Phytotitan extends CardImpl {
 
-    public Phytotitan(UUID ownerId) {
-        super(ownerId, 191, "Phytotitan", Rarity.RARE, new CardType[]{CardType.CREATURE}, "{4}{G}{G}");
-        this.expansionSetCode = "M15";
+    public Phytotitan(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{4}{G}{G}");
         this.subtype.add("Plant");
         this.subtype.add("Elemental");
 

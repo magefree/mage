@@ -25,15 +25,15 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.eighthedition;
+package mage.cards.d;
 
 import java.util.UUID;
 import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.MageInt;
 import mage.abilities.keyword.FlyingAbility;
 import mage.abilities.keyword.VigilanceAbility;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 
 /**
  *
@@ -41,9 +41,8 @@ import mage.cards.CardImpl;
  */
 public class DivingGriffin extends CardImpl {
 
-    public DivingGriffin(UUID ownerId) {
-        super(ownerId, 17, "Diving Griffin", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{1}{W}{W}");
-        this.expansionSetCode = "8ED";
+    public DivingGriffin(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{1}{W}{W}");
         this.subtype.add("Griffin");
 
         this.power = new MageInt(2);

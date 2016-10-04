@@ -25,16 +25,16 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.battleforzendikar;
+package mage.cards.u;
 
 import java.util.UUID;
 import mage.abilities.Ability;
 import mage.abilities.dynamicvalue.common.HighestConvertedManaCostValue;
 import mage.abilities.effects.OneShotEffect;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Outcome;
-import mage.constants.Rarity;
 import mage.game.Game;
 import mage.players.Player;
 
@@ -44,9 +44,8 @@ import mage.players.Player;
  */
 public class UginsInsight extends CardImpl {
 
-    public UginsInsight(UUID ownerId) {
-        super(ownerId, 87, "Ugin's Insight", Rarity.RARE, new CardType[]{CardType.SORCERY}, "{3}{U}{U}");
-        this.expansionSetCode = "BFZ";
+    public UginsInsight(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{3}{U}{U}");
 
         // Scry X, where X is the highest converted mana cost among permanents you control, then draw three cards.
         this.getSpellAbility().addEffect(new UginsInsightEffect());

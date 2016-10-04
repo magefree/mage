@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.ninthedition;
+package mage.cards.h;
 
 import java.util.UUID;
 import mage.MageInt;
@@ -36,9 +36,9 @@ import mage.abilities.costs.common.TapSourceCost;
 import mage.abilities.decorator.ConditionalActivatedAbility;
 import mage.abilities.effects.common.ReturnFromGraveyardToBattlefieldTargetEffect;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.PhaseStep;
-import mage.constants.Rarity;
 import mage.constants.Zone;
 import mage.filter.common.FilterCreatureCard;
 import mage.target.common.TargetCardInYourGraveyard;
@@ -50,9 +50,8 @@ import mage.target.common.TargetControlledCreaturePermanent;
  */
 public class HellsCaretaker extends CardImpl {
 
-    public HellsCaretaker(UUID ownerId) {
-        super(ownerId, 137, "Hell's Caretaker", Rarity.RARE, new CardType[]{CardType.CREATURE}, "{3}{B}");
-        this.expansionSetCode = "9ED";
+    public HellsCaretaker(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{3}{B}");
         this.subtype.add("Horror");
         this.power = new MageInt(1);
         this.toughness = new MageInt(1);

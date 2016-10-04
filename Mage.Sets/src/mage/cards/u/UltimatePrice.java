@@ -25,13 +25,13 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.returntoravnica;
+package mage.cards.u;
 
 import java.util.UUID;
 import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.abilities.effects.common.DestroyTargetEffect;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.filter.predicate.mageobject.MonocoloredPredicate;
 import mage.target.common.TargetCreaturePermanent;
@@ -48,9 +48,8 @@ public class UltimatePrice extends CardImpl {
         filter.add(new MonocoloredPredicate());
     }
 
-    public UltimatePrice(UUID ownerId) {
-        super(ownerId, 82, "Ultimate Price", Rarity.UNCOMMON, new CardType[]{CardType.INSTANT}, "{1}{B}");
-        this.expansionSetCode = "RTR";
+    public UltimatePrice(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.INSTANT},"{1}{B}");
 
         // Destroy target monocolored creature.
         this.getSpellAbility().addTarget(new TargetCreaturePermanent(filter));

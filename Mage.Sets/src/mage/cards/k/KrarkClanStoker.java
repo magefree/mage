@@ -26,11 +26,10 @@
  *  or implied, of BetaSteward_at_googlemail.com.
  */
 
-package mage.sets.darksteel;
+package mage.cards.k;
 
 import java.util.UUID;
 import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.constants.Zone;
 import mage.MageInt;
 import mage.Mana;
@@ -39,6 +38,7 @@ import mage.abilities.costs.common.SacrificeTargetCost;
 import mage.abilities.costs.common.TapSourceCost;
 import mage.abilities.mana.SimpleManaAbility;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.filter.common.FilterControlledArtifactPermanent;
 import mage.target.common.TargetControlledPermanent;
 
@@ -47,9 +47,8 @@ import mage.target.common.TargetControlledPermanent;
  */
 public class KrarkClanStoker extends CardImpl {
 
-    public KrarkClanStoker(UUID ownerId) {
-        super(ownerId, 65, "Krark-Clan Stoker", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{2}{R}");
-        this.expansionSetCode = "DST";
+    public KrarkClanStoker(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{2}{R}");
         this.subtype.add("Goblin");
         this.subtype.add("Shaman");
 

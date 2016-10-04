@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.judgment;
+package mage.cards.f;
 
 import java.util.UUID;
 import mage.MageObject;
@@ -39,11 +39,11 @@ import mage.abilities.effects.OneShotEffect;
 import mage.abilities.keyword.FlashbackAbility;
 import mage.cards.Card;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.cards.Cards;
 import mage.cards.CardsImpl;
 import mage.constants.CardType;
 import mage.constants.Outcome;
-import mage.constants.Rarity;
 import mage.constants.TimingRule;
 import mage.constants.Zone;
 import mage.filter.FilterCard;
@@ -60,9 +60,8 @@ import mage.target.TargetCard;
  */
 public class FlashOfInsight extends CardImpl {
 
-    public FlashOfInsight(UUID ownerId) {
-        super(ownerId, 40, "Flash of Insight", Rarity.UNCOMMON, new CardType[]{CardType.INSTANT}, "{X}{1}{U}");
-        this.expansionSetCode = "JUD";
+    public FlashOfInsight(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.INSTANT},"{X}{1}{U}");
 
         // Look at the top X cards of your library. Put one of them into your hand and the rest on the bottom of your library in any order.
         this.getSpellAbility().addEffect(new FlashOfInsightEffect());

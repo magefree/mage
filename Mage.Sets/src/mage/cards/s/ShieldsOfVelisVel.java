@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.lorwyn;
+package mage.cards.s;
 
 import java.util.Iterator;
 import java.util.List;
@@ -35,11 +35,11 @@ import mage.abilities.Ability;
 import mage.abilities.effects.ContinuousEffectImpl;
 import mage.abilities.keyword.ChangelingAbility;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Duration;
 import mage.constants.Layer;
 import mage.constants.Outcome;
-import mage.constants.Rarity;
 import mage.constants.SubLayer;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.game.Game;
@@ -52,9 +52,8 @@ import mage.target.TargetPlayer;
  */
 public class ShieldsOfVelisVel extends CardImpl {
 
-    public ShieldsOfVelisVel(UUID ownerId) {
-        super(ownerId, 39, "Shields of Velis Vel", Rarity.COMMON, new CardType[]{CardType.TRIBAL, CardType.INSTANT}, "{W}");
-        this.expansionSetCode = "LRW";
+    public ShieldsOfVelisVel(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.TRIBAL,CardType.INSTANT},"{W}");
         this.subtype.add("Shapeshifter");
 
         // Changeling

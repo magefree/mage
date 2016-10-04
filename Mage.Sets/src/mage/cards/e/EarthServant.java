@@ -26,12 +26,11 @@
  *  or implied, of BetaSteward_at_googlemail.com.
  */
 
-package mage.sets.magic2011;
+package mage.cards.e;
 
 import java.util.UUID;
 import mage.constants.CardType;
 import mage.constants.Duration;
-import mage.constants.Rarity;
 import mage.constants.TargetController;
 import mage.constants.Zone;
 import mage.MageInt;
@@ -39,6 +38,7 @@ import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.dynamicvalue.common.PermanentsOnBattlefieldCount;
 import mage.abilities.effects.common.continuous.BoostSourceEffect;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.filter.common.FilterLandPermanent;
 import mage.filter.predicate.mageobject.SubtypePredicate;
 import mage.filter.predicate.permanent.ControllerPredicate;
@@ -56,9 +56,8 @@ public class EarthServant extends CardImpl {
         filter.add(new ControllerPredicate(TargetController.YOU));
     }
 
-    public EarthServant(UUID ownerId) {
-        super(ownerId, 134, "Earth Servant", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{5}{R}");
-        this.expansionSetCode = "M11";
+    public EarthServant(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{5}{R}");
         this.subtype.add("Elemental");
 
         this.power = new MageInt(4);

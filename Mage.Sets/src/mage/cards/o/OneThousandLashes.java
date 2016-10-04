@@ -25,12 +25,11 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.gatecrash;
+package mage.cards.o;
 
 import java.util.UUID;
 
 import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.constants.Outcome;
 import mage.constants.TargetController;
 import mage.constants.Zone;
@@ -42,6 +41,7 @@ import mage.abilities.effects.common.combat.CantBlockAttackActivateAttachedEffec
 import mage.abilities.effects.common.LoseLifeTargetEffect;
 import mage.abilities.keyword.EnchantAbility;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.target.TargetPermanent;
 import mage.target.common.TargetCreaturePermanent;
 
@@ -51,9 +51,8 @@ import mage.target.common.TargetCreaturePermanent;
  */
 public class OneThousandLashes extends CardImpl {
 
-    public OneThousandLashes(UUID ownerId) {
-        super(ownerId, 183, "One Thousand Lashes", Rarity.UNCOMMON, new CardType[]{CardType.ENCHANTMENT}, "{2}{W}{B}");
-        this.expansionSetCode = "GTC";
+    public OneThousandLashes(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.ENCHANTMENT},"{2}{W}{B}");
         this.subtype.add("Aura");
 
 

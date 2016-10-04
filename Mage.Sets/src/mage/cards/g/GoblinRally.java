@@ -26,13 +26,13 @@
  * or implied, of BetaSteward_at_googlemail.com.
  */
 
-package mage.sets.returntoravnica;
+package mage.cards.g;
 
 import java.util.UUID;
 import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.abilities.effects.common.CreateTokenEffect;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.game.permanent.token.GoblinToken;
 
 /**
@@ -41,9 +41,8 @@ import mage.game.permanent.token.GoblinToken;
  */
 public class GoblinRally extends CardImpl {
 
-    public GoblinRally(UUID ownerId) {
-        super(ownerId, 95, "Goblin Rally", Rarity.UNCOMMON, new CardType[]{CardType.SORCERY}, "{3}{R}{R}");
-        this.expansionSetCode = "RTR";
+    public GoblinRally(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{3}{R}{R}");
 
 
         // Put four 1/1 red Goblin creature tokens onto the battlefield.

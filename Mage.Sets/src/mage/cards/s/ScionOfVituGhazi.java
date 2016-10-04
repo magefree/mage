@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.dragonsmaze;
+package mage.cards.s;
 
 import java.util.UUID;
 import mage.MageInt;
@@ -36,8 +36,8 @@ import mage.abilities.decorator.ConditionalTriggeredAbility;
 import mage.abilities.effects.common.CreateTokenEffect;
 import mage.abilities.effects.common.PopulateEffect;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.game.permanent.token.BirdToken;
 import mage.watchers.common.CastFromHandWatcher;
 
@@ -47,9 +47,8 @@ import mage.watchers.common.CastFromHandWatcher;
  */
 public class ScionOfVituGhazi extends CardImpl {
 
-    public ScionOfVituGhazi(UUID ownerId) {
-        super(ownerId, 7, "Scion of Vitu-Ghazi", Rarity.RARE, new CardType[]{CardType.CREATURE}, "{3}{W}{W}");
-        this.expansionSetCode = "DGM";
+    public ScionOfVituGhazi(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{3}{W}{W}");
         this.subtype.add("Elemental");
 
         this.power = new MageInt(4);

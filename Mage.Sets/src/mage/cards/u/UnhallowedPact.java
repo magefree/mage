@@ -25,16 +25,16 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.avacynrestored;
+package mage.cards.u;
 
 import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.abilities.Ability;
 import mage.abilities.common.DiesAttachedTriggeredAbility;
 import mage.abilities.effects.common.AttachEffect;
 import mage.abilities.effects.common.ReturnToBattlefieldUnderYourControlAttachedEffect;
 import mage.abilities.keyword.EnchantAbility;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.Outcome;
 import mage.target.TargetPermanent;
 import mage.target.common.TargetCreaturePermanent;
@@ -46,9 +46,8 @@ import java.util.UUID;
  */
 public class UnhallowedPact extends CardImpl {
 
-    public UnhallowedPact(UUID ownerId) {
-        super(ownerId, 124, "Unhallowed Pact", Rarity.COMMON, new CardType[]{CardType.ENCHANTMENT}, "{2}{B}");
-        this.expansionSetCode = "AVR";
+    public UnhallowedPact(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.ENCHANTMENT},"{2}{B}");
         this.subtype.add("Aura");
 
 

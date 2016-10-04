@@ -25,15 +25,15 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.returntoravnica;
+package mage.cards.d;
 
 import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.MageInt;
 import mage.abilities.costs.mana.ManaCostsImpl;
 import mage.abilities.keyword.HasteAbility;
 import mage.abilities.keyword.ScavengeAbility;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 
 import java.util.UUID;
 
@@ -43,9 +43,8 @@ import java.util.UUID;
  */
 public class DregMangler extends CardImpl {
 
-    public DregMangler(UUID ownerId) {
-        super(ownerId, 158, "Dreg Mangler", Rarity.UNCOMMON, new CardType[]{CardType.CREATURE}, "{1}{B}{G}");
-        this.expansionSetCode = "RTR";
+    public DregMangler(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{1}{B}{G}");
         this.subtype.add("Plant");
         this.subtype.add("Zombie");
 

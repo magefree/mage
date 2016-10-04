@@ -25,13 +25,14 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.dragonsmaze;
+package mage.cards.s;
 
 import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.common.BeginningOfUpkeepTriggeredAbility;
 import mage.abilities.effects.common.ReturnToHandChosenControlledPermanentEffect;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.*;
 import mage.filter.common.FilterControlledCreaturePermanent;
 
@@ -41,9 +42,8 @@ import mage.filter.common.FilterControlledCreaturePermanent;
  */
 public class SpeciesGorger extends CardImpl {
 
-    public SpeciesGorger(UUID ownerId) {
-        super(ownerId, 105, "Species Gorger", Rarity.UNCOMMON, new CardType[]{CardType.CREATURE}, "{3}{G}{U}");
-        this.expansionSetCode = "DGM";
+    public SpeciesGorger(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{3}{G}{U}");
         this.subtype.add("Frog");
         this.subtype.add("Beast");
 

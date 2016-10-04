@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.eventide;
+package mage.cards.d;
 
 import java.util.UUID;
 import mage.MageInt;
@@ -37,9 +37,9 @@ import mage.abilities.effects.common.continuous.BoostSourceEffect;
 import mage.abilities.keyword.FlyingAbility;
 import mage.abilities.keyword.LifelinkAbility;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Duration;
-import mage.constants.Rarity;
 import mage.constants.Zone;
 import mage.game.Game;
 import mage.players.Player;
@@ -50,9 +50,8 @@ import mage.players.Player;
  */
 public class DivinityOfPride extends CardImpl {
 
-    public DivinityOfPride(UUID ownerId) {
-        super(ownerId, 86, "Divinity of Pride", Rarity.RARE, new CardType[]{CardType.CREATURE}, "{W/B}{W/B}{W/B}{W/B}{W/B}");
-        this.expansionSetCode = "EVE";
+    public DivinityOfPride(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{W/B}{W/B}{W/B}{W/B}{W/B}");
         this.subtype.add("Spirit");
         this.subtype.add("Avatar");
 

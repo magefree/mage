@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.darksteel;
+package mage.cards.r;
 
 import java.util.UUID;
 import mage.MageInt;
@@ -33,8 +33,8 @@ import mage.abilities.Ability;
 import mage.abilities.common.AttacksTriggeredAbility;
 import mage.abilities.effects.common.TapAllEffect;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.filter.common.FilterArtifactPermanent;
 
 /**
@@ -43,9 +43,8 @@ import mage.filter.common.FilterArtifactPermanent;
  */
 public class RoaringSlagwurm extends CardImpl {
 
-    public RoaringSlagwurm(UUID ownerId) {
-        super(ownerId, 83, "Roaring Slagwurm", Rarity.RARE, new CardType[]{CardType.CREATURE}, "{5}{G}{G}");
-        this.expansionSetCode = "DST";
+    public RoaringSlagwurm(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{5}{G}{G}");
         this.subtype.add("Wurm");
         this.power = new MageInt(6);
         this.toughness = new MageInt(4);

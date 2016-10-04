@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.commander;
+package mage.cards.k;
 
 import java.util.UUID;
 import mage.MageObject;
@@ -33,11 +33,11 @@ import mage.abilities.Ability;
 import mage.abilities.effects.OneShotEffect;
 import mage.cards.Card;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.cards.Cards;
 import mage.cards.CardsImpl;
 import mage.constants.CardType;
 import mage.constants.Outcome;
-import mage.constants.Rarity;
 import mage.constants.Zone;
 import mage.filter.FilterCard;
 import mage.filter.common.FilterBasicLandCard;
@@ -52,9 +52,8 @@ import mage.target.common.TargetCardInLibrary;
  */
 public class KodamasReach extends CardImpl {
 
-    public KodamasReach(UUID ownerId) {
-        super(ownerId, 163, "Kodama's Reach", Rarity.COMMON, new CardType[]{CardType.SORCERY}, "{2}{G}");
-        this.expansionSetCode = "CMD";
+    public KodamasReach(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{2}{G}");
         this.subtype.add("Arcane");
 
         // Search your library for up to two basic land cards, reveal those cards, and put one onto the battlefield tapped and the other into your hand. Then shuffle your library.

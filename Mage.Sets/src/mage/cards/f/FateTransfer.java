@@ -25,15 +25,15 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.shadowmoor;
+package mage.cards.f;
 
 import java.util.UUID;
 import mage.abilities.Ability;
 import mage.abilities.effects.OneShotEffect;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Outcome;
-import mage.constants.Rarity;
 import mage.counters.Counter;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.filter.predicate.mageobject.AnotherTargetPredicate;
@@ -50,9 +50,8 @@ public class FateTransfer extends CardImpl {
     private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("target creature to move all counters from");
     private static final FilterCreaturePermanent filter2 = new FilterCreaturePermanent("another target creature to move all counters to");
 
-    public FateTransfer(UUID ownerId) {
-        super(ownerId, 161, "Fate Transfer", Rarity.COMMON, new CardType[]{CardType.INSTANT}, "{1}{U/B}");
-        this.expansionSetCode = "SHM";
+    public FateTransfer(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.INSTANT},"{1}{U/B}");
 
         // Move all counters from target creature onto another target creature.
         this.getSpellAbility().addEffect(new FateTransferEffect());

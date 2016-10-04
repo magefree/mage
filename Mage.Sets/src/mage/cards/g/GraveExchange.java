@@ -25,16 +25,16 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.avacynrestored;
+package mage.cards.g;
 
 import java.util.UUID;
 import mage.constants.CardType;
 import mage.constants.Outcome;
-import mage.constants.Rarity;
 import mage.abilities.Ability;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.ReturnToHandTargetEffect;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.filter.common.FilterControlledCreaturePermanent;
 import mage.filter.common.FilterCreatureCard;
 import mage.game.Game;
@@ -53,9 +53,8 @@ public class GraveExchange extends CardImpl {
 
     private static final FilterCreatureCard filter = new FilterCreatureCard("creature card from your graveyard");
 
-    public GraveExchange(UUID ownerId) {
-        super(ownerId, 105, "Grave Exchange", Rarity.COMMON, new CardType[]{CardType.SORCERY}, "{4}{B}{B}");
-        this.expansionSetCode = "AVR";
+    public GraveExchange(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{4}{B}{B}");
 
 
         // Return target creature card from your graveyard to your hand.

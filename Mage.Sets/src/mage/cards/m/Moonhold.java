@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.eventide;
+package mage.cards.m;
 
 import java.util.UUID;
 import mage.MageObject;
@@ -38,11 +38,11 @@ import mage.abilities.effects.ContinuousRuleModifyingEffectImpl;
 import mage.abilities.effects.common.InfoEffect;
 import mage.cards.Card;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.ColoredManaSymbol;
 import mage.constants.Duration;
 import mage.constants.Outcome;
-import mage.constants.Rarity;
 import mage.game.Game;
 import mage.game.events.GameEvent;
 import mage.target.TargetPlayer;
@@ -54,9 +54,8 @@ import mage.watchers.common.ManaSpentToCastWatcher;
  */
 public class Moonhold extends CardImpl {
 
-    public Moonhold(UUID ownerId) {
-        super(ownerId, 143, "Moonhold", Rarity.UNCOMMON, new CardType[]{CardType.INSTANT}, "{2}{R/W}");
-        this.expansionSetCode = "EVE";
+    public Moonhold(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.INSTANT},"{2}{R/W}");
 
         // Target player can't play land cards this turn if {R} was spent to cast Moonhold and can't play creature cards this turn if {W} was spent to cast it.
         ContinuousRuleModifyingEffect effect = new MoonholdEffect();

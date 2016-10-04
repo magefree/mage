@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.mirrodinbesieged;
+package mage.cards.r;
 
 import java.util.UUID;
 import mage.abilities.dynamicvalue.common.ManacostVariableValue;
@@ -33,9 +33,9 @@ import mage.abilities.effects.common.DamageTargetEffect;
 import mage.abilities.effects.common.ShuffleSpellEffect;
 import mage.abilities.effects.common.replacement.DealtDamageToCreatureBySourceDies;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Duration;
-import mage.constants.Rarity;
 import mage.target.common.TargetCreatureOrPlayer;
 import mage.watchers.common.DamagedByWatcher;
 
@@ -45,9 +45,8 @@ import mage.watchers.common.DamagedByWatcher;
  */
 public class RedSunsZenith extends CardImpl {
 
-    public RedSunsZenith(UUID ownerId) {
-        super(ownerId, 74, "Red Sun's Zenith", Rarity.RARE, new CardType[]{CardType.SORCERY}, "{X}{R}");
-        this.expansionSetCode = "MBS";
+    public RedSunsZenith(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{X}{R}");
 
         // Red Sun's Zenith deals X damage to target creature or player.
         // If a creature dealt damage this way would die this turn, exile it instead.

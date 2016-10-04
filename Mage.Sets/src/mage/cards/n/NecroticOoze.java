@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.scarsofmirrodin;
+package mage.cards.n;
 
 import java.util.HashSet;
 import java.util.List;
@@ -39,17 +39,17 @@ import mage.abilities.effects.ContinuousEffect;
 import mage.abilities.effects.ContinuousEffectImpl;
 import mage.cards.Card;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Duration;
 import mage.constants.Layer;
 import mage.constants.Outcome;
-import mage.constants.Rarity;
 import mage.constants.SubLayer;
 import mage.constants.Zone;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.players.Player;
-import mage.sets.futuresight.YixlidJailer;
+import mage.cards.y.YixlidJailer;
 
 /**
  *
@@ -57,9 +57,8 @@ import mage.sets.futuresight.YixlidJailer;
  */
 public class NecroticOoze extends CardImpl {
 
-    public NecroticOoze(UUID ownerId) {
-        super(ownerId, 72, "Necrotic Ooze", Rarity.RARE, new CardType[]{CardType.CREATURE}, "{2}{B}{B}");
-        this.expansionSetCode = "SOM";
+    public NecroticOoze(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{2}{B}{B}");
         this.subtype.add("Ooze");
 
         this.power = new MageInt(4);

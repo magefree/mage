@@ -25,17 +25,17 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.urzassaga;
+package mage.cards.s;
 
 import java.util.UUID;
 
 import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.EntersBattlefieldTriggeredAbility;
 import mage.abilities.effects.common.ReturnToHandTargetEffect;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.filter.FilterPermanent;
 import mage.filter.predicate.Predicates;
 import mage.filter.predicate.mageobject.CardTypePredicate;
@@ -54,9 +54,8 @@ public class SternProctor extends CardImpl {
                 new CardTypePredicate(CardType.ENCHANTMENT)));
     }
 
-    public SternProctor(UUID ownerId) {
-        super(ownerId, 99, "Stern Proctor", Rarity.UNCOMMON, new CardType[]{CardType.CREATURE}, "{U}{U}");
-        this.expansionSetCode = "USG";
+    public SternProctor(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{U}{U}");
         this.subtype.add("Human");
         this.subtype.add("Wizard");
 

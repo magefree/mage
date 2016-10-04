@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.scourge;
+package mage.cards.d;
 
 import java.util.UUID;
 import mage.abilities.Ability;
@@ -36,9 +36,9 @@ import mage.abilities.effects.common.DestroyAllEffect;
 import mage.abilities.keyword.CyclingAbility;
 import mage.cards.Card;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Outcome;
-import mage.constants.Rarity;
 import mage.filter.FilterPermanent;
 import mage.filter.common.FilterLandPermanent;
 import mage.filter.predicate.Predicates;
@@ -53,9 +53,8 @@ import mage.players.Player;
  */
 public class DecreeOfAnnihilation extends CardImpl {
 
-    public DecreeOfAnnihilation(UUID ownerId) {
-        super(ownerId, 85, "Decree of Annihilation", Rarity.RARE, new CardType[]{CardType.SORCERY}, "{8}{R}{R}");
-        this.expansionSetCode = "SCG";
+    public DecreeOfAnnihilation(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{8}{R}{R}");
 
         // Exile all artifacts, creatures, and lands from the battlefield, all cards from all graveyards, and all cards from all hands.
         this.getSpellAbility().addEffect(new DecreeOfAnnihilationEffect());

@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.lorwyn;
+package mage.cards.h;
 
 import java.util.UUID;
 import mage.MageInt;
@@ -36,9 +36,9 @@ import mage.abilities.costs.common.SacrificeTargetCost;
 import mage.abilities.effects.common.CreateTokenEffect;
 import mage.abilities.effects.common.continuous.BoostTargetEffect;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Duration;
-import mage.constants.Rarity;
 import mage.constants.Zone;
 import mage.filter.common.FilterControlledPermanent;
 import mage.filter.common.FilterCreaturePermanent;
@@ -61,9 +61,8 @@ public class HearthcageGiant extends CardImpl {
         filterGiant.add(new SubtypePredicate("Giant"));
     }
 
-    public HearthcageGiant(UUID ownerId) {
-        super(ownerId, 174, "Hearthcage Giant", Rarity.UNCOMMON, new CardType[]{CardType.CREATURE}, "{6}{R}{R}");
-        this.expansionSetCode = "LRW";
+    public HearthcageGiant(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{6}{R}{R}");
         this.subtype.add("Giant");
         this.subtype.add("Warrior");
 

@@ -25,18 +25,18 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.gatecrash;
+package mage.cards.l;
 
 import java.util.UUID;
 import mage.constants.CardType;
 import mage.constants.Outcome;
-import mage.constants.Rarity;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.EntersBattlefieldTriggeredAbility;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.keyword.VigilanceAbility;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.filter.predicate.permanent.ControllerIdPredicate;
 import mage.game.Game;
@@ -51,9 +51,8 @@ import mage.target.common.TargetCreaturePermanent;
  */
 public class LuminatePrimordial extends CardImpl {
 
-    public LuminatePrimordial(UUID ownerId) {
-        super(ownerId, 20, "Luminate Primordial", Rarity.RARE, new CardType[]{CardType.CREATURE}, "{5}{W}{W}");
-        this.expansionSetCode = "GTC";
+    public LuminatePrimordial(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{5}{W}{W}");
         this.subtype.add("Avatar");
 
         this.power = new MageInt(4);

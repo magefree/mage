@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.battleforzendikar;
+package mage.cards.a;
 
 import java.util.UUID;
 import mage.MageInt;
@@ -34,9 +34,9 @@ import mage.abilities.dynamicvalue.common.PermanentsOnBattlefieldCount;
 import mage.abilities.effects.common.continuous.BoostSourceEffect;
 import mage.abilities.keyword.FlyingAbility;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Duration;
-import mage.constants.Rarity;
 import mage.filter.common.FilterAttackingCreature;
 import mage.filter.predicate.mageobject.SubtypePredicate;
 import mage.filter.predicate.permanent.AnotherPredicate;
@@ -54,9 +54,8 @@ public class AngelicCaptain extends CardImpl {
         filter.add(new AnotherPredicate());
     }
 
-    public AngelicCaptain(UUID ownerId) {
-        super(ownerId, 208, "Angelic Captain", Rarity.RARE, new CardType[]{CardType.CREATURE}, "{3}{R}{W}");
-        this.expansionSetCode = "BFZ";
+    public AngelicCaptain(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{3}{R}{W}");
         this.subtype.add("Angel");
         this.subtype.add("Ally");
         this.power = new MageInt(4);

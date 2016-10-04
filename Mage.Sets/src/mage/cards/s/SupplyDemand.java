@@ -25,15 +25,15 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.dissension;
+package mage.cards.s;
 
 import java.util.UUID;
 import mage.abilities.dynamicvalue.common.ManacostVariableValue;
 import mage.abilities.effects.common.CreateTokenEffect;
 import mage.abilities.effects.common.search.SearchLibraryPutInHandEffect;
+import mage.cards.CardSetInfo;
 import mage.cards.SplitCard;
 import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.filter.FilterCard;
 import mage.filter.predicate.mageobject.MulticoloredPredicate;
 import mage.game.permanent.token.SaprolingToken;
@@ -51,9 +51,8 @@ public class SupplyDemand extends SplitCard {
         filter.add(new MulticoloredPredicate());
     }
 
-    public SupplyDemand(UUID ownerId) {
-        super(ownerId, 157, "Supply", "Demand", Rarity.UNCOMMON, new CardType[]{CardType.SORCERY}, "{X}{G}{W}", "{1}{W}{U}", false);
-        this.expansionSetCode = "DIS";
+    public SupplyDemand(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{X}{G}{W}","{1}{W}{U}",false);
 
         // Supply
         // Put X 1/1 green Saproling creature tokens onto the battlefield.

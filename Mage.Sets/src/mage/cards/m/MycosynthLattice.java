@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.darksteel;
+package mage.cards.m;
 
 import java.util.List;
 import java.util.UUID;
@@ -38,13 +38,13 @@ import mage.abilities.effects.AsThoughManaEffect;
 import mage.abilities.effects.ContinuousEffectImpl;
 import mage.cards.Card;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.AsThoughEffectType;
 import mage.constants.CardType;
 import mage.constants.Duration;
 import mage.constants.Layer;
 import mage.constants.ManaType;
 import mage.constants.Outcome;
-import mage.constants.Rarity;
 import mage.constants.SubLayer;
 import mage.constants.Zone;
 import mage.game.Game;
@@ -59,9 +59,8 @@ import mage.players.Player;
  */
 public class MycosynthLattice extends CardImpl {
 
-    public MycosynthLattice(UUID ownerId) {
-        super(ownerId, 130, "Mycosynth Lattice", Rarity.RARE, new CardType[]{CardType.ARTIFACT}, "{6}");
-        this.expansionSetCode = "DST";
+    public MycosynthLattice(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.ARTIFACT},"{6}");
 
         // All permanents are artifacts in addition to their other types.
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new PermanentsAreArtifactsEffect()));

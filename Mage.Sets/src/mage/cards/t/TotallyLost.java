@@ -25,13 +25,13 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.gatecrash;
+package mage.cards.t;
 
 import java.util.UUID;
 import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.abilities.effects.common.PutOnLibraryTargetEffect;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.target.common.TargetNonlandPermanent;
 
 /**
@@ -40,9 +40,8 @@ import mage.target.common.TargetNonlandPermanent;
  */
 public class TotallyLost extends CardImpl {
 
-    public TotallyLost(UUID ownerId) {
-        super(ownerId, 54, "Totally Lost", Rarity.COMMON, new CardType[]{CardType.INSTANT}, "{4}{U}");
-        this.expansionSetCode = "GTC";
+    public TotallyLost(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.INSTANT},"{4}{U}");
 
 
         // Put target nonland permanent on top of its owner's library.

@@ -25,13 +25,13 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.shadowsoverinnistrad;
+package mage.cards.d;
 
 import java.util.UUID;
 import mage.abilities.effects.common.FightTargetsEffect;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.filter.predicate.mageobject.AnotherTargetPredicate;
 import mage.filter.predicate.permanent.BlockingPredicate;
@@ -49,9 +49,8 @@ public class DissensionInTheRanks extends CardImpl {
         filter.add(new BlockingPredicate());
     }
 
-    public DissensionInTheRanks(UUID ownerId) {
-        super(ownerId, 152, "Dissension in the Ranks", Rarity.UNCOMMON, new CardType[]{CardType.INSTANT}, "{3}{R}{R}");
-        this.expansionSetCode = "SOI";
+    public DissensionInTheRanks(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.INSTANT},"{3}{R}{R}");
 
         // Target blocking creature fights another target blocking creature.
         this.getSpellAbility().addEffect(new FightTargetsEffect());

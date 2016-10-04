@@ -25,17 +25,17 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.avacynrestored;
+package mage.cards.a;
 
 import java.util.UUID;
 import mage.constants.CardType;
 import mage.constants.Outcome;
-import mage.constants.Rarity;
 import mage.constants.Zone;
 import mage.abilities.Ability;
 import mage.abilities.effects.OneShotEffect;
 import mage.cards.Card;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.filter.FilterCard;
 import mage.game.Game;
 import mage.players.Player;
@@ -47,9 +47,8 @@ import mage.target.TargetCard;
  */
 public class AmassTheComponents extends CardImpl {
 
-    public AmassTheComponents(UUID ownerId) {
-        super(ownerId, 43, "Amass the Components", Rarity.COMMON, new CardType[]{CardType.SORCERY}, "{3}{U}");
-        this.expansionSetCode = "AVR";
+    public AmassTheComponents(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{3}{U}");
 
 
         // Draw three cards, then put a card from your hand on the bottom of your library.

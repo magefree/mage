@@ -25,19 +25,19 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.tempest;
+package mage.cards.e;
 
 import java.util.UUID;
 import mage.MageObject;
 import mage.abilities.Ability;
 import mage.abilities.effects.OneShotEffect;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.cards.repository.CardRepository;
 import mage.choices.Choice;
 import mage.choices.ChoiceImpl;
 import mage.constants.CardType;
 import mage.constants.Outcome;
-import mage.constants.Rarity;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.filter.predicate.mageobject.SubtypePredicate;
 import mage.game.Game;
@@ -50,9 +50,8 @@ import mage.players.Player;
  */
 public class Extinction extends CardImpl {
 
-    public Extinction(UUID ownerId) {
-        super(ownerId, 29, "Extinction", Rarity.RARE, new CardType[]{CardType.SORCERY}, "{4}{B}");
-        this.expansionSetCode = "TMP";
+    public Extinction(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{4}{B}");
 
         // Destroy all creatures of the creature type of your choice.
         this.getSpellAbility().addEffect(new ExtinctionEffect());

@@ -25,16 +25,16 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.urzassaga;
+package mage.cards.u;
 
 import java.util.UUID;
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.effects.PreventionEffectImpl;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Duration;
-import mage.constants.Rarity;
 import mage.constants.Zone;
 import mage.game.Game;
 import mage.game.events.GameEvent;
@@ -45,9 +45,8 @@ import mage.game.events.GameEvent;
  */
 public class UrzasArmor extends CardImpl {
 
-    public UrzasArmor(UUID ownerId) {
-        super(ownerId, 313, "Urza's Armor", Rarity.UNCOMMON, new CardType[]{CardType.ARTIFACT}, "{6}");
-        this.expansionSetCode = "USG";
+    public UrzasArmor(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.ARTIFACT},"{6}");
 
         // If a source would deal damage to you, prevent 1 of that damage.
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new UrzasArmorEffect()));

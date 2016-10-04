@@ -25,13 +25,13 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.seventhedition;
+package mage.cards.p;
 
 import java.util.UUID;
 import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.abilities.effects.common.DestroyTargetEffect;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.filter.FilterPermanent;
 import mage.filter.predicate.Predicates;
 import mage.filter.predicate.mageobject.CardTypePredicate;
@@ -52,9 +52,8 @@ public class Pillage extends CardImpl {
                 new CardTypePredicate(CardType.LAND)));
     }
 
-    public Pillage(UUID ownerId) {
-        super(ownerId, 207, "Pillage", Rarity.UNCOMMON, new CardType[]{CardType.SORCERY}, "{1}{R}{R}");
-        this.expansionSetCode = "7ED";
+    public Pillage(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{1}{R}{R}");
 
 
         // Destroy target artifact or land. It can't be regenerated.

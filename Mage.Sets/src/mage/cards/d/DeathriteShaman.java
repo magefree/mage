@@ -25,12 +25,11 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.returntoravnica;
+package mage.cards.d;
 
 import java.util.UUID;
 
 import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleActivatedAbility;
@@ -41,6 +40,7 @@ import mage.abilities.effects.common.ExileTargetEffect;
 import mage.abilities.effects.common.GainLifeEffect;
 import mage.abilities.effects.common.LoseLifeOpponentsEffect;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.Zone;
 import mage.filter.FilterCard;
 import mage.filter.common.FilterCreatureCard;
@@ -63,9 +63,8 @@ public class DeathriteShaman extends CardImpl {
                 new CardTypePredicate(CardType.SORCERY)));
     }
 
-    public DeathriteShaman(UUID ownerId) {
-        super(ownerId, 213, "Deathrite Shaman", Rarity.RARE, new CardType[]{CardType.CREATURE}, "{B/G}");
-        this.expansionSetCode = "RTR";
+    public DeathriteShaman(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{B/G}");
         this.subtype.add("Elf");
         this.subtype.add("Shaman");
 

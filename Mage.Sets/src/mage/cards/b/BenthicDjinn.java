@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.mirage;
+package mage.cards.b;
 
 import java.util.UUID;
 import mage.MageInt;
@@ -33,8 +33,8 @@ import mage.abilities.common.BeginningOfUpkeepTriggeredAbility;
 import mage.abilities.effects.common.LoseLifeSourceControllerEffect;
 import mage.abilities.keyword.IslandwalkAbility;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.constants.TargetController;
 
 /**
@@ -43,9 +43,8 @@ import mage.constants.TargetController;
  */
 public class BenthicDjinn extends CardImpl {
 
-    public BenthicDjinn(UUID ownerId) {
-        super(ownerId, 317, "Benthic Djinn", Rarity.RARE, new CardType[]{CardType.CREATURE}, "{2}{U}{B}");
-        this.expansionSetCode = "MIR";
+    public BenthicDjinn(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{2}{U}{B}");
         this.subtype.add("Djinn");
         this.power = new MageInt(5);
         this.toughness = new MageInt(3);

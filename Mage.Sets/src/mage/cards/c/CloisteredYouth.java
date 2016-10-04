@@ -25,17 +25,18 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.innistrad;
+package mage.cards.c;
 
 import java.util.UUID;
 
 import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.MageInt;
 import mage.abilities.common.BeginningOfUpkeepTriggeredAbility;
 import mage.abilities.effects.common.TransformSourceEffect;
 import mage.abilities.keyword.TransformAbility;
+import mage.cards.u.UnholyFiend;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.TargetController;
 
 /**
@@ -44,16 +45,15 @@ import mage.constants.TargetController;
  */
 public class CloisteredYouth extends CardImpl {
 
-    public CloisteredYouth(UUID ownerId) {
-        super(ownerId, 8, "Cloistered Youth", Rarity.UNCOMMON, new CardType[]{CardType.CREATURE}, "{1}{W}");
-        this.expansionSetCode = "ISD";
+    public CloisteredYouth(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{1}{W}");
         this.subtype.add("Human");
 
         this.power = new MageInt(1);
         this.toughness = new MageInt(1);
 
         this.transformable = true;
-        this.secondSideCard = new UnholyFiend(ownerId);
+        this.secondSideCardClazz = UnholyFiend.class;
 
         // At the beginning of your upkeep, you may transform Cloistered Youth.
         this.addAbility(new TransformAbility());

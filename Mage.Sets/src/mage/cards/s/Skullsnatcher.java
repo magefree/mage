@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.betrayersofkamigawa;
+package mage.cards.s;
 
 import java.util.UUID;
 import mage.MageInt;
@@ -35,8 +35,8 @@ import mage.abilities.effects.Effect;
 import mage.abilities.effects.common.ExileTargetEffect;
 import mage.abilities.keyword.NinjutsuAbility;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.constants.Zone;
 import mage.filter.FilterCard;
 import mage.filter.common.FilterControlledCreaturePermanent;
@@ -60,9 +60,8 @@ public class Skullsnatcher extends CardImpl {
         filter.add(new UnblockedPredicate());
     }
 
-    public Skullsnatcher(UUID ownerId) {
-        super(ownerId, 84, "Skullsnatcher", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{1}{B}");
-        this.expansionSetCode = "BOK";
+    public Skullsnatcher(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{1}{B}");
         this.subtype.add("Rat");
         this.subtype.add("Ninja");
 

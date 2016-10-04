@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.battleforzendikar;
+package mage.cards.k;
 
 import java.util.UUID;
 import mage.MageInt;
@@ -40,11 +40,11 @@ import mage.abilities.effects.common.CreateTokenEffect;
 import mage.abilities.effects.common.GetEmblemEffect;
 import mage.cards.Card;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.cards.Cards;
 import mage.cards.CardsImpl;
 import mage.constants.CardType;
 import mage.constants.Outcome;
-import mage.constants.Rarity;
 import mage.constants.SetTargetPointer;
 import mage.constants.Zone;
 import mage.filter.common.FilterCreatureCard;
@@ -66,9 +66,8 @@ import mage.target.common.TargetLandPermanent;
  */
 public class KioraMasterOfTheDepths extends CardImpl {
 
-    public KioraMasterOfTheDepths(UUID ownerId) {
-        super(ownerId, 213, "Kiora, Master of the Depths", Rarity.MYTHIC, new CardType[]{CardType.PLANESWALKER}, "{2}{G}{U}");
-        this.expansionSetCode = "BFZ";
+    public KioraMasterOfTheDepths(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.PLANESWALKER},"{2}{G}{U}");
         this.subtype.add("Kiora");
 
         this.addAbility(new PlanswalkerEntersWithLoyalityCountersAbility(4));

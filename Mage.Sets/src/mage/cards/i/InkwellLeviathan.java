@@ -26,16 +26,16 @@
  *  or implied, of BetaSteward_at_googlemail.com.
  */
 
-package mage.sets.conflux;
+package mage.cards.i;
 
 import java.util.UUID;
 import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.MageInt;
 import mage.abilities.keyword.IslandwalkAbility;
 import mage.abilities.keyword.ShroudAbility;
 import mage.abilities.keyword.TrampleAbility;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 
 /**
  *
@@ -43,9 +43,8 @@ import mage.cards.CardImpl;
  */
 public class InkwellLeviathan extends CardImpl {
 
-    public InkwellLeviathan(UUID ownerId) {
-        super(ownerId, 30, "Inkwell Leviathan", Rarity.RARE, new CardType[]{CardType.ARTIFACT, CardType.CREATURE}, "{7}{U}{U}" );
-        this.expansionSetCode = "CON";
+    public InkwellLeviathan(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.ARTIFACT,CardType.CREATURE},"{7}{U}{U}");
         this.subtype.add("Leviathan");
 
         this.power = new MageInt(7);

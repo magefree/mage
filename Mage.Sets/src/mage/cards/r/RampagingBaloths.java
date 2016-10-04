@@ -26,7 +26,7 @@
  *  or implied, of BetaSteward_at_googlemail.com.
  */
 
-package mage.sets.zendikar;
+package mage.cards.r;
 
 import java.util.UUID;
 import mage.MageInt;
@@ -34,8 +34,8 @@ import mage.abilities.common.LandfallAbility;
 import mage.abilities.effects.common.CreateTokenEffect;
 import mage.abilities.keyword.TrampleAbility;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.game.permanent.token.BeastToken2;
 
 /**
@@ -44,9 +44,8 @@ import mage.game.permanent.token.BeastToken2;
  */
 public class RampagingBaloths extends CardImpl {
 
-    public RampagingBaloths(UUID ownerId) {
-        super(ownerId, 178, "Rampaging Baloths", Rarity.MYTHIC, new CardType[]{CardType.CREATURE}, "{4}{G}{G}");
-        this.expansionSetCode = "ZEN";
+    public RampagingBaloths(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{4}{G}{G}");
         this.subtype.add("Beast");
 
         this.power = new MageInt(6);

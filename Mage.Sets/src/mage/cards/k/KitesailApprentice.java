@@ -25,12 +25,11 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.worldwake;
+package mage.cards.k;
 
 import java.util.UUID;
 
 import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.MageInt;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.condition.common.EquippedSourceCondition;
@@ -39,6 +38,7 @@ import mage.abilities.effects.common.continuous.BoostSourceEffect;
 import mage.abilities.effects.common.continuous.GainAbilitySourceEffect;
 import mage.abilities.keyword.FlyingAbility;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.Duration;
 import mage.constants.Zone;
 
@@ -51,9 +51,8 @@ public class KitesailApprentice extends CardImpl {
     private static final String rule1 = "As long as {this} is equipped, it gets +1/+1";
     private static final String rule2 = "As long as {this} is equipped, it has flying";
 
-    public KitesailApprentice(UUID ownerId) {
-        super(ownerId, 10, "Kitesail Apprentice", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{W}");
-        this.expansionSetCode = "WWK";
+    public KitesailApprentice(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{W}");
         this.subtype.add("Kor");
         this.subtype.add("Soldier");
 

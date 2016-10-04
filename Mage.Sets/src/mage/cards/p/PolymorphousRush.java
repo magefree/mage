@@ -25,17 +25,17 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.journeyintonyx;
+package mage.cards.p;
 
 import java.util.UUID;
 import mage.abilities.Ability;
 import mage.abilities.abilityword.StriveAbility;
 import mage.abilities.effects.OneShotEffect;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Duration;
 import mage.constants.Outcome;
-import mage.constants.Rarity;
 import mage.constants.TargetController;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.filter.predicate.permanent.ControllerPredicate;
@@ -58,9 +58,8 @@ public class PolymorphousRush extends CardImpl {
         filter.add(new ControllerPredicate(TargetController.YOU));
     }
 
-    public PolymorphousRush(UUID ownerId) {
-        super(ownerId, 46, "Polymorphous Rush", Rarity.RARE, new CardType[]{CardType.INSTANT}, "{2}{U}");
-        this.expansionSetCode = "JOU";
+    public PolymorphousRush(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.INSTANT},"{2}{U}");
 
         // Strive - Polymorphous Rush costs {1}{U} more to cast for each target beyond the first.
         this.addAbility(new StriveAbility("{1}{U}"));

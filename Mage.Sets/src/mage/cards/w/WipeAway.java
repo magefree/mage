@@ -25,14 +25,14 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.timespiral;
+package mage.cards.w;
 
 import java.util.UUID;
 import mage.abilities.effects.common.ReturnToHandTargetEffect;
 import mage.abilities.keyword.SplitSecondAbility;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.target.TargetPermanent;
 
 /**
@@ -41,9 +41,8 @@ import mage.target.TargetPermanent;
  */
 public class WipeAway extends CardImpl {
 
-    public WipeAway(UUID ownerId) {
-        super(ownerId, 94, "Wipe Away", Rarity.UNCOMMON, new CardType[]{CardType.INSTANT}, "{1}{U}{U}");
-        this.expansionSetCode = "TSP";
+    public WipeAway(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.INSTANT},"{1}{U}{U}");
 
 
         // Split second

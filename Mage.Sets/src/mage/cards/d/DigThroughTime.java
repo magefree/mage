@@ -25,15 +25,15 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.khansoftarkir;
+package mage.cards.d;
 
 import java.util.UUID;
 import mage.abilities.dynamicvalue.common.StaticValue;
 import mage.abilities.effects.common.LookLibraryAndPickControllerEffect;
 import mage.abilities.keyword.DelveAbility;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.constants.Zone;
 import mage.filter.FilterCard;
 
@@ -43,9 +43,8 @@ import mage.filter.FilterCard;
  */
 public class DigThroughTime extends CardImpl {
 
-    public DigThroughTime(UUID ownerId) {
-        super(ownerId, 36, "Dig Through Time", Rarity.RARE, new CardType[]{CardType.INSTANT}, "{6}{U}{U}");
-        this.expansionSetCode = "KTK";
+    public DigThroughTime(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.INSTANT},"{6}{U}{U}");
 
 
         // Delve

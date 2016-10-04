@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.invasion;
+package mage.cards.o;
 
 import java.util.UUID;
 import mage.MageInt;
@@ -33,8 +33,8 @@ import mage.abilities.dynamicvalue.common.DomainValue;
 import mage.abilities.effects.common.CreateTokenEffect;
 import mage.abilities.keyword.FlyingAbility;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.game.permanent.token.Token;
 
 /**
@@ -44,9 +44,8 @@ import mage.game.permanent.token.Token;
  */
 public class OrderedMigration extends CardImpl {
 
-    public OrderedMigration(UUID ownerId) {
-        super(ownerId, 258, "Ordered Migration", Rarity.UNCOMMON, new CardType[]{CardType.SORCERY}, "{3}{W}{U}");
-        this.expansionSetCode = "INV";
+    public OrderedMigration(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{3}{W}{U}");
 
         // Domain - Put a 1/1 blue Bird creature token with flying onto the battlefield for each basic land type among lands you control.
         this.getSpellAbility().addEffect(new CreateTokenEffect(new BirdToken(), new DomainValue()));

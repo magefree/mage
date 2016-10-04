@@ -25,16 +25,16 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.gatecrash;
+package mage.cards.b;
 
 import java.util.UUID;
 import mage.abilities.dynamicvalue.DynamicValue;
 import mage.abilities.dynamicvalue.common.ManacostVariableValue;
 import mage.abilities.effects.common.continuous.SetPowerToughnessAllEffect;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Duration;
-import mage.constants.Rarity;
 import mage.filter.common.FilterControlledCreaturePermanent;
 
 /**
@@ -43,9 +43,8 @@ import mage.filter.common.FilterControlledCreaturePermanent;
  */
 public class BiomassMutation extends CardImpl {
 
-    public BiomassMutation(UUID ownerId) {
-        super(ownerId, 213, "Biomass Mutation", Rarity.RARE, new CardType[]{CardType.INSTANT}, "{X}{G/U}{G/U}");
-        this.expansionSetCode = "GTC";
+    public BiomassMutation(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.INSTANT},"{X}{G/U}{G/U}");
 
 
         // Creatures you control have base power and toughness X/X until end of turn.

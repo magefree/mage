@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.planeshift;
+package mage.cards.m;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -37,11 +37,11 @@ import mage.abilities.costs.common.TapSourceCost;
 import mage.abilities.effects.common.ManaEffect;
 import mage.abilities.mana.SimpleManaAbility;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.choices.Choice;
 import mage.choices.ChoiceImpl;
 import mage.constants.CardType;
 import mage.constants.ColoredManaSymbol;
-import mage.constants.Rarity;
 import mage.constants.Zone;
 import mage.filter.common.FilterControlledPermanent;
 import mage.game.Game;
@@ -54,9 +54,8 @@ import mage.players.Player;
  */
 public class MeteorCrater extends CardImpl {
 
-    public MeteorCrater(UUID ownerId) {
-        super(ownerId, 140, "Meteor Crater", Rarity.RARE, new CardType[]{CardType.LAND}, "");
-        this.expansionSetCode = "PLS";
+    public MeteorCrater(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.LAND},"");
 
         // {tap}: Choose a color of a permanent you control. Add one mana of that color to your mana pool.
         this.addAbility(new SimpleManaAbility(Zone.BATTLEFIELD, new MeteorCraterEffect(), new TapSourceCost()));

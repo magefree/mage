@@ -25,16 +25,16 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.shardsofalara;
+package mage.cards.w;
 
 import java.util.UUID;
 
 import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.abilities.Ability;
 import mage.abilities.common.EntersBattlefieldControlledTriggeredAbility;
 import mage.abilities.effects.common.DamageTargetEffect;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.Zone;
 import mage.filter.Filter;
 import mage.filter.common.FilterCreaturePermanent;
@@ -52,9 +52,8 @@ import mage.target.common.TargetCreatureOrPlayer;
         filter.add(new PowerPredicate(Filter.ComparisonType.GreaterThan, 4));
     }
 
-    public WhereAncientsTread(UUID ownerId) {
-        super(ownerId, 122, "Where Ancients Tread", Rarity.RARE, new CardType[]{CardType.ENCHANTMENT}, "{4}{R}");
-        this.expansionSetCode = "ALA";
+    public WhereAncientsTread(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.ENCHANTMENT},"{4}{R}");
 
 
         // Whenever a creature with power 5 or greater enters the battlefield under your control, you may have Where Ancients Tread deal 5 damage to target creature or player.

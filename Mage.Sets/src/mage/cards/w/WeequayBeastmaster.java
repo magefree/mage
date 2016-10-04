@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.starwars;
+package mage.cards.w;
 
 import java.util.UUID;
 import mage.MageInt;
@@ -35,8 +35,8 @@ import mage.abilities.effects.common.cost.AbilitiesCostReductionControllerEffect
 import mage.abilities.effects.common.counter.AddCountersTargetEffect;
 import mage.abilities.keyword.MonstrosityAbility;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.constants.Zone;
 import mage.counters.CounterType;
 
@@ -46,9 +46,8 @@ import mage.counters.CounterType;
  */
 public class WeequayBeastmaster extends CardImpl {
 
-    public WeequayBeastmaster(UUID ownerId) {
-        super(ownerId, 127, "Weequay Beastmaster", Rarity.UNCOMMON, new CardType[]{CardType.CREATURE}, "{1}{R}");
-        this.expansionSetCode = "SWS";
+    public WeequayBeastmaster(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{1}{R}");
         this.subtype.add("Weequay");
         this.subtype.add("Shaman");
         this.power = new MageInt(2);

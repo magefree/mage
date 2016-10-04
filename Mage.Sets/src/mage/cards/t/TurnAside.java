@@ -26,13 +26,13 @@
  *  or implied, of BetaSteward_at_googlemail.com.
  */
 
-package mage.sets.scarsofmirrodin;
+package mage.cards.t;
 
 import java.util.UUID;
 import mage.abilities.effects.common.CounterTargetEffect;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.filter.FilterSpell;
 import mage.filter.common.FilterControlledPermanent;
 import mage.filter.predicate.other.TargetsPermanentPredicate;
@@ -50,9 +50,8 @@ public class TurnAside extends CardImpl {
         filter.add(new TargetsPermanentPredicate(new FilterControlledPermanent()));
     }
 
-    public TurnAside(UUID ownerId) {
-        super(ownerId, 49, "Turn Aside", Rarity.COMMON, new CardType[]{CardType.INSTANT}, "{U}");
-        this.expansionSetCode = "SOM";
+    public TurnAside(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.INSTANT},"{U}");
 
         // Counter target spell that targets a permanent you control.
         this.getSpellAbility().addEffect(new CounterTargetEffect());

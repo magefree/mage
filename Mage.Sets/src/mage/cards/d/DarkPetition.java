@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.magicorigins;
+package mage.cards.d;
 
 import java.util.UUID;
 import mage.Mana;
@@ -35,8 +35,8 @@ import mage.abilities.effects.Effect;
 import mage.abilities.effects.common.AddManaToManaPoolSourceControllerEffect;
 import mage.abilities.effects.common.search.SearchLibraryPutInHandEffect;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.target.common.TargetCardInLibrary;
 
 /**
@@ -45,9 +45,8 @@ import mage.target.common.TargetCardInLibrary;
  */
 public class DarkPetition extends CardImpl {
 
-    public DarkPetition(UUID ownerId) {
-        super(ownerId, 90, "Dark Petition", Rarity.RARE, new CardType[]{CardType.SORCERY}, "{3}{B}{B}");
-        this.expansionSetCode = "ORI";
+    public DarkPetition(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{3}{B}{B}");
 
         // Search your library for a card and put that card into your hand. Then shuffle your library.
         this.getSpellAbility().addEffect(new SearchLibraryPutInHandEffect(new TargetCardInLibrary()));

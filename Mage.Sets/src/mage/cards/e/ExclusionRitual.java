@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.newphyrexia;
+package mage.cards.e;
 
 import java.util.UUID;
 import mage.abilities.Ability;
@@ -35,6 +35,7 @@ import mage.abilities.effects.ContinuousRuleModifyingEffectImpl;
 import mage.abilities.effects.OneShotEffect;
 import mage.cards.Card;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.*;
 import mage.filter.FilterPermanent;
 import mage.filter.predicate.Predicates;
@@ -56,9 +57,8 @@ public class ExclusionRitual extends CardImpl {
         filter.add(Predicates.not(new CardTypePredicate(CardType.LAND)));
     }
 
-    public ExclusionRitual(UUID ownerId) {
-        super(ownerId, 10, "Exclusion Ritual", Rarity.UNCOMMON, new CardType[]{CardType.ENCHANTMENT}, "{4}{W}{W}");
-        this.expansionSetCode = "NPH";
+    public ExclusionRitual(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.ENCHANTMENT},"{4}{W}{W}");
 
         // Imprint - When Exclusion Ritual enters the battlefield, exile target nonland permanent.
         Ability ability = new EntersBattlefieldTriggeredAbility(new ExclusionRitualImprintEffect(), false);

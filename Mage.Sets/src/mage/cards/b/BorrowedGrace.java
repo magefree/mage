@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.eldritchmoon;
+package mage.cards.b;
 
 import java.util.UUID;
 import mage.abilities.Mode;
@@ -33,9 +33,9 @@ import mage.abilities.costs.mana.ManaCostsImpl;
 import mage.abilities.effects.common.continuous.BoostControlledEffect;
 import mage.abilities.keyword.EscalateAbility;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Duration;
-import mage.constants.Rarity;
 
 /**
  *
@@ -43,9 +43,8 @@ import mage.constants.Rarity;
  */
 public class BorrowedGrace extends CardImpl {
 
-    public BorrowedGrace(UUID ownerId) {
-        super(ownerId, 14, "Borrowed Grace", Rarity.COMMON, new CardType[]{CardType.INSTANT}, "{2}{W}");
-        this.expansionSetCode = "EMN";
+    public BorrowedGrace(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.INSTANT},"{2}{W}");
 
         // Escalate {1}{W}
         this.addAbility(new EscalateAbility(new ManaCostsImpl<>("{1}{W}")));

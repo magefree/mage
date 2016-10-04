@@ -25,13 +25,13 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.tempest;
+package mage.cards.t;
 
 import java.util.UUID;
 import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.abilities.effects.common.PutOnLibraryTargetEffect;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.target.common.TargetCreaturePermanent;
 
 /**
@@ -40,9 +40,8 @@ import mage.target.common.TargetCreaturePermanent;
  */
 public class TimeEbb extends CardImpl {
 
-    public TimeEbb(UUID ownerId) {
-        super(ownerId, 96, "Time Ebb", Rarity.COMMON, new CardType[]{CardType.SORCERY}, "{2}{U}");
-        this.expansionSetCode = "TMP";
+    public TimeEbb(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{2}{U}");
 
         this.getSpellAbility().addEffect(new PutOnLibraryTargetEffect(true));
         this.getSpellAbility().addTarget(new TargetCreaturePermanent());

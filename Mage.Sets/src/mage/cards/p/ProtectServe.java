@@ -26,13 +26,13 @@
  *  or implied, of BetaSteward_at_googlemail.com.
  */
 
-package mage.sets.dragonsmaze;
+package mage.cards.p;
 
 import java.util.UUID;
 import mage.constants.CardType;
 import mage.constants.Duration;
-import mage.constants.Rarity;
 import mage.abilities.effects.common.continuous.BoostTargetEffect;
+import mage.cards.CardSetInfo;
 import mage.cards.SplitCard;
 import mage.target.common.TargetCreaturePermanent;
 
@@ -44,9 +44,8 @@ import mage.target.common.TargetCreaturePermanent;
 
 public class ProtectServe extends SplitCard {
 
-    public ProtectServe(UUID ownerId) {
-        super(ownerId, 131, "Protect", "Serve", Rarity.UNCOMMON, new CardType[]{CardType.INSTANT}, "{2}{W}", "{1}{U}", true);
-        this.expansionSetCode = "DGM";
+    public ProtectServe(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.INSTANT},"{2}{W}","{1}{U}",true);
 
         // Protect
         // Target creature gets +2/+4 until end of turn.

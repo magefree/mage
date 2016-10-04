@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.fifthdawn;
+package mage.cards.b;
 
 import java.util.UUID;
 import mage.MageInt;
@@ -38,8 +38,8 @@ import mage.abilities.effects.common.DoIfCostPaid;
 import mage.abilities.effects.common.search.SearchLibraryPutOnLibraryEffect;
 import mage.abilities.keyword.TrampleAbility;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.constants.TargetController;
 import mage.constants.Zone;
 import mage.target.common.TargetCardInLibrary;
@@ -50,9 +50,8 @@ import mage.target.common.TargetCardInLibrary;
  */
 public class BringerOfTheBlackDawn extends CardImpl {
 
-    public BringerOfTheBlackDawn(UUID ownerId) {
-        super(ownerId, 43, "Bringer of the Black Dawn", Rarity.RARE, new CardType[]{CardType.CREATURE}, "{7}{B}{B}");
-        this.expansionSetCode = "5DN";
+    public BringerOfTheBlackDawn(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{7}{B}{B}");
         this.subtype.add("Bringer");
 
         this.power = new MageInt(5);

@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.planarchaos;
+package mage.cards.f;
 
 import java.util.UUID;
 import mage.MageInt;
@@ -38,10 +38,10 @@ import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.ExileReturnBattlefieldOwnerNextEndStepSourceEffect;
 import mage.abilities.effects.common.continuous.GainAbilityAllEffect;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Duration;
 import mage.constants.Outcome;
-import mage.constants.Rarity;
 import mage.constants.Zone;
 import mage.filter.FilterPermanent;
 import mage.game.Game;
@@ -56,9 +56,8 @@ public class FreneticSliver extends CardImpl {
 
     private static final FilterPermanent filter = new FilterPermanent("Sliver", "All Slivers");
 
-    public FreneticSliver(UUID ownerId) {
-        super(ownerId, 157, "Frenetic Sliver", Rarity.UNCOMMON, new CardType[]{CardType.CREATURE}, "{1}{U}{R}");
-        this.expansionSetCode = "PLC";
+    public FreneticSliver(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{1}{U}{R}");
         this.subtype.add("Sliver");
         this.power = new MageInt(2);
         this.toughness = new MageInt(2);

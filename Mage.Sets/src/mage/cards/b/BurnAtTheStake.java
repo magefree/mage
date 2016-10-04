@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.avacynrestored;
+package mage.cards.b;
 
 import java.util.UUID;
 import mage.abilities.Ability;
@@ -33,9 +33,9 @@ import mage.abilities.costs.common.TapVariableTargetCost;
 import mage.abilities.dynamicvalue.common.GetXValue;
 import mage.abilities.effects.OneShotEffect;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Outcome;
-import mage.constants.Rarity;
 import mage.filter.common.FilterControlledCreaturePermanent;
 import mage.filter.predicate.Predicates;
 import mage.filter.predicate.permanent.TappedPredicate;
@@ -56,9 +56,8 @@ public class BurnAtTheStake extends CardImpl {
         filter.add(Predicates.not(new TappedPredicate()));
     }
 
-    public BurnAtTheStake(UUID ownerId) {
-        super(ownerId, 130, "Burn at the Stake", Rarity.RARE, new CardType[]{CardType.SORCERY}, "{2}{R}{R}{R}");
-        this.expansionSetCode = "AVR";
+    public BurnAtTheStake(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{2}{R}{R}{R}");
 
 
         // As an additional cost to cast Burn at the Stake, tap any number of untapped creatures you control.

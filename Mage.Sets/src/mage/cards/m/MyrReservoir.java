@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.scarsofmirrodin;
+package mage.cards.m;
 
 import java.util.UUID;
 import mage.ConditionalMana;
@@ -40,8 +40,8 @@ import mage.abilities.effects.common.BasicManaEffect;
 import mage.abilities.effects.common.ReturnToHandTargetEffect;
 import mage.abilities.mana.BasicManaAbility;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.constants.Zone;
 import mage.filter.FilterCard;
 import mage.filter.predicate.mageobject.SubtypePredicate;
@@ -59,9 +59,8 @@ public class MyrReservoir extends CardImpl {
         myrCardFilter.add(new SubtypePredicate("Myr"));
     }
 
-    public MyrReservoir(UUID ownerId) {
-        super(ownerId, 183, "Myr Reservoir", Rarity.RARE, new CardType[]{CardType.ARTIFACT}, "{3}");
-        this.expansionSetCode = "SOM";
+    public MyrReservoir(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.ARTIFACT},"{3}");
 
         // {tap}: Add {C}{C} to your mana pool. Spend this mana only to cast Myr spells or activate abilities of Myr.
         this.addAbility(new MyrReservoirManaAbility());

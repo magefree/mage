@@ -25,15 +25,15 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.starter1999;
+package mage.cards.g;
 
 import java.util.UUID;
 import mage.abilities.dynamicvalue.MultipliedValue;
 import mage.abilities.dynamicvalue.common.CardsInControllerHandCount;
 import mage.abilities.effects.common.GainLifeEffect;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.Rarity;
 
 /**
  *
@@ -42,9 +42,8 @@ import mage.constants.Rarity;
  */
 public class GerrardsWisdom extends CardImpl {
 
-    public GerrardsWisdom(UUID ownerId) {
-        super(ownerId, 18, "Gerrard's Wisdom", Rarity.RARE, new CardType[]{CardType.SORCERY}, "{2}{W}{W}");
-        this.expansionSetCode = "S99";
+    public GerrardsWisdom(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{2}{W}{W}");
 
         // You gain 2 life for each card in your hand.
         this.getSpellAbility().addEffect(new GainLifeEffect(new MultipliedValue(new CardsInControllerHandCount(), 2),

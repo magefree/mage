@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.saviorsofkamigawa;
+package mage.cards.m;
 
 import java.util.UUID;
 import mage.abilities.common.SimpleStaticAbility;
@@ -34,9 +34,9 @@ import mage.abilities.dynamicvalue.common.SignInversionDynamicValue;
 import mage.abilities.dynamicvalue.common.StaticValue;
 import mage.abilities.effects.common.continuous.BoostAllEffect;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Duration;
-import mage.constants.Rarity;
 import mage.constants.Zone;
 import mage.filter.common.FilterCreaturePermanent;
 
@@ -46,9 +46,8 @@ import mage.filter.common.FilterCreaturePermanent;
  */
 public class MeishinTheMindCage extends CardImpl {
 
-    public MeishinTheMindCage(UUID ownerId) {
-        super(ownerId, 44, "Meishin, the Mind Cage", Rarity.RARE, new CardType[]{CardType.ENCHANTMENT}, "{4}{U}{U}{U}");
-        this.expansionSetCode = "SOK";
+    public MeishinTheMindCage(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.ENCHANTMENT},"{4}{U}{U}{U}");
         this.supertype.add("Legendary");
 
 

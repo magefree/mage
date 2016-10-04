@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.shardsofalara;
+package mage.cards.s;
 
 import mage.abilities.Ability;
 import mage.abilities.DelayedTriggeredAbility;
@@ -33,10 +33,10 @@ import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.CreateTokenEffect;
 import mage.abilities.effects.common.DamageTargetEffect;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Duration;
 import mage.constants.Outcome;
-import mage.constants.Rarity;
 import mage.game.Game;
 import mage.game.events.GameEvent;
 import mage.game.events.GameEvent.EventType;
@@ -53,9 +53,8 @@ import java.util.UUID;
  */
 public class Skeletonize extends CardImpl {
 
-    public Skeletonize(UUID ownerId) {
-        super(ownerId, 114, "Skeletonize", Rarity.UNCOMMON, new CardType[]{CardType.INSTANT}, "{4}{R}");
-        this.expansionSetCode = "ALA";
+    public Skeletonize(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.INSTANT},"{4}{R}");
 
         // Skeletonize deals 3 damage to target creature.
         this.getSpellAbility().addEffect(new DamageTargetEffect(3));

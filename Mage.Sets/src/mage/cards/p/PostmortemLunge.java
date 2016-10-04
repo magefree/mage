@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.newphyrexia;
+package mage.cards.p;
 
 import java.util.UUID;
 import mage.abilities.Ability;
@@ -37,11 +37,11 @@ import mage.abilities.effects.common.continuous.GainAbilityTargetEffect;
 import mage.abilities.keyword.HasteAbility;
 import mage.cards.Card;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.AbilityType;
 import mage.constants.CardType;
 import mage.constants.Duration;
 import mage.constants.Outcome;
-import mage.constants.Rarity;
 import mage.constants.Zone;
 import mage.filter.Filter;
 import mage.filter.FilterCard;
@@ -59,9 +59,8 @@ import mage.target.targetpointer.FixedTarget;
  */
 public class PostmortemLunge extends CardImpl {
 
-    public PostmortemLunge(UUID ownerId) {
-        super(ownerId, 70, "Postmortem Lunge", Rarity.UNCOMMON, new CardType[]{CardType.SORCERY}, "{X}{BP}");
-        this.expansionSetCode = "NPH";
+    public PostmortemLunge(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{X}{BP}");
 
         // Return target creature card with converted mana cost X from your graveyard to the battlefield. It gains haste. Exile it at the beginning of the next end step.
         this.getSpellAbility().addEffect(new PostmortemLungeEffect());

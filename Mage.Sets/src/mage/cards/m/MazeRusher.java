@@ -26,18 +26,18 @@
  *  or implied, of BetaSteward_at_googlemail.com.
  */
 
-package mage.sets.dragonsmaze;
+package mage.cards.m;
 
 import java.util.UUID;
 import mage.constants.CardType;
 import mage.constants.Duration;
-import mage.constants.Rarity;
 import mage.constants.Zone;
 import mage.MageInt;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.effects.common.continuous.GainAbilityAllEffect;
 import mage.abilities.keyword.HasteAbility;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.filter.common.FilterControlledCreaturePermanent;
 import mage.filter.predicate.mageobject.MulticoloredPredicate;
 
@@ -54,9 +54,8 @@ public class MazeRusher extends CardImpl {
         filter.add(new MulticoloredPredicate());
     }
 
-    public MazeRusher (UUID ownerId) {
-        super(ownerId, 33, "Maze Rusher", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{5}{R}");
-        this.expansionSetCode = "DGM";
+    public MazeRusher (UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{5}{R}");
         this.subtype.add("Elemental");
 
         this.power = new MageInt(6);

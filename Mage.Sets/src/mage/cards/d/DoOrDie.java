@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.invasion;
+package mage.cards.d;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -33,9 +33,9 @@ import java.util.UUID;
 import mage.abilities.Ability;
 import mage.abilities.effects.OneShotEffect;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Outcome;
-import mage.constants.Rarity;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
@@ -49,9 +49,8 @@ import mage.target.common.TargetCreaturePermanent;
  */
 public class DoOrDie extends CardImpl {
 
-    public DoOrDie(UUID ownerId) {
-        super(ownerId, 102, "Do or Die", Rarity.RARE, new CardType[]{CardType.SORCERY}, "{1}{B}");
-        this.expansionSetCode = "INV";
+    public DoOrDie(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{1}{B}");
 
         // Separate all creatures target player controls into two piles. Destroy all creatures in the pile of that player's choice. They can't be regenerated.
         this.getSpellAbility().addEffect(new DoOrDieEffect());

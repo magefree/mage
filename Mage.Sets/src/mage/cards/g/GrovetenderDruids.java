@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.battleforzendikar;
+package mage.cards.g;
 
 import java.util.UUID;
 import mage.MageInt;
@@ -36,9 +36,9 @@ import mage.abilities.costs.mana.ManaCostsImpl;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.CreateTokenEffect;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Outcome;
-import mage.constants.Rarity;
 import mage.game.Game;
 import mage.game.permanent.token.Token;
 import mage.players.Player;
@@ -49,9 +49,8 @@ import mage.players.Player;
  */
 public class GrovetenderDruids extends CardImpl {
 
-    public GrovetenderDruids(UUID ownerId) {
-        super(ownerId, 212, "Grovetender Druids", Rarity.UNCOMMON, new CardType[]{CardType.CREATURE}, "{2}{G}{W}");
-        this.expansionSetCode = "BFZ";
+    public GrovetenderDruids(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{2}{G}{W}");
         this.subtype.add("Elf");
         this.subtype.add("Druid");
         this.subtype.add("Ally");

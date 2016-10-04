@@ -25,12 +25,11 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.shadowmoor;
+package mage.cards.s;
 
 import java.util.UUID;
 
 import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.constants.Zone;
 import mage.MageInt;
 import mage.abilities.common.BeginningOfEndStepTriggeredAbility;
@@ -38,6 +37,7 @@ import mage.abilities.condition.Condition;
 import mage.abilities.condition.common.OpponentLostLifeCondition;
 import mage.abilities.effects.common.DrawCardSourceControllerEffect;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.TargetController;
 
 /**
@@ -46,9 +46,8 @@ import mage.constants.TargetController;
  */
 public class SyggRiverCutthroat extends CardImpl {
 
-    public SyggRiverCutthroat(UUID ownerId) {
-        super(ownerId, 176, "Sygg, River Cutthroat", Rarity.RARE, new CardType[]{CardType.CREATURE}, "{U/B}{U/B}");
-        this.expansionSetCode = "SHM";
+    public SyggRiverCutthroat(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{U/B}{U/B}");
         this.supertype.add("Legendary");
         this.subtype.add("Merfolk");
         this.subtype.add("Rogue");

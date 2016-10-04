@@ -26,15 +26,15 @@
  *  or implied, of BetaSteward_at_googlemail.com.
  */
 
-package mage.sets.riseoftheeldrazi;
+package mage.cards.u;
 
 import java.util.UUID;
 import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.MageInt;
 import mage.abilities.common.AttacksEachTurnStaticAbility;
 import mage.abilities.keyword.AnnihilatorAbility;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 
 /**
  *
@@ -42,9 +42,8 @@ import mage.cards.CardImpl;
  */
 public class UlamogsCrusher extends CardImpl {
 
-    public UlamogsCrusher (UUID ownerId) {
-        super(ownerId, 13, "Ulamog's Crusher", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{8}");
-        this.expansionSetCode = "ROE";
+    public UlamogsCrusher (UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{8}");
         this.subtype.add("Eldrazi");
         this.power = new MageInt(8);
         this.toughness = new MageInt(8);

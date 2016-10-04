@@ -25,14 +25,14 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.tenthedition;
+package mage.cards.w;
 
 import java.util.UUID;
 
 import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.abilities.effects.common.continuous.BoostControlledEffect;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.Duration;
 import mage.filter.common.FilterCreaturePermanent;
 
@@ -42,9 +42,8 @@ import mage.filter.common.FilterCreaturePermanent;
  */
 public class WarriorsHonor extends CardImpl {
 
-    public WarriorsHonor(UUID ownerId) {
-        super(ownerId, 58, "Warrior's Honor", Rarity.COMMON, new CardType[]{CardType.INSTANT}, "{2}{W}");
-        this.expansionSetCode = "10E";
+    public WarriorsHonor(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.INSTANT},"{2}{W}");
 
         this.getSpellAbility().addEffect(new BoostControlledEffect(1, 1, Duration.EndOfTurn, new FilterCreaturePermanent(), false));
     }

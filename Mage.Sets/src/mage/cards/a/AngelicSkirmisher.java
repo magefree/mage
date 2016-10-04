@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.gatecrash;
+package mage.cards.a;
 
 import java.util.HashSet;
 import java.util.Set;
@@ -40,12 +40,12 @@ import mage.abilities.keyword.FlyingAbility;
 import mage.abilities.keyword.LifelinkAbility;
 import mage.abilities.keyword.VigilanceAbility;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.choices.Choice;
 import mage.choices.ChoiceImpl;
 import mage.constants.CardType;
 import mage.constants.Duration;
 import mage.constants.Outcome;
-import mage.constants.Rarity;
 import mage.constants.TargetController;
 import mage.filter.common.FilterControlledCreaturePermanent;
 import mage.game.Game;
@@ -58,9 +58,8 @@ import mage.players.Player;
  */
 public class AngelicSkirmisher extends CardImpl {
 
-    public AngelicSkirmisher(UUID ownerId) {
-        super(ownerId, 3, "Angelic Skirmisher", Rarity.RARE, new CardType[]{CardType.CREATURE}, "{4}{W}{W}");
-        this.expansionSetCode = "GTC";
+    public AngelicSkirmisher(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{4}{W}{W}");
         this.subtype.add("Angel");
 
         this.power = new MageInt(4);

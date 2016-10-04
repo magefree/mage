@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.commander2015;
+package mage.cards.d;
 
 import java.util.HashSet;
 import java.util.Set;
@@ -38,9 +38,9 @@ import mage.abilities.effects.OneShotEffect;
 import mage.abilities.keyword.FlyingAbility;
 import mage.cards.Card;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Outcome;
-import mage.constants.Rarity;
 import mage.constants.TargetController;
 import mage.constants.Zone;
 import mage.filter.common.FilterCreatureCard;
@@ -57,9 +57,8 @@ import mage.target.common.TargetOpponent;
  */
 public class DawnbreakReclaimer extends CardImpl {
 
-    public DawnbreakReclaimer(UUID ownerId) {
-        super(ownerId, 2, "Dawnbreak Reclaimer", Rarity.RARE, new CardType[]{CardType.CREATURE}, "{4}{W}{W}");
-        this.expansionSetCode = "C15";
+    public DawnbreakReclaimer(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{4}{W}{W}");
         this.subtype.add("Angel");
         this.power = new MageInt(5);
         this.toughness = new MageInt(5);

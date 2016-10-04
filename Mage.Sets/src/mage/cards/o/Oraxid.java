@@ -25,15 +25,15 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.nemesis;
+package mage.cards.o;
 
 import java.util.UUID;
 import mage.MageInt;
 import mage.ObjectColor;
 import mage.abilities.keyword.ProtectionAbility;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.filter.FilterCard;
 import mage.filter.predicate.mageobject.ColorPredicate;
 
@@ -49,9 +49,8 @@ public class Oraxid extends CardImpl {
         filter.add(new ColorPredicate(ObjectColor.RED));
     }
 
-    public Oraxid(UUID ownerId) {
-        super(ownerId, 35, "Oraxid", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{3}{U}");
-        this.expansionSetCode = "NEM";
+    public Oraxid(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{3}{U}");
         this.subtype.add("Crab");
         this.subtype.add("Beast");
         this.power = new MageInt(2);

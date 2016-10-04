@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.worldwake;
+package mage.cards.a;
 
 import java.util.UUID;
 
@@ -33,6 +33,7 @@ import mage.constants.*;
 import mage.abilities.Ability;
 import mage.abilities.effects.OneShotEffect;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.filter.FilterPermanent;
 import mage.filter.predicate.permanent.ControllerPredicate;
 import mage.game.Game;
@@ -52,9 +53,8 @@ public class AetherTradewinds extends CardImpl {
         filter.add(new ControllerPredicate(TargetController.NOT_YOU));
     }
 
-    public AetherTradewinds(UUID ownerId) {
-        super(ownerId, 24, "Aether Tradewinds", Rarity.COMMON, new CardType[]{CardType.INSTANT}, "{2}{U}");
-        this.expansionSetCode = "WWK";
+    public AetherTradewinds(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.INSTANT},"{2}{U}");
 
 
         // Return target permanent you control and target permanent you don't control to their owners' hands.

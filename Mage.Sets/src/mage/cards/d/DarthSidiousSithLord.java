@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.starwars;
+package mage.cards.d;
 
 import java.util.UUID;
 import mage.abilities.Ability;
@@ -37,9 +37,9 @@ import mage.abilities.effects.common.SacrificeEffect;
 import mage.abilities.effects.common.continuous.GainControlTargetEffect;
 import mage.abilities.effects.common.discard.DiscardTargetEffect;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Duration;
-import mage.constants.Rarity;
 import mage.filter.FilterPermanent;
 import mage.filter.predicate.Predicates;
 import mage.filter.predicate.mageobject.CardTypePredicate;
@@ -59,9 +59,8 @@ public class DarthSidiousSithLord extends CardImpl {
         filter.add(Predicates.not(new CardTypePredicate(CardType.CREATURE)));
     }
 
-    public DarthSidiousSithLord(UUID ownerId) {
-        super(ownerId, 192, "Darth Sidious, Sith Lord", Rarity.MYTHIC, new CardType[]{CardType.PLANESWALKER}, "{3}{U}{B}{B}{R}");
-        this.expansionSetCode = "SWS";
+    public DarthSidiousSithLord(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.PLANESWALKER},"{3}{U}{B}{B}{R}");
         this.subtype.add("Sidious");
 
         this.addAbility(new PlanswalkerEntersWithLoyalityCountersAbility(5));

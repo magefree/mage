@@ -25,13 +25,12 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.returntoravnica;
+package mage.cards.t;
 
 import java.util.UUID;
 
 import mage.constants.CardType;
 import mage.constants.Duration;
-import mage.constants.Rarity;
 import mage.constants.Outcome;
 import mage.constants.TargetController;
 import mage.abilities.Ability;
@@ -42,6 +41,7 @@ import mage.abilities.effects.common.continuous.BoostAllEffect;
 import mage.abilities.effects.common.continuous.BoostTargetEffect;
 import mage.abilities.keyword.OverloadAbility;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.TimingRule;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.filter.predicate.permanent.ControllerPredicate;
@@ -63,9 +63,8 @@ public class Teleportal extends CardImpl {
         filter.add(new ControllerPredicate(TargetController.YOU));
     }
 
-    public Teleportal(UUID ownerId) {
-        super(ownerId, 202, "Teleportal", Rarity.UNCOMMON, new CardType[]{CardType.SORCERY}, "{U}{R}");
-        this.expansionSetCode = "RTR";
+    public Teleportal(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{U}{R}");
 
 
         // Target creature you control gets +1/+0 until end of turn and can't be blocked this turn.

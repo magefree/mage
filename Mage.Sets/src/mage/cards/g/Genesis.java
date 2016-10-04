@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.judgment;
+package mage.cards.g;
 
 import java.util.UUID;
 import mage.MageInt;
@@ -35,8 +35,8 @@ import mage.abilities.costs.mana.ManaCostsImpl;
 import mage.abilities.effects.common.DoIfCostPaid;
 import mage.abilities.effects.common.ReturnFromGraveyardToHandTargetEffect;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.constants.TargetController;
 import mage.constants.Zone;
 import mage.filter.common.FilterCreatureCard;
@@ -48,9 +48,8 @@ import mage.target.common.TargetCardInYourGraveyard;
  */
 public class Genesis extends CardImpl {
 
-    public Genesis(UUID ownerId) {
-        super(ownerId, 117, "Genesis", Rarity.RARE, new CardType[]{CardType.CREATURE}, "{4}{G}");
-        this.expansionSetCode = "JUD";
+    public Genesis(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{4}{G}");
         this.subtype.add("Incarnation");
 
         this.power = new MageInt(4);

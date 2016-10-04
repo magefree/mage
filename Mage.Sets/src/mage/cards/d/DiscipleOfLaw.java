@@ -26,17 +26,17 @@
 * or implied, of BetaSteward_at_googlemail.com.
 */
 
-package mage.sets.urzassaga;
+package mage.cards.d;
 
 import java.util.UUID;
 import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.MageInt;
 import mage.ObjectColor;
 import mage.abilities.costs.mana.ManaCostsImpl;
 import mage.abilities.keyword.CyclingAbility;
 import mage.abilities.keyword.ProtectionAbility;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.filter.FilterCard;
 import mage.filter.predicate.mageobject.ColorPredicate;
 
@@ -52,9 +52,8 @@ public class DiscipleOfLaw extends CardImpl {
         filter.add(new ColorPredicate(ObjectColor.RED));
     }
 
-    public DiscipleOfLaw(UUID ownerId) {
-        super(ownerId, 11, "Disciple of Law", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{1}{W}");
-        this.expansionSetCode = "USG";
+    public DiscipleOfLaw(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{1}{W}");
         this.subtype.add("Human");
         this.subtype.add("Cleric");
 

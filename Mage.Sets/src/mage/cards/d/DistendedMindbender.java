@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.eldritchmoon;
+package mage.cards.d;
 
 import java.util.List;
 import java.util.UUID;
@@ -37,9 +37,9 @@ import mage.abilities.effects.common.CastSourceTriggeredAbility;
 import mage.abilities.keyword.EmergeAbility;
 import mage.cards.Card;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Outcome;
-import mage.constants.Rarity;
 import mage.constants.Zone;
 import mage.filter.Filter;
 import mage.filter.FilterCard;
@@ -57,9 +57,8 @@ import mage.target.common.TargetOpponent;
  */
 public class DistendedMindbender extends CardImpl {
 
-    public DistendedMindbender(UUID ownerId) {
-        super(ownerId, 3, "Distended Mindbender", Rarity.RARE, new CardType[]{CardType.CREATURE}, "{8}");
-        this.expansionSetCode = "EMN";
+    public DistendedMindbender(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{8}");
         this.subtype.add("Eldrazi");
         this.subtype.add("Insect");
         this.power = new MageInt(5);

@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.riseoftheeldrazi;
+package mage.cards.w;
 
 import mage.constants.*;
 import mage.abilities.Ability;
@@ -36,6 +36,7 @@ import mage.abilities.effects.common.continuous.BoostEquippedEffect;
 import mage.abilities.keyword.DefenderAbility;
 import mage.abilities.keyword.EquipAbility;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 
@@ -46,9 +47,8 @@ import java.util.UUID;
  */
 public class WarmongersChariot extends CardImpl {
 
-    public WarmongersChariot(UUID ownerId) {
-        super(ownerId, 226, "Warmonger's Chariot", Rarity.UNCOMMON, new CardType[]{CardType.ARTIFACT}, "{2}");
-        this.expansionSetCode = "ROE";
+    public WarmongersChariot(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.ARTIFACT},"{2}");
         this.subtype.add("Equipment");
 
         // Equipped creature gets +2/+2.

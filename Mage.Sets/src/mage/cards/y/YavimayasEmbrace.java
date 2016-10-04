@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.apocalypse;
+package mage.cards.y;
 
 import java.util.UUID;
 import mage.abilities.Ability;
@@ -38,11 +38,11 @@ import mage.abilities.effects.common.continuous.GainAbilityAttachedEffect;
 import mage.abilities.keyword.EnchantAbility;
 import mage.abilities.keyword.TrampleAbility;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.AttachmentType;
 import mage.constants.CardType;
 import mage.constants.Duration;
 import mage.constants.Outcome;
-import mage.constants.Rarity;
 import mage.constants.Zone;
 import mage.target.TargetPermanent;
 import mage.target.common.TargetCreaturePermanent;
@@ -54,9 +54,8 @@ import mage.target.common.TargetCreaturePermanent;
  */
 public class YavimayasEmbrace extends CardImpl {
 
-    public YavimayasEmbrace(UUID ownerId) {
-        super(ownerId, 127, "Yavimaya's Embrace", Rarity.RARE, new CardType[]{CardType.ENCHANTMENT}, "{5}{G}{U}{U}");
-        this.expansionSetCode = "APC";
+    public YavimayasEmbrace(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.ENCHANTMENT},"{5}{G}{U}{U}");
         this.subtype.add("Aura");
 
         // Enchant creature

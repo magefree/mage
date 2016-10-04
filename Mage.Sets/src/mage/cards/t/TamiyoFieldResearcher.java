@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.eldritchmoon;
+package mage.cards.t;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -49,12 +49,12 @@ import mage.abilities.effects.common.GetEmblemEffect;
 import mage.abilities.effects.common.TapTargetEffect;
 import mage.cards.Card;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.cards.SplitCardHalf;
 import mage.constants.CardType;
 import mage.constants.Duration;
 import mage.constants.Layer;
 import mage.constants.Outcome;
-import mage.constants.Rarity;
 import mage.constants.SubLayer;
 import mage.constants.Zone;
 import mage.filter.FilterPermanent;
@@ -84,9 +84,8 @@ public class TamiyoFieldResearcher extends CardImpl {
         filter.add(Predicates.not(new CardTypePredicate(CardType.LAND)));
     }
 
-    public TamiyoFieldResearcher(UUID ownerId) {
-        super(ownerId, 190, "Tamiyo, Field Researcher", Rarity.MYTHIC, new CardType[]{CardType.PLANESWALKER}, "{1}{G}{W}{U}");
-        this.expansionSetCode = "EMN";
+    public TamiyoFieldResearcher(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.PLANESWALKER},"{1}{G}{W}{U}");
         this.subtype.add("Tamiyo");
 
         this.addAbility(new PlanswalkerEntersWithLoyalityCountersAbility(4));

@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.fatereforged;
+package mage.cards.h;
 
 import java.util.UUID;
 import mage.abilities.dynamicvalue.DynamicValue;
@@ -34,8 +34,8 @@ import mage.abilities.effects.Effect;
 import mage.abilities.effects.common.DamageTargetEffect;
 import mage.abilities.effects.common.GainLifeEffect;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.filter.common.FilterControlledCreaturePermanent;
 import mage.target.common.TargetCreatureOrPlayer;
 
@@ -45,9 +45,8 @@ import mage.target.common.TargetCreatureOrPlayer;
  */
 public class HarshSustenance extends CardImpl {
 
-    public HarshSustenance(UUID ownerId) {
-        super(ownerId, 154, "Harsh Sustenance", Rarity.COMMON, new CardType[]{CardType.INSTANT}, "{1}{W}{B}");
-        this.expansionSetCode = "FRF";
+    public HarshSustenance(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.INSTANT},"{1}{W}{B}");
 
         // Harsh Sustenance deals X damage to target creature or player and you gain X life, where X is the number of creatures you control.
         DynamicValue xValue = new PermanentsOnBattlefieldCount(new FilterControlledCreaturePermanent());

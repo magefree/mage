@@ -25,15 +25,15 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.limitedalpha;
+package mage.cards.c;
 
 import java.util.UUID;
 import mage.abilities.common.EntersBattlefieldAbility;
 import mage.abilities.effects.Effect;
 import mage.abilities.effects.common.CopyPermanentEffect;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.filter.common.FilterArtifactPermanent;
 import mage.util.functions.CardTypeApplier;
 
@@ -44,9 +44,8 @@ import mage.util.functions.CardTypeApplier;
  */
 public class CopyArtifact extends CardImpl {
 
-    public CopyArtifact(UUID ownerId) {
-        super(ownerId, 54, "Copy Artifact", Rarity.RARE, new CardType[]{CardType.ENCHANTMENT}, "{1}{U}");
-        this.expansionSetCode = "LEA";
+    public CopyArtifact(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.ENCHANTMENT},"{1}{U}");
 
         // You may have Copy Artifact enter the battlefield as a copy of any artifact on the battlefield, except it's an enchantment in addition to its other types.
         Effect effect = new CopyPermanentEffect(new FilterArtifactPermanent(), new CardTypeApplier(CardType.ENCHANTMENT));

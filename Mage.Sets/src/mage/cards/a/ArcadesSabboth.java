@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.masterseditioniii;
+package mage.cards.a;
 
 import java.util.UUID;
 import mage.MageInt;
@@ -38,9 +38,9 @@ import mage.abilities.effects.common.continuous.BoostAllEffect;
 import mage.abilities.effects.common.continuous.BoostSourceEffect;
 import mage.abilities.keyword.FlyingAbility;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Duration;
-import mage.constants.Rarity;
 import mage.constants.TargetController;
 import mage.constants.Zone;
 import mage.filter.common.FilterCreaturePermanent;
@@ -63,9 +63,8 @@ public class ArcadesSabboth extends CardImpl {
         filter.add(Predicates.not(new AttackingPredicate()));
     }
 
-    public ArcadesSabboth(UUID ownerId) {
-        super(ownerId, 142, "Arcades Sabboth", Rarity.RARE, new CardType[]{CardType.CREATURE}, "{2}{G}{G}{W}{W}{U}{U}");
-        this.expansionSetCode = "ME3";
+    public ArcadesSabboth(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{2}{G}{G}{W}{W}{U}{U}");
         this.supertype.add("Legendary");
         this.subtype.add("Elder");
         this.subtype.add("Dragon");

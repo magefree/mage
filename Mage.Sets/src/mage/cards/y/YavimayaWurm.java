@@ -26,14 +26,14 @@
  *  or implied, of BetaSteward_at_googlemail.com.
  */
 
-package mage.sets.magic2011;
+package mage.cards.y;
 
 import java.util.UUID;
 import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.MageInt;
 import mage.abilities.keyword.TrampleAbility;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 
 /**
  *
@@ -41,9 +41,8 @@ import mage.cards.CardImpl;
  */
 public class YavimayaWurm extends CardImpl {
 
-    public YavimayaWurm(UUID ownerId) {
-        super(ownerId, 200, "Yavimaya Wurm", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{4}{G}{G}");
-        this.expansionSetCode = "M11";
+    public YavimayaWurm(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{4}{G}{G}");
         this.subtype.add("Wurm");
 
         this.power = new MageInt(6);

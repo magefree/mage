@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.championsofkamigawa;
+package mage.cards.r;
 
 import java.util.HashSet;
 import java.util.Set;
@@ -34,8 +34,8 @@ import mage.MageObject;
 import mage.abilities.Ability;
 import mage.abilities.effects.common.ExileTargetEffect;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
@@ -47,9 +47,8 @@ import mage.watchers.common.PlayerDamagedBySourceWatcher;
  */
 public class Reciprocate extends CardImpl {
 
-    public Reciprocate(UUID ownerId) {
-        super(ownerId, 40, "Reciprocate", Rarity.UNCOMMON, new CardType[]{CardType.INSTANT}, "{W}");
-        this.expansionSetCode = "CHK";
+    public Reciprocate(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.INSTANT},"{W}");
 
         // Exile target creature that dealt damage to you this turn.
         this.getSpellAbility().addEffect(new ExileTargetEffect());

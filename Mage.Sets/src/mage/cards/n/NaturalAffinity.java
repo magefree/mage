@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.ninthedition;
+package mage.cards.n;
 
 import java.util.Iterator;
 import java.util.UUID;
@@ -33,11 +33,11 @@ import mage.MageObjectReference;
 import mage.abilities.Ability;
 import mage.abilities.effects.ContinuousEffectImpl;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Duration;
 import mage.constants.Layer;
 import mage.constants.Outcome;
-import mage.constants.Rarity;
 import mage.constants.SubLayer;
 import mage.filter.common.FilterLandPermanent;
 import mage.game.Game;
@@ -49,9 +49,8 @@ import mage.game.permanent.Permanent;
  */
 public class NaturalAffinity extends CardImpl {
 
-    public NaturalAffinity(UUID ownerId) {
-        super(ownerId, 256, "Natural Affinity", Rarity.RARE, new CardType[]{CardType.INSTANT}, "{2}{G}");
-        this.expansionSetCode = "9ED";
+    public NaturalAffinity(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.INSTANT},"{2}{G}");
 
         // All lands become 2/2 creatures until end of turn. They're still lands.
         this.getSpellAbility().addEffect(new BecomesCreatureAllEffect());

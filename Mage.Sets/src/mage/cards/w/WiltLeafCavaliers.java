@@ -25,14 +25,14 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.shadowmoor;
+package mage.cards.w;
 
 import java.util.UUID;
 import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.MageInt;
 import mage.abilities.keyword.VigilanceAbility;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 
 /**
  *
@@ -40,9 +40,8 @@ import mage.cards.CardImpl;
  */
 public class WiltLeafCavaliers extends CardImpl {
 
-    public WiltLeafCavaliers(UUID ownerId) {
-        super(ownerId, 244, "Wilt-Leaf Cavaliers", Rarity.UNCOMMON, new CardType[]{CardType.CREATURE}, "{G/W}{G/W}{G/W}");
-        this.expansionSetCode = "SHM";
+    public WiltLeafCavaliers(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{G/W}{G/W}{G/W}");
         this.subtype.add("Elf");
         this.subtype.add("Knight");
 

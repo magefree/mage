@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.planeshift;
+package mage.cards.t;
 
 import java.util.UUID;
 import mage.abilities.common.EntersBattlefieldTriggeredAbility;
@@ -35,8 +35,8 @@ import mage.abilities.mana.BlueManaAbility;
 import mage.abilities.mana.GreenManaAbility;
 import mage.abilities.mana.WhiteManaAbility;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.filter.common.FilterControlledLandPermanent;
 import mage.filter.predicate.Predicates;
 import mage.filter.predicate.mageobject.SubtypePredicate;
@@ -53,9 +53,8 @@ public class TrevasRuins extends CardImpl {
         filter.add(Predicates.not(new SubtypePredicate("Lair")));
     }
     
-    public TrevasRuins(UUID ownerId) {
-        super(ownerId, 143, "Treva's Ruins", Rarity.UNCOMMON, new CardType[]{CardType.LAND}, "");
-        this.expansionSetCode = "PLS";
+    public TrevasRuins(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.LAND},"");
         this.subtype.add("Lair");
 
         // When Treva's Ruins enters the battlefield, sacrifice it unless you return a non-Lair land you control to its owner's hand.

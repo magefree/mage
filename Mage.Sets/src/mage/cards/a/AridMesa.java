@@ -26,14 +26,14 @@
 * or implied, of BetaSteward_at_googlemail.com.
 */
 
-package mage.sets.zendikar;
+package mage.cards.a;
 
 import java.util.UUID;
 import mage.ObjectColor;
 import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.abilities.common.FetchLandActivatedAbility;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 
 /**
  *
@@ -41,9 +41,8 @@ import mage.cards.CardImpl;
  */
 public class AridMesa extends CardImpl {
 
-    public AridMesa(UUID ownerId) {
-        super(ownerId, 211, "Arid Mesa", Rarity.RARE, new CardType[]{CardType.LAND}, null);
-        this.expansionSetCode = "ZEN";
+    public AridMesa(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.LAND},null);
         this.frameColor = new ObjectColor("WR");
         this.addAbility(new FetchLandActivatedAbility(new String[] {"Mountain", "Plains"}));
     }

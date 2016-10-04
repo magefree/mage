@@ -25,15 +25,15 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.exodus;
+package mage.cards.r;
 
 import java.util.UUID;
 import mage.abilities.costs.common.SacrificeTargetCost;
 import mage.abilities.effects.common.GainLifeEffect;
 import mage.abilities.keyword.BuybackAbility;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.filter.common.FilterControlledLandPermanent;
 import mage.target.common.TargetControlledPermanent;
 
@@ -43,9 +43,8 @@ import mage.target.common.TargetControlledPermanent;
  */
 public class ReapingTheRewards extends CardImpl {
 
-    public ReapingTheRewards(UUID ownerId) {
-        super(ownerId, 16, "Reaping the Rewards", Rarity.COMMON, new CardType[]{CardType.INSTANT}, "{W}");
-        this.expansionSetCode = "EXO";
+    public ReapingTheRewards(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.INSTANT},"{W}");
 
         // Buyback-Sacrifice a land.
         this.addAbility(new BuybackAbility(new SacrificeTargetCost(new TargetControlledPermanent(new FilterControlledLandPermanent()))));

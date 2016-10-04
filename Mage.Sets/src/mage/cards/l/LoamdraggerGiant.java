@@ -25,13 +25,13 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.shadowmoor;
+package mage.cards.l;
 
 import java.util.UUID;
 import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.MageInt;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 
 /**
  *
@@ -39,9 +39,8 @@ import mage.cards.CardImpl;
  */
 public class LoamdraggerGiant extends CardImpl {
 
-    public LoamdraggerGiant(UUID ownerId) {
-        super(ownerId, 210, "Loamdragger Giant", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{4}{R/G}{R/G}{R/G}");
-        this.expansionSetCode = "SHM";
+    public LoamdraggerGiant(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{4}{R/G}{R/G}{R/G}");
         this.subtype.add("Giant");
         this.subtype.add("Warrior");
 

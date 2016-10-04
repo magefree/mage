@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.antiquities;
+package mage.cards.t;
 
 import java.util.UUID;
 import mage.abilities.Ability;
@@ -33,9 +33,9 @@ import mage.abilities.costs.mana.GenericManaCost;
 import mage.abilities.effects.SearchEffect;
 import mage.cards.Card;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Outcome;
-import mage.constants.Rarity;
 import mage.constants.Zone;
 import mage.filter.common.FilterArtifactCard;
 import mage.filter.common.FilterControlledArtifactPermanent;
@@ -51,9 +51,8 @@ import mage.target.common.TargetControlledPermanent;
  */
 public class TransmuteArtifact extends CardImpl {
 
-    public TransmuteArtifact(UUID ownerId) {
-        super(ownerId, 58, "Transmute Artifact", Rarity.UNCOMMON, new CardType[]{CardType.SORCERY}, "{U}{U}");
-        this.expansionSetCode = "ATQ";
+    public TransmuteArtifact(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{U}{U}");
 
         // Sacrifice an artifact. If you do, search your library for an artifact card. If that card's converted mana cost is less than or equal to the sacrificed artifact's converted mana cost, put it onto the battlefield. If it's greater, you may pay {X}, where X is the difference. If you do, put it onto the battlefield. If you don't, put it into its owner's graveyard. Then shuffle your library.
         this.getSpellAbility().addEffect(new TransmuteArtifactEffect());

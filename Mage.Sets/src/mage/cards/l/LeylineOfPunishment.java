@@ -26,13 +26,12 @@
  *  or implied, of BetaSteward_at_googlemail.com.
  */
 
-package mage.sets.magic2011;
+package mage.cards.l;
 
 import java.util.UUID;
 import mage.constants.CardType;
 import mage.constants.Duration;
 import mage.constants.Outcome;
-import mage.constants.Rarity;
 import mage.constants.Zone;
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleStaticAbility;
@@ -40,6 +39,7 @@ import mage.abilities.effects.ContinuousRuleModifyingEffectImpl;
 import mage.abilities.effects.common.continuous.CantGainLifeAllEffect;
 import mage.abilities.keyword.LeylineAbility;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.game.Game;
 import mage.game.events.GameEvent;
 import mage.game.events.GameEvent.EventType;
@@ -50,9 +50,8 @@ import mage.game.events.GameEvent.EventType;
  */
 public class LeylineOfPunishment extends CardImpl {
 
-    public LeylineOfPunishment(UUID ownerId) {
-        super(ownerId, 148, "Leyline of Punishment", Rarity.RARE, new CardType[]{CardType.ENCHANTMENT}, "{2}{R}{R}");
-        this.expansionSetCode = "M11";
+    public LeylineOfPunishment(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.ENCHANTMENT},"{2}{R}{R}");
 
         // If Leyline of Punishment is in your opening hand, you may begin the game with it on the battlefield.
         this.addAbility(LeylineAbility.getInstance());

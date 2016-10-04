@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.masterseditioniii;
+package mage.cards.v;
 
 import java.util.UUID;
 import mage.MageInt;
@@ -36,9 +36,9 @@ import mage.abilities.effects.common.SacrificeSourceUnlessPaysEffect;
 import mage.abilities.effects.common.continuous.BoostSourceEffect;
 import mage.abilities.keyword.FlyingAbility;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Duration;
-import mage.constants.Rarity;
 import mage.constants.TargetController;
 import mage.constants.Zone;
 
@@ -48,9 +48,8 @@ import mage.constants.Zone;
  */
 public class VaevictisAsmadi extends CardImpl {
 
-    public VaevictisAsmadi(UUID ownerId) {
-        super(ownerId, 185, "Vaevictis Asmadi", Rarity.RARE, new CardType[]{CardType.CREATURE}, "{2}{B}{B}{R}{R}{G}{G}");
-        this.expansionSetCode = "ME3";
+    public VaevictisAsmadi(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{2}{B}{B}{R}{R}{G}{G}");
         this.supertype.add("Legendary");
         this.subtype.add("Elder");
         this.subtype.add("Dragon");

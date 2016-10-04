@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.worldwake;
+package mage.cards.m;
 
 import java.util.UUID;
 
@@ -39,6 +39,7 @@ import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.continuous.BoostSourceEffect;
 import mage.abilities.keyword.FlyingAbility;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.filter.predicate.permanent.ControllerIdPredicate;
 import mage.game.Game;
@@ -51,9 +52,8 @@ import mage.target.common.TargetCreaturePermanent;
  */
 public class MordantDragon extends CardImpl {
 
-    public MordantDragon(UUID ownerId) {
-        super(ownerId, 85, "Mordant Dragon", Rarity.RARE, new CardType[]{CardType.CREATURE}, "{3}{R}{R}{R}");
-        this.expansionSetCode = "WWK";
+    public MordantDragon(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{3}{R}{R}{R}");
         this.subtype.add("Dragon");
 
         this.power = new MageInt(5);

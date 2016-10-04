@@ -25,14 +25,14 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.gatecrash;
+package mage.cards.r;
 
 import java.util.UUID;
 import mage.constants.CardType;
 import mage.constants.Duration;
-import mage.constants.Rarity;
 import mage.abilities.effects.common.continuous.BoostControlledEffect;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 
 /**
  *
@@ -40,9 +40,8 @@ import mage.cards.CardImpl;
  */
 public class RighteousCharge extends CardImpl {
 
-    public RighteousCharge (UUID ownerId) {
-        super(ownerId, 23, "Righteous Charge", Rarity.UNCOMMON, new CardType[]{CardType.SORCERY}, "{1}{W}{W}");
-        this.expansionSetCode = "GTC";
+    public RighteousCharge (UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{1}{W}{W}");
 
 
         // Creatures you control get +2/+2 until end of turn.

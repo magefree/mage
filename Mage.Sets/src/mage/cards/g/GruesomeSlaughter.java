@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.battleforzendikar;
+package mage.cards.g;
 
 import java.util.UUID;
 import mage.abilities.Ability;
@@ -36,9 +36,9 @@ import mage.abilities.effects.Effect;
 import mage.abilities.effects.common.DamageTargetEffect;
 import mage.abilities.effects.common.continuous.GainAbilityControlledEffect;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Duration;
-import mage.constants.Rarity;
 import mage.constants.Zone;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.filter.predicate.mageobject.ColorlessPredicate;
@@ -56,9 +56,8 @@ public class GruesomeSlaughter extends CardImpl {
         filter.add(new ColorlessPredicate());
     }
 
-    public GruesomeSlaughter(UUID ownerId) {
-        super(ownerId, 9, "Gruesome Slaughter", Rarity.RARE, new CardType[]{CardType.SORCERY}, "{6}");
-        this.expansionSetCode = "BFZ";
+    public GruesomeSlaughter(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{6}");
 
         // Until end of turn, colorless creatures you control gain "{T}: This creature deals damage equal to its power to target creature."
         Effect effect = new DamageTargetEffect(new SourcePermanentPowerCount());

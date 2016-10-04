@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.stronghold;
+package mage.cards.c;
 
 import java.util.UUID;
 import mage.MageInt;
@@ -34,10 +34,10 @@ import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.costs.mana.ColoredManaCost;
 import mage.abilities.effects.common.combat.CantBlockAttachedEffect;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.AttachmentType;
 import mage.constants.CardType;
 import mage.constants.ColoredManaSymbol;
-import mage.constants.Rarity;
 import mage.constants.Zone;
 
 /**
@@ -46,9 +46,8 @@ import mage.constants.Zone;
  */
 public class ConvulsingLicid extends CardImpl {
 
-    public ConvulsingLicid(UUID ownerId) {
-        super(ownerId, 77, "Convulsing Licid", Rarity.UNCOMMON, new CardType[]{CardType.CREATURE}, "{2}{R}");
-        this.expansionSetCode = "STH";
+    public ConvulsingLicid(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{2}{R}");
         this.subtype.add("Licid");
         this.power = new MageInt(2);
         this.toughness = new MageInt(2);

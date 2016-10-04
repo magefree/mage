@@ -25,15 +25,15 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.khansoftarkir;
+package mage.cards.a;
 
 import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.keyword.FlyingAbility;
 import mage.abilities.keyword.VigilanceAbility;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.Rarity;
 
 /**
  *
@@ -41,9 +41,8 @@ import mage.constants.Rarity;
  */
 public class AlabasterKirin extends CardImpl {
 
-    public AlabasterKirin(UUID ownerId) {
-        super(ownerId, 4, "Alabaster Kirin", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{3}{W}");
-        this.expansionSetCode = "KTK";
+    public AlabasterKirin(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{3}{W}");
         this.subtype.add("Kirin");
 
         this.power = new MageInt(2);

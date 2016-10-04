@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.eldritchmoon;
+package mage.cards.s;
 
 import java.util.List;
 import java.util.UUID;
@@ -40,10 +40,10 @@ import mage.abilities.effects.common.continuous.GainAbilityAllEffect;
 import mage.abilities.keyword.EscalateAbility;
 import mage.abilities.keyword.TrampleAbility;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Duration;
 import mage.constants.Outcome;
-import mage.constants.Rarity;
 import mage.constants.TargetController;
 import mage.filter.FilterPlayer;
 import mage.filter.common.FilterCreaturePermanent;
@@ -69,9 +69,8 @@ public class SavageAlliance extends CardImpl {
         filterOpponent.add(new PlayerPredicate(TargetController.OPPONENT));
     }
 
-    public SavageAlliance(UUID ownerId) {
-        super(ownerId, 140, "Savage Alliance", Rarity.UNCOMMON, new CardType[]{CardType.INSTANT}, "{2}{R}");
-        this.expansionSetCode = "EMN";
+    public SavageAlliance(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.INSTANT},"{2}{R}");
 
         // Escalate {1}
         this.addAbility(new EscalateAbility(new GenericManaCost(1)));

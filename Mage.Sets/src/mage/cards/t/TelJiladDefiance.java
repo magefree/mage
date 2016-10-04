@@ -26,13 +26,13 @@
  *  or implied, of BetaSteward_at_googlemail.com.
  */
 
-package mage.sets.scarsofmirrodin;
+package mage.cards.t;
 
 import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.abilities.effects.common.DrawCardSourceControllerEffect;
 import mage.abilities.effects.common.continuous.GainProtectionFromTypeTargetEffect;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.Duration;
 import mage.filter.common.FilterArtifactCard;
 import mage.target.common.TargetCreaturePermanent;
@@ -44,9 +44,8 @@ import java.util.UUID;
  */
 public class TelJiladDefiance extends CardImpl {
 
-    public TelJiladDefiance(UUID ownerId) {
-        super(ownerId, 129, "Tel-Jilad Defiance", Rarity.COMMON, new CardType[]{CardType.INSTANT}, "{1}{G}");
-        this.expansionSetCode = "SOM";
+    public TelJiladDefiance(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.INSTANT},"{1}{G}");
 
         this.getSpellAbility().addEffect(new GainProtectionFromTypeTargetEffect(Duration.EndOfTurn, new FilterArtifactCard("artifacts")));
         this.getSpellAbility().addTarget(new TargetCreaturePermanent());

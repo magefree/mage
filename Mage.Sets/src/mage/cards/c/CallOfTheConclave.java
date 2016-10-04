@@ -25,13 +25,13 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.returntoravnica;
+package mage.cards.c;
 
 import java.util.UUID;
 import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.abilities.effects.common.CreateTokenEffect;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.game.permanent.token.CentaurToken;
 
 /**
@@ -40,9 +40,8 @@ import mage.game.permanent.token.CentaurToken;
  */
 public class CallOfTheConclave extends CardImpl {
 
-    public CallOfTheConclave(UUID ownerId) {
-        super(ownerId, 146, "Call of the Conclave", Rarity.UNCOMMON, new CardType[]{CardType.SORCERY}, "{G}{W}");
-        this.expansionSetCode = "RTR";
+    public CallOfTheConclave(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{G}{W}");
 
 
         // Put a 3/3 green Centaur creature token onto the battlefield.

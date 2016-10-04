@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.betrayersofkamigawa;
+package mage.cards.s;
 
 import java.util.UUID;
 import mage.MageInt;
@@ -33,9 +33,9 @@ import mage.abilities.Ability;
 import mage.abilities.common.BeginningOfUpkeepTriggeredAbility;
 import mage.abilities.effects.OneShotEffect;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Outcome;
-import mage.constants.Rarity;
 import mage.constants.TargetController;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.game.Game;
@@ -47,9 +47,8 @@ import mage.players.Player;
  */
 public class ScourgeOfNumai extends CardImpl {
 
-    public ScourgeOfNumai(UUID ownerId) {
-        super(ownerId, 80, "Scourge of Numai", Rarity.UNCOMMON, new CardType[]{CardType.CREATURE}, "{3}{B}");
-        this.expansionSetCode = "BOK";
+    public ScourgeOfNumai(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{3}{B}");
         this.subtype.add("Demon");
         this.subtype.add("Spirit");
 

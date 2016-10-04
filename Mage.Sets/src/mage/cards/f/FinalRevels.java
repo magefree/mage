@@ -25,13 +25,13 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.lorwyn;
+package mage.cards.f;
 
 import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.abilities.Mode;
 import mage.abilities.effects.common.continuous.BoostAllEffect;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.Duration;
 import mage.filter.common.FilterCreaturePermanent;
 
@@ -43,9 +43,8 @@ import java.util.UUID;
  */
 public class FinalRevels extends CardImpl {
 
-    public FinalRevels(UUID ownerId) {
-        super(ownerId, 113, "Final Revels", Rarity.UNCOMMON, new CardType[]{CardType.SORCERY}, "{4}{B}");
-        this.expansionSetCode = "LRW";
+    public FinalRevels(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{4}{B}");
 
         this.getSpellAbility().addEffect(new BoostAllEffect(2, 0, Duration.EndOfTurn, new FilterCreaturePermanent(), false));
         Mode mode = new Mode();

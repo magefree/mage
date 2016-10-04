@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.limitedalpha;
+package mage.cards.k;
 
 import java.util.UUID;
 import mage.MageInt;
@@ -33,10 +33,10 @@ import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.effects.ContinuousEffect;
 import mage.abilities.effects.common.continuous.BecomesCreatureAllEffect;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.DependencyType;
 import mage.constants.Duration;
-import mage.constants.Rarity;
 import mage.constants.Zone;
 import mage.filter.FilterPermanent;
 import mage.game.permanent.token.Token;
@@ -48,9 +48,8 @@ import mage.game.permanent.token.Token;
  */
 public class KormusBell extends CardImpl {
 
-    public KormusBell(UUID ownerId) {
-        super(ownerId, 256, "Kormus Bell", Rarity.RARE, new CardType[]{CardType.ARTIFACT}, "{4}");
-        this.expansionSetCode = "LEA";
+    public KormusBell(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.ARTIFACT},"{4}");
 
         // All Swamps are 1/1 black creatures that are still lands.
         ContinuousEffect effect = new BecomesCreatureAllEffect(new KormusBellToken(), "lands", new FilterPermanent("Swamp", "Swamps"), Duration.WhileOnBattlefield);

@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.khansoftarkir;
+package mage.cards.s;
 
 import java.util.List;
 import java.util.UUID;
@@ -35,8 +35,8 @@ import mage.abilities.effects.common.CreateTokenEffect;
 import mage.abilities.effects.common.PutTopCardOfLibraryIntoGraveControllerEffect;
 import mage.cards.Card;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.constants.Zone;
 import mage.game.Game;
 import mage.game.events.GameEvent;
@@ -50,9 +50,8 @@ import mage.game.permanent.token.ZombieToken;
  */
 public class SidisiBroodTyrant extends CardImpl {
 
-    public SidisiBroodTyrant(UUID ownerId) {
-        super(ownerId, 199, "Sidisi, Brood Tyrant", Rarity.MYTHIC, new CardType[]{CardType.CREATURE}, "{1}{B}{G}{U}");
-        this.expansionSetCode = "KTK";
+    public SidisiBroodTyrant(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{1}{B}{G}{U}");
         this.supertype.add("Legendary");
         this.subtype.add("Naga");
         this.subtype.add("Shaman");

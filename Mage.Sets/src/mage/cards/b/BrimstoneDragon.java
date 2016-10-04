@@ -25,15 +25,15 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.portalsecondage;
+package mage.cards.b;
 
 import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.keyword.FlyingAbility;
 import mage.abilities.keyword.HasteAbility;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.Rarity;
 
 /**
  *
@@ -41,9 +41,8 @@ import mage.constants.Rarity;
  */
 public class BrimstoneDragon extends CardImpl {
 
-    public BrimstoneDragon(UUID ownerId) {
-        super(ownerId, 92, "Brimstone Dragon", Rarity.RARE, new CardType[]{CardType.CREATURE}, "{6}{R}{R}");
-        this.expansionSetCode = "PO2";
+    public BrimstoneDragon(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{6}{R}{R}");
         this.subtype.add("Dragon");
 
         this.power = new MageInt(6);

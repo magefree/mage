@@ -26,15 +26,15 @@
  *  or implied, of BetaSteward_at_googlemail.com.
  */
 
-package mage.sets.magic2010;
+package mage.cards.h;
 
 import mage.constants.CardType;
 import mage.constants.Outcome;
-import mage.constants.Rarity;
 import mage.abilities.Ability;
 import mage.abilities.effects.OneShotEffect;
 import mage.cards.Card;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.filter.FilterCard;
 import mage.filter.common.FilterBasicLandCard;
 import mage.game.Game;
@@ -52,9 +52,8 @@ import mage.filter.predicate.mageobject.NamePredicate;
  */
 public class HauntingEchoes extends CardImpl {
 
-    public HauntingEchoes(UUID ownerId) {
-        super(ownerId, 98, "Haunting Echoes", Rarity.RARE, new CardType[]{CardType.SORCERY}, "{3}{B}{B}");
-        this.expansionSetCode = "M10";
+    public HauntingEchoes(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{3}{B}{B}");
 
         this.getSpellAbility().addTarget(new TargetPlayer());
         this.getSpellAbility().addEffect(new HauntingEchoesEffect());

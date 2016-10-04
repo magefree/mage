@@ -25,14 +25,14 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.returntoravnica;
+package mage.cards.s;
 
 import java.util.UUID;
 import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.abilities.effects.common.CreateTokenEffect;
 import mage.abilities.effects.common.DestroyTargetEffect;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.game.permanent.token.GoblinToken;
 import mage.target.common.TargetLandPermanent;
 
@@ -41,9 +41,8 @@ import mage.target.common.TargetLandPermanent;
  */
 public class SurveyTheWreckage extends CardImpl {
 
-    public SurveyTheWreckage(UUID ownerId) {
-        super(ownerId, 107, "Survey the Wreckage", Rarity.COMMON, new CardType[]{CardType.SORCERY}, "{4}{R}");
-        this.expansionSetCode = "RTR";
+    public SurveyTheWreckage(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{4}{R}");
 
 
         // Destroy target land. Put a 1/1 red Goblin creature token onto the battlefield.

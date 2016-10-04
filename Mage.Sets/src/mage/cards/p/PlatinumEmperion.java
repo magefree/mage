@@ -25,14 +25,14 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.scarsofmirrodin;
+package mage.cards.p;
 
 import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.MageInt;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.effects.common.continuous.LifeTotalCantChangeControllerEffect;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.Duration;
 import mage.constants.Zone;
 
@@ -44,9 +44,8 @@ import java.util.UUID;
  */
 public class PlatinumEmperion extends CardImpl {
 
-    public PlatinumEmperion(UUID ownerId) {
-        super(ownerId, 193, "Platinum Emperion", Rarity.MYTHIC, new CardType[]{CardType.ARTIFACT, CardType.CREATURE}, "{8}");
-        this.expansionSetCode = "SOM";
+    public PlatinumEmperion(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.ARTIFACT,CardType.CREATURE},"{8}");
         this.subtype.add("Golem");
 
         this.power = new MageInt(8);

@@ -25,13 +25,13 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.seventhedition;
+package mage.cards.p;
 
 import java.util.UUID;
 import mage.abilities.effects.common.DamageMultiEffect;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.target.common.TargetCreatureOrPlayerAmount;
 
 /**
@@ -40,9 +40,8 @@ import mage.target.common.TargetCreatureOrPlayerAmount;
  */
 public class Pyrotechnics extends CardImpl {
 
-    public Pyrotechnics(UUID ownerId) {
-        super(ownerId, 210, "Pyrotechnics", Rarity.UNCOMMON, new CardType[]{CardType.SORCERY}, "{4}{R}");
-        this.expansionSetCode = "7ED";
+    public Pyrotechnics(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{4}{R}");
 
 
         // Pyrotechnics deals 4 damage divided as you choose among any number of target creatures and/or players.

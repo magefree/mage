@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.saviorsofkamigawa;
+package mage.cards.e;
 
 import java.util.UUID;
 import mage.abilities.Ability;
@@ -33,9 +33,9 @@ import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.EpicEffect;
 import mage.cards.Card;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Outcome;
-import mage.constants.Rarity;
 import mage.constants.Zone;
 import mage.filter.FilterCard;
 import mage.filter.predicate.Predicates;
@@ -52,9 +52,8 @@ import mage.target.common.TargetOpponent;
  */
 public class EternalDominion extends CardImpl {
 
-    public EternalDominion(UUID ownerId) {
-        super(ownerId, 36, "Eternal Dominion", Rarity.RARE, new CardType[]{CardType.SORCERY}, "{7}{U}{U}{U}");
-        this.expansionSetCode = "SOK";
+    public EternalDominion(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{7}{U}{U}{U}");
 
         // Search target opponent's library for an artifact, creature, enchantment, or land card.
         // Put that card onto the battlefield under your control. Then that player shuffles his or her library.

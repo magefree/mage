@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.dissension;
+package mage.cards.v;
 
 import java.util.UUID;
 import mage.MageInt;
@@ -34,9 +34,9 @@ import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.effects.RestrictionEffect;
 import mage.abilities.keyword.GraftAbility;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Duration;
-import mage.constants.Rarity;
 import mage.constants.Zone;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
@@ -47,9 +47,8 @@ import mage.game.permanent.Permanent;
  */
 public class VigeanHydropon extends CardImpl {
 
-    public VigeanHydropon(UUID ownerId) {
-        super(ownerId, 135, "Vigean Hydropon", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{1}{G}{U}");
-        this.expansionSetCode = "DIS";
+    public VigeanHydropon(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{1}{G}{U}");
         this.subtype.add("Plant");
         this.subtype.add("Mutant");
         this.power = new MageInt(0);

@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.magic2015;
+package mage.cards.s;
 
 import java.util.UUID;
 import mage.MageInt;
@@ -35,9 +35,9 @@ import mage.abilities.effects.common.continuous.SetPowerToughnessSourceEffect;
 import mage.abilities.keyword.ConvokeAbility;
 import mage.abilities.keyword.FlyingAbility;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Duration;
-import mage.constants.Rarity;
 import mage.constants.Zone;
 import mage.filter.common.FilterControlledCreaturePermanent;
 
@@ -49,9 +49,8 @@ public class SeraphOfTheMasses extends CardImpl {
 
     private static final FilterControlledCreaturePermanent filter = new FilterControlledCreaturePermanent("creatures you control");
 
-    public SeraphOfTheMasses(UUID ownerId) {
-        super(ownerId, 32, "Seraph of the Masses", Rarity.UNCOMMON, new CardType[]{CardType.CREATURE}, "{5}{W}{W}");
-        this.expansionSetCode = "M15";
+    public SeraphOfTheMasses(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{5}{W}{W}");
         this.subtype.add("Angel");
 
         this.power = new MageInt(0);

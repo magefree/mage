@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.nemesis;
+package mage.cards.s;
 
 import java.util.UUID;
 import mage.abilities.condition.CompoundCondition;
@@ -35,8 +35,8 @@ import mage.abilities.condition.common.OpponentControlsPermanentCondition;
 import mage.abilities.costs.AlternativeCostSourceAbility;
 import mage.abilities.effects.common.PutOnLibraryTargetEffect;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.filter.FilterPermanent;
 import mage.filter.predicate.mageobject.SubtypePredicate;
 import mage.target.common.TargetCreaturePermanent;
@@ -55,9 +55,8 @@ public class Submerge extends CardImpl {
         filterIsland.add(new SubtypePredicate(("Island")));
     }
     
-    public Submerge(UUID ownerId) {
-        super(ownerId, 48, "Submerge", Rarity.UNCOMMON, new CardType[]{CardType.INSTANT}, "{4}{U}");
-        this.expansionSetCode = "NEM";
+    public Submerge(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.INSTANT},"{4}{U}");
 
 
         // If an opponent controls a Forest and you control an Island, you may cast Submerge without paying its mana cost.

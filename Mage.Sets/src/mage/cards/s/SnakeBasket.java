@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.visions;
+package mage.cards.s;
 
 import java.util.UUID;
 import mage.abilities.Ability;
@@ -36,8 +36,8 @@ import mage.abilities.dynamicvalue.common.ManacostVariableValue;
 import mage.abilities.effects.Effect;
 import mage.abilities.effects.common.CreateTokenEffect;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.constants.Zone;
 import mage.game.permanent.token.SnakeToken;
 
@@ -47,9 +47,8 @@ import mage.game.permanent.token.SnakeToken;
  */
 public class SnakeBasket extends CardImpl {
 
-    public SnakeBasket(UUID ownerId) {
-        super(ownerId, 155, "Snake Basket", Rarity.RARE, new CardType[]{CardType.ARTIFACT}, "{4}");
-        this.expansionSetCode = "VIS";
+    public SnakeBasket(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.ARTIFACT},"{4}");
 
         // {X}, Sacrifice Snake Basket: Put X 1/1 green Snake creature tokens onto the battlefield. Activate this ability only any time you could cast a sorcery.
         Effect effect = new CreateTokenEffect(new SnakeToken(), new ManacostVariableValue());

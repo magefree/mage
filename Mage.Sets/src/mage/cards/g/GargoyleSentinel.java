@@ -26,7 +26,7 @@
  *  or implied, of BetaSteward_at_googlemail.com.
  */
 
-package mage.sets.magic2011;
+package mage.cards.g;
 
 import java.util.Iterator;
 import java.util.UUID;
@@ -34,7 +34,6 @@ import mage.constants.CardType;
 import mage.constants.Duration;
 import mage.constants.Layer;
 import mage.constants.Outcome;
-import mage.constants.Rarity;
 import mage.constants.SubLayer;
 import mage.constants.Zone;
 import mage.MageInt;
@@ -45,6 +44,7 @@ import mage.abilities.effects.ContinuousEffectImpl;
 import mage.abilities.keyword.DefenderAbility;
 import mage.abilities.keyword.FlyingAbility;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 
@@ -54,9 +54,8 @@ import mage.game.permanent.Permanent;
  */
 public class GargoyleSentinel extends CardImpl {
 
-    public GargoyleSentinel(UUID ownerId) {
-        super(ownerId, 207, "Gargoyle Sentinel", Rarity.UNCOMMON, new CardType[]{CardType.ARTIFACT, CardType.CREATURE}, "{3}");
-        this.expansionSetCode = "M11";
+    public GargoyleSentinel(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.ARTIFACT,CardType.CREATURE},"{3}");
         this.subtype.add("Gargoyle");
         this.power = new MageInt(3);
         this.toughness = new MageInt(3);

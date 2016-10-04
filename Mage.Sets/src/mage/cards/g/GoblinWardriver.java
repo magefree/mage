@@ -26,14 +26,14 @@
  *  or implied, of BetaSteward_at_googlemail.com.
  */
 
-package mage.sets.mirrodinbesieged;
+package mage.cards.g;
 
 import java.util.UUID;
 import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.MageInt;
 import mage.abilities.keyword.BattleCryAbility;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 
 /**
  *
@@ -41,9 +41,8 @@ import mage.cards.CardImpl;
  */
 public class GoblinWardriver extends CardImpl {
 
-    public GoblinWardriver (UUID ownerId) {
-        super(ownerId, 64, "Goblin Wardriver", Rarity.UNCOMMON, new CardType[]{CardType.CREATURE}, "{R}{R}");
-        this.expansionSetCode = "MBS";
+    public GoblinWardriver (UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{R}{R}");
         this.subtype.add("Goblin");
         this.subtype.add("Warrior");
 

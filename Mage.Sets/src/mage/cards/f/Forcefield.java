@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.mastersedition;
+package mage.cards.f;
 
 import java.util.UUID;
 import mage.MageObject;
@@ -36,10 +36,10 @@ import mage.abilities.effects.ContinuousEffect;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.PreventionEffectImpl;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Duration;
 import mage.constants.Outcome;
-import mage.constants.Rarity;
 import mage.constants.Zone;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.filter.predicate.permanent.UnblockedPredicate;
@@ -58,9 +58,8 @@ import mage.target.targetpointer.FixedTarget;
  */
 public class Forcefield extends CardImpl {
 
-    public Forcefield(UUID ownerId) {
-        super(ownerId, 157, "Forcefield", Rarity.RARE, new CardType[]{CardType.ARTIFACT}, "{3}");
-        this.expansionSetCode = "MED";
+    public Forcefield(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.ARTIFACT},"{3}");
 
         // {1}: The next time an unblocked creature of your choice would deal combat damage to you this turn, prevent all but 1 of that damage.
         this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new ForcefieldEffect(), new GenericManaCost(1)));

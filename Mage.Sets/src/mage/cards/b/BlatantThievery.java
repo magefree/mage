@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.onslaught;
+package mage.cards.b;
 
 import java.util.HashMap;
 import java.util.HashSet;
@@ -39,10 +39,10 @@ import mage.abilities.effects.ContinuousEffect;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.continuous.GainControlTargetEffect;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Duration;
 import mage.constants.Outcome;
-import mage.constants.Rarity;
 import mage.filter.FilterPermanent;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
@@ -55,9 +55,8 @@ import mage.target.targetpointer.FixedTarget;
  */
 public class BlatantThievery extends CardImpl {
 
-    public BlatantThievery(UUID ownerId) {
-        super(ownerId, 71, "Blatant Thievery", Rarity.RARE, new CardType[]{CardType.SORCERY}, "{4}{U}{U}{U}");
-        this.expansionSetCode = "ONS";
+    public BlatantThievery(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{4}{U}{U}{U}");
 
         // For each opponent, gain control of target permanent that player controls.
         this.getSpellAbility().addEffect(new BlatantThieveryEffect());

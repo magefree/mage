@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.shadowsoverinnistrad;
+package mage.cards.t;
 
 import java.util.UUID;
 import mage.abilities.Ability;
@@ -39,10 +39,10 @@ import mage.abilities.effects.common.continuous.GainAbilityAttachedEffect;
 import mage.abilities.keyword.EquipAbility;
 import mage.abilities.keyword.VigilanceAbility;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.AttachmentType;
 import mage.constants.CardType;
 import mage.constants.Outcome;
-import mage.constants.Rarity;
 import mage.constants.Zone;
 
 /**
@@ -53,9 +53,8 @@ public class TrueFaithCenser extends CardImpl {
 
     private static final String staticText = "As long as equipped creature is a Human, it gets an addtional +1/+0";
 
-    public TrueFaithCenser(UUID ownerId) {
-        super(ownerId, 267, "True-Faith Censer", Rarity.COMMON, new CardType[]{CardType.ARTIFACT}, "{2}");
-        this.expansionSetCode = "SOI";
+    public TrueFaithCenser(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.ARTIFACT},"{2}");
         this.subtype.add("Equipment");
 
         // Equipped creature gets +1/+1 and has vigilance.

@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.worldwake;
+package mage.cards.w;
 
 import java.util.UUID;
 import mage.MageInt;
@@ -37,10 +37,10 @@ import mage.abilities.keyword.IslandwalkAbility;
 import mage.abilities.keyword.SwampwalkAbility;
 import mage.cards.Card;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Duration;
 import mage.constants.Outcome;
-import mage.constants.Rarity;
 import mage.constants.Zone;
 import mage.filter.FilterCard;
 import mage.filter.predicate.Predicates;
@@ -61,9 +61,8 @@ import mage.target.common.TargetCardInGraveyard;
  */
 public class WrexialTheRisenDeep extends CardImpl {
 
-    public WrexialTheRisenDeep(UUID ownerId) {
-        super(ownerId, 120, "Wrexial, the Risen Deep", Rarity.MYTHIC, new CardType[]{CardType.CREATURE}, "{3}{U}{U}{B}");
-        this.expansionSetCode = "WWK";
+    public WrexialTheRisenDeep(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{3}{U}{U}{B}");
         this.supertype.add("Legendary");
         this.subtype.add("Kraken");
 

@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.planechase;
+package mage.cards.a;
 
 import java.util.UUID;
 import mage.MageInt;
@@ -34,8 +34,8 @@ import mage.abilities.effects.common.counter.AddCountersSourceEffect;
 import mage.abilities.keyword.ModularAbility;
 import mage.abilities.keyword.TrampleAbility;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.counters.CounterType;
 import mage.filter.FilterPermanent;
 import mage.filter.common.FilterArtifactPermanent;
@@ -53,9 +53,8 @@ public class ArcboundCrusher extends CardImpl {
         filter.add(new AnotherPredicate());
     }
     
-    public ArcboundCrusher(UUID ownerId) {
-        super(ownerId, 105, "Arcbound Crusher", Rarity.UNCOMMON, new CardType[]{CardType.ARTIFACT, CardType.CREATURE}, "{4}");
-        this.expansionSetCode = "HOP";
+    public ArcboundCrusher(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.ARTIFACT,CardType.CREATURE},"{4}");
         this.subtype.add("Juggernaut");
         this.power = new MageInt(0);
         this.toughness = new MageInt(0);

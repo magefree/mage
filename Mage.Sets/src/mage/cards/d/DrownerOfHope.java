@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.battleforzendikar;
+package mage.cards.d;
 
 import java.util.UUID;
 import mage.MageInt;
@@ -38,8 +38,8 @@ import mage.abilities.effects.common.CreateTokenEffect;
 import mage.abilities.effects.common.TapTargetEffect;
 import mage.abilities.keyword.DevoidAbility;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.constants.Zone;
 import mage.filter.common.FilterControlledPermanent;
 import mage.filter.predicate.Predicates;
@@ -62,9 +62,8 @@ public class DrownerOfHope extends CardImpl {
                 new SubtypePredicate("Scion")));
     }
 
-    public DrownerOfHope(UUID ownerId) {
-        super(ownerId, 57, "Drowner of Hope", Rarity.RARE, new CardType[]{CardType.CREATURE}, "{5}{U}");
-        this.expansionSetCode = "BFZ";
+    public DrownerOfHope(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{5}{U}");
         this.subtype.add("Eldrazi");
         this.power = new MageInt(5);
         this.toughness = new MageInt(5);

@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.magic2012;
+package mage.cards.c;
 
 import mage.constants.*;
 import mage.abilities.Ability;
@@ -37,6 +37,7 @@ import mage.abilities.effects.ContinuousEffect;
 import mage.abilities.effects.ContinuousEffectImpl;
 import mage.abilities.effects.OneShotEffect;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.target.common.TargetCreaturePermanent;
@@ -49,9 +50,8 @@ import java.util.UUID;
  */
 public class CrownOfEmpires extends CardImpl {
 
-    public CrownOfEmpires(UUID ownerId) {
-        super(ownerId, 203, "Crown of Empires", Rarity.UNCOMMON, new CardType[]{CardType.ARTIFACT}, "{2}");
-        this.expansionSetCode = "M12";
+    public CrownOfEmpires(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.ARTIFACT},"{2}");
 
         // {3}, {tap}: Tap target creature. Gain control of that creature instead if you control artifacts named Scepter of Empires and Throne of Empires.
         Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new CrownOfEmpiresEffect(), new GenericManaCost(3));

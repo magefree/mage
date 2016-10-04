@@ -1,4 +1,4 @@
-package mage.sets.championsofkamigawa;
+package mage.cards.a;
 
 import java.util.UUID;
 import mage.MageInt;
@@ -12,10 +12,10 @@ import mage.abilities.effects.common.FlipSourceEffect;
 import mage.abilities.keyword.HasteAbility;
 import mage.abilities.keyword.ProtectionAbility;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Duration;
 import mage.constants.Outcome;
-import mage.constants.Rarity;
 import mage.constants.Zone;
 import mage.filter.FilterCard;
 import mage.filter.predicate.mageobject.ColorPredicate;
@@ -31,9 +31,8 @@ import mage.game.permanent.token.Token;
  */
 public class AkkiLavarunner extends CardImpl {
 
-    public AkkiLavarunner(UUID ownerId) {
-        super(ownerId, 153, "Akki Lavarunner", Rarity.RARE, new CardType[]{CardType.CREATURE}, "{3}{R}");
-        this.expansionSetCode = "CHK";
+    public AkkiLavarunner(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{3}{R}");
         this.subtype.add("Goblin");
         this.subtype.add("Warrior");
 

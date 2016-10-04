@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.magic2014;
+package mage.cards.g;
 
 import java.util.UUID;
 import mage.MageInt;
@@ -34,9 +34,9 @@ import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.costs.common.TapSourceCost;
 import mage.abilities.effects.RequirementEffect;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Duration;
-import mage.constants.Rarity;
 import mage.constants.Zone;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
@@ -47,9 +47,8 @@ import mage.game.permanent.Permanent;
  */
 public class GoblinDiplomats extends CardImpl {
 
-    public GoblinDiplomats(UUID ownerId) {
-        super(ownerId, 141, "Goblin Diplomats", Rarity.RARE, new CardType[]{CardType.CREATURE}, "{1}{R}");
-        this.expansionSetCode = "M14";
+    public GoblinDiplomats(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{1}{R}");
         this.subtype.add("Goblin");
 
         this.power = new MageInt(2);

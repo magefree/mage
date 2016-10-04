@@ -25,17 +25,17 @@
  * authors and should not be interpreted as representing official policies, either expressed
  * or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.ravnica;
+package mage.cards.c;
 
 import java.util.UUID;
 import mage.ObjectColor;
 import mage.abilities.Ability;
 import mage.abilities.effects.OneShotEffect;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.AbilityWord;
 import mage.constants.CardType;
 import mage.constants.Outcome;
-import mage.constants.Rarity;
 import mage.filter.FilterPermanent;
 import mage.filter.predicate.mageobject.CardTypePredicate;
 import mage.game.Game;
@@ -48,9 +48,8 @@ import mage.target.common.TargetCreaturePermanent;
  */
 public class CleansingBeam extends CardImpl {
 
-    public CleansingBeam(UUID ownerId) {
-        super(ownerId, 118, "Cleansing Beam", Rarity.UNCOMMON, new CardType[]{CardType.INSTANT}, "{4}{R}");
-        this.expansionSetCode = "RAV";
+    public CleansingBeam(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.INSTANT},"{4}{R}");
 
         // Radiance — Cleansing Beam deals 2 damage to target creature and each other creature that shares a color with it.
         this.getSpellAbility().addEffect(new CleansingBeamEffect());

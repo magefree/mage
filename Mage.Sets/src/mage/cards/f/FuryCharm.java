@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.planarchaos;
+package mage.cards.f;
 
 import java.util.UUID;
 import mage.abilities.Ability;
@@ -39,10 +39,10 @@ import mage.abilities.keyword.SuspendAbility;
 import mage.abilities.keyword.TrampleAbility;
 import mage.cards.Card;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Duration;
 import mage.constants.Outcome;
-import mage.constants.Rarity;
 import mage.counters.CounterType;
 import mage.filter.FilterCard;
 import mage.filter.predicate.mageobject.AbilityPredicate;
@@ -65,9 +65,8 @@ public class FuryCharm extends CardImpl {
         filter.add(new AbilityPredicate(SuspendAbility.class));
     }
 
-    public FuryCharm(UUID ownerId) {
-        super(ownerId, 100, "Fury Charm", Rarity.COMMON, new CardType[]{CardType.INSTANT}, "{1}{R}");
-        this.expansionSetCode = "PLC";
+    public FuryCharm(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.INSTANT},"{1}{R}");
 
         // Choose one -
         this.getSpellAbility().getModes().setMinModes(1);

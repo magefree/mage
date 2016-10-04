@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.riseoftheeldrazi;
+package mage.cards.e;
 
 import java.util.UUID;
 import mage.abilities.ActivatedAbilityImpl;
@@ -33,9 +33,9 @@ import mage.abilities.costs.common.SacrificeSourceCost;
 import mage.abilities.costs.common.TapSourceCost;
 import mage.abilities.effects.common.search.SearchLibraryPutInPlayEffect;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Outcome;
-import mage.constants.Rarity;
 import mage.constants.Zone;
 import mage.filter.common.FilterBasicLandCard;
 import mage.target.common.TargetCardInLibrary;
@@ -46,9 +46,8 @@ import mage.target.common.TargetCardInLibrary;
  */
 public class EvolvingWilds extends CardImpl {
 
-    public EvolvingWilds(UUID ownerId) {
-        super(ownerId, 228, "Evolving Wilds", Rarity.COMMON, new CardType[]{CardType.LAND}, null);
-        this.expansionSetCode = "ROE";
+    public EvolvingWilds(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.LAND},null);
 
         // {T}, Sacrifice Evolving Wilds: Search your library for a basic land card and put it onto the battlefield tapped. Then shuffle your library.
         this.addAbility(new EvolvingWildsAbility());

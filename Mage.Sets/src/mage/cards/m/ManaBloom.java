@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.returntoravnica;
+package mage.cards.m;
 
 import java.util.UUID;
 import mage.abilities.Ability;
@@ -40,8 +40,8 @@ import mage.abilities.effects.common.EntersBattlefieldWithXCountersEffect;
 import mage.abilities.effects.common.ReturnToHandSourceEffect;
 import mage.abilities.mana.ActivateOncePerTurnManaAbility;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.constants.TargetController;
 import mage.constants.Zone;
 import mage.counters.CounterType;
@@ -54,9 +54,8 @@ public class ManaBloom extends CardImpl {
 
     static final String rule = "with X charge counters on it";
 
-    public ManaBloom(UUID ownerId) {
-        super(ownerId, 130, "Mana Bloom", Rarity.RARE, new CardType[]{CardType.ENCHANTMENT}, "{X}{G}");
-        this.expansionSetCode = "RTR";
+    public ManaBloom(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.ENCHANTMENT},"{X}{G}");
 
         // Mana Bloom enters the battlefield with X charge counters on it.
         this.addAbility(new EntersBattlefieldAbility(new EntersBattlefieldWithXCountersEffect(CounterType.CHARGE.createInstance())));

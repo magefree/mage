@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.riseoftheeldrazi;
+package mage.cards.h;
 
 import java.util.UUID;
 
@@ -39,6 +39,7 @@ import mage.abilities.keyword.EnchantAbility;
 import mage.abilities.keyword.FirstStrikeAbility;
 import mage.abilities.keyword.TotemArmorAbility;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.target.TargetPermanent;
 import mage.target.common.TargetCreaturePermanent;
 
@@ -48,9 +49,8 @@ import mage.target.common.TargetCreaturePermanent;
  */
 public class HyenaUmbra extends CardImpl {
 
-    public HyenaUmbra(UUID ownerId) {
-        super(ownerId, 26, "Hyena Umbra", Rarity.COMMON, new CardType[]{CardType.ENCHANTMENT}, "{W}");
-        this.expansionSetCode = "ROE";
+    public HyenaUmbra(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.ENCHANTMENT},"{W}");
         this.subtype.add("Aura");
 
 

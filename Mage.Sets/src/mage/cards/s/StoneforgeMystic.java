@@ -26,7 +26,7 @@
  *  or implied, of BetaSteward_at_googlemail.com.
  */
 
-package mage.sets.worldwake;
+package mage.cards.s;
 
 import java.util.UUID;
 import mage.MageInt;
@@ -37,8 +37,8 @@ import mage.abilities.costs.mana.ManaCostsImpl;
 import mage.abilities.effects.common.PutPermanentOnBattlefieldEffect;
 import mage.abilities.effects.common.search.SearchLibraryPutInHandEffect;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.constants.Zone;
 import mage.filter.FilterCard;
 import mage.filter.predicate.mageobject.SubtypePredicate;
@@ -56,9 +56,8 @@ public class StoneforgeMystic extends CardImpl {
         filter.add(new SubtypePredicate("Equipment"));
     }
 
-    public StoneforgeMystic(UUID ownerId) {
-        super(ownerId, 20, "Stoneforge Mystic", Rarity.RARE, new CardType[]{CardType.CREATURE}, "{1}{W}");
-        this.expansionSetCode = "WWK";
+    public StoneforgeMystic(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{1}{W}");
 
         this.subtype.add("Kor");
         this.subtype.add("Artificer");

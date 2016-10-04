@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.fatereforged;
+package mage.cards.c;
 
 import java.util.UUID;
 import mage.abilities.dynamicvalue.common.StaticValue;
@@ -33,8 +33,8 @@ import mage.abilities.effects.Effect;
 import mage.abilities.effects.common.DamageTargetEffect;
 import mage.abilities.effects.common.DrawCardSourceControllerEffect;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.target.TargetPlayer;
 import mage.target.common.TargetCreaturePermanent;
 import mage.target.targetpointer.SecondTargetPointer;
@@ -45,9 +45,8 @@ import mage.target.targetpointer.SecondTargetPointer;
  */
 public class CunningStrike extends CardImpl {
 
-    public CunningStrike(UUID ownerId) {
-        super(ownerId, 150, "Cunning Strike", Rarity.COMMON, new CardType[]{CardType.INSTANT}, "{3}{U}{R}");
-        this.expansionSetCode = "FRF";
+    public CunningStrike(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.INSTANT},"{3}{U}{R}");
 
         // Cunning Strike deals 2 damage to target creature and 2 damage to target player.
         this.getSpellAbility().addEffect(new DamageTargetEffect(new StaticValue(2), true, "", true));

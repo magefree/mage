@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.shadowmoor;
+package mage.cards.f;
 
 import java.util.UUID;
 import mage.ObjectColor;
@@ -40,10 +40,10 @@ import mage.abilities.keyword.EnchantAbility;
 import mage.abilities.keyword.FirstStrikeAbility;
 import mage.abilities.keyword.WitherAbility;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.AttachmentType;
 import mage.constants.CardType;
 import mage.constants.Outcome;
-import mage.constants.Rarity;
 import mage.constants.Zone;
 import mage.target.TargetPermanent;
 import mage.target.common.TargetCreaturePermanent;
@@ -54,9 +54,8 @@ import mage.target.common.TargetCreaturePermanent;
  */
 public class FistsOfTheDemigod extends CardImpl {
 
-    public FistsOfTheDemigod(UUID ownerId) {
-        super(ownerId, 187, "Fists of the Demigod", Rarity.COMMON, new CardType[]{CardType.ENCHANTMENT}, "{1}{B/R}");
-        this.expansionSetCode = "SHM";
+    public FistsOfTheDemigod(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.ENCHANTMENT},"{1}{B/R}");
         this.subtype.add("Aura");
 
 

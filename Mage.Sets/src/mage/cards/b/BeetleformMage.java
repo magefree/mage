@@ -26,12 +26,11 @@
  *  or implied, of BetaSteward_at_googlemail.com.
  */
 
-package mage.sets.dragonsmaze;
+package mage.cards.b;
 
 import java.util.UUID;
 import mage.constants.CardType;
 import mage.constants.Duration;
-import mage.constants.Rarity;
 import mage.constants.Zone;
 import mage.MageInt;
 import mage.abilities.Ability;
@@ -41,6 +40,7 @@ import mage.abilities.effects.common.continuous.BoostSourceEffect;
 import mage.abilities.effects.common.continuous.GainAbilitySourceEffect;
 import mage.abilities.keyword.FlyingAbility;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 
 /**
  *
@@ -50,9 +50,8 @@ import mage.cards.CardImpl;
 
 public class BeetleformMage extends CardImpl {
 
-    public BeetleformMage (UUID ownerId) {
-        super(ownerId, 54, "Beetleform Mage", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{1}{G}{U}");
-        this.expansionSetCode = "DGM";
+    public BeetleformMage (UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{1}{G}{U}");
         this.subtype.add("Human");
         this.subtype.add("Insect");
         this.subtype.add("Wizard");

@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.commander2013;
+package mage.cards.t;
 
 import java.util.UUID;
 import mage.abilities.Ability;
@@ -36,9 +36,9 @@ import mage.abilities.costs.mana.GenericManaCost;
 import mage.abilities.effects.PreventionEffectImpl;
 import mage.abilities.effects.common.continuous.BoostAllEffect;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Duration;
-import mage.constants.Rarity;
 import mage.constants.Zone;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.filter.predicate.permanent.AttackingPredicate;
@@ -57,9 +57,8 @@ public class Thunderstaff extends CardImpl {
         filter.add(new AttackingPredicate());
     }
 
-    public Thunderstaff(UUID ownerId) {
-        super(ownerId, 267, "Thunderstaff", Rarity.UNCOMMON, new CardType[]{CardType.ARTIFACT}, "{3}");
-        this.expansionSetCode = "C13";
+    public Thunderstaff(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.ARTIFACT},"{3}");
 
         // As long as Thunderstaff is untapped, if a creature would deal combat damage to you, prevent 1 of that damage.
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new ThunderstaffPreventionEffect()));

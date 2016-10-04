@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.battleforzendikar;
+package mage.cards.i;
 
 import java.util.UUID;
 import mage.abilities.dynamicvalue.common.ColorsOfManaSpentToCastCount;
@@ -34,10 +34,10 @@ import mage.abilities.effects.common.continuous.GainAbilityTargetEffect;
 import mage.abilities.effects.common.counter.AddCountersTargetEffect;
 import mage.abilities.keyword.TrampleAbility;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.AbilityWord;
 import mage.constants.CardType;
 import mage.constants.Duration;
-import mage.constants.Rarity;
 import mage.counters.CounterType;
 import mage.target.common.TargetCreaturePermanent;
 
@@ -47,9 +47,8 @@ import mage.target.common.TargetCreaturePermanent;
  */
 public class InfuseWithTheElements extends CardImpl {
 
-    public InfuseWithTheElements(UUID ownerId) {
-        super(ownerId, 175, "Infuse with the Elements", Rarity.UNCOMMON, new CardType[]{CardType.INSTANT}, "{3}{G}");
-        this.expansionSetCode = "BFZ";
+    public InfuseWithTheElements(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.INSTANT},"{3}{G}");
 
         // <i>Converge</i> - Put X +1/+1 counters on target creature, where X is the number of colors of mana spent to cast Infuse with the Elements.
         this.getSpellAbility().setAbilityWord(AbilityWord.CONVERGE);

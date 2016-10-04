@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.commander2014;
+package mage.cards.c;
 
 import java.util.UUID;
 import mage.MageObject;
@@ -34,9 +34,9 @@ import mage.abilities.effects.PreventionEffectData;
 import mage.abilities.effects.PreventionEffectImpl;
 import mage.cards.Card;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Duration;
-import mage.constants.Rarity;
 import mage.game.Game;
 import mage.game.events.GameEvent;
 import mage.game.permanent.Permanent;
@@ -51,9 +51,8 @@ import org.apache.log4j.Logger;
  */
 public class Comeuppance extends CardImpl {
 
-    public Comeuppance(UUID ownerId) {
-        super(ownerId, 4, "Comeuppance", Rarity.RARE, new CardType[]{CardType.INSTANT}, "{3}{W}");
-        this.expansionSetCode = "C14";
+    public Comeuppance(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.INSTANT},"{3}{W}");
 
 
         // Prevent all damage that would be dealt to you and planeswalkers you control this turn by sources you don't control. If damage from a creature source is prevented this way, Comeuppance deals that much damage to that creature. If damage from a noncreature source is prevented this way, Comeuppance deals that much damage to the source's controller.

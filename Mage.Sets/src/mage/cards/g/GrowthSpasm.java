@@ -25,14 +25,14 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.riseoftheeldrazi;
+package mage.cards.g;
 
 import java.util.UUID;
 import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.abilities.effects.common.CreateTokenEffect;
 import mage.abilities.effects.common.search.SearchLibraryPutInPlayEffect;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.filter.common.FilterBasicLandCard;
 import mage.game.permanent.token.EldraziSpawnToken;
 import mage.target.common.TargetCardInLibrary;
@@ -45,9 +45,8 @@ public class GrowthSpasm extends CardImpl {
 
     private static final FilterBasicLandCard filter = new FilterBasicLandCard();
 
-    public GrowthSpasm(UUID ownerId) {
-        super(ownerId, 186, "Growth Spasm", Rarity.COMMON, new CardType[]{CardType.SORCERY}, "{2}{G}");
-        this.expansionSetCode = "ROE";
+    public GrowthSpasm(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{2}{G}");
 
 
         this.getSpellAbility().addEffect(new SearchLibraryPutInPlayEffect(new TargetCardInLibrary(filter), true));

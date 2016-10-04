@@ -25,16 +25,16 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.scourge;
+package mage.cards.n;
 
 import java.util.UUID;
 import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.MageInt;
 import mage.abilities.costs.mana.ManaCostsImpl;
 import mage.abilities.keyword.PlainscyclingAbility;
 import mage.abilities.keyword.VigilanceAbility;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 
 /**
  *
@@ -42,9 +42,8 @@ import mage.cards.CardImpl;
  */
 public class NobleTemplar extends CardImpl {
 
-    public NobleTemplar(UUID ownerId) {
-        super(ownerId, 19, "Noble Templar", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{5}{W}");
-        this.expansionSetCode = "SCG";
+    public NobleTemplar(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{5}{W}");
         this.subtype.add("Human");
         this.subtype.add("Cleric");
         this.subtype.add("Soldier");

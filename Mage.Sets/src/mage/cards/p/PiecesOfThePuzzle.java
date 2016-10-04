@@ -25,15 +25,15 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.shadowsoverinnistrad;
+package mage.cards.p;
 
 import java.util.UUID;
 import mage.abilities.dynamicvalue.common.StaticValue;
 import mage.abilities.effects.Effect;
 import mage.abilities.effects.common.LookLibraryAndPickControllerEffect;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.constants.Zone;
 import mage.filter.FilterCard;
 import mage.filter.predicate.Predicates;
@@ -51,9 +51,8 @@ public class PiecesOfThePuzzle extends CardImpl {
         FILTER.add(Predicates.or(new CardTypePredicate(CardType.INSTANT), new CardTypePredicate(CardType.SORCERY)));
     }
 
-    public PiecesOfThePuzzle(UUID ownerId) {
-        super(ownerId, 78, "Pieces of the Puzzle", Rarity.COMMON, new CardType[]{CardType.SORCERY}, "{2}{U}");
-        this.expansionSetCode = "SOI";
+    public PiecesOfThePuzzle(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{2}{U}");
 
         // Reveal the top five cards of your library. Put up to two instant and/or sorcery cards from among them into your hand and the rest into your graveyard.
         Effect effect = new LookLibraryAndPickControllerEffect(new StaticValue(5), false, new StaticValue(2), FILTER, Zone.GRAVEYARD, false, true, true, Zone.HAND, false);

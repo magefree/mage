@@ -25,13 +25,13 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.antiquities;
+package mage.cards.r;
 
 import java.util.UUID;
 import mage.abilities.effects.common.ReturnToHandTargetEffect;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.filter.common.FilterArtifactCard;
 import mage.target.common.TargetCardInYourGraveyard;
 
@@ -41,9 +41,8 @@ import mage.target.common.TargetCardInYourGraveyard;
  */
 public class Reconstruction extends CardImpl {
 
-    public Reconstruction(UUID ownerId) {
-        super(ownerId, 56, "Reconstruction", Rarity.COMMON, new CardType[]{CardType.SORCERY}, "{U}");
-        this.expansionSetCode = "ATQ";
+    public Reconstruction(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{U}");
 
         // Return target artifact card from your graveyard to your hand.
         this.getSpellAbility().addEffect(new ReturnToHandTargetEffect());

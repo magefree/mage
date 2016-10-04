@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.kaladesh;
+package mage.cards.g;
 
 import java.util.UUID;
 import mage.abilities.effects.Effect;
@@ -33,8 +33,8 @@ import mage.abilities.effects.common.DrawCardSourceControllerEffect;
 import mage.abilities.effects.common.counter.GetEnergyCountersControllerEffect;
 import mage.abilities.effects.keyword.ScryEffect;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.Rarity;
 
 /**
  *
@@ -42,9 +42,8 @@ import mage.constants.Rarity;
  */
 public class GlimmerOfGenius extends CardImpl {
 
-    public GlimmerOfGenius(UUID ownerId) {
-        super(ownerId, 49, "Glimmer of Genius", Rarity.UNCOMMON, new CardType[]{CardType.INSTANT}, "{3}{U}");
-        this.expansionSetCode = "KLD";
+    public GlimmerOfGenius(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.INSTANT},"{3}{U}");
 
         // Scry 2, then draw two card. You get {E}{E}.
         this.getSpellAbility().addEffect(new ScryEffect(2));

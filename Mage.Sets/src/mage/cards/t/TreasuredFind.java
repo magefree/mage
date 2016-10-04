@@ -25,14 +25,14 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.returntoravnica;
+package mage.cards.t;
 
 import java.util.UUID;
 import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.abilities.effects.common.ExileSpellEffect;
 import mage.abilities.effects.common.ReturnFromGraveyardToHandTargetEffect;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.target.common.TargetCardInYourGraveyard;
 
 /**
@@ -41,9 +41,8 @@ import mage.target.common.TargetCardInYourGraveyard;
  */
 public class TreasuredFind extends CardImpl {
 
-    public TreasuredFind(UUID ownerId) {
-        super(ownerId, 204, "Treasured Find", Rarity.UNCOMMON, new CardType[]{CardType.SORCERY}, "{B}{G}");
-        this.expansionSetCode = "RTR";
+    public TreasuredFind(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{B}{G}");
 
 
 

@@ -25,14 +25,13 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.gatecrash;
+package mage.cards.g;
 
 import java.util.UUID;
 import mage.constants.AttachmentType;
 import mage.constants.CardType;
 import mage.constants.Duration;
 import mage.constants.Outcome;
-import mage.constants.Rarity;
 import mage.constants.Zone;
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleStaticAbility;
@@ -41,6 +40,7 @@ import mage.abilities.effects.common.continuous.GainAbilityAttachedEffect;
 import mage.abilities.keyword.EnchantAbility;
 import mage.abilities.keyword.ProtectionAbility;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.filter.FilterObject;
 import mage.filter.predicate.mageobject.MulticoloredPredicate;
 import mage.target.TargetPermanent;
@@ -57,9 +57,8 @@ public class GuildscornWard extends CardImpl {
         filter.add(new MulticoloredPredicate());
     }
 
-    public GuildscornWard(UUID ownerId) {
-        super(ownerId, 15, "Guildscorn Ward", Rarity.COMMON, new CardType[]{CardType.ENCHANTMENT}, "{W}");
-        this.expansionSetCode = "GTC";
+    public GuildscornWard(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.ENCHANTMENT},"{W}");
 
         this.subtype.add("Aura");
 

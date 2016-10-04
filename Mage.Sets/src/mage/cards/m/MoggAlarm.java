@@ -25,15 +25,15 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.nemesis;
+package mage.cards.m;
 
 import java.util.UUID;
 import mage.abilities.costs.AlternativeCostSourceAbility;
 import mage.abilities.costs.common.SacrificeTargetCost;
 import mage.abilities.effects.common.CreateTokenEffect;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.filter.common.FilterControlledPermanent;
 import mage.filter.predicate.mageobject.SubtypePredicate;
 import mage.game.permanent.token.GoblinToken;
@@ -50,9 +50,8 @@ public class MoggAlarm extends CardImpl {
         filter.add(new SubtypePredicate("Mountain"));
     }
     
-    public MoggAlarm(UUID ownerId) {
-        super(ownerId, 93, "Mogg Alarm", Rarity.UNCOMMON, new CardType[]{CardType.SORCERY}, "{1}{R}{R}");
-        this.expansionSetCode = "NEM";
+    public MoggAlarm(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{1}{R}{R}");
 
         // You may sacrifice two Mountains rather than pay Mogg Alarm's mana cost.
         this.addAbility(new AlternativeCostSourceAbility(new SacrificeTargetCost(new TargetControlledPermanent(2, 2, filter, true))));

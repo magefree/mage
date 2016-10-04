@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.shadowsoverinnistrad;
+package mage.cards.a;
 
 import java.util.UUID;
 import mage.abilities.Ability;
@@ -44,9 +44,9 @@ import mage.abilities.keyword.HasteAbility;
 import mage.abilities.keyword.TrampleAbility;
 import mage.abilities.keyword.TransformAbility;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Duration;
-import mage.constants.Rarity;
 import mage.constants.Zone;
 import mage.filter.FilterPermanent;
 import mage.filter.common.FilterControlledCreaturePermanent;
@@ -62,9 +62,8 @@ public class ArlinnEmbracedByTheMoon extends CardImpl {
 
     private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("Creatures you control");
 
-    public ArlinnEmbracedByTheMoon(UUID ownerId) {
-        super(ownerId, 243, "Arlinn, Embraced by the Moon", Rarity.MYTHIC, new CardType[]{CardType.PLANESWALKER}, "");
-        this.expansionSetCode = "SOI";
+    public ArlinnEmbracedByTheMoon(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.PLANESWALKER},"");
         this.subtype.add("Arlinn");
         this.color.setRed(true);
         this.color.setGreen(true);

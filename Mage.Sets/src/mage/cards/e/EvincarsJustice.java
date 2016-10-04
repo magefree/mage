@@ -25,14 +25,14 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.tempest;
+package mage.cards.e;
 
 import java.util.UUID;
 import mage.abilities.effects.common.DamageEverythingEffect;
 import mage.abilities.keyword.BuybackAbility;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.Rarity;
 
 /**
  *
@@ -40,9 +40,8 @@ import mage.constants.Rarity;
  */
 public class EvincarsJustice extends CardImpl {
 
-    public EvincarsJustice(UUID ownerId) {
-        super(ownerId, 28, "Evincar's Justice", Rarity.COMMON, new CardType[]{CardType.SORCERY}, "{2}{B}{B}");
-        this.expansionSetCode = "TMP";
+    public EvincarsJustice(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{2}{B}{B}");
 
         // Buyback {3}
         this.addAbility(new BuybackAbility("{3}"));

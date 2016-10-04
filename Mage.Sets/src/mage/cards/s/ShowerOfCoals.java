@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.odyssey;
+package mage.cards.s;
 
 import java.util.UUID;
 import mage.abilities.condition.common.CardsInControllerGraveCondition;
@@ -33,8 +33,8 @@ import mage.abilities.decorator.ConditionalOneShotEffect;
 import mage.abilities.effects.Effect;
 import mage.abilities.effects.common.DamageTargetEffect;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.target.common.TargetCreatureOrPlayer;
 
 /**
@@ -43,9 +43,8 @@ import mage.target.common.TargetCreatureOrPlayer;
  */
 public class ShowerOfCoals extends CardImpl {
 
-    public ShowerOfCoals(UUID ownerId) {
-        super(ownerId, 221, "Shower of Coals", Rarity.UNCOMMON, new CardType[]{CardType.SORCERY}, "{3}{R}{R}");
-        this.expansionSetCode = "ODY";
+    public ShowerOfCoals(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{3}{R}{R}");
 
 
         // Shower of Coals deals 2 damage to each of up to three target creatures and/or players.

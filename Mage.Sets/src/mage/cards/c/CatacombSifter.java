@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.battleforzendikar;
+package mage.cards.c;
 
 import java.util.UUID;
 import mage.MageInt;
@@ -35,8 +35,8 @@ import mage.abilities.effects.common.CreateTokenEffect;
 import mage.abilities.effects.keyword.ScryEffect;
 import mage.abilities.keyword.DevoidAbility;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.constants.TargetController;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.filter.predicate.permanent.AnotherPredicate;
@@ -55,9 +55,8 @@ public class CatacombSifter extends CardImpl {
         filter.add(new ControllerPredicate(TargetController.YOU));
     }        
 
-    public CatacombSifter(UUID ownerId) {
-        super(ownerId, 201, "Catacomb Sifter", Rarity.UNCOMMON, new CardType[]{CardType.CREATURE}, "{1}{B}{G}");
-        this.expansionSetCode = "BFZ";
+    public CatacombSifter(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{1}{B}{G}");
         this.subtype.add("Eldrazi");
         this.subtype.add("Drone");
         this.power = new MageInt(2);

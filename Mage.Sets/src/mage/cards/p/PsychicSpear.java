@@ -25,14 +25,14 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.betrayersofkamigawa;
+package mage.cards.p;
 
 import java.util.UUID;
 
 import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.abilities.effects.common.discard.DiscardCardYouChooseTargetEffect;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.TargetController;
 import mage.filter.FilterCard;
 import mage.filter.predicate.Predicates;
@@ -51,9 +51,8 @@ public class PsychicSpear extends CardImpl {
         filter.add(Predicates.or(new SubtypePredicate("Spirit"),new SubtypePredicate("Arcane")));
     }
 
-    public PsychicSpear(UUID ownerId) {
-        super(ownerId, 78, "Psychic Spear", Rarity.COMMON, new CardType[]{CardType.SORCERY}, "{B}");
-        this.expansionSetCode = "BOK";
+    public PsychicSpear(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{B}");
 
 
         // Target player reveals his or her hand. You choose a Spirit or Arcane card from it. That player discards that card.

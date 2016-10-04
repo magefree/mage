@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.khansoftarkir;
+package mage.cards.a;
 
 import java.util.UUID;
 import mage.MageInt;
@@ -40,9 +40,9 @@ import mage.abilities.keyword.FlyingAbility;
 import mage.abilities.keyword.MorphAbility;
 import mage.cards.Card;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Outcome;
-import mage.constants.Rarity;
 import mage.constants.TargetController;
 import mage.constants.Zone;
 import mage.game.Game;
@@ -54,9 +54,8 @@ import mage.players.Player;
  */
 public class AshcloudPhoenix extends CardImpl {
 
-    public AshcloudPhoenix(UUID ownerId) {
-        super(ownerId, 99, "Ashcloud Phoenix", Rarity.MYTHIC, new CardType[]{CardType.CREATURE}, "{2}{R}{R}");
-        this.expansionSetCode = "KTK";
+    public AshcloudPhoenix(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{2}{R}{R}");
         this.subtype.add("Phoenix");
 
         this.power = new MageInt(4);

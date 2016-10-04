@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.planarchaos;
+package mage.cards.g;
 
 import java.util.UUID;
 import mage.MageInt;
@@ -34,8 +34,8 @@ import mage.abilities.effects.common.SacrificeSourceEffect;
 import mage.abilities.keyword.HasteAbility;
 import mage.abilities.keyword.TrampleAbility;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.constants.TargetController;
 
 /**
@@ -44,9 +44,8 @@ import mage.constants.TargetController;
  */
 public class Groundbreaker extends CardImpl {
 
-    public Groundbreaker(UUID ownerId) {
-        super(ownerId, 148, "Groundbreaker", Rarity.RARE, new CardType[]{CardType.CREATURE}, "{G}{G}{G}");
-        this.expansionSetCode = "PLC";
+    public Groundbreaker(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{G}{G}{G}");
         this.subtype.add("Elemental");
 
         this.power = new MageInt(6);

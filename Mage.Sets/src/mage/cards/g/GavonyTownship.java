@@ -1,4 +1,4 @@
-package mage.sets.innistrad;
+package mage.cards.g;
 
 import java.util.UUID;
 import mage.abilities.Ability;
@@ -8,17 +8,16 @@ import mage.abilities.costs.mana.ManaCostsImpl;
 import mage.abilities.effects.common.counter.AddCountersAllEffect;
 import mage.abilities.mana.ColorlessManaAbility;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.constants.Zone;
 import mage.counters.CounterType;
 import mage.filter.common.FilterControlledCreaturePermanent;
 
 public class GavonyTownship extends CardImpl {
 
-    public GavonyTownship(UUID ownerId) {
-        super(ownerId, 239, "Gavony Township", Rarity.RARE, new CardType[]{CardType.LAND}, null);
-        this.expansionSetCode = "ISD";
+    public GavonyTownship(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.LAND},null);
 
         // {T}: Add {1} to your mana pool.
         this.addAbility(new ColorlessManaAbility());

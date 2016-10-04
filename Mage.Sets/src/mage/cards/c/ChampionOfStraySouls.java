@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.bornofthegods;
+package mage.cards.c;
 
 import java.util.UUID;
 import mage.MageInt;
@@ -39,8 +39,8 @@ import mage.abilities.effects.Effect;
 import mage.abilities.effects.common.PutOnLibrarySourceEffect;
 import mage.abilities.effects.common.ReturnFromGraveyardToBattlefieldTargetEffect;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.constants.Zone;
 import mage.filter.common.FilterControlledCreaturePermanent;
 import mage.filter.common.FilterCreatureCard;
@@ -61,9 +61,8 @@ public class ChampionOfStraySouls extends CardImpl {
         filter.add(new AnotherPredicate());
     }
 
-    public ChampionOfStraySouls(UUID ownerId) {
-        super(ownerId, 63, "Champion of Stray Souls", Rarity.MYTHIC, new CardType[]{CardType.CREATURE}, "{4}{B}{B}");
-        this.expansionSetCode = "BNG";
+    public ChampionOfStraySouls(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{4}{B}{B}");
         this.subtype.add("Skeleton");
         this.subtype.add("Warrior");
 

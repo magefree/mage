@@ -25,17 +25,17 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.shardsofalara;
+package mage.cards.s;
 
 import java.util.UUID;
 import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.EntersBattlefieldTriggeredAbility;
 import mage.abilities.effects.common.ReturnToHandTargetEffect;
 import mage.abilities.keyword.FlyingAbility;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.filter.common.FilterArtifactCard;
 import mage.target.common.TargetCardInYourGraveyard;
 
@@ -45,9 +45,8 @@ import mage.target.common.TargetCardInYourGraveyard;
  */
 public class SanctumGargoyle extends CardImpl {
 
-    public SanctumGargoyle(UUID ownerId) {
-        super(ownerId, 24, "Sanctum Gargoyle", Rarity.COMMON, new CardType[]{CardType.ARTIFACT, CardType.CREATURE}, "{3}{W}");
-        this.expansionSetCode = "ALA";
+    public SanctumGargoyle(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.ARTIFACT,CardType.CREATURE},"{3}{W}");
         this.subtype.add("Gargoyle");
 
         this.power = new MageInt(2);

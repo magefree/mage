@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.shadowsoverinnistrad;
+package mage.cards.f;
 
 import java.util.UUID;
 import mage.abilities.common.AsEntersBattlefieldAbility;
@@ -34,8 +34,8 @@ import mage.abilities.effects.common.TapSourceUnlessPaysEffect;
 import mage.abilities.mana.GreenManaAbility;
 import mage.abilities.mana.WhiteManaAbility;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.filter.FilterCard;
 import mage.filter.predicate.Predicates;
 import mage.filter.predicate.mageobject.SubtypePredicate;
@@ -54,9 +54,8 @@ public class FortifiedVillage extends CardImpl {
                 new SubtypePredicate("Plains")));
     }
 
-    public FortifiedVillage(UUID ownerId) {
-        super(ownerId, 274, "Fortified Village", Rarity.RARE, new CardType[]{CardType.LAND}, "");
-        this.expansionSetCode = "SOI";
+    public FortifiedVillage(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.LAND},"");
 
         // As Fortified Village enters the battlefield, you may reveal a Forest or Plains card from your hand. If you don't, Fortified Village enters the battlefield tapped.
         this.addAbility(new AsEntersBattlefieldAbility(new TapSourceUnlessPaysEffect(new RevealTargetFromHandCost(new TargetCardInHand(filter))),

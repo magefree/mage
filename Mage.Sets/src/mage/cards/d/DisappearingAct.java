@@ -25,14 +25,14 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.kaladesh;
+package mage.cards.d;
 
 import java.util.UUID;
 import mage.abilities.costs.common.ReturnToHandChosenControlledPermanentCost;
 import mage.abilities.effects.common.CounterTargetEffect;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.filter.common.FilterControlledPermanent;
 import mage.target.TargetSpell;
 import mage.target.common.TargetControlledPermanent;
@@ -43,9 +43,8 @@ import mage.target.common.TargetControlledPermanent;
  */
 public class DisappearingAct extends CardImpl {
 
-    public DisappearingAct(UUID ownerId) {
-        super(ownerId, 43, "Disappearing Act", Rarity.UNCOMMON, new CardType[]{CardType.INSTANT}, "{1}{U}{U}");
-        this.expansionSetCode = "KLD";
+    public DisappearingAct(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.INSTANT},"{1}{U}{U}");
 
         // As an additional cost to cast Disappearing Act, return a permanent you control to its owner's hand.
         this.getSpellAbility().addCost(new ReturnToHandChosenControlledPermanentCost(new TargetControlledPermanent(new FilterControlledPermanent("a permanent"))));

@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.legends;
+package mage.cards.c;
 
 import java.util.UUID;
 import mage.abilities.Ability;
@@ -34,11 +34,11 @@ import mage.abilities.effects.Effect;
 import mage.abilities.effects.ReplacementEffectImpl;
 import mage.abilities.effects.common.PutTopCardOfLibraryIntoGraveTargetEffect;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Duration;
 import mage.constants.Outcome;
 import mage.constants.PhaseStep;
-import mage.constants.Rarity;
 import mage.constants.Zone;
 import mage.game.Game;
 import mage.game.events.GameEvent;
@@ -52,9 +52,8 @@ import mage.watchers.common.CardsDrawnDuringDrawStepWatcher;
  */
 public class ChainsOfMephistopheles extends CardImpl {
 
-    public ChainsOfMephistopheles(UUID ownerId) {
-        super(ownerId, 5, "Chains of Mephistopheles", Rarity.RARE, new CardType[]{CardType.ENCHANTMENT}, "{1}{B}");
-        this.expansionSetCode = "LEG";
+    public ChainsOfMephistopheles(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.ENCHANTMENT},"{1}{B}");
 
         // If a player would draw a card except the first one he or she draws in his or her draw step each turn, that player discards a card instead. If the player discards a card this way, he or she draws a card. If the player doesn't discard a card this way, he or she puts the top card of his or her library into his or her graveyard.
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new ChainsOfMephistophelesReplacementEffect()), new CardsDrawnDuringDrawStepWatcher());

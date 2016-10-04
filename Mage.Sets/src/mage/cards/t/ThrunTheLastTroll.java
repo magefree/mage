@@ -25,12 +25,11 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.mirrodinbesieged;
+package mage.cards.t;
 
 import java.util.UUID;
 
 import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.constants.Zone;
 import mage.MageInt;
 import mage.abilities.common.SimpleActivatedAbility;
@@ -40,6 +39,7 @@ import mage.abilities.effects.common.CantBeCounteredSourceEffect;
 import mage.abilities.effects.common.RegenerateSourceEffect;
 import mage.abilities.keyword.HexproofAbility;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 
 /**
  *
@@ -47,9 +47,8 @@ import mage.cards.CardImpl;
  */
 public class ThrunTheLastTroll extends CardImpl {
 
-    public ThrunTheLastTroll(UUID ownerId) {
-        super(ownerId, 92, "Thrun, the Last Troll", Rarity.MYTHIC, new CardType[]{CardType.CREATURE}, "{2}{G}{G}");
-        this.expansionSetCode = "MBS";
+    public ThrunTheLastTroll(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{2}{G}{G}");
         this.supertype.add("Legendary");
         this.subtype.add("Troll");
         this.subtype.add("Shaman");

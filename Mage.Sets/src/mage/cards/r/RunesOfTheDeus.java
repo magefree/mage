@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.shadowmoor;
+package mage.cards.r;
 
 import java.util.UUID;
 import mage.ObjectColor;
@@ -40,10 +40,10 @@ import mage.abilities.keyword.DoubleStrikeAbility;
 import mage.abilities.keyword.EnchantAbility;
 import mage.abilities.keyword.TrampleAbility;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.AttachmentType;
 import mage.constants.CardType;
 import mage.constants.Outcome;
-import mage.constants.Rarity;
 import mage.constants.Zone;
 import mage.target.TargetPermanent;
 import mage.target.common.TargetCreaturePermanent;
@@ -54,9 +54,8 @@ import mage.target.common.TargetCreaturePermanent;
  */
 public class RunesOfTheDeus extends CardImpl {
 
-    public RunesOfTheDeus(UUID ownerId) {
-        super(ownerId, 215, "Runes of the Deus", Rarity.COMMON, new CardType[]{CardType.ENCHANTMENT}, "{4}{R/G}");
-        this.expansionSetCode = "SHM";
+    public RunesOfTheDeus(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.ENCHANTMENT},"{4}{R/G}");
         this.subtype.add("Aura");
 
 

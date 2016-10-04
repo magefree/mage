@@ -25,17 +25,17 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.zendikar;
+package mage.cards.d;
 
 import java.util.UUID;
 import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.MageInt;
 import mage.ObjectColor;
 import mage.abilities.common.EntersBattlefieldTriggeredAbility;
 import mage.abilities.effects.common.ExileTargetEffect;
 import mage.abilities.keyword.ProtectionAbility;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.filter.FilterCard;
 import mage.filter.FilterPermanent;
 import mage.filter.predicate.mageobject.ColorPredicate;
@@ -55,9 +55,8 @@ public class DevoutLightcaster extends CardImpl {
         filterTarget.add(new ColorPredicate(ObjectColor.BLACK));
     }
 
-    public DevoutLightcaster(UUID ownerId) {
-        super(ownerId, 10, "Devout Lightcaster", Rarity.RARE, new CardType[]{CardType.CREATURE}, "{W}{W}{W}");
-        this.expansionSetCode = "ZEN";
+    public DevoutLightcaster(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{W}{W}{W}");
         this.subtype.add("Kor");
         this.subtype.add("Cleric");
 

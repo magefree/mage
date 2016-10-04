@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.battleforzendikar;
+package mage.cards.s;
 
 import java.util.UUID;
 import mage.abilities.common.SpellCastControllerTriggeredAbility;
@@ -35,8 +35,8 @@ import mage.abilities.effects.common.DoIfCostPaid;
 import mage.abilities.effects.common.search.SearchLibraryPutInHandEffect;
 import mage.abilities.mana.ColorlessManaAbility;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.filter.Filter.ComparisonType;
 import mage.filter.FilterSpell;
 import mage.filter.common.FilterCreatureCard;
@@ -59,9 +59,8 @@ public class SanctumOfUgin extends CardImpl {
         filterSpells.add(new ConvertedManaCostPredicate(ComparisonType.GreaterThan, 6));
     }
 
-    public SanctumOfUgin(UUID ownerId) {
-        super(ownerId, 242, "Sanctum of Ugin", Rarity.RARE, new CardType[]{CardType.LAND}, "");
-        this.expansionSetCode = "BFZ";
+    public SanctumOfUgin(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.LAND},"");
 
         // {T}: Add {C} to your mana pool.
         this.addAbility(new ColorlessManaAbility());

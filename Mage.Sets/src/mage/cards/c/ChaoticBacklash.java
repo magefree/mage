@@ -25,16 +25,16 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.eventide;
+package mage.cards.c;
 
 import java.util.UUID;
 import mage.ObjectColor;
 import mage.abilities.Ability;
 import mage.abilities.effects.OneShotEffect;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Outcome;
-import mage.constants.Rarity;
 import mage.filter.FilterPermanent;
 import mage.filter.predicate.Predicates;
 import mage.filter.predicate.mageobject.ColorPredicate;
@@ -48,9 +48,8 @@ import mage.target.TargetPlayer;
  */
 public class ChaoticBacklash extends CardImpl {
 
-    public ChaoticBacklash(UUID ownerId) {
-        super(ownerId, 49, "Chaotic Backlash", Rarity.UNCOMMON, new CardType[]{CardType.INSTANT}, "{4}{R}");
-        this.expansionSetCode = "EVE";
+    public ChaoticBacklash(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.INSTANT},"{4}{R}");
 
 
         // Chaotic Backlash deals damage to target player equal to twice the number of white and/or blue permanents he or she controls.

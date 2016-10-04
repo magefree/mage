@@ -25,13 +25,13 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.urzaslegacy;
+package mage.cards.o;
 
 import java.util.UUID;
 import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.abilities.effects.common.DrawCardTargetEffect;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.target.TargetPlayer;
 
 /**
@@ -40,9 +40,8 @@ import mage.target.TargetPlayer;
  */
 public class Opportunity extends CardImpl {
 
-    public Opportunity(UUID ownerId) {
-        super(ownerId, 37, "Opportunity", Rarity.UNCOMMON, new CardType[]{CardType.INSTANT}, "{4}{U}{U}");
-        this.expansionSetCode = "ULG";
+    public Opportunity(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.INSTANT},"{4}{U}{U}");
 
 
         // Target player draws four cards.

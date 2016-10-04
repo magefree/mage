@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.magic2010;
+package mage.cards.l;
 
 import java.util.LinkedHashSet;
 import java.util.Set;
@@ -38,9 +38,9 @@ import mage.abilities.effects.common.discard.DiscardTargetEffect;
 import mage.abilities.effects.common.search.SearchLibraryPutOnLibraryEffect;
 import mage.cards.Card;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Outcome;
-import mage.constants.Rarity;
 import mage.constants.Zone;
 import mage.game.Game;
 import mage.players.Player;
@@ -53,9 +53,8 @@ import mage.target.common.TargetCardInLibrary;
  */
 public class LilianaVess extends CardImpl {
 
-    public LilianaVess(UUID ownerId) {
-        super(ownerId, 102, "Liliana Vess", Rarity.MYTHIC, new CardType[]{CardType.PLANESWALKER}, "{3}{B}{B}");
-        this.expansionSetCode = "M10";
+    public LilianaVess(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.PLANESWALKER},"{3}{B}{B}");
         this.subtype.add("Liliana");
 
         this.addAbility(new PlanswalkerEntersWithLoyalityCountersAbility(5));

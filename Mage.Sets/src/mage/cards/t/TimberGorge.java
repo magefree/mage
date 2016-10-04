@@ -25,15 +25,15 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.oathofthegatewatch;
+package mage.cards.t;
 
 import java.util.UUID;
 import mage.abilities.common.EntersBattlefieldTappedAbility;
 import mage.abilities.mana.GreenManaAbility;
 import mage.abilities.mana.RedManaAbility;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.Rarity;
 
 /**
  *
@@ -41,9 +41,8 @@ import mage.constants.Rarity;
  */
 public class TimberGorge extends CardImpl {
 
-    public TimberGorge(UUID ownerId) {
-        super(ownerId, 179, "Timber Gorge", Rarity.UNCOMMON, new CardType[]{CardType.LAND}, "");
-        this.expansionSetCode = "OGW";
+    public TimberGorge(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.LAND},"");
 
         // Timber Gorge enters the battlefield tapped.
         this.addAbility(new EntersBattlefieldTappedAbility());

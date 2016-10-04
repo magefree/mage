@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.shardsofalara;
+package mage.cards.e;
 
 import java.util.UUID;
 import mage.abilities.LoyaltyAbility;
@@ -41,9 +41,9 @@ import mage.abilities.effects.common.continuous.GainAbilityTargetEffect;
 import mage.abilities.keyword.FlyingAbility;
 import mage.abilities.keyword.IndestructibleAbility;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Duration;
-import mage.constants.Rarity;
 import mage.constants.Zone;
 import mage.filter.common.FilterControlledPermanent;
 import mage.filter.predicate.Predicates;
@@ -59,9 +59,8 @@ import mage.target.common.TargetCreaturePermanent;
  */
 public class ElspethKnightErrant extends CardImpl {
 
-    public ElspethKnightErrant(UUID ownerId) {
-        super(ownerId, 9, "Elspeth, Knight-Errant", Rarity.MYTHIC, new CardType[]{CardType.PLANESWALKER}, "{2}{W}{W}");
-        this.expansionSetCode = "ALA";
+    public ElspethKnightErrant(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.PLANESWALKER},"{2}{W}{W}");
         this.subtype.add("Elspeth");
 
         this.addAbility(new PlanswalkerEntersWithLoyalityCountersAbility(4));

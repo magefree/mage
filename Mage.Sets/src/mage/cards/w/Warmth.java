@@ -25,15 +25,15 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.tempest;
+package mage.cards.w;
 
 import java.util.UUID;
 import mage.ObjectColor;
 import mage.abilities.common.SpellCastOpponentTriggeredAbility;
 import mage.abilities.effects.common.GainLifeEffect;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.filter.FilterSpell;
 import mage.filter.predicate.mageobject.ColorPredicate;
 
@@ -48,9 +48,8 @@ public class Warmth extends CardImpl {
         filter.add(new ColorPredicate(ObjectColor.RED));
     }
 
-    public Warmth(UUID ownerId) {
-        super(ownerId, 263, "Warmth", Rarity.UNCOMMON, new CardType[]{CardType.ENCHANTMENT}, "{1}{W}");
-        this.expansionSetCode = "TMP";
+    public Warmth(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.ENCHANTMENT},"{1}{W}");
 
 
         // Whenever an opponent casts a red spell, you gain 2 life.

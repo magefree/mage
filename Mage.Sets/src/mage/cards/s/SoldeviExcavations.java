@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.alliances;
+package mage.cards.s;
 
 import java.util.UUID;
 import mage.Mana;
@@ -39,8 +39,8 @@ import mage.abilities.effects.common.EnterBattlefieldPayCostOrPutGraveyardEffect
 import mage.abilities.effects.keyword.ScryEffect;
 import mage.abilities.mana.SimpleManaAbility;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.constants.Zone;
 import mage.filter.common.FilterControlledPermanent;
 import mage.filter.predicate.Predicates;
@@ -61,9 +61,8 @@ public class SoldeviExcavations extends CardImpl {
         filter.add(Predicates.not(new TappedPredicate()));
     }
 
-    public SoldeviExcavations(UUID ownerId) {
-        super(ownerId, 188, "Soldevi Excavations", Rarity.RARE, new CardType[]{CardType.LAND}, "");
-        this.expansionSetCode = "ALL";
+    public SoldeviExcavations(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.LAND},"");
 
         // If Soldevi Excavations would enter the battlefield, sacrifice an untapped Island instead. If you do, put Soldevi Excavations onto the battlefield. If you don't, put it into its owner's graveyard.
         this.addAbility(new SimpleStaticAbility(Zone.ALL, new EnterBattlefieldPayCostOrPutGraveyardEffect(new SacrificeTargetCost(new TargetControlledPermanent(filter)))));

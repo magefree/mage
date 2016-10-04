@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.betrayersofkamigawa;
+package mage.cards.s;
 
 import java.util.UUID;
 import mage.ObjectColor;
@@ -36,9 +36,9 @@ import mage.abilities.dynamicvalue.common.ExileFromHandCostCardConvertedMana;
 import mage.abilities.dynamicvalue.common.SignInversionDynamicValue;
 import mage.abilities.effects.common.continuous.BoostTargetEffect;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Duration;
-import mage.constants.Rarity;
 import mage.filter.common.FilterOwnedCard;
 import mage.filter.predicate.Predicates;
 import mage.filter.predicate.mageobject.CardIdPredicate;
@@ -52,9 +52,8 @@ import mage.target.common.TargetCreaturePermanent;
  */
 public class SickeningShoal extends CardImpl {
 
-    public SickeningShoal(UUID ownerId) {
-        super(ownerId, 82, "Sickening Shoal", Rarity.RARE, new CardType[]{CardType.INSTANT}, "{X}{B}{B}");
-        this.expansionSetCode = "BOK";
+    public SickeningShoal(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.INSTANT},"{X}{B}{B}");
         this.subtype.add("Arcane");
 
 

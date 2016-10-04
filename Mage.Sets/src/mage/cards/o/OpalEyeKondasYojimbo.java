@@ -25,13 +25,12 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.betrayersofkamigawa;
+package mage.cards.o;
 
 import java.util.UUID;
 
 import mage.constants.CardType;
 import mage.constants.Outcome;
-import mage.constants.Rarity;
 import mage.constants.Zone;
 import mage.MageInt;
 import mage.MageObject;
@@ -44,6 +43,7 @@ import mage.abilities.effects.common.PreventDamageToSourceEffect;
 import mage.abilities.keyword.BushidoAbility;
 import mage.abilities.keyword.DefenderAbility;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.Duration;
 import mage.game.Game;
 import mage.game.events.DamageEvent;
@@ -57,9 +57,8 @@ import mage.target.TargetSource;
  */
 public class OpalEyeKondasYojimbo extends CardImpl {
 
-    public OpalEyeKondasYojimbo(UUID ownerId) {
-        super(ownerId, 17, "Opal-Eye, Konda's Yojimbo", Rarity.RARE, new CardType[]{CardType.CREATURE}, "{1}{W}{W}");
-        this.expansionSetCode = "BOK";
+    public OpalEyeKondasYojimbo(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{1}{W}{W}");
         this.supertype.add("Legendary");
         this.subtype.add("Fox");
         this.subtype.add("Samurai");

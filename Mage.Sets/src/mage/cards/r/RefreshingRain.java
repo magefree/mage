@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.nemesis;
+package mage.cards.r;
 
 import java.util.UUID;
 import mage.abilities.condition.CompoundCondition;
@@ -35,8 +35,8 @@ import mage.abilities.condition.common.PermanentsOnTheBattlefieldCondition;
 import mage.abilities.costs.AlternativeCostSourceAbility;
 import mage.abilities.effects.common.GainLifeTargetEffect;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.filter.FilterPermanent;
 import mage.filter.predicate.mageobject.SubtypePredicate;
 import mage.target.TargetPlayer;
@@ -55,9 +55,8 @@ public class RefreshingRain extends CardImpl {
         filterSwamp.add(new SubtypePredicate(("Swamp")));
     }
 
-    public RefreshingRain(UUID ownerId) {
-        super(ownerId, 110, "Refreshing Rain", Rarity.UNCOMMON, new CardType[]{CardType.INSTANT}, "{3}{G}");
-        this.expansionSetCode = "NEM";
+    public RefreshingRain(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.INSTANT},"{3}{G}");
 
         // If an opponent controls a Swamp and you control a Forest, you may cast Refreshing Rain without paying its mana cost.
         Condition condition = new CompoundCondition("If an opponent controls a Swamp and you control a Forest",

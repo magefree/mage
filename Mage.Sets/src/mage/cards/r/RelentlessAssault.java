@@ -25,14 +25,14 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.seventhedition;
+package mage.cards.r;
 
 import java.util.UUID;
 import mage.abilities.effects.common.AddCombatAndMainPhaseEffect;
 import mage.abilities.effects.common.UntapAllThatAttackedEffect;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.watchers.common.AttackedThisTurnWatcher;
 
 /**
@@ -41,9 +41,8 @@ import mage.watchers.common.AttackedThisTurnWatcher;
  */
 public class RelentlessAssault extends CardImpl {
 
-    public RelentlessAssault(UUID ownerId) {
-        super(ownerId, 214, "Relentless Assault", Rarity.RARE, new CardType[]{CardType.SORCERY}, "{2}{R}{R}");
-        this.expansionSetCode = "7ED";
+    public RelentlessAssault(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{2}{R}{R}");
 
         // Untap all creatures that attacked this turn. After this main phase, there is an additional combat phase followed by an additional main phase.
         this.getSpellAbility().addWatcher(new AttackedThisTurnWatcher());

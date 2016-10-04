@@ -25,20 +25,20 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.onslaught;
+package mage.cards.w;
 
 import java.util.List;
 import java.util.UUID;
 
 import mage.constants.CardType;
 import mage.constants.Outcome;
-import mage.constants.Rarity;
 import mage.constants.Zone;
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.costs.mana.ManaCostsImpl;
 import mage.abilities.effects.ReplacementEffectImpl;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.Duration;
 import mage.filter.common.FilterControlledPermanent;
 import mage.game.Game;
@@ -53,9 +53,8 @@ import mage.target.common.TargetControlledPermanent;
  */
 public class WordsOfWind extends CardImpl {
 
-    public WordsOfWind(UUID ownerId) {
-        super(ownerId, 122, "Words of Wind", Rarity.RARE, new CardType[]{CardType.ENCHANTMENT}, "{2}{U}");
-        this.expansionSetCode = "ONS";
+    public WordsOfWind(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.ENCHANTMENT},"{2}{U}");
 
 
         // {1}: The next time you would draw a card this turn, each player returns a permanent he or she controls to its owner's hand instead.

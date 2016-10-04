@@ -25,12 +25,11 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.timespiral;
+package mage.cards.h;
 
 import java.util.UUID;
 import mage.constants.CardType;
 import mage.constants.Duration;
-import mage.constants.Rarity;
 import mage.constants.Zone;
 import mage.MageInt;
 import mage.abilities.TriggeredAbility;
@@ -39,6 +38,7 @@ import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.effects.common.DestroyTargetEffect;
 import mage.abilities.effects.common.continuous.GainAbilityAllEffect;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.filter.common.FilterArtifactOrEnchantmentPermanent;
 import mage.filter.predicate.mageobject.SubtypePredicate;
@@ -55,9 +55,8 @@ public class HarmonicSliver extends CardImpl {
         filterSliver.add(new SubtypePredicate("Sliver"));
     }
 
-    public HarmonicSliver(UUID ownerId) {
-        super(ownerId, 240, "Harmonic Sliver", Rarity.UNCOMMON, new CardType[]{CardType.CREATURE}, "{1}{G}{W}");
-        this.expansionSetCode = "TSP";
+    public HarmonicSliver(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{1}{G}{W}");
         this.subtype.add("Sliver");
 
         this.power = new MageInt(1);

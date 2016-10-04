@@ -25,14 +25,14 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.gatecrash;
+package mage.cards.m;
 
 import mage.abilities.Ability;
 import mage.abilities.effects.OneShotEffect;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Outcome;
-import mage.constants.Rarity;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
@@ -48,9 +48,8 @@ import java.util.UUID;
  */
 public class MimingSlime extends CardImpl {
 
-    public MimingSlime(UUID ownerId) {
-        super(ownerId, 126, "Miming Slime", Rarity.UNCOMMON, new CardType[]{CardType.SORCERY}, "{2}{G}");
-        this.expansionSetCode = "GTC";
+    public MimingSlime(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{2}{G}");
 
         // Put an X/X green Ooze creature token onto the battlefield, where X is the greatest power among creatures you control.
         this.getSpellAbility().addEffect(new MimingSlimeEffect());

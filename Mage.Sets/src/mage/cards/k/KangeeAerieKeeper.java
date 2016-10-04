@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.invasion;
+package mage.cards.k;
 
 import java.util.UUID;
 import mage.MageInt;
@@ -44,9 +44,9 @@ import mage.abilities.keyword.FlyingAbility;
 import mage.abilities.keyword.KickerAbility;
 import mage.cards.Card;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Duration;
-import mage.constants.Rarity;
 import mage.constants.Zone;
 import mage.counters.CounterType;
 import mage.filter.common.FilterCreaturePermanent;
@@ -67,9 +67,8 @@ public class KangeeAerieKeeper extends CardImpl {
         filter.add(new AnotherPredicate());
     }
 
-    public KangeeAerieKeeper(UUID ownerId) {
-        super(ownerId, 253, "Kangee, Aerie Keeper", Rarity.RARE, new CardType[]{CardType.CREATURE}, "{2}{W}{U}");
-        this.expansionSetCode = "INV";
+    public KangeeAerieKeeper(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{2}{W}{U}");
         this.supertype.add("Legendary");
         this.subtype.add("Bird");
         this.subtype.add("Wizard");

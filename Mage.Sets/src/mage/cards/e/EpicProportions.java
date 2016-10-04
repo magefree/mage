@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.lorwyn;
+package mage.cards.e;
 
 import mage.constants.*;
 import mage.abilities.Ability;
@@ -37,6 +37,7 @@ import mage.abilities.keyword.EnchantAbility;
 import mage.abilities.keyword.FlashAbility;
 import mage.abilities.keyword.TrampleAbility;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.target.TargetPermanent;
 import mage.target.common.TargetCreaturePermanent;
 
@@ -48,9 +49,8 @@ import java.util.UUID;
  */
 public class EpicProportions extends CardImpl {
 
-    public EpicProportions(UUID ownerId) {
-        super(ownerId, 209, "Epic Proportions", Rarity.RARE, new CardType[]{CardType.ENCHANTMENT}, "{4}{G}{G}");
-        this.expansionSetCode = "LRW";
+    public EpicProportions(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.ENCHANTMENT},"{4}{G}{G}");
         this.subtype.add("Aura");
 
         this.addAbility(FlashAbility.getInstance());

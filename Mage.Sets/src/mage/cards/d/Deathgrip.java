@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.limitedbeta;
+package mage.cards.d;
 
 import java.util.UUID;
 import mage.ObjectColor;
@@ -34,8 +34,8 @@ import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.costs.mana.ManaCostsImpl;
 import mage.abilities.effects.common.CounterTargetEffect;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.constants.Zone;
 import mage.filter.FilterSpell;
 import mage.filter.predicate.mageobject.ColorPredicate;
@@ -51,9 +51,8 @@ public class Deathgrip extends CardImpl {
         filter.add(new ColorPredicate(ObjectColor.GREEN));
     }
 
-    public Deathgrip(UUID ownerId) {
-        super(ownerId, 9, "Deathgrip", Rarity.UNCOMMON, new CardType[]{CardType.ENCHANTMENT}, "{B}{B}");
-        this.expansionSetCode = "LEB";
+    public Deathgrip(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.ENCHANTMENT},"{B}{B}");
 
         // {B}{B}: Counter target green spell.
         Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new CounterTargetEffect(), new ManaCostsImpl("{B}{B}"));

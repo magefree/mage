@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.oathofthegatewatch;
+package mage.cards.o;
 
 import java.util.UUID;
 import mage.MageObject;
@@ -37,6 +37,7 @@ import mage.abilities.effects.AsThoughManaEffect;
 import mage.abilities.effects.OneShotEffect;
 import mage.cards.Card;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.cards.Cards;
 import mage.cards.CardsImpl;
 import mage.constants.AsThoughEffectType;
@@ -44,7 +45,6 @@ import mage.constants.CardType;
 import mage.constants.Duration;
 import mage.constants.ManaType;
 import mage.constants.Outcome;
-import mage.constants.Rarity;
 import mage.constants.Zone;
 import mage.filter.FilterCard;
 import mage.filter.predicate.Predicates;
@@ -60,9 +60,8 @@ import mage.target.TargetCard;
  */
 public class OathOfNissa extends CardImpl {
 
-    public OathOfNissa(UUID ownerId) {
-        super(ownerId, 140, "Oath of Nissa", Rarity.RARE, new CardType[]{CardType.ENCHANTMENT}, "{G}");
-        this.expansionSetCode = "OGW";
+    public OathOfNissa(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.ENCHANTMENT},"{G}");
         this.supertype.add("Legendary");
 
         // When Oath of Nissa enters the battlefield, look at the top three cards of your library. You may reveal a creature, land, or planeswalker card from among them and put it into your hand. Put the rest on the bottom of your library in any order.

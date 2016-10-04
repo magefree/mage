@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.riseoftheeldrazi;
+package mage.cards.d;
 
 import java.util.UUID;
 import mage.abilities.Ability;
@@ -33,9 +33,9 @@ import mage.abilities.costs.common.SacrificeXTargetCost;
 import mage.abilities.dynamicvalue.common.GetXValue;
 import mage.abilities.effects.OneShotEffect;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Outcome;
-import mage.constants.Rarity;
 import mage.filter.common.FilterControlledLandPermanent;
 import mage.game.Game;
 import mage.game.permanent.token.Token;
@@ -46,9 +46,8 @@ import mage.game.permanent.token.Token;
  */
 public class DevastatingSummons extends CardImpl {
 
-    public DevastatingSummons(UUID ownerId) {
-        super(ownerId, 140, "Devastating Summons", Rarity.RARE, new CardType[]{CardType.SORCERY}, "{R}");
-        this.expansionSetCode = "ROE";
+    public DevastatingSummons(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{R}");
 
 
         // As an additional cost to cast Devastating Summons, sacrifice X lands.

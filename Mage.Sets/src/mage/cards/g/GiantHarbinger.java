@@ -25,15 +25,15 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.lorwyn;
+package mage.cards.g;
 
 import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.common.EntersBattlefieldTriggeredAbility;
 import mage.abilities.effects.common.search.SearchLibraryPutOnLibraryEffect;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.filter.FilterCard;
 import mage.filter.predicate.mageobject.SubtypePredicate;
 import mage.target.common.TargetCardInLibrary;
@@ -49,9 +49,8 @@ public class GiantHarbinger extends CardImpl {
         filter.add(new SubtypePredicate("Giant"));
     }
 
-    public GiantHarbinger(UUID ownerId) {
-        super(ownerId, 169, "Giant Harbinger", Rarity.UNCOMMON, new CardType[]{CardType.CREATURE}, "{4}{R}");
-        this.expansionSetCode = "LRW";
+    public GiantHarbinger(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{4}{R}");
         this.subtype.add("Giant");
         this.subtype.add("Shaman");
         this.power = new MageInt(3);

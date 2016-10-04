@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.bornofthegods;
+package mage.cards.s;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -37,9 +37,9 @@ import mage.abilities.TriggeredAbilityImpl;
 import mage.abilities.effects.Effect;
 import mage.abilities.effects.OneShotEffect;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Outcome;
-import mage.constants.Rarity;
 import mage.constants.Zone;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.filter.predicate.permanent.ControllerIdPredicate;
@@ -58,9 +58,8 @@ import mage.target.targetpointer.FixedTarget;
  */
 public class SatyrFiredancer extends CardImpl {
 
-    public SatyrFiredancer(UUID ownerId) {
-        super(ownerId, 108, "Satyr Firedancer", Rarity.RARE, new CardType[]{CardType.ENCHANTMENT, CardType.CREATURE}, "{1}{R}");
-        this.expansionSetCode = "BNG";
+    public SatyrFiredancer(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.ENCHANTMENT,CardType.CREATURE},"{1}{R}");
         this.subtype.add("Satyr");
 
         this.power = new MageInt(1);

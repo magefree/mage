@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.shadowsoverinnistrad;
+package mage.cards.i;
 
 import java.util.UUID;
 import mage.MageInt;
@@ -42,9 +42,9 @@ import mage.abilities.keyword.HexproofAbility;
 import mage.abilities.keyword.IndestructibleAbility;
 import mage.abilities.keyword.TransformAbility;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Duration;
-import mage.constants.Rarity;
 import mage.constants.Zone;
 
 /**
@@ -53,9 +53,8 @@ import mage.constants.Zone;
  */
 public class InsidiousMist extends CardImpl {
 
-    public InsidiousMist(UUID ownerId) {
-        super(ownerId, 108, "Insidious Mist", Rarity.RARE, new CardType[]{CardType.CREATURE}, "");
-        this.expansionSetCode = "SOI";
+    public InsidiousMist(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"");
         this.subtype.add("Elemental");
         this.power = new MageInt(0);
         this.toughness = new MageInt(1);

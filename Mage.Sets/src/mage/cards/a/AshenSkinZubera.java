@@ -26,18 +26,18 @@
  *  or implied, of BetaSteward_at_googlemail.com.
  */
 
-package mage.sets.championsofkamigawa;
+package mage.cards.a;
 
 import java.util.UUID;
 
 import mage.abilities.dynamicvalue.common.ZuberasDiedDynamicValue;
 import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.DiesTriggeredAbility;
 import mage.abilities.effects.common.discard.DiscardTargetEffect;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.target.common.TargetOpponent;
 import mage.watchers.common.ZuberasDiedWatcher;
 
@@ -46,9 +46,8 @@ import mage.watchers.common.ZuberasDiedWatcher;
  */
 public class AshenSkinZubera extends CardImpl {
 
-    public AshenSkinZubera(UUID ownerId) {
-        super(ownerId, 101, "Ashen-Skin Zubera", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{1}{B}");
-        this.expansionSetCode = "CHK";
+    public AshenSkinZubera(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{1}{B}");
         this.subtype.add("Zubera");
         this.subtype.add("Spirit");
 

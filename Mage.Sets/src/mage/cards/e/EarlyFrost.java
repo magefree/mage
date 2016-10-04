@@ -25,13 +25,13 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.fifthdawn;
+package mage.cards.e;
 
 import java.util.UUID;
 import mage.abilities.effects.common.TapTargetEffect;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.filter.common.FilterLandPermanent;
 import mage.target.common.TargetLandPermanent;
 
@@ -41,9 +41,8 @@ import mage.target.common.TargetLandPermanent;
  */
 public class EarlyFrost extends CardImpl {
 
-    public EarlyFrost(UUID ownerId) {
-        super(ownerId, 29, "Early Frost", Rarity.COMMON, new CardType[]{CardType.INSTANT}, "{1}{U}");
-        this.expansionSetCode = "5DN";
+    public EarlyFrost(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.INSTANT},"{1}{U}");
 
 
         // Tap up to three target lands.

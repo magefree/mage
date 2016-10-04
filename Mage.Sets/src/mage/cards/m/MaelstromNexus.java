@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.alarareborn;
+package mage.cards.m;
 
 import java.util.UUID;
 import mage.abilities.Ability;
@@ -33,11 +33,11 @@ import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.effects.ContinuousEffectImpl;
 import mage.abilities.keyword.CascadeAbility;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Duration;
 import mage.constants.Layer;
 import mage.constants.Outcome;
-import mage.constants.Rarity;
 import mage.constants.SubLayer;
 import mage.constants.Zone;
 import mage.game.Game;
@@ -53,9 +53,8 @@ import mage.watchers.common.FirstSpellCastThisTurnWatcher;
  */
 public class MaelstromNexus extends CardImpl {
 
-    public MaelstromNexus(UUID ownerId) {
-        super(ownerId, 130, "Maelstrom Nexus", Rarity.MYTHIC, new CardType[]{CardType.ENCHANTMENT}, "{W}{U}{B}{R}{G}");
-        this.expansionSetCode = "ARB";
+    public MaelstromNexus(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.ENCHANTMENT},"{W}{U}{B}{R}{G}");
 
         // The first spell you cast each turn has cascade.
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new MaelstromNexusGainCascadeFirstSpellEffect()), new FirstSpellCastThisTurnWatcher());

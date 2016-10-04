@@ -25,13 +25,13 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.betrayersofkamigawa;
+package mage.cards.r;
 
 import java.util.UUID;
 import mage.abilities.effects.common.ReturnToHandFromBattlefieldAllEffect;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.filter.common.FilterArtifactOrEnchantmentPermanent;
 
 /**
@@ -40,9 +40,8 @@ import mage.filter.common.FilterArtifactOrEnchantmentPermanent;
  */
 public class ReduceToDreams extends CardImpl {
 
-    public ReduceToDreams(UUID ownerId) {
-        super(ownerId, 49, "Reduce to Dreams", Rarity.RARE, new CardType[]{CardType.SORCERY}, "{3}{U}{U}");
-        this.expansionSetCode = "BOK";
+    public ReduceToDreams(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{3}{U}{U}");
 
         // Return all artifacts and enchantments to their owners' hands.
         this.getSpellAbility().addEffect(new ReturnToHandFromBattlefieldAllEffect(new FilterArtifactOrEnchantmentPermanent()));

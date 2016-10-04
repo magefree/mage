@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.dragonsoftarkir;
+package mage.cards.b;
 
 import java.util.UUID;
 import mage.MageInt;
@@ -36,8 +36,8 @@ import mage.abilities.keyword.FlyingAbility;
 import mage.abilities.keyword.HexproofAbility;
 import mage.abilities.keyword.MorphAbility;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.counters.CounterType;
 import mage.filter.common.FilterControlledCreaturePermanent;
 import mage.filter.predicate.mageobject.SubtypePredicate;
@@ -56,9 +56,8 @@ public class BelltollDragon extends CardImpl {
         filter.add(new SubtypePredicate("Dragon"));
     }
 
-    public BelltollDragon(UUID ownerId) {
-        super(ownerId, 46, "Belltoll Dragon", Rarity.UNCOMMON, new CardType[]{CardType.CREATURE}, "{5}{U}");
-        this.expansionSetCode = "DTK";
+    public BelltollDragon(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{5}{U}");
         this.subtype.add("Dragon");
         this.power = new MageInt(3);
         this.toughness = new MageInt(3);

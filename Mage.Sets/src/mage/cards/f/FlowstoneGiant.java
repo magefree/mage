@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.tempest;
+package mage.cards.f;
 
 import java.util.UUID;
 
@@ -35,6 +35,7 @@ import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.costs.mana.ColoredManaCost;
 import mage.abilities.effects.common.continuous.BoostSourceEffect;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 
 /**
  *
@@ -42,9 +43,8 @@ import mage.cards.CardImpl;
  */
 public class FlowstoneGiant extends CardImpl {
 
-    public FlowstoneGiant(UUID ownerId) {
-        super(ownerId, 174, "Flowstone Giant", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{2}{R}{R}");
-        this.expansionSetCode = "TMP";
+    public FlowstoneGiant(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{2}{R}{R}");
         this.subtype.add("Giant");
 
         this.power = new MageInt(3);

@@ -25,13 +25,13 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.prophecy;
+package mage.cards.s;
 
 import java.util.UUID;
 import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.abilities.effects.common.DamageTargetEffect;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.target.common.TargetCreatureOrPlayer;
 
 /**
@@ -40,9 +40,8 @@ import mage.target.common.TargetCreatureOrPlayer;
  */
 public class SearingWind extends CardImpl {
 
-    public SearingWind(UUID ownerId) {
-        super(ownerId, 103, "Searing Wind", Rarity.RARE, new CardType[]{CardType.INSTANT}, "{8}{R}");
-        this.expansionSetCode = "PCY";
+    public SearingWind(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.INSTANT},"{8}{R}");
 
 
         // Searing Wind deals 10 damage to target creature or player.

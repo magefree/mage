@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.eldritchmoon;
+package mage.cards.a;
 
 import java.util.UUID;
 import mage.MageInt;
@@ -34,8 +34,8 @@ import mage.abilities.effects.common.LoseLifeOpponentsEffect;
 import mage.abilities.keyword.DeathtouchAbility;
 import mage.abilities.keyword.FlyingAbility;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.Rarity;
 
 /**
  *
@@ -43,9 +43,8 @@ import mage.constants.Rarity;
  */
 public class AuroraOfEmrakul extends CardImpl {
 
-    public AuroraOfEmrakul(UUID ownerId) {
-        super(ownerId, 193, "Aurora of Emrakul", Rarity.UNCOMMON, new CardType[]{CardType.CREATURE}, "");
-        this.expansionSetCode = "EMN";
+    public AuroraOfEmrakul(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"");
         this.subtype.add("Eldrazi");
         this.subtype.add("Reflection");
         this.power = new MageInt(1);

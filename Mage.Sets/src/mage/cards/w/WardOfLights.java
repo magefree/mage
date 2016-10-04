@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.mirage;
+package mage.cards.w;
 
 import java.util.UUID;
 import mage.abilities.Ability;
@@ -38,10 +38,10 @@ import mage.abilities.effects.common.continuous.CastAsThoughItHadFlashSourceEffe
 import mage.abilities.effects.keyword.ProtectionChosenColorAttachedEffect;
 import mage.abilities.keyword.EnchantAbility;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Duration;
 import mage.constants.Outcome;
-import mage.constants.Rarity;
 import mage.constants.Zone;
 import mage.target.TargetPermanent;
 import mage.target.common.TargetCreaturePermanent;
@@ -52,9 +52,8 @@ import mage.target.common.TargetCreaturePermanent;
  */
 public class WardOfLights extends CardImpl {
 
-    public WardOfLights(UUID ownerId) {
-        super(ownerId, 251, "Ward of Lights", Rarity.COMMON, new CardType[]{CardType.ENCHANTMENT}, "{W}{W}");
-        this.expansionSetCode = "MIR";
+    public WardOfLights(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.ENCHANTMENT},"{W}{W}");
         this.subtype.add("Aura");
 
         // You may cast Ward of Lights as though it had flash. If you cast it any time a sorcery couldn't have been cast, the controller of the permanent it becomes sacrifices it at the beginning of the next cleanup step.

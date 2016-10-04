@@ -25,15 +25,15 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.dragonsoftarkir;
+package mage.cards.s;
 
 import java.util.UUID;
 import mage.ObjectColor;
 import mage.abilities.effects.common.DestroyTargetEffect;
 import mage.abilities.effects.common.GainLifeEffect;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.filter.common.FilterAttackingOrBlockingCreature;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.filter.predicate.Predicates;
@@ -54,9 +54,8 @@ public class SurgeOfRighteousness extends CardImpl {
                 new ColorPredicate(ObjectColor.RED)));
     }
 
-    public SurgeOfRighteousness(UUID ownerId) {
-        super(ownerId, 42, "Surge of Righteousness", Rarity.UNCOMMON, new CardType[]{CardType.INSTANT}, "{1}{W}");
-        this.expansionSetCode = "DTK";
+    public SurgeOfRighteousness(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.INSTANT},"{1}{W}");
 
         // Destroy target black or red creature that's attacking or blocking. You gain 2 life.
         this.getSpellAbility().addTarget(new TargetCreaturePermanent(filter));

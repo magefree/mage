@@ -26,15 +26,15 @@
  *  or implied, of BetaSteward_at_googlemail.com.
  */
 
-package mage.sets.shardsofalara;
+package mage.cards.b;
 
 import java.util.UUID;
 import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.MageInt;
 import mage.abilities.keyword.HasteAbility;
 import mage.abilities.keyword.VigilanceAbility;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 
 /**
  *
@@ -42,9 +42,8 @@ import mage.cards.CardImpl;
  */
 public class BullCerodon extends CardImpl {
 
-    public BullCerodon (UUID ownerId) {
-        super(ownerId, 161, "Bull Cerodon", Rarity.UNCOMMON, new CardType[]{CardType.CREATURE}, "{4}{R}{W}");
-        this.expansionSetCode = "ALA";
+    public BullCerodon (UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{4}{R}{W}");
         this.subtype.add("Beast");
 
 

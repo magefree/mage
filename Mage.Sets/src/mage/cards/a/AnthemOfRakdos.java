@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.dissension;
+package mage.cards.a;
 
 import java.util.UUID;
 import mage.abilities.Ability;
@@ -37,10 +37,10 @@ import mage.abilities.effects.ReplacementEffectImpl;
 import mage.abilities.effects.common.DamageControllerEffect;
 import mage.abilities.effects.common.continuous.BoostTargetEffect;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Duration;
 import mage.constants.Outcome;
-import mage.constants.Rarity;
 import mage.constants.Zone;
 import mage.game.Game;
 import mage.game.events.GameEvent;
@@ -51,9 +51,8 @@ import mage.game.events.GameEvent;
  */
 public class AnthemOfRakdos extends CardImpl {
 
-    public AnthemOfRakdos(UUID ownerId) {
-        super(ownerId, 102, "Anthem of Rakdos", Rarity.RARE, new CardType[]{CardType.ENCHANTMENT}, "{2}{B}{R}{R}");
-        this.expansionSetCode = "DIS";
+    public AnthemOfRakdos(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.ENCHANTMENT},"{2}{B}{R}{R}");
 
         // Whenever a creature you control attacks, it gets +2/+0 until end of turn and Anthem of Rakdos deals 1 damage to you.
         Effect effect = new BoostTargetEffect(2, 0, Duration.EndOfTurn);

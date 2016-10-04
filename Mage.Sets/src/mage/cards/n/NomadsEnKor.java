@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.stronghold;
+package mage.cards.n;
 
 import java.util.UUID;
 import mage.MageInt;
@@ -34,9 +34,9 @@ import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.costs.mana.GenericManaCost;
 import mage.abilities.effects.common.RedirectDamageFromSourceToTargetEffect;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Duration;
-import mage.constants.Rarity;
 import mage.constants.Zone;
 import mage.target.common.TargetControlledCreaturePermanent;
 
@@ -46,9 +46,8 @@ import mage.target.common.TargetControlledCreaturePermanent;
  */
 public class NomadsEnKor extends CardImpl {
 
-    public NomadsEnKor(UUID ownerId) {
-        super(ownerId, 109, "Nomads en-Kor", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{W}");
-        this.expansionSetCode = "STH";
+    public NomadsEnKor(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{W}");
         this.subtype.add("Kor");
         this.subtype.add("Nomad");
         this.subtype.add("Soldier");

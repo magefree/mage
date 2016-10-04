@@ -25,14 +25,14 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.mirage;
+package mage.cards.w;
 
 import java.util.UUID;
 import mage.abilities.costs.common.PayLifeCost;
 import mage.abilities.effects.common.CounterTargetEffect;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.filter.FilterSpell;
 import mage.filter.predicate.mageobject.CardTypePredicate;
 import mage.target.TargetSpell;
@@ -47,9 +47,8 @@ public class WitheringBoon extends CardImpl {
     static {
         filter.add(new CardTypePredicate(CardType.CREATURE));
     }
-    public WitheringBoon(UUID ownerId) {
-        super(ownerId, 50, "Withering Boon", Rarity.UNCOMMON, new CardType[]{CardType.INSTANT}, "{1}{B}");
-        this.expansionSetCode = "MIR";
+    public WitheringBoon(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.INSTANT},"{1}{B}");
 
         // As an additional cost to cast Withering Boon, pay 3 life.
         this.getSpellAbility().addCost(new PayLifeCost(3));

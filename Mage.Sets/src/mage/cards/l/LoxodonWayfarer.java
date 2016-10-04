@@ -26,12 +26,12 @@
  *  or implied, of BetaSteward_at_googlemail.com.
  */
 
-package mage.sets.scarsofmirrodin;
+package mage.cards.l;
 
 import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.MageInt;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 
 import java.util.UUID;
 
@@ -41,9 +41,8 @@ import java.util.UUID;
  */
 public class LoxodonWayfarer extends CardImpl {
 
-    public LoxodonWayfarer (UUID ownerId) {
-        super(ownerId, 15, "Loxodon Wayfarer", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{2}{W}");
-        this.expansionSetCode = "SOM";
+    public LoxodonWayfarer (UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{2}{W}");
         this.subtype.add("Elephant");
         this.subtype.add("Monk");
 

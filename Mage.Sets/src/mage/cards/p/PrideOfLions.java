@@ -25,13 +25,13 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.starter1999;
+package mage.cards.p;
 
 import java.util.UUID;
 import mage.MageInt;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.abilities.common.DamageAsThoughNotBlockedAbility;
 
 /**
@@ -40,9 +40,8 @@ import mage.abilities.common.DamageAsThoughNotBlockedAbility;
  */
 public class PrideOfLions extends CardImpl {
 
-    public PrideOfLions(UUID ownerId) {
-        super(ownerId, 139, "Pride of Lions", Rarity.UNCOMMON, new CardType[]{CardType.CREATURE}, "{3}{G}{G}");
-        this.expansionSetCode = "S99";
+    public PrideOfLions(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{3}{G}{G}");
         this.subtype.add("Cat");
 
         this.power = new MageInt(4);

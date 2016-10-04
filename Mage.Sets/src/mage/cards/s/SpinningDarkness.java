@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.weatherlight;
+package mage.cards.s;
 
 import java.util.Iterator;
 import java.util.Set;
@@ -39,10 +39,10 @@ import mage.abilities.effects.common.DamageTargetEffect;
 import mage.abilities.effects.common.GainLifeEffect;
 import mage.cards.Card;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.cards.Cards;
 import mage.cards.CardsImpl;
 import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.constants.Zone;
 import mage.filter.FilterCard;
 import mage.filter.common.FilterCreaturePermanent;
@@ -63,9 +63,8 @@ public class SpinningDarkness extends CardImpl {
         filter.add(Predicates.not(new ColorPredicate(ObjectColor.BLACK)));
     }
 
-    public SpinningDarkness(UUID ownerId) {
-        super(ownerId, 23, "Spinning Darkness", Rarity.COMMON, new CardType[]{CardType.INSTANT}, "{4}{B}{B}");
-        this.expansionSetCode = "WTH";
+    public SpinningDarkness(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.INSTANT},"{4}{B}{B}");
 
         // You may exile the top three black cards of your graveyard rather than pay Spinning Darkness's mana cost.
         this.addAbility(new AlternativeCostSourceAbility(new SpinningDarknessCost()));

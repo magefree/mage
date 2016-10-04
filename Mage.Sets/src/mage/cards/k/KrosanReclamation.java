@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.judgment;
+package mage.cards.k;
 
 import java.util.List;
 import java.util.UUID;
@@ -35,9 +35,9 @@ import mage.abilities.effects.OneShotEffect;
 import mage.abilities.keyword.FlashbackAbility;
 import mage.cards.Card;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Outcome;
-import mage.constants.Rarity;
 import mage.constants.TimingRule;
 import mage.constants.Zone;
 import mage.filter.FilterCard;
@@ -52,9 +52,8 @@ import mage.target.common.TargetCardInGraveyard;
  */
 public class KrosanReclamation extends CardImpl {
 
-    public KrosanReclamation(UUID ownerId) {
-        super(ownerId, 122, "Krosan Reclamation", Rarity.UNCOMMON, new CardType[]{CardType.INSTANT}, "{1}{G}");
-        this.expansionSetCode = "JUD";
+    public KrosanReclamation(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.INSTANT},"{1}{G}");
 
         // Target player shuffles up to two target cards from his or her graveyard into his or her library.
         this.getSpellAbility().addEffect(new KrosanReclamationEffect());

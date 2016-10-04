@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.ravnica;
+package mage.cards.t;
 
 import java.util.UUID;
 import mage.MageObject;
@@ -34,11 +34,11 @@ import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.NameACardEffect;
 import mage.cards.Card;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.cards.Cards;
 import mage.cards.CardsImpl;
 import mage.constants.CardType;
 import mage.constants.Outcome;
-import mage.constants.Rarity;
 import mage.constants.Zone;
 import mage.game.Game;
 import mage.players.Player;
@@ -50,9 +50,8 @@ import mage.target.TargetPlayer;
  */
 public class TunnelVision extends CardImpl {
 
-    public TunnelVision(UUID ownerId) {
-        super(ownerId, 72, "Tunnel Vision", Rarity.RARE, new CardType[]{CardType.SORCERY}, "{5}{U}");
-        this.expansionSetCode = "RAV";
+    public TunnelVision(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{5}{U}");
 
         // Name a card. Target player reveals cards from the top of his or her library until the named card is revealed. 
         // If it is, that player puts the rest of the revealed cards into his or her graveyard and puts the named card on top of his or her library. 

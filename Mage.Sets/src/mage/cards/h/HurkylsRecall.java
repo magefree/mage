@@ -25,16 +25,16 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.fifthedition;
+package mage.cards.h;
 
 import java.util.UUID;
 import mage.constants.CardType;
 import mage.constants.Outcome;
-import mage.constants.Rarity;
 import mage.constants.Zone;
 import mage.abilities.Ability;
 import mage.abilities.effects.OneShotEffect;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.filter.common.FilterArtifactPermanent;
 import mage.filter.predicate.permanent.ControllerIdPredicate;
 import mage.game.Game;
@@ -47,9 +47,8 @@ import mage.target.TargetPlayer;
  */
 public class HurkylsRecall extends CardImpl {
 
-    public HurkylsRecall(UUID ownerId) {
-        super(ownerId, 93, "Hurkyl's Recall", Rarity.RARE, new CardType[]{CardType.INSTANT}, "{1}{U}");
-        this.expansionSetCode = "5ED";
+    public HurkylsRecall(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.INSTANT},"{1}{U}");
 
 
         // Return all artifacts target player owns to his or her hand.

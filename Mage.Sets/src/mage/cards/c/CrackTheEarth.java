@@ -25,13 +25,13 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.betrayersofkamigawa;
+package mage.cards.c;
 
 import java.util.UUID;
 import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.abilities.effects.common.SacrificeAllEffect;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.filter.common.FilterControlledPermanent;
 
 /**
@@ -40,9 +40,8 @@ import mage.filter.common.FilterControlledPermanent;
  */
 public class CrackTheEarth extends CardImpl {
 
-    public CrackTheEarth(UUID ownerId) {
-        super(ownerId, 98, "Crack the Earth", Rarity.COMMON, new CardType[]{CardType.SORCERY}, "{R}");
-        this.expansionSetCode = "BOK";
+    public CrackTheEarth(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{R}");
         this.subtype.add("Arcane");
 
         // Each player sacrifices a permanent.

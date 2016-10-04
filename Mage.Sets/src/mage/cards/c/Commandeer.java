@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.coldsnap;
+package mage.cards.c;
 
 import java.util.UUID;
 import mage.ObjectColor;
@@ -34,9 +34,9 @@ import mage.abilities.costs.AlternativeCostSourceAbility;
 import mage.abilities.costs.common.ExileFromHandCost;
 import mage.abilities.effects.OneShotEffect;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Outcome;
-import mage.constants.Rarity;
 import mage.filter.FilterCard;
 import mage.filter.FilterSpell;
 import mage.filter.predicate.Predicates;
@@ -61,9 +61,8 @@ public class Commandeer extends CardImpl {
         filterSpell.add(Predicates.not(new CardTypePredicate(CardType.CREATURE)));
     }
 
-    public Commandeer(UUID ownerId) {
-        super(ownerId, 29, "Commandeer", Rarity.RARE, new CardType[]{CardType.INSTANT}, "{5}{U}{U}");
-        this.expansionSetCode = "CSP";
+    public Commandeer(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.INSTANT},"{5}{U}{U}");
 
 
         // You may exile two blue cards from your hand rather than pay Commandeer's mana cost.

@@ -25,15 +25,15 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.bornofthegods;
+package mage.cards.t;
 
 import java.util.UUID;
 import mage.abilities.dynamicvalue.common.DevotionCount;
 import mage.abilities.effects.common.CounterUnlessPaysEffect;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.ColoredManaSymbol;
-import mage.constants.Rarity;
 import mage.target.TargetSpell;
 
 /**
@@ -42,9 +42,8 @@ import mage.target.TargetSpell;
  */
 public class ThassasRebuff extends CardImpl {
 
-    public ThassasRebuff(UUID ownerId) {
-        super(ownerId, 54, "Thassa's Rebuff", Rarity.UNCOMMON, new CardType[]{CardType.INSTANT}, "{1}{U}");
-        this.expansionSetCode = "BNG";
+    public ThassasRebuff(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.INSTANT},"{1}{U}");
 
 
         // Counter target spell unless its controller pays {X}, where X is your devotion to blue.

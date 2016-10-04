@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.nemesis;
+package mage.cards.k;
 
 import java.util.UUID;
 import mage.abilities.Ability;
@@ -37,8 +37,8 @@ import mage.abilities.decorator.ConditionalContinuousRuleModifyingEffect;
 import mage.abilities.effects.Effect;
 import mage.abilities.effects.common.DontUntapInControllersUntapStepAllEffect;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.abilities.effects.common.TapAllEffect;
 import mage.constants.Duration;
 import mage.constants.TargetController;
@@ -58,9 +58,8 @@ public class KillSwitch extends CardImpl {
     //    filter.add(new AnotherPredicate());
    // }
 
-    public KillSwitch(UUID ownerId) {
-        super(ownerId, 133, "Kill Switch", Rarity.RARE, new CardType[]{CardType.ARTIFACT}, "{3}");
-        this.expansionSetCode = "NEM";
+    public KillSwitch(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.ARTIFACT},"{3}");
 
         // {2}, {tap}: Tap all other artifacts. They don't untap during their controllers' untap steps for as long as Kill Switch remains tapped.
         FilterArtifactPermanent filter = new FilterArtifactPermanent();

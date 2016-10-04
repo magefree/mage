@@ -25,15 +25,15 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.magic2014;
+package mage.cards.d;
 
 import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.keyword.VigilanceAbility;
 import mage.abilities.keyword.LifelinkAbility;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.Rarity;
 
 /**
  *
@@ -41,9 +41,8 @@ import mage.constants.Rarity;
  */
 public class DawnstrikePaladin extends CardImpl {
 
-    public DawnstrikePaladin(UUID ownerId) {
-        super(ownerId, 15, "Dawnstrike Paladin", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{3}{W}{W}");
-        this.expansionSetCode = "M14";
+    public DawnstrikePaladin(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{3}{W}{W}");
         this.subtype.add("Human");
         this.subtype.add("Knight");
 

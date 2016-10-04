@@ -25,11 +25,10 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.darkascension;
+package mage.cards.g;
 
 import java.util.UUID;
 import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.MageInt;
 import mage.abilities.common.EntersBattlefieldAbility;
 import mage.abilities.condition.common.MorbidCondition;
@@ -37,6 +36,7 @@ import mage.abilities.decorator.ConditionalOneShotEffect;
 import mage.abilities.effects.common.counter.AddCountersSourceEffect;
 import mage.abilities.keyword.TrampleAbility;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.counters.CounterType;
 
 /**
@@ -45,9 +45,8 @@ import mage.counters.CounterType;
  */
 public class GravetillerWurm extends CardImpl {
 
-    public GravetillerWurm(UUID ownerId) {
-        super(ownerId, 116, "Gravetiller Wurm", Rarity.UNCOMMON, new CardType[]{CardType.CREATURE}, "{5}{G}");
-        this.expansionSetCode = "DKA";
+    public GravetillerWurm(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{5}{G}");
         this.subtype.add("Wurm");
 
         this.power = new MageInt(4);

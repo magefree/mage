@@ -26,7 +26,7 @@
  *  or implied, of BetaSteward_at_googlemail.com.
  */
 
-package mage.sets.magic2011;
+package mage.cards.a;
 
 import java.util.HashSet;
 import java.util.Set;
@@ -38,10 +38,10 @@ import mage.abilities.effects.ContinuousRuleModifyingEffectImpl;
 import mage.abilities.effects.RestrictionEffect;
 import mage.abilities.keyword.FlyingAbility;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Duration;
 import mage.constants.Outcome;
-import mage.constants.Rarity;
 import mage.constants.WatcherScope;
 import mage.constants.Zone;
 import mage.game.Game;
@@ -57,9 +57,8 @@ import mage.watchers.common.CastSpellLastTurnWatcher;
  */
 public class AngelicArbiter extends CardImpl {
 
-    public AngelicArbiter(UUID ownerId) {
-        super(ownerId, 4, "Angelic Arbiter", Rarity.RARE, new CardType[]{CardType.CREATURE}, "{5}{W}{W}");
-        this.expansionSetCode = "M11";
+    public AngelicArbiter(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{5}{W}{W}");
         this.subtype.add("Angel");
 
         this.power = new MageInt(5);

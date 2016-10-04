@@ -25,15 +25,15 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.fifthedition;
+package mage.cards.a;
 
 import java.util.UUID;
 import mage.Mana;
 import mage.abilities.costs.common.SacrificeTargetCost;
 import mage.abilities.mana.SimpleManaAbility;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.constants.Zone;
 import mage.filter.common.FilterControlledCreaturePermanent;
 import mage.target.common.TargetControlledCreaturePermanent;
@@ -44,9 +44,8 @@ import mage.target.common.TargetControlledCreaturePermanent;
  */
 public class AshnodsAltar extends CardImpl {
 
-    public AshnodsAltar(UUID ownerId) {
-        super(ownerId, 349, "Ashnod's Altar", Rarity.UNCOMMON, new CardType[]{CardType.ARTIFACT}, "{3}");
-        this.expansionSetCode = "5ED";
+    public AshnodsAltar(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.ARTIFACT},"{3}");
 
         // Sacrifice a creature: Add {C}{C} to your mana pool.
         SacrificeTargetCost cost = new SacrificeTargetCost(new TargetControlledCreaturePermanent(1,1,new FilterControlledCreaturePermanent("a creature"), true));

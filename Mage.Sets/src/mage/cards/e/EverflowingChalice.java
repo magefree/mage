@@ -26,11 +26,10 @@
  *  or implied, of BetaSteward_at_googlemail.com.
  */
 
-package mage.sets.worldwake;
+package mage.cards.e;
 
 import java.util.UUID;
 import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.Mana;
 import mage.abilities.common.EntersBattlefieldAbility;
 import mage.abilities.dynamicvalue.common.CountersSourceCount;
@@ -39,6 +38,7 @@ import mage.abilities.effects.common.counter.AddCountersSourceEffect;
 import mage.abilities.keyword.MultikickerAbility;
 import mage.abilities.mana.DynamicManaAbility;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.counters.CounterType;
 
 
@@ -51,9 +51,8 @@ public class EverflowingChalice extends CardImpl {
 
     protected static final String rule = "Everflowing Chalice enters the battlefield with a charge counter on it for each time it was kicked.";
 
-    public EverflowingChalice(UUID ownerId) {
-        super(ownerId, 123, "Everflowing Chalice", Rarity.UNCOMMON, new CardType[]{CardType.ARTIFACT}, "{0}");
-        this.expansionSetCode = "WWK";
+    public EverflowingChalice(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.ARTIFACT},"{0}");
 
         // Multikicker {2} (You may pay an additional {2} any number of times as you cast this spell.)
         this.addAbility(new MultikickerAbility("{2}"));

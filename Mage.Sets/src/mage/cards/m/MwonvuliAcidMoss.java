@@ -25,14 +25,14 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.timespiral;
+package mage.cards.m;
 
 import java.util.UUID;
 import mage.abilities.effects.common.DestroyTargetEffect;
 import mage.abilities.effects.common.search.SearchLibraryPutInPlayEffect;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.filter.common.FilterLandCard;
 import mage.filter.common.FilterLandPermanent;
 import mage.filter.predicate.mageobject.SubtypePredicate;
@@ -45,9 +45,8 @@ import mage.target.common.TargetCardInLibrary;
  */
 public class MwonvuliAcidMoss extends CardImpl {
 
-    public MwonvuliAcidMoss(UUID ownerId) {
-        super(ownerId, 207, "Mwonvuli Acid-Moss", Rarity.COMMON, new CardType[]{CardType.SORCERY}, "{2}{G}{G}");
-        this.expansionSetCode = "TSP";
+    public MwonvuliAcidMoss(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{2}{G}{G}");
         
         FilterLandCard filterForest = new FilterLandCard();
         filterForest.add(new SubtypePredicate("Forest"));

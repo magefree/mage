@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.magic2011;
+package mage.cards.p;
 
 import java.util.UUID;
 import mage.MageInt;
@@ -36,9 +36,9 @@ import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.SacrificeSourceEffect;
 import mage.abilities.keyword.IndestructibleAbility;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Outcome;
-import mage.constants.Rarity;
 import mage.constants.Zone;
 import mage.counters.Counter;
 import mage.filter.common.FilterControlledPermanent;
@@ -55,9 +55,8 @@ import mage.target.common.TargetControlledPermanent;
  */
 public class PhylacteryLich extends CardImpl {
 
-    public PhylacteryLich(UUID ownerId) {
-        super(ownerId, 110, "Phylactery Lich", Rarity.RARE, new CardType[]{CardType.CREATURE}, "{B}{B}{B}");
-        this.expansionSetCode = "M11";
+    public PhylacteryLich(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{B}{B}{B}");
         this.subtype.add("Zombie");
 
         this.power = new MageInt(5);

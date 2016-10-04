@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.commander2013;
+package mage.cards.i;
 
 import java.util.List;
 import java.util.UUID;
@@ -37,11 +37,11 @@ import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.RequirementEffect;
 import mage.abilities.effects.RestrictionEffect;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Duration;
 import mage.constants.Outcome;
 import mage.constants.PhaseStep;
-import mage.constants.Rarity;
 import mage.constants.TurnPhase;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
@@ -54,9 +54,8 @@ import mage.game.turn.TurnMod;
  */
 public class IllusionistsGambit extends CardImpl {
 
-    public IllusionistsGambit(UUID ownerId) {
-        super(ownerId, 47, "Illusionist's Gambit", Rarity.RARE, new CardType[]{CardType.INSTANT}, "{2}{U}{U}");
-        this.expansionSetCode = "C13";
+    public IllusionistsGambit(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.INSTANT},"{2}{U}{U}");
 
         // Cast Illusionist's Gambit only during the declare blockers step on an opponent's turn.
         this.addAbility(new CastOnlyDuringPhaseStepSourceAbility(PhaseStep.DECLARE_BLOCKERS, OnOpponentsTurnCondition.getInstance()));

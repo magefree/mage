@@ -25,12 +25,11 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.darkascension;
+package mage.cards.s;
 
 import java.util.UUID;
 
 import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.MageInt;
 import mage.abilities.TriggeredAbility;
 import mage.abilities.common.BeginningOfUpkeepTriggeredAbility;
@@ -41,6 +40,7 @@ import mage.abilities.effects.common.DrawCardSourceControllerEffect;
 import mage.abilities.effects.common.TransformSourceEffect;
 import mage.abilities.keyword.TransformAbility;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.TargetController;
 
 /**
@@ -49,9 +49,8 @@ import mage.constants.TargetController;
  */
 public class SilverpeltWerewolf extends CardImpl {
 
-    public SilverpeltWerewolf(UUID ownerId) {
-        super(ownerId, 122, "Silverpelt Werewolf", Rarity.UNCOMMON, new CardType[]{CardType.CREATURE}, null);
-        this.expansionSetCode = "DKA";
+    public SilverpeltWerewolf(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},null);
         this.subtype.add("Werewolf");
         this.color.setGreen(true);
 

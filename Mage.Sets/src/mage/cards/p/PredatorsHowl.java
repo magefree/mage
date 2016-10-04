@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.conspiracy;
+package mage.cards.p;
 
 import java.util.UUID;
 import mage.abilities.condition.common.MorbidCondition;
@@ -33,8 +33,8 @@ import mage.abilities.decorator.ConditionalOneShotEffect;
 import mage.abilities.effects.Effect;
 import mage.abilities.effects.common.CreateTokenEffect;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.game.permanent.token.WolfToken;
 
 /**
@@ -43,9 +43,8 @@ import mage.game.permanent.token.WolfToken;
  */
 public class PredatorsHowl extends CardImpl {
 
-    public PredatorsHowl(UUID ownerId) {
-        super(ownerId, 37, "Predator's Howl", Rarity.UNCOMMON, new CardType[]{CardType.INSTANT}, "{3}{G}");
-        this.expansionSetCode = "CNS";
+    public PredatorsHowl(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.INSTANT},"{3}{G}");
 
         // Put a 2/2 green Wolf creature token onto the battlefield.
         // Morbid - Put three 2/2 green Wolf creature tokens onto the battlefield instead if a creature died this turn.

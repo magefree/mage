@@ -25,14 +25,14 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.shadowsoverinnistrad;
+package mage.cards.f;
 
 import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.keyword.SkulkAbility;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.Rarity;
 
 /**
  *
@@ -40,9 +40,8 @@ import mage.constants.Rarity;
  */
 public class FurtiveHomunculus extends CardImpl {
 
-    public FurtiveHomunculus(UUID ownerId) {
-        super(ownerId, 64, "Furtive Homunculus", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{1}{U}");
-        this.expansionSetCode = "SOI";
+    public FurtiveHomunculus(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{1}{U}");
         this.subtype.add("Homunculus");
         this.power = new MageInt(2);
         this.toughness = new MageInt(1);

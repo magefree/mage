@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.dragonsmaze;
+package mage.cards.p;
 
 import java.util.UUID;
 import mage.Mana;
@@ -35,10 +35,10 @@ import mage.abilities.common.delayed.AtTheBeginOfMainPhaseDelayedTriggeredAbilit
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.ManaEffect;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.choices.ChoiceColor;
 import mage.constants.CardType;
 import mage.constants.Outcome;
-import mage.constants.Rarity;
 import mage.constants.TargetController;
 import mage.game.Game;
 import mage.game.stack.Spell;
@@ -51,9 +51,8 @@ import mage.target.TargetSpell;
  */
 public class PlasmCapture extends CardImpl {
 
-    public PlasmCapture(UUID ownerId) {
-        super(ownerId, 91, "Plasm Capture", Rarity.RARE, new CardType[]{CardType.INSTANT}, "{G}{G}{U}{U}");
-        this.expansionSetCode = "DGM";
+    public PlasmCapture(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.INSTANT},"{G}{G}{U}{U}");
 
         // Counter target spell. At the beginning of your next precombat main phase, add X mana in any combination of colors to your mana pool, where X is that spell's converted mana cost.
         this.getSpellAbility().addTarget(new TargetSpell());

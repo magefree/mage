@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.modernmasters;
+package mage.cards.f;
 
 import java.util.UUID;
 import mage.MageInt;
@@ -33,9 +33,9 @@ import mage.abilities.Ability;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.CreateTokenEffect;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Outcome;
-import mage.constants.Rarity;
 import mage.game.Game;
 import mage.game.permanent.token.Token;
 import mage.players.Player;
@@ -46,9 +46,8 @@ import mage.players.Player;
  */
 public class FeudkillersVerdict extends CardImpl {
 
-    public FeudkillersVerdict(UUID ownerId) {
-        super(ownerId, 15, "Feudkiller's Verdict", Rarity.UNCOMMON, new CardType[]{CardType.TRIBAL, CardType.SORCERY}, "{4}{W}{W}");
-        this.expansionSetCode = "MMA";
+    public FeudkillersVerdict(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.TRIBAL,CardType.SORCERY},"{4}{W}{W}");
         this.subtype.add("Giant");
 
 

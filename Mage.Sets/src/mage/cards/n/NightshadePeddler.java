@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.avacynrestored;
+package mage.cards.n;
 
 import java.util.UUID;
 import mage.MageInt;
@@ -34,8 +34,8 @@ import mage.abilities.effects.common.continuous.GainAbilityPairedEffect;
 import mage.abilities.keyword.DeathtouchAbility;
 import mage.abilities.keyword.SoulbondAbility;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.constants.Zone;
 
 /**
@@ -45,9 +45,8 @@ public class NightshadePeddler extends CardImpl {
 
     private static final String ruleText = "As long as {this} is paired with another creature, both creatures have deathtouch";
 
-    public NightshadePeddler(UUID ownerId) {
-        super(ownerId, 187, "Nightshade Peddler", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{1}{G}");
-        this.expansionSetCode = "AVR";
+    public NightshadePeddler(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{1}{G}");
         this.subtype.add("Human");
         this.subtype.add("Druid");
 

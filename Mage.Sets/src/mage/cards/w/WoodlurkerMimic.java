@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.eventide;
+package mage.cards.w;
 
 import java.util.UUID;
 import mage.MageInt;
@@ -36,9 +36,9 @@ import mage.abilities.effects.common.continuous.GainAbilitySourceEffect;
 import mage.abilities.effects.common.continuous.SetPowerToughnessSourceEffect;
 import mage.abilities.keyword.WitherAbility;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Duration;
-import mage.constants.Rarity;
 import mage.constants.SubLayer;
 import mage.filter.FilterSpell;
 import mage.filter.predicate.mageobject.ColorPredicate;
@@ -59,9 +59,8 @@ public class WoodlurkerMimic extends CardImpl {
 
     private String rule = "Whenever you cast a spell that's both black and green, {this} has base power and toughness 4/5 until end of turn and gains wither until end of turn.";
 
-    public WoodlurkerMimic(UUID ownerId) {
-        super(ownerId, 130, "Woodlurker Mimic", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{1}{B/G}");
-        this.expansionSetCode = "EVE";
+    public WoodlurkerMimic(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{1}{B/G}");
         this.subtype.add("Shapeshifter");
 
         this.color.setGreen(true);

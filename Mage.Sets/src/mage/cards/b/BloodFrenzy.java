@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.tempest;
+package mage.cards.b;
 
 import java.util.UUID;
 import mage.abilities.Ability;
@@ -34,11 +34,11 @@ import mage.abilities.effects.ContinuousRuleModifyingEffectImpl;
 import mage.abilities.effects.common.DestroyTargetAtBeginningOfNextEndStepEffect;
 import mage.abilities.effects.common.continuous.BoostTargetEffect;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Duration;
 import mage.constants.Outcome;
 import mage.constants.PhaseStep;
-import mage.constants.Rarity;
 import mage.constants.TurnPhase;
 import mage.constants.Zone;
 import mage.game.Game;
@@ -51,9 +51,8 @@ import mage.target.common.TargetAttackingOrBlockingCreature;
  */
 public class BloodFrenzy extends CardImpl {
 
-    public BloodFrenzy(UUID ownerId) {
-        super(ownerId, 164, "Blood Frenzy", Rarity.COMMON, new CardType[]{CardType.INSTANT}, "{1}{R}");
-        this.expansionSetCode = "TMP";
+    public BloodFrenzy(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.INSTANT},"{1}{R}");
 
         // Cast Blood Frenzy only before the combat damage step.
         Ability ability = new SimpleStaticAbility(Zone.ALL, new BloodFrenzyCastRestriction());

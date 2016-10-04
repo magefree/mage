@@ -25,14 +25,14 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.iceage;
+package mage.cards.m;
 
 import java.util.UUID;
 import mage.abilities.dynamicvalue.common.ManacostVariableValue;
 import mage.abilities.effects.common.discard.DiscardCardYouChooseTargetEffect;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.constants.TargetController;
 import mage.target.TargetPlayer;
 
@@ -42,9 +42,8 @@ import mage.target.TargetPlayer;
  */
 public class MindWarp extends CardImpl {
 
-    public MindWarp(UUID ownerId) {
-        super(ownerId, 36, "Mind Warp", Rarity.UNCOMMON, new CardType[]{CardType.SORCERY}, "{X}{3}{B}");
-        this.expansionSetCode = "ICE";
+    public MindWarp(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{X}{3}{B}");
 
 
         // Look at target player's hand and choose X cards from it. That player discards those cards.

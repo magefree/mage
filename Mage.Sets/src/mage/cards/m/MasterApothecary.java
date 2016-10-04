@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.odyssey;
+package mage.cards.m;
 
 import java.util.UUID;
 import mage.MageInt;
@@ -34,9 +34,9 @@ import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.costs.common.TapTargetCost;
 import mage.abilities.effects.common.PreventDamageToTargetEffect;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Duration;
-import mage.constants.Rarity;
 import mage.constants.Zone;
 import mage.filter.common.FilterControlledCreaturePermanent;
 import mage.filter.predicate.Predicates;
@@ -58,9 +58,8 @@ public class MasterApothecary extends CardImpl {
         filter.add(Predicates.not(new TappedPredicate()));
     }
 
-    public MasterApothecary(UUID ownerId) {
-        super(ownerId, 32, "Master Apothecary", Rarity.RARE, new CardType[]{CardType.CREATURE}, "{W}{W}{W}");
-        this.expansionSetCode = "ODY";
+    public MasterApothecary(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{W}{W}{W}");
         this.subtype.add("Human");
         this.subtype.add("Cleric");
 

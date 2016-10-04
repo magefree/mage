@@ -25,18 +25,18 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.returntoravnica;
+package mage.cards.a;
 
 import java.util.UUID;
 
 import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.AttacksTriggeredAbility;
 import mage.abilities.effects.common.DetainTargetEffect;
 import mage.abilities.keyword.FlyingAbility;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.TargetController;
 import mage.filter.common.FilterNonlandPermanent;
 import mage.filter.predicate.permanent.ControllerPredicate;
@@ -54,9 +54,8 @@ public class ArchonOfTheTriumvirate extends CardImpl {
         filter.add(new ControllerPredicate(TargetController.OPPONENT));
     }
     
-    public ArchonOfTheTriumvirate(UUID ownerId) {
-        super(ownerId, 142, "Archon of the Triumvirate", Rarity.RARE, new CardType[]{CardType.CREATURE}, "{5}{W}{U}");
-        this.expansionSetCode = "RTR";
+    public ArchonOfTheTriumvirate(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{5}{W}{U}");
         this.subtype.add("Archon");
 
         this.power = new MageInt(4);

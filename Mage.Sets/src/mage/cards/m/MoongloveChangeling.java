@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.morningtide;
+package mage.cards.m;
 
 import java.util.UUID;
 
@@ -37,6 +37,7 @@ import mage.abilities.effects.common.continuous.GainAbilitySourceEffect;
 import mage.abilities.keyword.ChangelingAbility;
 import mage.abilities.keyword.DeathtouchAbility;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 
 /**
  *
@@ -44,9 +45,8 @@ import mage.cards.CardImpl;
  */
 public class MoongloveChangeling extends CardImpl {
 
-    public MoongloveChangeling(UUID ownerId) {
-        super(ownerId, 67, "Moonglove Changeling", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{2}{B}");
-        this.expansionSetCode = "MOR";
+    public MoongloveChangeling(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{2}{B}");
         this.subtype.add("Shapeshifter");
 
         this.power = new MageInt(2);

@@ -25,13 +25,13 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.journeyintonyx;
+package mage.cards.e;
 
 import java.util.UUID;
 import mage.abilities.effects.common.DestroyAllEffect;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.filter.FilterPermanent;
 import mage.filter.predicate.Predicates;
 import mage.filter.predicate.mageobject.CardTypePredicate;
@@ -50,9 +50,8 @@ public class ExtinguishAllHope extends CardImpl {
     }
     
     
-    public ExtinguishAllHope(UUID ownerId) {
-        super(ownerId, 68, "Extinguish All Hope", Rarity.RARE, new CardType[]{CardType.SORCERY}, "{4}{B}{B}");
-        this.expansionSetCode = "JOU";
+    public ExtinguishAllHope(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{4}{B}{B}");
 
 
         // Destroy all nonenchantment creatures.

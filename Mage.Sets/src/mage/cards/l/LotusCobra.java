@@ -26,15 +26,15 @@
  *  or implied, of BetaSteward_at_googlemail.com.
  */
 
-package mage.sets.zendikar;
+package mage.cards.l;
 
 import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.common.LandfallAbility;
 import mage.abilities.effects.common.AddManaOfAnyColorEffect;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.Rarity;
 
 /**
  *
@@ -42,9 +42,8 @@ import mage.constants.Rarity;
  */
 public class LotusCobra extends CardImpl {
 
-    public LotusCobra(UUID ownerId) {
-        super(ownerId, 168, "Lotus Cobra", Rarity.MYTHIC, new CardType[]{CardType.CREATURE}, "{1}{G}");
-        this.expansionSetCode = "ZEN";
+    public LotusCobra(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{1}{G}");
         this.subtype.add("Snake");
 
         this.power = new MageInt(2);

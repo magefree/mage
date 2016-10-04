@@ -25,13 +25,13 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.mercadianmasques;
+package mage.cards.h;
 
 import java.util.UUID;
 import mage.abilities.effects.common.ReturnToHandTargetEffect;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.filter.FilterPermanent;
 import mage.filter.predicate.Predicates;
 import mage.filter.predicate.mageobject.CardTypePredicate;
@@ -51,9 +51,8 @@ public class Hoodwink extends CardImpl {
                 new CardTypePredicate(CardType.ENCHANTMENT),
                 new CardTypePredicate(CardType.LAND)));
     }
-    public Hoodwink(UUID ownerId) {
-        super(ownerId, 84, "Hoodwink", Rarity.COMMON, new CardType[]{CardType.INSTANT}, "{1}{U}");
-        this.expansionSetCode = "MMQ";
+    public Hoodwink(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.INSTANT},"{1}{U}");
 
         // Return target artifact, enchantment, or land to its owner's hand.
         this.getSpellAbility().addEffect(new ReturnToHandTargetEffect());

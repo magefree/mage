@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.returntoravnica;
+package mage.cards.c;
 
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleStaticAbility;
@@ -36,6 +36,7 @@ import mage.abilities.effects.Effect;
 import mage.abilities.effects.common.continuous.BoostEquippedEffect;
 import mage.abilities.keyword.EquipAbility;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.*;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
@@ -48,9 +49,8 @@ import java.util.UUID;
  */
 public class CivicSaber extends CardImpl {
  
-    public CivicSaber(UUID ownerId) {
-        super(ownerId, 227, "Civic Saber", Rarity.UNCOMMON, new CardType[]{CardType.ARTIFACT}, "{1}");
-        this.expansionSetCode = "RTR";
+    public CivicSaber(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.ARTIFACT},"{1}");
         this.subtype.add("Equipment");
  
         // Equipped creature gets +1/+0 for each of its colors.

@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.starwars;
+package mage.cards.c;
 
 import java.util.UUID;
 import mage.MageObject;
@@ -38,10 +38,10 @@ import mage.abilities.effects.common.LoseLifeDefendingPlayerEffect;
 import mage.abilities.effects.common.combat.CantBeBlockedAttachedEffect;
 import mage.abilities.keyword.EnchantAbility;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.AttachmentType;
 import mage.constants.CardType;
 import mage.constants.Outcome;
-import mage.constants.Rarity;
 import mage.constants.Zone;
 import mage.counters.Counter;
 import mage.filter.FilterPermanent;
@@ -57,9 +57,8 @@ import mage.target.common.TargetCreaturePermanent;
  */
 public class CloakingDevice extends CardImpl {
 
-    public CloakingDevice(UUID ownerId) {
-        super(ownerId, 36, "Cloaking Device", Rarity.COMMON, new CardType[]{CardType.ENCHANTMENT}, "{1}{U}");
-        this.expansionSetCode = "SWS";
+    public CloakingDevice(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.ENCHANTMENT},"{1}{U}");
         this.subtype.add("Aura");
 
         // Enchant creature

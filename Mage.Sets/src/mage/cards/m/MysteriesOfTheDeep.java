@@ -25,15 +25,15 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.worldwake;
+package mage.cards.m;
 
 import java.util.UUID;
 import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.abilities.condition.common.LandfallCondition;
 import mage.abilities.decorator.ConditionalOneShotEffect;
 import mage.abilities.effects.common.DrawCardSourceControllerEffect;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.watchers.common.LandfallWatcher;
 
 /**
@@ -42,9 +42,8 @@ import mage.watchers.common.LandfallWatcher;
  */
 public class MysteriesOfTheDeep extends CardImpl {
 
-    public MysteriesOfTheDeep(UUID ownerId) {
-        super(ownerId, 33, "Mysteries of the Deep", Rarity.COMMON, new CardType[]{CardType.INSTANT}, "{4}{U}");
-        this.expansionSetCode = "WWK";
+    public MysteriesOfTheDeep(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.INSTANT},"{4}{U}");
 
         // Draw two cards.
         // Landfall - If you had a land enter the battlefield under your control this turn, draw three cards instead.

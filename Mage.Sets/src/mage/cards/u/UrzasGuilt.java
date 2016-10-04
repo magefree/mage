@@ -25,16 +25,16 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.planeshift;
+package mage.cards.u;
 
 import java.util.UUID;
 import mage.abilities.effects.Effect;
 import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.abilities.effects.common.discard.DiscardEachPlayerEffect;
 import mage.abilities.effects.common.DrawCardAllEffect;
 import mage.abilities.effects.common.LoseLifeAllPlayersEffect;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 
 /**
  *
@@ -42,9 +42,8 @@ import mage.cards.CardImpl;
  */
 public class UrzasGuilt extends CardImpl {
 
-    public UrzasGuilt(UUID ownerId) {
-        super(ownerId, 130, "Urza's Guilt", Rarity.RARE, new CardType[]{CardType.SORCERY}, "{2}{U}{B}");
-        this.expansionSetCode = "PLS";
+    public UrzasGuilt(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{2}{U}{B}");
 
 
         // Each player draws two cards, then discards three cards, then loses 4 life.

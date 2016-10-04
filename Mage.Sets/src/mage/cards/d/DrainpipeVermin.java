@@ -25,12 +25,11 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.returntoravnica;
+package mage.cards.d;
 
 import java.util.UUID;
 import mage.constants.CardType;
 import mage.constants.ColoredManaSymbol;
-import mage.constants.Rarity;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.DiesTriggeredAbility;
@@ -38,6 +37,7 @@ import mage.abilities.costs.mana.ColoredManaCost;
 import mage.abilities.effects.common.discard.DiscardTargetEffect;
 import mage.abilities.effects.common.DoIfCostPaid;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.target.TargetPlayer;
 
 /**
@@ -46,9 +46,8 @@ import mage.target.TargetPlayer;
  */
 public class DrainpipeVermin extends CardImpl {
 
-    public DrainpipeVermin(UUID ownerId) {
-        super(ownerId, 66, "Drainpipe Vermin", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{B}");
-        this.expansionSetCode = "RTR";
+    public DrainpipeVermin(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{B}");
         this.subtype.add("Rat");
 
         this.power = new MageInt(1);

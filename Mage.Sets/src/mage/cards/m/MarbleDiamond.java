@@ -25,14 +25,14 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.seventhedition;
+package mage.cards.m;
 
 import java.util.UUID;
 import mage.abilities.common.EntersBattlefieldTappedAbility;
 import mage.abilities.mana.WhiteManaAbility;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.Rarity;
 
 /**
  *
@@ -40,9 +40,8 @@ import mage.constants.Rarity;
  */
 public class MarbleDiamond extends CardImpl {
 
-    public MarbleDiamond(UUID ownerId) {
-        super(ownerId, 306, "Marble Diamond", Rarity.UNCOMMON, new CardType[]{CardType.ARTIFACT}, "{2}");
-        this.expansionSetCode = "7ED";
+    public MarbleDiamond(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.ARTIFACT},"{2}");
 
         // Marble Diamond enters the battlefield tapped.
         this.addAbility(new EntersBattlefieldTappedAbility());

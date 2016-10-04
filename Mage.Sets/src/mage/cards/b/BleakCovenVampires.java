@@ -25,11 +25,10 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.scarsofmirrodin;
+package mage.cards.b;
 
 import java.util.UUID;
 import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.MageInt;
 import mage.abilities.TriggeredAbility;
 import mage.abilities.common.EntersBattlefieldTriggeredAbility;
@@ -38,6 +37,7 @@ import mage.abilities.decorator.ConditionalTriggeredAbility;
 import mage.abilities.effects.common.GainLifeEffect;
 import mage.abilities.effects.common.LoseLifeTargetEffect;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.target.Target;
 import mage.target.TargetPlayer;
 
@@ -49,9 +49,8 @@ public class BleakCovenVampires extends CardImpl {
 
     private final String effectText = "Metalcraft - When Bleak Coven Vampires enters the battlefield, if you control three or more artifacts, target player loses 4 life and you gain 4 life.";
 
-    public BleakCovenVampires(UUID ownerId) {
-        super(ownerId, 55, "Bleak Coven Vampires", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{3}{B}{B}");
-        this.expansionSetCode = "SOM";
+    public BleakCovenVampires(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{3}{B}{B}");
         this.subtype.add("Vampire");
         this.subtype.add("Warrior");
 

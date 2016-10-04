@@ -25,12 +25,11 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.guildpact;
+package mage.cards.n;
 
 import java.util.UUID;
 
 import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.DrawCardControllerTriggeredAbility;
@@ -40,6 +39,7 @@ import mage.abilities.effects.common.DamageTargetEffect;
 import mage.abilities.effects.common.DrawCardSourceControllerEffect;
 import mage.abilities.keyword.FlyingAbility;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.Zone;
 import mage.target.common.TargetCreatureOrPlayer;
 
@@ -49,9 +49,8 @@ import mage.target.common.TargetCreatureOrPlayer;
  */
 public class NivMizzetTheFiremind extends CardImpl {
 
-    public NivMizzetTheFiremind(UUID ownerId) {
-        super(ownerId, 123, "Niv-Mizzet, the Firemind", Rarity.RARE, new CardType[]{CardType.CREATURE}, "{2}{U}{U}{R}{R}");
-        this.expansionSetCode = "GPT";
+    public NivMizzetTheFiremind(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{2}{U}{U}{R}{R}");
         this.supertype.add("Legendary");
         this.subtype.add("Dragon");
         this.subtype.add("Wizard");

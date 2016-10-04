@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.dragonsoftarkir;
+package mage.cards.n;
 
 import java.util.UUID;
 import mage.MageObject;
@@ -43,12 +43,12 @@ import mage.abilities.effects.common.GetEmblemEffect;
 import mage.abilities.keyword.ReboundAbility;
 import mage.cards.Card;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.cards.CardsImpl;
 import mage.constants.CardType;
 import mage.constants.Duration;
 import mage.constants.Layer;
 import mage.constants.Outcome;
-import mage.constants.Rarity;
 import mage.constants.SubLayer;
 import mage.constants.Zone;
 import mage.game.Game;
@@ -64,9 +64,8 @@ import mage.target.targetpointer.FixedTarget;
  */
 public class NarsetTranscendent extends CardImpl {
 
-    public NarsetTranscendent(UUID ownerId) {
-        super(ownerId, 225, "Narset Transcendent", Rarity.MYTHIC, new CardType[]{CardType.PLANESWALKER}, "{2}{W}{U}");
-        this.expansionSetCode = "DTK";
+    public NarsetTranscendent(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.PLANESWALKER},"{2}{W}{U}");
         this.subtype.add("Narset");
 
         this.addAbility(new PlanswalkerEntersWithLoyalityCountersAbility(6));

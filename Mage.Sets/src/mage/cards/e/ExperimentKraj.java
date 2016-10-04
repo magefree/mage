@@ -25,14 +25,13 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.dissension;
+package mage.cards.e;
 
 import java.util.UUID;
 import mage.constants.CardType;
 import mage.constants.Duration;
 import mage.constants.Layer;
 import mage.constants.Outcome;
-import mage.constants.Rarity;
 import mage.constants.SubLayer;
 import mage.constants.Zone;
 import mage.MageInt;
@@ -44,6 +43,7 @@ import mage.abilities.costs.common.TapSourceCost;
 import mage.abilities.effects.ContinuousEffectImpl;
 import mage.abilities.effects.common.counter.AddCountersTargetEffect;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.counters.CounterType;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.filter.predicate.permanent.AnotherPredicate;
@@ -58,9 +58,8 @@ import mage.target.common.TargetCreaturePermanent;
  */
 public class ExperimentKraj extends CardImpl {
 
-    public ExperimentKraj(UUID ownerId) {
-        super(ownerId, 110, "Experiment Kraj", Rarity.RARE, new CardType[]{CardType.CREATURE}, "{2}{G}{G}{U}{U}");
-        this.expansionSetCode = "DIS";
+    public ExperimentKraj(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{2}{G}{G}{U}{U}");
         this.supertype.add("Legendary");
         this.subtype.add("Ooze");
         this.subtype.add("Mutant");

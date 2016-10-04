@@ -25,16 +25,16 @@
  * authors and should not be interpreted as representing official policies, either expressed
  * or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.conflux;
+package mage.cards.m;
 
 import java.util.List;
 import java.util.UUID;
 import mage.abilities.Ability;
 import mage.abilities.effects.OneShotEffect;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Outcome;
-import mage.constants.Rarity;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
@@ -46,9 +46,8 @@ import mage.game.permanent.token.SoldierToken;
  */
 public class MartialCoup extends CardImpl {
 
-    public MartialCoup(UUID ownerId) {
-        super(ownerId, 11, "Martial Coup", Rarity.RARE, new CardType[]{CardType.SORCERY}, "{X}{W}{W}");
-        this.expansionSetCode = "CON";
+    public MartialCoup(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{X}{W}{W}");
 
         // Put X 1/1 white Soldier creature tokens onto the battlefield. If X is 5 or more, destroy all other creatures.
         this.getSpellAbility().addEffect(new MartialCoupEffect());

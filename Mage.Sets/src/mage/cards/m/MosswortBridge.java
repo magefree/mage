@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.commander2013;
+package mage.cards.m;
 
 import java.util.UUID;
 import mage.abilities.Ability;
@@ -37,8 +37,8 @@ import mage.abilities.effects.common.HideawayPlayEffect;
 import mage.abilities.keyword.HideawayAbility;
 import mage.abilities.mana.GreenManaAbility;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.constants.Zone;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.game.Game;
@@ -50,9 +50,8 @@ import mage.game.permanent.Permanent;
  */
 public class MosswortBridge extends CardImpl {
 
-    public MosswortBridge(UUID ownerId) {
-        super(ownerId, 307, "Mosswort Bridge", Rarity.RARE, new CardType[]{CardType.LAND}, "");
-        this.expansionSetCode = "C13";
+    public MosswortBridge(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.LAND},"");
 
         // Hideaway (This land enters the battlefield tapped. When it does, look at the top four cards of your library, exile one face down, then put the rest on the bottom of your library.)
         this.addAbility(new HideawayAbility());

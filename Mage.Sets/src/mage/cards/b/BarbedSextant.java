@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.iceage;
+package mage.cards.b;
 
 import java.util.UUID;
 import mage.abilities.common.delayed.AtTheBeginOfNextUpkeepDelayedTriggeredAbility;
@@ -37,9 +37,9 @@ import mage.abilities.effects.common.DrawCardSourceControllerEffect;
 import mage.abilities.mana.AnyColorManaAbility;
 import mage.abilities.mana.ManaAbility;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Duration;
-import mage.constants.Rarity;
 
 /**
  *
@@ -47,9 +47,8 @@ import mage.constants.Rarity;
  */
 public class BarbedSextant extends CardImpl {
 
-    public BarbedSextant(UUID ownerId) {
-        super(ownerId, 287, "Barbed Sextant", Rarity.COMMON, new CardType[]{CardType.ARTIFACT}, "{1}");
-        this.expansionSetCode = "ICE";
+    public BarbedSextant(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.ARTIFACT},"{1}");
 
         // {1}, {tap}, Sacrifice Barbed Sextant: Add one mana of any color to your mana pool. Draw a card at the beginning of the next turn's upkeep.
         ManaAbility ability = new AnyColorManaAbility(new GenericManaCost(1));

@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.dissension;
+package mage.cards.p;
 
 import java.util.UUID;
 import mage.MageInt;
@@ -38,9 +38,9 @@ import mage.abilities.effects.common.continuous.BoostSourceEffect;
 import mage.abilities.keyword.FlyingAbility;
 import mage.abilities.keyword.ForecastAbility;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Duration;
-import mage.constants.Rarity;
 import mage.constants.Zone;
 import mage.game.permanent.token.Token;
 import mage.filter.common.FilterCreaturePermanent;
@@ -59,9 +59,8 @@ public class PrideOfTheClouds extends CardImpl {
         filter.add(new AbilityPredicate(FlyingAbility.class));
     }
     
-    public PrideOfTheClouds(UUID ownerId) {
-        super(ownerId, 125, "Pride of the Clouds", Rarity.RARE, new CardType[]{CardType.CREATURE}, "{W}{U}");
-        this.expansionSetCode = "DIS";
+    public PrideOfTheClouds(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{W}{U}");
         this.subtype.add("Elemental");
         this.subtype.add("Cat");
         this.power = new MageInt(1);

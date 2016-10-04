@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.oathofthegatewatch;
+package mage.cards.d;
 
 import java.util.UUID;
 import mage.MageInt;
@@ -38,9 +38,9 @@ import mage.abilities.effects.OneShotEffect;
 import mage.abilities.keyword.DevoidAbility;
 import mage.cards.Card;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Outcome;
-import mage.constants.Rarity;
 import mage.constants.Zone;
 import mage.filter.common.FilterCreatureCard;
 import mage.game.Game;
@@ -54,9 +54,8 @@ import mage.target.common.TargetOpponent;
  */
 public class DreadDefiler extends CardImpl {
 
-    public DreadDefiler(UUID ownerId) {
-        super(ownerId, 68, "Dread Defiler", Rarity.RARE, new CardType[]{CardType.CREATURE}, "{6}{B}");
-        this.expansionSetCode = "OGW";
+    public DreadDefiler(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{6}{B}");
         this.subtype.add("Eldrazi");
         this.power = new MageInt(6);
         this.toughness = new MageInt(8);

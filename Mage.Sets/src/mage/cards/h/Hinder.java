@@ -25,13 +25,13 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.championsofkamigawa;
+package mage.cards.h;
 
 import java.util.UUID;
 import mage.abilities.effects.common.CounterTargetWithReplacementEffect;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.constants.Zone;
 import mage.constants.ZoneDetail;
 import mage.target.TargetSpell;
@@ -42,9 +42,8 @@ import mage.target.TargetSpell;
  */
 public class Hinder extends CardImpl {
 
-    public Hinder(UUID ownerId) {
-        super(ownerId, 65, "Hinder", Rarity.UNCOMMON, new CardType[]{CardType.INSTANT}, "{1}{U}{U}");
-        this.expansionSetCode = "CHK";
+    public Hinder(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.INSTANT},"{1}{U}{U}");
 
         // Counter target spell. If that spell is countered this way, put that card on the top or bottom of its owner's library instead of into that player's graveyard.
         this.getSpellAbility().addEffect(new CounterTargetWithReplacementEffect(Zone.LIBRARY, ZoneDetail.CHOOSE));

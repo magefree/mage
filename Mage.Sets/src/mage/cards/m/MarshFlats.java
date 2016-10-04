@@ -26,14 +26,14 @@
 * or implied, of BetaSteward_at_googlemail.com.
 */
 
-package mage.sets.zendikar;
+package mage.cards.m;
 
 import java.util.UUID;
 import mage.ObjectColor;
 import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.abilities.common.FetchLandActivatedAbility;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 
 /**
  *
@@ -41,9 +41,8 @@ import mage.cards.CardImpl;
  */
 public class MarshFlats extends CardImpl {
 
-    public MarshFlats(UUID ownerId) {
-        super(ownerId, 219, "Marsh Flats", Rarity.RARE, new CardType[]{CardType.LAND}, null);
-        this.expansionSetCode = "ZEN";
+    public MarshFlats(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.LAND},null);
         this.frameColor = new ObjectColor("WB");
         this.addAbility(new FetchLandActivatedAbility(new String[] {"Swamp", "Plains"}));
     }

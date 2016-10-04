@@ -25,14 +25,14 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.timeshifted;
+package mage.cards.f;
 
 import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.abilities.costs.mana.ManaCostsImpl;
 import mage.abilities.effects.common.DamageTargetEffect;
 import mage.abilities.keyword.MadnessAbility;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.target.common.TargetCreatureOrPlayer;
 
 import java.util.UUID;
@@ -43,9 +43,8 @@ import java.util.UUID;
  */
 public class FieryTemper extends CardImpl {
 
-    public FieryTemper(UUID ownerId) {
-        super(ownerId, 62, "Fiery Temper", Rarity.SPECIAL, new CardType[]{CardType.INSTANT}, "{1}{R}{R}");
-        this.expansionSetCode = "TSB";
+    public FieryTemper(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.INSTANT},"{1}{R}{R}");
 
 
         // Fiery Temper deals 3 damage to target creature or player.

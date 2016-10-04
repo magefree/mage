@@ -26,15 +26,15 @@
  *  or implied, of BetaSteward_at_googlemail.com.
  */
 
-package mage.sets.tenthedition;
+package mage.cards.b;
 
 import java.util.UUID;
 import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.MageInt;
 import mage.abilities.keyword.FlyingAbility;
 import mage.abilities.mana.AnyColorManaAbility;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 
 /**
  *
@@ -42,9 +42,8 @@ import mage.cards.CardImpl;
  */
 public class BirdsOfParadise extends CardImpl {
 
-    public BirdsOfParadise(UUID ownerId) {
-        super(ownerId, 252, "Birds of Paradise", Rarity.RARE, new CardType[]{CardType.CREATURE}, "{G}");
-        this.expansionSetCode = "10E";
+    public BirdsOfParadise(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{G}");
         this.subtype.add("Bird");
 
         this.power = new MageInt(0);

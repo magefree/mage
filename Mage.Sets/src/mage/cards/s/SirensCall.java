@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.fourthedition;
+package mage.cards.s;
 
 import java.util.UUID;
 import mage.abilities.Ability;
@@ -38,10 +38,10 @@ import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.RequirementEffect;
 import mage.abilities.effects.common.CreateDelayedTriggeredAbilityEffect;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Duration;
 import mage.constants.Outcome;
-import mage.constants.Rarity;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.players.Player;
@@ -53,9 +53,8 @@ import mage.watchers.common.AttackedThisTurnWatcher;
  */
 public class SirensCall extends CardImpl {
 
-    public SirensCall(UUID ownerId) {
-        super(ownerId, 101, "Siren's Call", Rarity.UNCOMMON, new CardType[]{CardType.INSTANT}, "{U}");
-        this.expansionSetCode = "4ED";
+    public SirensCall(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.INSTANT},"{U}");
 
         // Cast Siren's Call only during an opponent's turn, before attackers are declared.
         this.addAbility(new CastOnlyDuringPhaseStepSourceAbility(null, null,

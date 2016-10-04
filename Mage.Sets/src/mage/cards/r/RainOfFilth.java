@@ -25,18 +25,18 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.urzassaga;
+package mage.cards.r;
 
 import java.util.UUID;
 
 import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.Mana;
 import mage.abilities.costs.common.SacrificeSourceCost;
 import mage.abilities.effects.common.continuous.GainAbilityAllEffect;
 import mage.abilities.mana.ManaAbility;
 import mage.abilities.mana.SimpleManaAbility;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.Duration;
 import mage.constants.Zone;
 import mage.filter.common.FilterControlledLandPermanent;
@@ -47,9 +47,8 @@ import mage.filter.common.FilterControlledLandPermanent;
  */
 public class RainOfFilth extends CardImpl {
 
-    public RainOfFilth(UUID ownerId) {
-        super(ownerId, 151, "Rain of Filth", Rarity.UNCOMMON, new CardType[]{CardType.INSTANT}, "{B}");
-        this.expansionSetCode = "USG";
+    public RainOfFilth(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.INSTANT},"{B}");
 
 
         // Until end of turn, lands you control gain "Sacrifice this land: Add {B} to your mana pool."

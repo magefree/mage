@@ -25,14 +25,14 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.magic2010;
+package mage.cards.k;
 
 import java.util.UUID;
 import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.MageInt;
 import mage.abilities.keyword.ShroudAbility;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 
 /**
  *
@@ -40,9 +40,8 @@ import mage.cards.CardImpl;
  */
 public class KalonianBehemoth extends CardImpl {
 
-    public KalonianBehemoth(UUID ownerId) {
-        super(ownerId, 188, "Kalonian Behemoth", Rarity.RARE, new CardType[]{CardType.CREATURE}, "{5}{G}{G}");
-        this.expansionSetCode = "M10";
+    public KalonianBehemoth(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{5}{G}{G}");
         this.subtype.add("Beast");
 
         this.power = new MageInt(9);

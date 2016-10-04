@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.kaladesh;
+package mage.cards.u;
 
 import java.util.UUID;
 import mage.abilities.Ability;
@@ -42,8 +42,8 @@ import mage.abilities.effects.common.DoIfCostPaid;
 import mage.abilities.effects.common.GainLifeEffect;
 import mage.abilities.effects.common.LoseLifeOpponentsEffect;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.constants.Zone;
 import mage.filter.common.FilterControlledArtifactPermanent;
 import mage.target.common.TargetCreaturePermanent;
@@ -54,9 +54,8 @@ import mage.target.common.TargetCreaturePermanent;
  */
 public class UnderhandedDesigns extends CardImpl {
 
-    public UnderhandedDesigns(UUID ownerId) {
-        super(ownerId, 104, "Underhanded Designs", Rarity.UNCOMMON, new CardType[]{CardType.ENCHANTMENT}, "{1}{B}");
-        this.expansionSetCode = "KLD";
+    public UnderhandedDesigns(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.ENCHANTMENT},"{1}{B}");
 
         // Whenever an artifact enters the battlefield under your control, you may pay {1}. If you do, each opponent loses 1 life and you gain 1 life.
         DoIfCostPaid doIfCostPaid = new DoIfCostPaid(new LoseLifeOpponentsEffect(1), new GenericManaCost(1));

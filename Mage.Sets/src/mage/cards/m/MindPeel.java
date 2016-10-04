@@ -25,15 +25,15 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.stronghold;
+package mage.cards.m;
 
 import java.util.UUID;
 
 import mage.abilities.effects.common.discard.DiscardTargetEffect;
 import mage.abilities.keyword.BuybackAbility;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.target.TargetPlayer;
 
 /**
@@ -42,9 +42,8 @@ import mage.target.TargetPlayer;
  */
 public class MindPeel extends CardImpl {
 
-    public MindPeel(UUID ownerId) {
-        super(ownerId, 13, "Mind Peel", Rarity.UNCOMMON, new CardType[]{CardType.SORCERY}, "{B}");
-        this.expansionSetCode = "STH";
+    public MindPeel(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{B}");
 
         // Buyback {2}{B}{B}
         this.addAbility(new BuybackAbility("{2}{B}{B}"));

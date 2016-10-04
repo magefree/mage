@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.tenthedition;
+package mage.cards.m;
 
 import java.util.Iterator;
 import java.util.UUID;
@@ -36,6 +36,7 @@ import mage.abilities.Ability;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.effects.ContinuousEffectImpl;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.filter.common.FilterArtifactPermanent;
 import mage.filter.predicate.Predicates;
 import mage.filter.predicate.mageobject.CardTypePredicate;
@@ -48,9 +49,8 @@ import mage.game.permanent.Permanent;
  */
 public class MarchOfTheMachines extends CardImpl {
 
-    public MarchOfTheMachines(UUID ownerId) {
-        super(ownerId, 91, "March of the Machines", Rarity.RARE, new CardType[]{CardType.ENCHANTMENT}, "{3}{U}");
-        this.expansionSetCode = "10E";
+    public MarchOfTheMachines(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.ENCHANTMENT},"{3}{U}");
 
 
         // Each noncreature artifact is an artifact creature with power and toughness each equal to its converted mana cost.

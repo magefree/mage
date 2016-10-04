@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.mirrodinbesieged;
+package mage.cards.m;
 
 import java.util.HashSet;
 import java.util.List;
@@ -34,11 +34,11 @@ import mage.abilities.Ability;
 import mage.abilities.effects.OneShotEffect;
 import mage.cards.Card;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.cards.Cards;
 import mage.cards.CardsImpl;
 import mage.constants.CardType;
 import mage.constants.Outcome;
-import mage.constants.Rarity;
 import mage.constants.Zone;
 import mage.filter.FilterCard;
 import mage.filter.predicate.mageobject.NamePredicate;
@@ -53,9 +53,8 @@ import mage.target.TargetCard;
  */
 public class MitoticManipulation extends CardImpl {
 
-    public MitoticManipulation(UUID ownerId) {
-        super(ownerId, 27, "Mitotic Manipulation", Rarity.RARE, new CardType[]{CardType.SORCERY}, "{1}{U}{U}");
-        this.expansionSetCode = "MBS";
+    public MitoticManipulation(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{1}{U}{U}");
 
 
         this.getSpellAbility().addEffect(new MitoticManipulationEffect());

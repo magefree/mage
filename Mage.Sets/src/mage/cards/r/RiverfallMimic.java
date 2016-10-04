@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.eventide;
+package mage.cards.r;
 
 import java.util.UUID;
 import mage.MageInt;
@@ -36,9 +36,9 @@ import mage.abilities.effects.common.continuous.GainAbilitySourceEffect;
 import mage.abilities.effects.common.continuous.SetPowerToughnessSourceEffect;
 import mage.abilities.keyword.CantBeBlockedSourceAbility;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Duration;
-import mage.constants.Rarity;
 import mage.constants.SubLayer;
 import mage.filter.FilterSpell;
 import mage.filter.predicate.mageobject.ColorPredicate;
@@ -59,9 +59,8 @@ public class RiverfallMimic extends CardImpl {
 
     private String rule = "Whenever you cast a spell that's both blue and red, {this} has base power and toughness 3/3 until end of turn and can't be blocked this turn.";
 
-    public RiverfallMimic(UUID ownerId) {
-        super(ownerId, 111, "Riverfall Mimic", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{1}{U/R}");
-        this.expansionSetCode = "EVE";
+    public RiverfallMimic(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{1}{U/R}");
         this.subtype.add("Shapeshifter");
 
         this.color.setRed(true);

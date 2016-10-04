@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.avacynrestored;
+package mage.cards.d;
 
 import java.util.LinkedHashSet;
 import java.util.Set;
@@ -36,9 +36,9 @@ import mage.abilities.effects.OneShotEffect;
 import mage.abilities.keyword.MiracleAbility;
 import mage.cards.Card;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Outcome;
-import mage.constants.Rarity;
 import mage.constants.Zone;
 import mage.filter.common.FilterNonlandPermanent;
 import mage.game.Game;
@@ -51,9 +51,8 @@ import mage.players.Player;
  */
 public class DevastationTide extends CardImpl {
 
-    public DevastationTide(UUID ownerId) {
-        super(ownerId, 48, "Devastation Tide", Rarity.RARE, new CardType[]{CardType.SORCERY}, "{3}{U}{U}");
-        this.expansionSetCode = "AVR";
+    public DevastationTide(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{3}{U}{U}");
 
         // Return all nonland permanents to their owners' hands.
         this.getSpellAbility().addEffect(new DevastationTideEffect());

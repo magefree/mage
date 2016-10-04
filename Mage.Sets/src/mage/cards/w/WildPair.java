@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.planarchaos;
+package mage.cards.w;
 
 import java.util.UUID;
 import mage.MageObject;
@@ -35,10 +35,10 @@ import mage.abilities.condition.Condition;
 import mage.abilities.decorator.ConditionalTriggeredAbility;
 import mage.abilities.effects.OneShotEffect;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.cards.CardsImpl;
 import mage.constants.CardType;
 import mage.constants.Outcome;
-import mage.constants.Rarity;
 import mage.constants.SetTargetPointer;
 import mage.constants.Zone;
 import mage.filter.Filter;
@@ -58,9 +58,8 @@ import mage.watchers.common.CastFromHandWatcher;
  */
 public class WildPair extends CardImpl {
 
-    public WildPair(UUID ownerId) {
-        super(ownerId, 144, "Wild Pair", Rarity.RARE, new CardType[]{CardType.ENCHANTMENT}, "{4}{G}{G}");
-        this.expansionSetCode = "PLC";
+    public WildPair(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.ENCHANTMENT},"{4}{G}{G}");
 
         // Whenever a creature enters the battlefield, if you cast it from your hand, you may search your library for a creature card with the same total power and toughness and put it onto the battlefield. If you do, shuffle your library.
         this.addAbility(new ConditionalTriggeredAbility(

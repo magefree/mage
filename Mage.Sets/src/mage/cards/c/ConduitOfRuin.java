@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.battleforzendikar;
+package mage.cards.c;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -37,8 +37,8 @@ import mage.abilities.effects.common.CastSourceTriggeredAbility;
 import mage.abilities.effects.common.cost.SpellsCostReductionControllerEffect;
 import mage.abilities.effects.common.search.SearchLibraryPutOnLibraryEffect;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.constants.WatcherScope;
 import mage.constants.Zone;
 import mage.filter.Filter;
@@ -69,9 +69,8 @@ public class ConduitOfRuin extends CardImpl {
         filterCost.add(new FirstCastCreatureSpellPredicate());
     }
 
-    public ConduitOfRuin(UUID ownerId) {
-        super(ownerId, 4, "Conduit of Ruin", Rarity.RARE, new CardType[]{CardType.CREATURE}, "{6}");
-        this.expansionSetCode = "BFZ";
+    public ConduitOfRuin(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{6}");
         this.subtype.add("Eldrazi");
         this.power = new MageInt(5);
         this.toughness = new MageInt(5);

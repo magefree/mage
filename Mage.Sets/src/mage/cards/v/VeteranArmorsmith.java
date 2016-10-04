@@ -25,16 +25,16 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.magic2010;
+package mage.cards.v;
 
 import java.util.UUID;
 
 import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.MageInt;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.effects.common.continuous.BoostControlledEffect;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.Duration;
 import mage.constants.Zone;
 import mage.filter.common.FilterCreaturePermanent;
@@ -52,9 +52,8 @@ public class VeteranArmorsmith extends CardImpl {
         filter.add(new SubtypePredicate("Soldier"));
     }
 
-    public VeteranArmorsmith(UUID ownerId) {
-        super(ownerId, 38, "Veteran Armorsmith", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{W}{W}");
-        this.expansionSetCode = "M10";
+    public VeteranArmorsmith(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{W}{W}");
         this.subtype.add("Human");
         this.subtype.add("Soldier");
 

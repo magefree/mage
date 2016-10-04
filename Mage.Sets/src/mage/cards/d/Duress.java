@@ -26,13 +26,13 @@
  *  or implied, of BetaSteward_at_googlemail.com.
  */
 
-package mage.sets.magic2010;
+package mage.cards.d;
 
 import java.util.UUID;
 import mage.abilities.effects.common.discard.DiscardCardYouChooseTargetEffect;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.filter.FilterCard;
 import mage.filter.predicate.Predicates;
 import mage.filter.predicate.mageobject.CardTypePredicate;
@@ -50,9 +50,8 @@ public class Duress extends CardImpl {
         filter.add(Predicates.not(new CardTypePredicate(CardType.LAND)));
     }
 
-    public Duress(UUID ownerId){
-        super(ownerId, 96, "Duress", Rarity.COMMON, new CardType[]{CardType.SORCERY},"{B}");
-        this.expansionSetCode = "M10";
+    public Duress(UUID ownerId, CardSetInfo setInfo){
+        super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{B}");
 
 
         // Target opponent reveals his or her hand. You choose a noncreature, nonland card from it. That player discards that card.

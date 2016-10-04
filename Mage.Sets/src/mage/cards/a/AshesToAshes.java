@@ -25,16 +25,16 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.fifthedition;
+package mage.cards.a;
 
 import java.util.UUID;
 
 import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.abilities.Ability;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.DamageControllerEffect;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.Outcome;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.filter.predicate.Predicates;
@@ -55,9 +55,8 @@ public class AshesToAshes extends CardImpl {
         filter.add(Predicates.not(new CardTypePredicate(CardType.ARTIFACT)));
     }
 
-    public AshesToAshes(UUID ownerId) {
-        super(ownerId, 3, "Ashes to Ashes", Rarity.UNCOMMON, new CardType[]{CardType.SORCERY}, "{1}{B}{B}");
-        this.expansionSetCode = "5ED";
+    public AshesToAshes(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{1}{B}{B}");
 
 
         // Exile two target nonartifact creatures. Ashes to Ashes deals 5 damage to you.

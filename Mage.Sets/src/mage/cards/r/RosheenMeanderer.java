@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.shadowmoor;
+package mage.cards.r;
 
 import java.util.UUID;
 import mage.ConditionalMana;
@@ -37,9 +37,9 @@ import mage.abilities.condition.Condition;
 import mage.abilities.effects.common.BasicManaEffect;
 import mage.abilities.mana.BasicManaAbility;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.AbilityType;
 import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.game.Game;
 
 /**
@@ -48,9 +48,8 @@ import mage.game.Game;
  */
 public class RosheenMeanderer extends CardImpl {
 
-    public RosheenMeanderer(UUID ownerId) {
-        super(ownerId, 214, "Rosheen Meanderer", Rarity.RARE, new CardType[]{CardType.CREATURE}, "{3}{R/G}");
-        this.expansionSetCode = "SHM";
+    public RosheenMeanderer(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{3}{R/G}");
         this.supertype.add("Legendary");
         this.subtype.add("Giant");
         this.subtype.add("Shaman");

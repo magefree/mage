@@ -25,18 +25,18 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.judgment;
+package mage.cards.q;
 
 import java.util.UUID;
 import mage.abilities.Ability;
 import mage.abilities.effects.SearchEffect;
 import mage.abilities.keyword.FlashbackAbility;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.cards.Cards;
 import mage.cards.CardsImpl;
 import mage.constants.CardType;
 import mage.constants.Outcome;
-import mage.constants.Rarity;
 import mage.constants.Zone;
 import mage.filter.FilterCard;
 import mage.filter.predicate.mageobject.AbilityPredicate;
@@ -57,9 +57,8 @@ public class QuietSpeculation extends CardImpl {
         filterCard.add(new AbilityPredicate(FlashbackAbility.class));
     }
 
-    public QuietSpeculation(UUID ownerId) {
-        super(ownerId, 49, "Quiet Speculation", Rarity.UNCOMMON, new CardType[]{CardType.SORCERY}, "{1}{U}");
-        this.expansionSetCode = "JUD";
+    public QuietSpeculation(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{1}{U}");
 
         // Search target player's library for up to three cards with flashback and put them into that player's graveyard. Then the player shuffles his or her library.
         TargetCardInLibrary target = new TargetCardInLibrary(0, 3, filterCard);

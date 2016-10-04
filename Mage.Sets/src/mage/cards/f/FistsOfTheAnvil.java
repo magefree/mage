@@ -25,14 +25,14 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.tenthedition;
+package mage.cards.f;
 
 import java.util.UUID;
 
 import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.abilities.effects.common.continuous.BoostTargetEffect;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.Duration;
 import mage.target.common.TargetCreaturePermanent;
 
@@ -42,9 +42,8 @@ import mage.target.common.TargetCreaturePermanent;
  */
 public class FistsOfTheAnvil extends CardImpl {
 
-    public FistsOfTheAnvil(UUID ownerId) {
-        super(ownerId, 201, "Fists of the Anvil", Rarity.COMMON, new CardType[]{CardType.INSTANT}, "{1}{R}");
-        this.expansionSetCode = "10E";
+    public FistsOfTheAnvil(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.INSTANT},"{1}{R}");
 
         this.getSpellAbility().addEffect(new BoostTargetEffect(4, 0, Duration.EndOfTurn));
         this.getSpellAbility().addTarget(new TargetCreaturePermanent());

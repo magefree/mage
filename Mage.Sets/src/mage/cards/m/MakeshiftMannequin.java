@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.archenemy;
+package mage.cards.m;
 
 import java.util.UUID;
 import mage.abilities.Ability;
@@ -36,11 +36,11 @@ import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.SacrificeSourceEffect;
 import mage.cards.Card;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Duration;
 import mage.constants.Layer;
 import mage.constants.Outcome;
-import mage.constants.Rarity;
 import mage.constants.SubLayer;
 import mage.constants.Zone;
 import mage.counters.CounterType;
@@ -58,9 +58,8 @@ import mage.target.targetpointer.FixedTarget;
  */
 public class MakeshiftMannequin extends CardImpl {
 
-    public MakeshiftMannequin(UUID ownerId) {
-        super(ownerId, 20, "Makeshift Mannequin", Rarity.UNCOMMON, new CardType[]{CardType.INSTANT}, "{3}{B}");
-        this.expansionSetCode = "ARC";
+    public MakeshiftMannequin(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.INSTANT},"{3}{B}");
 
         // Return target creature card from your graveyard to the battlefield with a mannequin counter on it. For as long as that creature has a mannequin counter on it, it has "When this creature becomes the target of a spell or ability, sacrifice it."
         this.getSpellAbility().addEffect(new MakeshiftMannequinEffect());

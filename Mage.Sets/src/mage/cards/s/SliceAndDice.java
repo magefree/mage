@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.onslaught;
+package mage.cards.s;
 
 import java.util.UUID;
 import mage.abilities.common.CycleTriggeredAbility;
@@ -33,8 +33,8 @@ import mage.abilities.costs.mana.ManaCostsImpl;
 import mage.abilities.effects.common.DamageAllEffect;
 import mage.abilities.keyword.CyclingAbility;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.filter.common.FilterCreaturePermanent;
 
 /**
@@ -43,9 +43,8 @@ import mage.filter.common.FilterCreaturePermanent;
  */
 public class SliceAndDice extends CardImpl {
 
-    public SliceAndDice(UUID ownerId) {
-        super(ownerId, 232, "Slice and Dice", Rarity.UNCOMMON, new CardType[]{CardType.SORCERY}, "{4}{R}{R}");
-        this.expansionSetCode = "ONS";
+    public SliceAndDice(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{4}{R}{R}");
 
 
         // Slice and Dice deals 4 damage to each creature.

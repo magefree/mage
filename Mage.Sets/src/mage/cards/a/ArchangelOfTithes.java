@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.magicorigins;
+package mage.cards.a;
 
 import java.util.UUID;
 import mage.MageInt;
@@ -36,8 +36,8 @@ import mage.abilities.effects.common.combat.CantAttackYouUnlessPayManaAllEffect;
 import mage.abilities.effects.common.combat.CantBlockUnlessPayManaAllEffect;
 import mage.abilities.keyword.FlyingAbility;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.constants.Zone;
 import mage.game.Game;
 import mage.game.events.GameEvent;
@@ -49,9 +49,8 @@ import mage.game.permanent.Permanent;
  */
 public class ArchangelOfTithes extends CardImpl {
 
-    public ArchangelOfTithes(UUID ownerId) {
-        super(ownerId, 4, "Archangel of Tithes", Rarity.MYTHIC, new CardType[]{CardType.CREATURE}, "{1}{W}{W}{W}");
-        this.expansionSetCode = "ORI";
+    public ArchangelOfTithes(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{1}{W}{W}{W}");
         this.subtype.add("Angel");
         this.power = new MageInt(3);
         this.toughness = new MageInt(5);

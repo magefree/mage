@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.theros;
+package mage.cards.w;
 
 import java.util.UUID;
 import mage.abilities.Ability;
@@ -45,10 +45,10 @@ import mage.abilities.keyword.HasteAbility;
 import mage.abilities.keyword.LifelinkAbility;
 import mage.cards.Card;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Duration;
 import mage.constants.Outcome;
-import mage.constants.Rarity;
 import mage.constants.Zone;
 import mage.filter.common.FilterCreatureCard;
 import mage.filter.common.FilterCreaturePermanent;
@@ -66,9 +66,8 @@ import mage.target.targetpointer.FixedTarget;
  */
 public class WhipOfErebos extends CardImpl {
 
-    public WhipOfErebos(UUID ownerId) {
-        super(ownerId, 110, "Whip of Erebos", Rarity.RARE, new CardType[]{CardType.ENCHANTMENT, CardType.ARTIFACT}, "{2}{B}{B}");
-        this.expansionSetCode = "THS";
+    public WhipOfErebos(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.ENCHANTMENT,CardType.ARTIFACT},"{2}{B}{B}");
         this.supertype.add("Legendary");
 
         // Creatures you control have lifelink.

@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.eventide;
+package mage.cards.b;
 
 import java.util.UUID;
 import mage.MageInt;
@@ -36,8 +36,8 @@ import mage.abilities.effects.common.counter.AddCountersSourceEffect;
 import mage.abilities.effects.common.counter.RemoveCounterSourceEffect;
 import mage.abilities.keyword.FirstStrikeAbility;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.counters.CounterType;
 import mage.filter.FilterSpell;
 import mage.filter.predicate.mageobject.ColorPredicate;
@@ -55,9 +55,8 @@ public class BelligerentHatchling extends CardImpl {
         filterWhiteSpell.add(new ColorPredicate(ObjectColor.WHITE));
     }
 
-    public BelligerentHatchling(UUID ownerId) {
-        super(ownerId, 134, "Belligerent Hatchling", Rarity.UNCOMMON, new CardType[]{CardType.CREATURE}, "{3}{R/W}");
-        this.expansionSetCode = "EVE";
+    public BelligerentHatchling(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{3}{R/W}");
         this.subtype.add("Elemental");
 
 

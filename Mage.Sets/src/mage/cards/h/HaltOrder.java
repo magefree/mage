@@ -25,14 +25,14 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.scarsofmirrodin;
+package mage.cards.h;
 
 import java.util.UUID;
 import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.abilities.effects.common.CounterTargetEffect;
 import mage.abilities.effects.common.DrawCardSourceControllerEffect;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.filter.common.FilterArtifactSpell;
 import mage.target.TargetSpell;
 
@@ -41,9 +41,8 @@ import mage.target.TargetSpell;
  * @author Loki
  */
 public class HaltOrder extends CardImpl {
-    public HaltOrder (UUID ownerId) {
-        super(ownerId, 34, "Halt Order", Rarity.UNCOMMON, new CardType[]{CardType.INSTANT}, "{2}{U}");
-        this.expansionSetCode = "SOM";
+    public HaltOrder (UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.INSTANT},"{2}{U}");
 
         // Counter target artifact spell. Draw a card.
         this.getSpellAbility().addTarget(new TargetSpell(new FilterArtifactSpell()));

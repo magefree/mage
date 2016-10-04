@@ -25,15 +25,15 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.magic2012;
+package mage.cards.t;
 
 import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.abilities.Ability;
 import mage.abilities.effects.Effect;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.CreateTokenEffect;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.Outcome;
 import mage.filter.FilterPermanent;
 import mage.filter.common.FilterCreaturePermanent;
@@ -48,9 +48,8 @@ import java.util.UUID;
  */
 public class TimelyReinforcements extends CardImpl {
 
-    public TimelyReinforcements(UUID ownerId) {
-        super(ownerId, 40, "Timely Reinforcements", Rarity.UNCOMMON, new CardType[]{CardType.SORCERY}, "{2}{W}");
-        this.expansionSetCode = "M12";
+    public TimelyReinforcements(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{2}{W}");
 
 
         // If you have less life than an opponent, you gain 6 life. If you control fewer creatures than an opponent, put three 1/1 white Soldier creature tokens onto the battlefield.

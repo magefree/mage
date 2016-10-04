@@ -25,13 +25,13 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.urzaslegacy;
+package mage.cards.i;
 
 import java.util.UUID;
 import mage.abilities.effects.common.CounterTargetEffect;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.filter.FilterSpell;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.filter.predicate.other.TargetsPermanentPredicate;
@@ -49,9 +49,8 @@ public class Intervene extends CardImpl {
         filter.add(new TargetsPermanentPredicate(new FilterCreaturePermanent()));
     }
 
-    public Intervene(UUID ownerId) {
-        super(ownerId, 33, "Intervene", Rarity.COMMON, new CardType[]{CardType.INSTANT}, "{U}");
-        this.expansionSetCode = "ULG";
+    public Intervene(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.INSTANT},"{U}");
 
 
         // Counter target spell that targets a creature.

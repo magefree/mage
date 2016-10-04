@@ -25,15 +25,15 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.conflux;
+package mage.cards.a;
 
 import mage.ConditionalMana;
 import mage.abilities.mana.ConditionalAnyColorManaAbility;
 import mage.abilities.mana.builder.ConditionalManaBuilder;
 import mage.abilities.mana.conditional.CreatureCastConditionalMana;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.Rarity;
 
 import java.util.UUID;
 
@@ -43,9 +43,8 @@ import java.util.UUID;
  */
 public class AncientZiggurat extends CardImpl {
 
-    public AncientZiggurat(UUID ownerId) {
-        super(ownerId, 141, "Ancient Ziggurat", Rarity.UNCOMMON, new CardType[]{CardType.LAND}, "");
-        this.expansionSetCode = "CON";
+    public AncientZiggurat(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.LAND},"");
 
         // {tap}: Add one mana of any color to your mana pool. Spend this mana only to cast a creature spell.
         this.addAbility(new ConditionalAnyColorManaAbility(1, new AncientZigguratManaBuilder()));

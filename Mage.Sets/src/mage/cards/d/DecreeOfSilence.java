@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.scourge;
+package mage.cards.d;
 
 import java.util.UUID;
 import mage.abilities.Ability;
@@ -40,8 +40,8 @@ import mage.abilities.effects.common.SacrificeSourceEffect;
 import mage.abilities.effects.common.counter.AddCountersSourceEffect;
 import mage.abilities.keyword.CyclingAbility;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.constants.SetTargetPointer;
 import mage.constants.Zone;
 import mage.counters.CounterType;
@@ -54,9 +54,8 @@ import mage.target.TargetSpell;
  */
 public class DecreeOfSilence extends CardImpl {
 
-    public DecreeOfSilence(UUID ownerId) {
-        super(ownerId, 32, "Decree of Silence", Rarity.RARE, new CardType[]{CardType.ENCHANTMENT}, "{6}{U}{U}");
-        this.expansionSetCode = "SCG";
+    public DecreeOfSilence(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.ENCHANTMENT},"{6}{U}{U}");
 
         // Whenever an opponent casts a spell, counter that spell and put a depletion counter on Decree of Silence. If there are three or more depletion counters on Decree of Silence, sacrifice it.
         Effect effect = new CounterTargetEffect();

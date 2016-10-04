@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.magic2015;
+package mage.cards.s;
 
 import java.util.UUID;
 import mage.MageInt;
@@ -36,8 +36,8 @@ import mage.abilities.costs.mana.ManaCostsImpl;
 import mage.abilities.effects.common.ReturnFromGraveyardToHandTargetEffect;
 import mage.abilities.keyword.DeathtouchAbility;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.constants.Zone;
 import mage.filter.common.FilterCreatureCard;
 import mage.target.common.TargetCardInYourGraveyard;
@@ -48,9 +48,8 @@ import mage.target.common.TargetCardInYourGraveyard;
  */
 public class SoulOfInnistrad extends CardImpl {
 
-    public SoulOfInnistrad(UUID ownerId) {
-        super(ownerId, 115, "Soul of Innistrad", Rarity.MYTHIC, new CardType[]{CardType.CREATURE}, "{4}{B}{B}");
-        this.expansionSetCode = "M15";
+    public SoulOfInnistrad(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{4}{B}{B}");
         this.subtype.add("Avatar");
 
         this.power = new MageInt(6);

@@ -25,7 +25,7 @@
  * authors and should not be interpreted as representing official policies, either expressed
  * or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.shardsofalara;
+package mage.cards.a;
 
 import java.util.UUID;
 import mage.abilities.LoyaltyAbility;
@@ -36,8 +36,8 @@ import mage.abilities.effects.common.DestroyAllControlledTargetEffect;
 import mage.abilities.effects.common.DontUntapInControllersNextUntapStepTargetEffect;
 import mage.abilities.effects.common.GainLifeEffect;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.filter.FilterPermanent;
 import mage.filter.predicate.mageobject.CardTypePredicate;
 import mage.target.TargetPermanent;
@@ -56,9 +56,8 @@ public class AjaniVengeant extends CardImpl {
         filter.add(new CardTypePredicate(CardType.LAND));
     }
 
-    public AjaniVengeant(UUID ownerId) {
-        super(ownerId, 154, "Ajani Vengeant", Rarity.MYTHIC, new CardType[]{CardType.PLANESWALKER}, "{2}{R}{W}");
-        this.expansionSetCode = "ALA";
+    public AjaniVengeant(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.PLANESWALKER},"{2}{R}{W}");
         this.subtype.add("Ajani");
 
         this.addAbility(new PlanswalkerEntersWithLoyalityCountersAbility(3));

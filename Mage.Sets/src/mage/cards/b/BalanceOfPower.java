@@ -25,15 +25,15 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.eighthedition;
+package mage.cards.b;
 
 import java.util.UUID;
 import mage.constants.CardType;
 import mage.constants.Outcome;
-import mage.constants.Rarity;
 import mage.abilities.Ability;
 import mage.abilities.effects.OneShotEffect;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.game.Game;
 import mage.players.Player;
 import mage.target.common.TargetOpponent;
@@ -44,9 +44,8 @@ import mage.target.common.TargetOpponent;
  */
 public class BalanceOfPower extends CardImpl {
 
-    public BalanceOfPower(UUID ownerId) {
-        super(ownerId, 62, "Balance of Power", Rarity.RARE, new CardType[]{CardType.SORCERY}, "{3}{U}{U}");
-        this.expansionSetCode = "8ED";
+    public BalanceOfPower(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{3}{U}{U}");
 
 
         // If target opponent has more cards in hand than you, draw cards equal to the difference.

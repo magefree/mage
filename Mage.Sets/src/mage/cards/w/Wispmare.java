@@ -25,11 +25,10 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.lorwyn;
+package mage.cards.w;
 
 import java.util.UUID;
 import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.EntersBattlefieldTriggeredAbility;
@@ -37,6 +36,7 @@ import mage.abilities.effects.common.DestroyTargetEffect;
 import mage.abilities.keyword.FlyingAbility;
 import mage.abilities.keyword.EvokeAbility;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.filter.common.FilterEnchantmentPermanent;
 import mage.target.Target;
 import mage.target.TargetPermanent;
@@ -47,9 +47,8 @@ import mage.target.TargetPermanent;
  */
 public class Wispmare extends CardImpl {
 
-    public Wispmare(UUID ownerId) {
-        super(ownerId, 48, "Wispmare", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{2}{W}");
-        this.expansionSetCode = "LRW";
+    public Wispmare(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{2}{W}");
         this.subtype.add("Elemental");
 
         this.power = new MageInt(1);

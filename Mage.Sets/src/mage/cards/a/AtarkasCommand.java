@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.dragonsoftarkir;
+package mage.cards.a;
 
 import java.util.UUID;
 import mage.abilities.Mode;
@@ -37,9 +37,9 @@ import mage.abilities.effects.common.continuous.CantGainLifeAllEffect;
 import mage.abilities.effects.common.continuous.GainAbilityControlledEffect;
 import mage.abilities.keyword.ReachAbility;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Duration;
-import mage.constants.Rarity;
 import mage.constants.TargetController;
 
 /**
@@ -48,9 +48,8 @@ import mage.constants.TargetController;
  */
 public class AtarkasCommand extends CardImpl {
 
-    public AtarkasCommand(UUID ownerId) {
-        super(ownerId, 213, "Atarka's Command", Rarity.RARE, new CardType[]{CardType.INSTANT}, "{R}{G}");
-        this.expansionSetCode = "DTK";
+    public AtarkasCommand(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.INSTANT},"{R}{G}");
 
         // Choose two - 
         this.getSpellAbility().getModes().setMinModes(2);

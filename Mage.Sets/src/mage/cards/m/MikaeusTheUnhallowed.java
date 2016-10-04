@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.darkascension;
+package mage.cards.m;
 
 import java.util.UUID;
 import mage.MageInt;
@@ -37,9 +37,9 @@ import mage.abilities.effects.common.continuous.GainAbilityControlledEffect;
 import mage.abilities.keyword.IntimidateAbility;
 import mage.abilities.keyword.UndyingAbility;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Duration;
-import mage.constants.Rarity;
 import mage.constants.Zone;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.filter.predicate.Predicates;
@@ -61,9 +61,8 @@ public class MikaeusTheUnhallowed extends CardImpl {
         filter.add(Predicates.not(new SubtypePredicate("Human")));
     }
 
-    public MikaeusTheUnhallowed(UUID ownerId) {
-        super(ownerId, 70, "Mikaeus, the Unhallowed", Rarity.MYTHIC, new CardType[]{CardType.CREATURE}, "{3}{B}{B}{B}");
-        this.expansionSetCode = "DKA";
+    public MikaeusTheUnhallowed(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{3}{B}{B}{B}");
         this.supertype.add("Legendary");
         this.subtype.add("Zombie");
         this.subtype.add("Cleric");

@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.invasion;
+package mage.cards.c;
 
 import java.util.UUID;
 import mage.abilities.Ability;
@@ -40,6 +40,7 @@ import mage.abilities.effects.common.continuous.GainAbilityTargetEffect;
 import mage.abilities.keyword.HasteAbility;
 import mage.cards.Card;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.*;
 import mage.filter.common.FilterCreatureCard;
 import mage.game.Game;
@@ -54,9 +55,8 @@ import mage.target.targetpointer.FixedTarget;
  */
 public class CauldronDance extends CardImpl {
 
-    public CauldronDance(UUID ownerId) {
-        super(ownerId, 238, "Cauldron Dance", Rarity.UNCOMMON, new CardType[]{CardType.INSTANT}, "{4}{B}{R}");
-        this.expansionSetCode = "INV";
+    public CauldronDance(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.INSTANT},"{4}{B}{R}");
 
         // Cast Cauldron Dance only during combat.
         this.addAbility(new CastOnlyDuringPhaseStepSourceAbility(TurnPhase.COMBAT));

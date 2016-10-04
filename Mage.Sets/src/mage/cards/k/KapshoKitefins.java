@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.magic2015;
+package mage.cards.k;
 
 import java.util.UUID;
 import mage.MageInt;
@@ -34,8 +34,8 @@ import mage.abilities.common.EntersBattlefieldControlledTriggeredAbility;
 import mage.abilities.effects.common.TapTargetEffect;
 import mage.abilities.keyword.FlyingAbility;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.constants.TargetController;
 import mage.constants.Zone;
 import mage.filter.common.FilterCreaturePermanent;
@@ -56,9 +56,8 @@ public class KapshoKitefins extends CardImpl {
         filterTarget.add(new ControllerPredicate(TargetController.OPPONENT));
     }
 
-    public KapshoKitefins(UUID ownerId) {
-        super(ownerId, 66, "Kapsho Kitefins", Rarity.UNCOMMON, new CardType[]{CardType.CREATURE}, "{4}{U}{U}");
-        this.expansionSetCode = "M15";
+    public KapshoKitefins(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{4}{U}{U}");
         this.subtype.add("Fish");
 
         this.color.setBlue(true);

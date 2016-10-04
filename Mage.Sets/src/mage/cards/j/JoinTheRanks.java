@@ -26,14 +26,14 @@
  *  or implied, of BetaSteward_at_googlemail.com.
  */
 
-package mage.sets.worldwake;
+package mage.cards.j;
 
 import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.effects.common.CreateTokenEffect;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.game.permanent.token.Token;
 
 /**
@@ -42,9 +42,8 @@ import mage.game.permanent.token.Token;
  */
 public class JoinTheRanks extends CardImpl {
 
-    public JoinTheRanks (UUID ownerId) {
-        super(ownerId, 9, "Join the Ranks", Rarity.COMMON, new CardType[]{CardType.INSTANT}, "{3}{W}");
-        this.expansionSetCode = "WWK";
+    public JoinTheRanks (UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.INSTANT},"{3}{W}");
         this.color.setWhite(true);        
         
         // Put two 1/1 white Soldier Ally creature tokens onto the battlefield.

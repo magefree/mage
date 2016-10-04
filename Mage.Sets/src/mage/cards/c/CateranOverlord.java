@@ -26,12 +26,11 @@
  *  or implied, of BetaSteward_at_googlemail.com.
  */
 
-package mage.sets.mercadianmasques;
+package mage.cards.c;
 
 import java.util.UUID;
 
 import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.constants.Zone;
 import mage.MageInt;
 import mage.abilities.Ability;
@@ -42,6 +41,7 @@ import mage.abilities.costs.mana.GenericManaCost;
 import mage.abilities.effects.common.RegenerateSourceEffect;
 import mage.abilities.effects.common.search.SearchLibraryPutInPlayEffect;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.filter.Filter.ComparisonType;
 import mage.filter.common.FilterPermanentCard;
 import mage.filter.predicate.mageobject.ConvertedManaCostPredicate;
@@ -62,9 +62,8 @@ public class CateranOverlord extends CardImpl {
 	filter.add(new ConvertedManaCostPredicate(ComparisonType.LessThan, 7));
     }
 
-    public CateranOverlord(UUID ownerId) {
-        super(ownerId, 123, "Cateran Overlord", Rarity.RARE, new CardType[]{CardType.CREATURE}, "{4}{B}{B}{B}");
-        this.expansionSetCode = "MMQ";
+    public CateranOverlord(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{4}{B}{B}{B}");
         this.subtype.add("Horror");
         this.subtype.add("Mercenary");
 

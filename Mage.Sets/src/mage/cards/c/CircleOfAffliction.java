@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.planarchaos;
+package mage.cards.c;
 
 import java.util.UUID;
 import mage.MageObject;
@@ -39,9 +39,9 @@ import mage.abilities.effects.common.DoIfCostPaid;
 import mage.abilities.effects.common.GainLifeEffect;
 import mage.abilities.effects.common.LoseLifeTargetEffect;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Outcome;
-import mage.constants.Rarity;
 import mage.constants.Zone;
 import mage.game.Game;
 import mage.game.events.GameEvent;
@@ -54,9 +54,8 @@ import mage.target.TargetPlayer;
  */
 public class CircleOfAffliction extends CardImpl {
 
-    public CircleOfAffliction(UUID ownerId) {
-        super(ownerId, 66, "Circle of Affliction", Rarity.UNCOMMON, new CardType[]{CardType.ENCHANTMENT}, "{1}{B}");
-        this.expansionSetCode = "PLC";
+    public CircleOfAffliction(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.ENCHANTMENT},"{1}{B}");
 
         // As Circle of Affliction enters the battlefield, choose a color.
         this.addAbility(new EntersBattlefieldAbility(new ChooseColorEffect(Outcome.Neutral)));

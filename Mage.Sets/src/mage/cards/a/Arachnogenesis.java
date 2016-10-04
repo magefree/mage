@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.commander2015;
+package mage.cards.a;
 
 import java.util.UUID;
 import mage.abilities.Ability;
@@ -34,9 +34,9 @@ import mage.abilities.effects.Effect;
 import mage.abilities.effects.common.CreateTokenEffect;
 import mage.abilities.effects.common.PreventAllDamageByAllPermanentsEffect;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Duration;
-import mage.constants.Rarity;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.filter.predicate.Predicates;
 import mage.filter.predicate.mageobject.SubtypePredicate;
@@ -56,9 +56,8 @@ public class Arachnogenesis extends CardImpl {
         filter.add(Predicates.not(new SubtypePredicate("Spider")));
     }
 
-    public Arachnogenesis(UUID ownerId) {
-        super(ownerId, 32, "Arachnogenesis", Rarity.RARE, new CardType[]{CardType.INSTANT}, "{2}{G}");
-        this.expansionSetCode = "C15";
+    public Arachnogenesis(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.INSTANT},"{2}{G}");
 
         // Put X 1/2 green Spider creature tokens with reach onto the battlefield, where X is the number of creatures attacking you.
         Effect effect = new CreateTokenEffect(new SpiderToken(), new ArachnogenesisCount());

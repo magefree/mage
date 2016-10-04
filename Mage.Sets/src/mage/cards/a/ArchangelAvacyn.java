@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.shadowsoverinnistrad;
+package mage.cards.a;
 
 import java.util.UUID;
 import mage.MageInt;
@@ -44,10 +44,10 @@ import mage.abilities.keyword.IndestructibleAbility;
 import mage.abilities.keyword.TransformAbility;
 import mage.abilities.keyword.VigilanceAbility;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Duration;
 import mage.constants.Outcome;
-import mage.constants.Rarity;
 import mage.constants.TargetController;
 import mage.filter.common.FilterControlledCreaturePermanent;
 import mage.filter.common.FilterCreaturePermanent;
@@ -71,16 +71,15 @@ public class ArchangelAvacyn extends CardImpl {
         filter.add(new ControllerPredicate(TargetController.YOU));
     }
 
-    public ArchangelAvacyn(UUID ownerId) {
-        super(ownerId, 5, "Archangel Avacyn", Rarity.MYTHIC, new CardType[]{CardType.CREATURE}, "{3}{W}{W}");
-        this.expansionSetCode = "SOI";
+    public ArchangelAvacyn(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{3}{W}{W}");
         this.supertype.add("Legendary");
         this.subtype.add("Angel");
         this.power = new MageInt(4);
         this.toughness = new MageInt(4);
 
         this.transformable = true;
-        this.secondSideCard = new AvacynThePurifier(ownerId);
+        this.secondSideCardClazz = AvacynThePurifier.class;
 
         // Flash
         this.addAbility(FlashAbility.getInstance());

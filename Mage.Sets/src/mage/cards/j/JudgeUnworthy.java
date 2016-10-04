@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.futuresight;
+package mage.cards.j;
 
 import java.util.UUID;
 import mage.abilities.Ability;
@@ -34,10 +34,10 @@ import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.keyword.ScryEffect;
 import mage.cards.Card;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.cards.CardsImpl;
 import mage.constants.CardType;
 import mage.constants.Outcome;
-import mage.constants.Rarity;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.players.Player;
@@ -49,9 +49,8 @@ import mage.target.common.TargetAttackingOrBlockingCreature;
  */
 public class JudgeUnworthy extends CardImpl {
 
-    public JudgeUnworthy(UUID ownerId) {
-        super(ownerId, 9, "Judge Unworthy", Rarity.COMMON, new CardType[]{CardType.INSTANT}, "{1}{W}");
-        this.expansionSetCode = "FUT";
+    public JudgeUnworthy(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.INSTANT},"{1}{W}");
 
         // Choose target attacking or blocking creature. Scry 3, then reveal the top card of your library. Judge Unworthy deals damage equal to that card's converted mana cost to that creature.
         this.getSpellAbility().addTarget(new TargetAttackingOrBlockingCreature());

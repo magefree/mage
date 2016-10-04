@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.fatereforged;
+package mage.cards.s;
 
 import java.util.UUID;
 import mage.abilities.dynamicvalue.DynamicValue;
@@ -34,8 +34,8 @@ import mage.abilities.effects.Effect;
 import mage.abilities.effects.common.DrawCardSourceControllerEffect;
 import mage.abilities.effects.common.GainLifeEffect;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.filter.Filter;
 import mage.filter.common.FilterControlledCreaturePermanent;
 import mage.filter.predicate.mageobject.PowerPredicate;
@@ -52,9 +52,8 @@ public class ShamanicRevelation extends CardImpl {
         filter.add(new PowerPredicate(Filter.ComparisonType.GreaterThan, 3));
     }
 
-    public ShamanicRevelation(UUID ownerId) {
-        super(ownerId, 138, "Shamanic Revelation", Rarity.RARE, new CardType[]{CardType.SORCERY}, "{3}{G}{G}");
-        this.expansionSetCode = "FRF";
+    public ShamanicRevelation(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{3}{G}{G}");
 
         // Draw a card for each creature you control.
         this.getSpellAbility().addEffect(new DrawCardSourceControllerEffect(new PermanentsOnBattlefieldCount(new FilterControlledCreaturePermanent())));

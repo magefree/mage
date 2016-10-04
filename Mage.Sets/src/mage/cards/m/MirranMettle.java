@@ -25,17 +25,17 @@
  * authors and should not be interpreted as representing official policies, either expressed
  * or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.mirrodinbesieged;
+package mage.cards.m;
 
 import java.util.UUID;
 import mage.abilities.condition.LockedInCondition;
 import mage.constants.CardType;
 import mage.constants.Duration;
-import mage.constants.Rarity;
 import mage.abilities.condition.common.MetalcraftCondition;
 import mage.abilities.decorator.ConditionalContinuousEffect;
 import mage.abilities.effects.common.continuous.BoostTargetEffect;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.target.common.TargetCreaturePermanent;
 
 /**
@@ -46,9 +46,8 @@ public class MirranMettle extends CardImpl {
 
     private final String effectText = "Metalcraft - That creature gets +4/+4 until end of turn instead if you control three or more artifacts.";
 
-    public MirranMettle(UUID ownerId) {
-        super(ownerId, 84, "Mirran Mettle", Rarity.COMMON, new CardType[]{CardType.INSTANT}, "{G}");
-        this.expansionSetCode = "MBS";
+    public MirranMettle(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.INSTANT},"{G}");
 
 
         this.getSpellAbility().addTarget(new TargetCreaturePermanent());

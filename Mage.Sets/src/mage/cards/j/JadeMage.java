@@ -26,17 +26,17 @@
  *  or implied, of BetaSteward_at_googlemail.com.
  */
 
-package mage.sets.magic2012;
+package mage.cards.j;
 
 import java.util.UUID;
 
 import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.MageInt;
 import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.costs.mana.ManaCostsImpl;
 import mage.abilities.effects.common.CreateTokenEffect;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.Zone;
 import mage.game.permanent.token.SaprolingToken;
 
@@ -45,9 +45,8 @@ import mage.game.permanent.token.SaprolingToken;
  */
 public class JadeMage extends CardImpl {
 
-    public JadeMage(UUID ownerId) {
-        super(ownerId, 181, "Jade Mage", Rarity.UNCOMMON, new CardType[]{CardType.CREATURE}, "{1}{G}");
-        this.expansionSetCode = "M12";
+    public JadeMage(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{1}{G}");
         this.subtype.add("Human");
         this.subtype.add("Shaman");
 

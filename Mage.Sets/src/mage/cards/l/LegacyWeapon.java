@@ -25,11 +25,10 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.apocalypse;
+package mage.cards.l;
 
 import java.util.UUID;
 import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.constants.Zone;
 import mage.abilities.common.PutIntoGraveFromAnywhereSourceAbility;
 import mage.abilities.common.SimpleActivatedAbility;
@@ -37,6 +36,7 @@ import mage.abilities.costs.mana.ManaCostsImpl;
 import mage.abilities.effects.common.ExileTargetEffect;
 import mage.abilities.effects.common.RevealAndShuffleIntoLibrarySourceEffect;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.target.TargetPermanent;
 
 /**
@@ -45,9 +45,8 @@ import mage.target.TargetPermanent;
  */
 public class LegacyWeapon extends CardImpl {
 
-    public LegacyWeapon(UUID ownerId) {
-        super(ownerId, 137, "Legacy Weapon", Rarity.RARE, new CardType[]{CardType.ARTIFACT}, "{7}");
-        this.expansionSetCode = "APC";
+    public LegacyWeapon(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.ARTIFACT},"{7}");
         this.supertype.add("Legendary");
 
         // {W}{U}{B}{R}{G}: Exile target permanent.

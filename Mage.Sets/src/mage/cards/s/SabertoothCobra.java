@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.mirage;
+package mage.cards.s;
 
 import java.util.UUID;
 import mage.MageInt;
@@ -36,9 +36,9 @@ import mage.abilities.effects.Effect;
 import mage.abilities.effects.common.UnlessPaysDelayedEffect;
 import mage.abilities.effects.common.counter.AddPoisonCounterTargetEffect;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.PhaseStep;
-import mage.constants.Rarity;
 
 /**
  *
@@ -46,9 +46,8 @@ import mage.constants.Rarity;
  */
 public class SabertoothCobra extends CardImpl {
 
-    public SabertoothCobra(UUID ownerId) {
-        super(ownerId, 136, "Sabertooth Cobra", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{2}{G}");
-        this.expansionSetCode = "MIR";
+    public SabertoothCobra(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{2}{G}");
         this.subtype.add("Snake");
         this.power = new MageInt(2);
         this.toughness = new MageInt(2);

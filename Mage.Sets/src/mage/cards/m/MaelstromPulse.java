@@ -26,13 +26,13 @@
 * or implied, of BetaSteward_at_googlemail.com.
 */
 
-package mage.sets.alarareborn;
+package mage.cards.m;
 
 import java.util.UUID;
 import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.abilities.effects.common.DestroyAllNamedPermanentsEffect;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.target.common.TargetNonlandPermanent;
 
 /**
@@ -41,9 +41,8 @@ import mage.target.common.TargetNonlandPermanent;
  */
 public class MaelstromPulse extends CardImpl {
 
-    public MaelstromPulse(UUID ownerId) {
-        super(ownerId, 92, "Maelstrom Pulse", Rarity.RARE, new CardType[]{CardType.SORCERY}, "{1}{B}{G}");
-        this.expansionSetCode = "ARB";
+    public MaelstromPulse(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{1}{B}{G}");
         
 
         // Destroy target nonland permanent and all other permanents with the same name as that permanent.

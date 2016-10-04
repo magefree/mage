@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.betrayersofkamigawa;
+package mage.cards.s;
 
 import java.util.List;
 import java.util.UUID;
@@ -33,9 +33,9 @@ import mage.abilities.Ability;
 import mage.abilities.effects.OneShotEffect;
 import mage.cards.Card;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Outcome;
-import mage.constants.Rarity;
 import mage.constants.Zone;
 import mage.filter.FilterCard;
 import mage.game.Game;
@@ -49,9 +49,8 @@ import mage.target.common.TargetCardInGraveyard;
  */
 public class StreamOfConsciousness extends CardImpl {
 
-    public StreamOfConsciousness(UUID ownerId) {
-        super(ownerId, 53, "Stream of Consciousness", Rarity.UNCOMMON, new CardType[]{CardType.INSTANT}, "{1}{U}");
-        this.expansionSetCode = "BOK";
+    public StreamOfConsciousness(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.INSTANT},"{1}{U}");
         this.subtype.add("Arcane");
 
         // Target player shuffles up to four target cards from his or her graveyard into his or her library.

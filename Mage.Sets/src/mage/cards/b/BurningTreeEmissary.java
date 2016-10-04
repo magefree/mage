@@ -25,16 +25,16 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.gatecrash;
+package mage.cards.b;
 
 import java.util.UUID;
 import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.MageInt;
 import mage.Mana;
 import mage.abilities.common.EntersBattlefieldTriggeredAbility;
 import mage.abilities.effects.common.BasicManaEffect;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 
 /**
  *
@@ -42,9 +42,8 @@ import mage.cards.CardImpl;
  */
 public class BurningTreeEmissary extends CardImpl {
 
-    public BurningTreeEmissary(UUID ownerId) {
-        super(ownerId, 216, "Burning-Tree Emissary", Rarity.UNCOMMON, new CardType[]{CardType.CREATURE}, "{R/G}{R/G}");
-        this.expansionSetCode = "GTC";
+    public BurningTreeEmissary(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{R/G}{R/G}");
         this.subtype.add("Human");
         this.subtype.add("Shaman");
 

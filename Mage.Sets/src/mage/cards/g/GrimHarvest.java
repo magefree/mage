@@ -25,15 +25,15 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.coldsnap;
+package mage.cards.g;
 
 import java.util.UUID;
 import mage.abilities.costs.mana.ManaCostsImpl;
 import mage.abilities.effects.common.ReturnToHandTargetEffect;
 import mage.abilities.keyword.RecoverAbility;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.filter.common.FilterCreatureCard;
 import mage.target.common.TargetCardInYourGraveyard;
 
@@ -45,9 +45,8 @@ public class GrimHarvest extends CardImpl {
     
     private static FilterCreatureCard filter = new FilterCreatureCard("creature card from your graveyard");
 
-    public GrimHarvest(UUID ownerId) {
-        super(ownerId, 58, "Grim Harvest", Rarity.COMMON, new CardType[]{CardType.INSTANT}, "{1}{B}");
-        this.expansionSetCode = "CSP";
+    public GrimHarvest(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.INSTANT},"{1}{B}");
 
         // Return target creature card from your graveyard to your hand.
         this.getSpellAbility().addTarget(new TargetCardInYourGraveyard(filter));

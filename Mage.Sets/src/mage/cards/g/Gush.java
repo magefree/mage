@@ -25,15 +25,15 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.jacevschandra;
+package mage.cards.g;
 
 import java.util.UUID;
 import mage.abilities.costs.AlternativeCostSourceAbility;
 import mage.abilities.costs.common.ReturnToHandChosenControlledPermanentCost;
 import mage.abilities.effects.common.DrawCardSourceControllerEffect;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.filter.common.FilterControlledLandPermanent;
 import mage.filter.predicate.mageobject.SubtypePredicate;
 import mage.target.common.TargetControlledPermanent;
@@ -48,9 +48,8 @@ public class Gush extends CardImpl {
     static{
         filter.add(new SubtypePredicate("Island"));
     }
-    public Gush(UUID ownerId) {
-        super(ownerId, 27, "Gush", Rarity.COMMON, new CardType[]{CardType.INSTANT}, "{4}{U}");
-        this.expansionSetCode = "DD2";
+    public Gush(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.INSTANT},"{4}{U}");
 
 
         // You may return two Islands you control to their owner's hand rather than pay Gush's mana cost.

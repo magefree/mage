@@ -25,14 +25,14 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.mirage;
+package mage.cards.b;
 
 import java.util.UUID;
 import mage.abilities.common.EntersBattlefieldTappedAbility;
 import mage.abilities.common.FetchLandActivatedAbility;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.Rarity;
 
 /**
  *
@@ -40,9 +40,8 @@ import mage.constants.Rarity;
  */
 public class BadRiver extends CardImpl {
 
-    public BadRiver(UUID ownerId) {
-        super(ownerId, 289, "Bad River", Rarity.UNCOMMON, new CardType[]{CardType.LAND}, "");
-        this.expansionSetCode = "MIR";
+    public BadRiver(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.LAND},"");
 
         // Bad River enters the battlefield tapped.
         this.addAbility(new EntersBattlefieldTappedAbility());

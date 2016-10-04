@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.elspethvstezzeret;
+package mage.cards.s;
 
 import java.util.UUID;
 import mage.abilities.costs.mana.ManaCostsImpl;
@@ -33,9 +33,9 @@ import mage.abilities.dynamicvalue.common.ManacostVariableValue;
 import mage.abilities.effects.common.continuous.BoostControlledEffect;
 import mage.abilities.keyword.ReinforceAbility;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Duration;
-import mage.constants.Rarity;
 
 /**
  *
@@ -43,9 +43,8 @@ import mage.constants.Rarity;
  */
 public class SwellOfCourage extends CardImpl {
 
-    public SwellOfCourage(UUID ownerId) {
-        super(ownerId, 31, "Swell of Courage", Rarity.UNCOMMON, new CardType[]{CardType.INSTANT}, "{3}{W}{W}");
-        this.expansionSetCode = "DDF";
+    public SwellOfCourage(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.INSTANT},"{3}{W}{W}");
 
 
         // Creatures you control get +2/+2 until end of turn.

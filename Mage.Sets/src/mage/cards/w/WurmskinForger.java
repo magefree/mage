@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.mirrodin;
+package mage.cards.w;
 
 import java.util.UUID;
 import mage.MageInt;
@@ -33,8 +33,8 @@ import mage.abilities.Ability;
 import mage.abilities.common.EntersBattlefieldTriggeredAbility;
 import mage.abilities.effects.common.counter.DistributeCountersEffect;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.counters.CounterType;
 import mage.target.common.TargetCreaturePermanentAmount;
 
@@ -44,9 +44,8 @@ import mage.target.common.TargetCreaturePermanentAmount;
  */
 public class WurmskinForger extends CardImpl {
 
-    public WurmskinForger(UUID ownerId) {
-        super(ownerId, 140, "Wurmskin Forger", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{5}{G}{G}");
-        this.expansionSetCode = "MRD";
+    public WurmskinForger(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{5}{G}{G}");
         this.subtype.add("Elf");
         this.subtype.add("Warrior");
         this.power = new MageInt(2);

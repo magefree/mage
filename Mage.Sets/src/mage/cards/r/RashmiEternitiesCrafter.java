@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.kaladesh;
+package mage.cards.r;
 
 import java.util.List;
 import java.util.UUID;
@@ -36,10 +36,10 @@ import mage.abilities.effects.Effect;
 import mage.abilities.effects.OneShotEffect;
 import mage.cards.Card;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.cards.CardsImpl;
 import mage.constants.CardType;
 import mage.constants.Outcome;
-import mage.constants.Rarity;
 import mage.constants.Zone;
 import mage.game.Game;
 import mage.game.events.GameEvent;
@@ -53,9 +53,8 @@ import mage.watchers.common.SpellsCastWatcher;
  */
 public class RashmiEternitiesCrafter extends CardImpl {
 
-    public RashmiEternitiesCrafter(UUID ownerId) {
-        super(ownerId, 184, "Rashmi, Eternities Crafter", Rarity.MYTHIC, new CardType[]{CardType.CREATURE}, "{2}{G}{U}");
-        this.expansionSetCode = "KLD";
+    public RashmiEternitiesCrafter(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{2}{G}{U}");
         this.supertype.add("Legendary");
         this.subtype.add("Elf");
         this.subtype.add("Druid");

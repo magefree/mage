@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.shadowsoverinnistrad;
+package mage.cards.e;
 
 import java.util.UUID;
 import mage.MageInt;
@@ -35,9 +35,10 @@ import mage.abilities.costs.common.DiscardCardCost;
 import mage.abilities.costs.mana.GenericManaCost;
 import mage.abilities.effects.common.TransformSourceEffect;
 import mage.abilities.keyword.TransformAbility;
+import mage.cards.i.InsidiousMist;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.constants.Zone;
 
 /**
@@ -46,16 +47,15 @@ import mage.constants.Zone;
  */
 public class ElusiveTormentor extends CardImpl {
 
-    public ElusiveTormentor(UUID ownerId) {
-        super(ownerId, 108, "Elusive Tormentor", Rarity.RARE, new CardType[]{CardType.CREATURE}, "{2}{B}{B}");
-        this.expansionSetCode = "SOI";
+    public ElusiveTormentor(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{2}{B}{B}");
         this.subtype.add("Vampire");
         this.subtype.add("Wizard");
         this.power = new MageInt(4);
         this.toughness = new MageInt(4);
 
         this.transformable = true;
-        this.secondSideCard = new InsidiousMist(ownerId);
+        this.secondSideCardClazz = InsidiousMist.class;
 
         // {1}, Discard a card: Transform Elusive Tormentor.
         this.addAbility(new TransformAbility());

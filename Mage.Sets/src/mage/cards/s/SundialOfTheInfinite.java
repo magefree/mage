@@ -25,20 +25,20 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.magic2012;
+package mage.cards.s;
 
 import java.util.UUID;
 
 import mage.constants.Zone;
 
 import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.abilities.Ability;
 import mage.abilities.common.ActivateIfConditionActivatedAbility;
 import mage.abilities.condition.common.MyTurnCondition;
 import mage.abilities.costs.common.TapSourceCost;
 import mage.abilities.costs.mana.GenericManaCost;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.abilities.effects.common.EndTurnEffect;
 
 /**
@@ -47,9 +47,8 @@ import mage.abilities.effects.common.EndTurnEffect;
  */
 public class SundialOfTheInfinite extends CardImpl {
 
-    public SundialOfTheInfinite(UUID ownerId) {
-        super(ownerId, 218, "Sundial of the Infinite", Rarity.RARE, new CardType[]{CardType.ARTIFACT}, "{2}");
-        this.expansionSetCode = "M12";
+    public SundialOfTheInfinite(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.ARTIFACT},"{2}");
 
         // {1}, {tap}: End the turn. Activate this ability only during your turn.
         Ability ability = new ActivateIfConditionActivatedAbility(Zone.BATTLEFIELD, new EndTurnEffect(), new GenericManaCost(1), MyTurnCondition.getInstance());

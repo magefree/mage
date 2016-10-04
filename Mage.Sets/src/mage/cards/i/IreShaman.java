@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.dragonsoftarkir;
+package mage.cards.i;
 
 import java.util.UUID;
 import mage.MageInt;
@@ -39,11 +39,11 @@ import mage.abilities.keyword.MenaceAbility;
 import mage.abilities.keyword.MorphAbility;
 import mage.cards.Card;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.AsThoughEffectType;
 import mage.constants.CardType;
 import mage.constants.Duration;
 import mage.constants.Outcome;
-import mage.constants.Rarity;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.players.Player;
@@ -55,9 +55,8 @@ import mage.target.targetpointer.FixedTarget;
  */
 public class IreShaman extends CardImpl {
 
-    public IreShaman(UUID ownerId) {
-        super(ownerId, 141, "Ire Shaman", Rarity.RARE, new CardType[]{CardType.CREATURE}, "{1}{R}");
-        this.expansionSetCode = "DTK";
+    public IreShaman(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{1}{R}");
         this.subtype.add("Orc");
         this.subtype.add("Shaman");
         this.power = new MageInt(2);

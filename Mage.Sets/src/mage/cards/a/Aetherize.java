@@ -25,13 +25,13 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.gatecrash;
+package mage.cards.a;
 
 import java.util.UUID;
 import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.abilities.effects.common.ReturnToHandFromBattlefieldAllEffect;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.filter.common.FilterAttackingCreature;
 
 /**
@@ -40,9 +40,8 @@ import mage.filter.common.FilterAttackingCreature;
  */
 public class Aetherize extends CardImpl {
 
-    public Aetherize(UUID ownerId) {
-        super(ownerId, 29, "Aetherize", Rarity.UNCOMMON, new CardType[]{CardType.INSTANT}, "{3}{U}");
-        this.expansionSetCode = "GTC";
+    public Aetherize(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.INSTANT},"{3}{U}");
 
 
         // Return all attacking creatures to their owners' hands.

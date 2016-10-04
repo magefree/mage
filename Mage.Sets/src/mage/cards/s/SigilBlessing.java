@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.shardsofalara;
+package mage.cards.s;
 
 import java.util.Iterator;
 import java.util.UUID;
@@ -33,11 +33,11 @@ import mage.MageObjectReference;
 import mage.abilities.Ability;
 import mage.abilities.effects.ContinuousEffectImpl;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Duration;
 import mage.constants.Layer;
 import mage.constants.Outcome;
-import mage.constants.Rarity;
 import mage.constants.SubLayer;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.game.Game;
@@ -50,9 +50,8 @@ import mage.target.common.TargetControlledCreaturePermanent;
  */
 public class SigilBlessing extends CardImpl {
 
-    public SigilBlessing(UUID ownerId) {
-        super(ownerId, 195, "Sigil Blessing", Rarity.COMMON, new CardType[]{CardType.INSTANT}, "{G}{W}");
-        this.expansionSetCode = "ALA";
+    public SigilBlessing(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.INSTANT},"{G}{W}");
 
         // Until end of turn, target creature you control gets +3/+3 and other creatures you control get +1/+1.
         this.getSpellAbility().addTarget(new TargetControlledCreaturePermanent());

@@ -25,16 +25,16 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.portalsecondage;
+package mage.cards.l;
 
 import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.common.AttacksTriggeredAbility;
 import mage.abilities.effects.common.continuous.BoostSourceEffect;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Duration;
-import mage.constants.Rarity;
 
 /**
  *
@@ -42,9 +42,8 @@ import mage.constants.Rarity;
  */
 public class LurkingNightstalker extends CardImpl {
 
-    public LurkingNightstalker(UUID ownerId) {
-        super(ownerId, 17, "Lurking Nightstalker", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{B}{B}");
-        this.expansionSetCode = "PO2";
+    public LurkingNightstalker(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{B}{B}");
         this.subtype.add("Nightstalker");
         this.power = new MageInt(1);
         this.toughness = new MageInt(1);

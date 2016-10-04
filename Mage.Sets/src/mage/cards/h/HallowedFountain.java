@@ -26,7 +26,7 @@
  *  or implied, of BetaSteward_at_googlemail.com.
  */
 
-package mage.sets.dissension;
+package mage.cards.h;
 
 import java.util.UUID;
 import mage.abilities.common.AsEntersBattlefieldAbility;
@@ -35,8 +35,8 @@ import mage.abilities.effects.common.TapSourceUnlessPaysEffect;
 import mage.abilities.mana.BlueManaAbility;
 import mage.abilities.mana.WhiteManaAbility;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.Rarity;
 
 /**
  *
@@ -44,9 +44,8 @@ import mage.constants.Rarity;
  */
 public class HallowedFountain extends CardImpl {
 
-    public HallowedFountain (UUID ownerId) {
-        super(ownerId, 174, "Hallowed Fountain", Rarity.RARE, new CardType[]{CardType.LAND}, null);
-        this.expansionSetCode = "DIS";
+    public HallowedFountain (UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.LAND},null);
         this.subtype.add("Plains");
         this.subtype.add("Island");
         this.addAbility(new WhiteManaAbility());

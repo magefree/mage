@@ -25,13 +25,13 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.seventhedition;
+package mage.cards.t;
 
 import java.util.UUID;
 import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.MageInt;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 
 /**
  *
@@ -39,9 +39,8 @@ import mage.cards.CardImpl;
  */
 public class TrainedOrgg extends CardImpl {
 
-    public TrainedOrgg(UUID ownerId) {
-        super(ownerId, 224, "Trained Orgg", Rarity.RARE, new CardType[]{CardType.CREATURE}, "{6}{R}");
-        this.expansionSetCode = "7ED";
+    public TrainedOrgg(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{6}{R}");
         this.subtype.add("Orgg");
 
         this.power = new MageInt(6);

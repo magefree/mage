@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.dissension;
+package mage.cards.m;
 
 import java.util.Set;
 import java.util.UUID;
@@ -39,11 +39,11 @@ import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.search.SearchLibraryPutOnLibraryEffect;
 import mage.cards.Card;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.cards.Cards;
 import mage.cards.CardsImpl;
 import mage.constants.CardType;
 import mage.constants.Outcome;
-import mage.constants.Rarity;
 import mage.constants.Zone;
 import mage.filter.FilterSpell;
 import mage.filter.common.FilterCreatureCard;
@@ -70,9 +70,8 @@ public class MomirVigSimicVisionary extends CardImpl {
         filter2.add(new CardTypePredicate(CardType.CREATURE));
     }
 
-    public MomirVigSimicVisionary(UUID ownerId) {
-        super(ownerId, 118, "Momir Vig, Simic Visionary", Rarity.RARE, new CardType[]{CardType.CREATURE}, "{3}{G}{U}");
-        this.expansionSetCode = "DIS";
+    public MomirVigSimicVisionary(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{3}{G}{U}");
         this.supertype.add("Legendary");
         this.subtype.add("Elf");
         this.subtype.add("Wizard");

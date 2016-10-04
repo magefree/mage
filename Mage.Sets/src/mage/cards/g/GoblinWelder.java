@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.urzaslegacy;
+package mage.cards.g;
 
 import java.util.UUID;
 import mage.MageInt;
@@ -35,9 +35,9 @@ import mage.abilities.costs.common.TapSourceCost;
 import mage.abilities.effects.OneShotEffect;
 import mage.cards.Card;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Outcome;
-import mage.constants.Rarity;
 import mage.constants.Zone;
 import mage.filter.common.FilterArtifactCard;
 import mage.filter.common.FilterArtifactPermanent;
@@ -53,9 +53,8 @@ import mage.target.common.TargetCardInGraveyard;
  */
 public class GoblinWelder extends CardImpl {
 
-    public GoblinWelder(UUID ownerId) {
-        super(ownerId, 80, "Goblin Welder", Rarity.RARE, new CardType[]{CardType.CREATURE}, "{R}");
-        this.expansionSetCode = "ULG";
+    public GoblinWelder(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{R}");
         this.subtype.add("Goblin");
         this.subtype.add("Artificer");
 

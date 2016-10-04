@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.starwars;
+package mage.cards.t;
 
 import java.util.UUID;
 import mage.abilities.Ability;
@@ -39,8 +39,8 @@ import mage.abilities.effects.common.LoseGameTargetPlayerEffect;
 import mage.abilities.effects.common.counter.AddCountersSourceEffect;
 import mage.abilities.mana.ColorlessManaAbility;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.constants.Zone;
 import mage.counters.CounterType;
 import mage.target.TargetPermanent;
@@ -52,9 +52,8 @@ import mage.target.TargetPlayer;
  */
 public class TheDeathStar extends CardImpl {
 
-    public TheDeathStar(UUID ownerId) {
-        super(ownerId, 1, "The Death Star", Rarity.MYTHIC, new CardType[]{CardType.LAND}, "");
-        this.expansionSetCode = "SWS";
+    public TheDeathStar(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.LAND},"");
         this.supertype.add("Legendary");
 
         // {T}: Add {C} to your mana pool.

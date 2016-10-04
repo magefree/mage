@@ -25,15 +25,15 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.dragonsmaze;
+package mage.cards.a;
 
 import java.util.UUID;
 import mage.constants.CardType;
 import mage.constants.Outcome;
-import mage.constants.Rarity;
 import mage.abilities.Ability;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.CreateTokenEffect;
+import mage.cards.CardSetInfo;
 import mage.cards.SplitCard;
 import mage.filter.common.FilterControlledCreaturePermanent;
 import mage.game.Game;
@@ -46,9 +46,8 @@ import mage.players.Player;
  */
 public class AliveWell extends SplitCard {
 
-    public AliveWell(UUID ownerId) {
-        super(ownerId, 121, "Alive", "Well", Rarity.UNCOMMON, new CardType[]{CardType.SORCERY}, "{3}{G}","{W}", true);
-        this.expansionSetCode = "DGM";
+    public AliveWell(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{3}{G}","{W}",true);
 
         // Alive
         // Put a 3/3 green Centaur creature token onto the battlefield.

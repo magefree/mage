@@ -25,17 +25,17 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.commander;
+package mage.cards.a;
 
 import java.util.UUID;
 import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.EntersBattlefieldTriggeredAbility;
 import mage.abilities.effects.common.ReturnToHandTargetEffect;
 import mage.abilities.keyword.EvokeAbility;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.target.Target;
 import mage.target.common.TargetNonlandPermanent;
 
@@ -45,9 +45,8 @@ import mage.target.common.TargetNonlandPermanent;
  */
 public class Aethersnipe extends CardImpl {
 
-    public Aethersnipe(UUID ownerId) {
-        super(ownerId, 39, "Aethersnipe", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{5}{U}");
-        this.expansionSetCode = "CMD";
+    public Aethersnipe(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{5}{U}");
         this.subtype.add("Elemental");
 
         this.power = new MageInt(4);

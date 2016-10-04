@@ -26,15 +26,15 @@
 * or implied, of BetaSteward_at_googlemail.com.
 */
 
-package mage.sets.shardsofalara;
+package mage.cards.s;
 
 import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.common.DiesTriggeredAbility;
 import mage.abilities.effects.common.CreateTokenEffect;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.game.permanent.token.SaprolingToken;
 
 /**
@@ -45,9 +45,8 @@ public class SproutingThrinax extends CardImpl {
 
     private static SaprolingToken saprolingToken = new SaprolingToken();
 
-    public SproutingThrinax(UUID ownerId) {
-        super(ownerId, 197, "Sprouting Thrinax", Rarity.UNCOMMON, new CardType[]{CardType.CREATURE}, "{B}{R}{G}");
-        this.expansionSetCode = "ALA";
+    public SproutingThrinax(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{B}{R}{G}");
 
 
         this.subtype.add("Lizard");

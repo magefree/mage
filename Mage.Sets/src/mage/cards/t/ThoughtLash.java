@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.masterseditionii;
+package mage.cards.t;
 
 import java.util.UUID;
 import mage.abilities.Ability;
@@ -36,12 +36,12 @@ import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.PreventionEffectImpl;
 import mage.abilities.keyword.CumulativeUpkeepAbility;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.cards.Cards;
 import mage.cards.CardsImpl;
 import mage.constants.CardType;
 import mage.constants.Duration;
 import mage.constants.Outcome;
-import mage.constants.Rarity;
 import mage.constants.Zone;
 import mage.game.Game;
 import mage.game.events.GameEvent;
@@ -54,9 +54,8 @@ import mage.players.Player;
  */
 public class ThoughtLash extends CardImpl {
 
-    public ThoughtLash(UUID ownerId) {
-        super(ownerId, 70, "Thought Lash", Rarity.RARE, new CardType[]{CardType.ENCHANTMENT}, "{2}{U}{U}");
-        this.expansionSetCode = "ME2";
+    public ThoughtLash(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.ENCHANTMENT},"{2}{U}{U}");
 
         // Cumulative upkeep - Exile the top card of your library.
         this.addAbility(new CumulativeUpkeepAbility(new ExileFromTopOfLibraryCost(1)));

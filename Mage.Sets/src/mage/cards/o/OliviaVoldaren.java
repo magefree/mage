@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.innistrad;
+package mage.cards.o;
 
 import java.util.UUID;
 import mage.MageInt;
@@ -41,6 +41,7 @@ import mage.abilities.effects.common.continuous.GainControlTargetEffect;
 import mage.abilities.effects.common.counter.AddCountersSourceEffect;
 import mage.abilities.keyword.FlyingAbility;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.*;
 import mage.counters.CounterType;
 import mage.filter.FilterPermanent;
@@ -65,9 +66,8 @@ public class OliviaVoldaren extends CardImpl {
         vampireFilter.add(new SubtypePredicate("Vampire"));
     }
 
-    public OliviaVoldaren(UUID ownerId) {
-        super(ownerId, 215, "Olivia Voldaren", Rarity.MYTHIC, new CardType[]{CardType.CREATURE}, "{2}{B}{R}");
-        this.expansionSetCode = "ISD";
+    public OliviaVoldaren(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{2}{B}{R}");
         this.supertype.add("Legendary");
         this.subtype.add("Vampire");
 

@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.morningtide;
+package mage.cards.o;
 
 import java.util.UUID;
 import mage.MageInt;
@@ -37,10 +37,10 @@ import mage.abilities.effects.ReplacementEffectImpl;
 import mage.abilities.effects.common.discard.DiscardTargetEffect;
 import mage.abilities.keyword.FlyingAbility;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Duration;
 import mage.constants.Outcome;
-import mage.constants.Rarity;
 import mage.constants.Zone;
 import mage.counters.CounterType;
 import mage.game.Game;
@@ -57,9 +57,8 @@ import mage.target.targetpointer.FixedTarget;
  */
 public class OonasBlackguard extends CardImpl {
 
-    public OonasBlackguard(UUID ownerId) {
-        super(ownerId, 72, "Oona's Blackguard", Rarity.UNCOMMON, new CardType[]{CardType.CREATURE}, "{1}{B}");
-        this.expansionSetCode = "MOR";
+    public OonasBlackguard(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{1}{B}");
         this.subtype.add("Faerie");
         this.subtype.add("Rogue");
         this.power = new MageInt(1);

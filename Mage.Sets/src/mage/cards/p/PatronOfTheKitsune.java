@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.betrayersofkamigawa;
+package mage.cards.p;
 
 import java.util.UUID;
 import mage.MageInt;
@@ -33,17 +33,16 @@ import mage.abilities.common.AttacksAllTriggeredAbility;
 import mage.abilities.effects.common.GainLifeEffect;
 import mage.abilities.keyword.OfferingAbility;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.Rarity;
 
 /**
  * @author LevelX2
  */
 public class PatronOfTheKitsune extends CardImpl {
 
-    public PatronOfTheKitsune(UUID ownerId) {
-        super(ownerId, 19, "Patron of the Kitsune", Rarity.RARE, new CardType[]{CardType.CREATURE}, "{4}{W}{W}");
-        this.expansionSetCode = "BOK";
+    public PatronOfTheKitsune(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{4}{W}{W}");
         this.supertype.add("Legendary");
         this.subtype.add("Spirit");
 

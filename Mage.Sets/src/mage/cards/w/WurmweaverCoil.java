@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.guildpact;
+package mage.cards.w;
 
 import java.util.UUID;
 import mage.ObjectColor;
@@ -39,10 +39,10 @@ import mage.abilities.effects.common.CreateTokenEffect;
 import mage.abilities.effects.common.continuous.BoostEnchantedEffect;
 import mage.abilities.keyword.EnchantAbility;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Duration;
 import mage.constants.Outcome;
-import mage.constants.Rarity;
 import mage.constants.Zone;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.filter.predicate.mageobject.ColorPredicate;
@@ -62,9 +62,8 @@ public class WurmweaverCoil extends CardImpl {
         filter.add(new ColorPredicate(ObjectColor.GREEN));
     }
 
-    public WurmweaverCoil(UUID ownerId) {
-        super(ownerId, 99, "Wurmweaver Coil", Rarity.RARE, new CardType[]{CardType.ENCHANTMENT}, "{4}{G}{G}");
-        this.expansionSetCode = "GPT";
+    public WurmweaverCoil(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.ENCHANTMENT},"{4}{G}{G}");
         this.subtype.add("Aura");
 
         TargetPermanent auraTarget = new TargetCreaturePermanent(filter);

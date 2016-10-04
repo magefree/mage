@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.championsofkamigawa;
+package mage.cards.r;
 
 import java.util.HashSet;
 import java.util.Set;
@@ -33,11 +33,11 @@ import java.util.UUID;
 import mage.abilities.Ability;
 import mage.abilities.effects.OneShotEffect;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.choices.Choice;
 import mage.choices.ChoiceImpl;
 import mage.constants.CardType;
 import mage.constants.Outcome;
-import mage.constants.Rarity;
 import mage.game.Game;
 import mage.players.Player;
 
@@ -47,9 +47,8 @@ import mage.players.Player;
  */
 public class ReverseTheSands extends CardImpl {
 
-    public ReverseTheSands(UUID ownerId) {
-        super(ownerId, 41, "Reverse the Sands", Rarity.RARE, new CardType[]{CardType.SORCERY}, "{6}{W}{W}");
-        this.expansionSetCode = "CHK";
+    public ReverseTheSands(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{6}{W}{W}");
 
 
         // Redistribute any number of players' life totals.

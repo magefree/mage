@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.returntoravnica;
+package mage.cards.r;
 
 import java.util.UUID;
 import mage.MageInt;
@@ -40,11 +40,11 @@ import mage.abilities.keyword.FlyingAbility;
 import mage.abilities.keyword.TrampleAbility;
 import mage.cards.Card;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.CostModificationType;
 import mage.constants.Duration;
 import mage.constants.Outcome;
-import mage.constants.Rarity;
 import mage.constants.Zone;
 import mage.game.Game;
 import mage.game.events.GameEvent;
@@ -57,9 +57,8 @@ import mage.util.CardUtil;
  */
 public class RakdosLordOfRiots extends CardImpl {
 
-    public RakdosLordOfRiots(UUID ownerId) {
-        super(ownerId, 187, "Rakdos, Lord of Riots", Rarity.MYTHIC, new CardType[]{CardType.CREATURE}, "{B}{B}{R}{R}");
-        this.expansionSetCode = "RTR";
+    public RakdosLordOfRiots(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{B}{B}{R}{R}");
         this.supertype.add("Legendary");
         this.subtype.add("Demon");
 

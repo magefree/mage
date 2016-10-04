@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.newphyrexia;
+package mage.cards.j;
 
 import java.util.UUID;
 
@@ -38,6 +38,7 @@ import mage.abilities.effects.common.continuous.MaximumHandSizeControllerEffect;
 import mage.abilities.effects.common.continuous.MaximumHandSizeControllerEffect.HandSizeModification;
 import mage.abilities.keyword.FlashAbility;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 
 /**
  *
@@ -45,9 +46,8 @@ import mage.cards.CardImpl;
  */
 public class JinGitaxiasCoreAugur extends CardImpl {
 
-    public JinGitaxiasCoreAugur(UUID ownerId) {
-        super(ownerId, 37, "Jin-Gitaxias, Core Augur", Rarity.MYTHIC, new CardType[]{CardType.CREATURE}, "{8}{U}{U}");
-        this.expansionSetCode = "NPH";
+    public JinGitaxiasCoreAugur(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{8}{U}{U}");
         this.supertype.add("Legendary");
         this.subtype.add("Praetor");
 

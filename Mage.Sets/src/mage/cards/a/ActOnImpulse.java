@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.magic2015;
+package mage.cards.a;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -35,11 +35,11 @@ import mage.abilities.effects.AsThoughEffectImpl;
 import mage.abilities.effects.OneShotEffect;
 import mage.cards.Card;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.AsThoughEffectType;
 import mage.constants.CardType;
 import mage.constants.Duration;
 import mage.constants.Outcome;
-import mage.constants.Rarity;
 import mage.constants.Zone;
 import mage.game.Game;
 import mage.players.Library;
@@ -51,9 +51,8 @@ import mage.players.Player;
  */
 public class ActOnImpulse extends CardImpl {
 
-    public ActOnImpulse(UUID ownerId) {
-        super(ownerId, 126, "Act on Impulse", Rarity.UNCOMMON, new CardType[]{CardType.SORCERY}, "{2}{R}");
-        this.expansionSetCode = "M15";
+    public ActOnImpulse(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{2}{R}");
 
 
         // Exile the top three cards of your library. Until end of turn, you may play cards exiled this way.

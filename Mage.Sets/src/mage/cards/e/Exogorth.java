@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.starwars;
+package mage.cards.e;
 
 import java.util.UUID;
 import mage.MageInt;
@@ -36,9 +36,9 @@ import mage.abilities.keyword.FlashAbility;
 import mage.abilities.keyword.SpaceflightAbility;
 import mage.abilities.keyword.TrampleAbility;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Duration;
-import mage.constants.Rarity;
 import mage.constants.Zone;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
@@ -49,9 +49,8 @@ import mage.game.permanent.Permanent;
  */
 public class Exogorth extends CardImpl {
 
-    public Exogorth(UUID ownerId) {
-        super(ownerId, 136, "Exogorth", Rarity.RARE, new CardType[]{CardType.CREATURE}, "{5}{G}{G}");
-        this.expansionSetCode = "SWS";
+    public Exogorth(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{5}{G}{G}");
         this.subtype.add("Slug");
         this.power = new MageInt(7);
         this.toughness = new MageInt(7);

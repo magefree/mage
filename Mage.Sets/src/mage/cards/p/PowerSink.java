@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.limitedalpha;
+package mage.cards.p;
 
 import java.util.List;
 import java.util.UUID;
@@ -36,9 +36,9 @@ import mage.abilities.costs.mana.GenericManaCost;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.mana.ManaAbility;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Outcome;
-import mage.constants.Rarity;
 import mage.filter.common.FilterLandPermanent;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
@@ -52,9 +52,8 @@ import mage.target.TargetSpell;
  */
 public class PowerSink extends CardImpl {
 
-    public PowerSink(UUID ownerId) {
-        super(ownerId, 73, "Power Sink", Rarity.COMMON, new CardType[]{CardType.INSTANT}, "{X}{U}");
-        this.expansionSetCode = "LEA";
+    public PowerSink(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.INSTANT},"{X}{U}");
 
 
         // Counter target spell unless its controller pays {X}. If he or she doesn't, that player taps all lands with mana abilities he or she controls and empties his or her mana pool.

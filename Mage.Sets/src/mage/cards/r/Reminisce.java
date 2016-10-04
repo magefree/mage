@@ -25,16 +25,16 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.onslaught;
+package mage.cards.r;
 
 import java.util.UUID;
 import mage.abilities.Ability;
 import mage.abilities.effects.OneShotEffect;
 import mage.cards.Card;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Outcome;
-import mage.constants.Rarity;
 import mage.constants.Zone;
 import mage.game.Game;
 import mage.players.Player;
@@ -46,9 +46,8 @@ import mage.target.TargetPlayer;
  */
 public class Reminisce extends CardImpl {
 
-    public Reminisce(UUID ownerId) {
-        super(ownerId, 105, "Reminisce", Rarity.UNCOMMON, new CardType[]{CardType.SORCERY}, "{2}{U}");
-        this.expansionSetCode = "ONS";
+    public Reminisce(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{2}{U}");
 
         // Target player shuffles his or her graveyard into his or her library.
         this.getSpellAbility().addEffect(new ReminisceEffect());

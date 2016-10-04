@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.journeyintonyx;
+package mage.cards.g;
 
 import java.util.ArrayList;
 import java.util.HashSet;
@@ -43,10 +43,10 @@ import mage.abilities.effects.common.continuous.BoostEquippedEffect;
 import mage.abilities.keyword.EquipAbility;
 import mage.cards.Card;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Duration;
 import mage.constants.Outcome;
-import mage.constants.Rarity;
 import mage.constants.Zone;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.filter.predicate.Predicates;
@@ -69,9 +69,8 @@ import mage.util.CardUtil;
  */
 public class Godsend extends CardImpl {
 
-    public Godsend(UUID ownerId) {
-        super(ownerId, 12, "Godsend", Rarity.MYTHIC, new CardType[]{CardType.ARTIFACT}, "{1}{W}{W}");
-        this.expansionSetCode = "JOU";
+    public Godsend(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.ARTIFACT},"{1}{W}{W}");
         this.supertype.add("Legendary");
         this.subtype.add("Equipment");
 

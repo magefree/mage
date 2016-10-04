@@ -25,14 +25,14 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.magic2015;
+package mage.cards.u;
 
 import mage.abilities.effects.common.LoseLifeSourceControllerEffect;
 import mage.abilities.effects.common.continuous.BoostTargetEffect;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Duration;
-import mage.constants.Rarity;
 import mage.target.common.TargetCreaturePermanent;
 
 import java.util.UUID;
@@ -42,9 +42,8 @@ import java.util.UUID;
  */
 public class Ulcerate extends CardImpl {
 
-    public Ulcerate(UUID ownerId) {
-        super(ownerId, 119, "Ulcerate", Rarity.UNCOMMON, new CardType[]{CardType.INSTANT}, "{B}");
-        this.expansionSetCode = "M15";
+    public Ulcerate(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.INSTANT},"{B}");
 
 
         // Target creature gets -3/-3 until end of turn. You lose 3 life.

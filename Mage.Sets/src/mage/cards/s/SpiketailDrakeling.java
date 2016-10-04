@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.timespiral;
+package mage.cards.s;
 
 import java.util.UUID;
 import mage.MageInt;
@@ -36,8 +36,8 @@ import mage.abilities.costs.mana.GenericManaCost;
 import mage.abilities.effects.common.CounterUnlessPaysEffect;
 import mage.abilities.keyword.FlyingAbility;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.constants.Zone;
 import mage.target.TargetSpell;
 
@@ -48,9 +48,8 @@ import mage.target.TargetSpell;
  */
 public class SpiketailDrakeling extends CardImpl {
 
-    public SpiketailDrakeling(UUID ownerId) {
-        super(ownerId, 80, "Spiketail Drakeling", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{1}{U}{U}");
-        this.expansionSetCode = "TSP";
+    public SpiketailDrakeling(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{1}{U}{U}");
         this.subtype.add("Drake");
         this.power = new MageInt(2);
         this.toughness = new MageInt(2);

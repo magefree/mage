@@ -25,13 +25,13 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.portalthreekingdoms;
+package mage.cards.s;
 
 import java.util.UUID;
 import mage.MageInt;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.Rarity;
 
 /**
  *
@@ -39,9 +39,8 @@ import mage.constants.Rarity;
  */
 public class ShuEliteInfantry extends CardImpl {
 
-    public ShuEliteInfantry(UUID ownerId) {
-        super(ownerId, 22, "Shu Elite Infantry", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{3}{W}");
-        this.expansionSetCode = "PTK";
+    public ShuEliteInfantry(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{3}{W}");
         this.subtype.add("Human");
         this.subtype.add("Soldier");
 

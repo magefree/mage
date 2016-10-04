@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.eventide;
+package mage.cards.w;
 
 import java.util.UUID;
 import mage.MageObject;
@@ -34,10 +34,10 @@ import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.effects.ContinuousRuleModifyingEffectImpl;
 import mage.cards.Card;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Duration;
 import mage.constants.Outcome;
-import mage.constants.Rarity;
 import mage.constants.Zone;
 import mage.filter.common.FilterArtifactPermanent;
 import mage.filter.common.FilterCreaturePermanent;
@@ -54,9 +54,8 @@ import mage.players.Player;
  */
 public class WardOfBones extends CardImpl {
 
-    public WardOfBones(UUID ownerId) {
-        super(ownerId, 174, "Ward of Bones", Rarity.RARE, new CardType[]{CardType.ARTIFACT}, "{6}");
-        this.expansionSetCode = "EVE";
+    public WardOfBones(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.ARTIFACT},"{6}");
 
         // Each opponent who controls more creatures than you can't play creature cards. The same is true for artifacts, enchantments, and lands.
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new WardOfBonesEffect()));

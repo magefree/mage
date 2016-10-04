@@ -26,25 +26,24 @@
 * or implied, of BetaSteward_at_googlemail.com.
 */
 
-package mage.sets.magic2010;
+package mage.cards.g;
 
 import java.util.UUID;
 
 import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.MageInt;
 import mage.abilities.keyword.FlyingAbility;
 import mage.abilities.keyword.VigilanceAbility;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 
 /**
  * @author Loki
  */
 public class GriffinSentinel extends CardImpl {
 
-    public GriffinSentinel(UUID ownerId) {
-        super(ownerId, 12, "Griffin Sentinel", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{2}{W}");
-        this.expansionSetCode = "M10";
+    public GriffinSentinel(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{2}{W}");
         this.subtype.add("Griffin");
 
         this.addAbility(FlyingAbility.getInstance());

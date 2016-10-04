@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.judgment;
+package mage.cards.l;
 
 import java.util.UUID;
 import mage.abilities.condition.common.CardsInControllerGraveCondition;
@@ -35,8 +35,8 @@ import mage.abilities.effects.Effect;
 import mage.abilities.effects.common.DamageTargetEffect;
 import mage.abilities.keyword.FlashbackAbility;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.constants.TimingRule;
 import mage.target.common.TargetCreatureOrPlayer;
 
@@ -46,9 +46,8 @@ import mage.target.common.TargetCreatureOrPlayer;
  */
 public class LightningSurge extends CardImpl {
 
-    public LightningSurge(UUID ownerId) {
-        super(ownerId, 96, "Lightning Surge", Rarity.RARE, new CardType[]{CardType.SORCERY}, "{3}{R}{R}");
-        this.expansionSetCode = "JUD";
+    public LightningSurge(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{3}{R}{R}");
 
         // Lightning Surge deals 4 damage to target creature or player.
         // Threshold - If seven or more cards are in your graveyard, instead Lightning Surge deals 6 damage to that creature or player and the damage can't be prevented.

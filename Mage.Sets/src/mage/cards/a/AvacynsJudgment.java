@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.shadowsoverinnistrad;
+package mage.cards.a;
 
 import java.util.UUID;
 import mage.abilities.Ability;
@@ -36,8 +36,8 @@ import mage.abilities.effects.Effect;
 import mage.abilities.effects.common.DamageMultiEffect;
 import mage.abilities.keyword.MadnessAbility;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.game.Game;
 import mage.target.common.TargetCreatureOrPlayerAmount;
 
@@ -47,9 +47,8 @@ import mage.target.common.TargetCreatureOrPlayerAmount;
  */
 public class AvacynsJudgment extends CardImpl {
 
-    public AvacynsJudgment(UUID ownerId) {
-        super(ownerId, 145, "Avacyn's Judgment", Rarity.RARE, new CardType[]{CardType.SORCERY}, "{1}{R}");
-        this.expansionSetCode = "SOI";
+    public AvacynsJudgment(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{1}{R}");
 
         // Madness {X}{R}
         Ability ability = new MadnessAbility(this, new ManaCostsImpl("{X}{R}"));

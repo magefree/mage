@@ -26,17 +26,17 @@
  *  or implied, of BetaSteward_at_googlemail.com.
  */
 
-package mage.sets.scarsofmirrodin;
+package mage.cards.n;
 
 import java.util.UUID;
 import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.EntersBattlefieldTriggeredAbility;
 import mage.abilities.effects.common.combat.CantBeBlockedTargetEffect;
 import mage.abilities.keyword.CantBeBlockedSourceAbility;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.target.common.TargetCreaturePermanent;
 
 /**
@@ -45,9 +45,8 @@ import mage.target.common.TargetCreaturePermanent;
  */
 public class NeurokInvisimancer extends CardImpl {
 
-    public NeurokInvisimancer (UUID ownerId) {
-        super(ownerId, 37, "Neurok Invisimancer", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{1}{U}{U}");
-        this.expansionSetCode = "SOM";
+    public NeurokInvisimancer (UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{1}{U}{U}");
         this.subtype.add("Human");
         this.subtype.add("Wizard");
 

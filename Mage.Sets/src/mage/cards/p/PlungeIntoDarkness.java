@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.fifthdawn;
+package mage.cards.p;
 
 import java.util.UUID;
 import mage.abilities.Ability;
@@ -36,11 +36,11 @@ import mage.abilities.effects.OneShotEffect;
 import mage.abilities.keyword.EntwineAbility;
 import mage.cards.Card;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.cards.Cards;
 import mage.cards.CardsImpl;
 import mage.constants.CardType;
 import mage.constants.Outcome;
-import mage.constants.Rarity;
 import mage.constants.Zone;
 import mage.filter.FilterCard;
 import mage.filter.common.FilterControlledCreaturePermanent;
@@ -57,9 +57,8 @@ import mage.target.common.TargetControlledCreaturePermanent;
  */
 public class PlungeIntoDarkness extends CardImpl {
 
-    public PlungeIntoDarkness(UUID ownerId) {
-        super(ownerId, 57, "Plunge into Darkness", Rarity.RARE, new CardType[]{CardType.INSTANT}, "{1}{B}");
-        this.expansionSetCode = "5DN";
+    public PlungeIntoDarkness(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.INSTANT},"{1}{B}");
 
 
         // Choose one - 

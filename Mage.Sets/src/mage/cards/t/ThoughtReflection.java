@@ -25,17 +25,17 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.shadowmoor;
+package mage.cards.t;
 
 import java.util.UUID;
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.effects.ReplacementEffectImpl;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Duration;
 import mage.constants.Outcome;
-import mage.constants.Rarity;
 import mage.constants.Zone;
 import mage.game.Game;
 import mage.game.events.GameEvent;
@@ -48,9 +48,8 @@ import mage.players.Player;
  */
 public class ThoughtReflection extends CardImpl {
 
-    public ThoughtReflection(UUID ownerId) {
-        super(ownerId, 53, "Thought Reflection", Rarity.RARE, new CardType[]{CardType.ENCHANTMENT}, "{4}{U}{U}{U}");
-        this.expansionSetCode = "SHM";
+    public ThoughtReflection(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.ENCHANTMENT},"{4}{U}{U}{U}");
                                    
         // If you would draw a card, draw two cards instead.
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new ThoughtReflectionReplacementEffect()));

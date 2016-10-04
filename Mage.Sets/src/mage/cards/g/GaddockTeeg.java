@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.lorwyn;
+package mage.cards.g;
 
 import java.util.UUID;
 import mage.MageInt;
@@ -34,10 +34,10 @@ import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.effects.ContinuousRuleModifyingEffectImpl;
 import mage.cards.Card;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Duration;
 import mage.constants.Outcome;
-import mage.constants.Rarity;
 import mage.constants.Zone;
 import mage.game.Game;
 import mage.game.events.GameEvent;
@@ -48,9 +48,8 @@ import mage.game.events.GameEvent;
  */
 public class GaddockTeeg extends CardImpl {
 
-    public GaddockTeeg(UUID ownerId) {
-        super(ownerId, 248, "Gaddock Teeg", Rarity.RARE, new CardType[]{CardType.CREATURE}, "{G}{W}");
-        this.expansionSetCode = "LRW";
+    public GaddockTeeg(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{G}{W}");
         this.supertype.add("Legendary");
         this.subtype.add("Kithkin");
         this.subtype.add("Advisor");

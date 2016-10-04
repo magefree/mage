@@ -25,14 +25,14 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.invasion;
+package mage.cards.p;
 
 import java.util.UUID;
 import mage.abilities.effects.common.DestroyTargetEffect;
 import mage.abilities.effects.common.discard.DiscardTargetEffect;
+import mage.cards.CardSetInfo;
 import mage.cards.SplitCard;
 import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.target.TargetPlayer;
 import mage.target.common.TargetLandPermanent;
 
@@ -42,9 +42,8 @@ import mage.target.common.TargetLandPermanent;
  */
 public class PainSuffering extends SplitCard {
 
-    public PainSuffering(UUID ownerId) {
-        super(ownerId, 294, "Pain", "Suffering", Rarity.UNCOMMON, new CardType[]{CardType.SORCERY}, "{B}", "{3}{R}", false);
-        this.expansionSetCode = "INV";
+    public PainSuffering(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{B}","{3}{R}",false);
         
         // Pain
         // Target player discards a card.

@@ -25,12 +25,11 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.zendikar;
+package mage.cards.n;
 
 import java.util.UUID;
 
 import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.abilities.Ability;
 import mage.abilities.condition.Condition;
 import mage.abilities.costs.AlternativeCostSourceAbility;
@@ -38,6 +37,7 @@ import mage.abilities.costs.mana.ManaCostsImpl;
 import mage.abilities.effects.common.GainLifeEffect;
 import mage.abilities.effects.common.LoseLifeTargetEffect;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.game.Game;
 import mage.target.TargetPlayer;
 import mage.watchers.common.PlayerGainedLifeWatcher;
@@ -48,9 +48,8 @@ import mage.watchers.common.PlayerGainedLifeWatcher;
  */
 public class NeedlebiteTrap extends CardImpl {
 
-    public NeedlebiteTrap(UUID ownerId) {
-        super(ownerId, 105, "Needlebite Trap", Rarity.UNCOMMON, new CardType[]{CardType.INSTANT}, "{5}{B}{B}");
-        this.expansionSetCode = "ZEN";
+    public NeedlebiteTrap(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.INSTANT},"{5}{B}{B}");
         this.subtype.add("Trap");
 
         // If an opponent gained life this turn, you may pay {B} rather than pay Needlebite Trap's mana cost.

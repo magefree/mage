@@ -25,18 +25,18 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.shadowmoor;
+package mage.cards.m;
 
 import java.util.UUID;
 
 import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.EntersBattlefieldTriggeredAbility;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.keyword.PersistAbility;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.Outcome;
 import mage.constants.Zone;
 import mage.game.Game;
@@ -50,9 +50,8 @@ import mage.target.common.TargetCreatureOrPlayer;
  */
 public class MurderousRedcap extends CardImpl {
 
-    public MurderousRedcap(UUID ownerId) {
-        super(ownerId, 192, "Murderous Redcap", Rarity.UNCOMMON, new CardType[]{CardType.CREATURE}, "{2}{B/R}{B/R}");
-        this.expansionSetCode = "SHM";
+    public MurderousRedcap(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{2}{B/R}{B/R}");
         this.subtype.add("Goblin");
         this.subtype.add("Assassin");
 

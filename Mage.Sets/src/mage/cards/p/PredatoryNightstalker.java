@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.vintagemasters;
+package mage.cards.p;
 
 import java.util.UUID;
 import mage.MageInt;
@@ -33,8 +33,8 @@ import mage.abilities.Ability;
 import mage.abilities.common.EntersBattlefieldTriggeredAbility;
 import mage.abilities.effects.common.SacrificeEffect;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.target.common.TargetOpponent;
 
@@ -44,9 +44,8 @@ import mage.target.common.TargetOpponent;
  */
 public class PredatoryNightstalker extends CardImpl {
 
-    public PredatoryNightstalker(UUID ownerId) {
-        super(ownerId, 134, "Predatory Nightstalker", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{3}{B}{B}");
-        this.expansionSetCode = "VMA";
+    public PredatoryNightstalker(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{3}{B}{B}");
         this.subtype.add("Nightstalker");
         this.power = new MageInt(3);
         this.toughness = new MageInt(2);

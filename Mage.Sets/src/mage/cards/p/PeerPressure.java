@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.onslaught;
+package mage.cards.p;
 
 import java.util.UUID;
 import mage.abilities.Ability;
@@ -34,13 +34,13 @@ import mage.abilities.effects.ContinuousEffect;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.continuous.GainControlTargetEffect;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.cards.repository.CardRepository;
 import mage.choices.Choice;
 import mage.choices.ChoiceImpl;
 import mage.constants.CardType;
 import mage.constants.Duration;
 import mage.constants.Outcome;
-import mage.constants.Rarity;
 import mage.filter.FilterPermanent;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.filter.predicate.permanent.ControllerIdPredicate;
@@ -55,9 +55,8 @@ import mage.target.targetpointer.FixedTarget;
  */
 public class PeerPressure extends CardImpl {
 
-    public PeerPressure(UUID ownerId) {
-        super(ownerId, 101, "Peer Pressure", Rarity.RARE, new CardType[]{CardType.SORCERY}, "{3}{U}");
-        this.expansionSetCode = "ONS";
+    public PeerPressure(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{3}{U}");
 
         // Choose a creature type. If you control more creatures of that type than each other player, you gain control of all creatures of that type.
         this.getSpellAbility().addEffect(new PeerPressureEffect());

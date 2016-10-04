@@ -25,17 +25,17 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.zendikar;
+package mage.cards.g;
 
 import java.util.UUID;
 
 import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.MageInt;
 import mage.abilities.common.LandfallAbility;
 import mage.abilities.effects.common.continuous.GainAbilitySourceEffect;
 import mage.abilities.keyword.FlyingAbility;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.Duration;
 
 /**
@@ -44,9 +44,8 @@ import mage.constants.Duration;
  */
 public class GeyserGlider extends CardImpl {
 
-    public GeyserGlider(UUID ownerId) {
-        super(ownerId, 124, "Geyser Glider", Rarity.UNCOMMON, new CardType[]{CardType.CREATURE}, "{3}{R}{R}");
-        this.expansionSetCode = "ZEN";
+    public GeyserGlider(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{3}{R}{R}");
         this.subtype.add("Elemental");
         this.subtype.add("Beast");
 

@@ -25,15 +25,15 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.invasion;
+package mage.cards.r;
 
 import java.util.UUID;
 import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.MageInt;
 import mage.abilities.keyword.FlashAbility;
 import mage.abilities.keyword.HasteAbility;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 
 /**
  *
@@ -41,9 +41,8 @@ import mage.cards.CardImpl;
  */
 public class RagingKavu extends CardImpl {
 
-    public RagingKavu(UUID ownerId) {
-        super(ownerId, 262, "Raging Kavu", Rarity.RARE, new CardType[]{CardType.CREATURE}, "{1}{R}{G}");
-        this.expansionSetCode = "INV";
+    public RagingKavu(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{1}{R}{G}");
         this.subtype.add("Kavu");
 
         this.power = new MageInt(3);

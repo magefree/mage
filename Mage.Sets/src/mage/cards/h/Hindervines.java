@@ -25,14 +25,14 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.gatecrash;
+package mage.cards.h;
 
 import java.util.UUID;
 import mage.abilities.effects.common.PreventAllDamageByAllPermanentsEffect;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Duration;
-import mage.constants.Rarity;
 import mage.counters.CounterType;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.filter.predicate.Predicates;
@@ -50,9 +50,8 @@ public class Hindervines extends CardImpl {
         filter.add(Predicates.not(new CounterPredicate(CounterType.P1P1)));
     }
 
-    public Hindervines(UUID ownerId) {
-        super(ownerId, 124, "Hindervines", Rarity.UNCOMMON, new CardType[]{CardType.INSTANT}, "{2}{G}");
-        this.expansionSetCode = "GTC";
+    public Hindervines(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.INSTANT},"{2}{G}");
 
 
         // Prevent all combat damage that would be dealt this turn by creatures with no +1/+1 counters on them.

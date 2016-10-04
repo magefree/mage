@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.starwars;
+package mage.cards.d;
 
 import java.util.UUID;
 import mage.MageInt;
@@ -35,8 +35,8 @@ import mage.abilities.costs.mana.ManaCostsImpl;
 import mage.abilities.effects.common.ChangeATargetOfTargetSpellAbilityToSourceEffect;
 import mage.abilities.keyword.RepairAbility;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.constants.Zone;
 import mage.target.TargetStackObject;
 
@@ -46,9 +46,8 @@ import mage.target.TargetStackObject;
  */
 public class Droideka extends CardImpl {
 
-    public Droideka(UUID ownerId) {
-        super(ownerId, 9, "Droideka", Rarity.UNCOMMON, new CardType[]{CardType.ARTIFACT, CardType.CREATURE}, "{4}{W}");
-        this.expansionSetCode = "SWS";
+    public Droideka(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.ARTIFACT,CardType.CREATURE},"{4}{W}");
         this.subtype.add("Droid");
         this.power = new MageInt(3);
         this.toughness = new MageInt(6);

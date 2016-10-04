@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.tempest;
+package mage.cards.s;
 
 import java.util.UUID;
 import mage.abilities.common.BeginningOfUpkeepTriggeredAbility;
@@ -35,8 +35,8 @@ import mage.abilities.decorator.ConditionalTriggeredAbility;
 import mage.abilities.effects.common.CreateTokenEffect;
 import mage.abilities.effects.common.DamageControllerEffect;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.constants.TargetController;
 import mage.constants.Zone;
 import mage.filter.FilterPermanent;
@@ -48,9 +48,8 @@ import mage.game.permanent.token.ZombieToken;
  */
 public class Sarcomancy extends CardImpl {
    
-    public Sarcomancy(UUID ownerId) {
-        super(ownerId, 48, "Sarcomancy", Rarity.RARE, new CardType[]{CardType.ENCHANTMENT}, "{B}");
-        this.expansionSetCode = "TMP";
+    public Sarcomancy(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.ENCHANTMENT},"{B}");
 
 
         // When Sarcomancy enters the battlefield, put a 2/2 black Zombie creature token onto the battlefield.

@@ -25,16 +25,16 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.onslaught;
+package mage.cards.t;
 
 import java.util.UUID;
 import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.abilities.common.EntersBattlefieldTappedAbility;
 import mage.abilities.costs.mana.ManaCostsImpl;
 import mage.abilities.keyword.CyclingAbility;
 import mage.abilities.mana.GreenManaAbility;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 
 /**
  *
@@ -42,9 +42,8 @@ import mage.cards.CardImpl;
  */
 public class TranquilThicket extends CardImpl {
 
-    public TranquilThicket(UUID ownerId) {
-        super(ownerId, 326, "Tranquil Thicket", Rarity.COMMON, new CardType[]{CardType.LAND}, "");
-        this.expansionSetCode = "ONS";
+    public TranquilThicket(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.LAND},"");
 
         // Tranquil Thicket enters the battlefield tapped.
         this.addAbility(new EntersBattlefieldTappedAbility());

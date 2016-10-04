@@ -26,7 +26,7 @@
  *  or implied, of BetaSteward_at_googlemail.com.
  */
 
-package mage.sets.championsofkamigawa;
+package mage.cards.v;
 
 import java.util.UUID;
 
@@ -36,6 +36,7 @@ import mage.abilities.effects.common.AttachEffect;
 import mage.abilities.effects.common.continuous.GainAbilityAttachedEffect;
 import mage.abilities.keyword.VigilanceAbility;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.target.TargetPermanent;
 import mage.target.common.TargetCreaturePermanent;
 
@@ -45,9 +46,8 @@ import mage.target.common.TargetCreaturePermanent;
  */
 public class Vigilance extends CardImpl {
 
-    public Vigilance (UUID ownerId) {
-        super(ownerId, 49, "Vigilance", Rarity.COMMON, new CardType[]{CardType.ENCHANTMENT}, "{W}");
-        this.expansionSetCode = "CHK";
+    public Vigilance (UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.ENCHANTMENT},"{W}");
         this.subtype.add("Aura");
 
         TargetPermanent auraTarget = new TargetCreaturePermanent();

@@ -26,14 +26,14 @@
  *  or implied, of BetaSteward_at_googlemail.com.
  */
 
-package mage.sets.tenthedition;
+package mage.cards.d;
 
 import java.util.UUID;
 import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.ObjectColor;
 import mage.abilities.effects.common.DestroyTargetEffect;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.filter.predicate.Predicates;
 import mage.filter.predicate.mageobject.ColorPredicate;
@@ -53,9 +53,8 @@ public class Deathmark extends CardImpl {
                 new ColorPredicate(ObjectColor.WHITE)));
     }
 
-    public Deathmark(UUID ownerId) {
-        super(ownerId, 134, "Deathmark", Rarity.UNCOMMON, new CardType[]{CardType.SORCERY}, "{B}");
-        this.expansionSetCode = "10E";
+    public Deathmark(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{B}");
 
         this.getSpellAbility().addTarget(new TargetCreaturePermanent(filter));
         this.getSpellAbility().addEffect(new DestroyTargetEffect());

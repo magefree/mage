@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.worldwake;
+package mage.cards.s;
 
 import java.util.UUID;
 import mage.abilities.Ability;
@@ -35,8 +35,8 @@ import mage.abilities.costs.mana.ManaCostsImpl;
 import mage.abilities.effects.common.DestroyTargetEffect;
 import mage.abilities.keyword.FlyingAbility;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.filter.common.FilterAttackingCreature;
 import mage.filter.predicate.mageobject.AbilityPredicate;
 import mage.game.Game;
@@ -55,9 +55,8 @@ public class SlingbowTrap extends CardImpl {
         filter.add(new AbilityPredicate(FlyingAbility.class));
     }
 
-    public SlingbowTrap(UUID ownerId) {
-        super(ownerId, 111, "Slingbow Trap", Rarity.UNCOMMON, new CardType[]{CardType.INSTANT}, "{3}{G}");
-        this.expansionSetCode = "WWK";
+    public SlingbowTrap(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.INSTANT},"{3}{G}");
         this.subtype.add("Trap");
 
         // If a black creature with flying is attacking, you may pay {G} rather than pay Slingbow Trap's mana cost.

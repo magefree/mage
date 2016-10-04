@@ -27,13 +27,13 @@
  *  or implied, of BetaSteward_at_googlemail.com.
  * 
  */
-package mage.sets.championsofkamigawa;
+package mage.cards.t;
 
 import java.util.UUID;
 import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.abilities.effects.common.TapTargetEffect;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.target.Target;
 import mage.target.common.TargetCreaturePermanent;
 
@@ -44,9 +44,8 @@ import mage.target.common.TargetCreaturePermanent;
 
 public class TerashisCry extends CardImpl {
 
-    public TerashisCry(UUID ownerId) {
-        super(ownerId, 47, "Terashi's Cry", Rarity.COMMON, new CardType[]{CardType.SORCERY}, "{3}{W}");
-        this.expansionSetCode = "CHK";
+    public TerashisCry(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{3}{W}");
         this.subtype.add("Arcane");
 
 

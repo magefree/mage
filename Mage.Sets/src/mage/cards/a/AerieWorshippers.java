@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.bornofthegods;
+package mage.cards.a;
 
 import java.util.UUID;
 import mage.MageInt;
@@ -35,8 +35,8 @@ import mage.abilities.effects.common.DoIfCostPaid;
 import mage.abilities.keyword.FlyingAbility;
 import mage.abilities.keyword.InspiredAbility;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.game.permanent.token.Token;
 
 /**
@@ -45,9 +45,8 @@ import mage.game.permanent.token.Token;
  */
 public class AerieWorshippers extends CardImpl {
 
-    public AerieWorshippers(UUID ownerId) {
-        super(ownerId, 30, "Aerie Worshippers", Rarity.UNCOMMON, new CardType[]{CardType.CREATURE}, "{3}{U}");
-        this.expansionSetCode = "BNG";
+    public AerieWorshippers(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{3}{U}");
         this.subtype.add("Human");
         this.subtype.add("Cleric");
 

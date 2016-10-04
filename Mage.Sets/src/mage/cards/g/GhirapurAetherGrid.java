@@ -25,15 +25,15 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.magicorigins;
+package mage.cards.g;
 
 import java.util.UUID;
 import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.costs.common.TapTargetCost;
 import mage.abilities.effects.common.DamageTargetEffect;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.constants.Zone;
 import mage.filter.common.FilterControlledPermanent;
 import mage.filter.predicate.Predicates;
@@ -55,9 +55,8 @@ public class GhirapurAetherGrid extends CardImpl {
         filter.add(Predicates.not(new TappedPredicate()));
     }
 
-    public GhirapurAetherGrid(UUID ownerId) {
-        super(ownerId, 148, "Ghirapur Aether Grid", Rarity.UNCOMMON, new CardType[]{CardType.ENCHANTMENT}, "{2}{R}");
-        this.expansionSetCode = "ORI";
+    public GhirapurAetherGrid(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.ENCHANTMENT},"{2}{R}");
 
         // Tap two untaped artifacts you control: Ghirapur Aether Grid deals 1 damage to target creature or player
         SimpleActivatedAbility ability = new SimpleActivatedAbility(Zone.BATTLEFIELD,

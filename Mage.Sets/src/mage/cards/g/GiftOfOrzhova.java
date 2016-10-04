@@ -25,14 +25,13 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.gatecrash;
+package mage.cards.g;
 
 import java.util.UUID;
 import mage.constants.AttachmentType;
 import mage.constants.CardType;
 import mage.constants.Duration;
 import mage.constants.Outcome;
-import mage.constants.Rarity;
 import mage.constants.Zone;
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleStaticAbility;
@@ -43,6 +42,7 @@ import mage.abilities.keyword.EnchantAbility;
 import mage.abilities.keyword.FlyingAbility;
 import mage.abilities.keyword.LifelinkAbility;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.target.TargetPermanent;
 import mage.target.common.TargetCreaturePermanent;
 
@@ -52,9 +52,8 @@ import mage.target.common.TargetCreaturePermanent;
  */
 public class GiftOfOrzhova extends CardImpl {
 
-    public GiftOfOrzhova(UUID ownerId) {
-        super(ownerId, 219, "Gift of Orzhova", Rarity.UNCOMMON, new CardType[]{CardType.ENCHANTMENT}, "{1}{W/B}{W/B}");
-        this.expansionSetCode = "GTC";
+    public GiftOfOrzhova(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.ENCHANTMENT},"{1}{W/B}{W/B}");
 
         this.subtype.add("Aura");
 

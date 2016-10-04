@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.innistrad;
+package mage.cards.g;
 
 import java.util.LinkedHashSet;
 import java.util.Set;
@@ -42,11 +42,11 @@ import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.counter.AddCountersSourceEffect;
 import mage.cards.Card;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Duration;
 import mage.constants.Layer;
 import mage.constants.Outcome;
-import mage.constants.Rarity;
 import mage.constants.SubLayer;
 import mage.constants.Zone;
 import mage.counters.CounterType;
@@ -61,9 +61,8 @@ import mage.target.common.TargetCardInHand;
  */
 public class GrimoireOfTheDead extends CardImpl {
 
-    public GrimoireOfTheDead(UUID ownerId) {
-        super(ownerId, 226, "Grimoire of the Dead", Rarity.MYTHIC, new CardType[]{CardType.ARTIFACT}, "{4}");
-        this.expansionSetCode = "ISD";
+    public GrimoireOfTheDead(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.ARTIFACT},"{4}");
         this.supertype.add("Legendary");
 
         // {1}, {tap}, Discard a card: Put a study counter on Grimoire of the Dead.

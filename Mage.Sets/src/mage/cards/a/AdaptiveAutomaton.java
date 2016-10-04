@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.magic2012;
+package mage.cards.a;
 
 import java.util.UUID;
 import mage.MageInt;
@@ -36,11 +36,11 @@ import mage.abilities.effects.ContinuousEffectImpl;
 import mage.abilities.effects.common.ChooseCreatureTypeEffect;
 import mage.abilities.effects.common.continuous.BoostAllOfChosenSubtypeEffect;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Duration;
 import mage.constants.Layer;
 import mage.constants.Outcome;
-import mage.constants.Rarity;
 import mage.constants.SubLayer;
 import mage.constants.TargetController;
 import mage.constants.Zone;
@@ -60,9 +60,8 @@ public class AdaptiveAutomaton extends CardImpl {
         filter.add(new ControllerPredicate(TargetController.YOU));
     }
 
-    public AdaptiveAutomaton(UUID ownerId) {
-        super(ownerId, 201, "Adaptive Automaton", Rarity.RARE, new CardType[]{CardType.ARTIFACT, CardType.CREATURE}, "{3}");
-        this.expansionSetCode = "M12";
+    public AdaptiveAutomaton(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.ARTIFACT,CardType.CREATURE},"{3}");
         this.subtype.add("Construct");
 
         this.power = new MageInt(2);

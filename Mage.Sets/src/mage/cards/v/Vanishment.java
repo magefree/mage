@@ -25,14 +25,14 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.avacynrestored;
+package mage.cards.v;
 
 import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.abilities.costs.mana.ManaCostsImpl;
 import mage.abilities.effects.common.PutOnLibraryTargetEffect;
 import mage.abilities.keyword.MiracleAbility;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.target.common.TargetNonlandPermanent;
 
 import java.util.UUID;
@@ -43,9 +43,8 @@ import java.util.UUID;
  */
 public class Vanishment extends CardImpl {
 
-    public Vanishment(UUID ownerId) {
-        super(ownerId, 82, "Vanishment", Rarity.UNCOMMON, new CardType[]{CardType.INSTANT}, "{4}{U}");
-        this.expansionSetCode = "AVR";
+    public Vanishment(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.INSTANT},"{4}{U}");
 
 
         // Put target nonland permanent on top of its owner's library.

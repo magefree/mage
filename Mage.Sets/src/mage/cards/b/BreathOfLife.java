@@ -25,14 +25,14 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.starter2000;
+package mage.cards.b;
 
 import java.util.UUID;
 
 import mage.abilities.effects.common.ReturnFromGraveyardToBattlefieldTargetEffect;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.filter.common.FilterCreatureCard;
 import mage.target.common.TargetCardInYourGraveyard;
 
@@ -42,9 +42,8 @@ import mage.target.common.TargetCardInYourGraveyard;
  */
 public class BreathOfLife extends CardImpl {
 
-    public BreathOfLife(UUID ownerId) {
-        super(ownerId, 2, "Breath of Life", Rarity.UNCOMMON, new CardType[]{CardType.SORCERY}, "{3}{W}");
-        this.expansionSetCode = "S00";
+    public BreathOfLife(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{3}{W}");
 
 
         // Return target creature card from your graveyard to the battlefield.

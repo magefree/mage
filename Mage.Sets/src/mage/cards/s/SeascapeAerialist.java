@@ -25,18 +25,18 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.zendikar;
+package mage.cards.s;
 
 import java.util.UUID;
 
 import mage.constants.CardType;
 import mage.constants.Duration;
-import mage.constants.Rarity;
 import mage.MageInt;
 import mage.abilities.common.AllyEntersBattlefieldTriggeredAbility;
 import mage.abilities.effects.common.continuous.GainAbilityAllEffect;
 import mage.abilities.keyword.FlyingAbility;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.TargetController;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.filter.predicate.mageobject.SubtypePredicate;
@@ -55,9 +55,8 @@ public class SeascapeAerialist extends CardImpl {
         filter.add(new ControllerPredicate(TargetController.YOU));
     }
 
-    public SeascapeAerialist(UUID ownerId) {
-        super(ownerId, 64, "Seascape Aerialist", Rarity.UNCOMMON, new CardType[]{CardType.CREATURE}, "{4}{U}");
-        this.expansionSetCode = "ZEN";
+    public SeascapeAerialist(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{4}{U}");
         this.subtype.add("Merfolk");
         this.subtype.add("Wizard");
         this.subtype.add("Ally");

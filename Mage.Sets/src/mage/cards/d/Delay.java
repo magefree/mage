@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.futuresight;
+package mage.cards.d;
 
 import java.util.UUID;
 import mage.MageObjectReference;
@@ -37,9 +37,9 @@ import mage.abilities.effects.common.continuous.GainSuspendEffect;
 import mage.abilities.keyword.SuspendAbility;
 import mage.cards.Card;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Outcome;
-import mage.constants.Rarity;
 import mage.constants.Zone;
 import mage.counters.CounterType;
 import mage.game.Game;
@@ -53,9 +53,8 @@ import mage.target.TargetSpell;
  */
 public class Delay extends CardImpl {
 
-    public Delay(UUID ownerId) {
-        super(ownerId, 35, "Delay", Rarity.UNCOMMON, new CardType[]{CardType.INSTANT}, "{1}{U}");
-        this.expansionSetCode = "FUT";
+    public Delay(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.INSTANT},"{1}{U}");
 
 
         // Counter target spell. If the spell is countered this way, exile it with three time counters on it instead of putting it into its owner's graveyard. If it doesn't have suspend, it gains suspend.

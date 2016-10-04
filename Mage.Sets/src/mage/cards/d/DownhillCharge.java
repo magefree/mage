@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.nemesis;
+package mage.cards.d;
 
 import java.util.UUID;
 import mage.abilities.costs.AlternativeCostSourceAbility;
@@ -35,9 +35,9 @@ import mage.abilities.dynamicvalue.common.StaticValue;
 import mage.abilities.effects.Effect;
 import mage.abilities.effects.common.continuous.BoostTargetEffect;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Duration;
-import mage.constants.Rarity;
 import mage.filter.common.FilterControlledPermanent;
 import mage.filter.predicate.mageobject.SubtypePredicate;
 import mage.target.common.TargetControlledPermanent;
@@ -55,9 +55,8 @@ public class DownhillCharge extends CardImpl {
         filter.add(new SubtypePredicate("Mountain"));
     }
 
-    public DownhillCharge(UUID ownerId) {
-        super(ownerId, 79, "Downhill Charge", Rarity.COMMON, new CardType[]{CardType.INSTANT}, "{2}{R}");
-        this.expansionSetCode = "NEM";
+    public DownhillCharge(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.INSTANT},"{2}{R}");
 
         // You may sacrifice a Mountain rather than pay Downhill Charge's mana cost.
         this.addAbility(new AlternativeCostSourceAbility(new SacrificeTargetCost(new TargetControlledPermanent(filter))));

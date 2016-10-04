@@ -26,7 +26,7 @@
  *  or implied, of BetaSteward_at_googlemail.com.
  */
 
-package mage.sets.scarsofmirrodin;
+package mage.cards.h;
 
 import java.util.UUID;
 
@@ -40,6 +40,7 @@ import mage.abilities.effects.common.DestroyTargetEffect;
 import mage.abilities.keyword.FlyingAbility;
 import mage.cards.Card;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.filter.FilterPermanent;
 import mage.filter.predicate.mageobject.CardTypePredicate;
 import mage.game.Game;
@@ -57,9 +58,8 @@ public class HoardSmelterDragon extends CardImpl {
         filter.add(new CardTypePredicate(CardType.ARTIFACT));
     }
 
-    public HoardSmelterDragon (UUID ownerId) {
-        super(ownerId, 93, "Hoard-Smelter Dragon", Rarity.RARE, new CardType[]{CardType.CREATURE}, "{4}{R}{R}");
-        this.expansionSetCode = "SOM";
+    public HoardSmelterDragon (UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{4}{R}{R}");
         this.subtype.add("Dragon");
 
         this.power = new MageInt(5);

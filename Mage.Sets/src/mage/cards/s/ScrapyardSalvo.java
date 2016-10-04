@@ -25,14 +25,14 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.newphyrexia;
+package mage.cards.s;
 
 import java.util.UUID;
 import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.abilities.dynamicvalue.common.CardsInControllerGraveyardCount;
 import mage.abilities.effects.common.DamageTargetEffect;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.filter.common.FilterArtifactCard;
 import mage.target.TargetPlayer;
 
@@ -44,9 +44,8 @@ public class ScrapyardSalvo extends CardImpl {
 
     private static final FilterArtifactCard filter = new FilterArtifactCard("artifact cards");
 
-    public ScrapyardSalvo(UUID ownerId) {
-        super(ownerId, 94, "Scrapyard Salvo", Rarity.COMMON, new CardType[]{CardType.SORCERY}, "{1}{R}{R}");
-        this.expansionSetCode = "NPH";
+    public ScrapyardSalvo(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{1}{R}{R}");
 
 
         this.getSpellAbility().addTarget(new TargetPlayer());

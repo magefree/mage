@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.guildpact;
+package mage.cards.q;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -35,11 +35,11 @@ import mage.abilities.effects.AsThoughEffectImpl;
 import mage.abilities.effects.common.DrawCardSourceControllerEffect;
 import mage.cards.Card;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.AsThoughEffectType;
 import mage.constants.CardType;
 import mage.constants.Duration;
 import mage.constants.Outcome;
-import mage.constants.Rarity;
 import mage.constants.WatcherScope;
 import mage.game.Game;
 import mage.game.events.GameEvent;
@@ -53,9 +53,8 @@ import mage.watchers.Watcher;
  */
 public class Quicken extends CardImpl {
 
-    public Quicken(UUID ownerId) {
-        super(ownerId, 31, "Quicken", Rarity.RARE, new CardType[]{CardType.INSTANT}, "{U}");
-        this.expansionSetCode = "GPT";
+    public Quicken(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.INSTANT},"{U}");
 
         // The next sorcery card you cast this turn can be cast as though it had flash.
         this.getSpellAbility().addEffect(new QuickenAsThoughEffect());

@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.fatereforged;
+package mage.cards.a;
 
 import java.util.UUID;
 import mage.MageInt;
@@ -33,8 +33,8 @@ import mage.abilities.common.EntersBattlefieldTriggeredAbility;
 import mage.abilities.effects.common.ReturnToHandChosenControlledPermanentEffect;
 import mage.abilities.keyword.TrampleAbility;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.filter.common.FilterControlledCreaturePermanent;
 import mage.filter.predicate.permanent.AnotherPredicate;
 
@@ -50,9 +50,8 @@ public class AmbushKrotiq extends CardImpl {
         filter.add(new AnotherPredicate());
     }
 
-    public AmbushKrotiq(UUID ownerId) {
-        super(ownerId, 122, "Ambush Krotiq", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{5}{G}");
-        this.expansionSetCode = "FRF";
+    public AmbushKrotiq(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{5}{G}");
         this.subtype.add("Insect");
         this.power = new MageInt(5);
         this.toughness = new MageInt(5);

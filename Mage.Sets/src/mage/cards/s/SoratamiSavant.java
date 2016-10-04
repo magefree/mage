@@ -26,12 +26,11 @@
  *  or implied, of BetaSteward_at_googlemail.com.
  */
 
-package mage.sets.championsofkamigawa;
+package mage.cards.s;
 
 import java.util.UUID;
 
 import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleActivatedAbility;
@@ -40,6 +39,7 @@ import mage.abilities.costs.mana.GenericManaCost;
 import mage.abilities.effects.common.CounterUnlessPaysEffect;
 import mage.abilities.keyword.FlyingAbility;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.Zone;
 import mage.filter.common.FilterControlledLandPermanent;
 import mage.filter.common.FilterControlledPermanent;
@@ -53,9 +53,8 @@ public class SoratamiSavant extends CardImpl {
 
     private static final FilterControlledPermanent filter = new FilterControlledLandPermanent("a land");
 
-    public SoratamiSavant(UUID ownerId) {
-        super(ownerId, 90, "Soratami Savant", Rarity.UNCOMMON, new CardType[]{CardType.CREATURE}, "{2}{U}{U}");
-        this.expansionSetCode = "CHK";
+    public SoratamiSavant(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{2}{U}{U}");
         this.subtype.add("Moonfolk");
         this.subtype.add("Wizard");
 

@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.battleforzendikar;
+package mage.cards.u;
 
 import java.util.UUID;
 import mage.MageInt;
@@ -36,11 +36,11 @@ import mage.abilities.keyword.DevoidAbility;
 import mage.abilities.keyword.FlashAbility;
 import mage.abilities.keyword.FlyingAbility;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.cards.Cards;
 import mage.cards.CardsImpl;
 import mage.constants.CardType;
 import mage.constants.Outcome;
-import mage.constants.Rarity;
 import mage.constants.TargetController;
 import mage.constants.Zone;
 import mage.filter.FilterCard;
@@ -58,9 +58,8 @@ import mage.target.common.TargetCardInExile;
  */
 public class UlamogsNullifier extends CardImpl {
 
-    public UlamogsNullifier(UUID ownerId) {
-        super(ownerId, 207, "Ulamog's Nullifier", Rarity.UNCOMMON, new CardType[]{CardType.CREATURE}, "{2}{U}{B}");
-        this.expansionSetCode = "BFZ";
+    public UlamogsNullifier(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{2}{U}{B}");
         this.subtype.add("Eldrazi");
         this.subtype.add("Processor");
         this.power = new MageInt(2);

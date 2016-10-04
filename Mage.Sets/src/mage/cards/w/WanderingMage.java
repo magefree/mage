@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.masterseditioniii;
+package mage.cards.w;
 
 import java.util.UUID;
 import mage.MageInt;
@@ -37,9 +37,9 @@ import mage.abilities.costs.common.PayLifeCost;
 import mage.abilities.costs.mana.ManaCostsImpl;
 import mage.abilities.effects.common.PreventDamageToTargetEffect;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Duration;
-import mage.constants.Rarity;
 import mage.constants.Zone;
 import mage.counters.CounterType;
 import mage.filter.common.FilterCreaturePermanent;
@@ -66,9 +66,8 @@ public class WanderingMage extends CardImpl {
                 new SubtypePredicate("Wizard")));
     }
 
-    public WanderingMage(UUID ownerId) {
-        super(ownerId, 186, "Wandering Mage", Rarity.RARE, new CardType[]{CardType.CREATURE}, "{W}{U}{B}");
-        this.expansionSetCode = "ME3";
+    public WanderingMage(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{W}{U}{B}");
         this.subtype.add("Human");
         this.subtype.add("Cleric");
         this.subtype.add("Wizard");

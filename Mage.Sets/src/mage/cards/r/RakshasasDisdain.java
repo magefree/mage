@@ -25,15 +25,15 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.fatereforged;
+package mage.cards.r;
 
 import java.util.UUID;
 import mage.abilities.dynamicvalue.common.CardsInControllerGraveyardCount;
 import mage.abilities.effects.Effect;
 import mage.abilities.effects.common.CounterUnlessPaysEffect;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.target.TargetSpell;
 
 /**
@@ -42,9 +42,8 @@ import mage.target.TargetSpell;
  */
 public class RakshasasDisdain extends CardImpl {
 
-    public RakshasasDisdain(UUID ownerId) {
-        super(ownerId, 45, "Rakshasa's Disdain", Rarity.COMMON, new CardType[]{CardType.INSTANT}, "{2}{U}");
-        this.expansionSetCode = "FRF";
+    public RakshasasDisdain(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.INSTANT},"{2}{U}");
 
         // Counter target spell unless its controller pays {1} for each card in your graveyard.
         Effect effect = new CounterUnlessPaysEffect(new CardsInControllerGraveyardCount());

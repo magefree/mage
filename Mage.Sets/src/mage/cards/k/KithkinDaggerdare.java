@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.lorwyn;
+package mage.cards.k;
 
 import mage.constants.*;
 import mage.MageInt;
@@ -35,6 +35,7 @@ import mage.abilities.costs.common.TapSourceCost;
 import mage.abilities.costs.mana.ColoredManaCost;
 import mage.abilities.effects.common.continuous.BoostTargetEffect;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.target.common.TargetAttackingCreature;
 
 import java.util.UUID;
@@ -45,9 +46,8 @@ import java.util.UUID;
  */
 public class KithkinDaggerdare extends CardImpl {
 
-    public KithkinDaggerdare(UUID ownerId) {
-        super(ownerId, 223, "Kithkin Daggerdare", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{1}{G}");
-        this.expansionSetCode = "LRW";
+    public KithkinDaggerdare(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{1}{G}");
         this.subtype.add("Kithkin");
         this.subtype.add("Soldier");
 

@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.starwars;
+package mage.cards.f;
 
 import java.util.UUID;
 import mage.abilities.Ability;
@@ -33,9 +33,9 @@ import mage.abilities.dynamicvalue.common.ManacostVariableValue;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.DamageTargetEffect;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Outcome;
-import mage.constants.Rarity;
 import mage.game.Game;
 import mage.players.Player;
 import mage.target.common.TargetCreatureOrPlayer;
@@ -46,9 +46,8 @@ import mage.target.common.TargetCreatureOrPlayer;
  */
 public class ForceLightning extends CardImpl {
 
-    public ForceLightning(UUID ownerId) {
-        super(ownerId, 103, "Force Lightning", Rarity.RARE, new CardType[]{CardType.INSTANT}, "{X}{R}{R}");
-        this.expansionSetCode = "SWS";
+    public ForceLightning(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.INSTANT},"{X}{R}{R}");
 
         // Force Lightning deals X damage to target creature or player.
         this.getSpellAbility().addEffect(new DamageTargetEffect(new ManacostVariableValue()));

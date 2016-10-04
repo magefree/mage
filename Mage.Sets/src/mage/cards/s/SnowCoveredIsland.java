@@ -25,13 +25,13 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.iceage;
+package mage.cards.s;
 
 import java.util.UUID;
 import mage.abilities.mana.BlueManaAbility;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.Rarity;
 
 /**
  *
@@ -39,9 +39,8 @@ import mage.constants.Rarity;
  */
 public class SnowCoveredIsland extends CardImpl {
 
-    public SnowCoveredIsland(UUID ownerId) {
-        super(ownerId, 348, "Snow-Covered Island", Rarity.COMMON, new CardType[]{CardType.LAND}, "");
-        this.expansionSetCode = "ICE";
+    public SnowCoveredIsland(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.LAND},"");
         this.supertype.add("Basic");
         this.supertype.add("Snow");
         this.subtype.add("Island");

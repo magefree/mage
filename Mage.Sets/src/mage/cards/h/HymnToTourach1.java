@@ -25,13 +25,13 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.fallenempires;
+package mage.cards.h;
 
 import java.util.UUID;
 import mage.abilities.effects.common.discard.DiscardTargetEffect;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.target.TargetPlayer;
 
 /**
@@ -40,9 +40,8 @@ import mage.target.TargetPlayer;
  */
 public class HymnToTourach1 extends CardImpl {
 
-    public HymnToTourach1(UUID ownerId) {
-        super(ownerId, 12, "Hymn to Tourach", Rarity.COMMON, new CardType[]{CardType.SORCERY}, "{B}{B}");
-        this.expansionSetCode = "FEM";
+    public HymnToTourach1(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{B}{B}");
 
 
         // Target player discards two cards at random.

@@ -25,15 +25,15 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.shadowsoverinnistrad;
+package mage.cards.j;
 
 import java.util.UUID;
 import mage.abilities.effects.common.continuous.BoostTargetEffect;
 import mage.abilities.effects.keyword.InvestigateEffect;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Duration;
-import mage.constants.Rarity;
 import mage.target.common.TargetCreaturePermanent;
 
 /**
@@ -42,9 +42,8 @@ import mage.target.common.TargetCreaturePermanent;
  */
 public class JacesScrutiny extends CardImpl {
 
-    public JacesScrutiny(UUID ownerId) {
-        super(ownerId, 70, "Jace's Scrutiny", Rarity.COMMON, new CardType[]{CardType.INSTANT}, "{1}{U}");
-        this.expansionSetCode = "SOI";
+    public JacesScrutiny(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.INSTANT},"{1}{U}");
 
         // Target creature gets -4/-0 until end of turn.
         getSpellAbility().addEffect(new BoostTargetEffect(-4, -0, Duration.EndOfTurn));

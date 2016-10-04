@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.urzaslegacy;
+package mage.cards.d;
 
 import java.util.Set;
 import java.util.UUID;
@@ -39,6 +39,7 @@ import mage.abilities.decorator.ConditionalTriggeredAbility;
 import mage.abilities.effects.common.SacrificeSourceEffect;
 import mage.abilities.effects.common.search.SearchLibraryPutInPlayEffect;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.filter.common.FilterCreatureCard;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.game.Game;
@@ -50,9 +51,8 @@ import mage.target.common.TargetCardInLibrary;
  */
 public class DefenseOfTheHeart extends CardImpl {
 
-    public DefenseOfTheHeart(UUID ownerId) {
-        super(ownerId, 100, "Defense of the Heart", Rarity.RARE, new CardType[]{CardType.ENCHANTMENT}, "{3}{G}");
-        this.expansionSetCode = "ULG";
+    public DefenseOfTheHeart(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.ENCHANTMENT},"{3}{G}");
 
 
         // At the beginning of your upkeep, if an opponent controls three or more creatures, sacrifice Defense of the Heart, search your library for up to two creature cards, and put those cards onto the battlefield. Then shuffle your library.

@@ -25,13 +25,13 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.portalthreekingdoms;
+package mage.cards.s;
 
 import java.util.UUID;
 import mage.abilities.effects.common.ReturnFromGraveyardToHandTargetEffect;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.filter.FilterCard;
 import mage.filter.predicate.mageobject.CardTypePredicate;
 import mage.target.common.TargetCardInYourGraveyard;
@@ -48,9 +48,8 @@ public class SagesKnowledge extends CardImpl {
         filter.add(new CardTypePredicate(CardType.SORCERY));
     }
 
-    public SagesKnowledge(UUID ownerId) {
-        super(ownerId, 52, "Sage's Knowledge", Rarity.COMMON, new CardType[]{CardType.SORCERY}, "{2}{U}");
-        this.expansionSetCode = "PTK";
+    public SagesKnowledge(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{2}{U}");
 
         // Return target sorcery card from your graveyard to your hand.
         this.getSpellAbility().addEffect(new ReturnFromGraveyardToHandTargetEffect());

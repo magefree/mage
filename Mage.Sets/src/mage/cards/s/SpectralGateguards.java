@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.avacynrestored;
+package mage.cards.s;
 
 import java.util.UUID;
 import mage.MageInt;
@@ -34,8 +34,8 @@ import mage.abilities.effects.common.continuous.GainAbilityPairedEffect;
 import mage.abilities.keyword.SoulbondAbility;
 import mage.abilities.keyword.VigilanceAbility;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.constants.Zone;
 
 /**
@@ -45,9 +45,8 @@ public class SpectralGateguards extends CardImpl {
 
     private static final String ruleText = "As long as {this} is paired with another creature, both creatures have vigilance";
 
-    public SpectralGateguards(UUID ownerId) {
-        super(ownerId, 37, "Spectral Gateguards", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{4}{W}");
-        this.expansionSetCode = "AVR";
+    public SpectralGateguards(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{4}{W}");
         this.subtype.add("Spirit");
         this.subtype.add("Soldier");
 

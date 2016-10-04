@@ -25,12 +25,12 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.tenthedition;
+package mage.cards.h;
 
 import java.util.UUID;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.target.common.TargetOpponent;
 import mage.abilities.effects.common.ReplaceOpponentCardsInHandWithSelectedEffect;
 
@@ -40,9 +40,8 @@ import mage.abilities.effects.common.ReplaceOpponentCardsInHandWithSelectedEffec
  */
 public class HeadGames extends CardImpl {
 
-    public HeadGames(UUID ownerId) {
-        super(ownerId, 148, "Head Games", Rarity.RARE, new CardType[]{CardType.SORCERY}, "{3}{B}{B}");
-        this.expansionSetCode = "10E";
+    public HeadGames(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{3}{B}{B}");
 
         // Target opponent puts the cards from his or her hand on top of his or her library. Search that player's library for that many cards. The player puts those cards into his or her hand, then shuffles his or her library.
         this.getSpellAbility().addEffect(new ReplaceOpponentCardsInHandWithSelectedEffect());

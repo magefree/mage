@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.shadowsoverinnistrad;
+package mage.cards.t;
 
 import java.util.List;
 import java.util.UUID;
@@ -40,9 +40,9 @@ import mage.abilities.effects.common.continuous.PlayAdditionalLandsControllerEff
 import mage.abilities.keyword.DeathtouchAbility;
 import mage.cards.Card;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Duration;
-import mage.constants.Rarity;
 import mage.constants.TargetController;
 import mage.constants.Zone;
 import mage.filter.common.FilterControlledLandPermanent;
@@ -57,9 +57,8 @@ import mage.target.common.TargetControlledPermanent;
  */
 public class TheGitrogMonster extends CardImpl {
 
-    public TheGitrogMonster(UUID ownerId) {
-        super(ownerId, 245, "The Gitrog Monster", Rarity.MYTHIC, new CardType[]{CardType.CREATURE}, "{3}{B}{G}");
-        this.expansionSetCode = "SOI";
+    public TheGitrogMonster(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{3}{B}{G}");
         this.supertype.add("Legendary");
         this.subtype.add("Frog");
         this.subtype.add("Horror");

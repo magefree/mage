@@ -25,12 +25,11 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.riseoftheeldrazi;
+package mage.cards.m;
 
 import java.util.UUID;
 
 import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.constants.Zone;
 import mage.MageInt;
 import mage.abilities.common.SimpleStaticAbility;
@@ -47,6 +46,7 @@ import mage.abilities.effects.common.continuous.PlayWithTheTopCardRevealedEffect
 import mage.abilities.mana.ManaAbility;
 import mage.abilities.mana.SimpleManaAbility;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.Duration;
 import mage.game.Game;
 
@@ -58,9 +58,8 @@ public class MulDayaChannelers extends CardImpl {
 
     private static final String rule1 = "As long as the top card of your library is a creature card, {this} gets +3/+3";
 
-    public MulDayaChannelers(UUID ownerId) {
-        super(ownerId, 198, "Mul Daya Channelers", Rarity.RARE, new CardType[]{CardType.CREATURE}, "{1}{G}{G}");
-        this.expansionSetCode = "ROE";
+    public MulDayaChannelers(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{1}{G}{G}");
         this.subtype.add("Elf");
         this.subtype.add("Druid");
         this.subtype.add("Shaman");

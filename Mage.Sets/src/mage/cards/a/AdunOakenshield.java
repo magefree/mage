@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.legends;
+package mage.cards.a;
 
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleActivatedAbility;
@@ -33,8 +33,8 @@ import mage.abilities.effects.common.ReturnToHandTargetEffect;
 import mage.abilities.costs.common.TapSourceCost;
 import mage.abilities.costs.mana.ManaCostsImpl;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.constants.Zone;
 import mage.filter.common.FilterCreatureCard;
 import mage.MageInt;
@@ -50,9 +50,8 @@ public class AdunOakenshield extends CardImpl {
 
     private static final FilterCreatureCard filter = new FilterCreatureCard("creature card from your graveyard");
 
-    public AdunOakenshield(UUID ownerId) {
-        super(ownerId, 256, "Adun Oakenshield", Rarity.RARE, new CardType[]{CardType.CREATURE}, "{B}{R}{G}");
-        this.expansionSetCode = "LEG";
+    public AdunOakenshield(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{B}{R}{G}");
         this.supertype.add("Legendary");
         this.subtype.add("Human");
         this.subtype.add("Knight");

@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.starwars;
+package mage.cards.s;
 
 import java.util.UUID;
 import mage.abilities.Ability;
@@ -36,10 +36,10 @@ import mage.abilities.effects.common.continuous.GainAbilityTargetEffect;
 import mage.abilities.effects.common.counter.AddCountersTargetEffect;
 import mage.abilities.keyword.TrampleAbility;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Duration;
 import mage.constants.Outcome;
-import mage.constants.Rarity;
 import mage.counters.CounterType;
 import mage.filter.Filter;
 import mage.filter.FilterPermanent;
@@ -58,9 +58,8 @@ import mage.target.targetpointer.FixedTarget;
  */
 public class ShowOfDominance extends CardImpl {
 
-    public ShowOfDominance(UUID ownerId) {
-        super(ownerId, 156, "Show of Dominance", Rarity.UNCOMMON, new CardType[]{CardType.SORCERY}, "{3}{G}");
-        this.expansionSetCode = "SWS";
+    public ShowOfDominance(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{3}{G}");
 
         // Put four +1/+1 counters on the creature with the highest power. If two or more creatures are tied for the greatest power, you choose one of them. That creature gains trample.
         this.getSpellAbility().addEffect(new ShowOfDominanceEffect());

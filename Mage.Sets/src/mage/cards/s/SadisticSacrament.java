@@ -25,13 +25,12 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.zendikar;
+package mage.cards.s;
 
 import java.util.List;
 import java.util.UUID;
 import mage.constants.CardType;
 import mage.constants.Outcome;
-import mage.constants.Rarity;
 import mage.abilities.Ability;
 import mage.abilities.condition.common.KickedCondition;
 import mage.abilities.decorator.ConditionalOneShotEffect;
@@ -39,6 +38,7 @@ import mage.abilities.effects.OneShotEffect;
 import mage.abilities.keyword.KickerAbility;
 import mage.cards.Card;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.filter.FilterCard;
 import mage.game.Game;
 import mage.players.Player;
@@ -53,9 +53,8 @@ public class SadisticSacrament extends CardImpl {
 
     private static final String ruleText = "Search target player's library for up to three cards, exile them, then that player shuffles his or her library. If {this} was kicked, instead search that player's library for up to fifteen cards, exile them, then that player shuffles his or her library";
 
-    public SadisticSacrament(UUID ownerId) {
-        super(ownerId, 110, "Sadistic Sacrament", Rarity.RARE, new CardType[]{CardType.SORCERY}, "{B}{B}{B}");
-        this.expansionSetCode = "ZEN";
+    public SadisticSacrament(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{B}{B}{B}");
 
         this.color.setBlack(true);
 

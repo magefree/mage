@@ -25,11 +25,10 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.betrayersofkamigawa;
+package mage.cards.t;
 
 import java.util.UUID;
 import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.MageInt;
 import mage.MageObject;
 import mage.abilities.Abilities;
@@ -38,6 +37,7 @@ import mage.abilities.common.SpellCastControllerTriggeredAbility;
 import mage.abilities.effects.common.search.SearchLibraryPutInHandEffect;
 import mage.abilities.keyword.EnchantAbility;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.filter.FilterCard;
 import mage.filter.FilterSpell;
 import mage.filter.common.FilterSpiritOrArcaneCard;
@@ -62,9 +62,8 @@ public class Tallowisp extends CardImpl {
         filterAura.add(new TallowispAbilityPredicate());
     }
 
-    public Tallowisp(UUID ownerId) {
-        super(ownerId, 25, "Tallowisp", Rarity.UNCOMMON, new CardType[]{CardType.CREATURE}, "{1}{W}");
-        this.expansionSetCode = "BOK";
+    public Tallowisp(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{1}{W}");
         this.subtype.add("Spirit");
 
         this.power = new MageInt(1);

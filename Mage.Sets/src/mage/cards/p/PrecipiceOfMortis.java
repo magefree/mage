@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.starwars;
+package mage.cards.p;
 
 import java.util.UUID;
 import mage.abilities.Ability;
@@ -34,9 +34,9 @@ import mage.abilities.common.EntersBattlefieldAllTriggeredAbility;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.keyword.MeditateAbility;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Outcome;
-import mage.constants.Rarity;
 import mage.constants.Zone;
 import mage.filter.common.FilterControlledCreaturePermanent;
 import mage.filter.predicate.mageobject.AbilityPredicate;
@@ -58,9 +58,8 @@ public class PrecipiceOfMortis extends CardImpl {
         filter.add(new AbilityPredicate(MeditateAbility.class));
     }
 
-    public PrecipiceOfMortis(UUID ownerId) {
-        super(ownerId, 210, "Precipice of Mortis", Rarity.RARE, new CardType[]{CardType.ENCHANTMENT}, "{G}{U}{W}");
-        this.expansionSetCode = "SWS";
+    public PrecipiceOfMortis(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.ENCHANTMENT},"{G}{U}{W}");
 
         // Whenever a creature with meditate enters the battlefield under your control, you may copy target triggered ability you control. You may choose new targets for that ability.
         Ability ability = new EntersBattlefieldAllTriggeredAbility(Zone.BATTLEFIELD, new PrecipiceOfMortisEffect(), filter, true);

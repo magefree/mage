@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.commander2014;
+package mage.cards.d;
 
 import java.util.UUID;
 import mage.abilities.Ability;
@@ -40,9 +40,9 @@ import mage.abilities.effects.common.GetEmblemEffect;
 import mage.abilities.effects.common.ReturnFromGraveyardToBattlefieldTargetEffect;
 import mage.cards.Card;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Outcome;
-import mage.constants.Rarity;
 import mage.constants.TargetController;
 import mage.constants.Zone;
 import mage.filter.FilterCard;
@@ -67,9 +67,8 @@ import mage.target.targetpointer.FixedTarget;
  */
 public class DarettiScrapSavant extends CardImpl {
 
-    public DarettiScrapSavant(UUID ownerId) {
-        super(ownerId, 33, "Daretti, Scrap Savant", Rarity.MYTHIC, new CardType[]{CardType.PLANESWALKER}, "{3}{R}");
-        this.expansionSetCode = "C14";
+    public DarettiScrapSavant(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.PLANESWALKER},"{3}{R}");
         this.subtype.add("Daretti");
 
         this.addAbility(new PlanswalkerEntersWithLoyalityCountersAbility(3));

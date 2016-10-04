@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.eighthedition;
+package mage.cards.m;
 
 import java.util.UUID;
 import mage.ObjectColor;
@@ -37,8 +37,8 @@ import mage.abilities.costs.mana.ManaCostsImpl;
 import mage.abilities.effects.Effect;
 import mage.abilities.effects.common.DestroyTargetEffect;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.constants.Zone;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.filter.predicate.Predicates;
@@ -59,9 +59,8 @@ public class MurderousBetrayal extends CardImpl {
         filter.add(Predicates.not(new ColorPredicate(ObjectColor.BLACK)));
     }
 
-    public MurderousBetrayal(UUID ownerId) {
-        super(ownerId, 147, "Murderous Betrayal", Rarity.RARE, new CardType[]{CardType.ENCHANTMENT}, "{B}{B}{B}");
-        this.expansionSetCode = "8ED";
+    public MurderousBetrayal(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.ENCHANTMENT},"{B}{B}{B}");
 
         // {B}{B}, Pay half your life, rounded up: Destroy target nonblack creature. It can't be regenerated.
         Effect effect = new DestroyTargetEffect(true);

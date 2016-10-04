@@ -25,14 +25,14 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.lorwyn;
+package mage.cards.o;
 
 import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.MageInt;
 import mage.abilities.keyword.TrampleAbility;
 import mage.abilities.keyword.VigilanceAbility;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 
 import java.util.UUID;
 
@@ -42,9 +42,8 @@ import java.util.UUID;
  */
 public class OakgnarlWarrior extends CardImpl {
 
-    public OakgnarlWarrior(UUID ownerId) {
-        super(ownerId, 232, "Oakgnarl Warrior", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{5}{G}{G}");
-        this.expansionSetCode = "LRW";
+    public OakgnarlWarrior(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{5}{G}{G}");
         this.subtype.add("Treefolk");
         this.subtype.add("Warrior");
 

@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.journeyintonyx;
+package mage.cards.p;
 
 import java.util.UUID;
 import mage.MageInt;
@@ -38,11 +38,11 @@ import mage.abilities.keyword.DoubleStrikeAbility;
 import mage.abilities.keyword.TrampleAbility;
 import mage.cards.Card;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.AsThoughEffectType;
 import mage.constants.CardType;
 import mage.constants.Duration;
 import mage.constants.Outcome;
-import mage.constants.Rarity;
 import mage.constants.Zone;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
@@ -56,9 +56,8 @@ import mage.target.targetpointer.FixedTarget;
  */
 public class PropheticFlamespeaker extends CardImpl {
 
-    public PropheticFlamespeaker(UUID ownerId) {
-        super(ownerId, 106, "Prophetic Flamespeaker", Rarity.MYTHIC, new CardType[]{CardType.CREATURE}, "{1}{R}{R}");
-        this.expansionSetCode = "JOU";
+    public PropheticFlamespeaker(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{1}{R}{R}");
         this.subtype.add("Human");
         this.subtype.add("Shaman");
 

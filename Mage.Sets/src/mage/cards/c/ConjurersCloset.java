@@ -25,15 +25,15 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.avacynrestored;
+package mage.cards.c;
 
 import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.abilities.Ability;
 import mage.abilities.common.BeginningOfYourEndStepTriggeredAbility;
 import mage.abilities.effects.common.ExileTargetForSourceEffect;
 import mage.abilities.effects.common.ReturnToBattlefieldUnderYourControlTargetEffect;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.target.common.TargetControlledCreaturePermanent;
 
 import java.util.UUID;
@@ -43,9 +43,8 @@ import java.util.UUID;
  */
 public class ConjurersCloset extends CardImpl {
 
-    public ConjurersCloset(UUID ownerId) {
-        super(ownerId, 214, "Conjurer's Closet", Rarity.RARE, new CardType[]{CardType.ARTIFACT}, "{5}");
-        this.expansionSetCode = "AVR";
+    public ConjurersCloset(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.ARTIFACT},"{5}");
 
         // At the beginning of your end step, you may exile target creature you control, then return that card to the battlefield under your control.
         Ability ability = new BeginningOfYourEndStepTriggeredAbility(new ExileTargetForSourceEffect(), true);

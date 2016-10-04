@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.dragonsmaze;
+package mage.cards.s;
 
 import java.util.UUID;
 import mage.MageInt;
@@ -36,8 +36,8 @@ import mage.abilities.effects.common.EntersBattlefieldWithXCountersEffect;
 import mage.abilities.effects.common.counter.AddCountersSourceEffect;
 import mage.abilities.keyword.DoubleStrikeAbility;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.constants.Zone;
 import mage.counters.CounterType;
 
@@ -47,9 +47,8 @@ import mage.counters.CounterType;
  */
 public class SavagebornHydra extends CardImpl {
 
-    public SavagebornHydra(UUID ownerId) {
-        super(ownerId, 100, "Savageborn Hydra", Rarity.MYTHIC, new CardType[]{CardType.CREATURE}, "{X}{R}{G}");
-        this.expansionSetCode = "DGM";
+    public SavagebornHydra(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{X}{R}{G}");
         this.subtype.add("Hydra");
 
         this.power = new MageInt(0);

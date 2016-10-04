@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.futuresight;
+package mage.cards.n;
 
 import java.util.UUID;
 import mage.Mana;
@@ -38,8 +38,8 @@ import mage.abilities.effects.common.BasicManaEffect;
 import mage.abilities.mana.ActivateIfConditionManaAbility;
 import mage.abilities.mana.ColorlessManaAbility;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.constants.Zone;
 import mage.filter.FilterPermanent;
 import mage.filter.common.FilterControlledPermanent;
@@ -60,9 +60,8 @@ public class NimbusMaze extends CardImpl {
         controlPlains.add(new SubtypePredicate("Plains"));
     }
 
-    public NimbusMaze(UUID ownerId) {
-        super(ownerId, 178, "Nimbus Maze", Rarity.RARE, new CardType[]{CardType.LAND}, "");
-        this.expansionSetCode = "FUT";
+    public NimbusMaze(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.LAND},"");
 
         // {tap}: Add {C} to your mana pool.
         this.addAbility(new ColorlessManaAbility());

@@ -25,14 +25,14 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.starter1999;
+package mage.cards.s;
 
 import java.util.UUID;
 import mage.abilities.effects.common.DamageAllEffect;
 import mage.abilities.keyword.FlyingAbility;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.filter.predicate.mageobject.AbilityPredicate;
 
@@ -49,9 +49,8 @@ public class Squall extends CardImpl {
         filter.add(new AbilityPredicate(FlyingAbility.class));
     }
 
-    public Squall(UUID ownerId) {
-        super(ownerId, 143, "Squall", Rarity.COMMON, new CardType[]{CardType.SORCERY}, "{2}{G}");
-        this.expansionSetCode = "S99";
+    public Squall(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{2}{G}");
 
         // Squall deals 2 damage to each creature with flying.
         this.getSpellAbility().addEffect(new DamageAllEffect(2, filter));

@@ -25,14 +25,14 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.battleforzendikar;
+package mage.cards.b;
 
 import java.util.UUID;
 import mage.abilities.effects.common.DamageAllEffect;
 import mage.abilities.keyword.AwakenAbility;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.constants.TargetController;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.filter.predicate.permanent.ControllerPredicate;
@@ -49,9 +49,8 @@ public class BoilingEarth extends CardImpl {
         filter.add(new ControllerPredicate(TargetController.OPPONENT));
     }
 
-    public BoilingEarth(UUID ownerId) {
-        super(ownerId, 142, "Boiling Earth", Rarity.COMMON, new CardType[]{CardType.SORCERY}, "{1}{R}");
-        this.expansionSetCode = "BFZ";
+    public BoilingEarth(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{1}{R}");
 
         // Boiling Earth deals 1 damage to each creature your opponents control.
         this.getSpellAbility().addEffect(new DamageAllEffect(1, filter));

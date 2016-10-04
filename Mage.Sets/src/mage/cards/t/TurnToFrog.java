@@ -25,15 +25,15 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.magic2012;
+package mage.cards.t;
 
 import java.util.UUID;
 import mage.abilities.effects.Effect;
 import mage.constants.CardType;
 import mage.constants.Duration;
-import mage.constants.Rarity;
 import mage.abilities.effects.common.continuous.BecomesCreatureTargetEffect;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.game.permanent.token.FrogToken;
 import mage.target.common.TargetCreaturePermanent;
 
@@ -43,9 +43,8 @@ import mage.target.common.TargetCreaturePermanent;
  */
 public class TurnToFrog extends CardImpl {
 
-    public TurnToFrog(UUID ownerId) {
-        super(ownerId, 78, "Turn to Frog", Rarity.UNCOMMON, new CardType[]{CardType.INSTANT}, "{1}{U}");
-        this.expansionSetCode = "M12";
+    public TurnToFrog(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.INSTANT},"{1}{U}");
 
         // Until end of turn, target creature loses all abilities and becomes a blue Frog with base power and toughness 1/1.
         Effect effect = new BecomesCreatureTargetEffect(new FrogToken(), true, false, Duration.EndOfTurn);

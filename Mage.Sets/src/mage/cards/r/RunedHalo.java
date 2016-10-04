@@ -25,12 +25,11 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.shadowmoor;
+package mage.cards.r;
 
 import java.util.UUID;
 
 import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.abilities.Ability;
 import mage.abilities.common.AsEntersBattlefieldAbility;
 import mage.abilities.effects.ContinuousEffect;
@@ -39,6 +38,7 @@ import mage.abilities.effects.common.NameACardEffect;
 import mage.abilities.effects.common.continuous.GainAbilityControllerEffect;
 import mage.abilities.keyword.ProtectionAbility;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.Duration;
 import mage.constants.Outcome;
 import mage.filter.FilterObject;
@@ -59,9 +59,8 @@ import mage.players.Player;
  */
 public class RunedHalo extends CardImpl {
 
-    public RunedHalo(UUID ownerId) {
-        super(ownerId, 21, "Runed Halo", Rarity.RARE, new CardType[]{CardType.ENCHANTMENT}, "{W}{W}");
-        this.expansionSetCode = "SHM";
+    public RunedHalo(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.ENCHANTMENT},"{W}{W}");
 
 
         // As Runed Halo enters the battlefield, name a card.

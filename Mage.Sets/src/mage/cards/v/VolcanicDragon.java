@@ -26,25 +26,24 @@
  *  or implied, of BetaSteward_at_googlemail.com.
  */
 
-package mage.sets.magic2012;
+package mage.cards.v;
 
 import java.util.UUID;
 
 import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.MageInt;
 import mage.abilities.keyword.FlyingAbility;
 import mage.abilities.keyword.HasteAbility;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 
 /**
  * @author Loki
  */
 public class VolcanicDragon extends CardImpl {
 
-    public VolcanicDragon(UUID ownerId) {
-        super(ownerId, 158, "Volcanic Dragon", Rarity.UNCOMMON, new CardType[]{CardType.CREATURE}, "{4}{R}{R}");
-        this.expansionSetCode = "M12";
+    public VolcanicDragon(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{4}{R}{R}");
         this.subtype.add("Dragon");
 
         this.power = new MageInt(4);

@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.ravnica;
+package mage.cards.i;
 
 import java.util.UUID;
 import mage.abilities.Ability;
@@ -34,10 +34,10 @@ import mage.abilities.decorator.ConditionalOneShotEffect;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.CounterTargetEffect;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.ColoredManaSymbol;
 import mage.constants.Outcome;
-import mage.constants.Rarity;
 import mage.constants.Zone;
 import mage.game.Game;
 import mage.game.stack.StackObject;
@@ -50,9 +50,8 @@ import mage.target.TargetSpell;
  */
 public class InduceParanoia extends CardImpl {
 
-    public InduceParanoia(UUID ownerId) {
-        super(ownerId, 56, "Induce Paranoia", Rarity.COMMON, new CardType[]{CardType.INSTANT}, "{2}{U}{U}");
-        this.expansionSetCode = "RAV";
+    public InduceParanoia(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.INSTANT},"{2}{U}{U}");
         
         // Counter target spell. If {B} was spent to cast Induce Paranoia, that spell's controller puts the top X cards of his or her library into his or her graveyard, where X is the spell's converted mana cost.
         this.getSpellAbility().addEffect(new ConditionalOneShotEffect(

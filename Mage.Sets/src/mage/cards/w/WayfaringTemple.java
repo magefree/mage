@@ -26,12 +26,11 @@
 * or implied, of BetaSteward_at_googlemail.com.
 */
 
-package mage.sets.returntoravnica;
+package mage.cards.w;
 
 import java.util.UUID;
 import mage.constants.CardType;
 import mage.constants.Duration;
-import mage.constants.Rarity;
 import mage.constants.Zone;
 import mage.MageInt;
 import mage.abilities.common.DealsCombatDamageToAPlayerTriggeredAbility;
@@ -40,6 +39,7 @@ import mage.abilities.dynamicvalue.common.PermanentsOnBattlefieldCount;
 import mage.abilities.effects.common.PopulateEffect;
 import mage.abilities.effects.common.continuous.SetPowerToughnessSourceEffect;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.filter.common.FilterControlledCreaturePermanent;
 
 /**
@@ -48,9 +48,8 @@ import mage.filter.common.FilterControlledCreaturePermanent;
  */
 public class WayfaringTemple extends CardImpl {
 
-    public WayfaringTemple(UUID ownerId) {
-        super(ownerId, 209, "Wayfaring Temple", Rarity.RARE, new CardType[]{CardType.CREATURE}, "{1}{G}{W}");
-        this.expansionSetCode = "RTR";
+    public WayfaringTemple(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{1}{G}{W}");
         this.subtype.add("Elemental");
 
         this.power = new MageInt(0);

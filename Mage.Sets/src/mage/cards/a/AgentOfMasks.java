@@ -25,17 +25,17 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.guildpact;
+package mage.cards.a;
 
 import java.util.UUID;
 
 import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.BeginningOfUpkeepTriggeredAbility;
 import mage.abilities.effects.OneShotEffect;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.Outcome;
 import mage.constants.TargetController;
 import mage.game.Game;
@@ -46,9 +46,8 @@ import mage.game.Game;
  */
 public class AgentOfMasks extends CardImpl {
 
-    public AgentOfMasks(UUID ownerId) {
-        super(ownerId, 100, "Agent of Masks", Rarity.UNCOMMON, new CardType[]{CardType.CREATURE}, "{3}{W}{B}");
-        this.expansionSetCode = "GPT";
+    public AgentOfMasks(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{3}{W}{B}");
         this.subtype.add("Human");
         this.subtype.add("Advisor");
 

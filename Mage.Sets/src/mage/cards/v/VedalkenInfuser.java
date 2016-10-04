@@ -26,17 +26,17 @@
  *  or implied, of BetaSteward_at_googlemail.com.
  */
 
-package mage.sets.mirrodinbesieged;
+package mage.cards.v;
 
 import java.util.UUID;
 
 import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.BeginningOfUpkeepTriggeredAbility;
 import mage.abilities.effects.common.counter.AddCountersTargetEffect;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.TargetController;
 import mage.counters.CounterType;
 import mage.target.common.TargetArtifactPermanent;
@@ -47,9 +47,8 @@ import mage.target.common.TargetArtifactPermanent;
  */
 public class VedalkenInfuser extends CardImpl {
 
-    public VedalkenInfuser (UUID ownerId) {
-        super(ownerId, 37, "Vedalken Infuser", Rarity.UNCOMMON, new CardType[]{CardType.CREATURE}, "{3}{U}");
-        this.expansionSetCode = "MBS";
+    public VedalkenInfuser (UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{3}{U}");
         this.subtype.add("Vedalken");
         this.subtype.add("Wizard");
 

@@ -25,14 +25,14 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.tenthedition;
+package mage.cards.m;
 
 import java.util.UUID;
 import mage.abilities.common.DiscardsACardOpponentTriggeredAbility;
 import mage.abilities.effects.common.DamageTargetEffect;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.constants.SetTargetPointer;
 
 /**
@@ -41,9 +41,8 @@ import mage.constants.SetTargetPointer;
  */
 public class Megrim extends CardImpl {
 
-    public Megrim(UUID ownerId) {
-        super(ownerId, 157, "Megrim", Rarity.UNCOMMON, new CardType[]{CardType.ENCHANTMENT}, "{2}{B}");
-        this.expansionSetCode = "10E";
+    public Megrim(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.ENCHANTMENT},"{2}{B}");
 
         // Whenever an opponent discards a card, Megrim deals 2 damage to that player.
         this.addAbility(new DiscardsACardOpponentTriggeredAbility(new DamageTargetEffect(2, true, "that player"), false, SetTargetPointer.PLAYER));

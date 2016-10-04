@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.starwars;
+package mage.cards.m;
 
 import java.util.UUID;
 import mage.abilities.Ability;
@@ -37,8 +37,8 @@ import mage.abilities.effects.common.counter.AddCountersSourceEffect;
 import mage.abilities.mana.ColorlessManaAbility;
 import mage.abilities.mana.SimpleManaAbility;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.constants.Zone;
 import mage.counters.CounterType;
 
@@ -48,9 +48,8 @@ import mage.counters.CounterType;
  */
 public class MoistureFarm extends CardImpl {
 
-    public MoistureFarm(UUID ownerId) {
-        super(ownerId, 247, "Moisture Farm", Rarity.RARE, new CardType[]{CardType.LAND}, "");
-        this.expansionSetCode = "SWS";
+    public MoistureFarm(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.LAND},"");
 
         // {T}: Add {C} to your mana pool.
         this.addAbility(new ColorlessManaAbility());

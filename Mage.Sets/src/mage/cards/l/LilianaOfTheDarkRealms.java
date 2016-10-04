@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.magic2013;
+package mage.cards.l;
 
 import java.util.UUID;
 import mage.Mana;
@@ -40,11 +40,11 @@ import mage.abilities.effects.common.continuous.GainAbilityControlledEffect;
 import mage.abilities.effects.common.search.SearchLibraryPutInHandEffect;
 import mage.abilities.mana.SimpleManaAbility;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Duration;
 import mage.constants.Layer;
 import mage.constants.Outcome;
-import mage.constants.Rarity;
 import mage.constants.SubLayer;
 import mage.constants.TargetController;
 import mage.constants.Zone;
@@ -71,9 +71,8 @@ public class LilianaOfTheDarkRealms extends CardImpl {
         filter.add(new SubtypePredicate("Swamp"));
     }
 
-    public LilianaOfTheDarkRealms(UUID ownerId) {
-        super(ownerId, 97, "Liliana of the Dark Realms", Rarity.MYTHIC, new CardType[]{CardType.PLANESWALKER}, "{2}{B}{B}");
-        this.expansionSetCode = "M13";
+    public LilianaOfTheDarkRealms(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.PLANESWALKER},"{2}{B}{B}");
         this.subtype.add("Liliana");
 
         this.addAbility(new PlanswalkerEntersWithLoyalityCountersAbility(3));

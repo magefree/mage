@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.khansoftarkir;
+package mage.cards.k;
 
 import java.util.UUID;
 import mage.MageInt;
@@ -45,12 +45,12 @@ import mage.abilities.keyword.HasteAbility;
 import mage.abilities.keyword.TrampleAbility;
 import mage.cards.Card;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.cards.Cards;
 import mage.cards.CardsImpl;
 import mage.constants.CardType;
 import mage.constants.Duration;
 import mage.constants.Outcome;
-import mage.constants.Rarity;
 import mage.constants.TargetController;
 import mage.constants.Zone;
 import mage.filter.common.FilterCreatureCard;
@@ -67,9 +67,8 @@ import mage.target.targetpointer.FixedTarget;
  */
 public class KheruLichLord extends CardImpl {
 
-    public KheruLichLord(UUID ownerId) {
-        super(ownerId, 182, "Kheru Lich Lord", Rarity.RARE, new CardType[]{CardType.CREATURE}, "{3}{B}{G}{U}");
-        this.expansionSetCode = "KTK";
+    public KheruLichLord(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{3}{B}{G}{U}");
         this.subtype.add("Zombie");
         this.subtype.add("Wizard");
 

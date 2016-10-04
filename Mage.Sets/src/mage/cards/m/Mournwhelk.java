@@ -25,17 +25,17 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.lorwyn;
+package mage.cards.m;
 
 import java.util.UUID;
 import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.EntersBattlefieldTriggeredAbility;
 import mage.abilities.effects.common.discard.DiscardTargetEffect;
 import mage.abilities.keyword.EvokeAbility;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.target.TargetPlayer;
 
 /**
@@ -44,9 +44,8 @@ import mage.target.TargetPlayer;
  */
 public class Mournwhelk extends CardImpl {
 
-    public Mournwhelk(UUID ownerId) {
-        super(ownerId, 127, "Mournwhelk", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{6}{B}");
-        this.expansionSetCode = "LRW";
+    public Mournwhelk(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{6}{B}");
         this.subtype.add("Elemental");
 
         this.power = new MageInt(3);

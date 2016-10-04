@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.prophecy;
+package mage.cards.a;
 
 import java.util.UUID;
 import mage.MageInt;
@@ -38,9 +38,9 @@ import mage.abilities.costs.mana.ManaCostsImpl;
 import mage.abilities.effects.common.continuous.BoostSourceEffect;
 import mage.abilities.keyword.FlyingAbility;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Duration;
-import mage.constants.Rarity;
 import mage.constants.Zone;
 import mage.filter.FilterPermanent;
 import mage.filter.common.FilterLandPermanent;
@@ -53,9 +53,8 @@ import mage.util.CardUtil;
  */
 public class AvatarOfFury extends CardImpl {
 
-    public AvatarOfFury(UUID ownerId) {
-        super(ownerId, 82, "Avatar of Fury", Rarity.RARE, new CardType[]{CardType.CREATURE}, "{6}{R}{R}");
-        this.expansionSetCode = "PCY";
+    public AvatarOfFury(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{6}{R}{R}");
         this.subtype.add("Avatar");
 
         this.power = new MageInt(6);

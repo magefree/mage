@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.kaladesh;
+package mage.cards.h;
 
 import java.util.UUID;
 import mage.abilities.effects.Effect;
@@ -34,9 +34,9 @@ import mage.abilities.effects.common.continuous.GainAbilityTargetEffect;
 import mage.abilities.effects.common.continuous.GainControlTargetEffect;
 import mage.abilities.keyword.HasteAbility;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Duration;
-import mage.constants.Rarity;
 import mage.filter.StaticFilters;
 import mage.target.TargetPermanent;
 
@@ -46,9 +46,8 @@ import mage.target.TargetPermanent;
  */
 public class Hijack extends CardImpl {
 
-    public Hijack(UUID ownerId) {
-        super(ownerId, 118, "Hijack", Rarity.COMMON, new CardType[]{CardType.SORCERY}, "{1}{R}{R}");
-        this.expansionSetCode = "KLD";
+    public Hijack(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{1}{R}{R}");
 
         // Gain control of target artifact or creature until end of turn. Untap it. It gains haste until end of turn.
         this.getSpellAbility().addTarget(new TargetPermanent(StaticFilters.FILTER_PERMANENT_ARTIFACT_OR_CREATURE));

@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.fifthedition;
+package mage.cards.c;
 
 import java.util.UUID;
 import mage.MageInt;
@@ -42,10 +42,10 @@ import mage.abilities.effects.common.GainLifeEffect;
 import mage.abilities.effects.common.continuous.GainAbilityAttachedEffect;
 import mage.abilities.keyword.EnchantAbility;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.AttachmentType;
 import mage.constants.CardType;
 import mage.constants.Outcome;
-import mage.constants.Rarity;
 import mage.constants.Zone;
 import mage.filter.common.FilterControlledCreaturePermanent;
 import mage.filter.common.FilterControlledLandPermanent;
@@ -69,9 +69,8 @@ public class CaribouRange extends CardImpl {
         filter.add(new SubtypePredicate("Caribou"));
     }
 
-    public CaribouRange(UUID ownerId) {
-        super(ownerId, 290, "Caribou Range", Rarity.RARE, new CardType[]{CardType.ENCHANTMENT}, "{2}{W}{W}");
-        this.expansionSetCode = "5ED";
+    public CaribouRange(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.ENCHANTMENT},"{2}{W}{W}");
         this.subtype.add("Aura");
 
         // Enchant land you control

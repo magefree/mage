@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.riseoftheeldrazi;
+package mage.cards.t;
 
 import mage.constants.*;
 import mage.MageInt;
@@ -34,6 +34,7 @@ import mage.abilities.Ability;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.effects.ReplacementEffectImpl;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.game.Game;
 import mage.game.events.GameEvent;
 import mage.game.permanent.PermanentCard;
@@ -47,9 +48,8 @@ import mage.game.permanent.Permanent;
  */
 public class TajuruPreserver extends CardImpl {
 
-    public TajuruPreserver(UUID ownerId) {
-        super(ownerId, 211, "Tajuru Preserver", Rarity.RARE, new CardType[]{CardType.CREATURE}, "{1}{G}");
-        this.expansionSetCode = "ROE";
+    public TajuruPreserver(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{1}{G}");
         this.subtype.add("Elf");
         this.subtype.add("Shaman");
 

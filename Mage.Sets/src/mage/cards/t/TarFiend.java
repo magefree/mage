@@ -25,11 +25,10 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.shardsofalara;
+package mage.cards.t;
 
 import java.util.UUID;
 import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.EntersBattlefieldTriggeredAbility;
@@ -38,6 +37,7 @@ import mage.abilities.effects.common.DevourEffect.DevourFactor;
 import mage.abilities.effects.common.discard.DiscardTargetEffect;
 import mage.abilities.keyword.DevourAbility;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.target.TargetPlayer;
 
 /**
@@ -46,9 +46,8 @@ import mage.target.TargetPlayer;
  */
 public class TarFiend extends CardImpl {
 
-    public TarFiend(UUID ownerId) {
-        super(ownerId, 89, "Tar Fiend", Rarity.RARE, new CardType[]{CardType.CREATURE}, "{5}{B}");
-        this.expansionSetCode = "ALA";
+    public TarFiend(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{5}{B}");
         this.subtype.add("Elemental");
 
         this.power = new MageInt(4);

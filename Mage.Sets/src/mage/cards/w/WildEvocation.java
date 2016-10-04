@@ -26,19 +26,19 @@
  *  or implied, of BetaSteward_at_googlemail.com.
  */
 
-package mage.sets.magic2011;
+package mage.cards.w;
 
 import java.util.UUID;
 
 import mage.constants.CardType;
 import mage.constants.Outcome;
-import mage.constants.Rarity;
 import mage.constants.Zone;
 import mage.abilities.Ability;
 import mage.abilities.common.BeginningOfUpkeepTriggeredAbility;
 import mage.abilities.effects.OneShotEffect;
 import mage.cards.Card;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.cards.Cards;
 import mage.cards.CardsImpl;
 import mage.constants.TargetController;
@@ -51,9 +51,8 @@ import mage.players.Player;
  */
 public class WildEvocation extends CardImpl {
 
-    public WildEvocation(UUID ownerId) {
-        super(ownerId, 160, "Wild Evocation", Rarity.RARE, new CardType[]{CardType.ENCHANTMENT}, "{5}{R}");
-        this.expansionSetCode = "M11";
+    public WildEvocation(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.ENCHANTMENT},"{5}{R}");
 
 
                 //At the beginning of each player's upkeep, that player reveals a card at random from his or her hand. If it's a land card, the player puts it onto the battlefield. Otherwise, the player casts it without paying its mana cost if able.

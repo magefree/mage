@@ -25,13 +25,13 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.portal;
+package mage.cards.m;
 
 import java.util.UUID;
 import mage.abilities.effects.common.discard.DiscardTargetEffect;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.target.common.TargetOpponent;
 
 /**
@@ -40,9 +40,8 @@ import mage.target.common.TargetOpponent;
  */
 public class MindKnives extends CardImpl {
 
-    public MindKnives(UUID ownerId) {
-        super(ownerId, 23, "Mind Knives", Rarity.COMMON, new CardType[]{CardType.SORCERY}, "{1}{B}");
-        this.expansionSetCode = "POR";
+    public MindKnives(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{1}{B}");
 
         // Target opponent discards a card at random.
         this.getSpellAbility().addEffect(new DiscardTargetEffect(1, true));

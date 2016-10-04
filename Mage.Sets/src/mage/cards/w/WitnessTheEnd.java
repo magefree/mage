@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.oathofthegatewatch;
+package mage.cards.w;
 
 import java.util.UUID;
 import mage.abilities.effects.Effect;
@@ -33,8 +33,8 @@ import mage.abilities.effects.common.ExileFromZoneTargetEffect;
 import mage.abilities.effects.common.LoseLifeTargetEffect;
 import mage.abilities.keyword.DevoidAbility;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.constants.Zone;
 import mage.filter.FilterCard;
 import mage.target.common.TargetOpponent;
@@ -45,9 +45,8 @@ import mage.target.common.TargetOpponent;
  */
 public class WitnessTheEnd extends CardImpl {
 
-    public WitnessTheEnd(UUID ownerId) {
-        super(ownerId, 82, "Witness the End", Rarity.COMMON, new CardType[]{CardType.SORCERY}, "{3}{B}");
-        this.expansionSetCode = "OGW";
+    public WitnessTheEnd(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{3}{B}");
 
         // Devoid
         this.addAbility(new DevoidAbility(this.color));

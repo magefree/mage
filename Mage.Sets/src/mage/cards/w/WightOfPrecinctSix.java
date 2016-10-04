@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.gatecrash;
+package mage.cards.w;
 
 import mage.MageInt;
 import mage.abilities.Ability;
@@ -34,9 +34,9 @@ import mage.abilities.dynamicvalue.DynamicValue;
 import mage.abilities.effects.Effect;
 import mage.abilities.effects.common.continuous.BoostSourceEffect;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Duration;
-import mage.constants.Rarity;
 import mage.constants.Zone;
 import mage.filter.FilterCard;
 import mage.filter.common.FilterCreatureCard;
@@ -53,9 +53,8 @@ public class WightOfPrecinctSix extends CardImpl {
 
     private static final FilterCard filter = new FilterCreatureCard("creature card in your opponents' graveyards");
 
-    public WightOfPrecinctSix(UUID ownerId) {
-        super(ownerId, 84, "Wight of Precinct Six", Rarity.UNCOMMON, new CardType[]{CardType.CREATURE}, "{1}{B}");
-        this.expansionSetCode = "GTC";
+    public WightOfPrecinctSix(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{1}{B}");
         this.subtype.add("Zombie");
 
         this.power = new MageInt(1);

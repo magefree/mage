@@ -25,12 +25,11 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.shadowmoor;
+package mage.cards.s;
 
 import java.util.UUID;
 import mage.constants.CardType;
 import mage.constants.Duration;
-import mage.constants.Rarity;
 import mage.constants.Zone;
 import mage.MageInt;
 import mage.ObjectColor;
@@ -39,6 +38,7 @@ import mage.abilities.costs.common.TapSourceCost;
 import mage.abilities.effects.common.continuous.GainAbilityTargetEffect;
 import mage.abilities.keyword.HasteAbility;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.filter.predicate.Predicates;
 import mage.filter.predicate.mageobject.ColorPredicate;
@@ -58,9 +58,8 @@ public class SootstokeKindler extends CardImpl {
                 new ColorPredicate(ObjectColor.RED)));
     }
 
-    public SootstokeKindler(UUID ownerId) {
-        super(ownerId, 195, "Sootstoke Kindler", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{1}{B/R}");
-        this.expansionSetCode = "SHM";
+    public SootstokeKindler(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{1}{B/R}");
         this.subtype.add("Elemental");
         this.subtype.add("Shaman");
 

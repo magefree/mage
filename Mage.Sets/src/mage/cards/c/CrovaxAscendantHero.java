@@ -25,12 +25,11 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.planarchaos;
+package mage.cards.c;
 
 import java.util.UUID;
 
 import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.MageInt;
 import mage.ObjectColor;
 import mage.abilities.common.SimpleActivatedAbility;
@@ -39,6 +38,7 @@ import mage.abilities.costs.common.PayLifeCost;
 import mage.abilities.effects.common.ReturnToHandSourceEffect;
 import mage.abilities.effects.common.continuous.BoostAllEffect;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.Duration;
 import mage.constants.Zone;
 import mage.filter.common.FilterCreaturePermanent;
@@ -58,9 +58,8 @@ public class CrovaxAscendantHero extends CardImpl {
         filter2.add(Predicates.not(new ColorPredicate(ObjectColor.WHITE)));
     }
 
-    public CrovaxAscendantHero(UUID ownerId) {
-        super(ownerId, 3, "Crovax, Ascendant Hero", Rarity.RARE, new CardType[]{CardType.CREATURE}, "{4}{W}{W}");
-        this.expansionSetCode = "PLC";
+    public CrovaxAscendantHero(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{4}{W}{W}");
         this.supertype.add("Legendary");
         this.subtype.add("Human");
 

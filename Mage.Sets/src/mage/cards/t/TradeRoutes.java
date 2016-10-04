@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.ninthedition;
+package mage.cards.t;
 
 import java.util.UUID;
 
@@ -37,8 +37,8 @@ import mage.abilities.effects.Effect;
 import mage.abilities.effects.common.DrawCardSourceControllerEffect;
 import mage.abilities.effects.common.ReturnToHandTargetEffect;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.constants.TargetController;
 import mage.constants.Zone;
 import mage.filter.common.FilterLandCard;
@@ -60,9 +60,8 @@ public class TradeRoutes extends CardImpl {
         landYouControl.add(new ControllerPredicate(TargetController.YOU));
     }
 
-    public TradeRoutes(UUID ownerId) {
-        super(ownerId, 108, "Trade Routes", Rarity.RARE, new CardType[]{CardType.ENCHANTMENT}, "{1}{U}");
-        this.expansionSetCode = "9ED";
+    public TradeRoutes(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.ENCHANTMENT},"{1}{U}");
 
 
         // {1}: Return target land you control to its owner's hand.

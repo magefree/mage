@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.judgment;
+package mage.cards.s;
 
 import java.util.UUID;
 
@@ -35,8 +35,8 @@ import mage.abilities.effects.Effect;
 import mage.abilities.effects.common.DamageAllEffect;
 import mage.abilities.keyword.FlyingAbility;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.filter.predicate.Predicates;
 import mage.filter.predicate.mageobject.AbilityPredicate;
@@ -53,9 +53,8 @@ public class SwirlingSandstorm extends CardImpl {
         filter.add(Predicates.not(new AbilityPredicate(FlyingAbility.class)));
     }
 
-    public SwirlingSandstorm(UUID ownerId) {
-        super(ownerId, 102, "Swirling Sandstorm", Rarity.COMMON, new CardType[]{CardType.SORCERY}, "{3}{R}");
-        this.expansionSetCode = "JUD";
+    public SwirlingSandstorm(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{3}{R}");
 
         // Threshold - Swirling Sandstorm deals 5 damage to each creature without flying if seven or more cards are in your graveyard.
         Effect effect = new ConditionalOneShotEffect(

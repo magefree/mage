@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.homelands;
+package mage.cards.s;
 
 import java.util.UUID;
 import mage.abilities.Ability;
@@ -41,8 +41,8 @@ import mage.abilities.effects.common.SacrificeSourceEffect;
 import mage.abilities.effects.common.counter.AddCountersSourceEffect;
 import mage.abilities.effects.common.counter.AddCountersTargetEffect;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.constants.TargetController;
 import mage.constants.Zone;
 import mage.counters.CounterType;
@@ -54,9 +54,8 @@ import mage.target.common.TargetCreaturePermanent;
  */
 public class SerratedArrows extends CardImpl {
 
-    public SerratedArrows(UUID ownerId) {
-        super(ownerId, 135, "Serrated Arrows", Rarity.COMMON, new CardType[]{CardType.ARTIFACT}, "{4}");
-        this.expansionSetCode = "HML";
+    public SerratedArrows(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.ARTIFACT},"{4}");
 
         // Serrated Arrows enters the battlefield with three arrowhead counters on it.
         Effect effect = new AddCountersSourceEffect(CounterType.ARROWHEAD.createInstance(3));

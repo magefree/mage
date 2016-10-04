@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.saviorsofkamigawa;
+package mage.cards.t;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -33,9 +33,9 @@ import java.util.UUID;
 import mage.abilities.Ability;
 import mage.abilities.effects.OneShotEffect;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Outcome;
-import mage.constants.Rarity;
 import mage.filter.common.FilterLandPermanent;
 import mage.filter.predicate.permanent.ControllerIdPredicate;
 import mage.game.Game;
@@ -50,9 +50,8 @@ import mage.target.common.TargetLandPermanent;
  */
 public class ThoughtsOfRuin extends CardImpl {
 
-    public ThoughtsOfRuin(UUID ownerId) {
-        super(ownerId, 118, "Thoughts of Ruin", Rarity.RARE, new CardType[]{CardType.SORCERY}, "{2}{R}{R}");
-        this.expansionSetCode = "SOK";
+    public ThoughtsOfRuin(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{2}{R}{R}");
 
 
         // Each player sacrifices a land for each card in your hand.

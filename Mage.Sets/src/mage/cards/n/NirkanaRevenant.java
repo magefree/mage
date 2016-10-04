@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.riseoftheeldrazi;
+package mage.cards.n;
 
 import java.util.UUID;
 import mage.MageInt;
@@ -36,9 +36,9 @@ import mage.abilities.effects.common.BasicManaEffect;
 import mage.abilities.effects.common.continuous.BoostSourceEffect;
 import mage.abilities.mana.TriggeredManaAbility;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Duration;
-import mage.constants.Rarity;
 import mage.constants.Zone;
 import mage.filter.common.FilterControlledLandPermanent;
 import mage.filter.predicate.mageobject.SubtypePredicate;
@@ -53,9 +53,8 @@ import mage.game.permanent.Permanent;
  */
 public class NirkanaRevenant extends CardImpl {
 
-    public NirkanaRevenant(UUID ownerId) {
-        super(ownerId, 120, "Nirkana Revenant", Rarity.MYTHIC, new CardType[]{CardType.CREATURE}, "{4}{B}{B}");
-        this.expansionSetCode = "ROE";
+    public NirkanaRevenant(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{4}{B}{B}");
         this.subtype.add("Vampire");
         this.subtype.add("Shade");
 

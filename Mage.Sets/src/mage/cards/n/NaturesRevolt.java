@@ -25,16 +25,16 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.seventhedition;
+package mage.cards.n;
 
 import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.effects.common.continuous.BecomesCreatureAllEffect;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Duration;
-import mage.constants.Rarity;
 import mage.constants.Zone;
 import mage.filter.common.FilterLandPermanent;
 import mage.game.permanent.token.Token;
@@ -46,9 +46,8 @@ import mage.game.permanent.token.Token;
  */
 public class NaturesRevolt extends CardImpl {
 
-    public NaturesRevolt(UUID ownerId) {
-        super(ownerId, 260, "Nature's Revolt", Rarity.RARE, new CardType[]{CardType.ENCHANTMENT}, "{3}{G}{G}");
-        this.expansionSetCode = "7ED";
+    public NaturesRevolt(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.ENCHANTMENT},"{3}{G}{G}");
 
         // All lands are 2/2 creatures that are still lands.
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new BecomesCreatureAllEffect(new NaturesRevoltToken(),

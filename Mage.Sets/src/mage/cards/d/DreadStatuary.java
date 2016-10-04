@@ -26,12 +26,11 @@
  *  or implied, of BetaSteward_at_googlemail.com.
  */
 
-package mage.sets.worldwake;
+package mage.cards.d;
 
 import java.util.UUID;
 import mage.constants.CardType;
 import mage.constants.Duration;
-import mage.constants.Rarity;
 import mage.constants.Zone;
 import mage.MageInt;
 import mage.abilities.common.SimpleActivatedAbility;
@@ -39,6 +38,7 @@ import mage.abilities.costs.mana.ManaCostsImpl;
 import mage.abilities.effects.common.continuous.BecomesCreatureSourceEffect;
 import mage.abilities.mana.ColorlessManaAbility;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.game.permanent.token.Token;
 
 /**
@@ -47,9 +47,8 @@ import mage.game.permanent.token.Token;
  */
 public class DreadStatuary extends CardImpl {
 
-    public DreadStatuary(UUID ownerId) {
-        super(ownerId, 135, "Dread Statuary", Rarity.UNCOMMON, new CardType[]{CardType.LAND}, null);
-        this.expansionSetCode = "WWK";
+    public DreadStatuary(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.LAND},null);
         this.addAbility(new ColorlessManaAbility());
         this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new BecomesCreatureSourceEffect(new DreadStatuaryToken(), "land", Duration.EndOfTurn), new ManaCostsImpl("{4}")));
     }

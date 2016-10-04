@@ -25,16 +25,16 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.avacynrestored;
+package mage.cards.g;
 
 import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.MageInt;
 import mage.abilities.common.EntersBattlefieldTriggeredAbility;
 import mage.abilities.dynamicvalue.common.PermanentsOnBattlefieldCount;
 import mage.abilities.effects.common.GainLifeEffect;
 import mage.abilities.keyword.FlyingAbility;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.filter.common.FilterControlledCreaturePermanent;
 import mage.filter.predicate.permanent.AnotherPredicate;
 
@@ -53,9 +53,8 @@ public class GoldnightRedeemer extends CardImpl {
         filter.add(new AnotherPredicate());
     }
 
-    public GoldnightRedeemer(UUID ownerId) {
-        super(ownerId, 23, "Goldnight Redeemer", Rarity.UNCOMMON, new CardType[]{CardType.CREATURE}, "{4}{W}{W}");
-        this.expansionSetCode = "AVR";
+    public GoldnightRedeemer(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{4}{W}{W}");
         this.subtype.add("Angel");
 
         this.power = new MageInt(4);

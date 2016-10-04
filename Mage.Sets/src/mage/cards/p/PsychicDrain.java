@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.ravnica;
+package mage.cards.p;
 
 import java.util.UUID;
 import mage.abilities.dynamicvalue.common.ManacostVariableValue;
@@ -33,8 +33,8 @@ import mage.abilities.effects.Effect;
 import mage.abilities.effects.common.GainLifeEffect;
 import mage.abilities.effects.common.PutLibraryIntoGraveTargetEffect;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.target.TargetPlayer;
 
 /**
@@ -43,9 +43,8 @@ import mage.target.TargetPlayer;
  */
 public class PsychicDrain extends CardImpl {
 
-    public PsychicDrain(UUID ownerId) {
-        super(ownerId, 220, "Psychic Drain", Rarity.UNCOMMON, new CardType[]{CardType.SORCERY}, "{X}{U}{B}");
-        this.expansionSetCode = "RAV";
+    public PsychicDrain(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{X}{U}{B}");
 
         // Target player puts the top X cards of his or her library into his or her graveyard and you gain X life.
         this.getSpellAbility().addEffect(new PutLibraryIntoGraveTargetEffect(new ManacostVariableValue()));

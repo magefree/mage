@@ -25,16 +25,16 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.alarareborn;
+package mage.cards.m;
 
 import java.util.UUID;
 import mage.abilities.Ability;
 import mage.abilities.common.BeginningOfUpkeepTriggeredAbility;
 import mage.abilities.effects.OneShotEffect;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Outcome;
-import mage.constants.Rarity;
 import mage.constants.TargetController;
 import mage.constants.Zone;
 import mage.counters.CounterType;
@@ -51,9 +51,8 @@ import mage.players.Player;
  */
 public class MayaelsAria extends CardImpl {
 
-    public MayaelsAria(UUID ownerId) {
-        super(ownerId, 121, "Mayael's Aria", Rarity.RARE, new CardType[]{CardType.ENCHANTMENT}, "{R}{G}{W}");
-        this.expansionSetCode = "ARB";
+    public MayaelsAria(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.ENCHANTMENT},"{R}{G}{W}");
 
         // At the beginning of your upkeep, put a +1/+1 counter on each creature you control if you control a creature with power 5 or greater.
         // Then you gain 10 life if you control a creature with power 10 or greater.

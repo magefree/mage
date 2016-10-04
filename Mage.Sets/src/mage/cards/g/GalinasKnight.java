@@ -25,15 +25,15 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.invasion;
+package mage.cards.g;
 
 import java.util.UUID;
 import mage.MageInt;
 import mage.ObjectColor;
 import mage.abilities.keyword.ProtectionAbility;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.filter.FilterCard;
 import mage.filter.predicate.mageobject.ColorPredicate;
 
@@ -49,9 +49,8 @@ public class GalinasKnight extends CardImpl {
       protectionFilter.add(new ColorPredicate(ObjectColor.RED));
     }
     
-    public GalinasKnight(UUID ownerId) {
-        super(ownerId, 248, "Galina's Knight", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{W}{U}");
-        this.expansionSetCode = "INV";
+    public GalinasKnight(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{W}{U}");
         this.subtype.add("Merfolk");
         this.subtype.add("Knight");
         this.power = new MageInt(2);

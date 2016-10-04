@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.onslaught;
+package mage.cards.f;
 
 import java.util.UUID;
 import mage.abilities.DelayedTriggeredAbility;
@@ -33,9 +33,9 @@ import mage.abilities.effects.Effect;
 import mage.abilities.effects.common.CreateDelayedTriggeredAbilityEffect;
 import mage.abilities.effects.common.LoseLifeTargetEffect;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Duration;
-import mage.constants.Rarity;
 import mage.game.Game;
 import mage.game.events.GameEvent;
 import mage.game.events.GameEvent.EventType;
@@ -47,9 +47,8 @@ import mage.target.targetpointer.FixedTarget;
  */
 public class FalseCure extends CardImpl {
 
-    public FalseCure(UUID ownerId) {
-        super(ownerId, 146, "False Cure", Rarity.RARE, new CardType[]{CardType.INSTANT}, "{B}{B}");
-        this.expansionSetCode = "ONS";
+    public FalseCure(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.INSTANT},"{B}{B}");
 
 
         // Until end of turn, whenever a player gains life, that player loses 2 life for each 1 life he or she gained.

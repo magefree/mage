@@ -25,15 +25,15 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.legions;
+package mage.cards.g;
 
 import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.common.LeavesBattlefieldTriggeredAbility;
 import mage.abilities.effects.common.SacrificeControllerEffect;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.filter.common.FilterLandPermanent;
 
 /**
@@ -42,9 +42,8 @@ import mage.filter.common.FilterLandPermanent;
  */
 public class GoblinFirebug extends CardImpl {
 
-    public GoblinFirebug(UUID ownerId) {
-        super(ownerId, 98, "Goblin Firebug", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{1}{R}");
-        this.expansionSetCode = "LGN";
+    public GoblinFirebug(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{1}{R}");
         this.subtype.add("Goblin");
         this.power = new MageInt(2);
         this.toughness = new MageInt(2);

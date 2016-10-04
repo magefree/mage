@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.mercadianmasques;
+package mage.cards.l;
 
 import java.util.UUID;
 import mage.MageInt;
@@ -33,8 +33,8 @@ import mage.abilities.TriggeredAbilityImpl;
 import mage.abilities.effects.common.SacrificeEffect;
 import mage.abilities.keyword.HasteAbility;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.constants.Zone;
 import mage.filter.common.FilterLandPermanent;
 import mage.game.Game;
@@ -49,9 +49,8 @@ import mage.target.targetpointer.FixedTarget;
  */
 public class LavaRunner extends CardImpl {
 
-    public LavaRunner(UUID ownerId) {
-        super(ownerId, 200, "Lava Runner", Rarity.RARE, new CardType[]{CardType.CREATURE}, "{1}{R}{R}");
-        this.expansionSetCode = "MMQ";
+    public LavaRunner(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{1}{R}{R}");
         this.subtype.add("Lizard");
         this.power = new MageInt(2);
         this.toughness = new MageInt(2);

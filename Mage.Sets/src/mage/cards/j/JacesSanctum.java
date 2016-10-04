@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.magicorigins;
+package mage.cards.j;
 
 import java.util.UUID;
 import mage.abilities.common.SimpleStaticAbility;
@@ -33,8 +33,8 @@ import mage.abilities.common.SpellCastControllerTriggeredAbility;
 import mage.abilities.effects.common.cost.SpellsCostReductionControllerEffect;
 import mage.abilities.effects.keyword.ScryEffect;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.constants.Zone;
 import mage.filter.FilterCard;
 import mage.filter.FilterSpell;
@@ -60,9 +60,8 @@ public class JacesSanctum extends CardImpl {
         filter2.add(Predicates.or(new CardTypePredicate(CardType.INSTANT), new CardTypePredicate(CardType.SORCERY)));
     }
 
-    public JacesSanctum(UUID ownerId) {
-        super(ownerId, 61, "Jace's Sanctum", Rarity.RARE, new CardType[]{CardType.ENCHANTMENT}, "{3}{U}");
-        this.expansionSetCode = "ORI";
+    public JacesSanctum(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.ENCHANTMENT},"{3}{U}");
 
         // Instant and sorcery spells you cast cost {1} less.
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new SpellsCostReductionControllerEffect(filter, 1)));

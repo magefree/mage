@@ -26,7 +26,7 @@
  *  or implied, of BetaSteward_at_googlemail.com.
  */
 
-package mage.sets.legends;
+package mage.cards.h;
 
 import java.util.UUID;
 
@@ -34,9 +34,9 @@ import mage.ObjectColor;
 import mage.abilities.effects.Effect;
 import mage.abilities.effects.common.continuous.BecomesColorTargetEffect;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Duration;
-import mage.constants.Rarity;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.target.common.TargetCreaturePermanent;
 
@@ -46,9 +46,8 @@ import mage.target.common.TargetCreaturePermanent;
  */
 public class HeavensGate extends CardImpl {
 
-    public HeavensGate(UUID ownerId) {
-        super(ownerId, 188, "Heaven's Gate", Rarity.UNCOMMON, new CardType[]{CardType.INSTANT}, "{W}");
-        this.expansionSetCode = "LEG";
+    public HeavensGate(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.INSTANT},"{W}");
 
         // Any number of target creatures become white until end of turn.
         Effect effect = new BecomesColorTargetEffect(ObjectColor.WHITE, Duration.EndOfTurn);

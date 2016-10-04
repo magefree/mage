@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.ravnica;
+package mage.cards.c;
 
 import java.util.HashSet;
 import java.util.Set;
@@ -34,9 +34,9 @@ import mage.abilities.Ability;
 import mage.abilities.common.EntersBattlefieldAllTriggeredAbility;
 import mage.abilities.effects.OneShotEffect;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Outcome;
-import mage.constants.Rarity;
 import mage.constants.SetTargetPointer;
 import mage.constants.TargetController;
 import mage.constants.Zone;
@@ -63,9 +63,8 @@ public class CloudstoneCurio extends CardImpl {
         filter.add(new ControllerPredicate(TargetController.YOU));
     }
 
-    public CloudstoneCurio(UUID ownerId) {
-        super(ownerId, 257, "Cloudstone Curio", Rarity.RARE, new CardType[]{CardType.ARTIFACT}, "{3}");
-        this.expansionSetCode = "RAV";
+    public CloudstoneCurio(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.ARTIFACT},"{3}");
 
         // Whenever a nonartifact permanent enters the battlefield under your control, you may return another permanent you control that shares a card type with it to its owner's hand.
         this.addAbility(new EntersBattlefieldAllTriggeredAbility(Zone.BATTLEFIELD, new CloudstoneCurioEffect(), filter, true, SetTargetPointer.PERMANENT, "", true));

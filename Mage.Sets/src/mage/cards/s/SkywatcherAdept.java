@@ -25,10 +25,9 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.riseoftheeldrazi;
+package mage.cards.s;
 
 import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.MageInt;
 import mage.abilities.Abilities;
 import mage.abilities.AbilitiesImpl;
@@ -37,6 +36,7 @@ import mage.abilities.costs.mana.ManaCostsImpl;
 import mage.abilities.keyword.FlyingAbility;
 import mage.abilities.keyword.LevelUpAbility;
 import mage.abilities.keyword.LevelerCardBuilder;
+import mage.cards.CardSetInfo;
 import mage.cards.LevelerCard;
 
 import java.util.UUID;
@@ -47,9 +47,8 @@ import java.util.UUID;
  */
 public class SkywatcherAdept extends LevelerCard {
 
-    public SkywatcherAdept(UUID ownerId) {
-        super(ownerId, 88, "Skywatcher Adept", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{U}");
-        this.expansionSetCode = "ROE";
+    public SkywatcherAdept(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{U}");
         this.subtype.add("Merfolk");
         this.subtype.add("Wizard");
 

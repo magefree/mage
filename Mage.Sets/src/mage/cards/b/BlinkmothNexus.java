@@ -26,13 +26,12 @@
  *  or implied, of BetaSteward_at_googlemail.com.
  */
 
-package mage.sets.darksteel;
+package mage.cards.b;
 
 import java.util.UUID;
 
 import mage.constants.CardType;
 import mage.constants.Duration;
-import mage.constants.Rarity;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleActivatedAbility;
@@ -43,6 +42,7 @@ import mage.abilities.effects.common.continuous.BoostTargetEffect;
 import mage.abilities.keyword.FlyingAbility;
 import mage.abilities.mana.ColorlessManaAbility;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.Zone;
 import mage.filter.FilterPermanent;
 import mage.filter.predicate.mageobject.SubtypePredicate;
@@ -60,9 +60,8 @@ public class BlinkmothNexus extends CardImpl {
         filter.add(new SubtypePredicate("Blinkmoth"));
     }
 
-    public BlinkmothNexus(UUID ownerId) {
-        super(ownerId, 163, "Blinkmoth Nexus", Rarity.RARE, new CardType[]{CardType.LAND}, null);
-        this.expansionSetCode = "DST";
+    public BlinkmothNexus(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.LAND},null);
         
         // {T}: Add {C}to your mana pool.
         this.addAbility(new ColorlessManaAbility());

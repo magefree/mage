@@ -25,13 +25,13 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.newphyrexia;
+package mage.cards.g;
 
 import java.util.UUID;
 import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.abilities.effects.common.DamageTargetEffect;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.target.common.TargetCreatureOrPlayer;
 
 /**
@@ -40,9 +40,8 @@ import mage.target.common.TargetCreatureOrPlayer;
  */
 public class GutShot extends CardImpl {
 
-    public GutShot(UUID ownerId) {
-        super(ownerId, 86, "Gut Shot", Rarity.UNCOMMON, new CardType[]{CardType.INSTANT}, "{RP}");
-        this.expansionSetCode = "NPH";
+    public GutShot(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.INSTANT},"{RP}");
 
         this.getSpellAbility().addEffect(new DamageTargetEffect(1));
         this.getSpellAbility().addTarget(new TargetCreatureOrPlayer());

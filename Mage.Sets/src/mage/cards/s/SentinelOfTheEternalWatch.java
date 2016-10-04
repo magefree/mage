@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.magicorigins;
+package mage.cards.s;
 
 import java.util.UUID;
 import mage.MageInt;
@@ -35,8 +35,8 @@ import mage.abilities.effects.Effect;
 import mage.abilities.effects.common.TapTargetEffect;
 import mage.abilities.keyword.VigilanceAbility;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.constants.TargetController;
 import mage.constants.Zone;
 import mage.filter.common.FilterCreaturePermanent;
@@ -55,9 +55,8 @@ public class SentinelOfTheEternalWatch extends CardImpl {
 
     private final UUID originalId;
 
-    public SentinelOfTheEternalWatch(UUID ownerId) {
-        super(ownerId, 30, "Sentinel of the Eternal Watch", Rarity.UNCOMMON, new CardType[]{CardType.CREATURE}, "{5}{W}");
-        this.expansionSetCode = "ORI";
+    public SentinelOfTheEternalWatch(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{5}{W}");
         this.subtype.add("Giant");
         this.subtype.add("Soldier");
         this.power = new MageInt(4);

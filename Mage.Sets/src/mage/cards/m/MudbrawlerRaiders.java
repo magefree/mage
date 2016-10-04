@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.shadowmoor;
+package mage.cards.m;
 
 import java.util.UUID;
 import mage.MageInt;
@@ -33,9 +33,9 @@ import mage.ObjectColor;
 import mage.abilities.common.SimpleEvasionAbility;
 import mage.abilities.effects.common.combat.CantBeBlockedByCreaturesSourceEffect;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Duration;
-import mage.constants.Rarity;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.filter.predicate.mageobject.ColorPredicate;
 
@@ -51,9 +51,8 @@ public class MudbrawlerRaiders extends CardImpl {
         filter.add(new ColorPredicate(ObjectColor.BLUE));
     }
 
-    public MudbrawlerRaiders(UUID ownerId) {
-        super(ownerId, 213, "Mudbrawler Raiders", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{2}{R/G}{R/G}");
-        this.expansionSetCode = "SHM";
+    public MudbrawlerRaiders(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{2}{R/G}{R/G}");
         this.subtype.add("Goblin");
         this.subtype.add("Warrior");
         this.power = new MageInt(3);

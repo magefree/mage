@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.fatereforged;
+package mage.cards.s;
 
 import java.util.UUID;
 import mage.abilities.Ability;
@@ -33,11 +33,11 @@ import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.PutTopCardOfLibraryIntoGraveControllerEffect;
 import mage.cards.Card;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.cards.Cards;
 import mage.cards.CardsImpl;
 import mage.constants.CardType;
 import mage.constants.Outcome;
-import mage.constants.Rarity;
 import mage.constants.Zone;
 import mage.filter.common.FilterCreatureCard;
 import mage.filter.common.FilterLandCard;
@@ -52,9 +52,8 @@ import mage.target.common.TargetCardInYourGraveyard;
  */
 public class SuddenReclamation extends CardImpl {
 
-    public SuddenReclamation(UUID ownerId) {
-        super(ownerId, 139, "Sudden Reclamation", Rarity.UNCOMMON, new CardType[]{CardType.INSTANT}, "{3}{G}");
-        this.expansionSetCode = "FRF";
+    public SuddenReclamation(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.INSTANT},"{3}{G}");
 
         // Put the top four cards of your library into your graveyard, then return a creature card and a land card from your graveyard to your hand.
         this.getSpellAbility().addEffect(new PutTopCardOfLibraryIntoGraveControllerEffect(4));

@@ -26,16 +26,16 @@
  * or implied, of BetaSteward_at_googlemail.com.
  */
 
-package mage.sets.scarsofmirrodin;
+package mage.cards.k;
 
 import java.util.UUID;
 import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.MageInt;
 import mage.abilities.common.EntersBattlefieldTriggeredAbility;
 import mage.abilities.effects.common.GainLifeEffect;
 import mage.abilities.keyword.FlyingAbility;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 
 /**
  * 
@@ -43,9 +43,8 @@ import mage.cards.CardImpl;
  */
 public class KembasSkyguard extends CardImpl {
 
-    public KembasSkyguard(UUID ownerId) {
-        super(ownerId, 13, "Kemba's Skyguard", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{1}{W}{W}");
-        this.expansionSetCode = "SOM";
+    public KembasSkyguard(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{1}{W}{W}");
         this.subtype.add("Cat");
         this.subtype.add("Knight");
 

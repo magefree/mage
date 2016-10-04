@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.fifthdawn;
+package mage.cards.c;
 
 import java.util.UUID;
 import mage.abilities.Ability;
@@ -36,11 +36,11 @@ import mage.abilities.effects.ContinuousEffectImpl;
 import mage.abilities.effects.common.CreateDelayedTriggeredAbilityEffect;
 import mage.abilities.effects.common.SacrificeSourceEffect;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Duration;
 import mage.constants.Layer;
 import mage.constants.Outcome;
-import mage.constants.Rarity;
 import mage.constants.SubLayer;
 import mage.constants.Zone;
 import mage.game.Game;
@@ -52,9 +52,8 @@ import mage.game.permanent.Permanent;
  */
 public class ChimericCoils extends CardImpl {
 
-    public ChimericCoils(UUID ownerId) {
-        super(ownerId, 108, "Chimeric Coils", Rarity.UNCOMMON, new CardType[]{CardType.ARTIFACT}, "{1}");
-        this.expansionSetCode = "5DN";
+    public ChimericCoils(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.ARTIFACT},"{1}");
 
         // {X}{1}: Chimeric Coils becomes an X/X Construct artifact creature. Sacrifice it at the beginning of thhe next end step.
         Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new ChimericCoilsEffect(), new ManaCostsImpl("{X}{1}"));

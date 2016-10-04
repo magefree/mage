@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.oathofthegatewatch;
+package mage.cards.b;
 
 import java.util.UUID;
 import mage.MageInt;
@@ -37,8 +37,8 @@ import mage.abilities.effects.common.CreateTokenEffect;
 import mage.abilities.effects.common.RegenerateSourceEffect;
 import mage.abilities.keyword.DevoidAbility;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.constants.Zone;
 import mage.game.permanent.token.EldraziScionToken;
 
@@ -48,9 +48,8 @@ import mage.game.permanent.token.EldraziScionToken;
  */
 public class BirthingHulk extends CardImpl {
 
-    public BirthingHulk(UUID ownerId) {
-        super(ownerId, 121, "Birthing Hulk", Rarity.UNCOMMON, new CardType[]{CardType.CREATURE}, "{6}{G}");
-        this.expansionSetCode = "OGW";
+    public BirthingHulk(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{6}{G}");
         this.subtype.add("Eldrazi");
         this.subtype.add("Drone");
         this.power = new MageInt(5);

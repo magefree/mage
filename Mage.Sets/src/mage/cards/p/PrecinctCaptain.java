@@ -25,16 +25,16 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.returntoravnica;
+package mage.cards.p;
 
 import java.util.UUID;
 import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.MageInt;
 import mage.abilities.common.DealsCombatDamageToAPlayerTriggeredAbility;
 import mage.abilities.effects.common.CreateTokenEffect;
 import mage.abilities.keyword.FirstStrikeAbility;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.game.permanent.token.SoldierToken;
 
 /**
@@ -43,9 +43,8 @@ import mage.game.permanent.token.SoldierToken;
  */
 public class PrecinctCaptain extends CardImpl {
 
-    public PrecinctCaptain(UUID ownerId) {
-        super(ownerId, 17, "Precinct Captain", Rarity.RARE, new CardType[]{CardType.CREATURE}, "{W}{W}");
-        this.expansionSetCode = "RTR";
+    public PrecinctCaptain(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{W}{W}");
         this.subtype.add("Human");
         this.subtype.add("Soldier");
 

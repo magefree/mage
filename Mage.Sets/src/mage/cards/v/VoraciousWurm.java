@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.magic2014;
+package mage.cards.v;
 
 import java.util.UUID;
 import mage.MageInt;
@@ -33,8 +33,8 @@ import mage.abilities.common.EntersBattlefieldAbility;
 import mage.abilities.dynamicvalue.common.ControllerGotLifeCount;
 import mage.abilities.effects.common.counter.AddCountersSourceEffect;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.counters.CounterType;
 import mage.watchers.common.PlayerGainedLifeWatcher;
 
@@ -44,9 +44,8 @@ import mage.watchers.common.PlayerGainedLifeWatcher;
  */
 public class VoraciousWurm extends CardImpl {
 
-    public VoraciousWurm(UUID ownerId) {
-        super(ownerId, 200, "Voracious Wurm", Rarity.UNCOMMON, new CardType[]{CardType.CREATURE}, "{1}{G}");
-        this.expansionSetCode = "M14";
+    public VoraciousWurm(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{1}{G}");
         this.subtype.add("Wurm");
 
         this.power = new MageInt(2);

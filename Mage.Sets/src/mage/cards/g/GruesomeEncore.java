@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.mirrodinbesieged;
+package mage.cards.g;
 
 import java.util.UUID;
 import mage.abilities.Ability;
@@ -39,10 +39,10 @@ import mage.abilities.effects.common.continuous.GainAbilityTargetEffect;
 import mage.abilities.keyword.HasteAbility;
 import mage.cards.Card;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Duration;
 import mage.constants.Outcome;
-import mage.constants.Rarity;
 import mage.constants.Zone;
 import mage.filter.common.FilterCreatureCard;
 import mage.game.Game;
@@ -59,9 +59,8 @@ public class GruesomeEncore extends CardImpl {
 
     private static final FilterCreatureCard filter = new FilterCreatureCard("creature card from an opponent's graveyard");
 
-    public GruesomeEncore(UUID ownerId) {
-        super(ownerId, 44, "Gruesome Encore", Rarity.UNCOMMON, new CardType[]{CardType.SORCERY}, "{2}{B}");
-        this.expansionSetCode = "MBS";
+    public GruesomeEncore(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{2}{B}");
 
         // Put target creature card from an opponent's graveyard onto the battlefield under your control. It gains haste.
         this.getSpellAbility().addEffect(new GruesomeEncoreEffect());

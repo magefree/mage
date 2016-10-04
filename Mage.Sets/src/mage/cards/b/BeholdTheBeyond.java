@@ -25,15 +25,15 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.shadowsoverinnistrad;
+package mage.cards.b;
 
 import java.util.UUID;
 import mage.abilities.effects.Effect;
 import mage.abilities.effects.common.discard.DiscardHandControllerEffect;
 import mage.abilities.effects.common.search.SearchLibraryPutInHandEffect;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.filter.FilterCard;
 import mage.target.common.TargetCardInLibrary;
 
@@ -43,9 +43,8 @@ import mage.target.common.TargetCardInLibrary;
  */
 public class BeholdTheBeyond extends CardImpl {
 
-    public BeholdTheBeyond(UUID ownerId) {
-        super(ownerId, 101, "Behold the Beyond", Rarity.MYTHIC, new CardType[]{CardType.SORCERY}, "{5}{B}{B}");
-        this.expansionSetCode = "SOI";
+    public BeholdTheBeyond(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{5}{B}{B}");
 
         // Discard your hand. Search your library for three cards and put those cards into your hand. Then shuffle your library.
         this.getSpellAbility().addEffect(new DiscardHandControllerEffect());

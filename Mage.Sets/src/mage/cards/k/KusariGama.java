@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.championsofkamigawa;
+package mage.cards.k;
 
 import java.util.UUID;
 import mage.abilities.Ability;
@@ -39,11 +39,11 @@ import mage.abilities.effects.common.continuous.BoostSourceEffect;
 import mage.abilities.effects.common.continuous.GainAbilityAttachedEffect;
 import mage.abilities.keyword.EquipAbility;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.AttachmentType;
 import mage.constants.CardType;
 import mage.constants.Duration;
 import mage.constants.Outcome;
-import mage.constants.Rarity;
 import mage.constants.Zone;
 import mage.filter.common.FilterBlockingCreature;
 import mage.filter.common.FilterCreaturePermanent;
@@ -58,9 +58,8 @@ import mage.game.permanent.Permanent;
  */
 public class KusariGama extends CardImpl {
 
-    public KusariGama(UUID ownerId) {
-        super(ownerId, 260, "Kusari-Gama", Rarity.RARE, new CardType[]{CardType.ARTIFACT}, "{3}");
-        this.expansionSetCode = "CHK";
+    public KusariGama(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.ARTIFACT},"{3}");
         this.subtype.add("Equipment");
 
         // Equipped creature has "{2}: This creature gets +1/+0 until end of turn."

@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.journeyintonyx;
+package mage.cards.a;
 
 import java.util.UUID;
 import mage.abilities.Ability;
@@ -35,8 +35,8 @@ import mage.abilities.effects.common.GainLifeEffect;
 import mage.abilities.effects.common.LookLibraryAndPickControllerEffect;
 import mage.abilities.effects.common.counter.DistributeCountersEffect;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.constants.TargetController;
 import mage.constants.Zone;
 import mage.counters.CounterType;
@@ -65,9 +65,8 @@ public class AjaniMentorOfHeroes extends CardImpl {
                 new CardTypePredicate(CardType.PLANESWALKER)));
     }
 
-    public AjaniMentorOfHeroes(UUID ownerId) {
-        super(ownerId, 145, "Ajani, Mentor of Heroes", Rarity.MYTHIC, new CardType[]{CardType.PLANESWALKER}, "{3}{G}{W}");
-        this.expansionSetCode = "JOU";
+    public AjaniMentorOfHeroes(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.PLANESWALKER},"{3}{G}{W}");
         this.subtype.add("Ajani");
 
         this.addAbility(new PlanswalkerEntersWithLoyalityCountersAbility(4));

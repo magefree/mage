@@ -25,24 +25,23 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.magic2013;
+package mage.cards.m;
 
 import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.keyword.CantAttackAloneAbility;
 import mage.abilities.keyword.CantBlockAloneAbility;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.Rarity;
 
 /**
  * @author magenoxx_at_gmail.com
  */
 public class MoggFlunkies extends CardImpl {
 
-    public MoggFlunkies(UUID ownerId) {
-        super(ownerId, 143, "Mogg Flunkies", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{1}{R}");
-        this.expansionSetCode = "M13";
+    public MoggFlunkies(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{1}{R}");
         this.subtype.add("Goblin");
 
         this.power = new MageInt(3);

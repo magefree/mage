@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.avacynrestored;
+package mage.cards.t;
 
 import java.util.UUID;
 import mage.abilities.Ability;
@@ -43,9 +43,9 @@ import mage.abilities.effects.common.TapTargetEffect;
 import mage.abilities.effects.common.continuous.MaximumHandSizeControllerEffect;
 import mage.abilities.effects.common.continuous.MaximumHandSizeControllerEffect.HandSizeModification;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Duration;
-import mage.constants.Rarity;
 import mage.constants.SetTargetPointer;
 import mage.constants.TargetController;
 import mage.constants.Zone;
@@ -64,9 +64,8 @@ import mage.target.TargetPlayer;
  */
 public class TamiyoTheMoonSage extends CardImpl {
 
-    public TamiyoTheMoonSage(UUID ownerId) {
-        super(ownerId, 79, "Tamiyo, the Moon Sage", Rarity.MYTHIC, new CardType[]{CardType.PLANESWALKER}, "{3}{U}{U}");
-        this.expansionSetCode = "AVR";
+    public TamiyoTheMoonSage(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.PLANESWALKER},"{3}{U}{U}");
         this.subtype.add("Tamiyo");
 
         this.addAbility(new PlanswalkerEntersWithLoyalityCountersAbility(4));

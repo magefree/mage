@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.invasion;
+package mage.cards.a;
 
 import java.util.UUID;
 import mage.abilities.Ability;
@@ -37,9 +37,9 @@ import mage.abilities.effects.common.DoUnlessAnyPlayerPaysEffect;
 import mage.abilities.effects.common.ReturnFromGraveyardToBattlefieldTargetEffect;
 import mage.cards.Card;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Outcome;
-import mage.constants.Rarity;
 import mage.constants.TargetController;
 import mage.game.Game;
 import mage.players.Player;
@@ -51,9 +51,8 @@ import mage.target.targetpointer.FixedTarget;
  */
 public class AetherRift extends CardImpl {
 
-    public AetherRift(UUID ownerId) {
-        super(ownerId, 227, "Aether Rift", Rarity.RARE, new CardType[]{CardType.ENCHANTMENT}, "{1}{R}{G}");
-        this.expansionSetCode = "INV";
+    public AetherRift(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.ENCHANTMENT},"{1}{R}{G}");
 
 
         // At the beginning of your upkeep, discard a card at random. If you discard a creature card this way, return it from your graveyard to the battlefield unless any player pays 5 life.

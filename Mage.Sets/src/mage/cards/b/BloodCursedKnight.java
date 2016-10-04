@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.magicorigins;
+package mage.cards.b;
 
 import java.util.UUID;
 import mage.MageInt;
@@ -37,9 +37,9 @@ import mage.abilities.effects.common.continuous.BoostSourceEffect;
 import mage.abilities.effects.common.continuous.GainAbilitySourceEffect;
 import mage.abilities.keyword.LifelinkAbility;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Duration;
-import mage.constants.Rarity;
 import mage.constants.Zone;
 import mage.filter.common.FilterControlledEnchantmentPermanent;
 
@@ -52,9 +52,8 @@ public class BloodCursedKnight extends CardImpl {
     final static private String rule1 = "As long as you control an enchantment, {this} gets +1/+1";
     final static private String rule2 = "and has lifelink";
 
-    public BloodCursedKnight(UUID ownerId) {
-        super(ownerId, 211, "Blood-Cursed Knight", Rarity.UNCOMMON, new CardType[]{CardType.CREATURE}, "{1}{W}{B}");
-        this.expansionSetCode = "ORI";
+    public BloodCursedKnight(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{1}{W}{B}");
         this.subtype.add("Vampire");
         this.subtype.add("Knight");
         this.power = new MageInt(3);

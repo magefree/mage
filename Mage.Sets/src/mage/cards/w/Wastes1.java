@@ -25,13 +25,13 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.oathofthegatewatch;
+package mage.cards.w;
 
 import java.util.UUID;
 import mage.abilities.mana.ColorlessManaAbility;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.Rarity;
 
 /**
  *
@@ -39,9 +39,8 @@ import mage.constants.Rarity;
  */
 public class Wastes1 extends CardImpl {
 
-    public Wastes1(UUID ownerId) {
-        super(ownerId, 183, "Wastes", Rarity.COMMON, new CardType[]{CardType.LAND}, "");
-        this.expansionSetCode = "OGW";
+    public Wastes1(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.LAND},"");
         this.supertype.add("Basic");
 
         // {T}: Add {C} to your mana pool.

@@ -26,16 +26,16 @@
  *  or implied, of BetaSteward_at_googlemail.com.
  */
 
-package mage.sets.newphyrexia;
+package mage.cards.d;
 
 import java.util.UUID;
 import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.abilities.condition.common.MetalcraftCondition;
 import mage.abilities.decorator.ConditionalOneShotEffect;
 import mage.abilities.effects.common.ExileTargetEffect;
 import mage.abilities.effects.common.TapTargetEffect;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.target.common.TargetCreaturePermanent;
 
 /**
@@ -44,9 +44,8 @@ import mage.target.common.TargetCreaturePermanent;
  */
 public class Dispatch extends CardImpl {
 
-    public Dispatch (UUID ownerId) {
-        super(ownerId, 7, "Dispatch", Rarity.UNCOMMON, new CardType[]{CardType.INSTANT}, "{W}");
-        this.expansionSetCode = "NPH";
+    public Dispatch (UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.INSTANT},"{W}");
 
         this.getSpellAbility().addEffect(new TapTargetEffect());
         this.getSpellAbility().addEffect(new ConditionalOneShotEffect(new ExileTargetEffect(), MetalcraftCondition.getInstance(), "Metalcraft - If you control three or more artifacts, exile that creature"));

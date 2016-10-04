@@ -25,13 +25,13 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.onslaught;
+package mage.cards.p;
 
 import java.util.UUID;
 import mage.abilities.effects.common.DamageTargetEffect;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.target.common.TargetCreaturePermanent;
 
 /**
@@ -40,9 +40,8 @@ import mage.target.common.TargetCreaturePermanent;
  */
 public class PinpointAvalanche extends CardImpl {
 
-    public PinpointAvalanche(UUID ownerId) {
-        super(ownerId, 221, "Pinpoint Avalanche", Rarity.COMMON, new CardType[]{CardType.INSTANT}, "{3}{R}{R}");
-        this.expansionSetCode = "ONS";
+    public PinpointAvalanche(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.INSTANT},"{3}{R}{R}");
 
         // Pinpoint Avalanche deals 4 damage to target creature. The damage can't be prevented.
         this.getSpellAbility().addEffect(new DamageTargetEffect(4, false));

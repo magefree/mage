@@ -25,16 +25,16 @@
 *  authors and should not be interpreted as representing official policies, either expressed
 *  or implied, of BetaSteward_at_googlemail.com.
 */
-package mage.sets.guildpact;
+package mage.cards.a;
 
 import java.util.UUID;
 import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.effects.common.DestroyTargetEffect;
 import mage.abilities.keyword.HauntAbility;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.filter.common.FilterEnchantmentPermanent;
 import mage.target.Target;
 import mage.target.TargetPermanent;
@@ -45,9 +45,8 @@ import mage.target.TargetPermanent;
 */
 public class AbsolverThrull extends CardImpl {
 
-    public AbsolverThrull(UUID ownerId) {
-        super(ownerId, 1, "Absolver Thrull", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{3}{W}");
-        this.expansionSetCode = "GPT";
+    public AbsolverThrull(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{3}{W}");
         this.subtype.add("Thrull");
         this.subtype.add("Cleric");
 

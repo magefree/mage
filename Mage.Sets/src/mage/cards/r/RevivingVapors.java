@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.invasion;
+package mage.cards.r;
 
 import java.util.UUID;
 import mage.MageObject;
@@ -33,11 +33,11 @@ import mage.abilities.Ability;
 import mage.abilities.effects.OneShotEffect;
 import mage.cards.Card;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.cards.Cards;
 import mage.cards.CardsImpl;
 import mage.constants.CardType;
 import mage.constants.Outcome;
-import mage.constants.Rarity;
 import mage.constants.Zone;
 import mage.filter.FilterCard;
 import mage.game.Game;
@@ -50,9 +50,8 @@ import mage.target.TargetCard;
  */
 public class RevivingVapors extends CardImpl {
 
-    public RevivingVapors(UUID ownerId) {
-        super(ownerId, 265, "Reviving Vapors", Rarity.UNCOMMON, new CardType[]{CardType.INSTANT}, "{2}{W}{U}");
-        this.expansionSetCode = "INV";
+    public RevivingVapors(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.INSTANT},"{2}{W}{U}");
 
         // Reveal the top three cards of your library and put one of them into your hand. You gain life equal to that card's converted mana cost. Put all other cards revealed this way into your graveyard.
         this.getSpellAbility().addEffect(new RevivingVaporsEffect());

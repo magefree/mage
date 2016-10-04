@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.avacynrestored;
+package mage.cards.d;
 
 import java.util.UUID;
 import mage.abilities.Ability;
@@ -35,8 +35,8 @@ import mage.abilities.effects.common.AddManaOfAnyColorEffect;
 import mage.abilities.effects.common.counter.AddCountersSourceEffect;
 import mage.abilities.mana.SimpleManaAbility;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.constants.Zone;
 import mage.counters.CounterType;
 
@@ -47,9 +47,8 @@ import mage.counters.CounterType;
  */
 public class DruidsRepository extends CardImpl {
 
-    public DruidsRepository(UUID ownerId) {
-        super(ownerId, 176, "Druids' Repository", Rarity.RARE, new CardType[]{CardType.ENCHANTMENT}, "{1}{G}{G}");
-        this.expansionSetCode = "AVR";
+    public DruidsRepository(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.ENCHANTMENT},"{1}{G}{G}");
 
 
         // Whenever a creature you control attacks, put a charge counter on Druids' Repository.

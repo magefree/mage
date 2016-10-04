@@ -25,15 +25,15 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.starwars;
+package mage.cards.s;
 
 import java.util.UUID;
 import mage.abilities.effects.common.UntapTargetEffect;
 import mage.abilities.effects.common.continuous.BoostOpponentsEffect;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Duration;
-import mage.constants.Rarity;
 import mage.target.common.TargetControlledCreaturePermanent;
 
 /**
@@ -42,9 +42,8 @@ import mage.target.common.TargetControlledCreaturePermanent;
  */
 public class SurpriseManeuver extends CardImpl {
 
-    public SurpriseManeuver(UUID ownerId) {
-        super(ownerId, 59, "Surprise Maneuver", Rarity.COMMON, new CardType[]{CardType.INSTANT}, "{2}{U}");
-        this.expansionSetCode = "SWS";
+    public SurpriseManeuver(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.INSTANT},"{2}{U}");
 
         // Untap up to two target creatures you control.
         this.getSpellAbility().addTarget(new TargetControlledCreaturePermanent(0, 2));

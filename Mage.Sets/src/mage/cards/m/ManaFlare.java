@@ -25,14 +25,14 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.fourthedition;
+package mage.cards.m;
 
 import java.util.UUID;
 import mage.abilities.common.TapForManaAllTriggeredManaAbility;
 import mage.abilities.effects.common.AddManaOfAnyTypeProducedEffect;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.constants.SetTargetPointer;
 import mage.filter.common.FilterLandPermanent;
 
@@ -42,9 +42,8 @@ import mage.filter.common.FilterLandPermanent;
  */
 public class ManaFlare extends CardImpl {
 
-    public ManaFlare(UUID ownerId) {
-        super(ownerId, 229, "Mana Flare", Rarity.RARE, new CardType[]{CardType.ENCHANTMENT}, "{2}{R}");
-        this.expansionSetCode = "4ED";
+    public ManaFlare(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.ENCHANTMENT},"{2}{R}");
 
         // Whenever a player taps a land for mana, that player adds one mana to his or her mana pool of any type that land produced.
         this.addAbility(new TapForManaAllTriggeredManaAbility(

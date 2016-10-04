@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.tempest;
+package mage.cards.l;
 
 import java.util.UUID;
 import mage.MageObject;
@@ -33,11 +33,11 @@ import mage.abilities.Ability;
 import mage.abilities.effects.OneShotEffect;
 import mage.cards.Card;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.cards.Cards;
 import mage.cards.CardsImpl;
 import mage.constants.CardType;
 import mage.constants.Outcome;
-import mage.constants.Rarity;
 import mage.constants.Zone;
 import mage.filter.FilterCard;
 import mage.filter.predicate.Predicates;
@@ -56,9 +56,8 @@ import mage.target.common.TargetCardInLibrary;
  */
 public class Lobotomy extends CardImpl {
 
-    public Lobotomy(UUID ownerId) {
-        super(ownerId, 342, "Lobotomy", Rarity.UNCOMMON, new CardType[]{CardType.SORCERY}, "{2}{U}{B}");
-        this.expansionSetCode = "TMP";
+    public Lobotomy(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{2}{U}{B}");
 
         // Target player reveals his or her hand, then you choose a card other than a basic land card from it. Search that player's graveyard, hand, and library for all cards with the same name as the chosen card and exile them. Then that player shuffles his or her library.
         this.getSpellAbility().addEffect(new LobotomyEffect());

@@ -25,14 +25,14 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.portalsecondage;
+package mage.cards.d;
 
 import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.common.DamageAsThoughNotBlockedAbility;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.Rarity;
 
 /**
  *
@@ -40,9 +40,8 @@ import mage.constants.Rarity;
  */
 public class DeathcoilWurm extends CardImpl {
 
-    public DeathcoilWurm(UUID ownerId) {
-        super(ownerId, 65, "Deathcoil Wurm", Rarity.RARE, new CardType[]{CardType.CREATURE}, "{6}{G}{G}");
-        this.expansionSetCode = "PO2";
+    public DeathcoilWurm(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{6}{G}{G}");
         this.subtype.add("Wurm");
         this.power = new MageInt(7);
         this.toughness = new MageInt(6);

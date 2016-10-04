@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.battleforzendikar;
+package mage.cards.a;
 
 import java.util.UUID;
 import mage.MageInt;
@@ -38,8 +38,8 @@ import mage.abilities.effects.common.ReturnSourceFromGraveyardToBattlefieldEffec
 import mage.abilities.keyword.FlyingAbility;
 import mage.abilities.keyword.HasteAbility;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.constants.Zone;
 import mage.game.Game;
 import mage.game.events.GameEvent;
@@ -51,9 +51,8 @@ import mage.game.permanent.Permanent;
  */
 public class AkoumFirebird extends CardImpl {
 
-    public AkoumFirebird(UUID ownerId) {
-        super(ownerId, 138, "Akoum Firebird", Rarity.MYTHIC, new CardType[]{CardType.CREATURE}, "{2}{R}{R}");
-        this.expansionSetCode = "BFZ";
+    public AkoumFirebird(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{2}{R}{R}");
         this.subtype.add("Phoenix");
         this.power = new MageInt(3);
         this.toughness = new MageInt(3);

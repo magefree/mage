@@ -26,7 +26,7 @@
  *  or implied, of BetaSteward_at_googlemail.com.
  */
 
-package mage.sets.scarsofmirrodin;
+package mage.cards.g;
 
 import java.util.UUID;
 
@@ -39,8 +39,8 @@ import mage.abilities.dynamicvalue.common.CountersSourceCount;
 import mage.abilities.effects.common.GainLifeEffect;
 import mage.abilities.effects.common.counter.AddCountersSourceEffect;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.constants.TargetController;
 import mage.constants.Zone;
 import mage.counters.CounterType;
@@ -51,9 +51,8 @@ import mage.counters.CounterType;
  */
 public class GoldenUrn extends CardImpl {
 
-    public GoldenUrn (UUID ownerId) {
-        super(ownerId, 158, "Golden Urn", Rarity.COMMON, new CardType[]{CardType.ARTIFACT}, "{1}");
-        this.expansionSetCode = "SOM";
+    public GoldenUrn (UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.ARTIFACT},"{1}");
         this.addAbility(new BeginningOfUpkeepTriggeredAbility(new AddCountersSourceEffect(CounterType.CHARGE.createInstance()), TargetController.YOU, true));
         Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new GainLifeEffect(new CountersSourceCount(CounterType.CHARGE)), new TapSourceCost());
         ability.addCost(new SacrificeSourceCost());

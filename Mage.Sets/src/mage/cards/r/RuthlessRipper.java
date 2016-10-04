@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.khansoftarkir;
+package mage.cards.r;
 
 import java.util.UUID;
 import mage.MageInt;
@@ -38,8 +38,8 @@ import mage.abilities.effects.common.LoseLifeTargetEffect;
 import mage.abilities.keyword.DeathtouchAbility;
 import mage.abilities.keyword.MorphAbility;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.filter.FilterCard;
 import mage.filter.predicate.mageobject.ColorPredicate;
 import mage.target.TargetPlayer;
@@ -56,9 +56,8 @@ public class RuthlessRipper extends CardImpl {
         filter.add(new ColorPredicate(ObjectColor.BLACK));
     }
 
-    public RuthlessRipper(UUID ownerId) {
-        super(ownerId, 88, "Ruthless Ripper", Rarity.UNCOMMON, new CardType[]{CardType.CREATURE}, "{B}");
-        this.expansionSetCode = "KTK";
+    public RuthlessRipper(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{B}");
         this.subtype.add("Human");
         this.subtype.add("Assassin");
 

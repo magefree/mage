@@ -25,14 +25,14 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.battleforzendikar;
+package mage.cards.s;
 
 import java.util.UUID;
 import mage.abilities.effects.common.CounterTargetEffect;
 import mage.abilities.keyword.AwakenAbility;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.target.TargetSpell;
 
 /**
@@ -41,9 +41,8 @@ import mage.target.TargetSpell;
  */
 public class ScatterToTheWinds extends CardImpl {
 
-    public ScatterToTheWinds(UUID ownerId) {
-        super(ownerId, 85, "Scatter to the Winds", Rarity.RARE, new CardType[]{CardType.INSTANT}, "{1}{U}{U}");
-        this.expansionSetCode = "BFZ";
+    public ScatterToTheWinds(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.INSTANT},"{1}{U}{U}");
 
         // Counter target spell.
         this.getSpellAbility().addEffect(new CounterTargetEffect());

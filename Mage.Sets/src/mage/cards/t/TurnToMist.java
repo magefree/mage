@@ -25,14 +25,14 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.shadowmoor;
+package mage.cards.t;
 
 import java.util.UUID;
 
 import mage.abilities.effects.common.MistmeadowWitchEffect;
 import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.target.common.TargetCreaturePermanent;
 
 /**
@@ -41,9 +41,8 @@ import mage.target.common.TargetCreaturePermanent;
  */
 public class TurnToMist extends CardImpl {
 
-    public TurnToMist(UUID ownerId) {
-        super(ownerId, 155, "Turn to Mist", Rarity.COMMON, new CardType[]{CardType.INSTANT}, "{1}{W/U}");
-        this.expansionSetCode = "SHM";
+    public TurnToMist(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.INSTANT},"{1}{W/U}");
 
 
         // Exile target creature. Return that card to the battlefield under its owner's control at the beginning of the next end step.

@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.mirrodinbesieged;
+package mage.cards.k;
 
 import java.util.UUID;
 import mage.MageObject;
@@ -36,9 +36,9 @@ import mage.abilities.effects.Effect;
 import mage.abilities.effects.OneShotEffect;
 import mage.cards.Card;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Outcome;
-import mage.constants.Rarity;
 import mage.constants.Zone;
 import mage.filter.common.FilterNonlandCard;
 import mage.game.Game;
@@ -57,9 +57,8 @@ import mage.util.CardUtil;
  */
 public class KnowledgePool extends CardImpl {
 
-    public KnowledgePool(UUID ownerId) {
-        super(ownerId, 111, "Knowledge Pool", Rarity.RARE, new CardType[]{CardType.ARTIFACT}, "{6}");
-        this.expansionSetCode = "MBS";
+    public KnowledgePool(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.ARTIFACT},"{6}");
 
         // Imprint - When Knowledge Pool enters the battlefield, each player exiles the top three cards of his or her library
         this.addAbility(new EntersBattlefieldTriggeredAbility(new KnowledgePoolEffect1(), false));

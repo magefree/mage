@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.gatecrash;
+package mage.cards.n;
 
 import java.util.UUID;
 import mage.MageInt;
@@ -33,8 +33,8 @@ import mage.abilities.common.EntersBattlefieldAbility;
 import mage.abilities.effects.common.EntersBattlefieldWithXCountersEffect;
 import mage.abilities.keyword.FlyingAbility;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.counters.CounterType;
 
 /**
@@ -43,9 +43,8 @@ import mage.counters.CounterType;
  */
 public class NimbusSwimmer extends CardImpl {
 
-    public NimbusSwimmer(UUID ownerId) {
-        super(ownerId, 181, "Nimbus Swimmer", Rarity.UNCOMMON, new CardType[]{CardType.CREATURE}, "{X}{G}{U}");
-        this.expansionSetCode = "GTC";
+    public NimbusSwimmer(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{X}{G}{U}");
         this.subtype.add("Leviathan");
 
         this.power = new MageInt(0);

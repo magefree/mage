@@ -25,13 +25,13 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.fifthedition;
+package mage.cards.a;
 
 import java.util.UUID;
 import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.abilities.effects.common.DestroyAllEffect;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.filter.common.FilterLandPermanent;
 
 /**
@@ -40,9 +40,8 @@ import mage.filter.common.FilterLandPermanent;
  */
 public class Armageddon extends CardImpl {
 
-    public Armageddon(UUID ownerId) {
-        super(ownerId, 283, "Armageddon", Rarity.RARE, new CardType[]{CardType.SORCERY}, "{3}{W}");
-        this.expansionSetCode = "5ED";
+    public Armageddon(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{3}{W}");
 
 
         // Destroy all lands.

@@ -26,12 +26,11 @@
  *  or implied, of BetaSteward_at_googlemail.com.
  */
 
-package mage.sets.scarsofmirrodin;
+package mage.cards.e;
 
 import java.util.UUID;
 import mage.constants.CardType;
 import mage.constants.Duration;
-import mage.constants.Rarity;
 import mage.constants.Zone;
 import mage.MageInt;
 import mage.abilities.Ability;
@@ -43,6 +42,7 @@ import mage.abilities.effects.common.continuous.BoostSourceEffect;
 import mage.abilities.effects.common.continuous.GainAbilitySourceEffect;
 import mage.abilities.keyword.TrampleAbility;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 
 /**
  *
@@ -51,9 +51,8 @@ import mage.cards.CardImpl;
 public class EzurisBrigade extends CardImpl {
     private final String text = "Metalcraft - As long as you control three or more artifacts, Ezuri's Brigade gets +4/+4 and has trample";
 
-    public EzurisBrigade (UUID ownerId) {
-        super(ownerId, 121, "Ezuri's Brigade", Rarity.RARE, new CardType[]{CardType.CREATURE}, "{2}{G}{G}");
-        this.expansionSetCode = "SOM";
+    public EzurisBrigade (UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{2}{G}{G}");
         this.subtype.add("Elf");
         this.subtype.add("Warrior");
 

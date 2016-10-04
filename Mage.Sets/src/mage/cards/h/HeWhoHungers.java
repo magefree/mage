@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.championsofkamigawa;
+package mage.cards.h;
 
 /**
  *
@@ -34,7 +34,6 @@ package mage.sets.championsofkamigawa;
 
 
 import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.constants.Zone;
 import mage.MageInt;
 import mage.abilities.Ability;
@@ -45,6 +44,7 @@ import mage.abilities.effects.common.discard.DiscardCardYouChooseTargetEffect;
 import mage.abilities.keyword.FlyingAbility;
 import mage.abilities.keyword.SoulshiftAbility;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.filter.common.FilterControlledPermanent;
 import mage.filter.predicate.mageobject.SubtypePredicate;
 import mage.target.common.TargetControlledPermanent;
@@ -63,9 +63,8 @@ public class HeWhoHungers extends CardImpl {
         filter.add(new SubtypePredicate("Spirit"));
     }
 
-    public HeWhoHungers(UUID ownerId) {
-        super(ownerId, 114, "He Who Hungers", Rarity.RARE, new CardType[]{CardType.CREATURE}, "{4}{B}");
-        this.expansionSetCode = "CHK";
+    public HeWhoHungers(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{4}{B}");
         this.supertype.add("Legendary");
         this.subtype.add("Spirit");
 

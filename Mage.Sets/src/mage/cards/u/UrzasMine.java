@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.fifthedition;
+package mage.cards.u;
 
 import java.util.UUID;
 import mage.Mana;
@@ -33,19 +33,18 @@ import mage.abilities.Ability;
 import mage.abilities.dynamicvalue.common.UrzaTerrainValue;
 import mage.abilities.mana.DynamicManaAbility;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.Rarity;
 
 /**
  *
  * @author Melkhior
  */
 public class UrzasMine extends CardImpl {
-    public UrzasMine(UUID ownerId) {
-        super(ownerId, 447, "Urza's Mine", Rarity.COMMON, new CardType[]{CardType.LAND}, "");
+    public UrzasMine(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.LAND},"");
         this.subtype.add("Urza's");
         this.subtype.add("Mine");
-        this.expansionSetCode = "5ED";
 
         // {T}: Add {C} to your mana pool. If you control an Urza's Power-Plant and an Urza's Tower, add {C}{C} to your mana pool instead.
         Ability urzaManaAbility = new DynamicManaAbility(Mana.ColorlessMana(1), new UrzaTerrainValue(2),

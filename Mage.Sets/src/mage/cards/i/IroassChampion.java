@@ -25,14 +25,14 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.magicorigins;
+package mage.cards.i;
 
 import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.keyword.DoubleStrikeAbility;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.Rarity;
 
 /**
  *
@@ -40,9 +40,8 @@ import mage.constants.Rarity;
  */
 public class IroassChampion extends CardImpl {
 
-    public IroassChampion(UUID ownerId) {
-        super(ownerId, 214, "Iroas's Champion", Rarity.UNCOMMON, new CardType[]{CardType.CREATURE}, "{1}{R}{W}");
-        this.expansionSetCode = "ORI";
+    public IroassChampion(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{1}{R}{W}");
         this.subtype.add("Human");
         this.subtype.add("Soldier");
         this.power = new MageInt(2);

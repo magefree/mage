@@ -25,11 +25,10 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.mercadianmasques;
+package mage.cards.r;
 
 import java.util.UUID;
 import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.constants.Zone;
 import mage.MageInt;
 import mage.abilities.Ability;
@@ -39,6 +38,7 @@ import mage.abilities.costs.mana.GenericManaCost;
 import mage.abilities.effects.common.search.SearchLibraryPutInPlayEffect;
 import mage.abilities.keyword.FlyingAbility;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.filter.Filter.ComparisonType;
 import mage.filter.common.FilterPermanentCard;
 import mage.filter.predicate.mageobject.ConvertedManaCostPredicate;
@@ -58,9 +58,8 @@ public class RamosianSkyMarshal extends CardImpl {
         filter.add(new ConvertedManaCostPredicate(ComparisonType.LessThan, 7));
     }
 
-    public RamosianSkyMarshal(UUID ownerId) {
-        super(ownerId, 40, "Ramosian Sky Marshal", Rarity.RARE, new CardType[]{CardType.CREATURE}, "{3}{W}{W}");
-        this.expansionSetCode = "MMQ";
+    public RamosianSkyMarshal(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{3}{W}{W}");
         this.subtype.add("Human");
         this.subtype.add("Rebel");
 

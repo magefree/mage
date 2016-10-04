@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.commander2013;
+package mage.cards.j;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -38,9 +38,9 @@ import mage.abilities.effects.OneShotEffect;
 import mage.abilities.keyword.FlyingAbility;
 import mage.cards.Card;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Outcome;
-import mage.constants.Rarity;
 import mage.constants.WatcherScope;
 import mage.filter.common.FilterInstantOrSorceryCard;
 import mage.game.ExileZone;
@@ -59,9 +59,8 @@ import mage.watchers.Watcher;
  */
 public class JelevaNephaliasScourge extends CardImpl {
 
-    public JelevaNephaliasScourge(UUID ownerId) {
-        super(ownerId, 194, "Jeleva, Nephalia's Scourge", Rarity.MYTHIC, new CardType[]{CardType.CREATURE}, "{1}{U}{B}{R}");
-        this.expansionSetCode = "C13";
+    public JelevaNephaliasScourge(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{1}{U}{B}{R}");
         this.supertype.add("Legendary");
         this.subtype.add("Vampire");
         this.subtype.add("Wizard");

@@ -25,14 +25,14 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.timespiral;
+package mage.cards.e;
 
 import java.util.UUID;
 import mage.abilities.effects.common.CreateTokenEffect;
 import mage.abilities.keyword.StormAbility;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.game.permanent.token.GoblinToken;
 
 /**
@@ -41,9 +41,8 @@ import mage.game.permanent.token.GoblinToken;
  */
 public class EmptyTheWarrens extends CardImpl {
 
-    public EmptyTheWarrens(UUID ownerId) {
-        super(ownerId, 152, "Empty the Warrens", Rarity.COMMON, new CardType[]{CardType.SORCERY}, "{3}{R}");
-        this.expansionSetCode = "TSP";
+    public EmptyTheWarrens(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{3}{R}");
 
         // Put two 1/1 red Goblin creature tokens onto the battlefield.
         this.getSpellAbility().addEffect(new CreateTokenEffect(new GoblinToken(), 2));

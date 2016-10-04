@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.championsofkamigawa;
+package mage.cards.t;
 
 import java.util.HashSet;
 import java.util.Set;
@@ -35,9 +35,9 @@ import mage.abilities.TriggeredAbilityImpl;
 import mage.abilities.effects.Effect;
 import mage.abilities.effects.OneShotEffect;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Outcome;
-import mage.constants.Rarity;
 import mage.constants.Zone;
 import mage.game.Game;
 import mage.game.combat.CombatGroup;
@@ -52,9 +52,8 @@ import mage.players.Player;
  */
 public class TideOfWar extends CardImpl {
 
-    public TideOfWar(UUID ownerId) {
-        super(ownerId, 194, "Tide of War", Rarity.RARE, new CardType[]{CardType.ENCHANTMENT}, "{4}{R}{R}");
-        this.expansionSetCode = "CHK";
+    public TideOfWar(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.ENCHANTMENT},"{4}{R}{R}");
 
 
         // Whenever one or more creatures block, flip a coin. If you win the flip, each blocking creature is sacrificed by its controller. If you lose the flip, each blocked creature is sacrificed by its controller.

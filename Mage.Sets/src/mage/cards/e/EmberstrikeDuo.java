@@ -25,12 +25,11 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.shadowmoor;
+package mage.cards.e;
 
 import java.util.UUID;
 import mage.constants.CardType;
 import mage.constants.Duration;
-import mage.constants.Rarity;
 import mage.MageInt;
 import mage.ObjectColor;
 import mage.abilities.common.SpellCastControllerTriggeredAbility;
@@ -38,6 +37,7 @@ import mage.abilities.effects.common.continuous.BoostSourceEffect;
 import mage.abilities.effects.common.continuous.GainAbilitySourceEffect;
 import mage.abilities.keyword.FirstStrikeAbility;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.filter.FilterSpell;
 import mage.filter.predicate.mageobject.ColorPredicate;
 
@@ -55,9 +55,8 @@ public class EmberstrikeDuo extends CardImpl {
         redFilter.add(new ColorPredicate(ObjectColor.RED));
     }
 
-    public EmberstrikeDuo(UUID ownerId) {
-        super(ownerId, 185, "Emberstrike Duo", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{1}{B/R}");
-        this.expansionSetCode = "SHM";
+    public EmberstrikeDuo(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{1}{B/R}");
         this.subtype.add("Elemental");
         this.subtype.add("Warrior");
         this.subtype.add("Shaman");

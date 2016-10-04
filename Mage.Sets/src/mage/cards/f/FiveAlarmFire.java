@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.gatecrash;
+package mage.cards.f;
 
 import java.util.HashSet;
 import java.util.UUID;
@@ -36,8 +36,8 @@ import mage.abilities.costs.common.RemoveCountersSourceCost;
 import mage.abilities.effects.common.DamageTargetEffect;
 import mage.abilities.effects.common.counter.AddCountersSourceEffect;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.constants.Zone;
 import mage.counters.CounterType;
 import mage.filter.common.FilterControlledCreaturePermanent;
@@ -54,9 +54,8 @@ import mage.target.common.TargetCreatureOrPlayer;
  */
 public class FiveAlarmFire extends CardImpl {
 
-    public FiveAlarmFire(UUID ownerId) {
-        super(ownerId, 91, "Five-Alarm Fire", Rarity.RARE, new CardType[]{CardType.ENCHANTMENT}, "{1}{R}{R}");
-        this.expansionSetCode = "GTC";
+    public FiveAlarmFire(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.ENCHANTMENT},"{1}{R}{R}");
         
 
 

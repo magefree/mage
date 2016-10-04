@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.commander2014;
+package mage.cards.d;
 
 import java.util.UUID;
 import mage.abilities.Ability;
@@ -33,8 +33,8 @@ import mage.abilities.SpellAbility;
 import mage.abilities.effects.Effect;
 import mage.abilities.effects.common.ReturnToHandTargetEffect;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.filter.common.FilterNonlandPermanent;
 import mage.game.Game;
 import mage.target.Target;
@@ -46,9 +46,8 @@ import mage.target.common.TargetNonlandPermanent;
  */
 public class DistortingWake extends CardImpl {
 
-    public DistortingWake(UUID ownerId) {
-        super(ownerId, 107, "Distorting Wake", Rarity.RARE, new CardType[]{CardType.SORCERY}, "{X}{U}{U}{U}");
-        this.expansionSetCode = "C14";
+    public DistortingWake(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{X}{U}{U}{U}");
 
 
         // Return X target nonland permanents to their owners' hands.

@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.urzaslegacy;
+package mage.cards.g;
 
 import java.util.UUID;
 import mage.MageInt;
@@ -36,9 +36,9 @@ import mage.abilities.dynamicvalue.common.BlockedCreatureCount;
 import mage.abilities.effects.Effect;
 import mage.abilities.effects.common.continuous.BoostSourceEffect;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Duration;
-import mage.constants.Rarity;
 
 /**
  *
@@ -46,9 +46,8 @@ import mage.constants.Rarity;
  */
 public class GangOfElk extends CardImpl {
 
-    public GangOfElk(UUID ownerId) {
-        super(ownerId, 102, "Gang of Elk", Rarity.UNCOMMON, new CardType[]{CardType.CREATURE}, "{5}{G}");
-        this.expansionSetCode = "ULG";
+    public GangOfElk(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{5}{G}");
         this.subtype.add("Elk");
         this.subtype.add("Beast");
 

@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.magic2014;
+package mage.cards.s;
 
 import java.util.UUID;
 import mage.MageInt;
@@ -39,9 +39,9 @@ import mage.abilities.effects.common.DamageTargetEffect;
 import mage.abilities.effects.common.continuous.BoostSourceEffect;
 import mage.abilities.keyword.FlyingAbility;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Duration;
-import mage.constants.Rarity;
 import mage.constants.Zone;
 import mage.filter.common.FilterControlledCreaturePermanent;
 import mage.filter.common.FilterCreaturePermanent;
@@ -64,9 +64,8 @@ public class ScourgeOfValkas extends CardImpl {
     
     private final String rule = "Whenever {this} or another Dragon enters the battlefield under your control, it deals X damage to target creature or player, where X is the number of Dragons you control.";
 
-    public ScourgeOfValkas(UUID ownerId) {
-        super(ownerId, 151, "Scourge of Valkas", Rarity.MYTHIC, new CardType[]{CardType.CREATURE}, "{2}{R}{R}{R}");
-        this.expansionSetCode = "M14";
+    public ScourgeOfValkas(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{2}{R}{R}{R}");
         this.subtype.add("Dragon");
 
         this.color.setRed(true);

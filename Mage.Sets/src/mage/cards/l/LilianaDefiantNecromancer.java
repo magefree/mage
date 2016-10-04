@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.magicorigins;
+package mage.cards.l;
 
 import java.util.UUID;
 import mage.abilities.Ability;
@@ -42,9 +42,9 @@ import mage.abilities.effects.common.ReturnFromGraveyardToBattlefieldTargetEffec
 import mage.abilities.effects.common.discard.DiscardEachPlayerEffect;
 import mage.cards.Card;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Outcome;
-import mage.constants.Rarity;
 import mage.constants.TargetController;
 import mage.constants.Zone;
 import mage.filter.Filter;
@@ -73,9 +73,8 @@ public class LilianaDefiantNecromancer extends CardImpl {
 
     UUID ability2Id;
 
-    public LilianaDefiantNecromancer(UUID ownerId) {
-        super(ownerId, 106, "Liliana, Defiant Necromancer", Rarity.MYTHIC, new CardType[]{CardType.PLANESWALKER}, "");
-        this.expansionSetCode = "ORI";
+    public LilianaDefiantNecromancer(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.PLANESWALKER},"");
         this.subtype.add("Liliana");
         this.color.setBlack(true);
 

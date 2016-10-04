@@ -26,12 +26,11 @@
 * or implied, of BetaSteward_at_googlemail.com.
 */
 
-package mage.sets.urzassaga;
+package mage.cards.c;
 
 import java.util.UUID;
 
 import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.constants.Zone;
 import mage.MageInt;
 import mage.abilities.common.BeginningOfUpkeepTriggeredAbility;
@@ -41,6 +40,7 @@ import mage.abilities.effects.common.RegenerateSourceEffect;
 import mage.abilities.effects.common.SacrificeSourceUnlessPaysEffect;
 import mage.abilities.keyword.TrampleAbility;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.TargetController;
 
 /**
@@ -49,9 +49,8 @@ import mage.constants.TargetController;
  */
 public class ChildOfGaea extends CardImpl {
 
-    public ChildOfGaea(UUID ownerId) {
-        super(ownerId, 242, "Child of Gaea", Rarity.RARE, new CardType[]{CardType.CREATURE}, "{3}{G}{G}{G}");
-        this.expansionSetCode = "USG";
+    public ChildOfGaea(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{3}{G}{G}{G}");
         this.subtype.add("Elemental");
 
         this.power = new MageInt(7);

@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.bornofthegods;
+package mage.cards.k;
 
 import java.util.UUID;
 import mage.MageInt;
@@ -39,9 +39,9 @@ import mage.abilities.effects.common.DrawCardSourceControllerEffect;
 import mage.abilities.effects.common.GetEmblemEffect;
 import mage.abilities.effects.common.continuous.PlayAdditionalLandsControllerEffect;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Duration;
-import mage.constants.Rarity;
 import mage.constants.TargetController;
 import mage.constants.Zone;
 import mage.filter.FilterPermanent;
@@ -67,9 +67,8 @@ public class KioraTheCrashingWave extends CardImpl {
         filter.add(new ControllerPredicate(TargetController.OPPONENT));
     }
 
-    public KioraTheCrashingWave(UUID ownerId) {
-        super(ownerId, 149, "Kiora, the Crashing Wave", Rarity.MYTHIC, new CardType[]{CardType.PLANESWALKER}, "{2}{G}{U}");
-        this.expansionSetCode = "BNG";
+    public KioraTheCrashingWave(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.PLANESWALKER},"{2}{G}{U}");
         this.subtype.add("Kiora");
 
         this.addAbility(new PlanswalkerEntersWithLoyalityCountersAbility(2));

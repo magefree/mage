@@ -26,13 +26,13 @@
  *  or implied, of BetaSteward_at_googlemail.com.
  */
 
-package mage.sets.tenthedition;
+package mage.cards.e;
 
 import java.util.UUID;
 import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.MageInt;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 
 /**
  *
@@ -40,9 +40,8 @@ import mage.cards.CardImpl;
  */
 public class EarthElemental extends CardImpl {
 
-    public EarthElemental (UUID ownerId) {
-        super(ownerId, 199, "Earth Elemental", Rarity.UNCOMMON, new CardType[]{CardType.CREATURE}, "{3}{R}{R}");
-        this.expansionSetCode = "10E";
+    public EarthElemental (UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{3}{R}{R}");
         this.subtype.add("Elemental");
 
         this.power = new MageInt(4);

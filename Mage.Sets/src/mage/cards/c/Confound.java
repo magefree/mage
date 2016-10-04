@@ -25,14 +25,14 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.planeshift;
+package mage.cards.c;
 
 import java.util.UUID;
 import mage.abilities.effects.common.CounterTargetEffect;
 import mage.abilities.effects.common.DrawCardSourceControllerEffect;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.filter.FilterSpell;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.filter.predicate.other.TargetsPermanentPredicate;
@@ -50,9 +50,8 @@ public class Confound extends CardImpl {
         filter.add(new TargetsPermanentPredicate(new FilterCreaturePermanent()));
     }
 
-    public Confound(UUID ownerId) {
-        super(ownerId, 22, "Confound", Rarity.COMMON, new CardType[]{CardType.INSTANT}, "{1}{U}");
-        this.expansionSetCode = "PLS";
+    public Confound(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.INSTANT},"{1}{U}");
 
         // Counter target spell that targets one or more creatures.
         this.getSpellAbility().addEffect(new CounterTargetEffect());

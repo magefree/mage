@@ -25,14 +25,14 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.odyssey;
+package mage.cards.d;
 
 import java.util.UUID;
 import mage.abilities.effects.Effect;
 import mage.abilities.effects.common.DestroyTargetEffect;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.target.common.TargetArtifactPermanent;
 import mage.target.common.TargetCreaturePermanent;
 import mage.target.common.TargetEnchantmentPermanent;
@@ -44,9 +44,8 @@ import mage.target.common.TargetLandPermanent;
  */
 public class Decimate extends CardImpl {
 
-    public Decimate(UUID ownerId) {
-        super(ownerId, 287, "Decimate", Rarity.RARE, new CardType[]{CardType.SORCERY}, "{2}{R}{G}");
-        this.expansionSetCode = "ODY";
+    public Decimate(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{2}{R}{G}");
 
         // Destroy target artifact, target creature, target enchantment, and target land.
         Effect effect = new DestroyTargetEffect(false, true);

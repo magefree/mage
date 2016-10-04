@@ -25,15 +25,15 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.khansoftarkir;
+package mage.cards.w;
 
 import java.util.UUID;
 import mage.abilities.Mode;
 import mage.abilities.effects.common.DamageTargetEffect;
 import mage.abilities.effects.common.TapTargetEffect;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.target.common.TargetCreaturePermanent;
 
 /**
@@ -42,9 +42,8 @@ import mage.target.common.TargetCreaturePermanent;
  */
 public class Winterflame extends CardImpl {
 
-    public Winterflame(UUID ownerId) {
-        super(ownerId, 213, "Winterflame", Rarity.UNCOMMON, new CardType[]{CardType.INSTANT}, "{1}{U}{R}");
-        this.expansionSetCode = "KTK";
+    public Winterflame(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.INSTANT},"{1}{U}{R}");
 
 
         // Choose one or both -

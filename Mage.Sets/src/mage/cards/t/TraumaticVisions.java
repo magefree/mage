@@ -25,15 +25,15 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.conflux;
+package mage.cards.t;
 
 import java.util.UUID;
 import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.abilities.costs.mana.ManaCostsImpl;
 import mage.abilities.effects.common.CounterTargetEffect;
 import mage.abilities.keyword.BasicLandcyclingAbility;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.target.TargetSpell;
 
 /**
@@ -42,9 +42,8 @@ import mage.target.TargetSpell;
  */
 public class TraumaticVisions extends CardImpl {
 
-    public TraumaticVisions(UUID ownerId) {
-        super(ownerId, 36, "Traumatic Visions", Rarity.COMMON, new CardType[]{CardType.INSTANT}, "{3}{U}{U}");
-        this.expansionSetCode = "CON";
+    public TraumaticVisions(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.INSTANT},"{3}{U}{U}");
 
 
         // Counter target spell.

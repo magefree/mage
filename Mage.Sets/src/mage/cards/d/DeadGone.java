@@ -1,11 +1,11 @@
-package mage.sets.planarchaos;
+package mage.cards.d;
 
 import mage.abilities.effects.common.DamageTargetEffect;
 import mage.abilities.effects.common.ReturnToHandTargetEffect;
 import mage.cards.Card;
+import mage.cards.CardSetInfo;
 import mage.cards.SplitCard;
 import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.constants.TargetController;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.filter.predicate.permanent.ControllerPredicate;
@@ -23,9 +23,8 @@ public class DeadGone extends SplitCard {
         filter.add(new ControllerPredicate(TargetController.NOT_YOU));
     }
 
-    public DeadGone(UUID ownerId) {
-        super(ownerId, 113, "Dead", "Gone", Rarity.COMMON, new CardType[]{CardType.INSTANT}, "{R}", "{2}{R}", false);
-        this.expansionSetCode = "PLC";
+    public DeadGone(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.INSTANT},"{R}","{2}{R}",false);
 
         // Dead
         // Dead deals 2 damage to target creature.

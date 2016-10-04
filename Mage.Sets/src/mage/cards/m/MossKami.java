@@ -26,14 +26,14 @@
  *  or implied, of BetaSteward_at_googlemail.com.
  */
 
-package mage.sets.championsofkamigawa;
+package mage.cards.m;
 
 import java.util.UUID;
 import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.MageInt;
 import mage.abilities.keyword.TrampleAbility;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 
 /**
  *
@@ -41,9 +41,8 @@ import mage.cards.CardImpl;
  */
 public class MossKami extends CardImpl {
 
-    public MossKami (UUID ownerId) {
-        super(ownerId, 228, "Moss Kami", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{5}{G}");
-        this.expansionSetCode = "CHK";
+    public MossKami (UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{5}{G}");
         this.subtype.add("Spirit");
 
         this.power = new MageInt(5);

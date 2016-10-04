@@ -25,13 +25,13 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.magic2015;
+package mage.cards.p;
 
 import java.util.UUID;
 import mage.abilities.effects.common.ExileTargetEffect;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.filter.Filter;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.filter.predicate.mageobject.ToughnessPredicate;
@@ -49,9 +49,8 @@ public class PillarOfLight extends CardImpl {
         filter.add(new ToughnessPredicate(Filter.ComparisonType.GreaterThan, 3));
     }
 
-    public PillarOfLight(UUID ownerId) {
-        super(ownerId, 24, "Pillar of Light", Rarity.COMMON, new CardType[]{CardType.INSTANT}, "{2}{W}");
-        this.expansionSetCode = "M15";
+    public PillarOfLight(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.INSTANT},"{2}{W}");
 
 
         // Exile target creature with toughness 4 or greater.

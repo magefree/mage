@@ -25,12 +25,11 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.fifthdawn;
+package mage.cards.b;
 
 import java.util.UUID;
 
 import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.costs.common.RemoveCountersSourceCost;
@@ -38,6 +37,7 @@ import mage.abilities.effects.common.continuous.BoostTargetEffect;
 import mage.abilities.keyword.FlashAbility;
 import mage.abilities.keyword.SunburstAbility;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.Duration;
 import mage.constants.Zone;
 import mage.counters.CounterType;
@@ -49,9 +49,8 @@ import mage.target.common.TargetCreaturePermanent;
  */
 public class BatonOfCourage extends CardImpl {
 
-    public BatonOfCourage(UUID ownerId) {
-        super(ownerId, 105, "Baton of Courage", Rarity.COMMON, new CardType[]{CardType.ARTIFACT}, "{3}");
-        this.expansionSetCode = "5DN";
+    public BatonOfCourage(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.ARTIFACT},"{3}");
 
         // Flash
         this.addAbility(FlashAbility.getInstance());

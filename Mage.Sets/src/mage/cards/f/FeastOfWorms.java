@@ -26,16 +26,16 @@
  *  or implied, of BetaSteward_at_googlemail.com.
  */
 
-package mage.sets.championsofkamigawa;
+package mage.cards.f;
 
 import java.util.UUID;
 import mage.constants.CardType;
 import mage.constants.Outcome;
-import mage.constants.Rarity;
 import mage.abilities.Ability;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.DestroyTargetEffect;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.filter.common.FilterControlledLandPermanent;
 import mage.filter.common.FilterControlledPermanent;
 import mage.filter.predicate.permanent.ControllerIdPredicate;
@@ -51,9 +51,8 @@ import mage.target.common.TargetLandPermanent;
  */
 public class FeastOfWorms extends CardImpl {
 
-    public FeastOfWorms (UUID ownerId) {
-        super(ownerId, 207, "Feast of Worms", Rarity.UNCOMMON, new CardType[]{CardType.SORCERY}, "{3}{G}{G}");
-        this.expansionSetCode = "CHK";
+    public FeastOfWorms (UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{3}{G}{G}");
         this.subtype.add("Arcane");
 
 

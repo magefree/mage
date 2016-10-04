@@ -25,15 +25,15 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.alarareborn;
+package mage.cards.g;
 
 import java.util.UUID;
 import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.MageInt;
 import mage.abilities.effects.common.DevourEffect;
 import mage.abilities.keyword.DevourAbility;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 
 /**
  *
@@ -41,9 +41,8 @@ import mage.cards.CardImpl;
  */
 public class GorgerWurm extends CardImpl {
 
-    public GorgerWurm(UUID ownerId) {
-        super(ownerId, 56, "Gorger Wurm", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{3}{R}{G}");
-        this.expansionSetCode = "ARB";
+    public GorgerWurm(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{3}{R}{G}");
         this.subtype.add("Wurm");
 
 

@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.worldwake;
+package mage.cards.p;
 
 import java.util.List;
 import java.util.UUID;
@@ -36,6 +36,7 @@ import mage.abilities.costs.mana.ManaCostsImpl;
 import mage.abilities.effects.common.DontUntapInControllersNextUntapStepTargetEffect;
 import mage.abilities.effects.common.TapTargetEffect;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.*;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
@@ -48,9 +49,8 @@ import mage.watchers.common.PermanentsEnteredBattlefieldWatcher;
  */
 public class PermafrostTrap extends CardImpl {
 
-    public PermafrostTrap(UUID ownerId) {
-        super(ownerId, 34, "Permafrost Trap", Rarity.UNCOMMON, new CardType[]{CardType.INSTANT}, "{2}{U}{U}");
-        this.expansionSetCode = "WWK";
+    public PermafrostTrap(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.INSTANT},"{2}{U}{U}");
         this.subtype.add("Trap");
 
         // If an opponent had a green creature enter the battlefield under his or her control this turn, you may pay {U} rather than pay Permafrost Trap's mana cost.

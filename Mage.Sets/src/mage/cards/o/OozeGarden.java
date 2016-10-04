@@ -25,13 +25,12 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.shardsofalara;
+package mage.cards.o;
 
 import java.util.ArrayList;
 import java.util.UUID;
 
 import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.ObjectColor;
 import mage.abilities.AbilitiesImpl;
 import mage.abilities.Ability;
@@ -41,6 +40,7 @@ import mage.abilities.costs.common.SacrificeTargetCost;
 import mage.abilities.costs.mana.ManaCostsImpl;
 import mage.abilities.effects.OneShotEffect;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.Outcome;
 import mage.constants.Zone;
 import mage.filter.common.FilterControlledCreaturePermanent;
@@ -60,9 +60,8 @@ public class OozeGarden extends CardImpl {
     static{
         filter.add(Predicates.not(new SubtypePredicate("Ooze")));
     }
-    public OozeGarden(UUID ownerId) {
-        super(ownerId, 143, "Ooze Garden", Rarity.RARE, new CardType[]{CardType.ENCHANTMENT}, "{1}{G}");
-        this.expansionSetCode = "ALA";
+    public OozeGarden(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.ENCHANTMENT},"{1}{G}");
 
 
         // {1}{G}, Sacrifice a non-Ooze creature: Put an X/X green Ooze creature token onto the battlefield, where X is the sacrificed creature's power. Activate this ability only any time you could cast a sorcery.

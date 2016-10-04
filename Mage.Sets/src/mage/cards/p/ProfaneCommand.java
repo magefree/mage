@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.commander2014;
+package mage.cards.p;
 
 import java.util.UUID;
 import mage.abilities.Ability;
@@ -40,9 +40,9 @@ import mage.abilities.effects.common.continuous.BoostTargetEffect;
 import mage.abilities.effects.common.continuous.GainAbilityTargetEffect;
 import mage.abilities.keyword.FearAbility;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Duration;
-import mage.constants.Rarity;
 import mage.filter.Filter;
 import mage.filter.FilterCard;
 import mage.filter.common.FilterCreatureCard;
@@ -59,9 +59,8 @@ import mage.target.common.TargetCreaturePermanent;
  */
 public class ProfaneCommand extends CardImpl {
 
-    public ProfaneCommand(UUID ownerId) {
-        super(ownerId, 156, "Profane Command", Rarity.RARE, new CardType[]{CardType.SORCERY}, "{X}{B}{B}");
-        this.expansionSetCode = "C14";
+    public ProfaneCommand(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{X}{B}{B}");
 
 
         DynamicValue xValue = new ManacostVariableValue();

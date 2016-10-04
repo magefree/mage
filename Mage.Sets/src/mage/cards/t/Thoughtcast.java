@@ -25,14 +25,14 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.elspethvstezzeret;
+package mage.cards.t;
 
 import java.util.UUID;
 import mage.abilities.effects.common.DrawCardSourceControllerEffect;
 import mage.abilities.keyword.AffinityForArtifactsAbility;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.Rarity;
 
 /**
  *
@@ -40,9 +40,8 @@ import mage.constants.Rarity;
  */
 public class Thoughtcast extends CardImpl {
 
-    public Thoughtcast(UUID ownerId) {
-        super(ownerId, 71, "Thoughtcast", Rarity.COMMON, new CardType[]{CardType.SORCERY}, "{4}{U}");
-        this.expansionSetCode = "DDF";
+    public Thoughtcast(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{4}{U}");
 
 
         // Affinity for artifacts

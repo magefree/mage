@@ -25,14 +25,14 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.timespiral;
+package mage.cards.t;
 
 import java.util.UUID;
 
 import mage.abilities.effects.common.PutOnLibraryTargetEffect;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.filter.FilterPermanent;
 import mage.filter.predicate.Predicates;
 import mage.filter.predicate.mageobject.CardTypePredicate;
@@ -52,9 +52,8 @@ public class TemporalEddy extends CardImpl {
                 new CardTypePredicate(CardType.LAND)));
     }
 
-    public TemporalEddy(UUID ownerId) {
-        super(ownerId, 85, "Temporal Eddy", Rarity.COMMON, new CardType[]{CardType.SORCERY}, "{2}{U}{U}");
-        this.expansionSetCode = "TSP";
+    public TemporalEddy(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{2}{U}{U}");
 
         // Put target creature or land on top of its owner's library.
         this.getSpellAbility().addEffect(new PutOnLibraryTargetEffect(true));

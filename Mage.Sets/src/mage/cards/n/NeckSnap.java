@@ -25,12 +25,12 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.lorwyn;
+package mage.cards.n;
 
 import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.abilities.effects.common.DestroyTargetEffect;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.target.common.TargetAttackingOrBlockingCreature;
 
 import java.util.UUID;
@@ -41,9 +41,8 @@ import java.util.UUID;
  */
 public class NeckSnap extends CardImpl {
 
-    public NeckSnap(UUID ownerId) {
-        super(ownerId, 32, "Neck Snap", Rarity.COMMON, new CardType[]{CardType.INSTANT}, "{3}{W}");
-        this.expansionSetCode = "LRW";
+    public NeckSnap(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.INSTANT},"{3}{W}");
 
         // Destroy target attacking or blocking creature.
         this.getSpellAbility().addEffect(new DestroyTargetEffect());

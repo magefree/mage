@@ -25,13 +25,12 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.zendikar;
+package mage.cards.v;
 
 import java.util.UUID;
 
 import mage.constants.CardType;
 import mage.constants.Outcome;
-import mage.constants.Rarity;
 import mage.constants.Zone;
 import mage.MageInt;
 import mage.abilities.Ability;
@@ -40,6 +39,7 @@ import mage.abilities.costs.common.SacrificeSourceCost;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.keyword.FirstStrikeAbility;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.counters.Counter;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
@@ -51,9 +51,8 @@ import mage.target.TargetPermanent;
  */
 public class VampireHexmage extends CardImpl {
 
-    public VampireHexmage(UUID ownerId) {
-        super(ownerId, 114, "Vampire Hexmage", Rarity.UNCOMMON, new CardType[]{CardType.CREATURE}, "{B}{B}");
-        this.expansionSetCode = "ZEN";
+    public VampireHexmage(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{B}{B}");
         this.subtype.add("Vampire");
         this.subtype.add("Shaman");
 

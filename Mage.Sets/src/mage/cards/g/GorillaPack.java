@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.iceage;
+package mage.cards.g;
 
 import java.util.UUID;
 import mage.MageInt;
@@ -34,8 +34,8 @@ import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.effects.common.SacrificeSourceEffect;
 import mage.abilities.effects.common.combat.CantAttackUnlessDefenderControllsPermanent;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.constants.Zone;
 import mage.filter.Filter;
 import mage.filter.common.FilterLandPermanent;
@@ -46,9 +46,8 @@ import mage.filter.common.FilterLandPermanent;
  */
 public class GorillaPack extends CardImpl {
 
-    public GorillaPack(UUID ownerId) {
-        super(ownerId, 135, "Gorilla Pack", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{2}{G}");
-        this.expansionSetCode = "ICE";
+    public GorillaPack(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{2}{G}");
         this.subtype.add("Ape");
         this.power = new MageInt(3);
         this.toughness = new MageInt(3);

@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.elspethvstezzeret;
+package mage.cards.r;
 
 import java.util.UUID;
 import mage.abilities.common.AsEntersBattlefieldAbility;
@@ -35,8 +35,8 @@ import mage.abilities.effects.common.TapSourceUnlessPaysEffect;
 import mage.abilities.keyword.ReinforceAbility;
 import mage.abilities.mana.WhiteManaAbility;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.filter.FilterCard;
 import mage.filter.predicate.mageobject.SubtypePredicate;
 import mage.target.common.TargetCardInHand;
@@ -53,9 +53,8 @@ public class RusticClachan extends CardImpl {
         filter.add(new SubtypePredicate("Kithkin"));
     }
 
-    public RusticClachan(UUID ownerId) {
-        super(ownerId, 34, "Rustic Clachan", Rarity.RARE, new CardType[]{CardType.LAND}, "");
-        this.expansionSetCode = "DDF";
+    public RusticClachan(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.LAND},"");
 
         // As Rustic Clachan enters the battlefield, you may reveal a Kithkin card from your hand. If you don't, Rustic Clachan enters the battlefield tapped.
         this.addAbility(new AsEntersBattlefieldAbility(new TapSourceUnlessPaysEffect(new RevealTargetFromHandCost(new TargetCardInHand(filter))), "you may reveal a Kithkin card from your hand. If you don't, {this} enters the battlefield tapped"));

@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.magicorigins;
+package mage.cards.j;
 
 import java.util.UUID;
 import mage.MageInt;
@@ -40,8 +40,8 @@ import mage.abilities.effects.common.ExileAndReturnTransformedSourceEffect;
 import mage.abilities.effects.common.ExileAndReturnTransformedSourceEffect.Gender;
 import mage.abilities.keyword.TransformAbility;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.constants.Zone;
 
 /**
@@ -50,9 +50,8 @@ import mage.constants.Zone;
  */
 public class JaceVrynsProdigy extends CardImpl {
 
-    public JaceVrynsProdigy(UUID ownerId) {
-        super(ownerId, 60, "Jace, Vryn's Prodigy", Rarity.MYTHIC, new CardType[]{CardType.CREATURE}, "{1}{U}");
-        this.expansionSetCode = "ORI";
+    public JaceVrynsProdigy(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{1}{U}");
         this.supertype.add("Legendary");
         this.subtype.add("Human");
         this.subtype.add("Wizard");
@@ -60,7 +59,7 @@ public class JaceVrynsProdigy extends CardImpl {
         this.toughness = new MageInt(2);
 
         this.transformable = true;
-        this.secondSideCard = new JaceTelepathUnbound(ownerId);
+        this.secondSideCardClazz = JaceTelepathUnbound.class;
 
         // {T}: Draw a card, then discard a card. If there are five or more cards in your graveyard, exile Jace, Vryn's Prodigy, then return him to the battefield transformed under his owner's control.
         this.addAbility(new TransformAbility());

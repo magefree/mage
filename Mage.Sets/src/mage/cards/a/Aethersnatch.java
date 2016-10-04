@@ -25,15 +25,15 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.commander2015;
+package mage.cards.a;
 
 import java.util.UUID;
 import mage.abilities.Ability;
 import mage.abilities.effects.OneShotEffect;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Outcome;
-import mage.constants.Rarity;
 import mage.game.Game;
 import mage.game.stack.Spell;
 import mage.players.Player;
@@ -45,9 +45,8 @@ import mage.target.TargetSpell;
  */
 public class Aethersnatch extends CardImpl {
 
-    public Aethersnatch(UUID ownerId) {
-        super(ownerId, 9, "Aethersnatch", Rarity.RARE, new CardType[]{CardType.INSTANT}, "{4}{U}{U}");
-        this.expansionSetCode = "C15";
+    public Aethersnatch(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.INSTANT},"{4}{U}{U}");
 
         // Gain control of target spell. You may choose new targets for it.
         this.getSpellAbility().addEffect(new AethersnatchEffect());

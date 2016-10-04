@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.darkascension;
+package mage.cards.s;
 
 import java.util.UUID;
 import mage.MageInt;
@@ -40,10 +40,10 @@ import mage.abilities.effects.common.continuous.BoostControlledEffect;
 import mage.abilities.keyword.LifelinkAbility;
 import mage.cards.Card;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Duration;
 import mage.constants.Outcome;
-import mage.constants.Rarity;
 import mage.constants.Zone;
 import mage.filter.FilterPermanent;
 import mage.filter.predicate.Predicates;
@@ -69,9 +69,8 @@ public class SorinLordOfInnistrad extends CardImpl {
                 new CardTypePredicate(CardType.PLANESWALKER)));
     }
 
-    public SorinLordOfInnistrad(UUID ownerId) {
-        super(ownerId, 142, "Sorin, Lord of Innistrad", Rarity.MYTHIC, new CardType[]{CardType.PLANESWALKER}, "{2}{W}{B}");
-        this.expansionSetCode = "DKA";
+    public SorinLordOfInnistrad(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.PLANESWALKER},"{2}{W}{B}");
         this.subtype.add("Sorin");
 
         this.addAbility(new PlanswalkerEntersWithLoyalityCountersAbility(3));

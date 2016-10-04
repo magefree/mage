@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.saviorsofkamigawa;
+package mage.cards.m;
 
 import java.util.Set;
 import java.util.UUID;
@@ -34,11 +34,11 @@ import mage.abilities.Ability;
 import mage.abilities.effects.OneShotEffect;
 import mage.cards.Card;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.cards.Cards;
 import mage.cards.CardsImpl;
 import mage.constants.CardType;
 import mage.constants.Outcome;
-import mage.constants.Rarity;
 import mage.constants.Zone;
 import mage.filter.FilterCard;
 import mage.game.Game;
@@ -53,9 +53,8 @@ import mage.target.common.TargetOpponent;
  */
 public class MurmursFromBeyond extends CardImpl {
 
-    public MurmursFromBeyond(UUID ownerId) {
-        super(ownerId, 47, "Murmurs from Beyond", Rarity.COMMON, new CardType[]{CardType.INSTANT}, "{2}{U}");
-        this.expansionSetCode = "SOK";
+    public MurmursFromBeyond(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.INSTANT},"{2}{U}");
         this.subtype.add("Arcane");
 
         // Reveal the top three cards of your library. An opponent chooses one of them. Put that card into your graveyard and the rest into your hand.

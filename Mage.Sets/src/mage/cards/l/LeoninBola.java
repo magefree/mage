@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.darksteel;
+package mage.cards.l;
 
 import java.util.UUID;
 
@@ -41,6 +41,7 @@ import mage.abilities.effects.common.TapTargetEffect;
 import mage.abilities.effects.common.continuous.GainAbilityAttachedEffect;
 import mage.abilities.keyword.EquipAbility;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.target.common.TargetCreaturePermanent;
@@ -51,9 +52,8 @@ import mage.target.common.TargetCreaturePermanent;
  */
 public class LeoninBola extends CardImpl {
 
-    public LeoninBola(UUID ownerId) {
-        super(ownerId, 127, "Leonin Bola", Rarity.COMMON, new CardType[]{CardType.ARTIFACT}, "{1}");
-        this.expansionSetCode = "DST";
+    public LeoninBola(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.ARTIFACT},"{1}");
         this.subtype.add("Equipment");
 
         // Equipped creature has "{tap}, Unattach Leonin Bola: Tap target creature."

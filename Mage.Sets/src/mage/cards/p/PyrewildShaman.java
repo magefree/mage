@@ -26,7 +26,7 @@
  *  or implied, of BetaSteward_at_googlemail.com.
  */
 
-package mage.sets.dragonsmaze;
+package mage.cards.p;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -39,9 +39,9 @@ import mage.abilities.effects.common.ReturnToHandSourceEffect;
 import mage.abilities.effects.common.continuous.BoostTargetEffect;
 import mage.abilities.keyword.BloodrushAbility;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Duration;
-import mage.constants.Rarity;
 import mage.constants.Zone;
 import mage.game.Game;
 import mage.game.events.DamagedEvent;
@@ -54,9 +54,8 @@ import mage.game.permanent.Permanent;
 
 public class PyrewildShaman extends CardImpl {
 
-    public PyrewildShaman (UUID ownerId) {
-        super(ownerId, 36, "Pyrewild Shaman", Rarity.RARE, new CardType[]{CardType.CREATURE}, "{2}{R}");
-        this.expansionSetCode = "DGM";
+    public PyrewildShaman (UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{2}{R}");
         this.subtype.add("Goblin");
         this.subtype.add("Shaman");
 

@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.dragonsmaze;
+package mage.cards.s;
 
 import mage.abilities.Ability;
 import mage.abilities.common.AttacksOrBlocksEnchantedTriggeredAbility;
@@ -33,9 +33,9 @@ import mage.abilities.effects.common.AttachEffect;
 import mage.abilities.effects.common.LoseLifeControllerAttachedEffect;
 import mage.abilities.keyword.EnchantAbility;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Outcome;
-import mage.constants.Rarity;
 import mage.constants.Zone;
 import mage.target.TargetPermanent;
 import mage.target.common.TargetCreaturePermanent;
@@ -50,10 +50,9 @@ import java.util.UUID;
 
 public class SinisterPossession extends CardImpl {
 
-    public SinisterPossession(UUID ownerId) {
-        super(ownerId, 29, "Sinister Possession", Rarity.COMMON, new CardType[]{CardType.ENCHANTMENT}, "{B}");
+    public SinisterPossession(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.ENCHANTMENT},"{B}");
         this.subtype.add("Aura");
-        this.expansionSetCode = "DGM";
 
 
         // Enchant creature

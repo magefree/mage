@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.oathofthegatewatch;
+package mage.cards.w;
 
 import java.util.UUID;
 import mage.abilities.Mode;
@@ -34,8 +34,8 @@ import mage.abilities.effects.common.CounterTargetEffect;
 import mage.abilities.effects.common.CreateTokenEffect;
 import mage.abilities.effects.common.ExileTargetEffect;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.filter.Filter;
 import mage.filter.Filter.ComparisonType;
 import mage.filter.FilterSpell;
@@ -64,9 +64,8 @@ public class WarpingWail extends CardImpl {
         filterSorcery.add(new CardTypePredicate(CardType.SORCERY));
     }
 
-    public WarpingWail(UUID ownerId) {
-        super(ownerId, 12, "Warping Wail", Rarity.UNCOMMON, new CardType[]{CardType.INSTANT}, "{1}{C}");
-        this.expansionSetCode = "OGW";
+    public WarpingWail(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.INSTANT},"{1}{C}");
 
         // Choose one &mdash; Exile target creature with power or toughness 1 or less.
         Effect effect = new ExileTargetEffect();

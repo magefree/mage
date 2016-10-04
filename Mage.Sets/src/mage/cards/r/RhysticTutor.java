@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.prophecy;
+package mage.cards.r;
 
 import java.util.UUID;
 import mage.abilities.costs.mana.ManaCostsImpl;
@@ -33,8 +33,8 @@ import mage.abilities.effects.Effect;
 import mage.abilities.effects.common.DoUnlessAnyPlayerPaysEffect;
 import mage.abilities.effects.common.search.SearchLibraryPutInHandEffect;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.target.common.TargetCardInLibrary;
 
 /**
@@ -43,9 +43,8 @@ import mage.target.common.TargetCardInLibrary;
  */
 public class RhysticTutor extends CardImpl {
 
-    public RhysticTutor(UUID ownerId) {
-        super(ownerId, 77, "Rhystic Tutor", Rarity.RARE, new CardType[]{CardType.SORCERY}, "{2}{B}");
-        this.expansionSetCode = "PCY";
+    public RhysticTutor(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{2}{B}");
 
         // Unless any player pays {2}, search your library for a card, put that card into your hand, then shuffle your library.
         Effect effect = new DoUnlessAnyPlayerPaysEffect(new SearchLibraryPutInHandEffect(new TargetCardInLibrary()), new ManaCostsImpl("{2}"));

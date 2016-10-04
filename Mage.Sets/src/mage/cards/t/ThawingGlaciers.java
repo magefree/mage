@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.vintagemasters;
+package mage.cards.t;
 
 import java.util.UUID;
 import mage.abilities.Ability;
@@ -38,9 +38,9 @@ import mage.abilities.effects.common.CreateDelayedTriggeredAbilityEffect;
 import mage.abilities.effects.common.ReturnToHandSourceEffect;
 import mage.abilities.effects.common.search.SearchLibraryPutInPlayEffect;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Outcome;
-import mage.constants.Rarity;
 import mage.constants.Zone;
 import mage.filter.common.FilterBasicLandCard;
 import mage.target.common.TargetCardInLibrary;
@@ -51,9 +51,8 @@ import mage.target.common.TargetCardInLibrary;
  */
 public class ThawingGlaciers extends CardImpl {
 
-    public ThawingGlaciers(UUID ownerId) {
-        super(ownerId, 318, "Thawing Glaciers", Rarity.RARE, new CardType[]{CardType.LAND}, "");
-        this.expansionSetCode = "VMA";
+    public ThawingGlaciers(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.LAND},"");
 
         // Thawing Glaciers enters the battlefield tapped.
         this.addAbility(new EntersBattlefieldTappedAbility());

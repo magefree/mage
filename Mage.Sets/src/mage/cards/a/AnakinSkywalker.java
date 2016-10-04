@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.starwars;
+package mage.cards.a;
 
 import java.util.UUID;
 import mage.MageInt;
@@ -39,11 +39,12 @@ import mage.abilities.effects.common.TransformSourceEffect;
 import mage.abilities.effects.common.continuous.BoostTargetEffect;
 import mage.abilities.effects.common.counter.AddCountersSourceEffect;
 import mage.abilities.keyword.TransformAbility;
+import mage.cards.d.DarthVader;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Duration;
 import mage.constants.Outcome;
-import mage.constants.Rarity;
 import mage.constants.Zone;
 import mage.counters.CounterType;
 import mage.filter.common.FilterControlledCreaturePermanent;
@@ -67,9 +68,8 @@ public class AnakinSkywalker extends CardImpl {
         filter.add(new AnotherPredicate());
     }
 
-    public AnakinSkywalker(UUID ownerId) {
-        super(ownerId, 182, "Anakin Skywalker", Rarity.MYTHIC, new CardType[]{CardType.CREATURE}, "{3}{U}{B}{R}");
-        this.expansionSetCode = "SWS";
+    public AnakinSkywalker(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{3}{U}{B}{R}");
         this.supertype.add("Legendary");
         this.subtype.add("Human");
         this.subtype.add("Sith");
@@ -77,7 +77,7 @@ public class AnakinSkywalker extends CardImpl {
         this.toughness = new MageInt(4);
 
         this.transformable = true;
-        this.secondSideCard = new DarthVader(ownerId);
+        this.secondSideCardClazz = DarthVader.class;
 
         // Whenever another creature dies, put a +1/+1 counter on Anakin Skywalker.
         this.addAbility(new DiesCreatureTriggeredAbility(new AddCountersSourceEffect(CounterType.P1P1.createInstance()), false, true));

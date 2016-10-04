@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.morningtide;
+package mage.cards.p;
 
 import java.util.UUID;
 import mage.abilities.Ability;
@@ -33,9 +33,9 @@ import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.ClashEffect;
 import mage.abilities.effects.common.discard.DiscardTargetEffect;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Outcome;
-import mage.constants.Rarity;
 import mage.game.Game;
 import mage.players.Player;
 import mage.target.TargetPlayer;
@@ -46,9 +46,8 @@ import mage.target.TargetPlayer;
  */
 public class PullingTeeth extends CardImpl {
 
-    public PullingTeeth(UUID ownerId) {
-        super(ownerId, 75, "Pulling Teeth", Rarity.COMMON, new CardType[]{CardType.SORCERY}, "{1}{B}");
-        this.expansionSetCode = "MOR";
+    public PullingTeeth(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{1}{B}");
 
         // Clash with an opponent. If you win, target player discards two cards. Otherwise that player discards a card.
         this.getSpellAbility().addEffect(new PullingTeethEffect());

@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.urzassaga;
+package mage.cards.l;
 
 import java.util.UUID;
 import mage.abilities.Ability;
@@ -36,8 +36,8 @@ import mage.abilities.dynamicvalue.common.CountersSourceCount;
 import mage.abilities.effects.common.CounterUnlessPaysEffect;
 import mage.abilities.effects.common.counter.AddCountersSourceEffect;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.constants.TargetController;
 import mage.constants.Zone;
 import mage.counters.CounterType;
@@ -49,9 +49,8 @@ import mage.target.TargetSpell;
  */
 public class LiltingRefrain extends CardImpl {
 
-    public LiltingRefrain(UUID ownerId) {
-        super(ownerId, 83, "Lilting Refrain", Rarity.UNCOMMON, new CardType[]{CardType.ENCHANTMENT}, "{1}{U}");
-        this.expansionSetCode = "USG";
+    public LiltingRefrain(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.ENCHANTMENT},"{1}{U}");
 
         // At the beginning of your upkeep, you may put a verse counter on Lilting Refrain.
         this.addAbility(new BeginningOfUpkeepTriggeredAbility(new AddCountersSourceEffect(CounterType.VERSE.createInstance()), TargetController.YOU, true));

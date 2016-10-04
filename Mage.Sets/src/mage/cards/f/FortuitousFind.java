@@ -25,14 +25,14 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.kaladesh;
+package mage.cards.f;
 
 import java.util.UUID;
 import mage.abilities.Mode;
 import mage.abilities.effects.common.ReturnToHandTargetEffect;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.filter.common.FilterArtifactCard;
 import mage.filter.common.FilterCreatureCard;
 import mage.target.common.TargetCardInYourGraveyard;
@@ -43,9 +43,8 @@ import mage.target.common.TargetCardInYourGraveyard;
  */
 public class FortuitousFind extends CardImpl {
 
-    public FortuitousFind(UUID ownerId) {
-        super(ownerId, 81, "Fortuitous Find", Rarity.COMMON, new CardType[]{CardType.SORCERY}, "{2}{B}");
-        this.expansionSetCode = "KLD";
+    public FortuitousFind(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{2}{B}");
 
         // Choose one or both &mdash;
         this.getSpellAbility().getModes().setMinModes(1);

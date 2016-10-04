@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.fifthdawn;
+package mage.cards.s;
 
 import java.util.UUID;
 import mage.abilities.Ability;
@@ -38,8 +38,8 @@ import mage.abilities.effects.common.TapTargetEffect;
 import mage.abilities.effects.common.UntapSourceEffect;
 import mage.abilities.effects.common.UntapTargetEffect;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.constants.Zone;
 import mage.target.common.TargetCreaturePermanent;
 
@@ -49,9 +49,8 @@ import mage.target.common.TargetCreaturePermanent;
  */
 public class StaffOfDomination extends CardImpl {
 
-    public StaffOfDomination(UUID ownerId) {
-        super(ownerId, 156, "Staff of Domination", Rarity.RARE, new CardType[]{CardType.ARTIFACT}, "{3}");
-        this.expansionSetCode = "5DN";
+    public StaffOfDomination(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.ARTIFACT},"{3}");
 
         // {1}: Untap Staff of Domination.
         this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new UntapSourceEffect(), new ManaCostsImpl("{1}")));

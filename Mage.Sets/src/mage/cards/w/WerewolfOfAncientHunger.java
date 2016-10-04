@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.shadowsoverinnistrad;
+package mage.cards.w;
 
 import java.util.UUID;
 import mage.MageInt;
@@ -43,9 +43,9 @@ import mage.abilities.keyword.TrampleAbility;
 import mage.abilities.keyword.TransformAbility;
 import mage.abilities.keyword.VigilanceAbility;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Duration;
-import mage.constants.Rarity;
 import mage.constants.TargetController;
 import mage.constants.Zone;
 
@@ -55,9 +55,8 @@ import mage.constants.Zone;
  */
 public class WerewolfOfAncientHunger extends CardImpl {
 
-    public WerewolfOfAncientHunger(UUID ownerId) {
-        super(ownerId, 225, "Werewolf of Ancient Hunger", Rarity.RARE, new CardType[]{CardType.CREATURE}, "");
-        this.expansionSetCode = "SOI";
+    public WerewolfOfAncientHunger(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"");
         this.subtype.add("Werewolf");
         this.power = new MageInt(0);
         this.toughness = new MageInt(0);

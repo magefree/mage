@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.darksteel;
+package mage.cards.s;
 
 import java.util.HashSet;
 import java.util.Set;
@@ -35,9 +35,9 @@ import mage.abilities.Ability;
 import mage.abilities.common.EntersOrLeavesTheBattlefieldSourceTriggeredAbility;
 import mage.abilities.effects.OneShotEffect;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Outcome;
-import mage.constants.Rarity;
 import mage.filter.common.FilterLandPermanent;
 import mage.filter.predicate.mageobject.SubtypePredicate;
 import mage.game.Game;
@@ -52,9 +52,8 @@ import mage.target.common.TargetLandPermanent;
  */
 public class SunderingTitan extends CardImpl {
 
-    public SunderingTitan(UUID ownerId) {
-        super(ownerId, 146, "Sundering Titan", Rarity.RARE, new CardType[]{CardType.ARTIFACT, CardType.CREATURE}, "{8}");
-        this.expansionSetCode = "DST";
+    public SunderingTitan(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.ARTIFACT,CardType.CREATURE},"{8}");
         this.subtype.add("Golem");
 
         this.power = new MageInt(7);

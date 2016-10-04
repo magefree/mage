@@ -25,15 +25,15 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.commander;
+package mage.cards.r;
 
 import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.common.BeginningOfCombatTriggeredAbility;
 import mage.abilities.effects.common.combat.AttackIfAbleTargetRandomOpponentSourceEffect;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.constants.TargetController;
 
 /**
@@ -42,9 +42,8 @@ import mage.constants.TargetController;
  */
 public class RuhanOfTheFomori extends CardImpl {
 
-    public RuhanOfTheFomori(UUID ownerId) {
-        super(ownerId, 221, "Ruhan of the Fomori", Rarity.MYTHIC, new CardType[]{CardType.CREATURE}, "{1}{R}{W}{U}");
-        this.expansionSetCode = "CMD";
+    public RuhanOfTheFomori(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{1}{R}{W}{U}");
         this.supertype.add("Legendary");
         this.subtype.add("Giant");
         this.subtype.add("Warrior");

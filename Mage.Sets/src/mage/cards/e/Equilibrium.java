@@ -25,16 +25,16 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.exodus;
+package mage.cards.e;
 
 import java.util.UUID;
 import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.abilities.Ability;
 import mage.abilities.costs.mana.GenericManaCost;
 import mage.abilities.effects.common.DoIfCostPaid;
 import mage.abilities.effects.common.ReturnToHandTargetEffect;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.filter.FilterSpell;
 import mage.filter.predicate.mageobject.CardTypePredicate;
 import mage.target.common.TargetCreaturePermanent;
@@ -52,9 +52,8 @@ public class Equilibrium extends CardImpl {
         filter.add(new CardTypePredicate(CardType.CREATURE));
     }
 
-    public Equilibrium(UUID ownerId) {
-        super(ownerId, 32, "Equilibrium", Rarity.RARE, new CardType[]{CardType.ENCHANTMENT}, "{1}{U}{U}");
-        this.expansionSetCode = "EXO";
+    public Equilibrium(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.ENCHANTMENT},"{1}{U}{U}");
 
 
         // Whenever you cast a creature spell, you may pay {1}. If you do, return target creature to its owner's hand.

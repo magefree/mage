@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.futuresight;
+package mage.cards.p;
 
 import java.util.UUID;
 import mage.ObjectColor;
@@ -34,8 +34,8 @@ import mage.abilities.condition.Condition;
 import mage.abilities.costs.AlternativeCostSourceAbility;
 import mage.abilities.effects.common.DestroyAllEffect;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.constants.WatcherScope;
 import mage.filter.FilterSpell;
 import mage.filter.common.FilterEnchantmentPermanent;
@@ -52,9 +52,8 @@ import mage.watchers.Watcher;
  */
 public class PatriciansScorn extends CardImpl { 
 
-    public PatriciansScorn(UUID ownerId) {
-        super(ownerId, 29, "Patrician's Scorn", Rarity.COMMON, new CardType[]{CardType.INSTANT}, "{3}{W}");
-        this.expansionSetCode = "FUT";
+    public PatriciansScorn(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.INSTANT},"{3}{W}");
 
 
         // If you've cast another white spell this turn, you may cast Patrician's Scorn without paying its mana cost.

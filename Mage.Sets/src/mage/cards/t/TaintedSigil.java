@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.alarareborn;
+package mage.cards.t;
 
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleActivatedAbility;
@@ -35,8 +35,8 @@ import mage.abilities.dynamicvalue.DynamicValue;
 import mage.abilities.effects.Effect;
 import mage.abilities.effects.common.GainLifeEffect;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.constants.Zone;
 import mage.game.Game;
 import mage.watchers.common.PlayerLostLifeWatcher;
@@ -51,9 +51,8 @@ public class TaintedSigil extends CardImpl {
     
     String rule = "You gain life equal to the total life lost by all players this turn";
 
-    public TaintedSigil(UUID ownerId) {
-        super(ownerId, 83, "Tainted Sigil", Rarity.UNCOMMON, new CardType[]{CardType.ARTIFACT}, "{1}{W}{B}");
-        this.expansionSetCode = "ARB";
+    public TaintedSigil(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.ARTIFACT},"{1}{W}{B}");
 
         
 

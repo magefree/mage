@@ -25,14 +25,14 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.modernmasters;
+package mage.cards.i;
 
 import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.StaticAbility;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.constants.Zone;
 import mage.filter.common.FilterLandPermanent;
 import mage.filter.predicate.mageobject.SupertypePredicate;
@@ -48,9 +48,8 @@ public class Imperiosaur extends CardImpl {
         filter.add(new SupertypePredicate("Basic"));
     }
 
-    public Imperiosaur(UUID ownerId) {
-        super(ownerId, 148, "Imperiosaur", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{2}{G}{G}");
-        this.expansionSetCode = "MMA";
+    public Imperiosaur(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{2}{G}{G}");
         this.subtype.add("Lizard");
 
         this.power = new MageInt(5);

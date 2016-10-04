@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package mage.sets.legends;
+package mage.cards.a;
 
 import java.util.UUID;
 import mage.abilities.Ability;
@@ -12,9 +12,9 @@ import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.effects.common.DontUntapInControllersUntapStepAllEffect;
 import mage.abilities.effects.common.TapAllEffect;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Duration;
-import mage.constants.Rarity;
 import mage.constants.TargetController;
 import mage.constants.Zone;
 import mage.filter.common.FilterCreaturePermanent;
@@ -31,9 +31,8 @@ public class ArenaOfTheAncients extends CardImpl {
         legendaryFilter.add(new SupertypePredicate("Legendary"));
     }
     
-    public ArenaOfTheAncients(UUID ownerId) {
-        super(ownerId, 215, "Arena of the Ancients", Rarity.RARE, new CardType[]{CardType.ARTIFACT}, "{3}");
-        this.expansionSetCode = "LEG";
+    public ArenaOfTheAncients(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.ARTIFACT},"{3}");
         
         // When Arena of the Ancients enters the battlefield, tap all Legendary creatures
         Ability tapAllLegendsAbility = new EntersBattlefieldTriggeredAbility(new TapAllEffect(legendaryFilter));

@@ -25,14 +25,14 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.fatereforged;
+package mage.cards.a;
 
 import java.util.UUID;
 import mage.abilities.effects.common.SacrificeEffect;
 import mage.abilities.effects.keyword.BolsterEffect;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.filter.common.FilterEnchantmentPermanent;
 import mage.target.TargetPlayer;
 
@@ -42,9 +42,8 @@ import mage.target.TargetPlayer;
  */
 public class AbzanAdvantage extends CardImpl {
 
-    public AbzanAdvantage(UUID ownerId) {
-        super(ownerId, 2, "Abzan Advantage", Rarity.COMMON, new CardType[]{CardType.INSTANT}, "{1}{W}");
-        this.expansionSetCode = "FRF";
+    public AbzanAdvantage(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.INSTANT},"{1}{W}");
 
         // Target player sacrifices an enchantment. Bolster 1.
         this.getSpellAbility().addEffect(new SacrificeEffect(new FilterEnchantmentPermanent(), 1, "Target player"));

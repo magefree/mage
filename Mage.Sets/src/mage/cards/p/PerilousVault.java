@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.magic2015;
+package mage.cards.p;
 
 import java.util.UUID;
 import mage.abilities.Ability;
@@ -35,9 +35,9 @@ import mage.abilities.costs.common.TapSourceCost;
 import mage.abilities.costs.mana.GenericManaCost;
 import mage.abilities.effects.OneShotEffect;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Outcome;
-import mage.constants.Rarity;
 import mage.constants.Zone;
 import mage.filter.FilterPermanent;
 import mage.filter.common.FilterNonlandPermanent;
@@ -51,9 +51,8 @@ import mage.players.Player;
  */
 public class PerilousVault extends CardImpl {
 
-    public PerilousVault(UUID ownerId) {
-        super(ownerId, 224, "Perilous Vault", Rarity.MYTHIC, new CardType[]{CardType.ARTIFACT}, "{4}");
-        this.expansionSetCode = "M15";
+    public PerilousVault(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.ARTIFACT},"{4}");
 
         // {5}, {T}, Exile Perilous Vault: Exile all nonland permanents.
         Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new PerilousVaultEffect(), new GenericManaCost(5));

@@ -25,14 +25,13 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.innistrad;
+package mage.cards.t;
 
 import java.util.UUID;
 import mage.constants.CardType;
 import mage.constants.Duration;
 import mage.constants.Layer;
 import mage.constants.Outcome;
-import mage.constants.Rarity;
 import mage.constants.SubLayer;
 import mage.constants.Zone;
 import mage.abilities.Ability;
@@ -44,6 +43,7 @@ import mage.abilities.effects.OneShotEffect;
 import mage.abilities.keyword.EquipAbility;
 import mage.cards.Card;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.cards.CardsImpl;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
@@ -55,9 +55,8 @@ import mage.players.Player;
  */
 public class TrepanationBlade extends CardImpl {
 
-    public TrepanationBlade(UUID ownerId) {
-        super(ownerId, 235, "Trepanation Blade", Rarity.UNCOMMON, new CardType[]{CardType.ARTIFACT}, "{3}");
-        this.expansionSetCode = "ISD";
+    public TrepanationBlade(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.ARTIFACT},"{3}");
         this.subtype.add("Equipment");
 
         // Whenever equipped creature attacks, defending player reveals cards from the top of his or her library until he or she reveals a land card.

@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.odyssey;
+package mage.cards.p;
 
 import java.util.UUID;
 import mage.MageInt;
@@ -34,9 +34,9 @@ import mage.abilities.costs.common.DiscardCardCost;
 import mage.abilities.costs.common.SacrificeTargetCost;
 import mage.abilities.effects.common.continuous.BoostSourceEffect;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Duration;
-import mage.constants.Rarity;
 import mage.constants.Zone;
 import mage.filter.common.FilterControlledEnchantmentPermanent;
 import mage.target.common.TargetControlledPermanent;
@@ -47,9 +47,8 @@ import mage.target.common.TargetControlledPermanent;
  */
 public class Phantatog extends CardImpl {
 
-    public Phantatog(UUID ownerId) {
-        super(ownerId, 291, "Phantatog", Rarity.UNCOMMON, new CardType[]{CardType.CREATURE}, "{1}{W}{U}");
-        this.expansionSetCode = "ODY";
+    public Phantatog(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{1}{W}{U}");
         this.subtype.add("Atog");
 
         this.power = new MageInt(1);

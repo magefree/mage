@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.mirrodin;
+package mage.cards.d;
 
 import java.util.UUID;
 import mage.abilities.Mode;
@@ -34,8 +34,8 @@ import mage.abilities.effects.common.TapTargetEffect;
 import mage.abilities.effects.common.UntapTargetEffect;
 import mage.abilities.keyword.EntwineAbility;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.filter.FilterPermanent;
 import mage.target.TargetPermanent;
 
@@ -45,9 +45,8 @@ import mage.target.TargetPermanent;
  */
 public class DreamsGrip extends CardImpl {
 
-    public DreamsGrip(UUID ownerId) {
-        super(ownerId, 34, "Dream's Grip", Rarity.COMMON, new CardType[]{CardType.INSTANT}, "{U}");
-        this.expansionSetCode = "MRD";
+    public DreamsGrip(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.INSTANT},"{U}");
 
         // Choose one - 
         this.getSpellAbility().getModes().setMinModes(1);

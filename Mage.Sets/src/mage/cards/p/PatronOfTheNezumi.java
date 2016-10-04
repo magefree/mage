@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.betrayersofkamigawa;
+package mage.cards.p;
 
 import java.util.UUID;
 import mage.MageInt;
@@ -35,8 +35,8 @@ import mage.abilities.effects.common.LoseLifeTargetEffect;
 import mage.abilities.keyword.OfferingAbility;
 import mage.cards.Card;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.constants.Zone;
 import mage.game.Game;
 import mage.game.events.GameEvent;
@@ -50,9 +50,8 @@ import mage.target.targetpointer.FixedTarget;
  */
 public class PatronOfTheNezumi extends CardImpl {
 
-    public PatronOfTheNezumi(UUID ownerId) {
-        super(ownerId, 77, "Patron of the Nezumi", Rarity.RARE, new CardType[]{CardType.CREATURE}, "{5}{B}{B}");
-        this.expansionSetCode = "BOK";
+    public PatronOfTheNezumi(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{5}{B}{B}");
         this.supertype.add("Legendary");
         this.subtype.add("Spirit");
 

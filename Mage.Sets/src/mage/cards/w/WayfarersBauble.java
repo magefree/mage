@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.commander2013;
+package mage.cards.w;
 
 import java.util.UUID;
 import mage.abilities.Ability;
@@ -34,9 +34,9 @@ import mage.abilities.costs.common.SacrificeSourceCost;
 import mage.abilities.costs.mana.GenericManaCost;
 import mage.abilities.effects.common.search.SearchLibraryPutInPlayEffect;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Outcome;
-import mage.constants.Rarity;
 import mage.constants.Zone;
 import mage.filter.common.FilterBasicLandCard;
 import mage.target.common.TargetCardInLibrary;
@@ -47,9 +47,8 @@ import mage.target.common.TargetCardInLibrary;
  */
 public class WayfarersBauble extends CardImpl {
 
-    public WayfarersBauble(UUID ownerId) {
-        super(ownerId, 270, "Wayfarer's Bauble", Rarity.COMMON, new CardType[]{CardType.ARTIFACT}, "{1}");
-        this.expansionSetCode = "C13";
+    public WayfarersBauble(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.ARTIFACT},"{1}");
 
         // {2}, {tap}, Sacrifice Wayfarer's Bauble: Search your library for a basic land card and put that card onto the battlefield tapped. Then shuffle your library.
         Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD,

@@ -26,18 +26,18 @@
  *  or implied, of BetaSteward_at_googlemail.com.
  */
 
-package mage.sets.championsofkamigawa;
+package mage.cards.o;
 
 import java.util.UUID;
 
 import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.MageInt;
 import mage.abilities.common.SpellCastControllerTriggeredAbility;
 import mage.abilities.effects.common.continuous.GainAbilitySourceEffect;
 import mage.abilities.keyword.ForestwalkAbility;
 import mage.abilities.keyword.ReachAbility;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.Duration;
 import mage.filter.common.FilterSpiritOrArcaneCard;
 
@@ -48,9 +48,8 @@ public class OrbweaverKumo extends CardImpl {
 
     private static final FilterSpiritOrArcaneCard filter = new FilterSpiritOrArcaneCard();
 
-    public OrbweaverKumo(UUID ownerId) {
-        super(ownerId, 231, "Orbweaver Kumo", Rarity.UNCOMMON, new CardType[]{CardType.CREATURE}, "{4}{G}{G}");
-        this.expansionSetCode = "CHK";
+    public OrbweaverKumo(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{4}{G}{G}");
         this.subtype.add("Spirit");
 
         this.power = new MageInt(3);

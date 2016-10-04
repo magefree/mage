@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.magic2014;
+package mage.cards.s;
 
 import java.util.UUID;
 import mage.ObjectColor;
@@ -33,8 +33,8 @@ import mage.abilities.common.EntersBattlefieldControlledTriggeredAbility;
 import mage.abilities.common.SpellCastControllerTriggeredAbility;
 import mage.abilities.effects.common.GainLifeEffect;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.constants.Zone;
 import mage.filter.FilterSpell;
 import mage.filter.common.FilterLandPermanent;
@@ -55,9 +55,8 @@ public class StaffOfTheWildMagus extends CardImpl {
         filterLand.add(new SubtypePredicate("Forest"));
     }
 
-    public StaffOfTheWildMagus(UUID ownerId) {
-        super(ownerId, 223, "Staff of the Wild Magus", Rarity.UNCOMMON, new CardType[]{CardType.ARTIFACT}, "{3}");
-        this.expansionSetCode = "M14";
+    public StaffOfTheWildMagus(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.ARTIFACT},"{3}");
 
         // Whenever you cast a green spell or a Forest enters the battlefield under your control, you may gain 1 life.
         this.addAbility(new SpellCastControllerTriggeredAbility(new GainLifeEffect(1), filterSpell,false));

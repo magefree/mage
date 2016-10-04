@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.commander2013;
+package mage.cards.i;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -37,9 +37,9 @@ import mage.abilities.effects.common.DamageAllEffect;
 import mage.abilities.effects.common.DamageTargetEffect;
 import mage.abilities.effects.common.DestroyTargetEffect;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Outcome;
-import mage.constants.Rarity;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.game.Game;
 import mage.players.Player;
@@ -52,9 +52,8 @@ import mage.target.common.TargetNonBasicLandPermanent;
  */
 public class IncendiaryCommand extends CardImpl {
 
-    public IncendiaryCommand(UUID ownerId) {
-        super(ownerId, 113, "Incendiary Command", Rarity.RARE, new CardType[]{CardType.SORCERY}, "{3}{R}{R}");
-        this.expansionSetCode = "C13";
+    public IncendiaryCommand(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{3}{R}{R}");
 
         // Choose two -
         this.getSpellAbility().getModes().setMinModes(2);

@@ -25,14 +25,14 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.heroesvsmonsters;
+package mage.cards.s;
 
 import java.util.UUID;
 import mage.abilities.effects.Effect;
 import mage.abilities.effects.common.DamageTargetEffect;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.target.TargetPlayer;
 import mage.target.common.TargetCreaturePermanent;
 import mage.target.targetpointer.SecondTargetPointer;
@@ -43,9 +43,8 @@ import mage.target.targetpointer.SecondTargetPointer;
  */
 public class ShowerOfSparks extends CardImpl {
 
-    public ShowerOfSparks(UUID ownerId) {
-        super(ownerId, 61, "Shower of Sparks", Rarity.COMMON, new CardType[]{CardType.INSTANT}, "{R}");
-        this.expansionSetCode = "DDL";
+    public ShowerOfSparks(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.INSTANT},"{R}");
 
 
         // Shower of Sparks deals 1 damage to target creature and 1 damage to target player.

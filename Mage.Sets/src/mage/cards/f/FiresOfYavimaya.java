@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.planechase;
+package mage.cards.f;
 
 import java.util.UUID;
 
@@ -38,6 +38,7 @@ import mage.abilities.effects.common.continuous.BoostTargetEffect;
 import mage.abilities.effects.common.continuous.GainAbilityAllEffect;
 import mage.abilities.keyword.HasteAbility;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.filter.common.FilterControlledCreaturePermanent;
 import mage.filter.predicate.permanent.ControllerPredicate;
 import mage.target.common.TargetCreaturePermanent;
@@ -54,9 +55,8 @@ public class FiresOfYavimaya extends CardImpl {
         filter.add(new ControllerPredicate(TargetController.YOU));
     }
 
-    public FiresOfYavimaya(UUID ownerId) {
-        super(ownerId, 87, "Fires of Yavimaya", Rarity.UNCOMMON, new CardType[]{CardType.ENCHANTMENT}, "{1}{R}{G}");
-        this.expansionSetCode = "HOP";
+    public FiresOfYavimaya(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.ENCHANTMENT},"{1}{R}{G}");
 
 
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new GainAbilityAllEffect(HasteAbility.getInstance(), Duration.WhileOnBattlefield, filter, false)));

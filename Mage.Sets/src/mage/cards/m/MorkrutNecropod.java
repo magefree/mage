@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.shadowsoverinnistrad;
+package mage.cards.m;
 
 import java.util.UUID;
 import mage.MageInt;
@@ -33,8 +33,8 @@ import mage.abilities.common.AttacksOrBlocksTriggeredAbility;
 import mage.abilities.effects.common.SacrificeControllerEffect;
 import mage.abilities.keyword.MenaceAbility;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.filter.FilterPermanent;
 import mage.filter.predicate.Predicates;
 import mage.filter.predicate.mageobject.CardTypePredicate;
@@ -55,9 +55,8 @@ public class MorkrutNecropod extends CardImpl {
         filter.add(new AnotherPredicate());
     }
 
-    public MorkrutNecropod(UUID ownerId) {
-        super(ownerId, 125, "Morkrut Necropod", Rarity.UNCOMMON, new CardType[]{CardType.CREATURE}, "{5}{B}");
-        this.expansionSetCode = "SOI";
+    public MorkrutNecropod(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{5}{B}");
         this.subtype.add("Slug");
         this.subtype.add("Horror");
         this.power = new MageInt(7);

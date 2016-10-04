@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.tempest;
+package mage.cards.c;
 
 import java.util.UUID;
 import mage.MageObject;
@@ -37,11 +37,11 @@ import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.NameACardEffect;
 import mage.cards.Card;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.cards.Cards;
 import mage.cards.CardsImpl;
 import mage.constants.CardType;
 import mage.constants.Outcome;
-import mage.constants.Rarity;
 import mage.constants.Zone;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
@@ -55,9 +55,8 @@ import mage.target.common.TargetCreatureOrPlayer;
  */
 public class CursedScroll extends CardImpl {
 
-    public CursedScroll(UUID ownerId) {
-        super(ownerId, 271, "Cursed Scroll", Rarity.RARE, new CardType[]{CardType.ARTIFACT}, "{1}");
-        this.expansionSetCode = "TMP";
+    public CursedScroll(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.ARTIFACT},"{1}");
 
         // {3}, {T}: Name a card. Reveal a card at random from your hand. If it's the named card, Cursed Scroll deals 2 damage to target creature or player.
         Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new NameACardEffect(NameACardEffect.TypeOfName.ALL), new ManaCostsImpl("{3}"));

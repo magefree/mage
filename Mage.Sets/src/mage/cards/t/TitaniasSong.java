@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.fourthedition;
+package mage.cards.t;
 
 import java.util.Iterator;
 import java.util.UUID;
@@ -35,11 +35,11 @@ import mage.abilities.common.LeavesBattlefieldTriggeredAbility;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.effects.ContinuousEffectImpl;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Duration;
 import mage.constants.Layer;
 import mage.constants.Outcome;
-import mage.constants.Rarity;
 import mage.constants.SubLayer;
 import mage.constants.Zone;
 import mage.filter.common.FilterArtifactPermanent;
@@ -54,9 +54,8 @@ import mage.game.permanent.Permanent;
  */
 public class TitaniasSong extends CardImpl {
 
-    public TitaniasSong(UUID ownerId) {
-        super(ownerId, 160, "Titania's Song", Rarity.RARE, new CardType[]{CardType.ENCHANTMENT}, "{3}{G}");
-        this.expansionSetCode = "4ED";
+    public TitaniasSong(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.ENCHANTMENT},"{3}{G}");
 
         // Each noncreature artifact loses all abilities and becomes an artifact creature with power and toughness each equal to its converted mana cost. If Titania's Song leaves the battlefield, this effect continues until end of turn.
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new TitaniasSongEffect(Duration.WhileOnBattlefield)));

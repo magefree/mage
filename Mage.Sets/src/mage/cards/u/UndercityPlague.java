@@ -25,16 +25,16 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.gatecrash;
+package mage.cards.u;
 
 import java.util.UUID;
 import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.abilities.effects.common.CipherEffect;
 import mage.abilities.effects.common.discard.DiscardTargetEffect;
 import mage.abilities.effects.common.LoseLifeTargetEffect;
 import mage.abilities.effects.common.SacrificeEffect;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.filter.FilterPermanent;
 import mage.target.TargetPlayer;
 
@@ -44,9 +44,8 @@ import mage.target.TargetPlayer;
  */
 public class UndercityPlague extends CardImpl {
 
-    public UndercityPlague(UUID ownerId) {
-        super(ownerId, 83, "Undercity Plague", Rarity.RARE, new CardType[]{CardType.SORCERY}, "{4}{B}{B}");
-        this.expansionSetCode = "GTC";
+    public UndercityPlague(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{4}{B}{B}");
 
 
         // Target player loses 1 life, discards a card, then sacrifices a permanent.

@@ -26,7 +26,7 @@
  *  or implied, of BetaSteward_at_googlemail.com.
  */
 
-package mage.sets.mirrodinbesieged;
+package mage.cards.g;
 
 import java.util.UUID;
 import mage.MageInt;
@@ -35,8 +35,8 @@ import mage.abilities.effects.common.ReturnToHandTargetEffect;
 import mage.abilities.keyword.DeathtouchAbility;
 import mage.abilities.keyword.FirstStrikeAbility;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.constants.Zone;
 import mage.filter.FilterCard;
 import mage.filter.predicate.mageobject.CardTypePredicate;
@@ -52,9 +52,8 @@ import mage.target.common.TargetCardInYourGraveyard;
  * @author Loki
  */
 public class GlissaTheTraitor extends CardImpl {
-    public GlissaTheTraitor (UUID ownerId) {
-        super(ownerId, 96, "Glissa, the Traitor", Rarity.MYTHIC, new CardType[]{CardType.CREATURE}, "{B}{G}{G}");
-        this.expansionSetCode = "MBS";
+    public GlissaTheTraitor (UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{B}{G}{G}");
         this.supertype.add("Legendary");
         this.subtype.add("Zombie");
         this.subtype.add("Elf");

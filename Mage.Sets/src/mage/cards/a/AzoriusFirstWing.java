@@ -25,15 +25,15 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.dissension;
+package mage.cards.a;
 
 import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.keyword.FlyingAbility;
 import mage.abilities.keyword.ProtectionAbility;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.filter.common.FilterEnchantmentCard;
 
 /**
@@ -43,9 +43,8 @@ import mage.filter.common.FilterEnchantmentCard;
  */
 public class AzoriusFirstWing extends CardImpl {
 
-    public AzoriusFirstWing(UUID ownerId) {
-        super(ownerId, 105, "Azorius First-Wing", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{W}{U}");
-        this.expansionSetCode = "DIS";
+    public AzoriusFirstWing(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{W}{U}");
         this.subtype.add("Griffin");
         this.power = new MageInt(2);
         this.toughness = new MageInt(2);

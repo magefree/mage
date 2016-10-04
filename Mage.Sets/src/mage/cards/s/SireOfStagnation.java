@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.battleforzendikar;
+package mage.cards.s;
 
 import java.util.UUID;
 import mage.MageInt;
@@ -35,8 +35,8 @@ import mage.abilities.effects.common.DrawCardSourceControllerEffect;
 import mage.abilities.effects.common.ExileCardsFromTopOfLibraryTargetEffect;
 import mage.abilities.keyword.DevoidAbility;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.constants.SetTargetPointer;
 import mage.constants.TargetController;
 import mage.constants.Zone;
@@ -56,9 +56,8 @@ public class SireOfStagnation extends CardImpl {
         filter.add(new ControllerPredicate(TargetController.OPPONENT));
     }
 
-    public SireOfStagnation(UUID ownerId) {
-        super(ownerId, 206, "Sire of Stagnation", Rarity.MYTHIC, new CardType[]{CardType.CREATURE}, "{4}{U}{B}");
-        this.expansionSetCode = "BFZ";
+    public SireOfStagnation(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{4}{U}{B}");
         this.subtype.add("Eldrazi");
         this.power = new MageInt(5);
         this.toughness = new MageInt(7);

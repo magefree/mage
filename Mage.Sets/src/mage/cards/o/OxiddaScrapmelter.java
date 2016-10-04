@@ -26,14 +26,14 @@
  *  or implied, of BetaSteward_at_googlemail.com.
  */
 
-package mage.sets.scarsofmirrodin;
+package mage.cards.o;
 
 import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.effects.common.DestroyTargetEffect;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.target.TargetPermanent;
 
 import java.util.UUID;
@@ -47,9 +47,8 @@ import mage.filter.common.FilterArtifactPermanent;
 public class OxiddaScrapmelter extends CardImpl {
     private static final FilterArtifactPermanent filter = new FilterArtifactPermanent("artifact");
 
-    public OxiddaScrapmelter (UUID ownerId) {
-        super(ownerId, 101, "Oxidda Scrapmelter", Rarity.UNCOMMON, new CardType[]{CardType.CREATURE}, "{3}{R}");
-        this.expansionSetCode = "SOM";
+    public OxiddaScrapmelter (UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{3}{R}");
         this.subtype.add("Beast");
 
         this.power = new MageInt(3);

@@ -25,14 +25,14 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.lorwyn;
+package mage.cards.c;
 
 import java.util.UUID;
 import mage.abilities.Mode;
 import mage.abilities.effects.common.DamageTargetEffect;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.filter.FilterPermanent;
 import mage.filter.predicate.Predicates;
 import mage.filter.predicate.mageobject.CardTypePredicate;
@@ -56,9 +56,8 @@ public class ConsumingBonfire extends CardImpl {
         filter2.add(new SubtypePredicate("Treefolk"));              
     }
 
-    public ConsumingBonfire(UUID ownerId) {
-        super(ownerId, 161, "Consuming Bonfire", Rarity.COMMON, new CardType[]{CardType.TRIBAL, CardType.SORCERY}, "{3}{R}{R}");
-        this.expansionSetCode = "LRW";
+    public ConsumingBonfire(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.TRIBAL,CardType.SORCERY},"{3}{R}{R}");
         this.subtype.add("Elemental");
 
         // Choose one - Consuming Bonfire deals 4 damage to target non-Elemental creature; 

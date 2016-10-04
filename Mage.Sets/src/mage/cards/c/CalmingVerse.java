@@ -25,15 +25,15 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.prophecy;
+package mage.cards.c;
 
 import java.util.UUID;
 import mage.abilities.Ability;
 import mage.abilities.effects.OneShotEffect;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Outcome;
-import mage.constants.Rarity;
 import mage.constants.TargetController;
 import mage.filter.FilterPermanent;
 import mage.filter.common.FilterControlledEnchantmentPermanent;
@@ -52,9 +52,8 @@ import mage.players.Player;
  */
 public class CalmingVerse extends CardImpl {
     
-    public CalmingVerse(UUID ownerId) {
-        super(ownerId, 110, "Calming Verse", Rarity.COMMON, new CardType[]{CardType.SORCERY}, "{3}{G}");
-        this.expansionSetCode = "PCY";
+    public CalmingVerse(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{3}{G}");
 
         // Destroy all enchantments you don't control. Then, if you control an untapped land, destroy all enchantments you control.
         this.getSpellAbility().addEffect(new CalmingVerseEffect());

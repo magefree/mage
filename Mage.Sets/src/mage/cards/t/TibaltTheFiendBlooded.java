@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.avacynrestored;
+package mage.cards.t;
 
 import java.util.List;
 import java.util.UUID;
@@ -44,11 +44,11 @@ import mage.abilities.effects.common.discard.DiscardControllerEffect;
 import mage.abilities.keyword.HasteAbility;
 import mage.cards.Card;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Duration;
 import mage.constants.Layer;
 import mage.constants.Outcome;
-import mage.constants.Rarity;
 import mage.constants.SubLayer;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.game.Game;
@@ -63,9 +63,8 @@ import mage.target.targetpointer.FixedTarget;
  */
 public class TibaltTheFiendBlooded extends CardImpl {
 
-    public TibaltTheFiendBlooded(UUID ownerId) {
-        super(ownerId, 161, "Tibalt, the Fiend-Blooded", Rarity.MYTHIC, new CardType[]{CardType.PLANESWALKER}, "{R}{R}");
-        this.expansionSetCode = "AVR";
+    public TibaltTheFiendBlooded(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.PLANESWALKER},"{R}{R}");
         this.subtype.add("Tibalt");
 
         this.addAbility(new PlanswalkerEntersWithLoyalityCountersAbility(2));

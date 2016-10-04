@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.commander2015;
+package mage.cards.r;
 
 import java.util.UUID;
 import mage.MageInt;
@@ -40,10 +40,10 @@ import mage.abilities.effects.common.combat.CantAttackYouOrPlaneswalkerAllEffect
 import mage.abilities.keyword.HasteAbility;
 import mage.abilities.keyword.TrampleAbility;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Duration;
 import mage.constants.Outcome;
-import mage.constants.Rarity;
 import mage.constants.TargetController;
 import mage.constants.Zone;
 import mage.filter.common.FilterCreaturePermanent;
@@ -64,9 +64,8 @@ public class RiteOfTheRagingStorm extends CardImpl {
         filter.add(new NamePredicate("Lightning Rager"));
     }
 
-    public RiteOfTheRagingStorm(UUID ownerId) {
-        super(ownerId, 30, "Rite of the Raging Storm", Rarity.UNCOMMON, new CardType[]{CardType.ENCHANTMENT}, "{3}{R}{R}");
-        this.expansionSetCode = "C15";
+    public RiteOfTheRagingStorm(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.ENCHANTMENT},"{3}{R}{R}");
 
         // Creatures named Lightning Rager can't attack you or planeswalkers you control.
         Effect effect = new CantAttackYouOrPlaneswalkerAllEffect(Duration.WhileOnBattlefield, filter);

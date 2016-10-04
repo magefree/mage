@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.dragonsoftarkir;
+package mage.cards.o;
 
 import java.util.UUID;
 import mage.abilities.Mode;
@@ -34,8 +34,8 @@ import mage.abilities.effects.common.DrawCardSourceControllerEffect;
 import mage.abilities.effects.common.GainLifeEffect;
 import mage.abilities.effects.common.ReturnFromGraveyardToBattlefieldTargetEffect;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.filter.Filter;
 import mage.filter.FilterCard;
 import mage.filter.FilterSpell;
@@ -62,9 +62,8 @@ public class OjutaisCommand extends CardImpl {
         filter2.add(new CardTypePredicate(CardType.CREATURE));
     }
     
-    public OjutaisCommand(UUID ownerId) {
-        super(ownerId, 227, "Ojutai's Command", Rarity.RARE, new CardType[]{CardType.INSTANT}, "{2}{W}{U}");
-        this.expansionSetCode = "DTK";
+    public OjutaisCommand(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.INSTANT},"{2}{W}{U}");
 
         // Choose two - 
         this.getSpellAbility().getModes().setMinModes(2);

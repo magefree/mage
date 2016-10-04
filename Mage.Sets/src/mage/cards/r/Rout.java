@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.conspiracy;
+package mage.cards.r;
 
 import java.util.UUID;
 import mage.abilities.Ability;
@@ -34,8 +34,8 @@ import mage.abilities.costs.mana.ManaCostsImpl;
 import mage.abilities.effects.Effect;
 import mage.abilities.effects.common.DestroyAllEffect;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.filter.common.FilterCreaturePermanent;
 
 /**
@@ -45,9 +45,8 @@ import mage.filter.common.FilterCreaturePermanent;
  */
 public class Rout extends CardImpl {
 
-    public Rout(UUID ownerId) {
-        super(ownerId, 80, "Rout", Rarity.RARE, new CardType[]{CardType.SORCERY}, "{3}{W}{W}");
-        this.expansionSetCode = "CNS";
+    public Rout(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{3}{W}{W}");
 
         Effect effect = new DestroyAllEffect(new FilterCreaturePermanent("creatures"), true);
         // You may cast Rout as though it had flash if you pay {2} more to cast it.

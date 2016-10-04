@@ -25,17 +25,17 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.gatecrash;
+package mage.cards.s;
 
 import java.util.List;
 import java.util.UUID;
 
 import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.abilities.Ability;
 import mage.abilities.effects.SearchEffect;
 import mage.cards.Card;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.cards.Cards;
 import mage.cards.CardsImpl;
 import mage.constants.Outcome;
@@ -51,9 +51,8 @@ import mage.target.common.TargetCardInLibrary;
  */
 public class SignalTheClans extends CardImpl {
 
-    public SignalTheClans (UUID ownerId) {
-        super(ownerId, 194, "Signal the Clans", Rarity.RARE, new CardType[]{CardType.INSTANT}, "{R}{G}");
-        this.expansionSetCode = "GTC";
+    public SignalTheClans (UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.INSTANT},"{R}{G}");
 
 
         // Search your library for three creature cards and reveal them. If you reveal three cards with different names, choose one of them at random and put that card into your hand. Shuffle the rest into your library.

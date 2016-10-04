@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.theros;
+package mage.cards.t;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -43,10 +43,10 @@ import mage.abilities.effects.common.CreateDelayedTriggeredAbilityEffect;
 import mage.abilities.effects.common.DontUntapInControllersNextUntapStepTargetEffect;
 import mage.abilities.effects.common.continuous.BoostTargetEffect;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Duration;
 import mage.constants.Outcome;
-import mage.constants.Rarity;
 import mage.constants.WatcherScope;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.game.Game;
@@ -64,9 +64,8 @@ import mage.watchers.Watcher;
  */
 public class TritonTactics extends CardImpl {
 
-    public TritonTactics(UUID ownerId) {
-        super(ownerId, 71, "Triton Tactics", Rarity.UNCOMMON, new CardType[]{CardType.INSTANT}, "{U}");
-        this.expansionSetCode = "THS";
+    public TritonTactics(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.INSTANT},"{U}");
 
         // Up to two target creatures each get +0/+3 until end of turn. Untap those creatures.
         // At this turn's next end of combat, tap each creature that was blocked by one of those

@@ -25,12 +25,12 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.lorwyn;
+package mage.cards.c;
 
 import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.MageInt;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 
 import java.util.UUID;
 import mage.abilities.TriggeredAbilityImpl;
@@ -49,9 +49,8 @@ import mage.game.events.GameEvent;
  */
 public class CeaselessSearblades extends CardImpl {
    
-    public CeaselessSearblades(UUID ownerId) {
-        super(ownerId, 158, "Ceaseless Searblades", Rarity.UNCOMMON, new CardType[]{CardType.CREATURE}, "{3}{R}");
-        this.expansionSetCode = "LRW";
+    public CeaselessSearblades(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{3}{R}");
         this.subtype.add("Elemental");
         this.subtype.add("Warrior");
 

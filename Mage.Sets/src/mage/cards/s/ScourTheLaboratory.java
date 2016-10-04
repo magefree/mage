@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.eldritchmoon;
+package mage.cards.s;
 
 import java.util.UUID;
 import mage.abilities.Ability;
@@ -34,9 +34,9 @@ import mage.abilities.condition.common.DeliriumCondition;
 import mage.abilities.effects.common.DrawCardSourceControllerEffect;
 import mage.abilities.effects.common.cost.SpellCostReductionSourceEffect;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.AbilityWord;
 import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.constants.Zone;
 
 /**
@@ -45,9 +45,8 @@ import mage.constants.Zone;
  */
 public class ScourTheLaboratory extends CardImpl {
 
-    public ScourTheLaboratory(UUID ownerId) {
-        super(ownerId, 73, "Scour the Laboratory", Rarity.UNCOMMON, new CardType[]{CardType.INSTANT}, "{4}{U}{U}");
-        this.expansionSetCode = "EMN";
+    public ScourTheLaboratory(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.INSTANT},"{4}{U}{U}");
 
         // <i>Delirium</i> &mdash; Scour the Laboratory costs {2} less to cast if there are four or more card types among cards in your graveyard.
         Ability ability = new SimpleStaticAbility(Zone.STACK, new SpellCostReductionSourceEffect(2, DeliriumCondition.getInstance()));

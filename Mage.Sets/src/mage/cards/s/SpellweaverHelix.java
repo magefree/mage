@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.mirrodin;
+package mage.cards.s;
 
 import java.util.UUID;
 import mage.abilities.Ability;
@@ -35,9 +35,9 @@ import mage.abilities.effects.Effect;
 import mage.abilities.effects.OneShotEffect;
 import mage.cards.Card;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Outcome;
-import mage.constants.Rarity;
 import mage.constants.Zone;
 import mage.filter.FilterCard;
 import mage.filter.predicate.mageobject.CardTypePredicate;
@@ -61,9 +61,8 @@ public class SpellweaverHelix extends CardImpl {
         filter.add(new CardTypePredicate(CardType.SORCERY));
     }
 
-    public SpellweaverHelix(UUID ownerId) {
-        super(ownerId, 247, "Spellweaver Helix", Rarity.RARE, new CardType[]{CardType.ARTIFACT}, "{3}");
-        this.expansionSetCode = "MRD";
+    public SpellweaverHelix(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.ARTIFACT},"{3}");
 
         // Imprint - When Spellweaver Helix enters the battlefield, you may exile two target sorcery cards from a single graveyard.
         Ability ability = new EntersBattlefieldTriggeredAbility(new SpellweaverHelixImprintEffect(), true, "Imprint &mdash; ");

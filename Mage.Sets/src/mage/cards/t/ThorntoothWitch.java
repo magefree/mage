@@ -25,17 +25,17 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.lorwyn;
+package mage.cards.t;
 
 import java.util.UUID;
 
 import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.SpellCastControllerTriggeredAbility;
 import mage.abilities.effects.common.continuous.BoostTargetEffect;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.Duration;
 import mage.filter.FilterSpell;
 import mage.filter.predicate.mageobject.SubtypePredicate;
@@ -53,9 +53,8 @@ public class ThorntoothWitch extends CardImpl {
         filter.add(new SubtypePredicate("Treefolk"));
     }
 
-    public ThorntoothWitch(UUID ownerId) {
-        super(ownerId, 144, "Thorntooth Witch", Rarity.UNCOMMON, new CardType[]{CardType.CREATURE}, "{5}{B}");
-        this.expansionSetCode = "LRW";
+    public ThorntoothWitch(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{5}{B}");
         this.subtype.add("Treefolk");
         this.subtype.add("Shaman");
 

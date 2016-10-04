@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.commander2015;
+package mage.cards.a;
 
 import java.util.UUID;
 import mage.abilities.TriggeredAbilityImpl;
@@ -33,8 +33,8 @@ import mage.abilities.costs.common.SacrificeSourceCost;
 import mage.abilities.effects.common.CreateTokenEffect;
 import mage.abilities.effects.common.DoIfCostPaid;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.constants.Zone;
 import mage.game.Game;
 import mage.game.events.GameEvent;
@@ -46,9 +46,8 @@ import mage.game.permanent.token.DragonToken2;
  */
 public class AwakenTheSkyTyrant extends CardImpl {
 
-    public AwakenTheSkyTyrant(UUID ownerId) {
-        super(ownerId, 24, "Awaken the Sky Tyrant", Rarity.RARE, new CardType[]{CardType.ENCHANTMENT}, "{3}{R}");
-        this.expansionSetCode = "C15";
+    public AwakenTheSkyTyrant(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.ENCHANTMENT},"{3}{R}");
 
         // When a source an opponent controls deals damage to you, sacrifice Awaken the Sky Tyrant. If you do, put a 5/5 red Dragon creature token with flying onto the battlefield.
         this.addAbility(new AwakenTheSkyTyrantTriggeredAbility());

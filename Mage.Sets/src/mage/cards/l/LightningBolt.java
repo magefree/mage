@@ -26,13 +26,13 @@
 * or implied, of BetaSteward_at_googlemail.com.
 */
 
-package mage.sets.magic2010;
+package mage.cards.l;
 
 import java.util.UUID;
 import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.abilities.effects.common.DamageTargetEffect;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.target.common.TargetCreatureOrPlayer;
 
 /**
@@ -41,9 +41,8 @@ import mage.target.common.TargetCreatureOrPlayer;
  */
 public class LightningBolt extends CardImpl {
 
-    public LightningBolt(UUID ownerId) {
-        super(ownerId, 146, "Lightning Bolt", Rarity.COMMON, new CardType[]{CardType.INSTANT}, "{R}");
-        this.expansionSetCode = "M10";
+    public LightningBolt(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.INSTANT},"{R}");
 
         this.getSpellAbility().addTarget(new TargetCreatureOrPlayer());
         this.getSpellAbility().addEffect(new DamageTargetEffect(3));

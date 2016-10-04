@@ -25,15 +25,15 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.newphyrexia;
+package mage.cards.p;
 
 import mage.MageInt;
 import mage.abilities.common.OnEventTriggeredAbility;
 import mage.abilities.effects.common.CreateTokenEffect;
 import mage.abilities.keyword.InfectAbility;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.game.events.GameEvent.EventType;
 import mage.game.permanent.token.InsectInfectToken;
 import mage.abilities.dynamicvalue.common.OpponentsPoisonCountersCount;
@@ -46,9 +46,8 @@ import java.util.UUID;
  */
 public class PhyrexianSwarmlord extends CardImpl {
 
-    public PhyrexianSwarmlord(UUID ownerId) {
-        super(ownerId, 119, "Phyrexian Swarmlord", Rarity.RARE, new CardType[]{CardType.CREATURE}, "{4}{G}{G}");
-        this.expansionSetCode = "NPH";
+    public PhyrexianSwarmlord(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{4}{G}{G}");
         this.subtype.add("Insect");
         this.subtype.add("Horror");
 

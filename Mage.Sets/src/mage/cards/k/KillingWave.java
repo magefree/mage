@@ -25,15 +25,15 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.avacynrestored;
+package mage.cards.k;
 
 import mage.constants.CardType;
 import mage.constants.Outcome;
-import mage.constants.Rarity;
 import mage.abilities.Ability;
 import mage.abilities.dynamicvalue.common.ManacostVariableValue;
 import mage.abilities.effects.OneShotEffect;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
@@ -50,9 +50,8 @@ import java.util.UUID;
  */
 public class KillingWave extends CardImpl {
 
-    public KillingWave(UUID ownerId) {
-        super(ownerId, 111, "Killing Wave", Rarity.RARE, new CardType[]{CardType.SORCERY}, "{X}{B}");
-        this.expansionSetCode = "AVR";
+    public KillingWave(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{X}{B}");
 
 
         // For each creature, its controller sacrifices it unless he or she pays X life.

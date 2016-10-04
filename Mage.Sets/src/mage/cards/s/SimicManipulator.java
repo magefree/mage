@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.gatecrash;
+package mage.cards.s;
 
 import java.util.UUID;
 import mage.MageInt;
@@ -38,11 +38,11 @@ import mage.abilities.costs.common.TapSourceCost;
 import mage.abilities.effects.ContinuousEffectImpl;
 import mage.abilities.keyword.EvolveAbility;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Duration;
 import mage.constants.Layer;
 import mage.constants.Outcome;
-import mage.constants.Rarity;
 import mage.constants.SubLayer;
 import mage.constants.Zone;
 import mage.counters.CounterType;
@@ -67,9 +67,8 @@ public class SimicManipulator extends CardImpl {
 
     private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("creature with power less than or equal to the number of +1/+1 counters removed this way");
 
-    public SimicManipulator(UUID ownerId) {
-        super(ownerId, 50, "Simic Manipulator", Rarity.RARE, new CardType[]{CardType.CREATURE}, "{1}{U}{U}");
-        this.expansionSetCode = "GTC";
+    public SimicManipulator(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{1}{U}{U}");
         this.subtype.add("Mutant");
         this.subtype.add("Wizard");
 

@@ -25,13 +25,13 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.portal;
+package mage.cards.p;
 
 import java.util.UUID;
 import mage.abilities.effects.common.search.SearchLibraryPutOnLibraryEffect;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.filter.FilterCard;
 import mage.filter.predicate.mageobject.CardTypePredicate;
 import mage.target.common.TargetCardInLibrary;
@@ -46,9 +46,8 @@ public class PersonalTutor extends CardImpl {
         filter.add(new CardTypePredicate(CardType.SORCERY));
     }
    
-    public PersonalTutor(UUID ownerId) {
-        super(ownerId, 65, "Personal Tutor", Rarity.UNCOMMON, new CardType[]{CardType.SORCERY}, "{U}");
-        this.expansionSetCode = "POR";
+    public PersonalTutor(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{U}");
 
 
         // Search your library for a sorcery card and reveal that card. Shuffle your library, then put the card on top of it.

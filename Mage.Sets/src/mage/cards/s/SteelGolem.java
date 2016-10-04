@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.tenthedition;
+package mage.cards.s;
 
 import java.util.UUID;
 
@@ -35,6 +35,7 @@ import mage.abilities.Ability;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.effects.ContinuousRuleModifyingEffectImpl;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.filter.common.FilterCreatureSpell;
 import mage.game.Game;
 import mage.game.events.GameEvent;
@@ -46,9 +47,8 @@ import mage.game.stack.Spell;
  */
 public class SteelGolem extends CardImpl {
 
-    public SteelGolem(UUID ownerId) {
-        super(ownerId, 344, "Steel Golem", Rarity.UNCOMMON, new CardType[]{CardType.ARTIFACT, CardType.CREATURE}, "{3}");
-        this.expansionSetCode = "10E";
+    public SteelGolem(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.ARTIFACT,CardType.CREATURE},"{3}");
         this.subtype.add("Golem");
 
         this.power = new MageInt(3);

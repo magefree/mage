@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.shadowmoor;
+package mage.cards.s;
 
 import java.util.UUID;
 import mage.MageInt;
@@ -37,9 +37,9 @@ import mage.abilities.effects.PreventionEffectImpl;
 import mage.abilities.keyword.FlyingAbility;
 import mage.cards.Card;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Duration;
-import mage.constants.Rarity;
 import mage.constants.Zone;
 import mage.game.Game;
 import mage.game.events.GameEvent;
@@ -54,9 +54,8 @@ import mage.players.Player;
  */
 public class SwansOfBrynArgoll extends CardImpl {
 
-    public SwansOfBrynArgoll(UUID ownerId) {
-        super(ownerId, 151, "Swans of Bryn Argoll", Rarity.RARE, new CardType[]{CardType.CREATURE}, "{2}{W/U}{W/U}");
-        this.expansionSetCode = "SHM";
+    public SwansOfBrynArgoll(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{2}{W/U}{W/U}");
         this.subtype.add("Bird");
         this.subtype.add("Spirit");
 

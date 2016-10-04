@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.shadowsoverinnistrad;
+package mage.cards.s;
 
 import mage.MageInt;
 import mage.abilities.Ability;
@@ -40,9 +40,9 @@ import mage.abilities.effects.common.continuous.GainAbilityControllerEffect;
 import mage.abilities.keyword.FlyingAbility;
 import mage.abilities.keyword.HexproofAbility;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Duration;
-import mage.constants.Rarity;
 import mage.constants.Zone;
 import mage.filter.common.FilterControlledPermanent;
 import mage.filter.predicate.mageobject.SubtypePredicate;
@@ -63,9 +63,8 @@ public class SigardaHeronsGrace extends CardImpl {
         filter.add(new SubtypePredicate("Human"));
     }
 
-    public SigardaHeronsGrace(UUID ownerId) {
-        super(ownerId, 250, "Sigarda, Heron's Grace", Rarity.MYTHIC, new CardType[]{CardType.CREATURE}, "{3}{G}{W}");
-        this.expansionSetCode = "SOI";
+    public SigardaHeronsGrace(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{3}{G}{W}");
         this.supertype.add("Legendary");
         this.subtype.add("Angel");
         this.power = new MageInt(4);

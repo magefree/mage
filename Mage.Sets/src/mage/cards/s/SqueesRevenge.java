@@ -25,15 +25,15 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.apocalypse;
+package mage.cards.s;
 
 import java.util.UUID;
 import mage.abilities.Ability;
 import mage.abilities.effects.OneShotEffect;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Outcome;
-import mage.constants.Rarity;
 import mage.game.Game;
 import mage.players.Player;
 
@@ -43,9 +43,8 @@ import mage.players.Player;
  */
 public class SqueesRevenge extends CardImpl {
 
-    public SqueesRevenge(UUID ownerId) {
-        super(ownerId, 123, "Squee's Revenge", Rarity.UNCOMMON, new CardType[]{CardType.SORCERY}, "{1}{U}{R}");
-        this.expansionSetCode = "APC";
+    public SqueesRevenge(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{1}{U}{R}");
 
         // Choose a number. Flip a coin that many times or until you lose a flip, whichever comes first. If you win all the flips, draw two cards for each flip.
         this.getSpellAbility().addEffect(new SqueesRevengeEffect());

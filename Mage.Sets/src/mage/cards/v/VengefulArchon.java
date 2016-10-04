@@ -26,12 +26,11 @@
  *  or implied, of BetaSteward_at_googlemail.com.
  */
 
-package mage.sets.magic2011;
+package mage.cards.v;
 
 import java.util.UUID;
 import mage.constants.CardType;
 import mage.constants.Duration;
-import mage.constants.Rarity;
 import mage.constants.Zone;
 import mage.MageInt;
 import mage.abilities.Ability;
@@ -40,6 +39,7 @@ import mage.abilities.costs.mana.ManaCostsImpl;
 import mage.abilities.effects.PreventionEffectImpl;
 import mage.abilities.keyword.FlyingAbility;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.game.Game;
 import mage.game.events.GameEvent;
 import mage.players.Player;
@@ -51,9 +51,8 @@ import mage.target.TargetPlayer;
  */
 public class VengefulArchon extends CardImpl {
 
-    public VengefulArchon(UUID ownerId) {
-        super(ownerId, 37, "Vengeful Archon", Rarity.RARE, new CardType[]{CardType.CREATURE}, "{4}{W}{W}{W}");
-        this.expansionSetCode = "M11";
+    public VengefulArchon(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{4}{W}{W}{W}");
         this.subtype.add("Archon");
 
         this.power = new MageInt(7);

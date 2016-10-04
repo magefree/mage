@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.alarareborn;
+package mage.cards.s;
 
 import java.util.UUID;
 import mage.MageInt;
@@ -37,12 +37,12 @@ import mage.abilities.effects.ContinuousEffectImpl;
 import mage.abilities.effects.ContinuousRuleModifyingEffectImpl;
 import mage.cards.Card;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.AsThoughEffectType;
 import mage.constants.CardType;
 import mage.constants.Duration;
 import mage.constants.Layer;
 import mage.constants.Outcome;
-import mage.constants.Rarity;
 import mage.constants.SubLayer;
 import mage.constants.TargetController;
 import mage.constants.Zone;
@@ -57,9 +57,8 @@ import mage.target.common.TargetOpponent;
  */
 public class SenTriplets extends CardImpl {
 
-    public SenTriplets(UUID ownerId) {
-        super(ownerId, 109, "Sen Triplets", Rarity.MYTHIC, new CardType[]{CardType.ARTIFACT, CardType.CREATURE}, "{2}{W}{U}{B}");
-        this.expansionSetCode = "ARB";
+    public SenTriplets(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.ARTIFACT,CardType.CREATURE},"{2}{W}{U}{B}");
         this.supertype.add("Legendary");
         this.subtype.add("Human");
         this.subtype.add("Wizard");

@@ -25,14 +25,14 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.invasion;
+package mage.cards.u;
 
 import java.util.UUID;
 import mage.abilities.effects.common.CounterTargetEffect;
 import mage.abilities.effects.common.LoseLifeTargetControllerEffect;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.filter.FilterSpell;
 import mage.target.TargetSpell;
 
@@ -42,9 +42,8 @@ import mage.target.TargetSpell;
  */
 public class Undermine extends CardImpl {
 
-    public Undermine(UUID ownerId) {
-        super(ownerId, 282, "Undermine", Rarity.RARE, new CardType[]{CardType.INSTANT}, "{U}{U}{B}");
-        this.expansionSetCode = "INV";
+    public Undermine(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.INSTANT},"{U}{U}{B}");
 
 
         // Counter target spell. Its controller loses 3 life.

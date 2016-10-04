@@ -25,20 +25,20 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.returntoravnica;
+package mage.cards.d;
 
 import java.util.UUID;
 import mage.MageObject;
 
 import mage.constants.CardType;
 import mage.constants.Outcome;
-import mage.constants.Rarity;
 import mage.abilities.Ability;
 import mage.abilities.common.EntersBattlefieldTriggeredAbility;
 import mage.abilities.common.LeavesBattlefieldTriggeredAbility;
 import mage.abilities.effects.OneShotEffect;
 import mage.cards.Card;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.Zone;
 import mage.filter.FilterPermanent;
 import mage.filter.common.FilterNonlandPermanent;
@@ -63,9 +63,8 @@ public class DetentionSphere extends CardImpl {
         filter.add(Predicates.not(new NamePredicate("Detention Sphere")));
     }
 
-    public DetentionSphere(UUID ownerId) {
-        super(ownerId, 155, "Detention Sphere", Rarity.RARE, new CardType[]{CardType.ENCHANTMENT}, "{1}{W}{U}");
-        this.expansionSetCode = "RTR";
+    public DetentionSphere(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.ENCHANTMENT},"{1}{W}{U}");
 
 
         // When Detention Sphere enters the battlefield, you may exile

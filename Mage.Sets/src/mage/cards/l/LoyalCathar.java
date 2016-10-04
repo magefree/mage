@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.darkascension;
+package mage.cards.l;
 
 import java.util.UUID;
 import mage.MageInt;
@@ -35,11 +35,12 @@ import mage.abilities.common.delayed.AtTheBeginOfNextEndStepDelayedTriggeredAbil
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.keyword.TransformAbility;
 import mage.abilities.keyword.VigilanceAbility;
+import mage.cards.u.UnhallowedCathar;
 import mage.cards.Card;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Outcome;
-import mage.constants.Rarity;
 import mage.constants.Zone;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
@@ -50,14 +51,13 @@ import mage.game.permanent.Permanent;
  */
 public class LoyalCathar extends CardImpl {
 
-    public LoyalCathar(UUID ownerId) {
-        super(ownerId, 13, "Loyal Cathar", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{W}{W}");
-        this.expansionSetCode = "DKA";
+    public LoyalCathar(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{W}{W}");
         this.subtype.add("Human");
         this.subtype.add("Soldier");
 
         this.transformable = true;
-        this.secondSideCard = new UnhallowedCathar(ownerId);
+        this.secondSideCardClazz = UnhallowedCathar.class;
 
         this.power = new MageInt(2);
         this.toughness = new MageInt(2);

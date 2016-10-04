@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.weatherlight;
+package mage.cards.p;
 
 import java.util.UUID;
 import mage.abilities.Ability;
@@ -37,8 +37,8 @@ import mage.abilities.effects.common.SacrificeTargetEffect;
 import mage.abilities.effects.common.discard.DiscardHandControllerEffect;
 import mage.abilities.keyword.CumulativeUpkeepAbility;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.constants.TargetController;
 import mage.filter.common.FilterControlledLandPermanent;
 import mage.game.Game;
@@ -51,9 +51,8 @@ import mage.target.common.TargetControlledPermanent;
  */
 public class PsychicVortex extends CardImpl {
 
-    public PsychicVortex(UUID ownerId) {
-        super(ownerId, 50, "Psychic Vortex", Rarity.RARE, new CardType[]{CardType.ENCHANTMENT}, "{2}{U}{U}");
-        this.expansionSetCode = "WTH";
+    public PsychicVortex(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.ENCHANTMENT},"{2}{U}{U}");
 
         // Cumulative upkeep-Draw a card.
         this.addAbility(new CumulativeUpkeepAbility(new PsychicVortexCost()));

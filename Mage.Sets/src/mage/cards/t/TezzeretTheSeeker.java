@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.shardsofalara;
+package mage.cards.t;
 
 import java.util.List;
 import java.util.UUID;
@@ -39,11 +39,11 @@ import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.UntapTargetEffect;
 import mage.cards.Card;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Duration;
 import mage.constants.Layer;
 import mage.constants.Outcome;
-import mage.constants.Rarity;
 import mage.constants.SubLayer;
 import mage.constants.Zone;
 import mage.filter.Filter.ComparisonType;
@@ -62,9 +62,8 @@ import mage.target.common.TargetCardInLibrary;
  */
 public class TezzeretTheSeeker extends CardImpl {
 
-    public TezzeretTheSeeker(UUID ownerId) {
-        super(ownerId, 60, "Tezzeret the Seeker", Rarity.MYTHIC, new CardType[]{CardType.PLANESWALKER}, "{3}{U}{U}");
-        this.expansionSetCode = "ALA";
+    public TezzeretTheSeeker(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.PLANESWALKER},"{3}{U}{U}");
         this.subtype.add("Tezzeret");
 
         this.addAbility(new PlanswalkerEntersWithLoyalityCountersAbility(4));

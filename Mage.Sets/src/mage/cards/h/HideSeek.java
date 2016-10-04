@@ -26,17 +26,17 @@
  *  or implied, of BetaSteward_at_googlemail.com.
  */
 
-package mage.sets.dissension;
+package mage.cards.h;
 
 import java.util.UUID;
 import mage.abilities.Ability;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.PutOnLibraryTargetEffect;
 import mage.cards.Card;
+import mage.cards.CardSetInfo;
 import mage.cards.SplitCard;
 import mage.constants.CardType;
 import mage.constants.Outcome;
-import mage.constants.Rarity;
 import mage.constants.Zone;
 import mage.filter.FilterPermanent;
 import mage.filter.predicate.Predicates;
@@ -61,9 +61,8 @@ public class HideSeek extends SplitCard {
                 new CardTypePredicate(CardType.ENCHANTMENT)));
     }
 
-    public HideSeek(UUID ownerId) {
-        super(ownerId, 151, "Hide", "Seek", Rarity.UNCOMMON, new CardType[]{CardType.INSTANT}, "{R}{W}", "{W}{B}", false);
-        this.expansionSetCode = "DIS";
+    public HideSeek(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.INSTANT},"{R}{W}","{W}{B}",false);
         
         // Hide
         // Put target artifact or enchantment on the bottom of its owner's library.

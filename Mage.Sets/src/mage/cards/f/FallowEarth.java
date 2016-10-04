@@ -25,13 +25,13 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.mirage;
+package mage.cards.f;
 
 import java.util.UUID;
 import mage.abilities.effects.common.PutOnLibraryTargetEffect;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.target.common.TargetLandPermanent;
 
 /**
@@ -40,9 +40,8 @@ import mage.target.common.TargetLandPermanent;
  */
 public class FallowEarth extends CardImpl {
 
-    public FallowEarth(UUID ownerId) {
-        super(ownerId, 112, "Fallow Earth", Rarity.UNCOMMON, new CardType[]{CardType.SORCERY}, "{2}{G}");
-        this.expansionSetCode = "MIR";
+    public FallowEarth(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{2}{G}");
 
 
         // Put target land on top of its owner's library.

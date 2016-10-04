@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.journeyintonyx;
+package mage.cards.d;
 
 import java.util.HashSet;
 import java.util.Set;
@@ -36,10 +36,10 @@ import mage.abilities.Ability;
 import mage.abilities.effects.common.continuous.ExchangeControlTargetEffect;
 import mage.abilities.keyword.InspiredAbility;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Duration;
 import mage.constants.Outcome;
-import mage.constants.Rarity;
 import mage.constants.TargetController;
 import mage.filter.predicate.Predicates;
 import mage.filter.predicate.mageobject.CardTypePredicate;
@@ -57,9 +57,8 @@ import mage.util.CardUtil;
  */
 public class DaringThief extends CardImpl {
 
-    public DaringThief(UUID ownerId) {
-        super(ownerId, 36, "Daring Thief", Rarity.RARE, new CardType[]{CardType.CREATURE}, "{2}{U}");
-        this.expansionSetCode = "JOU";
+    public DaringThief(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{2}{U}");
         this.subtype.add("Human");
         this.subtype.add("Rogue");
 

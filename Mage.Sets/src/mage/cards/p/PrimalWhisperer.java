@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.legions;
+package mage.cards.p;
 
 import java.util.UUID;
 import mage.MageInt;
@@ -35,9 +35,9 @@ import mage.abilities.dynamicvalue.common.PermanentsOnBattlefieldCount;
 import mage.abilities.effects.common.continuous.BoostSourceEffect;
 import mage.abilities.keyword.MorphAbility;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Duration;
-import mage.constants.Rarity;
 import mage.constants.Zone;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.filter.predicate.other.FaceDownPredicate;
@@ -54,9 +54,8 @@ public class PrimalWhisperer extends CardImpl {
         filter.add(new FaceDownPredicate());
     }
 
-    public PrimalWhisperer(UUID ownerId) {
-        super(ownerId, 135, "Primal Whisperer", Rarity.RARE, new CardType[]{CardType.CREATURE}, "{4}{G}");
-        this.expansionSetCode = "LGN";
+    public PrimalWhisperer(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{4}{G}");
         this.subtype.add("Elf");
         this.subtype.add("Soldier");
         this.power = new MageInt(2);

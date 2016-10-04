@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.fifthedition;
+package mage.cards.d;
 
 import java.util.UUID;
 import mage.abilities.Ability;
@@ -35,8 +35,8 @@ import mage.abilities.effects.Effect;
 import mage.abilities.effects.common.DamageTargetControllerEffect;
 import mage.abilities.effects.common.DestroyTargetEffect;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.filter.Filter;
 import mage.filter.common.FilterArtifactPermanent;
 import mage.filter.predicate.mageobject.ConvertedManaCostPredicate;
@@ -49,9 +49,8 @@ import mage.target.common.TargetArtifactPermanent;
  */
 public class Detonate extends CardImpl {
 
-    public Detonate(UUID ownerId) {
-        super(ownerId, 218, "Detonate", Rarity.UNCOMMON, new CardType[]{CardType.SORCERY}, "{X}{R}");
-        this.expansionSetCode = "5ED";
+    public Detonate(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{X}{R}");
 
         // Destroy target artifact with converted mana cost X. It can't be regenerated. Detonate deals X damage to that artifact's controller.
         this.getSpellAbility().addEffect(new DestroyTargetEffect(true));

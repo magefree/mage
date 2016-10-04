@@ -25,18 +25,18 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.scarsofmirrodin;
+package mage.cards.k;
 
 import java.util.UUID;
 
 import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.constants.TargetController;
 import mage.MageInt;
 import mage.abilities.common.BeginningOfUpkeepTriggeredAbility;
 import mage.abilities.dynamicvalue.common.EquipmentAttachedCount;
 import mage.abilities.effects.common.CreateTokenEffect;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.game.permanent.token.CatToken;
 
 /**
@@ -45,9 +45,8 @@ import mage.game.permanent.token.CatToken;
  */
 public class KembaKhaRegent extends CardImpl {
 
-    public KembaKhaRegent(UUID ownerId) {
-        super(ownerId, 12, "Kemba, Kha Regent", Rarity.RARE, new CardType[]{CardType.CREATURE}, "{1}{W}{W}");
-        this.expansionSetCode = "SOM";
+    public KembaKhaRegent(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{1}{W}{W}");
         this.supertype.add("Legendary");
         this.subtype.add("Cat");
         this.subtype.add("Cleric");

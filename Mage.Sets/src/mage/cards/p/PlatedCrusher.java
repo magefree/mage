@@ -25,15 +25,15 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.battleforzendikar;
+package mage.cards.p;
 
 import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.keyword.TrampleAbility;
 import mage.abilities.keyword.HexproofAbility;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.Rarity;
 
 /**
  *
@@ -41,9 +41,8 @@ import mage.constants.Rarity;
  */
 public class PlatedCrusher extends CardImpl {
 
-    public PlatedCrusher(UUID ownerId) {
-        super(ownerId, 183, "Plated Crusher", Rarity.UNCOMMON, new CardType[]{CardType.CREATURE}, "{4}{G}{G}{G}");
-        this.expansionSetCode = "BFZ";
+    public PlatedCrusher(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{4}{G}{G}{G}");
         this.subtype.add("Beast");
         this.power = new MageInt(7);
         this.toughness = new MageInt(6);

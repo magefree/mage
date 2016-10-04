@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.mirage;
+package mage.cards.u;
 
 import java.util.UUID;
 import mage.MageInt;
@@ -35,8 +35,8 @@ import mage.abilities.costs.common.SacrificeSourceCost;
 import mage.abilities.effects.common.CounterTargetEffect;
 import mage.abilities.keyword.FlyingAbility;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.constants.Zone;
 import mage.filter.FilterSpell;
 import mage.filter.predicate.Predicates;
@@ -59,9 +59,8 @@ public class UnyaroGriffin extends CardImpl {
                 new CardTypePredicate(CardType.SORCERY)));
     }
 
-    public UnyaroGriffin(UUID ownerId) {
-        super(ownerId, 248, "Unyaro Griffin", Rarity.UNCOMMON, new CardType[]{CardType.CREATURE}, "{3}{W}");
-        this.expansionSetCode = "MIR";
+    public UnyaroGriffin(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{3}{W}");
         this.subtype.add("Griffin");
 
         this.power = new MageInt(2);

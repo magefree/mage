@@ -25,18 +25,18 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.fifthdawn;
+package mage.cards.s;
 
 import java.util.UUID;
 
 import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.MageInt;
 import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.costs.common.RemoveCountersSourceCost;
 import mage.abilities.effects.common.continuous.BoostSourceEffect;
 import mage.abilities.keyword.SunburstAbility;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.Duration;
 import mage.constants.Zone;
 import mage.counters.CounterType;
@@ -47,9 +47,8 @@ import mage.counters.CounterType;
  */
 public class SawtoothThresher extends CardImpl {
 
-    public SawtoothThresher(UUID ownerId) {
-        super(ownerId, 149, "Sawtooth Thresher", Rarity.COMMON, new CardType[]{CardType.ARTIFACT, CardType.CREATURE}, "{6}");
-        this.expansionSetCode = "5DN";
+    public SawtoothThresher(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.ARTIFACT,CardType.CREATURE},"{6}");
         this.subtype.add("Construct");
 
         this.power = new MageInt(1);

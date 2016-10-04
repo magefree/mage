@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.judgment;
+package mage.cards.e;
 
 import java.util.UUID;
 import mage.abilities.common.BeginningOfUpkeepTriggeredAbility;
@@ -33,8 +33,8 @@ import mage.abilities.condition.common.PermanentsOnTheBattlefieldCondition;
 import mage.abilities.decorator.ConditionalTriggeredAbility;
 import mage.abilities.effects.common.WinGameSourceControllerEffect;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.constants.TargetController;
 import mage.filter.common.FilterControlledCreaturePermanent;
 
@@ -46,9 +46,8 @@ public class EpicStruggle extends CardImpl {
     
     private static final FilterControlledCreaturePermanent filter = new FilterControlledCreaturePermanent("if you control twenty or more creatures");
 
-    public EpicStruggle(UUID ownerId) {
-        super(ownerId, 112, "Epic Struggle", Rarity.RARE, new CardType[]{CardType.ENCHANTMENT}, "{2}{G}{G}");
-        this.expansionSetCode = "JUD";
+    public EpicStruggle(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.ENCHANTMENT},"{2}{G}{G}");
 
         // At the beginning of your upkeep, if you control twenty or more creatures, you win the game.
         this.addAbility(new ConditionalTriggeredAbility(

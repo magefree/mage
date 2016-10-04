@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.tempest;
+package mage.cards.a;
 
 import java.util.UUID;
 
@@ -37,6 +37,7 @@ import mage.abilities.costs.mana.ColoredManaCost;
 import mage.abilities.effects.common.continuous.GainAbilityTargetEffect;
 import mage.abilities.keyword.FirstStrikeAbility;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.target.common.TargetCreaturePermanent;
 
 /**
@@ -45,9 +46,8 @@ import mage.target.common.TargetCreaturePermanent;
  */
 public class AdvanceScout extends CardImpl {
 
-    public AdvanceScout(UUID ownerId) {
-        super(ownerId, 213, "Advance Scout", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{1}{W}");
-        this.expansionSetCode = "TMP";
+    public AdvanceScout(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{1}{W}");
         this.subtype.add("Human");
         this.subtype.add("Soldier");
         this.subtype.add("Scout");

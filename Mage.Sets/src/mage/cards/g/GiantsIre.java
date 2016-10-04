@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.lorwyn;
+package mage.cards.g;
 
 import java.util.UUID;
 import mage.abilities.condition.common.PermanentsOnTheBattlefieldCondition;
@@ -33,8 +33,8 @@ import mage.abilities.decorator.ConditionalOneShotEffect;
 import mage.abilities.effects.common.DamageTargetEffect;
 import mage.abilities.effects.common.DrawCardSourceControllerEffect;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.filter.FilterPermanent;
 import mage.filter.predicate.mageobject.SubtypePredicate;
 import mage.target.TargetPlayer;
@@ -51,9 +51,8 @@ public class GiantsIre extends CardImpl {
         filter.add(new SubtypePredicate("Giant"));
     }
 
-    public GiantsIre(UUID ownerId) {
-        super(ownerId, 170, "Giant's Ire", Rarity.COMMON, new CardType[]{CardType.TRIBAL, CardType.SORCERY}, "{3}{R}");
-        this.expansionSetCode = "LRW";
+    public GiantsIre(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.TRIBAL,CardType.SORCERY},"{3}{R}");
         this.subtype.add("Giant");
 
         // Giant's Ire deals 4 damage to target player.

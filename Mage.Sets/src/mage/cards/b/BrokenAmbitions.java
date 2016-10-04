@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.lorwyn;
+package mage.cards.b;
 
 import java.util.UUID;
 import mage.abilities.Ability;
@@ -37,9 +37,9 @@ import mage.abilities.dynamicvalue.common.ManacostVariableValue;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.ClashEffect;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Outcome;
-import mage.constants.Rarity;
 import mage.constants.Zone;
 import mage.game.Game;
 import mage.game.stack.Spell;
@@ -52,9 +52,8 @@ import mage.target.TargetSpell;
  */
 public class BrokenAmbitions extends CardImpl {
 
-    public BrokenAmbitions(UUID ownerId) {
-        super(ownerId, 54, "Broken Ambitions", Rarity.COMMON, new CardType[]{CardType.INSTANT}, "{X}{U}");
-        this.expansionSetCode = "LRW";
+    public BrokenAmbitions(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.INSTANT},"{X}{U}");
 
         // Counter target spell unless its controller pays {X}. Clash with an opponent. If you win, that spell's controller puts the top four cards of his or her library into his or her graveyard.
         this.getSpellAbility().addEffect(new BrokenAmbitionsEffect(new ManacostVariableValue()));

@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.eldritchmoon;
+package mage.cards.b;
 
 import java.util.UUID;
 import mage.abilities.Mode;
@@ -36,8 +36,8 @@ import mage.abilities.effects.common.SacrificeEffect;
 import mage.abilities.effects.common.UntapTargetEffect;
 import mage.abilities.keyword.EscalateAbility;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.constants.TargetController;
 import mage.filter.FilterPlayer;
 import mage.filter.common.FilterAttackingCreature;
@@ -60,9 +60,8 @@ public class BlessedAlliance extends CardImpl {
         filterSacrifice.add(new PlayerPredicate(TargetController.OPPONENT));
     }
 
-    public BlessedAlliance(UUID ownerId) {
-        super(ownerId, 13, "Blessed Alliance", Rarity.UNCOMMON, new CardType[]{CardType.INSTANT}, "{1}{W}");
-        this.expansionSetCode = "EMN";
+    public BlessedAlliance(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.INSTANT},"{1}{W}");
 
         // Escalate {2}
         this.addAbility(new EscalateAbility(new GenericManaCost(2)));

@@ -25,13 +25,13 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.tempest;
+package mage.cards.c;
 
 import java.util.UUID;
 import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.abilities.effects.common.CounterTargetEffect;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.target.TargetSpell;
 
 /**
@@ -40,9 +40,8 @@ import mage.target.TargetSpell;
  */
 public class Counterspell extends CardImpl {
 
-    public Counterspell(UUID ownerId) {
-        super(ownerId, 57, "Counterspell", Rarity.COMMON, new CardType[]{CardType.INSTANT}, "{U}{U}");
-        this.expansionSetCode = "TMP";
+    public Counterspell(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.INSTANT},"{U}{U}");
 
         this.getSpellAbility().addEffect(new CounterTargetEffect());
         this.getSpellAbility().addTarget(new TargetSpell());

@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.eventide;
+package mage.cards.i;
 
 import java.util.List;
 import java.util.UUID;
@@ -40,10 +40,10 @@ import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.continuous.BoostSourceEffect;
 import mage.abilities.keyword.TrampleAbility;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Duration;
 import mage.constants.Outcome;
-import mage.constants.Rarity;
 import mage.constants.Zone;
 import mage.filter.common.FilterControlledCreaturePermanent;
 import mage.filter.predicate.Predicates;
@@ -69,9 +69,8 @@ public class ImpelledGiant extends CardImpl {
         filter.add(new AnotherPredicate());
     }
 
-    public ImpelledGiant(UUID ownerId) {
-        super(ownerId, 58, "Impelled Giant", Rarity.UNCOMMON, new CardType[]{CardType.CREATURE}, "{4}{R}{R}");
-        this.expansionSetCode = "EVE";
+    public ImpelledGiant(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{4}{R}{R}");
         this.subtype.add("Giant");
         this.subtype.add("Warrior");
 

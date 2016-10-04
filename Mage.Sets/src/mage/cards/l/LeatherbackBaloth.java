@@ -26,13 +26,13 @@
  *  or implied, of BetaSteward_at_googlemail.com.
  */
 
-package mage.sets.worldwake;
+package mage.cards.l;
 
 import java.util.UUID;
 import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.MageInt;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 
 /**
  *
@@ -40,9 +40,8 @@ import mage.cards.CardImpl;
  */
 public class LeatherbackBaloth extends CardImpl {
 
-    public LeatherbackBaloth (UUID ownerId) {
-        super(ownerId, 107, "Leatherback Baloth", Rarity.UNCOMMON, new CardType[]{CardType.CREATURE}, "{G}{G}{G}");
-        this.expansionSetCode = "WWK";
+    public LeatherbackBaloth (UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{G}{G}{G}");
         this.subtype.add("Beast");
 
         this.power = new MageInt(4);

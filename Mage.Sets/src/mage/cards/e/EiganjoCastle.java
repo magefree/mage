@@ -26,7 +26,7 @@
  *  or implied, of BetaSteward_at_googlemail.com.
  */
 
-package mage.sets.championsofkamigawa;
+package mage.cards.e;
 
 import java.util.UUID;
 
@@ -38,6 +38,7 @@ import mage.abilities.costs.mana.ColoredManaCost;
 import mage.abilities.effects.common.PreventDamageToTargetEffect;
 import mage.abilities.mana.WhiteManaAbility;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.filter.predicate.mageobject.SupertypePredicate;
 import mage.target.TargetPermanent;
@@ -53,9 +54,8 @@ public class EiganjoCastle extends CardImpl {
         filter.add(new SupertypePredicate("Legendary"));
     }
 
-    public EiganjoCastle(UUID ownerId) {
-        super(ownerId, 275, "Eiganjo Castle", Rarity.RARE, new CardType[]{CardType.LAND}, null);
-        this.expansionSetCode = "CHK";
+    public EiganjoCastle(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.LAND},null);
         this.supertype.add("Legendary");
         this.addAbility(new WhiteManaAbility());
         Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new PreventDamageToTargetEffect(Duration.EndOfTurn, 2), new ColoredManaCost(ColoredManaSymbol.W));

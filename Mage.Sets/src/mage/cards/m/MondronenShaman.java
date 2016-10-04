@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.darkascension;
+package mage.cards.m;
 
 import java.util.UUID;
 import mage.MageInt;
@@ -35,9 +35,10 @@ import mage.abilities.condition.common.NoSpellsWereCastLastTurnCondition;
 import mage.abilities.decorator.ConditionalTriggeredAbility;
 import mage.abilities.effects.common.TransformSourceEffect;
 import mage.abilities.keyword.TransformAbility;
+import mage.cards.t.TovolarsMagehunter;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.constants.TargetController;
 
 /**
@@ -46,9 +47,8 @@ import mage.constants.TargetController;
  */
 public class MondronenShaman extends CardImpl {
 
-    public MondronenShaman(UUID ownerId) {
-        super(ownerId, 98, "Mondronen Shaman", Rarity.RARE, new CardType[]{CardType.CREATURE}, "{3}{R}");
-        this.expansionSetCode = "DKA";
+    public MondronenShaman(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{3}{R}");
         this.subtype.add("Human");        
         this.subtype.add("Shaman");
         this.subtype.add("Werewolf");
@@ -57,7 +57,7 @@ public class MondronenShaman extends CardImpl {
         this.toughness = new MageInt(2);
 
         this.transformable = true;
-        this.secondSideCard = new TovolarsMagehunter(ownerId);
+        this.secondSideCardClazz = TovolarsMagehunter.class;
 
         // At the beginning of each upkeep, if no spells were cast last turn, transform Mondronen Shaman.
         this.addAbility(new TransformAbility());

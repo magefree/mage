@@ -25,14 +25,14 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.newphyrexia;
+package mage.cards.a;
 
 import java.util.UUID;
 import mage.abilities.costs.common.SacrificeTargetCost;
 import mage.abilities.effects.common.DamageTargetEffect;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.filter.common.FilterControlledPermanent;
 import mage.filter.predicate.Predicates;
 import mage.filter.predicate.mageobject.CardTypePredicate;
@@ -53,9 +53,8 @@ public class Artillerize extends CardImpl {
                 new CardTypePredicate(CardType.CREATURE)));
     }
 
-    public Artillerize(UUID ownerId) {
-        super(ownerId, 79, "Artillerize", Rarity.COMMON, new CardType[]{CardType.INSTANT}, "{3}{R}");
-        this.expansionSetCode = "NPH";
+    public Artillerize(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.INSTANT},"{3}{R}");
 
         this.getSpellAbility().addCost(new SacrificeTargetCost(new TargetControlledPermanent(filter)));
         this.getSpellAbility().addTarget(new TargetCreatureOrPlayer());

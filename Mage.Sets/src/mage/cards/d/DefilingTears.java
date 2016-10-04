@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.invasion;
+package mage.cards.d;
 
 import java.util.UUID;
 import mage.ObjectColor;
@@ -37,9 +37,9 @@ import mage.abilities.effects.common.continuous.BecomesColorTargetEffect;
 import mage.abilities.effects.common.continuous.BoostTargetEffect;
 import mage.abilities.effects.common.continuous.GainAbilityTargetEffect;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Duration;
-import mage.constants.Rarity;
 import mage.constants.Zone;
 import mage.target.common.TargetCreaturePermanent;
 
@@ -49,9 +49,8 @@ import mage.target.common.TargetCreaturePermanent;
  */
 public class DefilingTears extends CardImpl {
 
-    public DefilingTears(UUID ownerId) {
-        super(ownerId, 99, "Defiling Tears", Rarity.UNCOMMON, new CardType[]{CardType.INSTANT}, "{2}{B}");
-        this.expansionSetCode = "INV";
+    public DefilingTears(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.INSTANT},"{2}{B}");
 
         // Until end of turn, target creature becomes black, gets +1/-1, and gains "{B}: Regenerate this creature."
         this.getSpellAbility().addTarget(new TargetCreaturePermanent());

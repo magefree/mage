@@ -25,13 +25,13 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.odyssey;
+package mage.cards.r;
 
 import java.util.UUID;
 import mage.abilities.effects.common.PutOnLibraryTargetEffect;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.target.common.TargetCreaturePermanent;
 
 /**
@@ -40,9 +40,8 @@ import mage.target.common.TargetCreaturePermanent;
  */
 public class Repel extends CardImpl {
 
-    public Repel(UUID ownerId) {
-        super(ownerId, 98, "Repel", Rarity.COMMON, new CardType[]{CardType.INSTANT}, "{3}{U}");
-        this.expansionSetCode = "ODY";
+    public Repel(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.INSTANT},"{3}{U}");
 
 
         // Put target creature on top of its owner's library.

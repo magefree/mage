@@ -25,14 +25,14 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.theros;
+package mage.cards.t;
 
 import java.util.UUID;
 import mage.abilities.effects.common.DrawCardSourceControllerEffect;
 import mage.abilities.effects.common.PutLibraryIntoGraveTargetEffect;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.target.TargetPlayer;
 
 /**
@@ -41,9 +41,8 @@ import mage.target.TargetPlayer;
  */
 public class ThassasBounty extends CardImpl {
 
-    public ThassasBounty(UUID ownerId) {
-        super(ownerId, 67, "Thassa's Bounty", Rarity.COMMON, new CardType[]{CardType.SORCERY}, "{5}{U}");
-        this.expansionSetCode = "THS";
+    public ThassasBounty(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{5}{U}");
 
 
         // Draw three cards. Target player puts the top three cards of his or her library into his or her graveyard.

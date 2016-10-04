@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.darkascension;
+package mage.cards.c;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -38,10 +38,10 @@ import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.DontUntapInControllersNextUntapStepTargetEffect;
 import mage.abilities.effects.common.PreventAllDamageByAllPermanentsEffect;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Duration;
 import mage.constants.Outcome;
-import mage.constants.Rarity;
 import mage.filter.common.FilterAttackingCreature;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
@@ -53,9 +53,8 @@ import mage.target.targetpointer.FixedTargets;
  */
 public class ClingingMists extends CardImpl {
 
-    public ClingingMists(UUID ownerId) {
-        super(ownerId, 109, "Clinging Mists", Rarity.COMMON, new CardType[]{CardType.INSTANT}, "{2}{G}");
-        this.expansionSetCode = "DKA";
+    public ClingingMists(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.INSTANT},"{2}{G}");
 
         // Prevent all combat damage that would be dealt this turn.
         this.getSpellAbility().addEffect(new PreventAllDamageByAllPermanentsEffect(null, Duration.EndOfTurn, true));

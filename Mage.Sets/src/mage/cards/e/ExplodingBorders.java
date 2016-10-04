@@ -25,15 +25,15 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.conflux;
+package mage.cards.e;
 
 import java.util.UUID;
 import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.abilities.dynamicvalue.common.DomainValue;
 import mage.abilities.effects.common.DamageTargetEffect;
 import mage.abilities.effects.common.search.SearchLibraryPutInPlayEffect;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.filter.common.FilterBasicLandCard;
 import mage.target.TargetPlayer;
 import mage.target.common.TargetCardInLibrary;
@@ -44,9 +44,8 @@ import mage.target.common.TargetCardInLibrary;
  */
 public class ExplodingBorders extends CardImpl {
 
-    public ExplodingBorders(UUID ownerId) {
-        super(ownerId, 106, "Exploding Borders", Rarity.COMMON, new CardType[]{CardType.SORCERY}, "{2}{R}{G}");
-        this.expansionSetCode = "CON";
+    public ExplodingBorders(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{2}{R}{G}");
 
 
         // Domain - Search your library for a basic land card, put that card onto the battlefield tapped, then shuffle your library. Exploding Borders deals X damage to target player, where X is the number of basic land types among lands you control.

@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.apocalypse;
+package mage.cards.i;
 
 import java.util.UUID;
 import mage.abilities.condition.common.KickedCostCondition;
@@ -36,8 +36,8 @@ import mage.abilities.effects.common.DamageTargetEffect;
 import mage.abilities.effects.common.DrawCardSourceControllerEffect;
 import mage.abilities.keyword.KickerAbility;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.target.common.TargetCreaturePermanent;
 
 /**
@@ -46,9 +46,8 @@ import mage.target.common.TargetCreaturePermanent;
  */
 public class Illuminate extends CardImpl {
 
-    public Illuminate(UUID ownerId) {
-        super(ownerId, 63, "Illuminate", Rarity.UNCOMMON, new CardType[]{CardType.SORCERY}, "{X}{R}");
-        this.expansionSetCode = "APC";
+    public Illuminate(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{X}{R}");
 
         // Kicker {2}{R} and/or {3}{U}
         KickerAbility kickerAbility = new KickerAbility("{2}{R}");

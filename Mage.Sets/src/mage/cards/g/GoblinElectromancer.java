@@ -25,16 +25,16 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.returntoravnica;
+package mage.cards.g;
 
 import java.util.UUID;
 
 import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.MageInt;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.effects.common.cost.SpellsCostReductionControllerEffect;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.Zone;
 import mage.filter.FilterCard;
 import mage.filter.predicate.Predicates;
@@ -54,9 +54,8 @@ public class GoblinElectromancer extends CardImpl {
         ));
     }
 
-    public GoblinElectromancer(UUID ownerId) {
-        super(ownerId, 163, "Goblin Electromancer", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{U}{R}");
-        this.expansionSetCode = "RTR";
+    public GoblinElectromancer(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{U}{R}");
         this.subtype.add("Goblin");
         this.subtype.add("Wizard");
 

@@ -26,18 +26,18 @@
 *  or implied, of BetaSteward_at_googlemail.com.
 */
 
-package mage.sets.ravnica;
+package mage.cards.s;
 
 import java.util.UUID;
 
 import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.Mana;
 import mage.abilities.Ability;
 import mage.abilities.costs.common.TapSourceCost;
 import mage.abilities.costs.mana.GenericManaCost;
 import mage.abilities.mana.SimpleManaAbility;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.Zone;
 
 /**
@@ -46,9 +46,8 @@ import mage.constants.Zone;
 */
 public class SelesnyaSignet extends CardImpl {
 
-    public SelesnyaSignet (UUID ownerId) {
-        super(ownerId, 270, "Selesnya Signet", Rarity.COMMON, new CardType[]{CardType.ARTIFACT}, "{2}");
-        this.expansionSetCode = "RAV";
+    public SelesnyaSignet (UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.ARTIFACT},"{2}");
         Ability ability = new SimpleManaAbility(Zone.BATTLEFIELD, new Mana(0, 1, 0, 1, 0, 0, 0, 0), new GenericManaCost(1));
         ability.addCost(new TapSourceCost());
         this.addAbility(ability);

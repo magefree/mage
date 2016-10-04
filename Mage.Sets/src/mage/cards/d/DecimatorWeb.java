@@ -26,12 +26,11 @@
  *  or implied, of BetaSteward_at_googlemail.com.
  */
 
-package mage.sets.mirrodinbesieged;
+package mage.cards.d;
 
 import java.util.UUID;
 
 import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.costs.common.TapSourceCost;
@@ -40,6 +39,7 @@ import mage.abilities.effects.common.LoseLifeTargetEffect;
 import mage.abilities.effects.common.PutLibraryIntoGraveTargetEffect;
 import mage.abilities.effects.common.counter.AddCountersTargetEffect;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.Zone;
 import mage.counters.CounterType;
 import mage.target.common.TargetOpponent;
@@ -50,9 +50,8 @@ import mage.target.common.TargetOpponent;
  */
 public class DecimatorWeb extends CardImpl {
 
-    public DecimatorWeb (UUID ownerId) {
-        super(ownerId, 105, "Decimator Web", Rarity.RARE, new CardType[]{CardType.ARTIFACT}, "{4}");
-        this.expansionSetCode = "MBS";
+    public DecimatorWeb (UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.ARTIFACT},"{4}");
         Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new LoseLifeTargetEffect(2), new ManaCostsImpl("{4}"));
         ability.addCost(new TapSourceCost());
         ability.addEffect(new AddCountersTargetEffect(CounterType.POISON.createInstance()));

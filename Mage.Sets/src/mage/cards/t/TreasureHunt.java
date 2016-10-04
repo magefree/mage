@@ -25,17 +25,17 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.worldwake;
+package mage.cards.t;
 
 import java.util.UUID;
 import mage.constants.CardType;
 import mage.constants.Outcome;
-import mage.constants.Rarity;
 import mage.constants.Zone;
 import mage.abilities.Ability;
 import mage.abilities.effects.OneShotEffect;
 import mage.cards.Card;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.cards.CardsImpl;
 import mage.game.Game;
 import mage.players.Library;
@@ -47,9 +47,8 @@ import mage.players.Player;
  */
 public class TreasureHunt extends CardImpl {
 
-    public TreasureHunt(UUID ownerId) {
-        super(ownerId, 42, "Treasure Hunt", Rarity.COMMON, new CardType[]{CardType.SORCERY}, "{1}{U}");
-        this.expansionSetCode = "WWK";
+    public TreasureHunt(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{1}{U}");
 
 
         // Reveal cards from the top of your library until you reveal a nonland card, then put all cards revealed this way into your hand.

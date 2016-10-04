@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.oathofthegatewatch;
+package mage.cards.g;
 
 import java.util.UUID;
 import mage.abilities.effects.common.DontUntapInControllersNextUntapStepTargetEffect;
@@ -33,8 +33,8 @@ import mage.abilities.effects.common.DrawCardSourceControllerEffect;
 import mage.abilities.effects.common.TapTargetEffect;
 import mage.abilities.keyword.SurgeAbility;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.target.common.TargetCreaturePermanent;
 
 /**
@@ -43,9 +43,8 @@ import mage.target.common.TargetCreaturePermanent;
  */
 public class GripOfTheRoil extends CardImpl {
 
-    public GripOfTheRoil(UUID ownerId) {
-        super(ownerId, 56, "Grip of the Roil", Rarity.UNCOMMON, new CardType[]{CardType.INSTANT}, "{2}{U}");
-        this.expansionSetCode = "OGW";
+    public GripOfTheRoil(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.INSTANT},"{2}{U}");
 
         // Tap target creature. It doesn't untap during its controller's next untap step.
         this.getSpellAbility().addTarget(new TargetCreaturePermanent());

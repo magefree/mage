@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.saviorsofkamigawa;
+package mage.cards.m;
 
 import java.util.UUID;
 import mage.abilities.Ability;
@@ -37,9 +37,9 @@ import mage.abilities.costs.mana.GenericManaCost;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.mana.ColorlessManaAbility;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Outcome;
-import mage.constants.Rarity;
 import mage.constants.Zone;
 import mage.filter.common.FilterControlledCreaturePermanent;
 import mage.game.Game;
@@ -52,9 +52,8 @@ import mage.target.common.TargetControlledCreaturePermanent;
  */
 public class MirenTheMoaningWell extends CardImpl {
 
-    public MirenTheMoaningWell(UUID ownerId) {
-        super(ownerId, 163, "Miren, the Moaning Well", Rarity.RARE, new CardType[]{CardType.LAND}, "");
-        this.expansionSetCode = "SOK";
+    public MirenTheMoaningWell(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.LAND},"");
         this.supertype.add("Legendary");
 
         // {tap}: Add {C} to your mana pool.

@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.eldritchmoon;
+package mage.cards.s;
 
 import java.util.UUID;
 import mage.MageInt;
@@ -37,9 +37,10 @@ import mage.abilities.effects.Effect;
 import mage.abilities.effects.common.DamageTargetEffect;
 import mage.abilities.effects.common.TransformSourceEffect;
 import mage.abilities.keyword.TransformAbility;
+import mage.cards.e.EruptingDreadwolf;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.constants.Zone;
 import mage.target.common.TargetCreaturePermanent;
 
@@ -49,16 +50,15 @@ import mage.target.common.TargetCreaturePermanent;
  */
 public class SmolderingWerewolf extends CardImpl {
 
-    public SmolderingWerewolf(UUID ownerId) {
-        super(ownerId, 142, "Smoldering Werewolf", Rarity.UNCOMMON, new CardType[]{CardType.CREATURE}, "{2}{R}{R}");
-        this.expansionSetCode = "EMN";
+    public SmolderingWerewolf(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{2}{R}{R}");
         this.subtype.add("Werewolf");
         this.subtype.add("Horror");
         this.power = new MageInt(3);
         this.toughness = new MageInt(2);
 
         this.transformable = true;
-        this.secondSideCard = new EruptingDreadwolf(ownerId);
+        this.secondSideCardClazz = EruptingDreadwolf.class;
 
         // When Smoldering Werewolf enters the battlefield, it deals 1 damage to each of up to two target creatures.
         Effect effect = new DamageTargetEffect(1);

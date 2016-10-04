@@ -25,18 +25,18 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.returntoravnica;
+package mage.cards.a;
 
 import java.util.UUID;
 
 import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.abilities.Mode;
 import mage.abilities.effects.common.DrawCardSourceControllerEffect;
 import mage.abilities.effects.common.PutOnLibraryTargetEffect;
 import mage.abilities.effects.common.continuous.GainAbilityControlledEffect;
 import mage.abilities.keyword.LifelinkAbility;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.Duration;
 import mage.filter.common.FilterControlledCreaturePermanent;
 import mage.target.common.TargetAttackingOrBlockingCreature;
@@ -47,9 +47,8 @@ import mage.target.common.TargetAttackingOrBlockingCreature;
  */
 public class AzoriusCharm extends CardImpl {
 
-    public AzoriusCharm(UUID ownerId) {
-        super(ownerId, 145, "Azorius Charm", Rarity.UNCOMMON, new CardType[]{CardType.INSTANT}, "{W}{U}");
-        this.expansionSetCode = "RTR";
+    public AzoriusCharm(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.INSTANT},"{W}{U}");
 
 
         // Choose one — Creatures you control gain lifelink until end of turn;

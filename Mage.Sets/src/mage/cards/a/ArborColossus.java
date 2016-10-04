@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.theros;
+package mage.cards.a;
 
 import java.util.UUID;
 import mage.MageInt;
@@ -36,8 +36,8 @@ import mage.abilities.keyword.FlyingAbility;
 import mage.abilities.keyword.MonstrosityAbility;
 import mage.abilities.keyword.ReachAbility;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.constants.TargetController;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.filter.predicate.mageobject.AbilityPredicate;
@@ -57,9 +57,8 @@ public class ArborColossus extends CardImpl {
         filter.add(new ControllerPredicate(TargetController.OPPONENT));
     }
 
-    public ArborColossus(UUID ownerId) {
-        super(ownerId, 150, "Arbor Colossus", Rarity.RARE, new CardType[]{CardType.CREATURE}, "{2}{G}{G}{G}");
-        this.expansionSetCode = "THS";
+    public ArborColossus(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{2}{G}{G}{G}");
         this.subtype.add("Giant");
 
         this.power = new MageInt(6);

@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.eldritchmoon;
+package mage.cards.u;
 
 import java.util.UUID;
 import mage.MageInt;
@@ -38,9 +38,9 @@ import mage.abilities.effects.common.TransformSourceEffect;
 import mage.abilities.effects.common.continuous.BoostTargetEffect;
 import mage.abilities.keyword.TransformAbility;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Duration;
-import mage.constants.Rarity;
 import mage.constants.TargetController;
 import mage.constants.Zone;
 import mage.game.Game;
@@ -54,9 +54,8 @@ import mage.target.common.TargetCreaturePermanent;
  */
 public class UlrichOfTheKrallenhorde extends CardImpl {
 
-    public UlrichOfTheKrallenhorde(UUID ownerId) {
-        super(ownerId, 191, "Ulrich of the Krallenhorde", Rarity.MYTHIC, new CardType[]{CardType.CREATURE}, "{3}{R}{G}");
-        this.expansionSetCode = "EMN";
+    public UlrichOfTheKrallenhorde(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{3}{R}{G}");
         this.supertype.add("Legendary");
         this.subtype.add("Human");
         this.subtype.add("Werewolf");
@@ -65,7 +64,7 @@ public class UlrichOfTheKrallenhorde extends CardImpl {
 
 
         this.transformable = true;
-        this.secondSideCard = new UlrichUncontestedAlpha(ownerId);
+        this.secondSideCardClazz = UlrichUncontestedAlpha.class;
 
         // Whenever this creature enters the battlefield or transforms into Ulrich of the Krallenhorde, target creature gets +4/+4 until end of turn.
         this.addAbility(new UlrichOfTheKrallenhordeAbility());

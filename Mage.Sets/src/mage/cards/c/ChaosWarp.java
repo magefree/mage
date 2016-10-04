@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.vintagemasters;
+package mage.cards.c;
 
 import java.util.UUID;
 import mage.MageObject;
@@ -33,11 +33,11 @@ import mage.abilities.Ability;
 import mage.abilities.effects.OneShotEffect;
 import mage.cards.Card;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.cards.Cards;
 import mage.cards.CardsImpl;
 import mage.constants.CardType;
 import mage.constants.Outcome;
-import mage.constants.Rarity;
 import mage.constants.Zone;
 import mage.filter.common.FilterPermanentCard;
 import mage.game.Game;
@@ -52,9 +52,8 @@ import mage.target.TargetPermanent;
  */
 public class ChaosWarp extends CardImpl {
 
-    public ChaosWarp(UUID ownerId) {
-        super(ownerId, 154, "Chaos Warp", Rarity.RARE, new CardType[]{CardType.INSTANT}, "{2}{R}");
-        this.expansionSetCode = "VMA";
+    public ChaosWarp(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.INSTANT},"{2}{R}");
 
         // The owner of target permanent shuffles it into his or her library,
         this.getSpellAbility().addEffect(new ChaosWarpShuffleIntoLibraryEffect());

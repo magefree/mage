@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.commander2014;
+package mage.cards.i;
 
 import java.io.ObjectStreamException;
 import java.util.UUID;
@@ -35,8 +35,8 @@ import mage.abilities.dynamicvalue.DynamicValue;
 import mage.abilities.effects.Effect;
 import mage.abilities.effects.common.DamageMultiEffect;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.constants.WatcherScope;
 import mage.game.Game;
 import mage.game.events.GameEvent;
@@ -49,9 +49,8 @@ import mage.watchers.Watcher;
  */
 public class ImpactResonance extends CardImpl {
 
-    public ImpactResonance(UUID ownerId) {
-        super(ownerId, 36, "Impact Resonance", Rarity.RARE, new CardType[]{CardType.INSTANT}, "{1}{R}");
-        this.expansionSetCode = "C14";
+    public ImpactResonance(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.INSTANT},"{1}{R}");
 
 
         // Impact Resonance deals X damage divided as you choose among any number of target creatures, where X is the greatest amount of damage dealt by a source to a permanent or player this turn.

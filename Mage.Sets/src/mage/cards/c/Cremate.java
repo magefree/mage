@@ -25,14 +25,14 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.guildpact;
+package mage.cards.c;
 
 import java.util.UUID;
 import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.abilities.effects.common.DrawCardSourceControllerEffect;
 import mage.abilities.effects.common.ExileTargetEffect;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.target.common.TargetCardInGraveyard;
 
 /**
@@ -41,9 +41,8 @@ import mage.target.common.TargetCardInGraveyard;
  */
 public class Cremate extends CardImpl {
 
-    public Cremate(UUID ownerId) {
-        super(ownerId, 45, "Cremate", Rarity.COMMON, new CardType[]{CardType.INSTANT}, "{B}");
-        this.expansionSetCode = "GPT";
+    public Cremate(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.INSTANT},"{B}");
 
         this.getSpellAbility().addEffect(new ExileTargetEffect());
         this.getSpellAbility().addTarget(new TargetCardInGraveyard());

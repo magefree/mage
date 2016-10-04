@@ -25,13 +25,12 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.zendikar;
+package mage.cards.v;
 
 import java.util.UUID;
 import mage.abilities.condition.LockedInCondition;
 import mage.constants.CardType;
 import mage.constants.Duration;
-import mage.constants.Rarity;
 import mage.abilities.condition.common.KickedCondition;
 import mage.abilities.decorator.ConditionalContinuousEffect;
 import mage.abilities.effects.ContinuousEffect;
@@ -40,6 +39,7 @@ import mage.abilities.effects.common.continuous.GainAbilityTargetEffect;
 import mage.abilities.keyword.KickerAbility;
 import mage.abilities.keyword.LifelinkAbility;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.target.common.TargetCreaturePermanent;
 
 /**
@@ -48,9 +48,8 @@ import mage.target.common.TargetCreaturePermanent;
  */
 public class VampiresBite extends CardImpl {
 
-    public VampiresBite(UUID ownerId) {
-        super(ownerId, 117, "Vampire's Bite", Rarity.COMMON, new CardType[]{CardType.INSTANT}, "{B}");
-        this.expansionSetCode = "ZEN";
+    public VampiresBite(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.INSTANT},"{B}");
 
 
         // Kicker {2}{B} (You may pay an additional {2}{B} as you cast this spell.)

@@ -25,12 +25,12 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.dragonsmaze;
+package mage.cards.w;
 
 import java.util.UUID;
 import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.abilities.effects.common.DestroyTargetEffect;
+import mage.cards.CardSetInfo;
 import mage.cards.SplitCard;
 import mage.filter.common.FilterEnchantmentPermanent;
 import mage.target.Target;
@@ -43,9 +43,8 @@ import mage.target.common.TargetArtifactPermanent;
  */
 public class WearTear extends SplitCard {
 
-    public WearTear(UUID ownerId) {
-        super(ownerId, 135, "Wear", "Tear", Rarity.UNCOMMON, new CardType[]{CardType.INSTANT}, "{1}{R}", "{W}", true);
-        this.expansionSetCode = "DGM";
+    public WearTear(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.INSTANT},"{1}{R}","{W}",true);
 
         // Wear
         // Destroy target artifact.

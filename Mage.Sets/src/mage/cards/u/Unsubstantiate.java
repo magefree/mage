@@ -25,13 +25,13 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.eldritchmoon;
+package mage.cards.u;
 
 import java.util.UUID;
 import mage.abilities.effects.common.ReturnToHandTargetEffect;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.filter.common.FilterSpellOrPermanent;
 import mage.target.common.TargetSpellOrPermanent;
@@ -48,9 +48,8 @@ public class Unsubstantiate extends CardImpl {
         filter.setPermanentFilter(new FilterCreaturePermanent());
     }
 
-    public Unsubstantiate(UUID ownerId) {
-        super(ownerId, 79, "Unsubstantiate", Rarity.UNCOMMON, new CardType[]{CardType.INSTANT}, "{1}{U}");
-        this.expansionSetCode = "EMN";
+    public Unsubstantiate(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.INSTANT},"{1}{U}");
 
         // Return target spell or creature to its owner's hand.
         this.getSpellAbility().addTarget(new TargetSpellOrPermanent(1, 1, filter, false));

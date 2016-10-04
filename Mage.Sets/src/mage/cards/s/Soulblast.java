@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.tenthedition;
+package mage.cards.s;
 
 import java.util.UUID;
 import mage.abilities.Ability;
@@ -33,9 +33,9 @@ import mage.abilities.costs.Cost;
 import mage.abilities.costs.common.SacrificeAllCost;
 import mage.abilities.effects.OneShotEffect;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Outcome;
-import mage.constants.Rarity;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
@@ -50,9 +50,8 @@ public class Soulblast extends CardImpl {
 
     private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("creatures you control");
 
-    public Soulblast(UUID ownerId) {
-        super(ownerId, 236, "Soulblast", Rarity.RARE, new CardType[]{CardType.INSTANT}, "{3}{R}{R}{R}");
-        this.expansionSetCode = "10E";
+    public Soulblast(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.INSTANT},"{3}{R}{R}{R}");
 
 
         // As an additional cost to cast Soulblast, sacrifice all creatures you control.

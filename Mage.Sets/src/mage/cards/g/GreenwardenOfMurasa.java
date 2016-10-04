@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.battleforzendikar;
+package mage.cards.g;
 
 import java.util.UUID;
 import mage.MageInt;
@@ -40,9 +40,9 @@ import mage.abilities.effects.common.ReturnFromGraveyardToHandTargetEffect;
 import mage.abilities.effects.common.ReturnToHandTargetEffect;
 import mage.cards.Card;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Outcome;
-import mage.constants.Rarity;
 import mage.game.Game;
 import mage.players.Player;
 import mage.target.common.TargetCardInYourGraveyard;
@@ -54,9 +54,8 @@ import mage.target.targetpointer.FixedTarget;
  */
 public class GreenwardenOfMurasa extends CardImpl {
 
-    public GreenwardenOfMurasa(UUID ownerId) {
-        super(ownerId, 174, "Greenwarden of Murasa", Rarity.MYTHIC, new CardType[]{CardType.CREATURE}, "{4}{G}{G}");
-        this.expansionSetCode = "BFZ";
+    public GreenwardenOfMurasa(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{4}{G}{G}");
         this.subtype.add("Elemental");
         this.power = new MageInt(5);
         this.toughness = new MageInt(4);

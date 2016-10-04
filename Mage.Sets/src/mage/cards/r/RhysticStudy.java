@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.prophecy;
+package mage.cards.r;
 
 import java.util.UUID;
 import mage.MageObject;
@@ -35,9 +35,9 @@ import mage.abilities.costs.Cost;
 import mage.abilities.costs.mana.GenericManaCost;
 import mage.abilities.effects.OneShotEffect;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Outcome;
-import mage.constants.Rarity;
 import mage.constants.SetTargetPointer;
 import mage.constants.Zone;
 import mage.filter.FilterSpell;
@@ -50,9 +50,8 @@ import mage.players.Player;
  */
 public class RhysticStudy extends CardImpl {
 
-    public RhysticStudy(UUID ownerId) {
-        super(ownerId, 45, "Rhystic Study", Rarity.COMMON, new CardType[]{CardType.ENCHANTMENT}, "{2}{U}");
-        this.expansionSetCode = "PCY";
+    public RhysticStudy(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.ENCHANTMENT},"{2}{U}");
 
         // Whenever an opponent casts a spell, you may draw a card unless that player pays {1}.
         this.addAbility(new SpellCastOpponentTriggeredAbility(Zone.BATTLEFIELD, new RhysticStudyDrawEffect(), new FilterSpell(), false, SetTargetPointer.PLAYER));

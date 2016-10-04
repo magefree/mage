@@ -25,16 +25,16 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.mirrodin;
+package mage.cards.w;
 
 import java.util.UUID;
 import mage.abilities.Ability;
 import mage.abilities.effects.OneShotEffect;
 import mage.cards.Card;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Outcome;
-import mage.constants.Rarity;
 import mage.game.Game;
 import mage.players.Player;
 import mage.target.TargetPlayer;
@@ -46,9 +46,8 @@ import mage.target.common.TargetDiscard;
  */
 public class WrenchMind extends CardImpl {
 
-    public WrenchMind(UUID ownerId) {
-        super(ownerId, 84, "Wrench Mind", Rarity.COMMON, new CardType[]{CardType.SORCERY}, "{B}{B}");
-        this.expansionSetCode = "MRD";
+    public WrenchMind(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{B}{B}");
 
 
         // Target player discards two cards unless he or she discards an artifact card.

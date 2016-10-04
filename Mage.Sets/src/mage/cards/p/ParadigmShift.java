@@ -25,18 +25,18 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.weatherlight;
+package mage.cards.p;
 
 import java.util.UUID;
 import mage.abilities.Ability;
 import mage.abilities.effects.OneShotEffect;
 import mage.cards.Card;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.cards.Cards;
 import mage.cards.CardsImpl;
 import mage.constants.CardType;
 import mage.constants.Outcome;
-import mage.constants.Rarity;
 import mage.constants.Zone;
 import mage.game.Game;
 import mage.players.Player;
@@ -47,9 +47,8 @@ import mage.players.Player;
  */
 public class ParadigmShift extends CardImpl {
 
-    public ParadigmShift(UUID ownerId) {
-        super(ownerId, 46, "Paradigm Shift", Rarity.RARE, new CardType[]{CardType.SORCERY}, "{1}{U}");
-        this.expansionSetCode = "WTH";
+    public ParadigmShift(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{1}{U}");
 
         // Exile all cards from your library. Then shuffle your graveyard into your library.
         this.getSpellAbility().addEffect(new ExileLibraryEffect());

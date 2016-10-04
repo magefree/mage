@@ -25,17 +25,17 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.thedark;
+package mage.cards.f;
 
 import java.util.UUID;
 import mage.abilities.common.CastOnlyDuringPhaseStepSourceAbility;
 import mage.abilities.condition.common.OnOpponentsTurnCondition;
 import mage.abilities.effects.common.combat.CantAttackAnyPlayerAllEffect;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Duration;
 import mage.constants.PhaseStep;
-import mage.constants.Rarity;
 import mage.filter.common.FilterCreaturePermanent;
 
 /**
@@ -44,9 +44,8 @@ import mage.filter.common.FilterCreaturePermanent;
  */
 public class Festival extends CardImpl {
 
-    public Festival(UUID ownerId) {
-        super(ownerId, 81, "Festival", Rarity.COMMON, new CardType[]{CardType.INSTANT}, "{W}");
-        this.expansionSetCode = "DRK";
+    public Festival(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.INSTANT},"{W}");
 
         // Cast Festival only during an opponent's upkeep.
         this.addAbility(new CastOnlyDuringPhaseStepSourceAbility(null, PhaseStep.UPKEEP, OnOpponentsTurnCondition.getInstance(),

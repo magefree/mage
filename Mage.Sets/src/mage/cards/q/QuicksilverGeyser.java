@@ -25,13 +25,13 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.mirrodinbesieged;
+package mage.cards.q;
 
 import java.util.UUID;
 import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.abilities.effects.common.ReturnToHandTargetEffect;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.target.common.TargetNonlandPermanent;
 
 /**
@@ -40,9 +40,8 @@ import mage.target.common.TargetNonlandPermanent;
  */
 public class QuicksilverGeyser extends CardImpl {
 
-    public QuicksilverGeyser(UUID ownerId) {
-        super(ownerId, 30, "Quicksilver Geyser", Rarity.COMMON, new CardType[]{CardType.INSTANT}, "{4}{U}");
-        this.expansionSetCode = "MBS";
+    public QuicksilverGeyser(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.INSTANT},"{4}{U}");
 
 
         // Return up to two target nonland permanents to their owners' hands.

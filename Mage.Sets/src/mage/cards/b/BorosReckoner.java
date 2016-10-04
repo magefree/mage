@@ -25,13 +25,12 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.gatecrash;
+package mage.cards.b;
 
 import java.util.UUID;
 import mage.constants.CardType;
 import mage.constants.Duration;
 import mage.constants.Outcome;
-import mage.constants.Rarity;
 import mage.constants.Zone;
 import mage.MageInt;
 import mage.abilities.Ability;
@@ -42,6 +41,7 @@ import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.continuous.GainAbilitySourceEffect;
 import mage.abilities.keyword.FirstStrikeAbility;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.players.Player;
@@ -53,9 +53,8 @@ import mage.target.common.TargetCreatureOrPlayer;
  */
 public class BorosReckoner extends CardImpl {
 
-    public BorosReckoner(UUID ownerId) {
-        super(ownerId, 215, "Boros Reckoner", Rarity.RARE, new CardType[]{CardType.CREATURE}, "{R/W}{R/W}{R/W}");
-        this.expansionSetCode = "GTC";
+    public BorosReckoner(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{R/W}{R/W}{R/W}");
         this.subtype.add("Minotaur");
         this.subtype.add("Wizard");
 

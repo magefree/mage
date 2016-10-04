@@ -25,15 +25,15 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.darkascension;
+package mage.cards.s;
 
 import java.util.UUID;
 import mage.abilities.costs.mana.ManaCostsImpl;
 import mage.abilities.effects.common.discard.DiscardHandDrawSameNumberSourceEffect;
 import mage.abilities.keyword.FlashbackAbility;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.constants.TimingRule;
 
 /**
@@ -42,9 +42,8 @@ import mage.constants.TimingRule;
  */
 public class ShatteredPerception extends CardImpl {
 
-    public ShatteredPerception(UUID ownerId) {
-        super(ownerId, 104, "Shattered Perception", Rarity.UNCOMMON, new CardType[]{CardType.SORCERY}, "{2}{R}");
-        this.expansionSetCode = "DKA";
+    public ShatteredPerception(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{2}{R}");
 
         // Discard all the cards in your hand, then draw that many cards.
         this.getSpellAbility().addEffect(new DiscardHandDrawSameNumberSourceEffect());

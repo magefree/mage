@@ -25,13 +25,13 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.portalthreekingdoms;
+package mage.cards.c;
 
 import java.util.UUID;
 import mage.abilities.effects.common.ReturnToHandTargetEffect;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.target.common.TargetCreaturePermanent;
 
 /**
@@ -40,9 +40,8 @@ import mage.target.common.TargetCreaturePermanent;
  */
 public class Counterintelligence extends CardImpl {
 
-    public Counterintelligence(UUID ownerId) {
-        super(ownerId, 41, "Counterintelligence", Rarity.UNCOMMON, new CardType[]{CardType.SORCERY}, "{2}{U}{U}");
-        this.expansionSetCode = "PTK";
+    public Counterintelligence(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{2}{U}{U}");
 
         // Return one or two target creatures to their owners' hands.
         this.getSpellAbility().addEffect(new ReturnToHandTargetEffect());

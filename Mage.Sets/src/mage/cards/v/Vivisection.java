@@ -26,14 +26,14 @@
  *  or implied, of BetaSteward_at_googlemail.com.
  */
 
-package mage.sets.mirrodinbesieged;
+package mage.cards.v;
 
 import java.util.UUID;
 import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.abilities.costs.common.SacrificeTargetCost;
 import mage.abilities.effects.common.DrawCardSourceControllerEffect;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.target.common.TargetControlledCreaturePermanent;
 
 /**
@@ -42,9 +42,8 @@ import mage.target.common.TargetControlledCreaturePermanent;
  */
 public class Vivisection extends CardImpl {
 
-    public Vivisection (UUID ownerId) {
-        super(ownerId, 38, "Vivisection", Rarity.COMMON, new CardType[]{CardType.SORCERY}, "{3}{U}");
-        this.expansionSetCode = "MBS";
+    public Vivisection (UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{3}{U}");
 
         this.getSpellAbility().addEffect(new DrawCardSourceControllerEffect(3));
         this.getSpellAbility().addCost(new SacrificeTargetCost(new TargetControlledCreaturePermanent()));

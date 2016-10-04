@@ -25,14 +25,14 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.fatereforged;
+package mage.cards.g;
 
 import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.keyword.DelveAbility;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.Rarity;
 
 /**
  *
@@ -40,9 +40,8 @@ import mage.constants.Rarity;
  */
 public class GurmagAngler extends CardImpl {
 
-    public GurmagAngler(UUID ownerId) {
-        super(ownerId, 72, "Gurmag Angler", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{6}{B}");
-        this.expansionSetCode = "FRF";
+    public GurmagAngler(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{6}{B}");
         this.subtype.add("Zombie");
         this.subtype.add("Fish");
         this.power = new MageInt(5);

@@ -26,7 +26,7 @@
  *  or implied, of BetaSteward_at_googlemail.com.
  */
 
-package mage.sets.riseoftheeldrazi;
+package mage.cards.v;
 
 import java.util.UUID;
 import mage.MageInt;
@@ -34,8 +34,8 @@ import mage.abilities.TriggeredAbilityImpl;
 import mage.abilities.effects.common.ReturnSourceFromGraveyardToBattlefieldEffect;
 import mage.abilities.keyword.HasteAbility;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.constants.WatcherScope;
 import mage.constants.Zone;
 import mage.game.Game;
@@ -50,9 +50,8 @@ import mage.watchers.Watcher;
  */
 public class Vengevine extends CardImpl {
 
-    public Vengevine(UUID ownerId) {
-        super(ownerId, 212, "Vengevine", Rarity.MYTHIC, new CardType[]{CardType.CREATURE}, "{2}{G}{G}");
-        this.expansionSetCode = "ROE";
+    public Vengevine(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{2}{G}{G}");
         this.subtype.add("Elemental");
 
         this.power = new MageInt(4);

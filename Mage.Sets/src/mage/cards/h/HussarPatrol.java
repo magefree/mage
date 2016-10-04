@@ -25,15 +25,15 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.returntoravnica;
+package mage.cards.h;
 
 import java.util.UUID;
 import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.MageInt;
 import mage.abilities.keyword.FlashAbility;
 import mage.abilities.keyword.VigilanceAbility;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 
 /**
  *
@@ -41,9 +41,8 @@ import mage.cards.CardImpl;
  */
 public class HussarPatrol extends CardImpl {
 
-    public HussarPatrol(UUID ownerId) {
-        super(ownerId, 169, "Hussar Patrol", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{2}{W}{U}");
-        this.expansionSetCode = "RTR";
+    public HussarPatrol(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{2}{W}{U}");
         this.subtype.add("Human");
         this.subtype.add("Knight");
 

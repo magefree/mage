@@ -25,14 +25,14 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.kaladesh;
+package mage.cards.s;
 
 import java.util.UUID;
 import mage.abilities.effects.common.DestroyTargetEffect;
 import mage.abilities.effects.keyword.ScryEffect;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.filter.Filter;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.filter.predicate.mageobject.PowerPredicate;
@@ -50,9 +50,8 @@ public class SkywhalersShot extends CardImpl {
         filter.add(new PowerPredicate(Filter.ComparisonType.GreaterThan, 2));
     }
 
-    public SkywhalersShot(UUID ownerId) {
-        super(ownerId, 29, "Skywhaler's Shot", Rarity.UNCOMMON, new CardType[]{CardType.INSTANT}, "{2}{W}");
-        this.expansionSetCode = "KLD";
+    public SkywhalersShot(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.INSTANT},"{2}{W}");
 
         // Destroy target creature with power 3 or greater. Scry 1.
         getSpellAbility().addEffect(new DestroyTargetEffect());

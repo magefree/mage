@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.iceage;
+package mage.cards.w;
 
 import java.util.UUID;
 import mage.abilities.dynamicvalue.common.TargetConvertedManaCost;
@@ -33,8 +33,8 @@ import mage.abilities.effects.Effect;
 import mage.abilities.effects.common.DamageTargetControllerEffect;
 import mage.abilities.effects.common.DestroyTargetEffect;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.filter.FilterPermanent;
 import mage.filter.predicate.mageobject.SubtypePredicate;
 import mage.target.TargetPermanent;
@@ -51,9 +51,8 @@ public class WordOfBlasting extends CardImpl {
         filter.add(new SubtypePredicate("Wall"));
     }
 
-    public WordOfBlasting(UUID ownerId) {
-        super(ownerId, 224, "Word of Blasting", Rarity.UNCOMMON, new CardType[]{CardType.INSTANT}, "{1}{R}");
-        this.expansionSetCode = "ICE";
+    public WordOfBlasting(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.INSTANT},"{1}{R}");
 
         // Destroy target Wall. It can't be regenerated. Word of Blasting deals damage equal to that Wall's converted mana cost to the Wall's controller.
         this.getSpellAbility().addEffect(new DestroyTargetEffect(true));

@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.eldritchmoon;
+package mage.cards.c;
 
 import java.util.UUID;
 import mage.abilities.Ability;
@@ -37,9 +37,9 @@ import mage.abilities.effects.common.DamageTargetEffect;
 import mage.abilities.keyword.EscalateAbility;
 import mage.cards.Card;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Outcome;
-import mage.constants.Rarity;
 import mage.constants.TargetController;
 import mage.filter.FilterPlayer;
 import mage.filter.common.FilterCreaturePermanent;
@@ -63,9 +63,8 @@ public class CollectiveDefiance extends CardImpl {
         filterDamageOpponent.add(new PlayerPredicate(TargetController.OPPONENT));
     }
 
-    public CollectiveDefiance(UUID ownerId) {
-        super(ownerId, 123, "Collective Defiance", Rarity.RARE, new CardType[]{CardType.SORCERY}, "{1}{R}{R}");
-        this.expansionSetCode = "EMN";
+    public CollectiveDefiance(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{1}{R}{R}");
 
         // Escalate {1}
         this.addAbility(new EscalateAbility(new GenericManaCost(1)));

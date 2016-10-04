@@ -26,7 +26,7 @@
  *  or implied, of BetaSteward_at_googlemail.com.
  */
 
-package mage.sets.riseoftheeldrazi;
+package mage.cards.g;
 
 import java.util.UUID;
 import mage.MageInt;
@@ -35,9 +35,9 @@ import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.costs.mana.GenericManaCost;
 import mage.abilities.effects.common.continuous.SetPowerToughnessTargetEffect;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Duration;
-import mage.constants.Rarity;
 import mage.constants.Zone;
 import mage.target.common.TargetControlledCreaturePermanent;
 
@@ -47,9 +47,8 @@ import mage.target.common.TargetControlledCreaturePermanent;
  */
 public class Gigantomancer extends CardImpl {
 
-    public Gigantomancer (UUID ownerId) {
-        super(ownerId, 184, "Gigantomancer", Rarity.RARE, new CardType[]{CardType.CREATURE}, "{7}{G}");
-        this.expansionSetCode = "ROE";
+    public Gigantomancer (UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{7}{G}");
         this.subtype.add("Human");
         this.subtype.add("Shaman");
 

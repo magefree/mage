@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.riseoftheeldrazi;
+package mage.cards.l;
 
 import java.util.UUID;
 import mage.MageInt;
@@ -38,9 +38,9 @@ import mage.abilities.costs.mana.ManaCostsImpl;
 import mage.abilities.effects.common.turn.AddExtraTurnControllerEffect;
 import mage.abilities.keyword.LevelUpAbility;
 import mage.abilities.keyword.LevelerCardBuilder;
+import mage.cards.CardSetInfo;
 import mage.cards.LevelerCard;
 import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.constants.TargetController;
 import mage.constants.Zone;
 
@@ -50,9 +50,8 @@ import mage.constants.Zone;
  */
 public class LighthouseChronologist extends LevelerCard {
 
-    public LighthouseChronologist(UUID ownerId) {
-        super(ownerId, 75, "Lighthouse Chronologist", Rarity.MYTHIC, new CardType[]{CardType.CREATURE}, "{1}{U}");
-        this.expansionSetCode = "ROE";
+    public LighthouseChronologist(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{1}{U}");
         this.subtype.add("Human");
         this.subtype.add("Wizard");
         this.color.setBlue(true);

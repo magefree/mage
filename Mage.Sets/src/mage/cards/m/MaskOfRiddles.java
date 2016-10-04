@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.alarareborn;
+package mage.cards.m;
 
 import java.util.UUID;
 import mage.abilities.common.DealsDamageToAPlayerAttachedTriggeredAbility;
@@ -36,6 +36,7 @@ import mage.abilities.effects.common.continuous.GainAbilityAttachedEffect;
 import mage.abilities.keyword.EquipAbility;
 import mage.abilities.keyword.FearAbility;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.*;
 
 /**
@@ -44,9 +45,8 @@ import mage.constants.*;
  */
 public class MaskOfRiddles extends CardImpl {
 
-    public MaskOfRiddles(UUID ownerId) {
-        super(ownerId, 25, "Mask of Riddles", Rarity.UNCOMMON, new CardType[]{CardType.ARTIFACT}, "{U}{B}");
-        this.expansionSetCode = "ARB";
+    public MaskOfRiddles(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.ARTIFACT},"{U}{B}");
         this.subtype.add("Equipment");
 
         // Equipped creature has fear.

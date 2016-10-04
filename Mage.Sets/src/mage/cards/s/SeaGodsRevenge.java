@@ -25,14 +25,14 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.theros;
+package mage.cards.s;
 
 import java.util.UUID;
 import mage.abilities.effects.common.ReturnToHandTargetEffect;
 import mage.abilities.effects.keyword.ScryEffect;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.target.common.TargetCreaturePermanent;
 
 /**
@@ -41,9 +41,8 @@ import mage.target.common.TargetCreaturePermanent;
  */
 public class SeaGodsRevenge extends CardImpl {
 
-    public SeaGodsRevenge(UUID ownerId) {
-        super(ownerId, 61, "Sea God's Revenge", Rarity.UNCOMMON, new CardType[]{CardType.SORCERY}, "{5}{U}");
-        this.expansionSetCode = "THS";
+    public SeaGodsRevenge(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{5}{U}");
 
 
         // Return up to three target creatures to their owners' hands. Scry 1.

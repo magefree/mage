@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.starwars;
+package mage.cards.s;
 
 import java.util.UUID;
 import mage.MageInt;
@@ -35,11 +35,11 @@ import mage.abilities.SpellAbility;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.effects.common.cost.CostModificationEffectImpl;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.CostModificationType;
 import mage.constants.Duration;
 import mage.constants.Outcome;
-import mage.constants.Rarity;
 import mage.constants.Zone;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
@@ -53,9 +53,8 @@ import mage.util.CardUtil;
  */
 public class SenatorLottDod extends CardImpl {
 
-    public SenatorLottDod(UUID ownerId) {
-        super(ownerId, 167, "Senator Lott Dod", Rarity.UNCOMMON, new CardType[]{CardType.CREATURE}, "{U}{B}");
-        this.expansionSetCode = "SWS";
+    public SenatorLottDod(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{U}{B}");
         this.supertype.add("Legendary");
         this.subtype.add("Neimoidian");
         this.subtype.add("Advisor");

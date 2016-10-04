@@ -25,16 +25,16 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.mirage;
+package mage.cards.p;
 
 import java.util.UUID;
 
 import mage.abilities.effects.Effect;
 import mage.abilities.effects.common.continuous.ExchangeControlTargetEffect;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Duration;
-import mage.constants.Rarity;
 import mage.constants.TargetController;
 import mage.filter.common.FilterControlledLandPermanent;
 import mage.filter.common.FilterLandPermanent;
@@ -56,9 +56,8 @@ public class PoliticalTrickery extends CardImpl {
         filter.add(new ControllerPredicate(TargetController.OPPONENT));
     }
 
-    public PoliticalTrickery(UUID ownerId) {
-        super(ownerId, 81, "Political Trickery", Rarity.RARE, new CardType[]{CardType.SORCERY}, "{2}{U}");
-        this.expansionSetCode = "MIR";
+    public PoliticalTrickery(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{2}{U}");
 
         // Exchange control of target land you control and target land an opponent controls.
         Effect effect = new ExchangeControlTargetEffect(Duration.EndOfGame, rule, false, true);

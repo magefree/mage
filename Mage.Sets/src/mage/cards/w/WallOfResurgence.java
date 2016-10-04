@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.oathofthegatewatch;
+package mage.cards.w;
 
 import java.util.UUID;
 import mage.MageInt;
@@ -36,9 +36,9 @@ import mage.abilities.effects.common.continuous.BecomesCreatureTargetEffect;
 import mage.abilities.effects.common.counter.AddCountersTargetEffect;
 import mage.abilities.keyword.DefenderAbility;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Duration;
-import mage.constants.Rarity;
 import mage.counters.CounterType;
 import mage.filter.common.FilterControlledLandPermanent;
 import mage.game.permanent.token.WallOfResurgenceToken;
@@ -50,9 +50,8 @@ import mage.target.common.TargetControlledPermanent;
  */
 public class WallOfResurgence extends CardImpl {
 
-    public WallOfResurgence(UUID ownerId) {
-        super(ownerId, 39, "Wall of Resurgence", Rarity.UNCOMMON, new CardType[]{CardType.CREATURE}, "{2}{W}");
-        this.expansionSetCode = "OGW";
+    public WallOfResurgence(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{2}{W}");
         this.subtype.add("Wall");
         this.power = new MageInt(0);
         this.toughness = new MageInt(6);

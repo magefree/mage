@@ -25,15 +25,15 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.riseoftheeldrazi;
+package mage.cards.l;
 
 import java.util.UUID;
 
 import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.abilities.Ability;
 import mage.abilities.effects.OneShotEffect;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.Outcome;
 import mage.filter.common.FilterCreatureCard;
 import mage.game.Game;
@@ -47,9 +47,8 @@ import mage.abilities.costs.common.RevealTargetFromHandCost;
  */
 public class LivingDestiny extends CardImpl {
 
-    public LivingDestiny(UUID ownerId) {
-        super(ownerId, 195, "Living Destiny", Rarity.COMMON, new CardType[]{CardType.INSTANT}, "{3}{G}");
-        this.expansionSetCode = "ROE";
+    public LivingDestiny(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.INSTANT},"{3}{G}");
 
 
         // As an additional cost to cast Living Destiny, reveal a creature card from your hand.

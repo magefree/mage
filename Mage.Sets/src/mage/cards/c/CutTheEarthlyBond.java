@@ -25,13 +25,13 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.saviorsofkamigawa;
+package mage.cards.c;
 
 import java.util.UUID;
 import mage.abilities.effects.common.ReturnToHandTargetEffect;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.filter.FilterPermanent;
 import mage.filter.predicate.permanent.EnchantedPredicate;
 import mage.target.Target;
@@ -48,9 +48,8 @@ public class CutTheEarthlyBond extends CardImpl {
         filter.add(new EnchantedPredicate());
     }
 
-    public CutTheEarthlyBond(UUID ownerId) {
-        super(ownerId, 32, "Cut the Earthly Bond", Rarity.COMMON, new CardType[]{CardType.INSTANT}, "{U}");
-        this.expansionSetCode = "SOK";
+    public CutTheEarthlyBond(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.INSTANT},"{U}");
         this.subtype.add("Arcane");
 
 

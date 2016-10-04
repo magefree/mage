@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.zendikar;
+package mage.cards.m;
 
 import java.util.UUID;
 import mage.abilities.effects.Effect;
@@ -35,9 +35,9 @@ import mage.abilities.effects.common.continuous.GainControlTargetEffect;
 import mage.abilities.effects.common.counter.AddCountersTargetEffect;
 import mage.abilities.keyword.HasteAbility;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Duration;
-import mage.constants.Rarity;
 import mage.counters.CounterType;
 import mage.target.common.TargetCreaturePermanent;
 
@@ -47,9 +47,8 @@ import mage.target.common.TargetCreaturePermanent;
  */
 public class MarkOfMutiny extends CardImpl {
 
-    public MarkOfMutiny(UUID ownerId) {
-        super(ownerId, 137, "Mark of Mutiny", Rarity.UNCOMMON, new CardType[]{CardType.SORCERY}, "{2}{R}");
-        this.expansionSetCode = "ZEN";
+    public MarkOfMutiny(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{2}{R}");
 
         // Gain control of target creature until end of turn.
         // Put a +1/+1 counter on it and untap it.

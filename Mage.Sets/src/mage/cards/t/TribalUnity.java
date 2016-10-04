@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.planechase;
+package mage.cards.t;
 
 import java.util.UUID;
 import mage.MageObject;
@@ -35,13 +35,13 @@ import mage.abilities.dynamicvalue.common.ManacostVariableValue;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.continuous.BoostAllEffect;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.cards.repository.CardRepository;
 import mage.choices.Choice;
 import mage.choices.ChoiceImpl;
 import mage.constants.CardType;
 import mage.constants.Duration;
 import mage.constants.Outcome;
-import mage.constants.Rarity;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.filter.predicate.mageobject.SubtypePredicate;
 import mage.game.Game;
@@ -53,9 +53,8 @@ import mage.players.Player;
  */
 public class TribalUnity extends CardImpl {
 
-    public TribalUnity(UUID ownerId) {
-        super(ownerId, 80, "Tribal Unity", Rarity.UNCOMMON, new CardType[]{CardType.INSTANT}, "{X}{2}{G}");
-        this.expansionSetCode = "HOP";
+    public TribalUnity(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.INSTANT},"{X}{2}{G}");
 
         // Creatures of the creature type of your choice get +X/+X until end of turn.
         this.getSpellAbility().addEffect(new TribalUnityEffect(new ManacostVariableValue()));

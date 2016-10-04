@@ -25,12 +25,12 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.returntoravnica;
+package mage.cards.d;
 
 import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.abilities.effects.common.DestroyTargetEffect;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.filter.FilterPermanent;
 import mage.filter.predicate.Predicates;
 import mage.filter.predicate.mageobject.CardTypePredicate;
@@ -52,9 +52,8 @@ public class Dreadbore extends CardImpl {
         ));
     }
 
-    public Dreadbore(UUID ownerId) {
-        super(ownerId, 157, "Dreadbore", Rarity.RARE, new CardType[]{CardType.SORCERY}, "{B}{R}");
-        this.expansionSetCode = "RTR";
+    public Dreadbore(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{B}{R}");
 
 
         // Destroy target creature or planeswalker.

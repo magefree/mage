@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.dissension;
+package mage.cards.t;
 
 import java.util.UUID;
 import mage.MageInt;
@@ -34,8 +34,8 @@ import mage.abilities.common.SpellCastControllerTriggeredAbility;
 import mage.abilities.effects.common.ReturnToHandTargetEffect;
 import mage.abilities.keyword.FlyingAbility;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.target.TargetPermanent;
 
 /**
@@ -44,9 +44,8 @@ import mage.target.TargetPermanent;
  */
 public class TidespoutTyrant extends CardImpl {
 
-    public TidespoutTyrant(UUID ownerId) {
-        super(ownerId, 34, "Tidespout Tyrant", Rarity.RARE, new CardType[]{CardType.CREATURE}, "{5}{U}{U}{U}");
-        this.expansionSetCode = "DIS";
+    public TidespoutTyrant(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{5}{U}{U}{U}");
         this.subtype.add("Djinn");
 
         this.power = new MageInt(5);

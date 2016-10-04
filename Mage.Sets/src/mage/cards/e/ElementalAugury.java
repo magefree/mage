@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.masterseditionii;
+package mage.cards.e;
 
 import java.util.UUID;
 import mage.abilities.Ability;
@@ -34,11 +34,11 @@ import mage.abilities.costs.mana.ManaCostsImpl;
 import mage.abilities.effects.OneShotEffect;
 import mage.cards.Card;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.cards.Cards;
 import mage.cards.CardsImpl;
 import mage.constants.CardType;
 import mage.constants.Outcome;
-import mage.constants.Rarity;
 import mage.constants.Zone;
 import mage.game.Game;
 import mage.players.Player;
@@ -50,9 +50,8 @@ import mage.target.TargetPlayer;
  */
 public class ElementalAugury extends CardImpl {
 
-    public ElementalAugury(UUID ownerId) {
-        super(ownerId, 193, "Elemental Augury", Rarity.RARE, new CardType[]{CardType.ENCHANTMENT}, "{U}{B}{R}");
-        this.expansionSetCode = "ME2";
+    public ElementalAugury(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.ENCHANTMENT},"{U}{B}{R}");
 
         // {3}: Look at the top three cards of target player's library, then put them back in any order.
         Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new ElementalAuguryEffect(), new ManaCostsImpl("3"));

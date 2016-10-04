@@ -26,17 +26,17 @@
  *  or implied, of BetaSteward_at_googlemail.com.
  */
 
-package mage.sets.mirrodinbesieged;
+package mage.cards.r;
 
 import java.util.UUID;
 import mage.abilities.effects.Effect;
 
 import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.abilities.effects.common.continuous.BoostAllEffect;
 import mage.abilities.effects.common.continuous.GainAbilityAllEffect;
 import mage.abilities.keyword.FirstStrikeAbility;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.Duration;
 import mage.filter.common.FilterAttackingCreature;
 
@@ -46,9 +46,8 @@ import mage.filter.common.FilterAttackingCreature;
  */
 public class RallyTheForces extends CardImpl {
 
-    public RallyTheForces (UUID ownerId) {
-        super(ownerId, 73, "Rally the Forces", Rarity.COMMON, new CardType[]{CardType.INSTANT}, "{2}{R}");
-        this.expansionSetCode = "MBS";
+    public RallyTheForces (UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.INSTANT},"{2}{R}");
 
         // Attacking creatures get +1/+0 and gain first strike until end of turn.
         Effect effect = new BoostAllEffect(1, 0, Duration.EndOfTurn, new FilterAttackingCreature("Attacking creatures"), false);

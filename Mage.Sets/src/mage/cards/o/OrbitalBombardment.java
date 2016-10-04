@@ -25,13 +25,13 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.starwars;
+package mage.cards.o;
 
 import java.util.UUID;
 import mage.abilities.effects.common.DestroyAllEffect;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.filter.predicate.Predicates;
 import mage.filter.predicate.mageobject.SubtypePredicate;
@@ -48,9 +48,8 @@ public class OrbitalBombardment extends CardImpl {
         filter.add(Predicates.not(new SubtypePredicate("Starship")));
     }
 
-    public OrbitalBombardment(UUID ownerId) {
-        super(ownerId, 25, "Orbital Bombardment", Rarity.RARE, new CardType[]{CardType.SORCERY}, "{3}{W}{W}");
-        this.expansionSetCode = "SWS";
+    public OrbitalBombardment(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{3}{W}{W}");
 
         // Destroy all non-Starship creatuers.
         getSpellAbility().getEffects().add(new DestroyAllEffect(new FilterCreaturePermanent(filter)));

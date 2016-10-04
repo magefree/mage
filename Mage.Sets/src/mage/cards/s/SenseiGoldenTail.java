@@ -26,13 +26,12 @@
  *  or implied, of BetaSteward_at_googlemail.com.
  */
 
-package mage.sets.championsofkamigawa;
+package mage.cards.s;
 
 import java.util.UUID;
 
 import mage.constants.CardType;
 import mage.constants.Duration;
-import mage.constants.Rarity;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.ActivateAsSorceryActivatedAbility;
@@ -43,6 +42,7 @@ import mage.abilities.effects.common.continuous.GainAbilityTargetEffect;
 import mage.abilities.effects.common.counter.AddCountersTargetEffect;
 import mage.abilities.keyword.BushidoAbility;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.Zone;
 import mage.counters.Counter;
 import mage.target.common.TargetCreaturePermanent;
@@ -53,10 +53,9 @@ import mage.target.common.TargetCreaturePermanent;
  */
 public class SenseiGoldenTail extends CardImpl {
 
-    public SenseiGoldenTail (UUID ownerId) {
-        super(ownerId, 44, "Sensei Golden-Tail", Rarity.RARE, new CardType[]{CardType.CREATURE}, "{1}{W}");
+    public SenseiGoldenTail (UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{1}{W}");
         this.supertype.add("Legendary");
-        this.expansionSetCode = "CHK";
         this.subtype.add("Fox");
         this.subtype.add("Samurai");
 

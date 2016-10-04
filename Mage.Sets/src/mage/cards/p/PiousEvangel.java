@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.shadowsoverinnistrad;
+package mage.cards.p;
 
 import java.util.UUID;
 import mage.MageInt;
@@ -38,9 +38,10 @@ import mage.abilities.costs.mana.GenericManaCost;
 import mage.abilities.effects.common.GainLifeEffect;
 import mage.abilities.effects.common.TransformSourceEffect;
 import mage.abilities.keyword.TransformAbility;
+import mage.cards.w.WaywardDisciple;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.constants.Zone;
 import mage.filter.FilterPermanent;
 import mage.filter.common.FilterControlledPermanent;
@@ -61,16 +62,15 @@ public class PiousEvangel extends CardImpl {
         filter2.add(new AnotherPredicate());
     }
 
-    public PiousEvangel(UUID ownerId) {
-        super(ownerId, 34, "Pious Evangel", Rarity.UNCOMMON, new CardType[]{CardType.CREATURE}, "{2}{W}");
-        this.expansionSetCode = "SOI";
+    public PiousEvangel(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{2}{W}");
         this.subtype.add("Human");
         this.subtype.add("Cleric");
         this.power = new MageInt(2);
         this.toughness = new MageInt(2);
 
         this.transformable = true;
-        this.secondSideCard = new WaywardDisciple(ownerId);
+        this.secondSideCardClazz = WaywardDisciple.class;
 
         // Whenever Pious Evangel or another creature enters the battlefield under your control, you gain 1 life.
         this.addAbility(new EntersBattlefieldControlledTriggeredAbility(new GainLifeEffect(1), filter));

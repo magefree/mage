@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.newphyrexia;
+package mage.cards.s;
 
 import java.util.List;
 import java.util.UUID;
@@ -33,11 +33,11 @@ import mage.abilities.Ability;
 import mage.abilities.effects.OneShotEffect;
 import mage.cards.Card;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.cards.Cards;
 import mage.cards.CardsImpl;
 import mage.constants.CardType;
 import mage.constants.Outcome;
-import mage.constants.Rarity;
 import mage.constants.Zone;
 import mage.filter.FilterCard;
 import mage.filter.predicate.Predicates;
@@ -62,9 +62,8 @@ public class SurgicalExtraction extends CardImpl {
         filter.add(Predicates.not(Predicates.and(new CardTypePredicate(CardType.LAND), new SupertypePredicate("Basic"))));
     }
 
-    public SurgicalExtraction(UUID ownerId) {
-        super(ownerId, 74, "Surgical Extraction", Rarity.RARE, new CardType[]{CardType.INSTANT}, "{BP}");
-        this.expansionSetCode = "NPH";
+    public SurgicalExtraction(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.INSTANT},"{BP}");
 
         // Choose target card in a graveyard other than a basic land card. Search its owner's graveyard,
         // hand, and library for any number of cards with the same name as that card and exile them.

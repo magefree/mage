@@ -25,12 +25,11 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.returntoravnica;
+package mage.cards.g;
 
 import java.util.UUID;
 
 import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.MageInt;
 import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.costs.mana.ManaCostsImpl;
@@ -39,6 +38,7 @@ import mage.abilities.keyword.DeathtouchAbility;
 import mage.abilities.mana.BlackManaAbility;
 import mage.abilities.mana.GreenManaAbility;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.Duration;
 import mage.constants.Zone;
 import mage.game.permanent.token.Token;
@@ -48,9 +48,8 @@ import mage.game.permanent.token.Token;
  */
 public class GolgariKeyrune extends CardImpl {
 
-    public GolgariKeyrune(UUID ownerId) {
-        super(ownerId, 229, "Golgari Keyrune", Rarity.UNCOMMON, new CardType[]{CardType.ARTIFACT}, "{3}");
-        this.expansionSetCode = "RTR";
+    public GolgariKeyrune(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.ARTIFACT},"{3}");
 
         // {T}: Add {B} or {G} to your mana pool.
         this.addAbility(new BlackManaAbility());

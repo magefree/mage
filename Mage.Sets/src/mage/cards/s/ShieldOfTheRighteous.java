@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.alarareborn;
+package mage.cards.s;
 
 import java.util.UUID;
 import mage.abilities.common.BlocksCreatureAttachedTriggeredAbility;
@@ -37,10 +37,10 @@ import mage.abilities.effects.common.continuous.GainAbilityAttachedEffect;
 import mage.abilities.keyword.EquipAbility;
 import mage.abilities.keyword.VigilanceAbility;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.AttachmentType;
 import mage.constants.CardType;
 import mage.constants.Outcome;
-import mage.constants.Rarity;
 import mage.constants.Zone;
 import mage.target.common.TargetControlledCreaturePermanent;
 
@@ -50,9 +50,8 @@ import mage.target.common.TargetControlledCreaturePermanent;
  */
 public class ShieldOfTheRighteous extends CardImpl {
 
-    public ShieldOfTheRighteous(UUID ownerId) {
-        super(ownerId, 11, "Shield of the Righteous", Rarity.UNCOMMON, new CardType[]{CardType.ARTIFACT}, "{W}{U}");
-        this.expansionSetCode = "ARB";
+    public ShieldOfTheRighteous(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.ARTIFACT},"{W}{U}");
         this.subtype.add("Equipment");
 
         // Equipped creature gets +0/+2 and has vigilance.

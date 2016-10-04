@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.bornofthegods;
+package mage.cards.k;
 
 import java.util.UUID;
 import mage.MageInt;
@@ -37,9 +37,9 @@ import mage.abilities.effects.common.continuous.LoseCreatureTypeSourceEffect;
 import mage.abilities.effects.common.search.SearchLibraryPutInPlayEffect;
 import mage.abilities.keyword.IndestructibleAbility;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.ColoredManaSymbol;
-import mage.constants.Rarity;
 import mage.constants.Zone;
 import mage.filter.FilterCard;
 import mage.filter.common.FilterCreatureSpell;
@@ -59,9 +59,8 @@ public class KarametraGodOfHarvests extends CardImpl {
                 new SubtypePredicate("Forest"),
                 new SubtypePredicate("Plains")));
     }
-    public KarametraGodOfHarvests(UUID ownerId) {
-        super(ownerId, 148, "Karametra, God of Harvests", Rarity.MYTHIC, new CardType[]{CardType.ENCHANTMENT, CardType.CREATURE}, "{3}{G}{W}");
-        this.expansionSetCode = "BNG";
+    public KarametraGodOfHarvests(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.ENCHANTMENT,CardType.CREATURE},"{3}{G}{W}");
         this.supertype.add("Legendary");
         this.subtype.add("God");
 

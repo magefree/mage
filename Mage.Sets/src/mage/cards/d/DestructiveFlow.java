@@ -25,14 +25,14 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.planeshift;
+package mage.cards.d;
 
 import java.util.UUID;
 import mage.abilities.common.BeginningOfUpkeepTriggeredAbility;
 import mage.abilities.effects.common.SacrificeEffect;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.constants.TargetController;
 import mage.filter.common.FilterLandPermanent;
 import mage.filter.predicate.Predicates;
@@ -50,9 +50,8 @@ public class DestructiveFlow extends CardImpl {
         filter.add(Predicates.not(new SupertypePredicate("Basic")));
     }
 
-    public DestructiveFlow(UUID ownerId) {
-        super(ownerId, 102, "Destructive Flow", Rarity.RARE, new CardType[]{CardType.ENCHANTMENT}, "{B}{R}{G}");
-        this.expansionSetCode = "PLS";
+    public DestructiveFlow(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.ENCHANTMENT},"{B}{R}{G}");
 
         // At the beginning of each player's upkeep, that player sacrifices a nonbasic land.
         this.addAbility(new BeginningOfUpkeepTriggeredAbility(new SacrificeEffect(filter, 1, "that player"),

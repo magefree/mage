@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.magic2010;
+package mage.cards.j;
 
 import java.util.UUID;
 import mage.abilities.LoyaltyAbility;
@@ -34,8 +34,8 @@ import mage.abilities.effects.common.DrawCardAllEffect;
 import mage.abilities.effects.common.DrawCardTargetEffect;
 import mage.abilities.effects.common.PutLibraryIntoGraveTargetEffect;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.target.TargetPlayer;
 
 /**
@@ -44,9 +44,8 @@ import mage.target.TargetPlayer;
  */
 public class JaceBeleren extends CardImpl {
 
-    public JaceBeleren(UUID ownerId) {
-        super(ownerId, 58, "Jace Beleren", Rarity.MYTHIC, new CardType[]{CardType.PLANESWALKER}, "{1}{U}{U}");
-        this.expansionSetCode = "M10";
+    public JaceBeleren(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.PLANESWALKER},"{1}{U}{U}");
         this.subtype.add("Jace");
 
         this.addAbility(new PlanswalkerEntersWithLoyalityCountersAbility(3));

@@ -25,10 +25,9 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.mirrodinbesieged;
+package mage.cards.s;
 
 import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.abilities.Ability;
 import mage.abilities.common.EntersBattlefieldTappedAbility;
 import mage.abilities.costs.common.RemoveCountersSourceCost;
@@ -36,6 +35,7 @@ import mage.abilities.effects.EntersBattlefieldEffect;
 import mage.abilities.effects.common.counter.AddCountersSourceEffect;
 import mage.abilities.mana.AnyColorManaAbility;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.counters.CounterType;
 
 import java.util.UUID;
@@ -48,9 +48,8 @@ public class SphereOfTheSuns extends CardImpl {
 
     private static final String ruleText = "Sphere of the Suns enters the battlefield tapped and with three charge counters on it.";
     
-    public SphereOfTheSuns(UUID ownerId) {
-        super(ownerId, 134, "Sphere of the Suns", Rarity.UNCOMMON, new CardType[]{CardType.ARTIFACT}, "{2}");
-        this.expansionSetCode = "MBS";
+    public SphereOfTheSuns(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.ARTIFACT},"{2}");
 
         // Sphere of the Suns enters the battlefield tapped and with three charge counters on it.
         Ability ability = new EntersBattlefieldTappedAbility(ruleText);

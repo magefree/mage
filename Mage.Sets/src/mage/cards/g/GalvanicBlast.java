@@ -25,15 +25,15 @@
  * authors and should not be interpreted as representing official policies, either expressed
  * or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.scarsofmirrodin;
+package mage.cards.g;
 
 import java.util.UUID;
 import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.abilities.condition.common.MetalcraftCondition;
 import mage.abilities.decorator.ConditionalOneShotEffect;
 import mage.abilities.effects.common.DamageTargetEffect;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.target.common.TargetCreatureOrPlayer;
 
 /**
@@ -44,9 +44,8 @@ public class GalvanicBlast extends CardImpl {
 
     private final String effectText = "{this} deals 2 damage to target creature or player.<br>Metalcraft - {this}t deals 4 damage to that creature or player instead if you control three or more artifacts";
 
-    public GalvanicBlast(UUID ownerId) {
-        super(ownerId, 91, "Galvanic Blast", Rarity.COMMON, new CardType[]{CardType.INSTANT}, "{R}");
-        this.expansionSetCode = "SOM";
+    public GalvanicBlast(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.INSTANT},"{R}");
         this.color.setRed(true);
 
 

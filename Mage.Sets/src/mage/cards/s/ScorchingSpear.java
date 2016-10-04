@@ -25,13 +25,13 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.starter1999;
+package mage.cards.s;
 
 import java.util.UUID;
 import mage.abilities.effects.common.DamageTargetEffect;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.target.common.TargetCreatureOrPlayer;
 
 /**
@@ -40,9 +40,8 @@ import mage.target.common.TargetCreatureOrPlayer;
  */
 public class ScorchingSpear extends CardImpl {
 
-    public ScorchingSpear(UUID ownerId) {
-        super(ownerId, 116, "Scorching Spear", Rarity.COMMON, new CardType[]{CardType.SORCERY}, "{R}");
-        this.expansionSetCode = "S99";
+    public ScorchingSpear(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{R}");
 
         // Scorching Spear deals 1 damage to target creature or player.
         this.getSpellAbility().addEffect(new DamageTargetEffect(1));

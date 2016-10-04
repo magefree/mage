@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.starwars;
+package mage.cards.b;
 
 import java.util.UUID;
 import mage.MageInt;
@@ -38,8 +38,8 @@ import mage.abilities.keyword.MenaceAbility;
 import mage.abilities.keyword.DeathtouchAbility;
 import mage.abilities.keyword.HasteAbility;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.counters.CounterType;
 import mage.target.common.TargetOpponentsCreaturePermanent;
 
@@ -49,9 +49,8 @@ import mage.target.common.TargetOpponentsCreaturePermanent;
  */
 public class BobaFett extends CardImpl {
 
-    public BobaFett(UUID ownerId) {
-        super(ownerId, 185, "Boba Fett", Rarity.MYTHIC, new CardType[]{CardType.CREATURE}, "{2}{B}{R}{G}");
-        this.expansionSetCode = "SWS";
+    public BobaFett(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{2}{B}{R}{G}");
         this.supertype.add("Legendary");
         this.subtype.add("Human");
         this.subtype.add("Hunter");

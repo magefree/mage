@@ -25,14 +25,14 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.judgment;
+package mage.cards.g;
 
 import java.util.UUID;
 import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.MageInt;
 import mage.abilities.keyword.TrampleAbility;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 
 /**
  *
@@ -40,9 +40,8 @@ import mage.cards.CardImpl;
  */
 public class GiantWarthog extends CardImpl {
 
-    public GiantWarthog(UUID ownerId) {
-        super(ownerId, 118, "Giant Warthog", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{5}{G}");
-        this.expansionSetCode = "JUD";
+    public GiantWarthog(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{5}{G}");
         this.subtype.add("Boar");
         this.subtype.add("Beast");
 

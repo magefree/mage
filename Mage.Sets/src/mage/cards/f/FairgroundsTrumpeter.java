@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.kaladesh;
+package mage.cards.f;
 
 import java.util.HashSet;
 import java.util.Set;
@@ -37,8 +37,8 @@ import mage.abilities.condition.Condition;
 import mage.abilities.decorator.ConditionalTriggeredAbility;
 import mage.abilities.effects.common.counter.AddCountersSourceEffect;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.constants.TargetController;
 import mage.constants.WatcherScope;
 import mage.counters.CounterType;
@@ -53,9 +53,8 @@ import mage.watchers.Watcher;
  */
 public class FairgroundsTrumpeter extends CardImpl {
 
-    public FairgroundsTrumpeter(UUID ownerId) {
-        super(ownerId, 155, "Fairgrounds Trumpeter", Rarity.UNCOMMON, new CardType[]{CardType.CREATURE}, "{2}{G}");
-        this.expansionSetCode = "KLD";
+    public FairgroundsTrumpeter(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{2}{G}");
         this.subtype.add("Elephant");
         this.power = new MageInt(2);
         this.toughness = new MageInt(2);

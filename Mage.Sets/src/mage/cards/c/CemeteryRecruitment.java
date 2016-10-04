@@ -25,16 +25,16 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.eldritchmoon;
+package mage.cards.c;
 
 import java.util.UUID;
 import mage.abilities.Ability;
 import mage.abilities.effects.OneShotEffect;
 import mage.cards.Card;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Outcome;
-import mage.constants.Rarity;
 import mage.constants.Zone;
 import mage.filter.common.FilterCreatureCard;
 import mage.game.Game;
@@ -47,9 +47,8 @@ import mage.target.common.TargetCardInYourGraveyard;
  */
 public class CemeteryRecruitment extends CardImpl {
 
-    public CemeteryRecruitment(UUID ownerId) {
-        super(ownerId, 83, "Cemetery Recruitment", Rarity.COMMON, new CardType[]{CardType.SORCERY}, "{1}{B}");
-        this.expansionSetCode = "EMN";
+    public CemeteryRecruitment(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{1}{B}");
 
         // Return target creature card from your graveyard to your hand. If it's a Zombie card, draw a card.
         this.getSpellAbility().addEffect(new CemeteryRecruitmentEffect());

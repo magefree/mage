@@ -25,12 +25,11 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.conflux;
+package mage.cards.o;
 
 import java.util.UUID;
 import mage.constants.CardType;
 import mage.constants.Duration;
-import mage.constants.Rarity;
 import mage.constants.Zone;
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleActivatedAbility;
@@ -41,6 +40,7 @@ import mage.abilities.effects.common.DrawDiscardControllerEffect;
 import mage.abilities.effects.common.GainLifeEffect;
 import mage.abilities.effects.common.continuous.BoostTargetEffect;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.target.TargetPlayer;
 import mage.target.common.TargetCreaturePermanent;
 
@@ -50,9 +50,8 @@ import mage.target.common.TargetCreaturePermanent;
  */
 public class ObeliskOfAlara extends CardImpl {
 
-    public ObeliskOfAlara(UUID ownerId) {
-        super(ownerId, 140, "Obelisk of Alara", Rarity.RARE, new CardType[]{CardType.ARTIFACT}, "{6}");
-        this.expansionSetCode = "CON";
+    public ObeliskOfAlara(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.ARTIFACT},"{6}");
 
         // {1}{W}, {tap}: You gain 5 life.
         Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new GainLifeEffect(5), new ManaCostsImpl("{1}{W}"));

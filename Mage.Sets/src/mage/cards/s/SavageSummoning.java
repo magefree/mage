@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.magic2014;
+package mage.cards.s;
 
 import java.util.HashSet;
 import java.util.LinkedHashMap;
@@ -41,11 +41,11 @@ import mage.abilities.effects.ContinuousRuleModifyingEffectImpl;
 import mage.abilities.effects.ReplacementEffectImpl;
 import mage.cards.Card;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.AsThoughEffectType;
 import mage.constants.CardType;
 import mage.constants.Duration;
 import mage.constants.Outcome;
-import mage.constants.Rarity;
 import mage.constants.WatcherScope;
 import mage.counters.CounterType;
 import mage.game.Game;
@@ -63,9 +63,8 @@ import mage.watchers.Watcher;
  */
 public class SavageSummoning extends CardImpl {
 
-    public SavageSummoning(UUID ownerId) {
-        super(ownerId, 194, "Savage Summoning", Rarity.RARE, new CardType[]{CardType.INSTANT}, "{G}");
-        this.expansionSetCode = "M14";
+    public SavageSummoning(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.INSTANT},"{G}");
 
         // Savage Summoning can't be countered.
         Ability ability = new CantBeCounteredAbility();

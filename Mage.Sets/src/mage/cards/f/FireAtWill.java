@@ -25,13 +25,13 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.eventide;
+package mage.cards.f;
 
 import java.util.UUID;
 import mage.abilities.effects.common.DamageMultiEffect;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.filter.predicate.Predicates;
 import mage.filter.predicate.permanent.AttackingPredicate;
@@ -53,9 +53,8 @@ public class FireAtWill extends CardImpl {
                 new BlockingPredicate()));
     }
 
-    public FireAtWill(UUID ownerId) {
-        super(ownerId, 140, "Fire at Will", Rarity.COMMON, new CardType[]{CardType.INSTANT}, "{R/W}{R/W}{R/W}");
-        this.expansionSetCode = "EVE";
+    public FireAtWill(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.INSTANT},"{R/W}{R/W}{R/W}");
 
 
         // Fire at Will deals 3 damage divided as you choose among one, two, or three target attacking or blocking creatures.

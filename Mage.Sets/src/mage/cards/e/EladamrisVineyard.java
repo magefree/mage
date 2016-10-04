@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.tempest;
+package mage.cards.e;
 
 import java.util.UUID;
 
@@ -33,8 +33,8 @@ import mage.Mana;
 import mage.abilities.common.BeginningOfPreCombatMainTriggeredAbility;
 import mage.abilities.effects.common.AddManaToManaPoolTargetControllerEffect;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.constants.TargetController;
 import mage.constants.Zone;
 
@@ -44,9 +44,8 @@ import mage.constants.Zone;
  */
 public class EladamrisVineyard extends CardImpl {
 
-    public EladamrisVineyard(UUID ownerId) {
-        super(ownerId, 118, "Eladamri's Vineyard", Rarity.RARE, new CardType[]{CardType.ENCHANTMENT}, "{G}");
-        this.expansionSetCode = "TMP";
+    public EladamrisVineyard(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.ENCHANTMENT},"{G}");
 
 
         // At the beginning of each player's precombat main phase, add {G}{G} to that player's mana pool.

@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.scarsofmirrodin;
+package mage.cards.s;
 
 import mage.constants.*;
 import mage.abilities.Ability;
@@ -37,6 +37,7 @@ import mage.abilities.effects.OneShotEffect;
 import mage.abilities.keyword.FlashbackAbility;
 import mage.cards.Card;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.filter.FilterCard;
 import mage.filter.common.FilterNonlandCard;
 import mage.game.Game;
@@ -53,9 +54,8 @@ import java.util.UUID;
  */
 public class SemblanceAnvil extends CardImpl {
 
-    public SemblanceAnvil(UUID ownerId) {
-        super(ownerId, 201, "Semblance Anvil", Rarity.RARE, new CardType[]{CardType.ARTIFACT}, "{3}");
-        this.expansionSetCode = "SOM";
+    public SemblanceAnvil(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.ARTIFACT},"{3}");
 
         // Imprint - When Semblance Anvil enters the battlefield, you may exile a nonland card from your hand.
         this.addAbility(new EntersBattlefieldTriggeredAbility(new SemblanceAnvilEffect(), true));

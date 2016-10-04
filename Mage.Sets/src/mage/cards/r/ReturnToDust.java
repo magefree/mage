@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.commander;
+package mage.cards.r;
 
 import java.util.UUID;
 import mage.abilities.Ability;
@@ -33,8 +33,8 @@ import mage.abilities.SpellAbility;
 import mage.abilities.effects.Effect;
 import mage.abilities.effects.common.ExileTargetEffect;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.filter.FilterPermanent;
 import mage.filter.predicate.Predicates;
 import mage.filter.predicate.mageobject.CardTypePredicate;
@@ -53,9 +53,8 @@ public class ReturnToDust extends CardImpl {
                                  new CardTypePredicate(CardType.ENCHANTMENT)));
     }
 
-    public ReturnToDust(UUID ownerId) {
-        super(ownerId, 28, "Return to Dust", Rarity.UNCOMMON, new CardType[]{CardType.INSTANT}, "{2}{W}{W}");
-        this.expansionSetCode = "CMD";
+    public ReturnToDust(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.INSTANT},"{2}{W}{W}");
 
 
         // Exile target artifact or enchantment. If you cast this spell during your main phase, you may exile up to one other target artifact or enchantment.

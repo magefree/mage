@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.commander2013;
+package mage.cards.e;
 
 import java.util.UUID;
 import mage.MageInt;
@@ -36,9 +36,9 @@ import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.CreateTokenEffect;
 import mage.abilities.effects.common.SacrificeSourceEffect;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Outcome;
-import mage.constants.Rarity;
 import mage.constants.Zone;
 import mage.filter.Filter;
 import mage.filter.FilterSpell;
@@ -61,9 +61,8 @@ public class EndrekSahrMasterBreeder extends CardImpl {
         filter.add(new CardTypePredicate(CardType.CREATURE));
     }
 
-    public EndrekSahrMasterBreeder(UUID ownerId) {
-        super(ownerId, 76, "Endrek Sahr, Master Breeder", Rarity.RARE, new CardType[]{CardType.CREATURE}, "{4}{B}");
-        this.expansionSetCode = "C13";
+    public EndrekSahrMasterBreeder(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{4}{B}");
         this.supertype.add("Legendary");
         this.subtype.add("Human");
         this.subtype.add("Wizard");

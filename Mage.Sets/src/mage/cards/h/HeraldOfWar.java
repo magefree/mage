@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.avacynrestored;
+package mage.cards.h;
 
 import mage.constants.*;
 import mage.MageInt;
@@ -39,6 +39,7 @@ import mage.abilities.keyword.FlashbackAbility;
 import mage.abilities.keyword.FlyingAbility;
 import mage.cards.Card;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.counters.CounterType;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
@@ -51,9 +52,8 @@ import java.util.UUID;
  */
 public class HeraldOfWar extends CardImpl {
 
-    public HeraldOfWar(UUID ownerId) {
-        super(ownerId, 24, "Herald of War", Rarity.RARE, new CardType[]{CardType.CREATURE}, "{3}{W}{W}");
-        this.expansionSetCode = "AVR";
+    public HeraldOfWar(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{3}{W}{W}");
         this.subtype.add("Angel");
 
         this.power = new MageInt(3);

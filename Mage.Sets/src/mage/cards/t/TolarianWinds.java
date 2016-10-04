@@ -25,13 +25,13 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.urzassaga;
+package mage.cards.t;
 
 import java.util.UUID;
 import mage.abilities.effects.common.discard.DiscardHandDrawSameNumberSourceEffect;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.Rarity;
 
 /**
  *
@@ -39,9 +39,8 @@ import mage.constants.Rarity;
  */
 public class TolarianWinds extends CardImpl {
 
-    public TolarianWinds(UUID ownerId) {
-        super(ownerId, 104, "Tolarian Winds", Rarity.COMMON, new CardType[]{CardType.INSTANT}, "{1}{U}");
-        this.expansionSetCode = "USG";
+    public TolarianWinds(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.INSTANT},"{1}{U}");
 
         // Discard all the cards in your hand, then draw that many cards.
         this.getSpellAbility().addEffect(new DiscardHandDrawSameNumberSourceEffect());

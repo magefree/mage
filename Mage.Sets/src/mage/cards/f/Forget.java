@@ -25,15 +25,15 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.homelands;
+package mage.cards.f;
 
 import java.util.UUID;
 import mage.abilities.Ability;
 import mage.abilities.effects.OneShotEffect;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Outcome;
-import mage.constants.Rarity;
 import mage.game.Game;
 import mage.players.Player;
 import mage.target.TargetPlayer;
@@ -44,9 +44,8 @@ import mage.target.TargetPlayer;
  */
 public class Forget extends CardImpl {
 
-    public Forget(UUID ownerId) {
-        super(ownerId, 32, "Forget", Rarity.RARE, new CardType[]{CardType.SORCERY}, "{U}{U}");
-        this.expansionSetCode = "HML";
+    public Forget(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{U}{U}");
 
 
         // Target player discards two cards, then draws as many cards as he or she discarded this way.

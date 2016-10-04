@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.championsofkamigawa;
+package mage.cards.v;
 
 import java.util.UUID;
 import mage.abilities.Ability;
@@ -33,9 +33,9 @@ import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.costs.mana.GenericManaCost;
 import mage.abilities.effects.RedirectionEffect;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Duration;
-import mage.constants.Rarity;
 import mage.constants.Zone;
 import mage.filter.common.FilterControlledCreaturePermanent;
 import mage.filter.predicate.mageobject.SupertypePredicate;
@@ -56,9 +56,8 @@ public class VassalsDuty extends CardImpl {
         filter.add(new SupertypePredicate("Legendary"));
     }
 
-    public VassalsDuty(UUID ownerId) {
-        super(ownerId, 48, "Vassal's Duty", Rarity.RARE, new CardType[]{CardType.ENCHANTMENT}, "{3}{W}");
-        this.expansionSetCode = "CHK";
+    public VassalsDuty(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.ENCHANTMENT},"{3}{W}");
 
         // {1}: The next 1 damage that would be dealt to target legendary creature you control this turn is dealt to you instead.
         Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new VassalsDutyPreventDamageTargetEffect(Duration.EndOfTurn, 1), new GenericManaCost(1));

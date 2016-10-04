@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.gatecrash;
+package mage.cards.g;
 
 import java.util.UUID;
 
@@ -33,7 +33,6 @@ import mage.constants.CardType;
 import mage.constants.AsThoughEffectType;
 import mage.constants.Duration;
 import mage.constants.Outcome;
-import mage.constants.Rarity;
 import mage.constants.Zone;
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleActivatedAbility;
@@ -45,6 +44,7 @@ import mage.abilities.effects.common.combat.CantBeBlockedAllEffect;
 import mage.abilities.effects.common.continuous.GainAbilityControlledEffect;
 import mage.abilities.keyword.HexproofAbility;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.filter.common.FilterControlledCreaturePermanent;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.game.Game;
@@ -63,9 +63,8 @@ import mage.game.permanent.Permanent;
  */
 public class GlaringSpotlight extends CardImpl {
 
-    public GlaringSpotlight(UUID ownerId) {
-        super(ownerId, 229, "Glaring Spotlight", Rarity.RARE, new CardType[]{CardType.ARTIFACT}, "{1}");
-        this.expansionSetCode = "GTC";
+    public GlaringSpotlight(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.ARTIFACT},"{1}");
 
         // Creatures your opponents control with hexproof can be the targets of spells and abilities you control as though they didn't have hexproof.
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new GlaringSpotlightEffect()));

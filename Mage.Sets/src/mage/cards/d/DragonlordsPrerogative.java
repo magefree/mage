@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.dragonsoftarkir;
+package mage.cards.d;
 
 import java.util.UUID;
 import mage.abilities.Ability;
@@ -39,8 +39,8 @@ import mage.abilities.effects.common.CantBeCounteredSourceEffect;
 import mage.abilities.effects.common.DrawCardSourceControllerEffect;
 import mage.abilities.effects.common.InfoEffect;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.constants.Zone;
 import mage.filter.FilterCard;
 import mage.filter.common.FilterControlledPermanent;
@@ -62,9 +62,8 @@ public class DragonlordsPrerogative extends CardImpl {
         filter.add(new SubtypePredicate("Dragon"));
     }
 
-    public DragonlordsPrerogative(UUID ownerId) {
-        super(ownerId, 52, "Dragonlord's Prerogative", Rarity.RARE, new CardType[]{CardType.INSTANT}, "{4}{U}{U}");
-        this.expansionSetCode = "DTK";
+    public DragonlordsPrerogative(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.INSTANT},"{4}{U}{U}");
 
         // As an additional cost to cast Dragonlord's Prerogative, you may reveal a Dragon card from your hand.
         this.getSpellAbility().addEffect(new InfoEffect("As an additional cost to cast {this}, you may reveal a Dragon card from your hand"));

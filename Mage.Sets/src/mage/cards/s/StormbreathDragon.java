@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.theros;
+package mage.cards.s;
 
 import java.util.UUID;
 import mage.MageInt;
@@ -38,9 +38,9 @@ import mage.abilities.keyword.HasteAbility;
 import mage.abilities.keyword.MonstrosityAbility;
 import mage.abilities.keyword.ProtectionAbility;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Outcome;
-import mage.constants.Rarity;
 import mage.filter.FilterObject;
 import mage.filter.predicate.mageobject.ColorPredicate;
 import mage.game.Game;
@@ -57,9 +57,8 @@ public class StormbreathDragon extends CardImpl {
         filter.add(new ColorPredicate(ObjectColor.WHITE));
     }
 
-    public StormbreathDragon(UUID ownerId) {
-        super(ownerId, 143, "Stormbreath Dragon", Rarity.MYTHIC, new CardType[]{CardType.CREATURE}, "{3}{R}{R}");
-        this.expansionSetCode = "THS";
+    public StormbreathDragon(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{3}{R}{R}");
         this.subtype.add("Dragon");
 
         this.power = new MageInt(4);

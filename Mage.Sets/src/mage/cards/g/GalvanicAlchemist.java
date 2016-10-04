@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.avacynrestored;
+package mage.cards.g;
 
 import java.util.UUID;
 import mage.MageInt;
@@ -37,8 +37,8 @@ import mage.abilities.effects.common.UntapSourceEffect;
 import mage.abilities.effects.common.continuous.GainAbilityPairedEffect;
 import mage.abilities.keyword.SoulbondAbility;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.constants.Zone;
 
 /**
@@ -48,9 +48,8 @@ public class GalvanicAlchemist extends CardImpl {
 
     private static final String ruleText = "As long as {this} is paired with another creature, each of those creatures has \"{2}{U}: Untap this creature.\"";
 
-    public GalvanicAlchemist(UUID ownerId) {
-        super(ownerId, 54, "Galvanic Alchemist", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{2}{U}");
-        this.expansionSetCode = "AVR";
+    public GalvanicAlchemist(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{2}{U}");
         this.subtype.add("Human");
         this.subtype.add("Wizard");
 

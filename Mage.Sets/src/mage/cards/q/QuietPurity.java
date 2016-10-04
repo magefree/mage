@@ -26,14 +26,14 @@
  *  or implied, of BetaSteward_at_googlemail.com.
  */
 
-package mage.sets.championsofkamigawa;
+package mage.cards.q;
 
 import java.util.UUID;
 
 import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.abilities.effects.common.DestroyTargetEffect;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.filter.FilterPermanent;
 import mage.filter.predicate.mageobject.CardTypePredicate;
 import mage.target.TargetPermanent;
@@ -49,9 +49,8 @@ public class QuietPurity extends CardImpl {
         filter.add(new CardTypePredicate(CardType.ENCHANTMENT));
     }
 
-    public QuietPurity(UUID ownerId) {
-        super(ownerId, 39, "Quiet Purity", Rarity.COMMON, new CardType[]{CardType.INSTANT}, "{W}");
-        this.expansionSetCode = "CHK";
+    public QuietPurity(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.INSTANT},"{W}");
         this.subtype.add("Arcane");
 
         this.getSpellAbility().addTarget(new TargetPermanent(filter));

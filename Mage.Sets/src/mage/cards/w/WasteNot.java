@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.magic2015;
+package mage.cards.w;
 
 import java.util.UUID;
 import mage.Mana;
@@ -35,8 +35,8 @@ import mage.abilities.effects.common.CreateTokenEffect;
 import mage.abilities.effects.common.DrawCardSourceControllerEffect;
 import mage.cards.Card;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.constants.Zone;
 import mage.game.Game;
 import mage.game.events.GameEvent;
@@ -49,9 +49,8 @@ import mage.game.permanent.token.ZombieToken;
  */
 public class WasteNot extends CardImpl {
 
-    public WasteNot(UUID ownerId) {
-        super(ownerId, 122, "Waste Not", Rarity.RARE, new CardType[]{CardType.ENCHANTMENT}, "{1}{B}");
-        this.expansionSetCode = "M15";
+    public WasteNot(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.ENCHANTMENT},"{1}{B}");
 
         // Whenever an opponent discards a creature card, put a 2/2 black Zombie creature token onto the battlefield.
         this.addAbility(new WasteNotCreatureTriggeredAbility());

@@ -25,13 +25,13 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.magic2013;
+package mage.cards.m;
 
 import java.util.UUID;
 import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.abilities.effects.common.PutLibraryIntoGraveTargetEffect;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.target.common.TargetOpponent;
 
 /**
@@ -40,9 +40,8 @@ import mage.target.common.TargetOpponent;
  */
 public class MindSculpt extends CardImpl {
 
-    public MindSculpt(UUID ownerId) {
-        super(ownerId, 61, "Mind Sculpt", Rarity.COMMON, new CardType[]{CardType.SORCERY}, "{1}{U}");
-        this.expansionSetCode = "M13";
+    public MindSculpt(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{1}{U}");
 
 
         // Target opponent puts the top seven cards of his or her library into his or her graveyard.

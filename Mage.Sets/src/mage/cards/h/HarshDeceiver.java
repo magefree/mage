@@ -25,14 +25,13 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.championsofkamigawa;
+package mage.cards.h;
 
 import java.util.UUID;
 
 import mage.abilities.common.FeralDeceiverAbility;
 import mage.constants.CardType;
 import mage.constants.Duration;
-import mage.constants.Rarity;
 import mage.constants.Zone;
 import mage.MageInt;
 import mage.abilities.Ability;
@@ -43,6 +42,7 @@ import mage.abilities.effects.common.LookLibraryControllerEffect;
 import mage.abilities.effects.common.UntapSourceEffect;
 import mage.abilities.effects.common.continuous.BoostSourceEffect;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 
 /**
  *
@@ -50,9 +50,8 @@ import mage.cards.CardImpl;
  */
 public class HarshDeceiver extends CardImpl {
 
-    public HarshDeceiver(UUID ownerId) {
-        super(ownerId, 11, "Harsh Deceiver", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{3}{W}");
-        this.expansionSetCode = "CHK";
+    public HarshDeceiver(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{3}{W}");
         this.subtype.add("Spirit");
 
         this.power = new MageInt(1);

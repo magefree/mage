@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.tenthedition;
+package mage.cards.w;
 
 import java.util.UUID;
 
@@ -36,6 +36,7 @@ import mage.abilities.costs.mana.ColoredManaCost;
 import mage.abilities.effects.common.continuous.BoostSourceEffect;
 import mage.abilities.keyword.DefenderAbility;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 
 /**
  *
@@ -43,9 +44,8 @@ import mage.cards.CardImpl;
  */
 public class WallOfFire extends CardImpl {
 
-    public WallOfFire(UUID ownerId) {
-        super(ownerId, 247, "Wall of Fire", Rarity.UNCOMMON, new CardType[]{CardType.CREATURE}, "{1}{R}{R}");
-        this.expansionSetCode = "10E";
+    public WallOfFire(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{1}{R}{R}");
         this.subtype.add("Wall");
 
         this.power = new MageInt(0);

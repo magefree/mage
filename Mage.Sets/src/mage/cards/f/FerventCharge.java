@@ -25,16 +25,16 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.apocalypse;
+package mage.cards.f;
 
 import java.util.UUID;
 import mage.abilities.common.AttacksCreatureYouControlTriggeredAbility;
 import mage.abilities.effects.Effect;
 import mage.abilities.effects.common.continuous.BoostTargetEffect;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Duration;
-import mage.constants.Rarity;
 
 /**
  *
@@ -42,9 +42,8 @@ import mage.constants.Rarity;
  */
 public class FerventCharge extends CardImpl {
 
-    public FerventCharge(UUID ownerId) {
-        super(ownerId, 98, "Fervent Charge", Rarity.RARE, new CardType[]{CardType.ENCHANTMENT}, "{1}{W}{B}{R}");
-        this.expansionSetCode = "APC";
+    public FerventCharge(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.ENCHANTMENT},"{1}{W}{B}{R}");
 
         // Whenever a creature you control attacks, it gets +2/+2 until end of turn.
         Effect effect = new BoostTargetEffect(2, 2, Duration.EndOfTurn);

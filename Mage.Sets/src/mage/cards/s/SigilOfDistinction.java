@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.shardsofalara;
+package mage.cards.s;
 
 import java.util.UUID;
 import mage.abilities.common.EntersBattlefieldAbility;
@@ -36,9 +36,9 @@ import mage.abilities.effects.common.EntersBattlefieldWithXCountersEffect;
 import mage.abilities.effects.common.continuous.BoostEquippedEffect;
 import mage.abilities.keyword.EquipAbility;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Outcome;
-import mage.constants.Rarity;
 import mage.constants.Zone;
 import mage.counters.CounterType;
 
@@ -47,9 +47,8 @@ import mage.counters.CounterType;
  */
 public class SigilOfDistinction extends CardImpl {
 
-    public SigilOfDistinction(UUID ownerId) {
-        super(ownerId, 219, "Sigil of Distinction", Rarity.RARE, new CardType[]{CardType.ARTIFACT}, "{X}");
-        this.expansionSetCode = "ALA";
+    public SigilOfDistinction(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.ARTIFACT},"{X}");
         this.subtype.add("Equipment");
 
         // Sigil of Distinction enters the battlefield with X charge counters on it.

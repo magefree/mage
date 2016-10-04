@@ -25,16 +25,16 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.returntoravnica;
+package mage.cards.h;
 
 import java.util.UUID;
 import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.MageInt;
 import mage.abilities.effects.common.CreateTokenEffect;
 import mage.abilities.effects.common.PopulateEffect;
 import mage.abilities.keyword.TrampleAbility;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.game.permanent.token.Token;
 
 /**
@@ -43,9 +43,8 @@ import mage.game.permanent.token.Token;
  */
 public class HorncallersChant extends CardImpl {
 
-    public HorncallersChant(UUID ownerId) {
-        super(ownerId, 128, "Horncaller's Chant", Rarity.COMMON, new CardType[]{CardType.SORCERY}, "{7}{G}");
-        this.expansionSetCode = "RTR";
+    public HorncallersChant(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{7}{G}");
 
 
         // Put a 4/4 green Rhino creature token with trample onto the battlefield, then populate.

@@ -25,14 +25,14 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.fourthedition;
+package mage.cards.c;
 
 import java.util.UUID;
 import mage.abilities.effects.common.continuous.BecomesColorTargetEffect;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Duration;
-import mage.constants.Rarity;
 import mage.ObjectColor;
 import mage.target.common.TargetSpellOrPermanent;
 
@@ -43,9 +43,8 @@ import mage.target.common.TargetSpellOrPermanent;
  */
 public class Chaoslace extends CardImpl {
 
-    public Chaoslace(UUID ownerId) {
-        super(ownerId, 200, "Chaoslace", Rarity.RARE, new CardType[]{CardType.INSTANT}, "{R}");
-        this.expansionSetCode = "4ED";
+    public Chaoslace(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.INSTANT},"{R}");
 
         // Target spell or permanent becomes red.
         this.getSpellAbility().addTarget(new TargetSpellOrPermanent());

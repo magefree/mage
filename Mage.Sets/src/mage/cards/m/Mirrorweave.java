@@ -25,16 +25,16 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.shadowmoor;
+package mage.cards.m;
 
 import java.util.UUID;
 import mage.abilities.Ability;
 import mage.abilities.effects.OneShotEffect;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Duration;
 import mage.constants.Outcome;
-import mage.constants.Rarity;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.filter.predicate.Predicates;
 import mage.filter.predicate.mageobject.SupertypePredicate;
@@ -57,9 +57,8 @@ public class Mirrorweave extends CardImpl {
         filter.add(Predicates.not(new SupertypePredicate("Legendary")));
     }
 
-    public Mirrorweave(UUID ownerId) {
-        super(ownerId, 143, "Mirrorweave", Rarity.RARE, new CardType[]{CardType.INSTANT}, "{2}{W/U}{W/U}");
-        this.expansionSetCode = "SHM";
+    public Mirrorweave(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.INSTANT},"{2}{W/U}{W/U}");
 
         // Each other creature becomes a copy of target nonlegendary creature until end of turn.
         this.getSpellAbility().addEffect(new MirrorWeaveEffect());

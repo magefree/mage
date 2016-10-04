@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.onslaught;
+package mage.cards.t;
 
 import java.util.UUID;
 import mage.abilities.dynamicvalue.common.PermanentsOnBattlefieldCount;
@@ -33,8 +33,8 @@ import mage.abilities.effects.Effect;
 import mage.abilities.effects.common.DamageEverythingEffect;
 import mage.abilities.keyword.FlyingAbility;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.filter.FilterPermanent;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.filter.predicate.Predicates;
@@ -55,9 +55,8 @@ public class ThunderOfHooves extends CardImpl {
         filterBeasts.add(new SubtypePredicate("Beast"));
     }
 
-    public ThunderOfHooves(UUID ownerId) {
-        super(ownerId, 242, "Thunder of Hooves", Rarity.UNCOMMON, new CardType[]{CardType.SORCERY}, "{3}{R}");
-        this.expansionSetCode = "ONS";
+    public ThunderOfHooves(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{3}{R}");
 
         // Thunder of Hooves deals X damage to each creature without flying and each player, where X is the number of Beasts on the battlefield.
         Effect effect = new DamageEverythingEffect(new PermanentsOnBattlefieldCount(new FilterPermanent(filterBeasts)), new FilterCreaturePermanent(filterNotFlying));

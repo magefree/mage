@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.alliances;
+package mage.cards.t;
 
 import java.util.UUID;
 import mage.abilities.Ability;
@@ -40,8 +40,8 @@ import mage.abilities.effects.common.DestroyTargetEffect;
 import mage.abilities.effects.common.counter.AddCountersSourceEffect;
 import mage.abilities.keyword.CumulativeUpkeepAbility;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.constants.Zone;
 import mage.counters.CounterType;
 import mage.target.TargetPermanent;
@@ -52,9 +52,8 @@ import mage.target.TargetPermanent;
  */
 public class Tornado extends CardImpl {
 
-    public Tornado(UUID ownerId) {
-        super(ownerId, 86, "Tornado", Rarity.RARE, new CardType[]{CardType.ENCHANTMENT}, "{4}{G}");
-        this.expansionSetCode = "ALL";
+    public Tornado(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.ENCHANTMENT},"{4}{G}");
 
 
         // Cumulative upkeep {G}

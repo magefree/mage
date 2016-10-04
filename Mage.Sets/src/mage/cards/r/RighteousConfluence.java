@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.commander2015;
+package mage.cards.r;
 
 import java.util.UUID;
 import mage.abilities.Mode;
@@ -33,8 +33,8 @@ import mage.abilities.effects.common.CreateTokenEffect;
 import mage.abilities.effects.common.ExileTargetEffect;
 import mage.abilities.effects.common.GainLifeEffect;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.game.permanent.token.KnightToken;
 import mage.target.common.TargetEnchantmentPermanent;
 
@@ -44,9 +44,8 @@ import mage.target.common.TargetEnchantmentPermanent;
  */
 public class RighteousConfluence extends CardImpl {
 
-    public RighteousConfluence(UUID ownerId) {
-        super(ownerId, 7, "Righteous Confluence", Rarity.RARE, new CardType[]{CardType.SORCERY}, "{3}{W}{W}");
-        this.expansionSetCode = "C15";
+    public RighteousConfluence(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{3}{W}{W}");
 
         // Choose three - You may choose the same mode more than once.
         this.getSpellAbility().getModes().setMinModes(3);

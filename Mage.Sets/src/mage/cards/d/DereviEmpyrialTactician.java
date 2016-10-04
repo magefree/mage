@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.commander2013;
+package mage.cards.d;
 
 import java.util.UUID;
 import mage.MageInt;
@@ -39,9 +39,9 @@ import mage.abilities.effects.common.MayTapOrUntapTargetEffect;
 import mage.abilities.keyword.FlyingAbility;
 import mage.cards.Card;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Outcome;
-import mage.constants.Rarity;
 import mage.constants.Zone;
 import mage.game.Game;
 import mage.game.events.DamagedPlayerEvent;
@@ -57,9 +57,8 @@ import mage.target.TargetPermanent;
  */
 public class DereviEmpyrialTactician extends CardImpl {
 
-    public DereviEmpyrialTactician(UUID ownerId) {
-        super(ownerId, 186, "Derevi, Empyrial Tactician", Rarity.MYTHIC, new CardType[]{CardType.CREATURE}, "{G}{W}{U}");
-        this.expansionSetCode = "C13";
+    public DereviEmpyrialTactician(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{G}{W}{U}");
         this.supertype.add("Legendary");
         this.subtype.add("Bird");
         this.subtype.add("Wizard");

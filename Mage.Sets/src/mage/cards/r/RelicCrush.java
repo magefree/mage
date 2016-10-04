@@ -25,14 +25,14 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.zendikar;
+package mage.cards.r;
 
 import java.util.UUID;
 import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.abilities.effects.Effect;
 import mage.abilities.effects.common.DestroyTargetEffect;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.filter.FilterPermanent;
 import mage.filter.common.FilterArtifactOrEnchantmentPermanent;
 import mage.target.TargetPermanent;
@@ -43,9 +43,8 @@ import mage.target.TargetPermanent;
  */
 public class RelicCrush extends CardImpl {
 
-    public RelicCrush(UUID ownerId) {
-        super(ownerId, 179, "Relic Crush", Rarity.COMMON, new CardType[]{CardType.INSTANT}, "{4}{G}");
-        this.expansionSetCode = "ZEN";
+    public RelicCrush(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.INSTANT},"{4}{G}");
 
         // Destroy target artifact or enchantment and up to one other target artifact or enchantment.
         FilterPermanent filter = new FilterArtifactOrEnchantmentPermanent();

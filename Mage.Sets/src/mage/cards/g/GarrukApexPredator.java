@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.magic2015;
+package mage.cards.g;
 
 import java.util.UUID;
 import mage.MageInt;
@@ -43,10 +43,10 @@ import mage.abilities.effects.common.continuous.GainAbilityTargetEffect;
 import mage.abilities.keyword.DeathtouchAbility;
 import mage.abilities.keyword.TrampleAbility;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Duration;
 import mage.constants.Outcome;
-import mage.constants.Rarity;
 import mage.constants.SetTargetPointer;
 import mage.constants.Zone;
 import mage.filter.FilterPermanent;
@@ -74,9 +74,8 @@ public class GarrukApexPredator extends CardImpl {
         filter.add(new AnotherPredicate());
     }
 
-    public GarrukApexPredator(UUID ownerId) {
-        super(ownerId, 210, "Garruk, Apex Predator", Rarity.MYTHIC, new CardType[]{CardType.PLANESWALKER}, "{5}{B}{G}");
-        this.expansionSetCode = "M15";
+    public GarrukApexPredator(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.PLANESWALKER},"{5}{B}{G}");
         this.subtype.add("Garruk");
 
         this.addAbility(new PlanswalkerEntersWithLoyalityCountersAbility(5));

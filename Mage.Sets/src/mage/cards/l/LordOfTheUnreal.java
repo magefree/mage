@@ -26,12 +26,11 @@
  *  or implied, of BetaSteward_at_googlemail.com.
  */
 
-package mage.sets.magic2012;
+package mage.cards.l;
 
 import java.util.UUID;
 
 import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleStaticAbility;
@@ -39,6 +38,7 @@ import mage.abilities.effects.common.continuous.BoostControlledEffect;
 import mage.abilities.effects.common.continuous.GainAbilityControlledEffect;
 import mage.abilities.keyword.HexproofAbility;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.Duration;
 import mage.constants.Zone;
 import mage.filter.common.FilterCreaturePermanent;
@@ -55,9 +55,8 @@ public class LordOfTheUnreal extends CardImpl {
         filter.add(new SubtypePredicate("Illusion"));
     }
 
-    public LordOfTheUnreal(UUID ownerId) {
-        super(ownerId, 62, "Lord of the Unreal", Rarity.RARE, new CardType[]{CardType.CREATURE}, "{U}{U}");
-        this.expansionSetCode = "M12";
+    public LordOfTheUnreal(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{U}{U}");
         this.subtype.add("Human");
         this.subtype.add("Wizard");
 

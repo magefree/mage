@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.conspiracy;
+package mage.cards.w;
 
 import java.util.UUID;
 import mage.MageInt;
@@ -38,10 +38,10 @@ import mage.abilities.effects.common.DrawCardAllEffect;
 import mage.abilities.effects.common.continuous.BoostControlledEffect;
 import mage.abilities.keyword.TrampleAbility;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Duration;
 import mage.constants.Outcome;
-import mage.constants.Rarity;
 import mage.filter.common.FilterAttackingCreature;
 import mage.game.Game;
 import mage.players.Player;
@@ -55,9 +55,8 @@ public class WoodvineElemental extends CardImpl {
     final private String rule = "<i>Parley &mdash; </i> Whenever {this} attacks, each player reveals the top card of his or her library. " 
                         + "For each nonland card revealed this way, attacking creatures you control get +1/+1 until end of turn. Then each player draws a card.";
     
-    public WoodvineElemental(UUID ownerId) {
-        super(ownerId, 52, "Woodvine Elemental", Rarity.UNCOMMON, new CardType[]{CardType.CREATURE}, "{4}{G}{W}");
-        this.expansionSetCode = "CNS";
+    public WoodvineElemental(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{4}{G}{W}");
         this.subtype.add("Elemental");
         this.power = new MageInt(4);
         this.toughness = new MageInt(4);

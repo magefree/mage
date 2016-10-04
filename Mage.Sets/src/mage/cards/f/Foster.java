@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.commander2013;
+package mage.cards.f;
 
 import java.util.UUID;
 import mage.MageObject;
@@ -36,11 +36,11 @@ import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.DoIfCostPaid;
 import mage.cards.Card;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.cards.Cards;
 import mage.cards.CardsImpl;
 import mage.constants.CardType;
 import mage.constants.Outcome;
-import mage.constants.Rarity;
 import mage.constants.TargetController;
 import mage.constants.Zone;
 import mage.filter.common.FilterCreatureCard;
@@ -61,9 +61,8 @@ public class Foster extends CardImpl {
         filter.add(new ControllerPredicate(TargetController.YOU));
     }
 
-    public Foster(UUID ownerId) {
-        super(ownerId, 146, "Foster", Rarity.RARE, new CardType[]{CardType.ENCHANTMENT}, "{2}{G}{G}");
-        this.expansionSetCode = "C13";
+    public Foster(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.ENCHANTMENT},"{2}{G}{G}");
 
         // Whenever a creature you control dies, you may pay {1}. If you do, reveal cards from the top of your library until you reveal a creature card. Put that card into your hand and the rest into your graveyard.
         Ability ability = new DiesCreatureTriggeredAbility(

@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.magic2015;
+package mage.cards.l;
 
 import java.util.UUID;
 import mage.abilities.Ability;
@@ -33,9 +33,9 @@ import mage.abilities.costs.Cost;
 import mage.abilities.costs.common.SacrificeTargetCost;
 import mage.abilities.effects.OneShotEffect;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Outcome;
-import mage.constants.Rarity;
 import mage.filter.common.FilterControlledCreaturePermanent;
 import mage.game.Game;
 import mage.players.Player;
@@ -47,9 +47,8 @@ import mage.target.common.TargetControlledCreaturePermanent;
  */
 public class LifesLegacy extends CardImpl {
 
-    public LifesLegacy(UUID ownerId) {
-        super(ownerId, 183, "Life's Legacy", Rarity.RARE, new CardType[]{CardType.SORCERY}, "{1}{G}");
-        this.expansionSetCode = "M15";
+    public LifesLegacy(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{1}{G}");
 
 
         // As an additional cost to cast Life's Legacy, sacrifice a creature.

@@ -25,14 +25,14 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.eldritchmoon;
+package mage.cards.e;
 
 import java.util.UUID;
 import mage.abilities.common.SpellCastControllerTriggeredAbility;
 import mage.abilities.effects.common.DrawCardSourceControllerEffect;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.filter.Filter;
 import mage.filter.FilterSpell;
 import mage.filter.predicate.mageobject.ConvertedManaCostPredicate;
@@ -51,9 +51,8 @@ public class EmrakulsInfluence extends CardImpl {
         filterSpell.add(new ConvertedManaCostPredicate(Filter.ComparisonType.GreaterThan, 6));
     }
 
-    public EmrakulsInfluence(UUID ownerId) {
-        super(ownerId, 157, "Emrakul's Influence", Rarity.UNCOMMON, new CardType[]{CardType.ENCHANTMENT}, "{2}{G}{G}");
-        this.expansionSetCode = "EMN";
+    public EmrakulsInfluence(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.ENCHANTMENT},"{2}{G}{G}");
 
         // Whenever you cast an Eldrazi creature spell with converted mana cost 7 or greater, draw two cards.
         this.addAbility(new SpellCastControllerTriggeredAbility(new DrawCardSourceControllerEffect(2), filterSpell, false));

@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.riseoftheeldrazi;
+package mage.cards.s;
 
 import java.util.UUID;
 import mage.abilities.Ability;
@@ -41,10 +41,10 @@ import mage.abilities.effects.common.PutTokenOntoBattlefieldCopyTargetEffect;
 import mage.abilities.effects.common.continuous.GainAbilityAttachedEffect;
 import mage.abilities.keyword.EnchantAbility;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.AttachmentType;
 import mage.constants.CardType;
 import mage.constants.Outcome;
-import mage.constants.Rarity;
 import mage.constants.Zone;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
@@ -58,9 +58,8 @@ import mage.target.targetpointer.FixedTarget;
  */
 public class SplinterTwin extends CardImpl {
 
-    public SplinterTwin(UUID ownerId) {
-        super(ownerId, 165, "Splinter Twin", Rarity.RARE, new CardType[]{CardType.ENCHANTMENT}, "{2}{R}{R}");
-        this.expansionSetCode = "ROE";
+    public SplinterTwin(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.ENCHANTMENT},"{2}{R}{R}");
         this.subtype.add("Aura");
 
         // Enchant creature

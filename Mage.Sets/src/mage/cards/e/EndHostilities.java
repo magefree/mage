@@ -25,16 +25,16 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.khansoftarkir;
+package mage.cards.e;
 
 import java.util.ArrayList;
 import java.util.UUID;
 import mage.abilities.Ability;
 import mage.abilities.effects.OneShotEffect;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Outcome;
-import mage.constants.Rarity;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.players.Player;
@@ -45,9 +45,8 @@ import mage.players.Player;
  */
 public class EndHostilities extends CardImpl {
 
-    public EndHostilities(UUID ownerId) {
-        super(ownerId, 8, "End Hostilities", Rarity.RARE, new CardType[]{CardType.SORCERY}, "{3}{W}{W}");
-        this.expansionSetCode = "KTK";
+    public EndHostilities(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{3}{W}{W}");
 
 
         // Destroy all creatures and all permanents attached to creatures.

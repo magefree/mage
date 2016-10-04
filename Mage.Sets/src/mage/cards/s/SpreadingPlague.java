@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.invasion;
+package mage.cards.s;
 
 import java.util.UUID;
 import mage.ObjectColor;
@@ -33,9 +33,9 @@ import mage.abilities.Ability;
 import mage.abilities.common.EntersBattlefieldAllTriggeredAbility;
 import mage.abilities.effects.OneShotEffect;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Outcome;
-import mage.constants.Rarity;
 import mage.constants.SetTargetPointer;
 import mage.constants.Zone;
 import mage.filter.FilterPermanent;
@@ -52,9 +52,8 @@ public class SpreadingPlague extends CardImpl {
     
     private static final String RULE = "Whenever a creature enters the battlefield, destroy all other creatures that share a color with it. They can't be regenerated.";
 
-    public SpreadingPlague(UUID ownerId) {
-        super(ownerId, 125, "Spreading Plague", Rarity.RARE, new CardType[]{CardType.ENCHANTMENT}, "{4}{B}");
-        this.expansionSetCode = "INV";
+    public SpreadingPlague(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.ENCHANTMENT},"{4}{B}");
 
         // Whenever a creature enters the battlefield, destroy all other creatures that share a color with it. They can't be regenerated.
         this.addAbility(new EntersBattlefieldAllTriggeredAbility(Zone.BATTLEFIELD, new SpreadingPlagueEffect(), new FilterCreaturePermanent(), false, SetTargetPointer.PERMANENT, RULE));

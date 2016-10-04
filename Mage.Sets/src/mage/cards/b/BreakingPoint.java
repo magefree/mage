@@ -25,15 +25,15 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.judgment;
+package mage.cards.b;
 
 import java.util.UUID;
 import mage.abilities.Ability;
 import mage.abilities.effects.OneShotEffect;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Outcome;
-import mage.constants.Rarity;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
@@ -47,9 +47,8 @@ import mage.players.Player;
  */
 public class BreakingPoint extends CardImpl {
 
-    public BreakingPoint(UUID ownerId) {
-        super(ownerId, 81, "Breaking Point", Rarity.RARE, new CardType[]{CardType.SORCERY}, "{1}{R}{R}");
-        this.expansionSetCode = "JUD";
+    public BreakingPoint(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{1}{R}{R}");
 
         // Any player may have Breaking Point deal 6 damage to him or her. If no one does, destroy all creatures. Creatures destroyed this way can't be regenerated.
         this.getSpellAbility().addEffect(new BreakingPointDestroyEffect());

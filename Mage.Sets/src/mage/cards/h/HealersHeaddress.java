@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.fifthdawn;
+package mage.cards.h;
 
 import java.util.UUID;
 import mage.abilities.Ability;
@@ -41,11 +41,11 @@ import mage.abilities.effects.common.continuous.BoostEquippedEffect;
 import mage.abilities.effects.common.continuous.GainAbilityAttachedEffect;
 import mage.abilities.keyword.EquipAbility;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.AttachmentType;
 import mage.constants.CardType;
 import mage.constants.Duration;
 import mage.constants.Outcome;
-import mage.constants.Rarity;
 import mage.constants.Zone;
 import mage.target.common.TargetControlledCreaturePermanent;
 import mage.target.common.TargetCreatureOrPlayer;
@@ -56,9 +56,8 @@ import mage.target.common.TargetCreatureOrPlayer;
  */
 public class HealersHeaddress extends CardImpl {
 
-    public HealersHeaddress(UUID ownerId) {
-        super(ownerId, 129, "Healer's Headdress", Rarity.COMMON, new CardType[]{CardType.ARTIFACT}, "{2}");
-        this.expansionSetCode = "5DN";
+    public HealersHeaddress(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.ARTIFACT},"{2}");
         this.subtype.add("Equipment");
 
         // Equipped creature gets +0/+2 and has "{tap}: Prevent the next 1 damage that would be dealt to target creature or player this turn."

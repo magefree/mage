@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.betrayersofkamigawa;
+package mage.cards.b;
 
 import java.util.UUID;
 import mage.abilities.Ability;
@@ -39,11 +39,11 @@ import mage.abilities.effects.common.PreventCombatDamageToSourceEffect;
 import mage.abilities.effects.common.continuous.GainAbilityAttachedEffect;
 import mage.abilities.keyword.EquipAbility;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.AttachmentType;
 import mage.constants.CardType;
 import mage.constants.Duration;
 import mage.constants.Outcome;
-import mage.constants.Rarity;
 import mage.constants.Zone;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
@@ -54,9 +54,8 @@ import mage.game.permanent.Permanent;
  */
 public class BlindingPowder extends CardImpl {
 
-    public BlindingPowder(UUID ownerId) {
-        super(ownerId, 153, "Blinding Powder", Rarity.UNCOMMON, new CardType[]{CardType.ARTIFACT}, "{1}");
-        this.expansionSetCode = "BOK";
+    public BlindingPowder(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.ARTIFACT},"{1}");
         this.subtype.add("Equipment");
 
         // Equipped creature has "Unattach Blinding Powder: Prevent all combat damage that would be dealt to this creature this turn."

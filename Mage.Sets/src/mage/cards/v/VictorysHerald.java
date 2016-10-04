@@ -26,7 +26,7 @@
  *  or implied, of BetaSteward_at_googlemail.com.
  */
 
-package mage.sets.mirrodinbesieged;
+package mage.cards.v;
 
 import java.util.UUID;
 import mage.MageInt;
@@ -36,9 +36,9 @@ import mage.abilities.effects.common.continuous.GainAbilityControlledEffect;
 import mage.abilities.keyword.FlyingAbility;
 import mage.abilities.keyword.LifelinkAbility;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Duration;
-import mage.constants.Rarity;
 import mage.filter.common.FilterAttackingCreature;
 
 /**
@@ -47,9 +47,8 @@ import mage.filter.common.FilterAttackingCreature;
  */
 public class VictorysHerald extends CardImpl {
 
-    public VictorysHerald (UUID ownerId) {
-        super(ownerId, 18, "Victory's Herald", Rarity.RARE, new CardType[]{CardType.CREATURE}, "{3}{W}{W}{W}");
-        this.expansionSetCode = "MBS";
+    public VictorysHerald (UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{3}{W}{W}{W}");
         this.subtype.add("Angel");
 
         this.power = new MageInt(4);

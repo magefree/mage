@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.journeyintonyx;
+package mage.cards.r;
 
 import java.util.UUID;
 import mage.MageInt;
@@ -34,8 +34,8 @@ import mage.abilities.effects.common.CreateTokenEffect;
 import mage.abilities.effects.keyword.ScryEffect;
 import mage.abilities.keyword.FlyingAbility;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.game.permanent.token.Token;
 
 /**
@@ -44,9 +44,8 @@ import mage.game.permanent.token.Token;
  */
 public class RiseOfEagles extends CardImpl {
 
-    public RiseOfEagles(UUID ownerId) {
-        super(ownerId, 49, "Rise of Eagles", Rarity.COMMON, new CardType[]{CardType.SORCERY}, "{4}{U}{U}");
-        this.expansionSetCode = "JOU";
+    public RiseOfEagles(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{4}{U}{U}");
 
 
         // Put two 2/2 blue Bird enchantment creature tokens with flying onto the battlefield. Scry 1.

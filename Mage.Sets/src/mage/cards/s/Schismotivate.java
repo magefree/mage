@@ -25,17 +25,17 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.guildpact;
+package mage.cards.s;
 
 import java.util.UUID;
 import mage.abilities.Ability;
 import mage.abilities.effects.ContinuousEffectImpl;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Duration;
 import mage.constants.Layer;
 import mage.constants.Outcome;
-import mage.constants.Rarity;
 import mage.constants.SubLayer;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.filter.predicate.mageobject.AnotherTargetPredicate;
@@ -49,9 +49,8 @@ import mage.target.common.TargetCreaturePermanent;
  */
 public class Schismotivate extends CardImpl {
 
-    public Schismotivate(UUID ownerId) {
-        super(ownerId, 129, "Schismotivate", Rarity.UNCOMMON, new CardType[]{CardType.INSTANT}, "{1}{U}{R}");
-        this.expansionSetCode = "GPT";
+    public Schismotivate(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.INSTANT},"{1}{U}{R}");
 
         // Target creature gets +4/+0 until end of turn. Another target creature gets -4/-0 until end of turn.
         this.getSpellAbility().addEffect(new SchismotivateEffect());

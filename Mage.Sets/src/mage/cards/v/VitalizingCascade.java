@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.mirage;
+package mage.cards.v;
 
 import java.util.UUID;
 import mage.abilities.Ability;
@@ -33,8 +33,8 @@ import mage.abilities.dynamicvalue.common.ManacostVariableValue;
 import mage.abilities.effects.Effect;
 import mage.abilities.effects.common.GainLifeEffect;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.game.Game;
 
 /**
@@ -43,9 +43,8 @@ import mage.game.Game;
  */
 public class VitalizingCascade extends CardImpl {
 
-    public VitalizingCascade(UUID ownerId) {
-        super(ownerId, 346, "Vitalizing Cascade", Rarity.UNCOMMON, new CardType[]{CardType.INSTANT}, "{X}{G}{W}");
-        this.expansionSetCode = "MIR";
+    public VitalizingCascade(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.INSTANT},"{X}{G}{W}");
 
         // You gain X plus 3 life.
         this.getSpellAbility().addEffect(new GainLifeEffect(new VitalizingCascadeValue()));

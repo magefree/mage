@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.innistrad;
+package mage.cards.g;
 
 import java.util.UUID;
 import mage.MageInt;
@@ -39,8 +39,8 @@ import mage.abilities.effects.common.DontUntapInControllersUntapStepSourceEffect
 import mage.abilities.effects.common.UntapSourceEffect;
 import mage.abilities.effects.common.counter.AddCountersSourceEffect;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.constants.Zone;
 import mage.counters.CounterType;
 import mage.filter.common.FilterControlledCreaturePermanent;
@@ -64,9 +64,8 @@ public class GrimgrinCorpseBorn extends CardImpl {
         filter.add(new AnotherPredicate());
     }
 
-    public GrimgrinCorpseBorn(UUID ownerId) {
-        super(ownerId, 214, "Grimgrin, Corpse-Born", Rarity.MYTHIC, new CardType[]{CardType.CREATURE}, "{3}{U}{B}");
-        this.expansionSetCode = "ISD";
+    public GrimgrinCorpseBorn(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{3}{U}{B}");
         this.supertype.add("Legendary");
         this.subtype.add("Zombie");
         this.subtype.add("Warrior");

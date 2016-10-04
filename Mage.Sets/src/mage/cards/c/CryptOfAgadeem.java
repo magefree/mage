@@ -25,11 +25,10 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.zendikar;
+package mage.cards.c;
 
 import java.util.UUID;
 import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.Mana;
 import mage.ObjectColor;
 import mage.abilities.common.EntersBattlefieldTappedAbility;
@@ -39,6 +38,7 @@ import mage.abilities.dynamicvalue.common.CardsInControllerGraveyardCount;
 import mage.abilities.mana.BlackManaAbility;
 import mage.abilities.mana.DynamicManaAbility;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.filter.common.FilterCreatureCard;
 import mage.filter.predicate.mageobject.ColorPredicate;
 
@@ -54,9 +54,8 @@ public class CryptOfAgadeem extends CardImpl {
         filter.add(new ColorPredicate(ObjectColor.BLACK));
     }
 
-    public CryptOfAgadeem(UUID ownerId) {
-        super(ownerId, 212, "Crypt of Agadeem", Rarity.RARE, new CardType[]{CardType.LAND}, "");
-        this.expansionSetCode = "ZEN";
+    public CryptOfAgadeem(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.LAND},"");
 
         // Crypt of Agadeem enters the battlefield tapped.
         this.addAbility(new EntersBattlefieldTappedAbility());

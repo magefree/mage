@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.darksteel;
+package mage.cards.p;
 
 import java.util.UUID;
 import mage.abilities.Ability;
@@ -36,11 +36,12 @@ import mage.abilities.costs.mana.VariableManaCost;
 import mage.abilities.effects.OneShotEffect;
 import mage.cards.Card;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.cards.CardsImpl;
+import mage.cards.CardSetInfo;
 import mage.cards.SplitCard;
 import mage.constants.CardType;
 import mage.constants.Outcome;
-import mage.constants.Rarity;
 import mage.constants.TargetController;
 import mage.constants.Zone;
 import mage.filter.Filter;
@@ -60,9 +61,8 @@ import mage.util.CardUtil;
  */
 public class PanopticMirror extends CardImpl {
 
-    public PanopticMirror(UUID ownerId) {
-        super(ownerId, 136, "Panoptic Mirror", Rarity.RARE, new CardType[]{CardType.ARTIFACT}, "{5}");
-        this.expansionSetCode = "DST";
+    public PanopticMirror(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.ARTIFACT},"{5}");
 
         // Imprint - {X}, {tap}: You may exile an instant or sorcery card with converted mana cost X from your hand.
         Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new PanopticMirrorExileEffect(), new VariableManaCost());

@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.commander2013;
+package mage.cards.s;
 
 import java.util.UUID;
 import mage.MageInt;
@@ -33,8 +33,8 @@ import mage.abilities.common.DiesCreatureTriggeredAbility;
 import mage.abilities.effects.common.CreateTokenEffect;
 import mage.abilities.keyword.HasteAbility;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.constants.TargetController;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.filter.predicate.Predicates;
@@ -56,9 +56,8 @@ public class SekKuarDeathkeeper extends CardImpl {
         filter.add(Predicates.not(new TokenPredicate()));
     }
 
-    public SekKuarDeathkeeper(UUID ownerId) {
-        super(ownerId, 210, "Sek'Kuar, Deathkeeper", Rarity.RARE, new CardType[]{CardType.CREATURE}, "{2}{B}{R}{G}");
-        this.expansionSetCode = "C13";
+    public SekKuarDeathkeeper(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{2}{B}{R}{G}");
         this.supertype.add("Legendary");
         this.subtype.add("Orc");
         this.subtype.add("Shaman");

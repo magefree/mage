@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.planarchaos;
+package mage.cards.e;
 
 import java.util.UUID;
 import mage.abilities.Mode;
@@ -34,9 +34,9 @@ import mage.abilities.effects.common.continuous.GainAbilityTargetEffect;
 import mage.abilities.effects.common.search.SearchLibraryPutInHandEffect;
 import mage.abilities.keyword.FlyingAbility;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Duration;
-import mage.constants.Rarity;
 import mage.filter.common.FilterBasicLandCard;
 import mage.filter.common.FilterCreatureCard;
 import mage.target.common.TargetCardInLibrary;
@@ -51,9 +51,8 @@ public class EvolutionCharm extends CardImpl {
     
     private static FilterCreatureCard filter = new FilterCreatureCard("creature card from your graveyard");
 
-    public EvolutionCharm(UUID ownerId) {
-        super(ownerId, 127, "Evolution Charm", Rarity.COMMON, new CardType[]{CardType.INSTANT}, "{1}{G}");
-        this.expansionSetCode = "PLC";
+    public EvolutionCharm(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.INSTANT},"{1}{G}");
 
         // Choose one - Search your library for a basic land card, reveal it, put it into your hand, then shuffle your library;
         this.getSpellAbility().addEffect(new SearchLibraryPutInHandEffect(new TargetCardInLibrary(0, 1, new FilterBasicLandCard()), true, true));

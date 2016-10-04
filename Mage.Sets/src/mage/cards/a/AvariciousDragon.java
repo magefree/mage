@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.magicorigins;
+package mage.cards.a;
 
 import java.util.UUID;
 import mage.MageInt;
@@ -35,8 +35,8 @@ import mage.abilities.effects.common.DrawCardSourceControllerEffect;
 import mage.abilities.effects.common.discard.DiscardHandControllerEffect;
 import mage.abilities.keyword.FlyingAbility;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.constants.TargetController;
 
 /**
@@ -45,9 +45,8 @@ import mage.constants.TargetController;
  */
 public class AvariciousDragon extends CardImpl {
 
-    public AvariciousDragon(UUID ownerId) {
-        super(ownerId, 131, "Avaricious Dragon", Rarity.MYTHIC, new CardType[]{CardType.CREATURE}, "{2}{R}{R}");
-        this.expansionSetCode = "ORI";
+    public AvariciousDragon(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{2}{R}{R}");
         this.subtype.add("Dragon");
         this.power = new MageInt(4);
         this.toughness = new MageInt(4);

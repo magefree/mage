@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.shadowsoverinnistrad;
+package mage.cards.s;
 
 import java.util.UUID;
 import mage.abilities.Ability;
@@ -34,11 +34,12 @@ import mage.abilities.costs.mana.ManaCostsImpl;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.PutLibraryIntoGraveTargetEffect;
 import mage.abilities.keyword.TransformAbility;
+import mage.cards.p.PersistentNightmare;
 import mage.cards.Card;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Outcome;
-import mage.constants.Rarity;
 import mage.constants.Zone;
 import mage.game.Game;
 import mage.players.Player;
@@ -50,12 +51,11 @@ import mage.target.common.TargetOpponent;
  */
 public class StartledAwake extends CardImpl {
 
-    public StartledAwake(UUID ownerId) {
-        super(ownerId, 88, "Startled Awake", Rarity.MYTHIC, new CardType[]{CardType.SORCERY}, "{2}{U}{U}");
-        this.expansionSetCode = "SOI";
+    public StartledAwake(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{2}{U}{U}");
 
         this.transformable = true;
-        this.secondSideCard = new PersistentNightmare(ownerId);
+        this.secondSideCardClazz = PersistentNightmare.class;
 
         // Target opponent puts the top thirteen cards of his or her library into his or her graveyard.
         this.getSpellAbility().addTarget(new TargetOpponent());

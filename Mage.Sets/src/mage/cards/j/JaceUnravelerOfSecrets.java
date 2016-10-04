@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.shadowsoverinnistrad;
+package mage.cards.j;
 
 import java.util.List;
 import java.util.UUID;
@@ -40,8 +40,8 @@ import mage.abilities.effects.common.GetEmblemEffect;
 import mage.abilities.effects.common.ReturnToHandTargetEffect;
 import mage.abilities.effects.keyword.ScryEffect;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.constants.Zone;
 import mage.filter.FilterSpell;
 import mage.game.Game;
@@ -58,9 +58,8 @@ import mage.watchers.common.SpellsCastWatcher;
  */
 public class JaceUnravelerOfSecrets extends CardImpl {
 
-    public JaceUnravelerOfSecrets(UUID ownerId) {
-        super(ownerId, 69, "Jace, Unraveler of Secrets", Rarity.MYTHIC, new CardType[]{CardType.PLANESWALKER}, "{3}{U}{U}");
-        this.expansionSetCode = "SOI";
+    public JaceUnravelerOfSecrets(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.PLANESWALKER},"{3}{U}{U}");
         this.subtype.add("Jace");
 
         this.addAbility(new PlanswalkerEntersWithLoyalityCountersAbility(5));

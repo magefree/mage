@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.planarchaos;
+package mage.cards.n;
 
 import java.util.UUID;
 import mage.abilities.TriggeredAbilityImpl;
@@ -35,9 +35,9 @@ import mage.abilities.effects.common.SkipDrawStepEffect;
 import mage.abilities.effects.common.continuous.MaximumHandSizeControllerEffect;
 import mage.abilities.effects.common.continuous.MaximumHandSizeControllerEffect.HandSizeModification;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Duration;
-import mage.constants.Rarity;
 import mage.constants.Zone;
 import mage.game.Game;
 import mage.game.events.GameEvent;
@@ -49,9 +49,8 @@ import mage.game.events.GameEvent.EventType;
  */
 public class NullProfusion extends CardImpl {
 
-    public NullProfusion(UUID ownerId) {
-        super(ownerId, 89, "Null Profusion", Rarity.RARE, new CardType[]{CardType.ENCHANTMENT}, "{4}{B}{B}");
-        this.expansionSetCode = "PLC";
+    public NullProfusion(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.ENCHANTMENT},"{4}{B}{B}");
 
         // Skip your draw step.
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new SkipDrawStepEffect())); 

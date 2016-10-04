@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.innistrad;
+package mage.cards.l;
 
 import java.util.UUID;
 import mage.MageInt;
@@ -38,9 +38,9 @@ import mage.abilities.effects.common.counter.AddCountersSourceEffect;
 import mage.abilities.keyword.DefenderAbility;
 import mage.abilities.keyword.TransformAbility;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Outcome;
-import mage.constants.Rarity;
 import mage.constants.Zone;
 import mage.counters.CounterType;
 import mage.game.Game;
@@ -52,16 +52,15 @@ import mage.game.permanent.Permanent;
  */
 public class LudevicsTestSubject extends CardImpl {
 
-    public LudevicsTestSubject(UUID ownerId) {
-        super(ownerId, 64, "Ludevic's Test Subject", Rarity.RARE, new CardType[]{CardType.CREATURE}, "{1}{U}");
-        this.expansionSetCode = "ISD";
+    public LudevicsTestSubject(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{1}{U}");
         this.subtype.add("Lizard");
 
         this.power = new MageInt(0);
         this.toughness = new MageInt(3);
 
         this.transformable = true;
-        this.secondSideCard = new LudevicsAbomination(ownerId);
+        this.secondSideCardClazz = LudevicsAbomination.class;
 
         this.addAbility(DefenderAbility.getInstance());
         // {1}{U}: Put a hatchling counter on Ludevic's Test Subject. Then if there are five or more hatchling counters on it, remove all of them and transform it.

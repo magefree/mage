@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.tenthedition;
+package mage.cards.m;
 
 import java.util.UUID;
 import mage.abilities.Ability;
@@ -34,8 +34,8 @@ import mage.abilities.condition.Condition;
 import mage.abilities.decorator.ConditionalTriggeredAbility;
 import mage.abilities.effects.common.WinGameSourceControllerEffect;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.constants.TargetController;
 import mage.filter.common.FilterCreatureCard;
 import mage.game.Game;
@@ -47,9 +47,8 @@ import mage.players.Player;
  */
 public class MortalCombat extends CardImpl {
 
-    public MortalCombat(UUID ownerId) {
-        super(ownerId, 160, "Mortal Combat", Rarity.RARE, new CardType[]{CardType.ENCHANTMENT}, "{2}{B}{B}");
-        this.expansionSetCode = "10E";
+    public MortalCombat(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.ENCHANTMENT},"{2}{B}{B}");
 
         // At the beginning of your upkeep, if twenty or more creature cards are in your graveyard, you win the game.
         this.addAbility(new ConditionalTriggeredAbility(

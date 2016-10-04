@@ -25,18 +25,18 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.returntoravnica;
+package mage.cards.r;
 
 import java.util.UUID;
 import mage.constants.CardType;
 import mage.constants.Duration;
 import mage.constants.Layer;
 import mage.constants.Outcome;
-import mage.constants.Rarity;
 import mage.constants.SubLayer;
 import mage.abilities.Ability;
 import mage.abilities.effects.ContinuousEffectImpl;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.filter.predicate.mageobject.AnotherTargetPredicate;
 import mage.game.Game;
@@ -49,9 +49,8 @@ import mage.target.common.TargetCreaturePermanent;
  */
 public class RitesOfReaping extends CardImpl {
 
-    public RitesOfReaping(UUID ownerId) {
-        super(ownerId, 191, "Rites of Reaping", Rarity.UNCOMMON, new CardType[]{CardType.SORCERY}, "{4}{B}{G}");
-        this.expansionSetCode = "RTR";
+    public RitesOfReaping(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{4}{B}{G}");
 
 
         // Target creature gets +3/+3 until end of turn. Another target creature gets -3/-3 until end of turn.

@@ -25,14 +25,14 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.oathofthegatewatch;
+package mage.cards.a;
 
 import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.effects.common.CreateTokenEffect;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.game.permanent.token.Token;
 
 /**
@@ -41,9 +41,8 @@ import mage.game.permanent.token.Token;
  */
 public class AlliedReinforcements extends CardImpl {
 
-    public AlliedReinforcements(UUID ownerId) {
-        super(ownerId, 15, "Allied Reinforcements", Rarity.UNCOMMON, new CardType[]{CardType.SORCERY}, "{3}{W}");
-        this.expansionSetCode = "OGW";
+    public AlliedReinforcements(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{3}{W}");
 
         // Put two 2/2 white Knight Ally creature tokens onto the battlefield.
         this.getSpellAbility().addEffect(new CreateTokenEffect(new KnightAllyToken(), 2));

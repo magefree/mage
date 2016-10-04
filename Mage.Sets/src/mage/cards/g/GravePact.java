@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.ninthedition;
+package mage.cards.g;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -34,9 +34,9 @@ import mage.abilities.Ability;
 import mage.abilities.TriggeredAbilityImpl;
 import mage.abilities.effects.OneShotEffect;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Outcome;
-import mage.constants.Rarity;
 import mage.constants.Zone;
 import mage.game.Game;
 import mage.game.events.GameEvent;
@@ -52,9 +52,8 @@ import mage.target.common.TargetControlledCreaturePermanent;
  */
 public class GravePact extends CardImpl {
 
-    public GravePact(UUID ownerId) {
-        super(ownerId, 135, "Grave Pact", Rarity.RARE, new CardType[]{CardType.ENCHANTMENT}, "{1}{B}{B}{B}");
-        this.expansionSetCode = "9ED";
+    public GravePact(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.ENCHANTMENT},"{1}{B}{B}{B}");
 
 
         // Whenever a creature you control dies, each other player sacrifices a creature.

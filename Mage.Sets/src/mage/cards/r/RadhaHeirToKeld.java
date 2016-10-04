@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.planarchaos;
+package mage.cards.r;
 
 import java.util.UUID;
 import mage.MageInt;
@@ -35,8 +35,8 @@ import mage.abilities.common.AttacksTriggeredAbility;
 import mage.abilities.effects.common.BasicManaEffect;
 import mage.abilities.mana.GreenManaAbility;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.Rarity;
 
 /**
  *
@@ -44,9 +44,8 @@ import mage.constants.Rarity;
  */
 public class RadhaHeirToKeld extends CardImpl {
 
-    public RadhaHeirToKeld(UUID ownerId) {
-        super(ownerId, 162, "Radha, Heir to Keld", Rarity.RARE, new CardType[]{CardType.CREATURE}, "{R}{G}");
-        this.expansionSetCode = "PLC";
+    public RadhaHeirToKeld(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{R}{G}");
         this.supertype.add("Legendary");
         this.subtype.add("Elf");
         this.subtype.add("Warrior");

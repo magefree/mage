@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.thedark;
+package mage.cards.g;
 
 import java.util.UUID;
 
@@ -37,10 +37,10 @@ import mage.abilities.effects.common.AttachEffect;
 import mage.abilities.effects.common.continuous.BoostAllEffect;
 import mage.abilities.keyword.EnchantAbility;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Duration;
 import mage.constants.Outcome;
-import mage.constants.Rarity;
 import mage.constants.Zone;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.game.Game;
@@ -56,9 +56,8 @@ public class GoblinCaves extends CardImpl {
 
     private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("Goblin", "Goblin creatures");
 
-    public GoblinCaves(UUID ownerId) {
-        super(ownerId, 63, "Goblin Caves", Rarity.COMMON, new CardType[]{CardType.ENCHANTMENT}, "{1}{R}{R}");
-        this.expansionSetCode = "DRK";
+    public GoblinCaves(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.ENCHANTMENT},"{1}{R}{R}");
         this.subtype.add("Aura");
 
         // Enchant land

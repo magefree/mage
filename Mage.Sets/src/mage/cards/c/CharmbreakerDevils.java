@@ -25,14 +25,13 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.innistrad;
+package mage.cards.c;
 
 import java.util.Random;
 import java.util.UUID;
 import mage.constants.CardType;
 import mage.constants.Duration;
 import mage.constants.Outcome;
-import mage.constants.Rarity;
 import mage.constants.Zone;
 import mage.MageInt;
 import mage.abilities.Ability;
@@ -42,6 +41,7 @@ import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.continuous.BoostSourceEffect;
 import mage.cards.Card;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.filter.FilterCard;
 import mage.filter.FilterSpell;
 import mage.filter.predicate.Predicates;
@@ -65,9 +65,8 @@ public class CharmbreakerDevils extends CardImpl {
                 new CardTypePredicate(CardType.SORCERY)));
     }
 
-    public CharmbreakerDevils(UUID ownerId) {
-        super(ownerId, 134, "Charmbreaker Devils", Rarity.RARE, new CardType[]{CardType.CREATURE}, "{5}{R}");
-        this.expansionSetCode = "ISD";
+    public CharmbreakerDevils(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{5}{R}");
         this.subtype.add("Devil");
 
         this.power = new MageInt(4);

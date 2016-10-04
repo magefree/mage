@@ -25,18 +25,18 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.gatecrash;
+package mage.cards.e;
 
 import java.util.HashSet;
 import java.util.Set;
 import java.util.UUID;
 import mage.constants.CardType;
 import mage.constants.Duration;
-import mage.constants.Rarity;
 import mage.MageObject;
 import mage.abilities.Ability;
 import mage.abilities.effects.common.continuous.BoostTargetEffect;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
@@ -49,9 +49,8 @@ import mage.watchers.common.SourceDidDamageWatcher;
  */
 public class ExecutionersSwing extends CardImpl {
 
-    public ExecutionersSwing(UUID ownerId) {
-        super(ownerId, 161, "Executioner's Swing", Rarity.COMMON, new CardType[]{CardType.INSTANT}, "{W}{B}");
-        this.expansionSetCode = "GTC";
+    public ExecutionersSwing(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.INSTANT},"{W}{B}");
 
 
         // Target creature that dealt damage this turn gets -5/-5 until end of turn.

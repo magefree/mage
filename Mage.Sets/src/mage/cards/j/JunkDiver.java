@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.commander2014;
+package mage.cards.j;
 
 import java.util.UUID;
 import mage.MageInt;
@@ -35,8 +35,8 @@ import mage.abilities.effects.Effect;
 import mage.abilities.effects.common.ReturnFromGraveyardToHandTargetEffect;
 import mage.abilities.keyword.FlyingAbility;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.filter.common.FilterArtifactCard;
 import mage.filter.predicate.mageobject.AnotherCardPredicate;
 import mage.target.common.TargetCardInYourGraveyard;
@@ -53,9 +53,8 @@ public class JunkDiver extends CardImpl {
         filter.add(new AnotherCardPredicate());
     }
 
-    public JunkDiver(UUID ownerId) {
-        super(ownerId, 244, "Junk Diver", Rarity.RARE, new CardType[]{CardType.ARTIFACT, CardType.CREATURE}, "{3}");
-        this.expansionSetCode = "C14";
+    public JunkDiver(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.ARTIFACT,CardType.CREATURE},"{3}");
         this.subtype.add("Bird");
 
         this.power = new MageInt(1);

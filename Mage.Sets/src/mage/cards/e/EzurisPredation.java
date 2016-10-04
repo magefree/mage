@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.commander2015;
+package mage.cards.e;
 
 import java.util.List;
 import java.util.UUID;
@@ -33,9 +33,9 @@ import mage.abilities.Ability;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.CreateTokenEffect;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Outcome;
-import mage.constants.Rarity;
 import mage.constants.TargetController;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.filter.predicate.permanent.ControllerPredicate;
@@ -50,9 +50,8 @@ import mage.players.Player;
  */
 public class EzurisPredation extends CardImpl {
 
-    public EzurisPredation(UUID ownerId) {
-        super(ownerId, 36, "Ezuri's Predation", Rarity.RARE, new CardType[]{CardType.SORCERY}, "{5}{G}{G}{G}");
-        this.expansionSetCode = "C15";
+    public EzurisPredation(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{5}{G}{G}{G}");
 
         // For each creature your opponents control, put a 4/4 green Beast creature token onto the battlefield. Each of those Beasts fights a different one of those creatures.
         this.getSpellAbility().addEffect(new EzurisPredationEffect());

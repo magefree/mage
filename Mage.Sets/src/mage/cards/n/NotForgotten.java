@@ -25,16 +25,16 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.shadowsoverinnistrad;
+package mage.cards.n;
 
 import java.util.UUID;
 import mage.abilities.Ability;
 import mage.abilities.effects.OneShotEffect;
 import mage.cards.Card;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Outcome;
-import mage.constants.Rarity;
 import mage.constants.Zone;
 import mage.game.Game;
 import mage.game.permanent.token.SpiritWhiteToken;
@@ -48,9 +48,8 @@ import mage.target.common.TargetCardInGraveyard;
  */
 public class NotForgotten extends CardImpl {
 
-    public NotForgotten(UUID ownerId) {
-        super(ownerId, 30, "Not Forgotten", Rarity.UNCOMMON, new CardType[]{CardType.SORCERY}, "{1}{W}");
-        this.expansionSetCode = "SOI";
+    public NotForgotten(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{1}{W}");
 
         // Put target card from a graveyard on the top or bottom of its owner's library. 
         // Put a 1/1 white Spirit creature token with flying onto the battlefield.

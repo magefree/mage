@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.theros;
+package mage.cards.c;
 
 import java.util.UUID;
 import mage.MageInt;
@@ -33,9 +33,9 @@ import mage.abilities.Ability;
 import mage.abilities.SpellAbility;
 import mage.abilities.effects.OneShotEffect;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Outcome;
-import mage.constants.Rarity;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.game.permanent.token.Token;
@@ -47,9 +47,8 @@ import mage.target.common.TargetCreaturePermanent;
  */
 public class CurseOfTheSwine extends CardImpl {
 
-    public CurseOfTheSwine(UUID ownerId) {
-        super(ownerId, 46, "Curse of the Swine", Rarity.RARE, new CardType[]{CardType.SORCERY}, "{X}{U}{U}");
-        this.expansionSetCode = "THS";
+    public CurseOfTheSwine(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{X}{U}{U}");
 
 
         // Exile X target creatures. For each creature exiled this way, its controller puts a 2/2 green Boar creature token onto the battlefield.

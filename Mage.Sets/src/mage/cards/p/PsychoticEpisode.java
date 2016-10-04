@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.timespiral;
+package mage.cards.p;
 
 import java.util.UUID;
 
@@ -36,11 +36,11 @@ import mage.abilities.effects.OneShotEffect;
 import mage.abilities.keyword.MadnessAbility;
 import mage.cards.Card;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.cards.Cards;
 import mage.cards.CardsImpl;
 import mage.constants.CardType;
 import mage.constants.Outcome;
-import mage.constants.Rarity;
 import mage.constants.Zone;
 import mage.filter.FilterCard;
 import mage.game.Game;
@@ -54,9 +54,8 @@ import mage.target.TargetPlayer;
  */
 public class PsychoticEpisode extends CardImpl {
 
-    public PsychoticEpisode(UUID ownerId) {
-        super(ownerId, 126, "Psychotic Episode", Rarity.COMMON, new CardType[]{CardType.SORCERY}, "{1}{B}{B}");
-        this.expansionSetCode = "TSP";
+    public PsychoticEpisode(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{1}{B}{B}");
 
         // Target player reveals his or her hand and the top card of his or her library. You choose a card revealed this way. That player puts the chosen card on the bottom of his or her library.
         this.getSpellAbility().addEffect(new PsychoticEpisodeEffect());

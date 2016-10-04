@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.commander2014;
+package mage.cards.c;
 
 import java.util.UUID;
 import mage.abilities.common.SimpleActivatedAbility;
@@ -33,8 +33,8 @@ import mage.abilities.costs.common.SacrificeSourceCost;
 import mage.abilities.effects.common.DrawCardSourceControllerEffect;
 import mage.abilities.mana.CommanderColorIdentityManaAbility;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.constants.Zone;
 
 /**
@@ -43,9 +43,8 @@ import mage.constants.Zone;
  */
 public class CommandersSphere extends CardImpl {
 
-    public CommandersSphere(UUID ownerId) {
-        super(ownerId, 54, "Commander's Sphere", Rarity.COMMON, new CardType[]{CardType.ARTIFACT}, "{3}");
-        this.expansionSetCode = "C14";
+    public CommandersSphere(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.ARTIFACT},"{3}");
 
         // {tap}: Add to your mana pool one mana of any color in your commander's color identity.
         this.addAbility(new CommanderColorIdentityManaAbility());

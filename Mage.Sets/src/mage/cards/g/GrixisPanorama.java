@@ -25,12 +25,11 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.shardsofalara;
+package mage.cards.g;
 
 import java.util.UUID;
 import mage.constants.CardType;
 import mage.constants.Outcome;
-import mage.constants.Rarity;
 import mage.constants.Zone;
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleActivatedAbility;
@@ -40,6 +39,7 @@ import mage.abilities.costs.mana.GenericManaCost;
 import mage.abilities.effects.common.search.SearchLibraryPutInPlayEffect;
 import mage.abilities.mana.ColorlessManaAbility;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.filter.FilterCard;
 import mage.filter.predicate.Predicates;
 import mage.filter.predicate.mageobject.CardTypePredicate;
@@ -64,9 +64,8 @@ public class GrixisPanorama extends CardImpl {
                 new SubtypePredicate("Mountain")));
     }
 
-    public GrixisPanorama(UUID ownerId) {
-        super(ownerId, 224, "Grixis Panorama", Rarity.COMMON, new CardType[]{CardType.LAND}, "");
-        this.expansionSetCode = "ALA";
+    public GrixisPanorama(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.LAND},"");
 
         this.addAbility(new ColorlessManaAbility());
         TargetCardInLibrary target = new TargetCardInLibrary(filter);

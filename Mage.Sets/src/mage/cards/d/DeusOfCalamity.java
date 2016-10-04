@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.heroesvsmonsters;
+package mage.cards.d;
 
 import java.util.UUID;
 import mage.MageInt;
@@ -33,8 +33,8 @@ import mage.abilities.TriggeredAbilityImpl;
 import mage.abilities.effects.common.DestroyTargetEffect;
 import mage.abilities.keyword.TrampleAbility;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.constants.Zone;
 import mage.filter.common.FilterLandPermanent;
 import mage.filter.predicate.permanent.ControllerIdPredicate;
@@ -50,9 +50,8 @@ import mage.target.common.TargetLandPermanent;
  */
 public class DeusOfCalamity extends CardImpl {
 
-    public DeusOfCalamity(UUID ownerId) {
-        super(ownerId, 54, "Deus of Calamity", Rarity.RARE, new CardType[]{CardType.CREATURE}, "{R/G}{R/G}{R/G}{R/G}{R/G}");
-        this.expansionSetCode = "DDL";
+    public DeusOfCalamity(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{R/G}{R/G}{R/G}{R/G}{R/G}");
         this.subtype.add("Spirit");
         this.subtype.add("Avatar");
 

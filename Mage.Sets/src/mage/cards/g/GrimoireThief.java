@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.morningtide;
+package mage.cards.g;
 
 import java.util.HashSet;
 import java.util.Iterator;
@@ -43,14 +43,15 @@ import mage.abilities.effects.AsThoughEffectImpl;
 import mage.abilities.effects.OneShotEffect;
 import mage.cards.Card;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.cards.Cards;
 import mage.cards.CardsImpl;
+import mage.cards.CardSetInfo;
 import mage.cards.SplitCard;
 import mage.constants.AsThoughEffectType;
 import mage.constants.CardType;
 import mage.constants.Duration;
 import mage.constants.Outcome;
-import mage.constants.Rarity;
 import mage.constants.Zone;
 import mage.game.ExileZone;
 import mage.game.Game;
@@ -68,9 +69,8 @@ public class GrimoireThief extends CardImpl {
 
     protected static final String VALUE_PREFIX = "ExileZones";
 
-    public GrimoireThief(UUID ownerId) {
-        super(ownerId, 35, "Grimoire Thief", Rarity.RARE, new CardType[]{CardType.CREATURE}, "{U}{U}");
-        this.expansionSetCode = "MOR";
+    public GrimoireThief(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{U}{U}");
         this.subtype.add("Merfolk");
         this.subtype.add("Rogue");
         this.power = new MageInt(2);

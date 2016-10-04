@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.alliances;
+package mage.cards.e;
 
 import java.util.UUID;
 import mage.ObjectColor;
@@ -33,9 +33,9 @@ import mage.abilities.Ability;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.ExileTargetEffect;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Outcome;
-import mage.constants.Rarity;
 import mage.constants.Zone;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.filter.predicate.Predicates;
@@ -59,9 +59,8 @@ public class Exile extends CardImpl {
         filter.add(Predicates.not(new ColorPredicate(ObjectColor.WHITE)));
     }
 
-    public Exile(UUID ownerId) {
-        super(ownerId, 129, "Exile", Rarity.RARE, new CardType[]{CardType.INSTANT}, "{2}{W}");
-        this.expansionSetCode = "ALL";
+    public Exile(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.INSTANT},"{2}{W}");
 
         // Exile target nonwhite attacking creature. 
         this.getSpellAbility().addTarget(new TargetCreaturePermanent(filter));

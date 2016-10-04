@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.darksteel;
+package mage.cards.b;
 
 import java.util.UUID;
 import mage.abilities.Ability;
@@ -35,8 +35,8 @@ import mage.abilities.dynamicvalue.common.PermanentsTargetOpponentControlsCount;
 import mage.abilities.effects.Effect;
 import mage.abilities.effects.common.LoseLifeTargetEffect;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.filter.common.FilterArtifactPermanent;
 import mage.filter.predicate.other.OwnerIdPredicate;
 import mage.filter.predicate.permanent.ControllerIdPredicate;
@@ -50,9 +50,8 @@ import mage.target.TargetPlayer;
  */
 public class BurdenOfGreed extends CardImpl {
 
-    public BurdenOfGreed(UUID ownerId) {
-        super(ownerId, 38, "Burden of Greed", Rarity.COMMON, new CardType[]{CardType.INSTANT}, "{3}{B}");
-        this.expansionSetCode = "DST";
+    public BurdenOfGreed(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.INSTANT},"{3}{B}");
 
         // Target player loses 1 life for each tapped artifact he or she controls.
         getSpellAbility().addTarget(new TargetPlayer());

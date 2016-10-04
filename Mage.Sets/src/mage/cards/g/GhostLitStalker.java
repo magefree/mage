@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.saviorsofkamigawa;
+package mage.cards.g;
 
 import java.util.UUID;
 import mage.MageInt;
@@ -36,8 +36,8 @@ import mage.abilities.costs.mana.ManaCostsImpl;
 import mage.abilities.effects.common.discard.DiscardTargetEffect;
 import mage.abilities.keyword.ChannelAbility;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.constants.TimingRule;
 import mage.constants.Zone;
 import mage.target.TargetPlayer;
@@ -48,9 +48,8 @@ import mage.target.TargetPlayer;
  */
 public class GhostLitStalker extends CardImpl {
 
-    public GhostLitStalker(UUID ownerId) {
-        super(ownerId, 69, "Ghost-Lit Stalker", Rarity.UNCOMMON, new CardType[]{CardType.CREATURE}, "{B}");
-        this.expansionSetCode = "SOK";
+    public GhostLitStalker(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{B}");
         this.subtype.add("Spirit");
 
         this.power = new MageInt(1);

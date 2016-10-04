@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.shadowsoverinnistrad;
+package mage.cards.i;
 
 import mage.MageInt;
 import mage.abilities.common.AttacksTriggeredAbility;
@@ -33,8 +33,8 @@ import mage.abilities.condition.common.DeliriumCondition;
 import mage.abilities.decorator.ConditionalTriggeredAbility;
 import mage.abilities.effects.common.CreateTokenEffect;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.game.permanent.token.OozeToken;
 
 import java.util.UUID;
@@ -45,9 +45,8 @@ import java.util.UUID;
  */
 public class InexorableBlob extends CardImpl {
 
-    public InexorableBlob(UUID ownerId) {
-        super(ownerId, 212, "Inexorable Blob", Rarity.RARE, new CardType[]{CardType.CREATURE}, "{2}{G}");
-        this.expansionSetCode = "SOI";
+    public InexorableBlob(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{2}{G}");
         this.subtype.add("Ooze");
         this.power = new MageInt(3);
         this.toughness = new MageInt(3);

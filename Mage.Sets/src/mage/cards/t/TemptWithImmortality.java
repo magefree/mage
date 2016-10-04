@@ -25,16 +25,16 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.commander2013;
+package mage.cards.t;
 
 import java.util.UUID;
 import mage.abilities.Ability;
 import mage.abilities.effects.OneShotEffect;
 import mage.cards.Card;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Outcome;
-import mage.constants.Rarity;
 import mage.constants.Zone;
 import mage.filter.FilterCard;
 import mage.filter.common.FilterCreatureCard;
@@ -51,9 +51,8 @@ import mage.target.common.TargetCardInYourGraveyard;
  */
 public class TemptWithImmortality extends CardImpl {
 
-    public TemptWithImmortality(UUID ownerId) {
-        super(ownerId, 95, "Tempt with Immortality", Rarity.RARE, new CardType[]{CardType.SORCERY}, "{4}{B}");
-        this.expansionSetCode = "C13";
+    public TemptWithImmortality(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{4}{B}");
 
         // Tempting offer - Return a creature card from your graveyard to the battlefield. Each opponent may return a creature card from his or her graveyard to the battlefield. For each player who does, return a creature card from your graveyard to the battlefield.
         this.getSpellAbility().addEffect(new TemptWithImmortalityEffect());

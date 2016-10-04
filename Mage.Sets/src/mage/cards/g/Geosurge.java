@@ -25,11 +25,10 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.newphyrexia;
+package mage.cards.g;
 
 import mage.ConditionalMana;
 import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.Mana;
 import mage.abilities.Ability;
 import mage.abilities.SpellAbility;
@@ -37,6 +36,7 @@ import mage.abilities.condition.Condition;
 import mage.abilities.effects.common.BasicManaEffect;
 import mage.cards.Card;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.game.Game;
 
 import java.util.UUID;
@@ -47,9 +47,8 @@ import java.util.UUID;
  */
 public class Geosurge extends CardImpl {
 
-    public Geosurge(UUID ownerId) {
-        super(ownerId, 85, "Geosurge", Rarity.UNCOMMON, new CardType[]{CardType.SORCERY}, "{R}{R}{R}{R}");
-        this.expansionSetCode = "NPH";
+    public Geosurge(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{R}{R}{R}{R}");
 
 
         this.getSpellAbility().addEffect(new BasicManaEffect(new GeosurgeConditionalMana()));

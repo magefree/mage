@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.torment;
+package mage.cards.t;
 
 import java.util.UUID;
 import mage.abilities.Ability;
@@ -34,8 +34,8 @@ import mage.abilities.dynamicvalue.common.GetXValue;
 import mage.abilities.effects.Effect;
 import mage.abilities.effects.common.ReturnToHandTargetEffect;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.filter.FilterCard;
 import mage.filter.FilterPermanent;
 import mage.filter.predicate.Predicates;
@@ -56,9 +56,8 @@ public class TurbulentDreams extends CardImpl {
         filter.add(Predicates.not(new CardTypePredicate(CardType.LAND)));
     }
 
-    public TurbulentDreams(UUID ownerId) {
-        super(ownerId, 49, "Turbulent Dreams", Rarity.RARE, new CardType[]{CardType.SORCERY}, "{U}{U}");
-        this.expansionSetCode = "TOR";
+    public TurbulentDreams(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{U}{U}");
 
         // As an additional cost to cast Turbulent Dreams, discard X cards.
         this.getSpellAbility().addCost(new DiscardXTargetCost(new FilterCard("cards"), true));

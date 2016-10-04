@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.fatereforged;
+package mage.cards.r;
 
 import java.util.ArrayList;
 import java.util.Set;
@@ -39,9 +39,9 @@ import mage.abilities.effects.common.ExileSpellEffect;
 import mage.abilities.effects.common.ExileTargetEffect;
 import mage.cards.Card;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Outcome;
-import mage.constants.Rarity;
 import mage.constants.Zone;
 import mage.filter.Filter.ComparisonType;
 import mage.filter.common.FilterCreatureCard;
@@ -57,9 +57,8 @@ import mage.target.targetpointer.FixedTargets;
  */
 public class RallyTheAncestors extends CardImpl {
 
-    public RallyTheAncestors(UUID ownerId) {
-        super(ownerId, 22, "Rally the Ancestors", Rarity.RARE, new CardType[]{CardType.INSTANT}, "{X}{W}{W}");
-        this.expansionSetCode = "FRF";
+    public RallyTheAncestors(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.INSTANT},"{X}{W}{W}");
 
         // Return each creature card with converted mana cost X or less from your graveyard to the battlefield.
         // Exile those creatures at the beginning of your next upkeep. Exile Rally the Ancestors.

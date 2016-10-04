@@ -25,15 +25,15 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.eventide;
+package mage.cards.s;
 
 import java.util.UUID;
 import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.MageInt;
 import mage.abilities.keyword.SwampwalkAbility;
 import mage.abilities.keyword.ForestwalkAbility;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 
 /**
  *
@@ -41,9 +41,8 @@ import mage.cards.CardImpl;
  */
 public class StalkerHag extends CardImpl {
 
-    public StalkerHag(UUID ownerId) {
-        super(ownerId, 129, "Stalker Hag", Rarity.UNCOMMON, new CardType[]{CardType.CREATURE}, "{B/G}{B/G}{B/G}");
-        this.expansionSetCode = "EVE";
+    public StalkerHag(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{B/G}{B/G}{B/G}");
         this.subtype.add("Hag");
 
         this.power = new MageInt(3);

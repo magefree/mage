@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.commander2015;
+package mage.cards.g;
 
 import java.util.Iterator;
 import java.util.List;
@@ -39,11 +39,11 @@ import mage.abilities.effects.OneShotEffect;
 import mage.abilities.keyword.FlashAbility;
 import mage.abilities.keyword.ReachAbility;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Duration;
 import mage.constants.Layer;
 import mage.constants.Outcome;
-import mage.constants.Rarity;
 import mage.constants.SubLayer;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.game.Game;
@@ -57,9 +57,8 @@ import mage.target.TargetPlayer;
  */
 public class GreatOakGuardian extends CardImpl {
 
-    public GreatOakGuardian(UUID ownerId) {
-        super(ownerId, 37, "Great Oak Guardian", Rarity.UNCOMMON, new CardType[]{CardType.CREATURE}, "{5}{G}");
-        this.expansionSetCode = "C15";
+    public GreatOakGuardian(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{5}{G}");
         this.subtype.add("Treefolk");
         this.power = new MageInt(4);
         this.toughness = new MageInt(5);

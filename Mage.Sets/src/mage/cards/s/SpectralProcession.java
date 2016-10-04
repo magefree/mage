@@ -25,13 +25,13 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.shadowmoor;
+package mage.cards.s;
 
 import java.util.UUID;
 import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.abilities.effects.common.CreateTokenEffect;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.game.permanent.token.SpiritWhiteToken;
 
 /**
@@ -40,9 +40,8 @@ import mage.game.permanent.token.SpiritWhiteToken;
  */
 public class SpectralProcession extends CardImpl {
 
-    public SpectralProcession(UUID ownerId) {
-        super(ownerId, 23, "Spectral Procession", Rarity.UNCOMMON, new CardType[]{CardType.SORCERY}, "{2/W}{2/W}{2/W}");
-        this.expansionSetCode = "SHM";
+    public SpectralProcession(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{2/W}{2/W}{2/W}");
 
 
         // Put three 1/1 white Spirit creature tokens with flying onto the battlefield.

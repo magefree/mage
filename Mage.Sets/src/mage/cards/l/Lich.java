@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.masterseditioniv;
+package mage.cards.l;
 
 import java.util.UUID;
 import mage.abilities.Ability;
@@ -41,10 +41,10 @@ import mage.abilities.effects.common.LoseGameSourceControllerEffect;
 import mage.abilities.effects.common.LoseLifeSourceControllerEffect;
 import mage.abilities.effects.common.continuous.DontLoseByZeroOrLessLifeEffect;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Duration;
 import mage.constants.Outcome;
-import mage.constants.Rarity;
 import mage.constants.Zone;
 import mage.filter.common.FilterControlledPermanent;
 import mage.filter.predicate.Predicates;
@@ -63,9 +63,8 @@ import mage.target.common.TargetControlledPermanent;
  */
 public class Lich extends CardImpl {
 
-    public Lich(UUID ownerId) {
-        super(ownerId, 89, "Lich", Rarity.RARE, new CardType[]{CardType.ENCHANTMENT}, "{B}{B}{B}{B}");
-        this.expansionSetCode = "ME4";
+    public Lich(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.ENCHANTMENT},"{B}{B}{B}{B}");
 
         // As Lich enters the battlefield, you lose life equal to your life total.
         this.addAbility(new EntersBattlefieldAbility(new LoseLifeSourceControllerEffect(new ControllerLifeCount()), null, "As Lich enters the battlefield, you lose life equal to your life total.", null));

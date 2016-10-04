@@ -25,13 +25,13 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.portal;
+package mage.cards.m;
 
 import java.util.UUID;
 import mage.abilities.effects.common.CounterTargetEffect;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.filter.FilterSpell;
 import mage.filter.predicate.Predicates;
 import mage.filter.predicate.mageobject.CardTypePredicate;
@@ -49,9 +49,8 @@ public class MysticDenial extends CardImpl {
         filter.add(Predicates.or(new CardTypePredicate(CardType.CREATURE), new CardTypePredicate(CardType.SORCERY)));
     }
 
-    public MysticDenial(UUID ownerId) {
-        super(ownerId, 62, "Mystic Denial", Rarity.UNCOMMON, new CardType[]{CardType.INSTANT}, "{1}{U}{U}");
-        this.expansionSetCode = "POR";
+    public MysticDenial(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.INSTANT},"{1}{U}{U}");
 
         // Counter target creature or sorcery spell.
         this.getSpellAbility().addTarget(new TargetSpell(filter));

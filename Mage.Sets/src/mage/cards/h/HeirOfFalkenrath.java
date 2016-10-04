@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.shadowsoverinnistrad;
+package mage.cards.h;
 
 import java.util.UUID;
 import mage.MageInt;
@@ -34,8 +34,8 @@ import mage.abilities.costs.common.DiscardCardCost;
 import mage.abilities.effects.common.TransformSourceEffect;
 import mage.abilities.keyword.TransformAbility;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.constants.Zone;
 
 /**
@@ -44,15 +44,14 @@ import mage.constants.Zone;
  */
 public class HeirOfFalkenrath extends CardImpl {
 
-    public HeirOfFalkenrath(UUID ownerId) {
-        super(ownerId, 116, "Heir of Falkenrath", Rarity.UNCOMMON, new CardType[]{CardType.CREATURE}, "{1}{B}");
-        this.expansionSetCode = "SOI";
+    public HeirOfFalkenrath(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{1}{B}");
         this.subtype.add("Vampire");
         this.power = new MageInt(2);
         this.toughness = new MageInt(1);
 
         this.transformable = true;
-        this.secondSideCard = new HeirToTheNight(ownerId);
+        this.secondSideCardClazz = HeirToTheNight.class;
 
         // Discard a card: Transform Heir of Falkenrath. Activate this ability only once each turn.
         this.addAbility(new TransformAbility());

@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.magic2010;
+package mage.cards.c;
 
 import java.util.List;
 import java.util.UUID;
@@ -34,11 +34,11 @@ import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.effects.ContinuousEffectImpl;
 import mage.abilities.keyword.ChangelingAbility;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Duration;
 import mage.constants.Layer;
 import mage.constants.Outcome;
-import mage.constants.Rarity;
 import mage.constants.SubLayer;
 import mage.constants.Zone;
 import mage.filter.common.FilterCreaturePermanent;
@@ -52,9 +52,8 @@ import mage.util.CardUtil;
  */
 public class CoatOfArms extends CardImpl {
 
-    public CoatOfArms(UUID ownerId) {
-        super(ownerId, 207, "Coat of Arms", Rarity.RARE, new CardType[]{CardType.ARTIFACT}, "{5}");
-        this.expansionSetCode = "M10";
+    public CoatOfArms(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.ARTIFACT},"{5}");
 
         // Each creature gets +1/+1 for each other creature on the battlefield that shares at least one creature type with it.
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new CoatOfArmsEffect()));

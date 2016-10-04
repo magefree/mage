@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.knightsvsdragons;
+package mage.cards.p;
 
 import java.util.UUID;
 import mage.MageInt;
@@ -38,10 +38,10 @@ import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.CreateDelayedTriggeredAbilityEffect;
 import mage.abilities.keyword.ForecastAbility;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Duration;
 import mage.constants.Outcome;
-import mage.constants.Rarity;
 import mage.game.Game;
 import mage.game.events.GameEvent;
 import mage.game.permanent.Permanent;
@@ -54,9 +54,8 @@ import mage.target.common.TargetCreaturePermanent;
  */
 public class PaladinOfPrahv extends CardImpl {
 
-    public PaladinOfPrahv(UUID ownerId) {
-        super(ownerId, 22, "Paladin of Prahv", Rarity.UNCOMMON, new CardType[]{CardType.CREATURE}, "{4}{W}{W}");
-        this.expansionSetCode = "DDG";
+    public PaladinOfPrahv(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{4}{W}{W}");
         this.subtype.add("Human");
         this.subtype.add("Knight");
         this.power = new MageInt(3);

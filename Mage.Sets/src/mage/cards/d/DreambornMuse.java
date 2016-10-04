@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.legions;
+package mage.cards.d;
 
 import java.util.UUID;
 import mage.MageInt;
@@ -33,8 +33,8 @@ import mage.abilities.common.BeginningOfUpkeepTriggeredAbility;
 import mage.abilities.dynamicvalue.common.CardsInTargetPlayerHandCount;
 import mage.abilities.effects.common.PutLibraryIntoGraveTargetEffect;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.constants.TargetController;
 
 /**
@@ -43,9 +43,8 @@ import mage.constants.TargetController;
  */
 public class DreambornMuse extends CardImpl {
 
-    public DreambornMuse(UUID ownerId) {
-        super(ownerId, 36, "Dreamborn Muse", Rarity.RARE, new CardType[]{CardType.CREATURE}, "{2}{U}{U}");
-        this.expansionSetCode = "LGN";
+    public DreambornMuse(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{2}{U}{U}");
         this.subtype.add("Spirit");
         this.power = new MageInt(2);
         this.toughness = new MageInt(2);

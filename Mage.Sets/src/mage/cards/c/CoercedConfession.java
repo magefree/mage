@@ -25,17 +25,17 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.gatecrash;
+package mage.cards.c;
 
 import java.util.UUID;
 
 import mage.constants.CardType;
 import mage.constants.Outcome;
-import mage.constants.Rarity;
 import mage.abilities.Ability;
 import mage.abilities.effects.OneShotEffect;
 import mage.cards.Card;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.cards.Cards;
 import mage.cards.CardsImpl;
 import mage.constants.Zone;
@@ -49,9 +49,8 @@ import mage.target.TargetPlayer;
  */
 public class CoercedConfession extends CardImpl {
 
-    public CoercedConfession(UUID ownerId) {
-        super(ownerId, 217, "Coerced Confession", Rarity.UNCOMMON, new CardType[]{CardType.SORCERY}, "{4}{U/B}");
-        this.expansionSetCode = "GTC";
+    public CoercedConfession(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{4}{U/B}");
 
 
         // Target player puts the top four cards of his or her library into his or her graveyard. You draw a card for each creature card put into a graveyard this way.

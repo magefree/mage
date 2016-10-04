@@ -25,19 +25,19 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.ravnica;
+package mage.cards.s;
 
 import java.util.UUID;
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.effects.common.cost.CostModificationEffectImpl;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.AbilityType;
 import mage.constants.CardType;
 import mage.constants.CostModificationType;
 import mage.constants.Duration;
 import mage.constants.Outcome;
-import mage.constants.Rarity;
 import mage.constants.Zone;
 import mage.game.Game;
 import mage.util.CardUtil;
@@ -48,9 +48,8 @@ import mage.util.CardUtil;
  */
 public class SuppressionField extends CardImpl {
 
-    public SuppressionField(UUID ownerId) {
-        super(ownerId, 31, "Suppression Field", Rarity.UNCOMMON, new CardType[]{CardType.ENCHANTMENT}, "{1}{W}");
-        this.expansionSetCode = "RAV";
+    public SuppressionField(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.ENCHANTMENT},"{1}{W}");
 
         // Activated abilities cost {2} more to activate unless they're mana abilities.
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new SuppressionFieldCostReductionEffect()));

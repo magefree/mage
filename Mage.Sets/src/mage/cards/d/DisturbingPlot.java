@@ -25,14 +25,14 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.shadowmoor;
+package mage.cards.d;
 
 import java.util.UUID;
 import mage.abilities.effects.common.ReturnToHandTargetEffect;
 import mage.abilities.keyword.ConspireAbility;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.filter.common.FilterCreatureCard;
 import mage.target.common.TargetCardInGraveyard;
 
@@ -42,9 +42,8 @@ import mage.target.common.TargetCardInGraveyard;
  */
 public class DisturbingPlot extends CardImpl {
 
-    public DisturbingPlot(UUID ownerId) {
-        super(ownerId, 64, "Disturbing Plot", Rarity.COMMON, new CardType[]{CardType.SORCERY}, "{1}{B}");
-        this.expansionSetCode = "SHM";
+    public DisturbingPlot(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{1}{B}");
 
         // Return target creature card from a graveyard to its owner's hand.
         this.getSpellAbility().addEffect(new ReturnToHandTargetEffect());

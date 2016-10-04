@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.timeshifted;
+package mage.cards.t;
 
 import java.util.UUID;
 import mage.ObjectColor;
@@ -36,10 +36,10 @@ import mage.abilities.effects.RestrictionEffect;
 import mage.abilities.effects.common.ChooseColorEffect;
 import mage.abilities.keyword.FlyingAbility;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Duration;
 import mage.constants.Outcome;
-import mage.constants.Rarity;
 import mage.constants.Zone;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
@@ -51,9 +51,8 @@ import mage.game.permanent.Permanent;
  */
 public class TeferisMoat extends CardImpl {
 
-    public TeferisMoat(UUID ownerId) {
-        super(ownerId, 103, "Teferi's Moat", Rarity.SPECIAL, new CardType[]{CardType.ENCHANTMENT}, "{3}{W}{U}");
-        this.expansionSetCode = "TSB";
+    public TeferisMoat(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.ENCHANTMENT},"{3}{W}{U}");
            
         // As Teferi's Moat enters the battlefield, choose a color.
         this.addAbility(new EntersBattlefieldAbility(new ChooseColorEffect(Outcome.Neutral)));

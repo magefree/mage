@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.avacynrestored;
+package mage.cards.h;
 
 import java.util.UUID;
 import mage.MageInt;
@@ -33,8 +33,8 @@ import mage.abilities.TriggeredAbilityImpl;
 import mage.abilities.effects.common.DestroyTargetEffect;
 import mage.abilities.effects.common.ReturnToHandTargetEffect;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.constants.Zone;
 import mage.filter.common.FilterControlledCreaturePermanent;
 import mage.filter.predicate.permanent.AnotherPredicate;
@@ -49,9 +49,8 @@ import mage.target.common.TargetControlledCreaturePermanent;
  */
 public class HavengulSkaab extends CardImpl {
 
-    public HavengulSkaab(UUID ownerId) {
-        super(ownerId, 60, "Havengul Skaab", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{5}{U}");
-        this.expansionSetCode = "AVR";
+    public HavengulSkaab(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{5}{U}");
         this.subtype.add("Zombie");
         this.subtype.add("Horror");
 

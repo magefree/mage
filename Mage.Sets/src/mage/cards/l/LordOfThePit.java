@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.divinevsdemonic;
+package mage.cards.l;
 
 import java.util.UUID;
 import mage.MageInt;
@@ -35,6 +35,7 @@ import mage.abilities.effects.OneShotEffect;
 import mage.abilities.keyword.FlyingAbility;
 import mage.abilities.keyword.TrampleAbility;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.*;
 import mage.filter.common.FilterControlledCreaturePermanent;
 import mage.filter.predicate.permanent.AnotherPredicate;
@@ -50,9 +51,8 @@ import mage.target.common.TargetControlledCreaturePermanent;
  */
 public class LordOfThePit extends CardImpl {
 
-    public LordOfThePit(UUID ownerId) {
-        super(ownerId, 30, "Lord of the Pit", Rarity.MYTHIC, new CardType[]{CardType.CREATURE}, "{4}{B}{B}{B}");
-        this.expansionSetCode = "DDC";
+    public LordOfThePit(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{4}{B}{B}{B}");
         this.subtype.add("Demon");
 
         this.power = new MageInt(7);

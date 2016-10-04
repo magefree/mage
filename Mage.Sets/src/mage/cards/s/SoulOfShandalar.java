@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.magic2015;
+package mage.cards.s;
 
 import java.util.HashSet;
 import java.util.Set;
@@ -39,9 +39,9 @@ import mage.abilities.costs.mana.ManaCostsImpl;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.keyword.FirstStrikeAbility;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Outcome;
-import mage.constants.Rarity;
 import mage.constants.Zone;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.game.Game;
@@ -56,9 +56,8 @@ import mage.target.TargetPlayer;
  */
 public class SoulOfShandalar extends CardImpl {
 
-    public SoulOfShandalar(UUID ownerId) {
-        super(ownerId, 163, "Soul of Shandalar", Rarity.MYTHIC, new CardType[]{CardType.CREATURE}, "{4}{R}{R}");
-        this.expansionSetCode = "M15";
+    public SoulOfShandalar(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{4}{R}{R}");
         this.subtype.add("Avatar");
 
         this.power = new MageInt(6);

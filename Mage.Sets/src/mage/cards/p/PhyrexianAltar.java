@@ -25,14 +25,14 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.invasion;
+package mage.cards.p;
 
 import java.util.UUID;
 import mage.abilities.costs.common.SacrificeTargetCost;
 import mage.abilities.mana.AnyColorManaAbility;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.target.common.TargetControlledCreaturePermanent;
 
 /**
@@ -41,9 +41,8 @@ import mage.target.common.TargetControlledCreaturePermanent;
  */
 public class PhyrexianAltar extends CardImpl {
 
-    public PhyrexianAltar(UUID ownerId) {
-        super(ownerId, 306, "Phyrexian Altar", Rarity.RARE, new CardType[]{CardType.ARTIFACT}, "{3}");
-        this.expansionSetCode = "INV";
+    public PhyrexianAltar(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.ARTIFACT},"{3}");
 
         // Sacrifice a creature: Add one mana of any color to your mana pool.
         this.addAbility(new AnyColorManaAbility(new SacrificeTargetCost(new TargetControlledCreaturePermanent())));

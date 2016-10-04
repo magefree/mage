@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.theros;
+package mage.cards.e;
 
 import java.util.UUID;
 import mage.MageInt;
@@ -33,8 +33,8 @@ import mage.abilities.common.BecomesMonstrousSourceTriggeredAbility;
 import mage.abilities.effects.common.SacrificeAllEffect;
 import mage.abilities.keyword.MonstrosityAbility;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.filter.common.FilterControlledLandPermanent;
 
 /**
@@ -43,9 +43,8 @@ import mage.filter.common.FilterControlledLandPermanent;
  */
 public class EmberSwallower extends CardImpl {
 
-    public EmberSwallower(UUID ownerId) {
-        super(ownerId, 120, "Ember Swallower", Rarity.RARE, new CardType[]{CardType.CREATURE}, "{2}{R}{R}");
-        this.expansionSetCode = "THS";
+    public EmberSwallower(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{2}{R}{R}");
         this.subtype.add("Elemental");
 
         this.power = new MageInt(4);

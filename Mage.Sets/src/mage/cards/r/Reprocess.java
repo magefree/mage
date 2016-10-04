@@ -25,15 +25,15 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.seventhedition;
+package mage.cards.r;
 
 import java.util.UUID;
 import mage.abilities.Ability;
 import mage.abilities.effects.OneShotEffect;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Outcome;
-import mage.constants.Rarity;
 import mage.filter.common.FilterControlledPermanent;
 import mage.filter.predicate.Predicates;
 import mage.filter.predicate.mageobject.CardTypePredicate;
@@ -49,9 +49,8 @@ import mage.target.common.TargetControlledPermanent;
  */
 public class Reprocess extends CardImpl {
 
-    public Reprocess(UUID ownerId) {
-        super(ownerId, 159, "Reprocess", Rarity.RARE, new CardType[]{CardType.SORCERY}, "{2}{B}{B}");
-        this.expansionSetCode = "7ED";
+    public Reprocess(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{2}{B}{B}");
 
         // Sacrifice any number of artifacts, creatures, and/or lands. Draw a card for each permanent sacrificed this way.
         this.getSpellAbility().addEffect(new ReprocessEffect());

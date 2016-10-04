@@ -25,15 +25,15 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.onslaught;
+package mage.cards.o;
 
 import java.util.UUID;
 import mage.abilities.TriggeredAbilityImpl;
 import mage.abilities.effects.Effect;
 import mage.abilities.effects.common.DrawCardSourceControllerEffect;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.constants.Zone;
 import mage.game.Game;
 import mage.game.events.GameEvent;
@@ -44,9 +44,8 @@ import mage.game.events.GameEvent;
  */
 public class OverwhelmingInstinct extends CardImpl {
 
-    public OverwhelmingInstinct(UUID ownerId) {
-        super(ownerId, 276, "Overwhelming Instinct", Rarity.UNCOMMON, new CardType[]{CardType.ENCHANTMENT}, "{2}{G}");
-        this.expansionSetCode = "ONS";
+    public OverwhelmingInstinct(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.ENCHANTMENT},"{2}{G}");
 
         // Whenever you attack with three or more creatures, draw a card.
         this.addAbility(new OverwhelmingInstinctTriggeredAbility(new DrawCardSourceControllerEffect(1)));

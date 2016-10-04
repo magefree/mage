@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.coldsnap;
+package mage.cards.b;
 
 import java.util.UUID;
 import mage.MageInt;
@@ -36,9 +36,9 @@ import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.discard.DiscardTargetEffect;
 import mage.abilities.keyword.FlyingAbility;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Outcome;
-import mage.constants.Rarity;
 import mage.constants.Zone;
 import mage.filter.common.FilterControlledPermanent;
 import mage.game.Game;
@@ -53,9 +53,8 @@ import mage.target.common.TargetControlledPermanent;
  */
 public class BlizzardSpecter extends CardImpl {
 
-    public BlizzardSpecter(UUID ownerId) {
-        super(ownerId, 126, "Blizzard Specter", Rarity.UNCOMMON, new CardType[]{CardType.CREATURE}, "{2}{U}{B}");
-        this.expansionSetCode = "CSP";
+    public BlizzardSpecter(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{2}{U}{B}");
         this.supertype.add("Snow");
         this.subtype.add("Specter");
         this.power = new MageInt(2);

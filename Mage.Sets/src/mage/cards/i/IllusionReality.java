@@ -25,15 +25,15 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.apocalypse;
+package mage.cards.i;
 
 import java.util.UUID;
 import mage.abilities.effects.common.DestroyTargetEffect;
 import mage.abilities.effects.common.continuous.BecomesColorTargetEffect;
+import mage.cards.CardSetInfo;
 import mage.cards.SplitCard;
 import mage.constants.CardType;
 import mage.constants.Duration;
-import mage.constants.Rarity;
 import mage.target.Target;
 import mage.target.common.TargetArtifactPermanent;
 import mage.target.common.TargetSpellOrPermanent;
@@ -45,9 +45,8 @@ import mage.target.common.TargetSpellOrPermanent;
 
 public class IllusionReality extends SplitCard {
 
-    public IllusionReality(UUID ownerId) {
-        super(ownerId, 129, "Illusion", "Reality", Rarity.UNCOMMON, new CardType[]{CardType.INSTANT}, "{U}", "{2}{G}", false);
-        this.expansionSetCode = "APC";
+    public IllusionReality(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.INSTANT},"{U}","{2}{G}",false);
 
         // Illusion
         // Target spell or permanent becomes the color of your choice until end of turn.

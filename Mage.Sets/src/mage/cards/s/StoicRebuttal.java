@@ -26,13 +26,13 @@
  *  or implied, of BetaSteward_at_googlemail.com.
  */
 
-package mage.sets.scarsofmirrodin;
+package mage.cards.s;
 
 import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.abilities.condition.common.MetalcraftCondition;
 import mage.abilities.effects.common.CounterTargetEffect;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.target.TargetSpell;
 
 import java.util.UUID;
@@ -47,9 +47,8 @@ import mage.constants.Zone;
  */
 public class StoicRebuttal extends CardImpl {
 
-    public StoicRebuttal(UUID ownerId) {
-        super(ownerId, 46, "Stoic Rebuttal", Rarity.COMMON, new CardType[]{CardType.INSTANT}, "{1}{U}{U}");
-        this.expansionSetCode = "SOM";
+    public StoicRebuttal(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.INSTANT},"{1}{U}{U}");
 
         // Metalcraft - Stoic Rebuttal costs {1} less to cast if you control three or more artifacts.
         Ability ability = new SimpleStaticAbility(Zone.STACK, new SpellCostReductionSourceEffect(1, MetalcraftCondition.getInstance()));

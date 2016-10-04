@@ -25,13 +25,12 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.shadowmoor;
+package mage.cards.a;
 
 import java.util.UUID;
 
 import mage.constants.CardType;
 import mage.constants.Outcome;
-import mage.constants.Rarity;
 import mage.MageInt;
 import mage.MageObject;
 import mage.abilities.Ability;
@@ -39,6 +38,7 @@ import mage.abilities.common.DealsCombatDamageToAPlayerTriggeredAbility;
 import mage.abilities.effects.OneShotEffect;
 import mage.cards.Card;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.cards.Cards;
 import mage.cards.CardsImpl;
 import mage.constants.Zone;
@@ -51,9 +51,8 @@ import mage.players.Player;
  */
 public class AuguryAdept extends CardImpl {
 
-    public AuguryAdept(UUID ownerId) {
-        super(ownerId, 137, "Augury Adept", Rarity.RARE, new CardType[]{CardType.CREATURE}, "{1}{W/U}{W/U}");
-        this.expansionSetCode = "SHM";
+    public AuguryAdept(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{1}{W/U}{W/U}");
         this.subtype.add("Kithkin");
         this.subtype.add("Wizard");
 

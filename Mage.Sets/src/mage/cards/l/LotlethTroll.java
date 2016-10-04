@@ -25,12 +25,11 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.returntoravnica;
+package mage.cards.l;
 
 import java.util.UUID;
 
 import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.MageInt;
 import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.costs.common.DiscardTargetCost;
@@ -39,6 +38,7 @@ import mage.abilities.effects.common.RegenerateSourceEffect;
 import mage.abilities.effects.common.counter.AddCountersSourceEffect;
 import mage.abilities.keyword.TrampleAbility;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.Zone;
 import mage.counters.CounterType;
 import mage.filter.common.FilterCreatureCard;
@@ -52,9 +52,8 @@ public class LotlethTroll extends CardImpl {
 
     private static final FilterCreatureCard filter = new FilterCreatureCard("creature card in your hand");
 
-    public LotlethTroll(UUID ownerId) {
-        super(ownerId, 177, "Lotleth Troll", Rarity.RARE, new CardType[]{CardType.CREATURE}, "{B}{G}");
-        this.expansionSetCode = "RTR";
+    public LotlethTroll(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{B}{G}");
         this.subtype.add("Zombie");
         this.subtype.add("Troll");
 

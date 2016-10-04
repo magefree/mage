@@ -25,15 +25,15 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.fourthedition;
+package mage.cards.m;
 
 import java.util.UUID;
 import mage.abilities.Ability;
 import mage.abilities.effects.OneShotEffect;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Outcome;
-import mage.constants.Rarity;
 import mage.game.Game;
 import mage.players.Player;
 import mage.target.common.TargetOpponent;
@@ -44,9 +44,8 @@ import mage.target.common.TargetOpponent;
  */
 public class ManaClash extends CardImpl {
 
-    public ManaClash(UUID ownerId) {
-        super(ownerId, 228, "Mana Clash", Rarity.RARE, new CardType[]{CardType.SORCERY}, "{R}");
-        this.expansionSetCode = "4ED";
+    public ManaClash(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{R}");
 
         // You and target opponent each flip a coin. Mana Clash deals 1 damage to each player whose coin comes up tails. Repeat this process until both players' coins come up heads on the same flip.
         this.getSpellAbility().addEffect(new ManaClashEffect());

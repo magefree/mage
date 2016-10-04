@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.journeyintonyx;
+package mage.cards.s;
 
 import java.util.UUID;
 import mage.abilities.Ability;
@@ -34,9 +34,9 @@ import mage.abilities.common.delayed.AtTheBeginOfNextEndStepDelayedTriggeredAbil
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.ReturnFromExileEffect;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Outcome;
-import mage.constants.Rarity;
 import mage.constants.Zone;
 import mage.filter.FilterPermanent;
 import mage.filter.predicate.Predicates;
@@ -57,9 +57,8 @@ public class Skybind extends CardImpl {
         filter.add(Predicates.not(new CardTypePredicate(CardType.ENCHANTMENT)));
     }
 
-    public Skybind(UUID ownerId) {
-        super(ownerId, 25, "Skybind", Rarity.RARE, new CardType[]{CardType.ENCHANTMENT}, "{3}{W}{W}");
-        this.expansionSetCode = "JOU";
+    public Skybind(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.ENCHANTMENT},"{3}{W}{W}");
 
         // Constellation — When Skybind or another enchantment enters the battlefield under your control, exile target nonenchantment permanent. Return that card to the battlefield under its owner's control at the beginning of the next end step.
         Ability ability = new ConstellationAbility(new SkybindEffect(), false);

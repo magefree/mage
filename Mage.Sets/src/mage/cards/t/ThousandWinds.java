@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.khansoftarkir;
+package mage.cards.t;
 
 import java.util.UUID;
 import mage.MageInt;
@@ -35,8 +35,8 @@ import mage.abilities.effects.common.ReturnToHandFromBattlefieldAllEffect;
 import mage.abilities.keyword.FlyingAbility;
 import mage.abilities.keyword.MorphAbility;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.filter.predicate.permanent.AnotherPredicate;
 import mage.filter.predicate.permanent.TappedPredicate;
@@ -54,9 +54,8 @@ public class ThousandWinds extends CardImpl {
         filter.add(new TappedPredicate());
     }
 
-    public ThousandWinds(UUID ownerId) {
-        super(ownerId, 58, "Thousand Winds", Rarity.RARE, new CardType[]{CardType.CREATURE}, "{4}{U}{U}");
-        this.expansionSetCode = "KTK";
+    public ThousandWinds(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{4}{U}{U}");
         this.subtype.add("Elemental");
 
         this.power = new MageInt(5);

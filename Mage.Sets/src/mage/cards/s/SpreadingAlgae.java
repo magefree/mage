@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.urzassaga;
+package mage.cards.s;
 
 import java.util.UUID;
 import mage.abilities.Ability;
@@ -36,9 +36,9 @@ import mage.abilities.effects.common.DestroyAttachedEffect;
 import mage.abilities.effects.common.ReturnToHandSourceEffect;
 import mage.abilities.keyword.EnchantAbility;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Outcome;
-import mage.constants.Rarity;
 import mage.filter.FilterPermanent;
 import mage.filter.predicate.mageobject.SubtypePredicate;
 import mage.target.TargetPermanent;
@@ -55,9 +55,8 @@ public class SpreadingAlgae extends CardImpl {
         filter.add(new SubtypePredicate("Swamp"));
     }
 
-    public SpreadingAlgae(UUID ownerId) {
-        super(ownerId, 274, "Spreading Algae", Rarity.UNCOMMON, new CardType[]{CardType.ENCHANTMENT}, "{G}");
-        this.expansionSetCode = "USG";
+    public SpreadingAlgae(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.ENCHANTMENT},"{G}");
         this.subtype.add("Aura");
 
         // Enchant Swamp

@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.avacynrestored;
+package mage.cards.p;
 
 import mage.constants.*;
 import mage.abilities.Ability;
@@ -38,6 +38,7 @@ import mage.abilities.effects.common.continuous.GainAbilityAttachedEffect;
 import mage.abilities.keyword.EnchantAbility;
 import mage.abilities.keyword.IntimidateAbility;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.target.TargetPermanent;
 import mage.target.common.TargetCreaturePermanent;
 import java.util.UUID;
@@ -50,9 +51,8 @@ public class PredatorsGambit extends CardImpl {
 
     private static final String rule = "Enchanted creature has intimidate as long as its controller controls no other creatures";
 
-    public PredatorsGambit(UUID ownerId) {
-        super(ownerId, 117, "Predator's Gambit", Rarity.COMMON, new CardType[]{CardType.ENCHANTMENT}, "{B}");
-        this.expansionSetCode = "AVR";
+    public PredatorsGambit(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.ENCHANTMENT},"{B}");
         this.subtype.add("Aura");
 
         // Enchant creature

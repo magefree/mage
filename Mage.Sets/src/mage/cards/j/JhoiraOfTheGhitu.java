@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.modernmasters;
+package mage.cards.j;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -42,9 +42,9 @@ import mage.abilities.effects.common.continuous.GainSuspendEffect;
 import mage.abilities.keyword.SuspendAbility;
 import mage.cards.Card;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Outcome;
-import mage.constants.Rarity;
 import mage.constants.Zone;
 import mage.counters.CounterType;
 import mage.filter.common.FilterNonlandCard;
@@ -58,9 +58,8 @@ import mage.target.common.TargetCardInHand;
  */
 public class JhoiraOfTheGhitu extends CardImpl {
 
-    public JhoiraOfTheGhitu(UUID ownerId) {
-        super(ownerId, 177, "Jhoira of the Ghitu", Rarity.RARE, new CardType[]{CardType.CREATURE}, "{1}{U}{R}");
-        this.expansionSetCode = "MMA";
+    public JhoiraOfTheGhitu(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{1}{U}{R}");
         this.supertype.add("Legendary");
         this.subtype.add("Human");
         this.subtype.add("Wizard");

@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.fifthdawn;
+package mage.cards.f;
 
 import java.util.UUID;
 import mage.MageInt;
@@ -33,9 +33,9 @@ import mage.abilities.common.AttacksTriggeredAbility;
 import mage.abilities.effects.common.continuous.GainAbilityAllEffect;
 import mage.abilities.keyword.TrampleAbility;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Duration;
-import mage.constants.Rarity;
 import mage.filter.common.FilterAttackingCreature;
 
 /**
@@ -44,9 +44,8 @@ import mage.filter.common.FilterAttackingCreature;
  */
 public class FangrenPathcutter extends CardImpl {
 
-    public FangrenPathcutter(UUID ownerId) {
-        super(ownerId, 87, "Fangren Pathcutter", Rarity.UNCOMMON, new CardType[]{CardType.CREATURE}, "{4}{G}{G}");
-        this.expansionSetCode = "5DN";
+    public FangrenPathcutter(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{4}{G}{G}");
         this.subtype.add("Beast");
 
         this.power = new MageInt(4);

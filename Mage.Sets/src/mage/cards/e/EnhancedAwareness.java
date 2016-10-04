@@ -25,13 +25,13 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.fatereforged;
+package mage.cards.e;
 
 import java.util.UUID;
 import mage.abilities.effects.common.DrawDiscardControllerEffect;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.Rarity;
 
 /**
  *
@@ -39,9 +39,8 @@ import mage.constants.Rarity;
  */
 public class EnhancedAwareness extends CardImpl {
 
-    public EnhancedAwareness(UUID ownerId) {
-        super(ownerId, 33, "Enhanced Awareness", Rarity.COMMON, new CardType[]{CardType.INSTANT}, "{4}{U}");
-        this.expansionSetCode = "FRF";
+    public EnhancedAwareness(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.INSTANT},"{4}{U}");
 
         // Draw three cards, then discard a card.
         this.getSpellAbility().addEffect(new DrawDiscardControllerEffect(3,1));

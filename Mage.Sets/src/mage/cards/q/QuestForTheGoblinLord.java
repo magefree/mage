@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.worldwake;
+package mage.cards.q;
 
 import java.util.UUID;
 import mage.abilities.common.EntersBattlefieldControlledTriggeredAbility;
@@ -35,9 +35,9 @@ import mage.abilities.decorator.ConditionalContinuousEffect;
 import mage.abilities.effects.common.continuous.BoostAllEffect;
 import mage.abilities.effects.common.counter.AddCountersSourceEffect;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Duration;
-import mage.constants.Rarity;
 import mage.constants.TargetController;
 import mage.constants.Zone;
 import mage.counters.CounterType;
@@ -62,9 +62,8 @@ public class QuestForTheGoblinLord extends CardImpl {
         goblinFilter.add(new SubtypePredicate("Goblin"));
     }
 
-    public QuestForTheGoblinLord(UUID ownerId) {
-        super(ownerId, 86, "Quest for the Goblin Lord", Rarity.UNCOMMON, new CardType[]{CardType.ENCHANTMENT}, "{R}");
-        this.expansionSetCode = "WWK";
+    public QuestForTheGoblinLord(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.ENCHANTMENT},"{R}");
 
         // Whenever a Goblin enters the battlefield under your control, you may put a quest counter on Quest for the Goblin Lord.
         this.addAbility(new EntersBattlefieldControlledTriggeredAbility(Zone.BATTLEFIELD, new AddCountersSourceEffect(CounterType.QUEST.createInstance()), goblinFilter, true));

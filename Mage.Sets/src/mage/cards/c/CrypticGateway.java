@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.onslaught;
+package mage.cards.c;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -39,9 +39,9 @@ import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.PutPermanentOnBattlefieldEffect;
 import mage.abilities.keyword.ChangelingAbility;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Outcome;
-import mage.constants.Rarity;
 import mage.constants.Zone;
 import mage.filter.FilterCard;
 import mage.filter.common.FilterControlledCreaturePermanent;
@@ -68,9 +68,8 @@ public class CrypticGateway extends CardImpl {
 
     TargetControlledPermanent target;
 
-    public CrypticGateway(UUID ownerId) {
-        super(ownerId, 306, "Cryptic Gateway", Rarity.RARE, new CardType[]{CardType.ARTIFACT}, "{5}");
-        this.expansionSetCode = "ONS";
+    public CrypticGateway(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.ARTIFACT},"{5}");
 
         // Tap two untapped creatures you control: You may put a creature card from your hand that shares a creature type with each creature tapped this way onto the battlefield.
         this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new CrypticGatewayEffect(), new CrypticGatewayCost(new TargetControlledPermanent(filter))));

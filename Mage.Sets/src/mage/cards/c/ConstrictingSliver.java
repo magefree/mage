@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.magic2015;
+package mage.cards.c;
 
 import java.util.UUID;
 import mage.MageInt;
@@ -38,10 +38,10 @@ import mage.abilities.effects.common.CreateDelayedTriggeredAbilityEffect;
 import mage.abilities.effects.common.ExileTargetEffect;
 import mage.abilities.effects.common.continuous.GainAbilityAllEffect;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Duration;
 import mage.constants.Outcome;
-import mage.constants.Rarity;
 import mage.constants.TargetController;
 import mage.constants.Zone;
 import mage.filter.common.FilterControlledCreaturePermanent;
@@ -64,9 +64,8 @@ public class ConstrictingSliver extends CardImpl {
         filterTarget.add(new ControllerPredicate(TargetController.OPPONENT));
     }
 
-    public ConstrictingSliver(UUID ownerId) {
-        super(ownerId, 7, "Constricting Sliver", Rarity.UNCOMMON, new CardType[]{CardType.CREATURE}, "{5}{W}");
-        this.expansionSetCode = "M15";
+    public ConstrictingSliver(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{5}{W}");
         this.subtype.add("Sliver");
 
         this.power = new MageInt(3);

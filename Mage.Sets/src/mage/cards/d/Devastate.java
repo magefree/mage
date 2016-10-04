@@ -25,14 +25,14 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.prophecy;
+package mage.cards.d;
 
 import java.util.UUID;
 import mage.abilities.effects.common.DamageEverythingEffect;
 import mage.abilities.effects.common.DestroyTargetEffect;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.target.common.TargetLandPermanent;
 
 /**
@@ -41,9 +41,8 @@ import mage.target.common.TargetLandPermanent;
  */
 public class Devastate extends CardImpl {
 
-    public Devastate(UUID ownerId) {
-        super(ownerId, 87, "Devastate", Rarity.COMMON, new CardType[]{CardType.SORCERY}, "{3}{R}{R}");
-        this.expansionSetCode = "PCY";
+    public Devastate(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{3}{R}{R}");
 
         // Destroy target land. Devastate deals 1 damage to each creature and each player.
         this.getSpellAbility().addEffect(new DestroyTargetEffect());

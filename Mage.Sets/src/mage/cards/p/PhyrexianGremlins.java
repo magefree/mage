@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.antiquities;
+package mage.cards.p;
 
 import java.util.UUID;
 import mage.MageInt;
@@ -36,8 +36,8 @@ import mage.abilities.costs.common.TapSourceCost;
 import mage.abilities.effects.common.DontUntapAsLongAsSourceTappedEffect;
 import mage.abilities.effects.common.TapTargetEffect;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.constants.Zone;
 import mage.target.common.TargetArtifactPermanent;
 
@@ -47,9 +47,8 @@ import mage.target.common.TargetArtifactPermanent;
  */
 public class PhyrexianGremlins extends CardImpl {
 
-    public PhyrexianGremlins(UUID ownerId) {
-        super(ownerId, 48, "Phyrexian Gremlins", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{2}{B}");
-        this.expansionSetCode = "ATQ";
+    public PhyrexianGremlins(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{2}{B}");
         this.subtype.add("Gremlin");
         this.power = new MageInt(1);
         this.toughness = new MageInt(1);

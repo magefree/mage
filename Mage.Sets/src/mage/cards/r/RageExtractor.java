@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.newphyrexia;
+package mage.cards.r;
 
 import java.util.UUID;
 import mage.abilities.TriggeredAbilityImpl;
@@ -34,8 +34,8 @@ import mage.abilities.costs.mana.PhyrexianManaCost;
 import mage.abilities.dynamicvalue.common.StaticValue;
 import mage.abilities.effects.common.DamageTargetEffect;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.constants.Zone;
 import mage.game.Game;
 import mage.game.events.GameEvent;
@@ -48,9 +48,8 @@ import mage.target.common.TargetCreatureOrPlayer;
  */
 public class RageExtractor extends CardImpl {
 
-    public RageExtractor(UUID ownerId) {
-        super(ownerId, 91, "Rage Extractor", Rarity.UNCOMMON, new CardType[]{CardType.ARTIFACT}, "{4}{RP}");
-        this.expansionSetCode = "NPH";
+    public RageExtractor(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.ARTIFACT},"{4}{RP}");
 
 
         this.addAbility(new RageExtractorTriggeredAbility());

@@ -25,14 +25,14 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.ravnica;
+package mage.cards.m;
 
 import java.util.UUID;
 import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.abilities.effects.common.CounterTargetEffect;
 import mage.abilities.keyword.TransmuteAbility;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.filter.FilterSpell;
 import mage.filter.predicate.Predicates;
 import mage.filter.predicate.mageobject.CardTypePredicate;
@@ -51,9 +51,8 @@ public class MuddleTheMixture extends CardImpl {
                 new CardTypePredicate(CardType.SORCERY)));
     }
 
-    public MuddleTheMixture(UUID ownerId) {
-        super(ownerId, 60, "Muddle the Mixture", Rarity.COMMON, new CardType[]{CardType.INSTANT}, "{U}{U}");
-        this.expansionSetCode = "RAV";
+    public MuddleTheMixture(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.INSTANT},"{U}{U}");
 
 
         // Counter target instant or sorcery spell.

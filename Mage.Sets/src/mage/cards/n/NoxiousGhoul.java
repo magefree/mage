@@ -25,16 +25,16 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.planechase;
+package mage.cards.n;
 
 import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.common.EntersBattlefieldAllTriggeredAbility;
 import mage.abilities.effects.common.continuous.BoostAllEffect;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Duration;
-import mage.constants.Rarity;
 import mage.constants.Zone;
 import mage.filter.FilterPermanent;
 import mage.filter.common.FilterCreaturePermanent;
@@ -52,9 +52,8 @@ public class NoxiousGhoul extends CardImpl {
     final FilterPermanent filter = new FilterPermanent("Noxious Ghoul or another Zombie");
     final FilterCreaturePermanent filter2 = new FilterCreaturePermanent("non-Zombie");
 
-    public NoxiousGhoul(UUID ownerId) {
-        super(ownerId, 35, "Noxious Ghoul", Rarity.UNCOMMON, new CardType[]{CardType.CREATURE}, "{3}{B}{B}");
-        this.expansionSetCode = "HOP";
+    public NoxiousGhoul(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{3}{B}{B}");
         this.subtype.add("Zombie");
 
         this.power = new MageInt(3);

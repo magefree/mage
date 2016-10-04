@@ -25,14 +25,14 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.eldritchmoon;
+package mage.cards.m;
 
 import java.util.UUID;
 import mage.abilities.effects.common.CreateTokenEffect;
 import mage.abilities.effects.common.DamageTargetEffect;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.game.permanent.token.DevilToken;
 import mage.target.common.TargetCreatureOrPlayer;
 
@@ -42,9 +42,8 @@ import mage.target.common.TargetCreatureOrPlayer;
  */
 public class MakeMischief extends CardImpl {
 
-    public MakeMischief(UUID ownerId) {
-        super(ownerId, 135, "Make Mischief", Rarity.COMMON, new CardType[]{CardType.SORCERY}, "{2}{R}");
-        this.expansionSetCode = "EMN";
+    public MakeMischief(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{2}{R}");
 
         // Make Mischief deals 1 damage to target creature or player. Put a 1/1 red Devil creature token onto the battlefield.
         // It has "When this creature dies, it deals 1 damage to target creature or player."

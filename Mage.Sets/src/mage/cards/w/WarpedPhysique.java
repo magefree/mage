@@ -26,17 +26,17 @@
  *  or implied, of BetaSteward_at_googlemail.com.
  */
 
-package mage.sets.dragonsmaze;
+package mage.cards.w;
 
 import java.util.UUID;
 import mage.constants.CardType;
 import mage.constants.Duration;
-import mage.constants.Rarity;
 import mage.abilities.dynamicvalue.DynamicValue;
 import mage.abilities.dynamicvalue.common.CardsInControllerHandCount;
 import mage.abilities.dynamicvalue.common.SignInversionDynamicValue;
 import mage.abilities.effects.common.continuous.BoostTargetEffect;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.target.common.TargetCreaturePermanent;
 
 /**
@@ -47,9 +47,8 @@ import mage.target.common.TargetCreaturePermanent;
 
 public class WarpedPhysique extends CardImpl {
 
-    public WarpedPhysique(UUID ownerId) {
-        super(ownerId, 117, "Warped Physique", Rarity.UNCOMMON, new CardType[]{CardType.INSTANT}, "{U}{B}");
-        this.expansionSetCode = "DGM";
+    public WarpedPhysique(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.INSTANT},"{U}{B}");
 
 
         // Target creature gets +X/-X until end of turn, where X is the number of cards in your hand.

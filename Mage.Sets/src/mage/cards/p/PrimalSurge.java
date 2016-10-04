@@ -25,18 +25,18 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.avacynrestored;
+package mage.cards.p;
 
 import java.util.List;
 import java.util.UUID;
 import mage.constants.CardType;
 import mage.constants.Outcome;
-import mage.constants.Rarity;
 import mage.constants.Zone;
 import mage.abilities.Ability;
 import mage.abilities.effects.OneShotEffect;
 import mage.cards.Card;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.players.Player;
@@ -47,9 +47,8 @@ import mage.players.Player;
  */
 public class PrimalSurge extends CardImpl {
 
-    public PrimalSurge(UUID ownerId) {
-        super(ownerId, 189, "Primal Surge", Rarity.MYTHIC, new CardType[]{CardType.SORCERY}, "{8}{G}{G}");
-        this.expansionSetCode = "AVR";
+    public PrimalSurge(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{8}{G}{G}");
 
 
         // Exile the top card of your library. If it's a permanent card, you may put it onto the battlefield. If you do, repeat this process.

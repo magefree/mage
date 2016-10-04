@@ -25,15 +25,15 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.mercadianmasques;
+package mage.cards.t;
 
 import java.util.UUID;
 import mage.abilities.costs.AlternativeCostSourceAbility;
 import mage.abilities.costs.common.ReturnToHandChosenControlledPermanentCost;
 import mage.abilities.effects.common.CounterTargetEffect;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.filter.common.FilterControlledLandPermanent;
 import mage.filter.predicate.mageobject.SubtypePredicate;
 import mage.target.TargetSpell;
@@ -48,9 +48,8 @@ public class Thwart extends CardImpl {
     static{
         filter.add(new SubtypePredicate("Island"));
     }
-    public Thwart(UUID ownerId) {
-        super(ownerId, 108, "Thwart", Rarity.UNCOMMON, new CardType[]{CardType.INSTANT}, "{2}{U}{U}");
-        this.expansionSetCode = "MMQ";
+    public Thwart(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.INSTANT},"{2}{U}{U}");
 
         // You may return three Islands you control to their owner's hand rather than pay Thwart's mana cost.
         AlternativeCostSourceAbility ability;   

@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.futuresight;
+package mage.cards.b;
 
 import java.util.UUID;
 import mage.abilities.TriggeredAbility;
@@ -35,8 +35,8 @@ import mage.abilities.condition.common.CardsInHandCondition;
 import mage.abilities.decorator.ConditionalTriggeredAbility;
 import mage.abilities.effects.common.WinGameSourceControllerEffect;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.constants.Zone;
 import mage.filter.FilterPermanent;
 import mage.filter.predicate.permanent.AnotherPredicate;
@@ -50,9 +50,8 @@ import mage.game.events.GameEvent.EventType;
  */
 public class BarrenGlory extends CardImpl {
 
-    public BarrenGlory(UUID ownerId) {
-        super(ownerId, 3, "Barren Glory", Rarity.RARE, new CardType[]{CardType.ENCHANTMENT}, "{4}{W}{W}");
-        this.expansionSetCode = "FUT";
+    public BarrenGlory(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.ENCHANTMENT},"{4}{W}{W}");
 
         // At the beginning of your upkeep, if you control no permanents other than Barren Glory and have no cards in hand, you win the game.
         Condition condition = new CardsInHandCondition(CardsInHandCondition.CountType.EQUAL_TO, 0);

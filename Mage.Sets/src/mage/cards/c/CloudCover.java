@@ -25,14 +25,14 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.planeshift;
+package mage.cards.c;
 
 import java.util.UUID;
 import mage.abilities.TriggeredAbilityImpl;
 import mage.abilities.effects.common.ReturnToHandTargetEffect;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.constants.Zone;
 import mage.game.Game;
 import mage.game.events.GameEvent;
@@ -47,9 +47,8 @@ import mage.target.targetpointer.FixedTarget;
  */
 public class CloudCover extends CardImpl {
 
-    public CloudCover(UUID ownerId) {
-        super(ownerId, 98, "Cloud Cover", Rarity.RARE, new CardType[]{CardType.ENCHANTMENT}, "{2}{W}{U}");
-        this.expansionSetCode = "PLS";
+    public CloudCover(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.ENCHANTMENT},"{2}{W}{U}");
 
         // Whenever another permanent you control becomes the target of a spell or ability an opponent controls, you may return that permanent to its owner's hand.
         this.addAbility(new CloudCoverAbility());

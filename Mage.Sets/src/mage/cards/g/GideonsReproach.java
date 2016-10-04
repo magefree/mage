@@ -25,13 +25,13 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.battleforzendikar;
+package mage.cards.g;
 
 import java.util.UUID;
 import mage.abilities.effects.common.DamageTargetEffect;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.target.common.TargetAttackingOrBlockingCreature;
 
 /**
@@ -40,9 +40,8 @@ import mage.target.common.TargetAttackingOrBlockingCreature;
  */
 public class GideonsReproach extends CardImpl {
 
-    public GideonsReproach(UUID ownerId) {
-        super(ownerId, 30, "Gideon's Reproach", Rarity.COMMON, new CardType[]{CardType.INSTANT}, "{1}{W}");
-        this.expansionSetCode = "BFZ";
+    public GideonsReproach(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.INSTANT},"{1}{W}");
 
         // Gideon's Reproach deals 4 damage to target attacking or blocking creature.
         getSpellAbility().addEffect(new DamageTargetEffect(4));

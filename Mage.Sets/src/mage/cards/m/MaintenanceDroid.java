@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.starwars;
+package mage.cards.m;
 
 import java.util.HashSet;
 import java.util.UUID;
@@ -38,11 +38,11 @@ import mage.abilities.effects.common.counter.AddCountersTargetEffect;
 import mage.abilities.effects.common.counter.RemoveCounterTargetEffect;
 import mage.abilities.keyword.RepairAbility;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.choices.Choice;
 import mage.choices.ChoiceImpl;
 import mage.constants.CardType;
 import mage.constants.Outcome;
-import mage.constants.Rarity;
 import mage.constants.Zone;
 import mage.counters.CounterType;
 import mage.filter.FilterCard;
@@ -63,9 +63,8 @@ public class MaintenanceDroid extends CardImpl {
         filter.add(new CounterCardPredicate(CounterType.REPAIR));
     }
 
-    public MaintenanceDroid(UUID ownerId) {
-        super(ownerId, 162, "Maintenance Droid", Rarity.COMMON, new CardType[]{CardType.ARTIFACT, CardType.CREATURE}, "{W}{U}");
-        this.expansionSetCode = "SWS";
+    public MaintenanceDroid(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.ARTIFACT,CardType.CREATURE},"{W}{U}");
         this.subtype.add("Droid");
         this.power = new MageInt(1);
         this.toughness = new MageInt(2);

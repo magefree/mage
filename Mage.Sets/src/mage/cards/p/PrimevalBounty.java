@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.magic2014;
+package mage.cards.p;
 
 import java.util.UUID;
 import mage.abilities.Ability;
@@ -36,8 +36,8 @@ import mage.abilities.effects.common.CreateTokenEffect;
 import mage.abilities.effects.common.GainLifeEffect;
 import mage.abilities.effects.common.counter.AddCountersTargetEffect;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.counters.CounterType;
 import mage.filter.FilterSpell;
 import mage.filter.common.FilterLandPermanent;
@@ -59,9 +59,8 @@ public class PrimevalBounty extends CardImpl {
         filterNonCreature.add(Predicates.not(new CardTypePredicate(CardType.CREATURE)));
     }
 
-    public PrimevalBounty(UUID ownerId) {
-        super(ownerId, 190, "Primeval Bounty", Rarity.MYTHIC, new CardType[]{CardType.ENCHANTMENT}, "{5}{G}");
-        this.expansionSetCode = "M14";
+    public PrimevalBounty(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.ENCHANTMENT},"{5}{G}");
 
 
         // Whenever you cast a creature spell, put a 3/3 green Beast creature token onto the battlefield.

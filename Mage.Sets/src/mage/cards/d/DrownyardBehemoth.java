@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.eldritchmoon;
+package mage.cards.d;
 
 import java.util.UUID;
 import mage.MageInt;
@@ -36,9 +36,9 @@ import mage.abilities.keyword.EmergeAbility;
 import mage.abilities.keyword.FlashAbility;
 import mage.abilities.keyword.HexproofAbility;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Duration;
-import mage.constants.Rarity;
 
 /**
  *
@@ -46,9 +46,8 @@ import mage.constants.Rarity;
  */
 public class DrownyardBehemoth extends CardImpl {
 
-    public DrownyardBehemoth(UUID ownerId) {
-        super(ownerId, 4, "Drownyard Behemoth", Rarity.UNCOMMON, new CardType[]{CardType.CREATURE}, "{9}");
-        this.expansionSetCode = "EMN";
+    public DrownyardBehemoth(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{9}");
         this.subtype.add("Eldrazi");
         this.subtype.add("Crab");
         this.power = new MageInt(5);

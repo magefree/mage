@@ -25,13 +25,13 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.fatereforged;
+package mage.cards.r;
 
 import java.util.UUID;
 import mage.abilities.effects.common.DestroyTargetEffect;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.filter.predicate.Predicates;
 import mage.filter.predicate.mageobject.ColorlessPredicate;
@@ -49,9 +49,8 @@ public class ReachOfShadows extends CardImpl {
         filter.add(Predicates.not(new ColorlessPredicate()));
     }
 
-    public ReachOfShadows(UUID ownerId) {
-        super(ownerId, 81, "Reach of Shadows", Rarity.COMMON, new CardType[]{CardType.INSTANT}, "{4}{B}");
-        this.expansionSetCode = "FRF";
+    public ReachOfShadows(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.INSTANT},"{4}{B}");
 
         // Destroy target creature that's one or more colors.
         this.getSpellAbility().addEffect(new DestroyTargetEffect());

@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.magic2010;
+package mage.cards.o;
 
 import java.util.LinkedHashSet;
 import java.util.UUID;
@@ -33,10 +33,10 @@ import mage.abilities.Ability;
 import mage.abilities.effects.OneShotEffect;
 import mage.cards.Card;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.cards.Cards;
 import mage.constants.CardType;
 import mage.constants.Outcome;
-import mage.constants.Rarity;
 import mage.constants.Zone;
 import mage.game.Game;
 import mage.players.Player;
@@ -47,9 +47,8 @@ import mage.players.Player;
  */
 public class OpenTheVaults extends CardImpl {
 
-    public OpenTheVaults(UUID ownerId) {
-        super(ownerId, 21, "Open the Vaults", Rarity.RARE, new CardType[]{CardType.SORCERY}, "{4}{W}{W}");
-        this.expansionSetCode = "M10";
+    public OpenTheVaults(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{4}{W}{W}");
 
         // Return all artifact and enchantment cards from all graveyards to the battlefield under their owners' control.
         this.getSpellAbility().addEffect(new OpenTheVaultsEffect());

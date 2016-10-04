@@ -26,12 +26,11 @@
  *  or implied, of BetaSteward_at_googlemail.com.
  */
 
-package mage.sets.magic2012;
+package mage.cards.b;
 
 import java.util.UUID;
 
 import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.costs.common.SacrificeSourceCost;
@@ -40,6 +39,7 @@ import mage.abilities.costs.mana.GenericManaCost;
 import mage.abilities.effects.common.ReturnToHandTargetEffect;
 import mage.abilities.mana.ColorlessManaAbility;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.Zone;
 import mage.filter.common.FilterArtifactCard;
 import mage.target.common.TargetCardInYourGraveyard;
@@ -49,9 +49,8 @@ import mage.target.common.TargetCardInYourGraveyard;
  */
 public class BuriedRuin extends CardImpl {
 
-    public BuriedRuin(UUID ownerId) {
-        super(ownerId, 224, "Buried Ruin", Rarity.UNCOMMON, new CardType[]{CardType.LAND}, "");
-        this.expansionSetCode = "M12";
+    public BuriedRuin(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.LAND},"");
         this.addAbility(new ColorlessManaAbility());
         Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new ReturnToHandTargetEffect(), new GenericManaCost(2));
         ability.addCost(new TapSourceCost());

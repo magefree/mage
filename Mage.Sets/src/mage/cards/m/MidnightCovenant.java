@@ -26,7 +26,7 @@
  *  or implied, of BetaSteward_at_googlemail.com.
  */
 
-package mage.sets.championsofkamigawa;
+package mage.cards.m;
 
 import java.util.UUID;
 
@@ -39,6 +39,7 @@ import mage.abilities.effects.common.continuous.BoostSourceEffect;
 import mage.abilities.effects.common.continuous.GainAbilityAttachedEffect;
 import mage.abilities.keyword.EnchantAbility;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.target.TargetPermanent;
 import mage.target.common.TargetCreaturePermanent;
 
@@ -48,9 +49,8 @@ import mage.target.common.TargetCreaturePermanent;
  */
 public class MidnightCovenant extends CardImpl {
 
-    public MidnightCovenant(UUID ownerId) {
-        super(ownerId, 125, "Midnight Covenant", Rarity.COMMON, new CardType[]{CardType.ENCHANTMENT}, "{1}{B}");
-        this.expansionSetCode = "CHK";
+    public MidnightCovenant(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.ENCHANTMENT},"{1}{B}");
         this.subtype.add("Aura");
 
 

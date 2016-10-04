@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.mirrodin;
+package mage.cards.n;
 
 import java.util.UUID;
 
@@ -36,6 +36,7 @@ import mage.abilities.dynamicvalue.common.PermanentsOnBattlefieldCount;
 import mage.abilities.effects.common.continuous.BoostEquippedEffect;
 import mage.abilities.keyword.EquipAbility;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.filter.common.FilterLandPermanent;
 import mage.filter.predicate.mageobject.SubtypePredicate;
 import mage.filter.predicate.permanent.ControllerPredicate;
@@ -52,9 +53,8 @@ public class NightmareLash extends CardImpl {
         filter.add(new ControllerPredicate(TargetController.YOU));
     }
 
-    public NightmareLash(UUID ownerId) {
-        super(ownerId, 219, "Nightmare Lash", Rarity.RARE, new CardType[]{CardType.ARTIFACT}, "{4}");
-        this.expansionSetCode = "MRD";
+    public NightmareLash(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.ARTIFACT},"{4}");
         this.subtype.add("Equipment");
 
         // Equipped creature gets +1/+1 for each Swamp you control.

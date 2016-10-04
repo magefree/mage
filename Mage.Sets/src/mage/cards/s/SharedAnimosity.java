@@ -25,13 +25,12 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.morningtide;
+package mage.cards.s;
 
 import java.util.ArrayList;
 import java.util.UUID;
 
 import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.MageObject;
 import mage.abilities.Ability;
 import mage.abilities.Mode;
@@ -39,6 +38,7 @@ import mage.abilities.common.AttacksCreatureYouControlTriggeredAbility;
 import mage.abilities.effects.ContinuousEffectImpl;
 import mage.abilities.keyword.ChangelingAbility;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.Duration;
 import mage.constants.Layer;
 import mage.constants.Outcome;
@@ -58,9 +58,8 @@ import mage.game.permanent.Permanent;
  */
 public class SharedAnimosity extends CardImpl {
 
-    public SharedAnimosity(UUID ownerId) {
-        super(ownerId, 104, "Shared Animosity", Rarity.RARE, new CardType[]{CardType.ENCHANTMENT}, "{2}{R}");
-        this.expansionSetCode = "MOR";
+    public SharedAnimosity(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.ENCHANTMENT},"{2}{R}");
 
         // Whenever a creature you control attacks, it gets +1/+0 until end of turn for each other attacking creature that shares a creature type with it.
         this.addAbility(new AttacksCreatureYouControlTriggeredAbility(new SharedAnimosityEffect(), false, true));

@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.nemesis;
+package mage.cards.m;
 
 import java.util.UUID;
 import mage.abilities.condition.CompoundCondition;
@@ -35,8 +35,8 @@ import mage.abilities.condition.common.PermanentsOnTheBattlefieldCondition;
 import mage.abilities.costs.AlternativeCostSourceAbility;
 import mage.abilities.effects.common.DestroyTargetEffect;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.filter.FilterPermanent;
 import mage.filter.common.FilterArtifactPermanent;
 import mage.filter.predicate.mageobject.SubtypePredicate;
@@ -56,9 +56,8 @@ public class MoggSalvage extends CardImpl {
         filterIsland.add(new SubtypePredicate(("Island")));
     }
 
-    public MoggSalvage(UUID ownerId) {
-        super(ownerId, 94, "Mogg Salvage", Rarity.UNCOMMON, new CardType[]{CardType.INSTANT}, "{2}{R}");
-        this.expansionSetCode = "NEM";
+    public MoggSalvage(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.INSTANT},"{2}{R}");
 
         // If an opponent controls an Island and you control a Mountain, you may cast Mogg Salvage without paying its mana cost.
         Condition condition = new CompoundCondition("If an opponent controls an Island and you control a Mountain",

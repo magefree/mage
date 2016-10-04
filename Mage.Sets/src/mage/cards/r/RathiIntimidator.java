@@ -25,11 +25,10 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.nemesis;
+package mage.cards.r;
 
 import java.util.UUID;
 import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.constants.Zone;
 import mage.MageInt;
 import mage.abilities.Ability;
@@ -39,6 +38,7 @@ import mage.abilities.costs.mana.GenericManaCost;
 import mage.abilities.effects.common.search.SearchLibraryPutInPlayEffect;
 import mage.abilities.keyword.FearAbility;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.filter.Filter.ComparisonType;
 import mage.filter.common.FilterPermanentCard;
 import mage.filter.predicate.mageobject.ConvertedManaCostPredicate;
@@ -58,9 +58,8 @@ public class RathiIntimidator extends CardImpl {
         filter.add(new ConvertedManaCostPredicate(ComparisonType.LessThan, 3));
     }
 
-    public RathiIntimidator(UUID ownerId) {
-        super(ownerId, 69, "Rathi Intimidator", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{1}{B}{B}");
-        this.expansionSetCode = "NEM";
+    public RathiIntimidator(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{1}{B}{B}");
         this.subtype.add("Horror");
         this.subtype.add("Mercenary");
 

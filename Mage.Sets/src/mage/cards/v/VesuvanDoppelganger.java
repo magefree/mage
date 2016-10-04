@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.unlimitededition;
+package mage.cards.v;
 
 import java.util.UUID;
 import mage.MageInt;
@@ -36,9 +36,9 @@ import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.effects.EntersBattlefieldEffect;
 import mage.abilities.effects.OneShotEffect;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Outcome;
-import mage.constants.Rarity;
 import mage.constants.TargetController;
 import mage.constants.Zone;
 import mage.filter.common.FilterCreaturePermanent;
@@ -57,9 +57,8 @@ public class VesuvanDoppelganger extends CardImpl {
 
     private static final String rule = "You may have {this} enter the battlefield as a copy of any creature on the battlefield except it doesn't copy that creature's color and it gains \"At the beginning of your upkeep, you may have this creature become a copy of target creature except it doesn't copy that creature's color. If you do, this creature gains this ability.\"";
 
-    public VesuvanDoppelganger(UUID ownerId) {
-        super(ownerId, 88, "Vesuvan Doppelganger", Rarity.RARE, new CardType[]{CardType.CREATURE}, "{3}{U}{U}");
-        this.expansionSetCode = "2ED";
+    public VesuvanDoppelganger(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{3}{U}{U}");
         this.subtype.add("Shapeshifter");
         this.power = new MageInt(0);
         this.toughness = new MageInt(0);

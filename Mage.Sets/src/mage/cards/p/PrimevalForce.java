@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.eighthedition;
+package mage.cards.p;
 
 import java.util.UUID;
 import mage.MageInt;
@@ -33,8 +33,8 @@ import mage.abilities.common.EntersBattlefieldTriggeredAbility;
 import mage.abilities.costs.common.SacrificeTargetCost;
 import mage.abilities.effects.common.SacrificeSourceUnlessPaysEffect;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.filter.common.FilterControlledLandPermanent;
 import mage.filter.predicate.mageobject.SubtypePredicate;
 import mage.target.common.TargetControlledPermanent;
@@ -50,9 +50,8 @@ public class PrimevalForce extends CardImpl {
         filter.add(new SubtypePredicate("Forest"));
     }
     
-    public PrimevalForce(UUID ownerId) {
-        super(ownerId, 273, "Primeval Force", Rarity.RARE, new CardType[]{CardType.CREATURE}, "{2}{G}{G}{G}");
-        this.expansionSetCode = "8ED";
+    public PrimevalForce(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{2}{G}{G}{G}");
         this.subtype.add("Elemental");
 
         this.power = new MageInt(8);

@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.guildpact;
+package mage.cards.s;
 
 import java.util.UUID;
 import mage.abilities.common.AsEntersBattlefieldAbility;
@@ -34,8 +34,8 @@ import mage.abilities.effects.common.TapSourceUnlessPaysEffect;
 import mage.abilities.mana.GreenManaAbility;
 import mage.abilities.mana.RedManaAbility;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.Rarity;
 
 /**
  *
@@ -43,9 +43,8 @@ import mage.constants.Rarity;
  */
 public class StompingGround extends CardImpl {
 
-    public StompingGround(UUID ownerId) {
-        super(ownerId, 165, "Stomping Ground", Rarity.RARE, new CardType[]{CardType.LAND}, null);
-        this.expansionSetCode = "GPT";
+    public StompingGround(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.LAND},null);
         this.subtype.add("Mountain");
         this.subtype.add("Forest");
 

@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.eldritchmoon;
+package mage.cards.a;
 
 import java.util.UUID;
 import mage.MageInt;
@@ -36,8 +36,8 @@ import mage.abilities.effects.common.GainLifeEffect;
 import mage.abilities.effects.common.LoseLifeTargetEffect;
 import mage.abilities.keyword.EmergeAbility;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.target.common.TargetOpponent;
 
 /**
@@ -46,9 +46,8 @@ import mage.target.common.TargetOpponent;
  */
 public class AbundantMaw extends CardImpl {
 
-    public AbundantMaw(UUID ownerId) {
-        super(ownerId, 1, "Abundant Maw", Rarity.UNCOMMON, new CardType[]{CardType.CREATURE}, "{8}");
-        this.expansionSetCode = "EMN";
+    public AbundantMaw(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{8}");
         this.subtype.add("Eldrazi");
         this.subtype.add("Leech");
         this.power = new MageInt(6);

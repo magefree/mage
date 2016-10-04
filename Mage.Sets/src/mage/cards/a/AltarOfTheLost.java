@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.darkascension;
+package mage.cards.a;
 
 import java.util.UUID;
 import mage.ConditionalMana;
@@ -38,8 +38,8 @@ import mage.abilities.keyword.FlashbackAbility;
 import mage.abilities.mana.ConditionalAnyColorManaAbility;
 import mage.abilities.mana.builder.ConditionalManaBuilder;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.constants.Zone;
 import mage.game.Game;
 import mage.game.stack.Spell;
@@ -50,9 +50,8 @@ import mage.game.stack.Spell;
  */
 public class AltarOfTheLost extends CardImpl {
 
-    public AltarOfTheLost(UUID ownerId) {
-        super(ownerId, 144, "Altar of the Lost", Rarity.UNCOMMON, new CardType[]{CardType.ARTIFACT}, "{3}");
-        this.expansionSetCode = "DKA";
+    public AltarOfTheLost(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.ARTIFACT},"{3}");
 
         // Altar of the Lost enters the battlefield tapped.
         this.addAbility(new EntersBattlefieldTappedAbility());

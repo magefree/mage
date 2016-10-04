@@ -26,17 +26,17 @@
 * or implied, of BetaSteward_at_googlemail.com.
 */
 
-package mage.sets.returntoravnica;
+package mage.cards.a;
 
 import java.util.UUID;
 
 import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.MageInt;
 import mage.abilities.common.EntersBattlefieldTriggeredAbility;
 import mage.abilities.effects.common.CreateTokenEffect;
 import mage.abilities.keyword.TrampleAbility;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.game.permanent.token.WurmToken2;
 
 /**
@@ -45,9 +45,8 @@ import mage.game.permanent.token.WurmToken2;
  */
 public class ArmadaWurm extends CardImpl {
 
-    public ArmadaWurm(UUID ownerId) {
-        super(ownerId, 143, "Armada Wurm", Rarity.MYTHIC, new CardType[]{CardType.CREATURE}, "{2}{G}{G}{W}{W}");
-        this.expansionSetCode = "RTR";
+    public ArmadaWurm(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{2}{G}{G}{W}{W}");
         this.subtype.add("Wurm");
 
 

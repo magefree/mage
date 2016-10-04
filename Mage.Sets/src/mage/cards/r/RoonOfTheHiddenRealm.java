@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.commander2013;
+package mage.cards.r;
 
 import java.util.UUID;
 import mage.MageInt;
@@ -41,9 +41,9 @@ import mage.abilities.effects.common.ReturnToBattlefieldUnderOwnerControlTargetE
 import mage.abilities.keyword.TrampleAbility;
 import mage.abilities.keyword.VigilanceAbility;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Outcome;
-import mage.constants.Rarity;
 import mage.constants.Zone;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.filter.predicate.permanent.AnotherPredicate;
@@ -65,9 +65,8 @@ public class RoonOfTheHiddenRealm extends CardImpl {
         filter.add(new AnotherPredicate());
     }
 
-    public RoonOfTheHiddenRealm(UUID ownerId) {
-        super(ownerId, 206, "Roon of the Hidden Realm", Rarity.MYTHIC, new CardType[]{CardType.CREATURE}, "{2}{G}{W}{U}");
-        this.expansionSetCode = "C13";
+    public RoonOfTheHiddenRealm(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{2}{G}{W}{U}");
         this.supertype.add("Legendary");
         this.subtype.add("Rhino");
         this.subtype.add("Soldier");

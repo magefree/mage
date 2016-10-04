@@ -25,14 +25,14 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.portalthreekingdoms;
+package mage.cards.t;
 
 import java.util.UUID;
 import mage.abilities.effects.common.combat.MustBeBlockedByAllTargetEffect;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Duration;
-import mage.constants.Rarity;
 import mage.target.common.TargetCreaturePermanent;
 
 /**
@@ -41,9 +41,8 @@ import mage.target.common.TargetCreaturePermanent;
  */
 public class TauntingChallenge extends CardImpl {
 
-    public TauntingChallenge(UUID ownerId) {
-        super(ownerId, 152, "Taunting Challenge", Rarity.RARE, new CardType[]{CardType.SORCERY}, "{1}{G}{G}");
-        this.expansionSetCode = "PTK";
+    public TauntingChallenge(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{1}{G}{G}");
 
         // All creatures able to block target creature this turn do so.
         this.getSpellAbility().addEffect(new MustBeBlockedByAllTargetEffect(Duration.EndOfTurn));

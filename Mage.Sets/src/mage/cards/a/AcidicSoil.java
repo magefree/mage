@@ -25,16 +25,16 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.urzassaga;
+package mage.cards.a;
 
 import java.util.List;
 import java.util.UUID;
 
 import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.abilities.Ability;
 import mage.abilities.effects.OneShotEffect;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.Outcome;
 import mage.filter.common.FilterLandPermanent;
 import mage.game.Game;
@@ -47,9 +47,8 @@ import mage.players.Player;
  */
 public class AcidicSoil extends CardImpl {
 
-    public AcidicSoil(UUID ownerId) {
-        super(ownerId, 172, "Acidic Soil", Rarity.UNCOMMON, new CardType[]{CardType.SORCERY}, "{2}{R}");
-        this.expansionSetCode = "USG";
+    public AcidicSoil(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{2}{R}");
 
 
         //Acidic Soil deals damage to each player equal to the number of lands he or she controls.

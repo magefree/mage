@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.shadowmoor;
+package mage.cards.v;
 
 import java.util.UUID;
 import mage.MageInt;
@@ -36,10 +36,10 @@ import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.costs.mana.ManaCostsImpl;
 import mage.abilities.effects.ContinuousRuleModifyingEffectImpl;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Duration;
 import mage.constants.Outcome;
-import mage.constants.Rarity;
 import mage.constants.Zone;
 import mage.game.Game;
 import mage.game.events.GameEvent;
@@ -52,9 +52,8 @@ import mage.target.TargetSpell;
  */
 public class VexingShusher extends CardImpl {
 
-    public VexingShusher(UUID ownerId) {
-        super(ownerId, 222, "Vexing Shusher", Rarity.RARE, new CardType[]{CardType.CREATURE}, "{R/G}{R/G}");
-        this.expansionSetCode = "SHM";
+    public VexingShusher(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{R/G}{R/G}");
         this.subtype.add("Goblin");
         this.subtype.add("Shaman");
 

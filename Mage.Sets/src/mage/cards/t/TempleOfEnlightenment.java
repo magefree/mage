@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.bornofthegods;
+package mage.cards.t;
 
 import java.util.UUID;
 import mage.abilities.common.EntersBattlefieldTappedAbility;
@@ -34,8 +34,8 @@ import mage.abilities.effects.keyword.ScryEffect;
 import mage.abilities.mana.BlueManaAbility;
 import mage.abilities.mana.WhiteManaAbility;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.Rarity;
 
 /**
  *
@@ -43,9 +43,8 @@ import mage.constants.Rarity;
  */
 public class TempleOfEnlightenment extends CardImpl {
 
-    public TempleOfEnlightenment(UUID ownerId) {
-        super(ownerId, 163, "Temple of Enlightenment", Rarity.RARE, new CardType[]{CardType.LAND}, "");
-        this.expansionSetCode = "BNG";
+    public TempleOfEnlightenment(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.LAND},"");
 
         // Temple of Enlightenment enters the battlefield tapped.
         this.addAbility(new EntersBattlefieldTappedAbility());

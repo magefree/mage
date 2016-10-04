@@ -26,7 +26,7 @@
  *  or implied, of BetaSteward_at_googlemail.com.
  */
 
-package mage.sets.dragonsmaze;
+package mage.cards.s;
 
 import java.util.UUID;
 import mage.MageInt;
@@ -34,8 +34,8 @@ import mage.abilities.Ability;
 import mage.abilities.common.EntersBattlefieldTriggeredAbility;
 import mage.abilities.effects.common.ExileCardYouChooseTargetOpponentEffect;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.filter.common.FilterInstantOrSorceryCard;
 import mage.target.common.TargetOpponent;
 
@@ -47,9 +47,8 @@ import mage.target.common.TargetOpponent;
 
 public class SinCollector extends CardImpl {
 
-    public SinCollector(UUID ownerId) {
-        super(ownerId, 103, "Sin Collector", Rarity.UNCOMMON, new CardType[]{CardType.CREATURE}, "{1}{W}{B}");
-        this.expansionSetCode = "DGM";
+    public SinCollector(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{1}{W}{B}");
         this.subtype.add("Human");
         this.subtype.add("Cleric");
         this.power = new MageInt(2);

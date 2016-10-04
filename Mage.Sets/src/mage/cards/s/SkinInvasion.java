@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.shadowsoverinnistrad;
+package mage.cards.s;
 
 import java.util.UUID;
 import mage.abilities.Ability;
@@ -38,11 +38,11 @@ import mage.abilities.keyword.EnchantAbility;
 import mage.abilities.keyword.TransformAbility;
 import mage.cards.Card;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.AttachmentType;
 import mage.constants.CardType;
 import mage.constants.Duration;
 import mage.constants.Outcome;
-import mage.constants.Rarity;
 import mage.constants.Zone;
 import mage.game.Game;
 import mage.players.Player;
@@ -55,13 +55,12 @@ import mage.target.common.TargetCreaturePermanent;
  */
 public class SkinInvasion extends CardImpl {
 
-    public SkinInvasion(UUID ownerId) {
-        super(ownerId, 182, "Skin Invasion", Rarity.UNCOMMON, new CardType[]{CardType.ENCHANTMENT}, "{R}");
-        this.expansionSetCode = "SOI";
+    public SkinInvasion(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.ENCHANTMENT},"{R}");
         this.subtype.add("Aura");
 
         this.transformable = true;
-        this.secondSideCard = new SkinShedder(ownerId);
+        this.secondSideCardClazz = SkinShedder.class;
 
         // Enchant creature
         TargetPermanent auraTarget = new TargetCreaturePermanent();

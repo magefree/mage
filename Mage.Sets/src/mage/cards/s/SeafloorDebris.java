@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.odyssey;
+package mage.cards.s;
 
 import java.util.UUID;
 import mage.abilities.Ability;
@@ -34,8 +34,8 @@ import mage.abilities.costs.common.SacrificeSourceCost;
 import mage.abilities.mana.AnyColorManaAbility;
 import mage.abilities.mana.BlueManaAbility;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.Rarity;
 
 /**
  *
@@ -43,9 +43,8 @@ import mage.constants.Rarity;
  */
 public class SeafloorDebris extends CardImpl {
 
-    public SeafloorDebris(UUID ownerId) {
-        super(ownerId, 325, "Seafloor Debris", Rarity.COMMON, new CardType[]{CardType.LAND}, "");
-        this.expansionSetCode = "ODY";
+    public SeafloorDebris(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.LAND},"");
 
         // Seafloor Debris enters the battlefield tapped.
         this.addAbility(new EntersBattlefieldTappedAbility());

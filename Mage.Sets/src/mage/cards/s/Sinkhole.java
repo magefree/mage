@@ -25,13 +25,13 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.limitedalpha;
+package mage.cards.s;
 
 import java.util.UUID;
 import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.abilities.effects.common.DestroyTargetEffect;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.target.common.TargetLandPermanent;
 
 /**
@@ -40,9 +40,8 @@ import mage.target.common.TargetLandPermanent;
  */
 public class Sinkhole extends CardImpl {
 
-    public Sinkhole(UUID ownerId) {
-        super(ownerId, 38, "Sinkhole", Rarity.COMMON, new CardType[]{CardType.SORCERY}, "{B}{B}");
-        this.expansionSetCode = "LEA";
+    public Sinkhole(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{B}{B}");
 
 
         // Destroy target land.

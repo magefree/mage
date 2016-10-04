@@ -25,16 +25,16 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.shadowmoor;
+package mage.cards.t;
 
 import java.util.UUID;
 import mage.abilities.Ability;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.keyword.ConspireAbility;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Outcome;
-import mage.constants.Rarity;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.filter.predicate.Predicates;
 import mage.filter.predicate.permanent.TappedPredicate;
@@ -55,9 +55,8 @@ public class TraitorsRoar extends CardImpl {
         filter.add(Predicates.not(new TappedPredicate()));
     }
 
-    public TraitorsRoar(UUID ownerId) {
-        super(ownerId, 200, "Traitor's Roar", Rarity.COMMON, new CardType[]{CardType.SORCERY}, "{4}{B/R}");
-        this.expansionSetCode = "SHM";
+    public TraitorsRoar(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{4}{B/R}");
 
         // Tap target untapped creature. It deals damage equal to its power to its controller.
         this.getSpellAbility().addTarget(new TargetCreaturePermanent(filter));

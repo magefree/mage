@@ -25,13 +25,12 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.innistrad;
+package mage.cards.g;
 
 import java.util.Collection;
 import java.util.UUID;
 import mage.constants.CardType;
 import mage.constants.Outcome;
-import mage.constants.Rarity;
 import mage.constants.Zone;
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleActivatedAbility;
@@ -39,6 +38,7 @@ import mage.abilities.costs.common.TapSourceCost;
 import mage.abilities.effects.OneShotEffect;
 import mage.cards.Card;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.game.Game;
 import mage.players.Player;
 
@@ -48,9 +48,8 @@ import mage.players.Player;
  */
 public class GhoulcallersBell extends CardImpl {
 
-    public GhoulcallersBell(UUID ownerId) {
-        super(ownerId, 224, "Ghoulcaller's Bell", Rarity.COMMON, new CardType[]{CardType.ARTIFACT}, "{1}");
-        this.expansionSetCode = "ISD";
+    public GhoulcallersBell(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.ARTIFACT},"{1}");
 
         // {tap}: Each player puts the top card of his or her library into his or her graveyard.
         this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new GhoulcallersBellEffect(), new TapSourceCost()));

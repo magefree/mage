@@ -26,15 +26,15 @@
  *  or implied, of BetaSteward_at_googlemail.com.
  */
 
-package mage.sets.championsofkamigawa;
+package mage.cards.n;
 
 import java.util.UUID;
 
 import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.effects.common.continuous.BoostAllEffect;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.Duration;
 import mage.constants.Zone;
 import mage.filter.common.FilterCreaturePermanent;
@@ -46,9 +46,8 @@ import mage.filter.common.FilterCreaturePermanent;
 public class NightOfSoulsBetrayal extends CardImpl {
     private static FilterCreaturePermanent filter = new FilterCreaturePermanent("All creatures");
 
-    public NightOfSoulsBetrayal (UUID ownerId) {
-        super(ownerId, 133, "Night of Souls' Betrayal", Rarity.RARE, new CardType[]{CardType.ENCHANTMENT}, "{2}{B}{B}");
-        this.expansionSetCode = "CHK";
+    public NightOfSoulsBetrayal (UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.ENCHANTMENT},"{2}{B}{B}");
         this.supertype.add("Legendary");
 
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new BoostAllEffect(-1, -1, Duration.WhileOnBattlefield, filter, false)));

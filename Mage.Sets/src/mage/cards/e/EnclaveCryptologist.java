@@ -26,10 +26,9 @@
  *  or implied, of BetaSteward_at_googlemail.com.
  */
 
-package mage.sets.riseoftheeldrazi;
+package mage.cards.e;
 
 import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.constants.Zone;
 import mage.MageInt;
 import mage.abilities.Abilities;
@@ -42,6 +41,7 @@ import mage.abilities.effects.common.DrawCardSourceControllerEffect;
 import mage.abilities.effects.common.DrawDiscardControllerEffect;
 import mage.abilities.keyword.LevelerCardBuilder;
 import mage.abilities.keyword.LevelUpAbility;
+import mage.cards.CardSetInfo;
 import mage.cards.LevelerCard;
 
 import java.util.UUID;
@@ -52,9 +52,8 @@ import java.util.UUID;
  */
 public class EnclaveCryptologist extends LevelerCard {
 
-    public EnclaveCryptologist (UUID ownerId) {
-        super(ownerId, 66, "Enclave Cryptologist", Rarity.UNCOMMON, new CardType[]{CardType.CREATURE}, "{U}");
-        this.expansionSetCode = "ROE";
+    public EnclaveCryptologist (UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{U}");
         this.subtype.add("Merfolk");
         this.subtype.add("Wizard");
         this.color.setBlue(true);

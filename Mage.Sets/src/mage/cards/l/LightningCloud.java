@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.visions;
+package mage.cards.l;
 
 import java.util.UUID;
 import mage.ObjectColor;
@@ -35,8 +35,8 @@ import mage.abilities.costs.mana.ManaCostsImpl;
 import mage.abilities.effects.common.DamageTargetEffect;
 import mage.abilities.effects.common.DoIfCostPaid;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.filter.FilterSpell;
 import mage.filter.predicate.mageobject.ColorPredicate;
 import mage.target.common.TargetCreatureOrPlayer;
@@ -53,9 +53,8 @@ public class LightningCloud extends CardImpl {
         filter.add(new ColorPredicate(ObjectColor.RED));
     }
 
-    public LightningCloud(UUID ownerId) {
-        super(ownerId, 87, "Lightning Cloud", Rarity.RARE, new CardType[]{CardType.ENCHANTMENT}, "{3}{R}");
-        this.expansionSetCode = "VIS";
+    public LightningCloud(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.ENCHANTMENT},"{3}{R}");
 
         // Whenever a player casts a red spell, you may pay {R}. If you do, Lightning Cloud deals 1 damage to target creature or player.
         Ability ability = new SpellCastAllTriggeredAbility(new DoIfCostPaid(new DamageTargetEffect(1), new ManaCostsImpl("{R}")), filter, false);

@@ -25,15 +25,15 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.morningtide;
+package mage.cards.h;
 
 import java.util.UUID;
 import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.abilities.costs.mana.ManaCostsImpl;
 import mage.abilities.effects.common.CreateTokenEffect;
 import mage.abilities.keyword.ReinforceAbility;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.game.permanent.token.ElfToken;
 
 /**
@@ -42,9 +42,8 @@ import mage.game.permanent.token.ElfToken;
  */
 public class HuntingTriad extends CardImpl {
 
-    public HuntingTriad(UUID ownerId) {
-        super(ownerId, 127, "Hunting Triad", Rarity.UNCOMMON, new CardType[]{CardType.TRIBAL, CardType.SORCERY}, "{3}{G}");
-        this.expansionSetCode = "MOR";
+    public HuntingTriad(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.TRIBAL,CardType.SORCERY},"{3}{G}");
         this.subtype.add("Elf");
 
         this.getSpellAbility().addEffect(new CreateTokenEffect(new ElfToken(), 3));

@@ -26,13 +26,13 @@
 * or implied, of BetaSteward_at_googlemail.com.
 */
 
-package mage.sets.magic2011;
+package mage.cards.r;
 
 import java.util.UUID;
 import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.abilities.effects.common.CopyTargetSpellEffect;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.filter.FilterSpell;
 import mage.filter.predicate.Predicates;
 import mage.filter.predicate.mageobject.CardTypePredicate;
@@ -52,9 +52,8 @@ public class Reverberate extends CardImpl {
                 new CardTypePredicate(CardType.SORCERY)));
     }
 
-    public Reverberate(UUID ownerId) {
-        super(ownerId, 155, "Reverberate", Rarity.RARE, new CardType[]{CardType.INSTANT}, "{R}{R}");
-        this.expansionSetCode = "M11";
+    public Reverberate(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.INSTANT},"{R}{R}");
 
         
         // Copy target instant or sorcery spell. You may choose new targets for the copy.

@@ -26,12 +26,11 @@
  *  or implied, of BetaSteward_at_googlemail.com.
  */
 
-package mage.sets.zendikar;
+package mage.cards.k;
 
 import java.util.UUID;
 import mage.constants.CardType;
 import mage.constants.Outcome;
-import mage.constants.Rarity;
 import mage.constants.Zone;
 import mage.abilities.Ability;
 import mage.abilities.common.EntersBattlefieldTriggeredAbility;
@@ -40,6 +39,7 @@ import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.AddManaOfAnyColorEffect;
 import mage.abilities.mana.SimpleManaAbility;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.filter.common.FilterControlledLandPermanent;
 import mage.filter.common.FilterControlledPermanent;
 import mage.game.Game;
@@ -55,9 +55,8 @@ public class KhalniGem extends CardImpl {
 
     private static final FilterControlledPermanent filter = new FilterControlledLandPermanent();
 
-    public KhalniGem (UUID ownerId) {
-        super(ownerId, 205, "Khalni Gem", Rarity.UNCOMMON, new CardType[]{CardType.ARTIFACT}, "{4}");
-        this.expansionSetCode = "ZEN";
+    public KhalniGem (UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.ARTIFACT},"{4}");
 
         // When Khalni Gem enters the battlefield, return two lands you control to their owner's hand.
         Ability etbAbility = new EntersBattlefieldTriggeredAbility(new KhalniGemReturnToHandTargetEffect());

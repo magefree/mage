@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.khansoftarkir;
+package mage.cards.s;
 
 import java.util.UUID;
 import mage.MageInt;
@@ -36,8 +36,8 @@ import mage.abilities.effects.common.GainLifeEffect;
 import mage.abilities.effects.common.LoseLifeOpponentsEffect;
 import mage.abilities.keyword.TrampleAbility;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.Rarity;
 
 /**
  *
@@ -45,9 +45,8 @@ import mage.constants.Rarity;
  */
 public class SiegeRhino extends CardImpl {
 
-    public SiegeRhino(UUID ownerId) {
-        super(ownerId, 200, "Siege Rhino", Rarity.RARE, new CardType[]{CardType.CREATURE}, "{1}{W}{B}{G}");
-        this.expansionSetCode = "KTK";
+    public SiegeRhino(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{1}{W}{B}{G}");
         this.subtype.add("Rhino");
 
         this.power = new MageInt(4);

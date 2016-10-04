@@ -25,16 +25,16 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.portalthreekingdoms;
+package mage.cards.o;
 
 import java.util.UUID;
 import mage.abilities.Ability;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.DrawCardSourceControllerEffect;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Outcome;
-import mage.constants.Rarity;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
@@ -47,9 +47,8 @@ import mage.target.common.TargetOpponent;
  */
 public class OverwhelmingForces extends CardImpl {
 
-    public OverwhelmingForces(UUID ownerId) {
-        super(ownerId, 79, "Overwhelming Forces", Rarity.RARE, new CardType[]{CardType.SORCERY}, "{6}{B}{B}");
-        this.expansionSetCode = "PTK";
+    public OverwhelmingForces(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{6}{B}{B}");
 
         // Destroy all creatures target opponent controls. Draw a card for each creature destroyed this way.
         this.getSpellAbility().addEffect(new OverwhelmingForcesEffect());

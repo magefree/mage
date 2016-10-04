@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.timespiral;
+package mage.cards.o;
 
 import java.util.UUID;
 import mage.MageInt;
@@ -38,9 +38,9 @@ import mage.abilities.effects.common.continuous.BecomesCreatureSourceEffect;
 import mage.abilities.keyword.FlyingAbility;
 import mage.abilities.keyword.ProtectionAbility;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Duration;
-import mage.constants.Rarity;
 import mage.filter.FilterCard;
 import mage.filter.common.FilterCreatureSpell;
 import mage.filter.common.FilterEnchantmentPermanent;
@@ -54,9 +54,8 @@ import mage.game.permanent.token.Token;
  */
 public class OpalGuardian extends CardImpl {
 
-    public OpalGuardian(UUID ownerId) {
-        super(ownerId, 30, "Opal Guardian", Rarity.RARE, new CardType[]{CardType.ENCHANTMENT}, "{W}{W}{W}");
-        this.expansionSetCode = "TSP";
+    public OpalGuardian(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.ENCHANTMENT},"{W}{W}{W}");
 
         // When an opponent casts a creature spell, if Opal Guardian is an enchantment, Opal Guardian becomes a 3/4 Gargoyle creature with flying and protection from red.
         TriggeredAbility ability = new SpellCastOpponentTriggeredAbility(new BecomesCreatureSourceEffect(new OpalGuardianGargoyle(), "", Duration.WhileOnBattlefield, true, false),

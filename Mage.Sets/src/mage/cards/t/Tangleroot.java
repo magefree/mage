@@ -25,15 +25,15 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.mirrodin;
+package mage.cards.t;
 
 import java.util.UUID;
 import mage.Mana;
 import mage.abilities.common.SpellCastAllTriggeredAbility;
 import mage.abilities.effects.common.AddManaToManaPoolTargetControllerEffect;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.constants.SetTargetPointer;
 import mage.filter.common.FilterCreatureSpell;
 
@@ -43,9 +43,8 @@ import mage.filter.common.FilterCreatureSpell;
  */
 public class Tangleroot extends CardImpl {
 
-    public Tangleroot(UUID ownerId) {
-        super(ownerId, 259, "Tangleroot", Rarity.RARE, new CardType[]{CardType.ARTIFACT}, "{3}");
-        this.expansionSetCode = "MRD";
+    public Tangleroot(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.ARTIFACT},"{3}");
 
         // Whenever a player casts a creature spell, that player adds {G} to his or her mana pool.
         this.addAbility(new SpellCastAllTriggeredAbility(new AddManaToManaPoolTargetControllerEffect(Mana.GreenMana(1), "his or her"), new FilterCreatureSpell("a creature spell"), false, SetTargetPointer.PLAYER));

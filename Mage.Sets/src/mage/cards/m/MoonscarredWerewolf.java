@@ -25,11 +25,10 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.darkascension;
+package mage.cards.m;
 
 import java.util.UUID;
 import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.constants.TargetController;
 import mage.constants.Zone;
 import mage.MageInt;
@@ -45,6 +44,7 @@ import mage.abilities.keyword.TransformAbility;
 import mage.abilities.keyword.VigilanceAbility;
 import mage.abilities.mana.SimpleManaAbility;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 
 /**
  *
@@ -52,9 +52,8 @@ import mage.cards.CardImpl;
  */
 public class MoonscarredWerewolf extends CardImpl {
 
-    public MoonscarredWerewolf(UUID ownerId) {
-        super(ownerId, 125, "Moonscarred Werewolf", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "");
-        this.expansionSetCode = "DKA";
+    public MoonscarredWerewolf(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"");
         this.subtype.add("Werewolf");
 
         this.color.setGreen(true);

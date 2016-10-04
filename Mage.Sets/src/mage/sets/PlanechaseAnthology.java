@@ -31,6 +31,8 @@ package mage.sets;
 import java.util.GregorianCalendar;
 import mage.cards.ExpansionSet;
 import mage.constants.SetType;
+import mage.constants.Rarity;
+import java.util.List;
 
 /**
  *
@@ -38,7 +40,7 @@ import mage.constants.SetType;
  */
 public class PlanechaseAnthology extends ExpansionSet {
 
-    private static final PlanechaseAnthology fINSTANCE =  new PlanechaseAnthology();
+    private static final PlanechaseAnthology fINSTANCE = new PlanechaseAnthology();
 
     public static PlanechaseAnthology getInstance() {
         return fINSTANCE;

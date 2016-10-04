@@ -25,17 +25,17 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.magic2010;
+package mage.cards.c;
 
 import java.util.UUID;
 import mage.constants.CardType;
 import mage.constants.Outcome;
-import mage.constants.Rarity;
 import mage.abilities.Ability;
 import mage.abilities.costs.VariableCost;
 import mage.abilities.costs.mana.VariableManaCost;
 import mage.abilities.effects.OneShotEffect;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.filter.FilterMana;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
@@ -55,9 +55,8 @@ public class ConsumeSpirit extends CardImpl {
         filterBlack.setBlack(true);
     }
 
-    public ConsumeSpirit(UUID ownerId) {
-        super(ownerId, 89, "Consume Spirit", Rarity.UNCOMMON, new CardType[]{CardType.SORCERY}, "{X}{1}{B}");
-        this.expansionSetCode = "M10";
+    public ConsumeSpirit(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{X}{1}{B}");
 
 
         // Spend only black mana on X.

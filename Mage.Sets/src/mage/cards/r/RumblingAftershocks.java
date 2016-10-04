@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.worldwake;
+package mage.cards.r;
 
 import java.util.UUID;
 import mage.abilities.Ability;
@@ -33,9 +33,9 @@ import mage.abilities.TriggeredAbilityImpl;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.keyword.KickerAbility;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Outcome;
-import mage.constants.Rarity;
 import mage.constants.TargetController;
 import mage.constants.Zone;
 import mage.filter.common.FilterCreaturePermanent;
@@ -60,9 +60,8 @@ public class RumblingAftershocks extends CardImpl {
         filter.add(new ControllerPredicate(TargetController.YOU));
     }
 
-    public RumblingAftershocks(UUID ownerId) {
-        super(ownerId, 89, "Rumbling Aftershocks", Rarity.UNCOMMON, new CardType[]{CardType.ENCHANTMENT}, "{4}{R}");
-        this.expansionSetCode = "WWK";
+    public RumblingAftershocks(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.ENCHANTMENT},"{4}{R}");
 
 
         // Whenever you cast a kicked spell, you may have Rumbling Aftershocks deal damage to target creature or player equal to the number of times that spell was kicked.

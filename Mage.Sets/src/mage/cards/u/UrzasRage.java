@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.phyrexiavsthecoalition;
+package mage.cards.u;
 
 import java.util.UUID;
 import mage.abilities.Ability;
@@ -37,8 +37,8 @@ import mage.abilities.effects.common.CantBeCounteredSourceEffect;
 import mage.abilities.effects.common.DamageTargetEffect;
 import mage.abilities.keyword.KickerAbility;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.constants.Zone;
 import mage.target.common.TargetCreatureOrPlayer;
 
@@ -48,9 +48,8 @@ import mage.target.common.TargetCreatureOrPlayer;
  */
 public class UrzasRage extends CardImpl {
 
-    public UrzasRage(UUID ownerId) {
-        super(ownerId, 36, "Urza's Rage", Rarity.MYTHIC, new CardType[]{CardType.INSTANT}, "{2}{R}");
-        this.expansionSetCode = "DDE";
+    public UrzasRage(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.INSTANT},"{2}{R}");
 
         // Kicker {8}{R}
         this.addAbility(new KickerAbility("{8}{R}"));

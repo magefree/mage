@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.fatereforged;
+package mage.cards.m;
 
 import java.util.UUID;
 import mage.MageInt;
@@ -33,17 +33,16 @@ import mage.abilities.common.AttacksTriggeredAbility;
 import mage.abilities.effects.common.LoseLifeOpponentsEffect;
 import mage.abilities.keyword.DashAbility;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.Rarity;
 /**
  *
  * @author fireshoes
  */
 public class MarduShadowspear extends CardImpl {
 
-    public MarduShadowspear(UUID ownerId) {
-        super(ownerId, 74, "Mardu Shadowspear", Rarity.UNCOMMON, new CardType[]{CardType.CREATURE}, "{B}");
-        this.expansionSetCode = "FRF";
+    public MarduShadowspear(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{B}");
         this.subtype.add("Human");
         this.subtype.add("Warrior");
         this.power = new MageInt(1);

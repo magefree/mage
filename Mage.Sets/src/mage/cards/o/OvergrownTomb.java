@@ -26,17 +26,17 @@
  *  or implied, of BetaSteward_at_googlemail.com.
  */
 
-package mage.sets.ravnica;
+package mage.cards.o;
 
 import java.util.UUID;
 import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.abilities.common.AsEntersBattlefieldAbility;
 import mage.abilities.costs.common.PayLifeCost;
 import mage.abilities.effects.common.TapSourceUnlessPaysEffect;
 import mage.abilities.mana.BlackManaAbility;
 import mage.abilities.mana.GreenManaAbility;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 
 /**
  *
@@ -44,9 +44,8 @@ import mage.cards.CardImpl;
  */
 public class OvergrownTomb extends CardImpl {
 
-    public OvergrownTomb (UUID ownerId) {
-        super(ownerId, 279, "Overgrown Tomb", Rarity.RARE, new CardType[]{CardType.LAND}, null);
-        this.expansionSetCode = "RAV";
+    public OvergrownTomb (UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.LAND},null);
         this.subtype.add("Swamp");
         this.subtype.add("Forest");
 

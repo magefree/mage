@@ -26,10 +26,9 @@
 * or implied, of BetaSteward_at_googlemail.com.
 */
 
-package mage.sets.innistrad;
+package mage.cards.s;
 
 import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.abilities.common.EntersBattlefieldAbility;
 import mage.abilities.condition.Condition;
 import mage.abilities.condition.common.PermanentsOnTheBattlefieldCondition;
@@ -39,6 +38,7 @@ import mage.abilities.effects.common.TapSourceEffect;
 import mage.abilities.mana.BlueManaAbility;
 import mage.abilities.mana.RedManaAbility;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.filter.common.FilterLandPermanent;
 import mage.filter.predicate.Predicates;
 import mage.filter.predicate.mageobject.SubtypePredicate;
@@ -56,9 +56,8 @@ public class SulfurFalls extends CardImpl {
         filter.add(Predicates.or(new SubtypePredicate("Island"), new SubtypePredicate("Mountain")));
     }
 
-    public SulfurFalls(UUID ownerId) {
-        super(ownerId, 248, "Sulfur Falls", Rarity.RARE, new CardType[]{CardType.LAND}, null);
-        this.expansionSetCode = "ISD";
+    public SulfurFalls(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.LAND},null);
 
         Condition controls = new InvertCondition(new PermanentsOnTheBattlefieldCondition(filter, PermanentsOnTheBattlefieldCondition.CountType.MORE_THAN, 0));
         String abilityText = "tap it unless you control a Island or a Mountain";

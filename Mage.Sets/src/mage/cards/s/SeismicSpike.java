@@ -25,15 +25,15 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.ravnica;
+package mage.cards.s;
 
 import java.util.UUID;
 import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.Mana;
 import mage.abilities.effects.common.BasicManaEffect;
 import mage.abilities.effects.common.DestroyTargetEffect;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.target.common.TargetLandPermanent;
 
 /**
@@ -42,9 +42,8 @@ import mage.target.common.TargetLandPermanent;
  */
 public class SeismicSpike extends CardImpl {
 
-    public SeismicSpike(UUID ownerId) {
-        super(ownerId, 141, "Seismic Spike", Rarity.COMMON, new CardType[]{CardType.SORCERY}, "{2}{R}{R}");
-        this.expansionSetCode = "RAV";
+    public SeismicSpike(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{2}{R}{R}");
 
 
         // Destroy target land. Add {R}{R} to your mana pool.

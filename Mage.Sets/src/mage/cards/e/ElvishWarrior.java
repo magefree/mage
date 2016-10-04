@@ -25,13 +25,13 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.morningtide;
+package mage.cards.e;
 
 import java.util.UUID;
 import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.MageInt;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 
 /**
  *
@@ -39,9 +39,8 @@ import mage.cards.CardImpl;
  */
 public class ElvishWarrior extends CardImpl {
 
-    public ElvishWarrior(UUID ownerId) {
-        super(ownerId, 120, "Elvish Warrior", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{G}{G}");
-        this.expansionSetCode = "MOR";
+    public ElvishWarrior(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{G}{G}");
         this.subtype.add("Elf");
         this.subtype.add("Warrior");
 

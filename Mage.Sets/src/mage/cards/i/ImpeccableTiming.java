@@ -25,13 +25,13 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.kaladesh;
+package mage.cards.i;
 
 import java.util.UUID;
 import mage.abilities.effects.common.DamageTargetEffect;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.target.common.TargetAttackingOrBlockingCreature;
 
 /**
@@ -40,9 +40,8 @@ import mage.target.common.TargetAttackingOrBlockingCreature;
  */
 public class ImpeccableTiming extends CardImpl {
 
-    public ImpeccableTiming(UUID ownerId) {
-        super(ownerId, 19, "Impeccable Timing", Rarity.COMMON, new CardType[]{CardType.INSTANT}, "{1}{W}");
-        this.expansionSetCode = "KLD";
+    public ImpeccableTiming(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.INSTANT},"{1}{W}");
 
         // Impeccable Timing deals 3 damage to target attacking or blocking creature.
         this.getSpellAbility().addTarget(new TargetAttackingOrBlockingCreature());

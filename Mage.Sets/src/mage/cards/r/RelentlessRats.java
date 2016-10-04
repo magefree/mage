@@ -26,14 +26,13 @@
 * or implied, of BetaSteward_at_googlemail.com.
 */
 
-package mage.sets.tenthedition;
+package mage.cards.r;
 
 import java.util.UUID;
 import mage.constants.CardType;
 import mage.constants.Duration;
 import mage.constants.Layer;
 import mage.constants.Outcome;
-import mage.constants.Rarity;
 import mage.constants.SubLayer;
 import mage.constants.Zone;
 import mage.MageInt;
@@ -42,6 +41,7 @@ import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.effects.ContinuousEffectImpl;
 import mage.abilities.effects.common.InfoEffect;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.filter.predicate.mageobject.NamePredicate;
 import mage.game.Game;
@@ -59,9 +59,8 @@ public class RelentlessRats extends CardImpl {
         filter.add(new NamePredicate("Relentless Rats"));
     }
 
-    public RelentlessRats(UUID ownerId) {
-        super(ownerId, 173, "Relentless Rats", Rarity.UNCOMMON, new CardType[]{CardType.CREATURE}, "{1}{B}{B}");
-        this.expansionSetCode = "10E";
+    public RelentlessRats(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{1}{B}{B}");
         this.subtype.add("Rat");
 
         this.power = new MageInt(2);

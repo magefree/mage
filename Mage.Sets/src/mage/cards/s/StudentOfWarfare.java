@@ -26,10 +26,9 @@
  *  or implied, of BetaSteward_at_googlemail.com.
  */
 
-package mage.sets.riseoftheeldrazi;
+package mage.cards.s;
 
 import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.MageInt;
 import mage.abilities.Abilities;
 import mage.abilities.AbilitiesImpl;
@@ -39,6 +38,7 @@ import mage.abilities.keyword.DoubleStrikeAbility;
 import mage.abilities.keyword.FirstStrikeAbility;
 import mage.abilities.keyword.LevelUpAbility;
 import mage.abilities.keyword.LevelerCardBuilder;
+import mage.cards.CardSetInfo;
 import mage.cards.LevelerCard;
 
 import java.util.UUID;
@@ -49,9 +49,8 @@ import java.util.UUID;
  */
 public class StudentOfWarfare extends LevelerCard {
 
-    public StudentOfWarfare (UUID ownerId) {
-        super(ownerId, 47, "Student of Warfare", Rarity.RARE, new CardType[]{CardType.CREATURE}, "{W}");
-        this.expansionSetCode = "ROE";
+    public StudentOfWarfare (UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{W}");
         this.subtype.add("Human");
         this.subtype.add("Knight");
         this.color.setWhite(true);

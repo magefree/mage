@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.eventide;
+package mage.cards.h;
 
 import mage.MageInt;
 import mage.abilities.Ability;
@@ -39,9 +39,9 @@ import mage.abilities.effects.common.continuous.BoostSourceEffect;
 import mage.abilities.keyword.HasteAbility;
 import mage.cards.Card;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Duration;
-import mage.constants.Rarity;
 import mage.filter.common.FilterControlledPermanent;
 import mage.game.Game;
 
@@ -54,9 +54,8 @@ import java.util.UUID;
  */
 public class HeartlashCinder extends CardImpl {
 
-    public HeartlashCinder(UUID ownerId) {
-        super(ownerId, 56, "Heartlash Cinder", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{1}{R}");
-        this.expansionSetCode = "EVE";
+    public HeartlashCinder(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{1}{R}");
         this.subtype.add("Elemental");
         this.subtype.add("Warrior");
 

@@ -25,12 +25,11 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.betrayersofkamigawa;
+package mage.cards.t;
 
 import java.util.UUID;
 import mage.constants.CardType;
 import mage.constants.Duration;
-import mage.constants.Rarity;
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.common.SimpleStaticAbility;
@@ -41,6 +40,7 @@ import mage.abilities.effects.common.continuous.GainAbilityAllEffect;
 import mage.abilities.effects.common.counter.AddCountersTargetEffect;
 import mage.abilities.keyword.IndestructibleAbility;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.Zone;
 import mage.counters.CounterType;
 import mage.filter.FilterPermanent;
@@ -64,9 +64,8 @@ public class ThatWhichWasTaken extends CardImpl {
         filterIndestructible.add(new CounterPredicate(CounterType.DIVINITY));
     }
 
-    public ThatWhichWasTaken(UUID ownerId) {
-        super(ownerId, 162, "That Which Was Taken", Rarity.RARE, new CardType[]{CardType.ARTIFACT}, "{5}");
-        this.expansionSetCode = "BOK";
+    public ThatWhichWasTaken(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.ARTIFACT},"{5}");
         this.supertype.add("Legendary");
 
         // {4}, {T}: Put a divinity counter on target permanent other than That Which Was Taken.

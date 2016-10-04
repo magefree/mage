@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.eldritchmoon;
+package mage.cards.s;
 
 import java.util.UUID;
 import mage.MageInt;
@@ -35,9 +35,10 @@ import mage.abilities.costs.mana.ManaCostsImpl;
 import mage.abilities.effects.common.TransformSourceEffect;
 import mage.abilities.effects.common.combat.CantBeBlockedByCreaturesWithLessPowerEffect;
 import mage.abilities.keyword.TransformAbility;
+import mage.cards.h.HowlingChorus;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.constants.Zone;
 
 /**
@@ -46,16 +47,15 @@ import mage.constants.Zone;
  */
 public class ShrillHowler extends CardImpl {
 
-    public ShrillHowler(UUID ownerId) {
-        super(ownerId, 168, "Shrill Howler", Rarity.UNCOMMON, new CardType[]{CardType.CREATURE}, "{2}{G}");
-        this.expansionSetCode = "EMN";
+    public ShrillHowler(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{2}{G}");
         this.subtype.add("Werewolf");
         this.subtype.add("Horror");
         this.power = new MageInt(3);
         this.toughness = new MageInt(1);
 
         this.transformable = true;
-        this.secondSideCard = new HowlingChorus(ownerId);
+        this.secondSideCardClazz = HowlingChorus.class;
 
         // Creatures with power less than Shrill Howler's power can't block it.
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new CantBeBlockedByCreaturesWithLessPowerEffect()));

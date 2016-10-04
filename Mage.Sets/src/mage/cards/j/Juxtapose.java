@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.fifthedition;
+package mage.cards.j;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -38,13 +38,13 @@ import mage.MageObject;
 import mage.abilities.Ability;
 import mage.abilities.effects.ContinuousEffectImpl;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.cards.Cards;
 import mage.cards.CardsImpl;
 import mage.constants.CardType;
 import mage.constants.Duration;
 import mage.constants.Layer;
 import mage.constants.Outcome;
-import mage.constants.Rarity;
 import mage.constants.SubLayer;
 import mage.constants.Zone;
 import mage.filter.FilterCard;
@@ -63,9 +63,8 @@ import mage.target.TargetPlayer;
  */
 public class Juxtapose extends CardImpl {
 
-    public Juxtapose(UUID ownerId) {
-        super(ownerId, 95, "Juxtapose", Rarity.RARE, new CardType[]{CardType.SORCERY}, "{3}{U}");
-        this.expansionSetCode = "5ED";
+    public Juxtapose(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{3}{U}");
 
 
         // You and target player exchange control of the creature you each control with the highest converted mana cost. Then exchange control of artifacts the same way. If two or more permanents a player controls are tied for highest cost, their controller chooses one of them.

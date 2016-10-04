@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.battleforzendikar;
+package mage.cards.a;
 
 import java.util.UUID;
 import mage.MageInt;
@@ -34,8 +34,8 @@ import mage.abilities.dynamicvalue.common.PermanentsOnBattlefieldCount;
 import mage.abilities.effects.common.GainLifeEffect;
 import mage.abilities.keyword.FlyingAbility;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.filter.common.FilterControlledCreaturePermanent;
 
 /**
@@ -44,9 +44,8 @@ import mage.filter.common.FilterControlledCreaturePermanent;
  */
 public class AngelOfRenewal extends CardImpl {
 
-    public AngelOfRenewal(UUID ownerId) {
-        super(ownerId, 18, "Angel of Renewal", Rarity.UNCOMMON, new CardType[]{CardType.CREATURE}, "{5}{W}");
-        this.expansionSetCode = "BFZ";
+    public AngelOfRenewal(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{5}{W}");
         this.subtype.add("Angel");
         this.subtype.add("Ally");
         this.power = new MageInt(4);

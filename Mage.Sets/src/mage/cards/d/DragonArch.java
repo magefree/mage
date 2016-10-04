@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.apocalypse;
+package mage.cards.d;
 
 import java.util.UUID;
 import mage.abilities.Ability;
@@ -34,8 +34,8 @@ import mage.abilities.costs.common.TapSourceCost;
 import mage.abilities.costs.mana.ManaCostsImpl;
 import mage.abilities.effects.common.PutPermanentOnBattlefieldEffect;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.constants.Zone;
 import mage.filter.common.FilterCreatureCard;
 import mage.filter.predicate.mageobject.MulticoloredPredicate;
@@ -53,9 +53,8 @@ public class DragonArch extends CardImpl {
         filter.add(new MulticoloredPredicate());
     }
 
-    public DragonArch(UUID ownerId) {
-        super(ownerId, 135, "Dragon Arch", Rarity.UNCOMMON, new CardType[]{CardType.ARTIFACT}, "{5}");
-        this.expansionSetCode = "APC";
+    public DragonArch(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.ARTIFACT},"{5}");
 
         // {2}, {T}: You may put a multicolored creature card from your hand onto the battlefield.
         Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new PutPermanentOnBattlefieldEffect(filter),

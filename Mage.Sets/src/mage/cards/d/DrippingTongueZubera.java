@@ -26,17 +26,17 @@
  *  or implied, of BetaSteward_at_googlemail.com.
  */
 
-package mage.sets.championsofkamigawa;
+package mage.cards.d;
 
 import java.util.UUID;
 
 import mage.abilities.dynamicvalue.common.ZuberasDiedDynamicValue;
 import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.MageInt;
 import mage.abilities.common.DiesTriggeredAbility;
 import mage.abilities.effects.common.CreateTokenEffect;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.game.permanent.token.SpiritToken;
 import mage.watchers.common.ZuberasDiedWatcher;
 
@@ -46,9 +46,8 @@ import mage.watchers.common.ZuberasDiedWatcher;
  */
 public class DrippingTongueZubera extends CardImpl {
 
-    public DrippingTongueZubera (UUID ownerId) {
-        super(ownerId, 206, "Dripping-Tongue Zubera", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{1}{G}");
-        this.expansionSetCode = "CHK";
+    public DrippingTongueZubera (UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{1}{G}");
         this.subtype.add("Zubera");
         this.subtype.add("Spirit");
 

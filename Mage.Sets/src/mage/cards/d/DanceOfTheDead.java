@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.iceage;
+package mage.cards.d;
 
 import java.util.UUID;
 import mage.MageObjectReference;
@@ -49,11 +49,11 @@ import mage.abilities.effects.common.continuous.SourceEffect;
 import mage.abilities.keyword.EnchantAbility;
 import mage.cards.Card;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Duration;
 import mage.constants.Layer;
 import mage.constants.Outcome;
-import mage.constants.Rarity;
 import mage.constants.SubLayer;
 import mage.constants.TargetController;
 import mage.constants.Zone;
@@ -73,9 +73,8 @@ import mage.target.common.TargetCreaturePermanent;
  */
 public class DanceOfTheDead extends CardImpl {
 
-    public DanceOfTheDead(UUID ownerId) {
-        super(ownerId, 6, "Dance of the Dead", Rarity.UNCOMMON, new CardType[]{CardType.ENCHANTMENT}, "{1}{B}");
-        this.expansionSetCode = "ICE";
+    public DanceOfTheDead(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.ENCHANTMENT},"{1}{B}");
         this.subtype.add("Aura");
 
         // Enchant creature card in a graveyard

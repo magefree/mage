@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.returntoravnica;
+package mage.cards.c;
 
 import java.util.LinkedList;
 import java.util.List;
@@ -42,7 +42,7 @@ import mage.abilities.effects.common.CantBeCounteredSourceEffect;
 import mage.abilities.effects.common.CounterTargetEffect;
 import mage.abilities.keyword.OverloadAbility;
 import mage.cards.CardImpl;
-import mage.constants.Rarity;
+import mage.cards.CardSetInfo;
 import mage.constants.TargetController;
 import mage.constants.Zone;
 import mage.filter.FilterSpell;
@@ -65,9 +65,8 @@ public class Counterflux extends CardImpl {
         filter.add(new ControllerPredicate(TargetController.NOT_YOU));
     }
 
-    public Counterflux(UUID ownerId) {
-        super(ownerId, 153, "Counterflux", Rarity.RARE, new CardType[]{CardType.INSTANT}, "{U}{U}{R}");
-        this.expansionSetCode = "RTR";
+    public Counterflux(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.INSTANT},"{U}{U}{R}");
 
 
         // Counterflux can't be countered by spells or abilities.
@@ -85,13 +84,13 @@ public class Counterflux extends CardImpl {
         this.addAbility(new OverloadAbility(this, new CounterfluxEffect(), new ManaCostsImpl("{1}{U}{U}{R}")));
     }
 
-    public Counterflux(final mage.sets.returntoravnica.Counterflux card) {
+    public Counterflux(final Counterflux card) {
         super(card);
     }
 
     @Override
-    public mage.sets.returntoravnica.Counterflux copy() {
-        return new mage.sets.returntoravnica.Counterflux(this);
+    public Counterflux copy() {
+        return new Counterflux(this);
     }
 }
 

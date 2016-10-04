@@ -25,14 +25,14 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.magic2013;
+package mage.cards.c;
 
 import java.util.UUID;
 import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.abilities.effects.common.DamageAllControlledTargetEffect;
 import mage.abilities.effects.common.DamageTargetEffect;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.target.TargetPlayer;
 
@@ -42,9 +42,8 @@ import mage.target.TargetPlayer;
  */
 public class ChandrasFury extends CardImpl {
 
-    public ChandrasFury(UUID ownerId) {
-        super(ownerId, 124, "Chandra's Fury", Rarity.COMMON, new CardType[]{CardType.INSTANT}, "{4}{R}");
-        this.expansionSetCode = "M13";
+    public ChandrasFury(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.INSTANT},"{4}{R}");
 
 
         // Chandra's Fury deals 4 damage to target player and 1 damage to each creature that player controls.

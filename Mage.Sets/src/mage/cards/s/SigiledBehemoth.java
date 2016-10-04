@@ -26,14 +26,14 @@
  *  or implied, of BetaSteward_at_googlemail.com.
  */
 
-package mage.sets.alarareborn;
+package mage.cards.s;
 
 import java.util.UUID;
 import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.MageInt;
 import mage.abilities.keyword.ExaltedAbility;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 
 /**
  *
@@ -41,9 +41,8 @@ import mage.cards.CardImpl;
  */
 public class SigiledBehemoth extends CardImpl {
 
-    public SigiledBehemoth (UUID ownerId) {
-        super(ownerId, 79, "Sigiled Behemoth", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{4}{G}{W}");
-        this.expansionSetCode = "ARB";
+    public SigiledBehemoth (UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{4}{G}{W}");
         this.subtype.add("Beast");
 
 

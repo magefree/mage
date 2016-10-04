@@ -26,16 +26,16 @@
  *  or implied, of BetaSteward_at_googlemail.com.
  */
 
-package mage.sets.championsofkamigawa;
+package mage.cards.s;
 
 import java.util.UUID;
 import mage.constants.CardType;
 import mage.constants.Duration;
-import mage.constants.Rarity;
 import mage.abilities.dynamicvalue.DynamicValue;
 import mage.abilities.dynamicvalue.common.PermanentsOnBattlefieldCount;
 import mage.abilities.effects.common.continuous.BoostTargetEffect;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.filter.common.FilterControlledLandPermanent;
 import mage.filter.common.FilterControlledPermanent;
 import mage.target.common.TargetCreaturePermanent;
@@ -47,9 +47,8 @@ import mage.target.common.TargetCreaturePermanent;
 public class StrengthOfCedars extends CardImpl {
     private static final FilterControlledPermanent filter = new FilterControlledLandPermanent("the number of lands you control");
 
-    public StrengthOfCedars (UUID ownerId) {
-        super(ownerId, 245, "Strength of Cedars", Rarity.UNCOMMON, new CardType[]{CardType.INSTANT}, "{4}{G}");
-        this.expansionSetCode = "CHK";
+    public StrengthOfCedars (UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.INSTANT},"{4}{G}");
         this.subtype.add("Arcane");
 
 

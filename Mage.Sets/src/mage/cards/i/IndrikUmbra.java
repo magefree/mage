@@ -25,14 +25,13 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.planechase2012;
+package mage.cards.i;
 
 import java.util.UUID;
 import mage.constants.AttachmentType;
 import mage.constants.CardType;
 import mage.constants.Duration;
 import mage.constants.Outcome;
-import mage.constants.Rarity;
 import mage.constants.Zone;
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleStaticAbility;
@@ -44,6 +43,7 @@ import mage.abilities.keyword.EnchantAbility;
 import mage.abilities.keyword.FirstStrikeAbility;
 import mage.abilities.keyword.TotemArmorAbility;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.target.TargetPermanent;
 import mage.target.common.TargetCreaturePermanent;
 
@@ -53,9 +53,8 @@ import mage.target.common.TargetCreaturePermanent;
  */
 public class IndrikUmbra extends CardImpl {
 
-    public IndrikUmbra(UUID ownerId) {
-        super(ownerId, 96, "Indrik Umbra", Rarity.RARE, new CardType[]{CardType.ENCHANTMENT}, "{4}{G}{W}");
-        this.expansionSetCode = "PC2";
+    public IndrikUmbra(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.ENCHANTMENT},"{4}{G}{W}");
         this.subtype.add("Aura");
 
 

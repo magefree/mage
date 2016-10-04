@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.scourge;
+package mage.cards.p;
 
 import java.util.UUID;
 import mage.abilities.Ability;
@@ -40,13 +40,13 @@ import mage.abilities.keyword.EnchantAbility;
 import mage.abilities.keyword.FlyingAbility;
 import mage.abilities.keyword.ShroudAbility;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.choices.Choice;
 import mage.choices.ChoiceImpl;
 import mage.constants.AttachmentType;
 import mage.constants.CardType;
 import mage.constants.Duration;
 import mage.constants.Outcome;
-import mage.constants.Rarity;
 import mage.constants.Zone;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
@@ -60,9 +60,8 @@ import mage.target.common.TargetCreaturePermanent;
  */
 public class PemminsAura extends CardImpl {
 
-    public PemminsAura(UUID ownerId) {
-        super(ownerId, 45, "Pemmin's Aura", Rarity.UNCOMMON, new CardType[]{CardType.ENCHANTMENT}, "{1}{U}{U}");
-        this.expansionSetCode = "SCG";
+    public PemminsAura(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.ENCHANTMENT},"{1}{U}{U}");
         this.subtype.add("Aura");
 
         // Enchant creature

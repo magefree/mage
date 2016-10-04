@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.torment;
+package mage.cards.s;
 
 import java.util.UUID;
 import mage.MageInt;
@@ -33,8 +33,8 @@ import mage.abilities.Ability;
 import mage.abilities.common.DiesTriggeredAbility;
 import mage.abilities.effects.common.counter.DistributeCountersEffect;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.counters.CounterType;
 import mage.target.common.TargetCreaturePermanentAmount;
 
@@ -44,9 +44,8 @@ import mage.target.common.TargetCreaturePermanentAmount;
  */
 public class ShamblingSwarm extends CardImpl {
 
-    public ShamblingSwarm(UUID ownerId) {
-        super(ownerId, 82, "Shambling Swarm", Rarity.RARE, new CardType[]{CardType.CREATURE}, "{1}{B}{B}{B}");
-        this.expansionSetCode = "TOR";
+    public ShamblingSwarm(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{1}{B}{B}{B}");
         this.subtype.add("Horror");
         this.power = new MageInt(3);
         this.toughness = new MageInt(3);

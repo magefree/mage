@@ -25,15 +25,15 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.returntoravnica;
+package mage.cards.s;
 
 import java.util.UUID;
 import mage.abilities.Ability;
 import mage.abilities.common.CantBeCounteredAbility;
 import mage.abilities.effects.common.DestroyAllEffect;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.filter.common.FilterCreaturePermanent;
 
 /**
@@ -42,9 +42,8 @@ import mage.filter.common.FilterCreaturePermanent;
  */
 public class SupremeVerdict extends CardImpl {
 
-    public SupremeVerdict(UUID ownerId) {
-        super(ownerId, 201, "Supreme Verdict", Rarity.RARE, new CardType[]{CardType.SORCERY}, "{1}{W}{W}{U}");
-        this.expansionSetCode = "RTR";
+    public SupremeVerdict(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{1}{W}{W}{U}");
 
         // Supreme Verdict can't be countered.
         Ability ability = new CantBeCounteredAbility();

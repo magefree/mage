@@ -25,14 +25,14 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.stronghold;
+package mage.cards.b;
 
 import java.util.UUID;
 import mage.abilities.TriggeredAbilityImpl;
 import mage.abilities.effects.common.PutLandFromHandOntoBattlefieldEffect;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.constants.Zone;
 import mage.game.Game;
 import mage.game.events.GameEvent;
@@ -44,9 +44,8 @@ import mage.game.permanent.Permanent;
  */
 public class Burgeoning extends CardImpl {
 
-    public Burgeoning(UUID ownerId) {
-        super(ownerId, 52, "Burgeoning", Rarity.RARE, new CardType[]{CardType.ENCHANTMENT}, "{G}");
-        this.expansionSetCode = "STH";
+    public Burgeoning(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.ENCHANTMENT},"{G}");
 
         // Whenever an opponent plays a land, you may put a land card from your hand onto the battlefield.
         this.addAbility(new BurgeoningTriggeredAbility());

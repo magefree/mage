@@ -25,11 +25,10 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.darkascension;
+package mage.cards.h;
 
 import java.util.UUID;
 import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.constants.TargetController;
 import mage.constants.Zone;
 import mage.abilities.common.DiesTriggeredAbility;
@@ -39,6 +38,7 @@ import mage.abilities.costs.mana.GenericManaCost;
 import mage.abilities.effects.common.ExileTargetForSourceEffect;
 import mage.abilities.effects.common.ReturnFromExileForSourceEffect;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.filter.predicate.permanent.ControllerPredicate;
 import mage.target.common.TargetControlledCreaturePermanent;
@@ -56,9 +56,8 @@ public class Helvault extends CardImpl {
         filter.add(new ControllerPredicate(TargetController.NOT_YOU));
     }
 
-    public Helvault(UUID ownerId) {
-        super(ownerId, 151, "Helvault", Rarity.MYTHIC, new CardType[]{CardType.ARTIFACT}, "{3}");
-        this.expansionSetCode = "DKA";
+    public Helvault(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.ARTIFACT},"{3}");
         this.supertype.add("Legendary");
 
         // {1}, {tap}: Exile target creature you control.

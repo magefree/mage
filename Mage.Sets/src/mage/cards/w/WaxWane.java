@@ -25,15 +25,15 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.archenemy;
+package mage.cards.w;
 
 import java.util.UUID;
 import mage.abilities.effects.common.DestroyTargetEffect;
 import mage.abilities.effects.common.continuous.BoostTargetEffect;
+import mage.cards.CardSetInfo;
 import mage.cards.SplitCard;
 import mage.constants.CardType;
 import mage.constants.Duration;
-import mage.constants.Rarity;
 import mage.target.common.TargetCreaturePermanent;
 import mage.target.common.TargetEnchantmentPermanent;
 
@@ -43,9 +43,8 @@ import mage.target.common.TargetEnchantmentPermanent;
  */
 public class WaxWane extends SplitCard {
 
-    public WaxWane(UUID ownerId) {
-        super(ownerId, 101, "Wax", "Wane", Rarity.UNCOMMON, new CardType[]{CardType.INSTANT}, "{G}", "{W}", false);
-        this.expansionSetCode = "ARC";
+    public WaxWane(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.INSTANT},"{G}","{W}",false);
 
         // Wax
         // Target creature gets +2/+2 until end of turn.

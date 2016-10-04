@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.bornofthegods;
+package mage.cards.f;
 
 import java.util.UUID;
 import mage.abilities.condition.common.MyTurnCondition;
@@ -33,8 +33,8 @@ import mage.abilities.decorator.ConditionalOneShotEffect;
 import mage.abilities.effects.common.DestroyAllEffect;
 import mage.abilities.effects.keyword.ScryEffect;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.filter.FilterPermanent;
 import mage.filter.predicate.Predicates;
 import mage.filter.predicate.mageobject.CardTypePredicate;
@@ -51,9 +51,8 @@ public class FatedRetribution extends CardImpl {
                 new CardTypePredicate(CardType.CREATURE),
                 new CardTypePredicate(CardType.PLANESWALKER)));
     }
-    public FatedRetribution(UUID ownerId) {
-        super(ownerId, 11, "Fated Retribution", Rarity.RARE, new CardType[]{CardType.INSTANT}, "{4}{W}{W}{W}");
-        this.expansionSetCode = "BNG";
+    public FatedRetribution(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.INSTANT},"{4}{W}{W}{W}");
 
 
         // Destroy all creatures and planeswalkers. If it's your turn, scry 2.

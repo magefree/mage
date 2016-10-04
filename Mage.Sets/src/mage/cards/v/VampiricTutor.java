@@ -25,14 +25,14 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.visions;
+package mage.cards.v;
 
 import java.util.UUID;
 import mage.abilities.effects.common.LoseLifeSourceControllerEffect;
 import mage.abilities.effects.common.search.SearchLibraryPutOnLibraryEffect;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.target.common.TargetCardInLibrary;
 
 /**
@@ -41,9 +41,8 @@ import mage.target.common.TargetCardInLibrary;
  */
 public class VampiricTutor extends CardImpl {
 
-    public VampiricTutor(UUID ownerId) {
-        super(ownerId, 22, "Vampiric Tutor", Rarity.RARE, new CardType[]{CardType.INSTANT}, "{B}");
-        this.expansionSetCode = "VIS";
+    public VampiricTutor(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.INSTANT},"{B}");
 
 
         // Search your library for a card, then shuffle your library and put that card on top of it. You lose 2 life.

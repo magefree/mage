@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.bornofthegods;
+package mage.cards.s;
 
 import java.util.HashSet;
 import java.util.UUID;
@@ -34,6 +34,7 @@ import mage.abilities.Ability;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.effects.ContinuousRuleModifyingEffectImpl;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.*;
 import mage.game.Game;
 import mage.game.events.GameEvent;
@@ -46,9 +47,8 @@ import mage.watchers.Watcher;
  */
 public class SpiritOfTheLabyrinth extends CardImpl {
 
-    public SpiritOfTheLabyrinth(UUID ownerId) {
-        super(ownerId, 27, "Spirit of the Labyrinth", Rarity.RARE, new CardType[]{CardType.ENCHANTMENT, CardType.CREATURE}, "{1}{W}");
-        this.expansionSetCode = "BNG";
+    public SpiritOfTheLabyrinth(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.ENCHANTMENT,CardType.CREATURE},"{1}{W}");
         this.subtype.add("Spirit");
 
         this.power = new MageInt(3);

@@ -25,14 +25,14 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.newphyrexia;
+package mage.cards.m;
 
 import java.util.UUID;
 import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.abilities.effects.common.discard.DiscardTargetEffect;
 import mage.abilities.effects.common.DrawCardSourceControllerEffect;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.target.common.TargetOpponent;
 
 /**
@@ -41,9 +41,8 @@ import mage.target.common.TargetOpponent;
  */
 public class Mindculling extends CardImpl {
 
-    public Mindculling(UUID ownerId) {
-        super(ownerId, 39, "Mindculling", Rarity.UNCOMMON, new CardType[]{CardType.SORCERY}, "{5}{U}");
-        this.expansionSetCode = "NPH";
+    public Mindculling(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{5}{U}");
 
 
         this.getSpellAbility().addEffect(new DrawCardSourceControllerEffect(2));

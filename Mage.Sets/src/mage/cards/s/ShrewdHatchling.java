@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.eventide;
+package mage.cards.s;
 
 import java.util.UUID;
 import mage.MageInt;
@@ -39,9 +39,9 @@ import mage.abilities.effects.RestrictionEffect;
 import mage.abilities.effects.common.counter.AddCountersSourceEffect;
 import mage.abilities.effects.common.counter.RemoveCounterSourceEffect;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Duration;
-import mage.constants.Rarity;
 import mage.constants.TargetController;
 import mage.constants.Zone;
 import mage.counters.CounterType;
@@ -72,9 +72,8 @@ public class ShrewdHatchling extends CardImpl {
     private String rule = "Whenever you cast a blue spell, remove a -1/-1 counter from Shrewd Hatchling.";
     private String rule2 = "Whenever you cast a red spell, remove a -1/-1 counter from Shrewd Hatchling.";
 
-    public ShrewdHatchling(UUID ownerId) {
-        super(ownerId, 112, "Shrewd Hatchling", Rarity.UNCOMMON, new CardType[]{CardType.CREATURE}, "{3}{U/R}");
-        this.expansionSetCode = "EVE";
+    public ShrewdHatchling(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{3}{U/R}");
         this.subtype.add("Elemental");
 
         this.power = new MageInt(6);

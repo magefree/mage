@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.lorwyn;
+package mage.cards.v;
 
 import java.util.UUID;
 import mage.abilities.Ability;
@@ -36,8 +36,8 @@ import mage.abilities.effects.common.counter.AddCountersSourceEffect;
 import mage.abilities.mana.AnyColorManaAbility;
 import mage.abilities.mana.BlueManaAbility;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.counters.CounterType;
 
 /**
@@ -46,9 +46,8 @@ import mage.counters.CounterType;
  */
 public class VividCreek extends CardImpl {
 
-    public VividCreek(UUID ownerId) {
-        super(ownerId, 276, "Vivid Creek", Rarity.UNCOMMON, new CardType[]{CardType.LAND}, "");
-        this.expansionSetCode = "LRW";
+    public VividCreek(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.LAND},"");
         // Vivid Creek enters the battlefield tapped with two charge counters on it.
         Ability ability = new EntersBattlefieldAbility(new TapSourceEffect(true), false, null, "{this} enters the battlefield tapped with two charge counters on it", null);
         ability.addEffect(new AddCountersSourceEffect(CounterType.CHARGE.createInstance(2)));

@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.apocalypse;
+package mage.cards.u;
 
 import java.util.UUID;
 
@@ -34,8 +34,8 @@ import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.costs.mana.GenericManaCost;
 import mage.abilities.effects.common.continuous.BecomesChosenCreatureTypeTargetEffect;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.constants.Zone;
 import mage.target.common.TargetCreaturePermanent;
 
@@ -45,9 +45,8 @@ import mage.target.common.TargetCreaturePermanent;
  */
 public class UnnaturalSelection extends CardImpl {
 
-    public UnnaturalSelection(UUID ownerId) {
-        super(ownerId, 32, "Unnatural Selection", Rarity.RARE, new CardType[]{CardType.ENCHANTMENT}, "{1}{U}");
-        this.expansionSetCode = "APC";
+    public UnnaturalSelection(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.ENCHANTMENT},"{1}{U}");
 
         // {1}: Choose a creature type other than Wall. Target creature becomes that type until end of turn.
         Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new BecomesChosenCreatureTypeTargetEffect(true), new GenericManaCost(1));

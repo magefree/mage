@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.mirrodin;
+package mage.cards.t;
 
 import java.util.UUID;
 import mage.abilities.Ability;
@@ -34,9 +34,9 @@ import mage.abilities.effects.OneShotEffect;
 import mage.abilities.keyword.EntwineAbility;
 import mage.cards.Card;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Outcome;
-import mage.constants.Rarity;
 import mage.constants.Zone;
 import mage.game.Game;
 import mage.players.Player;
@@ -47,9 +47,8 @@ import mage.players.Player;
  */
 public class TemporalCascade extends CardImpl {
 
-    public TemporalCascade(UUID ownerId) {
-        super(ownerId, 52, "Temporal Cascade", Rarity.RARE, new CardType[]{CardType.SORCERY}, "{5}{U}{U}");
-        this.expansionSetCode = "MRD";
+    public TemporalCascade(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{5}{U}{U}");
 
         // Choose one - Each player shuffles his or her hand and graveyard into his or her library;
         this.getSpellAbility().addEffect(new TemporalCascadeShuffleEffect());

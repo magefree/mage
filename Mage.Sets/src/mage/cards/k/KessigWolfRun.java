@@ -25,10 +25,9 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.innistrad;
+package mage.cards.k;
 
 import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.costs.common.TapSourceCost;
@@ -40,6 +39,7 @@ import mage.abilities.effects.common.continuous.GainAbilityTargetEffect;
 import mage.abilities.keyword.TrampleAbility;
 import mage.abilities.mana.ColorlessManaAbility;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.target.common.TargetCreaturePermanent;
 
 import java.util.UUID;
@@ -51,9 +51,8 @@ import mage.constants.Zone;
  */
 public class KessigWolfRun extends CardImpl {
 
-    public KessigWolfRun(UUID ownerId) {
-        super(ownerId, 243, "Kessig Wolf Run", Rarity.RARE, new CardType[]{CardType.LAND}, "");
-        this.expansionSetCode = "ISD";
+    public KessigWolfRun(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.LAND},"");
 
         // {T}: Add {C} to your mana pool.
         this.addAbility(new ColorlessManaAbility());

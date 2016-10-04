@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.iceage;
+package mage.cards.w;
 
 import java.util.UUID;
 import mage.abilities.common.SimpleActivatedAbility;
@@ -34,9 +34,9 @@ import mage.abilities.effects.common.ReturnToHandSourceEffect;
 import mage.abilities.effects.common.continuous.LoseAbilityAllEffect;
 import mage.abilities.keyword.FlyingAbility;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Duration;
-import mage.constants.Rarity;
 import mage.constants.Zone;
 import mage.filter.common.FilterControlledLandPermanent;
 import mage.filter.common.FilterCreaturePermanent;
@@ -55,9 +55,8 @@ public class Whiteout extends CardImpl {
         filter.add(new SupertypePredicate("Snow"));
     }
 
-    public Whiteout(UUID ownerId) {
-        super(ownerId, 163, "Whiteout", Rarity.UNCOMMON, new CardType[]{CardType.INSTANT}, "{1}{G}");
-        this.expansionSetCode = "ICE";
+    public Whiteout(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.INSTANT},"{1}{G}");
 
         // All creatures lose flying until end of turn.
         this.getSpellAbility().addEffect(new LoseAbilityAllEffect(new FilterCreaturePermanent(), FlyingAbility.getInstance(), Duration.EndOfTurn));

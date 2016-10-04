@@ -25,15 +25,15 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.fifthedition;
+package mage.cards.r;
 
 import java.util.UUID;
 import mage.MageInt;
 import mage.ObjectColor;
 import mage.abilities.keyword.ProtectionAbility;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.filter.FilterCard;
 import mage.filter.predicate.mageobject.ColorPredicate;
 
@@ -48,9 +48,8 @@ public class RepentantBlacksmith extends CardImpl {
         protectionFilter.add(new ColorPredicate(ObjectColor.RED));
     }
 
-    public RepentantBlacksmith(UUID ownerId) {
-        super(ownerId, 330, "Repentant Blacksmith", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{1}{W}");
-        this.expansionSetCode = "5ED";
+    public RepentantBlacksmith(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{1}{W}");
         this.subtype.add("Human");
 
         this.power = new MageInt(1);

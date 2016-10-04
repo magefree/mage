@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.shadowsoverinnistrad;
+package mage.cards.n;
 
 import java.util.UUID;
 import mage.abilities.Ability;
@@ -45,10 +45,10 @@ import mage.abilities.effects.common.continuous.GainAbilityTargetEffect;
 import mage.abilities.keyword.HasteAbility;
 import mage.cards.Card;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Duration;
 import mage.constants.Outcome;
-import mage.constants.Rarity;
 import mage.constants.Zone;
 import mage.filter.FilterCard;
 import mage.filter.FilterPermanent;
@@ -78,9 +78,8 @@ public class NahiriTheHarbinger extends CardImpl {
                     new TappedPredicate()))));
     }
 
-    public NahiriTheHarbinger(UUID ownerId) {
-        super(ownerId, 247, "Nahiri, the Harbinger", Rarity.MYTHIC, new CardType[]{CardType.PLANESWALKER}, "{2}{R}{W}");
-        this.expansionSetCode = "SOI";
+    public NahiriTheHarbinger(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.PLANESWALKER},"{2}{R}{W}");
         this.subtype.add("Nahiri");
 
         this.addAbility(new PlanswalkerEntersWithLoyalityCountersAbility(4));

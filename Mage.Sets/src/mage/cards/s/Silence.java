@@ -25,17 +25,17 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.magic2010;
+package mage.cards.s;
 
 import java.util.UUID;
 import mage.MageObject;
 import mage.abilities.Ability;
 import mage.abilities.effects.ContinuousRuleModifyingEffectImpl;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Duration;
 import mage.constants.Outcome;
-import mage.constants.Rarity;
 import mage.game.Game;
 import mage.game.events.GameEvent;
 import mage.game.events.GameEvent.EventType;
@@ -46,9 +46,8 @@ import mage.game.events.GameEvent.EventType;
  */
 public class Silence extends CardImpl {
 
-    public Silence(UUID ownerId) {
-        super(ownerId, 31, "Silence", Rarity.RARE, new CardType[]{CardType.INSTANT}, "{W}");
-        this.expansionSetCode = "M10";
+    public Silence(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.INSTANT},"{W}");
 
         // Your opponents can't cast spells this turn. (Spells cast before this resolves are unaffected.)
         this.getSpellAbility().addEffect(new SilenceEffect());

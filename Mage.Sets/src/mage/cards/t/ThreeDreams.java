@@ -25,14 +25,14 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.planechase2012;
+package mage.cards.t;
 
 import java.util.UUID;
 import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.abilities.effects.common.search.SearchLibraryPutInHandEffect;
 import mage.cards.Card;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.cards.Cards;
 import mage.filter.FilterCard;
 import mage.filter.predicate.mageobject.SubtypePredicate;
@@ -45,9 +45,8 @@ import mage.target.common.TargetCardInLibrary;
  */
 public class ThreeDreams extends CardImpl {
 
-    public ThreeDreams(UUID ownerId) {
-        super(ownerId, 13, "Three Dreams", Rarity.RARE, new CardType[]{CardType.SORCERY}, "{4}{W}");
-        this.expansionSetCode = "PC2";
+    public ThreeDreams(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{4}{W}");
 
 
         // Search your library for up to three Aura cards with different names, reveal them, and put them into your hand. Then shuffle your library.

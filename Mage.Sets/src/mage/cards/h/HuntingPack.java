@@ -25,14 +25,14 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.scourge;
+package mage.cards.h;
 
 import java.util.UUID;
 import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.abilities.effects.common.CreateTokenEffect;
 import mage.abilities.keyword.StormAbility;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.game.permanent.token.BeastToken2;
 
 /**
@@ -41,9 +41,8 @@ import mage.game.permanent.token.BeastToken2;
  */
 public class HuntingPack extends CardImpl {
 
-    public HuntingPack(UUID ownerId) {
-        super(ownerId, 121, "Hunting Pack", Rarity.UNCOMMON, new CardType[]{CardType.INSTANT}, "{5}{G}{G}");
-        this.expansionSetCode = "SCG";
+    public HuntingPack(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.INSTANT},"{5}{G}{G}");
 
         // Put a 4/4 green Beast creature token onto the battlefield.
         this.getSpellAbility().addEffect(new CreateTokenEffect(new BeastToken2(), 1));

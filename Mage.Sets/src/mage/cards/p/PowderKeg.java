@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.magicplayerrewards;
+package mage.cards.p;
 
 import java.util.UUID;
 import mage.abilities.Ability;
@@ -35,9 +35,9 @@ import mage.abilities.costs.common.SacrificeSourceCost;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.counter.AddCountersSourceEffect;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Outcome;
-import mage.constants.Rarity;
 import mage.constants.TargetController;
 import mage.constants.Zone;
 import mage.counters.CounterType;
@@ -50,9 +50,8 @@ import mage.game.permanent.Permanent;
  */
 public class PowderKeg extends CardImpl {
 
-    public PowderKeg(UUID ownerId) {
-        super(ownerId, 3, "Powder Keg", Rarity.SPECIAL, new CardType[]{CardType.ARTIFACT}, "{2}");
-        this.expansionSetCode = "MPRP";
+    public PowderKeg(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.ARTIFACT},"{2}");
 
         // At the beginning of your upkeep, you may put a fuse counter on Powder Keg.
         this.addAbility(new BeginningOfUpkeepTriggeredAbility(new AddCountersSourceEffect(CounterType.FUSE.createInstance(), true), TargetController.YOU, true));

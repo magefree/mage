@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.magicorigins;
+package mage.cards.c;
 
 import java.util.UUID;
 import mage.MageInt;
@@ -42,8 +42,8 @@ import mage.abilities.effects.common.ExileAndReturnTransformedSourceEffect.Gende
 import mage.abilities.effects.common.UntapSourceEffect;
 import mage.abilities.keyword.TransformAbility;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.constants.Zone;
 import mage.filter.FilterSpell;
 import mage.filter.predicate.mageobject.ColorPredicate;
@@ -61,9 +61,8 @@ public class ChandraFireOfKaladesh extends CardImpl {
         filter.add(new ColorPredicate(ObjectColor.RED));
     }
 
-    public ChandraFireOfKaladesh(UUID ownerId) {
-        super(ownerId, 135, "Chandra, Fire of Kaladesh", Rarity.MYTHIC, new CardType[]{CardType.CREATURE}, "{1}{R}{R}");
-        this.expansionSetCode = "ORI";
+    public ChandraFireOfKaladesh(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{1}{R}{R}");
         this.supertype.add("Legendary");
         this.subtype.add("Human");
         this.subtype.add("Shaman");
@@ -71,7 +70,7 @@ public class ChandraFireOfKaladesh extends CardImpl {
         this.toughness = new MageInt(2);
 
         this.transformable = true;
-        this.secondSideCard = new ChandraRoaringFlame(ownerId);
+        this.secondSideCardClazz = ChandraRoaringFlame.class;
         
         // Whenever you cast a red spell, untap Chandra, Fire of Kaladesh.
         this.addAbility(new SpellCastControllerTriggeredAbility(new UntapSourceEffect(), filter, false));

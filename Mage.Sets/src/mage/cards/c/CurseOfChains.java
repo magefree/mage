@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.shadowmoor;
+package mage.cards.c;
 
 import java.util.UUID;
 import mage.abilities.Ability;
@@ -34,9 +34,9 @@ import mage.abilities.effects.common.AttachEffect;
 import mage.abilities.effects.common.TapEnchantedEffect;
 import mage.abilities.keyword.EnchantAbility;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Outcome;
-import mage.constants.Rarity;
 import mage.constants.TargetController;
 import mage.target.TargetPermanent;
 import mage.target.common.TargetCreaturePermanent;
@@ -47,9 +47,8 @@ import mage.target.common.TargetCreaturePermanent;
  */
 public class CurseOfChains extends CardImpl {
 
-    public CurseOfChains(UUID ownerId) {
-        super(ownerId, 139, "Curse of Chains", Rarity.COMMON, new CardType[]{CardType.ENCHANTMENT}, "{1}{W/U}");
-        this.expansionSetCode = "SHM";
+    public CurseOfChains(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.ENCHANTMENT},"{1}{W/U}");
         this.subtype.add("Aura");
 
 

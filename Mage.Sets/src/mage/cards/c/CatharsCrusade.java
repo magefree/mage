@@ -25,14 +25,14 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.avacynrestored;
+package mage.cards.c;
 
 import java.util.UUID;
 import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.abilities.common.CreatureEntersBattlefieldTriggeredAbility;
 import mage.abilities.effects.common.counter.AddCountersAllEffect;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.counters.CounterType;
 import mage.filter.common.FilterControlledCreaturePermanent;
 
@@ -42,9 +42,8 @@ import mage.filter.common.FilterControlledCreaturePermanent;
  */
 public class CatharsCrusade extends CardImpl {
 
-    public CatharsCrusade(UUID ownerId) {
-        super(ownerId, 10, "Cathars' Crusade", Rarity.RARE, new CardType[]{CardType.ENCHANTMENT}, "{3}{W}{W}");
-        this.expansionSetCode = "AVR";
+    public CatharsCrusade(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.ENCHANTMENT},"{3}{W}{W}");
 
 
         // Whenever a creature enters the battlefield under your control, put a +1/+1 counter on each creature you control.

@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.bornofthegods;
+package mage.cards.g;
 
 import java.util.UUID;
 import mage.abilities.Ability;
@@ -33,8 +33,8 @@ import mage.abilities.SpellAbility;
 import mage.abilities.effects.keyword.ScryEffect;
 import mage.abilities.effects.common.TapTargetEffect;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.game.Game;
 import mage.target.common.TargetCreaturePermanent;
@@ -47,9 +47,8 @@ public class GlimpseTheSunGod extends CardImpl {
 
     private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("creatures");
 
-    public GlimpseTheSunGod(UUID ownerId) {
-        super(ownerId, 13, "Glimpse the Sun God", Rarity.UNCOMMON, new CardType[]{CardType.INSTANT}, "{X}{W}");
-        this.expansionSetCode = "BNG";
+    public GlimpseTheSunGod(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.INSTANT},"{X}{W}");
 
 
         // Tap X target creatures. Scry 1.

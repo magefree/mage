@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.oathofthegatewatch;
+package mage.cards.t;
 
 import java.util.UUID;
 import mage.MageInt;
@@ -35,8 +35,8 @@ import mage.abilities.common.LeavesBattlefieldTriggeredAbility;
 import mage.abilities.effects.common.DrawCardTargetEffect;
 import mage.abilities.effects.common.ExileCardYouChooseTargetOpponentEffect;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.filter.FilterCard;
 import mage.filter.predicate.Predicates;
 import mage.filter.predicate.mageobject.CardTypePredicate;
@@ -54,9 +54,8 @@ public class ThoughtKnotSeer extends CardImpl {
         filter.add(Predicates.not(new CardTypePredicate(CardType.LAND)));
     }
 
-    public ThoughtKnotSeer(UUID ownerId) {
-        super(ownerId, 9, "Thought-Knot Seer", Rarity.RARE, new CardType[]{CardType.CREATURE}, "{3}{C}");
-        this.expansionSetCode = "OGW";
+    public ThoughtKnotSeer(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{3}{C}");
         this.subtype.add("Eldrazi");
         this.power = new MageInt(4);
         this.toughness = new MageInt(4);

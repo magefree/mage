@@ -26,16 +26,16 @@
  *  or implied, of BetaSteward_at_googlemail.com.
  */
 
-package mage.sets.dragonsmaze;
+package mage.cards.w;
 
 import java.util.UUID;
 import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.MageInt;
 import mage.ObjectColor;
 import mage.abilities.keyword.ForestwalkAbility;
 import mage.abilities.keyword.ProtectionAbility;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.filter.FilterObject;
 import mage.filter.predicate.mageobject.ColorPredicate;
 
@@ -52,9 +52,8 @@ public class WoodlotCrawler extends CardImpl {
         filter.add(new ColorPredicate(ObjectColor.GREEN));
     }
 
-    public WoodlotCrawler (UUID ownerId) {
-        super(ownerId, 118, "Woodlot Crawler", Rarity.UNCOMMON, new CardType[]{CardType.CREATURE}, "{U}{B}");
-        this.expansionSetCode = "DGM";
+    public WoodlotCrawler (UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{U}{B}");
         this.subtype.add("Insect");
 
         this.power = new MageInt(2);

@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.invasion;
+package mage.cards.c;
 
 import java.util.UUID;
 
@@ -36,8 +36,8 @@ import mage.abilities.costs.mana.ManaCostsImpl;
 import mage.abilities.dynamicvalue.common.DomainValue;
 import mage.abilities.effects.common.combat.CantAttackYouUnlessPayManaAllEffect;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.constants.Zone;
 import mage.game.Game;
 import mage.game.events.GameEvent;
@@ -48,9 +48,8 @@ import mage.game.events.GameEvent;
  */
 public class CollectiveRestraint extends CardImpl {
 
-    public CollectiveRestraint(UUID ownerId) {
-        super(ownerId, 49, "Collective Restraint", Rarity.RARE, new CardType[]{CardType.ENCHANTMENT}, "{3}{U}");
-        this.expansionSetCode = "INV";
+    public CollectiveRestraint(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.ENCHANTMENT},"{3}{U}");
 
         // Domain - Creatures can't attack you unless their controller pays {X} for each creature he or she controls that's attacking you, where X is the number of basic land types you control.
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new CollectiveRestraintPayManaToAttackAllEffect()));

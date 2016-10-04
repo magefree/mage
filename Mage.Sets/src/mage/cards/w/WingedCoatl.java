@@ -26,16 +26,16 @@
  *  or implied, of BetaSteward_at_googlemail.com.
  */
 
-package mage.sets.alarareborn;
+package mage.cards.w;
 
 import java.util.UUID;
 import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.MageInt;
 import mage.abilities.keyword.DeathtouchAbility;
 import mage.abilities.keyword.FlashAbility;
 import mage.abilities.keyword.FlyingAbility;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 
 /**
  *
@@ -43,9 +43,8 @@ import mage.cards.CardImpl;
  */
 public class WingedCoatl extends CardImpl {
 
-    public WingedCoatl (UUID ownerId) {
-        super(ownerId, 105, "Winged Coatl", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{1}{G}{U}");
-        this.expansionSetCode = "ARB";
+    public WingedCoatl (UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{1}{G}{U}");
         this.subtype.add("Snake");
 
 

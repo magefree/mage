@@ -25,16 +25,16 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.urzassaga;
+package mage.cards.v;
 
 import java.util.UUID;
 import mage.Mana;
 import mage.abilities.common.TapForManaAllTriggeredManaAbility;
 import mage.abilities.effects.common.AddManaToManaPoolTargetControllerEffect;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.ColoredManaSymbol;
-import mage.constants.Rarity;
 import mage.constants.SetTargetPointer;
 import mage.filter.common.FilterLandPermanent;
 import mage.filter.predicate.mageobject.SubtypePredicate;
@@ -50,9 +50,8 @@ public class VernalBloom extends CardImpl {
     static {
         filter.add(new SubtypePredicate("Forest"));
     }
-    public VernalBloom(UUID ownerId) {
-        super(ownerId, 281, "Vernal Bloom", Rarity.RARE, new CardType[]{CardType.ENCHANTMENT}, "{3}{G}");
-        this.expansionSetCode = "USG";
+    public VernalBloom(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.ENCHANTMENT},"{3}{G}");
 
 
         // Whenever a Forest is tapped for mana, its controller adds {G} to his or her mana pool.

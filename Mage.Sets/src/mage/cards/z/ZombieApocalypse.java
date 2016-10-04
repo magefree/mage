@@ -25,16 +25,16 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.darkascension;
+package mage.cards.z;
 
 import java.util.UUID;
 
 import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.abilities.Ability;
 import mage.abilities.effects.OneShotEffect;
 import mage.cards.Card;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.Outcome;
 import mage.constants.Zone;
 import mage.filter.common.FilterCreatureCard;
@@ -50,9 +50,8 @@ import mage.players.Player;
  */
 public class ZombieApocalypse extends CardImpl {
 
-    public ZombieApocalypse(UUID ownerId) {
-        super(ownerId, 80, "Zombie Apocalypse", Rarity.RARE, new CardType[]{CardType.SORCERY}, "{3}{B}{B}{B}");
-        this.expansionSetCode = "DKA";
+    public ZombieApocalypse(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{3}{B}{B}{B}");
 
 
         // Return all Zombie creature cards from your graveyard to the battlefield tapped, then destroy all Humans.

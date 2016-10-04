@@ -25,12 +25,11 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.scarsofmirrodin;
+package mage.cards.a;
 
 import java.util.UUID;
 import mage.constants.CardType;
 import mage.constants.Duration;
-import mage.constants.Rarity;
 import mage.constants.Zone;
 import mage.MageInt;
 import mage.abilities.common.SimpleStaticAbility;
@@ -40,6 +39,7 @@ import mage.abilities.effects.ContinuousEffect;
 import mage.abilities.effects.common.continuous.GainAbilitySourceEffect;
 import mage.abilities.keyword.DoubleStrikeAbility;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 
 /**
  *
@@ -49,9 +49,8 @@ public class AuriokEdgewright extends CardImpl {
 
     protected static String effectText = "Metalcraft - Auriok Edgewright has double strike as long as you control three or more artifacts.";
 
-    public AuriokEdgewright(UUID ownerId) {
-        super(ownerId, 3, "Auriok Edgewright", Rarity.UNCOMMON, new CardType[]{CardType.CREATURE}, "{W}{W}");
-        this.expansionSetCode = "SOM";
+    public AuriokEdgewright(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{W}{W}");
         this.subtype.add("Human");
         this.subtype.add("Soldier");
 

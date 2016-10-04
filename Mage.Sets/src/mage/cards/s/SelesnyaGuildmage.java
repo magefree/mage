@@ -26,18 +26,18 @@
  *  or implied, of BetaSteward_at_googlemail.com.
  */
 
-package mage.sets.ravnica;
+package mage.cards.s;
 
 import java.util.UUID;
 
 import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.MageInt;
 import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.costs.mana.ManaCostsImpl;
 import mage.abilities.effects.common.CreateTokenEffect;
 import mage.abilities.effects.common.continuous.BoostControlledEffect;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.Duration;
 import mage.constants.Zone;
 import mage.game.permanent.token.SaprolingToken;
@@ -48,9 +48,8 @@ import mage.game.permanent.token.SaprolingToken;
  */
 public class SelesnyaGuildmage extends CardImpl {
 
-    public SelesnyaGuildmage (UUID ownerId) {
-        super(ownerId, 252, "Selesnya Guildmage", Rarity.UNCOMMON, new CardType[]{CardType.CREATURE}, "{G/W}{G/W}");
-        this.expansionSetCode = "RAV";
+    public SelesnyaGuildmage (UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{G/W}{G/W}");
         this.subtype.add("Elf");
         this.subtype.add("Wizard");
 

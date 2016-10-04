@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.antiquities;
+package mage.cards.a;
 
 import java.util.UUID;
 import mage.abilities.common.SimpleStaticAbility;
@@ -35,10 +35,10 @@ import mage.abilities.effects.common.continuous.GainAbilityAttachedEffect;
 import mage.abilities.keyword.EnchantAbility;
 import mage.abilities.keyword.ProtectionAbility;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.AttachmentType;
 import mage.constants.CardType;
 import mage.constants.Outcome;
-import mage.constants.Rarity;
 import mage.constants.Zone;
 import mage.filter.common.FilterArtifactCard;
 import mage.target.TargetPermanent;
@@ -51,9 +51,8 @@ import mage.target.common.TargetCreaturePermanent;
 public class ArtifactWard extends CardImpl {
     private static final FilterArtifactCard filter = new FilterArtifactCard("artifacts");
     
-    public ArtifactWard(UUID ownerId) {
-        super(ownerId, 96, "Artifact Ward", Rarity.COMMON, new CardType[]{CardType.ENCHANTMENT}, "{W}");
-        this.expansionSetCode = "ATQ";
+    public ArtifactWard(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.ENCHANTMENT},"{W}");
         this.subtype.add("Aura");
 
         // Enchant creature

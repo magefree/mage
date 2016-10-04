@@ -25,14 +25,14 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.gatecrash;
+package mage.cards.g;
 
 import java.util.UUID;
 import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.abilities.dynamicvalue.common.PermanentsOnBattlefieldCount;
 import mage.abilities.effects.common.DamageTargetEffect;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.filter.common.FilterControlledLandPermanent;
 import mage.target.common.TargetCreaturePermanent;
 
@@ -42,9 +42,8 @@ import mage.target.common.TargetCreaturePermanent;
  */
 public class GroundAssault extends CardImpl {
 
-    public GroundAssault(UUID ownerId) {
-        super(ownerId, 168, "Ground Assault", Rarity.UNCOMMON, new CardType[]{CardType.SORCERY}, "{R}{G}");
-        this.expansionSetCode = "GTC";
+    public GroundAssault(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{R}{G}");
 
 
         // Ground Assault deals damage to target creature equal to the number of lands you control.

@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.limitedalpha;
+package mage.cards.p;
 
 import java.util.UUID;
 import mage.abilities.Ability;
@@ -35,9 +35,9 @@ import mage.abilities.effects.common.AttachEffect;
 import mage.abilities.effects.common.DamageAttachedControllerEffect;
 import mage.abilities.keyword.EnchantAbility;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Outcome;
-import mage.constants.Rarity;
 import mage.target.TargetPermanent;
 import mage.target.common.TargetLandPermanent;
 
@@ -48,9 +48,8 @@ import mage.target.common.TargetLandPermanent;
  */
 public class PsychicVenom extends CardImpl {
 
-    public PsychicVenom(UUID ownerId) {
-        super(ownerId, 76, "Psychic Venom", Rarity.COMMON, new CardType[]{CardType.ENCHANTMENT}, "{1}{U}");
-        this.expansionSetCode = "LEA";
+    public PsychicVenom(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.ENCHANTMENT},"{1}{U}");
         this.subtype.add("Aura");
 
 

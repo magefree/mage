@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.journeyintonyx;
+package mage.cards.s;
 
 import java.util.ArrayList;
 import java.util.UUID;
@@ -33,9 +33,9 @@ import mage.abilities.Ability;
 import mage.abilities.abilityword.StriveAbility;
 import mage.abilities.effects.OneShotEffect;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Outcome;
-import mage.constants.Rarity;
 import mage.constants.Zone;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
@@ -50,9 +50,8 @@ import mage.target.common.TargetCreaturePermanent;
  */
 public class SilenceTheBelievers extends CardImpl {
 
-    public SilenceTheBelievers(UUID ownerId) {
-        super(ownerId, 82, "Silence the Believers", Rarity.RARE, new CardType[]{CardType.INSTANT}, "{2}{B}{B}");
-        this.expansionSetCode = "JOU";
+    public SilenceTheBelievers(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.INSTANT},"{2}{B}{B}");
 
 
         // Strive - Silence the Believers costs 2B more to cast for each target beyond the first.

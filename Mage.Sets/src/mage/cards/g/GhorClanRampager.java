@@ -25,12 +25,11 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.gatecrash;
+package mage.cards.g;
 
 import java.util.UUID;
 
 import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.effects.common.continuous.BoostTargetEffect;
@@ -38,6 +37,7 @@ import mage.abilities.effects.common.continuous.GainAbilityTargetEffect;
 import mage.abilities.keyword.BloodrushAbility;
 import mage.abilities.keyword.TrampleAbility;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.Duration;
 
 /**
@@ -46,9 +46,8 @@ import mage.constants.Duration;
  */
 public class GhorClanRampager extends CardImpl {
 
-    public GhorClanRampager(UUID ownerId) {
-        super(ownerId, 167, "Ghor-Clan Rampager", Rarity.UNCOMMON, new CardType[]{CardType.CREATURE}, "{2}{R}{G}");
-        this.expansionSetCode = "GTC";
+    public GhorClanRampager(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{2}{R}{G}");
         this.subtype.add("Beast");
 
         this.power = new MageInt(4);

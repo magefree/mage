@@ -25,13 +25,13 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.conflux;
+package mage.cards.l;
 
 import java.util.UUID;
 import mage.abilities.effects.common.CounterTargetWithReplacementEffect;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.constants.Zone;
 import mage.constants.ZoneDetail;
 import mage.target.TargetSpell;
@@ -42,9 +42,8 @@ import mage.target.TargetSpell;
  */
 public class LapseOfCertainty extends CardImpl {
 
-    public LapseOfCertainty(UUID ownerId) {
-        super(ownerId, 9, "Lapse of Certainty", Rarity.COMMON, new CardType[]{CardType.INSTANT}, "{2}{W}");
-        this.expansionSetCode = "CON";
+    public LapseOfCertainty(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.INSTANT},"{2}{W}");
 
         // Counter target spell. If that spell is countered this way, put it on top of its owner's library instead of into that player's graveyard.
         this.getSpellAbility().addEffect(new CounterTargetWithReplacementEffect(Zone.LIBRARY, ZoneDetail.TOP));

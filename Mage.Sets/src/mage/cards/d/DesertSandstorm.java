@@ -25,13 +25,13 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.portalthreekingdoms;
+package mage.cards.d;
 
 import java.util.UUID;
 import mage.abilities.effects.common.DamageAllEffect;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.filter.common.FilterCreaturePermanent;
 
 /**
@@ -40,9 +40,8 @@ import mage.filter.common.FilterCreaturePermanent;
  */
 public class DesertSandstorm extends CardImpl {
 
-    public DesertSandstorm(UUID ownerId) {
-        super(ownerId, 107, "Desert Sandstorm", Rarity.COMMON, new CardType[]{CardType.SORCERY}, "{2}{R}");
-        this.expansionSetCode = "PTK";
+    public DesertSandstorm(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{2}{R}");
 
         // Desert Sandstorm deals 1 damage to each creature.
         this.getSpellAbility().addEffect(new DamageAllEffect(1, new FilterCreaturePermanent()));

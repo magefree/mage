@@ -25,17 +25,17 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.worldwake;
+package mage.cards.t;
 
 import java.util.UUID;
 import mage.abilities.condition.LockedInCondition;
 
 import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.abilities.condition.common.LandfallCondition;
 import mage.abilities.decorator.ConditionalContinuousEffect;
 import mage.abilities.effects.common.continuous.BoostTargetEffect;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.Duration;
 import mage.target.common.TargetCreaturePermanent;
 import mage.watchers.common.LandfallWatcher;
@@ -46,9 +46,8 @@ import mage.watchers.common.LandfallWatcher;
  */
 public class TombHex extends CardImpl {
 
-    public TombHex(UUID ownerId) {
-        super(ownerId, 69, "Tomb Hex", Rarity.COMMON, new CardType[]{CardType.INSTANT}, "{2}{B}");
-        this.expansionSetCode = "WWK";
+    public TombHex(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.INSTANT},"{2}{B}");
 
         // Target creature gets -2/-2 until end of turn.
         // Landfall - If you had a land enter the battlefield under your control this turn, that creature gets -4/-4 until end of turn instead.

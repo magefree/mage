@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.darkascension;
+package mage.cards.i;
 
 import java.util.UUID;
 
@@ -35,6 +35,7 @@ import mage.abilities.costs.mana.ManaCostsImpl;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.keyword.FlashbackAbility;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.game.Game;
 import mage.game.stack.Spell;
 import mage.players.Player;
@@ -46,9 +47,8 @@ import mage.target.TargetPlayer;
  */
 public class IncreasingConfusion extends CardImpl {
 
-    public IncreasingConfusion(UUID ownerId) {
-        super(ownerId, 41, "Increasing Confusion", Rarity.RARE, new CardType[]{CardType.SORCERY}, "{X}{U}");
-        this.expansionSetCode = "DKA";
+    public IncreasingConfusion(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{X}{U}");
 
 
         // Target player puts the top X cards of his or her library into his or her graveyard. If Increasing Confusion was cast from a graveyard, that player puts twice that many cards into his or her graveyard instead.

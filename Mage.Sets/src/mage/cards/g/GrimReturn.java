@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.magic2014;
+package mage.cards.g;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -35,8 +35,8 @@ import mage.abilities.Ability;
 import mage.abilities.effects.Effect;
 import mage.abilities.effects.common.ReturnFromGraveyardToBattlefieldTargetEffect;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.filter.FilterCard;
 import mage.filter.common.FilterCreatureCard;
 import mage.filter.predicate.Predicates;
@@ -53,9 +53,8 @@ public class GrimReturn extends CardImpl {
 
     private static final String textFilter = "creature card in a graveyard that was put there from the battlefield this turn";
 
-    public GrimReturn(UUID ownerId) {
-        super(ownerId, 100, "Grim Return", Rarity.RARE, new CardType[]{CardType.INSTANT}, "{2}{B}");
-        this.expansionSetCode = "M14";
+    public GrimReturn(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.INSTANT},"{2}{B}");
 
         // Choose target creature card in a graveyard that was put there from the battlefield this turn. Put that card onto the battlefield under your control.
         Effect effect = new ReturnFromGraveyardToBattlefieldTargetEffect();

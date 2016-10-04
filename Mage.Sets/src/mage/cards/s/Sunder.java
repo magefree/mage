@@ -25,15 +25,15 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.urzassaga;
+package mage.cards.s;
 
 import java.util.UUID;
 import mage.abilities.Ability;
 import mage.abilities.effects.OneShotEffect;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Outcome;
-import mage.constants.Rarity;
 import mage.constants.Zone;
 import mage.filter.common.FilterLandPermanent;
 import mage.game.Game;
@@ -45,9 +45,8 @@ import mage.game.permanent.Permanent;
  */
 public class Sunder extends CardImpl {
 
-    public Sunder(UUID ownerId) {
-        super(ownerId, 101, "Sunder", Rarity.RARE, new CardType[]{CardType.INSTANT}, "{3}{U}{U}");
-        this.expansionSetCode = "USG";
+    public Sunder(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.INSTANT},"{3}{U}{U}");
 
         // Return all lands to their owners' hands.
         this.getSpellAbility().addEffect(new SunderEffect());

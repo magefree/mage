@@ -25,15 +25,15 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.khansoftarkir;
+package mage.cards.e;
 
 import java.util.UUID;
 import mage.abilities.dynamicvalue.common.ManacostVariableValue;
 import mage.abilities.effects.common.CreateTokenEffect;
 import mage.abilities.keyword.DelveAbility;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.game.permanent.token.ZombieToken;
 
 /**
@@ -42,9 +42,8 @@ import mage.game.permanent.token.ZombieToken;
  */
 public class EmptyThePits extends CardImpl {
 
-    public EmptyThePits(UUID ownerId) {
-        super(ownerId, 72, "Empty the Pits", Rarity.MYTHIC, new CardType[]{CardType.INSTANT}, "{X}{X}{B}{B}{B}{B}");
-        this.expansionSetCode = "KTK";
+    public EmptyThePits(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.INSTANT},"{X}{X}{B}{B}{B}{B}");
 
 
         // Delve

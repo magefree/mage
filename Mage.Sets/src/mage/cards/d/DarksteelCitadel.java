@@ -26,14 +26,14 @@
  *  or implied, of BetaSteward_at_googlemail.com.
  */
 
-package mage.sets.darksteel;
+package mage.cards.d;
 
 import java.util.UUID;
 import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.abilities.keyword.IndestructibleAbility;
 import mage.abilities.mana.ColorlessManaAbility;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 
 /**
  *
@@ -41,9 +41,8 @@ import mage.cards.CardImpl;
  */
 public class DarksteelCitadel extends CardImpl {
 
-    public DarksteelCitadel (UUID ownerId) {
-        super(ownerId, 164, "Darksteel Citadel", Rarity.COMMON, new CardType[]{CardType.ARTIFACT, CardType.LAND}, null);
-        this.expansionSetCode = "DST";
+    public DarksteelCitadel (UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.ARTIFACT,CardType.LAND},null);
         
         // Indestructible (Effects that say "destroy" don't destroy this land.)
         this.addAbility(IndestructibleAbility.getInstance());

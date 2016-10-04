@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.eldritchmoon;
+package mage.cards.l;
 
 import java.util.UUID;
 import mage.abilities.Ability;
@@ -41,10 +41,10 @@ import mage.abilities.effects.common.PutTopCardOfLibraryIntoGraveControllerEffec
 import mage.abilities.effects.common.continuous.BoostTargetEffect;
 import mage.cards.Card;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Duration;
 import mage.constants.Outcome;
-import mage.constants.Rarity;
 import mage.constants.TargetController;
 import mage.constants.Zone;
 import mage.filter.common.FilterControlledCreaturePermanent;
@@ -63,9 +63,8 @@ import mage.target.common.TargetCreaturePermanent;
  */
 public class LilianaTheLastHope extends CardImpl {
 
-    public LilianaTheLastHope(UUID ownerId) {
-        super(ownerId, 93, "Liliana, the Last Hope", Rarity.MYTHIC, new CardType[]{CardType.PLANESWALKER}, "{1}{B}{B}");
-        this.expansionSetCode = "EMN";
+    public LilianaTheLastHope(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.PLANESWALKER},"{1}{B}{B}");
         this.subtype.add("Liliana");
 
         this.addAbility(new PlanswalkerEntersWithLoyalityCountersAbility(3));

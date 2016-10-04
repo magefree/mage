@@ -25,15 +25,15 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.saviorsofkamigawa;
+package mage.cards.o;
 
 import java.util.UUID;
 import mage.abilities.Ability;
 import mage.abilities.effects.OneShotEffect;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Outcome;
-import mage.constants.Rarity;
 import mage.filter.common.FilterCreatureSpell;
 import mage.game.Game;
 import mage.game.stack.Spell;
@@ -46,9 +46,8 @@ import mage.target.TargetSpell;
  */
 public class OverwhelmingIntellect extends CardImpl {
 
-    public OverwhelmingIntellect(UUID ownerId) {
-        super(ownerId, 51, "Overwhelming Intellect", Rarity.UNCOMMON, new CardType[]{CardType.INSTANT}, "{4}{U}{U}");
-        this.expansionSetCode = "SOK";
+    public OverwhelmingIntellect(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.INSTANT},"{4}{U}{U}");
 
         // Counter target creature spell. Draw cards equal to that spell's converted mana cost.
         this.getSpellAbility().addTarget(new TargetSpell(new FilterCreatureSpell()));

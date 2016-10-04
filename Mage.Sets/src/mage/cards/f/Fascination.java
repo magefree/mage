@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.fatereforged;
+package mage.cards.f;
 
 import java.util.UUID;
 import mage.abilities.Mode;
@@ -33,8 +33,8 @@ import mage.abilities.dynamicvalue.common.ManacostVariableValue;
 import mage.abilities.effects.common.DrawCardAllEffect;
 import mage.abilities.effects.common.PutTopCardOfLibraryIntoGraveEachPlayerEffect;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.constants.TargetController;
 
 /**
@@ -43,9 +43,8 @@ import mage.constants.TargetController;
  */
 public class Fascination extends CardImpl {
 
-    public Fascination(UUID ownerId) {
-        super(ownerId, 34, "Fascination", Rarity.UNCOMMON, new CardType[]{CardType.SORCERY}, "{X}{U}{U}");
-        this.expansionSetCode = "FRF";
+    public Fascination(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{X}{U}{U}");
 
         // Choose one -
         // * Each player draws X cards.

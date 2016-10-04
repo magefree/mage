@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.zendikar;
+package mage.cards.r;
 
 import java.util.UUID;
 import mage.abilities.condition.common.KickedCondition;
@@ -33,8 +33,8 @@ import mage.abilities.decorator.ConditionalOneShotEffect;
 import mage.abilities.effects.common.PutTokenOntoBattlefieldCopyTargetEffect;
 import mage.abilities.keyword.KickerAbility;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.target.common.TargetCreaturePermanent;
 
 /**
@@ -43,9 +43,8 @@ import mage.target.common.TargetCreaturePermanent;
  */
 public class RiteOfReplication extends CardImpl {
 
-    public RiteOfReplication(UUID ownerId) {
-        super(ownerId, 61, "Rite of Replication", Rarity.RARE, new CardType[]{CardType.SORCERY}, "{2}{U}{U}");
-        this.expansionSetCode = "ZEN";
+    public RiteOfReplication(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{2}{U}{U}");
 
         // Kicker {5}
         this.addAbility(new KickerAbility("{5}"));

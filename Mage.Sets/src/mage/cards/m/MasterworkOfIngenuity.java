@@ -25,14 +25,14 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.commander2014;
+package mage.cards.m;
 
 import java.util.UUID;
 import mage.abilities.common.EntersBattlefieldAbility;
 import mage.abilities.effects.common.CopyPermanentEffect;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.filter.FilterPermanent;
 import mage.filter.predicate.mageobject.CardTypePredicate;
 import mage.filter.predicate.mageobject.SubtypePredicate;
@@ -50,9 +50,8 @@ public class MasterworkOfIngenuity extends CardImpl {
         filter.add(new SubtypePredicate("Equipment"));
     }
 
-    public MasterworkOfIngenuity(UUID ownerId) {
-        super(ownerId, 57, "Masterwork of Ingenuity", Rarity.RARE, new CardType[]{CardType.ARTIFACT}, "{1}");
-        this.expansionSetCode = "C14";
+    public MasterworkOfIngenuity(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.ARTIFACT},"{1}");
         this.subtype.add("Equipment");
 
         // You may have Masterwork of Ingenuity enter the battlefield as a copy of any Equipment on the battlefield.

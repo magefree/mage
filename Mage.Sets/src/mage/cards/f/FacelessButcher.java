@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.timeshifted;
+package mage.cards.f;
 
 import java.util.UUID;
 import mage.MageInt;
@@ -36,8 +36,8 @@ import mage.abilities.effects.Effect;
 import mage.abilities.effects.common.ExileTargetForSourceEffect;
 import mage.abilities.effects.common.ReturnFromExileForSourceEffect;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.constants.Zone;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.filter.predicate.permanent.AnotherPredicate;
@@ -59,9 +59,8 @@ public class FacelessButcher extends CardImpl {
     }
 
 
-    public FacelessButcher(UUID ownerId) {
-        super(ownerId, 43, "Faceless Butcher", Rarity.SPECIAL, new CardType[]{CardType.CREATURE}, "{2}{B}{B}");
-        this.expansionSetCode = "TSB";
+    public FacelessButcher(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{2}{B}{B}");
         this.subtype.add("Nightmare");
         this.subtype.add("Horror");
         this.power = new MageInt(2);

@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.shardsofalara;
+package mage.cards.p;
 
 import java.util.UUID;
 import mage.MageInt;
@@ -36,9 +36,9 @@ import mage.abilities.effects.Effect;
 import mage.abilities.effects.OneShotEffect;
 import mage.cards.Card;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Outcome;
-import mage.constants.Rarity;
 import mage.constants.Zone;
 import mage.game.Game;
 import mage.game.events.GameEvent;
@@ -54,9 +54,8 @@ import mage.target.targetpointer.FixedTarget;
  */
 public class PrinceOfThralls extends CardImpl {
 
-    public PrinceOfThralls(UUID ownerId) {
-        super(ownerId, 182, "Prince of Thralls", Rarity.MYTHIC, new CardType[]{CardType.CREATURE}, "{4}{U}{B}{B}{R}");
-        this.expansionSetCode = "ALA";
+    public PrinceOfThralls(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{4}{U}{B}{B}{R}");
         this.subtype.add("Demon");
 
         this.power = new MageInt(7);

@@ -25,12 +25,11 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.urzassaga;
+package mage.cards.p;
 
 import java.util.UUID;
 
 import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.abilities.TriggeredAbility;
 import mage.abilities.common.OnEventTriggeredAbility;
 import mage.abilities.common.SimpleActivatedAbility;
@@ -40,6 +39,7 @@ import mage.abilities.decorator.ConditionalTriggeredAbility;
 import mage.abilities.effects.common.DamageEverythingEffect;
 import mage.abilities.effects.common.SacrificeSourceEffect;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.TargetController;
 import mage.constants.Zone;
 import mage.game.events.GameEvent;
@@ -52,9 +52,8 @@ public class Pestilence extends CardImpl {
 
     private static final String ruleText = "At the beginning of the end step, if no creatures are on the battlefield, sacrifice Pestilence.";
 
-    public Pestilence(UUID ownerId) {
-        super(ownerId, 147, "Pestilence", Rarity.COMMON, new CardType[]{CardType.ENCHANTMENT}, "{2}{B}{B}");
-        this.expansionSetCode = "USG";
+    public Pestilence(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.ENCHANTMENT},"{2}{B}{B}");
 
         // At the beginning of the end step, if no creatures are on the battlefield, sacrifice Pestilence.
         TriggeredAbility triggered = new OnEventTriggeredAbility(GameEvent.EventType.END_TURN_STEP_PRE, "beginning of the end step", true, new SacrificeSourceEffect());

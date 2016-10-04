@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.kaladesh;
+package mage.cards.d;
 
 import java.util.UUID;
 import mage.MageObject;
@@ -33,11 +33,11 @@ import mage.abilities.Ability;
 import mage.abilities.effects.OneShotEffect;
 import mage.cards.Card;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.cards.Cards;
 import mage.cards.CardsImpl;
 import mage.constants.CardType;
 import mage.constants.Outcome;
-import mage.constants.Rarity;
 import mage.constants.Zone;
 import mage.filter.common.FilterCreatureCard;
 import mage.game.Game;
@@ -51,9 +51,8 @@ import mage.target.common.TargetOpponent;
  */
 public class DubiousChallenge extends CardImpl {
 
-    public DubiousChallenge(UUID ownerId) {
-        super(ownerId, 152, "Dubious Challenge", Rarity.RARE, new CardType[]{CardType.SORCERY}, "{3}{G}");
-        this.expansionSetCode = "KLD";
+    public DubiousChallenge(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{3}{G}");
 
         // Look at the top ten cards of your library, exile up to two creature cards from among them, then shuffle your library. Target opponent may choose one of the exiled cards and put it onto the battlefield under his or her control. Put the rest onto the battlefield under your control.
         getSpellAbility().addEffect(new DubiousChallengeEffect());

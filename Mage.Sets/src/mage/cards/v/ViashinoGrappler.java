@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.invasion;
+package mage.cards.v;
 
 import java.util.UUID;
 
@@ -36,6 +36,7 @@ import mage.abilities.costs.mana.ColoredManaCost;
 import mage.abilities.effects.common.continuous.GainAbilitySourceEffect;
 import mage.abilities.keyword.TrampleAbility;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 
 /**
  *
@@ -43,9 +44,8 @@ import mage.cards.CardImpl;
  */
 public class ViashinoGrappler extends CardImpl {
 
-    public ViashinoGrappler(UUID ownerId) {
-        super(ownerId, 179, "Viashino Grappler", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{2}{R}");
-        this.expansionSetCode = "INV";
+    public ViashinoGrappler(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{2}{R}");
         this.subtype.add("Viashino");
 
         this.power = new MageInt(3);

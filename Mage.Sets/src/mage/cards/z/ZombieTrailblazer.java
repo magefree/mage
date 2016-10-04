@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.torment;
+package mage.cards.z;
 
 import java.util.UUID;
 import mage.MageInt;
@@ -36,9 +36,9 @@ import mage.abilities.effects.common.continuous.BecomesBasicLandTargetEffect;
 import mage.abilities.effects.common.continuous.GainAbilityTargetEffect;
 import mage.abilities.keyword.SwampwalkAbility;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Duration;
-import mage.constants.Rarity;
 import mage.constants.Zone;
 import mage.filter.common.FilterControlledPermanent;
 import mage.filter.predicate.Predicates;
@@ -61,9 +61,8 @@ public class ZombieTrailblazer extends CardImpl {
         filter.add(Predicates.not(new TappedPredicate()));
     }
 
-    public ZombieTrailblazer(UUID ownerId) {
-        super(ownerId, 89, "Zombie Trailblazer", Rarity.UNCOMMON, new CardType[]{CardType.CREATURE}, "{B}{B}{B}");
-        this.expansionSetCode = "TOR";
+    public ZombieTrailblazer(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{B}{B}{B}");
         this.subtype.add("Zombie");
         this.subtype.add("Scout");
         this.power = new MageInt(2);

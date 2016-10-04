@@ -25,16 +25,16 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.avacynrestored;
+package mage.cards.d;
 
 import java.util.UUID;
 import mage.constants.CardType;
 import mage.constants.Outcome;
-import mage.constants.Rarity;
 import mage.abilities.Ability;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.ReturnFromGraveyardToBattlefieldTargetEffect;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.counters.CounterType;
 import mage.filter.common.FilterCreatureCard;
 import mage.game.Game;
@@ -47,9 +47,8 @@ import mage.target.common.TargetCardInYourGraveyard;
  */
 public class DefyDeath extends CardImpl {
 
-    public DefyDeath(UUID ownerId) {
-        super(ownerId, 16, "Defy Death", Rarity.UNCOMMON, new CardType[]{CardType.SORCERY}, "{3}{W}{W}");
-        this.expansionSetCode = "AVR";
+    public DefyDeath(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{3}{W}{W}");
 
 
         // Return target creature card from your graveyard to the battlefield. If it's an Angel, put two +1/+1 counters on it.

@@ -25,16 +25,16 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.theros;
+package mage.cards.r;
 
 import java.util.UUID;
 import mage.abilities.effects.common.DamageTargetEffect;
 import mage.abilities.effects.keyword.ScryEffect;
 import mage.abilities.effects.common.ruleModifying.CantRegenerateTargetEffect;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Duration;
-import mage.constants.Rarity;
 import mage.target.common.TargetCreaturePermanent;
 import mage.watchers.common.DamagedByWatcher;
 
@@ -44,9 +44,8 @@ import mage.watchers.common.DamagedByWatcher;
  */
 public class RageOfPurphoros extends CardImpl {
 
-    public RageOfPurphoros(UUID ownerId) {
-        super(ownerId, 137, "Rage of Purphoros", Rarity.COMMON, new CardType[]{CardType.SORCERY}, "{4}{R}");
-        this.expansionSetCode = "THS";
+    public RageOfPurphoros(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{4}{R}");
 
 
         // Rage of Purphoros deals 4 damage to target creature. It can't be regenerated this turn. Scry 1.

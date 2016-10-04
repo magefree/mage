@@ -26,13 +26,13 @@
  *  or implied, of BetaSteward_at_googlemail.com.
  */
 
-package mage.sets.apocalypse;
+package mage.cards.v;
 
 import java.util.UUID;
 import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.abilities.effects.common.DestroyTargetEffect;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.target.TargetPermanent;
 
 /**
@@ -41,9 +41,8 @@ import mage.target.TargetPermanent;
  */
 public class Vindicate extends CardImpl {
 
-    public Vindicate (UUID ownerId) {
-        super(ownerId, 126, "Vindicate", Rarity.RARE, new CardType[]{CardType.SORCERY}, "{1}{W}{B}");
-        this.expansionSetCode = "APC";
+    public Vindicate (UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{1}{W}{B}");
 
 
         this.getSpellAbility().addEffect(new DestroyTargetEffect());

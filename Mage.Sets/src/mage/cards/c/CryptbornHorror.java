@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.returntoravnica;
+package mage.cards.c;
 
 import java.util.UUID;
 import mage.MageInt;
@@ -35,9 +35,9 @@ import mage.abilities.dynamicvalue.common.OpponentsLostLifeCount;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.keyword.TrampleAbility;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Outcome;
-import mage.constants.Rarity;
 import mage.counters.CounterType;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
@@ -50,9 +50,8 @@ public class CryptbornHorror extends CardImpl {
 
     private static final String rule = "{this} enters the battlefield with X +1/+1 counters on it, where X is the total life lost by your opponents this turn";
 
-    public CryptbornHorror(UUID ownerId) {
-        super(ownerId, 212, "Cryptborn Horror", Rarity.RARE, new CardType[]{CardType.CREATURE}, "{1}{B/R}{B/R}");
-        this.expansionSetCode = "RTR";
+    public CryptbornHorror(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{1}{B/R}{B/R}");
         this.subtype.add("Horror");
         this.color.setBlack(true);
         this.color.setRed(true);

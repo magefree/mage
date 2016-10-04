@@ -25,14 +25,14 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.darkascension;
+package mage.cards.g;
 
 import java.util.UUID;
 import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.abilities.dynamicvalue.common.CardsInControllerGraveyardCount;
 import mage.abilities.effects.common.DrawCardSourceControllerEffect;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.filter.common.FilterCreatureCard;
 
 /**
@@ -41,9 +41,8 @@ import mage.filter.common.FilterCreatureCard;
  */
 public class GrimFlowering extends CardImpl {
 
-    public GrimFlowering(UUID ownerId) {
-        super(ownerId, 117, "Grim Flowering", Rarity.UNCOMMON, new CardType[]{CardType.SORCERY}, "{5}{G}");
-        this.expansionSetCode = "DKA";
+    public GrimFlowering(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{5}{G}");
 
 
         // Draw a card for each creature card in your graveyard.

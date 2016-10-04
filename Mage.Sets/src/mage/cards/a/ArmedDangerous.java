@@ -26,16 +26,16 @@
  *  or implied, of BetaSteward_at_googlemail.com.
  */
 
-package mage.sets.dragonsmaze;
+package mage.cards.a;
 
 import java.util.UUID;
 import mage.constants.CardType;
 import mage.constants.Duration;
-import mage.constants.Rarity;
 import mage.abilities.effects.common.combat.MustBeBlockedByAllTargetEffect;
 import mage.abilities.effects.common.continuous.BoostTargetEffect;
 import mage.abilities.effects.common.continuous.GainAbilityTargetEffect;
 import mage.abilities.keyword.DoubleStrikeAbility;
+import mage.cards.CardSetInfo;
 import mage.cards.SplitCard;
 import mage.target.common.TargetCreaturePermanent;
 
@@ -47,9 +47,8 @@ import mage.target.common.TargetCreaturePermanent;
 
 public class ArmedDangerous extends SplitCard {
 
-    public ArmedDangerous(UUID ownerId) {
-        super(ownerId, 122, "Armed", "Dangerous", Rarity.UNCOMMON, new CardType[]{CardType.SORCERY}, "{1}{R}", "{3}{G}", true);
-        this.expansionSetCode = "DGM";
+    public ArmedDangerous(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{1}{R}","{3}{G}",true);
 
         // Armed
         // Target creature gets +1/+1 and gains double strike until end of turn.

@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.dragonsmaze;
+package mage.cards.r;
 
 import java.util.UUID;
 import mage.abilities.Ability;
@@ -37,9 +37,9 @@ import mage.abilities.effects.common.DamageTargetEffect;
 import mage.abilities.effects.common.TapTargetEffect;
 import mage.abilities.effects.common.UntapTargetEffect;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Outcome;
-import mage.constants.Rarity;
 import mage.filter.FilterPermanent;
 import mage.filter.predicate.mageobject.AnotherTargetPredicate;
 import mage.game.Game;
@@ -61,9 +61,8 @@ public class RalZarek extends CardImpl {
         secondFilter.add(new AnotherTargetPredicate(2));
     }
 
-    public RalZarek(UUID ownerId) {
-        super(ownerId, 94, "Ral Zarek", Rarity.MYTHIC, new CardType[]{CardType.PLANESWALKER}, "{2}{U}{R}");
-        this.expansionSetCode = "DGM";
+    public RalZarek(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.PLANESWALKER},"{2}{U}{R}");
         this.subtype.add("Ral");
 
         this.addAbility(new PlanswalkerEntersWithLoyalityCountersAbility(4));

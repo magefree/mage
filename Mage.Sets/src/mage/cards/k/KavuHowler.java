@@ -25,13 +25,13 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.apocalypse;
+package mage.cards.k;
 
 import java.util.UUID;
 import mage.MageInt;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.abilities.common.EntersBattlefieldTriggeredAbility;
 import mage.abilities.effects.common.EnvoyEffect;
 import mage.filter.FilterCard;
@@ -49,9 +49,8 @@ public class KavuHowler extends CardImpl {
         filter.add(new SubtypePredicate("Kavu"));
     }
 
-    public KavuHowler(UUID ownerId) {
-        super(ownerId, 79, "Kavu Howler", Rarity.UNCOMMON, new CardType[]{CardType.CREATURE}, "{4}{G}{G}");
-        this.expansionSetCode = "APC";
+    public KavuHowler(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{4}{G}{G}");
         this.subtype.add("Kavu");
 
         this.power = new MageInt(4);

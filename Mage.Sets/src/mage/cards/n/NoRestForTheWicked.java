@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.urzassaga;
+package mage.cards.n;
 
 import java.util.ArrayList;
 import java.util.UUID;
@@ -35,11 +35,11 @@ import mage.abilities.costs.common.SacrificeSourceCost;
 import mage.abilities.effects.OneShotEffect;
 import mage.cards.Card;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.cards.Cards;
 import mage.cards.CardsImpl;
 import mage.constants.CardType;
 import mage.constants.Outcome;
-import mage.constants.Rarity;
 import mage.constants.WatcherScope;
 import mage.constants.Zone;
 import mage.game.Game;
@@ -54,9 +54,8 @@ import mage.watchers.Watcher;
  */
 public class NoRestForTheWicked extends CardImpl {
 
-    public NoRestForTheWicked(UUID ownerId) {
-        super(ownerId, 142, "No Rest for the Wicked", Rarity.UNCOMMON, new CardType[]{CardType.ENCHANTMENT}, "{1}{B}");
-        this.expansionSetCode = "USG";
+    public NoRestForTheWicked(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.ENCHANTMENT},"{1}{B}");
 
         // Sacrifice No Rest for the Wicked: Return to your hand all creature cards in your graveyard that were put there from the battlefield this turn.
         Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new NoRestForTheWickedEffect(), new SacrificeSourceCost());

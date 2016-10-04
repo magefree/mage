@@ -25,13 +25,13 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.limitedalpha;
+package mage.cards.t;
 
 import java.util.UUID;
 import mage.abilities.effects.common.turn.AddExtraTurnControllerEffect;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.Rarity;
 
 /**
  *
@@ -39,9 +39,8 @@ import mage.constants.Rarity;
  */
 public class TimeWalk extends CardImpl {
 
-    public TimeWalk(UUID ownerId) {
-        super(ownerId, 84, "Time Walk", Rarity.RARE, new CardType[]{CardType.SORCERY}, "{1}{U}");
-        this.expansionSetCode = "LEA";
+    public TimeWalk(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{1}{U}");
 
 
         // Take an extra turn after this one.

@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.fatereforged;
+package mage.cards.w;
 
 import java.util.UUID;
 import mage.abilities.condition.LockedInCondition;
@@ -34,9 +34,9 @@ import mage.abilities.decorator.ConditionalReplacementEffect;
 import mage.abilities.effects.Effect;
 import mage.abilities.effects.common.PreventAllDamageByAllPermanentsEffect;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Duration;
-import mage.constants.Rarity;
 import mage.constants.TargetController;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.filter.predicate.permanent.ControllerPredicate;
@@ -53,9 +53,8 @@ public class WindsOfQalSisma extends CardImpl {
         filter.add(new ControllerPredicate(TargetController.OPPONENT));
     }
 
-    public WindsOfQalSisma(UUID ownerId) {
-        super(ownerId, 147, "Winds of Qal Sisma", Rarity.UNCOMMON, new CardType[]{CardType.INSTANT}, "{1}{G}");
-        this.expansionSetCode = "FRF";
+    public WindsOfQalSisma(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.INSTANT},"{1}{G}");
 
         // Prevent all combat damage that would be dealt this turn.
         // Ferocious - If you control a creature with power 4 or greater, instead prevent all combat damage that would be dealt this turn by creatures your opponents control.

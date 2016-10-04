@@ -25,16 +25,16 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.saviorsofkamigawa;
+package mage.cards.r;
 
 import java.util.UUID;
 import mage.abilities.Ability;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.DrawCardSourceControllerEffect;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Outcome;
-import mage.constants.Rarity;
 import mage.filter.common.FilterArtifactOrEnchantmentPermanent;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
@@ -47,9 +47,8 @@ import mage.target.TargetPermanent;
  */
 public class RendingVines extends CardImpl {
 
-    public RendingVines(UUID ownerId) {
-        super(ownerId, 143, "Rending Vines", Rarity.COMMON, new CardType[]{CardType.INSTANT}, "{1}{G}{G}");
-        this.expansionSetCode = "SOK";
+    public RendingVines(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.INSTANT},"{1}{G}{G}");
         this.subtype.add("Arcane");
 
         // Destroy target artifact or enchantment if its converted mana cost is less than or equal to the number of cards in your hand.

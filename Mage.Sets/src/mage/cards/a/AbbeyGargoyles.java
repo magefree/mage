@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.fifthedition;
+package mage.cards.a;
 
 import java.util.UUID;
 import mage.MageInt;
@@ -33,8 +33,8 @@ import mage.ObjectColor;
 import mage.abilities.keyword.FlyingAbility;
 import mage.abilities.keyword.ProtectionAbility;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.filter.FilterObject;
 import mage.filter.predicate.mageobject.ColorPredicate;
 
@@ -49,9 +49,8 @@ public class AbbeyGargoyles extends CardImpl {
         filter.add(new ColorPredicate(ObjectColor.RED));
     }
     
-    public AbbeyGargoyles(UUID ownerId) {
-        super(ownerId, 277, "Abbey Gargoyles", Rarity.UNCOMMON, new CardType[]{CardType.CREATURE}, "{2}{W}{W}{W}");
-        this.expansionSetCode = "5ED";
+    public AbbeyGargoyles(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{2}{W}{W}{W}");
         this.subtype.add("Gargoyle");
         this.power = new MageInt(3);
         this.toughness = new MageInt(4);

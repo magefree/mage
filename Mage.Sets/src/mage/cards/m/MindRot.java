@@ -26,13 +26,13 @@
  *  or implied, of BetaSteward_at_googlemail.com.
  */
 
-package mage.sets.tenthedition;
+package mage.cards.m;
 
 import java.util.UUID;
 import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.abilities.effects.common.discard.DiscardTargetEffect;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.target.TargetPlayer;
 
 /**
@@ -41,9 +41,8 @@ import mage.target.TargetPlayer;
  */
 public class MindRot extends CardImpl {
 
-    public MindRot(UUID ownerId){
-        super(ownerId, 159, "Mind Rot", Rarity.COMMON, new CardType[]{CardType.SORCERY},"{2}{B}");
-        this.expansionSetCode = "10E";
+    public MindRot(UUID ownerId, CardSetInfo setInfo){
+        super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{2}{B}");
 
         this.getSpellAbility().addTarget(new TargetPlayer());
         this.getSpellAbility().addEffect(new DiscardTargetEffect(2));

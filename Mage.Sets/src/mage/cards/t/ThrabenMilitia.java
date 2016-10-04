@@ -25,13 +25,13 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.innistrad;
+package mage.cards.t;
 
 import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.MageInt;
 import mage.abilities.keyword.TrampleAbility;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 
 import java.util.UUID;
 
@@ -40,9 +40,8 @@ import java.util.UUID;
  */
 public class ThrabenMilitia extends CardImpl {
 
-    public ThrabenMilitia(UUID ownerId) {
-        super(ownerId, 1038, "Thraben Militia", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "");
-        this.expansionSetCode = "ISD";
+    public ThrabenMilitia(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"");
         this.subtype.add("Human");
         this.subtype.add("Soldier");
         this.color.setWhite(true);

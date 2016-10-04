@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.journeyintonyx;
+package mage.cards.i;
 
 import java.util.UUID;
 import mage.abilities.Ability;
@@ -33,10 +33,10 @@ import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.keyword.ScryEffect;
 import mage.cards.Card;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.cards.CardsImpl;
 import mage.constants.CardType;
 import mage.constants.Outcome;
-import mage.constants.Rarity;
 import mage.game.Game;
 import mage.players.Player;
 
@@ -46,9 +46,8 @@ import mage.players.Player;
  */
 public class InterpretTheSigns extends CardImpl {
 
-    public InterpretTheSigns(UUID ownerId) {
-        super(ownerId, 43, "Interpret the Signs", Rarity.UNCOMMON, new CardType[]{CardType.SORCERY}, "{5}{U}");
-        this.expansionSetCode = "JOU";
+    public InterpretTheSigns(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{5}{U}");
 
 
         // Scry 3, then reveal the top card of your library. Draw cards equal to that card's converted mana cost.

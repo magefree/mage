@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.apocalypse;
+package mage.cards.p;
 
 import java.util.UUID;
 import mage.abilities.dynamicvalue.DynamicValue;
@@ -34,9 +34,9 @@ import mage.abilities.dynamicvalue.common.SignInversionDynamicValue;
 import mage.abilities.effects.Effect;
 import mage.abilities.effects.common.continuous.BoostAllEffect;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Duration;
-import mage.constants.Rarity;
 
 /**
  *
@@ -45,9 +45,8 @@ import mage.constants.Rarity;
  */
 public class PlanarDespair extends CardImpl {
 
-    public PlanarDespair(UUID ownerId) {
-        super(ownerId, 50, "Planar Despair", Rarity.RARE, new CardType[]{CardType.SORCERY}, "{3}{B}{B}");
-        this.expansionSetCode = "APC";
+    public PlanarDespair(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{3}{B}{B}");
 
         // Domain - All creatures get -1/-1 until end of turn for each basic land type among lands you control.
         DynamicValue dv = new SignInversionDynamicValue(new DomainValue());

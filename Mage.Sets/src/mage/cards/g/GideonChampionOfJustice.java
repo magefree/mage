@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.gatecrash;
+package mage.cards.g;
 
 import java.util.UUID;
 import mage.MageInt;
@@ -41,10 +41,10 @@ import mage.abilities.effects.common.continuous.BecomesCreatureSourceEffect;
 import mage.abilities.effects.common.counter.AddCountersSourceEffect;
 import mage.abilities.keyword.IndestructibleAbility;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Duration;
 import mage.constants.Outcome;
-import mage.constants.Rarity;
 import mage.counters.CounterType;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.game.Game;
@@ -58,9 +58,8 @@ import mage.target.common.TargetOpponent;
  */
 public class GideonChampionOfJustice extends CardImpl {
 
-    public GideonChampionOfJustice(UUID ownerId) {
-        super(ownerId, 13, "Gideon, Champion of Justice", Rarity.MYTHIC, new CardType[]{CardType.PLANESWALKER}, "{2}{W}{W}");
-        this.expansionSetCode = "GTC";
+    public GideonChampionOfJustice(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.PLANESWALKER},"{2}{W}{W}");
         this.subtype.add("Gideon");
 
         this.addAbility(new PlanswalkerEntersWithLoyalityCountersAbility(4));

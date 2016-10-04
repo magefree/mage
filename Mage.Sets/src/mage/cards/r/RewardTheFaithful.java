@@ -25,15 +25,15 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.scourge;
+package mage.cards.r;
 
 import java.util.UUID;
 
 import mage.abilities.dynamicvalue.common.HighestConvertedManaCostValue;
 import mage.abilities.effects.common.GainLifeTargetEffect;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.target.TargetPlayer;
 
 /**
@@ -42,9 +42,8 @@ import mage.target.TargetPlayer;
  */
 public class RewardTheFaithful extends CardImpl {
 
-    public RewardTheFaithful(UUID ownerId) {
-        super(ownerId, 22, "Reward the Faithful", Rarity.UNCOMMON, new CardType[]{CardType.INSTANT}, "{W}");
-        this.expansionSetCode = "SCG";
+    public RewardTheFaithful(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.INSTANT},"{W}");
 
         // Any number of target players each gain life equal to the highest converted mana cost among permanents you control.
         this.getSpellAbility().addEffect(new GainLifeTargetEffect(new HighestConvertedManaCostValue()));

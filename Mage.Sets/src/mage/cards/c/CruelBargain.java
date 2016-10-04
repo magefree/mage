@@ -25,13 +25,13 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.vintagemasters;
+package mage.cards.c;
 
 import mage.abilities.effects.common.DrawCardSourceControllerEffect;
 import mage.abilities.effects.common.LoseHalfLifeEffect;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.Rarity;
 
 import java.util.UUID;
 
@@ -41,9 +41,8 @@ import java.util.UUID;
  */
 public class CruelBargain extends CardImpl {
 
-    public CruelBargain(UUID ownerId) {
-        super(ownerId, 111, "Cruel Bargain", Rarity.RARE, new CardType[]{CardType.SORCERY}, "{B}{B}{B}");
-        this.expansionSetCode = "VMA";
+    public CruelBargain(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{B}{B}{B}");
 
 
         // Draw four cards. You lose half your life, rounded up.

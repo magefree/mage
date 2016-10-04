@@ -25,18 +25,18 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.timeshifted;
+package mage.cards.p;
 
 import java.util.UUID;
 
 import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.costs.common.TapSourceCost;
 import mage.abilities.effects.common.continuous.BoostTargetEffect;
 import mage.abilities.mana.GreenManaAbility;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.Duration;
 import mage.constants.Zone;
 import mage.filter.Filter;
@@ -57,9 +57,8 @@ public class Pendelhaven extends CardImpl {
         filter.add(new ToughnessPredicate(Filter.ComparisonType.Equal, 1));
     }
 
-    public Pendelhaven(UUID ownerId) {
-        super(ownerId, 120, "Pendelhaven", Rarity.COMMON, new CardType[]{CardType.LAND}, null);
-        this.expansionSetCode = "TSB";
+    public Pendelhaven(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.LAND},null);
         this.supertype.add("Legendary");
 
         // {tap}: Add {G} to your mana pool.

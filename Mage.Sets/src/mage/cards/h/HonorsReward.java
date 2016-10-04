@@ -25,14 +25,14 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.fatereforged;
+package mage.cards.h;
 
 import java.util.UUID;
 import mage.abilities.effects.common.GainLifeEffect;
 import mage.abilities.effects.keyword.BolsterEffect;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.Rarity;
 
 /**
  *
@@ -40,9 +40,8 @@ import mage.constants.Rarity;
  */
 public class HonorsReward extends CardImpl {
 
-    public HonorsReward(UUID ownerId) {
-        super(ownerId, 14, "Honor's Reward", Rarity.UNCOMMON, new CardType[]{CardType.INSTANT}, "{2}{W}");
-        this.expansionSetCode = "FRF";
+    public HonorsReward(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.INSTANT},"{2}{W}");
 
         // You gain 4 life.
         this.getSpellAbility().addEffect(new GainLifeEffect(4));

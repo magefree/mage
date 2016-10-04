@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.starwars;
+package mage.cards.a;
 
 import java.util.UUID;
 import mage.MageInt;
@@ -40,9 +40,9 @@ import mage.abilities.effects.common.combat.BlocksIfAbleTargetEffect;
 import mage.abilities.effects.common.continuous.BoostSourceEffect;
 import mage.abilities.keyword.DoubleStrikeAbility;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Duration;
-import mage.constants.Rarity;
 import mage.target.common.TargetCreaturePermanent;
 import mage.watchers.common.LifeLossOtherFromCombatWatcher;
 
@@ -52,9 +52,8 @@ import mage.watchers.common.LifeLossOtherFromCombatWatcher;
  */
 public class AsajjVentress extends CardImpl {
 
-    public AsajjVentress(UUID ownerId) {
-        super(ownerId, 183, "Asajj Ventress", Rarity.RARE, new CardType[]{CardType.CREATURE}, "{1}{U}{B}{R}");
-        this.expansionSetCode = "SWS";
+    public AsajjVentress(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{1}{U}{B}{R}");
         this.supertype.add("Legendary");
         this.subtype.add("Dathomirian");
         this.subtype.add("Sith");

@@ -25,13 +25,13 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.tempest;
+package mage.cards.d;
 
 import java.util.UUID;
 import mage.abilities.keyword.BuybackAbility;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.filter.common.FilterCreatureCard;
 import mage.target.common.TargetCardInYourGraveyard;
 import mage.abilities.effects.common.ReturnToHandTargetEffect;
@@ -44,9 +44,8 @@ public class DisturbedBurial extends CardImpl {
     
     private static FilterCreatureCard filter = new FilterCreatureCard("creature card from your graveyard");
 
-    public DisturbedBurial(UUID ownerId) {
-        super(ownerId, 23, "Disturbed Burial", Rarity.COMMON, new CardType[]{CardType.SORCERY}, "{1}{B}");
-        this.expansionSetCode = "TMP";
+    public DisturbedBurial(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{1}{B}");
 
         // Buyback {3}
         this.addAbility(new BuybackAbility("{3}"));        

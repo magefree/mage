@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.eldritchmoon;
+package mage.cards.p;
 
 import java.util.UUID;
 import mage.abilities.Ability;
@@ -33,8 +33,8 @@ import mage.abilities.DelayedTriggeredAbility;
 import mage.abilities.common.ChancellorAbility;
 import mage.abilities.effects.common.SetPlayerLifeSourceEffect;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.game.Game;
 import mage.game.events.GameEvent;
 import mage.game.events.GameEvent.EventType;
@@ -47,9 +47,8 @@ public class Providence extends CardImpl {
 
     private static String abilityText = "at the beginning of the first upkeep, your life total becomes 26";
 
-    public Providence(UUID ownerId) {
-        super(ownerId, 37, "Providence", Rarity.RARE, new CardType[]{CardType.SORCERY}, "{5}{W}{W}");
-        this.expansionSetCode = "EMN";
+    public Providence(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{5}{W}{W}");
 
         // You may reveal this card from your opening hand. If you do, at the beginning of the first upkeep, your life total becomes 26.
         Ability ability = new ChancellorAbility(new ProvidenceDelayedTriggeredAbility(), abilityText);

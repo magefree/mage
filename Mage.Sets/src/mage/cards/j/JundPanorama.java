@@ -26,12 +26,11 @@
 * or implied, of BetaSteward_at_googlemail.com.
 */
 
-package mage.sets.shardsofalara;
+package mage.cards.j;
 
 import java.util.UUID;
 import mage.constants.CardType;
 import mage.constants.Outcome;
-import mage.constants.Rarity;
 import mage.constants.Zone;
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleActivatedAbility;
@@ -41,6 +40,7 @@ import mage.abilities.costs.mana.GenericManaCost;
 import mage.abilities.effects.common.search.SearchLibraryPutInPlayEffect;
 import mage.abilities.mana.ColorlessManaAbility;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.filter.FilterCard;
 import mage.filter.predicate.Predicates;
 import mage.filter.predicate.mageobject.CardTypePredicate;
@@ -65,9 +65,8 @@ public class JundPanorama extends CardImpl {
                 new SubtypePredicate("Forest")));
     }
 
-    public JundPanorama(UUID ownerId) {
-        super(ownerId, 225, "Jund Panorama", Rarity.COMMON, new CardType[]{CardType.LAND}, null);
-        this.expansionSetCode = "ALA";
+    public JundPanorama(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.LAND},null);
         this.addAbility(new ColorlessManaAbility());
         TargetCardInLibrary target = new TargetCardInLibrary(filter);
         Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new SearchLibraryPutInPlayEffect(target, true, Outcome.PutLandInPlay), new GenericManaCost(1));

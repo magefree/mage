@@ -25,13 +25,13 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.tempest;
+package mage.cards.d;
 
 import java.util.UUID;
 import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.abilities.effects.common.SacrificeEffect;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.target.TargetPlayer;
 
@@ -41,9 +41,8 @@ import mage.target.TargetPlayer;
  */
 public class DiabolicEdict extends CardImpl {
 
-    public DiabolicEdict(UUID ownerId) {
-        super(ownerId, 22, "Diabolic Edict", Rarity.COMMON, new CardType[]{CardType.INSTANT}, "{1}{B}");
-        this.expansionSetCode = "TMP";
+    public DiabolicEdict(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.INSTANT},"{1}{B}");
 
         // Target player sacrifices a creature.
         this.getSpellAbility().addEffect(new SacrificeEffect(new FilterCreaturePermanent(), 1, "Target player"));

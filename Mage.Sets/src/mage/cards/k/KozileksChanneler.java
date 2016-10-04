@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.battleforzendikar;
+package mage.cards.k;
 
 import java.util.UUID;
 import mage.MageInt;
@@ -33,8 +33,8 @@ import mage.Mana;
 import mage.abilities.costs.common.TapSourceCost;
 import mage.abilities.mana.SimpleManaAbility;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.constants.Zone;
 
 /**
@@ -43,9 +43,8 @@ import mage.constants.Zone;
  */
 public class KozileksChanneler extends CardImpl {
 
-    public KozileksChanneler(UUID ownerId) {
-        super(ownerId, 10, "Kozilek's Channeler", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{5}");
-        this.expansionSetCode = "BFZ";
+    public KozileksChanneler(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{5}");
         this.subtype.add("Eldrazi");
         this.power = new MageInt(4);
         this.toughness = new MageInt(4);

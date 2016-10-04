@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.darkascension;
+package mage.cards.t;
 
 import java.util.UUID;
 import mage.MageInt;
@@ -37,11 +37,11 @@ import mage.abilities.keyword.FirstStrikeAbility;
 import mage.abilities.keyword.FlashbackAbility;
 import mage.cards.Card;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.CostModificationType;
 import mage.constants.Duration;
 import mage.constants.Outcome;
-import mage.constants.Rarity;
 import mage.constants.Zone;
 import mage.game.Game;
 import mage.util.CardUtil;
@@ -52,9 +52,8 @@ import mage.util.CardUtil;
  */
 public class ThaliaGuardianOfThraben extends CardImpl {
 
-    public ThaliaGuardianOfThraben(UUID ownerId) {
-        super(ownerId, 24, "Thalia, Guardian of Thraben", Rarity.RARE, new CardType[]{CardType.CREATURE}, "{1}{W}");
-        this.expansionSetCode = "DKA";
+    public ThaliaGuardianOfThraben(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{1}{W}");
         this.supertype.add("Legendary");
         this.subtype.add("Human");
         this.subtype.add("Soldier");

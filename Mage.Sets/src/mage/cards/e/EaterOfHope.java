@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.bornofthegods;
+package mage.cards.e;
 
 import java.util.UUID;
 import mage.MageInt;
@@ -37,8 +37,8 @@ import mage.abilities.effects.common.DestroyTargetEffect;
 import mage.abilities.effects.common.RegenerateSourceEffect;
 import mage.abilities.keyword.FlyingAbility;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.constants.Zone;
 import mage.filter.common.FilterControlledCreaturePermanent;
 import mage.filter.predicate.permanent.AnotherPredicate;
@@ -59,9 +59,8 @@ public class EaterOfHope extends CardImpl {
         destroyFilter.add(new AnotherPredicate());
     }
 
-    public EaterOfHope(UUID ownerId) {
-        super(ownerId, 66, "Eater of Hope", Rarity.RARE, new CardType[]{CardType.CREATURE}, "{5}{B}{B}");
-        this.expansionSetCode = "BNG";
+    public EaterOfHope(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{5}{B}{B}");
         this.subtype.add("Demon");
 
         this.power = new MageInt(6);

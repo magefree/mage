@@ -25,10 +25,9 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.scarsofmirrodin;
+package mage.cards.s;
 
 import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.MageInt;
 import mage.abilities.TriggeredAbility;
 import mage.abilities.common.DealsCombatDamageToAPlayerTriggeredAbility;
@@ -37,6 +36,7 @@ import mage.abilities.decorator.ConditionalTriggeredAbility;
 import mage.abilities.effects.common.PutLibraryIntoGraveTargetEffect;
 import mage.abilities.keyword.FlyingAbility;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 
 import java.util.UUID;
 
@@ -48,9 +48,8 @@ public class ScreechingSilcaw extends CardImpl {
 
     private static final String text = "Metalcraft - Whenever Screeching Silcaw deals combat damage to a player, if you control three or more artifacts, that player puts the top four cards of his or her library into his or her graveyard.";
 
-    public ScreechingSilcaw(UUID ownerId) {
-        super(ownerId, 42, "Screeching Silcaw", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{1}{U}");
-        this.expansionSetCode = "SOM";
+    public ScreechingSilcaw(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{1}{U}");
         this.subtype.add("Bird");
 
         this.power = new MageInt(1);

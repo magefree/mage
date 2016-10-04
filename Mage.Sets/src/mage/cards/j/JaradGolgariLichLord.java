@@ -25,12 +25,11 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.returntoravnica;
+package mage.cards.j;
 
 import java.util.UUID;
 
 import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleActivatedAbility;
@@ -44,6 +43,7 @@ import mage.abilities.effects.common.LoseLifeOpponentsEffect;
 import mage.abilities.effects.common.ReturnSourceFromGraveyardToHandEffect;
 import mage.abilities.effects.common.continuous.BoostSourceEffect;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.Duration;
 import mage.constants.Zone;
 import mage.filter.common.FilterControlledCreaturePermanent;
@@ -70,9 +70,8 @@ public class JaradGolgariLichLord extends CardImpl {
         filterForest.add(new SubtypePredicate("Forest"));
     }
 
-    public JaradGolgariLichLord(UUID ownerId) {
-        super(ownerId, 174, "Jarad, Golgari Lich Lord", Rarity.MYTHIC, new CardType[]{CardType.CREATURE}, "{B}{B}{G}{G}");
-        this.expansionSetCode = "RTR";
+    public JaradGolgariLichLord(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{B}{B}{G}{G}");
         this.supertype.add("Legendary");
         this.subtype.add("Zombie");
         this.subtype.add("Elf");

@@ -25,16 +25,16 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.dragonsoftarkir;
+package mage.cards.c;
 
 import java.util.UUID;
 import mage.abilities.Ability;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.PutTokenOntoBattlefieldCopyTargetEffect;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Outcome;
-import mage.constants.Rarity;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
@@ -48,9 +48,8 @@ import mage.target.targetpointer.FixedTarget;
  */
 public class CloneLegion extends CardImpl {
 
-    public CloneLegion(UUID ownerId) {
-        super(ownerId, 48, "Clone Legion", Rarity.MYTHIC, new CardType[]{CardType.SORCERY}, "{7}{U}{U}");
-        this.expansionSetCode = "DTK";
+    public CloneLegion(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{7}{U}{U}");
 
         // For each creature target player controls, put a token onto the the battlefield that's a copy of that creature.
         this.getSpellAbility().addEffect(new CloneLegionEffect());

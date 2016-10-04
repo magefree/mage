@@ -26,12 +26,12 @@
 * or implied, of BetaSteward_at_googlemail.com.
 */
 
-package mage.sets.magic2010;
+package mage.cards.h;
 
 import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.MageInt;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 
 import java.util.UUID;
 
@@ -40,9 +40,8 @@ import java.util.UUID;
  */
 public class HornedTurtle extends CardImpl {
 
-    public HornedTurtle(UUID ownerId) {
-        super(ownerId, 55, "Horned Turtle", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{2}{U}");
-        this.expansionSetCode = "M10";
+    public HornedTurtle(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{2}{U}");
 
         this.subtype.add("Turtle");
         this.power = new MageInt(1);

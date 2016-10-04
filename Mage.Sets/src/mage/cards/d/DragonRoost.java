@@ -25,15 +25,15 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.tenthedition;
+package mage.cards.d;
 
 import java.util.UUID;
 import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.costs.mana.ManaCostsImpl;
 import mage.abilities.effects.common.CreateTokenEffect;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.constants.Zone;
 import mage.game.permanent.token.DragonToken2;
 
@@ -43,9 +43,8 @@ import mage.game.permanent.token.DragonToken2;
  */
 public class DragonRoost extends CardImpl {
 
-    public DragonRoost(UUID ownerId) {
-        super(ownerId, 197, "Dragon Roost", Rarity.RARE, new CardType[]{CardType.ENCHANTMENT}, "{4}{R}{R}");
-        this.expansionSetCode = "10E";
+    public DragonRoost(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.ENCHANTMENT},"{4}{R}{R}");
 
         this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new CreateTokenEffect(new DragonToken2(), 1), new ManaCostsImpl("{5}{R}{R}")));
     }

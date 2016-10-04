@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.khansoftarkir;
+package mage.cards.b;
 
 import java.util.UUID;
 import mage.abilities.Ability;
@@ -37,9 +37,9 @@ import mage.abilities.costs.mana.GenericManaCost;
 import mage.abilities.effects.common.EntersBattlefieldWithXCountersEffect;
 import mage.abilities.effects.common.combat.CantAttackBlockTargetEffect;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Duration;
-import mage.constants.Rarity;
 import mage.constants.Zone;
 import mage.counters.Counter;
 import mage.target.common.TargetCreaturePermanent;
@@ -50,9 +50,8 @@ import mage.target.common.TargetCreaturePermanent;
  */
 public class BribersPurse extends CardImpl {
 
-    public BribersPurse(UUID ownerId) {
-        super(ownerId, 217, "Briber's Purse", Rarity.UNCOMMON, new CardType[]{CardType.ARTIFACT}, "{X}");
-        this.expansionSetCode = "KTK";
+    public BribersPurse(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.ARTIFACT},"{X}");
 
         // Briber's Purse enters the battlefield with X gem counters on it.
         this.addAbility(new EntersBattlefieldAbility(new EntersBattlefieldWithXCountersEffect(new Counter("gem"))));

@@ -25,15 +25,15 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.planechase2012;
+package mage.cards.r;
 
 import java.util.UUID;
 import mage.abilities.Ability;
 import mage.abilities.effects.OneShotEffect;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Outcome;
-import mage.constants.Rarity;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.target.common.TargetCreaturePermanent;
@@ -45,9 +45,8 @@ import mage.util.CardUtil;
  */
 public class RivalsDuel extends CardImpl {
 
-    public RivalsDuel(UUID ownerId) {
-        super(ownerId, 51, "Rivals' Duel", Rarity.UNCOMMON, new CardType[]{CardType.SORCERY}, "{3}{R}");
-        this.expansionSetCode = "PC2";
+    public RivalsDuel(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{3}{R}");
 
         // Choose two target creatures that share no creature types. Those creatures fight each other.
         this.getSpellAbility().addTarget(new TargetCreaturePermanentWithDifferentTypes(2));

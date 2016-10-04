@@ -25,15 +25,15 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.newphyrexia;
+package mage.cards.a;
 
 import java.util.UUID;
 import mage.constants.CardType;
 import mage.constants.Duration;
-import mage.constants.Rarity;
 import mage.abilities.effects.common.DrawCardSourceControllerEffect;
 import mage.abilities.effects.common.continuous.AddCardTypeTargetEffect;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.target.TargetPermanent;
 
 /**
@@ -42,9 +42,8 @@ import mage.target.TargetPermanent;
  */
 public class ArgentMutation extends CardImpl {
 
-    public ArgentMutation(UUID ownerId) {
-        super(ownerId, 27, "Argent Mutation", Rarity.UNCOMMON, new CardType[]{CardType.INSTANT}, "{2}{U}");
-        this.expansionSetCode = "NPH";
+    public ArgentMutation(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.INSTANT},"{2}{U}");
 
 
         this.getSpellAbility().addEffect(new AddCardTypeTargetEffect(CardType.ARTIFACT, Duration.EndOfTurn));

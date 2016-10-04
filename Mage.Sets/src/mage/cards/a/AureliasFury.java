@@ -25,11 +25,10 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.gatecrash;
+package mage.cards.a;
 
 import mage.constants.CardType;
 import mage.constants.Outcome;
-import mage.constants.Rarity;
 import mage.constants.Duration;
 import mage.constants.WatcherScope;
 import mage.MageObject;
@@ -41,6 +40,7 @@ import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.DamageMultiEffect;
 import mage.cards.Card;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.game.Game;
 import mage.game.events.GameEvent;
 import mage.game.events.GameEvent.EventType;
@@ -82,9 +82,8 @@ import mage.abilities.effects.ContinuousRuleModifyingEffectImpl;
  */
 public class AureliasFury extends CardImpl {
 
-    public AureliasFury(UUID ownerId) {
-        super(ownerId, 144, "Aurelia's Fury", Rarity.MYTHIC, new CardType[]{CardType.INSTANT}, "{X}{R}{W}");
-        this.expansionSetCode = "GTC";
+    public AureliasFury(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.INSTANT},"{X}{R}{W}");
 
 
         // Aurelia's Fury deals X damage divided as you choose among any number of target creatures and/or players.

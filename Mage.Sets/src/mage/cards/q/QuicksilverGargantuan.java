@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.scarsofmirrodin;
+package mage.cards.q;
 
 import java.util.UUID;
 import mage.MageInt;
@@ -34,8 +34,8 @@ import mage.abilities.Ability;
 import mage.abilities.common.EntersBattlefieldAbility;
 import mage.abilities.effects.common.CopyPermanentEffect;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.util.functions.ApplyToPermanent;
@@ -45,9 +45,8 @@ import mage.util.functions.ApplyToPermanent;
  */
 public class QuicksilverGargantuan extends CardImpl {
 
-    public QuicksilverGargantuan(UUID ownerId) {
-        super(ownerId, 39, "Quicksilver Gargantuan", Rarity.MYTHIC, new CardType[]{CardType.CREATURE}, "{5}{U}{U}");
-        this.expansionSetCode = "SOM";
+    public QuicksilverGargantuan(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{5}{U}{U}");
         this.subtype.add("Shapeshifter");
 
         this.power = new MageInt(7);

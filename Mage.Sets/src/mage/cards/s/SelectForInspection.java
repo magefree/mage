@@ -25,14 +25,14 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.kaladesh;
+package mage.cards.s;
 
 import java.util.UUID;
 import mage.abilities.effects.common.ReturnToHandTargetEffect;
 import mage.abilities.effects.keyword.ScryEffect;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.filter.predicate.permanent.TappedPredicate;
 import mage.target.common.TargetCreaturePermanent;
@@ -43,9 +43,8 @@ import mage.target.common.TargetCreaturePermanent;
  */
 public class SelectForInspection extends CardImpl {
 
-    public SelectForInspection(UUID ownerId) {
-        super(ownerId, 63, "Select for Inspection", Rarity.COMMON, new CardType[]{CardType.INSTANT}, "{U}");
-        this.expansionSetCode = "KLD";
+    public SelectForInspection(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.INSTANT},"{U}");
 
         // Return target tapped creature to its owner's hand.  Scry 1.
         this.getSpellAbility().addEffect(new ReturnToHandTargetEffect());

@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.shadowsoverinnistrad;
+package mage.cards.c;
 
 import java.util.UUID;
 import mage.MageInt;
@@ -35,9 +35,10 @@ import mage.abilities.condition.common.NoSpellsWereCastLastTurnCondition;
 import mage.abilities.decorator.ConditionalTriggeredAbility;
 import mage.abilities.effects.common.TransformSourceEffect;
 import mage.abilities.keyword.TransformAbility;
+import mage.cards.b.BrandedHowler;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.constants.TargetController;
 
 /**
@@ -46,16 +47,15 @@ import mage.constants.TargetController;
  */
 public class ConvictedKiller extends CardImpl {
 
-    public ConvictedKiller(UUID ownerId) {
-        super(ownerId, 149, "Convicted Killer", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{2}{R}");
-        this.expansionSetCode = "SOI";
+    public ConvictedKiller(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{2}{R}");
         this.subtype.add("Human");
         this.subtype.add("Werewolf");
         this.power = new MageInt(2);
         this.toughness = new MageInt(2);
 
         this.transformable = true;
-        this.secondSideCard = new BrandedHowler(ownerId);
+        this.secondSideCardClazz = BrandedHowler.class;
 
         // At the beginning of each upkeep, if no spells were cast last turn, transform Convicted Killer.
         this.addAbility(new TransformAbility());

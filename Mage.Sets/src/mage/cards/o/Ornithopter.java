@@ -26,14 +26,14 @@
  *  or implied, of BetaSteward_at_googlemail.com.
  */
 
-package mage.sets.tenthedition;
+package mage.cards.o;
 
 import java.util.UUID;
 import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.MageInt;
 import mage.abilities.keyword.FlyingAbility;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 
 /**
  *
@@ -41,9 +41,8 @@ import mage.cards.CardImpl;
  */
 public class Ornithopter extends CardImpl {
 
-    public Ornithopter(UUID ownerId) {
-        super(ownerId, 336, "Ornithopter", Rarity.UNCOMMON, new CardType[]{CardType.CREATURE, CardType.ARTIFACT}, "{0}");
-        this.expansionSetCode = "10E";
+    public Ornithopter(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.CREATURE,CardType.ARTIFACT},"{0}");
         this.subtype.add("Thopter");
         this.power = new MageInt(0);
         this.toughness = new MageInt(2);

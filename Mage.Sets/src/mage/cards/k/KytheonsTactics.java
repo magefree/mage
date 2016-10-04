@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.magicorigins;
+package mage.cards.k;
 
 import java.util.UUID;
 import mage.abilities.condition.common.SpellMasteryCondition;
@@ -35,9 +35,9 @@ import mage.abilities.effects.common.continuous.BoostControlledEffect;
 import mage.abilities.effects.common.continuous.GainAbilityControlledEffect;
 import mage.abilities.keyword.VigilanceAbility;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Duration;
-import mage.constants.Rarity;
 
 /**
  *
@@ -45,9 +45,8 @@ import mage.constants.Rarity;
  */
 public class KytheonsTactics extends CardImpl {
 
-    public KytheonsTactics(UUID ownerId) {
-        super(ownerId, 25, "Kytheon's Tactics", Rarity.COMMON, new CardType[]{CardType.SORCERY}, "{1}{W}{W}");
-        this.expansionSetCode = "ORI";
+    public KytheonsTactics(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{1}{W}{W}");
 
         // Creatures you control get +2/+1 until end of turn.
         this.getSpellAbility().addEffect(new BoostControlledEffect(2, 1, Duration.EndOfTurn));

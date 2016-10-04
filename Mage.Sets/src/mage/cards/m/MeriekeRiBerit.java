@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.iceage;
+package mage.cards.m;
 
 import java.util.UUID;
 import mage.MageInt;
@@ -41,10 +41,10 @@ import mage.abilities.effects.common.DontUntapInControllersUntapStepSourceEffect
 import mage.abilities.effects.common.continuous.GainControlTargetEffect;
 import mage.abilities.effects.common.DestroyTargetEffect;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Duration;
 import mage.constants.Outcome;
-import mage.constants.Rarity;
 import mage.constants.Zone;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.game.Game;
@@ -61,9 +61,8 @@ import mage.target.targetpointer.FixedTarget;
  */
 public class MeriekeRiBerit extends CardImpl {
 
-    public MeriekeRiBerit(UUID ownerId) {
-        super(ownerId, 375, "Merieke Ri Berit", Rarity.RARE, new CardType[]{CardType.CREATURE}, "{W}{U}{B}");
-        this.expansionSetCode = "ICE";
+    public MeriekeRiBerit(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{W}{U}{B}");
         this.supertype.add("Legendary");
         this.subtype.add("Human");
         this.power = new MageInt(1);

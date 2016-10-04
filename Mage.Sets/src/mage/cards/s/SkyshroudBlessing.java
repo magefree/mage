@@ -25,16 +25,16 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.planeshift;
+package mage.cards.s;
 
 import java.util.UUID;
 import mage.abilities.effects.common.DrawCardSourceControllerEffect;
 import mage.abilities.effects.common.continuous.GainAbilityAllEffect;
 import mage.abilities.keyword.ShroudAbility;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Duration;
-import mage.constants.Rarity;
 import mage.filter.common.FilterLandPermanent;
 
 /**
@@ -43,9 +43,8 @@ import mage.filter.common.FilterLandPermanent;
  */
 public class SkyshroudBlessing extends CardImpl {
 
-    public SkyshroudBlessing(UUID ownerId) {
-        super(ownerId, 92, "Skyshroud Blessing", Rarity.UNCOMMON, new CardType[]{CardType.INSTANT}, "{1}{G}");
-        this.expansionSetCode = "PLS";
+    public SkyshroudBlessing(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.INSTANT},"{1}{G}");
 
         // Lands gain shroud until end of turn.
         this.getSpellAbility().addEffect(new GainAbilityAllEffect(ShroudAbility.getInstance(),

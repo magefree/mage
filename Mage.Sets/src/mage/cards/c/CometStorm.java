@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.worldwake;
+package mage.cards.c;
 
 import mage.abilities.Ability;
 import mage.abilities.SpellAbility;
@@ -33,9 +33,9 @@ import mage.abilities.dynamicvalue.common.MultikickerCount;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.keyword.MultikickerAbility;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Outcome;
-import mage.constants.Rarity;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.players.Player;
@@ -49,9 +49,8 @@ import java.util.UUID;
  */
 public class CometStorm extends CardImpl {
 
-    public CometStorm(UUID ownerId) {
-        super(ownerId, 76, "Comet Storm", Rarity.MYTHIC, new CardType[]{CardType.INSTANT}, "{X}{R}{R}");
-        this.expansionSetCode = "WWK";
+    public CometStorm(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.INSTANT},"{X}{R}{R}");
 
         // Multikicker {1}
         this.addAbility(new MultikickerAbility("{1}"));

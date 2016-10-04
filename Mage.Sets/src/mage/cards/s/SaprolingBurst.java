@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.vintagemasters;
+package mage.cards.s;
 
 import java.util.HashSet;
 import java.util.Set;
@@ -42,10 +42,10 @@ import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.continuous.SetPowerToughnessSourceEffect;
 import mage.abilities.keyword.FadingAbility;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Duration;
 import mage.constants.Outcome;
-import mage.constants.Rarity;
 import mage.constants.Zone;
 import mage.counters.CounterType;
 import mage.game.Game;
@@ -60,9 +60,8 @@ import mage.util.CardUtil;
  */
 public class SaprolingBurst extends CardImpl {
 
-    public SaprolingBurst(UUID ownerId) {
-        super(ownerId, 230, "Saproling Burst", Rarity.RARE, new CardType[]{CardType.ENCHANTMENT}, "{4}{G}");
-        this.expansionSetCode = "VMA";
+    public SaprolingBurst(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.ENCHANTMENT},"{4}{G}");
 
         // Fading 7
         this.addAbility(new FadingAbility(7, this));

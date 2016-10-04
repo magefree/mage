@@ -25,11 +25,10 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.zendikar;
+package mage.cards.e;
 
 import java.util.UUID;
 import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.constants.Zone;
 import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.costs.common.SacrificeSourceCost;
@@ -37,6 +36,7 @@ import mage.abilities.costs.common.TapSourceCost;
 import mage.abilities.costs.mana.GenericManaCost;
 import mage.abilities.effects.common.search.SearchLibraryPutInHandEffect;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.filter.common.FilterLandCard;
 import mage.target.common.TargetCardInLibrary;
 
@@ -46,9 +46,8 @@ import mage.target.common.TargetCardInLibrary;
  */
 public class ExpeditionMap extends CardImpl {
 
-    public ExpeditionMap(UUID ownerId) {
-        super(ownerId, 201, "Expedition Map", Rarity.COMMON, new CardType[]{CardType.ARTIFACT}, "{1}");
-        this.expansionSetCode = "ZEN";
+    public ExpeditionMap(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.ARTIFACT},"{1}");
 
         // {2}, {tap}, Sacrifice Expedition Map: Search your library for a land card, reveal it, and put it into your hand. Then shuffle your library.
         TargetCardInLibrary target = new TargetCardInLibrary(new FilterLandCard());

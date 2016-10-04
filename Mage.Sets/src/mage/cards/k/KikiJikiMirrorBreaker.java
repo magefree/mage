@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.championsofkamigawa;
+package mage.cards.k;
 
 import java.util.UUID;
 import mage.MageInt;
@@ -38,9 +38,9 @@ import mage.abilities.effects.common.PutTokenOntoBattlefieldCopyTargetEffect;
 import mage.abilities.effects.common.SacrificeTargetEffect;
 import mage.abilities.keyword.HasteAbility;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Outcome;
-import mage.constants.Rarity;
 import mage.constants.Zone;
 import mage.filter.common.FilterControlledCreaturePermanent;
 import mage.filter.predicate.Predicates;
@@ -62,9 +62,8 @@ public class KikiJikiMirrorBreaker extends CardImpl {
         filter.add(Predicates.not(new SupertypePredicate("Legendary")));
     }
 
-    public KikiJikiMirrorBreaker(UUID ownerId) {
-        super(ownerId, 175, "Kiki-Jiki, Mirror Breaker", Rarity.RARE, new CardType[]{CardType.CREATURE}, "{2}{R}{R}{R}");
-        this.expansionSetCode = "CHK";
+    public KikiJikiMirrorBreaker(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{2}{R}{R}{R}");
         this.supertype.add("Legendary");
         this.subtype.add("Goblin");
         this.subtype.add("Shaman");

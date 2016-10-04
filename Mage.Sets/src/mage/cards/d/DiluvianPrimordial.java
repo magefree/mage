@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.gatecrash;
+package mage.cards.d;
 
 import java.util.UUID;
 import mage.MageInt;
@@ -37,10 +37,10 @@ import mage.abilities.effects.ReplacementEffectImpl;
 import mage.abilities.keyword.FlyingAbility;
 import mage.cards.Card;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Duration;
 import mage.constants.Outcome;
-import mage.constants.Rarity;
 import mage.constants.Zone;
 import mage.filter.FilterCard;
 import mage.filter.predicate.Predicates;
@@ -61,9 +61,8 @@ import mage.target.targetpointer.FixedTarget;
  */
 public class DiluvianPrimordial extends CardImpl {
 
-    public DiluvianPrimordial(UUID ownerId) {
-        super(ownerId, 33, "Diluvian Primordial", Rarity.RARE, new CardType[]{CardType.CREATURE}, "{5}{U}{U}");
-        this.expansionSetCode = "GTC";
+    public DiluvianPrimordial(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{5}{U}{U}");
         this.subtype.add("Avatar");
 
         this.power = new MageInt(5);

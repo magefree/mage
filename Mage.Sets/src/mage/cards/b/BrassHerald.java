@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.apocalypse;
+package mage.cards.b;
 
 import java.util.UUID;
 import mage.MageInt;
@@ -38,10 +38,10 @@ import mage.abilities.effects.common.ChooseCreatureTypeEffect;
 import mage.abilities.effects.common.EnvoyEffect;
 import mage.abilities.effects.common.continuous.BoostAllOfChosenSubtypeEffect;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Duration;
 import mage.constants.Outcome;
-import mage.constants.Rarity;
 import mage.constants.Zone;
 import mage.filter.FilterCard;
 import mage.filter.predicate.mageobject.ChosenSubtypePredicate;
@@ -53,9 +53,8 @@ import mage.game.Game;
  */
 public class BrassHerald extends CardImpl {
 
-    public BrassHerald(UUID ownerId) {
-        super(ownerId, 133, "Brass Herald", Rarity.UNCOMMON, new CardType[]{CardType.ARTIFACT, CardType.CREATURE}, "{6}");
-        this.expansionSetCode = "APC";
+    public BrassHerald(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.ARTIFACT,CardType.CREATURE},"{6}");
         this.subtype.add("Golem");
         this.power = new MageInt(2);
         this.toughness = new MageInt(2);

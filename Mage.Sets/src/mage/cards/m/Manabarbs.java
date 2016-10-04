@@ -25,16 +25,16 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.tenthedition;
+package mage.cards.m;
 
 import java.util.UUID;
 
 
 import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.abilities.common.TapForManaAllTriggeredAbility;
 import mage.abilities.effects.common.DamageTargetEffect;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.SetTargetPointer;
 import mage.filter.common.FilterLandPermanent;
 
@@ -44,9 +44,8 @@ import mage.filter.common.FilterLandPermanent;
  */
 public class Manabarbs extends CardImpl {
 
-    public Manabarbs(UUID ownerId) {
-        super(ownerId, 218, "Manabarbs", Rarity.RARE, new CardType[]{CardType.ENCHANTMENT}, "{3}{R}");
-        this.expansionSetCode = "10E";
+    public Manabarbs(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.ENCHANTMENT},"{3}{R}");
 
 
         // Whenever a player taps a land for mana, Manabarbs deals 1 damage to that player.

@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.shardsofalara;
+package mage.cards.e;
 
 import java.util.UUID;
 
@@ -37,6 +37,7 @@ import mage.abilities.effects.ReplacementEffectImpl;
 import mage.abilities.keyword.FlyingAbility;
 import mage.abilities.keyword.ShroudAbility;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.game.Game;
 import mage.game.events.DamagePlayerEvent;
 import mage.game.events.GameEvent;
@@ -48,9 +49,8 @@ import mage.game.permanent.Permanent;
  */
 public class EmpyrialArchangel extends CardImpl {
 
-    public EmpyrialArchangel(UUID ownerId) {
-        super(ownerId, 166, "Empyrial Archangel", Rarity.MYTHIC, new CardType[]{CardType.CREATURE}, "{4}{G}{W}{W}{U}");
-        this.expansionSetCode = "ALA";
+    public EmpyrialArchangel(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{4}{G}{W}{W}{U}");
         this.subtype.add("Angel");
 
         this.power = new MageInt(5);

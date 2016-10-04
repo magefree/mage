@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.magicorigins;
+package mage.cards.m;
 
 import java.util.UUID;
 import mage.MageInt;
@@ -34,8 +34,8 @@ import mage.abilities.common.EntersBattlefieldTriggeredAbility;
 import mage.abilities.effects.common.ChangeATargetOfTargetSpellAbilityToSourceEffect;
 import mage.abilities.keyword.FlashAbility;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.target.TargetStackObject;
 
 /**
@@ -44,9 +44,8 @@ import mage.target.TargetStackObject;
  */
 public class MizziumMeddler extends CardImpl {
 
-    public MizziumMeddler(UUID ownerId) {
-        super(ownerId, 64, "Mizzium Meddler", Rarity.RARE, new CardType[]{CardType.CREATURE}, "{2}{U}");
-        this.expansionSetCode = "ORI";
+    public MizziumMeddler(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{2}{U}");
         this.subtype.add("Vedalken");
         this.subtype.add("Wizard");
         this.power = new MageInt(1);

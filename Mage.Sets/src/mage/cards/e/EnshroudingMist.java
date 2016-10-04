@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.magicorigins;
+package mage.cards.e;
 
 import java.util.UUID;
 import mage.abilities.condition.common.RenownedTargetCondition;
@@ -36,9 +36,9 @@ import mage.abilities.effects.common.PreventDamageToTargetEffect;
 import mage.abilities.effects.common.UntapTargetEffect;
 import mage.abilities.effects.common.continuous.BoostTargetEffect;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Duration;
-import mage.constants.Rarity;
 import mage.target.common.TargetCreaturePermanent;
 
 /**
@@ -47,9 +47,8 @@ import mage.target.common.TargetCreaturePermanent;
  */
 public class EnshroudingMist extends CardImpl {
 
-    public EnshroudingMist(UUID ownerId) {
-        super(ownerId, 13, "Enshrouding Mist", Rarity.COMMON, new CardType[]{CardType.INSTANT}, "{W}");
-        this.expansionSetCode = "ORI";
+    public EnshroudingMist(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.INSTANT},"{W}");
 
         // Target creature gets +1/+1 until end of turn. Prevent all damage that would dealt to it this turn. If it's renowned, untap it.
         this.getSpellAbility().addEffect(new BoostTargetEffect(1, 1, Duration.EndOfTurn));

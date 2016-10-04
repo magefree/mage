@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.kaladesh;
+package mage.cards.a;
 
 import java.util.UUID;
 import mage.abilities.Ability;
@@ -34,10 +34,10 @@ import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.effects.ReplacementEffectImpl;
 import mage.abilities.effects.common.GainLifeEffect;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Duration;
 import mage.constants.Outcome;
-import mage.constants.Rarity;
 import mage.constants.TargetController;
 import mage.constants.Zone;
 import mage.filter.common.FilterCreaturePermanent;
@@ -59,9 +59,8 @@ public class AuthorityOfTheConsuls extends CardImpl {
         filter.add(new ControllerPredicate(TargetController.OPPONENT));
     }
 
-    public AuthorityOfTheConsuls(UUID ownerId) {
-        super(ownerId, 5, "Authority of the Consuls", Rarity.RARE, new CardType[]{CardType.ENCHANTMENT}, "{W}");
-        this.expansionSetCode = "KLD";
+    public AuthorityOfTheConsuls(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.ENCHANTMENT},"{W}");
 
         // Creatures your opponents control enter the battlefield tapped.
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new AuthorityOfTheConsulsTapEffect()));

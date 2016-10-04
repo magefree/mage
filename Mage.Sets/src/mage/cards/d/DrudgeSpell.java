@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.homelands;
+package mage.cards.d;
 
 import mage.abilities.Ability;
 import mage.abilities.common.LeavesBattlefieldTriggeredAbility;
@@ -36,8 +36,8 @@ import mage.abilities.effects.Effect;
 import mage.abilities.effects.common.CreateTokenEffect;
 import mage.abilities.effects.common.DestroyAllEffect;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.constants.Zone;
 import mage.filter.FilterPermanent;
 import mage.filter.common.FilterCreatureCard;
@@ -61,9 +61,8 @@ public class DrudgeSpell extends CardImpl {
         filter.add(new TokenPredicate());
     }
 
-    public DrudgeSpell(UUID ownerId) {
-        super(ownerId, 6, "Drudge Spell", Rarity.UNCOMMON, new CardType[]{CardType.ENCHANTMENT}, "{B}{B}");
-        this.expansionSetCode = "HML";
+    public DrudgeSpell(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.ENCHANTMENT},"{B}{B}");
 
         // {B}, Exile two creature cards from your graveyard: Put a 1/1 black Skeleton creature token onto the battlefield. It has "{B}: Regenerate this creature."
         Effect effect = new CreateTokenEffect(new SkeletonToken());

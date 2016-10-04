@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.tempest;
+package mage.cards.a;
 
 import java.util.UUID;
 import mage.abilities.Ability;
@@ -36,11 +36,11 @@ import mage.abilities.effects.ContinuousEffectImpl;
 import mage.abilities.effects.Effect;
 import mage.abilities.effects.common.continuous.CastAsThoughItHadFlashAllEffect;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Duration;
 import mage.constants.Layer;
 import mage.constants.Outcome;
-import mage.constants.Rarity;
 import mage.constants.SubLayer;
 import mage.constants.Zone;
 import mage.filter.Filter.ComparisonType;
@@ -70,9 +70,8 @@ public class Aluren extends CardImpl {
         filter.add(new ConvertedManaCostPredicate(ComparisonType.LessThan, 4));
     }
     
-    public Aluren(UUID ownerId) {
-        super(ownerId, 107, "Aluren", Rarity.RARE, new CardType[]{CardType.ENCHANTMENT}, "{2}{G}{G}");
-        this.expansionSetCode = "TMP";
+    public Aluren(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.ENCHANTMENT},"{2}{G}{G}");
 
 
         // Any player may play creature cards with converted mana cost 3 or less without paying their mana cost

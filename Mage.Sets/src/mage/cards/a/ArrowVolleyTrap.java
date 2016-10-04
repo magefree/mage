@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.zendikar;
+package mage.cards.a;
 
 import java.util.UUID;
 import mage.abilities.Ability;
@@ -34,8 +34,8 @@ import mage.abilities.costs.AlternativeCostSourceAbility;
 import mage.abilities.costs.mana.ManaCostsImpl;
 import mage.abilities.effects.common.DamageMultiEffect;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.filter.common.FilterAttackingCreature;
 import mage.game.Game;
 import mage.target.common.TargetCreaturePermanentAmount;
@@ -45,9 +45,8 @@ import mage.target.common.TargetCreaturePermanentAmount;
  */
 public class ArrowVolleyTrap extends CardImpl {
 
-    public ArrowVolleyTrap(UUID ownerId) {
-        super(ownerId, 2, "Arrow Volley Trap", Rarity.UNCOMMON, new CardType[]{CardType.INSTANT}, "{3}{W}{W}");
-        this.expansionSetCode = "ZEN";
+    public ArrowVolleyTrap(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.INSTANT},"{3}{W}{W}");
         this.subtype.add("Trap");
 
         // If four or more creatures are attacking, you may pay {1}{W} rather than pay Arrow Volley Trap's mana cost.

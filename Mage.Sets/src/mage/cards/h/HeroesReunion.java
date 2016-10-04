@@ -25,12 +25,12 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.invasion;
+package mage.cards.h;
 
 import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.abilities.effects.common.GainLifeTargetEffect;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.target.TargetPlayer;
 
 import java.util.UUID;
@@ -40,9 +40,8 @@ import java.util.UUID;
  */
 public class HeroesReunion extends CardImpl {
 
-    public HeroesReunion(UUID ownerId) {
-        super(ownerId, 250, "Heroes' Reunion", Rarity.UNCOMMON, new CardType[]{CardType.INSTANT}, "{G}{W}");
-        this.expansionSetCode = "INV";
+    public HeroesReunion(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.INSTANT},"{G}{W}");
 
 
         // Target player gains 7 life.

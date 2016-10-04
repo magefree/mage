@@ -25,12 +25,11 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.mirrodin;
+package mage.cards.n;
 
 import java.util.UUID;
 
 import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.costs.common.SacrificeSourceCost;
@@ -39,6 +38,7 @@ import mage.abilities.costs.mana.GenericManaCost;
 import mage.abilities.effects.common.discard.DiscardTargetEffect;
 import mage.abilities.effects.common.DrawCardSourceControllerEffect;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.ColoredManaSymbol;
 import mage.constants.Zone;
 import mage.target.TargetPlayer;
@@ -49,9 +49,8 @@ import mage.target.TargetPlayer;
  */
 public class NecrogenSpellbomb extends CardImpl {
 
-    public NecrogenSpellbomb(UUID ownerId) {
-        super(ownerId, 216, "Necrogen Spellbomb", Rarity.COMMON, new CardType[]{CardType.ARTIFACT}, "{1}");
-        this.expansionSetCode = "MRD";
+    public NecrogenSpellbomb(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.ARTIFACT},"{1}");
         Ability firstAbility = new SimpleActivatedAbility(Zone.BATTLEFIELD, new DiscardTargetEffect(1), new ColoredManaCost(ColoredManaSymbol.B));
         firstAbility.addCost(new SacrificeSourceCost());
         firstAbility.addTarget(new TargetPlayer());

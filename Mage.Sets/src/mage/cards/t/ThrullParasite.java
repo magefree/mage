@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.gatecrash;
+package mage.cards.t;
 
 import java.util.UUID;
 import mage.MageInt;
@@ -36,8 +36,8 @@ import mage.abilities.costs.common.TapSourceCost;
 import mage.abilities.effects.common.counter.RemoveCounterTargetEffect;
 import mage.abilities.keyword.ExtortAbility;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.constants.Zone;
 import mage.target.common.TargetNonlandPermanent;
 
@@ -47,9 +47,8 @@ import mage.target.common.TargetNonlandPermanent;
 */
 public class ThrullParasite extends CardImpl {
 
-    public ThrullParasite(UUID ownerId) {
-        super(ownerId, 81, "Thrull Parasite", Rarity.UNCOMMON, new CardType[]{CardType.CREATURE}, "{B}");
-        this.expansionSetCode = "GTC";
+    public ThrullParasite(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{B}");
         this.subtype.add("Thrull");
 
         this.power = new MageInt(1);

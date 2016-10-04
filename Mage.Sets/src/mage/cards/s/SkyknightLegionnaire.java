@@ -26,15 +26,15 @@
  *  or implied, of BetaSteward_at_googlemail.com.
  */
 
-package mage.sets.ravnica;
+package mage.cards.s;
 
 import java.util.UUID;
 import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.MageInt;
 import mage.abilities.keyword.FlyingAbility;
 import mage.abilities.keyword.HasteAbility;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 
 /**
  *
@@ -42,9 +42,8 @@ import mage.cards.CardImpl;
  */
 public class SkyknightLegionnaire extends CardImpl {
 
-    public SkyknightLegionnaire (UUID ownerId) {
-        super(ownerId, 232, "Skyknight Legionnaire", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{1}{R}{W}");
-        this.expansionSetCode = "RAV";
+    public SkyknightLegionnaire (UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{1}{R}{W}");
         this.subtype.add("Human");
         this.subtype.add("Knight");
 

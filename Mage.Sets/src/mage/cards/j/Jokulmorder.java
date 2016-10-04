@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.coldsnap;
+package mage.cards.j;
 
 import java.util.UUID;
 import mage.MageInt;
@@ -40,8 +40,8 @@ import mage.abilities.effects.common.SacrificeSourceUnlessPaysEffect;
 import mage.abilities.effects.common.UntapSourceEffect;
 import mage.abilities.keyword.TrampleAbility;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.constants.Zone;
 import mage.filter.common.FilterControlledLandPermanent;
 import mage.game.Game;
@@ -56,9 +56,8 @@ import mage.target.common.TargetControlledPermanent;
  */
 public class Jokulmorder extends CardImpl {
 
-    public Jokulmorder(UUID ownerId) {
-        super(ownerId, 37, "Jokulmorder", Rarity.RARE, new CardType[]{CardType.CREATURE}, "{4}{U}{U}{U}");
-        this.expansionSetCode = "CSP";
+    public Jokulmorder(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{4}{U}{U}{U}");
         this.subtype.add("Leviathan");
         this.power = new MageInt(12);
         this.toughness = new MageInt(12);

@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.invasion;
+package mage.cards.v;
 
 import java.util.UUID;
 import mage.MageInt;
@@ -33,8 +33,8 @@ import mage.abilities.common.DealsDamageToACreatureTriggeredAbility;
 import mage.abilities.effects.common.DestroyTargetEffect;
 import mage.abilities.keyword.FirstStrikeAbility;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.Rarity;
 
 /**
  *
@@ -43,9 +43,8 @@ import mage.constants.Rarity;
  */
 public class VoraciousCobra extends CardImpl {
 
-    public VoraciousCobra(UUID ownerId) {
-        super(ownerId, 288, "Voracious Cobra", Rarity.UNCOMMON, new CardType[]{CardType.CREATURE}, "{2}{R}{G}");
-        this.expansionSetCode = "INV";
+    public VoraciousCobra(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{2}{R}{G}");
         this.subtype.add("Snake");
         this.power = new MageInt(2);
         this.toughness = new MageInt(2);

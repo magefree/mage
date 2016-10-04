@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.theros;
+package mage.cards.c;
 
 import java.util.UUID;
 import mage.MageInt;
@@ -34,9 +34,9 @@ import mage.abilities.common.EntersBattlefieldTriggeredAbility;
 import mage.abilities.condition.common.PermanentsOnTheBattlefieldCondition;
 import mage.abilities.effects.OneShotEffect;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Outcome;
-import mage.constants.Rarity;
 import mage.constants.TargetController;
 import mage.counters.CounterType;
 import mage.filter.common.FilterCreaturePermanent;
@@ -51,9 +51,8 @@ import mage.players.Player;
  */
 public class ChroniclerOfHeroes extends CardImpl {
 
-    public ChroniclerOfHeroes(UUID ownerId) {
-        super(ownerId, 190, "Chronicler of Heroes", Rarity.UNCOMMON, new CardType[]{CardType.CREATURE}, "{1}{G}{W}");
-        this.expansionSetCode = "THS";
+    public ChroniclerOfHeroes(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{1}{G}{W}");
         this.subtype.add("Centaur");
         this.subtype.add("Wizard");
 

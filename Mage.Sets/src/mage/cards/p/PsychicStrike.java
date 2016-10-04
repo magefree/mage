@@ -25,16 +25,16 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.gatecrash;
+package mage.cards.p;
 
 import java.util.UUID;
 import mage.constants.CardType;
 import mage.constants.Outcome;
-import mage.constants.Rarity;
 import mage.constants.Zone;
 import mage.abilities.Ability;
 import mage.abilities.effects.OneShotEffect;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.filter.FilterSpell;
 import mage.game.Game;
 import mage.game.stack.StackObject;
@@ -47,9 +47,8 @@ import mage.target.TargetSpell;
  */
 public class PsychicStrike extends CardImpl {
 
-    public PsychicStrike(UUID ownerId) {
-        super(ownerId, 189, "Psychic Strike", Rarity.COMMON, new CardType[]{CardType.INSTANT}, "{1}{U}{B}");
-        this.expansionSetCode = "GTC";
+    public PsychicStrike(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.INSTANT},"{1}{U}{B}");
 
 
         // Counter target spell. Its controller puts the top two cards of his or her library into his or her graveyard.

@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.invasion;
+package mage.cards.s;
 
 import java.util.UUID;
 import mage.MageInt;
@@ -36,8 +36,8 @@ import mage.abilities.keyword.TrampleAbility;
 import mage.abilities.keyword.HasteAbility;
 import mage.abilities.keyword.KickerAbility;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.constants.TargetController;
 
 /**
@@ -46,9 +46,8 @@ import mage.constants.TargetController;
  */
 public class Skizzik extends CardImpl {
 
-    public Skizzik(UUID ownerId) {
-        super(ownerId, 169, "Skizzik", Rarity.RARE, new CardType[]{CardType.CREATURE}, "{3}{R}");
-        this.expansionSetCode = "INV";
+    public Skizzik(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{3}{R}");
         this.subtype.add("Elemental");
 
         this.power = new MageInt(5);

@@ -25,15 +25,15 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.urzaslegacy;
+package mage.cards.u;
 
 import java.util.UUID;
 import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.abilities.costs.mana.ManaCostsImpl;
 import mage.abilities.effects.common.ReturnFromGraveyardToBattlefieldTargetEffect;
 import mage.abilities.keyword.CyclingAbility;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.filter.Filter.ComparisonType;
 import mage.filter.FilterCard;
 import mage.filter.common.FilterCreatureCard;
@@ -52,9 +52,8 @@ public class Unearth extends CardImpl {
         filter.add(new ConvertedManaCostPredicate(ComparisonType.LessThan, 4));
     }
 
-    public Unearth(UUID ownerId) {
-        super(ownerId, 72, "Unearth", Rarity.COMMON, new CardType[]{CardType.SORCERY}, "{B}");
-        this.expansionSetCode = "ULG";
+    public Unearth(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{B}");
 
 
         // Return target creature card with converted mana cost 3 or less from your graveyard to the battlefield.

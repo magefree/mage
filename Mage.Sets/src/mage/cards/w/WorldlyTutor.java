@@ -25,13 +25,13 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.mirage;
+package mage.cards.w;
 
 import java.util.UUID;
 import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.abilities.effects.common.search.SearchLibraryPutOnLibraryEffect;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.filter.common.FilterCreatureCard;
 import mage.target.common.TargetCardInLibrary;
 
@@ -41,9 +41,8 @@ import mage.target.common.TargetCardInLibrary;
  */
 public class WorldlyTutor extends CardImpl {
 
-    public WorldlyTutor(UUID ownerId) {
-        super(ownerId, 153, "Worldly Tutor", Rarity.UNCOMMON, new CardType[]{CardType.INSTANT}, "{G}");
-        this.expansionSetCode = "MIR";
+    public WorldlyTutor(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.INSTANT},"{G}");
 
 
         // Search your library for a creature card and reveal that card. Shuffle your library, then put the card on top of it.

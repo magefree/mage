@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.commander;
+package mage.cards.s;
 
 import java.util.UUID;
 import mage.abilities.Ability;
@@ -35,9 +35,9 @@ import mage.abilities.effects.Effect;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.PutTopCardOfLibraryIntoGraveTargetEffect;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Outcome;
-import mage.constants.Rarity;
 import mage.game.Game;
 import mage.players.Player;
 import mage.target.targetpointer.FixedTarget;
@@ -48,9 +48,8 @@ import mage.target.targetpointer.FixedTarget;
  */
 public class SharedTrauma extends CardImpl {
 
-    public SharedTrauma(UUID ownerId) {
-        super(ownerId, 99, "Shared Trauma", Rarity.RARE, new CardType[]{CardType.SORCERY}, "{B}");
-        this.expansionSetCode = "CMD";
+    public SharedTrauma(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{B}");
 
 
         // Join forces - Starting with you, each player may pay any amount of mana. Each player puts the top X cards of his or her library into his or her graveyard, where X is the total amount of mana paid this way.

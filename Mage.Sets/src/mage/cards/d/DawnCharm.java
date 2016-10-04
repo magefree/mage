@@ -25,17 +25,17 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.planarchaos;
+package mage.cards.d;
 
 import java.util.UUID;
 import mage.constants.CardType;
 import mage.constants.Duration;
-import mage.constants.Rarity;
 import mage.abilities.Mode;
 import mage.abilities.effects.common.CounterTargetEffect;
 import mage.abilities.effects.common.PreventAllDamageByAllPermanentsEffect;
 import mage.abilities.effects.common.RegenerateTargetEffect;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.filter.FilterSpell;
 import mage.filter.predicate.ObjectPlayer;
 import mage.filter.predicate.ObjectPlayerPredicate;
@@ -57,9 +57,8 @@ public class DawnCharm extends CardImpl {
         filter.add(new DawnCharmPredicate());
     }
 
-    public DawnCharm(UUID ownerId) {
-        super(ownerId, 4, "Dawn Charm", Rarity.COMMON, new CardType[]{CardType.INSTANT}, "{1}{W}");
-        this.expansionSetCode = "PLC";
+    public DawnCharm(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.INSTANT},"{1}{W}");
 
 
         // Choose one - Prevent all combat damage that would be dealt this turn

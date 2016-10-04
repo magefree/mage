@@ -26,11 +26,10 @@
  *  or implied, of BetaSteward_at_googlemail.com.
  */
 
-package mage.sets.magic2010;
+package mage.cards.m;
 
 import java.util.UUID;
 import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.constants.Zone;
 import mage.MageInt;
 import mage.abilities.common.DiesTriggeredAbility;
@@ -40,6 +39,7 @@ import mage.abilities.effects.common.DamageEverythingEffect;
 import mage.abilities.effects.common.ReturnSourceFromGraveyardToHandEffect;
 import mage.abilities.keyword.FlyingAbility;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 
 /**
  *
@@ -47,9 +47,8 @@ import mage.cards.CardImpl;
  */
 public class MagmaPhoenix extends CardImpl {
 
-    public MagmaPhoenix(UUID ownerId) {
-        super(ownerId, 148, "Magma Phoenix", Rarity.RARE, new CardType[]{CardType.CREATURE}, "{3}{R}{R}");
-        this.expansionSetCode = "M10";
+    public MagmaPhoenix(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{3}{R}{R}");
         this.subtype.add("Phoenix");
 
         this.power = new MageInt(3);

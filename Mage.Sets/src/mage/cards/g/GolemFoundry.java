@@ -25,11 +25,10 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.scarsofmirrodin;
+package mage.cards.g;
 
 import java.util.UUID;
 import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.constants.Zone;
 import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.common.SpellCastControllerTriggeredAbility;
@@ -37,6 +36,7 @@ import mage.abilities.costs.common.RemoveCountersSourceCost;
 import mage.abilities.effects.common.CreateTokenEffect;
 import mage.abilities.effects.common.counter.AddCountersSourceEffect;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.counters.CounterType;
 import mage.filter.common.FilterArtifactSpell;
 import mage.game.permanent.token.GolemToken;
@@ -46,9 +46,8 @@ import mage.game.permanent.token.GolemToken;
  * @author Loki, North
  */
 public class GolemFoundry extends CardImpl {
-    public GolemFoundry (UUID ownerId) {
-        super(ownerId, 160, "Golem Foundry", Rarity.COMMON, new CardType[]{CardType.ARTIFACT}, "{3}");
-        this.expansionSetCode = "SOM";
+    public GolemFoundry (UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.ARTIFACT},"{3}");
 
         // Whenever you cast an artifact spell, 
         FilterArtifactSpell filter = new FilterArtifactSpell("an artifact spell");

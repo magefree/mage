@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.shadowmoor;
+package mage.cards.h;
 
 import java.util.UUID;
 import mage.MageInt;
@@ -38,9 +38,9 @@ import mage.abilities.condition.common.CardsInHandCondition;
 import mage.abilities.decorator.ConditionalTriggeredAbility;
 import mage.abilities.effects.OneShotEffect;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Outcome;
-import mage.constants.Rarity;
 import mage.constants.TargetController;
 import mage.constants.Zone;
 import mage.game.Game;
@@ -56,9 +56,8 @@ public class HollowbornBarghest extends CardImpl {
 
     private static final String rule = "At the beginning of your upkeep, if you have no cards in hand, each opponent loses 2 life.";
 
-    public HollowbornBarghest(UUID ownerId) {
-        super(ownerId, 68, "Hollowborn Barghest", Rarity.RARE, new CardType[]{CardType.CREATURE}, "{5}{B}{B}");
-        this.expansionSetCode = "SHM";
+    public HollowbornBarghest(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{5}{B}{B}");
         this.subtype.add("Demon");
         this.subtype.add("Hound");
 

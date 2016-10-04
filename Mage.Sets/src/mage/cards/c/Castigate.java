@@ -25,13 +25,13 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.guildpact;
+package mage.cards.c;
 
 import java.util.UUID;
 import mage.abilities.effects.common.ExileCardYouChooseTargetOpponentEffect;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.filter.FilterCard;
 import mage.filter.predicate.Predicates;
 import mage.filter.predicate.mageobject.CardTypePredicate;
@@ -49,9 +49,8 @@ public class Castigate extends CardImpl {
         filter.add(Predicates.not(new CardTypePredicate(CardType.LAND)));
     }
 
-    public Castigate(UUID ownerId) {
-        super(ownerId, 106, "Castigate", Rarity.COMMON, new CardType[]{CardType.SORCERY}, "{W}{B}");
-        this.expansionSetCode = "GPT";
+    public Castigate(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{W}{B}");
 
         // Target opponent reveals his or her hand. You choose a nonland card from it and exile that card.
         this.getSpellAbility().addEffect(new ExileCardYouChooseTargetOpponentEffect(filter));

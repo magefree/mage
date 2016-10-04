@@ -25,16 +25,16 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.guildpact;
+package mage.cards.r;
 
 import java.util.UUID;
 import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.abilities.Ability;
 import mage.abilities.SpellAbility;
 import mage.abilities.effects.common.DrawCardSourceControllerEffect;
 import mage.abilities.effects.common.ReturnToHandTargetEffect;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.filter.Filter;
 import mage.filter.common.FilterNonlandPermanent;
 import mage.filter.predicate.mageobject.ConvertedManaCostPredicate;
@@ -48,9 +48,8 @@ import mage.target.common.TargetNonlandPermanent;
  */
 public class Repeal extends CardImpl {
 
-    public Repeal(UUID ownerId) {
-        super(ownerId, 32, "Repeal", Rarity.COMMON, new CardType[]{CardType.INSTANT}, "{X}{U}");
-        this.expansionSetCode = "GPT";
+    public Repeal(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.INSTANT},"{X}{U}");
 
 
         // Return target nonland permanent with converted mana cost X to its owner's hand.

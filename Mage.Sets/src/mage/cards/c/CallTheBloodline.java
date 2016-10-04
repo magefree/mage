@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.shadowsoverinnistrad;
+package mage.cards.c;
 
 import java.util.UUID;
 import mage.abilities.Ability;
@@ -34,8 +34,8 @@ import mage.abilities.costs.common.DiscardCardCost;
 import mage.abilities.costs.mana.GenericManaCost;
 import mage.abilities.effects.common.CreateTokenEffect;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.constants.Zone;
 import mage.game.permanent.token.VampireKnightToken;
 
@@ -45,9 +45,8 @@ import mage.game.permanent.token.VampireKnightToken;
  */
 public class CallTheBloodline extends CardImpl {
 
-    public CallTheBloodline(UUID ownerId) {
-        super(ownerId, 103, "Call the Bloodline", Rarity.UNCOMMON, new CardType[]{CardType.ENCHANTMENT}, "{1}{B}");
-        this.expansionSetCode = "SOI";
+    public CallTheBloodline(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.ENCHANTMENT},"{1}{B}");
 
         // {1}, Discard a card: Put a 1/1 black Vampire Knight token with lifelink onto the battlefield. Activate this ability only once each turn.
         Ability ability = new LimitedTimesPerTurnActivatedAbility(Zone.BATTLEFIELD, new CreateTokenEffect(new VampireKnightToken()), new GenericManaCost(1));

@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.futuresight;
+package mage.cards.d;
 
 import java.util.List;
 import java.util.UUID;
@@ -37,9 +37,9 @@ import mage.abilities.effects.Effect;
 import mage.abilities.effects.OneShotEffect;
 import mage.cards.Card;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Outcome;
-import mage.constants.Rarity;
 import mage.counters.Counter;
 import mage.counters.CounterType;
 import mage.filter.Filter;
@@ -57,9 +57,8 @@ import mage.players.Player;
  */
 public class DustOfMoments extends CardImpl {
 
-    public DustOfMoments(UUID ownerId) {
-        super(ownerId, 5, "Dust of Moments", Rarity.UNCOMMON, new CardType[]{CardType.INSTANT}, "{2}{W}");
-        this.expansionSetCode = "FUT";
+    public DustOfMoments(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.INSTANT},"{2}{W}");
 
         // Choose one - Remove two time counters from each permanent and each suspended card
         this.getSpellAbility().addEffect(new RemoveCountersEffect());

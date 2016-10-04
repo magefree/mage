@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.mastersedition;
+package mage.cards.y;
 
 import java.util.UUID;
 import mage.MageInt;
@@ -33,9 +33,9 @@ import mage.abilities.Ability;
 import mage.abilities.common.BlocksTriggeredAbility;
 import mage.abilities.effects.OneShotEffect;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Outcome;
-import mage.constants.Rarity;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.players.Player;
@@ -47,9 +47,8 @@ import mage.players.Player;
  */
 public class YdwenEfreet extends CardImpl {
 
-    public YdwenEfreet(UUID ownerId) {
-        super(ownerId, 112, "Ydwen Efreet", Rarity.RARE, new CardType[]{CardType.CREATURE}, "{R}{R}{R}");
-        this.expansionSetCode = "MED";
+    public YdwenEfreet(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{R}{R}{R}");
         this.subtype.add("Efreet");
         this.power = new MageInt(3);
         this.toughness = new MageInt(6);

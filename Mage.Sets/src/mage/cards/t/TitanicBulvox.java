@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.scourge;
+package mage.cards.t;
 
 import java.util.UUID;
 import mage.MageInt;
@@ -33,8 +33,8 @@ import mage.abilities.keyword.TrampleAbility;
 import mage.abilities.costs.mana.ManaCostsImpl;
 import mage.abilities.keyword.MorphAbility;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.Rarity;
 
 /**
  *
@@ -42,9 +42,8 @@ import mage.constants.Rarity;
  */
 public class TitanicBulvox extends CardImpl {
 
-    public TitanicBulvox(UUID ownerId) {
-        super(ownerId, 129, "Titanic Bulvox", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{6}{G}{G}");
-        this.expansionSetCode = "SCG";
+    public TitanicBulvox(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{6}{G}{G}");
         this.subtype.add("Beast");
         this.power = new MageInt(7);
         this.toughness = new MageInt(4);

@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.mirrodinbesieged;
+package mage.cards.c;
 
 import java.util.UUID;
 
@@ -33,7 +33,6 @@ import mage.constants.CardType;
 import mage.constants.Duration;
 import mage.constants.Layer;
 import mage.constants.Outcome;
-import mage.constants.Rarity;
 import mage.constants.SubLayer;
 import mage.constants.Zone;
 import mage.abilities.Ability;
@@ -46,6 +45,7 @@ import mage.abilities.effects.ContinuousEffectImpl;
 import mage.abilities.effects.common.continuous.BoostAllEffect;
 import mage.abilities.mana.ColorlessManaAbility;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.filter.common.FilterAttackingCreature;
 import mage.game.Game;
 import mage.game.events.DamagedPlayerEvent;
@@ -60,9 +60,8 @@ public class ContestedWarZone extends CardImpl {
 
     private static final FilterAttackingCreature filter = new FilterAttackingCreature("Attacking creatures");
 
-    public ContestedWarZone(UUID ownerId) {
-        super(ownerId, 144, "Contested War Zone", Rarity.RARE, new CardType[]{CardType.LAND}, null);
-        this.expansionSetCode = "MBS";
+    public ContestedWarZone(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.LAND},null);
 
         // Whenever a creature deals combat damage to you, that creature's controller gains control of Contested War Zone.
         this.addAbility(new ContestedWarZoneAbility());

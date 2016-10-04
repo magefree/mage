@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.scarsofmirrodin;
+package mage.cards.m;
 
 import java.util.UUID;
 import mage.abilities.Ability;
@@ -34,9 +34,9 @@ import mage.abilities.costs.common.TapSourceCost;
 import mage.abilities.effects.common.AddManaOfAnyColorEffect;
 import mage.abilities.mana.ActivateIfConditionManaAbility;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.AbilityWord;
 import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.constants.Zone;
 
 /**
@@ -45,10 +45,9 @@ import mage.constants.Zone;
  */
 public class MoxOpal extends CardImpl {
 
-    public MoxOpal(UUID ownerId) {
-        super(ownerId, 179, "Mox Opal", Rarity.MYTHIC, new CardType[]{CardType.ARTIFACT}, "{0}");
+    public MoxOpal(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.ARTIFACT},"{0}");
         this.supertype.add("Legendary");
-        this.expansionSetCode = "SOM";
 
         Ability ability = new ActivateIfConditionManaAbility(
                 Zone.BATTLEFIELD,

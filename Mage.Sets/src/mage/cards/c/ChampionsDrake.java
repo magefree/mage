@@ -25,16 +25,16 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.riseoftheeldrazi;
+package mage.cards.c;
 
 import java.util.UUID;
 import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.MageInt;
 import mage.constants.Duration;
 import mage.abilities.condition.common.PermanentHasCounterCondition;
 import mage.abilities.keyword.FlyingAbility;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.counters.CounterType;
 import mage.abilities.effects.common.continuous.BoostSourceEffect;
 import mage.abilities.decorator.ConditionalContinuousEffect;
@@ -50,10 +50,9 @@ public class ChampionsDrake extends CardImpl {
 
     private static final String rule = "{this} gets +3/+3 as long as you control a creature with three or more level counters on it.";
 
-    public ChampionsDrake(UUID ownerId) {
+    public ChampionsDrake(UUID ownerId, CardSetInfo setInfo) {
 
-        super(ownerId, 56, "Champion's Drake", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{1}{U}");
-        this.expansionSetCode = "ROE";
+        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{1}{U}");
         this.subtype.add("Drake");
 
         this.color.setBlue(true);

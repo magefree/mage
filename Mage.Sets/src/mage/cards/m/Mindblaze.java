@@ -26,16 +26,16 @@
  *  or implied, of BetaSteward_at_googlemail.com.
  */
 
-package mage.sets.championsofkamigawa;
+package mage.cards.m;
 
 import java.util.HashSet;
 import java.util.UUID;
 
 import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.abilities.Ability;
 import mage.abilities.effects.OneShotEffect;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.cards.Cards;
 import mage.cards.CardsImpl;
 import mage.cards.repository.CardRepository;
@@ -55,9 +55,8 @@ import mage.target.TargetPlayer;
  */
 public class Mindblaze extends CardImpl {
 
-    public Mindblaze (UUID ownerId) {
-        super(ownerId, 180, "Mindblaze", Rarity.RARE, new CardType[]{CardType.SORCERY}, "{5}{R}");
-        this.expansionSetCode = "CHK";
+    public Mindblaze (UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{5}{R}");
 
 
         // Name a nonland card and choose a number greater than 0. Target player reveals his or her library.

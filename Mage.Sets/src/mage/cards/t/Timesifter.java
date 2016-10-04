@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.mirrodin;
+package mage.cards.t;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -37,9 +37,9 @@ import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.turn.AddExtraTurnTargetEffect;
 import mage.cards.Card;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Outcome;
-import mage.constants.Rarity;
 import mage.constants.TargetController;
 import mage.game.Game;
 import mage.players.Player;
@@ -51,9 +51,8 @@ import mage.target.targetpointer.FixedTarget;
  */
 public class Timesifter extends CardImpl {
 
-    public Timesifter(UUID ownerId) {
-        super(ownerId, 262, "Timesifter", Rarity.RARE, new CardType[]{CardType.ARTIFACT}, "{5}");
-        this.expansionSetCode = "MRD";
+    public Timesifter(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.ARTIFACT},"{5}");
 
         // At the beginning of each upkeep, each player exiles the top card of his or her library. The player who exiled the card with the highest converted mana cost takes an extra turn after this one. If two or more players' cards are tied for highest cost, the tied players repeat this process until the tie is broken.
         this.addAbility(new BeginningOfUpkeepTriggeredAbility(new TimesifterEffect(), TargetController.ANY, false));

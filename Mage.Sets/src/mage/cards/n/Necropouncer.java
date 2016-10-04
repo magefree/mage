@@ -25,13 +25,12 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.newphyrexia;
+package mage.cards.n;
 
 import java.util.UUID;
 import mage.constants.AttachmentType;
 import mage.constants.CardType;
 import mage.constants.Outcome;
-import mage.constants.Rarity;
 import mage.constants.Zone;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.costs.mana.GenericManaCost;
@@ -41,6 +40,7 @@ import mage.abilities.keyword.EquipAbility;
 import mage.abilities.keyword.HasteAbility;
 import mage.abilities.keyword.LivingWeaponAbility;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 
 /**
  *
@@ -48,9 +48,8 @@ import mage.cards.CardImpl;
  */
 public class Necropouncer extends CardImpl {
 
-    public Necropouncer(UUID ownerId) {
-        super(ownerId, 147, "Necropouncer", Rarity.UNCOMMON, new CardType[]{CardType.ARTIFACT}, "{6}");
-        this.expansionSetCode = "NPH";
+    public Necropouncer(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.ARTIFACT},"{6}");
         this.subtype.add("Equipment");
 
         this.addAbility(new LivingWeaponAbility());

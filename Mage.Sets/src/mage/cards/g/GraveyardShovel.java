@@ -25,11 +25,10 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.innistrad;
+package mage.cards.g;
 
 import mage.constants.CardType;
 import mage.constants.Outcome;
-import mage.constants.Rarity;
 import mage.constants.Zone;
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleActivatedAbility;
@@ -38,6 +37,7 @@ import mage.abilities.costs.mana.GenericManaCost;
 import mage.abilities.effects.OneShotEffect;
 import mage.cards.Card;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.game.Game;
 import mage.players.Player;
 import mage.target.TargetPlayer;
@@ -51,9 +51,8 @@ import java.util.UUID;
  */
 public class GraveyardShovel extends CardImpl {
 
-    public GraveyardShovel(UUID ownerId) {
-        super(ownerId, 225, "Graveyard Shovel", Rarity.UNCOMMON, new CardType[]{CardType.ARTIFACT}, "{2}");
-        this.expansionSetCode = "ISD";
+    public GraveyardShovel(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.ARTIFACT},"{2}");
 
         // {2}, {tap}: Target player exiles a card from his or her graveyard. If it's a creature card, you gain 2 life.
         Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new GraveyardShovelEffect(), new GenericManaCost(2));

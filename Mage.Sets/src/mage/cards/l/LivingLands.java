@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.limitedalpha;
+package mage.cards.l;
 
 import java.util.UUID;
 import mage.MageInt;
@@ -33,10 +33,10 @@ import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.effects.ContinuousEffect;
 import mage.abilities.effects.common.continuous.BecomesCreatureAllEffect;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.DependencyType;
 import mage.constants.Duration;
-import mage.constants.Rarity;
 import mage.constants.Zone;
 import mage.filter.common.FilterLandPermanent;
 import mage.filter.predicate.mageobject.SubtypePredicate;
@@ -54,9 +54,8 @@ public class LivingLands extends CardImpl {
         filter.add(new SubtypePredicate("Forest"));
     }
 
-    public LivingLands(UUID ownerId) {
-        super(ownerId, 118, "Living Lands", Rarity.RARE, new CardType[]{CardType.ENCHANTMENT}, "{3}{G}");
-        this.expansionSetCode = "LEA";
+    public LivingLands(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.ENCHANTMENT},"{3}{G}");
 
         // All Forests are 1/1 creatures that are still lands.
         ContinuousEffect effect = new BecomesCreatureAllEffect(new LivingLandsToken(), "lands", filter, Duration.WhileOnBattlefield);

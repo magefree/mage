@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.weatherlight;
+package mage.cards.h;
 
 import java.util.UUID;
 import mage.MageInt;
@@ -33,8 +33,8 @@ import mage.abilities.common.EntersBattlefieldTriggeredAbility;
 import mage.abilities.costs.common.ReturnToHandFromGraveyardCost;
 import mage.abilities.effects.common.SacrificeSourceUnlessPaysEffect;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.filter.common.FilterBasicLandCard;
 import mage.target.common.TargetCardInYourGraveyard;
 
@@ -44,9 +44,8 @@ import mage.target.common.TargetCardInYourGraveyard;
  */
 public class HarvestWurm extends CardImpl {
 
-    public HarvestWurm(UUID ownerId) {
-        super(ownerId, 72, "Harvest Wurm", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{1}{G}");
-        this.expansionSetCode = "WTH";
+    public HarvestWurm(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{1}{G}");
         this.subtype.add("Wurm");
         this.power = new MageInt(3);
         this.toughness = new MageInt(2);

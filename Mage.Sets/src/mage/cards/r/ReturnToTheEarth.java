@@ -25,14 +25,14 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.fatereforged;
+package mage.cards.r;
 
 import java.util.UUID;
 import mage.abilities.effects.common.DestroyTargetEffect;
 import mage.abilities.keyword.FlyingAbility;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.filter.FilterPermanent;
 import mage.filter.predicate.Predicates;
 import mage.filter.predicate.mageobject.AbilityPredicate;
@@ -57,9 +57,8 @@ public class ReturnToTheEarth extends CardImpl {
               ));
     }
 
-    public ReturnToTheEarth(UUID ownerId) {
-        super(ownerId, 135, "Return to the Earth", Rarity.COMMON, new CardType[]{CardType.INSTANT}, "{3}{G}");
-        this.expansionSetCode = "FRF";
+    public ReturnToTheEarth(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.INSTANT},"{3}{G}");
 
         // Destroy target artifact, enchantment, or creature with flying.
         this.getSpellAbility().addEffect(new DestroyTargetEffect());

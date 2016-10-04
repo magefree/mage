@@ -26,13 +26,13 @@
  *  or implied, of BetaSteward_at_googlemail.com.
  */
 
-package mage.sets.mirrodin;
+package mage.cards.g;
 
 import java.util.UUID;
 import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.abilities.mana.RedManaAbility;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 
 /**
  *
@@ -40,9 +40,8 @@ import mage.cards.CardImpl;
  */
 public class GreatFurnace extends CardImpl {
 
-    public GreatFurnace (UUID ownerId) {
-        super(ownerId, 282, "Great Furnace", Rarity.COMMON, new CardType[]{CardType.ARTIFACT, CardType.LAND}, null);
-        this.expansionSetCode = "MRD";
+    public GreatFurnace (UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.ARTIFACT,CardType.LAND},null);
         this.addAbility(new RedManaAbility());
     }
 

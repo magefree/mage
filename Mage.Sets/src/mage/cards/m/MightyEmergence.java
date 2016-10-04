@@ -25,15 +25,15 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.shardsofalara;
+package mage.cards.m;
 
 import java.util.UUID;
 import mage.abilities.common.EntersBattlefieldAllTriggeredAbility;
 import mage.abilities.effects.Effect;
 import mage.abilities.effects.common.counter.AddCountersTargetEffect;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.constants.SetTargetPointer;
 import mage.constants.Zone;
 import mage.counters.CounterType;
@@ -53,9 +53,8 @@ public class MightyEmergence extends CardImpl {
         filter.add(new PowerPredicate(Filter.ComparisonType.GreaterThan, 4));
     }
 
-    public MightyEmergence(UUID ownerId) {
-        super(ownerId, 137, "Mighty Emergence", Rarity.UNCOMMON, new CardType[]{CardType.ENCHANTMENT}, "{2}{G}");
-        this.expansionSetCode = "ALA";
+    public MightyEmergence(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.ENCHANTMENT},"{2}{G}");
 
         // Whenever a creature with power 5 or greater enters the battlefield under your control, you may put two +1/+1 counters on it.
         Effect effect = new AddCountersTargetEffect(CounterType.P2P2.createInstance());

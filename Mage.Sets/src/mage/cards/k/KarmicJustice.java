@@ -25,15 +25,15 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.odyssey;
+package mage.cards.k;
 
 import java.util.UUID;
 import mage.MageObject;
 import mage.abilities.TriggeredAbilityImpl;
 import mage.abilities.effects.common.DestroyTargetEffect;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.constants.Zone;
 import mage.filter.FilterPermanent;
 import mage.filter.predicate.permanent.ControllerIdPredicate;
@@ -49,9 +49,8 @@ import mage.target.TargetPermanent;
  */
 public class KarmicJustice extends CardImpl {
 
-    public KarmicJustice(UUID ownerId) {
-        super(ownerId, 26, "Karmic Justice", Rarity.RARE, new CardType[]{CardType.ENCHANTMENT}, "{2}{W}");
-        this.expansionSetCode = "ODY";
+    public KarmicJustice(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.ENCHANTMENT},"{2}{W}");
 
 
         // Whenever a spell or ability an opponent controls destroys a noncreature permanent you control, you may destroy target permanent that opponent controls.

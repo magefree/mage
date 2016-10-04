@@ -25,14 +25,14 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.nemesis;
+package mage.cards.o;
 
 import java.util.UUID;
 import mage.abilities.effects.common.combat.CantAttackBlockTargetEffect;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Duration;
-import mage.constants.Rarity;
 import mage.target.common.TargetCreaturePermanent;
 
 /**
@@ -41,9 +41,8 @@ import mage.target.common.TargetCreaturePermanent;
  */
 public class OffBalance extends CardImpl {
 
-    public OffBalance(UUID ownerId) {
-        super(ownerId, 15, "Off Balance", Rarity.COMMON, new CardType[]{CardType.INSTANT}, "{W}");
-        this.expansionSetCode = "NEM";
+    public OffBalance(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.INSTANT},"{W}");
 
         // Target creature can't attack or block this turn.
         this.getSpellAbility().addEffect(new CantAttackBlockTargetEffect(Duration.EndOfTurn));

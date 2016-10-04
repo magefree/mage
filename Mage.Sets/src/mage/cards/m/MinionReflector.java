@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.shardsofalara;
+package mage.cards.m;
 
 import java.util.UUID;
 import mage.abilities.Ability;
@@ -39,10 +39,10 @@ import mage.abilities.effects.common.PutTokenOntoBattlefieldCopyTargetEffect;
 import mage.abilities.effects.common.SacrificeSourceEffect;
 import mage.abilities.effects.common.continuous.GainAbilityTargetEffect;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Duration;
 import mage.constants.Outcome;
-import mage.constants.Rarity;
 import mage.constants.TargetController;
 import mage.filter.common.FilterControlledCreaturePermanent;
 import mage.filter.common.FilterCreaturePermanent;
@@ -65,9 +65,8 @@ public class MinionReflector extends CardImpl {
         filter.add(Predicates.not(new TokenPredicate()));
     }
 
-    public MinionReflector(UUID ownerId) {
-        super(ownerId, 211, "Minion Reflector", Rarity.RARE, new CardType[]{CardType.ARTIFACT}, "{5}");
-        this.expansionSetCode = "ALA";
+    public MinionReflector(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.ARTIFACT},"{5}");
 
         // Whenever a nontoken creature enters the battlefield under your control, you may pay {2}. If you do, put a token that's a copy of that creature onto the battlefield. That token has haste and "At the beginning of the end step, sacrifice this permanent."
         Ability ability = new MinionReflectorTriggeredAbility();

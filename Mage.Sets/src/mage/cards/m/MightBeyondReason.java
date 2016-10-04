@@ -25,15 +25,15 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.shadowsoverinnistrad;
+package mage.cards.m;
 
 import java.util.UUID;
 import mage.abilities.condition.common.DeliriumCondition;
 import mage.abilities.decorator.ConditionalOneShotEffect;
 import mage.abilities.effects.common.counter.AddCountersTargetEffect;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.counters.CounterType;
 import mage.target.common.TargetCreaturePermanent;
 
@@ -43,9 +43,8 @@ import mage.target.common.TargetCreaturePermanent;
  */
 public class MightBeyondReason extends CardImpl {
 
-    public MightBeyondReason(UUID ownerId) {
-        super(ownerId, 217, "Might Beyond Reason", Rarity.COMMON, new CardType[]{CardType.INSTANT}, "{3}{G}");
-        this.expansionSetCode = "SOI";
+    public MightBeyondReason(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.INSTANT},"{3}{G}");
 
         // Put two +1/+1 counter on target creature.
         // <i>Delirium</i> &mdash; Put three +1/+1 counter on that creature instead if there are four or more card types among cards in your graveyard.

@@ -25,11 +25,10 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.championsofkamigawa;
+package mage.cards.t;
 
 import java.util.UUID;
 import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.DealsCombatDamageToAPlayerTriggeredAbility;
@@ -37,6 +36,7 @@ import mage.abilities.effects.common.ReturnToHandTargetEffect;
 import mage.abilities.keyword.FlyingAbility;
 import mage.abilities.keyword.TrampleAbility;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.filter.FilterCard;
 import mage.filter.predicate.mageobject.SubtypePredicate;
 import mage.target.common.TargetCardInYourGraveyard;
@@ -53,9 +53,8 @@ public class TheUnspeakable extends CardImpl {
         filter.add(new SubtypePredicate("Arcane"));
     }
 
-    public TheUnspeakable(UUID ownerId) {
-        super(ownerId, 98, "The Unspeakable", Rarity.RARE, new CardType[]{CardType.CREATURE}, "{6}{U}{U}{U}");
-        this.expansionSetCode = "CHK";
+    public TheUnspeakable(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{6}{U}{U}{U}");
         this.supertype.add("Legendary");
         this.subtype.add("Spirit");
 

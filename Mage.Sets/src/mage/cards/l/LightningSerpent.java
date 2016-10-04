@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.coldsnap;
+package mage.cards.l;
 
 import java.util.UUID;
 import mage.MageInt;
@@ -36,8 +36,8 @@ import mage.abilities.effects.common.SacrificeSourceEffect;
 import mage.abilities.keyword.HasteAbility;
 import mage.abilities.keyword.TrampleAbility;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.constants.TargetController;
 import mage.counters.CounterType;
 
@@ -47,9 +47,8 @@ import mage.counters.CounterType;
  */
 public class LightningSerpent extends CardImpl {
 
-    public LightningSerpent(UUID ownerId) {
-        super(ownerId, 88, "Lightning Serpent", Rarity.RARE, new CardType[]{CardType.CREATURE}, "{X}{R}");
-        this.expansionSetCode = "CSP";
+    public LightningSerpent(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{X}{R}");
         this.subtype.add("Elemental");
         this.subtype.add("Serpent");
         this.power = new MageInt(2);

@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.judgment;
+package mage.cards.p;
 
 import java.util.UUID;
 import mage.abilities.Ability;
@@ -33,9 +33,9 @@ import mage.abilities.common.BeginningOfUpkeepTriggeredAbility;
 import mage.abilities.common.SpellCastAllTriggeredAbility;
 import mage.abilities.effects.OneShotEffect;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Outcome;
-import mage.constants.Rarity;
 import mage.constants.SetTargetPointer;
 import mage.constants.TargetController;
 import mage.filter.FilterSpell;
@@ -49,9 +49,8 @@ import mage.players.Player;
  */
 public class PlanarChaos extends CardImpl {
 
-    public PlanarChaos(UUID ownerId) {
-        super(ownerId, 97, "Planar Chaos", Rarity.UNCOMMON, new CardType[]{CardType.ENCHANTMENT}, "{2}{R}");
-        this.expansionSetCode = "JUD";
+    public PlanarChaos(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.ENCHANTMENT},"{2}{R}");
 
         // At the beginning of your upkeep, flip a coin. If you lose the flip, sacrifice Planar Chaos.
         this.addAbility(new BeginningOfUpkeepTriggeredAbility(new PlanarChaosUpkeepEffect(), TargetController.YOU, false));

@@ -25,13 +25,13 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.riseoftheeldrazi;
+package mage.cards.c;
 
 import java.util.UUID;
 import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.abilities.effects.common.DestroyAllEffect;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.filter.Filter;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.filter.predicate.mageobject.ConvertedManaCostPredicate;
@@ -48,9 +48,8 @@ public class ConsumeTheMeek extends CardImpl {
     filter.add(new ConvertedManaCostPredicate(Filter.ComparisonType.LessThan, 4));
     }
 
-    public ConsumeTheMeek(UUID ownerId) {
-        super(ownerId, 100, "Consume the Meek", Rarity.RARE, new CardType[]{CardType.INSTANT}, "{3}{B}{B}");
-        this.expansionSetCode = "ROE";
+    public ConsumeTheMeek(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.INSTANT},"{3}{B}{B}");
 
 
         // Destroy each creature with converted mana cost 3 or less. They can't be regenerated.

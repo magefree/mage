@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.conspiracytakethecrown;
+package mage.cards.d;
 
 import java.util.UUID;
 import mage.MageInt;
@@ -40,9 +40,9 @@ import mage.abilities.effects.common.DoIfCostPaid;
 import mage.abilities.effects.common.PutTokenOntoBattlefieldCopyTargetEffect;
 import mage.abilities.keyword.DefenderAbility;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Outcome;
-import mage.constants.Rarity;
 import mage.filter.StaticFilters;
 import mage.filter.common.FilterArtifactCard;
 import mage.filter.common.FilterControlledArtifactPermanent;
@@ -58,9 +58,8 @@ import mage.target.common.TargetControlledPermanent;
  */
 public class DarettiIngeniousIconoclast extends CardImpl {
 
-    public DarettiIngeniousIconoclast(UUID ownerId) {
-        super(ownerId, 74, "Daretti, Ingenious Iconoclast", Rarity.MYTHIC, new CardType[]{CardType.PLANESWALKER}, "{1}{B}{R}");
-        this.expansionSetCode = "CN2";
+    public DarettiIngeniousIconoclast(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.PLANESWALKER},"{1}{B}{R}");
         this.subtype.add("Daretti");
 
         this.addAbility(new PlanswalkerEntersWithLoyalityCountersAbility(3));

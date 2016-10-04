@@ -25,15 +25,15 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.lorwyn;
+package mage.cards.l;
 
 import java.util.UUID;
 import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.MageInt;
 import mage.abilities.common.SpellCastControllerTriggeredAbility;
 import mage.abilities.effects.common.CreateTokenEffect;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.filter.FilterSpell;
 import mage.filter.predicate.mageobject.SubtypePredicate;
 import mage.game.permanent.token.ElfToken;
@@ -50,9 +50,8 @@ public class LysAlanaHuntmaster extends CardImpl {
         filter.add(new SubtypePredicate("Elf"));
     }
 
-    public LysAlanaHuntmaster(UUID ownerId) {
-        super(ownerId, 229, "Lys Alana Huntmaster", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{2}{G}{G}");
-        this.expansionSetCode = "LRW";
+    public LysAlanaHuntmaster(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{2}{G}{G}");
         this.subtype.add("Elf");
         this.subtype.add("Warrior");
 

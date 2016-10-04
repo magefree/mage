@@ -25,12 +25,11 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.timespiral;
+package mage.cards.g;
 
 import java.util.UUID;
 
 import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.MageInt;
 import mage.abilities.ActivatedAbilityImpl;
 import mage.abilities.costs.common.SacrificeTargetCost;
@@ -39,6 +38,7 @@ import mage.abilities.effects.common.counter.RemoveCounterSourceEffect;
 import mage.abilities.keyword.SuspendAbility;
 import mage.cards.Card;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.Zone;
 import mage.counters.CounterType;
 import mage.filter.common.FilterControlledPermanent;
@@ -55,9 +55,8 @@ public class GreaterGargadon extends CardImpl {
 
 
     
-    public GreaterGargadon(UUID ownerId) {
-        super(ownerId, 161, "Greater Gargadon", Rarity.RARE, new CardType[]{CardType.CREATURE}, "{9}{R}");
-        this.expansionSetCode = "TSP";
+    public GreaterGargadon(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{9}{R}");
         this.subtype.add("Beast");
 
         this.power = new MageInt(9);

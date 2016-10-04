@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.invasion;
+package mage.cards.m;
 
 import java.util.UUID;
 import mage.MageInt;
@@ -35,6 +35,7 @@ import mage.abilities.dynamicvalue.common.PermanentsOnBattlefieldCount;
 import mage.abilities.effects.common.continuous.BoostSourceEffect;
 import mage.abilities.keyword.ProtectionAbility;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.*;
 import mage.filter.FilterCard;
 import mage.filter.common.FilterLandPermanent;
@@ -56,9 +57,8 @@ public class MaraudingKnight extends CardImpl {
       plainsFilter.add(new ControllerPredicate(TargetController.OPPONENT));
     }
 
-    public MaraudingKnight(UUID ownerId) {
-        super(ownerId, 110, "Marauding Knight", Rarity.RARE, new CardType[]{CardType.CREATURE}, "{2}{B}{B}");
-        this.expansionSetCode = "INV";
+    public MaraudingKnight(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{2}{B}{B}");
         this.subtype.add("Zombie");
         this.subtype.add("Knight");
         this.power = new MageInt(2);

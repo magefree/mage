@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.legions;
+package mage.cards.d;
 
 import java.util.UUID;
 import mage.MageInt;
@@ -33,8 +33,8 @@ import mage.abilities.common.CantBlockAbility;
 import mage.abilities.common.DealsCombatDamageToACreatureTriggeredAbility;
 import mage.abilities.effects.common.DestroyTargetEffect;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.Rarity;
 
 /**
  *
@@ -42,9 +42,8 @@ import mage.constants.Rarity;
  */
 public class DrippingDead extends CardImpl {
 
-    public DrippingDead(UUID ownerId) {
-        super(ownerId, 67, "Dripping Dead", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{4}{B}{B}");
-        this.expansionSetCode = "LGN";
+    public DrippingDead(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{4}{B}{B}");
         this.subtype.add("Zombie");
         this.power = new MageInt(4);
         this.toughness = new MageInt(1);

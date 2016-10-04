@@ -25,13 +25,13 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.urzasdestiny;
+package mage.cards.p;
 
 import java.util.UUID;
 import mage.abilities.effects.common.PutOnLibraryTargetEffect;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.filter.common.FilterLandPermanent;
 import mage.target.common.TargetLandPermanent;
 
@@ -41,9 +41,8 @@ import mage.target.common.TargetLandPermanent;
  */
 public class PlowUnder extends CardImpl {
 
-    public PlowUnder(UUID ownerId) {
-        super(ownerId, 117, "Plow Under", Rarity.RARE, new CardType[]{CardType.SORCERY}, "{3}{G}{G}");
-        this.expansionSetCode = "UDS";
+    public PlowUnder(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{3}{G}{G}");
 
 
         // Put two target lands on top of their owners' libraries.

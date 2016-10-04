@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.planeshift;
+package mage.cards.m;
 
 import java.util.HashMap;
 import java.util.List;
@@ -33,9 +33,9 @@ import java.util.UUID;
 import mage.abilities.Ability;
 import mage.abilities.effects.OneShotEffect;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Outcome;
-import mage.constants.Rarity;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
@@ -48,9 +48,8 @@ import mage.game.permanent.token.SpiritWhiteToken;
  */
 public class MarchOfSouls extends CardImpl {
 
-    public MarchOfSouls(UUID ownerId) {
-        super(ownerId, 10, "March of Souls", Rarity.RARE, new CardType[]{CardType.SORCERY}, "{4}{W}");
-        this.expansionSetCode = "PLS";
+    public MarchOfSouls(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{4}{W}");
 
         // Destroy all creatures. They can't be regenerated. For each creature destroyed this way, its controller puts a 1/1 white Spirit creature token with flying onto the battlefield.
         this.getSpellAbility().addEffect(new MarchOfSoulsEffect());

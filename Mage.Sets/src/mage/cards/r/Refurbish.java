@@ -25,13 +25,13 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.kaladesh;
+package mage.cards.r;
 
 import java.util.UUID;
 import mage.abilities.effects.common.ReturnFromGraveyardToBattlefieldTargetEffect;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.filter.common.FilterArtifactCard;
 import mage.target.common.TargetCardInYourGraveyard;
 
@@ -41,9 +41,8 @@ import mage.target.common.TargetCardInYourGraveyard;
  */
 public class Refurbish extends CardImpl {
 
-    public Refurbish(UUID ownerId) {
-        super(ownerId, 25, "Refurbish", Rarity.UNCOMMON, new CardType[]{CardType.SORCERY}, "{3}{W}");
-        this.expansionSetCode = "KLD";
+    public Refurbish(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{3}{W}");
 
         // Return target artifact card from your graveyard to the battlefield.
         this.getSpellAbility().addTarget(new TargetCardInYourGraveyard(new FilterArtifactCard("artifact card from your graveyard")));

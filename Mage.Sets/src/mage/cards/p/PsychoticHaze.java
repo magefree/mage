@@ -25,14 +25,14 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.torment;
+package mage.cards.p;
 
 import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.abilities.costs.mana.ManaCostsImpl;
 import mage.abilities.effects.common.DamageEverythingEffect;
 import mage.abilities.keyword.MadnessAbility;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 
 import java.util.UUID;
 
@@ -42,9 +42,8 @@ import java.util.UUID;
  */
 public class PsychoticHaze extends CardImpl {
 
-    public PsychoticHaze(UUID ownerId) {
-        super(ownerId, 76, "Psychotic Haze", Rarity.COMMON, new CardType[]{CardType.INSTANT}, "{2}{B}{B}");
-        this.expansionSetCode = "TOR";
+    public PsychoticHaze(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.INSTANT},"{2}{B}{B}");
 
 
         // Psychotic Haze deals 1 damage to each creature and each player.

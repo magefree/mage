@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.scourge;
+package mage.cards.b;
 
 import java.util.UUID;
 import mage.abilities.costs.mana.ManaCostsImpl;
@@ -34,8 +34,8 @@ import mage.abilities.keyword.CyclingAbility;
 import mage.filter.common.FilterArtifactOrEnchantmentPermanent;
 import mage.target.TargetPermanent;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.Rarity;
 
 /**
  *
@@ -43,9 +43,8 @@ import mage.constants.Rarity;
  */
 public class BreakAsunder extends CardImpl {
 
-    public BreakAsunder(UUID ownerId) {
-        super(ownerId, 113, "Break Asunder", Rarity.COMMON, new CardType[]{CardType.SORCERY}, "{2}{G}{G}");
-        this.expansionSetCode = "SCG";
+    public BreakAsunder(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{2}{G}{G}");
 
         // Destroy target artifact or enchantment.
         this.getSpellAbility().addEffect(new DestroyTargetEffect());

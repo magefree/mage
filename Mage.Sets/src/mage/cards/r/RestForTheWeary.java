@@ -25,15 +25,15 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.worldwake;
+package mage.cards.r;
 
 import java.util.UUID;
 import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.abilities.condition.common.LandfallCondition;
 import mage.abilities.decorator.ConditionalOneShotEffect;
 import mage.abilities.effects.common.GainLifeTargetEffect;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.target.TargetPlayer;
 import mage.watchers.common.LandfallWatcher;
 
@@ -43,9 +43,8 @@ import mage.watchers.common.LandfallWatcher;
  */
 public class RestForTheWeary extends CardImpl {
 
-    public RestForTheWeary(UUID ownerId) {
-        super(ownerId, 18, "Rest for the Weary", Rarity.COMMON, new CardType[]{CardType.INSTANT}, "{1}{W}");
-        this.expansionSetCode = "WWK";
+    public RestForTheWeary(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.INSTANT},"{1}{W}");
 
         // Target player gains 4 life.
         // Landfall - If you had a land enter the battlefield under your control this turn, that player gains 8 life instead.

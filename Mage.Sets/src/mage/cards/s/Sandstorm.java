@@ -25,13 +25,13 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.fourthedition;
+package mage.cards.s;
 
 import java.util.UUID;
 import mage.abilities.effects.common.DamageAllEffect;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.filter.common.FilterAttackingCreature;
 
 /**
@@ -40,9 +40,8 @@ import mage.filter.common.FilterAttackingCreature;
  */
 public class Sandstorm extends CardImpl {
   
-    public Sandstorm(UUID ownerId) {
-        super(ownerId, 153, "Sandstorm", Rarity.COMMON, new CardType[]{CardType.INSTANT}, "{G}");
-        this.expansionSetCode = "4ED";
+    public Sandstorm(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.INSTANT},"{G}");
 
         // Sandstorm deals 1 damage to each attacking creature.
         this.getSpellAbility().addEffect(new DamageAllEffect(1, new FilterAttackingCreature()));

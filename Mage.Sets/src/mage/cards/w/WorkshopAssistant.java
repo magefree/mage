@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.kaladesh;
+package mage.cards.w;
 
 import java.util.UUID;
 import mage.MageInt;
@@ -34,8 +34,8 @@ import mage.abilities.common.DiesTriggeredAbility;
 import mage.abilities.effects.Effect;
 import mage.abilities.effects.common.ReturnFromGraveyardToHandTargetEffect;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.filter.common.FilterArtifactCard;
 import mage.filter.predicate.mageobject.AnotherCardPredicate;
 import mage.target.common.TargetCardInYourGraveyard;
@@ -52,9 +52,8 @@ public class WorkshopAssistant extends CardImpl {
         filter.add(new AnotherCardPredicate());
     }
 
-    public WorkshopAssistant(UUID ownerId) {
-        super(ownerId, 241, "Workshop Assistant", Rarity.COMMON, new CardType[]{CardType.ARTIFACT, CardType.CREATURE}, "{3}");
-        this.expansionSetCode = "KLD";
+    public WorkshopAssistant(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.ARTIFACT,CardType.CREATURE},"{3}");
         this.subtype.add("Construct");
         this.power = new MageInt(1);
         this.toughness = new MageInt(2);

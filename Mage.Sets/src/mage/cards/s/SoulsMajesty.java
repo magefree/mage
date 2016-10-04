@@ -26,15 +26,15 @@
  *  or implied, of BetaSteward_at_googlemail.com.
  */
 
-package mage.sets.conflux;
+package mage.cards.s;
 
 import java.util.UUID;
 import mage.constants.CardType;
 import mage.constants.Outcome;
-import mage.constants.Rarity;
 import mage.abilities.Ability;
 import mage.abilities.effects.OneShotEffect;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.players.Player;
@@ -46,9 +46,8 @@ import mage.target.common.TargetControlledCreaturePermanent;
  */
 public class SoulsMajesty extends CardImpl {
 
-    public SoulsMajesty(UUID ownerId) {
-        super(ownerId, 92, "Soul's Majesty", Rarity.RARE, new CardType[]{CardType.SORCERY}, "{4}{G}");
-        this.expansionSetCode = "CON";
+    public SoulsMajesty(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{4}{G}");
 
         this.getSpellAbility().addTarget(new TargetControlledCreaturePermanent());
         this.getSpellAbility().addEffect(new SoulsMajestyEffect());

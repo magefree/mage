@@ -25,14 +25,14 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.torment;
+package mage.cards.v;
 
 import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.abilities.costs.mana.ManaCostsImpl;
 import mage.abilities.effects.common.DamageMultiEffect;
 import mage.abilities.keyword.MadnessAbility;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.target.common.TargetCreatureOrPlayerAmount;
 
 import java.util.UUID;
@@ -43,9 +43,8 @@ import java.util.UUID;
  */
 public class ViolentEruption extends CardImpl {
 
-    public ViolentEruption(UUID ownerId) {
-        super(ownerId, 117, "Violent Eruption", Rarity.UNCOMMON, new CardType[]{CardType.INSTANT}, "{1}{R}{R}{R}");
-        this.expansionSetCode = "TOR";
+    public ViolentEruption(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.INSTANT},"{1}{R}{R}{R}");
 
 
         // Violent Eruption deals 4 damage divided as you choose among any number of target creatures and/or players.

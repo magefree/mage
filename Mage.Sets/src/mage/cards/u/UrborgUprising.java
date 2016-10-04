@@ -25,13 +25,13 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.apocalypse;
+package mage.cards.u;
 
 import mage.abilities.effects.common.DrawCardSourceControllerEffect;
 import mage.abilities.effects.common.ReturnFromGraveyardToHandTargetEffect;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.filter.common.FilterCreatureCard;
 import mage.target.common.TargetCardInYourGraveyard;
 
@@ -42,9 +42,8 @@ import java.util.UUID;
  */
 public class UrborgUprising extends CardImpl {
 
-    public UrborgUprising(UUID ownerId) {
-        super(ownerId, 53, "Urborg Uprising", Rarity.COMMON, new CardType[]{CardType.SORCERY}, "{4}{B}");
-        this.expansionSetCode = "APC";
+    public UrborgUprising(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{4}{B}");
 
         // Return up to two target creature cards from your graveyard to your hand.
         this.getSpellAbility().addEffect(new ReturnFromGraveyardToHandTargetEffect());

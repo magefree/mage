@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.apocalypse;
+package mage.cards.s;
 
 import java.util.UUID;
 import mage.abilities.condition.LockedInCondition;
@@ -35,9 +35,9 @@ import mage.abilities.effects.ContinuousEffect;
 import mage.abilities.effects.common.continuous.BoostControlledEffect;
 import mage.abilities.keyword.KickerAbility;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Duration;
-import mage.constants.Rarity;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.filter.predicate.mageobject.SubtypePredicate;
 
@@ -54,9 +54,8 @@ public class StrengthOfNight extends CardImpl {
         filter.add(new SubtypePredicate("Zombie"));
     }
 
-    public StrengthOfNight(UUID ownerId) {
-        super(ownerId, 86, "Strength of Night", Rarity.COMMON, new CardType[]{CardType.INSTANT}, "{2}{G}");
-        this.expansionSetCode = "APC";
+    public StrengthOfNight(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.INSTANT},"{2}{G}");
 
         // Kicker {B}
         this.addAbility(new KickerAbility("{B}"));

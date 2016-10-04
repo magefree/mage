@@ -25,12 +25,11 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.shadowmoor;
+package mage.cards.g;
 
 import java.util.UUID;
 import mage.constants.CardType;
 import mage.constants.Duration;
-import mage.constants.Rarity;
 import mage.MageInt;
 import mage.ObjectColor;
 import mage.abilities.common.SpellCastControllerTriggeredAbility;
@@ -38,6 +37,7 @@ import mage.abilities.effects.common.continuous.BoostSourceEffect;
 import mage.abilities.effects.common.continuous.GainAbilitySourceEffect;
 import mage.abilities.keyword.FearAbility;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.filter.FilterSpell;
 import mage.filter.predicate.mageobject.ColorPredicate;
 
@@ -55,9 +55,8 @@ public class GravelgillDuo extends CardImpl {
         blackFilter.add(new ColorPredicate(ObjectColor.BLACK));
     }
 
-    public GravelgillDuo(UUID ownerId) {
-        super(ownerId, 165, "Gravelgill Duo", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{2}{U/B}");
-        this.expansionSetCode = "SHM";
+    public GravelgillDuo(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{2}{U/B}");
         this.subtype.add("Merfolk");
         this.subtype.add("Rogue");
         this.subtype.add("Warrior");

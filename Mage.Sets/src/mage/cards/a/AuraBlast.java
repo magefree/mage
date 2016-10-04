@@ -25,14 +25,14 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.planeshift;
+package mage.cards.a;
 
 import java.util.UUID;
 import mage.abilities.effects.common.DestroyTargetEffect;
 import mage.abilities.effects.common.DrawCardSourceControllerEffect;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.target.common.TargetEnchantmentPermanent;
 
 /**
@@ -42,9 +42,8 @@ import mage.target.common.TargetEnchantmentPermanent;
  */
 public class AuraBlast extends CardImpl {
 
-    public AuraBlast(UUID ownerId) {
-        super(ownerId, 1, "Aura Blast", Rarity.COMMON, new CardType[]{CardType.INSTANT}, "{1}{W}");
-        this.expansionSetCode = "PLS";
+    public AuraBlast(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.INSTANT},"{1}{W}");
 
         // Destroy target enchantment.
         this.getSpellAbility().addEffect(new DestroyTargetEffect());

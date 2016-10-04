@@ -26,13 +26,13 @@
  *  or implied, of BetaSteward_at_googlemail.com.
  */
 
-package mage.sets.riseoftheeldrazi;
+package mage.cards.i;
 
 import java.util.UUID;
 import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.abilities.effects.common.discard.DiscardCardYouChooseTargetEffect;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.TargetController;
 import mage.filter.Filter;
 import mage.filter.FilterCard;
@@ -54,9 +54,8 @@ public class InquisitionOfKozilek extends CardImpl {
         filter.add(new ConvertedManaCostPredicate(Filter.ComparisonType.LessThan, 4));
     }
 
-    public InquisitionOfKozilek(UUID ownerId){
-        super(ownerId, 115, "Inquisition of Kozilek", Rarity.UNCOMMON, new CardType[]{CardType.SORCERY},"{B}");
-        this.expansionSetCode = "ROE";
+    public InquisitionOfKozilek(UUID ownerId, CardSetInfo setInfo){
+        super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{B}");
 
         this.getSpellAbility().addTarget(new TargetPlayer());
         this.getSpellAbility().addEffect(new DiscardCardYouChooseTargetEffect(filter, TargetController.ANY));

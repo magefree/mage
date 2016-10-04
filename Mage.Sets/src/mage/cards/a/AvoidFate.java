@@ -25,13 +25,13 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.legends;
+package mage.cards.a;
 
 import java.util.UUID;
 import mage.abilities.effects.common.CounterTargetEffect;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.filter.FilterSpell;
 import mage.filter.common.FilterControlledPermanent;
 import mage.filter.predicate.Predicates;
@@ -53,9 +53,8 @@ public class AvoidFate extends CardImpl {
         filter.add(new TargetsPermanentPredicate(new FilterControlledPermanent()));
     }
 
-    public AvoidFate(UUID ownerId) {
-        super(ownerId, 89, "Avoid Fate", Rarity.COMMON, new CardType[]{CardType.INSTANT}, "{G}");
-        this.expansionSetCode = "LEG";
+    public AvoidFate(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.INSTANT},"{G}");
 
         // Counter target instant or Aura spell that targets a permanent you control.
         this.getSpellAbility().addEffect(new CounterTargetEffect());

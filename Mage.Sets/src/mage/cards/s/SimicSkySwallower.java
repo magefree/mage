@@ -25,16 +25,16 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.dissension;
+package mage.cards.s;
 
 import java.util.UUID;
 import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.MageInt;
 import mage.abilities.keyword.FlyingAbility;
 import mage.abilities.keyword.TrampleAbility;
 import mage.abilities.keyword.ShroudAbility;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 
 /**
  *
@@ -42,9 +42,8 @@ import mage.cards.CardImpl;
  */
 public class SimicSkySwallower extends CardImpl {
 
-    public SimicSkySwallower(UUID ownerId) {
-        super(ownerId, 130, "Simic Sky Swallower", Rarity.RARE, new CardType[]{CardType.CREATURE}, "{5}{G}{U}");
-        this.expansionSetCode = "DIS";
+    public SimicSkySwallower(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{5}{G}{U}");
         this.subtype.add("Leviathan");
 
         this.power = new MageInt(6);

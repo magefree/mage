@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.magicorigins;
+package mage.cards.g;
 
 import java.util.UUID;
 import mage.ConditionalMana;
@@ -43,9 +43,9 @@ import mage.abilities.mana.ConditionalColoredManaAbility;
 import mage.abilities.mana.builder.ConditionalManaBuilder;
 import mage.abilities.mana.conditional.CreatureCastManaCondition;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Duration;
-import mage.constants.Rarity;
 import mage.constants.Zone;
 import mage.filter.common.FilterControlledCreaturePermanent;
 import mage.filter.predicate.mageobject.SubtypePredicate;
@@ -66,9 +66,8 @@ public class GnarlrootTrapper extends CardImpl {
         filter.add(new SubtypePredicate("Elf"));
     }
 
-    public GnarlrootTrapper(UUID ownerId) {
-        super(ownerId, 100, "Gnarlroot Trapper", Rarity.UNCOMMON, new CardType[]{CardType.CREATURE}, "{B}");
-        this.expansionSetCode = "ORI";
+    public GnarlrootTrapper(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{B}");
         this.subtype.add("Elf");
         this.subtype.add("Druid");
         this.power = new MageInt(1);

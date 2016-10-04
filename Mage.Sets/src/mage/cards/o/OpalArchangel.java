@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.urzassaga;
+package mage.cards.o;
 
 import java.util.UUID;
 import mage.MageInt;
@@ -37,9 +37,9 @@ import mage.abilities.effects.common.continuous.BecomesCreatureSourceEffect;
 import mage.abilities.keyword.FlyingAbility;
 import mage.abilities.keyword.VigilanceAbility;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Duration;
-import mage.constants.Rarity;
 import mage.filter.common.FilterCreatureSpell;
 import mage.filter.common.FilterEnchantmentPermanent;
 import mage.game.permanent.token.Token;
@@ -51,9 +51,8 @@ import mage.game.permanent.token.Token;
  */
 public class OpalArchangel extends CardImpl {
 
-    public OpalArchangel(UUID ownerId) {
-        super(ownerId, 23, "Opal Archangel", Rarity.RARE, new CardType[]{CardType.ENCHANTMENT}, "{4}{W}");
-        this.expansionSetCode = "USG";
+    public OpalArchangel(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.ENCHANTMENT},"{4}{W}");
 
         // When an opponent casts a creature spell, if Opal Archangel is an enchantment, Opal Archangel becomes a 5/5 Angel creature with flying and vigilance.
         TriggeredAbility ability = new SpellCastOpponentTriggeredAbility(new BecomesCreatureSourceEffect(new OpalArchangelToken(), "", Duration.WhileOnBattlefield, true, false),

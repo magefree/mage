@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.magic2011;
+package mage.cards.g;
 
 import java.util.UUID;
 import mage.MageInt;
@@ -35,9 +35,9 @@ import mage.abilities.effects.common.CantBeCounteredSourceEffect;
 import mage.abilities.effects.common.CantBeTargetedSourceEffect;
 import mage.abilities.keyword.HasteAbility;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Duration;
-import mage.constants.Rarity;
 import mage.constants.Zone;
 import mage.filter.FilterObject;
 import mage.filter.FilterStackObject;
@@ -56,9 +56,8 @@ public class GaeasRevenge extends CardImpl {
         filter.add(Predicates.not(new ColorPredicate(ObjectColor.GREEN)));
     }
 
-    public GaeasRevenge(UUID ownerId) {
-        super(ownerId, 174, "Gaea's Revenge", Rarity.MYTHIC, new CardType[]{CardType.CREATURE}, "{5}{G}{G}");
-        this.expansionSetCode = "M11";
+    public GaeasRevenge(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{5}{G}{G}");
         this.subtype.add("Elemental");
 
         this.power = new MageInt(8);

@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.urzasdestiny;
+package mage.cards.c;
 
 import java.util.UUID;
 import mage.MageInt;
@@ -33,8 +33,8 @@ import mage.abilities.common.ControlsPermanentsControllerTriggeredAbility;
 import mage.abilities.effects.common.SacrificeSourceEffect;
 import mage.abilities.keyword.FlyingAbility;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.filter.Filter;
 import mage.filter.common.FilterArtifactPermanent;
 
@@ -44,9 +44,8 @@ import mage.filter.common.FilterArtifactPermanent;
  */
 public class CovetousDragon extends CardImpl {
 
-    public CovetousDragon(UUID ownerId) {
-        super(ownerId, 80, "Covetous Dragon", Rarity.RARE, new CardType[]{CardType.CREATURE}, "{4}{R}");
-        this.expansionSetCode = "UDS";
+    public CovetousDragon(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{4}{R}");
         this.subtype.add("Dragon");
         this.power = new MageInt(6);
         this.toughness = new MageInt(5);

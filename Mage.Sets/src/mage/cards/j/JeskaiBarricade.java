@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.fatereforged;
+package mage.cards.j;
 
 import java.util.UUID;
 import mage.MageInt;
@@ -35,8 +35,8 @@ import mage.abilities.effects.common.ReturnToHandTargetEffect;
 import mage.abilities.keyword.FlashAbility;
 import mage.abilities.keyword.DefenderAbility;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.constants.TargetController;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.filter.predicate.permanent.AnotherPredicate;
@@ -56,9 +56,8 @@ public class JeskaiBarricade extends CardImpl {
         filter.add(new ControllerPredicate(TargetController.YOU));
     }
 
-    public JeskaiBarricade(UUID ownerId) {
-        super(ownerId, 15, "Jeskai Barricade", Rarity.UNCOMMON, new CardType[]{CardType.CREATURE}, "{1}{W}");
-        this.expansionSetCode = "FRF";
+    public JeskaiBarricade(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{1}{W}");
         this.subtype.add("Wall");
         this.power = new MageInt(0);
         this.toughness = new MageInt(4);

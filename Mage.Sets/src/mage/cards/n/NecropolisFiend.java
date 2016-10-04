@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.khansoftarkir;
+package mage.cards.n;
 
 import java.util.UUID;
 import mage.MageInt;
@@ -45,9 +45,9 @@ import mage.abilities.effects.common.continuous.BoostTargetEffect;
 import mage.abilities.keyword.DelveAbility;
 import mage.abilities.keyword.FlyingAbility;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Duration;
-import mage.constants.Rarity;
 import mage.constants.Zone;
 import mage.filter.FilterCard;
 import mage.game.Game;
@@ -62,9 +62,8 @@ import mage.target.common.TargetCreaturePermanent;
  */
 public class NecropolisFiend extends CardImpl {
 
-    public NecropolisFiend(UUID ownerId) {
-        super(ownerId, 82, "Necropolis Fiend", Rarity.RARE, new CardType[]{CardType.CREATURE}, "{7}{B}{B}");
-        this.expansionSetCode = "KTK";
+    public NecropolisFiend(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{7}{B}{B}");
         this.subtype.add("Demon");
 
         this.power = new MageInt(4);

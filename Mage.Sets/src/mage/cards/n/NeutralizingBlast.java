@@ -25,13 +25,13 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.fatereforged;
+package mage.cards.n;
 
 import java.util.UUID;
 import mage.abilities.effects.common.CounterTargetEffect;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.filter.FilterSpell;
 import mage.filter.predicate.mageobject.MulticoloredPredicate;
 import mage.target.TargetSpell;
@@ -47,9 +47,8 @@ public class NeutralizingBlast extends CardImpl {
         filter.add(new MulticoloredPredicate());
     }
 
-    public NeutralizingBlast(UUID ownerId) {
-        super(ownerId, 44, "Neutralizing Blast", Rarity.UNCOMMON, new CardType[]{CardType.INSTANT}, "{1}{U}");
-        this.expansionSetCode = "FRF";
+    public NeutralizingBlast(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.INSTANT},"{1}{U}");
 
         // Counter target multicolored spell.
         this.getSpellAbility().addEffect(new CounterTargetEffect());

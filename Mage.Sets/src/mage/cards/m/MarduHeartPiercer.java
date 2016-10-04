@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.khansoftarkir;
+package mage.cards.m;
 
 import java.util.UUID;
 import mage.MageInt;
@@ -35,8 +35,8 @@ import mage.abilities.condition.common.RaidCondition;
 import mage.abilities.decorator.ConditionalTriggeredAbility;
 import mage.abilities.effects.common.DamageTargetEffect;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.target.common.TargetCreatureOrPlayer;
 import mage.watchers.common.PlayerAttackedWatcher;
 
@@ -46,9 +46,8 @@ import mage.watchers.common.PlayerAttackedWatcher;
  */
 public class MarduHeartPiercer extends CardImpl {
 
-    public MarduHeartPiercer(UUID ownerId) {
-        super(ownerId, 116, "Mardu Heart-Piercer", Rarity.UNCOMMON, new CardType[]{CardType.CREATURE}, "{3}{R}");
-        this.expansionSetCode = "KTK";
+    public MarduHeartPiercer(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{3}{R}");
         this.subtype.add("Human");
         this.subtype.add("Archer");
 

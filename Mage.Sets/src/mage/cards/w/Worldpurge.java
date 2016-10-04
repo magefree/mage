@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.shadowmoor;
+package mage.cards.w;
 
 import java.util.HashSet;
 import java.util.Set;
@@ -35,11 +35,11 @@ import mage.abilities.Ability;
 import mage.abilities.effects.OneShotEffect;
 import mage.cards.Card;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.cards.Cards;
 import mage.cards.CardsImpl;
 import mage.constants.CardType;
 import mage.constants.Outcome;
-import mage.constants.Rarity;
 import mage.constants.Zone;
 import mage.filter.FilterCard;
 import mage.filter.FilterPermanent;
@@ -53,9 +53,8 @@ import mage.target.common.TargetCardInHand;
  */
 public class Worldpurge extends CardImpl {
 
-    public Worldpurge(UUID ownerId) {
-        super(ownerId, 156, "Worldpurge", Rarity.RARE, new CardType[]{CardType.SORCERY}, "{4}{W/U}{W/U}{W/U}{W/U}");
-        this.expansionSetCode = "SHM";
+    public Worldpurge(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{4}{W/U}{W/U}{W/U}{W/U}");
 
         // Return all permanents to their owners' hands. Each player chooses up to seven cards in his or her hand, then shuffles the rest into his or her library. Empty all mana pools.
         this.getSpellAbility().addEffect(new WorldpurgeEffect());

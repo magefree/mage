@@ -25,13 +25,13 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.tenthedition;
+package mage.cards.r;
 
 import java.util.UUID;
 import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.abilities.effects.common.ReturnToHandTargetEffect;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.target.common.TargetCardInYourGraveyard;
 
 /**
@@ -40,9 +40,8 @@ import mage.target.common.TargetCardInYourGraveyard;
  */
 public class Recollect extends CardImpl {
 
-    public Recollect(UUID ownerId) {
-        super(ownerId, 289, "Recollect", Rarity.UNCOMMON, new CardType[]{CardType.SORCERY}, "{2}{G}");
-        this.expansionSetCode = "10E";
+    public Recollect(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{2}{G}");
 
 
         // Return target card from your graveyard to your hand.

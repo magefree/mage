@@ -25,15 +25,15 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.starwars;
+package mage.cards.t;
 
 import java.util.UUID;
 import mage.abilities.common.DiesTriggeredAbility;
 import mage.abilities.dynamicvalue.common.ManacostVariableValue;
 import mage.abilities.effects.common.CreateTokenEffect;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.game.permanent.token.Token;
 import mage.game.permanent.token.TrooperToken;
 
@@ -43,9 +43,8 @@ import mage.game.permanent.token.TrooperToken;
  */
 public class TheBattleOfHoth extends CardImpl {
     
-    public TheBattleOfHoth(UUID ownerId) {
-        super(ownerId, 4, "The Battle of Hoth", Rarity.MYTHIC, new CardType[]{CardType.SORCERY}, "{X}{X}{W}{W}{W}");
-        this.expansionSetCode = "SWS";
+    public TheBattleOfHoth(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{X}{X}{W}{W}{W}");
 
         // Create X 5/5 white artifact AT-AT creature tokens wiht "When this creature dies, create two 1/1 white Trooper creature tokens."
         this.getSpellAbility().addEffect(new CreateTokenEffect(new ATATToken(), new ManacostVariableValue()));

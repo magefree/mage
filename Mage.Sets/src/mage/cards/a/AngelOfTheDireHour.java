@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.commander2014;
+package mage.cards.a;
 
 import java.util.UUID;
 import mage.MageInt;
@@ -36,8 +36,8 @@ import mage.abilities.effects.common.ExileAllEffect;
 import mage.abilities.keyword.FlashAbility;
 import mage.abilities.keyword.FlyingAbility;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.filter.common.FilterAttackingCreature;
 import mage.watchers.common.CastFromHandWatcher;
 
@@ -47,9 +47,8 @@ import mage.watchers.common.CastFromHandWatcher;
  */
 public class AngelOfTheDireHour extends CardImpl {
 
-    public AngelOfTheDireHour(UUID ownerId) {
-        super(ownerId, 1, "Angel of the Dire Hour", Rarity.RARE, new CardType[]{CardType.CREATURE}, "{5}{W}{W}");
-        this.expansionSetCode = "C14";
+    public AngelOfTheDireHour(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{5}{W}{W}");
         this.subtype.add("Angel");
 
         this.power = new MageInt(5);

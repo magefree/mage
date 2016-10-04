@@ -25,15 +25,15 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.nemesis;
+package mage.cards.a;
 
 import java.util.UUID;
 import mage.abilities.dynamicvalue.common.CardsInAllGraveyardsCount;
 import mage.abilities.effects.Effect;
 import mage.abilities.effects.common.DrawCardSourceControllerEffect;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.filter.FilterCard;
 import mage.filter.predicate.mageobject.NamePredicate;
 
@@ -49,9 +49,8 @@ public class AccumulatedKnowledge extends CardImpl {
         filter.add(new NamePredicate("Accumulated Knowledge"));
     }
 
-    public AccumulatedKnowledge(UUID ownerId) {
-        super(ownerId, 26, "Accumulated Knowledge", Rarity.COMMON, new CardType[]{CardType.INSTANT}, "{1}{U}");
-        this.expansionSetCode = "NEM";
+    public AccumulatedKnowledge(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.INSTANT},"{1}{U}");
 
 
         // Draw a card, then draw cards equal to the number of cards named Accumulated Knowledge in all graveyards.

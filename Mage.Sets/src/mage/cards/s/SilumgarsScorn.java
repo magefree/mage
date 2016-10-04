@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.dragonsoftarkir;
+package mage.cards.s;
 
 import java.util.UUID;
 
@@ -36,10 +36,10 @@ import mage.abilities.costs.mana.GenericManaCost;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.InfoEffect;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.AbilityType;
 import mage.constants.CardType;
 import mage.constants.Outcome;
-import mage.constants.Rarity;
 import mage.filter.FilterCard;
 import mage.filter.predicate.mageobject.SubtypePredicate;
 import mage.game.Game;
@@ -61,9 +61,8 @@ public class SilumgarsScorn extends CardImpl {
         filter.add(new SubtypePredicate("Dragon"));
     }    
     
-    public SilumgarsScorn(UUID ownerId) {
-        super(ownerId, 78, "Silumgar's Scorn", Rarity.UNCOMMON, new CardType[]{CardType.INSTANT}, "{U}{U}");
-        this.expansionSetCode = "DTK";
+    public SilumgarsScorn(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.INSTANT},"{U}{U}");
 
         // As an additional cost to cast Silumgar's Scorn, you may reveal a Dragon card from your hand.
         this.getSpellAbility().addEffect(new InfoEffect("As an additional cost to cast {this}, you may reveal a Dragon card from your hand"));

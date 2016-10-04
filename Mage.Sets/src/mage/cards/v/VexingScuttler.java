@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.eldritchmoon;
+package mage.cards.v;
 
 import java.util.UUID;
 import mage.MageInt;
@@ -36,8 +36,8 @@ import mage.abilities.effects.common.CastSourceTriggeredAbility;
 import mage.abilities.effects.common.ReturnToHandTargetEffect;
 import mage.abilities.keyword.EmergeAbility;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.filter.FilterCard;
 import mage.filter.predicate.Predicates;
 import mage.filter.predicate.mageobject.CardTypePredicate;
@@ -57,9 +57,8 @@ public class VexingScuttler extends CardImpl {
                 new CardTypePredicate(CardType.SORCERY)));
     }
 
-    public VexingScuttler(UUID ownerId) {
-        super(ownerId, 11, "Vexing Scuttler", Rarity.UNCOMMON, new CardType[]{CardType.CREATURE}, "{8}");
-        this.expansionSetCode = "EMN";
+    public VexingScuttler(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{8}");
         this.subtype.add("Eldrazi");
         this.subtype.add("Crab");
         this.power = new MageInt(4);

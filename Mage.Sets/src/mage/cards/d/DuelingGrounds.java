@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.invasion;
+package mage.cards.d;
 
 import java.util.Set;
 import java.util.UUID;
@@ -36,9 +36,9 @@ import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.effects.ContinuousEffect;
 import mage.abilities.effects.RestrictionEffect;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Duration;
-import mage.constants.Rarity;
 import mage.constants.Zone;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
@@ -51,9 +51,8 @@ import mage.watchers.common.BlockedThisTurnWatcher;
  */
 public class DuelingGrounds extends CardImpl {
 
-    public DuelingGrounds(UUID ownerId) {
-        super(ownerId, 245, "Dueling Grounds", Rarity.RARE, new CardType[]{CardType.ENCHANTMENT}, "{1}{G}{W}");
-        this.expansionSetCode = "INV";
+    public DuelingGrounds(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.ENCHANTMENT},"{1}{G}{W}");
 
         // No more than one creature can attack each turn.
         this.addAbility(

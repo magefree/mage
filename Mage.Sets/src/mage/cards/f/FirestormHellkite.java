@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.visions;
+package mage.cards.f;
 
 import java.util.UUID;
 import mage.MageInt;
@@ -34,8 +34,8 @@ import mage.abilities.keyword.TrampleAbility;
 import mage.abilities.costs.mana.ManaCostsImpl;
 import mage.abilities.keyword.CumulativeUpkeepAbility;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.Rarity;
 
 /**
  *
@@ -43,9 +43,8 @@ import mage.constants.Rarity;
  */
 public class FirestormHellkite extends CardImpl {
 
-    public FirestormHellkite(UUID ownerId) {
-        super(ownerId, 130, "Firestorm Hellkite", Rarity.RARE, new CardType[]{CardType.CREATURE}, "{4}{U}{R}");
-        this.expansionSetCode = "VIS";
+    public FirestormHellkite(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{4}{U}{R}");
         this.subtype.add("Dragon");
         this.power = new MageInt(6);
         this.toughness = new MageInt(6);

@@ -25,10 +25,9 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.prophecy;
+package mage.cards.a;
 
 import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.constants.Zone;
 import mage.MageInt;
 import mage.Mana;
@@ -41,6 +40,7 @@ import mage.abilities.effects.common.combat.CanBlockAdditionalCreatureEffect;
 import mage.abilities.keyword.FlashbackAbility;
 import mage.abilities.keyword.FlyingAbility;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.Duration;
 import mage.constants.Outcome;
 import mage.game.Game;
@@ -57,9 +57,8 @@ import mage.constants.CostModificationType;
  */
 public class AvatarOfHope extends CardImpl {
 
-    public AvatarOfHope(UUID ownerId) {
-        super(ownerId, 3, "Avatar of Hope", Rarity.RARE, new CardType[]{CardType.CREATURE}, "{6}{W}{W}");
-        this.expansionSetCode = "PCY";
+    public AvatarOfHope(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{6}{W}{W}");
         this.subtype.add("Avatar");
 
         this.power = new MageInt(4);

@@ -25,15 +25,15 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.shadowmoor;
+package mage.cards.m;
 
 import java.util.UUID;
 import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.MageInt;
 import mage.abilities.keyword.LifelinkAbility;
 import mage.abilities.keyword.ProtectionAbility;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.filter.Filter.ComparisonType;
 import mage.filter.FilterCard;
 import mage.filter.predicate.mageobject.ConvertedManaCostPredicate;
@@ -50,9 +50,8 @@ public class MistmeadowSkulk extends CardImpl {
         filter.add(new ConvertedManaCostPredicate(ComparisonType.GreaterThan, 2));
     }
 
-    public MistmeadowSkulk(UUID ownerId) {
-        super(ownerId, 14, "Mistmeadow Skulk", Rarity.UNCOMMON, new CardType[]{CardType.CREATURE}, "{1}{W}");
-        this.expansionSetCode = "SHM";
+    public MistmeadowSkulk(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{1}{W}");
         this.subtype.add("Kithkin");
         this.subtype.add("Rogue");
 

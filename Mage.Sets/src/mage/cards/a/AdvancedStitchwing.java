@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.eldritchmoon;
+package mage.cards.a;
 
 import java.util.UUID;
 import mage.MageInt;
@@ -36,8 +36,8 @@ import mage.abilities.costs.mana.ManaCostsImpl;
 import mage.abilities.effects.common.ReturnSourceFromGraveyardToBattlefieldEffect;
 import mage.abilities.keyword.FlyingAbility;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.constants.Zone;
 import mage.filter.FilterCard;
 import mage.target.common.TargetCardInHand;
@@ -48,9 +48,8 @@ import mage.target.common.TargetCardInHand;
  */
 public class AdvancedStitchwing extends CardImpl {
 
-    public AdvancedStitchwing(UUID ownerId) {
-        super(ownerId, 49, "Advanced Stitchwing", Rarity.UNCOMMON, new CardType[]{CardType.CREATURE}, "{3}{U}{U}");
-        this.expansionSetCode = "EMN";
+    public AdvancedStitchwing(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{3}{U}{U}");
         this.subtype.add("Zombie");
         this.subtype.add("Horror");
         this.power = new MageInt(3);

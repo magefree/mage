@@ -25,16 +25,16 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.fifthdawn;
+package mage.cards.b;
 
 import java.util.UUID;
 import mage.constants.CardType;
 import mage.constants.Outcome;
-import mage.constants.Rarity;
 import mage.abilities.Ability;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.ShuffleSpellEffect;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.game.Game;
 import mage.game.turn.TurnMod;
 import mage.target.TargetPlayer;
@@ -45,9 +45,8 @@ import mage.target.TargetPlayer;
  */
 public class BeaconOfTomorrows extends CardImpl {
 
-    public BeaconOfTomorrows(UUID ownerId) {
-        super(ownerId, 24, "Beacon of Tomorrows", Rarity.RARE, new CardType[]{CardType.SORCERY}, "{6}{U}{U}");
-        this.expansionSetCode = "5DN";
+    public BeaconOfTomorrows(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{6}{U}{U}");
 
 
         // Target player takes an extra turn after this one.

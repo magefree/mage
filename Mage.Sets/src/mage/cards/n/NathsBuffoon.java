@@ -25,14 +25,14 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.lorwyn;
+package mage.cards.n;
 
 import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.keyword.ProtectionAbility;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.filter.FilterCard;
 import mage.filter.predicate.mageobject.SubtypePredicate;
 
@@ -48,9 +48,8 @@ public class NathsBuffoon extends CardImpl {
         filter.add(new SubtypePredicate("Elf"));
     }
 
-    public NathsBuffoon(UUID ownerId) {
-        super(ownerId, 129, "Nath's Buffoon", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{1}{B}");
-        this.expansionSetCode = "LRW";
+    public NathsBuffoon(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{1}{B}");
         this.subtype.add("Goblin");
         this.subtype.add("Rogue");
         this.power = new MageInt(1);

@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.commander;
+package mage.cards.c;
 
 import java.util.UUID;
 import mage.MageInt;
@@ -36,9 +36,9 @@ import mage.abilities.effects.common.LookLibraryAndPickControllerEffect;
 import mage.abilities.effects.common.SacrificeSourceUnlessConditionEffect;
 import mage.abilities.keyword.VigilanceAbility;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.ColoredManaSymbol;
-import mage.constants.Rarity;
 import mage.constants.Zone;
 import mage.filter.FilterCard;
 import mage.watchers.common.ManaSpentToCastWatcher;
@@ -49,9 +49,8 @@ import mage.watchers.common.ManaSpentToCastWatcher;
  */
 public class CourtHussar extends CardImpl {
 
-    public CourtHussar(UUID ownerId) {
-        super(ownerId, 43, "Court Hussar", Rarity.UNCOMMON, new CardType[]{CardType.CREATURE}, "{2}{U}");
-        this.expansionSetCode = "CMD";
+    public CourtHussar(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{2}{U}");
         this.subtype.add("Vedalken");
         this.subtype.add("Knight");
 

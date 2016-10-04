@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.morningtide;
+package mage.cards.c;
 
 import java.util.UUID;
 import mage.MageInt;
@@ -37,10 +37,10 @@ import mage.abilities.costs.mana.ColoredManaCost;
 import mage.abilities.effects.common.combat.CanBlockAdditionalCreatureAllEffect;
 import mage.abilities.effects.common.counter.AddCountersTargetEffect;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.ColoredManaSymbol;
 import mage.constants.Duration;
-import mage.constants.Rarity;
 import mage.constants.Zone;
 import mage.counters.CounterType;
 import mage.filter.common.FilterControlledCreaturePermanent;
@@ -62,9 +62,8 @@ public class CennsTactician extends CardImpl {
         filterCounter.add(new CounterPredicate(CounterType.P1P1));
     }
 
-    public CennsTactician(UUID ownerId) {
-        super(ownerId, 5, "Cenn's Tactician", Rarity.UNCOMMON, new CardType[]{CardType.CREATURE}, "{W}");
-        this.expansionSetCode = "MOR";
+    public CennsTactician(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{W}");
         this.subtype.add("Kithkin");
         this.subtype.add("Soldier");
         this.power = new MageInt(1);

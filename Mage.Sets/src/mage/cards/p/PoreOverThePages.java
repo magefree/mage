@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.shadowsoverinnistrad;
+package mage.cards.p;
 
 import java.util.UUID;
 import mage.abilities.effects.Effect;
@@ -33,8 +33,8 @@ import mage.abilities.effects.common.DrawCardSourceControllerEffect;
 import mage.abilities.effects.common.UntapLandsEffect;
 import mage.abilities.effects.common.discard.DiscardControllerEffect;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.Rarity;
 
 /**
  *
@@ -42,9 +42,8 @@ import mage.constants.Rarity;
  */
 public class PoreOverThePages extends CardImpl {
 
-    public PoreOverThePages(UUID ownerId) {
-        super(ownerId, 79, "Pore Over the Pages", Rarity.UNCOMMON, new CardType[]{CardType.SORCERY}, "{3}{U}{U}");
-        this.expansionSetCode = "SOI";
+    public PoreOverThePages(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{3}{U}{U}");
 
         // Draw three cards, untap up to two lands, then discard a card.
         Effect effect = new DrawCardSourceControllerEffect(3);

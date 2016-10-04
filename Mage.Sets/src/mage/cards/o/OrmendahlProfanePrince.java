@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.shadowsoverinnistrad;
+package mage.cards.o;
 
 import java.util.UUID;
 import mage.MageInt;
@@ -34,8 +34,8 @@ import mage.abilities.keyword.HasteAbility;
 import mage.abilities.keyword.IndestructibleAbility;
 import mage.abilities.keyword.LifelinkAbility;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.Rarity;
 
 /**
  *
@@ -43,9 +43,8 @@ import mage.constants.Rarity;
  */
 public class OrmendahlProfanePrince extends CardImpl {
 
-    public OrmendahlProfanePrince(UUID ownerId) {
-        super(ownerId, 281, "Ormendahl, Profane Prince", Rarity.RARE, new CardType[]{CardType.CREATURE}, "");
-        this.expansionSetCode = "SOI";
+    public OrmendahlProfanePrince(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"");
         this.supertype.add("Legendary");
         this.subtype.add("Demon");
         this.power = new MageInt(9);

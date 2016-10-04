@@ -26,16 +26,16 @@
  *  or implied, of BetaSteward_at_googlemail.com.
  */
 
-package mage.sets.mirrodinbesieged;
+package mage.cards.h;
 
 import java.util.UUID;
 import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.MageInt;
 import mage.abilities.common.AttacksTriggeredAbility;
 import mage.abilities.effects.common.CreateTokenEffect;
 import mage.abilities.keyword.BattleCryAbility;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.game.permanent.token.SoldierToken;
 
 /**
@@ -43,9 +43,8 @@ import mage.game.permanent.token.SoldierToken;
  */
 public class HeroOfBladehold extends CardImpl {
 
-    public HeroOfBladehold(UUID ownerId) {
-        super(ownerId, 8, "Hero of Bladehold", Rarity.MYTHIC, new CardType[]{CardType.CREATURE}, "{2}{W}{W}");
-        this.expansionSetCode = "MBS";
+    public HeroOfBladehold(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{2}{W}{W}");
         this.subtype.add("Human");
         this.subtype.add("Knight");
 

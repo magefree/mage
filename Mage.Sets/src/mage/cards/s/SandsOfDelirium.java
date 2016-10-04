@@ -26,12 +26,11 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.magic2013;
+package mage.cards.s;
 
 import java.util.UUID;
 
 import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.costs.common.TapSourceCost;
@@ -39,6 +38,7 @@ import mage.abilities.costs.mana.VariableManaCost;
 import mage.abilities.dynamicvalue.common.ManacostVariableValue;
 import mage.abilities.effects.common.PutLibraryIntoGraveTargetEffect;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.Zone;
 import mage.target.TargetPlayer;
 
@@ -48,9 +48,8 @@ import mage.target.TargetPlayer;
  */
 public class SandsOfDelirium extends CardImpl {
 
-    public SandsOfDelirium(UUID ownerId) {
-        super(ownerId, 216, "Sands of Delirium", Rarity.RARE, new CardType[]{CardType.ARTIFACT}, "{3}");
-        this.expansionSetCode = "M13";
+    public SandsOfDelirium(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.ARTIFACT},"{3}");
 
         // {X}, {tap}: Target player puts the top X cards of his or her library into his or her graveyard.
         Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new PutLibraryIntoGraveTargetEffect(new ManacostVariableValue()), new VariableManaCost());

@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.magicorigins;
+package mage.cards.m;
 
 import java.util.UUID;
 import mage.Mana;
@@ -40,8 +40,8 @@ import mage.abilities.effects.common.counter.AddCountersSourceEffect;
 import mage.abilities.mana.ColorlessManaAbility;
 import mage.abilities.mana.DynamicManaAbility;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.constants.Zone;
 import mage.counters.CounterType;
 
@@ -52,9 +52,8 @@ import mage.counters.CounterType;
  */
 public class MageRingNetwork extends CardImpl {
 
-    public MageRingNetwork(UUID ownerId) {
-        super(ownerId, 249, "Mage-Ring Network", Rarity.UNCOMMON, new CardType[]{CardType.LAND}, "");
-        this.expansionSetCode = "ORI";
+    public MageRingNetwork(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.LAND},"");
 
         // {T}: Add {C} to your mana pool.
         this.addAbility(new ColorlessManaAbility());

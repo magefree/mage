@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.magic2012;
+package mage.cards.j;
 
 import java.util.UUID;
 import mage.abilities.Ability;
@@ -36,8 +36,8 @@ import mage.abilities.effects.common.DrawCardSourceControllerEffect;
 import mage.abilities.effects.common.DrawCardTargetEffect;
 import mage.abilities.effects.common.PutLibraryIntoGraveTargetEffect;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.game.Game;
 import mage.players.Player;
 import mage.target.TargetPlayer;
@@ -47,9 +47,8 @@ import mage.target.TargetPlayer;
  */
 public class JaceMemoryAdept extends CardImpl {
 
-    public JaceMemoryAdept(UUID ownerId) {
-        super(ownerId, 58, "Jace, Memory Adept", Rarity.MYTHIC, new CardType[]{CardType.PLANESWALKER}, "{3}{U}{U}");
-        this.expansionSetCode = "M12";
+    public JaceMemoryAdept(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.PLANESWALKER},"{3}{U}{U}");
         this.subtype.add("Jace");
 
         this.addAbility(new PlanswalkerEntersWithLoyalityCountersAbility(4));

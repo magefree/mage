@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.legends;
+package mage.cards.g;
 
 import java.util.UUID;
 import mage.MageInt;
@@ -35,8 +35,8 @@ import mage.abilities.condition.common.MyTurnCondition;
 import mage.abilities.costs.common.TapSourceCost;
 import mage.abilities.effects.common.discard.DiscardTargetEffect;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.constants.Zone;
 import mage.target.TargetPlayer;
 
@@ -46,9 +46,8 @@ import mage.target.TargetPlayer;
  */
 public class GwendlynDiCorci extends CardImpl {
 
-    public GwendlynDiCorci(UUID ownerId) {
-        super(ownerId, 268, "Gwendlyn Di Corci", Rarity.RARE, new CardType[]{CardType.CREATURE}, "{U}{B}{B}{R}");
-        this.expansionSetCode = "LEG";
+    public GwendlynDiCorci(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{U}{B}{B}{R}");
         this.supertype.add("Legendary");
         this.subtype.add("Human");
         this.subtype.add("Rogue");

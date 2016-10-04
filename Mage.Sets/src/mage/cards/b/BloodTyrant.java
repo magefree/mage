@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.conflux;
+package mage.cards.b;
 
 import java.util.UUID;
 import mage.MageInt;
@@ -37,9 +37,9 @@ import mage.abilities.effects.common.counter.AddCountersSourceEffect;
 import mage.abilities.keyword.FlyingAbility;
 import mage.abilities.keyword.TrampleAbility;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Outcome;
-import mage.constants.Rarity;
 import mage.constants.TargetController;
 import mage.constants.Zone;
 import mage.counters.CounterType;
@@ -55,9 +55,8 @@ import mage.players.Player;
  */
 public class BloodTyrant extends CardImpl {
 
-    public BloodTyrant(UUID ownerId) {
-        super(ownerId, 99, "Blood Tyrant", Rarity.RARE, new CardType[]{CardType.CREATURE}, "{4}{U}{B}{R}");
-        this.expansionSetCode = "CON";
+    public BloodTyrant(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{4}{U}{B}{R}");
         this.subtype.add("Vampire");
 
         this.power = new MageInt(5);

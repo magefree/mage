@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.bornofthegods;
+package mage.cards.f;
 
 import java.util.UUID;
 import mage.abilities.condition.common.MyTurnCondition;
@@ -33,8 +33,8 @@ import mage.abilities.decorator.ConditionalOneShotEffect;
 import mage.abilities.effects.common.PutTokenOntoBattlefieldCopyTargetEffect;
 import mage.abilities.effects.keyword.ScryEffect;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.target.common.TargetControlledCreaturePermanent;
 
 /**
@@ -43,9 +43,8 @@ import mage.target.common.TargetControlledCreaturePermanent;
  */
 public class FatedInfatuation extends CardImpl {
 
-    public FatedInfatuation(UUID ownerId) {
-        super(ownerId, 39, "Fated Infatuation", Rarity.RARE, new CardType[]{CardType.INSTANT}, "{U}{U}{U}");
-        this.expansionSetCode = "BNG";
+    public FatedInfatuation(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.INSTANT},"{U}{U}{U}");
 
 
         // Put a token onto the battlefield that's a copy of target creature you control. If it's your turn, scry 2.

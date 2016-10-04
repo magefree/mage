@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.futuresight;
+package mage.cards.q;
 
 import java.util.UUID;
 import mage.MageInt;
@@ -34,8 +34,8 @@ import mage.abilities.effects.common.ReturnToHandSourceEffect;
 import mage.abilities.keyword.ShroudAbility;
 import mage.abilities.keyword.SplitSecondAbility;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.constants.Zone;
 import mage.game.Game;
 import mage.game.events.GameEvent;
@@ -48,9 +48,8 @@ import mage.game.stack.StackObject;
  */
 public class Quagnoth extends CardImpl {
 
-    public Quagnoth(UUID ownerId) {
-        super(ownerId, 150, "Quagnoth", Rarity.RARE, new CardType[]{CardType.CREATURE}, "{5}{G}");
-        this.expansionSetCode = "FUT";
+    public Quagnoth(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{5}{G}");
         this.subtype.add("Beast");
         this.power = new MageInt(4);
         this.toughness = new MageInt(5);

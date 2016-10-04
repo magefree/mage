@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.invasion;
+package mage.cards.e;
 
 import java.util.UUID;
 import mage.abilities.Ability;
@@ -33,10 +33,10 @@ import mage.abilities.common.BeginningOfUpkeepTriggeredAbility;
 import mage.abilities.effects.ReplacementEffectImpl;
 import mage.abilities.effects.common.search.SearchLibraryPutInHandEffect;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Duration;
 import mage.constants.Outcome;
-import mage.constants.Rarity;
 import mage.constants.TargetController;
 import mage.filter.common.FilterBasicLandCard;
 import mage.game.Game;
@@ -49,9 +49,8 @@ import mage.target.common.TargetCardInLibrary;
  */
 public class ElfhameSanctuary extends CardImpl {
 
-    public ElfhameSanctuary(UUID ownerId) {
-        super(ownerId, 185, "Elfhame Sanctuary", Rarity.UNCOMMON, new CardType[]{CardType.ENCHANTMENT}, "{1}{G}");
-        this.expansionSetCode = "INV";
+    public ElfhameSanctuary(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.ENCHANTMENT},"{1}{G}");
 
         // At the beginning of your upkeep, you may search your library for a basic land card, reveal that card, and put it into your hand. If you do, you skip your draw step this turn and shuffle your library.
         Ability ability = new BeginningOfUpkeepTriggeredAbility(new SearchLibraryPutInHandEffect(new TargetCardInLibrary(new FilterBasicLandCard())), TargetController.YOU, true);

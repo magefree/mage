@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.mastersedition;
+package mage.cards.i;
 
 import java.util.UUID;
 import mage.MageInt;
@@ -37,8 +37,8 @@ import mage.abilities.effects.common.DamagePlayersEffect;
 import mage.abilities.effects.common.InfoEffect;
 import mage.abilities.keyword.FlyingAbility;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.constants.TargetController;
 import mage.constants.Zone;
 import mage.filter.common.FilterCreaturePermanent;
@@ -56,9 +56,8 @@ public class IfhBiffEfreet extends CardImpl {
         filter.add(new AbilityPredicate(FlyingAbility.class));
     }
 
-    public IfhBiffEfreet(UUID ownerId) {
-        super(ownerId, 123, "Ifh-Biff Efreet", Rarity.RARE, new CardType[]{CardType.CREATURE}, "{2}{G}{G}");
-        this.expansionSetCode = "MED";
+    public IfhBiffEfreet(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{2}{G}{G}");
         this.subtype.add("Efreet");
         this.power = new MageInt(3);
         this.toughness = new MageInt(3);

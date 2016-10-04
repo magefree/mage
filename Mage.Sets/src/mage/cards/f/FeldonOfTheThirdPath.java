@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.commander2014;
+package mage.cards.f;
 
 import java.util.UUID;
 import mage.MageInt;
@@ -40,9 +40,9 @@ import mage.abilities.effects.common.PutTokenOntoBattlefieldCopyTargetEffect;
 import mage.abilities.effects.common.SacrificeTargetEffect;
 import mage.cards.Card;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Outcome;
-import mage.constants.Rarity;
 import mage.constants.Zone;
 import mage.filter.common.FilterCreatureCard;
 import mage.game.Game;
@@ -56,9 +56,8 @@ import mage.target.targetpointer.FixedTarget;
  */
 public class FeldonOfTheThirdPath extends CardImpl {
 
-    public FeldonOfTheThirdPath(UUID ownerId) {
-        super(ownerId, 35, "Feldon of the Third Path", Rarity.MYTHIC, new CardType[]{CardType.CREATURE}, "{1}{R}{R}");
-        this.expansionSetCode = "C14";
+    public FeldonOfTheThirdPath(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{1}{R}{R}");
         this.supertype.add("Legendary");
         this.subtype.add("Human");
         this.subtype.add("Artificer");

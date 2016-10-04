@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.planeshift;
+package mage.cards.d;
 
 import java.util.UUID;
 import mage.MageInt;
@@ -45,11 +45,11 @@ import mage.abilities.effects.common.counter.AddCountersSourceEffect;
 import mage.abilities.keyword.FlyingAbility;
 import mage.abilities.keyword.KickerAbility;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.AbilityType;
 import mage.constants.CardType;
 import mage.constants.Duration;
 import mage.constants.Outcome;
-import mage.constants.Rarity;
 import mage.counters.CounterType;
 import mage.filter.common.FilterCreatureCard;
 import mage.game.Game;
@@ -63,9 +63,8 @@ import mage.players.Player;
  */
 public class DralnusPet extends CardImpl {
 
-    public DralnusPet(UUID ownerId) {
-        super(ownerId, 23, "Dralnu's Pet", Rarity.RARE, new CardType[]{CardType.CREATURE}, "{1}{U}{U}");
-        this.expansionSetCode = "PLS";
+    public DralnusPet(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{1}{U}{U}");
         this.subtype.add("Shapeshifter");
         this.power = new MageInt(2);
         this.toughness = new MageInt(2);

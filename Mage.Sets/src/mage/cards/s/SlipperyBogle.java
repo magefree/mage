@@ -25,14 +25,14 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.eventide;
+package mage.cards.s;
 
 import java.util.UUID;
 import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.MageInt;
 import mage.abilities.keyword.HexproofAbility;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 
 /**
  *
@@ -40,9 +40,8 @@ import mage.cards.CardImpl;
  */
 public class SlipperyBogle extends CardImpl {
 
-    public SlipperyBogle(UUID ownerId) {
-        super(ownerId, 160, "Slippery Bogle", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{G/U}");
-        this.expansionSetCode = "EVE";
+    public SlipperyBogle(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{G/U}");
         this.subtype.add("Beast");
 
         this.power = new MageInt(1);

@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.eldritchmoon;
+package mage.cards.d;
 
 import java.util.UUID;
 import mage.MageInt;
@@ -37,10 +37,11 @@ import mage.abilities.effects.common.CreateTokenEffect;
 import mage.abilities.effects.common.TransformSourceEffect;
 import mage.abilities.keyword.FlyingAbility;
 import mage.abilities.keyword.TransformAbility;
+import mage.cards.f.FinalIteration;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Outcome;
-import mage.constants.Rarity;
 import mage.constants.TargetController;
 import mage.filter.FilterPermanent;
 import mage.filter.FilterSpell;
@@ -66,16 +67,15 @@ public class DocentOfPerfection extends CardImpl {
                 new CardTypePredicate(CardType.SORCERY)));
     }
 
-    public DocentOfPerfection(UUID ownerId) {
-        super(ownerId, 56, "Docent of Perfection", Rarity.RARE, new CardType[]{CardType.CREATURE}, "{3}{U}{U}");
-        this.expansionSetCode = "EMN";
+    public DocentOfPerfection(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{3}{U}{U}");
         this.subtype.add("Insect");
         this.subtype.add("Horror");
         this.power = new MageInt(5);
         this.toughness = new MageInt(4);
 
         this.transformable = true;
-        this.secondSideCard = new FinalIteration(ownerId);
+        this.secondSideCardClazz = FinalIteration.class;
 
         // Flying
         this.addAbility(FlyingAbility.getInstance());

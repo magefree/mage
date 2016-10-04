@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.shadowsoverinnistrad;
+package mage.cards.e;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -36,11 +36,11 @@ import mage.abilities.Ability;
 import mage.abilities.effects.OneShotEffect;
 import mage.cards.Card;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.cards.Cards;
 import mage.cards.CardsImpl;
 import mage.constants.CardType;
 import mage.constants.Outcome;
-import mage.constants.Rarity;
 import mage.constants.Zone;
 import mage.filter.FilterCard;
 import mage.game.Game;
@@ -56,9 +56,8 @@ import mage.util.GameLog;
  */
 public class EpiphanyAtTheDrownyard extends CardImpl {
 
-    public EpiphanyAtTheDrownyard(UUID ownerId) {
-        super(ownerId, 59, "Epiphany at the Drownyard", Rarity.RARE, new CardType[]{CardType.INSTANT}, "{X}{U}");
-        this.expansionSetCode = "SOI";
+    public EpiphanyAtTheDrownyard(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.INSTANT},"{X}{U}");
 
         // Reveal the top X plus one cards of your library and separate them into two piles. An opponent chooses one of those piles. Put that pile into your hand and the other into your graveyard.
         this.getSpellAbility().addEffect(new EpiphanyAtTheDrownyardEffect());

@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.eventide;
+package mage.cards.c;
 
 import java.util.UUID;
 import mage.MageInt;
@@ -34,9 +34,9 @@ import mage.abilities.common.DealsCombatDamageToAPlayerTriggeredAbility;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.keyword.IslandwalkAbility;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Outcome;
-import mage.constants.Rarity;
 import mage.game.Game;
 import mage.players.Player;
 
@@ -46,9 +46,8 @@ import mage.players.Player;
  */
 public class ColdEyedSelkie extends CardImpl {
 
-    public ColdEyedSelkie(UUID ownerId) {
-        super(ownerId, 149, "Cold-Eyed Selkie", Rarity.RARE, new CardType[]{CardType.CREATURE}, "{1}{G/U}{G/U}");
-        this.expansionSetCode = "EVE";
+    public ColdEyedSelkie(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{1}{G/U}{G/U}");
         this.subtype.add("Merfolk");
         this.subtype.add("Rogue");
 

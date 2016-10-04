@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.planeshift;
+package mage.cards.s;
 
 import java.util.UUID;
 import mage.ObjectColor;
@@ -35,11 +35,11 @@ import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.effects.ContinuousEffectImpl;
 import mage.abilities.effects.common.ChooseColorEffect;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Duration;
 import mage.constants.Layer;
 import mage.constants.Outcome;
-import mage.constants.Rarity;
 import mage.constants.SubLayer;
 import mage.constants.Zone;
 import mage.filter.FilterPermanent;
@@ -55,9 +55,8 @@ import mage.players.Player;
  */
 public class ShiftingSky extends CardImpl {
 
-    public ShiftingSky(UUID ownerId) {
-        super(ownerId, 32, "Shifting Sky", Rarity.UNCOMMON, new CardType[]{CardType.ENCHANTMENT}, "{2}{U}");
-        this.expansionSetCode = "PLS";
+    public ShiftingSky(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.ENCHANTMENT},"{2}{U}");
 
         // As Shifting Sky enters the battlefield, choose a color.
         this.addAbility(new EntersBattlefieldTriggeredAbility(new ChooseColorEffect(Outcome.Detriment)));

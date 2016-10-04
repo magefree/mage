@@ -26,17 +26,17 @@
  *  or implied, of BetaSteward_at_googlemail.com.
  */
 
-package mage.sets.ravnica;
+package mage.cards.w;
 
 import java.util.UUID;
 import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.abilities.common.AsEntersBattlefieldAbility;
 import mage.abilities.costs.common.PayLifeCost;
 import mage.abilities.effects.common.TapSourceUnlessPaysEffect;
 import mage.abilities.mana.BlackManaAbility;
 import mage.abilities.mana.BlueManaAbility;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 
 /**
  *
@@ -44,9 +44,8 @@ import mage.cards.CardImpl;
  */
 public class WateryGrave extends CardImpl {
 
-    public WateryGrave(UUID ownerId) {
-        super(ownerId, 286, "Watery Grave", Rarity.RARE, new CardType[]{CardType.LAND}, null);
-        this.expansionSetCode = "RAV";
+    public WateryGrave(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.LAND},null);
         this.subtype.add("Island");
         this.subtype.add("Swamp");
         

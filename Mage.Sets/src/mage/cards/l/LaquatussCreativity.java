@@ -25,15 +25,15 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.odyssey;
+package mage.cards.l;
 
 import java.util.UUID;
 import mage.abilities.Ability;
 import mage.abilities.effects.OneShotEffect;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Outcome;
-import mage.constants.Rarity;
 import mage.filter.FilterCard;
 import mage.game.Game;
 import mage.players.Player;
@@ -45,9 +45,8 @@ import mage.target.TargetPlayer;
  */
 public class LaquatussCreativity extends CardImpl {
 
-    public LaquatussCreativity(UUID ownerId) {
-        super(ownerId, 88, "Laquatus's Creativity", Rarity.UNCOMMON, new CardType[]{CardType.SORCERY}, "{4}{U}");
-        this.expansionSetCode = "ODY";
+    public LaquatussCreativity(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{4}{U}");
 
 
         // Target player draws cards equal to the number of cards in his or her hand, then discards that many cards.

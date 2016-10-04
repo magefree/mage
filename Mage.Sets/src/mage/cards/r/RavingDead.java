@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.commander2014;
+package mage.cards.r;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -41,10 +41,10 @@ import mage.abilities.effects.RequirementEffect;
 import mage.abilities.effects.common.combat.AttackIfAbleTargetRandomOpponentSourceEffect;
 import mage.abilities.keyword.DeathtouchAbility;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Duration;
 import mage.constants.Outcome;
-import mage.constants.Rarity;
 import mage.constants.TargetController;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
@@ -58,9 +58,8 @@ import mage.util.RandomUtil;
  */
 public class RavingDead extends CardImpl {
 
-    public RavingDead(UUID ownerId) {
-        super(ownerId, 29, "Raving Dead", Rarity.RARE, new CardType[]{CardType.CREATURE}, "{4}{B}");
-        this.expansionSetCode = "C14";
+    public RavingDead(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{4}{B}");
         this.subtype.add("Zombie");
 
         this.power = new MageInt(2);

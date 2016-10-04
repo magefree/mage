@@ -26,11 +26,10 @@
  *  or implied, of BetaSteward_at_googlemail.com.
  */
 
-package mage.sets.worldwake;
+package mage.cards.e;
 
 import java.util.UUID;
 import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.constants.Zone;
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleActivatedAbility;
@@ -40,6 +39,7 @@ import mage.abilities.costs.mana.ManaCostsImpl;
 import mage.abilities.effects.common.cost.SpellsCostReductionControllerEffect;
 import mage.abilities.effects.common.search.SearchLibraryPutInHandEffect;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.filter.FilterCard;
 import mage.filter.common.FilterCreatureCard;
 import mage.filter.predicate.mageobject.ColorlessPredicate;
@@ -61,9 +61,8 @@ public class EyeOfUgin extends CardImpl {
         filterSpells.add(new SubtypePredicate("Eldrazi"));
     }
 
-    public EyeOfUgin (UUID ownerId) {
-        super(ownerId, 136, "Eye of Ugin", Rarity.MYTHIC, new CardType[]{CardType.LAND}, null);
-        this.expansionSetCode = "WWK";
+    public EyeOfUgin (UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.LAND},null);
         this.supertype.add("Legendary");
 
         // Colorless Eldrazi spells you cast cost {2} less to cast.

@@ -27,7 +27,7 @@
  *  or implied, of BetaSteward_at_googlemail.com.
  *
  */
-package mage.sets.championsofkamigawa;
+package mage.cards.i;
 
 import mage.constants.Zone;
 import mage.MageInt;
@@ -38,8 +38,8 @@ import mage.abilities.costs.common.TapSourceCost;
 import mage.abilities.effects.common.DamageTargetEffect;
 import mage.abilities.effects.common.FlipSourceEffect;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.filter.predicate.permanent.WasDealtDamageThisTurnPredicate;
 import mage.game.permanent.token.Token;
@@ -58,9 +58,8 @@ public class InitiateOfBlood extends CardImpl {
         filter.add(new WasDealtDamageThisTurnPredicate());
     }
 
-    public InitiateOfBlood(UUID ownerId) {
-        super(ownerId, 173, "Initiate of Blood", Rarity.UNCOMMON, new CardType[]{CardType.CREATURE}, "{3}{R}");
-        this.expansionSetCode = "CHK";
+    public InitiateOfBlood(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{3}{R}");
         this.subtype.add("Ogre");
         this.subtype.add("Shaman");
 

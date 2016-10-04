@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.ravnica;
+package mage.cards.e;
 
 import java.util.UUID;
 import mage.abilities.Ability;
@@ -34,11 +34,12 @@ import mage.abilities.effects.Effect;
 import mage.abilities.effects.OneShotEffect;
 import mage.cards.Card;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.cards.CardsImpl;
+import mage.cards.CardSetInfo;
 import mage.cards.SplitCard;
 import mage.constants.CardType;
 import mage.constants.Outcome;
-import mage.constants.Rarity;
 import mage.constants.Zone;
 import mage.filter.FilterCard;
 import mage.filter.FilterSpell;
@@ -61,9 +62,8 @@ import mage.util.CardUtil;
  */
 public class EyeOfTheStorm extends CardImpl {
 
-    public EyeOfTheStorm(UUID ownerId) {
-        super(ownerId, 48, "Eye of the Storm", Rarity.RARE, new CardType[]{CardType.ENCHANTMENT}, "{5}{U}{U}");
-        this.expansionSetCode = "RAV";
+    public EyeOfTheStorm(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.ENCHANTMENT},"{5}{U}{U}");
 
         // Whenever a player casts an instant or sorcery card, exile it. Then that player copies each instant or sorcery card exiled with Eye of the Storm. For each copy, the player may cast the copy without paying its mana cost.
         this.addAbility(new EyeOfTheStormAbility());

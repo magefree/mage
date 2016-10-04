@@ -25,11 +25,10 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.magic2013;
+package mage.cards.m;
 
 import java.util.UUID;
 import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.MageInt;
 import mage.abilities.common.EntersBattlefieldTriggeredAbility;
 import mage.abilities.effects.common.search.SearchLibraryPutOnLibraryEffect;
@@ -38,6 +37,7 @@ import mage.abilities.keyword.HexproofAbility;
 import mage.abilities.keyword.ReachAbility;
 import mage.abilities.keyword.TrampleAbility;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.filter.FilterCard;
 import mage.filter.predicate.Predicates;
 import mage.filter.predicate.mageobject.AbilityPredicate;
@@ -61,9 +61,8 @@ public class MwonvuliBeastTracker extends CardImpl {
         new AbilityPredicate(TrampleAbility.class)));
     }
 
-    public MwonvuliBeastTracker(UUID ownerId) {
-        super(ownerId, 177, "Mwonvuli Beast Tracker", Rarity.UNCOMMON, new CardType[]{CardType.CREATURE}, "{1}{G}{G}");
-        this.expansionSetCode = "M13";
+    public MwonvuliBeastTracker(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{1}{G}{G}");
         this.subtype.add("Human");
         this.subtype.add("Scout");
 

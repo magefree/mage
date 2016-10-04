@@ -25,13 +25,12 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.legions;
+package mage.cards.s;
 
 import java.util.UUID;
 
 import mage.constants.CardType;
 import mage.constants.Outcome;
-import mage.constants.Rarity;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.DealsCombatDamageToAPlayerTriggeredAbility;
@@ -41,6 +40,7 @@ import mage.abilities.effects.OneShotEffect;
 import mage.abilities.keyword.CyclingAbility;
 import mage.cards.Card;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.Zone;
 import mage.filter.FilterCard;
 import mage.filter.predicate.mageobject.CardTypePredicate;
@@ -55,9 +55,8 @@ import mage.target.common.TargetCardInGraveyard;
  */
 public class ScionOfDarkness extends CardImpl {
 
-    public ScionOfDarkness(UUID ownerId) {
-        super(ownerId, 79, "Scion of Darkness", Rarity.RARE, new CardType[]{CardType.CREATURE}, "{5}{B}{B}{B}");
-        this.expansionSetCode = "LGN";
+    public ScionOfDarkness(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{5}{B}{B}{B}");
         this.subtype.add("Avatar");
 
         this.power = new MageInt(6);

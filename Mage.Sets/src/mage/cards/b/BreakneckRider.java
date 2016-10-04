@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.shadowsoverinnistrad;
+package mage.cards.b;
 
 import java.util.UUID;
 import mage.MageInt;
@@ -35,9 +35,10 @@ import mage.abilities.condition.common.NoSpellsWereCastLastTurnCondition;
 import mage.abilities.decorator.ConditionalTriggeredAbility;
 import mage.abilities.effects.common.TransformSourceEffect;
 import mage.abilities.keyword.TransformAbility;
+import mage.cards.n.NeckBreaker;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.constants.TargetController;
 
 /**
@@ -46,9 +47,8 @@ import mage.constants.TargetController;
  */
 public class BreakneckRider extends CardImpl {
 
-    public BreakneckRider(UUID ownerId) {
-        super(ownerId, 147, "Breakneck Rider", Rarity.UNCOMMON, new CardType[]{CardType.CREATURE}, "{1}{R}{R}");
-        this.expansionSetCode = "SOI";
+    public BreakneckRider(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{1}{R}{R}");
         this.subtype.add("Human");
         this.subtype.add("Scout");
         this.subtype.add("Werewolf");
@@ -56,7 +56,7 @@ public class BreakneckRider extends CardImpl {
         this.toughness = new MageInt(3);
         
         this.transformable = true;
-        this.secondSideCard = new NeckBreaker(ownerId);
+        this.secondSideCardClazz = NeckBreaker.class;
 
         // At the beginning of each upkeep, if no spells were cast last turn, transform Breakneck Rider.
         this.addAbility(new TransformAbility());

@@ -25,14 +25,14 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.guildpact;
+package mage.cards.c;
 
 import java.util.UUID;
 import mage.abilities.effects.common.discard.DiscardTargetEffect;
 import mage.abilities.keyword.HauntAbility;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.target.TargetPlayer;
 
 /**
@@ -41,9 +41,8 @@ import mage.target.TargetPlayer;
  */
 public class CryOfContrition extends CardImpl {
 
-    public CryOfContrition(UUID ownerId) {
-        super(ownerId, 46, "Cry of Contrition", Rarity.COMMON, new CardType[]{CardType.SORCERY}, "{B}");
-        this.expansionSetCode = "GPT";
+    public CryOfContrition(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{B}");
 
         // Target player discards a card.
         this.getSpellAbility().addEffect(new DiscardTargetEffect(1));

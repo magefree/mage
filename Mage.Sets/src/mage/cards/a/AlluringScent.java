@@ -25,14 +25,14 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.portal;
+package mage.cards.a;
 
 import java.util.UUID;
 import mage.abilities.effects.common.combat.MustBeBlockedByAllTargetEffect;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Duration;
-import mage.constants.Rarity;
 import mage.target.common.TargetCreaturePermanent;
 
 /**
@@ -41,9 +41,8 @@ import mage.target.common.TargetCreaturePermanent;
  */
 public class AlluringScent extends CardImpl {
 
-    public AlluringScent(UUID ownerId) {
-        super(ownerId, 80, "Alluring Scent", Rarity.RARE, new CardType[]{CardType.SORCERY}, "{1}{G}{G}");
-        this.expansionSetCode = "POR";
+    public AlluringScent(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{1}{G}{G}");
 
         // All creatures able to block target creature this turn do so.
         this.getSpellAbility().addEffect(new MustBeBlockedByAllTargetEffect(Duration.EndOfTurn));

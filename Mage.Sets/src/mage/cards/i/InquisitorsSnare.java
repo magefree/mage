@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.shadowmoor;
+package mage.cards.i;
 
 import java.util.UUID;
 import mage.ObjectColor;
@@ -33,10 +33,10 @@ import mage.abilities.Ability;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.PreventAllDamageByAllPermanentsEffect;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Duration;
 import mage.constants.Outcome;
-import mage.constants.Rarity;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.filter.predicate.permanent.PermanentIdPredicate;
 import mage.game.Game;
@@ -51,9 +51,8 @@ import mage.target.common.TargetAttackingOrBlockingCreature;
  */
 public class InquisitorsSnare extends CardImpl {
 
-    public InquisitorsSnare(UUID ownerId) {
-        super(ownerId, 8, "Inquisitor's Snare", Rarity.COMMON, new CardType[]{CardType.INSTANT}, "{1}{W}");
-        this.expansionSetCode = "SHM";
+    public InquisitorsSnare(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.INSTANT},"{1}{W}");
 
 
         // Prevent all damage target attacking or blocking creature would deal this turn. If that creature is black or red, destroy it.

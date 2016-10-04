@@ -25,15 +25,15 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.tempestremastered;
+package mage.cards.h;
 
 import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.effects.common.combat.CantAttackUnlessDefenderControllsPermanent;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.constants.Zone;
 import mage.filter.common.FilterLandPermanent;
 
@@ -43,9 +43,8 @@ import mage.filter.common.FilterLandPermanent;
  */
 public class HammerheadShark extends CardImpl {
 
-    public HammerheadShark(UUID ownerId) {
-        super(ownerId, 52, "Hammerhead Shark", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{1}{U}");
-        this.expansionSetCode = "TPR";
+    public HammerheadShark(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{1}{U}");
         this.subtype.add("Fish");
         this.power = new MageInt(2);
         this.toughness = new MageInt(3);

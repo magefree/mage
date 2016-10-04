@@ -25,12 +25,11 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.legions;
+package mage.cards.u;
 
 import java.util.UUID;
 
 import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.TurnedFaceUpSourceTriggeredAbility;
@@ -42,6 +41,7 @@ import mage.abilities.effects.common.turn.SkipNextTurnSourceEffect;
 import mage.abilities.keyword.MorphAbility;
 import mage.abilities.keyword.TrampleAbility;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.Duration;
 
 /**
@@ -50,9 +50,8 @@ import mage.constants.Duration;
  */
 public class UnstableHulk extends CardImpl {
 
-    public UnstableHulk(UUID ownerId) {
-        super(ownerId, 115, "Unstable Hulk", Rarity.RARE, new CardType[]{CardType.CREATURE}, "{1}{R}{R}");
-        this.expansionSetCode = "LGN";
+    public UnstableHulk(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{1}{R}{R}");
         this.subtype.add("Goblin");
         this.subtype.add("Mutant");
 

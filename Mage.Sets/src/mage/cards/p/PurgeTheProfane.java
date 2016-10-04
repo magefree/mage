@@ -25,14 +25,14 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.gatecrash;
+package mage.cards.p;
 
 import java.util.UUID;
 import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.abilities.effects.common.discard.DiscardTargetEffect;
 import mage.abilities.effects.common.GainLifeEffect;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.target.common.TargetOpponent;
 
 /**
@@ -41,9 +41,8 @@ import mage.target.common.TargetOpponent;
  */
 public class PurgeTheProfane extends CardImpl {
 
-    public PurgeTheProfane(UUID ownerId) {
-        super(ownerId, 190, "Purge the Profane", Rarity.COMMON, new CardType[]{CardType.SORCERY}, "{2}{W}{B}");
-        this.expansionSetCode = "GTC";
+    public PurgeTheProfane(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{2}{W}{B}");
 
 
         // Target opponent discards two cards and you gain 2 life.

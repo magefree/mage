@@ -26,15 +26,15 @@
 * or implied, of BetaSteward_at_googlemail.com.
 */
 
-package mage.sets.urzassaga;
+package mage.cards.t;
 
 import java.util.UUID;
 import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.Mana;
 import mage.abilities.dynamicvalue.common.PermanentsOnBattlefieldCount;
 import mage.abilities.mana.DynamicManaAbility;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.filter.common.FilterControlledPermanent;
 import mage.filter.predicate.mageobject.CardTypePredicate;
 
@@ -51,10 +51,9 @@ public class TolarianAcademy extends CardImpl {
         filter.add(new CardTypePredicate(CardType.ARTIFACT));
     }
 
-    public TolarianAcademy(UUID ownerId) {
-        super(ownerId, 330, "Tolarian Academy", Rarity.RARE, new CardType[]{CardType.LAND}, "");
+    public TolarianAcademy(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.LAND},"");
         this.supertype.add("Legendary");
-        this.expansionSetCode = "USG";
 
         DynamicManaAbility ability = new DynamicManaAbility(Mana.BlueMana(1), new PermanentsOnBattlefieldCount(filter));
         this.addAbility(ability);

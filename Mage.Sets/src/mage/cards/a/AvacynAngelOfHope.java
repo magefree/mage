@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.avacynrestored;
+package mage.cards.a;
 
 import java.util.UUID;
 import mage.MageInt;
@@ -36,9 +36,9 @@ import mage.abilities.keyword.FlyingAbility;
 import mage.abilities.keyword.IndestructibleAbility;
 import mage.abilities.keyword.VigilanceAbility;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Duration;
-import mage.constants.Rarity;
 import mage.constants.Zone;
 import mage.filter.common.FilterControlledPermanent;
 
@@ -48,9 +48,8 @@ import mage.filter.common.FilterControlledPermanent;
  */
 public class AvacynAngelOfHope extends CardImpl {
 
-    public AvacynAngelOfHope(UUID ownerId) {
-        super(ownerId, 6, "Avacyn, Angel of Hope", Rarity.MYTHIC, new CardType[]{CardType.CREATURE}, "{5}{W}{W}{W}");
-        this.expansionSetCode = "AVR";
+    public AvacynAngelOfHope(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{5}{W}{W}{W}");
         this.supertype.add("Legendary");
         this.subtype.add("Angel");
 

@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.scarsofmirrodin;
+package mage.cards.b;
 
 import java.util.UUID;
 import mage.abilities.common.EntersBattlefieldAbility;
@@ -37,8 +37,8 @@ import mage.abilities.effects.common.TapSourceEffect;
 import mage.abilities.mana.BlackManaAbility;
 import mage.abilities.mana.RedManaAbility;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.filter.common.FilterLandPermanent;
 
 /**
@@ -49,9 +49,8 @@ public class BlackcleaveCliffs extends CardImpl {
 
     private static final FilterLandPermanent filter = new FilterLandPermanent();
 
-    public BlackcleaveCliffs(UUID ownerId) {
-        super(ownerId, 224, "Blackcleave Cliffs", Rarity.RARE, new CardType[]{CardType.LAND}, null);
-        this.expansionSetCode = "SOM";
+    public BlackcleaveCliffs(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.LAND},null);
 
         Condition controls = new InvertCondition(new PermanentsOnTheBattlefieldCondition(filter, PermanentsOnTheBattlefieldCondition.CountType.FEWER_THAN, 3));
         String abilityText = "tapped unless you control fewer than 3 lands";

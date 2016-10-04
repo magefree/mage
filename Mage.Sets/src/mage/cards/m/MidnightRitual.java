@@ -25,18 +25,18 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.mercadianmasques;
+package mage.cards.m;
 
 import java.util.UUID;
 import mage.abilities.Ability;
 import mage.abilities.SpellAbility;
 import mage.abilities.effects.OneShotEffect;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.cards.Cards;
 import mage.cards.CardsImpl;
 import mage.constants.CardType;
 import mage.constants.Outcome;
-import mage.constants.Rarity;
 import mage.constants.Zone;
 import mage.filter.common.FilterCreatureCard;
 import mage.game.Game;
@@ -52,9 +52,8 @@ public class MidnightRitual extends CardImpl {
 
     private final FilterCreatureCard filter = new FilterCreatureCard("creature card from your graveyard");
 
-    public MidnightRitual(UUID ownerId) {
-        super(ownerId, 146, "Midnight Ritual", Rarity.RARE, new CardType[]{CardType.SORCERY}, "{X}{2}{B}");
-        this.expansionSetCode = "MMQ";
+    public MidnightRitual(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{X}{2}{B}");
 
         // Exile X target creature cards from your graveyard.
         // For each creature card exiled this way, put a 2/2 black Zombie creature token onto the battlefield.

@@ -25,15 +25,15 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.commander2014;
+package mage.cards.i;
 
 import java.util.UUID;
 import mage.abilities.Ability;
 import mage.abilities.effects.OneShotEffect;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Outcome;
-import mage.constants.Rarity;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
@@ -45,9 +45,8 @@ import mage.players.Player;
  */
 public class InciteRebellion extends CardImpl {
 
-    public InciteRebellion(UUID ownerId) {
-        super(ownerId, 37, "Incite Rebellion", Rarity.RARE, new CardType[]{CardType.SORCERY}, "{4}{R}{R}");
-        this.expansionSetCode = "C14";
+    public InciteRebellion(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{4}{R}{R}");
 
 
         // For each player, Incite Rebellion deals damage to that player and each creature that player controls equal to the number of creatures he or she controls.

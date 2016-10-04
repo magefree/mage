@@ -25,15 +25,15 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.visions;
+package mage.cards.f;
 
 import java.util.UUID;
 import mage.abilities.costs.AlternativeCostSourceAbility;
 import mage.abilities.costs.common.SacrificeTargetCost;
 import mage.abilities.effects.common.DamageTargetEffect;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.filter.common.FilterControlledPermanent;
 import mage.filter.predicate.mageobject.SubtypePredicate;
 import mage.target.common.TargetControlledPermanent;
@@ -52,9 +52,8 @@ public class Fireblast extends CardImpl {
         filter.add(new SubtypePredicate("Mountain"));
     }
 
-    public Fireblast(UUID ownerId) {
-        super(ownerId, 79, "Fireblast", Rarity.COMMON, new CardType[]{CardType.INSTANT}, "{4}{R}{R}");
-        this.expansionSetCode = "VIS";
+    public Fireblast(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.INSTANT},"{4}{R}{R}");
 
         // You may sacrifice two Mountains rather than pay Fireblast's mana cost.
         this.addAbility(new AlternativeCostSourceAbility(new SacrificeTargetCost(new TargetControlledPermanent(2, 2, filter, true))));

@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.shadowmoor;
+package mage.cards.p;
 
 import java.util.UUID;
 import mage.MageInt;
@@ -37,11 +37,11 @@ import mage.abilities.costs.mana.ManaCostsImpl;
 import mage.abilities.effects.OneShotEffect;
 import mage.cards.Card;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.cards.Cards;
 import mage.cards.CardsImpl;
 import mage.constants.CardType;
 import mage.constants.Outcome;
-import mage.constants.Rarity;
 import mage.constants.Zone;
 import mage.game.Game;
 import mage.players.Player;
@@ -52,9 +52,8 @@ import mage.players.Player;
  */
 public class PuresightMerrow extends CardImpl {
 
-    public PuresightMerrow(UUID ownerId) {
-        super(ownerId, 146, "Puresight Merrow", Rarity.UNCOMMON, new CardType[]{CardType.CREATURE}, "{W/U}{W/U}");
-        this.expansionSetCode = "SHM";
+    public PuresightMerrow(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{W/U}{W/U}");
         this.subtype.add("Merfolk");
         this.subtype.add("Wizard");
 

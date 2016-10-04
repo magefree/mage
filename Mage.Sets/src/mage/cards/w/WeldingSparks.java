@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.kaladesh;
+package mage.cards.w;
 
 import java.util.UUID;
 import mage.abilities.dynamicvalue.IntPlusDynamicValue;
@@ -33,8 +33,8 @@ import mage.abilities.dynamicvalue.common.PermanentsOnBattlefieldCount;
 import mage.abilities.effects.Effect;
 import mage.abilities.effects.common.DamageTargetEffect;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.filter.common.FilterControlledArtifactPermanent;
 import mage.target.common.TargetCreaturePermanent;
 
@@ -44,9 +44,8 @@ import mage.target.common.TargetCreaturePermanent;
  */
 public class WeldingSparks extends CardImpl {
 
-    public WeldingSparks(UUID ownerId) {
-        super(ownerId, 140, "Welding Sparks", Rarity.COMMON, new CardType[]{CardType.INSTANT}, "{2}{R}");
-        this.expansionSetCode = "KLD";
+    public WeldingSparks(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.INSTANT},"{2}{R}");
 
         // Welding Sparks deals X damage to target creature, where X is 3 plus the number of artifacts you control.
         Effect effect = new DamageTargetEffect(new IntPlusDynamicValue(3, new PermanentsOnBattlefieldCount(new FilterControlledArtifactPermanent("artifacts you control"))));

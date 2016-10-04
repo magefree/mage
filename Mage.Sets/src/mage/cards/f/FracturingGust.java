@@ -25,15 +25,15 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.shadowmoor;
+package mage.cards.f;
 
 import java.util.UUID;
 import mage.constants.CardType;
 import mage.constants.Outcome;
-import mage.constants.Rarity;
 import mage.abilities.Ability;
 import mage.abilities.effects.OneShotEffect;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.filter.FilterPermanent;
 import mage.filter.predicate.Predicates;
 import mage.filter.predicate.mageobject.CardTypePredicate;
@@ -47,9 +47,8 @@ import mage.players.Player;
  */
 public class FracturingGust extends CardImpl {
 
-    public FracturingGust(UUID ownerId) {
-        super(ownerId, 227, "Fracturing Gust", Rarity.RARE, new CardType[]{CardType.INSTANT}, "{2}{G/W}{G/W}{G/W}");
-        this.expansionSetCode = "SHM";
+    public FracturingGust(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.INSTANT},"{2}{G/W}{G/W}{G/W}");
 
         // Destroy all artifacts and enchantments. You gain 2 life for each permanent destroyed this way.
         this.getSpellAbility().addEffect(new FracturingGustDestroyEffect());

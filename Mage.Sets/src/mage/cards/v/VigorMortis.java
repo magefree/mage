@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.ravnica;
+package mage.cards.v;
 
 import java.util.UUID;
 import mage.abilities.Ability;
@@ -34,10 +34,10 @@ import mage.abilities.decorator.ConditionalOneShotEffect;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.ReturnFromGraveyardToBattlefieldTargetEffect;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.ColoredManaSymbol;
 import mage.constants.Outcome;
-import mage.constants.Rarity;
 import mage.counters.CounterType;
 import mage.filter.common.FilterCreatureCard;
 import mage.game.Game;
@@ -50,9 +50,8 @@ import mage.target.common.TargetCardInYourGraveyard;
  */
 public class VigorMortis extends CardImpl {
 
-    public VigorMortis(UUID ownerId) {
-        super(ownerId, 111, "Vigor Mortis", Rarity.UNCOMMON, new CardType[]{CardType.SORCERY}, "{2}{B}{B}");
-        this.expansionSetCode = "RAV";
+    public VigorMortis(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{2}{B}{B}");
 
         // Return target creature card from your graveyard to the battlefield. If {G} was spent to cast Vigor Mortis, that creature enters the battlefield with an additional +1/+1 counter on it.
         this.getSpellAbility().addEffect(new ReturnFromGraveyardToBattlefieldTargetEffect());

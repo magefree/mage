@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.worldwake;
+package mage.cards.l;
 
 import java.util.UUID;
 import mage.MageInt;
@@ -39,9 +39,9 @@ import mage.abilities.effects.common.continuous.BoostSourceEffect;
 import mage.abilities.mana.BlackManaAbility;
 import mage.abilities.mana.RedManaAbility;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Duration;
-import mage.constants.Rarity;
 import mage.constants.Zone;
 import mage.game.permanent.token.Token;
 
@@ -51,9 +51,8 @@ import mage.game.permanent.token.Token;
  */
 public class LavaclawReaches extends CardImpl {
 
-    public LavaclawReaches(UUID ownerId) {
-        super(ownerId, 139, "Lavaclaw Reaches", Rarity.RARE, new CardType[]{CardType.LAND}, null);
-        this.expansionSetCode = "WWK";
+    public LavaclawReaches(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.LAND},null);
 
         // Lavaclaw Reaches enters the battlefield tapped.
         this.addAbility(new EntersBattlefieldTappedAbility());

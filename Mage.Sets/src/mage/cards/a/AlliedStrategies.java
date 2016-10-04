@@ -25,14 +25,14 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.planeshift;
+package mage.cards.a;
 
 import java.util.UUID;
 import mage.abilities.dynamicvalue.common.DomainValue;
 import mage.abilities.effects.common.DrawCardTargetEffect;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.target.TargetPlayer;
 
 /**
@@ -41,9 +41,8 @@ import mage.target.TargetPlayer;
  */
 public class AlliedStrategies extends CardImpl {
 
-    public AlliedStrategies(UUID ownerId) {
-        super(ownerId, 20, "Allied Strategies", Rarity.UNCOMMON, new CardType[]{CardType.SORCERY}, "{4}{U}");
-        this.expansionSetCode = "PLS";
+    public AlliedStrategies(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{4}{U}");
 
         // Domain - Target player draws a card for each basic land type among lands he or she controls.
         this.getSpellAbility().addEffect(new DrawCardTargetEffect(new DomainValue(true)));

@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.eldritchmoon;
+package mage.cards.e;
 
 import java.util.UUID;
 import mage.MageInt;
@@ -39,8 +39,8 @@ import mage.abilities.effects.common.DoIfCostPaid;
 import mage.abilities.effects.common.TransformSourceEffect;
 import mage.abilities.keyword.TransformAbility;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.constants.TargetController;
 import mage.constants.Zone;
 import mage.filter.common.FilterControlledPermanent;
@@ -60,16 +60,15 @@ public class ExtricatorOfSin extends CardImpl {
         filter.add(new AnotherPredicate());
     }
 
-    public ExtricatorOfSin(UUID ownerId) {
-        super(ownerId, 23, "Extricator of Sin", Rarity.UNCOMMON, new CardType[]{CardType.CREATURE}, "{2}{W}");
-        this.expansionSetCode = "EMN";
+    public ExtricatorOfSin(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{2}{W}");
         this.subtype.add("Human");
         this.subtype.add("Cleric");
         this.power = new MageInt(0);
         this.toughness = new MageInt(3);
 
         this.transformable = true;
-        this.secondSideCard = new ExtricatorOfFlesh(ownerId);
+        this.secondSideCardClazz = ExtricatorOfFlesh.class;
 
         // When Extricator of Sin enters the battlefield, you may sacrifice another permanent. If you do, put a 3/2 colorless Eldrazi Horror creature token onto the battlefield.
         this.addAbility(new EntersBattlefieldTriggeredAbility(new DoIfCostPaid(new CreateTokenEffect(new EldraziHorrorToken()),

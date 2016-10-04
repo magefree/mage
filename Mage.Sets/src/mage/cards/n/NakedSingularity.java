@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.iceage;
+package mage.cards.n;
 
 import java.util.UUID;
 import mage.Mana;
@@ -35,12 +35,12 @@ import mage.abilities.costs.mana.GenericManaCost;
 import mage.abilities.effects.ReplacementEffectImpl;
 import mage.abilities.keyword.CumulativeUpkeepAbility;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.choices.Choice;
 import mage.choices.ChoiceImpl;
 import mage.constants.CardType;
 import mage.constants.Duration;
 import mage.constants.Outcome;
-import mage.constants.Rarity;
 import mage.constants.Zone;
 import mage.game.Game;
 import mage.game.events.GameEvent;
@@ -54,9 +54,8 @@ import mage.players.Player;
  */
 public class NakedSingularity extends CardImpl {
 
-    public NakedSingularity(UUID ownerId) {
-        super(ownerId, 305, "Naked Singularity", Rarity.RARE, new CardType[]{CardType.ARTIFACT}, "{5}");
-        this.expansionSetCode = "ICE";
+    public NakedSingularity(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.ARTIFACT},"{5}");
 
         // Cumulative upkeep {3}
         this.addAbility(new CumulativeUpkeepAbility(new GenericManaCost(3)));

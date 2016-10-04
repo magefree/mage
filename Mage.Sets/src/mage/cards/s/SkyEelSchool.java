@@ -26,16 +26,16 @@
  *  or implied, of BetaSteward_at_googlemail.com.
  */
 
-package mage.sets.scarsofmirrodin;
+package mage.cards.s;
 
 import java.util.UUID;
 import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.MageInt;
 import mage.abilities.common.EntersBattlefieldTriggeredAbility;
 import mage.abilities.effects.common.DrawDiscardControllerEffect;
 import mage.abilities.keyword.FlyingAbility;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 
 /**
  *
@@ -43,9 +43,8 @@ import mage.cards.CardImpl;
  */
 public class SkyEelSchool extends CardImpl {
 
-    public SkyEelSchool (UUID ownerId) {
-        super(ownerId, 44, "Sky-Eel School", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{3}{U}{U}");
-        this.expansionSetCode = "SOM";
+    public SkyEelSchool (UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{3}{U}{U}");
         this.subtype.add("Fish");
 
         this.power = new MageInt(3);

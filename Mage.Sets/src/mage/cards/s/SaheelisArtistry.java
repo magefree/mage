@@ -25,14 +25,14 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.kaladesh;
+package mage.cards.s;
 
 import java.util.UUID;
 import mage.abilities.Mode;
 import mage.abilities.effects.common.PutTokenOntoBattlefieldCopyTargetEffect;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.target.common.TargetArtifactPermanent;
 import mage.target.common.TargetCreaturePermanent;
 
@@ -42,9 +42,8 @@ import mage.target.common.TargetCreaturePermanent;
  */
 public class SaheelisArtistry extends CardImpl {
 
-    public SaheelisArtistry(UUID ownerId) {
-        super(ownerId, 62, "Saheeli's Artistry", Rarity.RARE, new CardType[]{CardType.SORCERY}, "{4}{U}{U}");
-        this.expansionSetCode = "KLD";
+    public SaheelisArtistry(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{4}{U}{U}");
 
         // Choose one or both —
         this.getSpellAbility().getModes().setMinModes(1);

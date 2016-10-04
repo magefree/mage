@@ -25,11 +25,10 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.onslaught;
+package mage.cards.w;
 
 import java.util.UUID;
 import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.constants.Zone;
 import mage.MageInt;
 import mage.abilities.Ability;
@@ -39,6 +38,7 @@ import mage.abilities.costs.common.TapSourceCost;
 import mage.abilities.costs.mana.ManaCostsImpl;
 import mage.abilities.effects.common.search.SearchLibraryPutInHandEffect;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.filter.common.FilterLandCard;
 import mage.filter.common.FilterLandPermanent;
 import mage.target.common.TargetCardInLibrary;
@@ -49,9 +49,8 @@ import mage.target.common.TargetCardInLibrary;
  */
 public class WeatheredWayfarer extends CardImpl {
 
-    public WeatheredWayfarer(UUID ownerId) {
-        super(ownerId, 59, "Weathered Wayfarer", Rarity.RARE, new CardType[]{CardType.CREATURE}, "{W}");
-        this.expansionSetCode = "ONS";
+    public WeatheredWayfarer(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{W}");
         this.subtype.add("Human");
         this.subtype.add("Nomad");
         this.subtype.add("Cleric");

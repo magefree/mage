@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.shadowmoor;
+package mage.cards.t;
 
 import java.util.UUID;
 import mage.abilities.Ability;
@@ -34,9 +34,9 @@ import mage.abilities.costs.common.PayLifeCost;
 import mage.abilities.effects.OneShotEffect;
 import mage.cards.Card;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Outcome;
-import mage.constants.Rarity;
 import mage.game.Game;
 import mage.players.Player;
 import mage.target.TargetPlayer;
@@ -49,9 +49,8 @@ public class Tyrannize extends CardImpl {
     
     private static final String rule = "Pay 7 life? (otherwise discard your hand)";
 
-    public Tyrannize(UUID ownerId) {
-        super(ownerId, 201, "Tyrannize", Rarity.RARE, new CardType[]{CardType.SORCERY}, "{3}{B/R}{B/R}");
-        this.expansionSetCode = "SHM";
+    public Tyrannize(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{3}{B/R}{B/R}");
 
         // Target player discards his or her hand unless he or she pays 7 life.
         this.getSpellAbility().addTarget(new TargetPlayer());

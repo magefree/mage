@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.nemesis;
+package mage.cards.d;
 
 import java.util.UUID;
 import mage.abilities.costs.AlternativeCostSourceAbility;
@@ -33,8 +33,8 @@ import mage.abilities.costs.common.ReturnToHandChosenControlledPermanentCost;
 import mage.abilities.costs.mana.GenericManaCost;
 import mage.abilities.effects.common.CounterUnlessPaysEffect;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.filter.common.FilterControlledPermanent;
 import mage.filter.predicate.mageobject.CardTypePredicate;
 import mage.filter.predicate.mageobject.SubtypePredicate;
@@ -54,9 +54,8 @@ public class Daze extends CardImpl {
         filter.add(new CardTypePredicate(CardType.LAND));
     }
 
-    public Daze(UUID ownerId) {
-        super(ownerId, 30, "Daze", Rarity.COMMON, new CardType[]{CardType.INSTANT}, "{1}{U}");
-        this.expansionSetCode = "NEM";
+    public Daze(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.INSTANT},"{1}{U}");
 
 
         // You may return an Island you control to its owner's hand rather than pay Daze's mana cost.

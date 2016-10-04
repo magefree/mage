@@ -25,14 +25,14 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.betrayersofkamigawa;
+package mage.cards.i;
 
 import java.util.UUID;
 import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.abilities.dynamicvalue.common.CardsInControllerGraveyardCount;
 import mage.abilities.effects.common.DamageTargetEffect;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.filter.FilterCard;
 import mage.filter.predicate.mageobject.SubtypePredicate;
 import mage.target.common.TargetCreatureOrPlayer;
@@ -49,9 +49,8 @@ public class IreOfKaminari extends CardImpl {
         filter.add(new SubtypePredicate("Arcane"));
     }
 
-    public IreOfKaminari(UUID ownerId) {
-        super(ownerId, 109, "Ire of Kaminari", Rarity.COMMON, new CardType[]{CardType.INSTANT}, "{3}{R}");
-        this.expansionSetCode = "BOK";
+    public IreOfKaminari(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.INSTANT},"{3}{R}");
         this.subtype.add("Arcane");
 
         // Ire of Kaminari deals damage to target creature or player equal to the number of Arcane cards in your graveyard.

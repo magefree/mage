@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.ravnica;
+package mage.cards.p;
 
 import java.util.UUID;
 import mage.abilities.Ability;
@@ -34,10 +34,10 @@ import mage.abilities.costs.mana.GenericManaCost;
 import mage.abilities.effects.ReplacementEffectImpl;
 import mage.abilities.keyword.EquipAbility;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Duration;
 import mage.constants.Outcome;
-import mage.constants.Rarity;
 import mage.constants.Zone;
 import mage.game.Game;
 import mage.game.events.DamagePlayerEvent;
@@ -50,9 +50,8 @@ import mage.game.permanent.Permanent;
  */
 public class PariahsShield extends CardImpl {
 
-    public PariahsShield(UUID ownerId) {
-        super(ownerId, 267, "Pariah's Shield", Rarity.RARE, new CardType[]{CardType.ARTIFACT}, "{5}");
-        this.expansionSetCode = "RAV";
+    public PariahsShield(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.ARTIFACT},"{5}");
         this.subtype.add("Equipment");
 
         // All damage that would be dealt to you is dealt to equipped creature instead.
@@ -70,49 +69,49 @@ public class PariahsShield extends CardImpl {
     public PariahsShield copy() {
         return new PariahsShield(this);
     }
-}
 
-class PariahEffect extends ReplacementEffectImpl {
-    PariahEffect() {
-        super(Duration.WhileOnBattlefield, Outcome.RedirectDamage);
-        staticText = "All damage that would be dealt to you is dealt to equipped creature instead";
-    }
-
-    PariahEffect(final PariahEffect effect) {
-        super(effect);
-    }
-
-    @Override
-    public boolean replaceEvent(GameEvent event, Ability source, Game game) {
-        Permanent equipment = game.getPermanent(source.getSourceId());
-        if (equipment != null) {
-            Permanent p = game.getPermanent(equipment.getAttachedTo());
-            if (p != null) {                
-                DamagePlayerEvent damageEvent = (DamagePlayerEvent) event;
-                p.damage(damageEvent.getAmount(), event.getSourceId(), game, damageEvent.isCombatDamage(), damageEvent.isPreventable());
-                return true;
-            }
+    class PariahEffect extends ReplacementEffectImpl {
+        PariahEffect() {
+            super(Duration.WhileOnBattlefield, Outcome.RedirectDamage);
+            staticText = "All damage that would be dealt to you is dealt to equipped creature instead";
         }
-        return false;
-    }
 
-    @Override
-    public boolean checksEventType(GameEvent event, Game game) {
-        return event.getType() == GameEvent.EventType.DAMAGE_PLAYER;
-    }
-    
-    @Override
-    public boolean applies(GameEvent event, Ability source, Game game) {
-        return event.getPlayerId().equals(source.getControllerId());
-    }
+        PariahEffect(final PariahEffect effect) {
+            super(effect);
+        }
 
-    @Override
-    public boolean apply(Game game, Ability source) {
-        return true;
-    }
+        @Override
+        public boolean replaceEvent(GameEvent event, Ability source, Game game) {
+            Permanent equipment = game.getPermanent(source.getSourceId());
+            if (equipment != null) {
+                Permanent p = game.getPermanent(equipment.getAttachedTo());
+                if (p != null) {
+                    DamagePlayerEvent damageEvent = (DamagePlayerEvent) event;
+                    p.damage(damageEvent.getAmount(), event.getSourceId(), game, damageEvent.isCombatDamage(), damageEvent.isPreventable());
+                    return true;
+                }
+            }
+            return false;
+        }
 
-    @Override
-    public PariahEffect copy() {
-        return new PariahEffect(this);
+        @Override
+        public boolean checksEventType(GameEvent event, Game game) {
+            return event.getType() == GameEvent.EventType.DAMAGE_PLAYER;
+        }
+
+        @Override
+        public boolean applies(GameEvent event, Ability source, Game game) {
+            return event.getPlayerId().equals(source.getControllerId());
+        }
+
+        @Override
+        public boolean apply(Game game, Ability source) {
+            return true;
+        }
+
+        @Override
+        public PariahEffect copy() {
+            return new PariahEffect(this);
+        }
     }
 }

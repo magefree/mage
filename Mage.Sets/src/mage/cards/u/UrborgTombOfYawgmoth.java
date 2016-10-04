@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.planarchaos;
+package mage.cards.u;
 
 import java.util.UUID;
 
@@ -36,6 +36,7 @@ import mage.abilities.effects.ContinuousEffectImpl;
 import mage.abilities.effects.common.continuous.GainAbilityAllEffect;
 import mage.abilities.mana.BlackManaAbility;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.filter.common.FilterLandPermanent;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
@@ -46,9 +47,8 @@ import mage.game.permanent.Permanent;
  */
 public class UrborgTombOfYawgmoth extends CardImpl {
 
-    public UrborgTombOfYawgmoth(UUID ownerId) {
-        super(ownerId, 165, "Urborg, Tomb of Yawgmoth", Rarity.RARE, new CardType[]{CardType.LAND}, "");
-        this.expansionSetCode = "PLC";
+    public UrborgTombOfYawgmoth(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.LAND},"");
         this.supertype.add("Legendary");
 
         // Each land is a Swamp in addition to its other land types.

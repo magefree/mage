@@ -26,13 +26,13 @@
  *  or implied, of BetaSteward_at_googlemail.com.
  */
 
-package mage.sets.darksteel;
+package mage.cards.d;
 
 import mage.abilities.keyword.IndestructibleAbility;
 import mage.abilities.mana.AnyColorManaAbility;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.Rarity;
 
 import java.util.UUID;
 
@@ -42,9 +42,8 @@ import java.util.UUID;
 
 public class DarksteelIngot extends CardImpl {
 
-    public DarksteelIngot(UUID ownerId) {
-        super(ownerId, 112, "Darksteel Ingot", Rarity.COMMON, new CardType[]{CardType.ARTIFACT}, "{3}");
-        this.expansionSetCode = "DST";
+    public DarksteelIngot(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.ARTIFACT},"{3}");
         this.addAbility(IndestructibleAbility.getInstance());
         this.addAbility(new AnyColorManaAbility());
     }

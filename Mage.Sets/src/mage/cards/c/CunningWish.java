@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.judgment;
+package mage.cards.c;
 
 import java.util.Set;
 import java.util.UUID;
@@ -33,11 +33,11 @@ import mage.abilities.Ability;
 import mage.abilities.effects.OneShotEffect;
 import mage.cards.Card;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.cards.Cards;
 import mage.cards.CardsImpl;
 import mage.constants.CardType;
 import mage.constants.Outcome;
-import mage.constants.Rarity;
 import mage.constants.Zone;
 import mage.filter.FilterCard;
 import mage.filter.predicate.mageobject.CardTypePredicate;
@@ -51,9 +51,8 @@ import mage.target.TargetCard;
  */
 public class CunningWish extends CardImpl {
 
-    public CunningWish(UUID ownerId) {
-        super(ownerId, 37, "Cunning Wish", Rarity.RARE, new CardType[]{CardType.INSTANT}, "{2}{U}");
-        this.expansionSetCode = "JUD";
+    public CunningWish(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.INSTANT},"{2}{U}");
 
 
         // You may choose an instant card you own from outside the game, reveal that card, and put it into your hand. Exile Cunning Wish.

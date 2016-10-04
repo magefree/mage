@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.magic2010;
+package mage.cards.v;
 
 import mage.abilities.effects.common.continuous.PlayWithTheTopCardRevealedEffect;
 import mage.abilities.effects.common.continuous.GainAbilityControlledEffect;
@@ -35,7 +35,6 @@ import mage.abilities.effects.common.continuous.BoostSourceEffect;
 import java.util.UUID;
 import mage.constants.CardType;
 import mage.constants.Duration;
-import mage.constants.Rarity;
 import mage.constants.Zone;
 import mage.MageInt;
 import mage.abilities.Ability;
@@ -46,6 +45,7 @@ import mage.abilities.decorator.ConditionalContinuousEffect;
 import mage.abilities.keyword.FlyingAbility;
 import mage.cards.Card;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.filter.predicate.mageobject.SubtypePredicate;
 import mage.game.Game;
@@ -57,9 +57,8 @@ import mage.players.Player;
  */
 public class VampireNocturnus extends CardImpl {
 
-    public VampireNocturnus(UUID ownerId) {
-        super(ownerId, 118, "Vampire Nocturnus", Rarity.MYTHIC, new CardType[]{CardType.CREATURE}, "{1}{B}{B}{B}");
-        this.expansionSetCode = "M10";
+    public VampireNocturnus(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{1}{B}{B}{B}");
         this.subtype.add("Vampire");
 
         this.power = new MageInt(3);

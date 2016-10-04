@@ -26,14 +26,14 @@
  *  or implied, of BetaSteward_at_googlemail.com.
  */
 
-package mage.sets.invasion;
+package mage.cards.a;
 
 import java.util.UUID;
 import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.abilities.effects.Effect;
 import mage.abilities.effects.common.CreateTokenEffect;
 import mage.abilities.effects.common.DamageTargetEffect;
+import mage.cards.CardSetInfo;
 import mage.cards.SplitCard;
 import mage.game.permanent.token.ElephantToken;
 import mage.target.common.TargetCreatureOrPlayer;
@@ -46,9 +46,8 @@ import mage.target.common.TargetCreatureOrPlayer;
 
 public class AssaultBattery extends SplitCard {
 
-    public AssaultBattery(UUID ownerId) {
-        super(ownerId, 295, "Assault", "Battery", Rarity.UNCOMMON, new CardType[]{CardType.SORCERY}, "{R}", "{3}{G}", false);
-        this.expansionSetCode = "INV";
+    public AssaultBattery(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{R}","{3}{G}",false);
 
         // Assault
         // Assault deals 2 damage to target creature or player.

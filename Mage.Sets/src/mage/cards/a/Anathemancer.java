@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.alarareborn;
+package mage.cards.a;
 
 import mage.MageInt;
 import mage.abilities.Ability;
@@ -36,8 +36,8 @@ import mage.abilities.effects.Effect;
 import mage.abilities.effects.common.DamageTargetEffect;
 import mage.abilities.keyword.UnearthAbility;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.filter.common.FilterLandPermanent;
 import mage.filter.predicate.Predicates;
 import mage.filter.predicate.mageobject.SupertypePredicate;
@@ -53,9 +53,8 @@ import java.util.UUID;
  */
 public class Anathemancer extends CardImpl {
 
-    public Anathemancer(UUID ownerId) {
-        super(ownerId, 33, "Anathemancer", Rarity.UNCOMMON, new CardType[]{CardType.CREATURE}, "{1}{B}{R}");
-        this.expansionSetCode = "ARB";
+    public Anathemancer(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{1}{B}{R}");
         this.subtype.add("Zombie");
         this.subtype.add("Wizard");
        

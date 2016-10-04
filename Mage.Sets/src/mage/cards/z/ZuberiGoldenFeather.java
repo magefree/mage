@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.mirage;
+package mage.cards.z;
 
 import java.util.UUID;
 import mage.MageInt;
@@ -33,9 +33,9 @@ import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.effects.common.continuous.BoostAllEffect;
 import mage.abilities.keyword.FlyingAbility;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Duration;
-import mage.constants.Rarity;
 import mage.constants.Zone;
 import mage.filter.common.FilterCreaturePermanent;
 
@@ -47,9 +47,8 @@ public class ZuberiGoldenFeather extends CardImpl {
 
     private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("Griffin", "Griffin creatures");
 
-    public ZuberiGoldenFeather(UUID ownerId) {
-        super(ownerId, 255, "Zuberi, Golden Feather", Rarity.RARE, new CardType[]{CardType.CREATURE}, "{4}{W}");
-        this.expansionSetCode = "MIR";
+    public ZuberiGoldenFeather(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{4}{W}");
         this.supertype.add("Legendary");
         this.subtype.add("Griffin");
         this.power = new MageInt(3);

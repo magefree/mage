@@ -25,16 +25,17 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.shadowsoverinnistrad;
+package mage.cards.d;
 
 import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.TriggeredAbilityImpl;
 import mage.abilities.effects.common.TransformSourceEffect;
 import mage.abilities.keyword.TransformAbility;
+import mage.cards.b.BearerOfOverwhelmingTruths;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.constants.Zone;
 import mage.game.Game;
 import mage.game.events.GameEvent;
@@ -46,16 +47,15 @@ import mage.game.events.GameEvent.EventType;
  */
 public class DaringSleuth extends CardImpl {
 
-    public DaringSleuth(UUID ownerId) {
-        super(ownerId, 54, "Daring Sleuth", Rarity.UNCOMMON, new CardType[]{CardType.CREATURE}, "{1}{U}");
-        this.expansionSetCode = "SOI";
+    public DaringSleuth(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{1}{U}");
         this.subtype.add("Human");
         this.subtype.add("Rogue");
         this.power = new MageInt(2);
         this.toughness = new MageInt(1);
         
         this.transformable = true;
-        this.secondSideCard = new BearerOfOverwhelmingTruths(ownerId);
+        this.secondSideCardClazz = BearerOfOverwhelmingTruths.class;
 
         // When you sacrifice a Clue, transform Daring Sleuth.
         this.addAbility(new TransformAbility());

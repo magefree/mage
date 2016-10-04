@@ -25,16 +25,16 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.darkascension;
+package mage.cards.m;
 
 import java.util.UUID;
 
 import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.abilities.costs.mana.ManaCostsImpl;
 import mage.abilities.effects.common.ReturnToHandTargetEffect;
 import mage.abilities.keyword.FlashbackAbility;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.TimingRule;
 import mage.filter.FilterCard;
 import mage.filter.predicate.Predicates;
@@ -54,9 +54,8 @@ public class MysticRetrieval extends CardImpl {
                 new CardTypePredicate(CardType.SORCERY)));
     }
 
-    public MysticRetrieval(UUID ownerId) {
-        super(ownerId, 42, "Mystic Retrieval", Rarity.UNCOMMON, new CardType[]{CardType.SORCERY}, "{3}{U}");
-        this.expansionSetCode = "DKA";
+    public MysticRetrieval(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{3}{U}");
 
 
         // Return target instant or sorcery card from your graveyard to your hand.

@@ -25,13 +25,13 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.shadowmoor;
+package mage.cards.f;
 
 import java.util.UUID;
 import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.abilities.effects.common.DamageTargetEffect;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.target.common.TargetCreatureOrPlayer;
 
 /**
@@ -40,9 +40,8 @@ import mage.target.common.TargetCreatureOrPlayer;
  */
 public class FlameJavelin extends CardImpl {
 
-    public FlameJavelin(UUID ownerId) {
-        super(ownerId, 92, "Flame Javelin", Rarity.UNCOMMON, new CardType[]{CardType.INSTANT}, "{2/R}{2/R}{2/R}");
-        this.expansionSetCode = "SHM";
+    public FlameJavelin(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.INSTANT},"{2/R}{2/R}{2/R}");
 
 
         // Flame Javelin deals 4 damage to target creature or player.

@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.shadowmoor;
+package mage.cards.w;
 
 import java.util.UUID;
 import mage.MageObject;
@@ -36,12 +36,12 @@ import mage.abilities.effects.common.AttachEffect;
 import mage.abilities.keyword.EnchantAbility;
 import mage.cards.Card;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.cards.Cards;
 import mage.cards.CardsImpl;
 import mage.constants.CardType;
 import mage.constants.Duration;
 import mage.constants.Outcome;
-import mage.constants.Rarity;
 import mage.constants.Zone;
 import mage.game.Game;
 import mage.game.events.GameEvent;
@@ -57,9 +57,8 @@ import mage.target.TargetPlayer;
  */
 public class WheelOfSunAndMoon extends CardImpl {
 
-    public WheelOfSunAndMoon(UUID ownerId) {
-        super(ownerId, 243, "Wheel of Sun and Moon", Rarity.RARE, new CardType[]{CardType.ENCHANTMENT}, "{G/W}{G/W}");
-        this.expansionSetCode = "SHM";
+    public WheelOfSunAndMoon(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.ENCHANTMENT},"{G/W}{G/W}");
         this.subtype.add("Aura");
 
         // Enchant player

@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.championsofkamigawa;
+package mage.cards.k;
 
 import java.util.UUID;
 import mage.MageInt;
@@ -33,17 +33,16 @@ import mage.abilities.keyword.BushidoAbility;
 import mage.abilities.keyword.IndestructibleAbility;
 import mage.abilities.keyword.VigilanceAbility;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.Rarity;
 
 /**
  * @author Loki
  */
 public class KondaLordOfEiganjo extends CardImpl {
 
-    public KondaLordOfEiganjo(UUID ownerId) {
-        super(ownerId, 30, "Konda, Lord of Eiganjo", Rarity.RARE, new CardType[]{CardType.CREATURE}, "{5}{W}{W}");
-        this.expansionSetCode = "CHK";
+    public KondaLordOfEiganjo(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{5}{W}{W}");
         this.supertype.add("Legendary");
         this.subtype.add("Human");
         this.subtype.add("Samurai");

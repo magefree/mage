@@ -25,13 +25,13 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.portalsecondage;
+package mage.cards.e;
 
 import java.util.UUID;
 import mage.abilities.effects.common.CounterTargetEffect;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.filter.FilterSpell;
 import mage.filter.predicate.mageobject.CardTypePredicate;
 import mage.target.TargetSpell;
@@ -48,9 +48,8 @@ public class Extinguish extends CardImpl {
         filter.add(new CardTypePredicate(CardType.SORCERY));
     }
 
-    public Extinguish(UUID ownerId) {
-        super(ownerId, 38, "Extinguish", Rarity.COMMON, new CardType[]{CardType.INSTANT}, "{1}{U}");
-        this.expansionSetCode = "PO2";
+    public Extinguish(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.INSTANT},"{1}{U}");
 
         // Counter target sorcery spell.
         this.getSpellAbility().addTarget(new TargetSpell(filter));

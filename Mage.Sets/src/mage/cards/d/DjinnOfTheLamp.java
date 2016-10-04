@@ -25,14 +25,14 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.portal;
+package mage.cards.d;
 
 import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.keyword.FlyingAbility;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.Rarity;
 
 /**
  *
@@ -40,9 +40,8 @@ import mage.constants.Rarity;
  */
 public class DjinnOfTheLamp extends CardImpl {
 
-    public DjinnOfTheLamp(UUID ownerId) {
-        super(ownerId, 54, "Djinn of the Lamp", Rarity.RARE, new CardType[]{CardType.CREATURE}, "{5}{U}{U}");
-        this.expansionSetCode = "POR";
+    public DjinnOfTheLamp(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{5}{U}{U}");
         this.subtype.add("Djinn");
 
         this.power = new MageInt(5);

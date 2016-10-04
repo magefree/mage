@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.dissension;
+package mage.cards.r;
 
 import java.util.Set;
 import java.util.UUID;
@@ -35,10 +35,10 @@ import mage.abilities.effects.common.CreateTokenEffect;
 import mage.cards.Card;
 import mage.cards.Cards;
 import mage.cards.CardsImpl;
+import mage.cards.CardSetInfo;
 import mage.cards.SplitCard;
 import mage.constants.CardType;
 import mage.constants.Outcome;
-import mage.constants.Rarity;
 import mage.constants.Zone;
 import mage.filter.FilterCard;
 import mage.game.Game;
@@ -52,9 +52,8 @@ import mage.target.TargetCard;
  */
 public class ResearchDevelopment extends SplitCard {
 
-    public ResearchDevelopment(UUID ownerId) {
-        super(ownerId, 155, "Research", "Development", Rarity.RARE, new CardType[]{CardType.INSTANT}, "{G}{U}", "{3}{U}{R}", false);
-        this.expansionSetCode = "DIS";
+    public ResearchDevelopment(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.INSTANT},"{G}{U}","{3}{U}{R}",false);
 
         // Choose up to four cards you own from outside the game and shuffle them into your library.
         getLeftHalfCard().getSpellAbility().addEffect(new ResearchEffect());

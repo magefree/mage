@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.morningtide;
+package mage.cards.n;
 
 import java.util.UUID;
 import mage.abilities.Ability;
@@ -37,9 +37,9 @@ import mage.abilities.effects.common.CreateTokenEffect;
 import mage.abilities.effects.common.turn.AddExtraTurnControllerEffect;
 import mage.abilities.keyword.ProwlAbility;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Outcome;
-import mage.constants.Rarity;
 import mage.game.Game;
 import mage.game.permanent.token.FaerieRogueToken;
 import mage.players.Player;
@@ -51,9 +51,8 @@ import mage.watchers.common.AmountOfDamageAPlayerReceivedThisTurnWatcher;
  */
 public class NotoriousThrong extends CardImpl {
 
-    public NotoriousThrong(UUID ownerId) {
-        super(ownerId, 45, "Notorious Throng", Rarity.RARE, new CardType[]{CardType.TRIBAL, CardType.SORCERY}, "{3}{U}");
-        this.expansionSetCode = "MOR";
+    public NotoriousThrong(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.TRIBAL,CardType.SORCERY},"{3}{U}");
         this.subtype.add("Rogue");
 
         // Prowl {5}{U}

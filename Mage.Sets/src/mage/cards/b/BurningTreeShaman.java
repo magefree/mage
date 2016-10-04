@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.guildpact;
+package mage.cards.b;
 
 import java.util.UUID;
 import mage.MageInt;
@@ -34,9 +34,9 @@ import mage.abilities.dynamicvalue.common.StaticValue;
 import mage.abilities.effects.Effect;
 import mage.abilities.effects.common.DamageTargetEffect;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.AbilityType;
 import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.constants.Zone;
 import mage.game.Game;
 import mage.game.events.GameEvent;
@@ -50,9 +50,8 @@ import mage.target.targetpointer.FixedTarget;
  */
 public class BurningTreeShaman extends CardImpl {
 
-    public BurningTreeShaman(UUID ownerId) {
-        super(ownerId, 105, "Burning-Tree Shaman", Rarity.RARE, new CardType[]{CardType.CREATURE}, "{1}{R}{G}");
-        this.expansionSetCode = "GPT";
+    public BurningTreeShaman(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{1}{R}{G}");
         this.subtype.add("Centaur");
         this.subtype.add("Shaman");
 

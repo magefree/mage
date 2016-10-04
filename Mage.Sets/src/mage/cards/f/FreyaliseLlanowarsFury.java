@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.commander2014;
+package mage.cards.f;
 
 import java.util.UUID;
 import mage.MageInt;
@@ -39,8 +39,8 @@ import mage.abilities.effects.common.DestroyTargetEffect;
 import mage.abilities.effects.common.DrawCardSourceControllerEffect;
 import mage.abilities.mana.GreenManaAbility;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.filter.common.FilterArtifactOrEnchantmentPermanent;
 import mage.filter.common.FilterControlledCreaturePermanent;
 import mage.filter.predicate.mageobject.ColorPredicate;
@@ -59,9 +59,8 @@ public class FreyaliseLlanowarsFury extends CardImpl {
         filterGreen.add(new ColorPredicate(ObjectColor.GREEN));
     }
 
-    public FreyaliseLlanowarsFury(UUID ownerId) {
-        super(ownerId, 43, "Freyalise, Llanowar's Fury", Rarity.MYTHIC, new CardType[]{CardType.PLANESWALKER}, "{3}{G}{G}");
-        this.expansionSetCode = "C14";
+    public FreyaliseLlanowarsFury(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.PLANESWALKER},"{3}{G}{G}");
         this.subtype.add("Freyalise");
 
         this.addAbility(new PlanswalkerEntersWithLoyalityCountersAbility(3));

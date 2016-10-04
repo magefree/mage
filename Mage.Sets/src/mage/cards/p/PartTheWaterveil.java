@@ -25,15 +25,15 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.battleforzendikar;
+package mage.cards.p;
 
 import java.util.UUID;
 import mage.abilities.effects.common.ExileSpellEffect;
 import mage.abilities.effects.common.turn.AddExtraTurnControllerEffect;
 import mage.abilities.keyword.AwakenAbility;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.Rarity;
 
 /**
  *
@@ -41,9 +41,8 @@ import mage.constants.Rarity;
  */
 public class PartTheWaterveil extends CardImpl {
 
-    public PartTheWaterveil(UUID ownerId) {
-        super(ownerId, 80, "Part the Waterveil", Rarity.MYTHIC, new CardType[]{CardType.SORCERY}, "{4}{U}{U}");
-        this.expansionSetCode = "BFZ";
+    public PartTheWaterveil(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{4}{U}{U}");
 
         // Take an extra turn after this one. Exile Part the Waterveil.
         this.getSpellAbility().addEffect(new AddExtraTurnControllerEffect());

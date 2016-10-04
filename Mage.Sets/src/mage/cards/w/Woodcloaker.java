@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.scourge;
+package mage.cards.w;
 
 import java.util.UUID;
 import mage.MageInt;
@@ -35,9 +35,9 @@ import mage.abilities.effects.common.continuous.GainAbilityTargetEffect;
 import mage.abilities.keyword.MorphAbility;
 import mage.abilities.keyword.TrampleAbility;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Duration;
-import mage.constants.Rarity;
 import mage.target.common.TargetCreaturePermanent;
 import mage.abilities.common.TurnedFaceUpSourceTriggeredAbility;
 
@@ -47,9 +47,8 @@ import mage.abilities.common.TurnedFaceUpSourceTriggeredAbility;
  */
 public class Woodcloaker extends CardImpl {
 
-    public Woodcloaker(UUID ownerId) {
-        super(ownerId, 134, "Woodcloaker", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{5}{G}");
-        this.expansionSetCode = "SCG";
+    public Woodcloaker(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{5}{G}");
         this.subtype.add("Elf");
         this.power = new MageInt(3);
         this.toughness = new MageInt(3);

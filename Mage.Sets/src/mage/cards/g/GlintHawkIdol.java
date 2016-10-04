@@ -26,13 +26,12 @@
  *  or implied, of BetaSteward_at_googlemail.com.
  */
 
-package mage.sets.scarsofmirrodin;
+package mage.cards.g;
 
 import java.util.UUID;
 
 import mage.constants.CardType;
 import mage.constants.Duration;
-import mage.constants.Rarity;
 import mage.constants.TargetController;
 import mage.constants.Zone;
 import mage.MageInt;
@@ -42,6 +41,7 @@ import mage.abilities.costs.mana.ColoredManaCost;
 import mage.abilities.effects.common.continuous.BecomesCreatureSourceEffect;
 import mage.abilities.keyword.FlyingAbility;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.ColoredManaSymbol;
 import mage.filter.FilterPermanent;
 import mage.filter.common.FilterArtifactPermanent;
@@ -61,9 +61,8 @@ public class GlintHawkIdol extends CardImpl {
         filter.add(new AnotherPredicate());
     }
 
-    public GlintHawkIdol (UUID ownerId) {
-        super(ownerId, 156, "Glint Hawk Idol", Rarity.COMMON, new CardType[]{CardType.ARTIFACT}, "{2}");
-        this.expansionSetCode = "SOM";
+    public GlintHawkIdol (UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.ARTIFACT},"{2}");
         
         // Whenever another artifact enters the battlefield under your control, you may have {this} become a 2/2 Bird artifact creature with flying until end of turn.
         this.addAbility(new EntersBattlefieldControlledTriggeredAbility(

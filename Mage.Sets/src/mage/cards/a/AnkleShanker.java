@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.khansoftarkir;
+package mage.cards.a;
 
 import java.util.UUID;
 import mage.MageInt;
@@ -37,9 +37,9 @@ import mage.abilities.keyword.DeathtouchAbility;
 import mage.abilities.keyword.FirstStrikeAbility;
 import mage.abilities.keyword.HasteAbility;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Duration;
-import mage.constants.Rarity;
 
 /**
  *
@@ -47,9 +47,8 @@ import mage.constants.Rarity;
  */
 public class AnkleShanker extends CardImpl {
 
-    public AnkleShanker(UUID ownerId) {
-        super(ownerId, 164, "Ankle Shanker", Rarity.RARE, new CardType[]{CardType.CREATURE}, "{2}{R}{W}{B}");
-        this.expansionSetCode = "KTK";
+    public AnkleShanker(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{2}{R}{W}{B}");
         this.subtype.add("Goblin");
         this.subtype.add("Berserker");
 

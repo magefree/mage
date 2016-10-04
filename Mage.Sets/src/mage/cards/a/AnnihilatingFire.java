@@ -27,15 +27,15 @@
  *  or implied, of BetaSteward_at_googlemail.com.
  *
  */
-package mage.sets.returntoravnica;
+package mage.cards.a;
 
 import java.util.UUID;
 import mage.abilities.effects.common.DamageTargetEffect;
 import mage.abilities.effects.common.replacement.DealtDamageToCreatureBySourceDies;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Duration;
-import mage.constants.Rarity;
 import mage.target.common.TargetCreatureOrPlayer;
 import mage.watchers.common.DamagedByWatcher;
 
@@ -45,9 +45,8 @@ import mage.watchers.common.DamagedByWatcher;
  */
 public class AnnihilatingFire extends CardImpl {
 
-    public AnnihilatingFire(UUID ownerId) {
-        super(ownerId, 85, "Annihilating Fire", Rarity.COMMON, new CardType[]{CardType.INSTANT}, "{1}{R}{R}");
-        this.expansionSetCode = "RTR";
+    public AnnihilatingFire(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.INSTANT},"{1}{R}{R}");
 
         // Annihilating Fire deals 3 damage to target creature or player.
         this.getSpellAbility().addEffect(new DamageTargetEffect(3));

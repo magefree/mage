@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.legends;
+package mage.cards.t;
 
 import java.util.UUID;
 import mage.abilities.Ability;
@@ -40,8 +40,8 @@ import mage.abilities.effects.common.PutPermanentOnBattlefieldEffect;
 import mage.abilities.effects.common.ReturnFromGraveyardToBattlefieldTargetEffect;
 import mage.abilities.effects.common.counter.AddCountersSourceEffect;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.constants.Zone;
 import mage.counters.CounterType;
 import mage.filter.common.FilterCreatureCard;
@@ -54,9 +54,8 @@ import mage.target.common.TargetCardInYourGraveyard;
  */
 public class TriassicEgg extends CardImpl {
 
-    public TriassicEgg(UUID ownerId) {
-        super(ownerId, 242, "Triassic Egg", Rarity.RARE, new CardType[]{CardType.ARTIFACT}, "{4}");
-        this.expansionSetCode = "LEG";
+    public TriassicEgg(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.ARTIFACT},"{4}");
 
         // {3}, {tap}: Put a hatchling counter on Triassic Egg.
         Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, 

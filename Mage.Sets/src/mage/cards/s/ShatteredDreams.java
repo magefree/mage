@@ -25,13 +25,13 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.fifthdawn;
+package mage.cards.s;
 
 import java.util.UUID;
 import mage.abilities.effects.common.discard.DiscardCardYouChooseTargetEffect;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.filter.FilterCard;
 import mage.filter.predicate.mageobject.CardTypePredicate;
 import mage.target.common.TargetOpponent;
@@ -47,9 +47,8 @@ public class ShatteredDreams extends CardImpl {
         filter.add(new CardTypePredicate(CardType.ARTIFACT));
     }
     
-    public ShatteredDreams(UUID ownerId) {
-        super(ownerId, 59, "Shattered Dreams", Rarity.UNCOMMON, new CardType[]{CardType.SORCERY}, "{B}");
-        this.expansionSetCode = "5DN";
+    public ShatteredDreams(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{B}");
 
 
         // Target opponent reveals his or her hand. You choose an artifact card from it. That player discards that card.

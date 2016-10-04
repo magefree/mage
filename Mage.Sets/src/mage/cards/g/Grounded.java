@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.avacynrestored;
+package mage.cards.g;
 
 import mage.constants.*;
 import mage.abilities.Ability;
@@ -35,6 +35,7 @@ import mage.abilities.effects.common.continuous.LoseAbilityAttachedEffect;
 import mage.abilities.keyword.EnchantAbility;
 import mage.abilities.keyword.FlyingAbility;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.target.TargetPermanent;
 import mage.target.common.TargetCreaturePermanent;
 
@@ -45,9 +46,8 @@ import java.util.UUID;
  */
 public class Grounded extends CardImpl {
 
-    public Grounded(UUID ownerId) {
-        super(ownerId, 181, "Grounded", Rarity.COMMON, new CardType[]{CardType.ENCHANTMENT}, "{1}{G}");
-        this.expansionSetCode = "AVR";
+    public Grounded(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.ENCHANTMENT},"{1}{G}");
         this.subtype.add("Aura");
 
 

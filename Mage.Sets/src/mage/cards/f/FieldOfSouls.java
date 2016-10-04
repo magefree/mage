@@ -25,14 +25,14 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.tempestremastered;
+package mage.cards.f;
 
 import java.util.UUID;
 import mage.abilities.common.DiesCreatureTriggeredAbility;
 import mage.abilities.effects.common.CreateTokenEffect;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.constants.TargetController;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.filter.predicate.Predicates;
@@ -52,9 +52,8 @@ public class FieldOfSouls extends CardImpl {
         filter.add(Predicates.not(new TokenPredicate()));
     }
 
-    public FieldOfSouls(UUID ownerId) {
-        super(ownerId, 13, "Field of Souls", Rarity.RARE, new CardType[]{CardType.ENCHANTMENT}, "{2}{W}{W}");
-        this.expansionSetCode = "TPR";
+    public FieldOfSouls(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.ENCHANTMENT},"{2}{W}{W}");
 
         // Whenever a nontoken creature is put into your graveyard from the battlefield, put a 1/1 white Spirit creature token with flying onto the battlefield.
         this.addAbility(new DiesCreatureTriggeredAbility(new CreateTokenEffect(new SpiritWhiteToken()), false, filter));

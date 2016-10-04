@@ -25,12 +25,11 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.urzassaga;
+package mage.cards.l;
 
 import java.util.UUID;
 
 import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.costs.mana.ManaCostsImpl;
@@ -39,6 +38,7 @@ import mage.abilities.effects.common.continuous.BecomesBasicLandEnchantedEffect;
 import mage.abilities.keyword.CyclingAbility;
 import mage.abilities.keyword.EnchantAbility;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.Outcome;
 import mage.constants.Zone;
 import mage.target.TargetPermanent;
@@ -50,9 +50,8 @@ import mage.target.common.TargetLandPermanent;
  */
 public class LingeringMirage extends CardImpl {
 
-    public LingeringMirage(UUID ownerId) {
-        super(ownerId, 84, "Lingering Mirage", Rarity.UNCOMMON, new CardType[]{CardType.ENCHANTMENT}, "{1}{U}");
-        this.expansionSetCode = "USG";
+    public LingeringMirage(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.ENCHANTMENT},"{1}{U}");
         this.subtype.add("Aura");
 
 

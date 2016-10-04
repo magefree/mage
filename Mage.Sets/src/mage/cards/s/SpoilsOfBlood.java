@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.commander2014;
+package mage.cards.s;
 
 import java.util.UUID;
 import mage.MageInt;
@@ -34,9 +34,9 @@ import mage.abilities.Ability;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.CreateTokenEffect;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Outcome;
-import mage.constants.Rarity;
 import mage.constants.WatcherScope;
 import mage.constants.Zone;
 import mage.game.Game;
@@ -53,9 +53,8 @@ import mage.watchers.Watcher;
  */
 public class SpoilsOfBlood extends CardImpl {
 
-    public SpoilsOfBlood(UUID ownerId) {
-        super(ownerId, 30, "Spoils of Blood", Rarity.RARE, new CardType[]{CardType.INSTANT}, "{B}");
-        this.expansionSetCode = "C14";
+    public SpoilsOfBlood(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.INSTANT},"{B}");
 
 
         // Put an X/X black Horror creature token onto the battlefield, where X is the number of creatures that died this turn.

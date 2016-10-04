@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.darkascension;
+package mage.cards.w;
 
 import java.util.UUID;
 import mage.MageInt;
@@ -35,8 +35,8 @@ import mage.abilities.keyword.FlyingAbility;
 import mage.abilities.keyword.IntimidateAbility;
 import mage.abilities.keyword.TrampleAbility;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.constants.Zone;
 import mage.counters.CounterType;
 import mage.game.Game;
@@ -49,9 +49,8 @@ import mage.game.events.GameEvent.EventType;
  */
 public class WithengarUnbound extends CardImpl {
 
-    public WithengarUnbound(UUID ownerId) {
-        super(ownerId, 147, "Withengar Unbound", Rarity.MYTHIC, new CardType[]{CardType.CREATURE}, "");
-        this.expansionSetCode = "DKA";
+    public WithengarUnbound(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"");
         this.supertype.add("Legendary");
         this.subtype.add("Demon");
         this.color.setBlack(true);

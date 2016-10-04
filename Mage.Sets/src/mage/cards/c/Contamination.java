@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.urzassaga;
+package mage.cards.c;
 
 import java.util.UUID;
 import mage.MageObject;
@@ -37,10 +37,10 @@ import mage.abilities.costs.common.SacrificeTargetCost;
 import mage.abilities.effects.ReplacementEffectImpl;
 import mage.abilities.effects.common.SacrificeSourceUnlessPaysEffect;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Duration;
 import mage.constants.Outcome;
-import mage.constants.Rarity;
 import mage.constants.TargetController;
 import mage.constants.Zone;
 import mage.filter.common.FilterControlledCreaturePermanent;
@@ -56,9 +56,8 @@ import mage.target.common.TargetControlledCreaturePermanent;
  */
 public class Contamination extends CardImpl {
 
-    public Contamination(UUID ownerId) {
-        super(ownerId, 123, "Contamination", Rarity.RARE, new CardType[]{CardType.ENCHANTMENT}, "{2}{B}");
-        this.expansionSetCode = "USG";
+    public Contamination(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.ENCHANTMENT},"{2}{B}");
 
         // At the beginning of your upkeep, sacrifice Contamination unless you sacrifice a creature.
         this.addAbility(new BeginningOfUpkeepTriggeredAbility(new SacrificeSourceUnlessPaysEffect(new SacrificeTargetCost(new TargetControlledCreaturePermanent(new FilterControlledCreaturePermanent("a creature")))), TargetController.YOU, false));

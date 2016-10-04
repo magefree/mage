@@ -25,13 +25,14 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.magic2013;
+package mage.cards.f;
 
 import mage.constants.*;
 import mage.abilities.Ability;
 import mage.abilities.effects.OneShotEffect;
 import mage.cards.Card;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.game.Game;
 import mage.game.events.GameEvent;
 import mage.game.events.ZoneChangeEvent;
@@ -46,9 +47,8 @@ import java.util.UUID;
  */
 public class FaithsReward extends CardImpl {
 
-    public FaithsReward(UUID ownerId) {
-        super(ownerId, 14, "Faith's Reward", Rarity.RARE, new CardType[]{CardType.INSTANT}, "{3}{W}");
-        this.expansionSetCode = "M13";
+    public FaithsReward(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.INSTANT},"{3}{W}");
 
 
         // Return to the battlefield all permanent cards in your graveyard that were put there from the battlefield this turn.

@@ -26,16 +26,16 @@
  *  or implied, of BetaSteward_at_googlemail.com.
  */
 
-package mage.sets.dissension;
+package mage.cards.o;
 
 import java.util.UUID;
 import mage.constants.CardType;
 import mage.constants.Outcome;
-import mage.constants.Rarity;
 import mage.abilities.Ability;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.CopyTargetSpellEffect;
 import mage.abilities.effects.common.SacrificeEffect;
+import mage.cards.CardSetInfo;
 import mage.cards.SplitCard;
 import mage.filter.FilterSpell;
 import mage.filter.common.FilterAttackingCreature;
@@ -61,9 +61,8 @@ public class OddsEnds extends SplitCard {
                 new CardTypePredicate(CardType.SORCERY)));
     }
 
-    public OddsEnds(UUID ownerId) {
-        super(ownerId, 153, "Odds", "Ends", Rarity.RARE, new CardType[]{CardType.INSTANT}, "{U}{R}", "{3}{R}{W}", false);
-        this.expansionSetCode = "DIS";
+    public OddsEnds(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.INSTANT},"{U}{R}","{3}{R}{W}",false);
 
         // Odds
         // Flip a coin. If it comes up heads, counter target instant or sorcery spell. If it comes up tails, copy that spell and you may choose new targets for the copy.

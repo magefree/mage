@@ -25,15 +25,15 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.eventide;
+package mage.cards.w;
 
 import java.util.UUID;
 import mage.abilities.effects.common.AddCombatAndMainPhaseEffect;
 import mage.abilities.effects.common.UntapAllThatAttackedEffect;
 import mage.abilities.keyword.RetraceAbility;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.watchers.common.AttackedThisTurnWatcher;
 
 /**
@@ -42,9 +42,8 @@ import mage.watchers.common.AttackedThisTurnWatcher;
  */
 public class WavesOfAggression extends CardImpl {
 
-    public WavesOfAggression(UUID ownerId) {
-        super(ownerId, 148, "Waves of Aggression", Rarity.RARE, new CardType[]{CardType.SORCERY}, "{3}{R/W}{R/W}");
-        this.expansionSetCode = "EVE";
+    public WavesOfAggression(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{3}{R/W}{R/W}");
 
         // Untap all creatures that attacked this turn. After this main phase, there is an additional combat phase followed by an additional main phase.
         this.getSpellAbility().addWatcher(new AttackedThisTurnWatcher());

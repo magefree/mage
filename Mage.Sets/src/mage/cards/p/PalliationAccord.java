@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.dissension;
+package mage.cards.p;
 
 import java.util.UUID;
 import mage.abilities.Ability;
@@ -35,9 +35,9 @@ import mage.abilities.costs.common.RemoveCountersSourceCost;
 import mage.abilities.effects.PreventionEffectImpl;
 import mage.abilities.effects.common.counter.AddCountersSourceEffect;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Duration;
-import mage.constants.Rarity;
 import mage.constants.TargetController;
 import mage.constants.Zone;
 import mage.counters.CounterType;
@@ -58,9 +58,8 @@ public class PalliationAccord extends CardImpl {
         filter.add(new ControllerPredicate(TargetController.OPPONENT));
     }
 
-    public PalliationAccord(UUID ownerId) {
-        super(ownerId, 122, "Palliation Accord", Rarity.UNCOMMON, new CardType[]{CardType.ENCHANTMENT}, "{3}{W}{U}");
-        this.expansionSetCode = "DIS";
+    public PalliationAccord(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.ENCHANTMENT},"{3}{W}{U}");
 
         // Whenever a creature an opponent controls becomes tapped, put a shield counter on Palliation Accord.
         this.addAbility(new BecomesTappedTriggeredAbility(new AddCountersSourceEffect(CounterType.SHIELD.createInstance()), false, filter));

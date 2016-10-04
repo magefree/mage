@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.fatereforged;
+package mage.cards.r;
 
 import java.util.UUID;
 import mage.ConditionalMana;
@@ -42,11 +42,11 @@ import mage.abilities.mana.ConditionalColorlessManaAbility;
 import mage.abilities.mana.builder.ConditionalManaBuilder;
 import mage.cards.Card;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.cards.Cards;
 import mage.cards.CardsImpl;
 import mage.constants.CardType;
 import mage.constants.Outcome;
-import mage.constants.Rarity;
 import mage.constants.Zone;
 import mage.filter.FilterCard;
 import mage.filter.predicate.Predicates;
@@ -61,9 +61,8 @@ import mage.target.common.TargetCardInLibrary;
  */
 public class RenownedWeaponsmith extends CardImpl {
 
-    public RenownedWeaponsmith(UUID ownerId) {
-        super(ownerId, 48, "Renowned Weaponsmith", Rarity.UNCOMMON, new CardType[]{CardType.CREATURE}, "{1}{U}");
-        this.expansionSetCode = "FRF";
+    public RenownedWeaponsmith(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{1}{U}");
         this.subtype.add("Human");
         this.subtype.add("Artificer");
         this.power = new MageInt(1);

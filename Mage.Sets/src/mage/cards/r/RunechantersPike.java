@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.innistrad;
+package mage.cards.r;
 
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleStaticAbility;
@@ -38,6 +38,7 @@ import mage.abilities.effects.common.continuous.GainAbilityAttachedEffect;
 import mage.abilities.keyword.EquipAbility;
 import mage.abilities.keyword.FirstStrikeAbility;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.*;
 import mage.filter.FilterCard;
 import mage.filter.predicate.Predicates;
@@ -60,9 +61,8 @@ public class RunechantersPike extends CardImpl {
                 new CardTypePredicate(CardType.SORCERY)));
     }
 
-    public RunechantersPike(UUID ownerId) {
-        super(ownerId, 231, "Runechanter's Pike", Rarity.RARE, new CardType[]{CardType.ARTIFACT}, "{2}");
-        this.expansionSetCode = "ISD";
+    public RunechantersPike(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.ARTIFACT},"{2}");
         this.subtype.add("Equipment");
 
         // Equip {2}

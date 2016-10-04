@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.eldritchmoon;
+package mage.cards.p;
 
 import java.util.UUID;
 import mage.MageInt;
@@ -33,10 +33,10 @@ import mage.abilities.Ability;
 import mage.abilities.common.DealsCombatDamageToACreatureTriggeredAbility;
 import mage.abilities.effects.OneShotEffect;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Duration;
 import mage.constants.Outcome;
-import mage.constants.Rarity;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.util.functions.EmptyApplyToPermanent;
@@ -47,9 +47,8 @@ import mage.util.functions.EmptyApplyToPermanent;
  */
 public class PermeatingMass extends CardImpl {
 
-    public PermeatingMass(UUID ownerId) {
-        super(ownerId, 165, "Permeating Mass", Rarity.RARE, new CardType[]{CardType.CREATURE}, "{G}");
-        this.expansionSetCode = "EMN";
+    public PermeatingMass(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{G}");
         this.subtype.add("Spirit");
         this.power = new MageInt(1);
         this.toughness = new MageInt(3);

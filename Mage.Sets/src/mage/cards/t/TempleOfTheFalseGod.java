@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.commander2013;
+package mage.cards.t;
 
 import java.util.UUID;
 import mage.Mana;
@@ -34,8 +34,8 @@ import mage.abilities.costs.common.TapSourceCost;
 import mage.abilities.effects.common.BasicManaEffect;
 import mage.abilities.mana.ActivateIfConditionManaAbility;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.constants.Zone;
 import mage.filter.common.FilterLandPermanent;
 
@@ -47,9 +47,8 @@ public class TempleOfTheFalseGod extends CardImpl {
 
     private static final FilterLandPermanent filter = new FilterLandPermanent("you control five or more lands");
 
-    public TempleOfTheFalseGod(UUID ownerId) {
-        super(ownerId, 327, "Temple of the False God", Rarity.UNCOMMON, new CardType[]{CardType.LAND}, "");
-        this.expansionSetCode = "C13";
+    public TempleOfTheFalseGod(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.LAND},"");
 
         // {tap}: Add {C}{C} to your mana pool. Activate this ability only if you control five or more lands.
         this.addAbility(new ActivateIfConditionManaAbility(

@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.innistrad;
+package mage.cards.c;
 
 import java.util.UUID;
 import mage.MageInt;
@@ -34,11 +34,12 @@ import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.costs.common.TapSourceCost;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.keyword.TransformAbility;
+import mage.cards.h.HomicidalBrute;
 import mage.cards.Card;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Outcome;
-import mage.constants.Rarity;
 import mage.constants.WatcherScope;
 import mage.constants.Zone;
 import mage.game.Game;
@@ -52,14 +53,13 @@ import mage.watchers.Watcher;
  */
 public class CivilizedScholar extends CardImpl {
 
-    public CivilizedScholar(UUID ownerId) {
-        super(ownerId, 47, "Civilized Scholar", Rarity.UNCOMMON, new CardType[]{CardType.CREATURE}, "{2}{U}");
-        this.expansionSetCode = "ISD";
+    public CivilizedScholar(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{2}{U}");
         this.subtype.add("Human");
         this.subtype.add("Advisor");
 
         this.transformable = true;
-        this.secondSideCard = new HomicidalBrute(ownerId);
+        this.secondSideCardClazz = HomicidalBrute.class;
 
         this.power = new MageInt(0);
         this.toughness = new MageInt(1);

@@ -25,13 +25,13 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.prophecy;
+package mage.cards.b;
 
 import java.util.UUID;
 import mage.abilities.effects.common.SetPlayerLifeTargetEffect;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.target.TargetPlayer;
 
 /**
@@ -40,9 +40,8 @@ import mage.target.TargetPlayer;
  */
 public class BlessedWind extends CardImpl {
 
-    public BlessedWind(UUID ownerId) {
-        super(ownerId, 4, "Blessed Wind", Rarity.RARE, new CardType[]{CardType.SORCERY}, "{7}{W}{W}");
-        this.expansionSetCode = "PCY";
+    public BlessedWind(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{7}{W}{W}");
 
         // Target player's life total becomes 20.
         this.getSpellAbility().addEffect(new SetPlayerLifeTargetEffect(20));

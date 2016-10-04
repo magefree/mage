@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.darksteel;
+package mage.cards.s;
 
 import mage.abilities.Mode;
 import mage.abilities.common.CastOnlyDuringPhaseStepSourceAbility;
@@ -36,9 +36,9 @@ import mage.abilities.effects.common.continuous.GainAbilityControlledEffect;
 import mage.abilities.keyword.DoubleStrikeAbility;
 import mage.abilities.keyword.EntwineAbility;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Duration;
-import mage.constants.Rarity;
 import mage.constants.TurnPhase;
 import mage.filter.common.FilterControlledCreaturePermanent;
 import mage.filter.common.FilterCreaturePermanent;
@@ -51,9 +51,8 @@ import java.util.UUID;
  */
 public class SavageBeating extends CardImpl {
 
-    public SavageBeating(UUID ownerId) {
-        super(ownerId, 67, "Savage Beating", Rarity.RARE, new CardType[]{CardType.INSTANT}, "{3}{R}{R}");
-        this.expansionSetCode = "DST";
+    public SavageBeating(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.INSTANT},"{3}{R}{R}");
 
         // Cast Savage Beating only during your turn and only during combat.
         this.addAbility(new CastOnlyDuringPhaseStepSourceAbility(TurnPhase.COMBAT, null, MyTurnCondition.getInstance(),

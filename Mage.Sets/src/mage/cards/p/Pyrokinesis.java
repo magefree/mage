@@ -25,16 +25,16 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.alliances;
+package mage.cards.p;
 
 import java.util.UUID;
 import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.ObjectColor;
 import mage.abilities.costs.AlternativeCostSourceAbility;
 import mage.abilities.costs.common.ExileFromHandCost;
 import mage.abilities.effects.common.DamageMultiEffect;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.filter.common.FilterOwnedCard;
 import mage.filter.predicate.Predicates;
 import mage.filter.predicate.mageobject.CardIdPredicate;
@@ -48,9 +48,8 @@ import mage.target.common.TargetCreaturePermanentAmount;
  */
 public class Pyrokinesis extends CardImpl {
 
-    public Pyrokinesis(UUID ownerId) {
-        super(ownerId, 115, "Pyrokinesis", Rarity.UNCOMMON, new CardType[]{CardType.INSTANT}, "{4}{R}{R}");
-        this.expansionSetCode = "ALL";
+    public Pyrokinesis(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.INSTANT},"{4}{R}{R}");
 
 
         // You may exile a red card from your hand rather than pay Pyrokinesis's mana cost.

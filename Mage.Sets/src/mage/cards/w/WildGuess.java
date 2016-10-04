@@ -25,14 +25,14 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.magic2013;
+package mage.cards.w;
 
 import java.util.UUID;
 import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.abilities.costs.common.DiscardTargetCost;
 import mage.abilities.effects.common.DrawCardSourceControllerEffect;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.target.common.TargetCardInHand;
 
 /**
@@ -41,9 +41,8 @@ import mage.target.common.TargetCardInHand;
  */
 public class WildGuess extends CardImpl {
 
-    public WildGuess(UUID ownerId) {
-        super(ownerId, 157, "Wild Guess", Rarity.COMMON, new CardType[]{CardType.SORCERY}, "{R}{R}");
-        this.expansionSetCode = "M13";
+    public WildGuess(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{R}{R}");
 
 
         // As an additional cost to cast Wild Guess, discard a card.

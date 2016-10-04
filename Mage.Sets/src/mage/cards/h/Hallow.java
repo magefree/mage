@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.darksteel;
+package mage.cards.h;
 
 import java.util.UUID;
 import mage.MageObject;
@@ -33,9 +33,9 @@ import mage.abilities.Ability;
 import mage.abilities.effects.PreventionEffectData;
 import mage.abilities.effects.PreventionEffectImpl;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Duration;
-import mage.constants.Rarity;
 import mage.game.Game;
 import mage.game.events.GameEvent;
 import mage.game.stack.Spell;
@@ -48,9 +48,8 @@ import mage.target.TargetSpell;
  */
 public class Hallow extends CardImpl {
 
-    public Hallow(UUID ownerId) {
-        super(ownerId, 4, "Hallow", Rarity.COMMON, new CardType[]{CardType.INSTANT}, "{W}");
-        this.expansionSetCode = "DST";
+    public Hallow(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.INSTANT},"{W}");
 
 
         // Prevent all damage target spell would deal this turn. You gain life equal to the damage prevented this way.

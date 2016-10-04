@@ -25,13 +25,13 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.mercadianmasques;
+package mage.cards.m;
 
 import java.util.UUID;
 import mage.abilities.effects.common.SkipNextCombatEffect;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.target.TargetPlayer;
 
 /**
@@ -40,9 +40,8 @@ import mage.target.TargetPlayer;
  */
 public class MomentOfSilence extends CardImpl {
 
-    public MomentOfSilence(UUID ownerId) {
-        super(ownerId, 28, "Moment of Silence", Rarity.COMMON, new CardType[]{CardType.INSTANT}, "{W}");
-        this.expansionSetCode = "MMQ";
+    public MomentOfSilence(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.INSTANT},"{W}");
 
         // Target player skips his or her next combat phase this turn.
         this.getSpellAbility().addEffect(new SkipNextCombatEffect());

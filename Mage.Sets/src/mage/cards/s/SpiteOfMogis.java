@@ -25,15 +25,15 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.journeyintonyx;
+package mage.cards.s;
 
 import java.util.UUID;
 import mage.abilities.dynamicvalue.common.CardsInControllerGraveyardCount;
 import mage.abilities.effects.common.DamageTargetEffect;
 import mage.abilities.effects.keyword.ScryEffect;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.filter.common.FilterInstantOrSorceryCard;
 import mage.target.common.TargetCreaturePermanent;
 
@@ -43,9 +43,8 @@ import mage.target.common.TargetCreaturePermanent;
  */
 public class SpiteOfMogis extends CardImpl {
 
-    public SpiteOfMogis(UUID ownerId) {
-        super(ownerId, 113, "Spite of Mogis", Rarity.UNCOMMON, new CardType[]{CardType.SORCERY}, "{R}");
-        this.expansionSetCode = "JOU";
+    public SpiteOfMogis(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{R}");
 
 
         // Spite of Mogis deals damage to target creature equal to the number of instant and sorcery cards in your graveyard. Scry 1.

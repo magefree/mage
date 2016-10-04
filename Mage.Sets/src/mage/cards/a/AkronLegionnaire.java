@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.legends;
+package mage.cards.a;
 
 import java.util.UUID;
 import mage.MageInt;
@@ -33,9 +33,9 @@ import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.effects.Effect;
 import mage.abilities.effects.common.combat.CantAttackAnyPlayerAllEffect;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Duration;
-import mage.constants.Rarity;
 import mage.constants.TargetController;
 import mage.constants.Zone;
 import mage.filter.common.FilterCreaturePermanent;
@@ -58,9 +58,8 @@ public class AkronLegionnaire extends CardImpl {
         filter.add(Predicates.not(new CardTypePredicate(CardType.ARTIFACT)));
     }
 
-    public AkronLegionnaire(UUID ownerId) {
-        super(ownerId, 170, "Akron Legionnaire", Rarity.RARE, new CardType[]{CardType.CREATURE}, "{6}{W}{W}");
-        this.expansionSetCode = "LEG";
+    public AkronLegionnaire(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{6}{W}{W}");
         this.subtype.add("Giant");
         this.subtype.add("Soldier");
         this.power = new MageInt(8);

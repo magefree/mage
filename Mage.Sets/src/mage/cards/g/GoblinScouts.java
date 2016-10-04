@@ -25,15 +25,15 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.mirage;
+package mage.cards.g;
 
 import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.effects.common.CreateTokenEffect;
 import mage.abilities.keyword.MountainwalkAbility;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.game.permanent.token.Token;
 
 /**
@@ -42,9 +42,8 @@ import mage.game.permanent.token.Token;
  */
 public class GoblinScouts extends CardImpl {
 
-    public GoblinScouts(UUID ownerId) {
-        super(ownerId, 178, "Goblin Scouts", Rarity.UNCOMMON, new CardType[]{CardType.SORCERY}, "{3}{R}{R}");
-        this.expansionSetCode = "MIR";
+    public GoblinScouts(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{3}{R}{R}");
 
         // Put three 1/1 red Goblin Scout creature tokens with mountainwalk onto the battlefield.
         this.getSpellAbility().addEffect(new CreateTokenEffect(new GoblinScoutsToken(), 3));

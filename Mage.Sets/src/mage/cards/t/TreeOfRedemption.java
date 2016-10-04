@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.innistrad;
+package mage.cards.t;
 
 import java.util.UUID;
 import mage.MageInt;
@@ -36,10 +36,10 @@ import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.continuous.SetPowerToughnessSourceEffect;
 import mage.abilities.keyword.DefenderAbility;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Duration;
 import mage.constants.Outcome;
-import mage.constants.Rarity;
 import mage.constants.SubLayer;
 import mage.constants.Zone;
 import mage.game.Game;
@@ -52,9 +52,8 @@ import mage.players.Player;
  */
 public class TreeOfRedemption extends CardImpl {
 
-    public TreeOfRedemption(UUID ownerId) {
-        super(ownerId, 207, "Tree of Redemption", Rarity.MYTHIC, new CardType[]{CardType.CREATURE}, "{3}{G}");
-        this.expansionSetCode = "ISD";
+    public TreeOfRedemption(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{3}{G}");
         this.subtype.add("Plant");
 
         this.power = new MageInt(0);

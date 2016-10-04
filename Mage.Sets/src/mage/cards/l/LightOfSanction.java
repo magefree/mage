@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.ravnica;
+package mage.cards.l;
 
 import java.util.UUID;
 import mage.MageObject;
@@ -34,9 +34,9 @@ import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.effects.PreventionEffectImpl;
 import mage.cards.Card;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Duration;
-import mage.constants.Rarity;
 import mage.constants.Zone;
 import mage.game.Controllable;
 import mage.game.Game;
@@ -49,9 +49,8 @@ import mage.game.permanent.Permanent;
  */
 public class LightOfSanction extends CardImpl {
 
-    public LightOfSanction(UUID ownerId) {
-        super(ownerId, 24, "Light of Sanction", Rarity.RARE, new CardType[]{CardType.ENCHANTMENT}, "{1}{W}{W}");
-        this.expansionSetCode = "RAV";
+    public LightOfSanction(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.ENCHANTMENT},"{1}{W}{W}");
 
         // Prevent all damage that would be dealt to creatures you control by sources you control.
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new LightOfSanctionEffect()));

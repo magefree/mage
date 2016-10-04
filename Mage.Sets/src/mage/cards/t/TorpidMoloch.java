@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.ravnica;
+package mage.cards.t;
 
 import java.util.UUID;
 import mage.MageInt;
@@ -34,9 +34,9 @@ import mage.abilities.costs.common.SacrificeTargetCost;
 import mage.abilities.effects.common.continuous.LoseAbilitySourceEffect;
 import mage.abilities.keyword.DefenderAbility;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Duration;
-import mage.constants.Rarity;
 import mage.constants.Zone;
 import mage.filter.common.FilterControlledLandPermanent;
 import mage.target.common.TargetControlledPermanent;
@@ -47,9 +47,8 @@ import mage.target.common.TargetControlledPermanent;
  */
 public class TorpidMoloch extends CardImpl {
 
-    public TorpidMoloch(UUID ownerId) {
-        super(ownerId, 147, "Torpid Moloch", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{R}");
-        this.expansionSetCode = "RAV";
+    public TorpidMoloch(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{R}");
         this.subtype.add("Lizard");
         this.power = new MageInt(3);
         this.toughness = new MageInt(2);

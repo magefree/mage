@@ -25,15 +25,15 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.innistrad;
+package mage.cards.r;
 
 import java.util.UUID;
 import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.constants.TargetController;
 import mage.abilities.effects.common.ReturnToHandTargetEffect;
 import mage.abilities.keyword.FlashbackAbility;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.filter.FilterCard;
 import mage.filter.predicate.mageobject.AbilityPredicate;
 import mage.filter.predicate.other.OwnerPredicate;
@@ -52,9 +52,8 @@ public class RunicRepetition extends CardImpl {
         filter.add(new AbilityPredicate(FlashbackAbility.class));
     }
 
-    public RunicRepetition(UUID ownerId) {
-        super(ownerId, 72, "Runic Repetition", Rarity.UNCOMMON, new CardType[]{CardType.SORCERY}, "{2}{U}");
-        this.expansionSetCode = "ISD";
+    public RunicRepetition(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{2}{U}");
 
         // Return target exiled card with flashback you own to your hand.
         TargetCardInExile target = new TargetCardInExile(filter);

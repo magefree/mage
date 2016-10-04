@@ -25,15 +25,15 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.innistrad;
+package mage.cards.i;
 
 import java.util.UUID;
 import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.Mana;
 import mage.abilities.costs.common.SacrificeTargetCost;
 import mage.abilities.effects.common.BasicManaEffect;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.target.common.TargetControlledCreaturePermanent;
 
 /**
@@ -42,9 +42,8 @@ import mage.target.common.TargetControlledCreaturePermanent;
  */
 public class InfernalPlunge extends CardImpl {
 
-    public InfernalPlunge(UUID ownerId) {
-        super(ownerId, 148, "Infernal Plunge", Rarity.COMMON, new CardType[]{CardType.SORCERY}, "{R}");
-        this.expansionSetCode = "ISD";
+    public InfernalPlunge(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{R}");
 
 
         // As an additional cost to cast Infernal Plunge, sacrifice a creature.

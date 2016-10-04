@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.innistrad;
+package mage.cards.i;
 
 import mage.constants.*;
 import mage.MageInt;
@@ -37,7 +37,9 @@ import mage.abilities.decorator.ConditionalTriggeredAbility;
 import mage.abilities.effects.common.TransformSourceEffect;
 import mage.abilities.effects.common.continuous.BoostControlledEffect;
 import mage.abilities.keyword.TransformAbility;
+import mage.cards.w.WildbloodPack;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.filter.common.FilterAttackingCreature;
 
 import java.util.UUID;
@@ -49,14 +51,13 @@ import mage.abilities.decorator.ConditionalContinuousEffect;
  */
 public class InstigatorGang extends CardImpl {
 
-    public InstigatorGang(UUID ownerId) {
-        super(ownerId, 149, "Instigator Gang", Rarity.RARE, new CardType[]{CardType.CREATURE}, "{3}{R}");
-        this.expansionSetCode = "ISD";
+    public InstigatorGang(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{3}{R}");
         this.subtype.add("Human");
         this.subtype.add("Werewolf");
 
         this.transformable = true;
-        this.secondSideCard = new WildbloodPack(ownerId);
+        this.secondSideCardClazz = WildbloodPack.class;
 
         this.power = new MageInt(2);
         this.toughness = new MageInt(3);

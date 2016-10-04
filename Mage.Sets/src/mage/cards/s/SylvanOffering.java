@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.commander2014;
+package mage.cards.s;
 
 import java.util.UUID;
 import mage.MageInt;
@@ -34,9 +34,9 @@ import mage.abilities.effects.Effect;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.CreateTokenTargetEffect;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Outcome;
-import mage.constants.Rarity;
 import mage.game.Game;
 import mage.game.permanent.token.ElfToken;
 import mage.game.permanent.token.Token;
@@ -51,9 +51,8 @@ import mage.target.targetpointer.FixedTarget;
  */
 public class SylvanOffering extends CardImpl {
 
-    public SylvanOffering(UUID ownerId) {
-        super(ownerId, 48, "Sylvan Offering", Rarity.RARE, new CardType[]{CardType.SORCERY}, "{X}{G}");
-        this.expansionSetCode = "C14";
+    public SylvanOffering(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{X}{G}");
 
         // Choose an opponent. You and that player each put an X/X green Treefolk creature token onto the battlefield.
         this.getSpellAbility().addEffect(new SylvanOfferingEffect1());

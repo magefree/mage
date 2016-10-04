@@ -25,14 +25,14 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.championsofkamigawa;
+package mage.cards.w;
 
 import java.util.UUID;
 import mage.abilities.effects.common.DestroyTargetEffect;
 import mage.abilities.keyword.SpliceOntoArcaneAbility;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.filter.common.FilterArtifactOrEnchantmentPermanent;
 import mage.target.Target;
 import mage.target.TargetPermanent;
@@ -43,9 +43,8 @@ import mage.target.TargetPermanent;
  */
 public class WearAway extends CardImpl {
 
-    public WearAway(UUID ownerId) {
-        super(ownerId, 250, "Wear Away", Rarity.COMMON, new CardType[]{CardType.INSTANT}, "{G}{G}");
-        this.expansionSetCode = "CHK";
+    public WearAway(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.INSTANT},"{G}{G}");
         this.subtype.add("Arcane");
 
         // Destroy target artifact or enchantment.

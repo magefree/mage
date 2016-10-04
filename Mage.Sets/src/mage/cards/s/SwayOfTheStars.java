@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.betrayersofkamigawa;
+package mage.cards.s;
 
 import java.util.UUID;
 import mage.abilities.Ability;
@@ -34,9 +34,9 @@ import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.DrawCardAllEffect;
 import mage.abilities.effects.common.SetPlayerLifeAllEffect;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Outcome;
-import mage.constants.Rarity;
 import mage.constants.Zone;
 import mage.filter.FilterPermanent;
 import mage.filter.predicate.other.OwnerIdPredicate;
@@ -50,9 +50,8 @@ import mage.players.Player;
  */
 public class SwayOfTheStars extends CardImpl {
 
-    public SwayOfTheStars(UUID ownerId) {
-        super(ownerId, 54, "Sway of the Stars", Rarity.RARE, new CardType[]{CardType.SORCERY}, "{8}{U}{U}");
-        this.expansionSetCode = "BOK";
+    public SwayOfTheStars(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{8}{U}{U}");
 
         // Each player shuffles his or her hand, graveyard, and permanents he or she owns into his or her library, then draws seven cards. Each player's life total becomes 7.
         this.getSpellAbility().addEffect(new SwayOfTheStarsEffect());

@@ -25,14 +25,14 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.mediainserts;
+package mage.cards.w;
 
 import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.keyword.VigilanceAbility;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.Rarity;
 
 /**
  *
@@ -40,9 +40,8 @@ import mage.constants.Rarity;
  */
 public class WindseekerCentaur extends CardImpl {
 
-    public WindseekerCentaur(UUID ownerId) {
-        super(ownerId, 7, "Windseeker Centaur", Rarity.SPECIAL, new CardType[]{CardType.CREATURE}, "{1}{R}{R}");
-        this.expansionSetCode = "MBP";
+    public WindseekerCentaur(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{1}{R}{R}");
         this.subtype.add("Centaur");
         this.power = new MageInt(2);
         this.toughness = new MageInt(2);

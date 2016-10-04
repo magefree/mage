@@ -25,15 +25,15 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.stronghold;
+package mage.cards.c;
 
 import java.util.UUID;
 import mage.abilities.effects.common.continuous.GainAbilityControlledEffect;
 import mage.abilities.keyword.ReachAbility;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Duration;
-import mage.constants.Rarity;
 import mage.filter.common.FilterControlledCreaturePermanent;
 
 /**
@@ -42,9 +42,8 @@ import mage.filter.common.FilterControlledCreaturePermanent;
  */
 public class CrossbowAmbush extends CardImpl {
 
-    public CrossbowAmbush(UUID ownerId) {
-        super(ownerId, 55, "Crossbow Ambush", Rarity.COMMON, new CardType[]{CardType.INSTANT}, "{G}");
-        this.expansionSetCode = "STH";
+    public CrossbowAmbush(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.INSTANT},"{G}");
 
         // Creatures you control gain reach until end of turn.
         this.getSpellAbility().addEffect(new GainAbilityControlledEffect(ReachAbility.getInstance(), Duration.EndOfTurn, new FilterControlledCreaturePermanent("Creatures")));

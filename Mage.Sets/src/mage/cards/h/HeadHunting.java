@@ -25,15 +25,15 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.starwars;
+package mage.cards.h;
 
 import java.util.UUID;
 import mage.abilities.effects.common.DrawCardSourceControllerEffect;
 import mage.abilities.effects.common.LoseLifeOpponentsEffect;
 import mage.abilities.effects.common.counter.AddCountersTargetEffect;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.counters.CounterType;
 import mage.target.common.TargetOpponentsCreaturePermanent;
 
@@ -43,9 +43,8 @@ import mage.target.common.TargetOpponentsCreaturePermanent;
  */
 public class HeadHunting extends CardImpl {
 
-    public HeadHunting(UUID ownerId) {
-        super(ownerId, 76, "Head Hunting", Rarity.COMMON, new CardType[]{CardType.INSTANT}, "{1}{B}");
-        this.expansionSetCode = "SWS";
+    public HeadHunting(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.INSTANT},"{1}{B}");
 
         // Each opponent loses 1 life.
         this.getSpellAbility().addEffect(new LoseLifeOpponentsEffect(1));

@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.starwars;
+package mage.cards.a;
 
 import java.util.UUID;
 import mage.MageInt;
@@ -34,8 +34,8 @@ import mage.abilities.common.BecomesMonstrousTriggeredAbility;
 import mage.abilities.effects.common.FightTargetsEffect;
 import mage.abilities.keyword.MonstrosityAbility;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.target.common.TargetOpponentsCreaturePermanent;
 
 /**
@@ -44,9 +44,8 @@ import mage.target.common.TargetOpponentsCreaturePermanent;
  */
 public class AcklayOfTheArena extends CardImpl {
 
-    public AcklayOfTheArena(UUID ownerId) {
-        super(ownerId, 180, "Acklay of the Arena", Rarity.RARE, new CardType[]{CardType.CREATURE}, "{1}{R}{G}{W}");
-        this.expansionSetCode = "SWS";
+    public AcklayOfTheArena(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{1}{R}{G}{W}");
         this.subtype.add("Insect");
         this.subtype.add("Beast");
         this.power = new MageInt(5);

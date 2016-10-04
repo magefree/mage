@@ -26,14 +26,13 @@
  *  or implied, of BetaSteward_at_googlemail.com.
  */
 
-package mage.sets.returntoravnica;
+package mage.cards.u;
 
 import java.util.UUID;
 
 import mage.constants.AttachmentType;
 import mage.constants.CardType;
 import mage.constants.Outcome;
-import mage.constants.Rarity;
 import mage.constants.Zone;
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleActivatedAbility;
@@ -45,6 +44,7 @@ import mage.abilities.effects.common.DrawCardSourceControllerEffect;
 import mage.abilities.effects.common.continuous.GainAbilityAttachedEffect;
 import mage.abilities.keyword.EnchantAbility;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.Duration;
 import mage.target.TargetPermanent;
 import mage.target.common.TargetLandPermanent;
@@ -57,9 +57,8 @@ public class UnderworldConnections extends CardImpl {
 
     static final String rule = "Enchanted land has \"{T}, Pay 1 life: Draw a card.\"";
 
-    public UnderworldConnections (UUID ownerId) {
-        super(ownerId, 83, "Underworld Connections", Rarity.RARE, new CardType[]{CardType.ENCHANTMENT}, "{1}{B}{B}");
-        this.expansionSetCode = "RTR";
+    public UnderworldConnections (UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.ENCHANTMENT},"{1}{B}{B}");
         this.subtype.add("Aura");
         this.color.setBlack(true);
 

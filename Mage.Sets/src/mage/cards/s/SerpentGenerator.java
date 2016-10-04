@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.fifthedition;
+package mage.cards.s;
 
 import java.util.UUID;
 import mage.MageInt;
@@ -38,8 +38,8 @@ import mage.abilities.effects.Effect;
 import mage.abilities.effects.common.CreateTokenEffect;
 import mage.abilities.effects.common.counter.AddPoisonCounterTargetEffect;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.constants.Zone;
 import mage.game.permanent.token.Token;
 
@@ -49,9 +49,8 @@ import mage.game.permanent.token.Token;
  */
 public class SerpentGenerator extends CardImpl {
 
-    public SerpentGenerator(UUID ownerId) {
-        super(ownerId, 397, "Serpent Generator", Rarity.RARE, new CardType[]{CardType.ARTIFACT}, "{6}");
-        this.expansionSetCode = "5ED";
+    public SerpentGenerator(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.ARTIFACT},"{6}");
 
         // {4}, {tap}: Put a 1/1 colorless Snake artifact creature token onto the battlefield. It has "Whenever this creature deals damage to a player, that player gets a poison counter."
         Effect effect = new CreateTokenEffect(new SnakeToken());

@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.championsofkamigawa;
+package mage.cards.s;
 
 import java.util.UUID;
 import mage.abilities.Ability;
@@ -36,8 +36,8 @@ import mage.abilities.effects.common.DrawCardSourceControllerEffect;
 import mage.abilities.effects.common.discard.DiscardControllerEffect;
 import mage.abilities.effects.common.search.SearchLibraryPutInPlayEffect;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.constants.WatcherScope;
 import mage.filter.common.FilterCreatureCard;
 import mage.filter.predicate.mageobject.NamePredicate;
@@ -61,9 +61,8 @@ public class SiftThroughSands extends CardImpl {
         filter.add(new NamePredicate("The Unspeakable"));
     }
 
-    public SiftThroughSands(UUID ownerId) {
-        super(ownerId, 84, "Sift Through Sands", Rarity.COMMON, new CardType[]{CardType.INSTANT}, "{1}{U}{U}");
-        this.expansionSetCode = "CHK";
+    public SiftThroughSands(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.INSTANT},"{1}{U}{U}");
         this.subtype.add("Arcane");
 
         // Draw two cards, then discard a card.

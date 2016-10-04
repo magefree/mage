@@ -26,15 +26,15 @@
  *  or implied, of BetaSteward_at_googlemail.com.
  */
 
-package mage.sets.championsofkamigawa;
+package mage.cards.s;
 
 import java.util.UUID;
 import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.abilities.dynamicvalue.common.ManacostVariableValue;
 import mage.abilities.effects.common.DamageTargetEffect;
 import mage.abilities.effects.common.GainLifeEffect;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.target.common.TargetCreaturePermanent;
 
 /**
@@ -43,9 +43,8 @@ import mage.target.common.TargetCreaturePermanent;
  */
 public class SwallowingPlague extends CardImpl {
 
-    public SwallowingPlague (UUID ownerId) {
-        super(ownerId, 146, "Swallowing Plague", Rarity.UNCOMMON, new CardType[]{CardType.SORCERY}, "{X}{B}{B}");
-        this.expansionSetCode = "CHK";
+    public SwallowingPlague (UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{X}{B}{B}");
         this.subtype.add("Arcane");
 
         this.getSpellAbility().addEffect(new DamageTargetEffect(new ManacostVariableValue()));

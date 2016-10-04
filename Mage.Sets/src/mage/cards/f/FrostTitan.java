@@ -26,11 +26,10 @@
  *  or implied, of BetaSteward_at_googlemail.com.
  */
 
-package mage.sets.magic2011;
+package mage.cards.f;
 
 import java.util.UUID;
 import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.constants.Zone;
 import mage.MageInt;
 import mage.abilities.TriggeredAbilityImpl;
@@ -39,6 +38,7 @@ import mage.abilities.effects.common.CounterUnlessPaysEffect;
 import mage.abilities.effects.common.DontUntapInControllersNextUntapStepTargetEffect;
 import mage.abilities.effects.common.TapTargetEffect;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.game.Game;
 import mage.game.events.GameEvent;
 import mage.game.events.GameEvent.EventType;
@@ -51,9 +51,8 @@ import mage.target.TargetStackObject;
  */
 public class FrostTitan extends CardImpl {
 
-    public FrostTitan(UUID ownerId) {
-        super(ownerId, 55, "Frost Titan", Rarity.MYTHIC, new CardType[]{CardType.CREATURE}, "{4}{U}{U}");
-        this.expansionSetCode = "M11";
+    public FrostTitan(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{4}{U}{U}");
         this.subtype.add("Giant");
 
         this.power = new MageInt(6);

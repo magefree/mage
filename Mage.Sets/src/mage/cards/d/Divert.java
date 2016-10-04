@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.odyssey;
+package mage.cards.d;
 
 import java.util.UUID;
 import mage.abilities.Ability;
@@ -33,9 +33,9 @@ import mage.abilities.costs.Cost;
 import mage.abilities.costs.mana.GenericManaCost;
 import mage.abilities.effects.OneShotEffect;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Outcome;
-import mage.constants.Rarity;
 import mage.game.Game;
 import mage.game.stack.Spell;
 import mage.players.Player;
@@ -47,9 +47,8 @@ import mage.target.TargetSpell;
  */
 public class Divert extends CardImpl {
 
-    public Divert(UUID ownerId) {
-        super(ownerId, 82, "Divert", Rarity.RARE, new CardType[]{CardType.INSTANT}, "{U}");
-        this.expansionSetCode = "ODY";
+    public Divert(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.INSTANT},"{U}");
 
 
         // Change the target of target spell with a single target unless that spell's controller pays {2}.

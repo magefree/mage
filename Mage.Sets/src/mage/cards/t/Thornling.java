@@ -26,12 +26,11 @@
  *  or implied, of BetaSteward_at_googlemail.com.
  */
 
-package mage.sets.conflux;
+package mage.cards.t;
 
 import java.util.UUID;
 import mage.constants.CardType;
 import mage.constants.Duration;
-import mage.constants.Rarity;
 import mage.constants.Zone;
 import mage.MageInt;
 import mage.abilities.common.SimpleActivatedAbility;
@@ -42,6 +41,7 @@ import mage.abilities.keyword.HasteAbility;
 import mage.abilities.keyword.IndestructibleAbility;
 import mage.abilities.keyword.TrampleAbility;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 
 
 /**
@@ -50,9 +50,8 @@ import mage.cards.CardImpl;
  */
 public class Thornling extends CardImpl {
 
-    public Thornling(UUID ownerId) {
-        super(ownerId, 95, "Thornling", Rarity.MYTHIC, new CardType[]{CardType.CREATURE}, "{3}{G}{G}");
-        this.expansionSetCode = "CON";
+    public Thornling(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{3}{G}{G}");
 
         this.subtype.add("Elemental");
         this.subtype.add("Shapeshifter");

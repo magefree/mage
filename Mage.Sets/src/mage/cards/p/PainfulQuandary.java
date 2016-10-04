@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.scarsofmirrodin;
+package mage.cards.p;
 
 import java.util.UUID;
 import mage.abilities.Ability;
@@ -34,9 +34,9 @@ import mage.abilities.costs.Cost;
 import mage.abilities.costs.common.DiscardTargetCost;
 import mage.abilities.effects.OneShotEffect;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Outcome;
-import mage.constants.Rarity;
 import mage.constants.SetTargetPointer;
 import mage.constants.Zone;
 import mage.filter.FilterSpell;
@@ -50,9 +50,8 @@ import mage.target.common.TargetCardInHand;
  */
 public class PainfulQuandary extends CardImpl {
 
-    public PainfulQuandary(UUID ownerId) {
-        super(ownerId, 73, "Painful Quandary", Rarity.RARE, new CardType[]{CardType.ENCHANTMENT}, "{3}{B}{B}");
-        this.expansionSetCode = "SOM";
+    public PainfulQuandary(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.ENCHANTMENT},"{3}{B}{B}");
 
         // Whenever an opponent casts a spell, that player loses 5 life unless he or she discards a card.
         this.addAbility(new SpellCastOpponentTriggeredAbility(Zone.BATTLEFIELD, new PainfulQuandryEffect(), new FilterSpell(), false, SetTargetPointer.PLAYER));

@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.guildpact;
+package mage.cards.t;
 
 import java.util.UUID;
 import mage.MageInt;
@@ -35,9 +35,9 @@ import mage.abilities.condition.common.ManaWasSpentCondition;
 import mage.abilities.decorator.ConditionalTriggeredAbility;
 import mage.abilities.effects.common.DestroyTargetEffect;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.ColoredManaSymbol;
-import mage.constants.Rarity;
 import mage.target.common.TargetArtifactPermanent;
 import mage.watchers.common.ManaSpentToCastWatcher;
 
@@ -47,9 +47,8 @@ import mage.watchers.common.ManaSpentToCastWatcher;
  */
 public class TinStreetHooligan extends CardImpl {
 
-    public TinStreetHooligan(UUID ownerId) {
-        super(ownerId, 78, "Tin Street Hooligan", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{1}{R}");
-        this.expansionSetCode = "GPT";
+    public TinStreetHooligan(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{1}{R}");
         this.subtype.add("Goblin");
         this.subtype.add("Rogue");
 

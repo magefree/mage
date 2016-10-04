@@ -25,13 +25,13 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.timespiral;
+package mage.cards.s;
 
 import java.util.UUID;
 import mage.abilities.effects.common.CreateTokenEffect;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.game.permanent.token.SaprolingToken;
 
 /**
@@ -40,9 +40,8 @@ import mage.game.permanent.token.SaprolingToken;
  */
 public class Sprout extends CardImpl {
 
-    public Sprout(UUID ownerId) {
-        super(ownerId, 221, "Sprout", Rarity.COMMON, new CardType[]{CardType.INSTANT}, "{G}");
-        this.expansionSetCode = "TSP";
+    public Sprout(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.INSTANT},"{G}");
 
         // Put a 1/1 green Saproling creature token onto the battlefield.
         this.getSpellAbility().addEffect(new CreateTokenEffect(new SaprolingToken()));

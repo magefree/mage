@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.starwars;
+package mage.cards.d;
 
 import java.util.Iterator;
 import java.util.UUID;
@@ -38,11 +38,11 @@ import mage.abilities.effects.ContinuousEffectImpl;
 import mage.abilities.keyword.MenaceAbility;
 import mage.abilities.keyword.LifelinkAbility;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Duration;
 import mage.constants.Layer;
 import mage.constants.Outcome;
-import mage.constants.Rarity;
 import mage.constants.SetTargetPointer;
 import mage.constants.SubLayer;
 import mage.counters.CounterType;
@@ -56,9 +56,8 @@ import mage.game.permanent.Permanent;
  */
 public class DarthVader extends CardImpl {
 
-    public DarthVader(UUID ownerId) {
-        super(ownerId, 182, "Darth Vader", Rarity.MYTHIC, new CardType[]{CardType.CREATURE}, "");
-        this.expansionSetCode = "SWS";
+    public DarthVader(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"");
         this.supertype.add("Legendary");
         this.subtype.add("Human");
         this.subtype.add("Sith");

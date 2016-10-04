@@ -26,13 +26,13 @@
  *  or implied, of BetaSteward_at_googlemail.com.
  */
 
-package mage.sets.ravnica;
+package mage.cards.p;
 
 import java.util.UUID;
 import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.abilities.effects.common.DestroyTargetEffect;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.filter.FilterPermanent;
 import mage.filter.predicate.Predicates;
 import mage.filter.predicate.mageobject.CardTypePredicate;
@@ -51,9 +51,8 @@ public class Putrefy extends CardImpl {
                 new CardTypePredicate(CardType.CREATURE)));
     }
 
-    public Putrefy (UUID ownerId) {
-        super(ownerId, 221, "Putrefy", Rarity.UNCOMMON, new CardType[]{CardType.INSTANT}, "{1}{B}{G}");
-        this.expansionSetCode = "RAV";
+    public Putrefy (UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.INSTANT},"{1}{B}{G}");
 
 
         this.getSpellAbility().addTarget(new TargetPermanent(filter));

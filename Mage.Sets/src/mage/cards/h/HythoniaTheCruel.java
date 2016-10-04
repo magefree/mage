@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.theros;
+package mage.cards.h;
 
 import java.util.UUID;
 import mage.MageInt;
@@ -34,8 +34,8 @@ import mage.abilities.effects.common.DestroyAllEffect;
 import mage.abilities.keyword.DeathtouchAbility;
 import mage.abilities.keyword.MonstrosityAbility;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.filter.predicate.Predicates;
 import mage.filter.predicate.mageobject.SubtypePredicate;
@@ -51,9 +51,8 @@ public class HythoniaTheCruel extends CardImpl {
         filter.add(Predicates.not(new SubtypePredicate("Gorgon")));
     }
 
-    public HythoniaTheCruel(UUID ownerId) {
-        super(ownerId, 91, "Hythonia the Cruel", Rarity.MYTHIC, new CardType[]{CardType.CREATURE}, "{4}{B}{B}");
-        this.expansionSetCode = "THS";
+    public HythoniaTheCruel(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{4}{B}{B}");
         this.supertype.add("Legendary");
         this.subtype.add("Gorgon");
 

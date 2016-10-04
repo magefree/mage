@@ -26,16 +26,16 @@
  *  or implied, of BetaSteward_at_googlemail.com.
  */
 
-package mage.sets.returntoravnica;
+package mage.cards.s;
 
 import java.util.UUID;
 import mage.abilities.Ability;
 import mage.abilities.TriggeredAbilityImpl;
 import mage.abilities.effects.OneShotEffect;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Outcome;
-import mage.constants.Rarity;
 import mage.constants.Zone;
 import mage.game.Game;
 import mage.game.events.GameEvent;
@@ -59,9 +59,8 @@ public class ShriekingAffliction extends CardImpl {
 
     static final String rule = "At the beginning of the upkeep of enchanted creature's controller, that player loses 2 life";
 
-    public ShriekingAffliction (UUID ownerId) {
-        super(ownerId, 76, "Shrieking Affliction", Rarity.UNCOMMON, new CardType[]{CardType.ENCHANTMENT}, "{B}");
-        this.expansionSetCode = "RTR";
+    public ShriekingAffliction (UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.ENCHANTMENT},"{B}");
 
 
         // At the beginning of each opponent's upkeep, if that player has one or fewer cards in hand, he or she loses 3 life.

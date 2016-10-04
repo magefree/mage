@@ -25,18 +25,18 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.fifthedition;
+package mage.cards.r;
 
 import java.util.UUID;
 import mage.abilities.Ability;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.ExileSpellEffect;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.cards.Cards;
 import mage.cards.CardsImpl;
 import mage.constants.CardType;
 import mage.constants.Outcome;
-import mage.constants.Rarity;
 import mage.constants.Zone;
 import mage.filter.FilterCard;
 import mage.game.Game;
@@ -49,9 +49,8 @@ import mage.target.common.TargetCardInYourGraveyard;
  */
 public class Recall extends CardImpl {
 
-    public Recall(UUID ownerId) {
-        super(ownerId, 115, "Recall", Rarity.RARE, new CardType[]{CardType.SORCERY}, "{X}{X}{U}");
-        this.expansionSetCode = "5ED";
+    public Recall(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{X}{X}{U}");
 
         // Discard X cards, then return a card from your graveyard to your hand for each card discarded this way.
         this.getSpellAbility().addEffect(new RecallEffect());

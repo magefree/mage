@@ -26,12 +26,11 @@
  *  or implied, of BetaSteward_at_googlemail.com.
  */
 
-package mage.sets.scarsofmirrodin;
+package mage.cards.c;
 
 import java.util.UUID;
 import mage.constants.CardType;
 import mage.constants.Duration;
-import mage.constants.Rarity;
 import mage.constants.Zone;
 import mage.MageInt;
 import mage.abilities.common.SimpleStaticAbility;
@@ -40,6 +39,7 @@ import mage.abilities.decorator.ConditionalContinuousEffect;
 import mage.abilities.effects.ContinuousEffect;
 import mage.abilities.effects.common.continuous.BoostSourceEffect;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 
 /**
  *
@@ -48,9 +48,8 @@ import mage.cards.CardImpl;
 public class ChromeSteed extends CardImpl {
     private static final String text = "Metalcraft - Chrome Steed gets +2/+2 as long as you control three or more artifacts";
 
-    public ChromeSteed (UUID ownerId) {
-        super(ownerId, 142, "Chrome Steed", Rarity.COMMON, new CardType[]{CardType.ARTIFACT, CardType.CREATURE}, "{4}");
-        this.expansionSetCode = "SOM";
+    public ChromeSteed (UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.ARTIFACT,CardType.CREATURE},"{4}");
         this.subtype.add("Horse");
         this.power = new MageInt(2);
         this.toughness = new MageInt(2);

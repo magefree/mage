@@ -26,13 +26,13 @@
  *  or implied, of BetaSteward_at_googlemail.com.
  */
 
-package mage.sets.conflux;
+package mage.cards.f;
 
 import java.util.UUID;
 import mage.MageInt;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.Rarity;
 
 /**
  *
@@ -40,9 +40,8 @@ import mage.constants.Rarity;
  */
 public class FusionElemental extends CardImpl {
 
-    public FusionElemental(UUID ownerId) {
-        super(ownerId, 107, "Fusion Elemental", Rarity.UNCOMMON, new CardType[]{CardType.CREATURE}, "{W}{U}{B}{R}{G}");
-        this.expansionSetCode = "CON";
+    public FusionElemental(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{W}{U}{B}{R}{G}");
         this.subtype.add("Elemental");
 
 

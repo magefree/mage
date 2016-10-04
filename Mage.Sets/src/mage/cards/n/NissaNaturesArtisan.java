@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.kaladesh;
+package mage.cards.n;
 
 import java.util.LinkedHashSet;
 import java.util.Set;
@@ -42,12 +42,12 @@ import mage.abilities.effects.common.continuous.GainAbilityControlledEffect;
 import mage.abilities.keyword.TrampleAbility;
 import mage.cards.Card;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.cards.Cards;
 import mage.cards.CardsImpl;
 import mage.constants.CardType;
 import mage.constants.Duration;
 import mage.constants.Outcome;
-import mage.constants.Rarity;
 import mage.constants.Zone;
 import mage.filter.common.FilterLandCard;
 import mage.game.Game;
@@ -59,9 +59,8 @@ import mage.players.Player;
  */
 public class NissaNaturesArtisan extends CardImpl {
 
-    public NissaNaturesArtisan(UUID ownerId) {
-        super(ownerId, 270, "Nissa, Nature's Artisan", Rarity.MYTHIC, new CardType[]{CardType.PLANESWALKER}, "{4}{G}{G}");
-        this.expansionSetCode = "KLD";
+    public NissaNaturesArtisan(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.PLANESWALKER},"{4}{G}{G}");
         this.subtype.add("Nissa");
 
         this.addAbility(new PlanswalkerEntersWithLoyalityCountersAbility(5));

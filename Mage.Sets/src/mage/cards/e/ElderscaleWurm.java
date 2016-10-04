@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.magic2013;
+package mage.cards.e;
 
 import mage.constants.*;
 import mage.MageInt;
@@ -36,6 +36,7 @@ import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.ReplacementEffectImpl;
 import mage.abilities.keyword.TrampleAbility;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.game.Game;
 import mage.game.events.GameEvent;
 import mage.players.Player;
@@ -47,9 +48,8 @@ import java.util.UUID;
  */
 public class ElderscaleWurm extends CardImpl {
 
-    public ElderscaleWurm(UUID ownerId) {
-        super(ownerId, 167, "Elderscale Wurm", Rarity.MYTHIC, new CardType[]{CardType.CREATURE}, "{4}{G}{G}{G}");
-        this.expansionSetCode = "M13";
+    public ElderscaleWurm(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{4}{G}{G}{G}");
         this.subtype.add("Wurm");
 
         this.power = new MageInt(7);

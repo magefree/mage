@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.theros;
+package mage.cards.r;
 
 import java.util.UUID;
 import mage.abilities.Ability;
@@ -38,9 +38,9 @@ import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.ExileSpellEffect;
 import mage.cards.Card;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Outcome;
-import mage.constants.Rarity;
 import mage.constants.TargetController;
 import mage.constants.Zone;
 import mage.filter.common.FilterControlledCreaturePermanent;
@@ -81,9 +81,8 @@ import mage.target.common.TargetControlledCreaturePermanent;
  */
 public class RescueFromTheUnderworld extends CardImpl {
 
-    public RescueFromTheUnderworld(UUID ownerId) {
-        super(ownerId, 102, "Rescue from the Underworld", Rarity.UNCOMMON, new CardType[]{CardType.INSTANT}, "{4}{B}");
-        this.expansionSetCode = "THS";
+    public RescueFromTheUnderworld(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.INSTANT},"{4}{B}");
 
         // As an additional cost to cast Rescue from the Underworld, sacrifice a creature.
         this.getSpellAbility().addCost(new SacrificeTargetCost(new TargetControlledCreaturePermanent(1, 1, new FilterControlledCreaturePermanent("a creature"), false)));

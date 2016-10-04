@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.shardsofalara;
+package mage.cards.r;
 
 import java.util.List;
 import java.util.UUID;
@@ -35,9 +35,9 @@ import mage.abilities.common.EntersBattlefieldTriggeredAbility;
 import mage.abilities.common.LeavesBattlefieldTriggeredAbility;
 import mage.abilities.effects.OneShotEffect;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Outcome;
-import mage.constants.Rarity;
 import mage.constants.Zone;
 import mage.filter.common.FilterLandPermanent;
 import mage.game.ExileZone;
@@ -51,9 +51,8 @@ import mage.players.Player;
  */
 public class RealmRazer extends CardImpl {
 
-    public RealmRazer(UUID ownerId) {
-        super(ownerId, 187, "Realm Razer", Rarity.RARE, new CardType[]{CardType.CREATURE}, "{3}{R}{G}{W}");
-        this.expansionSetCode = "ALA";
+    public RealmRazer(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{3}{R}{G}{W}");
         this.subtype.add("Beast");
 
         this.power = new MageInt(4);

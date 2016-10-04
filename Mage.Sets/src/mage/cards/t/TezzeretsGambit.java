@@ -25,14 +25,14 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.newphyrexia;
+package mage.cards.t;
 
 import java.util.UUID;
 import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.abilities.effects.common.DrawCardSourceControllerEffect;
 import mage.abilities.effects.common.counter.ProliferateEffect;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 
 /**
  *
@@ -40,9 +40,8 @@ import mage.cards.CardImpl;
  */
 public class TezzeretsGambit extends CardImpl {
 
-    public TezzeretsGambit(UUID ownerId) {
-        super(ownerId, 47, "Tezzeret's Gambit", Rarity.UNCOMMON, new CardType[]{CardType.SORCERY}, "{3}{UP}");
-        this.expansionSetCode = "NPH";
+    public TezzeretsGambit(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{3}{UP}");
 
         this.getSpellAbility().addEffect(new DrawCardSourceControllerEffect(2));
         this.getSpellAbility().addEffect(new ProliferateEffect());

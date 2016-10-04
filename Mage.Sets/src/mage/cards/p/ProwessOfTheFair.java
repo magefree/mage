@@ -25,14 +25,14 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.lorwyn;
+package mage.cards.p;
 
 import java.util.UUID;
 import mage.abilities.common.PutIntoGraveFromBattlefieldAllTriggeredAbility;
 import mage.abilities.effects.common.CreateTokenEffect;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.filter.FilterPermanent;
 import mage.filter.predicate.Predicates;
 import mage.filter.predicate.mageobject.SubtypePredicate;
@@ -54,9 +54,8 @@ public class ProwessOfTheFair extends CardImpl {
         filter.add(Predicates.not(new TokenPredicate()));
     }
 
-    public ProwessOfTheFair(UUID ownerId) {
-        super(ownerId, 136, "Prowess of the Fair", Rarity.UNCOMMON, new CardType[]{CardType.TRIBAL, CardType.ENCHANTMENT}, "{1}{B}");
-        this.expansionSetCode = "LRW";
+    public ProwessOfTheFair(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.TRIBAL,CardType.ENCHANTMENT},"{1}{B}");
         this.subtype.add("Elf");
 
         // Whenever another nontoken Elf is put into your graveyard from the battlefield, you may put a 1/1 green Elf Warrior creature token onto the battlefield.

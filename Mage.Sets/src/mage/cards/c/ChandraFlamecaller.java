@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.oathofthegatewatch;
+package mage.cards.c;
 
 import java.util.Set;
 import java.util.UUID;
@@ -45,9 +45,9 @@ import mage.abilities.effects.common.ExileTargetEffect;
 import mage.abilities.keyword.HasteAbility;
 import mage.cards.Card;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Outcome;
-import mage.constants.Rarity;
 import mage.constants.Zone;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.game.Game;
@@ -62,9 +62,8 @@ import mage.target.targetpointer.FixedTarget;
  */
 public class ChandraFlamecaller extends CardImpl {
 
-    public ChandraFlamecaller(UUID ownerId) {
-        super(ownerId, 104, "Chandra, Flamecaller", Rarity.MYTHIC, new CardType[]{CardType.PLANESWALKER}, "{4}{R}{R}");
-        this.expansionSetCode = "OGW";
+    public ChandraFlamecaller(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.PLANESWALKER},"{4}{R}{R}");
         this.subtype.add("Chandra");
 
         this.addAbility(new PlanswalkerEntersWithLoyalityCountersAbility(4));

@@ -25,14 +25,14 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.saviorsofkamigawa;
+package mage.cards.h;
 
 import java.util.UUID;
 import mage.abilities.dynamicvalue.common.ManacostVariableValue;
 import mage.abilities.effects.common.DamageMultiEffect;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.filter.common.FilterAttackingCreature;
 import mage.target.common.TargetCreaturePermanentAmount;
 
@@ -42,9 +42,8 @@ import mage.target.common.TargetCreaturePermanentAmount;
  */
 public class HailOfArrows extends CardImpl {
 
-    public HailOfArrows(UUID ownerId) {
-        super(ownerId, 11, "Hail of Arrows", Rarity.UNCOMMON, new CardType[]{CardType.INSTANT}, "{X}{W}");
-        this.expansionSetCode = "SOK";
+    public HailOfArrows(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.INSTANT},"{X}{W}");
 
         // Hail of Arrows deals X damage divided as you choose among any number of target attacking creatures.
         this.getSpellAbility().addEffect(new DamageMultiEffect(new ManacostVariableValue()));

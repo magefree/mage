@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.betrayersofkamigawa;
+package mage.cards.n;
 
 import java.util.UUID;
 import mage.ObjectColor;
@@ -34,8 +34,8 @@ import mage.abilities.costs.common.ExileFromHandCost;
 import mage.abilities.dynamicvalue.common.ExileFromHandCostCardConvertedMana;
 import mage.abilities.effects.common.GainLifeEffect;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.filter.common.FilterOwnedCard;
 import mage.filter.predicate.Predicates;
 import mage.filter.predicate.mageobject.CardIdPredicate;
@@ -48,9 +48,8 @@ import mage.target.common.TargetCardInHand;
  */
 public class NourishingShoal extends CardImpl {
 
-    public NourishingShoal(UUID ownerId) {
-        super(ownerId, 137, "Nourishing Shoal", Rarity.RARE, new CardType[]{CardType.INSTANT}, "{X}{G}{G}");
-        this.expansionSetCode = "BOK";
+    public NourishingShoal(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.INSTANT},"{X}{G}{G}");
         this.subtype.add("Arcane");
 
 

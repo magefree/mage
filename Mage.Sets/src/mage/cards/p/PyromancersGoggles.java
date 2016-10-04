@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.magicorigins;
+package mage.cards.p;
 
 import java.util.UUID;
 import mage.ObjectColor;
@@ -35,8 +35,8 @@ import mage.abilities.effects.Effect;
 import mage.abilities.effects.common.CopyTargetSpellEffect;
 import mage.abilities.mana.RedManaAbility;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.constants.Zone;
 import mage.filter.common.FilterInstantOrSorcerySpell;
 import mage.filter.predicate.mageobject.ColorPredicate;
@@ -52,9 +52,8 @@ import mage.target.targetpointer.FixedTarget;
  */
 public class PyromancersGoggles extends CardImpl {
 
-    public PyromancersGoggles(UUID ownerId) {
-        super(ownerId, 236, "Pyromancer's Goggles", Rarity.MYTHIC, new CardType[]{CardType.ARTIFACT}, "{5}");
-        this.expansionSetCode = "ORI";
+    public PyromancersGoggles(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.ARTIFACT},"{5}");
         this.supertype.add("Legendary");
 
         // {T}: Add {R} to your mana pool.

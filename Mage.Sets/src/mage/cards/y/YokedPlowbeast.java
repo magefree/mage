@@ -26,15 +26,15 @@
  *  or implied, of BetaSteward_at_googlemail.com.
  */
 
-package mage.sets.shardsofalara;
+package mage.cards.y;
 
 import java.util.UUID;
 import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.MageInt;
 import mage.abilities.costs.mana.ManaCostsImpl;
 import mage.abilities.keyword.CyclingAbility;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 
 /**
  *
@@ -42,9 +42,8 @@ import mage.cards.CardImpl;
  */
 public class YokedPlowbeast extends CardImpl {
 
-    public YokedPlowbeast (UUID ownerId) {
-        super(ownerId, 31, "Yoked Plowbeast", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{5}{W}{W}");
-        this.expansionSetCode = "ALA";
+    public YokedPlowbeast (UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{5}{W}{W}");
         this.subtype.add("Beast");
 
         this.power = new MageInt(5);

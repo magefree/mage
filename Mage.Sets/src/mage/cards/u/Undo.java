@@ -25,13 +25,13 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.starter1999;
+package mage.cards.u;
 
 import java.util.UUID;
 import mage.abilities.effects.common.ReturnToHandTargetEffect;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.target.common.TargetCreaturePermanent;
 
 /**
@@ -40,9 +40,8 @@ import mage.target.common.TargetCreaturePermanent;
  */
 public class Undo extends CardImpl {
 
-    public Undo(UUID ownerId) {
-        super(ownerId, 58, "Undo", Rarity.UNCOMMON, new CardType[]{CardType.SORCERY}, "{1}{U}{U}");
-        this.expansionSetCode = "S99";
+    public Undo(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{1}{U}{U}");
 
         // Return two target creatures to their owners' hands.
         this.getSpellAbility().addEffect(new ReturnToHandTargetEffect());

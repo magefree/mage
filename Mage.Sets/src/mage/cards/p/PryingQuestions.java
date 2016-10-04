@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.eldritchmoon;
+package mage.cards.p;
 
 import java.util.UUID;
 import mage.abilities.Ability;
@@ -33,9 +33,9 @@ import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.LoseLifeTargetEffect;
 import mage.cards.Card;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Outcome;
-import mage.constants.Rarity;
 import mage.constants.Zone;
 import mage.game.Game;
 import mage.players.Player;
@@ -48,9 +48,8 @@ import mage.target.common.TargetOpponent;
  */
 public class PryingQuestions extends CardImpl {
 
-    public PryingQuestions(UUID ownerId) {
-        super(ownerId, 101, "Prying Questions", Rarity.UNCOMMON, new CardType[]{CardType.SORCERY}, "{2}{B}");
-        this.expansionSetCode = "EMN";
+    public PryingQuestions(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{2}{B}");
 
         // Target opponent loses 3 life and puts a card from his or her hand on top of his or her library.
         this.getSpellAbility().addTarget(new TargetOpponent());

@@ -25,7 +25,7 @@
  * authors and should not be interpreted as representing official policies, either expressed
  * or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.magic2010;
+package mage.cards.g;
 
 import java.util.UUID;
 import mage.abilities.LoyaltyAbility;
@@ -38,9 +38,9 @@ import mage.abilities.effects.common.continuous.BoostControlledEffect;
 import mage.abilities.effects.common.continuous.GainAbilityControlledEffect;
 import mage.abilities.keyword.TrampleAbility;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Duration;
-import mage.constants.Rarity;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.game.permanent.token.BeastToken;
 import mage.target.common.TargetLandPermanent;
@@ -53,9 +53,8 @@ public class GarrukWildspeaker extends CardImpl {
 
     private static BeastToken beastToken = new BeastToken();
 
-    public GarrukWildspeaker(UUID ownerId) {
-        super(ownerId, 183, "Garruk Wildspeaker", Rarity.MYTHIC, new CardType[]{CardType.PLANESWALKER}, "{2}{G}{G}");
-        this.expansionSetCode = "M10";
+    public GarrukWildspeaker(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.PLANESWALKER},"{2}{G}{G}");
         this.subtype.add("Garruk");
 
         this.addAbility(new PlanswalkerEntersWithLoyalityCountersAbility(3));

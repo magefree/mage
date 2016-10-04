@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.commander2014;
+package mage.cards.w;
 
 import java.util.HashMap;
 import java.util.LinkedHashSet;
@@ -35,11 +35,11 @@ import java.util.UUID;
 import mage.abilities.Ability;
 import mage.abilities.effects.OneShotEffect;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.cards.Cards;
 import mage.cards.CardsImpl;
 import mage.constants.CardType;
 import mage.constants.Outcome;
-import mage.constants.Rarity;
 import mage.constants.Zone;
 import mage.filter.FilterPermanent;
 import mage.filter.common.FilterBasicLandCard;
@@ -57,9 +57,8 @@ import mage.target.common.TargetCardInLibrary;
  */
 public class WaveOfVitriol extends CardImpl {
 
-    public WaveOfVitriol(UUID ownerId) {
-        super(ownerId, 51, "Wave of Vitriol", Rarity.RARE, new CardType[]{CardType.SORCERY}, "{5}{G}{G}");
-        this.expansionSetCode = "C14";
+    public WaveOfVitriol(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{5}{G}{G}");
 
         // Each player sacrifices all artifacts, enchantments, and nonbasic lands he or she controls. For each land sacrificed this way, its controller may search his or her library for a basic land card and put it onto the battlefield tapped. Then each player who searched his or her library this way shuffles it.
         this.getSpellAbility().addEffect(new WaveOfVitriolEffect());

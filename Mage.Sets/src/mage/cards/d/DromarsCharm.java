@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.commander2013;
+package mage.cards.d;
 
 import java.util.UUID;
 import mage.abilities.Mode;
@@ -33,9 +33,9 @@ import mage.abilities.effects.common.CounterTargetEffect;
 import mage.abilities.effects.common.GainLifeEffect;
 import mage.abilities.effects.common.continuous.BoostTargetEffect;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Duration;
-import mage.constants.Rarity;
 import mage.target.TargetSpell;
 import mage.target.common.TargetCreaturePermanent;
 
@@ -45,9 +45,8 @@ import mage.target.common.TargetCreaturePermanent;
  */
 public class DromarsCharm extends CardImpl {
 
-    public DromarsCharm(UUID ownerId) {
-        super(ownerId, 187, "Dromar's Charm", Rarity.UNCOMMON, new CardType[]{CardType.INSTANT}, "{W}{U}{B}");
-        this.expansionSetCode = "C13";
+    public DromarsCharm(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.INSTANT},"{W}{U}{B}");
 
 
         // Choose one - You gain 5 life; or counter target spell; or target creature gets -2/-2 until end of turn.

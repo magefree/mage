@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.eventide;
+package mage.cards.d;
 
 import java.util.UUID;
 import mage.MageInt;
@@ -38,8 +38,8 @@ import mage.abilities.effects.common.RegenerateSourceEffect;
 import mage.abilities.effects.common.counter.AddCountersSourceEffect;
 import mage.abilities.keyword.TrampleAbility;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.constants.Zone;
 import mage.counters.CounterType;
 
@@ -48,9 +48,8 @@ import mage.counters.CounterType;
  */
 public class DeityOfScars extends CardImpl {
 
-    public DeityOfScars(UUID ownerId) {
-        super(ownerId, 118, "Deity of Scars", Rarity.RARE, new CardType[]{CardType.CREATURE}, "{B/G}{B/G}{B/G}{B/G}{B/G}");
-        this.expansionSetCode = "EVE";
+    public DeityOfScars(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{B/G}{B/G}{B/G}{B/G}{B/G}");
         this.subtype.add("Spirit");
         this.subtype.add("Avatar");
 

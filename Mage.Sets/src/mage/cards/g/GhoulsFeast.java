@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.izzetvsgolgari;
+package mage.cards.g;
 
 import java.util.UUID;
 import mage.abilities.dynamicvalue.DynamicValue;
@@ -33,9 +33,9 @@ import mage.abilities.dynamicvalue.common.CardsInControllerGraveyardCount;
 import mage.abilities.dynamicvalue.common.StaticValue;
 import mage.abilities.effects.common.continuous.BoostTargetEffect;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Duration;
-import mage.constants.Rarity;
 import mage.filter.common.FilterCreatureCard;
 import mage.target.common.TargetCreaturePermanent;
 
@@ -45,9 +45,8 @@ import mage.target.common.TargetCreaturePermanent;
  */
 public class GhoulsFeast extends CardImpl {
 
-    public GhoulsFeast(UUID ownerId) {
-        super(ownerId, 67, "Ghoul's Feast", Rarity.UNCOMMON, new CardType[]{CardType.INSTANT}, "{1}{B}");
-        this.expansionSetCode = "DDJ";
+    public GhoulsFeast(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.INSTANT},"{1}{B}");
 
         // Target creature gets +X/+0 until end of turn, where X is the number of creature cards in your graveyard.
         DynamicValue xValue = new CardsInControllerGraveyardCount(new FilterCreatureCard("creature card"));

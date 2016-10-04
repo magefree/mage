@@ -25,18 +25,18 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.darkascension;
+package mage.cards.a;
 
 import java.util.UUID;
 
 import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.abilities.Ability;
 import mage.abilities.dynamicvalue.DynamicValue;
 import mage.abilities.dynamicvalue.common.CardsInControllerGraveyardCount;
 import mage.abilities.effects.OneShotEffect;
 import mage.cards.Card;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.Outcome;
 import mage.constants.Zone;
 import mage.game.Game;
@@ -48,9 +48,8 @@ import mage.players.Player;
  */
 public class ArchangelsLight extends CardImpl {
 
-    public ArchangelsLight(UUID ownerId) {
-        super(ownerId, 1, "Archangel's Light", Rarity.MYTHIC, new CardType[]{CardType.SORCERY}, "{7}{W}");
-        this.expansionSetCode = "DKA";
+    public ArchangelsLight(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{7}{W}");
 
         // You gain 2 life for each card in your graveyard, then shuffle your graveyard into your library.
         this.getSpellAbility().addEffect(new ArchangelsLightEffect());

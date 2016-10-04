@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.jacevschandra;
+package mage.cards.h;
 
 import java.util.UUID;
 import mage.MageInt;
@@ -38,9 +38,9 @@ import mage.abilities.effects.common.CreateTokenEffect;
 import mage.abilities.effects.common.ShuffleIntoLibrarySourceEffect;
 import mage.abilities.keyword.HasteAbility;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Duration;
-import mage.constants.Rarity;
 import mage.constants.Zone;
 import mage.game.Game;
 import mage.game.events.GameEvent;
@@ -53,9 +53,8 @@ import mage.game.stack.Spell;
  */
 public class Hostility extends CardImpl {
 
-    public Hostility(UUID ownerId) {
-        super(ownerId, 48, "Hostility", Rarity.RARE, new CardType[]{CardType.CREATURE}, "{3}{R}{R}{R}");
-        this.expansionSetCode = "DD2";
+    public Hostility(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{3}{R}{R}{R}");
         this.subtype.add("Elemental");
         this.subtype.add("Incarnation");
         this.power = new MageInt(6);

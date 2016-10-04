@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.ftvangels;
+package mage.cards.a;
 
 import java.util.UUID;
 import mage.MageInt;
@@ -37,12 +37,12 @@ import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.continuous.BoostAllEffect;
 import mage.abilities.keyword.FlyingAbility;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.choices.Choice;
 import mage.choices.ChoiceImpl;
 import mage.constants.CardType;
 import mage.constants.Duration;
 import mage.constants.Outcome;
-import mage.constants.Rarity;
 import mage.constants.Zone;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.game.Game;
@@ -55,9 +55,8 @@ import mage.players.Player;
  */
 public class ArchangelOfStrife extends CardImpl {
 
-    public ArchangelOfStrife(UUID ownerId) {
-        super(ownerId, 3, "Archangel of Strife", Rarity.MYTHIC, new CardType[]{CardType.CREATURE}, "{5}{W}{W}");
-        this.expansionSetCode = "V15";
+    public ArchangelOfStrife(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{5}{W}{W}");
         this.subtype.add("Angel");
         this.power = new MageInt(6);
         this.toughness = new MageInt(6);

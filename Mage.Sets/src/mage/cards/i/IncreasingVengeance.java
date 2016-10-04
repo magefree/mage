@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.darkascension;
+package mage.cards.i;
 
 import java.util.UUID;
 import mage.abilities.Ability;
@@ -33,6 +33,7 @@ import mage.abilities.costs.mana.ManaCostsImpl;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.keyword.FlashbackAbility;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.*;
 import mage.filter.FilterSpell;
 import mage.filter.predicate.Predicates;
@@ -60,9 +61,8 @@ public class IncreasingVengeance extends CardImpl {
         filter.add(new ControllerPredicate(TargetController.YOU));
     }
 
-    public IncreasingVengeance(UUID ownerId) {
-        super(ownerId, 95, "Increasing Vengeance", Rarity.RARE, new CardType[]{CardType.INSTANT}, "{R}{R}");
-        this.expansionSetCode = "DKA";
+    public IncreasingVengeance(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.INSTANT},"{R}{R}");
 
         // Copy target instant or sorcery spell you control. If Increasing Vengeance was cast from a graveyard, copy that spell twice instead. You may choose new targets for the copies.
         this.getSpellAbility().addEffect(new IncreasingVengeanceEffect());

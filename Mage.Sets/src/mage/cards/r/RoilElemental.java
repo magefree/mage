@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.zendikar;
+package mage.cards.r;
 
 import java.util.UUID;
 
@@ -38,6 +38,7 @@ import mage.abilities.decorator.ConditionalContinuousEffect;
 import mage.abilities.effects.common.continuous.GainControlTargetEffect;
 import mage.abilities.keyword.FlyingAbility;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.filter.FilterPermanent;
 import mage.filter.predicate.mageobject.CardIdPredicate;
 import mage.filter.predicate.permanent.ControllerPredicate;
@@ -49,9 +50,8 @@ import mage.target.common.TargetCreaturePermanent;
  */
 public class RoilElemental extends CardImpl {
 
-    public RoilElemental(UUID ownerId) {
-        super(ownerId, 62, "Roil Elemental", Rarity.RARE, new CardType[]{CardType.CREATURE}, "{3}{U}{U}{U}");
-        this.expansionSetCode = "ZEN";
+    public RoilElemental(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{3}{U}{U}{U}");
         this.subtype.add("Elemental");
 
         this.power = new MageInt(3);

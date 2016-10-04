@@ -25,15 +25,15 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.guildpact;
+package mage.cards.w;
 
 import java.util.UUID;
 import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.MageInt;
 import mage.abilities.costs.common.SacrificeSourceCost;
 import mage.abilities.mana.AnyColorManaAbility;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 
 /**
  *
@@ -41,9 +41,8 @@ import mage.cards.CardImpl;
  */
 public class WildCantor extends CardImpl {
 
-    public WildCantor(UUID ownerId) {
-        super(ownerId, 149, "Wild Cantor", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{R/G}");
-        this.expansionSetCode = "GPT";
+    public WildCantor(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{R/G}");
         this.subtype.add("Human");
         this.subtype.add("Druid");
 

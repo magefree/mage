@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.iceage;
+package mage.cards.h;
 
 import java.util.UUID;
 import mage.abilities.Ability;
@@ -36,8 +36,8 @@ import mage.abilities.costs.common.TapTargetCost;
 import mage.abilities.effects.common.DamageTargetEffect;
 import mage.abilities.effects.common.SacrificeSourceUnlessPaysEffect;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.constants.Zone;
 import mage.filter.common.FilterControlledLandPermanent;
 import mage.filter.predicate.Predicates;
@@ -60,9 +60,8 @@ public class Hecatomb extends CardImpl {
         filter.add(Predicates.not(new TappedPredicate()));
     }
     
-    public Hecatomb(UUID ownerId) {
-        super(ownerId, 18, "Hecatomb", Rarity.RARE, new CardType[]{CardType.ENCHANTMENT}, "{1}{B}{B}");
-        this.expansionSetCode = "ICE";
+    public Hecatomb(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.ENCHANTMENT},"{1}{B}{B}");
 
 
         // When Hecatomb enters the battlefield, sacrifice Hecatomb unless you sacrifice four creatures.

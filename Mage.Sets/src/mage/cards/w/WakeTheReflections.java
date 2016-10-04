@@ -26,13 +26,13 @@
  *  or implied, of BetaSteward_at_googlemail.com.
  */
 
-package mage.sets.dragonsmaze;
+package mage.cards.w;
 
 import java.util.UUID;
 import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.abilities.effects.common.PopulateEffect;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 
 /**
  *
@@ -42,9 +42,8 @@ import mage.cards.CardImpl;
 
 public class WakeTheReflections extends CardImpl {
 
-    public WakeTheReflections(UUID ownerId) {
-        super(ownerId, 10, "Wake the Reflections", Rarity.COMMON, new CardType[]{CardType.SORCERY}, "{W}");
-        this.expansionSetCode = "DGM";
+    public WakeTheReflections(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{W}");
 
 
         // Populate.

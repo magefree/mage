@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.kaladesh;
+package mage.cards.e;
 
 import java.util.UUID;
 import mage.abilities.Ability;
@@ -39,8 +39,8 @@ import mage.abilities.effects.common.DoIfCostPaid;
 import mage.abilities.effects.common.DrawCardSourceControllerEffect;
 import mage.abilities.effects.common.counter.GetEnergyCountersControllerEffect;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.constants.Zone;
 import mage.filter.common.FilterControlledPermanent;
 import mage.filter.predicate.Predicates;
@@ -60,9 +60,8 @@ public class EraOfInnovation extends CardImpl {
                 new SubtypePredicate("Artificer")));
     }
 
-    public EraOfInnovation(UUID ownerId) {
-        super(ownerId, 45, "Era of Innovation", Rarity.UNCOMMON, new CardType[]{CardType.ENCHANTMENT}, "{1}{U}");
-        this.expansionSetCode = "KLD";
+    public EraOfInnovation(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.ENCHANTMENT},"{1}{U}");
 
         // Whenever an artifact or Artificer enters the battlefield under you control, you may pay {1}. If you do, you get {E}{E}.
         Effect effect = new DoIfCostPaid(new GetEnergyCountersControllerEffect(2), new GenericManaCost(1));

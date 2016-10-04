@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.arabiannights;
+package mage.cards.m;
 
 import java.util.UUID;
 import mage.ObjectColor;
@@ -38,9 +38,9 @@ import mage.abilities.effects.common.DoIfCostPaid;
 import mage.abilities.effects.common.DontUntapInControllersUntapStepAllEffect;
 import mage.abilities.effects.common.UntapEnchantedEffect;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Duration;
-import mage.constants.Rarity;
 import mage.constants.TargetController;
 import mage.constants.Zone;
 import mage.filter.common.FilterCreaturePermanent;
@@ -65,9 +65,8 @@ public class MagneticMountain extends CardImpl {
         filter.add(new ColorPredicate(ObjectColor.BLUE));
     }
     
-    public MagneticMountain(UUID ownerId) {
-        super(ownerId, 50, "Magnetic Mountain", Rarity.UNCOMMON, new CardType[]{CardType.ENCHANTMENT}, "{1}{R}{R}");
-        this.expansionSetCode = "ARN";
+    public MagneticMountain(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.ENCHANTMENT},"{1}{R}{R}");
 
         // Blue creatures don't untap during their controllers' untap steps.
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, 

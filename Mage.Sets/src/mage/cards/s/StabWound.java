@@ -26,14 +26,13 @@
  *  or implied, of BetaSteward_at_googlemail.com.
  */
 
-package mage.sets.returntoravnica;
+package mage.cards.s;
 
 import java.util.UUID;
 
 import mage.constants.CardType;
 import mage.constants.Duration;
 import mage.constants.Outcome;
-import mage.constants.Rarity;
 import mage.constants.Zone;
 import mage.abilities.Ability;
 import mage.abilities.common.BeginningOfUpkeepTriggeredAbility;
@@ -43,6 +42,7 @@ import mage.abilities.effects.common.LoseLifeTargetEffect;
 import mage.abilities.effects.common.continuous.BoostEnchantedEffect;
 import mage.abilities.keyword.EnchantAbility;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.TargetController;
 import mage.target.TargetPermanent;
 import mage.target.common.TargetCreaturePermanent;
@@ -55,9 +55,8 @@ public class StabWound extends CardImpl {
 
     static final String rule = "At the beginning of the upkeep of enchanted creature's controller, that player loses 2 life";
 
-    public StabWound (UUID ownerId) {
-        super(ownerId, 78, "Stab Wound", Rarity.COMMON, new CardType[]{CardType.ENCHANTMENT}, "{2}{B}");
-        this.expansionSetCode = "RTR";
+    public StabWound (UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.ENCHANTMENT},"{2}{B}");
         this.subtype.add("Aura");
 
 

@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.dragonsoftarkir;
+package mage.cards.q;
 
 import java.util.UUID;
 import mage.ConditionalMana;
@@ -39,8 +39,8 @@ import mage.abilities.costs.common.TapSourceCost;
 import mage.abilities.mana.ConditionalColorlessManaAbility;
 import mage.abilities.mana.builder.ConditionalManaBuilder;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.game.Game;
 import mage.game.stack.Spell;
 
@@ -50,9 +50,8 @@ import mage.game.stack.Spell;
  */
 public class QarsiDeceiver extends CardImpl {
 
-    public QarsiDeceiver(UUID ownerId) {
-        super(ownerId, 71, "Qarsi Deceiver", Rarity.UNCOMMON, new CardType[]{CardType.CREATURE}, "{1}{U}");
-        this.expansionSetCode = "DTK";
+    public QarsiDeceiver(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{1}{U}");
         this.subtype.add("Naga");
         this.subtype.add("Wizard");
         this.power = new MageInt(0);

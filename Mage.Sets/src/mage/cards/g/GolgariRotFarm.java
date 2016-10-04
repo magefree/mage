@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.ravnica;
+package mage.cards.g;
 import java.util.UUID;
 import mage.Mana;
 import mage.abilities.common.EntersBattlefieldTappedAbility;
@@ -34,8 +34,8 @@ import mage.abilities.costs.common.TapSourceCost;
 import mage.abilities.effects.common.ReturnToHandChosenControlledPermanentEffect;
 import mage.abilities.mana.SimpleManaAbility;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.constants.Zone;
 import mage.filter.common.FilterControlledLandPermanent;
 import mage.filter.common.FilterControlledPermanent;
@@ -48,9 +48,8 @@ public class GolgariRotFarm extends CardImpl {
 
     private static final FilterControlledPermanent filter = new FilterControlledLandPermanent();
 
-    public GolgariRotFarm(UUID ownerId) {
-        super(ownerId, 278, "Golgari Rot Farm", Rarity.COMMON, new CardType[]{CardType.LAND}, null);
-        this.expansionSetCode = "RAV";
+    public GolgariRotFarm(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.LAND},null);
 
         // Golgari Rot Farm enters the battlefield tapped.
         this.addAbility(new EntersBattlefieldTappedAbility());

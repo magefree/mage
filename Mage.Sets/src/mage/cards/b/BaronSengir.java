@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.mastersedition;
+package mage.cards.b;
 
 import java.util.UUID;
 import mage.MageInt;
@@ -37,8 +37,8 @@ import mage.abilities.effects.common.RegenerateTargetEffect;
 import mage.abilities.effects.common.counter.AddCountersSourceEffect;
 import mage.abilities.keyword.FlyingAbility;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.constants.Zone;
 import mage.counters.CounterType;
 import mage.filter.common.FilterCreaturePermanent;
@@ -59,9 +59,8 @@ public class BaronSengir extends CardImpl {
         filter.add(new AnotherPredicate());
     }
 
-    public BaronSengir(UUID ownerId) {
-        super(ownerId, 58, "Baron Sengir", Rarity.RARE, new CardType[]{CardType.CREATURE}, "{5}{B}{B}{B}");
-        this.expansionSetCode = "MED";
+    public BaronSengir(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{5}{B}{B}{B}");
         this.supertype.add("Legendary");
         this.subtype.add("Vampire");
         this.power = new MageInt(5);

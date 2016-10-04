@@ -25,13 +25,13 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.starwars;
+package mage.cards.s;
 
 import java.util.UUID;
 import mage.abilities.effects.common.CreateTokenEffect;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.game.permanent.token.TIEFighterToken;
 
 /**
@@ -40,9 +40,8 @@ import mage.game.permanent.token.TIEFighterToken;
  */
 public class SwarmTheSkies extends CardImpl {
 
-    public SwarmTheSkies(UUID ownerId) {
-        super(ownerId, 91, "Swarm the Skies", Rarity.COMMON, new CardType[]{CardType.SORCERY}, "{3}{B}");
-        this.expansionSetCode = "SWS";
+    public SwarmTheSkies(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{3}{B}");
 
         // Create three 1/1 black Starship artifact creature tokens with Spaceflight named TIE Fighter.
         this.getSpellAbility().addEffect(new CreateTokenEffect(new TIEFighterToken(), 3));

@@ -25,18 +25,18 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.alarareborn;
+package mage.cards.s;
 
 import java.util.UUID;
 
 import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.costs.common.SacrificeSourceCost;
 import mage.abilities.effects.common.continuous.GainAbilityControlledEffect;
 import mage.abilities.keyword.CascadeAbility;
 import mage.abilities.keyword.FlyingAbility;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.Duration;
 import mage.constants.Zone;
 import mage.filter.common.FilterControlledCreaturePermanent;
@@ -47,9 +47,8 @@ import mage.filter.common.FilterControlledCreaturePermanent;
  */
 public class StormcallersBoon extends CardImpl {
 
-    public StormcallersBoon(UUID ownerId) {
-        super(ownerId, 13, "Stormcaller's Boon", Rarity.COMMON, new CardType[]{CardType.ENCHANTMENT}, "{2}{W}{U}");
-        this.expansionSetCode = "ARB";
+    public StormcallersBoon(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.ENCHANTMENT},"{2}{W}{U}");
 
 
 

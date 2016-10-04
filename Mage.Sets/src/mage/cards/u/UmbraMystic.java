@@ -25,18 +25,18 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.riseoftheeldrazi;
+package mage.cards.u;
 
 import java.util.UUID;
 import mage.constants.CardType;
 import mage.constants.Duration;
-import mage.constants.Rarity;
 import mage.constants.Zone;
 import mage.MageInt;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.effects.common.continuous.GainAbilityAllEffect;
 import mage.abilities.keyword.TotemArmorAbility;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.filter.common.FilterEnchantmentPermanent;
 import mage.filter.predicate.ObjectPlayer;
 import mage.filter.predicate.ObjectPlayerPredicate;
@@ -56,9 +56,8 @@ public class UmbraMystic extends CardImpl {
         filter.add(new SubtypePredicate("Aura"));
     }
 
-    public UmbraMystic(UUID ownerId) {
-        super(ownerId, 52, "Umbra Mystic", Rarity.RARE, new CardType[]{CardType.CREATURE}, "{2}{W}");
-        this.expansionSetCode = "ROE";
+    public UmbraMystic(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{2}{W}");
         this.subtype.add("Human");
         this.subtype.add("Wizard");
 

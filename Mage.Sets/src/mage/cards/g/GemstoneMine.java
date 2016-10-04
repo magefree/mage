@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.timeshifted;
+package mage.cards.g;
 
 import java.util.UUID;
 import mage.abilities.Ability;
@@ -37,8 +37,8 @@ import mage.abilities.effects.common.SacrificeSourceEffect;
 import mage.abilities.effects.common.counter.AddCountersSourceEffect;
 import mage.abilities.mana.AnyColorManaAbility;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.counters.CounterType;
 
 /**
@@ -47,9 +47,8 @@ import mage.counters.CounterType;
  */
 public class GemstoneMine extends CardImpl {
 
-    public GemstoneMine(UUID ownerId) {
-        super(ownerId, 119, "Gemstone Mine", Rarity.RARE, new CardType[]{CardType.LAND}, "");
-        this.expansionSetCode = "TSB";
+    public GemstoneMine(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.LAND},"");
 
         // Gemstone Mine enters the battlefield with three mining counters on it.
         this.addAbility(new EntersBattlefieldAbility(new AddCountersSourceEffect(CounterType.MINING.createInstance(3))));

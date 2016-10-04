@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.gatecrash;
+package mage.cards.s;
 
 import java.util.UUID;
 
@@ -41,6 +41,7 @@ import mage.abilities.effects.common.SacrificeSourceEffect;
 import mage.abilities.effects.common.continuous.ControlEnchantedEffect;
 import mage.abilities.keyword.EnchantAbility;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.filter.FilterCard;
 import mage.target.TargetPermanent;
 import mage.target.common.TargetCardInHand;
@@ -52,9 +53,8 @@ import mage.target.common.TargetCreaturePermanent;
  */
 public class SoulRansom extends CardImpl {
 
-    public SoulRansom(UUID ownerId) {
-        super(ownerId, 198, "Soul Ransom", Rarity.RARE, new CardType[]{CardType.ENCHANTMENT}, "{2}{U}{B}");
-        this.expansionSetCode = "GTC";
+    public SoulRansom(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.ENCHANTMENT},"{2}{U}{B}");
         this.subtype.add("Aura");
 
 

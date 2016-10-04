@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.planarchaos;
+package mage.cards.l;
 
 import java.util.UUID;
 import mage.ObjectColor;
@@ -34,11 +34,11 @@ import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.effects.ContinuousEffectImpl;
 import mage.abilities.mana.GreenManaAbility;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Duration;
 import mage.constants.Layer;
 import mage.constants.Outcome;
-import mage.constants.Rarity;
 import mage.constants.SubLayer;
 import mage.constants.Zone;
 import mage.filter.FilterPermanent;
@@ -54,9 +54,8 @@ import mage.players.Player;
  */
 public class LifeAndLimb extends CardImpl {
 
-    public LifeAndLimb(UUID ownerId) {
-        super(ownerId, 133, "Life and Limb", Rarity.RARE, new CardType[]{CardType.ENCHANTMENT}, "{3}{G}");
-        this.expansionSetCode = "PLC";
+    public LifeAndLimb(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.ENCHANTMENT},"{3}{G}");
 
         // All Forests and all Saprolings are 1/1 green Saproling creatures and Forest lands in addition to their other types.
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new LifeAndLimbEffect()));

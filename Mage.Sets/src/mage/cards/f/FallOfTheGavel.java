@@ -25,14 +25,14 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.returntoravnica;
+package mage.cards.f;
 
 import java.util.UUID;
 import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.abilities.effects.common.CounterTargetEffect;
 import mage.abilities.effects.common.GainLifeEffect;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.target.TargetSpell;
 
 /**
@@ -41,9 +41,8 @@ import mage.target.TargetSpell;
  */
 public class FallOfTheGavel extends CardImpl {
 
-    public FallOfTheGavel(UUID ownerId) {
-        super(ownerId, 161, "Fall of the Gavel", Rarity.UNCOMMON, new CardType[]{CardType.INSTANT}, "{3}{W}{U}");
-        this.expansionSetCode = "RTR";
+    public FallOfTheGavel(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.INSTANT},"{3}{W}{U}");
 
 
         // Target player draws two cards.

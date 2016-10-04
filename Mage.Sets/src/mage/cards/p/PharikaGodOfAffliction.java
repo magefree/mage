@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.journeyintonyx;
+package mage.cards.p;
 
 import java.util.UUID;
 import mage.MageInt;
@@ -41,10 +41,10 @@ import mage.abilities.keyword.DeathtouchAbility;
 import mage.abilities.keyword.IndestructibleAbility;
 import mage.cards.Card;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.ColoredManaSymbol;
 import mage.constants.Outcome;
-import mage.constants.Rarity;
 import mage.constants.Zone;
 import mage.filter.common.FilterCreatureCard;
 import mage.game.Game;
@@ -59,9 +59,8 @@ import mage.target.common.TargetCardInGraveyard;
  */
 public class PharikaGodOfAffliction extends CardImpl {
 
-    public PharikaGodOfAffliction(UUID ownerId) {
-        super(ownerId, 154, "Pharika, God of Affliction", Rarity.MYTHIC, new CardType[]{CardType.ENCHANTMENT, CardType.CREATURE}, "{1}{B}{G}");
-        this.expansionSetCode = "JOU";
+    public PharikaGodOfAffliction(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.ENCHANTMENT,CardType.CREATURE},"{1}{B}{G}");
         this.supertype.add("Legendary");
         this.subtype.add("God");
 

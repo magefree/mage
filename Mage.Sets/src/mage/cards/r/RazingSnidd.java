@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.planeshift;
+package mage.cards.r;
 
 import java.util.UUID;
 import mage.MageInt;
@@ -34,8 +34,8 @@ import mage.abilities.common.EntersBattlefieldTriggeredAbility;
 import mage.abilities.effects.common.ReturnToHandChosenControlledPermanentEffect;
 import mage.abilities.effects.common.SacrificeAllEffect;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.filter.common.FilterControlledCreaturePermanent;
 import mage.filter.common.FilterControlledLandPermanent;
 import mage.filter.predicate.Predicates;
@@ -54,9 +54,8 @@ public class RazingSnidd extends CardImpl {
         filter.add(Predicates.or(new ColorPredicate(ObjectColor.BLACK), new ColorPredicate(ObjectColor.RED)));
     }
 
-    public RazingSnidd(UUID ownerId) {
-        super(ownerId, 121, "Razing Snidd", Rarity.UNCOMMON, new CardType[]{CardType.CREATURE}, "{4}{B}{R}");
-        this.expansionSetCode = "PLS";
+    public RazingSnidd(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{4}{B}{R}");
         this.subtype.add("Beast");
         this.power = new MageInt(3);
         this.toughness = new MageInt(3);

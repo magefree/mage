@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.innistrad;
+package mage.cards.t;
 
 import java.util.UUID;
 import mage.MageInt;
@@ -43,9 +43,9 @@ import mage.abilities.keyword.DoubleStrikeAbility;
 import mage.abilities.keyword.MenaceAbility;
 import mage.abilities.keyword.TransformAbility;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Duration;
-import mage.constants.Rarity;
 import mage.constants.TargetController;
 import mage.constants.Zone;
 import mage.filter.common.FilterCreaturePermanent;
@@ -65,9 +65,8 @@ public class TerrorOfKruinPass extends CardImpl {
         filter.add(new SubtypePredicate("Werewolf"));
     }
 
-    public TerrorOfKruinPass(UUID ownerId) {
-        super(ownerId, 152, "Terror of Kruin Pass", Rarity.RARE, new CardType[]{CardType.CREATURE}, "");
-        this.expansionSetCode = "ISD";
+    public TerrorOfKruinPass(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"");
         this.subtype.add("Werewolf");
 
         // this card is the second face of double-faced card

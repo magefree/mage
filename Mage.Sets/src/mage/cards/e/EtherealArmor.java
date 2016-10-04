@@ -26,7 +26,7 @@
  *  or implied, of BetaSteward_at_googlemail.com.
  */
 
-package mage.sets.returntoravnica;
+package mage.cards.e;
 
 import java.util.UUID;
 
@@ -34,7 +34,6 @@ import mage.constants.AttachmentType;
 import mage.constants.CardType;
 import mage.constants.Duration;
 import mage.constants.Outcome;
-import mage.constants.Rarity;
 import mage.constants.Zone;
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleStaticAbility;
@@ -45,6 +44,7 @@ import mage.abilities.effects.common.continuous.GainAbilityAttachedEffect;
 import mage.abilities.keyword.EnchantAbility;
 import mage.abilities.keyword.FirstStrikeAbility;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.TargetController;
 import mage.filter.common.FilterEnchantmentPermanent;
 import mage.filter.predicate.permanent.ControllerPredicate;
@@ -63,9 +63,8 @@ public class EtherealArmor extends CardImpl {
         filter.add(new ControllerPredicate(TargetController.YOU));
     }
 
-    public EtherealArmor (UUID ownerId) {
-        super(ownerId, 9, "Ethereal Armor", Rarity.COMMON, new CardType[]{CardType.ENCHANTMENT}, "{W}");
-        this.expansionSetCode = "RTR";
+    public EtherealArmor (UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.ENCHANTMENT},"{W}");
         this.subtype.add("Aura");
 
 

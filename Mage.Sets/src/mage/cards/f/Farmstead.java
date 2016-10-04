@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.unlimitededition;
+package mage.cards.f;
 
 import java.util.UUID;
 import mage.abilities.Ability;
@@ -39,10 +39,10 @@ import mage.abilities.effects.common.GainLifeEffect;
 import mage.abilities.effects.common.continuous.GainAbilityAttachedEffect;
 import mage.abilities.keyword.EnchantAbility;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.AttachmentType;
 import mage.constants.CardType;
 import mage.constants.Outcome;
-import mage.constants.Rarity;
 import mage.constants.TargetController;
 import mage.constants.Zone;
 import mage.target.TargetPermanent;
@@ -54,9 +54,8 @@ import mage.target.common.TargetLandPermanent;
  */
 public class Farmstead extends CardImpl {
 
-    public Farmstead(UUID ownerId) {
-        super(ownerId, 204, "Farmstead", Rarity.RARE, new CardType[]{CardType.ENCHANTMENT}, "{W}{W}{W}");
-        this.expansionSetCode = "2ED";
+    public Farmstead(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.ENCHANTMENT},"{W}{W}{W}");
         this.subtype.add("Aura");
 
         // Enchant land

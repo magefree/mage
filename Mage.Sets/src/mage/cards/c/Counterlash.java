@@ -25,18 +25,18 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.darkascension;
+package mage.cards.c;
 
 import java.util.ArrayList;
 import java.util.UUID;
 
 import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.MageObject;
 import mage.abilities.Ability;
 import mage.abilities.effects.OneShotEffect;
 import mage.cards.Card;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.Outcome;
 import mage.filter.FilterCard;
 import mage.filter.predicate.Predicate;
@@ -54,9 +54,8 @@ import mage.target.common.TargetCardInHand;
  */
 public class Counterlash extends CardImpl {
 
-    public Counterlash(UUID ownerId) {
-        super(ownerId, 33, "Counterlash", Rarity.RARE, new CardType[]{CardType.INSTANT}, "{4}{U}{U}");
-        this.expansionSetCode = "DKA";
+    public Counterlash(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.INSTANT},"{4}{U}{U}");
 
 
         // Counter target spell. You may cast a nonland card in your hand that shares a card type with that spell without paying its mana cost.

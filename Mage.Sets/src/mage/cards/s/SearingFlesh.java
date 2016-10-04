@@ -25,13 +25,13 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.onslaught;
+package mage.cards.s;
 
 import java.util.UUID;
 import mage.abilities.effects.common.DamageTargetEffect;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.target.common.TargetOpponent;
 
 /**
@@ -40,9 +40,8 @@ import mage.target.common.TargetOpponent;
  */
 public class SearingFlesh extends CardImpl {
 
-    public SearingFlesh(UUID ownerId) {
-        super(ownerId, 225, "Searing Flesh", Rarity.UNCOMMON, new CardType[]{CardType.SORCERY}, "{6}{R}");
-        this.expansionSetCode = "ONS";
+    public SearingFlesh(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{6}{R}");
 
         // Searing Flesh deals 7 damage to target opponent.
         this.getSpellAbility().addTarget(new TargetOpponent());

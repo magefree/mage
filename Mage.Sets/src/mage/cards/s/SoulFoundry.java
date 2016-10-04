@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.mirrodin;
+package mage.cards.s;
 
 import java.util.UUID;
 import mage.abilities.Ability;
@@ -40,9 +40,9 @@ import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.PutTokenOntoBattlefieldCopyTargetEffect;
 import mage.cards.Card;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Outcome;
-import mage.constants.Rarity;
 import mage.constants.Zone;
 import mage.filter.FilterCard;
 import mage.filter.predicate.mageobject.CardTypePredicate;
@@ -59,9 +59,8 @@ import mage.util.CardUtil;
  */
 public class SoulFoundry extends CardImpl {
 
-    public SoulFoundry(UUID ownerId) {
-        super(ownerId, 246, "Soul Foundry", Rarity.RARE, new CardType[]{CardType.ARTIFACT}, "{4}");
-        this.expansionSetCode = "MRD";
+    public SoulFoundry(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.ARTIFACT},"{4}");
 
         // Imprint - When Soul Foundry enters the battlefield, you may exile a creature card from your hand.
         this.addAbility(new EntersBattlefieldTriggeredAbility(new SoulFoundryImprintEffect(), true, "<i>Imprint - </i>"));

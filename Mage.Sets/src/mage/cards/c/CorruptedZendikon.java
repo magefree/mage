@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.worldwake;
+package mage.cards.c;
 
 import mage.MageInt;
 import mage.abilities.Ability;
@@ -36,6 +36,7 @@ import mage.abilities.effects.common.ReturnToHandAttachedEffect;
 import mage.abilities.effects.common.continuous.BecomesCreatureAttachedEffect;
 import mage.abilities.keyword.EnchantAbility;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.*;
 import mage.game.permanent.token.OozeToken;
 import mage.target.TargetPermanent;
@@ -49,9 +50,8 @@ import java.util.UUID;
  */
 public class CorruptedZendikon extends CardImpl {
 
-    public CorruptedZendikon(UUID ownerId) {
-        super(ownerId, 55, "Corrupted Zendikon", Rarity.COMMON, new CardType[]{CardType.ENCHANTMENT}, "{1}{B}");
-        this.expansionSetCode = "WWK";
+    public CorruptedZendikon(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.ENCHANTMENT},"{1}{B}");
         this.subtype.add("Aura");
 
 

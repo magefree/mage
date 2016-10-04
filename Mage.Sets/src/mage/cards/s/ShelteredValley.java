@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.alliances;
+package mage.cards.s;
 
 import java.util.UUID;
 import mage.abilities.Ability;
@@ -40,8 +40,8 @@ import mage.abilities.effects.common.EnterBattlefieldPayCostOrPutGraveyardEffect
 import mage.abilities.effects.common.GainLifeEffect;
 import mage.abilities.mana.ColorlessManaAbility;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.constants.TargetController;
 import mage.constants.Zone;
 import mage.filter.FilterPermanent;
@@ -61,9 +61,8 @@ public class ShelteredValley extends CardImpl {
         filterShelteredValley.add(new NamePredicate("Sheltered Valley"));
     }
 
-    public ShelteredValley(UUID ownerId) {
-        super(ownerId, 187, "Sheltered Valley", Rarity.RARE, new CardType[]{CardType.LAND}, "");
-        this.expansionSetCode = "ALL";
+    public ShelteredValley(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.LAND},"");
 
         // If Sheltered Valley would enter the battlefield, instead sacrifice each other permanent named Sheltered Valley you control, then put Sheltered Valley onto the battlefield.
         Effect effect = new EnterBattlefieldPayCostOrPutGraveyardEffect(new SacrificeAllCost(filterShelteredValley));

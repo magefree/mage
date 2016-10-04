@@ -25,14 +25,14 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.khansoftarkir;
+package mage.cards.t;
 
 import java.util.UUID;
 import mage.abilities.costs.common.DiscardTargetCost;
 import mage.abilities.effects.common.DrawCardSourceControllerEffect;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.target.common.TargetCardInHand;
 
 /**
@@ -41,9 +41,8 @@ import mage.target.common.TargetCardInHand;
  */
 public class TormentingVoice extends CardImpl {
 
-    public TormentingVoice(UUID ownerId) {
-        super(ownerId, 123, "Tormenting Voice", Rarity.COMMON, new CardType[]{CardType.SORCERY}, "{1}{R}");
-        this.expansionSetCode = "KTK";
+    public TormentingVoice(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{1}{R}");
 
 
         // As an additional cost to cast Tormenting Voice, discard a card.

@@ -25,15 +25,15 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.vintagemasters;
+package mage.cards.m;
 
 import java.util.UUID;
 import mage.abilities.costs.common.TapSourceCost;
 import mage.abilities.mana.ConditionalColorlessManaAbility;
 import mage.abilities.mana.conditional.ConditionalSpellManaBuilder;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.filter.common.FilterArtifactSpell;
 
 /**
@@ -42,9 +42,8 @@ import mage.filter.common.FilterArtifactSpell;
  */
 public class MishrasWorkshop extends CardImpl {
 
-    public MishrasWorkshop(UUID ownerId) {
-        super(ownerId, 305, "Mishra's Workshop", Rarity.MYTHIC, new CardType[]{CardType.LAND}, "");
-        this.expansionSetCode = "VMA";
+    public MishrasWorkshop(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.LAND},"");
 
         // {tap}: Add {C}{C}{C} to your mana pool. Spend this mana only to cast artifact spells.
         this.addAbility(new ConditionalColorlessManaAbility(new TapSourceCost(), 3,

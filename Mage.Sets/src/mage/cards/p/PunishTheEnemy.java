@@ -26,13 +26,13 @@
  *  or implied, of BetaSteward_at_googlemail.com.
  */
 
-package mage.sets.dragonsmaze;
+package mage.cards.p;
 
 import java.util.UUID;
 import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.abilities.effects.common.DamageTargetEffect;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.target.Target;
 import mage.target.TargetPlayer;
 import mage.target.common.TargetCreaturePermanent;
@@ -45,9 +45,8 @@ import mage.target.common.TargetCreaturePermanent;
 
 public class PunishTheEnemy extends CardImpl {
 
-    public PunishTheEnemy(UUID ownerId) {
-        super(ownerId, 35, "Punish the Enemy", Rarity.COMMON, new CardType[]{CardType.INSTANT}, "{4}{R}");
-        this.expansionSetCode = "DGM";
+    public PunishTheEnemy(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.INSTANT},"{4}{R}");
 
 
         // Punish the Enemy deals 3 damage to target player and 3 damage to target creature.

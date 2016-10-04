@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.shadowsoverinnistrad;
+package mage.cards.d;
 
 import java.util.UUID;
 import mage.MageInt;
@@ -39,9 +39,10 @@ import mage.abilities.dynamicvalue.common.StaticValue;
 import mage.abilities.effects.common.LookLibraryAndPickControllerEffect;
 import mage.abilities.effects.common.TransformSourceEffect;
 import mage.abilities.keyword.TransformAbility;
+import mage.cards.k.KrallenhordeHowler;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.constants.TargetController;
 import mage.constants.Zone;
 import mage.filter.common.FilterCreatureCard;
@@ -52,15 +53,14 @@ import mage.filter.common.FilterCreatureCard;
  */
 public class DuskwatchRecruiter extends CardImpl {
 
-    public DuskwatchRecruiter(UUID ownerId) {
-        super(ownerId, 203, "Duskwatch Recruiter", Rarity.UNCOMMON, new CardType[]{CardType.CREATURE}, "{1}{G}");
-        this.expansionSetCode = "SOI";
+    public DuskwatchRecruiter(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{1}{G}");
         this.subtype.add("Human");
         this.subtype.add("Warrior");
         this.subtype.add("Werewolf");
 
         this.transformable = true;
-        this.secondSideCard = new KrallenhordeHowler(ownerId);
+        this.secondSideCardClazz = KrallenhordeHowler.class;
 
         this.power = new MageInt(2);
         this.toughness = new MageInt(2);

@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.tempest;
+package mage.cards.v;
 
 import java.util.UUID;
 import mage.abilities.Ability;
@@ -42,19 +42,20 @@ import mage.abilities.effects.common.AttachEffect;
 import mage.abilities.effects.common.ReturnToHandSourceEffect;
 import mage.abilities.keyword.EnchantAbility;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Duration;
 import mage.constants.Outcome;
-import mage.constants.Rarity;
 import mage.constants.TargetController;
 import mage.constants.Zone;
 import mage.game.Game;
 import mage.game.events.GameEvent;
 import mage.game.permanent.Permanent;
-import static mage.sets.tempest.VolrathsCurse.keyString;
 import mage.target.TargetPermanent;
 import mage.target.common.TargetControlledPermanent;
 import mage.target.common.TargetCreaturePermanent;
+
+import static mage.cards.v.VolrathsCurse.keyString;
 
 /**
  *
@@ -64,9 +65,8 @@ public class VolrathsCurse extends CardImpl {
 
     public static final String keyString = "_ignoreEffectForTurn";
 
-    public VolrathsCurse(UUID ownerId) {
-        super(ownerId, 101, "Volrath's Curse", Rarity.COMMON, new CardType[]{CardType.ENCHANTMENT}, "{1}{U}");
-        this.expansionSetCode = "TMP";
+    public VolrathsCurse(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.ENCHANTMENT},"{1}{U}");
         this.subtype.add("Aura");
 
         // Enchant creature

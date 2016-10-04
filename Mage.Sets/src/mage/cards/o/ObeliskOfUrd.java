@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.magic2015;
+package mage.cards.o;
 
 import java.util.UUID;
 import mage.abilities.Ability;
@@ -35,11 +35,11 @@ import mage.abilities.effects.ContinuousEffectImpl;
 import mage.abilities.effects.common.ChooseCreatureTypeEffect;
 import mage.abilities.keyword.ConvokeAbility;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Duration;
 import mage.constants.Layer;
 import mage.constants.Outcome;
-import mage.constants.Rarity;
 import mage.constants.SubLayer;
 import mage.constants.Zone;
 import mage.filter.common.FilterCreaturePermanent;
@@ -52,9 +52,8 @@ import mage.game.permanent.Permanent;
  */
 public class ObeliskOfUrd extends CardImpl {
 
-    public ObeliskOfUrd(UUID ownerId) {
-        super(ownerId, 222, "Obelisk of Urd", Rarity.RARE, new CardType[]{CardType.ARTIFACT}, "{6}");
-        this.expansionSetCode = "M15";
+    public ObeliskOfUrd(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.ARTIFACT},"{6}");
 
         // Convoke
         this.addAbility(new ConvokeAbility());

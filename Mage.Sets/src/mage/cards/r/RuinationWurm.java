@@ -25,13 +25,13 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.gatecrash;
+package mage.cards.r;
 
 import java.util.UUID;
 import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.MageInt;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 
 /**
  *
@@ -39,9 +39,8 @@ import mage.cards.CardImpl;
  */
 public class RuinationWurm extends CardImpl {
 
-    public RuinationWurm(UUID ownerId) {
-        super(ownerId, 192, "Ruination Wurm", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{4}{R}{G}");
-        this.expansionSetCode = "GTC";
+    public RuinationWurm(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{4}{R}{G}");
         this.subtype.add("Wurm");
 
         this.power = new MageInt(7);

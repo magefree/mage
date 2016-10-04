@@ -26,18 +26,18 @@
  *  or implied, of BetaSteward_at_googlemail.com.
  */
 
-package mage.sets.alarareborn;
+package mage.cards.f;
 
 import java.util.UUID;
 
 import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.EntersBattlefieldTriggeredAbility;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.keyword.FlyingAbility;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.Outcome;
 import mage.filter.FilterPermanent;
 import mage.filter.common.FilterControlledPermanent;
@@ -51,9 +51,8 @@ import mage.players.Player;
  */
 public class FiligreeAngel extends CardImpl {
 
-    public FiligreeAngel (UUID ownerId) {
-        super(ownerId, 6, "Filigree Angel", Rarity.RARE, new CardType[]{CardType.ARTIFACT, CardType.CREATURE}, "{5}{W}{W}{U}");
-        this.expansionSetCode = "ARB";
+    public FiligreeAngel (UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.ARTIFACT,CardType.CREATURE},"{5}{W}{W}{U}");
         this.subtype.add("Angel");
 
 

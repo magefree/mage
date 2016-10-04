@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.shadowmoor;
+package mage.cards.a;
 
 import java.util.Set;
 import java.util.UUID;
@@ -34,11 +34,11 @@ import mage.abilities.Ability;
 import mage.abilities.effects.OneShotEffect;
 import mage.cards.Card;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.cards.Cards;
 import mage.cards.CardsImpl;
 import mage.constants.CardType;
 import mage.constants.Outcome;
-import mage.constants.Rarity;
 import mage.constants.Zone;
 import mage.filter.FilterCard;
 import mage.filter.common.FilterControlledCreaturePermanent;
@@ -54,9 +54,8 @@ import mage.target.TargetCard;
  */
 public class AdviceFromTheFae extends CardImpl {
 
-    public AdviceFromTheFae(UUID ownerId) {
-        super(ownerId, 28, "Advice from the Fae", Rarity.UNCOMMON, new CardType[]{CardType.SORCERY}, "{2/U}{2/U}{2/U}");
-        this.expansionSetCode = "SHM";
+    public AdviceFromTheFae(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{2/U}{2/U}{2/U}");
 
         // <i>({2U} can be paid with any two mana or with {U}. This card's converted mana cost is 6.)</i>
         // Look at the top five cards of your library. If you control more creatures than each other player, put two of those cards into your hand. Otherwise, put one of them into your hand. Then put the rest on the bottom of your library in any order.

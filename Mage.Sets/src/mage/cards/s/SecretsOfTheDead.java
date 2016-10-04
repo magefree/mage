@@ -25,15 +25,15 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.darkascension;
+package mage.cards.s;
 
 import java.util.UUID;
 import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.constants.Zone;
 import mage.abilities.common.SpellCastControllerTriggeredAbility;
 import mage.abilities.effects.common.DrawCardSourceControllerEffect;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.filter.FilterSpell;
 import mage.filter.predicate.Predicate;
 import mage.game.Game;
@@ -51,9 +51,8 @@ public class SecretsOfTheDead extends CardImpl {
         filter.add(new SpellZonePredicate(Zone.GRAVEYARD));
     }
 
-    public SecretsOfTheDead(UUID ownerId) {
-        super(ownerId, 48, "Secrets of the Dead", Rarity.UNCOMMON, new CardType[]{CardType.ENCHANTMENT}, "{2}{U}");
-        this.expansionSetCode = "DKA";
+    public SecretsOfTheDead(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.ENCHANTMENT},"{2}{U}");
 
 
         // Whenever you cast a spell from your graveyard, draw a card.

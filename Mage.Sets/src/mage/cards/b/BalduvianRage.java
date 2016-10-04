@@ -25,14 +25,14 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.coldsnap;
+package mage.cards.b;
 
 import java.util.UUID;
 
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Duration;
-import mage.constants.Rarity;
 import mage.abilities.dynamicvalue.common.ManacostVariableValue;
 import mage.abilities.dynamicvalue.common.StaticValue;
 import mage.abilities.effects.common.continuous.BoostTargetEffect;
@@ -49,9 +49,8 @@ import mage.filter.common.FilterAttackingCreature;
  */
 public class BalduvianRage extends CardImpl {
 
-    public BalduvianRage(UUID ownerId) {
-        super(ownerId, 76, "Balduvian Rage", Rarity.UNCOMMON, new CardType[]{CardType.INSTANT}, "{X}{R}");
-        this.expansionSetCode = "CSP";
+    public BalduvianRage(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.INSTANT},"{X}{R}");
 
         // Target attacking creature gets +X/+0 until end of turn.
         this.getSpellAbility().addEffect(new BoostTargetEffect(new ManacostVariableValue(), new StaticValue(0), Duration.EndOfTurn));

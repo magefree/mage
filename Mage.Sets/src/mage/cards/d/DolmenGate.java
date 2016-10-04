@@ -25,15 +25,15 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.lorwyn;
+package mage.cards.d;
 
 import java.util.UUID;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.effects.common.PreventAllDamageToAllEffect;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Duration;
-import mage.constants.Rarity;
 import mage.constants.Zone;
 import mage.filter.common.FilterControlledCreatureInPlay;
 import mage.filter.predicate.permanent.AttackingPredicate;
@@ -50,9 +50,8 @@ public class DolmenGate extends CardImpl {
         filter.getCreatureFilter().add(new AttackingPredicate());
     }
 
-    public DolmenGate(UUID ownerId) {
-        super(ownerId, 256, "Dolmen Gate", Rarity.RARE, new CardType[]{CardType.ARTIFACT}, "{2}");
-        this.expansionSetCode = "LRW";
+    public DolmenGate(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.ARTIFACT},"{2}");
 
         // Prevent all combat damage that would be dealt to attacking creatures you control.
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new PreventAllDamageToAllEffect(Duration.WhileOnBattlefield, filter, true)));

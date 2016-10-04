@@ -25,15 +25,15 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.journeyintonyx;
+package mage.cards.e;
 
 import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.abilityword.ConstellationAbility;
 import mage.abilities.effects.common.DrawCardSourceControllerEffect;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.Rarity;
 
 /**
  *
@@ -41,9 +41,8 @@ import mage.constants.Rarity;
  */
 public class EidolonOfBlossoms extends CardImpl {
 
-    public EidolonOfBlossoms(UUID ownerId) {
-        super(ownerId, 122, "Eidolon of Blossoms", Rarity.RARE, new CardType[]{CardType.ENCHANTMENT, CardType.CREATURE}, "{2}{G}{G}");
-        this.expansionSetCode = "JOU";
+    public EidolonOfBlossoms(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.ENCHANTMENT,CardType.CREATURE},"{2}{G}{G}");
         this.subtype.add("Spirit");
 
         this.power = new MageInt(2);

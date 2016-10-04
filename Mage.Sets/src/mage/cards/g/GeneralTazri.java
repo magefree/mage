@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.oathofthegatewatch;
+package mage.cards.g;
 
 import java.util.UUID;
 import mage.MageInt;
@@ -39,9 +39,9 @@ import mage.abilities.effects.Effect;
 import mage.abilities.effects.common.continuous.BoostControlledEffect;
 import mage.abilities.effects.common.search.SearchLibraryPutInHandEffect;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Duration;
-import mage.constants.Rarity;
 import mage.constants.Zone;
 import mage.filter.common.FilterCreatureCard;
 import mage.filter.common.FilterCreaturePermanent;
@@ -62,9 +62,8 @@ public class GeneralTazri extends CardImpl {
         filter.add(new SubtypePredicate("Ally"));
     }
 
-    public GeneralTazri(UUID ownerId) {
-        super(ownerId, 19, "General Tazri", Rarity.MYTHIC, new CardType[]{CardType.CREATURE}, "{4}{W}");
-        this.expansionSetCode = "OGW";
+    public GeneralTazri(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{4}{W}");
         this.supertype.add("Legendary");
         this.subtype.add("Human");
         this.subtype.add("Ally");

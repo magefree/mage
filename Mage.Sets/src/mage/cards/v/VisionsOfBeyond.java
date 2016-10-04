@@ -25,15 +25,15 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.magic2012;
+package mage.cards.v;
 
 import java.util.UUID;
 
 import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.abilities.Ability;
 import mage.abilities.effects.OneShotEffect;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.Outcome;
 import mage.game.Game;
 import mage.players.Player;
@@ -44,9 +44,8 @@ import mage.players.Player;
  */
 public class VisionsOfBeyond extends CardImpl {
 
-    public VisionsOfBeyond(UUID ownerId) {
-        super(ownerId, 80, "Visions of Beyond", Rarity.RARE, new CardType[]{CardType.INSTANT}, "{U}");
-        this.expansionSetCode = "M12";
+    public VisionsOfBeyond(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.INSTANT},"{U}");
 
 
         // Draw a card. If a graveyard has twenty or more cards in it, draw three cards instead.

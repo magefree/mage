@@ -25,14 +25,14 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.commander;
+package mage.cards.r;
 
 import java.util.UUID;
 import mage.abilities.common.AttacksAllTriggeredAbility;
 import mage.abilities.effects.common.GainLifeEffect;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.Rarity;
 
 /**
  *
@@ -40,9 +40,8 @@ import mage.constants.Rarity;
  */
 public class RighteousCause extends CardImpl {
 
-    public RighteousCause(UUID ownerId) {
-        super(ownerId, 29, "Righteous Cause", Rarity.UNCOMMON, new CardType[]{CardType.ENCHANTMENT}, "{3}{W}{W}");
-        this.expansionSetCode = "CMD";
+    public RighteousCause(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.ENCHANTMENT},"{3}{W}{W}");
 
         // Whenever a creature attacks, you gain 1 life.
         this.addAbility(new AttacksAllTriggeredAbility(new GainLifeEffect(1), false));

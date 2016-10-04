@@ -25,15 +25,15 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.dissension;
+package mage.cards.p;
 
 import java.util.UUID;
 import mage.abilities.costs.mana.ManaCostsImpl;
 import mage.abilities.effects.common.ReturnFromGraveyardToBattlefieldTargetEffect;
 import mage.abilities.keyword.ForecastAbility;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.filter.Filter;
 import mage.filter.common.FilterCreatureCard;
 import mage.filter.predicate.mageobject.ConvertedManaCostPredicate;
@@ -51,9 +51,8 @@ public class ProclamationOfRebirth extends CardImpl {
         filter1.add(new ConvertedManaCostPredicate(Filter.ComparisonType.LessThan, 2));
         filter3.add(new ConvertedManaCostPredicate(Filter.ComparisonType.LessThan, 2));
     }
-    public ProclamationOfRebirth(UUID ownerId) {
-        super(ownerId, 15, "Proclamation of Rebirth", Rarity.RARE, new CardType[]{CardType.SORCERY}, "{2}{W}");
-        this.expansionSetCode = "DIS";
+    public ProclamationOfRebirth(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{2}{W}");
 
         // Return up to three target creature cards with converted mana cost 1 or less from your graveyard to the battlefield.
         this.getSpellAbility().addTarget(new TargetCardInYourGraveyard(0,3,filter3));

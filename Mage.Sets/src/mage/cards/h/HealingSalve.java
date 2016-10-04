@@ -25,16 +25,16 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.seventhedition;
+package mage.cards.h;
 
 import java.util.UUID;
 
 import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.abilities.Mode;
 import mage.abilities.effects.common.GainLifeTargetEffect;
 import mage.abilities.effects.common.PreventDamageToTargetEffect;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.Duration;
 import mage.target.TargetPlayer;
 import mage.target.common.TargetCreatureOrPlayer;
@@ -45,9 +45,8 @@ import mage.target.common.TargetCreatureOrPlayer;
  */
 public class HealingSalve extends CardImpl {
 
-    public HealingSalve(UUID ownerId) {
-        super(ownerId, 18, "Healing Salve", Rarity.COMMON, new CardType[]{CardType.INSTANT}, "{W}");
-        this.expansionSetCode = "7ED";
+    public HealingSalve(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.INSTANT},"{W}");
 
 
         // Choose one - Target player gains 3 life; or prevent the next 3 damage that would be dealt to target creature or player this turn.

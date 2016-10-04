@@ -26,7 +26,7 @@
 * or implied, of BetaSteward_at_googlemail.com.
 */
 
-package mage.sets.returntoravnica;
+package mage.cards.t;
 
 import java.util.UUID;
 import mage.MageInt;
@@ -39,9 +39,9 @@ import mage.abilities.effects.Effect;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.PopulateEffect;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Outcome;
-import mage.constants.Rarity;
 import mage.constants.Zone;
 import mage.game.Game;
 import mage.game.events.GameEvent;
@@ -55,9 +55,8 @@ import mage.players.Player;
  */
 public class TrostaniSelesnyasVoice extends CardImpl {
 
-    public TrostaniSelesnyasVoice(UUID ownerId) {
-        super(ownerId, 206, "Trostani, Selesnya's Voice", Rarity.MYTHIC, new CardType[]{CardType.CREATURE}, "{G}{G}{W}{W}");
-        this.expansionSetCode = "RTR";
+    public TrostaniSelesnyasVoice(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{G}{G}{W}{W}");
         this.supertype.add("Legendary");
         this.subtype.add("Dryad");
 

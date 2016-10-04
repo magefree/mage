@@ -25,13 +25,14 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.urzassaga;
+package mage.cards.w;
 
 import mage.constants.*;
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.effects.ReplacementEffectImpl;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.filter.common.FilterControlledCreaturePermanent;
 import mage.game.Game;
 import mage.game.events.GameEvent;
@@ -44,9 +45,8 @@ import java.util.UUID;
  */
 public class Worship extends CardImpl {
 
-    public Worship(UUID ownerId) {
-        super(ownerId, 57, "Worship", Rarity.RARE, new CardType[]{CardType.ENCHANTMENT}, "{3}{W}");
-        this.expansionSetCode = "USG";
+    public Worship(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.ENCHANTMENT},"{3}{W}");
 
         // If you control a creature, damage that would reduce your life total to less than 1 reduces it to 1 instead.
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new WorshipReplacementEffect()));

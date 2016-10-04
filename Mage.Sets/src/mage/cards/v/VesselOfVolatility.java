@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.shadowsoverinnistrad;
+package mage.cards.v;
 
 import java.util.UUID;
 import mage.Mana;
@@ -36,8 +36,8 @@ import mage.abilities.costs.mana.ManaCostsImpl;
 import mage.abilities.effects.common.BasicManaEffect;
 import mage.abilities.mana.SimpleManaAbility;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.constants.Zone;
 
 /**
@@ -46,9 +46,8 @@ import mage.constants.Zone;
  */
 public class VesselOfVolatility extends CardImpl {
 
-    public VesselOfVolatility(UUID ownerId) {
-        super(ownerId, 189, "Vessel of Volatility", Rarity.COMMON, new CardType[]{CardType.ENCHANTMENT}, "{1}{R}");
-        this.expansionSetCode = "SOI";
+    public VesselOfVolatility(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.ENCHANTMENT},"{1}{R}");
 
         // {1}{R}, Sacrifice Vessel of Volatility: Add {R}{R}{R}{R} to your mana pool.
         Ability ability = new SimpleManaAbility(Zone.BATTLEFIELD, Mana.RedMana(4), new ManaCostsImpl("{1}{R}"));

@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.urzasdestiny;
+package mage.cards.p;
 
 import java.util.UUID;
 import mage.MageInt;
@@ -34,8 +34,8 @@ import mage.abilities.dynamicvalue.common.StaticValue;
 import mage.abilities.effects.common.SacrificeEffect;
 import mage.abilities.keyword.TrampleAbility;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.constants.Zone;
 import mage.filter.FilterPermanent;
 import mage.game.Game;
@@ -49,9 +49,8 @@ import mage.target.targetpointer.FixedTarget;
  */
 public class PhyrexianNegator extends CardImpl {
 
-    public PhyrexianNegator(UUID ownerId) {
-        super(ownerId, 65, "Phyrexian Negator", Rarity.RARE, new CardType[]{CardType.CREATURE}, "{2}{B}");
-        this.expansionSetCode = "UDS";
+    public PhyrexianNegator(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{2}{B}");
         this.subtype.add("Horror");
 
         this.power = new MageInt(5);

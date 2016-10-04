@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.mirrodin;
+package mage.cards.l;
 
 import java.util.UUID;
 import mage.MageInt;
@@ -37,10 +37,10 @@ import mage.abilities.costs.mana.GenericManaCost;
 import mage.abilities.effects.common.DrawCardSourceControllerEffect;
 import mage.abilities.effects.common.continuous.BecomesCreatureTargetEffect;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.ColoredManaSymbol;
 import mage.constants.Duration;
-import mage.constants.Rarity;
 import mage.constants.Zone;
 import mage.game.permanent.token.Token;
 import mage.target.common.TargetLandPermanent;
@@ -51,9 +51,8 @@ import mage.target.common.TargetLandPermanent;
  */
 public class LifesparkSpellbomb extends CardImpl {
 
-    public LifesparkSpellbomb(UUID ownerId) {
-        super(ownerId, 197, "Lifespark Spellbomb", Rarity.COMMON, new CardType[]{CardType.ARTIFACT}, "{1}");
-        this.expansionSetCode = "MRD";
+    public LifesparkSpellbomb(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.ARTIFACT},"{1}");
 
         // {G}, Sacrifice Lifespark Spellbomb: Until end of turn, target land becomes a 3/3 creature that's still a land.
         Ability firstAbility = new SimpleActivatedAbility(Zone.BATTLEFIELD, new BecomesCreatureTargetEffect(new LifesparkSpellbombToken(), false, true, Duration.EndOfTurn), new ColoredManaCost(ColoredManaSymbol.G));

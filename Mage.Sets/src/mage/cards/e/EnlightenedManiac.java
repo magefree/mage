@@ -25,15 +25,15 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.eldritchmoon;
+package mage.cards.e;
 
 import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.common.EntersBattlefieldTriggeredAbility;
 import mage.abilities.effects.common.CreateTokenEffect;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.game.permanent.token.EldraziHorrorToken;
 
 /**
@@ -42,9 +42,8 @@ import mage.game.permanent.token.EldraziHorrorToken;
  */
 public class EnlightenedManiac extends CardImpl {
 
-    public EnlightenedManiac(UUID ownerId) {
-        super(ownerId, 58, "Enlightened Maniac", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{3}{U}");
-        this.expansionSetCode = "EMN";
+    public EnlightenedManiac(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{3}{U}");
         this.subtype.add("Human");
         this.power = new MageInt(0);
         this.toughness = new MageInt(2);

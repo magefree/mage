@@ -25,18 +25,18 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.ravnica;
+package mage.cards.s;
 
 import java.util.UUID;
 
 import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleTriggeredAbility;
 import mage.abilities.costs.mana.GenericManaCost;
 import mage.abilities.effects.common.DamageTargetEffect;
 import mage.abilities.effects.common.DoIfCostPaid;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.Zone;
 import mage.game.events.GameEvent;
 import mage.target.common.TargetCreatureOrPlayer;
@@ -47,9 +47,8 @@ import mage.target.common.TargetCreatureOrPlayer;
  */
 public class SearingMeditation extends CardImpl {
 
-    public SearingMeditation(UUID ownerId) {
-        super(ownerId, 226, "Searing Meditation", Rarity.RARE, new CardType[]{CardType.ENCHANTMENT}, "{1}{R}{W}");
-        this.expansionSetCode = "RAV";
+    public SearingMeditation(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.ENCHANTMENT},"{1}{R}{W}");
 
 
         // Whenever you gain life, you may pay {2}. If you do, Searing Meditation deals 2 damage to target creature or player.

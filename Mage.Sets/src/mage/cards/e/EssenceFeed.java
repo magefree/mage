@@ -26,15 +26,15 @@
  *  or implied, of BetaSteward_at_googlemail.com.
  */
 
-package mage.sets.riseoftheeldrazi;
+package mage.cards.e;
 
 import java.util.UUID;
 import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.abilities.effects.common.CreateTokenEffect;
 import mage.abilities.effects.common.GainLifeEffect;
 import mage.abilities.effects.common.LoseLifeTargetEffect;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.game.permanent.token.EldraziSpawnToken;
 import mage.target.TargetPlayer;
 
@@ -44,9 +44,8 @@ import mage.target.TargetPlayer;
  */
 public class EssenceFeed extends CardImpl {
 
-    public EssenceFeed (UUID ownerId) {
-        super(ownerId, 110, "Essence Feed", Rarity.COMMON, new CardType[]{CardType.SORCERY}, "{5}{B}");
-        this.expansionSetCode = "ROE";
+    public EssenceFeed (UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{5}{B}");
 
         this.getSpellAbility().addEffect(new LoseLifeTargetEffect(3));
         this.getSpellAbility().addEffect(new GainLifeEffect(3));

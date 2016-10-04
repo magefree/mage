@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.oathofthegatewatch;
+package mage.cards.b;
 
 import java.util.UUID;
 import mage.MageInt;
@@ -33,8 +33,8 @@ import mage.abilities.Ability;
 import mage.abilities.common.EntersBattlefieldTriggeredAbility;
 import mage.abilities.effects.common.ReturnFromGraveyardToHandTargetEffect;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.filter.common.FilterCreatureCard;
 import mage.target.common.TargetCardInYourGraveyard;
 
@@ -44,9 +44,8 @@ import mage.target.common.TargetCardInYourGraveyard;
  */
 public class BalothNull extends CardImpl {
 
-    public BalothNull(UUID ownerId) {
-        super(ownerId, 152, "Baloth Null", Rarity.UNCOMMON, new CardType[]{CardType.CREATURE}, "{4}{B}{G}");
-        this.expansionSetCode = "OGW";
+    public BalothNull(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{4}{B}{G}");
         this.subtype.add("Zombie");
         this.subtype.add("Beast");
         this.power = new MageInt(4);

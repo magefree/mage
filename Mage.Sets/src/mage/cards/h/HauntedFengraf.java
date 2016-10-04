@@ -25,14 +25,13 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.darkascension;
+package mage.cards.h;
 
 import java.util.Random;
 import java.util.UUID;
 
 import mage.constants.CardType;
 import mage.constants.Outcome;
-import mage.constants.Rarity;
 import mage.constants.Zone;
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleActivatedAbility;
@@ -43,6 +42,7 @@ import mage.abilities.effects.OneShotEffect;
 import mage.abilities.mana.ColorlessManaAbility;
 import mage.cards.Card;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.filter.common.FilterCreatureCard;
 import mage.game.Game;
 import mage.players.Player;
@@ -54,9 +54,8 @@ import mage.util.RandomUtil;
  */
 public class HauntedFengraf extends CardImpl {
 
-    public HauntedFengraf(UUID ownerId) {
-        super(ownerId, 157, "Haunted Fengraf", Rarity.COMMON, new CardType[]{CardType.LAND}, "");
-        this.expansionSetCode = "DKA";
+    public HauntedFengraf(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.LAND},"");
 
         // {tap}: Add {C} to your mana pool.
         this.addAbility(new ColorlessManaAbility());

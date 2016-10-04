@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.timespiral;
+package mage.cards.m;
 
 import java.util.UUID;
 import mage.abilities.Ability;
@@ -34,8 +34,8 @@ import mage.abilities.dynamicvalue.common.ManacostVariableValue;
 import mage.abilities.effects.common.DestroyTargetEffect;
 import mage.abilities.effects.common.GainLifeEffect;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.filter.Filter;
 import mage.filter.common.FilterArtifactOrEnchantmentPermanent;
 import mage.filter.predicate.mageobject.ConvertedManaCostPredicate;
@@ -48,9 +48,8 @@ import mage.target.TargetPermanent;
  */
 public class Molder extends CardImpl {
 
-    public Molder(UUID ownerId) {
-        super(ownerId, 206, "Molder", Rarity.COMMON, new CardType[]{CardType.INSTANT}, "{X}{G}");
-        this.expansionSetCode = "TSP";
+    public Molder(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.INSTANT},"{X}{G}");
 
         // Destroy target artifact or enchantment with converted mana cost X. It can't be regenerated. You gain X life.
         this.getSpellAbility().addEffect(new DestroyTargetEffect());

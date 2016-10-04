@@ -25,13 +25,12 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.timespiral;
+package mage.cards.s;
 
 import java.util.UUID;
 import mage.constants.CardType;
 import mage.constants.Duration;
 import mage.constants.Outcome;
-import mage.constants.Rarity;
 import mage.constants.Zone;
 import mage.MageInt;
 import mage.abilities.Ability;
@@ -40,6 +39,7 @@ import mage.abilities.effects.ContinuousRuleModifyingEffectImpl;
 import mage.abilities.keyword.FlyingAbility;
 import mage.abilities.keyword.VigilanceAbility;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.game.Game;
 import mage.game.events.GameEvent;
 import mage.game.events.GameEvent.EventType;
@@ -51,9 +51,8 @@ import mage.players.Player;
  */
 public class SerraAvenger extends CardImpl {
 
-    public SerraAvenger(UUID ownerId) {
-        super(ownerId, 40, "Serra Avenger", Rarity.RARE, new CardType[]{CardType.CREATURE}, "{W}{W}");
-        this.expansionSetCode = "TSP";
+    public SerraAvenger(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{W}{W}");
         this.subtype.add("Angel");
 
         this.power = new MageInt(3);

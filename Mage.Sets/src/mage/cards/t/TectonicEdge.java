@@ -26,7 +26,7 @@
  *  or implied, of BetaSteward_at_googlemail.com.
  */
 
-package mage.sets.worldwake;
+package mage.cards.t;
 
 import java.util.UUID;
 import mage.abilities.Ability;
@@ -40,8 +40,8 @@ import mage.abilities.costs.mana.ManaCostsImpl;
 import mage.abilities.effects.common.DestroyTargetEffect;
 import mage.abilities.mana.ColorlessManaAbility;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.constants.Zone;
 import mage.filter.common.FilterLandPermanent;
 import mage.game.Game;
@@ -53,9 +53,8 @@ import mage.target.common.TargetNonBasicLandPermanent;
  */
 public class TectonicEdge extends CardImpl {
 
-    public TectonicEdge(UUID ownerId) {
-        super(ownerId, 145, "Tectonic Edge", Rarity.UNCOMMON, new CardType[]{CardType.LAND}, null);
-        this.expansionSetCode = "WWK";
+    public TectonicEdge(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.LAND},null);
 
         // Tap: Add 1 to your mana pool.
         this.addAbility(new ColorlessManaAbility());

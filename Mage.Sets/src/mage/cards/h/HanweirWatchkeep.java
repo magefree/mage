@@ -25,10 +25,9 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.innistrad;
+package mage.cards.h;
 
 import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.MageInt;
 import mage.abilities.TriggeredAbility;
 import mage.abilities.common.BeginningOfUpkeepTriggeredAbility;
@@ -37,7 +36,9 @@ import mage.abilities.decorator.ConditionalTriggeredAbility;
 import mage.abilities.effects.common.TransformSourceEffect;
 import mage.abilities.keyword.DefenderAbility;
 import mage.abilities.keyword.TransformAbility;
+import mage.cards.b.BaneOfHanweir;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.TargetController;
 
 import java.util.UUID;
@@ -47,15 +48,14 @@ import java.util.UUID;
  */
 public class HanweirWatchkeep extends CardImpl {
 
-    public HanweirWatchkeep(UUID ownerId) {
-        super(ownerId, 145, "Hanweir Watchkeep", Rarity.UNCOMMON, new CardType[]{CardType.CREATURE}, "{2}{R}");
-        this.expansionSetCode = "ISD";
+    public HanweirWatchkeep(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{2}{R}");
         this.subtype.add("Human");
         this.subtype.add("Warrior");
         this.subtype.add("Werewolf");
 
         this.transformable = true;
-        this.secondSideCard = new BaneOfHanweir(ownerId);
+        this.secondSideCardClazz = BaneOfHanweir.class;
 
         this.power = new MageInt(1);
         this.toughness = new MageInt(5);

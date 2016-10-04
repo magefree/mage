@@ -25,12 +25,11 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.championsofkamigawa;
+package mage.cards.g;
 
 import java.util.UUID;
 
 import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.MageInt;
 import mage.abilities.common.BeginningOfUpkeepTriggeredAbility;
 import mage.abilities.condition.common.PermanentsOnTheBattlefieldCondition;
@@ -38,6 +37,7 @@ import mage.abilities.decorator.ConditionalOneShotEffect;
 import mage.abilities.effects.common.discard.DiscardControllerEffect;
 import mage.abilities.keyword.TrampleAbility;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.TargetController;
 import mage.filter.FilterPermanent;
 import mage.filter.common.FilterControlledCreaturePermanent;
@@ -55,9 +55,8 @@ public class GutwrencherOni extends CardImpl {
         filter.add(new SubtypePredicate("Ogre"));
     }
 
-    public GutwrencherOni(UUID ownerId) {
-        super(ownerId, 113, "Gutwrencher Oni", Rarity.UNCOMMON, new CardType[]{CardType.CREATURE}, "{3}{B}{B}");
-        this.expansionSetCode = "CHK";
+    public GutwrencherOni(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{3}{B}{B}");
         this.subtype.add("Demon");
         this.subtype.add("Spirit");
 

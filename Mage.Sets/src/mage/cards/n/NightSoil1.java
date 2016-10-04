@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.fallenempires;
+package mage.cards.n;
 
 import java.util.UUID;
 import mage.abilities.Ability;
@@ -34,8 +34,8 @@ import mage.abilities.costs.common.ExileFromGraveCost;
 import mage.abilities.costs.mana.GenericManaCost;
 import mage.abilities.effects.common.CreateTokenEffect;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.constants.Zone;
 import mage.filter.common.FilterCreatureCard;
 import mage.game.permanent.token.SaprolingToken;
@@ -47,9 +47,8 @@ import mage.target.common.TargetCardInASingleGraveyard;
  */
 public class NightSoil1 extends CardImpl {
 
-    public NightSoil1(UUID ownerId) {
-        super(ownerId, 80, "Night Soil", Rarity.COMMON, new CardType[]{CardType.ENCHANTMENT}, "{G}{G}");
-        this.expansionSetCode = "FEM";
+    public NightSoil1(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.ENCHANTMENT},"{G}{G}");
 
 
         // {1}, Exile two creature cards from a single graveyard: Put a 1/1 green Saproling creature token onto the battlefield.

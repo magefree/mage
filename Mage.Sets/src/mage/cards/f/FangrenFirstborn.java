@@ -25,15 +25,15 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.darksteel;
+package mage.cards.f;
 
 import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.common.AttacksTriggeredAbility;
 import mage.abilities.effects.common.counter.AddCountersAllEffect;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.counters.CounterType;
 import mage.filter.common.FilterAttackingCreature;
 
@@ -43,9 +43,8 @@ import mage.filter.common.FilterAttackingCreature;
  */
 public class FangrenFirstborn extends CardImpl {
 
-    public FangrenFirstborn(UUID ownerId) {
-        super(ownerId, 75, "Fangren Firstborn", Rarity.RARE, new CardType[]{CardType.CREATURE}, "{1}{G}{G}{G}");
-        this.expansionSetCode = "DST";
+    public FangrenFirstborn(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{1}{G}{G}{G}");
         this.subtype.add("Beast");
 
         this.power = new MageInt(4);

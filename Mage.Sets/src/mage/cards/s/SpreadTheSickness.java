@@ -26,14 +26,14 @@
  *  or implied, of BetaSteward_at_googlemail.com.
  */
 
-package mage.sets.mirrodinbesieged;
+package mage.cards.s;
 
 import java.util.UUID;
 import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.abilities.effects.common.DestroyTargetEffect;
 import mage.abilities.effects.common.counter.ProliferateEffect;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.target.common.TargetCreaturePermanent;
 
 /**
@@ -42,9 +42,8 @@ import mage.target.common.TargetCreaturePermanent;
  */
 public class SpreadTheSickness extends CardImpl {
 
-    public SpreadTheSickness (UUID ownerId) {
-        super(ownerId, 56, "Spread the Sickness", Rarity.COMMON, new CardType[]{CardType.SORCERY}, "{4}{B}");
-        this.expansionSetCode = "MBS";
+    public SpreadTheSickness (UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{4}{B}");
 
         this.getSpellAbility().addEffect(new DestroyTargetEffect());
         this.getSpellAbility().addEffect(new ProliferateEffect());

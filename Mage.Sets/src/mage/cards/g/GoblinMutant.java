@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.iceage;
+package mage.cards.g;
 
 import java.util.UUID;
 import mage.MageInt;
@@ -35,8 +35,8 @@ import mage.abilities.effects.common.combat.CantAttackIfDefenderControlsPermanen
 import mage.abilities.effects.common.combat.CantBlockCreaturesSourceEffect;
 import mage.abilities.keyword.TrampleAbility;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.constants.Zone;
 import mage.filter.Filter;
 import mage.filter.common.FilterCreaturePermanent;
@@ -59,9 +59,8 @@ public class GoblinMutant extends CardImpl {
         filter2.add(new PowerPredicate(Filter.ComparisonType.GreaterThan, 2));
     }
 
-    public GoblinMutant(UUID ownerId) {
-        super(ownerId, 188, "Goblin Mutant", Rarity.UNCOMMON, new CardType[]{CardType.CREATURE}, "{2}{R}{R}");
-        this.expansionSetCode = "ICE";
+    public GoblinMutant(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{2}{R}{R}");
         this.subtype.add("Goblin");
         this.subtype.add("Mutant");
 

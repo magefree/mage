@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.torment;
+package mage.cards.p;
 
 import java.util.UUID;
 import mage.MageInt;
@@ -39,9 +39,9 @@ import mage.abilities.effects.common.ExileTargetForSourceEffect;
 import mage.abilities.effects.common.ReturnFromExileForSourceEffect;
 import mage.abilities.effects.common.continuous.BoostSourceEffect;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Duration;
-import mage.constants.Rarity;
 import mage.constants.Zone;
 import mage.target.common.TargetLandPermanent;
 
@@ -51,9 +51,8 @@ import mage.target.common.TargetLandPermanent;
  */
 public class Petradon extends CardImpl {
 
-    public Petradon(UUID ownerId) {
-        super(ownerId, 108, "Petradon", Rarity.RARE, new CardType[]{CardType.CREATURE}, "{6}{R}{R}");
-        this.expansionSetCode = "TOR";
+    public Petradon(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{6}{R}{R}");
         this.subtype.add("Nightmare");
         this.subtype.add("Beast");
         this.power = new MageInt(5);

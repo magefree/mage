@@ -25,15 +25,15 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.zendikar;
+package mage.cards.r;
 
 import java.util.UUID;
 import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.MageInt;
 import mage.abilities.common.DealsDamageToOpponentTriggeredAbility;
 import mage.abilities.effects.common.SacrificeControllerEffect;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.filter.common.FilterLandPermanent;
 
 /**
@@ -42,9 +42,8 @@ import mage.filter.common.FilterLandPermanent;
  */
 public class RuinousMinotaur extends CardImpl {
 
-    public RuinousMinotaur(UUID ownerId) {
-        super(ownerId, 145, "Ruinous Minotaur", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{1}{R}{R}");
-        this.expansionSetCode = "ZEN";
+    public RuinousMinotaur(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{1}{R}{R}");
         this.subtype.add("Minotaur");
         this.subtype.add("Warrior");
 

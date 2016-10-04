@@ -25,14 +25,14 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.bornofthegods;
+package mage.cards.m;
 
 import java.util.UUID;
 import mage.abilities.effects.common.continuous.BoostTargetEffect;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Duration;
-import mage.constants.Rarity;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.target.common.TargetCreaturePermanent;
 
@@ -42,9 +42,8 @@ import mage.target.common.TargetCreaturePermanent;
  */
 public class MischiefAndMayhem extends CardImpl {
 
-    public MischiefAndMayhem(UUID ownerId) {
-        super(ownerId, 126, "Mischief and Mayhem", Rarity.UNCOMMON, new CardType[]{CardType.SORCERY}, "{4}{G}");
-        this.expansionSetCode = "BNG";
+    public MischiefAndMayhem(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{4}{G}");
 
 
         // Up to two target creatures each get +4/+4 until end of turn.

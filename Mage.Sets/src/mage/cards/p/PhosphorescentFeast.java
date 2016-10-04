@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.eventide;
+package mage.cards.p;
 
 import java.util.UUID;
 import mage.abilities.Ability;
@@ -33,11 +33,11 @@ import mage.abilities.effects.Effect;
 import mage.abilities.effects.OneShotEffect;
 import mage.cards.Card;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.cards.Cards;
 import mage.cards.CardsImpl;
 import mage.constants.CardType;
 import mage.constants.Outcome;
-import mage.constants.Rarity;
 import mage.filter.FilterCard;
 import mage.game.Game;
 import mage.players.Player;
@@ -50,9 +50,8 @@ import mage.target.common.TargetCardInHand;
  */
 public class PhosphorescentFeast extends CardImpl {
 
-    public PhosphorescentFeast(UUID ownerId) {
-        super(ownerId, 72, "Phosphorescent Feast", Rarity.UNCOMMON, new CardType[]{CardType.SORCERY}, "{2}{G}{G}{G}");
-        this.expansionSetCode = "EVE";
+    public PhosphorescentFeast(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{2}{G}{G}{G}");
 
 
         // Chroma - Reveal any number of cards in your hand. You gain 2 life for each green mana symbol in those cards' mana costs.

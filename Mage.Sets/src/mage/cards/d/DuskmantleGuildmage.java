@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.gatecrash;
+package mage.cards.d;
 
 import java.util.UUID;
 import mage.MageInt;
@@ -39,9 +39,9 @@ import mage.abilities.effects.common.LoseLifeTargetEffect;
 import mage.abilities.effects.common.PutLibraryIntoGraveTargetEffect;
 import mage.cards.Card;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Duration;
-import mage.constants.Rarity;
 import mage.constants.Zone;
 import mage.game.Game;
 import mage.game.events.GameEvent;
@@ -56,9 +56,8 @@ import mage.target.targetpointer.FixedTarget;
  */
 public class DuskmantleGuildmage extends CardImpl {
 
-    public DuskmantleGuildmage(UUID ownerId) {
-        super(ownerId, 158, "Duskmantle Guildmage", Rarity.UNCOMMON, new CardType[]{CardType.CREATURE}, "{U}{B}");
-        this.expansionSetCode = "GTC";
+    public DuskmantleGuildmage(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{U}{B}");
         this.subtype.add("Human");
         this.subtype.add("Wizard");
 

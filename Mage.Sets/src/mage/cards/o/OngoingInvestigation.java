@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.shadowsoverinnistrad;
+package mage.cards.o;
 
 import java.util.HashSet;
 import java.util.Set;
@@ -39,8 +39,8 @@ import mage.abilities.effects.Effect;
 import mage.abilities.effects.common.GainLifeEffect;
 import mage.abilities.effects.keyword.InvestigateEffect;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.constants.Zone;
 import mage.filter.common.FilterCreatureCard;
 import mage.game.Game;
@@ -56,9 +56,8 @@ import mage.target.common.TargetCardInYourGraveyard;
  */
 public class OngoingInvestigation extends CardImpl {
 
-    public OngoingInvestigation(UUID ownerId) {
-        super(ownerId, 77, "Ongoing Investigation", Rarity.UNCOMMON, new CardType[]{CardType.ENCHANTMENT}, "{1}{U}");
-        this.expansionSetCode = "SOI";
+    public OngoingInvestigation(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.ENCHANTMENT},"{1}{U}");
 
         // Whenever one or more creatures you control deal combat damage to a player, investigate.
         this.addAbility(new OngoingInvestigationTriggeredAbility());

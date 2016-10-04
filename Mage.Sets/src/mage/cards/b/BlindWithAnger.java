@@ -26,17 +26,17 @@
  *  or implied, of BetaSteward_at_googlemail.com.
  */
 
-package mage.sets.championsofkamigawa;
+package mage.cards.b;
 
 import java.util.UUID;
 
 import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.abilities.effects.common.UntapTargetEffect;
 import mage.abilities.effects.common.continuous.GainAbilityTargetEffect;
 import mage.abilities.effects.common.continuous.GainControlTargetEffect;
 import mage.abilities.keyword.HasteAbility;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.Duration;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.filter.predicate.Predicates;
@@ -55,9 +55,8 @@ public class BlindWithAnger extends CardImpl {
         filter.add(Predicates.not(new SupertypePredicate("Legendary")));
     }
 
-    public BlindWithAnger(UUID ownerId) {
-        super(ownerId, 158, "Blind with Anger", Rarity.UNCOMMON, new CardType[]{CardType.INSTANT}, "{3}{R}");
-        this.expansionSetCode = "CHK";
+    public BlindWithAnger(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.INSTANT},"{3}{R}");
         this.subtype.add("Arcane");
 
         this.getSpellAbility().addEffect(new UntapTargetEffect());

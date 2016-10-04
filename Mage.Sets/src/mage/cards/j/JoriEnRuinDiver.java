@@ -25,15 +25,15 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.oathofthegatewatch;
+package mage.cards.j;
 
 import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.TriggeredAbilityImpl;
 import mage.abilities.effects.common.DrawCardSourceControllerEffect;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.constants.Zone;
 import mage.game.Game;
 import mage.game.events.GameEvent;
@@ -46,9 +46,8 @@ import mage.watchers.common.CastSpellLastTurnWatcher;
  */
 public class JoriEnRuinDiver extends CardImpl {
 
-    public JoriEnRuinDiver(UUID ownerId) {
-        super(ownerId, 155, "Jori En, Ruin Diver", Rarity.RARE, new CardType[]{CardType.CREATURE}, "{1}{U}{R}");
-        this.expansionSetCode = "OGW";
+    public JoriEnRuinDiver(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{1}{U}{R}");
         this.supertype.add("Legendary");
         this.subtype.add("Merfolk");
         this.subtype.add("Wizard");

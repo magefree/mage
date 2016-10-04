@@ -25,16 +25,16 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.ravnica;
+package mage.cards.c;
 
 import java.util.UUID;
 
 import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.abilities.effects.common.LoseLifeTargetControllerEffect;
 import mage.abilities.effects.common.ReturnToHandTargetEffect;
 import mage.abilities.keyword.TransmuteAbility;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.target.TargetPermanent;
 
 /**
@@ -42,9 +42,8 @@ import mage.target.TargetPermanent;
  */
 public class ClutchOfTheUndercity extends CardImpl {
 
-    public ClutchOfTheUndercity(UUID ownerId) {
-        super(ownerId, 197, "Clutch of the Undercity", Rarity.UNCOMMON, new CardType[]{CardType.INSTANT}, "{1}{U}{U}{B}");
-        this.expansionSetCode = "RAV";
+    public ClutchOfTheUndercity(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.INSTANT},"{1}{U}{U}{B}");
 
 
         // Return target permanent to its owner's hand. Its controller loses 3 life.

@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.mirrodinbesieged;
+package mage.cards.s;
 
 import java.util.UUID;
 
@@ -36,6 +36,7 @@ import mage.abilities.effects.common.continuous.AddCardTypeAttachedEffect;
 import mage.abilities.effects.common.continuous.BoostEquippedEffect;
 import mage.abilities.keyword.EquipAbility;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 
 /**
  *
@@ -43,9 +44,8 @@ import mage.cards.CardImpl;
  */
 public class SilverskinArmor extends CardImpl {
 
-    public SilverskinArmor(UUID ownerId) {
-        super(ownerId, 132, "Silverskin Armor", Rarity.UNCOMMON, new CardType[]{CardType.ARTIFACT}, "{2}");
-        this.expansionSetCode = "MBS";
+    public SilverskinArmor(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.ARTIFACT},"{2}");
         this.subtype.add("Equipment");
 
         this.addAbility(new EquipAbility(Outcome.BoostCreature, new ManaCostsImpl("{2}")));

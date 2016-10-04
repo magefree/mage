@@ -25,18 +25,18 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.shardsofalara;
+package mage.cards.t;
 
 import java.util.UUID;
 import mage.constants.CardType;
 import mage.constants.Duration;
-import mage.constants.Rarity;
 import mage.abilities.effects.common.continuous.BoostControlledEffect;
 import mage.abilities.effects.common.continuous.GainAbilityControlledEffect;
 import mage.abilities.keyword.FirstStrikeAbility;
 import mage.abilities.keyword.LifelinkAbility;
 import mage.abilities.keyword.TrampleAbility;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.filter.common.FilterCreaturePermanent;
 
 /**
@@ -46,9 +46,8 @@ import mage.filter.common.FilterCreaturePermanent;
 public class TitanicUltimatum extends CardImpl {
     private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("Creatures");
 
-    public TitanicUltimatum(UUID ownerId) {
-        super(ownerId, 204, "Titanic Ultimatum", Rarity.RARE, new CardType[]{CardType.SORCERY}, "{R}{R}{G}{G}{G}{W}{W}");
-        this.expansionSetCode = "ALA";
+    public TitanicUltimatum(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{R}{R}{G}{G}{G}{W}{W}");
 
 
         // Until end of turn, creatures you control get +5/+5 and gain first strike, lifelink, and trample.

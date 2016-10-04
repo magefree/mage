@@ -28,11 +28,10 @@
  * 
  */
 
-package mage.sets.championsofkamigawa;
+package mage.cards.o;
 
 import mage.constants.CardType;
 import mage.constants.Duration;
-import mage.constants.Rarity;
 import mage.constants.Zone;
 import mage.MageInt;
 import mage.abilities.Ability;
@@ -46,6 +45,7 @@ import mage.abilities.effects.common.CreateTokenEffect;
 import mage.abilities.effects.common.FlipSourceEffect;
 import mage.abilities.effects.common.continuous.BoostTargetEffect;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.filter.common.FilterControlledCreaturePermanent;
 import mage.game.permanent.token.SnakeToken;
 import mage.game.permanent.token.Token;
@@ -59,9 +59,8 @@ import java.util.UUID;
  */
 public class OrochiEggwatcher extends CardImpl {
 
-    public OrochiEggwatcher(UUID ownerId) {
-        super(ownerId, 233, "Orochi Eggwatcher", Rarity.UNCOMMON, new CardType[]{CardType.CREATURE}, "{2}{G}");
-        this.expansionSetCode = "CHK";
+    public OrochiEggwatcher(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{2}{G}");
         this.subtype.add("Snake");
         this.subtype.add("Shaman");
 

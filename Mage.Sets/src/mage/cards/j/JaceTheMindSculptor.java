@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.worldwake;
+package mage.cards.j;
 
 import java.util.UUID;
 
@@ -37,11 +37,11 @@ import mage.abilities.effects.common.BrainstormEffect;
 import mage.abilities.effects.common.ReturnToHandTargetEffect;
 import mage.cards.Card;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.cards.Cards;
 import mage.cards.CardsImpl;
 import mage.constants.CardType;
 import mage.constants.Outcome;
-import mage.constants.Rarity;
 import mage.constants.Zone;
 import mage.game.Game;
 import mage.players.Player;
@@ -53,9 +53,8 @@ import mage.target.common.TargetCreaturePermanent;
  */
 public class JaceTheMindSculptor extends CardImpl {
 
-    public JaceTheMindSculptor(UUID ownerId) {
-        super(ownerId, 31, "Jace, the Mind Sculptor", Rarity.MYTHIC, new CardType[]{CardType.PLANESWALKER}, "{2}{U}{U}");
-        this.expansionSetCode = "WWK";
+    public JaceTheMindSculptor(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.PLANESWALKER},"{2}{U}{U}");
         this.subtype.add("Jace");
 
         this.addAbility(new PlanswalkerEntersWithLoyalityCountersAbility(3));

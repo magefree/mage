@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.ravnica;
+package mage.cards.b;
 
 import java.util.UUID;
 import mage.ObjectColor;
@@ -34,10 +34,10 @@ import mage.abilities.dynamicvalue.DynamicValue;
 import mage.abilities.dynamicvalue.common.ManacostVariableValue;
 import mage.abilities.effects.OneShotEffect;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.AbilityWord;
 import mage.constants.CardType;
 import mage.constants.Outcome;
-import mage.constants.Rarity;
 import mage.filter.FilterPermanent;
 import mage.filter.predicate.mageobject.CardTypePredicate;
 import mage.game.Game;
@@ -51,9 +51,8 @@ import mage.target.common.TargetCreaturePermanent;
  */
 public class Brightflame extends CardImpl {
 
-    public Brightflame(UUID ownerId) {
-        super(ownerId, 194, "Brightflame", Rarity.RARE, new CardType[]{CardType.SORCERY}, "{X}{R}{R}{W}{W}");
-        this.expansionSetCode = "RAV";
+    public Brightflame(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{X}{R}{R}{W}{W}");
 
         // Radiance - Brightflame deals X damage to target creature and each other creature that shares a color with it. You gain life equal to the damage dealt this way.
         this.getSpellAbility().addEffect(new BrightflameEffect(new ManacostVariableValue()));

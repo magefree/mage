@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.onslaught;
+package mage.cards.b;
 
 import java.util.UUID;
 import mage.MageInt;
@@ -36,8 +36,8 @@ import mage.abilities.costs.mana.ManaCostsImpl;
 import mage.abilities.effects.common.SacrificeSourceEffect;
 import mage.abilities.keyword.MorphAbility;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.game.events.GameEvent;
 
 /**
@@ -46,9 +46,8 @@ import mage.game.events.GameEvent;
  */
 public class BlisteringFirecat extends CardImpl {
 
-    public BlisteringFirecat(UUID ownerId) {
-        super(ownerId, 189, "Blistering Firecat", Rarity.RARE, new CardType[]{CardType.CREATURE}, "{1}{R}{R}{R}");
-        this.expansionSetCode = "ONS";
+    public BlisteringFirecat(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{1}{R}{R}{R}");
         this.subtype.add("Elemental");
         this.subtype.add("Cat");
 

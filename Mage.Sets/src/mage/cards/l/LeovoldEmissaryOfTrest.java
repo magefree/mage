@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.conspiracytakethecrown;
+package mage.cards.l;
 
 import java.util.UUID;
 import mage.MageInt;
@@ -35,6 +35,7 @@ import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.effects.ContinuousRuleModifyingEffectImpl;
 import mage.abilities.effects.common.DrawCardSourceControllerEffect;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.*;
 import mage.game.Game;
 import mage.game.events.GameEvent;
@@ -48,9 +49,8 @@ import mage.watchers.common.CardsAmountDrawnThisTurnWatcher;
  */
 public class LeovoldEmissaryOfTrest extends CardImpl {
 
-    public LeovoldEmissaryOfTrest(UUID ownerId) {
-        super(ownerId, 77, "Leovold, Emissary of Trest", Rarity.MYTHIC, new CardType[]{CardType.CREATURE}, "{B}{G}{U}");
-        this.expansionSetCode = "CN2";
+    public LeovoldEmissaryOfTrest(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{B}{G}{U}");
         this.supertype.add("Legendary");
         this.subtype.add("Elf");
         this.subtype.add("Advisor");

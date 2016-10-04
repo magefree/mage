@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.commander2015;
+package mage.cards.w;
 
 import java.util.UUID;
 import mage.abilities.Mode;
@@ -35,9 +35,9 @@ import mage.abilities.effects.common.LoseLifeTargetEffect;
 import mage.abilities.effects.common.ReturnFromGraveyardToHandTargetEffect;
 import mage.abilities.effects.common.continuous.BoostTargetEffect;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Duration;
-import mage.constants.Rarity;
 import mage.filter.common.FilterCreatureCard;
 import mage.target.TargetPlayer;
 import mage.target.common.TargetCardInYourGraveyard;
@@ -49,9 +49,8 @@ import mage.target.common.TargetCreaturePermanent;
  */
 public class WretchedConfluence extends CardImpl {
 
-    public WretchedConfluence(UUID ownerId) {
-        super(ownerId, 23, "Wretched Confluence", Rarity.RARE, new CardType[]{CardType.INSTANT}, "{3}{B}{B}");
-        this.expansionSetCode = "C15";
+    public WretchedConfluence(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.INSTANT},"{3}{B}{B}");
 
         // Choose three. You may choose the same mode more than once. 
         this.getSpellAbility().getModes().setMinModes(3);

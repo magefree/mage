@@ -25,13 +25,13 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.bornofthegods;
+package mage.cards.p;
 
 import java.util.UUID;
 import mage.abilities.effects.common.search.SearchLibraryPutInHandEffect;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.filter.FilterCard;
 import mage.filter.predicate.mageobject.CardTypePredicate;
 import mage.target.common.TargetCardInLibrary;
@@ -47,9 +47,8 @@ public class PleaForGuidance extends CardImpl {
         filter.add(new CardTypePredicate(CardType.ENCHANTMENT));
     }
     
-    public PleaForGuidance(UUID ownerId) {
-        super(ownerId, 24, "Plea for Guidance", Rarity.RARE, new CardType[]{CardType.SORCERY}, "{5}{W}");
-        this.expansionSetCode = "BNG";
+    public PleaForGuidance(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{5}{W}");
 
 
         // Search your library for up to two enchantment cards, reveal them, and put them into your hand. Then shuffle your library.

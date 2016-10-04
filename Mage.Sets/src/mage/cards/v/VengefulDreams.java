@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.torment;
+package mage.cards.v;
 
 import java.util.UUID;
 import mage.abilities.Ability;
@@ -34,8 +34,8 @@ import mage.abilities.dynamicvalue.common.GetXValue;
 import mage.abilities.effects.Effect;
 import mage.abilities.effects.common.ExileTargetEffect;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.filter.FilterCard;
 import mage.filter.common.FilterAttackingCreature;
 import mage.game.Game;
@@ -48,9 +48,8 @@ import mage.target.common.TargetCreaturePermanent;
  */
 public class VengefulDreams extends CardImpl {
 
-    public VengefulDreams(UUID ownerId) {
-        super(ownerId, 21, "Vengeful Dreams", Rarity.RARE, new CardType[]{CardType.INSTANT}, "{W}{W}");
-        this.expansionSetCode = "TOR";
+    public VengefulDreams(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.INSTANT},"{W}{W}");
 
         // As an additional cost to cast Vengeful Dreams, discard X cards.
         this.getSpellAbility().addCost(new DiscardXTargetCost(new FilterCard("cards"), true));

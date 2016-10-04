@@ -25,14 +25,14 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.khansoftarkir;
+package mage.cards.d;
 
 import java.util.UUID;
 import mage.abilities.effects.common.SacrificeEffect;
 import mage.abilities.keyword.DelveAbility;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.target.TargetPlayer;
 
@@ -42,9 +42,8 @@ import mage.target.TargetPlayer;
  */
 public class DeadDrop extends CardImpl {
 
-    public DeadDrop(UUID ownerId) {
-        super(ownerId, 67, "Dead Drop", Rarity.UNCOMMON, new CardType[]{CardType.SORCERY}, "{9}{B}");
-        this.expansionSetCode = "KTK";
+    public DeadDrop(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{9}{B}");
 
 
         // Delve

@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.gatecrash;
+package mage.cards.g;
 
 import java.util.UUID;
 import mage.MageInt;
@@ -34,9 +34,9 @@ import mage.abilities.TriggeredAbilityImpl;
 import mage.abilities.effects.Effect;
 import mage.abilities.effects.OneShotEffect;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Outcome;
-import mage.constants.Rarity;
 import mage.constants.TargetController;
 import mage.constants.Zone;
 import mage.filter.common.FilterCreaturePermanent;
@@ -61,9 +61,8 @@ public class GruulRagebeast extends CardImpl {
         filter2.add(new ControllerPredicate(TargetController.OPPONENT));
     }
 
-    public GruulRagebeast(UUID ownerId) {
-        super(ownerId, 170, "Gruul Ragebeast", Rarity.RARE, new CardType[]{CardType.CREATURE}, "{5}{R}{G}");
-        this.expansionSetCode = "GTC";
+    public GruulRagebeast(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{5}{R}{G}");
         this.subtype.add("Beast");
 
         this.power = new MageInt(6);

@@ -25,12 +25,11 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.riseoftheeldrazi;
+package mage.cards.n;
 
 import java.util.UUID;
 
 import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.abilities.Ability;
 import mage.abilities.TriggeredAbility;
 import mage.abilities.common.BeginningOfUpkeepTriggeredAbility;
@@ -38,6 +37,7 @@ import mage.abilities.condition.Condition;
 import mage.abilities.decorator.ConditionalTriggeredAbility;
 import mage.abilities.effects.common.WinGameSourceControllerEffect;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.TargetController;
 import mage.game.Game;
 
@@ -47,9 +47,8 @@ import mage.game.Game;
  */
 public class NearDeathExperience extends CardImpl {
 
-    public NearDeathExperience(UUID ownerId) {
-        super(ownerId, 38, "Near-Death Experience", Rarity.RARE, new CardType[]{CardType.ENCHANTMENT}, "{2}{W}{W}{W}");
-        this.expansionSetCode = "ROE";
+    public NearDeathExperience(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.ENCHANTMENT},"{2}{W}{W}{W}");
 
 
         // At the beginning of your upkeep, if you have exactly 1 life, you win the game.

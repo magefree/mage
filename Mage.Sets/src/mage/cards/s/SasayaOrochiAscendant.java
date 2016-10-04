@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.saviorsofkamigawa;
+package mage.cards.s;
 
 import java.util.UUID;
 import mage.MageInt;
@@ -38,11 +38,11 @@ import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.FlipSourceEffect;
 import mage.abilities.effects.common.ManaEffect;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.choices.Choice;
 import mage.choices.ChoiceImpl;
 import mage.constants.CardType;
 import mage.constants.Outcome;
-import mage.constants.Rarity;
 import mage.constants.SetTargetPointer;
 import mage.constants.Zone;
 import mage.filter.FilterPermanent;
@@ -63,9 +63,8 @@ import mage.players.Player;
  */
 public class SasayaOrochiAscendant extends CardImpl {
 
-    public SasayaOrochiAscendant(UUID ownerId) {
-        super(ownerId, 145, "Sasaya, Orochi Ascendant", Rarity.RARE, new CardType[]{CardType.CREATURE}, "{1}{G}{G}");
-        this.expansionSetCode = "SOK";
+    public SasayaOrochiAscendant(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{1}{G}{G}");
         this.supertype.add("Legendary");
         this.subtype.add("Snake");
         this.subtype.add("Monk");

@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.guildpact;
+package mage.cards.r;
 
 import java.util.UUID;
 import mage.MageInt;
@@ -33,8 +33,8 @@ import mage.abilities.common.BeginningOfUpkeepTriggeredAbility;
 import mage.abilities.effects.Effect;
 import mage.abilities.effects.common.DamagePlayersEffect;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.constants.TargetController;
 import mage.constants.Zone;
 
@@ -44,9 +44,8 @@ import mage.constants.Zone;
  */
 public class RumblingSlum extends CardImpl {
 
-    public RumblingSlum(UUID ownerId) {
-        super(ownerId, 126, "Rumbling Slum", Rarity.RARE, new CardType[]{CardType.CREATURE}, "{1}{R}{G}{G}");
-        this.expansionSetCode = "GPT";
+    public RumblingSlum(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{1}{R}{G}{G}");
         this.subtype.add("Elemental");
         this.power = new MageInt(5);
         this.toughness = new MageInt(5);

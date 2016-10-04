@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.journeyintonyx;
+package mage.cards.t;
 
 import java.util.UUID;
 import mage.MageInt;
@@ -33,8 +33,8 @@ import mage.abilities.Ability;
 import mage.abilities.effects.common.ReturnToHandTargetEffect;
 import mage.abilities.keyword.HeroicAbility;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.target.common.TargetEnchantmentPermanent;
 
 /**
@@ -43,9 +43,8 @@ import mage.target.common.TargetEnchantmentPermanent;
  */
 public class TritonCavalry extends CardImpl {
 
-    public TritonCavalry(UUID ownerId) {
-        super(ownerId, 55, "Triton Cavalry", Rarity.UNCOMMON, new CardType[]{CardType.CREATURE}, "{3}{U}");
-        this.expansionSetCode = "JOU";
+    public TritonCavalry(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{3}{U}");
         this.subtype.add("Merfolk");
         this.subtype.add("Soldier");
 

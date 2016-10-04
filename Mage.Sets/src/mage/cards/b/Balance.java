@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.limitedbeta;
+package mage.cards.b;
 
 import java.util.HashMap;
 import java.util.UUID;
@@ -33,11 +33,11 @@ import mage.abilities.Ability;
 import mage.abilities.effects.OneShotEffect;
 import mage.cards.Card;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.cards.Cards;
 import mage.cards.CardsImpl;
 import mage.constants.CardType;
 import mage.constants.Outcome;
-import mage.constants.Rarity;
 import mage.filter.FilterCard;
 import mage.filter.common.FilterControlledCreaturePermanent;
 import mage.filter.common.FilterControlledLandPermanent;
@@ -53,9 +53,8 @@ import mage.target.common.TargetControlledPermanent;
  */
 public class Balance extends CardImpl {
 
-    public Balance(UUID ownerId) {
-        super(ownerId, 188, "Balance", Rarity.RARE, new CardType[]{CardType.SORCERY}, "{1}{W}");
-        this.expansionSetCode = "LEB";
+    public Balance(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{1}{W}");
 
         // Each player chooses a number of lands he or she controls equal to the number of lands controlled by the player who controls the fewest, then sacrifices the rest. Players discard cards and sacrifice creatures the same way.
         this.getSpellAbility().addEffect(new BalanceEffect());

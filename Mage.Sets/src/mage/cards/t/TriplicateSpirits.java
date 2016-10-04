@@ -25,14 +25,14 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.magic2015;
+package mage.cards.t;
 
 import java.util.UUID;
 import mage.abilities.effects.common.CreateTokenEffect;
 import mage.abilities.keyword.ConvokeAbility;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.game.permanent.token.SpiritWhiteToken;
 
 /**
@@ -41,9 +41,8 @@ import mage.game.permanent.token.SpiritWhiteToken;
  */
 public class TriplicateSpirits extends CardImpl {
 
-    public TriplicateSpirits(UUID ownerId) {
-        super(ownerId, 40, "Triplicate Spirits", Rarity.COMMON, new CardType[]{CardType.SORCERY}, "{4}{W}{W}");
-        this.expansionSetCode = "M15";
+    public TriplicateSpirits(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{4}{W}{W}");
 
 
         // Convoke

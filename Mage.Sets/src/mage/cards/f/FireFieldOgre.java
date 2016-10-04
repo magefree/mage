@@ -25,16 +25,16 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.shardsofalara;
+package mage.cards.f;
 
 import java.util.UUID;
 import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.MageInt;
 import mage.abilities.keyword.FirstStrikeAbility;
 import mage.abilities.costs.mana.ManaCostsImpl;
 import mage.abilities.keyword.UnearthAbility;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 
 /**
  *
@@ -42,9 +42,8 @@ import mage.cards.CardImpl;
  */
 public class FireFieldOgre extends CardImpl {
 
-    public FireFieldOgre(UUID ownerId) {
-        super(ownerId, 168, "Fire-Field Ogre", Rarity.UNCOMMON, new CardType[]{CardType.CREATURE}, "{1}{U}{B}{R}");
-        this.expansionSetCode = "ALA";
+    public FireFieldOgre(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{1}{U}{B}{R}");
         this.subtype.add("Ogre");
         this.subtype.add("Mutant");
 

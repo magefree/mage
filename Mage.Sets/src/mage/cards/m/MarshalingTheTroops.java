@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.portalthreekingdoms;
+package mage.cards.m;
 
 import java.io.Serializable;
 import java.util.HashMap;
@@ -34,9 +34,9 @@ import java.util.UUID;
 import mage.abilities.Ability;
 import mage.abilities.effects.OneShotEffect;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Outcome;
-import mage.constants.Rarity;
 import mage.constants.TargetController;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.filter.predicate.Predicates;
@@ -52,9 +52,8 @@ import mage.target.TargetPermanent;
  */
 public class MarshalingTheTroops extends CardImpl {
 
-    public MarshalingTheTroops(UUID ownerId) {
-        super(ownerId, 141, "Marshaling the Troops", Rarity.RARE, new CardType[]{CardType.SORCERY}, "{1}{G}");
-        this.expansionSetCode = "PTK";
+    public MarshalingTheTroops(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{1}{G}");
 
         // Tap any number of untapped creatures you control. You gain 4 life for each creature tapped this way.
         this.getSpellAbility().addEffect(new MarshalingTheTroopsEffect());

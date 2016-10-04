@@ -25,16 +25,16 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.returntoravnica;
+package mage.cards.u;
 
 import java.util.UUID;
 import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.MageInt;
 import mage.abilities.common.AttacksCreatureYouControlTriggeredAbility;
 import mage.abilities.effects.common.CreateTokenEffect;
 import mage.abilities.keyword.FlyingAbility;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.filter.common.FilterControlledCreaturePermanent;
 import mage.filter.predicate.mageobject.SubtypePredicate;
 import mage.game.permanent.token.Token;
@@ -50,9 +50,8 @@ public class UtvaraHellkite extends CardImpl {
         filter.add(new SubtypePredicate("Dragon"));
     }
 
-    public UtvaraHellkite(UUID ownerId) {
-        super(ownerId, 110, "Utvara Hellkite", Rarity.MYTHIC, new CardType[]{CardType.CREATURE}, "{6}{R}{R}");
-        this.expansionSetCode = "RTR";
+    public UtvaraHellkite(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{6}{R}{R}");
         this.subtype.add("Dragon");
 
         this.power = new MageInt(6);

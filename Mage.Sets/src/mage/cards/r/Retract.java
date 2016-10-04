@@ -25,14 +25,14 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.darksteel;
+package mage.cards.r;
 
 import java.util.UUID;
 import mage.abilities.effects.Effect;
 import mage.abilities.effects.common.ReturnToHandFromBattlefieldAllEffect;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.filter.common.FilterControlledArtifactPermanent;
 
 /**
@@ -41,9 +41,8 @@ import mage.filter.common.FilterControlledArtifactPermanent;
  */
 public class Retract extends CardImpl {
 
-    public Retract(UUID ownerId) {
-        super(ownerId, 32, "Retract", Rarity.RARE, new CardType[]{CardType.INSTANT}, "{U}");
-        this.expansionSetCode = "DST";
+    public Retract(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.INSTANT},"{U}");
 
         // Return all artifacts you control to their owner's hand.
         Effect effect = new ReturnToHandFromBattlefieldAllEffect(new FilterControlledArtifactPermanent());

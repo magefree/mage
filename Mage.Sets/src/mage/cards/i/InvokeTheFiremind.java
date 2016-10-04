@@ -25,16 +25,16 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.guildpact;
+package mage.cards.i;
 
 import java.util.UUID;
 import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.abilities.Mode;
 import mage.abilities.dynamicvalue.common.ManacostVariableValue;
 import mage.abilities.effects.common.DamageTargetEffect;
 import mage.abilities.effects.common.DrawCardSourceControllerEffect;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.target.common.TargetCreatureOrPlayer;
 
 /**
@@ -43,9 +43,8 @@ import mage.target.common.TargetCreatureOrPlayer;
  */
 public class InvokeTheFiremind extends CardImpl {
 
-    public InvokeTheFiremind(UUID ownerId) {
-        super(ownerId, 118, "Invoke the Firemind", Rarity.RARE, new CardType[]{CardType.SORCERY}, "{X}{U}{U}{R}");
-        this.expansionSetCode = "GPT";
+    public InvokeTheFiremind(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{X}{U}{U}{R}");
 
 
         this.getSpellAbility().addEffect(new DrawCardSourceControllerEffect(new ManacostVariableValue()));

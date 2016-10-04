@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.onslaught;
+package mage.cards.m;
 
 import java.util.UUID;
 import mage.Mana;
@@ -33,9 +33,9 @@ import mage.abilities.Ability;
 import mage.abilities.common.EntersBattlefieldAllTriggeredAbility;
 import mage.abilities.effects.OneShotEffect;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Outcome;
-import mage.constants.Rarity;
 import mage.constants.SetTargetPointer;
 import mage.constants.Zone;
 import mage.filter.common.FilterCreaturePermanent;
@@ -50,9 +50,8 @@ import mage.util.CardUtil;
  */
 public class ManaEchoes extends CardImpl {
 
-    public ManaEchoes(UUID ownerId) {
-        super(ownerId, 218, "Mana Echoes", Rarity.RARE, new CardType[]{CardType.ENCHANTMENT}, "{2}{R}{R}");
-        this.expansionSetCode = "ONS";
+    public ManaEchoes(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.ENCHANTMENT},"{2}{R}{R}");
 
         // Whenever a creature enters the battlefield, you may add X mana of {C} to your mana pool, where X is the number of creatures you control that share a creature type with it.
         this.addAbility(new EntersBattlefieldAllTriggeredAbility(Zone.BATTLEFIELD,

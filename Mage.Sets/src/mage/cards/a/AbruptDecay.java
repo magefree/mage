@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.returntoravnica;
+package mage.cards.a;
 
 import java.util.UUID;
 import mage.abilities.Ability;
@@ -34,8 +34,8 @@ import mage.abilities.effects.Effect;
 import mage.abilities.effects.common.CantBeCounteredSourceEffect;
 import mage.abilities.effects.common.DestroyTargetEffect;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.constants.Zone;
 import mage.filter.Filter;
 import mage.filter.common.FilterNonlandPermanent;
@@ -54,9 +54,8 @@ public class AbruptDecay extends CardImpl {
         filter.add(new ConvertedManaCostPredicate(Filter.ComparisonType.LessThan, 4));
     }
 
-    public AbruptDecay(UUID ownerId) {
-        super(ownerId, 141, "Abrupt Decay", Rarity.RARE, new CardType[]{CardType.INSTANT}, "{B}{G}");
-        this.expansionSetCode = "RTR";
+    public AbruptDecay(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.INSTANT},"{B}{G}");
 
         // Abrupt Decay can't be countered by spells or abilities.
         Effect effect = new CantBeCounteredSourceEffect();

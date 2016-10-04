@@ -25,14 +25,14 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.shadowmoor;
+package mage.cards.s;
 
 import java.util.UUID;
 import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.MageInt;
 import mage.abilities.keyword.PersistAbility;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 
 /**
  *
@@ -40,9 +40,8 @@ import mage.cards.CardImpl;
  */
 public class SafeholdElite extends CardImpl {
 
-    public SafeholdElite(UUID ownerId) {
-        super(ownerId, 239, "Safehold Elite", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{1}{G/W}");
-        this.expansionSetCode = "SHM";
+    public SafeholdElite(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{1}{G/W}");
         this.subtype.add("Elf");
         this.subtype.add("Scout");
 

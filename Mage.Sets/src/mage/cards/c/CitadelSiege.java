@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.fatereforged;
+package mage.cards.c;
 
 import java.util.UUID;
 import mage.abilities.Ability;
@@ -37,8 +37,8 @@ import mage.abilities.effects.common.ChooseModeEffect;
 import mage.abilities.effects.common.TapTargetEffect;
 import mage.abilities.effects.common.counter.AddCountersTargetEffect;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.constants.TargetController;
 import mage.counters.CounterType;
 import mage.filter.common.FilterCreaturePermanent;
@@ -56,9 +56,8 @@ public class CitadelSiege extends CardImpl {
     private final static String ruleTrigger1 = "&bull Khans &mdash; At the beginning of combat on your turn, put two +1/+1 counters on target creature you control.";
     private final static String ruleTrigger2 = "&bull Dragons &mdash; At the beginning of combat on each opponent's turn, tap target creature that player controls.";
 
-    public CitadelSiege(UUID ownerId) {
-        super(ownerId, 8, "Citadel Siege", Rarity.RARE, new CardType[]{CardType.ENCHANTMENT}, "{2}{W}{W}");
-        this.expansionSetCode = "FRF";
+    public CitadelSiege(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.ENCHANTMENT},"{2}{W}{W}");
 
         // As Citadel Siege enters the battlefield, choose Khans or Dragons.
         this.addAbility(new EntersBattlefieldAbility(new ChooseModeEffect("Khans or Dragons?","Khans", "Dragons"),null,

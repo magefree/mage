@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.dragonsmaze;
+package mage.cards.d;
 
 import java.util.UUID;
 import mage.MageInt;
@@ -38,9 +38,9 @@ import mage.abilities.effects.common.continuous.LoseAllAbilitiesAllEffect;
 import mage.abilities.keyword.FlyingAbility;
 import mage.abilities.keyword.OverloadAbility;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Duration;
-import mage.constants.Rarity;
 import mage.constants.TargetController;
 import mage.filter.common.FilterControlledCreaturePermanent;
 import mage.filter.common.FilterCreaturePermanent;
@@ -59,9 +59,8 @@ public class Dragonshift extends CardImpl {
         filter.add(new ControllerPredicate(TargetController.YOU));
     }
 
-    public Dragonshift(UUID ownerId) {
-        super(ownerId, 66, "Dragonshift", Rarity.RARE, new CardType[]{CardType.INSTANT}, "{1}{U}{R}");
-        this.expansionSetCode = "DGM";
+    public Dragonshift(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.INSTANT},"{1}{U}{R}");
 
 
         // Until end of turn, target creature you control becomes a blue and red Dragon with base power and toughness 4/4, loses all abilities, and gains flying.

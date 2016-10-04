@@ -26,7 +26,7 @@
  *  or implied, of BetaSteward_at_googlemail.com.
  */
 
-package mage.sets.championsofkamigawa;
+package mage.cards.s;
 
 import java.util.UUID;
 
@@ -39,6 +39,7 @@ import mage.abilities.effects.common.continuous.GainAbilityTargetEffect;
 import mage.abilities.keyword.FearAbility;
 import mage.abilities.mana.BlackManaAbility;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.filter.predicate.mageobject.SupertypePredicate;
 import mage.target.TargetPermanent;
@@ -54,9 +55,8 @@ public class ShizoDeathsStorehouse extends CardImpl {
         filter.add(new SupertypePredicate("Legendary"));
     }
 
-    public ShizoDeathsStorehouse(UUID ownerId) {
-        super(ownerId, 283, "Shizo, Death's Storehouse", Rarity.RARE, new CardType[]{CardType.LAND}, null);
-        this.expansionSetCode = "CHK";
+    public ShizoDeathsStorehouse(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.LAND},null);
         this.supertype.add("Legendary");
         this.addAbility(new BlackManaAbility());
         Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new GainAbilityTargetEffect(FearAbility.getInstance(), Duration.EndOfTurn), new ColoredManaCost(ColoredManaSymbol.B));

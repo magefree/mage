@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.shadowsoverinnistrad;
+package mage.cards.t;
 
 import java.util.UUID;
 import mage.abilities.condition.InvertCondition;
@@ -33,8 +33,8 @@ import mage.abilities.condition.common.DeliriumCondition;
 import mage.abilities.decorator.ConditionalOneShotEffect;
 import mage.abilities.effects.common.SacrificeEffect;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.filter.common.FilterCreatureOrPlaneswalkerPermanent;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.filter.common.FilterPlaneswalkerPermanent;
@@ -46,9 +46,8 @@ import mage.target.TargetPlayer;
  */
 public class ToTheSlaughter extends CardImpl {
 
-    public ToTheSlaughter(UUID ownerId) {
-        super(ownerId, 139, "To the Slaughter", Rarity.RARE, new CardType[]{CardType.INSTANT}, "{2}{B}");
-        this.expansionSetCode = "SOI";
+    public ToTheSlaughter(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.INSTANT},"{2}{B}");
 
         // Target player sacrifices a creature or planeswalker.
         this.getSpellAbility().addEffect(new ConditionalOneShotEffect(

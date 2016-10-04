@@ -25,15 +25,15 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.tempest;
+package mage.cards.s;
 
 import java.util.UUID;
 import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.MageInt;
 import mage.abilities.keyword.FlyingAbility;
 import mage.abilities.keyword.FirstStrikeAbility;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 
 /**
  *
@@ -41,9 +41,8 @@ import mage.cards.CardImpl;
  */
 public class SkySpirit extends CardImpl {
 
-    public SkySpirit(UUID ownerId) {
-        super(ownerId, 346, "Sky Spirit", Rarity.UNCOMMON, new CardType[]{CardType.CREATURE}, "{1}{W}{U}");
-        this.expansionSetCode = "TMP";
+    public SkySpirit(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{1}{W}{U}");
         this.subtype.add("Spirit");
 
         this.power = new MageInt(2);

@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.returntoravnica;
+package mage.cards.j;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -40,12 +40,12 @@ import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.continuous.BoostTargetEffect;
 import mage.cards.Card;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.cards.Cards;
 import mage.cards.CardsImpl;
 import mage.constants.CardType;
 import mage.constants.Duration;
 import mage.constants.Outcome;
-import mage.constants.Rarity;
 import mage.constants.Zone;
 import mage.filter.FilterCard;
 import mage.filter.common.FilterNonlandCard;
@@ -69,9 +69,8 @@ import mage.util.CardUtil;
  */
 public class JaceArchitectOfThought extends CardImpl {
 
-    public JaceArchitectOfThought(UUID ownerId) {
-        super(ownerId, 44, "Jace, Architect of Thought", Rarity.MYTHIC, new CardType[]{CardType.PLANESWALKER}, "{2}{U}{U}");
-        this.expansionSetCode = "RTR";
+    public JaceArchitectOfThought(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.PLANESWALKER},"{2}{U}{U}");
         this.subtype.add("Jace");
 
         this.addAbility(new PlanswalkerEntersWithLoyalityCountersAbility(4));

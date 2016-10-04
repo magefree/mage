@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.betrayersofkamigawa;
+package mage.cards.m;
 
 import java.util.UUID;
 import mage.MageObject;
@@ -34,11 +34,11 @@ import mage.abilities.SpellAbility;
 import mage.abilities.effects.OneShotEffect;
 import mage.cards.Card;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.cards.Cards;
 import mage.cards.CardsImpl;
 import mage.constants.CardType;
 import mage.constants.Outcome;
-import mage.constants.Rarity;
 import mage.constants.SpellAbilityType;
 import mage.filter.FilterSpell;
 import mage.game.Game;
@@ -55,9 +55,8 @@ import java.util.UUID;
  */
 public class MinamosMeddling extends CardImpl {
 
-    public MinamosMeddling(UUID ownerId) {
-        super(ownerId, 42, "Minamo's Meddling", Rarity.COMMON, new CardType[]{CardType.INSTANT}, "{2}{U}{U}");
-        this.expansionSetCode = "BOK";
+    public MinamosMeddling(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.INSTANT},"{2}{U}{U}");
 
 
         // Counter target spell. That spell's controller reveals his or her hand, then discards each card with the same name as a card spliced onto that spell.

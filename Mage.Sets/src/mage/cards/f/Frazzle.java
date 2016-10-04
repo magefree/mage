@@ -25,14 +25,14 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.guildpact;
+package mage.cards.f;
 
 import java.util.UUID;
 import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.ObjectColor;
 import mage.abilities.effects.common.CounterTargetEffect;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.filter.FilterSpell;
 import mage.filter.predicate.Predicates;
 import mage.filter.predicate.mageobject.ColorPredicate;
@@ -49,9 +49,8 @@ public class Frazzle extends CardImpl {
         filter.add(Predicates.not(new ColorPredicate(ObjectColor.BLUE)));
     }
 
-    public Frazzle(UUID ownerId) {
-        super(ownerId, 25, "Frazzle", Rarity.UNCOMMON, new CardType[]{CardType.INSTANT}, "{3}{U}");
-        this.expansionSetCode = "GPT";
+    public Frazzle(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.INSTANT},"{3}{U}");
 
         this.getSpellAbility().addEffect(new CounterTargetEffect());
         this.getSpellAbility().addTarget(new TargetSpell(filter));

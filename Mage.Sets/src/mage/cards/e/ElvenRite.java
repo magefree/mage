@@ -25,13 +25,13 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.stronghold;
+package mage.cards.e;
 
 import java.util.UUID;
 import mage.abilities.effects.common.counter.DistributeCountersEffect;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.counters.CounterType;
 import mage.target.common.TargetCreaturePermanentAmount;
 
@@ -41,9 +41,8 @@ import mage.target.common.TargetCreaturePermanentAmount;
  */
 public class ElvenRite extends CardImpl {
 
-    public ElvenRite(UUID ownerId) {
-        super(ownerId, 56, "Elven Rite", Rarity.UNCOMMON, new CardType[]{CardType.SORCERY}, "{1}{G}");
-        this.expansionSetCode = "STH";
+    public ElvenRite(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{1}{G}");
 
         // Distribute two +1/+1 counters among one or two target creatures.
         this.getSpellAbility().addEffect(new DistributeCountersEffect(CounterType.P1P1, 2, false, "one or two target creatures"));

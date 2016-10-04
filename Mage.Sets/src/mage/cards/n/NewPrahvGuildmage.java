@@ -25,13 +25,12 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.returntoravnica;
+package mage.cards.n;
 
 import java.util.UUID;
 
 import mage.constants.CardType;
 import mage.constants.Duration;
-import mage.constants.Rarity;
 import mage.constants.Zone;
 import mage.MageInt;
 import mage.abilities.Ability;
@@ -41,6 +40,7 @@ import mage.abilities.effects.common.DetainTargetEffect;
 import mage.abilities.effects.common.continuous.GainAbilityTargetEffect;
 import mage.abilities.keyword.FlyingAbility;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.TargetController;
 import mage.filter.common.FilterNonlandPermanent;
 import mage.filter.predicate.permanent.ControllerPredicate;
@@ -59,9 +59,8 @@ public class NewPrahvGuildmage extends CardImpl {
         filter.add(new ControllerPredicate(TargetController.OPPONENT));
     }
     
-    public NewPrahvGuildmage(UUID ownerId) {
-        super(ownerId, 181, "New Prahv Guildmage", Rarity.UNCOMMON, new CardType[]{CardType.CREATURE}, "{W}{U}");
-        this.expansionSetCode = "RTR";
+    public NewPrahvGuildmage(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{W}{U}");
         this.subtype.add("Human");
         this.subtype.add("Wizard");
         

@@ -25,14 +25,14 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.apocalypse;
+package mage.cards.d;
 
 import java.util.UUID;
 import mage.abilities.effects.common.PreventAllDamageToAllEffect;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Duration;
-import mage.constants.Rarity;
 import mage.constants.TargetController;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.filter.predicate.permanent.ControllerPredicate;
@@ -49,9 +49,8 @@ public class DivineLight extends CardImpl {
         filter.add(new ControllerPredicate(TargetController.YOU));
     }
 
-    public DivineLight(UUID ownerId) {
-        super(ownerId, 8, "Divine Light", Rarity.COMMON, new CardType[]{CardType.SORCERY}, "{W}");
-        this.expansionSetCode = "APC";
+    public DivineLight(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{W}");
 
         // Prevent all damage that would be dealt this turn to creatures you control.
         this.getSpellAbility().addEffect(new PreventAllDamageToAllEffect(Duration.EndOfTurn, filter));

@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.onslaught;
+package mage.cards.a;
 
 import mage.abilities.Ability;
 import mage.abilities.TriggeredAbilityImpl;
@@ -38,6 +38,7 @@ import mage.abilities.effects.common.continuous.GainAbilityAllEffect;
 import mage.abilities.effects.common.counter.AddCountersTargetEffect;
 import mage.abilities.keyword.DefenderAbility;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.*;
 import mage.counters.CounterType;
 import mage.filter.common.FilterCreaturePermanent;
@@ -65,9 +66,8 @@ public class Aurification extends CardImpl {
 
     final String rule = "Each creature with a gold counter on it is a Wall in addition to its other creature types and has defender.";
 
-    public Aurification(UUID ownerId) {
-        super(ownerId, 6, "Aurification", Rarity.RARE, new CardType[]{CardType.ENCHANTMENT}, "{2}{W}{W}");
-        this.expansionSetCode = "ONS";
+    public Aurification(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.ENCHANTMENT},"{2}{W}{W}");
 
         // Whenever a creature deals damage to you, put a gold counter on it.
         this.addAbility(new AddGoldCountersAbility());

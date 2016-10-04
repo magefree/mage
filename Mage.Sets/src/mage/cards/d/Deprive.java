@@ -26,14 +26,14 @@
  *  or implied, of BetaSteward_at_googlemail.com.
  */
 
-package mage.sets.riseoftheeldrazi;
+package mage.cards.d;
 
 import java.util.UUID;
 import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.abilities.costs.common.ReturnToHandChosenControlledPermanentCost;
 import mage.abilities.effects.common.CounterTargetEffect;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.filter.common.FilterControlledLandPermanent;
 import mage.filter.common.FilterControlledPermanent;
 import mage.target.TargetSpell;
@@ -47,9 +47,8 @@ public class Deprive extends CardImpl {
 
     private static final FilterControlledPermanent filter = new FilterControlledLandPermanent("land");
 
-    public Deprive(UUID ownerId) {
-        super(ownerId, 59, "Deprive", Rarity.COMMON, new CardType[]{CardType.INSTANT}, "{U}{U}");
-        this.expansionSetCode = "ROE";
+    public Deprive(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.INSTANT},"{U}{U}");
 
         // As an additional cost to cast Deprive, return a land you control to its owner's hand.
         this.getSpellAbility().addCost(new ReturnToHandChosenControlledPermanentCost(new TargetControlledPermanent(filter)));

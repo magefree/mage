@@ -26,7 +26,7 @@
  *  or implied, of BetaSteward_at_googlemail.com.
  */
 
-package mage.sets.zendikar;
+package mage.cards.a;
 
 import java.util.HashSet;
 import java.util.Set;
@@ -37,8 +37,8 @@ import mage.abilities.costs.AlternativeCostSourceAbility;
 import mage.abilities.costs.mana.GenericManaCost;
 import mage.abilities.effects.common.PutLibraryIntoGraveTargetEffect;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.constants.WatcherScope;
 import mage.game.Game;
 import mage.game.events.GameEvent;
@@ -52,9 +52,8 @@ import mage.watchers.Watcher;
  */
 public class ArchiveTrap extends CardImpl {
 
-    public ArchiveTrap(UUID ownerId) {
-        super(ownerId, 41, "Archive Trap", Rarity.RARE, new CardType[]{CardType.INSTANT}, "{3}{U}{U}");
-        this.expansionSetCode = "ZEN";
+    public ArchiveTrap(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.INSTANT},"{3}{U}{U}");
         
         this.subtype.add("Trap");
 

@@ -25,16 +25,16 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.dragonsoftarkir;
+package mage.cards.f;
 
 import java.util.UUID;
 import mage.abilities.Ability;
 import mage.abilities.dynamicvalue.common.AttackingFilterCreatureCount;
 import mage.abilities.effects.OneShotEffect;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Outcome;
-import mage.constants.Rarity;
 import mage.constants.TargetController;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.filter.predicate.permanent.ControllerPredicate;
@@ -48,9 +48,8 @@ import mage.target.common.TargetOpponent;
  */
 public class FoulTongueShriek extends CardImpl {
 
-    public FoulTongueShriek(UUID ownerId) {
-        super(ownerId, 103, "Foul-Tongue Shriek", Rarity.COMMON, new CardType[]{CardType.INSTANT}, "{B}");
-        this.expansionSetCode = "DTK";
+    public FoulTongueShriek(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.INSTANT},"{B}");
 
         // Target opponent loses 1 life for each attacking creature you control. You gain that much life.
         this.getSpellAbility().addEffect(new FoulTongueShriekEffect());

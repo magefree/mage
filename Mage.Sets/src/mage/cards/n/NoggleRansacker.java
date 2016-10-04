@@ -25,17 +25,17 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.planechase2012;
+package mage.cards.n;
 
 import java.util.UUID;
 import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.EntersBattlefieldTriggeredAbility;
 import mage.abilities.effects.common.discard.DiscardEachPlayerEffect;
 import mage.abilities.effects.common.DrawCardAllEffect;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 
 /**
  *
@@ -43,9 +43,8 @@ import mage.cards.CardImpl;
  */
 public class NoggleRansacker extends CardImpl {
 
-    public NoggleRansacker(UUID ownerId) {
-        super(ownerId, 102, "Noggle Ransacker", Rarity.UNCOMMON, new CardType[]{CardType.CREATURE}, "{2}{U/R}");
-        this.expansionSetCode = "PC2";
+    public NoggleRansacker(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{2}{U/R}");
         this.subtype.add("Noggle");
         this.subtype.add("Rogue");
 

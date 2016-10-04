@@ -25,15 +25,15 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.mirrodin;
+package mage.cards.c;
 
 import java.util.UUID;
 import mage.abilities.Ability;
 import mage.abilities.common.BeginningOfUpkeepTriggeredAbility;
 import mage.abilities.effects.common.DestroyTargetEffect;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.constants.TargetController;
 import mage.filter.Filter;
 import mage.filter.FilterPermanent;
@@ -57,9 +57,8 @@ public class CullingScales extends CardImpl {
         filterNonlandPermanentWithLowestCmc.add(new HasLowestCMCAmongstNonlandPermanentsPredicate());
     }
     
-    public CullingScales(UUID ownerId) {
-        super(ownerId, 160, "Culling Scales", Rarity.RARE, new CardType[]{CardType.ARTIFACT}, "{3}");
-        this.expansionSetCode = "MRD";
+    public CullingScales(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.ARTIFACT},"{3}");
 
         // At the beginning of your upkeep, destroy target nonland permanent with the lowest converted mana cost.
         Ability ability = new BeginningOfUpkeepTriggeredAbility(new DestroyTargetEffect(), TargetController.YOU, false);

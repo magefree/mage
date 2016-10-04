@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.odyssey;
+package mage.cards.f;
 
 import java.util.UUID;
 import mage.abilities.Ability;
@@ -35,8 +35,8 @@ import mage.abilities.effects.Effect;
 import mage.abilities.effects.common.InfoEffect;
 import mage.abilities.effects.common.DamageTargetEffect;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.constants.Zone;
 import mage.filter.FilterCard;
 import mage.filter.predicate.Predicates;
@@ -58,9 +58,8 @@ public class FlameBurst extends CardImpl {
             new AbilityPredicate(CountAsFlameBurstAbility.class)));
     }
 
-    public FlameBurst(UUID ownerId) {
-        super(ownerId, 194, "Flame Burst", Rarity.COMMON, new CardType[]{CardType.INSTANT}, "{1}{R}");
-        this.expansionSetCode = "ODY";
+    public FlameBurst(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.INSTANT},"{1}{R}");
 
         // Flame Burst deals X damage to target creature or player, where X is 2 plus the number of cards named Flame Burst in all graveyards.
         Effect effect = new DamageTargetEffect(new FlameBurstCount(filter));

@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.shardsofalara;
+package mage.cards.c;
 
 import java.util.ArrayList;
 import java.util.LinkedHashSet;
@@ -36,9 +36,9 @@ import mage.abilities.Ability;
 import mage.abilities.effects.OneShotEffect;
 import mage.cards.Card;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Outcome;
-import mage.constants.Rarity;
 import mage.constants.Zone;
 import mage.filter.FilterCard;
 import mage.filter.predicate.mageobject.NamePredicate;
@@ -54,9 +54,8 @@ import mage.target.common.TargetControlledPermanent;
  */
 public class ClarionUltimatum extends CardImpl {
 
-    public ClarionUltimatum(UUID ownerId) {
-        super(ownerId, 163, "Clarion Ultimatum", Rarity.RARE, new CardType[]{CardType.SORCERY}, "{G}{G}{W}{W}{W}{U}{U}");
-        this.expansionSetCode = "ALA";
+    public ClarionUltimatum(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{G}{G}{W}{W}{W}{U}{U}");
 
         // Choose five permanents you control. For each of those permanents, you may search your library for a card with the same name as that permanent. Put those cards onto the battlefield tapped, then shuffle your library.
         this.getSpellAbility().addEffect(new ClarionUltimatumEffect());

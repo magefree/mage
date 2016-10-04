@@ -25,15 +25,15 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.iceage;
+package mage.cards.f;
 
 import mage.abilities.costs.common.PayVariableLifeCost;
 import mage.abilities.dynamicvalue.DynamicValue;
 import mage.abilities.dynamicvalue.common.GetXValue;
 import mage.abilities.effects.common.DamageMultiEffect;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.target.common.TargetCreaturePermanentAmount;
 
 import java.util.UUID;
@@ -44,9 +44,8 @@ import java.util.UUID;
  */
 public class FireCovenant extends CardImpl {
 
-    public FireCovenant(UUID ownerId) {
-        super(ownerId, 367, "Fire Covenant", Rarity.UNCOMMON, new CardType[]{CardType.INSTANT}, "{1}{B}{R}");
-        this.expansionSetCode = "ICE";
+    public FireCovenant(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.INSTANT},"{1}{B}{R}");
 
 
         // As an additional cost to cast Fire Covenant, pay X life.

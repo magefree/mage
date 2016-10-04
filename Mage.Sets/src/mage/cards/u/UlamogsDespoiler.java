@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.battleforzendikar;
+package mage.cards.u;
 
 import java.util.UUID;
 import mage.MageInt;
@@ -34,11 +34,11 @@ import mage.abilities.common.EntersBattlefieldAbility;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.counter.AddCountersSourceEffect;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.cards.Cards;
 import mage.cards.CardsImpl;
 import mage.constants.CardType;
 import mage.constants.Outcome;
-import mage.constants.Rarity;
 import mage.constants.TargetController;
 import mage.constants.Zone;
 import mage.counters.CounterType;
@@ -55,9 +55,8 @@ import mage.target.common.TargetCardInExile;
  */
 public class UlamogsDespoiler extends CardImpl {
 
-    public UlamogsDespoiler(UUID ownerId) {
-        super(ownerId, 16, "Ulamog's Despoiler", Rarity.UNCOMMON, new CardType[]{CardType.CREATURE}, "{6}");
-        this.expansionSetCode = "BFZ";
+    public UlamogsDespoiler(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{6}");
         this.subtype.add("Eldrazi");
         this.subtype.add("Processor");
         this.power = new MageInt(5);

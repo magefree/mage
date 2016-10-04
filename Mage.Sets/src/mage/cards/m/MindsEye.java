@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.mirrodin;
+package mage.cards.m;
 
 import java.util.UUID;
 import mage.abilities.common.DrawCardOpponentTriggeredAbility;
@@ -33,8 +33,8 @@ import mage.abilities.costs.mana.GenericManaCost;
 import mage.abilities.effects.common.DoIfCostPaid;
 import mage.abilities.effects.common.DrawCardSourceControllerEffect;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.Rarity;
 
 /**
  *
@@ -42,9 +42,8 @@ import mage.constants.Rarity;
  */
 public class MindsEye extends CardImpl {
 
-    public MindsEye(UUID ownerId) {
-        super(ownerId, 205, "Mind's Eye", Rarity.RARE, new CardType[]{CardType.ARTIFACT}, "{5}");
-        this.expansionSetCode = "MRD";
+    public MindsEye(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.ARTIFACT},"{5}");
 
         // Whenever an opponent draws a card, you may pay {1}. If you do, draw a card.
         this.addAbility(new DrawCardOpponentTriggeredAbility(new DoIfCostPaid(new DrawCardSourceControllerEffect(1), new GenericManaCost(1)), false, false));

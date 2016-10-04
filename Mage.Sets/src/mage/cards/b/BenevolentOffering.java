@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.commander2014;
+package mage.cards.b;
 
 import java.util.UUID;
 import mage.abilities.Ability;
@@ -34,9 +34,9 @@ import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.CreateTokenEffect;
 import mage.abilities.effects.common.CreateTokenTargetEffect;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Outcome;
-import mage.constants.Rarity;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.game.Game;
 import mage.game.permanent.token.SpiritWhiteToken;
@@ -51,9 +51,8 @@ import mage.target.targetpointer.FixedTarget;
  */
 public class BenevolentOffering extends CardImpl {
 
-    public BenevolentOffering(UUID ownerId) {
-        super(ownerId, 3, "Benevolent Offering", Rarity.RARE, new CardType[]{CardType.INSTANT}, "{3}{W}");
-        this.expansionSetCode = "C14";
+    public BenevolentOffering(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.INSTANT},"{3}{W}");
 
 
         // Choose an opponent. You and that player each put three 1/1 white Spirit creature tokens with flying onto the battlefield.

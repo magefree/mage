@@ -25,15 +25,15 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.mercadianmasques;
+package mage.cards.p;
 
 import java.util.UUID;
 import mage.abilities.Ability;
 import mage.abilities.effects.OneShotEffect;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Outcome;
-import mage.constants.Rarity;
 import mage.filter.Filter;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.filter.predicate.mageobject.PowerPredicate;
@@ -47,9 +47,8 @@ import mage.players.Player;
  */
 public class PuppetsVerdict extends CardImpl {
 
-    public PuppetsVerdict(UUID ownerId) {
-        super(ownerId, 208, "Puppet's Verdict", Rarity.RARE, new CardType[]{CardType.INSTANT}, "{1}{R}{R}");
-        this.expansionSetCode = "MMQ";
+    public PuppetsVerdict(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.INSTANT},"{1}{R}{R}");
 
         // Flip a coin. If you win the flip, destroy all creatures with power 2 or less. If you lose the flip, destroy all creatures with power 3 or greater.
         this.getSpellAbility().addEffect(new PuppetsVerdictEffect());

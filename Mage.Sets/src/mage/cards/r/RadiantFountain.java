@@ -25,15 +25,15 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.magic2015;
+package mage.cards.r;
 
 import java.util.UUID;
 import mage.abilities.common.EntersBattlefieldTriggeredAbility;
 import mage.abilities.effects.common.GainLifeEffect;
 import mage.abilities.mana.ColorlessManaAbility;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.Rarity;
 
 /**
  *
@@ -41,9 +41,8 @@ import mage.constants.Rarity;
  */
 public class RadiantFountain extends CardImpl {
 
-    public RadiantFountain(UUID ownerId) {
-        super(ownerId, 245, "Radiant Fountain", Rarity.COMMON, new CardType[]{CardType.LAND}, "");
-        this.expansionSetCode = "M15";
+    public RadiantFountain(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.LAND},"");
 
         // When Radiant Fountain enters the battlefield, you gain 2 life.
         this.addAbility(new EntersBattlefieldTriggeredAbility(new GainLifeEffect(2), false));

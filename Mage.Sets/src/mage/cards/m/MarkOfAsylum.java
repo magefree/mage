@@ -25,15 +25,15 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.conflux;
+package mage.cards.m;
 
 import java.util.UUID;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.effects.common.PreventAllNonCombatDamageToAllEffect;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Duration;
-import mage.constants.Rarity;
 import mage.constants.Zone;
 import mage.filter.common.FilterControlledCreatureInPlay;
 
@@ -45,9 +45,8 @@ public class MarkOfAsylum extends CardImpl {
     
     private static final FilterControlledCreatureInPlay filter = new FilterControlledCreatureInPlay("creatures you control");
     
-    public MarkOfAsylum(UUID ownerId) {
-        super(ownerId, 10, "Mark of Asylum", Rarity.RARE, new CardType[]{CardType.ENCHANTMENT}, "{1}{W}");
-        this.expansionSetCode = "CON";
+    public MarkOfAsylum(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.ENCHANTMENT},"{1}{W}");
 
 
         // Prevent all noncombat damage that would be dealt to creatures you control.

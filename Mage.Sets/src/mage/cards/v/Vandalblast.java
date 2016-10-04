@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.returntoravnica;
+package mage.cards.v;
 
 import java.util.UUID;
 import mage.abilities.costs.mana.ManaCostsImpl;
@@ -33,8 +33,8 @@ import mage.abilities.effects.common.DestroyAllEffect;
 import mage.abilities.effects.common.DestroyTargetEffect;
 import mage.abilities.keyword.OverloadAbility;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.constants.TargetController;
 import mage.constants.TimingRule;
 import mage.filter.common.FilterArtifactPermanent;
@@ -53,9 +53,8 @@ public class Vandalblast extends CardImpl {
         FILTER.add(new ControllerPredicate(TargetController.NOT_YOU));
     }
 
-    public Vandalblast(UUID ownerId) {
-        super(ownerId, 111, "Vandalblast", Rarity.UNCOMMON, new CardType[]{CardType.SORCERY}, "{R}");
-        this.expansionSetCode = "RTR";
+    public Vandalblast(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{R}");
 
         // Destroy target artifact you don't control.
         this.getSpellAbility().addTarget(new TargetArtifactPermanent(FILTER));

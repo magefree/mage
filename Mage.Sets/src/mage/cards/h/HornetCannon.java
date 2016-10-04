@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.phyrexiavsthecoalition;
+package mage.cards.h;
 
 import java.util.UUID;
 import mage.abilities.Ability;
@@ -36,9 +36,9 @@ import mage.abilities.costs.mana.GenericManaCost;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.DestroyTargetEffect;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Outcome;
-import mage.constants.Rarity;
 import mage.constants.Zone;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
@@ -52,9 +52,8 @@ import mage.target.targetpointer.FixedTarget;
  */
 public class HornetCannon extends CardImpl {
 
-    public HornetCannon(UUID ownerId) {
-        super(ownerId, 28, "Hornet Cannon", Rarity.UNCOMMON, new CardType[]{CardType.ARTIFACT}, "{4}");
-        this.expansionSetCode = "DDE";
+    public HornetCannon(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.ARTIFACT},"{4}");
 
         // {3}, {tap}: Put a 1/1 colorless Insect artifact creature token with flying and haste named Hornet onto the battlefield. Destroy it at the beginning of the next end step.
         Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new HornetCannonEffect(), new GenericManaCost(3));

@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.scourge;
+package mage.cards.k;
 
 import java.util.UUID;
 import mage.MageInt;
@@ -39,13 +39,13 @@ import mage.abilities.effects.common.continuous.BoostAllEffect;
 import mage.abilities.effects.common.continuous.GainControlTargetEffect;
 import mage.abilities.keyword.HasteAbility;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.cards.repository.CardRepository;
 import mage.choices.Choice;
 import mage.choices.ChoiceImpl;
 import mage.constants.CardType;
 import mage.constants.Duration;
 import mage.constants.Outcome;
-import mage.constants.Rarity;
 import mage.constants.TargetController;
 import mage.constants.Zone;
 import mage.filter.common.FilterCreaturePermanent;
@@ -61,9 +61,8 @@ import mage.target.targetpointer.FixedTarget;
  */
 public class KaronaFalseGod extends CardImpl {
 
-    public KaronaFalseGod(UUID ownerId) {
-        super(ownerId, 138, "Karona, False God", Rarity.RARE, new CardType[]{CardType.CREATURE}, "{1}{W}{U}{B}{R}{G}");
-        this.expansionSetCode = "SCG";
+    public KaronaFalseGod(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{1}{W}{U}{B}{R}{G}");
         this.supertype.add("Legendary");
         this.subtype.add("Avatar");
 

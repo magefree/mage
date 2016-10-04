@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.eldritchmoon;
+package mage.cards.d;
 
 import java.util.UUID;
 import mage.abilities.Ability;
@@ -35,9 +35,9 @@ import mage.abilities.effects.Effect;
 import mage.abilities.effects.common.CreateTokenTargetEffect;
 import mage.abilities.effects.common.continuous.BoostTargetEffect;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Duration;
-import mage.constants.Rarity;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.filter.predicate.mageobject.SubtypePredicate;
 import mage.game.Game;
@@ -53,9 +53,8 @@ import mage.target.targetpointer.SecondTargetPointer;
  */
 public class DarkSalvation extends CardImpl {
 
-    public DarkSalvation(UUID ownerId) {
-        super(ownerId, 87, "Dark Salvation", Rarity.RARE, new CardType[]{CardType.SORCERY}, "{X}{X}{B}");
-        this.expansionSetCode = "EMN";
+    public DarkSalvation(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{X}{X}{B}");
 
         // Target player puts X 2/2 black Zombie creature tokens onto the battlefield, then up to one target creature gets -1/-1 until end of turn for each Zombie that player controls.
         this.getSpellAbility().addTarget(new TargetPlayer());

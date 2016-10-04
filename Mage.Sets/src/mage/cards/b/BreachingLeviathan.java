@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.commander2014;
+package mage.cards.b;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -40,9 +40,9 @@ import mage.abilities.effects.ContinuousEffect;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.DontUntapInControllersNextUntapStepTargetEffect;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Outcome;
-import mage.constants.Rarity;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.filter.predicate.Predicates;
 import mage.filter.predicate.mageobject.ColorPredicate;
@@ -57,9 +57,8 @@ import mage.watchers.common.CastFromHandWatcher;
  */
 public class BreachingLeviathan extends CardImpl {
 
-    public BreachingLeviathan(UUID ownerId) {
-        super(ownerId, 12, "Breaching Leviathan", Rarity.RARE, new CardType[]{CardType.CREATURE}, "{7}{U}{U}");
-        this.expansionSetCode = "C14";
+    public BreachingLeviathan(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{7}{U}{U}");
         this.subtype.add("Leviathan");
 
         this.power = new MageInt(9);

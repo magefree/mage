@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.commander;
+package mage.cards.t;
 
 import java.util.UUID;
 import mage.MageInt;
@@ -36,8 +36,8 @@ import mage.abilities.effects.common.DoIfCostPaid;
 import mage.abilities.effects.common.ReturnFromGraveyardToBattlefieldTargetEffect;
 import mage.abilities.keyword.FlyingAbility;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.filter.common.FilterCreatureCard;
 import mage.target.Target;
 import mage.target.common.TargetCardInGraveyard;
@@ -48,9 +48,8 @@ import mage.target.common.TargetCardInGraveyard;
  */
 public class TenebTheHarvester extends CardImpl {
 
-    public TenebTheHarvester(UUID ownerId) {
-        super(ownerId, 230, "Teneb, the Harvester", Rarity.RARE, new CardType[]{CardType.CREATURE}, "{3}{B}{G}{W}");
-        this.expansionSetCode = "CMD";
+    public TenebTheHarvester(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{3}{B}{G}{W}");
         this.supertype.add("Legendary");
         this.subtype.add("Dragon");
 

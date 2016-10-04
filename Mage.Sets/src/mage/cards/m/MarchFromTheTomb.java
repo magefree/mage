@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.battleforzendikar;
+package mage.cards.m;
 
 import java.util.HashSet;
 import java.util.Set;
@@ -35,8 +35,8 @@ import mage.abilities.effects.Effect;
 import mage.abilities.effects.common.ReturnFromGraveyardToBattlefieldTargetEffect;
 import mage.cards.Card;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.filter.FilterCard;
 import mage.filter.common.FilterCreatureCard;
 import mage.filter.predicate.mageobject.SubtypePredicate;
@@ -49,9 +49,8 @@ import mage.target.common.TargetCardInYourGraveyard;
  */
 public class MarchFromTheTomb extends CardImpl {
 
-    public MarchFromTheTomb(UUID ownerId) {
-        super(ownerId, 214, "March from the Tomb", Rarity.RARE, new CardType[]{CardType.SORCERY}, "{3}{W}{B}");
-        this.expansionSetCode = "BFZ";
+    public MarchFromTheTomb(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{3}{W}{B}");
 
         // Return any number of target Ally creature cards with total converted mana cost of 8 or less from your graveyard to the battlefield.
         Effect effect = new ReturnFromGraveyardToBattlefieldTargetEffect();

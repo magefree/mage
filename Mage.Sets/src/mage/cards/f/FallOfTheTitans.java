@@ -25,15 +25,15 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.oathofthegatewatch;
+package mage.cards.f;
 
 import java.util.UUID;
 import mage.abilities.dynamicvalue.common.ManacostVariableValue;
 import mage.abilities.effects.common.DamageTargetEffect;
 import mage.abilities.keyword.SurgeAbility;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.target.common.TargetCreatureOrPlayer;
 
 /**
@@ -42,9 +42,8 @@ import mage.target.common.TargetCreatureOrPlayer;
  */
 public class FallOfTheTitans extends CardImpl {
 
-    public FallOfTheTitans(UUID ownerId) {
-        super(ownerId, 109, "Fall of the Titans", Rarity.RARE, new CardType[]{CardType.INSTANT}, "{X}{X}{R}");
-        this.expansionSetCode = "OGW";
+    public FallOfTheTitans(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.INSTANT},"{X}{X}{R}");
 
         // Fall of the Titans deals X damage to each of up to two target creatures and/or players.
         this.getSpellAbility().addTarget(new TargetCreatureOrPlayer(0, 2));

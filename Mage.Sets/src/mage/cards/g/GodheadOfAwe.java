@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.shadowmoor;
+package mage.cards.g;
 
 import java.util.UUID;
 import mage.MageInt;
@@ -33,9 +33,9 @@ import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.effects.common.continuous.SetPowerToughnessAllEffect;
 import mage.abilities.keyword.FlyingAbility;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Duration;
-import mage.constants.Rarity;
 import mage.constants.Zone;
 import mage.filter.FilterPermanent;
 import mage.filter.predicate.mageobject.CardTypePredicate;
@@ -55,9 +55,8 @@ public class GodheadOfAwe extends CardImpl {
         filter.add(new AnotherPredicate());
     }
 
-    public GodheadOfAwe(UUID ownerId) {
-        super(ownerId, 142, "Godhead of Awe", Rarity.RARE, new CardType[]{CardType.CREATURE}, "{W/U}{W/U}{W/U}{W/U}{W/U}");
-        this.expansionSetCode = "SHM";
+    public GodheadOfAwe(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{W/U}{W/U}{W/U}{W/U}{W/U}");
         this.subtype.add("Spirit");
         this.subtype.add("Avatar");
 

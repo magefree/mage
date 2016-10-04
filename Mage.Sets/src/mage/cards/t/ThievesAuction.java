@@ -25,18 +25,18 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.mercadianmasques;
+package mage.cards.t;
 
 import java.util.UUID;
 import mage.abilities.Ability;
 import mage.abilities.effects.OneShotEffect;
 import mage.cards.Card;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.cards.Cards;
 import mage.cards.CardsImpl;
 import mage.constants.CardType;
 import mage.constants.Outcome;
-import mage.constants.Rarity;
 import mage.constants.Zone;
 import mage.filter.FilterCard;
 import mage.filter.FilterPermanent;
@@ -56,9 +56,8 @@ import mage.util.CardUtil;
  */
 public class ThievesAuction extends CardImpl {
 
-    public ThievesAuction(UUID ownerId) {
-        super(ownerId, 218, "Thieves' Auction", Rarity.RARE, new CardType[]{CardType.SORCERY}, "{4}{R}{R}{R}");
-        this.expansionSetCode = "MMQ";
+    public ThievesAuction(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{4}{R}{R}{R}");
 
         // Exile all nontoken permanents. Starting with you, each player chooses one of the exiled cards and puts it onto the battlefield tapped under his or her control. Repeat this process until all cards exiled this way have been chosen.
         this.getSpellAbility().addEffect(new ThievesAuctionEffect());

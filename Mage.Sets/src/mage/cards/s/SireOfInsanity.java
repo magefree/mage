@@ -25,18 +25,18 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.dragonsmaze;
+package mage.cards.s;
 
 import java.util.UUID;
 
 import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.OnEventTriggeredAbility;
 import mage.abilities.effects.OneShotEffect;
 import mage.cards.Card;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.Outcome;
 import mage.game.Game;
 import mage.game.events.GameEvent;
@@ -50,9 +50,8 @@ import mage.players.Player;
 
 public class SireOfInsanity extends CardImpl {
 
-    public SireOfInsanity (UUID ownerId) {
-        super(ownerId, 104, "Sire of Insanity", Rarity.RARE, new CardType[]{CardType.CREATURE}, "{4}{B}{R}");
-        this.expansionSetCode = "DGM";
+    public SireOfInsanity (UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{4}{B}{R}");
         this.subtype.add("Demon");
 
 

@@ -26,7 +26,7 @@
  *  or implied, of BetaSteward_at_googlemail.com.
  */
 
-package mage.sets.eventide;
+package mage.cards.b;
 
 import java.util.UUID;
 import mage.MageInt;
@@ -34,8 +34,8 @@ import mage.abilities.common.EntersBattlefieldAbility;
 import mage.abilities.effects.common.counter.AddCountersSourceEffect;
 import mage.abilities.keyword.FlyingAbility;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.counters.CounterType;
 
 /**
@@ -44,9 +44,8 @@ import mage.counters.CounterType;
  */
 public class BloodiedGhost extends CardImpl {
 
-    public BloodiedGhost (UUID ownerId) {
-        super(ownerId, 83, "Bloodied Ghost", Rarity.UNCOMMON, new CardType[]{CardType.CREATURE}, "{1}{W/B}{W/B}");
-        this.expansionSetCode = "EVE";
+    public BloodiedGhost (UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{1}{W/B}{W/B}");
         this.subtype.add("Spirit");
         this.power = new MageInt(3);
         this.toughness = new MageInt(3);

@@ -26,16 +26,16 @@
  *  or implied, of BetaSteward_at_googlemail.com.
  */
 
-package mage.sets.dragonsmaze;
+package mage.cards.b;
 
 import java.util.UUID;
 import mage.constants.CardType;
 import mage.constants.Outcome;
-import mage.constants.Rarity;
 import mage.abilities.Ability;
 import mage.abilities.effects.OneShotEffect;
 import mage.cards.Card;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.players.Player;
@@ -50,9 +50,8 @@ import mage.target.common.TargetDiscard;
 
 public class BlastOfGenius extends CardImpl {
 
-    public BlastOfGenius(UUID ownerId) {
-        super(ownerId, 55, "Blast of Genius", Rarity.UNCOMMON, new CardType[]{CardType.SORCERY}, "{4}{U}{R}");
-        this.expansionSetCode = "DGM";
+    public BlastOfGenius(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{4}{U}{R}");
 
 
         // Choose target creature or player. Draw three cards and discard a card. Blast of Genius deals damage equal to the converted mana cost of the discard card to that creature or player.

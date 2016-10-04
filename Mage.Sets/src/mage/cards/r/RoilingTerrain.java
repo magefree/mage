@@ -25,15 +25,15 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.worldwake;
+package mage.cards.r;
 
 import java.util.UUID;
 import mage.abilities.Ability;
 import mage.abilities.effects.OneShotEffect;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Outcome;
-import mage.constants.Rarity;
 import mage.filter.common.FilterLandCard;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
@@ -46,9 +46,8 @@ import mage.target.common.TargetLandPermanent;
  */
 public class RoilingTerrain extends CardImpl {
 
-    public RoilingTerrain(UUID ownerId) {
-        super(ownerId, 88, "Roiling Terrain", Rarity.COMMON, new CardType[]{CardType.SORCERY}, "{2}{R}{R}");
-        this.expansionSetCode = "WWK";
+    public RoilingTerrain(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{2}{R}{R}");
 
         // Destroy target land, then Roiling Terrain deals damage to that land's controller equal to the number of land cards in that player's graveyard.
         this.getSpellAbility().addEffect(new RoilingTerrainEffect());

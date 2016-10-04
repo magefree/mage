@@ -25,15 +25,15 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.theros;
+package mage.cards.g;
 
 import java.util.UUID;
 import mage.abilities.effects.keyword.ScryEffect;
 import mage.abilities.effects.common.continuous.GainProtectionFromColorTargetEffect;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Duration;
-import mage.constants.Rarity;
 import mage.target.common.TargetControlledCreaturePermanent;
 
 /**
@@ -42,9 +42,8 @@ import mage.target.common.TargetControlledCreaturePermanent;
  */
 public class GodsWilling extends CardImpl {
 
-    public GodsWilling(UUID ownerId) {
-        super(ownerId, 16, "Gods Willing", Rarity.COMMON, new CardType[]{CardType.INSTANT}, "{W}");
-        this.expansionSetCode = "THS";
+    public GodsWilling(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.INSTANT},"{W}");
 
         // Target creature you control gains protection from the color of your choice until end of turn. Scry 1.
         this.getSpellAbility().addEffect(new GainProtectionFromColorTargetEffect(Duration.EndOfTurn));

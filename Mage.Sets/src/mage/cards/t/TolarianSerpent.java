@@ -25,15 +25,15 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.weatherlight;
+package mage.cards.t;
 
 import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.common.OnEventTriggeredAbility;
 import mage.abilities.effects.common.PutTopCardOfLibraryIntoGraveControllerEffect;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.game.events.GameEvent.EventType;
 
 /**
@@ -42,9 +42,8 @@ import mage.game.events.GameEvent.EventType;
  */
 public class TolarianSerpent extends CardImpl {
 
-    public TolarianSerpent(UUID ownerId) {
-        super(ownerId, 57, "Tolarian Serpent", Rarity.RARE, new CardType[]{CardType.CREATURE}, "{5}{U}{U}");
-        this.expansionSetCode = "WTH";
+    public TolarianSerpent(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{5}{U}{U}");
         this.subtype.add("Serpent");
         this.power = new MageInt(7);
         this.toughness = new MageInt(7);

@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.elspethvstezzeret;
+package mage.cards.a;
 
 import java.util.UUID;
 import mage.MageInt;
@@ -36,9 +36,9 @@ import mage.abilities.keyword.ConvokeAbility;
 import mage.abilities.keyword.FlashAbility;
 import mage.abilities.keyword.FlyingAbility;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Duration;
-import mage.constants.Rarity;
 import mage.target.common.TargetCreatureOrPlayerAmount;
 
 /**
@@ -47,9 +47,8 @@ import mage.target.common.TargetCreatureOrPlayerAmount;
  */
 public class AngelOfSalvation extends CardImpl {
 
-    public AngelOfSalvation(UUID ownerId) {
-        super(ownerId, 20, "Angel of Salvation", Rarity.RARE, new CardType[]{CardType.CREATURE}, "{6}{W}{W}");
-        this.expansionSetCode = "DDF";
+    public AngelOfSalvation(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{6}{W}{W}");
         this.subtype.add("Angel");
 
         this.power = new MageInt(5);

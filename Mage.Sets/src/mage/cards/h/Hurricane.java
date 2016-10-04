@@ -25,15 +25,15 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.limitedalpha;
+package mage.cards.h;
 
 import java.util.UUID;
 import mage.abilities.dynamicvalue.common.ManacostVariableValue;
 import mage.abilities.effects.common.DamageEverythingEffect;
 import mage.abilities.keyword.FlyingAbility;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.filter.predicate.mageobject.AbilityPredicate;
 
@@ -49,9 +49,8 @@ public class Hurricane extends CardImpl {
         filter.add(new AbilityPredicate(FlyingAbility.class));
     }
     
-    public Hurricane(UUID ownerId) {
-        super(ownerId, 109, "Hurricane", Rarity.UNCOMMON, new CardType[]{CardType.SORCERY}, "{X}{G}");
-        this.expansionSetCode = "LEA";
+    public Hurricane(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{X}{G}");
 
 
         // Hurricane deals X damage to each creature with flying and each player.

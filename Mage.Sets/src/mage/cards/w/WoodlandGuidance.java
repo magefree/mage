@@ -25,14 +25,14 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.lorwyn;
+package mage.cards.w;
 
 import java.util.UUID;
 import mage.abilities.effects.common.DoIfClashWonEffect;
 import mage.abilities.effects.common.ExileSpellEffect;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.abilities.effects.common.ReturnFromGraveyardToHandTargetEffect;
 import mage.abilities.effects.common.UntapAllLandsControllerEffect;
 import mage.filter.common.FilterLandPermanent;
@@ -44,9 +44,8 @@ import mage.target.common.TargetCardInYourGraveyard;
  */
 public class WoodlandGuidance extends CardImpl {
 
-    public WoodlandGuidance(UUID ownerId) {
-        super(ownerId, 243, "Woodland Guidance", Rarity.UNCOMMON, new CardType[]{CardType.SORCERY}, "{3}{G}");
-        this.expansionSetCode = "LRW";
+    public WoodlandGuidance(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{3}{G}");
 
         // Return target card from your graveyard to your hand
         this.getSpellAbility().addEffect(new ReturnFromGraveyardToHandTargetEffect());

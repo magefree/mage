@@ -25,15 +25,15 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.darkascension;
+package mage.cards.h;
 
 import java.util.UUID;
 import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.MageInt;
 import mage.abilities.common.EntersBattlefieldTappedAbility;
 import mage.abilities.costs.common.ExileFromGraveCost;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.filter.common.FilterCreatureCard;
 import mage.target.common.TargetCardInYourGraveyard;
 
@@ -43,9 +43,8 @@ import mage.target.common.TargetCardInYourGraveyard;
  */
 public class HeadlessSkaab extends CardImpl {
 
-    public HeadlessSkaab(UUID ownerId) {
-        super(ownerId, 40, "Headless Skaab", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{2}{U}");
-        this.expansionSetCode = "DKA";
+    public HeadlessSkaab(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{2}{U}");
         this.subtype.add("Zombie");
         this.subtype.add("Warrior");
 

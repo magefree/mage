@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.shadowsoverinnistrad;
+package mage.cards.g;
 
 import java.util.UUID;
 import mage.MageInt;
@@ -36,8 +36,8 @@ import mage.abilities.decorator.ConditionalTriggeredAbility;
 import mage.abilities.effects.common.TransformSourceEffect;
 import mage.abilities.keyword.TransformAbility;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.constants.TargetController;
 
 /**
@@ -46,16 +46,15 @@ import mage.constants.TargetController;
  */
 public class GatstafArsonists extends CardImpl {
 
-    public GatstafArsonists(UUID ownerId) {
-        super(ownerId, 158, "Gatstaf Arsonists", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{4}{R}");
-        this.expansionSetCode = "SOI";
+    public GatstafArsonists(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{4}{R}");
         this.subtype.add("Human");
         this.subtype.add("Werewolf");
         this.power = new MageInt(5);
         this.toughness = new MageInt(4);
 
         this.transformable = true;
-        this.secondSideCard = new GatstafRavagers(ownerId);
+        this.secondSideCardClazz = GatstafRavagers.class;
 
         // At the beginning of each upkeep, if no spells were cast last turn, transform Gatstaf Arsonists.
         this.addAbility(new TransformAbility());

@@ -25,15 +25,15 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.shadowmoor;
+package mage.cards.j;
 
 import java.util.UUID;
 import mage.abilities.dynamicvalue.common.PermanentsOnBattlefieldCount;
 import mage.abilities.effects.Effect;
 import mage.abilities.effects.common.DamageMultiEffect;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.filter.common.FilterControlledLandPermanent;
 import mage.filter.predicate.mageobject.SubtypePredicate;
 import mage.target.common.TargetCreatureOrPlayerAmount;
@@ -52,9 +52,8 @@ public class JawsOfStone extends CardImpl {
 
     static final private String rule = "{this} deals X damage divided as you choose among any number of target creatures and/or players, where X is the number of Mountains you control as you cast {this}";
     
-    public JawsOfStone(UUID ownerId) {
-        super(ownerId, 97, "Jaws of Stone", Rarity.UNCOMMON, new CardType[]{CardType.SORCERY}, "{5}{R}");
-        this.expansionSetCode = "SHM";
+    public JawsOfStone(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{5}{R}");
 
         // Jaws of Stone deals X damage divided as you choose among any number of target creatures and/or players, where X is the number of Mountains you control as you cast Jaws of Stone.
         PermanentsOnBattlefieldCount mountains = new PermanentsOnBattlefieldCount(filter, null);

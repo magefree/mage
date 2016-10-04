@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.vintagemasters;
+package mage.cards.k;
 
 import java.util.UUID;
 import mage.abilities.Ability;
@@ -37,11 +37,11 @@ import mage.abilities.effects.common.DamageTargetEffect;
 import mage.abilities.effects.common.cost.CostModificationEffectImpl;
 import mage.abilities.keyword.FlashbackAbility;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.CostModificationType;
 import mage.constants.Duration;
 import mage.constants.Outcome;
-import mage.constants.Rarity;
 import mage.constants.Zone;
 import mage.game.Game;
 import mage.target.Target;
@@ -55,9 +55,8 @@ import mage.util.CardUtil;
  */
 public class KaerveksTorch extends CardImpl {
 
-    public KaerveksTorch(UUID ownerId) {
-        super(ownerId, 175, "Kaervek's Torch", Rarity.UNCOMMON, new CardType[]{CardType.SORCERY}, "{X}{R}");
-        this.expansionSetCode = "VMA";
+    public KaerveksTorch(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{X}{R}");
 
         // As long as Kaervek's Torch is on the stack, spells that target it cost {2} more to cast.
         this.addAbility(new SimpleStaticAbility(Zone.STACK, new KaerveksTorchCostIncreaseEffect()));

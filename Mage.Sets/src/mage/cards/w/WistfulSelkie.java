@@ -26,15 +26,15 @@
  *  or implied, of BetaSteward_at_googlemail.com.
  */
 
-package mage.sets.eventide;
+package mage.cards.w;
 
 import java.util.UUID;
 import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.MageInt;
 import mage.abilities.common.EntersBattlefieldTriggeredAbility;
 import mage.abilities.effects.common.DrawCardSourceControllerEffect;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 
 /**
  *
@@ -42,9 +42,8 @@ import mage.cards.CardImpl;
  */
 public class WistfulSelkie extends CardImpl {
 
-    public WistfulSelkie (UUID ownerId) {
-        super(ownerId, 165, "Wistful Selkie", Rarity.UNCOMMON, new CardType[]{CardType.CREATURE}, "{G/U}{G/U}{G/U}");
-        this.expansionSetCode = "EVE";
+    public WistfulSelkie (UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{G/U}{G/U}{G/U}");
         this.subtype.add("Merfolk");
         this.subtype.add("Wizard");
 

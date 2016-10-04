@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.fifthdawn;
+package mage.cards.s;
 
 import java.util.UUID;
 import mage.MageInt;
@@ -35,8 +35,8 @@ import mage.abilities.costs.common.TapSourceCost;
 import mage.abilities.effects.common.CreateTokenEffect;
 import mage.abilities.effects.common.UntapSourceEffect;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.constants.Zone;
 import mage.filter.common.FilterArtifactPermanent;
 import mage.game.permanent.token.Token;
@@ -47,9 +47,8 @@ import mage.game.permanent.token.Token;
  */
 public class SummoningStation extends CardImpl {
 
-    public SummoningStation(UUID ownerId) {
-        super(ownerId, 158, "Summoning Station", Rarity.RARE, new CardType[]{CardType.ARTIFACT}, "{7}");
-        this.expansionSetCode = "5DN";
+    public SummoningStation(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.ARTIFACT},"{7}");
 
         // {tap}: Put a 2/2 colorless Pincher creature token onto the battlefield.
         this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD,new CreateTokenEffect(new PincherToken()), new TapSourceCost()));

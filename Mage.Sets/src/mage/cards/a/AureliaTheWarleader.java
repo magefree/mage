@@ -25,7 +25,7 @@
 *  authors and should not be interpreted as representing official policies, either expressed
 *  or implied, of BetaSteward_at_googlemail.com.
 */
-package mage.sets.gatecrash;
+package mage.cards.a;
 
 import mage.MageInt;
 import mage.abilities.Ability;
@@ -38,8 +38,8 @@ import mage.abilities.keyword.HasteAbility;
 import mage.abilities.keyword.VigilanceAbility;
 import mage.cards.Card;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.constants.Zone;
 import mage.filter.common.FilterControlledCreaturePermanent;
 import mage.game.Game;
@@ -54,9 +54,8 @@ import java.util.UUID;
 */
 public class AureliaTheWarleader extends CardImpl {
 
-    public AureliaTheWarleader(UUID ownerId) {
-        super(ownerId, 143, "Aurelia, the Warleader", Rarity.MYTHIC, new CardType[]{CardType.CREATURE}, "{2}{R}{R}{W}{W}");
-        this.expansionSetCode = "GTC";
+    public AureliaTheWarleader(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{2}{R}{R}{W}{W}");
 
 
         this.supertype.add("Legendary");

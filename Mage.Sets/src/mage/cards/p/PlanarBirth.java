@@ -25,17 +25,17 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.urzassaga;
+package mage.cards.p;
 
 import java.util.UUID;
 import mage.abilities.Ability;
 import mage.abilities.effects.OneShotEffect;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.cards.Cards;
 import mage.cards.CardsImpl;
 import mage.constants.CardType;
 import mage.constants.Outcome;
-import mage.constants.Rarity;
 import mage.constants.Zone;
 import mage.filter.common.FilterBasicLandCard;
 import mage.game.Game;
@@ -47,9 +47,8 @@ import mage.players.Player;
  */
 public class PlanarBirth extends CardImpl {
 
-    public PlanarBirth(UUID ownerId) {
-        super(ownerId, 31, "Planar Birth", Rarity.RARE, new CardType[]{CardType.SORCERY}, "{1}{W}");
-        this.expansionSetCode = "USG";
+    public PlanarBirth(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{1}{W}");
 
         // Return all basic land cards from all graveyards to the battlefield tapped under their owners' control.
         this.getSpellAbility().addEffect(new PlanarBirthEffect());

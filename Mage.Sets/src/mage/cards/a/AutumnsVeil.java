@@ -26,16 +26,16 @@
  *  or implied, of BetaSteward_at_googlemail.com.
  */
 
-package mage.sets.magic2011;
+package mage.cards.a;
 
 import java.util.UUID;
 import mage.constants.CardType;
 import mage.constants.Duration;
-import mage.constants.Rarity;
 import mage.ObjectColor;
 import mage.abilities.effects.common.CantBeCounteredControlledEffect;
 import mage.abilities.effects.common.CantBeTargetedAllEffect;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.filter.FilterSpell;
 import mage.filter.common.FilterControlledCreaturePermanent;
 import mage.filter.predicate.Predicates;
@@ -57,9 +57,8 @@ public class AutumnsVeil extends CardImpl {
                 new ColorPredicate(ObjectColor.BLACK)));
     }
 
-    public AutumnsVeil(UUID ownerId) {
-        super(ownerId, 162, "Autumn's Veil", Rarity.UNCOMMON, new CardType[]{CardType.INSTANT}, "{G}");
-        this.expansionSetCode = "M11";
+    public AutumnsVeil(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.INSTANT},"{G}");
 
         // Spells you control can't be countered by blue or black spells this turn
         this.getSpellAbility().addEffect(new CantBeCounteredControlledEffect(filterTarget1, filterSource, Duration.EndOfTurn));

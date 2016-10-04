@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.magic2014;
+package mage.cards.d;
 
 import java.io.Serializable;
 import java.util.HashMap;
@@ -34,9 +34,9 @@ import java.util.UUID;
 import mage.abilities.Ability;
 import mage.abilities.effects.OneShotEffect;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Outcome;
-import mage.constants.Rarity;
 import mage.filter.common.FilterControlledCreaturePermanent;
 import mage.filter.predicate.Predicates;
 import mage.filter.predicate.permanent.TappedPredicate;
@@ -51,9 +51,8 @@ import mage.target.TargetPermanent;
  */
 public class DevoutInvocation extends CardImpl {
 
-    public DevoutInvocation(UUID ownerId) {
-        super(ownerId, 16, "Devout Invocation", Rarity.MYTHIC, new CardType[]{CardType.SORCERY}, "{6}{W}");
-        this.expansionSetCode = "M14";
+    public DevoutInvocation(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{6}{W}");
 
         // Tap any number of untapped creatures you control. Put a 4/4 white Angel creature token with flying onto the battlefield for each creature tapped this way.
         this.getSpellAbility().addEffect(new DevoutInvocationEffect());

@@ -26,7 +26,7 @@
  *  or implied, of BetaSteward_at_googlemail.com.
  */
 
-package mage.sets.eventide;
+package mage.cards.f;
 
 import java.util.UUID;
 import mage.Mana;
@@ -35,8 +35,8 @@ import mage.abilities.costs.mana.ManaCostsImpl;
 import mage.abilities.mana.ColorlessManaAbility;
 import mage.abilities.mana.SimpleManaAbility;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.constants.Zone;
 
 /**
@@ -45,9 +45,8 @@ import mage.constants.Zone;
  */
 public class FloodedGrove extends CardImpl {
 
-    public FloodedGrove (UUID ownerId) {
-        super(ownerId, 177, "Flooded Grove", Rarity.RARE, new CardType[]{CardType.LAND}, null);
-        this.expansionSetCode = "EVE";
+    public FloodedGrove (UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.LAND},null);
         
         // {T}: Add {C} to your mana pool.
         this.addAbility(new ColorlessManaAbility());

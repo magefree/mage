@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.theros;
+package mage.cards.a;
 
 import java.util.UUID;
 import mage.MageObject;
@@ -38,13 +38,13 @@ import mage.abilities.effects.ContinuousEffectImpl;
 import mage.abilities.effects.OneShotEffect;
 import mage.cards.Card;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.cards.Cards;
 import mage.cards.CardsImpl;
 import mage.constants.CardType;
 import mage.constants.Duration;
 import mage.constants.Layer;
 import mage.constants.Outcome;
-import mage.constants.Rarity;
 import mage.constants.SubLayer;
 import mage.constants.Zone;
 import mage.filter.Filter;
@@ -66,9 +66,8 @@ import mage.util.CardUtil;
  */
 public class AshiokNightmareWeaver extends CardImpl {
 
-    public AshiokNightmareWeaver(UUID ownerId) {
-        super(ownerId, 188, "Ashiok, Nightmare Weaver", Rarity.MYTHIC, new CardType[]{CardType.PLANESWALKER}, "{1}{U}{B}");
-        this.expansionSetCode = "THS";
+    public AshiokNightmareWeaver(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.PLANESWALKER},"{1}{U}{B}");
         this.subtype.add("Ashiok");
 
         this.addAbility(new PlanswalkerEntersWithLoyalityCountersAbility(3));

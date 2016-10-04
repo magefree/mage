@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.darkascension;
+package mage.cards.h;
 
 import java.util.UUID;
 import mage.MageInt;
@@ -38,7 +38,9 @@ import mage.abilities.effects.common.CreateTokenEffect;
 import mage.abilities.effects.common.GainLifeEffect;
 import mage.abilities.effects.common.TransformSourceEffect;
 import mage.abilities.keyword.TransformAbility;
+import mage.cards.r.RavagerOfTheFells;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.*;
 import mage.game.Game;
 import mage.game.events.GameEvent;
@@ -51,14 +53,13 @@ import mage.game.permanent.token.WolfToken;
  */
 public class HuntmasterOfTheFells extends CardImpl {
 
-    public HuntmasterOfTheFells(UUID ownerId) {
-        super(ownerId, 140, "Huntmaster of the Fells", Rarity.MYTHIC, new CardType[]{CardType.CREATURE}, "{2}{R}{G}");
-        this.expansionSetCode = "DKA";
+    public HuntmasterOfTheFells(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{2}{R}{G}");
         this.subtype.add("Human");
         this.subtype.add("Werewolf");
 
         this.transformable = true;
-        this.secondSideCard = new RavagerOfTheFells(ownerId);
+        this.secondSideCardClazz = RavagerOfTheFells.class;
 
         this.power = new MageInt(2);
         this.toughness = new MageInt(2);

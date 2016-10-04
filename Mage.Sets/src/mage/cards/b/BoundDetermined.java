@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.dissension;
+package mage.cards.b;
 
 import java.util.UUID;
 import mage.MageObject;
@@ -36,11 +36,11 @@ import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.DrawCardSourceControllerEffect;
 import mage.abilities.effects.common.ExileSourceEffect;
 import mage.cards.CardsImpl;
+import mage.cards.CardSetInfo;
 import mage.cards.SplitCard;
 import mage.constants.CardType;
 import mage.constants.Duration;
 import mage.constants.Outcome;
-import mage.constants.Rarity;
 import mage.constants.Zone;
 import mage.filter.FilterCard;
 import mage.filter.FilterSpell;
@@ -66,9 +66,8 @@ public class BoundDetermined extends SplitCard {
         filter.add(new MulticoloredPredicate());
     }
 
-    public BoundDetermined(UUID ownerId) {
-        super(ownerId, 149, "Bound", "Determined", Rarity.RARE, new CardType[]{CardType.INSTANT}, "{3}{B}{G}", "{G}{U}", false);
-        this.expansionSetCode = "DIS";
+    public BoundDetermined(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.INSTANT},"{3}{B}{G}","{G}{U}",false);
 
         // Bound
         // Sacrifice a creature. Return up to X cards from your graveyard to your hand, where X is the number of colors that creature was. Exile this card.

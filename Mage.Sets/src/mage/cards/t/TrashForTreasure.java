@@ -25,14 +25,14 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.mirrodin;
+package mage.cards.t;
 
 import java.util.UUID;
 import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.abilities.costs.common.SacrificeTargetCost;
 import mage.abilities.effects.common.ReturnFromGraveyardToBattlefieldTargetEffect;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.filter.FilterCard;
 import mage.filter.common.FilterControlledPermanent;
 import mage.filter.predicate.mageobject.CardTypePredicate;
@@ -53,9 +53,8 @@ public class TrashForTreasure extends CardImpl {
         filterCard.add(new CardTypePredicate(CardType.ARTIFACT));
     }
 
-    public TrashForTreasure(UUID ownerId) {
-        super(ownerId, 109, "Trash for Treasure", Rarity.RARE, new CardType[]{CardType.SORCERY}, "{2}{R}");
-        this.expansionSetCode = "MRD";
+    public TrashForTreasure(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{2}{R}");
 
         this.getSpellAbility().addCost(new SacrificeTargetCost(new TargetControlledPermanent(filterPermanent)));
         this.getSpellAbility().addEffect(new ReturnFromGraveyardToBattlefieldTargetEffect());

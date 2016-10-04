@@ -27,15 +27,15 @@
  *  or implied, of BetaSteward_at_googlemail.com.
  * 
  */
-package mage.sets.championsofkamigawa;
+package mage.cards.b;
 
 import java.util.UUID;
 
 import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.ObjectColor;
 import mage.abilities.effects.common.DestroyTargetEffect;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.filter.FilterPermanent;
 import mage.filter.predicate.Predicates;
 import mage.filter.predicate.mageobject.CardTypePredicate;
@@ -57,9 +57,8 @@ public class Befoul extends CardImpl {
                     Predicates.not(new ColorPredicate(ObjectColor.BLACK)),
                     new CardTypePredicate(CardType.CREATURE))));
     }
-    public Befoul (UUID ownerId) {
-        super(ownerId, 102, "Befoul", Rarity.COMMON, new CardType[]{CardType.SORCERY}, "{2}{B}{B}");
-        this.expansionSetCode = "CHK";
+    public Befoul (UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{2}{B}{B}");
 
         // Destroy target land or nonblack creature. It can't be regenerated.
         this.getSpellAbility().addEffect(new DestroyTargetEffect(true));

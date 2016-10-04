@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.dissension;
+package mage.cards.a;
 
 import java.util.UUID;
 import mage.MageInt;
@@ -34,8 +34,8 @@ import mage.abilities.costs.common.DiscardTargetCost;
 import mage.abilities.effects.common.SacrificeSourceUnlessPaysEffect;
 import mage.abilities.keyword.FlyingAbility;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.filter.FilterCard;
 import mage.target.common.TargetCardInHand;
 
@@ -45,9 +45,8 @@ import mage.target.common.TargetCardInHand;
  */
 public class AvatarOfDiscord extends CardImpl {
 
-    public AvatarOfDiscord(UUID ownerId) {
-        super(ownerId, 140, "Avatar of Discord", Rarity.RARE, new CardType[]{CardType.CREATURE}, "{B/R}{B/R}{B/R}");
-        this.expansionSetCode = "DIS";
+    public AvatarOfDiscord(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{B/R}{B/R}{B/R}");
         this.subtype.add("Avatar");
 
         this.power = new MageInt(5);

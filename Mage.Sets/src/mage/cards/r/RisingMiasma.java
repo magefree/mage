@@ -25,15 +25,15 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.battleforzendikar;
+package mage.cards.r;
 
 import java.util.UUID;
 import mage.abilities.effects.common.continuous.BoostAllEffect;
 import mage.abilities.keyword.AwakenAbility;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Duration;
-import mage.constants.Rarity;
 
 /**
  *
@@ -41,9 +41,8 @@ import mage.constants.Rarity;
  */
 public class RisingMiasma extends CardImpl {
 
-    public RisingMiasma(UUID ownerId) {
-        super(ownerId, 122, "Rising Miasma", Rarity.UNCOMMON, new CardType[]{CardType.SORCERY}, "{3}{B}");
-        this.expansionSetCode = "BFZ";
+    public RisingMiasma(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{3}{B}");
 
         // All creatures get -2/-2 until end of turn.
         this.getSpellAbility().addEffect(new BoostAllEffect(-2, -2, Duration.EndOfTurn));

@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.guildpact;
+package mage.cards.h;
 
 import java.util.UUID;
 
@@ -41,6 +41,7 @@ import mage.abilities.effects.common.ReturnToHandSourceEffect;
 import mage.abilities.effects.common.continuous.GainAbilityAttachedEffect;
 import mage.abilities.keyword.EnchantAbility;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.target.TargetPermanent;
 import mage.target.common.TargetCreatureOrPlayer;
 import mage.target.common.TargetCreaturePermanent;
@@ -51,9 +52,8 @@ import mage.target.common.TargetCreaturePermanent;
  */
 public class HypervoltGrasp extends CardImpl {
 
-    public HypervoltGrasp(UUID ownerId) {
-        super(ownerId, 67, "Hypervolt Grasp", Rarity.UNCOMMON, new CardType[]{CardType.ENCHANTMENT}, "{2}{R}");
-        this.expansionSetCode = "GPT";
+    public HypervoltGrasp(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.ENCHANTMENT},"{2}{R}");
         this.subtype.add("Aura");
 
         

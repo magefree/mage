@@ -25,15 +25,15 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.saviorsofkamigawa;
+package mage.cards.p;
 
 import java.util.UUID;
 import mage.abilities.dynamicvalue.MultipliedValue;
 import mage.abilities.dynamicvalue.common.CardsInControllerHandCount;
 import mage.abilities.effects.common.GainLifeEffect;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.Rarity;
 
 /**
  *
@@ -41,9 +41,8 @@ import mage.constants.Rarity;
  */
 public class PresenceOfTheWise extends CardImpl {
 
-    public PresenceOfTheWise(UUID ownerId) {
-        super(ownerId, 23, "Presence of the Wise", Rarity.UNCOMMON, new CardType[]{CardType.SORCERY}, "{2}{W}{W}");
-        this.expansionSetCode = "SOK";
+    public PresenceOfTheWise(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{2}{W}{W}");
 
         // You gain 2 life for each card in your hand.
         this.getSpellAbility().addEffect(new GainLifeEffect(

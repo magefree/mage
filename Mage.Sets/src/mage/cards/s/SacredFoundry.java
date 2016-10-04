@@ -26,17 +26,17 @@
  *  or implied, of BetaSteward_at_googlemail.com.
  */
 
-package mage.sets.ravnica;
+package mage.cards.s;
 
 import java.util.UUID;
 import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.abilities.common.AsEntersBattlefieldAbility;
 import mage.abilities.costs.common.PayLifeCost;
 import mage.abilities.effects.common.TapSourceUnlessPaysEffect;
 import mage.abilities.mana.RedManaAbility;
 import mage.abilities.mana.WhiteManaAbility;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 
 /**
  *
@@ -44,9 +44,8 @@ import mage.cards.CardImpl;
  */
 public class SacredFoundry extends CardImpl {
 
-    public SacredFoundry (UUID ownerId) {
-        super(ownerId, 280, "Sacred Foundry", Rarity.RARE, new CardType[]{CardType.LAND}, null);
-        this.expansionSetCode = "RAV";
+    public SacredFoundry (UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.LAND},null);
         this.subtype.add("Mountain");
         this.subtype.add("Plains");
         this.addAbility(new RedManaAbility());

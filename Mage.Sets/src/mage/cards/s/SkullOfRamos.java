@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.mercadianmasques;
+package mage.cards.s;
 
 import java.util.UUID;
 import mage.Mana;
@@ -33,8 +33,8 @@ import mage.abilities.costs.common.SacrificeSourceCost;
 import mage.abilities.mana.BlackManaAbility;
 import mage.abilities.mana.SimpleManaAbility;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.constants.Zone;
 
 /**
@@ -43,9 +43,8 @@ import mage.constants.Zone;
  */
 public class SkullOfRamos extends CardImpl {
 
-    public SkullOfRamos(UUID ownerId) {
-        super(ownerId, 312, "Skull of Ramos", Rarity.RARE, new CardType[]{CardType.ARTIFACT}, "{3}");
-        this.expansionSetCode = "MMQ";
+    public SkullOfRamos(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.ARTIFACT},"{3}");
 
         // {tap}: Add {B} to your mana pool.
         this.addAbility(new BlackManaAbility());

@@ -25,11 +25,10 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.commander;
+package mage.cards.f;
 
 import java.util.UUID;
 import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.EntersBattlefieldTriggeredAbility;
@@ -37,6 +36,7 @@ import mage.abilities.effects.common.DestroyTargetEffect;
 import mage.abilities.keyword.TrampleAbility;
 import mage.abilities.keyword.EvokeAbility;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.target.Target;
 import mage.target.common.TargetLandPermanent;
 
@@ -46,9 +46,8 @@ import mage.target.common.TargetLandPermanent;
  */
 public class Faultgrinder extends CardImpl {
 
-    public Faultgrinder(UUID ownerId) {
-        super(ownerId, 122, "Faultgrinder", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{6}{R}");
-        this.expansionSetCode = "CMD";
+    public Faultgrinder(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{6}{R}");
         this.subtype.add("Elemental");
 
         this.power = new MageInt(4);

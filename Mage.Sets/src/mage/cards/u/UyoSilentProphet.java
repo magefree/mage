@@ -25,12 +25,11 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.championsofkamigawa;
+package mage.cards.u;
 
 import java.util.UUID;
 
 import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleActivatedAbility;
@@ -39,6 +38,7 @@ import mage.abilities.costs.mana.GenericManaCost;
 import mage.abilities.effects.common.CopyTargetSpellEffect;
 import mage.abilities.keyword.FlyingAbility;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.Zone;
 import mage.filter.FilterSpell;
 import mage.filter.common.FilterControlledLandPermanent;
@@ -61,9 +61,8 @@ public class UyoSilentProphet extends CardImpl {
                 new CardTypePredicate(CardType.SORCERY)));
     }
 
-    public UyoSilentProphet(UUID ownerId) {
-        super(ownerId, 99, "Uyo, Silent Prophet", Rarity.RARE, new CardType[]{CardType.CREATURE}, "{4}{U}{U}");
-        this.expansionSetCode = "CHK";
+    public UyoSilentProphet(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{4}{U}{U}");
         this.supertype.add("Legendary");
         this.subtype.add("Moonfolk");
         this.subtype.add("Wizard");

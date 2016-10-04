@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.ftvdragons;
+package mage.cards.d;
 
 import java.util.UUID;
 import mage.MageInt;
@@ -38,6 +38,7 @@ import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.cost.CostModificationEffectImpl;
 import mage.abilities.keyword.FlyingAbility;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.*;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
@@ -50,9 +51,8 @@ import mage.util.CardUtil;
  */
 public class Draco extends CardImpl {
 
-    public Draco(UUID ownerId) {
-        super(ownerId, 3, "Draco", Rarity.RARE, new CardType[]{CardType.ARTIFACT, CardType.CREATURE}, "{16}");
-        this.expansionSetCode = "DRB";
+    public Draco(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.ARTIFACT,CardType.CREATURE},"{16}");
         this.subtype.add("Dragon");
         this.power = new MageInt(9);
         this.toughness = new MageInt(9);

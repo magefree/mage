@@ -26,14 +26,13 @@
  *  or implied, of BetaSteward_at_googlemail.com.
  */
 
-package mage.sets.dragonsmaze;
+package mage.cards.m;
 
 import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
 import mage.constants.CardType;
 import mage.constants.Outcome;
-import mage.constants.Rarity;
 import mage.constants.Zone;
 import mage.abilities.Ability;
 import mage.abilities.common.EntersBattlefieldTappedAbility;
@@ -45,6 +44,7 @@ import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.search.SearchLibraryPutInPlayEffect;
 import mage.abilities.mana.ColorlessManaAbility;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.filter.FilterCard;
 import mage.filter.predicate.mageobject.SubtypePredicate;
 import mage.game.Game;
@@ -64,9 +64,8 @@ public class MazesEnd extends CardImpl {
         filterCard.add(new SubtypePredicate("Gate"));
     }
 
-    public MazesEnd(UUID ownerId) {
-        super(ownerId, 152, "Maze's End", Rarity.MYTHIC, new CardType[]{CardType.LAND}, "");
-        this.expansionSetCode = "DGM";
+    public MazesEnd(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.LAND},"");
 
 
         // Maze's End enters the battlefield tapped.

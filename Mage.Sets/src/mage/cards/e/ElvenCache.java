@@ -25,13 +25,13 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.visions;
+package mage.cards.e;
 
 import java.util.UUID;
 import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.abilities.effects.common.ReturnFromGraveyardToHandTargetEffect;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.target.common.TargetCardInYourGraveyard;
 
 /**
@@ -40,9 +40,8 @@ import mage.target.common.TargetCardInYourGraveyard;
  */
 public class ElvenCache extends CardImpl {
 
-    public ElvenCache(UUID ownerId) {
-        super(ownerId, 55, "Elven Cache", Rarity.COMMON, new CardType[]{CardType.SORCERY}, "{2}{G}{G}");
-        this.expansionSetCode = "VIS";
+    public ElvenCache(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{2}{G}{G}");
 
 
         // Return target card from your graveyard to your hand.

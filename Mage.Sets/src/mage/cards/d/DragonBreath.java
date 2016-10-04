@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.archenemy;
+package mage.cards.d;
 
 import java.util.UUID;
 import mage.abilities.Ability;
@@ -41,12 +41,12 @@ import mage.abilities.keyword.EnchantAbility;
 import mage.abilities.keyword.HasteAbility;
 import mage.cards.Card;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.AttachmentType;
 import mage.constants.CardType;
 import mage.constants.ColoredManaSymbol;
 import mage.constants.Duration;
 import mage.constants.Outcome;
-import mage.constants.Rarity;
 import mage.constants.SetTargetPointer;
 import mage.constants.Zone;
 import mage.filter.Filter.ComparisonType;
@@ -69,9 +69,8 @@ public class DragonBreath extends CardImpl {
         filter.add(new ConvertedManaCostPredicate(ComparisonType.GreaterThan, 5));
     }
 
-    public DragonBreath(UUID ownerId) {
-        super(ownerId, 33, "Dragon Breath", Rarity.COMMON, new CardType[]{CardType.ENCHANTMENT}, "{1}{R}");
-        this.expansionSetCode = "ARC";
+    public DragonBreath(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.ENCHANTMENT},"{1}{R}");
         this.subtype.add("Aura");
 
         // Enchant creature

@@ -25,14 +25,13 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.dragonsmaze;
+package mage.cards.n;
 
 import java.util.UUID;
 
 import mage.constants.CardType;
 import mage.constants.AsThoughEffectType;
 import mage.constants.Duration;
-import mage.constants.Rarity;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.SpellCastControllerTriggeredAbility;
@@ -40,6 +39,7 @@ import mage.abilities.effects.AsThoughEffectImpl;
 import mage.abilities.effects.common.continuous.BoostSourceEffect;
 import mage.abilities.keyword.DefenderAbility;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.Outcome;
 import mage.filter.FilterSpell;
 import mage.filter.predicate.Predicates;
@@ -61,9 +61,8 @@ public class NivixCyclops extends CardImpl {
                 new CardTypePredicate(CardType.SORCERY)));
     }
 
-    public NivixCyclops(UUID ownerId) {
-        super(ownerId, 87, "Nivix Cyclops", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{1}{U}{R}");
-        this.expansionSetCode = "DGM";
+    public NivixCyclops(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{1}{U}{R}");
         this.subtype.add("Cyclops");
 
         this.power = new MageInt(1);

@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package mage.sets.darksteel;
+package mage.cards.g;
 
 import java.util.UUID;
 import mage.MageInt;
@@ -14,9 +14,9 @@ import mage.abilities.costs.common.TapSourceCost;
 import mage.abilities.costs.mana.ManaCostsImpl;
 import mage.abilities.effects.OneShotEffect;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Outcome;
-import mage.constants.Rarity;
 import mage.constants.Zone;
 import mage.filter.common.FilterArtifactPermanent;
 import mage.game.Game;
@@ -30,9 +30,8 @@ import mage.target.TargetPermanent;
  */
 public class GoblinArchaeologist extends CardImpl {
 
-    public GoblinArchaeologist(UUID ownerId) {
-        super(ownerId, 63, "Goblin Archaeologist", Rarity.UNCOMMON, new CardType[]{CardType.CREATURE}, "{1}{R}");
-        this.expansionSetCode = "DST";
+    public GoblinArchaeologist(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{1}{R}");
         this.subtype.add("Goblin");
         this.subtype.add("Artificer");
 

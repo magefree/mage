@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.legends;
+package mage.cards.t;
 
 import java.util.UUID;
 
@@ -39,6 +39,7 @@ import mage.abilities.costs.mana.ManaCostsImpl;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.continuous.GainAbilityAllEffect;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
@@ -50,9 +51,8 @@ import mage.players.Player;
  */
 public class TheTabernacleAtPendrellVale extends CardImpl {
 
-    public TheTabernacleAtPendrellVale(UUID ownerId) {
-        super(ownerId, 252, "The Tabernacle at Pendrell Vale", Rarity.RARE, new CardType[]{CardType.LAND}, "");
-        this.expansionSetCode = "LEG";
+    public TheTabernacleAtPendrellVale(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.LAND},"");
         this.supertype.add("Legendary");
 
         // All creatures have "At the beginning of your upkeep, destroy this creature unless you pay {1}."

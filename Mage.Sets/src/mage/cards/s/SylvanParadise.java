@@ -26,7 +26,7 @@
  *  or implied, of BetaSteward_at_googlemail.com.
  */
 
-package mage.sets.legends;
+package mage.cards.s;
 
         import java.util.UUID;
 
@@ -34,10 +34,10 @@ package mage.sets.legends;
         import mage.abilities.effects.Effect;
         import mage.abilities.effects.common.continuous.BecomesColorTargetEffect;
         import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
         import mage.constants.CardType;
         import mage.constants.Duration;
-        import mage.constants.Rarity;
-        import mage.filter.common.FilterCreaturePermanent;
+                import mage.filter.common.FilterCreaturePermanent;
         import mage.target.common.TargetCreaturePermanent;
 
 /**
@@ -46,9 +46,8 @@ package mage.sets.legends;
  */
 public class SylvanParadise extends CardImpl {
 
-    public SylvanParadise(UUID ownerId) {
-        super(ownerId, 122, "Sylvan Paradise", Rarity.UNCOMMON, new CardType[]{CardType.INSTANT}, "{G}");
-        this.expansionSetCode = "LEG";
+    public SylvanParadise(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.INSTANT},"{G}");
 
         // Any number of target creatures become green until end of turn.
         Effect effect = new BecomesColorTargetEffect(ObjectColor.GREEN, Duration.EndOfTurn);

@@ -25,14 +25,14 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.dragonsoftarkir;
+package mage.cards.p;
 
 import java.util.UUID;
 import mage.abilities.effects.common.ReturnFromGraveyardToBattlefieldTargetEffect;
 import mage.abilities.keyword.ReboundAbility;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.filter.FilterCard;
 import mage.filter.predicate.Predicates;
 import mage.filter.predicate.mageobject.CardTypePredicate;
@@ -55,9 +55,8 @@ public class ProfoundJourney extends CardImpl {
                 new CardTypePredicate(CardType.PLANESWALKER)));
     }
 
-    public ProfoundJourney(UUID ownerId) {
-        super(ownerId, 30, "Profound Journey", Rarity.RARE, new CardType[]{CardType.SORCERY}, "{5}{W}{W}");
-        this.expansionSetCode = "DTK";
+    public ProfoundJourney(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{5}{W}{W}");
 
         // Return target permanent card from your graveyard to the battlefield.
         this.getSpellAbility().addEffect(new ReturnFromGraveyardToBattlefieldTargetEffect());

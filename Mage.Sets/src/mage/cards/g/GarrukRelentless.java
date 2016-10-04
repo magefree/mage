@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.innistrad;
+package mage.cards.g;
 
 import java.util.UUID;
 import mage.abilities.Ability;
@@ -37,9 +37,9 @@ import mage.abilities.effects.common.CreateTokenEffect;
 import mage.abilities.effects.common.TransformSourceEffect;
 import mage.abilities.keyword.TransformAbility;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Outcome;
-import mage.constants.Rarity;
 import mage.constants.Zone;
 import mage.counters.CounterType;
 import mage.game.Game;
@@ -54,13 +54,12 @@ import mage.target.common.TargetCreaturePermanent;
  */
 public class GarrukRelentless extends CardImpl {
 
-    public GarrukRelentless(UUID ownerId) {
-        super(ownerId, 181, "Garruk Relentless", Rarity.MYTHIC, new CardType[]{CardType.PLANESWALKER}, "{3}{G}");
-        this.expansionSetCode = "ISD";
+    public GarrukRelentless(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.PLANESWALKER},"{3}{G}");
         this.subtype.add("Garruk");
 
         this.transformable = true;
-        this.secondSideCard = new GarrukTheVeilCursed(ownerId);
+        this.secondSideCardClazz = GarrukTheVeilCursed.class;
 
         this.addAbility(new PlanswalkerEntersWithLoyalityCountersAbility(3));
 

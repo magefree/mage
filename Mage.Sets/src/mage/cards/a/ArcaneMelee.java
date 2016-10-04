@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.avacynrestored;
+package mage.cards.a;
 
 import mage.constants.*;
 import mage.abilities.Ability;
@@ -35,6 +35,7 @@ import mage.abilities.effects.common.cost.CostModificationEffectImpl;
 import mage.abilities.keyword.FlashbackAbility;
 import mage.cards.Card;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.game.Game;
 import mage.util.CardUtil;
 
@@ -46,9 +47,8 @@ import java.util.UUID;
  */
 public class ArcaneMelee extends CardImpl {
 
-    public ArcaneMelee(UUID ownerId) {
-        super(ownerId, 44, "Arcane Melee", Rarity.RARE, new CardType[]{CardType.ENCHANTMENT}, "{4}{U}");
-        this.expansionSetCode = "AVR";
+    public ArcaneMelee(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.ENCHANTMENT},"{4}{U}");
 
         // Instant and sorcery spells cost {2} less to cast.
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new ArcaneMeleeCostReductionEffect()));

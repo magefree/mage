@@ -26,13 +26,13 @@
  *  or implied, of BetaSteward_at_googlemail.com.
  */
 
-package mage.sets.riseoftheeldrazi;
+package mage.cards.a;
 
 import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.abilities.dynamicvalue.common.StaticValue;
 import mage.abilities.effects.common.LookLibraryAndPickControllerEffect;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.filter.FilterCard;
 import mage.filter.predicate.mageobject.ColorlessPredicate;
 
@@ -51,9 +51,8 @@ public class AncientStirrings extends CardImpl {
     }
 
 
-    public AncientStirrings(UUID ownerId) {
-        super(ownerId, 174, "Ancient Stirrings", Rarity.COMMON, new CardType[]{CardType.SORCERY}, "{G}");
-        this.expansionSetCode = "ROE";
+    public AncientStirrings(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{G}");
 
         // Look at the top five cards of your library. You may reveal a colorless card from among them and put it into your hand. 
         // Then put the rest on the bottom of your library in any order. (Cards with no colored mana in their mana costs are colorless. Lands are also colorless.)

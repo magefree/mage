@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.timeshifted;
+package mage.cards.k;
 
 import java.util.UUID;
 import mage.MageInt;
@@ -34,8 +34,8 @@ import mage.abilities.costs.mana.ManaCostsImpl;
 import mage.abilities.effects.common.SacrificeSourceUnlessPaysEffect;
 import mage.abilities.keyword.MorphAbility;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.constants.TargetController;
 
 /**
@@ -44,9 +44,8 @@ import mage.constants.TargetController;
  */
 public class KrosanCloudscraper extends CardImpl {
 
-    public KrosanCloudscraper(UUID ownerId) {
-        super(ownerId, 82, "Krosan Cloudscraper", Rarity.SPECIAL, new CardType[]{CardType.CREATURE}, "{7}{G}{G}{G}");
-        this.expansionSetCode = "TSB";
+    public KrosanCloudscraper(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{7}{G}{G}{G}");
         this.subtype.add("Beast");
         this.subtype.add("Mutant");
 

@@ -25,13 +25,13 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.ninthedition;
+package mage.cards.f;
 
 import java.util.UUID;
 import mage.abilities.mana.AnyColorLandsProduceManaAbility;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.constants.TargetController;
 
 /**
@@ -40,9 +40,8 @@ import mage.constants.TargetController;
  */
 public class FellwarStone extends CardImpl {
 
-    public FellwarStone(UUID ownerId) {
-        super(ownerId, 297, "Fellwar Stone", Rarity.UNCOMMON, new CardType[]{CardType.ARTIFACT}, "{2}");
-        this.expansionSetCode = "9ED";
+    public FellwarStone(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.ARTIFACT},"{2}");
 
         // {T}: Add to your mana pool one mana of any color that a land an opponent controls could produce.
         this.addAbility(new AnyColorLandsProduceManaAbility(TargetController.OPPONENT));

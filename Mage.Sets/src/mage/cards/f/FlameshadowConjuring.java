@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.magicorigins;
+package mage.cards.f;
 
 import java.util.UUID;
 import mage.abilities.Ability;
@@ -37,9 +37,9 @@ import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.ExileTargetEffect;
 import mage.abilities.effects.common.PutTokenOntoBattlefieldCopyTargetEffect;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Outcome;
-import mage.constants.Rarity;
 import mage.constants.SetTargetPointer;
 import mage.constants.Zone;
 import mage.filter.common.FilterControlledCreaturePermanent;
@@ -61,9 +61,8 @@ public class FlameshadowConjuring extends CardImpl {
         filterNontoken.add(Predicates.not(new TokenPredicate()));
     }
 
-    public FlameshadowConjuring(UUID ownerId) {
-        super(ownerId, 147, "Flameshadow Conjuring", Rarity.RARE, new CardType[]{CardType.ENCHANTMENT}, "{3}{R}");
-        this.expansionSetCode = "ORI";
+    public FlameshadowConjuring(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.ENCHANTMENT},"{3}{R}");
 
         // Whenever a nontoken creature enters the battlefield under your control, you may pay {R}. If you do, put a token onto the battlefield that's a copy of that creature. That token gains haste. Exile it at the beginning of the next end step.
         Ability ability = new EntersBattlefieldControlledTriggeredAbility(Zone.BATTLEFIELD, new FlameshadowConjuringEffect(), filterNontoken, false, SetTargetPointer.PERMANENT,

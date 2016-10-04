@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.timespiral;
+package mage.cards.g;
 
 import java.util.UUID;
 import mage.Mana;
@@ -39,11 +39,11 @@ import mage.abilities.effects.common.ChooseColorEffect;
 import mage.abilities.effects.common.ManaEffect;
 import mage.abilities.mana.TriggeredManaAbility;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Duration;
 import mage.constants.Layer;
 import mage.constants.Outcome;
-import mage.constants.Rarity;
 import mage.constants.SetTargetPointer;
 import mage.constants.SubLayer;
 import mage.constants.Zone;
@@ -71,9 +71,8 @@ public class GauntletOfPower extends CardImpl {
         filter.add(new SupertypePredicate("Basic"));
     }
 
-    public GauntletOfPower(UUID ownerId) {
-        super(ownerId, 255, "Gauntlet of Power", Rarity.RARE, new CardType[]{CardType.ARTIFACT}, "{5}");
-        this.expansionSetCode = "TSP";
+    public GauntletOfPower(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.ARTIFACT},"{5}");
 
         // As Gauntlet of Power enters the battlefield, choose a color.
         this.addAbility(new EntersBattlefieldAbility(new ChooseColorEffect(Outcome.Neutral)));

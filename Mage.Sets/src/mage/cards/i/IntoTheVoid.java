@@ -25,12 +25,12 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.avacynrestored;
+package mage.cards.i;
 
 import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.abilities.effects.common.ReturnToHandTargetEffect;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.target.common.TargetCreaturePermanent;
 
 import java.util.UUID;
@@ -41,9 +41,8 @@ import java.util.UUID;
  */
 public class IntoTheVoid extends CardImpl {
 
-    public IntoTheVoid(UUID ownerId) {
-        super(ownerId, 62, "Into the Void", Rarity.UNCOMMON, new CardType[]{CardType.SORCERY}, "{3}{U}");
-        this.expansionSetCode = "AVR";
+    public IntoTheVoid(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{3}{U}");
 
 
         // Return up to two target creatures to their owners' hands.

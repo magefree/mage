@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.gatecrash;
+package mage.cards.s;
 
 import java.util.UUID;
 
@@ -35,6 +35,7 @@ import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.effects.common.continuous.BoostAllEffect;
 import mage.abilities.keyword.FlyingAbility;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.filter.predicate.mageobject.AbilityPredicate;
 import mage.filter.predicate.permanent.ControllerPredicate;
@@ -51,9 +52,8 @@ public class SmogElemental extends CardImpl {
         filter.add(new AbilityPredicate(FlyingAbility.class));
     }
 
-    public SmogElemental(UUID ownerId) {
-        super(ownerId, 79, "Smog Elemental", Rarity.UNCOMMON, new CardType[]{CardType.CREATURE}, "{4}{B}{B}");
-        this.expansionSetCode = "GTC";
+    public SmogElemental(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{4}{B}{B}");
         this.subtype.add("Elemental");
 
         this.power = new MageInt(3);

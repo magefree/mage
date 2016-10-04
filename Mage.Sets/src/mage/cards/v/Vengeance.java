@@ -25,13 +25,13 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.seventhedition;
+package mage.cards.v;
 
 import java.util.UUID;
 import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.abilities.effects.common.DestroyTargetEffect;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.filter.predicate.permanent.TappedPredicate;
 import mage.target.common.TargetCreaturePermanent;
@@ -47,9 +47,8 @@ public class Vengeance extends CardImpl {
         filter.add(new TappedPredicate());
     }
 
-    public Vengeance(UUID ownerId) {
-        super(ownerId, 54, "Vengeance", Rarity.UNCOMMON, new CardType[]{CardType.SORCERY}, "{3}{W}");
-        this.expansionSetCode = "7ED";
+    public Vengeance(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{3}{W}");
 
 
         // Destroy target tapped creature.

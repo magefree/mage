@@ -25,15 +25,15 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.conspiracy;
+package mage.cards.d;
 
 import java.util.UUID;
 import mage.abilities.common.BeginningOfEndStepTriggeredAbility;
 import mage.abilities.condition.common.MorbidCondition;
 import mage.abilities.effects.common.DrawCardSourceControllerEffect;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.constants.TargetController;
 import mage.constants.Zone;
 
@@ -43,9 +43,8 @@ import mage.constants.Zone;
  */
 public class DeathreapRitual extends CardImpl {
 
-    public DeathreapRitual(UUID ownerId) {
-        super(ownerId, 44, "Deathreap Ritual", Rarity.UNCOMMON, new CardType[]{CardType.ENCHANTMENT}, "{2}{B}{G}");
-        this.expansionSetCode = "CNS";
+    public DeathreapRitual(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.ENCHANTMENT},"{2}{B}{G}");
 
         // Morbid - At the beginning of each end step, if a creature died this turn, you may draw a card.
         this.addAbility(new BeginningOfEndStepTriggeredAbility(Zone.BATTLEFIELD, new DrawCardSourceControllerEffect(1),

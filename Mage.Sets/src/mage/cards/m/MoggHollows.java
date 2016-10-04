@@ -25,17 +25,17 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.tempest;
+package mage.cards.m;
 
 import java.util.UUID;
 import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.abilities.Ability;
 import mage.abilities.effects.common.DontUntapInControllersNextUntapStepSourceEffect;
 import mage.abilities.mana.ColorlessManaAbility;
 import mage.abilities.mana.GreenManaAbility;
 import mage.abilities.mana.RedManaAbility;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 
 /**
  *
@@ -43,9 +43,8 @@ import mage.cards.CardImpl;
  */
 public class MoggHollows extends CardImpl {
 
-    public MoggHollows(UUID ownerId) {
-        super(ownerId, 318, "Mogg Hollows", Rarity.UNCOMMON, new CardType[]{CardType.LAND}, null);
-        this.expansionSetCode = "TMP";
+    public MoggHollows(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.LAND},null);
 
         // {tap}: Add {C} to your mana pool.
         this.addAbility(new ColorlessManaAbility());

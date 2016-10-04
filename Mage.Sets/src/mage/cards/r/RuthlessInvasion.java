@@ -26,15 +26,15 @@
  *  or implied, of BetaSteward_at_googlemail.com.
  */
 
-package mage.sets.newphyrexia;
+package mage.cards.r;
 
 import java.util.UUID;
 
 import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.abilities.Ability;
 import mage.abilities.effects.RestrictionEffect;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.Duration;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
@@ -45,9 +45,8 @@ import mage.game.permanent.Permanent;
  */
 public class RuthlessInvasion extends CardImpl {
 
-    public RuthlessInvasion (UUID ownerId) {
-        super(ownerId, 93, "Ruthless Invasion", Rarity.COMMON, new CardType[]{CardType.SORCERY}, "{3}{RP}");
-        this.expansionSetCode = "NPH";
+    public RuthlessInvasion (UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{3}{RP}");
 
         this.getSpellAbility().addEffect(new RuthlessInvasionEffect());
     }

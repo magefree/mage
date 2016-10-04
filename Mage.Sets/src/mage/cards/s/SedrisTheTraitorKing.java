@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.shardsofalara;
+package mage.cards.s;
 
 import java.util.UUID;
 
@@ -38,6 +38,7 @@ import mage.abilities.effects.ContinuousEffectImpl;
 import mage.abilities.keyword.UnearthAbility;
 import mage.cards.Card;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.game.Game;
 import mage.players.Player;
 
@@ -46,9 +47,8 @@ import mage.players.Player;
  */
 public class SedrisTheTraitorKing extends CardImpl {
 
-    public SedrisTheTraitorKing(UUID ownerId) {
-        super(ownerId, 193, "Sedris, the Traitor King", Rarity.MYTHIC, new CardType[]{CardType.CREATURE}, "{3}{U}{B}{R}");
-        this.expansionSetCode = "ALA";
+    public SedrisTheTraitorKing(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{3}{U}{B}{R}");
         this.supertype.add("Legendary");
         this.subtype.add("Zombie");
         this.subtype.add("Warrior");

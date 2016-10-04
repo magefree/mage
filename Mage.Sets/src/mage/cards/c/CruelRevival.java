@@ -25,16 +25,16 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.onslaught;
+package mage.cards.c;
 
 import java.util.UUID;
 
 import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.abilities.Ability;
 import mage.abilities.effects.OneShotEffect;
 import mage.cards.Card;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.Outcome;
 import mage.constants.Zone;
 import mage.filter.FilterCard;
@@ -62,9 +62,8 @@ public class CruelRevival extends CardImpl {
         filter2.add(new SubtypePredicate("Zombie"));
     }
 
-    public CruelRevival(UUID ownerId) {
-        super(ownerId, 135, "Cruel Revival", Rarity.COMMON, new CardType[]{CardType.INSTANT}, "{4}{B}");
-        this.expansionSetCode = "ONS";
+    public CruelRevival(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.INSTANT},"{4}{B}");
 
 
         // Destroy target non-Zombie creature. It can't be regenerated. Return up to one target Zombie card from your graveyard to your hand.

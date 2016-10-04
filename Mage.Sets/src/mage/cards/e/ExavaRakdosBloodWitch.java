@@ -25,13 +25,12 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.dragonsmaze;
+package mage.cards.e;
 
 import java.util.UUID;
 
 import mage.constants.CardType;
 import mage.constants.Duration;
-import mage.constants.Rarity;
 import mage.constants.Zone;
 import mage.MageInt;
 import mage.abilities.common.SimpleStaticAbility;
@@ -40,6 +39,7 @@ import mage.abilities.keyword.FirstStrikeAbility;
 import mage.abilities.keyword.HasteAbility;
 import mage.abilities.keyword.UnleashAbility;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.TargetController;
 import mage.counters.CounterType;
 import mage.filter.FilterPermanent;
@@ -63,9 +63,8 @@ public class ExavaRakdosBloodWitch extends CardImpl {
     }
 
     final String rule = "Each other creature you control with a +1/+1 counter on it has haste";
-    public ExavaRakdosBloodWitch(UUID ownerId) {
-        super(ownerId, 69, "Exava, Rakdos Blood Witch", Rarity.RARE, new CardType[]{CardType.CREATURE}, "{2}{B}{R}");
-        this.expansionSetCode = "DGM";
+    public ExavaRakdosBloodWitch(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{2}{B}{R}");
         this.supertype.add("Legendary");
         this.subtype.add("Human");
         this.subtype.add("Cleric");

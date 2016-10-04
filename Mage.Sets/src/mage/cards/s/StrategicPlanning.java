@@ -25,18 +25,18 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.commander2013;
+package mage.cards.s;
 
 import java.util.UUID;
 import mage.abilities.Ability;
 import mage.abilities.effects.OneShotEffect;
 import mage.cards.Card;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.cards.Cards;
 import mage.cards.CardsImpl;
 import mage.constants.CardType;
 import mage.constants.Outcome;
-import mage.constants.Rarity;
 import mage.constants.Zone;
 import mage.filter.FilterCard;
 import mage.game.Game;
@@ -49,9 +49,8 @@ import mage.target.TargetCard;
  */
 public class StrategicPlanning extends CardImpl {
 
-    public StrategicPlanning(UUID ownerId) {
-        super(ownerId, 59, "Strategic Planning", Rarity.UNCOMMON, new CardType[]{CardType.SORCERY}, "{1}{U}");
-        this.expansionSetCode = "C13";
+    public StrategicPlanning(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{1}{U}");
 
 
         // Look at the top three cards of your library. Put one of them into your hand and the rest into your graveyard.

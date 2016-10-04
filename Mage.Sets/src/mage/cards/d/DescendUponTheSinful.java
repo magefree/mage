@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.shadowsoverinnistrad;
+package mage.cards.d;
 
 import java.util.UUID;
 import mage.abilities.condition.common.DeliriumCondition;
@@ -34,8 +34,8 @@ import mage.abilities.effects.Effect;
 import mage.abilities.effects.common.CreateTokenEffect;
 import mage.abilities.effects.common.ExileAllEffect;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.game.permanent.token.AngelToken;
 
@@ -45,9 +45,8 @@ import mage.game.permanent.token.AngelToken;
  */
 public class DescendUponTheSinful extends CardImpl {
 
-    public DescendUponTheSinful(UUID ownerId) {
-        super(ownerId, 13, "Descend upon the Sinful", Rarity.MYTHIC, new CardType[]{CardType.SORCERY}, "{4}{W}{W}");
-        this.expansionSetCode = "SOI";
+    public DescendUponTheSinful(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{4}{W}{W}");
 
         // Exile all creatures
         this.getSpellAbility().addEffect(new ExileAllEffect(new FilterCreaturePermanent()));

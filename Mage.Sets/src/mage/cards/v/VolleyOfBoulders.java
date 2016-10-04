@@ -25,15 +25,15 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.odyssey;
+package mage.cards.v;
 
 import java.util.UUID;
 import mage.abilities.costs.mana.ManaCostsImpl;
 import mage.abilities.effects.common.DamageMultiEffect;
 import mage.abilities.keyword.FlashbackAbility;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.constants.TimingRule;
 import mage.target.common.TargetCreatureOrPlayerAmount;
 
@@ -43,9 +43,8 @@ import mage.target.common.TargetCreatureOrPlayerAmount;
  */
 public class VolleyOfBoulders extends CardImpl {
 
-    public VolleyOfBoulders(UUID ownerId) {
-        super(ownerId, 227, "Volley of Boulders", Rarity.RARE, new CardType[]{CardType.SORCERY}, "{8}{R}");
-        this.expansionSetCode = "ODY";
+    public VolleyOfBoulders(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{8}{R}");
 
 
         // Volley of Boulders deals 6 damage divided as you choose among any number of target creatures and/or players.

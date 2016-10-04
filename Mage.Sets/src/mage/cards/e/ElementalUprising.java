@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.oathofthegatewatch;
+package mage.cards.e;
 
 import java.util.UUID;
 import mage.MageInt;
@@ -34,9 +34,9 @@ import mage.abilities.effects.common.combat.MustBeBlockedByAtLeastOneTargetEffec
 import mage.abilities.effects.common.continuous.BecomesCreatureTargetEffect;
 import mage.abilities.keyword.HasteAbility;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Duration;
-import mage.constants.Rarity;
 import mage.constants.TargetController;
 import mage.filter.common.FilterLandPermanent;
 import mage.filter.predicate.permanent.ControllerPredicate;
@@ -55,9 +55,8 @@ public class ElementalUprising extends CardImpl {
         filter.add(new ControllerPredicate(TargetController.YOU));
     }
 
-    public ElementalUprising(UUID ownerId) {
-        super(ownerId, 130, "Elemental Uprising", Rarity.COMMON, new CardType[]{CardType.INSTANT}, "{1}{G}");
-        this.expansionSetCode = "OGW";
+    public ElementalUprising(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.INSTANT},"{1}{G}");
 
         // Target land you control becomes a 4/4 Elemental creature with haste until end of turn. It's still a land. It must be blocked this turn if able.
         getSpellAbility().addEffect(new BecomesCreatureTargetEffect(new ElementalUprisingToken(), false, true, Duration.EndOfTurn));

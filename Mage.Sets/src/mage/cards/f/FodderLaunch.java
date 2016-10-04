@@ -25,16 +25,16 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.lorwyn;
+package mage.cards.f;
 
 import java.util.UUID;
 
 import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.abilities.costs.common.SacrificeTargetCost;
 import mage.abilities.effects.common.DamageTargetControllerEffect;
 import mage.abilities.effects.common.continuous.BoostTargetEffect;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.Duration;
 import mage.filter.common.FilterControlledCreaturePermanent;
 import mage.target.common.TargetControlledCreaturePermanent;
@@ -45,9 +45,8 @@ import mage.target.common.TargetCreaturePermanent;
  */
 public class FodderLaunch extends CardImpl {
 
-    public FodderLaunch(UUID ownerId) {
-        super(ownerId, 114, "Fodder Launch", Rarity.UNCOMMON, new CardType[]{CardType.TRIBAL, CardType.SORCERY}, "{3}{B}");
-        this.expansionSetCode = "LRW";
+    public FodderLaunch(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.TRIBAL,CardType.SORCERY},"{3}{B}");
         this.subtype.add("Goblin");
 
         //As an additional cost to cast Fodder Launch, sacrifice a Goblin.

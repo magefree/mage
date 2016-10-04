@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.newphyrexia;
+package mage.cards.c;
 
 import mage.MageInt;
 import mage.abilities.Ability;
@@ -33,6 +33,7 @@ import mage.abilities.common.ZoneChangeTriggeredAbility;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.keyword.DefenderAbility;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.*;
 import mage.game.Game;
 import mage.game.events.GameEvent;
@@ -49,9 +50,8 @@ import java.util.UUID;
  */
 public class CathedralMembrane extends CardImpl {
 
-    public CathedralMembrane(UUID ownerId) {
-        super(ownerId, 5, "Cathedral Membrane", Rarity.UNCOMMON, new CardType[]{CardType.ARTIFACT, CardType.CREATURE}, "{1}{WP}");
-        this.expansionSetCode = "NPH";
+    public CathedralMembrane(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.ARTIFACT,CardType.CREATURE},"{1}{WP}");
         this.subtype.add("Wall");
 
         this.power = new MageInt(0);

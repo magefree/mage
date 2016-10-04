@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.mirrodin;
+package mage.cards.s;
 
 import java.util.ArrayList;
 import java.util.UUID;
@@ -35,6 +35,7 @@ import mage.abilities.Ability;
 import mage.abilities.effects.OneShotEffect;
 import mage.cards.Card;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.game.Game;
 import mage.game.events.GameEvent;
 import mage.game.events.ZoneChangeEvent;
@@ -46,9 +47,8 @@ import mage.watchers.Watcher;
  */
 public class SecondSunrise extends CardImpl {
 
-    public SecondSunrise(UUID ownerId) {
-        super(ownerId, 20, "Second Sunrise", Rarity.RARE, new CardType[]{CardType.INSTANT}, "{1}{W}{W}");
-        this.expansionSetCode = "MRD";
+    public SecondSunrise(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.INSTANT},"{1}{W}{W}");
 
 
         // Each player returns to the battlefield all artifact, creature, enchantment, and land cards in his or her graveyard that were put there from the battlefield this turn.

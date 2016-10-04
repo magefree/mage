@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.shardsofalara;
+package mage.cards.s;
 
 import java.util.UUID;
 import mage.MageInt;
@@ -35,9 +35,9 @@ import mage.abilities.effects.RestrictionUntapNotMoreThanEffect;
 import mage.abilities.keyword.FlyingAbility;
 import mage.abilities.keyword.VigilanceAbility;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Duration;
-import mage.constants.Rarity;
 import mage.constants.Zone;
 import mage.filter.common.FilterControlledCreaturePermanent;
 import mage.filter.common.FilterControlledPermanent;
@@ -50,9 +50,8 @@ import mage.players.Player;
  */
 public class StoicAngel extends CardImpl {
 
-    public StoicAngel(UUID ownerId) {
-        super(ownerId, 199, "Stoic Angel", Rarity.RARE, new CardType[]{CardType.CREATURE}, "{1}{G}{W}{U}");
-        this.expansionSetCode = "ALA";
+    public StoicAngel(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{1}{G}{W}{U}");
         this.subtype.add("Angel");
 
         this.power = new MageInt(3);

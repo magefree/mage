@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.kaladesh;
+package mage.cards.v;
 
 import java.util.UUID;
 import mage.MageInt;
@@ -36,9 +36,9 @@ import mage.abilities.effects.common.CrewsVehicleSourceTriggeredAbility;
 import mage.abilities.effects.common.continuous.BoostTargetEffect;
 import mage.abilities.effects.keyword.ScryEffect;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Duration;
-import mage.constants.Rarity;
 import mage.constants.Zone;
 import mage.game.Game;
 import mage.game.events.GameEvent;
@@ -50,9 +50,8 @@ import mage.target.targetpointer.FixedTarget;
  */
 public class VeteranMotorist extends CardImpl {
 
-    public VeteranMotorist(UUID ownerId) {
-        super(ownerId, 188, "Veteran Motorist", Rarity.UNCOMMON, new CardType[]{CardType.CREATURE}, "{R}{W}");
-        this.expansionSetCode = "KLD";
+    public VeteranMotorist(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{R}{W}");
         this.subtype.add("Dwarf");
         this.subtype.add("Pilot");
         this.power = new MageInt(3);

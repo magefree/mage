@@ -25,15 +25,15 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.tempestremastered;
+package mage.cards.r;
 
 import java.util.UUID;
 import mage.abilities.Ability;
 import mage.abilities.effects.OneShotEffect;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Outcome;
-import mage.constants.Rarity;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.players.Player;
@@ -45,9 +45,8 @@ import mage.target.common.TargetCreaturePermanent;
  */
 public class Repentance extends CardImpl {
 
-    public Repentance(UUID ownerId) {
-        super(ownerId, 25, "Repentance", Rarity.UNCOMMON, new CardType[]{CardType.SORCERY}, "{2}{W}");
-        this.expansionSetCode = "TPR";
+    public Repentance(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{2}{W}");
 
         // Target creature deals damage to itself equal to its power.
         this.getSpellAbility().addEffect(new RepentanceEffect());

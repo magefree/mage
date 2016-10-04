@@ -26,12 +26,11 @@
  *  or implied, of BetaSteward_at_googlemail.com.
  */
 
-package mage.sets.apocalypse;
+package mage.cards.b;
 
 import java.util.UUID;
 
 import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleActivatedAbility;
@@ -39,6 +38,7 @@ import mage.abilities.costs.common.SacrificeSourceCost;
 import mage.abilities.costs.mana.ColoredManaCost;
 import mage.abilities.effects.common.DamageEverythingEffect;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.ColoredManaSymbol;
 import mage.constants.Zone;
 
@@ -47,9 +47,8 @@ import mage.constants.Zone;
  */
 public class BloodfireColossus extends CardImpl {
 
-    public BloodfireColossus(UUID ownerId) {
-        super(ownerId, 55, "Bloodfire Colossus", Rarity.RARE, new CardType[]{CardType.CREATURE}, "{6}{R}{R}");
-        this.expansionSetCode = "APC";
+    public BloodfireColossus(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{6}{R}{R}");
         this.subtype.add("Giant");
 
         this.power = new MageInt(6);

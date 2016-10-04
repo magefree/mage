@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.dragonsoftarkir;
+package mage.cards.s;
 
 import java.util.UUID;
 import mage.abilities.dynamicvalue.common.CardsInControllerHandCount;
@@ -34,9 +34,9 @@ import mage.abilities.effects.common.continuous.GainAbilityControlledEffect;
 import mage.abilities.effects.keyword.BolsterEffect;
 import mage.abilities.keyword.TrampleAbility;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Duration;
-import mage.constants.Rarity;
 import mage.counters.CounterType;
 import mage.filter.common.FilterControlledCreaturePermanent;
 import mage.filter.predicate.permanent.CounterPredicate;
@@ -52,9 +52,8 @@ public class SunbringersTouch extends CardImpl {
         filter.add(new CounterPredicate(CounterType.P1P1));
     }
 
-    public SunbringersTouch(UUID ownerId) {
-        super(ownerId, 209, "Sunbringer's Touch", Rarity.RARE, new CardType[]{CardType.SORCERY}, "{2}{G}{G}");
-        this.expansionSetCode = "DTK";
+    public SunbringersTouch(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{2}{G}{G}");
 
         // Bolster X, where X is the number of cards in your hand. 
         this.getSpellAbility().addEffect(new BolsterEffect(new CardsInControllerHandCount()));

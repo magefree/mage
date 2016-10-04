@@ -25,16 +25,16 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.homelands;
+package mage.cards.a;
 
 import java.util.UUID;
 import mage.ObjectColor;
 import mage.abilities.Ability;
 import mage.abilities.effects.OneShotEffect;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Outcome;
-import mage.constants.Rarity;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.filter.predicate.mageobject.ColorPredicate;
 import mage.game.Game;
@@ -46,9 +46,8 @@ import mage.players.Player;
  */
 public class AnHavvaInn extends CardImpl {
 
-    public AnHavvaInn(UUID ownerId) {
-        super(ownerId, 52, "An-Havva Inn", Rarity.UNCOMMON, new CardType[]{CardType.SORCERY}, "{1}{G}{G}");
-        this.expansionSetCode = "HML";
+    public AnHavvaInn(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{1}{G}{G}");
 
         // You gain X plus 1 life, where X is the number of green creatures on the battlefield.
         this.getSpellAbility().addEffect(new AnHavvaInnEffect());

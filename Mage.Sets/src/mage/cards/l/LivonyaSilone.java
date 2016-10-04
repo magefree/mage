@@ -25,15 +25,15 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.masterseditioniii;
+package mage.cards.l;
 
 import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.keyword.FirstStrikeAbility;
 import mage.abilities.keyword.LandwalkAbility;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.filter.common.FilterLandPermanent;
 import mage.filter.predicate.mageobject.SupertypePredicate;
 
@@ -49,9 +49,8 @@ public class LivonyaSilone extends CardImpl {
         filter.add(new SupertypePredicate("Legendary"));
     }
 
-    public LivonyaSilone(UUID ownerId) {
-        super(ownerId, 160, "Livonya Silone", Rarity.UNCOMMON, new CardType[]{CardType.CREATURE}, "{2}{R}{R}{G}{G}");
-        this.expansionSetCode = "ME3";
+    public LivonyaSilone(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{2}{R}{R}{G}{G}");
         this.supertype.add("Legendary");
         this.subtype.add("Human");
         this.subtype.add("Warrior");

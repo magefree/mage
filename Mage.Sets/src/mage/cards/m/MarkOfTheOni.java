@@ -26,13 +26,12 @@
  *  or implied, of BetaSteward_at_googlemail.com.
  */
 
-package mage.sets.betrayersofkamigawa;
+package mage.cards.m;
 
 import java.util.UUID;
 
 import mage.constants.CardType;
 import mage.constants.Outcome;
-import mage.constants.Rarity;
 import mage.constants.Zone;
 import mage.abilities.Ability;
 import mage.abilities.common.BeginningOfEndStepTriggeredAbility;
@@ -43,6 +42,7 @@ import mage.abilities.effects.common.SacrificeSourceEffect;
 import mage.abilities.effects.common.continuous.ControlEnchantedEffect;
 import mage.abilities.keyword.EnchantAbility;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.TargetController;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.filter.predicate.mageobject.SubtypePredicate;
@@ -59,9 +59,8 @@ public class MarkOfTheOni extends CardImpl {
         filter.add(new SubtypePredicate("Demon"));
     }
 
-    public MarkOfTheOni(UUID ownerId) {
-        super(ownerId, 73, "Mark of the Oni", Rarity.UNCOMMON, new CardType[]{CardType.ENCHANTMENT}, "{2}{B}");
-        this.expansionSetCode = "BOK";
+    public MarkOfTheOni(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.ENCHANTMENT},"{2}{B}");
 
         this.subtype.add("Aura");
 

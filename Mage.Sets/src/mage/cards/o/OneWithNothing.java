@@ -25,16 +25,16 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.saviorsofkamigawa;
+package mage.cards.o;
 
 import java.util.UUID;
 import mage.abilities.Ability;
 import mage.abilities.effects.OneShotEffect;
 import mage.cards.Card;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Outcome;
-import mage.constants.Rarity;
 import mage.game.Game;
 import mage.players.Player;
 
@@ -44,9 +44,8 @@ import mage.players.Player;
  */
 public class OneWithNothing extends CardImpl {
 
-    public OneWithNothing(UUID ownerId) {
-        super(ownerId, 84, "One with Nothing", Rarity.RARE, new CardType[]{CardType.INSTANT}, "{B}");
-        this.expansionSetCode = "SOK";
+    public OneWithNothing(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.INSTANT},"{B}");
 
 
         // Discard your hand.

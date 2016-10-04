@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.eldritchmoon;
+package mage.cards.l;
 
 import java.util.UUID;
 import mage.abilities.Ability;
@@ -34,8 +34,8 @@ import mage.abilities.effects.Effect;
 import mage.abilities.effects.common.CounterTargetEffect;
 import mage.abilities.effects.common.SacrificeSourceEffect;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.constants.SetTargetPointer;
 import mage.constants.Zone;
 import mage.filter.FilterSpell;
@@ -46,9 +46,8 @@ import mage.filter.FilterSpell;
  */
 public class LunarForce extends CardImpl {
 
-    public LunarForce(UUID ownerId) {
-        super(ownerId, 68, "Lunar Force", Rarity.UNCOMMON, new CardType[]{CardType.ENCHANTMENT}, "{2}{U}");
-        this.expansionSetCode = "EMN";
+    public LunarForce(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.ENCHANTMENT},"{2}{U}");
 
         // Whenever an opponent casts a spell, sacrifice Lunar Force and counter that spell.
         Ability ability = new SpellCastOpponentTriggeredAbility(Zone.BATTLEFIELD, new SacrificeSourceEffect(),

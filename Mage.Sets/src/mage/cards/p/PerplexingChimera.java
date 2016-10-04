@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.bornofthegods;
+package mage.cards.p;
 
 import java.util.UUID;
 import mage.MageInt;
@@ -36,11 +36,11 @@ import mage.abilities.effects.ContinuousEffectImpl;
 import mage.abilities.effects.Effect;
 import mage.abilities.effects.OneShotEffect;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Duration;
 import mage.constants.Layer;
 import mage.constants.Outcome;
-import mage.constants.Rarity;
 import mage.constants.SubLayer;
 import mage.constants.Zone;
 import mage.game.Game;
@@ -99,9 +99,8 @@ import mage.target.targetpointer.FixedTarget;
  */
 public class PerplexingChimera extends CardImpl {
 
-    public PerplexingChimera(UUID ownerId) {
-        super(ownerId, 48, "Perplexing Chimera", Rarity.RARE, new CardType[]{CardType.ENCHANTMENT, CardType.CREATURE}, "{4}{U}");
-        this.expansionSetCode = "BNG";
+    public PerplexingChimera(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.ENCHANTMENT,CardType.CREATURE},"{4}{U}");
         this.subtype.add("Chimera");
 
         this.power = new MageInt(3);

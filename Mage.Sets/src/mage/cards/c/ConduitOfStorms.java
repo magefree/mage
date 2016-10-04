@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.eldritchmoon;
+package mage.cards.c;
 
 import java.util.UUID;
 import mage.MageInt;
@@ -40,8 +40,8 @@ import mage.abilities.effects.common.CreateDelayedTriggeredAbilityEffect;
 import mage.abilities.effects.common.TransformSourceEffect;
 import mage.abilities.keyword.TransformAbility;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.constants.TargetController;
 import mage.constants.Zone;
 
@@ -51,16 +51,15 @@ import mage.constants.Zone;
  */
 public class ConduitOfStorms extends CardImpl {
 
-    public ConduitOfStorms(UUID ownerId) {
-        super(ownerId, 124, "Conduit of Storms", Rarity.UNCOMMON, new CardType[]{CardType.CREATURE}, "{2}{R}");
-        this.expansionSetCode = "EMN";
+    public ConduitOfStorms(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{2}{R}");
         this.subtype.add("Werewolf");
         this.subtype.add("Horror");
         this.power = new MageInt(2);
         this.toughness = new MageInt(3);
 
         this.transformable = true;
-        this.secondSideCard = new ConduitOfEmrakul(ownerId);
+        this.secondSideCardClazz = ConduitOfEmrakul.class;
 
         // Whenever Conduit of Storms attacks, add {R} to your mana pool at the beginning of your next main phase this turn.
         Effect effect = new CreateDelayedTriggeredAbilityEffect(

@@ -25,15 +25,15 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.stronghold;
+package mage.cards.h;
 
 import java.util.UUID;
 import mage.abilities.common.SpellCastAllTriggeredAbility;
 import mage.abilities.effects.common.CounterTargetEffect;
 import mage.abilities.effects.common.SacrificeSourceEffect;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.constants.SetTargetPointer;
 import mage.filter.FilterSpell;
 import mage.abilities.Ability;
@@ -45,9 +45,8 @@ import mage.abilities.effects.Effect;
  */
 public class Hesitation extends CardImpl {
 
-    public Hesitation(UUID ownerId) {
-        super(ownerId, 33, "Hesitation", Rarity.UNCOMMON, new CardType[]{CardType.ENCHANTMENT}, "{1}{U}");
-        this.expansionSetCode = "STH";
+    public Hesitation(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.ENCHANTMENT},"{1}{U}");
 
         // When a player casts a spell, sacrifice Hesitation and counter that spell.
         Ability ability = new SpellCastAllTriggeredAbility(new SacrificeSourceEffect(), new FilterSpell("a spell"), false, SetTargetPointer.SPELL);

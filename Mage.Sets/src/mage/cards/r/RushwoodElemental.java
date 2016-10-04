@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.mercadianmasques;
+package mage.cards.r;
 
 import java.util.UUID;
 import mage.MageInt;
@@ -33,8 +33,8 @@ import mage.abilities.common.BeginningOfUpkeepTriggeredAbility;
 import mage.abilities.effects.common.counter.AddCountersSourceEffect;
 import mage.abilities.keyword.TrampleAbility;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.constants.TargetController;
 import mage.counters.CounterType;
 
@@ -44,9 +44,8 @@ import mage.counters.CounterType;
  */
 public class RushwoodElemental extends CardImpl {
 
-    public RushwoodElemental(UUID ownerId) {
-        super(ownerId, 264, "Rushwood Elemental", Rarity.RARE, new CardType[]{CardType.CREATURE}, "{G}{G}{G}{G}{G}");
-        this.expansionSetCode = "MMQ";
+    public RushwoodElemental(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{G}{G}{G}{G}{G}");
         this.subtype.add("Elemental");
         this.power = new MageInt(4);
         this.toughness = new MageInt(4);

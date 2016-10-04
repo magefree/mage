@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.commander;
+package mage.cards.a;
 
 import java.util.UUID;
 import mage.MageInt;
@@ -36,9 +36,9 @@ import mage.abilities.effects.common.combat.AttacksIfAbleAllEffect;
 import mage.abilities.effects.common.continuous.GainAbilityAllEffect;
 import mage.abilities.keyword.DoubleStrikeAbility;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Duration;
-import mage.constants.Rarity;
 import mage.constants.Zone;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.watchers.common.AttackedThisTurnWatcher;
@@ -49,9 +49,8 @@ import mage.watchers.common.AttackedThisTurnWatcher;
  */
 public class AvatarOfSlaughter extends CardImpl {
 
-    public AvatarOfSlaughter(UUID ownerId) {
-        super(ownerId, 111, "Avatar of Slaughter", Rarity.RARE, new CardType[]{CardType.CREATURE}, "{6}{R}{R}");
-        this.expansionSetCode = "CMD";
+    public AvatarOfSlaughter(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{6}{R}{R}");
         this.subtype.add("Avatar");
         this.power = new MageInt(8);
         this.toughness = new MageInt(8);

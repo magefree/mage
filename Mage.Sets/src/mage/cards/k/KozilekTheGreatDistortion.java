@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.oathofthegatewatch;
+package mage.cards.k;
 
 import java.util.HashSet;
 import java.util.Set;
@@ -43,9 +43,9 @@ import mage.abilities.effects.common.CounterTargetEffect;
 import mage.abilities.keyword.MenaceAbility;
 import mage.cards.Card;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Outcome;
-import mage.constants.Rarity;
 import mage.constants.Zone;
 import mage.filter.Filter;
 import mage.filter.FilterCard;
@@ -64,9 +64,8 @@ import mage.target.common.TargetCardInHand;
  */
 public class KozilekTheGreatDistortion extends CardImpl {
 
-    public KozilekTheGreatDistortion(UUID ownerId) {
-        super(ownerId, 4, "Kozilek, the Great Distortion", Rarity.MYTHIC, new CardType[]{CardType.CREATURE}, "{8}{C}{C}");
-        this.expansionSetCode = "OGW";
+    public KozilekTheGreatDistortion(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{8}{C}{C}");
         this.supertype.add("Legendary");
         this.subtype.add("Eldrazi");
         this.power = new MageInt(12);

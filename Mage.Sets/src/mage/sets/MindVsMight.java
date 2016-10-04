@@ -9,6 +9,8 @@ package mage.sets;
 import java.util.GregorianCalendar;
 import mage.cards.ExpansionSet;
 import mage.constants.SetType;
+import mage.constants.Rarity;
+import java.util.List;
 
 /**
  *
@@ -16,7 +18,7 @@ import mage.constants.SetType;
  */
 
 public class MindVsMight extends ExpansionSet {
-    private static final MindVsMight fINSTANCE =  new MindVsMight();
+    private static final MindVsMight fINSTANCE = new MindVsMight();
 
     public static MindVsMight getInstance() {
         return fINSTANCE;

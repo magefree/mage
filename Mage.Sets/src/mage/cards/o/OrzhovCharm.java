@@ -25,19 +25,19 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.gatecrash;
+package mage.cards.o;
 
 import java.util.LinkedList;
 import java.util.UUID;
 import mage.constants.CardType;
 import mage.constants.Outcome;
-import mage.constants.Rarity;
 import mage.constants.Zone;
 import mage.abilities.Ability;
 import mage.abilities.Mode;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.ReturnFromGraveyardToBattlefieldTargetEffect;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.filter.Filter;
 import mage.filter.FilterCard;
 import mage.filter.common.FilterCreatureCard;
@@ -60,9 +60,8 @@ public class OrzhovCharm extends CardImpl {
         filter.add(new ConvertedManaCostPredicate(Filter.ComparisonType.LessThan, 2));
     }
 
-    public OrzhovCharm(UUID ownerId) {
-        super(ownerId, 185, "Orzhov Charm", Rarity.UNCOMMON, new CardType[]{CardType.INSTANT}, "{W}{B}");
-        this.expansionSetCode = "GTC";
+    public OrzhovCharm(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.INSTANT},"{W}{B}");
 
 
         //Choose one - Return target creature you control and all Auras you control attached to it to their owner's hand

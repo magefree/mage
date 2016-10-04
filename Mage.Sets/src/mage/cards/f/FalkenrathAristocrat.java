@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.darkascension;
+package mage.cards.f;
 
 import java.util.UUID;
 import mage.MageInt;
@@ -39,10 +39,10 @@ import mage.abilities.keyword.FlyingAbility;
 import mage.abilities.keyword.HasteAbility;
 import mage.abilities.keyword.IndestructibleAbility;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Duration;
 import mage.constants.Outcome;
-import mage.constants.Rarity;
 import mage.constants.Zone;
 import mage.counters.CounterType;
 import mage.game.Game;
@@ -55,9 +55,8 @@ import mage.target.common.TargetControlledCreaturePermanent;
  */
 public class FalkenrathAristocrat extends CardImpl {
 
-    public FalkenrathAristocrat(UUID ownerId) {
-        super(ownerId, 138, "Falkenrath Aristocrat", Rarity.MYTHIC, new CardType[]{CardType.CREATURE}, "{2}{B}{R}");
-        this.expansionSetCode = "DKA";
+    public FalkenrathAristocrat(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{2}{B}{R}");
         this.subtype.add("Vampire");
 
         this.power = new MageInt(4);

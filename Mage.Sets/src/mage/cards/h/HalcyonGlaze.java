@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.ravnica;
+package mage.cards.h;
 
 import java.util.UUID;
 import mage.MageInt;
@@ -34,9 +34,9 @@ import mage.abilities.effects.Effect;
 import mage.abilities.effects.common.continuous.BecomesCreatureSourceEffect;
 import mage.abilities.keyword.FlyingAbility;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Duration;
-import mage.constants.Rarity;
 import mage.filter.FilterSpell;
 import mage.filter.predicate.mageobject.CardTypePredicate;
 import mage.game.permanent.token.Token;
@@ -53,9 +53,8 @@ public class HalcyonGlaze extends CardImpl {
         filter.add(new CardTypePredicate(CardType.CREATURE));
     }
 
-    public HalcyonGlaze(UUID ownerId) {
-        super(ownerId, 54, "Halcyon Glaze", Rarity.UNCOMMON, new CardType[]{CardType.ENCHANTMENT}, "{1}{U}{U}");
-        this.expansionSetCode = "RAV";
+    public HalcyonGlaze(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.ENCHANTMENT},"{1}{U}{U}");
 
 
         // Whenever you cast a creature spell, Halcyon Glaze becomes a 4/4 Illusion creature with flying in addition to its other types until end of turn.

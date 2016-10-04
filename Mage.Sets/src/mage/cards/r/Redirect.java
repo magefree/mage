@@ -26,13 +26,13 @@
 * or implied, of BetaSteward_at_googlemail.com.
 */
 
-package mage.sets.magic2011;
+package mage.cards.r;
 
 import java.util.UUID;
 import mage.abilities.effects.common.ChooseNewTargetsTargetEffect;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.target.TargetSpell;
 
 /**
@@ -41,9 +41,8 @@ import mage.target.TargetSpell;
  */
 public class Redirect extends CardImpl {
 
-    public Redirect(UUID ownerId) {
-        super(ownerId, 71, "Redirect", Rarity.RARE, new CardType[]{CardType.INSTANT}, "{U}{U}");
-        this.expansionSetCode = "M11";
+    public Redirect(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.INSTANT},"{U}{U}");
 
 
         // You may choose new targets for target spell.

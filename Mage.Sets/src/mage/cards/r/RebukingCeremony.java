@@ -25,13 +25,13 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.darksteel;
+package mage.cards.r;
 
 import java.util.UUID;
 import mage.abilities.effects.common.PutOnLibraryTargetEffect;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.target.common.TargetArtifactPermanent;
 
 /**
@@ -40,9 +40,8 @@ import mage.target.common.TargetArtifactPermanent;
  */
 public class RebukingCeremony extends CardImpl {
 
-    public RebukingCeremony(UUID ownerId) {
-        super(ownerId, 82, "Rebuking Ceremony", Rarity.RARE, new CardType[]{CardType.SORCERY}, "{3}{G}{G}");
-        this.expansionSetCode = "DST";
+    public RebukingCeremony(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{3}{G}{G}");
 
         // Put two target artifacts on top of their owners' libraries.
         getSpellAbility().addEffect(new PutOnLibraryTargetEffect(true));

@@ -25,14 +25,14 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.mirage;
+package mage.cards.b;
 
 import java.util.UUID;
 import mage.ObjectColor;
 import mage.abilities.effects.common.TapAllEffect;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.filter.predicate.Predicates;
 import mage.filter.predicate.mageobject.ColorPredicate;
@@ -50,9 +50,8 @@ public class BlindingLight extends CardImpl {
         filter.add(Predicates.not(new ColorPredicate(ObjectColor.WHITE)));
     }
 
-    public BlindingLight(UUID ownerId) {
-        super(ownerId, 209, "Blinding Light", Rarity.UNCOMMON, new CardType[]{CardType.SORCERY}, "{2}{W}");
-        this.expansionSetCode = "MIR";
+    public BlindingLight(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{2}{W}");
 
         // Tap all nonwhite creatures.
         this.getSpellAbility().addEffect(new TapAllEffect(filter));

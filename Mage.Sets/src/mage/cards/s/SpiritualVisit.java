@@ -25,14 +25,14 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.saviorsofkamigawa;
+package mage.cards.s;
 
 import java.util.UUID;
 import mage.abilities.effects.common.CreateTokenEffect;
 import mage.abilities.keyword.SpliceOntoArcaneAbility;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.game.permanent.token.SpiritToken;
 
 /**
@@ -41,9 +41,8 @@ import mage.game.permanent.token.SpiritToken;
  */
 public class SpiritualVisit extends CardImpl {
 
-    public SpiritualVisit(UUID ownerId) {
-        super(ownerId, 29, "Spiritual Visit", Rarity.COMMON, new CardType[]{CardType.INSTANT}, "{W}");
-        this.expansionSetCode = "SOK";
+    public SpiritualVisit(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.INSTANT},"{W}");
         this.subtype.add("Arcane");
 
         // Put a 1/1 colorless Spirit creature token onto the battlefield.

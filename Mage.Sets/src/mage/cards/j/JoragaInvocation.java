@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.magicorigins;
+package mage.cards.j;
 
 import java.util.UUID;
 import mage.abilities.Ability;
@@ -34,10 +34,10 @@ import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.combat.MustBeBlockedByAtLeastOneTargetEffect;
 import mage.abilities.effects.common.continuous.BoostControlledEffect;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Duration;
 import mage.constants.Outcome;
-import mage.constants.Rarity;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
@@ -50,9 +50,8 @@ import mage.target.targetpointer.FixedTarget;
  */
 public class JoragaInvocation extends CardImpl {
 
-    public JoragaInvocation(UUID ownerId) {
-        super(ownerId, 183, "Joraga Invocation", Rarity.UNCOMMON, new CardType[]{CardType.SORCERY}, "{4}{G}{G}");
-        this.expansionSetCode = "ORI";
+    public JoragaInvocation(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{4}{G}{G}");
 
         // Each creature you control gets +3/+3 until end of turn and must be blocked this turn if able.
         this.getSpellAbility().addEffect(new BoostControlledEffect(3, 3, Duration.EndOfTurn));

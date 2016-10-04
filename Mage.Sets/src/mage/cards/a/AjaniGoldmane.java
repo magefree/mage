@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.magic2010;
+package mage.cards.a;
 
 import java.util.UUID;
 import mage.abilities.Ability;
@@ -40,11 +40,11 @@ import mage.abilities.effects.common.continuous.GainAbilityControlledEffect;
 import mage.abilities.effects.common.counter.AddCountersAllEffect;
 import mage.abilities.keyword.VigilanceAbility;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Duration;
 import mage.constants.Layer;
 import mage.constants.Outcome;
-import mage.constants.Rarity;
 import mage.constants.SubLayer;
 import mage.constants.Zone;
 import mage.counters.CounterType;
@@ -61,9 +61,8 @@ import mage.players.Player;
  */
 public class AjaniGoldmane extends CardImpl {
 
-    public AjaniGoldmane(UUID ownerId) {
-        super(ownerId, 1, "Ajani Goldmane", Rarity.MYTHIC, new CardType[]{CardType.PLANESWALKER}, "{2}{W}{W}");
-        this.expansionSetCode = "M10";
+    public AjaniGoldmane(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.PLANESWALKER},"{2}{W}{W}");
         this.subtype.add("Ajani");
 
         this.addAbility(new PlanswalkerEntersWithLoyalityCountersAbility(4));

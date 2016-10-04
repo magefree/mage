@@ -25,14 +25,14 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.portalthreekingdoms;
+package mage.cards.b;
 
 import java.util.UUID;
 import mage.abilities.effects.common.TapTargetEffect;
 import mage.abilities.keyword.HorsemanshipAbility;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.filter.predicate.Predicates;
 import mage.filter.predicate.mageobject.AbilityPredicate;
@@ -50,9 +50,8 @@ public class BrokenDam extends CardImpl {
         filter.add(Predicates.not(new AbilityPredicate(HorsemanshipAbility.class)));
     }
 
-   public BrokenDam(UUID ownerId) {
-        super(ownerId, 37, "Broken Dam", Rarity.COMMON, new CardType[]{CardType.SORCERY}, "{U}");
-        this.expansionSetCode = "PTK";
+   public BrokenDam(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{U}");
 
         // Tap one or two target creatures without horsemanship.
         this.getSpellAbility().addEffect(new TapTargetEffect("one or two target creatures without horsemanship"));

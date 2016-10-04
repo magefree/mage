@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.darkascension;
+package mage.cards.m;
 
 import java.util.UUID;
 
@@ -36,6 +36,7 @@ import mage.abilities.costs.mana.ColoredManaCost;
 import mage.abilities.effects.common.continuous.BoostControlledEffect;
 import mage.abilities.keyword.FlyingAbility;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 
 /**
  *
@@ -43,9 +44,8 @@ import mage.cards.CardImpl;
  */
 public class MoonveilDragon extends CardImpl {
 
-    public MoonveilDragon(UUID ownerId) {
-        super(ownerId, 99, "Moonveil Dragon", Rarity.MYTHIC, new CardType[]{CardType.CREATURE}, "{3}{R}{R}{R}");
-        this.expansionSetCode = "DKA";
+    public MoonveilDragon(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{3}{R}{R}{R}");
         this.subtype.add("Dragon");
 
         this.power = new MageInt(5);

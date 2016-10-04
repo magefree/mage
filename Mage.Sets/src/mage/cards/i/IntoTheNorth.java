@@ -25,14 +25,14 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.coldsnap;
+package mage.cards.i;
 
 import java.util.UUID;
 import mage.abilities.effects.common.search.SearchLibraryPutInPlayEffect;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Outcome;
-import mage.constants.Rarity;
 import mage.filter.common.FilterLandCard;
 import mage.filter.predicate.mageobject.SupertypePredicate;
 import mage.target.common.TargetCardInLibrary;
@@ -49,9 +49,8 @@ public class IntoTheNorth extends CardImpl {
         filter.add(new SupertypePredicate("Snow"));
     }
     
-    public IntoTheNorth(UUID ownerId) {
-        super(ownerId, 111, "Into the North", Rarity.COMMON, new CardType[]{CardType.SORCERY}, "{1}{G}");
-        this.expansionSetCode = "CSP";
+    public IntoTheNorth(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{1}{G}");
 
 
         // Search your library for a snow land card and put it onto the battlefield tapped. Then shuffle your library.

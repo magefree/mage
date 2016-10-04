@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.kaladesh;
+package mage.cards.c;
 
 import java.util.UUID;
 import mage.MageObject;
@@ -43,9 +43,9 @@ import mage.abilities.effects.common.DamageTargetEffect;
 import mage.abilities.effects.common.GetEmblemEffect;
 import mage.cards.Card;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Outcome;
-import mage.constants.Rarity;
 import mage.constants.TargetController;
 import mage.constants.Zone;
 import mage.filter.FilterSpell;
@@ -62,9 +62,8 @@ import mage.target.common.TargetCreaturePermanent;
  */
 public class ChandraTorchOfDefiance extends CardImpl {
 
-    public ChandraTorchOfDefiance(UUID ownerId) {
-        super(ownerId, 110, "Chandra, Torch of Defiance", Rarity.MYTHIC, new CardType[]{CardType.PLANESWALKER}, "{2}{R}{R}");
-        this.expansionSetCode = "KLD";
+    public ChandraTorchOfDefiance(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.PLANESWALKER},"{2}{R}{R}");
         this.subtype.add("Chandra");
 
         this.addAbility(new PlanswalkerEntersWithLoyalityCountersAbility(4));

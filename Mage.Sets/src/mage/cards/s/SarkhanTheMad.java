@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.riseoftheeldrazi;
+package mage.cards.s;
 
 import mage.MageObject;
 import mage.abilities.Ability;
@@ -34,10 +34,10 @@ import mage.abilities.common.PlanswalkerEntersWithLoyalityCountersAbility;
 import mage.abilities.effects.OneShotEffect;
 import mage.cards.Card;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.cards.CardsImpl;
 import mage.constants.CardType;
 import mage.constants.Outcome;
-import mage.constants.Rarity;
 import mage.constants.Zone;
 import mage.filter.common.FilterControlledPermanent;
 import mage.filter.predicate.mageobject.CardTypePredicate;
@@ -60,9 +60,8 @@ import java.util.UUID;
  */
 public class SarkhanTheMad extends CardImpl {
 
-    public SarkhanTheMad(UUID ownerId) {
-        super(ownerId, 214, "Sarkhan the Mad", Rarity.MYTHIC, new CardType[]{CardType.PLANESWALKER}, "{3}{B}{R}");
-        this.expansionSetCode = "ROE";
+    public SarkhanTheMad(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.PLANESWALKER},"{3}{B}{R}");
         this.subtype.add("Sarkhan");
         this.addAbility(new PlanswalkerEntersWithLoyalityCountersAbility(7));
 

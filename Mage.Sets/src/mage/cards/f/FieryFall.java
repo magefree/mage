@@ -26,15 +26,15 @@
  *  or implied, of BetaSteward_at_googlemail.com.
  */
 
-package mage.sets.conflux;
+package mage.cards.f;
 
 import java.util.UUID;
 import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.abilities.costs.mana.ManaCostsImpl;
 import mage.abilities.effects.common.DamageTargetEffect;
 import mage.abilities.keyword.BasicLandcyclingAbility;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.target.common.TargetCreaturePermanent;
 
 /**
@@ -43,9 +43,8 @@ import mage.target.common.TargetCreaturePermanent;
  */
 public class FieryFall extends CardImpl {
 
-    public FieryFall (UUID ownerId) {
-        super(ownerId, 63, "Fiery Fall", Rarity.COMMON, new CardType[]{CardType.INSTANT}, "{5}{R}");
-        this.expansionSetCode = "CON";
+    public FieryFall (UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.INSTANT},"{5}{R}");
 
         
         // Fiery Fall deals 5 damage to target creature.

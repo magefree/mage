@@ -25,11 +25,10 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.returntoravnica;
+package mage.cards.s;
 
 import java.util.UUID;
 import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.abilities.Mode;
 import mage.abilities.effects.Effect;
 import mage.abilities.effects.common.CreateTokenEffect;
@@ -38,6 +37,7 @@ import mage.abilities.effects.common.continuous.BoostTargetEffect;
 import mage.abilities.effects.common.continuous.GainAbilityTargetEffect;
 import mage.abilities.keyword.TrampleAbility;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.Duration;
 import mage.filter.Filter;
 import mage.filter.common.FilterCreaturePermanent;
@@ -57,9 +57,8 @@ public class SelesnyaCharm extends CardImpl {
         filter.add(new PowerPredicate(Filter.ComparisonType.GreaterThan, 4));
     }
 
-    public SelesnyaCharm(UUID ownerId) {
-        super(ownerId, 194, "Selesnya Charm", Rarity.UNCOMMON, new CardType[]{CardType.INSTANT}, "{G}{W}");
-        this.expansionSetCode = "RTR";
+    public SelesnyaCharm(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.INSTANT},"{G}{W}");
 
        
         // Choose one — Target creature gets +2/+2 and gains trample until end of turn;

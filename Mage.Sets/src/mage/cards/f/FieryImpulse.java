@@ -25,15 +25,15 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.magicorigins;
+package mage.cards.f;
 
 import java.util.UUID;
 import mage.abilities.condition.common.SpellMasteryCondition;
 import mage.abilities.decorator.ConditionalOneShotEffect;
 import mage.abilities.effects.common.DamageTargetEffect;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.target.common.TargetCreaturePermanent;
 
 /**
@@ -42,9 +42,8 @@ import mage.target.common.TargetCreaturePermanent;
  */
 public class FieryImpulse extends CardImpl {
 
-    public FieryImpulse(UUID ownerId) {
-        super(ownerId, 145, "Fiery Impulse", Rarity.COMMON, new CardType[]{CardType.INSTANT}, "{R}");
-        this.expansionSetCode = "ORI";
+    public FieryImpulse(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.INSTANT},"{R}");
 
         // Fiery Impulse deals 2 damage to target creature.
         // <i>Spell mastery</i> — If there are two or more instant and/or sorcery cards in your graveyard, Fiery Impulse deals 3 damage to that creature instead.

@@ -25,14 +25,14 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.conflux;
+package mage.cards.s;
 
 import java.util.UUID;
 import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.abilities.dynamicvalue.common.DomainValue;
 import mage.abilities.effects.common.CreateTokenEffect;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.game.permanent.token.SaprolingToken;
 
 /**
@@ -41,9 +41,8 @@ import mage.game.permanent.token.SaprolingToken;
  */
 public class SporeBurst extends CardImpl {
 
-    public SporeBurst(UUID ownerId) {
-        super(ownerId, 93, "Spore Burst", Rarity.UNCOMMON, new CardType[]{CardType.SORCERY}, "{3}{G}");
-        this.expansionSetCode = "CON";
+    public SporeBurst(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{3}{G}");
 
 
         // Domain - Put a 1/1 green Saproling creature token onto the battlefield for each basic land type among lands you control.

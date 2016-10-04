@@ -25,17 +25,17 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.dragonsmaze;
+package mage.cards.t;
 
 import java.util.UUID;
 import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.EntersBattlefieldTriggeredAbility;
 import mage.abilities.effects.common.CreateTokenEffect;
 import mage.abilities.keyword.TrampleAbility;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.game.permanent.token.CentaurToken;
 import mage.game.permanent.token.KnightToken;
 import mage.game.permanent.token.Token;
@@ -46,9 +46,8 @@ import mage.game.permanent.token.Token;
  */
 public class TrostanisSummoner extends CardImpl {
 
-    public TrostanisSummoner(UUID ownerId) {
-        super(ownerId, 110, "Trostani's Summoner", Rarity.UNCOMMON, new CardType[]{CardType.CREATURE}, "{5}{G}{W}");
-        this.expansionSetCode = "DGM";
+    public TrostanisSummoner(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{5}{G}{W}");
         this.subtype.add("Elf");
         this.subtype.add("Shaman");
 

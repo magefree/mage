@@ -25,15 +25,15 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.guildpact;
+package mage.cards.d;
 
 import java.util.UUID;
 import mage.abilities.Ability;
 import mage.abilities.common.BeginningOfUpkeepTriggeredAbility;
 import mage.abilities.effects.common.ReturnFromGraveyardToBattlefieldTargetEffect;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.constants.TargetController;
 import mage.constants.Zone;
 import mage.filter.common.FilterCreatureCard;
@@ -45,9 +45,8 @@ import mage.target.common.TargetCardInGraveyard;
  */
 public class DebtorsKnell extends CardImpl {
 
-    public DebtorsKnell(UUID ownerId) {
-        super(ownerId, 141, "Debtors' Knell", Rarity.RARE, new CardType[]{CardType.ENCHANTMENT}, "{4}{W/B}{W/B}{W/B}");
-        this.expansionSetCode = "GPT";
+    public DebtorsKnell(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.ENCHANTMENT},"{4}{W/B}{W/B}{W/B}");
 
 
         // <i>({WB} can be paid with either {W} or {B}.)</i>

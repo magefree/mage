@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.shadowsoverinnistrad;
+package mage.cards.k;
 
 import java.util.UUID;
 import mage.MageInt;
@@ -34,9 +34,10 @@ import mage.abilities.costs.mana.ManaCostsImpl;
 import mage.abilities.decorator.ConditionalActivatedAbility;
 import mage.abilities.effects.common.TransformSourceEffect;
 import mage.abilities.keyword.TransformAbility;
+import mage.cards.d.DemonPossessedWitch;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.constants.Zone;
 
 /**
@@ -45,15 +46,14 @@ import mage.constants.Zone;
  */
 public class KindlyStranger extends CardImpl {
 
-    public KindlyStranger(UUID ownerId) {
-        super(ownerId, 119, "Kindly Stranger", Rarity.UNCOMMON, new CardType[]{CardType.CREATURE}, "{2}{B}");
-        this.expansionSetCode = "SOI";
+    public KindlyStranger(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{2}{B}");
         this.subtype.add("Human");
         this.power = new MageInt(2);
         this.toughness = new MageInt(3);
 
         this.transformable = true;
-        this.secondSideCard = new DemonPossessedWitch(ownerId);
+        this.secondSideCardClazz = DemonPossessedWitch.class;
 
         // <i>Delirium</i> &mdash; {2}{B}: Transform Kindly Stranger. Activate this ability only if there are four or more card types among cards in your graveyard.
         this.addAbility(new TransformAbility());

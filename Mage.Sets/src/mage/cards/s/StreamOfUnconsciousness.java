@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.morningtide;
+package mage.cards.s;
 
 import java.util.UUID;
 import mage.abilities.condition.common.PermanentsOnTheBattlefieldCondition;
@@ -33,9 +33,9 @@ import mage.abilities.decorator.ConditionalOneShotEffect;
 import mage.abilities.effects.common.DrawCardSourceControllerEffect;
 import mage.abilities.effects.common.continuous.BoostTargetEffect;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Duration;
-import mage.constants.Rarity;
 import mage.filter.FilterPermanent;
 import mage.filter.predicate.mageobject.SubtypePredicate;
 import mage.target.common.TargetCreaturePermanent;
@@ -52,9 +52,8 @@ public class StreamOfUnconsciousness extends CardImpl {
         filter.add(new SubtypePredicate("Wizard"));
     }
 
-    public StreamOfUnconsciousness(UUID ownerId) {
-        super(ownerId, 52, "Stream of Unconsciousness", Rarity.COMMON, new CardType[]{CardType.TRIBAL, CardType.INSTANT}, "{U}");
-        this.expansionSetCode = "MOR";
+    public StreamOfUnconsciousness(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.TRIBAL,CardType.INSTANT},"{U}");
         this.subtype.add("Wizard");
 
         // Target creature gets -4/-0 until end of turn. 

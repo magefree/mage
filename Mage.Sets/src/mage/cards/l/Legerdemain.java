@@ -25,16 +25,16 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.tempest;
+package mage.cards.l;
 
 import java.util.UUID;
 import mage.MageItem;
 import mage.abilities.Ability;
 import mage.abilities.effects.common.continuous.ExchangeControlTargetEffect;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Duration;
-import mage.constants.Rarity;
 import mage.filter.FilterPermanent;
 import mage.filter.predicate.ObjectSourcePlayer;
 import mage.filter.predicate.ObjectSourcePlayerPredicate;
@@ -60,9 +60,8 @@ public class Legerdemain extends CardImpl {
         secondFilter.add(new SharesTypePredicate());
     }
 
-    public Legerdemain(UUID ownerId) {
-        super(ownerId, 72, "Legerdemain", Rarity.UNCOMMON, new CardType[]{CardType.SORCERY}, "{2}{U}{U}");
-        this.expansionSetCode = "TMP";
+    public Legerdemain(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{2}{U}{U}");
 
         // Exchange control of target artifact or creature and another target permanent that shares one of those types with it.
         this.getSpellAbility().addEffect(new ExchangeControlTargetEffect(Duration.EndOfGame, "Exchange control of target artifact or creature and another target permanent that shares one of those types with it", false, true));

@@ -25,16 +25,16 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.planechase;
+package mage.cards.a;
 
 import java.util.UUID;
 
 import mage.abilities.effects.common.DestroyAllEffect;
 import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.abilities.costs.mana.ManaCostsImpl;
 import mage.abilities.keyword.CyclingAbility;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.filter.FilterPermanent;
 import mage.filter.predicate.Predicates;
 import mage.filter.predicate.mageobject.CardTypePredicate;
@@ -54,9 +54,8 @@ public class AkromasVengeance extends CardImpl {
                 new CardTypePredicate(CardType.ENCHANTMENT)));
     }
 
-    public AkromasVengeance(UUID ownerId) {
-        super(ownerId, 1, "Akroma's Vengeance", Rarity.RARE, new CardType[]{CardType.SORCERY}, "{4}{W}{W}");
-        this.expansionSetCode = "HOP";
+    public AkromasVengeance(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{4}{W}{W}");
 
         this.addAbility(new CyclingAbility(new ManaCostsImpl("{3}")));
         this.getSpellAbility().addEffect(new DestroyAllEffect(filter));

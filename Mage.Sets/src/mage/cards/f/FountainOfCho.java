@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.mercadianmasques;
+package mage.cards.f;
 
 import java.util.UUID;
 import mage.Mana;
@@ -39,8 +39,8 @@ import mage.abilities.dynamicvalue.common.RemovedCountersForCostValue;
 import mage.abilities.effects.common.counter.AddCountersSourceEffect;
 import mage.abilities.mana.DynamicManaAbility;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.constants.Zone;
 import mage.counters.CounterType;
 
@@ -50,9 +50,8 @@ import mage.counters.CounterType;
  */
 public class FountainOfCho extends CardImpl {
 
-    public FountainOfCho(UUID ownerId) {
-        super(ownerId, 317, "Fountain of Cho", Rarity.UNCOMMON, new CardType[]{CardType.LAND}, "");
-        this.expansionSetCode = "MMQ";
+    public FountainOfCho(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.LAND},"");
 
         // Fountain of Cho enters the battlefield tapped.
         this.addAbility(new EntersBattlefieldTappedAbility());

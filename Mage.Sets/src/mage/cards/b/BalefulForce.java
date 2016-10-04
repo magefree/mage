@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.commander2013;
+package mage.cards.b;
 
 import java.util.UUID;
 import mage.MageInt;
@@ -35,8 +35,8 @@ import mage.abilities.effects.Effect;
 import mage.abilities.effects.common.DrawCardSourceControllerEffect;
 import mage.abilities.effects.common.LoseLifeSourceControllerEffect;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.constants.TargetController;
 
 /**
@@ -45,9 +45,8 @@ import mage.constants.TargetController;
  */
 public class BalefulForce extends CardImpl {
 
-    public BalefulForce(UUID ownerId) {
-        super(ownerId, 70, "Baleful Force", Rarity.RARE, new CardType[]{CardType.CREATURE}, "{5}{B}{B}{B}");
-        this.expansionSetCode = "C13";
+    public BalefulForce(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{5}{B}{B}{B}");
         this.subtype.add("Elemental");
 
         this.power = new MageInt(7);

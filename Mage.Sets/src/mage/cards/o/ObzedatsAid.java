@@ -25,13 +25,13 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.dragonsmaze;
+package mage.cards.o;
 
 import java.util.UUID;
 import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.abilities.effects.common.ReturnFromGraveyardToBattlefieldTargetEffect;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.filter.FilterCard;
 import mage.filter.predicate.Predicates;
 import mage.filter.predicate.mageobject.CardTypePredicate;
@@ -54,9 +54,8 @@ public class ObzedatsAid extends CardImpl {
                 new CardTypePredicate(CardType.PLANESWALKER)));
     }
 
-    public ObzedatsAid(UUID ownerId) {
-        super(ownerId, 89, "Obzedat's Aid", Rarity.RARE, new CardType[]{CardType.SORCERY}, "{3}{W}{B}");
-        this.expansionSetCode = "DGM";
+    public ObzedatsAid(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{3}{W}{B}");
 
 
         // Return target permanent card from your graveyard to the battlefield.

@@ -26,14 +26,14 @@
  *  or implied, of BetaSteward_at_googlemail.com.
  */
 
-package mage.sets.returntoravnica;
+package mage.cards.d;
 
 import java.util.UUID;
 import mage.abilities.TriggeredAbilityImpl;
 import mage.abilities.effects.common.counter.AddCountersTargetEffect;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.constants.Zone;
 import mage.counters.CounterType;
 import mage.game.Game;
@@ -49,9 +49,8 @@ import mage.target.common.TargetControlledCreaturePermanent;
  */
 public class DeathsPresence extends CardImpl {
 
-    public DeathsPresence(UUID ownerId) {
-        super(ownerId, 121, "Death's Presence", Rarity.RARE, new CardType[]{CardType.ENCHANTMENT}, "{5}{G}");
-        this.expansionSetCode = "RTR";
+    public DeathsPresence(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.ENCHANTMENT},"{5}{G}");
 
         
         // Whenever a creature you control dies, put X +1/+1 counters on target creature you control, where X is the power of the creature that died.

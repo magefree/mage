@@ -25,16 +25,16 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.returntoravnica;
+package mage.cards.c;
 
 import java.util.UUID;
 
 import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.abilities.Ability;
 import mage.abilities.common.BeginningOfUpkeepTriggeredAbility;
 import mage.abilities.effects.common.continuous.ExchangeControlTargetEffect;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.Duration;
 import mage.constants.TargetController;
 import mage.filter.FilterPermanent;
@@ -55,9 +55,8 @@ public class ConjuredCurrency extends CardImpl {
     }
     private static final String rule = "you may exchange control of {this} and target permanent you neither own nor control";
 
-    public ConjuredCurrency(UUID ownerId) {
-        super(ownerId, 33, "Conjured Currency", Rarity.RARE, new CardType[]{CardType.ENCHANTMENT}, "{5}{U}");
-        this.expansionSetCode = "RTR";
+    public ConjuredCurrency(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.ENCHANTMENT},"{5}{U}");
 
         this.color.setBlue(true);
 

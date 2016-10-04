@@ -25,16 +25,16 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.shardsofalara;
+package mage.cards.b;
 
 import java.util.UUID;
 import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.abilities.Mode;
 import mage.abilities.effects.common.CounterTargetEffect;
 import mage.abilities.effects.common.DestroyTargetEffect;
 import mage.abilities.effects.common.PutOnLibraryTargetEffect;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.filter.FilterSpell;
 import mage.filter.predicate.mageobject.CardTypePredicate;
 import mage.target.TargetSpell;
@@ -53,9 +53,8 @@ public class BantCharm extends CardImpl {
         filter.add(new CardTypePredicate(CardType.INSTANT));
     }
 
-    public BantCharm(UUID ownerId) {
-        super(ownerId, 155, "Bant Charm", Rarity.UNCOMMON, new CardType[]{CardType.INSTANT}, "{G}{W}{U}");
-        this.expansionSetCode = "ALA";
+    public BantCharm(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.INSTANT},"{G}{W}{U}");
 
 
         // Choose one - Destroy target artifact;

@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.vintagemasters;
+package mage.cards.s;
 
 import java.util.UUID;
 import mage.MageInt;
@@ -38,9 +38,9 @@ import mage.abilities.effects.common.DrawCardAllEffect;
 import mage.abilities.effects.common.ManaEffect;
 import mage.abilities.mana.SimpleManaAbility;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.AbilityWord;
 import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.constants.Zone;
 import mage.game.Game;
 import mage.players.Player;
@@ -51,9 +51,8 @@ import mage.players.Player;
  */
 public class SelvalaExplorerReturned extends CardImpl {
 
-    public SelvalaExplorerReturned(UUID ownerId) {
-        super(ownerId, 260, "Selvala, Explorer Returned", Rarity.RARE, new CardType[]{CardType.CREATURE}, "{1}{G}{W}");
-        this.expansionSetCode = "VMA";
+    public SelvalaExplorerReturned(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{1}{G}{W}");
         this.supertype.add("Legendary");
         this.subtype.add("Elf");
         this.subtype.add("Scout");

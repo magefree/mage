@@ -25,17 +25,17 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.eventide;
+package mage.cards.f;
 
 import java.util.UUID;
 import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.MageInt;
 import mage.ObjectColor;
 import mage.abilities.common.SpellCastControllerTriggeredAbility;
 import mage.abilities.effects.common.CreateTokenEffect;
 import mage.abilities.keyword.FlyingAbility;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.filter.FilterSpell;
 import mage.filter.predicate.mageobject.ColorPredicate;
 import mage.game.permanent.token.Token;
@@ -54,9 +54,8 @@ public class FableOfWolfAndOwl extends CardImpl {
         filterBlueSpell.add(new ColorPredicate(ObjectColor.BLUE));
     }
 
-    public FableOfWolfAndOwl(UUID ownerId) {
-        super(ownerId, 150, "Fable of Wolf and Owl", Rarity.RARE, new CardType[]{CardType.ENCHANTMENT}, "{3}{G/U}{G/U}{G/U}");
-        this.expansionSetCode = "EVE";
+    public FableOfWolfAndOwl(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.ENCHANTMENT},"{3}{G/U}{G/U}{G/U}");
 
 
         this.addAbility(new SpellCastControllerTriggeredAbility(new CreateTokenEffect(new WolfToken(), 1), filterGreenSpell, true));

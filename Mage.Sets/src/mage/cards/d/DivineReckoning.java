@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.innistrad;
+package mage.cards.d;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -36,9 +36,9 @@ import mage.abilities.effects.OneShotEffect;
 import mage.abilities.keyword.FlashbackAbility;
 import mage.cards.Card;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Outcome;
-import mage.constants.Rarity;
 import mage.constants.TimingRule;
 import mage.filter.common.FilterControlledCreaturePermanent;
 import mage.filter.common.FilterCreaturePermanent;
@@ -53,9 +53,8 @@ import mage.target.common.TargetControlledPermanent;
  */
 public class DivineReckoning extends CardImpl {
 
-    public DivineReckoning(UUID ownerId) {
-        super(ownerId, 10, "Divine Reckoning", Rarity.RARE, new CardType[]{CardType.SORCERY}, "{2}{W}{W}");
-        this.expansionSetCode = "ISD";
+    public DivineReckoning(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{2}{W}{W}");
 
         // Each player chooses a creature he or she controls. Destroy the rest.
         this.getSpellAbility().addEffect(new DivineReckoningEffect());

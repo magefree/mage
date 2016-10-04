@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.shadowmoor;
+package mage.cards.c;
 
 import java.util.UUID;
 import mage.MageInt;
@@ -37,10 +37,10 @@ import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.DoIfCostPaid;
 import mage.abilities.effects.common.continuous.GainAbilityTargetEffect;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Duration;
 import mage.constants.Outcome;
-import mage.constants.Rarity;
 import mage.constants.Zone;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.game.Game;
@@ -54,9 +54,8 @@ import mage.util.functions.EmptyApplyToPermanent;
  */
 public class CemeteryPuca extends CardImpl {
 
-    public CemeteryPuca(UUID ownerId) {
-        super(ownerId, 158, "Cemetery Puca", Rarity.RARE, new CardType[]{CardType.CREATURE}, "{1}{U/B}{U/B}");
-        this.expansionSetCode = "SHM";
+    public CemeteryPuca(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{1}{U/B}{U/B}");
         this.subtype.add("Shapeshifter");
 
         this.power = new MageInt(1);

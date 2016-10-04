@@ -26,16 +26,16 @@
  *  or implied, of BetaSteward_at_googlemail.com.
  */
 
-package mage.sets.conflux;
+package mage.cards.a;
 
 import java.util.UUID;
 import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.abilities.costs.mana.ManaCostsImpl;
 import mage.abilities.effects.common.GainLifeEffect;
 import mage.abilities.effects.common.LoseLifeTargetEffect;
 import mage.abilities.keyword.BasicLandcyclingAbility;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.target.TargetPlayer;
 
 /**
@@ -44,9 +44,8 @@ import mage.target.TargetPlayer;
  */
 public class AbsorbVis extends CardImpl {
 
-    public AbsorbVis (UUID ownerId) {
-        super(ownerId, 40, "Absorb Vis", Rarity.COMMON, new CardType[]{CardType.SORCERY}, "{6}{B}");
-        this.expansionSetCode = "CON";
+    public AbsorbVis (UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{6}{B}");
 
         this.getSpellAbility().addEffect(new LoseLifeTargetEffect(4));
         this.getSpellAbility().addEffect(new GainLifeEffect(4));

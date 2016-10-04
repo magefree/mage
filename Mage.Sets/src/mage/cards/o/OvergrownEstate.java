@@ -25,15 +25,15 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.apocalypse;
+package mage.cards.o;
 
 import java.util.UUID;
 import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.costs.common.SacrificeTargetCost;
 import mage.abilities.effects.common.GainLifeEffect;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.constants.Zone;
 import mage.filter.common.FilterControlledLandPermanent;
 import mage.filter.common.FilterControlledPermanent;
@@ -46,9 +46,8 @@ public class OvergrownEstate extends CardImpl {
 
     private static final FilterControlledPermanent filter = new FilterControlledLandPermanent("a land");
 
-    public OvergrownEstate(UUID ownerId) {
-        super(ownerId, 113, "Overgrown Estate", Rarity.RARE, new CardType[]{CardType.ENCHANTMENT}, "{B}{G}{W}");
-        this.expansionSetCode = "APC";
+    public OvergrownEstate(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.ENCHANTMENT},"{B}{G}{W}");
         
         // Sacrifice a land: You gain 3 life.
         this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new GainLifeEffect(3), new SacrificeTargetCost(new TargetControlledPermanent(filter))));

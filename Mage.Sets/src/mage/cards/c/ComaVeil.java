@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.shardsofalara;
+package mage.cards.c;
 
 import java.util.UUID;
 import mage.abilities.common.SimpleStaticAbility;
@@ -33,9 +33,9 @@ import mage.abilities.effects.common.AttachEffect;
 import mage.abilities.effects.common.DontUntapInControllersUntapStepEnchantedEffect;
 import mage.abilities.keyword.EnchantAbility;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Outcome;
-import mage.constants.Rarity;
 import mage.constants.Zone;
 import mage.filter.FilterPermanent;
 import mage.filter.predicate.Predicates;
@@ -56,9 +56,8 @@ public class ComaVeil extends CardImpl {
                 new CardTypePredicate(CardType.CREATURE)));
     }
 
-    public ComaVeil(UUID ownerId) {
-        super(ownerId, 36, "Coma Veil", Rarity.COMMON, new CardType[]{CardType.ENCHANTMENT}, "{4}{U}");
-        this.expansionSetCode = "ALA";
+    public ComaVeil(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.ENCHANTMENT},"{4}{U}");
         this.subtype.add("Aura");
 
         // Enchant artifact or creature

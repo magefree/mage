@@ -26,7 +26,7 @@
  *  or implied, of BetaSteward_at_googlemail.com.
  */
 
-package mage.sets.championsofkamigawa;
+package mage.cards.s;
 
 import mage.MageInt;
 import mage.abilities.Ability;
@@ -35,8 +35,8 @@ import mage.abilities.dynamicvalue.DynamicValue;
 import mage.abilities.effects.Effect;
 import mage.abilities.effects.common.GainLifeEffect;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.game.Game;
 import mage.watchers.common.ZuberasDiedWatcher;
 
@@ -48,9 +48,8 @@ import java.util.UUID;
  */
 public class SilentChantZubera extends CardImpl {
 
-    public SilentChantZubera (UUID ownerId) {
-        super(ownerId, 45, "Silent-Chant Zubera", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{1}{W}");
-        this.expansionSetCode = "CHK";
+    public SilentChantZubera (UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{1}{W}");
         this.subtype.add("Zubera");
         this.subtype.add("Spirit");
 

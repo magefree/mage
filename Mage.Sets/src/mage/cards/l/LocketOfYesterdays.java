@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.timespiral;
+package mage.cards.l;
 
 import java.util.UUID;
 
@@ -38,6 +38,7 @@ import mage.abilities.effects.common.cost.CostModificationEffectImpl;
 import mage.abilities.keyword.FlashbackAbility;
 import mage.cards.Card;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.game.Game;
 import mage.util.CardUtil;
 
@@ -47,9 +48,8 @@ import mage.util.CardUtil;
  */
 public class LocketOfYesterdays extends CardImpl {
 
-    public LocketOfYesterdays(UUID ownerId) {
-        super(ownerId, 258, "Locket of Yesterdays", Rarity.UNCOMMON, new CardType[]{CardType.ARTIFACT}, "{1}");
-        this.expansionSetCode = "TSP";
+    public LocketOfYesterdays(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.ARTIFACT},"{1}");
 
         // Spells you cast cost {1} less to cast for each card with the same name as that spell in your graveyard.
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new LocketOfYesterdaysCostReductionEffect()));

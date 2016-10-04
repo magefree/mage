@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.starwars;
+package mage.cards.s;
 
 import java.util.UUID;
 import mage.MageInt;
@@ -37,8 +37,8 @@ import mage.abilities.effects.common.DamageTargetEffect;
 import mage.abilities.effects.common.TapTargetEffect;
 import mage.abilities.keyword.SpaceflightAbility;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.constants.Zone;
 import mage.filter.common.FilterCreatureOrPlayer;
 import mage.filter.common.FilterCreaturePermanent;
@@ -63,9 +63,8 @@ public class StarDestroyer extends CardImpl {
         filter3.getCreatureFilter().add(Predicates.not(new SubtypePredicate("Starship")));
     }
 
-    public StarDestroyer(UUID ownerId) {
-        super(ownerId, 218, "Star Destroyer", Rarity.RARE, new CardType[]{CardType.ARTIFACT, CardType.CREATURE}, "{4}{U}{B}{R}");
-        this.expansionSetCode = "SWS";
+    public StarDestroyer(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.ARTIFACT,CardType.CREATURE},"{4}{U}{B}{R}");
         this.subtype.add("Starship");
         this.power = new MageInt(6);
         this.toughness = new MageInt(6);

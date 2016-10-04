@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.zendikar;
+package mage.cards.r;
 
 import java.util.UUID;
 import mage.abilities.Ability;
@@ -36,8 +36,8 @@ import mage.abilities.dynamicvalue.DynamicValue;
 import mage.abilities.effects.Effect;
 import mage.abilities.effects.common.DamageTargetEffect;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.game.Game;
 import mage.players.Player;
 import mage.target.TargetPlayer;
@@ -49,9 +49,8 @@ import mage.watchers.common.CardsAmountDrawnThisTurnWatcher;
  */
 public class RuneflareTrap extends CardImpl {
 
-    public RuneflareTrap(UUID ownerId) {
-        super(ownerId, 146, "Runeflare Trap", Rarity.UNCOMMON, new CardType[]{CardType.INSTANT}, "{4}{R}{R}");
-        this.expansionSetCode = "ZEN";
+    public RuneflareTrap(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.INSTANT},"{4}{R}{R}");
         this.subtype.add("Trap");
 
         // If an opponent drew three or more cards this turn, you may pay {R} rather than pay Runeflare Trap's mana cost.

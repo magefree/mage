@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.journeyintonyx;
+package mage.cards.d;
 
 import java.util.UUID;
 import mage.MageInt;
@@ -38,9 +38,9 @@ import mage.abilities.effects.common.search.SearchLibraryPutInHandEffect;
 import mage.abilities.keyword.InspiredAbility;
 import mage.cards.Card;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Outcome;
-import mage.constants.Rarity;
 import mage.filter.Filter;
 import mage.filter.FilterCard;
 import mage.filter.common.FilterNonlandCard;
@@ -56,9 +56,8 @@ import mage.target.common.TargetCardInLibrary;
  */
 public class DiscipleOfDeceit extends CardImpl {
 
-    public DiscipleOfDeceit(UUID ownerId) {
-        super(ownerId, 148, "Disciple of Deceit", Rarity.UNCOMMON, new CardType[]{CardType.CREATURE}, "{U}{B}");
-        this.expansionSetCode = "JOU";
+    public DiscipleOfDeceit(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{U}{B}");
         this.subtype.add("Human");
         this.subtype.add("Rogue");
 

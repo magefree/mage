@@ -26,11 +26,10 @@
 * or implied, of BetaSteward_at_googlemail.com.
 */
 
-package mage.sets.zendikar;
+package mage.cards.g;
 
 import java.util.UUID;
 import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.MageInt;
 import mage.abilities.common.EntersBattlefieldTriggeredAbility;
 import mage.abilities.condition.common.KickedCondition;
@@ -39,6 +38,7 @@ import mage.abilities.effects.common.DestroyTargetEffect;
 import mage.abilities.keyword.HasteAbility;
 import mage.abilities.keyword.KickerAbility;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.target.common.TargetNonBasicLandPermanent;
 
 /**
@@ -47,9 +47,8 @@ import mage.target.common.TargetNonBasicLandPermanent;
  */
 public class GoblinRuinblaster extends CardImpl {
 
-    public GoblinRuinblaster(UUID ownerId) {
-        super(ownerId, 127, "Goblin Ruinblaster", Rarity.UNCOMMON, new CardType[]{CardType.CREATURE}, "{2}{R}");
-        this.expansionSetCode = "ZEN";
+    public GoblinRuinblaster(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{2}{R}");
 
         this.subtype.add("Goblin");
         this.subtype.add("Shaman");

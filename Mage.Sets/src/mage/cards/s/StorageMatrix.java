@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.ninthedition;
+package mage.cards.s;
 
 import java.util.HashSet;
 import java.util.UUID;
@@ -33,12 +33,12 @@ import mage.abilities.Ability;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.effects.RestrictionEffect;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.choices.Choice;
 import mage.choices.ChoiceImpl;
 import mage.constants.CardType;
 import mage.constants.Duration;
 import mage.constants.PhaseStep;
-import mage.constants.Rarity;
 import mage.constants.Zone;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
@@ -50,9 +50,8 @@ import mage.players.Player;
  */
 public class StorageMatrix extends CardImpl {
 
-    public StorageMatrix(UUID ownerId) {
-        super(ownerId, 310, "Storage Matrix", Rarity.RARE, new CardType[]{CardType.ARTIFACT}, "{3}");
-        this.expansionSetCode = "9ED";
+    public StorageMatrix(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.ARTIFACT},"{3}");
 
         // As long as Storage Matrix is untapped, each player chooses artifact, creature, or land during his or her untap step. That player can untap only permanents of the chosen type this step.
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new StorageMatrixRestrictionEffect()));

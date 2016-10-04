@@ -26,15 +26,15 @@
  *  or implied, of BetaSteward_at_googlemail.com.
  */
 
-package mage.sets.alarareborn;
+package mage.cards.s;
 
 import java.util.UUID;
 import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.MageInt;
 import mage.abilities.keyword.FlyingAbility;
 import mage.abilities.keyword.HasteAbility;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 
 /**
  *
@@ -42,9 +42,8 @@ import mage.cards.CardImpl;
  */
 public class SewnEyeDrake extends CardImpl {
 
-    public SewnEyeDrake (UUID ownerId) {
-        super(ownerId, 135, "Sewn-Eye Drake", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{2}{U/R}{B}");
-        this.expansionSetCode = "ARB";
+    public SewnEyeDrake (UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{2}{U/R}{B}");
         this.subtype.add("Zombie");
         this.subtype.add("Drake");
         

@@ -26,17 +26,17 @@
  *  or implied, of BetaSteward_at_googlemail.com.
  */
 
-package mage.sets.scarsofmirrodin;
+package mage.cards.l;
 
 import java.util.UUID;
 
 import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.costs.common.TapSourceCost;
 import mage.abilities.effects.common.continuous.AddCardTypeTargetEffect;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.Duration;
 import mage.constants.Zone;
 import mage.target.TargetPermanent;
@@ -47,9 +47,8 @@ import mage.target.TargetPermanent;
  */
 public class LiquimetalCoating extends CardImpl {
 
-    public LiquimetalCoating (UUID ownerId) {
-        super(ownerId, 171, "Liquimetal Coating", Rarity.UNCOMMON, new CardType[]{CardType.ARTIFACT}, "{2}");
-        this.expansionSetCode = "SOM";
+    public LiquimetalCoating (UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.ARTIFACT},"{2}");
 
         // {T}: Target permanent becomes an artifact in addition to its other types until end of turn.
         Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new AddCardTypeTargetEffect(CardType.ARTIFACT, Duration.EndOfTurn), new TapSourceCost());

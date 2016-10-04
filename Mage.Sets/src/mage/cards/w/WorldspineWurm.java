@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.returntoravnica;
+package mage.cards.w;
 
 import java.util.UUID;
 import mage.MageInt;
@@ -35,8 +35,8 @@ import mage.abilities.effects.common.CreateTokenEffect;
 import mage.abilities.effects.common.ShuffleIntoLibrarySourceEffect;
 import mage.abilities.keyword.TrampleAbility;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.game.permanent.token.WurmToken2;
 
 /**
@@ -45,9 +45,8 @@ import mage.game.permanent.token.WurmToken2;
  */
 public class WorldspineWurm extends CardImpl {
 
-    public WorldspineWurm(UUID ownerId) {
-        super(ownerId, 140, "Worldspine Wurm", Rarity.MYTHIC, new CardType[]{CardType.CREATURE}, "{8}{G}{G}{G}");
-        this.expansionSetCode = "RTR";
+    public WorldspineWurm(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{8}{G}{G}{G}");
         this.subtype.add("Wurm");
 
         this.power = new MageInt(15);

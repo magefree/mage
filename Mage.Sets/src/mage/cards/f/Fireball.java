@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.magic2010;
+package mage.cards.f;
 
 import java.util.ArrayList;
 import java.util.Iterator;
@@ -36,9 +36,9 @@ import mage.abilities.Ability;
 import mage.abilities.costs.mana.GenericManaCost;
 import mage.abilities.effects.OneShotEffect;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Outcome;
-import mage.constants.Rarity;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.players.Player;
@@ -50,9 +50,8 @@ import mage.target.common.TargetCreatureOrPlayer;
  */
 public class Fireball extends CardImpl {
 
-    public Fireball(UUID ownerId) {
-        super(ownerId, 136, "Fireball", Rarity.UNCOMMON, new CardType[]{CardType.SORCERY}, "{X}{R}");
-        this.expansionSetCode = "M10";
+    public Fireball(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{X}{R}");
 
         // Fireball deals X damage divided evenly, rounded down, among any number of target creatures and/or players.
         // Fireball costs 1 more to cast for each target beyond the first.

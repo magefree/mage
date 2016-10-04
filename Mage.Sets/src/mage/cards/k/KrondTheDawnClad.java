@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.planechase2012;
+package mage.cards.k;
 
 import java.util.UUID;
 import mage.MageInt;
@@ -37,8 +37,8 @@ import mage.abilities.effects.common.ExileTargetEffect;
 import mage.abilities.keyword.FlyingAbility;
 import mage.abilities.keyword.VigilanceAbility;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.target.TargetPermanent;
 
 /**
@@ -47,9 +47,8 @@ import mage.target.TargetPermanent;
  */
 public class KrondTheDawnClad extends CardImpl {
 
-    public KrondTheDawnClad(UUID ownerId) {
-        super(ownerId, 99, "Krond the Dawn-Clad", Rarity.MYTHIC, new CardType[]{CardType.CREATURE}, "{G}{G}{G}{W}{W}{W}");
-        this.expansionSetCode = "PC2";
+    public KrondTheDawnClad(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{G}{G}{G}{W}{W}{W}");
         this.supertype.add("Legendary");
         this.subtype.add("Archon");
 

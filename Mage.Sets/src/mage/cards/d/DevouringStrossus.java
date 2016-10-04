@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.invasion;
+package mage.cards.d;
 
 import java.util.UUID;
 import mage.MageInt;
@@ -38,8 +38,8 @@ import mage.abilities.effects.common.SacrificeEffect;
 import mage.abilities.keyword.FlyingAbility;
 import mage.abilities.keyword.TrampleAbility;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.constants.TargetController;
 import mage.constants.Zone;
 import mage.filter.common.FilterControlledCreaturePermanent;
@@ -51,9 +51,8 @@ import mage.target.common.TargetControlledCreaturePermanent;
  */
 public class DevouringStrossus extends CardImpl {
 
-    public DevouringStrossus(UUID ownerId) {
-        super(ownerId, 101, "Devouring Strossus", Rarity.RARE, new CardType[]{CardType.CREATURE}, "{5}{B}{B}{B}");
-        this.expansionSetCode = "INV";
+    public DevouringStrossus(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{5}{B}{B}{B}");
         this.subtype.add("Horror");
         this.power = new MageInt(9);
         this.toughness = new MageInt(9);

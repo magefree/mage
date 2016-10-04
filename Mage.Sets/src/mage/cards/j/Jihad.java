@@ -25,16 +25,16 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.arabiannights;
+package mage.cards.j;
 
 import java.util.UUID;
 import mage.abilities.common.AsEntersBattlefieldAbility;
 import mage.abilities.effects.common.ChooseOpponentEffect;
 import mage.abilities.effects.common.ChooseColorEffect;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Outcome;
-import mage.constants.Rarity;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.filter.FilterPermanent;
 import mage.filter.predicate.mageobject.ColorPredicate;
@@ -66,9 +66,8 @@ public class Jihad extends CardImpl {
         filter.add(new ColorPredicate(ObjectColor.WHITE));
     }
 
-    public Jihad(UUID ownerId) {
-        super(ownerId, 60, "Jihad", Rarity.RARE, new CardType[]{CardType.ENCHANTMENT}, "{W}{W}{W}");
-        this.expansionSetCode = "ARN";
+    public Jihad(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.ENCHANTMENT},"{W}{W}{W}");
 
         // As Jihad enters the battlefield, choose a color and an opponent.
         this.addAbility(new AsEntersBattlefieldAbility(new ChooseColorEffect(Outcome.Detriment)));

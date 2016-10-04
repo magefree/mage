@@ -25,11 +25,10 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.riseoftheeldrazi;
+package mage.cards.s;
 
 import java.util.UUID;
 import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.MageInt;
 import mage.abilities.common.DealsCombatDamageToAPlayerTriggeredAbility;
 import mage.abilities.common.SpellCastControllerTriggeredAbility;
@@ -37,6 +36,7 @@ import mage.abilities.dynamicvalue.common.CountersSourceCount;
 import mage.abilities.effects.common.DrawCardSourceControllerEffect;
 import mage.abilities.effects.common.counter.AddCountersSourceEffect;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.counters.CounterType;
 import mage.filter.FilterSpell;
 import mage.filter.predicate.Predicates;
@@ -56,9 +56,8 @@ public class SurrakarSpellblade extends CardImpl {
                 new CardTypePredicate(CardType.SORCERY)));
     }
 
-    public SurrakarSpellblade(UUID ownerId) {
-        super(ownerId, 90, "Surrakar Spellblade", Rarity.RARE, new CardType[]{CardType.CREATURE}, "{1}{U}{U}");
-        this.expansionSetCode = "ROE";
+    public SurrakarSpellblade(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{1}{U}{U}");
         this.subtype.add("Surrakar");
 
         this.power = new MageInt(2);

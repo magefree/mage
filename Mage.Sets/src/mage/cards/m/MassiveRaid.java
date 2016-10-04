@@ -25,14 +25,14 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.gatecrash;
+package mage.cards.m;
 
 import java.util.UUID;
 import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.abilities.dynamicvalue.common.PermanentsOnBattlefieldCount;
 import mage.abilities.effects.common.DamageTargetEffect;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.filter.common.FilterControlledCreaturePermanent;
 import mage.target.common.TargetCreatureOrPlayer;
 
@@ -42,9 +42,8 @@ import mage.target.common.TargetCreatureOrPlayer;
  */
 public class MassiveRaid extends CardImpl {
 
-    public MassiveRaid(UUID ownerId) {
-        super(ownerId, 100, "Massive Raid", Rarity.COMMON, new CardType[]{CardType.INSTANT}, "{1}{R}{R}");
-        this.expansionSetCode = "GTC";
+    public MassiveRaid(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.INSTANT},"{1}{R}{R}");
 
 
         // Massive Raid deals damage to target creature or player equal to the number of creatures you control.

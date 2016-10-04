@@ -25,13 +25,12 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.returntoravnica;
+package mage.cards.c;
 
 import java.util.UUID;
 
 import mage.constants.CardType;
 import mage.constants.Duration;
-import mage.constants.Rarity;
 import mage.constants.Outcome;
 import mage.constants.TargetController;
 import mage.abilities.Ability;
@@ -42,6 +41,7 @@ import mage.abilities.effects.common.continuous.BoostAllEffect;
 import mage.abilities.effects.common.continuous.BoostTargetEffect;
 import mage.abilities.keyword.OverloadAbility;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.filter.predicate.permanent.ControllerPredicate;
 import mage.game.Game;
@@ -62,9 +62,8 @@ public class ChemistersTrick extends CardImpl {
         filter.add(new ControllerPredicate(TargetController.NOT_YOU));
     }
 
-    public ChemistersTrick(UUID ownerId) {
-        super(ownerId, 149, "Chemister's Trick", Rarity.COMMON, new CardType[]{CardType.INSTANT}, "{U}{R}");
-        this.expansionSetCode = "RTR";
+    public ChemistersTrick(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.INSTANT},"{U}{R}");
 
 
         // Target creature you don't control gets -2/-0 until end of turn and attacks this turn if able.

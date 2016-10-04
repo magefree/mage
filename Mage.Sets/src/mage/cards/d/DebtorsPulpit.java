@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.gatecrash;
+package mage.cards.d;
 
 import java.util.UUID;
 
@@ -39,6 +39,7 @@ import mage.abilities.effects.common.TapTargetEffect;
 import mage.abilities.effects.common.continuous.GainAbilityAttachedEffect;
 import mage.abilities.keyword.EnchantAbility;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.target.TargetPermanent;
 import mage.target.common.TargetCreaturePermanent;
 import mage.target.common.TargetLandPermanent;
@@ -49,9 +50,8 @@ import mage.target.common.TargetLandPermanent;
  */
 public class DebtorsPulpit extends CardImpl {
 
-    public DebtorsPulpit(UUID ownerId) {
-        super(ownerId, 10, "Debtor's Pulpit", Rarity.UNCOMMON, new CardType[]{CardType.ENCHANTMENT}, "{4}{W}");
-        this.expansionSetCode = "GTC";
+    public DebtorsPulpit(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.ENCHANTMENT},"{4}{W}");
 
         this.subtype.add("Aura");
 

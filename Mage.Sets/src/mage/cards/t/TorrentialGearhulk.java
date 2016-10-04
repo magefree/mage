@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.masterpieceseries;
+package mage.cards.t;
 
 import java.util.UUID;
 import mage.MageInt;
@@ -37,10 +37,10 @@ import mage.abilities.effects.ReplacementEffectImpl;
 import mage.abilities.keyword.FlashAbility;
 import mage.cards.Card;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Duration;
 import mage.constants.Outcome;
-import mage.constants.Rarity;
 import mage.constants.Zone;
 import mage.filter.FilterCard;
 import mage.filter.predicate.mageobject.CardTypePredicate;
@@ -63,9 +63,8 @@ public class TorrentialGearhulk extends CardImpl {
         filter.add(new CardTypePredicate(CardType.INSTANT));
     }
 
-    public TorrentialGearhulk(UUID ownerId) {
-        super(ownerId, 4, "Torrential Gearhulk", Rarity.MYTHIC, new CardType[]{CardType.ARTIFACT, CardType.CREATURE}, "{4}{U}{U}");
-        this.expansionSetCode = "MPS";
+    public TorrentialGearhulk(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.ARTIFACT,CardType.CREATURE},"{4}{U}{U}");
         this.subtype.add("Construct");
         this.power = new MageInt(5);
         this.toughness = new MageInt(6);

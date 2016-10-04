@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.shardsofalara;
+package mage.cards.n;
 
 import java.util.UUID;
 import mage.abilities.Mode;
@@ -33,8 +33,8 @@ import mage.abilities.effects.common.DamageTargetEffect;
 import mage.abilities.effects.common.ReturnToHandTargetEffect;
 import mage.abilities.effects.common.TapAllTargetPlayerControlsEffect;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.target.TargetPlayer;
 import mage.target.common.TargetCardInGraveyard;
@@ -46,9 +46,8 @@ import mage.target.common.TargetCreaturePermanent;
  */
 public class NayaCharm extends CardImpl {
 
-    public NayaCharm(UUID ownerId) {
-        super(ownerId, 180, "Naya Charm", Rarity.UNCOMMON, new CardType[]{CardType.INSTANT}, "{R}{G}{W}");
-        this.expansionSetCode = "ALA";
+    public NayaCharm(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.INSTANT},"{R}{G}{W}");
 
         // Choose one - Naya Charm deals 3 damage to target creature;
         this.getSpellAbility().addEffect(new DamageTargetEffect(3));

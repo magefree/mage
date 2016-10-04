@@ -25,15 +25,15 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.worldwake;
+package mage.cards.n;
 
 import java.util.UUID;
 import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.MageInt;
 import mage.abilities.common.AttacksTriggeredAbility;
 import mage.abilities.effects.common.DestroyAllEffect;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.filter.FilterPermanent;
 import mage.filter.predicate.mageobject.CardTypePredicate;
 import mage.filter.predicate.permanent.AnotherPredicate;
@@ -51,9 +51,8 @@ public class NovablastWurm extends CardImpl {
         filter.add(new CardTypePredicate(CardType.CREATURE));
     }
 
-    public NovablastWurm(UUID ownerId) {
-        super(ownerId, 119, "Novablast Wurm", Rarity.MYTHIC, new CardType[]{CardType.CREATURE}, "{3}{G}{G}{W}{W}");
-        this.expansionSetCode = "WWK";
+    public NovablastWurm(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{3}{G}{G}{W}{W}");
         this.subtype.add("Wurm");
 
         this.power = new MageInt(7);

@@ -25,14 +25,14 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.starter1999;
+package mage.cards.c;
 
 import java.util.UUID;
 
 import mage.abilities.effects.common.DamageTargetEffect;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.target.common.TargetCreatureOrPlayer;
 
 /**
@@ -41,9 +41,8 @@ import mage.target.common.TargetCreatureOrPlayer;
  */
 public class CinderStorm extends CardImpl {
 
-    public CinderStorm(UUID ownerId) {
-        super(ownerId, 93, "Cinder Storm", Rarity.UNCOMMON, new CardType[]{CardType.SORCERY}, "{6}{R}");
-        this.expansionSetCode = "S99";
+    public CinderStorm(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{6}{R}");
 
         // Cinder Storm deals 7 damage to target creature or player.
         this.getSpellAbility().addTarget(new TargetCreatureOrPlayer());

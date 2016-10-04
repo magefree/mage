@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.kaladesh;
+package mage.cards.i;
 
 import java.util.UUID;
 import mage.abilities.Mode;
@@ -33,8 +33,8 @@ import mage.abilities.effects.common.ChooseNewTargetsTargetEffect;
 import mage.abilities.effects.common.CopyTargetSpellEffect;
 import mage.abilities.effects.common.CounterTargetEffect;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.filter.FilterSpell;
 import mage.filter.predicate.Predicates;
 import mage.filter.predicate.mageobject.CardTypePredicate;
@@ -54,9 +54,8 @@ public class InsidiousWill extends CardImpl {
                 new CardTypePredicate(CardType.SORCERY)));
     }
 
-    public InsidiousWill(UUID ownerId) {
-        super(ownerId, 52, "Insidious Will", Rarity.RARE, new CardType[]{CardType.INSTANT}, "{2}{U}{U}");
-        this.expansionSetCode = "KLD";
+    public InsidiousWill(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.INSTANT},"{2}{U}{U}");
 
         // Choose one &mdash
         this.getSpellAbility().getModes().setMinModes(1);

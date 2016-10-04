@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.shadowmoor;
+package mage.cards.r;
 
 import java.util.UUID;
 import mage.abilities.condition.common.ManaWasSpentCondition;
@@ -34,9 +34,9 @@ import mage.abilities.effects.common.CounterTargetEffect;
 import mage.abilities.effects.common.CreateTokenEffect;
 import mage.abilities.effects.common.InfoEffect;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.ColoredManaSymbol;
-import mage.constants.Rarity;
 import mage.filter.common.FilterCreatureSpell;
 import mage.game.permanent.token.KithkinToken;
 import mage.target.TargetSpell;
@@ -48,9 +48,8 @@ import mage.watchers.common.ManaSpentToCastWatcher;
  */
 public class RepelIntruders extends CardImpl {
 
-    public RepelIntruders(UUID ownerId) {
-        super(ownerId, 147, "Repel Intruders", Rarity.UNCOMMON, new CardType[]{CardType.INSTANT}, "{3}{W/U}");
-        this.expansionSetCode = "SHM";
+    public RepelIntruders(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.INSTANT},"{3}{W/U}");
 
 
         // Put two 1/1 white Kithkin Soldier creature tokens onto the battlefield if {W} was spent to cast Repel Intruders. Counter up to one target creature spell if {U} was spent to cast Repel Intruders.

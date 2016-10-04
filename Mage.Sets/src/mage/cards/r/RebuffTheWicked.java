@@ -25,13 +25,13 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.planarchaos;
+package mage.cards.r;
 
 import java.util.UUID;
 import mage.abilities.effects.common.CounterTargetEffect;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.filter.FilterSpell;
 import mage.filter.common.FilterControlledPermanent;
 import mage.filter.predicate.other.TargetsPermanentPredicate;
@@ -49,9 +49,8 @@ public class RebuffTheWicked extends CardImpl {
         filter.add(new TargetsPermanentPredicate(new FilterControlledPermanent()));
     }
 
-    public RebuffTheWicked(UUID ownerId) {
-        super(ownerId, 12, "Rebuff the Wicked", Rarity.UNCOMMON, new CardType[]{CardType.INSTANT}, "{W}");
-        this.expansionSetCode = "PLC";
+    public RebuffTheWicked(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.INSTANT},"{W}");
 
         // Counter target spell that targets a permanent you control.
         this.getSpellAbility().addEffect(new CounterTargetEffect());

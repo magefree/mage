@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.vintagemasters;
+package mage.cards.m;
 
 import java.util.UUID;
 import mage.Mana;
@@ -36,9 +36,9 @@ import mage.abilities.effects.Effect;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.AddManaToManaPoolTargetControllerEffect;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Outcome;
-import mage.constants.Rarity;
 import mage.constants.TargetController;
 import mage.game.Game;
 import mage.game.stack.Spell;
@@ -51,9 +51,8 @@ import mage.target.targetpointer.FixedTarget;
  */
 public class ManaDrain extends CardImpl {
 
-    public ManaDrain(UUID ownerId) {
-        super(ownerId, 78, "Mana Drain", Rarity.MYTHIC, new CardType[]{CardType.INSTANT}, "{U}{U}");
-        this.expansionSetCode = "VMA";
+    public ManaDrain(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.INSTANT},"{U}{U}");
 
         // Counter target spell. At the beginning of your next main phase, add X mana of {C} to your mana pool, where X is that spell's converted mana cost.
         this.getSpellAbility().addTarget(new TargetSpell());

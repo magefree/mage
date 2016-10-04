@@ -25,14 +25,14 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.magic2015;
+package mage.cards.f;
 
 import java.util.UUID;
 import mage.abilities.effects.common.CreateTokenEffect;
 import mage.abilities.keyword.ConvokeAbility;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.game.permanent.token.BeastToken;
 
 /**
@@ -41,9 +41,8 @@ import mage.game.permanent.token.BeastToken;
  */
 public class FeralIncarnation extends CardImpl {
 
-    public FeralIncarnation(UUID ownerId) {
-        super(ownerId, 174, "Feral Incarnation", Rarity.UNCOMMON, new CardType[]{CardType.SORCERY}, "{8}{G}");
-        this.expansionSetCode = "M15";
+    public FeralIncarnation(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{8}{G}");
 
         // Convoke
         this.addAbility(new ConvokeAbility());

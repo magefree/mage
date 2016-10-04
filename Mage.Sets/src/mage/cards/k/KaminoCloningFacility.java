@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.starwars;
+package mage.cards.k;
 
 import java.util.UUID;
 import mage.abilities.Ability;
@@ -37,8 +37,8 @@ import mage.abilities.mana.ColorlessManaAbility;
 import mage.abilities.mana.ConditionalAnyColorManaAbility;
 import mage.abilities.mana.conditional.ConditionalSpellManaBuilder;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.constants.Zone;
 import mage.filter.FilterSpell;
 import mage.filter.predicate.mageobject.SubtypePredicate;
@@ -56,9 +56,8 @@ public class KaminoCloningFacility extends CardImpl {
         FILTER.add(new SubtypePredicate("Trooper"));
     }
 
-    public KaminoCloningFacility(UUID ownerId) {
-        super(ownerId, 246, "Kamino Cloning Facility", Rarity.RARE, new CardType[]{CardType.LAND}, "");
-        this.expansionSetCode = "SWS";
+    public KaminoCloningFacility(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.LAND},"");
 
         // {T}: Add {C} to your mana pool.
         this.addAbility(new ColorlessManaAbility());

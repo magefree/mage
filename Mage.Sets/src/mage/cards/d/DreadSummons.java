@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.commander2015;
+package mage.cards.d;
 
 import java.util.Set;
 import java.util.UUID;
@@ -34,9 +34,9 @@ import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.CreateTokenEffect;
 import mage.cards.Card;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Outcome;
-import mage.constants.Rarity;
 import mage.constants.Zone;
 import mage.game.Game;
 import mage.game.permanent.token.ZombieToken;
@@ -48,9 +48,8 @@ import mage.players.Player;
  */
 public class DreadSummons extends CardImpl {
 
-    public DreadSummons(UUID ownerId) {
-        super(ownerId, 20, "Dread Summons", Rarity.RARE, new CardType[]{CardType.SORCERY}, "{X}{B}{B}");
-        this.expansionSetCode = "C15";
+    public DreadSummons(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{X}{B}{B}");
 
         // Each player puts the top X cards of his or her library into his or her graveyard. For each creature card put into a graveyard this way, you put a 2/2 black Zombie creature token onto the battlefield tapped.
         getSpellAbility().addEffect(new DreadSummonsEffect());

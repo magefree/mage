@@ -25,15 +25,15 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.seventhedition;
+package mage.cards.c;
 
 import java.util.UUID;
 import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.abilities.common.BecomesTappedSourceTriggeredAbility;
 import mage.abilities.effects.common.DamageControllerEffect;
 import mage.abilities.mana.AnyColorManaAbility;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 
 /**
  *
@@ -41,9 +41,8 @@ import mage.cards.CardImpl;
  */
 public class CityOfBrass extends CardImpl {
 
-    public CityOfBrass(UUID ownerId) {
-        super(ownerId, 327, "City of Brass", Rarity.RARE, new CardType[]{CardType.LAND}, "");
-        this.expansionSetCode = "7ED";
+    public CityOfBrass(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.LAND},"");
 
         // Whenever City of Brass becomes tapped, it deals 1 damage to you.
         this.addAbility(new BecomesTappedSourceTriggeredAbility(new DamageControllerEffect(1)));

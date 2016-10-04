@@ -25,13 +25,13 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.magicorigins;
+package mage.cards.r;
 
 import java.util.UUID;
 import mage.abilities.effects.common.DestroyTargetEffect;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.filter.Filter;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.filter.predicate.mageobject.PowerPredicate;
@@ -49,9 +49,8 @@ public class ReaveSoul extends CardImpl {
         filter.add(new PowerPredicate(Filter.ComparisonType.LessThan, 4));
     }
 
-    public ReaveSoul(UUID ownerId) {
-        super(ownerId, 115, "Reave Soul", Rarity.COMMON, new CardType[]{CardType.SORCERY}, "{1}{B}");
-        this.expansionSetCode = "ORI";
+    public ReaveSoul(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{1}{B}");
 
         // Destroy target creature with power 3 or less.
         this.getSpellAbility().addEffect(new DestroyTargetEffect());

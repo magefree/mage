@@ -25,16 +25,16 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.gatecrash;
+package mage.cards.c;
 
 import java.util.UUID;
 import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.MageInt;
 import mage.abilities.effects.common.CipherEffect;
 import mage.abilities.effects.common.CreateTokenEffect;
 import mage.abilities.keyword.FlyingAbility;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.game.permanent.token.Token;
 
 /**
@@ -43,9 +43,8 @@ import mage.game.permanent.token.Token;
  */
 public class CallOfTheNightwing extends CardImpl {
 
-    public CallOfTheNightwing(UUID ownerId) {
-        super(ownerId, 149, "Call of the Nightwing", Rarity.UNCOMMON, new CardType[]{CardType.SORCERY}, "{2}{U}{B}");
-        this.expansionSetCode = "GTC";
+    public CallOfTheNightwing(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{2}{U}{B}");
 
 
         // Put a 1/1/ blue and black Horror creature token with flying onto the battlefield.

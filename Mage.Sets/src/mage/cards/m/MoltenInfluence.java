@@ -25,15 +25,15 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.odyssey;
+package mage.cards.m;
 
 import java.util.UUID;
 import mage.abilities.Ability;
 import mage.abilities.effects.OneShotEffect;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Outcome;
-import mage.constants.Rarity;
 import mage.filter.FilterSpell;
 import mage.filter.predicate.Predicates;
 import mage.filter.predicate.mageobject.CardTypePredicate;
@@ -56,9 +56,8 @@ public class MoltenInfluence extends CardImpl {
                 new CardTypePredicate(CardType.SORCERY));
     }
 
-    public MoltenInfluence(UUID ownerId) {
-        super(ownerId, 207, "Molten Influence", Rarity.RARE, new CardType[]{CardType.INSTANT}, "{1}{R}");
-        this.expansionSetCode = "ODY";
+    public MoltenInfluence(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.INSTANT},"{1}{R}");
 
         // Counter target instant or sorcery spell unless its controller has Molten Influence deal 4 damage to him or her.
         this.getSpellAbility().addTarget(new TargetSpell(filter));

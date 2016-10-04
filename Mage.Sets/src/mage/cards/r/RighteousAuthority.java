@@ -26,7 +26,7 @@
  *  or implied, of BetaSteward_at_googlemail.com.
  */
 
-package mage.sets.returntoravnica;
+package mage.cards.r;
 
 import mage.abilities.Ability;
 import mage.abilities.common.BeginningOfDrawTriggeredAbility;
@@ -38,6 +38,7 @@ import mage.abilities.effects.common.DrawCardTargetEffect;
 import mage.abilities.effects.common.continuous.BoostEnchantedEffect;
 import mage.abilities.keyword.EnchantAbility;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.*;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
@@ -53,9 +54,8 @@ import java.util.UUID;
  */
 public class RighteousAuthority extends CardImpl {
 
-    public RighteousAuthority (UUID ownerId) {
-        super(ownerId, 189, "Righteous Authority", Rarity.RARE, new CardType[]{CardType.ENCHANTMENT}, "{3}{W}{U}");
-        this.expansionSetCode = "RTR";
+    public RighteousAuthority (UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.ENCHANTMENT},"{3}{W}{U}");
         this.subtype.add("Aura");
 
 

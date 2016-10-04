@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.mirage;
+package mage.cards.r;
 
 import java.util.UUID;
 import mage.MageInt;
@@ -35,8 +35,8 @@ import mage.abilities.effects.Effect;
 import mage.abilities.effects.common.CreateDelayedTriggeredAbilityEffect;
 import mage.abilities.effects.common.DestroyTargetEffect;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.filter.predicate.Predicates;
 import mage.filter.predicate.mageobject.SubtypePredicate;
@@ -53,9 +53,8 @@ public class RockBasilisk extends CardImpl {
         filter.add(Predicates.not(new SubtypePredicate("Wall")));
     }
 
-    public RockBasilisk(UUID ownerId) {
-        super(ownerId, 339, "Rock Basilisk", Rarity.RARE, new CardType[]{CardType.CREATURE}, "{4}{R}{G}");
-        this.expansionSetCode = "MIR";
+    public RockBasilisk(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{4}{R}{G}");
         this.subtype.add("Basilisk");
 
         this.power = new MageInt(4);

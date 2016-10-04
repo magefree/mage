@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.dragonsoftarkir;
+package mage.cards.r;
 
 import java.util.UUID;
 import mage.MageInt;
@@ -37,12 +37,12 @@ import mage.abilities.effects.common.continuous.BoostControlledEffect;
 import mage.abilities.effects.common.cost.CostModificationEffectImpl;
 import mage.cards.Card;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.AsThoughEffectType;
 import mage.constants.CardType;
 import mage.constants.CostModificationType;
 import mage.constants.Duration;
 import mage.constants.Outcome;
-import mage.constants.Rarity;
 import mage.constants.Zone;
 import mage.filter.common.FilterCreatureCard;
 import mage.filter.common.FilterCreaturePermanent;
@@ -65,9 +65,8 @@ public class RisenExecutioner extends CardImpl {
         filter.add(new SubtypePredicate("Zombie"));
     }
     
-    public RisenExecutioner(UUID ownerId) {
-        super(ownerId, 116, "Risen Executioner", Rarity.MYTHIC, new CardType[]{CardType.CREATURE}, "{2}{B}{B}");
-        this.expansionSetCode = "DTK";
+    public RisenExecutioner(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{2}{B}{B}");
         this.subtype.add("Zombie");
         this.subtype.add("Warrior");
         this.power = new MageInt(4);

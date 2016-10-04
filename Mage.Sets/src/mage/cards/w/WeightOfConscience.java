@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.morningtide;
+package mage.cards.w;
 
 import java.util.HashSet;
 import java.util.Set;
@@ -39,10 +39,10 @@ import mage.abilities.effects.common.AttachEffect;
 import mage.abilities.effects.common.combat.CantAttackAttachedEffect;
 import mage.abilities.keyword.EnchantAbility;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.AttachmentType;
 import mage.constants.CardType;
 import mage.constants.Outcome;
-import mage.constants.Rarity;
 import mage.constants.Zone;
 import mage.filter.common.FilterControlledCreaturePermanent;
 import mage.filter.predicate.Predicates;
@@ -61,9 +61,8 @@ import mage.util.CardUtil;
  */
 public class WeightOfConscience extends CardImpl {
 
-    public WeightOfConscience(UUID ownerId) {
-        super(ownerId, 28, "Weight of Conscience", Rarity.COMMON, new CardType[]{CardType.ENCHANTMENT}, "{1}{W}");
-        this.expansionSetCode = "MOR";
+    public WeightOfConscience(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.ENCHANTMENT},"{1}{W}");
         this.subtype.add("Aura");
 
         // Enchant creature

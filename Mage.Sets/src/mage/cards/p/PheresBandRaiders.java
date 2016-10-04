@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.bornofthegods;
+package mage.cards.p;
 
 import java.util.UUID;
 import mage.MageInt;
@@ -34,8 +34,8 @@ import mage.abilities.effects.common.CreateTokenEffect;
 import mage.abilities.effects.common.DoIfCostPaid;
 import mage.abilities.keyword.InspiredAbility;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.game.permanent.token.CentaurEnchantmentCreatureToken;
 
 /**
@@ -44,9 +44,8 @@ import mage.game.permanent.token.CentaurEnchantmentCreatureToken;
  */
 public class PheresBandRaiders extends CardImpl {
 
-    public PheresBandRaiders(UUID ownerId) {
-        super(ownerId, 133, "Pheres-Band Raiders", Rarity.UNCOMMON, new CardType[]{CardType.CREATURE}, "{5}{G}");
-        this.expansionSetCode = "BNG";
+    public PheresBandRaiders(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{5}{G}");
         this.subtype.add("Centaur");
         this.subtype.add("Warrior");
 

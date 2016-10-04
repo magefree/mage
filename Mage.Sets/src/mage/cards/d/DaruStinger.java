@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.legions;
+package mage.cards.d;
 
 import java.util.UUID;
 import mage.MageInt;
@@ -37,8 +37,8 @@ import mage.abilities.effects.common.AmplifyEffect;
 import mage.abilities.effects.common.DamageTargetEffect;
 import mage.abilities.keyword.AmplifyAbility;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.constants.Zone;
 import mage.counters.CounterType;
 import mage.target.common.TargetAttackingOrBlockingCreature;
@@ -49,9 +49,8 @@ import mage.target.common.TargetAttackingOrBlockingCreature;
  */
 public class DaruStinger extends CardImpl {
 
-    public DaruStinger(UUID ownerId) {
-        super(ownerId, 10, "Daru Stinger", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{3}{W}");
-        this.expansionSetCode = "LGN";
+    public DaruStinger(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{3}{W}");
         this.subtype.add("Soldier");
         this.power = new MageInt(1);
         this.toughness = new MageInt(1);

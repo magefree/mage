@@ -26,11 +26,10 @@
 * or implied, of BetaSteward_at_googlemail.com.
 */
 
-package mage.sets.magic2010;
+package mage.cards.g;
 
 import java.util.UUID;
 import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.constants.Zone;
 import mage.MageInt;
 import mage.abilities.ActivatedAbilityImpl;
@@ -41,6 +40,7 @@ import mage.abilities.effects.common.CreateTokenEffect;
 import mage.abilities.keyword.FlyingAbility;
 import mage.abilities.mana.ColorlessManaAbility;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.game.permanent.token.Token;
 
 /**
@@ -49,9 +49,8 @@ import mage.game.permanent.token.Token;
  */
 public class GargoyleCastle extends CardImpl {
 
-    public GargoyleCastle(UUID ownerId) {
-        super(ownerId, 225, "Gargoyle Castle", Rarity.RARE, new CardType[]{CardType.LAND}, null);
-        this.expansionSetCode = "M10";
+    public GargoyleCastle(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.LAND},null);
         this.addAbility(new ColorlessManaAbility());
         this.addAbility(new GargoyleCastleAbility());
     }

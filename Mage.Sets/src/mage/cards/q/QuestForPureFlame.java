@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.zendikar;
+package mage.cards.q;
 
 import java.util.UUID;
 import mage.abilities.Ability;
@@ -36,10 +36,10 @@ import mage.abilities.costs.common.SacrificeSourceCost;
 import mage.abilities.effects.ReplacementEffectImpl;
 import mage.abilities.effects.common.counter.AddCountersSourceEffect;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Duration;
 import mage.constants.Outcome;
-import mage.constants.Rarity;
 import mage.constants.Zone;
 import mage.counters.CounterType;
 import mage.game.Game;
@@ -52,9 +52,8 @@ import mage.game.events.GameEvent.EventType;
  */
 public class QuestForPureFlame extends CardImpl {
 
-    public QuestForPureFlame(UUID ownerId) {
-        super(ownerId, 144, "Quest for Pure Flame", Rarity.UNCOMMON, new CardType[]{CardType.ENCHANTMENT}, "{R}");
-        this.expansionSetCode = "ZEN";
+    public QuestForPureFlame(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.ENCHANTMENT},"{R}");
 
         // Whenever a source you control deals damage to an opponent, you may put a quest counter on Quest for Pure Flame.
         this.addAbility(new QuestForPureFlameTriggeredAbility());

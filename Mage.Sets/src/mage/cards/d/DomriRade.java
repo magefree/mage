@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.gatecrash;
+package mage.cards.d;
 
 import java.util.UUID;
 import mage.MageObject;
@@ -43,11 +43,11 @@ import mage.abilities.keyword.HexproofAbility;
 import mage.abilities.keyword.TrampleAbility;
 import mage.cards.Card;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.cards.CardsImpl;
 import mage.constants.CardType;
 import mage.constants.Duration;
 import mage.constants.Outcome;
-import mage.constants.Rarity;
 import mage.constants.Zone;
 import mage.filter.FilterPermanent;
 import mage.filter.common.FilterControlledCreaturePermanent;
@@ -65,9 +65,8 @@ import mage.target.common.TargetCreaturePermanent;
  */
 public class DomriRade extends CardImpl {
 
-    public DomriRade(UUID ownerId) {
-        super(ownerId, 156, "Domri Rade", Rarity.MYTHIC, new CardType[]{CardType.PLANESWALKER}, "{1}{R}{G}");
-        this.expansionSetCode = "GTC";
+    public DomriRade(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.PLANESWALKER},"{1}{R}{G}");
         this.subtype.add("Domri");
 
         this.addAbility(new PlanswalkerEntersWithLoyalityCountersAbility(3));

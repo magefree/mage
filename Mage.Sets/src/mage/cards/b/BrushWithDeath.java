@@ -25,15 +25,15 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.stronghold;
+package mage.cards.b;
 
 import java.util.UUID;
 import mage.abilities.effects.common.GainLifeEffect;
 import mage.abilities.effects.common.LoseLifeTargetEffect;
 import mage.abilities.keyword.BuybackAbility;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.target.common.TargetOpponent;
 
 /**
@@ -42,9 +42,8 @@ import mage.target.common.TargetOpponent;
  */
 public class BrushWithDeath extends CardImpl {
 
-    public BrushWithDeath(UUID ownerId) {
-        super(ownerId, 2, "Brush with Death", Rarity.COMMON, new CardType[]{CardType.SORCERY}, "{2}{B}");
-        this.expansionSetCode = "STH";
+    public BrushWithDeath(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{2}{B}");
 
         // Buyback {2}{B}{B}
         this.addAbility(new BuybackAbility("{2}{B}{B}"));

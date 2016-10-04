@@ -25,13 +25,13 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.worldwake;
+package mage.cards.d;
 
 import java.util.UUID;
 import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.abilities.effects.common.CounterTargetEffect;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.filter.FilterSpell;
 import mage.filter.predicate.mageobject.CardTypePredicate;
 import mage.target.TargetSpell;
@@ -48,9 +48,8 @@ public class Dispel extends CardImpl {
             filter.add(new CardTypePredicate(CardType.INSTANT));
     }
 
-    public Dispel(UUID ownerId) {
-        super(ownerId, 26, "Dispel", Rarity.COMMON, new CardType[]{CardType.INSTANT}, "{U}");
-        this.expansionSetCode = "WWK";
+    public Dispel(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.INSTANT},"{U}");
 
         this.getSpellAbility().addTarget(new TargetSpell(filter));
         this.getSpellAbility().addEffect(new CounterTargetEffect());

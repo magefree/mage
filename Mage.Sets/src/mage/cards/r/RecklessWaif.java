@@ -25,10 +25,9 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.innistrad;
+package mage.cards.r;
 
 import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.MageInt;
 import mage.abilities.TriggeredAbility;
 import mage.abilities.common.BeginningOfUpkeepTriggeredAbility;
@@ -36,7 +35,9 @@ import mage.abilities.condition.common.NoSpellsWereCastLastTurnCondition;
 import mage.abilities.decorator.ConditionalTriggeredAbility;
 import mage.abilities.effects.common.TransformSourceEffect;
 import mage.abilities.keyword.TransformAbility;
+import mage.cards.m.MercilessPredator;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.TargetController;
 
 import java.util.UUID;
@@ -46,15 +47,14 @@ import java.util.UUID;
  */
 public class RecklessWaif extends CardImpl {
 
-    public RecklessWaif(UUID ownerId) {
-        super(ownerId, 159, "Reckless Waif", Rarity.UNCOMMON, new CardType[]{CardType.CREATURE}, "{R}");
-        this.expansionSetCode = "ISD";
+    public RecklessWaif(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{R}");
         this.subtype.add("Human");
         this.subtype.add("Rogue");
         this.subtype.add("Werewolf");
 
         this.transformable = true;
-        this.secondSideCard = new MercilessPredator(ownerId);
+        this.secondSideCardClazz = MercilessPredator.class;
 
         this.power = new MageInt(1);
         this.toughness = new MageInt(1);

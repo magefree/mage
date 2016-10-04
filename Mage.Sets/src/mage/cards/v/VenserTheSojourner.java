@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.scarsofmirrodin;
+package mage.cards.v;
 
 import java.util.UUID;
 import mage.MageObject;
@@ -41,10 +41,10 @@ import mage.abilities.effects.common.GetEmblemEffect;
 import mage.abilities.effects.common.ReturnFromExileEffect;
 import mage.abilities.effects.common.combat.CantBeBlockedAllEffect;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Duration;
 import mage.constants.Outcome;
-import mage.constants.Rarity;
 import mage.constants.TargetController;
 import mage.constants.Zone;
 import mage.filter.FilterPermanent;
@@ -73,9 +73,8 @@ public class VenserTheSojourner extends CardImpl {
         filter.add(new OwnerPredicate(TargetController.YOU));
     }
 
-    public VenserTheSojourner(UUID ownerId) {
-        super(ownerId, 135, "Venser, the Sojourner", Rarity.MYTHIC, new CardType[]{CardType.PLANESWALKER}, "{3}{W}{U}");
-        this.expansionSetCode = "SOM";
+    public VenserTheSojourner(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.PLANESWALKER},"{3}{W}{U}");
         this.subtype.add("Venser");
 
         this.addAbility(new PlanswalkerEntersWithLoyalityCountersAbility(3));

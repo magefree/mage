@@ -25,15 +25,15 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.invasion;
+package mage.cards.a;
 
 import java.util.UUID;
 import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.abilities.dynamicvalue.common.TargetConvertedManaCost;
 import mage.abilities.effects.common.CreateTokenEffect;
 import mage.abilities.effects.common.DestroyTargetEffect;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.filter.common.FilterArtifactPermanent;
 import mage.game.permanent.token.SaprolingToken;
 import mage.target.TargetPermanent;
@@ -44,9 +44,8 @@ import mage.target.TargetPermanent;
  */
 public class ArtifactMutation extends CardImpl {
 
-    public ArtifactMutation(UUID ownerId) {
-        super(ownerId, 231, "Artifact Mutation", Rarity.RARE, new CardType[]{CardType.INSTANT}, "{R}{G}");
-        this.expansionSetCode = "INV";
+    public ArtifactMutation(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.INSTANT},"{R}{G}");
 
 
         // Destroy target artifact. It can't be regenerated.

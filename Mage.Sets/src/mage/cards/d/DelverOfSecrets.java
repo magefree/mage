@@ -25,20 +25,21 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.innistrad;
+package mage.cards.d;
 
 import java.util.UUID;
 import mage.constants.CardType;
 import mage.constants.Outcome;
-import mage.constants.Rarity;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.BeginningOfUpkeepTriggeredAbility;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.TransformSourceEffect;
 import mage.abilities.keyword.TransformAbility;
+import mage.cards.i.InsectileAberration;
 import mage.cards.Card;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.cards.Cards;
 import mage.cards.CardsImpl;
 import mage.constants.TargetController;
@@ -54,9 +55,8 @@ import mage.players.Player;
  */
 public class DelverOfSecrets extends CardImpl {
 
-    public DelverOfSecrets(UUID ownerId) {
-        super(ownerId, 51, "Delver of Secrets", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{U}");
-        this.expansionSetCode = "ISD";
+    public DelverOfSecrets(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{U}");
         this.subtype.add("Human");
         this.subtype.add("Wizard");
 
@@ -64,7 +64,7 @@ public class DelverOfSecrets extends CardImpl {
         this.toughness = new MageInt(1);
 
         this.transformable = true;
-        this.secondSideCard = new InsectileAberration(ownerId);
+        this.secondSideCardClazz = InsectileAberration.class;
 
         // At the beginning of your upkeep, look at the top card of your library. You may reveal that card. If an instant or sorcery card is revealed this way, transform Delver of Secrets.
         this.addAbility(new TransformAbility());

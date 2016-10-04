@@ -26,17 +26,17 @@
 * or implied, of BetaSteward_at_googlemail.com.
 */
 
-package mage.sets.conflux;
+package mage.cards.n;
 
 import java.util.UUID;
 import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.MageInt;
 import mage.abilities.keyword.ExaltedAbility;
 import mage.abilities.mana.BlueManaAbility;
 import mage.abilities.mana.GreenManaAbility;
 import mage.abilities.mana.WhiteManaAbility;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 
 
 /**
@@ -45,9 +45,8 @@ import mage.cards.CardImpl;
  */
 public class NobleHierarch extends CardImpl {
 
-    public NobleHierarch(UUID ownerId) {
-        super(ownerId, 87, "Noble Hierarch", Rarity.RARE, new CardType[]{CardType.CREATURE}, "{G}");
-        this.expansionSetCode = "CON";
+    public NobleHierarch(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{G}");
 
         this.subtype.add("Human");
         this.subtype.add("Druid");

@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.iceage;
+package mage.cards.v;
 
 import java.util.UUID;
 import mage.Mana;
@@ -41,8 +41,8 @@ import mage.abilities.effects.common.counter.AddCountersSourceEffect;
 import mage.abilities.effects.common.counter.RemoveCounterSourceEffect;
 import mage.abilities.mana.SimpleManaAbility;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.constants.TargetController;
 import mage.constants.Zone;
 import mage.counters.CounterType;
@@ -53,9 +53,8 @@ import mage.counters.CounterType;
  */
 public class Veldt extends CardImpl {
 
-    public Veldt(UUID ownerId) {
-        super(ownerId, 358, "Veldt", Rarity.RARE, new CardType[]{CardType.LAND}, "");
-        this.expansionSetCode = "ICE";
+    public Veldt(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.LAND},"");
 
         // Veldt doesn't untap during your untap step if it has a depletion counter on it.
         Effect effect = new ConditionalContinuousRuleModifyingEffect(new DontUntapInControllersUntapStepSourceEffect(false, true),

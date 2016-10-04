@@ -25,15 +25,15 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.shadowmoor;
+package mage.cards.o;
 
 import java.util.UUID;
 import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.MageInt;
 import mage.ObjectColor;
 import mage.abilities.keyword.ProtectionAbility;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.filter.FilterCard;
 import mage.filter.predicate.Predicates;
 import mage.filter.predicate.mageobject.ColorPredicate;
@@ -53,9 +53,8 @@ public class OversoulOfDusk extends CardImpl {
                 new ColorPredicate(ObjectColor.RED)));
     }
 
-    public OversoulOfDusk(UUID ownerId) {
-        super(ownerId, 234, "Oversoul of Dusk", Rarity.RARE, new CardType[]{CardType.CREATURE}, "{G/W}{G/W}{G/W}{G/W}{G/W}");
-        this.expansionSetCode = "SHM";
+    public OversoulOfDusk(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{G/W}{G/W}{G/W}{G/W}{G/W}");
         this.subtype.add("Spirit");
         this.subtype.add("Avatar");
 

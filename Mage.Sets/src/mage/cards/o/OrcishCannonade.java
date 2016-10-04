@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.speedvscunning;
+package mage.cards.o;
 
 import java.util.UUID;
 import mage.abilities.effects.Effect;
@@ -33,8 +33,8 @@ import mage.abilities.effects.common.DamageControllerEffect;
 import mage.abilities.effects.common.DamageTargetEffect;
 import mage.abilities.effects.common.DrawCardSourceControllerEffect;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.target.common.TargetCreatureOrPlayer;
 
 /**
@@ -43,9 +43,8 @@ import mage.target.common.TargetCreatureOrPlayer;
  */
 public class OrcishCannonade extends CardImpl {
 
-    public OrcishCannonade(UUID ownerId) {
-        super(ownerId, 28, "Orcish Cannonade", Rarity.COMMON, new CardType[]{CardType.INSTANT}, "{1}{R}{R}");
-        this.expansionSetCode = "DDN";
+    public OrcishCannonade(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.INSTANT},"{1}{R}{R}");
 
         // Orcish Cannonade deals 2 damage to target creature or player and 3 damage to you.
         this.getSpellAbility().addEffect(new DamageTargetEffect(2));

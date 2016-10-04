@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.judgment;
+package mage.cards.s;
 
 import java.util.UUID;
 import mage.abilities.common.BeginningOfUpkeepTriggeredAbility;
@@ -37,9 +37,9 @@ import mage.abilities.effects.common.SkipDrawStepEffect;
 import mage.abilities.effects.common.continuous.GainAbilityControllerEffect;
 import mage.abilities.keyword.ShroudAbility;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Duration;
-import mage.constants.Rarity;
 import mage.constants.TargetController;
 import mage.constants.Zone;
 import mage.target.common.TargetCardInHand;
@@ -50,9 +50,8 @@ import mage.target.common.TargetCardInHand;
  */
 public class SolitaryConfinement extends CardImpl {
 
-    public SolitaryConfinement(UUID ownerId) {
-        super(ownerId, 24, "Solitary Confinement", Rarity.RARE, new CardType[]{CardType.ENCHANTMENT}, "{2}{W}");
-        this.expansionSetCode = "JUD";
+    public SolitaryConfinement(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.ENCHANTMENT},"{2}{W}");
 
         // At the beginning of your upkeep, sacrifice Solitary Confinement unless you discard a card.
         this.addAbility(new BeginningOfUpkeepTriggeredAbility(Zone.BATTLEFIELD, new SacrificeSourceUnlessPaysEffect(new DiscardTargetCost(new TargetCardInHand())), TargetController.YOU, false));

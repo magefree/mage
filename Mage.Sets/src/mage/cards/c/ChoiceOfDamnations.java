@@ -25,15 +25,15 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.saviorsofkamigawa;
+package mage.cards.c;
 
 import java.util.UUID;
 import mage.abilities.Ability;
 import mage.abilities.effects.OneShotEffect;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Outcome;
-import mage.constants.Rarity;
 import mage.filter.FilterPermanent;
 import mage.filter.common.FilterControlledPermanent;
 import mage.game.Game;
@@ -49,9 +49,8 @@ import mage.target.common.TargetOpponent;
  */
 public class ChoiceOfDamnations extends CardImpl {
 
-    public ChoiceOfDamnations(UUID ownerId) {
-        super(ownerId, 62, "Choice of Damnations", Rarity.RARE, new CardType[]{CardType.SORCERY}, "{5}{B}");
-        this.expansionSetCode = "SOK";
+    public ChoiceOfDamnations(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{5}{B}");
         this.subtype.add("Arcane");
 
         // Target opponent chooses a number. You may have that player lose that much life. If you don't, that player sacrifices all but that many permanents.

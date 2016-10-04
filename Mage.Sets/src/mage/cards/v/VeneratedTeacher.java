@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.riseoftheeldrazi;
+package mage.cards.v;
 
 import java.util.List;
 import java.util.UUID;
@@ -36,9 +36,9 @@ import mage.filter.common.FilterControlledCreaturePermanent;
 import mage.constants.Outcome;
 import mage.counters.CounterType;
 import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.abilities.Ability;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.abilities.keyword.LevelUpAbility;
@@ -49,9 +49,8 @@ import mage.abilities.keyword.LevelUpAbility;
  */
 public class VeneratedTeacher extends CardImpl {
 
-    public VeneratedTeacher(UUID ownerId) {
-        super(ownerId, 93, "Venerated Teacher", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{2}{U}");
-        this.expansionSetCode = "ROE";
+    public VeneratedTeacher(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{2}{U}");
         this.subtype.add("Human");
         this.subtype.add("Wizard");
 

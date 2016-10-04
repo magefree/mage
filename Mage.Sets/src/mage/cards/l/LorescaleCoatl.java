@@ -26,15 +26,15 @@
  *  or implied, of BetaSteward_at_googlemail.com.
  */
 
-package mage.sets.alarareborn;
+package mage.cards.l;
 
 import java.util.UUID;
 import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.MageInt;
 import mage.abilities.common.DrawCardControllerTriggeredAbility;
 import mage.abilities.effects.common.counter.AddCountersSourceEffect;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.counters.CounterType;
 
 /**
@@ -43,9 +43,8 @@ import mage.counters.CounterType;
  */
 public class LorescaleCoatl extends CardImpl {
 
-    public LorescaleCoatl (UUID ownerId) {
-        super(ownerId, 101, "Lorescale Coatl", Rarity.UNCOMMON, new CardType[]{CardType.CREATURE}, "{1}{G}{U}");
-        this.expansionSetCode = "ARB";
+    public LorescaleCoatl (UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{1}{G}{U}");
         this.subtype.add("Snake");
 
 

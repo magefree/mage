@@ -26,7 +26,7 @@
  *  or implied, of BetaSteward_at_googlemail.com.
  */
 
-package mage.sets.zendikar;
+package mage.cards.o;
 
 import java.util.UUID;
 import mage.MageInt;
@@ -39,9 +39,9 @@ import mage.abilities.effects.common.DamageControllerEffect;
 import mage.abilities.effects.common.continuous.GainAbilityTargetEffect;
 import mage.abilities.effects.common.counter.AddCountersTargetEffect;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Duration;
-import mage.constants.Rarity;
 import mage.constants.TargetController;
 import mage.constants.Zone;
 import mage.counters.CounterType;
@@ -65,9 +65,8 @@ public class ObsidianFireheart extends CardImpl {
         filter.add(Predicates.not(new CounterPredicate(CounterType.BLAZE)));
     }
 
-    public ObsidianFireheart(UUID ownerId) {
-        super(ownerId, 140, "Obsidian Fireheart", Rarity.MYTHIC, new CardType[]{CardType.CREATURE}, "{1}{R}{R}{R}");
-        this.expansionSetCode = "ZEN";
+    public ObsidianFireheart(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{1}{R}{R}{R}");
         this.subtype.add("Elemental");
 
 

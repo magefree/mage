@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.eldritchmoon;
+package mage.cards.c;
 
 import java.util.UUID;
 import mage.abilities.Mode;
@@ -38,9 +38,9 @@ import mage.abilities.effects.common.continuous.BoostTargetEffect;
 import mage.abilities.effects.common.discard.DiscardCardYouChooseTargetEffect;
 import mage.abilities.keyword.EscalateAbility;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Duration;
-import mage.constants.Rarity;
 import mage.constants.TargetController;
 import mage.filter.FilterCard;
 import mage.filter.FilterPlayer;
@@ -69,9 +69,8 @@ public class CollectiveBrutality extends CardImpl {
         filterLoseLife.add(new PlayerPredicate(TargetController.OPPONENT));
     }
 
-    public CollectiveBrutality(UUID ownerId) {
-        super(ownerId, 85, "Collective Brutality", Rarity.RARE, new CardType[]{CardType.SORCERY}, "{1}{B}");
-        this.expansionSetCode = "EMN";
+    public CollectiveBrutality(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{1}{B}");
 
         // Escalate - Discard a card.
         Cost cost = new DiscardCardCost();

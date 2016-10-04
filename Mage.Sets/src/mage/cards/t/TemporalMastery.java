@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.avacynrestored;
+package mage.cards.t;
 
 import java.util.UUID;
 import mage.abilities.costs.mana.ManaCostsImpl;
@@ -33,17 +33,16 @@ import mage.abilities.effects.common.ExileSpellEffect;
 import mage.abilities.effects.common.turn.AddExtraTurnControllerEffect;
 import mage.abilities.keyword.MiracleAbility;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.Rarity;
 
 /**
  * @author noxx
  */
 public class TemporalMastery extends CardImpl {
 
-    public TemporalMastery(UUID ownerId) {
-        super(ownerId, 81, "Temporal Mastery", Rarity.MYTHIC, new CardType[]{CardType.SORCERY}, "{5}{U}{U}");
-        this.expansionSetCode = "AVR";
+    public TemporalMastery(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{5}{U}{U}");
 
 
         // Take an extra turn after this one. Exile Temporal Mastery.

@@ -25,14 +25,14 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.eighthedition;
+package mage.cards.m;
 
 import java.util.UUID;
 import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.ObjectColor;
 import mage.abilities.effects.common.search.SearchLibraryPutInHandEffect;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.filter.FilterCard;
 import mage.filter.predicate.mageobject.CardTypePredicate;
 import mage.filter.predicate.mageobject.ColorPredicate;
@@ -51,9 +51,8 @@ public class MerchantScroll extends CardImpl {
         filter.add(new CardTypePredicate(CardType.INSTANT));
     }
 
-    public MerchantScroll(UUID ownerId) {
-        super(ownerId, 91, "Merchant Scroll", Rarity.UNCOMMON, new CardType[]{CardType.SORCERY}, "{1}{U}");
-        this.expansionSetCode = "8ED";
+    public MerchantScroll(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{1}{U}");
 
 
         // Search your library for a blue instant card, reveal that card, and put it into your hand. Then shuffle your library.

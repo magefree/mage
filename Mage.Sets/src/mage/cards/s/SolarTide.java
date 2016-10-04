@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.mirrodin;
+package mage.cards.s;
 
 import java.util.UUID;
 import mage.abilities.Mode;
@@ -33,8 +33,8 @@ import mage.abilities.costs.common.SacrificeTargetCost;
 import mage.abilities.effects.common.DestroyAllEffect;
 import mage.abilities.keyword.EntwineAbility;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.filter.Filter;
 import mage.filter.common.FilterControlledLandPermanent;
 import mage.filter.common.FilterCreaturePermanent;
@@ -55,9 +55,8 @@ public class SolarTide extends CardImpl {
         filter2.add(new PowerPredicate(Filter.ComparisonType.GreaterThan, 2));
     }
 
-    public SolarTide(UUID ownerId) {
-        super(ownerId, 24, "Solar Tide", Rarity.RARE, new CardType[]{CardType.SORCERY}, "{4}{W}{W}");
-        this.expansionSetCode = "MRD";
+    public SolarTide(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{4}{W}{W}");
 
         // Choose one - Destroy all creatures with power 2 or less;
         this.getSpellAbility().addEffect(new DestroyAllEffect(filter1));

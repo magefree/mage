@@ -25,15 +25,15 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.onslaught;
+package mage.cards.c;
 
 import java.util.UUID;
 import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.costs.mana.ManaCostsImpl;
 import mage.abilities.effects.common.CreateTokenEffect;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.constants.Zone;
 import mage.game.permanent.token.CentaurToken;
 
@@ -43,9 +43,8 @@ import mage.game.permanent.token.CentaurToken;
  */
 public class CentaurGlade extends CardImpl {
 
-    public CentaurGlade(UUID ownerId) {
-        super(ownerId, 251, "Centaur Glade", Rarity.UNCOMMON, new CardType[]{CardType.ENCHANTMENT}, "{3}{G}{G}");
-        this.expansionSetCode = "ONS";
+    public CentaurGlade(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.ENCHANTMENT},"{3}{G}{G}");
 
         // {2}{G}{G}: Put a 3/3 green Centaur creature token onto the battlefield.
         this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new CreateTokenEffect(new CentaurToken(), 1), new ManaCostsImpl("{2}{G}{G}")));

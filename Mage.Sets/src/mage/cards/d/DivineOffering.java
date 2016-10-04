@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.mirrodinbesieged;
+package mage.cards.d;
 
 import java.util.UUID;
 import mage.abilities.dynamicvalue.common.TargetConvertedManaCost;
@@ -33,8 +33,8 @@ import mage.abilities.effects.Effect;
 import mage.abilities.effects.common.DestroyTargetEffect;
 import mage.abilities.effects.common.GainLifeEffect;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.target.common.TargetArtifactPermanent;
 
 /**
@@ -43,9 +43,8 @@ import mage.target.common.TargetArtifactPermanent;
  */
 public class DivineOffering extends CardImpl {
 
-    public DivineOffering(UUID ownerId) {
-        super(ownerId, 5, "Divine Offering", Rarity.COMMON, new CardType[]{CardType.INSTANT}, "{1}{W}");
-        this.expansionSetCode = "MBS";
+    public DivineOffering(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.INSTANT},"{1}{W}");
 
 
         // Destroy target artifact. You gain life equal to its converted mana cost.

@@ -25,15 +25,15 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.lorwyn;
+package mage.cards.f;
 
 import java.util.UUID;
 
 import mage.abilities.common.SpellCastOpponentTriggeredAbility;
 import mage.abilities.effects.common.DrawCardTargetEffect;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.constants.SetTargetPointer;
 import mage.constants.Zone;
 import mage.filter.FilterSpell;
@@ -44,9 +44,8 @@ import mage.filter.FilterSpell;
  */
 public class ForcedFruition extends CardImpl {
 
-    public ForcedFruition(UUID ownerId) {
-        super(ownerId, 66, "Forced Fruition", Rarity.RARE, new CardType[]{CardType.ENCHANTMENT}, "{4}{U}{U}");
-        this.expansionSetCode = "LRW";
+    public ForcedFruition(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.ENCHANTMENT},"{4}{U}{U}");
 
 
         // Whenever an opponent casts a spell, that player draws seven cards.

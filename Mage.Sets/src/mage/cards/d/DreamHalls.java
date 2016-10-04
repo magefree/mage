@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.stronghold;
+package mage.cards.d;
 
 import java.util.UUID;
 import mage.abilities.Ability;
@@ -35,11 +35,11 @@ import mage.abilities.costs.AlternativeCostSourceAbility;
 import mage.abilities.costs.common.DiscardCardCost;
 import mage.abilities.effects.ContinuousEffectImpl;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Duration;
 import mage.constants.Layer;
 import mage.constants.Outcome;
-import mage.constants.Rarity;
 import mage.constants.SubLayer;
 import mage.constants.Zone;
 import mage.filter.FilterCard;
@@ -54,9 +54,8 @@ import mage.players.Player;
  */
 public class DreamHalls extends CardImpl {
 
-    public DreamHalls(UUID ownerId) {
-        super(ownerId, 28, "Dream Halls", Rarity.RARE, new CardType[]{CardType.ENCHANTMENT}, "{3}{U}{U}");
-        this.expansionSetCode = "STH";
+    public DreamHalls(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.ENCHANTMENT},"{3}{U}{U}");
 
         // Rather than pay the mana cost for a spell, its controller may discard a card that shares a color with that spell.
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new DreamHallsEffect()));

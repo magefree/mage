@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.stronghold;
+package mage.cards.r;
 
 import java.util.HashSet;
 import java.util.Set;
@@ -38,10 +38,10 @@ import mage.abilities.effects.common.continuous.GainAbilityAllEffect;
 import mage.abilities.effects.common.continuous.GainControlTargetEffect;
 import mage.abilities.keyword.HasteAbility;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Duration;
 import mage.constants.Outcome;
-import mage.constants.Rarity;
 import mage.filter.common.FilterControlledCreaturePermanent;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.filter.predicate.Predicates;
@@ -57,9 +57,8 @@ import mage.target.targetpointer.FixedTarget;
  */
 public class ReinsOfPower extends CardImpl {
 
-    public ReinsOfPower(UUID ownerId) {
-        super(ownerId, 41, "Reins of Power", Rarity.RARE, new CardType[]{CardType.INSTANT}, "{2}{U}{U}");
-        this.expansionSetCode = "STH";
+    public ReinsOfPower(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.INSTANT},"{2}{U}{U}");
 
         // Untap all creatures you control and all creatures target opponent controls. You and that opponent each gain control of all creatures the other controls until end of turn. Those creatures gain haste until end of turn.
         this.getSpellAbility().addEffect(new ReinsOfPowerEffect());

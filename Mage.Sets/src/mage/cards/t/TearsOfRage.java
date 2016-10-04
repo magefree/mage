@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.darksteel;
+package mage.cards.t;
 
 import java.util.UUID;
 import mage.abilities.Ability;
@@ -38,11 +38,11 @@ import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.SacrificeTargetEffect;
 import mage.abilities.effects.common.continuous.BoostControlledEffect;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Duration;
 import mage.constants.Outcome;
 import mage.constants.PhaseStep;
-import mage.constants.Rarity;
 import mage.filter.common.FilterAttackingCreature;
 import mage.game.Game;
 import mage.players.Player;
@@ -54,9 +54,8 @@ import mage.target.targetpointer.FixedTargets;
  */
 public class TearsOfRage extends CardImpl {
 
-    public TearsOfRage(UUID ownerId) {
-        super(ownerId, 70, "Tears of Rage", Rarity.UNCOMMON, new CardType[]{CardType.INSTANT}, "{2}{R}{R}");
-        this.expansionSetCode = "DST";
+    public TearsOfRage(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.INSTANT},"{2}{R}{R}");
 
         // Cast Tears of Rage only during the declare attackers step.
         this.addAbility(new CastOnlyDuringPhaseStepSourceAbility(PhaseStep.DECLARE_ATTACKERS));

@@ -26,7 +26,7 @@
  *  or implied, of BetaSteward_at_googlemail.com.
  */
 
-package mage.sets.mirrodinbesieged;
+package mage.cards.p;
 
 import java.util.UUID;
 import mage.MageInt;
@@ -35,8 +35,8 @@ import mage.abilities.keyword.FirstStrikeAbility;
 import mage.abilities.keyword.InfectAbility;
 import mage.abilities.keyword.ProtectionAbility;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.filter.FilterCard;
 import mage.filter.predicate.mageobject.ColorPredicate;
 
@@ -55,9 +55,8 @@ public class PhyrexianCrusader extends CardImpl {
         filter2.add(new ColorPredicate(ObjectColor.WHITE));
     }
 
-    public PhyrexianCrusader (UUID ownerId) {
-        super(ownerId, 50, "Phyrexian Crusader", Rarity.RARE, new CardType[]{CardType.CREATURE}, "{1}{B}{B}");
-        this.expansionSetCode = "MBS";
+    public PhyrexianCrusader (UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{1}{B}{B}");
         this.subtype.add("Zombie");
         this.subtype.add("Knight");
 

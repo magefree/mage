@@ -25,14 +25,14 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.eventide;
+package mage.cards.c;
 
 import java.util.UUID;
 import mage.abilities.effects.common.CreateTokenEffect;
 import mage.abilities.keyword.RetraceAbility;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.game.permanent.token.KithkinToken;
 
 /**
@@ -41,9 +41,8 @@ import mage.game.permanent.token.KithkinToken;
  */
 public class CennsEnlistment extends CardImpl {
 
-    public CennsEnlistment(UUID ownerId) {
-        super(ownerId, 3, "Cenn's Enlistment", Rarity.COMMON, new CardType[]{CardType.SORCERY}, "{3}{W}");
-        this.expansionSetCode = "EVE";
+    public CennsEnlistment(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{3}{W}");
 
         // Put two 1/1 white Kithkin Soldier creature tokens onto the battlefield.
         this.getSpellAbility().addEffect(new CreateTokenEffect(new KithkinToken(), 2));

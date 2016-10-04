@@ -25,12 +25,11 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.avacynrestored;
+package mage.cards.r;
 
 import java.util.UUID;
 import mage.constants.CardType;
 import mage.constants.Duration;
-import mage.constants.Rarity;
 import mage.abilities.costs.mana.ManaCostsImpl;
 import mage.abilities.effects.Effect;
 import mage.abilities.effects.common.combat.MustBeBlockedByAllTargetEffect;
@@ -39,6 +38,7 @@ import mage.abilities.effects.common.continuous.GainAbilityTargetEffect;
 import mage.abilities.keyword.MiracleAbility;
 import mage.abilities.keyword.TrampleAbility;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.target.common.TargetCreaturePermanent;
 
 /**
@@ -47,9 +47,8 @@ import mage.target.common.TargetCreaturePermanent;
  */
 public class RevengeOfTheHunted extends CardImpl {
 
-    public RevengeOfTheHunted(UUID ownerId) {
-        super(ownerId, 191, "Revenge of the Hunted", Rarity.RARE, new CardType[]{CardType.SORCERY}, "{4}{G}{G}");
-        this.expansionSetCode = "AVR";
+    public RevengeOfTheHunted(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{4}{G}{G}");
 
 
         // Until end of turn, target creature gets +6/+6 and gains trample, and all creatures able to block it this turn do so.

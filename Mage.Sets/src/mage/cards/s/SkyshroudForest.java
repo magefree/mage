@@ -25,11 +25,10 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.tempest;
+package mage.cards.s;
 
 import java.util.UUID;
 import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.abilities.Ability;
 import mage.abilities.common.EntersBattlefieldTappedAbility;
 import mage.abilities.effects.common.DamageControllerEffect;
@@ -37,6 +36,7 @@ import mage.abilities.mana.BlueManaAbility;
 import mage.abilities.mana.ColorlessManaAbility;
 import mage.abilities.mana.GreenManaAbility;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 
 /**
  *
@@ -44,9 +44,8 @@ import mage.cards.CardImpl;
  */
 public class SkyshroudForest extends CardImpl {
 
-    public SkyshroudForest(UUID ownerId) {
-        super(ownerId, 332, "Skyshroud Forest", Rarity.RARE, new CardType[]{CardType.LAND}, null);
-        this.expansionSetCode = "TMP";
+    public SkyshroudForest(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.LAND},null);
 
         // Skyshroud Forest enters the battlefield tapped.
         this.addAbility(new EntersBattlefieldTappedAbility());

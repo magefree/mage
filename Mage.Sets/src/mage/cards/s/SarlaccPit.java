@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.starwars;
+package mage.cards.s;
 
 import java.util.UUID;
 import mage.MageInt;
@@ -41,8 +41,8 @@ import mage.abilities.keyword.FirstStrikeAbility;
 import mage.abilities.keyword.HexproofAbility;
 import mage.abilities.keyword.MonstrosityAbility;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.filter.common.FilterControlledLandPermanent;
 import mage.target.common.TargetControlledPermanent;
 
@@ -52,9 +52,8 @@ import mage.target.common.TargetControlledPermanent;
  */
 public class SarlaccPit extends CardImpl {
 
-    public SarlaccPit(UUID ownerId) {
-        super(ownerId, 173, "Sarlacc Pit", Rarity.RARE, new CardType[]{CardType.CREATURE}, "{R}{G}");
-        this.expansionSetCode = "SWS";
+    public SarlaccPit(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{R}{G}");
         this.subtype.add("Beast");
         this.power = new MageInt(0);
         this.toughness = new MageInt(4);

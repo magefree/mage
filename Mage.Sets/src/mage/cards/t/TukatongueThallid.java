@@ -26,15 +26,15 @@
  *  or implied, of BetaSteward_at_googlemail.com.
  */
 
-package mage.sets.conflux;
+package mage.cards.t;
 
 import java.util.UUID;
 import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.MageInt;
 import mage.abilities.common.DiesTriggeredAbility;
 import mage.abilities.effects.common.CreateTokenEffect;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.game.permanent.token.SaprolingToken;
 
 /**
@@ -43,9 +43,8 @@ import mage.game.permanent.token.SaprolingToken;
  */
 public class TukatongueThallid extends CardImpl {
 
-    public TukatongueThallid(UUID ownerId) {
-        super(ownerId, 96, "Tukatongue Thallid", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{G}");
-        this.expansionSetCode = "CON";
+    public TukatongueThallid(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{G}");
 
         this.subtype.add("Fungus");
         this.power = new MageInt(1);

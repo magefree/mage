@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.commander2015;
+package mage.cards.k;
 
 import java.util.UUID;
 import mage.MageInt;
@@ -37,8 +37,8 @@ import mage.abilities.costs.mana.ManaCostsImpl;
 import mage.abilities.effects.common.ExileTargetEffect;
 import mage.abilities.effects.common.counter.AddCountersSourceEffect;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.constants.Zone;
 import mage.counters.CounterType;
 import mage.target.common.TargetCreaturePermanent;
@@ -49,9 +49,8 @@ import mage.target.common.TargetCreaturePermanent;
  */
 public class KarlovOfTheGhostCouncil extends CardImpl {
 
-    public KarlovOfTheGhostCouncil(UUID ownerId) {
-        super(ownerId, 46, "Karlov of the Ghost Council", Rarity.MYTHIC, new CardType[]{CardType.CREATURE}, "{W}{B}");
-        this.expansionSetCode = "C15";
+    public KarlovOfTheGhostCouncil(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{W}{B}");
         this.supertype.add("Legendary");
         this.subtype.add("Spirit");
         this.subtype.add("Advisor");

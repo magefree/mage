@@ -25,12 +25,12 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.lorwyn;
+package mage.cards.g;
 
 import java.util.UUID;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.abilities.Ability;
 import mage.abilities.effects.ContinuousEffect;
 import mage.abilities.effects.OneShotEffect;
@@ -52,9 +52,8 @@ import mage.target.targetpointer.FixedTarget;
  */
 public class GiltLeafAmbush extends CardImpl {
 
-    public GiltLeafAmbush(UUID ownerId) {
-        super(ownerId, 214, "Gilt-Leaf Ambush", Rarity.COMMON, new CardType[]{CardType.TRIBAL, CardType.INSTANT}, "{2}{G}");
-        this.expansionSetCode = "LRW";
+    public GiltLeafAmbush(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.TRIBAL,CardType.INSTANT},"{2}{G}");
         this.subtype.add("Elf");
 
         // Put two 1/1 green Elf Warrior creature tokens into play. Clash with an opponent. If you win, those creatures gain deathtouch until end of turn

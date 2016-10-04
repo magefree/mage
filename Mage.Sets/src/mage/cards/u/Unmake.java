@@ -26,13 +26,13 @@
  *  or implied, of BetaSteward_at_googlemail.com.
  */
 
-package mage.sets.eventide;
+package mage.cards.u;
 
 import java.util.UUID;
 import mage.abilities.effects.common.ExileTargetEffect;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.target.common.TargetCreaturePermanent;
 
 /**
@@ -41,9 +41,8 @@ import mage.target.common.TargetCreaturePermanent;
  */
 public class Unmake extends CardImpl {
 
-    public Unmake (UUID ownerId) {
-        super(ownerId, 96, "Unmake", Rarity.COMMON, new CardType[]{CardType.INSTANT}, "{W/B}{W/B}{W/B}");
-        this.expansionSetCode = "EVE";
+    public Unmake (UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.INSTANT},"{W/B}{W/B}{W/B}");
         this.getSpellAbility().addEffect(new ExileTargetEffect());
         this.getSpellAbility().addTarget(new TargetCreaturePermanent());
     }

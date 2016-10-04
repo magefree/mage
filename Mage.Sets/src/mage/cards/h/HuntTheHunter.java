@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.theros;
+package mage.cards.h;
 
 import java.util.UUID;
 import mage.ObjectColor;
@@ -33,9 +33,9 @@ import mage.abilities.effects.Effect;
 import mage.abilities.effects.common.FightTargetsEffect;
 import mage.abilities.effects.common.continuous.BoostTargetEffect;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Duration;
-import mage.constants.Rarity;
 import mage.constants.TargetController;
 import mage.filter.common.FilterControlledCreaturePermanent;
 import mage.filter.common.FilterCreaturePermanent;
@@ -59,9 +59,8 @@ public class HuntTheHunter extends CardImpl {
         filterOpponentGreen.add(new ColorPredicate(ObjectColor.GREEN));
     }
 
-    public HuntTheHunter(UUID ownerId) {
-        super(ownerId, 159, "Hunt the Hunter", Rarity.UNCOMMON, new CardType[]{CardType.SORCERY}, "{G}");
-        this.expansionSetCode = "THS";
+    public HuntTheHunter(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{G}");
 
 
         // Target green creature you control gets +2/+2 until end of turn. It fights target green creature an opponent controls.

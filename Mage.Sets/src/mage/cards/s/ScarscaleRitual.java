@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.shadowmoor;
+package mage.cards.s;
 
 import java.util.UUID;
 import mage.abilities.Ability;
@@ -33,9 +33,9 @@ import mage.abilities.costs.Cost;
 import mage.abilities.costs.CostImpl;
 import mage.abilities.effects.common.DrawCardSourceControllerEffect;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Outcome;
-import mage.constants.Rarity;
 import mage.counters.CounterType;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.game.Game;
@@ -50,9 +50,8 @@ import mage.target.common.TargetControlledCreaturePermanent;
  */
 public class ScarscaleRitual extends CardImpl {
 
-    public ScarscaleRitual(UUID ownerId) {
-        super(ownerId, 175, "Scarscale Ritual", Rarity.COMMON, new CardType[]{CardType.SORCERY}, "{1}{U/B}");
-        this.expansionSetCode = "SHM";
+    public ScarscaleRitual(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{1}{U/B}");
 
         // As an additional cost to cast Scarscale Ritual, put a -1/-1 counter on a creature you control.
         this.getSpellAbility().addCost(new ScarscaleRitualCost());

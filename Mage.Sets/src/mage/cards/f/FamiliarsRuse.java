@@ -25,14 +25,14 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.lorwyn;
+package mage.cards.f;
 
 import java.util.UUID;
 import mage.abilities.costs.common.ReturnToHandChosenControlledPermanentCost;
 import mage.abilities.effects.common.CounterTargetEffect;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.filter.common.FilterControlledCreaturePermanent;
 import mage.target.TargetSpell;
 import mage.target.common.TargetControlledCreaturePermanent;
@@ -43,9 +43,8 @@ import mage.target.common.TargetControlledCreaturePermanent;
  */
 public class FamiliarsRuse extends CardImpl {
 
-    public FamiliarsRuse(UUID ownerId) {
-        super(ownerId, 64, "Familiar's Ruse", Rarity.UNCOMMON, new CardType[]{CardType.INSTANT}, "{U}{U}");
-        this.expansionSetCode = "LRW";
+    public FamiliarsRuse(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.INSTANT},"{U}{U}");
 
         // As an additional cost to cast Familiar's Ruse, return a creature you control to its owner's hand.
         this.getSpellAbility().addCost(new ReturnToHandChosenControlledPermanentCost(

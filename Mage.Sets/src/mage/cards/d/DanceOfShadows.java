@@ -26,17 +26,17 @@
  *  or implied, of BetaSteward_at_googlemail.com.
  */
 
-package mage.sets.championsofkamigawa;
+package mage.cards.d;
 
 import java.util.UUID;
 import mage.abilities.effects.Effect;
 
 import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.abilities.effects.common.continuous.BoostControlledEffect;
 import mage.abilities.effects.common.continuous.GainAbilityControlledEffect;
 import mage.abilities.keyword.FearAbility;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.Duration;
 import mage.filter.common.FilterCreaturePermanent;
 
@@ -46,9 +46,8 @@ import mage.filter.common.FilterCreaturePermanent;
  */
 public class DanceOfShadows extends CardImpl {
 
-    public DanceOfShadows (UUID ownerId) {
-        super(ownerId, 108, "Dance of Shadows", Rarity.UNCOMMON, new CardType[]{CardType.SORCERY}, "{3}{B}{B}");
-        this.expansionSetCode = "CHK";
+    public DanceOfShadows (UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{3}{B}{B}");
         this.subtype.add("Arcane");
 
         

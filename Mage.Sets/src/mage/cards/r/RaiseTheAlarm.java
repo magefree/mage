@@ -26,13 +26,13 @@
  *  or implied, of BetaSteward_at_googlemail.com.
  */
 
-package mage.sets.mirrodin;
+package mage.cards.r;
 
 import java.util.UUID;
 import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.abilities.effects.common.CreateTokenEffect;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.game.permanent.token.SoldierToken;
 
 /**
@@ -41,9 +41,8 @@ import mage.game.permanent.token.SoldierToken;
  */
 public class RaiseTheAlarm extends CardImpl {
 
-    public RaiseTheAlarm (UUID ownerId) {
-        super(ownerId, 16, "Raise the Alarm", Rarity.COMMON, new CardType[]{CardType.INSTANT}, "{1}{W}");
-        this.expansionSetCode = "MRD";
+    public RaiseTheAlarm (UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.INSTANT},"{1}{W}");
 
         this.getSpellAbility().addEffect(new CreateTokenEffect(new SoldierToken(), 2));
     }

@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.weatherlight;
+package mage.cards.l;
 
 import java.util.UUID;
 import mage.abilities.common.SimpleStaticAbility;
@@ -35,8 +35,8 @@ import mage.abilities.effects.common.AddManaOfAnyColorEffect;
 import mage.abilities.effects.common.EnterBattlefieldPayCostOrPutGraveyardEffect;
 import mage.abilities.mana.SimpleManaAbility;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.constants.Zone;
 import mage.filter.common.FilterControlledLandPermanent;
 import mage.filter.predicate.Predicates;
@@ -55,9 +55,8 @@ public class LotusVale extends CardImpl {
         filter.add(Predicates.not(new TappedPredicate()));
     }
 
-    public LotusVale(UUID ownerId) {
-        super(ownerId, 165, "Lotus Vale", Rarity.RARE, new CardType[]{CardType.LAND}, "");
-        this.expansionSetCode = "WTH";
+    public LotusVale(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.LAND},"");
 
         // If Lotus Vale would enter the battlefield, sacrifice two untapped lands instead. If you do, put Lotus Vale onto the battlefield. If you don't, put it into its owner's graveyard.
         this.addAbility(new SimpleStaticAbility(Zone.ALL, new EnterBattlefieldPayCostOrPutGraveyardEffect(

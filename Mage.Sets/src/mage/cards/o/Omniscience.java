@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.magic2013;
+package mage.cards.o;
 
 import java.util.UUID;
 import mage.MageObject;
@@ -38,12 +38,12 @@ import mage.abilities.costs.AlternativeCostSourceAbility;
 import mage.abilities.effects.ContinuousEffectImpl;
 import mage.cards.Card;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.cards.SplitCardHalf;
 import mage.constants.CardType;
 import mage.constants.Duration;
 import mage.constants.Layer;
 import mage.constants.Outcome;
-import mage.constants.Rarity;
 import mage.constants.SubLayer;
 import mage.constants.Zone;
 import mage.filter.common.FilterNonlandCard;
@@ -57,9 +57,8 @@ import mage.players.Player;
  */
 public class Omniscience extends CardImpl {
 
-    public Omniscience(UUID ownerId) {
-        super(ownerId, 63, "Omniscience", Rarity.MYTHIC, new CardType[]{CardType.ENCHANTMENT}, "{7}{U}{U}{U}");
-        this.expansionSetCode = "M13";
+    public Omniscience(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.ENCHANTMENT},"{7}{U}{U}{U}");
 
         // You may cast nonland cards from your hand without paying their mana costs.
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new OmniscienceCastingEffect()));

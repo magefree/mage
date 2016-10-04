@@ -25,12 +25,11 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.morningtide;
+package mage.cards.p;
 
 import java.util.UUID;
 import mage.constants.CardType;
 import mage.constants.Outcome;
-import mage.constants.Rarity;
 import mage.constants.Zone;
 import mage.MageInt;
 import mage.abilities.Ability;
@@ -39,6 +38,7 @@ import mage.abilities.effects.OneShotEffect;
 import mage.abilities.keyword.FirstStrikeAbility;
 import mage.cards.Card;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.filter.common.FilterCreatureCard;
 import mage.filter.predicate.mageobject.SubtypePredicate;
 import mage.game.Game;
@@ -52,10 +52,8 @@ import mage.target.common.TargetCardInHand;
  */
 public class PreeminentCaptain extends CardImpl {
 
-    public PreeminentCaptain(UUID ownerId) {
-        super(ownerId, 20, "Preeminent Captain", Rarity.RARE,
-                new CardType[] { CardType.CREATURE }, "{2}{W}");
-        this.expansionSetCode = "MOR";
+    public PreeminentCaptain(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{2}{W}");
         this.subtype.add("Kithkin");
         this.subtype.add("Soldier");
 

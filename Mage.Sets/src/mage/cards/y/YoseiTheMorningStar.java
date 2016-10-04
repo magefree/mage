@@ -25,12 +25,11 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.championsofkamigawa;
+package mage.cards.y;
 
 import java.util.UUID;
 import mage.constants.CardType;
 import mage.constants.Outcome;
-import mage.constants.Rarity;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.Mode;
@@ -39,6 +38,7 @@ import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.SkipNextPlayerUntapStepEffect;
 import mage.abilities.keyword.FlyingAbility;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.filter.FilterPermanent;
 import mage.filter.predicate.permanent.ControllerIdPredicate;
 import mage.game.Game;
@@ -55,9 +55,8 @@ import mage.target.Targets;
  */
 public class YoseiTheMorningStar extends CardImpl {
 
-    public YoseiTheMorningStar(UUID ownerId) {
-        super(ownerId, 50, "Yosei, the Morning Star", Rarity.RARE, new CardType[]{CardType.CREATURE}, "{4}{W}{W}");
-        this.expansionSetCode = "CHK";
+    public YoseiTheMorningStar(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{4}{W}{W}");
         this.supertype.add("Legendary");
         this.subtype.add("Dragon");
         this.subtype.add("Spirit");

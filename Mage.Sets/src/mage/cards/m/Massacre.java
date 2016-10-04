@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.nemesis;
+package mage.cards.m;
 
 import java.util.UUID;
 import mage.abilities.condition.CompoundCondition;
@@ -35,9 +35,9 @@ import mage.abilities.condition.common.PermanentsOnTheBattlefieldCondition;
 import mage.abilities.costs.AlternativeCostSourceAbility;
 import mage.abilities.effects.common.continuous.BoostAllEffect;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Duration;
-import mage.constants.Rarity;
 import mage.filter.FilterPermanent;
 import mage.filter.predicate.mageobject.SubtypePredicate;
 
@@ -55,9 +55,8 @@ public class Massacre extends CardImpl {
         filterSwamp.add(new SubtypePredicate(("Swamp")));
     }
 
-    public Massacre(UUID ownerId) {
-        super(ownerId, 58, "Massacre", Rarity.UNCOMMON, new CardType[]{CardType.SORCERY}, "{2}{B}{B}");
-        this.expansionSetCode = "NEM";
+    public Massacre(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{2}{B}{B}");
 
 
         // If an opponent controls a Plains and you control a Swamp, you may cast Massacre without paying its mana cost.

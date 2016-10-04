@@ -25,13 +25,13 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.legends;
+package mage.cards.c;
 
 import java.util.UUID;
 import mage.MageInt;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.Rarity;
 
 /**
  *
@@ -39,9 +39,8 @@ import mage.constants.Rarity;
  */
 public class CrimsonKobolds extends CardImpl {
 
-    public CrimsonKobolds(UUID ownerId) {
-        super(ownerId, 219, "Crimson Kobolds", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{0}");
-        this.expansionSetCode = "LEG";
+    public CrimsonKobolds(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{0}");
         this.color.setRed(true);
         this.subtype.add("Kobold");
         this.power = new MageInt(0);

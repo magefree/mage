@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.commander2014;
+package mage.cards.s;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -35,9 +35,9 @@ import mage.abilities.Ability;
 import mage.abilities.effects.OneShotEffect;
 import mage.cards.Card;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Outcome;
-import mage.constants.Rarity;
 import mage.constants.Zone;
 import mage.filter.common.FilterArtifactCard;
 import mage.filter.common.FilterArtifactPermanent;
@@ -51,9 +51,8 @@ import mage.players.Player;
  */
 public class ScrapMastery extends CardImpl {
 
-    public ScrapMastery(UUID ownerId) {
-        super(ownerId, 38, "Scrap Mastery", Rarity.RARE, new CardType[]{CardType.SORCERY}, "{3}{R}{R}");
-        this.expansionSetCode = "C14";
+    public ScrapMastery(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{3}{R}{R}");
 
         // Each player exiles all artifact cards from his or her graveyard, then sacrifices all artifacts he or she controls, then puts all cards he or she exiled this way onto the battlefield.
         this.getSpellAbility().addEffect(new ScrapMasteryEffect());

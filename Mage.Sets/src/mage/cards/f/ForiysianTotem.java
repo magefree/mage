@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.timespiral;
+package mage.cards.f;
 
 import mage.MageInt;
 import mage.abilities.common.SimpleActivatedAbility;
@@ -38,9 +38,9 @@ import mage.abilities.effects.common.continuous.BecomesCreatureSourceEffect;
 import mage.abilities.keyword.TrampleAbility;
 import mage.abilities.mana.RedManaAbility;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Duration;
-import mage.constants.Rarity;
 import mage.constants.Zone;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.game.permanent.token.Token;
@@ -55,9 +55,8 @@ public class ForiysianTotem extends CardImpl {
 
     private final static String ruleText = "As long as {this} is a creature, it can block an additional creature each combat.";
 
-    public ForiysianTotem(UUID ownerId) {
-        super(ownerId, 254, "Foriysian Totem", Rarity.UNCOMMON, new CardType[]{CardType.ARTIFACT}, "{3}");
-        this.expansionSetCode = "TSP";
+    public ForiysianTotem(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.ARTIFACT},"{3}");
 
         // {tap}: Add {R} to your mana pool.
         this.addAbility(new RedManaAbility());

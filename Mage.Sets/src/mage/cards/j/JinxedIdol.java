@@ -26,7 +26,7 @@
  *  or implied, of BetaSteward_at_googlemail.com.
  */
 
-package mage.sets.magic2011;
+package mage.cards.j;
 
 import mage.abilities.Ability;
 import mage.abilities.common.OnEventTriggeredAbility;
@@ -35,6 +35,7 @@ import mage.abilities.costs.common.SacrificeTargetCost;
 import mage.abilities.effects.ContinuousEffectImpl;
 import mage.abilities.effects.common.DamageControllerEffect;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.*;
 import mage.game.Game;
 import mage.game.events.GameEvent.EventType;
@@ -50,9 +51,8 @@ import java.util.UUID;
  */
 public class JinxedIdol extends CardImpl {
 
-    public JinxedIdol(UUID ownerId) {
-        super(ownerId, 208, "Jinxed Idol", Rarity.RARE, new CardType[]{CardType.ARTIFACT}, "{2}");
-        this.expansionSetCode = "M11";
+    public JinxedIdol(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.ARTIFACT},"{2}");
         
         // At the beginning of your upkeep, Jinxed Idol deals 2 damage to you.        
         this.addAbility(new OnEventTriggeredAbility(EventType.UPKEEP_STEP_PRE, "beginning of your upkeep", new DamageControllerEffect(2)));

@@ -25,13 +25,12 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.dragonsmaze;
+package mage.cards.r;
 
 import java.util.UUID;
 
 import mage.constants.CardType;
 import mage.constants.Duration;
-import mage.constants.Rarity;
 import mage.abilities.effects.Effect;
 import mage.abilities.effects.common.UntapAllControllerEffect;
 import mage.abilities.effects.common.continuous.GainAbilityAllEffect;
@@ -39,6 +38,7 @@ import mage.abilities.effects.common.continuous.GainAbilityControlledEffect;
 import mage.abilities.keyword.DeathtouchAbility;
 import mage.abilities.keyword.IndestructibleAbility;
 import mage.abilities.keyword.LifelinkAbility;
+import mage.cards.CardSetInfo;
 import mage.cards.SplitCard;
 import mage.filter.common.FilterControlledCreaturePermanent;
 import mage.filter.common.FilterCreaturePermanent;
@@ -49,9 +49,8 @@ import mage.filter.common.FilterCreaturePermanent;
  */
 public class ReadyWilling extends SplitCard {
 
-    public ReadyWilling(UUID ownerId) {
-        super(ownerId, 132, "Ready", "Willing", Rarity.RARE, new CardType[]{CardType.INSTANT}, "{1}{G}{W}", "{1}{W}{B}", true);
-        this.expansionSetCode = "DGM";
+    public ReadyWilling(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.INSTANT},"{1}{G}{W}","{1}{W}{B}",true);
 
         // Ready
         // Creatures you control are indestructible this turn. Untap each creature you control.

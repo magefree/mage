@@ -25,14 +25,14 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.starter1999;
+package mage.cards.g;
 
 import java.util.UUID;
 import mage.abilities.effects.common.LoseLifeSourceControllerEffect;
 import mage.abilities.effects.common.search.SearchLibraryPutInHandEffect;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.target.common.TargetCardInLibrary;
 
 /**
@@ -41,9 +41,8 @@ import mage.target.common.TargetCardInLibrary;
  */
 public class GrimTutor extends CardImpl {
 
-    public GrimTutor(UUID ownerId) {
-        super(ownerId, 79, "Grim Tutor", Rarity.RARE, new CardType[]{CardType.SORCERY}, "{1}{B}{B}");
-        this.expansionSetCode = "S99";
+    public GrimTutor(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{1}{B}{B}");
 
 
         // Search your library for a card and put that card into your hand, then shuffle your library.

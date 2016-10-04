@@ -25,13 +25,13 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.kaladesh;
+package mage.cards.f;
 
 import java.util.UUID;
 import mage.abilities.effects.common.DestroyTargetEffect;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.filter.Filter;
 import mage.filter.common.FilterArtifactOrEnchantmentPermanent;
 import mage.filter.predicate.mageobject.ConvertedManaCostPredicate;
@@ -49,9 +49,8 @@ public class Fragmentize extends CardImpl {
         filter.add(new ConvertedManaCostPredicate(Filter.ComparisonType.LessThan, 5));
     }
 
-    public Fragmentize(UUID ownerId) {
-        super(ownerId, 14, "Fragmentize", Rarity.COMMON, new CardType[]{CardType.SORCERY}, "{W}");
-        this.expansionSetCode = "KLD";
+    public Fragmentize(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{W}");
 
         // Destroy target artifact or enchantment with converted mana cost 4 or less.
         this.getSpellAbility().addEffect(new DestroyTargetEffect());

@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.urzaslegacy;
+package mage.cards.b;
 
 import java.util.Set;
 import java.util.UUID;
@@ -40,6 +40,7 @@ import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.SacrificeSourceEffect;
 import mage.cards.Card;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.game.Game;
 import mage.players.Player;
 import mage.target.common.TargetOpponent;
@@ -50,9 +51,8 @@ import mage.target.common.TargetOpponent;
  */
 public class BrinkOfMadness extends CardImpl {
 
-    public BrinkOfMadness(UUID ownerId) {
-        super(ownerId, 50, "Brink of Madness", Rarity.RARE, new CardType[]{CardType.ENCHANTMENT}, "{2}{B}{B}");
-        this.expansionSetCode = "ULG";
+    public BrinkOfMadness(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.ENCHANTMENT},"{2}{B}{B}");
 
 
         // At the beginning of your upkeep, if you have no cards in hand, sacrifice Brink of Madness and target opponent discards his or her hand.

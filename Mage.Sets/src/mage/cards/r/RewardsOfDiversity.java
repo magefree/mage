@@ -25,14 +25,14 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.invasion;
+package mage.cards.r;
 
 import java.util.UUID;
 import mage.abilities.common.SpellCastOpponentTriggeredAbility;
 import mage.abilities.effects.common.GainLifeEffect;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.constants.TargetController;
 import mage.filter.FilterSpell;
 import mage.filter.predicate.mageobject.MulticoloredPredicate;
@@ -51,9 +51,8 @@ public class RewardsOfDiversity extends CardImpl {
         filter.add(new MulticoloredPredicate());
     }
 
-    public RewardsOfDiversity(UUID ownerId) {
-        super(ownerId, 32, "Rewards of Diversity", Rarity.UNCOMMON, new CardType[]{CardType.ENCHANTMENT}, "{2}{W}");
-        this.expansionSetCode = "INV";
+    public RewardsOfDiversity(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.ENCHANTMENT},"{2}{W}");
 
         // Whenever an opponent casts a multicolored spell, you gain 4 life.
         this.addAbility(new SpellCastOpponentTriggeredAbility(new GainLifeEffect(4), filter, false));

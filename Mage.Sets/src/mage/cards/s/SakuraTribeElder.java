@@ -1,4 +1,4 @@
-package mage.sets.championsofkamigawa;
+package mage.cards.s;
 
 /*
  *  Copyright 2010 BetaSteward_at_googlemail.com. All rights reserved.
@@ -33,9 +33,9 @@ import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.costs.common.SacrificeSourceCost;
 import mage.abilities.effects.common.search.SearchLibraryPutInPlayEffect;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Outcome;
-import mage.constants.Rarity;
 import mage.constants.Zone;
 import mage.filter.common.FilterBasicLandCard;
 import mage.target.common.TargetCardInLibrary;
@@ -49,9 +49,8 @@ public class SakuraTribeElder extends CardImpl {
 
     final static FilterBasicLandCard filterLands = new FilterBasicLandCard();
 
-    public SakuraTribeElder(UUID ownerId) {
-        super(ownerId, 239, "Sakura-Tribe Elder", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{1}{G}");
-        this.expansionSetCode = "CHK";
+    public SakuraTribeElder(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{1}{G}");
         this.subtype.add("Snake");
         this.subtype.add("Shaman");
 

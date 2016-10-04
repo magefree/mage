@@ -25,15 +25,15 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.limitedbeta;
+package mage.cards.t;
 
 import java.util.UUID;
 import mage.ObjectColor;
 import mage.abilities.effects.common.continuous.BecomesColorTargetEffect;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Duration;
-import mage.constants.Rarity;
 import mage.target.common.TargetSpellOrPermanent;
 
 /**
@@ -42,9 +42,8 @@ import mage.target.common.TargetSpellOrPermanent;
  */
 public class Thoughtlace extends CardImpl {
 
-    public Thoughtlace(UUID ownerId) {
-        super(ownerId, 83, "Thoughtlace", Rarity.RARE, new CardType[]{CardType.INSTANT}, "{U}");
-        this.expansionSetCode = "LEB";
+    public Thoughtlace(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.INSTANT},"{U}");
 
         // Target spell or permanent becomes blue.
         this.getSpellAbility().addTarget(new TargetSpellOrPermanent());

@@ -25,13 +25,12 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.riseoftheeldrazi;
+package mage.cards.k;
 
 import java.util.Iterator;
 import java.util.UUID;
 import mage.constants.CardType;
 import mage.constants.Outcome;
-import mage.constants.Rarity;
 import mage.constants.Zone;
 import mage.MageInt;
 import mage.ObjectColor;
@@ -41,6 +40,7 @@ import mage.abilities.costs.mana.ManaCost;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.keyword.TrampleAbility;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.filter.common.FilterControlledCreaturePermanent;
 import mage.filter.predicate.mageobject.ColorPredicate;
 import mage.game.Game;
@@ -58,9 +58,8 @@ public class KhalniHydra extends CardImpl {
         filter.add(new ColorPredicate(ObjectColor.GREEN));
     }
 
-    public KhalniHydra(UUID ownerId) {
-        super(ownerId, 192, "Khalni Hydra", Rarity.MYTHIC, new CardType[]{CardType.CREATURE}, "{G}{G}{G}{G}{G}{G}{G}{G}");
-        this.expansionSetCode = "ROE";
+    public KhalniHydra(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{G}{G}{G}{G}{G}{G}{G}{G}");
         this.subtype.add("Hydra");
 
         this.power = new MageInt(8);

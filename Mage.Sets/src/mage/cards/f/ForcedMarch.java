@@ -3,12 +3,11 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package mage.sets.mercadianmasques;
+package mage.cards.f;
 
 import java.util.UUID;
 import mage.abilities.Ability;
 import mage.constants.CardType;
-import mage.constants.Rarity;
 
 /**
  *
@@ -16,6 +15,7 @@ import mage.constants.Rarity;
  */
 import mage.abilities.effects.OneShotEffect;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.Outcome;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.game.Game;
@@ -24,9 +24,8 @@ import mage.game.permanent.Permanent;
 
 public class ForcedMarch extends CardImpl {
     
-    public ForcedMarch(UUID ownerId) {
-        super(ownerId, 136, "Forced March", Rarity.RARE, new CardType[]{CardType.SORCERY}, "{X}{B}{B}{B}");
-        this.expansionSetCode = "MMQ";
+    public ForcedMarch(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{X}{B}{B}{B}");
         
         // Destroy all creatures with converted mana cost X or less
         this.getSpellAbility().addEffect(new ForcedMarchEffect());

@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.fifthdawn;
+package mage.cards.h;
 
 import java.util.UUID;
 import mage.MageInt;
@@ -44,10 +44,10 @@ import mage.abilities.keyword.FirstStrikeAbility;
 import mage.abilities.keyword.HasteAbility;
 import mage.abilities.keyword.TrampleAbility;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.AttachmentType;
 import mage.constants.CardType;
 import mage.constants.Outcome;
-import mage.constants.Rarity;
 import mage.constants.Zone;
 import mage.filter.common.FilterControlledArtifactPermanent;
 import mage.filter.predicate.mageobject.NamePredicate;
@@ -71,9 +71,8 @@ public class HelmOfKaldra extends CardImpl {
         filterSword.add(new NamePredicate("Sword of Kaldra"));
     }
 
-    public HelmOfKaldra(UUID ownerId) {
-        super(ownerId, 131, "Helm of Kaldra", Rarity.RARE, new CardType[]{CardType.ARTIFACT}, "{3}");
-        this.expansionSetCode = "5DN";
+    public HelmOfKaldra(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.ARTIFACT},"{3}");
         this.supertype.add("Legendary");
         this.subtype.add("Equipment");
 

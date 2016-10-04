@@ -25,12 +25,11 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.betrayersofkamigawa;
+package mage.cards.t;
 
 import java.util.UUID;
 
 import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.MageInt;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.dynamicvalue.common.PermanentsOnBattlefieldCount;
@@ -38,6 +37,7 @@ import mage.abilities.effects.common.continuous.SetToughnessSourceEffect;
 import mage.abilities.keyword.DefenderAbility;
 import mage.abilities.keyword.ReachAbility;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.Duration;
 import mage.constants.Zone;
 import mage.filter.FilterPermanent;
@@ -55,9 +55,8 @@ public class TraprootKami extends CardImpl {
         filter.add(new SubtypePredicate("Forest"));
     }
 
-    public TraprootKami(UUID ownerId) {
-        super(ownerId, 147, "Traproot Kami", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{G}");
-        this.expansionSetCode = "BOK";
+    public TraprootKami(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{G}");
         this.subtype.add("Spirit");
 
         this.power = new MageInt(0);

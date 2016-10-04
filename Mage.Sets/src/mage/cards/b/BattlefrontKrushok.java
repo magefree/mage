@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.fatereforged;
+package mage.cards.b;
 
 import java.util.UUID;
 import mage.MageInt;
@@ -33,8 +33,8 @@ import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.effects.common.combat.CantBeBlockedByMoreThanOneAllEffect;
 import mage.abilities.effects.common.combat.CantBeBlockedByMoreThanOneSourceEffect;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.constants.Zone;
 import mage.counters.CounterType;
 import mage.filter.common.FilterControlledCreaturePermanent;
@@ -52,9 +52,8 @@ public class BattlefrontKrushok extends CardImpl {
         filter.add(new CounterPredicate(CounterType.P1P1));
     }
 
-    public BattlefrontKrushok(UUID ownerId) {
-        super(ownerId, 125, "Battlefront Krushok", Rarity.UNCOMMON, new CardType[]{CardType.CREATURE}, "{4}{G}");
-        this.expansionSetCode = "FRF";
+    public BattlefrontKrushok(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{4}{G}");
         this.subtype.add("Beast");
         this.power = new MageInt(3);
         this.toughness = new MageInt(4);

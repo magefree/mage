@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.tenthedition;
+package mage.cards.d;
 
 import java.util.UUID;
 import mage.MageInt;
@@ -33,8 +33,8 @@ import mage.abilities.common.EntersBattlefieldTriggeredAbility;
 import mage.abilities.effects.Effect;
 import mage.abilities.effects.common.ReturnToHandFromBattlefieldAllEffect;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.filter.common.FilterControlledCreaturePermanent;
 import mage.filter.predicate.permanent.AnotherPredicate;
 
@@ -50,9 +50,8 @@ public class DenizenOfTheDeep extends CardImpl {
         filter.add(new AnotherPredicate());
     }
 
-    public DenizenOfTheDeep(UUID ownerId) {
-        super(ownerId, 80, "Denizen of the Deep", Rarity.RARE, new CardType[]{CardType.CREATURE}, "{6}{U}{U}");
-        this.expansionSetCode = "10E";
+    public DenizenOfTheDeep(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{6}{U}{U}");
         this.subtype.add("Serpent");
         this.power = new MageInt(11);
         this.toughness = new MageInt(11);

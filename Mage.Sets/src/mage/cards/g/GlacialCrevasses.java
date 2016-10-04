@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.iceage;
+package mage.cards.g;
 
 import java.util.UUID;
 import mage.abilities.Ability;
@@ -34,9 +34,9 @@ import mage.abilities.costs.common.SacrificeTargetCost;
 import mage.abilities.effects.Effect;
 import mage.abilities.effects.common.PreventAllDamageByAllPermanentsEffect;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Duration;
-import mage.constants.Rarity;
 import mage.constants.Zone;
 import mage.filter.common.FilterControlledLandPermanent;
 import mage.filter.predicate.mageobject.SubtypePredicate;
@@ -56,9 +56,8 @@ public class GlacialCrevasses extends CardImpl {
         filter.add(new SupertypePredicate("Snow"));
     }
 
-    public GlacialCrevasses(UUID ownerId) {
-        super(ownerId, 187, "Glacial Crevasses", Rarity.RARE, new CardType[]{CardType.ENCHANTMENT}, "{2}{R}");
-        this.expansionSetCode = "ICE";
+    public GlacialCrevasses(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.ENCHANTMENT},"{2}{R}");
 
         // Sacrifice a snow Mountain: Prevent all combat damage that would be dealt this turn.
         Effect effect = new PreventAllDamageByAllPermanentsEffect(Duration.EndOfTurn, true);

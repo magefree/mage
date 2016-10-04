@@ -26,12 +26,11 @@
  *  or implied, of BetaSteward_at_googlemail.com.
  */
 
-package mage.sets.mirrodinbesieged;
+package mage.cards.i;
 
 import java.util.UUID;
 import mage.constants.CardType;
 import mage.constants.Duration;
-import mage.constants.Rarity;
 import mage.constants.Zone;
 import mage.MageInt;
 import mage.abilities.common.SimpleActivatedAbility;
@@ -42,6 +41,7 @@ import mage.abilities.keyword.FlyingAbility;
 import mage.abilities.keyword.InfectAbility;
 import mage.abilities.mana.ColorlessManaAbility;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.game.permanent.token.Token;
 
 /**
@@ -50,9 +50,8 @@ import mage.game.permanent.token.Token;
  */
 public class InkmothNexus extends CardImpl {
 
-    public InkmothNexus (UUID ownerId) {
-        super(ownerId, 145, "Inkmoth Nexus", Rarity.RARE, new CardType[]{CardType.LAND}, null);
-        this.expansionSetCode = "MBS";
+    public InkmothNexus (UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.LAND},null);
         
         // {T}: Add {C} to your mana pool.
         this.addAbility(new ColorlessManaAbility());

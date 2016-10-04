@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.dissension;
+package mage.cards.h;
 
 import java.util.UUID;
 import mage.MageInt;
@@ -35,10 +35,10 @@ import mage.abilities.effects.OneShotEffect;
 import mage.abilities.keyword.HasteAbility;
 import mage.cards.Card;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.cards.Cards;
 import mage.constants.CardType;
 import mage.constants.Outcome;
-import mage.constants.Rarity;
 import mage.game.Game;
 import mage.players.Player;
 import mage.target.TargetPlayer;
@@ -49,9 +49,8 @@ import mage.target.TargetPlayer;
  */
 public class HellholeRats extends CardImpl {
 
-    public HellholeRats(UUID ownerId) {
-        super(ownerId, 113, "Hellhole Rats", Rarity.UNCOMMON, new CardType[]{CardType.CREATURE}, "{2}{B}{R}");
-        this.expansionSetCode = "DIS";
+    public HellholeRats(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{2}{B}{R}");
         this.subtype.add("Rat");
         this.power = new MageInt(2);
         this.toughness = new MageInt(2);

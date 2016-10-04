@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.shadowsoverinnistrad;
+package mage.cards.a;
 
 import java.util.UUID;
 import mage.MageInt;
@@ -33,9 +33,10 @@ import mage.abilities.common.BeginningOfEndStepTriggeredAbility;
 import mage.abilities.condition.common.EquippedSourceCondition;
 import mage.abilities.effects.common.TransformSourceEffect;
 import mage.abilities.keyword.TransformAbility;
+import mage.cards.l.LunarchInquisitors;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.constants.TargetController;
 import mage.constants.Zone;
 
@@ -45,16 +46,15 @@ import mage.constants.Zone;
  */
 public class AvacynianMissionaries extends CardImpl {
 
-    public AvacynianMissionaries(UUID ownerId) {
-        super(ownerId, 6, "Avacynian Missionaries", Rarity.UNCOMMON, new CardType[]{CardType.CREATURE}, "{3}{W}");
-        this.expansionSetCode = "SOI";
+    public AvacynianMissionaries(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{3}{W}");
         this.subtype.add("Human");
         this.subtype.add("Cleric");
         this.power = new MageInt(3);
         this.toughness = new MageInt(3);
 
         this.transformable = true;
-        this.secondSideCard = new LunarchInquisitors(ownerId);
+        this.secondSideCardClazz = LunarchInquisitors.class;
 
         // At the beginning of your end step, if Avacynian Missionaries is equipped, transform it.
         this.addAbility(new TransformAbility());

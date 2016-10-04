@@ -26,13 +26,13 @@
  *  or implied, of BetaSteward_at_googlemail.com.
  */
 
-package mage.sets.alarareborn;
+package mage.cards.r;
 
 import java.util.UUID;
 import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.MageInt;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 
 /**
  *
@@ -40,9 +40,8 @@ import mage.cards.CardImpl;
  */
 public class RhoxBrute extends CardImpl {
 
-    public RhoxBrute (UUID ownerId) {
-        super(ownerId, 59, "Rhox Brute", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{2}{R}{G}");
-        this.expansionSetCode = "ARB";
+    public RhoxBrute (UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{2}{R}{G}");
         this.subtype.add("Rhino");
         this.subtype.add("Warrior");
 

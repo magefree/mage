@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.lorwyn;
+package mage.cards.w;
 
 import java.util.UUID;
 import mage.MageInt;
@@ -34,8 +34,8 @@ import mage.abilities.common.BeginningOfUpkeepTriggeredAbility;
 import mage.abilities.effects.common.ReturnToHandTargetEffect;
 import mage.abilities.keyword.FearAbility;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.constants.TargetController;
 import mage.filter.FilterCard;
 import mage.filter.predicate.mageobject.SubtypePredicate;
@@ -53,9 +53,8 @@ public class WortBoggartAuntie extends CardImpl {
         filter.add(new SubtypePredicate("Goblin"));
     }
 
-    public WortBoggartAuntie(UUID ownerId) {
-        super(ownerId, 252, "Wort, Boggart Auntie", Rarity.RARE, new CardType[]{CardType.CREATURE}, "{2}{B}{R}");
-        this.expansionSetCode = "LRW";
+    public WortBoggartAuntie(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{2}{B}{R}");
         this.supertype.add("Legendary");
         this.subtype.add("Goblin");
         this.subtype.add("Shaman");

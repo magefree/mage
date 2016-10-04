@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.mastersedition;
+package mage.cards.h;
 
 import java.util.UUID;
 import mage.MageInt;
@@ -36,8 +36,8 @@ import mage.abilities.costs.common.TapSourceCost;
 import mage.abilities.costs.common.TapTargetCost;
 import mage.abilities.effects.common.DestroyTargetEffect;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.constants.Zone;
 import mage.filter.common.FilterControlledCreaturePermanent;
 import mage.filter.predicate.Predicates;
@@ -59,9 +59,8 @@ public class HandOfJustice extends CardImpl {
         filter.add(Predicates.not(new TappedPredicate()));
     }
 
-    public HandOfJustice(UUID ownerId) {
-        super(ownerId, 15, "Hand of Justice", Rarity.RARE, new CardType[]{CardType.CREATURE}, "{5}{W}");
-        this.expansionSetCode = "MED";
+    public HandOfJustice(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{5}{W}");
         this.subtype.add("Avatar");
         this.power = new MageInt(2);
         this.toughness = new MageInt(6);

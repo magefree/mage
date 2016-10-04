@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.planeshift;
+package mage.cards.m;
 
 import java.util.UUID;
 import mage.MageInt;
@@ -33,8 +33,8 @@ import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.effects.Effect;
 import mage.abilities.effects.common.combat.CantAttackIfDefenderControlsPermanent;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.constants.Zone;
 import mage.filter.Filter;
 import mage.filter.common.FilterControlledCreaturePermanent;
@@ -55,9 +55,8 @@ public class MoggJailer extends CardImpl {
         filter.add(Predicates.and(new PowerPredicate(Filter.ComparisonType.LessThan, 2), Predicates.not(new TappedPredicate())));
     }
     
-    public MoggJailer(UUID ownerId) {
-        super(ownerId, 68, "Mogg Jailer", Rarity.UNCOMMON, new CardType[]{CardType.CREATURE}, "{1}{R}");
-        this.expansionSetCode = "PLS";
+    public MoggJailer(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{1}{R}");
         this.subtype.add("Goblin");
         this.power = new MageInt(2);
         this.toughness = new MageInt(2);

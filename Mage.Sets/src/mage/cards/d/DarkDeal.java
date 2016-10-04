@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.fatereforged;
+package mage.cards.d;
 
 import java.util.LinkedHashMap;
 import java.util.Map;
@@ -33,9 +33,9 @@ import java.util.UUID;
 import mage.abilities.Ability;
 import mage.abilities.effects.OneShotEffect;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Outcome;
-import mage.constants.Rarity;
 import mage.game.Game;
 import mage.players.Player;
 
@@ -45,9 +45,8 @@ import mage.players.Player;
  */
 public class DarkDeal extends CardImpl {
 
-    public DarkDeal(UUID ownerId) {
-        super(ownerId, 66, "Dark Deal", Rarity.UNCOMMON, new CardType[]{CardType.SORCERY}, "{2}{B}");
-        this.expansionSetCode = "FRF";
+    public DarkDeal(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{2}{B}");
 
         // Each player discards all the cards in his or her hand, then draws that many cards minus one.
         this.getSpellAbility().addEffect(new DarkDealEffect());

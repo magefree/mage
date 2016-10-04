@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.mirrodin;
+package mage.cards.e;
 
 import java.util.UUID;
 import mage.abilities.Ability;
@@ -36,9 +36,9 @@ import mage.abilities.effects.common.AddManaOfAnyTypeProducedEffect;
 import mage.abilities.mana.TriggeredManaAbility;
 import mage.cards.Card;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Outcome;
-import mage.constants.Rarity;
 import mage.constants.Zone;
 import mage.filter.common.FilterControlledPermanent;
 import mage.filter.predicate.mageobject.CardTypePredicate;
@@ -57,9 +57,8 @@ import mage.util.CardUtil;
  */
 public class ExtraplanarLens extends CardImpl {
 
-    public ExtraplanarLens(UUID ownerId) {
-        super(ownerId, 169, "Extraplanar Lens", Rarity.RARE, new CardType[]{CardType.ARTIFACT}, "{3}");
-        this.expansionSetCode = "MRD";
+    public ExtraplanarLens(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.ARTIFACT},"{3}");
 
         // Imprint - When Extraplanar Lens enters the battlefield, you may exile target land you control.
         this.addAbility(new EntersBattlefieldTriggeredAbility(new ExtraplanarLensImprintEffect(), true, "<i>Imprint - </i>"));

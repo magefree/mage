@@ -25,16 +25,16 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.alliances;
+package mage.cards.d;
 
 import java.util.UUID;
 import mage.abilities.Ability;
 import mage.abilities.effects.OneShotEffect;
 import mage.cards.Card;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Outcome;
-import mage.constants.Rarity;
 import mage.constants.Zone;
 import mage.game.Game;
 import mage.players.Player;
@@ -45,9 +45,8 @@ import mage.players.Player;
  */
 public class DiminishingReturns extends CardImpl {
 
-    public DiminishingReturns(UUID ownerId) {
-        super(ownerId, 39, "Diminishing Returns", Rarity.RARE, new CardType[]{CardType.SORCERY}, "{2}{U}{U}");
-        this.expansionSetCode = "ALL";
+    public DiminishingReturns(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{2}{U}{U}");
 
         // Each player shuffles his or her hand and graveyard into his or her library. You exile the top ten cards of your library. Then each player draws up to seven cards.
         this.getSpellAbility().addEffect(new DiminishingReturnsEffect());

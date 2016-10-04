@@ -25,14 +25,14 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.magic2010;
+package mage.cards.p;
 
 import java.util.UUID;
 
 import mage.abilities.effects.common.DestroyAllEffect;
 import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.filter.common.FilterNonlandPermanent;
 
 /**
@@ -41,9 +41,8 @@ import mage.filter.common.FilterNonlandPermanent;
  */
 public class PlanarCleansing extends CardImpl {
 
-    public PlanarCleansing(UUID ownerId) {
-        super(ownerId, 24, "Planar Cleansing", Rarity.RARE, new CardType[]{CardType.SORCERY}, "{3}{W}{W}{W}");
-        this.expansionSetCode = "M10";
+    public PlanarCleansing(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{3}{W}{W}{W}");
 
 
         // Destroy all nonland permanents.

@@ -25,20 +25,20 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.tenthedition;
+package mage.cards.s;
 
 import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
 
 import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.DealsCombatDamageToAPlayerTriggeredAbility;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.keyword.FlyingAbility;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.cards.Card;
 import mage.constants.Outcome;
 import mage.game.Game;
@@ -50,9 +50,8 @@ import mage.players.Player;
  */
 public class Scalpelexis extends CardImpl {
 
-    public Scalpelexis(UUID ownerId) {
-        super(ownerId, 105, "Scalpelexis", Rarity.RARE, new CardType[]{CardType.CREATURE}, "{4}{U}");
-        this.expansionSetCode = "10E";
+    public Scalpelexis(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{4}{U}");
         this.subtype.add("Beast");
 
         this.power = new MageInt(1);

@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.planarchaos;
+package mage.cards.t;
 
 import java.util.UUID;
 import mage.abilities.Ability;
@@ -33,9 +33,9 @@ import mage.abilities.Mode;
 import mage.abilities.effects.OneShotEffect;
 import mage.cards.Card;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Outcome;
-import mage.constants.Rarity;
 import mage.counters.CounterType;
 import mage.filter.common.FilterPermanentOrSuspendedCard;
 import mage.filter.predicate.permanent.CounterPredicate;
@@ -55,9 +55,8 @@ public class Timecrafting extends CardImpl {
         filter.getPermanentFilter().add(new CounterPredicate(CounterType.TIME));
     }
 
-    public Timecrafting(UUID ownerId) {
-        super(ownerId, 109, "Timecrafting", Rarity.UNCOMMON, new CardType[]{CardType.INSTANT}, "{X}{R}");
-        this.expansionSetCode = "PLC";
+    public Timecrafting(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.INSTANT},"{X}{R}");
 
         // Choose one - Remove X time counters from target permanent or suspended card;
         this.getSpellAbility().addEffect(new TimecraftingRemoveEffect());

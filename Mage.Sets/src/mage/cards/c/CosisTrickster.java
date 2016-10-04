@@ -25,15 +25,15 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.zendikar;
+package mage.cards.c;
 
 import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.TriggeredAbilityImpl;
 import mage.abilities.effects.common.counter.AddCountersSourceEffect;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.constants.Zone;
 import mage.counters.CounterType;
 import mage.game.Game;
@@ -46,9 +46,8 @@ import mage.game.events.GameEvent.EventType;
  */
 public class CosisTrickster extends CardImpl {
 
-    public CosisTrickster(UUID ownerId) {
-        super(ownerId, 45, "Cosi's Trickster", Rarity.RARE, new CardType[]{CardType.CREATURE}, "{U}");
-        this.expansionSetCode = "ZEN";
+    public CosisTrickster(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{U}");
         this.subtype.add("Merfolk");
         this.subtype.add("Wizard");
 

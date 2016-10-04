@@ -25,16 +25,16 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.alarareborn;
+package mage.cards.m;
 
 import java.util.UUID;
 import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.MageInt;
 import mage.abilities.common.AttacksEachTurnStaticAbility;
 import mage.abilities.costs.mana.ManaCostsImpl;
 import mage.abilities.keyword.CyclingAbility;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 
 /**
  *
@@ -42,9 +42,8 @@ import mage.cards.CardImpl;
  */
 public class MonstrousCarabid extends CardImpl {
 
-    public MonstrousCarabid(UUID ownerId) {
-        super(ownerId, 43, "Monstrous Carabid", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{3}{B}{R}");
-        this.expansionSetCode = "ARB";
+    public MonstrousCarabid(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{3}{B}{R}");
         this.subtype.add("Insect");
 
 

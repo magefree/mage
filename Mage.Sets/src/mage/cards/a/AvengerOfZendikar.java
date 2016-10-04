@@ -26,11 +26,10 @@
  *  or implied, of BetaSteward_at_googlemail.com.
  */
 
-package mage.sets.worldwake;
+package mage.cards.a;
 
 import java.util.UUID;
 import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.MageInt;
 import mage.abilities.common.EntersBattlefieldTriggeredAbility;
 import mage.abilities.common.LandfallAbility;
@@ -38,6 +37,7 @@ import mage.abilities.dynamicvalue.common.PermanentsOnBattlefieldCount;
 import mage.abilities.effects.common.CreateTokenEffect;
 import mage.abilities.effects.common.counter.AddCountersAllEffect;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.counters.CounterType;
 import mage.filter.common.FilterControlledCreaturePermanent;
 import mage.filter.common.FilterControlledLandPermanent;
@@ -58,9 +58,8 @@ public class AvengerOfZendikar extends CardImpl {
         filter.add(new SubtypePredicate("Plant"));
     }
 
-    public AvengerOfZendikar (UUID ownerId) {
-        super(ownerId, 96, "Avenger of Zendikar", Rarity.MYTHIC, new CardType[]{CardType.CREATURE}, "{5}{G}{G}");
-        this.expansionSetCode = "WWK";
+    public AvengerOfZendikar (UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{5}{G}{G}");
         this.subtype.add("Elemental");
 
         this.power = new MageInt(5);

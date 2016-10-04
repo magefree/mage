@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.zendikar;
+package mage.cards.m;
 
 import java.util.UUID;
 import mage.abilities.Ability;
@@ -40,8 +40,8 @@ import mage.abilities.effects.common.turn.AddExtraTurnControllerEffect;
 import mage.abilities.effects.common.turn.SkipNextTurnSourceEffect;
 import mage.abilities.mana.BlueManaAbility;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.constants.Zone;
 import mage.counters.CounterType;
 
@@ -51,9 +51,8 @@ import mage.counters.CounterType;
  */
 public class MagosiTheWaterveil extends CardImpl {
 
-    public MagosiTheWaterveil(UUID ownerId) {
-        super(ownerId, 218, "Magosi, the Waterveil", Rarity.RARE, new CardType[]{CardType.LAND}, "");
-        this.expansionSetCode = "ZEN";
+    public MagosiTheWaterveil(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.LAND},"");
 
         // Magosi, the Waterveil enters the battlefield tapped.
         this.addAbility(new EntersBattlefieldTappedAbility());

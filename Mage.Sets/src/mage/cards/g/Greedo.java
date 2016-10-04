@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.starwars;
+package mage.cards.g;
 
 import java.util.UUID;
 import mage.MageInt;
@@ -35,9 +35,9 @@ import mage.abilities.effects.common.continuous.GainAbilityAllEffect;
 import mage.abilities.effects.common.search.SearchLibraryPutInHandEffect;
 import mage.abilities.keyword.FirstStrikeAbility;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Duration;
-import mage.constants.Rarity;
 import mage.constants.Zone;
 import mage.filter.FilterCard;
 import mage.filter.common.FilterCreaturePermanent;
@@ -60,9 +60,8 @@ public class Greedo extends CardImpl {
 
     }
 
-    public Greedo(UUID ownerId) {
-        super(ownerId, 199, "Greedo", Rarity.RARE, new CardType[]{CardType.CREATURE}, "{B}{R}{G}");
-        this.expansionSetCode = "SWS";
+    public Greedo(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{B}{R}{G}");
         this.supertype.add("Legendary");
         this.subtype.add("Rodian");
         this.subtype.add("Hunter");

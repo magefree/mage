@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.fourthedition;
+package mage.cards.e;
 
 import java.util.UUID;
 
@@ -38,9 +38,9 @@ import mage.abilities.effects.common.PreventCombatDamageBySourceEffect;
 import mage.abilities.effects.common.PreventCombatDamageToSourceEffect;
 import mage.abilities.effects.common.UntapTargetEffect;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Duration;
-import mage.constants.Rarity;
 import mage.constants.TargetController;
 import mage.constants.Zone;
 import mage.filter.common.FilterCreaturePermanent;
@@ -60,9 +60,8 @@ public class EbonyHorse extends CardImpl {
         filter.add(new AttackingPredicate());
     }
 
-    public EbonyHorse(UUID ownerId) {
-        super(ownerId, 336, "Ebony Horse", Rarity.RARE, new CardType[]{CardType.ARTIFACT}, "{3}");
-        this.expansionSetCode = "4ED";
+    public EbonyHorse(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.ARTIFACT},"{3}");
 
         // {2}, {tap}: Untap target attacking creature you control. Prevent all combat damage that would be dealt to and dealt by that creature this turn.
         Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new UntapTargetEffect(), new GenericManaCost(2));

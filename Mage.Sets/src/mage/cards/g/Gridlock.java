@@ -25,15 +25,15 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.gatecrash;
+package mage.cards.g;
 
 import java.util.UUID;
 import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.abilities.Ability;
 import mage.abilities.SpellAbility;
 import mage.abilities.effects.common.TapTargetEffect;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.filter.common.FilterNonlandPermanent;
 import mage.game.Game;
 import mage.target.TargetPermanent;
@@ -45,9 +45,8 @@ import mage.target.TargetPermanent;
 public class Gridlock extends CardImpl {
     private static final FilterNonlandPermanent filter = new FilterNonlandPermanent("nonland permanents");
 
-    public Gridlock(UUID ownerId) {
-        super(ownerId, 36, "Gridlock", Rarity.UNCOMMON, new CardType[]{CardType.INSTANT}, "{X}{U}");
-        this.expansionSetCode = "GTC";
+    public Gridlock(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.INSTANT},"{X}{U}");
 
 
         // Tap X target nonland permanents.

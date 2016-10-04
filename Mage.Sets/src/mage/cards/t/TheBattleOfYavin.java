@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.starwars;
+package mage.cards.t;
 
 import java.util.LinkedList;
 import java.util.List;
@@ -34,9 +34,9 @@ import mage.abilities.Ability;
 import mage.abilities.dynamicvalue.common.ManacostVariableValue;
 import mage.abilities.effects.OneShotEffect;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Outcome;
-import mage.constants.Rarity;
 import mage.filter.common.FilterNonlandPermanent;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
@@ -49,9 +49,8 @@ import mage.target.common.TargetOpponent;
  */
 public class TheBattleOfYavin extends CardImpl {
 
-    public TheBattleOfYavin(UUID ownerId) {
-        super(ownerId, 66, "The Battle of Yavin", Rarity.MYTHIC, new CardType[]{CardType.SORCERY}, "{X}{B}{B}");
-        this.expansionSetCode = "SWS";
+    public TheBattleOfYavin(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{X}{B}{B}");
 
         // For each nonland permanent target opponent controls, that player sacrificies it unless he or she pays X life.
         this.getSpellAbility().addEffect(new TheBattleOfYavinEffect());

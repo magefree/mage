@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.kaladesh;
+package mage.cards.n;
 
 import java.util.UUID;
 import mage.MageInt;
@@ -40,9 +40,9 @@ import mage.abilities.effects.common.UntapTargetEffect;
 import mage.abilities.effects.common.continuous.BecomesCreatureTargetEffect;
 import mage.abilities.keyword.HasteAbility;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Duration;
-import mage.constants.Rarity;
 import mage.constants.TargetController;
 import mage.constants.Zone;
 import mage.filter.common.FilterControlledLandPermanent;
@@ -66,9 +66,8 @@ public class NissaVitalForce extends CardImpl {
         filter.add(new ControllerPredicate(TargetController.YOU));
     }
 
-    public NissaVitalForce(UUID ownerId) {
-        super(ownerId, 163, "Nissa, Vital Force", Rarity.MYTHIC, new CardType[]{CardType.PLANESWALKER}, "{3}{G}{G}");
-        this.expansionSetCode = "KLD";
+    public NissaVitalForce(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.PLANESWALKER},"{3}{G}{G}");
         this.subtype.add("Nissa");
 
         this.addAbility(new PlanswalkerEntersWithLoyalityCountersAbility(5));

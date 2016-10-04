@@ -25,15 +25,15 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.planechase;
+package mage.cards.r;
 
 import java.util.UUID;
 import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.MageInt;
 import mage.abilities.keyword.FlyingAbility;
 import mage.abilities.keyword.HasteAbility;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 
 /**
  *
@@ -41,9 +41,8 @@ import mage.cards.CardImpl;
  */
 public class RorixBladewing extends CardImpl {
 
-    public RorixBladewing(UUID ownerId) {
-        super(ownerId, 65, "Rorix Bladewing", Rarity.RARE, new CardType[]{CardType.CREATURE}, "{3}{R}{R}{R}");
-        this.expansionSetCode = "HOP";
+    public RorixBladewing(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{3}{R}{R}{R}");
         this.supertype.add("Legendary");
         this.subtype.add("Dragon");
 

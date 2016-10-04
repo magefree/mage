@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.khansoftarkir;
+package mage.cards.h;
 
 import java.util.UUID;
 import mage.abilities.DelayedTriggeredAbility;
@@ -35,9 +35,9 @@ import mage.abilities.effects.Effect;
 import mage.abilities.effects.common.CopyTargetSpellEffect;
 import mage.abilities.effects.common.CreateDelayedTriggeredAbilityEffect;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Duration;
-import mage.constants.Rarity;
 import mage.game.Game;
 import mage.game.events.GameEvent;
 import mage.game.stack.Spell;
@@ -50,9 +50,8 @@ import mage.watchers.common.PlayerAttackedWatcher;
  */
 public class HowlOfTheHorde extends CardImpl {
 
-    public HowlOfTheHorde(UUID ownerId) {
-        super(ownerId, 112, "Howl of the Horde", Rarity.RARE, new CardType[]{CardType.SORCERY}, "{2}{R}");
-        this.expansionSetCode = "KTK";
+    public HowlOfTheHorde(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{2}{R}");
 
 
         // When you cast your next instant or sorcery spell this turn, copy that spell. You may choose new targets for the copy. 

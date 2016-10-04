@@ -25,13 +25,13 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.dragonsoftarkir;
+package mage.cards.r;
 
 import java.util.UUID;
 import mage.abilities.effects.common.ExileTargetEffect;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.filter.FilterPermanent;
 import mage.filter.predicate.Predicates;
 import mage.filter.predicate.mageobject.CardTypePredicate;
@@ -51,9 +51,8 @@ public class RadiantPurge extends CardImpl {
                 Predicates.and(new CardTypePredicate(CardType.ENCHANTMENT), new MulticoloredPredicate())));
     }
 
-    public RadiantPurge(UUID ownerId) {
-        super(ownerId, 31, "Radiant Purge", Rarity.RARE, new CardType[]{CardType.INSTANT}, "{1}{W}");
-        this.expansionSetCode = "DTK";
+    public RadiantPurge(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.INSTANT},"{1}{W}");
 
         //Exile target multicolored creature or multicolored enchantment.
         this.getSpellAbility().addEffect(new ExileTargetEffect());

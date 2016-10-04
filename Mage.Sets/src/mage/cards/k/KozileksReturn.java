@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.oathofthegatewatch;
+package mage.cards.k;
 
 import java.util.UUID;
 import mage.abilities.common.SpellCastControllerTriggeredAbility;
@@ -34,8 +34,8 @@ import mage.abilities.effects.common.DamageAllEffect;
 import mage.abilities.effects.common.DoIfCostPaid;
 import mage.abilities.keyword.DevoidAbility;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.constants.Zone;
 import mage.filter.Filter.ComparisonType;
 import mage.filter.FilterSpell;
@@ -58,9 +58,8 @@ public class KozileksReturn extends CardImpl {
         filter.add(new ConvertedManaCostPredicate(ComparisonType.GreaterThan, 6));
     }
 
-    public KozileksReturn(UUID ownerId) {
-        super(ownerId, 98, "Kozilek's Return", Rarity.MYTHIC, new CardType[]{CardType.INSTANT}, "{2}{R}");
-        this.expansionSetCode = "OGW";
+    public KozileksReturn(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.INSTANT},"{2}{R}");
 
         // Devoid
         this.addAbility(new DevoidAbility(this.color));

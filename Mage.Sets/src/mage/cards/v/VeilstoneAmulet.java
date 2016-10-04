@@ -25,11 +25,11 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.futuresight;
+package mage.cards.v;
 
 import java.util.UUID;
 import mage.cards.CardImpl;
-import mage.constants.Rarity;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.abilities.common.SpellCastControllerTriggeredAbility;
 import mage.filter.FilterSpell;
@@ -47,9 +47,8 @@ import mage.game.events.GameEvent.EventType;
  */
 public class VeilstoneAmulet extends CardImpl {
 
-    public VeilstoneAmulet(UUID ownerId) {
-        super(ownerId, 166, "Veilstone Amulet", Rarity.RARE, new CardType[]{CardType.ARTIFACT}, "{3}");
-        this.expansionSetCode = "FUT";
+    public VeilstoneAmulet(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.ARTIFACT},"{3}");
 
         // Whenever you cast a spell, creatures you control can't be the targets of spells or abilities your opponents control this turn.
         this.addAbility(new SpellCastControllerTriggeredAbility(new VeilstoneAmuletEffect(), new FilterSpell("a spell"), false));

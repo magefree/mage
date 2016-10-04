@@ -25,18 +25,18 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.fifthdawn;
+package mage.cards.r;
 
 import java.util.UUID;
 import mage.abilities.Ability;
 import mage.abilities.effects.OneShotEffect;
 import mage.cards.Card;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.cards.Cards;
 import mage.cards.CardsImpl;
 import mage.constants.CardType;
 import mage.constants.Outcome;
-import mage.constants.Rarity;
 import mage.constants.Zone;
 import mage.filter.common.FilterInstantOrSorceryCard;
 import mage.game.Game;
@@ -50,9 +50,8 @@ import mage.target.common.TargetOpponent;
  */
 public class ReversalOfFortune extends CardImpl {
 
-    public ReversalOfFortune(UUID ownerId) {
-        super(ownerId, 77, "Reversal of Fortune", Rarity.RARE, new CardType[]{CardType.SORCERY}, "{4}{R}{R}");
-        this.expansionSetCode = "5DN";
+    public ReversalOfFortune(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{4}{R}{R}");
 
 
         // Target opponent reveals his or her hand. You may copy an instant or sorcery card in it. If you do, you may cast the copy without paying its mana cost.

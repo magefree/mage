@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.khansoftarkir;
+package mage.cards.t;
 
 import java.util.UUID;
 import mage.abilities.Mode;
@@ -35,12 +35,12 @@ import mage.abilities.effects.common.CounterUnlessPaysEffect;
 import mage.abilities.effects.common.FightTargetsEffect;
 import mage.abilities.effects.common.combat.CantBlockAllEffect;
 import mage.abilities.effects.common.continuous.BoostTargetEffect;
-import mage.cards.CardImpl;import mage.target.Target;
+import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;import mage.target.Target;
 import mage.target.common.TargetControlledCreaturePermanent;
 import mage.target.common.TargetCreaturePermanent;
 import mage.constants.CardType;
 import mage.constants.Duration;
-import mage.constants.Rarity;
 import mage.constants.TargetController;
 import mage.filter.Filter;
 import mage.filter.common.FilterCreaturePermanent;
@@ -62,9 +62,8 @@ public class TemurCharm extends CardImpl {
         filterCantBlock.add(new PowerPredicate(Filter.ComparisonType.LessThan, 4));
     }
     
-    public TemurCharm(UUID ownerId) {
-        super(ownerId, 208, "Temur Charm", Rarity.UNCOMMON, new CardType[]{CardType.INSTANT}, "{G}{U}{R}");
-        this.expansionSetCode = "KTK";
+    public TemurCharm(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.INSTANT},"{G}{U}{R}");
 
 
         // Choose one -

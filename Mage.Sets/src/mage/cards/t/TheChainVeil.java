@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.magic2015;
+package mage.cards.t;
 
 import java.util.HashSet;
 import java.util.Set;
@@ -40,11 +40,11 @@ import mage.abilities.costs.mana.ManaCostsImpl;
 import mage.abilities.effects.ContinuousEffectImpl;
 import mage.abilities.effects.common.LoseLifeSourceControllerEffect;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Duration;
 import mage.constants.Layer;
 import mage.constants.Outcome;
-import mage.constants.Rarity;
 import mage.constants.SubLayer;
 import mage.constants.TargetController;
 import mage.constants.WatcherScope;
@@ -61,9 +61,8 @@ import mage.watchers.Watcher;
  */
 public class TheChainVeil extends CardImpl {
 
-    public TheChainVeil(UUID ownerId) {
-        super(ownerId, 215, "The Chain Veil", Rarity.MYTHIC, new CardType[]{CardType.ARTIFACT}, "{4}");
-        this.expansionSetCode = "M15";
+    public TheChainVeil(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.ARTIFACT},"{4}");
         this.supertype.add("Legendary");
 
         // At the beginning of your end step, if you didn't activate a loyalty ability of a planeswalker this turn, you lose 2 life.

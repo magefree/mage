@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.guildpact;
+package mage.cards.d;
 
 import java.util.UUID;
 import mage.MageInt;
@@ -33,8 +33,8 @@ import mage.abilities.common.DealsCombatDamageToAPlayerTriggeredAbility;
 import mage.abilities.dynamicvalue.common.PermanentsOnBattlefieldCount;
 import mage.abilities.effects.common.CreateTokenEffect;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.filter.common.FilterControlledLandPermanent;
 import mage.filter.common.FilterControlledPermanent;
 import mage.game.permanent.token.Token;
@@ -46,9 +46,8 @@ public class DuneBroodNephilim extends CardImpl {
 
     final static FilterControlledPermanent filterLands = new FilterControlledLandPermanent();
 
-    public DuneBroodNephilim(UUID ownerId) {
-        super(ownerId, 110, "Dune-Brood Nephilim", Rarity.RARE, new CardType[]{CardType.CREATURE}, "{B}{R}{G}{W}");
-        this.expansionSetCode = "GPT";
+    public DuneBroodNephilim(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{B}{R}{G}{W}");
         this.subtype.add("Nephilim");
 
 

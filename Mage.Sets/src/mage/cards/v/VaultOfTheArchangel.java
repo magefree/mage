@@ -25,12 +25,11 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.darkascension;
+package mage.cards.v;
 
 import java.util.UUID;
 import mage.constants.CardType;
 import mage.constants.Duration;
-import mage.constants.Rarity;
 import mage.constants.Zone;
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleActivatedAbility;
@@ -41,6 +40,7 @@ import mage.abilities.keyword.DeathtouchAbility;
 import mage.abilities.keyword.LifelinkAbility;
 import mage.abilities.mana.ColorlessManaAbility;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.filter.common.FilterControlledCreaturePermanent;
 
 /**
@@ -49,9 +49,8 @@ import mage.filter.common.FilterControlledCreaturePermanent;
  */
 public class VaultOfTheArchangel extends CardImpl {
 
-    public VaultOfTheArchangel(UUID ownerId) {
-        super(ownerId, 158, "Vault of the Archangel", Rarity.RARE, new CardType[]{CardType.LAND}, "");
-        this.expansionSetCode = "DKA";
+    public VaultOfTheArchangel(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.LAND},"");
 
         // {tap}: Add {C} to your mana pool.
         this.addAbility(new ColorlessManaAbility());

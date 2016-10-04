@@ -27,11 +27,10 @@
  *  or implied, of BetaSteward_at_googlemail.com.
  * 
  */
-package mage.sets.darkascension;
+package mage.cards.t;
 
 import java.util.UUID;
 import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.constants.Zone;
 import mage.MageInt;
 import mage.abilities.common.EntersBattlefieldTriggeredAbility;
@@ -39,6 +38,7 @@ import mage.abilities.dynamicvalue.common.StaticValue;
 import mage.abilities.effects.common.LookLibraryAndPickControllerEffect;
 import mage.abilities.keyword.FlyingAbility;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.filter.FilterCard;
 
 /**
@@ -47,9 +47,8 @@ import mage.filter.FilterCard;
  */
 public class TowerGeist extends CardImpl {
 
-    public TowerGeist(UUID ownerId) {
-        super(ownerId, 53, "Tower Geist", Rarity.UNCOMMON, new CardType[]{CardType.CREATURE}, "{3}{U}");
-        this.expansionSetCode = "DKA";
+    public TowerGeist(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{3}{U}");
         this.subtype.add("Spirit");
 
         this.power = new MageInt(2);

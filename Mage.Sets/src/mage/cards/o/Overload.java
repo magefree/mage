@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.invasion;
+package mage.cards.o;
 
 import java.util.UUID;
 import mage.abilities.Ability;
@@ -34,8 +34,8 @@ import mage.abilities.condition.common.KickedCondition;
 import mage.abilities.effects.common.DestroyTargetEffect;
 import mage.abilities.keyword.KickerAbility;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.filter.Filter;
 import mage.filter.common.FilterArtifactPermanent;
 import mage.filter.predicate.mageobject.ConvertedManaCostPredicate;
@@ -56,9 +56,8 @@ public class Overload extends CardImpl {
         filter5.add(new ConvertedManaCostPredicate(Filter.ComparisonType.LessThan, 5));
     }
 
-    public Overload(UUID ownerId) {
-        super(ownerId, 157, "Overload", Rarity.COMMON, new CardType[]{CardType.INSTANT}, "{R}");
-        this.expansionSetCode = "INV";
+    public Overload(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.INSTANT},"{R}");
 
         // Kicker {2}
         this.addAbility(new KickerAbility("{2}"));

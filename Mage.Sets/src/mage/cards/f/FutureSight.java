@@ -25,15 +25,15 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.onslaught;
+package mage.cards.f;
 
 import java.util.UUID;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.effects.common.continuous.PlayTheTopCardEffect;
 import mage.abilities.effects.common.continuous.PlayWithTheTopCardRevealedEffect;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.constants.Zone;
 
 /**
@@ -42,9 +42,8 @@ import mage.constants.Zone;
  */
 public class FutureSight extends CardImpl {
 
-    public FutureSight(UUID ownerId) {
-        super(ownerId, 84, "Future Sight", Rarity.RARE, new CardType[]{CardType.ENCHANTMENT}, "{2}{U}{U}{U}");
-        this.expansionSetCode = "ONS";
+    public FutureSight(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.ENCHANTMENT},"{2}{U}{U}{U}");
 
         // Play with the top card of your library revealed.
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new PlayWithTheTopCardRevealedEffect()));

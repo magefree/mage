@@ -25,15 +25,15 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.returntoravnica;
+package mage.cards.s;
 
 import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.MageInt;
 import mage.abilities.costs.mana.ManaCostsImpl;
 import mage.abilities.keyword.DeathtouchAbility;
 import mage.abilities.keyword.ScavengeAbility;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 
 import java.util.UUID;
 
@@ -43,9 +43,8 @@ import java.util.UUID;
  */
 public class SluicewayScorpion extends CardImpl {
 
-    public SluicewayScorpion(UUID ownerId) {
-        super(ownerId, 198, "Sluiceway Scorpion", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{2}{B}{G}");
-        this.expansionSetCode = "RTR";
+    public SluicewayScorpion(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{2}{B}{G}");
         this.subtype.add("Scorpion");
 
         this.power = new MageInt(2);

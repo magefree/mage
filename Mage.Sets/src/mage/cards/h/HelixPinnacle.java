@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.eventide;
+package mage.cards.h;
 
 import java.util.UUID;
 import mage.abilities.common.BeginningOfUpkeepTriggeredAbility;
@@ -38,8 +38,8 @@ import mage.abilities.effects.common.WinGameSourceControllerEffect;
 import mage.abilities.effects.common.counter.AddCountersSourceEffect;
 import mage.abilities.keyword.ShroudAbility;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.constants.TargetController;
 import mage.constants.Zone;
 import mage.counters.CounterType;
@@ -52,9 +52,8 @@ public class HelixPinnacle extends CardImpl {
 
     final String rule = "if there are 100 or more tower counters on Helix Pinnacle, you win the game";
 
-    public HelixPinnacle(UUID ownerId) {
-        super(ownerId, 68, "Helix Pinnacle", Rarity.RARE, new CardType[]{CardType.ENCHANTMENT}, "{G}");
-        this.expansionSetCode = "EVE";
+    public HelixPinnacle(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.ENCHANTMENT},"{G}");
 
         // Shroud
         this.addAbility(ShroudAbility.getInstance());

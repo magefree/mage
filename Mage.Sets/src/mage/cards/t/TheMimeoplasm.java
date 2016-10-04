@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.commander;
+package mage.cards.t;
 
 import java.util.UUID;
 import mage.MageInt;
@@ -36,12 +36,12 @@ import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.CopyEffect;
 import mage.cards.Card;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.cards.Cards;
 import mage.cards.CardsImpl;
 import mage.constants.CardType;
 import mage.constants.Duration;
 import mage.constants.Outcome;
-import mage.constants.Rarity;
 import mage.constants.Zone;
 import mage.counters.CounterType;
 import mage.filter.common.FilterCreatureCard;
@@ -56,9 +56,8 @@ import mage.target.common.TargetCardInGraveyard;
  */
 public class TheMimeoplasm extends CardImpl {
 
-    public TheMimeoplasm(UUID ownerId) {
-        super(ownerId, 210, "The Mimeoplasm", Rarity.MYTHIC, new CardType[]{CardType.CREATURE}, "{2}{G}{U}{B}");
-        this.expansionSetCode = "CMD";
+    public TheMimeoplasm(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{2}{G}{U}{B}");
         this.supertype.add("Legendary");
         this.subtype.add("Ooze");
 

@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.invasion;
+package mage.cards.t;
 
 import java.util.UUID;
 import mage.Mana;
@@ -36,8 +36,8 @@ import mage.abilities.costs.common.TapSourceCost;
 import mage.abilities.mana.GreenManaAbility;
 import mage.abilities.mana.SimpleManaAbility;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.constants.Zone;
 
 /**
@@ -46,9 +46,8 @@ import mage.constants.Zone;
  */
 public class TinderFarm extends CardImpl {
 
-    public TinderFarm(UUID ownerId) {
-        super(ownerId, 329, "Tinder Farm", Rarity.COMMON, new CardType[]{CardType.LAND}, "");
-        this.expansionSetCode = "INV";
+    public TinderFarm(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.LAND},"");
 
         // Tinder Farm enters the battlefield tapped.
         this.addAbility(new EntersBattlefieldTappedAbility());

@@ -25,14 +25,14 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.shadowsoverinnistrad;
+package mage.cards.d;
 
 import java.util.UUID;
 import mage.abilities.effects.Effect;
 import mage.abilities.effects.common.CreateTokenEffect;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.game.permanent.token.DevilToken;
 
 /**
@@ -41,9 +41,8 @@ import mage.game.permanent.token.DevilToken;
  */
 public class DevilsPlayground extends CardImpl {
 
-    public DevilsPlayground(UUID ownerId) {
-        super(ownerId, 151, "Devils' Playground", Rarity.RARE, new CardType[]{CardType.SORCERY}, "{4}{R}{R}");
-        this.expansionSetCode = "SOI";
+    public DevilsPlayground(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{4}{R}{R}");
 
         // Put four 1/1 red Devil creature tokens onto the battlefield. They have "When this creature dies, it deals 1 damage to target creature or player."
         Effect effect = new CreateTokenEffect(new DevilToken(), 4);

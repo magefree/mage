@@ -26,16 +26,16 @@
  *  or implied, of BetaSteward_at_googlemail.com.
  */
 
-package mage.sets.dissension;
+package mage.cards.c;
 
 import java.util.UUID;
 import mage.abilities.Ability;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.ReturnFromGraveyardToBattlefieldTargetEffect;
+import mage.cards.CardSetInfo;
 import mage.cards.SplitCard;
 import mage.constants.CardType;
 import mage.constants.Outcome;
-import mage.constants.Rarity;
 import mage.filter.FilterCard;
 import mage.filter.predicate.Predicates;
 import mage.filter.predicate.mageobject.CardTypePredicate;
@@ -53,9 +53,8 @@ public class CrimePunishment extends SplitCard {
                                  new CardTypePredicate(CardType.ENCHANTMENT)));
     }
 
-    public CrimePunishment(UUID ownerId) {
-        super(ownerId, 150, "Crime", "Punishment", Rarity.RARE, new CardType[]{CardType.SORCERY}, "{3}{W}{B}", "{X}{B}{G}", false);
-        this.expansionSetCode = "DIS";
+    public CrimePunishment(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{3}{W}{B}","{X}{B}{G}",false);
 
         // Crime
         // Put target creature or enchantment card from an opponent's graveyard onto the battlefield under your control.

@@ -25,11 +25,10 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.shardsofalara;
+package mage.cards.m;
 
 import java.util.UUID;
 import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.constants.TargetController;
 import mage.MageInt;
 import mage.abilities.common.BeginningOfUpkeepTriggeredAbility;
@@ -38,6 +37,7 @@ import mage.abilities.effects.common.CreateTokenEffect;
 import mage.abilities.effects.common.DevourEffect.DevourFactor;
 import mage.abilities.keyword.DevourAbility;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.counters.CounterType;
 import mage.game.permanent.token.SaprolingToken;
 
@@ -47,9 +47,8 @@ import mage.game.permanent.token.SaprolingToken;
  */
 public class Mycoloth extends CardImpl {
 
-    public Mycoloth(UUID ownerId) {
-        super(ownerId, 140, "Mycoloth", Rarity.RARE, new CardType[]{CardType.CREATURE}, "{3}{G}{G}");
-        this.expansionSetCode = "ALA";
+    public Mycoloth(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{3}{G}{G}");
         this.subtype.add("Fungus");
 
         this.power = new MageInt(4);

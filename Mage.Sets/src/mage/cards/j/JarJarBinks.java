@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.starwars;
+package mage.cards.j;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -39,11 +39,11 @@ import mage.abilities.effects.ContinuousEffect;
 import mage.abilities.effects.ContinuousEffectImpl;
 import mage.abilities.effects.OneShotEffect;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Duration;
 import mage.constants.Layer;
 import mage.constants.Outcome;
-import mage.constants.Rarity;
 import mage.constants.SubLayer;
 import mage.constants.TargetController;
 import mage.filter.Filter;
@@ -63,9 +63,8 @@ import mage.util.RandomUtil;
  */
 public class JarJarBinks extends CardImpl {
 
-    public JarJarBinks(UUID ownerId) {
-        super(ownerId, 41, "Jar Jar Binks", Rarity.RARE, new CardType[]{CardType.CREATURE}, "{2}{U}");
-        this.expansionSetCode = "SWS";
+    public JarJarBinks(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{2}{U}");
         this.supertype.add("Legendary");
         this.subtype.add("Gungan");
         this.power = new MageInt(0);

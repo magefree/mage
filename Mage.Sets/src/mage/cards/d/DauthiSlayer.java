@@ -25,15 +25,15 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.tempest;
+package mage.cards.d;
 
 import java.util.UUID;
 import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.MageInt;
 import mage.abilities.common.AttacksEachTurnStaticAbility;
 import mage.abilities.keyword.ShadowAbility;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 
 /**
  *
@@ -41,9 +41,8 @@ import mage.cards.CardImpl;
  */
 public class DauthiSlayer extends CardImpl {
 
-    public DauthiSlayer(UUID ownerId) {
-        super(ownerId, 20, "Dauthi Slayer", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{B}{B}");
-        this.expansionSetCode = "TMP";
+    public DauthiSlayer(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{B}{B}");
         this.subtype.add("Dauthi");
         this.subtype.add("Soldier");
 

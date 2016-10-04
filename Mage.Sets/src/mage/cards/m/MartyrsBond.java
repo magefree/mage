@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.commander;
+package mage.cards.m;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -36,9 +36,9 @@ import mage.abilities.effects.Effect;
 import mage.abilities.effects.OneShotEffect;
 import mage.cards.Card;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Outcome;
-import mage.constants.Rarity;
 import mage.constants.Zone;
 import mage.filter.common.FilterControlledPermanent;
 import mage.filter.predicate.Predicates;
@@ -58,9 +58,8 @@ import mage.target.targetpointer.FixedTarget;
  */
 public class MartyrsBond extends CardImpl {
 
-    public MartyrsBond(UUID ownerId) {
-        super(ownerId, 19, "Martyr's Bond", Rarity.RARE, new CardType[]{CardType.ENCHANTMENT}, "{4}{W}{W}");
-        this.expansionSetCode = "CMD";
+    public MartyrsBond(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.ENCHANTMENT},"{4}{W}{W}");
 
         // Whenever Martyr's Bond or another nonland permanent you control is put into a graveyard from the battlefield, each opponent sacrifices a permanent that shares a card type with it.
         this.addAbility(new MartyrsBondTriggeredAbility());

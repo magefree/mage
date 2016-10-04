@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.alliances;
+package mage.cards.l;
 
 import java.util.UUID;
 import mage.abilities.Mode;
@@ -35,8 +35,8 @@ import mage.abilities.effects.common.CreateDelayedTriggeredAbilityEffect;
 import mage.abilities.effects.common.DrawCardSourceControllerEffect;
 import mage.abilities.effects.common.search.SearchLibraryPutInHandEffect;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.constants.TargetController;
 import mage.target.common.TargetCardInLibrary;
 
@@ -46,9 +46,8 @@ import mage.target.common.TargetCardInLibrary;
  */
 public class LibraryOfLatNam extends CardImpl {
 
-    public LibraryOfLatNam(UUID ownerId) {
-        super(ownerId, 47, "Library of Lat-Nam", Rarity.RARE, new CardType[]{CardType.SORCERY}, "{4}{U}");
-        this.expansionSetCode = "ALL";
+    public LibraryOfLatNam(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{4}{U}");
 
         // An opponent chooses one
         this.getSpellAbility().getModes().setModeChooser(TargetController.OPPONENT);

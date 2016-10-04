@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.seventhedition;
+package mage.cards.d;
 
 import java.util.UUID;
 import mage.ObjectColor;
@@ -33,11 +33,11 @@ import mage.abilities.Ability;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.effects.ContinuousEffectImpl;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Duration;
 import mage.constants.Layer;
 import mage.constants.Outcome;
-import mage.constants.Rarity;
 import mage.constants.SubLayer;
 import mage.constants.Zone;
 import mage.filter.common.FilterCreaturePermanent;
@@ -50,9 +50,8 @@ import mage.game.permanent.Permanent;
  */
 public class DarkestHour extends CardImpl {
 
-    public DarkestHour(UUID ownerId) {
-        super(ownerId, 128, "Darkest Hour", Rarity.RARE, new CardType[]{CardType.ENCHANTMENT}, "{B}");
-        this.expansionSetCode = "7ED";
+    public DarkestHour(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.ENCHANTMENT},"{B}");
 
 
         // All creatures are black.

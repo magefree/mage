@@ -25,13 +25,13 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.ninthedition;
+package mage.cards.s;
 
 import java.util.UUID;
 import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.abilities.effects.common.GainLifeEffect;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 
 /**
  *
@@ -39,9 +39,8 @@ import mage.cards.CardImpl;
  */
 public class SacredNectar extends CardImpl {
 
-    public SacredNectar(UUID ownerId) {
-        super(ownerId, 38, "Sacred Nectar", Rarity.COMMON, new CardType[]{CardType.SORCERY}, "{1}{W}");
-        this.expansionSetCode = "9ED";
+    public SacredNectar(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{1}{W}");
 
 
         // You gain 4 life.

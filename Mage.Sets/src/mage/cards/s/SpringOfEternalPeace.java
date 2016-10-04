@@ -25,13 +25,13 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.portalthreekingdoms;
+package mage.cards.s;
 
 import java.util.UUID;
 import mage.abilities.effects.common.GainLifeEffect;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.Rarity;
 
 /**
  *
@@ -39,9 +39,8 @@ import mage.constants.Rarity;
  */
 public class SpringOfEternalPeace extends CardImpl {
 
-    public SpringOfEternalPeace(UUID ownerId) {
-        super(ownerId, 148, "Spring of Eternal Peace", Rarity.COMMON, new CardType[]{CardType.SORCERY}, "{3}{G}{G}");
-        this.expansionSetCode = "PTK";
+    public SpringOfEternalPeace(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{3}{G}{G}");
 
         // You gain 8 life.
         this.getSpellAbility().addEffect(new GainLifeEffect(8));

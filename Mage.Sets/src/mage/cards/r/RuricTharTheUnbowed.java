@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.dragonsmaze;
+package mage.cards.r;
 
 import java.util.UUID;
 import mage.MageInt;
@@ -36,8 +36,8 @@ import mage.abilities.effects.common.DamageTargetEffect;
 import mage.abilities.keyword.ReachAbility;
 import mage.abilities.keyword.VigilanceAbility;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.constants.Zone;
 import mage.game.Game;
 import mage.game.events.GameEvent;
@@ -51,9 +51,8 @@ import mage.target.targetpointer.FixedTarget;
  */
 public class RuricTharTheUnbowed extends CardImpl {
 
-    public RuricTharTheUnbowed(UUID ownerId) {
-        super(ownerId, 99, "Ruric Thar, the Unbowed", Rarity.RARE, new CardType[]{CardType.CREATURE}, "{4}{R}{G}");
-        this.expansionSetCode = "DGM";
+    public RuricTharTheUnbowed(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{4}{R}{G}");
         this.supertype.add("Legendary");
         this.subtype.add("Ogre");
         this.subtype.add("Warrior");

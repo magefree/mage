@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.oathofthegatewatch;
+package mage.cards.n;
 
 import java.util.UUID;
 import mage.abilities.LoyaltyAbility;
@@ -37,8 +37,8 @@ import mage.abilities.effects.common.DrawCardSourceControllerEffect;
 import mage.abilities.effects.common.GainLifeEffect;
 import mage.abilities.effects.common.counter.AddCountersAllEffect;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.constants.TargetController;
 import mage.counters.CounterType;
 import mage.filter.common.FilterControlledCreaturePermanent;
@@ -58,9 +58,8 @@ public class NissaVoiceOfZendikar extends CardImpl {
         filter.add(new ControllerPredicate(TargetController.YOU));
     }
 
-    public NissaVoiceOfZendikar(UUID ownerId) {
-        super(ownerId, 138, "Nissa, Voice of Zendikar", Rarity.MYTHIC, new CardType[]{CardType.PLANESWALKER}, "{1}{G}{G}");
-        this.expansionSetCode = "OGW";
+    public NissaVoiceOfZendikar(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.PLANESWALKER},"{1}{G}{G}");
         this.subtype.add("Nissa");
         
         this.addAbility(new PlanswalkerEntersWithLoyalityCountersAbility(3));

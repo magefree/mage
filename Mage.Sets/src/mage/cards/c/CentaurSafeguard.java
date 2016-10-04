@@ -25,15 +25,15 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.ravnica;
+package mage.cards.c;
 
 import java.util.UUID;
 import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.MageInt;
 import mage.abilities.common.DiesTriggeredAbility;
 import mage.abilities.effects.common.GainLifeEffect;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 
 /**
  *
@@ -41,9 +41,8 @@ import mage.cards.CardImpl;
  */
 public class CentaurSafeguard extends CardImpl {
 
-    public CentaurSafeguard(UUID ownerId) {
-        super(ownerId, 244, "Centaur Safeguard", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{2}{G/W}");
-        this.expansionSetCode = "RAV";
+    public CentaurSafeguard(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{2}{G/W}");
         this.subtype.add("Centaur");
         this.subtype.add("Warrior");
 

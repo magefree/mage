@@ -25,14 +25,14 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.urzasdestiny;
+package mage.cards.f;
 
 import java.util.UUID;
 import mage.abilities.effects.common.ExileTargetForSourceEffect;
 import mage.abilities.effects.common.ReturnToBattlefieldUnderOwnerControlTargetEffect;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.filter.FilterPermanent;
 import mage.filter.predicate.Predicates;
 import mage.filter.predicate.permanent.TokenPredicate;
@@ -50,9 +50,8 @@ public class Flicker extends CardImpl {
         filter.add(Predicates.not(new TokenPredicate()));
     }
     
-    public Flicker(UUID ownerId) {
-        super(ownerId, 9, "Flicker", Rarity.RARE, new CardType[]{CardType.SORCERY}, "{1}{W}");
-        this.expansionSetCode = "UDS";
+    public Flicker(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{1}{W}");
 
         // Exile target nontoken permanent, then return it to the battlefield under its owner's control.
         this.getSpellAbility().addTarget(new TargetPermanent(filter));

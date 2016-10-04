@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.dragonsoftarkir;
+package mage.cards.s;
 
 import java.util.UUID;
 import mage.ConditionalMana;
@@ -42,10 +42,10 @@ import mage.abilities.effects.OneShotEffect;
 import mage.abilities.mana.ConditionalAnyColorManaAbility;
 import mage.abilities.mana.builder.ConditionalManaBuilder;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.AbilityWord;
 import mage.constants.CardType;
 import mage.constants.Outcome;
-import mage.constants.Rarity;
 import mage.constants.Zone;
 import mage.filter.FilterPermanent;
 import mage.filter.common.FilterCreaturePermanent;
@@ -59,9 +59,8 @@ import mage.players.Player;
  */
 public class ShamanOfForgottenWays extends CardImpl {
 
-    public ShamanOfForgottenWays(UUID ownerId) {
-        super(ownerId, 204, "Shaman of Forgotten Ways", Rarity.MYTHIC, new CardType[]{CardType.CREATURE}, "{2}{G}");
-        this.expansionSetCode = "DTK";
+    public ShamanOfForgottenWays(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{2}{G}");
         this.subtype.add("Human");
         this.subtype.add("Shaman");
         this.power = new MageInt(	2);

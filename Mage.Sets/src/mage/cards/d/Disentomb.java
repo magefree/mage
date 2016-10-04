@@ -26,13 +26,13 @@
  *  or implied, of BetaSteward_at_googlemail.com.
  */
 
-package mage.sets.magic2010;
+package mage.cards.d;
 
 import java.util.UUID;
 import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.abilities.effects.common.ReturnToHandTargetEffect;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.filter.common.FilterCreatureCard;
 import mage.target.common.TargetCardInYourGraveyard;
 
@@ -44,9 +44,8 @@ public class Disentomb extends CardImpl {
 
     private static FilterCreatureCard filter = new FilterCreatureCard("creature card from your graveyard");
 
-    public Disentomb(UUID ownerId) {
-        super(ownerId, 92, "Disentomb", Rarity.COMMON, new CardType[]{CardType.SORCERY}, "{B}");
-        this.expansionSetCode = "M10";
+    public Disentomb(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{B}");
 
         this.getSpellAbility().addTarget(new TargetCardInYourGraveyard(filter));
         this.getSpellAbility().addEffect(new ReturnToHandTargetEffect());

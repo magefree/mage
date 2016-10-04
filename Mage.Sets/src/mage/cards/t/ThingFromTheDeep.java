@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.masterseditioniv;
+package mage.cards.t;
 
 import java.util.UUID;
 import mage.MageInt;
@@ -34,8 +34,8 @@ import mage.abilities.costs.common.SacrificeTargetCost;
 import mage.abilities.effects.Effect;
 import mage.abilities.effects.common.SacrificeSourceUnlessPaysEffect;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.filter.common.FilterControlledLandPermanent;
 import mage.filter.predicate.mageobject.SubtypePredicate;
 import mage.target.common.TargetControlledPermanent;
@@ -52,9 +52,8 @@ public class ThingFromTheDeep extends CardImpl {
         filter.add(new SubtypePredicate("Island"));
     }
 
-    public ThingFromTheDeep(UUID ownerId) {
-        super(ownerId, 68, "Thing from the Deep", Rarity.RARE, new CardType[]{CardType.CREATURE}, "{6}{U}{U}{U}");
-        this.expansionSetCode = "ME4";
+    public ThingFromTheDeep(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{6}{U}{U}{U}");
         this.subtype.add("Leviathan");
         this.power = new MageInt(9);
         this.toughness = new MageInt(9);

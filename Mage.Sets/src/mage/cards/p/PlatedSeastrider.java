@@ -26,12 +26,12 @@
  *  or implied, of BetaSteward_at_googlemail.com.
  */
 
-package mage.sets.scarsofmirrodin;
+package mage.cards.p;
 
 import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.MageInt;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 
 import java.util.UUID;
 
@@ -41,9 +41,8 @@ import java.util.UUID;
  */
 public class PlatedSeastrider extends CardImpl {
 
-    public PlatedSeastrider (UUID ownerId) {
-        super(ownerId, 38, "Plated Seastrider", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{U}{U}");
-        this.expansionSetCode = "SOM";
+    public PlatedSeastrider (UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{U}{U}");
         this.subtype.add("Beast");
 
         this.power = new MageInt(1);

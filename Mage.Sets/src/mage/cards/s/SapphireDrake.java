@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.gatecrash;
+package mage.cards.s;
 
 import java.util.UUID;
 
@@ -35,6 +35,7 @@ import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.effects.common.continuous.GainAbilityAllEffect;
 import mage.abilities.keyword.FlyingAbility;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.counters.CounterType;
 import mage.filter.FilterPermanent;
 import mage.filter.predicate.mageobject.CardTypePredicate;
@@ -57,9 +58,8 @@ public class SapphireDrake extends CardImpl {
     
     final String rule = "Each creature you control with a +1/+1 counter on it has flying";
 
-    public SapphireDrake(UUID ownerId) {
-        super(ownerId, 47, "Sapphire Drake", Rarity.UNCOMMON, new CardType[]{CardType.CREATURE}, "{5}{U}");
-        this.expansionSetCode = "GTC";
+    public SapphireDrake(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{5}{U}");
         this.subtype.add("Drake");
 
         this.power = new MageInt(4);

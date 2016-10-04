@@ -25,15 +25,15 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.kaladesh;
+package mage.cards.t;
 
 import java.util.UUID;
 import mage.abilities.dynamicvalue.common.PermanentsOnBattlefieldCount;
 import mage.abilities.effects.common.DestroyTargetEffect;
 import mage.abilities.effects.common.GainLifeEffect;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.filter.common.FilterControlledArtifactPermanent;
 import mage.target.common.TargetCreaturePermanent;
 
@@ -43,9 +43,8 @@ import mage.target.common.TargetCreaturePermanent;
  */
 public class TidyConclusion extends CardImpl {
 
-    public TidyConclusion(UUID ownerId) {
-        super(ownerId, 103, "Tidy Conclusion", Rarity.COMMON, new CardType[]{CardType.INSTANT}, "{3}{B}{B}");
-        this.expansionSetCode = "KLD";
+    public TidyConclusion(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.INSTANT},"{3}{B}{B}");
 
         // Destroy target creature. You gain 1 life for each artifact you control.
         this.getSpellAbility().addEffect(new DestroyTargetEffect());

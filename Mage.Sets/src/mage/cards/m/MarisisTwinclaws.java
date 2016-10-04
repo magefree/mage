@@ -26,14 +26,14 @@
  *  or implied, of BetaSteward_at_googlemail.com.
  */
 
-package mage.sets.alarareborn;
+package mage.cards.m;
 
 import java.util.UUID;
 import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.MageInt;
 import mage.abilities.keyword.DoubleStrikeAbility;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 
 /**
  *
@@ -41,9 +41,8 @@ import mage.cards.CardImpl;
  */
 public class MarisisTwinclaws extends CardImpl {
 
-    public MarisisTwinclaws (UUID ownerId) {
-        super(ownerId, 140, "Marisi's Twinclaws", Rarity.UNCOMMON, new CardType[]{CardType.CREATURE}, "{2}{R/W}{G}");
-        this.expansionSetCode = "ARB";
+    public MarisisTwinclaws (UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{2}{R/W}{G}");
         this.subtype.add("Cat");
         this.subtype.add("Warrior");
 

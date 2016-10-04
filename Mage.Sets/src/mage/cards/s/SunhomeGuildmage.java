@@ -26,7 +26,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.gatecrash;
+package mage.cards.s;
 
 import java.util.UUID;
 import mage.MageInt;
@@ -35,9 +35,9 @@ import mage.abilities.costs.mana.ManaCostsImpl;
 import mage.abilities.effects.common.CreateTokenEffect;
 import mage.abilities.effects.common.continuous.BoostControlledEffect;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Duration;
-import mage.constants.Rarity;
 import mage.constants.Zone;
 import mage.game.permanent.token.SoldierTokenWithHaste;
 
@@ -47,9 +47,8 @@ import mage.game.permanent.token.SoldierTokenWithHaste;
  */
 public class SunhomeGuildmage extends CardImpl {
 
-    public SunhomeGuildmage(UUID ownerId) {
-        super(ownerId, 200, "Sunhome Guildmage", Rarity.UNCOMMON, new CardType[]{CardType.CREATURE}, "{R}{W}");
-        this.expansionSetCode = "GTC";
+    public SunhomeGuildmage(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{R}{W}");
         this.subtype.add("Human");
         this.subtype.add("Wizard");
 

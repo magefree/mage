@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.magic2015;
+package mage.cards.m;
 
 import java.util.UUID;
 import mage.abilities.Ability;
@@ -33,8 +33,8 @@ import mage.abilities.common.EntersBattlefieldTriggeredAbility;
 import mage.abilities.effects.common.DamageTargetEffect;
 import mage.abilities.mana.AnyColorManaAbility;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.target.common.TargetCreatureOrPlayer;
 
 /**
@@ -43,9 +43,8 @@ import mage.target.common.TargetCreatureOrPlayer;
  */
 public class Meteorite extends CardImpl {
 
-    public Meteorite(UUID ownerId) {
-        super(ownerId, 221, "Meteorite", Rarity.UNCOMMON, new CardType[]{CardType.ARTIFACT}, "{5}");
-        this.expansionSetCode = "M15";
+    public Meteorite(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.ARTIFACT},"{5}");
 
         // When Meteorite enters the battlefield, it deals 2 damage to target creature or player.
         Ability ability = new EntersBattlefieldTriggeredAbility(new DamageTargetEffect(2), false);

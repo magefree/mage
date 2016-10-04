@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.invasion;
+package mage.cards.r;
 
 import java.util.UUID;
 import mage.MageInt;
@@ -33,8 +33,8 @@ import mage.abilities.common.DiesTriggeredAbility;
 import mage.abilities.effects.common.DrawCardSourceControllerEffect;
 import mage.abilities.keyword.VigilanceAbility;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.Rarity;
 
 /**
  *
@@ -43,9 +43,8 @@ import mage.constants.Rarity;
  */
 public class RiptideCrab extends CardImpl {
 
-    public RiptideCrab(UUID ownerId) {
-        super(ownerId, 266, "Riptide Crab", Rarity.UNCOMMON, new CardType[]{CardType.CREATURE}, "{1}{W}{U}");
-        this.expansionSetCode = "INV";
+    public RiptideCrab(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{1}{W}{U}");
         this.subtype.add("Crab");
         this.power = new MageInt(1);
         this.toughness = new MageInt(3);

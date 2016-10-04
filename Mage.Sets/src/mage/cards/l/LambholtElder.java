@@ -25,12 +25,11 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.darkascension;
+package mage.cards.l;
 
 import java.util.UUID;
 
 import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.MageInt;
 import mage.abilities.TriggeredAbility;
 import mage.abilities.common.BeginningOfUpkeepTriggeredAbility;
@@ -38,7 +37,9 @@ import mage.abilities.condition.common.NoSpellsWereCastLastTurnCondition;
 import mage.abilities.decorator.ConditionalTriggeredAbility;
 import mage.abilities.effects.common.TransformSourceEffect;
 import mage.abilities.keyword.TransformAbility;
+import mage.cards.s.SilverpeltWerewolf;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.TargetController;
 
 /**
@@ -47,9 +48,8 @@ import mage.constants.TargetController;
  */
 public class LambholtElder extends CardImpl {
 
-    public LambholtElder(UUID ownerId) {
-        super(ownerId, 122, "Lambholt Elder", Rarity.UNCOMMON, new CardType[]{CardType.CREATURE}, "{2}{G}");
-        this.expansionSetCode = "DKA";
+    public LambholtElder(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{2}{G}");
         this.subtype.add("Human");
         this.subtype.add("Werewolf");
 
@@ -57,7 +57,7 @@ public class LambholtElder extends CardImpl {
         this.toughness = new MageInt(2);
 
         this.transformable = true;
-        this.secondSideCard = new SilverpeltWerewolf(ownerId);
+        this.secondSideCardClazz = SilverpeltWerewolf.class;
 
         // At the beginning of each upkeep, if no spells were cast last turn, transform Lambholt Elder.
         this.addAbility(new TransformAbility());

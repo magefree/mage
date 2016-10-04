@@ -26,13 +26,13 @@
  *  or implied, of BetaSteward_at_googlemail.com.
  */
 
-package mage.sets.magic2010;
+package mage.cards.n;
 
 import java.util.UUID;
 import mage.abilities.effects.common.ReturnToHandTargetEffect;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.filter.common.FilterPermanentCard;
 import mage.target.common.TargetCardInYourGraveyard;
 
@@ -42,9 +42,8 @@ import mage.target.common.TargetCardInYourGraveyard;
  */
 public class NaturesSpiral extends CardImpl {
 
-    public NaturesSpiral(UUID ownerId) {
-        super(ownerId, 196, "Nature's Spiral", Rarity.UNCOMMON, new CardType[]{CardType.SORCERY}, "{1}{G}");
-        this.expansionSetCode = "M10";
+    public NaturesSpiral(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{1}{G}");
 
         this.getSpellAbility().addTarget(new TargetCardInYourGraveyard(new FilterPermanentCard("permanent card from your graveyard")));
         this.getSpellAbility().addEffect(new ReturnToHandTargetEffect());

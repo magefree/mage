@@ -26,14 +26,14 @@
  *  or implied, of BetaSteward_at_googlemail.com.
  */
 
-package mage.sets.magic2010;
+package mage.cards.m;
 
 import java.util.UUID;
 import mage.abilities.dynamicvalue.common.ManacostVariableValue;
 import mage.abilities.effects.common.DrawCardSourceControllerEffect;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.Rarity;
 
 /**
  *
@@ -41,9 +41,8 @@ import mage.constants.Rarity;
  */
 public class MindSpring extends CardImpl {
 
-    public MindSpring(UUID ownerId) {
-        super(ownerId, 64, "Mind Spring", Rarity.RARE, new CardType[]{CardType.SORCERY}, "{X}{U}{U}");
-        this.expansionSetCode = "M10";
+    public MindSpring(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{X}{U}{U}");
 
         this.getSpellAbility().addEffect(new DrawCardSourceControllerEffect(new ManacostVariableValue()));
     }

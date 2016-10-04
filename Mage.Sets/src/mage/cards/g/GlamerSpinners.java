@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.shadowmoor;
+package mage.cards.g;
 
 import java.util.LinkedList;
 import java.util.UUID;
@@ -37,9 +37,9 @@ import mage.abilities.effects.OneShotEffect;
 import mage.abilities.keyword.FlashAbility;
 import mage.abilities.keyword.FlyingAbility;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Outcome;
-import mage.constants.Rarity;
 import mage.filter.FilterPermanent;
 import mage.filter.predicate.Predicates;
 import mage.filter.predicate.permanent.ControllerIdPredicate;
@@ -56,9 +56,8 @@ import mage.target.TargetPermanent;
  */
 public class GlamerSpinners extends CardImpl {
 
-    public GlamerSpinners(UUID ownerId) {
-        super(ownerId, 141, "Glamer Spinners", Rarity.UNCOMMON, new CardType[]{CardType.CREATURE}, "{4}{W/U}");
-        this.expansionSetCode = "SHM";
+    public GlamerSpinners(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{4}{W/U}");
         this.subtype.add("Faerie");
         this.subtype.add("Wizard");
 

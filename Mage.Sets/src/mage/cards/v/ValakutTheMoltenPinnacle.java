@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.zendikar;
+package mage.cards.v;
 
 import java.util.UUID;
 import mage.abilities.TriggeredAbilityImpl;
@@ -33,8 +33,8 @@ import mage.abilities.common.EntersBattlefieldTappedAbility;
 import mage.abilities.effects.common.DamageTargetEffect;
 import mage.abilities.mana.RedManaAbility;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.constants.TargetController;
 import mage.constants.Zone;
 import mage.filter.common.FilterLandPermanent;
@@ -59,9 +59,8 @@ public class ValakutTheMoltenPinnacle extends CardImpl {
         filter.add(new SubtypePredicate("Mountain"));
     }
 
-    public ValakutTheMoltenPinnacle(UUID ownerId) {
-        super(ownerId, 228, "Valakut, the Molten Pinnacle", Rarity.RARE, new CardType[]{CardType.LAND}, null);
-        this.expansionSetCode = "ZEN";
+    public ValakutTheMoltenPinnacle(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.LAND},null);
 
         // Valakut, the Molten Pinnacle enters the battlefield tapped.
         this.addAbility(new EntersBattlefieldTappedAbility());

@@ -25,15 +25,15 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.starwars;
+package mage.cards.p;
 
 import java.util.UUID;
 import mage.abilities.Ability;
 import mage.abilities.effects.OneShotEffect;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Outcome;
-import mage.constants.Rarity;
 import mage.counters.CounterType;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
@@ -46,9 +46,8 @@ import mage.target.common.TargetCreaturePermanent;
  */
 public class PrimalInstict extends CardImpl {
 
-    public PrimalInstict(UUID ownerId) {
-        super(ownerId, 172, "Primal Instict", Rarity.COMMON, new CardType[]{CardType.INSTANT}, "{1}{R}{G}");
-        this.expansionSetCode = "SWS";
+    public PrimalInstict(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.INSTANT},"{1}{R}{G}");
 
         // Put a +1/+1 counter on target creature, then double the number of +1/+1 counters on that creature.
         this.getSpellAbility().addEffect(new PrimalInstictEffect());

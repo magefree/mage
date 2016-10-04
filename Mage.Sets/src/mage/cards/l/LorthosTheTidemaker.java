@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.zendikar;
+package mage.cards.l;
 
 import java.util.UUID;
 import mage.MageInt;
@@ -36,8 +36,8 @@ import mage.abilities.effects.common.DoIfCostPaid;
 import mage.abilities.effects.common.DontUntapInControllersNextUntapStepTargetEffect;
 import mage.abilities.effects.common.TapTargetEffect;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.filter.FilterPermanent;
 import mage.target.TargetPermanent;
 
@@ -49,9 +49,8 @@ public class LorthosTheTidemaker extends CardImpl {
 
     private static final FilterPermanent filter = new FilterPermanent();
 
-    public LorthosTheTidemaker(UUID ownerId) {
-        super(ownerId, 53, "Lorthos, the Tidemaker", Rarity.MYTHIC, new CardType[]{CardType.CREATURE}, "{5}{U}{U}{U}");
-        this.expansionSetCode = "ZEN";
+    public LorthosTheTidemaker(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{5}{U}{U}{U}");
         this.supertype.add("Legendary");
         this.subtype.add("Octopus");
 

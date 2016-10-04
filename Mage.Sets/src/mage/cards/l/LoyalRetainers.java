@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.portalthreekingdoms;
+package mage.cards.l;
 
 import java.util.UUID;
 import mage.MageInt;
@@ -35,8 +35,8 @@ import mage.abilities.condition.common.MyTurnBeforeAttackersDeclaredCondition;
 import mage.abilities.costs.common.SacrificeSourceCost;
 import mage.abilities.effects.common.ReturnFromGraveyardToBattlefieldTargetEffect;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.constants.Zone;
 import mage.filter.common.FilterCreatureCard;
 import mage.filter.predicate.mageobject.SupertypePredicate;
@@ -54,9 +54,8 @@ public class LoyalRetainers extends CardImpl {
         filter.add(new SupertypePredicate("Legendary"));
     }
 
-    public LoyalRetainers(UUID ownerId) {
-        super(ownerId, 12, "Loyal Retainers", Rarity.UNCOMMON, new CardType[]{CardType.CREATURE}, "{2}{W}");
-        this.expansionSetCode = "PTK";
+    public LoyalRetainers(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{2}{W}");
         this.subtype.add("Human");
         this.subtype.add("Advisor");
 

@@ -25,15 +25,15 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.eventide;
+package mage.cards.c;
 
 import java.util.UUID;
 import mage.abilities.effects.common.continuous.GainAbilityTargetEffect;
 import mage.abilities.keyword.PersistAbility;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Duration;
-import mage.constants.Rarity;
 import mage.target.common.TargetCreaturePermanent;
 
 /**
@@ -44,9 +44,8 @@ public class CauldronHaze extends CardImpl {
     
     private String rule = "Choose any number of target creatures. Each of those creatures gains persist until end of turn";
 
-    public CauldronHaze(UUID ownerId) {
-        super(ownerId, 84, "Cauldron Haze", Rarity.UNCOMMON, new CardType[]{CardType.INSTANT}, "{1}{W/B}");
-        this.expansionSetCode = "EVE";
+    public CauldronHaze(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.INSTANT},"{1}{W/B}");
 
 
         // Choose any number of target creatures. Each of those creatures gains persist until end of turn.

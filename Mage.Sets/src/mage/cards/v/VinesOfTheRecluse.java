@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.oathofthegatewatch;
+package mage.cards.v;
 
 import java.util.UUID;
 import mage.abilities.effects.Effect;
@@ -34,9 +34,9 @@ import mage.abilities.effects.common.continuous.BoostTargetEffect;
 import mage.abilities.effects.common.continuous.GainAbilityTargetEffect;
 import mage.abilities.keyword.ReachAbility;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Duration;
-import mage.constants.Rarity;
 import mage.target.common.TargetCreaturePermanent;
 
 /**
@@ -45,9 +45,8 @@ import mage.target.common.TargetCreaturePermanent;
  */
 public class VinesOfTheRecluse extends CardImpl {
 
-    public VinesOfTheRecluse(UUID ownerId) {
-        super(ownerId, 146, "Vines of the Recluse", Rarity.COMMON, new CardType[]{CardType.INSTANT}, "{G}");
-        this.expansionSetCode = "OGW";
+    public VinesOfTheRecluse(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.INSTANT},"{G}");
 
         // Target creature gets +1/+2 and gains reach until end of turn.
         Effect effect = new BoostTargetEffect(1, 2, Duration.EndOfTurn);

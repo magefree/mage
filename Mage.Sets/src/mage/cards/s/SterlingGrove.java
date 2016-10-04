@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.invasion;
+package mage.cards.s;
 
 import java.util.UUID;
 import mage.abilities.Ability;
@@ -37,9 +37,9 @@ import mage.abilities.effects.common.continuous.GainAbilityControlledEffect;
 import mage.abilities.effects.common.search.SearchLibraryPutOnLibraryEffect;
 import mage.abilities.keyword.ShroudAbility;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Duration;
-import mage.constants.Rarity;
 import mage.constants.Zone;
 import mage.filter.FilterCard;
 import mage.filter.common.FilterControlledPermanent;
@@ -60,10 +60,9 @@ public class SterlingGrove extends CardImpl {
     }
 
 
-    public SterlingGrove(UUID ownerId) {
+    public SterlingGrove(UUID ownerId, CardSetInfo setInfo) {
         
-        super(ownerId, 278, "Sterling Grove", Rarity.UNCOMMON, new CardType[]{CardType.ENCHANTMENT}, "{G}{W}");
-        this.expansionSetCode = "INV";
+        super(ownerId,setInfo,new CardType[]{CardType.ENCHANTMENT},"{G}{W}");
 
 
         // Other enchantments you control have shroud.

@@ -25,14 +25,14 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.riseoftheeldrazi;
+package mage.cards.h;
 
 import java.util.UUID;
 import mage.constants.CardType;
 import mage.constants.Duration;
-import mage.constants.Rarity;
 import mage.abilities.effects.common.PreventAllDamageByAllPermanentsEffect;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.filter.common.FilterAttackingCreature;
 
 /**
@@ -41,10 +41,8 @@ import mage.filter.common.FilterAttackingCreature;
  */
 public class HarmlessAssault extends CardImpl {
 
-    public HarmlessAssault(UUID ownerId) {
-        super(ownerId, 24, "Harmless Assault", Rarity.COMMON,
-                new CardType[] { CardType.INSTANT }, "{2}{W}{W}");
-        this.expansionSetCode = "ROE";
+    public HarmlessAssault(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.INSTANT},"{2}{W}{W}");
 
 
         // Prevent all combat damage that would be dealt this turn by attacking

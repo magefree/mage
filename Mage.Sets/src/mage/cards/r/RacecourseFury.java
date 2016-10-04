@@ -26,14 +26,13 @@
  *  or implied, of BetaSteward_at_googlemail.com.
  */
 
-package mage.sets.returntoravnica;
+package mage.cards.r;
 
 import java.util.UUID;
 
 import mage.constants.AttachmentType;
 import mage.constants.CardType;
 import mage.constants.Outcome;
-import mage.constants.Rarity;
 import mage.constants.Zone;
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleActivatedAbility;
@@ -45,6 +44,7 @@ import mage.abilities.effects.common.continuous.GainAbilityTargetEffect;
 import mage.abilities.keyword.EnchantAbility;
 import mage.abilities.keyword.HasteAbility;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.Duration;
 import mage.target.TargetPermanent;
 import mage.target.common.TargetCreaturePermanent;
@@ -58,9 +58,8 @@ public class RacecourseFury extends CardImpl {
 
     static final String rule = "Enchanted land has \"{T}: Target creature gains haste until end of turn.\"";
 
-    public RacecourseFury (UUID ownerId) {
-        super(ownerId, 104, "Racecourse Fury", Rarity.UNCOMMON, new CardType[]{CardType.ENCHANTMENT}, "{R}");
-        this.expansionSetCode = "RTR";
+    public RacecourseFury (UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.ENCHANTMENT},"{R}");
         this.subtype.add("Aura");
         this.color.setRed(true);
 

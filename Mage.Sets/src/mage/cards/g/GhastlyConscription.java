@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.fatereforged;
+package mage.cards.g;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -41,10 +41,10 @@ import mage.abilities.effects.common.continuous.BecomesFaceDownCreatureEffect;
 import mage.abilities.effects.common.continuous.BecomesFaceDownCreatureEffect.FaceDownType;
 import mage.cards.Card;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Duration;
 import mage.constants.Outcome;
-import mage.constants.Rarity;
 import mage.constants.Zone;
 import mage.filter.common.FilterCreatureCard;
 import mage.game.Game;
@@ -57,9 +57,8 @@ import mage.target.TargetPlayer;
  */
 public class GhastlyConscription extends CardImpl {
 
-    public GhastlyConscription(UUID ownerId) {
-        super(ownerId, 70, "Ghastly Conscription", Rarity.MYTHIC, new CardType[]{CardType.SORCERY}, "{5}{B}{B}");
-        this.expansionSetCode = "FRF";
+    public GhastlyConscription(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{5}{B}{B}");
 
         // Exile all creature cards from target player's graveyard in a face-down pile, shuffle that pile, then manifest those cards.<i> (To manifest a card, put it onto the battlefield face down as a 2/2 creature. Turn it face up at any time for its mana cost if it's a creature card.)</i>
         this.getSpellAbility().addEffect(new GhastlyConscriptionEffect());

@@ -26,13 +26,12 @@
  *  or implied, of BetaSteward_at_googlemail.com.
  */
 
-package mage.sets.worldwake;
+package mage.cards.b;
 
 import java.util.UUID;
 
 import mage.constants.CardType;
 import mage.constants.Outcome;
-import mage.constants.Rarity;
 import mage.constants.Zone;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.costs.mana.GenericManaCost;
@@ -41,6 +40,7 @@ import mage.abilities.keyword.DeathtouchAbility;
 import mage.abilities.keyword.EquipAbility;
 import mage.abilities.keyword.LifelinkAbility;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.AttachmentType;
 
 /**
@@ -49,9 +49,8 @@ import mage.constants.AttachmentType;
  */
 public class BasiliskCollar extends CardImpl {
 
-    public BasiliskCollar(UUID ownerId) {
-        super(ownerId, 122, "Basilisk Collar", Rarity.RARE, new CardType[]{CardType.ARTIFACT}, "{1}");
-        this.expansionSetCode = "WWK";
+    public BasiliskCollar(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.ARTIFACT},"{1}");
         this.subtype.add("Equipment");
         this.addAbility(new EquipAbility(Outcome.AddAbility, new GenericManaCost(2)));
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new GainAbilityAttachedEffect(LifelinkAbility.getInstance(), AttachmentType.EQUIPMENT)));

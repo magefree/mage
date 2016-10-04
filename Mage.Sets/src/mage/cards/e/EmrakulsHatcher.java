@@ -26,15 +26,15 @@
  *  or implied, of BetaSteward_at_googlemail.com.
  */
 
-package mage.sets.riseoftheeldrazi;
+package mage.cards.e;
 
 import java.util.UUID;
 import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.MageInt;
 import mage.abilities.common.EntersBattlefieldTriggeredAbility;
 import mage.abilities.effects.common.CreateTokenEffect;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.game.permanent.token.EldraziSpawnToken;
 
 /**
@@ -43,9 +43,8 @@ import mage.game.permanent.token.EldraziSpawnToken;
  */
 public class EmrakulsHatcher extends CardImpl {
 
-    public EmrakulsHatcher(UUID ownerId) {
-        super(ownerId, 142, "Emrakul's Hatcher", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{4}{R}");
-        this.expansionSetCode = "ROE";
+    public EmrakulsHatcher(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{4}{R}");
         this.subtype.add("Eldrazi");
         this.subtype.add("Drone");
 

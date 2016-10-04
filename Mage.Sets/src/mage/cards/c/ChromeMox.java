@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.mirrodin;
+package mage.cards.c;
 
 import java.util.List;
 import java.util.UUID;
@@ -40,11 +40,11 @@ import mage.abilities.effects.common.ManaEffect;
 import mage.abilities.mana.SimpleManaAbility;
 import mage.cards.Card;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.choices.Choice;
 import mage.choices.ChoiceImpl;
 import mage.constants.CardType;
 import mage.constants.Outcome;
-import mage.constants.Rarity;
 import mage.constants.Zone;
 import mage.filter.FilterCard;
 import mage.filter.predicate.Predicates;
@@ -62,9 +62,8 @@ import mage.util.GameLog;
  */
 public class ChromeMox extends CardImpl {
 
-    public ChromeMox(UUID ownerId) {
-        super(ownerId, 152, "Chrome Mox", Rarity.RARE, new CardType[]{CardType.ARTIFACT}, "{0}");
-        this.expansionSetCode = "MRD";
+    public ChromeMox(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.ARTIFACT},"{0}");
 
         // Imprint - When Chrome Mox enters the battlefield, you may exile a nonartifact, nonland card from your hand.
         this.addAbility(new EntersBattlefieldTriggeredAbility(new ChromeMoxEffect(), true));

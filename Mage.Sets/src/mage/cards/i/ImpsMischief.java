@@ -25,16 +25,16 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.planarchaos;
+package mage.cards.i;
 
 import java.util.UUID;
 import mage.abilities.Ability;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.ChooseNewTargetsTargetEffect;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Outcome;
-import mage.constants.Rarity;
 import mage.filter.FilterSpell;
 import mage.filter.predicate.mageobject.NumberOfTargetsPredicate;
 import mage.game.Game;
@@ -54,9 +54,8 @@ public class ImpsMischief extends CardImpl {
         filter.add(new NumberOfTargetsPredicate(1));
     }
     
-    public ImpsMischief(UUID ownerId) {
-        super(ownerId, 72, "Imp's Mischief", Rarity.RARE, new CardType[]{CardType.INSTANT}, "{1}{B}");
-        this.expansionSetCode = "PLC";
+    public ImpsMischief(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.INSTANT},"{1}{B}");
 
 
         // Change the target of target spell with a single target. You lose life equal to that spell's converted mana cost.

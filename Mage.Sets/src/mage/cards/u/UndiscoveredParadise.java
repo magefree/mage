@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.visions;
+package mage.cards.u;
 
 import java.util.UUID;
 import mage.abilities.Ability;
@@ -35,9 +35,9 @@ import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.ReturnToHandTargetEffect;
 import mage.abilities.mana.AnyColorManaAbility;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Outcome;
-import mage.constants.Rarity;
 import mage.game.Game;
 import mage.game.events.GameEvent;
 import mage.game.permanent.Permanent;
@@ -49,9 +49,8 @@ import mage.target.targetpointer.FixedTarget;
  */
 public class UndiscoveredParadise extends CardImpl {
 
-    public UndiscoveredParadise(UUID ownerId) {
-        super(ownerId, 167, "Undiscovered Paradise", Rarity.RARE, new CardType[]{CardType.LAND}, "");
-        this.expansionSetCode = "VIS";
+    public UndiscoveredParadise(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.LAND},"");
 
         // {T}: Add one mana of any color to your mana pool. During your next untap step, as you untap your permanents, return Undiscovered Paradise to its owner's hand.
         Ability ability = new AnyColorManaAbility();

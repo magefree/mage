@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.commander;
+package mage.cards.r;
 
 import java.util.UUID;
 import mage.MageInt;
@@ -37,8 +37,8 @@ import mage.abilities.effects.common.CopyTargetSpellEffect;
 import mage.abilities.effects.common.DoIfCostPaid;
 import mage.abilities.effects.common.PutTokenOntoBattlefieldCopyTargetEffect;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.constants.SetTargetPointer;
 import mage.constants.Zone;
 import mage.filter.FilterSpell;
@@ -66,9 +66,8 @@ public class RikuOfTwoReflections extends CardImpl {
 
     }
 
-    public RikuOfTwoReflections(UUID ownerId) {
-        super(ownerId, 220, "Riku of Two Reflections", Rarity.MYTHIC, new CardType[]{CardType.CREATURE}, "{2}{U}{R}{G}");
-        this.expansionSetCode = "CMD";
+    public RikuOfTwoReflections(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{2}{U}{R}{G}");
         this.supertype.add("Legendary");
         this.subtype.add("Human");
         this.subtype.add("Wizard");

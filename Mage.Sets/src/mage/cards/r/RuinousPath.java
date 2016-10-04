@@ -25,14 +25,14 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.battleforzendikar;
+package mage.cards.r;
 
 import java.util.UUID;
 import mage.abilities.effects.common.DestroyTargetEffect;
 import mage.abilities.keyword.AwakenAbility;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.target.common.TargetCreatureOrPlaneswalker;
 
 /**
@@ -41,9 +41,8 @@ import mage.target.common.TargetCreatureOrPlaneswalker;
  */
 public class RuinousPath extends CardImpl {
 
-    public RuinousPath(UUID ownerId) {
-        super(ownerId, 123, "Ruinous Path", Rarity.RARE, new CardType[]{CardType.SORCERY}, "{1}{B}{B}");
-        this.expansionSetCode = "BFZ";
+    public RuinousPath(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{1}{B}{B}");
 
         // Destroy target creature or planeswalker.
         this.getSpellAbility().addEffect(new DestroyTargetEffect());

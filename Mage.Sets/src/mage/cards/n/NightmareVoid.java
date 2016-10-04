@@ -25,14 +25,14 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.ravnica;
+package mage.cards.n;
 
 import java.util.UUID;
 import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.abilities.effects.common.discard.DiscardCardYouChooseTargetEffect;
 import mage.abilities.keyword.DredgeAbility;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.TargetController;
 import mage.target.TargetPlayer;
 
@@ -42,9 +42,8 @@ import mage.target.TargetPlayer;
  */
 public class NightmareVoid extends CardImpl {
 
-    public NightmareVoid(UUID ownerId) {
-        super(ownerId, 100, "Nightmare Void", Rarity.UNCOMMON, new CardType[]{CardType.SORCERY}, "{3}{B}");
-        this.expansionSetCode = "RAV";
+    public NightmareVoid(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{3}{B}");
 
 
         // Target player reveals his or her hand. You choose a card from it. That player discards that card.

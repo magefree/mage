@@ -25,14 +25,14 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.avacynrestored;
+package mage.cards.e;
 
 import java.util.UUID;
 import mage.abilities.TriggeredAbilityImpl;
 import mage.abilities.effects.common.GainLifeEffect;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.constants.Zone;
 import mage.game.Game;
 import mage.game.events.GameEvent;
@@ -43,9 +43,8 @@ import mage.game.events.GameEvent.EventType;
  */
 public class ExquisiteBlood extends CardImpl {
 
-    public ExquisiteBlood(UUID ownerId) {
-        super(ownerId, 102, "Exquisite Blood", Rarity.RARE, new CardType[]{CardType.ENCHANTMENT}, "{4}{B}");
-        this.expansionSetCode = "AVR";
+    public ExquisiteBlood(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.ENCHANTMENT},"{4}{B}");
 
 
         // Whenever an opponent loses life, you gain that much life.

@@ -26,13 +26,13 @@
  *  or implied, of BetaSteward_at_googlemail.com.
  */
 
-package mage.sets.tenthedition;
+package mage.cards.d;
 
 import java.util.UUID;
 import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.abilities.effects.common.search.SearchLibraryPutInHandEffect;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.target.common.TargetCardInLibrary;
 
 /**
@@ -41,9 +41,8 @@ import mage.target.common.TargetCardInLibrary;
  */
 public class DiabolicTutor extends CardImpl {
 
-    public DiabolicTutor(UUID ownerId){
-        super(ownerId, 135, "Diabolic Tutor", Rarity.UNCOMMON, new CardType[]{CardType.SORCERY},"{2}{B}{B}");
-        this.expansionSetCode = "10E";
+    public DiabolicTutor(UUID ownerId, CardSetInfo setInfo){
+        super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{2}{B}{B}");
 
         TargetCardInLibrary target = new TargetCardInLibrary();
         this.getSpellAbility().addEffect(new SearchLibraryPutInHandEffect(target));

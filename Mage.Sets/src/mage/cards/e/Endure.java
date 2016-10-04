@@ -25,14 +25,14 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.eventide;
+package mage.cards.e;
 
 import java.util.UUID;
 import mage.abilities.effects.common.PreventAllDamageToAllEffect;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Duration;
-import mage.constants.Rarity;
 import mage.constants.TargetController;
 import mage.filter.common.FilterPermanentOrPlayer;
 import mage.filter.predicate.other.PlayerPredicate;
@@ -51,9 +51,8 @@ public class Endure extends CardImpl {
         filter.getPlayerFilter().add(new PlayerPredicate(TargetController.YOU));
     }
 
-    public Endure(UUID ownerId) {
-        super(ownerId, 5, "Endure", Rarity.UNCOMMON, new CardType[]{CardType.INSTANT}, "{3}{W}{W}");
-        this.expansionSetCode = "EVE";
+    public Endure(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.INSTANT},"{3}{W}{W}");
 
 
         // Prevent all damage that would be dealt to you and permanents you control this turn.

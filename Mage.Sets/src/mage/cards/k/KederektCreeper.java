@@ -25,15 +25,15 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.shardsofalara;
+package mage.cards.k;
 
 import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.keyword.DeathtouchAbility;
 import mage.abilities.keyword.MenaceAbility;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.Rarity;
 
 /**
  *
@@ -41,9 +41,8 @@ import mage.constants.Rarity;
  */
 public class KederektCreeper extends CardImpl {
 
-    public KederektCreeper(UUID ownerId) {
-        super(ownerId, 176, "Kederekt Creeper", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{U}{B}{R}");
-        this.expansionSetCode = "ALA";
+    public KederektCreeper(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{U}{B}{R}");
         this.subtype.add("Horror");
 
         this.power = new MageInt(2);

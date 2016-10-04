@@ -26,7 +26,7 @@
  *  or implied, of BetaSteward_at_googlemail.com.
  */
 
-package mage.sets.apocalypse;
+package mage.cards.n;
 
 import java.util.Iterator;
 import java.util.List;
@@ -36,7 +36,7 @@ import mage.abilities.Ability;
 import mage.abilities.effects.ContinuousEffectImpl;
 import mage.abilities.effects.common.continuous.BoostTargetEffect;
 import mage.constants.CardType;
-import mage.constants.Rarity;
+import mage.cards.CardSetInfo;
 import mage.cards.SplitCard;
 import mage.constants.Duration;
 import mage.constants.Layer;
@@ -55,9 +55,8 @@ import mage.target.common.TargetCreaturePermanent;
 
 public class NightDay extends SplitCard {
 
-    public NightDay(UUID ownerId) {
-        super(ownerId, 131, "Night", "Day", Rarity.UNCOMMON, new CardType[]{CardType.INSTANT}, "{B}", "{2}{W}", false);
-        this.expansionSetCode = "APC";
+    public NightDay(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.INSTANT},"{B}","{2}{W}",false);
 
         // Night
         // Target creature gets -1/-1 until end of turn.

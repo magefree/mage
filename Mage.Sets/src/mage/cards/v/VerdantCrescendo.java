@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.kaladesh;
+package mage.cards.v;
 
 import java.util.UUID;
 import mage.MageObject;
@@ -34,11 +34,11 @@ import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.search.SearchLibraryPutInPlayEffect;
 import mage.cards.Card;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.cards.Cards;
 import mage.cards.CardsImpl;
 import mage.constants.CardType;
 import mage.constants.Outcome;
-import mage.constants.Rarity;
 import mage.constants.Zone;
 import mage.filter.FilterCard;
 import mage.filter.common.FilterBasicLandCard;
@@ -54,9 +54,8 @@ import mage.target.common.TargetCardInLibrary;
  */
 public class VerdantCrescendo extends CardImpl {
 
-    public VerdantCrescendo(UUID ownerId) {
-        super(ownerId, 273, "Verdant Crescendo", Rarity.RARE, new CardType[]{CardType.SORCERY}, "{3}{G}");
-        this.expansionSetCode = "KLD";
+    public VerdantCrescendo(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{3}{G}");
 
         // Search your library for a basic land card and put it onto the battlefield tapped.
         this.getSpellAbility().addEffect(new SearchLibraryPutInPlayEffect(new TargetCardInLibrary(new FilterBasicLandCard()), true, false));

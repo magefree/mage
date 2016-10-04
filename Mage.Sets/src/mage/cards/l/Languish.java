@@ -25,14 +25,14 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.magicorigins;
+package mage.cards.l;
 
 import java.util.UUID;
 import mage.abilities.effects.common.continuous.BoostAllEffect;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Duration;
-import mage.constants.Rarity;
 
 /**
  *
@@ -40,9 +40,8 @@ import mage.constants.Rarity;
  */
 public class Languish extends CardImpl {
 
-    public Languish(UUID ownerId) {
-        super(ownerId, 105, "Languish", Rarity.RARE, new CardType[]{CardType.SORCERY}, "{2}{B}{B}");
-        this.expansionSetCode = "ORI";
+    public Languish(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{2}{B}{B}");
 
         // All creatures get -4/-4 until end of turn.
         this.getSpellAbility().addEffect(new BoostAllEffect(-4, -4, Duration.EndOfTurn));

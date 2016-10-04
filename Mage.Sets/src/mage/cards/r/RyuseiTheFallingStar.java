@@ -1,4 +1,4 @@
-package mage.sets.championsofkamigawa;
+package mage.cards.r;
 
 /*
  *  Copyright 2010 BetaSteward_at_googlemail.com. All rights reserved.
@@ -33,8 +33,8 @@ import mage.abilities.common.DiesTriggeredAbility;
 import mage.abilities.effects.common.DamageAllEffect;
 import mage.abilities.keyword.FlyingAbility;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.filter.predicate.Predicates;
 import mage.filter.predicate.mageobject.AbilityPredicate;
@@ -52,9 +52,8 @@ public class RyuseiTheFallingStar extends CardImpl {
         filter.add(Predicates.not(new AbilityPredicate(FlyingAbility.class)));
     }
 
-    public RyuseiTheFallingStar(UUID ownerId) {
-        super(ownerId, 185, "Ryusei, the Falling Star", Rarity.RARE, new CardType[]{CardType.CREATURE}, "{5}{R}");
-        this.expansionSetCode = "CHK";
+    public RyuseiTheFallingStar(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{5}{R}");
         this.supertype.add("Legendary");
         this.subtype.add("Dragon");
         this.subtype.add("Spirit");

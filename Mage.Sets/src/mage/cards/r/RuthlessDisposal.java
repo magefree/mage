@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.eldritchmoon;
+package mage.cards.r;
 
 import java.util.UUID;
 import mage.abilities.costs.Cost;
@@ -34,9 +34,9 @@ import mage.abilities.costs.common.SacrificeTargetCost;
 import mage.abilities.effects.Effect;
 import mage.abilities.effects.common.continuous.BoostTargetEffect;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Duration;
-import mage.constants.Rarity;
 import mage.filter.FilterCard;
 import mage.target.common.TargetCardInHand;
 import mage.target.common.TargetControlledCreaturePermanent;
@@ -48,9 +48,8 @@ import mage.target.common.TargetCreaturePermanent;
  */
 public class RuthlessDisposal extends CardImpl {
 
-    public RuthlessDisposal(UUID ownerId) {
-        super(ownerId, 103, "Ruthless Disposal", Rarity.UNCOMMON, new CardType[]{CardType.SORCERY}, "{4}{B}");
-        this.expansionSetCode = "EMN";
+    public RuthlessDisposal(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{4}{B}");
 
         // As an additional cost to cast Ruthless Disposal, discard a card and sacrifice a creature.
         this.getSpellAbility().addCost(new DiscardTargetCost(new TargetCardInHand(new FilterCard("a card"))));

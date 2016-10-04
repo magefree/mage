@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.timeshifted;
+package mage.cards.g;
 
 import java.util.UUID;
 import mage.MageObject;
@@ -40,12 +40,12 @@ import mage.abilities.effects.ContinuousEffect;
 import mage.abilities.effects.OneShotEffect;
 import mage.cards.Card;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.AsThoughEffectType;
 import mage.constants.CardType;
 import mage.constants.Duration;
 import mage.constants.Outcome;
 import mage.constants.PhaseStep;
-import mage.constants.Rarity;
 import mage.constants.Zone;
 import mage.game.ExileZone;
 import mage.game.Game;
@@ -63,9 +63,8 @@ import mage.util.CardUtil;
  */
 public class GrinningTotem extends CardImpl {
 
-    public GrinningTotem(UUID ownerId) {
-        super(ownerId, 110, "Grinning Totem", Rarity.SPECIAL, new CardType[]{CardType.ARTIFACT}, "{4}");
-        this.expansionSetCode = "TSB";
+    public GrinningTotem(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.ARTIFACT},"{4}");
 
         // {2}, {tap}, Sacrifice Grinning Totem: Search target opponent's library for a card and exile it. Then that player shuffles his or her library.
         // Until the beginning of your next upkeep, you may play that card.

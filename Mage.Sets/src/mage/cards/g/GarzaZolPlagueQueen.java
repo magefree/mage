@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.coldsnap;
+package mage.cards.g;
 
 import java.util.UUID;
 import mage.MageInt;
@@ -36,8 +36,8 @@ import mage.abilities.effects.common.counter.AddCountersSourceEffect;
 import mage.abilities.keyword.FlyingAbility;
 import mage.abilities.keyword.HasteAbility;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.counters.CounterType;
 
 /**
@@ -46,9 +46,8 @@ import mage.counters.CounterType;
  */
 public class GarzaZolPlagueQueen extends CardImpl {
 
-    public GarzaZolPlagueQueen(UUID ownerId) {
-        super(ownerId, 129, "Garza Zol, Plague Queen", Rarity.RARE, new CardType[]{CardType.CREATURE}, "{4}{U}{B}{R}");
-        this.expansionSetCode = "CSP";
+    public GarzaZolPlagueQueen(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{4}{U}{B}{R}");
         this.supertype.add("Legendary");
         this.subtype.add("Vampire");
         this.power = new MageInt(5);

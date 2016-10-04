@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.battleforzendikar;
+package mage.cards.q;
 
 import java.util.UUID;
 import mage.abilities.Ability;
@@ -37,9 +37,9 @@ import mage.abilities.effects.common.CreateDelayedTriggeredAbilityEffect;
 import mage.abilities.effects.common.EntersBattlefieldWithXCountersEffect;
 import mage.abilities.effects.common.ExileTargetEffect;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Outcome;
-import mage.constants.Rarity;
 import mage.constants.TargetController;
 import mage.counters.Counter;
 import mage.filter.common.FilterNonlandPermanent;
@@ -55,9 +55,8 @@ import mage.util.CardUtil;
  */
 public class QuarantineField extends CardImpl {
 
-    public QuarantineField(UUID ownerId) {
-        super(ownerId, 43, "Quarantine Field", Rarity.MYTHIC, new CardType[]{CardType.ENCHANTMENT}, "{X}{X}{W}{W}");
-        this.expansionSetCode = "BFZ";
+    public QuarantineField(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.ENCHANTMENT},"{X}{X}{W}{W}");
 
         // Quarantine Field enters the battlefield with X isolation counters on it.
         this.addAbility(new EntersBattlefieldAbility(new EntersBattlefieldWithXCountersEffect(new Counter("isolation"))));

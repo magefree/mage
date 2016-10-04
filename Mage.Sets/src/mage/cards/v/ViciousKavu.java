@@ -25,16 +25,16 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.invasion;
+package mage.cards.v;
 
 import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.common.AttacksTriggeredAbility;
 import mage.abilities.effects.common.continuous.BoostSourceEffect;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Duration;
-import mage.constants.Rarity;
 
 /**
  *
@@ -43,9 +43,8 @@ import mage.constants.Rarity;
  */
 public class ViciousKavu extends CardImpl {
 
-    public ViciousKavu(UUID ownerId) {
-        super(ownerId, 284, "Vicious Kavu", Rarity.UNCOMMON, new CardType[]{CardType.CREATURE}, "{1}{B}{R}");
-        this.expansionSetCode = "INV";
+    public ViciousKavu(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{1}{B}{R}");
         this.subtype.add("Kavu");
         this.power = new MageInt(2);
         this.toughness = new MageInt(2);

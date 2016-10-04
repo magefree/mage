@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.futuresight;
+package mage.cards.p;
 
 import java.util.UUID;
 import mage.abilities.common.delayed.PactDelayedTriggeredAbility;
@@ -33,8 +33,8 @@ import mage.abilities.costs.mana.ManaCostsImpl;
 import mage.abilities.effects.common.CounterTargetEffect;
 import mage.abilities.effects.common.CreateDelayedTriggeredAbilityEffect;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.target.TargetSpell;
 
 /**
@@ -43,9 +43,8 @@ import mage.target.TargetSpell;
  */
 public class PactOfNegation extends CardImpl {
 
-    public PactOfNegation(UUID ownerId) {
-        super(ownerId, 42, "Pact of Negation", Rarity.RARE, new CardType[]{CardType.INSTANT}, "{0}");
-        this.expansionSetCode = "FUT";
+    public PactOfNegation(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.INSTANT},"{0}");
 
         this.color.setBlue(true);
         

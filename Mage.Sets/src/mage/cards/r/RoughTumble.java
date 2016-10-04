@@ -25,15 +25,15 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.commander2013;
+package mage.cards.r;
 
 import java.util.UUID;
 import mage.abilities.effects.Effect;
 import mage.abilities.effects.common.DamageAllEffect;
 import mage.abilities.keyword.FlyingAbility;
+import mage.cards.CardSetInfo;
 import mage.cards.SplitCard;
 import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.filter.predicate.Predicates;
 import mage.filter.predicate.mageobject.AbilityPredicate;
@@ -51,9 +51,8 @@ public class RoughTumble extends SplitCard {
         filterWithoutFlying.add(Predicates.not(new AbilityPredicate(FlyingAbility.class)));
     }
 
-    public RoughTumble(UUID ownerId) {
-        super(ownerId, 118, "Rough", "Tumble", Rarity.UNCOMMON, new CardType[]{CardType.SORCERY}, "{1}{R}", "{5}{R}", false);
-        this.expansionSetCode = "C13";
+    public RoughTumble(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{1}{R}","{5}{R}",false);
 
         // Rough
         // Rough deals 2 damage to each creature without flying.

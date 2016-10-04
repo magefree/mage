@@ -26,14 +26,14 @@
  *  or implied, of BetaSteward_at_googlemail.com.
  */
 
-package mage.sets.shardsofalara;
+package mage.cards.j;
 
 import java.util.UUID;
 import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.MageInt;
 import mage.abilities.keyword.CantBeBlockedSourceAbility;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 
 /**
  *
@@ -41,9 +41,8 @@ import mage.cards.CardImpl;
  */
 public class JhessianInfiltrator extends CardImpl {
 
-    public JhessianInfiltrator (UUID ownerId) {
-        super(ownerId, 174, "Jhessian Infiltrator", Rarity.UNCOMMON, new CardType[]{CardType.CREATURE}, "{G}{U}");
-        this.expansionSetCode = "ALA";
+    public JhessianInfiltrator (UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{G}{U}");
         this.subtype.add("Human");
         this.subtype.add("Rogue");
 

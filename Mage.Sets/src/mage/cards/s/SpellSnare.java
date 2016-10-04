@@ -25,13 +25,13 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.dissension;
+package mage.cards.s;
 
 import java.util.UUID;
 import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.abilities.effects.common.CounterTargetEffect;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.filter.Filter;
 import mage.filter.FilterSpell;
 import mage.filter.predicate.mageobject.ConvertedManaCostPredicate;
@@ -49,9 +49,8 @@ public class SpellSnare extends CardImpl {
         filter.add(new ConvertedManaCostPredicate(Filter.ComparisonType.Equal, 2));
     }
 
-    public SpellSnare(UUID ownerId) {
-        super(ownerId, 33, "Spell Snare", Rarity.UNCOMMON, new CardType[]{CardType.INSTANT}, "{U}");
-        this.expansionSetCode = "DIS";
+    public SpellSnare(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.INSTANT},"{U}");
 
         // Counter target spell with converted mana cost 2.
         this.getSpellAbility().addEffect(new CounterTargetEffect());

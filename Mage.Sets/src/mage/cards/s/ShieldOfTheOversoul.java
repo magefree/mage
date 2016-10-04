@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.shadowmoor;
+package mage.cards.s;
 
 import java.util.UUID;
 import mage.ObjectColor;
@@ -40,10 +40,10 @@ import mage.abilities.keyword.EnchantAbility;
 import mage.abilities.keyword.FlyingAbility;
 import mage.abilities.keyword.IndestructibleAbility;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.AttachmentType;
 import mage.constants.CardType;
 import mage.constants.Outcome;
-import mage.constants.Rarity;
 import mage.constants.Zone;
 import mage.target.TargetPermanent;
 import mage.target.common.TargetCreaturePermanent;
@@ -54,9 +54,8 @@ import mage.target.common.TargetCreaturePermanent;
  */
 public class ShieldOfTheOversoul extends CardImpl {
 
-    public ShieldOfTheOversoul(UUID ownerId) {
-        super(ownerId, 242, "Shield of the Oversoul", Rarity.COMMON, new CardType[]{CardType.ENCHANTMENT}, "{2}{G/W}");
-        this.expansionSetCode = "SHM";
+    public ShieldOfTheOversoul(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.ENCHANTMENT},"{2}{G/W}");
         this.subtype.add("Aura");
 
 

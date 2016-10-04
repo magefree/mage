@@ -26,11 +26,10 @@
 * or implied, of BetaSteward_at_googlemail.com.
 */
 
-package mage.sets.shardsofalara;
+package mage.cards.k;
 
 import java.util.UUID;
 import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.MageInt;
 import mage.abilities.common.EntersBattlefieldTriggeredAbility;
 import mage.abilities.condition.common.OpponentControlsMoreCondition;
@@ -38,6 +37,7 @@ import mage.abilities.decorator.ConditionalTriggeredAbility;
 import mage.abilities.effects.common.search.SearchLibraryPutInPlayEffect;
 import mage.abilities.keyword.FirstStrikeAbility;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.filter.common.FilterBySubtypeCard;
 import mage.filter.common.FilterLandPermanent;
 import mage.target.common.TargetCardInLibrary;
@@ -48,9 +48,8 @@ import mage.target.common.TargetCardInLibrary;
  */
 public class KnightOfTheWhiteOrchid extends CardImpl {
 
-    public KnightOfTheWhiteOrchid(UUID ownerId) {
-        super(ownerId, 16, "Knight of the White Orchid", Rarity.RARE, new CardType[]{CardType.CREATURE}, "{W}{W}");
-        this.expansionSetCode = "ALA";
+    public KnightOfTheWhiteOrchid(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{W}{W}");
         this.subtype.add("Human");
         this.subtype.add("Knight");
 

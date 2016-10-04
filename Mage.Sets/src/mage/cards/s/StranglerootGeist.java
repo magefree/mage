@@ -25,15 +25,15 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.darkascension;
+package mage.cards.s;
 
 import java.util.UUID;
 import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.MageInt;
 import mage.abilities.keyword.HasteAbility;
 import mage.abilities.keyword.UndyingAbility;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 
 /**
  *
@@ -41,9 +41,8 @@ import mage.cards.CardImpl;
  */
 public class StranglerootGeist extends CardImpl {
 
-    public StranglerootGeist(UUID ownerId) {
-        super(ownerId, 127, "Strangleroot Geist", Rarity.UNCOMMON, new CardType[]{CardType.CREATURE}, "{G}{G}");
-        this.expansionSetCode = "DKA";
+    public StranglerootGeist(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{G}{G}");
         this.subtype.add("Spirit");
 
         this.power = new MageInt(2);

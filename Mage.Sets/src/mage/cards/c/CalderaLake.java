@@ -25,16 +25,16 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.tempest;
+package mage.cards.c;
 
 import java.util.UUID;
 import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.abilities.Ability;
 import mage.abilities.common.EntersBattlefieldTappedAbility;
 import mage.abilities.effects.common.DamageControllerEffect;
 import mage.abilities.mana.*;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 
 /**
  *
@@ -42,9 +42,8 @@ import mage.cards.CardImpl;
  */
 public class CalderaLake extends CardImpl {
 
-    public CalderaLake(UUID ownerId) {
-        super(ownerId, 306, "Caldera Lake", Rarity.RARE, new CardType[]{CardType.LAND}, null);
-        this.expansionSetCode = "TMP";
+    public CalderaLake(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.LAND},null);
 
         // Caldera Lake enters the battlefield tapped.
         this.addAbility(new EntersBattlefieldTappedAbility());

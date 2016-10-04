@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.lorwyn;
+package mage.cards.e;
 
 import java.util.UUID;
 import mage.MageInt;
@@ -35,8 +35,8 @@ import mage.abilities.condition.common.MyTurnCondition;
 import mage.abilities.decorator.ConditionalTriggeredAbility;
 import mage.abilities.effects.common.CreateTokenEffect;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.filter.FilterSpell;
 import mage.filter.predicate.mageobject.ColorPredicate;
 import mage.game.permanent.token.Token;
@@ -53,9 +53,8 @@ public class EyesOfTheWisent extends CardImpl {
         filter.add(new ColorPredicate(ObjectColor.BLUE));
     }
 
-    public EyesOfTheWisent(UUID ownerId) {
-        super(ownerId, 210, "Eyes of the Wisent", Rarity.RARE, new CardType[]{CardType.TRIBAL, CardType.ENCHANTMENT}, "{1}{G}");
-        this.expansionSetCode = "LRW";
+    public EyesOfTheWisent(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.TRIBAL,CardType.ENCHANTMENT},"{1}{G}");
         this.subtype.add("Elemental");
 
         // Whenever an opponent casts a blue spell during your turn, you may put a 4/4 green Elemental creature token onto the battlefield.

@@ -25,14 +25,14 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.theros;
+package mage.cards.g;
 
 import java.util.UUID;
 import mage.ObjectColor;
 import mage.abilities.effects.common.ExileTargetEffect;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.filter.FilterPermanent;
 import mage.filter.predicate.mageobject.ColorPredicate;
 import mage.target.Target;
@@ -48,9 +48,8 @@ public class GlareOfHeresy extends CardImpl {
     static {
         filter.add(new ColorPredicate(ObjectColor.WHITE));
     }
-    public GlareOfHeresy(UUID ownerId) {
-        super(ownerId, 15, "Glare of Heresy", Rarity.UNCOMMON, new CardType[]{CardType.SORCERY}, "{1}{W}");
-        this.expansionSetCode = "THS";
+    public GlareOfHeresy(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{1}{W}");
 
 
         // Exile target white permanent.

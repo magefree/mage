@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.onslaught;
+package mage.cards.h;
 
 import java.util.HashSet;
 import java.util.Set;
@@ -35,12 +35,12 @@ import mage.abilities.Ability;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.DestroyAllEffect;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.cards.repository.CardRepository;
 import mage.choices.Choice;
 import mage.choices.ChoiceImpl;
 import mage.constants.CardType;
 import mage.constants.Outcome;
-import mage.constants.Rarity;
 import mage.filter.FilterPermanent;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.filter.predicate.Predicates;
@@ -54,9 +54,8 @@ import mage.players.Player;
  */
 public class HarshMercy extends CardImpl {
 
-    public HarshMercy(UUID ownerId) {
-        super(ownerId, 39, "Harsh Mercy", Rarity.RARE, new CardType[]{CardType.SORCERY}, "{2}{W}");
-        this.expansionSetCode = "ONS";
+    public HarshMercy(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{2}{W}");
 
         // Each player chooses a creature type. Destroy all creatures that aren't of a type chosen this way. They can't be regenerated.
         this.getSpellAbility().addEffect(new HarshMercyEffect());

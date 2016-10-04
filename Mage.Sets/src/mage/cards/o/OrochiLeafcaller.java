@@ -26,16 +26,16 @@
  *  or implied, of BetaSteward_at_googlemail.com.
  */
 
-package mage.sets.championsofkamigawa;
+package mage.cards.o;
 
 import java.util.UUID;
 
 import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.MageInt;
 import mage.abilities.costs.mana.ColoredManaCost;
 import mage.abilities.mana.AnyColorManaAbility;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.ColoredManaSymbol;
 
 /**
@@ -44,9 +44,8 @@ import mage.constants.ColoredManaSymbol;
  */
 public class OrochiLeafcaller extends CardImpl {
 
-    public OrochiLeafcaller (UUID ownerId) {
-        super(ownerId, 234, "Orochi Leafcaller", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{G}");
-        this.expansionSetCode = "CHK";
+    public OrochiLeafcaller (UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{G}");
         this.subtype.add("Snake");
         this.subtype.add("Shaman");
 

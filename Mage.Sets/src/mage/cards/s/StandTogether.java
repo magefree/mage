@@ -25,14 +25,14 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.darksteel;
+package mage.cards.s;
 
 import java.util.UUID;
 import mage.abilities.effects.Effect;
 import mage.abilities.effects.common.counter.AddCountersTargetEffect;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.counters.CounterType;
 import mage.target.Target;
 import mage.target.common.TargetCreaturePermanent;
@@ -43,9 +43,8 @@ import mage.target.common.TargetCreaturePermanent;
  */
 public class StandTogether extends CardImpl {
 
-    public StandTogether(UUID ownerId) {
-        super(ownerId, 84, "Stand Together", Rarity.UNCOMMON, new CardType[]{CardType.INSTANT}, "{3}{G}{G}");
-        this.expansionSetCode = "DST";
+    public StandTogether(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.INSTANT},"{3}{G}{G}");
 
         // Put two +1/+1 counters on target creature and two +1/+1 counters on another target creature.
         Effect effect = new AddCountersTargetEffect(CounterType.P1P1.createInstance(2));

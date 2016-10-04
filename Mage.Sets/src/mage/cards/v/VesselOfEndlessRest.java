@@ -25,15 +25,15 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.avacynrestored;
+package mage.cards.v;
 
 import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.abilities.Ability;
 import mage.abilities.common.EntersBattlefieldTriggeredAbility;
 import mage.abilities.effects.common.PutOnLibraryTargetEffect;
 import mage.abilities.mana.AnyColorManaAbility;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.target.common.TargetCardInGraveyard;
 
 import java.util.UUID;
@@ -43,9 +43,8 @@ import java.util.UUID;
  */
 public class VesselOfEndlessRest extends CardImpl {
 
-    public VesselOfEndlessRest(UUID ownerId) {
-        super(ownerId, 224, "Vessel of Endless Rest", Rarity.UNCOMMON, new CardType[]{CardType.ARTIFACT}, "{3}");
-        this.expansionSetCode = "AVR";
+    public VesselOfEndlessRest(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.ARTIFACT},"{3}");
 
         // When Vessel of Endless Rest enters the battlefield, put target card from a graveyard on the bottom of its owner's library.
         Ability ability = new EntersBattlefieldTriggeredAbility(new PutOnLibraryTargetEffect(false), false);

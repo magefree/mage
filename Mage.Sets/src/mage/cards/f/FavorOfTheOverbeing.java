@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.eventide;
+package mage.cards.f;
 
 import java.util.UUID;
 import mage.ObjectColor;
@@ -40,8 +40,8 @@ import mage.abilities.keyword.EnchantAbility;
 import mage.abilities.keyword.FlyingAbility;
 import mage.abilities.keyword.VigilanceAbility;
 import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.AttachmentType;
 import mage.constants.Outcome;
 import mage.constants.Zone;
@@ -54,9 +54,8 @@ import mage.target.common.TargetCreaturePermanent;
  */
 public class FavorOfTheOverbeing extends CardImpl {
 
-    public FavorOfTheOverbeing(UUID ownerId) {
-        super(ownerId, 151, "Favor of the Overbeing", Rarity.COMMON, new CardType[]{CardType.ENCHANTMENT}, "{1}{G/U}");
-        this.expansionSetCode = "EVE";
+    public FavorOfTheOverbeing(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.ENCHANTMENT},"{1}{G/U}");
         this.subtype.add("Aura");
 
 

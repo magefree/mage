@@ -26,7 +26,7 @@
  *  or implied, of BetaSteward_at_googlemail.com.
  */
 
-package mage.sets.magic2011;
+package mage.cards.d;
 
 import java.util.UUID;
 import mage.MageInt;
@@ -37,8 +37,8 @@ import mage.abilities.costs.common.SacrificeTargetCost;
 import mage.abilities.keyword.FlyingAbility;
 import mage.abilities.keyword.TrampleAbility;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.filter.common.FilterControlledCreaturePermanent;
 import mage.filter.predicate.mageobject.ColorPredicate;
 import mage.target.common.TargetControlledPermanent;
@@ -55,9 +55,8 @@ public class DemonOfDeathsGate extends CardImpl {
         filter.add(new ColorPredicate(ObjectColor.BLACK));
     }
     
-    public DemonOfDeathsGate(UUID ownerId) {
-        super(ownerId, 92, "Demon of Death's Gate", Rarity.MYTHIC, new CardType[]{CardType.CREATURE}, "{6}{B}{B}{B}");
-        this.expansionSetCode = "M11";
+    public DemonOfDeathsGate(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{6}{B}{B}{B}");
         this.subtype.add("Demon");
 
         this.power = new MageInt(9);

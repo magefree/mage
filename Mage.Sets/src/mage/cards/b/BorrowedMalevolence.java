@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.eldritchmoon;
+package mage.cards.b;
 
 import java.util.UUID;
 import mage.abilities.Mode;
@@ -34,9 +34,9 @@ import mage.abilities.effects.Effect;
 import mage.abilities.effects.common.continuous.BoostTargetEffect;
 import mage.abilities.keyword.EscalateAbility;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Duration;
-import mage.constants.Rarity;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.target.common.TargetCreaturePermanent;
 
@@ -49,9 +49,8 @@ public class BorrowedMalevolence extends CardImpl {
     private static final FilterCreaturePermanent filterCreaturePlus = new FilterCreaturePermanent("creature to get +1/+1");
     private static final FilterCreaturePermanent filterCreatureMinus = new FilterCreaturePermanent("creature to get -1/-1");
 
-    public BorrowedMalevolence(UUID ownerId) {
-        super(ownerId, 82, "Borrowed Malevolence", Rarity.COMMON, new CardType[]{CardType.INSTANT}, "{B}");
-        this.expansionSetCode = "EMN";
+    public BorrowedMalevolence(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.INSTANT},"{B}");
 
         // Escalate {2}
         this.addAbility(new EscalateAbility(new GenericManaCost(2)));

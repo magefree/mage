@@ -25,14 +25,14 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.planarchaos;
+package mage.cards.s;
 
 import java.util.UUID;
 import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.ObjectColor;
 import mage.abilities.effects.common.DestroyTargetEffect;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.filter.FilterPermanent;
 import mage.filter.predicate.Predicates;
 import mage.filter.predicate.mageobject.ColorPredicate;
@@ -48,9 +48,8 @@ public class Saltblast extends CardImpl {
     static {
         filter.add(Predicates.not(new ColorPredicate(ObjectColor.WHITE)));
     }
-    public Saltblast(UUID ownerId) {
-        super(ownerId, 15, "Saltblast", Rarity.UNCOMMON, new CardType[]{CardType.SORCERY}, "{3}{W}{W}");
-        this.expansionSetCode = "PLC";
+    public Saltblast(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{3}{W}{W}");
 
 
         // Destroy target nonwhite permanent.

@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.saviorsofkamigawa;
+package mage.cards.e;
 
 import java.util.UUID;
 import mage.abilities.Ability;
@@ -33,9 +33,9 @@ import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.EpicEffect;
 import mage.cards.Card;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Outcome;
-import mage.constants.Rarity;
 import mage.constants.Zone;
 import mage.filter.FilterCard;
 import mage.filter.predicate.mageobject.CardTypePredicate;
@@ -50,9 +50,8 @@ import mage.target.common.TargetCardInLibrary;
  */
 public class EnduringIdeal extends CardImpl {
 
-    public EnduringIdeal(UUID ownerId) {
-        super(ownerId, 9, "Enduring Ideal", Rarity.RARE, new CardType[]{CardType.SORCERY}, "{5}{W}{W}");
-        this.expansionSetCode = "SOK";
+    public EnduringIdeal(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{5}{W}{W}");
 
         // Search your library for an enchantment card and put it onto the battlefield. Then shuffle your library.
         this.getSpellAbility().addEffect(new EnduringIdealEffect());

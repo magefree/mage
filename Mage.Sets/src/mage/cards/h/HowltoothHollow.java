@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.lorwyn;
+package mage.cards.h;
 
 import java.util.UUID;
 import mage.abilities.Ability;
@@ -37,8 +37,8 @@ import mage.abilities.effects.common.HideawayPlayEffect;
 import mage.abilities.keyword.HideawayAbility;
 import mage.abilities.mana.BlackManaAbility;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.constants.TargetController;
 import mage.constants.Zone;
 
@@ -48,9 +48,8 @@ import mage.constants.Zone;
  */
 public class HowltoothHollow extends CardImpl {
 
-    public HowltoothHollow(UUID ownerId) {
-        super(ownerId, 269, "Howltooth Hollow", Rarity.RARE, new CardType[]{CardType.LAND}, "");
-        this.expansionSetCode = "LRW";
+    public HowltoothHollow(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.LAND},"");
 
         // Hideaway
         this.addAbility(new HideawayAbility());

@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.theros;
+package mage.cards.s;
 
 import java.util.UUID;
 import mage.MageInt;
@@ -35,9 +35,9 @@ import mage.abilities.effects.common.continuous.SetPowerSourceEffect;
 import mage.abilities.keyword.FlyingAbility;
 import mage.abilities.keyword.TrampleAbility;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Duration;
-import mage.constants.Rarity;
 import mage.constants.Zone;
 import mage.filter.common.FilterInstantOrSorceryCard;
 
@@ -47,9 +47,8 @@ import mage.filter.common.FilterInstantOrSorceryCard;
  */
 public class SpellheartChimera extends CardImpl {
 
-    public SpellheartChimera(UUID ownerId) {
-        super(ownerId, 204, "Spellheart Chimera", Rarity.UNCOMMON, new CardType[]{CardType.CREATURE}, "{1}{U}{R}");
-        this.expansionSetCode = "THS";
+    public SpellheartChimera(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{1}{U}{R}");
         this.subtype.add("Chimera");
 
         this.power = new MageInt(0);

@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.magic2015;
+package mage.cards.a;
 
 import java.util.UUID;
 import mage.MageInt;
@@ -39,11 +39,11 @@ import mage.abilities.effects.PreventionEffectImpl;
 import mage.abilities.keyword.FlyingAbility;
 import mage.abilities.keyword.VigilanceAbility;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.choices.ChoiceColor;
 import mage.constants.CardType;
 import mage.constants.Duration;
 import mage.constants.Outcome;
-import mage.constants.Rarity;
 import mage.constants.Zone;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.filter.predicate.permanent.AnotherPredicate;
@@ -65,9 +65,8 @@ public class AvacynGuardianAngel extends CardImpl {
         filter.add(new AnotherPredicate());
     }
         
-    public AvacynGuardianAngel(UUID ownerId) {
-        super(ownerId, 3, "Avacyn, Guardian Angel", Rarity.RARE, new CardType[]{CardType.CREATURE}, "{2}{W}{W}{W}");
-        this.expansionSetCode = "M15";
+    public AvacynGuardianAngel(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{2}{W}{W}{W}");
         this.supertype.add("Legendary");
         this.subtype.add("Angel");
 

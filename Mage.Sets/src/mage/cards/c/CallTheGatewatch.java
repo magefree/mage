@@ -25,13 +25,13 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.oathofthegatewatch;
+package mage.cards.c;
 
 import java.util.UUID;
 import mage.abilities.effects.common.search.SearchLibraryPutInHandEffect;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.filter.common.FilterPlaneswalkerCard;
 import mage.target.common.TargetCardInLibrary;
 
@@ -43,9 +43,8 @@ public class CallTheGatewatch extends CardImpl {
     
     private static final FilterPlaneswalkerCard filter = new FilterPlaneswalkerCard("planeswalker card");
 
-    public CallTheGatewatch(UUID ownerId) {
-        super(ownerId, 16, "Call the Gatewatch", Rarity.RARE, new CardType[]{CardType.SORCERY}, "{2}{W}");
-        this.expansionSetCode = "OGW";
+    public CallTheGatewatch(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{2}{W}");
 
         // Search your library for a planeswalker card, reveal it, and put it into your hand. Then shuffle your library.
         this.getSpellAbility().addEffect(new SearchLibraryPutInHandEffect(new TargetCardInLibrary(filter), true));

@@ -26,10 +26,9 @@
 * or implied, of BetaSteward_at_googlemail.com.
 */
 
-package mage.sets.innistrad;
+package mage.cards.h;
 
 import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.abilities.common.EntersBattlefieldAbility;
 import mage.abilities.condition.Condition;
 import mage.abilities.condition.common.PermanentsOnTheBattlefieldCondition;
@@ -39,6 +38,7 @@ import mage.abilities.effects.common.TapSourceEffect;
 import mage.abilities.mana.BlueManaAbility;
 import mage.abilities.mana.GreenManaAbility;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.filter.common.FilterLandPermanent;
 import mage.filter.predicate.Predicates;
 import mage.filter.predicate.mageobject.SubtypePredicate;
@@ -56,9 +56,8 @@ public class HinterlandHarbor extends CardImpl {
         filter.add(Predicates.or(new SubtypePredicate("Forest"), new SubtypePredicate("Island")));
     }
 
-    public HinterlandHarbor(UUID ownerId) {
-        super(ownerId, 241, "Hinterland Harbor", Rarity.RARE, new CardType[]{CardType.LAND}, null);
-        this.expansionSetCode = "ISD";
+    public HinterlandHarbor(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.LAND},null);
 
         Condition controls = new InvertCondition(new PermanentsOnTheBattlefieldCondition(filter, PermanentsOnTheBattlefieldCondition.CountType.MORE_THAN, 0));
         String abilityText = "tapped unless you control a Forest or an Island";

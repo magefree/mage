@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.ravnica;
+package mage.cards.b;
 
 import java.util.UUID;
 import mage.abilities.Ability;
@@ -35,9 +35,9 @@ import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.DrawCardSourceControllerEffect;
 import mage.cards.Card;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Outcome;
-import mage.constants.Rarity;
 import mage.constants.TargetController;
 import mage.constants.Zone;
 import mage.game.ExileZone;
@@ -52,9 +52,8 @@ import mage.util.CardUtil;
  */
 public class BottledCloister extends CardImpl {
 
-    public BottledCloister(UUID ownerId) {
-        super(ownerId, 256, "Bottled Cloister", Rarity.RARE, new CardType[]{CardType.ARTIFACT}, "{4}");
-        this.expansionSetCode = "RAV";
+    public BottledCloister(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.ARTIFACT},"{4}");
 
         // At the beginning of each opponent's upkeep, exile all cards from your hand face down.
         this.addAbility(new BeginningOfUpkeepTriggeredAbility(new BottledCloisterExileEffect(), TargetController.OPPONENT, false));

@@ -25,14 +25,14 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.battleforzendikar;
+package mage.cards.r;
 
 import java.util.UUID;
 import mage.abilities.effects.common.PutOnLibraryTargetEffect;
 import mage.abilities.keyword.AwakenAbility;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.target.common.TargetCreaturePermanent;
 
 /**
@@ -41,9 +41,8 @@ import mage.target.common.TargetCreaturePermanent;
  */
 public class RoilSpout extends CardImpl {
 
-    public RoilSpout(UUID ownerId) {
-        super(ownerId, 219, "Roil Spout", Rarity.UNCOMMON, new CardType[]{CardType.SORCERY}, "{1}{W}{U}");
-        this.expansionSetCode = "BFZ";
+    public RoilSpout(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{1}{W}{U}");
 
         // Put target creature on top of its owner's library.
         this.getSpellAbility().addEffect(new PutOnLibraryTargetEffect(true));

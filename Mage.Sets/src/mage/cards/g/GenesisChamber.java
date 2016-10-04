@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.darksteel;
+package mage.cards.g;
 
 import java.util.UUID;
 import mage.abilities.Ability;
@@ -33,9 +33,9 @@ import mage.abilities.common.EntersBattlefieldAllTriggeredAbility;
 import mage.abilities.effects.Effect;
 import mage.abilities.effects.OneShotEffect;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Outcome;
-import mage.constants.Rarity;
 import mage.constants.SetTargetPointer;
 import mage.constants.Zone;
 import mage.filter.FilterPermanent;
@@ -56,9 +56,8 @@ public class GenesisChamber extends CardImpl {
     static{
         filter.add(Predicates.not(new TokenPredicate()));
     }
-    public GenesisChamber(UUID ownerId) {
-        super(ownerId, 122, "Genesis Chamber", Rarity.UNCOMMON, new CardType[]{CardType.ARTIFACT}, "{2}");
-        this.expansionSetCode = "DST";
+    public GenesisChamber(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.ARTIFACT},"{2}");
 
         // Whenever a nontoken creature enters the battlefield, if Genesis Chamber is untapped, that creature's controller puts a 1/1 colorless Myr artifact creature token onto the battlefield.
         this.addAbility(new GenesisChamberTriggeredAbility(new GenesisChamberEffect(), filter));

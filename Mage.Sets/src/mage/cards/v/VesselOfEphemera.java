@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.shadowsoverinnistrad;
+package mage.cards.v;
 
 import java.util.UUID;
 import mage.abilities.Ability;
@@ -35,8 +35,8 @@ import mage.abilities.costs.mana.ManaCostsImpl;
 import mage.abilities.effects.Effect;
 import mage.abilities.effects.common.CreateTokenEffect;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.constants.Zone;
 import mage.game.permanent.token.SpiritWhiteToken;
 
@@ -46,9 +46,8 @@ import mage.game.permanent.token.SpiritWhiteToken;
  */
 public class VesselOfEphemera extends CardImpl {
 
-    public VesselOfEphemera(UUID ownerId) {
-        super(ownerId, 48, "Vessel of Ephemera", Rarity.COMMON, new CardType[]{CardType.ENCHANTMENT}, "{1}{W}");
-        this.expansionSetCode = "SOI";
+    public VesselOfEphemera(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.ENCHANTMENT},"{1}{W}");
 
         // {2}{W}, Sacrifice Vessel of Ephemera: Put two 1/1 white Spirit creature tokens with flying onto the battlefield.
         Effect effect = new CreateTokenEffect(new SpiritWhiteToken(), 2);

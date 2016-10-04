@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.ravnica;
+package mage.cards.l;
 
 import java.util.UUID;
 import mage.MageInt;
@@ -37,11 +37,11 @@ import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.LookLibraryTopCardTargetPlayerEffect;
 import mage.cards.Card;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.cards.Cards;
 import mage.cards.CardsImpl;
 import mage.constants.CardType;
 import mage.constants.Outcome;
-import mage.constants.Rarity;
 import mage.constants.Zone;
 import mage.game.Game;
 import mage.players.Player;
@@ -53,9 +53,8 @@ import mage.target.TargetPlayer;
  */
 public class LurkingInformant extends CardImpl {
 
-    public LurkingInformant(UUID ownerId) {
-        super(ownerId, 249, "Lurking Informant", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{1}{U/B}");
-        this.expansionSetCode = "RAV";
+    public LurkingInformant(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{1}{U/B}");
         this.subtype.add("Human");
         this.subtype.add("Rogue");
         this.power = new MageInt(1);

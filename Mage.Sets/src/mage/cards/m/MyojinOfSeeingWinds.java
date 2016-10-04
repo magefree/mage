@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.championsofkamigawa;
+package mage.cards.m;
 
 import java.util.UUID;
 
@@ -46,6 +46,7 @@ import mage.abilities.effects.common.continuous.GainAbilitySourceEffect;
 import mage.abilities.effects.common.counter.AddCountersSourceEffect;
 import mage.abilities.keyword.IndestructibleAbility;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.counters.CounterType;
 import mage.filter.FilterPermanent;
 import mage.filter.predicate.permanent.ControllerPredicate;
@@ -61,9 +62,8 @@ public class MyojinOfSeeingWinds extends CardImpl {
         filter.add(new ControllerPredicate(TargetController.YOU));
     }
 
-    public MyojinOfSeeingWinds(UUID ownerId) {
-        super(ownerId, 75, "Myojin of Seeing Winds", Rarity.RARE, new CardType[]{CardType.CREATURE}, "{7}{U}{U}{U}");
-        this.expansionSetCode = "CHK";
+    public MyojinOfSeeingWinds(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{7}{U}{U}{U}");
         this.supertype.add("Legendary");
         this.subtype.add("Spirit");
 

@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.shadowmoor;
+package mage.cards.i;
 
 import java.util.UUID;
 import mage.MageObject;
@@ -41,12 +41,12 @@ import mage.abilities.effects.common.continuous.GainAbilityTargetEffect;
 import mage.abilities.keyword.HasteAbility;
 import mage.cards.Card;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.cards.Cards;
 import mage.cards.CardsImpl;
 import mage.constants.CardType;
 import mage.constants.Duration;
 import mage.constants.Outcome;
-import mage.constants.Rarity;
 import mage.constants.Zone;
 import mage.filter.FilterCard;
 import mage.filter.predicate.Predicates;
@@ -62,9 +62,8 @@ import mage.target.targetpointer.FixedTarget;
  */
 public class ImpromptuRaid extends CardImpl {
 
-    public ImpromptuRaid(UUID ownerId) {
-        super(ownerId, 209, "Impromptu Raid", Rarity.RARE, new CardType[]{CardType.ENCHANTMENT}, "{3}{R/G}");
-        this.expansionSetCode = "SHM";
+    public ImpromptuRaid(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.ENCHANTMENT},"{3}{R/G}");
 
         // {2}{RG}: Reveal the top card of your library. If it isn't a creature card, put it into your graveyard. Otherwise, put that card onto the battlefield. That creature gains haste. Sacrifice it at the beginning of the next end step.
         this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new ImpromptuRaidEffect(), new ManaCostsImpl("{2}{R/G}")));

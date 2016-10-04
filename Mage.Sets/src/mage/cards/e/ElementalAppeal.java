@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.zendikar;
+package mage.cards.e;
 
 import java.util.UUID;
 
@@ -35,7 +35,6 @@ import mage.abilities.keyword.TrampleAbility;
 import mage.constants.CardType;
 import mage.constants.Duration;
 import mage.constants.Outcome;
-import mage.constants.Rarity;
 import mage.abilities.Ability;
 import mage.abilities.common.delayed.AtTheBeginOfNextEndStepDelayedTriggeredAbility;
 import mage.abilities.condition.LockedInCondition;
@@ -46,6 +45,7 @@ import mage.abilities.effects.common.ExileTargetEffect;
 import mage.abilities.effects.common.continuous.BoostTargetEffect;
 import mage.abilities.keyword.KickerAbility;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.game.permanent.token.Token;
@@ -57,9 +57,8 @@ import mage.target.targetpointer.FixedTarget;
  */
 public class ElementalAppeal extends CardImpl {
 
-    public ElementalAppeal(UUID ownerId) {
-        super(ownerId, 123, "Elemental Appeal", Rarity.RARE, new CardType[]{CardType.SORCERY}, "{R}{R}{R}{R}");
-        this.expansionSetCode = "ZEN";
+    public ElementalAppeal(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{R}{R}{R}{R}");
 
         // Kicker {5}
         this.addAbility(new KickerAbility("{5}"));

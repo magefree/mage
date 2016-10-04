@@ -3,13 +3,14 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package mage.sets.fifthdawn;
+package mage.cards.e;
 
 import java.util.UUID;
 import mage.constants.*;
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.game.Game;
 import mage.game.events.GameEvent;
 import mage.game.events.GameEvent.EventType;
@@ -22,9 +23,8 @@ import mage.players.Player;
  */
 public class EonHub extends CardImpl {
  
-    public EonHub(UUID ownerId) {
-        super(ownerId, 120, "Eon Hub", Rarity.RARE, new CardType[]{CardType.ARTIFACT}, "{5}");
-        this.expansionSetCode = "5DN";
+    public EonHub(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.ARTIFACT},"{5}");
         
         // Players skip their upkeep steps.
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new SkipUpkeepStepEffect()));

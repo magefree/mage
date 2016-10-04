@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.magic2012;
+package mage.cards.g;
 
 import java.util.UUID;
 import mage.abilities.Ability;
@@ -35,9 +35,9 @@ import mage.abilities.dynamicvalue.common.PermanentsOnBattlefieldCount;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.CreateTokenEffect;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Outcome;
-import mage.constants.Rarity;
 import mage.filter.common.FilterControlledCreaturePermanent;
 import mage.filter.common.FilterControlledLandPermanent;
 import mage.filter.common.FilterControlledPermanent;
@@ -55,9 +55,8 @@ public class GarrukPrimalHunter extends CardImpl {
 
     private static final FilterControlledPermanent filter = new FilterControlledLandPermanent();
 
-    public GarrukPrimalHunter(UUID ownerId) {
-        super(ownerId, 174, "Garruk, Primal Hunter", Rarity.MYTHIC, new CardType[]{CardType.PLANESWALKER}, "{2}{G}{G}{G}");
-        this.expansionSetCode = "M12";
+    public GarrukPrimalHunter(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.PLANESWALKER},"{2}{G}{G}{G}");
         this.subtype.add("Garruk");
 
         this.addAbility(new PlanswalkerEntersWithLoyalityCountersAbility(3));

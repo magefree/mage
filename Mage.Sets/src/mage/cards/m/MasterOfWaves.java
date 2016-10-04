@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.theros;
+package mage.cards.m;
 
 import java.util.UUID;
 import mage.MageInt;
@@ -38,10 +38,10 @@ import mage.abilities.effects.common.CreateTokenEffect;
 import mage.abilities.effects.common.continuous.BoostControlledEffect;
 import mage.abilities.keyword.ProtectionAbility;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.ColoredManaSymbol;
 import mage.constants.Duration;
-import mage.constants.Rarity;
 import mage.constants.Zone;
 import mage.filter.FilterCard;
 import mage.filter.common.FilterCreaturePermanent;
@@ -62,9 +62,8 @@ public class MasterOfWaves extends CardImpl {
         filterBoost.add(new SubtypePredicate("Elemental"));
     }
 
-    public MasterOfWaves(UUID ownerId) {
-        super(ownerId, 53, "Master of Waves", Rarity.MYTHIC, new CardType[]{CardType.CREATURE}, "{3}{U}");
-        this.expansionSetCode = "THS";
+    public MasterOfWaves(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{3}{U}");
         this.subtype.add("Merfolk");
         this.subtype.add("Wizard");
 

@@ -25,16 +25,16 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.avacynrestored;
+package mage.cards.t;
 
 import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.abilities.TriggeredAbility;
 import mage.abilities.common.BeginningOfUpkeepTriggeredAbility;
 import mage.abilities.condition.common.ControlsCreatureGreatestPowerCondition;
 import mage.abilities.decorator.ConditionalTriggeredAbility;
 import mage.abilities.effects.common.discard.DiscardTargetEffect;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.TargetController;
 import mage.target.Target;
 import mage.target.common.TargetOpponent;
@@ -49,9 +49,8 @@ public class TriumphOfCruelty extends CardImpl {
 
     private static final String ruleText = "target opponent discards a card if you control the creature with the greatest power or tied for the greatest power";
 
-    public TriumphOfCruelty(UUID ownerId) {
-        super(ownerId, 122, "Triumph of Cruelty", Rarity.UNCOMMON, new CardType[]{CardType.ENCHANTMENT}, "{2}{B}");
-        this.expansionSetCode = "AVR";
+    public TriumphOfCruelty(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.ENCHANTMENT},"{2}{B}");
 
 
         // At the beginning of your upkeep, target opponent discards a card if you control the creature with the greatest power or tied for the greatest power.

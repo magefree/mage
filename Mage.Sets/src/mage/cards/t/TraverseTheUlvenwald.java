@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.shadowsoverinnistrad;
+package mage.cards.t;
 
 import java.util.UUID;
 import mage.abilities.condition.InvertCondition;
@@ -33,8 +33,8 @@ import mage.abilities.condition.common.DeliriumCondition;
 import mage.abilities.decorator.ConditionalOneShotEffect;
 import mage.abilities.effects.common.search.SearchLibraryPutInHandEffect;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.filter.FilterCard;
 import mage.filter.common.FilterBasicLandCard;
 import mage.filter.predicate.Predicates;
@@ -53,9 +53,8 @@ public class TraverseTheUlvenwald extends CardImpl {
         filter.add(Predicates.or(new CardTypePredicate(CardType.CREATURE), new CardTypePredicate(CardType.LAND)));
     }
 
-    public TraverseTheUlvenwald(UUID ownerId) {
-        super(ownerId, 234, "Traverse the Ulvenwald", Rarity.RARE, new CardType[]{CardType.SORCERY}, "{G}");
-        this.expansionSetCode = "SOI";
+    public TraverseTheUlvenwald(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{G}");
 
         // Search your library for a basic land card, reveal it, put it into your hand, then shuffle your library.
         this.getSpellAbility().addEffect(new ConditionalOneShotEffect(

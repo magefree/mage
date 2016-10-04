@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.fifthedition;
+package mage.cards.s;
 
 import java.util.HashMap;
 import java.util.LinkedHashSet;
@@ -38,11 +38,11 @@ import mage.abilities.common.BeginningOfDrawTriggeredAbility;
 import mage.abilities.effects.OneShotEffect;
 import mage.cards.Card;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.cards.Cards;
 import mage.cards.CardsImpl;
 import mage.constants.CardType;
 import mage.constants.Outcome;
-import mage.constants.Rarity;
 import mage.constants.TargetController;
 import mage.constants.WatcherScope;
 import mage.filter.FilterCard;
@@ -59,9 +59,8 @@ import mage.watchers.Watcher;
  */
 public class SylvanLibrary extends CardImpl {
 
-    public SylvanLibrary(UUID ownerId) {
-        super(ownerId, 191, "Sylvan Library", Rarity.RARE, new CardType[]{CardType.ENCHANTMENT}, "{1}{G}");
-        this.expansionSetCode = "5ED";
+    public SylvanLibrary(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.ENCHANTMENT},"{1}{G}");
 
         // At the beginning of your draw step, you may draw two additional cards. If you do, choose two cards in your hand drawn this turn. For each of those cards, pay 4 life or put the card on top of your library.
         this.addAbility(new BeginningOfDrawTriggeredAbility(new SylvanLibraryEffect(), TargetController.YOU, true),

@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.onslaught;
+package mage.cards.w;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -34,11 +34,11 @@ import mage.MageObject;
 import mage.abilities.Ability;
 import mage.abilities.effects.OneShotEffect;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.cards.Cards;
 import mage.cards.CardsImpl;
 import mage.constants.CardType;
 import mage.constants.Outcome;
-import mage.constants.Rarity;
 import mage.constants.Zone;
 import mage.filter.common.FilterCreatureCard;
 import mage.game.Game;
@@ -51,9 +51,8 @@ import mage.target.common.TargetCardInLibrary;
  */
 public class WeirdHarvest extends CardImpl {
 
-    public WeirdHarvest(UUID ownerId) {
-        super(ownerId, 299, "Weird Harvest", Rarity.RARE, new CardType[]{CardType.SORCERY}, "{X}{G}{G}");
-        this.expansionSetCode = "ONS";
+    public WeirdHarvest(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{X}{G}{G}");
 
         // Each player may search his or her library for up to X creature cards, reveal those cards, and put them into his or her hand. Then each player who searched his or her library this way shuffles it.
         getSpellAbility().addEffect(new WeirdHarvestEffect());

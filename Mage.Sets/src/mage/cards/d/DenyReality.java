@@ -26,14 +26,14 @@
  *  or implied, of BetaSteward_at_googlemail.com.
  */
 
-package mage.sets.alarareborn;
+package mage.cards.d;
 
 import java.util.UUID;
 import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.abilities.effects.common.ReturnToHandTargetEffect;
 import mage.abilities.keyword.CascadeAbility;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.target.TargetPermanent;
 
 /**
@@ -42,9 +42,8 @@ import mage.target.TargetPermanent;
  */
 public class DenyReality extends CardImpl {
 
-    public DenyReality (UUID ownerId) {
-        super(ownerId, 19, "Deny Reality", Rarity.COMMON, new CardType[]{CardType.SORCERY}, "{3}{U}{B}");
-        this.expansionSetCode = "ARB";
+    public DenyReality (UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{3}{U}{B}");
 
         
         this.getSpellAbility().addTarget(new TargetPermanent());

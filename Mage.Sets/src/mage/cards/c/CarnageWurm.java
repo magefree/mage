@@ -25,15 +25,15 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.magic2012;
+package mage.cards.c;
 
 import java.util.UUID;
 import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.MageInt;
 import mage.abilities.keyword.BloodthirstAbility;
 import mage.abilities.keyword.TrampleAbility;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 
 /**
  *
@@ -41,9 +41,8 @@ import mage.cards.CardImpl;
  */
 public class CarnageWurm extends CardImpl {
 
-    public CarnageWurm(UUID ownerId) {
-        super(ownerId, 168, "Carnage Wurm", Rarity.UNCOMMON, new CardType[]{CardType.CREATURE}, "{6}{G}");
-        this.expansionSetCode = "M12";
+    public CarnageWurm(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{6}{G}");
         this.subtype.add("Wurm");
 
         this.power = new MageInt(6);

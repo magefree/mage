@@ -26,7 +26,7 @@
  *  or implied, of BetaSteward_at_googlemail.com.
  */
 
-package mage.sets.championsofkamigawa;
+package mage.cards.a;
 
 import java.util.UUID;
 
@@ -39,6 +39,7 @@ import mage.abilities.costs.mana.ColoredManaCost;
 import mage.abilities.effects.common.continuous.GainAbilityAllEffect;
 import mage.abilities.keyword.FirstStrikeAbility;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.filter.common.FilterAttackingCreature;
 
 
@@ -48,9 +49,8 @@ import mage.filter.common.FilterAttackingCreature;
  */
 public class AkkiCoalflinger extends CardImpl {
 
-    public AkkiCoalflinger (UUID ownerId) {
-        super(ownerId, 152, "Akki Coalflinger", Rarity.UNCOMMON, new CardType[]{CardType.CREATURE}, "{1}{R}{R}");
-        this.expansionSetCode = "CHK";
+    public AkkiCoalflinger (UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{1}{R}{R}");
         this.subtype.add("Goblin");
         this.subtype.add("Shaman");
 

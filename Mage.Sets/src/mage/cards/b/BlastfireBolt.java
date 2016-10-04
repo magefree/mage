@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.magic2015;
+package mage.cards.b;
 
 import java.util.ArrayList;
 import java.util.UUID;
@@ -33,9 +33,9 @@ import mage.abilities.Ability;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.DamageTargetEffect;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Outcome;
-import mage.constants.Rarity;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.players.Player;
@@ -47,9 +47,8 @@ import mage.target.common.TargetCreaturePermanent;
  */
 public class BlastfireBolt extends CardImpl {
 
-    public BlastfireBolt(UUID ownerId) {
-        super(ownerId, 130, "Blastfire Bolt", Rarity.COMMON, new CardType[]{CardType.INSTANT}, "{5}{R}");
-        this.expansionSetCode = "M15";
+    public BlastfireBolt(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.INSTANT},"{5}{R}");
 
 
         // Blastfire Bolt deals 5 damage to target creature.  Destroy all Equipment attached to that creature.

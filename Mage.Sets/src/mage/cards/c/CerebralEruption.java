@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.scarsofmirrodin;
+package mage.cards.c;
 
 import java.util.UUID;
 import mage.MageObject;
@@ -33,11 +33,11 @@ import mage.abilities.Ability;
 import mage.abilities.effects.OneShotEffect;
 import mage.cards.Card;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.cards.Cards;
 import mage.cards.CardsImpl;
 import mage.constants.CardType;
 import mage.constants.Outcome;
-import mage.constants.Rarity;
 import mage.constants.Zone;
 import mage.filter.FilterPermanent;
 import mage.filter.common.FilterCreaturePermanent;
@@ -52,9 +52,8 @@ import mage.target.common.TargetOpponent;
  */
 public class CerebralEruption extends CardImpl {
 
-    public CerebralEruption(UUID ownerId) {
-        super(ownerId, 86, "Cerebral Eruption", Rarity.RARE, new CardType[]{CardType.SORCERY}, "{2}{R}{R}");
-        this.expansionSetCode = "SOM";
+    public CerebralEruption(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{2}{R}{R}");
 
         // Target opponent reveals the top card of his or her library. Cerebral Eruption deals damage equal to the revealed card's converted mana cost to that player and each creature he or she controls. If a land card is revealed this way, return Cerebral Eruption to its owner's hand.
         this.getSpellAbility().addTarget(new TargetOpponent());

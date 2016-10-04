@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.returntoravnica;
+package mage.cards.s;
 
 import java.util.UUID;
 import mage.abilities.Ability;
@@ -34,8 +34,8 @@ import mage.abilities.costs.mana.ManaCosts;
 import mage.abilities.costs.mana.ManaCostsImpl;
 import mage.abilities.effects.common.combat.CantAttackYouUnlessPayManaAllEffect;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.constants.Zone;
 import mage.filter.common.FilterEnchantmentPermanent;
 import mage.game.Game;
@@ -47,9 +47,8 @@ import mage.game.events.GameEvent;
  */
 public class SphereOfSafety extends CardImpl {
 
-    public SphereOfSafety(UUID ownerId) {
-        super(ownerId, 24, "Sphere of Safety", Rarity.UNCOMMON, new CardType[]{CardType.ENCHANTMENT}, "{4}{W}");
-        this.expansionSetCode = "RTR";
+    public SphereOfSafety(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.ENCHANTMENT},"{4}{W}");
 
         // Creatures can't attack you or a planeswalker you control unless their controller pays {X} for each of those creatures, where X is the number of enchantments you control.
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new SphereOfSafetyPayManaToAttackAllEffect()));

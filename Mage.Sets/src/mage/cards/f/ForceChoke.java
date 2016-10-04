@@ -25,15 +25,15 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.starwars;
+package mage.cards.f;
 
 import java.util.UUID;
 import mage.abilities.effects.common.CounterTargetEffect;
 import mage.abilities.effects.common.LoseLifeTargetControllerEffect;
 import mage.abilities.effects.keyword.ScryEffect;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.target.TargetSpell;
 
 /**
@@ -42,9 +42,8 @@ import mage.target.TargetSpell;
  */
 public class ForceChoke extends CardImpl {
 
-    public ForceChoke(UUID ownerId) {
-        super(ownerId, 166, "Force Choke", Rarity.COMMON, new CardType[]{CardType.INSTANT}, "{3}{U}{B}");
-        this.expansionSetCode = "SWS";
+    public ForceChoke(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.INSTANT},"{3}{U}{B}");
 
         // Counter target spell.
         this.getSpellAbility().addTarget(new TargetSpell());

@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.invasion;
+package mage.cards.s;
 
 import java.util.UUID;
 import mage.MageInt;
@@ -33,8 +33,8 @@ import mage.ObjectColor;
 import mage.abilities.keyword.ProtectionAbility;
 import mage.abilities.keyword.TrampleAbility;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.filter.FilterCard;
 import mage.filter.predicate.Predicates;
 import mage.filter.predicate.mageobject.ColorPredicate;
@@ -52,9 +52,8 @@ public class SabertoothNishoba extends CardImpl {
         filter.add(Predicates.or(new ColorPredicate(ObjectColor.BLUE), new ColorPredicate(ObjectColor.RED)));
     }
 
-    public SabertoothNishoba(UUID ownerId) {
-        super(ownerId, 268, "Sabertooth Nishoba", Rarity.RARE, new CardType[]{CardType.CREATURE}, "{4}{G}{W}");
-        this.expansionSetCode = "INV";
+    public SabertoothNishoba(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{4}{G}{W}");
         this.subtype.add("Cat");
         this.subtype.add("Beast");
         this.subtype.add("Warrior");

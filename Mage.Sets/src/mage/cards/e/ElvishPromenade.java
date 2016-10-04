@@ -25,13 +25,13 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.lorwyn;
+package mage.cards.e;
 
 import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.abilities.dynamicvalue.common.PermanentsOnBattlefieldCount;
 import mage.abilities.effects.common.CreateTokenEffect;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.filter.common.FilterControlledPermanent;
 import mage.filter.predicate.mageobject.SubtypePredicate;
 import mage.game.permanent.token.ElfToken;
@@ -50,9 +50,8 @@ public class ElvishPromenade extends CardImpl {
         filter.add(new SubtypePredicate("Elf"));
     }
 
-    public ElvishPromenade(UUID ownerId) {
-        super(ownerId, 208, "Elvish Promenade", Rarity.UNCOMMON, new CardType[]{CardType.TRIBAL, CardType.SORCERY}, "{3}{G}");
-        this.expansionSetCode = "LRW";
+    public ElvishPromenade(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.TRIBAL,CardType.SORCERY},"{3}{G}");
         this.subtype.add("Elf");
 
         this.getSpellAbility().addEffect(new CreateTokenEffect(new ElfToken(), new PermanentsOnBattlefieldCount(filter)));

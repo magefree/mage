@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.battleforzendikar;
+package mage.cards.b;
 
 import java.util.UUID;
 import mage.MageInt;
@@ -33,11 +33,11 @@ import mage.abilities.Ability;
 import mage.abilities.common.AttacksTriggeredAbility;
 import mage.abilities.effects.OneShotEffect;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.cards.Cards;
 import mage.cards.CardsImpl;
 import mage.constants.CardType;
 import mage.constants.Outcome;
-import mage.constants.Rarity;
 import mage.constants.SetTargetPointer;
 import mage.constants.Zone;
 import mage.game.Game;
@@ -51,9 +51,8 @@ import mage.target.common.TargetControlledPermanent;
  */
 public class BaneOfBalaGed extends CardImpl {
 
-    public BaneOfBalaGed(UUID ownerId) {
-        super(ownerId, 1, "Bane of Bala Ged", Rarity.UNCOMMON, new CardType[]{CardType.CREATURE}, "{7}");
-        this.expansionSetCode = "BFZ";
+    public BaneOfBalaGed(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{7}");
         this.subtype.add("Eldrazi");
         this.power = new MageInt(7);
         this.toughness = new MageInt(5);

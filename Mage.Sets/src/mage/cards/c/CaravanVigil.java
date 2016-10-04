@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.innistrad;
+package mage.cards.c;
 
 import java.util.UUID;
 import mage.MageObject;
@@ -34,11 +34,11 @@ import mage.abilities.condition.common.MorbidCondition;
 import mage.abilities.effects.OneShotEffect;
 import mage.cards.Card;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.cards.Cards;
 import mage.cards.CardsImpl;
 import mage.constants.CardType;
 import mage.constants.Outcome;
-import mage.constants.Rarity;
 import mage.constants.Zone;
 import mage.filter.common.FilterBasicLandCard;
 import mage.game.Game;
@@ -51,9 +51,8 @@ import mage.target.common.TargetCardInLibrary;
  */
 public class CaravanVigil extends CardImpl {
 
-    public CaravanVigil(UUID ownerId) {
-        super(ownerId, 173, "Caravan Vigil", Rarity.COMMON, new CardType[]{CardType.SORCERY}, "{G}");
-        this.expansionSetCode = "ISD";
+    public CaravanVigil(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{G}");
 
         // Search your library for a basic land card, reveal it, put it into your hand, then shuffle your library.
         // Morbid - You may put that card onto the battlefield instead of putting it into your hand if a creature died this turn.

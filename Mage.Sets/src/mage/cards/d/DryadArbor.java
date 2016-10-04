@@ -25,14 +25,14 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.futuresight;
+package mage.cards.d;
 
 import java.util.UUID;
 import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.MageInt;
 import mage.abilities.mana.GreenManaAbility;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 
 /**
  *
@@ -40,9 +40,8 @@ import mage.cards.CardImpl;
  */
 public class DryadArbor extends CardImpl {
 
-    public DryadArbor(UUID ownerId) {
-        super(ownerId, 174, "Dryad Arbor", Rarity.UNCOMMON, new CardType[]{CardType.LAND, CardType.CREATURE}, "");
-        this.expansionSetCode = "FUT";
+    public DryadArbor(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.LAND,CardType.CREATURE},"");
         this.subtype.add("Forest");
         this.subtype.add("Dryad");
 

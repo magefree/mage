@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.alarareborn;
+package mage.cards.m;
 
 import java.util.UUID;
 import mage.abilities.Ability;
@@ -34,9 +34,9 @@ import mage.abilities.costs.mana.GenericManaCost;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.keyword.EquipAbility;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Outcome;
-import mage.constants.Rarity;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.target.common.TargetControlledCreaturePermanent;
@@ -47,9 +47,8 @@ import mage.target.common.TargetControlledCreaturePermanent;
  */
 public class MageSlayer extends CardImpl {
 
-    public MageSlayer(UUID ownerId) {
-        super(ownerId, 57, "Mage Slayer", Rarity.UNCOMMON, new CardType[]{CardType.ARTIFACT}, "{1}{R}{G}");
-        this.expansionSetCode = "ARB";
+    public MageSlayer(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.ARTIFACT},"{1}{R}{G}");
         this.subtype.add("Equipment");
 
 

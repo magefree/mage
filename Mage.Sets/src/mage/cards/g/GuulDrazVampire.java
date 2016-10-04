@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.zendikar;
+package mage.cards.g;
 
 import java.util.UUID;
 import mage.MageInt;
@@ -38,9 +38,9 @@ import mage.abilities.effects.common.continuous.BoostSourceEffect;
 import mage.abilities.effects.common.continuous.GainAbilitySourceEffect;
 import mage.abilities.keyword.IntimidateAbility;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Duration;
-import mage.constants.Rarity;
 import mage.constants.Zone;
 
 /**
@@ -52,9 +52,8 @@ public class GuulDrazVampire extends CardImpl {
     private static final String rule1 = "As long as an opponent has 10 or less life, {this} gets +2/+1";
     private static final String rule2 = "and has intimidate. <i>(It can't be blocked except by artifact creatures and/or creatures that share a color with it.)</i>";
 
-    public GuulDrazVampire(UUID ownerId) {
-        super(ownerId, 93, "Guul Draz Vampire", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{B}");
-        this.expansionSetCode = "ZEN";
+    public GuulDrazVampire(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{B}");
         this.subtype.add("Vampire");
         this.subtype.add("Rogue");
 

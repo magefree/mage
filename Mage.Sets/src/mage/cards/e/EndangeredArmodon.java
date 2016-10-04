@@ -25,15 +25,15 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.tempestremastered;
+package mage.cards.e;
 
 import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.common.ControlsPermanentsControllerTriggeredAbility;
 import mage.abilities.effects.common.SacrificeSourceEffect;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.filter.Filter;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.filter.predicate.mageobject.ToughnessPredicate;
@@ -50,9 +50,8 @@ public class EndangeredArmodon extends CardImpl {
         filter.add(new ToughnessPredicate(Filter.ComparisonType.LessThan, 3));
     }
 
-    public EndangeredArmodon(UUID ownerId) {
-        super(ownerId, 171, "Endangered Armodon", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{2}{G}{G}");
-        this.expansionSetCode = "TPR";
+    public EndangeredArmodon(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{2}{G}{G}");
         this.subtype.add("Elephant");
         this.power = new MageInt(4);
         this.toughness = new MageInt(5);

@@ -25,14 +25,14 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.kaladesh;
+package mage.cards.c;
 
 import java.util.UUID;
 import mage.abilities.costs.common.DiscardTargetCost;
 import mage.abilities.effects.common.DrawCardSourceControllerEffect;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.filter.FilterCard;
 import mage.target.common.TargetCardInHand;
 
@@ -42,9 +42,8 @@ import mage.target.common.TargetCardInHand;
  */
 public class CatharticReunion extends CardImpl {
 
-    public CatharticReunion(UUID ownerId) {
-        super(ownerId, 109, "Cathartic Reunion", Rarity.COMMON, new CardType[]{CardType.SORCERY}, "{1}{R}");
-        this.expansionSetCode = "KLD";
+    public CatharticReunion(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{1}{R}");
 
         // As an additional cost to cast Cathartic Reunion, discard two cards.
         this.getSpellAbility().addCost(new DiscardTargetCost(new TargetCardInHand(2, new FilterCard("two cards"))));

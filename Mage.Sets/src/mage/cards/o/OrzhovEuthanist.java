@@ -25,16 +25,16 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.guildpact;
+package mage.cards.o;
 
 import java.util.UUID;
 import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.effects.common.DestroyTargetEffect;
 import mage.abilities.keyword.HauntAbility;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.filter.predicate.permanent.WasDealtDamageThisTurnPredicate;
 import mage.target.Target;
@@ -51,9 +51,8 @@ public class OrzhovEuthanist extends CardImpl {
         filter.add(new WasDealtDamageThisTurnPredicate());
     }
 
-    public OrzhovEuthanist(UUID ownerId) {
-        super(ownerId, 54, "Orzhov Euthanist", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{2}{B}");
-        this.expansionSetCode = "GPT";
+    public OrzhovEuthanist(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{2}{B}");
         this.subtype.add("Human");
         this.subtype.add("Assassin");
 

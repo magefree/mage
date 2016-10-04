@@ -25,15 +25,15 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.portalthreekingdoms;
+package mage.cards.z;
 
 import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.common.DiesTriggeredAbility;
 import mage.abilities.effects.common.ReturnToHandSourceEffect;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.Rarity;
 
 /**
  *
@@ -41,9 +41,8 @@ import mage.constants.Rarity;
  */
 public class ZodiacDragon extends CardImpl {
 
-    public ZodiacDragon(UUID ownerId) {
-        super(ownerId, 131, "Zodiac Dragon", Rarity.RARE, new CardType[]{CardType.CREATURE}, "{7}{R}{R}");
-        this.expansionSetCode = "PTK";
+    public ZodiacDragon(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{7}{R}{R}");
         this.subtype.add("Dragon");
         this.power = new MageInt(8);
         this.toughness = new MageInt(8);

@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.timespiral;
+package mage.cards.h;
 
 import java.util.UUID;
 import mage.abilities.Ability;
@@ -34,9 +34,9 @@ import mage.abilities.effects.OneShotEffect;
 import mage.abilities.keyword.SuspendAbility;
 import mage.cards.Card;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Outcome;
-import mage.constants.Rarity;
 import mage.constants.Zone;
 import mage.filter.FilterCard;
 import mage.filter.predicate.Predicates;
@@ -53,9 +53,8 @@ import mage.target.common.TargetCardInHand;
  */
 public class Hypergenesis extends CardImpl {
 
-    public Hypergenesis(UUID ownerId) {
-        super(ownerId, 201, "Hypergenesis", Rarity.RARE, new CardType[]{CardType.SORCERY}, "");
-        this.expansionSetCode = "TSP";
+    public Hypergenesis(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"");
         this.color.setGreen(true);
 
         // Suspend 3-{1}{G}{G}

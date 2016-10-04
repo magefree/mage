@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.innistrad;
+package mage.cards.h;
 
 import java.util.Set;
 import java.util.UUID;
@@ -35,9 +35,9 @@ import mage.abilities.costs.mana.ManaCostsImpl;
 import mage.abilities.effects.OneShotEffect;
 import mage.cards.Card;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Outcome;
-import mage.constants.Rarity;
 import mage.constants.Zone;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
@@ -50,9 +50,8 @@ import mage.target.common.TargetCreatureOrPlayer;
  */
 public class HereticsPunishment extends CardImpl {
 
-    public HereticsPunishment(UUID ownerId) {
-        super(ownerId, 147, "Heretic's Punishment", Rarity.RARE, new CardType[]{CardType.ENCHANTMENT}, "{4}{R}");
-        this.expansionSetCode = "ISD";
+    public HereticsPunishment(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.ENCHANTMENT},"{4}{R}");
 
         // {3}{R}: Choose target creature or player, then put the top three cards of your library into your graveyard. Heretic's Punishment deals damage to that creature or player equal to the highest converted mana cost among those cards.
         Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new HereticsPunishmentEffect(), new ManaCostsImpl("{3}{R}"));

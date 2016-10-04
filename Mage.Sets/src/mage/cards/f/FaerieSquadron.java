@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.invasion;
+package mage.cards.f;
 
 
 import java.util.UUID;
@@ -38,9 +38,9 @@ import mage.abilities.effects.common.counter.AddCountersSourceEffect;
 import mage.abilities.keyword.FlyingAbility;
 import mage.abilities.keyword.KickerAbility;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Duration;
-import mage.constants.Rarity;
 import mage.counters.CounterType;
 
 /**
@@ -50,9 +50,8 @@ import mage.counters.CounterType;
  */
 public class FaerieSquadron extends CardImpl {
 
-    public FaerieSquadron(UUID ownerId) {
-        super(ownerId, 58, "Faerie Squadron", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{U}");
-        this.expansionSetCode = "INV";
+    public FaerieSquadron(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{U}");
         this.subtype.add("Faerie");
         this.power = new MageInt(1);
         this.toughness = new MageInt(1);

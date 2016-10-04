@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.journeyintonyx;
+package mage.cards.b;
 
 import java.util.UUID;
 import mage.MageInt;
@@ -36,8 +36,8 @@ import mage.abilities.effects.Effect;
 import mage.abilities.effects.common.CreateDelayedTriggeredAbilityEffect;
 import mage.abilities.effects.common.DestroyAllEffect;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.filter.FilterPermanent;
 
 /**
@@ -46,9 +46,8 @@ import mage.filter.FilterPermanent;
  */
 public class BearerOfTheHeavens extends CardImpl {
 
-    public BearerOfTheHeavens(UUID ownerId) {
-        super(ownerId, 89, "Bearer of the Heavens", Rarity.RARE, new CardType[]{CardType.CREATURE}, "{7}{R}");
-        this.expansionSetCode = "JOU";
+    public BearerOfTheHeavens(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{7}{R}");
         this.subtype.add("Giant");
 
         this.power = new MageInt(10);

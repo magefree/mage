@@ -26,11 +26,10 @@
  *  or implied, of BetaSteward_at_googlemail.com.
  */
 
-package mage.sets.championsofkamigawa;
+package mage.cards.m;
 
 import java.util.UUID;
 import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.constants.Zone;
 import mage.MageInt;
 import mage.abilities.Ability;
@@ -40,6 +39,7 @@ import mage.abilities.costs.mana.GenericManaCost;
 import mage.abilities.effects.common.CreateTokenEffect;
 import mage.abilities.keyword.FlyingAbility;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.filter.common.FilterControlledLandPermanent;
 import mage.filter.common.FilterControlledPermanent;
 import mage.game.permanent.token.Token;
@@ -52,9 +52,8 @@ public class MelokuTheCloudedMirror extends CardImpl {
 
     private static final FilterControlledPermanent filter = new FilterControlledLandPermanent("land");
 
-    public MelokuTheCloudedMirror(UUID ownerId) {
-        super(ownerId, 74, "Meloku the Clouded Mirror", Rarity.RARE, new CardType[]{CardType.CREATURE}, "{4}{U}");
-        this.expansionSetCode = "CHK";
+    public MelokuTheCloudedMirror(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{4}{U}");
         this.supertype.add("Legendary");
         this.subtype.add("Moonfolk");
         this.subtype.add("Wizard");

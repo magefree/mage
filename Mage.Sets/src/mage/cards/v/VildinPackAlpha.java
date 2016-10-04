@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.shadowsoverinnistrad;
+package mage.cards.v;
 
 import java.util.UUID;
 import mage.MageInt;
@@ -39,9 +39,9 @@ import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.TransformSourceEffect;
 import mage.abilities.keyword.TransformAbility;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Outcome;
-import mage.constants.Rarity;
 import mage.constants.SetTargetPointer;
 import mage.constants.TargetController;
 import mage.constants.Zone;
@@ -56,9 +56,8 @@ import mage.players.Player;
  */
 public class VildinPackAlpha extends CardImpl {
 
-    public VildinPackAlpha(UUID ownerId) {
-        super(ownerId, 159, "Vildin-Pack Alpha", Rarity.RARE, new CardType[]{CardType.CREATURE}, "");
-        this.expansionSetCode = "SOI";
+    public VildinPackAlpha(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"");
         this.subtype.add("Werewolf");
         this.power = new MageInt(4);
         this.toughness = new MageInt(3);

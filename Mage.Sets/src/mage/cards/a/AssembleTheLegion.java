@@ -25,7 +25,7 @@
 *  authors and should not be interpreted as representing official policies, either expressed
 *  or implied, of BetaSteward_at_googlemail.com.
 */
-package mage.sets.gatecrash;
+package mage.cards.a;
 
 import java.util.UUID;
 import mage.abilities.Ability;
@@ -34,8 +34,8 @@ import mage.abilities.dynamicvalue.common.CountersSourceCount;
 import mage.abilities.effects.common.CreateTokenEffect;
 import mage.abilities.effects.common.counter.AddCountersSourceEffect;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.constants.TargetController;
 import mage.counters.CounterType;
 import mage.game.permanent.token.SoldierTokenWithHaste;
@@ -46,9 +46,8 @@ import mage.game.permanent.token.SoldierTokenWithHaste;
 */
 public class AssembleTheLegion extends CardImpl {
 
-    public AssembleTheLegion(UUID ownerId) {
-        super(ownerId, 142, "Assemble the Legion", Rarity.RARE, new CardType[]{CardType.ENCHANTMENT}, "{3}{R}{W}");
-        this.expansionSetCode = "GTC";
+    public AssembleTheLegion(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.ENCHANTMENT},"{3}{R}{W}");
 
         // At the beginning of your upkeep, put a muster counter on Assemble the Legion. Then put a 1/1 red and white Soldier creature token with haste onto the battlefield for each muster counter on Assemble the Legion.
         Ability ability = new BeginningOfUpkeepTriggeredAbility(new AddCountersSourceEffect(CounterType.MUSTER.createInstance()), TargetController.YOU, false);

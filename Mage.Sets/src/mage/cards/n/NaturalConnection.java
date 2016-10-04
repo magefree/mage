@@ -25,13 +25,13 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.battleforzendikar;
+package mage.cards.n;
 
 import java.util.UUID;
 import mage.abilities.effects.common.search.SearchLibraryPutInPlayEffect;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.filter.common.FilterBasicLandCard;
 import mage.target.common.TargetCardInLibrary;
 
@@ -41,9 +41,8 @@ import mage.target.common.TargetCardInLibrary;
  */
 public class NaturalConnection extends CardImpl {
 
-    public NaturalConnection(UUID ownerId) {
-        super(ownerId, 179, "Natural Connection", Rarity.COMMON, new CardType[]{CardType.INSTANT}, "{2}{G}");
-        this.expansionSetCode = "BFZ";
+    public NaturalConnection(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.INSTANT},"{2}{G}");
 
         // Search your library for a basic land card, put it onto the battlefield tapped, then shuffle your library.
         TargetCardInLibrary target = new TargetCardInLibrary(new FilterBasicLandCard());

@@ -26,7 +26,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.gatecrash;
+package mage.cards.p;
 
 import java.util.UUID;
 import mage.MageInt;
@@ -39,8 +39,8 @@ import mage.abilities.effects.Effect;
 import mage.abilities.effects.common.DrawCardSourceControllerEffect;
 import mage.abilities.effects.common.counter.AddCountersSourceEffect;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.counters.CounterType;
 import mage.filter.common.FilterControlledCreaturePermanent;
 import mage.game.Game;
@@ -52,9 +52,8 @@ import mage.game.permanent.Permanent;
  */
 public class PrimeSpeakerZegana extends CardImpl {
 
-    public PrimeSpeakerZegana(UUID ownerId) {
-        super(ownerId, 188, "Prime Speaker Zegana", Rarity.MYTHIC, new CardType[]{CardType.CREATURE}, "{2}{G}{G}{U}{U}");
-        this.expansionSetCode = "GTC";
+    public PrimeSpeakerZegana(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{2}{G}{G}{U}{U}");
         this.subtype.add("Merfolk");
         this.subtype.add("Wizard");
         this.supertype.add("Legendary");

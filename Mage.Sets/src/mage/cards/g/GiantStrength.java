@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.tempest;
+package mage.cards.g;
 
 import java.util.UUID;
 import mage.abilities.Ability;
@@ -34,6 +34,7 @@ import mage.abilities.effects.common.AttachEffect;
 import mage.abilities.effects.common.continuous.BoostEnchantedEffect;
 import mage.abilities.keyword.EnchantAbility;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.*;
 import mage.target.TargetPermanent;
 import mage.target.common.TargetCreaturePermanent;
@@ -43,9 +44,8 @@ import mage.target.common.TargetCreaturePermanent;
  */
 public class GiantStrength extends CardImpl {
 
-    public GiantStrength(UUID ownerId) {
-        super(ownerId, 178, "Giant Strength", Rarity.COMMON, new CardType[]{CardType.ENCHANTMENT}, "{R}{R}");
-        this.expansionSetCode = "TMP";
+    public GiantStrength(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.ENCHANTMENT},"{R}{R}");
         this.subtype.add("Aura");
 
         // Enchant creature

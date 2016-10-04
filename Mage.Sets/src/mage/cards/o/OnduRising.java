@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.battleforzendikar;
+package mage.cards.o;
 
 import java.util.UUID;
 import mage.abilities.DelayedTriggeredAbility;
@@ -35,9 +35,9 @@ import mage.abilities.effects.common.continuous.GainAbilityTargetEffect;
 import mage.abilities.keyword.AwakenAbility;
 import mage.abilities.keyword.LifelinkAbility;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Duration;
-import mage.constants.Rarity;
 import mage.game.Game;
 import mage.game.events.GameEvent;
 import mage.game.events.GameEvent.EventType;
@@ -50,9 +50,8 @@ import mage.target.targetpointer.FixedTarget;
  */
 public class OnduRising extends CardImpl {
 
-    public OnduRising(UUID ownerId) {
-        super(ownerId, 41, "Ondu Rising", Rarity.UNCOMMON, new CardType[]{CardType.SORCERY}, "{1}{W}");
-        this.expansionSetCode = "BFZ";
+    public OnduRising(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{1}{W}");
 
         // Whenever a creature attacks this turn, it gains lifelink until end of turn.
         this.getSpellAbility().addEffect(new CreateDelayedTriggeredAbilityEffect(new OnduRisingTriggeredAbility()));

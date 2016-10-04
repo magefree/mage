@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.theros;
+package mage.cards.p;
 
 import java.util.HashSet;
 import java.util.Set;
@@ -36,9 +36,9 @@ import mage.abilities.common.BecomesMonstrousSourceTriggeredAbility;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.keyword.MonstrosityAbility;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Outcome;
-import mage.constants.Rarity;
 import mage.constants.TargetController;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.filter.predicate.permanent.ControllerPredicate;
@@ -75,9 +75,8 @@ public class PolukranosWorldEater extends CardImpl {
         filter.add(new ControllerPredicate(TargetController.OPPONENT));
     }
 
-    public PolukranosWorldEater(UUID ownerId) {
-        super(ownerId, 172, "Polukranos, World Eater", Rarity.MYTHIC, new CardType[]{CardType.CREATURE}, "{2}{G}{G}");
-        this.expansionSetCode = "THS";
+    public PolukranosWorldEater(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{2}{G}{G}");
         this.supertype.add("Legendary");
         this.subtype.add("Hydra");
 

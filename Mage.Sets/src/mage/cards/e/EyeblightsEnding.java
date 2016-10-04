@@ -25,12 +25,12 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.lorwyn;
+package mage.cards.e;
 
 import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.abilities.effects.common.DestroyTargetEffect;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.filter.predicate.Predicates;
 import mage.filter.predicate.mageobject.SubtypePredicate;
@@ -50,9 +50,8 @@ public class EyeblightsEnding extends CardImpl {
         filter.add(Predicates.not(new SubtypePredicate("Elf")));
     }
 
-    public EyeblightsEnding(UUID ownerId) {
-        super(ownerId, 110, "Eyeblight's Ending", Rarity.COMMON, new CardType[]{CardType.TRIBAL, CardType.INSTANT}, "{2}{B}");
-        this.expansionSetCode = "LRW";
+    public EyeblightsEnding(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.TRIBAL,CardType.INSTANT},"{2}{B}");
         this.subtype.add("Elf");
 
         this.getSpellAbility().addEffect(new DestroyTargetEffect());

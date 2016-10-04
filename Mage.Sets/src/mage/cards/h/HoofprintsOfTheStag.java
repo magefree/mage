@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.lorwyn;
+package mage.cards.h;
 
 import java.util.UUID;
 import mage.MageInt;
@@ -39,8 +39,8 @@ import mage.abilities.effects.common.CreateTokenEffect;
 import mage.abilities.effects.common.counter.AddCountersSourceEffect;
 import mage.abilities.keyword.FlyingAbility;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.constants.Zone;
 import mage.counters.CounterType;
 import mage.game.permanent.token.Token;
@@ -51,9 +51,8 @@ import mage.game.permanent.token.Token;
  */
 public class HoofprintsOfTheStag extends CardImpl {
 
-    public HoofprintsOfTheStag(UUID ownerId) {
-        super(ownerId, 21, "Hoofprints of the Stag", Rarity.RARE, new CardType[]{CardType.TRIBAL, CardType.ENCHANTMENT}, "{1}{W}");
-        this.expansionSetCode = "LRW";
+    public HoofprintsOfTheStag(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.TRIBAL,CardType.ENCHANTMENT},"{1}{W}");
         this.subtype.add("Elemental");
 
         // Whenever you draw a card, you may put a hoofprint counter on Hoofprints of the Stag.

@@ -25,14 +25,14 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.dissension;
+package mage.cards.p;
 
 import java.util.UUID;
 import mage.abilities.effects.common.DestroyAllEffect;
 import mage.abilities.effects.common.DestroyTargetEffect;
+import mage.cards.CardSetInfo;
 import mage.cards.SplitCard;
 import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.filter.FilterPermanent;
 import mage.filter.predicate.Predicates;
 import mage.filter.predicate.mageobject.MulticoloredPredicate;
@@ -53,9 +53,8 @@ public class PureSimple extends SplitCard {
         filterMulticolor.add(new MulticoloredPredicate());
     }
 
-    public PureSimple(UUID ownerId) {
-        super(ownerId, 154, "Pure", "Simple", Rarity.UNCOMMON, new CardType[]{CardType.SORCERY}, "{1}{R}{G}", "{1}{G}{W}", true);
-        this.expansionSetCode = "DIS";
+    public PureSimple(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{1}{R}{G}","{1}{G}{W}",true);
 
         // Pure
         // Destroy target multicolored permanent.

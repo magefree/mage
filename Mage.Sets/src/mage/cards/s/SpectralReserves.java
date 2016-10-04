@@ -25,15 +25,15 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.eldritchmoon;
+package mage.cards.s;
 
 import java.util.UUID;
 import mage.abilities.effects.Effect;
 import mage.abilities.effects.common.CreateTokenEffect;
 import mage.abilities.effects.common.GainLifeEffect;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.game.permanent.token.SpiritWhiteToken;
 
 /**
@@ -42,9 +42,8 @@ import mage.game.permanent.token.SpiritWhiteToken;
  */
 public class SpectralReserves extends CardImpl {
 
-    public SpectralReserves(UUID ownerId) {
-        super(ownerId, 43, "Spectral Reserves", Rarity.COMMON, new CardType[]{CardType.SORCERY}, "{3}{W}");
-        this.expansionSetCode = "EMN";
+    public SpectralReserves(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{3}{W}");
 
         // Put two 1/1 white Spirit creature tokens with flying onto the battlefield. You gain 2 life.
         Effect effect = new CreateTokenEffect(new SpiritWhiteToken("EMN"), 2);

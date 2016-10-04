@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.worldwake;
+package mage.cards.c;
 
 import java.util.UUID;
 import mage.MageInt;
@@ -38,9 +38,9 @@ import mage.abilities.keyword.VigilanceAbility;
 import mage.abilities.mana.BlueManaAbility;
 import mage.abilities.mana.WhiteManaAbility;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Duration;
-import mage.constants.Rarity;
 import mage.constants.Zone;
 import mage.game.permanent.token.Token;
 
@@ -50,9 +50,8 @@ import mage.game.permanent.token.Token;
  */
 public class CelestialColonnade extends CardImpl {
 
-    public CelestialColonnade(UUID ownerId) {
-        super(ownerId, 133, "Celestial Colonnade", Rarity.RARE, new CardType[]{CardType.LAND}, null);
-        this.expansionSetCode = "WWK";
+    public CelestialColonnade(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.LAND},null);
         this.addAbility(new EntersBattlefieldTappedAbility());
         this.addAbility(new BlueManaAbility());
         this.addAbility(new WhiteManaAbility());

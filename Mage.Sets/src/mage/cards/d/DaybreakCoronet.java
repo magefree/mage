@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.futuresight;
+package mage.cards.d;
 
 import java.util.LinkedList;
 import java.util.List;
@@ -41,11 +41,11 @@ import mage.abilities.keyword.FirstStrikeAbility;
 import mage.abilities.keyword.LifelinkAbility;
 import mage.abilities.keyword.VigilanceAbility;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.AttachmentType;
 import mage.constants.CardType;
 import mage.constants.Duration;
 import mage.constants.Outcome;
-import mage.constants.Rarity;
 import mage.constants.Zone;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.filter.predicate.Predicate;
@@ -60,9 +60,8 @@ import mage.target.common.TargetCreaturePermanent;
  */
 public class DaybreakCoronet extends CardImpl {
     
-    public DaybreakCoronet(UUID ownerId) {
-        super(ownerId, 21, "Daybreak Coronet", Rarity.RARE, new CardType[]{CardType.ENCHANTMENT}, "{W}{W}");
-        this.expansionSetCode = "FUT";
+    public DaybreakCoronet(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.ENCHANTMENT},"{W}{W}");
         this.subtype.add("Aura");
 
 

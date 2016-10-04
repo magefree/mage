@@ -25,11 +25,10 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.shardsofalara;
+package mage.cards.n;
 
 import java.util.UUID;
 import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.constants.Zone;
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleActivatedAbility;
@@ -37,6 +36,7 @@ import mage.abilities.costs.mana.GenericManaCost;
 import mage.abilities.effects.common.CreateTokenEffect;
 import mage.abilities.effects.common.ExileTargetEffect;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.filter.common.FilterCreatureCard;
 import mage.game.permanent.token.SaprolingToken;
 import mage.target.common.TargetCardInGraveyard;
@@ -47,9 +47,8 @@ import mage.target.common.TargetCardInGraveyard;
  */
 public class Necrogenesis extends CardImpl {
 
-    public Necrogenesis(UUID ownerId) {
-        super(ownerId, 181, "Necrogenesis", Rarity.UNCOMMON, new CardType[]{CardType.ENCHANTMENT}, "{B}{G}");
-        this.expansionSetCode = "ALA";
+    public Necrogenesis(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.ENCHANTMENT},"{B}{G}");
 
         // {2}: Exile target creature card from a graveyard. Put a 1/1 green Saproling creature token onto the battlefield.
         Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new ExileTargetEffect(), new GenericManaCost(2));

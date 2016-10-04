@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.coldsnap;
+package mage.cards.a;
 
 import java.util.UUID;
 import mage.MageInt;
@@ -37,9 +37,9 @@ import mage.abilities.effects.common.continuous.BoostSourceEffect;
 import mage.abilities.effects.common.search.SearchLibraryPutInHandEffect;
 import mage.abilities.keyword.TrampleAbility;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Duration;
-import mage.constants.Rarity;
 import mage.filter.FilterCard;
 import mage.filter.common.FilterAttackingCreature;
 import mage.filter.predicate.mageobject.SubtypePredicate;
@@ -61,9 +61,8 @@ public class AurochsHerd extends CardImpl {
         filter2.add(new AnotherPredicate());
     }
 
-    public AurochsHerd(UUID ownerId) {
-        super(ownerId, 103, "Aurochs Herd", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{5}{G}");
-        this.expansionSetCode = "CSP";
+    public AurochsHerd(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{5}{G}");
         this.subtype.add("Aurochs");
         this.power = new MageInt(4);
         this.toughness = new MageInt(4);

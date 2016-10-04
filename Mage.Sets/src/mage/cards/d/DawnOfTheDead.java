@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.torment;
+package mage.cards.d;
 
 import java.util.UUID;
 import mage.abilities.Ability;
@@ -40,10 +40,10 @@ import mage.abilities.effects.common.continuous.GainAbilityTargetEffect;
 import mage.abilities.keyword.HasteAbility;
 import mage.cards.Card;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Duration;
 import mage.constants.Outcome;
-import mage.constants.Rarity;
 import mage.constants.TargetController;
 import mage.constants.Zone;
 import mage.filter.common.FilterCreatureCard;
@@ -59,9 +59,8 @@ import mage.target.targetpointer.FixedTarget;
  */
 public class DawnOfTheDead extends CardImpl {
 
-    public DawnOfTheDead(UUID ownerId) {
-        super(ownerId, 59, "Dawn of the Dead", Rarity.RARE, new CardType[]{CardType.ENCHANTMENT}, "{2}{B}{B}{B}");
-        this.expansionSetCode = "TOR";
+    public DawnOfTheDead(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.ENCHANTMENT},"{2}{B}{B}{B}");
 
         // At the beginning of your upkeep, you lose 1 life.
         this.addAbility(new BeginningOfUpkeepTriggeredAbility(Zone.BATTLEFIELD, new LoseLifeSourceControllerEffect(1), TargetController.YOU, false));

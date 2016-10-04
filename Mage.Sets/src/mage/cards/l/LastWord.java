@@ -26,14 +26,14 @@
  *  or implied, of BetaSteward_at_googlemail.com.
  */
 
-package mage.sets.darksteel;
+package mage.cards.l;
 
 import java.util.UUID;
 import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.abilities.common.CantBeCounteredAbility;
 import mage.abilities.effects.common.CounterTargetEffect;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.target.TargetSpell;
 
 /**
@@ -42,9 +42,8 @@ import mage.target.TargetSpell;
  */
 public class LastWord extends CardImpl {
 
-    public LastWord (UUID ownerId) {
-        super(ownerId, 23, "Last Word", Rarity.RARE, new CardType[]{CardType.INSTANT}, "{2}{U}{U}");
-        this.expansionSetCode = "DST";
+    public LastWord (UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.INSTANT},"{2}{U}{U}");
 
         this.addAbility(new CantBeCounteredAbility());
         this.getSpellAbility().addEffect(new CounterTargetEffect());

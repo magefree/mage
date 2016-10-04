@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.darkascension;
+package mage.cards.i;
 
 import java.util.UUID;
 import mage.MageInt;
@@ -35,10 +35,10 @@ import mage.abilities.effects.ContinuousRuleModifyingEffectImpl;
 import mage.abilities.effects.common.continuous.BoostControlledEffect;
 import mage.abilities.keyword.IntimidateAbility;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Duration;
 import mage.constants.Outcome;
-import mage.constants.Rarity;
 import mage.constants.Zone;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.filter.predicate.Predicates;
@@ -60,9 +60,8 @@ public class Immerwolf extends CardImpl {
         filter.add(Predicates.or(new SubtypePredicate("Wolf"), new SubtypePredicate("Werewolf")));
     }
 
-    public Immerwolf(UUID ownerId) {
-        super(ownerId, 141, "Immerwolf", Rarity.UNCOMMON, new CardType[]{CardType.CREATURE}, "{1}{R}{G}");
-        this.expansionSetCode = "DKA";
+    public Immerwolf(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{1}{R}{G}");
         this.subtype.add("Wolf");
 
         this.power = new MageInt(2);

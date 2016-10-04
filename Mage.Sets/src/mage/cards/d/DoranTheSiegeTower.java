@@ -25,19 +25,19 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.lorwyn;
+package mage.cards.d;
 
 import java.util.UUID;
 
 import mage.constants.CardType;
 import mage.constants.Outcome;
-import mage.constants.Rarity;
 import mage.constants.Zone;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.effects.ContinuousEffectImpl;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.Duration;
 import mage.constants.Layer;
 import mage.constants.SubLayer;
@@ -59,9 +59,8 @@ import mage.game.Game;
  */
 public class DoranTheSiegeTower extends CardImpl {
 
-    public DoranTheSiegeTower(UUID ownerId) {
-        super(ownerId, 247, "Doran, the Siege Tower", Rarity.RARE, new CardType[]{CardType.CREATURE}, "{B}{G}{W}");
-        this.expansionSetCode = "LRW";
+    public DoranTheSiegeTower(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{B}{G}{W}");
         this.supertype.add("Legendary");
         this.subtype.add("Treefolk");
         this.subtype.add("Shaman");

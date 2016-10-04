@@ -26,13 +26,13 @@
 * or implied, of BetaSteward_at_googlemail.com.
 */
 
-package mage.sets.urzassaga;
+package mage.cards.r;
 
 import java.util.UUID;
 import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.abilities.effects.common.DestroyTargetEffect;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.filter.FilterPermanent;
 import mage.filter.common.FilterLandPermanent;
 import mage.target.TargetPermanent;
@@ -45,9 +45,8 @@ public class RainOfSalt extends CardImpl {
 
     private static final FilterPermanent filter = new FilterLandPermanent();
 
-    public RainOfSalt(UUID ownerId) {
-        super(ownerId, 206, "Rain of Salt", Rarity.UNCOMMON, new CardType[]{CardType.SORCERY}, "{4}{R}{R}");
-        this.expansionSetCode = "USG";
+    public RainOfSalt(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{4}{R}{R}");
 
 
         // Destroy two target lands.

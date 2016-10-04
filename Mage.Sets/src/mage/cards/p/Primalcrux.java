@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.eventide;
+package mage.cards.p;
 
 import java.util.UUID;
 import mage.MageInt;
@@ -37,9 +37,9 @@ import mage.abilities.effects.common.continuous.SetPowerToughnessSourceEffect;
 import mage.abilities.keyword.TrampleAbility;
 import mage.cards.Card;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Duration;
-import mage.constants.Rarity;
 import mage.constants.Zone;
 import mage.filter.common.FilterControlledPermanent;
 import mage.game.Game;
@@ -51,9 +51,8 @@ import mage.game.Game;
  */
 public class Primalcrux extends CardImpl {
 
-    public Primalcrux(UUID ownerId) {
-        super(ownerId, 73, "Primalcrux", Rarity.RARE, new CardType[]{CardType.CREATURE}, "{G}{G}{G}{G}{G}{G}");
-        this.expansionSetCode = "EVE";
+    public Primalcrux(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{G}{G}{G}{G}{G}{G}");
         this.subtype.add("Elemental");
 
         this.power = new MageInt(0);

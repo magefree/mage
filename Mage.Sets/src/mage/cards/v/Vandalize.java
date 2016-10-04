@@ -25,14 +25,14 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.dragonsoftarkir;
+package mage.cards.v;
 
 import java.util.UUID;
 import mage.abilities.Mode;
 import mage.abilities.effects.common.DestroyTargetEffect;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.target.common.TargetArtifactPermanent;
 import mage.target.common.TargetLandPermanent;
 
@@ -42,9 +42,8 @@ import mage.target.common.TargetLandPermanent;
  */
 public class Vandalize extends CardImpl {
 
-    public Vandalize(UUID ownerId) {
-        super(ownerId, 165, "Vandalize", Rarity.COMMON, new CardType[]{CardType.SORCERY}, "{4}{R}");
-        this.expansionSetCode = "DTK";
+    public Vandalize(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{4}{R}");
 
         // Choose one or both - Destroy target artifact; or Destroy target land.
         this.getSpellAbility().getModes().setMinModes(1);

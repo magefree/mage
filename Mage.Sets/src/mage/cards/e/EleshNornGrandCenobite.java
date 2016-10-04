@@ -26,18 +26,18 @@
  *  or implied, of BetaSteward_at_googlemail.com.
  */
 
-package mage.sets.newphyrexia;
+package mage.cards.e;
 
 import java.util.UUID;
 
 import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.MageInt;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.effects.common.continuous.BoostControlledEffect;
 import mage.abilities.effects.common.continuous.BoostOpponentsEffect;
 import mage.abilities.keyword.VigilanceAbility;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.Duration;
 import mage.constants.Zone;
 
@@ -47,9 +47,8 @@ import mage.constants.Zone;
  */
 public class EleshNornGrandCenobite extends CardImpl {
     
-    public EleshNornGrandCenobite (UUID ownerId) {
-        super(ownerId, 9, "Elesh Norn, Grand Cenobite", Rarity.MYTHIC, new CardType[]{CardType.CREATURE}, "{5}{W}{W}");
-        this.expansionSetCode = "NPH";
+    public EleshNornGrandCenobite (UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{5}{W}{W}");
         this.supertype.add("Legendary");
         this.subtype.add("Praetor");
 

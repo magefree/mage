@@ -26,17 +26,17 @@
  *  or implied, of BetaSteward_at_googlemail.com.
  */
 
-package mage.sets.riseoftheeldrazi;
+package mage.cards.a;
 
 import java.util.UUID;
 import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.effects.common.CastSourceTriggeredAbility;
 import mage.abilities.effects.common.ReturnFromGraveyardToBattlefieldTargetEffect;
 import mage.abilities.keyword.AnnihilatorAbility;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.filter.common.FilterCreatureCard;
 import mage.target.common.TargetCardInYourGraveyard;
 
@@ -46,9 +46,8 @@ import mage.target.common.TargetCardInYourGraveyard;
  */
 public class ArtisanOfKozilek extends CardImpl {
 
-    public ArtisanOfKozilek (UUID ownerId) {
-        super(ownerId, 2, "Artisan of Kozilek", Rarity.UNCOMMON, new CardType[]{CardType.CREATURE}, "{9}");
-        this.expansionSetCode = "ROE";
+    public ArtisanOfKozilek (UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{9}");
         this.subtype.add("Eldrazi");
         this.power = new MageInt(10);
         this.toughness = new MageInt(9);

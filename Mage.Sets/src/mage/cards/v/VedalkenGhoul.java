@@ -25,15 +25,15 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.alarareborn;
+package mage.cards.v;
 
 import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.common.BecomesBlockedTriggeredAbility;
 import mage.abilities.effects.common.LoseLifeDefendingPlayerEffect;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.Rarity;
 
 /**
  *
@@ -41,9 +41,8 @@ import mage.constants.Rarity;
  */
 public class VedalkenGhoul extends CardImpl {
 
-    public VedalkenGhoul(UUID ownerId) {
-        super(ownerId, 32, "Vedalken Ghoul", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{U}{B}");
-        this.expansionSetCode = "ARB";
+    public VedalkenGhoul(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{U}{B}");
         this.subtype.add("Vedalken");
         this.subtype.add("Zombie");
 

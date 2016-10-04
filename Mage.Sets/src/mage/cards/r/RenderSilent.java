@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.dragonsmaze;
+package mage.cards.r;
 
 import java.util.UUID;
 import mage.MageObject;
@@ -34,10 +34,10 @@ import mage.abilities.Mode;
 import mage.abilities.effects.ContinuousRuleModifyingEffectImpl;
 import mage.abilities.effects.OneShotEffect;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Duration;
 import mage.constants.Outcome;
-import mage.constants.Rarity;
 import mage.filter.common.FilterControlledPermanent;
 import mage.filter.predicate.mageobject.MulticoloredPredicate;
 import mage.game.Game;
@@ -59,9 +59,8 @@ public class RenderSilent extends CardImpl {
         filter.add(new MulticoloredPredicate());
     }
 
-    public RenderSilent(UUID ownerId) {
-        super(ownerId, 96, "Render Silent", Rarity.RARE, new CardType[]{CardType.INSTANT}, "{W}{U}{U}");
-        this.expansionSetCode = "DGM";
+    public RenderSilent(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.INSTANT},"{W}{U}{U}");
 
         // Counter target spell. Its controller can't cast spells this turn.
         this.getSpellAbility().addEffect(new RenderSilentCounterEffect());

@@ -25,14 +25,14 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.magic2010;
+package mage.cards.u;
 
 import java.util.UUID;
 import mage.abilities.common.DrawCardOpponentTriggeredAbility;
 import mage.abilities.effects.common.DamageTargetEffect;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.Rarity;
 
 /**
  *
@@ -40,9 +40,8 @@ import mage.constants.Rarity;
  */
 public class UnderworldDreams extends CardImpl {
 
-    public UnderworldDreams(UUID ownerId) {
-        super(ownerId, 115, "Underworld Dreams", Rarity.RARE, new CardType[]{CardType.ENCHANTMENT}, "{B}{B}{B}");
-        this.expansionSetCode = "M10";
+    public UnderworldDreams(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.ENCHANTMENT},"{B}{B}{B}");
 
         // Whenever an opponent draws a card, Underworld Dreams deals 1 damage to him or her.
         this.addAbility(new DrawCardOpponentTriggeredAbility(new DamageTargetEffect(1, true, "him or her"), false, true));

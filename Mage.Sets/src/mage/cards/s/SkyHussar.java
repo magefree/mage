@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.dissension;
+package mage.cards.s;
 
 import java.util.UUID;
 import mage.MageInt;
@@ -37,8 +37,8 @@ import mage.abilities.effects.common.UntapAllControllerEffect;
 import mage.abilities.keyword.FlyingAbility;
 import mage.abilities.keyword.ForecastAbility;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.filter.common.FilterControlledCreaturePermanent;
 import mage.filter.predicate.Predicates;
 import mage.filter.predicate.mageobject.ColorPredicate;
@@ -57,9 +57,8 @@ public class SkyHussar extends CardImpl {
         filter.add(Predicates.not(new TappedPredicate()));
     }
 
-    public SkyHussar(UUID ownerId) {
-        super(ownerId, 131, "Sky Hussar", Rarity.UNCOMMON, new CardType[]{CardType.CREATURE}, "{3}{W}{U}");
-        this.expansionSetCode = "DIS";
+    public SkyHussar(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{3}{W}{U}");
         this.subtype.add("Human");
         this.subtype.add("Knight");
 

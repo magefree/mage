@@ -25,14 +25,14 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.theros;
+package mage.cards.d;
 
 import java.util.UUID;
 import mage.abilities.effects.common.CounterTargetEffect;
 import mage.abilities.effects.keyword.ScryEffect;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.target.Target;
 import mage.target.TargetSpell;
 
@@ -43,9 +43,8 @@ import mage.target.TargetSpell;
 public class Dissolve extends CardImpl {
 
 
-    public Dissolve(UUID ownerId) {
-        super(ownerId, 47, "Dissolve", Rarity.UNCOMMON, new CardType[]{CardType.INSTANT}, "{1}{U}{U}");
-        this.expansionSetCode = "THS";
+    public Dissolve(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.INSTANT},"{1}{U}{U}");
 
 
         // Counter target spell. Scry 1. (Look at the top card of your library. You may put that card on the bottom of your library.)

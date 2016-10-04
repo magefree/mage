@@ -25,12 +25,11 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.returntoravnica;
+package mage.cards.m;
 
 import java.util.UUID;
 
 import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleActivatedAbility;
@@ -41,6 +40,7 @@ import mage.abilities.dynamicvalue.common.DiscardCostCardConvertedMana;
 import mage.abilities.effects.common.DamageTargetEffect;
 import mage.abilities.effects.common.DrawCardSourceControllerEffect;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.Zone;
 import mage.target.common.TargetCreaturePermanent;
 
@@ -50,9 +50,8 @@ import mage.target.common.TargetCreaturePermanent;
  */
 public class MercurialChemister extends CardImpl {
 
-    public MercurialChemister(UUID ownerId) {
-        super(ownerId, 180, "Mercurial Chemister", Rarity.RARE, new CardType[]{CardType.CREATURE}, "{3}{U}{R}");
-        this.expansionSetCode = "RTR";
+    public MercurialChemister(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{3}{U}{R}");
         this.subtype.add("Human");
         this.subtype.add("Wizard");
 

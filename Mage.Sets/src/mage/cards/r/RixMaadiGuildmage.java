@@ -25,12 +25,11 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.returntoravnica;
+package mage.cards.r;
 
 import java.util.UUID;
 
 import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.constants.Zone;
 import mage.MageInt;
 import mage.abilities.common.SimpleActivatedAbility;
@@ -38,6 +37,7 @@ import mage.abilities.costs.mana.ManaCostsImpl;
 import mage.abilities.effects.common.LoseLifeTargetEffect;
 import mage.abilities.effects.common.continuous.BoostTargetEffect;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.Duration;
 import mage.filter.FilterPlayer;
 import mage.filter.common.FilterBlockingCreature;
@@ -61,9 +61,8 @@ public class RixMaadiGuildmage extends CardImpl {
         playerFilter.add(new PlayerLostLifePredicate());
     }
 
-    public RixMaadiGuildmage(UUID ownerId) {
-        super(ownerId, 192, "Rix Maadi Guildmage", Rarity.UNCOMMON, new CardType[]{CardType.CREATURE}, "{B}{R}");
-        this.expansionSetCode = "RTR";
+    public RixMaadiGuildmage(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{B}{R}");
         this.subtype.add("Human");
         this.subtype.add("Shaman");
 

@@ -25,10 +25,9 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.innistrad;
+package mage.cards.h;
 
 import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.MageInt;
 import mage.abilities.TriggeredAbility;
 import mage.abilities.common.BeginningOfUpkeepTriggeredAbility;
@@ -37,6 +36,7 @@ import mage.abilities.decorator.ConditionalTriggeredAbility;
 import mage.abilities.effects.common.TransformSourceEffect;
 import mage.abilities.keyword.TransformAbility;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.TargetController;
 
 import java.util.UUID;
@@ -46,9 +46,8 @@ import java.util.UUID;
  */
 public class HowlpackOfEstwald extends CardImpl {
 
-    public HowlpackOfEstwald(UUID ownerId) {
-        super(ownerId, 209, "Howlpack of Estwald", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "");
-        this.expansionSetCode = "ISD";
+    public HowlpackOfEstwald(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"");
         this.subtype.add("Werewolf");
         this.color.setGreen(true);
 

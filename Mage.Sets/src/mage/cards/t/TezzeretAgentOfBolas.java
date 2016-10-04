@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.mirrodinbesieged;
+package mage.cards.t;
 
 import java.util.UUID;
 import mage.abilities.Ability;
@@ -39,10 +39,10 @@ import mage.abilities.effects.common.LookLibraryAndPickControllerEffect;
 import mage.abilities.effects.common.continuous.AddCardTypeTargetEffect;
 import mage.abilities.effects.common.continuous.SetPowerToughnessTargetEffect;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Duration;
 import mage.constants.Outcome;
-import mage.constants.Rarity;
 import mage.filter.FilterCard;
 import mage.filter.common.FilterControlledPermanent;
 import mage.filter.predicate.mageobject.CardTypePredicate;
@@ -63,9 +63,8 @@ public class TezzeretAgentOfBolas extends CardImpl {
         filter.add(new CardTypePredicate(CardType.ARTIFACT));
     }
 
-    public TezzeretAgentOfBolas(UUID ownerId) {
-        super(ownerId, 97, "Tezzeret, Agent of Bolas", Rarity.MYTHIC, new CardType[]{CardType.PLANESWALKER}, "{2}{U}{B}");
-        this.expansionSetCode = "MBS";
+    public TezzeretAgentOfBolas(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.PLANESWALKER},"{2}{U}{B}");
         this.subtype.add("Tezzeret");
 
         this.addAbility(new PlanswalkerEntersWithLoyalityCountersAbility(3));

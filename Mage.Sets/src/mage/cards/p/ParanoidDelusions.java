@@ -25,14 +25,14 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.gatecrash;
+package mage.cards.p;
 
 import java.util.UUID;
 import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.abilities.effects.common.CipherEffect;
 import mage.abilities.effects.common.PutLibraryIntoGraveTargetEffect;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.target.TargetPlayer;
 
 /**
@@ -41,9 +41,8 @@ import mage.target.TargetPlayer;
  */
 public class ParanoidDelusions extends CardImpl {
 
-    public ParanoidDelusions(UUID ownerId) {
-        super(ownerId, 186, "Paranoid Delusions", Rarity.COMMON, new CardType[]{CardType.SORCERY}, "{U}{B}");
-        this.expansionSetCode = "GTC";
+    public ParanoidDelusions(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{U}{B}");
 
 
         // Target player puts the top three cards of his or her library into his or her graveyard.

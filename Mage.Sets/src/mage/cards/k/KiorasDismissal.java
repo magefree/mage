@@ -25,15 +25,15 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.journeyintonyx;
+package mage.cards.k;
 
 import java.util.UUID;
 import mage.abilities.abilityword.StriveAbility;
 import mage.abilities.effects.Effect;
 import mage.abilities.effects.common.ReturnToHandTargetEffect;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.filter.common.FilterEnchantmentPermanent;
 import mage.target.TargetPermanent;
 
@@ -43,9 +43,8 @@ import mage.target.TargetPermanent;
  */
 public class KiorasDismissal extends CardImpl {
 
-    public KiorasDismissal(UUID ownerId) {
-        super(ownerId, 44, "Kiora's Dismissal", Rarity.UNCOMMON, new CardType[]{CardType.INSTANT}, "{U}");
-        this.expansionSetCode = "JOU";
+    public KiorasDismissal(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.INSTANT},"{U}");
 
 
         // Strive - Kiora's Dismissal costs U more to cast for each target beyond the first.

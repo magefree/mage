@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.mediainserts;
+package mage.cards.v;
 
 import java.util.UUID;
 import mage.MageInt;
@@ -36,8 +36,8 @@ import mage.abilities.effects.common.CounterTargetEffect;
 import mage.abilities.effects.common.ReturnToHandSourceEffect;
 import mage.abilities.keyword.FlashAbility;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.target.common.TargetActivatedAbility;
 
 /**
@@ -46,9 +46,8 @@ import mage.target.common.TargetActivatedAbility;
  */
 public class VoidmageHusher extends CardImpl {
 
-    public VoidmageHusher(UUID ownerId) {
-        super(ownerId, 62, "Voidmage Husher", Rarity.SPECIAL, new CardType[]{CardType.CREATURE}, "{3}{U}");
-        this.expansionSetCode = "MBP";
+    public VoidmageHusher(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{3}{U}");
         this.subtype.add("Human");
         this.subtype.add("Wizard");
         this.power = new MageInt(2);

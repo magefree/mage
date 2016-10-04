@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.commander2013;
+package mage.cards.d;
 
 import java.util.UUID;
 import mage.MageInt;
@@ -37,9 +37,9 @@ import mage.abilities.costs.common.TapSourceCost;
 import mage.abilities.effects.common.continuous.ExchangeControlTargetEffect;
 import mage.abilities.keyword.FlyingAbility;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Duration;
-import mage.constants.Rarity;
 import mage.constants.TurnPhase;
 import mage.constants.Zone;
 import mage.filter.common.FilterCreaturePermanent;
@@ -59,9 +59,8 @@ public class DjinnOfInfiniteDeceits extends CardImpl {
         filter.add(Predicates.not(new SupertypePredicate("Legendary")));
     }
 
-    public DjinnOfInfiniteDeceits(UUID ownerId) {
-        super(ownerId, 41, "Djinn of Infinite Deceits", Rarity.RARE, new CardType[]{CardType.CREATURE}, "{4}{U}{U}");
-        this.expansionSetCode = "C13";
+    public DjinnOfInfiniteDeceits(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{4}{U}{U}");
         this.subtype.add("Djinn");
 
         this.power = new MageInt(2);

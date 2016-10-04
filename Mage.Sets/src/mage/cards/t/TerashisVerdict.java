@@ -25,13 +25,13 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.betrayersofkamigawa;
+package mage.cards.t;
 
 import java.util.UUID;
 import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.abilities.effects.common.DestroyTargetEffect;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.filter.Filter;
 import mage.filter.common.FilterAttackingCreature;
 import mage.filter.predicate.mageobject.PowerPredicate;
@@ -49,9 +49,8 @@ public class TerashisVerdict extends CardImpl {
         filter.add(new PowerPredicate(Filter.ComparisonType.LessThan, 4));
     }
 
-    public TerashisVerdict(UUID ownerId) {
-        super(ownerId, 27, "Terashi's Verdict", Rarity.UNCOMMON, new CardType[]{CardType.INSTANT}, "{1}{W}");
-        this.expansionSetCode = "BOK";
+    public TerashisVerdict(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.INSTANT},"{1}{W}");
         this.subtype.add("Arcane");
 
         // Destroy target attacking creature with power 3 or less.

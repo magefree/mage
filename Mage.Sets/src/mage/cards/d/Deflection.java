@@ -25,13 +25,13 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.iceage;
+package mage.cards.d;
 
 import java.util.UUID;
 import mage.abilities.effects.common.ChooseNewTargetsTargetEffect;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.filter.FilterSpell;
 import mage.filter.predicate.mageobject.NumberOfTargetsPredicate;
 import mage.target.TargetSpell;
@@ -48,9 +48,8 @@ public class Deflection extends CardImpl {
         filter.add(new NumberOfTargetsPredicate(1));
     }
     
-    public Deflection(UUID ownerId) {
-        super(ownerId, 65, "Deflection", Rarity.RARE, new CardType[]{CardType.INSTANT}, "{3}{U}");
-        this.expansionSetCode = "ICE";
+    public Deflection(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.INSTANT},"{3}{U}");
 
 
         // Change the target of target spell with a single target.

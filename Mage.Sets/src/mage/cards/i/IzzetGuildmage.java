@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.guildpact;
+package mage.cards.i;
 
 import java.util.UUID;
 import mage.MageInt;
@@ -34,8 +34,8 @@ import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.costs.mana.ManaCostsImpl;
 import mage.abilities.effects.common.CopyTargetSpellEffect;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.constants.TargetController;
 import mage.constants.Zone;
 import mage.filter.Filter;
@@ -63,9 +63,8 @@ public class IzzetGuildmage extends CardImpl {
         filterSorcery.add(new ControllerPredicate(TargetController.YOU));
     }
 
-    public IzzetGuildmage(UUID ownerId) {
-        super(ownerId, 145, "Izzet Guildmage", Rarity.UNCOMMON, new CardType[]{CardType.CREATURE}, "{U/R}{U/R}");
-        this.expansionSetCode = "GPT";
+    public IzzetGuildmage(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{U/R}{U/R}");
         this.subtype.add("Human");
         this.subtype.add("Wizard");
 

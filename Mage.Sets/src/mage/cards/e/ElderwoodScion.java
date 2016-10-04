@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.planechase2012;
+package mage.cards.e;
 
 import java.util.UUID;
 import mage.MageInt;
@@ -38,11 +38,11 @@ import mage.abilities.keyword.FlashbackAbility;
 import mage.abilities.keyword.LifelinkAbility;
 import mage.abilities.keyword.TrampleAbility;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.CostModificationType;
 import mage.constants.Duration;
 import mage.constants.Outcome;
-import mage.constants.Rarity;
 import mage.constants.Zone;
 import mage.game.Game;
 import mage.target.Target;
@@ -54,9 +54,8 @@ import mage.util.CardUtil;
  */
 public class ElderwoodScion extends CardImpl {
 
-    public ElderwoodScion(UUID ownerId) {
-        super(ownerId, 88, "Elderwood Scion", Rarity.RARE, new CardType[]{CardType.CREATURE}, "{3}{G}{W}");
-        this.expansionSetCode = "PC2";
+    public ElderwoodScion(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{3}{G}{W}");
         this.subtype.add("Elemental");
 
         this.power = new MageInt(4);

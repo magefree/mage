@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.newphyrexia;
+package mage.cards.f;
 
 import java.util.UUID;
 import mage.abilities.Ability;
@@ -33,8 +33,8 @@ import mage.abilities.dynamicvalue.DynamicValue;
 import mage.abilities.effects.Effect;
 import mage.abilities.effects.common.CreateTokenEffect;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.game.Game;
 import mage.game.permanent.token.BeastToken;
 import mage.watchers.common.CreaturesDiedWatcher;
@@ -45,9 +45,8 @@ import mage.watchers.common.CreaturesDiedWatcher;
  */
 public class FreshMeat extends CardImpl {
 
-    public FreshMeat(UUID ownerId) {
-        super(ownerId, 109, "Fresh Meat", Rarity.RARE, new CardType[]{CardType.INSTANT}, "{3}{G}");
-        this.expansionSetCode = "NPH";
+    public FreshMeat(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.INSTANT},"{3}{G}");
 
         // Put a 3/3 green Beast creature token onto the battlefield for each creature put into your graveyard from the battlefield this turn.
         this.getSpellAbility().addWatcher(new CreaturesDiedWatcher());

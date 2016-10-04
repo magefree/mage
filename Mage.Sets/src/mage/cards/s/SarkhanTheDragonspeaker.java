@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.khansoftarkir;
+package mage.cards.s;
 
 import java.util.UUID;
 import mage.MageObjectReference;
@@ -45,11 +45,11 @@ import mage.abilities.keyword.FlyingAbility;
 import mage.abilities.keyword.HasteAbility;
 import mage.abilities.keyword.IndestructibleAbility;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Duration;
 import mage.constants.Layer;
 import mage.constants.Outcome;
-import mage.constants.Rarity;
 import mage.constants.SubLayer;
 import mage.constants.TargetController;
 import mage.constants.Zone;
@@ -64,9 +64,8 @@ import mage.target.common.TargetCreaturePermanent;
  */
 public class SarkhanTheDragonspeaker extends CardImpl {
 
-    public SarkhanTheDragonspeaker(UUID ownerId) {
-        super(ownerId, 119, "Sarkhan, the Dragonspeaker", Rarity.MYTHIC, new CardType[]{CardType.PLANESWALKER}, "{3}{R}{R}");
-        this.expansionSetCode = "KTK";
+    public SarkhanTheDragonspeaker(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.PLANESWALKER},"{3}{R}{R}");
         this.subtype.add("Sarkhan");
 
         this.addAbility(new PlanswalkerEntersWithLoyalityCountersAbility(4));

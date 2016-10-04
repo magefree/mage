@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.dragonsoftarkir;
+package mage.cards.d;
 
 import java.util.UUID;
 import mage.abilities.Mode;
@@ -35,9 +35,9 @@ import mage.abilities.effects.common.PreventDamageByTargetEffect;
 import mage.abilities.effects.common.SacrificeEffect;
 import mage.abilities.effects.common.counter.AddCountersTargetEffect;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Duration;
-import mage.constants.Rarity;
 import mage.constants.TargetController;
 import mage.counters.CounterType;
 import mage.filter.common.FilterCreaturePermanent;
@@ -63,9 +63,8 @@ public class DromokasCommand extends CardImpl {
         filterUncontrolledCreature.add(new ControllerPredicate(TargetController.NOT_YOU));
     }
 
-    public DromokasCommand(UUID ownerId) {
-        super(ownerId, 221, "Dromoka's Command", Rarity.RARE, new CardType[]{CardType.INSTANT}, "{G}{W}");
-        this.expansionSetCode = "DTK";
+    public DromokasCommand(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.INSTANT},"{G}{W}");
 
         // Choose two - Prevent all damage target instant or sorcery spell would deal this turn; Target player sacrifices an enchantment; Put a +1/+1 counter on target creature; or Target creature you control fights target creature you don't control.
         this.getSpellAbility().getModes().setMinModes(2);

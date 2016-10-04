@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.eldritchmoon;
+package mage.cards.b;
 
 import java.util.UUID;
 import mage.abilities.Mode;
@@ -36,9 +36,9 @@ import mage.abilities.effects.common.continuous.GainAbilityTargetEffect;
 import mage.abilities.keyword.EscalateAbility;
 import mage.abilities.keyword.FirstStrikeAbility;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Duration;
-import mage.constants.Rarity;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.target.common.TargetCreaturePermanent;
 
@@ -51,9 +51,8 @@ public class BorrowedHostility extends CardImpl {
     private static final FilterCreaturePermanent filterBoost = new FilterCreaturePermanent("creature to get +3/+0");
     private static final FilterCreaturePermanent filterFirstStrike = new FilterCreaturePermanent("creature to gain first strike");
 
-    public BorrowedHostility(UUID ownerId) {
-        super(ownerId, 121, "Borrowed Hostility", Rarity.COMMON, new CardType[]{CardType.INSTANT}, "{R}");
-        this.expansionSetCode = "EMN";
+    public BorrowedHostility(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.INSTANT},"{R}");
 
         // Escalate {3}
         this.addAbility(new EscalateAbility(new ManaCostsImpl<>("{3}")));

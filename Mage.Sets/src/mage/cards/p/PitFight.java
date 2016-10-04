@@ -25,13 +25,13 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.gatecrash;
+package mage.cards.p;
 
 import java.util.UUID;
 import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.abilities.effects.common.FightTargetsEffect;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.filter.predicate.mageobject.AnotherTargetPredicate;
 import mage.target.common.TargetControlledCreaturePermanent;
@@ -43,9 +43,8 @@ import mage.target.common.TargetCreaturePermanent;
  */
 public class PitFight extends CardImpl {
 
-    public PitFight(UUID ownerId) {
-        super(ownerId, 223, "Pit Fight", Rarity.COMMON, new CardType[]{CardType.INSTANT}, "{1}{R/G}");
-        this.expansionSetCode = "GTC";
+    public PitFight(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.INSTANT},"{1}{R/G}");
 
         // Target creature you control fights another target creature.
         this.getSpellAbility().addEffect(new FightTargetsEffect());

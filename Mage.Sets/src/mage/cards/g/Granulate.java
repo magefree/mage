@@ -25,13 +25,13 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.fifthdawn;
+package mage.cards.g;
 
 import java.util.UUID;
 import mage.abilities.effects.common.DestroyAllEffect;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.filter.Filter;
 import mage.filter.common.FilterNonlandPermanent;
 import mage.filter.predicate.mageobject.CardTypePredicate;
@@ -48,9 +48,8 @@ public class Granulate extends CardImpl {
         filter.add(new CardTypePredicate(CardType.ARTIFACT));
         filter.add(new ConvertedManaCostPredicate(Filter.ComparisonType.LessThan, 5));
     }
-    public Granulate(UUID ownerId) {
-        super(ownerId, 67, "Granulate", Rarity.RARE, new CardType[]{CardType.SORCERY}, "{2}{R}{R}");
-        this.expansionSetCode = "5DN";
+    public Granulate(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{2}{R}{R}");
 
 
         // Destroy each nonland artifact with converted mana cost 4 or less.

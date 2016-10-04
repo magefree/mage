@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.starwars;
+package mage.cards.n;
 
 import java.util.Set;
 import java.util.UUID;
@@ -33,8 +33,8 @@ import mage.abilities.Ability;
 import mage.abilities.effects.common.FightTargetsEffect;
 import mage.cards.Card;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.filter.Filter;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.filter.predicate.mageobject.PowerPredicate;
@@ -50,9 +50,8 @@ import mage.target.common.TargetControlledCreaturePermanent;
  */
 public class NoContest extends CardImpl {
 
-    public NoContest(UUID ownerId) {
-        super(ownerId, 150, "No Contest", Rarity.NA/*COMMON*/, new CardType[]{CardType.INSTANT}, "{G}");
-        this.expansionSetCode = "SWS";
+    public NoContest(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.INSTANT},"{G}");
 
         // Target creature you control fights target creature with power less than its power.
         this.getSpellAbility().addEffect(new FightTargetsEffect());

@@ -25,24 +25,23 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.limitedalpha;
+package mage.cards.w;
 
 import java.util.UUID;
 import mage.abilities.effects.Effect;
 import mage.abilities.effects.common.DrawCardAllEffect;
 import mage.abilities.effects.common.discard.DiscardHandAllEffect;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.Rarity;
 
 /**
  * @author mluds
  */
 public class WheelOfFortune extends CardImpl {
 
-    public WheelOfFortune(UUID ownerId) {
-        super(ownerId, 184, "Wheel of Fortune", Rarity.RARE, new CardType[]{CardType.SORCERY}, "{2}{R}");
-        this.expansionSetCode = "LEA";
+    public WheelOfFortune(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{2}{R}");
 
 
         // Each player discards his or her hand,

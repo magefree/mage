@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.newphyrexia;
+package mage.cards.i;
 
 import mage.abilities.Ability;
 import mage.abilities.costs.common.SacrificeTargetCost;
@@ -34,9 +34,9 @@ import mage.abilities.effects.Effect;
 import mage.abilities.effects.common.continuous.BoostAllEffect;
 import mage.cards.Card;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Duration;
-import mage.constants.Rarity;
 import mage.constants.Zone;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.game.Game;
@@ -51,9 +51,8 @@ import java.util.UUID;
  */
 public class IchorExplosion extends CardImpl {
 
-    public IchorExplosion(UUID ownerId) {
-        super(ownerId, 64, "Ichor Explosion", Rarity.UNCOMMON, new CardType[]{CardType.SORCERY}, "{5}{B}{B}");
-        this.expansionSetCode = "NPH";
+    public IchorExplosion(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{5}{B}{B}");
 
 
         // As an additional cost to cast Ichor Explosion, sacrifice a creature.

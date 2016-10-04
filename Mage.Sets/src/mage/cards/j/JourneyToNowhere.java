@@ -25,7 +25,7 @@
  * authors and should not be interpreted as representing official policies, either expressed
  * or implied, of maurer.it_at_googlemail.com.
  */
-package mage.sets.zendikar;
+package mage.cards.j;
 
 import java.util.UUID;
 import mage.abilities.Ability;
@@ -34,8 +34,8 @@ import mage.abilities.common.LeavesBattlefieldTriggeredAbility;
 import mage.abilities.effects.common.ExileTargetForSourceEffect;
 import mage.abilities.effects.common.ReturnFromExileForSourceEffect;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.constants.Zone;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.filter.predicate.permanent.AnotherPredicate;
@@ -48,9 +48,8 @@ import mage.target.TargetPermanent;
  */
 public class JourneyToNowhere extends CardImpl {
 
-    public JourneyToNowhere(UUID ownerId) {
-        super(ownerId, 14, "Journey to Nowhere", Rarity.COMMON, new CardType[]{CardType.ENCHANTMENT}, "{1}{W}");
-        this.expansionSetCode = "ZEN";
+    public JourneyToNowhere(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.ENCHANTMENT},"{1}{W}");
 
         // When Journey to Nowhere enters the battlefield, exile target creature.
         FilterCreaturePermanent filter = new FilterCreaturePermanent();

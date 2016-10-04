@@ -25,13 +25,13 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.avacynrestored;
+package mage.cards.r;
 
 import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.abilities.Mode;
 import mage.abilities.effects.common.DestroyTargetEffect;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.filter.common.FilterEnchantmentPermanent;
 import mage.filter.common.FilterLandPermanent;
 import mage.target.TargetPermanent;
@@ -46,9 +46,8 @@ import java.util.UUID;
  */
 public class RainOfThorns extends CardImpl {
 
-    public RainOfThorns(UUID ownerId) {
-        super(ownerId, 190, "Rain of Thorns", Rarity.UNCOMMON, new CardType[]{CardType.SORCERY}, "{4}{G}{G}");
-        this.expansionSetCode = "AVR";
+    public RainOfThorns(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{4}{G}{G}");
 
 
         // Choose one or more - Destroy target artifact; destroy target enchantment; and/or destroy target land.

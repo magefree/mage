@@ -25,13 +25,13 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.mirrodinbesieged;
+package mage.cards.c;
 
 import java.util.UUID;
 import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.abilities.effects.common.counter.AddCountersAllEffect;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.counters.CounterType;
 import mage.filter.common.FilterAttackingCreature;
 
@@ -43,9 +43,8 @@ public class ChokingFumes extends CardImpl {
 
     private static final FilterAttackingCreature filter = new FilterAttackingCreature();
 
-    public ChokingFumes(UUID ownerId) {
-        super(ownerId, 4, "Choking Fumes", Rarity.UNCOMMON, new CardType[]{CardType.INSTANT}, "{2}{W}");
-        this.expansionSetCode = "MBS";
+    public ChokingFumes(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.INSTANT},"{2}{W}");
 
 
         this.getSpellAbility().addEffect(new AddCountersAllEffect(CounterType.M1M1.createInstance(), filter));

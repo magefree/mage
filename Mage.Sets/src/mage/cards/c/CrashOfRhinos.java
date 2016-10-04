@@ -25,14 +25,14 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.mirage;
+package mage.cards.c;
 
 import java.util.UUID;
 import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.MageInt;
 import mage.abilities.keyword.TrampleAbility;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 
 /**
  *
@@ -40,9 +40,8 @@ import mage.cards.CardImpl;
  */
 public class CrashOfRhinos extends CardImpl {
 
-    public CrashOfRhinos(UUID ownerId) {
-        super(ownerId, 108, "Crash of Rhinos", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{6}{G}{G}");
-        this.expansionSetCode = "MIR";
+    public CrashOfRhinos(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{6}{G}{G}");
         this.subtype.add("Rhino");
 
         this.power = new MageInt(8);

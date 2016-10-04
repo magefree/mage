@@ -25,14 +25,14 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.iceage;
+package mage.cards.r;
 
 import java.util.UUID;
 import mage.abilities.effects.common.continuous.BoostAllEffect;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Duration;
-import mage.constants.Rarity;
 import mage.filter.common.FilterBlockingCreature;
 
 /**
@@ -41,9 +41,8 @@ import mage.filter.common.FilterBlockingCreature;
  */
 public class Rally extends CardImpl {
 
-    public Rally(UUID ownerId) {
-        super(ownerId, 272, "Rally", Rarity.COMMON, new CardType[]{CardType.INSTANT}, "{W}{W}");
-        this.expansionSetCode = "ICE";
+    public Rally(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.INSTANT},"{W}{W}");
 
         // Blocking creatures get +1/+1 until end of turn.
         this.getSpellAbility().addEffect(new BoostAllEffect(1, 1, Duration.EndOfTurn,

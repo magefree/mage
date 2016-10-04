@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.portalthreekingdoms;
+package mage.cards.d;
 
 import java.util.UUID;
 import mage.MageInt;
@@ -35,9 +35,9 @@ import mage.abilities.condition.common.MyTurnBeforeAttackersDeclaredCondition;
 import mage.abilities.costs.common.TapSourceCost;
 import mage.abilities.effects.OneShotEffect;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Outcome;
-import mage.constants.Rarity;
 import mage.constants.Zone;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.game.Game;
@@ -52,9 +52,8 @@ import mage.target.common.TargetOpponentsChoicePermanent;
  */
 public class DiaochanArtfulBeauty extends CardImpl {
 
-    public DiaochanArtfulBeauty(UUID ownerId) {
-        super(ownerId, 108, "Diaochan, Artful Beauty", Rarity.RARE, new CardType[]{CardType.CREATURE}, "{3}{R}");
-        this.expansionSetCode = "PTK";
+    public DiaochanArtfulBeauty(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{3}{R}");
         this.supertype.add("Legendary");
         this.subtype.add("Human");
         this.subtype.add("Advisor");

@@ -26,16 +26,16 @@
  *  or implied, of BetaSteward_at_googlemail.com.
  */
 
-package mage.sets.worldwake;
+package mage.cards.h;
 
 import java.util.UUID;
 import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.abilities.common.EntersBattlefieldTappedAbility;
 import mage.abilities.common.EntersBattlefieldTriggeredAbility;
 import mage.abilities.effects.common.LookLibraryControllerEffect;
 import mage.abilities.mana.BlueManaAbility;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 
 /**
  *
@@ -43,9 +43,8 @@ import mage.cards.CardImpl;
  */
 public class HalimarDepths extends CardImpl {
 
-    public HalimarDepths(UUID ownerId) {
-        super(ownerId, 137, "Halimar Depths", Rarity.COMMON, new CardType[]{CardType.LAND}, null);
-        this.expansionSetCode = "WWK";
+    public HalimarDepths(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.LAND},null);
                 // Halimar Depths enters the battlefield tapped.
                 this.addAbility(new EntersBattlefieldTappedAbility());
                 // When Halimar Depths enters the battlefield, look at the top three cards of your library, then put them back in any order.

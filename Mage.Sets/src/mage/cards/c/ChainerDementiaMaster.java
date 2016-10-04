@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.torment;
+package mage.cards.c;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -46,10 +46,10 @@ import mage.abilities.effects.common.continuous.BecomesColorTargetEffect;
 import mage.abilities.effects.common.continuous.BecomesCreatureTypeTargetEffect;
 import mage.abilities.effects.common.continuous.BoostAllEffect;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Duration;
 import mage.constants.Outcome;
-import mage.constants.Rarity;
 import mage.constants.Zone;
 import mage.filter.FilterPermanent;
 import mage.filter.common.FilterCreatureCard;
@@ -74,9 +74,8 @@ public class ChainerDementiaMaster extends CardImpl {
         filterPermanent.add(new SubtypePredicate("Nightmare"));
     }
 
-    public ChainerDementiaMaster(UUID ownerId) {
-        super(ownerId, 56, "Chainer, Dementia Master", Rarity.RARE, new CardType[]{CardType.CREATURE}, "{3}{B}{B}");
-        this.expansionSetCode = "TOR";
+    public ChainerDementiaMaster(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{3}{B}{B}");
         this.supertype.add("Legendary");
         this.subtype.add("Human");
         this.subtype.add("Minion");

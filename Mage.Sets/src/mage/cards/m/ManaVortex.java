@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.masterseditioniii;
+package mage.cards.m;
 
 import java.util.UUID;
 import mage.abilities.Ability;
@@ -38,9 +38,9 @@ import mage.abilities.effects.common.CastSourceTriggeredAbility;
 import mage.abilities.effects.common.SacrificeEffect;
 import mage.abilities.effects.common.SacrificeSourceEffect;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Outcome;
-import mage.constants.Rarity;
 import mage.constants.TargetController;
 import mage.constants.Zone;
 import mage.filter.common.FilterControlledLandPermanent;
@@ -60,9 +60,8 @@ public class ManaVortex extends CardImpl {
     
     public static final FilterLandPermanent filter = new FilterLandPermanent();
 
-    public ManaVortex(UUID ownerId) {
-        super(ownerId, 44, "Mana Vortex", Rarity.RARE, new CardType[]{CardType.ENCHANTMENT}, "{1}{U}{U}");
-        this.expansionSetCode = "ME3";
+    public ManaVortex(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.ENCHANTMENT},"{1}{U}{U}");
 
         // When you cast Mana Vortex, counter it unless you sacrifice a land.
         this.addAbility(new CastSourceTriggeredAbility(new CounterSourceEffect()));

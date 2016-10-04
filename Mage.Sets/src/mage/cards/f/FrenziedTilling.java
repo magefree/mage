@@ -25,14 +25,14 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.invasion;
+package mage.cards.f;
 
 import java.util.UUID;
 import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.abilities.effects.common.DestroyTargetEffect;
 import mage.abilities.effects.common.search.SearchLibraryPutInPlayEffect;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.filter.common.FilterBasicLandCard;
 import mage.target.common.TargetCardInLibrary;
 import mage.target.common.TargetLandPermanent;
@@ -43,9 +43,8 @@ import mage.target.common.TargetLandPermanent;
  */
 public class FrenziedTilling extends CardImpl {
 
-    public FrenziedTilling(UUID ownerId) {
-        super(ownerId, 247, "Frenzied Tilling", Rarity.COMMON, new CardType[]{CardType.SORCERY}, "{3}{R}{G}");
-        this.expansionSetCode = "INV";
+    public FrenziedTilling(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{3}{R}{G}");
 
 
         // Destroy target land. Search your library for a basic land card and put that card onto the battlefield tapped. Then shuffle your library.

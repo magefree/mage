@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.khansoftarkir;
+package mage.cards.j;
 
 import java.util.UUID;
 import mage.abilities.Ability;
@@ -35,9 +35,9 @@ import mage.abilities.effects.common.DrawDiscardControllerEffect;
 import mage.abilities.effects.common.UntapAllControllerEffect;
 import mage.abilities.effects.common.continuous.BoostControlledEffect;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Duration;
-import mage.constants.Rarity;
 import mage.filter.FilterSpell;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.filter.predicate.Predicates;
@@ -55,9 +55,8 @@ public class JeskaiAscendancy extends CardImpl {
         filterNonCreature.add(Predicates.not(new CardTypePredicate(CardType.CREATURE)));
     }
 
-    public JeskaiAscendancy(UUID ownerId) {
-        super(ownerId, 180, "Jeskai Ascendancy", Rarity.RARE, new CardType[]{CardType.ENCHANTMENT}, "{U}{R}{W}");
-        this.expansionSetCode = "KTK";
+    public JeskaiAscendancy(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.ENCHANTMENT},"{U}{R}{W}");
 
 
         // Whenever you cast a noncreature spell, creatures you control get +1/+1 until end of turn. Untap those creatures.

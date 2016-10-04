@@ -25,15 +25,15 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.commander2014;
+package mage.cards.d;
 
 import java.util.UUID;
 import mage.abilities.dynamicvalue.common.PermanentsOnBattlefieldCount;
 import mage.abilities.effects.Effect;
 import mage.abilities.effects.common.CreateTokenEffect;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.game.permanent.token.SoldierToken;
 
@@ -43,9 +43,8 @@ import mage.game.permanent.token.SoldierToken;
  */
 public class DeployToTheFront extends CardImpl {
 
-    public DeployToTheFront(UUID ownerId) {
-        super(ownerId, 6, "Deploy to the Front", Rarity.RARE, new CardType[]{CardType.SORCERY}, "{5}{W}{W}");
-        this.expansionSetCode = "C14";
+    public DeployToTheFront(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{5}{W}{W}");
 
         // Put X 1/1 white Soldier creature tokens onto the battlefield, where X is the number of creatures on the battlefield.
         Effect effect = new CreateTokenEffect(new SoldierToken(), new PermanentsOnBattlefieldCount(new FilterCreaturePermanent("the number of creatures on the battlefield")));

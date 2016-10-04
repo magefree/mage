@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.portal;
+package mage.cards.t;
 
 import java.util.UUID;
 import mage.MageInt;
@@ -34,8 +34,8 @@ import mage.abilities.costs.common.DiscardCardCost;
 import mage.abilities.effects.Effect;
 import mage.abilities.effects.common.SacrificeSourceUnlessPaysEffect;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.filter.common.FilterLandCard;
 
 /**
@@ -44,9 +44,8 @@ import mage.filter.common.FilterLandCard;
  */
 public class ThunderingWurm extends CardImpl {
 
-    public ThunderingWurm(UUID ownerId) {
-        super(ownerId, 115, "Thundering Wurm", Rarity.RARE, new CardType[]{CardType.CREATURE}, "{2}{G}");
-        this.expansionSetCode = "POR";
+    public ThunderingWurm(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{2}{G}");
         this.subtype.add("Wurm");
         this.power = new MageInt(4);
         this.toughness = new MageInt(4);

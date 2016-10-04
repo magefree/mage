@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.theros;
+package mage.cards.p;
 
 import java.util.UUID;
 import mage.MageInt;
@@ -39,8 +39,8 @@ import mage.abilities.keyword.MonstrosityAbility;
 import mage.abilities.keyword.ProtectionAbility;
 import mage.abilities.keyword.TrampleAbility;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.filter.FilterCard;
 import mage.filter.FilterPermanent;
 import mage.filter.common.FilterEnchantmentPermanent;
@@ -66,9 +66,8 @@ public class PolisCrusher extends CardImpl {
 
     private final UUID originalId;
 
-    public PolisCrusher(UUID ownerId) {
-        super(ownerId, 198, "Polis Crusher", Rarity.RARE, new CardType[]{CardType.CREATURE}, "{2}{R}{G}");
-        this.expansionSetCode = "THS";
+    public PolisCrusher(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{2}{R}{G}");
         this.subtype.add("Cyclops");
 
         this.power = new MageInt(4);

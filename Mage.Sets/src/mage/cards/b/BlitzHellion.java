@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.alarareborn;
+package mage.cards.b;
 
 import java.util.UUID;
 
@@ -36,6 +36,7 @@ import mage.abilities.effects.common.ShuffleIntoLibrarySourceEffect;
 import mage.abilities.keyword.HasteAbility;
 import mage.abilities.keyword.TrampleAbility;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.*;
 
 /**
@@ -44,9 +45,8 @@ import mage.constants.*;
  */
 public class BlitzHellion extends CardImpl {
 
-    public BlitzHellion(UUID ownerId) {
-        super(ownerId, 49, "Blitz Hellion", Rarity.RARE, new CardType[]{CardType.CREATURE}, "{3}{R}{G}");
-        this.expansionSetCode = "ARB";
+    public BlitzHellion(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{3}{R}{G}");
         this.subtype.add("Hellion");
 
 

@@ -25,15 +25,15 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.portalthreekingdoms;
+package mage.cards.b;
 
 import java.util.UUID;
 import mage.abilities.dynamicvalue.common.ManacostVariableValue;
 import mage.abilities.effects.common.DamageEverythingEffect;
 import mage.abilities.keyword.HorsemanshipAbility;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.filter.predicate.mageobject.AbilityPredicate;
 
@@ -49,9 +49,8 @@ public class BorrowingTheEastWind extends CardImpl {
         filter.add(new AbilityPredicate(HorsemanshipAbility.class));
     }
 
-    public BorrowingTheEastWind(UUID ownerId) {
-        super(ownerId, 133, "Borrowing the East Wind", Rarity.RARE, new CardType[]{CardType.SORCERY}, "{X}{G}{G}");
-        this.expansionSetCode = "PTK";
+    public BorrowingTheEastWind(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{X}{G}{G}");
 
         // Borrowing the East Wind deals X damage to each creature with horsemanship and each player.
         this.getSpellAbility().addEffect(new DamageEverythingEffect(new ManacostVariableValue(), filter));                                                                                                  }

@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.invasion;
+package mage.cards.v;
 
 import java.util.UUID;
 import mage.MageInt;
@@ -34,8 +34,8 @@ import mage.abilities.keyword.ProtectionAbility;
 import mage.filter.FilterCard;
 import mage.filter.predicate.mageobject.ColorPredicate;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.Rarity;
 
 /**
  *
@@ -47,9 +47,8 @@ public class VodalianZombie extends CardImpl {
         protectionFilter.add(new ColorPredicate(ObjectColor.GREEN));
     }
     
-    public VodalianZombie(UUID ownerId) {
-        super(ownerId, 286, "Vodalian Zombie", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{U}{B}");
-        this.expansionSetCode = "INV";
+    public VodalianZombie(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{U}{B}");
         this.subtype.add("Merfolk");
         this.subtype.add("Zombie");
         this.power = new MageInt(2);

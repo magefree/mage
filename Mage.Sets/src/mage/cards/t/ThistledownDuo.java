@@ -25,12 +25,11 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.shadowmoor;
+package mage.cards.t;
 
 import java.util.UUID;
 import mage.constants.CardType;
 import mage.constants.Duration;
-import mage.constants.Rarity;
 import mage.MageInt;
 import mage.ObjectColor;
 import mage.abilities.common.SpellCastControllerTriggeredAbility;
@@ -38,6 +37,7 @@ import mage.abilities.effects.common.continuous.BoostSourceEffect;
 import mage.abilities.effects.common.continuous.GainAbilitySourceEffect;
 import mage.abilities.keyword.FlyingAbility;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.filter.FilterSpell;
 import mage.filter.predicate.mageobject.ColorPredicate;
 
@@ -55,9 +55,8 @@ public class ThistledownDuo extends CardImpl {
         blueFilter.add(new ColorPredicate(ObjectColor.BLUE));
     }
 
-    public ThistledownDuo(UUID ownerId) {
-        super(ownerId, 152, "Thistledown Duo", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{2}{W/U}");
-        this.expansionSetCode = "SHM";
+    public ThistledownDuo(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{2}{W/U}");
         this.subtype.add("Kithkin");
         this.subtype.add("Soldier");
         this.subtype.add("Wizard");

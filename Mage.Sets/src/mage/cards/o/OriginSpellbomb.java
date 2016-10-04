@@ -26,11 +26,10 @@
  *  or implied, of BetaSteward_at_googlemail.com.
  */
 
-package mage.sets.scarsofmirrodin;
+package mage.cards.o;
 
 import java.util.UUID;
 import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.constants.Zone;
 import mage.abilities.Ability;
 import mage.abilities.common.DiesTriggeredAbility;
@@ -43,6 +42,7 @@ import mage.abilities.effects.common.CreateTokenEffect;
 import mage.abilities.effects.common.DoIfCostPaid;
 import mage.abilities.effects.common.DrawCardSourceControllerEffect;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.game.permanent.token.MyrToken;
 
 /**
@@ -51,9 +51,8 @@ import mage.game.permanent.token.MyrToken;
  */
 public class OriginSpellbomb extends CardImpl {
 
-    public OriginSpellbomb (UUID ownerId) {
-        super(ownerId, 189, "Origin Spellbomb", Rarity.COMMON, new CardType[]{CardType.ARTIFACT}, "{1}");
-        this.expansionSetCode = "SOM";
+    public OriginSpellbomb (UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.ARTIFACT},"{1}");
         Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new CreateTokenEffect(new MyrToken(), 1), new GenericManaCost(1));
         ability.addCost(new TapSourceCost());
         ability.addCost(new SacrificeSourceCost());

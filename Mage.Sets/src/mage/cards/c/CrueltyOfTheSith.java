@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.starwars;
+package mage.cards.c;
 
 import java.util.UUID;
 import mage.abilities.Mode;
@@ -34,8 +34,8 @@ import mage.abilities.effects.common.DamageTargetEffect;
 import mage.abilities.effects.common.SacrificeEffect;
 import mage.abilities.effects.common.discard.DiscardTargetEffect;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.filter.FilterSpell;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.filter.predicate.Predicates;
@@ -55,9 +55,8 @@ public class CrueltyOfTheSith extends CardImpl {
         filterNoncreature.add(Predicates.not(new CardTypePredicate(CardType.CREATURE)));
     }
 
-    public CrueltyOfTheSith(UUID ownerId) {
-        super(ownerId, 190, "Cruelty of the Sith", Rarity.UNCOMMON, new CardType[]{CardType.INSTANT}, "{U}{B}{R}");
-        this.expansionSetCode = "SWS";
+    public CrueltyOfTheSith(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.INSTANT},"{U}{B}{R}");
 
         // Choose one - Counter target noncreature spell.
         this.getSpellAbility().addEffect(new CounterTargetEffect());

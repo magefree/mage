@@ -25,13 +25,13 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.shadowmoor;
+package mage.cards.s;
 
 import java.util.UUID;
 import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.abilities.effects.common.search.SearchLibraryPutInHandEffect;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.filter.FilterCard;
 import mage.filter.predicate.Predicates;
 import mage.filter.predicate.mageobject.SubtypePredicate;
@@ -49,9 +49,8 @@ public class SafewrightQuest extends CardImpl {
         filter.add(Predicates.or(new SubtypePredicate("Forest"), new SubtypePredicate("Plains")));
     }
 
-    public SafewrightQuest(UUID ownerId) {
-        super(ownerId, 240, "Safewright Quest", Rarity.COMMON, new CardType[]{CardType.SORCERY}, "{G/W}");
-        this.expansionSetCode = "SHM";
+    public SafewrightQuest(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{G/W}");
 
 
         // Search your library for a Forest or Plains card, reveal it, and put it into your hand. Then shuffle your library.

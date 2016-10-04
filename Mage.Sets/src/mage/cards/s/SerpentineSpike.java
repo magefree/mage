@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.battleforzendikar;
+package mage.cards.s;
 
 import java.util.UUID;
 import mage.abilities.Ability;
@@ -34,10 +34,10 @@ import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.replacement.DealtDamageToCreatureBySourceDies;
 import mage.abilities.keyword.DevoidAbility;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Duration;
 import mage.constants.Outcome;
-import mage.constants.Rarity;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.filter.predicate.mageobject.AnotherTargetPredicate;
 import mage.game.Game;
@@ -51,9 +51,8 @@ import mage.watchers.common.DamagedByWatcher;
  */
 public class SerpentineSpike extends CardImpl {
 
-    public SerpentineSpike(UUID ownerId) {
-        super(ownerId, 133, "Serpentine Spike", Rarity.RARE, new CardType[]{CardType.SORCERY}, "{5}{R}{R}");
-        this.expansionSetCode = "BFZ";
+    public SerpentineSpike(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{5}{R}{R}");
 
         // Devoid
         Ability ability = new DevoidAbility(this.color);

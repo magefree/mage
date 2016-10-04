@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.morningtide;
+package mage.cards.s;
 
 import java.util.UUID;
 import mage.abilities.condition.common.PermanentsOnTheBattlefieldCondition;
@@ -34,8 +34,8 @@ import mage.abilities.decorator.ConditionalOneShotEffect;
 import mage.abilities.effects.common.CounterUnlessPaysEffect;
 import mage.abilities.effects.common.DrawCardSourceControllerEffect;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.filter.FilterPermanent;
 import mage.filter.predicate.mageobject.SubtypePredicate;
 import mage.target.TargetSpell;
@@ -52,9 +52,8 @@ public class SagesDousing extends CardImpl {
         filter.add(new SubtypePredicate("Wizard"));
     }
 
-    public SagesDousing(UUID ownerId) {
-        super(ownerId, 48, "Sage's Dousing", Rarity.UNCOMMON, new CardType[]{CardType.TRIBAL, CardType.INSTANT}, "{2}{U}");
-        this.expansionSetCode = "MOR";
+    public SagesDousing(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.TRIBAL,CardType.INSTANT},"{2}{U}");
         this.subtype.add("Wizard");
 
         // Counter target spell unless its controller pays {3}. 

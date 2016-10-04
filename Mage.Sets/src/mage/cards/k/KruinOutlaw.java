@@ -25,11 +25,10 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.innistrad;
+package mage.cards.k;
 
 import java.util.UUID;
 import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.constants.TargetController;
 import mage.MageInt;
 import mage.abilities.TriggeredAbility;
@@ -39,7 +38,9 @@ import mage.abilities.decorator.ConditionalTriggeredAbility;
 import mage.abilities.effects.common.TransformSourceEffect;
 import mage.abilities.keyword.FirstStrikeAbility;
 import mage.abilities.keyword.TransformAbility;
+import mage.cards.t.TerrorOfKruinPass;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 
 /**
  *
@@ -47,15 +48,14 @@ import mage.cards.CardImpl;
  */
 public class KruinOutlaw extends CardImpl {
 
-    public KruinOutlaw(UUID ownerId) {
-        super(ownerId, 152, "Kruin Outlaw", Rarity.RARE, new CardType[]{CardType.CREATURE}, "{1}{R}{R}");
-        this.expansionSetCode = "ISD";
+    public KruinOutlaw(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{1}{R}{R}");
         this.subtype.add("Human");
         this.subtype.add("Rogue");
         this.subtype.add("Werewolf");
 
         this.transformable = true;
-        this.secondSideCard = new TerrorOfKruinPass(ownerId);
+        this.secondSideCardClazz = TerrorOfKruinPass.class;
 
         this.power = new MageInt(2);
         this.toughness = new MageInt(2);

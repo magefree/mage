@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.shardsofalara;
+package mage.cards.e;
 
 import java.util.HashSet;
 import java.util.Set;
@@ -37,10 +37,10 @@ import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.effects.ContinuousRuleModifyingEffectImpl;
 import mage.cards.Card;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Duration;
 import mage.constants.Outcome;
-import mage.constants.Rarity;
 import mage.constants.WatcherScope;
 import mage.constants.Zone;
 import mage.game.Game;
@@ -54,9 +54,8 @@ import mage.watchers.Watcher;
  */
 public class EtherswornCanonist extends CardImpl {
 
-    public EtherswornCanonist(UUID ownerId) {
-        super(ownerId, 10, "Ethersworn Canonist", Rarity.RARE, new CardType[]{CardType.ARTIFACT, CardType.CREATURE}, "{1}{W}");
-        this.expansionSetCode = "ALA";
+    public EtherswornCanonist(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.ARTIFACT,CardType.CREATURE},"{1}{W}");
         this.subtype.add("Human");
         this.subtype.add("Cleric");
 

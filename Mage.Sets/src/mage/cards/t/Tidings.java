@@ -25,13 +25,13 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.tenthedition;
+package mage.cards.t;
 
 import java.util.UUID;
 import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.abilities.effects.common.DrawCardSourceControllerEffect;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 
 /**
  *
@@ -39,9 +39,8 @@ import mage.cards.CardImpl;
  */
 public class Tidings extends CardImpl {
 
-    public Tidings(UUID ownerId) {
-        super(ownerId, 116, "Tidings", Rarity.UNCOMMON, new CardType[]{CardType.SORCERY}, "{3}{U}{U}");
-        this.expansionSetCode = "10E";
+    public Tidings(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{3}{U}{U}");
 
         this.getSpellAbility().addEffect(new DrawCardSourceControllerEffect(4));
     }

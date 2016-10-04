@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.saviorsofkamigawa;
+package mage.cards.f;
 
 import java.util.UUID;
 import mage.MageInt;
@@ -36,9 +36,9 @@ import mage.abilities.effects.common.CreateTokenEffect;
 import mage.abilities.effects.common.ExileTargetEffect;
 import mage.abilities.keyword.HasteAbility;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Outcome;
-import mage.constants.Rarity;
 import mage.constants.Zone;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
@@ -52,9 +52,8 @@ import mage.target.targetpointer.FixedTarget;
  */
 public class FeralLightning extends CardImpl {
 
-    public FeralLightning(UUID ownerId) {
-        super(ownerId, 97, "Feral Lightning", Rarity.UNCOMMON, new CardType[]{CardType.SORCERY}, "{3}{R}{R}{R}");
-        this.expansionSetCode = "SOK";
+    public FeralLightning(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{3}{R}{R}{R}");
 
         // Put three 3/1 red Elemental creature tokens with haste onto the battlefield. Exile them at the beginning of the next end step.
         this.getSpellAbility().addEffect(new FeralLightningEffect());

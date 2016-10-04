@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.odyssey;
+package mage.cards.d;
 
 import java.util.UUID;
 import mage.abilities.Ability;
@@ -42,10 +42,10 @@ import mage.abilities.effects.common.ExileTargetEffect;
 import mage.abilities.effects.common.continuous.GainAbilitySourceEffect;
 import mage.cards.Card;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.AbilityWord;
 import mage.constants.CardType;
 import mage.constants.Outcome;
-import mage.constants.Rarity;
 import mage.constants.TargetController;
 import mage.constants.Zone;
 import mage.filter.common.FilterCreaturePermanent;
@@ -73,9 +73,8 @@ public class DecayingSoil extends CardImpl {
         filter.add(Predicates.not(new TokenPredicate()));
     }
 
-    public DecayingSoil(UUID ownerId) {
-        super(ownerId, 127, "Decaying Soil", Rarity.RARE, new CardType[]{CardType.ENCHANTMENT}, "{1}{B}{B}");
-        this.expansionSetCode = "ODY";
+    public DecayingSoil(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.ENCHANTMENT},"{1}{B}{B}");
 
 
         // At the beginning of your upkeep, exile a card from your graveyard.

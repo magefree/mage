@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.shadowsoverinnistrad;
+package mage.cards.h;
 
 import java.util.UUID;
 import mage.MageInt;
@@ -34,9 +34,10 @@ import mage.abilities.condition.common.PermanentsOnTheBattlefieldCondition;
 import mage.abilities.decorator.ConditionalTriggeredAbility;
 import mage.abilities.effects.common.TransformSourceEffect;
 import mage.abilities.keyword.TransformAbility;
+import mage.cards.w.WestvaleCultLeader;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.constants.TargetController;
 import mage.filter.common.FilterControlledCreaturePermanent;
 
@@ -48,16 +49,15 @@ public class HanweirMilitiaCaptain extends CardImpl {
 
     private static final FilterControlledCreaturePermanent filter = new FilterControlledCreaturePermanent("if you control four or more creatures");
 
-    public HanweirMilitiaCaptain(UUID ownerId) {
-        super(ownerId, 21, "Hanweir Militia Captain", Rarity.RARE, new CardType[]{CardType.CREATURE}, "{1}{W}");
-        this.expansionSetCode = "SOI";
+    public HanweirMilitiaCaptain(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{1}{W}");
         this.subtype.add("Human");
         this.subtype.add("Soldier");
         this.power = new MageInt(2);
         this.toughness = new MageInt(2);
 
         this.transformable = true;
-        this.secondSideCard = new WestvaleCultLeader(ownerId);
+        this.secondSideCardClazz = WestvaleCultLeader.class;
 
         // At the beginning of your upkeep, if you control four or more creatures, transform Hanweir Militia Captain.
         this.addAbility(new TransformAbility());

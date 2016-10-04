@@ -25,12 +25,11 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.darkascension;
+package mage.cards.e;
 
 import java.util.UUID;
 
 import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.abilities.Ability;
 import mage.abilities.common.DealsDamageToAPlayerAttachedTriggeredAbility;
 import mage.abilities.common.SimpleStaticAbility;
@@ -39,7 +38,9 @@ import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.continuous.BoostEquippedEffect;
 import mage.abilities.keyword.EquipAbility;
 import mage.abilities.keyword.TransformAbility;
+import mage.cards.w.WithengarUnbound;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.Outcome;
 import mage.constants.Zone;
 import mage.game.Game;
@@ -51,14 +52,13 @@ import mage.game.permanent.Permanent;
  */
 public class ElbrusTheBindingBlade extends CardImpl {
 
-    public ElbrusTheBindingBlade(UUID ownerId) {
-        super(ownerId, 147, "Elbrus, the Binding Blade", Rarity.MYTHIC, new CardType[]{CardType.ARTIFACT}, "{7}");
-        this.expansionSetCode = "DKA";
+    public ElbrusTheBindingBlade(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.ARTIFACT},"{7}");
         this.supertype.add("Legendary");
         this.subtype.add("Equipment");
 
         this.transformable = true;
-        this.secondSideCard = new WithengarUnbound(ownerId);
+        this.secondSideCardClazz = WithengarUnbound.class;
         this.addAbility(new TransformAbility());
 
         // Equipped creature gets +1/+0.

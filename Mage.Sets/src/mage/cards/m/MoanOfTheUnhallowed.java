@@ -25,15 +25,15 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.innistrad;
+package mage.cards.m;
 
 import java.util.UUID;
 import mage.abilities.costs.mana.ManaCostsImpl;
 import mage.abilities.effects.common.CreateTokenEffect;
 import mage.abilities.keyword.FlashbackAbility;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.constants.TimingRule;
 import mage.game.permanent.token.ZombieToken;
 
@@ -43,9 +43,8 @@ import mage.game.permanent.token.ZombieToken;
  */
 public class MoanOfTheUnhallowed extends CardImpl {
 
-    public MoanOfTheUnhallowed(UUID ownerId) {
-        super(ownerId, 109, "Moan of the Unhallowed", Rarity.UNCOMMON, new CardType[]{CardType.SORCERY}, "{2}{B}{B}");
-        this.expansionSetCode = "ISD";
+    public MoanOfTheUnhallowed(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{2}{B}{B}");
 
         // Put two 2/2 black Zombie creature tokens onto the battlefield.
         this.getSpellAbility().addEffect(new CreateTokenEffect(new ZombieToken(), 2));

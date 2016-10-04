@@ -25,15 +25,15 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.timespiral;
+package mage.cards.s;
 
 import java.util.UUID;
 import mage.abilities.dynamicvalue.common.ManacostVariableValue;
 import mage.abilities.effects.common.DamageEverythingEffect;
 import mage.abilities.keyword.FlyingAbility;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.filter.predicate.mageobject.AbilityPredicate;
 
@@ -49,9 +49,8 @@ public class SquallLine extends CardImpl {
         filter.add(new AbilityPredicate(FlyingAbility.class));
     }
 
-    public SquallLine(UUID ownerId) {
-        super(ownerId, 222, "Squall Line", Rarity.RARE, new CardType[]{CardType.INSTANT}, "{X}{G}{G}");
-        this.expansionSetCode = "TSP";
+    public SquallLine(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.INSTANT},"{X}{G}{G}");
 
         // Squall Line deals X damage to each creature with flying and each player.
         this.getSpellAbility().addEffect(new DamageEverythingEffect(new ManacostVariableValue(), filter));                                                                                                  }

@@ -25,13 +25,13 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.elspethvstezzeret;
+package mage.cards.a;
 
 import java.util.UUID;
 import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.abilities.effects.common.ReturnFromGraveyardToBattlefieldTargetEffect;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.filter.common.FilterArtifactCard;
 import mage.target.common.TargetCardInYourGraveyard;
 
@@ -41,9 +41,8 @@ import mage.target.common.TargetCardInYourGraveyard;
  */
 public class ArgivianRestoration extends CardImpl {
 
-    public ArgivianRestoration(UUID ownerId) {
-        super(ownerId, 69, "Argivian Restoration", Rarity.UNCOMMON, new CardType[]{CardType.SORCERY}, "{2}{U}{U}");
-        this.expansionSetCode = "DDF";
+    public ArgivianRestoration(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{2}{U}{U}");
 
 
         // Return target artifact card from your graveyard to the battlefield.

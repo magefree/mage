@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.khansoftarkir;
+package mage.cards.i;
 
 import java.util.UUID;
 import mage.MageInt;
@@ -36,8 +36,8 @@ import mage.abilities.costs.mana.ManaCostsImpl;
 import mage.abilities.effects.common.ReturnToHandTargetEffect;
 import mage.abilities.keyword.MorphAbility;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.filter.predicate.permanent.AnotherPredicate;
 import mage.target.common.TargetCreaturePermanent;
@@ -54,9 +54,8 @@ public class IcefeatherAven extends CardImpl {
         filter.add(new AnotherPredicate());
     }
 
-    public IcefeatherAven(UUID ownerId) {
-        super(ownerId, 178, "Icefeather Aven", Rarity.UNCOMMON, new CardType[]{CardType.CREATURE}, "{G}{U}");
-        this.expansionSetCode = "KTK";
+    public IcefeatherAven(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{G}{U}");
         this.subtype.add("Bird");
         this.subtype.add("Shaman");
 

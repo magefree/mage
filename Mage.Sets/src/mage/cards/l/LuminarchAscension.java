@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.zendikar;
+package mage.cards.l;
 
 import java.util.UUID;
 import mage.abilities.Ability;
@@ -39,8 +39,8 @@ import mage.abilities.decorator.ConditionalTriggeredAbility;
 import mage.abilities.effects.common.CreateTokenEffect;
 import mage.abilities.effects.common.counter.AddCountersSourceEffect;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.constants.Zone;
 import mage.counters.CounterType;
 import mage.game.Game;
@@ -57,9 +57,8 @@ public class LuminarchAscension extends CardImpl {
 
     private String rule = "At the beginning of each opponent's end step, if you didn't lose life this turn, you may put a quest counter on Luminarch Ascension. (Damage causes loss of life.)";
 
-    public LuminarchAscension(UUID ownerId) {
-        super(ownerId, 25, "Luminarch Ascension", Rarity.RARE, new CardType[]{CardType.ENCHANTMENT}, "{1}{W}");
-        this.expansionSetCode = "ZEN";
+    public LuminarchAscension(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.ENCHANTMENT},"{1}{W}");
 
         // At the beginning of each opponent's end step, if you didn't lose life this turn, you may put a quest counter on Luminarch Ascension.
         this.addAbility(new ConditionalTriggeredAbility(new LuminarchAscensionTriggeredAbility(), YouLostNoLifeThisTurnCondition.getInstance(), rule));

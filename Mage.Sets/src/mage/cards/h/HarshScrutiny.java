@@ -25,14 +25,14 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.kaladesh;
+package mage.cards.h;
 
 import java.util.UUID;
 import mage.abilities.effects.common.discard.DiscardCardYouChooseTargetEffect;
 import mage.abilities.effects.keyword.ScryEffect;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.filter.common.FilterCreatureCard;
 import mage.target.common.TargetOpponent;
 
@@ -42,9 +42,8 @@ import mage.target.common.TargetOpponent;
  */
 public class HarshScrutiny extends CardImpl {
 
-    public HarshScrutiny(UUID ownerId) {
-        super(ownerId, 85, "Harsh Scrutiny", Rarity.UNCOMMON, new CardType[]{CardType.SORCERY}, "{B}");
-        this.expansionSetCode = "KLD";
+    public HarshScrutiny(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{B}");
 
         // Target opponent reveals his or her hand. You choose a creature card from it. That player discards that card. Scry 1.
         this.getSpellAbility().addTarget(new TargetOpponent());

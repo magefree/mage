@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.conflux;
+package mage.cards.s;
 
 import java.util.UUID;
 import mage.abilities.Ability;
@@ -34,9 +34,9 @@ import mage.abilities.costs.common.SacrificeSourceCost;
 import mage.abilities.effects.RequirementEffect;
 import mage.abilities.effects.common.continuous.BoostOpponentsEffect;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Duration;
-import mage.constants.Rarity;
 import mage.constants.Zone;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
@@ -47,9 +47,8 @@ import mage.game.permanent.Permanent;
  */
 public class SuicidalCharge extends CardImpl {
 
-    public SuicidalCharge(UUID ownerId) {
-        super(ownerId, 128, "Suicidal Charge", Rarity.COMMON, new CardType[]{CardType.ENCHANTMENT}, "{3}{B}{R}");
-        this.expansionSetCode = "CON";
+    public SuicidalCharge(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.ENCHANTMENT},"{3}{B}{R}");
 
 
         // Sacrifice Suicidal Charge: Creatures your opponents control get -1/-1 until end of turn. Those creatures attack this turn if able.

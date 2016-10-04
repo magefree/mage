@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.oathofthegatewatch;
+package mage.cards.m;
 
 import java.util.UUID;
 import mage.MageInt;
@@ -35,10 +35,10 @@ import mage.abilities.common.DiesTriggeredAbility;
 import mage.abilities.effects.OneShotEffect;
 import mage.cards.Card;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.cards.CardsImpl;
 import mage.constants.CardType;
 import mage.constants.Outcome;
-import mage.constants.Rarity;
 import mage.constants.Zone;
 import mage.filter.Filter.ComparisonType;
 import mage.filter.common.FilterPermanentCard;
@@ -52,9 +52,8 @@ import mage.players.Player;
  */
 public class MatterReshaper extends CardImpl {
 
-    public MatterReshaper(UUID ownerId) {
-        super(ownerId, 6, "Matter Reshaper", Rarity.RARE, new CardType[]{CardType.CREATURE}, "{2}{C}");
-        this.expansionSetCode = "OGW";
+    public MatterReshaper(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{2}{C}");
         this.subtype.add("Eldrazi");
         this.power = new MageInt(3);
         this.toughness = new MageInt(2);

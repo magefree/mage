@@ -25,12 +25,11 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.invasion;
+package mage.cards.g;
 
 import java.util.UUID;
 
 import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.Mana;
 import mage.abilities.Ability;
 import mage.abilities.common.EntersBattlefieldTappedAbility;
@@ -40,6 +39,7 @@ import mage.abilities.effects.common.BasicManaEffect;
 import mage.abilities.mana.RedManaAbility;
 import mage.abilities.mana.SimpleManaAbility;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.Zone;
 
 /**
@@ -48,9 +48,8 @@ import mage.constants.Zone;
  */
 public class GeothermalCrevice extends CardImpl {
 
-    public GeothermalCrevice(UUID ownerId) {
-        super(ownerId, 323, "Geothermal Crevice", Rarity.COMMON, new CardType[]{CardType.LAND}, "");
-        this.expansionSetCode = "INV";
+    public GeothermalCrevice(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.LAND},"");
 
         // Geothermal Crevice enters the battlefield tapped.
         this.addAbility(new EntersBattlefieldTappedAbility());

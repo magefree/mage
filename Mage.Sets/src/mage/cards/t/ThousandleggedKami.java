@@ -26,24 +26,23 @@
  *  or implied, of BetaSteward_at_googlemail.com.
  */
 
-package mage.sets.championsofkamigawa;
+package mage.cards.t;
 
 import java.util.UUID;
 
 import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.MageInt;
 import mage.abilities.keyword.SoulshiftAbility;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 
 /**
  * @author Loki
  */
 public class ThousandleggedKami extends CardImpl {
 
-    public ThousandleggedKami(UUID ownerId) {
-        super(ownerId, 246, "Thousand-legged Kami", Rarity.UNCOMMON, new CardType[]{CardType.CREATURE}, "{6}{G}{G}");
-        this.expansionSetCode = "CHK";
+    public ThousandleggedKami(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{6}{G}{G}");
         this.subtype.add("Spirit");
 
         this.power = new MageInt(6);

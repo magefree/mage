@@ -25,16 +25,16 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.exodus;
+package mage.cards.m;
 
 import java.util.UUID;
 import mage.abilities.Ability;
 import mage.abilities.common.SpellCastAllTriggeredAbility;
 import mage.abilities.effects.OneShotEffect;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Outcome;
-import mage.constants.Rarity;
 import mage.constants.SetTargetPointer;
 import mage.constants.Zone;
 import mage.filter.FilterSpell;
@@ -52,9 +52,8 @@ import mage.target.common.TargetLandPermanent;
  */
 public class ManaBreach extends CardImpl {
 
-    public ManaBreach(UUID ownerId) {
-        super(ownerId, 38, "Mana Breach", Rarity.UNCOMMON, new CardType[]{CardType.ENCHANTMENT}, "{2}{U}");
-        this.expansionSetCode = "EXO";
+    public ManaBreach(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.ENCHANTMENT},"{2}{U}");
 
         // Whenever a player casts a spell, that player returns a land he or she controls to its owner's hand.
         this.addAbility(new SpellCastAllTriggeredAbility(new ManaBreachEffect(), new FilterSpell(), false, SetTargetPointer.PLAYER));

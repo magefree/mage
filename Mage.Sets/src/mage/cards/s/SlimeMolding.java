@@ -25,14 +25,14 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.returntoravnica;
+package mage.cards.s;
 
 import mage.abilities.Ability;
 import mage.abilities.effects.OneShotEffect;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Outcome;
-import mage.constants.Rarity;
 import mage.game.Game;
 import mage.game.permanent.token.OozeToken;
 
@@ -44,9 +44,8 @@ import java.util.UUID;
  */
 public class SlimeMolding extends CardImpl {
 
-    public SlimeMolding(UUID ownerId) {
-        super(ownerId, 135, "Slime Molding", Rarity.UNCOMMON, new CardType[]{CardType.SORCERY}, "{X}{G}");
-        this.expansionSetCode = "RTR";
+    public SlimeMolding(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{X}{G}");
 
 
         // Put an X/X green Ooze creature token onto the battlefield.

@@ -25,13 +25,13 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.fatereforged;
+package mage.cards.e;
 
 import java.util.UUID;
 import mage.abilities.effects.keyword.ManifestEffect;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.Rarity;
 
 /**
  *
@@ -39,9 +39,8 @@ import mage.constants.Rarity;
  */
 public class EtherealAmbush extends CardImpl {
 
-    public EtherealAmbush(UUID ownerId) {
-        super(ownerId, 152, "Ethereal Ambush", Rarity.COMMON, new CardType[]{CardType.INSTANT}, "{3}{G}{U}");
-        this.expansionSetCode = "FRF";
+    public EtherealAmbush(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.INSTANT},"{3}{G}{U}");
 
         // Manifest the top two cards of your library.
         this.getSpellAbility().addEffect(new ManifestEffect(2));

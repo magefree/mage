@@ -25,17 +25,17 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.iceage;
+package mage.cards.p;
 
 import java.util.UUID;
 import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.MageInt;
 import mage.abilities.common.EntersBattlefieldTappedAbility;
 import mage.abilities.costs.common.SacrificeTargetCost;
 import mage.abilities.keyword.TrampleAbility;
 import mage.abilities.keyword.CumulativeUpkeepAbility;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.filter.common.FilterControlledLandPermanent;
 import mage.target.common.TargetControlledPermanent;
 
@@ -45,9 +45,8 @@ import mage.target.common.TargetControlledPermanent;
  */
 public class PolarKraken extends CardImpl {
 
-    public PolarKraken(UUID ownerId) {
-        super(ownerId, 89, "Polar Kraken", Rarity.RARE, new CardType[]{CardType.CREATURE}, "{8}{U}{U}{U}");
-        this.expansionSetCode = "ICE";
+    public PolarKraken(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{8}{U}{U}{U}");
         this.subtype.add("Kraken");
 
         this.power = new MageInt(11);

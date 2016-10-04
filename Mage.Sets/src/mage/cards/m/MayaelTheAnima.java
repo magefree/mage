@@ -25,11 +25,10 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.shardsofalara;
+package mage.cards.m;
 
 import java.util.UUID;
 import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.constants.Zone;
 import mage.MageInt;
 import mage.abilities.common.SimpleActivatedAbility;
@@ -37,6 +36,7 @@ import mage.abilities.costs.common.TapSourceCost;
 import mage.abilities.costs.mana.ManaCostsImpl;
 import mage.abilities.effects.common.LookLibraryAndPickControllerEffect;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.filter.Filter.ComparisonType;
 import mage.filter.common.FilterCreatureCard;
 import mage.filter.predicate.mageobject.CardTypePredicate;
@@ -54,9 +54,8 @@ public class MayaelTheAnima extends CardImpl {
         filter.add(new PowerPredicate(ComparisonType.GreaterThan, 4));
     }
 
-    public MayaelTheAnima(UUID ownerId) {
-        super(ownerId, 179, "Mayael the Anima", Rarity.MYTHIC, new CardType[]{CardType.CREATURE}, "{R}{G}{W}");
-        this.expansionSetCode = "ALA";
+    public MayaelTheAnima(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{R}{G}{W}");
         this.supertype.add("Legendary");
         this.subtype.add("Elf");
         this.subtype.add("Shaman");

@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.shardsofalara;
+package mage.cards.s;
 
 import java.util.UUID;
 import mage.MageInt;
@@ -35,8 +35,8 @@ import mage.abilities.costs.common.ExileFromGraveCost;
 import mage.abilities.costs.common.SacrificeTargetCost;
 import mage.abilities.effects.common.ReturnSourceFromGraveyardToHandEffect;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.constants.Zone;
 import mage.filter.common.FilterArtifactCard;
 import mage.filter.common.FilterControlledArtifactPermanent;
@@ -56,9 +56,8 @@ public class SalvageTitan extends CardImpl {
         filter.add(new CardTypePredicate(CardType.ARTIFACT));
     }
     
-    public SalvageTitan(UUID ownerId) {
-        super(ownerId, 84, "Salvage Titan", Rarity.RARE, new CardType[]{CardType.ARTIFACT, CardType.CREATURE}, "{4}{B}{B}");
-        this.expansionSetCode = "ALA";
+    public SalvageTitan(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.ARTIFACT,CardType.CREATURE},"{4}{B}{B}");
         this.subtype.add("Golem");
 
         this.power = new MageInt(6);

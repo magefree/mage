@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.invasion;
+package mage.cards.t;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -35,12 +35,12 @@ import mage.abilities.Ability;
 import mage.abilities.effects.OneShotEffect;
 import mage.cards.Card;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.cards.repository.CardRepository;
 import mage.choices.Choice;
 import mage.choices.ChoiceImpl;
 import mage.constants.CardType;
 import mage.constants.Outcome;
-import mage.constants.Rarity;
 import mage.filter.FilterCard;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.filter.predicate.mageobject.SubtypePredicate;
@@ -55,9 +55,8 @@ import mage.target.TargetPlayer;
  */
 public class TsabosDecree extends CardImpl {
 
-    public TsabosDecree(UUID ownerId) {
-        super(ownerId, 129, "Tsabo's Decree", Rarity.RARE, new CardType[]{CardType.INSTANT}, "{5}{B}");
-        this.expansionSetCode = "INV";
+    public TsabosDecree(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.INSTANT},"{5}{B}");
 
         // Choose a creature type. Target player reveals his or her hand and discards all creature cards of that type. Then destroy all creatures of that type that player controls. They can't be regenerated.
         this.getSpellAbility().addEffect(new TsabosDecreeEffect());

@@ -25,11 +25,10 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.returntoravnica;
+package mage.cards.h;
  
 import java.util.UUID;
 import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.constants.Zone;
 import mage.MageInt;
 import mage.abilities.Ability;
@@ -40,6 +39,7 @@ import mage.abilities.dynamicvalue.common.SourcePermanentPowerCount;
 import mage.abilities.effects.common.DamageTargetEffect;
 import mage.abilities.keyword.UnleashAbility;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.target.TargetPlayer;
  
 /**
@@ -48,9 +48,8 @@ import mage.target.TargetPlayer;
  */
 public class HellholeFlailer extends CardImpl {
  
-    public HellholeFlailer(UUID ownerId) {
-        super(ownerId, 167, "Hellhole Flailer", Rarity.UNCOMMON, new CardType[]{CardType.CREATURE}, "{1}{B}{R}");
-        this.expansionSetCode = "RTR";
+    public HellholeFlailer(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{1}{B}{R}");
         this.subtype.add("Ogre");
         this.subtype.add("Warrior");
  

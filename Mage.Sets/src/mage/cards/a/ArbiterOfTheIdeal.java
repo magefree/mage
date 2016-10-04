@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.bornofthegods;
+package mage.cards.a;
 
 import java.util.UUID;
 import mage.MageInt;
@@ -37,12 +37,12 @@ import mage.abilities.keyword.FlyingAbility;
 import mage.abilities.keyword.InspiredAbility;
 import mage.cards.Card;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.cards.Cards;
 import mage.cards.CardsImpl;
 import mage.constants.CardType;
 import mage.constants.Duration;
 import mage.constants.Outcome;
-import mage.constants.Rarity;
 import mage.constants.Zone;
 import mage.counters.Counter;
 import mage.filter.FilterCard;
@@ -59,9 +59,8 @@ import mage.target.targetpointer.FixedTarget;
  */
 public class ArbiterOfTheIdeal extends CardImpl {
 
-    public ArbiterOfTheIdeal(UUID ownerId) {
-        super(ownerId, 31, "Arbiter of the Ideal", Rarity.RARE, new CardType[]{CardType.CREATURE}, "{4}{U}{U}");
-        this.expansionSetCode = "BNG";
+    public ArbiterOfTheIdeal(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{4}{U}{U}");
         this.subtype.add("Sphinx");
 
         this.power = new MageInt(4);

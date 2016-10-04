@@ -25,15 +25,15 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.riseoftheeldrazi;
+package mage.cards.n;
 
 import java.util.UUID;
 import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.abilities.dynamicvalue.common.PermanentsOnBattlefieldCount;
 import mage.abilities.effects.common.CreateTokenEffect;
 import mage.abilities.keyword.ReboundAbility;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.filter.common.FilterControlledCreaturePermanent;
 import mage.game.permanent.token.KorSoldierToken;
 
@@ -45,9 +45,8 @@ public class NomadsAssembly extends CardImpl {
 
     private static final FilterControlledCreaturePermanent filter = new FilterControlledCreaturePermanent();
 
-    public NomadsAssembly(UUID ownerId) {
-        super(ownerId, 39, "Nomads' Assembly", Rarity.RARE, new CardType[]{CardType.SORCERY}, "{4}{W}{W}");
-        this.expansionSetCode = "ROE";
+    public NomadsAssembly(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{4}{W}{W}");
 
 
         this.getSpellAbility().addEffect(new CreateTokenEffect(new KorSoldierToken(), new PermanentsOnBattlefieldCount(filter)));

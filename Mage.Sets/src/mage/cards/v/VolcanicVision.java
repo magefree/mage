@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.dragonsoftarkir;
+package mage.cards.v;
 
 import java.util.UUID;
 import mage.abilities.Ability;
@@ -33,9 +33,9 @@ import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.ExileSpellEffect;
 import mage.cards.Card;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Outcome;
-import mage.constants.Rarity;
 import mage.constants.TargetController;
 import mage.constants.Zone;
 import mage.filter.common.FilterCreaturePermanent;
@@ -52,9 +52,8 @@ import mage.target.common.TargetCardInYourGraveyard;
  */
 public class VolcanicVision extends CardImpl {
 
-    public VolcanicVision(UUID ownerId) {
-        super(ownerId, 167, "Volcanic Vision", Rarity.RARE, new CardType[]{CardType.SORCERY}, "{5}{R}{R}");
-        this.expansionSetCode = "DTK";
+    public VolcanicVision(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{5}{R}{R}");
 
         // Return target instant or sorcery card from your graveyard to your hand. Volcanic Visions deals damage equal to that card's converted mana cost to each creature your opponents control. Exile Volcanic Vision.
         this.getSpellAbility().addEffect(new VolcanicVisionReturnToHandTargetEffect());

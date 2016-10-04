@@ -27,7 +27,7 @@
  *  or implied, of BetaSteward_at_googlemail.com.
  *
  */
-package mage.sets.championsofkamigawa;
+package mage.cards.k;
 
 import java.util.UUID;
 import mage.abilities.Ability;
@@ -37,10 +37,10 @@ import mage.abilities.costs.mana.GenericManaCost;
 import mage.abilities.effects.common.continuous.BoostAllEffect;
 import mage.abilities.keyword.EquipAbility;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Duration;
 import mage.constants.Outcome;
-import mage.constants.Rarity;
 import mage.constants.Zone;
 import mage.filter.common.FilterControlledCreaturePermanent;
 import mage.filter.common.FilterCreaturePermanent;
@@ -63,9 +63,8 @@ public class KondasBanner extends CardImpl {
         legendaryFilter.add(new SupertypePredicate("Legendary"));
     }
 
-    public KondasBanner(UUID ownerId) {
-        super(ownerId, 259, "Konda's Banner", Rarity.RARE, new CardType[]{CardType.ARTIFACT}, "{2}");
-        this.expansionSetCode = "CHK";
+    public KondasBanner(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.ARTIFACT},"{2}");
         this.supertype.add("Legendary");
         this.subtype.add("Equipment");
 

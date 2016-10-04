@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.dragonsmaze;
+package mage.cards.r;
 
 import java.util.ArrayList;
 import java.util.UUID;
@@ -34,11 +34,11 @@ import mage.abilities.Ability;
 import mage.abilities.effects.OneShotEffect;
 import mage.cards.Card;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.cards.Cards;
 import mage.cards.CardsImpl;
 import mage.constants.CardType;
 import mage.constants.Outcome;
-import mage.constants.Rarity;
 import mage.constants.Zone;
 import mage.filter.FilterCard;
 import mage.filter.predicate.Predicates;
@@ -57,9 +57,8 @@ import mage.target.common.TargetOpponent;
  */
 public class ReapIntellect extends CardImpl {
 
-    public ReapIntellect(UUID ownerId) {
-        super(ownerId, 95, "Reap Intellect", Rarity.MYTHIC, new CardType[]{CardType.SORCERY}, "{X}{2}{U}{B}");
-        this.expansionSetCode = "DGM";
+    public ReapIntellect(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{X}{2}{U}{B}");
 
 
         // Target opponent reveals his or her hand. You choose up to X nonland cards from it and exile them. For each card exiled this way, search that player's graveyard, hand, and library for any number of cards with the same name as that card and exile them. Then that player shuffles his or her library.

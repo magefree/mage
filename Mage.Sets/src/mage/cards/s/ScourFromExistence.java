@@ -25,13 +25,13 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.battleforzendikar;
+package mage.cards.s;
 
 import java.util.UUID;
 import mage.abilities.effects.common.ExileTargetEffect;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.target.TargetPermanent;
 
 /**
@@ -40,9 +40,8 @@ import mage.target.TargetPermanent;
  */
 public class ScourFromExistence extends CardImpl {
 
-    public ScourFromExistence(UUID ownerId) {
-        super(ownerId, 13, "Scour from Existence", Rarity.COMMON, new CardType[]{CardType.INSTANT}, "{7}");
-        this.expansionSetCode = "BFZ";
+    public ScourFromExistence(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.INSTANT},"{7}");
 
         // Exile target permanent.
         this.getSpellAbility().addEffect(new ExileTargetEffect());

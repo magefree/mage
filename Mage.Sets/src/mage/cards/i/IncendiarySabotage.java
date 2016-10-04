@@ -25,14 +25,14 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.kaladesh;
+package mage.cards.i;
 
 import java.util.UUID;
 import mage.abilities.costs.common.SacrificeTargetCost;
 import mage.abilities.effects.common.DamageAllEffect;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.filter.common.FilterControlledArtifactPermanent;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.target.common.TargetControlledPermanent;
@@ -43,9 +43,8 @@ import mage.target.common.TargetControlledPermanent;
  */
 public class IncendiarySabotage extends CardImpl {
 
-    public IncendiarySabotage(UUID ownerId) {
-        super(ownerId, 119, "Incendiary Sabotage", Rarity.UNCOMMON, new CardType[]{CardType.INSTANT}, "{2}{R}{R}");
-        this.expansionSetCode = "KLD";
+    public IncendiarySabotage(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.INSTANT},"{2}{R}{R}");
 
         // As an additional cost to cast Incendiary Sabotage, sacrifice an artifact.
         this.getSpellAbility().addCost(new SacrificeTargetCost(new TargetControlledPermanent(new FilterControlledArtifactPermanent("an artifact"))));

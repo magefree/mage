@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.judgment;
+package mage.cards.s;
 
 import java.util.UUID;
 import mage.abilities.common.PutIntoGraveFromBattlefieldAllTriggeredAbility;
@@ -34,9 +34,9 @@ import mage.abilities.dynamicvalue.common.CountersSourceCount;
 import mage.abilities.effects.common.continuous.BoostAllEffect;
 import mage.abilities.effects.common.counter.AddCountersSourceEffect;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Duration;
-import mage.constants.Rarity;
 import mage.constants.Zone;
 import mage.counters.CounterType;
 import mage.filter.FilterPermanent;
@@ -57,9 +57,8 @@ public class SoulcatchersAerie extends CardImpl {
         filter2.add(new SubtypePredicate("Bird"));
     }
 
-    public SoulcatchersAerie(UUID ownerId) {
-        super(ownerId, 25, "Soulcatchers' Aerie", Rarity.UNCOMMON, new CardType[]{CardType.ENCHANTMENT}, "{1}{W}");
-        this.expansionSetCode = "JUD";
+    public SoulcatchersAerie(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.ENCHANTMENT},"{1}{W}");
 
         // Whenever a Bird is put into your graveyard from the battlefield, put a feather counter on Soulcatchers' Aerie.
         this.addAbility(new PutIntoGraveFromBattlefieldAllTriggeredAbility(new AddCountersSourceEffect(CounterType.FEATHER.createInstance()),

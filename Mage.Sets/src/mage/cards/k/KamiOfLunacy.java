@@ -26,25 +26,24 @@
  *  or implied, of BetaSteward_at_googlemail.com.
  */
 
-package mage.sets.championsofkamigawa;
+package mage.cards.k;
 
 import java.util.UUID;
 
 import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.MageInt;
 import mage.abilities.keyword.FlyingAbility;
 import mage.abilities.keyword.SoulshiftAbility;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 
 /**
  * @author Loki
  */
 public class KamiOfLunacy extends CardImpl {
 
-    public KamiOfLunacy(UUID ownerId) {
-        super(ownerId, 119, "Kami of Lunacy", Rarity.UNCOMMON, new CardType[]{CardType.CREATURE}, "{4}{B}{B}");
-        this.expansionSetCode = "CHK";
+    public KamiOfLunacy(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{4}{B}{B}");
         this.subtype.add("Spirit");
 
         this.power = new MageInt(4);

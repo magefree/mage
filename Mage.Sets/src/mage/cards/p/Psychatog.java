@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.vintagemasters;
+package mage.cards.p;
 
 import java.util.UUID;
 import mage.MageInt;
@@ -34,9 +34,9 @@ import mage.abilities.costs.common.DiscardCardCost;
 import mage.abilities.costs.common.ExileFromGraveCost;
 import mage.abilities.effects.common.continuous.BoostSourceEffect;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Duration;
-import mage.constants.Rarity;
 import mage.constants.Zone;
 import mage.filter.FilterCard;
 import mage.target.common.TargetCardInYourGraveyard;
@@ -47,9 +47,8 @@ import mage.target.common.TargetCardInYourGraveyard;
  */
 public class Psychatog extends CardImpl {
 
-    public Psychatog(UUID ownerId) {
-        super(ownerId, 258, "Psychatog", Rarity.UNCOMMON, new CardType[]{CardType.CREATURE}, "{1}{U}{B}");
-        this.expansionSetCode = "VMA";
+    public Psychatog(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{1}{U}{B}");
         this.subtype.add("Atog");
 
         this.power = new MageInt(1);

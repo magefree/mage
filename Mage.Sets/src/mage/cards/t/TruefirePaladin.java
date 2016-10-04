@@ -26,12 +26,11 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.gatecrash;
+package mage.cards.t;
 
 import java.util.UUID;
 import mage.constants.CardType;
 import mage.constants.Duration;
-import mage.constants.Rarity;
 import mage.constants.Zone;
 import mage.MageInt;
 import mage.abilities.common.SimpleActivatedAbility;
@@ -41,6 +40,7 @@ import mage.abilities.effects.common.continuous.GainAbilitySourceEffect;
 import mage.abilities.keyword.FirstStrikeAbility;
 import mage.abilities.keyword.VigilanceAbility;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 
 /**
  *
@@ -48,9 +48,8 @@ import mage.cards.CardImpl;
  */
 public class TruefirePaladin extends CardImpl {
 
-    public TruefirePaladin(UUID ownerId) {
-        super(ownerId, 202, "Truefire Paladin", Rarity.UNCOMMON, new CardType[]{CardType.CREATURE}, "{R}{W}");
-        this.expansionSetCode = "GTC";
+    public TruefirePaladin(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{R}{W}");
 
         this.subtype.add("Human");
         this.subtype.add("Knight");

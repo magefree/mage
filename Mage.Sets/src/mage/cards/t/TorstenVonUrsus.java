@@ -25,13 +25,13 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.legends;
+package mage.cards.t;
 
 import java.util.UUID;
 import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.MageInt;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 
 /**
  *
@@ -39,9 +39,8 @@ import mage.cards.CardImpl;
  */
 public class TorstenVonUrsus extends CardImpl {
 
-    public TorstenVonUrsus(UUID ownerId) {
-        super(ownerId, 306, "Torsten Von Ursus", Rarity.UNCOMMON, new CardType[]{CardType.CREATURE}, "{3}{G}{G}{W}");
-        this.expansionSetCode = "LEG";
+    public TorstenVonUrsus(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{3}{G}{G}{W}");
         this.supertype.add("Legendary");
         this.subtype.add("Human");
         this.subtype.add("Soldier");

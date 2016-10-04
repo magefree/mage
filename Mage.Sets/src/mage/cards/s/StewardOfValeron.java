@@ -26,15 +26,15 @@
  *  or implied, of BetaSteward_at_googlemail.com.
  */
 
-package mage.sets.shardsofalara;
+package mage.cards.s;
 
 import java.util.UUID;
 import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.MageInt;
 import mage.abilities.keyword.VigilanceAbility;
 import mage.abilities.mana.GreenManaAbility;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 
 /**
  *
@@ -42,9 +42,8 @@ import mage.cards.CardImpl;
  */
 public class StewardOfValeron extends CardImpl {
 
-    public StewardOfValeron (UUID ownerId) {
-        super(ownerId, 198, "Steward of Valeron", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{G}{W}");
-        this.expansionSetCode = "ALA";
+    public StewardOfValeron (UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{G}{W}");
         this.subtype.add("Human");
         this.subtype.add("Druid");
         this.subtype.add("Knight");

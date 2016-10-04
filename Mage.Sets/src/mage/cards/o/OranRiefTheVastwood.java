@@ -26,12 +26,11 @@
 * or implied, of BetaSteward_at_googlemail.com.
 */
 
-package mage.sets.zendikar;
+package mage.cards.o;
 
 import java.util.UUID;
 import mage.constants.CardType;
 import mage.constants.Outcome;
-import mage.constants.Rarity;
 import mage.constants.Zone;
 import mage.ObjectColor;
 import mage.abilities.Ability;
@@ -41,6 +40,7 @@ import mage.abilities.costs.common.TapSourceCost;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.mana.GreenManaAbility;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.counters.CounterType;
 import mage.filter.FilterPermanent;
 import mage.filter.predicate.mageobject.CardTypePredicate;
@@ -54,9 +54,8 @@ import mage.game.permanent.Permanent;
  */
 public class OranRiefTheVastwood extends CardImpl {
 
-    public OranRiefTheVastwood(UUID ownerId) {
-        super(ownerId, 221, "Oran-Rief, the Vastwood", Rarity.RARE, new CardType[]{CardType.LAND}, null);
-        this.expansionSetCode = "ZEN";
+    public OranRiefTheVastwood(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.LAND},null);
         this.addAbility(new EntersBattlefieldTappedAbility());
         this.addAbility(new GreenManaAbility());
         this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new OranRiefTheVastwoodEffect(), new TapSourceCost()));

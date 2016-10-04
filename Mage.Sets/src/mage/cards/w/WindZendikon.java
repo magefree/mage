@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.worldwake;
+package mage.cards.w;
 
 import java.util.UUID;
 
@@ -40,6 +40,7 @@ import mage.abilities.effects.common.continuous.BecomesCreatureAttachedEffect;
 import mage.abilities.keyword.EnchantAbility;
 import mage.abilities.keyword.FlyingAbility;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.game.permanent.token.Token;
 import mage.target.TargetPermanent;
 import mage.target.common.TargetLandPermanent;
@@ -50,9 +51,8 @@ import mage.target.common.TargetLandPermanent;
  */
 public class WindZendikon extends CardImpl {
 
-    public WindZendikon(UUID ownerId) {
-        super(ownerId, 46, "Wind Zendikon", Rarity.COMMON, new CardType[]{CardType.ENCHANTMENT}, "{U}");
-        this.expansionSetCode = "WWK";
+    public WindZendikon(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.ENCHANTMENT},"{U}");
         this.subtype.add("Aura");
 
 

@@ -26,17 +26,17 @@
 * or implied, of BetaSteward_at_googlemail.com.
 */
 
-package mage.sets.magic2010;
+package mage.cards.b;
 
 import java.util.UUID;
 import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.MageInt;
 import mage.abilities.keyword.FirstStrikeAbility;
 import mage.abilities.keyword.FlyingAbility;
 import mage.abilities.keyword.LifelinkAbility;
 import mage.abilities.keyword.ProtectionAbility;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.filter.FilterPermanent;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.filter.predicate.Predicates;
@@ -54,9 +54,8 @@ public class BaneslayerAngel extends CardImpl {
         filter.add(Predicates.or(new SubtypePredicate("Demon"), new SubtypePredicate("Dragon")));
     }
 
-    public BaneslayerAngel(UUID ownerId) {
-        super(ownerId, 4, "Baneslayer Angel", Rarity.MYTHIC, new CardType[]{CardType.CREATURE}, "{3}{W}{W}");
-        this.expansionSetCode = "M10";
+    public BaneslayerAngel(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{3}{W}{W}");
         this.subtype.add("Angel");
 
         this.power = new MageInt(5);

@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.battleforzendikar;
+package mage.cards.u;
 
 import java.util.UUID;
 import mage.MageInt;
@@ -37,9 +37,9 @@ import mage.abilities.effects.common.ExileTargetEffect;
 import mage.abilities.keyword.IndestructibleAbility;
 import mage.cards.Card;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Outcome;
-import mage.constants.Rarity;
 import mage.constants.Zone;
 import mage.filter.FilterPermanent;
 import mage.game.Game;
@@ -57,9 +57,8 @@ import mage.target.targetpointer.FixedTarget;
  */
 public class UlamogTheCeaselessHunger extends CardImpl {
 
-    public UlamogTheCeaselessHunger(UUID ownerId) {
-        super(ownerId, 15, "Ulamog, the Ceaseless Hunger", Rarity.MYTHIC, new CardType[]{CardType.CREATURE}, "{10}");
-        this.expansionSetCode = "BFZ";
+    public UlamogTheCeaselessHunger(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{10}");
         this.supertype.add("Legendary");
         this.subtype.add("Eldrazi");
         this.power = new MageInt(10);

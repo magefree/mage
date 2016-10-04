@@ -25,15 +25,15 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.saviorsofkamigawa;
+package mage.cards.i;
 
 import java.util.UUID;
 import mage.Mana;
 import mage.abilities.dynamicvalue.common.CardsInControllerHandCount;
 import mage.abilities.effects.common.DynamicManaEffect;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.Rarity;
 
 /**
  *
@@ -41,9 +41,8 @@ import mage.constants.Rarity;
  */
 public class InnerFire extends CardImpl {
 
-    public InnerFire(UUID ownerId) {
-        super(ownerId, 105, "Inner Fire", Rarity.COMMON, new CardType[]{CardType.SORCERY}, "{3}{R}");
-        this.expansionSetCode = "SOK";
+    public InnerFire(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{3}{R}");
 
 
         // Add {R} to your mana pool for each card in your hand.

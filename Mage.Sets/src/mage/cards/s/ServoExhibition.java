@@ -25,14 +25,14 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.kaladesh;
+package mage.cards.s;
 
 import java.util.UUID;
 import mage.abilities.effects.Effect;
 import mage.abilities.effects.common.CreateTokenEffect;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.game.permanent.token.ServoToken;
 
 /**
@@ -41,9 +41,8 @@ import mage.game.permanent.token.ServoToken;
  */
 public class ServoExhibition extends CardImpl {
 
-    public ServoExhibition(UUID ownerId) {
-        super(ownerId, 27, "Servo Exhibition", Rarity.UNCOMMON, new CardType[]{CardType.SORCERY}, "{1}{W}");
-        this.expansionSetCode = "KLD";
+    public ServoExhibition(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{1}{W}");
 
         // Create two 1/1 colorless Servo artifact creature tokens.
         Effect effect = new CreateTokenEffect(new ServoToken(), 2);

@@ -26,13 +26,13 @@
  *  or implied, of BetaSteward_at_googlemail.com.
  */
 
-package mage.sets.zendikar;
+package mage.cards.d;
 
 import java.util.UUID;
 import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.abilities.effects.common.DestroyAllEffect;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.filter.common.FilterCreaturePermanent;
 
 /**
@@ -41,9 +41,8 @@ import mage.filter.common.FilterCreaturePermanent;
  */
 public class DayOfJudgment extends CardImpl {
 
-    public DayOfJudgment(UUID ownerId) {
-        super(ownerId, 9, "Day of Judgment", Rarity.RARE, new CardType[]{CardType.SORCERY}, "{2}{W}{W}");
-        this.expansionSetCode = "ZEN";
+    public DayOfJudgment(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{2}{W}{W}");
 
         this.getSpellAbility().addEffect(new DestroyAllEffect(new FilterCreaturePermanent()));
     }

@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.shadowmoor;
+package mage.cards.i;
 
 import java.util.HashSet;
 import java.util.Map;
@@ -39,10 +39,10 @@ import mage.abilities.costs.mana.ManaCostsImpl;
 import mage.abilities.effects.common.DrawCardSourceControllerEffect;
 import mage.cards.Card;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.cards.Cards;
 import mage.cards.CardsImpl;
 import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.constants.Zone;
 import mage.filter.FilterCard;
 import mage.filter.predicate.mageobject.ColorPredicate;
@@ -56,9 +56,8 @@ import mage.target.common.TargetCardInHand;
  */
 public class IlluminatedFolio extends CardImpl {
 
-    public IlluminatedFolio(UUID ownerId) {
-        super(ownerId, 254, "Illuminated Folio", Rarity.UNCOMMON, new CardType[]{CardType.ARTIFACT}, "{5}");
-        this.expansionSetCode = "SHM";
+    public IlluminatedFolio(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.ARTIFACT},"{5}");
 
         // {1}, {tap}, Reveal two cards from your hand that share a color: Draw a card.
         Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new DrawCardSourceControllerEffect(1), new ManaCostsImpl("{1}"));

@@ -25,14 +25,14 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.riseoftheeldrazi;
+package mage.cards.h;
 
 import java.util.UUID;
 import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.abilities.dynamicvalue.common.ManacostVariableValue;
 import mage.abilities.effects.common.DamageTargetEffect;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.target.common.TargetCreaturePermanent;
 
 /**
@@ -41,9 +41,8 @@ import mage.target.common.TargetCreaturePermanent;
  */
 public class HeatRay extends CardImpl {
 
-    public HeatRay(UUID ownerId) {
-        super(ownerId, 150, "Heat Ray", Rarity.COMMON, new CardType[]{CardType.INSTANT}, "{X}{R}");
-        this.expansionSetCode = "ROE";
+    public HeatRay(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.INSTANT},"{X}{R}");
 
 
         this.getSpellAbility().addEffect(new DamageTargetEffect(new ManacostVariableValue()));

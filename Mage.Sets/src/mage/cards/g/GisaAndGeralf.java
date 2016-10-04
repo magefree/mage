@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.eldritchmoon;
+package mage.cards.g;
 
 import java.util.UUID;
 import mage.MageInt;
@@ -38,12 +38,12 @@ import mage.abilities.effects.ContinuousEffectImpl;
 import mage.abilities.effects.common.PutTopCardOfLibraryIntoGraveControllerEffect;
 import mage.cards.Card;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.AsThoughEffectType;
 import mage.constants.CardType;
 import mage.constants.Duration;
 import mage.constants.Layer;
 import mage.constants.Outcome;
-import mage.constants.Rarity;
 import mage.constants.SubLayer;
 import mage.constants.WatcherScope;
 import mage.constants.Zone;
@@ -62,9 +62,8 @@ import mage.watchers.Watcher;
  */
 public class GisaAndGeralf extends CardImpl {
 
-    public GisaAndGeralf(UUID ownerId) {
-        super(ownerId, 183, "Gisa and Geralf", Rarity.MYTHIC, new CardType[]{CardType.CREATURE}, "{2}{U}{B}");
-        this.expansionSetCode = "EMN";
+    public GisaAndGeralf(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{2}{U}{B}");
         this.supertype.add("Legendary");
         this.subtype.add("Human");
         this.subtype.add("Wizard");

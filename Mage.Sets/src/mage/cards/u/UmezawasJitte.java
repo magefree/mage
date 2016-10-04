@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.betrayersofkamigawa;
+package mage.cards.u;
 
 import mage.constants.*;
 import mage.abilities.Ability;
@@ -40,6 +40,7 @@ import mage.abilities.effects.common.continuous.BoostTargetEffect;
 import mage.abilities.effects.common.counter.AddCountersSourceEffect;
 import mage.abilities.keyword.EquipAbility;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.counters.CounterType;
 import mage.game.Game;
 import mage.game.events.DamagedEvent;
@@ -55,9 +56,8 @@ import mage.game.events.GameEvent.EventType;
  */
 public class UmezawasJitte extends CardImpl {
 
-    public UmezawasJitte(UUID ownerId) {
-        super(ownerId, 163, "Umezawa's Jitte", Rarity.RARE, new CardType[]{CardType.ARTIFACT}, "{2}");
-        this.expansionSetCode = "BOK";
+    public UmezawasJitte(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.ARTIFACT},"{2}");
         this.supertype.add("Legendary");
         this.subtype.add("Equipment");
 

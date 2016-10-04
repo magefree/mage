@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.elvesvsgoblins;
+package mage.cards.i;
 
 import java.util.HashSet;
 import java.util.Set;
@@ -38,9 +38,9 @@ import mage.abilities.costs.common.SacrificeTargetCost;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.CreateTokenEffect;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Outcome;
-import mage.constants.Rarity;
 import mage.constants.TargetController;
 import mage.constants.Zone;
 import mage.filter.common.FilterControlledPermanent;
@@ -70,9 +70,8 @@ public class IbHalfheartGoblinTactician extends CardImpl {
         filterGoblin.add(new ControllerPredicate(TargetController.YOU));
     }
 
-    public IbHalfheartGoblinTactician(UUID ownerId) {
-        super(ownerId, 43, "Ib Halfheart, Goblin Tactician", Rarity.RARE, new CardType[]{CardType.CREATURE}, "{3}{R}");
-        this.expansionSetCode = "EVG";
+    public IbHalfheartGoblinTactician(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{3}{R}");
         this.supertype.add("Legendary");
         this.subtype.add("Goblin");
         this.subtype.add("Advisor");

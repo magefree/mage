@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.ravnica;
+package mage.cards.d;
 
 import java.util.UUID;
 import mage.MageInt;
@@ -35,11 +35,11 @@ import mage.abilities.costs.mana.ManaCostsImpl;
 import mage.abilities.effects.ContinuousEffectImpl;
 import mage.cards.Card;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Duration;
 import mage.constants.Layer;
 import mage.constants.Outcome;
-import mage.constants.Rarity;
 import mage.constants.SubLayer;
 import mage.constants.Zone;
 import mage.filter.common.FilterCreatureCard;
@@ -53,9 +53,8 @@ import mage.target.common.TargetCardInGraveyard;
  */
 public class DimirDoppelganger extends CardImpl {
 
-    public DimirDoppelganger(UUID ownerId) {
-        super(ownerId, 202, "Dimir Doppelganger", Rarity.RARE, new CardType[]{CardType.CREATURE}, "{1}{U}{B}");
-        this.expansionSetCode = "RAV";
+    public DimirDoppelganger(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{1}{U}{B}");
         this.subtype.add("Shapeshifter");
 
         this.power = new MageInt(0);

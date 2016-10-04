@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package mage.sets.darksteel;
+package mage.cards.g;
 
 import java.util.UUID;
 import mage.MageInt;
@@ -12,8 +12,8 @@ import mage.abilities.common.BeginningOfUpkeepTriggeredAbility;
 import mage.abilities.effects.Effect;
 import mage.abilities.effects.common.SacrificeEffect;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.constants.TargetController;
 import mage.constants.Zone;
 import mage.filter.FilterPermanent;
@@ -41,9 +41,8 @@ public class GreaterHarvester extends CardImpl {
                 new CardTypePredicate(CardType.LAND)));
     }
 
-    public GreaterHarvester(UUID ownerId) {
-        super(ownerId, 44, "Greater Harvester", Rarity.RARE, new CardType[]{CardType.CREATURE}, "{2}{B}{B}{B}");
-        this.expansionSetCode = "DST";
+    public GreaterHarvester(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{2}{B}{B}{B}");
         this.subtype.add("Horror");
 
         this.power = new MageInt(5);

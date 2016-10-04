@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.innistrad;
+package mage.cards.g;
 
 import java.util.UUID;
 import mage.MageInt;
@@ -39,10 +39,10 @@ import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.continuous.SetPowerToughnessSourceEffect;
 import mage.abilities.effects.common.counter.AddCountersSourceEffect;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Duration;
 import mage.constants.Outcome;
-import mage.constants.Rarity;
 import mage.constants.Zone;
 import mage.counters.CounterType;
 import mage.game.Game;
@@ -59,9 +59,8 @@ import mage.game.permanent.token.Token;
  */
 public class GutterGrime extends CardImpl {
 
-    public GutterGrime(UUID ownerId) {
-        super(ownerId, 186, "Gutter Grime", Rarity.RARE, new CardType[]{CardType.ENCHANTMENT}, "{4}{G}");
-        this.expansionSetCode = "ISD";
+    public GutterGrime(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.ENCHANTMENT},"{4}{G}");
 
 
         // Whenever a nontoken creature you control dies, put a slime counter on Gutter Grime, then put a green Ooze creature token onto the battlefield with "This creature's power and toughness are each equal to the number of slime counters on Gutter Grime."

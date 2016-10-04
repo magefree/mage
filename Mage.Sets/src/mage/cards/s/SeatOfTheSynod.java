@@ -26,13 +26,13 @@
  *  or implied, of BetaSteward_at_googlemail.com.
  */
 
-package mage.sets.mirrodin;
+package mage.cards.s;
 
 import java.util.UUID;
 import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.abilities.mana.BlueManaAbility;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 
 /**
  *
@@ -40,9 +40,8 @@ import mage.cards.CardImpl;
  */
 public class SeatOfTheSynod extends CardImpl {
 
-    public SeatOfTheSynod (UUID ownerId) {
-        super(ownerId, 283, "Seat of the Synod", Rarity.COMMON, new CardType[]{CardType.ARTIFACT, CardType.LAND}, null);
-        this.expansionSetCode = "MRD";
+    public SeatOfTheSynod (UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.ARTIFACT,CardType.LAND},null);
         this.addAbility(new BlueManaAbility());
     }
 

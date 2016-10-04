@@ -26,23 +26,22 @@
  *  or implied, of BetaSteward_at_googlemail.com.
  */
 
-package mage.sets.darksteel;
+package mage.cards.a;
 
 import java.util.UUID;
 import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.MageInt;
 import mage.abilities.keyword.ModularAbility;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 
 /**
  * @author LevelX2
  */
 public class ArcboundWorker extends CardImpl {
 
-    public ArcboundWorker(UUID ownerId) {
-        super(ownerId, 104, "Arcbound Worker", Rarity.COMMON, new CardType[]{CardType.ARTIFACT, CardType.CREATURE}, "{1}");
-        this.expansionSetCode = "DST";
+    public ArcboundWorker(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.ARTIFACT,CardType.CREATURE},"{1}");
         this.subtype.add("Construct");
         this.power = new MageInt(0);
         this.toughness = new MageInt(0);

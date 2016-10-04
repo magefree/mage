@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.fatereforged;
+package mage.cards.w;
 
 import java.util.UUID;
 import mage.abilities.Ability;
@@ -35,9 +35,9 @@ import mage.abilities.effects.common.counter.AddCountersTargetEffect;
 import mage.abilities.effects.keyword.ManifestEffect;
 import mage.cards.Card;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Outcome;
-import mage.constants.Rarity;
 import mage.counters.CounterType;
 import mage.game.Game;
 import mage.players.Player;
@@ -49,9 +49,8 @@ import mage.target.targetpointer.FixedTarget;
  */
 public class Wildcall extends CardImpl {
 
-    public Wildcall(UUID ownerId) {
-        super(ownerId, 146, "Wildcall", Rarity.RARE, new CardType[]{CardType.SORCERY}, "{X}{G}{G}");
-        this.expansionSetCode = "FRF";
+    public Wildcall(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{X}{G}{G}");
 
         // Manifest the top card of your library, then put X +1/+1 counters on it.
         this.getSpellAbility().addEffect(new WildcallEffect());

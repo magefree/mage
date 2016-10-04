@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.timespiral;
+package mage.cards.c;
 
 import java.util.UUID;
 
@@ -34,8 +34,8 @@ import mage.abilities.costs.mana.ManaCostsImpl;
 import mage.abilities.effects.common.ReturnToHandTargetEffect;
 import mage.abilities.keyword.MadnessAbility;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.filter.common.FilterCreatureCard;
 import mage.filter.predicate.mageobject.ColorPredicate;
 import mage.target.common.TargetCardInYourGraveyard;
@@ -52,9 +52,8 @@ public class CallToTheNetherworld extends CardImpl {
         filter.add(new ColorPredicate(ObjectColor.BLACK));
     }
 
-    public CallToTheNetherworld(UUID ownerId) {
-        super(ownerId, 97, "Call to the Netherworld", Rarity.COMMON, new CardType[]{CardType.SORCERY}, "{B}");
-        this.expansionSetCode = "TSP";
+    public CallToTheNetherworld(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{B}");
 
         // Return target black creature card from your graveyard to your hand.
         this.getSpellAbility().addTarget(new TargetCardInYourGraveyard(filter));

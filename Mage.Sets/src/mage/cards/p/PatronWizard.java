@@ -25,12 +25,11 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.odyssey;
+package mage.cards.p;
 
 import java.util.UUID;
 
 import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleActivatedAbility;
@@ -38,6 +37,7 @@ import mage.abilities.costs.common.TapTargetCost;
 import mage.abilities.costs.mana.GenericManaCost;
 import mage.abilities.effects.common.CounterUnlessPaysEffect;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.Zone;
 import mage.filter.common.FilterControlledPermanent;
 import mage.filter.predicate.Predicates;
@@ -59,9 +59,8 @@ public class PatronWizard extends CardImpl {
         filter.add(Predicates.not(new TappedPredicate()));
     }
 
-    public PatronWizard(UUID ownerId) {
-        super(ownerId, 89, "Patron Wizard", Rarity.RARE, new CardType[]{CardType.CREATURE}, "{U}{U}{U}");
-        this.expansionSetCode = "ODY";
+    public PatronWizard(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{U}{U}{U}");
         this.subtype.add("Human");
         this.subtype.add("Wizard");
 

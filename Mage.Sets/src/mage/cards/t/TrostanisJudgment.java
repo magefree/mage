@@ -25,14 +25,14 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.returntoravnica;
+package mage.cards.t;
 
 import java.util.UUID;
 import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.abilities.effects.common.ExileTargetEffect;
 import mage.abilities.effects.common.PopulateEffect;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.target.common.TargetCreaturePermanent;
 
 /**
@@ -41,9 +41,8 @@ import mage.target.common.TargetCreaturePermanent;
  */
 public class TrostanisJudgment extends CardImpl {
 
-    public TrostanisJudgment(UUID ownerId) {
-        super(ownerId, 28, "Trostani's Judgment", Rarity.COMMON, new CardType[]{CardType.INSTANT}, "{5}{W}");
-        this.expansionSetCode = "RTR";
+    public TrostanisJudgment(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.INSTANT},"{5}{W}");
 
 
         // Exile target creature, then populate.

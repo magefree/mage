@@ -25,15 +25,15 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.eventide;
+package mage.cards.s;
 
 import java.util.UUID;
 
 import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.abilities.effects.common.CreateTokenEffect;
 import mage.abilities.keyword.RetraceAbility;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.game.permanent.token.BeastToken;
 
 /**
@@ -42,9 +42,8 @@ import mage.game.permanent.token.BeastToken;
  */
 public class SavageConception extends CardImpl {
 
-    public SavageConception(UUID ownerId) {
-        super(ownerId, 75, "Savage Conception", Rarity.UNCOMMON, new CardType[]{CardType.SORCERY}, "{3}{G}{G}");
-        this.expansionSetCode = "EVE";
+    public SavageConception(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{3}{G}{G}");
 
         // Put a 3/3 green Beast creature token onto the battlefield.
         this.getSpellAbility().addEffect(new CreateTokenEffect(new BeastToken()));

@@ -25,16 +25,16 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.timeshifted;
+package mage.cards.k;
 
 import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.effects.common.continuous.BoostAllEffect;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Duration;
-import mage.constants.Rarity;
 import mage.constants.TargetController;
 import mage.constants.Zone;
 import mage.filter.common.FilterCreaturePermanent;
@@ -54,9 +54,8 @@ public class KoboldTaskmaster extends CardImpl {
         filter.add(new SubtypePredicate("Kobold"));
     }
 
-    public KoboldTaskmaster(UUID ownerId) {
-        super(ownerId, 65, "Kobold Taskmaster", Rarity.SPECIAL, new CardType[]{CardType.CREATURE}, "{1}{R}");
-        this.expansionSetCode = "TSB";
+    public KoboldTaskmaster(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{1}{R}");
         this.subtype.add("Kobold");
         this.power = new MageInt(1);
         this.toughness = new MageInt(2);

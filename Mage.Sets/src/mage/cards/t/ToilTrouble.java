@@ -26,16 +26,16 @@
  *  or implied, of BetaSteward_at_googlemail.com.
  */
 
-package mage.sets.dragonsmaze;
+package mage.cards.t;
 
 import mage.abilities.dynamicvalue.common.CardsInTargetHandCount;
 import mage.abilities.effects.Effect;
 import mage.abilities.effects.common.DamageTargetEffect;
 import mage.abilities.effects.common.DrawCardTargetEffect;
 import mage.abilities.effects.common.LoseLifeTargetEffect;
+import mage.cards.CardSetInfo;
 import mage.cards.SplitCard;
 import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.target.TargetPlayer;
 
 import java.util.UUID;
@@ -48,9 +48,8 @@ import java.util.UUID;
 
 public class ToilTrouble extends SplitCard {
 
-    public ToilTrouble(UUID ownerId) {
-        super(ownerId, 133, "Toil", "Trouble", Rarity.UNCOMMON, new CardType[]{CardType.SORCERY}, "{2}{B}", "{2}{R}",true);
-        this.expansionSetCode = "DGM";
+    public ToilTrouble(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{2}{B}","{2}{R}",true);
 
         // Toil
         // Target player draws two cards and loses 2 life.

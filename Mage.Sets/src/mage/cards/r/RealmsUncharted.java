@@ -25,19 +25,19 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.riseoftheeldrazi;
+package mage.cards.r;
 
 import java.util.Set;
 import java.util.UUID;
 import mage.MageObject;
 import mage.constants.CardType;
 import mage.constants.Outcome;
-import mage.constants.Rarity;
 import mage.constants.Zone;
 import mage.abilities.Ability;
 import mage.abilities.effects.OneShotEffect;
 import mage.cards.Card;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.cards.Cards;
 import mage.cards.CardsImpl;
 import mage.filter.FilterCard;
@@ -55,9 +55,8 @@ import mage.target.common.TargetOpponent;
  */
 public class RealmsUncharted extends CardImpl {
 
-    public RealmsUncharted(UUID ownerId) {
-        super(ownerId, 206, "Realms Uncharted", Rarity.RARE, new CardType[]{CardType.INSTANT}, "{2}{G}");
-        this.expansionSetCode = "ROE";
+    public RealmsUncharted(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.INSTANT},"{2}{G}");
 
         // Search your library for four land cards with different names and reveal them. An opponent chooses two of those cards. Put the chosen cards into your graveyard and the rest into your hand. Then shuffle your library.
         this.getSpellAbility().addEffect(new RealmsUnchartedEffect());

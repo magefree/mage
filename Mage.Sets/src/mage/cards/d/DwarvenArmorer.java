@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.fallenempires;
+package mage.cards.d;
 
 import java.util.HashSet;
 import java.util.UUID;
@@ -39,11 +39,11 @@ import mage.abilities.effects.Effect;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.counter.AddCountersTargetEffect;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.choices.Choice;
 import mage.choices.ChoiceImpl;
 import mage.constants.CardType;
 import mage.constants.Outcome;
-import mage.constants.Rarity;
 import mage.constants.Zone;
 import mage.counters.Counter;
 import mage.counters.CounterType;
@@ -58,9 +58,8 @@ import mage.target.targetpointer.FixedTarget;
  */
 public class DwarvenArmorer extends CardImpl {
 
-    public DwarvenArmorer(UUID ownerId) {
-        super(ownerId, 104, "Dwarven Armorer", Rarity.RARE, new CardType[]{CardType.CREATURE}, "{R}");
-        this.expansionSetCode = "FEM";
+    public DwarvenArmorer(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{R}");
         this.subtype.add("Dwarf");
         this.power = new MageInt(0);
         this.toughness = new MageInt(2);

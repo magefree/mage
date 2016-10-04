@@ -25,13 +25,12 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.morningtide;
+package mage.cards.o;
 
 import java.util.UUID;
 import mage.constants.AttachmentType;
 import mage.constants.CardType;
 import mage.constants.Outcome;
-import mage.constants.Rarity;
 import mage.constants.Zone;
 import mage.abilities.Ability;
 import mage.abilities.common.EntersBattlefieldAllTriggeredAbility;
@@ -43,6 +42,7 @@ import mage.abilities.effects.common.continuous.GainAbilityAttachedEffect;
 import mage.abilities.keyword.EquipAbility;
 import mage.abilities.keyword.HasteAbility;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.SetTargetPointer;
 import mage.filter.FilterPermanent;
 import mage.filter.common.FilterCreaturePermanent;
@@ -59,9 +59,8 @@ public class ObsidianBattleAxe extends CardImpl {
         filter.add(new SubtypePredicate("Warrior"));
     }
 
-    public ObsidianBattleAxe(UUID ownerId) {
-        super(ownerId, 144, "Obsidian Battle-Axe", Rarity.UNCOMMON, new CardType[]{CardType.TRIBAL, CardType.ARTIFACT}, "{3}");
-        this.expansionSetCode = "MOR";
+    public ObsidianBattleAxe(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.TRIBAL,CardType.ARTIFACT},"{3}");
         this.subtype.add("Warrior");
         this.subtype.add("Equipment");
 

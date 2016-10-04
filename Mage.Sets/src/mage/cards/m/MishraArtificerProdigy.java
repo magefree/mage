@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.timespiral;
+package mage.cards.m;
 
 import java.util.UUID;
 import mage.MageInt;
@@ -34,9 +34,9 @@ import mage.abilities.TriggeredAbilityImpl;
 import mage.abilities.effects.OneShotEffect;
 import mage.cards.Card;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Outcome;
-import mage.constants.Rarity;
 import mage.constants.Zone;
 import mage.filter.FilterCard;
 import mage.filter.predicate.mageobject.NamePredicate;
@@ -55,9 +55,8 @@ import mage.target.common.TargetCardInYourGraveyard;
  */
 public class MishraArtificerProdigy extends CardImpl {
 
-    public MishraArtificerProdigy(UUID ownerId) {
-        super(ownerId, 243, "Mishra, Artificer Prodigy", Rarity.RARE, new CardType[]{CardType.CREATURE}, "{1}{U}{B}{R}");
-        this.expansionSetCode = "TSP";
+    public MishraArtificerProdigy(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{1}{U}{B}{R}");
         this.supertype.add("Legendary");
         this.subtype.add("Human");
         this.subtype.add("Artificer");

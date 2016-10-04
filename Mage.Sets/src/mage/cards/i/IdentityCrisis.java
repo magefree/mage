@@ -26,16 +26,16 @@
  *  or implied, of BetaSteward_at_googlemail.com.
  */
 
-package mage.sets.alarareborn;
+package mage.cards.i;
 
 import java.util.UUID;
 
 import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.abilities.Ability;
 import mage.abilities.effects.OneShotEffect;
 import mage.cards.Card;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.Outcome;
 import mage.game.Game;
 import mage.players.Player;
@@ -47,9 +47,8 @@ import mage.target.TargetPlayer;
  */
 public class IdentityCrisis extends CardImpl {
 
-    public IdentityCrisis (UUID ownerId) {
-        super(ownerId, 81, "Identity Crisis", Rarity.RARE, new CardType[]{CardType.SORCERY}, "{2}{W}{W}{B}{B}");
-        this.expansionSetCode = "ARB";
+    public IdentityCrisis (UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{2}{W}{W}{B}{B}");
 
         
         this.getSpellAbility().addEffect(new IdentityCrisisEffect());

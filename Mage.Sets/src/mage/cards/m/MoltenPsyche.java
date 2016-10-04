@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.scarsofmirrodin;
+package mage.cards.m;
 
 import java.util.HashMap;
 import java.util.LinkedHashMap;
@@ -35,9 +35,9 @@ import mage.abilities.Ability;
 import mage.abilities.condition.common.MetalcraftCondition;
 import mage.abilities.effects.OneShotEffect;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Outcome;
-import mage.constants.Rarity;
 import mage.constants.WatcherScope;
 import mage.constants.Zone;
 import mage.game.Game;
@@ -51,9 +51,8 @@ import mage.watchers.Watcher;
  */
 public class MoltenPsyche extends CardImpl {
 
-    public MoltenPsyche(UUID ownerId) {
-        super(ownerId, 98, "Molten Psyche", Rarity.RARE, new CardType[]{CardType.SORCERY}, "{1}{R}{R}");
-        this.expansionSetCode = "SOM";
+    public MoltenPsyche(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{1}{R}{R}");
 
         // Each player shuffles the cards from his or her hand into his or her library, then draws that many cards.
         // Metalcraft - If you control three or more artifacts, Molten Psyche deals damage to each opponent equal to the number of cards that player has drawn this turn.

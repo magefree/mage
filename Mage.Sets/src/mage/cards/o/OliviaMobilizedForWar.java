@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.shadowsoverinnistrad;
+package mage.cards.o;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -41,9 +41,9 @@ import mage.abilities.effects.common.counter.AddCountersTargetEffect;
 import mage.abilities.keyword.FlyingAbility;
 import mage.abilities.keyword.HasteAbility;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Duration;
-import mage.constants.Rarity;
 import mage.constants.SetTargetPointer;
 import mage.constants.Zone;
 import mage.counters.CounterType;
@@ -63,9 +63,8 @@ public class OliviaMobilizedForWar extends CardImpl {
         filter.add(new AnotherPredicate());
     }
 
-    public OliviaMobilizedForWar(UUID ownerId) {
-        super(ownerId, 248, "Olivia, Mobilized for War", Rarity.MYTHIC, new CardType[]{CardType.CREATURE}, "{1}{B}{R}");
-        this.expansionSetCode = "SOI";
+    public OliviaMobilizedForWar(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{1}{B}{R}");
         this.supertype.add("Legendary");
         this.subtype.add("Vampire");
         this.subtype.add("Knight");

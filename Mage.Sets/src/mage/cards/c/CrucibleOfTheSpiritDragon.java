@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.fatereforged;
+package mage.cards.c;
 
 import java.util.UUID;
 import mage.ConditionalMana;
@@ -43,8 +43,8 @@ import mage.abilities.mana.ColorlessManaAbility;
 import mage.abilities.mana.ConditionalAnyColorManaAbility;
 import mage.abilities.mana.builder.ConditionalManaBuilder;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.constants.Zone;
 import mage.counters.CounterType;
 import mage.game.Game;
@@ -55,9 +55,8 @@ import mage.game.Game;
  */
 public class CrucibleOfTheSpiritDragon extends CardImpl {
 
-    public CrucibleOfTheSpiritDragon(UUID ownerId) {
-        super(ownerId, 167, "Crucible of the Spirit Dragon", Rarity.RARE, new CardType[]{CardType.LAND}, "");
-        this.expansionSetCode = "FRF";
+    public CrucibleOfTheSpiritDragon(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.LAND},"");
 
         // {T}: Add {C} to your mana pool.
         this.addAbility(new ColorlessManaAbility());

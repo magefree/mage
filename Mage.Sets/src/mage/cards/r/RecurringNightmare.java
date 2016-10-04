@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.exodus;
+package mage.cards.r;
 
 import java.util.UUID;
 import mage.abilities.Ability;
@@ -34,8 +34,8 @@ import mage.abilities.costs.common.ReturnToHandFromBattlefieldSourceCost;
 import mage.abilities.costs.common.SacrificeTargetCost;
 import mage.abilities.effects.common.ReturnFromGraveyardToBattlefieldTargetEffect;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.constants.Zone;
 import mage.filter.common.FilterControlledCreaturePermanent;
 import mage.filter.common.FilterCreatureCard;
@@ -51,9 +51,8 @@ public class RecurringNightmare extends CardImpl {
     private static final FilterCreatureCard filter = new FilterCreatureCard("creature card in your graveyard");
     private static final FilterControlledCreaturePermanent filter2 = new FilterControlledCreaturePermanent("creature");
 
-    public RecurringNightmare(UUID ownerId) {
-        super(ownerId, 72, "Recurring Nightmare", Rarity.RARE, new CardType[]{CardType.ENCHANTMENT}, "{2}{B}");
-        this.expansionSetCode = "EXO";
+    public RecurringNightmare(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.ENCHANTMENT},"{2}{B}");
 
         // Sacrifice a creature, Return Recurring Nightmare to its owner's hand: Return target creature card from your graveyard to the battlefield. Activate this ability only any time you could cast a sorcery.
         Ability ability = new ActivateAsSorceryActivatedAbility(Zone.BATTLEFIELD, new ReturnFromGraveyardToBattlefieldTargetEffect(), new SacrificeTargetCost(new TargetControlledPermanent(filter2)));

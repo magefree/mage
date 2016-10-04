@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.fallenempires;
+package mage.cards.f;
 
 import java.util.UUID;
 import mage.abilities.Ability;
@@ -33,8 +33,8 @@ import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.costs.mana.ManaCostsImpl;
 import mage.abilities.effects.common.counter.AddCountersTargetEffect;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.constants.Zone;
 import mage.counters.CounterType;
 import mage.filter.FilterPermanent;
@@ -53,9 +53,8 @@ public class FungalBloom extends CardImpl {
         filter.add(new SubtypePredicate("Fungus"));
     }
 
-    public FungalBloom(UUID ownerId) {
-        super(ownerId, 79, "Fungal Bloom", Rarity.RARE, new CardType[]{CardType.ENCHANTMENT}, "{G}{G}");
-        this.expansionSetCode = "FEM";
+    public FungalBloom(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.ENCHANTMENT},"{G}{G}");
 
         // {G}{G}: Put a spore counter on target Fungus.
         Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD,

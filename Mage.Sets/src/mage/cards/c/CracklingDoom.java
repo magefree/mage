@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.khansoftarkir;
+package mage.cards.c;
 
 import java.util.ArrayList;
 import java.util.UUID;
@@ -33,9 +33,9 @@ import mage.abilities.Ability;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.DamagePlayersEffect;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Outcome;
-import mage.constants.Rarity;
 import mage.constants.TargetController;
 import mage.filter.Filter;
 import mage.filter.common.FilterControlledCreaturePermanent;
@@ -53,9 +53,8 @@ import mage.target.common.TargetControlledCreaturePermanent;
  */
 public class CracklingDoom extends CardImpl {
 
-    public CracklingDoom(UUID ownerId) {
-        super(ownerId, 171, "Crackling Doom", Rarity.RARE, new CardType[]{CardType.INSTANT}, "{R}{W}{B}");
-        this.expansionSetCode = "KTK";
+    public CracklingDoom(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.INSTANT},"{R}{W}{B}");
 
 
         // Crackling Doom deals 2 damage to each opponent. Each opponent sacrifices a creature with the greatest power among creatures he or she controls.

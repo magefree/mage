@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.vintagemasters;
+package mage.cards.m;
 
 import java.util.UUID;
 import mage.Mana;
@@ -35,9 +35,9 @@ import mage.abilities.costs.common.TapSourceCost;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.mana.SimpleManaAbility;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Outcome;
-import mage.constants.Rarity;
 import mage.constants.TargetController;
 import mage.constants.Zone;
 import mage.game.Game;
@@ -49,9 +49,8 @@ import mage.players.Player;
  */
 public class ManaCrypt extends CardImpl {
 
-    public ManaCrypt(UUID ownerId) {
-        super(ownerId, 272, "Mana Crypt", Rarity.MYTHIC, new CardType[]{CardType.ARTIFACT}, "{0}");
-        this.expansionSetCode = "VMA";
+    public ManaCrypt(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.ARTIFACT},"{0}");
 
         // At the beginning of your upkeep, flip a coin. If you lose the flip, Mana Crypt deals 3 damage to you.
         this.addAbility(new BeginningOfUpkeepTriggeredAbility(new ManaCryptEffect(), TargetController.YOU, false));

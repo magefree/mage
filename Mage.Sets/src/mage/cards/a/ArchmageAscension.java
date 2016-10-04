@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.zendikar;
+package mage.cards.a;
 
 import mage.abilities.Ability;
 import mage.abilities.TriggeredAbilityImpl;
@@ -34,6 +34,7 @@ import mage.abilities.effects.ReplacementEffectImpl;
 import mage.abilities.effects.common.counter.AddCountersSourceEffect;
 import mage.cards.Card;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.*;
 import mage.counters.CounterType;
 import mage.game.Game;
@@ -51,9 +52,8 @@ import java.util.UUID;
  */
 public class ArchmageAscension extends CardImpl {
 
-    public ArchmageAscension(UUID ownerId) {
-        super(ownerId, 42, "Archmage Ascension", Rarity.RARE, new CardType[]{CardType.ENCHANTMENT}, "{2}{U}");
-        this.expansionSetCode = "ZEN";
+    public ArchmageAscension(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.ENCHANTMENT},"{2}{U}");
 
 
         // At the beginning of each end step, if you drew two or more cards this turn, you may put a quest counter on Archmage Ascension.

@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.fatereforged;
+package mage.cards.o;
 
 import java.util.UUID;
 import mage.abilities.Ability;
@@ -41,11 +41,11 @@ import mage.abilities.effects.common.ChooseModeEffect;
 import mage.abilities.effects.common.DamageTargetEffect;
 import mage.cards.Card;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.AsThoughEffectType;
 import mage.constants.CardType;
 import mage.constants.Duration;
 import mage.constants.Outcome;
-import mage.constants.Rarity;
 import mage.constants.TargetController;
 import mage.constants.Zone;
 import mage.filter.common.FilterControlledCreaturePermanent;
@@ -64,9 +64,8 @@ public class OutpostSiege extends CardImpl {
     private final static String ruleTrigger1 = "&bull Khans &mdash; At the beginning of your upkeep, exile the top card of your library. Until end of turn, you may play that card.";
     private final static String ruleTrigger2 = "&bull Dragons &mdash; Whenever a creature you control leaves the battlefield, {this} deals 1 damage to target creature or player.";
 
-    public OutpostSiege(UUID ownerId) {
-        super(ownerId, 110, "Outpost Siege", Rarity.RARE, new CardType[]{CardType.ENCHANTMENT}, "{3}{R}");
-        this.expansionSetCode = "FRF";
+    public OutpostSiege(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.ENCHANTMENT},"{3}{R}");
 
         // As Outpost Siege enters the battlefield, choose Khans or Dragons.
         this.addAbility(new EntersBattlefieldAbility(new ChooseModeEffect("Khans or Dragons?", "Khans", "Dragons"), null,

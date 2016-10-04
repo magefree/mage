@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.starwars;
+package mage.cards.j;
 
 import java.util.UUID;
 import mage.abilities.TriggeredAbilityImpl;
@@ -36,8 +36,8 @@ import mage.abilities.effects.keyword.ScryEffect;
 import mage.abilities.keyword.MeditateAbility;
 import mage.cards.Card;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.constants.Zone;
 import mage.filter.FilterCard;
 import mage.filter.predicate.mageobject.SubtypePredicate;
@@ -57,9 +57,8 @@ public class JediTraining extends CardImpl {
         filter.add(new SubtypePredicate("Jedi"));
     }
 
-    public JediTraining(UUID ownerId) {
-        super(ownerId, 44, "Jedi Training", Rarity.UNCOMMON, new CardType[]{CardType.ENCHANTMENT}, "{2}{U}");
-        this.expansionSetCode = "SWS";
+    public JediTraining(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.ENCHANTMENT},"{2}{U}");
 
         // Jedi spells you cast cost {1} less to cast.
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new SpellsCostReductionControllerEffect(filter, 1)));

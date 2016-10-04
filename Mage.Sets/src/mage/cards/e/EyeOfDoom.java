@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.commander2013;
+package mage.cards.e;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -39,9 +39,9 @@ import mage.abilities.costs.mana.GenericManaCost;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.DestroyAllEffect;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Outcome;
-import mage.constants.Rarity;
 import mage.constants.Zone;
 import mage.counters.CounterType;
 import mage.filter.FilterPermanent;
@@ -63,9 +63,8 @@ public class EyeOfDoom extends CardImpl {
     static {
         filter.add(new CounterPredicate(CounterType.DOOM));
     }
-    public EyeOfDoom(UUID ownerId) {
-        super(ownerId, 243, "Eye of Doom", Rarity.RARE, new CardType[]{CardType.ARTIFACT}, "{4}");
-        this.expansionSetCode = "C13";
+    public EyeOfDoom(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.ARTIFACT},"{4}");
 
         // When Eye of Doom enters the battlefield, each player chooses a nonland permanent and puts a doom counter on it.
         this.addAbility(new EntersBattlefieldTriggeredAbility(new EyeOfDoomEffect(),false));

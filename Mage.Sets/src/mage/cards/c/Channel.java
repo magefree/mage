@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.revisededition;
+package mage.cards.c;
 
 import java.util.UUID;
 import mage.Mana;
@@ -39,10 +39,10 @@ import mage.abilities.effects.common.CreateDelayedTriggeredAbilityEffect;
 import mage.abilities.effects.common.CreateSpecialActionEffect;
 import mage.abilities.effects.common.RemoveSpecialActionEffect;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Duration;
 import mage.constants.Outcome;
-import mage.constants.Rarity;
 import mage.game.Game;
 import mage.game.events.GameEvent;
 import mage.game.events.GameEvent.EventType;
@@ -53,9 +53,8 @@ import mage.game.events.GameEvent.EventType;
  */
 public class Channel extends CardImpl {
 
-    public Channel(UUID ownerId) {
-        super(ownerId, 95, "Channel", Rarity.UNCOMMON, new CardType[]{CardType.SORCERY}, "{G}{G}");
-        this.expansionSetCode = "3ED";
+    public Channel(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{G}{G}");
 
         // Until end of turn, any time you could activate a mana ability, you may pay 1 life. If you do, add {C} to your mana pool.
         this.getSpellAbility().addEffect(new ChannelEffect());

@@ -25,16 +25,16 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.shadowmoor;
+package mage.cards.a;
 
 import java.util.UUID;
 import mage.abilities.Ability;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.keyword.ConspireAbility;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Outcome;
-import mage.constants.Rarity;
 import mage.constants.Zone;
 import mage.filter.common.FilterAttackingOrBlockingCreature;
 import mage.game.Game;
@@ -49,9 +49,8 @@ public class Aethertow extends CardImpl {
 
     private static final FilterAttackingOrBlockingCreature filter = new FilterAttackingOrBlockingCreature();
 
-    public Aethertow(UUID ownerId) {
-        super(ownerId, 136, "Aethertow", Rarity.COMMON, new CardType[]{CardType.INSTANT}, "{3}{W/U}");
-        this.expansionSetCode = "SHM";
+    public Aethertow(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.INSTANT},"{3}{W/U}");
 
         // Put target attacking or blocking creature on top of its owner's library.
         this.getSpellAbility().addEffect(new AethertowEffect());

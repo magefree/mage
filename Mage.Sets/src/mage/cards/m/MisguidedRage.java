@@ -25,13 +25,13 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.scourge;
+package mage.cards.m;
 
 import java.util.UUID;
 import mage.abilities.effects.common.SacrificeEffect;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.filter.FilterPermanent;
 import mage.target.TargetPlayer;
 
@@ -41,9 +41,8 @@ import mage.target.TargetPlayer;
  */
 public class MisguidedRage extends CardImpl {
 
-    public MisguidedRage(UUID ownerId) {
-        super(ownerId, 99, "Misguided Rage", Rarity.COMMON, new CardType[]{CardType.SORCERY}, "{2}{R}");
-        this.expansionSetCode = "SCG";
+    public MisguidedRage(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{2}{R}");
 
         // Target player sacrifices a permanent.
         this.getSpellAbility().addEffect(new SacrificeEffect(new FilterPermanent(), 1, "Target player"));

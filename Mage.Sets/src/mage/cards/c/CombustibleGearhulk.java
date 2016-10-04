@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.kaladesh;
+package mage.cards.c;
 
 import java.util.Set;
 import java.util.UUID;
@@ -37,9 +37,9 @@ import mage.abilities.effects.common.DrawCardSourceControllerEffect;
 import mage.abilities.keyword.FirstStrikeAbility;
 import mage.cards.Card;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Outcome;
-import mage.constants.Rarity;
 import mage.constants.Zone;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
@@ -53,9 +53,8 @@ import mage.target.common.TargetOpponent;
  */
 public class CombustibleGearhulk extends CardImpl {
 
-    public CombustibleGearhulk(UUID ownerId) {
-        super(ownerId, 112, "Combustible Gearhulk", Rarity.MYTHIC, new CardType[]{CardType.ARTIFACT, CardType.CREATURE}, "{4}{R}{R}");
-        this.expansionSetCode = "KLD";
+    public CombustibleGearhulk(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.ARTIFACT,CardType.CREATURE},"{4}{R}{R}");
         this.subtype.add("Construct");
         this.power = new MageInt(6);
         this.toughness = new MageInt(6);

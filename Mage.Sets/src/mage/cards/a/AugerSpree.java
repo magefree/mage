@@ -25,12 +25,12 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.returntoravnica;
+package mage.cards.a;
 
 import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.abilities.effects.common.continuous.BoostTargetEffect;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.Duration;
 import mage.target.common.TargetCreaturePermanent;
 
@@ -41,9 +41,8 @@ import java.util.UUID;
  */
 public class AugerSpree extends CardImpl {
 
-    public AugerSpree(UUID ownerId) {
-        super(ownerId, 144, "Auger Spree", Rarity.COMMON, new CardType[]{CardType.INSTANT}, "{1}{B}{R}");
-        this.expansionSetCode = "RTR";
+    public AugerSpree(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.INSTANT},"{1}{B}{R}");
 
 
         // Target creature gets +4/-4 until end of turn.

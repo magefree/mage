@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.eventide;
+package mage.cards.d;
 
 import java.util.UUID;
 import mage.MageInt;
@@ -34,8 +34,8 @@ import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.costs.common.SacrificeSourceCost;
 import mage.abilities.effects.common.DamageTargetEffect;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.constants.Zone;
 import mage.target.common.TargetAttackingOrBlockingCreature;
 
@@ -46,9 +46,8 @@ import mage.target.common.TargetAttackingOrBlockingCreature;
  */
 public class DuergarAssailant extends CardImpl {
 
-    public DuergarAssailant(UUID ownerId) {
-        super(ownerId, 136, "Duergar Assailant", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{R/W}");
-        this.expansionSetCode = "EVE";
+    public DuergarAssailant(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{R/W}");
         this.subtype.add("Dwarf");
         this.subtype.add("Soldier");
 

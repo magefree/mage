@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.returntoravnica;
+package mage.cards.n;
 
 import java.util.UUID;
 import mage.MageInt;
@@ -35,8 +35,8 @@ import mage.abilities.costs.mana.ManaCostsImpl;
 import mage.abilities.effects.common.CopyTargetSpellEffect;
 import mage.abilities.effects.common.DrawDiscardControllerEffect;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.constants.TargetController;
 import mage.constants.Zone;
 import mage.filter.FilterSpell;
@@ -60,9 +60,8 @@ public class NivixGuildmage extends CardImpl {
         filter.add(new ControllerPredicate(TargetController.YOU));
     }
     
-    public NivixGuildmage(UUID ownerId) {
-        super(ownerId, 182, "Nivix Guildmage", Rarity.UNCOMMON, new CardType[]{CardType.CREATURE}, "{U}{R}");
-        this.expansionSetCode = "RTR";
+    public NivixGuildmage(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{U}{R}");
         this.subtype.add("Human");
         this.subtype.add("Wizard");
 

@@ -25,11 +25,10 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.zendikar;
+package mage.cards.f;
 
 import java.util.UUID;
 import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.constants.TargetController;
 import mage.MageInt;
 import mage.abilities.Ability;
@@ -41,6 +40,7 @@ import mage.abilities.effects.common.WinGameSourceControllerEffect;
 import mage.abilities.keyword.LifelinkAbility;
 import mage.abilities.keyword.VigilanceAbility;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.game.Game;
 
 /**
@@ -49,9 +49,8 @@ import mage.game.Game;
  */
 public class FelidarSovereign extends CardImpl {
 
-    public FelidarSovereign(UUID ownerId) {
-        super(ownerId, 12, "Felidar Sovereign", Rarity.MYTHIC, new CardType[]{CardType.CREATURE}, "{4}{W}{W}");
-        this.expansionSetCode = "ZEN";
+    public FelidarSovereign(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{4}{W}{W}");
         this.subtype.add("Cat");
         this.subtype.add("Beast");
 

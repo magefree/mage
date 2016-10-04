@@ -25,16 +25,16 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.ravnica;
+package mage.cards.d;
 
 import java.util.UUID;
 
 import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.costs.common.SacrificeTargetCost;
 import mage.abilities.effects.common.GainLifeEffect;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.Zone;
 import mage.filter.common.FilterControlledPermanent;
 import mage.filter.predicate.mageobject.SubtypePredicate;
@@ -52,9 +52,8 @@ public class DarkHeartOfTheWood extends CardImpl {
         filter.add(new SubtypePredicate("Forest"));
     }
 
-    public DarkHeartOfTheWood(UUID ownerId) {
-        super(ownerId, 200, "Dark Heart of the Wood", Rarity.UNCOMMON, new CardType[]{CardType.ENCHANTMENT}, "{B}{G}");
-        this.expansionSetCode = "RAV";
+    public DarkHeartOfTheWood(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.ENCHANTMENT},"{B}{G}");
 
 
         // Sacrifice a Forest: You gain 3 life.

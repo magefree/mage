@@ -26,13 +26,13 @@
  *  or implied, of BetaSteward_at_googlemail.com.
  */
 
-package mage.sets.conflux;
+package mage.cards.c;
 
 import java.util.UUID;
 import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.MageInt;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 
 
 /**
@@ -41,9 +41,8 @@ import mage.cards.CardImpl;
  */
 public class CanyonMinotaur extends CardImpl {
 
-    public CanyonMinotaur(UUID ownerId) {
-        super(ownerId, 60, "Canyon Minotaur", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{3}{R}");
-        this.expansionSetCode = "CON";
+    public CanyonMinotaur(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{3}{R}");
 
         this.subtype.add("Minotaur");
         this.subtype.add("Warrior");

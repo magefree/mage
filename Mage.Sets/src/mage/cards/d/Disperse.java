@@ -26,13 +26,13 @@
  *  or implied, of BetaSteward_at_googlemail.com.
  */
 
-package mage.sets.scarsofmirrodin;
+package mage.cards.d;
 
 import java.util.UUID;
 import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.abilities.effects.common.ReturnToHandTargetEffect;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.target.common.TargetNonlandPermanent;
 
 /**
@@ -41,9 +41,8 @@ import mage.target.common.TargetNonlandPermanent;
  */
 public class Disperse extends CardImpl {
 
-    public Disperse (UUID ownerId) {
-        super(ownerId, 31, "Disperse", Rarity.COMMON, new CardType[]{CardType.INSTANT}, "{1}{U}");
-        this.expansionSetCode = "SOM";
+    public Disperse (UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.INSTANT},"{1}{U}");
 
         // Return target nonland permanent to its owner's hand.
         this.getSpellAbility().addTarget(new TargetNonlandPermanent());

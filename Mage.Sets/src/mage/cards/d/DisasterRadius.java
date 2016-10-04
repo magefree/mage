@@ -25,18 +25,18 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.riseoftheeldrazi;
+package mage.cards.d;
 
 import java.util.UUID;
 
 import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.constants.Outcome;
 import mage.constants.TargetController;
 import mage.abilities.Ability;
 import mage.abilities.costs.common.RevealTargetFromHandCost;
 import mage.abilities.effects.OneShotEffect;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.filter.common.FilterCreatureCard;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.filter.predicate.permanent.ControllerPredicate;
@@ -50,9 +50,8 @@ import mage.target.common.TargetCardInHand;
  */
 public class DisasterRadius extends CardImpl {
 
-    public DisasterRadius(UUID ownerId) {
-        super(ownerId, 141, "Disaster Radius", Rarity.RARE, new CardType[]{CardType.SORCERY}, "{5}{R}{R}");
-        this.expansionSetCode = "ROE";
+    public DisasterRadius(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{5}{R}{R}");
 
 
         // As an additional cost to cast Disaster Radius, reveal a creature card from your hand.

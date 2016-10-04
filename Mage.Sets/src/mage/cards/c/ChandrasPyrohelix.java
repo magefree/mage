@@ -25,14 +25,14 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.kaladesh;
+package mage.cards.c;
 
 import java.util.UUID;
 import mage.abilities.effects.Effect;
 import mage.abilities.effects.common.DamageMultiEffect;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.target.common.TargetCreatureOrPlayerAmount;
 
 /**
@@ -41,9 +41,8 @@ import mage.target.common.TargetCreatureOrPlayerAmount;
  */
 public class ChandrasPyrohelix extends CardImpl {
 
-    public ChandrasPyrohelix(UUID ownerId) {
-        super(ownerId, 111, "Chandra's Pyrohelix", Rarity.COMMON, new CardType[]{CardType.INSTANT}, "{1}{R}");
-        this.expansionSetCode = "KLD";
+    public ChandrasPyrohelix(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.INSTANT},"{1}{R}");
 
         // Chandra's Pyrohelix deals 2 damage divided as you choose among one or two target creatures and/or players.
         Effect effect = new DamageMultiEffect(2);

@@ -26,17 +26,17 @@
  *  or implied, of BetaSteward_at_googlemail.com.
  */
 
-package mage.sets.dragonsmaze;
+package mage.cards.b;
 
 import java.util.UUID;
 import mage.constants.CardType;
 import mage.constants.Duration;
-import mage.constants.Rarity;
 import mage.constants.Zone;
 import mage.MageInt;
 import mage.abilities.common.EntersBattlefieldAllTriggeredAbility;
 import mage.abilities.effects.common.continuous.BoostSourceEffect;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.filter.common.FilterControlledCreaturePermanent;
 import mage.filter.predicate.permanent.AnotherPredicate;
 
@@ -52,9 +52,8 @@ public class BronzebeakMoa extends CardImpl {
     static {
         filter.add(new AnotherPredicate());
     }
-    public BronzebeakMoa (UUID ownerId) {
-        super(ownerId, 60, "Bronzebeak Moa", Rarity.UNCOMMON, new CardType[]{CardType.CREATURE}, "{2}{G}{W}");
-        this.expansionSetCode = "DGM";
+    public BronzebeakMoa (UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{2}{G}{W}");
         this.subtype.add("Bird");
 
         this.power = new MageInt(2);

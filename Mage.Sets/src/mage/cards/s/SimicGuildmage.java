@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.dissension;
+package mage.cards.s;
 
 import java.util.UUID;
 import mage.MageInt;
@@ -36,9 +36,9 @@ import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.costs.mana.ManaCostsImpl;
 import mage.abilities.effects.OneShotEffect;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Outcome;
-import mage.constants.Rarity;
 import mage.constants.Zone;
 import mage.counters.CounterType;
 import mage.filter.FilterPermanent;
@@ -71,9 +71,8 @@ public class SimicGuildmage extends CardImpl {
         filter.add(new SubtypePredicate("Aura"));
     }
 
-    public SimicGuildmage(UUID ownerId) {
-        super(ownerId, 148, "Simic Guildmage", Rarity.UNCOMMON, new CardType[]{CardType.CREATURE}, "{G/U}{G/U}");
-        this.expansionSetCode = "DIS";
+    public SimicGuildmage(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{G/U}{G/U}");
         this.subtype.add("Elf");
         this.subtype.add("Wizard");
         this.power = new MageInt(2);

@@ -25,15 +25,15 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.dragonsoftarkir;
+package mage.cards.p;
 
 import java.util.UUID;
 import mage.abilities.effects.common.DestroyTargetEffect;
 import mage.abilities.effects.keyword.BolsterEffect;
 import mage.abilities.keyword.FlyingAbility;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.filter.predicate.mageobject.AbilityPredicate;
 import mage.target.common.TargetCreaturePermanent;
@@ -50,9 +50,8 @@ public class PinionFeast extends CardImpl {
         filter.add(new AbilityPredicate(FlyingAbility.class));
     }
 
-    public PinionFeast(UUID ownerId) {
-        super(ownerId, 195, "Pinion Feast", Rarity.COMMON, new CardType[]{CardType.INSTANT}, "{4}{G}");
-        this.expansionSetCode = "DTK";
+    public PinionFeast(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.INSTANT},"{4}{G}");
 
         // Destroy target creature with flying. Bolster 2.
         this.getSpellAbility().addEffect(new DestroyTargetEffect());

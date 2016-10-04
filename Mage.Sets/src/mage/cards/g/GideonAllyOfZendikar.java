@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.battleforzendikar;
+package mage.cards.g;
 
 import java.util.UUID;
 import mage.MageInt;
@@ -41,9 +41,9 @@ import mage.abilities.effects.common.continuous.BecomesCreatureSourceEffect;
 import mage.abilities.effects.common.continuous.BoostControlledEffect;
 import mage.abilities.keyword.IndestructibleAbility;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Duration;
-import mage.constants.Rarity;
 import mage.constants.Zone;
 import mage.game.command.Emblem;
 import mage.game.permanent.token.Token;
@@ -54,9 +54,8 @@ import mage.game.permanent.token.Token;
  */
 public class GideonAllyOfZendikar extends CardImpl {
 
-    public GideonAllyOfZendikar(UUID ownerId) {
-        super(ownerId, 29, "Gideon, Ally of Zendikar", Rarity.MYTHIC, new CardType[]{CardType.PLANESWALKER}, "{2}{W}{W}");
-        this.expansionSetCode = "BFZ";
+    public GideonAllyOfZendikar(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.PLANESWALKER},"{2}{W}{W}");
         this.subtype.add("Gideon");
 
         this.addAbility(new PlanswalkerEntersWithLoyalityCountersAbility(4));

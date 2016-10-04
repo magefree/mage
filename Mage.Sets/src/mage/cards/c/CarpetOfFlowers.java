@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.urzassaga;
+package mage.cards.c;
 
 import java.util.LinkedHashSet;
 import java.util.UUID;
@@ -34,11 +34,11 @@ import mage.abilities.Ability;
 import mage.abilities.TriggeredAbilityImpl;
 import mage.abilities.effects.common.ManaEffect;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.choices.ChoiceColor;
 import mage.choices.ChoiceImpl;
 import mage.constants.CardType;
 import mage.constants.Outcome;
-import mage.constants.Rarity;
 import mage.constants.Zone;
 import mage.filter.common.FilterControlledPermanent;
 import mage.filter.predicate.mageobject.CardTypePredicate;
@@ -55,9 +55,8 @@ import mage.target.common.TargetOpponent;
  */
 public class CarpetOfFlowers extends CardImpl {
 
-    public CarpetOfFlowers(UUID ownerId) {
-        super(ownerId, 240, "Carpet of Flowers", Rarity.UNCOMMON, new CardType[]{CardType.ENCHANTMENT}, "{G}");
-        this.expansionSetCode = "USG";
+    public CarpetOfFlowers(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.ENCHANTMENT},"{G}");
 
         // At the beginning of each of your main phases, if you haven't added mana to your mana pool with this ability this turn, you may add up to X mana of any one color to your mana pool, where X is the number of Islands target opponent controls.
         this.addAbility(new CarpetOfFlowersTriggeredAbility());

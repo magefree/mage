@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.innistrad;
+package mage.cards.c;
 
 import java.util.UUID;
 
@@ -36,6 +36,7 @@ import mage.abilities.effects.OneShotEffect;
 import mage.abilities.keyword.FlashbackAbility;
 import mage.cards.Card;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.choices.Choice;
 import mage.choices.ChoiceImpl;
 import mage.game.Game;
@@ -47,9 +48,8 @@ import mage.players.Player;
  */
 public class CreepingRenaissance extends CardImpl {
 
-    public CreepingRenaissance(UUID ownerId) {
-        super(ownerId, 174, "Creeping Renaissance", Rarity.RARE, new CardType[]{CardType.SORCERY}, "{3}{G}{G}");
-        this.expansionSetCode = "ISD";
+    public CreepingRenaissance(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{3}{G}{G}");
 
 
         // Choose a permanent type. Return all cards of the chosen type from your graveyard to your hand.

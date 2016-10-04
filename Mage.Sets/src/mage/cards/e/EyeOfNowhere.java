@@ -26,13 +26,13 @@
  *  or implied, of BetaSteward_at_googlemail.com.
  */
 
-package mage.sets.championsofkamigawa;
+package mage.cards.e;
 
 import java.util.UUID;
 import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.abilities.effects.common.ReturnToHandTargetEffect;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.target.TargetPermanent;
 
 /**
@@ -41,9 +41,8 @@ import mage.target.TargetPermanent;
  */
 public class EyeOfNowhere extends CardImpl {
 
-    public EyeOfNowhere (UUID ownerId) {
-        super(ownerId, 59, "Eye of Nowhere", Rarity.COMMON, new CardType[]{CardType.SORCERY}, "{U}{U}");
-        this.expansionSetCode = "CHK";
+    public EyeOfNowhere (UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{U}{U}");
         this.subtype.add("Arcane");
         
         // Return target permanent to its owner's hand.        

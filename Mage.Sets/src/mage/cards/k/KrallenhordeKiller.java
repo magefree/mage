@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.darkascension;
+package mage.cards.k;
 
 import java.util.UUID;
 
@@ -41,6 +41,7 @@ import mage.abilities.effects.common.TransformSourceEffect;
 import mage.abilities.effects.common.continuous.BoostSourceEffect;
 import mage.abilities.keyword.TransformAbility;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 
 /**
  *
@@ -48,9 +49,8 @@ import mage.cards.CardImpl;
  */
 public class KrallenhordeKiller extends CardImpl {
 
-    public KrallenhordeKiller(UUID ownerId) {
-        super(ownerId, 133, "Krallenhorde Killer", Rarity.RARE, new CardType[]{CardType.CREATURE}, "");
-        this.expansionSetCode = "DKA";
+    public KrallenhordeKiller(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"");
         this.subtype.add("Werewolf");
         this.color.setGreen(true);
 

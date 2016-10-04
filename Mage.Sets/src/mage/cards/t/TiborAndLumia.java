@@ -25,12 +25,11 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.guildpact;
+package mage.cards.t;
 
 import java.util.UUID;
 
 import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.MageInt;
 import mage.ObjectColor;
 import mage.abilities.Ability;
@@ -39,6 +38,7 @@ import mage.abilities.effects.common.DamageAllEffect;
 import mage.abilities.effects.common.continuous.GainAbilityTargetEffect;
 import mage.abilities.keyword.FlyingAbility;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.Duration;
 import mage.filter.FilterSpell;
 import mage.filter.common.FilterCreaturePermanent;
@@ -63,9 +63,8 @@ public class TiborAndLumia extends CardImpl {
         filterRed.add(new ColorPredicate(ObjectColor.RED));
     }
 
-    public TiborAndLumia(UUID ownerId) {
-        super(ownerId, 135, "Tibor and Lumia", Rarity.RARE, new CardType[]{CardType.CREATURE}, "{2}{U}{R}");
-        this.expansionSetCode = "GPT";
+    public TiborAndLumia(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{2}{U}{R}");
         this.supertype.add("Legendary");
         this.subtype.add("Human");
         this.subtype.add("Wizard");

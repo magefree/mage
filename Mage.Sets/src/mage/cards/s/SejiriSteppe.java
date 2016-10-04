@@ -26,7 +26,7 @@
  *  or implied, of BetaSteward_at_googlemail.com.
  */
 
-package mage.sets.worldwake;
+package mage.cards.s;
 
 import java.util.UUID;
 import mage.abilities.common.EntersBattlefieldTappedAbility;
@@ -34,9 +34,9 @@ import mage.abilities.common.EntersBattlefieldTriggeredAbility;
 import mage.abilities.effects.common.continuous.GainProtectionFromColorTargetEffect;
 import mage.abilities.mana.WhiteManaAbility;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Duration;
-import mage.constants.Rarity;
 import mage.target.common.TargetControlledCreaturePermanent;
 
 /**
@@ -45,9 +45,8 @@ import mage.target.common.TargetControlledCreaturePermanent;
  */
 public class SejiriSteppe extends CardImpl {
 
-    public SejiriSteppe(UUID ownerId) {
-        super(ownerId, 142, "Sejiri Steppe", Rarity.COMMON, new CardType[]{CardType.LAND}, null);
-        this.expansionSetCode = "WWK";
+    public SejiriSteppe(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.LAND},null);
         this.addAbility(new EntersBattlefieldTappedAbility());
         EntersBattlefieldTriggeredAbility ability = new EntersBattlefieldTriggeredAbility(new GainProtectionFromColorTargetEffect(Duration.EndOfTurn), false);
         ability.addTarget(new TargetControlledCreaturePermanent());

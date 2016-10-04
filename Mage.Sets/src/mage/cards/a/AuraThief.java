@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package mage.sets.urzasdestiny;
+package mage.cards.a;
 
 import java.util.UUID;
 import mage.MageInt;
@@ -14,10 +14,10 @@ import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.continuous.GainControlTargetEffect;
 import mage.abilities.keyword.FlyingAbility;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Duration;
 import mage.constants.Outcome;
-import mage.constants.Rarity;
 import mage.filter.common.FilterEnchantmentPermanent;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
@@ -30,9 +30,8 @@ import mage.target.targetpointer.FixedTarget;
 
 public class AuraThief extends CardImpl {
     
-    public AuraThief(UUID ownerId) {
-        super(ownerId, 26, "Aura Thief", Rarity.RARE, new CardType[]{CardType.CREATURE}, "{3}{U}");
-        this.expansionSetCode = "UDS";
+    public AuraThief(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{3}{U}");
         this.subtype.add("Illusion");
         this.power = new MageInt(2);
         this.toughness = new MageInt(2);

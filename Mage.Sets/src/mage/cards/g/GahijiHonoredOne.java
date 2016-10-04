@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.commander2013;
+package mage.cards.g;
 
 import java.util.Set;
 import java.util.UUID;
@@ -34,9 +34,9 @@ import mage.abilities.TriggeredAbilityImpl;
 import mage.abilities.effects.Effect;
 import mage.abilities.effects.common.continuous.BoostTargetEffect;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Duration;
-import mage.constants.Rarity;
 import mage.constants.Zone;
 import mage.game.Game;
 import mage.game.events.GameEvent;
@@ -51,9 +51,8 @@ import mage.target.targetpointer.FixedTarget;
  */
 public class GahijiHonoredOne extends CardImpl {
 
-    public GahijiHonoredOne(UUID ownerId) {
-        super(ownerId, 191, "Gahiji, Honored One", Rarity.MYTHIC, new CardType[]{CardType.CREATURE}, "{2}{R}{G}{W}");
-        this.expansionSetCode = "C13";
+    public GahijiHonoredOne(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{2}{R}{G}{W}");
         this.supertype.add("Legendary");
         this.subtype.add("Beast");
 

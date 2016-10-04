@@ -25,16 +25,16 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.legends;
+package mage.cards.e;
 
 import java.util.UUID;
 import mage.Mana;
 import mage.abilities.Ability;
 import mage.abilities.effects.OneShotEffect;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Outcome;
-import mage.constants.Rarity;
 import mage.filter.common.FilterControlledCreaturePermanent;
 import mage.filter.predicate.Predicates;
 import mage.filter.predicate.permanent.TappedPredicate;
@@ -55,9 +55,8 @@ public class EnergyTap extends CardImpl {
         filter.add(Predicates.not(new TappedPredicate()));
     }
 
-    public EnergyTap(UUID ownerId) {
-        super(ownerId, 54, "Energy Tap", Rarity.COMMON, new CardType[]{CardType.SORCERY}, "{U}");
-        this.expansionSetCode = "LEG";
+    public EnergyTap(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{U}");
 
         // Tap target untapped creature you control. If you do, add X mana of {C} to your mana pool, where X is that creature's converted mana cost.
         this.getSpellAbility().addTarget(new TargetControlledCreaturePermanent(filter));

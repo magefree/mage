@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.eldritchmoon;
+package mage.cards.l;
 
 import java.util.UUID;
 import mage.MageInt;
@@ -35,8 +35,8 @@ import mage.abilities.effects.common.CastSourceTriggeredAbility;
 import mage.abilities.effects.common.PutOnLibraryTargetEffect;
 import mage.abilities.keyword.EmergeAbility;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.filter.common.FilterNonlandPermanent;
 import mage.target.TargetPermanent;
 
@@ -46,9 +46,8 @@ import mage.target.TargetPermanent;
  */
 public class LashweedLurker extends CardImpl {
 
-    public LashweedLurker(UUID ownerId) {
-        super(ownerId, 9, "Lashweed Lurker", Rarity.UNCOMMON, new CardType[]{CardType.CREATURE}, "{8}");
-        this.expansionSetCode = "EMN";
+    public LashweedLurker(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{8}");
         this.subtype.add("Eldrazi");
         this.subtype.add("Horror");
         this.power = new MageInt(5);

@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.magicorigins;
+package mage.cards.n;
 
 import java.util.UUID;
 import mage.MageObject;
@@ -38,12 +38,12 @@ import mage.abilities.effects.common.CreateTokenEffect;
 import mage.abilities.effects.common.UntapTargetEffect;
 import mage.cards.Card;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.cards.CardsImpl;
 import mage.constants.CardType;
 import mage.constants.Duration;
 import mage.constants.Layer;
 import mage.constants.Outcome;
-import mage.constants.Rarity;
 import mage.constants.SubLayer;
 import mage.constants.Zone;
 import mage.filter.common.FilterLandPermanent;
@@ -59,9 +59,8 @@ import mage.target.common.TargetLandPermanent;
  */
 public class NissaSageAnimist extends CardImpl {
 
-    public NissaSageAnimist(UUID ownerId) {
-        super(ownerId, 189, "Nissa, Sage Animist", Rarity.MYTHIC, new CardType[]{CardType.PLANESWALKER}, "");
-        this.expansionSetCode = "ORI";
+    public NissaSageAnimist(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.PLANESWALKER},"");
         this.subtype.add("Nissa");
         this.color.setGreen(true);
 

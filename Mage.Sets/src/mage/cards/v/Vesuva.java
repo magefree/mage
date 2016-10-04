@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.timespiral;
+package mage.cards.v;
 
 import java.util.UUID;
 import mage.abilities.Ability;
@@ -34,8 +34,8 @@ import mage.abilities.effects.Effect;
 import mage.abilities.effects.common.CopyPermanentEffect;
 import mage.abilities.effects.common.TapSourceEffect;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.filter.FilterPermanent;
 import mage.filter.predicate.mageobject.CardTypePredicate;
 
@@ -51,9 +51,8 @@ public class Vesuva extends CardImpl {
         filter.add(new CardTypePredicate(CardType.LAND));
     }
 
-    public Vesuva(UUID ownerId) {
-        super(ownerId, 281, "Vesuva", Rarity.RARE, new CardType[]{CardType.LAND}, "");
-        this.expansionSetCode = "TSP";
+    public Vesuva(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.LAND},"");
 
         // You may have Vesuva enter the battlefield tapped as a copy of any land on the battlefield.
         Effect effect = new TapSourceEffect(true);

@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.visions;
+package mage.cards.g;
 
 import java.util.UUID;
 import mage.abilities.Ability;
@@ -33,9 +33,9 @@ import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.costs.common.ReturnToHandFromBattlefieldSourceCost;
 import mage.abilities.effects.common.PreventDamageByTargetEffect;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Duration;
-import mage.constants.Rarity;
 import mage.constants.Zone;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.filter.predicate.permanent.UnblockedPredicate;
@@ -53,9 +53,8 @@ public class GossamerChains extends CardImpl {
         filter.add(new UnblockedPredicate());
     }
 
-    public GossamerChains(UUID ownerId) {
-        super(ownerId, 106, "Gossamer Chains", Rarity.COMMON, new CardType[]{CardType.ENCHANTMENT}, "{W}{W}");
-        this.expansionSetCode = "VIS";
+    public GossamerChains(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.ENCHANTMENT},"{W}{W}");
 
         // Return Gossamer Chains to its owner's hand: Prevent all combat damage that would be dealt by target unblocked creature this turn.
         Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new PreventDamageByTargetEffect(Duration.EndOfTurn, true), new ReturnToHandFromBattlefieldSourceCost());

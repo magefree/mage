@@ -25,13 +25,13 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.invasion;
+package mage.cards.s;
 
 import java.util.UUID;
 import mage.abilities.effects.common.RecruiterEffect;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.filter.common.FilterBasicLandCard;
 
 /**
@@ -40,9 +40,8 @@ import mage.filter.common.FilterBasicLandCard;
  */
 public class ScoutingTrek extends CardImpl {
 
-    public ScoutingTrek(UUID ownerId) {
-        super(ownerId, 210, "Scouting Trek", Rarity.UNCOMMON, new CardType[]{CardType.SORCERY}, "{1}{G}");
-        this.expansionSetCode = "INV";
+    public ScoutingTrek(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{1}{G}");
 
         // Search your library for any number of basic land cards. Reveal those cards, then shuffle your library and put them on top of it.
         this.getSpellAbility().addEffect(new RecruiterEffect(new FilterBasicLandCard("basic land cards")));

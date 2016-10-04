@@ -25,15 +25,15 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.eldritchmoon;
+package mage.cards.s;
 
 import java.util.UUID;
 import mage.abilities.effects.Effect;
 import mage.abilities.effects.common.DrawCardSourceControllerEffect;
 import mage.abilities.effects.common.LoseLifeSourceControllerEffect;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.Rarity;
 
 /**
  *
@@ -41,9 +41,8 @@ import mage.constants.Rarity;
  */
 public class SuccumbToTemptation extends CardImpl {
 
-    public SuccumbToTemptation(UUID ownerId) {
-        super(ownerId, 107, "Succumb to Temptation", Rarity.COMMON, new CardType[]{CardType.INSTANT}, "{1}{B}{B}");
-        this.expansionSetCode = "EMN";
+    public SuccumbToTemptation(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.INSTANT},"{1}{B}{B}");
 
         // You draw two cards and you lose 2 life.
         this.getSpellAbility().addEffect(new DrawCardSourceControllerEffect(2));

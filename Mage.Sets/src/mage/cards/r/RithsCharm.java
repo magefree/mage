@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.planeshift;
+package mage.cards.r;
 
 import java.util.UUID;
 import mage.abilities.Mode;
@@ -33,8 +33,8 @@ import mage.abilities.effects.common.CreateTokenEffect;
 import mage.abilities.effects.common.DestroyTargetEffect;
 import mage.abilities.effects.common.PreventDamageBySourceEffect;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.game.permanent.token.SaprolingToken;
 import mage.target.common.TargetNonBasicLandPermanent;
 
@@ -44,9 +44,8 @@ import mage.target.common.TargetNonBasicLandPermanent;
  */
 public class RithsCharm extends CardImpl {
 
-    public RithsCharm(UUID ownerId) {
-        super(ownerId, 122, "Rith's Charm", Rarity.UNCOMMON, new CardType[]{CardType.INSTANT}, "{R}{G}{W}");
-        this.expansionSetCode = "PLS";
+    public RithsCharm(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.INSTANT},"{R}{G}{W}");
 
         // Choose one - Destroy target nonbasic land;
         this.getSpellAbility().addEffect(new DestroyTargetEffect());

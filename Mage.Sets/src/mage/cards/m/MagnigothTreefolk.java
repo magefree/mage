@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.planeshift;
+package mage.cards.m;
 
 import java.util.UUID;
 import mage.MageInt;
@@ -41,9 +41,9 @@ import mage.abilities.keyword.MountainwalkAbility;
 import mage.abilities.keyword.PlainswalkAbility;
 import mage.abilities.keyword.SwampwalkAbility;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Duration;
-import mage.constants.Rarity;
 import mage.constants.Zone;
 import mage.filter.common.FilterLandPermanent;
 
@@ -59,9 +59,8 @@ public class MagnigothTreefolk extends CardImpl {
     private static final FilterLandPermanent filterMountain = new FilterLandPermanent("Mountain", "Mountain");
     private static final FilterLandPermanent filterForest = new FilterLandPermanent("Forest", "Forest");
 
-    public MagnigothTreefolk(UUID ownerId) {
-        super(ownerId, 82, "Magnigoth Treefolk", Rarity.RARE, new CardType[]{CardType.CREATURE}, "{4}{G}");
-        this.expansionSetCode = "PLS";
+    public MagnigothTreefolk(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{4}{G}");
         this.subtype.add("Treefolk");
         this.power = new MageInt(2);
         this.toughness = new MageInt(6);

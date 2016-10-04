@@ -25,17 +25,17 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.gatecrash;
+package mage.cards.w;
 
 import java.util.UUID;
 
 import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.abilities.Ability;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.CipherEffect;
 import mage.cards.Card;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.Outcome;
 import mage.game.Game;
 import mage.players.Player;
@@ -46,9 +46,8 @@ import mage.players.Player;
  */
 public class WhisperingMadness extends CardImpl {
 
-    public WhisperingMadness(UUID ownerId) {
-        super(ownerId, 207, "Whispering Madness", Rarity.RARE, new CardType[]{CardType.SORCERY}, "{2}{U}{B}");
-        this.expansionSetCode = "GTC";
+    public WhisperingMadness(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{2}{U}{B}");
 
 
         // Each player discards his or her hand, then draws cards equal to the greatest number of cards a player discarded this way.

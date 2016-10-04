@@ -25,17 +25,17 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.alarareborn;
+package mage.cards.k;
 
 import java.util.UUID;
 
 import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.MageInt;
 import mage.abilities.common.AttacksTriggeredAbility;
 import mage.abilities.dynamicvalue.common.PermanentsOnBattlefieldCount;
 import mage.abilities.effects.common.continuous.BoostSourceEffect;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.Duration;
 import mage.filter.common.FilterControlledCreaturePermanent;
 import mage.filter.predicate.Predicates;
@@ -53,9 +53,8 @@ public class KnotvinePaladin extends CardImpl {
     }
 
 
-    public KnotvinePaladin(UUID ownerId) {
-        super(ownerId, 71, "Knotvine Paladin", Rarity.RARE, new CardType[]{CardType.CREATURE}, "{G}{W}");
-        this.expansionSetCode = "ARB";
+    public KnotvinePaladin(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{G}{W}");
         this.subtype.add("Human");
         this.subtype.add("Knight");
 

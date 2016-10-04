@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.shadowsoverinnistrad;
+package mage.cards.u;
 
 import java.util.UUID;
 import mage.MageInt;
@@ -34,8 +34,8 @@ import mage.abilities.effects.common.TransformSourceEffect;
 import mage.abilities.keyword.SkulkAbility;
 import mage.abilities.keyword.TransformAbility;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.Rarity;
 
 /**
  *
@@ -43,15 +43,14 @@ import mage.constants.Rarity;
  */
 public class UninvitedGeist extends CardImpl {
 
-    public UninvitedGeist(UUID ownerId) {
-        super(ownerId, 94, "Uninvited Geist", Rarity.UNCOMMON, new CardType[]{CardType.CREATURE}, "{2}{U}");
-        this.expansionSetCode = "SOI";
+    public UninvitedGeist(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{2}{U}");
         this.subtype.add("Spirit");
         this.power = new MageInt(2);
         this.toughness = new MageInt(2);
 
         this.transformable = true;
-        this.secondSideCard = new UnimpededTrespasser(ownerId);
+        this.secondSideCardClazz = UnimpededTrespasser.class;
 
         // Skulk (This creature can't be blocked by creatures with greater power.)
         this.addAbility(new SkulkAbility());

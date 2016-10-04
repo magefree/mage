@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.alarareborn;
+package mage.cards.d;
 
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleActivatedAbility;
@@ -37,6 +37,7 @@ import mage.abilities.effects.Effect;
 import mage.abilities.effects.common.continuous.BoostEquippedEffect;
 import mage.abilities.keyword.EquipAbility;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.*;
 import mage.game.Game;
 
@@ -48,9 +49,8 @@ import java.util.UUID;
  */
 public class DemonspineWhip extends CardImpl {
 
-    public DemonspineWhip(UUID ownerId) {
-        super(ownerId, 39, "Demonspine Whip", Rarity.UNCOMMON, new CardType[]{CardType.ARTIFACT}, "{B}{R}");
-        this.expansionSetCode = "ARB";
+    public DemonspineWhip(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.ARTIFACT},"{B}{R}");
         this.subtype.add("Equipment");
 
 

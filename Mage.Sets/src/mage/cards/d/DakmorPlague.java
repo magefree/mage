@@ -25,13 +25,13 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.starter1999;
+package mage.cards.d;
 
 import java.util.UUID;
 import mage.abilities.effects.common.DamageEverythingEffect;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.Rarity;
 
 /**
  *
@@ -39,9 +39,8 @@ import mage.constants.Rarity;
  */
 public class DakmorPlague extends CardImpl {
 
-    public DakmorPlague(UUID ownerId) {
-        super(ownerId, 72, "Dakmor Plague", Rarity.UNCOMMON, new CardType[]{CardType.SORCERY}, "{3}{B}{B}");
-        this.expansionSetCode = "S99";
+    public DakmorPlague(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{3}{B}{B}");
 
         // Dakmor Plague deals 3 damage to each creature and each player.
         this.getSpellAbility().addEffect(new DamageEverythingEffect(3));

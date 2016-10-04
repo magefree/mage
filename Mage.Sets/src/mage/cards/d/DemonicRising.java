@@ -25,15 +25,15 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.avacynrestored;
+package mage.cards.d;
 
 import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.abilities.TriggeredAbility;
 import mage.abilities.common.BeginningOfYourEndStepTriggeredAbility;
 import mage.abilities.decorator.ConditionalTriggeredAbility;
 import mage.abilities.effects.common.CreateTokenEffect;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.game.permanent.token.DemonToken;
 import java.util.UUID;
 import mage.abilities.condition.common.CreatureCountCondition;
@@ -46,9 +46,8 @@ public class DemonicRising extends CardImpl {
 
     private static final String ruleText = "At the beginning of your end step, if you control exactly one creature, put a 5/5 black Demon creature token with flying onto the battlefield";
 
-    public DemonicRising(UUID ownerId) {
-        super(ownerId, 94, "Demonic Rising", Rarity.RARE, new CardType[]{CardType.ENCHANTMENT}, "{3}{B}{B}");
-        this.expansionSetCode = "AVR";
+    public DemonicRising(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.ENCHANTMENT},"{3}{B}{B}");
 
         // At the beginning of your end step, if you control exactly one creature, put a 5/5 black Demon creature token with flying onto the battlefield.
         TriggeredAbility ability = new BeginningOfYourEndStepTriggeredAbility(new CreateTokenEffect(new DemonToken()), false);

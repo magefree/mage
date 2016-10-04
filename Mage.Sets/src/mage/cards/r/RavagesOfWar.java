@@ -25,13 +25,13 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.portalthreekingdoms;
+package mage.cards.r;
 
 import java.util.UUID;
 import mage.abilities.effects.common.DestroyAllEffect;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.filter.common.FilterLandPermanent;
 
 /**
@@ -40,9 +40,8 @@ import mage.filter.common.FilterLandPermanent;
  */
 public class RavagesOfWar extends CardImpl {
 
-    public RavagesOfWar(UUID ownerId) {
-        super(ownerId, 17, "Ravages of War", Rarity.RARE, new CardType[]{CardType.SORCERY}, "{3}{W}");
-        this.expansionSetCode = "PTK";
+    public RavagesOfWar(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{3}{W}");
 
 
         // Destroy all lands.

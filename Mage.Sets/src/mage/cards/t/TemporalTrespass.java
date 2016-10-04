@@ -25,15 +25,15 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.fatereforged;
+package mage.cards.t;
 
 import java.util.UUID;
 import mage.abilities.effects.common.turn.AddExtraTurnControllerEffect;
 import mage.abilities.effects.common.ExileSpellEffect;
 import mage.abilities.keyword.DelveAbility;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.Rarity;
 
 /**
  *
@@ -41,9 +41,8 @@ import mage.constants.Rarity;
  */
 public class TemporalTrespass extends CardImpl {
 
-    public TemporalTrespass(UUID ownerId) {
-        super(ownerId, 55, "Temporal Trespass", Rarity.MYTHIC, new CardType[]{CardType.SORCERY}, "{8}{U}{U}{U}");
-        this.expansionSetCode = "FRF";
+    public TemporalTrespass(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{8}{U}{U}{U}");
 
         // Delve
         this.addAbility(new DelveAbility());

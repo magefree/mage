@@ -25,14 +25,14 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.darkascension;
+package mage.cards.u;
 
 import java.util.UUID;
 import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.MageInt;
 import mage.abilities.common.CantBlockAbility;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 
 /**
  *
@@ -40,9 +40,8 @@ import mage.cards.CardImpl;
  */
 public class UnhallowedCathar extends CardImpl {
 
-    public UnhallowedCathar(UUID ownerId) {
-        super(ownerId, 13, "Unhallowed Cathar", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "");
-        this.expansionSetCode = "DKA";
+    public UnhallowedCathar(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"");
         this.subtype.add("Zombie");
         this.subtype.add("Soldier");
         this.color.setBlack(true);

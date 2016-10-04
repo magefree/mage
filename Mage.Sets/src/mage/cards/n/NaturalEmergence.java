@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.planeshift;
+package mage.cards.n;
 
 import java.util.UUID;
 import mage.MageInt;
@@ -37,9 +37,9 @@ import mage.abilities.effects.common.ReturnToHandChosenControlledPermanentEffect
 import mage.abilities.effects.common.continuous.BecomesCreatureAllEffect;
 import mage.abilities.keyword.FirstStrikeAbility;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Duration;
-import mage.constants.Rarity;
 import mage.constants.Zone;
 import mage.filter.common.FilterControlledEnchantmentPermanent;
 import mage.filter.common.FilterControlledLandPermanent;
@@ -60,9 +60,8 @@ public class NaturalEmergence extends CardImpl {
         filter.add(Predicates.or(new ColorPredicate(ObjectColor.RED), new ColorPredicate(ObjectColor.GREEN)));
     }
 
-    public NaturalEmergence(UUID ownerId) {
-        super(ownerId, 117, "Natural Emergence", Rarity.RARE, new CardType[]{CardType.ENCHANTMENT}, "{2}{R}{G}");
-        this.expansionSetCode = "PLS";
+    public NaturalEmergence(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.ENCHANTMENT},"{2}{R}{G}");
 
         // When Natural Emergence enters the battlefield, return a red or green enchantment you control to its owner's hand.
         Effect effect = new ReturnToHandChosenControlledPermanentEffect(filter);

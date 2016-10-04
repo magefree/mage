@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.conflux;
+package mage.cards.p;
 
 import java.util.UUID;
 import mage.MageInt;
@@ -34,8 +34,8 @@ import mage.abilities.common.PutIntoGraveFromAnywhereSourceAbility;
 import mage.abilities.effects.common.RevealAndShuffleIntoLibrarySourceEffect;
 import mage.abilities.keyword.ProtectionAbility;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.filter.FilterCard;
 import mage.game.Game;
 
@@ -45,9 +45,8 @@ import mage.game.Game;
  */
 public class Progenitus extends CardImpl {
 
-    public Progenitus(UUID ownerId) {
-        super(ownerId, 121, "Progenitus", Rarity.MYTHIC, new CardType[]{CardType.CREATURE}, "{W}{W}{U}{U}{B}{B}{R}{R}{G}{G}");
-        this.expansionSetCode = "CON";
+    public Progenitus(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{W}{W}{U}{U}{B}{B}{R}{R}{G}{G}");
         this.supertype.add("Legendary");
         this.subtype.add("Hydra");
         this.subtype.add("Avatar");

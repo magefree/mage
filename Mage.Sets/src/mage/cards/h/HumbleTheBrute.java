@@ -25,14 +25,14 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.shadowsoverinnistrad;
+package mage.cards.h;
 
 import java.util.UUID;
 import mage.abilities.effects.common.DestroyTargetEffect;
 import mage.abilities.effects.keyword.InvestigateEffect;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.filter.Filter;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.filter.predicate.mageobject.PowerPredicate;
@@ -50,9 +50,8 @@ public class HumbleTheBrute extends CardImpl {
         filter.add(new PowerPredicate(Filter.ComparisonType.GreaterThan, 3));
     }
 
-    public HumbleTheBrute(UUID ownerId) {
-        super(ownerId, 23, "Humble the Brute", Rarity.UNCOMMON, new CardType[]{CardType.INSTANT}, "{4}{W}");
-        this.expansionSetCode = "SOI";
+    public HumbleTheBrute(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.INSTANT},"{4}{W}");
 
         // Destroy target creature with power 4 or greater.
         this.getSpellAbility().addEffect(new DestroyTargetEffect());

@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.mercadianmasques;
+package mage.cards.m;
 
 import java.util.UUID;
 import mage.MageInt;
@@ -35,9 +35,9 @@ import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.CreateTokenEffect;
 import mage.abilities.effects.common.SacrificeSourceEffect;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Outcome;
-import mage.constants.Rarity;
 import mage.constants.SetTargetPointer;
 import mage.constants.Zone;
 import mage.filter.common.FilterCreaturePermanent;
@@ -51,9 +51,8 @@ import mage.game.permanent.token.Token;
  */
 public class MonkeyCage extends CardImpl {
 
-    public MonkeyCage(UUID ownerId) {
-        super(ownerId, 307, "Monkey Cage", Rarity.RARE, new CardType[]{CardType.ARTIFACT}, "{5}");
-        this.expansionSetCode = "MMQ";
+    public MonkeyCage(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.ARTIFACT},"{5}");
 
         // When a creature enters the battlefield, sacrifice Monkey Cage and put X 2/2 green Ape creature tokens onto the battlefield, where X is that creature's converted mana cost.
         Ability ability = new EntersBattlefieldAllTriggeredAbility(Zone.BATTLEFIELD, new SacrificeSourceEffect(),

@@ -25,14 +25,14 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.dragonsoftarkir;
+package mage.cards.e;
 
 import java.util.UUID;
 import mage.abilities.effects.common.DestroyTargetEffect;
 import mage.abilities.effects.keyword.BolsterEffect;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.filter.common.FilterAttackingOrBlockingCreature;
 import mage.target.common.TargetCreaturePermanent;
 
@@ -42,9 +42,8 @@ import mage.target.common.TargetCreaturePermanent;
  */
 public class EnduringVictory extends CardImpl {
 
-    public EnduringVictory(UUID ownerId) {
-        super(ownerId, 16, "Enduring Victory", Rarity.COMMON, new CardType[]{CardType.INSTANT}, "{4}{W}");
-        this.expansionSetCode = "DTK";
+    public EnduringVictory(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.INSTANT},"{4}{W}");
 
         // Destroy target attacking or blocking creature. Bolster 1.
         this.getSpellAbility().addTarget(new TargetCreaturePermanent(new FilterAttackingOrBlockingCreature()));

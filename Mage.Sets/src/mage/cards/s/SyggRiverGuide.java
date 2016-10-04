@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.lorwyn;
+package mage.cards.s;
 
 import java.util.UUID;
 import mage.MageInt;
@@ -35,9 +35,9 @@ import mage.abilities.costs.mana.ManaCostsImpl;
 import mage.abilities.effects.common.continuous.GainProtectionFromColorTargetEffect;
 import mage.abilities.keyword.IslandwalkAbility;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Duration;
-import mage.constants.Rarity;
 import mage.constants.Zone;
 import mage.filter.common.FilterControlledCreaturePermanent;
 import mage.filter.predicate.mageobject.SubtypePredicate;
@@ -56,9 +56,8 @@ public class SyggRiverGuide extends CardImpl {
         filter.add(new SubtypePredicate("Merfolk"));
     }
 
-    public SyggRiverGuide(UUID ownerId) {
-        super(ownerId, 251, "Sygg, River Guide", Rarity.RARE, new CardType[]{CardType.CREATURE}, "{W}{U}");
-        this.expansionSetCode = "LRW";
+    public SyggRiverGuide(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{W}{U}");
         this.supertype.add("Legendary");
         this.subtype.add("Merfolk");
         this.subtype.add("Wizard");

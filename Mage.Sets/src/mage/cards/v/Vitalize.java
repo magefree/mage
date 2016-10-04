@@ -25,13 +25,13 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.weatherlight;
+package mage.cards.v;
 
 import java.util.UUID;
 import mage.abilities.effects.common.UntapAllControllerEffect;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.filter.common.FilterCreaturePermanent;
 
 /**
@@ -40,9 +40,8 @@ import mage.filter.common.FilterCreaturePermanent;
  */
 public class Vitalize extends CardImpl {
 
-    public Vitalize(UUID ownerId) {
-        super(ownerId, 87, "Vitalize", Rarity.COMMON, new CardType[]{CardType.INSTANT}, "{G}");
-        this.expansionSetCode = "WTH";
+    public Vitalize(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.INSTANT},"{G}");
 
 
         // Untap all creatures you control.

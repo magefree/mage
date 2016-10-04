@@ -25,16 +25,16 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.journeyintonyx;
+package mage.cards.d;
 
 import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.abilityword.ConstellationAbility;
 import mage.abilities.effects.common.continuous.BoostAllEffect;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Duration;
-import mage.constants.Rarity;
 import mage.constants.TargetController;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.filter.predicate.permanent.ControllerPredicate;
@@ -51,9 +51,8 @@ public class DoomwakeGiant extends CardImpl {
         filter.add(new ControllerPredicate(TargetController.OPPONENT));
     }
     
-    public DoomwakeGiant(UUID ownerId) {
-        super(ownerId, 66, "Doomwake Giant", Rarity.RARE, new CardType[]{CardType.ENCHANTMENT, CardType.CREATURE}, "{4}{B}");
-        this.expansionSetCode = "JOU";
+    public DoomwakeGiant(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.ENCHANTMENT,CardType.CREATURE},"{4}{B}");
         this.subtype.add("Giant");
 
         this.power = new MageInt(4);

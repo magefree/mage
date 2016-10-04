@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.shadowsoverinnistrad;
+package mage.cards.l;
 
 import java.util.UUID;
 import mage.MageInt;
@@ -36,8 +36,8 @@ import mage.abilities.condition.common.PermanentsOnTheBattlefieldCondition.Count
 import mage.abilities.decorator.ConditionalTriggeredAbility;
 import mage.abilities.effects.common.DrawDiscardControllerEffect;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.filter.common.FilterControlledPermanent;
 import mage.filter.predicate.mageobject.SubtypePredicate;
 import mage.filter.predicate.permanent.AnotherPredicate;
@@ -55,9 +55,8 @@ public class LamplighterOfSelhoff extends CardImpl {
         filter.add(new SubtypePredicate("Zombie"));
     }
 
-    public LamplighterOfSelhoff(UUID ownerId) {
-        super(ownerId, 72, "Lamplighter of Selhoff", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{4}{U}");
-        this.expansionSetCode = "SOI";
+    public LamplighterOfSelhoff(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{4}{U}");
         this.subtype.add("Zombie");
         this.subtype.add("Horror");
         this.power = new MageInt(3);

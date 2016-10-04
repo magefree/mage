@@ -25,16 +25,16 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.shadowmoor;
+package mage.cards.g;
 
 import java.util.UUID;
 import mage.abilities.Ability;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.keyword.FlyingAbility;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Outcome;
-import mage.constants.Rarity;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.filter.predicate.mageobject.AbilityPredicate;
 import mage.game.Game;
@@ -54,9 +54,8 @@ public class GloomwidowsFeast extends CardImpl {
         filter.add(new AbilityPredicate(FlyingAbility.class));
     }
 
-    public GloomwidowsFeast(UUID ownerId) {
-        super(ownerId, 118, "Gloomwidow's Feast", Rarity.COMMON, new CardType[]{CardType.INSTANT}, "{3}{G}");
-        this.expansionSetCode = "SHM";
+    public GloomwidowsFeast(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.INSTANT},"{3}{G}");
 
 
         // Destroy target creature with flying. If that creature was blue or black, put a 1/2 green Spider creature token with reach onto the battlefield.

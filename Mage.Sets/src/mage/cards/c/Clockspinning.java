@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.timespiral;
+package mage.cards.c;
 
 import java.util.HashSet;
 import java.util.Set;
@@ -37,11 +37,11 @@ import mage.abilities.effects.common.counter.RemoveCounterTargetEffect;
 import mage.abilities.keyword.BuybackAbility;
 import mage.cards.Card;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.choices.Choice;
 import mage.choices.ChoiceImpl;
 import mage.constants.CardType;
 import mage.constants.Outcome;
-import mage.constants.Rarity;
 import mage.counters.Counter;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
@@ -55,9 +55,8 @@ import mage.target.targetpointer.FixedTarget;
  */
 public class Clockspinning extends CardImpl {
 
-    public Clockspinning(UUID ownerId) {
-        super(ownerId, 53, "Clockspinning", Rarity.COMMON, new CardType[]{CardType.INSTANT}, "{U}");
-        this.expansionSetCode = "TSP";
+    public Clockspinning(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.INSTANT},"{U}");
 
         // Buyback {3}
         this.addAbility(new BuybackAbility("{3}"));

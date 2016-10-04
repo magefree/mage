@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.dragonsmaze;
+package mage.cards.c;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -37,11 +37,11 @@ import mage.abilities.effects.common.UntapTargetEffect;
 import mage.abilities.effects.common.continuous.GainAbilityTargetEffect;
 import mage.abilities.effects.common.continuous.GainControlTargetEffect;
 import mage.abilities.keyword.HasteAbility;
+import mage.cards.CardSetInfo;
 import mage.cards.SplitCard;
 import mage.constants.CardType;
 import mage.constants.Duration;
 import mage.constants.Outcome;
-import mage.constants.Rarity;
 import mage.filter.FilterPermanent;
 import mage.filter.common.FilterControlledArtifactPermanent;
 import mage.filter.common.FilterControlledCreaturePermanent;
@@ -57,9 +57,8 @@ import mage.target.common.TargetControlledPermanent;
 
 public class CatchRelease extends SplitCard {
 
-    public CatchRelease(UUID ownerId) {
-        super(ownerId, 125, "Catch", "Release", Rarity.RARE, new CardType[]{CardType.SORCERY}, "{1}{U}{R}", "{4}{R}{W}", true);
-        this.expansionSetCode = "DGM";
+    public CatchRelease(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{1}{U}{R}","{4}{R}{W}",true);
 
         // Catch
         // Gain control of target permanent until end of turn. Untap it. It gains haste until end of turn.

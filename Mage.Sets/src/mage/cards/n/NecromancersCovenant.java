@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.alarareborn;
+package mage.cards.n;
 
 import java.util.UUID;
 import mage.abilities.Ability;
@@ -36,10 +36,10 @@ import mage.abilities.effects.common.continuous.GainAbilityAllEffect;
 import mage.abilities.keyword.LifelinkAbility;
 import mage.cards.Card;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Duration;
 import mage.constants.Outcome;
-import mage.constants.Rarity;
 import mage.constants.Zone;
 import mage.filter.common.FilterControlledCreaturePermanent;
 import mage.filter.common.FilterCreatureCard;
@@ -61,9 +61,8 @@ public class NecromancersCovenant extends CardImpl {
         filter.add(new SubtypePredicate("Zombie"));
     }
 
-    public NecromancersCovenant(UUID ownerId) {
-        super(ownerId, 82, "Necromancer's Covenant", Rarity.RARE, new CardType[]{CardType.ENCHANTMENT}, "{3}{W}{B}{B}");
-        this.expansionSetCode = "ARB";
+    public NecromancersCovenant(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.ENCHANTMENT},"{3}{W}{B}{B}");
 
         // When Necromancer's Covenant enters the battlefield, exile all creature cards from target player's graveyard, then put a 2/2 black Zombie creature token onto the battlefield for each card exiled this way.
         Ability ability = new EntersBattlefieldTriggeredAbility(new NecromancersConvenantEffect(), false);

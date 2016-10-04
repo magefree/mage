@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.eventide;
+package mage.cards.s;
 
 import java.util.UUID;
 import mage.abilities.Ability;
@@ -33,9 +33,9 @@ import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.PutTokenOntoBattlefieldCopyTargetEffect;
 import mage.abilities.keyword.RetraceAbility;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Outcome;
-import mage.constants.Rarity;
 import mage.constants.Zone;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
@@ -50,9 +50,8 @@ import mage.util.CardUtil;
  */
 public class SpittingImage extends CardImpl {
 
-    public SpittingImage(UUID ownerId) {
-        super(ownerId, 162, "Spitting Image", Rarity.RARE, new CardType[]{CardType.SORCERY}, "{4}{G/U}{G/U}");
-        this.expansionSetCode = "EVE";
+    public SpittingImage(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{4}{G/U}{G/U}");
 
         // Put a token that's a copy of target creature onto the battlefield.
         this.getSpellAbility().addEffect(new PutTokenOntoBattlefieldCopyTargetEffect());

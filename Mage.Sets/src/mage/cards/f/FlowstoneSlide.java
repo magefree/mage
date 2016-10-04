@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.tenthedition;
+package mage.cards.f;
 
 import java.util.UUID;
 import mage.abilities.dynamicvalue.DynamicValue;
@@ -33,9 +33,9 @@ import mage.abilities.dynamicvalue.common.ManacostVariableValue;
 import mage.abilities.dynamicvalue.common.SignInversionDynamicValue;
 import mage.abilities.effects.common.continuous.BoostAllEffect;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Duration;
-import mage.constants.Rarity;
 
 /**
  *
@@ -43,9 +43,8 @@ import mage.constants.Rarity;
  */
 public class FlowstoneSlide extends CardImpl {
 
-    public FlowstoneSlide(UUID ownerId) {
-        super(ownerId, 203, "Flowstone Slide", Rarity.RARE, new CardType[]{CardType.SORCERY}, "{X}{2}{R}{R}");
-        this.expansionSetCode = "10E";
+    public FlowstoneSlide(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{X}{2}{R}{R}");
 
         DynamicValue xPos = new ManacostVariableValue();
         DynamicValue xNeg = new SignInversionDynamicValue(new ManacostVariableValue());

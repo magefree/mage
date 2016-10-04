@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.urzassaga;
+package mage.cards.l;
 
 import java.util.UUID;
 import mage.MageInt;
@@ -37,9 +37,9 @@ import mage.abilities.effects.Effect;
 import mage.abilities.effects.common.continuous.BecomesCreatureSourceEffect;
 import mage.abilities.keyword.FlyingAbility;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Duration;
-import mage.constants.Rarity;
 import mage.constants.Zone;
 import mage.game.Game;
 import mage.game.permanent.token.Token;
@@ -51,9 +51,8 @@ import mage.players.Player;
  */
 public class LurkingEvil extends CardImpl {
 
-    public LurkingEvil(UUID ownerId) {
-        super(ownerId, 140, "Lurking Evil", Rarity.RARE, new CardType[]{CardType.ENCHANTMENT}, "{B}{B}{B}");
-        this.expansionSetCode = "USG";
+    public LurkingEvil(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.ENCHANTMENT},"{B}{B}{B}");
 
         // Pay half your life, rounded up: Lurking Evil becomes a 4/4 Horror creature with flying.
         Effect effect = new BecomesCreatureSourceEffect(new LurkingEvilToken(), null, Duration.EndOfGame, true, false);

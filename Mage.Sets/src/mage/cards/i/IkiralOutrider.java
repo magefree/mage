@@ -26,10 +26,9 @@
  *  or implied, of BetaSteward_at_googlemail.com.
  */
 
-package mage.sets.riseoftheeldrazi;
+package mage.cards.i;
 
 import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.MageInt;
 import mage.abilities.Abilities;
 import mage.abilities.AbilitiesImpl;
@@ -38,6 +37,7 @@ import mage.abilities.costs.mana.ManaCostsImpl;
 import mage.abilities.keyword.LevelerCardBuilder;
 import mage.abilities.keyword.LevelUpAbility;
 import mage.abilities.keyword.VigilanceAbility;
+import mage.cards.CardSetInfo;
 import mage.cards.LevelerCard;
 
 import java.util.UUID;
@@ -48,9 +48,8 @@ import java.util.UUID;
  */
 public class IkiralOutrider extends LevelerCard {
 
-    public IkiralOutrider (UUID ownerId) {
-        super(ownerId, 27, "Ikiral Outrider", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{1}{W}");
-        this.expansionSetCode = "ROE";
+    public IkiralOutrider (UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{1}{W}");
         this.subtype.add("Human");
         this.subtype.add("Soldier");
         this.color.setWhite(true);

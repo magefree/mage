@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.commander;
+package mage.cards.a;
 
 import java.util.UUID;
 import mage.MageInt;
@@ -40,11 +40,11 @@ import mage.abilities.keyword.FlashbackAbility;
 import mage.abilities.keyword.ProtectionAbility;
 import mage.cards.Card;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.CostModificationType;
 import mage.constants.Duration;
 import mage.constants.Outcome;
-import mage.constants.Rarity;
 import mage.constants.Zone;
 import mage.counters.CounterType;
 import mage.filter.FilterCard;
@@ -71,9 +71,8 @@ public class AnimarSoulOfElements extends CardImpl {
         filterSpell.add(new CardTypePredicate(CardType.CREATURE));
     }
 
-    public AnimarSoulOfElements(UUID ownerId) {
-        super(ownerId, 181, "Animar, Soul of Elements", Rarity.MYTHIC, new CardType[]{CardType.CREATURE}, "{U}{R}{G}");
-        this.expansionSetCode = "CMD";
+    public AnimarSoulOfElements(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{U}{R}{G}");
         this.supertype.add("Legendary");
         this.subtype.add("Elemental");
 

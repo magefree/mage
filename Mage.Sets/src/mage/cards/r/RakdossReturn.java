@@ -26,15 +26,15 @@
  *  or implied, of BetaSteward_at_googlemail.com.
  */
 
-package mage.sets.returntoravnica;
+package mage.cards.r;
 
 import java.util.UUID;
 import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.abilities.dynamicvalue.common.ManacostVariableValue;
 import mage.abilities.effects.common.DamageTargetEffect;
 import mage.abilities.effects.common.discard.DiscardTargetEffect;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.target.common.TargetOpponent;
 
 /**
@@ -43,9 +43,8 @@ import mage.target.common.TargetOpponent;
  */
 public class RakdossReturn extends CardImpl {
 
-    public RakdossReturn (UUID ownerId) {
-        super(ownerId, 188, "Rakdos's Return", Rarity.MYTHIC, new CardType[]{CardType.SORCERY}, "{X}{B}{R}");
-        this.expansionSetCode = "RTR";
+    public RakdossReturn (UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{X}{B}{R}");
 
 
 

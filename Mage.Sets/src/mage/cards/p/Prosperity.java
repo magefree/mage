@@ -25,14 +25,14 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.commander2013;
+package mage.cards.p;
 
 import java.util.UUID;
 import mage.abilities.dynamicvalue.common.ManacostVariableValue;
 import mage.abilities.effects.common.DrawCardAllEffect;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.Rarity;
 
 /**
  *
@@ -40,9 +40,8 @@ import mage.constants.Rarity;
  */
 public class Prosperity extends CardImpl {
 
-    public Prosperity(UUID ownerId) {
-        super(ownerId, 54, "Prosperity", Rarity.UNCOMMON, new CardType[]{CardType.SORCERY}, "{X}{U}");
-        this.expansionSetCode = "C13";
+    public Prosperity(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{X}{U}");
 
 
         // Each player draws X cards.

@@ -25,16 +25,16 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.shadowmoor;
+package mage.cards.p;
 
 import java.util.UUID;
 import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.MageInt;
 import mage.abilities.keyword.FlashAbility;
 import mage.abilities.keyword.DefenderAbility;
 import mage.abilities.keyword.FlyingAbility;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 
 /**
  *
@@ -42,9 +42,8 @@ import mage.cards.CardImpl;
  */
 public class Plumeveil extends CardImpl {
 
-    public Plumeveil(UUID ownerId) {
-        super(ownerId, 145, "Plumeveil", Rarity.UNCOMMON, new CardType[]{CardType.CREATURE}, "{W/U}{W/U}{W/U}");
-        this.expansionSetCode = "SHM";
+    public Plumeveil(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{W/U}{W/U}{W/U}");
         this.subtype.add("Elemental");
 
         this.power = new MageInt(4);

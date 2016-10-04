@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.eldritchmoon;
+package mage.cards.c;
 
 import java.util.UUID;
 import mage.abilities.Ability;
@@ -37,9 +37,10 @@ import mage.abilities.effects.common.LoseLifeAllPlayersEffect;
 import mage.abilities.effects.common.TransformSourceEffect;
 import mage.abilities.keyword.TransformAbility;
 import mage.abilities.mana.AnyColorManaAbility;
+import mage.cards.a.AuroraOfEmrakul;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.constants.TargetController;
 
 /**
@@ -48,12 +49,11 @@ import mage.constants.TargetController;
  */
 public class CryptolithFragment extends CardImpl {
 
-    public CryptolithFragment(UUID ownerId) {
-        super(ownerId, 193, "Cryptolith Fragment", Rarity.UNCOMMON, new CardType[]{CardType.ARTIFACT}, "{3}");
-        this.expansionSetCode = "EMN";
+    public CryptolithFragment(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.ARTIFACT},"{3}");
 
         this.transformable = true;
-        this.secondSideCard = new AuroraOfEmrakul(ownerId);
+        this.secondSideCardClazz = AuroraOfEmrakul.class;
 
         // Cryptolith Fragment enters the battlefield tapped.
         this.addAbility(new EntersBattlefieldTappedAbility());

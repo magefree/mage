@@ -25,7 +25,7 @@
  * authors and should not be interpreted as representing official policies, either expressed
  * or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.shardsofalara;
+package mage.cards.s;
 
 import java.util.UUID;
 import mage.abilities.LoyaltyAbility;
@@ -39,9 +39,9 @@ import mage.abilities.effects.common.continuous.GainAbilityTargetEffect;
 import mage.abilities.effects.common.continuous.GainControlTargetEffect;
 import mage.abilities.keyword.HasteAbility;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Duration;
-import mage.constants.Rarity;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.game.permanent.token.DragonToken;
 import mage.target.common.TargetCreaturePermanent;
@@ -54,9 +54,8 @@ public class SarkhanVol extends CardImpl {
 
     private static DragonToken dragonToken = new DragonToken();
 
-    public SarkhanVol(UUID ownerId) {
-        super(ownerId, 191, "Sarkhan Vol", Rarity.MYTHIC, new CardType[]{CardType.PLANESWALKER}, "{2}{R}{G}");
-        this.expansionSetCode = "ALA";
+    public SarkhanVol(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.PLANESWALKER},"{2}{R}{G}");
         this.subtype.add("Sarkhan");
 
         this.addAbility(new PlanswalkerEntersWithLoyalityCountersAbility(4));

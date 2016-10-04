@@ -25,10 +25,9 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.innistrad;
+package mage.cards.t;
 
 import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.MageInt;
 import mage.abilities.TriggeredAbility;
 import mage.abilities.common.BeginningOfUpkeepTriggeredAbility;
@@ -36,7 +35,9 @@ import mage.abilities.condition.common.NoSpellsWereCastLastTurnCondition;
 import mage.abilities.decorator.ConditionalTriggeredAbility;
 import mage.abilities.effects.common.TransformSourceEffect;
 import mage.abilities.keyword.TransformAbility;
+import mage.cards.r.RampagingWerewolf;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.TargetController;
 
 import java.util.UUID;
@@ -46,15 +47,14 @@ import java.util.UUID;
  */
 public class TormentedPariah extends CardImpl {
 
-    public TormentedPariah(UUID ownerId) {
-        super(ownerId, 165, "Tormented Pariah", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{3}{R}");
-        this.expansionSetCode = "ISD";
+    public TormentedPariah(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{3}{R}");
         this.subtype.add("Human");
         this.subtype.add("Warrior");
         this.subtype.add("Werewolf");
 
         this.transformable = true;
-        this.secondSideCard = new RampagingWerewolf(ownerId);
+        this.secondSideCardClazz = RampagingWerewolf.class;
 
         this.power = new MageInt(3);
         this.toughness = new MageInt(2);

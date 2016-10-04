@@ -25,13 +25,13 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.judgment;
+package mage.cards.v;
 
 import java.util.UUID;
 import mage.abilities.effects.common.DestroyTargetEffect;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.filter.FilterPermanent;
 import mage.filter.predicate.permanent.EnchantedPredicate;
 import mage.target.TargetPermanent;
@@ -48,9 +48,8 @@ public class VenomousVines extends CardImpl {
         filter.add(new EnchantedPredicate());
     }
 
-    public VenomousVines(UUID ownerId) {
-        super(ownerId, 136, "Venomous Vines", Rarity.COMMON, new CardType[]{CardType.SORCERY}, "{2}{G}{G}");
-        this.expansionSetCode = "JUD";
+    public VenomousVines(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{2}{G}{G}");
 
         // Destroy target enchanted permanent.
         this.getSpellAbility().addEffect(new DestroyTargetEffect());

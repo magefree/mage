@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.magicorigins;
+package mage.cards.t;
 
 import java.util.Set;
 import java.util.UUID;
@@ -35,11 +35,11 @@ import mage.abilities.condition.common.SpellMasteryCondition;
 import mage.abilities.effects.OneShotEffect;
 import mage.cards.Card;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.cards.Cards;
 import mage.cards.CardsImpl;
 import mage.constants.CardType;
 import mage.constants.Outcome;
-import mage.constants.Rarity;
 import mage.constants.Zone;
 import mage.filter.FilterCard;
 import mage.filter.common.FilterInstantOrSorceryCard;
@@ -54,9 +54,8 @@ import mage.target.common.TargetOpponent;
  */
 public class TalentOfTheTelepath extends CardImpl {
 
-    public TalentOfTheTelepath(UUID ownerId) {
-        super(ownerId, 78, "Talent of the Telepath", Rarity.RARE, new CardType[]{CardType.SORCERY}, "{2}{U}{U}");
-        this.expansionSetCode = "ORI";
+    public TalentOfTheTelepath(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{2}{U}{U}");
 
         // Target opponent reveals the top seven cards of his or her library. You may cast an instant or sorcery card from among them without paying its mana cost. Then that player puts the rest into his or her graveyard.
         // <i>Spell mastery</i> - If there are two or more instant and/or sorcery cards in your graveyard, you may cast up to two revealed instant and/or sorcery cards instead of one.

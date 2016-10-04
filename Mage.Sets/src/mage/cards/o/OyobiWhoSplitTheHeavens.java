@@ -25,17 +25,17 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.betrayersofkamigawa;
+package mage.cards.o;
 
 import java.util.UUID;
 
 import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.MageInt;
 import mage.abilities.common.SpellCastControllerTriggeredAbility;
 import mage.abilities.effects.common.CreateTokenEffect;
 import mage.abilities.keyword.FlyingAbility;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.filter.common.FilterSpiritOrArcaneCard;
 import mage.game.permanent.token.Token;
 
@@ -46,9 +46,8 @@ public class OyobiWhoSplitTheHeavens extends CardImpl {
 
     private static final FilterSpiritOrArcaneCard filter = new FilterSpiritOrArcaneCard();
 
-    public OyobiWhoSplitTheHeavens(UUID ownerId) {
-        super(ownerId, 18, "Oyobi, Who Split the Heavens", Rarity.RARE, new CardType[]{CardType.CREATURE}, "{6}{W}");
-        this.expansionSetCode = "BOK";
+    public OyobiWhoSplitTheHeavens(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{6}{W}");
         this.supertype.add("Legendary");
         this.subtype.add("Spirit");
 

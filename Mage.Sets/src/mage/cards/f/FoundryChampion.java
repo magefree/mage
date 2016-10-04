@@ -26,12 +26,11 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.gatecrash;
+package mage.cards.f;
 
 import java.util.UUID;
 
 import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.EntersBattlefieldTriggeredAbility;
@@ -41,6 +40,7 @@ import mage.abilities.dynamicvalue.common.PermanentsOnBattlefieldCount;
 import mage.abilities.effects.common.DamageTargetEffect;
 import mage.abilities.effects.common.continuous.BoostSourceEffect;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.Duration;
 import mage.constants.Zone;
 import mage.filter.common.FilterControlledCreaturePermanent;
@@ -52,9 +52,8 @@ import mage.target.common.TargetCreatureOrPlayer;
  */
 public class FoundryChampion extends CardImpl {
 
-    public FoundryChampion(UUID ownerId) {
-        super(ownerId, 165, "Foundry Champion", Rarity.RARE, new CardType[]{CardType.CREATURE}, "{4}{R}{W}");
-        this.expansionSetCode = "GTC";
+    public FoundryChampion(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{4}{R}{W}");
         this.subtype.add("Elemental");
         this.subtype.add("Soldier");
 

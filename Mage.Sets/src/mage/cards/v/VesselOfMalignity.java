@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.shadowsoverinnistrad;
+package mage.cards.v;
 
 import java.util.UUID;
 import mage.abilities.Ability;
@@ -34,8 +34,8 @@ import mage.abilities.costs.common.SacrificeSourceCost;
 import mage.abilities.costs.mana.ManaCostsImpl;
 import mage.abilities.effects.common.ExileFromZoneTargetEffect;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.constants.Zone;
 import mage.filter.FilterCard;
 import mage.target.common.TargetOpponent;
@@ -46,9 +46,8 @@ import mage.target.common.TargetOpponent;
  */
 public class VesselOfMalignity extends CardImpl {
 
-    public VesselOfMalignity(UUID ownerId) {
-        super(ownerId, 144, "Vessel of Malignity", Rarity.COMMON, new CardType[]{CardType.ENCHANTMENT}, "{1}{B}");
-        this.expansionSetCode = "SOI";
+    public VesselOfMalignity(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.ENCHANTMENT},"{1}{B}");
 
         // {1}{B}, Sacrifice Vessel of Malignity: Target opponent exiles two cards from his or her hand. Activate this ability only any time you could cast a sorcery.
         Ability ability = new ActivateAsSorceryActivatedAbility(Zone.BATTLEFIELD,

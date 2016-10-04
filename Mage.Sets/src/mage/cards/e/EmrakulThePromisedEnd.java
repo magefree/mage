@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.eldritchmoon;
+package mage.cards.e;
 
 import java.util.HashSet;
 import java.util.Set;
@@ -43,11 +43,11 @@ import mage.abilities.keyword.ProtectionAbility;
 import mage.abilities.keyword.TrampleAbility;
 import mage.cards.Card;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.CostModificationType;
 import mage.constants.Duration;
 import mage.constants.Outcome;
-import mage.constants.Rarity;
 import mage.constants.Zone;
 import mage.filter.FilterCard;
 import mage.filter.predicate.mageobject.CardTypePredicate;
@@ -68,9 +68,8 @@ public class EmrakulThePromisedEnd extends CardImpl {
         filter.add(new CardTypePredicate(CardType.INSTANT));
     }
 
-    public EmrakulThePromisedEnd(UUID ownerId) {
-        super(ownerId, 6, "Emrakul, the Promised End", Rarity.MYTHIC, new CardType[]{CardType.CREATURE}, "{13}");
-        this.expansionSetCode = "EMN";
+    public EmrakulThePromisedEnd(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{13}");
         this.supertype.add("Legendary");
         this.subtype.add("Eldrazi");
         this.power = new MageInt(13);

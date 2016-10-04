@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.shardsofalara;
+package mage.cards.f;
 
 import java.util.UUID;
 import mage.MageInt;
@@ -36,8 +36,8 @@ import mage.abilities.effects.common.EntersBattlefieldWithXCountersEffect;
 import mage.abilities.effects.common.InfoEffect;
 import mage.abilities.effects.common.counter.AddCountersSourceEffect;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.constants.TargetController;
 import mage.constants.Zone;
 import mage.counters.CounterType;
@@ -48,9 +48,8 @@ import mage.counters.CounterType;
  */
 public class FeralHydra extends CardImpl {
 
-    public FeralHydra(UUID ownerId) {
-        super(ownerId, 131, "Feral Hydra", Rarity.RARE, new CardType[]{CardType.CREATURE}, "{X}{G}");
-        this.expansionSetCode = "ALA";
+    public FeralHydra(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{X}{G}");
         this.subtype.add("Hydra");
         this.subtype.add("Beast");
 

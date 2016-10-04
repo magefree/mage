@@ -25,16 +25,16 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.magic2013;
+package mage.cards.a;
 
 import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.ObjectColor;
 import mage.abilities.CompoundAbility;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.effects.common.continuous.GainAbilityControlledEffect;
 import mage.abilities.keyword.*;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.Duration;
 import mage.constants.Zone;
 import mage.filter.FilterCard;
@@ -56,9 +56,8 @@ public class AkromasMemorial extends CardImpl {
     }
 
 
-    public AkromasMemorial(UUID ownerId) {
-        super(ownerId, 200, "Akroma's Memorial", Rarity.MYTHIC, new CardType[]{CardType.ARTIFACT}, "{7}");
-        this.expansionSetCode = "M13";
+    public AkromasMemorial(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.ARTIFACT},"{7}");
         this.supertype.add("Legendary");
     }
 

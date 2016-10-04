@@ -1,13 +1,13 @@
-package mage.sets.fifthdawn;
+package mage.cards.a;
 
 import java.util.UUID;
 import mage.abilities.Ability;
 import mage.abilities.effects.OneShotEffect;
 import mage.cards.Card;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Outcome;
-import mage.constants.Rarity;
 import mage.constants.Zone;
 import mage.filter.FilterCard;
 import mage.filter.predicate.mageobject.CardTypePredicate;
@@ -21,9 +21,8 @@ import mage.target.common.TargetOpponent;
  */
 public class Acquire extends CardImpl {
 
-    public Acquire(UUID ownerId) {
-        super(ownerId, 21, "Acquire", Rarity.RARE, new CardType[]{CardType.SORCERY}, "{3}{U}{U}");
-        this.expansionSetCode = "5DN";
+    public Acquire(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{3}{U}{U}");
 
         // Search target opponent's library for an artifact card and put that card onto the battlefield under your control.
         // Then that player shuffles his or her library.

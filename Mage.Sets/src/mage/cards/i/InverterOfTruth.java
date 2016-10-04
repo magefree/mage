@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.oathofthegatewatch;
+package mage.cards.i;
 
 import java.util.UUID;
 import mage.MageInt;
@@ -36,9 +36,9 @@ import mage.abilities.keyword.DevoidAbility;
 import mage.abilities.keyword.FlyingAbility;
 import mage.cards.Card;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Outcome;
-import mage.constants.Rarity;
 import mage.constants.Zone;
 import mage.game.Game;
 import mage.players.Player;
@@ -49,9 +49,8 @@ import mage.players.Player;
  */
 public class InverterOfTruth extends CardImpl {
 
-    public InverterOfTruth(UUID ownerId) {
-        super(ownerId, 72, "Inverter of Truth", Rarity.MYTHIC, new CardType[]{CardType.CREATURE}, "{2}{B}{B}");
-        this.expansionSetCode = "OGW";
+    public InverterOfTruth(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{2}{B}{B}");
         this.subtype.add("Eldrazi");
         this.power = new MageInt(6);
         this.toughness = new MageInt(6);

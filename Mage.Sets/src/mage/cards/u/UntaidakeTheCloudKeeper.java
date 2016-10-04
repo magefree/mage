@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.championsofkamigawa;
+package mage.cards.u;
 
 import java.util.UUID;
 import mage.ConditionalMana;
@@ -42,8 +42,8 @@ import mage.abilities.mana.ConditionalColorlessManaAbility;
 import mage.abilities.mana.builder.ConditionalManaBuilder;
 import mage.abilities.mana.conditional.ManaCondition;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.game.Game;
 
 /**
@@ -52,9 +52,8 @@ import mage.game.Game;
  */
 public class UntaidakeTheCloudKeeper extends CardImpl {
 
-    public UntaidakeTheCloudKeeper(UUID ownerId) {
-        super(ownerId, 285, "Untaidake, the Cloud Keeper", Rarity.RARE, new CardType[]{CardType.LAND}, "");
-        this.expansionSetCode = "CHK";
+    public UntaidakeTheCloudKeeper(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.LAND},"");
         this.supertype.add("Legendary");
 
         // Untaidake, the Cloud Keeper enters the battlefield tapped.

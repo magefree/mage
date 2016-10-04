@@ -25,13 +25,13 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.betrayersofkamigawa;
+package mage.cards.h;
 
 import java.util.UUID;
 import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.abilities.effects.common.DestroyTargetEffect;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.filter.predicate.mageobject.SupertypePredicate;
 import mage.target.common.TargetCreaturePermanent;
@@ -48,9 +48,8 @@ public class HerosDemise extends CardImpl {
         filter.add(new SupertypePredicate("Legendary"));
     }
 
-    public HerosDemise(UUID ownerId) {
-        super(ownerId, 68, "Hero's Demise", Rarity.RARE, new CardType[]{CardType.INSTANT}, "{1}{B}");
-        this.expansionSetCode = "BOK";
+    public HerosDemise(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.INSTANT},"{1}{B}");
 
         // Destroy target legendary creature.
         this.getSpellAbility().addEffect(new DestroyTargetEffect());

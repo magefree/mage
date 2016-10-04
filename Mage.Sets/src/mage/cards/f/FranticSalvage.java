@@ -25,13 +25,13 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.mirrodinbesieged;
+package mage.cards.f;
 
 import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.abilities.effects.common.DrawCardSourceControllerEffect;
 import mage.abilities.effects.common.PutOnLibraryTargetEffect;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.filter.common.FilterArtifactCard;
 
 import java.util.UUID;
@@ -43,9 +43,8 @@ import mage.target.common.TargetCardInYourGraveyard;
  */
 public class FranticSalvage extends CardImpl {
 
-    public FranticSalvage(UUID ownerId) {
-        super(ownerId, 6, "Frantic Salvage", Rarity.COMMON, new CardType[]{CardType.INSTANT}, "{3}{W}");
-        this.expansionSetCode = "MBS";
+    public FranticSalvage(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.INSTANT},"{3}{W}");
 
 
         this.getSpellAbility().addEffect(new PutOnLibraryTargetEffect(true));

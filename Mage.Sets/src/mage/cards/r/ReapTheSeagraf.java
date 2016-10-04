@@ -1,12 +1,12 @@
-package mage.sets.darkascension;
+package mage.cards.r;
 
 import java.util.UUID;
 import mage.abilities.costs.mana.ManaCostsImpl;
 import mage.abilities.effects.common.CreateTokenEffect;
 import mage.abilities.keyword.FlashbackAbility;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.constants.TimingRule;
 import mage.game.permanent.token.ZombieToken;
 
@@ -15,9 +15,8 @@ import mage.game.permanent.token.ZombieToken;
  */
 public class ReapTheSeagraf extends CardImpl {
 
-    public ReapTheSeagraf(UUID ownerId) {
-        super(ownerId, 72, "Reap the Seagraf", Rarity.COMMON, new CardType[]{CardType.SORCERY}, "{2}{B}");
-        this.expansionSetCode = "DKA";
+    public ReapTheSeagraf(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{2}{B}");
 
         this.getSpellAbility().addEffect(new CreateTokenEffect(new ZombieToken()));
         this.addAbility(new FlashbackAbility(new ManaCostsImpl("{4}{U}"), TimingRule.SORCERY));

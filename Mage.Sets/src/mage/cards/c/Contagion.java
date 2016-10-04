@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.alliances;
+package mage.cards.c;
 
 import java.util.UUID;
 import mage.ObjectColor;
@@ -34,8 +34,8 @@ import mage.abilities.costs.common.ExileFromHandCost;
 import mage.abilities.costs.common.PayLifeCost;
 import mage.abilities.effects.common.counter.DistributeCountersEffect;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.counters.CounterType;
 import mage.filter.common.FilterOwnedCard;
 import mage.filter.predicate.Predicates;
@@ -50,9 +50,8 @@ import mage.target.common.TargetCreaturePermanentAmount;
  */
 public class Contagion extends CardImpl {
 
-    public Contagion(UUID ownerId) {
-        super(ownerId, 4, "Contagion", Rarity.UNCOMMON, new CardType[]{CardType.INSTANT}, "{3}{B}{B}");
-        this.expansionSetCode = "ALL";
+    public Contagion(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.INSTANT},"{3}{B}{B}");
 
         FilterOwnedCard filter = new FilterOwnedCard("black card from your hand");
         filter.add(new ColorPredicate(ObjectColor.BLACK));

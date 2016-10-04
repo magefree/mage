@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.invasion;
+package mage.cards.v;
 
 import java.util.UUID;
 import mage.abilities.common.BeginningOfUpkeepTriggeredAbility;
@@ -35,9 +35,9 @@ import mage.abilities.effects.Effect;
 import mage.abilities.effects.common.SacrificeSourceUnlessPaysEffect;
 import mage.abilities.effects.common.continuous.GainAbilityAllEffect;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Duration;
-import mage.constants.Rarity;
 import mage.constants.TargetController;
 import mage.constants.Zone;
 import mage.filter.common.FilterCreaturePermanent;
@@ -48,9 +48,8 @@ import mage.filter.common.FilterCreaturePermanent;
  */
 public class VileConsumption extends CardImpl {
 
-    public VileConsumption(UUID ownerId) {
-        super(ownerId, 285, "Vile Consumption", Rarity.RARE, new CardType[]{CardType.ENCHANTMENT}, "{1}{U}{B}");
-        this.expansionSetCode = "INV";
+    public VileConsumption(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.ENCHANTMENT},"{1}{U}{B}");
 
         // All creatures have "At the beginning of your upkeep, sacrifice this creature unless you pay 1 life."
         Effect effect = new SacrificeSourceUnlessPaysEffect(new PayLifeCost(1));

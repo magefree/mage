@@ -25,13 +25,13 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.innistrad;
+package mage.cards.p;
 
 import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.abilities.Ability;
 import mage.abilities.effects.OneShotEffect;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.Outcome;
 import mage.filter.common.FilterEnchantmentPermanent;
 import mage.game.Game;
@@ -45,9 +45,8 @@ import java.util.UUID;
  */
 public class Paraselene extends CardImpl {
 
-    public Paraselene(UUID ownerId) {
-        super(ownerId, 26, "Paraselene", Rarity.UNCOMMON, new CardType[]{CardType.SORCERY}, "{2}{W}");
-        this.expansionSetCode = "ISD";
+    public Paraselene(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{2}{W}");
 
 
         // Destroy all enchantments. You gain 1 life for each enchantment destroyed this way.

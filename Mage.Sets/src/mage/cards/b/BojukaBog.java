@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.worldwake;
+package mage.cards.b;
 
 import java.util.UUID;
 import mage.abilities.common.EntersBattlefieldTappedAbility;
@@ -33,8 +33,8 @@ import mage.abilities.common.EntersBattlefieldTriggeredAbility;
 import mage.abilities.effects.common.ExileGraveyardAllTargetPlayerEffect;
 import mage.abilities.mana.BlackManaAbility;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.target.TargetPlayer;
 
 /**
@@ -43,9 +43,8 @@ import mage.target.TargetPlayer;
  */
 public class BojukaBog extends CardImpl {
 
-    public BojukaBog(UUID ownerId) {
-        super(ownerId, 132, "Bojuka Bog", Rarity.COMMON, new CardType[]{CardType.LAND}, "");
-        this.expansionSetCode = "WWK";
+    public BojukaBog(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.LAND},"");
 
         // Bojuka Bog enters the battlefield tapped.
         this.addAbility(new EntersBattlefieldTappedAbility());

@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.shadowsoverinnistrad;
+package mage.cards.l;
 
 import java.util.Set;
 import java.util.UUID;
@@ -33,11 +33,11 @@ import mage.abilities.Ability;
 import mage.abilities.effects.OneShotEffect;
 import mage.cards.Card;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.cards.Cards;
 import mage.cards.CardsImpl;
 import mage.constants.CardType;
 import mage.constants.Outcome;
-import mage.constants.Rarity;
 import mage.constants.Zone;
 import mage.filter.common.FilterCreatureCard;
 import mage.game.Game;
@@ -50,9 +50,8 @@ import mage.target.TargetPlayer;
  */
 public class LilianasIndignation extends CardImpl {
 
-    public LilianasIndignation(UUID ownerId) {
-        super(ownerId, 120, "Liliana's Indignation", Rarity.UNCOMMON, new CardType[]{CardType.SORCERY}, "{X}{B}");
-        this.expansionSetCode = "SOI";
+    public LilianasIndignation(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{X}{B}");
 
         // Put the top X cards of your library into your graveyard. Target player loses 2 life for each creature card put into your graveyard this way.
         this.getSpellAbility().addEffect(new LilianasIndignationEffect());

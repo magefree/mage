@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.vintagemasters;
+package mage.cards.l;
 
 import java.util.UUID;
 import mage.Mana;
@@ -37,8 +37,8 @@ import mage.abilities.effects.common.EnterBattlefieldPayCostOrPutGraveyardEffect
 import mage.abilities.mana.BlackManaAbility;
 import mage.abilities.mana.SimpleManaAbility;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.constants.Zone;
 import mage.filter.common.FilterControlledPermanent;
 import mage.filter.predicate.mageobject.SubtypePredicate;
@@ -56,9 +56,8 @@ public class LakeOfTheDead extends CardImpl {
         filter.add(new SubtypePredicate("Swamp"));
     }
 
-    public LakeOfTheDead(UUID ownerId) {
-        super(ownerId, 302, "Lake of the Dead", Rarity.RARE, new CardType[]{CardType.LAND}, "");
-        this.expansionSetCode = "VMA";
+    public LakeOfTheDead(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.LAND},"");
 
         // If Lake of the Dead would enter the battlefield, sacrifice a Swamp instead. If you do, put Lake of the Dead onto the battlefield. If you don't, put it into its owner's graveyard.
         this.addAbility(new SimpleStaticAbility(Zone.ALL, new EnterBattlefieldPayCostOrPutGraveyardEffect(new SacrificeTargetCost(new TargetControlledPermanent(filter)))));

@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.darksteel;
+package mage.cards.m;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -37,10 +37,10 @@ import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.DestroyTargetEffect;
 import mage.abilities.effects.common.continuous.GainControlTargetEffect;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Duration;
 import mage.constants.Outcome;
-import mage.constants.Rarity;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.filter.predicate.Predicates;
 import mage.filter.predicate.mageobject.CardTypePredicate;
@@ -62,9 +62,8 @@ public class MurderousSpoils extends CardImpl {
         FILTER.add(Predicates.not(new ColorPredicate(ObjectColor.BLACK)));
     }
 
-    public MurderousSpoils(UUID ownerId) {
-        super(ownerId, 48, "Murderous Spoils", Rarity.UNCOMMON, new CardType[]{CardType.INSTANT}, "{5}{B}");
-        this.expansionSetCode = "DST";
+    public MurderousSpoils(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.INSTANT},"{5}{B}");
 
         // Destroy target nonblack creature. It can't be regenerated. You gain control of all Equipment that was attached to it.
         this.getSpellAbility().addTarget(new TargetCreaturePermanent(FILTER));

@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.kaladesh;
+package mage.cards.p;
 
 import java.util.UUID;
 import mage.MageInt;
@@ -38,9 +38,9 @@ import mage.abilities.effects.common.DrawCardSourceControllerEffect;
 import mage.abilities.effects.common.continuous.GainAbilityControlledEffect;
 import mage.abilities.keyword.HexproofAbility;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Duration;
-import mage.constants.Rarity;
 import mage.constants.TargetController;
 import mage.constants.Zone;
 import mage.filter.common.FilterArtifactPermanent;
@@ -51,9 +51,8 @@ import mage.filter.common.FilterArtifactPermanent;
  */
 public class PadeemConsulOfInnovation extends CardImpl {
 
-    public PadeemConsulOfInnovation(UUID ownerId) {
-        super(ownerId, 59, "Padeem, Consul of Innovation", Rarity.RARE, new CardType[]{CardType.CREATURE}, "{3}{U}");
-        this.expansionSetCode = "KLD";
+    public PadeemConsulOfInnovation(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{3}{U}");
         this.supertype.add("Lengendary");
         this.subtype.add("Veldalken");
         this.subtype.add("Artificer");

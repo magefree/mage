@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.gatecrash;
+package mage.cards.c;
 
 import java.util.UUID;
 import mage.MageInt;
@@ -38,12 +38,12 @@ import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.continuous.SetPowerToughnessSourceEffect;
 import mage.cards.Card;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.cards.Cards;
 import mage.cards.CardsImpl;
 import mage.constants.CardType;
 import mage.constants.Duration;
 import mage.constants.Outcome;
-import mage.constants.Rarity;
 import mage.constants.Zone;
 import mage.game.Game;
 import mage.players.Player;
@@ -54,9 +54,8 @@ import mage.players.Player;
  */
 public class ConsumingAberration extends CardImpl {
 
-    public ConsumingAberration(UUID ownerId) {
-        super(ownerId, 152, "Consuming Aberration", Rarity.RARE, new CardType[]{CardType.CREATURE}, "{3}{U}{B}");
-        this.expansionSetCode = "GTC";
+    public ConsumingAberration(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{3}{U}{B}");
         
         this.subtype.add("Horror");
 

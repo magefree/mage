@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.fifthedition;
+package mage.cards.d;
 
 import java.util.UUID;
 import mage.MageInt;
@@ -34,6 +34,7 @@ import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.effects.common.SacrificeSourceEffect;
 import mage.abilities.effects.common.combat.CantAttackUnlessDefenderControllsPermanent;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.*;
 import mage.filter.Filter;
 import mage.filter.common.FilterLandPermanent;
@@ -45,9 +46,8 @@ import mage.filter.common.FilterLandPermanent;
  */
 public class Dandan extends CardImpl {
 
-    public Dandan(UUID ownerId) {
-        super(ownerId, 79, "Dandan", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{U}{U}");
-        this.expansionSetCode = "5ED";
+    public Dandan(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{U}{U}");
         this.subtype.add("Fish");
 
         this.power = new MageInt(4);

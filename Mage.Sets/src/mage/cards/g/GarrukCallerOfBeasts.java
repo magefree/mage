@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.magic2014;
+package mage.cards.g;
 
 import java.util.UUID;
 import mage.ObjectColor;
@@ -39,9 +39,9 @@ import mage.abilities.effects.common.PutPermanentOnBattlefieldEffect;
 import mage.abilities.effects.common.RevealLibraryPutIntoHandEffect;
 import mage.abilities.effects.common.search.SearchLibraryPutInPlayEffect;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Outcome;
-import mage.constants.Rarity;
 import mage.constants.Zone;
 import mage.filter.FilterSpell;
 import mage.filter.common.FilterCreatureCard;
@@ -62,9 +62,8 @@ public class GarrukCallerOfBeasts extends CardImpl {
         filterGreenCreature.add(new ColorPredicate(ObjectColor.GREEN));
     }
 
-    public GarrukCallerOfBeasts(UUID ownerId) {
-        super(ownerId, 172, "Garruk, Caller of Beasts", Rarity.MYTHIC, new CardType[]{CardType.PLANESWALKER}, "{4}{G}{G}");
-        this.expansionSetCode = "M14";
+    public GarrukCallerOfBeasts(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.PLANESWALKER},"{4}{G}{G}");
         this.subtype.add("Garruk");
 
         this.addAbility(new PlanswalkerEntersWithLoyalityCountersAbility(4));

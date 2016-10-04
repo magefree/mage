@@ -25,15 +25,15 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.torment;
+package mage.cards.a;
 
 import java.util.UUID;
 import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.MageInt;
 import mage.abilities.keyword.FlyingAbility;
 import mage.abilities.keyword.FirstStrikeAbility;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 
 /**
  *
@@ -41,9 +41,8 @@ import mage.cards.CardImpl;
  */
 public class AngelOfRetribution extends CardImpl {
 
-    public AngelOfRetribution(UUID ownerId) {
-        super(ownerId, 1, "Angel of Retribution", Rarity.RARE, new CardType[]{CardType.CREATURE}, "{6}{W}");
-        this.expansionSetCode = "TOR";
+    public AngelOfRetribution(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{6}{W}");
         this.subtype.add("Angel");
 
         this.power = new MageInt(5);

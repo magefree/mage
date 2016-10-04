@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.theros;
+package mage.cards.x;
 
 import java.util.LinkedHashSet;
 import java.util.Set;
@@ -39,13 +39,13 @@ import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.CreateTokenEffect;
 import mage.abilities.keyword.HasteAbility;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.cards.Cards;
 import mage.cards.CardsImpl;
 import mage.choices.Choice;
 import mage.choices.ChoiceImpl;
 import mage.constants.CardType;
 import mage.constants.Outcome;
-import mage.constants.Rarity;
 import mage.constants.Zone;
 import mage.filter.FilterCard;
 import mage.filter.common.FilterControlledCreaturePermanent;
@@ -62,9 +62,8 @@ import mage.target.TargetCard;
  */
 public class XenagosTheReveler extends CardImpl {
 
-    public XenagosTheReveler(UUID ownerId) {
-        super(ownerId, 209, "Xenagos, the Reveler", Rarity.MYTHIC, new CardType[]{CardType.PLANESWALKER}, "{2}{R}{G}");
-        this.expansionSetCode = "THS";
+    public XenagosTheReveler(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.PLANESWALKER},"{2}{R}{G}");
         this.subtype.add("Xenagos");
 
         this.addAbility(new PlanswalkerEntersWithLoyalityCountersAbility(3));

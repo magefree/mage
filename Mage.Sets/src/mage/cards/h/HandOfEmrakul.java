@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.riseoftheeldrazi;
+package mage.cards.h;
 
 import java.util.UUID;
 import mage.MageInt;
@@ -33,8 +33,8 @@ import mage.abilities.costs.AlternativeCostSourceAbility;
 import mage.abilities.costs.common.SacrificeTargetCost;
 import mage.abilities.keyword.AnnihilatorAbility;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.filter.common.FilterControlledPermanent;
 import mage.filter.predicate.mageobject.NamePredicate;
 import mage.target.common.TargetControlledPermanent;
@@ -51,9 +51,8 @@ public class HandOfEmrakul extends CardImpl {
         filter.add(new NamePredicate("Eldrazi Spawn"));
     }
 
-    public HandOfEmrakul(UUID ownerId) {
-        super(ownerId, 5, "Hand of Emrakul", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{9}");
-        this.expansionSetCode = "ROE";
+    public HandOfEmrakul(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{9}");
         this.subtype.add("Eldrazi");
 
         this.power = new MageInt(7);

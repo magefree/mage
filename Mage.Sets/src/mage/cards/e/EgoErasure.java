@@ -26,7 +26,7 @@
  *  or implied, of BetaSteward_at_googlemail.com.
  */
 
-package mage.sets.lorwyn;
+package mage.cards.e;
 
 import java.util.Iterator;
 import java.util.List;
@@ -36,12 +36,12 @@ import mage.abilities.Ability;
 import mage.abilities.effects.ContinuousEffectImpl;
 import mage.abilities.keyword.ChangelingAbility;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.cards.repository.CardRepository;
 import mage.constants.CardType;
 import mage.constants.Duration;
 import mage.constants.Layer;
 import mage.constants.Outcome;
-import mage.constants.Rarity;
 import mage.constants.SubLayer;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.game.Game;
@@ -54,9 +54,8 @@ import mage.target.TargetPlayer;
  */
 public class EgoErasure extends CardImpl {
 
-    public EgoErasure(UUID ownerId) {
-        super(ownerId, 59, "Ego Erasure", Rarity.UNCOMMON, new CardType[]{CardType.TRIBAL, CardType.INSTANT}, "{2}{U}");
-        this.expansionSetCode = "LRW";
+    public EgoErasure(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.TRIBAL,CardType.INSTANT},"{2}{U}");
         this.subtype.add("Shapeshifter");
 
         // Changeling

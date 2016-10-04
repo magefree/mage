@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.worldwake;
+package mage.cards.v;
 
 import java.util.UUID;
 
@@ -39,6 +39,7 @@ import mage.abilities.effects.common.ReturnToHandAttachedEffect;
 import mage.abilities.effects.common.continuous.BecomesCreatureAttachedEffect;
 import mage.abilities.keyword.EnchantAbility;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.game.permanent.token.Token;
 import mage.target.TargetPermanent;
 import mage.target.common.TargetLandPermanent;
@@ -49,9 +50,8 @@ import mage.target.common.TargetLandPermanent;
  */
 public class VastwoodZendikon extends CardImpl {
 
-    public VastwoodZendikon(UUID ownerId) {
-        super(ownerId, 117, "Vastwood Zendikon", Rarity.COMMON, new CardType[]{CardType.ENCHANTMENT}, "{4}{G}");
-        this.expansionSetCode = "WWK";
+    public VastwoodZendikon(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.ENCHANTMENT},"{4}{G}");
         this.subtype.add("Aura");
 
 

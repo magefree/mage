@@ -25,14 +25,14 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.prophecy;
+package mage.cards.i;
 
 import java.util.UUID;
 
 import mage.abilities.effects.common.DamageAllEffect;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.filter.predicate.permanent.WasDealtDamageThisTurnPredicate;
 
@@ -48,9 +48,8 @@ public class Inflame extends CardImpl {
         FILTER.add(new WasDealtDamageThisTurnPredicate());
     }
 
-    public Inflame(UUID ownerId) {
-        super(ownerId, 91, "Inflame", Rarity.COMMON, new CardType[]{CardType.INSTANT}, "{R}");
-        this.expansionSetCode = "PCY";
+    public Inflame(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.INSTANT},"{R}");
 
         // Inflame deals 2 damage to each creature dealt damage this turn.
         this.getSpellAbility().addEffect(new DamageAllEffect(2, FILTER));

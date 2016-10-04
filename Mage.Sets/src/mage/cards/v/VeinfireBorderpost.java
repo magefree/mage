@@ -26,12 +26,11 @@
  *  or implied, of BetaSteward_at_googlemail.com.
  */
 
-package mage.sets.alarareborn;
+package mage.cards.v;
 
 import java.util.UUID;
 import mage.abilities.Ability;
 import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.abilities.common.EntersBattlefieldTappedAbility;
 import mage.abilities.costs.AlternativeCostSourceAbility;
 import mage.abilities.costs.common.ReturnToHandChosenControlledPermanentCost;
@@ -39,6 +38,7 @@ import mage.abilities.costs.mana.GenericManaCost;
 import mage.abilities.mana.BlackManaAbility;
 import mage.abilities.mana.RedManaAbility;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.filter.common.FilterControlledLandPermanent;
 import mage.filter.common.FilterControlledPermanent;
 import mage.filter.predicate.mageobject.SupertypePredicate;
@@ -56,9 +56,8 @@ public class VeinfireBorderpost extends CardImpl {
         filter.add(new SupertypePredicate("Basic"));
     }
 
-    public VeinfireBorderpost (UUID ownerId) {
-        super(ownerId, 48, "Veinfire Borderpost", Rarity.COMMON, new CardType[]{CardType.ARTIFACT}, "{1}{B}{R}");
-        this.expansionSetCode = "ARB";
+    public VeinfireBorderpost (UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.ARTIFACT},"{1}{B}{R}");
         
 
 

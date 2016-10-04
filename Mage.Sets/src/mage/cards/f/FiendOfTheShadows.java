@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.darkascension;
+package mage.cards.f;
 
 import java.util.UUID;
 import mage.MageInt;
@@ -39,6 +39,7 @@ import mage.abilities.effects.common.ExileFromZoneTargetEffect;
 import mage.abilities.effects.common.RegenerateSourceEffect;
 import mage.abilities.keyword.FlyingAbility;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.*;
 import mage.filter.FilterCard;
 import mage.filter.common.FilterControlledCreaturePermanent;
@@ -61,9 +62,8 @@ public class FiendOfTheShadows extends CardImpl {
         filter.add(new SubtypePredicate("Human"));
     }
 
-    public FiendOfTheShadows(UUID ownerId) {
-        super(ownerId, 62, "Fiend of the Shadows", Rarity.RARE, new CardType[]{CardType.CREATURE}, "{3}{B}{B}");
-        this.expansionSetCode = "DKA";
+    public FiendOfTheShadows(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{3}{B}{B}");
         this.subtype.add("Vampire");
         this.subtype.add("Wizard");
 

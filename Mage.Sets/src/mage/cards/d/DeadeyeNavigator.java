@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.avacynrestored;
+package mage.cards.d;
 
 import java.util.UUID;
 import mage.MageInt;
@@ -38,8 +38,8 @@ import mage.abilities.effects.common.ReturnToBattlefieldUnderYourControlSourceEf
 import mage.abilities.effects.common.continuous.GainAbilityPairedEffect;
 import mage.abilities.keyword.SoulbondAbility;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.constants.Zone;
 
 /**
@@ -49,9 +49,8 @@ public class DeadeyeNavigator extends CardImpl {
 
     private static final String ruleText = "As long as {this} is paired with another creature, each of those creatures has \"{1}{U}: Exile this creature, then return it to the battlefield under your control.\"";
 
-    public DeadeyeNavigator(UUID ownerId) {
-        super(ownerId, 47, "Deadeye Navigator", Rarity.RARE, new CardType[]{CardType.CREATURE}, "{4}{U}{U}");
-        this.expansionSetCode = "AVR";
+    public DeadeyeNavigator(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{4}{U}{U}");
         this.subtype.add("Spirit");
 
         this.power = new MageInt(5);

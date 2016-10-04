@@ -25,12 +25,11 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.gatecrash;
+package mage.cards.g;
 
 import java.util.UUID;
 
 import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.constants.*;
 import mage.abilities.Mode;
 import mage.abilities.effects.common.combat.CantBlockAllEffect;
@@ -38,6 +37,7 @@ import mage.abilities.effects.common.continuous.GainControlAllEffect;
 import mage.abilities.effects.common.DamageAllEffect;
 import mage.abilities.keyword.FlyingAbility;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.filter.FilterPermanent;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.filter.predicate.Predicates;
@@ -60,9 +60,8 @@ public class GruulCharm extends CardImpl {
         filter3.add(new AbilityPredicate(FlyingAbility.class));
     }
 
-    public GruulCharm(UUID ownerId) {
-        super(ownerId, 169, "Gruul Charm", Rarity.UNCOMMON, new CardType[]{CardType.INSTANT}, "{R}{G}");
-        this.expansionSetCode = "GTC";
+    public GruulCharm(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.INSTANT},"{R}{G}");
 
 
         // Choose one - Creatures without flying can't block this turn;

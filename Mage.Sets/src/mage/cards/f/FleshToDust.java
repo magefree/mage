@@ -25,12 +25,12 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.magic2015;
+package mage.cards.f;
 
 import mage.abilities.effects.common.DestroyTargetEffect;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.target.common.TargetCreaturePermanent;
 
 import java.util.UUID;
@@ -40,9 +40,8 @@ import java.util.UUID;
  */
 public class FleshToDust extends CardImpl {
 
-    public FleshToDust(UUID ownerId) {
-        super(ownerId, 98, "Flesh to Dust", Rarity.COMMON, new CardType[]{CardType.INSTANT}, "{3}{B}{B}");
-        this.expansionSetCode = "M15";
+    public FleshToDust(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.INSTANT},"{3}{B}{B}");
 
 
         // Destroy target creature. It can't be regenerated.

@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.morningtide;
+package mage.cards.m;
 
 import java.util.UUID;
 import mage.abilities.Ability;
@@ -37,8 +37,8 @@ import mage.abilities.mana.BlackManaAbility;
 import mage.abilities.mana.GreenManaAbility;
 import mage.abilities.mana.WhiteManaAbility;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.filter.FilterCard;
 import mage.filter.predicate.mageobject.SubtypePredicate;
 import mage.target.common.TargetCardInHand;
@@ -55,9 +55,8 @@ public class MurmuringBosk extends CardImpl {
         filter.add(new SubtypePredicate("Treefolk"));
     }
 
-    public MurmuringBosk(UUID ownerId) {
-        super(ownerId, 147, "Murmuring Bosk", Rarity.RARE, new CardType[]{CardType.LAND}, "");
-        this.expansionSetCode = "MOR";
+    public MurmuringBosk(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.LAND},"");
         this.subtype.add("Forest");
 
         // <i>({tap}: Add {G} to your mana pool.)</i>

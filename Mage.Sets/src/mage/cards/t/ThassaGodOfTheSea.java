@@ -26,7 +26,7 @@
  *  or implied, of BetaSteward_at_googlemail.com.
  */
 
-package mage.sets.theros;
+package mage.cards.t;
 
 import java.util.UUID;
 import mage.MageInt;
@@ -42,10 +42,10 @@ import mage.abilities.effects.keyword.ScryEffect;
 import mage.abilities.effects.common.continuous.LoseCreatureTypeSourceEffect;
 import mage.abilities.keyword.IndestructibleAbility;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.ColoredManaSymbol;
 import mage.constants.Duration;
-import mage.constants.Rarity;
 import mage.constants.TargetController;
 import mage.constants.Zone;
 import mage.target.common.TargetControlledCreaturePermanent;
@@ -57,9 +57,8 @@ import mage.target.common.TargetControlledCreaturePermanent;
 
 public class ThassaGodOfTheSea extends CardImpl {
 
-    public ThassaGodOfTheSea(UUID ownerId) {
-        super(ownerId, 66, "Thassa, God of the Sea", Rarity.MYTHIC, new CardType[]{CardType.ENCHANTMENT, CardType.CREATURE}, "{2}{U}");
-        this.expansionSetCode = "THS";
+    public ThassaGodOfTheSea(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.ENCHANTMENT,CardType.CREATURE},"{2}{U}");
         this.supertype.add("Legendary");
         this.subtype.add("God");
 

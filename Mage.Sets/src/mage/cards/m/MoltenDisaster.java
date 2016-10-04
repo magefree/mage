@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.modernmasters;
+package mage.cards.m;
 
 import java.util.UUID;
 import mage.abilities.Ability;
@@ -37,10 +37,10 @@ import mage.abilities.keyword.FlyingAbility;
 import mage.abilities.keyword.KickerAbility;
 import mage.abilities.mana.ManaAbility;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Duration;
 import mage.constants.Outcome;
-import mage.constants.Rarity;
 import mage.constants.Zone;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.filter.predicate.Predicates;
@@ -56,9 +56,8 @@ import mage.players.Player;
  */
 public class MoltenDisaster extends CardImpl {
 
-    public MoltenDisaster(UUID ownerId) {
-        super(ownerId, 123, "Molten Disaster", Rarity.RARE, new CardType[]{CardType.SORCERY}, "{X}{R}{R}");
-        this.expansionSetCode = "MMA";
+    public MoltenDisaster(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{X}{R}{R}");
 
 
         // If Molten Disaster was kicked, it has split second.

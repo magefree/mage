@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.revisededition;
+package mage.cards.a;
 
 import java.util.UUID;
 import mage.abilities.Ability;
@@ -35,12 +35,12 @@ import mage.abilities.costs.mana.ManaCostsImpl;
 import mage.abilities.effects.ReplacementEffectImpl;
 import mage.cards.Card;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.cards.Cards;
 import mage.cards.CardsImpl;
 import mage.constants.CardType;
 import mage.constants.Duration;
 import mage.constants.Outcome;
-import mage.constants.Rarity;
 import mage.constants.Zone;
 import mage.filter.FilterCard;
 import mage.game.Game;
@@ -54,9 +54,8 @@ import mage.target.TargetCard;
  */
 public class AladdinsLamp extends CardImpl {
 
-    public AladdinsLamp(UUID ownerId) {
-        super(ownerId, 231, "Aladdin's Lamp", Rarity.RARE, new CardType[]{CardType.ARTIFACT}, "{10}");
-        this.expansionSetCode = "3ED";
+    public AladdinsLamp(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.ARTIFACT},"{10}");
 
         // {X}, {tap}: The next time you would draw a card this turn, instead look at the top X cards of your library, put all but one of them on the bottom of your library in a random order, then draw a card. X can't be 0.
         Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new AladdinsLampEffect(), new ManaCostsImpl("{X}"));        

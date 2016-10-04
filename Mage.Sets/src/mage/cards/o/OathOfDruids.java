@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.exodus;
+package mage.cards.o;
 
 import java.util.UUID;
 import mage.MageObject;
@@ -34,11 +34,11 @@ import mage.abilities.common.BeginningOfUpkeepTriggeredAbility;
 import mage.abilities.effects.OneShotEffect;
 import mage.cards.Card;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.cards.Cards;
 import mage.cards.CardsImpl;
 import mage.constants.CardType;
 import mage.constants.Outcome;
-import mage.constants.Rarity;
 import mage.constants.TargetController;
 import mage.constants.Zone;
 import mage.filter.FilterPlayer;
@@ -62,9 +62,8 @@ public class OathOfDruids extends CardImpl {
         filter.add(new OathOfDruidsPredicate());
     }
 
-    public OathOfDruids(UUID ownerId) {
-        super(ownerId, 115, "Oath of Druids", Rarity.RARE, new CardType[]{CardType.ENCHANTMENT}, "{1}{G}");
-        this.expansionSetCode = "EXO";
+    public OathOfDruids(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.ENCHANTMENT},"{1}{G}");
 
         // At the beginning of each player's upkeep, that player chooses target player who controls more creatures than he or she does and is his or her opponent. The first player may reveal cards from the top of his or her library until he or she reveals a creature card. If he or she does, that player puts that card onto the battlefield and all other cards revealed this way into his or her graveyard.
         Ability ability = new BeginningOfUpkeepTriggeredAbility(new OathOfDruidsEffect(), TargetController.ANY, true);

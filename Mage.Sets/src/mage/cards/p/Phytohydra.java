@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.ravnica;
+package mage.cards.p;
 
 import java.util.UUID;
 
@@ -35,6 +35,7 @@ import mage.abilities.Ability;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.effects.ReplacementEffectImpl;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.counters.CounterType;
 import mage.game.Game;
 import mage.game.events.DamageCreatureEvent;
@@ -48,9 +49,8 @@ import mage.game.permanent.Permanent;
  */
 public class Phytohydra extends CardImpl {
 
-    public Phytohydra(UUID ownerId) {
-        super(ownerId, 218, "Phytohydra", Rarity.RARE, new CardType[]{CardType.CREATURE}, "{2}{G}{W}{W}");
-        this.expansionSetCode = "RAV";
+    public Phytohydra(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{2}{G}{W}{W}");
         this.subtype.add("Plant");
         this.subtype.add("Hydra");
 

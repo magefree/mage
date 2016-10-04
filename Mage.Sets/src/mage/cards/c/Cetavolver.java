@@ -25,12 +25,11 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.apocalypse;
+package mage.cards.c;
 
 import java.util.UUID;
 import mage.constants.CardType;
 import mage.constants.Duration;
-import mage.constants.Rarity;
 import mage.MageInt;
 import mage.abilities.common.EntersBattlefieldAbility;
 import mage.abilities.condition.common.KickedCostCondition;
@@ -41,6 +40,7 @@ import mage.abilities.keyword.FirstStrikeAbility;
 import mage.abilities.keyword.KickerAbility;
 import mage.abilities.keyword.TrampleAbility;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.counters.CounterType;
 
 /**
@@ -49,9 +49,8 @@ import mage.counters.CounterType;
  */
 public class Cetavolver extends CardImpl {
 
-    public Cetavolver(UUID ownerId) {
-        super(ownerId, 21, "Cetavolver", Rarity.RARE, new CardType[]{CardType.CREATURE}, "{1}{U}");
-        this.expansionSetCode = "APC";
+    public Cetavolver(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{1}{U}");
         this.subtype.add("Volver");
 
         this.power = new MageInt(1);

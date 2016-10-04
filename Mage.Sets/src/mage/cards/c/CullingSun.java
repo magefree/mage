@@ -25,13 +25,13 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.guildpact;
+package mage.cards.c;
 
 import java.util.UUID;
 import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.abilities.effects.common.DestroyAllEffect;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.filter.Filter;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.filter.predicate.mageobject.ConvertedManaCostPredicate;
@@ -47,9 +47,8 @@ public class CullingSun extends CardImpl {
         filter.add(new ConvertedManaCostPredicate(Filter.ComparisonType.LessThan, 4));
     }
 
-    public CullingSun(UUID ownerId) {
-        super(ownerId, 109, "Culling Sun", Rarity.RARE, new CardType[]{CardType.SORCERY}, "{2}{W}{W}{B}");
-        this.expansionSetCode = "GPT";
+    public CullingSun(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{2}{W}{W}{B}");
 
 
         this.getSpellAbility().addEffect(new DestroyAllEffect(filter));

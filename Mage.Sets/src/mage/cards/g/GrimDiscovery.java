@@ -25,14 +25,14 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.zendikar;
+package mage.cards.g;
 
 import java.util.UUID;
 import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.abilities.Mode;
 import mage.abilities.effects.common.ReturnToHandTargetEffect;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.filter.common.FilterCreatureCard;
 import mage.filter.common.FilterLandCard;
 import mage.target.common.TargetCardInYourGraveyard;
@@ -46,9 +46,8 @@ public class GrimDiscovery extends CardImpl {
     private static final FilterCreatureCard filterCreatureCard = new FilterCreatureCard("creature card from your graveyard");
     private static final FilterLandCard filterLandCard = new FilterLandCard("land card from your graveyard");
 
-    public GrimDiscovery(UUID ownerId) {
-        super(ownerId, 91, "Grim Discovery", Rarity.COMMON, new CardType[]{CardType.SORCERY}, "{1}{B}");
-        this.expansionSetCode = "ZEN";
+    public GrimDiscovery(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{1}{B}");
 
 
         // Choose one or both -

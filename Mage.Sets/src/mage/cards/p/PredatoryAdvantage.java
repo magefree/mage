@@ -25,11 +25,10 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.alarareborn;
+package mage.cards.p;
 
 import java.util.UUID;
 import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.constants.TargetController;
 import mage.constants.WatcherScope;
 import mage.constants.Zone;
@@ -39,6 +38,7 @@ import mage.abilities.common.BeginningOfEndStepTriggeredAbility;
 import mage.abilities.condition.Condition;
 import mage.abilities.effects.common.CreateTokenEffect;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.game.Game;
 import mage.game.events.GameEvent;
 import mage.game.permanent.Permanent;
@@ -52,9 +52,8 @@ import mage.watchers.Watcher;
  */
 public class PredatoryAdvantage extends CardImpl {
 
-    public PredatoryAdvantage(UUID ownerId) {
-        super(ownerId, 58, "Predatory Advantage", Rarity.RARE, new CardType[]{CardType.ENCHANTMENT}, "{3}{R}{G}");
-        this.expansionSetCode = "ARB";
+    public PredatoryAdvantage(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.ENCHANTMENT},"{3}{R}{G}");
 
 
 

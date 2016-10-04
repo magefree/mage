@@ -25,15 +25,15 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.visions;
+package mage.cards.f;
 
 import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.common.ZoneChangeAllTriggeredAbility;
 import mage.abilities.effects.common.DrawCardSourceControllerEffect;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.constants.Zone;
 import mage.filter.common.FilterEnchantmentPermanent;
 
@@ -43,9 +43,8 @@ import mage.filter.common.FilterEnchantmentPermanent;
  */
 public class FemerefEnchantress extends CardImpl {
 
-    public FemerefEnchantress(UUID ownerId) {
-        super(ownerId, 129, "Femeref Enchantress", Rarity.RARE, new CardType[]{CardType.CREATURE}, "{G}{W}");
-        this.expansionSetCode = "VIS";
+    public FemerefEnchantress(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{G}{W}");
         this.subtype.add("Human");
         this.subtype.add("Druid");
 

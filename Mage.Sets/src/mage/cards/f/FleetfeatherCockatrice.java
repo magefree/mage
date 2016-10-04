@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.journeyintonyx;
+package mage.cards.f;
 
 import java.util.UUID;
 import mage.MageInt;
@@ -34,8 +34,8 @@ import mage.abilities.keyword.FlashAbility;
 import mage.abilities.keyword.FlyingAbility;
 import mage.abilities.keyword.MonstrosityAbility;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.Rarity;
 
 /**
  *
@@ -43,9 +43,8 @@ import mage.constants.Rarity;
  */
 public class FleetfeatherCockatrice extends CardImpl {
 
-    public FleetfeatherCockatrice(UUID ownerId) {
-        super(ownerId, 149, "Fleetfeather Cockatrice", Rarity.UNCOMMON, new CardType[]{CardType.CREATURE}, "{3}{G}{U}");
-        this.expansionSetCode = "JOU";
+    public FleetfeatherCockatrice(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{3}{G}{U}");
         this.subtype.add("Cockatrice");
 
         this.power = new MageInt(3);

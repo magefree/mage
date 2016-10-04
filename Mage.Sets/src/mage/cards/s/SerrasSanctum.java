@@ -26,15 +26,15 @@
 * or implied, of BetaSteward_at_googlemail.com.
 */
 
-package mage.sets.urzassaga;
+package mage.cards.s;
 
 import java.util.UUID;
 import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.Mana;
 import mage.abilities.dynamicvalue.common.PermanentsOnBattlefieldCount;
 import mage.abilities.mana.DynamicManaAbility;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.filter.common.FilterControlledPermanent;
 import mage.filter.predicate.mageobject.CardTypePredicate;
 
@@ -51,9 +51,8 @@ public class SerrasSanctum extends CardImpl {
         filter.add(new CardTypePredicate(CardType.ENCHANTMENT));
     }
 
-    public SerrasSanctum(UUID ownerId) {
-        super(ownerId, 325, "Serra's Sanctum", Rarity.RARE, new CardType[]{CardType.LAND}, "");
-        this.expansionSetCode = "USG";
+    public SerrasSanctum(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.LAND},"");
         this.supertype.add("Legendary");
 
         DynamicManaAbility ability = new DynamicManaAbility(Mana.WhiteMana(1), new PermanentsOnBattlefieldCount(filter));

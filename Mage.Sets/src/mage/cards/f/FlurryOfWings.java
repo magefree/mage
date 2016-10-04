@@ -25,16 +25,16 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.alarareborn;
+package mage.cards.f;
 
 import java.util.UUID;
 import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.MageInt;
 import mage.abilities.dynamicvalue.common.PermanentsOnBattlefieldCount;
 import mage.abilities.effects.common.CreateTokenEffect;
 import mage.abilities.keyword.FlyingAbility;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.filter.common.FilterAttackingCreature;
 import mage.game.permanent.token.Token;
 
@@ -46,9 +46,8 @@ public class FlurryOfWings extends CardImpl {
 
     private static final FilterAttackingCreature filter = new FilterAttackingCreature("the number of attacking creatures");
 
-    public FlurryOfWings(UUID ownerId) {
-        super(ownerId, 127, "Flurry of Wings", Rarity.UNCOMMON, new CardType[]{CardType.INSTANT}, "{G}{W}{U}");
-        this.expansionSetCode = "ARB";
+    public FlurryOfWings(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.INSTANT},"{G}{W}{U}");
 
 
 

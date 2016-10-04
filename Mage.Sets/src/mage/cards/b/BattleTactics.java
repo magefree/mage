@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.starwars;
+package mage.cards.b;
 
 import java.util.UUID;
 import mage.abilities.effects.Effect;
@@ -33,9 +33,9 @@ import mage.abilities.effects.common.continuous.BoostControlledEffect;
 import mage.abilities.effects.common.continuous.GainAbilityControlledEffect;
 import mage.abilities.keyword.VigilanceAbility;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Duration;
-import mage.constants.Rarity;
 
 /**
  *
@@ -43,9 +43,8 @@ import mage.constants.Rarity;
  */
 public class BattleTactics extends CardImpl {
 
-    public BattleTactics(UUID ownerId) {
-        super(ownerId, 5, "Battle Tactics", Rarity.COMMON, new CardType[]{CardType.INSTANT}, "{1}{W}{W}");
-        this.expansionSetCode = "SWS";
+    public BattleTactics(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.INSTANT},"{1}{W}{W}");
 
         // Creatures you control get +2/+1 and gain vigilance until end of turn.
         Effect effect = new BoostControlledEffect(2, 1, Duration.EndOfTurn);

@@ -25,14 +25,14 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.apocalypse;
+package mage.cards.e;
 
 import java.util.UUID;
 import mage.abilities.dynamicvalue.common.DomainValue;
 import mage.abilities.effects.common.CounterUnlessPaysEffect;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.target.TargetSpell;
 
 /**
@@ -41,9 +41,8 @@ import mage.target.TargetSpell;
  */
 public class EvasiveAction extends CardImpl {
 
-    public EvasiveAction(UUID ownerId) {
-        super(ownerId, 23, "Evasive Action", Rarity.UNCOMMON, new CardType[]{CardType.INSTANT}, "{1}{U}");
-        this.expansionSetCode = "APC";
+    public EvasiveAction(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.INSTANT},"{1}{U}");
 
         // Domain - Counter target spell unless its controller pays {1} for each basic land type among lands you control.
         this.getSpellAbility().addEffect(new CounterUnlessPaysEffect(new DomainValue()));

@@ -25,15 +25,15 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.futuresight;
+package mage.cards.s;
 
 import java.util.UUID;
 import mage.abilities.effects.common.CreateTokenEffect;
 import mage.abilities.keyword.BuybackAbility;
 import mage.abilities.keyword.ConvokeAbility;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.game.permanent.token.SaprolingToken;
 
 /**
@@ -42,9 +42,8 @@ import mage.game.permanent.token.SaprolingToken;
  */
 public class SproutSwarm extends CardImpl {
 
-    public SproutSwarm(UUID ownerId) {
-        super(ownerId, 138, "Sprout Swarm", Rarity.COMMON, new CardType[]{CardType.INSTANT}, "{1}{G}");
-        this.expansionSetCode = "FUT";
+    public SproutSwarm(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.INSTANT},"{1}{G}");
 
         // Convoke
         this.addAbility(new ConvokeAbility());

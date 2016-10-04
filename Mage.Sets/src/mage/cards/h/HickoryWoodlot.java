@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.mercadianmasques;
+package mage.cards.h;
 
 import java.util.UUID;
 import mage.Mana;
@@ -40,8 +40,8 @@ import mage.abilities.effects.common.SacrificeSourceEffect;
 import mage.abilities.effects.common.counter.AddCountersSourceEffect;
 import mage.abilities.mana.SimpleManaAbility;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.constants.Zone;
 import mage.counters.CounterType;
 
@@ -51,9 +51,8 @@ import mage.counters.CounterType;
  */
 public class HickoryWoodlot extends CardImpl {
 
-    public HickoryWoodlot(UUID ownerId) {
-        super(ownerId, 319, "Hickory Woodlot", Rarity.COMMON, new CardType[]{CardType.LAND}, "");
-        this.expansionSetCode = "MMQ";
+    public HickoryWoodlot(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.LAND},"");
 
         // Hickory Woodlot enters the battlefield tapped with two depletion counters on it.
         this.addAbility(new EntersBattlefieldTappedAbility());

@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.starwars;
+package mage.cards.f;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -42,11 +42,11 @@ import mage.abilities.effects.common.DoIfCostPaid;
 import mage.abilities.effects.common.counter.AddCountersSourceEffect;
 import mage.cards.Card;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.AsThoughEffectType;
 import mage.constants.CardType;
 import mage.constants.Duration;
 import mage.constants.Outcome;
-import mage.constants.Rarity;
 import mage.constants.TargetController;
 import mage.constants.Zone;
 import mage.counters.CounterType;
@@ -61,9 +61,8 @@ import mage.target.common.TargetCardInYourGraveyard;
  */
 public class FlamesOfRemembrance extends CardImpl {
 
-    public FlamesOfRemembrance(UUID ownerId) {
-        super(ownerId, 102, "Flames of Remembrance", Rarity.RARE, new CardType[]{CardType.ENCHANTMENT}, "{R}");
-        this.expansionSetCode = "SWS";
+    public FlamesOfRemembrance(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.ENCHANTMENT},"{R}");
 
         // At the beggining of your upkeep, you may exile a card from your graveyard. If you do, put a charge counter on Flames of Remembrance.
         this.addAbility(new BeginningOfUpkeepTriggeredAbility(new DoIfCostPaid(new AddCountersSourceEffect(CounterType.CHARGE.createInstance()), new ExileFromGraveCost(new TargetCardInYourGraveyard()), null, true), TargetController.YOU, false));

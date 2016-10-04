@@ -25,15 +25,15 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.timeshifted;
+package mage.cards.a;
 
 import java.util.UUID;
 import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.MageInt;
 import mage.ObjectColor;
 import mage.abilities.keyword.*;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.filter.FilterCard;
 import mage.filter.predicate.Predicates;
 import mage.filter.predicate.mageobject.ColorPredicate;
@@ -50,9 +50,8 @@ public class AkromaAngelOfWrath extends CardImpl {
         protectionFilter.add(Predicates.or(new ColorPredicate(ObjectColor.BLACK),new ColorPredicate(ObjectColor.RED)));
     }
 
-    public AkromaAngelOfWrath(UUID ownerId) {
-        super(ownerId, 1, "Akroma, Angel of Wrath", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{5}{W}{W}{W}");
-        this.expansionSetCode = "TSB";
+    public AkromaAngelOfWrath(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{5}{W}{W}{W}");
         this.supertype.add("Legendary");
         this.subtype.add("Angel");
 

@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.bornofthegods;
+package mage.cards.f;
 
 import java.util.UUID;
 import mage.abilities.condition.common.MyTurnCondition;
@@ -35,9 +35,9 @@ import mage.abilities.effects.keyword.ScryEffect;
 import mage.abilities.effects.common.continuous.GainAbilityTargetEffect;
 import mage.abilities.keyword.IndestructibleAbility;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Duration;
-import mage.constants.Rarity;
 import mage.filter.common.FilterCreatureCard;
 import mage.target.common.TargetCardInGraveyard;
 
@@ -47,9 +47,8 @@ import mage.target.common.TargetCardInGraveyard;
  */
 public class FatedReturn extends CardImpl {
 
-    public FatedReturn(UUID ownerId) {
-        super(ownerId, 69, "Fated Return", Rarity.RARE, new CardType[]{CardType.INSTANT}, "{4}{B}{B}{B}");
-        this.expansionSetCode = "BNG";
+    public FatedReturn(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.INSTANT},"{4}{B}{B}{B}");
 
 
         // Put target creature card from a graveyard onto the battlefield under your control. It gains indestructible. If it's your turn, scry 2.

@@ -25,15 +25,15 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.oathofthegatewatch;
+package mage.cards.r;
 
 import java.util.UUID;
 import mage.abilities.effects.Effect;
 import mage.abilities.effects.common.DrawCardTargetEffect;
 import mage.abilities.effects.common.ReturnToHandTargetEffect;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.constants.TargetController;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.filter.predicate.permanent.ControllerPredicate;
@@ -53,9 +53,8 @@ public class RoilingWaters extends CardImpl {
         FILTER.add(new ControllerPredicate(TargetController.OPPONENT));
     }
 
-    public RoilingWaters(UUID ownerId) {
-        super(ownerId, 62, "Roiling Waters", Rarity.UNCOMMON, new CardType[]{CardType.SORCERY}, "{5}{U}{U}");
-        this.expansionSetCode = "OGW";
+    public RoilingWaters(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{5}{U}{U}");
 
         // Return up to two target creatures your opponents control to their owners' hands.
         this.getSpellAbility().addEffect(new ReturnToHandTargetEffect());

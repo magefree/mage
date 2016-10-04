@@ -26,11 +26,10 @@
  *  or implied, of BetaSteward_at_googlemail.com.
  */
 
-package mage.sets.scarsofmirrodin;
+package mage.cards.d;
 
 import java.util.UUID;
 import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.abilities.common.EntersBattlefieldAbility;
 import mage.abilities.condition.Condition;
 import mage.abilities.condition.common.PermanentsOnTheBattlefieldCondition;
@@ -40,6 +39,7 @@ import mage.abilities.effects.common.TapSourceEffect;
 import mage.abilities.mana.BlackManaAbility;
 import mage.abilities.mana.BlueManaAbility;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.filter.common.FilterLandPermanent;
 import mage.filter.predicate.permanent.AnotherPredicate;
 
@@ -55,9 +55,8 @@ public class DarkslickShores extends CardImpl {
         filter.add(new AnotherPredicate());
     }
 
-    public DarkslickShores (UUID ownerId) {
-        super(ownerId, 226, "Darkslick Shores", Rarity.RARE, new CardType[]{CardType.LAND}, null);
-        this.expansionSetCode = "SOM";
+    public DarkslickShores (UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.LAND},null);
 
         // Darkslick Shores enters the battlefield tapped unless you control two or fewer other lands.
         Condition controls = new InvertCondition(new PermanentsOnTheBattlefieldCondition(filter, PermanentsOnTheBattlefieldCondition.CountType.FEWER_THAN, 3));

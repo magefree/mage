@@ -26,14 +26,14 @@
  *  or implied, of BetaSteward_at_googlemail.com.
  */
 
-package mage.sets.worldwake;
+package mage.cards.h;
 
 import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.MageInt;
 import mage.abilities.keyword.FlyingAbility;
 import mage.abilities.keyword.ProtectionAbility;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.filter.common.FilterLandCard;
 
 import java.util.UUID;
@@ -45,9 +45,8 @@ public class HorizonDrake extends CardImpl {
 
     private static FilterLandCard filter = new FilterLandCard("lands");
 
-    public HorizonDrake(UUID ownerId) {
-        super(ownerId, 30, "Horizon Drake", Rarity.UNCOMMON, new CardType[]{CardType.CREATURE}, "{1}{U}{U}");
-        this.expansionSetCode = "WWK";
+    public HorizonDrake(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{1}{U}{U}");
         this.subtype.add("Drake");
 
         this.power = new MageInt(3);

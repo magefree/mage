@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.torment;
+package mage.cards.f;
 
 import java.util.UUID;
 import mage.abilities.condition.common.CardsInControllerGraveCondition;
@@ -33,8 +33,8 @@ import mage.abilities.decorator.ConditionalOneShotEffect;
 import mage.abilities.effects.Effect;
 import mage.abilities.effects.common.search.SearchLibraryPutInPlayEffect;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.filter.common.FilterBasicLandCard;
 import mage.target.common.TargetCardInLibrary;
 
@@ -45,9 +45,8 @@ import mage.target.common.TargetCardInLibrary;
 
 public class FarWanderings extends CardImpl {
 
-    public FarWanderings(UUID ownerId) {
-        super(ownerId, 125, "Far Wanderings", Rarity.COMMON, new CardType[]{CardType.SORCERY}, "{2}{G}");
-        this.expansionSetCode = "TOR";
+    public FarWanderings(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{2}{G}");
 
         // Search your library for a basic land card, put that card onto the battlefield tapped, then shuffle your library.
         // Threshold - If seven or more cards are in your graveyard, instead search your library for up to three basic land cards, put them onto the battlefield tapped, then shuffle your library.

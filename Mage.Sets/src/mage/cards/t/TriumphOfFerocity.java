@@ -25,16 +25,16 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.avacynrestored;
+package mage.cards.t;
 
 import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.abilities.TriggeredAbility;
 import mage.abilities.common.BeginningOfUpkeepTriggeredAbility;
 import mage.abilities.condition.common.ControlsCreatureGreatestPowerCondition;
 import mage.abilities.decorator.ConditionalTriggeredAbility;
 import mage.abilities.effects.common.DrawCardSourceControllerEffect;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.TargetController;
 
 import java.util.UUID;
@@ -46,9 +46,8 @@ public class TriumphOfFerocity extends CardImpl {
 
     private static final String ruleText = "draw a card if you control the creature with the greatest power or tied for the greatest power";
 
-    public TriumphOfFerocity(UUID ownerId) {
-        super(ownerId, 198, "Triumph of Ferocity", Rarity.UNCOMMON, new CardType[]{CardType.ENCHANTMENT}, "{2}{G}");
-        this.expansionSetCode = "AVR";
+    public TriumphOfFerocity(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.ENCHANTMENT},"{2}{G}");
 
 
         // At the beginning of your upkeep, draw a card if you control the creature with the greatest power or tied for the greatest power.

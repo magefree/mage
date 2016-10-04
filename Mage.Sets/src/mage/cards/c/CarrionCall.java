@@ -26,13 +26,13 @@
  *  or implied, of BetaSteward_at_googlemail.com.
  */
 
-package mage.sets.scarsofmirrodin;
+package mage.cards.c;
 
 import java.util.UUID;
 import mage.abilities.effects.common.CreateTokenEffect;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.game.permanent.token.InsectInfectToken;
 
 /**
@@ -41,9 +41,8 @@ import mage.game.permanent.token.InsectInfectToken;
  */
 public class CarrionCall extends CardImpl {
 
-    public CarrionCall (UUID ownerId) {
-        super(ownerId, 115, "Carrion Call", Rarity.UNCOMMON, new CardType[]{CardType.INSTANT}, "{3}{G}");
-        this.expansionSetCode = "SOM";
+    public CarrionCall (UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.INSTANT},"{3}{G}");
 
         // Put two 1/1 green Insect creature tokens with infect onto the battlefield. (They deal damage to creatures in the form of -1/-1 counters and to players in the form of poison counters.)
         this.getSpellAbility().addEffect(new CreateTokenEffect(new InsectInfectToken(), 2));

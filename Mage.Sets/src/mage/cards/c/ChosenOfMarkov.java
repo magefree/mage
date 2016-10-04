@@ -25,12 +25,11 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.darkascension;
+package mage.cards.c;
 
 import java.util.UUID;
 
 import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleActivatedAbility;
@@ -38,7 +37,9 @@ import mage.abilities.costs.common.TapSourceCost;
 import mage.abilities.costs.common.TapTargetCost;
 import mage.abilities.effects.common.TransformSourceEffect;
 import mage.abilities.keyword.TransformAbility;
+import mage.cards.m.MarkovsServant;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.Zone;
 import mage.filter.common.FilterControlledPermanent;
 import mage.filter.predicate.Predicates;
@@ -58,16 +59,15 @@ public class ChosenOfMarkov extends CardImpl {
         filter.add(new SubtypePredicate("Vampire"));
     }
 
-    public ChosenOfMarkov(UUID ownerId) {
-        super(ownerId, 55, "Chosen of Markov", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{2}{B}");
-        this.expansionSetCode = "DKA";
+    public ChosenOfMarkov(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{2}{B}");
         this.subtype.add("Human");
 
         this.power = new MageInt(2);
         this.toughness = new MageInt(2);
 
         this.transformable = true;
-        this.secondSideCard = new MarkovsServant(ownerId);
+        this.secondSideCardClazz = MarkovsServant.class;
 
         // {tap}, Tap an untapped Vampire you control: Transform Chosen of Markov.
         this.addAbility(new TransformAbility());

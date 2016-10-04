@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.worldwake;
+package mage.cards.r;
 
 import java.util.UUID;
 
@@ -41,6 +41,7 @@ import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.continuous.GainAbilityAttachedEffect;
 import mage.abilities.keyword.EquipAbility;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.players.Player;
@@ -52,9 +53,8 @@ import mage.target.common.TargetCreatureOrPlayer;
  */
 public class RazorBoomerang extends CardImpl {
 
-    public RazorBoomerang(UUID ownerId) {
-        super(ownerId, 129, "Razor Boomerang", Rarity.UNCOMMON, new CardType[]{CardType.ARTIFACT}, "{3}");
-        this.expansionSetCode = "WWK";
+    public RazorBoomerang(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.ARTIFACT},"{3}");
         this.subtype.add("Equipment");
 
         // Equipped creature has "{tap}, Unattach Razor Boomerang: Razor Boomerang deals 1 damage to target creature or player. Return Razor Boomerang to its owner's hand."

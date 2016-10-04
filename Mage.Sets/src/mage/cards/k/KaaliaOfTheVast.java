@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.commander;
+package mage.cards.k;
 
 import java.util.UUID;
 import mage.MageInt;
@@ -35,9 +35,9 @@ import mage.abilities.effects.OneShotEffect;
 import mage.abilities.keyword.FlyingAbility;
 import mage.cards.Card;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Outcome;
-import mage.constants.Rarity;
 import mage.constants.Zone;
 import mage.filter.common.FilterCreatureCard;
 import mage.filter.predicate.Predicates;
@@ -55,9 +55,8 @@ import mage.target.common.TargetCardInHand;
  */
 public class KaaliaOfTheVast extends CardImpl {
 
-    public KaaliaOfTheVast(UUID ownerId) {
-        super(ownerId, 206, "Kaalia of the Vast", Rarity.MYTHIC, new CardType[]{CardType.CREATURE}, "{1}{W}{B}{R}");
-        this.expansionSetCode = "CMD";
+    public KaaliaOfTheVast(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{1}{W}{B}{R}");
         this.supertype.add("Legendary");
         this.subtype.add("Human");
         this.subtype.add("Cleric");

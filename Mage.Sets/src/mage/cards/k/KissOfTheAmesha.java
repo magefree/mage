@@ -25,14 +25,14 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.shardsofalara;
+package mage.cards.k;
 
 import java.util.UUID;
 import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.abilities.effects.common.DrawCardTargetEffect;
 import mage.abilities.effects.common.GainLifeTargetEffect;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.target.TargetPlayer;
 
 /**
@@ -41,9 +41,8 @@ import mage.target.TargetPlayer;
  */
 public class KissOfTheAmesha extends CardImpl {
 
-    public KissOfTheAmesha(UUID ownerId) {
-        super(ownerId, 177, "Kiss of the Amesha", Rarity.UNCOMMON, new CardType[]{CardType.SORCERY}, "{4}{W}{U}");
-        this.expansionSetCode = "ALA";
+    public KissOfTheAmesha(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{4}{W}{U}");
 
 
         // Target player gains 7 life and draws two cards.

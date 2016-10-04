@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.eldritchmoon;
+package mage.cards.m;
 
 import java.util.UUID;
 import mage.MageInt;
@@ -33,9 +33,9 @@ import mage.abilities.common.SpellCastControllerTriggeredAbility;
 import mage.abilities.effects.common.continuous.BoostSourceEffect;
 import mage.abilities.keyword.FlyingAbility;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Duration;
-import mage.constants.Rarity;
 import mage.filter.FilterSpell;
 import mage.filter.predicate.Predicates;
 import mage.filter.predicate.mageobject.CardTypePredicate;
@@ -54,9 +54,8 @@ public class MercurialGeists extends CardImpl {
                 new CardTypePredicate(CardType.SORCERY)));
     }
 
-    public MercurialGeists(UUID ownerId) {
-        super(ownerId, 186, "Mercurial Geists", Rarity.UNCOMMON, new CardType[]{CardType.CREATURE}, "{2}{U}{R}");
-        this.expansionSetCode = "EMN";
+    public MercurialGeists(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{2}{U}{R}");
         this.subtype.add("Spirit");
         this.power = new MageInt(1);
         this.toughness = new MageInt(3);

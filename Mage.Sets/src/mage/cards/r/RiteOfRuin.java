@@ -25,17 +25,17 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.avacynrestored;
+package mage.cards.r;
 
 import java.util.HashSet;
 import java.util.LinkedList;
 import java.util.UUID;
 import mage.constants.CardType;
 import mage.constants.Outcome;
-import mage.constants.Rarity;
 import mage.abilities.Ability;
 import mage.abilities.effects.OneShotEffect;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.choices.ChoiceImpl;
 import mage.filter.common.FilterControlledPermanent;
 import mage.filter.predicate.mageobject.CardTypePredicate;
@@ -50,9 +50,8 @@ import mage.target.common.TargetControlledPermanent;
  */
 public class RiteOfRuin extends CardImpl {
 
-    public RiteOfRuin(UUID ownerId) {
-        super(ownerId, 153, "Rite of Ruin", Rarity.RARE, new CardType[]{CardType.SORCERY}, "{5}{R}{R}");
-        this.expansionSetCode = "AVR";
+    public RiteOfRuin(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{5}{R}{R}");
 
 
         // Choose an order for artifacts, creatures, and lands. Each player sacrifices one permanent of the first type, sacrifices two of the second type, then sacrifices three of the third type.

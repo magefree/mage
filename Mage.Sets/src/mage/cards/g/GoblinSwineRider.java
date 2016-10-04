@@ -25,15 +25,15 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.visions;
+package mage.cards.g;
 
 import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.common.BecomesBlockedTriggeredAbility;
 import mage.abilities.effects.common.DamageAllEffect;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.filter.common.FilterAttackingOrBlockingCreature;
 
 /**
@@ -42,9 +42,8 @@ import mage.filter.common.FilterAttackingOrBlockingCreature;
  */
 public class GoblinSwineRider extends CardImpl {
 
-    public GoblinSwineRider(UUID ownerId) {
-        super(ownerId, 81, "Goblin Swine-Rider", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{R}");
-        this.expansionSetCode = "VIS";
+    public GoblinSwineRider(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{R}");
         this.subtype.add("Goblin");
         this.power = new MageInt(1);
         this.toughness = new MageInt(1);

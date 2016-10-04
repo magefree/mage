@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.eldritchmoon;
+package mage.cards.u;
 
 import java.util.UUID;
 import mage.MageInt;
@@ -38,8 +38,8 @@ import mage.abilities.effects.common.FightTargetSourceEffect;
 import mage.abilities.effects.common.TransformSourceEffect;
 import mage.abilities.keyword.TransformAbility;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.constants.TargetController;
 import mage.constants.Zone;
 import mage.filter.common.FilterCreaturePermanent;
@@ -58,9 +58,8 @@ import mage.target.common.TargetCreaturePermanent;
  */
 public class UlrichUncontestedAlpha extends CardImpl {
 
-    public UlrichUncontestedAlpha(UUID ownerId) {
-        super(ownerId, 191, "Ulrich, Uncontested Alpha", Rarity.MYTHIC, new CardType[]{CardType.CREATURE}, "");
-        this.expansionSetCode = "EMN";
+    public UlrichUncontestedAlpha(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"");
         this.supertype.add("Legendary");
         this.subtype.add("Werewolf");
         this.power = new MageInt(6);

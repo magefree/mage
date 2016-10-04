@@ -25,14 +25,14 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.dragonsoftarkir;
+package mage.cards.a;
 
 import java.util.UUID;
 import mage.abilities.dynamicvalue.common.StaticValue;
 import mage.abilities.effects.common.LookLibraryAndPickControllerEffect;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.constants.Zone;
 import mage.filter.FilterCard;
 
@@ -42,9 +42,8 @@ import mage.filter.FilterCard;
  */
 public class Anticipate extends CardImpl {
 
-    public Anticipate(UUID ownerId) {
-        super(ownerId, 45, "Anticipate", Rarity.COMMON, new CardType[]{CardType.INSTANT}, "{1}{U}");
-        this.expansionSetCode = "DTK";
+    public Anticipate(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.INSTANT},"{1}{U}");
 
         // Look at the top three cards of your library. Put one of them into your hand and the rest on the bottom of your library in any order.
         this.getSpellAbility().addEffect(new LookLibraryAndPickControllerEffect

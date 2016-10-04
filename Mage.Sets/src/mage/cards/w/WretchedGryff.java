@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.eldritchmoon;
+package mage.cards.w;
 
 import java.util.UUID;
 import mage.MageInt;
@@ -35,8 +35,8 @@ import mage.abilities.effects.common.DrawCardSourceControllerEffect;
 import mage.abilities.keyword.EmergeAbility;
 import mage.abilities.keyword.FlyingAbility;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.Rarity;
 
 /**
  *
@@ -44,9 +44,8 @@ import mage.constants.Rarity;
  */
 public class WretchedGryff extends CardImpl {
 
-    public WretchedGryff(UUID ownerId) {
-        super(ownerId, 12, "Wretched Gryff", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{7}");
-        this.expansionSetCode = "EMN";
+    public WretchedGryff(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{7}");
         this.subtype.add("Eldrazi");
         this.subtype.add("Hippogriff");
         this.power = new MageInt(3);

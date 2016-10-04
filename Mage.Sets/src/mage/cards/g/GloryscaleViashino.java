@@ -26,16 +26,16 @@
  *  or implied, of BetaSteward_at_googlemail.com.
  */
 
-package mage.sets.alarareborn;
+package mage.cards.g;
 
 import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.common.SpellCastControllerTriggeredAbility;
 import mage.abilities.effects.common.continuous.BoostSourceEffect;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Duration;
-import mage.constants.Rarity;
 import mage.filter.FilterSpell;
 import mage.filter.predicate.mageobject.MulticoloredPredicate;
 
@@ -51,9 +51,8 @@ public class GloryscaleViashino extends CardImpl {
         filter.add(new MulticoloredPredicate());
     }
 
-    public GloryscaleViashino (UUID ownerId) {
-        super(ownerId, 120, "Gloryscale Viashino", Rarity.UNCOMMON, new CardType[]{CardType.CREATURE}, "{1}{R}{G}{W}");
-        this.expansionSetCode = "ARB";
+    public GloryscaleViashino (UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{1}{R}{G}{W}");
         this.subtype.add("Viashino");
         this.subtype.add("Soldier");
 

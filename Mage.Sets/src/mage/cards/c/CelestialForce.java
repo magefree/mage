@@ -25,15 +25,15 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.commander;
+package mage.cards.c;
 
 import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.common.BeginningOfUpkeepTriggeredAbility;
 import mage.abilities.effects.common.GainLifeEffect;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.constants.TargetController;
 
 /**
@@ -42,9 +42,8 @@ import mage.constants.TargetController;
  */
 public class CelestialForce extends CardImpl {
 
-    public CelestialForce(UUID ownerId) {
-        super(ownerId, 10, "Celestial Force", Rarity.RARE, new CardType[]{CardType.CREATURE}, "{5}{W}{W}{W}");
-        this.expansionSetCode = "CMD";
+    public CelestialForce(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{5}{W}{W}{W}");
         this.subtype.add("Elemental");
 
         this.power = new MageInt(7);

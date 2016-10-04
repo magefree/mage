@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.fatereforged;
+package mage.cards.j;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -49,10 +49,10 @@ import mage.abilities.effects.common.continuous.BecomesFaceDownCreatureEffect;
 import mage.abilities.effects.common.continuous.BecomesFaceDownCreatureEffect.FaceDownType;
 import mage.cards.Card;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Duration;
 import mage.constants.Outcome;
-import mage.constants.Rarity;
 import mage.constants.TargetController;
 import mage.constants.Zone;
 import mage.game.Game;
@@ -65,9 +65,8 @@ import mage.players.Player;
  */
 public class JeskaiInfiltrator extends CardImpl {
 
-    public JeskaiInfiltrator(UUID ownerId) {
-        super(ownerId, 36, "Jeskai Infiltrator", Rarity.RARE, new CardType[]{CardType.CREATURE}, "{2}{U}");
-        this.expansionSetCode = "FRF";
+    public JeskaiInfiltrator(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{2}{U}");
         this.subtype.add("Human");
         this.subtype.add("Monk");
         this.power = new MageInt(2);

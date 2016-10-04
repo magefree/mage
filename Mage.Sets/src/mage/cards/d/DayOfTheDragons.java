@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.scourge;
+package mage.cards.d;
 
 import java.util.HashSet;
 import java.util.Set;
@@ -37,9 +37,9 @@ import mage.abilities.common.LeavesBattlefieldTriggeredAbility;
 import mage.abilities.effects.OneShotEffect;
 import mage.cards.Card;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Outcome;
-import mage.constants.Rarity;
 import mage.constants.TargetController;
 import mage.constants.Zone;
 import mage.filter.FilterPermanent;
@@ -60,9 +60,8 @@ import mage.util.CardUtil;
  */
 public class DayOfTheDragons extends CardImpl {
 
-    public DayOfTheDragons(UUID ownerId) {
-        super(ownerId, 31, "Day of the Dragons", Rarity.RARE, new CardType[]{CardType.ENCHANTMENT}, "{4}{U}{U}{U}");
-        this.expansionSetCode = "SCG";
+    public DayOfTheDragons(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.ENCHANTMENT},"{4}{U}{U}{U}");
 
         // When Day of the Dragons enters the battlefield, exile all creatures you control. Then put that many 5/5 red Dragon creature tokens with flying onto the battlefield.
         this.addAbility(new EntersBattlefieldTriggeredAbility(new DayOfTheDragonsEntersEffect(), false));

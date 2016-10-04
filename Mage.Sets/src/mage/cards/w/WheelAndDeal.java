@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.onslaught;
+package mage.cards.w;
 
 import java.util.UUID;
 import mage.abilities.effects.Effect;
@@ -33,8 +33,8 @@ import mage.abilities.effects.common.DrawCardSourceControllerEffect;
 import mage.abilities.effects.common.DrawCardTargetEffect;
 import mage.abilities.effects.common.discard.DiscardHandTargetEffect;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.constants.TargetController;
 import mage.filter.FilterPlayer;
 import mage.filter.predicate.other.PlayerPredicate;
@@ -52,9 +52,8 @@ public class WheelAndDeal extends CardImpl {
         filter.add(new PlayerPredicate(TargetController.OPPONENT));
     }
 
-    public WheelAndDeal(UUID ownerId) {
-        super(ownerId, 121, "Wheel and Deal", Rarity.RARE, new CardType[]{CardType.INSTANT}, "{3}{U}");
-        this.expansionSetCode = "ONS";
+    public WheelAndDeal(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.INSTANT},"{3}{U}");
 
         // Any number of target opponents each discards his or her hand and draws seven cards.
         Effect effect = new DiscardHandTargetEffect();

@@ -25,14 +25,14 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.starwars;
+package mage.cards.p;
 
 import java.util.UUID;
 import mage.abilities.Mode;
 import mage.abilities.effects.common.CounterTargetEffect;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.filter.FilterSpell;
 import mage.filter.predicate.ObjectPlayer;
 import mage.filter.predicate.ObjectPlayerPredicate;
@@ -54,9 +54,8 @@ public class PersonalEnergyField extends CardImpl {
         filter.add(new PersonalEnergyFieldPredicate());
     }
 
-    public PersonalEnergyField(UUID ownerId) {
-        super(ownerId, 50, "Personal Energy Field", Rarity.COMMON, new CardType[]{CardType.INSTANT}, "{U}");
-        this.expansionSetCode = "SWS";
+    public PersonalEnergyField(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.INSTANT},"{U}");
 
         // Counter target spell that targets you or a permanent you control.
         this.getSpellAbility().addEffect(new CounterTargetEffect());

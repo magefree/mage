@@ -25,15 +25,15 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.avacynrestored;
+package mage.cards.t;
 
 import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.EntersBattlefieldTriggeredAbility;
 import mage.abilities.effects.OneShotEffect;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.Outcome;
 import mage.filter.FilterPermanent;
 import mage.game.Game;
@@ -48,9 +48,8 @@ import java.util.UUID;
  */
 public class TyrantOfDiscord extends CardImpl {
 
-    public TyrantOfDiscord(UUID ownerId) {
-        super(ownerId, 162, "Tyrant of Discord", Rarity.RARE, new CardType[]{CardType.CREATURE}, "{4}{R}{R}{R}");
-        this.expansionSetCode = "AVR";
+    public TyrantOfDiscord(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{4}{R}{R}{R}");
         this.subtype.add("Elemental");
 
         this.power = new MageInt(7);

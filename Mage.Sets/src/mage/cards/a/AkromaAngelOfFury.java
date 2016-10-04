@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.commander;
+package mage.cards.a;
 
 import java.util.UUID;
 import mage.MageInt;
@@ -39,9 +39,9 @@ import mage.abilities.keyword.MorphAbility;
 import mage.abilities.keyword.ProtectionAbility;
 import mage.abilities.keyword.TrampleAbility;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Duration;
-import mage.constants.Rarity;
 import mage.constants.Zone;
 import mage.filter.FilterCard;
 import mage.filter.predicate.Predicates;
@@ -59,9 +59,8 @@ public class AkromaAngelOfFury extends CardImpl {
         protectionFilter.add(Predicates.or(new ColorPredicate(ObjectColor.WHITE),new ColorPredicate(ObjectColor.BLUE)));
     }
 
-    public AkromaAngelOfFury(UUID ownerId) {
-        super(ownerId, 108, "Akroma, Angel of Fury", Rarity.RARE, new CardType[]{CardType.CREATURE}, "{5}{R}{R}{R}");
-        this.expansionSetCode = "CMD";
+    public AkromaAngelOfFury(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{5}{R}{R}{R}");
         this.supertype.add("Legendary");
         this.subtype.add("Angel");
 

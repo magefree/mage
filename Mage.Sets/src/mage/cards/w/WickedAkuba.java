@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.championsofkamigawa;
+package mage.cards.w;
 
 import java.util.UUID;
 import mage.MageInt;
@@ -34,9 +34,9 @@ import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.costs.mana.ColoredManaCost;
 import mage.abilities.effects.common.LoseLifeTargetEffect;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.ColoredManaSymbol;
-import mage.constants.Rarity;
 import mage.constants.Zone;
 import mage.filter.FilterPlayer;
 import mage.filter.predicate.ObjectSourcePlayer;
@@ -58,9 +58,8 @@ public class WickedAkuba extends CardImpl {
         filter.add(new WickedAkubaPredicate());
     }
 
-    public WickedAkuba(UUID ownerId) {
-        super(ownerId, 150, "Wicked Akuba", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{B}{B}");
-        this.expansionSetCode = "CHK";
+    public WickedAkuba(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{B}{B}");
         this.subtype.add("Spirit");
 
         this.power = new MageInt(2);

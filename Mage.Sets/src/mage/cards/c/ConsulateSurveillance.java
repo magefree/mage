@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.kaladesh;
+package mage.cards.c;
 
 import java.util.UUID;
 import mage.abilities.common.EntersBattlefieldTriggeredAbility;
@@ -34,9 +34,9 @@ import mage.abilities.costs.common.PayEnergyCost;
 import mage.abilities.effects.common.PreventAllDamageFromChosenSourceToYouEffect;
 import mage.abilities.effects.common.counter.GetEnergyCountersControllerEffect;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Duration;
-import mage.constants.Rarity;
 import mage.constants.Zone;
 import mage.filter.FilterObject;
 
@@ -46,9 +46,8 @@ import mage.filter.FilterObject;
  */
 public class ConsulateSurveillance extends CardImpl {
 
-    public ConsulateSurveillance(UUID ownerId) {
-        super(ownerId, 10, "Consulate Surveillance", Rarity.UNCOMMON, new CardType[]{CardType.ENCHANTMENT}, "{3}{W}");
-        this.expansionSetCode = "KLD";
+    public ConsulateSurveillance(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.ENCHANTMENT},"{3}{W}");
 
         // When Consulate Surveillance enters the battlefield, you get {E}{E}{E}{E}.
         this.addAbility(new EntersBattlefieldTriggeredAbility(new GetEnergyCountersControllerEffect(4)));

@@ -27,13 +27,12 @@
  *  or implied, of BetaSteward_at_googlemail.com.
  * 
  */
-package mage.sets.championsofkamigawa;
+package mage.cards.t;
 
 import java.util.UUID;
 
 import mage.constants.AttachmentType;
 import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.constants.Zone;
 import mage.ObjectColor;
 import mage.abilities.common.SimpleStaticAbility;
@@ -45,6 +44,7 @@ import mage.abilities.effects.common.continuous.GainAbilityAttachedEffect;
 import mage.abilities.keyword.EquipAbility;
 import mage.abilities.keyword.TrampleAbility;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.Outcome;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.filter.predicate.mageobject.ColorPredicate;
@@ -69,9 +69,8 @@ public class TenzaGodosMaul extends CardImpl {
         redFilter.add(new ColorPredicate(ObjectColor.RED));
     }
 
-    public TenzaGodosMaul(UUID ownerId) {
-        super(ownerId, 271, "Tenza, Godo's Maul", Rarity.UNCOMMON, new CardType[]{CardType.ARTIFACT}, "{3}");
-        this.expansionSetCode = "CHK";
+    public TenzaGodosMaul(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.ARTIFACT},"{3}");
         this.supertype.add("Legendary");
         this.subtype.add("Equipment");
 

@@ -25,15 +25,15 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.khansoftarkir;
+package mage.cards.s;
 
 import java.util.UUID;
 import mage.abilities.Mode;
 import mage.abilities.effects.common.DestroyTargetEffect;
 import mage.abilities.effects.common.DrawDiscardControllerEffect;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.filter.common.FilterArtifactOrEnchantmentPermanent;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.filter.predicate.mageobject.MonocoloredPredicate;
@@ -53,9 +53,8 @@ public class SultaiCharm extends CardImpl {
         filter.add(new MonocoloredPredicate());
     }
 
-    public SultaiCharm(UUID ownerId) {
-        super(ownerId, 204, "Sultai Charm", Rarity.UNCOMMON, new CardType[]{CardType.INSTANT}, "{B}{G}{U}");
-        this.expansionSetCode = "KTK";
+    public SultaiCharm(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.INSTANT},"{B}{G}{U}");
 
         // Choose one -
         // <strong>*</strong> Destroy target monocolored creature.

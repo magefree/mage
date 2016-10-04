@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.kaladesh;
+package mage.cards.c;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -37,9 +37,9 @@ import mage.abilities.effects.OneShotEffect;
 import mage.abilities.keyword.VigilanceAbility;
 import mage.cards.Card;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Outcome;
-import mage.constants.Rarity;
 import mage.filter.common.FilterControlledArtifactPermanent;
 import mage.filter.common.FilterControlledCreaturePermanent;
 import mage.filter.common.FilterControlledEnchantmentPermanent;
@@ -58,9 +58,8 @@ import mage.target.common.TargetControlledPermanent;
  */
 public class CataclysmicGearhulk extends CardImpl {
 
-    public CataclysmicGearhulk(UUID ownerId) {
-        super(ownerId, 9, "Cataclysmic Gearhulk", Rarity.MYTHIC, new CardType[]{CardType.ARTIFACT, CardType.CREATURE}, "{3}{W}{W}");
-        this.expansionSetCode = "KLD";
+    public CataclysmicGearhulk(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.ARTIFACT,CardType.CREATURE},"{3}{W}{W}");
         this.subtype.add("Construct");
         this.power = new MageInt(4);
         this.toughness = new MageInt(5);

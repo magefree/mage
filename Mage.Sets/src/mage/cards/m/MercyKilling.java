@@ -25,14 +25,14 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.shadowmoor;
+package mage.cards.m;
 
 import java.util.UUID;
 
 import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.abilities.effects.common.SacrificeTargetEffect;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.target.common.TargetCreaturePermanent;
 import mage.abilities.effects.OneShotEffect;
 import mage.game.Game;
@@ -47,9 +47,8 @@ import mage.MageInt;
  */
 public class MercyKilling extends CardImpl {
 
-    public MercyKilling(UUID ownerId) {
-        super(ownerId, 231, "Mercy Killing", Rarity.UNCOMMON, new CardType[]{CardType.INSTANT}, "{2}{G/W}");
-        this.expansionSetCode = "SHM";
+    public MercyKilling(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.INSTANT},"{2}{G/W}");
         
         // Target creature's controller sacrifices it, then puts X 1/1 green and white Elf Warrior creature tokens onto the battlefield, where X is that creature's power.
         this.getSpellAbility().addEffect(new SacrificeTargetEffect("Target creature's controller sacrifices it"));

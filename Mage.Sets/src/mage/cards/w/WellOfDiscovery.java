@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.prophecy;
+package mage.cards.w;
 
 import java.util.UUID;
 import mage.abilities.common.BeginningOfEndStepTriggeredAbility;
@@ -34,8 +34,8 @@ import mage.abilities.condition.common.PermanentsOnTheBattlefieldCondition;
 import mage.abilities.decorator.ConditionalTriggeredAbility;
 import mage.abilities.effects.common.DrawCardSourceControllerEffect;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.constants.TargetController;
 import mage.filter.common.FilterControlledLandPermanent;
 import mage.filter.predicate.Predicates;
@@ -53,9 +53,8 @@ public class WellOfDiscovery extends CardImpl {
         filter.add(Predicates.not(new TappedPredicate()));
     }
 
-    public WellOfDiscovery(UUID ownerId) {
-        super(ownerId, 140, "Well of Discovery", Rarity.RARE, new CardType[]{CardType.ARTIFACT}, "{6}");
-        this.expansionSetCode = "PCY";
+    public WellOfDiscovery(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.ARTIFACT},"{6}");
 
         // At the beginning of your end step, if you control no untapped lands, draw a card.
         this.addAbility(new ConditionalTriggeredAbility(new BeginningOfEndStepTriggeredAbility(

@@ -25,14 +25,14 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.battleforzendikar;
+package mage.cards.n;
 
 import java.util.UUID;
 import mage.abilities.effects.common.GainLifeEffect;
 import mage.abilities.effects.common.search.SearchLibraryPutInPlayEffect;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.filter.common.FilterBasicLandCard;
 import mage.target.common.TargetCardInLibrary;
 
@@ -42,9 +42,8 @@ import mage.target.common.TargetCardInLibrary;
  */
 public class NissasRenewal extends CardImpl {
 
-    public NissasRenewal(UUID ownerId) {
-        super(ownerId, 180, "Nissa's Renewal", Rarity.RARE, new CardType[]{CardType.SORCERY}, "{5}{G}");
-        this.expansionSetCode = "BFZ";
+    public NissasRenewal(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{5}{G}");
 
         // Search your library for up to three basic land cards, put them onto the battlefield tapped, then shuffle your library. You gain 7 life.
         this.getSpellAbility().addEffect(new SearchLibraryPutInPlayEffect(new TargetCardInLibrary(0, 3, new FilterBasicLandCard()), true));

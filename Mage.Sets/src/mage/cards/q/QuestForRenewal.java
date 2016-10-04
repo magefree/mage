@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.worldwake;
+package mage.cards.q;
 
 import java.util.UUID;
 import mage.abilities.common.BecomesTappedTriggeredAbility;
@@ -35,8 +35,8 @@ import mage.abilities.decorator.ConditionalContinuousEffect;
 import mage.abilities.effects.common.continuous.UntapAllDuringEachOtherPlayersUntapStepEffect;
 import mage.abilities.effects.common.counter.AddCountersSourceEffect;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.constants.Zone;
 import mage.counters.CounterType;
 import mage.filter.common.FilterControlledCreaturePermanent;
@@ -47,9 +47,8 @@ import mage.filter.common.FilterControlledCreaturePermanent;
  */
 public class QuestForRenewal extends CardImpl {
 
-    public QuestForRenewal(UUID ownerId) {
-        super(ownerId, 110, "Quest for Renewal", Rarity.UNCOMMON, new CardType[]{CardType.ENCHANTMENT}, "{1}{G}");
-        this.expansionSetCode = "WWK";
+    public QuestForRenewal(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.ENCHANTMENT},"{1}{G}");
 
         // Whenever a creature you control becomes tapped, you may put a quest counter on Quest for Renewal.
         this.addAbility(new BecomesTappedTriggeredAbility(new AddCountersSourceEffect(CounterType.QUEST.createInstance()),

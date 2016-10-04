@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.eventide;
+package mage.cards.n;
 
 import java.util.UUID;
 import mage.MageInt;
@@ -33,9 +33,9 @@ import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.effects.common.continuous.BoostControlledEffect;
 import mage.abilities.keyword.FlyingAbility;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Duration;
-import mage.constants.Rarity;
 import mage.constants.Zone;
 import mage.filter.common.FilterAttackingCreature;
 
@@ -45,9 +45,8 @@ import mage.filter.common.FilterAttackingCreature;
  */
 public class NobilisOfWar extends CardImpl {
 
-    public NobilisOfWar(UUID ownerId) {
-        super(ownerId, 144, "Nobilis of War", Rarity.RARE, new CardType[]{CardType.CREATURE}, "{R/W}{R/W}{R/W}{R/W}{R/W}");
-        this.expansionSetCode = "EVE";
+    public NobilisOfWar(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{R/W}{R/W}{R/W}{R/W}{R/W}");
         this.subtype.add("Spirit");
         this.subtype.add("Avatar");
 

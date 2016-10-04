@@ -25,14 +25,14 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.mercadianmasques;
+package mage.cards.t;
 
 import java.util.UUID;
 import mage.abilities.dynamicvalue.common.ManacostVariableValue;
 import mage.abilities.effects.common.SacrificeAllEffect;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.filter.common.FilterControlledLandPermanent;
 
 /**
@@ -41,9 +41,8 @@ import mage.filter.common.FilterControlledLandPermanent;
  */
 public class TectonicBreak extends CardImpl {
 
-    public TectonicBreak(UUID ownerId) {
-        super(ownerId, 216, "Tectonic Break", Rarity.RARE, new CardType[]{CardType.SORCERY}, "{X}{R}{R}");
-        this.expansionSetCode = "MMQ";
+    public TectonicBreak(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{X}{R}{R}");
 
         // Each player sacrifices X lands.
         this.getSpellAbility().addEffect(new SacrificeAllEffect(new ManacostVariableValue(), new FilterControlledLandPermanent("lands")));

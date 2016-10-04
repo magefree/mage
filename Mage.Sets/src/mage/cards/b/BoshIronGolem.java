@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.planechase;
+package mage.cards.b;
 
 import java.util.UUID;
 
@@ -39,8 +39,8 @@ import mage.abilities.effects.Effect;
 import mage.abilities.effects.common.DamageTargetEffect;
 import mage.abilities.keyword.TrampleAbility;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.constants.Zone;
 import mage.filter.common.FilterControlledArtifactPermanent;
 import mage.target.common.TargetControlledPermanent;
@@ -52,9 +52,8 @@ import mage.target.common.TargetCreatureOrPlayer;
  */
 public class BoshIronGolem extends CardImpl {
 
-    public BoshIronGolem(UUID ownerId) {
-        super(ownerId, 108, "Bosh, Iron Golem", Rarity.RARE, new CardType[]{CardType.ARTIFACT, CardType.CREATURE}, "{8}");
-        this.expansionSetCode = "HOP";
+    public BoshIronGolem(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.ARTIFACT,CardType.CREATURE},"{8}");
         this.supertype.add("Legendary");
         this.subtype.add("Golem");
 

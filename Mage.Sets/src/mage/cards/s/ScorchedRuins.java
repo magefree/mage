@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package mage.sets.weatherlight;
+package mage.cards.s;
 
 import java.util.UUID;
 import mage.Mana;
@@ -13,8 +13,8 @@ import mage.abilities.costs.common.TapSourceCost;
 import mage.abilities.effects.common.EnterBattlefieldPayCostOrPutGraveyardEffect;
 import mage.abilities.mana.SimpleManaAbility;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.constants.Zone;
 import mage.filter.common.FilterControlledLandPermanent;
 import mage.filter.predicate.Predicates;
@@ -32,9 +32,8 @@ public class ScorchedRuins extends CardImpl {
         filter.add(Predicates.not(new TappedPredicate()));
     }
     
-    public ScorchedRuins(UUID ownerId) {
-        super(ownerId, 166, "Scorched Ruins", Rarity.RARE, new CardType[]{CardType.LAND}, "");
-        this.expansionSetCode = "WTH";
+    public ScorchedRuins(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.LAND},"");
         
         // If Scorched Ruins would enter the battlefield, sacrifice two untapped lands instead.
         // If you do, put Scorched Ruins onto the battlefield. If you don't, put it into its

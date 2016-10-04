@@ -25,15 +25,15 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.dragonsmaze;
+package mage.cards.z;
 
 import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.common.TapForManaAllTriggeredManaAbility;
 import mage.abilities.effects.common.AddManaOfAnyTypeProducedEffect;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.constants.SetTargetPointer;
 import mage.filter.common.FilterLandPermanent;
 
@@ -43,9 +43,8 @@ import mage.filter.common.FilterLandPermanent;
  */
 public class ZhurTaaAncient extends CardImpl {
 
-    public ZhurTaaAncient(UUID ownerId) {
-        super(ownerId, 119, "Zhur-Taa Ancient", Rarity.RARE, new CardType[]{CardType.CREATURE}, "{3}{R}{G}");
-        this.expansionSetCode = "DGM";
+    public ZhurTaaAncient(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{3}{R}{G}");
         this.subtype.add("Beast");
 
         this.power = new MageInt(7);

@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.starwars;
+package mage.cards.a;
 
 import java.util.UUID;
 import mage.abilities.costs.common.TapSourceCost;
@@ -34,8 +34,8 @@ import mage.abilities.mana.ConditionalAnyColorManaAbility;
 import mage.abilities.mana.SimpleManaAbility;
 import mage.abilities.mana.conditional.ConditionalSpellManaBuilder;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.constants.Zone;
 import mage.filter.FilterSpell;
 import mage.filter.predicate.mageobject.MulticoloredPredicate;
@@ -52,9 +52,8 @@ public class AncientHolocron extends CardImpl {
         filter.add(new MulticoloredPredicate());
     }
 
-    public AncientHolocron(UUID ownerId) {
-        super(ownerId, 230, "Ancient Holocron", Rarity.UNCOMMON, new CardType[]{CardType.ARTIFACT}, "{3}");
-        this.expansionSetCode = "SWS";
+    public AncientHolocron(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.ARTIFACT},"{3}");
 
         // {T}: Add one mana of any color to your manapool.
         this.addAbility(new SimpleManaAbility(Zone.BATTLEFIELD, new AddManaOfAnyColorEffect(1), new TapSourceCost()));

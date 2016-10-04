@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.starwars;
+package mage.cards.f;
 
 import java.util.UUID;
 import mage.abilities.Ability;
@@ -33,11 +33,11 @@ import mage.abilities.common.BeginningOfUpkeepTriggeredAbility;
 import mage.abilities.effects.OneShotEffect;
 import mage.cards.Card;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.cards.Cards;
 import mage.cards.CardsImpl;
 import mage.constants.CardType;
 import mage.constants.Outcome;
-import mage.constants.Rarity;
 import mage.constants.TargetController;
 import mage.constants.Zone;
 import mage.game.Game;
@@ -50,9 +50,8 @@ import mage.players.Player;
  */
 public class ForceMastery extends CardImpl {
 
-    public ForceMastery(UUID ownerId) {
-        super(ownerId, 196, "Force Mastery", Rarity.RARE, new CardType[]{CardType.ENCHANTMENT}, "{3}{G}{U}{W}");
-        this.expansionSetCode = "SWS";
+    public ForceMastery(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.ENCHANTMENT},"{3}{G}{U}{W}");
 
         // At the beggining of your upkeep, reveal the top card of your library and put that card into your hand. You gain life equal to its converted mana cost.
         this.addAbility(new BeginningOfUpkeepTriggeredAbility(new ForceMasteryEffect(), TargetController.YOU, false));

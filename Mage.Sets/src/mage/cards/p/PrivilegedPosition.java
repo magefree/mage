@@ -25,16 +25,16 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.ravnica;
+package mage.cards.p;
 
 import java.util.UUID;
 
 import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.effects.common.continuous.GainAbilityControlledEffect;
 import mage.abilities.keyword.HexproofAbility;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.Duration;
 import mage.constants.Zone;
 import mage.filter.FilterPermanent;
@@ -45,9 +45,8 @@ import mage.filter.FilterPermanent;
  */
 public class PrivilegedPosition extends CardImpl {
 
-    public PrivilegedPosition(UUID ownerId) {
-        super(ownerId, 251, "Privileged Position", Rarity.RARE, new CardType[]{CardType.ENCHANTMENT}, "{2}{G/W}{G/W}{G/W}");
-        this.expansionSetCode = "RAV";
+    public PrivilegedPosition(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.ENCHANTMENT},"{2}{G/W}{G/W}{G/W}");
 
 
         // Other permanents you control have hexproof.

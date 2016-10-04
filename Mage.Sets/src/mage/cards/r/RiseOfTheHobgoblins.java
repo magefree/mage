@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.eventide;
+package mage.cards.r;
 
 import java.util.UUID;
 import mage.MageInt;
@@ -41,10 +41,10 @@ import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.continuous.GainAbilityControlledEffect;
 import mage.abilities.keyword.FirstStrikeAbility;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Duration;
 import mage.constants.Outcome;
-import mage.constants.Rarity;
 import mage.constants.TargetController;
 import mage.constants.Zone;
 import mage.filter.FilterPermanent;
@@ -73,9 +73,8 @@ public class RiseOfTheHobgoblins extends CardImpl {
                 new ColorPredicate(ObjectColor.WHITE)));
     }
 
-    public RiseOfTheHobgoblins(UUID ownerId) {
-        super(ownerId, 145, "Rise of the Hobgoblins", Rarity.RARE, new CardType[]{CardType.ENCHANTMENT}, "{R/W}{R/W}");
-        this.expansionSetCode = "EVE";
+    public RiseOfTheHobgoblins(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.ENCHANTMENT},"{R/W}{R/W}");
 
 
         // When Rise of the Hobgoblins enters the battlefield, you may pay {X}. If you do, put X 1/1 red and white Goblin Soldier creature tokens onto the battlefield.

@@ -25,17 +25,17 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.riseoftheeldrazi;
+package mage.cards.s;
 
 import java.util.List;
 import java.util.UUID;
 
 import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.abilities.Ability;
 import mage.abilities.effects.OneShotEffect;
 import mage.cards.Card;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.Outcome;
 import mage.filter.FilterCard;
 import mage.game.Game;
@@ -49,9 +49,8 @@ import mage.target.common.TargetCardInOpponentsGraveyard;
  */
 public class SufferThePast extends CardImpl {
 
-    public SufferThePast(UUID ownerId) {
-        super(ownerId, 128, "Suffer the Past", Rarity.UNCOMMON, new CardType[]{CardType.INSTANT}, "{X}{B}");
-        this.expansionSetCode = "ROE";
+    public SufferThePast(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.INSTANT},"{X}{B}");
 
 
         // Exile X target cards from target player's graveyard. For each card exiled this way, that player loses 1 life and you gain 1 life.

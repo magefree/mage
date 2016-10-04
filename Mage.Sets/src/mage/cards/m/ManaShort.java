@@ -25,14 +25,14 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.limitedalpha;
+package mage.cards.m;
 
 import java.util.UUID;
 import mage.abilities.Ability;
 import mage.abilities.effects.common.TapAllTargetPlayerControlsEffect;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.filter.common.FilterLandPermanent;
 import mage.game.Game;
 import mage.players.Player;
@@ -44,9 +44,8 @@ import mage.target.TargetPlayer;
  */
 public class ManaShort extends CardImpl {
 
-    public ManaShort(UUID ownerId) {
-        super(ownerId, 66, "Mana Short", Rarity.RARE, new CardType[]{CardType.INSTANT}, "{2}{U}");
-        this.expansionSetCode = "LEA";
+    public ManaShort(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.INSTANT},"{2}{U}");
 
         // Tap all lands target player controls and empty his or her mana pool.
         this.getSpellAbility().addEffect(new ManaShortEffect());

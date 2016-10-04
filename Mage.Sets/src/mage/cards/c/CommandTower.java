@@ -25,13 +25,13 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.commander2013;
+package mage.cards.c;
 
 import java.util.UUID;
 import mage.abilities.mana.CommanderColorIdentityManaAbility;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.Rarity;
 
 /**
  *
@@ -39,9 +39,8 @@ import mage.constants.Rarity;
  */
 public class CommandTower extends CardImpl {
 
-    public CommandTower(UUID ownerId) {
-        super(ownerId, 281, "Command Tower", Rarity.COMMON, new CardType[]{CardType.LAND}, "");
-        this.expansionSetCode = "C13";
+    public CommandTower(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.LAND},"");
 
         // {tap}: Add to your mana pool one mana of any color in your commander's color identity.
         this.addAbility(new CommanderColorIdentityManaAbility());

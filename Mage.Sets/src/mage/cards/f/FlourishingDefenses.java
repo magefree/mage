@@ -25,14 +25,14 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.shadowmoor;
+package mage.cards.f;
 
 import java.util.UUID;
 import mage.abilities.TriggeredAbilityImpl;
 import mage.abilities.effects.common.CreateTokenEffect;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.constants.Zone;
 import mage.counters.CounterType;
 import mage.game.Game;
@@ -47,9 +47,8 @@ import mage.game.permanent.token.ElfToken;
  */
 public class FlourishingDefenses extends CardImpl {
 
-    public FlourishingDefenses(UUID ownerId) {
-        super(ownerId, 114, "Flourishing Defenses", Rarity.UNCOMMON, new CardType[]{CardType.ENCHANTMENT}, "{4}{G}");
-        this.expansionSetCode = "SHM";
+    public FlourishingDefenses(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.ENCHANTMENT},"{4}{G}");
 
         // Whenever a -1/-1 counter is placed on a creature, you may put a 1/1 green Elf Warrior creature token onto the battlefield.
         this.addAbility(new FlourishingDefensesTriggeredAbility());

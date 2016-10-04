@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.limitedalpha;
+package mage.cards.s;
 
 import java.util.UUID;
 import mage.abilities.common.DiesCreatureTriggeredAbility;
@@ -33,8 +33,8 @@ import mage.abilities.costs.mana.GenericManaCost;
 import mage.abilities.effects.common.DoIfCostPaid;
 import mage.abilities.effects.common.GainLifeEffect;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.Rarity;
 
 /**
  *
@@ -42,9 +42,8 @@ import mage.constants.Rarity;
  */
 public class SoulNet extends CardImpl {
 
-    public SoulNet(UUID ownerId) {
-        super(ownerId, 270, "Soul Net", Rarity.UNCOMMON, new CardType[]{CardType.ARTIFACT}, "{1}");
-        this.expansionSetCode = "LEA";
+    public SoulNet(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.ARTIFACT},"{1}");
 
         // Whenever a creature dies, you may pay {1}. If you do, you gain 1 life.
         this.addAbility(new DiesCreatureTriggeredAbility(new DoIfCostPaid(new GainLifeEffect(1), new GenericManaCost(1)), false));

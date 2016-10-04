@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.magicorigins;
+package mage.cards.t;
 
 import java.util.ArrayList;
 import java.util.Collection;
@@ -37,11 +37,11 @@ import mage.abilities.Ability;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.ExileSpellEffect;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.cards.Cards;
 import mage.cards.CardsImpl;
 import mage.constants.CardType;
 import mage.constants.Outcome;
-import mage.constants.Rarity;
 import mage.constants.Zone;
 import mage.filter.common.FilterLandCard;
 import mage.game.Game;
@@ -56,9 +56,8 @@ import mage.target.common.TargetCardInHand;
  */
 public class TheGreatAurora extends CardImpl {
 
-    public TheGreatAurora(UUID ownerId) {
-        super(ownerId, 179, "The Great Aurora", Rarity.MYTHIC, new CardType[]{CardType.SORCERY}, "{6}{G}{G}{G}");
-        this.expansionSetCode = "ORI";
+    public TheGreatAurora(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{6}{G}{G}{G}");
 
         // Each player shuffles all cards from his or her hand and all permanents he or she owns into his or her library, then draws that many cards. Each player may put any number of land cards from his or her hand onto the battlefield. Exile The Great Aurora.
         this.getSpellAbility().addEffect(new TheGreatAuroraEffect());

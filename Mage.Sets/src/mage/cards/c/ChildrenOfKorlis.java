@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.timespiral;
+package mage.cards.c;
 
 import mage.MageInt;
 import mage.abilities.Ability;
@@ -35,8 +35,8 @@ import mage.abilities.dynamicvalue.DynamicValue;
 import mage.abilities.effects.Effect;
 import mage.abilities.effects.common.GainLifeEffect;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.constants.Zone;
 import mage.game.Game;
 import mage.watchers.common.PlayerLostLifeWatcher;
@@ -49,9 +49,8 @@ import java.util.UUID;
  */
 public class ChildrenOfKorlis extends CardImpl {
 
-    public ChildrenOfKorlis(UUID ownerId) {
-        super(ownerId, 8, "Children of Korlis", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{W}");
-        this.expansionSetCode = "TSP";
+    public ChildrenOfKorlis(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{W}");
         this.subtype.add("Human");
         this.subtype.add("Rebel");
         this.subtype.add("Cleric");

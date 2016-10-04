@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.scourge;
+package mage.cards.f;
 
 import java.util.UUID;
 import mage.abilities.Ability;
@@ -33,8 +33,8 @@ import mage.abilities.dynamicvalue.DynamicValue;
 import mage.abilities.effects.Effect;
 import mage.abilities.effects.common.LoseLifeTargetEffect;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.game.Game;
 import mage.target.TargetPlayer;
 import mage.watchers.common.AmountOfDamageAPlayerReceivedThisTurnWatcher;
@@ -45,9 +45,8 @@ import mage.watchers.common.AmountOfDamageAPlayerReceivedThisTurnWatcher;
  */
 public class FinalPunishment extends CardImpl {
 
-    public FinalPunishment(UUID ownerId) {
-        super(ownerId, 67, "Final Punishment", Rarity.RARE, new CardType[]{CardType.SORCERY}, "{3}{B}{B}");
-        this.expansionSetCode = "SCG";
+    public FinalPunishment(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{3}{B}{B}");
 
         // Target player loses life equal to the damage already dealt to him or her this turn.
         Effect effect = new LoseLifeTargetEffect(new FinalPunishmentAmount());

@@ -25,13 +25,13 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.masterseditioniii;
+package mage.cards.g;
 
 import java.util.UUID;
 import mage.abilities.effects.common.DestroyAllEffect;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.filter.predicate.permanent.TappedPredicate;
 
@@ -47,9 +47,8 @@ public class GuanYus1000LiMarch extends CardImpl {
         filter.add(new TappedPredicate());
     }
 
-    public GuanYus1000LiMarch(UUID ownerId) {
-        super(ownerId, 13, "Guan Yu's 1,000-Li March", Rarity.RARE, new CardType[]{CardType.SORCERY}, "{4}{W}{W}");
-        this.expansionSetCode = "ME3";
+    public GuanYus1000LiMarch(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{4}{W}{W}");
 
         // Destroy all tapped creatures.
         this.getSpellAbility().addEffect(new DestroyAllEffect(filter, false));

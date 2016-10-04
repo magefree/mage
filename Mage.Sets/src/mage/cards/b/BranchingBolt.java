@@ -25,18 +25,18 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.shardsofalara;
+package mage.cards.b;
 
 import java.util.UUID;
 import mage.constants.CardType;
 import mage.constants.Outcome;
-import mage.constants.Rarity;
 import mage.abilities.Ability;
 import mage.abilities.Mode;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.DamageTargetEffect;
 import mage.abilities.keyword.FlyingAbility;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.filter.predicate.Predicates;
 import mage.filter.predicate.mageobject.AbilityPredicate;
@@ -58,9 +58,8 @@ public class BranchingBolt extends CardImpl {
         filterNotFlying.add(Predicates.not(new AbilityPredicate(FlyingAbility.class)));
     }
 
-    public BranchingBolt(UUID ownerId) {
-        super(ownerId, 158, "Branching Bolt", Rarity.COMMON, new CardType[]{CardType.INSTANT}, "{1}{R}{G}");
-        this.expansionSetCode = "ALA";
+    public BranchingBolt(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.INSTANT},"{1}{R}{G}");
 
 
         // Choose one or both -

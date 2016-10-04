@@ -25,14 +25,14 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.magic2010;
+package mage.cards.m;
 
 import java.util.UUID;
 import mage.abilities.dynamicvalue.common.ManacostVariableValue;
 import mage.abilities.effects.common.discard.DiscardTargetEffect;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.target.TargetPlayer;
 
 /**
@@ -41,9 +41,8 @@ import mage.target.TargetPlayer;
  */
 public class MindShatter extends CardImpl {
 
-    public MindShatter(UUID ownerId) {
-        super(ownerId, 106, "Mind Shatter", Rarity.RARE, new CardType[]{CardType.SORCERY}, "{X}{B}{B}");
-        this.expansionSetCode = "M10";
+    public MindShatter(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{X}{B}{B}");
 
         // Target player discards X cards at random.
         this.getSpellAbility().addEffect(new DiscardTargetEffect(new ManacostVariableValue(), true));

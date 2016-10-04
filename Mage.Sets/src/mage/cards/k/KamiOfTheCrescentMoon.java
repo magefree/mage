@@ -25,16 +25,16 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.saviorsofkamigawa;
+package mage.cards.k;
 
 import java.util.UUID;
 import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.constants.TargetController;
 import mage.MageInt;
 import mage.abilities.common.BeginningOfDrawTriggeredAbility;
 import mage.abilities.effects.common.DrawCardTargetEffect;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 
 /**
  *
@@ -42,9 +42,8 @@ import mage.cards.CardImpl;
  */
 public class KamiOfTheCrescentMoon extends CardImpl {
 
-    public KamiOfTheCrescentMoon(UUID ownerId) {
-        super(ownerId, 42, "Kami of the Crescent Moon", Rarity.RARE, new CardType[]{CardType.CREATURE}, "{U}{U}");
-        this.expansionSetCode = "SOK";
+    public KamiOfTheCrescentMoon(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{U}{U}");
         this.supertype.add("Legendary");
         this.subtype.add("Spirit");
 

@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.alarareborn;
+package mage.cards.t;
 
 import java.util.UUID;
 import mage.abilities.Ability;
@@ -34,8 +34,8 @@ import mage.abilities.costs.common.SacrificeTargetCost;
 import mage.abilities.costs.common.TapSourceCost;
 import mage.abilities.effects.common.turn.AddExtraTurnControllerEffect;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.constants.Zone;
 import mage.filter.common.FilterControlledArtifactPermanent;
 import mage.target.common.TargetControlledPermanent;
@@ -46,9 +46,8 @@ import mage.target.common.TargetControlledPermanent;
  */
 public class TimeSieve extends CardImpl {
 
-    public TimeSieve(UUID ownerId) {
-        super(ownerId, 31, "Time Sieve", Rarity.RARE, new CardType[]{CardType.ARTIFACT}, "{U}{B}");
-        this.expansionSetCode = "ARB";
+    public TimeSieve(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.ARTIFACT},"{U}{B}");
 
         // {tap}, Sacrifice five artifacts: Take an extra turn after this one.
         Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new AddExtraTurnControllerEffect(), new TapSourceCost());

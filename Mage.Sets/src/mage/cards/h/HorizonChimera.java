@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.theros;
+package mage.cards.h;
 
 import java.util.UUID;
 import mage.MageInt;
@@ -35,8 +35,8 @@ import mage.abilities.keyword.FlashAbility;
 import mage.abilities.keyword.FlyingAbility;
 import mage.abilities.keyword.TrampleAbility;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.Rarity;
 
 /**
  *
@@ -44,9 +44,8 @@ import mage.constants.Rarity;
  */
 public class HorizonChimera extends CardImpl {
 
-    public HorizonChimera(UUID ownerId) {
-        super(ownerId, 194, "Horizon Chimera", Rarity.UNCOMMON, new CardType[]{CardType.CREATURE}, "{2}{G}{U}");
-        this.expansionSetCode = "THS";
+    public HorizonChimera(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{2}{G}{U}");
         this.subtype.add("Chimera");
 
         this.power = new MageInt(3);

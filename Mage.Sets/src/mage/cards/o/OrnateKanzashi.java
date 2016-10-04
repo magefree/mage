@@ -26,7 +26,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.betrayersofkamigawa;
+package mage.cards.o;
 
 import java.util.UUID;
 import mage.MageObject;
@@ -39,11 +39,11 @@ import mage.abilities.effects.ContinuousEffect;
 import mage.abilities.effects.OneShotEffect;
 import mage.cards.Card;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.AsThoughEffectType;
 import mage.constants.CardType;
 import mage.constants.Duration;
 import mage.constants.Outcome;
-import mage.constants.Rarity;
 import mage.constants.Zone;
 import mage.game.Game;
 import mage.players.Library;
@@ -58,9 +58,8 @@ import mage.target.targetpointer.FixedTarget;
 public class OrnateKanzashi extends CardImpl {
 
 
-    public OrnateKanzashi(UUID ownerId) {
-        super(ownerId, 157, "Ornate Kanzashi", Rarity.RARE, new CardType[]{CardType.ARTIFACT}, "{5}");
-        this.expansionSetCode = "BOK";
+    public OrnateKanzashi(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.ARTIFACT},"{5}");
 
         // {2}, {T}: Target opponent exiles the top card of his or her library. You may play that card this turn.
         Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new OrnateKanzashiEffect(), new GenericManaCost(2));

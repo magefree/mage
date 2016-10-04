@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.dragonsoftarkir;
+package mage.cards.h;
 
 import java.util.ArrayList;
 import java.util.UUID;
@@ -37,11 +37,11 @@ import mage.abilities.effects.AsThoughEffectImpl;
 import mage.abilities.effects.OneShotEffect;
 import mage.cards.Card;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.AsThoughEffectType;
 import mage.constants.CardType;
 import mage.constants.Duration;
 import mage.constants.Outcome;
-import mage.constants.Rarity;
 import mage.constants.Zone;
 import mage.game.ExileZone;
 import mage.game.Game;
@@ -55,9 +55,8 @@ import mage.util.CardUtil;
  */
 public class HedonistsTrove extends CardImpl {
 
-    public HedonistsTrove(UUID ownerId) {
-        super(ownerId, 106, "Hedonist's Trove", Rarity.RARE, new CardType[]{CardType.ENCHANTMENT}, "{5}{B}{B}");
-        this.expansionSetCode = "DTK";
+    public HedonistsTrove(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.ENCHANTMENT},"{5}{B}{B}");
 
         // When Hedonist's Trove enters the battlefield, exile all cards from target opponent's graveyard.
         Ability ability = new EntersBattlefieldTriggeredAbility(new HedonistsTroveExileEffect());

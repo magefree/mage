@@ -25,15 +25,15 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.guildpact;
+package mage.cards.s;
 
 import java.util.UUID;
 import mage.constants.CardType;
 import mage.constants.Outcome;
-import mage.constants.Rarity;
 import mage.abilities.Ability;
 import mage.abilities.effects.OneShotEffect;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.game.Game;
 import mage.game.turn.TurnMod;
 import mage.players.Player;
@@ -44,9 +44,8 @@ import mage.players.Player;
  */
 public class StitchInTime extends CardImpl {
 
-    public StitchInTime(UUID ownerId) {
-        super(ownerId, 132, "Stitch in Time", Rarity.RARE, new CardType[]{CardType.SORCERY}, "{1}{U}{R}");
-        this.expansionSetCode = "GPT";
+    public StitchInTime(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{1}{U}{R}");
 
 
         // Flip a coin. If you win the flip, take an extra turn after this one.

@@ -25,13 +25,13 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.portalthreekingdoms;
+package mage.cards.f;
 
 import java.util.UUID;
 import mage.abilities.effects.common.PutOnLibraryTargetEffect;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.target.common.TargetCardInYourGraveyard;
 
 /**
@@ -40,9 +40,8 @@ import mage.target.common.TargetCardInYourGraveyard;
  */
 public class FalseMourning extends CardImpl {
 
-    public FalseMourning(UUID ownerId) {
-        super(ownerId, 134, "False Mourning", Rarity.UNCOMMON, new CardType[]{CardType.SORCERY}, "{G}");
-        this.expansionSetCode = "PTK";
+    public FalseMourning(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{G}");
 
         // Put target card from your graveyard on top of your library.
         this.getSpellAbility().addEffect(new PutOnLibraryTargetEffect(true));

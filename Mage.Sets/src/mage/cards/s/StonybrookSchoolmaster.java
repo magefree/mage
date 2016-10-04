@@ -25,15 +25,15 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.morningtide;
+package mage.cards.s;
 
 import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.common.BecomesTappedSourceTriggeredAbility;
 import mage.abilities.effects.common.CreateTokenEffect;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.game.permanent.token.MerfolkWizardToken;
 
 /**
@@ -42,9 +42,8 @@ import mage.game.permanent.token.MerfolkWizardToken;
  */
 public class StonybrookSchoolmaster extends CardImpl {
 
-    public StonybrookSchoolmaster(UUID ownerId) {
-        super(ownerId, 25, "Stonybrook Schoolmaster", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{2}{W}");
-        this.expansionSetCode = "MOR";
+    public StonybrookSchoolmaster(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{2}{W}");
         this.subtype.add("Merfolk");
         this.subtype.add("Wizard");
         this.power = new MageInt(1);

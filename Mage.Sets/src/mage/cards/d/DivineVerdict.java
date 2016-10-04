@@ -25,13 +25,13 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.magic2010;
+package mage.cards.d;
 
 import java.util.UUID;
 import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.abilities.effects.common.DestroyTargetEffect;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.filter.common.FilterAttackingOrBlockingCreature;
 import mage.target.common.TargetCreaturePermanent;
 
@@ -41,9 +41,8 @@ import mage.target.common.TargetCreaturePermanent;
  */
 public class DivineVerdict extends CardImpl {
 
-    public DivineVerdict(UUID ownerId) {
-        super(ownerId, 8, "Divine Verdict", Rarity.COMMON, new CardType[]{CardType.INSTANT}, "{3}{W}");
-        this.expansionSetCode = "M10";
+    public DivineVerdict(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.INSTANT},"{3}{W}");
 
 
         this.getSpellAbility().addTarget(new TargetCreaturePermanent(new FilterAttackingOrBlockingCreature()));

@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.commander;
+package mage.cards.g;
 
 import java.util.UUID;
 import mage.MageInt;
@@ -39,8 +39,8 @@ import mage.abilities.effects.common.CreateTokenEffect;
 import mage.abilities.effects.common.counter.AddCountersSourceEffect;
 import mage.abilities.effects.common.counter.AddCountersTargetEffect;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.constants.Zone;
 import mage.counters.CounterType;
 import mage.filter.common.FilterControlledCreaturePermanent;
@@ -63,9 +63,8 @@ public class GhaveGuruOfSpores extends CardImpl {
         filter.add(new CardTypePredicate(CardType.CREATURE));
     }
 
-    public GhaveGuruOfSpores(UUID ownerId) {
-        super(ownerId, 200, "Ghave, Guru of Spores", Rarity.MYTHIC, new CardType[]{CardType.CREATURE}, "{2}{B}{G}{W}");
-        this.expansionSetCode = "CMD";
+    public GhaveGuruOfSpores(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{2}{B}{G}{W}");
         this.supertype.add("Legendary");
         this.subtype.add("Fungus");
         this.subtype.add("Shaman");

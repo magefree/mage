@@ -25,13 +25,13 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.innistrad;
+package mage.cards.m;
 
 import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.MageInt;
 import mage.abilities.effects.common.continuous.BoostTargetEffect;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.target.common.TargetCreaturePermanent;
 
 import java.util.UUID;
@@ -48,9 +48,8 @@ public class MorkrutBanshee extends CardImpl {
 
     private static final String staticText = "Morbid - When {this} enters the battlefield, if a creature died this turn, target creature gets -4/-4 until end of turn.";
 
-    public MorkrutBanshee(UUID ownerId) {
-        super(ownerId, 110, "Morkrut Banshee", Rarity.UNCOMMON, new CardType[]{CardType.CREATURE}, "{3}{B}{B}");
-        this.expansionSetCode = "ISD";
+    public MorkrutBanshee(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{3}{B}{B}");
         this.subtype.add("Spirit");
 
         this.color.setBlack(true);

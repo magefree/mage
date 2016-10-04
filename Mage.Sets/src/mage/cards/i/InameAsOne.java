@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.saviorsofkamigawa;
+package mage.cards.i;
 
 import java.util.UUID;
 import mage.MageInt;
@@ -42,9 +42,9 @@ import mage.abilities.effects.common.ReturnFromGraveyardToBattlefieldTargetEffec
 import mage.abilities.effects.common.search.SearchLibraryPutInPlayEffect;
 import mage.cards.Card;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Outcome;
-import mage.constants.Rarity;
 import mage.filter.common.FilterPermanentCard;
 import mage.filter.predicate.mageobject.SubtypePredicate;
 import mage.game.Game;
@@ -66,9 +66,8 @@ public class InameAsOne extends CardImpl {
         filter.add(new SubtypePredicate("Spirit"));
     }
 
-    public InameAsOne(UUID ownerId) {
-        super(ownerId, 151, "Iname as One", Rarity.RARE, new CardType[]{CardType.CREATURE}, "{8}{B}{B}{G}{G}");
-        this.expansionSetCode = "SOK";
+    public InameAsOne(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{8}{B}{B}{G}{G}");
         this.supertype.add("Legendary");
         this.subtype.add("Spirit");
         this.power = new MageInt(8);
