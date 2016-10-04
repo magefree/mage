@@ -65,7 +65,7 @@ public class ChatSession {
         if (user != null && !clients.containsKey(userId)) {
             String userName = user.getName();
             clients.put(userId, userName);
-            broadcast(null, userName + " has joined", MessageColor.BLUE, true, MessageType.STATUS);
+            broadcast(null, userName + " has joined", MessageColor.BLUE, true, MessageType.STATUS, null);
             logger.trace(userName + " joined chat " + chatId);
         }
     }
@@ -107,7 +107,7 @@ public class ChatSession {
                         message = " left (" + reason.toString() + ")";
                 }
                 if (message != null) {
-                    broadcast(null, userName + message, MessageColor.BLUE, true, MessageType.STATUS);
+                    broadcast(null, userName + message, MessageColor.BLUE, true, MessageType.STATUS, null);
                 }
             }
         } catch (Exception ex) {
@@ -134,18 +134,6 @@ public class ChatSession {
             }
         }
         return false;
-    }
-
-    public void broadcast(String userName, String message, MessageColor color) {
-        this.broadcast(userName, message, color, true);
-    }
-
-    public void broadcast(String userName, String message, MessageColor color, boolean withTime) {
-        this.broadcast(userName, message, color, withTime, MessageType.TALK);
-    }
-
-    public void broadcast(String userName, String message, MessageColor color, boolean withTime, MessageType messageType) {
-        this.broadcast(userName, message, color, withTime, messageType, null);
     }
 
     public void broadcast(String userName, String message, MessageColor color, boolean withTime, MessageType messageType, SoundToPlay soundToPlay) {

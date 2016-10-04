@@ -37,7 +37,6 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import javax.management.MBeanServer;
-
 import mage.cards.ExpansionSet;
 import mage.cards.Sets;
 import mage.cards.repository.CardScanner;
@@ -118,25 +117,42 @@ public class Main {
             }
         }
 
+        if (ConfigSettings.getInstance().isAuthenticationActivated()) {
+            logger.info("Check authorized user DB version ...");
+            if (!AuthorizedUserRepository.instance.checkAlterAndMigrateAuthorizedUser()) {
+                logger.fatal("Failed to start server.");
+                return;
+            }
+            logger.info("Done.");
+        }
+
         logger.info("Loading extension packages...");
         List<ExtensionPackage> extensions = new ArrayList<>();
-        if(!extensionFolder.exists()) if(!extensionFolder.mkdirs())
-            logger.error("Could not create extensions directory.");
-        File[] extensionDirectories = extensionFolder.listFiles();
-        if(extensionDirectories != null) for(File f : extensionDirectories) if(f.isDirectory())
-            try {
-                logger.info(" - Loading extension from "+f);
-                extensions.add(ExtensionPackageLoader.loadExtension(f));
-            } catch (IOException e) {
-                logger.error("Could not load extension in "+f+"!", e);
+        if (!extensionFolder.exists()) {
+            if (!extensionFolder.mkdirs()) {
+                logger.error("Could not create extensions directory.");
             }
+        }
+        File[] extensionDirectories = extensionFolder.listFiles();
+        if (extensionDirectories != null) {
+            for (File f : extensionDirectories) {
+                if (f.isDirectory()) {
+                    try {
+                        logger.info(" - Loading extension from " + f);
+                        extensions.add(ExtensionPackageLoader.loadExtension(f));
+                    } catch (IOException e) {
+                        logger.error("Could not load extension in " + f + "!", e);
+                    }
+                }
+            }
+        }
         logger.info("Done.");
 
-        if(!extensions.isEmpty()) {
+        if (!extensions.isEmpty()) {
             logger.info("Registering custom sets...");
-            for(ExtensionPackage pkg : extensions) {
-                for(ExpansionSet set : pkg.getSets()) {
-                    logger.info("- Loading "+set.getName()+" ("+set.getCode()+")");
+            for (ExtensionPackage pkg : extensions) {
+                for (ExpansionSet set : pkg.getSets()) {
+                    logger.info("- Loading " + set.getName() + " (" + set.getCode() + ")");
                     Sets.getInstance().addSet(set);
                 }
                 PluginClassloaderRegistery.registerPluginClassloader(pkg.getClassLoader());
@@ -155,7 +171,6 @@ public class Main {
         logger.info("Updating user stats DB...");
         UserStatsRepository.instance.updateUserStats();
         logger.info("Done.");
-
         deleteSavedGames();
         ConfigSettings config = ConfigSettings.getInstance();
         for (GamePlugin plugin : config.getGameTypes()) {
@@ -177,12 +192,12 @@ public class Main {
         for (ExtensionPackage pkg : extensions) {
             Map<String, Class> draftCubes = pkg.getDraftCubes();
             for (String name : draftCubes.keySet()) {
-                logger.info("Loading extension: ["+name+"] "+draftCubes.get(name).toString());
+                logger.info("Loading extension: [" + name + "] " + draftCubes.get(name).toString());
                 CubeFactory.getInstance().addDraftCube(name, draftCubes.get(name));
             }
             Map<String, Class> deckTypes = pkg.getDeckTypes();
             for (String name : deckTypes.keySet()) {
-                logger.info("Loading extension: ["+name+"] "+deckTypes.get(name));
+                logger.info("Loading extension: [" + name + "] " + deckTypes.get(name));
                 DeckValidatorFactory.getInstance().addDeckType(name, deckTypes.get(name));
             }
         }
@@ -408,11 +423,11 @@ public class Main {
         }
         File[] files = directory.listFiles(
                 new FilenameFilter() {
-                    @Override
-                    public boolean accept(File dir, String name) {
-                        return name.endsWith(".game");
-                    }
-                }
+            @Override
+            public boolean accept(File dir, String name) {
+                return name.endsWith(".game");
+            }
+        }
         );
         for (File file : files) {
             file.delete();

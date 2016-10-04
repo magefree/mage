@@ -1440,6 +1440,36 @@ public class SessionImpl implements Session {
         return false;
     }
 
+    @Override
+    public boolean toggleActivation(String userName) {
+        try {
+            if (isConnected()) {
+                server.toggleActivation(sessionId, userName);
+                return true;
+            }
+        } catch (MageException ex) {
+            handleMageException(ex);
+        } catch (Throwable t) {
+            handleThrowable(t);
+        }
+        return false;
+    }
+
+    @Override
+    public boolean lockUser(String userName, long durationMinute) {
+        try {
+            if (isConnected()) {
+                server.lockUser(sessionId, userName, durationMinute);
+                return true;
+            }
+        } catch (MageException ex) {
+            handleMageException(ex);
+        } catch (Throwable t) {
+            handleThrowable(t);
+        }
+        return false;
+    }
+
     private void handleThrowable(Throwable t) {
         logger.fatal("Communication error", t);
         // Probably this can cause hanging the client under certain circumstances as the disconnect method is synchronized

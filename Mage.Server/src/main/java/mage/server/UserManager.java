@@ -76,11 +76,11 @@ public class UserManager {
         }, 60, 60, TimeUnit.SECONDS);
     }
 
-    public User createUser(String userName, String host) {
+    public User createUser(String userName, String host, AuthorizedUser authorizedUser) {
         if (getUserByName(userName) != null) {
             return null; //user already exists
         }
-        User user = new User(userName, host);
+        User user = new User(userName, host, authorizedUser);
         users.put(user.getId(), user);
         usersByName.put(userName, user);
         return user;

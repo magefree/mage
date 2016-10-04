@@ -70,6 +70,7 @@ public class ConsolePanel extends javax.swing.JPanel {
         this.tableUserModel = new TableUserModel();
         this.tableTableModel = new TableTableModel();
         initComponents();
+        spinnerMuteDurationMinutes.setValue(60);
         this.tblUsers.createDefaultColumnsFromModel();
         this.tblUsers.setRowSorter(new TableRowSorter(tableUserModel));
         this.tblUsers.setAutoResizeMode(AUTO_RESIZE_OFF);
@@ -127,7 +128,10 @@ public class ConsolePanel extends javax.swing.JPanel {
         btnDisconnect = new javax.swing.JButton();
         btnEndSession = new javax.swing.JButton();
         btnMuteUser = new javax.swing.JButton();
-        sliderMuteDurationMinutes = new javax.swing.JSlider();
+        btnDeActivate = new javax.swing.JButton();
+        btnLockUser = new javax.swing.JButton();
+        lblMinutes = new javax.swing.JLabel();
+        spinnerMuteDurationMinutes = new javax.swing.JSpinner();
         jPanel2 = new javax.swing.JPanel();
         jPanel5 = new javax.swing.JPanel();
         jScrollPane2 = new javax.swing.JScrollPane();
@@ -149,7 +153,7 @@ public class ConsolePanel extends javax.swing.JPanel {
         );
         jPanel3Layout.setVerticalGroup(
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 347, Short.MAX_VALUE)
+            .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 339, Short.MAX_VALUE)
         );
 
         jPanel4.setVerifyInputWhenFocusTarget(false);
@@ -176,8 +180,23 @@ public class ConsolePanel extends javax.swing.JPanel {
             }
         });
 
-        sliderMuteDurationMinutes.setMaximum(3600);
-        sliderMuteDurationMinutes.setValue(60);
+        btnDeActivate.setText("(de)activate");
+        btnDeActivate.setActionCommand("Mute 1h");
+        btnDeActivate.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnDeActivateActionPerformed(evt);
+            }
+        });
+
+        btnLockUser.setText("Lock user");
+        btnLockUser.setActionCommand("Mute 1h");
+        btnLockUser.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnLockUserActionPerformed(evt);
+            }
+        });
+
+        lblMinutes.setText("Minutes");
 
         javax.swing.GroupLayout jPanel4Layout = new javax.swing.GroupLayout(jPanel4);
         jPanel4.setLayout(jPanel4Layout);
@@ -187,22 +206,40 @@ public class ConsolePanel extends javax.swing.JPanel {
                 .addContainerGap()
                 .addComponent(btnDisconnect)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(btnEndSession)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(sliderMuteDurationMinutes, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
-                    .addComponent(btnMuteUser, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addContainerGap(50, Short.MAX_VALUE))
+                    .addGroup(jPanel4Layout.createSequentialGroup()
+                        .addComponent(btnEndSession)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(btnMuteUser))
+                    .addGroup(jPanel4Layout.createSequentialGroup()
+                        .addComponent(btnDeActivate)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(btnLockUser, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(lblMinutes)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(spinnerMuteDurationMinutes, javax.swing.GroupLayout.PREFERRED_SIZE, 64, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jPanel4Layout.setVerticalGroup(
             jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel4Layout.createSequentialGroup()
-                .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(btnDisconnect)
-                    .addComponent(btnEndSession)
-                    .addComponent(btnMuteUser))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 9, Short.MAX_VALUE)
-                .addComponent(sliderMuteDurationMinutes, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel4Layout.createSequentialGroup()
+                        .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(btnDisconnect)
+                            .addComponent(btnEndSession)
+                            .addComponent(btnMuteUser))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(btnDeActivate)
+                            .addComponent(btnLockUser)))
+                    .addGroup(jPanel4Layout.createSequentialGroup()
+                        .addGap(16, 16, 16)
+                        .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(lblMinutes)
+                            .addComponent(spinnerMuteDurationMinutes, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                .addContainerGap())
         );
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
@@ -216,8 +253,9 @@ public class ConsolePanel extends javax.swing.JPanel {
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
                 .addComponent(jPanel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jPanel4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(0, 0, 0)
+                .addComponent(jPanel4, javax.swing.GroupLayout.PREFERRED_SIZE, 57, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 0, 0))
         );
 
         jSplitPane1.setLeftComponent(jPanel1);
@@ -229,13 +267,11 @@ public class ConsolePanel extends javax.swing.JPanel {
         jPanel5.setLayout(jPanel5Layout);
         jPanel5Layout.setHorizontalGroup(
             jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 351, Short.MAX_VALUE)
+            .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 453, Short.MAX_VALUE)
         );
         jPanel5Layout.setVerticalGroup(
             jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel5Layout.createSequentialGroup()
-                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 343, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 0, Short.MAX_VALUE))
+            .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 340, Short.MAX_VALUE)
         );
 
         btnRemoveTable.setLabel("Remove Table");
@@ -272,7 +308,7 @@ public class ConsolePanel extends javax.swing.JPanel {
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
                 .addComponent(jPanel5, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGap(0, 0, 0)
                 .addComponent(jPanel6, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
 
@@ -307,12 +343,24 @@ public class ConsolePanel extends javax.swing.JPanel {
 
     private void btnMuteUserActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnMuteUserActionPerformed
         int row = this.tblUsers.convertRowIndexToModel(tblUsers.getSelectedRow());
-        ConsoleFrame.getSession().muteUserChat((String) tableUserModel.getValueAt(row, TableUserModel.POS_USER_NAME), sliderMuteDurationMinutes.getValue());
+        ConsoleFrame.getSession().muteUserChat((String) tableUserModel.getValueAt(row, TableUserModel.POS_USER_NAME), ((Number) spinnerMuteDurationMinutes.getValue()).longValue());
     }//GEN-LAST:event_btnMuteUserActionPerformed
 
+    private void btnDeActivateActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDeActivateActionPerformed
+        int row = this.tblUsers.convertRowIndexToModel(tblUsers.getSelectedRow());
+        ConsoleFrame.getSession().toggleActivation((String) tableUserModel.getValueAt(row, TableUserModel.POS_USER_NAME));
+    }//GEN-LAST:event_btnDeActivateActionPerformed
+
+    private void btnLockUserActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLockUserActionPerformed
+        int row = this.tblUsers.convertRowIndexToModel(tblUsers.getSelectedRow());
+        ConsoleFrame.getSession().lockUser((String) tableUserModel.getValueAt(row, TableUserModel.POS_USER_NAME), ((Number) spinnerMuteDurationMinutes.getValue()).longValue());
+    }//GEN-LAST:event_btnLockUserActionPerformed
+
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton btnDeActivate;
     private javax.swing.JButton btnDisconnect;
     private javax.swing.JButton btnEndSession;
+    private javax.swing.JButton btnLockUser;
     private javax.swing.JButton btnMuteUser;
     private javax.swing.JButton btnRemoveTable;
     private javax.swing.JPanel jPanel1;
@@ -324,7 +372,8 @@ public class ConsolePanel extends javax.swing.JPanel {
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JSplitPane jSplitPane1;
-    private javax.swing.JSlider sliderMuteDurationMinutes;
+    private javax.swing.JLabel lblMinutes;
+    private javax.swing.JSpinner spinnerMuteDurationMinutes;
     private javax.swing.JTable tblTables;
     private javax.swing.JTable tblUsers;
     // End of variables declaration//GEN-END:variables
@@ -338,10 +387,12 @@ class TableUserModel extends AbstractTableModel {
     public static final int POS_SESSION_ID = 3;
     public static final int POS_GAME_INFO = 4;
     public static final int POS_USER_STATE = 5;
+    public static final int POS_CHAT_MUTE = 6;
 
-    private final String[] columnNames = new String[]{"User Name", "Host", "Time Connected", "SessionId", "Gameinfo", "User State"};
+    private final String[] columnNames = new String[]{"User Name", "Host", "Time Connected", "SessionId", "Gameinfo", "User state", "Chat mute"};
     private UserView[] users = new UserView[0];
-    private static final DateFormat formatter = new SimpleDateFormat("HH:mm:ss");
+    private static final DateFormat formatterTime = new SimpleDateFormat("HH:mm:ss");
+    private static final DateFormat formatterTimeStamp = new SimpleDateFormat("yy-M-dd HH:mm:ss");
 
     public void loadData(List<UserView> users) {
         this.users = users.toArray(new UserView[0]);
@@ -366,13 +417,18 @@ class TableUserModel extends AbstractTableModel {
             case POS_HOST:
                 return users[arg0].getHost();
             case POS_TIME_CONNECTED:
-                return formatter.format(users[arg0].getConnectionTime());
+                return formatterTime.format(users[arg0].getConnectionTime());
             case POS_SESSION_ID:
                 return users[arg0].getSessionId();
             case POS_GAME_INFO:
                 return users[arg0].getGameInfo();
             case POS_USER_STATE:
                 return users[arg0].getUserState();
+            case POS_CHAT_MUTE:
+                if (users[arg0].getMuteChatUntil() == null) {
+                    return "";
+                }
+                return formatterTimeStamp.format(users[arg0].getMuteChatUntil());
         }
         return "";
     }

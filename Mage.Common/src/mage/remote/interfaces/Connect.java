@@ -58,5 +58,9 @@ public interface Connect {
 
     boolean muteUserChat(String userName, long durationMinute);
 
+    boolean toggleActivation(String userName);
+
+    boolean lockUser(String userName, long durationMinute);
+
     String getSessionId();
 }

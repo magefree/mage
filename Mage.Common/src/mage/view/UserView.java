@@ -43,14 +43,16 @@ public class UserView implements Serializable {
     private final Date timeConnected;
     private final String gameInfo;
     private final String userState;
+    private final Date muteChatUntil;
 
-    public UserView(String userName, String host, String sessionId, Date timeConnected, String gameInfo, String userState) {
+    public UserView(String userName, String host, String sessionId, Date timeConnected, String gameInfo, String userState, Date muteChatUntil) {
         this.userName = userName;
         this.host = host;
         this.sessionId = sessionId;
         this.timeConnected = timeConnected;
         this.gameInfo = gameInfo;
         this.userState = userState;
+        this.muteChatUntil = muteChatUntil;
     }
 
     public String getUserName() {
@@ -75,6 +77,10 @@ public class UserView implements Serializable {
 
     public String getUserState() {
         return userState;
+    }
+
+    public Date getMuteChatUntil() {
+        return muteChatUntil;
     }
 
 }

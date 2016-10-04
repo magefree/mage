@@ -180,14 +180,15 @@ public class Session {
 
     public String connectUserHandling(String userName, String password) throws MageException {
         this.isAdmin = false;
+        AuthorizedUser authorizedUser = null;
         if (ConfigSettings.getInstance().isAuthenticationActivated()) {
-            AuthorizedUser authorizedUser = AuthorizedUserRepository.instance.getByName(userName);
+            authorizedUser = AuthorizedUserRepository.instance.getByName(userName);
             if (authorizedUser == null || !authorizedUser.doCredentialsMatch(userName, password)) {
                 return "Wrong username or password. In case you haven't, please register your account first.";
             }
         }
 
-        User user = UserManager.getInstance().createUser(userName, host);
+        User user = UserManager.getInstance().createUser(userName, host, authorizedUser);
         boolean reconnect = false;
         if (user == null) {  // user already exists
             user = UserManager.getInstance().getUserByName(userName);
@@ -223,7 +224,7 @@ public class Session {
 
     public void connectAdmin() {
         this.isAdmin = true;
-        User user = UserManager.getInstance().createUser("Admin", host);
+        User user = UserManager.getInstance().createUser("Admin", host, null);
         if (user == null) {
             user = UserManager.getInstance().getUserByName("Admin");
         }

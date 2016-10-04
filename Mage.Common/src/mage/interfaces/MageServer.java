@@ -215,6 +215,10 @@ public interface MageServer {
 
     void muteUser(String sessionId, String userName, long durationMinutes) throws MageException;
 
+    void lockUser(String sessionId, String userName, long durationMinutes) throws MageException;
+
+    void toggleActivation(String sessionId, String userName) throws MageException;
+
     void removeTable(String sessionId, UUID tableId) throws MageException;
 
     void sendBroadcastMessage(String sessionId, String message) throws MageException;
