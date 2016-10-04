@@ -64,6 +64,9 @@ public class DeckArea extends javax.swing.JPanel {
     private Set<UUID> hiddenCards = new HashSet<>();
     private Deck lastDeck = new Deck();
     private BigCard lastBigCard = null;
+    private int dividerLocationNormal = 0;
+    private int dividerLocationLimited = 0;
+    private boolean isLimitedBuildingOrientation = false;
 
     public DeckCardLayout getCardLayout() {
         return deckList.getCardLayout();
@@ -76,9 +79,10 @@ public class DeckArea extends javax.swing.JPanel {
     public static class Settings {
         public DragCardGrid.Settings maindeckSettings;
         public DragCardGrid.Settings sideboardSetings;
-        public int dividerLocation;
+        public int dividerLocationLimited;
+        public int dividerLocationNormal;
 
-        private static Pattern parser = Pattern.compile("([^|]*)\\|([^|]*)\\|([^|]*)");
+        private static Pattern parser = Pattern.compile("([^|]*)\\|([^|]*)\\|([^|]*)\\|([^|]*)");
 
         public static Settings parse(String s) {
             Matcher m = parser.matcher(s);
@@ -86,7 +90,8 @@ public class DeckArea extends javax.swing.JPanel {
                 Settings settings = new Settings();
                 settings.maindeckSettings = DragCardGrid.Settings.parse(m.group(1));
                 settings.sideboardSetings = DragCardGrid.Settings.parse(m.group(2));
-                settings.dividerLocation = Integer.parseInt(m.group(3));
+                settings.dividerLocationNormal = Integer.parseInt(m.group(3));
+                settings.dividerLocationLimited = Integer.parseInt(m.group(4));
                 return settings;
             } else {
                 return null;
@@ -95,7 +100,7 @@ public class DeckArea extends javax.swing.JPanel {
 
         @Override
         public String toString() {
-            return maindeckSettings.toString() + "|" + sideboardSetings.toString() + "|" + dividerLocation;
+            return maindeckSettings.toString() + "|" + sideboardSetings.toString() + "|" + dividerLocationNormal + "|" + dividerLocationLimited;
         }
     }
 
@@ -161,7 +166,13 @@ public class DeckArea extends javax.swing.JPanel {
         Settings settings = new Settings();
         settings.maindeckSettings = deckList.saveSettings();
         settings.sideboardSetings = sideboardList.saveSettings();
-        settings.dividerLocation = deckAreaSplitPane.getDividerLocation();
+        if (isLimitedBuildingOrientation) {
+            dividerLocationLimited = deckAreaSplitPane.getDividerLocation();
+        } else {
+            dividerLocationNormal = deckAreaSplitPane.getDividerLocation();
+        }
+        settings.dividerLocationLimited = dividerLocationLimited;
+        settings.dividerLocationNormal = dividerLocationNormal;
         return settings;
     }
 
@@ -169,7 +180,17 @@ public class DeckArea extends javax.swing.JPanel {
         if (s != null) {
             deckList.loadSettings(s.maindeckSettings);
             sideboardList.loadSettings(s.sideboardSetings);
-            deckAreaSplitPane.setDividerLocation(s.dividerLocation);
+            dividerLocationLimited = s.dividerLocationLimited;
+            dividerLocationNormal = s.dividerLocationNormal;
+            if (isLimitedBuildingOrientation) {
+                if (dividerLocationLimited != 0) {
+                    deckAreaSplitPane.setDividerLocation(s.dividerLocationLimited);
+                }
+            } else {
+                if (dividerLocationNormal != 0) {
+                    deckAreaSplitPane.setDividerLocation(s.dividerLocationNormal);
+                }
+            }
         }
     }
 
@@ -191,8 +212,14 @@ public class DeckArea extends javax.swing.JPanel {
     public void setOrientation(boolean limitedBuildingOrientation) {
         if (limitedBuildingOrientation) {
             deckAreaSplitPane.setOrientation(JSplitPane.VERTICAL_SPLIT);
+            if (dividerLocationLimited != 0) {
+                deckAreaSplitPane.setDividerLocation(dividerLocationLimited);
+            }
         } else {
             deckAreaSplitPane.setOrientation(JSplitPane.HORIZONTAL_SPLIT);
+            if (dividerLocationNormal != 0) {
+                deckAreaSplitPane.setDividerLocation(dividerLocationNormal);
+            }
         }
     }
 
