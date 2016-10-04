@@ -156,8 +156,10 @@ public class ManaSymbols {
                     //Image image = UI.getImageIcon(file.getAbsolutePath()).getImage();
                     BufferedImage image = ImageIO.read(file);
                     //BufferedImage resized = ImageHelper.getResizedImage(BufferedImageBuilder.bufferImage(image, BufferedImage.TYPE_INT_ARGB), r);
-                    BufferedImage resized = ImageHelper.getResizedImage(image, r);
-                    sizedSymbols.put(symbol, resized);
+                    if (image != null) {
+                        BufferedImage resized = ImageHelper.getResizedImage(image, r);
+                        sizedSymbols.put(symbol, resized);
+                    }
                 }
             } catch (IOException e) {
                 LOGGER.error("Error for symbol:" + symbol);
