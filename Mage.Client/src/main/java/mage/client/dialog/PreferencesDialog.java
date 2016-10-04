@@ -185,6 +185,10 @@ public class PreferencesDialog extends javax.swing.JDialog {
     public static final String KEY_TABLES_DIVIDER_LOCATION_2 = "tablePanelDividerLocation2";
     public static final String KEY_TABLES_DIVIDER_LOCATION_3 = "tablePanelDividerLocation3";
 
+    // Positions of deck editor divider bars
+    public static final String KEY_EDITOR_HORIZONTAL_DIVIDER_LOCATION = "editorHorizontalDividerLocation";
+    public static final String KEY_EDITOR_DECKAREA_SETTINGS = "editorDeckAreaSettings";
+
     // user list
     public static final String KEY_USERS_COLUMNS_WIDTH = "userPanelColumnWidth";
     public static final String KEY_USERS_COLUMNS_ORDER = "userPanelColumnSort";

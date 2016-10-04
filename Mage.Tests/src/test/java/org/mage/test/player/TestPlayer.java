@@ -282,19 +282,14 @@ public class TestPlayer implements Player {
             Mode selectedMode = null;
             if (targetName.startsWith("mode=")) {
                 int modeNr = Integer.parseInt(targetName.substring(5, 6));
-                if (modeNr == 0 || modeNr > ability.getModes().size()) {
+                if (modeNr == 0 || modeNr > (ability.getModes().isEachModeMoreThanOnce() ? ability.getModes().getSelectedModes().size() : ability.getModes().size())) {
                     throw new UnsupportedOperationException("Given mode number (" + modeNr + ") not available for " + ability.toString());
                 }
                 UUID modeId = ability.getModes().getModeId(modeNr);
-
-                for (UUID currentModeId : ability.getModes().getSelectedModes()) {
-                    Mode mode = ability.getModes().get(currentModeId);
-                    if (mode.getId().equals(modeId)) {
-                        selectedMode = mode;
-                        ability.getModes().setActiveMode(mode);
-                        index = 0; // reset target index if mode changes
-                        break;
-                    }
+                selectedMode = ability.getModes().get(modeId);
+                if (modeId != ability.getModes().getMode().getId()) {
+                    ability.getModes().setActiveMode(modeId);
+                    index = 0; // reset target index if mode changes
                 }
                 targetName = targetName.substring(6);
             } else {

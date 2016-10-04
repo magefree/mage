@@ -211,9 +211,8 @@ public class Spell extends StackObjImpl implements Card {
                 for (SpellAbility spellAbility : this.spellAbilities) {
                     if (spellAbilityHasLegalParts(spellAbility, game)) {
                         for (UUID modeId : spellAbility.getModes().getSelectedModes()) {
-                            Mode mode = spellAbility.getModes().get(modeId);
-                            spellAbility.getModes().setActiveMode(mode);
-                            if (mode.getTargets().stillLegal(spellAbility, game)) {
+                            spellAbility.getModes().setActiveMode(modeId);
+                            if (spellAbility.getTargets().stillLegal(spellAbility, game)) {
                                 if (!spellAbility.getSpellAbilityType().equals(SpellAbilityType.SPLICE)) {
                                     updateOptionalCosts(index);
                                 }

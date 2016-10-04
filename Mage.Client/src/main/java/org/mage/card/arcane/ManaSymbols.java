@@ -153,11 +153,13 @@ public class ManaSymbols {
                     sizedSymbols.put(symbol, notResized);
                 } else {
                     Rectangle r = new Rectangle(size, size);
-                    Image image = UI.getImageIcon(file.getAbsolutePath()).getImage();
-                    BufferedImage resized = ImageHelper.getResizedImage(BufferedImageBuilder.bufferImage(image, BufferedImage.TYPE_INT_ARGB), r);
+                    //Image image = UI.getImageIcon(file.getAbsolutePath()).getImage();
+                    BufferedImage image = ImageIO.read(file);
+                    //BufferedImage resized = ImageHelper.getResizedImage(BufferedImageBuilder.bufferImage(image, BufferedImage.TYPE_INT_ARGB), r);
+                    BufferedImage resized = ImageHelper.getResizedImage(image, r);
                     sizedSymbols.put(symbol, resized);
                 }
-            } catch (Exception e) {
+            } catch (IOException e) {
                 LOGGER.error("Error for symbol:" + symbol);
                 fileErrors = true;
             }

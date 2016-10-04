@@ -105,11 +105,13 @@ class AvatarOfMightCostReductionEffect extends CostModificationEffectImpl {
 
     @Override
     public boolean applies(Ability abilityToModify, Ability source, Game game) {
-        int creatures = game.getBattlefield().countAll(new FilterCreaturePermanent(), source.getControllerId(), game);
-        for (UUID playerId : game.getOpponents(source.getControllerId())) {
-            Player opponent = game.getPlayer(playerId);
-            if (opponent != null && game.getBattlefield().countAll(new FilterCreaturePermanent(), opponent.getId(), game) >= creatures + 4) {
-                return true;
+        if (abilityToModify.getSourceId().equals(source.getSourceId()) && (abilityToModify instanceof SpellAbility)) {
+            int creatures = game.getBattlefield().countAll(new FilterCreaturePermanent(), source.getControllerId(), game);
+            for (UUID playerId : game.getOpponents(source.getControllerId())) {
+                Player opponent = game.getPlayer(playerId);
+                if (opponent != null && game.getBattlefield().countAll(new FilterCreaturePermanent(), opponent.getId(), game) >= creatures + 4) {
+                    return true;
+                }
             }
         }
         return false;

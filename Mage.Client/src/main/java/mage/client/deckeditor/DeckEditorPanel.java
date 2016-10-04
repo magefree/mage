@@ -28,10 +28,7 @@
 package mage.client.deckeditor;
 
 import java.awt.*;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
-import java.awt.event.WindowAdapter;
-import java.awt.event.WindowEvent;
+import java.awt.event.*;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.IOException;
@@ -50,6 +47,7 @@ import javax.swing.filechooser.FileFilter;
 import mage.cards.Card;
 import mage.cards.Sets;
 import mage.cards.decks.Deck;
+import mage.cards.decks.DeckCardLists;
 import mage.cards.decks.importer.DeckImporter;
 import mage.cards.decks.importer.DeckImporterUtil;
 import mage.cards.repository.CardInfo;
@@ -62,6 +60,7 @@ import mage.client.constants.Constants.DeckEditorMode;
 import mage.client.deck.generator.DeckGenerator.DeckGeneratorException;
 import mage.client.deck.generator.DeckGenerator;
 import mage.client.dialog.AddLandDialog;
+import mage.client.dialog.PreferencesDialog;
 import mage.client.plugins.impl.Plugins;
 import mage.client.util.Event;
 import mage.client.util.Listener;
@@ -106,12 +105,7 @@ public class DeckEditorPanel extends javax.swing.JPanel {
         deckArea.setOpaque(false);
         jPanel1.setOpaque(false);
         jSplitPane1.setOpaque(false);
-        SwingUtilities.invokeLater(new Runnable() {
-            @Override
-            public void run() {
-                jSplitPane1.setDividerLocation(0.3);
-            }
-        });
+        restoreDividerLocationsAndDeckAreaSettings();
         countdown = new Timer(1000,
                 new ActionListener() {
             @Override
@@ -128,12 +122,22 @@ public class DeckEditorPanel extends javax.swing.JPanel {
                 }
             }
         });
+
+        // Set up tracking to save the deck editor settings when the deck editor is hidden.
+        addHierarchyListener((HierarchyEvent e) -> {
+            if ((e.getChangeFlags() & HierarchyEvent.SHOWING_CHANGED) != 0) {
+                if (!isShowing()) {
+                    saveDividerLocationsAndDeckAreaSettings();
+                }
+            }
+        });
     }
 
     /**
      * Free resources so GC can remove unused objects from memory
      */
     public void cleanUp() {
+        saveDividerLocationsAndDeckAreaSettings();
         if (updateDeckTask != null) {
             updateDeckTask.cancel(true);
         }
@@ -150,6 +154,24 @@ public class DeckEditorPanel extends javax.swing.JPanel {
 
         this.remove(bigCard);
         this.bigCard = null;
+    }
+
+    private void saveDividerLocationsAndDeckAreaSettings() {
+        PreferencesDialog.saveValue(PreferencesDialog.KEY_EDITOR_HORIZONTAL_DIVIDER_LOCATION, Integer.toString(jSplitPane1.getDividerLocation()));
+        PreferencesDialog.saveValue(PreferencesDialog.KEY_EDITOR_DECKAREA_SETTINGS, this.deckArea.saveSettings().toString());
+    }
+
+    private void restoreDividerLocationsAndDeckAreaSettings() {
+        // Load horizontal split position setting
+        String dividerLocation = PreferencesDialog.getCachedValue(PreferencesDialog.KEY_EDITOR_HORIZONTAL_DIVIDER_LOCATION, "");
+        if (!dividerLocation.isEmpty()) {
+            jSplitPane1.setDividerLocation(Integer.parseInt(dividerLocation));
+        }
+
+        // Load deck area settings
+        this.deckArea.loadSettings(
+                DeckArea.Settings.parse(
+                        PreferencesDialog.getCachedValue(PreferencesDialog.KEY_EDITOR_DECKAREA_SETTINGS, "")));
     }
 
     public void changeGUISize() {
@@ -556,10 +578,14 @@ public class DeckEditorPanel extends javax.swing.JPanel {
     }
 
     private void refreshDeck() {
+        refreshDeck(false);
+    }
+
+    private void refreshDeck(boolean useLayout) {
         try {
             setCursor(new Cursor(Cursor.WAIT_CURSOR));
             this.txtDeckName.setText(deck.getName());
-            deckArea.loadDeck(deck, bigCard);
+            deckArea.loadDeck(deck, useLayout, bigCard);
         } finally {
             setCursor(new Cursor(Cursor.DEFAULT_CURSOR));
         }
@@ -614,13 +640,6 @@ public class DeckEditorPanel extends javax.swing.JPanel {
         jSplitPane1.setResizeWeight(0.5);
         jSplitPane1.setTopComponent(cardSelector);
         jSplitPane1.setBottomComponent(deckArea);
-
-        SwingUtilities.invokeLater(new Runnable() {
-            @Override
-            public void run() {
-                jSplitPane1.setDividerLocation(0.6);
-            }
-        });
 
         bigCard.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
 
@@ -878,7 +897,7 @@ public class DeckEditorPanel extends javax.swing.JPanel {
             } finally {
                 setCursor(new Cursor(Cursor.DEFAULT_CURSOR));
             }
-            refreshDeck();
+            refreshDeck(true);
             try {
                 if (file != null) {
                     MageFrame.getPreferences().put("lastDeckFolder", file.getCanonicalPath());
@@ -919,7 +938,10 @@ public class DeckEditorPanel extends javax.swing.JPanel {
                     fileName += ".dck";
                 }
                 setCursor(new Cursor(Cursor.WAIT_CURSOR));
-                Sets.saveDeck(fileName, deck.getDeckCardLists());
+                DeckCardLists cardLists = deck.getDeckCardLists();
+                cardLists.setCardLayout(deckArea.getCardLayout());
+                cardLists.setSideboardLayout(deckArea.getSideboardLayout());
+                Sets.saveDeck(fileName, cardLists);
             } catch (FileNotFoundException ex) {
                 JOptionPane.showMessageDialog(MageFrame.getDesktop(), ex.getMessage() + "\nTry ensuring that the selected directory is writable.", "Error saving deck", JOptionPane.ERROR_MESSAGE);
             } finally {

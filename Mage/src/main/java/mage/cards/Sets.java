@@ -33,6 +33,7 @@ import java.io.PrintWriter;
 import java.util.*;
 
 import mage.cards.decks.DeckCardInfo;
+import mage.cards.decks.DeckCardLayout;
 import mage.cards.decks.DeckCardLists;
 import mage.cards.repository.CardCriteria;
 import mage.cards.repository.CardInfo;
@@ -166,15 +167,46 @@ public class Sets extends HashMap<String, ExpansionSet> {
                 }
             }
 
+            // Write out all of the cards
             for (Map.Entry<String, DeckCardInfo> entry: deckCards.entrySet()) {
                 out.printf("%d [%s:%s] %s%n", entry.getValue().getQuantity(), entry.getValue().getSetCode(), entry.getValue().getCardNum(), entry.getValue().getCardName());
             }
             for (Map.Entry<String, DeckCardInfo> entry: sideboard.entrySet()) {
                 out.printf("SB: %d [%s:%s] %s%n", entry.getValue().getQuantity(), entry.getValue().getSetCode(), entry.getValue().getCardNum(), entry.getValue().getCardName());
             }
+
+            // Write out the layout
+            out.print("LAYOUT MAIN:");
+            writeCardLayout(out, deck.getCardLayout());
+            out.print("\n");
+            out.print("LAYOUT SIDEBOARD:");
+            writeCardLayout(out, deck.getSideboardLayout());
+            out.print("\n");
         }
         finally {
             out.close();
+        }
+    }
+
+    private static void writeCardLayout(PrintWriter out, DeckCardLayout layout) {
+        List<List<List<DeckCardInfo>>> cardGrid = layout.getCards();
+        int height = cardGrid.size();
+        int width = (height > 0) ? cardGrid.get(0).size() : 0;
+        out.print("(" + height + "," + width + ")");
+        out.print(layout.getSettings());
+        out.print("|");
+        for (List<List<DeckCardInfo>> row : cardGrid) {
+            for (List<DeckCardInfo> stack : row) {
+                out.print("(");
+                for (int i = 0; i < stack.size(); ++i) {
+                    DeckCardInfo info = stack.get(i);
+                    out.printf("[%s:%s]", info.getSetCode(), info.getCardNum());
+                    if (i != stack.size() - 1) {
+                        out.print(",");
+                    }
+                }
+                out.print(")");
+            }
         }
     }
 

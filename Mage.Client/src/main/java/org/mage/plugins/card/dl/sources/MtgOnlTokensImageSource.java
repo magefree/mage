@@ -177,6 +177,7 @@ public class MtgOnlTokensImageSource implements CardImageSource {
         copyUrlToImage.put("Elemental_BR_5_5.jpg", "ELEMENTAL.BR.ELEMENTAL.CREATURE.1.1.full.jpg");
         copyUrlToImage.put("Elemental_GW_y_y.jpg", "ELEMENTAL.WG.ELEMENTAL.CREATURE.S.S.full.jpg");
         copyUrlToImage.put("Elemental_G_2_2.jpg", "ELEMENTAL.G.ELEMENTAL.CREATURE.2.2.full.jpg");
+        copyUrlToImage.put("Elemental_R_3_1.jpg", "ELEMENTAL.R.ELEMENTAL.CREATURE.3.1.full.jpg");
         copyUrlToImage.put("Elemental_G_4_4.jpg", "ELEMENTAL.G.ELEMENTAL.CREATURE.4.4.full.jpg");
         copyUrlToImage.put("Elemental_G_5_3.jpg", "ELEMENTAL.G.ELEMENTAL.CREATURE.5.3.full.jpg");
         copyUrlToImage.put("Elemental_G_7_7.jpg", "ELEMENTAL.G.ELEMENTAL.CREATURE.7.7.full.jpg");

@@ -73,6 +73,28 @@ public class GathererSymbols implements Iterable<DownloadJob> {
                 String symbol = sym.replaceAll("/", "");
                 File dst = new File(dir, symbol + ".gif");
 
+                /**
+                 * Handle a bug on Gatherer where a few symbols are missing at the large size.
+                 * Fall back to using the medium symbol for those cases.
+                 */
+                int modSizeIndex = sizeIndex;
+                if (sizeIndex == 2) {
+                    switch (sym) {
+                        case "WP":
+                        case "UP":
+                        case "BP":
+                        case "RP":
+                        case "GP":
+                        case "E":
+                        case "C":
+                            modSizeIndex = 1;
+                            break;
+
+                        default:
+                            // Nothing to do, symbol is available in the large size
+                    }
+                }
+
                 switch (symbol) {
                     case "T":
                         symbol = "tap";
@@ -85,7 +107,7 @@ public class GathererSymbols implements Iterable<DownloadJob> {
                         break;
                 }
 
-                String url = format(urlFmt, sizes[sizeIndex], symbol);
+                String url = format(urlFmt, sizes[modSizeIndex], symbol);
 
                 return new DownloadJob(sym, fromURL(url), toFile(dst));
             }

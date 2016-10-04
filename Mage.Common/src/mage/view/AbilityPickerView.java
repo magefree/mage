@@ -24,8 +24,7 @@
 * The views and conclusions contained in the software and documentation are those of the
 * authors and should not be interpreted as representing official policies, either expressed
 * or implied, of BetaSteward_at_googlemail.com.
-*/
-
+ */
 package mage.view;
 
 import java.io.Serializable;
@@ -40,12 +39,13 @@ import mage.abilities.Ability;
  * @author BetaSteward_at_googlemail.com
  */
 public class AbilityPickerView implements Serializable {
+
     private static final long serialVersionUID = 1L;
 
-    private Map<UUID, String> choices = new LinkedHashMap<UUID, String>();
+    private Map<UUID, String> choices = new LinkedHashMap<>();
 
     public AbilityPickerView(String objectName, List<? extends Ability> abilities) {
-        for (Ability ability: abilities) {
+        for (Ability ability : abilities) {
             if (objectName == null) {
                 choices.put(ability.getId(), ability.getRule(true));
             } else {
