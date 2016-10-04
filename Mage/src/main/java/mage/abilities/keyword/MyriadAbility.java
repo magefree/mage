@@ -27,9 +27,10 @@
  */
 package mage.abilities.keyword;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.UUID;
 import mage.abilities.Ability;
-import mage.abilities.DelayedTriggeredAbility;
 import mage.abilities.common.AttacksTriggeredAbility;
 import mage.abilities.common.delayed.AtTheEndOfCombatDelayedTriggeredAbility;
 import mage.abilities.effects.OneShotEffect;
@@ -42,12 +43,15 @@ import mage.game.permanent.Permanent;
 import mage.players.Player;
 import mage.target.targetpointer.FixedTarget;
 import mage.target.targetpointer.FixedTargets;
+import org.apache.log4j.Logger;
 
 public class MyriadAbility extends AttacksTriggeredAbility {
 
     public MyriadAbility() {
         super(new MyriadEffect(), false,
-                "Myriad <i>(Whenever this creature attacks, for each opponent other than the defending player, put a token that's a copy of this creature onto the battlefield tapped and attacking that player or a planeswalker he or she controls. Exile those tokens at the end of combat.)</i>",
+                "Myriad <i>(Whenever this creature attacks, for each opponent other than the defending player, "
+                + "put a token that's a copy of this creature onto the battlefield tapped and attacking "
+                + "that player or a planeswalker he or she controls. Exile those tokens at the end of combat.)</i>",
                 SetTargetPointer.PLAYER
         );
     }
@@ -67,7 +71,10 @@ class MyriadEffect extends OneShotEffect {
 
     public MyriadEffect() {
         super(Outcome.Benefit);
-        this.staticText = "for each opponent other than the defending player, you may put a token that's a copy of this creature onto the battlefield tapped and attacking that player or a planeswalker he or she controls. Exile the tokens at the end of combat";
+        this.staticText = "for each opponent other than the defending player, you may put a token "
+                + "that's a copy of this creature onto the battlefield tapped and attacking that "
+                + "player or a planeswalker he or she controls. "
+                + "Exile the tokens at the end of combat";
     }
 
     public MyriadEffect(final MyriadEffect effect) {
@@ -85,6 +92,11 @@ class MyriadEffect extends OneShotEffect {
         Permanent sourceObject = game.getPermanentOrLKIBattlefield(source.getSourceId());
         if (controller != null && sourceObject != null) {
             UUID defendingPlayerId = game.getCombat().getDefendingPlayerId(source.getSourceId(), game);
+            if (defendingPlayerId == null) {
+                Logger.getLogger(MyriadEffect.class).error("defending player == null source: " + sourceObject.getName() + " attacking: " + (sourceObject.isAttacking() ? "Y" : "N"));
+                return false;
+            }
+            List<Permanent> tokens = new ArrayList<>();
             for (UUID playerId : game.getState().getPlayersInRange(controller.getId(), game)) {
                 if (playerId != defendingPlayerId && controller.hasOpponent(playerId, game)) {
                     Player opponent = game.getPlayer(playerId);
@@ -93,13 +105,14 @@ class MyriadEffect extends OneShotEffect {
                         PutTokenOntoBattlefieldCopyTargetEffect effect = new PutTokenOntoBattlefieldCopyTargetEffect(controller.getId(), null, false, 1, true, true, playerId);
                         effect.setTargetPointer(new FixedTarget(sourceObject, game));
                         effect.apply(game, source);
-                        ExileTargetEffect exileEffect = new ExileTargetEffect();
-                        exileEffect.setTargetPointer(new FixedTargets(effect.getAddedPermanent(), game));
-                        DelayedTriggeredAbility delayedAbility = new AtTheEndOfCombatDelayedTriggeredAbility(exileEffect);
-                        game.addDelayedTriggeredAbility(delayedAbility, source);
+                        tokens.addAll(effect.getAddedPermanent());
                     }
                 }
-
+            }
+            if (!tokens.isEmpty()) {
+                ExileTargetEffect exileEffect = new ExileTargetEffect();
+                exileEffect.setTargetPointer(new FixedTargets(tokens, game));
+                game.addDelayedTriggeredAbility(new AtTheEndOfCombatDelayedTriggeredAbility(exileEffect), source);
             }
             return true;
         }

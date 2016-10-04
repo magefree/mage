@@ -1286,13 +1286,21 @@ public class Combat implements Serializable, Copyable<Combat> {
         return defenderId;
     }
 
+    /**
+     * Returns the playerId of the player that is attacked by given attacking
+     * creature
+     *
+     * @param attackingCreatureId
+     * @param game
+     * @return
+     */
     public UUID getDefendingPlayerId(UUID attackingCreatureId, Game game) {
         UUID defenderId = null;
         for (CombatGroup group : groups) {
             if (group.getAttackers().contains(attackingCreatureId)) {
                 defenderId = group.getDefenderId();
                 if (group.defenderIsPlaneswalker) {
-                    Permanent permanent = game.getPermanent(defenderId);
+                    Permanent permanent = game.getPermanentOrLKIBattlefield(defenderId);
                     if (permanent != null) {
                         defenderId = permanent.getControllerId();
                     } else {
