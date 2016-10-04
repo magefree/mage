@@ -34,6 +34,9 @@ package mage.client.deckeditor;
 
 import mage.cards.Card;
 import mage.cards.decks.Deck;
+import mage.cards.decks.DeckCardInfo;
+import mage.cards.decks.DeckCardLayout;
+import mage.cards.decks.DeckCardLists;
 import mage.client.cards.BigCard;
 import mage.client.cards.CardEventSource;
 import mage.client.cards.DragCardGrid;
@@ -43,9 +46,12 @@ import mage.client.util.GUISizeHelper;
 import mage.client.util.Listener;
 import mage.view.CardView;
 import mage.view.CardsView;
+import org.apache.log4j.Logger;
 
 import javax.swing.*;
 import java.util.*;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 /**
  *
@@ -58,6 +64,40 @@ public class DeckArea extends javax.swing.JPanel {
     private Set<UUID> hiddenCards = new HashSet<>();
     private Deck lastDeck = new Deck();
     private BigCard lastBigCard = null;
+
+    public DeckCardLayout getCardLayout() {
+        return deckList.getCardLayout();
+    }
+
+    public DeckCardLayout getSideboardLayout() {
+        return sideboardList.getCardLayout();
+    }
+
+    public static class Settings {
+        public DragCardGrid.Settings maindeckSettings;
+        public DragCardGrid.Settings sideboardSetings;
+        public int dividerLocation;
+
+        private static Pattern parser = Pattern.compile("([^|]*)\\|([^|]*)\\|([^|]*)");
+
+        public static Settings parse(String s) {
+            Matcher m = parser.matcher(s);
+            if (m.find()) {
+                Settings settings = new Settings();
+                settings.maindeckSettings = DragCardGrid.Settings.parse(m.group(1));
+                settings.sideboardSetings = DragCardGrid.Settings.parse(m.group(2));
+                settings.dividerLocation = Integer.parseInt(m.group(3));
+                return settings;
+            } else {
+                return null;
+            }
+        }
+
+        @Override
+        public String toString() {
+            return maindeckSettings.toString() + "|" + sideboardSetings.toString() + "|" + dividerLocation;
+        }
+    }
 
     /**
      * Creates new form DeckArea
@@ -117,6 +157,22 @@ public class DeckArea extends javax.swing.JPanel {
         });
     }
 
+    public Settings saveSettings() {
+        Settings settings = new Settings();
+        settings.maindeckSettings = deckList.saveSettings();
+        settings.sideboardSetings = sideboardList.saveSettings();
+        settings.dividerLocation = deckAreaSplitPane.getDividerLocation();
+        return settings;
+    }
+
+    public void loadSettings(Settings s) {
+        if (s != null) {
+            deckList.loadSettings(s.maindeckSettings);
+            sideboardList.loadSettings(s.sideboardSetings);
+            deckAreaSplitPane.setDividerLocation(s.dividerLocation);
+        }
+    }
+
     public void cleanUp() {
         deckList.cleanUp();
         sideboardList.cleanUp();
@@ -161,11 +217,21 @@ public class DeckArea extends javax.swing.JPanel {
     }
 
     public void loadDeck(Deck deck, BigCard bigCard) {
+        loadDeck(deck, false, bigCard);
+    }
+
+    public void loadDeck(Deck deck, boolean useLayout, BigCard bigCard) {
         lastDeck = deck;
         lastBigCard = bigCard;
-        deckList.setCards(new CardsView(filterHidden(lastDeck.getCards())), lastBigCard);
+        deckList.setCards(
+                new CardsView(filterHidden(lastDeck.getCards())),
+                useLayout ? deck.getCardsLayout() : null,
+                lastBigCard);
         if (sideboardList.isVisible()) {
-            sideboardList.setCards(new CardsView(filterHidden(lastDeck.getSideboard())), lastBigCard);
+            sideboardList.setCards(
+                    new CardsView(filterHidden(lastDeck.getSideboard())),
+                    useLayout ? deck.getSideboardLayout() : null,
+                    lastBigCard);
         }
     }
 

@@ -44,6 +44,8 @@ public class Deck implements Serializable {
     private String name;
     private final Set<Card> cards = new LinkedHashSet<>();
     private final Set<Card> sideboard = new LinkedHashSet<>();
+    private DeckCardLayout cardsLayout;
+    private DeckCardLayout sideboardLayout;
     private long deckHashCode = 0;
 
     public static Deck load(DeckCardLists deckCardLists) throws GameException {
@@ -57,6 +59,8 @@ public class Deck implements Serializable {
     public static Deck load(DeckCardLists deckCardLists, boolean ignoreErrors, boolean mockCards) throws GameException {
         Deck deck = new Deck();
         deck.setName(deckCardLists.getName());
+        deck.cardsLayout = deckCardLists.getCardLayout();
+        deck.sideboardLayout = deckCardLists.getSideboardLayout();
         List<String> deckCardNames = new ArrayList<>();
         for (DeckCardInfo deckCardInfo : deckCardLists.getCards()) {
             Card card = createCard(deckCardInfo, mockCards);
@@ -141,8 +145,16 @@ public class Deck implements Serializable {
         return cards;
     }
 
+    public DeckCardLayout getCardsLayout() {
+        return cardsLayout;
+    }
+
     public Set<Card> getSideboard() {
         return sideboard;
+    }
+
+    public DeckCardLayout getSideboardLayout() {
+        return sideboardLayout;
     }
 
     public long getDeckHashCode() {
