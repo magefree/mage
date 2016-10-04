@@ -1,36 +1,21 @@
 package mage.client.cards;
 
 import mage.cards.MageCard;
-import mage.cards.decks.Deck;
 import mage.cards.decks.DeckCardInfo;
 import mage.cards.decks.DeckCardLayout;
-import mage.cards.decks.importer.DeckImporterUtil;
-import mage.cards.repository.CardInfo;
-import mage.client.MageFrame;
-import mage.client.deckeditor.DeckArea;
 import mage.client.dialog.PreferencesDialog;
 import mage.client.plugins.impl.Plugins;
 import mage.client.util.*;
 import mage.client.util.Event;
 import mage.constants.CardType;
-import mage.game.GameException;
 import mage.view.CardView;
 import mage.view.CardsView;
 import org.apache.log4j.Logger;
 import org.mage.card.arcane.CardRenderer;
 
 import javax.swing.*;
-import javax.swing.border.Border;
-import javax.swing.event.ChangeEvent;
-import javax.swing.event.ChangeListener;
-import javax.swing.event.PopupMenuEvent;
-import javax.swing.event.PopupMenuListener;
-import javax.swing.filechooser.FileFilter;
 import java.awt.*;
 import java.awt.event.*;
-import java.io.File;
-import java.io.IOException;
-import java.io.Serializable;
 import java.util.*;
 import java.util.List;
 import java.util.regex.Matcher;
@@ -367,6 +352,15 @@ public class DragCardGrid extends JPanel implements DragCardSource, DragCardTarg
 
     public void setRole(Role role) {
         this.role = role;
+        if (role == Role.SIDEBOARD) {
+            creatureCountLabel.setVisible(false);
+            landCountLabel.setVisible(false);
+            cardSizeSliderLabel.setVisible(false);
+        } else {
+            creatureCountLabel.setVisible(true);
+            landCountLabel.setVisible(true);
+            cardSizeSliderLabel.setVisible(true);
+        }
         updateCounts();
     }
 
@@ -501,6 +495,9 @@ public class DragCardGrid extends JPanel implements DragCardSource, DragCardTarg
 
     JPopupMenu sortPopup;
     JCheckBox separateCreaturesCb;
+
+    JSlider cardSizeSlider;
+    JLabel cardSizeSliderLabel;
 
     Map<Sort, AbstractButton> sortButtons = new HashMap<>();
 
@@ -641,13 +638,13 @@ public class DragCardGrid extends JPanel implements DragCardSource, DragCardTarg
         toolbar.add(toolbarInner, BorderLayout.WEST);
         JPanel sliderPanel = new JPanel(new GridBagLayout());
         sliderPanel.setOpaque(false);
-        final JSlider sizeSlider = new JSlider(SwingConstants.HORIZONTAL, 0, 100, 50);
-        sizeSlider.setOpaque(false);
-        sizeSlider.setPreferredSize(new Dimension(100, (int)sizeSlider.getPreferredSize().getHeight()));
-        sizeSlider.addChangeListener(e -> {
-            if (!sizeSlider.getValueIsAdjusting()) {
+        cardSizeSlider = new JSlider(SwingConstants.HORIZONTAL, 0, 100, 50);
+        cardSizeSlider.setOpaque(false);
+        cardSizeSlider.setPreferredSize(new Dimension(100, (int) cardSizeSlider.getPreferredSize().getHeight()));
+        cardSizeSlider.addChangeListener(e -> {
+            if (!cardSizeSlider.getValueIsAdjusting()) {
                 // Fraction in [-1, 1]
-                float sliderFrac = ((float) (sizeSlider.getValue() - 50)) / 50;
+                float sliderFrac = ((float) (cardSizeSlider.getValue() - 50)) / 50;
                 // Convert to frac in [0.5, 2.0] exponentially
                 cardSizeMod = (float) Math.pow(2, sliderFrac);
                 // Update grid
@@ -655,8 +652,9 @@ public class DragCardGrid extends JPanel implements DragCardSource, DragCardTarg
                 cardContent.repaint();
             }
         });
-        sliderPanel.add(new JLabel("Card Size:"));
-        sliderPanel.add(sizeSlider);
+        cardSizeSliderLabel = new JLabel("Card Size:");
+        sliderPanel.add(cardSizeSliderLabel);
+        sliderPanel.add(cardSizeSlider);
         toolbar.add(sliderPanel, BorderLayout.EAST);
         this.add(toolbar, BorderLayout.NORTH);
 
@@ -1143,7 +1141,7 @@ public class DragCardGrid extends JPanel implements DragCardSource, DragCardTarg
         updateCounts();
 
         // Create the card view
-        final MageCard cardPanel = Plugins.getInstance().getMageCard(card, lastBigCard, new Dimension(100, 140), null, true, true);
+        final MageCard cardPanel = Plugins.getInstance().getMageCard(card, lastBigCard, new Dimension(getCardWidth(), getCardHeight()), null, true, true);
         cardPanel.update(card);
         cardPanel.setTextOffset(0);
 
