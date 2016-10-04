@@ -27,6 +27,11 @@
  */
 package mage.remote;
 
+import java.io.IOException;
+import java.lang.reflect.UndeclaredThrowableException;
+import java.net.*;
+import java.util.*;
+import java.util.concurrent.TimeUnit;
 import mage.MageException;
 import mage.cards.decks.DeckCardLists;
 import mage.cards.decks.InvalidDeckException;
@@ -55,12 +60,6 @@ import org.jboss.remoting.callback.InvokerCallbackHandler;
 import org.jboss.remoting.transport.bisocket.Bisocket;
 import org.jboss.remoting.transport.socket.SocketWrapper;
 import org.jboss.remoting.transporter.TransporterClient;
-
-import java.io.IOException;
-import java.lang.reflect.UndeclaredThrowableException;
-import java.net.*;
-import java.util.*;
-import java.util.concurrent.TimeUnit;
 
 /**
  *
@@ -103,6 +102,7 @@ public class SessionImpl implements Session {
     // intended to be used with handleRemotingTaskExceptions for sharing the common exception
     // handling.
     public interface RemotingTask {
+
         public boolean run() throws Throwable;
     }
 
@@ -127,8 +127,8 @@ public class SessionImpl implements Session {
             } else if (cause instanceof NoSuchMethodException) {
                 // NoSuchMethodException is thrown on an invocation of an unknow JBoss remoting
                 // method, so it's likely to be because of a version incompatibility.
-                addMessage = "The following method is not available in the server, probably the " +
-                        "server version is not compatible to the client: " + cause.getMessage();
+                addMessage = "The following method is not available in the server, probably the "
+                        + "server version is not compatible to the client: " + cause.getMessage();
             }
             if (addMessage.isEmpty()) {
                 logger.fatal("", ex);
@@ -341,24 +341,25 @@ public class SessionImpl implements Session {
 
                 /**
                  * I'll explain the meaning of "secondaryBindPort" and
-                 * "secondaryConnectPort", and maybe that will help. The Remoting
-                 * bisocket transport creates two ServerSockets on the server. The
-                 * "primary" ServerSocket is used to create connections used for
-                 * ordinary invocations, e.g., a request to create a JMS consumer,
-                 * and the "secondary" ServerSocket is used to create "control"
-                 * connections for internal Remoting messages. The port for the
-                 * primary ServerSocket is configured by the "serverBindPort"
-                 * parameter, and the port for the secondary ServerSocket is, by
-                 * default, chosen randomly. The "secondaryBindPort" parameter can
-                 * be used to assign a specific port to the secondary ServerSocket.
-                 * Now, if there is a translating firewall between the client and
-                 * server, the client should be given the value of the port that is
+                 * "secondaryConnectPort", and maybe that will help. The
+                 * Remoting bisocket transport creates two ServerSockets on the
+                 * server. The "primary" ServerSocket is used to create
+                 * connections used for ordinary invocations, e.g., a request to
+                 * create a JMS consumer, and the "secondary" ServerSocket is
+                 * used to create "control" connections for internal Remoting
+                 * messages. The port for the primary ServerSocket is configured
+                 * by the "serverBindPort" parameter, and the port for the
+                 * secondary ServerSocket is, by default, chosen randomly. The
+                 * "secondaryBindPort" parameter can be used to assign a
+                 * specific port to the secondary ServerSocket. Now, if there is
+                 * a translating firewall between the client and server, the
+                 * client should be given the value of the port that is
                  * translated to the actual binding port of the secondary
                  * ServerSocket. For example, your configuration will tell the
-                 * secondary ServerSocket to bind to port 14000, and it will tell
-                 * the client to connect to port 14001. It assumes that there is a
-                 * firewall which will translate 14001 to 14000. Apparently, that's
-                 * not happening.
+                 * secondary ServerSocket to bind to port 14000, and it will
+                 * tell the client to connect to port 14001. It assumes that
+                 * there is a firewall which will translate 14001 to 14000.
+                 * Apparently, that's not happening.
                  */
                 // secondaryBindPort - the port to which the secondary server socket is to be bound. By default, an arbitrary port is selected.
                 // secondaryConnectPort - the port clients are to use to connect to the secondary server socket.
@@ -1424,6 +1425,21 @@ public class SessionImpl implements Session {
         return false;
     }
 
+    @Override
+    public boolean muteUserChat(String userName, long durationMinutes) {
+        try {
+            if (isConnected()) {
+                server.muteUser(sessionId, userName, durationMinutes);
+                return true;
+            }
+        } catch (MageException ex) {
+            handleMageException(ex);
+        } catch (Throwable t) {
+            handleThrowable(t);
+        }
+        return false;
+    }
+
     private void handleThrowable(Throwable t) {
         logger.fatal("Communication error", t);
         // Probably this can cause hanging the client under certain circumstances as the disconnect method is synchronized
@@ -1456,12 +1472,12 @@ public class SessionImpl implements Session {
         String email = connection.getEmail();
         return email == null ? "" : email;
     }
- 
+
     private String getAuthToken() {
         String authToken = connection.getAuthToken();
         return authToken == null ? "" : authToken;
     }
- 
+
     @Override
     public boolean updatePreferencesForServer(UserData userData) {
         try {
