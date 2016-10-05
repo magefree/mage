@@ -27,6 +27,7 @@
  */
 package mage.server;
 
+import java.util.Calendar;
 import java.util.Date;
 import java.util.LinkedList;
 import java.util.List;
@@ -42,6 +43,7 @@ import mage.players.net.UserData;
 import mage.players.net.UserGroup;
 import mage.server.game.GamesRoomManager;
 import mage.server.util.ConfigSettings;
+import mage.server.util.SystemUtil;
 import org.apache.log4j.Logger;
 import org.jboss.remoting.callback.AsynchInvokerCallbackHandler;
 import org.jboss.remoting.callback.Callback;
@@ -186,8 +188,20 @@ public class Session {
             if (authorizedUser == null || !authorizedUser.doCredentialsMatch(userName, password)) {
                 return "Wrong username or password. In case you haven't, please register your account first.";
             }
+            if (!authorizedUser.active) {
+                return "Your profile is deactivated, you can't sign on.";
+            }
+            if (authorizedUser.lockedUntil != null) {
+                if (authorizedUser.lockedUntil.compareTo(Calendar.getInstance().getTime()) > 0) {
+                    return "Your profile is deactivated until " + SystemUtil.dateFormat.format(authorizedUser.lockedUntil);
+                } else {
+                    User user = UserManager.getInstance().createUser(userName, host, authorizedUser);
+                    if (user != null && authorizedUser.lockedUntil != null) {
+                        user.setLockedUntil(null);
+                    }
+                }
+            }
         }
-
         User user = UserManager.getInstance().createUser(userName, host, authorizedUser);
         boolean reconnect = false;
         if (user == null) {  // user already exists

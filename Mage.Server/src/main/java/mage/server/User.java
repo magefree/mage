@@ -778,6 +778,8 @@ public class User {
         if (authorizedUser != null) {
             authorizedUser.lastConnection = this.connectionTime;
             authorizedUser.chatLockedUntil = this.chatLockedUntil;
+            authorizedUser.lockedUntil = this.lockedUntil;
+            authorizedUser.active = this.active;
             AuthorizedUserRepository.instance.update(authorizedUser);
         }
     }

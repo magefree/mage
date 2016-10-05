@@ -1108,8 +1108,8 @@ public class MageServerImpl implements MageServer {
     }
 
     @Override
-    public void lockUser(String sessionId, final String userName, final long durationMinutes) throws MageException {
-        execute("muteUser", sessionId, new Action() {
+    public void lockUser(final String sessionId, final String userName, final long durationMinutes) throws MageException {
+        execute("lockUser", sessionId, new Action() {
             @Override
             public void execute() {
                 User user = UserManager.getInstance().getUserByName(userName);
@@ -1117,6 +1117,9 @@ public class MageServerImpl implements MageServer {
                     Date lockUntil = new Date(Calendar.getInstance().getTimeInMillis() + (durationMinutes * Timer.ONE_MINUTE));
                     user.showUserMessage("Admin info", "Your user profile was locked until " + SystemUtil.dateFormat.format(lockUntil) + ".");
                     user.setLockedUntil(lockUntil);
+                    if (user.isConnected()) {
+                        SessionManager.getInstance().disconnectUser(sessionId, user.getSessionId());
+                    }
                 }
 
             }
@@ -1124,13 +1127,16 @@ public class MageServerImpl implements MageServer {
     }
 
     @Override
-    public void toggleActivation(String sessionId, final String userName) throws MageException {
-        execute("muteUser", sessionId, new Action() {
+    public void toggleActivation(final String sessionId, final String userName) throws MageException {
+        execute("toggleActivation", sessionId, new Action() {
             @Override
             public void execute() {
                 User user = UserManager.getInstance().getUserByName(userName);
                 if (user != null) {
                     user.setActive(!user.isActive());
+                    if (!user.isActive() && user.isConnected()) {
+                        SessionManager.getInstance().disconnectUser(sessionId, user.getSessionId());
+                    }
                 }
 
             }
