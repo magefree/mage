@@ -64,7 +64,7 @@ public class AuriokSiegeSled extends CardImpl {
 
         // {1}: Target artifact creature blocks Auriok Siege Sled this turn if able.
         MustBeBlockedByTargetSourceEffect effect = new MustBeBlockedByTargetSourceEffect(Duration.EndOfTurn);
-        effect.setText("Target artifact creature blocks Auriok Siege Sled this turn if able.");
+        effect.setText("Target artifact creature blocks {this} this turn if able.");
         Ability ability1 = new SimpleActivatedAbility(Zone.BATTLEFIELD, effect, new ManaCostsImpl("{1}"));
         ability1.addTarget(new TargetCreaturePermanent(filter));
         this.addAbility(ability1);
