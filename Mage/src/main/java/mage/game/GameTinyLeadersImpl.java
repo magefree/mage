@@ -38,6 +38,7 @@ import mage.abilities.effects.common.continuous.CommanderReplacementEffect;
 import mage.abilities.effects.common.cost.CommanderCostModification;
 import mage.cards.Card;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.cards.repository.CardInfo;
 import mage.cards.repository.CardRepository;
 import mage.constants.CardType;
@@ -164,8 +165,7 @@ public abstract class GameTinyLeadersImpl extends GameImpl {
 class DefaultCommander extends CardImpl {
 
     public DefaultCommander(UUID ownerId, String commanderName, String manaString) {
-        super(ownerId, 999, commanderName, Rarity.RARE, new CardType[]{CardType.CREATURE}, manaString);
-        this.expansionSetCode = "";
+        super(ownerId, new CardSetInfo(commanderName, "", "999", Rarity.RARE), new CardType[]{CardType.CREATURE}, manaString);
         this.supertype.add("Legendary");
 
         if (manaString.contains("{G}")) {

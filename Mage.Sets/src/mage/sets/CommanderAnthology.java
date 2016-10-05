@@ -30,20 +30,22 @@ package mage.sets;
 import java.util.GregorianCalendar;
 import mage.cards.ExpansionSet;
 import mage.constants.SetType;
+import mage.constants.Rarity;
+import java.util.List;
 
 /**
  *
  * @author fireshoes
  */
 public class CommanderAnthology extends ExpansionSet {
-    private static final CommanderAnthology fINSTANCE =  new CommanderAnthology();
+    private static final CommanderAnthology fINSTANCE = new CommanderAnthology();
 
     public static CommanderAnthology getInstance() {
         return fINSTANCE;
     }
 
     private CommanderAnthology() {
-        super("Commander Anthology", "CMA", "mage.sets.commanderanthology", new GregorianCalendar(2017, 6, 9).getTime(), SetType.SUPPLEMENTAL);
+        super("Commander Anthology", "CMA2", "mage.sets.commanderanthology", new GregorianCalendar(2017, 6, 9).getTime(), SetType.SUPPLEMENTAL);
         this.blockName = "Commander Anthology";
         this.hasBasicLands = false;
     }

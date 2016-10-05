@@ -30,6 +30,8 @@ package mage.sets;
 import java.util.GregorianCalendar;
 import mage.cards.ExpansionSet;
 import mage.constants.SetType;
+import mage.constants.Rarity;
+import java.util.List;
 
 /**
  *
@@ -38,7 +40,7 @@ import mage.constants.SetType;
 
 public class Commander2016 extends ExpansionSet {
 
-    private static final Commander2016 fINSTANCE =  new Commander2016();
+    private static final Commander2016 fINSTANCE = new Commander2016();
 
     public static Commander2016 getInstance() {
         return fINSTANCE;

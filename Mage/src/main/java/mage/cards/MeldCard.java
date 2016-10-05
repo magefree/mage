@@ -50,8 +50,8 @@ public abstract class MeldCard extends CardImpl {
     protected boolean isMelded;
     protected Cards halves;
 
-    public MeldCard(UUID ownerId, int cardNumber, String name, Rarity rarity, CardType[] cardTypes, String costs) {
-        super(ownerId, cardNumber, name, rarity, cardTypes, costs);
+    public MeldCard(UUID ownerId, CardSetInfo setInfo, CardType[] cardTypes, String costs) {
+        super(ownerId, setInfo, cardTypes, costs);
         halves = new CardsImpl();
     }
 

@@ -31,19 +31,16 @@ package mage.cards.basiclands;
 import java.util.UUID;
 import mage.ObjectColor;
 import mage.abilities.mana.BlackManaAbility;
+import mage.cards.Card;
+import mage.cards.CardSetInfo;
 
 /**
  *
  * @author BetaSteward_at_googlemail.com
  */
-public abstract class Swamp extends BasicLand {
-
-    public Swamp(UUID ownerId, int cardNumber) {
-        this(ownerId, String.valueOf(cardNumber));
-    }
-
-    public Swamp(UUID ownerId, String cardNumber) {
-        super(ownerId, cardNumber, "Swamp", new BlackManaAbility());
+public class Swamp extends BasicLand {
+    public Swamp(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId, setInfo, new BlackManaAbility());
         this.frameColor = ObjectColor.BLACK;
     }
 
@@ -51,4 +48,8 @@ public abstract class Swamp extends BasicLand {
         super(land);
     }
 
+    @Override
+    public Card copy() {
+        return new Swamp(this);
+    }
 }
