@@ -577,9 +577,9 @@ public class PlayerPanelExt extends javax.swing.JPanel {
         r = new Rectangle(15, 15);
         BufferedImage imageManaW = ManaSymbols.getSizedManaSymbol("W", 15);
         HoverButton btnWhiteMana = new HoverButton(null, imageManaW, imageManaW, imageManaW, r);
-        
+
         btnWhiteMana.setToolTipText("White mana");
-        btnWhiteMana.setOpaque(true);
+        btnWhiteMana.setOpaque(false);
         btnWhiteMana.setObserver(new Command() {
             @Override
             public void execute() {
