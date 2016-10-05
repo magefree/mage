@@ -95,6 +95,7 @@ public class RavnicaCityOfGuilds extends ExpansionSet {
         cards.add(new SetCardInfo("Concerted Effort", 8, Rarity.RARE, mage.cards.c.ConcertedEffort.class));
         cards.add(new SetCardInfo("Conclave Equenaut", 9, Rarity.COMMON, mage.cards.c.ConclaveEquenaut.class));
         cards.add(new SetCardInfo("Conclave Phalanx", 10, Rarity.UNCOMMON, mage.cards.c.ConclavePhalanx.class));
+        cards.add(new SetCardInfo("Conclave's Blessing", 11, Rarity.COMMON, mage.cards.c.ConclavesBlessing.class));
         cards.add(new SetCardInfo("Congregation at Dawn", 198, Rarity.UNCOMMON, mage.cards.c.CongregationAtDawn.class));
         cards.add(new SetCardInfo("Consult the Necrosages", 199, Rarity.COMMON, mage.cards.c.ConsultTheNecrosages.class));
         cards.add(new SetCardInfo("Convolute", 41, Rarity.COMMON, mage.cards.c.Convolute.class));
@@ -252,6 +253,7 @@ public class RavnicaCityOfGuilds extends ExpansionSet {
         cards.add(new SetCardInfo("Sandsower", 28, Rarity.UNCOMMON, mage.cards.s.Sandsower.class));
         cards.add(new SetCardInfo("Savra, Queen of the Golgari", 225, Rarity.RARE, mage.cards.s.SavraQueenOfTheGolgari.class));
         cards.add(new SetCardInfo("Scatter the Seeds", 181, Rarity.COMMON, mage.cards.s.ScatterTheSeeds.class));
+        cards.add(new SetCardInfo("Screeching Griffin", 29, Rarity.COMMON, mage.cards.s.ScreechingGriffin.class));
         cards.add(new SetCardInfo("Scion of the Wild", 182, Rarity.RARE, mage.cards.s.ScionOfTheWild.class));
         cards.add(new SetCardInfo("Searing Meditation", 226, Rarity.RARE, mage.cards.s.SearingMeditation.class));
         cards.add(new SetCardInfo("Seed Spark", 30, Rarity.UNCOMMON, mage.cards.s.SeedSpark.class));

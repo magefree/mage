@@ -216,6 +216,8 @@ public class Invasion extends ExpansionSet {
         cards.add(new SetCardInfo("Phyrexian Delver", 115, Rarity.RARE, mage.cards.p.PhyrexianDelver.class));
         cards.add(new SetCardInfo("Phyrexian Infiltrator", 116, Rarity.RARE, mage.cards.p.PhyrexianInfiltrator.class));
         cards.add(new SetCardInfo("Phyrexian Lens", 307, Rarity.RARE, mage.cards.p.PhyrexianLens.class));
+        cards.add(new SetCardInfo("Phyrexian Reaper", 117, Rarity.COMMON, mage.cards.p.PhyrexianReaper.class));
+        cards.add(new SetCardInfo("Phyrexian Slayer", 118, Rarity.COMMON, mage.cards.p.PhyrexianSlayer.class));
         cards.add(new SetCardInfo("Pincer Spider", 201, Rarity.COMMON, mage.cards.p.PincerSpider.class));
         cards.add(new SetCardInfo("Plague Spitter", 119, Rarity.UNCOMMON, mage.cards.p.PlagueSpitter.class));
         cards.add(new SetCardInfo("Plague Spores", 260, Rarity.COMMON, mage.cards.p.PlagueSpores.class));

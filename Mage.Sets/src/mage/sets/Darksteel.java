@@ -42,6 +42,7 @@ public class Darksteel extends ExpansionSet {
         cards.add(new SetCardInfo("Arcbound Stinger", 103, Rarity.COMMON, mage.cards.a.ArcboundStinger.class));
         cards.add(new SetCardInfo("Arcbound Worker", 104, Rarity.COMMON, mage.cards.a.ArcboundWorker.class));
         cards.add(new SetCardInfo("Auriok Glaivemaster", 1, Rarity.COMMON, mage.cards.a.AuriokGlaivemaster.class));
+        cards.add(new SetCardInfo("Auriok Siege Sled", 105, Rarity.UNCOMMON, mage.cards.a.AuriokSiegeSled.class));
         cards.add(new SetCardInfo("Barbed Lightning", 55, Rarity.COMMON, mage.cards.b.BarbedLightning.class));
         cards.add(new SetCardInfo("Blinkmoth Nexus", 163, Rarity.RARE, mage.cards.b.BlinkmothNexus.class));
         cards.add(new SetCardInfo("Burden of Greed", 38, Rarity.COMMON, mage.cards.b.BurdenOfGreed.class));
