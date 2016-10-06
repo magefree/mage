@@ -164,5 +164,10 @@ public class Deck implements Serializable {
     public void setDeckHashCode(long deckHashCode) {
         this.deckHashCode = deckHashCode;
     }
+    
+    public void clearLayouts() {
+        this.cardsLayout = null;
+        this.sideboardLayout = null;
+    }
 
 }
