@@ -250,6 +250,7 @@ public class MtgOnlTokensImageSource implements CardImageSource {
         copyUrlToImage.put("Lightning_Ranger_R_5_1.jpg", "LIGHTNINGRAGER.R.ELEMENTAL.CREATURE.5.1.full.jpg");
         copyUrlToImage.put("Lizard_G_2_2.jpg", "LIZARD.G.LIZARD.CREATURE.2.2.full.jpg");
         copyUrlToImage.put("Llanowar_Elves_G_1_1.jpg", "LLANOWARELVES.G.ELFDRUID.CREATURE.1.1.full.jpg");
+        copyUrlToImage.put("Manifest_2_2.jpg", "MANIFEST.....full.jpg");
         copyUrlToImage.put("Marit_Lage_B_20_20.jpg", "MARITLAGE.B.AVATAR.CREATURE.20.20.full.jpg");
         copyUrlToImage.put("Merfolk_U_1_1.jpg", "MERFOLK.U.MERFOLK.CREATURE.1.1.full.jpg");
         copyUrlToImage.put("Merfolk_Wizard_U_1_1.jpg", "MERFOLKWIZARD.U.MERFOLKWIZARD.CREATURE.1.1.full.jpg");
@@ -259,6 +260,7 @@ public class MtgOnlTokensImageSource implements CardImageSource {
         copyUrlToImage.put("Minor_Demon_BR_1_1.jpg", "MINORDEMON.BR.DEMON.CREATURE.1.1.full.jpg");
         copyUrlToImage.put("Minotaur_R_2_3.jpg", "MINOTAUR.R.MINOTAUR.CREATURE.2.3.full.jpg");
         copyUrlToImage.put("Monk_W_1_1.jpg", "MONK.W.MONK.CREATURE.1.1.full.jpg");
+        copyUrlToImage.put("Morph_2_2.jpg", "MORPH.....full.jpg");
         copyUrlToImage.put("Myr_1_1.jpg", "MYR..MYR.CREATUREARTIFACT.1.1.full.jpg");
         copyUrlToImage.put("Octopus_U_8_8.jpg", "OCTOPUS.U.OCTOPUS.CREATURE.8.8.full.jpg");
         copyUrlToImage.put("Ogre_R_3_3.jpg", "OGRE.R.OGRE.CREATURE.3.3.full.jpg");
