@@ -32,10 +32,7 @@ import java.util.GregorianCalendar;
 import mage.cards.ExpansionSet;
 import mage.constants.SetType;
 import mage.constants.Rarity;
-import java.util.List;
-import mage.ObjectColor;
 import mage.cards.CardGraphicInfo;
-import mage.cards.FrameStyle;
 
 /**
  *
@@ -83,6 +80,7 @@ public class FridayNightMagic extends ExpansionSet {
         cards.add(new SetCardInfo("Cabal Coffers", 89, Rarity.UNCOMMON, mage.cards.c.CabalCoffers.class));
         cards.add(new SetCardInfo("Cabal Therapy", 60, Rarity.UNCOMMON, mage.cards.c.CabalTherapy.class));
         cards.add(new SetCardInfo("Call of the Conclave", 155, Rarity.UNCOMMON, mage.cards.c.CallOfTheConclave.class));
+        cards.add(new SetCardInfo("Call the Bloodline", 199, Rarity.UNCOMMON, mage.cards.c.CallTheBloodline.class));
         cards.add(new SetCardInfo("Capsize", 35, Rarity.COMMON, mage.cards.c.Capsize.class));
         cards.add(new SetCardInfo("Carnophage", 16, Rarity.COMMON, mage.cards.c.Carnophage.class));
         cards.add(new SetCardInfo("Carrion Feeder", 49, Rarity.COMMON, mage.cards.c.CarrionFeeder.class));

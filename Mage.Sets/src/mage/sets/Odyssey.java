@@ -28,14 +28,10 @@
 package mage.sets;
 
 import java.util.GregorianCalendar;
-
-import mage.cards.ExpansionSet;
-import mage.constants.SetType;
-import mage.constants.Rarity;
-import java.util.List;
-import mage.ObjectColor;
 import mage.cards.CardGraphicInfo;
-import mage.cards.FrameStyle;
+import mage.cards.ExpansionSet;
+import mage.constants.Rarity;
+import mage.constants.SetType;
 
 /**
  *
@@ -297,6 +293,7 @@ public class Odyssey extends ExpansionSet {
         cards.add(new SetCardInfo("Second Thoughts", 45, Rarity.COMMON, mage.cards.s.SecondThoughts.class));
         cards.add(new SetCardInfo("Seize the Day", 220, Rarity.RARE, mage.cards.s.SeizeTheDay.class));
         cards.add(new SetCardInfo("Seton, Krosan Protector", 267, Rarity.RARE, mage.cards.s.SetonKrosanProtector.class));
+        cards.add(new SetCardInfo("Seton's Desire", 268, Rarity.UNCOMMON, mage.cards.s.SetonsDesire.class));
         cards.add(new SetCardInfo("Shadowblood Egg", 308, Rarity.UNCOMMON, mage.cards.s.ShadowbloodEgg.class));
         cards.add(new SetCardInfo("Shadowblood Ridge", 326, Rarity.RARE, mage.cards.s.ShadowbloodRidge.class));
         cards.add(new SetCardInfo("Shadowmage Infiltrator", 294, Rarity.RARE, mage.cards.s.ShadowmageInfiltrator.class));

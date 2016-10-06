@@ -32,7 +32,6 @@ import mage.MageObject;
 import mage.abilities.Ability;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.search.SearchLibraryPutInPlayEffect;
-import mage.cards.Card;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.cards.Cards;
@@ -103,9 +102,9 @@ class VerdantCrescendoEffect extends OneShotEffect {
             filter.add(new NamePredicate("Nissa, Nature's Artisan"));
             TargetCard target = new TargetCard(0, 1, Zone.ALL, filter);
             if (controller.choose(outcome, allCards, target, game)) {
-                Card cardFound = game.getCard(target.getFirstTarget());
-                if (cardFound != null) {
-                    controller.revealCards(sourceObject.getIdName(), allCards, game);
+                Cards cardFound = new CardsImpl(target.getTargets());
+                if (!cardFound.isEmpty()) {
+                    controller.revealCards(sourceObject.getIdName(), cardFound, game);
                     controller.moveCards(cardFound, Zone.HAND, source, game);
                 }
             }
