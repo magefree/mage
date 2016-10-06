@@ -42,7 +42,7 @@ public class VisionaryAugmenter extends CardImpl {
 
     public VisionaryAugmenter(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{2}{W}{W}");
-        this.subtype.add("Dward");
+        this.subtype.add("Dwarf");
         this.subtype.add("Artificer");
         this.power = new MageInt(2);
         this.toughness = new MageInt(1);
