@@ -585,7 +585,8 @@ public class NewTournamentDialog extends MageDialog {
                     } catch (GameException e1) {
                         JOptionPane.showMessageDialog(MageFrame.getDesktop(), e1.getMessage(), "Error loading deck", JOptionPane.ERROR_MESSAGE); 
                     }
-                    if (cubeFromDeck != null) { 
+                    if (cubeFromDeck != null) {
+                        cubeFromDeck.clearLayouts();
                         tOptions.getLimitedOptions().setCubeFromDeck(cubeFromDeck);
 		    }
                 }
