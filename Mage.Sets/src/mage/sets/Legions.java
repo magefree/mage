@@ -32,7 +32,6 @@ import java.util.GregorianCalendar;
 import mage.cards.ExpansionSet;
 import mage.constants.SetType;
 import mage.constants.Rarity;
-import java.util.List;
 
 /**
  *
@@ -162,6 +161,7 @@ public class Legions extends ExpansionSet {
         cards.add(new SetCardInfo("Timberwatch Elf", 140, Rarity.COMMON, mage.cards.t.TimberwatchElf.class));
         cards.add(new SetCardInfo("Totem Speaker", 141, Rarity.UNCOMMON, mage.cards.t.TotemSpeaker.class));
         cards.add(new SetCardInfo("Toxin Sliver", 84, Rarity.RARE, mage.cards.t.ToxinSliver.class));
+        cards.add(new SetCardInfo("Tribal Forcemage", 142, Rarity.RARE, mage.cards.t.TribalForcemage.class));
         cards.add(new SetCardInfo("Unstable Hulk", 115, Rarity.RARE, mage.cards.u.UnstableHulk.class));
         cards.add(new SetCardInfo("Vile Deacon", 85, Rarity.COMMON, mage.cards.v.VileDeacon.class));
         cards.add(new SetCardInfo("Voidmage Apprentice", 54, Rarity.COMMON, mage.cards.v.VoidmageApprentice.class));

@@ -48,7 +48,7 @@ public class NarnamCobra extends CardImpl {
 
     public NarnamCobra(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.ARTIFACT,CardType.CREATURE},"{2}");
-        this.subtype.add("snake");
+        this.subtype.add("Snake");
         this.power = new MageInt(2);
         this.toughness = new MageInt(1);
 
