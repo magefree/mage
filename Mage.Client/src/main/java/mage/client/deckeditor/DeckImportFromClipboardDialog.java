@@ -83,7 +83,21 @@ public class DeckImportFromClipboardDialog extends JDialog {
 
         {
             contentPane.setMinimumSize(new Dimension(540, 450));
+
+            contentPane.setBorder(new javax.swing.border.CompoundBorder(
+                    new javax.swing.border.TitledBorder(new javax.swing.border.EmptyBorder(0, 0, 0, 0),
+                            "Import from Clipboard", javax.swing.border.TitledBorder.CENTER,
+                            javax.swing.border.TitledBorder.TOP, new java.awt.Font("Dialog", java.awt.Font.PLAIN, 12),
+                            java.awt.Color.BLACK), contentPane.getBorder()));
             
+            contentPane.addPropertyChangeListener(new java.beans.PropertyChangeListener() {
+                public void propertyChange(java.beans.PropertyChangeEvent e) {
+                    if ("border".equals(e.getPropertyName())) {
+                        throw new RuntimeException();
+                    }
+                }
+            });
+
             contentPane.addPropertyChangeListener(new java.beans.PropertyChangeListener() {
                 public void propertyChange(java.beans.PropertyChangeEvent e) {
                     if ("border".equals(e.getPropertyName())) {
@@ -138,9 +152,10 @@ public class DeckImportFromClipboardDialog extends JDialog {
                 ((GridBagLayout) panel3.getLayout()).rowHeights = new int[]{0, 0};
                 ((GridBagLayout) panel3.getLayout()).columnWeights = new double[]{0.0, 1.0E-4};
                 ((GridBagLayout) panel3.getLayout()).rowWeights = new double[]{1.0, 1.0E-4};
-            
+
                 txtDeckList.setMinimumSize(new Dimension(250, 400));
                 txtDeckList.setPreferredSize(new Dimension(550, 400));
+                txtDeckList.setText("// Example:\n//1 Library of Congress\n//1 Cryptic Gateway\n//1 Azami, Lady of Scrolls\n// NB: This is slow as, and will lock your screen :)");
                 panel3.add(txtDeckList, new GridBagConstraints(0, 0, 1, 1, 1.0, 0.0,
                         GridBagConstraints.CENTER, GridBagConstraints.BOTH,
                         new Insets(0, 0, 0, 0), 0, 0));
