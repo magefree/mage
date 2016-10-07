@@ -12,6 +12,7 @@ import mage.constants.Outcome;
 import mage.constants.Zone;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
+import mage.players.Player;
 
 /**
  *
@@ -40,11 +41,12 @@ public class ShuffleIntoLibraryTargetEffect extends OneShotEffect {
     @Override
     public boolean apply(Game game, Ability source) {
         Permanent permanent = game.getPermanent(targetPointer.getFirst(game, source));
-        if (permanent != null) {
-            if (permanent.moveToZone(Zone.LIBRARY, source.getSourceId(), game, true)) {
+        Player controller = game.getPlayer(source.getControllerId());
+        if (permanent != null && controller != null) {
+            if (controller.moveCards(permanent, Zone.LIBRARY, source, game)) {
                 game.getPlayer(permanent.getOwnerId()).shuffleLibrary(source, game);
-                return true;
             }
+            return true;
         }
         return false;
     }

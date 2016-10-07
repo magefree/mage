@@ -35,6 +35,8 @@ import mage.abilities.effects.common.ReturnFromGraveyardToHandTargetEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
+import mage.filter.FilterCard;
+import mage.filter.predicate.mageobject.AnotherCardPredicate;
 import mage.target.common.TargetCardInYourGraveyard;
 
 /**
@@ -43,15 +45,21 @@ import mage.target.common.TargetCardInYourGraveyard;
  */
 public class ShaakHerd extends CardImpl {
 
+    private final static FilterCard filter = new FilterCard("another target creature card");
+
+    static {
+        filter.add(new AnotherCardPredicate());
+    }
+
     public ShaakHerd(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{2}{G}");
+        super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{2}{G}");
         this.subtype.add("Beast");
         this.power = new MageInt(2);
         this.toughness = new MageInt(2);
 
         // When Shaak Herd dies, you may return another target creature card from your graveyard to your hand.
         Ability ability = new DiesTriggeredAbility(new ReturnFromGraveyardToHandTargetEffect(), true);
-        ability.addTarget(new TargetCardInYourGraveyard());
+        ability.addTarget(new TargetCardInYourGraveyard(filter));
         this.addAbility(ability);
     }
 
