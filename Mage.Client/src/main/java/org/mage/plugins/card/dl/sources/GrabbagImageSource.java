@@ -1068,6 +1068,38 @@ public class GrabbagImageSource implements CardImageSource {
         copyUrlToImage.put("wmcq/3.jpg", "WMCQ.zip/WMCQ/Thalia, Guardian of Thraben.full.jpg");
         copyUrlToImage.put("wmcq/4.jpg", "WMCQ.zip/WMCQ/Liliana of the Veil.full.jpg");
         copyUrlToImage.put("wmcq/5.jpg", "WMCQ.zip/WMCQ/Snapcaster Mage.full.jpg");
+        copyUrlToImage.put("mpskld/1.jpg", "MPS.zip/MPS/Cataclysmic Gearhulk.full.jpg");
+        copyUrlToImage.put("mpskld/2.jpg", "MPS.zip/MPS/Torrential Gearhulk.full.jpg");
+        copyUrlToImage.put("mpskld/3.jpg", "MPS.zip/MPS/Noxious Gearhulk.full.jpg");
+        copyUrlToImage.put("mpskld/4.jpg", "MPS.zip/MPS/Combustible Gearhulk.full.jpg");
+        copyUrlToImage.put("mpskld/5.jpg", "MPS.zip/MPS/Verdurous Gearhulk.full.jpg");
+        copyUrlToImage.put("mpskld/6.jpg", "MPS.zip/MPS/�ther Vial.full.jpg");
+        copyUrlToImage.put("mpskld/6.jpg", "MPS.zip/MPS/Aether Vial.full.jpg");
+        copyUrlToImage.put("mpskld/7.jpg", "MPS.zip/MPS/Champion's Helm.full.jpg");
+        copyUrlToImage.put("mpskld/8.jpg", "MPS.zip/MPS/Chromatic Lantern.full.jpg");
+        copyUrlToImage.put("mpskld/9.jpg", "MPS.zip/MPS/Chrome Mox.full.jpg");
+        copyUrlToImage.put("mpskld/10.jpg", "MPS.zip/MPS/Cloudstone Curio.full.jpg");
+        copyUrlToImage.put("mpskld/11.jpg", "MPS.zip/MPS/Crucible of Worlds.full.jpg");
+        copyUrlToImage.put("mpskld/12.jpg", "MPS.zip/MPS/Gauntlet of Power.full.jpg");
+        copyUrlToImage.put("mpskld/13.jpg", "MPS.zip/MPS/Hangarback Walker.full.jpg");
+        copyUrlToImage.put("mpskld/14.jpg", "MPS.zip/MPS/Lightning Greaves.full.jpg");
+        copyUrlToImage.put("mpskld/15.jpg", "MPS.zip/MPS/Lotus Petal.full.jpg");
+        copyUrlToImage.put("mpskld/16.jpg", "MPS.zip/MPS/Mana Crypt.full.jpg");
+        copyUrlToImage.put("mpskld/17.jpg", "MPS.zip/MPS/Mana Vault.full.jpg");
+        copyUrlToImage.put("mpskld/18.jpg", "MPS.zip/MPS/Mind's Eye.full.jpg");
+        copyUrlToImage.put("mpskld/19.jpg", "MPS.zip/MPS/Mox Opal.full.jpg");
+        copyUrlToImage.put("mpskld/20.jpg", "MPS.zip/MPS/Painter's Servant.full.jpg");
+        copyUrlToImage.put("mpskld/21.jpg", "MPS.zip/MPS/Rings of Brighthearth.full.jpg");
+        copyUrlToImage.put("mpskld/22.jpg", "MPS.zip/MPS/Scroll Rack.full.jpg");
+        copyUrlToImage.put("mpskld/23.jpg", "MPS.zip/MPS/Sculpting Steel.full.jpg");
+        copyUrlToImage.put("mpskld/24.jpg", "MPS.zip/MPS/Sol Ring.full.jpg");
+        copyUrlToImage.put("mpskld/25.jpg", "MPS.zip/MPS/Solemn Simulacrum.full.jpg");
+        copyUrlToImage.put("mpskld/26.jpg", "MPS.zip/MPS/Static Orb.full.jpg");
+        copyUrlToImage.put("mpskld/27.jpg", "MPS.zip/MPS/Steel Overseer.full.jpg");
+        copyUrlToImage.put("mpskld/28.jpg", "MPS.zip/MPS/Sword of Feast and Famine.full.jpg");
+        copyUrlToImage.put("mpskld/29.jpg", "MPS.zip/MPS/Sword of Fire and Ice.full.jpg");
+        copyUrlToImage.put("mpskld/30.jpg", "MPS.zip/MPS/Sword of Light and Shadow.full.jpg");
+
 
 
         for (String key : copyUrlToImage.keySet()) {
