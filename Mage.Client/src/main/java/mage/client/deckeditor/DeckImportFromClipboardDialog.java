@@ -1,6 +1,7 @@
 package mage.client.deckeditor;
 
 import javax.swing.*;
+import java.awt.*;
 import java.awt.event.*;
 import java.io.BufferedWriter;
 import java.io.File;
@@ -8,6 +9,7 @@ import java.io.FileWriter;
 import java.io.IOException;
 
 public class DeckImportFromClipboardDialog extends JDialog {
+
     private JPanel contentPane;
     private JButton buttonOK;
     private JButton buttonCancel;
@@ -15,8 +17,8 @@ public class DeckImportFromClipboardDialog extends JDialog {
 
     private String tmpPath;
 
-
     public DeckImportFromClipboardDialog() {
+        initComponents();
         setContentPane(contentPane);
         setModal(true);
         getRootPane().setDefaultButton(buttonOK);
@@ -68,5 +70,84 @@ public class DeckImportFromClipboardDialog extends JDialog {
 
     public String getTmpPath() {
         return tmpPath;
+    }
+
+    private void initComponents() {
+        contentPane = new JPanel();
+        JPanel panel1 = new JPanel();
+        JPanel panel2 = new JPanel();
+        buttonOK = new JButton();
+        buttonCancel = new JButton();
+        JPanel panel3 = new JPanel();
+        txtDeckList = new JEditorPane();
+
+        {
+            contentPane.setMinimumSize(new Dimension(540, 450));
+            
+            contentPane.addPropertyChangeListener(new java.beans.PropertyChangeListener() {
+                public void propertyChange(java.beans.PropertyChangeEvent e) {
+                    if ("border".equals(e.getPropertyName())) {
+                        throw new RuntimeException();
+                    }
+                }
+            });
+
+            contentPane.setLayout(new GridBagLayout());
+            ((GridBagLayout) contentPane.getLayout()).columnWidths = new int[]{0, 0};
+            ((GridBagLayout) contentPane.getLayout()).rowHeights = new int[]{0, 0, 0};
+            ((GridBagLayout) contentPane.getLayout()).columnWeights = new double[]{0.01, 1.0E-4};
+            ((GridBagLayout) contentPane.getLayout()).rowWeights = new double[]{0.01, 0.0, 1.0E-4};
+
+            {
+                panel1.setLayout(new GridBagLayout());
+                ((GridBagLayout) panel1.getLayout()).columnWidths = new int[]{0, 0, 0};
+                ((GridBagLayout) panel1.getLayout()).rowHeights = new int[]{0, 0};
+                ((GridBagLayout) panel1.getLayout()).columnWeights = new double[]{0.0, 0.01, 1.0E-4};
+                ((GridBagLayout) panel1.getLayout()).rowWeights = new double[]{0.01, 1.0E-4};
+
+                {
+                    panel2.setLayout(new GridBagLayout());
+                    ((GridBagLayout) panel2.getLayout()).columnWidths = new int[]{0, 4, 0, 0};
+                    ((GridBagLayout) panel2.getLayout()).rowHeights = new int[]{0, 0};
+                    ((GridBagLayout) panel2.getLayout()).columnWeights = new double[]{0.01, 0.0, 0.01, 1.0E-4};
+                    ((GridBagLayout) panel2.getLayout()).rowWeights = new double[]{0.0, 1.0E-4};
+
+                    //---- buttonOK ----
+                    buttonOK.setText("Import");
+                    panel2.add(buttonOK, new GridBagConstraints(0, 0, 1, 1, 0.0, 0.0,
+                            GridBagConstraints.CENTER, GridBagConstraints.HORIZONTAL,
+                            new Insets(0, 0, 0, 0), 0, 0));
+
+                    //---- buttonCancel ----
+                    buttonCancel.setText("Cancel");
+                    panel2.add(buttonCancel, new GridBagConstraints(2, 0, 1, 1, 0.0, 0.0,
+                            GridBagConstraints.CENTER, GridBagConstraints.HORIZONTAL,
+                            new Insets(0, 0, 0, 0), 0, 0));
+                }
+                panel1.add(panel2, new GridBagConstraints(1, 0, 1, 1, 0.0, 0.0,
+                        GridBagConstraints.CENTER, GridBagConstraints.BOTH,
+                        new Insets(0, 0, 0, 0), 0, 0));
+            }
+            contentPane.add(panel1, new GridBagConstraints(0, 1, 1, 1, 0.0, 0.0,
+                    GridBagConstraints.CENTER, GridBagConstraints.BOTH,
+                    new Insets(0, 0, 0, 0), 0, 0));
+
+            {
+                panel3.setLayout(new GridBagLayout());
+                ((GridBagLayout) panel3.getLayout()).columnWidths = new int[]{0, 0};
+                ((GridBagLayout) panel3.getLayout()).rowHeights = new int[]{0, 0};
+                ((GridBagLayout) panel3.getLayout()).columnWeights = new double[]{0.0, 1.0E-4};
+                ((GridBagLayout) panel3.getLayout()).rowWeights = new double[]{1.0, 1.0E-4};
+            
+                txtDeckList.setMinimumSize(new Dimension(250, 400));
+                txtDeckList.setPreferredSize(new Dimension(550, 400));
+                panel3.add(txtDeckList, new GridBagConstraints(0, 0, 1, 1, 1.0, 0.0,
+                        GridBagConstraints.CENTER, GridBagConstraints.BOTH,
+                        new Insets(0, 0, 0, 0), 0, 0));
+            }
+            contentPane.add(panel3, new GridBagConstraints(0, 0, 1, 1, 0.0, 0.0,
+                    GridBagConstraints.CENTER, GridBagConstraints.BOTH,
+                    new Insets(0, 0, 5, 0), 0, 0));
+        }
     }
 }
