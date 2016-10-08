@@ -72,7 +72,7 @@ public class ConspiracyTakeTheCrown extends ExpansionSet {
         cards.add(new SetCardInfo("Bronze Sable", 208, Rarity.COMMON, mage.cards.b.BronzeSable.class));
         cards.add(new SetCardInfo("Brushstrider", 177, Rarity.UNCOMMON, mage.cards.b.Brushstrider.class));
         cards.add(new SetCardInfo("Burgeoning", 178, Rarity.RARE, mage.cards.b.Burgeoning.class));
-        cards.add(new SetCardInfo("Burn Away", 153, Rarity.UNCOMMON, mage.cards.b.BurnAway.class));
+        cards.add(new SetCardInfo("Burn Away", 151, Rarity.UNCOMMON, mage.cards.b.BurnAway.class));
         cards.add(new SetCardInfo("Burning Wish", 152, Rarity.RARE, mage.cards.b.BurningWish.class));
         cards.add(new SetCardInfo("Caller of Gales", 103, Rarity.COMMON, mage.cards.c.CallerOfGales.class));
         cards.add(new SetCardInfo("Carnage Gladiator", 199, Rarity.UNCOMMON, mage.cards.c.CarnageGladiator.class));
