@@ -41,23 +41,26 @@ sub toCamelCase
 
 open (DATA, $dataFile) || die "can't open $dataFile";
 open (FILES_TO_CHECK, ">files_to_check.bat");
-my $edit_str = "find \"super(ownerId\" ";
 print FILES_TO_CHECK "\@echo  off\n";
 print FILES_TO_CHECK "find \"super(ownerId\" ";
 print ("Looking at data in $dataFile\n");
+my %transformNames;
 while (<DATA>)
 {
     chomp;
     my $line = $_;
 
     my $addDay = "";
+    my $transformable = 0;
     if ($line =~ m/(transform|transformed under)/img)
     {
         $addDay = "-day";
+        $transformable = 1;
     }
     if ($line =~ m/(meld them|melds with)/img)
     {
         $addDay = "-day";
+        $transformable = 1;
     }
 
     $line =~ s/^(([^\|]+)\|([^\|]+)\|([^\|]+))\|.*/$1/;
@@ -79,15 +82,18 @@ while (<DATA>)
         my $trigraph = lc($sn);
         $trigraph =~ s/[^a-z]//img;
         print FILES_TO_CHECK " ..\\Mage.Sets\\src\\mage\\sets\\" , $trigraph, "\\", toCamelCase($name), ".java";
-        $edit_str .= " ..\\Mage.Sets\\src\\mage\\sets\\" . $trigraph. "\\". toCamelCase($name). ".java ";
+    }
+    if ($transformable)
+    {
+        $transformNames {$name} = 1;
     }
 }
 close(DATA);
-print ("Possible problem java files are here: .\\files_to_check.bat\n(\n$edit_str\n)\n");
 print FILES_TO_CHECK "\n";
 close (FILES_TO_CHECK);
 
-my $dir_listing = "dir \/a \/b \/s ..\\Mage.Sets\\src\\mage\\sets\\ | find \".java\" |";
+my $dir_listing = "dir \/a \/b \/s ..\\Mage.Sets\\ | find \".java\" |";
+
 my %find_info;
 my %files_from_key;
 open (DIR_LISTING, "$dir_listing");
@@ -106,64 +112,48 @@ while (<DIR_LISTING>)
     #  super(ownerId, 99, "Brine Elemental", Rarity.UNCOMMON, new CardType[]{CardType.CREATURE}, "{4}{U}{U}");
     #  this.expansionSetCode = "C14";
     my $name = "";
-    my $setId = "";
     my $cardNum = "";
-    my $class = "";
-    my $day = "";
 
     open (JAVA_FILE, "$file");
+    my $fileKey = $file;
+    $fileKey =~ s/^.*[\/\\]//;
+    if ($file !~ m/\.java$/)
+    {
+        next;
+    }
+
     while (<JAVA_FILE>)
     {
         chomp;
+        
+        #cards.add(new SetCardInfo("Bonds of Quicksilver", 102, Rarity.COMMON, mage.cards.b.BondsOfQuicksilver.class));
         my $line = $_;
-        if ($line =~ m/super\(ownerId,([^,]+),([^"]+)?"([^"]+)?"/)
+        if ($line =~ m/SetCardInfo\("([^"]+)",([^,]+),/img)
         {
-            $name = $3;
-            $cardNum = $1;
-            $cardNum =~ s/[^a-z0-9]//img;
-            $cardNum =~ s/ //img;
-        }
-        elsif ($line =~ m/expansionSetCode = "([^"]+)"/)
-        {
-            $setId = $1;
-        }
-        elsif ($line =~ m/super\(ownerId,([^,]+)/)
-        {
-            $cardNum = $1;
-        }
-        elsif ($line =~ m/cardNumber =(.*);/)
-        {
-            $cardNum = $1;
-        }
-        elsif ($line =~ m/^public class (.*) extends/)
-        {
-            $class = $1;
-        }
-        elsif ($line =~ m/(MeldCondition)/)
-        {
-            $day = "_day";
-        }
-        elsif ($line =~ m/(nightCard)/)
-        {
-            $day = "_night";
-        }
-    }
+            $name = $1;
+            if (defined ($transformNames{$name}))
+            {
+                next;
+            }
 
-    $name =~ s/[^a-z0-9]//img;
-    $setId =~ s/[^a-z0-9]//img;
-    $cardNum =~ s/[^a-z0-9]//img;
-    $class =~ s/[^a-z0-9]//img;
-    my $val = "$name($class),$setId,$cardNum.$day";
-    my $key = "$setId,$cardNum.$day";
-    if (!defined ($find_info {$key}))
-    {
-        $find_info {$key} = $val;
-        $files_from_key {$key} = $file;
-    }
-    elsif ($key ne ",.")
-    {
-        print ("$name($class in file:$file) $val\n Has the same key $key as\n$find_info{$key}  val=$val (from key=$key) in file: $files_from_key{$key}\n");
-    }
+            $cardNum = $2;
+            $name =~ s/[^a-z0-9]//img;
+            $cardNum =~ s/[^a-z0-9]//img;
+
+            my $val = "$name($file),$fileKey,$cardNum";
+            my $key = "$fileKey,$cardNum";
+            #print ("$key >>> $val\n");
+            if (!defined ($find_info {$key}))
+            {
+                $find_info {$key} = $val;
+                $files_from_key {$key} = $file;
+            }
+            elsif ($key ne ",.")
+            {
+                print ("========\n$val\n Has the same key $key as\n$find_info{$key}\n");
+            }
+        }
+   }
 
     close (JAVA_FILE);
 }
