@@ -510,6 +510,8 @@ public abstract class CardPanel extends MagePermanent implements MouseListener, 
      * However, they should ALSO call repaint() after the superclass call to
      * this function, that can't be done here as the overriders may need to do
      * things both before and after this call before repainting.
+     *
+     * @param card
      */
     @Override
     public void update(CardView card) {

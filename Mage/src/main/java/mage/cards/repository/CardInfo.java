@@ -30,24 +30,21 @@ package mage.cards.repository;
 import com.j256.ormlite.field.DataType;
 import com.j256.ormlite.field.DatabaseField;
 import com.j256.ormlite.table.DatabaseTable;
-
-
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
-
-import mage.cards.FrameStyle;
-import mage.cards.CardSetInfo;
-import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.ObjectColor;
 import mage.abilities.Ability;
 import mage.abilities.SpellAbility;
 import mage.abilities.common.PlanswalkerEntersWithLoyalityCountersAbility;
 import mage.cards.Card;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
+import mage.cards.FrameStyle;
 import mage.cards.mock.MockCard;
 import mage.cards.mock.MockSplitCard;
+import mage.constants.CardType;
+import mage.constants.Rarity;
 import mage.constants.SpellAbilityType;
 import org.apache.log4j.Logger;
 
@@ -156,13 +153,13 @@ public class CardInfo {
         this.setManaCosts(card.getManaCost().getSymbols());
 
         int length = 0;
-        for (String rule: card.getRules()) {
+        for (String rule : card.getRules()) {
             length += rule.length();
         }
         if (length > MAX_RULE_LENGTH) {
             length = 0;
             ArrayList<String> shortRules = new ArrayList<>();
-            for (String rule: card.getRules()) {
+            for (String rule : card.getRules()) {
                 if (length + rule.length() + 3 <= MAX_RULE_LENGTH) {
                     shortRules.add(rule);
                     length += rule.length() + 3;
@@ -185,10 +182,10 @@ public class CardInfo {
                 this.splitCardHalf = true;
             }
         }
-        
+
         // Starting loyalty
         if (card.getCardType().contains(CardType.PLANESWALKER)) {
-            for (Ability ab: card.getAbilities()) {
+            for (Ability ab : card.getAbilities()) {
                 if (ab instanceof PlanswalkerEntersWithLoyalityCountersAbility) {
                     this.startingLoyalty = "" + ((PlanswalkerEntersWithLoyalityCountersAbility) ab).getStartingLoyalty();
                 }
@@ -215,7 +212,9 @@ public class CardInfo {
     }
 
     public boolean usesVariousArt() {
-        return Character.isDigit(className.charAt(className.length() - 1));
+        return getRarity().equals(Rarity.LAND)
+                || Character.isDigit(className.charAt(className.length() - 1))
+                || !Character.isDigit(cardNumber.charAt(cardNumber.length() - 1));
     }
 
     public ObjectColor getColor() {
@@ -227,7 +226,7 @@ public class CardInfo {
         color.setWhite(white);
         return color;
     }
-    
+
     public ObjectColor getFrameColor() {
         return new ObjectColor(frameColor);
     }
@@ -321,7 +320,7 @@ public class CardInfo {
     public String getToughness() {
         return toughness;
     }
-    
+
     public String getStartingLoyalty() {
         return startingLoyalty;
     }
