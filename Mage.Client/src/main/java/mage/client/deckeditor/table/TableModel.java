@@ -54,7 +54,6 @@ import mage.client.deckeditor.SortSetting;
 import mage.client.plugins.impl.Plugins;
 import mage.client.util.Config;
 import mage.client.util.Event;
-import mage.client.util.ImageHelper;
 import mage.client.util.Listener;
 import mage.client.util.gui.GuiDisplayUtil;
 import mage.constants.CardType;
@@ -409,7 +408,7 @@ public class TableModel extends AbstractTableModel implements ICardGrid {
                 Image image = Plugins.getInstance().getOriginalImage(card);
                 if (image != null && image instanceof BufferedImage) {
                     // XXX: scaled to fit width
-                    bigCard.setCard(card.getId(), EnlargeMode.NORMAL, image, new ArrayList<String>(), false);
+                    bigCard.setCard(card.getId(), EnlargeMode.NORMAL, image, new ArrayList<>(), false);
                 } else {
                     drawCardText(card);
                 }

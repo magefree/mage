@@ -675,6 +675,9 @@ public class SessionImpl implements Session {
     public boolean joinTable(UUID roomId, UUID tableId, String playerName, String playerType, int skill, DeckCardLists deckList, String password) {
         try {
             if (isConnected()) {
+                // Workaround to fix Can't join table problem
+                deckList.setCardLayout(null);
+                deckList.setSideboardLayout(null);
                 return server.joinTable(sessionId, roomId, tableId, playerName, playerType, skill, deckList, password);
             }
         } catch (InvalidDeckException iex) {
@@ -693,6 +696,9 @@ public class SessionImpl implements Session {
     public boolean joinTournamentTable(UUID roomId, UUID tableId, String playerName, String playerType, int skill, DeckCardLists deckList, String password) {
         try {
             if (isConnected()) {
+                // Workaround to fix Can't join table problem
+                deckList.setCardLayout(null);
+                deckList.setSideboardLayout(null);
                 return server.joinTournamentTable(sessionId, roomId, tableId, playerName, playerType, skill, deckList, password);
             }
         } catch (GameException ex) {
@@ -1175,6 +1181,9 @@ public class SessionImpl implements Session {
     public boolean submitDeck(UUID tableId, DeckCardLists deck) {
         try {
             if (isConnected()) {
+                // Workaround to fix Can't join table problem
+                deck.setCardLayout(null);
+                deck.setSideboardLayout(null);
                 return server.submitDeck(sessionId, tableId, deck);
             }
         } catch (GameException ex) {
@@ -1191,6 +1200,8 @@ public class SessionImpl implements Session {
     public boolean updateDeck(UUID tableId, DeckCardLists deck) {
         try {
             if (isConnected()) {
+                deck.setCardLayout(null);
+                deck.setSideboardLayout(null);
                 server.updateDeck(sessionId, tableId, deck);
                 return true;
             }

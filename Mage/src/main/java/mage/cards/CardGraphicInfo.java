@@ -3,6 +3,7 @@ package mage.cards;
 import mage.ObjectColor;
 
 public final class CardGraphicInfo {
+
     private final ObjectColor frameColor;
     private final FrameStyle frameStyle;
     private final boolean useVariousArt;
@@ -17,9 +18,15 @@ public final class CardGraphicInfo {
         this.useVariousArt = useVariousArt;
     }
 
-    public ObjectColor getFrameColor() { return this.frameColor != null ? this.frameColor.copy() : null; }
+    public ObjectColor getFrameColor() {
+        return this.frameColor != null ? this.frameColor.copy() : null;
+    }
 
-    public FrameStyle getFrameStyle() { return this.frameStyle; }
+    public FrameStyle getFrameStyle() {
+        return this.frameStyle;
+    }
 
-    public boolean getUsesVariousArt() { return this.useVariousArt; }
+    public boolean getUsesVariousArt() {
+        return this.useVariousArt;
+    }
 }

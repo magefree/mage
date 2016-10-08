@@ -121,18 +121,22 @@ public class DckDeckImporter extends DeckImporter {
                 //
                 DeckCardLayout layout = new DeckCardLayout(grid, settings);
                 int expectedCount = 0;
-                if (target.equals("MAIN")) {
-                    deckList.setCardLayout(layout);
-                    expectedCount = deckList.getCards().size();
-                } else if (target.equals("SIDEBOARD")) {
-                    deckList.setSideboardLayout(layout);
-                    expectedCount = deckList.getSideboard().size();
-                } else {
-                    sbMessage.append("Bad target `" + target + "` for layout.\n");
+                switch (target) {
+                    case "MAIN":
+                        deckList.setCardLayout(layout);
+                        expectedCount = deckList.getCards().size();
+                        break;
+                    case "SIDEBOARD":
+                        deckList.setSideboardLayout(layout);
+                        expectedCount = deckList.getSideboard().size();
+                        break;
+                    default:
+                        sbMessage.append("Bad target `").append(target).append("` for layout.\n");
+                        break;
                 }
                 //
                 if (totalCardCount != expectedCount) {
-                    sbMessage.append("Layout mismatch: Expected " + expectedCount + " cards, but got " + totalCardCount + " in layout `" + target + "`\n.");
+                    sbMessage.append("Layout mismatch: Expected ").append(expectedCount).append(" cards, but got ").append(totalCardCount).append(" in layout `").append(target).append("`\n.");
                 }
 
             } else {
