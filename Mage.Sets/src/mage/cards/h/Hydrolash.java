@@ -46,7 +46,7 @@ public class Hydrolash extends CardImpl {
         super(ownerId,setInfo,new CardType[]{CardType.INSTANT},"{2}{U}");
 
         // Attacking creatures get -2/-0 until end of turn.
-        this.getSpellAbility().addEffect(new BoostAllEffect(-2, 0, Duration.EndOfTurn, new FilterAttackingCreature(), false));
+        this.getSpellAbility().addEffect(new BoostAllEffect(-2, 0, Duration.EndOfTurn, new FilterAttackingCreature("Attacking creatures"), false));
         // Draw a card.
         this.getSpellAbility().addEffect(new DrawCardSourceControllerEffect(1));
     }

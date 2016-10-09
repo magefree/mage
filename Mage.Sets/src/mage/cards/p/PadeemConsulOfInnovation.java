@@ -53,7 +53,7 @@ public class PadeemConsulOfInnovation extends CardImpl {
 
     public PadeemConsulOfInnovation(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{3}{U}");
-        this.supertype.add("Lengendary");
+        this.supertype.add("Legendary");
         this.subtype.add("Veldalken");
         this.subtype.add("Artificer");
         this.power = new MageInt(1);
