@@ -32,11 +32,13 @@
  */
 package mage.client.deckeditor;
 
+import java.util.*;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
+import javax.swing.*;
 import mage.cards.Card;
 import mage.cards.decks.Deck;
-import mage.cards.decks.DeckCardInfo;
 import mage.cards.decks.DeckCardLayout;
-import mage.cards.decks.DeckCardLists;
 import mage.client.cards.BigCard;
 import mage.client.cards.CardEventSource;
 import mage.client.cards.DragCardGrid;
@@ -46,12 +48,6 @@ import mage.client.util.GUISizeHelper;
 import mage.client.util.Listener;
 import mage.view.CardView;
 import mage.view.CardsView;
-import org.apache.log4j.Logger;
-
-import javax.swing.*;
-import java.util.*;
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
 
 /**
  *
@@ -66,7 +62,7 @@ public class DeckArea extends javax.swing.JPanel {
     private BigCard lastBigCard = null;
     private int dividerLocationNormal = 0;
     private int dividerLocationLimited = 0;
-    private boolean isLimitedBuildingOrientation = false;
+    private final boolean isLimitedBuildingOrientation = false;
 
     public DeckCardLayout getCardLayout() {
         return deckList.getCardLayout();
@@ -77,12 +73,13 @@ public class DeckArea extends javax.swing.JPanel {
     }
 
     public static class Settings {
+
         public DragCardGrid.Settings maindeckSettings;
         public DragCardGrid.Settings sideboardSetings;
         public int dividerLocationLimited;
         public int dividerLocationNormal;
 
-        private static Pattern parser = Pattern.compile("([^|]*)\\|([^|]*)\\|([^|]*)\\|([^|]*)");
+        private final static Pattern parser = Pattern.compile("([^|]*)\\|([^|]*)\\|([^|]*)\\|([^|]*)");
 
         public static Settings parse(String s) {
             Matcher m = parser.matcher(s);
@@ -186,10 +183,8 @@ public class DeckArea extends javax.swing.JPanel {
                 if (dividerLocationLimited != 0) {
                     deckAreaSplitPane.setDividerLocation(s.dividerLocationLimited);
                 }
-            } else {
-                if (dividerLocationNormal != 0) {
-                    deckAreaSplitPane.setDividerLocation(s.dividerLocationNormal);
-                }
+            } else if (dividerLocationNormal != 0) {
+                deckAreaSplitPane.setDividerLocation(s.dividerLocationNormal);
             }
         }
     }
