@@ -25,47 +25,35 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-
-package mage.cards.g;
+package mage.cards.v;
 
 import java.util.UUID;
-
 import mage.constants.CardType;
-import mage.abilities.costs.common.SacrificeTargetCost;
-import mage.abilities.effects.common.DamageTargetEffect;
+import mage.MageInt;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
-import mage.filter.common.FilterControlledCreaturePermanent;
-import mage.filter.predicate.mageobject.SubtypePredicate;
-import mage.target.common.TargetControlledCreaturePermanent;
-import mage.target.common.TargetCreatureOrPlayer;
 
 /**
- * @author Loki
+ *
+ * @author North
  */
-public class GoblinGrenade extends CardImpl {
+public class VodalianSoldiers1 extends CardImpl {
 
-    private static final FilterControlledCreaturePermanent filter = new FilterControlledCreaturePermanent("a Goblin");
+    public VodalianSoldiers1(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{1}{U}");
+        this.subtype.add("Merfolk");
+        this.subtype.add("Soldier");
 
-    static {
-        filter.add(new SubtypePredicate("Goblin"));
+        this.power = new MageInt(1);
+        this.toughness = new MageInt(2);
     }
 
-    public GoblinGrenade(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{R}");
-
-        this.getSpellAbility().addCost(new SacrificeTargetCost(new TargetControlledCreaturePermanent(1, 1, filter, false)));
-        this.getSpellAbility().addEffect(new DamageTargetEffect(5));
-        this.getSpellAbility().addTarget(new TargetCreatureOrPlayer());
-    }
-
-    public GoblinGrenade(final GoblinGrenade card) {
+    public VodalianSoldiers1(final VodalianSoldiers1 card) {
         super(card);
     }
 
     @Override
-    public GoblinGrenade copy() {
-        return new GoblinGrenade(this);
+    public VodalianSoldiers1 copy() {
+        return new VodalianSoldiers1(this);
     }
-
 }

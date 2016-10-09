@@ -25,35 +25,51 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.cards.v;
+package mage.cards.i;
 
 import java.util.UUID;
-import mage.constants.CardType;
 import mage.MageInt;
+import mage.abilities.Ability;
+import mage.abilities.common.SimpleActivatedAbility;
+import mage.abilities.costs.common.TapSourceCost;
+import mage.abilities.costs.mana.ManaCostsImpl;
+import mage.abilities.effects.common.continuous.GainAbilityTargetEffect;
+import mage.abilities.keyword.FirstStrikeAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
+import mage.constants.CardType;
+import mage.constants.Duration;
+import mage.constants.Zone;
+import mage.target.common.TargetCreaturePermanent;
 
 /**
  *
- * @author North
+ * @author LoneFox
  */
-public class VodalianSoldiers extends CardImpl {
+public class IcatianScout1 extends CardImpl {
 
-    public VodalianSoldiers(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{1}{U}");
-        this.subtype.add("Merfolk");
+    public IcatianScout1(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{W}");
+        this.subtype.add("Human");
         this.subtype.add("Soldier");
-
+        this.subtype.add("Scout");
         this.power = new MageInt(1);
-        this.toughness = new MageInt(2);
+        this.toughness = new MageInt(1);
+
+        // {1}, {tap}: Target creature gains first strike until end of turn.
+        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new GainAbilityTargetEffect(
+            FirstStrikeAbility.getInstance(), Duration.EndOfTurn), new ManaCostsImpl("{1}"));
+        ability.addCost(new TapSourceCost());
+        ability.addTarget(new TargetCreaturePermanent());
+        this.addAbility(ability);
     }
 
-    public VodalianSoldiers(final VodalianSoldiers card) {
+    public IcatianScout1(final IcatianScout1 card) {
         super(card);
     }
 
     @Override
-    public VodalianSoldiers copy() {
-        return new VodalianSoldiers(this);
+    public IcatianScout1 copy() {
+        return new IcatianScout1(this);
     }
 }

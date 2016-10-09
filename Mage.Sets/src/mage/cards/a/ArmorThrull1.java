@@ -25,61 +25,47 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.cards.o;
+package mage.cards.a;
 
 import java.util.UUID;
 import mage.MageInt;
-import mage.ObjectColor;
+import mage.abilities.Ability;
 import mage.abilities.common.SimpleActivatedAbility;
-import mage.abilities.costs.mana.ManaCostsImpl;
-import mage.abilities.effects.common.continuous.BoostSourceEffect;
-import mage.abilities.effects.common.continuous.GainAbilitySourceEffect;
-import mage.abilities.keyword.FirstStrikeAbility;
-import mage.abilities.keyword.ProtectionAbility;
+import mage.abilities.costs.common.SacrificeSourceCost;
+import mage.abilities.costs.common.TapSourceCost;
+import mage.abilities.effects.common.counter.AddCountersTargetEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.Duration;
 import mage.constants.Zone;
-import mage.filter.FilterCard;
-import mage.filter.predicate.mageobject.ColorPredicate;
+import mage.counters.CounterType;
+import mage.target.common.TargetCreaturePermanent;
 
 /**
  *
  * @author LoneFox
-
  */
-public class OrderOfTheEbonHand extends CardImpl {
+public class ArmorThrull1 extends CardImpl {
 
-    private static final FilterCard filter = new FilterCard("white");
+    public ArmorThrull1(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{2}{B}");
+        this.subtype.add("Thrull");
+        this.power = new MageInt(1);
+        this.toughness = new MageInt(3);
 
-    static {
-        filter.add(new ColorPredicate(ObjectColor.WHITE));
+        // {T}, Sacrifice Armor Thrull: Put a +1/+2 counter on target creature.
+        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new AddCountersTargetEffect(CounterType.P1P2.createInstance()), new TapSourceCost());
+        ability.addCost(new SacrificeSourceCost());
+        ability.addTarget(new TargetCreaturePermanent());
+        this.addAbility(ability);
     }
 
-    public OrderOfTheEbonHand(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{B}{B}");
-        this.subtype.add("Cleric");
-        this.subtype.add("Knight");
-        this.power = new MageInt(2);
-        this.toughness = new MageInt(1);
-
-        // Protection from white
-        this.addAbility(new ProtectionAbility(filter));
-
-        // {B}: Order of the Ebon Hand gains first strike until end of turn.
-        this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new GainAbilitySourceEffect(FirstStrikeAbility.getInstance(), Duration.EndOfTurn), new ManaCostsImpl("{B}")));
-
-        // {B}{B}: Order of the Ebon Hand gets +1/+0 until end of turn.
-        this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new BoostSourceEffect(1,0, Duration.EndOfTurn), new ManaCostsImpl("{B}{B}")));
-    }
-
-    public OrderOfTheEbonHand(final OrderOfTheEbonHand card) {
+    public ArmorThrull1(final ArmorThrull1 card) {
         super(card);
     }
 
     @Override
-    public OrderOfTheEbonHand copy() {
-        return new OrderOfTheEbonHand(this);
+    public ArmorThrull1 copy() {
+        return new ArmorThrull1(this);
     }
 }

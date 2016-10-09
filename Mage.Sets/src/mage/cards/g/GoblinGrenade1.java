@@ -25,47 +25,47 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.cards.a;
+
+package mage.cards.g;
 
 import java.util.UUID;
-import mage.MageInt;
-import mage.abilities.Ability;
-import mage.abilities.common.SimpleActivatedAbility;
-import mage.abilities.costs.common.SacrificeSourceCost;
-import mage.abilities.costs.common.TapSourceCost;
-import mage.abilities.effects.common.counter.AddCountersTargetEffect;
+
+import mage.constants.CardType;
+import mage.abilities.costs.common.SacrificeTargetCost;
+import mage.abilities.effects.common.DamageTargetEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
-import mage.constants.CardType;
-import mage.constants.Zone;
-import mage.counters.CounterType;
-import mage.target.common.TargetCreaturePermanent;
+import mage.filter.common.FilterControlledCreaturePermanent;
+import mage.filter.predicate.mageobject.SubtypePredicate;
+import mage.target.common.TargetControlledCreaturePermanent;
+import mage.target.common.TargetCreatureOrPlayer;
 
 /**
- *
- * @author LoneFox
+ * @author Loki
  */
-public class ArmorThrull extends CardImpl {
+public class GoblinGrenade1 extends CardImpl {
 
-    public ArmorThrull(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{2}{B}");
-        this.subtype.add("Thrull");
-        this.power = new MageInt(1);
-        this.toughness = new MageInt(3);
+    private static final FilterControlledCreaturePermanent filter = new FilterControlledCreaturePermanent("a Goblin");
 
-        // {T}, Sacrifice Armor Thrull: Put a +1/+2 counter on target creature.
-        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new AddCountersTargetEffect(CounterType.P1P2.createInstance()), new TapSourceCost());
-        ability.addCost(new SacrificeSourceCost());
-        ability.addTarget(new TargetCreaturePermanent());
-        this.addAbility(ability);
+    static {
+        filter.add(new SubtypePredicate("Goblin"));
     }
 
-    public ArmorThrull(final ArmorThrull card) {
+    public GoblinGrenade1(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{R}");
+
+        this.getSpellAbility().addCost(new SacrificeTargetCost(new TargetControlledCreaturePermanent(1, 1, filter, false)));
+        this.getSpellAbility().addEffect(new DamageTargetEffect(5));
+        this.getSpellAbility().addTarget(new TargetCreatureOrPlayer());
+    }
+
+    public GoblinGrenade1(final GoblinGrenade1 card) {
         super(card);
     }
 
     @Override
-    public ArmorThrull copy() {
-        return new ArmorThrull(this);
+    public GoblinGrenade1 copy() {
+        return new GoblinGrenade1(this);
     }
+
 }

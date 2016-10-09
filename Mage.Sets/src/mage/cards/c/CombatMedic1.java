@@ -44,9 +44,9 @@ import mage.target.common.TargetCreatureOrPlayer;
  *
  * @author LoneFox
  */
-public class CombatMedic extends CardImpl {
+public class CombatMedic1 extends CardImpl {
 
-    public CombatMedic(UUID ownerId, CardSetInfo setInfo) {
+    public CombatMedic1(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{2}{W}");
         this.subtype.add("Human");
         this.subtype.add("Cleric");
@@ -60,12 +60,12 @@ public class CombatMedic extends CardImpl {
         this.addAbility(ability);
     }
 
-    public CombatMedic(final CombatMedic card) {
+    public CombatMedic1(final CombatMedic1 card) {
         super(card);
     }
 
     @Override
-    public CombatMedic copy() {
-        return new CombatMedic(this);
+    public CombatMedic1 copy() {
+        return new CombatMedic1(this);
     }
 }

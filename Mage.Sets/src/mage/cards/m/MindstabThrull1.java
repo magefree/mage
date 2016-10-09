@@ -25,59 +25,43 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.cards.o;
+package mage.cards.m;
 
 import java.util.UUID;
 import mage.MageInt;
-import mage.ObjectColor;
-import mage.abilities.common.SimpleActivatedAbility;
-import mage.abilities.common.SimpleStaticAbility;
-import mage.abilities.costs.mana.ManaCostsImpl;
-import mage.abilities.effects.common.combat.CantBlockCreaturesSourceEffect;
-import mage.abilities.effects.common.continuous.GainAbilitySourceEffect;
-import mage.abilities.keyword.FirstStrikeAbility;
+import mage.abilities.common.AttacksAndIsNotBlockedTriggeredAbility;
+import mage.abilities.costs.common.SacrificeSourceCost;
+import mage.abilities.effects.Effect;
+import mage.abilities.effects.common.DoIfCostPaid;
+import mage.abilities.effects.common.discard.DiscardTargetEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.Duration;
-import mage.constants.Zone;
-import mage.filter.Filter;
-import mage.filter.common.FilterCreaturePermanent;
-import mage.filter.predicate.mageobject.ColorPredicate;
-import mage.filter.predicate.mageobject.PowerPredicate;
 
 /**
  *
- * @author fireshoes
+ * @author LoneFox
  */
-public class OrcishVeteran extends CardImpl {
-    
-    private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("white creatures with power 2 or greater");
-    
-    static {
-        filter.add(new ColorPredicate(ObjectColor.WHITE));
-        filter.add(new PowerPredicate(Filter.ComparisonType.GreaterThan, 1));
-    }
+public class MindstabThrull1 extends CardImpl {
 
-    public OrcishVeteran(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{2}{R}");
-        this.subtype.add("Orc");
+    public MindstabThrull1(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{1}{B}{B}");
+        this.subtype.add("Thrull");
         this.power = new MageInt(2);
         this.toughness = new MageInt(2);
 
-        // Orcish Veteran can't block white creatures with power 2 or greater.
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new CantBlockCreaturesSourceEffect(filter)));
-        
-        // {R}: Orcish Veteran gains first strike until end of turn.
-        this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new GainAbilitySourceEffect(FirstStrikeAbility.getInstance(), Duration.EndOfTurn), new ManaCostsImpl("{R}")));
+        // Whenever Mindstab Thrull attacks and isn't blocked, you may sacrifice it. If you do, defending player discards three cards.
+        Effect effect = new DiscardTargetEffect(3);
+        effect.setText("defending player discards three cards");
+        this.addAbility(new AttacksAndIsNotBlockedTriggeredAbility(new DoIfCostPaid(effect, new SacrificeSourceCost()), false, true));
     }
 
-    public OrcishVeteran(final OrcishVeteran card) {
+    public MindstabThrull1(final MindstabThrull1 card) {
         super(card);
     }
 
     @Override
-    public OrcishVeteran copy() {
-        return new OrcishVeteran(this);
+    public MindstabThrull1 copy() {
+        return new MindstabThrull1(this);
     }
 }

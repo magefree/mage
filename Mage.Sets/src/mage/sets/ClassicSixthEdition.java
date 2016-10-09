@@ -386,7 +386,7 @@ public class ClassicSixthEdition extends ExpansionSet {
         cards.add(new SetCardInfo("Vertigo", 212, Rarity.UNCOMMON, mage.cards.v.Vertigo.class));
         cards.add(new SetCardInfo("Viashino Warrior", 213, Rarity.COMMON, mage.cards.v.ViashinoWarrior.class));
         cards.add(new SetCardInfo("Vitalize", 265, Rarity.COMMON, mage.cards.v.Vitalize.class));
-        cards.add(new SetCardInfo("Vodalian Soldiers", 104, Rarity.COMMON, mage.cards.v.VodalianSoldiers.class));
+        cards.add(new SetCardInfo("Vodalian Soldiers", 104, Rarity.COMMON, mage.cards.v.VodalianSoldiers1.class));
         cards.add(new SetCardInfo("Volcanic Dragon", 214, Rarity.RARE, mage.cards.v.VolcanicDragon.class));
         cards.add(new SetCardInfo("Volcanic Geyser", 215, Rarity.UNCOMMON, mage.cards.v.VolcanicGeyser.class));
         cards.add(new SetCardInfo("Waiting in the Weeds", 266, Rarity.RARE, mage.cards.w.WaitingInTheWeeds.class));

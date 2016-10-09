@@ -63,7 +63,7 @@ public class MastersEditionII extends ExpansionSet {
         cards.add(new SetCardInfo("Angel of Light", 3, Rarity.UNCOMMON, mage.cards.a.AngelOfLight.class));
         cards.add(new SetCardInfo("Armored Griffin", 5, Rarity.COMMON, mage.cards.a.ArmoredGriffin.class));
         cards.add(new SetCardInfo("Armor of Faith", 4, Rarity.COMMON, mage.cards.a.ArmorOfFaith.class));
-        cards.add(new SetCardInfo("Armor Thrull", 77, Rarity.COMMON, mage.cards.a.ArmorThrull.class));
+        cards.add(new SetCardInfo("Armor Thrull", 77, Rarity.COMMON, mage.cards.a.ArmorThrull1.class));
         cards.add(new SetCardInfo("Aurochs", 153, Rarity.COMMON, mage.cards.a.Aurochs.class));
         cards.add(new SetCardInfo("Aysen Bureaucrats", 6, Rarity.COMMON, mage.cards.a.AysenBureaucrats.class));
         cards.add(new SetCardInfo("Badlands", 225, Rarity.RARE, mage.cards.b.Badlands.class));
@@ -78,7 +78,7 @@ public class MastersEditionII extends ExpansionSet {
         cards.add(new SetCardInfo("Browse", 43, Rarity.UNCOMMON, mage.cards.b.Browse.class));
         cards.add(new SetCardInfo("Burnout", 121, Rarity.UNCOMMON, mage.cards.b.Burnout.class));
         cards.add(new SetCardInfo("Caribou Range", 8, Rarity.RARE, mage.cards.c.CaribouRange.class));
-        cards.add(new SetCardInfo("Combat Medic", 9, Rarity.COMMON, mage.cards.c.CombatMedic.class));
+        cards.add(new SetCardInfo("Combat Medic", 9, Rarity.COMMON, mage.cards.c.CombatMedic1.class));
         cards.add(new SetCardInfo("Conquer", 122, Rarity.UNCOMMON, mage.cards.c.Conquer.class));
         cards.add(new SetCardInfo("Counterspell", 44, Rarity.UNCOMMON, mage.cards.c.Counterspell.class));
         cards.add(new SetCardInfo("Dance of the Dead", 83, Rarity.UNCOMMON, mage.cards.d.DanceOfTheDead.class));
@@ -94,7 +94,7 @@ public class MastersEditionII extends ExpansionSet {
         cards.add(new SetCardInfo("Elemental Augury", 193, Rarity.RARE, mage.cards.e.ElementalAugury.class));
         cards.add(new SetCardInfo("Elven Lyre", 208, Rarity.COMMON, mage.cards.e.ElvenLyre.class));
         cards.add(new SetCardInfo("Elvish Farmer", 156, Rarity.RARE, mage.cards.e.ElvishFarmer.class));
-        cards.add(new SetCardInfo("Elvish Hunter", 157, Rarity.COMMON, mage.cards.e.ElvishHunter.class));
+        cards.add(new SetCardInfo("Elvish Hunter", 157, Rarity.COMMON, mage.cards.e.ElvishHunter1.class));
         cards.add(new SetCardInfo("Elvish Ranger", 158, Rarity.COMMON, mage.cards.e.ElvishRanger.class));
         cards.add(new SetCardInfo("Elvish Spirit Guide", 159, Rarity.UNCOMMON, mage.cards.e.ElvishSpiritGuide.class));
         cards.add(new SetCardInfo("Enervate", 47, Rarity.COMMON, mage.cards.e.Enervate.class));
@@ -119,7 +119,7 @@ public class MastersEditionII extends ExpansionSet {
         cards.add(new SetCardInfo("Heart of Yavimaya", 231, Rarity.RARE, mage.cards.h.HeartOfYavimaya.class));
         cards.add(new SetCardInfo("Helm of Obedience", 210, Rarity.RARE, mage.cards.h.HelmOfObedience.class));
         cards.add(new SetCardInfo("Icatian Javelineers", 15, Rarity.COMMON, mage.cards.i.IcatianJavelineers1.class));
-        cards.add(new SetCardInfo("Icatian Scout", 17, Rarity.COMMON, mage.cards.i.IcatianScout.class));
+        cards.add(new SetCardInfo("Icatian Scout", 17, Rarity.COMMON, mage.cards.i.IcatianScout1.class));
         cards.add(new SetCardInfo("Icequake", 94, Rarity.COMMON, mage.cards.i.Icequake.class));
         cards.add(new SetCardInfo("Icy Prison", 50, Rarity.COMMON, mage.cards.i.IcyPrison.class));
         cards.add(new SetCardInfo("Ihsan's Shade", 95, Rarity.RARE, mage.cards.i.IhsansShade.class));
@@ -151,7 +151,7 @@ public class MastersEditionII extends ExpansionSet {
         cards.add(new SetCardInfo("Orcish Cannoneers", 138, Rarity.UNCOMMON, mage.cards.o.OrcishCannoneers.class));
         cards.add(new SetCardInfo("Orcish Captain", 139, Rarity.UNCOMMON, mage.cards.o.OrcishCaptain.class));
         cards.add(new SetCardInfo("Orcish Lumberjack", 142, Rarity.COMMON, mage.cards.o.OrcishLumberjack.class));
-        cards.add(new SetCardInfo("Orcish Veteran", 144, Rarity.COMMON, mage.cards.o.OrcishVeteran.class));
+        cards.add(new SetCardInfo("Orcish Veteran", 144, Rarity.COMMON, mage.cards.o.OrcishVeteran1.class));
         cards.add(new SetCardInfo("Order of the Sacred Torch", 25, Rarity.RARE, mage.cards.o.OrderOfTheSacredTorch.class));
         cards.add(new SetCardInfo("Order of the White Shield", 26, Rarity.UNCOMMON, mage.cards.o.OrderOfTheWhiteShield.class));
         cards.add(new SetCardInfo("Panic", 145, Rarity.COMMON, mage.cards.p.Panic.class));

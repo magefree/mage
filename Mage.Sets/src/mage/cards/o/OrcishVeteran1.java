@@ -25,51 +25,59 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.cards.i;
+package mage.cards.o;
 
 import java.util.UUID;
 import mage.MageInt;
-import mage.abilities.Ability;
+import mage.ObjectColor;
 import mage.abilities.common.SimpleActivatedAbility;
-import mage.abilities.costs.common.TapSourceCost;
+import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.costs.mana.ManaCostsImpl;
-import mage.abilities.effects.common.continuous.GainAbilityTargetEffect;
+import mage.abilities.effects.common.combat.CantBlockCreaturesSourceEffect;
+import mage.abilities.effects.common.continuous.GainAbilitySourceEffect;
 import mage.abilities.keyword.FirstStrikeAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Duration;
 import mage.constants.Zone;
-import mage.target.common.TargetCreaturePermanent;
+import mage.filter.Filter;
+import mage.filter.common.FilterCreaturePermanent;
+import mage.filter.predicate.mageobject.ColorPredicate;
+import mage.filter.predicate.mageobject.PowerPredicate;
 
 /**
  *
- * @author LoneFox
+ * @author fireshoes
  */
-public class IcatianScout extends CardImpl {
-
-    public IcatianScout(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{W}");
-        this.subtype.add("Human");
-        this.subtype.add("Soldier");
-        this.subtype.add("Scout");
-        this.power = new MageInt(1);
-        this.toughness = new MageInt(1);
-
-        // {1}, {tap}: Target creature gains first strike until end of turn.
-        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new GainAbilityTargetEffect(
-            FirstStrikeAbility.getInstance(), Duration.EndOfTurn), new ManaCostsImpl("{1}"));
-        ability.addCost(new TapSourceCost());
-        ability.addTarget(new TargetCreaturePermanent());
-        this.addAbility(ability);
+public class OrcishVeteran1 extends CardImpl {
+    
+    private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("white creatures with power 2 or greater");
+    
+    static {
+        filter.add(new ColorPredicate(ObjectColor.WHITE));
+        filter.add(new PowerPredicate(Filter.ComparisonType.GreaterThan, 1));
     }
 
-    public IcatianScout(final IcatianScout card) {
+    public OrcishVeteran1(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{2}{R}");
+        this.subtype.add("Orc");
+        this.power = new MageInt(2);
+        this.toughness = new MageInt(2);
+
+        // Orcish Veteran can't block white creatures with power 2 or greater.
+        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new CantBlockCreaturesSourceEffect(filter)));
+        
+        // {R}: Orcish Veteran gains first strike until end of turn.
+        this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new GainAbilitySourceEffect(FirstStrikeAbility.getInstance(), Duration.EndOfTurn), new ManaCostsImpl("{R}")));
+    }
+
+    public OrcishVeteran1(final OrcishVeteran1 card) {
         super(card);
     }
 
     @Override
-    public IcatianScout copy() {
-        return new IcatianScout(this);
+    public OrcishVeteran1 copy() {
+        return new OrcishVeteran1(this);
     }
 }

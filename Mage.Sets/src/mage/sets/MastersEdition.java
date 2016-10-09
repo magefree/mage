@@ -115,7 +115,7 @@ public class MastersEdition extends ExpansionSet {
         cards.add(new SetCardInfo("Ghazban Ogre", 120, Rarity.COMMON, mage.cards.g.GhazbanOgre.class));
         cards.add(new SetCardInfo("Giant Tortoise", 34, Rarity.COMMON, mage.cards.g.GiantTortoise.class));
         cards.add(new SetCardInfo("Goblin Chirurgeon", 94, Rarity.COMMON, mage.cards.g.GoblinChirurgeon1.class));
-        cards.add(new SetCardInfo("Goblin Grenade", 95, Rarity.UNCOMMON, mage.cards.g.GoblinGrenade.class));
+        cards.add(new SetCardInfo("Goblin Grenade", 95, Rarity.UNCOMMON, mage.cards.g.GoblinGrenade1.class));
         cards.add(new SetCardInfo("Goblin Mutant", 96, Rarity.UNCOMMON, mage.cards.g.GoblinMutant.class));
         cards.add(new SetCardInfo("Goblins of the Flarg", 98, Rarity.COMMON, mage.cards.g.GoblinsOfTheFlarg.class));
         cards.add(new SetCardInfo("Goblin Wizard", 97, Rarity.RARE, mage.cards.g.GoblinWizard.class));
@@ -154,7 +154,7 @@ public class MastersEdition extends ExpansionSet {
         cards.add(new SetCardInfo("Lord of Tresserhorn", 149, Rarity.RARE, mage.cards.l.LordOfTresserhorn.class));
         cards.add(new SetCardInfo("Mana Flare", 103, Rarity.RARE, mage.cards.m.ManaFlare.class));
         cards.add(new SetCardInfo("Marton Stromgald", 104, Rarity.RARE, mage.cards.m.MartonStromgald.class));
-        cards.add(new SetCardInfo("Mindstab Thrull", 76, Rarity.COMMON, mage.cards.m.MindstabThrull.class));
+        cards.add(new SetCardInfo("Mindstab Thrull", 76, Rarity.COMMON, mage.cards.m.MindstabThrull1.class));
         cards.add(new SetCardInfo("Mishra's Factory", 178, Rarity.UNCOMMON, mage.cards.m.MishrasFactory.class));
         cards.add(new SetCardInfo("Moat", 21, Rarity.RARE, mage.cards.m.Moat.class));
         cards.add(new SetCardInfo("Mountain", 190, Rarity.LAND, mage.cards.basiclands.Mountain.class, new CardGraphicInfo(null, true)));
@@ -167,8 +167,8 @@ public class MastersEdition extends ExpansionSet {
         cards.add(new SetCardInfo("Nevinyrral's Disk", 160, Rarity.RARE, mage.cards.n.NevinyrralsDisk.class));
         cards.add(new SetCardInfo("Onulet", 161, Rarity.COMMON, mage.cards.o.Onulet.class));
         cards.add(new SetCardInfo("Orcish Mechanics", 106, Rarity.UNCOMMON, mage.cards.o.OrcishMechanics.class));
-        cards.add(new SetCardInfo("Order of Leitbur", 22, Rarity.COMMON, mage.cards.o.OrderOfLeitbur.class));
-        cards.add(new SetCardInfo("Order of the Ebon Hand", 78, Rarity.COMMON, mage.cards.o.OrderOfTheEbonHand.class));
+        cards.add(new SetCardInfo("Order of Leitbur", 22, Rarity.COMMON, mage.cards.o.OrderOfLeitbur1.class));
+        cards.add(new SetCardInfo("Order of the Ebon Hand", 78, Rarity.COMMON, mage.cards.o.OrderOfTheEbonHand1.class));
         cards.add(new SetCardInfo("Oubliette", 79, Rarity.COMMON, mage.cards.o.Oubliette1.class));
         cards.add(new SetCardInfo("Paralyze", 80, Rarity.COMMON, mage.cards.p.Paralyze.class));
         cards.add(new SetCardInfo("Phantom Monster", 43, Rarity.COMMON, mage.cards.p.PhantomMonster.class));

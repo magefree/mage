@@ -25,49 +25,62 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.cards.e;
+package mage.cards.o;
 
 import java.util.UUID;
 import mage.MageInt;
-import mage.abilities.Ability;
+import mage.ObjectColor;
 import mage.abilities.common.SimpleActivatedAbility;
-import mage.abilities.costs.common.TapSourceCost;
 import mage.abilities.costs.mana.ManaCostsImpl;
-import mage.abilities.effects.common.DontUntapInControllersNextUntapStepTargetEffect;
+import mage.abilities.effects.common.continuous.BoostSourceEffect;
+import mage.abilities.effects.common.continuous.GainAbilitySourceEffect;
+import mage.abilities.keyword.FirstStrikeAbility;
+import mage.abilities.keyword.ProtectionAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
+import mage.constants.Duration;
 import mage.constants.Zone;
-import mage.target.common.TargetCreaturePermanent;
+import mage.filter.FilterCard;
+import mage.filter.predicate.mageobject.ColorPredicate;
 
 /**
  *
  * @author LoneFox
 
  */
-public class ElvishHunter extends CardImpl {
+public class OrderOfLeitbur1 extends CardImpl {
 
-    public ElvishHunter(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{1}{G}");
-        this.subtype.add("Elf");
-        this.subtype.add("Archer");
-        this.power = new MageInt(1);
-        this.toughness = new MageInt(1);
+    private static final FilterCard filter = new FilterCard("black");
 
-        // {1}{G}, {tap}: Target creature doesn't untap during its controller's next untap step.
-        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new DontUntapInControllersNextUntapStepTargetEffect("Target creature"),
-            new ManaCostsImpl("{1}{G}"));
-        ability.addCost(new TapSourceCost());
-        ability.addTarget(new TargetCreaturePermanent());
-        this.addAbility(ability);
+    static {
+        filter.add(new ColorPredicate(ObjectColor.BLACK));
     }
 
-    public ElvishHunter(final ElvishHunter card) {
+    public OrderOfLeitbur1(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{W}{W}");
+        this.subtype.add("Human");
+        this.subtype.add("Cleric");
+        this.subtype.add("Knight");
+        this.power = new MageInt(2);
+        this.toughness = new MageInt(1);
+
+        // Protection from black
+        this.addAbility(new ProtectionAbility(filter));
+
+        // {W}: Order of Leitbur gains first strike until end of turn.
+        this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new GainAbilitySourceEffect(FirstStrikeAbility.getInstance(), Duration.EndOfTurn), new ManaCostsImpl("{W}")));
+
+        // {W}{W}: Order of Leitbur gets +1/+0 until end of turn.
+        this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new BoostSourceEffect(1,0, Duration.EndOfTurn), new ManaCostsImpl("{W}{W}")));
+    }
+
+    public OrderOfLeitbur1(final OrderOfLeitbur1 card) {
         super(card);
     }
 
     @Override
-    public ElvishHunter copy() {
-        return new ElvishHunter(this);
+    public OrderOfLeitbur1 copy() {
+        return new OrderOfLeitbur1(this);
     }
 }
