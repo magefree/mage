@@ -87,7 +87,7 @@ public class TableModel extends AbstractTableModel implements ICardGrid {
     private boolean displayNoCopies = false;
     private UpdateCountsCallback updateCountsCallback;
 
-    private final String column[] = {"Qty", "Name", "Cost", "Color", "Type", "Stats", "Rarity", "Set"};
+    private final String column[] = {"Qty", "Name", "Cost", "Color", "Type", "Stats", "Rarity", "Set", "#"};
 
     private SortSetting sortSetting;
     private int recentSortedColumn;
@@ -271,6 +271,8 @@ public class TableModel extends AbstractTableModel implements ICardGrid {
                 return c.getRarity().toString();
             case 7:
                 return c.getExpansionSetCode();
+            case 8:
+                return c.getCardNumber();
             default:
                 return "error";
         }

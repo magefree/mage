@@ -33,8 +33,6 @@ import java.util.Date;
 import java.util.EnumMap;
 import java.util.Iterator;
 import java.util.List;
-
-import mage.ObjectColor;
 import mage.cards.repository.CardCriteria;
 import mage.cards.repository.CardInfo;
 import mage.cards.repository.CardRepository;
@@ -46,7 +44,9 @@ import mage.util.RandomUtil;
  * @author BetaSteward_at_googlemail.com
  */
 public abstract class ExpansionSet implements Serializable {
+
     public class SetCardInfo implements Serializable {
+
         private final String name;
         private final String cardNumber;
         private final Rarity rarity;
@@ -71,21 +71,37 @@ public abstract class ExpansionSet implements Serializable {
             this.cardNumber = cardNumber;
             this.rarity = rarity;
             this.cardClass = cardClass;
-            this.usesVariousArt = false;
+            if (graphicInfo != null) {
+                this.usesVariousArt = graphicInfo.getUsesVariousArt();
+            } else {
+                usesVariousArt = false;
+            }
             this.graphicInfo = graphicInfo;
         }
 
-        public String getName() { return this.name; }
+        public String getName() {
+            return this.name;
+        }
 
-        public String getCardNumber() { return this.cardNumber; }
+        public String getCardNumber() {
+            return this.cardNumber;
+        }
 
-        public Rarity getRarity() { return this.rarity; }
+        public Rarity getRarity() {
+            return this.rarity;
+        }
 
-        public Class<?> getCardClass() { return this.cardClass; }
+        public Class<?> getCardClass() {
+            return this.cardClass;
+        }
 
-        public boolean getUsesVariousArt() { return this.usesVariousArt; }
+        public boolean getUsesVariousArt() {
+            return this.usesVariousArt;
+        }
 
-        public CardGraphicInfo getGraphicInfo() { return this.graphicInfo; }
+        public CardGraphicInfo getGraphicInfo() {
+            return this.graphicInfo;
+        }
     }
 
     protected final List<SetCardInfo> cards = new ArrayList<>();
@@ -153,7 +169,9 @@ public abstract class ExpansionSet implements Serializable {
         return blockName;
     }
 
-    public List<SetCardInfo> getSetCardInfo() { return cards; }
+    public List<SetCardInfo> getSetCardInfo() {
+        return cards;
+    }
 
     @Override
     public String toString() {

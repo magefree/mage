@@ -186,8 +186,7 @@ public abstract class CardImpl extends MageObjectImpl implements Card {
             if (setInfo == null) {
                 Constructor<?> con = clazz.getConstructor(UUID.class);
                 card = (Card) con.newInstance(new Object[]{null});
-            }
-            else {
+            } else {
                 Constructor<?> con = clazz.getConstructor(UUID.class, CardSetInfo.class);
                 card = (Card) con.newInstance(null, setInfo);
             }
@@ -559,7 +558,7 @@ public abstract class CardImpl extends MageObjectImpl implements Card {
 
     @Override
     public final Card getSecondCardFace() {
-        if (secondSideCardClazz == null) {
+        if (secondSideCardClazz == null && secondSideCard == null) {
             return null;
         }
 

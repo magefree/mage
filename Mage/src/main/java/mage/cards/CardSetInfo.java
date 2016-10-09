@@ -1,10 +1,10 @@
 package mage.cards;
 
+import java.io.Serializable;
 import mage.constants.Rarity;
 
-import java.io.Serializable;
-
 public final class CardSetInfo implements Serializable {
+
     private final String name;
     private final String cardNumber;
     private final String expansionSetCode;
@@ -20,16 +20,31 @@ public final class CardSetInfo implements Serializable {
         this.expansionSetCode = expansionSetCode;
         this.cardNumber = cardNumber;
         this.rarity = rarity;
-        this.graphicInfo = graphicInfo;
+        if (graphicInfo == null && Rarity.LAND.equals(rarity)) {
+            // Workaround to get images of basic land permanents loaded
+            this.graphicInfo = new CardGraphicInfo(null, true);
+        } else {
+            this.graphicInfo = graphicInfo;
+        }
     }
 
-    public String getName() { return this.name; }
+    public String getName() {
+        return this.name;
+    }
 
-    public String getExpansionSetCode() { return this.expansionSetCode; }
+    public String getExpansionSetCode() {
+        return this.expansionSetCode;
+    }
 
-    public String getCardNumber() { return this.cardNumber; }
+    public String getCardNumber() {
+        return this.cardNumber;
+    }
 
-    public Rarity getRarity() { return this.rarity; }
+    public Rarity getRarity() {
+        return this.rarity;
+    }
 
-    public CardGraphicInfo getGraphicInfo() { return this.graphicInfo; }
+    public CardGraphicInfo getGraphicInfo() {
+        return this.graphicInfo;
+    }
 }
