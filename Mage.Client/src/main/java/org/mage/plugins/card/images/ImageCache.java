@@ -57,7 +57,6 @@ public class ImageCache {
                 try {
 
                     boolean usesVariousArt = false;
-                    LOGGER.info("Key load to CACHE: " + key);
                     if (key.matches(".*#usesVariousArt.*")) {
                         usesVariousArt = true;
                         key = key.replace("#usesVariousArt", "");
@@ -130,9 +129,7 @@ public class ImageCache {
                             }
                         } else {
                             BufferedImage image = loadImage(file);
-                            LOGGER.info("Basic image: @" + Integer.toHexString(image.hashCode()));
                             image = getWizardsCard(image);
-                            LOGGER.info("Wizard image: @" + Integer.toHexString(image.hashCode()));
                             return image;
                         }
                     } else {

@@ -66,7 +66,7 @@ public class CardPanelRenderImpl extends CardPanel {
         if (!a.getRarity().equals(b.getRarity())) {
             return false;
         }
-        if (!a.getCardNumber().equals(b.getCardNumber())) {
+        if (a.getCardNumber() != null && !a.getCardNumber().equals(b.getCardNumber())) {
             return false;
         }
         // Expansion set code, with null checking:

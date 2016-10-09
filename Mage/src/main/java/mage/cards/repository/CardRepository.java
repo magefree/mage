@@ -45,7 +45,6 @@ import java.util.List;
 import java.util.Set;
 import java.util.TreeSet;
 import java.util.concurrent.Callable;
-
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.SetType;
@@ -65,7 +64,7 @@ public enum CardRepository {
     // raise this if db structure was changed
     private static final long CARD_DB_VERSION = 47;
     // raise this if new cards were added to the server
-    private static final long CARD_CONTENT_VERSION = 62;
+    private static final long CARD_CONTENT_VERSION = 63;
 
     private Dao<CardInfo, Object> cardDao;
     private Set<String> classNames;
