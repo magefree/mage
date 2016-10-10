@@ -31,6 +31,7 @@ import mage.abilities.mana.AnyColorManaAbility;
 import mage.constants.CardType;
 import mage.constants.PhaseStep;
 import mage.constants.Zone;
+import mage.counters.CounterType;
 import org.junit.Test;
 import org.mage.test.serverside.base.CardTestPlayerBase;
 
@@ -38,7 +39,7 @@ import org.mage.test.serverside.base.CardTestPlayerBase;
  *
  * @author LevelX2
  */
-public class LandTypeChangingEffects extends CardTestPlayerBase {
+public class LandTypeChangingEffectsTest extends CardTestPlayerBase {
 
     /**
      *
@@ -95,6 +96,39 @@ public class LandTypeChangingEffects extends CardTestPlayerBase {
 
         assertType("Canopy Vista", CardType.LAND, "Mountain");
         assertAbility(playerB, "Canopy Vista", new AnyColorManaAbility(), true);
+    }
+
+    /**
+     * Currently, a land hit by Aquitect's Will loses all of its other
+     * abilities, making it a cheap Spreading Seas. It should function like
+     * Urborg, Tomb of Yawgmoth, not Spreading Seas or Blood Moon.
+     */
+    @Test
+    public void testLandDoesNotLooseOtherAbilities() {
+        // Put a flood counter on target land.
+        // That land is an Island in addition to its other types for as long as it has a flood counter on it.
+        // If you control a Merfolk, draw a card.
+        addCard(Zone.HAND, playerA, "Aquitect's Will");// Tribal Sorcery{U}
+        addCard(Zone.BATTLEFIELD, playerA, "Island", 1);
+        // Forbidding Watchtower enters the battlefield tapped.
+        // {T}: Add {W} to your mana pool.
+        // {1}{W}: Forbidding Watchtower becomes a 1/5 white Soldier creature until end of turn. It's still a land.
+        addCard(Zone.BATTLEFIELD, playerB, "Forbidding Watchtower", 1);
+        addCard(Zone.BATTLEFIELD, playerB, "Plains", 2);
+
+        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Aquitect's Will", "Forbidding Watchtower");
+
+        activateAbility(2, PhaseStep.PRECOMBAT_MAIN, playerB, "{1}{W}:");
+        setStopAt(2, PhaseStep.BEGIN_COMBAT);
+        execute();
+
+        assertGraveyardCount(playerA, "Aquitect's Will", 1);
+
+        assertPermanentCount(playerB, "Forbidding Watchtower", 1);
+        assertCounterCount("Forbidding Watchtower", CounterType.FLOOD, 1);
+        assertType("Forbidding Watchtower", CardType.LAND, "Island");
+        assertPowerToughness(playerB, "Forbidding Watchtower", 1, 5);
+
     }
 
 }
