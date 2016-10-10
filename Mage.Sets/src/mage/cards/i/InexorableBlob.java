@@ -27,6 +27,7 @@
  */
 package mage.cards.i;
 
+import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.common.AttacksTriggeredAbility;
 import mage.abilities.condition.common.DeliriumCondition;
@@ -37,8 +38,6 @@ import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.game.permanent.token.OozeToken;
 
-import java.util.UUID;
-
 /**
  *
  * @author fireshoes
@@ -46,17 +45,17 @@ import java.util.UUID;
 public class InexorableBlob extends CardImpl {
 
     public InexorableBlob(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{2}{G}");
+        super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{2}{G}");
         this.subtype.add("Ooze");
         this.power = new MageInt(3);
         this.toughness = new MageInt(3);
 
         // <i>Delirium</i> &mdash; Whenever Inexorable Blob attacks and there are at least four card types among cards in your graveyard,
         // put a 3/3 green Ooze creature token onto the battlefield tapped and attacking.
-        this.addAbility(new ConditionalTriggeredAbility(new AttacksTriggeredAbility(new CreateTokenEffect(new OozeToken(new MageInt(3), new MageInt(3)), 1, true, true), false),
+        this.addAbility(new ConditionalTriggeredAbility(new AttacksTriggeredAbility(new CreateTokenEffect(new OozeToken(3, 3), 1, true, true), false),
                 DeliriumCondition.getInstance(),
                 "<i>Delirium</i> &mdash; Whenever {this} attacks and there are at least four card types among cards in your graveyard, "
-                        + "put a 3/3 green Ooze creature token onto the battlefield tapped and attacking."));
+                + "put a 3/3 green Ooze creature token onto the battlefield tapped and attacking."));
     }
 
     public InexorableBlob(final InexorableBlob card) {
