@@ -43,9 +43,11 @@ import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Outcome;
-import mage.filter.StaticFilters;
+import mage.filter.FilterPermanent;
 import mage.filter.common.FilterArtifactCard;
 import mage.filter.common.FilterControlledArtifactPermanent;
+import mage.filter.predicate.Predicates;
+import mage.filter.predicate.mageobject.CardTypePredicate;
 import mage.game.Game;
 import mage.game.permanent.token.Token;
 import mage.target.TargetPermanent;
@@ -57,6 +59,14 @@ import mage.target.common.TargetControlledPermanent;
  * @author LevelX2
  */
 public class DarettiIngeniousIconoclast extends CardImpl {
+
+    private static final FilterPermanent filter = new FilterPermanent("artifact or creature");
+
+    static {
+        filter.add(Predicates.or(
+                new CardTypePredicate(CardType.ARTIFACT),
+                new CardTypePredicate(CardType.CREATURE)));
+    }
 
     public DarettiIngeniousIconoclast(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.PLANESWALKER},"{1}{B}{R}");
@@ -72,7 +82,7 @@ public class DarettiIngeniousIconoclast extends CardImpl {
         ability = new LoyaltyAbility(
                 new DoIfCostPaid(new DestroyTargetEffect(""), new SacrificeTargetCost(new TargetControlledPermanent(new FilterControlledArtifactPermanent("an artifact")))),
                 -1);
-        ability.addTarget(new TargetPermanent(StaticFilters.FILTER_ARTIFACT_CREATURE_PERMANENT));
+        ability.addTarget(new TargetPermanent(filter));
         this.addAbility(ability);
 
         // -6: Choose target artifact card in a graveyard or artifact on the battlefield. Put three tokens that are copies of it onto the battlefield.
