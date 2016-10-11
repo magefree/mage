@@ -52,7 +52,7 @@ public class ForceScream extends CardImpl {
     }
 
     public ForceScream(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.INSTANT},"{2}{R}");
+        super(ownerId, setInfo, new CardType[]{CardType.SORCERY}, "{2}{R}");
 
         // Force Spark deals 2 damage to each creature without spaceflight and each player.
         this.getSpellAbility().addEffect(new DamageEverythingEffect(2, filter));

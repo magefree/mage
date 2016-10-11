@@ -47,7 +47,7 @@ import mage.target.common.TargetCreatureOrPlayer;
 public class ForceLightning extends CardImpl {
 
     public ForceLightning(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.INSTANT},"{X}{R}{R}");
+        super(ownerId, setInfo, new CardType[]{CardType.SORCERY}, "{X}{R}{R}");
 
         // Force Lightning deals X damage to target creature or player.
         this.getSpellAbility().addEffect(new DamageTargetEffect(new ManacostVariableValue()));
