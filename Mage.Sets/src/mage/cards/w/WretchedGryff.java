@@ -45,18 +45,18 @@ import mage.constants.CardType;
 public class WretchedGryff extends CardImpl {
 
     public WretchedGryff(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{7}");
+        super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{7}");
         this.subtype.add("Eldrazi");
         this.subtype.add("Hippogriff");
         this.power = new MageInt(3);
         this.toughness = new MageInt(4);
 
-        // Emerge {5}{U}
+        // Emerge {5}{U} (You may cast this spell by sacrificing a creature and paying the emerge cost reduced by that creature's converted mana cost.)
         this.addAbility(new EmergeAbility(this, new ManaCostsImpl<>("{5}{U}")));
 
         // When you cast Wretched Gryff, draw a card.
         this.addAbility(new CastSourceTriggeredAbility(new DrawCardSourceControllerEffect(1)));
-        
+
         // Flying
         this.addAbility(FlyingAbility.getInstance());
     }
