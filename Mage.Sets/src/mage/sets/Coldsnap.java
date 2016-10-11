@@ -165,6 +165,7 @@ public class Coldsnap extends ExpansionSet {
         cards.add(new SetCardInfo("Surging Might", 125, Rarity.COMMON, mage.cards.s.SurgingMight.class));
         cards.add(new SetCardInfo("Surging Sentinels", 20, Rarity.COMMON, mage.cards.s.SurgingSentinels.class));
         cards.add(new SetCardInfo("Swift Maneuver", 21, Rarity.COMMON, mage.cards.s.SwiftManeuver.class));
+	cards.add(new SetCardInfo("Tamanoa", 132, Rarity.RARE, mage.cards.t.Tamanoa.class));
         cards.add(new SetCardInfo("Thermopod", 100, Rarity.COMMON, mage.cards.t.Thermopod.class));
         cards.add(new SetCardInfo("Thrumming Stone", 142, Rarity.RARE, mage.cards.t.ThrummingStone.class));
         cards.add(new SetCardInfo("Tresserhorn Sinks", 150, Rarity.UNCOMMON, mage.cards.t.TresserhornSinks.class));
