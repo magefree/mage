@@ -40,7 +40,7 @@ public class RepairAbility extends DiesTriggeredAbility {
         addSubAbility(new RepairCastFromGraveyardTriggeredAbility());
 
         ruleText = "Repair " + count + " <i>(When this creature dies, put " + count
-                + " repair counters on it. At the beggining of your upkeep, remove a repair counter. "
+                + " repair counters on it. At the beginning of your upkeep, remove a repair counter. "
                 + "Whenever the last is removed, you may cast it from graveyard until end of turn.)</i>";
 
     }

@@ -138,7 +138,7 @@ public class PermanentView extends CardView {
                             + " A face-down card can also be turned face up for its morph cost.");
                 } else if (permanent.isMorphed()) {
                     this.rules.add("If the controller has priority, he or she may turn this permanent face up."
-                            + " This is a special action; it doesnt use the stack. To do this he or she pays the morph costs,"
+                            + " This is a special action; it doesn't use the stack. To do this he or she pays the morph costs,"
                             + " then turns this permanent face up.");
                 }
             }
