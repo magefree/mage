@@ -28,9 +28,7 @@
 package mage.cards.p;
 
 import java.util.UUID;
-import mage.constants.CardType;
-import mage.constants.Outcome;
-import mage.constants.Zone;
+import mage.MageObject;
 import mage.abilities.Ability;
 import mage.abilities.common.EntersBattlefieldTriggeredAbility;
 import mage.abilities.common.SimpleActivatedAbility;
@@ -43,15 +41,16 @@ import mage.abilities.effects.OneShotEffect;
 import mage.cards.Card;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
-import mage.filter.FilterCard;
-import mage.filter.common.FilterArtifactCard;
+import mage.constants.CardType;
+import mage.constants.Outcome;
+import mage.constants.Zone;
+import mage.filter.StaticFilters;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
-import mage.players.Player;
 import mage.game.permanent.token.EmptyToken;
+import mage.players.Player;
 import mage.target.TargetCard;
 import mage.util.CardUtil;
-
 
 /**
  * @author nantuko
@@ -59,7 +58,7 @@ import mage.util.CardUtil;
 public class PrototypePortal extends CardImpl {
 
     public PrototypePortal(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.ARTIFACT},"{4}");
+        super(ownerId, setInfo, new CardType[]{CardType.ARTIFACT}, "{4}");
 
         // Imprint - When Prototype Portal enters the battlefield, you may exile an artifact card from your hand.
         this.addAbility(new EntersBattlefieldTriggeredAbility(new PrototypePortalEffect(), true));
@@ -102,8 +101,6 @@ public class PrototypePortal extends CardImpl {
 
 class PrototypePortalEffect extends OneShotEffect {
 
-    private static final FilterCard  filter = new FilterArtifactCard();
-
     public PrototypePortalEffect() {
         super(Outcome.Benefit);
         staticText = "exile an artifact card from your hand";
@@ -115,21 +112,24 @@ class PrototypePortalEffect extends OneShotEffect {
 
     @Override
     public boolean apply(Game game, Ability source) {
-        Player player = game.getPlayer(source.getControllerId());
-        if (player.getHand().size() > 0) {
-            TargetCard target = new TargetCard(Zone.HAND, filter);
-            player.choose(Outcome.Benefit, player.getHand(), target, game);
-            Card card = player.getHand().get(target.getFirstTarget(), game);
-            if (card != null) {
-                card.moveToExile(getId(), "Prototype Portal (Imprint)", source.getSourceId(), game);
-                Permanent permanent = game.getPermanent(source.getSourceId());
-                if (permanent != null) {
-                    permanent.imprint(card.getId(), game);
+        Player controller = game.getPlayer(source.getControllerId());
+        MageObject sourceObject = game.getObject(source.getSourceId());
+        if (controller != null && sourceObject != null) {
+            if (controller.getHand().size() > 0) {
+                TargetCard target = new TargetCard(Zone.HAND, StaticFilters.FILTER_CARD_ARTIFACT);
+                controller.choose(Outcome.Benefit, controller.getHand(), target, game);
+                Card card = controller.getHand().get(target.getFirstTarget(), game);
+                if (card != null) {
+                    controller.moveCardsToExile(card, source, game, true, source.getSourceId(), sourceObject.getIdName() + " (Imprint)");
+                    Permanent permanent = game.getPermanent(source.getSourceId());
+                    if (permanent != null) {
+                        permanent.imprint(card.getId(), game);
+                    }
                 }
-                return true;
             }
+            return true;
         }
-        return true;
+        return false;
     }
 
     @Override
@@ -176,4 +176,3 @@ class PrototypePortalCreateTokenEffect extends OneShotEffect {
     }
 
 }
-
