@@ -1,34 +1,79 @@
 package mage.client.cards;
 
+import java.awt.BorderLayout;
+import java.awt.Color;
+import java.awt.Dimension;
+import java.awt.Graphics;
+import java.awt.GridBagConstraints;
+import java.awt.GridBagLayout;
+import java.awt.GridLayout;
+import java.awt.event.KeyAdapter;
+import java.awt.event.KeyEvent;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
+import java.awt.event.MouseWheelListener;
+import java.util.ArrayList;
+import java.util.Collection;
+import java.util.Collections;
+import java.util.Comparator;
+import java.util.HashMap;
+import java.util.HashSet;
+import java.util.LinkedHashMap;
+import java.util.List;
+import java.util.Map;
+import java.util.Set;
+import java.util.UUID;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
+import java.util.stream.Collectors;
+import javax.swing.AbstractButton;
+import javax.swing.BorderFactory;
+import javax.swing.BoxLayout;
+import javax.swing.ButtonGroup;
+import javax.swing.ImageIcon;
+import javax.swing.JButton;
+import javax.swing.JCheckBox;
+import javax.swing.JCheckBoxMenuItem;
+import javax.swing.JComponent;
+import javax.swing.JLabel;
+import javax.swing.JLayeredPane;
+import javax.swing.JMenu;
+import javax.swing.JMenuItem;
+import javax.swing.JPanel;
+import javax.swing.JPopupMenu;
+import javax.swing.JScrollPane;
+import javax.swing.JSlider;
+import javax.swing.JTextField;
+import javax.swing.JToggleButton;
+import javax.swing.ScrollPaneConstants;
+import javax.swing.SwingConstants;
+import javax.swing.SwingUtilities;
 import mage.cards.MageCard;
 import mage.cards.decks.DeckCardInfo;
 import mage.cards.decks.DeckCardLayout;
 import mage.client.dialog.PreferencesDialog;
 import mage.client.plugins.impl.Plugins;
-import mage.client.util.*;
+import mage.client.util.CardViewCardTypeComparator;
+import mage.client.util.CardViewColorComparator;
+import mage.client.util.CardViewColorIdentityComparator;
+import mage.client.util.CardViewCostComparator;
+import mage.client.util.CardViewNameComparator;
+import mage.client.util.CardViewRarityComparator;
 import mage.client.util.Event;
+import mage.client.util.GUISizeHelper;
+import mage.client.util.Listener;
 import mage.constants.CardType;
 import mage.view.CardView;
 import mage.view.CardsView;
 import org.apache.log4j.Logger;
 import org.mage.card.arcane.CardRenderer;
-import mage.constants.CardType;
-
-import javax.swing.*;
-import java.awt.*;
-import java.awt.event.*;
-import java.util.*;
-import java.util.List;
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
-import java.util.stream.Collectors;
 
 /**
  * Created by StravantUser on 2016-09-20.
  */
 public class DragCardGrid extends JPanel implements DragCardSource, DragCardTarget {
 
-    private static Logger LOGGER = Logger.getLogger(DragCardGrid.class);
+    private final static Logger LOGGER = Logger.getLogger(DragCardGrid.class);
 
     @Override
     public Collection<CardView> dragCardList() {
@@ -236,7 +281,7 @@ public class DragCardGrid extends JPanel implements DragCardSource, DragCardTarg
                 ArrayList<ArrayList<CardView>> newRow = new ArrayList<>();
                 if (!cardGrid.isEmpty()) {
                     for (int colIndex = 0; colIndex < cardGrid.get(0).size(); ++colIndex) {
-                        newRow.add(new ArrayList<CardView>());
+                        newRow.add(new ArrayList<>());
                     }
                 }
                 cardGrid.add(newRow);
@@ -245,7 +290,7 @@ public class DragCardGrid extends JPanel implements DragCardSource, DragCardTarg
 
             // Insert the new column to add to
             for (int i = 0; i < cardGrid.size(); ++i) {
-                cardGrid.get(i).add(col, new ArrayList<CardView>());
+                cardGrid.get(i).add(col, new ArrayList<>());
             }
 
             // Add the cards
@@ -281,7 +326,7 @@ public class DragCardGrid extends JPanel implements DragCardSource, DragCardTarg
                 ArrayList<ArrayList<CardView>> newRow = new ArrayList<>();
                 if (!cardGrid.isEmpty()) {
                     for (int colIndex = 0; colIndex < cardGrid.get(0).size(); ++colIndex) {
-                        newRow.add(new ArrayList<CardView>());
+                        newRow.add(new ArrayList<>());
                     }
                 }
                 cardGrid.add(newRow);
@@ -291,7 +336,7 @@ public class DragCardGrid extends JPanel implements DragCardSource, DragCardTarg
             // Add a new col if needed
             if (col >= cardGrid.get(0).size()) {
                 for (int i = 0; i < cardGrid.size(); ++i) {
-                    cardGrid.get(i).add(new ArrayList<CardView>());
+                    cardGrid.get(i).add(new ArrayList<>());
                 }
             }
 
@@ -409,8 +454,10 @@ public class DragCardGrid extends JPanel implements DragCardSource, DragCardTarg
                 return 0;
             }
         }),
+        CARD_TYPE("Card Type", new CardViewCardTypeComparator()),
         CMC("Converted Mana Cost", new CardViewCostComparator()),
         COLOR("Color", new CardViewColorComparator()),
+        COLOR_IDENTITY("Color Identity", new CardViewColorIdentityComparator()),
         RARITY("Rarity", new CardViewRarityComparator());
 
         Sort(String text, Comparator<CardView> comparator) {
@@ -426,8 +473,8 @@ public class DragCardGrid extends JPanel implements DragCardSource, DragCardTarg
             return text;
         }
 
-        private Comparator<CardView> comparator;
-        private String text;
+        private final Comparator<CardView> comparator;
+        private final String text;
     }
 
     private abstract class CardTypeCounter {
@@ -496,14 +543,14 @@ public class DragCardGrid extends JPanel implements DragCardSource, DragCardTarg
             return card.getCardTypes().contains(CardType.PLANESWALKER);
         }
     };
-    private CardTypeCounter tribalCounter = new CardTypeCounter() {
+    private final CardTypeCounter tribalCounter = new CardTypeCounter() {
         @Override
         protected boolean is(CardView card) {
             return card.getCardTypes().contains(CardType.TRIBAL);
         }
     };
 
-    private CardTypeCounter[] allCounters = {
+    private final CardTypeCounter[] allCounters = {
         creatureCounter,
         landCounter,
         artifactCounter,
@@ -529,15 +576,15 @@ public class DragCardGrid extends JPanel implements DragCardSource, DragCardTarg
     public static int COUNT_LABEL_HEIGHT = 20;
     public static int GRID_PADDING = 10;
 
-    private static ImageIcon INSERT_ROW_ICON = new ImageIcon(DragCardGrid.class.getClassLoader().getResource("editor_insert_row.png"));
-    private static ImageIcon INSERT_COL_ICON = new ImageIcon(DragCardGrid.class.getClassLoader().getResource("editor_insert_col.png"));
+    private final static ImageIcon INSERT_ROW_ICON = new ImageIcon(DragCardGrid.class.getClassLoader().getResource("editor_insert_row.png"));
+    private final static ImageIcon INSERT_COL_ICON = new ImageIcon(DragCardGrid.class.getClassLoader().getResource("editor_insert_col.png"));
 
     // All of the current card views
-    private Map<UUID, MageCard> cardViews = new LinkedHashMap<>();
-    private ArrayList<CardView> allCards = new ArrayList<>();
+    private final Map<UUID, MageCard> cardViews = new LinkedHashMap<>();
+    private final ArrayList<CardView> allCards = new ArrayList<>();
 
     // Card listeners
-    private CardEventSource eventSource = new CardEventSource();
+    private final CardEventSource eventSource = new CardEventSource();
 
     // Last big card
     BigCard lastBigCard = null;
@@ -587,7 +634,7 @@ public class DragCardGrid extends JPanel implements DragCardSource, DragCardTarg
     Role role = Role.MAINDECK;
 
     // Dragging
-    private CardDraggerGlassPane dragger = new CardDraggerGlassPane(this);
+    private final CardDraggerGlassPane dragger = new CardDraggerGlassPane(this);
 
     // The grid of cards
     // The outermost array contains multiple rows of stacks of cards
@@ -595,9 +642,9 @@ public class DragCardGrid extends JPanel implements DragCardSource, DragCardTarg
     // The innermost array represents a single vertical stack of cards
     private ArrayList<ArrayList<ArrayList<CardView>>> cardGrid;
     private ArrayList<Integer> maxStackSize = new ArrayList<>();
-    private ArrayList<ArrayList<JLabel>> stackCountLabels = new ArrayList<>();
+    private final ArrayList<ArrayList<JLabel>> stackCountLabels = new ArrayList<>();
     private Sort cardSort = Sort.CMC;
-    private ArrayList<CardType> selectByTypeSelected = new ArrayList<CardType>();
+    private final ArrayList<CardType> selectByTypeSelected = new ArrayList<>();
     private boolean separateCreatures = true;
 
     public enum Role {
@@ -620,7 +667,7 @@ public class DragCardGrid extends JPanel implements DragCardSource, DragCardTarg
         public Sort sort;
         public boolean separateCreatures;
 
-        private static Pattern parser = Pattern.compile("\\(([^,]*),([^)]*)\\)");
+        private final static Pattern parser = Pattern.compile("\\(([^,]*),([^)]*)\\)");
 
         public static Settings parse(String str) {
             Matcher m = parser.matcher(str);
@@ -1313,22 +1360,27 @@ public class DragCardGrid extends JPanel implements DragCardSource, DragCardTarg
     }
 
     private int getCount(CardType cardType) {
-        if (cardType == CardType.CREATURE) {
-            return creatureCounter.get();
-        } else if (cardType == CardType.LAND) {
-            return landCounter.get();
-        } else if (cardType == CardType.ARTIFACT) {
-            return artifactCounter.get();
-        } else if (cardType == CardType.ENCHANTMENT) {
-            return enchantmentCounter.get();
-        } else if (cardType == CardType.INSTANT) {
-            return instantCounter.get();
-        } else if (cardType == CardType.PLANESWALKER) {
-            return planeswalkerCounter.get();
-        } else if (cardType == CardType.SORCERY) {
-            return sorceryCounter.get();
-        } else if (cardType == CardType.TRIBAL) {
-            return tribalCounter.get();
+        if (null != cardType) {
+            switch (cardType) {
+                case CREATURE:
+                    return creatureCounter.get();
+                case LAND:
+                    return landCounter.get();
+                case ARTIFACT:
+                    return artifactCounter.get();
+                case ENCHANTMENT:
+                    return enchantmentCounter.get();
+                case INSTANT:
+                    return instantCounter.get();
+                case PLANESWALKER:
+                    return planeswalkerCounter.get();
+                case SORCERY:
+                    return sorceryCounter.get();
+                case TRIBAL:
+                    return tribalCounter.get();
+                default:
+                    break;
+            }
         }
         return 0;
     }
@@ -1420,7 +1472,7 @@ public class DragCardGrid extends JPanel implements DragCardSource, DragCardTarg
         cardViews.put(card.getId(), cardPanel);
     }
 
-    private ArrayList<DragCardGridListener> listeners = new ArrayList<>();
+    private final ArrayList<DragCardGridListener> listeners = new ArrayList<>();
 
     public void addDragCardGridListener(DragCardGridListener l) {
         listeners.add(l);
@@ -1482,7 +1534,7 @@ public class DragCardGrid extends JPanel implements DragCardSource, DragCardTarg
      */
     private void sortIntoGrid(CardView newCard) {
         // Ensure row 1 exists
-        if (cardGrid.size() == 0) {
+        if (cardGrid.isEmpty()) {
             cardGrid.add(0, new ArrayList<>());
             maxStackSize.add(0, 0);
         }

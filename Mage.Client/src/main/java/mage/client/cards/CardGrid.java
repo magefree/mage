@@ -156,6 +156,9 @@ public class CardGrid extends javax.swing.JLayeredPane implements MouseListener,
                 case NAME:
                     Collections.sort(sortedCards, new CardNameComparator());
                     break;
+                case CARD_TYPE:
+                    Collections.sort(sortedCards, new CardTypeComparator());
+                    break;
                 case RARITY:
                     Collections.sort(sortedCards, new CardRarityComparator());
                     break;
@@ -179,6 +182,12 @@ public class CardGrid extends javax.swing.JLayeredPane implements MouseListener,
                     switch (sortSetting.getSortBy()) {
                         case NAME:
                             if (!cardImg.getOriginal().getName().equals(lastCard.getOriginal().getName())) {
+                                curColumn++;
+                                curRow = 0;
+                            }
+                            break;
+                        case CARD_TYPE:
+                            if (!cardImg.getOriginal().getCardTypes().equals(lastCard.getOriginal().getCardTypes())) {
                                 curColumn++;
                                 curRow = 0;
                             }
@@ -430,6 +439,20 @@ class CardColorDetailedIdentity implements Comparator<MageCard> {
     public int compare(MageCard o1, MageCard o2) {
         int val = CardUtil.getColorIdentitySortValue(o1.getOriginal().getManaCost(), o1.getOriginal().getColor(), o1.getOriginal().getRules())
                 - CardUtil.getColorIdentitySortValue(o2.getOriginal().getManaCost(), o2.getOriginal().getColor(), o2.getOriginal().getRules());
+        if (val == 0) {
+            return o1.getOriginal().getName().compareTo(o2.getOriginal().getName());
+        } else {
+            return val;
+        }
+    }
+
+}
+
+class CardTypeComparator implements Comparator<MageCard> {
+
+    @Override
+    public int compare(MageCard o1, MageCard o2) {
+        int val = o1.getOriginal().getCardTypes().toString().compareTo(o2.getOriginal().getCardTypes().toString());
         if (val == 0) {
             return o1.getOriginal().getName().compareTo(o2.getOriginal().getName());
         } else {
