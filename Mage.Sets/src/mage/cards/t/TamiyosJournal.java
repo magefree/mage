@@ -50,18 +50,18 @@ import mage.target.common.TargetControlledPermanent;
  * @author fireshoes
  */
 public class TamiyosJournal extends CardImpl {
-    
+
     private static final FilterControlledPermanent filter = new FilterControlledPermanent("three Clues");
-    
+
     static {
         filter.add(new SubtypePredicate("Clue"));
     }
 
     public TamiyosJournal(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.ARTIFACT},"{5}");
+        super(ownerId, setInfo, new CardType[]{CardType.ARTIFACT}, "{5}");
         this.supertype.add("Legendary");
 
-        // At the beginning of your upkeep, investigate.
+        // At the beginning of your upkeep, investigate (Put a colorless Clue artifact token onto the battlefield with \"{2}, Sacrifice this artifact: Draw a card.\").
         this.addAbility(new BeginningOfUpkeepTriggeredAbility(Zone.BATTLEFIELD, new InvestigateEffect(), TargetController.YOU, false));
 
         // {T}, Sacrifice three Clues: Search your library for a card and put that card into your hand. Then shuffle your library.

@@ -25,7 +25,6 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-
 package mage.watchers.common;
 
 import java.util.HashMap;
@@ -37,8 +36,6 @@ import mage.game.Game;
 import mage.game.events.GameEvent;
 import mage.watchers.Watcher;
 
-
-
 /**
  * Counts amount of life gained during the current turn by players.
  *
@@ -47,11 +44,10 @@ import mage.watchers.Watcher;
  */
 public class PlayerGainedLifeWatcher extends Watcher {
 
-    private Map<UUID, Integer> amountOfLifeGainedThisTurn = new HashMap<UUID, Integer>();
-
+    private final Map<UUID, Integer> amountOfLifeGainedThisTurn = new HashMap<>();
 
     public PlayerGainedLifeWatcher() {
-        super("PlayerGainedLifeWatcher", WatcherScope.GAME);
+        super(PlayerGainedLifeWatcher.class.getName(), WatcherScope.GAME);
     }
 
     public PlayerGainedLifeWatcher(final PlayerGainedLifeWatcher watcher) {
@@ -71,9 +67,9 @@ public class PlayerGainedLifeWatcher extends Watcher {
             if (playerId != null) {
                 Integer amount = amountOfLifeGainedThisTurn.get(playerId);
                 if (amount == null) {
-                    amount = Integer.valueOf(event.getAmount());
+                    amount = event.getAmount();
                 } else {
-                    amount = Integer.valueOf(amount + event.getAmount());
+                    amount = amount + event.getAmount();
                 }
                 amountOfLifeGainedThisTurn.put(playerId, amount);
             }
@@ -83,7 +79,7 @@ public class PlayerGainedLifeWatcher extends Watcher {
     public int getLiveGained(UUID playerId) {
         Integer amount = amountOfLifeGainedThisTurn.get(playerId);
         if (amount != null) {
-            return amount.intValue();
+            return amount;
         }
         return 0;
     }
