@@ -35,8 +35,9 @@ import mage.abilities.common.ActivateIfConditionActivatedAbility;
 import mage.abilities.common.delayed.AtTheBeginOfNextEndStepDelayedTriggeredAbility;
 import mage.abilities.condition.common.MetalcraftCondition;
 import mage.abilities.costs.mana.ManaCostsImpl;
+import mage.abilities.effects.Effect;
 import mage.abilities.effects.OneShotEffect;
-import mage.abilities.effects.common.ReturnFromExileEffect;
+import mage.abilities.effects.common.ReturnToBattlefieldUnderYourControlTargetEffect;
 import mage.abilities.keyword.FlyingAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
@@ -46,6 +47,7 @@ import mage.constants.Outcome;
 import mage.constants.Zone;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
+import mage.target.targetpointer.FixedTarget;
 
 /**
  *
@@ -54,7 +56,7 @@ import mage.game.permanent.Permanent;
 public class ArgentSphinx extends CardImpl {
 
     public ArgentSphinx(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{2}{U}{U}");
+        super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{2}{U}{U}");
         this.subtype.add("Sphinx");
 
         this.power = new MageInt(4);
@@ -100,10 +102,10 @@ class ArgentSphinxEffect extends OneShotEffect {
         if (permanent != null && sourceObject != null) {
             if (permanent.moveToExile(source.getSourceId(), sourceObject.getIdName(), source.getSourceId(), game)) {
                 //create delayed triggered ability
-                AtTheBeginOfNextEndStepDelayedTriggeredAbility delayedAbility
-                        = new AtTheBeginOfNextEndStepDelayedTriggeredAbility(
-                                new ReturnFromExileEffect(source.getSourceId(), Zone.BATTLEFIELD));
-                game.addDelayedTriggeredAbility(delayedAbility, source);
+                Effect effect = new ReturnToBattlefieldUnderYourControlTargetEffect();
+                effect.setText("Return it to the battlefield under your control at the beginning of the next end step");
+                effect.setTargetPointer(new FixedTarget(source.getSourceId(), game));
+                game.addDelayedTriggeredAbility(new AtTheBeginOfNextEndStepDelayedTriggeredAbility(effect), source);
                 return true;
             }
         }

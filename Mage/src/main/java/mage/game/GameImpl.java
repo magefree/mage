@@ -159,7 +159,6 @@ public abstract class GameImpl implements Game, Serializable {
         FILTER_LEGENDARY.add(new SupertypePredicate("Legendary"));
     }
 
-
     private transient Object customData;
     protected boolean simulation = false;
 
@@ -1520,10 +1519,11 @@ public abstract class GameImpl implements Game, Serializable {
         // return addDelayedTriggeredAbility(delayedAbility);
         DelayedTriggeredAbility newAbility = delayedAbility.copy();
         newAbility.newId();
+        newAbility.initOnAdding(this);
         // ability.init is called as the ability triggeres not now.
         // If a FixedTarget pointer is already set from the effect setting up this delayed ability
         // it has to be already initialized so it won't be overwitten as the ability triggers
-        state.addDelayedTriggeredAbility(newAbility);
+        getState().addDelayedTriggeredAbility(newAbility);
         return newAbility.getId();
     }
 
@@ -1532,10 +1532,11 @@ public abstract class GameImpl implements Game, Serializable {
     public UUID addDelayedTriggeredAbility(DelayedTriggeredAbility delayedAbility) {
         DelayedTriggeredAbility newAbility = delayedAbility.copy();
         newAbility.newId();
+        newAbility.initOnAdding(this);
         // ability.init is called as the ability triggeres not now.
         // If a FixedTarget pointer is already set from the effect setting up this delayed ability
         // it has to be already initialized so it won't be overwitten as the ability triggers
-        state.addDelayedTriggeredAbility(newAbility);
+        getState().addDelayedTriggeredAbility(newAbility);
         return newAbility.getId();
     }
 
