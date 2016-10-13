@@ -15,7 +15,7 @@ public class Guru extends ExpansionSet {
     }
 
     private Guru() {
-        super("Guru", "GUR", "mage.sets.guru", new GregorianCalendar(1990, 1, 2).getTime(), SetType.PROMOTIONAL);
+        super("Guru", "GUR", "mage.sets.guru", ExpansionSet.buildDate(1990, 1, 2), SetType.PROMOTIONAL);
         cards.add(new SetCardInfo("Forest", 1, Rarity.LAND, mage.cards.basiclands.Forest.class));
         cards.add(new SetCardInfo("Island", 2, Rarity.LAND, mage.cards.basiclands.Island.class));
         cards.add(new SetCardInfo("Mountain", 3, Rarity.LAND, mage.cards.basiclands.Mountain.class));

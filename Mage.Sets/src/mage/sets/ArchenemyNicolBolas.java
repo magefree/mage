@@ -47,7 +47,7 @@ public class ArchenemyNicolBolas extends ExpansionSet {
     }
 
     private ArchenemyNicolBolas() {
-        super("Archenemy: Nicol Bolas", "ANB", "mage.sets.archenemynicolbolas", new GregorianCalendar(2017, 6, 16).getTime(), SetType.SUPPLEMENTAL);
+        super("Archenemy: Nicol Bolas", "ANB", "mage.sets.archenemynicolbolas", ExpansionSet.buildDate(2017, 6, 16), SetType.SUPPLEMENTAL);
         this.blockName = "Command Zone";
     }
 

@@ -27,12 +27,9 @@
  */
 package mage.sets;
 
-import java.util.GregorianCalendar;
-
 import mage.cards.ExpansionSet;
-import mage.constants.SetType;
 import mage.constants.Rarity;
-import java.util.List;
+import mage.constants.SetType;
 
 /**
  *
@@ -47,7 +44,7 @@ public class Torment extends ExpansionSet {
     }
 
     private Torment() {
-        super("Torment", "TOR", "mage.sets.torment", new GregorianCalendar(2002, 0, 26).getTime(), SetType.EXPANSION);
+        super("Torment", "TOR", "mage.sets.torment", ExpansionSet.buildDate(2002, 1, 26), SetType.EXPANSION);
         this.blockName = "Odyssey";
         this.parentSet = Odyssey.getInstance();
         this.hasBasicLands = false;

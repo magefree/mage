@@ -28,7 +28,7 @@ public class JaceVsChandra extends ExpansionSet {
     }
 
     private JaceVsChandra() {
-        super("Duel Decks: Jace vs. Chandra", "DD2", "mage.sets.jacevschandra", new GregorianCalendar(2008, 11, 07).getTime(), SetType.SUPPLEMENTAL);
+        super("Duel Decks: Jace vs. Chandra", "DD2", "mage.sets.jacevschandra", ExpansionSet.buildDate(2008, 11, 07), SetType.SUPPLEMENTAL);
         this.blockName = "Duel Decks";
         this.hasBasicLands = false;
         cards.add(new SetCardInfo("Aethersnipe", 17, Rarity.COMMON, mage.cards.a.Aethersnipe.class));

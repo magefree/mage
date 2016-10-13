@@ -50,7 +50,7 @@ public class AsiaPacificLandProgram extends ExpansionSet {
     }
 
     private AsiaPacificLandProgram() {
-        super("Asia Pacific Land Program", "APAC", "mage.sets.asiapacificlandprogram", new GregorianCalendar(1997, 10, 13).getTime(), SetType.PROMOTIONAL);
+        super("Asia Pacific Land Program", "APAC", "mage.sets.asiapacificlandprogram", ExpansionSet.buildDate(1997, 10, 13), SetType.PROMOTIONAL);
         this.hasBoosters = false;
         cards.add(new SetCardInfo("Forest", 1, Rarity.LAND, mage.cards.basiclands.Forest.class, new CardGraphicInfo(null, true)));
         cards.add(new SetCardInfo("Forest", 6, Rarity.LAND, mage.cards.basiclands.Forest.class, new CardGraphicInfo(null, true)));

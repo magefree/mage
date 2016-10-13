@@ -47,7 +47,7 @@ public class UginsFate extends ExpansionSet {
     }
 
     private UginsFate() {
-        super("Ugin's Fate", "UGIN", "mage.sets.uginsfate", new GregorianCalendar(2015, 1, 16).getTime(), SetType.PROMOTIONAL);
+        super("Ugin's Fate", "UGIN", "mage.sets.uginsfate", ExpansionSet.buildDate(2015, 1, 16), SetType.PROMOTIONAL);
         this.hasBoosters = false;
         cards.add(new SetCardInfo("Ainok Tracker", 96, Rarity.COMMON, mage.cards.a.AinokTracker.class));
         cards.add(new SetCardInfo("Altar of the Brood", 216, Rarity.RARE, mage.cards.a.AltarOfTheBrood.class));

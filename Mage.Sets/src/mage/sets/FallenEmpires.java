@@ -50,7 +50,7 @@ public class FallenEmpires extends ExpansionSet {
     }
 
     private FallenEmpires() {
-        super("Fallen Empires", "FEM", "mage.sets.fallenempires", new GregorianCalendar(1994, 10, 1).getTime(), SetType.EXPANSION);
+        super("Fallen Empires", "FEM", "mage.sets.fallenempires", ExpansionSet.buildDate(1994, 10, 1), SetType.EXPANSION);
         this.hasBasicLands = false;
         this.hasBoosters = true;
         this.numBoosterLands = 1;

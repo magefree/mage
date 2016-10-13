@@ -49,7 +49,7 @@ public class IzzetVsGolgari extends ExpansionSet {
     }
 
     private IzzetVsGolgari() {
-        super("Duel Decks: Izzet vs. Golgari", "DDJ", "mage.sets.izzetvsgolgari", new GregorianCalendar(2012, 9, 7).getTime(), SetType.SUPPLEMENTAL);
+        super("Duel Decks: Izzet vs. Golgari", "DDJ", "mage.sets.izzetvsgolgari", ExpansionSet.buildDate(2012, 9, 7), SetType.SUPPLEMENTAL);
         this.blockName = "Duel Decks";
         this.hasBasicLands = false;
         cards.add(new SetCardInfo("Barren Moor", 78, Rarity.COMMON, mage.cards.b.BarrenMoor.class));

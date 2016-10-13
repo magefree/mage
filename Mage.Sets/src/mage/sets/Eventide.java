@@ -15,7 +15,7 @@ public class Eventide extends ExpansionSet {
     }
 
     private Eventide() {
-        super("Eventide", "EVE", "mage.sets.eventide", new GregorianCalendar(2008, 6, 25).getTime(), SetType.EXPANSION);
+        super("Eventide", "EVE", "mage.sets.eventide", ExpansionSet.buildDate(2008, 6, 25), SetType.EXPANSION);
         this.blockName = "Shadowmoor";
         this.parentSet = Shadowmoor.getInstance();
         this.hasBasicLands = false;

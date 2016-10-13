@@ -50,7 +50,7 @@ public class KnightsVsDragons extends ExpansionSet {
     }
 
     private KnightsVsDragons() {
-        super("Duel Decks: Knights vs. Dragons", "DDG", "mage.sets.knightsvsdragons", new GregorianCalendar(2011, 4, 1).getTime(), SetType.SUPPLEMENTAL);
+        super("Duel Decks: Knights vs. Dragons", "DDG", "mage.sets.knightsvsdragons", ExpansionSet.buildDate(2011, 4, 1), SetType.SUPPLEMENTAL);
         this.blockName = "Duel Decks";
         this.hasBasicLands = false;
         cards.add(new SetCardInfo("Alaborn Cavalier", 18, Rarity.UNCOMMON, mage.cards.a.AlabornCavalier.class));

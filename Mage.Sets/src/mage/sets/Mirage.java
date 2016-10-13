@@ -49,7 +49,7 @@ public class Mirage extends ExpansionSet {
     }
 
     private Mirage() {
-        super("Mirage", "MIR", "mage.sets.mirage", new GregorianCalendar(1996, 8, 21).getTime(), SetType.EXPANSION);
+        super("Mirage", "MIR", "mage.sets.mirage", ExpansionSet.buildDate(1996, 8, 21), SetType.EXPANSION);
         this.blockName = "Mirage";
         this.hasBoosters = true;
         this.numBoosterLands = 0;

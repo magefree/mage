@@ -50,7 +50,7 @@ public class Starter1999 extends ExpansionSet {
     }
 
     private Starter1999() {
-        super("Starter 1999", "S99", "mage.sets.starter1999", new GregorianCalendar(1999, 7, 1).getTime(), SetType.SUPPLEMENTAL);
+        super("Starter 1999", "S99", "mage.sets.starter1999", ExpansionSet.buildDate(1999, 7, 1), SetType.SUPPLEMENTAL);
         this.blockName = "Beginner";
         this.hasBasicLands = true;
         this.hasBoosters = true;

@@ -24,21 +24,20 @@
 * The views and conclusions contained in the software and documentation are those of the
 * authors and should not be interpreted as representing official policies, either expressed
 * or implied, of BetaSteward_at_googlemail.com.
-*/
-
+ */
 package mage.sets;
 
 import java.util.GregorianCalendar;
 import mage.cards.ExpansionSet;
-import mage.constants.SetType;
 import mage.constants.Rarity;
-import java.util.List;
+import mage.constants.SetType;
 
 /**
  *
  * @author fireshoes
  */
 public class FTVRealms extends ExpansionSet {
+
     private static final FTVRealms fINSTANCE = new FTVRealms();
 
     public static FTVRealms getInstance() {
@@ -46,7 +45,7 @@ public class FTVRealms extends ExpansionSet {
     }
 
     private FTVRealms() {
-        super("From the Vault: Realms", "V12", "mage.sets.ftvrealms", new GregorianCalendar(2012, 8, 31).getTime(), SetType.SUPPLEMENTAL);
+        super("From the Vault: Realms", "V12", "mage.sets.ftvrealms", ExpansionSet.buildDate(2012, 8, 31), SetType.SUPPLEMENTAL);
         this.hasBasicLands = false;
         cards.add(new SetCardInfo("Ancient Tomb", 1, Rarity.MYTHIC, mage.cards.a.AncientTomb.class));
         cards.add(new SetCardInfo("Boseiju, Who Shelters All", 2, Rarity.MYTHIC, mage.cards.b.BoseijuWhoSheltersAll.class));

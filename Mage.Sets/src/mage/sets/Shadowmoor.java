@@ -49,7 +49,7 @@ public class Shadowmoor extends ExpansionSet {
     }
 
     private Shadowmoor() {
-        super("Shadowmoor", "SHM", "mage.sets.shadowmoor", new GregorianCalendar(2008, 4, 2).getTime(), SetType.EXPANSION);
+        super("Shadowmoor", "SHM", "mage.sets.shadowmoor", ExpansionSet.buildDate(2008, 4, 2), SetType.EXPANSION);
         this.blockName = "Shadowmoor";
         this.hasBoosters = true;
         this.numBoosterLands = 0;

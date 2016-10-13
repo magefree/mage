@@ -35,7 +35,6 @@ import mage.cards.repository.CardCriteria;
 import mage.cards.repository.CardInfo;
 import mage.cards.repository.CardRepository;
 import mage.constants.SetType;
-import mage.constants.Rarity;
 
 /**
  *
@@ -52,7 +51,7 @@ public class AetherRevolt extends ExpansionSet {
     protected final List<CardInfo> savedSpecialLand = new ArrayList<>();
 
     private AetherRevolt() {
-        super("Aether Revolt", "AER", "mage.sets.aetherrevolt", new GregorianCalendar(2017, 1, 20).getTime(), SetType.EXPANSION);
+        super("Aether Revolt", "AER", "mage.sets.aetherrevolt", buildDate(2017, 1, 20), SetType.EXPANSION);
         this.blockName = "Kaladesh";
         this.hasBoosters = true;
         this.hasBasicLands = false;

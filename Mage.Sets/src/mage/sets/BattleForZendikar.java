@@ -55,7 +55,7 @@ public class BattleForZendikar extends ExpansionSet {
     protected final List<CardInfo> savedSpecialLand = new ArrayList<>();
 
     private BattleForZendikar() {
-        super("Battle for Zendikar", "BFZ", "mage.sets.battleforzendikar", new GregorianCalendar(2015, 10, 2).getTime(), SetType.EXPANSION);
+        super("Battle for Zendikar", "BFZ", "mage.sets.battleforzendikar", ExpansionSet.buildDate(2015, 10, 2), SetType.EXPANSION);
         this.blockName = "Battle for Zendikar";
         this.hasBoosters = true;
         this.hasBasicLands = true;

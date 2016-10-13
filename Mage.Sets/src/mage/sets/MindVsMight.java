@@ -25,7 +25,7 @@ public class MindVsMight extends ExpansionSet {
     }
 
     private MindVsMight() {
-        super("Duel Decks: Mind vs. Might", "DDS", "mage.sets.mindvsmight", new GregorianCalendar(2017, 3, 31).getTime(), SetType.SUPPLEMENTAL);
+        super("Duel Decks: Mind vs. Might", "DDS", "mage.sets.mindvsmight", ExpansionSet.buildDate(2017, 3, 31), SetType.SUPPLEMENTAL);
         this.blockName = "Duel Decks";
         this.hasBasicLands = false;
     }

@@ -28,7 +28,7 @@ public class ElvesVsGoblins extends ExpansionSet {
     }
 
     private ElvesVsGoblins() {
-        super("Duel Decks: Elves vs. Goblins", "EVG", "mage.sets.elvesvsgoblins", new GregorianCalendar(2007, 11, 16).getTime(), SetType.SUPPLEMENTAL);
+        super("Duel Decks: Elves vs. Goblins", "EVG", "mage.sets.elvesvsgoblins", ExpansionSet.buildDate(2007, 11, 16), SetType.SUPPLEMENTAL);
         this.blockName = "Duel Decks";
         this.hasBasicLands = false;
         cards.add(new SetCardInfo("Akki Coalflinger", 33, Rarity.UNCOMMON, mage.cards.a.AkkiCoalflinger.class));

@@ -24,21 +24,20 @@
 * The views and conclusions contained in the software and documentation are those of the
 * authors and should not be interpreted as representing official policies, either expressed
 * or implied, of BetaSteward_at_googlemail.com.
-*/
-
+ */
 package mage.sets;
 
 import java.util.GregorianCalendar;
 import mage.cards.ExpansionSet;
-import mage.constants.SetType;
 import mage.constants.Rarity;
-import java.util.List;
+import mage.constants.SetType;
 
 /**
  *
  * @author fireshoes
  */
 public class FTVDragons extends ExpansionSet {
+
     private static final FTVDragons fINSTANCE = new FTVDragons();
 
     public static FTVDragons getInstance() {
@@ -46,7 +45,7 @@ public class FTVDragons extends ExpansionSet {
     }
 
     private FTVDragons() {
-        super("From the Vault: Dragons", "DRB", "mage.sets.ftvdragons", new GregorianCalendar(2008, 8, 29).getTime(), SetType.SUPPLEMENTAL);
+        super("From the Vault: Dragons", "DRB", "mage.sets.ftvdragons", ExpansionSet.buildDate(2008, 8, 29), SetType.SUPPLEMENTAL);
         this.hasBasicLands = false;
         cards.add(new SetCardInfo("Bladewing the Risen", 1, Rarity.RARE, mage.cards.b.BladewingTheRisen.class));
         cards.add(new SetCardInfo("Bogardan Hellkite", 2, Rarity.RARE, mage.cards.b.BogardanHellkite.class));

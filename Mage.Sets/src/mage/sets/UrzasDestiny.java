@@ -27,11 +27,9 @@
  */
 package mage.sets;
 
-import java.util.GregorianCalendar;
-import mage.constants.SetType;
 import mage.cards.ExpansionSet;
 import mage.constants.Rarity;
-import java.util.List;
+import mage.constants.SetType;
 
 /**
  *
@@ -46,7 +44,7 @@ public class UrzasDestiny extends ExpansionSet {
     }
 
     private UrzasDestiny() {
-        super("Urza's Destiny", "UDS", "mage.sets.urzasdestiny", new GregorianCalendar(1999, 6, 23).getTime(), SetType.EXPANSION);
+        super("Urza's Destiny", "UDS", "mage.sets.urzasdestiny", ExpansionSet.buildDate(1999, 6, 7), SetType.EXPANSION);
         this.blockName = "Urza";
         this.parentSet = UrzasSaga.getInstance();
         this.hasBasicLands = false;

@@ -46,7 +46,7 @@ public class Guildpact extends ExpansionSet {
     }
 
     private Guildpact() {
-        super("Guildpact", "GPT", "mage.sets.guildpact", new GregorianCalendar(2006, 1, 3).getTime(), SetType.EXPANSION);
+        super("Guildpact", "GPT", "mage.sets.guildpact", ExpansionSet.buildDate(2006, 1, 3), SetType.EXPANSION);
         this.blockName = "Ravnica";
         this.parentSet = RavnicaCityOfGuilds.getInstance();
         this.hasBasicLands = false;

@@ -46,7 +46,7 @@ public class ZendikarExpeditions extends ExpansionSet {
     }
 
     private ZendikarExpeditions() {
-        super("Zendikar Expeditions", "EXP", "mage.sets.zendikarexpeditions", new GregorianCalendar(2015, 10, 2).getTime(), SetType.PROMOTIONAL);
+        super("Zendikar Expeditions", "EXP", "mage.sets.zendikarexpeditions", ExpansionSet.buildDate(2015, 10, 2), SetType.PROMOTIONAL);
         this.hasBoosters = false;
         this.hasBasicLands = false;
         cards.add(new SetCardInfo("Ancient Tomb", 36, Rarity.MYTHIC, mage.cards.a.AncientTomb.class));

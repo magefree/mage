@@ -48,7 +48,7 @@ public class Invasion extends ExpansionSet {
     }
 
     private Invasion() {
-        super("Invasion", "INV", "mage.sets.invasion", new GregorianCalendar(2000, 9, 2).getTime(), SetType.EXPANSION);
+        super("Invasion", "INV", "mage.sets.invasion", ExpansionSet.buildDate(2000, 9, 2), SetType.EXPANSION);
         this.blockName = "Invasion";
         this.hasBoosters = true;
         this.numBoosterLands = 0;

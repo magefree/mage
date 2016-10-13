@@ -49,7 +49,7 @@ public class Theros extends ExpansionSet {
     }
 
     private Theros() {
-        super("Theros", "THS", "mage.sets.theros", new GregorianCalendar(2013, 9, 27).getTime(), SetType.EXPANSION);
+        super("Theros", "THS", "mage.sets.theros", ExpansionSet.buildDate(2013, 9, 27), SetType.EXPANSION);
         this.blockName = "Theros";
         this.hasBoosters = true;
         this.numBoosterLands = 1;

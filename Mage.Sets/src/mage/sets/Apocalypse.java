@@ -15,7 +15,7 @@ public class Apocalypse extends ExpansionSet {
     }
 
     private Apocalypse() {
-        super("Apocalypse", "APC", "mage.sets.apocalypse", new GregorianCalendar(2001, 5, 1).getTime(), SetType.EXPANSION);
+        super("Apocalypse", "APC", "mage.sets.apocalypse", ExpansionSet.buildDate(2001, 5, 1), SetType.EXPANSION);
         this.blockName = "Invasion";
         this.parentSet = Invasion.getInstance();
         this.hasBasicLands = false;

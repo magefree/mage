@@ -46,7 +46,7 @@ public class ClashPack extends ExpansionSet {
     }
 
     private ClashPack() {
-        super("Clash Pack", "CLASH", "mage.sets.clashpack", new GregorianCalendar(2014, 7, 18).getTime(), SetType.SUPPLEMENTAL);
+        super("Clash Pack", "CLASH", "mage.sets.clashpack", ExpansionSet.buildDate(2014, 7, 18), SetType.SUPPLEMENTAL);
         this.hasBasicLands = false;
         cards.add(new SetCardInfo("Courser of Kruphix", 12, Rarity.SPECIAL, mage.cards.c.CourserOfKruphix.class));
         cards.add(new SetCardInfo("Fated Intervention", 2, Rarity.SPECIAL, mage.cards.f.FatedIntervention.class));

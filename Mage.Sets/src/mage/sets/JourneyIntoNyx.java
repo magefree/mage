@@ -47,7 +47,7 @@ public class JourneyIntoNyx extends ExpansionSet {
     }
 
     private JourneyIntoNyx() {
-        super("Journey into Nyx", "JOU", "mage.sets.journeyintonyx", new GregorianCalendar(2014, 5, 2).getTime(), SetType.EXPANSION);
+        super("Journey into Nyx", "JOU", "mage.sets.journeyintonyx", ExpansionSet.buildDate(2014, 5, 2), SetType.EXPANSION);
         this.blockName = "Theros";
         this.parentSet = Theros.getInstance();
         this.hasBasicLands = false;

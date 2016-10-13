@@ -49,7 +49,7 @@ public class Chronicles extends ExpansionSet {
     }
 
     private Chronicles() {
-        super("Chronicles", "CHR", "mage.sets.chronicles", new GregorianCalendar(1995, 6, 1).getTime(), SetType.SUPPLEMENTAL);
+        super("Chronicles", "CHR", "mage.sets.chronicles", ExpansionSet.buildDate(1995, 6, 1), SetType.SUPPLEMENTAL);
         this.blockName = "Reprint";
         this.hasBasicLands = false;
         this.hasBoosters = true;

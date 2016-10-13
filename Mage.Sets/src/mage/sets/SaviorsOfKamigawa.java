@@ -46,7 +46,7 @@ public class SaviorsOfKamigawa extends ExpansionSet {
     }
 
     private SaviorsOfKamigawa() {
-        super("Saviors of Kamigawa", "SOK", "mage.sets.saviorsofkamigawa", new GregorianCalendar(2005, 5, 3).getTime(), SetType.EXPANSION);
+        super("Saviors of Kamigawa", "SOK", "mage.sets.saviorsofkamigawa", ExpansionSet.buildDate(2005, 5, 3), SetType.EXPANSION);
         this.blockName = "Kamigawa";
         this.parentSet = ChampionsOfKamigawa.getInstance();
         this.hasBasicLands = false;

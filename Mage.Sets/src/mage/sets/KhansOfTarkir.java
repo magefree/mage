@@ -51,7 +51,7 @@ public class KhansOfTarkir extends ExpansionSet {
     }
 
     private KhansOfTarkir() {
-        super("Khans of Tarkir", "KTK", "mage.sets.khansoftarkir", new GregorianCalendar(2014, 9, 26).getTime(), SetType.EXPANSION);
+        super("Khans of Tarkir", "KTK", "mage.sets.khansoftarkir", ExpansionSet.buildDate(2014, 9, 26), SetType.EXPANSION);
         this.blockName = "Khans of Tarkir";
         this.hasBoosters = true;
         this.hasBasicLands = true;

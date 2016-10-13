@@ -50,7 +50,7 @@ public class Magic2011 extends ExpansionSet {
     }
 
     private Magic2011() {
-        super("Magic 2011", "M11", "mage.sets.magic2011", new GregorianCalendar(2010, 6, 16).getTime(), SetType.CORE);
+        super("Magic 2011", "M11", "mage.sets.magic2011", ExpansionSet.buildDate(2010, 6, 16), SetType.CORE);
         this.hasBoosters = true;
         this.numBoosterLands = 1;
         this.numBoosterCommon = 10;

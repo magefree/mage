@@ -55,7 +55,7 @@ public class Kaladesh extends ExpansionSet {
     protected final List<CardInfo> savedSpecialLand = new ArrayList<>();
 
     private Kaladesh() {
-        super("Kaladesh", "KLD", "mage.sets.kaladesh", new GregorianCalendar(2016, 9, 30).getTime(), SetType.EXPANSION);
+        super("Kaladesh", "KLD", "mage.sets.kaladesh", ExpansionSet.buildDate(2016, 9, 30), SetType.EXPANSION);
         this.blockName = "Kaladesh";
         this.hasBoosters = true;
         this.hasBasicLands = true;

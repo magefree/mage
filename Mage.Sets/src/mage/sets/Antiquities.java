@@ -50,7 +50,7 @@ public class Antiquities extends ExpansionSet {
     }
 
     private Antiquities() {
-        super("Antiquities", "ATQ", "mage.sets.antiquities", new GregorianCalendar(1994, 2, 1).getTime(), SetType.EXPANSION);
+        super("Antiquities", "ATQ", "mage.sets.antiquities", ExpansionSet.buildDate(1994, 2, 1), SetType.EXPANSION);
         this.hasBasicLands = false;
         this.hasBoosters = true;
         this.numBoosterLands = 1;

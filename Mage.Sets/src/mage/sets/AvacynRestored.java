@@ -49,7 +49,7 @@ public class AvacynRestored extends ExpansionSet {
     }
 
     private AvacynRestored() {
-        super("Avacyn Restored", "AVR", "mage.sets.avacynrestored", new GregorianCalendar(2012, 4, 4).getTime(), SetType.EXPANSION);
+        super("Avacyn Restored", "AVR", "mage.sets.avacynrestored", ExpansionSet.buildDate(2012, 4, 4), SetType.EXPANSION);
         this.blockName = "Innistrad";
         this.parentSet = Innistrad.getInstance();
         this.hasBoosters = true;

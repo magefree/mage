@@ -49,7 +49,7 @@ public class MasterpieceSeries extends ExpansionSet {
     }
 
     private MasterpieceSeries() {
-        super("Masterpiece Series", "MPS", "mage.sets.masterpieceseries", new GregorianCalendar(2016, 9, 30).getTime(), SetType.PROMOTIONAL);
+        super("Masterpiece Series", "MPS", "mage.sets.masterpieceseries", ExpansionSet.buildDate(2016, 9, 30), SetType.PROMOTIONAL);
         this.hasBoosters = false;
         this.hasBasicLands = false;
         cards.add(new SetCardInfo("Aether Vial", 6, Rarity.MYTHIC, mage.cards.a.AetherVial.class, new CardGraphicInfo(FrameStyle.KLD_INVENTION, false)));

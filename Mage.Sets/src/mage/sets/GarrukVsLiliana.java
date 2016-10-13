@@ -28,7 +28,7 @@ public class GarrukVsLiliana extends ExpansionSet {
     }
 
     private GarrukVsLiliana() {
-        super("Duel Decks: Garruk vs. Liliana", "DDD", "mage.sets.garrukvsliliana", new GregorianCalendar(2009, 10, 30).getTime(), SetType.SUPPLEMENTAL);
+        super("Duel Decks: Garruk vs. Liliana", "DDD", "mage.sets.garrukvsliliana", ExpansionSet.buildDate(2009, 10, 30), SetType.SUPPLEMENTAL);
         this.blockName = "Duel Decks";
         this.hasBasicLands = false;
         cards.add(new SetCardInfo("Albino Troll", 3, Rarity.UNCOMMON, mage.cards.a.AlbinoTroll.class));

@@ -27,12 +27,9 @@
  */
 package mage.sets;
 
-import java.util.GregorianCalendar;
-
 import mage.cards.ExpansionSet;
-import mage.constants.SetType;
 import mage.constants.Rarity;
-import java.util.List;
+import mage.constants.SetType;
 
 /**
  *
@@ -47,7 +44,7 @@ public class Stronghold extends ExpansionSet {
     }
 
     private Stronghold() {
-        super("Stronghold", "STH", "mage.sets.stronghold", new GregorianCalendar(1998, 1, 21).getTime(), SetType.EXPANSION);
+        super("Stronghold", "STH", "mage.sets.stronghold", ExpansionSet.buildDate(1998, 3, 2), SetType.EXPANSION);
         this.blockName = "Tempest";
         this.parentSet = Tempest.getInstance();
         this.hasBasicLands = false;

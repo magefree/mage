@@ -47,7 +47,7 @@ public class EternalMasters extends ExpansionSet {
     }
 
     private EternalMasters() {
-        super("Eternal Masters", "EMA", "mage.sets.eternalmasters", new GregorianCalendar(2016, 6, 10).getTime(), SetType.SUPPLEMENTAL);
+        super("Eternal Masters", "EMA", "mage.sets.eternalmasters", ExpansionSet.buildDate(2016, 6, 10), SetType.SUPPLEMENTAL);
         this.blockName = "Reprint";
         this.hasBasicLands = false;
         this.hasBoosters = true;

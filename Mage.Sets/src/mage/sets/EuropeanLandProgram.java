@@ -28,19 +28,15 @@
 package mage.sets;
 
 import java.util.GregorianCalendar;
-import mage.cards.ExpansionSet;
-import mage.constants.SetType;
-import mage.constants.Rarity;
-import java.util.List;
-import mage.ObjectColor;
 import mage.cards.CardGraphicInfo;
-import mage.cards.FrameStyle;
+import mage.cards.ExpansionSet;
+import mage.constants.Rarity;
+import mage.constants.SetType;
 
 /**
  *
  * @author fireshoes
  */
-
 public class EuropeanLandProgram extends ExpansionSet {
 
     private static final EuropeanLandProgram fINSTANCE = new EuropeanLandProgram();
@@ -50,7 +46,7 @@ public class EuropeanLandProgram extends ExpansionSet {
     }
 
     private EuropeanLandProgram() {
-        super("European Land Program", "EURO", "mage.sets.europeanlandprogram", new GregorianCalendar(2000, 2, 14).getTime(), SetType.PROMOTIONAL);
+        super("European Land Program", "EURO", "mage.sets.europeanlandprogram", ExpansionSet.buildDate(2000, 2, 14), SetType.PROMOTIONAL);
         this.hasBoosters = false;
         cards.add(new SetCardInfo("Forest", 1, Rarity.LAND, mage.cards.basiclands.Forest.class, new CardGraphicInfo(null, true)));
         cards.add(new SetCardInfo("Forest", 6, Rarity.LAND, mage.cards.basiclands.Forest.class, new CardGraphicInfo(null, true)));

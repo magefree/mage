@@ -24,15 +24,12 @@
 * The views and conclusions contained in the software and documentation are those of the
 * authors and should not be interpreted as representing official policies, either expressed
 * or implied, of BetaSteward_at_googlemail.com.
-*/
-
+ */
 package mage.sets;
 
 import java.util.GregorianCalendar;
 import mage.cards.ExpansionSet;
 import mage.constants.SetType;
-import mage.constants.Rarity;
-import java.util.List;
 
 /**
  *
@@ -47,7 +44,7 @@ public class PlanechaseAnthology extends ExpansionSet {
     }
 
     private PlanechaseAnthology() {
-        super("Planechase Anthology", "PCA", "mage.sets.planechaseanthology", new GregorianCalendar(2016, 11, 25).getTime(), SetType.SUPPLEMENTAL);
+        super("Planechase Anthology", "PCA", "mage.sets.planechaseanthology", ExpansionSet.buildDate(2016, 11, 25), SetType.SUPPLEMENTAL);
         this.blockName = "Command Zone";
     }
 

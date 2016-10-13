@@ -47,7 +47,7 @@ public class LaunchParty extends ExpansionSet {
     }
 
     private LaunchParty() {
-        super("Launch Party", "MLP", "mage.sets.launchparty", new GregorianCalendar(2011, 6, 17).getTime(), SetType.PROMOTIONAL);
+        super("Launch Party", "MLP", "mage.sets.launchparty", ExpansionSet.buildDate(2011, 6, 17), SetType.PROMOTIONAL);
         this.hasBoosters = false;
         this.hasBasicLands = false;
         cards.add(new SetCardInfo("Ajani Vengeant", 4, Rarity.MYTHIC, mage.cards.a.AjaniVengeant.class));

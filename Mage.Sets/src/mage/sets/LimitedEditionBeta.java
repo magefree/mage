@@ -23,7 +23,7 @@ public class LimitedEditionBeta extends ExpansionSet {
     }
 
     private LimitedEditionBeta() {
-        super("Limited Edition Beta", "LEB", "mage.sets.limitedbeta", new GregorianCalendar(1993, 9, 1).getTime(), SetType.CORE);
+        super("Limited Edition Beta", "LEB", "mage.sets.limitedbeta", ExpansionSet.buildDate(1993, 9, 1), SetType.CORE);
         this.hasBoosters = true;
         this.numBoosterLands = 0;
         this.numBoosterCommon = 11;

@@ -47,7 +47,7 @@ public class ModernMasters2017 extends ExpansionSet {
     }
 
     private ModernMasters2017() {
-        super("Modern Masters 2017", "MM3", "mage.sets.modernmasters2017", new GregorianCalendar(2017, 3, 17).getTime(), SetType.SUPPLEMENTAL);
+        super("Modern Masters 2017", "MM3", "mage.sets.modernmasters2017", ExpansionSet.buildDate(2017, 3, 17), SetType.SUPPLEMENTAL);
         this.blockName = "Reprint";
         this.hasBasicLands = false;
         this.hasBoosters = true;

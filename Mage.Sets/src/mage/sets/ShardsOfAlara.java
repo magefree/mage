@@ -50,7 +50,7 @@ public class ShardsOfAlara extends ExpansionSet {
     }
 
     private ShardsOfAlara() {
-        super("Shards of Alara", "ALA", "mage.sets.shardsofalara", new GregorianCalendar(2008, 8, 27).getTime(), SetType.EXPANSION);
+        super("Shards of Alara", "ALA", "mage.sets.shardsofalara", ExpansionSet.buildDate(2008, 8, 27), SetType.EXPANSION);
         this.blockName = "Shards of Alara";
         this.hasBoosters = true;
         this.numBoosterLands = 1;

@@ -47,7 +47,7 @@ public class GameDay extends ExpansionSet {
     }
 
     private GameDay() {
-        super("Game Day", "MGDC", "mage.sets.gameday", new GregorianCalendar(2011, 6, 17).getTime(), SetType.PROMOTIONAL);
+        super("Game Day", "MGDC", "mage.sets.gameday", ExpansionSet.buildDate(2011, 6, 17), SetType.PROMOTIONAL);
         this.hasBoosters = false;
         this.hasBasicLands = false;
         cards.add(new SetCardInfo("Anguished Unmaking", 52, Rarity.RARE, mage.cards.a.AnguishedUnmaking.class));

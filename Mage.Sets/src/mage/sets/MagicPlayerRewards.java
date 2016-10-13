@@ -41,7 +41,7 @@ public class MagicPlayerRewards extends ExpansionSet {
     }
 
     private MagicPlayerRewards() {
-        super("Magic Player Rewards", "MPRP", "mage.sets.magicplayerrewards", new GregorianCalendar(1990, 1, 1).getTime(), SetType.PROMOTIONAL);
+        super("Magic Player Rewards", "MPRP", "mage.sets.magicplayerrewards", ExpansionSet.buildDate(1990, 1, 1), SetType.PROMOTIONAL);
         this.hasBoosters = false;
         this.hasBasicLands = false;
         cards.add(new SetCardInfo("Bituminous Blast", 46, Rarity.SPECIAL, mage.cards.b.BituminousBlast.class));

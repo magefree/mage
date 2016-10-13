@@ -50,7 +50,7 @@ public class IceAge extends ExpansionSet {
     }
 
     private IceAge() {
-        super("Ice Age", "ICE", "mage.sets.iceage", new GregorianCalendar(1995, 5, 1).getTime(), SetType.EXPANSION);
+        super("Ice Age", "ICE", "mage.sets.iceage", ExpansionSet.buildDate(1995, 5, 1), SetType.EXPANSION);
         this.blockName = "Ice Age";
         this.hasBoosters = true;
         this.numBoosterLands = 0;

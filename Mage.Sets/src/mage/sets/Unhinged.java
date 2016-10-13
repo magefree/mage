@@ -22,7 +22,7 @@ public class Unhinged extends ExpansionSet {
     }
 
     private Unhinged() {
-        super("Unhinged", "UNH", "mage.sets.unhinged", new GregorianCalendar(2004, 11, 20).getTime(), SetType.JOKESET);
+        super("Unhinged", "UNH", "mage.sets.unhinged", ExpansionSet.buildDate(2004, 11, 20), SetType.JOKESET);
         cards.add(new SetCardInfo("Forest", 140, Rarity.LAND, mage.cards.basiclands.Forest.class, new CardGraphicInfo(FrameStyle.UNH_FULL_ART_BASIC, false)));
         cards.add(new SetCardInfo("Island", 137, Rarity.LAND, mage.cards.basiclands.Island.class, new CardGraphicInfo(FrameStyle.UNH_FULL_ART_BASIC, false)));
         cards.add(new SetCardInfo("Mountain", 139, Rarity.LAND, mage.cards.basiclands.Mountain.class, new CardGraphicInfo(FrameStyle.UNH_FULL_ART_BASIC, false)));

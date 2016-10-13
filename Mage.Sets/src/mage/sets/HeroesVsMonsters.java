@@ -49,7 +49,7 @@ public class HeroesVsMonsters extends ExpansionSet {
     }
 
     private HeroesVsMonsters() {
-        super("Duel Decks: Heroes vs. Monsters", "DDL", "mage.sets.heroesvsmonsters", new GregorianCalendar(2013, 9, 6).getTime(), SetType.SUPPLEMENTAL);
+        super("Duel Decks: Heroes vs. Monsters", "DDL", "mage.sets.heroesvsmonsters", ExpansionSet.buildDate(2013, 9, 6), SetType.SUPPLEMENTAL);
         this.blockName = "Duel Decks";
         this.hasBasicLands = false;
         cards.add(new SetCardInfo("Anax and Cymede", 11, Rarity.RARE, mage.cards.a.AnaxAndCymede.class));

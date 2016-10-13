@@ -27,21 +27,17 @@
  */
 package mage.sets;
 
-import java.util.GregorianCalendar;
-import mage.cards.ExpansionSet;
-import mage.constants.SetType;
-import mage.constants.Rarity;
-import java.util.List;
-import mage.ObjectColor;
 import mage.cards.CardGraphicInfo;
-import mage.cards.FrameStyle;
+import mage.cards.ExpansionSet;
+import mage.constants.Rarity;
+import mage.constants.SetType;
 
 /**
  *
  * @author LevelX2
  */
-
 public class PhyrexiaVsTheCoalition extends ExpansionSet {
+
     private static final PhyrexiaVsTheCoalition fINSTANCE = new PhyrexiaVsTheCoalition();
 
     public static PhyrexiaVsTheCoalition getInstance() {
@@ -49,7 +45,7 @@ public class PhyrexiaVsTheCoalition extends ExpansionSet {
     }
 
     private PhyrexiaVsTheCoalition() {
-        super("Duel Decks: Phyrexia vs. the Coalition", "DDE", "mage.sets.phyrexiavsthecoalition", new GregorianCalendar(2010, 3, 19).getTime(),
+        super("Duel Decks: Phyrexia vs. the Coalition", "DDE", "mage.sets.phyrexiavsthecoalition", ExpansionSet.buildDate(2010, 3, 19),
                 SetType.SUPPLEMENTAL);
         this.blockName = "Duel Decks";
         this.hasBasicLands = false;

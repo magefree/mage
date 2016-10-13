@@ -50,7 +50,7 @@ public class ReturnToRavnica extends ExpansionSet {
     }
 
     private ReturnToRavnica() {
-        super("Return to Ravnica", "RTR", "mage.sets.returntoravnica", new GregorianCalendar(2012, 9, 29).getTime(), SetType.EXPANSION);
+        super("Return to Ravnica", "RTR", "mage.sets.returntoravnica", ExpansionSet.buildDate(2012, 9, 29), SetType.EXPANSION);
         this.blockName = "Return to Ravnica";
         this.hasBoosters = true;
         this.numBoosterLands = 1;

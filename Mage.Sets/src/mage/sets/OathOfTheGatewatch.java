@@ -33,7 +33,7 @@ public class OathOfTheGatewatch extends ExpansionSet {
     protected final List<CardInfo> savedSpecialLand = new ArrayList<>();
 
     private OathOfTheGatewatch() {
-        super("Oath of the Gatewatch", "OGW", "mage.sets.oathofthegatewatch", new GregorianCalendar(2016, 1, 22).getTime(), SetType.EXPANSION);
+        super("Oath of the Gatewatch", "OGW", "mage.sets.oathofthegatewatch", ExpansionSet.buildDate(2016, 1, 22), SetType.EXPANSION);
         this.blockName = "Battle for Zendikar";
         this.parentSet = BattleForZendikar.getInstance();
         this.hasBoosters = true;

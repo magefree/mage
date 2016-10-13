@@ -48,7 +48,7 @@ public class Conspiracy extends ExpansionSet {
     }
 
     private Conspiracy() {
-        super("Conspiracy", "CNS", "mage.sets.conspiracy", new GregorianCalendar(2014, 6, 6).getTime(), SetType.SUPPLEMENTAL);
+        super("Conspiracy", "CNS", "mage.sets.conspiracy", ExpansionSet.buildDate(2014, 6, 6), SetType.SUPPLEMENTAL);
         this.blockName = "Conspiracy";
         this.hasBasicLands = false;
         this.hasBoosters = true;

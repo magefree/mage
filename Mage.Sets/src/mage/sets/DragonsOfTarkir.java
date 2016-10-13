@@ -51,7 +51,7 @@ public class DragonsOfTarkir extends ExpansionSet {
     }
 
     private DragonsOfTarkir() {
-        super("Dragons of Tarkir", "DTK", "mage.sets.dragonsoftarkir", new GregorianCalendar(2015, 3, 27).getTime(), SetType.EXPANSION);
+        super("Dragons of Tarkir", "DTK", "mage.sets.dragonsoftarkir", ExpansionSet.buildDate(2015, 3, 27), SetType.EXPANSION);
         this.blockName = "Khans of Tarkir";
         this.hasBoosters = true;
         this.hasBasicLands = true;

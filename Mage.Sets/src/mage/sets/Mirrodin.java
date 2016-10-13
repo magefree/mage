@@ -18,7 +18,7 @@ public class Mirrodin extends ExpansionSet {
     }
 
     private Mirrodin() {
-        super("Mirrodin", "MRD", "mage.sets.mirrodin", new GregorianCalendar(2003, 9, 2).getTime(), SetType.EXPANSION);
+        super("Mirrodin", "MRD", "mage.sets.mirrodin", ExpansionSet.buildDate(2003, 9, 2), SetType.EXPANSION);
         this.blockName = "Mirrodin";
         this.hasBoosters = true;
         this.numBoosterLands = 0;

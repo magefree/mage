@@ -46,7 +46,7 @@ public class Gatecrash extends ExpansionSet {
     }
 
     private Gatecrash() {
-        super("Gatecrash", "GTC", "mage.sets.gatecrash", new GregorianCalendar(2013, 2, 1).getTime(), SetType.EXPANSION);
+        super("Gatecrash", "GTC", "mage.sets.gatecrash", ExpansionSet.buildDate(2013, 2, 1), SetType.EXPANSION);
         this.blockName = "Return to Ravnica";
         this.parentSet = ReturnToRavnica.getInstance();
         this.hasBasicLands = false;

@@ -50,7 +50,7 @@ public class Zendikar extends ExpansionSet {
     }
 
     private Zendikar() {
-        super("Zendikar", "ZEN", "mage.sets.zendikar", new GregorianCalendar(2009, 8, 26).getTime(), SetType.EXPANSION);
+        super("Zendikar", "ZEN", "mage.sets.zendikar", ExpansionSet.buildDate(2009, 8, 26), SetType.EXPANSION);
         this.blockName = "Zendikar";
         this.hasBoosters = true;
         this.numBoosterLands = 1;

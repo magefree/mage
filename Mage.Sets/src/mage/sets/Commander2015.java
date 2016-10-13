@@ -50,7 +50,7 @@ public class Commander2015 extends ExpansionSet {
     }
 
     private Commander2015() {
-        super("Commander 2015 Edition", "C15", "mage.sets.commander2015", new GregorianCalendar(2015, 11, 13).getTime(), SetType.SUPPLEMENTAL);
+        super("Commander 2015 Edition", "C15", "mage.sets.commander2015", ExpansionSet.buildDate(2015, 11, 13), SetType.SUPPLEMENTAL);
         this.blockName = "Command Zone";
         cards.add(new SetCardInfo("Acidic Slime", 173, Rarity.UNCOMMON, mage.cards.a.AcidicSlime.class));
         cards.add(new SetCardInfo("Act of Aggression", 141, Rarity.UNCOMMON, mage.cards.a.ActOfAggression.class));

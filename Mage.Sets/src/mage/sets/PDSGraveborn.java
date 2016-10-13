@@ -49,7 +49,7 @@ public class PDSGraveborn extends ExpansionSet {
     }
 
     private PDSGraveborn() {
-        super("Premium Deck Series: Graveborn", "PD3", "mage.sets.pdsgraveborn", new GregorianCalendar(2011, 11, 1).getTime(), SetType.SUPPLEMENTAL);
+        super("Premium Deck Series: Graveborn", "PD3", "mage.sets.pdsgraveborn", ExpansionSet.buildDate(2011, 11, 1), SetType.SUPPLEMENTAL);
         this.hasBasicLands = false;
         cards.add(new SetCardInfo("Animate Dead", 16, Rarity.UNCOMMON, mage.cards.a.AnimateDead.class));
         cards.add(new SetCardInfo("Avatar of Woe", 6, Rarity.RARE, mage.cards.a.AvatarOfWoe.class));

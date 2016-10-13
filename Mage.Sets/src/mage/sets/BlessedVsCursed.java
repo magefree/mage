@@ -48,7 +48,7 @@ public class BlessedVsCursed extends ExpansionSet {
     }
 
     private BlessedVsCursed() {
-        super("Duel Decks: Blessed vs. Cursed", "DDQ", "mage.sets.blessedvscursed", new GregorianCalendar(2016, 2, 26).getTime(), SetType.SUPPLEMENTAL);
+        super("Duel Decks: Blessed vs. Cursed", "DDQ", "mage.sets.blessedvscursed", ExpansionSet.buildDate(2016, 2, 26), SetType.SUPPLEMENTAL);
         this.blockName = "Duel Decks";
         this.hasBasicLands = false;
         cards.add(new SetCardInfo("Abattoir Ghoul", 50, Rarity.UNCOMMON, mage.cards.a.AbattoirGhoul.class));

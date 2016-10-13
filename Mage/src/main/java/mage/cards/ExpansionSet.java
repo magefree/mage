@@ -31,6 +31,7 @@ import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.EnumMap;
+import java.util.GregorianCalendar;
 import java.util.Iterator;
 import java.util.List;
 import mage.cards.repository.CardCriteria;
@@ -296,6 +297,11 @@ public abstract class ExpansionSet implements Serializable {
             List<CardInfo> doubleFacedCards = CardRepository.instance.findCards(criteria);
             addToBooster(booster, doubleFacedCards);
         }
+    }
+
+    public static Date buildDate(int year, int month, int day) {
+        // The month starts with 0 = jan ... dec = 11
+        return new GregorianCalendar(year, month - 1, day).getTime();
     }
 
     /**

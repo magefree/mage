@@ -50,7 +50,7 @@ public class Planechase2012 extends ExpansionSet {
     }
 
     private Planechase2012() {
-        super("Planechase 2012 Edition", "PC2", "mage.sets.planechase2012", new GregorianCalendar(2012, 6, 1).getTime(), SetType.SUPPLEMENTAL);
+        super("Planechase 2012 Edition", "PC2", "mage.sets.planechase2012", ExpansionSet.buildDate(2012, 6, 1), SetType.SUPPLEMENTAL);
         this.blockName = "Command Zone";
         cards.add(new SetCardInfo("Arc Trail", 39, Rarity.UNCOMMON, mage.cards.a.ArcTrail.class));
         cards.add(new SetCardInfo("Armillary Sphere", 108, Rarity.COMMON, mage.cards.a.ArmillarySphere.class));

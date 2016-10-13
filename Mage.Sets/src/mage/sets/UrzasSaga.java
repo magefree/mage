@@ -24,18 +24,13 @@
 * The views and conclusions contained in the software and documentation are those of the
 * authors and should not be interpreted as representing official policies, either expressed
 * or implied, of BetaSteward_at_googlemail.com.
-*/
-
+ */
 package mage.sets;
 
-import java.util.GregorianCalendar;
-import mage.constants.SetType;
+import mage.cards.CardGraphicInfo;
 import mage.cards.ExpansionSet;
 import mage.constants.Rarity;
-import java.util.List;
-import mage.ObjectColor;
-import mage.cards.CardGraphicInfo;
-import mage.cards.FrameStyle;
+import mage.constants.SetType;
 
 /**
  *
@@ -50,7 +45,7 @@ public class UrzasSaga extends ExpansionSet {
     }
 
     private UrzasSaga() {
-        super("Urza's Saga", "USG", "mage.sets.urzassaga", new GregorianCalendar(1998, 10, 1).getTime(), SetType.EXPANSION);
+        super("Urza's Saga", "USG", "mage.sets.urzassaga", ExpansionSet.buildDate(1998, 10, 12), SetType.EXPANSION);
         this.blockName = "Urza";
         this.hasBoosters = true;
         this.numBoosterLands = 0;

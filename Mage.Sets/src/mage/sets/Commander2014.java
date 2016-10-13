@@ -50,7 +50,7 @@ public class Commander2014 extends ExpansionSet {
     }
 
     private Commander2014() {
-        super("Commander 2014 Edition", "C14", "mage.sets.commander2014", new GregorianCalendar(2014, 11, 07).getTime(), SetType.SUPPLEMENTAL);
+        super("Commander 2014 Edition", "C14", "mage.sets.commander2014", ExpansionSet.buildDate(2014, 11, 07), SetType.SUPPLEMENTAL);
         this.blockName = "Command Zone";
         cards.add(new SetCardInfo("Abyssal Persecutor", 132, Rarity.MYTHIC, mage.cards.a.AbyssalPersecutor.class));
         cards.add(new SetCardInfo("Adarkar Valkyrie", 63, Rarity.RARE, mage.cards.a.AdarkarValkyrie.class));

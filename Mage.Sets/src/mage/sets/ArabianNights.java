@@ -50,7 +50,7 @@ public class ArabianNights extends ExpansionSet {
     }
 
     private ArabianNights() {
-        super("Arabian Nights", "ARN", "mage.sets.arabiannights", new GregorianCalendar(1993, 11, 1).getTime(), SetType.EXPANSION);
+        super("Arabian Nights", "ARN", "mage.sets.arabiannights", ExpansionSet.buildDate(1993, 11, 1), SetType.EXPANSION);
         this.hasBasicLands = false;
         this.hasBoosters = true;
         this.numBoosterLands = 1;

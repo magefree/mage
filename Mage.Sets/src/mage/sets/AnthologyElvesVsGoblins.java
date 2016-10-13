@@ -27,20 +27,17 @@
  */
 package mage.sets;
 
-import java.util.GregorianCalendar;
-import mage.cards.ExpansionSet;
-import mage.constants.SetType;
-import mage.constants.Rarity;
-import java.util.List;
-import mage.ObjectColor;
 import mage.cards.CardGraphicInfo;
-import mage.cards.FrameStyle;
+import mage.cards.ExpansionSet;
+import mage.constants.Rarity;
+import mage.constants.SetType;
 
 /**
  *
  * @author fireshoes
  */
 public class AnthologyElvesVsGoblins extends ExpansionSet {
+
     private static final AnthologyElvesVsGoblins fINSTANCE = new AnthologyElvesVsGoblins();
 
     public static AnthologyElvesVsGoblins getInstance() {
@@ -48,7 +45,7 @@ public class AnthologyElvesVsGoblins extends ExpansionSet {
     }
 
     private AnthologyElvesVsGoblins() {
-        super("Duel Decks: Anthology, Elves vs. Goblins", "DD3EVG", "mage.sets.anthologyelvesvsgoblins", new GregorianCalendar(2014, 12, 5).getTime(),
+        super("Duel Decks: Anthology, Elves vs. Goblins", "DD3EVG", "mage.sets.anthologyelvesvsgoblins", ExpansionSet.buildDate(2014, 12, 5),
                 SetType.SUPPLEMENTAL);
         this.blockName = "Duel Decks: Anthology";
         this.hasBasicLands = false;

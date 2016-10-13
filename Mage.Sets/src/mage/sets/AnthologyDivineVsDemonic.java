@@ -27,20 +27,17 @@
  */
 package mage.sets;
 
-import java.util.GregorianCalendar;
-import mage.cards.ExpansionSet;
-import mage.constants.SetType;
-import mage.constants.Rarity;
-import java.util.List;
-import mage.ObjectColor;
 import mage.cards.CardGraphicInfo;
-import mage.cards.FrameStyle;
+import mage.cards.ExpansionSet;
+import mage.constants.Rarity;
+import mage.constants.SetType;
 
 /**
  *
  * @author fireshoes
  */
 public class AnthologyDivineVsDemonic extends ExpansionSet {
+
     private static final AnthologyDivineVsDemonic fINSTANCE = new AnthologyDivineVsDemonic();
 
     public static AnthologyDivineVsDemonic getInstance() {
@@ -48,7 +45,7 @@ public class AnthologyDivineVsDemonic extends ExpansionSet {
     }
 
     private AnthologyDivineVsDemonic() {
-        super("Duel Decks: Anthology, Divine vs. Demonic", "DD3DVD", "mage.sets.anthologydivinevsdemonic", new GregorianCalendar(2014, 12, 5).getTime(),
+        super("Duel Decks: Anthology, Divine vs. Demonic", "DD3DVD", "mage.sets.anthologydivinevsdemonic", ExpansionSet.buildDate(2014, 12, 5),
                 SetType.SUPPLEMENTAL);
         this.blockName = "Duel Decks: Anthology";
         this.hasBasicLands = false;

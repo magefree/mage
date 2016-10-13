@@ -46,7 +46,7 @@ public class PlanarChaos extends ExpansionSet {
     }
 
     private PlanarChaos() {
-        super("Planar Chaos", "PLC", "mage.sets.planarchaos", new GregorianCalendar(2007, 1, 2).getTime(), SetType.EXPANSION);
+        super("Planar Chaos", "PLC", "mage.sets.planarchaos", ExpansionSet.buildDate(2007, 1, 2), SetType.EXPANSION);
         this.blockName = "Time Spiral";
         this.parentSet = TimeSpiral.getInstance();
         this.hasBasicLands = false;

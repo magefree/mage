@@ -50,7 +50,7 @@ public class TenthEdition extends ExpansionSet {
     }
 
     private TenthEdition() {
-        super("Tenth Edition", "10E", "mage.sets.tenthedition", new GregorianCalendar(2007, 6, 14).getTime(), SetType.CORE);
+        super("Tenth Edition", "10E", "mage.sets.tenthedition", ExpansionSet.buildDate(2007, 6, 14), SetType.CORE);
         this.hasBoosters = true;
         this.numBoosterLands = 1;
         this.numBoosterCommon = 10;

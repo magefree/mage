@@ -50,7 +50,7 @@ public class JaceVsVraska extends ExpansionSet {
     }
 
     private JaceVsVraska() {
-        super("Duel Decks: Jace vs. Vraska", "DDM", "mage.sets.jacevsvraska", new GregorianCalendar(2014, 3, 14).getTime(), SetType.SUPPLEMENTAL);
+        super("Duel Decks: Jace vs. Vraska", "DDM", "mage.sets.jacevsvraska", ExpansionSet.buildDate(2014, 3, 14), SetType.SUPPLEMENTAL);
         this.blockName = "Duel Decks";
         this.hasBasicLands = false;
         cards.add(new SetCardInfo("Acidic Slime", 64, Rarity.UNCOMMON, mage.cards.a.AcidicSlime.class));

@@ -50,7 +50,7 @@ public class ArenaLeague extends ExpansionSet {
     }
 
     private ArenaLeague() {
-        super("Arena League", "ARENA", "mage.sets.arenaleague", new GregorianCalendar(1996, 7, 4).getTime(), SetType.PROMOTIONAL);
+        super("Arena League", "ARENA", "mage.sets.arenaleague", ExpansionSet.buildDate(1996, 7, 4), SetType.PROMOTIONAL);
         this.hasBoosters = false;
         cards.add(new SetCardInfo("Arc Lightning", 42, Rarity.COMMON, mage.cards.a.ArcLightning.class));
         cards.add(new SetCardInfo("Bonesplitter", 52, Rarity.COMMON, mage.cards.b.Bonesplitter.class));

@@ -50,7 +50,7 @@ public class VenserVsKoth extends ExpansionSet {
     }
 
     private VenserVsKoth() {
-        super("Duel Decks: Venser vs. Koth", "DDI", "mage.sets.venservskoth", new GregorianCalendar(2012, 3, 30).getTime(), SetType.SUPPLEMENTAL);
+        super("Duel Decks: Venser vs. Koth", "DDI", "mage.sets.venservskoth", ExpansionSet.buildDate(2012, 3, 30), SetType.SUPPLEMENTAL);
         this.blockName = "Duel Decks";
         this.hasBasicLands = false;
         cards.add(new SetCardInfo("Aether Membrane", 48, Rarity.UNCOMMON, mage.cards.a.AetherMembrane.class));

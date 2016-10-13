@@ -49,7 +49,7 @@ public class AjaniVsNicolBolas extends ExpansionSet {
     }
 
     private AjaniVsNicolBolas() {
-        super("Duel Decks: Ajani vs. Nicol Bolas", "DDH", "mage.sets.ajanivsnicolbolas", new GregorianCalendar(2011, 9, 2).getTime(), SetType.SUPPLEMENTAL);
+        super("Duel Decks: Ajani vs. Nicol Bolas", "DDH", "mage.sets.ajanivsnicolbolas", ExpansionSet.buildDate(2011, 9, 2), SetType.SUPPLEMENTAL);
         this.blockName = "Duel Decks";
         this.hasBasicLands = false;
         cards.add(new SetCardInfo("Ageless Entity", 18, Rarity.RARE, mage.cards.a.AgelessEntity.class));

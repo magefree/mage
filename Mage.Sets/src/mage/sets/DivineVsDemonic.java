@@ -50,7 +50,7 @@ public class DivineVsDemonic extends ExpansionSet {
     }
 
     private DivineVsDemonic() {
-        super("Duel Decks: Divine vs. Demonic", "DDC", "mage.sets.divinevsdemonic", new GregorianCalendar(2009, 04, 10).getTime(), SetType.SUPPLEMENTAL);
+        super("Duel Decks: Divine vs. Demonic", "DDC", "mage.sets.divinevsdemonic", ExpansionSet.buildDate(2009, 04, 10), SetType.SUPPLEMENTAL);
         this.blockName = "Duel Decks";
         this.hasBasicLands = false;
         cards.add(new SetCardInfo("Abyssal Gatekeeper", 31, Rarity.COMMON, mage.cards.a.AbyssalGatekeeper.class));

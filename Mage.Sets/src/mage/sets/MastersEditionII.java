@@ -46,7 +46,7 @@ public class MastersEditionII extends ExpansionSet {
     }
 
     private MastersEditionII() {
-        super("Masters Edition II", "ME2", "mage.sets.masterseditionii", new GregorianCalendar(2008, 9, 22).getTime(), SetType.MAGIC_ONLINE);
+        super("Masters Edition II", "ME2", "mage.sets.masterseditionii", ExpansionSet.buildDate(2008, 9, 22), SetType.MAGIC_ONLINE);
         this.hasBasicLands = false;
         this.hasBoosters = true;
         this.numBoosterLands = 1;

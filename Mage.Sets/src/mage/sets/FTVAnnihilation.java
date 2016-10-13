@@ -24,21 +24,20 @@
 * The views and conclusions contained in the software and documentation are those of the
 * authors and should not be interpreted as representing official policies, either expressed
 * or implied, of BetaSteward_at_googlemail.com.
-*/
-
+ */
 package mage.sets;
 
 import java.util.GregorianCalendar;
 import mage.cards.ExpansionSet;
-import mage.constants.SetType;
 import mage.constants.Rarity;
-import java.util.List;
+import mage.constants.SetType;
 
 /**
  *
  * @author fireshoes
  */
 public class FTVAnnihilation extends ExpansionSet {
+
     private static final FTVAnnihilation fINSTANCE = new FTVAnnihilation();
 
     public static FTVAnnihilation getInstance() {
@@ -46,7 +45,7 @@ public class FTVAnnihilation extends ExpansionSet {
     }
 
     private FTVAnnihilation() {
-        super("From the Vault: Annihilation", "V14", "mage.sets.ftvannihilation", new GregorianCalendar(2014, 8, 22).getTime(), SetType.SUPPLEMENTAL);
+        super("From the Vault: Annihilation", "V14", "mage.sets.ftvannihilation", ExpansionSet.buildDate(2014, 8, 22), SetType.SUPPLEMENTAL);
         this.hasBasicLands = false;
         cards.add(new SetCardInfo("Armageddon", 1, Rarity.MYTHIC, mage.cards.a.Armageddon.class));
         cards.add(new SetCardInfo("Burning of Xinye", 2, Rarity.MYTHIC, mage.cards.b.BurningOfXinye.class));

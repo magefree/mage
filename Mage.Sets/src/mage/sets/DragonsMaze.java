@@ -56,7 +56,7 @@ public class DragonsMaze extends ExpansionSet {
     List<CardInfo> savedSpecialRares = new ArrayList<>();
 
     private DragonsMaze() {
-        super("Dragon's Maze", "DGM", "mage.sets.dragonsmaze", new GregorianCalendar(2013, 5, 03).getTime(), SetType.EXPANSION);
+        super("Dragon's Maze", "DGM", "mage.sets.dragonsmaze", ExpansionSet.buildDate(2013, 5, 03), SetType.EXPANSION);
         this.blockName = "Return to Ravnica";
         this.hasBoosters = true;
         this.numBoosterSpecial = 1;

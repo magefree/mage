@@ -49,7 +49,7 @@ public class SpeedVsCunning extends ExpansionSet {
     }
 
     private SpeedVsCunning() {
-        super("Duel Decks: Speed vs. Cunning", "DDN", "mage.sets.speedvscunning", new GregorianCalendar(2014, 9, 5).getTime(), SetType.SUPPLEMENTAL);
+        super("Duel Decks: Speed vs. Cunning", "DDN", "mage.sets.speedvscunning", ExpansionSet.buildDate(2014, 9, 5), SetType.SUPPLEMENTAL);
         this.blockName = "Duel Decks";
         this.hasBasicLands = false;
         cards.add(new SetCardInfo("Act of Treason", 26, Rarity.COMMON, mage.cards.a.ActOfTreason.class));

@@ -49,7 +49,7 @@ public class MagicOrigins extends ExpansionSet {
     }
 
     private MagicOrigins() {
-        super("Magic Origins", "ORI", "mage.sets.magicorigins", new GregorianCalendar(2015, 7, 17).getTime(), SetType.CORE);
+        super("Magic Origins", "ORI", "mage.sets.magicorigins", ExpansionSet.buildDate(2015, 7, 17), SetType.CORE);
         this.hasBoosters = true;
         this.numBoosterLands = 1;
         this.numBoosterCommon = 10;

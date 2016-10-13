@@ -55,7 +55,7 @@ public class Portal extends ExpansionSet {
     }
 
     private Portal() {
-        super("Portal", "POR", "mage.sets.portal", new GregorianCalendar(1997, 5, 1).getTime(), SetType.SUPPLEMENTAL);
+        super("Portal", "POR", "mage.sets.portal", ExpansionSet.buildDate(1997, 5, 1), SetType.SUPPLEMENTAL);
         this.blockName = "Beginner";
         this.hasBasicLands = true;
         this.hasBoosters = true;

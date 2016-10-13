@@ -50,7 +50,7 @@ public class RavnicaCityOfGuilds extends ExpansionSet {
     }
 
     private RavnicaCityOfGuilds() {
-        super("Ravnica: City of Guilds", "RAV", "mage.sets.ravnica", new GregorianCalendar(2005, 9, 24).getTime(), SetType.EXPANSION);
+        super("Ravnica: City of Guilds", "RAV", "mage.sets.ravnica", ExpansionSet.buildDate(2005, 9, 24), SetType.EXPANSION);
         this.blockName = "Ravnica";
         this.hasBoosters = true;
         this.numBoosterLands = 0;

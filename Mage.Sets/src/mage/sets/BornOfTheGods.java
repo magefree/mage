@@ -47,7 +47,7 @@ public class BornOfTheGods extends ExpansionSet {
     }
 
     private BornOfTheGods() {
-        super("Born of the Gods", "BNG", "mage.sets.bornofthegods", new GregorianCalendar(2014, 2, 7).getTime(), SetType.EXPANSION);
+        super("Born of the Gods", "BNG", "mage.sets.bornofthegods", ExpansionSet.buildDate(2014, 2, 7), SetType.EXPANSION);
         this.blockName = "Theros";
         this.parentSet = Theros.getInstance();
         this.hasBasicLands = false;

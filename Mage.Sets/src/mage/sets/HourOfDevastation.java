@@ -24,15 +24,12 @@
 * The views and conclusions contained in the software and documentation are those of the
 * authors and should not be interpreted as representing official policies, either expressed
 * or implied, of BetaSteward_at_googlemail.com.
-*/
-
+ */
 package mage.sets;
 
 import java.util.GregorianCalendar;
 import mage.cards.ExpansionSet;
 import mage.constants.SetType;
-import mage.constants.Rarity;
-import java.util.List;
 
 /**
  *
@@ -47,7 +44,7 @@ public class HourOfDevastation extends ExpansionSet {
     }
 
     private HourOfDevastation() {
-        super("Hour of Devastation", "HOU", "mage.sets.hourofdevastation", new GregorianCalendar(2017, 7, 14).getTime(), SetType.EXPANSION);
+        super("Hour of Devastation", "HOU", "mage.sets.hourofdevastation", ExpansionSet.buildDate(2017, 7, 14), SetType.EXPANSION);
         this.blockName = "Amonkhet";
         this.parentSet = Amonkhet.getInstance();
         this.hasBasicLands = false;

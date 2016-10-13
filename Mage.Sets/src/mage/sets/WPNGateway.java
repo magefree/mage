@@ -24,7 +24,7 @@ public class WPNGateway extends ExpansionSet {
     }
 
     private WPNGateway() {
-        super("WPN Gateway", "GRC", "mage.sets.wpngateway", new GregorianCalendar(2011, 6, 17).getTime(), SetType.PROMOTIONAL);
+        super("WPN Gateway", "GRC", "mage.sets.wpngateway", ExpansionSet.buildDate(2011, 6, 17), SetType.PROMOTIONAL);
         this.hasBoosters = false;
         this.hasBasicLands = false;
         cards.add(new SetCardInfo("Auramancer", 77, Rarity.SPECIAL, mage.cards.a.Auramancer.class));

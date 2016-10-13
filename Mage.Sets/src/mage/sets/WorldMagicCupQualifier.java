@@ -47,7 +47,7 @@ public class WorldMagicCupQualifier extends ExpansionSet {
     }
 
     private WorldMagicCupQualifier() {
-        super("World Magic Cup Qualifier", "WMCQ", "mage.sets.worldmagiccupqualifier", new GregorianCalendar(2011, 6, 17).getTime(), SetType.PROMOTIONAL);
+        super("World Magic Cup Qualifier", "WMCQ", "mage.sets.worldmagiccupqualifier", ExpansionSet.buildDate(2011, 6, 17), SetType.PROMOTIONAL);
         this.hasBoosters = false;
         this.hasBasicLands = false;
         cards.add(new SetCardInfo("Abrupt Decay", 6, Rarity.RARE, mage.cards.a.AbruptDecay.class));

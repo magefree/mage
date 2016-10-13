@@ -47,7 +47,7 @@ public class TheDark extends ExpansionSet {
     }
 
     private TheDark() {
-        super("The Dark", "DRK", "mage.sets.thedark", new GregorianCalendar(1994, 7, 1).getTime(), SetType.EXPANSION);
+        super("The Dark", "DRK", "mage.sets.thedark", ExpansionSet.buildDate(1994, 7, 1), SetType.EXPANSION);
         this.hasBasicLands = false;
         this.hasBoosters = true;
         this.numBoosterLands = 1;

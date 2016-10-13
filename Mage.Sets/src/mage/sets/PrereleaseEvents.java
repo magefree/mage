@@ -18,7 +18,7 @@ public class PrereleaseEvents extends ExpansionSet {
     }
 
     private PrereleaseEvents() {
-        super("Prerelease Events", "PTC", "mage.sets.prereleaseevents", new GregorianCalendar(1990, 1, 1).getTime(), SetType.PROMOTIONAL);
+        super("Prerelease Events", "PTC", "mage.sets.prereleaseevents", ExpansionSet.buildDate(1990, 1, 1), SetType.PROMOTIONAL);
         this.hasBoosters = false;
         this.hasBasicLands = false;
         cards.add(new SetCardInfo("Abbot of Keral Keep", 198, Rarity.RARE, mage.cards.a.AbbotOfKeralKeep.class));

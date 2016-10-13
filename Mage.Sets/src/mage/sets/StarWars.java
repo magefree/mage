@@ -47,7 +47,7 @@ public class StarWars extends ExpansionSet {
     }
 
     private StarWars() {
-        super("Star Wars", "SWS", "mage.sets.starwars", new GregorianCalendar(2015, 12, 25).getTime(), SetType.CUSTOM_SET);
+        super("Star Wars", "SWS", "mage.sets.starwars", ExpansionSet.buildDate(2015, 12, 25), SetType.CUSTOM_SET);
         this.blockName = "Star Wars";
         this.hasBoosters = true;
         this.hasBasicLands = true;

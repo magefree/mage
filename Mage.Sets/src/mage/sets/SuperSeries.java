@@ -50,7 +50,7 @@ public class SuperSeries extends ExpansionSet {
     }
 
     private SuperSeries() {
-        super("Super Series", "SUS", "mage.sets.superseries", new GregorianCalendar(1996, 1, 1).getTime(), SetType.PROMOTIONAL);
+        super("Super Series", "SUS", "mage.sets.superseries", ExpansionSet.buildDate(1996, 1, 1), SetType.PROMOTIONAL);
         this.hasBoosters = false;
         cards.add(new SetCardInfo("City of Brass", 6, Rarity.SPECIAL, mage.cards.c.CityOfBrass.class));
         cards.add(new SetCardInfo("Crusade", 4, Rarity.SPECIAL, mage.cards.c.Crusade.class));

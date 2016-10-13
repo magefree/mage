@@ -48,7 +48,7 @@ public class ElspethVsKiora extends ExpansionSet {
     }
 
     private ElspethVsKiora() {
-        super("Duel Decks: Elspeth vs. Kiora", "DDO", "mage.sets.elspethvskiora", new GregorianCalendar(2015, 2, 27).getTime(), SetType.SUPPLEMENTAL);
+        super("Duel Decks: Elspeth vs. Kiora", "DDO", "mage.sets.elspethvskiora", ExpansionSet.buildDate(2015, 2, 27), SetType.SUPPLEMENTAL);
         this.blockName = "Duel Decks";
         this.hasBasicLands = false;
         cards.add(new SetCardInfo("Accumulated Knowledge", 35, Rarity.COMMON, mage.cards.a.AccumulatedKnowledge.class));

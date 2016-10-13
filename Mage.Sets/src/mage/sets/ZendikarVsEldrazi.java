@@ -50,7 +50,7 @@ public class ZendikarVsEldrazi extends ExpansionSet {
     }
 
     private ZendikarVsEldrazi() {
-        super("Duel Decks: Zendikar vs. Eldrazi", "DDP", "mage.sets.zendikarvseldrazi", new GregorianCalendar(2015, 8, 28).getTime(), SetType.SUPPLEMENTAL);
+        super("Duel Decks: Zendikar vs. Eldrazi", "DDP", "mage.sets.zendikarvseldrazi", ExpansionSet.buildDate(2015, 8, 28), SetType.SUPPLEMENTAL);
         this.blockName = "Duel Decks";
         this.hasBasicLands = false;
         cards.add(new SetCardInfo("Affa Guard Hound", 2, Rarity.UNCOMMON, mage.cards.a.AffaGuardHound.class));

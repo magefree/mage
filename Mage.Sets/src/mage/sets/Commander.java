@@ -51,7 +51,7 @@ public class Commander extends ExpansionSet {
     }
 
     private Commander() {
-        super("Commander", "CMD", "mage.sets.commander", new GregorianCalendar(2011, 6, 17).getTime(), SetType.SUPPLEMENTAL);
+        super("Commander", "CMD", "mage.sets.commander", ExpansionSet.buildDate(2011, 6, 17), SetType.SUPPLEMENTAL);
         this.blockName = "Command Zone";
         cards.add(new SetCardInfo("Acidic Slime", 140, Rarity.UNCOMMON, mage.cards.a.AcidicSlime.class));
         cards.add(new SetCardInfo("Acorn Catapult", 241, Rarity.RARE, mage.cards.a.AcornCatapult.class));
