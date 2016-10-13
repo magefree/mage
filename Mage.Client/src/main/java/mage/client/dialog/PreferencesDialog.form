@@ -5896,9 +5896,13 @@
                           <Component id="labelYourTurn" alignment="0" min="-2" max="-2" attributes="0"/>
                           <Component id="lebelSkip" alignment="0" min="-2" max="-2" attributes="0"/>
                           <Component id="labelPriorEnd" alignment="0" min="-2" max="-2" attributes="0"/>
+                          <Component id="labelSkipStep" alignment="0" min="-2" max="-2" attributes="0"/>
+                          <Component id="labelConfirm" alignment="0" min="-2" max="-2" attributes="0"/>
                       </Group>
                       <EmptySpace type="unrelated" max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="0" attributes="0">
+                          <Component id="keyConfirm" min="-2" max="-2" attributes="0"/>
+                          <Component id="keySkipStep" min="-2" max="-2" attributes="0"/>
                           <Component id="keySkipStack" min="-2" max="-2" attributes="0"/>
                           <Component id="keyYourTurn" min="-2" max="-2" attributes="0"/>
                           <Component id="keyNextTurn" min="-2" max="-2" attributes="0"/>
@@ -5916,6 +5920,11 @@
                   <Group type="102" alignment="0" attributes="0">
                       <EmptySpace max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="3" attributes="0">
+                          <Component id="labelConfirm" alignment="3" min="-2" max="-2" attributes="0"/>
+                          <Component id="keyConfirm" alignment="3" min="-2" max="-2" attributes="0"/>
+                      </Group>
+                      <EmptySpace type="unrelated" max="-2" attributes="0"/>
+                      <Group type="103" groupAlignment="3" attributes="0">
                           <Component id="labelCancel" alignment="3" min="-2" max="-2" attributes="0"/>
                           <Component id="keyCancelSkip" alignment="3" min="-2" max="-2" attributes="0"/>
                       </Group>
@@ -5928,6 +5937,11 @@
                       <Group type="103" groupAlignment="3" attributes="0">
                           <Component id="labelEndStep" alignment="3" min="-2" max="-2" attributes="0"/>
                           <Component id="keyEndStep" alignment="3" min="-2" max="-2" attributes="0"/>
+                      </Group>
+                      <EmptySpace type="unrelated" max="-2" attributes="0"/>
+                      <Group type="103" groupAlignment="3" attributes="0">
+                          <Component id="labelSkipStep" alignment="3" min="-2" max="-2" attributes="0"/>
+                          <Component id="keySkipStep" alignment="3" min="-2" max="-2" attributes="0"/>
                       </Group>
                       <EmptySpace type="unrelated" max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="3" attributes="0">
@@ -5949,7 +5963,7 @@
                           <Component id="labelPriorEnd" alignment="3" min="-2" max="-2" attributes="0"/>
                           <Component id="keyPriorEnd" alignment="3" min="-2" max="-2" attributes="0"/>
                       </Group>
-                      <EmptySpace pref="301" max="32767" attributes="0"/>
+                      <EmptySpace pref="263" max="32767" attributes="0"/>
                   </Group>
               </Group>
             </DimensionLayout>
@@ -6023,6 +6037,26 @@
             <Component class="mage.client.components.KeyBindButton" name="keyPriorEnd">
               <Properties>
                 <Property name="text" type="java.lang.String" value="keyBindButton1"/>
+              </Properties>
+            </Component>
+            <Component class="mage.client.components.KeyBindButton" name="keySkipStep">
+              <Properties>
+                <Property name="text" type="java.lang.String" value="keyBindButton1"/>
+              </Properties>
+            </Component>
+            <Component class="javax.swing.JLabel" name="labelSkipStep">
+              <Properties>
+                <Property name="text" type="java.lang.String" value="Skip Step"/>
+              </Properties>
+            </Component>
+            <Component class="mage.client.components.KeyBindButton" name="keyConfirm">
+              <Properties>
+                <Property name="text" type="java.lang.String" value="keyBindButton1"/>
+              </Properties>
+            </Component>
+            <Component class="javax.swing.JLabel" name="labelConfirm">
+              <Properties>
+                <Property name="text" type="java.lang.String" value="Confirm"/>
               </Properties>
             </Component>
           </SubComponents>

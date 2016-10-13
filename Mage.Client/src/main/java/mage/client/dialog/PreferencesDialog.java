@@ -57,6 +57,7 @@ import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JSlider;
 import javax.swing.JTextField;
+import javax.swing.KeyStroke;
 import javax.swing.border.Border;
 import javax.swing.filechooser.FileFilter;
 import mage.client.MageFrame;
@@ -295,9 +296,11 @@ public class PreferencesDialog extends javax.swing.JDialog {
 	public static final String KEY_CONNECTION_URL_SERVER_LIST = "connectionURLServerList";
 
 	// controls
+	public static final String KEY_CONTROL_CONFIRM = "controlConfirm";
 	public static final String KEY_CONTROL_CANCEL_SKIP = "controlCancelSkip";
 	public static final String KEY_CONTROL_NEXT_TURN = "controlNextTurn";
 	public static final String KEY_CONTROL_END_STEP = "controlEndStep";
+	public static final String KEY_CONTROL_SKIP_STEP = "controlSkipTurn";
 	public static final String KEY_CONTROL_MAIN_STEP = "controlMainStep";
 	public static final String KEY_CONTROL_YOUR_TURN = "controlYourTurn";
 	public static final String KEY_CONTROL_SKIP_STACK = "controlSkipStack";
@@ -564,6 +567,10 @@ public class PreferencesDialog extends javax.swing.JDialog {
         keyYourTurn = new mage.client.components.KeyBindButton();
         keySkipStack = new mage.client.components.KeyBindButton();
         keyPriorEnd = new mage.client.components.KeyBindButton();
+        keySkipStep = new mage.client.components.KeyBindButton();
+        labelSkipStep = new javax.swing.JLabel();
+        keyConfirm = new mage.client.components.KeyBindButton();
+        labelConfirm = new javax.swing.JLabel();
         saveButton = new javax.swing.JButton();
         exitButton = new javax.swing.JButton();
 
@@ -2494,6 +2501,14 @@ public class PreferencesDialog extends javax.swing.JDialog {
 
         keyPriorEnd.setText("keyBindButton1");
 
+        keySkipStep.setText("keyBindButton1");
+
+        labelSkipStep.setText("Skip Step");
+
+        keyConfirm.setText("keyBindButton1");
+
+        labelConfirm.setText("Confirm");
+
         org.jdesktop.layout.GroupLayout tabControlsLayout = new org.jdesktop.layout.GroupLayout(tabControls);
         tabControls.setLayout(tabControlsLayout);
         tabControlsLayout.setHorizontalGroup(
@@ -2507,9 +2522,13 @@ public class PreferencesDialog extends javax.swing.JDialog {
                     .add(labelMainStep)
                     .add(labelYourTurn)
                     .add(lebelSkip)
-                    .add(labelPriorEnd))
+                    .add(labelPriorEnd)
+                    .add(labelSkipStep)
+                    .add(labelConfirm))
                 .addPreferredGap(org.jdesktop.layout.LayoutStyle.UNRELATED)
                 .add(tabControlsLayout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
+                    .add(keyConfirm, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
+                    .add(keySkipStep, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
                     .add(keySkipStack, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
                     .add(keyYourTurn, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
                     .add(keyNextTurn, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
@@ -2524,6 +2543,10 @@ public class PreferencesDialog extends javax.swing.JDialog {
             .add(tabControlsLayout.createSequentialGroup()
                 .addContainerGap()
                 .add(tabControlsLayout.createParallelGroup(org.jdesktop.layout.GroupLayout.BASELINE)
+                    .add(labelConfirm)
+                    .add(keyConfirm, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(org.jdesktop.layout.LayoutStyle.UNRELATED)
+                .add(tabControlsLayout.createParallelGroup(org.jdesktop.layout.GroupLayout.BASELINE)
                     .add(labelCancel)
                     .add(keyCancelSkip, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(org.jdesktop.layout.LayoutStyle.UNRELATED)
@@ -2534,6 +2557,10 @@ public class PreferencesDialog extends javax.swing.JDialog {
                 .add(tabControlsLayout.createParallelGroup(org.jdesktop.layout.GroupLayout.BASELINE)
                     .add(labelEndStep)
                     .add(keyEndStep, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(org.jdesktop.layout.LayoutStyle.UNRELATED)
+                .add(tabControlsLayout.createParallelGroup(org.jdesktop.layout.GroupLayout.BASELINE)
+                    .add(labelSkipStep)
+                    .add(keySkipStep, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(org.jdesktop.layout.LayoutStyle.UNRELATED)
                 .add(tabControlsLayout.createParallelGroup(org.jdesktop.layout.GroupLayout.BASELINE)
                     .add(labelMainStep)
@@ -2550,7 +2577,7 @@ public class PreferencesDialog extends javax.swing.JDialog {
                 .add(tabControlsLayout.createParallelGroup(org.jdesktop.layout.GroupLayout.BASELINE)
                     .add(labelPriorEnd)
                     .add(keyPriorEnd, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(301, Short.MAX_VALUE))
+                .addContainerGap(263, Short.MAX_VALUE))
         );
 
         tabsPanel.addTab("Controls", tabControls);
@@ -2744,9 +2771,11 @@ public class PreferencesDialog extends javax.swing.JDialog {
 		save(prefs, dialog.txtURLServerList, KEY_CONNECTION_URL_SERVER_LIST);
 
 		// controls
+		save(prefs, dialog.keyConfirm, KEY_CONTROL_CONFIRM);
 		save(prefs, dialog.keyCancelSkip, KEY_CONTROL_CANCEL_SKIP);
 		save(prefs, dialog.keyNextTurn, KEY_CONTROL_NEXT_TURN);
 		save(prefs, dialog.keyEndStep, KEY_CONTROL_END_STEP);
+		save(prefs, dialog.keySkipStep, KEY_CONTROL_SKIP_STEP);
 		save(prefs, dialog.keyMainStep, KEY_CONTROL_MAIN_STEP);
 		save(prefs, dialog.keyYourTurn, KEY_CONTROL_YOUR_TURN);
 		save(prefs, dialog.keySkipStack, KEY_CONTROL_SKIP_STACK);
@@ -3289,9 +3318,11 @@ public class PreferencesDialog extends javax.swing.JDialog {
 	}
 
 	private static void loadControlSettings(Preferences prefs) {
+		load(prefs, dialog.keyConfirm, KEY_CONTROL_CONFIRM, KeyEvent.VK_F2);
 		load(prefs, dialog.keyCancelSkip, KEY_CONTROL_CANCEL_SKIP, KeyEvent.VK_F3);
 		load(prefs, dialog.keyNextTurn, KEY_CONTROL_NEXT_TURN, KeyEvent.VK_F4);
 		load(prefs, dialog.keyEndStep, KEY_CONTROL_END_STEP, KeyEvent.VK_F5);
+		load(prefs, dialog.keySkipStep, KEY_CONTROL_SKIP_STEP, KeyEvent.VK_F6);
 		load(prefs, dialog.keyMainStep, KEY_CONTROL_MAIN_STEP, KeyEvent.VK_F7);
 		load(prefs, dialog.keyYourTurn, KEY_CONTROL_YOUR_TURN, KeyEvent.VK_F9);
 		load(prefs, dialog.keySkipStack, KEY_CONTROL_SKIP_STACK, KeyEvent.VK_F10);
@@ -3498,6 +3529,11 @@ public class PreferencesDialog extends javax.swing.JDialog {
 			CACHE.put(key, value);
 			return value;
 		}
+	}
+
+	public static KeyStroke getCachedKeystroke(String key, int def) {
+		int code = getCachedValue(key, def);
+		return KeyStroke.getKeyStroke(code, 0);
 	}
 
 	private static void updateCache(String key, String value) {
@@ -3711,17 +3747,20 @@ public class PreferencesDialog extends javax.swing.JDialog {
     private javax.swing.JPanel jPanel32;
     private javax.swing.JPanel jPanel33;
     private mage.client.components.KeyBindButton keyCancelSkip;
+    private mage.client.components.KeyBindButton keyConfirm;
     private mage.client.components.KeyBindButton keyEndStep;
     private mage.client.components.KeyBindButton keyMainStep;
     private mage.client.components.KeyBindButton keyNextTurn;
     private mage.client.components.KeyBindButton keyPriorEnd;
     private mage.client.components.KeyBindButton keySkipStack;
+    private mage.client.components.KeyBindButton keySkipStep;
     private mage.client.components.KeyBindButton keyYourTurn;
     private javax.swing.JLabel labelCancel;
     private javax.swing.JLabel labelCardSizeHand;
     private javax.swing.JLabel labelCardSizeMaxBattlefield;
     private javax.swing.JLabel labelCardSizeMinBattlefield;
     private javax.swing.JLabel labelCardSizeOtherZones;
+    private javax.swing.JLabel labelConfirm;
     private javax.swing.JLabel labelDialogFont;
     private javax.swing.JLabel labelEditorCardOffset;
     private javax.swing.JLabel labelEditorCardSize;
@@ -3733,6 +3772,7 @@ public class PreferencesDialog extends javax.swing.JDialog {
     private javax.swing.JLabel labelNumberOfDownloadThreads;
     private javax.swing.JLabel labelPreferedImageLanguage;
     private javax.swing.JLabel labelPriorEnd;
+    private javax.swing.JLabel labelSkipStep;
     private javax.swing.JLabel labelStackWidth;
     private javax.swing.JLabel labelTooltipSize;
     private javax.swing.JLabel labelYourTurn;
