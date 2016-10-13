@@ -943,7 +943,7 @@ public class DragCardGrid extends JPanel implements DragCardSource, DragCardTarg
             selectBySearchOptionsC.fill = GridBagConstraints.VERTICAL;
 
             searchByTextField = new JTextField();
-            searchByTextField.setToolTipText("Searches for card names and in the rule text of the card.");
+            searchByTextField.setToolTipText("Searches for card names, types, rarity, casting cost and rules text.  NB: Mana symbols are written like {W},{U},{C} etc");
             searchByTextField.addKeyListener(new KeyAdapter() {
                 public void keyReleased(KeyEvent e) {
                     reselectBy();
@@ -1175,7 +1175,7 @@ public class DragCardGrid extends JPanel implements DragCardSource, DragCardTarg
 
         boolean useText = false;
         String searchStr = "";
-        if (searchByTextField.getText().length() > 3) {
+        if (searchByTextField.getText().length() >= 3) {
             useText = true;
             searchStr = searchByTextField.getText().toLowerCase();
         }
@@ -1187,7 +1187,7 @@ public class DragCardGrid extends JPanel implements DragCardSource, DragCardTarg
                     for (ArrayList<ArrayList<CardView>> gridRow : cardGrid) {
                         for (ArrayList<CardView> stack : gridRow) {
                             for (CardView card : stack) {
-                                boolean s = card.getCardTypes().contains(cardType);
+                                boolean s = card.isSelected() | card.getCardTypes().contains(cardType);
                                 card.setSelected(s);
                                 cardViews.get(card.getId()).update(card);
                             }
@@ -1202,10 +1202,11 @@ public class DragCardGrid extends JPanel implements DragCardSource, DragCardTarg
                 for (ArrayList<CardView> stack : gridRow) {
                     for (CardView card : stack) {
                         boolean s = card.isSelected();
+                        // Name
                         if (!s) {
                             s |= card.getName().toLowerCase().contains(searchStr);
-
                         }
+                        // Sub & Super Types
                         if (!s) {
                             for (String str : card.getSuperTypes()) {
                                 s |= str.toLowerCase().contains(searchStr);
@@ -1214,6 +1215,27 @@ public class DragCardGrid extends JPanel implements DragCardSource, DragCardTarg
                                 s |= str.toLowerCase().contains(searchStr);
                             }
                         }
+                        // Rarity
+                        if (!s) {
+                            s |= card.getRarity().toString().toLowerCase().contains(searchStr);
+                        }
+                        // Type line
+                        if (!s) {
+                            String t = "";
+                            for (CardType type : card.getCardTypes()) {
+                                t += " " + type.toString();
+                            }
+                            s |= t.toLowerCase().contains(searchStr);
+                        }
+                        // Casting cost
+                        if (!s) {
+                            String mc = "";
+                            for (String m : card.getManaCost()) {
+                                mc += m;
+                            }
+                            s |= mc.toLowerCase().contains(searchStr);
+                        }
+                        // Rules
                         if (!s) {
                             for (String str : card.getRules()) {
                                 s |= str.toLowerCase().contains(searchStr);
