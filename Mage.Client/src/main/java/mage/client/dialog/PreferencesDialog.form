@@ -5874,6 +5874,159 @@
             </Container>
           </SubComponents>
         </Container>
+        <Container class="javax.swing.JPanel" name="tabControls">
+          <Constraints>
+            <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.support.JTabbedPaneSupportLayout" value="org.netbeans.modules.form.compat2.layouts.support.JTabbedPaneSupportLayout$JTabbedPaneConstraintsDescription">
+              <JTabbedPaneConstraints tabName="Controls">
+                <Property name="tabTitle" type="java.lang.String" value="Controls"/>
+              </JTabbedPaneConstraints>
+            </Constraint>
+          </Constraints>
+
+          <Layout>
+            <DimensionLayout dim="0">
+              <Group type="103" groupAlignment="0" attributes="0">
+                  <Group type="102" attributes="0">
+                      <EmptySpace max="-2" attributes="0"/>
+                      <Group type="103" groupAlignment="0" attributes="0">
+                          <Component id="labelCancel" alignment="0" min="-2" max="-2" attributes="0"/>
+                          <Component id="labelNextTurn" alignment="0" min="-2" max="-2" attributes="0"/>
+                          <Component id="labelEndStep" alignment="0" min="-2" max="-2" attributes="0"/>
+                          <Component id="labelMainStep" alignment="0" min="-2" max="-2" attributes="0"/>
+                          <Component id="labelYourTurn" alignment="0" min="-2" max="-2" attributes="0"/>
+                          <Component id="lebelSkip" alignment="0" min="-2" max="-2" attributes="0"/>
+                          <Component id="labelPriorEnd" alignment="0" min="-2" max="-2" attributes="0"/>
+                      </Group>
+                      <EmptySpace type="unrelated" max="-2" attributes="0"/>
+                      <Group type="103" groupAlignment="0" attributes="0">
+                          <Component id="keySkipStack" min="-2" max="-2" attributes="0"/>
+                          <Component id="keyYourTurn" min="-2" max="-2" attributes="0"/>
+                          <Component id="keyNextTurn" min="-2" max="-2" attributes="0"/>
+                          <Component id="keyCancelSkip" min="-2" max="-2" attributes="0"/>
+                          <Component id="keyEndStep" min="-2" max="-2" attributes="0"/>
+                          <Component id="keyMainStep" min="-2" max="-2" attributes="0"/>
+                          <Component id="keyPriorEnd" min="-2" max="-2" attributes="0"/>
+                      </Group>
+                      <EmptySpace pref="483" max="32767" attributes="0"/>
+                  </Group>
+              </Group>
+            </DimensionLayout>
+            <DimensionLayout dim="1">
+              <Group type="103" groupAlignment="0" attributes="0">
+                  <Group type="102" alignment="0" attributes="0">
+                      <EmptySpace max="-2" attributes="0"/>
+                      <Group type="103" groupAlignment="3" attributes="0">
+                          <Component id="labelCancel" alignment="3" min="-2" max="-2" attributes="0"/>
+                          <Component id="keyCancelSkip" alignment="3" min="-2" max="-2" attributes="0"/>
+                      </Group>
+                      <EmptySpace type="unrelated" max="-2" attributes="0"/>
+                      <Group type="103" groupAlignment="3" attributes="0">
+                          <Component id="labelNextTurn" alignment="3" min="-2" max="-2" attributes="0"/>
+                          <Component id="keyNextTurn" alignment="3" min="-2" max="-2" attributes="0"/>
+                      </Group>
+                      <EmptySpace type="unrelated" max="-2" attributes="0"/>
+                      <Group type="103" groupAlignment="3" attributes="0">
+                          <Component id="labelEndStep" alignment="3" min="-2" max="-2" attributes="0"/>
+                          <Component id="keyEndStep" alignment="3" min="-2" max="-2" attributes="0"/>
+                      </Group>
+                      <EmptySpace type="unrelated" max="-2" attributes="0"/>
+                      <Group type="103" groupAlignment="3" attributes="0">
+                          <Component id="labelMainStep" alignment="3" min="-2" max="-2" attributes="0"/>
+                          <Component id="keyMainStep" alignment="3" min="-2" max="-2" attributes="0"/>
+                      </Group>
+                      <EmptySpace type="unrelated" max="-2" attributes="0"/>
+                      <Group type="103" groupAlignment="3" attributes="0">
+                          <Component id="labelYourTurn" alignment="3" min="-2" max="-2" attributes="0"/>
+                          <Component id="keyYourTurn" alignment="3" min="-2" max="-2" attributes="0"/>
+                      </Group>
+                      <EmptySpace type="unrelated" max="-2" attributes="0"/>
+                      <Group type="103" groupAlignment="3" attributes="0">
+                          <Component id="lebelSkip" alignment="3" min="-2" max="-2" attributes="0"/>
+                          <Component id="keySkipStack" alignment="3" min="-2" max="-2" attributes="0"/>
+                      </Group>
+                      <EmptySpace type="unrelated" max="-2" attributes="0"/>
+                      <Group type="103" groupAlignment="3" attributes="0">
+                          <Component id="labelPriorEnd" alignment="3" min="-2" max="-2" attributes="0"/>
+                          <Component id="keyPriorEnd" alignment="3" min="-2" max="-2" attributes="0"/>
+                      </Group>
+                      <EmptySpace pref="301" max="32767" attributes="0"/>
+                  </Group>
+              </Group>
+            </DimensionLayout>
+          </Layout>
+          <SubComponents>
+            <Component class="javax.swing.JLabel" name="labelNextTurn">
+              <Properties>
+                <Property name="text" type="java.lang.String" value="Next Turn"/>
+              </Properties>
+            </Component>
+            <Component class="javax.swing.JLabel" name="labelEndStep">
+              <Properties>
+                <Property name="text" type="java.lang.String" value="End Step"/>
+              </Properties>
+            </Component>
+            <Component class="javax.swing.JLabel" name="labelMainStep">
+              <Properties>
+                <Property name="text" type="java.lang.String" value="Main Step"/>
+              </Properties>
+            </Component>
+            <Component class="javax.swing.JLabel" name="labelYourTurn">
+              <Properties>
+                <Property name="text" type="java.lang.String" value="Your Turn"/>
+              </Properties>
+            </Component>
+            <Component class="javax.swing.JLabel" name="lebelSkip">
+              <Properties>
+                <Property name="text" type="java.lang.String" value="Skip Stack"/>
+              </Properties>
+            </Component>
+            <Component class="javax.swing.JLabel" name="labelPriorEnd">
+              <Properties>
+                <Property name="text" type="java.lang.String" value="Prior End"/>
+              </Properties>
+            </Component>
+            <Component class="javax.swing.JLabel" name="labelCancel">
+              <Properties>
+                <Property name="text" type="java.lang.String" value="Cancel Skip"/>
+              </Properties>
+            </Component>
+            <Component class="mage.client.components.KeyBindButton" name="keyCancelSkip">
+              <Properties>
+                <Property name="text" type="java.lang.String" value="keyBindButton1"/>
+              </Properties>
+            </Component>
+            <Component class="mage.client.components.KeyBindButton" name="keyNextTurn">
+              <Properties>
+                <Property name="text" type="java.lang.String" value="keyBindButton1"/>
+              </Properties>
+            </Component>
+            <Component class="mage.client.components.KeyBindButton" name="keyMainStep">
+              <Properties>
+                <Property name="text" type="java.lang.String" value="keyBindButton1"/>
+              </Properties>
+            </Component>
+            <Component class="mage.client.components.KeyBindButton" name="keyEndStep">
+              <Properties>
+                <Property name="text" type="java.lang.String" value="keyBindButton1"/>
+              </Properties>
+            </Component>
+            <Component class="mage.client.components.KeyBindButton" name="keyYourTurn">
+              <Properties>
+                <Property name="text" type="java.lang.String" value="keyBindButton1"/>
+              </Properties>
+            </Component>
+            <Component class="mage.client.components.KeyBindButton" name="keySkipStack">
+              <Properties>
+                <Property name="text" type="java.lang.String" value="keyBindButton1"/>
+              </Properties>
+            </Component>
+            <Component class="mage.client.components.KeyBindButton" name="keyPriorEnd">
+              <Properties>
+                <Property name="text" type="java.lang.String" value="keyBindButton1"/>
+              </Properties>
+            </Component>
+          </SubComponents>
+        </Container>
       </SubComponents>
     </Container>
     <Component class="javax.swing.JButton" name="saveButton">
