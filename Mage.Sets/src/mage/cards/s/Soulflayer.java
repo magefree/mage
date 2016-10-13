@@ -28,7 +28,6 @@
 package mage.cards.s;
 
 import java.util.HashSet;
-import java.util.List;
 import java.util.Set;
 import java.util.UUID;
 import mage.MageInt;
@@ -52,6 +51,7 @@ import mage.abilities.keyword.VigilanceAbility;
 import mage.cards.Card;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
+import mage.cards.Cards;
 import mage.constants.CardType;
 import mage.constants.Duration;
 import mage.constants.Layer;
@@ -69,7 +69,7 @@ import mage.util.CardUtil;
 public class Soulflayer extends CardImpl {
 
     public Soulflayer(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{4}{B}{B}");
+        super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{4}{B}{B}");
         this.subtype.add("Demon");
         this.power = new MageInt(4);
         this.toughness = new MageInt(4);
@@ -91,7 +91,6 @@ public class Soulflayer extends CardImpl {
         return new Soulflayer(this);
     }
 }
-
 
 class SoulflayerEffect extends ContinuousEffectImpl implements SourceEffect {
 
@@ -126,13 +125,13 @@ class SoulflayerEffect extends ContinuousEffectImpl implements SourceEffect {
                 abilitiesToAdd = new HashSet<>();
                 this.objectReference = new MageObjectReference(permanent, game);
                 String keyString = CardUtil.getCardZoneString("delvedCards", source.getSourceId(), game, true);
-                List<Card> delvedCards = (List<Card>) game.getState().getValue(keyString);
+                Cards delvedCards = (Cards) game.getState().getValue(keyString);
                 if (delvedCards != null) {
-                    for(Card card: delvedCards) {
+                    for (Card card : delvedCards.getCards(game)) {
                         if (!card.getCardType().contains(CardType.CREATURE)) {
                             continue;
                         }
-                        for (Ability cardAbility: card.getAbilities()) {
+                        for (Ability cardAbility : card.getAbilities()) {
                             if (cardAbility instanceof FlyingAbility) {
                                 abilitiesToAdd.add(FlyingAbility.getInstance());
                             }
@@ -170,14 +169,12 @@ class SoulflayerEffect extends ContinuousEffectImpl implements SourceEffect {
                     }
                 }
             }
-            for (Ability ability: abilitiesToAdd) {
+            for (Ability ability : abilitiesToAdd) {
                 permanent.addAbility(ability, source.getSourceId(), game);
             }
             return true;
-        } else {
-            if (abilitiesToAdd != null) {
-                abilitiesToAdd = null;
-            }
+        } else if (abilitiesToAdd != null) {
+            abilitiesToAdd = null;
         }
         return false;
     }

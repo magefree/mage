@@ -27,15 +27,8 @@
  */
 package mage.cards.b;
 
-import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
-import mage.constants.CardType;
-import mage.constants.Duration;
-import mage.constants.Layer;
-import mage.constants.Outcome;
-import mage.constants.SubLayer;
-import mage.constants.Zone;
 import mage.abilities.Ability;
 import mage.abilities.StaticAbility;
 import mage.abilities.common.SimpleStaticAbility;
@@ -45,6 +38,14 @@ import mage.abilities.effects.common.continuous.BoostEquippedEffect;
 import mage.abilities.keyword.EquipAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
+import mage.cards.Cards;
+import mage.cards.CardsImpl;
+import mage.constants.CardType;
+import mage.constants.Duration;
+import mage.constants.Layer;
+import mage.constants.Outcome;
+import mage.constants.SubLayer;
+import mage.constants.Zone;
 import mage.filter.common.FilterArtifactPermanent;
 import mage.filter.predicate.Predicates;
 import mage.filter.predicate.mageobject.CardTypePredicate;
@@ -59,8 +60,7 @@ import mage.game.permanent.Permanent;
 public class BludgeonBrawl extends CardImpl {
 
     public BludgeonBrawl(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.ENCHANTMENT},"{2}{R}");
-
+        super(ownerId, setInfo, new CardType[]{CardType.ENCHANTMENT}, "{2}{R}");
 
         // Each noncreature, non-Equipment artifact is an Equipment with equip {X} and "Equipped creature gets +X/+0," where X is that artifact's converted mana cost.
         this.addAbility(new BludgeonBrawlAbility());
@@ -114,7 +114,7 @@ class BludgeonBrawlAddSubtypeEffect extends ContinuousEffectImpl {
         filter.add(Predicates.not(new CardTypePredicate(CardType.CREATURE)));
         filter.add(Predicates.not(new SubtypePredicate("Equipment")));
 
-        List<UUID> affectedPermanents = new ArrayList<UUID>();
+        Cards affectedPermanents = new CardsImpl();
         List<Permanent> permanents = game.getBattlefield().getActivePermanents(filter, source.getControllerId(), game);
         for (Permanent permanent : permanents) {
             if (permanent != null) {
@@ -149,7 +149,7 @@ class BludgeonBrawlGainAbilityEffect extends ContinuousEffectImpl {
 
     @Override
     public boolean apply(Game game, Ability source) {
-        List<UUID> permanents = (List<UUID>) game.getState().getValue(source.getSourceId() + "BludgeonBrawlAffectedPermanents");
+        Cards permanents = (Cards) game.getState().getValue(source.getSourceId() + "BludgeonBrawlAffectedPermanents");
         if (permanents != null) {
             for (UUID permanentId : permanents) {
                 Permanent permanent = game.getPermanent(permanentId);
