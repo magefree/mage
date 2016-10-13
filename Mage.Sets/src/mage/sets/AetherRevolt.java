@@ -51,7 +51,7 @@ public class AetherRevolt extends ExpansionSet {
     protected final List<CardInfo> savedSpecialLand = new ArrayList<>();
 
     private AetherRevolt() {
-        super("Aether Revolt", "AER", "mage.sets.aetherrevolt", buildDate(2017, 1, 20), SetType.EXPANSION);
+        super("Aether Revolt", "AER", "mage.sets.aetherrevolt", ExpansionSet.buildDate(2017, 1, 20), SetType.EXPANSION);
         this.blockName = "Kaladesh";
         this.hasBoosters = true;
         this.hasBasicLands = false;
