@@ -1,7 +1,6 @@
 XMage.de 1    (Europe/Germany) fast :xmage.de:17171
 woogerworks   (North America/USA)       :xmage.woogerworks.com:17171
-XMage Testserver  (Europe/France) 1.4.8v0  :176.31.186.181:17171
-XMage BR      (South America/Brazil) :ec2-54-233-67-0.sa-east-1.compute.amazonaws.com:17171
+woogerworks replacment  (North America/USA)  :158.69.192.238:17171
 XMage.tahiti                         :xmage.tahiti.one:443
 Seedds Server (Asia)                :115.29.203.80:17171
 localhost -> connect to your local server (must be started):localhost:17171

@@ -825,8 +825,11 @@ public class DragCardGrid extends JPanel implements DragCardSource, DragCardTarg
 
         // Load separate creatures setting
         separateCreatures = PreferencesDialog.getCachedValue(PreferencesDialog.KEY_DECK_EDITOR_LAST_SEPARATE_CREATURES, "false").equals("true");
-        cardSort = Sort.valueOf(PreferencesDialog.getCachedValue(PreferencesDialog.KEY_DECK_EDITOR_LAST_SORT, Sort.NONE.toString()));
-
+        try {
+            cardSort = Sort.valueOf(PreferencesDialog.getCachedValue(PreferencesDialog.KEY_DECK_EDITOR_LAST_SORT, Sort.NONE.toString()));
+        } catch (IllegalArgumentException ex) {
+            cardSort = Sort.NONE;
+        }
         // Sort popup
         {
             sortPopup = new JPopupMenu();

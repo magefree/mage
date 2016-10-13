@@ -53,6 +53,7 @@ public class RepositoryUtil {
     }
 
     public static long getDatabaseVersion(ConnectionSource connectionSource, String entityName) throws SQLException {
+        TableUtils.createTableIfNotExists(connectionSource, DatabaseVersion.class);
         Dao<DatabaseVersion, Object> dbVersionDao = DaoManager.createDao(connectionSource, DatabaseVersion.class);
 
         QueryBuilder<DatabaseVersion, Object> queryBuilder = dbVersionDao.queryBuilder();
@@ -61,9 +62,8 @@ public class RepositoryUtil {
         if (dbVersions.isEmpty()) {
             return 0;
         } else {
-            return dbVersions.get(0). getVersion();
+            return dbVersions.get(0).getVersion();
         }
     }
-
 
 }
