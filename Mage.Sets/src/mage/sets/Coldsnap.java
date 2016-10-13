@@ -100,6 +100,7 @@ public class Coldsnap extends ExpansionSet {
         cards.add(new SetCardInfo("Gutless Ghoul", 60, Rarity.COMMON, mage.cards.g.GutlessGhoul.class));
         cards.add(new SetCardInfo("Haakon, Stromgald Scourge", 61, Rarity.RARE, mage.cards.h.HaakonStromgaldScourge.class));
         cards.add(new SetCardInfo("Heidar, Rimewind Master", 36, Rarity.RARE, mage.cards.h.HeidarRimewindMaster.class));
+	cards.add(new SetCardInfo("Herald of Leshrac", 62, Rarity.RARE, mage.cards.h.HeraldOfLeshrac.class));
         cards.add(new SetCardInfo("Hibernation's End", 110, Rarity.RARE, mage.cards.h.HibernationsEnd.class));
         cards.add(new SetCardInfo("Highland Weald", 147, Rarity.UNCOMMON, mage.cards.h.HighlandWeald.class));
         cards.add(new SetCardInfo("Icefall", 85, Rarity.COMMON, mage.cards.i.Icefall.class));
