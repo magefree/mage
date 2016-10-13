@@ -2694,6 +2694,7 @@ public abstract class PlayerImpl implements Player, Serializable {
                                         playable.add(ability);
                                     }
                                 }
+                                ability.setControllerId(card.getOwnerId());
                             }
                         }
                     }
