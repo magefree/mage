@@ -171,6 +171,13 @@ public class GameEvent implements Serializable {
         MANA_PAYED,
         LOSES, LOST, WINS,
         TARGET, TARGETED,
+        /* TARGETS_VALID
+         targetId    id of the spell or id of stack ability the targets were set to
+         sourceId    = targetId
+         playerId    controller of the spell or stack ability
+         amount      not used for this event
+         */
+        TARGETS_VALID,
         /* COUNTER
          targetId    id of the spell or id of stack ability
          sourceId    sourceId of the ability countering the spell or stack ability

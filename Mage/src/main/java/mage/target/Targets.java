@@ -33,6 +33,7 @@ import java.util.UUID;
 import mage.abilities.Ability;
 import mage.constants.Outcome;
 import mage.game.Game;
+import mage.game.events.GameEvent;
 
 /**
  *
@@ -105,6 +106,11 @@ public class Targets extends ArrayList<Target> {
                 }
                 if (!target.chooseTarget(outcome, targetController, source, game)) {
                     return false;
+                }
+                // Check if there are some rules for targets are violated, if so reset the targets and start again
+                if (this.getUnchosen().isEmpty()
+                        && game.replaceEvent(new GameEvent(GameEvent.EventType.TARGETS_VALID, source.getSourceId(), source.getSourceId(), source.getControllerId()), source)) {
+                    this.clearChosen();
                 }
             }
         }
