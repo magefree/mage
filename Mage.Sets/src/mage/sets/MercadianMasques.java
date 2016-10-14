@@ -312,6 +312,7 @@ public class MercadianMasques extends ExpansionSet {
         cards.add(new SetCardInfo("Vine Dryad", 284, Rarity.RARE, mage.cards.v.VineDryad.class));
         cards.add(new SetCardInfo("Vine Trellis", 285, Rarity.COMMON, mage.cards.v.VineTrellis.class));
         cards.add(new SetCardInfo("War Cadence", 224, Rarity.UNCOMMON, mage.cards.w.WarCadence.class));
+        cards.add(new SetCardInfo("War Tax", 113, Rarity.UNCOMMON, mage.cards.w.WarTax.class));
         cards.add(new SetCardInfo("Warmonger", 225, Rarity.UNCOMMON, mage.cards.w.Warmonger.class));
         cards.add(new SetCardInfo("Waterfront Bouncer", 114, Rarity.COMMON, mage.cards.w.WaterfrontBouncer.class));
         cards.add(new SetCardInfo("Wild Jhovall", 227, Rarity.COMMON, mage.cards.w.WildJhovall.class));
