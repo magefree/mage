@@ -23,7 +23,6 @@ import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.Iterator;
 import java.util.List;
-import java.util.Random;
 import java.util.Set;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
@@ -57,11 +56,11 @@ import net.java.truevfs.access.TFileOutputStream;
 import net.java.truevfs.access.TVFS;
 import net.java.truevfs.kernel.spec.FsSyncException;
 import org.apache.log4j.Logger;
+import org.mage.plugins.card.dl.sources.AltMtgOnlTokensImageSource;
 import org.mage.plugins.card.dl.sources.CardImageSource;
+import org.mage.plugins.card.dl.sources.GrabbagImageSource;
 import org.mage.plugins.card.dl.sources.MagicCardsImageSource;
 import org.mage.plugins.card.dl.sources.MtgOnlTokensImageSource;
-import org.mage.plugins.card.dl.sources.AltMtgOnlTokensImageSource;
-import org.mage.plugins.card.dl.sources.GrabbagImageSource;
 import org.mage.plugins.card.dl.sources.MythicspoilerComSource;
 import org.mage.plugins.card.dl.sources.TokensMtgImageSource;
 import org.mage.plugins.card.dl.sources.WizardCardsImageSource;
@@ -183,10 +182,10 @@ public class DownloadPictures extends DefaultBoundedRangeModel implements Runnab
                         break;
                     case 5:
                         cardImageSource = AltMtgOnlTokensImageSource.getInstance();
-                        break;                        
+                        break;
                     case 6:
                         cardImageSource = GrabbagImageSource.getInstance();
-                        break;                   
+                        break;
                 }
                 int count = DownloadPictures.this.cards.size();
                 float mb = (count * cardImageSource.getAverageSize()) / 1024;
@@ -565,7 +564,7 @@ public class DownloadPictures extends DefaultBoundedRangeModel implements Runnab
         private final URL url;
         private final int count;
         private final String actualFilename;
-        private boolean useSpecifiedPaths;
+        private final boolean useSpecifiedPaths;
 
         public DownloadTask(CardDownloadData card, URL url, int count) {
             this.card = card;
@@ -597,17 +596,15 @@ public class DownloadPictures extends DefaultBoundedRangeModel implements Runnab
                 String imagePath;
                 if (useSpecifiedPaths) {
                     if (card != null && card.isToken()) {
-                        imagePath = CardImageUtils.getTokenBasePath() + actualFilename;;
+                        imagePath = CardImageUtils.getTokenBasePath() + actualFilename;
+                    } else if (card != null) {
+                        imagePath = CardImageUtils.getImageBasePath() + actualFilename;
                     } else {
-                        if (card != null) {
-                            imagePath = CardImageUtils.getImageBasePath() + actualFilename;
-                        } else {
-                            imagePath = Constants.IO.imageBaseDir;
-                        }
+                        imagePath = Constants.IO.imageBaseDir;
                     }
-                    
+
                     String tmpFile = filePath + "temporary" + actualFilename;
-                    temporaryFile = new File(tmpFile.toString());
+                    temporaryFile = new File(tmpFile);
                     if (!temporaryFile.exists()) {
                         temporaryFile.getParentFile().mkdirs();
                     }

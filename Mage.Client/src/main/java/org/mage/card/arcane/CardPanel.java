@@ -320,6 +320,8 @@ public abstract class CardPanel extends MagePermanent implements MouseListener, 
 
     /**
      * Overridden by different card rendering styles
+     *
+     * @param g
      */
     protected abstract void paintCard(Graphics2D g);
 
@@ -722,7 +724,7 @@ public abstract class CardPanel extends MagePermanent implements MouseListener, 
                 sb.append("\n").append(card.getLoyalty());
             }
             if (card.getRules() == null) {
-                card.overrideRules(new ArrayList<String>());
+                card.overrideRules(new ArrayList<>());
             }
             for (String rule : card.getRules()) {
                 sb.append("\n").append(rule);

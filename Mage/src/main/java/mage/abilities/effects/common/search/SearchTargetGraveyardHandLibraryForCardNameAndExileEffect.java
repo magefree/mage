@@ -93,7 +93,7 @@ public abstract class SearchTargetGraveyardHandLibraryForCardNameAndExileEffect 
                 // cards in Graveyard
                 int cardsCount = (cardName.isEmpty() ? 0 : targetPlayer.getGraveyard().count(filter, game));
                 if (cardsCount > 0) {
-                    filter.setMessage("card named " + cardName + " in the graveyard of " + targetPlayer.getLogName());
+                    filter.setMessage("card named " + cardName + " in the graveyard of " + targetPlayer.getName());
                     TargetCard target = new TargetCard((graveyardExileOptional ? 0 : cardsCount), cardsCount, Zone.GRAVEYARD, filter);
                     if (controller.choose(Outcome.Exile, targetPlayer.getGraveyard(), target, game)) {
                         controller.moveCards(new CardsImpl(target.getTargets()), Zone.EXILED, source, game);
@@ -102,7 +102,7 @@ public abstract class SearchTargetGraveyardHandLibraryForCardNameAndExileEffect 
 
                 // cards in Hand
                 cardsCount = (cardName.isEmpty() ? 0 : targetPlayer.getHand().count(filter, game));
-                filter.setMessage("card named " + cardName + " in the hand of " + targetPlayer.getLogName());
+                filter.setMessage("card named " + cardName + " in the hand of " + targetPlayer.getName());
                 TargetCard target = new TargetCard(0, cardsCount, Zone.HAND, filter);
                 if (controller.choose(Outcome.Exile, targetPlayer.getHand(), target, game)) {
                     controller.moveCards(new CardsImpl(target.getTargets()), Zone.EXILED, source, game);

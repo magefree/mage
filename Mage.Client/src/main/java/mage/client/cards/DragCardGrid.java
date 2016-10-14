@@ -11,7 +11,6 @@ import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
-import java.awt.event.MouseWheelListener;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Collections;
@@ -666,15 +665,25 @@ public class DragCardGrid extends JPanel implements DragCardSource, DragCardTarg
 
         public Sort sort;
         public boolean separateCreatures;
+        public int cardSize;
 
-        private final static Pattern parser = Pattern.compile("\\(([^,]*),([^)]*)\\)");
+        private final static Pattern parser = Pattern.compile("\\(([^,]*),([^,]*),([^)]*)\\)");
 
         public static Settings parse(String str) {
             Matcher m = parser.matcher(str);
             if (m.find()) {
                 Settings s = new Settings();
-                s.sort = Sort.valueOf(m.group(1));
-                s.separateCreatures = Boolean.valueOf(m.group(2));
+                if (m.groupCount() > 0) {
+                    s.sort = Sort.valueOf(m.group(1));
+                }
+                if (m.groupCount() > 1) {
+                    s.separateCreatures = Boolean.valueOf(m.group(2));
+                }
+                if (m.groupCount() > 2) {
+                    s.cardSize = Integer.valueOf(m.group(3));
+                } else {
+                    s.cardSize = 50;
+                }
                 return s;
             } else {
                 return null;
@@ -683,7 +692,7 @@ public class DragCardGrid extends JPanel implements DragCardSource, DragCardTarg
 
         @Override
         public String toString() {
-            return "(" + sort.toString() + "," + Boolean.toString(separateCreatures) + ")";
+            return "(" + sort.toString() + "," + Boolean.toString(separateCreatures) + "," + Integer.toString(cardSize) + ")";
         }
     }
 
@@ -691,6 +700,7 @@ public class DragCardGrid extends JPanel implements DragCardSource, DragCardTarg
         Settings s = new Settings();
         s.sort = cardSort;
         s.separateCreatures = separateCreatures;
+        s.cardSize = cardSizeSlider.getValue();
         return s;
     }
 
@@ -698,6 +708,7 @@ public class DragCardGrid extends JPanel implements DragCardSource, DragCardTarg
         if (s != null) {
             setSort(s.sort);
             setSeparateCreatures(s.separateCreatures);
+            setCardSize(s.cardSize);
             resort();
         }
     }
@@ -710,6 +721,10 @@ public class DragCardGrid extends JPanel implements DragCardSource, DragCardTarg
     public void setSort(Sort s) {
         cardSort = s;
         sortButtons.get(s).setSelected(true);
+    }
+
+    public void setCardSize(int size) {
+        cardSizeSlider.setValue(size);
     }
 
     // Constructor
@@ -1451,10 +1466,10 @@ public class DragCardGrid extends JPanel implements DragCardSource, DragCardTarg
         cardPanel.setTextOffset(0);
 
         // Remove mouse wheel listeners so that scrolling works
-        for (MouseWheelListener l : cardPanel.getMouseWheelListeners()) {
-            cardPanel.removeMouseWheelListener(l);
-        }
-
+        // Scrolling works on all areas without cards or by using the scroll bar, that's enough
+//        for (MouseWheelListener l : cardPanel.getMouseWheelListeners()) {
+//            cardPanel.removeMouseWheelListener(l);
+//        }
         // Add a click listener for selection / drag start
         cardPanel.addMouseListener(new MouseAdapter() {
             @Override

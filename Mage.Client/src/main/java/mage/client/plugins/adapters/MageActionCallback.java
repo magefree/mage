@@ -9,6 +9,7 @@ import java.awt.image.BufferedImage;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
+import java.util.Date;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
@@ -33,7 +34,6 @@ import mage.client.components.MageComponents;
 import mage.client.dialog.PreferencesDialog;
 import mage.client.plugins.impl.Plugins;
 import mage.client.util.DefaultActionCallback;
-import mage.client.util.ImageHelper;
 import mage.client.util.gui.ArrowBuilder;
 import mage.client.util.gui.ArrowUtil;
 import mage.client.util.gui.GuiDisplayUtil;
@@ -80,6 +80,7 @@ public class MageActionCallback implements ActionCallback {
 
         CLOSED, NORMAL, ROTATED
     }
+    private Date enlargeredViewOpened;
     private volatile EnlargedWindowState enlargedWindowState = EnlargedWindowState.CLOSED;
     //private volatile boolean enlargedImageWindowOpen = false;
     // shows the alternative card the normal card or the alternative card (copy source, other flip side, other transformed side)
@@ -115,25 +116,8 @@ public class MageActionCallback implements ActionCallback {
 
     @Override
     public void mouseEntered(MouseEvent e, final TransferData data) {
-        hideTooltipPopup();
-        cancelTimeout();
-
-        this.tooltipCard = data.card;
         this.popupData = data;
-
-        Component parentComponent = SwingUtilities.getRoot(data.component);
-        Point parentPoint = parentComponent.getLocationOnScreen();
-
-        if (data.locationOnScreen == null) {
-            data.locationOnScreen = data.component.getLocationOnScreen();
-        }
-
-        ArrowUtil.drawArrowsForTargets(data, parentPoint);
-        ArrowUtil.drawArrowsForSource(data, parentPoint);
-        ArrowUtil.drawArrowsForPairedCards(data, parentPoint);
-        ArrowUtil.drawArrowsForEnchantPlayers(data, parentPoint);
-
-        showTooltipPopup(data, parentComponent, parentPoint);
+        handleOverNewView(data);
     }
 
     private void showTooltipPopup(final TransferData data, final Component parentComponent, final Point parentPoint) {
@@ -170,7 +154,11 @@ public class MageActionCallback implements ActionCallback {
             public void run() {
                 ThreadUtils.sleep(tooltipDelay);
 
-                if (tooltipCard == null || !tooltipCard.equals(data.card) || SessionHandler.getSession() == null || !popupTextWindowOpen || !enlargedWindowState.equals(EnlargedWindowState.CLOSED)) {
+                if (tooltipCard == null
+                        || !tooltipCard.equals(data.card)
+                        || SessionHandler.getSession() == null
+                        || !popupTextWindowOpen
+                        || !enlargedWindowState.equals(EnlargedWindowState.CLOSED)) {
                     return;
                 }
 
@@ -192,7 +180,8 @@ public class MageActionCallback implements ActionCallback {
                 SwingUtilities.invokeLater(new Runnable() {
                     @Override
                     public void run() {
-                        if (!popupTextWindowOpen || !enlargedWindowState.equals(EnlargedWindowState.CLOSED)) {
+                        if (!popupTextWindowOpen
+                                || !enlargedWindowState.equals(EnlargedWindowState.CLOSED)) {
                             return;
                         }
                         if (data.locationOnScreen == null) {
@@ -282,6 +271,17 @@ public class MageActionCallback implements ActionCallback {
 
     @Override
     public void mouseMoved(MouseEvent e, TransferData transferData) {
+        if (!Plugins.getInstance().isCardPluginLoaded()) {
+            return;
+        }
+        if (!popupData.card.equals(transferData.card)) {
+            this.popupData = transferData;
+            handleOverNewView(transferData);
+
+        }
+        if (bigCard == null) {
+            return;
+        }
         handlePopup(transferData);
     }
 
@@ -376,16 +376,28 @@ public class MageActionCallback implements ActionCallback {
         }
     }
 
-    private void handlePopup(TransferData transferData) {
-        if (!Plugins.getInstance().isCardPluginLoaded()) {
-            return;
-        }
-        if (bigCard == null) {
-            return;
+    private void handleOverNewView(TransferData data) {
+        hideTooltipPopup();
+        cancelTimeout();
+        Component parentComponent = SwingUtilities.getRoot(data.component);
+        Point parentPoint = parentComponent.getLocationOnScreen();
+
+        if (data.locationOnScreen == null) {
+            data.locationOnScreen = data.component.getLocationOnScreen();
         }
 
+        ArrowUtil.drawArrowsForTargets(data, parentPoint);
+        ArrowUtil.drawArrowsForSource(data, parentPoint);
+        ArrowUtil.drawArrowsForPairedCards(data, parentPoint);
+        ArrowUtil.drawArrowsForEnchantPlayers(data, parentPoint);
+        tooltipCard = data.card;
+        showTooltipPopup(data, parentComponent, parentPoint);
+    }
+
+    private void handlePopup(TransferData transferData) {
         MageCard mageCard = (MageCard) transferData.component;
-        if (!popupTextWindowOpen || mageCard.getOriginal().getId() != bigCard.getCardId()) {
+        if (!popupTextWindowOpen
+                || mageCard.getOriginal().getId() != bigCard.getCardId()) {
             if (bigCard.getWidth() > 0) {
                 synchronized (MageActionCallback.class) {
                     if (!popupTextWindowOpen || mageCard.getOriginal().getId() != bigCard.getCardId()) {
@@ -401,6 +413,7 @@ public class MageActionCallback implements ActionCallback {
                 popupTextWindowOpen = true;
             }
             if (!enlargedWindowState.equals(EnlargedWindowState.CLOSED)) {
+                cancelTimeout();
                 displayEnlargedCard(mageCard.getOriginal(), transferData);
             }
         }
@@ -455,12 +468,18 @@ public class MageActionCallback implements ActionCallback {
         int notches = e.getWheelRotation();
         if (!enlargedWindowState.equals(EnlargedWindowState.CLOSED)) {
             // same move direction will be ignored, opposite direction closes the enlarged window
-            if (enlargeMode.equals(EnlargeMode.NORMAL)) {
+            if (new Date().getTime() - enlargeredViewOpened.getTime() > 1000) {
+                // if the opening is back more than 1 seconds close anyway
+                hideEnlargedCard();
+                handleOverNewView(transferData);
+            } else if (enlargeMode.equals(EnlargeMode.NORMAL)) {
                 if (notches > 0) {
                     hideEnlargedCard();
+                    handleOverNewView(transferData);
                 }
             } else if (notches < 0) {
                 hideEnlargedCard();
+                handleOverNewView(transferData);
             }
             return;
         }
@@ -516,7 +535,7 @@ public class MageActionCallback implements ActionCallback {
     }
 
     private void displayEnlargedCard(final CardView cardView, final TransferData transferData) {
-        ThreadUtils.threadPool2.submit(new Runnable() {
+        ThreadUtils.threadPool3.submit(new Runnable() {
             @Override
             public void run() {
                 if (cardView == null) {
@@ -608,6 +627,7 @@ public class MageActionCallback implements ActionCallback {
             bigCard.hideTextComponent();
             bigCard.addJXPanel(mageCard.getOriginal().getId(), panel);
         }
+        enlargeredViewOpened = new Date();
     }
 
     private synchronized void startHideTimeout() {

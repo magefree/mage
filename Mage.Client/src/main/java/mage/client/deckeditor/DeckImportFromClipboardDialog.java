@@ -1,12 +1,12 @@
 package mage.client.deckeditor;
 
-import javax.swing.*;
 import java.awt.*;
 import java.awt.event.*;
 import java.io.BufferedWriter;
 import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
+import javax.swing.*;
 
 public class DeckImportFromClipboardDialog extends JDialog {
 
@@ -24,11 +24,13 @@ public class DeckImportFromClipboardDialog extends JDialog {
         getRootPane().setDefaultButton(buttonOK);
 
         buttonOK.addActionListener(new ActionListener() {
+            @Override
             public void actionPerformed(ActionEvent e) {
                 onOK();
             }
         });
         buttonCancel.addActionListener(new ActionListener() {
+            @Override
             public void actionPerformed(ActionEvent e) {
                 onCancel();
             }
@@ -36,6 +38,7 @@ public class DeckImportFromClipboardDialog extends JDialog {
 
         setDefaultCloseOperation(DO_NOTHING_ON_CLOSE);
         addWindowListener(new WindowAdapter() {
+            @Override
             public void windowClosing(WindowEvent e) {
                 onCancel();
             }
@@ -43,6 +46,7 @@ public class DeckImportFromClipboardDialog extends JDialog {
 
         // Close on "ESC"
         contentPane.registerKeyboardAction(new ActionListener() {
+            @Override
             public void actionPerformed(ActionEvent e) {
                 onCancel();
             }
@@ -89,8 +93,9 @@ public class DeckImportFromClipboardDialog extends JDialog {
                             "Import from Clipboard", javax.swing.border.TitledBorder.CENTER,
                             javax.swing.border.TitledBorder.TOP, new java.awt.Font("Dialog", java.awt.Font.PLAIN, 12),
                             java.awt.Color.BLACK), contentPane.getBorder()));
-            
+
             contentPane.addPropertyChangeListener(new java.beans.PropertyChangeListener() {
+                @Override
                 public void propertyChange(java.beans.PropertyChangeEvent e) {
                     if ("border".equals(e.getPropertyName())) {
                         throw new RuntimeException();
@@ -99,6 +104,7 @@ public class DeckImportFromClipboardDialog extends JDialog {
             });
 
             contentPane.addPropertyChangeListener(new java.beans.PropertyChangeListener() {
+                @Override
                 public void propertyChange(java.beans.PropertyChangeEvent e) {
                     if ("border".equals(e.getPropertyName())) {
                         throw new RuntimeException();
