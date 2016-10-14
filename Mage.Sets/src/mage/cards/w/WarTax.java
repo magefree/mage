@@ -34,9 +34,9 @@ import mage.abilities.costs.mana.ManaCostsImpl;
 import mage.abilities.dynamicvalue.DynamicValue;
 import mage.abilities.dynamicvalue.common.ManacostVariableValue;
 import mage.abilities.effects.ReplacementEffectImpl;
-import mage.constants.CardType;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
+import mage.constants.CardType;
 import mage.constants.Duration;
 import mage.constants.Outcome;
 import mage.constants.Zone;
@@ -46,23 +46,22 @@ import mage.players.Player;
 
 /**
  *
- * 
- * @author HCrescent
- * original code by LevelX2 edited from War Cadence
+ *
+ * @author HCrescent original code by LevelX2 edited from War Cadence
  */
 public class WarTax extends CardImpl {
-    
+
     public WarTax(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.ENCHANTMENT}, "{2}{U}");
-        
+
         // {X}{U}: This turn, creatures can't attack unless their controller pays {X} for each attacking creature he or she controls.
-        this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new WarTaxReplacementEffect(), new ManaCostsImpl("{X}{U}") ));
+        this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new WarTaxReplacementEffect(), new ManaCostsImpl("{X}{U}")));
     }
-    
+
     public WarTax(final WarTax card) {
         super(card);
     }
-    
+
     @Override
     public WarTax copy() {
         return new WarTax(this);
@@ -70,28 +69,28 @@ public class WarTax extends CardImpl {
 }
 
 class WarTaxReplacementEffect extends ReplacementEffectImpl {
-    
+
     DynamicValue xCosts = new ManacostVariableValue();
-    
-    WarTaxReplacementEffect ( ) {
+
+    WarTaxReplacementEffect() {
         super(Duration.EndOfTurn, Outcome.Neutral);
         staticText = "This turn, creatures can't attack unless their controller pays {X} for each attacking creature he or she controls";
     }
-    
-    WarTaxReplacementEffect ( WarTaxReplacementEffect effect ) {
+
+    WarTaxReplacementEffect(WarTaxReplacementEffect effect) {
         super(effect);
     }
-    
+
     @Override
     public boolean replaceEvent(GameEvent event, Ability source, Game game) {
         Player player = game.getPlayer(event.getPlayerId());
         if (player != null) {
             int amount = xCosts.calculate(game, source, this);
             if (amount > 0) {
-                String mana = new StringBuilder("{").append(amount).append("}").toString();
+                String mana = "{" + amount + "}";
                 ManaCostsImpl cost = new ManaCostsImpl(mana);
-                if ( cost.canPay(source, source.getSourceId(), event.getPlayerId(), game) &&
-                    player.chooseUse(Outcome.Benefit, new StringBuilder("Pay").append(mana).append(" to declare attacker?").toString(), source, game) ) {
+                if (cost.canPay(source, source.getSourceId(), event.getPlayerId(), game)
+                        && player.chooseUse(Outcome.Benefit, "Pay " + mana + " to declare attacker?", source, game)) {
                     if (cost.payOrRollback(source, game, source.getSourceId(), event.getPlayerId())) {
                         return false;
                     }
@@ -101,17 +100,17 @@ class WarTaxReplacementEffect extends ReplacementEffectImpl {
         }
         return false;
     }
-    
+
     @Override
     public boolean checksEventType(GameEvent event, Game game) {
         return event.getType() == GameEvent.EventType.DECLARE_ATTACKER;
     }
-    
+
     @Override
     public boolean applies(GameEvent event, Ability source, Game game) {
         return true;
     }
-    
+
     @Override
     public WarTaxReplacementEffect copy() {
         return new WarTaxReplacementEffect(this);
