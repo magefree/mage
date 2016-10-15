@@ -50,6 +50,7 @@ import javax.swing.SwingUtilities;
 import mage.cards.MageCard;
 import mage.cards.decks.DeckCardInfo;
 import mage.cards.decks.DeckCardLayout;
+import mage.client.MageFrame;
 import mage.client.dialog.PreferencesDialog;
 import mage.client.plugins.impl.Plugins;
 import mage.client.util.CardViewCardTypeComparator;
@@ -593,6 +594,7 @@ public class DragCardGrid extends JPanel implements DragCardSource, DragCardTarg
     JButton filterButton;
     JButton visibilityButton;
     JButton selectByButton;
+    JButton analyseButton;
 
     // Popup for toolbar
     JPopupMenu filterPopup;
@@ -741,6 +743,7 @@ public class DragCardGrid extends JPanel implements DragCardSource, DragCardTarg
         filterButton = new JButton("Filter");
         visibilityButton = new JButton("Visibility");
         selectByButton = new JButton("Select By ..");
+        analyseButton = new JButton("Analyse Mana");
 
         // Name and count label
         deckNameAndCountLabel = new JLabel();
@@ -763,6 +766,7 @@ public class DragCardGrid extends JPanel implements DragCardSource, DragCardTarg
         toolbarInner.add(filterButton);
         toolbarInner.add(visibilityButton);
         toolbarInner.add(selectByButton);
+        toolbarInner.add(analyseButton);
         toolbar.add(toolbarInner, BorderLayout.WEST);
         JPanel sliderPanel = new JPanel(new GridBagLayout());
         sliderPanel.setOpaque(false);
@@ -948,17 +952,17 @@ public class DragCardGrid extends JPanel implements DragCardSource, DragCardTarg
                 });
             }
 
-            JPanel selectBySearchOptions = new JPanel();
-            selectBySearchOptions.setPreferredSize(new Dimension(150, 60));
-            selectBySearchOptions.setLayout(new GridLayout(1, 1));
-            selectBySearchOptions.setBorder(BorderFactory.createTitledBorder(BorderFactory.createEtchedBorder(), "Search:"));
-            GridBagConstraints selectBySearchOptionsC = new GridBagConstraints();
-            selectBySearchOptionsC.gridx = 0;
-            selectBySearchOptionsC.gridy = 1;
-            selectBySearchOptionsC.gridwidth = 1;
-            selectBySearchOptionsC.gridheight = 1;
-            selectBySearchOptionsC.fill = GridBagConstraints.HORIZONTAL;
-            selectBySearchOptionsC.fill = GridBagConstraints.VERTICAL;
+            JPanel selectBySearchPanel = new JPanel();
+            selectBySearchPanel.setPreferredSize(new Dimension(150, 60));
+            selectBySearchPanel.setLayout(new GridLayout(1, 1));
+            selectBySearchPanel.setBorder(BorderFactory.createTitledBorder(BorderFactory.createEtchedBorder(), "Search:"));
+            GridBagConstraints selectBySearchPanelC = new GridBagConstraints();
+            selectBySearchPanelC.gridx = 0;
+            selectBySearchPanelC.gridy = 1;
+            selectBySearchPanelC.gridwidth = 1;
+            selectBySearchPanelC.gridheight = 1;
+            selectBySearchPanelC.fill = GridBagConstraints.HORIZONTAL;
+            selectBySearchPanelC.fill = GridBagConstraints.VERTICAL;
 
             searchByTextField = new JTextField();
             searchByTextField.setToolTipText("Searches for card names, types, rarity, casting cost and rules text.  NB: Mana symbols are written like {W},{U},{C} etc");
@@ -974,12 +978,19 @@ public class DragCardGrid extends JPanel implements DragCardSource, DragCardTarg
                 }
             });
 
-            selectBySearchOptions.add(searchByTextField);
-            selectByPopup.add(selectBySearchOptions, selectBySearchOptionsC);
-
-            selectByPopup.pack();
+            selectBySearchPanel.add(searchByTextField);
+            selectByPopup.add(selectBySearchPanel, selectBySearchPanelC);
             makeButtonPopup(selectByButton, selectByPopup);
         }
+
+        // Analyse Mana (aka #blue pips, #islands, #white pips, #plains etc.)
+        analyseButton.setToolTipText("Counts coloured/colourless mana costs. Counts land types.");
+
+        analyseButton.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent evt) {
+                analyseDeck();
+            }
+        });
 
         // Filter popup
         filterPopup = new JPopupMenu();
@@ -1269,6 +1280,135 @@ public class DragCardGrid extends JPanel implements DragCardSource, DragCardTarg
         // And finally rerender
         layoutGrid();
         repaint();
+    }
+
+    private static final Pattern pattern = Pattern.compile(".*Add(.*)(\\{[WUBRGXC]\\})(.*)to your mana pool");
+
+    public void analyseDeck() {
+        HashMap<String, Integer> qtys = new HashMap<>();
+        HashMap<String, Integer> pips = new HashMap<>();
+        HashMap<String, Integer> sourcePips = new HashMap<>();
+        HashMap<String, Integer> manaCounts = new HashMap<>();
+        pips.put("#w}", 0);
+        pips.put("#u}", 0);
+        pips.put("#b}", 0);
+        pips.put("#r}", 0);
+        pips.put("#g}", 0);
+        pips.put("#c}", 0);
+        qtys.put("plains", 0);
+        qtys.put("island", 0);
+        qtys.put("swamp", 0);
+        qtys.put("mountain", 0);
+        qtys.put("forest", 0);
+        qtys.put("basic", 0);
+        qtys.put("wastes", 0);
+        manaCounts = new HashMap<>();
+
+        for (ArrayList<ArrayList<CardView>> gridRow : cardGrid) {
+            for (ArrayList<CardView> stack : gridRow) {
+                for (CardView card : stack) {
+                    // Type line
+                    String t = "";
+                    for (CardType type : card.getCardTypes()) {
+                        t += " " + type.toString();
+                    }
+                    // Sub & Super Types
+                    for (String str : card.getSuperTypes()) {
+                        t += " " + str.toLowerCase();
+                    }
+                    for (String str : card.getSubTypes()) {
+                        t += " " + str.toLowerCase();
+                    }
+
+                    for (String qty : qtys.keySet()) {
+                        int value = qtys.get(qty);
+                        if (t.toLowerCase().contains(qty)) {
+                            qtys.put(qty, ++value);
+                        }
+                        
+                        // Rules
+                        for (String str : card.getRules()) {
+                            if (str.toLowerCase().contains(qty)) {
+                                qtys.put(qty, ++value);
+                            }
+                        }
+                    }
+                    // Wastes (special case)
+                    if (card.getName().equals("Wastes")) {
+                        int value = qtys.get("wastes");
+                        qtys.put("wastes", ++value);
+                    }
+
+
+                    // Mana Cost
+                    String mc = "";
+                    for (String m : card.getManaCost()) {
+                        mc += m;
+                    }
+                    mc = mc.replaceAll("\\{([WUBRG]).([WUBRG])\\}", "{$1}{$2}");
+                    mc = mc.replaceAll("\\{", "#");
+                    mc = mc.toLowerCase();
+                    for (String pip : pips.keySet()) {
+                        int value = pips.get(pip);
+                        while (mc.toLowerCase().contains(pip)) {
+                            pips.put(pip, ++value);
+                            mc = mc.replaceFirst(pip, "");
+                        }
+                    }
+
+                    // Adding mana
+                    for (String str : card.getRules()) {
+                        Matcher m = pattern.matcher(str);
+                        // ".*Add(.*)(\\{[WUBRGXC]\\})(.*)to your mana pool"
+                        while (m.find()) {
+                            System.out.println("0=" + m.group(0) + ",,,1=" + m.group(1) + ",,,2=" + m.group(2) + ",,,3=" + m.group(3));
+                            str = "Add" + m.group(1) + m.group(3) + "to your mana pool";
+                            System.out.println("Found " + m.group(2) + " in " + card.getName());
+                            int num = 1;
+                            if (manaCounts.get(m.group(2)) != null) {
+                                num = manaCounts.get(m.group(2));
+                                num++;
+                            }
+                            manaCounts.put(m.group(2), num);
+                            m = pattern.matcher(str);
+                        }
+                    }
+                }
+            }
+        }
+
+        String finalInfo = "Found the following quantity of mana costs, mana sources and land types:<br><font size=-1><ul>";
+        for (String qty : qtys.keySet()) {
+            int value = qtys.get(qty);
+            if (value > 0) {
+                finalInfo += "<li>" + qty + " = " + value;
+            }
+        }
+
+        for (String source : sourcePips.keySet()) {
+            int value = sourcePips.get(source);
+            if (value > 0) {
+                finalInfo += "<li>" + "Mana source " + source + " = " + value;
+            }
+        }
+
+        for (String pip : pips.keySet()) {
+            int value = pips.get(pip);
+            if (value > 0) {
+                finalInfo += "<li>" + pip.toUpperCase() + " mana pip/s = " + value;
+            }
+        }
+
+        for (String mana : manaCounts.keySet()) {
+            int value = manaCounts.get(mana);
+            if (value > 0) {
+                finalInfo += "<li>" + mana.toUpperCase() + " mana sources = " + value;
+            }
+        }
+        finalInfo = finalInfo.replaceAll("#", "\\{");
+        finalInfo += "</ul>";
+
+        MageFrame.getInstance().showMessage(finalInfo);
     }
 
     // Update the contents of the card grid
