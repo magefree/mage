@@ -45,7 +45,7 @@ public class PhyrexiaVsTheCoalition extends ExpansionSet {
     }
 
     private PhyrexiaVsTheCoalition() {
-        super("Duel Decks: Phyrexia vs. the Coalition", "DDE", "mage.sets.phyrexiavsthecoalition", ExpansionSet.buildDate(2010, 3, 19),
+        super("Duel Decks: Phyrexia vs. the Coalition", "DDE", ExpansionSet.buildDate(2010, 3, 19),
                 SetType.SUPPLEMENTAL);
         this.blockName = "Duel Decks";
         this.hasBasicLands = false;

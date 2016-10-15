@@ -27,7 +27,6 @@
  */
 package mage.sets;
 
-import java.util.GregorianCalendar;
 import mage.cards.CardGraphicInfo;
 import mage.cards.ExpansionSet;
 import mage.cards.FrameStyle;
@@ -47,7 +46,7 @@ public class StarWars extends ExpansionSet {
     }
 
     private StarWars() {
-        super("Star Wars", "SWS", "mage.sets.starwars", ExpansionSet.buildDate(2015, 12, 25), SetType.CUSTOM_SET);
+        super("Star Wars", "SWS", ExpansionSet.buildDate(2015, 12, 25), SetType.CUSTOM_SET);
         this.blockName = "Star Wars";
         this.hasBoosters = true;
         this.hasBasicLands = true;

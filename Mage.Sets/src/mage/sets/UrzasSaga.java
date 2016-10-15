@@ -45,7 +45,7 @@ public class UrzasSaga extends ExpansionSet {
     }
 
     private UrzasSaga() {
-        super("Urza's Saga", "USG", "mage.sets.urzassaga", ExpansionSet.buildDate(1998, 10, 12), SetType.EXPANSION);
+        super("Urza's Saga", "USG", ExpansionSet.buildDate(1998, 10, 12), SetType.EXPANSION);
         this.blockName = "Urza";
         this.hasBoosters = true;
         this.numBoosterLands = 0;

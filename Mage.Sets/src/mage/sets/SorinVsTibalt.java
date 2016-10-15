@@ -27,14 +27,10 @@
  */
 package mage.sets;
 
-import java.util.GregorianCalendar;
 import mage.cards.ExpansionSet;
 import mage.constants.SetType;
 import mage.constants.Rarity;
-import java.util.List;
-import mage.ObjectColor;
 import mage.cards.CardGraphicInfo;
-import mage.cards.FrameStyle;
 
 /**
  *
@@ -49,7 +45,7 @@ public class SorinVsTibalt extends ExpansionSet {
     }
 
     private SorinVsTibalt() {
-        super("Duel Decks: Sorin vs. Tibalt", "DDK", "mage.sets.sorinvstibalt", ExpansionSet.buildDate(2013, 3, 15), SetType.SUPPLEMENTAL);
+        super("Duel Decks: Sorin vs. Tibalt", "DDK", ExpansionSet.buildDate(2013, 3, 15), SetType.SUPPLEMENTAL);
         this.blockName = "Duel Decks";
         this.hasBasicLands = false;
         cards.add(new SetCardInfo("Absorb Vis", 31, Rarity.COMMON, mage.cards.a.AbsorbVis.class));

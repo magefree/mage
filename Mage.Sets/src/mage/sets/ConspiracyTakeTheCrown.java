@@ -28,11 +28,9 @@
 
 package mage.sets;
 
-import java.util.GregorianCalendar;
 import mage.cards.ExpansionSet;
 import mage.constants.SetType;
 import mage.constants.Rarity;
-import java.util.List;
 
 /**
  *
@@ -48,7 +46,7 @@ public class ConspiracyTakeTheCrown extends ExpansionSet {
     }
 
     private ConspiracyTakeTheCrown() {
-        super("Conspiracy: Take the Crown", "CN2", "mage.sets.conspiracytakethecrown", ExpansionSet.buildDate(2016, 8, 26), SetType.SUPPLEMENTAL);
+        super("Conspiracy: Take the Crown", "CN2", ExpansionSet.buildDate(2016, 8, 26), SetType.SUPPLEMENTAL);
         this.blockName = "Conspiracy";
         this.hasBasicLands = false;
         this.hasBoosters = true;

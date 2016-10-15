@@ -28,11 +28,9 @@
 
 package mage.sets;
 
-import java.util.GregorianCalendar;
 import mage.constants.SetType;
 import mage.cards.ExpansionSet;
 import mage.constants.Rarity;
-import java.util.List;
 
 /**
  *
@@ -47,7 +45,7 @@ public class LaunchParty extends ExpansionSet {
     }
 
     private LaunchParty() {
-        super("Launch Party", "MLP", "mage.sets.launchparty", ExpansionSet.buildDate(2011, 6, 17), SetType.PROMOTIONAL);
+        super("Launch Party", "MLP", ExpansionSet.buildDate(2011, 6, 17), SetType.PROMOTIONAL);
         this.hasBoosters = false;
         this.hasBasicLands = false;
         cards.add(new SetCardInfo("Ajani Vengeant", 4, Rarity.MYTHIC, mage.cards.a.AjaniVengeant.class));

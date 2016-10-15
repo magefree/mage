@@ -27,7 +27,6 @@
  */
 package mage.sets;
 
-import java.util.GregorianCalendar;
 import mage.cards.ExpansionSet;
 import mage.constants.Rarity;
 import mage.constants.SetType;
@@ -45,7 +44,7 @@ public class FTVLegends extends ExpansionSet {
     }
 
     private FTVLegends() {
-        super("From the Vault: Legends", "V11", "mage.sets.ftvlegends", ExpansionSet.buildDate(2011, 8, 26), SetType.SUPPLEMENTAL);
+        super("From the Vault: Legends", "V11", ExpansionSet.buildDate(2011, 8, 26), SetType.SUPPLEMENTAL);
         this.hasBasicLands = false;
         cards.add(new SetCardInfo("Cao Cao, Lord of Wei", 1, Rarity.MYTHIC, mage.cards.c.CaoCaoLordOfWei.class));
         cards.add(new SetCardInfo("Captain Sisay", 2, Rarity.MYTHIC, mage.cards.c.CaptainSisay.class));

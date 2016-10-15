@@ -28,14 +28,10 @@
 
 package mage.sets;
 
-import java.util.GregorianCalendar;
 import mage.constants.SetType;
 import mage.cards.ExpansionSet;
 import mage.constants.Rarity;
-import java.util.List;
-import mage.ObjectColor;
 import mage.cards.CardGraphicInfo;
-import mage.cards.FrameStyle;
 
 /**
  *
@@ -50,7 +46,7 @@ public class MirrodinBesieged extends ExpansionSet {
     }
 
     private MirrodinBesieged() {
-        super("Mirrodin Besieged", "MBS", "mage.sets.mirrodinbesieged", ExpansionSet.buildDate(2011, 1, 4), SetType.EXPANSION);
+        super("Mirrodin Besieged", "MBS", ExpansionSet.buildDate(2011, 1, 4), SetType.EXPANSION);
         this.blockName = "Scars of Mirrodin";
         this.parentSet = ScarsOfMirrodin.getInstance();
         this.hasBoosters = true;

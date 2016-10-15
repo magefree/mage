@@ -14,7 +14,7 @@ public class Tempest extends ExpansionSet {
     }
 
     private Tempest() {
-        super("Tempest", "TMP", "mage.sets.tempest", ExpansionSet.buildDate(1997, 10, 1), SetType.EXPANSION);
+        super("Tempest", "TMP", ExpansionSet.buildDate(1997, 10, 1), SetType.EXPANSION);
         this.blockName = "Tempest";
         this.hasBoosters = true;
         this.numBoosterLands = 0;

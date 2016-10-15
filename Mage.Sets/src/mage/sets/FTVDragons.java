@@ -27,7 +27,6 @@
  */
 package mage.sets;
 
-import java.util.GregorianCalendar;
 import mage.cards.ExpansionSet;
 import mage.constants.Rarity;
 import mage.constants.SetType;
@@ -45,7 +44,7 @@ public class FTVDragons extends ExpansionSet {
     }
 
     private FTVDragons() {
-        super("From the Vault: Dragons", "DRB", "mage.sets.ftvdragons", ExpansionSet.buildDate(2008, 8, 29), SetType.SUPPLEMENTAL);
+        super("From the Vault: Dragons", "DRB", ExpansionSet.buildDate(2008, 8, 29), SetType.SUPPLEMENTAL);
         this.hasBasicLands = false;
         cards.add(new SetCardInfo("Bladewing the Risen", 1, Rarity.RARE, mage.cards.b.BladewingTheRisen.class));
         cards.add(new SetCardInfo("Bogardan Hellkite", 2, Rarity.RARE, mage.cards.b.BogardanHellkite.class));

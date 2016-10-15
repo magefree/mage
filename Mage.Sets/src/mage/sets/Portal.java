@@ -28,14 +28,10 @@
 
 package mage.sets;
 
-import java.util.GregorianCalendar;
 import mage.cards.ExpansionSet;
 import mage.constants.SetType;
 import mage.constants.Rarity;
-import java.util.List;
-import mage.ObjectColor;
 import mage.cards.CardGraphicInfo;
-import mage.cards.FrameStyle;
 
 /**
  *
@@ -55,7 +51,7 @@ public class Portal extends ExpansionSet {
     }
 
     private Portal() {
-        super("Portal", "POR", "mage.sets.portal", ExpansionSet.buildDate(1997, 5, 1), SetType.SUPPLEMENTAL);
+        super("Portal", "POR", ExpansionSet.buildDate(1997, 5, 1), SetType.SUPPLEMENTAL);
         this.blockName = "Beginner";
         this.hasBasicLands = true;
         this.hasBoosters = true;

@@ -28,11 +28,9 @@
 
 package mage.sets;
 
-import java.util.GregorianCalendar;
 import mage.cards.ExpansionSet;
 import mage.constants.SetType;
 import mage.constants.Rarity;
-import java.util.List;
 
 /**
  *
@@ -47,7 +45,7 @@ public class EternalMasters extends ExpansionSet {
     }
 
     private EternalMasters() {
-        super("Eternal Masters", "EMA", "mage.sets.eternalmasters", ExpansionSet.buildDate(2016, 6, 10), SetType.SUPPLEMENTAL);
+        super("Eternal Masters", "EMA", ExpansionSet.buildDate(2016, 6, 10), SetType.SUPPLEMENTAL);
         this.blockName = "Reprint";
         this.hasBasicLands = false;
         this.hasBoosters = true;

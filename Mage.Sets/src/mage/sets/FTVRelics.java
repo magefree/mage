@@ -27,7 +27,6 @@
  */
 package mage.sets;
 
-import java.util.GregorianCalendar;
 import mage.cards.ExpansionSet;
 import mage.constants.Rarity;
 import mage.constants.SetType;
@@ -45,7 +44,7 @@ public class FTVRelics extends ExpansionSet {
     }
 
     private FTVRelics() {
-        super("From the Vault: Relics", "V10", "mage.sets.ftvrelics", ExpansionSet.buildDate(2010, 8, 27), SetType.SUPPLEMENTAL);
+        super("From the Vault: Relics", "V10", ExpansionSet.buildDate(2010, 8, 27), SetType.SUPPLEMENTAL);
         this.hasBasicLands = false;
         cards.add(new SetCardInfo("Aether Vial", 1, Rarity.MYTHIC, mage.cards.a.AetherVial.class));
         cards.add(new SetCardInfo("Black Vise", 2, Rarity.MYTHIC, mage.cards.b.BlackVise.class));

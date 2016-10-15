@@ -45,7 +45,7 @@ public class AnthologyDivineVsDemonic extends ExpansionSet {
     }
 
     private AnthologyDivineVsDemonic() {
-        super("Duel Decks: Anthology, Divine vs. Demonic", "DD3DVD", "mage.sets.anthologydivinevsdemonic", ExpansionSet.buildDate(2014, 12, 5),
+        super("Duel Decks: Anthology, Divine vs. Demonic", "DD3DVD", ExpansionSet.buildDate(2014, 12, 5),
                 SetType.SUPPLEMENTAL);
         this.blockName = "Duel Decks: Anthology";
         this.hasBasicLands = false;

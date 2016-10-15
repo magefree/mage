@@ -28,7 +28,6 @@
 package mage.sets;
 
 import java.util.ArrayList;
-import java.util.GregorianCalendar;
 import java.util.List;
 import mage.cards.ExpansionSet;
 import mage.cards.repository.CardCriteria;
@@ -36,7 +35,6 @@ import mage.cards.repository.CardInfo;
 import mage.cards.repository.CardRepository;
 import mage.constants.SetType;
 import mage.constants.Rarity;
-import mage.ObjectColor;
 import mage.cards.CardGraphicInfo;
 import mage.cards.FrameStyle;
 
@@ -55,7 +53,7 @@ public class BattleForZendikar extends ExpansionSet {
     protected final List<CardInfo> savedSpecialLand = new ArrayList<>();
 
     private BattleForZendikar() {
-        super("Battle for Zendikar", "BFZ", "mage.sets.battleforzendikar", ExpansionSet.buildDate(2015, 10, 2), SetType.EXPANSION);
+        super("Battle for Zendikar", "BFZ", ExpansionSet.buildDate(2015, 10, 2), SetType.EXPANSION);
         this.blockName = "Battle for Zendikar";
         this.hasBoosters = true;
         this.hasBasicLands = true;

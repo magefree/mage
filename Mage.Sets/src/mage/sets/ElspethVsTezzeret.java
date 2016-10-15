@@ -3,12 +3,8 @@ package mage.sets;
 import mage.cards.ExpansionSet;
 import mage.constants.SetType;
 
-import java.util.GregorianCalendar;
 import mage.constants.Rarity;
-import java.util.List;
-import mage.ObjectColor;
 import mage.cards.CardGraphicInfo;
-import mage.cards.FrameStyle;
 
 public class ElspethVsTezzeret extends ExpansionSet {
     private static final ElspethVsTezzeret fINSTANCE = new ElspethVsTezzeret();
@@ -18,7 +14,7 @@ public class ElspethVsTezzeret extends ExpansionSet {
     }
 
     private ElspethVsTezzeret() {
-        super("Duel Decks: Elspeth vs. Tezzeret", "DDF", "mage.sets.elspethvstezzeret", ExpansionSet.buildDate(2010, 8, 3), SetType.SUPPLEMENTAL);
+        super("Duel Decks: Elspeth vs. Tezzeret", "DDF", ExpansionSet.buildDate(2010, 8, 3), SetType.SUPPLEMENTAL);
         this.blockName = "Duel Decks";
         this.hasBasicLands = false;
         cards.add(new SetCardInfo("Abolish", 29, Rarity.UNCOMMON, mage.cards.a.Abolish.class));

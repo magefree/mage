@@ -3,12 +3,8 @@ package mage.sets;
 import mage.cards.ExpansionSet;
 import mage.constants.SetType;
 
-import java.util.GregorianCalendar;
 import mage.constants.Rarity;
-import java.util.List;
-import mage.ObjectColor;
 import mage.cards.CardGraphicInfo;
-import mage.cards.FrameStyle;
 
 public class Alliances extends ExpansionSet {
     private static final Alliances fINSTANCE = new Alliances();
@@ -18,7 +14,7 @@ public class Alliances extends ExpansionSet {
     }
 
     private Alliances() {
-        super("Alliances", "ALL", "mage.sets.alliances", ExpansionSet.buildDate(1996, 6, 10), SetType.EXPANSION);
+        super("Alliances", "ALL", ExpansionSet.buildDate(1996, 6, 10), SetType.EXPANSION);
         this.blockName = "Ice Age";
         this.parentSet = IceAge.getInstance();
         this.hasBasicLands = false;

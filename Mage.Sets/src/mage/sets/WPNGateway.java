@@ -5,11 +5,9 @@
  */
 package mage.sets;
 
-import java.util.GregorianCalendar;
 import mage.constants.SetType;
 import mage.cards.ExpansionSet;
 import mage.constants.Rarity;
-import java.util.List;
 
 /**
  *
@@ -24,7 +22,7 @@ public class WPNGateway extends ExpansionSet {
     }
 
     private WPNGateway() {
-        super("WPN Gateway", "GRC", "mage.sets.wpngateway", ExpansionSet.buildDate(2011, 6, 17), SetType.PROMOTIONAL);
+        super("WPN Gateway", "GRC", ExpansionSet.buildDate(2011, 6, 17), SetType.PROMOTIONAL);
         this.hasBoosters = false;
         this.hasBasicLands = false;
         cards.add(new SetCardInfo("Auramancer", 77, Rarity.SPECIAL, mage.cards.a.Auramancer.class));

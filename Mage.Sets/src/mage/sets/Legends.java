@@ -27,12 +27,9 @@
  */
 package mage.sets;
 
-import java.util.GregorianCalendar;
-
 import mage.cards.ExpansionSet;
 import mage.constants.SetType;
 import mage.constants.Rarity;
-import java.util.List;
 
 /**
  *
@@ -47,7 +44,7 @@ public class Legends extends ExpansionSet {
     }
 
     private Legends() {
-        super("Legends", "LEG", "mage.sets.legends", ExpansionSet.buildDate(1994, 5, 1), SetType.EXPANSION);
+        super("Legends", "LEG", ExpansionSet.buildDate(1994, 5, 1), SetType.EXPANSION);
         this.hasBasicLands = false;
         this.hasBoosters = true;
         this.numBoosterLands = 0;

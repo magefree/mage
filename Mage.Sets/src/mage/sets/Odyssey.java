@@ -27,7 +27,6 @@
  */
 package mage.sets;
 
-import java.util.GregorianCalendar;
 import mage.cards.CardGraphicInfo;
 import mage.cards.ExpansionSet;
 import mage.constants.Rarity;
@@ -45,7 +44,7 @@ public class Odyssey extends ExpansionSet {
     }
 
     private Odyssey() {
-        super("Odyssey", "ODY", "mage.sets.odyssey", ExpansionSet.buildDate(2001, 9, 22), SetType.EXPANSION);
+        super("Odyssey", "ODY", ExpansionSet.buildDate(2001, 9, 22), SetType.EXPANSION);
         this.blockName = "Odyssey";
         this.hasBoosters = true;
         this.numBoosterLands = 0;

@@ -6,14 +6,10 @@
 
 package mage.sets;
 
-import java.util.GregorianCalendar;
 import mage.cards.ExpansionSet;
 import mage.constants.SetType;
 import mage.constants.Rarity;
-import java.util.List;
-import mage.ObjectColor;
 import mage.cards.CardGraphicInfo;
-import mage.cards.FrameStyle;
 
 /**
  *
@@ -28,7 +24,7 @@ public class ElvesVsGoblins extends ExpansionSet {
     }
 
     private ElvesVsGoblins() {
-        super("Duel Decks: Elves vs. Goblins", "EVG", "mage.sets.elvesvsgoblins", ExpansionSet.buildDate(2007, 11, 16), SetType.SUPPLEMENTAL);
+        super("Duel Decks: Elves vs. Goblins", "EVG", ExpansionSet.buildDate(2007, 11, 16), SetType.SUPPLEMENTAL);
         this.blockName = "Duel Decks";
         this.hasBasicLands = false;
         cards.add(new SetCardInfo("Akki Coalflinger", 33, Rarity.UNCOMMON, mage.cards.a.AkkiCoalflinger.class));

@@ -27,14 +27,10 @@
  */
 package mage.sets;
 
-import java.util.GregorianCalendar;
 import mage.cards.ExpansionSet;
 import mage.constants.SetType;
 import mage.constants.Rarity;
-import java.util.List;
-import mage.ObjectColor;
 import mage.cards.CardGraphicInfo;
-import mage.cards.FrameStyle;
 
 /**
  *
@@ -50,7 +46,7 @@ public class Archenemy extends ExpansionSet {
     }
 
     private Archenemy() {
-        super("Archenemy", "ARC", "mage.sets.archenemy", ExpansionSet.buildDate(2010, 6, 18), SetType.SUPPLEMENTAL);
+        super("Archenemy", "ARC", ExpansionSet.buildDate(2010, 6, 18), SetType.SUPPLEMENTAL);
         this.blockName = "Command Zone";
         cards.add(new SetCardInfo("Aether Spellbomb", 102, Rarity.COMMON, mage.cards.a.AetherSpellbomb.class));
         cards.add(new SetCardInfo("Agony Warp", 76, Rarity.COMMON, mage.cards.a.AgonyWarp.class));

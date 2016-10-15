@@ -1,13 +1,9 @@
 package mage.sets;
 
-import java.util.GregorianCalendar;
 import mage.cards.ExpansionSet;
 import mage.constants.SetType;
 import mage.constants.Rarity;
-import java.util.List;
-import mage.ObjectColor;
 import mage.cards.CardGraphicInfo;
-import mage.cards.FrameStyle;
 
 public class ChampionsOfKamigawa extends ExpansionSet {
     private static final ChampionsOfKamigawa fINSTANCE = new ChampionsOfKamigawa();
@@ -17,7 +13,7 @@ public class ChampionsOfKamigawa extends ExpansionSet {
     }
 
     private ChampionsOfKamigawa() {
-        super("Champions of Kamigawa", "CHK", "mage.sets.championsofkamigawa", ExpansionSet.buildDate(2004, 9, 1), SetType.EXPANSION);
+        super("Champions of Kamigawa", "CHK", ExpansionSet.buildDate(2004, 9, 1), SetType.EXPANSION);
         this.blockName = "Kamigawa";
         this.hasBoosters = true;
         this.numBoosterLands = 0;

@@ -27,12 +27,9 @@
  */
 package mage.sets;
 
-import java.util.GregorianCalendar;
 import mage.cards.ExpansionSet;
 import mage.constants.SetType;
 import mage.constants.Rarity;
-import java.util.List;
-import mage.ObjectColor;
 import mage.cards.CardGraphicInfo;
 import mage.cards.FrameStyle;
 
@@ -49,7 +46,7 @@ public class MasterpieceSeries extends ExpansionSet {
     }
 
     private MasterpieceSeries() {
-        super("Masterpiece Series", "MPS", "mage.sets.masterpieceseries", ExpansionSet.buildDate(2016, 9, 30), SetType.PROMOTIONAL);
+        super("Masterpiece Series", "MPS", ExpansionSet.buildDate(2016, 9, 30), SetType.PROMOTIONAL);
         this.hasBoosters = false;
         this.hasBasicLands = false;
         cards.add(new SetCardInfo("Aether Vial", 6, Rarity.MYTHIC, mage.cards.a.AetherVial.class, new CardGraphicInfo(FrameStyle.KLD_INVENTION, false)));

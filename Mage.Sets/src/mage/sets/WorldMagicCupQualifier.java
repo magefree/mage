@@ -28,11 +28,9 @@
 
 package mage.sets;
 
-import java.util.GregorianCalendar;
 import mage.constants.SetType;
 import mage.cards.ExpansionSet;
 import mage.constants.Rarity;
-import java.util.List;
 
 /**
  *
@@ -47,7 +45,7 @@ public class WorldMagicCupQualifier extends ExpansionSet {
     }
 
     private WorldMagicCupQualifier() {
-        super("World Magic Cup Qualifier", "WMCQ", "mage.sets.worldmagiccupqualifier", ExpansionSet.buildDate(2011, 6, 17), SetType.PROMOTIONAL);
+        super("World Magic Cup Qualifier", "WMCQ", ExpansionSet.buildDate(2011, 6, 17), SetType.PROMOTIONAL);
         this.hasBoosters = false;
         this.hasBasicLands = false;
         cards.add(new SetCardInfo("Abrupt Decay", 6, Rarity.RARE, mage.cards.a.AbruptDecay.class));

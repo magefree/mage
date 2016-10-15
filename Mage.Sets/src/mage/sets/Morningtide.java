@@ -27,11 +27,9 @@
  */
 package mage.sets;
 
-import java.util.GregorianCalendar;
 import mage.constants.SetType;
 import mage.cards.ExpansionSet;
 import mage.constants.Rarity;
-import java.util.List;
 
 /**
  *
@@ -46,7 +44,7 @@ public class Morningtide extends ExpansionSet {
     }
 
     private Morningtide() {
-        super("Morningtide", "MOR", "mage.sets.morningtide", ExpansionSet.buildDate(2008, 1, 1), SetType.EXPANSION);
+        super("Morningtide", "MOR", ExpansionSet.buildDate(2008, 1, 1), SetType.EXPANSION);
         this.blockName = "Lorwyn";
         this.parentSet = Morningtide.getInstance();
         this.hasBasicLands = false;

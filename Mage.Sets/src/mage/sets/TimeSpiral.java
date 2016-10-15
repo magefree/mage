@@ -1,6 +1,5 @@
 package mage.sets;
 
-import java.util.GregorianCalendar;
 import java.util.List;
 import mage.cards.Card;
 import mage.cards.ExpansionSet;
@@ -8,9 +7,7 @@ import mage.cards.repository.CardCriteria;
 import mage.cards.repository.CardRepository;
 import mage.constants.Rarity;
 import mage.constants.SetType;
-import mage.ObjectColor;
 import mage.cards.CardGraphicInfo;
-import mage.cards.FrameStyle;
 
 public class TimeSpiral extends ExpansionSet {
 
@@ -21,7 +18,7 @@ public class TimeSpiral extends ExpansionSet {
     }
 
     private TimeSpiral() {
-        super("Time Spiral", "TSP", "mage.sets.timespiral", ExpansionSet.buildDate(2006, 9, 9), SetType.EXPANSION);
+        super("Time Spiral", "TSP", ExpansionSet.buildDate(2006, 9, 9), SetType.EXPANSION);
         this.blockName = "Time Spiral";
         this.hasBoosters = true;
         this.numBoosterLands = 0;

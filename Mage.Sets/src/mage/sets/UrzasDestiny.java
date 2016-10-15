@@ -44,7 +44,7 @@ public class UrzasDestiny extends ExpansionSet {
     }
 
     private UrzasDestiny() {
-        super("Urza's Destiny", "UDS", "mage.sets.urzasdestiny", ExpansionSet.buildDate(1999, 6, 7), SetType.EXPANSION);
+        super("Urza's Destiny", "UDS", ExpansionSet.buildDate(1999, 6, 7), SetType.EXPANSION);
         this.blockName = "Urza";
         this.parentSet = UrzasSaga.getInstance();
         this.hasBasicLands = false;

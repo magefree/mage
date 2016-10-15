@@ -27,11 +27,9 @@
  */
 package mage.sets;
 
-import java.util.GregorianCalendar;
 import mage.cards.ExpansionSet;
 import mage.constants.SetType;
 import mage.constants.Rarity;
-import java.util.List;
 
 /**
  *
@@ -47,7 +45,7 @@ public class UginsFate extends ExpansionSet {
     }
 
     private UginsFate() {
-        super("Ugin's Fate", "UGIN", "mage.sets.uginsfate", ExpansionSet.buildDate(2015, 1, 16), SetType.PROMOTIONAL);
+        super("Ugin's Fate", "UGIN", ExpansionSet.buildDate(2015, 1, 16), SetType.PROMOTIONAL);
         this.hasBoosters = false;
         cards.add(new SetCardInfo("Ainok Tracker", 96, Rarity.COMMON, mage.cards.a.AinokTracker.class));
         cards.add(new SetCardInfo("Altar of the Brood", 216, Rarity.RARE, mage.cards.a.AltarOfTheBrood.class));

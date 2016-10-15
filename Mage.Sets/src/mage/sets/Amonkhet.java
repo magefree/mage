@@ -27,11 +27,8 @@
  */
 package mage.sets;
 
-import java.util.GregorianCalendar;
 import mage.cards.ExpansionSet;
 import mage.constants.SetType;
-import mage.constants.Rarity;
-import java.util.List;
 
 /**
  *
@@ -46,7 +43,7 @@ public class Amonkhet extends ExpansionSet {
     }
 
     private Amonkhet() {
-        super("Amonkhet", "AKH", "mage.sets.amonkhet", ExpansionSet.buildDate(2017, 4, 28), SetType.EXPANSION);
+        super("Amonkhet", "AKH", ExpansionSet.buildDate(2017, 4, 28), SetType.EXPANSION);
         this.blockName = "Amonkhet";
         this.hasBoosters = true;
         this.numBoosterLands = 1;

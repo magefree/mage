@@ -55,7 +55,7 @@ public class ShadowsOverInnistrad extends ExpansionSet {
     protected final EnumMap<Rarity, List<CardInfo>> savedDoubleFacedCards;
 
     private ShadowsOverInnistrad() {
-        super("Shadows over Innistrad", "SOI", "mage.sets.shadowsoverinnistrad", ExpansionSet.buildDate(2016, 4, 8), SetType.EXPANSION);
+        super("Shadows over Innistrad", "SOI", ExpansionSet.buildDate(2016, 4, 8), SetType.EXPANSION);
         this.blockName = "Shadows over Innistrad";
         this.hasBoosters = true;
         this.numBoosterLands = 1;

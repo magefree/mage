@@ -28,14 +28,10 @@
 
 package mage.sets;
 
-import java.util.GregorianCalendar;
 import mage.cards.ExpansionSet;
 import mage.constants.SetType;
 import mage.constants.Rarity;
-import java.util.List;
-import mage.ObjectColor;
 import mage.cards.CardGraphicInfo;
-import mage.cards.FrameStyle;
 
 /**
  *
@@ -51,7 +47,7 @@ public class Commander2013 extends ExpansionSet {
     }
 
     private Commander2013() {
-        super("Commander 2013 Edition", "C13", "mage.sets.commander2013", ExpansionSet.buildDate(2013, 11, 01), SetType.SUPPLEMENTAL);
+        super("Commander 2013 Edition", "C13", ExpansionSet.buildDate(2013, 11, 01), SetType.SUPPLEMENTAL);
         this.blockName = "Command Zone";
         cards.add(new SetCardInfo("Acidic Slime", 134, Rarity.UNCOMMON, mage.cards.a.AcidicSlime.class));
         cards.add(new SetCardInfo("Act of Authority", 1, Rarity.RARE, mage.cards.a.ActOfAuthority.class));

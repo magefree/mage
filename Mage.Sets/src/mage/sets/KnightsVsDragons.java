@@ -28,14 +28,10 @@
 
 package mage.sets;
 
-import java.util.GregorianCalendar;
 import mage.cards.ExpansionSet;
 import mage.constants.SetType;
 import mage.constants.Rarity;
-import java.util.List;
-import mage.ObjectColor;
 import mage.cards.CardGraphicInfo;
-import mage.cards.FrameStyle;
 
 /**
  *
@@ -50,7 +46,7 @@ public class KnightsVsDragons extends ExpansionSet {
     }
 
     private KnightsVsDragons() {
-        super("Duel Decks: Knights vs. Dragons", "DDG", "mage.sets.knightsvsdragons", ExpansionSet.buildDate(2011, 4, 1), SetType.SUPPLEMENTAL);
+        super("Duel Decks: Knights vs. Dragons", "DDG", ExpansionSet.buildDate(2011, 4, 1), SetType.SUPPLEMENTAL);
         this.blockName = "Duel Decks";
         this.hasBasicLands = false;
         cards.add(new SetCardInfo("Alaborn Cavalier", 18, Rarity.UNCOMMON, mage.cards.a.AlabornCavalier.class));

@@ -27,14 +27,10 @@
  */
 package mage.sets;
 
-import java.util.GregorianCalendar;
 import mage.constants.SetType;
 import mage.cards.ExpansionSet;
 import mage.constants.Rarity;
-import java.util.List;
-import mage.ObjectColor;
 import mage.cards.CardGraphicInfo;
-import mage.cards.FrameStyle;
 
 /**
  *
@@ -49,7 +45,7 @@ public class Lorwyn extends ExpansionSet {
     }
 
     private Lorwyn() {
-        super("Lorwyn", "LRW", "mage.sets.lorwyn", ExpansionSet.buildDate(2007, 9, 12), SetType.EXPANSION);
+        super("Lorwyn", "LRW", ExpansionSet.buildDate(2007, 9, 12), SetType.EXPANSION);
         this.blockName = "Lorwyn";
         this.hasBoosters = true;
         this.numBoosterLands = 0;

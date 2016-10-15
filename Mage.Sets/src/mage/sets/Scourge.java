@@ -27,12 +27,9 @@
  */
 package mage.sets;
 
-import java.util.GregorianCalendar;
-
 import mage.cards.ExpansionSet;
 import mage.constants.SetType;
 import mage.constants.Rarity;
-import java.util.List;
 
 /**
  *
@@ -47,7 +44,7 @@ public class Scourge extends ExpansionSet {
     }
 
     private Scourge() {
-        super("Scourge", "SCG", "mage.sets.scourge", ExpansionSet.buildDate(2003, 5, 17), SetType.EXPANSION);
+        super("Scourge", "SCG", ExpansionSet.buildDate(2003, 5, 17), SetType.EXPANSION);
         this.blockName = "Onslaught";
         this.parentSet = Onslaught.getInstance();
         this.hasBasicLands = false;

@@ -28,11 +28,9 @@
 
 package mage.sets;
 
-import java.util.GregorianCalendar;
 import mage.cards.ExpansionSet;
 import mage.constants.SetType;
 import mage.constants.Rarity;
-import java.util.List;
 
 /**
  *
@@ -47,7 +45,7 @@ public class DuelsOfThePlaneswalkers extends ExpansionSet {
     }
 
     private DuelsOfThePlaneswalkers() {
-        super("Duels of the Planeswalkers", "DPA", "mage.sets.duelsoftheplaneswalkers", ExpansionSet.buildDate(2010, 6, 4), SetType.SUPPLEMENTAL);
+        super("Duels of the Planeswalkers", "DPA", ExpansionSet.buildDate(2010, 6, 4), SetType.SUPPLEMENTAL);
         cards.add(new SetCardInfo("The Rack", 95, Rarity.UNCOMMON, mage.cards.t.TheRack.class));
     }
 }

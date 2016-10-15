@@ -27,7 +27,6 @@
  */
 package mage.sets;
 
-import java.util.GregorianCalendar;
 import mage.cards.ExpansionSet;
 import mage.constants.Rarity;
 import mage.constants.SetType;
@@ -45,7 +44,7 @@ public class FTVExiled extends ExpansionSet {
     }
 
     private FTVExiled() {
-        super("From the Vault: Exiled", "V09", "mage.sets.ftvexiled", ExpansionSet.buildDate(2009, 8, 28), SetType.SUPPLEMENTAL);
+        super("From the Vault: Exiled", "V09", ExpansionSet.buildDate(2009, 8, 28), SetType.SUPPLEMENTAL);
         this.hasBasicLands = false;
         cards.add(new SetCardInfo("Balance", 1, Rarity.MYTHIC, mage.cards.b.Balance.class));
         cards.add(new SetCardInfo("Berserk", 2, Rarity.MYTHIC, mage.cards.b.Berserk.class));

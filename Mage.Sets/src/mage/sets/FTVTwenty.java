@@ -27,7 +27,6 @@
  */
 package mage.sets;
 
-import java.util.GregorianCalendar;
 import mage.cards.ExpansionSet;
 import mage.constants.Rarity;
 import mage.constants.SetType;
@@ -45,7 +44,7 @@ public class FTVTwenty extends ExpansionSet {
     }
 
     private FTVTwenty() {
-        super("From the Vault: Twenty", "V13", "mage.sets.ftvtwenty", ExpansionSet.buildDate(2013, 8, 23), SetType.SUPPLEMENTAL);
+        super("From the Vault: Twenty", "V13", ExpansionSet.buildDate(2013, 8, 23), SetType.SUPPLEMENTAL);
         this.hasBasicLands = false;
         cards.add(new SetCardInfo("Akroma's Vengeance", 11, Rarity.MYTHIC, mage.cards.a.AkromasVengeance.class));
         cards.add(new SetCardInfo("Chainer's Edict", 10, Rarity.MYTHIC, mage.cards.c.ChainersEdict.class));

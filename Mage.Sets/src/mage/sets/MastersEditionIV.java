@@ -27,11 +27,9 @@
  */
 package mage.sets;
 
-import java.util.GregorianCalendar;
 import mage.cards.ExpansionSet;
 import mage.constants.SetType;
 import mage.constants.Rarity;
-import java.util.List;
 
 /**
  *
@@ -47,7 +45,7 @@ public class MastersEditionIV extends ExpansionSet {
     }
 
     private MastersEditionIV() {
-        super("Masters Edition IV", "ME4", "mage.sets.masterseditioniv", ExpansionSet.buildDate(2011, 1, 10), SetType.MAGIC_ONLINE);
+        super("Masters Edition IV", "ME4", ExpansionSet.buildDate(2011, 1, 10), SetType.MAGIC_ONLINE);
         this.hasBasicLands = false;
         this.hasBoosters = true;
         this.numBoosterLands = 1;

@@ -27,7 +27,6 @@
  */
 package mage.sets;
 
-import java.util.GregorianCalendar;
 import mage.cards.ExpansionSet;
 import mage.constants.Rarity;
 import mage.constants.SetType;
@@ -45,7 +44,7 @@ public class FTVRealms extends ExpansionSet {
     }
 
     private FTVRealms() {
-        super("From the Vault: Realms", "V12", "mage.sets.ftvrealms", ExpansionSet.buildDate(2012, 8, 31), SetType.SUPPLEMENTAL);
+        super("From the Vault: Realms", "V12", ExpansionSet.buildDate(2012, 8, 31), SetType.SUPPLEMENTAL);
         this.hasBasicLands = false;
         cards.add(new SetCardInfo("Ancient Tomb", 1, Rarity.MYTHIC, mage.cards.a.AncientTomb.class));
         cards.add(new SetCardInfo("Boseiju, Who Shelters All", 2, Rarity.MYTHIC, mage.cards.b.BoseijuWhoSheltersAll.class));

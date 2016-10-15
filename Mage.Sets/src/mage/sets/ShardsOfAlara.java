@@ -28,14 +28,10 @@
 
 package mage.sets;
 
-import java.util.GregorianCalendar;
 import mage.constants.SetType;
 import mage.cards.ExpansionSet;
 import mage.constants.Rarity;
-import java.util.List;
-import mage.ObjectColor;
 import mage.cards.CardGraphicInfo;
-import mage.cards.FrameStyle;
 
 /**
  *
@@ -50,7 +46,7 @@ public class ShardsOfAlara extends ExpansionSet {
     }
 
     private ShardsOfAlara() {
-        super("Shards of Alara", "ALA", "mage.sets.shardsofalara", ExpansionSet.buildDate(2008, 8, 27), SetType.EXPANSION);
+        super("Shards of Alara", "ALA", ExpansionSet.buildDate(2008, 8, 27), SetType.EXPANSION);
         this.blockName = "Shards of Alara";
         this.hasBoosters = true;
         this.numBoosterLands = 1;

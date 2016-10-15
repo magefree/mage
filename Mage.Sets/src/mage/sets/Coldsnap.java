@@ -27,12 +27,9 @@
  */
 package mage.sets;
 
-import java.util.GregorianCalendar;
-
 import mage.cards.ExpansionSet;
 import mage.constants.SetType;
 import mage.constants.Rarity;
-import java.util.List;
 
 /**
  *
@@ -47,7 +44,7 @@ public class Coldsnap extends ExpansionSet {
     }
 
     private Coldsnap() {
-        super("Coldsnap", "CSP", "mage.sets.coldsnap", ExpansionSet.buildDate(2006, 6, 21), SetType.EXPANSION);
+        super("Coldsnap", "CSP", ExpansionSet.buildDate(2006, 6, 21), SetType.EXPANSION);
         this.blockName = "Ice Age";
         this.hasBoosters = true;
         this.numBoosterLands = 0;

@@ -27,14 +27,10 @@
  */
 package mage.sets;
 
-import java.util.GregorianCalendar;
 import mage.cards.ExpansionSet;
 import mage.constants.SetType;
 import mage.constants.Rarity;
-import java.util.List;
-import mage.ObjectColor;
 import mage.cards.CardGraphicInfo;
-import mage.cards.FrameStyle;
 
 /**
  *
@@ -49,7 +45,7 @@ public class HeroesVsMonsters extends ExpansionSet {
     }
 
     private HeroesVsMonsters() {
-        super("Duel Decks: Heroes vs. Monsters", "DDL", "mage.sets.heroesvsmonsters", ExpansionSet.buildDate(2013, 9, 6), SetType.SUPPLEMENTAL);
+        super("Duel Decks: Heroes vs. Monsters", "DDL", ExpansionSet.buildDate(2013, 9, 6), SetType.SUPPLEMENTAL);
         this.blockName = "Duel Decks";
         this.hasBasicLands = false;
         cards.add(new SetCardInfo("Anax and Cymede", 11, Rarity.RARE, mage.cards.a.AnaxAndCymede.class));

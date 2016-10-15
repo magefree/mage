@@ -30,9 +30,7 @@ package mage.sets;
 import mage.cards.ExpansionSet;
 import mage.constants.SetType;
 
-import java.util.GregorianCalendar;
 import mage.constants.Rarity;
-import java.util.List;
 
 /**
  * Created by IntelliJ IDEA. User: Loki Date: 20.12.10 Time: 21:40
@@ -46,7 +44,7 @@ public class Dissension extends ExpansionSet {
     }
 
     private Dissension() {
-        super("Dissension", "DIS", "mage.sets.dissension", ExpansionSet.buildDate(2006, 4, 5), SetType.EXPANSION);
+        super("Dissension", "DIS", ExpansionSet.buildDate(2006, 4, 5), SetType.EXPANSION);
         this.blockName = "Ravnica";
         this.parentSet = RavnicaCityOfGuilds.getInstance();
         this.hasBasicLands = false;

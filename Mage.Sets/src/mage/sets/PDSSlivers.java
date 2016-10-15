@@ -28,14 +28,10 @@
 
 package mage.sets;
 
-import java.util.GregorianCalendar;
 import mage.cards.ExpansionSet;
 import mage.constants.SetType;
 import mage.constants.Rarity;
-import java.util.List;
-import mage.ObjectColor;
 import mage.cards.CardGraphicInfo;
-import mage.cards.FrameStyle;
 
 /**
  *
@@ -49,7 +45,7 @@ public class PDSSlivers extends ExpansionSet {
     }
 
     private PDSSlivers() {
-        super("Premium Deck Series: Slivers", "H09", "mage.sets.pdsslivers", ExpansionSet.buildDate(2009, 11, 1), SetType.SUPPLEMENTAL);
+        super("Premium Deck Series: Slivers", "H09", ExpansionSet.buildDate(2009, 11, 1), SetType.SUPPLEMENTAL);
         this.hasBasicLands = false;
         cards.add(new SetCardInfo("Acidic Sliver", 13, Rarity.UNCOMMON, mage.cards.a.AcidicSliver.class));
         cards.add(new SetCardInfo("Amoeboid Changeling", 3, Rarity.COMMON, mage.cards.a.AmoeboidChangeling.class));

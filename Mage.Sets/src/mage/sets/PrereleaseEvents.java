@@ -3,12 +3,8 @@ package mage.sets;
 import mage.cards.ExpansionSet;
 import mage.constants.SetType;
 
-import java.util.GregorianCalendar;
 import mage.constants.Rarity;
-import java.util.List;
-import mage.ObjectColor;
 import mage.cards.CardGraphicInfo;
-import mage.cards.FrameStyle;
 
 public class PrereleaseEvents extends ExpansionSet {
     private static final PrereleaseEvents fINSTANCE = new PrereleaseEvents();
@@ -18,7 +14,7 @@ public class PrereleaseEvents extends ExpansionSet {
     }
 
     private PrereleaseEvents() {
-        super("Prerelease Events", "PTC", "mage.sets.prereleaseevents", ExpansionSet.buildDate(1990, 1, 1), SetType.PROMOTIONAL);
+        super("Prerelease Events", "PTC", ExpansionSet.buildDate(1990, 1, 1), SetType.PROMOTIONAL);
         this.hasBoosters = false;
         this.hasBasicLands = false;
         cards.add(new SetCardInfo("Abbot of Keral Keep", 198, Rarity.RARE, mage.cards.a.AbbotOfKeralKeep.class));

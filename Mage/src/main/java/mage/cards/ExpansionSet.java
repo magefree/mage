@@ -127,17 +127,15 @@ public abstract class ExpansionSet implements Serializable {
     protected int numBoosterDoubleFaced; // -1 = include normally 0 = exclude  1-n = include explicit
     protected int ratioBoosterMythic;
 
-    protected String packageName;
-    protected int maxCardNumberInBooster; // used to ommit cards with collector numbers beyond the regular cards in a set for boosters
+    protected int maxCardNumberInBooster; // used to omit cards with collector numbers beyond the regular cards in a set for boosters
 
     protected final EnumMap<Rarity, List<CardInfo>> savedCards;
 
-    public ExpansionSet(String name, String code, String packageName, Date releaseDate, SetType setType) {
+    public ExpansionSet(String name, String code, Date releaseDate, SetType setType) {
         this.name = name;
         this.code = code;
         this.releaseDate = releaseDate;
         this.setType = setType;
-        this.packageName = packageName;
         this.maxCardNumberInBooster = Integer.MAX_VALUE;
         savedCards = new EnumMap<>(Rarity.class);
     }
@@ -160,10 +158,6 @@ public abstract class ExpansionSet implements Serializable {
 
     public SetType getSetType() {
         return setType;
-    }
-
-    public String getPackageName() {
-        return packageName;
     }
 
     public String getBlockName() {

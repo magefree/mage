@@ -27,7 +27,6 @@
  */
 package mage.sets;
 
-import java.util.GregorianCalendar;
 import mage.cards.ExpansionSet;
 import mage.constants.Rarity;
 import mage.constants.SetType;
@@ -45,7 +44,7 @@ public class Nemesis extends ExpansionSet {
     }
 
     private Nemesis() {
-        super("Nemesis", "NEM", "mage.sets.nemesis", ExpansionSet.buildDate(2000, 1, 5), SetType.EXPANSION);
+        super("Nemesis", "NEM", ExpansionSet.buildDate(2000, 1, 5), SetType.EXPANSION);
         this.blockName = "Masques";
         this.parentSet = MercadianMasques.getInstance();
         this.hasBasicLands = false;

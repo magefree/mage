@@ -44,7 +44,7 @@ public class EldritchMoon extends ExpansionSet {
     }
 
     private EldritchMoon() {
-        super("Eldritch Moon", "EMN", "mage.sets.eldritchmoon", ExpansionSet.buildDate(2016, 7, 22), SetType.EXPANSION);
+        super("Eldritch Moon", "EMN", ExpansionSet.buildDate(2016, 7, 22), SetType.EXPANSION);
         this.blockName = "Shadows over Innistrad";
         this.hasBoosters = true;
         this.numBoosterLands = 1;

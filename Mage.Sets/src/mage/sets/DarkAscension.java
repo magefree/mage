@@ -27,11 +27,9 @@
 */
 package mage.sets;
 
-import java.util.GregorianCalendar;
 import mage.constants.SetType;
 import mage.cards.ExpansionSet;
 import mage.constants.Rarity;
-import java.util.List;
 
 /**
  *
@@ -46,7 +44,7 @@ public class DarkAscension extends ExpansionSet {
     }
 
     private DarkAscension() {
-        super("Dark Ascension", "DKA", "mage.sets.darkascension", ExpansionSet.buildDate(2012, 1, 3), SetType.EXPANSION);
+        super("Dark Ascension", "DKA", ExpansionSet.buildDate(2012, 1, 3), SetType.EXPANSION);
         this.blockName = "Innistrad";
         this.hasBoosters = true;
         this.numBoosterLands = 1;

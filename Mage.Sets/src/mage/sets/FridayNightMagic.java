@@ -28,7 +28,6 @@
 
 package mage.sets;
 
-import java.util.GregorianCalendar;
 import mage.cards.ExpansionSet;
 import mage.constants.SetType;
 import mage.constants.Rarity;
@@ -47,7 +46,7 @@ public class FridayNightMagic extends ExpansionSet {
     }
 
     private FridayNightMagic() {
-        super("Friday Night Magic", "FNMP", "mage.sets.fridaynightmagic", ExpansionSet.buildDate(2011, 6, 17), SetType.PROMOTIONAL);
+        super("Friday Night Magic", "FNMP", ExpansionSet.buildDate(2011, 6, 17), SetType.PROMOTIONAL);
         this.hasBoosters = false;
         this.hasBasicLands = false;
         cards.add(new SetCardInfo("Abzan Beastmaster", 180, Rarity.UNCOMMON, mage.cards.a.AbzanBeastmaster.class));

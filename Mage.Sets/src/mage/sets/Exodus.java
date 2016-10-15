@@ -44,7 +44,7 @@ public class Exodus extends ExpansionSet {
     }
 
     private Exodus() {
-        super("Exodus", "EXO", "mage.sets.exodus", ExpansionSet.buildDate(1998, 6, 15), SetType.EXPANSION);
+        super("Exodus", "EXO", ExpansionSet.buildDate(1998, 6, 15), SetType.EXPANSION);
         this.blockName = "Tempest";
         this.parentSet = Tempest.getInstance();
         this.hasBasicLands = false;

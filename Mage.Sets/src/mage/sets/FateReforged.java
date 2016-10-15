@@ -28,7 +28,6 @@
 package mage.sets;
 
 import java.util.ArrayList;
-import java.util.GregorianCalendar;
 import java.util.List;
 import mage.cards.ExpansionSet;
 import mage.cards.repository.CardCriteria;
@@ -37,9 +36,7 @@ import mage.cards.repository.CardRepository;
 import mage.constants.CardType;
 import mage.constants.Rarity;
 import mage.constants.SetType;
-import mage.ObjectColor;
 import mage.cards.CardGraphicInfo;
-import mage.cards.FrameStyle;
 
 /**
  *
@@ -57,7 +54,7 @@ public class FateReforged extends ExpansionSet {
     }
 
     private FateReforged() {
-        super("Fate Reforged", "FRF", "mage.sets.fatereforged", ExpansionSet.buildDate(2015, 1, 23), SetType.EXPANSION);
+        super("Fate Reforged", "FRF", ExpansionSet.buildDate(2015, 1, 23), SetType.EXPANSION);
         this.blockName = "Khans of Tarkir";
         this.parentSet = KhansOfTarkir.getInstance();
         this.hasBasicLands = false;

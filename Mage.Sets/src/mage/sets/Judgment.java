@@ -27,11 +27,9 @@
  */
 package mage.sets;
 
-import java.util.GregorianCalendar;
 import mage.constants.SetType;
 import mage.cards.ExpansionSet;
 import mage.constants.Rarity;
-import java.util.List;
 
 /**
  *
@@ -46,7 +44,7 @@ public class Judgment extends ExpansionSet {
     }
 
     private Judgment() {
-        super("Judgment", "JUD", "mage.sets.judgment", ExpansionSet.buildDate(2002, 5, 27), SetType.EXPANSION);
+        super("Judgment", "JUD", ExpansionSet.buildDate(2002, 5, 27), SetType.EXPANSION);
         this.blockName = "Odyssey";
         this.parentSet = Odyssey.getInstance();
         this.hasBasicLands = false;

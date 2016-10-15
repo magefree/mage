@@ -45,7 +45,7 @@ public class AnthologyElvesVsGoblins extends ExpansionSet {
     }
 
     private AnthologyElvesVsGoblins() {
-        super("Duel Decks: Anthology, Elves vs. Goblins", "DD3EVG", "mage.sets.anthologyelvesvsgoblins", ExpansionSet.buildDate(2014, 12, 5),
+        super("Duel Decks: Anthology, Elves vs. Goblins", "DD3EVG", ExpansionSet.buildDate(2014, 12, 5),
                 SetType.SUPPLEMENTAL);
         this.blockName = "Duel Decks: Anthology";
         this.hasBasicLands = false;

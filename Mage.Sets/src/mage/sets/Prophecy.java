@@ -27,12 +27,9 @@
  */
 package mage.sets;
 
-import java.util.GregorianCalendar;
-
 import mage.cards.ExpansionSet;
 import mage.constants.SetType;
 import mage.constants.Rarity;
-import java.util.List;
 
 /**
  *
@@ -47,7 +44,7 @@ public class Prophecy extends ExpansionSet {
     }
 
     private Prophecy() {
-        super("Prophecy", "PCY", "mage.sets.prophecy", ExpansionSet.buildDate(2000, 4, 27), SetType.EXPANSION);
+        super("Prophecy", "PCY", ExpansionSet.buildDate(2000, 4, 27), SetType.EXPANSION);
         this.blockName = "Masques";
         this.parentSet = MercadianMasques.getInstance();
         this.hasBasicLands = false;

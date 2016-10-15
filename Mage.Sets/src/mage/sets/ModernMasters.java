@@ -28,11 +28,9 @@
 
 package mage.sets;
 
-import java.util.GregorianCalendar;
 import mage.cards.ExpansionSet;
 import mage.constants.SetType;
 import mage.constants.Rarity;
-import java.util.List;
 
 /**
  *
@@ -47,7 +45,7 @@ public class ModernMasters extends ExpansionSet {
     }
 
     private ModernMasters() {
-        super("Modern Masters", "MMA", "mage.sets.modernmasters", ExpansionSet.buildDate(2013, 6, 7), SetType.SUPPLEMENTAL);
+        super("Modern Masters", "MMA", ExpansionSet.buildDate(2013, 6, 7), SetType.SUPPLEMENTAL);
         this.blockName = "Reprint";
         this.hasBasicLands = false;
         this.hasBoosters = true;

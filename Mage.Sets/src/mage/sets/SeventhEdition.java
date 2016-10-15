@@ -27,15 +27,10 @@
  */
 package mage.sets;
 
-import java.util.GregorianCalendar;
-
 import mage.cards.ExpansionSet;
 import mage.constants.SetType;
 import mage.constants.Rarity;
-import java.util.List;
-import mage.ObjectColor;
 import mage.cards.CardGraphicInfo;
-import mage.cards.FrameStyle;
 
 /**
  *
@@ -50,7 +45,7 @@ public class SeventhEdition extends ExpansionSet {
     }
 
     private SeventhEdition() {
-        super("Seventh Edition", "7ED", "mage.sets.seventhedition", ExpansionSet.buildDate(2001, 3, 11), SetType.CORE);
+        super("Seventh Edition", "7ED", ExpansionSet.buildDate(2001, 3, 11), SetType.CORE);
         this.hasBoosters = true;
         this.numBoosterLands = 1;
         this.numBoosterCommon = 10;

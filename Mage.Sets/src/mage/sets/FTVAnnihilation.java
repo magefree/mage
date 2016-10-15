@@ -27,7 +27,6 @@
  */
 package mage.sets;
 
-import java.util.GregorianCalendar;
 import mage.cards.ExpansionSet;
 import mage.constants.Rarity;
 import mage.constants.SetType;
@@ -45,7 +44,7 @@ public class FTVAnnihilation extends ExpansionSet {
     }
 
     private FTVAnnihilation() {
-        super("From the Vault: Annihilation", "V14", "mage.sets.ftvannihilation", ExpansionSet.buildDate(2014, 8, 22), SetType.SUPPLEMENTAL);
+        super("From the Vault: Annihilation", "V14", ExpansionSet.buildDate(2014, 8, 22), SetType.SUPPLEMENTAL);
         this.hasBasicLands = false;
         cards.add(new SetCardInfo("Armageddon", 1, Rarity.MYTHIC, mage.cards.a.Armageddon.class));
         cards.add(new SetCardInfo("Burning of Xinye", 2, Rarity.MYTHIC, mage.cards.b.BurningOfXinye.class));

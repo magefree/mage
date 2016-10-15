@@ -29,9 +29,7 @@ package mage.sets;
 
 import mage.cards.ExpansionSet;
 import mage.constants.SetType;
-import java.util.GregorianCalendar;
 import mage.constants.Rarity;
-import java.util.List;
 
 public class MagicPlayerRewards extends ExpansionSet {
     private static final MagicPlayerRewards fINSTANCE = new MagicPlayerRewards();
@@ -41,7 +39,7 @@ public class MagicPlayerRewards extends ExpansionSet {
     }
 
     private MagicPlayerRewards() {
-        super("Magic Player Rewards", "MPRP", "mage.sets.magicplayerrewards", ExpansionSet.buildDate(1990, 1, 1), SetType.PROMOTIONAL);
+        super("Magic Player Rewards", "MPRP", ExpansionSet.buildDate(1990, 1, 1), SetType.PROMOTIONAL);
         this.hasBoosters = false;
         this.hasBasicLands = false;
         cards.add(new SetCardInfo("Bituminous Blast", 46, Rarity.SPECIAL, mage.cards.b.BituminousBlast.class));

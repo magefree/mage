@@ -1,13 +1,9 @@
 package mage.sets;
 
-import java.util.GregorianCalendar;
 import mage.cards.ExpansionSet;
 import mage.constants.SetType;
 import mage.constants.Rarity;
-import java.util.List;
-import mage.ObjectColor;
 import mage.cards.CardGraphicInfo;
-import mage.cards.FrameStyle;
 
 public class FifthEdition extends ExpansionSet {
 
@@ -18,7 +14,7 @@ public class FifthEdition extends ExpansionSet {
     }
 
     private FifthEdition() {
-        super("Fifth Edition", "5ED", "mage.sets.fifthedition", ExpansionSet.buildDate(1997, 3, 1), SetType.CORE);
+        super("Fifth Edition", "5ED", ExpansionSet.buildDate(1997, 3, 1), SetType.CORE);
         this.hasBoosters = true;
         this.numBoosterLands = 0;
         this.numBoosterCommon = 11;

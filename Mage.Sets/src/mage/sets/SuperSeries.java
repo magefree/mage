@@ -27,14 +27,10 @@
  */
 package mage.sets;
 
-import java.util.GregorianCalendar;
 import mage.cards.ExpansionSet;
 import mage.constants.SetType;
 import mage.constants.Rarity;
-import java.util.List;
-import mage.ObjectColor;
 import mage.cards.CardGraphicInfo;
-import mage.cards.FrameStyle;
 
 /**
  *
@@ -50,7 +46,7 @@ public class SuperSeries extends ExpansionSet {
     }
 
     private SuperSeries() {
-        super("Super Series", "SUS", "mage.sets.superseries", ExpansionSet.buildDate(1996, 1, 1), SetType.PROMOTIONAL);
+        super("Super Series", "SUS", ExpansionSet.buildDate(1996, 1, 1), SetType.PROMOTIONAL);
         this.hasBoosters = false;
         cards.add(new SetCardInfo("City of Brass", 6, Rarity.SPECIAL, mage.cards.c.CityOfBrass.class));
         cards.add(new SetCardInfo("Crusade", 4, Rarity.SPECIAL, mage.cards.c.Crusade.class));

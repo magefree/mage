@@ -27,15 +27,10 @@
  */
 package mage.sets;
 
-import java.util.GregorianCalendar;
-
 import mage.cards.ExpansionSet;
 import mage.constants.SetType;
 import mage.constants.Rarity;
-import java.util.List;
-import mage.ObjectColor;
 import mage.cards.CardGraphicInfo;
-import mage.cards.FrameStyle;
 
 /**
  *
@@ -50,7 +45,7 @@ public class ArabianNights extends ExpansionSet {
     }
 
     private ArabianNights() {
-        super("Arabian Nights", "ARN", "mage.sets.arabiannights", ExpansionSet.buildDate(1993, 11, 1), SetType.EXPANSION);
+        super("Arabian Nights", "ARN", ExpansionSet.buildDate(1993, 11, 1), SetType.EXPANSION);
         this.hasBasicLands = false;
         this.hasBoosters = true;
         this.numBoosterLands = 1;

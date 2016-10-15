@@ -28,14 +28,10 @@
 
 package mage.sets;
 
-import java.util.GregorianCalendar;
 import mage.constants.SetType;
 import mage.cards.ExpansionSet;
 import mage.constants.Rarity;
-import java.util.List;
-import mage.ObjectColor;
 import mage.cards.CardGraphicInfo;
-import mage.cards.FrameStyle;
 
 /**
  *
@@ -50,7 +46,7 @@ public class JudgePromo extends ExpansionSet {
     }
 
     private JudgePromo() {
-        super("Judge Promo", "JR", "mage.sets.judgepromo", ExpansionSet.buildDate(2011, 6, 17), SetType.PROMOTIONAL);
+        super("Judge Promo", "JR", ExpansionSet.buildDate(2011, 6, 17), SetType.PROMOTIONAL);
         this.hasBoosters = false;
         cards.add(new SetCardInfo("Argothian Enchantress", 12, Rarity.RARE, mage.cards.a.ArgothianEnchantress.class));
         cards.add(new SetCardInfo("Armageddon", 14, Rarity.RARE, mage.cards.a.Armageddon.class));

@@ -27,14 +27,10 @@
  */
 package mage.sets;
 
-import java.util.GregorianCalendar;
 import mage.constants.SetType;
 import mage.cards.ExpansionSet;
 import mage.constants.Rarity;
-import java.util.List;
-import mage.ObjectColor;
 import mage.cards.CardGraphicInfo;
-import mage.cards.FrameStyle;
 
 /**
  *
@@ -49,7 +45,7 @@ public class AvacynRestored extends ExpansionSet {
     }
 
     private AvacynRestored() {
-        super("Avacyn Restored", "AVR", "mage.sets.avacynrestored", ExpansionSet.buildDate(2012, 4, 4), SetType.EXPANSION);
+        super("Avacyn Restored", "AVR", ExpansionSet.buildDate(2012, 4, 4), SetType.EXPANSION);
         this.blockName = "Innistrad";
         this.parentSet = Innistrad.getInstance();
         this.hasBoosters = true;

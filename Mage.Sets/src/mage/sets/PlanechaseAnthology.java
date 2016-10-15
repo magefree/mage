@@ -27,7 +27,6 @@
  */
 package mage.sets;
 
-import java.util.GregorianCalendar;
 import mage.cards.ExpansionSet;
 import mage.constants.SetType;
 
@@ -44,7 +43,7 @@ public class PlanechaseAnthology extends ExpansionSet {
     }
 
     private PlanechaseAnthology() {
-        super("Planechase Anthology", "PCA", "mage.sets.planechaseanthology", ExpansionSet.buildDate(2016, 11, 25), SetType.SUPPLEMENTAL);
+        super("Planechase Anthology", "PCA", ExpansionSet.buildDate(2016, 11, 25), SetType.SUPPLEMENTAL);
         this.blockName = "Command Zone";
     }
 

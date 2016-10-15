@@ -27,7 +27,6 @@
  */
 package mage.sets;
 
-import java.util.GregorianCalendar;
 import mage.cards.CardGraphicInfo;
 import mage.cards.ExpansionSet;
 import mage.constants.Rarity;
@@ -46,7 +45,7 @@ public class NissaVsObNixilis extends ExpansionSet {
     }
 
     private NissaVsObNixilis() {
-        super("Duel Decks: Nissa vs. Ob Nixilis", "DDR", "mage.sets.nissavsobnixilis", ExpansionSet.buildDate(2016, 9, 2), SetType.SUPPLEMENTAL);
+        super("Duel Decks: Nissa vs. Ob Nixilis", "DDR", ExpansionSet.buildDate(2016, 9, 2), SetType.SUPPLEMENTAL);
         this.blockName = "Duel Decks";
         this.hasBasicLands = false;
 

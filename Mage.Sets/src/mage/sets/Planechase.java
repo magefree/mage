@@ -28,14 +28,10 @@
 
 package mage.sets;
 
-import java.util.GregorianCalendar;
 import mage.constants.SetType;
 import mage.cards.ExpansionSet;
 import mage.constants.Rarity;
-import java.util.List;
-import mage.ObjectColor;
 import mage.cards.CardGraphicInfo;
-import mage.cards.FrameStyle;
 
 /**
  *
@@ -50,7 +46,7 @@ public class Planechase extends ExpansionSet {
     }
 
     private Planechase() {
-        super("Planechase", "HOP", "mage.sets.planechase", ExpansionSet.buildDate(2009, 8, 4), SetType.SUPPLEMENTAL);
+        super("Planechase", "HOP", ExpansionSet.buildDate(2009, 8, 4), SetType.SUPPLEMENTAL);
         this.blockName = "Command Zone";
         cards.add(new SetCardInfo("Akroma's Vengeance", 1, Rarity.RARE, mage.cards.a.AkromasVengeance.class));
         cards.add(new SetCardInfo("Ancient Den", 130, Rarity.COMMON, mage.cards.a.AncientDen.class));

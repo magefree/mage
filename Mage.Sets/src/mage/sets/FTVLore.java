@@ -27,7 +27,6 @@
  */
 package mage.sets;
 
-import java.util.GregorianCalendar;
 import mage.cards.ExpansionSet;
 import mage.constants.Rarity;
 import mage.constants.SetType;
@@ -45,7 +44,7 @@ public class FTVLore extends ExpansionSet {
     }
 
     private FTVLore() {
-        super("From the Vault: Lore", "V16", "mage.sets.ftvlore", ExpansionSet.buildDate(2016, 8, 19), SetType.SUPPLEMENTAL);
+        super("From the Vault: Lore", "V16", ExpansionSet.buildDate(2016, 8, 19), SetType.SUPPLEMENTAL);
         this.hasBasicLands = false;
         cards.add(new SetCardInfo("Beseech the Queen", 1, Rarity.MYTHIC, mage.cards.b.BeseechTheQueen.class));
         cards.add(new SetCardInfo("Cabal Ritual", 2, Rarity.MYTHIC, mage.cards.c.CabalRitual.class));

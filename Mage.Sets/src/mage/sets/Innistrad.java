@@ -31,12 +31,8 @@ package mage.sets;
 import mage.constants.SetType;
 import mage.cards.ExpansionSet;
 
-import java.util.GregorianCalendar;
 import mage.constants.Rarity;
-import java.util.List;
-import mage.ObjectColor;
 import mage.cards.CardGraphicInfo;
-import mage.cards.FrameStyle;
 
 /**
  * @author BetaSteward_at_googlemail.com
@@ -50,7 +46,7 @@ public class Innistrad extends ExpansionSet {
     }
 
     private Innistrad() {
-        super("Innistrad", "ISD", "mage.sets.innistrad", ExpansionSet.buildDate(2011, 9, 30), SetType.EXPANSION);
+        super("Innistrad", "ISD", ExpansionSet.buildDate(2011, 9, 30), SetType.EXPANSION);
         this.blockName = "Innistrad";
         this.hasBoosters = true;
         this.numBoosterLands = 1;

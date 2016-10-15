@@ -27,7 +27,6 @@
  */
 package mage.sets;
 
-import java.util.GregorianCalendar;
 import mage.cards.ExpansionSet;
 import mage.constants.SetType;
 
@@ -44,7 +43,7 @@ public class HourOfDevastation extends ExpansionSet {
     }
 
     private HourOfDevastation() {
-        super("Hour of Devastation", "HOU", "mage.sets.hourofdevastation", ExpansionSet.buildDate(2017, 7, 14), SetType.EXPANSION);
+        super("Hour of Devastation", "HOU", ExpansionSet.buildDate(2017, 7, 14), SetType.EXPANSION);
         this.blockName = "Amonkhet";
         this.parentSet = Amonkhet.getInstance();
         this.hasBasicLands = false;

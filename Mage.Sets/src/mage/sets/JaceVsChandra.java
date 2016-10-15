@@ -6,14 +6,10 @@
 
 package mage.sets;
 
-import java.util.GregorianCalendar;
 import mage.cards.ExpansionSet;
 import mage.constants.SetType;
 import mage.constants.Rarity;
-import java.util.List;
-import mage.ObjectColor;
 import mage.cards.CardGraphicInfo;
-import mage.cards.FrameStyle;
 
 /**
  *
@@ -28,7 +24,7 @@ public class JaceVsChandra extends ExpansionSet {
     }
 
     private JaceVsChandra() {
-        super("Duel Decks: Jace vs. Chandra", "DD2", "mage.sets.jacevschandra", ExpansionSet.buildDate(2008, 11, 07), SetType.SUPPLEMENTAL);
+        super("Duel Decks: Jace vs. Chandra", "DD2", ExpansionSet.buildDate(2008, 11, 07), SetType.SUPPLEMENTAL);
         this.blockName = "Duel Decks";
         this.hasBasicLands = false;
         cards.add(new SetCardInfo("Aethersnipe", 17, Rarity.COMMON, mage.cards.a.Aethersnipe.class));
