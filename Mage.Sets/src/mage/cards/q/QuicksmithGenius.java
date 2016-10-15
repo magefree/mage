@@ -56,6 +56,7 @@ public class QuicksmithGenius extends CardImpl {
 
     public QuicksmithGenius(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{2}{R}");
+        this.subtype.add("Human");
         this.subtype.add("Artificer");
         this.power = new MageInt(3);
         this.toughness = new MageInt(2);

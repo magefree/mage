@@ -45,7 +45,7 @@ public class RavenousBaboons extends CardImpl {
 
     public RavenousBaboons(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{3}{R}");
-        this.subtype.add("Ape");
+        this.subtype.add("Monkey");
 
         this.power = new MageInt(2);
         this.toughness = new MageInt(2);

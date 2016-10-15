@@ -49,7 +49,7 @@ public class AetherTheorist extends CardImpl {
 
     public AetherTheorist(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{1}{U}");
-        this.subtype.add("Vedelkan");
+        this.subtype.add("Vedalken");
         this.subtype.add("Rogue");
         this.power = new MageInt(1);
         this.toughness = new MageInt(3);

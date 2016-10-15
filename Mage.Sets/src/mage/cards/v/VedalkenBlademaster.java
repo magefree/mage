@@ -42,8 +42,8 @@ public class VedalkenBlademaster extends CardImpl {
 
     public VedalkenBlademaster(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{2}{U}");
-        this.subtype.add("Vedaklen");
-        this.subtype.add("Solider");
+        this.subtype.add("Vedalken");
+        this.subtype.add("Soldier");
         this.power = new MageInt(2);
         this.toughness = new MageInt(3);
 
