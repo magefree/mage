@@ -43,7 +43,7 @@ import mage.cards.repository.CardRepository;
  */
 public class DckDeckImporter extends DeckImporter {
 
-    private static final Pattern pattern = Pattern.compile("(SB:)?\\s*(\\d*)\\s*\\[([^]:]+):([^]:]+)\\].*");
+    private static final Pattern pattern = Pattern.compile("(SB:)?\\s*(\\d*)\\s*\\[([^]:]+):([^]:]+)\\]\\s*(.*)\\s*$");
 
     private static final Pattern layoutPattern = Pattern.compile("LAYOUT (\\w+):\\((\\d+),(\\d+)\\)([^|]+)\\|(.*)$");
 
@@ -70,6 +70,17 @@ public class DckDeckImporter extends DeckImporter {
 
             DeckCardInfo deckCardInfo = null;
             CardInfo cardInfo = CardRepository.instance.findCard(setCode, cardNum);
+            if (cardInfo == null) {
+                // Try alternate based on name
+                String cardName = m.group(5);
+                if (cardName != null && cardName.length() > 0) {
+                    cardInfo = CardRepository.instance.findPreferedCoreExpansionCard(cardName, false);
+                    sbMessage.append("Could not find card '" + cardName + "' in set " + setCode + " of number " + cardNum + ".\n");
+                    if (cardInfo != null) {
+                        sbMessage.append("Made substitution of " + cardInfo.getCardNumber() + ", " + cardInfo.getCard().getExpansionSetCode() + " instead.\n");
+                    }
+                }                
+            }
             if (cardInfo != null) {
                 deckCardInfo = new DeckCardInfo(cardInfo.getName(), cardInfo.getCardNumber(), cardInfo.getSetCode());
             }
