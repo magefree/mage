@@ -65,8 +65,9 @@ public class TargetsHaveToTargetPermanentIfAbleEffect extends ContinuousRuleModi
     @Override
     public boolean applies(GameEvent event, Ability source, Game game) {
         Player controller = game.getPlayer(source.getControllerId());
+        Player targetingPlayer = game.getPlayer(event.getPlayerId());
         if (controller != null
-                && controller.isHuman() // TODO: This target handling does only work for non AI players so AI logic 
+                && targetingPlayer.isHuman() // TODO: This target handling does only work for non AI players so AI logic
                 && controller.hasOpponent(event.getPlayerId(), game)) {
             StackObject stackObject = game.getStack().getStackObject(event.getSourceId());
             if (stackObject.isCopy()) {
