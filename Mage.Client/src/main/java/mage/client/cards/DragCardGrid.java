@@ -7,6 +7,8 @@ import java.awt.Graphics;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
 import java.awt.GridLayout;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
 import java.awt.event.MouseAdapter;
@@ -1325,7 +1327,7 @@ public class DragCardGrid extends JPanel implements DragCardSource, DragCardTarg
                         if (t.toLowerCase().contains(qty)) {
                             qtys.put(qty, ++value);
                         }
-                        
+
                         // Rules
                         for (String str : card.getRules()) {
                             if (str.toLowerCase().contains(qty)) {
@@ -1338,7 +1340,6 @@ public class DragCardGrid extends JPanel implements DragCardSource, DragCardTarg
                         int value = qtys.get("wastes");
                         qtys.put("wastes", ++value);
                     }
-
 
                     // Mana Cost
                     String mc = "";
