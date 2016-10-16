@@ -23,42 +23,8 @@ import java.util.regex.Pattern;
 
 public class VerifyCardDataTest {
 
-    @Test
-    public void verifySets() throws IOException {
-        Map<String, JsonSet> reference = MtgJson.sets();
-
-        for (ExpansionSet set : Sets.getInstance().values()) {
-            JsonSet ref = reference.get(set.getCode());
-            if (ref == null) {
-                for (JsonSet js : reference.values()) {
-                    if (set.getCode().equals(js.oldCode) || set.getCode().toLowerCase().equals(js.magicCardsInfoCode)) {
-                        ref = js;
-                        break;
-                    }
-                }
-                if (ref == null) {
-                    System.out.println("missing reference for " + set);
-                    continue;
-                }
-            }
-            if (!String.format("%tF", set.getReleaseDate()).equals(ref.releaseDate)) {
-                System.out.printf("%40s %-20s %20tF %20s%n", set, "release date", set.getReleaseDate(), ref.releaseDate);
-            }
-            if (set.hasBoosters() != (ref.booster != null)) {
-                System.out.printf("%40s %-20s %20s %20s%n", set, "has boosters", set.hasBoosters(), ref.booster != null);
-            }
-            boolean refHasBasicLands = false;
-            for (JsonCard card : ref.cards) {
-                if ("Mountain".equals(card.name)) {
-                    refHasBasicLands = true;
-                    break;
-                }
-            }
-            if (set.hasBasicLands() != refHasBasicLands) {
-                System.out.printf("%40s %-20s %20s %20s%n", set, "has basic lands", set.hasBasicLands(), refHasBasicLands);
-            }
-        }
-    }
+    // right now this is very noisy, and not useful enough to make any assertions on
+    private static final boolean CHECK_SOURCE_TOKENS = false;
 
     public static List<Card> allCards() {
         Collection<ExpansionSet> sets = Sets.getInstance().values();
@@ -105,8 +71,8 @@ public class VerifyCardDataTest {
     private static final Pattern SHORT_JAVA_STRING = Pattern.compile("(?<=\")[A-Z][a-z]+(?=\")");
 
     private Set<String> findSourceTokens(Class c) throws IOException {
-        if (BasicLand.class.isAssignableFrom(c)) {
-            return Collections.emptySet();
+        if (!CHECK_SOURCE_TOKENS || BasicLand.class.isAssignableFrom(c)) {
+            return null;
         }
         String path = "../Mage.Sets/src/" + c.getName().replace(".", "/") + ".java";
         try {
@@ -119,7 +85,7 @@ public class VerifyCardDataTest {
             return tokens;
         } catch (NoSuchFileException e) {
             System.out.println("failed to read " + path);
-            return Collections.emptySet();
+            return null;
         }
     }
 
