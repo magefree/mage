@@ -7,7 +7,9 @@ import mage.cards.CardSetInfo;
 import mage.cards.ExpansionSet;
 import mage.cards.Sets;
 import mage.cards.SplitCard;
+import mage.cards.basiclands.BasicLand;
 import mage.constants.CardType;
+import org.junit.Assert;
 import org.junit.Test;
 
 import java.io.IOException;
@@ -62,6 +64,9 @@ public class VerifyCardDataTest {
         Collection<ExpansionSet> sets = Sets.getInstance().values();
         List<Card> cards = new ArrayList<>();
         for (ExpansionSet set : sets) {
+            if (set.isCustomSet()) {
+                continue;
+            }
             for (ExpansionSet.SetCardInfo setInfo : set.getSetCardInfo()) {
                 cards.add(CardImpl.createCard(setInfo.getCardClass(), new CardSetInfo(setInfo.getName(), set.getCode(),
                         setInfo.getCardNumber(), setInfo.getRarity(), setInfo.getGraphicInfo())));
@@ -69,6 +74,17 @@ public class VerifyCardDataTest {
         }
         return cards;
     }
+
+    private void warn(Card card, String message) {
+        System.out.println("Warning: " + message + " for " + card.getName());
+    }
+
+    private void fail(Card card, String category, String message) {
+        failed++;
+        System.out.println("Error: (" + category + ") " + message + " for " + card.getName());
+    }
+
+    private int failed = 0;
 
     @Test
     public void verifyCards() throws IOException {
@@ -81,11 +97,17 @@ public class VerifyCardDataTest {
                 check(card, tokens);
             }
         }
+        if (failed > 0) {
+            Assert.fail(failed + " Errors");
+        }
     }
 
     private static final Pattern SHORT_JAVA_STRING = Pattern.compile("(?<=\")[A-Z][a-z]+(?=\")");
 
     private Set<String> findSourceTokens(Class c) throws IOException {
+        if (BasicLand.class.isAssignableFrom(c)) {
+            return Collections.emptySet();
+        }
         String path = "../Mage.Sets/src/" + c.getName().replace(".", "/") + ".java";
         try {
             String source = new String(Files.readAllBytes(Paths.get(path)), StandardCharsets.UTF_8);
@@ -104,7 +126,7 @@ public class VerifyCardDataTest {
     private void check(Card card, Set<String> tokens) {
         JsonCard ref = MtgJson.card(card.getName());
         if (ref == null) {
-            System.out.println("Missing card reference for " + card);
+            warn(card, "Missing card reference");
             return;
         }
         checkAll(card, ref);
@@ -146,6 +168,10 @@ public class VerifyCardDataTest {
     }
 
     private void checkColors(Card card, JsonCard ref) {
+        // gatherer is missing the color indicator on one card:
+        if ("Ulrich, Uncontested Alpha".equals(ref.name)) {
+            return;
+        }
         Collection<String> expected = ref.colors;
         ObjectColor color = card.getColor(null);
         if (expected == null) {
@@ -157,7 +183,7 @@ public class VerifyCardDataTest {
                 (color.isGreen() && !expected.contains("Green")) ||
                 (color.isRed() && !expected.contains("Red")) ||
                 (color.isWhite() && !expected.contains("White"))) {
-            System.out.println(color + " != " + expected + " for " + card);
+            fail(card, "colors", color + " != " + expected);
         }
     }
 
@@ -172,14 +198,14 @@ public class VerifyCardDataTest {
             }
         }
         if (!eqSet(card.getSubtype(null), expected)) {
-            System.out.println(card.getSubtype(null) + " != " + expected + " for " + card);
+            fail(card, "subtypes", card.getSubtype(null) + " != " + expected);
         }
     }
 
     private void checkSupertypes(Card card, JsonCard ref) {
         Collection<String> expected = ref.supertypes;
         if (!eqSet(card.getSupertype(), expected)) {
-            System.out.println(card.getSupertype() + " != " + expected + " for " + card);
+            fail(card, "supertypes", card.getSupertype() + " != " + expected);
         }
     }
 
@@ -190,7 +216,7 @@ public class VerifyCardDataTest {
             type.add(cardType.toString());
         }
         if (!eqSet(type, expected)) {
-            System.out.println(type + " != " + expected + " for " + card);
+            fail(card, "types", type + " != " + expected);
         }
     }
 
@@ -205,7 +231,7 @@ public class VerifyCardDataTest {
         if (!eqPT(card.getPower().toString(), ref.power) || !eqPT(card.getToughness().toString(), ref.toughness)) {
             String pt = card.getPower() + "/" + card.getToughness();
             String expected = ref.power + "/" + ref.toughness;
-            System.out.println(pt + " != " + expected + " for " + card);
+            fail(card, "pt", pt + " != " + expected);
         }
     }
 
@@ -227,7 +253,7 @@ public class VerifyCardDataTest {
             cost = cost.replaceAll("P\\}", "/P}");
         }
         if (!Objects.equals(cost, expected)) {
-            System.out.println(cost + " != " + expected + " for " + card);
+            fail(card, "cost", cost + " != " + expected);
         }
     }
 
