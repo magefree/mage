@@ -3,7 +3,8 @@
 ##
 #  File: gen_types_list.pl
 #  Author: spjspj
-#  Purpose: To open all card java files and work out if any have duplicate cardNumber / expansionSetCode
+#  Purpose: To open all card java files and count all subtypes/supertypes
+#  Purpose: Ones with unique splleings (sic.) are possibly incorrect!
 ##
 
 use strict;
