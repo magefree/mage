@@ -28,23 +28,16 @@
 package mage.cards.r;
 
 import java.util.UUID;
-import mage.abilities.Ability;
-import mage.abilities.effects.OneShotEffect;
-import mage.cards.Card;
+import mage.abilities.effects.common.ReturnFromGraveyardToBattlefieldTargetEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.Outcome;
-import mage.constants.Zone;
 import mage.filter.common.FilterCreatureCard;
-import mage.game.Game;
-import mage.players.Player;
 import mage.target.common.TargetCardInYourGraveyard;
 
 /**
  *
  * @author KholdFuzion
-
  */
 public class Resurrection extends CardImpl {
 
@@ -53,7 +46,7 @@ public class Resurrection extends CardImpl {
 
 
         // Return target creature card from your graveyard to the battlefield.
-        this.getSpellAbility().addEffect(new ResurrectionEffect());
+        this.getSpellAbility().addEffect(new ReturnFromGraveyardToBattlefieldTargetEffect());
         this.getSpellAbility().addTarget(new TargetCardInYourGraveyard(new FilterCreatureCard("creature card from your graveyard")));
 
     }
@@ -65,34 +58,5 @@ public class Resurrection extends CardImpl {
     @Override
     public Resurrection copy() {
         return new Resurrection(this);
-    }
-}
-
-class ResurrectionEffect extends OneShotEffect {
-
-    public ResurrectionEffect() {
-        super(Outcome.PutCreatureInPlay);
-        this.staticText = "Return target creature card from your graveyard to the battlefield.";
-    }
-
-    public ResurrectionEffect(final ResurrectionEffect effect) {
-        super(effect);
-    }
-
-    @Override
-    public ResurrectionEffect copy() {
-        return new ResurrectionEffect(this);
-    }
-
-    @Override
-    public boolean apply(Game game, Ability source) {
-        Card card = game.getCard(source.getFirstTarget());
-        Player player = game.getPlayer(card.getOwnerId());
-        if (card != null && player != null) {
-            card.putOntoBattlefield(game, Zone.GRAVEYARD, source.getSourceId(), source.getControllerId());
-            return true;
-        }
-
-        return false;
     }
 }
