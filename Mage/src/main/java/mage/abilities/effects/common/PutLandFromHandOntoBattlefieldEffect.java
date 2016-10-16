@@ -32,6 +32,7 @@ import mage.abilities.effects.OneShotEffect;
 import mage.cards.Card;
 import mage.constants.Outcome;
 import mage.constants.Zone;
+import mage.filter.FilterCard;
 import mage.filter.common.FilterLandCard;
 import mage.game.Game;
 import mage.players.Player;
@@ -44,6 +45,7 @@ import mage.target.common.TargetCardInHand;
  */
 public class PutLandFromHandOntoBattlefieldEffect extends OneShotEffect {
 
+    private FilterCard filter;
     private boolean tapped;
 
     public PutLandFromHandOntoBattlefieldEffect() {
@@ -51,21 +53,27 @@ public class PutLandFromHandOntoBattlefieldEffect extends OneShotEffect {
     }
 
     public PutLandFromHandOntoBattlefieldEffect(boolean tapped) {
+        this(tapped, new FilterLandCard());
+    }
+
+    public PutLandFromHandOntoBattlefieldEffect(boolean tapped, FilterCard filter) {
         super(Outcome.PutLandInPlay);
         this.tapped = tapped;
-        staticText = "you may put a land card from your hand onto the battlefield" + (tapped ? " tapped" : "");
+        this.filter = filter;
+        staticText = "you may put a " + filter.getMessage() + " from your hand onto the battlefield" + (tapped ? " tapped" : "");
     }
 
     public PutLandFromHandOntoBattlefieldEffect(final PutLandFromHandOntoBattlefieldEffect effect) {
         super(effect);
         this.tapped = effect.tapped;
+        this.filter = effect.filter;
     }
 
     @Override
     public boolean apply(Game game, Ability source) {
         Player controller = game.getPlayer(source.getControllerId());
         if (controller != null) {
-            Target target = new TargetCardInHand(new FilterLandCard("land card"));
+            Target target = new TargetCardInHand(filter);
             if (target.canChoose(source.getSourceId(), source.getControllerId(), game)
                     && controller.chooseUse(outcome, "Put land onto battlefield?", source, game)
                     && controller.choose(outcome, target, source.getSourceId(), game)) {

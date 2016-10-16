@@ -29,24 +29,13 @@ package mage.cards.e;
 
 import java.util.UUID;
 
+import mage.abilities.effects.common.PutLandFromHandOntoBattlefieldEffect;
 import mage.constants.CardType;
 import mage.MageInt;
-import mage.abilities.Ability;
 import mage.abilities.common.EntersBattlefieldTriggeredAbility;
-import mage.abilities.effects.OneShotEffect;
-import mage.cards.Card;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
-import mage.constants.Outcome;
-import mage.constants.Zone;
-import mage.filter.FilterCard;
-import mage.filter.predicate.Predicates;
-import mage.filter.predicate.mageobject.CardTypePredicate;
-import mage.filter.predicate.mageobject.SupertypePredicate;
-import mage.game.Game;
-import mage.game.permanent.Permanent;
-import mage.players.Player;
-import mage.target.common.TargetCardInHand;
+import mage.filter.common.FilterLandCard;
 
 /**
  *
@@ -63,7 +52,7 @@ public class ElvishPioneer extends CardImpl {
         this.toughness = new MageInt(1);
 
         // When Elvish Pioneer enters the battlefield, you may put a basic land card from your hand onto the battlefield tapped.
-        this.addAbility(new EntersBattlefieldTriggeredAbility(new PutLandOnBattlefieldEffect(), false));
+        this.addAbility(new EntersBattlefieldTriggeredAbility(new PutLandFromHandOntoBattlefieldEffect(true, FilterLandCard.basicLandCard()), false));
     }
 
     public ElvishPioneer(final ElvishPioneer card) {
@@ -73,52 +62,5 @@ public class ElvishPioneer extends CardImpl {
     @Override
     public ElvishPioneer copy() {
         return new ElvishPioneer(this);
-    }
-}
-
-class PutLandOnBattlefieldEffect extends OneShotEffect {
-    
-    private static final FilterCard filter = new FilterCard("card other than a basic land card");
-
-    static {
-        filter.add(Predicates.and(new CardTypePredicate(CardType.LAND), new SupertypePredicate("Basic")));
-    }
-
-    private static final String choiceText = "Put a basic land card from your hand onto the battlefield?";
-
-    public PutLandOnBattlefieldEffect() {
-        super(Outcome.PutLandInPlay);
-        this.staticText = "put a basic land card from your hand onto the battlefield";
-    }
-
-    public PutLandOnBattlefieldEffect(final PutLandOnBattlefieldEffect effect) {
-        super(effect);
-    }
-
-    @Override
-    public PutLandOnBattlefieldEffect copy() {
-        return new PutLandOnBattlefieldEffect(this);
-    }
-
-    @Override
-    public boolean apply(Game game, Ability source) {
-        Player player = game.getPlayer(source.getControllerId());
-        if (player == null || !player.chooseUse(Outcome.PutLandInPlay, choiceText, source, game)) {
-            return false;
-        }
-
-        TargetCardInHand target = new TargetCardInHand(filter);
-        if (player.choose(Outcome.PutLandInPlay, target, source.getSourceId(), game)) {
-            Card card = game.getCard(target.getFirstTarget());
-            if (card != null) {
-                card.putOntoBattlefield(game, Zone.HAND, source.getSourceId(), source.getControllerId());
-                Permanent permanent = game.getPermanent(card.getId());
-                if (permanent != null) {
-                        permanent.setTapped(true);
-                }
-                return true;
-            }
-        }
-        return false;
     }
 }
