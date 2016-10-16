@@ -744,8 +744,8 @@ public class DragCardGrid extends JPanel implements DragCardSource, DragCardTarg
         sortButton = new JButton("Sort");
         filterButton = new JButton("Filter");
         visibilityButton = new JButton("Visibility");
-        selectByButton = new JButton("Select By ..");
-        analyseButton = new JButton("Analyse Mana");
+        selectByButton = new JButton("Select By");
+        analyseButton = new JButton("Mana");
 
         // Name and count label
         deckNameAndCountLabel = new JLabel();
