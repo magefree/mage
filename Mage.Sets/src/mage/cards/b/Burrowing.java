@@ -30,20 +30,16 @@ package mage.cards.b;
 import java.util.UUID;
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleStaticAbility;
-import mage.abilities.effects.ContinuousEffectImpl;
 import mage.abilities.effects.common.AttachEffect;
+import mage.abilities.effects.common.continuous.GainAbilityAttachedEffect;
 import mage.abilities.keyword.EnchantAbility;
 import mage.abilities.keyword.MountainwalkAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
+import mage.constants.AttachmentType;
 import mage.constants.CardType;
-import mage.constants.Duration;
-import mage.constants.Layer;
 import mage.constants.Outcome;
-import mage.constants.SubLayer;
 import mage.constants.Zone;
-import mage.game.Game;
-import mage.game.permanent.Permanent;
 import mage.target.TargetPermanent;
 import mage.target.common.TargetCreaturePermanent;
 
@@ -60,13 +56,15 @@ public class Burrowing extends CardImpl {
 
 
         // Enchant creature
-        // Enchanted creature has mountainwalk.
         TargetPermanent auraTarget = new TargetCreaturePermanent();
         this.getSpellAbility().addTarget(auraTarget);
-        this.getSpellAbility().addEffect(new AttachEffect(Outcome.BoostCreature));
+        this.getSpellAbility().addEffect(new AttachEffect(Outcome.AddAbility));
         Ability ability = new EnchantAbility(auraTarget.getTargetName());
         this.addAbility(ability);
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new BurrowingEffect()));
+
+        // Enchanted creature has mountainwalk.
+        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD,
+                new GainAbilityAttachedEffect(new MountainwalkAbility(), AttachmentType.AURA)));
     }
 
     public Burrowing(final Burrowing card) {
@@ -77,51 +75,4 @@ public class Burrowing extends CardImpl {
     public Burrowing copy() {
         return new Burrowing(this);
     }
-}
-
-class BurrowingEffect extends ContinuousEffectImpl {
-
-    public BurrowingEffect() {
-        super(Duration.WhileOnBattlefield, Outcome.BoostCreature);
-        staticText = "Enchanted creature has mountainwalk";
-    }
-
-    public BurrowingEffect(final BurrowingEffect effect) {
-        super(effect);
-    }
-
-    @Override
-    public BurrowingEffect copy() {
-        return new BurrowingEffect(this);
-    }
-
-    @Override
-    public boolean apply(Layer layer, SubLayer sublayer, Ability source, Game game) {
-        Permanent enchantment = game.getPermanent(source.getSourceId());
-        if (enchantment != null && enchantment.getAttachedTo() != null) {
-            Permanent creature = game.getPermanent(enchantment.getAttachedTo());
-            if (creature != null) {
-                switch (layer) {
-                    case AbilityAddingRemovingEffects_6:
-                        if (sublayer == SubLayer.NA) {
-                            creature.addAbility(new MountainwalkAbility(), game);
-                        }
-                        break;
-                }
-                return true;
-            }
-        }
-        return false;
-    }
-
-    @Override
-    public boolean apply(Game game, Ability source) {
-        return false;
-    }
-
-    @Override
-    public boolean hasLayer(Layer layer) {
-        return layer == Layer.AbilityAddingRemovingEffects_6;
-    }
-
 }

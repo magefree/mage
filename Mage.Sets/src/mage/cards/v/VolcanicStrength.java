@@ -30,20 +30,18 @@ package mage.cards.v;
 import java.util.UUID;
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleStaticAbility;
-import mage.abilities.effects.ContinuousEffectImpl;
+import mage.abilities.effects.Effect;
 import mage.abilities.effects.common.AttachEffect;
+import mage.abilities.effects.common.continuous.BoostEnchantedEffect;
+import mage.abilities.effects.common.continuous.GainAbilityAttachedEffect;
 import mage.abilities.keyword.EnchantAbility;
 import mage.abilities.keyword.MountainwalkAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
+import mage.constants.AttachmentType;
 import mage.constants.CardType;
-import mage.constants.Duration;
-import mage.constants.Layer;
 import mage.constants.Outcome;
-import mage.constants.SubLayer;
 import mage.constants.Zone;
-import mage.game.Game;
-import mage.game.permanent.Permanent;
 import mage.target.TargetPermanent;
 import mage.target.common.TargetCreaturePermanent;
 
@@ -62,9 +60,14 @@ public class VolcanicStrength extends CardImpl {
         this.getSpellAbility().addTarget(auraTarget);
         this.getSpellAbility().addEffect(new AttachEffect(Outcome.BoostCreature));
         Ability ability = new EnchantAbility(auraTarget.getTargetName());
-        // Enchanted creature gets +2/+2 and has mountainwalk.
         this.addAbility(ability);
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new VolcanicStrengthEffect()));
+
+        // Enchanted creature gets +2/+2 and has mountainwalk.
+        Effect effect = new GainAbilityAttachedEffect(new MountainwalkAbility(), AttachmentType.AURA);
+        effect.setText("and has mountainwalk");
+        ability = new SimpleStaticAbility(Zone.BATTLEFIELD, new BoostEnchantedEffect(2, 2));
+        ability.addEffect(effect);
+        this.addAbility(ability);
     }
 
     public VolcanicStrength(final VolcanicStrength card) {
@@ -75,57 +78,4 @@ public class VolcanicStrength extends CardImpl {
     public VolcanicStrength copy() {
         return new VolcanicStrength(this);
     }
-}
-
-class VolcanicStrengthEffect extends ContinuousEffectImpl {
-
-    public VolcanicStrengthEffect() {
-        super(Duration.WhileOnBattlefield, Outcome.BoostCreature);
-        staticText = "Enchanted creature gets +2/+2 and has mountainwalk";
-    }
-
-    public VolcanicStrengthEffect(final VolcanicStrengthEffect effect) {
-        super(effect);
-    }
-
-    @Override
-    public VolcanicStrengthEffect copy() {
-        return new VolcanicStrengthEffect(this);
-    }
-
-    @Override
-    public boolean apply(Layer layer, SubLayer sublayer, Ability source, Game game) {
-        Permanent enchantment = game.getPermanent(source.getSourceId());
-        if (enchantment != null && enchantment.getAttachedTo() != null) {
-            Permanent creature = game.getPermanent(enchantment.getAttachedTo());
-            if (creature != null) {
-                switch (layer) {
-                    case PTChangingEffects_7:
-                        if (sublayer == SubLayer.ModifyPT_7c) {
-                            creature.addPower(2);
-                            creature.addToughness(2);
-                        }
-                        break;
-                    case AbilityAddingRemovingEffects_6:
-                        if (sublayer == SubLayer.NA) {
-                            creature.addAbility(new MountainwalkAbility(), game);
-                        }
-                        break;
-                }
-                return true;
-            }
-        }
-        return false;
-    }
-
-    @Override
-    public boolean apply(Game game, Ability source) {
-        return false;
-    }
-
-    @Override
-    public boolean hasLayer(Layer layer) {
-        return layer == Layer.AbilityAddingRemovingEffects_6 || layer == Layer.PTChangingEffects_7;
-    }
-
 }
