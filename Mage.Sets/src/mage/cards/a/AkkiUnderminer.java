@@ -30,19 +30,12 @@ package mage.cards.a;
 
 import java.util.UUID;
 import mage.MageInt;
-import mage.abilities.TriggeredAbilityImpl;
-import mage.abilities.effects.Effect;
+import mage.abilities.common.DealsCombatDamageToAPlayerTriggeredAbility;
 import mage.abilities.effects.common.SacrificeEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.Zone;
 import mage.filter.FilterPermanent;
-import mage.game.Game;
-import mage.game.events.DamagedPlayerEvent;
-import mage.game.events.GameEvent;
-import mage.game.events.GameEvent.EventType;
-import mage.target.targetpointer.FixedTarget;
 
 /**
  *
@@ -58,7 +51,7 @@ public class AkkiUnderminer extends CardImpl {
 
         this.power = new MageInt(1);
         this.toughness = new MageInt(1);
-        this.addAbility(new AkkiUnderminerAbility());
+        this.addAbility(new DealsCombatDamageToAPlayerTriggeredAbility(new SacrificeEffect(new FilterPermanent(), 1, "that player"), false, true));
     }
 
     public AkkiUnderminer (final AkkiUnderminer card) {
@@ -71,43 +64,3 @@ public class AkkiUnderminer extends CardImpl {
     }
 
 }
-
-class AkkiUnderminerAbility extends TriggeredAbilityImpl {
-
-    public AkkiUnderminerAbility() {
-        super(Zone.BATTLEFIELD, new SacrificeEffect(new FilterPermanent(), 1, ""));
-    }
-
-    public AkkiUnderminerAbility(final AkkiUnderminerAbility ability) {
-        super(ability);
-    }
-
-    @Override
-    public AkkiUnderminerAbility copy() {
-        return new AkkiUnderminerAbility(this);
-    }
-
-    @Override
-    public boolean checkEventType(GameEvent event, Game game) {
-        return event.getType() == EventType.DAMAGED_PLAYER;
-    }
-
-    @Override
-    public boolean checkTrigger(GameEvent event, Game game) {
-        DamagedPlayerEvent damageEvent = (DamagedPlayerEvent)event;
-        if (damageEvent.isCombatDamage() && event.getSourceId().equals(this.getSourceId())) {
-            for (Effect effect : this.getEffects()) {
-                    effect.setTargetPointer(new FixedTarget(event.getPlayerId()));
-            }
-            return true;
-        }
-        return false;
-    }
-
-    @Override
-    public String getRule() {
-        return "Whenever {this} deals combat damage to a player, that player sacrifices a permanent.";
-    }
-}
-
-
