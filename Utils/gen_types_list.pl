@@ -4,7 +4,7 @@
 #  File: gen_types_list.pl
 #  Author: spjspj
 #  Purpose: To open all card java files and count all subtypes/supertypes
-#  Purpose: Ones with unique splleings (sic.) are possibly incorrect!
+#  Purpose: Ones with unique spellings are possibly incorrect!
 ##
 
 use strict;
