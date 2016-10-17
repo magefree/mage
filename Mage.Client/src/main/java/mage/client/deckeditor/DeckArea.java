@@ -135,6 +135,15 @@ public class DeckArea extends javax.swing.JPanel {
                 hiddenCards.clear();
                 loadDeck(lastDeck, lastBigCard);
             }
+
+            @Override
+            public void duplicateCards(Collection<CardView> cards) {
+                sideboardList.deselectAll();
+                for (CardView card : cards) {
+                    CardView newCard = new CardView(card);
+                    deckList.addCardView(newCard, true);
+                }
+            }
         });
         sideboardList.addDragCardGridListener(new DragCardGrid.DragCardGridListener() {
             @Override
@@ -155,6 +164,15 @@ public class DeckArea extends javax.swing.JPanel {
             public void showAll() {
                 hiddenCards.clear();
                 loadDeck(lastDeck, lastBigCard);
+            }
+
+            @Override
+            public void duplicateCards(Collection<CardView> cards) {
+                deckList.deselectAll();
+                for (CardView card : cards) {
+                    CardView newCard = new CardView(card);
+                    sideboardList.addCardView(newCard, true);
+                }                
             }
         });
     }
@@ -223,9 +241,8 @@ public class DeckArea extends javax.swing.JPanel {
     }
 
     public void setDeckEditorMode(DeckEditorMode mode) {
-        // Maybe we need this? Right now it isn't needed. Will add if it is.
-        //this.deckList.setDeckEditorMode(mode);
-        //this.sideboardList.setDeckEditorMode(mode);
+        this.deckList.setDeckEditorMode(mode);
+        this.sideboardList.setDeckEditorMode(mode);
     }
 
     private Set<Card> filterHidden(Set<Card> cards) {

@@ -53,6 +53,7 @@ import mage.cards.MageCard;
 import mage.cards.decks.DeckCardInfo;
 import mage.cards.decks.DeckCardLayout;
 import mage.client.MageFrame;
+import mage.client.constants.Constants;
 import mage.client.dialog.PreferencesDialog;
 import mage.client.plugins.impl.Plugins;
 import mage.client.util.CardViewCardTypeComparator;
@@ -76,6 +77,7 @@ import org.mage.card.arcane.CardRenderer;
 public class DragCardGrid extends JPanel implements DragCardSource, DragCardTarget {
 
     private final static Logger LOGGER = Logger.getLogger(DragCardGrid.class);
+    private Constants.DeckEditorMode mode;
 
     @Override
     public Collection<CardView> dragCardList() {
@@ -363,7 +365,7 @@ public class DragCardGrid extends JPanel implements DragCardSource, DragCardTarg
             // Add new cards to grid
             for (CardView card : cards) {
                 card.setSelected(true);
-                addCardView(card);
+                addCardView(card, false);
                 eventSource.addSpecificCard(card, "add-specific-card");
             }
             layoutGrid();
@@ -446,6 +448,10 @@ public class DragCardGrid extends JPanel implements DragCardSource, DragCardTarg
 
         // Store layout and settings then return them
         return new DeckCardLayout(info, saveSettings().toString());
+    }
+
+    public void setDeckEditorMode(Constants.DeckEditorMode mode) {
+        this.mode = mode;
     }
 
     public enum Sort {
@@ -570,6 +576,8 @@ public class DragCardGrid extends JPanel implements DragCardSource, DragCardTarg
         void cardsSelected();
 
         void hideCards(Collection<CardView> card);
+        
+        void duplicateCards(Collection<CardView> cards);
 
         void showAll();
     };
@@ -739,6 +747,9 @@ public class DragCardGrid extends JPanel implements DragCardSource, DragCardTarg
         // Component init
         setLayout(new BorderLayout());
         setOpaque(false);
+
+        // Editting mode
+        this.mode = Constants.DeckEditorMode.LIMITED_BUILDING;
 
         // Toolbar
         sortButton = new JButton("Sort");
@@ -1077,6 +1088,12 @@ public class DragCardGrid extends JPanel implements DragCardSource, DragCardTarg
         }
     }
 
+    private void duplicateSelection() {
+        Collection<CardView> toDuplicate = dragCardList();
+        for (DragCardGridListener l : listeners) {
+            l.duplicateCards(toDuplicate);
+        }
+    }
     private void showAll() {
         for (DragCardGridListener l : listeners) {
             l.showAll();
@@ -1448,7 +1465,7 @@ public class DragCardGrid extends JPanel implements DragCardSource, DragCardTarg
             for (CardView newCard : cardsView.values()) {
                 if (!cardViews.containsKey(newCard.getId())) {
                     // Is a new card
-                    addCardView(newCard);
+                    addCardView(newCard, false);
 
                     // Put it into the appropirate place in the grid given the current sort
                     sortIntoGrid(newCard);
@@ -1471,7 +1488,7 @@ public class DragCardGrid extends JPanel implements DragCardSource, DragCardTarg
             for (CardView newCard : cardsView.values()) {
                 if (!cardViews.containsKey(newCard.getId())) {
                     // Add the new card
-                    addCardView(newCard);
+                    addCardView(newCard, false);
 
                     // Add the new card to tracking
                     Map<String, ArrayList<CardView>> forSetCode;
@@ -1589,10 +1606,17 @@ public class DragCardGrid extends JPanel implements DragCardSource, DragCardTarg
         JMenuItem hide = new JMenuItem("Hide");
         hide.addActionListener(e2 -> hideSelection());
         menu.add(hide);
+
+        // Show 'Duplicate Selection' for FREE_BUILDING
+        if (this.mode == Constants.DeckEditorMode.FREE_BUILDING) {
+            JMenuItem duplicateSelection = new JMenuItem("Duplicate Selection");
+            duplicateSelection.addActionListener(e2 -> duplicateSelection());
+            menu.add(duplicateSelection);
+        }
         menu.show(e.getComponent(), e.getX(), e.getY());
     }
 
-    private void addCardView(final CardView card) {
+    public void addCardView(final CardView card, boolean duplicated) {
         allCards.add(card);
 
         // Update counts
@@ -1651,6 +1675,16 @@ public class DragCardGrid extends JPanel implements DragCardSource, DragCardTarg
         // And add it
         cardContent.add(cardPanel);
         cardViews.put(card.getId(), cardPanel);
+        
+        if (duplicated) {
+            sortIntoGrid(card);
+            eventSource.addSpecificCard(card, "add-specific-card");
+            // Update layout
+            layoutGrid();
+            // Update draw
+            cardScroll.revalidate();
+            repaint();
+        }
     }
 
     private final ArrayList<DragCardGridListener> listeners = new ArrayList<>();
