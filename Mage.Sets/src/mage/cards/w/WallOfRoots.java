@@ -28,21 +28,18 @@
 package mage.cards.w;
 
 import java.util.UUID;
+
+import mage.abilities.costs.common.PutCountersSourceCost;
 import mage.constants.CardType;
 import mage.constants.Zone;
 import mage.MageInt;
 import mage.Mana;
-import mage.abilities.Ability;
-import mage.abilities.costs.Cost;
-import mage.abilities.costs.CostImpl;
 import mage.abilities.effects.common.BasicManaEffect;
 import mage.abilities.keyword.DefenderAbility;
 import mage.abilities.mana.ActivateOncePerTurnManaAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.counters.BoostCounter;
-import mage.game.Game;
-import mage.game.permanent.Permanent;
 
 /**
  *
@@ -61,7 +58,7 @@ public class WallOfRoots extends CardImpl {
         // Defender
         this.addAbility(DefenderAbility.getInstance());
         // Put a -0/-1 counter on Wall of Roots: Add {G} to your mana pool. Activate this ability only once each turn.
-        this.addAbility(new ActivateOncePerTurnManaAbility(Zone.BATTLEFIELD, new BasicManaEffect(Mana.GreenMana(1)), new WallOfRootsCost()));
+        this.addAbility(new ActivateOncePerTurnManaAbility(Zone.BATTLEFIELD, new BasicManaEffect(Mana.GreenMana(1)), new PutCountersSourceCost(new BoostCounter(0, -1))));
     }
 
     public WallOfRoots(final WallOfRoots card) {
@@ -71,36 +68,5 @@ public class WallOfRoots extends CardImpl {
     @Override
     public WallOfRoots copy() {
         return new WallOfRoots(this);
-    }
-}
-
-class WallOfRootsCost extends CostImpl {
-
-    public WallOfRootsCost() {
-        this.text = "Put a -0/-1 counter on {this}";
-    }
-
-    public WallOfRootsCost(WallOfRootsCost cost) {
-        super(cost);
-    }
-
-    @Override
-    public boolean canPay(Ability ability, UUID sourceId, UUID controllerId, Game game) {
-        return true;
-    }
-
-    @Override
-    public boolean pay(Ability ability, Game game, UUID sourceId, UUID controllerId, boolean noMana, Cost costToPay) {
-        Permanent permanent = game.getPermanent(sourceId);
-        if (permanent != null) {
-            permanent.addCounters(new BoostCounter(0, -1), game);
-            this.paid = true;
-        }
-        return paid;
-    }
-
-    @Override
-    public WallOfRootsCost copy() {
-        return new WallOfRootsCost(this);
     }
 }
