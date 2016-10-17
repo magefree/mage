@@ -29,6 +29,7 @@ package mage.cards.r;
 
 import java.util.UUID;
 
+import mage.abilities.effects.common.TapEnchantedEffect;
 import mage.constants.CardType;
 import mage.constants.Zone;
 import mage.abilities.Ability;
@@ -53,8 +54,6 @@ import mage.target.common.TargetCreaturePermanent;
  *
  * @author LevelX2
  */
-
-
 public class RunnersBane extends CardImpl {
 
     private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("creature with power 3 or less");
@@ -74,7 +73,7 @@ public class RunnersBane extends CardImpl {
         this.addAbility(ability);
 
         // When Runner's Bane enters the battlefield, tap enchanted creature.
-        this.addAbility(new EntersBattlefieldTriggeredAbility(new RunnersBaneEffect()));
+        this.addAbility(new EntersBattlefieldTriggeredAbility(new TapEnchantedEffect()));
         // Enchanted creature doesn't untap during its controller's the untap step.
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new DontUntapInControllersUntapStepEnchantedEffect()));
     }
@@ -86,33 +85,5 @@ public class RunnersBane extends CardImpl {
     @Override
     public RunnersBane copy() {
         return new RunnersBane(this);
-    }
-}
-
-class RunnersBaneEffect extends OneShotEffect {
-    RunnersBaneEffect() {
-        super(Outcome.Tap);
-        staticText = "tap enchanted creature";
-    }
-
-    RunnersBaneEffect(final RunnersBaneEffect effect) {
-        super(effect);
-    }
-
-    @Override
-    public boolean apply(Game game, Ability source) {
-        Permanent enchantment = game.getPermanent(source.getSourceId());
-        if (enchantment != null && enchantment.getAttachedTo() != null) {
-            Permanent permanent = game.getPermanent(enchantment.getAttachedTo());
-            if (permanent != null) {
-                return permanent.tap(game);
-            }
-        }
-        return false;
-    }
-
-    @Override
-    public RunnersBaneEffect copy() {
-        return new RunnersBaneEffect();
     }
 }
