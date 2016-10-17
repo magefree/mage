@@ -28,13 +28,15 @@
 package mage.cards.v;
 
 import java.util.UUID;
+
+import mage.abilities.common.BeginningOfEndStepTriggeredAbility;
 import mage.constants.CardType;
 import mage.MageInt;
-import mage.abilities.common.BeginningOfYourEndStepTriggeredAbility;
 import mage.abilities.effects.common.ReturnToHandSourceEffect;
 import mage.abilities.keyword.HasteAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
+import mage.constants.TargetController;
 
 /**
  *
@@ -52,7 +54,7 @@ public class ViashinoCutthroat extends CardImpl {
         // Haste
         this.addAbility(HasteAbility.getInstance());
         // At the beginning of the end step, return Viashino Cutthroat to its owner's hand.
-        this.addAbility(new BeginningOfYourEndStepTriggeredAbility(new ReturnToHandSourceEffect(true), false));
+        this.addAbility(new BeginningOfEndStepTriggeredAbility(new ReturnToHandSourceEffect(true), TargetController.ANY, false));
     }
 
     public ViashinoCutthroat(final ViashinoCutthroat card) {
