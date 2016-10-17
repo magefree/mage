@@ -37,31 +37,22 @@ import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.Duration;
 import mage.constants.Zone;
-import mage.filter.FilterCard;
 import mage.filter.common.FilterControlledCreaturePermanent;
-import mage.filter.predicate.mageobject.ColorPredicate;
 
 import java.util.UUID;
-import mage.filter.predicate.Predicates;
 
 /**
  * @author Loki, noxx
  */
 public class AkromasMemorial extends CardImpl {
 
-    private static final FilterCard protectionFilter = new FilterCard("black and from red");
-
-    static {
-        protectionFilter.add(Predicates.or(new ColorPredicate(ObjectColor.BLACK),new ColorPredicate(ObjectColor.RED)));
-    }
-
-
     public AkromasMemorial(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.ARTIFACT},"{7}");
         this.supertype.add("Legendary");
 
         // Creatures you control have flying, first strike, vigilance, trample, haste, and protection from black and from red.
-        CompoundAbility compoundAbilities = new CompoundAbility(FlyingAbility.getInstance(), FirstStrikeAbility.getInstance(), VigilanceAbility.getInstance(), TrampleAbility.getInstance(), HasteAbility.getInstance(), new ProtectionAbility(protectionFilter));
+        CompoundAbility compoundAbilities = new CompoundAbility(FlyingAbility.getInstance(), FirstStrikeAbility.getInstance(), VigilanceAbility.getInstance(),
+                TrampleAbility.getInstance(), HasteAbility.getInstance(), ProtectionAbility.from(ObjectColor.BLACK, ObjectColor.RED));
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new GainAbilityControlledEffect(compoundAbilities, Duration.WhileOnBattlefield, new FilterControlledCreaturePermanent("Creatures"))));
     }
 

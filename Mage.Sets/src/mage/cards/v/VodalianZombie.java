@@ -31,8 +31,6 @@ import java.util.UUID;
 import mage.MageInt;
 import mage.ObjectColor;
 import mage.abilities.keyword.ProtectionAbility;
-import mage.filter.FilterCard;
-import mage.filter.predicate.mageobject.ColorPredicate;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
@@ -42,11 +40,7 @@ import mage.constants.CardType;
  * @author Jgod
  */
 public class VodalianZombie extends CardImpl {
-    private static final FilterCard protectionFilter = new FilterCard("green");
-    static {
-        protectionFilter.add(new ColorPredicate(ObjectColor.GREEN));
-    }
-    
+
     public VodalianZombie(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{U}{B}");
         this.subtype.add("Merfolk");
@@ -55,7 +49,7 @@ public class VodalianZombie extends CardImpl {
         this.toughness = new MageInt(2);
 
         // Protection from green
-        this.addAbility(new ProtectionAbility(protectionFilter));
+        this.addAbility(ProtectionAbility.from(ObjectColor.GREEN));
     }
 
     public VodalianZombie(final VodalianZombie card) {

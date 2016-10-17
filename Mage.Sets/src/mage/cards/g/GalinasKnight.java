@@ -34,8 +34,6 @@ import mage.abilities.keyword.ProtectionAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.filter.FilterCard;
-import mage.filter.predicate.mageobject.ColorPredicate;
 
 /**
  *
@@ -43,12 +41,6 @@ import mage.filter.predicate.mageobject.ColorPredicate;
  */
 public class GalinasKnight extends CardImpl {
 
-    private static final FilterCard protectionFilter = new FilterCard("Red");
-    
-    static {
-      protectionFilter.add(new ColorPredicate(ObjectColor.RED));
-    }
-    
     public GalinasKnight(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{W}{U}");
         this.subtype.add("Merfolk");
@@ -57,7 +49,7 @@ public class GalinasKnight extends CardImpl {
         this.toughness = new MageInt(2);
 
         // Protection from red
-        this.addAbility(new ProtectionAbility(protectionFilter));
+        this.addAbility(ProtectionAbility.from(ObjectColor.RED));
     }
 
     public GalinasKnight(final GalinasKnight card) {

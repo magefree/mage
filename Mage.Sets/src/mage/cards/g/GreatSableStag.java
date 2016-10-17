@@ -38,21 +38,12 @@ import mage.abilities.effects.common.CantBeCounteredSourceEffect;
 import mage.abilities.keyword.ProtectionAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
-import mage.filter.FilterCard;
-import mage.filter.predicate.mageobject.ColorPredicate;
 
 /**
  *
  * @author BetaSteward_at_googlemail.com
  */
 public class GreatSableStag extends CardImpl {
-    private static final FilterCard filter1 = new FilterCard("Blue");
-    private static final FilterCard filter2 = new FilterCard("Black");
-
-    static {
-        filter1.add(new ColorPredicate(ObjectColor.BLUE));
-        filter2.add(new ColorPredicate(ObjectColor.BLACK));
-    }
 
     public GreatSableStag(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{1}{G}{G}");
@@ -61,8 +52,7 @@ public class GreatSableStag extends CardImpl {
         this.power = new MageInt(3);
         this.toughness = new MageInt(3);
 
-        this.addAbility(new ProtectionAbility(filter1));
-        this.addAbility(new ProtectionAbility(filter2));
+        this.addAbility(ProtectionAbility.from(ObjectColor.BLUE, ObjectColor.BLACK));
         this.addAbility(new SimpleStaticAbility(Zone.STACK, new CantBeCounteredSourceEffect()));
     }
 

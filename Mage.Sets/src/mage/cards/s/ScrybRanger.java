@@ -41,9 +41,7 @@ import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Zone;
-import mage.filter.FilterCard;
 import mage.filter.common.FilterControlledLandPermanent;
-import mage.filter.predicate.mageobject.ColorPredicate;
 import mage.filter.predicate.mageobject.SubtypePredicate;
 import mage.target.common.TargetControlledPermanent;
 import mage.target.common.TargetCreaturePermanent;
@@ -54,10 +52,8 @@ import mage.target.common.TargetCreaturePermanent;
  */
 public class ScrybRanger extends CardImpl {
 
-    private static final FilterCard filter = new FilterCard("blue");
     private static final FilterControlledLandPermanent filterForest = new FilterControlledLandPermanent("Forest");
     static {
-        filter.add(new ColorPredicate(ObjectColor.BLUE));
         filterForest.add(new SubtypePredicate("Forest"));
     }
 
@@ -73,7 +69,7 @@ public class ScrybRanger extends CardImpl {
         // Flying
         this.addAbility(FlyingAbility.getInstance());
         // protection from blue
-        this.addAbility(new ProtectionAbility(filter));
+        this.addAbility(ProtectionAbility.from(ObjectColor.BLUE));
         // Return a Forest you control to its owner's hand: Untap target creature. Activate this ability only once each turn.
         Ability ability = new LimitedTimesPerTurnActivatedAbility(Zone.BATTLEFIELD, new UntapTargetEffect(), new ReturnToHandChosenControlledPermanentCost(new TargetControlledPermanent(filterForest)));
         ability.addTarget(new TargetCreaturePermanent(1));

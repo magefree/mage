@@ -35,20 +35,12 @@ import mage.abilities.keyword.FlyingAbility;
 import mage.abilities.keyword.ProtectionAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
-import mage.filter.FilterCard;
-import mage.filter.predicate.mageobject.ColorPredicate;
 
 /**
  *
  * @author Plopman
  */
 public class WeatherseedFaeries extends CardImpl {
-
-    private static final FilterCard filter = new FilterCard("red");
-
-    static {
-        filter.add(new ColorPredicate(ObjectColor.RED));
-    }
 
     public WeatherseedFaeries(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{2}{U}");
@@ -60,7 +52,7 @@ public class WeatherseedFaeries extends CardImpl {
         // Flying
         this.addAbility(FlyingAbility.getInstance());
         // protection from red
-        this.addAbility(new ProtectionAbility(filter));
+        this.addAbility(ProtectionAbility.from(ObjectColor.RED));
     }
 
     public WeatherseedFaeries(final WeatherseedFaeries card) {

@@ -36,21 +36,12 @@ import mage.abilities.keyword.ForestwalkAbility;
 import mage.abilities.keyword.ProtectionAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
-import mage.filter.FilterObject;
-import mage.filter.predicate.mageobject.ColorPredicate;
 
 /**
  *
  * @author LevelX2
  */
-
-
 public class WoodlotCrawler extends CardImpl {
-
-    private static final FilterObject filter = new FilterObject("green");
-    static {
-        filter.add(new ColorPredicate(ObjectColor.GREEN));
-    }
 
     public WoodlotCrawler (UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{U}{B}");
@@ -62,7 +53,7 @@ public class WoodlotCrawler extends CardImpl {
         // Forestwalk
         this.addAbility(new ForestwalkAbility());
         // Protection from green
-        this.addAbility(new ProtectionAbility(filter));
+        this.addAbility(ProtectionAbility.from(ObjectColor.GREEN));
 
     }
 

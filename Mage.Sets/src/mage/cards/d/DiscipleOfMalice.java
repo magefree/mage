@@ -36,8 +36,6 @@ import mage.abilities.keyword.ProtectionAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.filter.FilterCard;
-import mage.filter.predicate.mageobject.ColorPredicate;
 
 /**
  *
@@ -45,12 +43,6 @@ import mage.filter.predicate.mageobject.ColorPredicate;
  */
 public class DiscipleOfMalice extends CardImpl {
     
-    private static final FilterCard filter = new FilterCard("White");
-
-    static {
-        filter.add(new ColorPredicate(ObjectColor.WHITE));
-    }
-
     public DiscipleOfMalice(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{1}{B}");
         this.subtype.add("Human");
@@ -59,7 +51,7 @@ public class DiscipleOfMalice extends CardImpl {
         this.toughness = new MageInt(2);
 
         // Protection from white
-        this.addAbility(new ProtectionAbility(filter));
+        this.addAbility(ProtectionAbility.from(ObjectColor.WHITE));
         // Cycling {2}
         this.addAbility(new CyclingAbility(new ManaCostsImpl("{2}")));
     }

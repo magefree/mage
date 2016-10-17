@@ -38,25 +38,17 @@ import mage.abilities.keyword.*;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.Zone;
-import mage.filter.FilterCard;
 import mage.filter.common.FilterAttackingCreature;
-import mage.filter.predicate.mageobject.ColorPredicate;
 
 import java.util.UUID;
 
 /**
  *
  * @author jeffwadsworth
-
  */
 public class SpiritOfTheNight extends CardImpl {
     
     private static final String rule = "Spirit of the Night has first strike as long as it's attacking";
-    private static final FilterCard filter = new FilterCard("Black");
-    
-    static {
-        filter.add(new ColorPredicate(ObjectColor.BLACK));
-    }
 
     public SpiritOfTheNight(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{6}{B}{B}{B}");
@@ -77,7 +69,7 @@ public class SpiritOfTheNight extends CardImpl {
         this.addAbility(HasteAbility.getInstance());
         
         // protection from black
-        this.addAbility(new ProtectionAbility(filter));
+        this.addAbility(ProtectionAbility.from(ObjectColor.BLACK));
         
         // Spirit of the Night has first strike as long as it's attacking.
         ConditionalContinuousEffect effect = new ConditionalContinuousEffect(new GainAbilitySourceEffect(FirstStrikeAbility.getInstance()), new SourceMatchesFilterCondition(new FilterAttackingCreature()), rule);

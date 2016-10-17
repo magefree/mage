@@ -44,20 +44,12 @@ import mage.constants.AbilityWord;
 import mage.constants.CardType;
 import mage.constants.Duration;
 import mage.constants.Zone;
-import mage.filter.FilterCard;
-import mage.filter.predicate.mageobject.ColorPredicate;
 
 /**
  *
  * @author LoneFox
  */
 public class MysticFamiliar extends CardImpl {
-
-    private static final FilterCard filter = new FilterCard("black");
-
-    static {
-        filter.add(new ColorPredicate(ObjectColor.BLACK));
-    }
 
     public MysticFamiliar(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{1}{W}");
@@ -71,7 +63,7 @@ public class MysticFamiliar extends CardImpl {
         Ability ability = new SimpleStaticAbility(Zone.BATTLEFIELD, new ConditionalContinuousEffect(
             new BoostSourceEffect(1, 1, Duration.WhileOnBattlefield), new CardsInControllerGraveCondition(7),
             "As long as seven or more cards are in your graveyard, {this} gets +1/+1"));
-        ability.addEffect(new ConditionalContinuousEffect(new GainAbilitySourceEffect(new ProtectionAbility(filter)),
+        ability.addEffect(new ConditionalContinuousEffect(new GainAbilitySourceEffect(ProtectionAbility.from(ObjectColor.BLACK)),
         new CardsInControllerGraveCondition(7), "and has protection from black"));
         ability.setAbilityWord(AbilityWord.THRESHOLD);
         this.addAbility(ability);

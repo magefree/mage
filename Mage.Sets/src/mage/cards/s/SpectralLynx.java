@@ -38,8 +38,6 @@ import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Zone;
-import mage.filter.FilterCard;
-import mage.filter.predicate.mageobject.ColorPredicate;
 
 /**
  *
@@ -47,12 +45,6 @@ import mage.filter.predicate.mageobject.ColorPredicate;
 
  */
 public class SpectralLynx extends CardImpl {
-
-    private static final FilterCard filter = new FilterCard("green");
-
-    static {
-        filter.add(new ColorPredicate(ObjectColor.GREEN));
-    }
 
     public SpectralLynx(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{1}{W}");
@@ -62,7 +54,7 @@ public class SpectralLynx extends CardImpl {
         this.toughness = new MageInt(1);
 
         // Protection from green
-        this.addAbility(new ProtectionAbility(filter));
+        this.addAbility(ProtectionAbility.from(ObjectColor.GREEN));
         // {B}: Regenerate Spectral Lynx.
         this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new RegenerateSourceEffect(), new ManaCostsImpl("{B}")));
     }

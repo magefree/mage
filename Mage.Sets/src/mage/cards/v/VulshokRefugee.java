@@ -34,20 +34,12 @@ import mage.ObjectColor;
 import mage.abilities.keyword.ProtectionAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
-import mage.filter.FilterCard;
-import mage.filter.predicate.mageobject.ColorPredicate;
 
 /**
  *
  * @author North
  */
 public class VulshokRefugee extends CardImpl {
-
-    private static final FilterCard filter = new FilterCard("Red");
-
-    static {
-        filter.add(new ColorPredicate(ObjectColor.RED));
-    }
 
     public VulshokRefugee(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{1}{R}{R}");
@@ -57,7 +49,7 @@ public class VulshokRefugee extends CardImpl {
         this.power = new MageInt(3);
         this.toughness = new MageInt(2);
 
-        this.addAbility(new ProtectionAbility(filter));
+        this.addAbility(ProtectionAbility.from(ObjectColor.RED));
     }
 
     public VulshokRefugee(final VulshokRefugee card) {

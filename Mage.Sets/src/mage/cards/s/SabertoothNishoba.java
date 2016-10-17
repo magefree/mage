@@ -35,22 +35,12 @@ import mage.abilities.keyword.TrampleAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.filter.FilterCard;
-import mage.filter.predicate.Predicates;
-import mage.filter.predicate.mageobject.ColorPredicate;
 
 /**
  *
  * @author LoneFox
-
  */
 public class SabertoothNishoba extends CardImpl {
-
-    private static final FilterCard filter = new FilterCard("blue and from red");
-
-    static {
-        filter.add(Predicates.or(new ColorPredicate(ObjectColor.BLUE), new ColorPredicate(ObjectColor.RED)));
-    }
 
     public SabertoothNishoba(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{4}{G}{W}");
@@ -63,7 +53,7 @@ public class SabertoothNishoba extends CardImpl {
         // Trample
         this.addAbility(TrampleAbility.getInstance());
         // protection from blue and from red
-        this.addAbility(new ProtectionAbility(filter));
+        this.addAbility(ProtectionAbility.from(ObjectColor.BLUE, ObjectColor.RED));
     }
 
     public SabertoothNishoba(final SabertoothNishoba card) {

@@ -48,9 +48,6 @@ import mage.constants.AttachmentType;
 import mage.constants.CardType;
 import mage.constants.Outcome;
 import mage.constants.Zone;
-import mage.filter.FilterCard;
-import mage.filter.predicate.Predicates;
-import mage.filter.predicate.mageobject.ColorPredicate;
 import mage.game.Game;
 import mage.game.events.DamagedPlayerEvent;
 import mage.game.events.GameEvent;
@@ -64,13 +61,6 @@ import mage.target.TargetPlayer;
  * @author Loki
  */
 public class SwordOfWarAndPeace extends CardImpl {
-    private static final FilterCard filter = new FilterCard("red and from white");
-
-    static {
-        filter.add(Predicates.or(
-                new ColorPredicate(ObjectColor.RED),
-                new ColorPredicate(ObjectColor.WHITE)));
-    }
 
     public SwordOfWarAndPeace (UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.ARTIFACT},"{3}");
@@ -78,7 +68,7 @@ public class SwordOfWarAndPeace extends CardImpl {
         
         // Equipped creature gets +2/+2 and has protection from red and from white.        
         Ability ability = new SimpleStaticAbility(Zone.BATTLEFIELD, new BoostEquippedEffect(2, 2));
-        Effect effect = new GainAbilityAttachedEffect(new ProtectionAbility(filter), AttachmentType.EQUIPMENT);
+        Effect effect = new GainAbilityAttachedEffect(ProtectionAbility.from(ObjectColor.RED, ObjectColor.WHITE), AttachmentType.EQUIPMENT);
         effect.setText("and has protection from red and from white");
         ability.addEffect(effect);
         this.addAbility(ability);

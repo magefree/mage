@@ -44,20 +44,12 @@ import mage.constants.AbilityWord;
 import mage.constants.CardType;
 import mage.constants.Duration;
 import mage.constants.Zone;
-import mage.filter.FilterCard;
-import mage.filter.predicate.mageobject.ColorPredicate;
 
 /**
  *
  * @author LevelX2
  */
 public class MysticEnforcer extends CardImpl {
-
-    private static final FilterCard filter = new FilterCard("Black");
-
-    static {
-        filter.add(new ColorPredicate(ObjectColor.BLACK));
-    }
 
     public MysticEnforcer(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{2}{G}{W}");
@@ -69,7 +61,7 @@ public class MysticEnforcer extends CardImpl {
         this.toughness = new MageInt(3);
 
         // Protection from black
-        this.addAbility(new ProtectionAbility(filter));
+        this.addAbility(ProtectionAbility.from(ObjectColor.BLACK));
         // Threshold - As long as seven or more cards are in your graveyard, Mystic Enforcer gets +3/+3 and has flying.
         Ability thresholdAbility = new SimpleStaticAbility(Zone.BATTLEFIELD, new ConditionalContinuousEffect(
             new BoostSourceEffect(3, 3, Duration.WhileOnBattlefield), new CardsInControllerGraveCondition(7),

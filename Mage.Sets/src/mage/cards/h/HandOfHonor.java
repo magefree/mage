@@ -36,19 +36,11 @@ import mage.abilities.keyword.BushidoAbility;
 import mage.abilities.keyword.ProtectionAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
-import mage.filter.FilterCard;
-import mage.filter.predicate.mageobject.ColorPredicate;
 
 /**
  * @author anonymous
  */
 public class HandOfHonor extends CardImpl {
-
-    private static final FilterCard filter = new FilterCard("black");
-
-    static {
-        filter.add(new ColorPredicate(ObjectColor.BLACK));
-    }
 
     public HandOfHonor(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{W}{W}");
@@ -58,7 +50,7 @@ public class HandOfHonor extends CardImpl {
         this.power = new MageInt(2);
         this.toughness = new MageInt(2);
         // Protection from black
-        this.addAbility(new ProtectionAbility(filter));
+        this.addAbility(ProtectionAbility.from(ObjectColor.BLACK));
         this.addAbility(new BushidoAbility(1));
     }
 

@@ -37,8 +37,6 @@ import mage.abilities.keyword.ProtectionAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.filter.FilterCard;
-import mage.filter.predicate.mageobject.ColorPredicate;
 
 /**
  *
@@ -46,16 +44,7 @@ import mage.filter.predicate.mageobject.ColorPredicate;
  */
 public class PhyrexianCrusader extends CardImpl {
 
-    private static final FilterCard filter = new FilterCard("Red");
-    private static final FilterCard filter2 = new FilterCard("White");
-
-    static {
-        filter.add(new ColorPredicate(ObjectColor.RED));
-
-        filter2.add(new ColorPredicate(ObjectColor.WHITE));
-    }
-
-    public PhyrexianCrusader (UUID ownerId, CardSetInfo setInfo) {
+    public PhyrexianCrusader(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{1}{B}{B}");
         this.subtype.add("Zombie");
         this.subtype.add("Knight");
@@ -66,13 +55,12 @@ public class PhyrexianCrusader extends CardImpl {
         // First strike,
         this.addAbility(FirstStrikeAbility.getInstance());
         // protection from red and from white
-        this.addAbility(new ProtectionAbility(filter));
-        this.addAbility(new ProtectionAbility(filter2));
+        this.addAbility(ProtectionAbility.from(ObjectColor.RED, ObjectColor.WHITE));
         // Infect
         this.addAbility(InfectAbility.getInstance());
     }
 
-    public PhyrexianCrusader (final PhyrexianCrusader card) {
+    public PhyrexianCrusader(final PhyrexianCrusader card) {
         super(card);
     }
 

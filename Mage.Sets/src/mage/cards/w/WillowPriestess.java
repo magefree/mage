@@ -42,7 +42,6 @@ import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Duration;
 import mage.constants.Zone;
-import mage.filter.FilterCard;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.filter.common.FilterPermanentCard;
 import mage.filter.predicate.mageobject.ColorPredicate;
@@ -58,12 +57,10 @@ public class WillowPriestess extends CardImpl {
     
     private static final FilterPermanentCard filter = new FilterPermanentCard("Faerie");
     private static final FilterCreaturePermanent greenCreature = new FilterCreaturePermanent("green creature");
-    private static final FilterCard protectionFilter = new FilterCard("black");
 
     static {
         filter.add(new SubtypePredicate("Faerie"));
         greenCreature.add(new ColorPredicate(ObjectColor.GREEN));
-        protectionFilter.add(new ColorPredicate(ObjectColor.BLACK));
     }
 
     public WillowPriestess(UUID ownerId, CardSetInfo setInfo) {
@@ -80,7 +77,7 @@ public class WillowPriestess extends CardImpl {
         
         // {2}{G}: Target green creature gains protection from black until end of turn.
         Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD,
-                new GainAbilityTargetEffect(new ProtectionAbility(protectionFilter), Duration.EndOfTurn), new ManaCostsImpl("{2}{G}"));
+                new GainAbilityTargetEffect(ProtectionAbility.from(ObjectColor.BLACK), Duration.EndOfTurn), new ManaCostsImpl("{2}{G}"));
         Target target = new TargetPermanent(greenCreature);
         ability.addTarget(target);
         this.addAbility(ability);

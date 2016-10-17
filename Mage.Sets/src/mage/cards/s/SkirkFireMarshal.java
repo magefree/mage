@@ -39,10 +39,8 @@ import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Zone;
-import mage.filter.FilterCard;
 import mage.filter.common.FilterControlledCreaturePermanent;
 import mage.filter.predicate.Predicates;
-import mage.filter.predicate.mageobject.ColorPredicate;
 import mage.filter.predicate.mageobject.SubtypePredicate;
 import mage.filter.predicate.permanent.TappedPredicate;
 import mage.target.common.TargetControlledCreaturePermanent;
@@ -53,11 +51,9 @@ import mage.target.common.TargetControlledCreaturePermanent;
  */
 public class SkirkFireMarshal extends CardImpl {
 
-    private static final FilterCard filterProtection = new FilterCard("red");
     private static final FilterControlledCreaturePermanent filter = new FilterControlledCreaturePermanent("untapped Goblins you control");
 
     static {
-        filterProtection.add(new ColorPredicate(ObjectColor.RED));
         filter.add(Predicates.not(new TappedPredicate()));
         filter.add(new SubtypePredicate("Goblin"));
     }
@@ -70,7 +66,7 @@ public class SkirkFireMarshal extends CardImpl {
         this.toughness = new MageInt(2);
 
         // Protection from red
-        this.addAbility(new ProtectionAbility(filterProtection));
+        this.addAbility(ProtectionAbility.from(ObjectColor.RED));
 
         // Tap five untapped Goblins you control: Skirk Fire Marshal deals 10 damage to each creature and each player.
         Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD,

@@ -38,7 +38,6 @@ import mage.abilities.keyword.ProtectionAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.filter.FilterCard;
 import mage.filter.common.FilterCreatureCard;
 import mage.filter.predicate.Predicates;
 import mage.filter.predicate.mageobject.ColorPredicate;
@@ -47,15 +46,12 @@ import mage.target.common.TargetCardInYourGraveyard;
 /**
  *
  * @author LoneFox
-
  */
 public class CryptAngel extends CardImpl {
 
-    private static final FilterCard filter = new FilterCard("white");
     private static final FilterCreatureCard filter2 = new FilterCreatureCard("blue or red creature card from your graveyard");
 
     static {
-        filter.add(new ColorPredicate(ObjectColor.WHITE));
         filter2.add(Predicates.or(new ColorPredicate(ObjectColor.RED), new ColorPredicate(ObjectColor.BLUE)));
     }
 
@@ -68,7 +64,7 @@ public class CryptAngel extends CardImpl {
         // Flying
         this.addAbility(FlyingAbility.getInstance());
         // protection from white
-        this.addAbility(new ProtectionAbility(filter));
+        this.addAbility(ProtectionAbility.from(ObjectColor.WHITE));
         // When Crypt Angel enters the battlefield, return target blue or red creature card from your graveyard to your hand.
         Ability ability = new EntersBattlefieldTriggeredAbility(new ReturnToHandTargetEffect(), false);
         ability.addTarget(new TargetCardInYourGraveyard(filter2));

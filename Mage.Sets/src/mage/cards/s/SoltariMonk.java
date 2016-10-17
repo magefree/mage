@@ -35,19 +35,12 @@ import mage.abilities.keyword.ProtectionAbility;
 import mage.abilities.keyword.ShadowAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
-import mage.filter.FilterCard;
-import mage.filter.predicate.mageobject.ColorPredicate;
 
 /**
  *
  * @author Loki
  */
 public class SoltariMonk extends CardImpl {
-    private static final FilterCard filter = new FilterCard("Black");
-
-    static {
-        filter.add(new ColorPredicate(ObjectColor.BLACK));
-    }
 
     public SoltariMonk(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{W}{W}");
@@ -59,7 +52,7 @@ public class SoltariMonk extends CardImpl {
         this.toughness = new MageInt(1);
 
         // Protection from black
-        this.addAbility(new ProtectionAbility(filter));
+        this.addAbility(ProtectionAbility.from(ObjectColor.BLACK));
         // Shadow
         this.addAbility(ShadowAbility.getInstance());
     }

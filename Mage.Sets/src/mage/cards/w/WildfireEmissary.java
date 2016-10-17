@@ -39,8 +39,6 @@ import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Duration;
 import mage.constants.Zone;
-import mage.filter.FilterCard;
-import mage.filter.predicate.mageobject.ColorPredicate;
 
 /**
  *
@@ -48,12 +46,6 @@ import mage.filter.predicate.mageobject.ColorPredicate;
  */
 public class WildfireEmissary extends CardImpl {
     
-    private static final FilterCard filter = new FilterCard("white");
-
-    static {
-        filter.add(new ColorPredicate(ObjectColor.WHITE));
-    }
-
     public WildfireEmissary(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{3}{R}");
         this.subtype.add("Efreet");
@@ -61,7 +53,7 @@ public class WildfireEmissary extends CardImpl {
         this.toughness = new MageInt(4);
 
         // Protection from white
-        this.addAbility(new ProtectionAbility(filter));
+        this.addAbility(ProtectionAbility.from(ObjectColor.WHITE));
         
         // {1}{R}: Wildfire Emissary gets +1/+0 until end of turn.
         this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new BoostSourceEffect(1, 0, Duration.EndOfTurn), new ManaCostsImpl("{1}{R}")));

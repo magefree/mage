@@ -44,21 +44,12 @@ import mage.constants.AbilityWord;
 import mage.constants.CardType;
 import mage.constants.Duration;
 import mage.constants.Zone;
-import mage.filter.FilterCard;
-import mage.filter.predicate.Predicates;
-import mage.filter.predicate.mageobject.ColorPredicate;
 
 /**
  *
  * @author cbt33
  */
 public class MysticCrusader extends CardImpl {
-
-    static final FilterCard filter = new FilterCard("black and from red");
-
-    static {
-        filter.add(Predicates.or(new ColorPredicate(ObjectColor.BLACK),new ColorPredicate(ObjectColor.RED)));
-    }
 
     public MysticCrusader(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{1}{W}{W}");
@@ -70,7 +61,7 @@ public class MysticCrusader extends CardImpl {
         this.toughness = new MageInt(1);
 
         // Protection from black and from red
-        this.addAbility(new ProtectionAbility(filter));
+        this.addAbility(ProtectionAbility.from(ObjectColor.BLACK, ObjectColor.RED));
         // Threshold - As long as seven or more cards are in your graveyard, Mystic Crusader gets +1/+1 and has flying.
         Ability ability = new SimpleStaticAbility(Zone.BATTLEFIELD, new ConditionalContinuousEffect(
             new BoostSourceEffect(1, 1, Duration.WhileOnBattlefield), new CardsInControllerGraveCondition(7),

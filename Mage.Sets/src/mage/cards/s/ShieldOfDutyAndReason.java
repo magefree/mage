@@ -42,9 +42,6 @@ import mage.abilities.keyword.EnchantAbility;
 import mage.abilities.keyword.ProtectionAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
-import mage.filter.FilterCard;
-import mage.filter.predicate.Predicates;
-import mage.filter.predicate.mageobject.ColorPredicate;
 import mage.target.TargetPermanent;
 import mage.target.common.TargetCreaturePermanent;
 
@@ -53,12 +50,6 @@ import mage.target.common.TargetCreaturePermanent;
  * @author LoneFox
  */
 public class ShieldOfDutyAndReason extends CardImpl {
-
-    private static final FilterCard filter = new FilterCard("green and from blue");
-
-    static {
-        filter.add(Predicates.or(new ColorPredicate(ObjectColor.GREEN), new ColorPredicate(ObjectColor.BLUE)));
-    }
 
     public ShieldOfDutyAndReason(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.ENCHANTMENT},"{W}");
@@ -71,7 +62,7 @@ public class ShieldOfDutyAndReason extends CardImpl {
         Ability ability = new EnchantAbility(auraTarget.getTargetName());
         this.addAbility(ability);
         // Enchanted creature has protection from green and from blue.
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new GainAbilityAttachedEffect(new ProtectionAbility(filter),
+        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new GainAbilityAttachedEffect(ProtectionAbility.from(ObjectColor.GREEN, ObjectColor.BLUE),
             AttachmentType.AURA, Duration.WhileOnBattlefield)));
     }
 

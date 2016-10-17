@@ -35,21 +35,12 @@ import mage.abilities.keyword.ProtectionAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.filter.FilterCard;
-import mage.filter.predicate.mageobject.ColorPredicate;
 
 /**
  *
  * @author LoneFox
-
  */
 public class MountainYeti extends CardImpl {
-
-    private static final FilterCard filter = new FilterCard("White");
-
-    static {
-        filter.add(new ColorPredicate(ObjectColor.WHITE));
-    }
 
     public MountainYeti(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{2}{R}{R}");
@@ -60,7 +51,7 @@ public class MountainYeti extends CardImpl {
         // Mountainwalk
         this.addAbility(new MountainwalkAbility());
         // protection from white
-        this.addAbility(new ProtectionAbility(filter));
+        this.addAbility(ProtectionAbility.from(ObjectColor.WHITE));
     }
 
     public MountainYeti(final MountainYeti card) {

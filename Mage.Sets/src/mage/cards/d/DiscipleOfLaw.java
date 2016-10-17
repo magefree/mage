@@ -37,20 +37,12 @@ import mage.abilities.keyword.CyclingAbility;
 import mage.abilities.keyword.ProtectionAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
-import mage.filter.FilterCard;
-import mage.filter.predicate.mageobject.ColorPredicate;
 
 /**
  *
  * @author Backfir3
  */
 public class DiscipleOfLaw extends CardImpl {
-
-    private static final FilterCard filter = new FilterCard("Red");
-
-    static {
-        filter.add(new ColorPredicate(ObjectColor.RED));
-    }
 
     public DiscipleOfLaw(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{1}{W}");
@@ -59,9 +51,9 @@ public class DiscipleOfLaw extends CardImpl {
 
         this.power = new MageInt(1);
         this.toughness = new MageInt(2);
-        this.addAbility(new ProtectionAbility(filter));
-                this.addAbility(new CyclingAbility(new ManaCostsImpl("{2}")));
-        }
+        this.addAbility(ProtectionAbility.from(ObjectColor.RED));
+        this.addAbility(new CyclingAbility(new ManaCostsImpl("{2}")));
+    }
 
     public DiscipleOfLaw(final DiscipleOfLaw card) {
         super(card);

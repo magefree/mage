@@ -34,8 +34,6 @@ import mage.abilities.keyword.ProtectionAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.filter.FilterCard;
-import mage.filter.predicate.mageobject.ColorPredicate;
 
 /**
  *
@@ -43,12 +41,6 @@ import mage.filter.predicate.mageobject.ColorPredicate;
  */
 public class LlanowarKnight extends CardImpl {
 
-    private static final FilterCard protectionFilter = new FilterCard("Black");
-    
-    static {
-      protectionFilter.add(new ColorPredicate(ObjectColor.BLACK));
-    }
-    
     public LlanowarKnight(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{G}{W}");
         this.subtype.add("Elf");
@@ -57,7 +49,7 @@ public class LlanowarKnight extends CardImpl {
         this.toughness = new MageInt(2);
 
         // Protection from black
-        this.addAbility(new ProtectionAbility(protectionFilter));
+        this.addAbility(ProtectionAbility.from(ObjectColor.BLACK));
         
     }
 

@@ -41,8 +41,6 @@ import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Outcome;
-import mage.filter.FilterObject;
-import mage.filter.predicate.mageobject.ColorPredicate;
 import mage.game.Game;
 import mage.players.Player;
 
@@ -51,11 +49,6 @@ import mage.players.Player;
  * @author LevelX2
  */
 public class StormbreathDragon extends CardImpl {
-    
-    private static final FilterObject filter = new FilterObject("white");
-    static {
-        filter.add(new ColorPredicate(ObjectColor.WHITE));
-    }
 
     public StormbreathDragon(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{3}{R}{R}");
@@ -69,7 +62,7 @@ public class StormbreathDragon extends CardImpl {
         // Haste
         this.addAbility(HasteAbility.getInstance());
         // protection from white
-        this.addAbility(new ProtectionAbility(filter));
+        this.addAbility(ProtectionAbility.from(ObjectColor.WHITE));
         // {5}{R}{R}: Monstrosity 3.
         this.addAbility(new MonstrosityAbility("{5}{R}{R}",3));
         // When Stormbreath Dragon becomes monstrous, it deals damage to each opponent equal to the number of cards in that player's hand.

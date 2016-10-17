@@ -44,21 +44,12 @@ import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Duration;
 import mage.constants.Zone;
-import mage.filter.FilterCard;
-import mage.filter.predicate.Predicates;
-import mage.filter.predicate.mageobject.ColorPredicate;
 
 /**
  *
  * @author fireshoes
  */
 public class GrotesqueHybrid extends CardImpl {
-
-    private static final FilterCard filter = new FilterCard("green and from white");
-
-    static {
-        filter.add(Predicates.or(new ColorPredicate(ObjectColor.GREEN), new ColorPredicate(ObjectColor.WHITE)));
-    }
 
     public GrotesqueHybrid(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{4}{B}");
@@ -73,7 +64,7 @@ public class GrotesqueHybrid extends CardImpl {
         Effect effect = new GainAbilitySourceEffect(FlyingAbility.getInstance(), Duration.EndOfTurn);
         effect.setText("{this} gains flying");
         Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, effect, new DiscardCardCost());
-        effect = new GainAbilitySourceEffect(new ProtectionAbility(filter), Duration.EndOfTurn);
+        effect = new GainAbilitySourceEffect(ProtectionAbility.from(ObjectColor.GREEN, ObjectColor.WHITE), Duration.EndOfTurn);
         effect.setText("and protection from green and from white until end of turn");
         ability.addEffect(effect);
         this.addAbility(ability);

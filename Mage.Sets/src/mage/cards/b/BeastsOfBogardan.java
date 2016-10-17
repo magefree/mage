@@ -40,7 +40,6 @@ import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Duration;
 import mage.constants.Zone;
-import mage.filter.FilterCard;
 import mage.filter.FilterPermanent;
 import mage.filter.predicate.Predicates;
 import mage.filter.predicate.mageobject.ColorPredicate;
@@ -52,11 +51,9 @@ import mage.filter.predicate.permanent.TokenPredicate;
  */
 public class BeastsOfBogardan extends CardImpl {
 
-    private static final FilterCard protectionFilter = new FilterCard("red");
     private static final FilterPermanent controlFilter = new FilterPermanent("nontoken white permanent");
 
     static {
-        protectionFilter.add(new ColorPredicate(ObjectColor.RED));
         controlFilter.add(new ColorPredicate(ObjectColor.WHITE));
         controlFilter.add(Predicates.not(new TokenPredicate()));
     }
@@ -68,7 +65,7 @@ public class BeastsOfBogardan extends CardImpl {
         this.toughness = new MageInt(3);
 
         // Protection from red
-        this.addAbility(new ProtectionAbility(protectionFilter));
+        this.addAbility(ProtectionAbility.from(ObjectColor.RED));
         // Beasts of Bogardan gets +1/+1 as long as an opponent controls a nontoken white permanent.
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new ConditionalContinuousEffect(
                 new BoostSourceEffect(1, 1, Duration.WhileOnBattlefield),

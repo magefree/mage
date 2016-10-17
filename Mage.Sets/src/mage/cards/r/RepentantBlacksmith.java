@@ -34,19 +34,12 @@ import mage.abilities.keyword.ProtectionAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.filter.FilterCard;
-import mage.filter.predicate.mageobject.ColorPredicate;
 
 /**
  *
  * @author KholdFuzion
  */
 public class RepentantBlacksmith extends CardImpl {
-
-    private static final FilterCard protectionFilter = new FilterCard("red");
-    static {
-        protectionFilter.add(new ColorPredicate(ObjectColor.RED));
-    }
 
     public RepentantBlacksmith(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{1}{W}");
@@ -56,7 +49,7 @@ public class RepentantBlacksmith extends CardImpl {
         this.toughness = new MageInt(2);
 
         // Protection from red
-        this.addAbility(new ProtectionAbility(protectionFilter));
+        this.addAbility(ProtectionAbility.from(ObjectColor.RED));
     }
 
     public RepentantBlacksmith(final RepentantBlacksmith card) {

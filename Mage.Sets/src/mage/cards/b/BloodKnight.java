@@ -35,20 +35,12 @@ import mage.abilities.keyword.ProtectionAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.filter.FilterCard;
-import mage.filter.predicate.mageobject.ColorPredicate;
 
 /**
  *
  * @author Quercitron
  */
 public class BloodKnight extends CardImpl {
-
-    private static final FilterCard filter = new FilterCard("white");
-
-    static {
-        filter.add(new ColorPredicate(ObjectColor.WHITE));
-    }
 
     public BloodKnight(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{R}{R}");
@@ -61,7 +53,7 @@ public class BloodKnight extends CardImpl {
         // First strike
         this.addAbility(FirstStrikeAbility.getInstance());
         // protection from white
-        this.addAbility(new ProtectionAbility(filter));
+        this.addAbility(ProtectionAbility.from(ObjectColor.WHITE));
     }
 
     public BloodKnight(final BloodKnight card) {

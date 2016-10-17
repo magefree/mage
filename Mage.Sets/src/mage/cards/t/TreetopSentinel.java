@@ -35,21 +35,13 @@ import mage.abilities.keyword.ProtectionAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.filter.FilterCard;
-import mage.filter.predicate.mageobject.ColorPredicate;
 
 /**
  *
  * @author cbt33
  */
- 
 public class TreetopSentinel extends CardImpl {
     
-    public static final FilterCard filter = new FilterCard("green");
-    static {
-        filter.add(new ColorPredicate(ObjectColor.GREEN));
-    }
-
     public TreetopSentinel(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{2}{U}{U}");
         this.subtype.add("Bird");
@@ -62,7 +54,7 @@ public class TreetopSentinel extends CardImpl {
         this.addAbility(FlyingAbility.getInstance());
         
         // protection from green
-        this.addAbility(new ProtectionAbility(filter));
+        this.addAbility(ProtectionAbility.from(ObjectColor.GREEN));
     }
 
     public TreetopSentinel(final TreetopSentinel card) {

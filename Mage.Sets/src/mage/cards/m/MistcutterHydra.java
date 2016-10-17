@@ -39,20 +39,12 @@ import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.counters.CounterType;
-import mage.filter.FilterObject;
-import mage.filter.predicate.mageobject.ColorPredicate;
 
 /**
  *
  * @author LevelX2
  */
 public class MistcutterHydra extends CardImpl {
-
-    private static final FilterObject filter = new FilterObject("from blue");
-
-    static {
-        filter.add(new ColorPredicate(ObjectColor.BLUE));
-    }
 
     public MistcutterHydra(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{X}{G}");
@@ -66,7 +58,7 @@ public class MistcutterHydra extends CardImpl {
         // Haste
         this.addAbility(HasteAbility.getInstance());
         // protection from blue
-        this.addAbility(new ProtectionAbility(filter));
+        this.addAbility(ProtectionAbility.from(ObjectColor.BLUE));
         // Mistcutter Hydra enters the battlefield with X +1/+1 counters on it.
         this.addAbility(new EntersBattlefieldAbility(new EntersBattlefieldWithXCountersEffect(CounterType.P1P1.createInstance())));
     }

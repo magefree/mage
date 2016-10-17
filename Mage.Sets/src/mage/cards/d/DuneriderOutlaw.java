@@ -40,8 +40,6 @@ import mage.abilities.keyword.ProtectionAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.counters.CounterType;
-import mage.filter.FilterCard;
-import mage.filter.predicate.mageobject.ColorPredicate;
 import mage.game.events.GameEvent;
 
 /**
@@ -51,11 +49,6 @@ import mage.game.events.GameEvent;
 public class DuneriderOutlaw extends CardImpl {
 
     private static final String ruleText = "At the beginning of each end step, if {this} dealt damage to an opponent this turn, put a +1/+1 counter on it.";
-    private static final FilterCard filter = new FilterCard("green");
-
-    static {
-        filter.add(new ColorPredicate(ObjectColor.GREEN));
-    }
 
     public DuneriderOutlaw(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{B}{B}");
@@ -68,7 +61,7 @@ public class DuneriderOutlaw extends CardImpl {
         this.toughness = new MageInt(1);
 
         // Protection from green
-        this.addAbility(new ProtectionAbility(filter));
+        this.addAbility(ProtectionAbility.from(ObjectColor.GREEN));
         // At the beginning of each end step, if Dunerider Outlaw dealt damage to an opponent this turn, put a +1/+1 counter on it.
         TriggeredAbility triggered = new OnEventTriggeredAbility(GameEvent.EventType.END_TURN_STEP_PRE, "beginning of each end step", true, new AddCountersSourceEffect(CounterType.P1P1.createInstance()));
         this.addAbility(new ConditionalTriggeredAbility(triggered, new DealtDamageToAnOpponent(), ruleText));

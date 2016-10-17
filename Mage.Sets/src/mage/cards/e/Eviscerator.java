@@ -36,20 +36,12 @@ import mage.abilities.effects.common.LoseLifeSourceControllerEffect;
 import mage.abilities.keyword.ProtectionAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
-import mage.filter.FilterCard;
-import mage.filter.predicate.mageobject.ColorPredicate;
 
 /**
  *
  * @author Plopman
  */
 public class Eviscerator extends CardImpl {
-
-    private static final FilterCard filter = new FilterCard("white");
-
-    static {
-        filter.add(new ColorPredicate(ObjectColor.WHITE));
-    }
 
     public Eviscerator(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{3}{B}{B}");
@@ -59,7 +51,7 @@ public class Eviscerator extends CardImpl {
         this.toughness = new MageInt(5);
 
         // Protection from white
-        this.addAbility(new ProtectionAbility(filter));
+        this.addAbility(ProtectionAbility.from(ObjectColor.WHITE));
         // When Eviscerator enters the battlefield, you lose 5 life.
         this.addAbility(new EntersBattlefieldTriggeredAbility(new LoseLifeSourceControllerEffect(5)));
     }

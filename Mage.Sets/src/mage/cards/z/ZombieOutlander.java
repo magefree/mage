@@ -35,29 +35,21 @@ import mage.ObjectColor;
 import mage.abilities.keyword.ProtectionAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
-import mage.filter.FilterCard;
-import mage.filter.predicate.mageobject.ColorPredicate;
 
 /**
  *
  * @author Loki
  */
 public class ZombieOutlander extends CardImpl {
-    private static final FilterCard filter = new FilterCard("green");
-
-    static {
-        filter.add(new ColorPredicate(ObjectColor.GREEN));
-    }
 
     public ZombieOutlander(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{U}{B}");
-
-
         this.subtype.add("Zombie");
         this.subtype.add("Scout");
         this.power = new MageInt(2);
         this.toughness = new MageInt(2);
-        this.addAbility(new ProtectionAbility(filter));
+
+        this.addAbility(ProtectionAbility.from(ObjectColor.GREEN));
     }
 
     public ZombieOutlander(final ZombieOutlander card) {

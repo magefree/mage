@@ -40,8 +40,6 @@ import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Duration;
 import mage.constants.Zone;
-import mage.filter.FilterCard;
-import mage.filter.predicate.mageobject.ColorPredicate;
 
 /**
  *
@@ -49,13 +47,6 @@ import mage.filter.predicate.mageobject.ColorPredicate;
  */
 public class KeeperOfKookus extends CardImpl {
 
-     private static final FilterCard filter = new FilterCard("from red");
-
-    static {
-        filter.add(new ColorPredicate(ObjectColor.RED));
-    }
-
-    
     public KeeperOfKookus(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{R}");
         this.subtype.add("Goblin");
@@ -63,8 +54,8 @@ public class KeeperOfKookus extends CardImpl {
         this.power = new MageInt(1);
         this.toughness = new MageInt(1);
 
-        // Keeper of Kookus gains protection from red until end of turn.
-        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new GainAbilitySourceEffect(new ProtectionAbility(filter), Duration.EndOfTurn),new ManaCostsImpl("{R"));
+        // {R}: Keeper of Kookus gains protection from red until end of turn.
+        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new GainAbilitySourceEffect(ProtectionAbility.from(ObjectColor.RED), Duration.EndOfTurn), new ManaCostsImpl("{R}"));
         this.addAbility(ability);
     }
 

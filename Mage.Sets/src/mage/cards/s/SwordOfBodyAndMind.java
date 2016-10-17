@@ -47,9 +47,6 @@ import mage.constants.AttachmentType;
 import mage.constants.CardType;
 import mage.constants.Outcome;
 import mage.constants.Zone;
-import mage.filter.FilterCard;
-import mage.filter.predicate.Predicates;
-import mage.filter.predicate.mageobject.ColorPredicate;
 import mage.game.Game;
 import mage.game.events.DamagedPlayerEvent;
 import mage.game.events.GameEvent;
@@ -64,21 +61,13 @@ import mage.target.targetpointer.FixedTarget;
  */
 public class SwordOfBodyAndMind extends CardImpl {
 
-    private static final FilterCard filter = new FilterCard("green and from blue");
-
-    static {
-        filter.add(Predicates.or(
-                new ColorPredicate(ObjectColor.GREEN),
-                new ColorPredicate(ObjectColor.BLUE)));
-    }
-
-    public SwordOfBodyAndMind (UUID ownerId, CardSetInfo setInfo) {
+    public SwordOfBodyAndMind(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.ARTIFACT},"{3}");
         this.subtype.add("Equipment");
 
         // Equipped creature gets +2/+2 and has protection from green and from blue.
         Ability ability = new SimpleStaticAbility(Zone.BATTLEFIELD, new BoostEquippedEffect(2, 2));
-        Effect effect = new GainAbilityAttachedEffect(new ProtectionAbility(filter), AttachmentType.EQUIPMENT);
+        Effect effect = new GainAbilityAttachedEffect(ProtectionAbility.from(ObjectColor.GREEN, ObjectColor.BLUE), AttachmentType.EQUIPMENT);
         effect.setText("and has protection from green and from blue");
         ability.addEffect(effect);
         this.addAbility(ability);
@@ -90,7 +79,7 @@ public class SwordOfBodyAndMind extends CardImpl {
         this.addAbility(new EquipAbility(Outcome.AddAbility, new GenericManaCost(2)));
     }
 
-    public SwordOfBodyAndMind (final SwordOfBodyAndMind card) {
+    public SwordOfBodyAndMind(final SwordOfBodyAndMind card) {
         super(card);
     }
 

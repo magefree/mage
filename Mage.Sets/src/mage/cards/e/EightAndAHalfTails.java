@@ -41,9 +41,6 @@ import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Duration;
 import mage.constants.Zone;
-import mage.filter.Filter;
-import mage.filter.FilterCard;
-import mage.filter.predicate.mageobject.ColorPredicate;
 import mage.target.Target;
 import mage.target.common.TargetControlledPermanent;
 import mage.target.common.TargetSpellOrPermanent;
@@ -53,11 +50,6 @@ import mage.target.common.TargetSpellOrPermanent;
  * @author LevelX2
  */
 public class EightAndAHalfTails extends CardImpl {
-
-    private static final Filter filter = new FilterCard("white");
-    static {
-        filter.add(new ColorPredicate(ObjectColor.WHITE));
-    }
 
     public EightAndAHalfTails(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{W}{W}");
@@ -69,7 +61,7 @@ public class EightAndAHalfTails extends CardImpl {
         this.toughness = new MageInt(2);
 
         // {1}{W}: Target permanent you control gains protection from white until end of turn.
-        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new GainAbilityTargetEffect(new ProtectionAbility(filter), Duration.EndOfTurn), new ManaCostsImpl("{1}{W}"));
+        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new GainAbilityTargetEffect(ProtectionAbility.from(ObjectColor.WHITE), Duration.EndOfTurn), new ManaCostsImpl("{1}{W}"));
         Target target = new TargetControlledPermanent();
         ability.addTarget(target);
         this.addAbility(ability);

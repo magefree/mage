@@ -35,20 +35,12 @@ import mage.abilities.keyword.FirstStrikeAbility;
 import mage.abilities.keyword.ProtectionAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
-import mage.filter.FilterCard;
-import mage.filter.predicate.Predicates;
-import mage.filter.predicate.mageobject.ColorPredicate;
 
 /**
  *
  * @author Loki
  */
 public class PaladinEnVec extends CardImpl {
-    private static final FilterCard protectionFilter = new FilterCard("black and from red");
-
-    static {
-        protectionFilter.add(Predicates.or(new ColorPredicate(ObjectColor.BLACK),new ColorPredicate(ObjectColor.RED)));
-    }
 
     public PaladinEnVec(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{1}{W}{W}");
@@ -61,7 +53,7 @@ public class PaladinEnVec extends CardImpl {
         // First strike
         this.addAbility(FirstStrikeAbility.getInstance());
         // protection from black and from red
-        this.addAbility(new ProtectionAbility(protectionFilter));
+        this.addAbility(ProtectionAbility.from(ObjectColor.BLACK, ObjectColor.RED));
     }
 
     public PaladinEnVec(final PaladinEnVec card) {

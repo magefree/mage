@@ -42,22 +42,12 @@ import mage.abilities.keyword.FlyingAbility;
 import mage.abilities.keyword.ProtectionAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
-import mage.filter.FilterCard;
-import mage.filter.predicate.Predicates;
-import mage.filter.predicate.mageobject.ColorPredicate;
 
 /**
  *
  * @author Loki
  */
 public class StillmoonCavalier extends CardImpl {
-
-    private static final FilterCard filter = new FilterCard("white and from black");
-    static {
-        filter.add(Predicates.or(
-                new ColorPredicate(ObjectColor.WHITE),
-                new ColorPredicate(ObjectColor.BLACK)));
-    }
 
     public StillmoonCavalier(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{1}{W/B}{W/B}");
@@ -68,7 +58,7 @@ public class StillmoonCavalier extends CardImpl {
         this.toughness = new MageInt(1);
 
         // Protection from white and from black
-        this.addAbility(new ProtectionAbility(filter));
+        this.addAbility(ProtectionAbility.from(ObjectColor.WHITE, ObjectColor.BLACK));
         // {WB}: Stillmoon Cavalier gains flying until end of turn.
         this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new GainAbilitySourceEffect(FlyingAbility.getInstance(), Duration.EndOfTurn), new ManaCostsImpl("{W/B}")));
         // {WB}: Stillmoon Cavalier gains first strike until end of turn.

@@ -39,9 +39,7 @@ import mage.abilities.keyword.FlyingAbility;
 import mage.abilities.keyword.ProtectionAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
-import mage.filter.FilterCard;
 import mage.filter.common.FilterCreatureCard;
-import mage.filter.predicate.mageobject.ColorPredicate;
 import mage.target.common.TargetCardInYourGraveyard;
 
 /**
@@ -49,12 +47,6 @@ import mage.target.common.TargetCardInYourGraveyard;
  * @author Backfir3
  */
 public class KarmicGuide extends CardImpl {
-
-    private static final FilterCard filter = new FilterCard("Black");
-
-    static {
-        filter.add(new ColorPredicate(ObjectColor.BLACK));
-    }
 
     public KarmicGuide(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{3}{W}{W}");
@@ -66,7 +58,7 @@ public class KarmicGuide extends CardImpl {
 
         this.addAbility(FlyingAbility.getInstance());
         // protection from black
-        this.addAbility(new ProtectionAbility(filter));
+        this.addAbility(ProtectionAbility.from(ObjectColor.BLACK));
         // Echo {3}{W}{W}
         this.addAbility(new EchoAbility("{3}{W}{W}"));
         // When Karmic Guide enters the battlefield, return target creature card from your graveyard to the battlefield.

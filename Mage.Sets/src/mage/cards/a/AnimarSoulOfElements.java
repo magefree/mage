@@ -47,11 +47,8 @@ import mage.constants.Duration;
 import mage.constants.Outcome;
 import mage.constants.Zone;
 import mage.counters.CounterType;
-import mage.filter.FilterCard;
 import mage.filter.FilterSpell;
-import mage.filter.predicate.Predicates;
 import mage.filter.predicate.mageobject.CardTypePredicate;
-import mage.filter.predicate.mageobject.ColorPredicate;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.util.CardUtil;
@@ -63,11 +60,7 @@ import mage.util.CardUtil;
 public class AnimarSoulOfElements extends CardImpl {
 
     private static final FilterSpell filterSpell = new FilterSpell("a creature spell");
-    private static final FilterCard filter = new FilterCard("white and from black");
     static {
-        filter.add(Predicates.or(
-                new ColorPredicate(ObjectColor.WHITE),
-                new ColorPredicate(ObjectColor.BLACK)));
         filterSpell.add(new CardTypePredicate(CardType.CREATURE));
     }
 
@@ -80,7 +73,7 @@ public class AnimarSoulOfElements extends CardImpl {
         this.toughness = new MageInt(1);
 
         // Protection from white and from black
-        this.addAbility(new ProtectionAbility(filter));
+        this.addAbility(ProtectionAbility.from(ObjectColor.WHITE, ObjectColor.BLACK));
 
         // Whenever you cast a creature spell, put a +1/+1 counter on Animar, Soul of Elements.
         this.addAbility(new SpellCastControllerTriggeredAbility(new AddCountersSourceEffect(CounterType.P1P1.createInstance()), filterSpell, false));

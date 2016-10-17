@@ -39,9 +39,7 @@ import mage.abilities.effects.common.continuous.GainAbilityAllEffect;
 import mage.abilities.keyword.ProtectionAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
-import mage.filter.FilterCard;
 import mage.filter.common.FilterCreaturePermanent;
-import mage.filter.predicate.mageobject.ColorPredicate;
 
 /**
  *
@@ -49,17 +47,11 @@ import mage.filter.predicate.mageobject.ColorPredicate;
  */
 public class AbsoluteLaw extends CardImpl {
 
-    private static final FilterCard filter = new FilterCard("Red");
-
-    static {
-        filter.add(new ColorPredicate(ObjectColor.RED));
-    }
-
     public AbsoluteLaw(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.ENCHANTMENT},"{1}{W}");
 
-        Ability ability = new ProtectionAbility(filter);
-                this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new GainAbilityAllEffect(ability, Duration.WhileOnBattlefield, new FilterCreaturePermanent(), false)));
+        Ability ability = ProtectionAbility.from(ObjectColor.RED);
+        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new GainAbilityAllEffect(ability, Duration.WhileOnBattlefield, new FilterCreaturePermanent("creatures"), false)));
     }
 
     public AbsoluteLaw(final AbsoluteLaw card) {

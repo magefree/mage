@@ -46,21 +46,14 @@ import mage.constants.CardType;
 import mage.constants.Duration;
 import mage.constants.Outcome;
 import mage.constants.Zone;
-import mage.filter.FilterCard;
-import mage.filter.predicate.mageobject.ColorPredicate;
 import mage.target.TargetPermanent;
 import mage.target.common.TargetCreaturePermanent;
+
 /**
  *
  * @author LoneFox
  */
 public class StrengthOfIsolation extends CardImpl {
-
-    private static final FilterCard filter = new FilterCard("black");
-
-    static {
-        filter.add(new ColorPredicate(ObjectColor.BLACK));
-    }
 
     public StrengthOfIsolation(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.ENCHANTMENT},"{1}{W}");
@@ -74,7 +67,7 @@ public class StrengthOfIsolation extends CardImpl {
         this.addAbility(ability);
         // Enchanted creature gets +1/+2 and has protection from black.
         ability = new SimpleStaticAbility(Zone.BATTLEFIELD, new BoostEnchantedEffect(1, 2, Duration.WhileOnBattlefield));
-        Effect effect = new GainAbilityAttachedEffect(new ProtectionAbility(filter), AttachmentType.AURA);
+        Effect effect = new GainAbilityAttachedEffect(ProtectionAbility.from(ObjectColor.BLACK), AttachmentType.AURA);
         effect.setText("and has protection from black");
         ability.addEffect(effect);
         this.addAbility(ability);

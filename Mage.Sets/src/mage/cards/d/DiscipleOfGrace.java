@@ -36,8 +36,6 @@ import mage.abilities.keyword.CyclingAbility;
 import mage.abilities.keyword.ProtectionAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
-import mage.filter.FilterCard;
-import mage.filter.predicate.mageobject.ColorPredicate;
 
 import java.util.UUID;
 
@@ -45,12 +43,6 @@ import java.util.UUID;
  * @author Backfir3
  */
 public class DiscipleOfGrace extends CardImpl {
-
-    private static final FilterCard filter = new FilterCard("black");
-
-    static {
-        filter.add(new ColorPredicate(ObjectColor.BLACK));
-    }
 
     public DiscipleOfGrace(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{1}{W}");
@@ -61,7 +53,7 @@ public class DiscipleOfGrace extends CardImpl {
         this.toughness = new MageInt(2);
         
         // Protection from black        
-        this.addAbility(new ProtectionAbility(filter));
+        this.addAbility(ProtectionAbility.from(ObjectColor.BLACK));
         
         // Cycling {2} ({2}, Discard this card: Draw a card.)        
         this.addAbility(new CyclingAbility(new ManaCostsImpl("{2}")));

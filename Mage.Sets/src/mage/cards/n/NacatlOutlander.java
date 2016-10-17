@@ -35,29 +35,21 @@ import mage.ObjectColor;
 import mage.abilities.keyword.ProtectionAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
-import mage.filter.FilterCard;
-import mage.filter.predicate.mageobject.ColorPredicate;
 
 /**
  *
  * @author Loki
  */
 public class NacatlOutlander extends CardImpl {
-    private static final FilterCard filter = new FilterCard("blue");
-
-    static {
-        filter.add(new ColorPredicate(ObjectColor.BLUE));
-    }
 
     public NacatlOutlander(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{R}{G}");
-
-
         this.subtype.add("Cat");
         this.subtype.add("Scout");
         this.power = new MageInt(2);
         this.toughness = new MageInt(2);
-        this.addAbility(new ProtectionAbility(filter));
+
+        this.addAbility(ProtectionAbility.from(ObjectColor.BLUE));
     }
 
     public NacatlOutlander(final NacatlOutlander card) {

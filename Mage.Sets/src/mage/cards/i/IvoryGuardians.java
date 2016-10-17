@@ -40,7 +40,6 @@ import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Duration;
 import mage.constants.Zone;
-import mage.filter.FilterCard;
 import mage.filter.FilterPermanent;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.filter.predicate.Predicates;
@@ -54,12 +53,10 @@ import mage.filter.predicate.permanent.TokenPredicate;
  */
 public class IvoryGuardians extends CardImpl {
 
-    private static final FilterCard protectionFilter = new FilterCard("red");
     private static final FilterPermanent controlFilter = new FilterPermanent("nontoken red permanent");
     private static final FilterCreaturePermanent boostFilter = new FilterCreaturePermanent();
 
     static {
-        protectionFilter.add(new ColorPredicate(ObjectColor.RED));
         controlFilter.add(new ColorPredicate(ObjectColor.RED));
         controlFilter.add(Predicates.not(new TokenPredicate()));
         boostFilter.add(new NamePredicate("Ivory Guardians"));
@@ -73,7 +70,7 @@ public class IvoryGuardians extends CardImpl {
         this.toughness = new MageInt(3);
 
         // Protection from red
-        this.addAbility(new ProtectionAbility(protectionFilter));
+        this.addAbility(ProtectionAbility.from(ObjectColor.RED));
         // Creatures named Ivory Guardians get +1/+1 as long as an opponent controls a nontoken red permanent.
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new ConditionalContinuousEffect(
                 new BoostAllEffect(1, 1, Duration.WhileOnBattlefield, boostFilter, false),

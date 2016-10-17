@@ -38,21 +38,12 @@ import mage.abilities.keyword.ProtectionAbility;
 import mage.abilities.keyword.ReachAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
-import mage.filter.FilterCard;
-import mage.filter.predicate.mageobject.ColorPredicate;
 
 /**
  *
  * @author LevelX2
  */
-
-
 public class Skylasher extends CardImpl {
-
-    private static final FilterCard filter = new FilterCard("blue");
-    static {
-        filter.add(new ColorPredicate(ObjectColor.BLUE));
-    }
 
     public Skylasher (UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{1}{G}");
@@ -67,7 +58,7 @@ public class Skylasher extends CardImpl {
         this.addAbility(new CantBeCounteredAbility());
         // Reach, protection from blue
         this.addAbility(ReachAbility.getInstance());
-        this.addAbility(new ProtectionAbility(filter));
+        this.addAbility(ProtectionAbility.from(ObjectColor.BLUE));
 
     }
 

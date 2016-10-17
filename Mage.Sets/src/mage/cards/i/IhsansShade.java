@@ -34,21 +34,12 @@ import mage.abilities.keyword.ProtectionAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.filter.FilterCard;
-import mage.filter.predicate.mageobject.ColorPredicate;
 
 /**
  *
  * @author LoneFox
-
  */
 public class IhsansShade extends CardImpl {
-
-    private static final FilterCard filter = new FilterCard("white");
-
-    static {
-        filter.add(new ColorPredicate(ObjectColor.WHITE));
-    }
 
     public IhsansShade(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{3}{B}{B}{B}");
@@ -59,7 +50,7 @@ public class IhsansShade extends CardImpl {
         this.toughness = new MageInt(5);
 
         // Protection from white
-        this.addAbility(new ProtectionAbility(filter));
+        this.addAbility(ProtectionAbility.from(ObjectColor.WHITE));
     }
 
     public IhsansShade(final IhsansShade card) {

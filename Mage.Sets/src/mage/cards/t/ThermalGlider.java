@@ -36,20 +36,12 @@ import mage.abilities.keyword.FlyingAbility;
 import mage.abilities.keyword.ProtectionAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
-import mage.filter.FilterCard;
-import mage.filter.predicate.mageobject.ColorPredicate;
 
 /**
  *
  * @author Backfir3
  */
 public class ThermalGlider extends CardImpl {
-
-    private static final FilterCard filter = new FilterCard("Red");
-
-    static {
-        filter.add(new ColorPredicate(ObjectColor.RED));
-    }
 
     public ThermalGlider(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{2}{W}");
@@ -63,7 +55,7 @@ public class ThermalGlider extends CardImpl {
         this.addAbility(FlyingAbility.getInstance());
 
         // Protection from red
-        this.addAbility(new ProtectionAbility(filter));
+        this.addAbility(ProtectionAbility.from(ObjectColor.RED));
     }
 
     public ThermalGlider(final ThermalGlider card) {

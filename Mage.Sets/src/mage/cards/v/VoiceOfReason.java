@@ -35,20 +35,12 @@ import mage.abilities.keyword.ProtectionAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.filter.FilterCard;
-import mage.filter.predicate.mageobject.ColorPredicate;
 
 /**
  *
  * @author LoneFox
  */
 public class VoiceOfReason extends CardImpl {
-
-    private static final FilterCard filter = new FilterCard("blue");
-
-    static {
-        filter.add(new ColorPredicate(ObjectColor.BLUE));
-    }
 
     public VoiceOfReason(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{3}{W}");
@@ -59,7 +51,7 @@ public class VoiceOfReason extends CardImpl {
         // Flying
         this.addAbility(FlyingAbility.getInstance());
         // protection from blue
-        this.addAbility(new ProtectionAbility(filter));
+        this.addAbility(ProtectionAbility.from(ObjectColor.BLUE));
     }
 
     public VoiceOfReason(final VoiceOfReason card) {

@@ -35,8 +35,6 @@ import mage.abilities.keyword.ProtectionAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.filter.FilterCard;
-import mage.filter.predicate.mageobject.ColorPredicate;
 
 /**
  *
@@ -44,12 +42,6 @@ import mage.filter.predicate.mageobject.ColorPredicate;
  */
 public class KnightOfGlory extends CardImpl {
     
-    private static final FilterCard filter = new FilterCard("black");
-    
-    static {
-        filter.add(new ColorPredicate(ObjectColor.BLACK));
-    }
-
     public KnightOfGlory(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{1}{W}");
         this.subtype.add("Human");
@@ -59,7 +51,7 @@ public class KnightOfGlory extends CardImpl {
         this.toughness = new MageInt(1);
 
         // Protection from black
-        this.addAbility(new ProtectionAbility(filter));
+        this.addAbility(ProtectionAbility.from(ObjectColor.BLACK));
         
         // Exalted
         this.addAbility(new ExaltedAbility());

@@ -43,8 +43,6 @@ import mage.constants.Duration;
 import mage.constants.PhaseStep;
 import mage.constants.Zone;
 import mage.counters.CounterType;
-import mage.filter.FilterCard;
-import mage.filter.predicate.mageobject.ColorPredicate;
 import mage.game.Game;
 import mage.game.events.GameEvent;
 import mage.game.permanent.Permanent;
@@ -56,12 +54,6 @@ import mage.game.turn.Step;
  */
 public class PhantomCentaur extends CardImpl {
 
-    private static final FilterCard filter = new FilterCard("Black");
-
-    static {
-        filter.add(new ColorPredicate(ObjectColor.BLACK));
-    }
-
     public PhantomCentaur(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{2}{G}{G}");
         this.subtype.add("Centaur");
@@ -71,7 +63,7 @@ public class PhantomCentaur extends CardImpl {
         this.toughness = new MageInt(0);
 
         // Protection from black
-        this.addAbility(new ProtectionAbility(filter));
+        this.addAbility(ProtectionAbility.from(ObjectColor.BLACK));
 
         // Phantom Centaur enters the battlefield with three +1/+1 counters on it.
         this.addAbility(new EntersBattlefieldAbility(new AddCountersSourceEffect(CounterType.P1P1.createInstance(3)), "with three +1/+1 counters on it"));

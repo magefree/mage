@@ -36,21 +36,12 @@ import mage.abilities.keyword.ProtectionAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.filter.FilterCard;
-import mage.filter.predicate.Predicates;
-import mage.filter.predicate.mageobject.ColorPredicate;
 
 /**
  *
  * @author LevelX2
  */
 public class AuriokChampion extends CardImpl {
-
-    static final FilterCard filter = new FilterCard("black and from red");
-
-    static {
-        filter.add(Predicates.or(new ColorPredicate(ObjectColor.BLACK),new ColorPredicate(ObjectColor.RED)));
-    }
 
     public AuriokChampion(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{W}{W}");
@@ -61,7 +52,7 @@ public class AuriokChampion extends CardImpl {
         this.toughness = new MageInt(1);
 
         // Protection from black and from red
-        this.addAbility(new ProtectionAbility(filter));
+        this.addAbility(ProtectionAbility.from(ObjectColor.BLACK, ObjectColor.RED));
         // Whenever another creature enters the battlefield, you may gain 1 life.
         this.addAbility(new AnotherCreatureEntersBattlefieldTriggeredAbility(new GainLifeEffect(1), true));
 
