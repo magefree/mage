@@ -1,11 +1,8 @@
 package mage.sets;
 
-import java.util.GregorianCalendar;
-
 import mage.cards.ExpansionSet;
 import mage.constants.SetType;
 import mage.constants.Rarity;
-import java.util.List;
 
 public class Apocalypse extends ExpansionSet {
     private static final Apocalypse fINSTANCE = new Apocalypse();
@@ -15,7 +12,7 @@ public class Apocalypse extends ExpansionSet {
     }
 
     private Apocalypse() {
-        super("Apocalypse", "APC", "mage.sets.apocalypse", new GregorianCalendar(2001, 5, 1).getTime(), SetType.EXPANSION);
+        super("Apocalypse", "APC", ExpansionSet.buildDate(2001, 5, 1), SetType.EXPANSION);
         this.blockName = "Invasion";
         this.parentSet = Invasion.getInstance();
         this.hasBasicLands = false;
@@ -38,6 +35,8 @@ public class Apocalypse extends ExpansionSet {
         cards.add(new SetCardInfo("Caves of Koilos", 140, Rarity.RARE, mage.cards.c.CavesOfKoilos.class));
         cards.add(new SetCardInfo("Ceta Disciple", 19, Rarity.COMMON, mage.cards.c.CetaDisciple.class));
         cards.add(new SetCardInfo("Cetavolver", 21, Rarity.RARE, mage.cards.c.Cetavolver.class));
+	cards.add(new SetCardInfo("Coalition Flag", 2, Rarity.UNCOMMON, mage.cards.c.CoalitionFlag.class));
+	cards.add(new SetCardInfo("Coalition Honor Guard", 3, Rarity.COMMON, mage.cards.c.CoalitionHonorGuard.class));
         cards.add(new SetCardInfo("Coastal Drake", 22, Rarity.COMMON, mage.cards.c.CoastalDrake.class));
         cards.add(new SetCardInfo("Consume Strength", 93, Rarity.COMMON, mage.cards.c.ConsumeStrength.class));
         cards.add(new SetCardInfo("Cromat", 94, Rarity.RARE, mage.cards.c.Cromat.class));
@@ -128,6 +127,7 @@ public class Apocalypse extends ExpansionSet {
         cards.add(new SetCardInfo("Spiritmonger", 121, Rarity.RARE, mage.cards.s.Spiritmonger.class));
         cards.add(new SetCardInfo("Squee's Embrace", 122, Rarity.COMMON, mage.cards.s.SqueesEmbrace.class));
         cards.add(new SetCardInfo("Squee's Revenge", 123, Rarity.UNCOMMON, mage.cards.s.SqueesRevenge.class));
+	cards.add(new SetCardInfo("Standard Bearer", 18, Rarity.COMMON, mage.cards.s.StandardBearer.class));
         cards.add(new SetCardInfo("Strength of Night", 86, Rarity.COMMON, mage.cards.s.StrengthOfNight.class));
         cards.add(new SetCardInfo("Suffocating Blast", 124, Rarity.RARE, mage.cards.s.SuffocatingBlast.class));
         cards.add(new SetCardInfo("Sylvan Messenger", 87, Rarity.UNCOMMON, mage.cards.s.SylvanMessenger.class));

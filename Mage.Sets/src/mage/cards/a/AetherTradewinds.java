@@ -28,16 +28,13 @@
 package mage.cards.a;
 
 import java.util.UUID;
-
-import mage.constants.*;
-import mage.abilities.Ability;
-import mage.abilities.effects.OneShotEffect;
+import mage.abilities.effects.Effect;
+import mage.abilities.effects.common.ReturnToHandTargetEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
+import mage.constants.*;
 import mage.filter.FilterPermanent;
 import mage.filter.predicate.permanent.ControllerPredicate;
-import mage.game.Game;
-import mage.game.permanent.Permanent;
 import mage.target.TargetPermanent;
 import mage.target.common.TargetControlledPermanent;
 
@@ -54,13 +51,14 @@ public class AetherTradewinds extends CardImpl {
     }
 
     public AetherTradewinds(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.INSTANT},"{2}{U}");
-
+        super(ownerId, setInfo, new CardType[]{CardType.INSTANT}, "{2}{U}");
 
         // Return target permanent you control and target permanent you don't control to their owners' hands.
         this.getSpellAbility().addTarget(new TargetControlledPermanent());
         this.getSpellAbility().addTarget(new TargetPermanent(filter));
-        this.getSpellAbility().addEffect(new AetherTradewindsEffect());
+        Effect effect = new ReturnToHandTargetEffect(true);
+        effect.setText("Return target permanent you control and target permanent you don't control to their owners' hands");
+        this.getSpellAbility().addEffect(effect);
     }
 
     public AetherTradewinds(final AetherTradewinds card) {
@@ -70,38 +68,5 @@ public class AetherTradewinds extends CardImpl {
     @Override
     public AetherTradewinds copy() {
         return new AetherTradewinds(this);
-    }
-}
-
-class AetherTradewindsEffect extends OneShotEffect {
-
-    public AetherTradewindsEffect() {
-        super(Outcome.ReturnToHand);
-        this.staticText = "Return target permanent you control and target permanent you don't control to their owners' hands";
-    }
-
-    public AetherTradewindsEffect(final AetherTradewindsEffect effect) {
-        super(effect);
-    }
-
-    @Override
-    public AetherTradewindsEffect copy() {
-        return new AetherTradewindsEffect(this);
-    }
-
-    @Override
-    public boolean apply(Game game, Ability source) {
-        boolean result = false;
-
-        Permanent permanent = game.getPermanent(source.getFirstTarget());
-        if (permanent != null) {
-            result |= permanent.moveToZone(Zone.HAND, source.getSourceId(), game, false);
-        }
-        permanent = game.getPermanent(source.getTargets().get(1).getFirstTarget());
-        if (permanent != null) {
-            result |= permanent.moveToZone(Zone.HAND, source.getSourceId(), game, false);
-        }
-
-        return result;
     }
 }

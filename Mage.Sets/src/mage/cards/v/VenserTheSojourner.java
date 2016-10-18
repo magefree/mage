@@ -38,7 +38,7 @@ import mage.abilities.effects.Effect;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.ExileTargetEffect;
 import mage.abilities.effects.common.GetEmblemEffect;
-import mage.abilities.effects.common.ReturnFromExileEffect;
+import mage.abilities.effects.common.ReturnToBattlefieldUnderYourControlTargetEffect;
 import mage.abilities.effects.common.combat.CantBeBlockedAllEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
@@ -74,7 +74,7 @@ public class VenserTheSojourner extends CardImpl {
     }
 
     public VenserTheSojourner(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.PLANESWALKER},"{3}{W}{U}");
+        super(ownerId, setInfo, new CardType[]{CardType.PLANESWALKER}, "{3}{W}{U}");
         this.subtype.add("Venser");
 
         this.addAbility(new PlanswalkerEntersWithLoyalityCountersAbility(3));
@@ -127,8 +127,10 @@ class VenserTheSojournerEffect extends OneShotEffect {
                 if (permanent != null) {
                     if (controller.moveCardToExileWithInfo(permanent, source.getSourceId(), sourceObject.getIdName(), source.getSourceId(), game, Zone.BATTLEFIELD, true)) {
                         //create delayed triggered ability
-                        game.addDelayedTriggeredAbility(new AtTheBeginOfNextEndStepDelayedTriggeredAbility(
-                                new ReturnFromExileEffect(source.getSourceId(), Zone.BATTLEFIELD)), source);
+                        Effect effect = new ReturnToBattlefieldUnderYourControlTargetEffect();
+                        effect.setText("Return it to the battlefield under your control at the beginning of the next end step");
+                        effect.setTargetPointer(new FixedTarget(permanent.getId(), game));
+                        game.addDelayedTriggeredAbility(new AtTheBeginOfNextEndStepDelayedTriggeredAbility(effect), source);
                         return true;
                     }
                 }

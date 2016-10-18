@@ -51,6 +51,7 @@ import mage.game.permanent.Permanent;
 import mage.players.Player;
 
 /**
+ * http://mtgsalvation.gamepedia.com/Land_changers
  *
  * @author LevelX2
  */
@@ -58,6 +59,7 @@ public class BecomesBasicLandTargetEffect extends ContinuousEffectImpl {
 
     protected boolean chooseLandType;
     protected ArrayList<String> landTypes = new ArrayList();
+    protected ArrayList<String> landTypesToAdd = new ArrayList();
     protected boolean loseOther;  // loses all other abilities, card types, and creature types
 
     public BecomesBasicLandTargetEffect(Duration duration) {
@@ -99,6 +101,7 @@ public class BecomesBasicLandTargetEffect extends ContinuousEffectImpl {
     public BecomesBasicLandTargetEffect(final BecomesBasicLandTargetEffect effect) {
         super(effect);
         this.landTypes.addAll(effect.landTypes);
+        this.landTypesToAdd.addAll(effect.landTypesToAdd);
         this.chooseLandType = effect.chooseLandType;
         this.loseOther = effect.loseOther;
     }
@@ -128,17 +131,8 @@ public class BecomesBasicLandTargetEffect extends ContinuousEffectImpl {
             }
         }
 
-        if (!loseOther) {
-            for (UUID targetPermanent : targetPointer.getTargets(game, source)) {
-                Permanent land = game.getPermanent(targetPermanent);
-                if (land != null) {
-                    for (String type : land.getSubtype(game)) {
-                        if (!landTypes.contains(type)) {
-                            landTypes.add(type);
-                        }
-                    }
-                }
-            }
+        if (loseOther) {
+            landTypesToAdd.addAll(landTypes);
         }
     }
 
@@ -153,15 +147,25 @@ public class BecomesBasicLandTargetEffect extends ContinuousEffectImpl {
                         if (!land.getCardType().contains(CardType.LAND)) {
                             land.getCardType().add(CardType.LAND);
                         }
-                        // 305.7 Note that this doesn't remove any abilities that were granted to the land by other effects
-                        // So the ability removing has to be done before Layer 6
-                        land.removeAllAbilities(source.getSourceId(), game);
-                        // 305.7
-                        land.getSubtype(game).removeAll(CardRepository.instance.getLandTypes());
-                        land.getSubtype(game).addAll(landTypes);
+                        if (loseOther) {
+                            // 305.7 Note that this doesn't remove any abilities that were granted to the land by other effects
+                            // So the ability removing has to be done before Layer 6
+                            land.removeAllAbilities(source.getSourceId(), game);
+                            // 305.7
+                            land.getSubtype(game).removeAll(CardRepository.instance.getLandTypes());
+                            land.getSubtype(game).addAll(landTypes);
+                        } else {
+                            landTypesToAdd.clear();
+                            for (String subtype : landTypes) {
+                                if (!land.getSubtype(game).contains(subtype)) {
+                                    land.getSubtype(game).add(subtype);
+                                    landTypesToAdd.add(subtype);
+                                }
+                            }
+                        }
                         break;
                     case AbilityAddingRemovingEffects_6:
-                        for (String landType : landTypes) {
+                        for (String landType : landTypesToAdd) {
                             switch (landType) {
                                 case "Swamp":
                                     land.addAbility(new BlackManaAbility(), source.getSourceId(), game);

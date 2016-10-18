@@ -1,16 +1,12 @@
 package mage.sets;
 
+import mage.cards.CardGraphicInfo;
 import mage.cards.ExpansionSet;
+import mage.constants.Rarity;
 import mage.constants.SetType;
 
-import java.util.GregorianCalendar;
-import mage.constants.Rarity;
-import java.util.List;
-import mage.ObjectColor;
-import mage.cards.CardGraphicInfo;
-import mage.cards.FrameStyle;
-
 public class Tempest extends ExpansionSet {
+
     private static final Tempest fINSTANCE = new Tempest();
 
     public static Tempest getInstance() {
@@ -18,7 +14,7 @@ public class Tempest extends ExpansionSet {
     }
 
     private Tempest() {
-        super("Tempest", "TMP", "mage.sets.tempest", new GregorianCalendar(1997, 9, 1).getTime(), SetType.EXPANSION);
+        super("Tempest", "TMP", ExpansionSet.buildDate(1997, 10, 1), SetType.EXPANSION);
         this.blockName = "Tempest";
         this.hasBoosters = true;
         this.numBoosterLands = 0;

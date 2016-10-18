@@ -24,21 +24,19 @@
 * The views and conclusions contained in the software and documentation are those of the
 * authors and should not be interpreted as representing official policies, either expressed
 * or implied, of BetaSteward_at_googlemail.com.
-*/
-
+ */
 package mage.sets;
 
-import java.util.GregorianCalendar;
 import mage.cards.ExpansionSet;
-import mage.constants.SetType;
 import mage.constants.Rarity;
-import java.util.List;
+import mage.constants.SetType;
 
 /**
  *
  * @author fireshoes
  */
 public class FTVAngels extends ExpansionSet {
+
     private static final FTVAngels fINSTANCE = new FTVAngels();
 
     public static FTVAngels getInstance() {
@@ -46,7 +44,7 @@ public class FTVAngels extends ExpansionSet {
     }
 
     private FTVAngels() {
-        super("From the Vault: Angels", "V15", "mage.sets.ftvangels", new GregorianCalendar(2015, 8, 21).getTime(), SetType.SUPPLEMENTAL);
+        super("From the Vault: Angels", "V15", ExpansionSet.buildDate(2015, 8, 21), SetType.SUPPLEMENTAL);
         this.hasBasicLands = false;
         cards.add(new SetCardInfo("Akroma, Angel of Fury", 1, Rarity.MYTHIC, mage.cards.a.AkromaAngelOfFury.class));
         cards.add(new SetCardInfo("Akroma, Angel of Wrath", 2, Rarity.MYTHIC, mage.cards.a.AkromaAngelOfWrath.class));

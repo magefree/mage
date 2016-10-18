@@ -27,11 +27,8 @@
  */
 package mage.sets;
 
-import java.util.GregorianCalendar;
 import mage.cards.ExpansionSet;
 import mage.constants.SetType;
-import mage.constants.Rarity;
-import java.util.List;
 
 /**
  *
@@ -45,7 +42,7 @@ public class CommanderAnthology extends ExpansionSet {
     }
 
     private CommanderAnthology() {
-        super("Commander Anthology", "CMA2", "mage.sets.commanderanthology", new GregorianCalendar(2017, 6, 9).getTime(), SetType.SUPPLEMENTAL);
+        super("Commander Anthology", "CMA2", ExpansionSet.buildDate(2017, 6, 9), SetType.SUPPLEMENTAL);
         this.blockName = "Commander Anthology";
         this.hasBasicLands = false;
     }

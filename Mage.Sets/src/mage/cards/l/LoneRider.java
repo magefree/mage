@@ -39,9 +39,9 @@ import mage.abilities.effects.common.TransformSourceEffect;
 import mage.abilities.keyword.FirstStrikeAbility;
 import mage.abilities.keyword.LifelinkAbility;
 import mage.abilities.keyword.TransformAbility;
-import mage.cards.i.ItThatRidesAsOne;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
+import mage.cards.i.ItThatRidesAsOne;
 import mage.constants.CardType;
 import mage.game.Game;
 import mage.game.events.GameEvent;
@@ -56,7 +56,7 @@ public class LoneRider extends CardImpl {
     private static final String ruleText = "At the beginning of the end step, if you gained 3 or more life this turn, transform {this}";
 
     public LoneRider(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{1}{W}");
+        super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{1}{W}");
         this.subtype.add("Human");
         this.subtype.add("Knight");
         this.power = new MageInt(1);
@@ -96,7 +96,7 @@ class YouGainedLifeCondition extends IntCompareCondition {
     @Override
     protected int getInputValue(Game game, Ability source) {
         int gainedLife = 0;
-        PlayerGainedLifeWatcher watcher = (PlayerGainedLifeWatcher) game.getState().getWatchers().get("PlayerGainedLifeWatcher");
+        PlayerGainedLifeWatcher watcher = (PlayerGainedLifeWatcher) game.getState().getWatchers().get(PlayerGainedLifeWatcher.class.getName());
         if (watcher != null) {
             gainedLife = watcher.getLiveGained(source.getControllerId());
         }

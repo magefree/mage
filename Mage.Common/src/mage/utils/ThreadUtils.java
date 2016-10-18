@@ -15,14 +15,17 @@ public class ThreadUtils {
 
     public static final ThreadPoolExecutor threadPool;
     public static final ThreadPoolExecutor threadPool2;
+    public static final ThreadPoolExecutor threadPool3;
     private static int threadCount;
+
     static {
-        /** used in CardInfoPaneImpl
-         * 
+        /**
+         * used in CardInfoPaneImpl
+         *
          */
         threadPool = new ThreadPoolExecutor(4, 4, 0L, TimeUnit.MILLISECONDS, new LinkedBlockingQueue(), new ThreadFactory() {
             @Override
-            public Thread newThread (Runnable runnable) {
+            public Thread newThread(Runnable runnable) {
                 threadCount++;
                 Thread thread = new Thread(runnable, "Util" + threadCount);
                 thread.setDaemon(true);
@@ -30,13 +33,13 @@ public class ThreadUtils {
             }
         });
         threadPool.prestartAllCoreThreads();
-        
+
         /**
-         * Used for MageActionCallback 
+         * Used for MageActionCallback
          */
         threadPool2 = new ThreadPoolExecutor(4, 4, 0L, TimeUnit.MILLISECONDS, new LinkedBlockingQueue(), new ThreadFactory() {
             @Override
-            public Thread newThread (Runnable runnable) {
+            public Thread newThread(Runnable runnable) {
                 threadCount++;
                 Thread thread = new Thread(runnable, "TP2" + threadCount);
                 thread.setDaemon(true);
@@ -44,16 +47,30 @@ public class ThreadUtils {
             }
         });
         threadPool2.prestartAllCoreThreads();
+        /**
+         * Used for Enlarged view
+         */
+
+        threadPool3 = new ThreadPoolExecutor(1, 1, 0L, TimeUnit.MILLISECONDS, new LinkedBlockingQueue(), new ThreadFactory() {
+            @Override
+            public Thread newThread(Runnable runnable) {
+                threadCount++;
+                Thread thread = new Thread(runnable, "EV" + threadCount);
+                thread.setDaemon(true);
+                return thread;
+            }
+        });
+        threadPool3.prestartAllCoreThreads();
     }
 
-    public static void sleep (int millis) {
+    public static void sleep(int millis) {
         try {
             Thread.sleep(millis);
         } catch (InterruptedException ignored) {
         }
     }
 
-    public static void wait (Object lock) {
+    public static void wait(Object lock) {
         synchronized (lock) {
             try {
                 lock.wait();

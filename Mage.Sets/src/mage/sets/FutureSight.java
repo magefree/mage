@@ -27,11 +27,9 @@
  */
 package mage.sets;
 
-import java.util.GregorianCalendar;
 import mage.constants.SetType;
 import mage.cards.ExpansionSet;
 import mage.constants.Rarity;
-import java.util.List;
 
 /**
  *
@@ -46,7 +44,7 @@ public class FutureSight extends ExpansionSet {
     }
 
     private FutureSight() {
-        super("Future Sight", "FUT", "mage.sets.futuresight", new GregorianCalendar(2007, 4, 4).getTime(), SetType.EXPANSION);
+        super("Future Sight", "FUT", ExpansionSet.buildDate(2007, 4, 4), SetType.EXPANSION);
         this.blockName = "Time Spiral";
         this.parentSet = TimeSpiral.getInstance();
         this.hasBasicLands = false;

@@ -24,24 +24,20 @@
 * The views and conclusions contained in the software and documentation are those of the
 * authors and should not be interpreted as representing official policies, either expressed
 * or implied, of BetaSteward_at_googlemail.com.
-*/
-
+ */
 package mage.sets;
 
-import java.util.GregorianCalendar;
-import mage.cards.ExpansionSet;
-import mage.constants.SetType;
-import mage.constants.Rarity;
-import java.util.List;
-import mage.ObjectColor;
 import mage.cards.CardGraphicInfo;
-import mage.cards.FrameStyle;
+import mage.cards.ExpansionSet;
+import mage.constants.Rarity;
+import mage.constants.SetType;
 
 /**
  *
  * @author fireshoes
  */
 public class PDSFireAndLightning extends ExpansionSet {
+
     private static final PDSFireAndLightning fINSTANCE = new PDSFireAndLightning();
 
     public static PDSFireAndLightning getInstance() {
@@ -49,7 +45,7 @@ public class PDSFireAndLightning extends ExpansionSet {
     }
 
     private PDSFireAndLightning() {
-        super("Premium Deck Series: Fire and Lightning", "PD2", "mage.sets.pdsfireandlightning", new GregorianCalendar(2010, 11, 1).getTime(),
+        super("Premium Deck Series: Fire and Lightning", "PD2", ExpansionSet.buildDate(2010, 11, 1),
                 SetType.SUPPLEMENTAL);
         this.hasBasicLands = false;
         cards.add(new SetCardInfo("Ball Lightning", 12, Rarity.RARE, mage.cards.b.BallLightning.class));

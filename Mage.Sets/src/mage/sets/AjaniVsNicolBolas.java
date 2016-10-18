@@ -28,14 +28,10 @@
 
 package mage.sets;
 
-import java.util.GregorianCalendar;
 import mage.cards.ExpansionSet;
 import mage.constants.SetType;
 import mage.constants.Rarity;
-import java.util.List;
-import mage.ObjectColor;
 import mage.cards.CardGraphicInfo;
-import mage.cards.FrameStyle;
 
 /**
  *
@@ -49,7 +45,7 @@ public class AjaniVsNicolBolas extends ExpansionSet {
     }
 
     private AjaniVsNicolBolas() {
-        super("Duel Decks: Ajani vs. Nicol Bolas", "DDH", "mage.sets.ajanivsnicolbolas", new GregorianCalendar(2011, 9, 2).getTime(), SetType.SUPPLEMENTAL);
+        super("Duel Decks: Ajani vs. Nicol Bolas", "DDH", ExpansionSet.buildDate(2011, 9, 2), SetType.SUPPLEMENTAL);
         this.blockName = "Duel Decks";
         this.hasBasicLands = false;
         cards.add(new SetCardInfo("Ageless Entity", 18, Rarity.RARE, mage.cards.a.AgelessEntity.class));

@@ -43,7 +43,7 @@ public class Modern extends Constructed {
     public Modern() {
         super("Constructed - Modern");
 
-        Date cutoff = new GregorianCalendar(2003, 7, 28).getTime(); // Eight edition release date
+        Date cutoff = new GregorianCalendar(2003, 6, 28).getTime(); // Eight edition release date
         for (ExpansionSet set : Sets.getInstance().values()) {
             if ((set.getReleaseDate().after(cutoff) || set.getReleaseDate().equals(cutoff))
                     && (set.getSetType() == SetType.CORE || set.getSetType() == SetType.EXPANSION)) {

@@ -56,7 +56,7 @@ import mage.target.TargetCard;
 public class VesselOfNascency extends CardImpl {
 
     public VesselOfNascency(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.ENCHANTMENT},"{G}");
+        super(ownerId, setInfo, new CardType[]{CardType.ENCHANTMENT}, "{G}");
 
         // {1}{G}, Sacrifice Vessel of Nascency: Reveal the top four cards of your library. You may put an artifact, creature, enchantment, land, or
         // planeswalker card from among them into your hand. Put the rest into your graveyard.

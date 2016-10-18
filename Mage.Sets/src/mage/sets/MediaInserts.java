@@ -27,14 +27,10 @@
  */
 package mage.sets;
 
-import java.util.GregorianCalendar;
 import mage.cards.ExpansionSet;
 import mage.constants.SetType;
 import mage.constants.Rarity;
-import java.util.List;
-import mage.ObjectColor;
 import mage.cards.CardGraphicInfo;
-import mage.cards.FrameStyle;
 
 public class MediaInserts extends ExpansionSet {
     private static final MediaInserts fINSTANCE = new MediaInserts();
@@ -44,7 +40,7 @@ public class MediaInserts extends ExpansionSet {
     }
 
     private MediaInserts() {
-        super("Media Inserts", "MBP", "mage.sets.mediainserts", new GregorianCalendar(1990, 1, 1).getTime(), SetType.PROMOTIONAL);
+        super("Media Inserts", "MBP", ExpansionSet.buildDate(1990, 1, 1), SetType.PROMOTIONAL);
         this.hasBoosters = false;
         this.hasBasicLands = false;
         cards.add(new SetCardInfo("Acquire", 83, Rarity.RARE, mage.cards.a.Acquire.class));

@@ -6,11 +6,8 @@
 
 package mage.sets;
 
-import java.util.GregorianCalendar;
 import mage.cards.ExpansionSet;
 import mage.constants.SetType;
-import mage.constants.Rarity;
-import java.util.List;
 
 /**
  *
@@ -25,7 +22,7 @@ public class MindVsMight extends ExpansionSet {
     }
 
     private MindVsMight() {
-        super("Duel Decks: Mind vs. Might", "DDS", "mage.sets.mindvsmight", new GregorianCalendar(2017, 3, 31).getTime(), SetType.SUPPLEMENTAL);
+        super("Duel Decks: Mind vs. Might", "DDS", ExpansionSet.buildDate(2017, 3, 31), SetType.SUPPLEMENTAL);
         this.blockName = "Duel Decks";
         this.hasBasicLands = false;
     }

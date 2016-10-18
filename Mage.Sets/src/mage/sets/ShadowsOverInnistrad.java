@@ -29,9 +29,9 @@ package mage.sets;
 
 import java.util.ArrayList;
 import java.util.EnumMap;
-import java.util.GregorianCalendar;
 import java.util.List;
 import mage.cards.Card;
+import mage.cards.CardGraphicInfo;
 import mage.cards.ExpansionSet;
 import mage.cards.repository.CardCriteria;
 import mage.cards.repository.CardInfo;
@@ -39,9 +39,6 @@ import mage.cards.repository.CardRepository;
 import mage.constants.Rarity;
 import mage.constants.SetType;
 import mage.util.RandomUtil;
-import mage.ObjectColor;
-import mage.cards.CardGraphicInfo;
-import mage.cards.FrameStyle;
 
 /**
  *
@@ -58,7 +55,7 @@ public class ShadowsOverInnistrad extends ExpansionSet {
     protected final EnumMap<Rarity, List<CardInfo>> savedDoubleFacedCards;
 
     private ShadowsOverInnistrad() {
-        super("Shadows over Innistrad", "SOI", "mage.sets.shadowsoverinnistrad", new GregorianCalendar(2016, 3, 8).getTime(), SetType.EXPANSION);
+        super("Shadows over Innistrad", "SOI", ExpansionSet.buildDate(2016, 4, 8), SetType.EXPANSION);
         this.blockName = "Shadows over Innistrad";
         this.hasBoosters = true;
         this.numBoosterLands = 1;

@@ -7,7 +7,9 @@ import mage.cards.Card;
 import mage.constants.PhaseStep;
 import mage.constants.Zone;
 import mage.filter.FilterCard;
+import mage.filter.common.FilterCreaturePermanent;
 import mage.filter.predicate.mageobject.NamePredicate;
+import mage.game.permanent.Permanent;
 import org.apache.log4j.Logger;
 import org.junit.Assert;
 import org.junit.Test;
@@ -101,7 +103,6 @@ public class CloneTest extends CardTestPlayerBase {
 
     // copy Nightmare test, check that the P/T setting effect ends
     // if the clone leaves battlefield
-
     @Test
     public void testCopyNightmare() {
         addCard(Zone.BATTLEFIELD, playerA, "Island", 5);
@@ -141,10 +142,63 @@ public class CloneTest extends CardTestPlayerBase {
         for (ContinuousEffectsList effectsList : currentGame.getContinuousEffects().allEffectsLists) {
             Iterator it = effectsList.iterator();
             while (it.hasNext()) {
-                 ContinuousEffect effect = (ContinuousEffect) it.next();
-                 Logger.getLogger(CloneTest.class).debug("- " + effect.toString());
+                ContinuousEffect effect = (ContinuousEffect) it.next();
+                Logger.getLogger(CloneTest.class).debug("- " + effect.toString());
             }
         }
     }
-            
+
+    /**
+     * When I Clone a creature, and I try to use Vesuvan Doppelganger to my
+     * cloned creature, The Vesuvan disappears and the creature is not created.
+     */
+    @Test
+    public void testCloneAndVesuvanDoppelganger() {
+        addCard(Zone.BATTLEFIELD, playerA, "Island", 5);
+        // You may have Clone enter the battlefield as a copy of any creature on the battlefield.
+        addCard(Zone.HAND, playerA, "Clone"); // Creature {3}{U}
+        // You may have Vesuvan Doppelganger enter the battlefield as a copy of any creature on the battlefield
+        // except it doesn't copy that creature's color and it gains "At the beginning of your upkeep,
+        // you may have this creature become a copy of target creature except it doesn't copy that creature's color.
+        // If you do, this creature gains this ability."
+        addCard(Zone.HAND, playerA, "Vesuvan Doppelganger"); // Creature  {3}{U}{U}
+
+        addCard(Zone.BATTLEFIELD, playerB, "Island", 2);
+        addCard(Zone.BATTLEFIELD, playerB, "Silvercoat Lion", 1);
+        // {2}, {T} , Sacrifice a creature: Draw a card.
+        addCard(Zone.BATTLEFIELD, playerB, "Phyrexian Vault", 1);
+
+        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Clone");
+        setChoice(playerA, "Silvercoat Lion");
+
+        activateAbility(2, PhaseStep.PRECOMBAT_MAIN, playerB, "{2}");
+
+        castSpell(3, PhaseStep.PRECOMBAT_MAIN, playerA, "Vesuvan Doppelganger");
+        setChoice(playerA, "Silvercoat Lion");
+
+        setStopAt(3, PhaseStep.BEGIN_COMBAT);
+        execute();
+
+        assertGraveyardCount(playerB, "Silvercoat Lion", 1);
+        assertGraveyardCount(playerA, "Vesuvan Doppelganger", 0);
+
+        assertPermanentCount(playerA, "Silvercoat Lion", 2);
+        assertPermanentCount(playerB, "Silvercoat Lion", 0);
+
+        assertHandCount(playerB, 2);
+
+        boolean whiteLion = false;
+        boolean blueLion = false;
+        for (Permanent permanent : currentGame.getBattlefield().getAllActivePermanents(new FilterCreaturePermanent(), playerA.getId(), currentGame)) {
+            if (permanent.getColor(currentGame).isWhite()) {
+                whiteLion = true;
+            }
+            if (permanent.getColor(currentGame).isBlue()) {
+                blueLion = true;
+            }
+        }
+
+        Assert.assertTrue("There should be a white and a blue Silvercoat Lion be on the battlefield", blueLion && whiteLion);
+    }
+
 }

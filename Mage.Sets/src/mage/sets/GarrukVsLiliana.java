@@ -6,14 +6,10 @@
 
 package mage.sets;
 
-import java.util.GregorianCalendar;
 import mage.cards.ExpansionSet;
 import mage.constants.SetType;
 import mage.constants.Rarity;
-import java.util.List;
-import mage.ObjectColor;
 import mage.cards.CardGraphicInfo;
-import mage.cards.FrameStyle;
 
 /**
  *
@@ -28,7 +24,7 @@ public class GarrukVsLiliana extends ExpansionSet {
     }
 
     private GarrukVsLiliana() {
-        super("Duel Decks: Garruk vs. Liliana", "DDD", "mage.sets.garrukvsliliana", new GregorianCalendar(2009, 10, 30).getTime(), SetType.SUPPLEMENTAL);
+        super("Duel Decks: Garruk vs. Liliana", "DDD", ExpansionSet.buildDate(2009, 10, 30), SetType.SUPPLEMENTAL);
         this.blockName = "Duel Decks";
         this.hasBasicLands = false;
         cards.add(new SetCardInfo("Albino Troll", 3, Rarity.UNCOMMON, mage.cards.a.AlbinoTroll.class));

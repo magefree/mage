@@ -28,11 +28,9 @@
 
 package mage.sets;
 
-import java.util.GregorianCalendar;
 import mage.constants.SetType;
 import mage.cards.ExpansionSet;
 import mage.constants.Rarity;
-import java.util.List;
 
 /**
  *
@@ -47,7 +45,7 @@ public class GrandPrix extends ExpansionSet {
     }
 
     private GrandPrix() {
-        super("Grand Prix", "GPX", "mage.sets.grandprix", new GregorianCalendar(2011, 6, 17).getTime(), SetType.PROMOTIONAL);
+        super("Grand Prix", "GPX", ExpansionSet.buildDate(2011, 6, 17), SetType.PROMOTIONAL);
         this.hasBoosters = false;
         this.hasBasicLands = false;
         cards.add(new SetCardInfo("All Is Dust", 9, Rarity.MYTHIC, mage.cards.a.AllIsDust.class));

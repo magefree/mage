@@ -28,7 +28,6 @@
 
 package mage.sets;
 
-import java.util.GregorianCalendar;
 import java.util.List;
 import mage.cards.ExpansionSet;
 import mage.cards.repository.CardCriteria;
@@ -50,7 +49,7 @@ public class VintageMasters extends ExpansionSet {
     }
 
     private VintageMasters() {
-        super("Vintage Masters", "VMA", "mage.sets.vintagemasters", new GregorianCalendar(2014, 6, 16).getTime(), SetType.MAGIC_ONLINE);
+        super("Vintage Masters", "VMA", ExpansionSet.buildDate(2014, 6, 16), SetType.MAGIC_ONLINE);
         this.hasBasicLands = false;
         this.hasBoosters = true;
         this.numBoosterSpecial = 1;

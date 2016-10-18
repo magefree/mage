@@ -27,11 +27,9 @@
  */
 package mage.sets;
 
-import java.util.GregorianCalendar;
 import mage.cards.ExpansionSet;
 import mage.constants.SetType;
 import mage.constants.Rarity;
-import java.util.List;
 
 /**
  *
@@ -47,7 +45,7 @@ public class Champs extends ExpansionSet {
     }
 
     private Champs() {
-        super("Champs", "CP", "mage.sets.champs", new GregorianCalendar(2006, 3, 18).getTime(), SetType.PROMOTIONAL);
+        super("Champs", "CP", ExpansionSet.buildDate(2006, 3, 18), SetType.PROMOTIONAL);
         this.hasBoosters = false;
         cards.add(new SetCardInfo("Blood Knight", 7, Rarity.SPECIAL, mage.cards.b.BloodKnight.class));
         cards.add(new SetCardInfo("Bramblewood Paragon", 11, Rarity.SPECIAL, mage.cards.b.BramblewoodParagon.class));

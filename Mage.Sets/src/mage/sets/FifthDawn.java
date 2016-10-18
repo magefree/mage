@@ -27,11 +27,9 @@
  */
 package mage.sets;
 
-import java.util.GregorianCalendar;
 import mage.constants.SetType;
 import mage.cards.ExpansionSet;
 import mage.constants.Rarity;
-import java.util.List;
 
 /**
  *
@@ -46,7 +44,7 @@ public class FifthDawn extends ExpansionSet {
     }
 
     private FifthDawn() {
-        super("Fifth Dawn", "5DN", "mage.sets.fifthdawn", new GregorianCalendar(2004, 5, 4).getTime(), SetType.EXPANSION);
+        super("Fifth Dawn", "5DN", ExpansionSet.buildDate(2004, 5, 4), SetType.EXPANSION);
         this.blockName = "Mirrodin";
         this.parentSet = Mirrodin.getInstance();
         this.hasBasicLands = false;

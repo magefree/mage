@@ -28,14 +28,10 @@
 
 package mage.sets;
 
-import java.util.GregorianCalendar;
 import mage.cards.ExpansionSet;
 import mage.constants.SetType;
 import mage.constants.Rarity;
-import java.util.List;
-import mage.ObjectColor;
 import mage.cards.CardGraphicInfo;
-import mage.cards.FrameStyle;
 
 /**
  *
@@ -51,7 +47,7 @@ public class KhansOfTarkir extends ExpansionSet {
     }
 
     private KhansOfTarkir() {
-        super("Khans of Tarkir", "KTK", "mage.sets.khansoftarkir", new GregorianCalendar(2014, 9, 26).getTime(), SetType.EXPANSION);
+        super("Khans of Tarkir", "KTK", ExpansionSet.buildDate(2014, 9, 26), SetType.EXPANSION);
         this.blockName = "Khans of Tarkir";
         this.hasBoosters = true;
         this.hasBasicLands = true;

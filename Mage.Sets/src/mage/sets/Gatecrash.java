@@ -27,11 +27,9 @@
  */
 package mage.sets;
 
-import java.util.GregorianCalendar;
 import mage.constants.SetType;
 import mage.cards.ExpansionSet;
 import mage.constants.Rarity;
-import java.util.List;
 
 /**
  *
@@ -46,7 +44,7 @@ public class Gatecrash extends ExpansionSet {
     }
 
     private Gatecrash() {
-        super("Gatecrash", "GTC", "mage.sets.gatecrash", new GregorianCalendar(2013, 2, 1).getTime(), SetType.EXPANSION);
+        super("Gatecrash", "GTC", ExpansionSet.buildDate(2013, 2, 1), SetType.EXPANSION);
         this.blockName = "Return to Ravnica";
         this.parentSet = ReturnToRavnica.getInstance();
         this.hasBasicLands = false;

@@ -27,14 +27,10 @@
  */
 package mage.sets;
 
-import java.util.GregorianCalendar;
 import mage.cards.ExpansionSet;
 import mage.constants.SetType;
 import mage.constants.Rarity;
-import java.util.List;
-import mage.ObjectColor;
 import mage.cards.CardGraphicInfo;
-import mage.cards.FrameStyle;
 
 /**
  *
@@ -48,7 +44,7 @@ public class ElspethVsKiora extends ExpansionSet {
     }
 
     private ElspethVsKiora() {
-        super("Duel Decks: Elspeth vs. Kiora", "DDO", "mage.sets.elspethvskiora", new GregorianCalendar(2015, 2, 27).getTime(), SetType.SUPPLEMENTAL);
+        super("Duel Decks: Elspeth vs. Kiora", "DDO", ExpansionSet.buildDate(2015, 2, 27), SetType.SUPPLEMENTAL);
         this.blockName = "Duel Decks";
         this.hasBasicLands = false;
         cards.add(new SetCardInfo("Accumulated Knowledge", 35, Rarity.COMMON, mage.cards.a.AccumulatedKnowledge.class));

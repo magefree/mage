@@ -28,11 +28,9 @@
 
 package mage.sets;
 
-import java.util.GregorianCalendar;
 import mage.cards.ExpansionSet;
 import mage.constants.SetType;
 import mage.constants.Rarity;
-import java.util.List;
 
 /**
  *
@@ -47,7 +45,7 @@ public class EternalMasters extends ExpansionSet {
     }
 
     private EternalMasters() {
-        super("Eternal Masters", "EMA", "mage.sets.eternalmasters", new GregorianCalendar(2016, 6, 10).getTime(), SetType.SUPPLEMENTAL);
+        super("Eternal Masters", "EMA", ExpansionSet.buildDate(2016, 6, 10), SetType.SUPPLEMENTAL);
         this.blockName = "Reprint";
         this.hasBasicLands = false;
         this.hasBoosters = true;
@@ -93,6 +91,7 @@ public class EternalMasters extends ExpansionSet {
         cards.add(new SetCardInfo("Chain Lightning", 123, Rarity.UNCOMMON, mage.cards.c.ChainLightning.class));
         cards.add(new SetCardInfo("Chrome Mox", 219, Rarity.MYTHIC, mage.cards.c.ChromeMox.class));
         cards.add(new SetCardInfo("Civic Wayfinder", 161, Rarity.COMMON, mage.cards.c.CivicWayfinder.class));
+	cards.add(new SetCardInfo("Coalition Honor Guard", 6, Rarity.COMMON, mage.cards.c.CoalitionHonorGuard.class));
         cards.add(new SetCardInfo("Commune with the Gods", 162, Rarity.COMMON, mage.cards.c.CommuneWithTheGods.class));
         cards.add(new SetCardInfo("Control Magic", 42, Rarity.RARE, mage.cards.c.ControlMagic.class));
         cards.add(new SetCardInfo("Counterspell", 43, Rarity.COMMON, mage.cards.c.Counterspell.class));

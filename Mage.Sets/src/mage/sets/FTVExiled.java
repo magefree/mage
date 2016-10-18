@@ -24,21 +24,19 @@
 * The views and conclusions contained in the software and documentation are those of the
 * authors and should not be interpreted as representing official policies, either expressed
 * or implied, of BetaSteward_at_googlemail.com.
-*/
-
+ */
 package mage.sets;
 
-import java.util.GregorianCalendar;
 import mage.cards.ExpansionSet;
-import mage.constants.SetType;
 import mage.constants.Rarity;
-import java.util.List;
+import mage.constants.SetType;
 
 /**
  *
  * @author fireshoes
  */
 public class FTVExiled extends ExpansionSet {
+
     private static final FTVExiled fINSTANCE = new FTVExiled();
 
     public static FTVExiled getInstance() {
@@ -46,7 +44,7 @@ public class FTVExiled extends ExpansionSet {
     }
 
     private FTVExiled() {
-        super("From the Vault: Exiled", "V09", "mage.sets.ftvexiled", new GregorianCalendar(2009, 8, 28).getTime(), SetType.SUPPLEMENTAL);
+        super("From the Vault: Exiled", "V09", ExpansionSet.buildDate(2009, 8, 28), SetType.SUPPLEMENTAL);
         this.hasBasicLands = false;
         cards.add(new SetCardInfo("Balance", 1, Rarity.MYTHIC, mage.cards.b.Balance.class));
         cards.add(new SetCardInfo("Berserk", 2, Rarity.MYTHIC, mage.cards.b.Berserk.class));

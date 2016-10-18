@@ -27,11 +27,8 @@
  */
 package mage.sets;
 
-import java.util.GregorianCalendar;
 import mage.cards.ExpansionSet;
 import mage.constants.SetType;
-import mage.constants.Rarity;
-import java.util.List;
 
 /**
  *
@@ -47,7 +44,7 @@ public class Commander2016 extends ExpansionSet {
     }
 
     private Commander2016() {
-        super("Commander 2016 Edition", "C16", "mage.sets.commander2016", new GregorianCalendar(2016, 11, 11).getTime(), SetType.SUPPLEMENTAL);
+        super("Commander 2016 Edition", "C16", ExpansionSet.buildDate(2016, 11, 11), SetType.SUPPLEMENTAL);
         this.blockName = "Command Zone";
     }
 

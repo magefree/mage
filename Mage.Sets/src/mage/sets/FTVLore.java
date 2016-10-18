@@ -24,21 +24,19 @@
 * The views and conclusions contained in the software and documentation are those of the
 * authors and should not be interpreted as representing official policies, either expressed
 * or implied, of BetaSteward_at_googlemail.com.
-*/
-
+ */
 package mage.sets;
 
-import java.util.GregorianCalendar;
 import mage.cards.ExpansionSet;
-import mage.constants.SetType;
 import mage.constants.Rarity;
-import java.util.List;
+import mage.constants.SetType;
 
 /**
  *
  * @author fireshoes
  */
 public class FTVLore extends ExpansionSet {
+
     private static final FTVLore fINSTANCE = new FTVLore();
 
     public static FTVLore getInstance() {
@@ -46,7 +44,7 @@ public class FTVLore extends ExpansionSet {
     }
 
     private FTVLore() {
-        super("From the Vault: Lore", "V16", "mage.sets.ftvlore", new GregorianCalendar(2016, 8, 19).getTime(), SetType.SUPPLEMENTAL);
+        super("From the Vault: Lore", "V16", ExpansionSet.buildDate(2016, 8, 19), SetType.SUPPLEMENTAL);
         this.hasBasicLands = false;
         cards.add(new SetCardInfo("Beseech the Queen", 1, Rarity.MYTHIC, mage.cards.b.BeseechTheQueen.class));
         cards.add(new SetCardInfo("Cabal Ritual", 2, Rarity.MYTHIC, mage.cards.c.CabalRitual.class));

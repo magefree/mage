@@ -27,14 +27,10 @@
  */
 package mage.sets;
 
-import java.util.GregorianCalendar;
 import mage.cards.ExpansionSet;
 import mage.constants.SetType;
 import mage.constants.Rarity;
-import java.util.List;
-import mage.ObjectColor;
 import mage.cards.CardGraphicInfo;
-import mage.cards.FrameStyle;
 
 /**
  *
@@ -50,7 +46,7 @@ public class AsiaPacificLandProgram extends ExpansionSet {
     }
 
     private AsiaPacificLandProgram() {
-        super("Asia Pacific Land Program", "APAC", "mage.sets.asiapacificlandprogram", new GregorianCalendar(1997, 10, 13).getTime(), SetType.PROMOTIONAL);
+        super("Asia Pacific Land Program", "APAC", ExpansionSet.buildDate(1997, 10, 13), SetType.PROMOTIONAL);
         this.hasBoosters = false;
         cards.add(new SetCardInfo("Forest", 1, Rarity.LAND, mage.cards.basiclands.Forest.class, new CardGraphicInfo(null, true)));
         cards.add(new SetCardInfo("Forest", 6, Rarity.LAND, mage.cards.basiclands.Forest.class, new CardGraphicInfo(null, true)));

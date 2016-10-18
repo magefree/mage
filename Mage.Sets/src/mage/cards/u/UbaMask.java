@@ -27,10 +27,7 @@
  */
 package mage.cards.u;
 
-import java.util.HashMap;
 import java.util.HashSet;
-import java.util.Map;
-import java.util.Set;
 import java.util.UUID;
 import mage.MageObject;
 import mage.MageObjectReference;
@@ -59,7 +56,7 @@ public class UbaMask extends CardImpl {
     public final static String UBA_MASK_VALUE_KEY = "ubaMaskExiledCards";
 
     public UbaMask(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.ARTIFACT},"{4}");
+        super(ownerId, setInfo, new CardType[]{CardType.ARTIFACT}, "{4}");
 
         // If a player would draw a card, that player exiles that card face up instead.
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new UbaMaskReplacementEffect()));
@@ -97,7 +94,9 @@ class UbaMaskReplacementEffect extends ReplacementEffectImpl {
     @Override
     public boolean replaceEvent(GameEvent event, Ability source, Game game) {
         if (event.getType().equals(GameEvent.EventType.PLAY_TURN)) {
-            game.getState().setValue(UbaMask.UBA_MASK_VALUE_KEY, null);
+            for (UUID playerId : game.getPlayerList()) {
+                game.getState().setValue(UbaMask.UBA_MASK_VALUE_KEY + source.getSourceId() + playerId, null);
+            }
             return false;
         }
         MageObject sourceObject = source.getSourceObject(game);
@@ -106,15 +105,10 @@ class UbaMaskReplacementEffect extends ReplacementEffectImpl {
             Card card = player.getLibrary().getFromTop(game);
             if (card != null) {
                 player.moveCardsToExile(card, source, game, true, source.getId(), sourceObject.getIdName());
-                Map<UUID, HashSet<MageObjectReference>> exiledCards = (Map) game.getState().getValue(UbaMask.UBA_MASK_VALUE_KEY);
-                if (exiledCards == null) {
-                    exiledCards = new HashMap<>();
-                    game.getState().setValue(UbaMask.UBA_MASK_VALUE_KEY, exiledCards);
-                }
-                HashSet<MageObjectReference> exiledCardsByPlayer = exiledCards.get(event.getPlayerId());
+                HashSet<MageObjectReference> exiledCardsByPlayer = (HashSet) game.getState().getValue(UbaMask.UBA_MASK_VALUE_KEY + event.getPlayerId());
                 if (exiledCardsByPlayer == null) {
                     exiledCardsByPlayer = new HashSet<>();
-                    exiledCards.put(event.getPlayerId(), exiledCardsByPlayer);
+                    game.getState().setValue(UbaMask.UBA_MASK_VALUE_KEY + event.getPlayerId(), exiledCardsByPlayer);
                 }
                 exiledCardsByPlayer.add(new MageObjectReference(card.getId(), game));
             }
@@ -158,12 +152,9 @@ class UbaMaskPlayEffect extends AsThoughEffectImpl {
     public boolean applies(UUID objectId, Ability source, UUID affectedControllerId, Game game) {
         Card card = game.getCard(objectId);
         if (card != null && affectedControllerId.equals(card.getOwnerId()) && game.getState().getZone(card.getId()) == Zone.EXILED) {
-            Map<UUID, HashSet<MageObjectReference>> exiledCards = (Map) game.getState().getValue(UbaMask.UBA_MASK_VALUE_KEY);
-            if (exiledCards != null) {
-                Set<MageObjectReference> exiledCardsByPlayer = exiledCards.get(affectedControllerId);
-                if (exiledCardsByPlayer != null) {
-                    return exiledCardsByPlayer.contains(new MageObjectReference(card, game));
-                }
+            HashSet<MageObjectReference> exiledCardsByPlayer = (HashSet) game.getState().getValue(UbaMask.UBA_MASK_VALUE_KEY + affectedControllerId);
+            if (exiledCardsByPlayer != null) {
+                return exiledCardsByPlayer.contains(new MageObjectReference(card, game));
             }
         }
         return false;

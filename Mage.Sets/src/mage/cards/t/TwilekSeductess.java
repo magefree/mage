@@ -41,13 +41,13 @@ import mage.constants.CardType;
 public class TwilekSeductess extends CardImpl {
 
     public TwilekSeductess(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{1}{G}");
+        super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{1}{G}");
         this.subtype.add("Twi'lek");
         this.power = new MageInt(2);
         this.toughness = new MageInt(2);
 
         // Whenever Twi'lek Seductess attacks, you may have target creature defending player controls untap and block it if able.
-        this.addAbility(new ProvokeAbility());
+        this.addAbility(new ProvokeAbility("Whenever {this} attacks, you may have target creature defending player controls untap and block it if able."));
 
     }
 

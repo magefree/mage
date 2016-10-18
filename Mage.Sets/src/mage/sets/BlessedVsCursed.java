@@ -27,14 +27,10 @@
  */
 package mage.sets;
 
-import java.util.GregorianCalendar;
 import mage.cards.ExpansionSet;
 import mage.constants.SetType;
 import mage.constants.Rarity;
-import java.util.List;
-import mage.ObjectColor;
 import mage.cards.CardGraphicInfo;
-import mage.cards.FrameStyle;
 
 /**
  *
@@ -48,7 +44,7 @@ public class BlessedVsCursed extends ExpansionSet {
     }
 
     private BlessedVsCursed() {
-        super("Duel Decks: Blessed vs. Cursed", "DDQ", "mage.sets.blessedvscursed", new GregorianCalendar(2016, 2, 26).getTime(), SetType.SUPPLEMENTAL);
+        super("Duel Decks: Blessed vs. Cursed", "DDQ", ExpansionSet.buildDate(2016, 2, 26), SetType.SUPPLEMENTAL);
         this.blockName = "Duel Decks";
         this.hasBasicLands = false;
         cards.add(new SetCardInfo("Abattoir Ghoul", 50, Rarity.UNCOMMON, mage.cards.a.AbattoirGhoul.class));

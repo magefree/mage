@@ -28,11 +28,9 @@
 
 package mage.sets;
 
-import java.util.GregorianCalendar;
 import mage.cards.ExpansionSet;
 import mage.constants.SetType;
 import mage.constants.Rarity;
-import java.util.List;
 
 /**
  *
@@ -47,7 +45,7 @@ public class JourneyIntoNyx extends ExpansionSet {
     }
 
     private JourneyIntoNyx() {
-        super("Journey into Nyx", "JOU", "mage.sets.journeyintonyx", new GregorianCalendar(2014, 5, 2).getTime(), SetType.EXPANSION);
+        super("Journey into Nyx", "JOU", ExpansionSet.buildDate(2014, 5, 2), SetType.EXPANSION);
         this.blockName = "Theros";
         this.parentSet = Theros.getInstance();
         this.hasBasicLands = false;

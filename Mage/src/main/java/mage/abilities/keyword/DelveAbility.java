@@ -37,6 +37,8 @@ import mage.abilities.costs.mana.AlternateManaPaymentAbility;
 import mage.abilities.costs.mana.ManaCost;
 import mage.abilities.effects.OneShotEffect;
 import mage.cards.Card;
+import mage.cards.Cards;
+import mage.cards.CardsImpl;
 import mage.constants.AbilityType;
 import mage.constants.ManaType;
 import mage.constants.Outcome;
@@ -56,17 +58,17 @@ import mage.util.CardUtil;
  * applies only after the total cost of the spell with delve is determined.
  * 702.65b Multiple instances of delve on the same spell are redundant.
  *
- * The rules for delve have changed slightly since it was last in an
- * expansion. Previously, delve reduced the cost to cast a spell. Under the
- * current rules, you exile cards from your graveyard at the same time you pay
- * the spell’s cost. Exiling a card this way is simply another way to pay that
- * cost. * Delve doesn't change a spell’s mana cost or converted mana cost. For
- * example, Dead Drop’s converted mana cost is 10 even if you exiled three cards
- * to cast it. * You can’t exile cards to pay for the colored mana requirements
- * of a spell with delve. * You can’t exile more cards than the generic mana
- * requirement of a spell with delve. For example, you can’t exile more than
- * nine cards from your graveyard to cast Dead Drop. * Because delve isn't an
- * alternative cost, it can be used in conjunction with alternative costs.
+ * The rules for delve have changed slightly since it was last in an expansion.
+ * Previously, delve reduced the cost to cast a spell. Under the current rules,
+ * you exile cards from your graveyard at the same time you pay the spell’s
+ * cost. Exiling a card this way is simply another way to pay that cost. * Delve
+ * doesn't change a spell’s mana cost or converted mana cost. For example, Dead
+ * Drop’s converted mana cost is 10 even if you exiled three cards to cast it. *
+ * You can’t exile cards to pay for the colored mana requirements of a spell
+ * with delve. * You can’t exile more cards than the generic mana requirement of
+ * a spell with delve. For example, you can’t exile more than nine cards from
+ * your graveyard to cast Dead Drop. * Because delve isn't an alternative cost,
+ * it can be used in conjunction with alternative costs.
  *
  * @author LevelX2
  *
@@ -155,18 +157,23 @@ class DelveEffect extends OneShotEffect {
         Player controller = game.getPlayer(source.getControllerId());
         if (controller != null) {
             ExileFromGraveCost exileFromGraveCost = (ExileFromGraveCost) source.getCosts().get(0);
+
             List<Card> exiledCards = exileFromGraveCost.getExiledCards();
             if (exiledCards.size() > 0) {
+                Cards toDelve = new CardsImpl();
+                for (Card card : exiledCards) {
+                    toDelve.add(card);
+                }
                 ManaPool manaPool = controller.getManaPool();
-                manaPool.addMana(new Mana(0, 0, 0, 0, 0, 0, 0, exiledCards.size()), game, source);
+                manaPool.addMana(new Mana(0, 0, 0, 0, 0, 0, 0, toDelve.size()), game, source);
                 manaPool.unlockManaType(ManaType.COLORLESS);
                 String keyString = CardUtil.getCardZoneString("delvedCards", source.getSourceId(), game);
                 @SuppressWarnings("unchecked")
-                List<Card> delvedCards = (List<Card>) game.getState().getValue(keyString);
+                Cards delvedCards = (Cards) game.getState().getValue(keyString);
                 if (delvedCards == null) {
-                    game.getState().setValue(keyString, exiledCards);
+                    game.getState().setValue(keyString, toDelve);
                 } else {
-                    delvedCards.addAll(exiledCards);
+                    delvedCards.addAll(toDelve);
                 }
             }
             return true;

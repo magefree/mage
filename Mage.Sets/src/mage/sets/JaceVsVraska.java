@@ -28,14 +28,10 @@
 
 package mage.sets;
 
-import java.util.GregorianCalendar;
 import mage.cards.ExpansionSet;
 import mage.constants.SetType;
 import mage.constants.Rarity;
-import java.util.List;
-import mage.ObjectColor;
 import mage.cards.CardGraphicInfo;
-import mage.cards.FrameStyle;
 
 /**
  *
@@ -50,7 +46,7 @@ public class JaceVsVraska extends ExpansionSet {
     }
 
     private JaceVsVraska() {
-        super("Duel Decks: Jace vs. Vraska", "DDM", "mage.sets.jacevsvraska", new GregorianCalendar(2014, 3, 14).getTime(), SetType.SUPPLEMENTAL);
+        super("Duel Decks: Jace vs. Vraska", "DDM", ExpansionSet.buildDate(2014, 3, 14), SetType.SUPPLEMENTAL);
         this.blockName = "Duel Decks";
         this.hasBasicLands = false;
         cards.add(new SetCardInfo("Acidic Slime", 64, Rarity.UNCOMMON, mage.cards.a.AcidicSlime.class));

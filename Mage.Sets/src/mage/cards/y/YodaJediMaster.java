@@ -38,7 +38,7 @@ import mage.abilities.effects.Effect;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.GetEmblemEffect;
 import mage.abilities.effects.common.LookLibraryAndPickControllerEffect;
-import mage.abilities.effects.common.ReturnFromExileEffect;
+import mage.abilities.effects.common.ReturnToBattlefieldUnderYourControlTargetEffect;
 import mage.abilities.effects.common.continuous.GainAbilityControlledEffect;
 import mage.abilities.effects.common.continuous.GainAbilityControllerEffect;
 import mage.abilities.keyword.HexproofAbility;
@@ -58,6 +58,7 @@ import mage.game.Game;
 import mage.game.command.Emblem;
 import mage.game.permanent.Permanent;
 import mage.target.TargetPermanent;
+import mage.target.targetpointer.FixedTarget;
 
 /**
  *
@@ -73,7 +74,7 @@ public class YodaJediMaster extends CardImpl {
     }
 
     public YodaJediMaster(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.PLANESWALKER},"{1}{G}{U}");
+        super(ownerId, setInfo, new CardType[]{CardType.PLANESWALKER}, "{1}{G}{U}");
         this.subtype.add("Yoda");
 
         this.addAbility(new PlanswalkerEntersWithLoyalityCountersAbility(3));
@@ -108,7 +109,7 @@ class YodaJediMasterEffect extends OneShotEffect {
 
     public YodaJediMasterEffect() {
         super(Outcome.Detriment);
-        staticText = "Exile another target permanent you own. Return that card to the battlefield under your control at the beggining of your next end step";
+        staticText = "Exile another target permanent you own. Return that card to the battlefield under your control at the beginning of your next end step";
     }
 
     public YodaJediMasterEffect(final YodaJediMasterEffect effect) {
@@ -122,8 +123,10 @@ class YodaJediMasterEffect extends OneShotEffect {
         if (permanent != null && sourcePermanent != null) {
             if (permanent.moveToExile(source.getSourceId(), sourcePermanent.getName(), source.getSourceId(), game)) {
                 //create delayed triggered ability
-                AtTheBeginOfNextEndStepDelayedTriggeredAbility delayedAbility = new AtTheBeginOfNextEndStepDelayedTriggeredAbility(new ReturnFromExileEffect(source.getSourceId(), Zone.BATTLEFIELD));
-                game.addDelayedTriggeredAbility(delayedAbility, source);
+                Effect effect = new ReturnToBattlefieldUnderYourControlTargetEffect();
+                effect.setText("Return that card to the battlefield under your control at the beginning of your next end step");
+                effect.setTargetPointer(new FixedTarget(permanent.getId(), game));
+                game.addDelayedTriggeredAbility(new AtTheBeginOfNextEndStepDelayedTriggeredAbility(effect), source);
                 return true;
             }
         }

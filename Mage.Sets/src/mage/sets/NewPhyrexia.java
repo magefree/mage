@@ -1,14 +1,9 @@
 package mage.sets;
 
-import java.util.GregorianCalendar;
-
 import mage.cards.ExpansionSet;
 import mage.constants.SetType;
 import mage.constants.Rarity;
-import java.util.List;
-import mage.ObjectColor;
 import mage.cards.CardGraphicInfo;
-import mage.cards.FrameStyle;
 
 public class NewPhyrexia extends ExpansionSet {
     private static final NewPhyrexia fINSTANCE = new NewPhyrexia();
@@ -18,7 +13,7 @@ public class NewPhyrexia extends ExpansionSet {
     }
 
     private NewPhyrexia() {
-        super("New Phyrexia", "NPH", "mage.sets.newphyrexia", new GregorianCalendar(2011, 4, 4).getTime(), SetType.EXPANSION);
+        super("New Phyrexia", "NPH", ExpansionSet.buildDate(2011, 4, 4), SetType.EXPANSION);
         this.blockName = "Scars of Mirrodin";
         this.parentSet = ScarsOfMirrodin.getInstance();
         this.hasBoosters = true;

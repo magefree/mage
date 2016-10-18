@@ -31,9 +31,7 @@ package mage.sets;
 import mage.cards.ExpansionSet;
 import mage.constants.SetType;
 
-import java.util.GregorianCalendar;
 import mage.constants.Rarity;
-import java.util.List;
 
 /**
  * Created by IntelliJ IDEA. User: Loki Date: 20.12.10 Time: 21:01
@@ -46,7 +44,7 @@ public class Guildpact extends ExpansionSet {
     }
 
     private Guildpact() {
-        super("Guildpact", "GPT", "mage.sets.guildpact", new GregorianCalendar(2006, 1, 3).getTime(), SetType.EXPANSION);
+        super("Guildpact", "GPT", ExpansionSet.buildDate(2006, 1, 3), SetType.EXPANSION);
         this.blockName = "Ravnica";
         this.parentSet = RavnicaCityOfGuilds.getInstance();
         this.hasBasicLands = false;

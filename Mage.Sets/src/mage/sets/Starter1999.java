@@ -28,14 +28,10 @@
 
 package mage.sets;
 
-import java.util.GregorianCalendar;
 import mage.cards.ExpansionSet;
 import mage.constants.SetType;
 import mage.constants.Rarity;
-import java.util.List;
-import mage.ObjectColor;
 import mage.cards.CardGraphicInfo;
-import mage.cards.FrameStyle;
 
 /**
  *
@@ -50,7 +46,7 @@ public class Starter1999 extends ExpansionSet {
     }
 
     private Starter1999() {
-        super("Starter 1999", "S99", "mage.sets.starter1999", new GregorianCalendar(1999, 7, 1).getTime(), SetType.SUPPLEMENTAL);
+        super("Starter 1999", "S99", ExpansionSet.buildDate(1999, 7, 1), SetType.SUPPLEMENTAL);
         this.blockName = "Beginner";
         this.hasBasicLands = true;
         this.hasBoosters = true;

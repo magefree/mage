@@ -28,10 +28,12 @@
 package mage.abilities.keyword;
 
 import java.util.UUID;
+import mage.Mana;
 import mage.abilities.SpellAbility;
 import mage.abilities.costs.common.SacrificeTargetCost;
 import mage.abilities.costs.mana.ManaCost;
 import mage.abilities.costs.mana.ManaCosts;
+import mage.abilities.mana.ManaOptions;
 import mage.cards.Card;
 import mage.constants.Outcome;
 import mage.constants.SpellAbilityType;
@@ -82,6 +84,26 @@ public class EmergeAbility extends SpellAbility {
             }
         }
         return false;
+    }
+
+    @Override
+    public ManaOptions getMinimumCostToActivate(UUID playerId, Game game) {
+        int maxCMC = 0;
+        for (Permanent creature : game.getBattlefield().getActivePermanents(new FilterControlledCreaturePermanent(), playerId, this.getSourceId(), game)) {
+            int cmc = creature.getConvertedManaCost();
+            if (cmc > maxCMC) {
+                maxCMC = cmc;
+            }
+        }
+        ManaOptions manaOptions = super.getMinimumCostToActivate(playerId, game);
+        for (Mana mana : manaOptions) {
+            if (mana.getGeneric() > maxCMC) {
+                mana.setGeneric(mana.getGeneric() - maxCMC);
+            } else {
+                mana.setGeneric(0);
+            }
+        }
+        return manaOptions;
     }
 
     @Override

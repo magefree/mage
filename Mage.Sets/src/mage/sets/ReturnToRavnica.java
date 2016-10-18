@@ -30,12 +30,8 @@ package mage.sets;
 import mage.constants.SetType;
 import mage.cards.ExpansionSet;
 
-import java.util.GregorianCalendar;
 import mage.constants.Rarity;
-import java.util.List;
-import mage.ObjectColor;
 import mage.cards.CardGraphicInfo;
-import mage.cards.FrameStyle;
 
 /**
  *
@@ -50,7 +46,7 @@ public class ReturnToRavnica extends ExpansionSet {
     }
 
     private ReturnToRavnica() {
-        super("Return to Ravnica", "RTR", "mage.sets.returntoravnica", new GregorianCalendar(2012, 9, 29).getTime(), SetType.EXPANSION);
+        super("Return to Ravnica", "RTR", ExpansionSet.buildDate(2012, 9, 29), SetType.EXPANSION);
         this.blockName = "Return to Ravnica";
         this.hasBoosters = true;
         this.numBoosterLands = 1;

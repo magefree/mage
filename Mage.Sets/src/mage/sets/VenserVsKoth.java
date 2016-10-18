@@ -28,14 +28,10 @@
 
 package mage.sets;
 
-import java.util.GregorianCalendar;
 import mage.cards.ExpansionSet;
 import mage.constants.SetType;
 import mage.constants.Rarity;
-import java.util.List;
-import mage.ObjectColor;
 import mage.cards.CardGraphicInfo;
-import mage.cards.FrameStyle;
 
 /**
  *
@@ -50,7 +46,7 @@ public class VenserVsKoth extends ExpansionSet {
     }
 
     private VenserVsKoth() {
-        super("Duel Decks: Venser vs. Koth", "DDI", "mage.sets.venservskoth", new GregorianCalendar(2012, 3, 30).getTime(), SetType.SUPPLEMENTAL);
+        super("Duel Decks: Venser vs. Koth", "DDI", ExpansionSet.buildDate(2012, 3, 30), SetType.SUPPLEMENTAL);
         this.blockName = "Duel Decks";
         this.hasBasicLands = false;
         cards.add(new SetCardInfo("Aether Membrane", 48, Rarity.UNCOMMON, mage.cards.a.AetherMembrane.class));

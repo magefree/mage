@@ -31,6 +31,7 @@ import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.EnumMap;
+import java.util.GregorianCalendar;
 import java.util.Iterator;
 import java.util.List;
 import mage.cards.repository.CardCriteria;
@@ -126,17 +127,15 @@ public abstract class ExpansionSet implements Serializable {
     protected int numBoosterDoubleFaced; // -1 = include normally 0 = exclude  1-n = include explicit
     protected int ratioBoosterMythic;
 
-    protected String packageName;
-    protected int maxCardNumberInBooster; // used to ommit cards with collector numbers beyond the regular cards in a set for boosters
+    protected int maxCardNumberInBooster; // used to omit cards with collector numbers beyond the regular cards in a set for boosters
 
     protected final EnumMap<Rarity, List<CardInfo>> savedCards;
 
-    public ExpansionSet(String name, String code, String packageName, Date releaseDate, SetType setType) {
+    public ExpansionSet(String name, String code, Date releaseDate, SetType setType) {
         this.name = name;
         this.code = code;
         this.releaseDate = releaseDate;
         this.setType = setType;
-        this.packageName = packageName;
         this.maxCardNumberInBooster = Integer.MAX_VALUE;
         savedCards = new EnumMap<>(Rarity.class);
     }
@@ -159,10 +158,6 @@ public abstract class ExpansionSet implements Serializable {
 
     public SetType getSetType() {
         return setType;
-    }
-
-    public String getPackageName() {
-        return packageName;
     }
 
     public String getBlockName() {
@@ -296,6 +291,11 @@ public abstract class ExpansionSet implements Serializable {
             List<CardInfo> doubleFacedCards = CardRepository.instance.findCards(criteria);
             addToBooster(booster, doubleFacedCards);
         }
+    }
+
+    public static Date buildDate(int year, int month, int day) {
+        // The month starts with 0 = jan ... dec = 11
+        return new GregorianCalendar(year, month - 1, day).getTime();
     }
 
     /**

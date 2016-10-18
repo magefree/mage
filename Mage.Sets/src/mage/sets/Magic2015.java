@@ -27,14 +27,10 @@
  */
 package mage.sets;
 
-import java.util.GregorianCalendar;
 import mage.cards.ExpansionSet;
 import mage.constants.SetType;
 import mage.constants.Rarity;
-import java.util.List;
-import mage.ObjectColor;
 import mage.cards.CardGraphicInfo;
-import mage.cards.FrameStyle;
 
 /**
  *
@@ -49,7 +45,7 @@ public class Magic2015 extends ExpansionSet {
     }
 
     private Magic2015() {
-        super("Magic 2015", "M15", "mage.sets.magic2015", new GregorianCalendar(2014, 7, 18).getTime(), SetType.CORE);
+        super("Magic 2015", "M15", ExpansionSet.buildDate(2014, 7, 18), SetType.CORE);
         this.hasBoosters = true;
         this.numBoosterLands = 1;
         this.numBoosterCommon = 10;

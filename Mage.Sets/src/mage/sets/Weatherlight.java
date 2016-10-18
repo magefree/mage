@@ -31,9 +31,7 @@ package mage.sets;
 import mage.constants.SetType;
 import mage.cards.ExpansionSet;
 
-import java.util.GregorianCalendar;
 import mage.constants.Rarity;
-import java.util.List;
 
 /**
  *
@@ -48,7 +46,7 @@ public class Weatherlight extends ExpansionSet {
     }
 
     private Weatherlight() {
-        super("Weatherlight", "WTH", "mage.sets.weatherlight", new GregorianCalendar(1997, 5, 31).getTime(), SetType.EXPANSION);
+        super("Weatherlight", "WTH", ExpansionSet.buildDate(1997, 5, 31), SetType.EXPANSION);
         this.blockName = "Mirage";
         this.parentSet = Mirage.getInstance();
         this.hasBasicLands = false;

@@ -27,11 +27,9 @@
  */
 package mage.sets;
 
-import java.util.GregorianCalendar;
 import mage.cards.ExpansionSet;
 import mage.constants.SetType;
 import mage.constants.Rarity;
-import java.util.List;
 
 /**
  *
@@ -47,7 +45,7 @@ public class CommandersArsenal extends ExpansionSet {
     }
 
     private CommandersArsenal() {
-        super("Commander's Arsenal", "CMA", "mage.sets.commandersarsenal", new GregorianCalendar(2012, 11, 2).getTime(), SetType.SUPPLEMENTAL);
+        super("Commander's Arsenal", "CMA", ExpansionSet.buildDate(2012, 11, 2), SetType.SUPPLEMENTAL);
         this.blockName = "Command Zone";
         cards.add(new SetCardInfo("Chaos Warp", 1, Rarity.SPECIAL, mage.cards.c.ChaosWarp.class));
         cards.add(new SetCardInfo("Command Tower", 2, Rarity.COMMON, mage.cards.c.CommandTower.class));

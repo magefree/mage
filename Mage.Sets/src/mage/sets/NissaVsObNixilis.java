@@ -27,20 +27,17 @@
  */
 package mage.sets;
 
-import java.util.GregorianCalendar;
-import mage.cards.ExpansionSet;
-import mage.constants.SetType;
-import mage.constants.Rarity;
-import java.util.List;
-import mage.ObjectColor;
 import mage.cards.CardGraphicInfo;
-import mage.cards.FrameStyle;
+import mage.cards.ExpansionSet;
+import mage.constants.Rarity;
+import mage.constants.SetType;
 
 /**
  *
  * @author fireshoes
  */
 public class NissaVsObNixilis extends ExpansionSet {
+
     private static final NissaVsObNixilis fINSTANCE = new NissaVsObNixilis();
 
     public static NissaVsObNixilis getInstance() {
@@ -48,9 +45,10 @@ public class NissaVsObNixilis extends ExpansionSet {
     }
 
     private NissaVsObNixilis() {
-        super("Duel Decks: Nissa vs. Ob Nixilis", "DDR", "mage.sets.nissavsobnixilis", new GregorianCalendar(2016, 9, 2).getTime(), SetType.SUPPLEMENTAL);
+        super("Duel Decks: Nissa vs. Ob Nixilis", "DDR", ExpansionSet.buildDate(2016, 9, 2), SetType.SUPPLEMENTAL);
         this.blockName = "Duel Decks";
         this.hasBasicLands = false;
+
         cards.add(new SetCardInfo("Abundance", 2, Rarity.RARE, mage.cards.a.Abundance.class));
         cards.add(new SetCardInfo("Altar's Reap", 37, Rarity.COMMON, mage.cards.a.AltarsReap.class));
         cards.add(new SetCardInfo("Ambition's Cost", 38, Rarity.UNCOMMON, mage.cards.a.AmbitionsCost.class));

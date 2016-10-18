@@ -27,12 +27,9 @@
  */
 package mage.sets;
 
-import java.util.GregorianCalendar;
-
 import mage.cards.ExpansionSet;
 import mage.constants.SetType;
 import mage.constants.Rarity;
-import java.util.List;
 
 /**
  *
@@ -47,7 +44,7 @@ public class Legends extends ExpansionSet {
     }
 
     private Legends() {
-        super("Legends", "LEG", "mage.sets.legends", new GregorianCalendar(1994, 5, 1).getTime(), SetType.EXPANSION);
+        super("Legends", "LEG", ExpansionSet.buildDate(1994, 5, 1), SetType.EXPANSION);
         this.hasBasicLands = false;
         this.hasBoosters = true;
         this.numBoosterLands = 0;
@@ -193,7 +190,7 @@ public class Legends extends ExpansionSet {
         cards.add(new SetCardInfo("Ring of Immortals", 238, Rarity.RARE, mage.cards.r.RingOfImmortals.class));
         cards.add(new SetCardInfo("Riven Turnbull", 294, Rarity.UNCOMMON, mage.cards.r.RivenTurnbull.class));
         cards.add(new SetCardInfo("Rubinia Soulsinger", 296, Rarity.RARE, mage.cards.r.RubiniaSoulsinger.class));
-        cards.add(new SetCardInfo("Sea King's Blessing", 75, Rarity.UNCOMMON, mage.cards.s.SeaKingsBlessing.class));
+        cards.add(new SetCardInfo("Sea Kings' Blessing", 75, Rarity.UNCOMMON, mage.cards.s.SeaKingsBlessing.class));
         cards.add(new SetCardInfo("Segovian Leviathan", 76, Rarity.UNCOMMON, mage.cards.s.SegovianLeviathan.class));
         cards.add(new SetCardInfo("Sentinel", 239, Rarity.RARE, mage.cards.s.Sentinel.class));
         cards.add(new SetCardInfo("Serpent Generator", 240, Rarity.RARE, mage.cards.s.SerpentGenerator.class));

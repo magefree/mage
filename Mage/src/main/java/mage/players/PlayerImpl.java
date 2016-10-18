@@ -2489,7 +2489,7 @@ public abstract class PlayerImpl implements Player, Serializable {
                 canBeCastRegularly = false;
             }
             if (canBeCastRegularly) {
-                ManaOptions abilityOptions = copy.getManaCostsToPay().getOptions();
+                ManaOptions abilityOptions = copy.getMinimumCostToActivate(playerId, game);
                 if (abilityOptions.isEmpty()) {
                     return true;
                 } else {
@@ -2694,6 +2694,7 @@ public abstract class PlayerImpl implements Player, Serializable {
                                         playable.add(ability);
                                     }
                                 }
+                                ability.setControllerId(card.getOwnerId());
                             }
                         }
                     }

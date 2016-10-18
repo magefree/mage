@@ -28,7 +28,6 @@
 package mage.sets;
 
 import java.util.ArrayList;
-import java.util.GregorianCalendar;
 import java.util.List;
 import mage.cards.ExpansionSet;
 import mage.cards.repository.CardCriteria;
@@ -36,9 +35,7 @@ import mage.cards.repository.CardInfo;
 import mage.cards.repository.CardRepository;
 import mage.constants.SetType;
 import mage.constants.Rarity;
-import mage.ObjectColor;
 import mage.cards.CardGraphicInfo;
-import mage.cards.FrameStyle;
 
 /**
  *
@@ -55,7 +52,7 @@ public class Kaladesh extends ExpansionSet {
     protected final List<CardInfo> savedSpecialLand = new ArrayList<>();
 
     private Kaladesh() {
-        super("Kaladesh", "KLD", "mage.sets.kaladesh", new GregorianCalendar(2016, 9, 30).getTime(), SetType.EXPANSION);
+        super("Kaladesh", "KLD", ExpansionSet.buildDate(2016, 9, 30), SetType.EXPANSION);
         this.blockName = "Kaladesh";
         this.hasBoosters = true;
         this.hasBasicLands = true;

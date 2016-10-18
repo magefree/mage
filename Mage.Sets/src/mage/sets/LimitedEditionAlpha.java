@@ -1,14 +1,9 @@
 package mage.sets;
 
-import java.util.GregorianCalendar;
-
 import mage.cards.ExpansionSet;
 import mage.constants.SetType;
 import mage.constants.Rarity;
-import java.util.List;
-import mage.ObjectColor;
 import mage.cards.CardGraphicInfo;
-import mage.cards.FrameStyle;
 
 /**
  *
@@ -23,7 +18,7 @@ public class LimitedEditionAlpha extends ExpansionSet {
     }
 
     private LimitedEditionAlpha() {
-        super("Limited Edition Alpha", "LEA", "mage.sets.limitedalpha", new GregorianCalendar(1993, 7, 1).getTime(), SetType.CORE);
+        super("Limited Edition Alpha", "LEA", ExpansionSet.buildDate(1993, 7, 1), SetType.CORE);
         this.hasBoosters = true;
         this.numBoosterLands = 0;
         this.numBoosterCommon = 11;

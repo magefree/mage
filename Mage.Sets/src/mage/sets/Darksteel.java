@@ -3,9 +3,7 @@ package mage.sets;
 import mage.cards.ExpansionSet;
 import mage.constants.SetType;
 
-import java.util.GregorianCalendar;
 import mage.constants.Rarity;
-import java.util.List;
 
 public class Darksteel extends ExpansionSet {
 
@@ -16,7 +14,7 @@ public class Darksteel extends ExpansionSet {
     }
 
     public Darksteel() {
-        super("Darksteel", "DST", "mage.sets.darksteel", new GregorianCalendar(2004, 1, 6).getTime(), SetType.EXPANSION);
+        super("Darksteel", "DST", ExpansionSet.buildDate(2004, 1, 6), SetType.EXPANSION);
         this.blockName = "Mirrodin";
         this.parentSet = Mirrodin.getInstance();
         this.hasBasicLands = false;

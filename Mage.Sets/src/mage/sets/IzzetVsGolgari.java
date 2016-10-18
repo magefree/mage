@@ -27,14 +27,10 @@
  */
 package mage.sets;
 
-import java.util.GregorianCalendar;
 import mage.cards.ExpansionSet;
 import mage.constants.SetType;
 import mage.constants.Rarity;
-import java.util.List;
-import mage.ObjectColor;
 import mage.cards.CardGraphicInfo;
-import mage.cards.FrameStyle;
 
 /**
  *
@@ -49,7 +45,7 @@ public class IzzetVsGolgari extends ExpansionSet {
     }
 
     private IzzetVsGolgari() {
-        super("Duel Decks: Izzet vs. Golgari", "DDJ", "mage.sets.izzetvsgolgari", new GregorianCalendar(2012, 9, 7).getTime(), SetType.SUPPLEMENTAL);
+        super("Duel Decks: Izzet vs. Golgari", "DDJ", ExpansionSet.buildDate(2012, 9, 7), SetType.SUPPLEMENTAL);
         this.blockName = "Duel Decks";
         this.hasBasicLands = false;
         cards.add(new SetCardInfo("Barren Moor", 78, Rarity.COMMON, mage.cards.b.BarrenMoor.class));

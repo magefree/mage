@@ -28,12 +28,9 @@
 package org.mage.plugins.card.dl.sources;
 
 import java.io.IOException;
-import java.net.URL;
 import java.util.HashMap;
-import java.util.logging.Level;
 import org.apache.log4j.Logger;
 import org.mage.plugins.card.images.CardDownloadData;
-import org.mage.plugins.card.images.DownloadPictures;
 
 /**
  *
@@ -54,7 +51,7 @@ public class GrabbagImageSource implements CardImageSource {
 
     @Override
     public String getSourceName() {
-        return "http://magiccards.info/scans/en/" ;
+        return "http://magiccards.info/scans/en/";
     }
 
     @Override
@@ -67,9 +64,9 @@ public class GrabbagImageSource implements CardImageSource {
         if (copyUrlToImage == null) {
             setupLinks();
         }
-        try { 
+        try {
             Thread.sleep(2000);
-        } catch (InterruptedException ex) {            
+        } catch (InterruptedException ex) {
         }
 
         for (String key : copyUrlToImageDone.keySet()) {
@@ -114,29 +111,29 @@ public class GrabbagImageSource implements CardImageSource {
         if (copyUrlToImage != null) {
             return;
         }
-        copyUrlToImage = new HashMap<String, String>();
-        copyImageToUrl = new HashMap<String, String>();
-        copyUrlToImageDone = new HashMap<String, Integer>();
+        copyUrlToImage = new HashMap<>();
+        copyImageToUrl = new HashMap<>();
+        copyUrlToImageDone = new HashMap<>();
 
         //http://anonymouse.org/cgi-bin/anon-www.cgi/http://magiccards.info/scans/en/arena/42.jpg
         copyUrlToImage.put("apac/1.jpg", "APAC.zip/APAC/Forest 3.full.jpg");
-        copyUrlToImage.put("apac/10.jpg",  "APAC.zip/APAC/Swamp.5.full.jpg");
+        copyUrlToImage.put("apac/10.jpg", "APAC.zip/APAC/Swamp.5.full.jpg");
         copyUrlToImage.put("apac/11.jpg", "APAC.zip/APAC/Forest 2.full.jpg");
-        copyUrlToImage.put("apac/12.jpg",  "APAC.zip/APAC/Island.7.full.jpg");
-        copyUrlToImage.put("apac/13.jpg",  "APAC.zip/APAC/Mountain.8.full.jpg");
-        copyUrlToImage.put("apac/14.jpg",  "APAC.zip/APAC/Plains.4.full.jpg");
+        copyUrlToImage.put("apac/12.jpg", "APAC.zip/APAC/Island.7.full.jpg");
+        copyUrlToImage.put("apac/13.jpg", "APAC.zip/APAC/Mountain.8.full.jpg");
+        copyUrlToImage.put("apac/14.jpg", "APAC.zip/APAC/Plains.4.full.jpg");
         copyUrlToImage.put("apac/15.jpg", "APAC.zip/APAC/Swamp 2.full.jpg");
         copyUrlToImage.put("apac/15.jpg", "APAC.zip/APAC/Swamp.15.full.jpg");
         copyUrlToImage.put("apac/2.jpg", "APAC.zip/APAC/Island 2.full.jpg");
         copyUrlToImage.put("apac/2.jpg", "APAC.zip/APAC/Island.2.full.jpg");
-        copyUrlToImage.put("apac/3.jpg",  "APAC.zip/APAC/Mountain.3.full.jpg");
+        copyUrlToImage.put("apac/3.jpg", "APAC.zip/APAC/Mountain.3.full.jpg");
         copyUrlToImage.put("apac/4.jpg", "APAC.zip/APAC/Plains 2.full.jpg");
         copyUrlToImage.put("apac/4.jpg", "APAC.zip/APAC/Plains.9.full.jpg");
-        copyUrlToImage.put("apac/5.jpg",  "APAC.zip/APAC/Swamp.10.full.jpg");
+        copyUrlToImage.put("apac/5.jpg", "APAC.zip/APAC/Swamp.10.full.jpg");
         copyUrlToImage.put("apac/6.jpg", "APAC.zip/APAC/Forest 1.full.jpg");
-        copyUrlToImage.put("apac/7.jpg",  "APAC.zip/APAC/Island.12.full.jpg");
-        copyUrlToImage.put("apac/8.jpg",  "APAC.zip/APAC/Mountain.13.full.jpg");
-        copyUrlToImage.put("apac/9.jpg",  "APAC.zip/APAC/Plains.14.full.jpg");
+        copyUrlToImage.put("apac/7.jpg", "APAC.zip/APAC/Island.12.full.jpg");
+        copyUrlToImage.put("apac/8.jpg", "APAC.zip/APAC/Mountain.13.full.jpg");
+        copyUrlToImage.put("apac/9.jpg", "APAC.zip/APAC/Plains.14.full.jpg");
         copyUrlToImage.put("arena/1.jpg", "ARENA.zip/ARENA/Plains 8.full.jpg");
         copyUrlToImage.put("arena/1.jpg", "ARENA.zip/ARENA/Plains.1.full.jpg");
         copyUrlToImage.put("arena/10.jpg", "ARENA.zip/ARENA/Swamp 8.full.jpg");
@@ -156,25 +153,25 @@ public class GrabbagImageSource implements CardImageSource {
         copyUrlToImage.put("arena/20.jpg", "ARENA.zip/ARENA/Pillage.full.jpg");
         copyUrlToImage.put("arena/21.jpg", "ARENA.zip/ARENA/Enlightened Tutor.full.jpg");
         copyUrlToImage.put("arena/22.jpg", "ARENA.zip/ARENA/Stupor.full.jpg");
-        copyUrlToImage.put("arena/23.jpg",  "ARENA.zip/ARENA/Plains.75.full.jpg");
-        copyUrlToImage.put("arena/24.jpg",  "ARENA.zip/ARENA/Island.9.full.jpg");
-        copyUrlToImage.put("arena/25.jpg",  "ARENA.zip/ARENA/Swamp.77.full.jpg");
-        copyUrlToImage.put("arena/26.jpg",  "ARENA.zip/ARENA/Mountain.70.full.jpg");
+        copyUrlToImage.put("arena/23.jpg", "ARENA.zip/ARENA/Plains.75.full.jpg");
+        copyUrlToImage.put("arena/24.jpg", "ARENA.zip/ARENA/Island.9.full.jpg");
+        copyUrlToImage.put("arena/25.jpg", "ARENA.zip/ARENA/Swamp.77.full.jpg");
+        copyUrlToImage.put("arena/26.jpg", "ARENA.zip/ARENA/Mountain.70.full.jpg");
         copyUrlToImage.put("arena/27.jpg", "ARENA.zip/ARENA/Forest 8.full.jpg");
         copyUrlToImage.put("arena/28.jpg", "ARENA.zip/ARENA/Creeping Mold.full.jpg");
         copyUrlToImage.put("arena/29.jpg", "ARENA.zip/ARENA/Dismiss.full.jpg");
-        copyUrlToImage.put("arena/3.jpg",  "ARENA.zip/ARENA/Swamp.69.full.jpg");
+        copyUrlToImage.put("arena/3.jpg", "ARENA.zip/ARENA/Swamp.69.full.jpg");
         copyUrlToImage.put("arena/30.jpg", "ARENA.zip/ARENA/Fling.full.jpg");
         copyUrlToImage.put("arena/31.jpg", "ARENA.zip/ARENA/Empyrial Armor.full.jpg");
-        copyUrlToImage.put("arena/32.jpg",  "ARENA.zip/ARENA/Plains.67.full.jpg");
-        copyUrlToImage.put("arena/33.jpg",  "ARENA.zip/ARENA/Island.76.full.jpg");
-        copyUrlToImage.put("arena/34.jpg",  "ARENA.zip/ARENA/Swamp.55.full.jpg");
+        copyUrlToImage.put("arena/32.jpg", "ARENA.zip/ARENA/Plains.67.full.jpg");
+        copyUrlToImage.put("arena/33.jpg", "ARENA.zip/ARENA/Island.76.full.jpg");
+        copyUrlToImage.put("arena/34.jpg", "ARENA.zip/ARENA/Swamp.55.full.jpg");
         copyUrlToImage.put("arena/35.jpg", "ARENA.zip/ARENA/Mountain 6.full.jpg");
         copyUrlToImage.put("arena/35.jpg", "ARENA.zip/ARENA/Mountain.78.full.jpg");
-        copyUrlToImage.put("arena/36.jpg",  "ARENA.zip/ARENA/Forest.71.full.jpg");
+        copyUrlToImage.put("arena/36.jpg", "ARENA.zip/ARENA/Forest.71.full.jpg");
         copyUrlToImage.put("arena/37.jpg", "ARENA.zip/ARENA/Diabolic Edict.full.jpg");
         copyUrlToImage.put("arena/38.jpg", "ARENA.zip/ARENA/Gaea's Blessing.full.jpg");
-        copyUrlToImage.put("arena/39.jpg",  "ARENA.zip/ARENA/Island.68.full.jpg");
+        copyUrlToImage.put("arena/39.jpg", "ARENA.zip/ARENA/Island.68.full.jpg");
         copyUrlToImage.put("arena/4.jpg", "ARENA.zip/ARENA/Mountain 5.full.jpg");
         copyUrlToImage.put("arena/40.jpg", "ARENA.zip/ARENA/Forest 6.full.jpg");
         copyUrlToImage.put("arena/40.jpg", "ARENA.zip/ARENA/Forest.5.full.jpg");
@@ -182,20 +179,20 @@ public class GrabbagImageSource implements CardImageSource {
         copyUrlToImage.put("arena/42.jpg", "ARENA.zip/ARENA/Arc Lightning.full.jpg");
         copyUrlToImage.put("arena/43.jpg", "ARENA.zip/ARENA/Dauthi Slayer.full.jpg");
         copyUrlToImage.put("arena/44.jpg", "ARENA.zip/ARENA/Mana Leak.full.jpg");
-        copyUrlToImage.put("arena/45.jpg",  "ARENA.zip/ARENA/Plains.53.full.jpg");
-        copyUrlToImage.put("arena/46.jpg",  "ARENA.zip/ARENA/Island.54.full.jpg");
-        copyUrlToImage.put("arena/47.jpg",  "ARENA.zip/ARENA/Swamp.47.full.jpg");
-        copyUrlToImage.put("arena/48.jpg",  "ARENA.zip/ARENA/Mountain.48.full.jpg");
-        copyUrlToImage.put("arena/49.jpg",  "ARENA.zip/ARENA/Forest.57.full.jpg");
-        copyUrlToImage.put("arena/5.jpg",  "ARENA.zip/ARENA/Forest.40.full.jpg");
+        copyUrlToImage.put("arena/45.jpg", "ARENA.zip/ARENA/Plains.53.full.jpg");
+        copyUrlToImage.put("arena/46.jpg", "ARENA.zip/ARENA/Island.54.full.jpg");
+        copyUrlToImage.put("arena/47.jpg", "ARENA.zip/ARENA/Swamp.47.full.jpg");
+        copyUrlToImage.put("arena/48.jpg", "ARENA.zip/ARENA/Mountain.48.full.jpg");
+        copyUrlToImage.put("arena/49.jpg", "ARENA.zip/ARENA/Forest.57.full.jpg");
+        copyUrlToImage.put("arena/5.jpg", "ARENA.zip/ARENA/Forest.40.full.jpg");
         copyUrlToImage.put("arena/50.jpg", "ARENA.zip/ARENA/Skirk Marauder.full.jpg");
         copyUrlToImage.put("arena/51.jpg", "ARENA.zip/ARENA/Elvish Aberration.full.jpg");
         copyUrlToImage.put("arena/52.jpg", "ARENA.zip/ARENA/Bonesplitter.full.jpg");
-        copyUrlToImage.put("arena/53.jpg",  "ARENA.zip/ARENA/Plains.45.full.jpg");
-        copyUrlToImage.put("arena/54.jpg",  "ARENA.zip/ARENA/Island.46.full.jpg");
-        copyUrlToImage.put("arena/55.jpg",  "ARENA.zip/ARENA/Swamp.34.full.jpg");
-        copyUrlToImage.put("arena/56.jpg",  "ARENA.zip/ARENA/Mountain.35.full.jpg");
-        copyUrlToImage.put("arena/57.jpg",  "ARENA.zip/ARENA/Forest.36.full.jpg");
+        copyUrlToImage.put("arena/53.jpg", "ARENA.zip/ARENA/Plains.45.full.jpg");
+        copyUrlToImage.put("arena/54.jpg", "ARENA.zip/ARENA/Island.46.full.jpg");
+        copyUrlToImage.put("arena/55.jpg", "ARENA.zip/ARENA/Swamp.34.full.jpg");
+        copyUrlToImage.put("arena/56.jpg", "ARENA.zip/ARENA/Mountain.35.full.jpg");
+        copyUrlToImage.put("arena/57.jpg", "ARENA.zip/ARENA/Forest.36.full.jpg");
         copyUrlToImage.put("arena/58.jpg", "ARENA.zip/ARENA/Darksteel Ingot.full.jpg");
         copyUrlToImage.put("arena/59.jpg", "ARENA.zip/ARENA/Serum Visions.full.jpg");
         copyUrlToImage.put("arena/6.jpg", "ARENA.zip/ARENA/Disenchant.full.jpg");
@@ -206,46 +203,46 @@ public class GrabbagImageSource implements CardImageSource {
         copyUrlToImage.put("arena/64.jpg", "ARENA.zip/ARENA/Goblin Mime.full.jpg");
         copyUrlToImage.put("arena/65.jpg", "ARENA.zip/ARENA/Granny's Payback.full.jpg");
         copyUrlToImage.put("arena/66.jpg", "ARENA.zip/ARENA/Ashnod's Coupon.full.jpg");
-        copyUrlToImage.put("arena/67.jpg",  "ARENA.zip/ARENA/Plains.32.full.jpg");
-        copyUrlToImage.put("arena/68.jpg",  "ARENA.zip/ARENA/Island.33.full.jpg");
-        copyUrlToImage.put("arena/69.jpg",  "ARENA.zip/ARENA/Swamp.25.full.jpg");
+        copyUrlToImage.put("arena/67.jpg", "ARENA.zip/ARENA/Plains.32.full.jpg");
+        copyUrlToImage.put("arena/68.jpg", "ARENA.zip/ARENA/Island.33.full.jpg");
+        copyUrlToImage.put("arena/69.jpg", "ARENA.zip/ARENA/Swamp.25.full.jpg");
         copyUrlToImage.put("arena/7.jpg", "ARENA.zip/ARENA/Fireball.full.jpg");
-        copyUrlToImage.put("arena/70.jpg",  "ARENA.zip/ARENA/Mountain.26.full.jpg");
-        copyUrlToImage.put("arena/71.jpg",  "ARENA.zip/ARENA/Forest.27.full.jpg");
+        copyUrlToImage.put("arena/70.jpg", "ARENA.zip/ARENA/Mountain.26.full.jpg");
+        copyUrlToImage.put("arena/71.jpg", "ARENA.zip/ARENA/Forest.27.full.jpg");
         copyUrlToImage.put("arena/72.jpg", "ARENA.zip/ARENA/Genju of the Spires.full.jpg");
         copyUrlToImage.put("arena/73.jpg", "ARENA.zip/ARENA/Okina Nightwatch.full.jpg");
         copyUrlToImage.put("arena/74.jpg", "ARENA.zip/ARENA/Skyknight Legionnaire.full.jpg");
-        copyUrlToImage.put("arena/75.jpg",  "ARENA.zip/ARENA/Plains.23.full.jpg");
-        copyUrlToImage.put("arena/76.jpg",  "ARENA.zip/ARENA/Island.24.full.jpg");
-        copyUrlToImage.put("arena/77.jpg",  "ARENA.zip/ARENA/Swamp.10.full.jpg");
-        copyUrlToImage.put("arena/78.jpg",  "ARENA.zip/ARENA/Mountain.11.full.jpg");
-        copyUrlToImage.put("arena/79.jpg",  "ARENA.zip/ARENA/Forest.12.full.jpg");
+        copyUrlToImage.put("arena/75.jpg", "ARENA.zip/ARENA/Plains.23.full.jpg");
+        copyUrlToImage.put("arena/76.jpg", "ARENA.zip/ARENA/Island.24.full.jpg");
+        copyUrlToImage.put("arena/77.jpg", "ARENA.zip/ARENA/Swamp.10.full.jpg");
+        copyUrlToImage.put("arena/78.jpg", "ARENA.zip/ARENA/Mountain.11.full.jpg");
+        copyUrlToImage.put("arena/79.jpg", "ARENA.zip/ARENA/Forest.12.full.jpg");
         copyUrlToImage.put("arena/8.jpg", "ARENA.zip/ARENA/Plains 1.full.jpg");
         copyUrlToImage.put("arena/8.jpg", "ARENA.zip/ARENA/Plains.8.full.jpg");
         copyUrlToImage.put("arena/80.jpg", "ARENA.zip/ARENA/Castigate.full.jpg");
         copyUrlToImage.put("arena/81.jpg", "ARENA.zip/ARENA/Wee Dragonauts.full.jpg");
         copyUrlToImage.put("arena/82.jpg", "ARENA.zip/ARENA/Coiling Oracle.full.jpg");
         copyUrlToImage.put("arena/83.jpg", "ARENA.zip/ARENA/Surging Flame.full.jpg");
-        copyUrlToImage.put("arena/9.jpg",  "ARENA.zip/ARENA/Island.2.full.jpg");
-        copyUrlToImage.put("euro/1.jpg",  "EURO.zip/EURO/Forest.6.full.jpg");
-        copyUrlToImage.put("euro/10.jpg",  "EURO.zip/EURO/Swamp.5.full.jpg");
+        copyUrlToImage.put("arena/9.jpg", "ARENA.zip/ARENA/Island.2.full.jpg");
+        copyUrlToImage.put("euro/1.jpg", "EURO.zip/EURO/Forest.6.full.jpg");
+        copyUrlToImage.put("euro/10.jpg", "EURO.zip/EURO/Swamp.5.full.jpg");
         copyUrlToImage.put("euro/11.jpg", "EURO.zip/EURO/Forest 2.full.jpg");
         copyUrlToImage.put("euro/11.jpg", "EURO.zip/EURO/Forest.1.full.jpg");
-        copyUrlToImage.put("euro/12.jpg",  "EURO.zip/EURO/Island.7.full.jpg");
-        copyUrlToImage.put("euro/13.jpg",  "EURO.zip/EURO/Mountain.8.full.jpg");
-        copyUrlToImage.put("euro/14.jpg",  "EURO.zip/EURO/Plains.4.full.jpg");
+        copyUrlToImage.put("euro/12.jpg", "EURO.zip/EURO/Island.7.full.jpg");
+        copyUrlToImage.put("euro/13.jpg", "EURO.zip/EURO/Mountain.8.full.jpg");
+        copyUrlToImage.put("euro/14.jpg", "EURO.zip/EURO/Plains.4.full.jpg");
         copyUrlToImage.put("euro/15.jpg", "EURO.zip/EURO/Swamp 2.full.jpg");
         copyUrlToImage.put("euro/15.jpg", "EURO.zip/EURO/Swamp.15.full.jpg");
         copyUrlToImage.put("euro/2.jpg", "EURO.zip/EURO/Island 2.full.jpg");
         copyUrlToImage.put("euro/2.jpg", "EURO.zip/EURO/Island.2.full.jpg");
-        copyUrlToImage.put("euro/3.jpg",  "EURO.zip/EURO/Mountain.3.full.jpg");
+        copyUrlToImage.put("euro/3.jpg", "EURO.zip/EURO/Mountain.3.full.jpg");
         copyUrlToImage.put("euro/4.jpg", "EURO.zip/EURO/Plains 2.full.jpg");
         copyUrlToImage.put("euro/4.jpg", "EURO.zip/EURO/Plains.9.full.jpg");
-        copyUrlToImage.put("euro/5.jpg",  "EURO.zip/EURO/Swamp.10.full.jpg");
-        copyUrlToImage.put("euro/6.jpg",  "EURO.zip/EURO/Forest.11.full.jpg");
-        copyUrlToImage.put("euro/7.jpg",  "EURO.zip/EURO/Island.12.full.jpg");
-        copyUrlToImage.put("euro/8.jpg",  "EURO.zip/EURO/Mountain.13.full.jpg");
-        copyUrlToImage.put("euro/9.jpg",  "EURO.zip/EURO/Plains.14.full.jpg");
+        copyUrlToImage.put("euro/5.jpg", "EURO.zip/EURO/Swamp.10.full.jpg");
+        copyUrlToImage.put("euro/6.jpg", "EURO.zip/EURO/Forest.11.full.jpg");
+        copyUrlToImage.put("euro/7.jpg", "EURO.zip/EURO/Island.12.full.jpg");
+        copyUrlToImage.put("euro/8.jpg", "EURO.zip/EURO/Mountain.13.full.jpg");
+        copyUrlToImage.put("euro/9.jpg", "EURO.zip/EURO/Plains.14.full.jpg");
         copyUrlToImage.put("exp/1.jpg", "EXP.zip/EXP/Prairie Stream.full.jpg");
         copyUrlToImage.put("exp/10.jpg", "EXP.zip/EXP/Temple Garden.full.jpg");
         copyUrlToImage.put("exp/11.jpg", "EXP.zip/EXP/Godless Shrine.full.jpg");
@@ -1246,9 +1243,7 @@ public class GrabbagImageSource implements CardImageSource {
         copyUrlToImage.put("mbp/145.jpg", "MBP.zip/MBP/Dread Defiler.full.jpg");
         copyUrlToImage.put("mbp/146.jpg", "MBP.zip/MBP/Tyrant of Valakut.full.jpg");
         copyUrlToImage.put("mbp/147.jpg", "MBP.zip/MBP/Gladehart Cavalry.full.jpg");
-        copyUrlToImage.put("mbp/148.jpg", "MBP.zip/MBP/Goblin Dark-Dwellers.full.jpg");        
-
-
+        copyUrlToImage.put("mbp/148.jpg", "MBP.zip/MBP/Goblin Dark-Dwellers.full.jpg");
 
         for (String key : copyUrlToImage.keySet()) {
             copyUrlToImageDone.put(key, maxTimes);
@@ -1271,7 +1266,7 @@ public class GrabbagImageSource implements CardImageSource {
         }
         return -1;
     }
-    
+
     @Override
     public Boolean isTokenSource() {
         return false;

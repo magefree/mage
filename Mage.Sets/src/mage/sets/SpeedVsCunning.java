@@ -27,14 +27,10 @@
  */
 package mage.sets;
 
-import java.util.GregorianCalendar;
 import mage.cards.ExpansionSet;
 import mage.constants.SetType;
 import mage.constants.Rarity;
-import java.util.List;
-import mage.ObjectColor;
 import mage.cards.CardGraphicInfo;
-import mage.cards.FrameStyle;
 
 /**
  *
@@ -49,7 +45,7 @@ public class SpeedVsCunning extends ExpansionSet {
     }
 
     private SpeedVsCunning() {
-        super("Duel Decks: Speed vs. Cunning", "DDN", "mage.sets.speedvscunning", new GregorianCalendar(2014, 9, 5).getTime(), SetType.SUPPLEMENTAL);
+        super("Duel Decks: Speed vs. Cunning", "DDN", ExpansionSet.buildDate(2014, 9, 5), SetType.SUPPLEMENTAL);
         this.blockName = "Duel Decks";
         this.hasBasicLands = false;
         cards.add(new SetCardInfo("Act of Treason", 26, Rarity.COMMON, mage.cards.a.ActOfTreason.class));

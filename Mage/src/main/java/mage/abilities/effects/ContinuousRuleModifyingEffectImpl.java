@@ -47,7 +47,7 @@ public abstract class ContinuousRuleModifyingEffectImpl extends ContinuousEffect
 
     // 613.10
     // Some continuous effects affect game rules rather than objects. For example, effects may modify
-    // a players maximum hand size, or say that a creature must attack this turn if able. These effects
+    // a player's maximum hand size, or say that a creature must attack this turn if able. These effects
     // are applied after all other continuous effects have been applied. Continuous effects that affect
     // the costs of spells or abilities are applied according to the order specified in rule 601.2e.
     // All other such effects are applied in timestamp order. See also the rules for timestamp order

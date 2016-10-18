@@ -27,11 +27,9 @@
  */
 package mage.sets;
 
-import java.util.GregorianCalendar;
 import mage.cards.ExpansionSet;
-import mage.constants.SetType;
 import mage.constants.Rarity;
-import java.util.List;
+import mage.constants.SetType;
 
 /**
  *
@@ -46,7 +44,7 @@ public class EldritchMoon extends ExpansionSet {
     }
 
     private EldritchMoon() {
-        super("Eldritch Moon", "EMN", "mage.sets.eldritchmoon", new GregorianCalendar(2016, 7, 26).getTime(), SetType.EXPANSION);
+        super("Eldritch Moon", "EMN", ExpansionSet.buildDate(2016, 7, 22), SetType.EXPANSION);
         this.blockName = "Shadows over Innistrad";
         this.hasBoosters = true;
         this.numBoosterLands = 1;

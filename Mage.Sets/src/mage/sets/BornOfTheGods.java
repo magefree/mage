@@ -28,11 +28,9 @@
 
 package mage.sets;
 
-import java.util.GregorianCalendar;
 import mage.cards.ExpansionSet;
 import mage.constants.SetType;
 import mage.constants.Rarity;
-import java.util.List;
 
 /**
  *
@@ -47,7 +45,7 @@ public class BornOfTheGods extends ExpansionSet {
     }
 
     private BornOfTheGods() {
-        super("Born of the Gods", "BNG", "mage.sets.bornofthegods", new GregorianCalendar(2014, 2, 7).getTime(), SetType.EXPANSION);
+        super("Born of the Gods", "BNG", ExpansionSet.buildDate(2014, 2, 7), SetType.EXPANSION);
         this.blockName = "Theros";
         this.parentSet = Theros.getInstance();
         this.hasBasicLands = false;

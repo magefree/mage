@@ -45,7 +45,7 @@ import mage.target.common.TargetCreaturePermanent;
 public class Capture extends CardImpl {
 
     public Capture(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{R}");
+        super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{2}{R}");
 
         // Gain control of target creature until end of turn.
         this.getSpellAbility().addTarget(new TargetCreaturePermanent());

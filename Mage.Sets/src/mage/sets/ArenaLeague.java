@@ -27,14 +27,10 @@
  */
 package mage.sets;
 
-import java.util.GregorianCalendar;
 import mage.cards.ExpansionSet;
 import mage.constants.SetType;
 import mage.constants.Rarity;
-import java.util.List;
-import mage.ObjectColor;
 import mage.cards.CardGraphicInfo;
-import mage.cards.FrameStyle;
 
 /**
  *
@@ -50,7 +46,7 @@ public class ArenaLeague extends ExpansionSet {
     }
 
     private ArenaLeague() {
-        super("Arena League", "ARENA", "mage.sets.arenaleague", new GregorianCalendar(1996, 7, 4).getTime(), SetType.PROMOTIONAL);
+        super("Arena League", "ARENA", ExpansionSet.buildDate(1996, 7, 4), SetType.PROMOTIONAL);
         this.hasBoosters = false;
         cards.add(new SetCardInfo("Arc Lightning", 42, Rarity.COMMON, mage.cards.a.ArcLightning.class));
         cards.add(new SetCardInfo("Bonesplitter", 52, Rarity.COMMON, mage.cards.b.Bonesplitter.class));

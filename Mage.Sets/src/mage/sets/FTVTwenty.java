@@ -24,21 +24,19 @@
 * The views and conclusions contained in the software and documentation are those of the
 * authors and should not be interpreted as representing official policies, either expressed
 * or implied, of BetaSteward_at_googlemail.com.
-*/
-
+ */
 package mage.sets;
 
-import java.util.GregorianCalendar;
 import mage.cards.ExpansionSet;
-import mage.constants.SetType;
 import mage.constants.Rarity;
-import java.util.List;
+import mage.constants.SetType;
 
 /**
  *
  * @author fireshoes
  */
 public class FTVTwenty extends ExpansionSet {
+
     private static final FTVTwenty fINSTANCE = new FTVTwenty();
 
     public static FTVTwenty getInstance() {
@@ -46,7 +44,7 @@ public class FTVTwenty extends ExpansionSet {
     }
 
     private FTVTwenty() {
-        super("From the Vault: Twenty", "V13", "mage.sets.ftvtwenty", new GregorianCalendar(2013, 8, 23).getTime(), SetType.SUPPLEMENTAL);
+        super("From the Vault: Twenty", "V13", ExpansionSet.buildDate(2013, 8, 23), SetType.SUPPLEMENTAL);
         this.hasBasicLands = false;
         cards.add(new SetCardInfo("Akroma's Vengeance", 11, Rarity.MYTHIC, mage.cards.a.AkromasVengeance.class));
         cards.add(new SetCardInfo("Chainer's Edict", 10, Rarity.MYTHIC, mage.cards.c.ChainersEdict.class));

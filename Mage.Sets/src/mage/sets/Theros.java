@@ -27,14 +27,10 @@
  */
 package mage.sets;
 
-import java.util.GregorianCalendar;
 import mage.cards.ExpansionSet;
 import mage.constants.SetType;
 import mage.constants.Rarity;
-import java.util.List;
-import mage.ObjectColor;
 import mage.cards.CardGraphicInfo;
-import mage.cards.FrameStyle;
 
 /**
  *
@@ -49,7 +45,7 @@ public class Theros extends ExpansionSet {
     }
 
     private Theros() {
-        super("Theros", "THS", "mage.sets.theros", new GregorianCalendar(2013, 9, 27).getTime(), SetType.EXPANSION);
+        super("Theros", "THS", ExpansionSet.buildDate(2013, 9, 27), SetType.EXPANSION);
         this.blockName = "Theros";
         this.hasBoosters = true;
         this.numBoosterLands = 1;

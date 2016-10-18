@@ -34,6 +34,7 @@ import mage.MageInt;
 import mage.MageObject;
 import mage.abilities.Ability;
 import mage.abilities.common.EntersBattlefieldTriggeredAbility;
+import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.effects.AsThoughEffectImpl;
 import mage.abilities.effects.AsThoughManaEffect;
 import mage.abilities.effects.ContinuousEffect;
@@ -69,7 +70,7 @@ public class GontiLordOfLuxury extends CardImpl {
     protected static final String VALUE_PREFIX = "ExileZones";
 
     public GontiLordOfLuxury(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{2}{B}{B}");
+        super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{2}{B}{B}");
         this.supertype.add("Legendary");
         this.subtype.add("Aetherborn");
         this.subtype.add("Rogue");
@@ -79,11 +80,13 @@ public class GontiLordOfLuxury extends CardImpl {
         // Deathtouch
         this.addAbility(DeathtouchAbility.getInstance());
 
-        // When Gonti, Lord of Luxury enters the battlefield, look at the top four cards of target opponent's library, exile one of them face down, then put the rest on the bottom of that library in a random order. For as long as that card remains exiled, you may look at it, you may cast it, and you may spend mana as though it were mana of any type to cast it.
+        // When Gonti, Lord of Luxury enters the battlefield, look at the top four cards of target opponent's library, exile one of them face down,
+        // then put the rest on the bottom of that library in a random order. For as long as that card remains exiled,
+        // you may look at it, you may cast it, and you may spend mana as though it were mana of any type to cast it.
         Ability ability = new EntersBattlefieldTriggeredAbility(new GontiLordOfLuxuryEffect());
         ability.addTarget(new TargetOpponent());
         this.addAbility(ability);
-
+        this.addAbility(new SimpleStaticAbility(Zone.ALL, new GontiLordOfLuxuryLookEffect()));
     }
 
     public GontiLordOfLuxury(final GontiLordOfLuxury card) {
@@ -128,33 +131,38 @@ class GontiLordOfLuxuryEffect extends OneShotEffect {
                     // move card to exile
                     UUID exileZoneId = CardUtil.getExileZoneId(game, source.getSourceId(), source.getSourceObjectZoneChangeCounter());
                     card.setFaceDown(true, game);
-                    controller.moveCardsToExile(card, source, game, false, exileZoneId, sourceObject.getIdName());
-                    card.setFaceDown(true, game);
-                    Set<UUID> exileZones = (Set<UUID>) game.getState().getValue(GontiLordOfLuxury.VALUE_PREFIX + source.getSourceId().toString());
-                    if (exileZones == null) {
-                        exileZones = new HashSet<>();
-                        game.getState().setValue(GontiLordOfLuxury.VALUE_PREFIX + source.getSourceId().toString(), exileZones);
+                    if (controller.moveCardsToExile(card, source, game, false, exileZoneId, sourceObject.getIdName())) {
+                        card.setFaceDown(true, game);
+                        @SuppressWarnings("unchecked")
+                        Set<UUID> exileZones = (Set<UUID>) game.getState().getValue(GontiLordOfLuxury.VALUE_PREFIX + source.getSourceId().toString());
+                        if (exileZones == null) {
+                            exileZones = new HashSet<>();
+                            game.getState().setValue(GontiLordOfLuxury.VALUE_PREFIX + source.getSourceId().toString(), exileZones);
+                        }
+                        exileZones.add(exileZoneId);
+                        // allow to cast the card
+                        ContinuousEffect effect = new GontiLordOfLuxuryCastFromExileEffect();
+                        effect.setTargetPointer(new FixedTarget(card.getId(), game));
+                        game.addEffect(effect, source);
+                        // and you may spend mana as though it were mana of any color to cast it
+                        effect = new GontiLordOfLuxurySpendAnyManaEffect();
+                        effect.setTargetPointer(new FixedTarget(card.getId(), game));
+                        game.addEffect(effect, source);
                     }
-                    exileZones.add(exileZoneId);
-                    // allow to cast the card
-                    ContinuousEffect effect = new GontiLordOfLuxuryCastFromExileEffect();
-                    effect.setTargetPointer(new FixedTarget(card.getId()));
-                    game.addEffect(effect, source);
-                    // and you may spend mana as though it were mana of any color to cast it
-                    effect = new GontiLordOfLuxurySpendAnyManaEffect();
-                    effect.setTargetPointer(new FixedTarget(card.getId()));
-                    game.addEffect(effect, source);
                 }
-                while (!topCards.isEmpty() && controller.isInGame()) {
-                    Card libCard = topCards.getRandom(game);
-                    topCards.remove(libCard);
-                    controller.moveCardToLibraryWithInfo(libCard, source.getSourceId(), game, Zone.LIBRARY, false, false);
-                }
+            }
+            // then put the rest on the bottom of that library in a random order
+            while (!topCards.isEmpty() && controller.isInGame()) {
+                Card libCard = topCards.getRandom(game);
+                topCards.remove(libCard);
+                controller.moveCardToLibraryWithInfo(libCard, source.getSourceId(), game, Zone.LIBRARY, false, false);
             }
             return true;
         }
+
         return false;
     }
+
 }
 
 class GontiLordOfLuxuryCastFromExileEffect extends AsThoughEffectImpl {
@@ -180,13 +188,12 @@ class GontiLordOfLuxuryCastFromExileEffect extends AsThoughEffectImpl {
 
     @Override
     public boolean applies(UUID objectId, Ability source, UUID affectedControllerId, Game game) {
-        if (objectId.equals(getTargetPointer().getFirst(game, source))) {
-            if (affectedControllerId.equals(source.getControllerId())) {
-                return true;
-            }
-        } else if (((FixedTarget) getTargetPointer()).getTarget().equals(objectId)) {
-            // object has moved zone so effect can be discarted
+        UUID targetId = getTargetPointer().getFirst(game, source);
+        if (targetId == null) {
             this.discard();
+        } else if (objectId.equals(targetId)
+                && affectedControllerId.equals(source.getControllerId())) {
+            return true;
         }
         return false;
     }

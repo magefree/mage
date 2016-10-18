@@ -29,12 +29,9 @@
 package mage.cards.repository;
 
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
 import mage.cards.*;
-import mage.util.ClassScanner;
 import org.apache.log4j.Logger;
 
 /**
@@ -54,13 +51,8 @@ public class CardScanner {
         scanned = true;
 
         List<CardInfo> cardsToAdd = new ArrayList<>();
-        Map<ClassLoader, List<String>> packageMap = new HashMap<>();
 
         for (ExpansionSet set : Sets.getInstance().values()) {
-            ClassLoader cl = set.getClass().getClassLoader();
-            if(!packageMap.containsKey(cl)) packageMap.put(cl, new ArrayList<String>());
-            List<String> packages = packageMap.get(cl);
-            packages.add(set.getPackageName());
             ExpansionRepository.instance.add(new ExpansionInfo(set));
         }
         ExpansionRepository.instance.setContentVersion(ExpansionRepository.instance.getContentVersionConstant());

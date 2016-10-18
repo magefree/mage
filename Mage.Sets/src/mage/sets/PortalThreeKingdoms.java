@@ -28,14 +28,10 @@
 
 package mage.sets;
 
-import java.util.GregorianCalendar;
 import mage.cards.ExpansionSet;
 import mage.constants.SetType;
 import mage.constants.Rarity;
-import java.util.List;
-import mage.ObjectColor;
 import mage.cards.CardGraphicInfo;
-import mage.cards.FrameStyle;
 
 /**
  *
@@ -50,7 +46,7 @@ public class PortalThreeKingdoms extends ExpansionSet {
     }
 
     private PortalThreeKingdoms() {
-        super("Portal Three Kingdoms", "PTK", "mage.sets.portalthreekingdoms", new GregorianCalendar(1999, 5, 1).getTime(), SetType.SUPPLEMENTAL);
+        super("Portal Three Kingdoms", "PTK", ExpansionSet.buildDate(1999, 5, 1), SetType.SUPPLEMENTAL);
         this.blockName = "Beginner";
         this.hasBasicLands = true;
         this.hasBoosters = true;

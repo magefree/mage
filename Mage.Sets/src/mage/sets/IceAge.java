@@ -27,15 +27,10 @@
  */
 package mage.sets;
 
-import java.util.GregorianCalendar;
-
 import mage.cards.ExpansionSet;
 import mage.constants.SetType;
 import mage.constants.Rarity;
-import java.util.List;
-import mage.ObjectColor;
 import mage.cards.CardGraphicInfo;
-import mage.cards.FrameStyle;
 
 /**
  *
@@ -50,7 +45,7 @@ public class IceAge extends ExpansionSet {
     }
 
     private IceAge() {
-        super("Ice Age", "ICE", "mage.sets.iceage", new GregorianCalendar(1995, 5, 1).getTime(), SetType.EXPANSION);
+        super("Ice Age", "ICE", ExpansionSet.buildDate(1995, 5, 1), SetType.EXPANSION);
         this.blockName = "Ice Age";
         this.hasBoosters = true;
         this.numBoosterLands = 0;

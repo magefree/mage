@@ -58,7 +58,7 @@ public class VesuvanDoppelganger extends CardImpl {
     private static final String rule = "You may have {this} enter the battlefield as a copy of any creature on the battlefield except it doesn't copy that creature's color and it gains \"At the beginning of your upkeep, you may have this creature become a copy of target creature except it doesn't copy that creature's color. If you do, this creature gains this ability.\"";
 
     public VesuvanDoppelganger(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{3}{U}{U}");
+        super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{3}{U}{U}");
         this.subtype.add("Shapeshifter");
         this.power = new MageInt(0);
         this.toughness = new MageInt(0);
@@ -94,7 +94,11 @@ class VesuvanDoppelgangerCopyEffect extends OneShotEffect {
     @Override
     public boolean apply(Game game, Ability source) {
         Player controller = game.getPlayer(source.getControllerId());
-        final Permanent sourcePermanent = game.getPermanent(source.getSourceId());
+        Permanent permanent = game.getPermanent(source.getSourceId());
+        if (permanent == null) {
+            permanent = game.getPermanentEntering(source.getSourceId());
+        }
+        final Permanent sourcePermanent = permanent;
         if (controller != null && sourcePermanent != null) {
             Target target = new TargetPermanent(new FilterCreaturePermanent("target creature (you copy from)"));
             target.setRequired(true);

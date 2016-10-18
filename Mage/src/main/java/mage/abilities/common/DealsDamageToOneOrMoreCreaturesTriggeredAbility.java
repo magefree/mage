@@ -9,7 +9,6 @@ import mage.abilities.effects.Effect;
 import mage.constants.PhaseStep;
 import mage.game.Game;
 import mage.game.events.GameEvent;
-import mage.game.turn.Step;
 
 /**
  *
@@ -30,10 +29,10 @@ public class DealsDamageToOneOrMoreCreaturesTriggeredAbility extends DealsDamage
         if (super.checkTrigger(event, game)) {
             // check that combat damage does only once trigger also if multiple creatures were damaged because they block or were blocked by source
             if (game.getTurn().getStepType().equals(PhaseStep.COMBAT_DAMAGE) || game.getTurn().getStepType().equals(PhaseStep.FIRST_COMBAT_DAMAGE)) {
-                Step step = (Step) game.getState().getValue("damageStep" + getOriginalId());
-                if (!game.getStep().equals(step)) {
+                Integer stepHash = (Integer) game.getState().getValue("damageStep" + getOriginalId());
+                if (stepHash == null || game.getStep().hashCode() != stepHash) {
                     // this ability did not trigger during this damage step
-                    game.getState().setValue("damageStep" + getOriginalId(), game.getStep());
+                    game.getState().setValue("damageStep" + getOriginalId(), game.getStep().hashCode());
                     return true;
                 }
             } else {

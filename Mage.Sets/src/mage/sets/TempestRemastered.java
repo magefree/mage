@@ -28,14 +28,10 @@
 
 package mage.sets;
 
-import java.util.GregorianCalendar;
 import mage.cards.ExpansionSet;
 import mage.constants.SetType;
 import mage.constants.Rarity;
-import java.util.List;
-import mage.ObjectColor;
 import mage.cards.CardGraphicInfo;
-import mage.cards.FrameStyle;
 
 /**
  *
@@ -50,7 +46,7 @@ public class TempestRemastered extends ExpansionSet {
     }
 
     private TempestRemastered() {
-        super("Tempest Remastered", "TPR", "mage.sets.tempestremastered", new GregorianCalendar(2015, 5, 6).getTime(), SetType.MAGIC_ONLINE);
+        super("Tempest Remastered", "TPR", ExpansionSet.buildDate(2015, 5, 6), SetType.MAGIC_ONLINE);
         this.hasBasicLands = true;
         this.hasBoosters = true;
         this.numBoosterLands = 1;

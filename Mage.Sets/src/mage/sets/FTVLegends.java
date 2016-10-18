@@ -24,21 +24,19 @@
 * The views and conclusions contained in the software and documentation are those of the
 * authors and should not be interpreted as representing official policies, either expressed
 * or implied, of BetaSteward_at_googlemail.com.
-*/
-
+ */
 package mage.sets;
 
-import java.util.GregorianCalendar;
 import mage.cards.ExpansionSet;
-import mage.constants.SetType;
 import mage.constants.Rarity;
-import java.util.List;
+import mage.constants.SetType;
 
 /**
  *
  * @author fireshoes
  */
 public class FTVLegends extends ExpansionSet {
+
     private static final FTVLegends fINSTANCE = new FTVLegends();
 
     public static FTVLegends getInstance() {
@@ -46,7 +44,7 @@ public class FTVLegends extends ExpansionSet {
     }
 
     private FTVLegends() {
-        super("From the Vault: Legends", "V11", "mage.sets.ftvlegends", new GregorianCalendar(2011, 8, 26).getTime(), SetType.SUPPLEMENTAL);
+        super("From the Vault: Legends", "V11", ExpansionSet.buildDate(2011, 8, 26), SetType.SUPPLEMENTAL);
         this.hasBasicLands = false;
         cards.add(new SetCardInfo("Cao Cao, Lord of Wei", 1, Rarity.MYTHIC, mage.cards.c.CaoCaoLordOfWei.class));
         cards.add(new SetCardInfo("Captain Sisay", 2, Rarity.MYTHIC, mage.cards.c.CaptainSisay.class));

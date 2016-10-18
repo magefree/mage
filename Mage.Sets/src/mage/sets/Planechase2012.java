@@ -28,14 +28,10 @@
 
 package mage.sets;
 
-import java.util.GregorianCalendar;
 import mage.constants.SetType;
 import mage.cards.ExpansionSet;
 import mage.constants.Rarity;
-import java.util.List;
-import mage.ObjectColor;
 import mage.cards.CardGraphicInfo;
-import mage.cards.FrameStyle;
 
 /**
  *
@@ -50,7 +46,7 @@ public class Planechase2012 extends ExpansionSet {
     }
 
     private Planechase2012() {
-        super("Planechase 2012 Edition", "PC2", "mage.sets.planechase2012", new GregorianCalendar(2012, 6, 1).getTime(), SetType.SUPPLEMENTAL);
+        super("Planechase 2012 Edition", "PC2", ExpansionSet.buildDate(2012, 6, 1), SetType.SUPPLEMENTAL);
         this.blockName = "Command Zone";
         cards.add(new SetCardInfo("Arc Trail", 39, Rarity.UNCOMMON, mage.cards.a.ArcTrail.class));
         cards.add(new SetCardInfo("Armillary Sphere", 108, Rarity.COMMON, mage.cards.a.ArmillarySphere.class));

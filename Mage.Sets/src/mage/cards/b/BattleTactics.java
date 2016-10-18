@@ -44,7 +44,7 @@ import mage.constants.Duration;
 public class BattleTactics extends CardImpl {
 
     public BattleTactics(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.INSTANT},"{1}{W}{W}");
+        super(ownerId, setInfo, new CardType[]{CardType.SORCERY}, "{1}{W}{W}");
 
         // Creatures you control get +2/+1 and gain vigilance until end of turn.
         Effect effect = new BoostControlledEffect(2, 1, Duration.EndOfTurn);

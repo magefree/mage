@@ -39,7 +39,7 @@ import mage.constants.Duration;
 import mage.constants.Outcome;
 import mage.constants.TargetController;
 import mage.filter.FilterPermanent;
-import mage.filter.predicate.other.PlayerIdPredicate;
+import mage.filter.predicate.permanent.ControllerIdPredicate;
 import mage.filter.predicate.permanent.ControllerPredicate;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
@@ -60,7 +60,7 @@ public class SabaccGame extends CardImpl {
     }
 
     public SabaccGame(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{1}{U}");
+        super(ownerId, setInfo, new CardType[]{CardType.SORCERY}, "{1}{U}");
 
         // Almost the same as unimplemented Mogg Assassin from Exodus
         // Not exactly. Because the permanent choosen by opponent does not have the target word in rule text it is chosen during resolution.
@@ -86,7 +86,7 @@ public class SabaccGame extends CardImpl {
 class SabaccGameEffect extends OneShotEffect {
 
     public SabaccGameEffect() {
-        super(Outcome.Benefit);
+        super(Outcome.Detriment);
         this.staticText = "Choose target permanent an opponent controls. That opponent chooses a permanent you control. "
                 + "Flip a coin. If you win the flip, gain control of the permanent you chose. "
                 + "If you lose the flip, your opponent gains control of the permanent they chose";
@@ -110,7 +110,7 @@ class SabaccGameEffect extends OneShotEffect {
                 Player opponent = game.getPlayer(targetPermanent.getControllerId());
                 if (opponent != null) {
                     FilterPermanent filter = new FilterPermanent("permanent controlled by " + controller.getName());
-                    filter.add(new PlayerIdPredicate(controller.getId()));
+                    filter.add(new ControllerIdPredicate(controller.getId()));
                     TargetPermanent target = new TargetPermanent(1, 1, filter, true);
                     Permanent chosenPermanent = null;
                     if (target.chooseTarget(outcome, opponent.getId(), source, game)) {

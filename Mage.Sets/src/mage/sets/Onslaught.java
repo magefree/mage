@@ -3,12 +3,9 @@ package mage.sets;
 import mage.cards.ExpansionSet;
 import mage.constants.SetType;
 
-import java.util.GregorianCalendar;
 import mage.constants.Rarity;
-import java.util.List;
 import mage.ObjectColor;
 import mage.cards.CardGraphicInfo;
-import mage.cards.FrameStyle;
 
 public class Onslaught extends ExpansionSet {
     private static final Onslaught fINSTANCE = new Onslaught();
@@ -18,7 +15,7 @@ public class Onslaught extends ExpansionSet {
     }
 
     private Onslaught() {
-        super("Onslaught", "ONS", "mage.sets.onslaught", new GregorianCalendar(2002, 10, 7).getTime(), SetType.EXPANSION);
+        super("Onslaught", "ONS", ExpansionSet.buildDate(2002, 10, 7), SetType.EXPANSION);
         this.blockName = "Onslaught";
         this.hasBoosters = true;
         this.numBoosterLands = 0;

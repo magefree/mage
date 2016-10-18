@@ -51,11 +51,10 @@ import mage.players.Player;
 public class WarCadence extends CardImpl {
 
     public WarCadence(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.ENCHANTMENT},"{2}{R}");
-
+        super(ownerId, setInfo, new CardType[]{CardType.ENCHANTMENT}, "{2}{R}");
 
         // {X}{R}: This turn, creatures can't block unless their controller pays {X} for each blocking creature he or she controls.
-        this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new WarCadenceReplacementEffect(), new ManaCostsImpl("{X}{R}") ));
+        this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new WarCadenceReplacementEffect(), new ManaCostsImpl("{X}{R}")));
 
     }
 
@@ -73,12 +72,12 @@ class WarCadenceReplacementEffect extends ReplacementEffectImpl {
 
     DynamicValue xCosts = new ManacostVariableValue();
 
-    WarCadenceReplacementEffect ( ) {
+    WarCadenceReplacementEffect() {
         super(Duration.EndOfTurn, Outcome.Neutral);
         staticText = "This turn, creatures can't block unless their controller pays {X} for each blocking creature he or she controls";
     }
 
-    WarCadenceReplacementEffect ( WarCadenceReplacementEffect effect ) {
+    WarCadenceReplacementEffect(WarCadenceReplacementEffect effect) {
         super(effect);
     }
 
@@ -88,10 +87,10 @@ class WarCadenceReplacementEffect extends ReplacementEffectImpl {
         if (player != null) {
             int amount = xCosts.calculate(game, source, this);
             if (amount > 0) {
-                String mana = new StringBuilder("{").append(amount).append("}").toString();
+                String mana = "{" + amount + "}";
                 ManaCostsImpl cost = new ManaCostsImpl(mana);
-                if ( cost.canPay(source, source.getSourceId(), event.getPlayerId(), game) &&
-                    player.chooseUse(Outcome.Benefit, new StringBuilder("Pay ").append(mana).append(" to declare blocker?").toString(), source, game) ) {
+                if (cost.canPay(source, source.getSourceId(), event.getPlayerId(), game)
+                        && player.chooseUse(Outcome.Benefit, "Pay " + mana + " to declare blocker?", source, game)) {
                     if (cost.payOrRollback(source, game, source.getSourceId(), event.getPlayerId())) {
                         return false;
                     }
@@ -106,7 +105,7 @@ class WarCadenceReplacementEffect extends ReplacementEffectImpl {
     public boolean checksEventType(GameEvent event, Game game) {
         return event.getType() == GameEvent.EventType.DECLARE_BLOCKER;
     }
-    
+
     @Override
     public boolean applies(GameEvent event, Ability source, Game game) {
         return true;
