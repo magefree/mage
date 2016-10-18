@@ -61,6 +61,7 @@ import mage.client.deckeditor.table.TableModel;
 import mage.client.deckeditor.table.UpdateCountsCallback;
 import mage.client.dialog.PreferencesDialog;
 import mage.client.plugins.impl.Plugins;
+import mage.client.util.CardViewCardTypeComparator;
 import mage.client.util.CardViewColorComparator;
 import mage.client.util.CardViewColorIdentityComparator;
 import mage.client.util.CardViewCostComparator;
@@ -331,6 +332,9 @@ public class CardsList extends javax.swing.JPanel implements MouseListener, ICar
                 case RARITY:
                     comparator = new CardViewRarityComparator();
                     break;
+                case CARD_TYPE:
+                    comparator = new CardViewCardTypeComparator();
+                    break;
                 case COLOR:
                     comparator = new CardViewColorComparator();
                     break;
@@ -392,7 +396,7 @@ public class CardsList extends javax.swing.JPanel implements MouseListener, ICar
         int instantCount = 0;
         int enchantmentCount = 0;
         int artifactCount = 0;
-       
+
         for (CardView card : cards.values()) {
             if (card.getCardTypes().contains(CardType.LAND)) {
                 landCount++;
