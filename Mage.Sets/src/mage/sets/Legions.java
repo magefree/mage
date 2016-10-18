@@ -110,6 +110,7 @@ public class Legions extends ExpansionSet {
         cards.add(new SetCardInfo("Goblin Turncoat", 72, Rarity.COMMON, mage.cards.g.GoblinTurncoat.class));
         cards.add(new SetCardInfo("Graveborn Muse", 73, Rarity.RARE, mage.cards.g.GravebornMuse.class));
         cards.add(new SetCardInfo("Havoc Demon", 74, Rarity.RARE, mage.cards.h.HavocDemon.class));
+	cards.add(new SetCardInfo("Hollow Specter", 75, Rarity.RARE, mage.cards.h.HollowSpecter.class));
         cards.add(new SetCardInfo("Hundroog", 129, Rarity.COMMON, mage.cards.h.Hundroog.class));
         cards.add(new SetCardInfo("Hunter Sliver", 102, Rarity.COMMON, mage.cards.h.HunterSliver.class));
         cards.add(new SetCardInfo("Imperial Hellkite", 103, Rarity.RARE, mage.cards.i.ImperialHellkite.class));

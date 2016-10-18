@@ -25,15 +25,17 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.cards.t;
+package mage.cards.c;
 
 import java.util.List;
 import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.Ability;
-import mage.abilities.common.EntersBattlefieldTriggeredAbility;
+import mage.abilities.common.ActivateAsSorceryActivatedAbility;
+import mage.abilities.costs.common.TapSourceCost;
+import mage.abilities.costs.mana.ManaCostsImpl;
+import mage.abilities.dynamicvalue.common.ManacostVariableValue;
 import mage.abilities.effects.OneShotEffect;
-import mage.abilities.keyword.FlyingAbility;
 import mage.cards.Card;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
@@ -43,8 +45,6 @@ import mage.constants.CardType;
 import mage.constants.Outcome;
 import mage.constants.Zone;
 import mage.filter.FilterCard;
-import mage.filter.common.FilterControlledPermanent;
-import mage.filter.predicate.mageobject.SubtypePredicate;
 import mage.game.Game;
 import mage.players.Player;
 import mage.target.TargetCard;
@@ -52,75 +52,69 @@ import mage.target.TargetPlayer;
 
 /**
  *
- * @author LevelX2
+ * @author fireshoes
  */
-public class ThievingSprite extends CardImpl {
+public class CabalInterrogator extends CardImpl {
 
-    public ThievingSprite(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{2}{B}");
-        this.subtype.add("Faerie");
-        this.subtype.add("Rogue");
+    public CabalInterrogator(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{1}{B}");
 
+        this.subtype.add("Zombie");
+        this.subtype.add("Wizard");
         this.power = new MageInt(1);
         this.toughness = new MageInt(1);
 
-        // Flying
-        this.addAbility(FlyingAbility.getInstance());
-        
-        // When Thieving Sprite enters the battlefield, target player reveals X cards from his or her hand, where X is the number of Faeries you control.
-        // You choose one of those cards. That player discards that card.
-        Ability ability = new EntersBattlefieldTriggeredAbility(new ThievingSpriteEffect(), false);
-        TargetPlayer target = new TargetPlayer();
-        ability.addTarget(target);
+        // {X}{B}, {tap}: Target player reveals X cards from his or her hand and you choose one of them. That player discards that card.
+        // Activate this ability only any time you could cast a sorcery.
+        Ability ability = new ActivateAsSorceryActivatedAbility(Zone.BATTLEFIELD, new CabalInterrogatorEffect(), new ManaCostsImpl("{X}{B}"));
+        ability.addCost(new TapSourceCost());
+        ability.addTarget(new TargetPlayer());
         this.addAbility(ability);
-
     }
 
-    public ThievingSprite(final ThievingSprite card) {
+    public CabalInterrogator(final CabalInterrogator card) {
         super(card);
     }
 
     @Override
-    public ThievingSprite copy() {
-        return new ThievingSprite(this);
+    public CabalInterrogator copy() {
+        return new CabalInterrogator(this);
     }
 }
 
-class ThievingSpriteEffect extends OneShotEffect {
+class CabalInterrogatorEffect extends OneShotEffect {
 
-    public ThievingSpriteEffect() {
+    public CabalInterrogatorEffect() {
         super(Outcome.Discard);
-        this.staticText = "target player reveals X cards from his or her hand, where X is the number of Faeries you control. You choose one of those cards. "
-                + "That player discards that card";
+        this.staticText = "Target player reveals X cards from his or her hand and you choose one of them. That player discards that card";
     }
 
-    public ThievingSpriteEffect(final ThievingSpriteEffect effect) {
+    public CabalInterrogatorEffect(final CabalInterrogatorEffect effect) {
         super(effect);
     }
 
     @Override
-    public ThievingSpriteEffect copy() {
-        return new ThievingSpriteEffect(this);
+    public CabalInterrogatorEffect copy() {
+        return new CabalInterrogatorEffect(this);
     }
 
     @Override
     public boolean apply(Game game, Ability source) {
+
         Player targetPlayer = game.getPlayer(source.getFirstTarget());
         Player controller = game.getPlayer(source.getControllerId());
         if (targetPlayer == null || controller == null) {
             return false;
         }
 
-        FilterControlledPermanent filter = new FilterControlledPermanent();
-        filter.add(new SubtypePredicate("Faerie"));
-        int numberOfFaeries = game.getBattlefield().countAll(filter, controller.getId(), game);
+        int amountToReveal = (new ManacostVariableValue()).calculate(game, source, this);
 
         Cards revealedCards = new CardsImpl();
-        if (numberOfFaeries > 0 && targetPlayer.getHand().size() > numberOfFaeries) {
+        if (amountToReveal > 0 && targetPlayer.getHand().size() > amountToReveal) {
             Cards cardsInHand = new CardsImpl();
             cardsInHand.addAll(targetPlayer.getHand());
 
-            TargetCard target = new TargetCard(numberOfFaeries, Zone.HAND, new FilterCard());
+            TargetCard target = new TargetCard(amountToReveal, Zone.HAND, new FilterCard());
 
             if (targetPlayer.choose(Outcome.Discard, cardsInHand, target, game)) {
                 List<UUID> targets = target.getTargets();
@@ -138,7 +132,7 @@ class ThievingSpriteEffect extends OneShotEffect {
         TargetCard targetInHand = new TargetCard(Zone.HAND, new FilterCard("card to discard"));
 
         if (!revealedCards.isEmpty()) {
-            targetPlayer.revealCards("Thieving Sprite", revealedCards, game);
+            targetPlayer.revealCards("Cabal Interrogator", revealedCards, game);
             Card card = null;
             if(revealedCards.size() > 1) {
                 controller.choose(Outcome.Discard, revealedCards, targetInHand, game);
