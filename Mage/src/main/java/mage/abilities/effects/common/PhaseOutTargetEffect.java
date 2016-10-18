@@ -13,7 +13,6 @@ import mage.constants.Outcome;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.target.Target;
-import mage.util.CardUtil;
 
 /**
  *
@@ -21,12 +20,23 @@ import mage.util.CardUtil;
  */
 public class PhaseOutTargetEffect extends OneShotEffect {
 
+    protected String targetDescription;
+    protected boolean useOnlyTargetPointer;
+
     public PhaseOutTargetEffect() {
         super(Outcome.Detriment);
     }
 
+    public PhaseOutTargetEffect(String targetDescription, boolean useOnlyTargetPointer) {
+        super(Outcome.Detriment);
+        this.targetDescription = targetDescription;
+        this.useOnlyTargetPointer = useOnlyTargetPointer;
+    }
+
     public PhaseOutTargetEffect(final PhaseOutTargetEffect effect) {
         super(effect);
+        this.targetDescription = effect.targetDescription;
+        this.useOnlyTargetPointer = effect.useOnlyTargetPointer;
     }
 
     @Override
@@ -36,8 +46,19 @@ public class PhaseOutTargetEffect extends OneShotEffect {
 
     @Override
     public boolean apply(Game game, Ability source) {
-        for (UUID target : targetPointer.getTargets(game, source)) {
-            Permanent permanent = game.getPermanent(target);
+        if (!useOnlyTargetPointer && source.getTargets().size() > 1) {
+            for (Target target : source.getTargets()) {
+                for (UUID targetId : target.getTargets()) {
+                    Permanent permanent = game.getPermanent(targetId);
+                    if (permanent != null) {
+                        permanent.phaseOut(game);
+                    }
+                }
+            }
+            return true;
+        }
+        for (UUID targetId :this.getTargetPointer().getTargets(game, source)) {
+            Permanent permanent = game.getPermanent(targetId);
             if (permanent != null) {
                 permanent.phaseOut(game);
             }
@@ -47,22 +68,18 @@ public class PhaseOutTargetEffect extends OneShotEffect {
 
     @Override
     public String getText(Mode mode) {
-        if (staticText.length() > 0) {
+        if (staticText != null && !staticText.isEmpty()) {
             return staticText + " phases out";
         }
 
-        Target target = mode.getTargets().get(0);
-        if (target.getMaxNumberOfTargets() > 1) {
-            if (target.getMaxNumberOfTargets() == target.getNumberOfTargets()) {
-                return CardUtil.numberToText(target.getNumberOfTargets()) + " target " + target.getTargetName() + "s phase out";
-            } else {
-                return "up to " + CardUtil.numberToText(target.getMaxNumberOfTargets()) + " target " + target.getTargetName() + "s phase out";
-            }
-        } else if (target.getMaxNumberOfTargets() == 0){
-            return "X target " + mode.getTargets().get(0).getTargetName() + " phase out";
+        StringBuilder sb = new StringBuilder();
+        if (targetDescription.length() > 0) {
+            sb.append(targetDescription);
         } else {
-            return "target " + mode.getTargets().get(0).getTargetName() + " phase out";
+            sb.append("Target ").append(mode.getTargets().get(0).getTargetName());
         }
+        sb.append(" phases out");
+        return sb.toString();
     }
 
 }
