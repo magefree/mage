@@ -3318,15 +3318,15 @@ public class PreferencesDialog extends javax.swing.JDialog {
 	}
 
 	private static void loadControlSettings(Preferences prefs) {
-		load(prefs, dialog.keyConfirm, KEY_CONTROL_CONFIRM, KeyEvent.VK_F2);
-		load(prefs, dialog.keyCancelSkip, KEY_CONTROL_CANCEL_SKIP, KeyEvent.VK_F3);
-		load(prefs, dialog.keyNextTurn, KEY_CONTROL_NEXT_TURN, KeyEvent.VK_F4);
-		load(prefs, dialog.keyEndStep, KEY_CONTROL_END_STEP, KeyEvent.VK_F5);
-		load(prefs, dialog.keySkipStep, KEY_CONTROL_SKIP_STEP, KeyEvent.VK_F6);
-		load(prefs, dialog.keyMainStep, KEY_CONTROL_MAIN_STEP, KeyEvent.VK_F7);
-		load(prefs, dialog.keyYourTurn, KEY_CONTROL_YOUR_TURN, KeyEvent.VK_F9);
-		load(prefs, dialog.keySkipStack, KEY_CONTROL_SKIP_STACK, KeyEvent.VK_F10);
-		load(prefs, dialog.keyPriorEnd, KEY_CONTROL_PRIOR_END, KeyEvent.VK_F11);
+		load(prefs, dialog.keyConfirm, KEY_CONTROL_CONFIRM);
+		load(prefs, dialog.keyCancelSkip, KEY_CONTROL_CANCEL_SKIP);
+		load(prefs, dialog.keyNextTurn, KEY_CONTROL_NEXT_TURN);
+		load(prefs, dialog.keyEndStep, KEY_CONTROL_END_STEP);
+		load(prefs, dialog.keySkipStep, KEY_CONTROL_SKIP_STEP);
+		load(prefs, dialog.keyMainStep, KEY_CONTROL_MAIN_STEP);
+		load(prefs, dialog.keyYourTurn, KEY_CONTROL_YOUR_TURN);
+		load(prefs, dialog.keySkipStack, KEY_CONTROL_SKIP_STACK);
+		load(prefs, dialog.keyPriorEnd, KEY_CONTROL_PRIOR_END);
 	}
 
 	private static void loadSelectedAvatar(Preferences prefs) {
@@ -3453,8 +3453,8 @@ public class PreferencesDialog extends javax.swing.JDialog {
 		load(prefs, checkBox, propName, PHASE_ON);
 	}
 
-	private static void load(Preferences prefs, KeyBindButton button, String propName, int defaultValue) {
-		int prop = prefs.getInt(propName, defaultValue);
+	private static void load(Preferences prefs, KeyBindButton button, String propName) {
+		int prop = prefs.getInt(propName, getDefaultControlKey(propName));
 		button.setKeyCode(prop);
 	}
 
@@ -3531,9 +3531,39 @@ public class PreferencesDialog extends javax.swing.JDialog {
 		}
 	}
 
-	public static KeyStroke getCachedKeystroke(String key, int def) {
-		int code = getCachedValue(key, def);
+	private static int getDefaultControlKey(String key) {
+		switch (key) {
+			case KEY_CONTROL_CONFIRM:
+				return KeyEvent.VK_F2;
+			case KEY_CONTROL_CANCEL_SKIP:
+				return KeyEvent.VK_F3;
+			case KEY_CONTROL_NEXT_TURN:
+				return KeyEvent.VK_F4;
+			case KEY_CONTROL_END_STEP:
+				return KeyEvent.VK_F5;
+			case KEY_CONTROL_SKIP_STEP:
+				return KeyEvent.VK_F6;
+			case KEY_CONTROL_MAIN_STEP:
+				return KeyEvent.VK_F7;
+			case KEY_CONTROL_YOUR_TURN:
+				return KeyEvent.VK_F9;
+			case KEY_CONTROL_SKIP_STACK:
+				return KeyEvent.VK_F10;
+			case KEY_CONTROL_PRIOR_END:
+				return KeyEvent.VK_F11;
+			default:
+				return 0;
+		}
+	}
+
+	public static KeyStroke getCachedKeystroke(String key) {
+		int code = getCachedValue(key, getDefaultControlKey(key));
 		return KeyStroke.getKeyStroke(code, 0);
+	}
+
+	public static String getCachedKeyText(String key) {
+		int code = getCachedValue(key, getDefaultControlKey(key));
+		return KeyEvent.getKeyText(code);
 	}
 
 	private static void updateCache(String key, String value) {
