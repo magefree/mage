@@ -33,9 +33,9 @@ import mage.game.draft.DraftCube;
  *
  * @author fireshoes
  */
-public class SimonotTimotheesTwistedColorPieCube extends DraftCube {
+public class TimotheeSimonotsTwistedColorPieCube extends DraftCube {
 
-public SimonotTimotheesTwistedColorPieCube() {
+public TimotheeSimonotsTwistedColorPieCube() {
         super("Simonot Timothee's Twisted Color Pie Cube"); // http://magic.wizards.com/en/MTGO/articles/archive/magic-online/you-make-cube-voting-2016-10-17
 
         cubeCards.add(new DraftCube.CardIdentity("Abbot of Keral Keep", ""));
