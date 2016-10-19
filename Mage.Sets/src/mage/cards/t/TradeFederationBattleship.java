@@ -62,10 +62,10 @@ public class TradeFederationBattleship extends CardImpl {
     }
 
     public TradeFederationBattleship(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.ARTIFACT,CardType.CREATURE},"{3}{W}{U}{B}");
+        super(ownerId, setInfo, new CardType[]{CardType.ARTIFACT, CardType.CREATURE}, "{3}{W}{U}{B}");
         this.subtype.add("Starship");
-        this.power = new MageInt(2);
-        this.toughness = new MageInt(2);
+        this.power = new MageInt(0);
+        this.toughness = new MageInt(6);
 
         // Spaceflight
         this.addAbility(SpaceflightAbility.getInstance());
