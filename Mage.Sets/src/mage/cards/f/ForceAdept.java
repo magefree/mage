@@ -63,7 +63,7 @@ public class ForceAdept extends CardImpl {
     }
 
     public ForceAdept(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{G}{U}{W}");
+        super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{G}{U}{W}");
         this.subtype.add("Mirialan");
         this.subtype.add("Jedi");
         this.power = new MageInt(2);
@@ -74,8 +74,8 @@ public class ForceAdept extends CardImpl {
 
         // When Force Adept enters the battlefield, return another target creature you control and target creature you don't control to their owner's hands.
         Ability ability = new EntersBattlefieldTriggeredAbility(new ForceAdeptEffect());
-        this.getSpellAbility().addTarget(new TargetControlledCreaturePermanent(filter1));
-        this.getSpellAbility().addTarget(new TargetCreaturePermanent(filter2));
+        ability.addTarget(new TargetControlledCreaturePermanent(filter1));
+        ability.addTarget(new TargetCreaturePermanent(filter2));
         this.addAbility(ability);
     }
 
