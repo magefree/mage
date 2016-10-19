@@ -28,8 +28,8 @@
 package mage.sets;
 
 import mage.cards.ExpansionSet;
-import mage.constants.SetType;
 import mage.constants.Rarity;
+import mage.constants.SetType;
 
 /**
  *
@@ -148,6 +148,7 @@ public class Prophecy extends ExpansionSet {
         cards.add(new SetCardInfo("Whipstitched Zombie", 81, Rarity.COMMON, mage.cards.w.WhipstitchedZombie.class));
         cards.add(new SetCardInfo("Wild Might", 134, Rarity.COMMON, mage.cards.w.WildMight.class));
         cards.add(new SetCardInfo("Wintermoon Mesa", 143, Rarity.RARE, mage.cards.w.WintermoonMesa.class));
+        cards.add(new SetCardInfo("Withdraw", 54, Rarity.COMMON, mage.cards.w.Withdraw.class));
         cards.add(new SetCardInfo("Zerapa Minotaur", 108, Rarity.COMMON, mage.cards.z.ZerapaMinotaur.class));
     }
 }

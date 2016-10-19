@@ -106,6 +106,7 @@ public class Weatherlight extends ExpansionSet {
         cards.add(new SetCardInfo("Fire Whip", 100, Rarity.COMMON, mage.cards.f.FireWhip.class));
         cards.add(new SetCardInfo("Fit of Rage", 102, Rarity.COMMON, mage.cards.f.FitOfRage.class));
         cards.add(new SetCardInfo("Fledgling Djinn", 11, Rarity.COMMON, mage.cards.f.FledglingDjinn.class));
+	cards.add(new SetCardInfo("Flux", 27, Rarity.COMMON, mage.cards.f.Flux.class));
         cards.add(new SetCardInfo("Fog Elemental", 40, Rarity.COMMON, mage.cards.f.FogElemental.class));
         cards.add(new SetCardInfo("Foriysian Brigade", 130, Rarity.UNCOMMON, mage.cards.f.ForiysianBrigade.class));
         cards.add(new SetCardInfo("Gaea's Blessing", 71, Rarity.UNCOMMON, mage.cards.g.GaeasBlessing.class));
