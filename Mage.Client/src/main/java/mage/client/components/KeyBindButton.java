@@ -1,44 +1,42 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package mage.client.components;
 
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
-import javax.swing.JToggleButton;
+import javax.swing.JButton;
+import javax.swing.JLabel;
+import javax.swing.JPopupMenu;
 
 /**
  *
  * @author Campbell Suter <znix@znix.xyz>
  */
-public class KeyBindButton extends JToggleButton implements KeyListener {
+public class KeyBindButton extends JButton implements ActionListener {
 
+	private final JPopupMenu menu;
+	private final PopupItem item;
 	private int keyCode;
 	private String text;
 
 	public KeyBindButton() {
+		menu = new JPopupMenu();
+		menu.add(item = new PopupItem());
+		addActionListener(this);
+
 		fixText();
-		addKeyListener(this);
 	}
 
-	@Override
-	public void keyTyped(KeyEvent e) {
-	}
-
-	@Override
-	public void keyPressed(KeyEvent e) {
-	}
-
-	@Override
-	public void keyReleased(KeyEvent e) {
-		if (!isSelected()) {
-			return;
+	private void applyNewKeycode(int code) {
+		keyCode = code;
+		switch (keyCode) {
+			case KeyEvent.VK_ESCAPE:
+			case KeyEvent.VK_SPACE:
+				keyCode = 0;
 		}
-		keyCode = e.getKeyCode();
 		fixText();
-		setSelected(false);
+		menu.setVisible(false);
+		setSize(getPreferredSize());
 		System.out.println("text: " + text);
 	}
 
@@ -65,4 +63,32 @@ public class KeyBindButton extends JToggleButton implements KeyListener {
 		return text;
 	}
 
+	@Override
+	public void actionPerformed(ActionEvent e) {
+		menu.show(this, 0, 0);
+		item.requestFocusInWindow();
+	}
+
+	private class PopupItem extends JLabel implements KeyListener {
+
+		public PopupItem() {
+			super("Press a key");
+			addKeyListener(this);
+			setFocusable(true);
+		}
+
+		@Override
+		public void keyTyped(KeyEvent e) {
+		}
+
+		@Override
+		public void keyPressed(KeyEvent e) {
+			applyNewKeycode(e.getKeyCode());
+		}
+
+		@Override
+		public void keyReleased(KeyEvent e) {
+		}
+
+	}
 }

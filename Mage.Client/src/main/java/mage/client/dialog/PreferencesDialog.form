@@ -3949,7 +3949,7 @@
                           <Component id="checkBoxEndTurnOthers" min="-2" max="-2" attributes="0"/>
                       </Group>
                       <EmptySpace type="unrelated" max="-2" attributes="0"/>
-                      <Component id="phases_stopSettings" pref="266" max="32767" attributes="0"/>
+                      <Component id="phases_stopSettings" pref="356" max="32767" attributes="0"/>
                       <EmptySpace max="-2" attributes="0"/>
                   </Group>
               </Group>
@@ -4171,7 +4171,7 @@
                       <Component id="panelCardImages" min="-2" max="-2" attributes="0"/>
                       <EmptySpace max="-2" attributes="0"/>
                       <Component id="panelBackgroundImages" min="-2" max="-2" attributes="0"/>
-                      <EmptySpace pref="53" max="32767" attributes="0"/>
+                      <EmptySpace pref="125" max="32767" attributes="0"/>
                   </Group>
               </Group>
             </DimensionLayout>
@@ -4230,7 +4230,7 @@
                                       </Group>
                                       <Component id="cbUseDefaultImageFolder" min="-2" max="-2" attributes="0"/>
                                   </Group>
-                                  <EmptySpace min="0" pref="231" max="32767" attributes="0"/>
+                                  <EmptySpace min="0" pref="270" max="32767" attributes="0"/>
                               </Group>
                           </Group>
                           <EmptySpace max="-2" attributes="0"/>
@@ -4744,7 +4744,7 @@
             <DimensionLayout dim="1">
               <Group type="103" groupAlignment="0" attributes="0">
                   <Group type="102" alignment="0" attributes="0">
-                      <Component id="avatarPane" pref="484" max="32767" attributes="0"/>
+                      <Component id="avatarPane" pref="584" max="32767" attributes="0"/>
                       <EmptySpace max="-2" attributes="0"/>
                   </Group>
               </Group>
@@ -5655,7 +5655,7 @@
                                   <Component id="jLabel17" min="-2" max="-2" attributes="0"/>
                               </Group>
                           </Group>
-                          <EmptySpace pref="91" max="32767" attributes="0"/>
+                          <EmptySpace pref="198" max="32767" attributes="0"/>
                       </Group>
                   </Group>
                 </DimensionLayout>
@@ -5901,17 +5901,19 @@
                       </Group>
                       <EmptySpace type="unrelated" max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="0" attributes="0">
-                          <Component id="keyConfirm" min="-2" max="-2" attributes="0"/>
-                          <Component id="keySkipStep" min="-2" max="-2" attributes="0"/>
-                          <Component id="keySkipStack" min="-2" max="-2" attributes="0"/>
-                          <Component id="keyYourTurn" min="-2" max="-2" attributes="0"/>
-                          <Component id="keyNextTurn" min="-2" max="-2" attributes="0"/>
-                          <Component id="keyCancelSkip" min="-2" max="-2" attributes="0"/>
-                          <Component id="keyEndStep" min="-2" max="-2" attributes="0"/>
-                          <Component id="keyMainStep" min="-2" max="-2" attributes="0"/>
-                          <Component id="keyPriorEnd" min="-2" max="-2" attributes="0"/>
+                          <Component id="keyConfirm" alignment="0" min="-2" max="-2" attributes="0"/>
+                          <Component id="keyCancelSkip" alignment="0" min="-2" max="-2" attributes="0"/>
+                          <Component id="keyNextTurn" alignment="0" min="-2" max="-2" attributes="0"/>
+                          <Component id="keySkipStack" alignment="0" min="-2" max="-2" attributes="0"/>
+                          <Component id="keyYourTurn" alignment="0" min="-2" max="-2" attributes="0"/>
+                          <Component id="keyMainStep" alignment="0" min="-2" max="-2" attributes="0"/>
+                          <Component id="keyPriorEnd" alignment="0" min="-2" max="-2" attributes="0"/>
+                          <Component id="keySkipStep" alignment="0" min="-2" max="-2" attributes="0"/>
+                          <Component id="keyEndStep" alignment="0" min="-2" max="-2" attributes="0"/>
                       </Group>
-                      <EmptySpace pref="483" max="32767" attributes="0"/>
+                      <EmptySpace max="-2" attributes="0"/>
+                      <Component id="controlsDescriptionLabel" pref="498" max="32767" attributes="0"/>
+                      <EmptySpace max="-2" attributes="0"/>
                   </Group>
               </Group>
             </DimensionLayout>
@@ -5919,51 +5921,56 @@
               <Group type="103" groupAlignment="0" attributes="0">
                   <Group type="102" alignment="0" attributes="0">
                       <EmptySpace max="-2" attributes="0"/>
-                      <Group type="103" groupAlignment="3" attributes="0">
-                          <Component id="labelConfirm" alignment="3" min="-2" max="-2" attributes="0"/>
-                          <Component id="keyConfirm" alignment="3" min="-2" max="-2" attributes="0"/>
+                      <Group type="103" groupAlignment="0" max="-2" attributes="0">
+                          <Group type="102" attributes="0">
+                              <Group type="103" groupAlignment="3" attributes="0">
+                                  <Component id="labelConfirm" alignment="3" min="-2" max="-2" attributes="0"/>
+                                  <Component id="keyConfirm" alignment="3" min="-2" max="-2" attributes="0"/>
+                              </Group>
+                              <EmptySpace type="unrelated" max="-2" attributes="0"/>
+                              <Group type="103" groupAlignment="3" attributes="0">
+                                  <Component id="labelCancel" alignment="3" min="-2" max="-2" attributes="0"/>
+                                  <Component id="keyCancelSkip" alignment="3" min="-2" max="-2" attributes="0"/>
+                              </Group>
+                              <EmptySpace type="unrelated" max="-2" attributes="0"/>
+                              <Group type="103" groupAlignment="3" attributes="0">
+                                  <Component id="labelNextTurn" alignment="3" min="-2" max="-2" attributes="0"/>
+                                  <Component id="keyNextTurn" alignment="3" min="-2" max="-2" attributes="0"/>
+                              </Group>
+                              <EmptySpace type="unrelated" min="-2" max="-2" attributes="0"/>
+                              <Group type="103" groupAlignment="3" attributes="0">
+                                  <Component id="labelEndStep" alignment="3" min="-2" max="-2" attributes="0"/>
+                                  <Component id="keyEndStep" alignment="3" min="-2" max="-2" attributes="0"/>
+                              </Group>
+                              <EmptySpace type="unrelated" max="-2" attributes="0"/>
+                              <Group type="103" groupAlignment="3" attributes="0">
+                                  <Component id="labelSkipStep" alignment="3" min="-2" max="-2" attributes="0"/>
+                                  <Component id="keySkipStep" alignment="3" min="-2" max="-2" attributes="0"/>
+                              </Group>
+                              <EmptySpace type="unrelated" max="-2" attributes="0"/>
+                              <Group type="103" groupAlignment="3" attributes="0">
+                                  <Component id="labelMainStep" alignment="3" min="-2" max="-2" attributes="0"/>
+                                  <Component id="keyMainStep" alignment="3" min="-2" max="-2" attributes="0"/>
+                              </Group>
+                              <EmptySpace type="unrelated" max="-2" attributes="0"/>
+                              <Group type="103" groupAlignment="3" attributes="0">
+                                  <Component id="labelYourTurn" alignment="3" min="-2" max="-2" attributes="0"/>
+                                  <Component id="keyYourTurn" alignment="3" min="-2" max="-2" attributes="0"/>
+                              </Group>
+                              <EmptySpace type="unrelated" max="-2" attributes="0"/>
+                              <Group type="103" groupAlignment="3" attributes="0">
+                                  <Component id="lebelSkip" alignment="3" min="-2" max="-2" attributes="0"/>
+                                  <Component id="keySkipStack" alignment="3" min="-2" max="-2" attributes="0"/>
+                              </Group>
+                              <EmptySpace type="unrelated" max="-2" attributes="0"/>
+                              <Group type="103" groupAlignment="3" attributes="0">
+                                  <Component id="labelPriorEnd" alignment="3" min="-2" max="-2" attributes="0"/>
+                                  <Component id="keyPriorEnd" alignment="3" min="-2" max="-2" attributes="0"/>
+                              </Group>
+                          </Group>
+                          <Component id="controlsDescriptionLabel" max="32767" attributes="0"/>
                       </Group>
-                      <EmptySpace type="unrelated" max="-2" attributes="0"/>
-                      <Group type="103" groupAlignment="3" attributes="0">
-                          <Component id="labelCancel" alignment="3" min="-2" max="-2" attributes="0"/>
-                          <Component id="keyCancelSkip" alignment="3" min="-2" max="-2" attributes="0"/>
-                      </Group>
-                      <EmptySpace type="unrelated" max="-2" attributes="0"/>
-                      <Group type="103" groupAlignment="3" attributes="0">
-                          <Component id="labelNextTurn" alignment="3" min="-2" max="-2" attributes="0"/>
-                          <Component id="keyNextTurn" alignment="3" min="-2" max="-2" attributes="0"/>
-                      </Group>
-                      <EmptySpace type="unrelated" max="-2" attributes="0"/>
-                      <Group type="103" groupAlignment="3" attributes="0">
-                          <Component id="labelEndStep" alignment="3" min="-2" max="-2" attributes="0"/>
-                          <Component id="keyEndStep" alignment="3" min="-2" max="-2" attributes="0"/>
-                      </Group>
-                      <EmptySpace type="unrelated" max="-2" attributes="0"/>
-                      <Group type="103" groupAlignment="3" attributes="0">
-                          <Component id="labelSkipStep" alignment="3" min="-2" max="-2" attributes="0"/>
-                          <Component id="keySkipStep" alignment="3" min="-2" max="-2" attributes="0"/>
-                      </Group>
-                      <EmptySpace type="unrelated" max="-2" attributes="0"/>
-                      <Group type="103" groupAlignment="3" attributes="0">
-                          <Component id="labelMainStep" alignment="3" min="-2" max="-2" attributes="0"/>
-                          <Component id="keyMainStep" alignment="3" min="-2" max="-2" attributes="0"/>
-                      </Group>
-                      <EmptySpace type="unrelated" max="-2" attributes="0"/>
-                      <Group type="103" groupAlignment="3" attributes="0">
-                          <Component id="labelYourTurn" alignment="3" min="-2" max="-2" attributes="0"/>
-                          <Component id="keyYourTurn" alignment="3" min="-2" max="-2" attributes="0"/>
-                      </Group>
-                      <EmptySpace type="unrelated" max="-2" attributes="0"/>
-                      <Group type="103" groupAlignment="3" attributes="0">
-                          <Component id="lebelSkip" alignment="3" min="-2" max="-2" attributes="0"/>
-                          <Component id="keySkipStack" alignment="3" min="-2" max="-2" attributes="0"/>
-                      </Group>
-                      <EmptySpace type="unrelated" max="-2" attributes="0"/>
-                      <Group type="103" groupAlignment="3" attributes="0">
-                          <Component id="labelPriorEnd" alignment="3" min="-2" max="-2" attributes="0"/>
-                          <Component id="keyPriorEnd" alignment="3" min="-2" max="-2" attributes="0"/>
-                      </Group>
-                      <EmptySpace pref="263" max="32767" attributes="0"/>
+                      <EmptySpace min="-2" pref="263" max="-2" attributes="0"/>
                   </Group>
               </Group>
             </DimensionLayout>
@@ -6057,6 +6064,12 @@
             <Component class="javax.swing.JLabel" name="labelConfirm">
               <Properties>
                 <Property name="text" type="java.lang.String" value="Confirm"/>
+              </Properties>
+            </Component>
+            <Component class="javax.swing.JLabel" name="controlsDescriptionLabel">
+              <Properties>
+                <Property name="text" type="java.lang.String" value="&lt;html&gt;Click on a button and press a key to change a keybind.&lt;br&gt;Space and ESC are not available, and will set the keybind to nothing.&lt;br&gt;If you are currently playing a game, the changes will not take effect until you start a new game."/>
+                <Property name="verticalAlignment" type="int" value="1"/>
               </Properties>
             </Component>
           </SubComponents>
