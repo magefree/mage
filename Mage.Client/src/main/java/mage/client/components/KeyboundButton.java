@@ -12,11 +12,11 @@ import mage.client.dialog.PreferencesDialog;
  */
 public class KeyboundButton extends JButton {
 
-	private final String key;
+	private final String text;
 	private static final Font keyFont = new Font(Font.SANS_SERIF, Font.BOLD, 13);
 
 	public KeyboundButton(String key) {
-		this.key = key;
+		text = PreferencesDialog.getCachedKeyText(key);
 	}
 
 	@Override
@@ -28,7 +28,6 @@ public class KeyboundButton extends JButton {
 				sg.setColor(Color.white);
 				sg.setFont(keyFont);
 
-				String text = PreferencesDialog.getCachedKeyText(key);
 				int textWidth = sg.getFontMetrics(keyFont).stringWidth(text);
 				int centerX = (getWidth() - textWidth) / 2;
 
