@@ -36,7 +36,7 @@ import mage.game.draft.DraftCube;
 public class TimotheeSimonotsTwistedColorPieCube extends DraftCube {
 
 public TimotheeSimonotsTwistedColorPieCube() {
-        super("Simonot Timothee's Twisted Color Pie Cube"); // http://magic.wizards.com/en/MTGO/articles/archive/magic-online/you-make-cube-voting-2016-10-17
+        super("Timothee Simonot's Twisted Color Pie Cube"); // http://magic.wizards.com/en/MTGO/articles/archive/magic-online/you-make-cube-voting-2016-10-17
 
         cubeCards.add(new DraftCube.CardIdentity("Abbot of Keral Keep", ""));
         cubeCards.add(new DraftCube.CardIdentity("Abhorrent Overlord", ""));
