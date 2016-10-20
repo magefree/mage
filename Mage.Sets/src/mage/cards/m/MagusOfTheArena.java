@@ -64,7 +64,7 @@ public class MagusOfTheArena extends CardImpl {
         Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new MagusOfTheArenaEffect(), new GenericManaCost(3));
         ability.addCost(new TapSourceCost());
         ability.addTarget(new TargetControlledCreaturePermanent());
-        ability.addTarget(new TargetOpponentsChoicePermanent(new FilterControlledCreaturePermanent()));
+        ability.addTarget(new TargetOpponentsChoicePermanent(1, 1, new FilterControlledCreaturePermanent(), false, true));
         this.addAbility(ability);
     }
 
