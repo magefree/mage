@@ -42,7 +42,9 @@ import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.awt.image.BufferedImage;
 import java.io.File;
+import java.util.Arrays;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 import java.util.prefs.BackingStoreException;
 import java.util.prefs.Preferences;
@@ -560,16 +562,16 @@ public class PreferencesDialog extends javax.swing.JDialog {
         lebelSkip = new javax.swing.JLabel();
         labelPriorEnd = new javax.swing.JLabel();
         labelCancel = new javax.swing.JLabel();
-        keyCancelSkip = new mage.client.components.KeyBindButton();
-        keyNextTurn = new mage.client.components.KeyBindButton();
-        keyMainStep = new mage.client.components.KeyBindButton();
-        keyEndStep = new mage.client.components.KeyBindButton();
-        keyYourTurn = new mage.client.components.KeyBindButton();
-        keySkipStack = new mage.client.components.KeyBindButton();
-        keyPriorEnd = new mage.client.components.KeyBindButton();
-        keySkipStep = new mage.client.components.KeyBindButton();
+        keyCancelSkip = new KeyBindButton(this, KEY_CONTROL_CANCEL_SKIP);
+        keyNextTurn = new KeyBindButton(this, KEY_CONTROL_NEXT_TURN);
+        keyMainStep = new KeyBindButton(this, KEY_CONTROL_MAIN_STEP);
+        keyEndStep = new KeyBindButton(this, KEY_CONTROL_END_STEP);
+        keyYourTurn = new KeyBindButton(this, KEY_CONTROL_YOUR_TURN);
+        keySkipStack = new KeyBindButton(this, KEY_CONTROL_SKIP_STACK);
+        keyPriorEnd = new KeyBindButton(this, KEY_CONTROL_PRIOR_END);
+        keySkipStep = new KeyBindButton(this, KEY_CONTROL_SKIP_STEP);
         labelSkipStep = new javax.swing.JLabel();
-        keyConfirm = new mage.client.components.KeyBindButton();
+        keyConfirm = new KeyBindButton(this, KEY_CONTROL_CONFIRM);
         labelConfirm = new javax.swing.JLabel();
         controlsDescriptionLabel = new javax.swing.JLabel();
         saveButton = new javax.swing.JButton();
@@ -2548,8 +2550,9 @@ public class PreferencesDialog extends javax.swing.JDialog {
             tabControlsLayout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
             .add(tabControlsLayout.createSequentialGroup()
                 .addContainerGap()
-                .add(tabControlsLayout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING, false)
-                    .add(tabControlsLayout.createSequentialGroup()
+                .add(tabControlsLayout.createParallelGroup(org.jdesktop.layout.GroupLayout.TRAILING, false)
+                    .add(org.jdesktop.layout.GroupLayout.LEADING, controlsDescriptionLabel)
+                    .add(org.jdesktop.layout.GroupLayout.LEADING, tabControlsLayout.createSequentialGroup()
                         .add(tabControlsLayout.createParallelGroup(org.jdesktop.layout.GroupLayout.BASELINE)
                             .add(labelConfirm)
                             .add(keyConfirm, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE))
@@ -2584,9 +2587,8 @@ public class PreferencesDialog extends javax.swing.JDialog {
                         .addPreferredGap(org.jdesktop.layout.LayoutStyle.UNRELATED)
                         .add(tabControlsLayout.createParallelGroup(org.jdesktop.layout.GroupLayout.BASELINE)
                             .add(labelPriorEnd)
-                            .add(keyPriorEnd, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)))
-                    .add(controlsDescriptionLabel))
-                .add(263, 263, 263))
+                            .add(keyPriorEnd, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE))))
+                .addContainerGap())
         );
 
         tabsPanel.addTab("Controls", tabControls);
@@ -2780,15 +2782,15 @@ public class PreferencesDialog extends javax.swing.JDialog {
 		save(prefs, dialog.txtURLServerList, KEY_CONNECTION_URL_SERVER_LIST);
 
 		// controls
-		save(prefs, dialog.keyConfirm, KEY_CONTROL_CONFIRM);
-		save(prefs, dialog.keyCancelSkip, KEY_CONTROL_CANCEL_SKIP);
-		save(prefs, dialog.keyNextTurn, KEY_CONTROL_NEXT_TURN);
-		save(prefs, dialog.keyEndStep, KEY_CONTROL_END_STEP);
-		save(prefs, dialog.keySkipStep, KEY_CONTROL_SKIP_STEP);
-		save(prefs, dialog.keyMainStep, KEY_CONTROL_MAIN_STEP);
-		save(prefs, dialog.keyYourTurn, KEY_CONTROL_YOUR_TURN);
-		save(prefs, dialog.keySkipStack, KEY_CONTROL_SKIP_STACK);
-		save(prefs, dialog.keyPriorEnd, KEY_CONTROL_PRIOR_END);
+		save(prefs, dialog.keyConfirm);
+		save(prefs, dialog.keyCancelSkip);
+		save(prefs, dialog.keyNextTurn);
+		save(prefs, dialog.keyEndStep);
+		save(prefs, dialog.keySkipStep);
+		save(prefs, dialog.keyMainStep);
+		save(prefs, dialog.keyYourTurn);
+		save(prefs, dialog.keySkipStack);
+		save(prefs, dialog.keyPriorEnd);
 
 		// Avatar
 		if (selectedAvatarId < MIN_AVATAR_ID || selectedAvatarId > MAX_AVATAR_ID) {
@@ -3327,15 +3329,15 @@ public class PreferencesDialog extends javax.swing.JDialog {
 	}
 
 	private static void loadControlSettings(Preferences prefs) {
-		load(prefs, dialog.keyConfirm, KEY_CONTROL_CONFIRM);
-		load(prefs, dialog.keyCancelSkip, KEY_CONTROL_CANCEL_SKIP);
-		load(prefs, dialog.keyNextTurn, KEY_CONTROL_NEXT_TURN);
-		load(prefs, dialog.keyEndStep, KEY_CONTROL_END_STEP);
-		load(prefs, dialog.keySkipStep, KEY_CONTROL_SKIP_STEP);
-		load(prefs, dialog.keyMainStep, KEY_CONTROL_MAIN_STEP);
-		load(prefs, dialog.keyYourTurn, KEY_CONTROL_YOUR_TURN);
-		load(prefs, dialog.keySkipStack, KEY_CONTROL_SKIP_STACK);
-		load(prefs, dialog.keyPriorEnd, KEY_CONTROL_PRIOR_END);
+		load(prefs, dialog.keyConfirm);
+		load(prefs, dialog.keyCancelSkip);
+		load(prefs, dialog.keyNextTurn);
+		load(prefs, dialog.keyEndStep);
+		load(prefs, dialog.keySkipStep);
+		load(prefs, dialog.keyMainStep);
+		load(prefs, dialog.keyYourTurn);
+		load(prefs, dialog.keySkipStack);
+		load(prefs, dialog.keyPriorEnd);
 	}
 
 	private static void loadSelectedAvatar(Preferences prefs) {
@@ -3462,8 +3464,9 @@ public class PreferencesDialog extends javax.swing.JDialog {
 		load(prefs, checkBox, propName, PHASE_ON);
 	}
 
-	private static void load(Preferences prefs, KeyBindButton button, String propName) {
-		int prop = prefs.getInt(propName, getDefaultControlKey(propName));
+	private static void load(Preferences prefs, KeyBindButton button) {
+		String key = button.getKey();
+		int prop = prefs.getInt(key, getDefaultControlKey(key));
 		button.setKeyCode(prop);
 	}
 
@@ -3504,10 +3507,11 @@ public class PreferencesDialog extends javax.swing.JDialog {
 		updateCache(propName, comboBox.getSelectedItem().toString().trim());
 	}
 
-	private static void save(Preferences prefs, KeyBindButton button, String propName) {
+	private static void save(Preferences prefs, KeyBindButton button) {
 		int code = button.getKeyCode();
-		prefs.putInt(propName, code);
-		updateCache(propName, Integer.toString(code));
+		String key = button.getKey();
+		prefs.putInt(key, code);
+		updateCache(key, Integer.toString(code));
 	}
 
 	public void reset() {
@@ -3685,6 +3689,20 @@ public class PreferencesDialog extends javax.swing.JDialog {
 				PreferencesDialog.getCachedValue(PreferencesDialog.KEY_PASS_PRIORITY_ACTIVATION, "true").equals("true"),
 				PreferencesDialog.getCachedValue(PreferencesDialog.KEY_AUTO_ORDER_TRIGGER, "true").equals("true"),
 				PreferencesDialog.getCachedValue(PreferencesDialog.KEY_USE_FIRST_MANA_ABILITY, "false").equals("true")
+		);
+	}
+
+	public List<KeyBindButton> getKeybindButtons() {
+		return Arrays.asList(
+				keyCancelSkip,
+				keyConfirm,
+				keyEndStep,
+				keyMainStep,
+				keyNextTurn,
+				keyPriorEnd,
+				keySkipStack,
+				keySkipStep,
+				keyYourTurn
 		);
 	}
 

@@ -5886,7 +5886,7 @@
           <Layout>
             <DimensionLayout dim="0">
               <Group type="103" groupAlignment="0" attributes="0">
-                  <Group type="102" attributes="0">
+                  <Group type="102" alignment="0" attributes="0">
                       <EmptySpace max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="0" attributes="0">
                           <Component id="labelCancel" alignment="0" min="-2" max="-2" attributes="0"/>
@@ -5921,8 +5921,9 @@
               <Group type="103" groupAlignment="0" attributes="0">
                   <Group type="102" alignment="0" attributes="0">
                       <EmptySpace max="-2" attributes="0"/>
-                      <Group type="103" groupAlignment="0" max="-2" attributes="0">
-                          <Group type="102" attributes="0">
+                      <Group type="103" groupAlignment="1" max="-2" attributes="0">
+                          <Component id="controlsDescriptionLabel" alignment="0" max="32767" attributes="0"/>
+                          <Group type="102" alignment="0" attributes="0">
                               <Group type="103" groupAlignment="3" attributes="0">
                                   <Component id="labelConfirm" alignment="3" min="-2" max="-2" attributes="0"/>
                                   <Component id="keyConfirm" alignment="3" min="-2" max="-2" attributes="0"/>
@@ -5968,9 +5969,8 @@
                                   <Component id="keyPriorEnd" alignment="3" min="-2" max="-2" attributes="0"/>
                               </Group>
                           </Group>
-                          <Component id="controlsDescriptionLabel" max="32767" attributes="0"/>
                       </Group>
-                      <EmptySpace min="-2" pref="263" max="-2" attributes="0"/>
+                      <EmptySpace min="-2" max="-2" attributes="0"/>
                   </Group>
               </Group>
             </DimensionLayout>
@@ -6015,41 +6015,65 @@
               <Properties>
                 <Property name="text" type="java.lang.String" value="keyBindButton1"/>
               </Properties>
+              <AuxValues>
+                <AuxValue name="JavaCodeGenerator_CreateCodeCustom" type="java.lang.String" value="new KeyBindButton(this, KEY_CONTROL_CANCEL_SKIP)"/>
+              </AuxValues>
             </Component>
             <Component class="mage.client.components.KeyBindButton" name="keyNextTurn">
               <Properties>
                 <Property name="text" type="java.lang.String" value="keyBindButton1"/>
               </Properties>
+              <AuxValues>
+                <AuxValue name="JavaCodeGenerator_CreateCodeCustom" type="java.lang.String" value="new KeyBindButton(this, KEY_CONTROL_NEXT_TURN)"/>
+              </AuxValues>
             </Component>
             <Component class="mage.client.components.KeyBindButton" name="keyMainStep">
               <Properties>
                 <Property name="text" type="java.lang.String" value="keyBindButton1"/>
               </Properties>
+              <AuxValues>
+                <AuxValue name="JavaCodeGenerator_CreateCodeCustom" type="java.lang.String" value="new KeyBindButton(this, KEY_CONTROL_MAIN_STEP)"/>
+              </AuxValues>
             </Component>
             <Component class="mage.client.components.KeyBindButton" name="keyEndStep">
               <Properties>
                 <Property name="text" type="java.lang.String" value="keyBindButton1"/>
               </Properties>
+              <AuxValues>
+                <AuxValue name="JavaCodeGenerator_CreateCodeCustom" type="java.lang.String" value="new KeyBindButton(this, KEY_CONTROL_END_STEP)"/>
+              </AuxValues>
             </Component>
             <Component class="mage.client.components.KeyBindButton" name="keyYourTurn">
               <Properties>
                 <Property name="text" type="java.lang.String" value="keyBindButton1"/>
               </Properties>
+              <AuxValues>
+                <AuxValue name="JavaCodeGenerator_CreateCodeCustom" type="java.lang.String" value="new KeyBindButton(this, KEY_CONTROL_YOUR_TURN)"/>
+              </AuxValues>
             </Component>
             <Component class="mage.client.components.KeyBindButton" name="keySkipStack">
               <Properties>
                 <Property name="text" type="java.lang.String" value="keyBindButton1"/>
               </Properties>
+              <AuxValues>
+                <AuxValue name="JavaCodeGenerator_CreateCodeCustom" type="java.lang.String" value="new KeyBindButton(this, KEY_CONTROL_SKIP_STACK)"/>
+              </AuxValues>
             </Component>
             <Component class="mage.client.components.KeyBindButton" name="keyPriorEnd">
               <Properties>
                 <Property name="text" type="java.lang.String" value="keyBindButton1"/>
               </Properties>
+              <AuxValues>
+                <AuxValue name="JavaCodeGenerator_CreateCodeCustom" type="java.lang.String" value="new KeyBindButton(this, KEY_CONTROL_PRIOR_END)"/>
+              </AuxValues>
             </Component>
             <Component class="mage.client.components.KeyBindButton" name="keySkipStep">
               <Properties>
                 <Property name="text" type="java.lang.String" value="keyBindButton1"/>
               </Properties>
+              <AuxValues>
+                <AuxValue name="JavaCodeGenerator_CreateCodeCustom" type="java.lang.String" value="new KeyBindButton(this, KEY_CONTROL_SKIP_STEP)"/>
+              </AuxValues>
             </Component>
             <Component class="javax.swing.JLabel" name="labelSkipStep">
               <Properties>
@@ -6060,6 +6084,9 @@
               <Properties>
                 <Property name="text" type="java.lang.String" value="keyBindButton1"/>
               </Properties>
+              <AuxValues>
+                <AuxValue name="JavaCodeGenerator_CreateCodeCustom" type="java.lang.String" value="new KeyBindButton(this, KEY_CONTROL_CONFIRM)"/>
+              </AuxValues>
             </Component>
             <Component class="javax.swing.JLabel" name="labelConfirm">
               <Properties>
