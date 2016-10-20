@@ -67,8 +67,10 @@ public class PrizedAmalgam extends CardImpl {
         this.toughness = new MageInt(3);
 
         // Whenever a creature enters the battlefield, if it entered from your graveyard or you cast it from your graveyard, return Prized Amalgam from your graveyard to the battlefield tapped at the beginning of the next end step.
+        Effect effect = new ReturnFromGraveyardToBattlefieldTargetEffect(true);
+        effect.setText("return {this} from your graveyard to the battlefield tapped at the beginning of the next end step");
         this.addAbility(new PrizedAmalgamTriggerdAbility(new CreateDelayedTriggeredAbilityEffect(
-                new AtTheBeginOfNextEndStepDelayedTriggeredAbility(new ReturnFromGraveyardToBattlefieldTargetEffect(true))), filter),
+                new AtTheBeginOfNextEndStepDelayedTriggeredAbility(effect)), filter),
                 new CastFromGraveyardWatcher());
     }
 
