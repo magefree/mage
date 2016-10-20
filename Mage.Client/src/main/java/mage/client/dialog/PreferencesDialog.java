@@ -574,6 +574,7 @@ public class PreferencesDialog extends javax.swing.JDialog {
         keyConfirm = new KeyBindButton(this, KEY_CONTROL_CONFIRM);
         labelConfirm = new javax.swing.JLabel();
         controlsDescriptionLabel = new javax.swing.JLabel();
+        bttnResetControls = new javax.swing.JButton();
         saveButton = new javax.swing.JButton();
         exitButton = new javax.swing.JButton();
 
@@ -2515,6 +2516,13 @@ public class PreferencesDialog extends javax.swing.JDialog {
         controlsDescriptionLabel.setText("<html>Click on a button and press a key to change a keybind.<br>Space and ESC are not available, and will set the keybind to nothing.<br>If you are currently playing a game, the changes will not take effect until you start a new game.");
         controlsDescriptionLabel.setVerticalAlignment(javax.swing.SwingConstants.TOP);
 
+        bttnResetControls.setText("Reset to default");
+        bttnResetControls.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                bttnResetControlsActionPerformed(evt);
+            }
+        });
+
         org.jdesktop.layout.GroupLayout tabControlsLayout = new org.jdesktop.layout.GroupLayout(tabControls);
         tabControls.setLayout(tabControlsLayout);
         tabControlsLayout.setHorizontalGroup(
@@ -2522,28 +2530,33 @@ public class PreferencesDialog extends javax.swing.JDialog {
             .add(tabControlsLayout.createSequentialGroup()
                 .addContainerGap()
                 .add(tabControlsLayout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
-                    .add(labelCancel)
-                    .add(labelNextTurn)
-                    .add(labelEndStep)
-                    .add(labelMainStep)
-                    .add(labelYourTurn)
-                    .add(lebelSkip)
-                    .add(labelPriorEnd)
-                    .add(labelSkipStep)
-                    .add(labelConfirm))
-                .addPreferredGap(org.jdesktop.layout.LayoutStyle.UNRELATED)
-                .add(tabControlsLayout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
-                    .add(keyConfirm, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
-                    .add(keyCancelSkip, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
-                    .add(keyNextTurn, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
-                    .add(keySkipStack, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
-                    .add(keyYourTurn, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
-                    .add(keyMainStep, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
-                    .add(keyPriorEnd, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
-                    .add(keySkipStep, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
-                    .add(keyEndStep, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED)
-                .add(controlsDescriptionLabel, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, 498, Short.MAX_VALUE)
+                    .add(tabControlsLayout.createSequentialGroup()
+                        .add(bttnResetControls)
+                        .add(0, 0, Short.MAX_VALUE))
+                    .add(tabControlsLayout.createSequentialGroup()
+                        .add(tabControlsLayout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
+                            .add(labelCancel)
+                            .add(labelNextTurn)
+                            .add(labelEndStep)
+                            .add(labelMainStep)
+                            .add(labelYourTurn)
+                            .add(lebelSkip)
+                            .add(labelPriorEnd)
+                            .add(labelSkipStep)
+                            .add(labelConfirm))
+                        .addPreferredGap(org.jdesktop.layout.LayoutStyle.UNRELATED)
+                        .add(tabControlsLayout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
+                            .add(keyConfirm, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
+                            .add(keyCancelSkip, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
+                            .add(keyNextTurn, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
+                            .add(keySkipStack, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
+                            .add(keyYourTurn, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
+                            .add(keyMainStep, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
+                            .add(keyPriorEnd, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
+                            .add(keySkipStep, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
+                            .add(keyEndStep, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE))
+                        .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED)
+                        .add(controlsDescriptionLabel, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, 498, Short.MAX_VALUE)))
                 .addContainerGap())
         );
         tabControlsLayout.setVerticalGroup(
@@ -2588,6 +2601,8 @@ public class PreferencesDialog extends javax.swing.JDialog {
                         .add(tabControlsLayout.createParallelGroup(org.jdesktop.layout.GroupLayout.BASELINE)
                             .add(labelPriorEnd)
                             .add(keyPriorEnd, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE))))
+                .addPreferredGap(org.jdesktop.layout.LayoutStyle.UNRELATED)
+                .add(bttnResetControls)
                 .addContainerGap())
         );
 
@@ -3080,6 +3095,14 @@ public class PreferencesDialog extends javax.swing.JDialog {
     private void cbCardRenderHideSetSymbolActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbCardRenderHideSetSymbolActionPerformed
 		// TODO add your handling code here:
     }//GEN-LAST:event_cbCardRenderHideSetSymbolActionPerformed
+
+    private void bttnResetControlsActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bttnResetControlsActionPerformed
+		getKeybindButtons().stream().forEach((bttn) -> {
+			String id = bttn.getKey();
+			int keyCode = getDefaultControlKey(id);
+			bttn.setKeyCode(keyCode);
+		});
+    }//GEN-LAST:event_bttnResetControlsActionPerformed
 
 	private void showProxySettings() {
 		Connection.ProxyType proxyType = (Connection.ProxyType) cbProxyType.getSelectedItem();
@@ -3713,6 +3736,7 @@ public class PreferencesDialog extends javax.swing.JDialog {
     private javax.swing.JButton btnBrowseBackgroundImage;
     private javax.swing.JButton btnBrowseBattlefieldImage;
     private javax.swing.JButton btnBrowseImageLocation;
+    private javax.swing.JButton bttnResetControls;
     private javax.swing.JCheckBox cbAllowRequestToShowHandCards;
     private javax.swing.JCheckBox cbAskMoveToGraveOrder;
     private javax.swing.JCheckBox cbAutoOrderTrigger;
