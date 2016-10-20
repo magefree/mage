@@ -69,7 +69,7 @@ public class Preacher extends CardImpl {
 
         // {tap}: Gain control of target creature of an opponent's choice that he or she controls for as long as Preacher remains tapped.
         Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new PreacherEffect(), new TapSourceCost());
-        ability.addTarget(new TargetOpponentsChoicePermanent(new FilterControlledCreaturePermanent()));
+        ability.addTarget(new TargetOpponentsChoicePermanent(1, 1, new FilterControlledCreaturePermanent(), false, true));
 
         this.addAbility(ability);
 

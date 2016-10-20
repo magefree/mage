@@ -21,20 +21,23 @@ import mage.target.TargetPermanent;
 public class TargetOpponentsChoicePermanent extends TargetPermanent {
 
     protected UUID opponentId = null;
+    private boolean dontTargetPlayer = false;
 
     public TargetOpponentsChoicePermanent(FilterPermanent filter) {
         super(1, 1, filter, false);
         this.targetName = filter.getMessage();
     }
 
-    public TargetOpponentsChoicePermanent(int minNumTargets, int maxNumTargets, FilterPermanent filter, boolean notTarget) {
+    public TargetOpponentsChoicePermanent(int minNumTargets, int maxNumTargets, FilterPermanent filter, boolean notTarget, boolean dontTargetPlayer) {
         super(minNumTargets, maxNumTargets, filter, notTarget);
         this.targetName = filter.getMessage();
+        this.dontTargetPlayer = dontTargetPlayer;
     }
 
     public TargetOpponentsChoicePermanent(final TargetOpponentsChoicePermanent target) {
         super(target);
         this.opponentId = target.opponentId;
+        this.dontTargetPlayer = target.dontTargetPlayer;
     }
 
     @Override
@@ -79,7 +82,7 @@ public class TargetOpponentsChoicePermanent extends TargetPermanent {
 
     private UUID getOpponentId(UUID playerId, Ability source, Game game) {
         if (opponentId == null) {
-            TargetOpponent target = new TargetOpponent();
+            TargetOpponent target = new TargetOpponent(dontTargetPlayer);
             Player player = game.getPlayer(playerId);
             if (player != null) {
                 if (player.chooseTarget(Outcome.Detriment, target, source, game)) {

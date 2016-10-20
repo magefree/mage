@@ -55,7 +55,7 @@ public class Evangelize extends CardImpl {
         GainControlTargetEffect effect = new GainControlTargetEffect(Duration.EndOfGame);
         effect.setText("Gain control of target creature of an opponent's choice that he or she controls");
         this.getSpellAbility().addEffect(effect);
-        this.getSpellAbility().addTarget(new TargetOpponentsChoicePermanent(1, 1, filter, false));
+        this.getSpellAbility().addTarget(new TargetOpponentsChoicePermanent(1, 1, filter, false, true));
     }
 
     public Evangelize(final Evangelize card) {
