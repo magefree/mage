@@ -44,7 +44,6 @@ import mage.target.common.TargetOpponentsChoicePermanent;
 public class Evangelize extends CardImpl {
 
     private static final FilterControlledCreaturePermanent filter = new FilterControlledCreaturePermanent();
-    private static final String staticText = "Gain control of target creature of an opponent's choice that he or she controls";
 
     public Evangelize(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.SORCERY}, "{4}{W}");
@@ -53,7 +52,9 @@ public class Evangelize extends CardImpl {
         this.addAbility(new BuybackAbility("{2}{W}{W}"));
 
         // Gain control of target creature of an opponent's choice that he or she controls.
-        this.getSpellAbility().addEffect(new GainControlTargetEffect(Duration.EndOfGame));
+        GainControlTargetEffect effect = new GainControlTargetEffect(Duration.EndOfGame);
+        effect.setText("Gain control of target creature of an opponent's choice that he or she controls");
+        this.getSpellAbility().addEffect(effect);
         this.getSpellAbility().addTarget(new TargetOpponentsChoicePermanent(1, 1, filter, false));
     }
 
