@@ -576,7 +576,7 @@ public class DragCardGrid extends JPanel implements DragCardSource, DragCardTarg
         void cardsSelected();
 
         void hideCards(Collection<CardView> card);
-        
+
         void duplicateCards(Collection<CardView> cards);
 
         void showAll();
@@ -1094,6 +1094,7 @@ public class DragCardGrid extends JPanel implements DragCardSource, DragCardTarg
             l.duplicateCards(toDuplicate);
         }
     }
+
     private void showAll() {
         for (DragCardGridListener l : listeners) {
             l.showAll();
@@ -1381,7 +1382,6 @@ public class DragCardGrid extends JPanel implements DragCardSource, DragCardTarg
                         while (m.find()) {
                             System.out.println("0=" + m.group(0) + ",,,1=" + m.group(1) + ",,,2=" + m.group(2) + ",,,3=" + m.group(3));
                             str = "Add" + m.group(1) + m.group(3) + "to your mana pool";
-                            System.out.println("Found " + m.group(2) + " in " + card.getName());
                             int num = 1;
                             if (manaCounts.get(m.group(2)) != null) {
                                 num = manaCounts.get(m.group(2));
@@ -1675,7 +1675,7 @@ public class DragCardGrid extends JPanel implements DragCardSource, DragCardTarg
         // And add it
         cardContent.add(cardPanel);
         cardViews.put(card.getId(), cardPanel);
-        
+
         if (duplicated) {
             sortIntoGrid(card);
             eventSource.addSpecificCard(card, "add-specific-card");
