@@ -57,20 +57,26 @@ public class RemoveCounterSourceEffect extends OneShotEffect {
     @Override
     public boolean apply(Game game, Ability source) {
         Permanent permanent = game.getPermanent(source.getSourceId());
-        if (permanent != null && permanent.getCounters(game).getCount(counter.getName()) >= counter.getCount()) {
-            permanent.removeCounters(counter.getName(), counter.getCount(), game);
-            if (!game.isSimulation()) {
-                game.informPlayers("Removed " + counter.getCount() + " " + counter.getName() + " counter from " + permanent.getLogName());
+        if (permanent != null) {
+            int toRemove = Math.min(counter.getCount(), permanent.getCounters(game).getCount(counter.getName()));
+            if (toRemove > 0) {
+                permanent.removeCounters(counter.getName(), toRemove, game);
+                if (!game.isSimulation()) {
+                    game.informPlayers("Removed " + toRemove + " " + counter.getName() + " counter from " + permanent.getLogName());
+                }
             }
             return true;
         }
         Card card = game.getCard(source.getSourceId());
-        if (card != null && card.getCounters(game).getCount(counter.getName()) >= counter.getCount()) {
-            card.removeCounters(counter.getName(), counter.getCount(), game);
-            if (!game.isSimulation()) {
-                game.informPlayers("Removed " + counter.getCount() + " " + counter.getName()
-                        + " counter from " + card.getLogName()
-                        + " (" + card.getCounters(game).getCount(counter.getName()) + " left)");
+        if (card != null) {
+            int toRemove = Math.min(counter.getCount(), card.getCounters(game).getCount(counter.getName()));
+            if (toRemove > 0) {
+                card.removeCounters(counter.getName(), toRemove, game);
+                if (!game.isSimulation()) {
+                    game.informPlayers("Removed " + toRemove + " " + counter.getName()
+                            + " counter from " + card.getLogName()
+                            + " (" + card.getCounters(game).getCount(counter.getName()) + " left)");
+                }
             }
             return true;
         }
