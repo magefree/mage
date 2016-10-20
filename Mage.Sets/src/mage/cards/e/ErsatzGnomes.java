@@ -49,17 +49,17 @@ import mage.target.TargetSpell;
 public class ErsatzGnomes extends CardImpl {
 
     public ErsatzGnomes(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.ARTIFACT,CardType.CREATURE},"{3}");
+        super(ownerId, setInfo, new CardType[]{CardType.ARTIFACT, CardType.CREATURE}, "{3}");
         this.subtype.add("Gnome");
         this.power = new MageInt(1);
         this.toughness = new MageInt(1);
 
-        // {tap}: Target spell becomes colorless.
+        // {T}: Target spell becomes colorless.
         Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new BecomesColorTargetEffect(new ObjectColor(), Duration.Custom), new TapSourceCost());
         ability.addTarget(new TargetSpell());
         this.addAbility(ability);
 
-        // {tap}: Target permanent becomes colorless until end of turn.
+        // {T}: Target permanent becomes colorless until end of turn.
         ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new BecomesColorTargetEffect(new ObjectColor(), Duration.EndOfTurn), new TapSourceCost());
         ability.addTarget(new TargetPermanent());
         this.addAbility(ability);

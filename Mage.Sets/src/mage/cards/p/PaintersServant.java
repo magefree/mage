@@ -59,7 +59,7 @@ import mage.sets.Commander;
 public class PaintersServant extends CardImpl {
 
     public PaintersServant(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.ARTIFACT,CardType.CREATURE},"{2}");
+        super(ownerId, setInfo, new CardType[]{CardType.ARTIFACT, CardType.CREATURE}, "{2}");
         this.subtype.add("Scarecrow");
 
         this.power = new MageInt(1);
@@ -97,24 +97,23 @@ class PaintersServantEffect extends ContinuousEffectImpl {
             if (color == null) {
                 return false;
             }
-            String colorString = color.toString();
             for (Permanent perm : game.getBattlefield().getActivePermanents(source.getControllerId(), game)) {
-                setObjectColor(perm, colorString, game);
+                perm.getColor(game).addColor(color);
             }
             // Stack
             for (MageObject object : game.getStack()) {
                 if (object instanceof Spell) {
-                    setObjectColor(object, colorString, game);
+                    object.getColor(game).addColor(color);
                 }
             }
             // Exile
             for (Card card : game.getExile().getAllCards(game)) {
-                setCardColor(card, colorString, game);
+                game.getState().getCreateCardAttribute(card).getColor().addColor(color);
             }
             // Command
             for (CommandObject commandObject : game.getState().getCommand()) {
                 if (commandObject instanceof Commander) {
-                    setObjectColor(commandObject, colorString, game);
+                    commandObject.getColor(game).addColor(color);
                 }
             }
 
@@ -123,62 +122,21 @@ class PaintersServantEffect extends ContinuousEffectImpl {
                 if (player != null) {
                     // Hand
                     for (Card card : player.getHand().getCards(game)) {
-                        setCardColor(card, colorString, game);
+                        game.getState().getCreateCardAttribute(card).getColor().addColor(color);
                     }
                     // Library
                     for (Card card : player.getLibrary().getCards(game)) {
-                        setCardColor(card, colorString, game);
+                        game.getState().getCreateCardAttribute(card).getColor().addColor(color);
                     }
                     // Graveyard
                     for (Card card : player.getGraveyard().getCards(game)) {
-                        setCardColor(card, colorString, game);
+                        game.getState().getCreateCardAttribute(card).getColor().addColor(color);
                     }
                 }
             }
             return true;
         }
         return false;
-    }
-
-    protected static void setCardColor(Card card, String colorString, Game game) {
-        ObjectColor color = game.getState().getCreateCardAttribute(card).getColor();
-        switch (colorString) {
-            case "W":
-                color.setWhite(true);
-                break;
-            case "B":
-                color.setBlack(true);
-                break;
-            case "U":
-                color.setBlue(true);
-                break;
-            case "G":
-                color.setGreen(true);
-                break;
-            case "R":
-                color.setRed(true);
-                break;
-        }
-    }
-
-    protected static void setObjectColor(MageObject obj, String colorString, Game game) {
-        switch (colorString) {
-            case "W":
-                obj.getColor(game).setWhite(true);
-                break;
-            case "B":
-                obj.getColor(game).setBlack(true);
-                break;
-            case "U":
-                obj.getColor(game).setBlue(true);
-                break;
-            case "G":
-                obj.getColor(game).setGreen(true);
-                break;
-            case "R":
-                obj.getColor(game).setRed(true);
-                break;
-        }
     }
 
     @Override
