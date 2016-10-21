@@ -5886,33 +5886,41 @@
           <Layout>
             <DimensionLayout dim="0">
               <Group type="103" groupAlignment="0" attributes="0">
-                  <Group type="102" attributes="0">
+                  <Group type="102" alignment="0" attributes="0">
                       <EmptySpace max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="0" attributes="0">
-                          <Component id="labelCancel" alignment="0" min="-2" max="-2" attributes="0"/>
-                          <Component id="labelNextTurn" alignment="0" min="-2" max="-2" attributes="0"/>
-                          <Component id="labelEndStep" alignment="0" min="-2" max="-2" attributes="0"/>
-                          <Component id="labelMainStep" alignment="0" min="-2" max="-2" attributes="0"/>
-                          <Component id="labelYourTurn" alignment="0" min="-2" max="-2" attributes="0"/>
-                          <Component id="lebelSkip" alignment="0" min="-2" max="-2" attributes="0"/>
-                          <Component id="labelPriorEnd" alignment="0" min="-2" max="-2" attributes="0"/>
-                          <Component id="labelSkipStep" alignment="0" min="-2" max="-2" attributes="0"/>
-                          <Component id="labelConfirm" alignment="0" min="-2" max="-2" attributes="0"/>
+                          <Group type="102" attributes="0">
+                              <Component id="bttnResetControls" min="-2" max="-2" attributes="0"/>
+                              <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
+                          </Group>
+                          <Group type="102" attributes="0">
+                              <Group type="103" groupAlignment="0" attributes="0">
+                                  <Component id="labelCancel" alignment="0" min="-2" max="-2" attributes="0"/>
+                                  <Component id="labelNextTurn" alignment="0" min="-2" max="-2" attributes="0"/>
+                                  <Component id="labelEndStep" alignment="0" min="-2" max="-2" attributes="0"/>
+                                  <Component id="labelMainStep" alignment="0" min="-2" max="-2" attributes="0"/>
+                                  <Component id="labelYourTurn" alignment="0" min="-2" max="-2" attributes="0"/>
+                                  <Component id="lebelSkip" alignment="0" min="-2" max="-2" attributes="0"/>
+                                  <Component id="labelPriorEnd" alignment="0" min="-2" max="-2" attributes="0"/>
+                                  <Component id="labelSkipStep" alignment="0" min="-2" max="-2" attributes="0"/>
+                                  <Component id="labelConfirm" alignment="0" min="-2" max="-2" attributes="0"/>
+                              </Group>
+                              <EmptySpace type="unrelated" max="-2" attributes="0"/>
+                              <Group type="103" groupAlignment="0" attributes="0">
+                                  <Component id="keyConfirm" alignment="0" min="-2" max="-2" attributes="0"/>
+                                  <Component id="keyCancelSkip" alignment="0" min="-2" max="-2" attributes="0"/>
+                                  <Component id="keyNextTurn" alignment="0" min="-2" max="-2" attributes="0"/>
+                                  <Component id="keySkipStack" alignment="0" min="-2" max="-2" attributes="0"/>
+                                  <Component id="keyYourTurn" alignment="0" min="-2" max="-2" attributes="0"/>
+                                  <Component id="keyMainStep" alignment="0" min="-2" max="-2" attributes="0"/>
+                                  <Component id="keyPriorEnd" alignment="0" min="-2" max="-2" attributes="0"/>
+                                  <Component id="keySkipStep" alignment="0" min="-2" max="-2" attributes="0"/>
+                                  <Component id="keyEndStep" alignment="0" min="-2" max="-2" attributes="0"/>
+                              </Group>
+                              <EmptySpace max="-2" attributes="0"/>
+                              <Component id="controlsDescriptionLabel" pref="498" max="32767" attributes="0"/>
+                          </Group>
                       </Group>
-                      <EmptySpace type="unrelated" max="-2" attributes="0"/>
-                      <Group type="103" groupAlignment="0" attributes="0">
-                          <Component id="keyConfirm" alignment="0" min="-2" max="-2" attributes="0"/>
-                          <Component id="keyCancelSkip" alignment="0" min="-2" max="-2" attributes="0"/>
-                          <Component id="keyNextTurn" alignment="0" min="-2" max="-2" attributes="0"/>
-                          <Component id="keySkipStack" alignment="0" min="-2" max="-2" attributes="0"/>
-                          <Component id="keyYourTurn" alignment="0" min="-2" max="-2" attributes="0"/>
-                          <Component id="keyMainStep" alignment="0" min="-2" max="-2" attributes="0"/>
-                          <Component id="keyPriorEnd" alignment="0" min="-2" max="-2" attributes="0"/>
-                          <Component id="keySkipStep" alignment="0" min="-2" max="-2" attributes="0"/>
-                          <Component id="keyEndStep" alignment="0" min="-2" max="-2" attributes="0"/>
-                      </Group>
-                      <EmptySpace max="-2" attributes="0"/>
-                      <Component id="controlsDescriptionLabel" pref="498" max="32767" attributes="0"/>
                       <EmptySpace max="-2" attributes="0"/>
                   </Group>
               </Group>
@@ -5921,8 +5929,9 @@
               <Group type="103" groupAlignment="0" attributes="0">
                   <Group type="102" alignment="0" attributes="0">
                       <EmptySpace max="-2" attributes="0"/>
-                      <Group type="103" groupAlignment="0" max="-2" attributes="0">
-                          <Group type="102" attributes="0">
+                      <Group type="103" groupAlignment="1" max="-2" attributes="0">
+                          <Component id="controlsDescriptionLabel" alignment="0" max="32767" attributes="0"/>
+                          <Group type="102" alignment="0" attributes="0">
                               <Group type="103" groupAlignment="3" attributes="0">
                                   <Component id="labelConfirm" alignment="3" min="-2" max="-2" attributes="0"/>
                                   <Component id="keyConfirm" alignment="3" min="-2" max="-2" attributes="0"/>
@@ -5968,9 +5977,10 @@
                                   <Component id="keyPriorEnd" alignment="3" min="-2" max="-2" attributes="0"/>
                               </Group>
                           </Group>
-                          <Component id="controlsDescriptionLabel" max="32767" attributes="0"/>
                       </Group>
-                      <EmptySpace min="-2" pref="263" max="-2" attributes="0"/>
+                      <EmptySpace type="unrelated" max="-2" attributes="0"/>
+                      <Component id="bttnResetControls" min="-2" max="-2" attributes="0"/>
+                      <EmptySpace max="-2" attributes="0"/>
                   </Group>
               </Group>
             </DimensionLayout>
@@ -6015,41 +6025,65 @@
               <Properties>
                 <Property name="text" type="java.lang.String" value="keyBindButton1"/>
               </Properties>
+              <AuxValues>
+                <AuxValue name="JavaCodeGenerator_CreateCodeCustom" type="java.lang.String" value="new KeyBindButton(this, KEY_CONTROL_CANCEL_SKIP)"/>
+              </AuxValues>
             </Component>
             <Component class="mage.client.components.KeyBindButton" name="keyNextTurn">
               <Properties>
                 <Property name="text" type="java.lang.String" value="keyBindButton1"/>
               </Properties>
+              <AuxValues>
+                <AuxValue name="JavaCodeGenerator_CreateCodeCustom" type="java.lang.String" value="new KeyBindButton(this, KEY_CONTROL_NEXT_TURN)"/>
+              </AuxValues>
             </Component>
             <Component class="mage.client.components.KeyBindButton" name="keyMainStep">
               <Properties>
                 <Property name="text" type="java.lang.String" value="keyBindButton1"/>
               </Properties>
+              <AuxValues>
+                <AuxValue name="JavaCodeGenerator_CreateCodeCustom" type="java.lang.String" value="new KeyBindButton(this, KEY_CONTROL_MAIN_STEP)"/>
+              </AuxValues>
             </Component>
             <Component class="mage.client.components.KeyBindButton" name="keyEndStep">
               <Properties>
                 <Property name="text" type="java.lang.String" value="keyBindButton1"/>
               </Properties>
+              <AuxValues>
+                <AuxValue name="JavaCodeGenerator_CreateCodeCustom" type="java.lang.String" value="new KeyBindButton(this, KEY_CONTROL_END_STEP)"/>
+              </AuxValues>
             </Component>
             <Component class="mage.client.components.KeyBindButton" name="keyYourTurn">
               <Properties>
                 <Property name="text" type="java.lang.String" value="keyBindButton1"/>
               </Properties>
+              <AuxValues>
+                <AuxValue name="JavaCodeGenerator_CreateCodeCustom" type="java.lang.String" value="new KeyBindButton(this, KEY_CONTROL_YOUR_TURN)"/>
+              </AuxValues>
             </Component>
             <Component class="mage.client.components.KeyBindButton" name="keySkipStack">
               <Properties>
                 <Property name="text" type="java.lang.String" value="keyBindButton1"/>
               </Properties>
+              <AuxValues>
+                <AuxValue name="JavaCodeGenerator_CreateCodeCustom" type="java.lang.String" value="new KeyBindButton(this, KEY_CONTROL_SKIP_STACK)"/>
+              </AuxValues>
             </Component>
             <Component class="mage.client.components.KeyBindButton" name="keyPriorEnd">
               <Properties>
                 <Property name="text" type="java.lang.String" value="keyBindButton1"/>
               </Properties>
+              <AuxValues>
+                <AuxValue name="JavaCodeGenerator_CreateCodeCustom" type="java.lang.String" value="new KeyBindButton(this, KEY_CONTROL_PRIOR_END)"/>
+              </AuxValues>
             </Component>
             <Component class="mage.client.components.KeyBindButton" name="keySkipStep">
               <Properties>
                 <Property name="text" type="java.lang.String" value="keyBindButton1"/>
               </Properties>
+              <AuxValues>
+                <AuxValue name="JavaCodeGenerator_CreateCodeCustom" type="java.lang.String" value="new KeyBindButton(this, KEY_CONTROL_SKIP_STEP)"/>
+              </AuxValues>
             </Component>
             <Component class="javax.swing.JLabel" name="labelSkipStep">
               <Properties>
@@ -6060,6 +6094,9 @@
               <Properties>
                 <Property name="text" type="java.lang.String" value="keyBindButton1"/>
               </Properties>
+              <AuxValues>
+                <AuxValue name="JavaCodeGenerator_CreateCodeCustom" type="java.lang.String" value="new KeyBindButton(this, KEY_CONTROL_CONFIRM)"/>
+              </AuxValues>
             </Component>
             <Component class="javax.swing.JLabel" name="labelConfirm">
               <Properties>
@@ -6071,6 +6108,14 @@
                 <Property name="text" type="java.lang.String" value="&lt;html&gt;Click on a button and press a key to change a keybind.&lt;br&gt;Space and ESC are not available, and will set the keybind to nothing.&lt;br&gt;If you are currently playing a game, the changes will not take effect until you start a new game."/>
                 <Property name="verticalAlignment" type="int" value="1"/>
               </Properties>
+            </Component>
+            <Component class="javax.swing.JButton" name="bttnResetControls">
+              <Properties>
+                <Property name="text" type="java.lang.String" value="Reset to default"/>
+              </Properties>
+              <Events>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="bttnResetControlsActionPerformed"/>
+              </Events>
             </Component>
           </SubComponents>
         </Container>
