@@ -7,6 +7,7 @@ import java.awt.event.KeyListener;
 import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JPopupMenu;
+import mage.client.dialog.PreferencesDialog;
 
 /**
  *
@@ -14,80 +15,102 @@ import javax.swing.JPopupMenu;
  */
 public class KeyBindButton extends JButton implements ActionListener {
 
-    private final JPopupMenu menu;
-    private final PopupItem item;
-    private int keyCode;
-    private String text;
+	private final PreferencesDialog preferences;
+	private final String key;
+	private PopupItem item;
+	private JPopupMenu menu;
+	private int keyCode;
+	private String text;
 
-    public KeyBindButton() {
-        menu = new JPopupMenu();
-        menu.add(item = new PopupItem());
-        addActionListener(this);
+	/**
+	 * For the IDE only, do not use!
+	 */
+	public KeyBindButton() {
+		this(null, null);
+	}
 
-        fixText();
-    }
+	public KeyBindButton(PreferencesDialog preferences, String key) {
+		this.preferences = preferences;
+		this.key = key;
+		addActionListener(this);
+		fixText();
+	}
 
-    private void applyNewKeycode(int code) {
-        keyCode = code;
-        switch (keyCode) {
-            case KeyEvent.VK_ESCAPE:
-            case KeyEvent.VK_SPACE:
-                keyCode = 0;
-        }
-        fixText();
-        menu.setVisible(false);
-        setSize(getPreferredSize());
-    }
+	private JPopupMenu getMenu() {
+		menu = new JPopupMenu();
+		menu.add(item = new PopupItem());
+		return menu;
+	}
 
-    private void fixText() {
-        if (keyCode == 0) {
-            text = "<None>";
-        } else {
-            text = KeyEvent.getKeyText(keyCode);
-        }
-        repaint();
-    }
+	private void applyNewKeycode(int code) {
+		preferences.getKeybindButtons().stream()
+				.filter(b -> b != KeyBindButton.this)
+				.filter(b -> b.getKeyCode() == code)
+				.forEach(b -> b.setKeyCode(0));
 
-    public void setKeyCode(int keyCode) {
-        this.keyCode = keyCode;
-        fixText();
-    }
+		setKeyCode(code);
+		menu.setVisible(false);
+	}
 
-    public int getKeyCode() {
-        return keyCode;
-    }
+	private void fixText() {
+		if (keyCode == 0) {
+			text = "<None>";
+		} else {
+			text = KeyEvent.getKeyText(keyCode);
+		}
+		repaint();
+	}
 
-    @Override
-    public String getText() {
-        return text;
-    }
+	public void setKeyCode(int keyCode) {
+		this.keyCode = keyCode;
+		switch (keyCode) {
+			case KeyEvent.VK_ESCAPE:
+			case KeyEvent.VK_SPACE:
+				keyCode = 0;
+		}
+		fixText();
+		setSize(getPreferredSize());
+	}
 
-    @Override
-    public void actionPerformed(ActionEvent e) {
-        menu.show(this, 0, 0);
-        item.requestFocusInWindow();
-    }
+	public int getKeyCode() {
+		return keyCode;
+	}
 
-    private class PopupItem extends JLabel implements KeyListener {
+	@Override
+	public String getText() {
+		return text;
+	}
 
-        public PopupItem() {
-            super("Press a key");
-            addKeyListener(this);
-            setFocusable(true);
-        }
+	public String getKey() {
+		return key;
+	}
 
-        @Override
-        public void keyTyped(KeyEvent e) {
-        }
+	@Override
+	public void actionPerformed(ActionEvent e) {
+		getMenu().show(this, 0, 0);
+		item.requestFocusInWindow();
+	}
 
-        @Override
-        public void keyPressed(KeyEvent e) {
-            applyNewKeycode(e.getKeyCode());
-        }
+	private class PopupItem extends JLabel implements KeyListener {
 
-        @Override
-        public void keyReleased(KeyEvent e) {
-        }
+		public PopupItem() {
+			super("Press a key");
+			addKeyListener(this);
+			setFocusable(true);
+		}
 
-    }
+		@Override
+		public void keyTyped(KeyEvent e) {
+		}
+
+		@Override
+		public void keyPressed(KeyEvent e) {
+			applyNewKeycode(e.getKeyCode());
+		}
+
+		@Override
+		public void keyReleased(KeyEvent e) {
+		}
+
+	}
 }
