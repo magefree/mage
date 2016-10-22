@@ -171,6 +171,7 @@ public class Onslaught extends ExpansionSet {
         cards.add(new SetCardInfo("Island", 337, Rarity.LAND, mage.cards.basiclands.Island.class, new CardGraphicInfo(null, true)));
         cards.add(new SetCardInfo("Island", 338, Rarity.LAND, mage.cards.basiclands.Island.class, new CardGraphicInfo(null, true)));
         cards.add(new SetCardInfo("Ixidor's Will", 90, Rarity.COMMON, mage.cards.i.IxidorsWill.class));
+        cards.add(new SetCardInfo("Ixidor, Reality Sculptor", 89, Rarity.RARE, mage.cards.i.IxidorRealitySculptor.class));
         cards.add(new SetCardInfo("Jareth, Leonine Titan", 43, Rarity.RARE, mage.cards.j.JarethLeonineTitan.class));
         cards.add(new SetCardInfo("Kamahl, Fist of Krosa", 268, Rarity.RARE, mage.cards.k.KamahlFistOfKrosa.class));
         cards.add(new SetCardInfo("Krosan Colossus", 270, Rarity.RARE, mage.cards.k.KrosanColossus.class));
