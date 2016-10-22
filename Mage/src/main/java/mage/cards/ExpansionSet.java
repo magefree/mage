@@ -193,8 +193,11 @@ public abstract class ExpansionSet implements Serializable {
 
         if (15 > theBooster.size()) {
             List<CardInfo> commons = getCardsByRarity(Rarity.COMMON);
-            while (15 > theBooster.size()) {
+            while (15 > theBooster.size() && !commons.isEmpty()) {
                 addToBooster(theBooster, commons);
+                if (commons.isEmpty()) {
+                    commons = getCardsByRarity(Rarity.COMMON);
+                }
             }
         }
 

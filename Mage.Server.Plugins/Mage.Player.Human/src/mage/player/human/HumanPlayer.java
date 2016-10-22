@@ -735,12 +735,14 @@ public class HumanPlayer extends PlayerImpl {
     }
 
     private boolean checkPassStep(Game game) {
-        if (game.getStep() != null) {
+        try {
             if (playerId.equals(game.getActivePlayerId())) {
                 return !this.getUserData().getUserSkipPrioritySteps().getYourTurn().isPhaseStepSet(game.getStep().getType());
             } else {
                 return !this.getUserData().getUserSkipPrioritySteps().getOpponentTurn().isPhaseStepSet(game.getStep().getType());
             }
+        } catch (NullPointerException ex) {
+            logger.error("null pointer exception  UserData = " + userData == null ? "null" : "not null");
         }
         return true;
     }
@@ -1464,6 +1466,11 @@ public class HumanPlayer extends PlayerImpl {
 
     protected void updateGameStatePriority(String methodName, Game game) {
         if (game.getState().getPriorityPlayerId() != null) { // don't do it if priority was set to null before (e.g. discard in cleanaup)
+            if (getId() == null) {
+                logger.fatal("Player with no ID: " + name);
+                this.quit(game);
+                return;
+            }
             logger.debug("Setting game priority to " + getId() + " [" + methodName + "]");
             game.getState().setPriorityPlayerId(getId());
         }

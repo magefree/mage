@@ -34,7 +34,6 @@ import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.SpellAbility;
 import mage.abilities.common.SimpleStaticAbility;
-import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.CastSourceTriggeredAbility;
 import mage.abilities.effects.common.cost.CostModificationEffectImpl;
 import mage.abilities.effects.common.turn.ControlTargetPlayerNextTurnEffect;
@@ -64,12 +63,13 @@ import mage.util.CardUtil;
 public class EmrakulThePromisedEnd extends CardImpl {
 
     private static final FilterCard filter = new FilterCard("instants");
+
     static {
         filter.add(new CardTypePredicate(CardType.INSTANT));
     }
 
     public EmrakulThePromisedEnd(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{13}");
+        super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{13}");
         this.supertype.add("Legendary");
         this.subtype.add("Eldrazi");
         this.power = new MageInt(13);

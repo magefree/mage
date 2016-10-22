@@ -25,13 +25,9 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-
 package mage.cards.g;
 
 import java.util.UUID;
-
-import mage.constants.CardType;
-import mage.constants.Zone;
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.costs.common.TapSourceCost;
@@ -39,9 +35,12 @@ import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.counter.AddCountersSourceEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
+import mage.constants.CardType;
 import mage.constants.Outcome;
+import mage.constants.Zone;
 import mage.counters.CounterType;
 import mage.game.Game;
+import mage.game.permanent.Permanent;
 import mage.players.Player;
 import mage.target.TargetPlayer;
 
@@ -51,15 +50,16 @@ import mage.target.TargetPlayer;
  */
 public class Grindclock extends CardImpl {
 
-    public Grindclock (UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.ARTIFACT},"{2}");
+    public Grindclock(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId, setInfo, new CardType[]{CardType.ARTIFACT}, "{2}");
+
         this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new AddCountersSourceEffect(CounterType.CHARGE.createInstance()), new TapSourceCost()));
         Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new GrindclockEffect(), new TapSourceCost());
         ability.addTarget(new TargetPlayer());
         this.addAbility(ability);
     }
 
-    public Grindclock (final Grindclock card) {
+    public Grindclock(final Grindclock card) {
         super(card);
     }
 
@@ -71,6 +71,7 @@ public class Grindclock extends CardImpl {
 }
 
 class GrindclockEffect extends OneShotEffect {
+
     public GrindclockEffect() {
         super(Outcome.Detriment);
         staticText = "Target player puts the top X cards of his or her library into his or her graveyard, where X is the number of charge counters on {this}";
@@ -82,11 +83,14 @@ class GrindclockEffect extends OneShotEffect {
 
     @Override
     public boolean apply(Game game, Ability source) {
-        int amount = game.getPermanent(source.getSourceId()).getCounters(game).getCount(CounterType.CHARGE);
-        Player targetPlayer = game.getPlayer(source.getFirstTarget());
-        if (targetPlayer != null) {
-            targetPlayer.moveCards(targetPlayer.getLibrary().getTopCards(game, amount), Zone.GRAVEYARD, source, game);
-            return true;
+        Permanent sourceObject = game.getPermanentOrLKIBattlefield(source.getSourceId());
+        if (sourceObject != null) {
+            int amount = sourceObject.getCounters(game).getCount(CounterType.CHARGE);
+            Player targetPlayer = game.getPlayer(source.getFirstTarget());
+            if (targetPlayer != null) {
+                targetPlayer.moveCards(targetPlayer.getLibrary().getTopCards(game, amount), Zone.GRAVEYARD, source, game);
+                return true;
+            }
         }
         return false;
     }
