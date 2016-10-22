@@ -57,7 +57,7 @@ public class PhaseOutTargetEffect extends OneShotEffect {
             }
             return true;
         }
-        for (UUID targetId :this.getTargetPointer().getTargets(game, source)) {
+        for (UUID targetId : this.getTargetPointer().getTargets(game, source)) {
             Permanent permanent = game.getPermanent(targetId);
             if (permanent != null) {
                 permanent.phaseOut(game);
@@ -73,7 +73,7 @@ public class PhaseOutTargetEffect extends OneShotEffect {
         }
 
         StringBuilder sb = new StringBuilder();
-        if (targetDescription.length() > 0) {
+        if (targetDescription == null || targetDescription.length() > 0) {
             sb.append(targetDescription);
         } else {
             sb.append("Target ").append(mode.getTargets().get(0).getTargetName());
