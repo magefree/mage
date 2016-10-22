@@ -899,7 +899,7 @@ public class Spell extends StackObjImpl implements Card {
 
     @Override
     public void checkForCountersToAdd(Permanent permanent, Game game) {
-        throw new UnsupportedOperationException("Not supported for Spell");
+        card.checkForCountersToAdd(permanent, game);
     }
 
     @Override

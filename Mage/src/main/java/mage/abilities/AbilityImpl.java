@@ -328,13 +328,16 @@ public abstract class AbilityImpl implements Ability {
             if (sourceObject != null && !this.getAbilityType().equals(AbilityType.TRIGGERED)) { // triggered abilities check this already in playerImpl.triggerAbility
                 sourceObject.adjustTargets(this, game);
             }
-            // Flashback abilities haven't made the choices the underlying spell might need for targetting.
-            if (!(this instanceof FlashbackAbility) && getTargets().size() > 0 && getTargets().chooseTargets(
-                    getEffects().get(0).getOutcome(), this.controllerId, this, noMana, game) == false) {
-                if ((variableManaCost != null || announceString != null) && !game.isSimulation()) {
-                    game.informPlayer(controller, (sourceObject != null ? sourceObject.getIdName() : "") + ": no valid targets with this value of X");
+            // Flashback abilities haven't made the choices the underlying spell might need for targeting.
+            if (!(this instanceof FlashbackAbility)
+                    && getTargets().size() > 0) {
+                Outcome outcome = getEffects().isEmpty() ? Outcome.Detriment : getEffects().get(0).getOutcome();
+                if (getTargets().chooseTargets(outcome, this.controllerId, this, noMana, game) == false) {
+                    if ((variableManaCost != null || announceString != null) && !game.isSimulation()) {
+                        game.informPlayer(controller, (sourceObject != null ? sourceObject.getIdName() : "") + ": no valid targets with this value of X");
+                    }
+                    return false; // when activation of ability is canceled during target selection
                 }
-                return false; // when activation of ability is canceled during target selection
             }
         } // end modes
 

@@ -132,7 +132,7 @@ public class PermanentCard extends PermanentImpl {
         transformable = card.isTransformable();
         if (transformable) {
             this.nightCard = card.isNightCard();
-            if (! this.nightCard) {
+            if (!this.nightCard) {
                 this.secondSideCard = card.getSecondCardFace();
                 this.secondSideCardClazz = this.secondSideCard.getClass();
             }

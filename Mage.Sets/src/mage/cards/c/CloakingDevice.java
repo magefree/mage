@@ -28,13 +28,14 @@
 package mage.cards.c;
 
 import java.util.UUID;
-import mage.MageObject;
 import mage.abilities.Ability;
+import mage.abilities.Mode;
 import mage.abilities.common.AttacksAttachedTriggeredAbility;
 import mage.abilities.common.SimpleStaticAbility;
+import mage.abilities.dynamicvalue.DynamicValue;
+import mage.abilities.dynamicvalue.common.StaticValue;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.AttachEffect;
-import mage.abilities.effects.common.LoseLifeDefendingPlayerEffect;
 import mage.abilities.effects.common.combat.CantBeBlockedAttachedEffect;
 import mage.abilities.keyword.EnchantAbility;
 import mage.cards.CardImpl;
@@ -43,8 +44,6 @@ import mage.constants.AttachmentType;
 import mage.constants.CardType;
 import mage.constants.Outcome;
 import mage.constants.Zone;
-import mage.counters.Counter;
-import mage.filter.FilterPermanent;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.players.Player;
@@ -58,7 +57,7 @@ import mage.target.common.TargetCreaturePermanent;
 public class CloakingDevice extends CardImpl {
 
     public CloakingDevice(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.ENCHANTMENT},"{1}{U}");
+        super(ownerId, setInfo, new CardType[]{CardType.ENCHANTMENT}, "{1}{U}");
         this.subtype.add("Aura");
 
         // Enchant creature
@@ -72,7 +71,7 @@ public class CloakingDevice extends CardImpl {
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new CantBeBlockedAttachedEffect(AttachmentType.AURA)));
 
         // Whenever enchanted creature attacks, defending player loses 1 life.
-        this.addAbility(new AttacksAttachedTriggeredAbility(new LoseLifeDefendingPlayerEffect(1, true), AttachmentType.AURA, false));
+        this.addAbility(new AttacksAttachedTriggeredAbility(new CloakingDeviceLoseLifeDefendingPlayerEffect(1, true), AttachmentType.AURA, false));
 
     }
 
@@ -84,4 +83,55 @@ public class CloakingDevice extends CardImpl {
     public CloakingDevice copy() {
         return new CloakingDevice(this);
     }
+}
+
+class CloakingDeviceLoseLifeDefendingPlayerEffect extends OneShotEffect {
+
+    private DynamicValue amount;
+    private boolean attackerIsSource;
+
+    /**
+     *
+     * @param amount
+     * @param attackerIsSource true if the source.getSourceId() contains the
+     * attacker false if attacker has to be taken from targetPointer
+     */
+    public CloakingDeviceLoseLifeDefendingPlayerEffect(int amount, boolean attackerIsSource) {
+        this(new StaticValue(amount), attackerIsSource);
+    }
+
+    public CloakingDeviceLoseLifeDefendingPlayerEffect(DynamicValue amount, boolean attackerIsSource) {
+        super(Outcome.Damage);
+        this.amount = amount;
+        this.attackerIsSource = attackerIsSource;
+    }
+
+    public CloakingDeviceLoseLifeDefendingPlayerEffect(final CloakingDeviceLoseLifeDefendingPlayerEffect effect) {
+        super(effect);
+        this.amount = effect.amount.copy();
+        this.attackerIsSource = effect.attackerIsSource;
+    }
+
+    @Override
+    public CloakingDeviceLoseLifeDefendingPlayerEffect copy() {
+        return new CloakingDeviceLoseLifeDefendingPlayerEffect(this);
+    }
+
+    @Override
+    public boolean apply(Game game, Ability source) {
+        Permanent enchantment = game.getPermanentOrLKIBattlefield(source.getSourceId());
+        if (enchantment != null && enchantment.getAttachedTo() != null) {
+            Player defender = game.getPlayer(game.getCombat().getDefendingPlayerId(enchantment.getAttachedTo(), game));
+            if (defender != null) {
+                defender.loseLife(amount.calculate(game, source, this), game, false);
+            }
+        }
+        return true;
+    }
+
+    @Override
+    public String getText(Mode mode) {
+        return "defending player loses " + amount + " life";
+    }
+
 }

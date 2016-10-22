@@ -25,16 +25,14 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-
 package mage.cards.v;
 
 import java.util.UUID;
-
-import mage.constants.CardType;
 import mage.abilities.effects.common.LoseLifeTargetControllerEffect;
 import mage.abilities.effects.common.ReturnToHandTargetEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
+import mage.constants.CardType;
 import mage.target.common.TargetCreaturePermanent;
 
 /**
@@ -43,17 +41,16 @@ import mage.target.common.TargetCreaturePermanent;
  */
 public class VaporSnag extends CardImpl {
 
-    public VaporSnag (UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.INSTANT},"{U}");
+    public VaporSnag(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId, setInfo, new CardType[]{CardType.INSTANT}, "{U}");
 
-        
         // Return target creature to its owner's hand. Its controller loses 1 life.
         this.getSpellAbility().addEffect(new ReturnToHandTargetEffect());
         this.getSpellAbility().addEffect(new LoseLifeTargetControllerEffect(1));
         this.getSpellAbility().addTarget(new TargetCreaturePermanent());
     }
 
-    public VaporSnag (final VaporSnag card) {
+    public VaporSnag(final VaporSnag card) {
         super(card);
     }
 

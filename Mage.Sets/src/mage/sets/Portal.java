@@ -124,6 +124,7 @@ public class Portal extends ExpansionSet {
         cards.add(new SetCardInfo("Fire Tempest", 133, Rarity.RARE, mage.cards.f.FireTempest.class));
         cards.add(new SetCardInfo("Flashfires", 134, Rarity.UNCOMMON, mage.cards.f.Flashfires.class));
         cards.add(new SetCardInfo("Fleet-Footed Monk", 177, Rarity.COMMON, mage.cards.f.FleetFootedMonk.class));
+	cards.add(new SetCardInfo("Flux", 56, Rarity.UNCOMMON, mage.cards.f.Flux.class));
         cards.add(new SetCardInfo("Foot Soldiers", 178, Rarity.COMMON, mage.cards.f.FootSoldiers.class));
         cards.add(new SetCardInfo("Forest", 203, Rarity.LAND, mage.cards.basiclands.Forest.class, new CardGraphicInfo(null, true)));
         cards.add(new SetCardInfo("Forest", 204, Rarity.LAND, mage.cards.basiclands.Forest.class, new CardGraphicInfo(null, true)));

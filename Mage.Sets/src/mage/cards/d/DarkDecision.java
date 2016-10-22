@@ -55,7 +55,7 @@ import mage.target.targetpointer.FixedTarget;
 public class DarkDecision extends CardImpl {
 
     public DarkDecision(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{B}{R}");
+        super(ownerId, setInfo, new CardType[]{CardType.SORCERY}, "{B}{R}");
 
         // As an additional cost to cast Dark Decision, pay 1 life.
         this.getSpellAbility().addCost(new PayLifeCost(1));
@@ -103,7 +103,7 @@ class DarkDecisionEffect extends OneShotEffect {
                 if (card != null) {
                     controller.moveCardsToExile(card, source, game, true, source.getSourceId(), sourceObject.getIdName());
                     ContinuousEffect effect = new DarkDecisionMayPlayExiledEffect();
-                    effect.setTargetPointer(new FixedTarget(card.getId()));
+                    effect.setTargetPointer(new FixedTarget(card.getId(), game));
                     game.addEffect(effect, source);
                 }
                 controller.shuffleLibrary(source, game);
@@ -137,7 +137,7 @@ class DarkDecisionMayPlayExiledEffect extends AsThoughEffectImpl {
 
     @Override
     public boolean applies(UUID objectId, Ability source, UUID affectedControllerId, Game game) {
-        if (objectId.equals(getTargetPointer().getFirst(game, source)) && affectedControllerId.equals(source.getSourceId())) {
+        if (objectId.equals(getTargetPointer().getFirst(game, source)) && affectedControllerId.equals(source.getControllerId())) {
             ExileZone exileZone = game.getExile().getExileZone(source.getSourceId());
             return exileZone != null && exileZone.contains(getTargetPointer().getFirst(game, source));
         }

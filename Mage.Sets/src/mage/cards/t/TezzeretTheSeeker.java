@@ -63,7 +63,7 @@ import mage.target.common.TargetCardInLibrary;
 public class TezzeretTheSeeker extends CardImpl {
 
     public TezzeretTheSeeker(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.PLANESWALKER},"{3}{U}{U}");
+        super(ownerId, setInfo, new CardType[]{CardType.PLANESWALKER}, "{3}{U}{U}");
         this.subtype.add("Tezzeret");
 
         this.addAbility(new PlanswalkerEntersWithLoyalityCountersAbility(4));
@@ -118,7 +118,7 @@ class TezzeretTheSeekerEffect2 extends OneShotEffect {
             }
         }
 
-        FilterArtifactCard filter = new FilterArtifactCard(new StringBuilder("artifact card with converted mana cost ").append(cmc).append(" or less").toString());
+        FilterArtifactCard filter = new FilterArtifactCard("artifact card with converted mana cost " + cmc + " or less");
         filter.add(new ConvertedManaCostPredicate(ComparisonType.LessThan, cmc + 1));
         TargetCardInLibrary target = new TargetCardInLibrary(filter);
 

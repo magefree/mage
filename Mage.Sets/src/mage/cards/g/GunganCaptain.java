@@ -44,7 +44,7 @@ import mage.constants.CardType;
 public class GunganCaptain extends CardImpl {
 
     public GunganCaptain(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{3}{U}");
+        super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{2}{U}");
         this.subtype.add("Gungan");
         this.subtype.add("Warrior");
         this.power = new MageInt(1);

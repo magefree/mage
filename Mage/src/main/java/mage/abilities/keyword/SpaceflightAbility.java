@@ -90,7 +90,8 @@ class SpaceFlightEffect extends RestrictionEffect implements MageSingleton {
 
     @Override
     public boolean canBeBlocked(Permanent attacker, Permanent blocker, Ability source, Game game) {
-        return blocker.getAbilities().containsKey(SpaceflightAbility.getInstance().getId());
+        return blocker.getAbilities().containsKey(SpaceflightAbility.getInstance().getId())
+                || blocker.getAbilities().containsKey(CanBlockSpaceflightAbility.getInstance().getId());
     }
 
     @Override

@@ -1499,6 +1499,17 @@ public abstract class GameImpl implements Game, Serializable {
 
     @Override
     public void addTriggeredAbility(TriggeredAbility ability) {
+        if (ability.getControllerId() == null) {
+            String sourceName = "no sourceId";
+            if (ability.getSourceId() != null) {
+                MageObject mageObject = getObject(ability.getSourceId());
+                if (mageObject != null) {
+                    sourceName = mageObject.getName();
+                }
+            }
+            logger.fatal("Added triggered ability without controller: " + sourceName + " rule: " + ability.getRule());
+            return;
+        }
         if (ability instanceof TriggeredManaAbility || ability instanceof DelayedTriggeredManaAbility) {
             // 20110715 - 605.4
             Ability manaAbiltiy = ability.copy();

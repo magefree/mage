@@ -50,6 +50,7 @@ public class LifeLossOtherFromCombatWatcher extends Watcher {
 
     public LifeLossOtherFromCombatWatcher(final LifeLossOtherFromCombatWatcher watcher) {
         super(watcher);
+        this.players.addAll(watcher.players);
     }
 
     @Override

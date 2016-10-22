@@ -33,7 +33,7 @@ import mage.abilities.common.EntersBattlefieldAllTriggeredAbility;
 import mage.abilities.common.delayed.AtTheBeginOfNextEndStepDelayedTriggeredAbility;
 import mage.abilities.effects.Effect;
 import mage.abilities.effects.common.CreateDelayedTriggeredAbilityEffect;
-import mage.abilities.effects.common.ReturnSourceFromGraveyardToBattlefieldEffect;
+import mage.abilities.effects.common.ReturnFromGraveyardToBattlefieldTargetEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
@@ -45,6 +45,7 @@ import mage.filter.predicate.other.OwnerPredicate;
 import mage.game.Game;
 import mage.game.events.EntersTheBattlefieldEvent;
 import mage.game.events.GameEvent;
+import mage.target.targetpointer.FixedTarget;
 import mage.watchers.common.CastFromGraveyardWatcher;
 
 /**
@@ -60,14 +61,16 @@ public class PrizedAmalgam extends CardImpl {
     }
 
     public PrizedAmalgam(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{1}{U}{B}");
+        super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{1}{U}{B}");
         this.subtype.add("Zombie");
         this.power = new MageInt(3);
         this.toughness = new MageInt(3);
 
         // Whenever a creature enters the battlefield, if it entered from your graveyard or you cast it from your graveyard, return Prized Amalgam from your graveyard to the battlefield tapped at the beginning of the next end step.
+        Effect effect = new ReturnFromGraveyardToBattlefieldTargetEffect(true);
+        effect.setText("return {this} from your graveyard to the battlefield tapped at the beginning of the next end step");
         this.addAbility(new PrizedAmalgamTriggerdAbility(new CreateDelayedTriggeredAbilityEffect(
-                new AtTheBeginOfNextEndStepDelayedTriggeredAbility(new ReturnSourceFromGraveyardToBattlefieldEffect(true))), filter),
+                new AtTheBeginOfNextEndStepDelayedTriggeredAbility(effect)), filter),
                 new CastFromGraveyardWatcher());
     }
 
@@ -98,20 +101,32 @@ class PrizedAmalgamTriggerdAbility extends EntersBattlefieldAllTriggeredAbility 
 
     @Override
     public boolean checkTrigger(GameEvent event, Game game) {
+        /**
+         * 4/8/2016 Prized Amalgam’s ability triggers only if it’s in your
+         * graveyard immediately after a creature enters the battlefield from
+         * your graveyard or you cast a creature from your graveyard. A Prized
+         * Amalgam that’s already on the battlefield won’t be returned at the
+         * beginning of the next end step if it’s put into your graveyard later.
+         */
+        boolean result = false;
         if (super.checkTrigger(event, game)) {
             EntersTheBattlefieldEvent entersEvent = (EntersTheBattlefieldEvent) event;
             if (entersEvent.getFromZone().equals(Zone.GRAVEYARD)) {
-                return true;
-            }
-            if (entersEvent.getFromZone().equals(Zone.STACK) && entersEvent.getTarget().getControllerId().equals(getControllerId())) {
+                result = true;
+            } else if (entersEvent.getFromZone().equals(Zone.STACK) && entersEvent.getTarget().getControllerId().equals(getControllerId())) {
                 CastFromGraveyardWatcher watcher = (CastFromGraveyardWatcher) game.getState().getWatchers().get(CastFromGraveyardWatcher.class.getName());
                 if (watcher != null) {
                     int zcc = game.getState().getZoneChangeCounter(event.getSourceId());
-                    return watcher.spellWasCastFromGraveyard(event.getSourceId(), zcc - 1);
+                    result = watcher.spellWasCastFromGraveyard(event.getSourceId(), zcc - 1);
                 }
             }
         }
-        return false;
+        if (result) {
+            for (Effect effect : getEffects()) {
+                effect.setTargetPointer(new FixedTarget(getSourceId(), game.getState().getZoneChangeCounter(getSourceId())));
+            }
+        }
+        return result;
     }
 
     @Override

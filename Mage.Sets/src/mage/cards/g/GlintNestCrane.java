@@ -36,6 +36,7 @@ import mage.abilities.keyword.FlyingAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
+import mage.constants.Zone;
 import mage.filter.FilterCard;
 import mage.filter.predicate.mageobject.CardTypePredicate;
 
@@ -48,11 +49,11 @@ public class GlintNestCrane extends CardImpl {
     private static final FilterCard filter = new FilterCard("an artifact card");
 
     static {
-            filter.add(new CardTypePredicate(CardType.ARTIFACT));
+        filter.add(new CardTypePredicate(CardType.ARTIFACT));
     }
 
     public GlintNestCrane(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{1}{U}");
+        super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{1}{U}");
         this.subtype.add("Bird");
         this.power = new MageInt(1);
         this.toughness = new MageInt(3);
@@ -62,7 +63,8 @@ public class GlintNestCrane extends CardImpl {
 
         // When Glint-Nest Crane enters the battlefield, look at the top four cards of your library. You may reveal an artifact card from among them and
         // put it into your hand. Put the rest on the bottom of your library in any order.
-        this.addAbility(new EntersBattlefieldTriggeredAbility(new LookLibraryAndPickControllerEffect(new StaticValue(4), false, new StaticValue(1), filter, false)));
+        this.addAbility(new EntersBattlefieldTriggeredAbility(
+                new LookLibraryAndPickControllerEffect(new StaticValue(4), false, new StaticValue(1), filter, Zone.LIBRARY, false, true, false, Zone.HAND, true)));
     }
 
     public GlintNestCrane(final GlintNestCrane card) {

@@ -208,6 +208,8 @@ public class ZonesHandler {
             // If we can't find the card we can't remove it.
             return false;
         }
+        // If needed take attributes from the spell (e.g. color of spell was changed)
+        card = takeAttributesFromSpell(card, event, game);
         boolean success = false;
         if (info.faceDown) {
             card.setFaceDown(true, game);
@@ -282,4 +284,23 @@ public class ZonesHandler {
         order.add(cards.getCards(game).iterator().next());
         return order;
     }
+
+    private static Card takeAttributesFromSpell(Card card, ZoneChangeEvent event, Game game) {
+        if (Zone.STACK.equals(event.getFromZone())) {
+            Spell spell = game.getStack().getSpell(event.getTargetId());
+            if (spell != null) {
+                boolean doCopy = false;
+                if (!card.getColor(game).equals(spell.getColor(game))) {
+                    doCopy = true;
+                }
+                if (doCopy) {
+                    // the card that is referenced to in the permanent is copied and the spell attributes are set to this copied card
+                    card = card.copy();
+                    card.getColor(game).setColor(spell.getColor(game));
+                }
+            }
+        }
+        return card;
+    }
+
 }

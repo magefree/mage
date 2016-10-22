@@ -47,13 +47,13 @@ import mage.watchers.common.LifeLossOtherFromCombatWatcher;
 public class SithMarauder extends CardImpl {
 
     public SithMarauder(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{3}{R}{R}");
+        super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{3}{R}{R}");
         this.subtype.add("Human");
         this.subtype.add("Sith");
         this.power = new MageInt(5);
         this.toughness = new MageInt(4);
 
-        // <i>Hate</i> &mdash; When Sith Marauder enters the battlefield, if opponent lost life from source other than combat damage this turn, Sith Marauder deals 3 damage to target creature or player.
+        // <i>Hate</i> &mdash; When Sith Marauder enters the battlefield, if an opponent lost life from a source other than combat damage this turn, Sith Marauder deals 3 damage to target creature or player.
         Ability ability = new ConditionalTriggeredAbility(
                 new EntersBattlefieldTriggeredAbility(new DamageTargetEffect(3)),
                 HateCondition.getInstance(),
