@@ -58,7 +58,7 @@ public class PerpetualTimepiece extends CardImpl {
         // {T}: Put the top two cards of your library into your graveyard.
         this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new PutTopCardOfLibraryIntoGraveControllerEffect(2), new TapSourceCost()));
 
-        // {2}, Exile Perpetual Timepiece: Shuffle any number of target cards from your graveyard into your libary.
+        // {2}, Exile Perpetual Timepiece: Shuffle any number of target cards from your graveyard into your library.
         Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new PerpetualTimepieceShuffleEffect(), new GenericManaCost(2));
         ability.addCost(new ExileSourceCost());
         ability.addTarget(new TargetCardInYourGraveyard(0, Integer.MAX_VALUE, new FilterCard("cards to shuffle into your library")));
@@ -79,7 +79,7 @@ class PerpetualTimepieceShuffleEffect extends OneShotEffect {
 
     PerpetualTimepieceShuffleEffect() {
         super(Outcome.Neutral);
-        this.staticText = "Shuffle any number of target cards from your graveyard into your libary";
+        this.staticText = "Shuffle any number of target cards from your graveyard into your library";
     }
 
     PerpetualTimepieceShuffleEffect(final PerpetualTimepieceShuffleEffect effect) {

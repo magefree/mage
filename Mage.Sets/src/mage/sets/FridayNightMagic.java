@@ -28,10 +28,10 @@
 
 package mage.sets;
 
-import mage.cards.ExpansionSet;
-import mage.constants.SetType;
-import mage.constants.Rarity;
 import mage.cards.CardGraphicInfo;
+import mage.cards.ExpansionSet;
+import mage.constants.Rarity;
+import mage.constants.SetType;
 
 /**
  *
@@ -174,6 +174,7 @@ public class FridayNightMagic extends ExpansionSet {
         cards.add(new SetCardInfo("Muscle Sliver", 33, Rarity.COMMON, mage.cards.m.MuscleSliver.class));
         cards.add(new SetCardInfo("Myr Enforcer", 105, Rarity.COMMON, mage.cards.m.MyrEnforcer.class));
         cards.add(new SetCardInfo("Nissa's Pilgrimage", 188, Rarity.COMMON, mage.cards.n.NissasPilgrimage.class));
+        cards.add(new SetCardInfo("Noose Constrictor", 200, Rarity.SPECIAL, mage.cards.n.NooseConstrictor.class));
         cards.add(new SetCardInfo("Oblivion Ring", 114, Rarity.COMMON, mage.cards.o.OblivionRing.class));
         cards.add(new SetCardInfo("Ophidian", 13, Rarity.UNCOMMON, mage.cards.o.Ophidian.class));
         cards.add(new SetCardInfo("Orator of Ojutai", 184, Rarity.UNCOMMON, mage.cards.o.OratorOfOjutai.class));
