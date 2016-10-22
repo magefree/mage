@@ -75,12 +75,33 @@ public class LookLibraryAndPickControllerEffect extends LookLibraryControllerEff
         this(new StaticValue(numberOfCards), false, new StaticValue(numberToPick), pickFilter, Zone.LIBRARY, false, true, upTo);
     }
 
+    /**
+     *
+     * @param numberOfCards
+     * @param numberToPick
+     * @param pickFilter
+     * @param reveal
+     * @param upTo
+     * @param targetZonePickedCards
+     * @param optional
+     */
     public LookLibraryAndPickControllerEffect(int numberOfCards, int numberToPick, FilterCard pickFilter, boolean reveal, boolean upTo,
             Zone targetZonePickedCards, boolean optional) {
         this(new StaticValue(numberOfCards), false, new StaticValue(numberToPick), pickFilter, Zone.LIBRARY, false, reveal, upTo, targetZonePickedCards, optional);
 
     }
 
+    /**
+     *
+     * @param numberOfCards
+     * @param mayShuffleAfter
+     * @param numberToPick
+     * @param pickFilter
+     * @param targetZoneLookedCards
+     * @param putOnTop
+     * @param reveal
+     * @param upTo
+     */
     public LookLibraryAndPickControllerEffect(DynamicValue numberOfCards, boolean mayShuffleAfter, DynamicValue numberToPick,
             FilterCard pickFilter, Zone targetZoneLookedCards, boolean putOnTop, boolean reveal, boolean upTo) {
         this(numberOfCards, mayShuffleAfter, numberToPick, pickFilter, targetZoneLookedCards, putOnTop, reveal, upTo, Zone.HAND, false);
