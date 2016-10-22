@@ -61,7 +61,7 @@ public class PhyrexianMetamorph extends CardImpl {
     }
 
     public PhyrexianMetamorph(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.ARTIFACT,CardType.CREATURE},"{3}{UP}");
+        super(ownerId, setInfo, new CardType[]{CardType.ARTIFACT, CardType.CREATURE}, "{3}{UP}");
         this.subtype.add("Shapeshifter");
 
         this.power = new MageInt(0);
@@ -87,7 +87,7 @@ public class PhyrexianMetamorph extends CardImpl {
         // You may have Phyrexian Metamorph enter the battlefield as a copy of any artifact or creature on the battlefield, except it's an artifact in addition to its other types.
         Effect effect = new CopyPermanentEffect(filter, phyrexianMetamorphApplier);
         effect.setText("You may have {this} enter the battlefield as a copy of any artifact or creature on the battlefield, except it's an artifact in addition to its other types");
-        Ability ability = new SimpleStaticAbility(Zone.ALL, new EntersBattlefieldEffect(effect));
+        Ability ability = new SimpleStaticAbility(Zone.ALL, new EntersBattlefieldEffect(effect, "", true));
         this.addAbility(ability);
     }
 
