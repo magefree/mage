@@ -49,14 +49,16 @@ import mage.target.common.TargetCreaturePermanent;
 
 /**
  *
- * @author anonymous
+ * @author cg5
  */
 public class IxidorRealitySculptor extends CardImpl {
 
     private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("Face-down creatures");
+    private static final FilterCreaturePermanent filterTarget = new FilterCreaturePermanent("Face-down creature");
 
     static {
         filter.add(new FaceDownPredicate());
+        filterTarget.add(new FaceDownPredicate());
     }
     
     public IxidorRealitySculptor(UUID ownerId, CardSetInfo setInfo) {
@@ -73,7 +75,7 @@ public class IxidorRealitySculptor extends CardImpl {
         
         // {2}{U}: Turn target face-down creature face up.
         Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new TurnFaceUpTargetEffect(), new ManaCostsImpl("{2}{U}"));
-        ability.addTarget(new TargetCreaturePermanent(filter));
+        ability.addTarget(new TargetCreaturePermanent(filterTarget));
         this.addAbility(ability);
     }
 
