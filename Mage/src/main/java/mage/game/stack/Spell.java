@@ -277,9 +277,6 @@ public class Spell extends StackObjImpl implements Card {
             }
         } else {
             updateOptionalCosts(0);
-            if (!getColor(game).equals(card.getColor(game))) { // if spell color was changed, the created permanent needs to be of that color
-                game.getState().getCreateCardAttribute(card).getColor().setColor(getColor(game));
-            }
             return controller.moveCards(card, Zone.BATTLEFIELD, ability, game, false, faceDown, false, null);
         }
     }
@@ -902,7 +899,7 @@ public class Spell extends StackObjImpl implements Card {
 
     @Override
     public void checkForCountersToAdd(Permanent permanent, Game game) {
-        throw new UnsupportedOperationException("Not supported for Spell");
+        card.checkForCountersToAdd(permanent, game);
     }
 
     @Override

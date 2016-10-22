@@ -1,16 +1,16 @@
 /*
  *  Copyright 2010 BetaSteward_at_googlemail.com. All rights reserved.
- * 
+ *
  *  Redistribution and use in source and binary forms, with or without modification, are
  *  permitted provided that the following conditions are met:
- * 
+ *
  *     1. Redistributions of source code must retain the above copyright notice, this list of
  *        conditions and the following disclaimer.
- * 
+ *
  *     2. Redistributions in binary form must reproduce the above copyright notice, this list
  *        of conditions and the following disclaimer in the documentation and/or other materials
  *        provided with the distribution.
- * 
+ *
  *  THIS SOFTWARE IS PROVIDED BY BetaSteward_at_googlemail.com ``AS IS'' AND ANY EXPRESS OR IMPLIED
  *  WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY AND
  *  FITNESS FOR A PARTICULAR PURPOSE ARE DISCLAIMED. IN NO EVENT SHALL BetaSteward_at_googlemail.com OR
@@ -20,12 +20,11 @@
  *  ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING
  *  NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF
  *  ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
- * 
+ *
  *  The views and conclusions contained in the software and documentation are those of the
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-
 package mage.player.ai;
 
 import java.util.LinkedList;
@@ -52,9 +51,6 @@ import mage.game.turn.PostCombatMainPhase;
 import mage.game.turn.PostCombatMainStep;
 import mage.game.turn.Step;
 import org.apache.log4j.Logger;
-
-
-
 
 /**
  *
@@ -91,10 +87,10 @@ public class ComputerPlayer7 extends ComputerPlayer6 {
     private boolean priorityPlay(Game game) {
         if (lastLoggedTurn != game.getTurnNum()) {
             lastLoggedTurn = game.getTurnNum();
-            logger.info("======================= Turn: "+ game.getTurnNum() + " ["+ game.getPlayer(game.getActivePlayerId()).getName() +"] =========================================");
+            logger.info("======================= Turn: " + game.getTurnNum() + " [" + game.getPlayer(game.getActivePlayerId()).getName() + "] =========================================");
         }
         logState(game);
-        logger.debug("Priority -- Step: " + (game.getTurn().getStepType() + "                       ").substring(0,25) + " ActivePlayer-" + game.getPlayer(game.getActivePlayerId()).getName() + " PriorityPlayer-" + name);
+        logger.debug("Priority -- Step: " + (game.getTurn().getStepType() + "                       ").substring(0, 25) + " ActivePlayer-" + game.getPlayer(game.getActivePlayerId()).getName() + " PriorityPlayer-" + name);
         game.getState().setPriorityPlayerId(playerId);
         game.firePriorityEvent(playerId);
         switch (game.getTurn().getStepType()) {
@@ -111,8 +107,7 @@ public class ComputerPlayer7 extends ComputerPlayer6 {
                     }
                     act(game);
                     return true;
-                }
-                else {
+                } else {
                     pass(game);
                 }
                 return false;
@@ -128,8 +123,7 @@ public class ComputerPlayer7 extends ComputerPlayer6 {
                     }
                     act(game);
                     return true;
-                }
-                else {
+                } else {
                     pass(game);
                 }
                 return false;
@@ -141,12 +135,12 @@ public class ComputerPlayer7 extends ComputerPlayer6 {
                 return false;
             case POSTCOMBAT_MAIN:
 //                if (game.getActivePlayerId().equals(playerId)) {
-                    printOutState(game);
-                    if (actions.isEmpty()) {
-                        calculatePostCombatActions(game);
-                    }
-                    act(game);
-                    return true;
+                printOutState(game);
+                if (actions.isEmpty()) {
+                    calculatePostCombatActions(game);
+                }
+                act(game);
+                return true;
 //                }
 //                else {
 //                    pass(game);
@@ -161,24 +155,24 @@ public class ComputerPlayer7 extends ComputerPlayer6 {
         return false;
     }
 
-    protected void calculatePreCombatActions(Game game) {        
+    protected void calculatePreCombatActions(Game game) {
         if (!getNextAction(game)) {
             currentScore = GameStateEvaluator2.evaluate(playerId, game);
             Game sim = createSimulation(game);
             SimulationNode2.resetCount();
             root = new SimulationNode2(null, sim, maxDepth, playerId);
-            
+
             addActionsTimed();
             logger.trace("After add actions timed: root.children.size = " + root.children.size());
             if (root.children.size() > 0) {
                 root = root.children.get(0);
                 // int bestScore = root.getScore();
                 // if (bestScore > currentScore || allowBadMoves) {
-                
+
                 // prevent repeating always the same action with no cost
                 boolean doThis = true;
                 if (root.abilities.size() == 1) {
-                    for (Ability ability:root.abilities) {
+                    for (Ability ability : root.abilities) {
                         if (ability.getManaCosts().convertedManaCost() == 0 && ability.getCosts().isEmpty()) {
                             if (actionCache.contains(ability.getRule() + "_" + ability.getSourceId())) {
                                 doThis = false; // don't do it again
@@ -217,7 +211,7 @@ public class ComputerPlayer7 extends ComputerPlayer6 {
                     actions = new LinkedList<>(root.abilities);
                     combat = root.combat;
                 } else {
-                    logger.debug("[" + game.getPlayer(playerId).getName() + "] no better score  current: " + currentScore + " bestScore: " + bestScore );
+                    logger.debug("[" + game.getPlayer(playerId).getName() + "] no better score  current: " + currentScore + " bestScore: " + bestScore);
                 }
             } else {
                 logger.debug("[" + game.getPlayer(playerId).getName() + "][post] Action: skip");
@@ -229,7 +223,7 @@ public class ComputerPlayer7 extends ComputerPlayer6 {
     protected int addActions(SimulationNode2 node, int depth, int alpha, int beta) {
         boolean stepFinished = false;
         int val;
-        if (logger.isTraceEnabled() && node !=null && node.getAbilities() != null && !node.getAbilities().toString().equals("[Pass]")){
+        if (logger.isTraceEnabled() && node != null && node.getAbilities() != null && !node.getAbilities().toString().equals("[Pass]")) {
             logger.trace("Add Action [" + depth + "] " + node.getAbilities().toString() + "  a: " + alpha + " b: " + beta);
         }
         Game game = node.getGame();
@@ -243,42 +237,39 @@ public class ComputerPlayer7 extends ComputerPlayer6 {
             val = GameStateEvaluator2.evaluate(playerId, game);
             if (logger.isTraceEnabled()) {
                 StringBuilder sb = new StringBuilder("Add Actions -- reached end state  <").append(val).append(">");
-                SimulationNode2 logNode  = node;
+                SimulationNode2 logNode = node;
                 do {
-                    sb.append(new StringBuilder(" <- ["+logNode.getDepth()+"]" + (logNode.getAbilities() != null ? logNode.getAbilities().toString():"[empty]")));
+                    sb.append(new StringBuilder(" <- [" + logNode.getDepth() + "]" + (logNode.getAbilities() != null ? logNode.getAbilities().toString() : "[empty]")));
                     logNode = logNode.getParent();
-                } while((logNode.getParent() != null));
+                } while ((logNode.getParent() != null));
                 logger.trace(sb);
             }
         } else if (node.getChildren().size() > 0) {
             if (logger.isDebugEnabled()) {
                 StringBuilder sb = new StringBuilder("Add Action [").append(depth)
                         .append("] -- something added children ")
-                        .append(node.getAbilities() != null ? node.getAbilities().toString():"null")
+                        .append(node.getAbilities() != null ? node.getAbilities().toString() : "null")
                         .append(" added children: ").append(node.getChildren().size()).append(" (");
-                for (SimulationNode2 logNode: node.getChildren()) {
-                    sb.append(logNode.getAbilities() != null ? logNode.getAbilities().toString():"null").append(", ");
+                for (SimulationNode2 logNode : node.getChildren()) {
+                    sb.append(logNode.getAbilities() != null ? logNode.getAbilities().toString() : "null").append(", ");
                 }
                 sb.append(")");
                 logger.debug(sb);
             }
-            val = minimaxAB(node, depth-1, alpha, beta);
-        }
-        else {
+            val = minimaxAB(node, depth - 1, alpha, beta);
+        } else {
             logger.trace("Add Action -- alpha: " + alpha + " beta: " + beta + " depth:" + depth + " step:" + game.getTurn().getStepType() + " for player:" + game.getPlayer(game.getPlayerList().get()).getName());
             if (allPassed(game)) {
                 if (!game.getStack().isEmpty()) {
                     resolve(node, depth, game);
-                }
-                else {
+                } else {
                     stepFinished = true;
                 }
             }
 
             if (game.gameOver(null)) {
                 val = GameStateEvaluator2.evaluate(playerId, game);
-            }
-            else if (stepFinished) {
+            } else if (stepFinished) {
                 logger.debug("Step finished");
                 int testScore = GameStateEvaluator2.evaluate(playerId, game);
                 if (game.getActivePlayerId().equals(playerId)) {
@@ -286,8 +277,7 @@ public class ComputerPlayer7 extends ComputerPlayer6 {
                         // if score at end of step is worse than original score don't check further
                         //logger.debug("Add Action -- abandoning check, no immediate benefit");
                         val = testScore;
-                    }
-                    else {
+                    } else {
                         /*switch (game.getTurn().getStepType()) {
                             case PRECOMBAT_MAIN:
                                 val = simulateCombat(game, node, depth-1, alpha, beta, false);
@@ -301,32 +291,29 @@ public class ComputerPlayer7 extends ComputerPlayer6 {
                         }*/
                         val = GameStateEvaluator2.evaluate(playerId, game);
                     }
-                }
-                else {
+                } else {
                     val = GameStateEvaluator2.evaluate(playerId, game);
                     /*if (game.getTurn().getStepType() == PhaseStep.DECLARE_ATTACKERS)
                         val = simulateBlockers(game, node, playerId, depth-1, alpha, beta, true);
                     else
                         val = GameStateEvaluator2.evaluate(playerId, game);
-                        */
+                     */
                 }
-            }
-            else if (node.getChildren().size() > 0) {
+            } else if (node.getChildren().size() > 0) {
                 if (logger.isDebugEnabled()) {
                     StringBuilder sb = new StringBuilder("Add Action [").append(depth)
                             .append("] -- trigger ")
-                            .append(node.getAbilities() != null ? node.getAbilities().toString():"null")
+                            .append(node.getAbilities() != null ? node.getAbilities().toString() : "null")
                             .append(" added children: ").append(node.getChildren().size()).append(" (");
-                    for (SimulationNode2 logNode: node.getChildren()) {
-                        sb.append(logNode.getAbilities() != null ? logNode.getAbilities().toString():"null").append(", ");
+                    for (SimulationNode2 logNode : node.getChildren()) {
+                        sb.append(logNode.getAbilities() != null ? logNode.getAbilities().toString() : "null").append(", ");
                     }
                     sb.append(")");
                     logger.debug(sb);
                 }
 
                 val = minimaxAB(node, depth, alpha, beta);
-            }
-            else {
+            } else {
                 val = simulatePriority(node, game, depth, alpha, beta);
             }
         }
@@ -353,25 +340,20 @@ public class ComputerPlayer7 extends ComputerPlayer6 {
                     if (!game.replaceEvent(GameEvent.getEvent(GameEvent.EventType.DECLARING_ATTACKERS, game.getActivePlayerId(), game.getActivePlayerId()))) {
                         val = simulateAttackers(game, node, game.getActivePlayerId(), depth, alpha, beta, counter);
                     }
-                }
-                else if (!counter) {
+                } else if (!counter) {
                     simulateToEnd(game);
                     val = simulatePostCombatMain(game, node, depth, alpha, beta);
                 }
             }
-        }
-        else {
-            if (!game.getStep().skipStep(game, game.getActivePlayerId())) {
-                game.fireEvent(new GameEvent(GameEvent.EventType.DECLARE_BLOCKERS_STEP_PRE, null, null, game.getActivePlayerId()));
-                if (!game.replaceEvent(GameEvent.getEvent(GameEvent.EventType.DECLARING_BLOCKERS, game.getActivePlayerId(), game.getActivePlayerId()))) {
-                    //only suitable for two player games - only simulates blocks for 1st defender
-                    val = simulateBlockers(game, node, game.getCombat().getDefenders().iterator().next(), depth, alpha, beta, counter);
-                }
+        } else if (!game.getStep().skipStep(game, game.getActivePlayerId())) {
+            game.fireEvent(new GameEvent(GameEvent.EventType.DECLARE_BLOCKERS_STEP_PRE, null, null, game.getActivePlayerId()));
+            if (!game.replaceEvent(GameEvent.getEvent(GameEvent.EventType.DECLARING_BLOCKERS, game.getActivePlayerId(), game.getActivePlayerId()))) {
+                //only suitable for two player games - only simulates blocks for 1st defender
+                val = simulateBlockers(game, node, game.getCombat().getDefenders().iterator().next(), depth, alpha, beta, counter);
             }
-            else if (!counter) {
-                finishCombat(game);
-                ///val = simulateCounterAttack(game, node, depth, alpha, beta);
-            }
+        } else if (!counter) {
+            finishCombat(game);
+            ///val = simulateCounterAttack(game, node, depth, alpha, beta);
         }
         if (val == null) {
             val = GameStateEvaluator2.evaluate(playerId, game);
@@ -381,7 +363,6 @@ public class ComputerPlayer7 extends ComputerPlayer6 {
         }
         return val;
     }
-
 
     protected int simulateAttackers(Game game, SimulationNode2 node, UUID attackerId, int depth, int alpha, int beta, boolean counter) {
         if (ALLOW_INTERRUPT && Thread.interrupted()) {
@@ -396,7 +377,7 @@ public class ComputerPlayer7 extends ComputerPlayer6 {
         if (logger.isDebugEnabled()) {
             logger.debug(attacker.getName() + "'s possible attackers: " + attacker.getAvailableAttackers(defenderId, game));
         }
-        for (Combat engagement: attacker.addAttackers(game)) {
+        for (Combat engagement : attacker.addAttackers(game)) {
             if (logger.isDebugEnabled()) {
                 logger.debug("Sim Attackers: " + engagement.getAttackers() + ", blockers: " + engagement.getBlockers());
             }
@@ -404,9 +385,9 @@ public class ComputerPlayer7 extends ComputerPlayer6 {
                 logger.debug("Sim Attackers -- pruning attackers");
                 break;
             }
-            Game sim = game.copy();            
-            for (CombatGroup group: engagement.getGroups()) {
-                for (UUID attackId: group.getAttackers()) {
+            Game sim = game.copy();
+            for (CombatGroup group : engagement.getGroups()) {
+                for (UUID attackId : group.getAttackers()) {
                     sim.getPlayer(attackerId).declareAttacker(attackId, defenderId, sim, false);
                 }
             }
@@ -424,7 +405,7 @@ public class ComputerPlayer7 extends ComputerPlayer6 {
             sim.fireEvent(GameEvent.getEvent(GameEvent.EventType.DECLARE_ATTACKERS_STEP_POST, sim.getActivePlayerId(), sim.getActivePlayerId()));
             Combat simCombat = sim.getCombat().copy();
             sim.getPhase().setStep(new DeclareBlockersStep());
-            val = simulateCombat(sim, newNode, depth-1, alpha, beta, counter);
+            val = simulateCombat(sim, newNode, depth - 1, alpha, beta, counter);
             if (!attackerId.equals(playerId)) {
                 if (val < beta) {
                     beta = val;
@@ -434,15 +415,12 @@ public class ComputerPlayer7 extends ComputerPlayer6 {
                         bestNode.setCombat(newNode.getChildren().get(0).getCombat());
                     }
                 }
-            }
-            else {
-                if (val > alpha) {
-                    alpha = val;
-                    bestNode = newNode;
-                    bestNode.setScore(val);
-                    if (newNode.getChildren().size() > 0) {
-                        bestNode.setCombat(newNode.getChildren().get(0).getCombat());
-                    }
+            } else if (val > alpha) {
+                alpha = val;
+                bestNode = newNode;
+                bestNode.setScore(val);
+                if (newNode.getChildren().size() > 0) {
+                    bestNode.setCombat(newNode.getChildren().get(0).getCombat());
                 }
             }
         }
@@ -475,16 +453,16 @@ public class ComputerPlayer7 extends ComputerPlayer6 {
                 logger.debug(defender.getName() + "'s possible blockers: " + defender.getAvailableBlockers(game));
             }
             List<Combat> combats = defender.addBlockers(game);
-            for (Combat engagement: combats) {
+            for (Combat engagement : combats) {
                 if (alpha >= beta) {
                     logger.debug("Sim blockers -- pruning blockers");
                     break;
                 }
                 Game sim = game.copy();
-                for (CombatGroup group: engagement.getGroups()) {
+                for (CombatGroup group : engagement.getGroups()) {
                     if (group.getAttackers().size() > 0) {
                         UUID attackerId = group.getAttackers().get(0);
-                        for (UUID blockerId: group.getBlockers()) {
+                        for (UUID blockerId : group.getBlockers()) {
                             sim.getPlayer(defenderId).declareBlocker(defenderId, blockerId, attackerId, sim);
                         }
                     }
@@ -505,11 +483,9 @@ public class ComputerPlayer7 extends ComputerPlayer6 {
                 finishCombat(sim);
                 if (sim.gameOver(null)) {
                     val = GameStateEvaluator2.evaluate(playerId, sim);
-                }
-                else if (!counter) {
-                    val = simulatePostCombatMain(sim, newNode, depth-1, alpha, beta);
-                }
-                else {
+                } else if (!counter) {
+                    val = simulatePostCombatMain(sim, newNode, depth - 1, alpha, beta);
+                } else {
                     val = GameStateEvaluator2.evaluate(playerId, sim);
                 }
                 if (!defenderId.equals(playerId)) {
@@ -519,14 +495,11 @@ public class ComputerPlayer7 extends ComputerPlayer6 {
                         bestNode.setScore(val);
                         bestNode.setCombat(simCombat);
                     }
-                }
-                else {
-                    if (val > alpha) {
-                        alpha = val;
-                        bestNode = newNode;
-                        bestNode.setScore(val);
-                        bestNode.setCombat(simCombat);
-                    }
+                } else if (val > alpha) {
+                    alpha = val;
+                    bestNode = newNode;
+                    bestNode.setScore(val);
+                    bestNode.setCombat(simCombat);
                 }
             }
         }
@@ -570,7 +543,6 @@ public class ComputerPlayer7 extends ComputerPlayer6 {
             val = GameStateEvaluator2.evaluate(playerId, game);
         return val;
     }*/
-
     protected void simulateStep(Game game, Step step) {
         if (ALLOW_INTERRUPT && Thread.interrupted()) {
             Thread.currentThread().interrupt();

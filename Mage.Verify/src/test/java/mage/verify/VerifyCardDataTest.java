@@ -1,5 +1,13 @@
 package mage.verify;
 
+import java.io.IOException;
+import java.nio.charset.StandardCharsets;
+import java.nio.file.Files;
+import java.nio.file.NoSuchFileException;
+import java.nio.file.Paths;
+import java.util.*;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 import mage.ObjectColor;
 import mage.cards.Card;
 import mage.cards.CardImpl;
@@ -11,15 +19,6 @@ import mage.cards.basiclands.BasicLand;
 import mage.constants.CardType;
 import org.junit.Assert;
 import org.junit.Test;
-
-import java.io.IOException;
-import java.nio.charset.StandardCharsets;
-import java.nio.file.Files;
-import java.nio.file.NoSuchFileException;
-import java.nio.file.Paths;
-import java.util.*;
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
 
 public class VerifyCardDataTest {
 
@@ -105,8 +104,7 @@ public class VerifyCardDataTest {
                 if (!(token.equals(card.getName())
                         || containsInTypesOrText(ref, token)
                         || containsInTypesOrText(ref, token.toLowerCase())
-                        || (ref2 != null && (containsInTypesOrText(ref2, token) || containsInTypesOrText(ref2, token.toLowerCase())))
-                )) {
+                        || (ref2 != null && (containsInTypesOrText(ref2, token) || containsInTypesOrText(ref2, token.toLowerCase()))))) {
                     System.out.println("unexpected token " + token + " in " + card);
                 }
             }
@@ -143,12 +141,12 @@ public class VerifyCardDataTest {
         if (expected == null) {
             expected = Collections.emptyList();
         }
-        if (expected.size() != color.getColorCount() ||
-                (color.isBlack() && !expected.contains("Black")) ||
-                (color.isBlue() && !expected.contains("Blue")) ||
-                (color.isGreen() && !expected.contains("Green")) ||
-                (color.isRed() && !expected.contains("Red")) ||
-                (color.isWhite() && !expected.contains("White"))) {
+        if (expected.size() != color.getColorCount()
+                || (color.isBlack() && !expected.contains("Black"))
+                || (color.isBlue() && !expected.contains("Blue"))
+                || (color.isGreen() && !expected.contains("Green"))
+                || (color.isRed() && !expected.contains("Red"))
+                || (color.isWhite() && !expected.contains("White"))) {
             fail(card, "colors", color + " != " + expected);
         }
     }

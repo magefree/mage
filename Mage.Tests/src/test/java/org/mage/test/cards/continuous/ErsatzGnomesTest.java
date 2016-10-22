@@ -90,10 +90,73 @@ public class ErsatzGnomesTest extends CardTestPlayerBase {
         execute();
 
         assertGraveyardCount(playerB, "Unsummon", 1);
+        assertHandCount(playerA, "Silvercoat Lion", 0);
         assertPermanentCount(playerA, "Silvercoat Lion", 1);
         assertTapped("Ersatz Gnomes", true);
         Permanent lion = getPermanent("Silvercoat Lion", playerA);
         Assert.assertTrue("Silvercoat lion has to be white", lion.getColor(currentGame).isWhite());
     }
 
+    @Test
+    public void testChangeColorOfBestowSpell() {
+        addCard(Zone.BATTLEFIELD, playerA, "Plains", 4);
+        addCard(Zone.BATTLEFIELD, playerA, "Silvercoat Lion");
+        // Bestow {3}{W}
+        // Lifelink
+        // Echanted creature gets +1/+1 and has lifelink.
+        addCard(Zone.HAND, playerA, "Hopeful Eidolon");// Creature {W}
+
+        // {T}: Target spell becomes colorless.
+        // {T}: Target permanent becomes colorless until end of turn.
+        addCard(Zone.BATTLEFIELD, playerA, "Ersatz Gnomes");
+
+        addCard(Zone.BATTLEFIELD, playerB, "Island", 1);
+        addCard(Zone.HAND, playerB, "Unsummon");
+
+        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Hopeful Eidolon using bestow", "Silvercoat Lion");
+        activateAbility(1, PhaseStep.PRECOMBAT_MAIN, playerA, "{T}: Target spell", "Hopeful Eidolon");
+
+        setStopAt(1, PhaseStep.END_TURN);
+        execute();
+
+        assertHandCount(playerA, "Hopeful Eidolon", 0);
+        assertPermanentCount(playerA, "Hopeful Eidolon", 1);
+        assertPowerToughness(playerA, "Silvercoat Lion", 3, 3);
+        assertTapped("Ersatz Gnomes", true);
+        Permanent eidolon = getPermanent("Hopeful Eidolon", playerA);
+        Assert.assertTrue("Hopeful Eidolon Enchantment has to be colorless", eidolon.getColor(currentGame).isColorless());
+    }
+
+    @Test
+    public void testChangeColorOfBestowSpellUnsummon() {
+        addCard(Zone.BATTLEFIELD, playerA, "Plains", 2);
+        // Bestow {3}{W}
+        // Lifelink
+        // Echanted creature gets +1/+1 and has lifelink.
+        addCard(Zone.HAND, playerA, "Hopeful Eidolon");// Creature {W}
+
+        // {T}: Target spell becomes colorless.
+        // {T}: Target permanent becomes colorless until end of turn.
+        addCard(Zone.BATTLEFIELD, playerA, "Ersatz Gnomes");
+
+        addCard(Zone.BATTLEFIELD, playerB, "Island", 1);
+        addCard(Zone.HAND, playerB, "Unsummon");
+
+        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Hopeful Eidolon");
+        activateAbility(1, PhaseStep.PRECOMBAT_MAIN, playerA, "{T}: Target spell", "Hopeful Eidolon");
+
+        castSpell(1, PhaseStep.END_COMBAT, playerB, "Unsummon", "Hopeful Eidolon");
+
+        castSpell(1, PhaseStep.POSTCOMBAT_MAIN, playerA, "Hopeful Eidolon");
+
+        setStopAt(1, PhaseStep.END_TURN);
+        execute();
+
+        assertGraveyardCount(playerB, "Unsummon", 1);
+        assertHandCount(playerA, "Hopeful Eidolon", 0);
+        assertPermanentCount(playerA, "Hopeful Eidolon", 1);
+        assertTapped("Ersatz Gnomes", true);
+        Permanent lion = getPermanent("Hopeful Eidolon", playerA);
+        Assert.assertTrue("Hopeful Eidolon has to be white", lion.getColor(currentGame).isWhite());
+    }
 }
