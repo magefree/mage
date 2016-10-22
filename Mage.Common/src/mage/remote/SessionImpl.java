@@ -32,6 +32,7 @@ import java.lang.reflect.UndeclaredThrowableException;
 import java.net.*;
 import java.util.*;
 import java.util.concurrent.TimeUnit;
+import javax.swing.JOptionPane;
 import mage.MageException;
 import mage.cards.decks.DeckCardLists;
 import mage.cards.decks.InvalidDeckException;
@@ -1432,9 +1433,12 @@ public class SessionImpl implements Session {
     @Override
     public boolean endUserSession(String userSessionId) {
         try {
-            if (isConnected()) {
-                server.endUserSession(sessionId, userSessionId);
-                return true;
+            if (JOptionPane.showConfirmDialog(null, "Are you sure you mean to mute userSessionId " + userSessionId + "?", "WARNING",
+                    JOptionPane.YES_NO_OPTION) == JOptionPane.YES_OPTION) {
+                if (isConnected()) {
+                    server.endUserSession(sessionId, userSessionId);
+                    return true;
+                }
             }
         } catch (MageException ex) {
             handleMageException(ex);
@@ -1447,9 +1451,12 @@ public class SessionImpl implements Session {
     @Override
     public boolean muteUserChat(String userName, long durationMinutes) {
         try {
-            if (isConnected()) {
-                server.muteUser(sessionId, userName, durationMinutes);
-                return true;
+            if (JOptionPane.showConfirmDialog(null, "Are you sure you mean to mute user " + userName + " for " + durationMinutes + " minutes?", "WARNING",
+                    JOptionPane.YES_NO_OPTION) == JOptionPane.YES_OPTION) {
+                if (isConnected()) {
+                    server.muteUser(sessionId, userName, durationMinutes);
+                    return true;
+                }
             }
         } catch (MageException ex) {
             handleMageException(ex);
@@ -1462,9 +1469,12 @@ public class SessionImpl implements Session {
     @Override
     public boolean toggleActivation(String userName) {
         try {
-            if (isConnected()) {
-                server.toggleActivation(sessionId, userName);
-                return true;
+            if (JOptionPane.showConfirmDialog(null, "Are you sure you mean to activate/deactivate user: " + userName + " for?", "WARNING",
+                    JOptionPane.YES_NO_OPTION) == JOptionPane.YES_OPTION) {
+                if (isConnected()) {
+                    server.toggleActivation(sessionId, userName);
+                    return true;
+                }
             }
         } catch (MageException ex) {
             handleMageException(ex);
@@ -1477,9 +1487,12 @@ public class SessionImpl implements Session {
     @Override
     public boolean lockUser(String userName, long durationMinute) {
         try {
-            if (isConnected()) {
-                server.lockUser(sessionId, userName, durationMinute);
-                return true;
+            if (JOptionPane.showConfirmDialog(null, "Are you sure you mean to lock user: " + userName + " for " + durationMinute + " minutes?", "WARNING",
+                    JOptionPane.YES_NO_OPTION) == JOptionPane.YES_OPTION) {
+                if (isConnected()) {
+                    server.lockUser(sessionId, userName, durationMinute);
+                    return true;
+                }
             }
         } catch (MageException ex) {
             handleMageException(ex);
