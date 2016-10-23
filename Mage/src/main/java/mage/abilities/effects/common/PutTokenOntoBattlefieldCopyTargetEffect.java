@@ -232,7 +232,13 @@ public class PutTokenOntoBattlefieldCopyTargetEffect extends OneShotEffect {
             return staticText;
         }
         StringBuilder sb = new StringBuilder();
-        sb.append("Put a token onto the battlefield ");
+        sb.append("Put ");
+        if (number == 1) {
+            sb.append("a token");
+        } else {
+            sb.append(CardUtil.numberToText(number)).append(" tokens");
+        }
+        sb.append(" onto the battlefield ");
         if (tapped && !attacking) {
             sb.append("tapped ");
         } else if (!tapped && attacking) {
