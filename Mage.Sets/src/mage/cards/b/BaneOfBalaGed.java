@@ -27,15 +27,16 @@
  */
 package mage.cards.b;
 
+import java.util.HashSet;
+import java.util.Set;
 import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.AttacksTriggeredAbility;
 import mage.abilities.effects.OneShotEffect;
+import mage.cards.Card;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
-import mage.cards.Cards;
-import mage.cards.CardsImpl;
 import mage.constants.CardType;
 import mage.constants.Outcome;
 import mage.constants.SetTargetPointer;
@@ -52,7 +53,7 @@ import mage.target.common.TargetControlledPermanent;
 public class BaneOfBalaGed extends CardImpl {
 
     public BaneOfBalaGed(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{7}");
+        super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{7}");
         this.subtype.add("Eldrazi");
         this.power = new MageInt(7);
         this.toughness = new MageInt(5);
@@ -93,7 +94,7 @@ class BaneOfBalaGedEffect extends OneShotEffect {
         if (defendingPlayer != null) {
             Target target = new TargetControlledPermanent(2);
             defendingPlayer.chooseTarget(outcome, target, source, game);
-            Cards toExile = new CardsImpl();
+            Set<Card> toExile = new HashSet<>();
             target.getTargets().stream().map((targetId)
                     -> game.getPermanent(targetId)).filter((permanent)
                     -> (permanent != null)).forEach((permanent)
