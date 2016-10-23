@@ -95,6 +95,7 @@ public class User {
     private boolean active;
     private Date lockedUntil;
     private final AuthorizedUser authorizedUser;
+    private String clientVersion;
 
     public User(String userName, String host, AuthorizedUser authorizedUser) {
         this.userId = UUID.randomUUID();
@@ -125,6 +126,7 @@ public class User {
         this.watchedGames = new ArrayList<>();
         this.tablesToDelete = new ArrayList<>();
         this.sessionId = "";
+        this.clientVersion = "";
     }
 
     public String getName() {
@@ -170,6 +172,14 @@ public class User {
             reconnect();
             logger.trace("USER - reconnected: " + userName + " id: " + userId);
         }
+    }
+
+    public void setClientVersion(String clientVersion) {
+        this.clientVersion = clientVersion;
+    }
+
+    public String getClientVersion() {
+        return clientVersion;
     }
 
     public void setChatLockedUntil(Date chatLockedUntil) {

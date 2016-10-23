@@ -223,7 +223,7 @@ public class SessionImpl implements Session {
                     // for backward compatibility. don't remove twice call - first one does nothing but for version checking
                     registerResult = server.connectUser(connection.getUsername(), connection.getPassword(), sessionId, client.getVersion());
                     if (registerResult) {
-                        server.setUserData(connection.getUsername(), sessionId, connection.getUserData());
+                        server.setUserData(connection.getUsername(), sessionId, connection.getUserData(), client.getVersion().toString());
                     }
                 } else {
                     registerResult = server.connectAdmin(connection.getAdminPassword(), sessionId, client.getVersion());
@@ -1544,7 +1544,7 @@ public class SessionImpl implements Session {
     public boolean updatePreferencesForServer(UserData userData) {
         try {
             if (isConnected()) {
-                server.setUserData(connection.getUsername(), sessionId, userData);
+                server.setUserData(connection.getUsername(), sessionId, userData, null);
             }
             return true;
         } catch (MageException ex) {

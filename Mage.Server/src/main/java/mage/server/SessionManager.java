@@ -122,10 +122,10 @@ public class SessionManager {
         return false;
     }
 
-    public boolean setUserData(String userName, String sessionId, UserData userData) throws MageException {
+    public boolean setUserData(String userName, String sessionId, UserData userData, String clientVersion) throws MageException {
         Session session = sessions.get(sessionId);
         if (session != null) {
-            session.setUserData(userName, userData);
+            session.setUserData(userName, userData, clientVersion);
             return true;
         }
         return false;

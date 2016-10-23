@@ -211,11 +211,11 @@ public class MageServerImpl implements MageServer {
     }
 
     @Override
-    public boolean setUserData(final String userName, final String sessionId, final UserData userData) throws MageException {
+    public boolean setUserData(final String userName, final String sessionId, final UserData userData, final String clientVersion) throws MageException {
         return executeWithResult("setUserData", sessionId, new ActionWithBooleanResult() {
             @Override
             public Boolean execute() throws MageException {
-                return SessionManager.getInstance().setUserData(userName, sessionId, userData);
+                return SessionManager.getInstance().setUserData(userName, sessionId, userData, clientVersion);
             }
         });
     }
@@ -1073,7 +1073,8 @@ public class MageServerImpl implements MageServer {
                             user.getConnectionTime(),
                             user.getGameInfo(),
                             user.getUserState().toString(),
-                            user.getChatLockedUntil()
+                            user.getChatLockedUntil(),
+                            user.getClientVersion()
                     ));
                 }
                 return users;

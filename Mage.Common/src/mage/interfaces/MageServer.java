@@ -79,7 +79,7 @@ public interface MageServer {
     List<CardInfo> getMissingCardsData(List<String> classNames);
 
     // user methods
-    boolean setUserData(String userName, String sessionId, UserData userData) throws MageException;
+    boolean setUserData(String userName, String sessionId, UserData userData, String clientVersion) throws MageException;
 
     void sendFeedbackMessage(String sessionId, String username, String title, String type, String message, String email) throws MageException;
 

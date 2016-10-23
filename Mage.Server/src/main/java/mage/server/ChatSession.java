@@ -65,7 +65,7 @@ public class ChatSession {
         if (user != null && !clients.containsKey(userId)) {
             String userName = user.getName();
             clients.put(userId, userName);
-            broadcast(null, userName + " has joined", MessageColor.BLUE, true, MessageType.STATUS, null);
+            broadcast(null, userName + " has joined (" + user.getClientVersion() + ")", MessageColor.BLUE, true, MessageType.STATUS, null);
             logger.trace(userName + " joined chat " + chatId);
         }
     }
