@@ -336,7 +336,7 @@ public class DraftPanel extends javax.swing.JPanel {
                     if (view != null) {
                         loadCardsToPickedCardsArea(view.getPicks());
                         draftBooster.loadBooster(EMPTY_VIEW, bigCard);
-                        Plugins.getInstance().getActionCallback().hideTooltipPopup();
+                        Plugins.getInstance().getActionCallback().hideOpenComponents();
                         setMessage("Waiting for other players");
                     }
                 }

@@ -419,11 +419,16 @@ public class MageActionCallback implements ActionCallback {
         }
     }
 
+    @Override
+    public void hideOpenComponents() {
+        this.hideTooltipPopup();
+        this.hideEnlargedCard();
+    }
+
     /**
      * Hides the text popup window
      *
      */
-    @Override
     public void hideTooltipPopup() {
         this.tooltipCard = null;
         if (tooltipPopup != null) {
