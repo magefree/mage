@@ -63,7 +63,7 @@ public class AugurOfBolas extends CardImpl {
     }
 
     public AugurOfBolas(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{1}{U}");
+        super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{1}{U}");
         this.subtype.add("Merfolk");
         this.subtype.add("Wizard");
 
@@ -126,8 +126,8 @@ class AugurOfBolasEffect extends OneShotEffect {
                             topCards.remove(card);
                         }
                     }
-                    controller.putCardsOnBottomOfLibrary(topCards, game, source, true);
                 }
+                controller.putCardsOnBottomOfLibrary(topCards, game, source, true);
             }
             return true;
         }
