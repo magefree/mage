@@ -34,9 +34,9 @@ import mage.abilities.common.BeginningOfDrawTriggeredAbility;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.effects.ContinuousRuleModifyingEffectImpl;
 import mage.abilities.effects.OneShotEffect;
-import mage.cards.Card;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
+import mage.cards.CardsImpl;
 import mage.constants.CardType;
 import mage.constants.Duration;
 import mage.constants.Outcome;
@@ -54,7 +54,7 @@ import mage.target.common.TargetCardInLibrary;
 public class MaralenOfTheMornsong extends CardImpl {
 
     public MaralenOfTheMornsong(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{1}{B}{B}");
+        super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{1}{B}{B}");
         this.supertype.add("Legendary");
         this.subtype.add("Elf");
         this.subtype.add("Wizard");
@@ -131,10 +131,7 @@ class MaralenOfTheMornsongEffect2 extends OneShotEffect {
             player.loseLife(3, game, false);
             TargetCardInLibrary target = new TargetCardInLibrary();
             if (player.searchLibrary(target, game)) {
-                for (UUID cardId : target.getTargets()) {
-                    Card card = player.getLibrary().getCard(cardId, game);
-                    player.putInHand(card, game);
-                }
+                player.moveCards(new CardsImpl(target.getTargets()), Zone.HAND, source, game);
             }
             player.shuffleLibrary(source, game);
             return true;
