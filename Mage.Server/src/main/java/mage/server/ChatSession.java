@@ -47,12 +47,12 @@ import org.apache.log4j.Logger;
 public class ChatSession {
 
     private static final Logger logger = Logger.getLogger(ChatSession.class);
+    private static final DateFormat timeFormatter = SimpleDateFormat.getTimeInstance(SimpleDateFormat.SHORT);
+
     private final ConcurrentHashMap<UUID, String> clients = new ConcurrentHashMap<>();
     private final UUID chatId;
     private final Date createTime;
     private final String info;
-    private final DateFormat timeFormatter = SimpleDateFormat.getTimeInstance(SimpleDateFormat.SHORT);
-    private final HashSet<UUID> clientsToRemove = new HashSet<>();
 
     public ChatSession(String info) {
         chatId = UUID.randomUUID();
@@ -77,7 +77,7 @@ public class ChatSession {
                 logger.fatal("User kill without disconnect reason  userId: " + userId);
                 reason = DisconnectReason.Undefined;
             }
-            if (reason != null && userId != null && clients.containsKey(userId)) {
+            if (userId != null && clients.containsKey(userId)) {
                 String userName = clients.get(userId);
                 if (!reason.equals(DisconnectReason.LostConnection)) { // for lost connection the user will be reconnected or session expire so no remove of chat yet
                     clients.remove(userId);
@@ -138,27 +138,23 @@ public class ChatSession {
 
     public void broadcast(String userName, String message, MessageColor color, boolean withTime, MessageType messageType, SoundToPlay soundToPlay) {
         if (!message.isEmpty()) {
-            boolean remove = false;
-            final String msg = message;
-            final String time = (withTime ? timeFormatter.format(new Date()) : "");
-            final String username = userName;
-            logger.trace("Broadcasting '" + msg + "' for " + chatId);
+            HashSet<UUID> clientsToRemove = null;
+            ClientCallback clientCallback = new ClientCallback("chatMessage", chatId, new ChatMessage(userName, message, (withTime ? timeFormatter.format(new Date()) : ""), color, messageType, soundToPlay));
             for (UUID userId : clients.keySet()) {
                 User user = UserManager.getInstance().getUser(userId);
                 if (user != null) {
-                    user.fireCallback(new ClientCallback("chatMessage", chatId, new ChatMessage(username, msg, time, color, messageType, soundToPlay)));
+                    user.fireCallback(clientCallback);
                 } else {
-                    // Happens when a user post to a chat while other users left chat at nearly the same time
-                    logger.trace("User not found but connected to chat - userId: " + userId + "  chatId: " + chatId);
+                    if (clientsToRemove == null) {
+                        clientsToRemove = new HashSet<>();
+                    }
                     clientsToRemove.add(userId);
-                    remove = true;
                 }
             }
-            if (remove) {
+            if (clientsToRemove != null) {
                 for (UUID userIdToRemove : clientsToRemove) {
                     clients.remove(userIdToRemove);
                 }
-                clientsToRemove.clear();
             }
         }
     }
