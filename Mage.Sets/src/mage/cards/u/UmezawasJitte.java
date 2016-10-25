@@ -27,7 +27,7 @@
  */
 package mage.cards.u;
 
-import mage.constants.*;
+import java.util.UUID;
 import mage.abilities.Ability;
 import mage.abilities.Mode;
 import mage.abilities.TriggeredAbilityImpl;
@@ -41,15 +41,14 @@ import mage.abilities.effects.common.counter.AddCountersSourceEffect;
 import mage.abilities.keyword.EquipAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
+import mage.constants.*;
 import mage.counters.CounterType;
 import mage.game.Game;
 import mage.game.events.DamagedEvent;
 import mage.game.events.GameEvent;
+import mage.game.events.GameEvent.EventType;
 import mage.game.permanent.Permanent;
 import mage.target.common.TargetCreaturePermanent;
-
-import java.util.UUID;
-import mage.game.events.GameEvent.EventType;
 
 /**
  * @author Loki
@@ -64,15 +63,19 @@ public class UmezawasJitte extends CardImpl {
         // Whenever equipped creature deals combat damage, put two charge counters on Umezawa's Jitte.
         this.addAbility(new UmezawasJitteAbility());
 
-        // Remove a charge counter from Umezawa's Jitte: Choose one Equipped creature gets +2/+2 until end of turn; or target creature gets -1/-1 until end of turn; or you gain 2 life.
+        // Remove a charge counter from Umezawa's Jitte: Choose one &mdash; Equipped creature gets +2/+2 until end of turn.
         Ability ability = new SimpleActivatedAbility(
-                Zone.BATTLEFIELD, 
-                new BoostEquippedEffect(2, 2, Duration.EndOfTurn), 
+                Zone.BATTLEFIELD,
+                new BoostEquippedEffect(2, 2, Duration.EndOfTurn),
                 new RemoveCountersSourceCost(CounterType.CHARGE.createInstance()));
+
+        // Target creature gets -1/-1 until end of turn.
         Mode mode = new Mode();
         mode.getEffects().add(new BoostTargetEffect(-1, -1, Duration.EndOfTurn));
         mode.getTargets().add(new TargetCreaturePermanent());
         ability.addMode(mode);
+
+        // You gain 2 life.
         mode = new Mode();
         mode.getEffects().add(new GainLifeEffect(2));
         ability.addMode(mode);

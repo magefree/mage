@@ -51,10 +51,10 @@ public class TajuruStalwart extends CardImpl {
         this.power = new MageInt(0);
         this.toughness = new MageInt(1);
 
-        // <i>Converge</i> - Tajuru Stalwart enters the battlefield with a +1/+1 counter on it for each color of mana spent to cast it.
+        // <i>Converge</i> &mdash; Tajuru Stalwart enters the battlefield with a +1/+1 counter on it for each color of mana spent to cast it.
         this.addAbility(new EntersBattlefieldAbility(
                 new AddCountersSourceEffect(CounterType.P1P1.createInstance(), ColorsOfManaSpentToCastCount.getInstance(), true),
-                null, "<i>Converge</i> - {this} enters the battlefield with a +1/+1 counter on it for each color of mana spent to cast it.", null));
+                null, "<i>Converge</i> &mdash; {this} enters the battlefield with a +1/+1 counter on it for each color of mana spent to cast it.", null));
 
     }
 

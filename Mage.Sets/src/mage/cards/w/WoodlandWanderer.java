@@ -55,7 +55,7 @@ public class WoodlandWanderer extends CardImpl {
         this.addAbility(VigilanceAbility.getInstance());
         // Trample
         this.addAbility(TrampleAbility.getInstance());
-        // <i>Converge</i> - Woodland Wanderer enters the battlefield with a +1/+1 counter on it for each color of mana spent to cast it.
+        // <i>Converge</i> &mdash; Woodland Wanderer enters the battlefield with a +1/+1 counter on it for each color of mana spent to cast it.
         this.addAbility(new EntersBattlefieldAbility(
                 new AddCountersSourceEffect(CounterType.P1P1.createInstance(), ColorsOfManaSpentToCastCount.getInstance(), true),
                 null, "<i>Converge</i> &mdash; {this} enters the battlefield with a +1/+1 counter on it for each color of mana spent to cast it.", null));

@@ -109,7 +109,7 @@ public class CreateTokenEffect extends OneShotEffect {
     }
 
     private void setText() {
-        StringBuilder sb = new StringBuilder("put ");
+        StringBuilder sb = new StringBuilder("create ");
         if (amount.toString().equals("1")) {
             sb.append("a ").append(token.getDescription());
         } else {
@@ -118,7 +118,6 @@ public class CreateTokenEffect extends OneShotEffect {
                 sb.append("s ");
             }
         }
-        sb.append(" onto the battlefield");
         if (tapped) {
             sb.append(" tapped");
         }
