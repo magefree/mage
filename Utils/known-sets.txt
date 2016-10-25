@@ -1,180 +1,184 @@
-Aether Revolt|aetherrevolt|
-Alara Reborn|alarareborn|
-Alliances|alliances|
-Amonkhet|amonkhet|
-Antiquities|antiquities|
-Apocalypse|apocalypse|
-Archenemy|archenemy|
-Archenemy: Nicol Bolas|archenemynicolbolas|
-Arabian Nights|arabiannights|
-Arena League|arenaleague|
-Asia Pacific Land Program|asiapacificlandprogram|
-Avacyn Restored|avacynrestored|
-Battle for Zendikar|battleforzendikar|
-Betrayers of Kamigawa|betrayersofkamigawa|
-Born of the Gods|bornofthegods|
-Champions of Kamigawa|championsofkamigawa|
-Champs|champs|
-Chronicles|chronicles|
-Clash Pack|clashpack|
-Classic Sixth Edition|classicsixthedition|
-Coldsnap|coldsnap|
-Commander 2013 Edition|commander2013|
-Commander 2014 Edition|commander2014|
-Commander 2015|commander2015|
-Commander 2016|commander2016|
-Commander Anthology|commanderanthology|
-Commander's Arsenal|commandersarsenal|
-Conflux|conflux|
-Conspiracy: Take the Crown|conspiracytakethecrown|
-Dark Ascension|darkascension|
-Darksteel|darksteel|
-Dissension|dissension|
-Dragons of Tarkir|dragonsoftarkir|
-Dragon's Maze|dragonsmaze|
-Duel Decks: Ajani vs. Nicol Bolas|ajanivsnicolbolas|
-Duel Decks: Anthology, Divine vs. Demonic|anthologydivinevsdemonic|
-Duel Decks: Anthology, Elves vs. Goblins|anthologyelvesvsgoblins|
-Duel Decks: Anthology, Garruk vs. Liliana|anthologygarrukvsliliana|
-Duel Decks: Anthology, Jace vs. Chandra|anthologyjacevschandra|
-Duel Decks: Blessed vs. Cursed|blessedvscursed|
-Duel Decks: Divine vs. Demonic|divinevsdemonic|
-Duel Decks: Elspeth vs. Kiora|elspethvskiora|
-Duel Decks: Elspeth vs. Tezzeret|elspethvstezzeret|
-Duel Decks: Elves vs. Goblins|elvesvsgoblins|
-Duel Decks: Garruk vs. Liliana|garrukvsliliana|
-Duel Decks: Heroes vs. Monsters|heroesvsmonsters|
-Duel Decks: Izzet vs. Golgari|izzetvsgolgari|
-Duel Decks: Jace vs. Chandra|jacevschandra|
-Duel Decks: Jace vs. Vraska|jacevsvraska|
-Duel Decks: Knights vs. Dragons|knightsvsdragons|
-Duel Decks: Mind vs. Might|mindvsmight|
-Duel Decks: Nissa vs. Ob Nixilis|nissavsobnixilis|
-Duel Decks: Phyrexia vs. the Coalition|phyrexiavsthecoalition|
-Duel Decks: Sorin vs. Tibalt|sorinvstibalt|
-Duel Decks: Speed vs. Cunning|speedvscunning|
-Duel Decks: Venser vs. Koth|venservskoth|
-Duel Decks: Zendikar vs. Eldrazi|zendikarvseldrazi|
-Duels of the Planeswalkers|duelsoftheplaneswalkers|
-Eighth Edition|eighthedition|
-Eldritch Moon|eldritchmoon|
-Eternal Masters|eternalmasters|
-European Land Program|europeanlandprogram|
-Eventide|eventide|
-Exodus|exodus|
-Fallen Empires|fallenempires|
-Fate Reforged|fatereforged|
-Fifth Dawn|fifthdawn|
-Fifth Edition|fifthedition|
-Fourth Edition|fourthedition|
-Friday Night Magic|fridaynightmagic|
-From the Vault: Angels|ftvangels|
-From the Vault: Annihilation|ftvannihilation|
-From the Vault: Dragons|ftvdragons|
-From the Vault: Exiled|ftvexiled|
-From the Vault: Legends|ftvlegends|
-From the Vault: Lore|ftvlore|
-From the Vault: Realms|ftvrealms|
-From the Vault: Relics|ftvrelics|
-From the Vault: Twenty|ftvtwenty|
-Future Sight|futuresight|
-Game Day|gameday|
-Gatecrash|gatecrash|
-Grand Prix|grandprix|
-Guildpact|guildpact|
-Homelands|homelands|
-Hour of Devastation|hourofdevastation|
-Ice Age|iceage|
-Innistrad|innistrad|
-Invasion|invasion|
-Judge Promo|judgepromo|
-Journey into Nyx|journeyintonyx|
-Judgment|judgment|
-Kaladesh|kaladesh|
-Khans of Tarkir|khansoftarkir|
-Launch Party|launchparty|
-Legends|legends|
-Legions|legions|
-Limited Edition Alpha|limitedalpha|
-Limited Edition Beta|limitedbeta|
-Lorwyn|lorwyn|
-Magic 2010|magic2010|
-Magic 2011|magic2011|
-Magic 2012|magic2012|
-Magic 2013|magic2013|
-Magic 2014|magic2014|
-Magic 2015|magic2015|
-Magic Origins|magicorigins|
-Magic Player Rewards|magicplayerrewards|
-Magic: The Gathering-Commander|commander|
-Media Inserts|mediainserts|
-Magic: The Gathering-Conspiracy|conspiracy|
-Masterpiece Series|masterpieceseries|
-Masters Edition|mastersedition|
-Masters Edition II|masterseditionii|
-Masters Edition III|masterseditioniii|
-Masters Edition IV|masterseditioniv|
-Mercadian Masques|mercadianmasques|
-Mirage|mirage|
-Mirrodin Besieged|mirrodinbesieged|
-Mirrodin|mirrodin|
-Modern Masters|modernmasters|
-Modern Masters 2015|modernmasters2015|
-Modern Masters 2017|modernmasters2017|
-Morningtide|morningtide|
-Nemesis|nemesis|
-New Phyrexia|newphyrexia|
-Ninth Edition|ninthedition|
-Oath of the Gatewatch|oathofthegatewatch|
-Odyssey|odyssey|
-Onslaught|onslaught|
-Planar Chaos|planarchaos|
-Planechase 2012 Edition|planechase2012|
-Planechase|planechase|
-Planechase Anthology|planechaseanthology|
-Planeshift|planeshift|
-Portal Second Age|portalsecondage|
-Portal Three Kingdoms|portalthreekingdoms|
-Portal|portal|
-Premium Deck Series: Graveborn|pdsgraveborn|
-Premium Deck Series: Fire and Lightning|pdsfireandlightning|
-Premium Deck Series: Slivers|pdsslivers|
-Prerelease Events|prereleaseevents|
-Prophecy|prophecy|
-Ravnica: City of Guilds|ravnica|
-Return to Ravnica|returntoravnica|
-Revised Edition|revisededition|
-Rise of the Eldrazi|riseoftheeldrazi|
-Saviors of Kamigawa|saviorsofkamigawa|
-Scars of Mirrodin|scarsofmirrodin|
-Scourge|scourge|
-Seventh Edition|seventhedition|
-Shadowmoor|shadowmoor|
-Shadows over Innistrad|shadowsoverinnistrad|
-Shards of Alara|shardsofalara|
-Starter 1999|starter1999|
-Starter 2000|starter2000|
-Stronghold|stronghold|
-Super Series|superseries|
-Tempest|tempest|
-Tempest Remastered|tempestremastered|
-Tenth Edition|tenthedition|
-The Dark|thedark|
-Theros|theros|
-Time Spiral "Timeshifted"|timeshifted|
-Time Spiral|timespiral|
-Torment|torment|
-Ugin's Fate|uginsfate|
-Unlimited Edition|unlimitededition|
-Urza's Destiny|urzasdestiny|
-Urza's Legacy|urzaslegacy|
-Urza's Saga|urzassaga|
-Visions|visions|
-Vintage Masters|vintagemasters|
-Weatherlight|weatherlight|
-Welcome Deck 2016|welcomedeck2016|
-World Magic Cup Qualifier|worldmagiccupqualifier|
-Worldwake|worldwake|
-WPN Gateway|wpngateway|
-Zendikar|zendikar|
-Zendikar Expeditions|zendikarexpeditions|
+Aether Revolt|AetherRevolt|
+Alara Reborn|AlaraReborn|
+Alliances|Alliances|
+Amonkhet|Amonkhet|
+Antiquities|Antiquities|
+Apocalypse|Apocalypse|
+Archenemy|Archenemy|
+Archenemy: Nicol Bolas|ArchenemyNicolBolas|
+Arabian Nights|ArabianNights|
+Arena League|ArenaLeague|
+Asia Pacific Land Program|AsiaPacificLandProgram|
+Avacyn Restored|AvacynRestored|
+Battle for Zendikar|BattleForZendikar|
+Betrayers of Kamigawa|BetrayersOfKamigawa|
+Born of the Gods|BornOfTheGods|
+Champions of Kamigawa|ChampionsOfKamigawa|
+Champs|Champs|
+Chronicles|Chronicles|
+Clash Pack|ClashPack|
+Classic Sixth Edition|ClassicSixthEdition|
+Coldsnap|Coldsnap|
+Commander 2013 Edition|Commander2013|
+Commander 2014 Edition|Commander2014|
+Commander 2015|Commander2015|
+Commander 2016|Commander2016|
+Commander Anthology|CommanderAnthology|
+Commander's Arsenal|CommandersArsenal|
+Conflux|Conflux|
+Conspiracy: Take the Crown|ConspiracyTakeTheCrown|
+Dark Ascension|DarkAscension|
+Darksteel|Darksteel|
+Dissension|Dissension|
+Dragon's Maze|DragonsMaze|
+Dragons of Tarkir|DragonsOfTarkir|
+Duel Decks: Ajani vs. Nicol Bolas|AjaniVsNicolBolas|
+Duel Decks: Anthology, Divine vs. Demonic|AnthologyDivineVsDemonic|
+Duel Decks: Anthology, Elves vs. Goblins|AnthologyElvesVsGoblins|
+Duel Decks: Anthology, Garruk vs. Liliana|AnthologyGarrukVsLiliana|
+Duel Decks: Anthology, Jace vs. Chandra|AnthologyJaceVsChandra|
+Duel Decks: Blessed vs. Cursed|BlessedVsCursed|
+Duel Decks: Divine vs. Demonic|DivineVsDemonic|
+Duel Decks: Elspeth vs. Kiora|ElspethVsKiora|
+Duel Decks: Elspeth vs. Tezzeret|ElspethVsTezzeret|
+Duel Decks: Elves vs. Goblins|ElvesVsGoblins|
+Duel Decks: Garruk vs. Liliana|GarrukVsLiliana|
+Duel Decks: Heroes vs. Monsters|HeroesVsMonsters|
+Duel Decks: Izzet vs. Golgari|IzzetVsGolgari|
+Duel Decks: Jace vs. Chandra|JaceVsChandra|
+Duel Decks: Jace vs. Vraska|JaceVsVraska|
+Duel Decks: Knights vs. Dragons|KnightsVsDragons|
+Duel Decks: Mind vs. Might|MindVsMight|
+Duel Decks: Nissa vs. Ob Nixilis|NissaVsObNixilis|
+Duel Decks: Phyrexia vs. the Coalition|PhyrexiaVsTheCoalition|
+Duel Decks: Sorin vs. Tibalt|SorinVsTibalt|
+Duel Decks: Speed vs. Cunning|SpeedVsCunning|
+Duel Decks: Venser vs. Koth|VenserVsKoth|
+Duel Decks: Zendikar vs. Eldrazi|ZendikarVsEldrazi|
+Duels of the Planeswalkers|DuelsOfThePlaneswalkers|
+Eighth Edition|EighthEdition|
+Eldritch Moon|EldritchMoon|
+Eternal Masters|EternalMasters|
+European Land Program|EuropeanLandProgram|
+Eventide|Eventide|
+Exodus|Exodus|
+Fallen Empires|FallenEmpires|
+Fate Reforged|FateReforged|
+Fifth Dawn|FifthDawn|
+Fifth Edition|FifthEdition|
+Fourth Edition|FourthEdition|
+Friday Night Magic|FridayNightMagic|
+From the Vault: Angels|FTVAngels|
+From the Vault: Annihilation|FTVAnnihilation|
+From the Vault: Dragons|FTVDragons|
+From the Vault: Exiled|FTVExiled|
+From the Vault: Legends|FTVLegends|
+From the Vault: Lore|FTVLore|
+From the Vault: Realms|FTVRealms|
+From the Vault: Relics|FTVRelics|
+From the Vault: Twenty|FTVTwenty|
+Future Sight|FutureSight|
+Game Day|GameDay|
+Gatecrash|Gatecrash|
+Grand Prix|GrandPrix|
+Guildpact|Guildpact|
+Guru|Guru|
+Homelands|Homelands|
+Hour of Devastation|HourOfDevastation|
+Ice Age|IceAge|
+Innistrad|Innistrad|
+Invasion|Invasion|
+Journey into Nyx|JourneyIntoNyx|
+Judge Promo|JudgePromo|
+Judgment|Judgment|
+Kaladesh|Kaladesh|
+Khans of Tarkir|KhansOfTarkir|
+Launch Party|LaunchParty|
+Legends|Legends|
+Legions|Legions|
+Limited Edition Alpha|LimitedEditionAlpha|
+Limited Edition Beta|LimitedEditionBeta|
+Lorwyn|Lorwyn|
+Magic 2010|Magic2010|
+Magic 2011|Magic2011|
+Magic 2012|Magic2012|
+Magic 2013|Magic2013|
+Magic 2014|Magic2014|
+Magic 2015|Magic2015|
+Magic Origins|MagicOrigins|
+Magic Player Rewards|MagicPlayerRewards|
+Magic: The Gathering-Commander|Commander|
+Magic: The Gathering-Conspiracy|Conspiracy|
+Masterpiece Series|MasterpieceSeries|
+Masters Edition|MastersEdition|
+Masters Edition II|MastersEditionII|
+Masters Edition III|MastersEditionIII|
+Masters Edition IV|MastersEditionIV|
+Media Inserts|MediaInserts|
+Mercadian Masques|MercadianMasques|
+Mirage|Mirage|
+Mirrodin|Mirrodin|
+Mirrodin Besieged|MirrodinBesieged|
+Modern Masters|ModernMasters|
+Modern Masters 2015|ModernMasters2015|
+Modern Masters 2017|ModernMasters2017|
+Morningtide|Morningtide|
+Nemesis|Nemesis|
+New Phyrexia|NewPhyrexia|
+Ninth Edition|NinthEdition|
+Oath of the Gatewatch|OathOfTheGatewatch|
+Odyssey|Odyssey|
+Onslaught|Onslaught|
+Planar Chaos|PlanarChaos|
+Planechase|Planechase|
+Planechase 2012 Edition|Planechase2012|
+Planechase Anthology|PlanechaseAnthology|
+Planeshift|Planeshift|
+Portal|Portal|
+Portal Second Age|PortalSecondAge|
+Portal Three Kingdoms|PortalThreeKingdoms|
+Premium Deck Series: Graveborn|PDSGraveborn|
+Premium Deck Series: Fire and Lightning|PDSFireAndLightning|
+Premium Deck Series: Slivers|PDSSlivers|
+Prerelease Events|PrereleaseEvents|
+Prophecy|Prophecy|
+Ravnica: City of Guilds|RavnicaCityOfGuilds|
+Return to Ravnica|ReturnToRavnica|
+Revised Edition|RevisedEdition|
+Rise of the Eldrazi|RiseOfTheEldrazi|
+Saviors of Kamigawa|SaviorsOfKamigawa|
+Scars of Mirrodin|ScarsOfMirrodin|
+Scourge|Scourge|
+Seventh Edition|SeventhEdition|
+Shadowmoor|Shadowmoor|
+Shadows over Innistrad|ShadowsOverInnistrad|
+Shards of Alara|ShardsOfAlara|
+Starter 1999|Starter1999|
+Starter 2000|Starter2000|
+Star Wars|StarWars|
+Stronghold|Stronghold|
+Super Series|SuperSeries|
+Tempest|Tempest|
+Tempest Remastered|TempestRemastered|
+Tenth Edition|TenthEdition|
+The Dark|TheDark|
+Theros|Theros|
+Time Spiral|TimeSpiral|
+Time Spiral "Timeshifted"|TimeSpiralTimeshifted|
+Torment|Torment|
+Ugin's Fate|UginsFate|
+Unglued|Unglued|
+Unhinged|Unhinged|
+Unlimited Edition|UnlimitedEdition|
+Urza's Destiny|UrzasDestiny|
+Urza's Legacy|UrzasLegacy|
+Urza's Saga|UrzasSaga|
+Vintage Masters|VintageMasters|
+Visions|Visions|
+Weatherlight|Weatherlight|
+Welcome Deck 2016|WelcomeDeck2016|
+World Magic Cup Qualifier|WorldMagicCupQualifier|
+Worldwake|Worldwake|
+WPN Gateway|WPNGateway|
+Zendikar|Zendikar|
+Zendikar Expeditions|ZendikarExpeditions|
