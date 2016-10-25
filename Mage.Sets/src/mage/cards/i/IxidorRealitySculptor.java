@@ -62,7 +62,7 @@ public class IxidorRealitySculptor extends CardImpl {
     }
     
     public IxidorRealitySculptor(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{3}{U}");
+        super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{3}{U}{U}");
         
         this.supertype.add("Legendary");
         this.subtype.add("Human");
