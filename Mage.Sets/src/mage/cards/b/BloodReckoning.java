@@ -28,18 +28,14 @@
 package mage.cards.b;
 
 import java.util.UUID;
-import mage.abilities.TriggeredAbilityImpl;
+import mage.abilities.common.AttacksAllTriggeredAbility;
 import mage.abilities.effects.Effect;
 import mage.abilities.effects.common.LoseLifeTargetEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.Zone;
-import mage.game.Game;
-import mage.game.events.GameEvent;
-import mage.game.events.GameEvent.EventType;
-import mage.game.permanent.Permanent;
-import mage.target.targetpointer.FixedTarget;
+import mage.constants.SetTargetPointer;
+import mage.filter.common.FilterCreaturePermanent;
 
 /**
  *
@@ -48,11 +44,12 @@ import mage.target.targetpointer.FixedTarget;
 public class BloodReckoning extends CardImpl {
 
     public BloodReckoning(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.ENCHANTMENT},"{3}{B}");
-
+        super(ownerId, setInfo, new CardType[]{CardType.ENCHANTMENT}, "{3}{B}");
 
         // Whenever a creature attacks you or a planeswalker you control, that creature's controller loses 1 life.
-        this.addAbility(new BloodReckoningTriggeredAbility());
+        Effect effect = new LoseLifeTargetEffect(1);
+        effect.setText("that creature's controller loses 1 life");
+        this.addAbility(new AttacksAllTriggeredAbility(effect, false, new FilterCreaturePermanent(), SetTargetPointer.PLAYER, true, true));
     }
 
     public BloodReckoning(final BloodReckoning card) {
@@ -62,59 +59,5 @@ public class BloodReckoning extends CardImpl {
     @Override
     public BloodReckoning copy() {
         return new BloodReckoning(this);
-    }
-}
-
-class BloodReckoningTriggeredAbility extends TriggeredAbilityImpl {
-
-    public BloodReckoningTriggeredAbility() {
-        super(Zone.BATTLEFIELD, new LoseLifeTargetEffect(1));
-    }
-
-    public BloodReckoningTriggeredAbility(final BloodReckoningTriggeredAbility ability) {
-        super(ability);
-    }
-
-    @Override
-    public BloodReckoningTriggeredAbility copy() {
-        return new BloodReckoningTriggeredAbility(this);
-    }
-
-    @Override
-    public boolean checkEventType(GameEvent event, Game game) {
-        return event.getType() == EventType.ATTACKER_DECLARED;
-    }
-
-    @Override
-    public boolean checkTrigger(GameEvent event, Game game) {
-        Permanent attacker = game.getPermanent(event.getSourceId());
-        if (attacker != null) {
-            // check attacks you
-            boolean youOrYourPlaneswalker = false;
-            boolean you = event.getTargetId().equals(this.getControllerId());
-            if (you) {
-                youOrYourPlaneswalker = true;
-            } else{ // check attacks your planeswalker
-            Permanent permanent = game.getPermanent(event.getTargetId());
-            youOrYourPlaneswalker = permanent != null
-                    && permanent.getCardType().contains(CardType.PLANESWALKER)
-                    && permanent.getControllerId().equals(this.getControllerId());
-            }
-            if (youOrYourPlaneswalker) {
-                for (Effect effect : this.getEffects()) {
-                    UUID controller = attacker.getControllerId();
-                    if (controller != null) {
-                        effect.setTargetPointer(new FixedTarget(controller));
-                    }
-                }
-                return true;
-            }
-        }
-        return false;
-    }
-
-    @Override
-    public String getRule() {
-        return "Whenever a creature attacks you or a planeswalker you control, that creature's controller loses 1 life.";
     }
 }
