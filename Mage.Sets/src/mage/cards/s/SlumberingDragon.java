@@ -30,7 +30,7 @@ package mage.cards.s;
 import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.Ability;
-import mage.abilities.TriggeredAbilityImpl;
+import mage.abilities.common.AttacksAllTriggeredAbility;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.effects.RestrictionEffect;
 import mage.abilities.effects.common.counter.AddCountersSourceEffect;
@@ -39,13 +39,12 @@ import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Duration;
+import mage.constants.SetTargetPointer;
 import mage.constants.Zone;
 import mage.counters.CounterType;
+import mage.filter.common.FilterCreaturePermanent;
 import mage.game.Game;
-import mage.game.events.GameEvent;
-import mage.game.events.GameEvent.EventType;
 import mage.game.permanent.Permanent;
-import mage.target.targetpointer.FixedTarget;
 
 /**
  *
@@ -54,7 +53,7 @@ import mage.target.targetpointer.FixedTarget;
 public class SlumberingDragon extends CardImpl {
 
     public SlumberingDragon(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{R}");
+        super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{R}");
         this.subtype.add("Dragon");
 
         this.power = new MageInt(3);
@@ -62,13 +61,12 @@ public class SlumberingDragon extends CardImpl {
 
         // Flying
         this.addAbility(FlyingAbility.getInstance());
-        
+
         // Slumbering Dragon can't attack or block unless it has five or more +1/+1 counters on it.
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new SlumberingDragonEffect()));
-        
-        // Whenever a creature attacks you or a planeswalker you control, put a +1/+1 counter on Slumbering Dragon.
-        this.addAbility(new SlumberingDragonTriggeredAbility());
-        
+
+        // Whenever a creature attacks you or a planeswalker you control, put a +1/+1 counter on Slumbering Dragon.               
+        this.addAbility(new AttacksAllTriggeredAbility(new AddCountersSourceEffect(CounterType.P1P1.createInstance()), false, new FilterCreaturePermanent(), SetTargetPointer.PERMANENT, true));
     }
 
     public SlumberingDragon(final SlumberingDragon card) {
@@ -119,45 +117,3 @@ class SlumberingDragonEffect extends RestrictionEffect {
         return new SlumberingDragonEffect(this);
     }
 }
-
-class SlumberingDragonTriggeredAbility extends TriggeredAbilityImpl {
-
-    public SlumberingDragonTriggeredAbility() {
-        super(Zone.BATTLEFIELD, new AddCountersSourceEffect(CounterType.P1P1.createInstance()), false);
-    }
-
-    public SlumberingDragonTriggeredAbility(final SlumberingDragonTriggeredAbility ability) {
-        super(ability);
-    }
-
-    @Override
-    public SlumberingDragonTriggeredAbility copy() {
-        return new SlumberingDragonTriggeredAbility(this);
-    }
-
-    @Override
-    public boolean checkEventType(GameEvent event, Game game) {
-        return event.getType() == EventType.ATTACKER_DECLARED;
-    }
-
-    @Override
-    public boolean checkTrigger(GameEvent event, Game game) {
-        if (event.getTargetId().equals(controllerId)) {
-            this.getEffects().get(0).setTargetPointer(new FixedTarget(event.getSourceId()));
-            return true;
-        }
-        Permanent permanent = game.getPermanent(event.getTargetId());
-        if (permanent != null && permanent.getCardType().contains(CardType.PLANESWALKER) && permanent.getControllerId().equals(controllerId)) {
-            this.getEffects().get(0).setTargetPointer(new FixedTarget(event.getSourceId()));
-            return true;
-        }
-        return false;
-    }
-
-    @Override
-    public String getRule() {
-        return "Whenever a creature attacks you or a planeswalker you control, put a +1/+1 counter on {this}.";
-    }
-}
-
-
