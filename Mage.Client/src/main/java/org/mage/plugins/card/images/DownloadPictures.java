@@ -187,10 +187,7 @@ public class DownloadPictures extends DefaultBoundedRangeModel implements Runnab
                         cardImageSource = GrabbagImageSource.getInstance();
                         break;
                 }
-                int count = DownloadPictures.this.cards.size();
-                float mb = (count * cardImageSource.getAverageSize()) / 1024;
-                bar.setString(String.format(cardIndex == count ? "%d of %d cards finished! Please close!"
-                        : "%d of %d cards finished! Please wait! [%.1f Mb]", 0, count, mb));
+                updateCardsToDownload();
             }
         });
         p0.add(jComboBox1);
@@ -227,20 +224,7 @@ public class DownloadPictures extends DefaultBoundedRangeModel implements Runnab
         checkBox.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                ArrayList<CardDownloadData> cardsToDownload = DownloadPictures.this.cards;
-                if (checkBox.isSelected()) {
-                    DownloadPictures.this.type2cards = new ArrayList<>();
-                    for (CardDownloadData data : DownloadPictures.this.cards) {
-                        if (data.isType2() || data.isToken()) {
-                            DownloadPictures.this.type2cards.add(data);
-                        }
-                    }
-                    cardsToDownload = DownloadPictures.this.type2cards;
-                }
-                int count = cardsToDownload.size();
-                float mb = (count * cardImageSource.getAverageSize()) / 1024;
-                bar.setString(String.format(cardIndex == count ? "%d of %d cards finished! Please close!"
-                        : "%d of %d cards finished! Please wait! [%.1f Mb]", 0, count, mb));
+                updateCardsToDownload();
             }
         });
 
@@ -262,6 +246,36 @@ public class DownloadPictures extends DefaultBoundedRangeModel implements Runnab
             }
         }
         return false;
+    }
+
+    private void updateCardsToDownload() {
+        ArrayList<CardDownloadData> cardsToDownload = cards;
+        if (type2cardsOnly()) {
+            selectType2andTokenCardsIfNotYetDone();
+            cardsToDownload = type2cards;
+        }
+        updateProgressText(cardsToDownload.size());
+    }
+
+    private boolean type2cardsOnly() {
+        return checkBox.isSelected();
+    }
+
+    private void selectType2andTokenCardsIfNotYetDone() {
+        if (type2cards == null) {
+            type2cards = new ArrayList<>();
+            for (CardDownloadData data : cards) {
+                if (data.isType2() || data.isToken()) {
+                    type2cards.add(data);
+                }
+            }
+        }
+    }
+
+    private void updateProgressText(int cardCount) {
+        float mb = (cardCount * cardImageSource.getAverageSize()) / 1024;
+        bar.setString(String.format(cardIndex == cardCount ? "%d of %d cards finished! Please close!"
+            : "%d of %d cards finished! Please wait! [%.1f Mb]", 0, cardCount, mb));
     }
 
     private static String createDownloadName(CardInfo card) {
