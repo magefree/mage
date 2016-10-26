@@ -204,10 +204,13 @@ public class Lorwyn extends ExpansionSet {
         cards.add(new SetCardInfo("Knight of Meadowgrain", 28, Rarity.UNCOMMON, mage.cards.k.KnightOfMeadowgrain.class));
         cards.add(new SetCardInfo("Knucklebone Witch", 120, Rarity.RARE, mage.cards.k.KnuckleboneWitch.class));
         cards.add(new SetCardInfo("Lace with Moonglove", 225, Rarity.COMMON, mage.cards.l.LaceWithMoonglove.class));
+	cards.add(new SetCardInfo("Lairwatch Giant", 29, Rarity.COMMON, mage.cards.l.LairwatchGiant.class));
+	cards.add(new SetCardInfo("Lammastide Weave", 226, Rarity.UNCOMMON, mage.cards.l.LammastideWeave.class));
         cards.add(new SetCardInfo("Lash Out", 183, Rarity.COMMON, mage.cards.l.LashOut.class));
         cards.add(new SetCardInfo("Leaf Gilder", 227, Rarity.COMMON, mage.cards.l.LeafGilder.class));
         cards.add(new SetCardInfo("Lignify", 228, Rarity.COMMON, mage.cards.l.Lignify.class));
         cards.add(new SetCardInfo("Liliana Vess", 121, Rarity.RARE, mage.cards.l.LilianaVess.class));
+	cards.add(new SetCardInfo("Lowland Oaf", 184, Rarity.COMMON, mage.cards.l.LowlandOaf.class));
         cards.add(new SetCardInfo("Lys Alana Huntmaster", 229, Rarity.COMMON, mage.cards.l.LysAlanaHuntmaster.class));
         cards.add(new SetCardInfo("Lys Alana Scarblade", 122, Rarity.UNCOMMON, mage.cards.l.LysAlanaScarblade.class));
         cards.add(new SetCardInfo("Mad Auntie", 123, Rarity.RARE, mage.cards.m.MadAuntie.class));
@@ -269,6 +272,7 @@ public class Lorwyn extends ExpansionSet {
         cards.add(new SetCardInfo("Secluded Glen", 271, Rarity.RARE, mage.cards.s.SecludedGlen.class));
         cards.add(new SetCardInfo("Seedguide Ash", 235, Rarity.UNCOMMON, mage.cards.s.SeedguideAsh.class));
         cards.add(new SetCardInfo("Sentinels of Glen Elendra", 84, Rarity.COMMON, mage.cards.s.SentinelsOfGlenElendra.class));
+	cards.add(new SetCardInfo("Sentry Oak", 38, Rarity.UNCOMMON, mage.cards.s.SentryOak.class));
         cards.add(new SetCardInfo("Shapesharer", 85, Rarity.RARE, mage.cards.s.Shapesharer.class));
         cards.add(new SetCardInfo("Shelldock Isle", 272, Rarity.RARE, mage.cards.s.ShelldockIsle.class));
         cards.add(new SetCardInfo("Shields of Velis Vel", 39, Rarity.COMMON, mage.cards.s.ShieldsOfVelisVel.class));
