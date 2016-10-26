@@ -59,7 +59,7 @@ public class UserManager {
     private final ConcurrentHashMap<UUID, User> users = new ConcurrentHashMap<>();
     private final ConcurrentHashMap<String, User> usersByName = new ConcurrentHashMap<>();
 
-    private static final ExecutorService CALL_EXECUTOR = ThreadExecutor.getInstance().getCallExecutor();
+    private static final ExecutorService USER_EXECUTOR = ThreadExecutor.getInstance().getCallExecutor();
 
     private static final UserManager INSTANCE = new UserManager();
 
@@ -136,7 +136,7 @@ public class UserManager {
         if (userId != null) {
             final User user = users.get(userId);
             if (user != null) {
-                CALL_EXECUTOR.execute(
+                USER_EXECUTOR.execute(
                         new Runnable() {
                     @Override
                     public void run() {
@@ -212,7 +212,7 @@ public class UserManager {
     }
 
     public void updateUserHistory() {
-        CALL_EXECUTOR.execute(new Runnable() {
+        USER_EXECUTOR.execute(new Runnable() {
             @Override
             public void run() {
                 for (String updatedUser : UserStatsRepository.instance.updateUserStats()) {
