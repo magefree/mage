@@ -564,8 +564,10 @@ public abstract class CardPanel extends MagePermanent implements MouseListener, 
             } else {
                 transformIcon = ImageManagerImpl.getInstance().getDayImage();
             }
-            dayNightButton.setVisible(!isPermanent);
-            dayNightButton.setIcon(new ImageIcon(transformIcon));
+            if (dayNightButton != null) {
+                dayNightButton.setVisible(!isPermanent);
+                dayNightButton.setIcon(new ImageIcon(transformIcon));
+            }
         }
     }
 
