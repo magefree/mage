@@ -115,4 +115,8 @@ public class MtgImageSource implements CardImageSource {
     public Boolean isTokenSource() {
         return false;
     }
+
+    @Override
+    public void doPause(String httpImageUrl) {
+    }
 }

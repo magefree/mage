@@ -226,4 +226,8 @@ public class MagicCardsImageSource implements CardImageSource {
     public Boolean isTokenSource() {
         return true;
     }
+    
+    @Override
+    public void doPause(String httpImageUrl) {
+    }
 }
