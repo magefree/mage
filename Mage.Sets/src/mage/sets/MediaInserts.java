@@ -27,10 +27,10 @@
  */
 package mage.sets;
 
-import mage.cards.ExpansionSet;
-import mage.constants.SetType;
-import mage.constants.Rarity;
 import mage.cards.CardGraphicInfo;
+import mage.cards.ExpansionSet;
+import mage.constants.Rarity;
+import mage.constants.SetType;
 
 public class MediaInserts extends ExpansionSet {
     private static final MediaInserts fINSTANCE = new MediaInserts();
@@ -93,6 +93,7 @@ public class MediaInserts extends ExpansionSet {
         cards.add(new SetCardInfo("Eidolon of Blossoms", 85, Rarity.RARE, mage.cards.e.EidolonOfBlossoms.class));
         cards.add(new SetCardInfo("Electrolyze", 42, Rarity.UNCOMMON, mage.cards.e.Electrolyze.class));
         cards.add(new SetCardInfo("Elusive Tormentor", 154, Rarity.RARE, mage.cards.e.ElusiveTormentor.class));
+        cards.add(new SetCardInfo("Emrakul, the Aeons Torn", 163, Rarity.MYTHIC, mage.cards.e.EmrakulTheAeonsTorn.class));
         cards.add(new SetCardInfo("Evolving Wilds", 121, Rarity.COMMON, mage.cards.e.EvolvingWilds.class));
         cards.add(new SetCardInfo("Faithless Looting", 39, Rarity.COMMON, mage.cards.f.FaithlessLooting.class));
         cards.add(new SetCardInfo("Fated Conflagration", 79, Rarity.RARE, mage.cards.f.FatedConflagration.class));

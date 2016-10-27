@@ -28,9 +28,9 @@
 
 package mage.sets;
 
-import mage.constants.SetType;
 import mage.cards.ExpansionSet;
 import mage.constants.Rarity;
+import mage.constants.SetType;
 
 /**
  *
@@ -52,6 +52,7 @@ public class GrandPrix extends ExpansionSet {
         cards.add(new SetCardInfo("Batterskull", 10, Rarity.MYTHIC, mage.cards.b.Batterskull.class));
         cards.add(new SetCardInfo("Call of the Herd", 2, Rarity.RARE, mage.cards.c.CallOfTheHerd.class));
         cards.add(new SetCardInfo("Chrome Mox", 3, Rarity.RARE, mage.cards.c.ChromeMox.class));
+        cards.add(new SetCardInfo("Progenitus", 13, Rarity.MYTHIC, mage.cards.p.Progenitus.class));
         cards.add(new SetCardInfo("Goblin Guide", 6, Rarity.RARE, mage.cards.g.GoblinGuide.class));
         cards.add(new SetCardInfo("Griselbrand", 11, Rarity.MYTHIC, mage.cards.g.Griselbrand.class));
         cards.add(new SetCardInfo("Lotus Cobra", 7, Rarity.MYTHIC, mage.cards.l.LotusCobra.class));
