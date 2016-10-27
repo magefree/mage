@@ -363,6 +363,7 @@ public class DownloadPictures extends DefaultBoundedRangeModel implements Runnab
         for (CardDownloadData card : allCardsUrls) {
             file = new TFile(CardImageUtils.generateImagePath(card));
             if (!file.exists()) {
+                logger.debug("Missing: " + file.getAbsolutePath());
                 cardsToDownload.add(card);
             }
         }
@@ -646,32 +647,42 @@ public class DownloadPictures extends DefaultBoundedRangeModel implements Runnab
                 BufferedOutputStream out;
 
                 // Logger.getLogger(this.getClass()).info(url.toString());
-                URLConnection httpConn = url.openConnection(p);
-                setUpConnection(httpConn);
-
-                httpConn.connect();
-                int responseCode = ((HttpURLConnection) httpConn).getResponseCode();
-                if (responseCode == 200) {
-                    try (BufferedInputStream in = new BufferedInputStream(((HttpURLConnection) httpConn).getInputStream())) {
-                        //try (BufferedInputStream in = new BufferedInputStream(url.openConnection(p).getInputStream())) {
-                        out = new BufferedOutputStream(new TFileOutputStream(temporaryFile));
-                        byte[] buf = new byte[1024];
-                        int len;
-                        while ((len = in.read(buf)) != -1) {
-                            // user cancelled
-                            if (cancel) {
-                                in.close();
-                                out.flush();
-                                out.close();
-                                temporaryFile.delete();
-                                return;
+                boolean useTempFile = false;
+                int responseCode = 0;
+                URLConnection httpConn = null;
+                
+                if (temporaryFile != null && temporaryFile.length() > 100) {
+                    useTempFile = true;
+                } else {
+                    httpConn = url.openConnection(p);
+                    setUpConnection(httpConn);
+                    httpConn.connect();
+                    responseCode = ((HttpURLConnection) httpConn).getResponseCode();
+                }
+                
+                if (responseCode == 200 || useTempFile) {
+                    if (!useTempFile) {
+                        try (BufferedInputStream in = new BufferedInputStream(((HttpURLConnection) httpConn).getInputStream())) {
+                            //try (BufferedInputStream in = new BufferedInputStream(url.openConnection(p).getInputStream())) {
+                            out = new BufferedOutputStream(new TFileOutputStream(temporaryFile));
+                            byte[] buf = new byte[1024];
+                            int len;
+                            while ((len = in.read(buf)) != -1) {
+                                // user cancelled
+                                if (cancel) {
+                                    in.close();
+                                    out.flush();
+                                    out.close();
+                                    temporaryFile.delete();
+                                    return;
+                                }
+                                out.write(buf, 0, len);
                             }
-                            out.write(buf, 0, len);
-                        }
 
+                        }
+                        out.flush();
+                        out.close();
                     }
-                    out.flush();
-                    out.close();
 
                     if (card != null && card.isTwoFacedCard()) {
                         BufferedImage image = ImageIO.read(temporaryFile);
@@ -690,7 +701,7 @@ public class DownloadPictures extends DefaultBoundedRangeModel implements Runnab
                             outputFile.getParentFile().mkdirs();
                             new TFile(temporaryFile).cp_rp(outputFile);
                         }
-                        temporaryFile.delete();
+                        //temporaryFile.delete();
                     } else {
                         outputFile.getParentFile().mkdirs();
                         new TFile(temporaryFile).cp_rp(outputFile);
@@ -712,7 +723,7 @@ public class DownloadPictures extends DefaultBoundedRangeModel implements Runnab
                 logger.error(e, e);
             } finally {
                 if (temporaryFile != null) {
-                    temporaryFile.delete();
+                    //temporaryFile.delete();
                 }
             }
             synchronized (sync) {
