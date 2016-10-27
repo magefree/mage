@@ -178,4 +178,8 @@ public class AltMtgOnlTokensImageSource implements CardImageSource {
     public Boolean isTokenSource() {
         return true;
     }
+    
+    @Override
+    public void doPause(String httpImageUrl) {
+    }
 }
