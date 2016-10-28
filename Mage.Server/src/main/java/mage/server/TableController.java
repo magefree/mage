@@ -62,8 +62,6 @@ import mage.server.game.GameFactory;
 import mage.server.game.GameManager;
 import mage.server.game.PlayerFactory;
 import mage.server.record.TableRecorderImpl;
-import mage.server.services.LogKeys;
-import mage.server.services.impl.LogServiceImpl;
 import mage.server.tournament.TournamentController;
 import mage.server.tournament.TournamentFactory;
 import mage.server.tournament.TournamentManager;
@@ -606,7 +604,6 @@ public class TableController {
             if (match.getGame() != null) {
                 logger.debug("- chatId:  " + GameManager.getInstance().getChatId(match.getGame().getId()));
             }
-            LogServiceImpl.instance.log(LogKeys.KEY_GAME_STARTED, String.valueOf(userPlayerMap.size()), creator, opponent.toString());
         } catch (Exception ex) {
             logger.fatal("Error starting game table: " + table.getId(), ex);
             if (table != null) {

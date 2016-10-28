@@ -32,8 +32,6 @@ import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
 import mage.MageException;
 import mage.players.net.UserData;
-import mage.server.services.LogKeys;
-import mage.server.services.impl.LogServiceImpl;
 import org.apache.log4j.Logger;
 import org.jboss.remoting.callback.InvokerCallbackHandler;
 
@@ -81,8 +79,6 @@ public class SessionManager {
             logger.debug(userName + " not registered: " + returnMessage);
             return false;
         }
-        LogServiceImpl.instance.log(LogKeys.KEY_USER_REGISTERED, userName, session.getHost(), sessionId);
-
         logger.info(userName + " registered");
         logger.debug("- userId:    " + session.getUserId());
         logger.debug("- sessionId: " + sessionId);
@@ -95,8 +91,6 @@ public class SessionManager {
         if (session != null) {
             String returnMessage = session.connectUser(userName, password);
             if (returnMessage == null) {
-                LogServiceImpl.instance.log(LogKeys.KEY_USER_CONNECTED, userName, session.getHost(), sessionId);
-
                 logger.info(userName + " connected to server");
                 logger.debug("- userId:    " + session.getUserId());
                 logger.debug("- sessionId: " + sessionId);
@@ -115,7 +109,6 @@ public class SessionManager {
         Session session = sessions.get(sessionId);
         if (session != null) {
             session.connectAdmin();
-            LogServiceImpl.instance.log(LogKeys.KEY_ADMIN_CONNECTED, "Admin", session.getHost(), sessionId);
             logger.info("Admin connected from " + session.getHost());
             return true;
         }
@@ -144,15 +137,12 @@ public class SessionManager {
                 switch (reason) {
                     case Disconnected:
                         session.kill(reason);
-                        LogServiceImpl.instance.log(LogKeys.KEY_SESSION_KILLED, sessionId);
                         break;
                     case SessionExpired:
                         session.kill(reason);
-                        LogServiceImpl.instance.log(LogKeys.KEY_SESSION_EXPIRED, sessionId);
                         break;
                     case LostConnection:
                         session.userLostConnection();
-                        LogServiceImpl.instance.log(LogKeys.KEY_SESSION_DISCONNECTED, sessionId);
                         break;
                     default:
                         logger.error("endSession: unexpected reason  " + reason.toString() + " - sessionId: " + sessionId);
@@ -187,7 +177,6 @@ public class SessionManager {
                     user.showUserMessage("Admin operation", "Your session was disconnected by Admin.");
                     userAdmin.showUserMessage("Admin action", "User" + user.getName() + " was disconnected.");
                     disconnect(userSessionId, DisconnectReason.AdminDisconnect);
-                    LogServiceImpl.instance.log(LogKeys.KEY_SESSION_DISCONNECTED_BY_ADMIN, sessionId, userSessionId);
                 } else {
                     userAdmin.showUserMessage("Admin operation", "User with sessionId " + userSessionId + " could not be found!");
                 }
@@ -206,7 +195,6 @@ public class SessionManager {
     public void endUserSession(String sessionId, String userSessionId) {
         if (isAdmin(sessionId)) {
             disconnect(userSessionId, DisconnectReason.AdminDisconnect);
-            LogServiceImpl.instance.log(LogKeys.KEY_SESSION_END_BY_ADMIN, sessionId, userSessionId);
         }
     }
 
