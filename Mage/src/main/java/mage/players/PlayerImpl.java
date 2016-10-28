@@ -909,8 +909,11 @@ public abstract class PlayerImpl implements Player, Serializable {
             } else {
                 TargetCard target = new TargetCard(Zone.LIBRARY, new FilterCard("card to put on the top of your library (last one chosen will be topmost)"));
                 target.setRequired(true);
-                while (isInGame() && cards.size() > 1) {
+                while (cards.size() > 1) {
                     this.choose(Outcome.Neutral, cards, target, game);
+                    if (!canRespond()) {
+                        return false;
+                    }
                     UUID targetObjectId = target.getFirstTarget();
                     cards.remove(targetObjectId);
                     moveObjectToLibrary(targetObjectId, sourceId, game, true, false);
@@ -2222,7 +2225,7 @@ public abstract class PlayerImpl implements Player, Serializable {
 
     @Override
     public boolean canRespond() { // abort is checked here to get out of player requests
-        return !hasQuit() && !hasLost() && !hasWon() && !hasLeft() && !abort;
+        return isInGame() && !abort;
     }
 
     @Override
