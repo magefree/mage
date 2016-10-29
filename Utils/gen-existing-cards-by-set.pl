@@ -184,3 +184,4 @@ print "\n\n\nImplemented but-not-yet-added-to-set cards:\n";
 print (join ("", sort keys (%implementedButNotInSetYet)));
 print "\n\n\nUnimplemented cards:\n";
 print (join ("", sort keys (%unimplemented)));
+print ("\nData from reading: ../../mage/Mage.Sets/src/mage/sets/$knownSets{$setName}.java\n");
