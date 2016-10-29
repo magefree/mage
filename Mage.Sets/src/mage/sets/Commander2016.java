@@ -101,6 +101,7 @@ public class Commander2016 extends ExpansionSet {
         cards.add(new SetCardInfo("Darkwater Catacombs", 289, Rarity.RARE, mage.cards.d.DarkwaterCatacombs.class));
         cards.add(new SetCardInfo("Dauntless Escort", 192, Rarity.RARE, mage.cards.d.DauntlessEscort.class));
         cards.add(new SetCardInfo("Decimate", 193, Rarity.RARE, mage.cards.d.Decimate.class));
+        cards.add(new SetCardInfo("Deepglow Skate", 7, Rarity.RARE, mage.cards.d.DeepglowSkate.class));
         cards.add(new SetCardInfo("Den Protector", 147, Rarity.RARE, mage.cards.d.DenProtector.class));
         cards.add(new SetCardInfo("Devastation Tide", 87, Rarity.RARE, mage.cards.d.DevastationTide.class));
         cards.add(new SetCardInfo("Disdainful Stroke", 88, Rarity.COMMON, mage.cards.d.DisdainfulStroke.class));
