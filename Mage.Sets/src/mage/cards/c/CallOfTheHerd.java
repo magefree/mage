@@ -48,7 +48,7 @@ public class CallOfTheHerd extends CardImpl {
         super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{2}{G}");
 
 
-        // Put a 3/3 green Elephant creature token onto the battlefield.
+        // Create a 3/3 green Elephant creature token.
         this.getSpellAbility().addEffect(new CreateTokenEffect(new ElephantToken()));
         // Flashback {3}{G}
         this.addAbility(new FlashbackAbility(new ManaCostsImpl("{3}{G}"), TimingRule.SORCERY));

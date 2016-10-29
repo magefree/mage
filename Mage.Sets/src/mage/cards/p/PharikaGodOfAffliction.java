@@ -73,7 +73,7 @@ public class PharikaGodOfAffliction extends CardImpl {
         Effect effect = new LoseCreatureTypeSourceEffect(new DevotionCount(ColoredManaSymbol.B, ColoredManaSymbol.G), 7);
         effect.setText("As long as your devotion to black and green is less than seven, Pharika isn't a creature");
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, effect));
-        // {B}{G}: Exile target creature card from a graveyard. It's owner puts a 1/1 black and green Snake enchantment creature token with deathtouch onto the battlefield.
+        // {B}{G}: Exile target creature card from a graveyard. It's owner creates a 1/1 black and green Snake enchantment creature token with deathtouch.
         Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new PharikaExileEffect(), new ManaCostsImpl("{B}{G}"));
         Target target = new TargetCardInGraveyard(new FilterCreatureCard("a creature card from a graveyard"));
         ability.addTarget(target);
@@ -95,7 +95,7 @@ class PharikaExileEffect extends OneShotEffect {
 
     public PharikaExileEffect() {
         super(Outcome.PutCreatureInPlay);
-        staticText = "Exile target creature card from a graveyard. It's owner puts a 1/1 black and green Snake enchantment creature token with deathtouch onto the battlefield";
+        staticText = "Exile target creature card from a graveyard. It's owner creates a 1/1 black and green Snake enchantment creature token with deathtouch";
     }
 
     public PharikaExileEffect(final PharikaExileEffect effect) {

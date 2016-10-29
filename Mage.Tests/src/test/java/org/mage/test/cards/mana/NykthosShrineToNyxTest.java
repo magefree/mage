@@ -136,7 +136,7 @@ public class NykthosShrineToNyxTest extends CardTestPlayerBase {
         addCard(Zone.BATTLEFIELD, playerA, "Simic Guildmage");
         // Cackling Counterpart {1}{U}{U}
         // Instant
-        // Put a token onto the battlefield that's a copy of target creature you control.
+        // Create a tokenonto the battlefield that's a copy of target creature you control.
         // Flashback {5}{U}{U} (You may cast this card from your graveyard for its flashback cost. Then exile it.)
         addCard(Zone.HAND, playerA, "Cackling Counterpart");
 

@@ -55,7 +55,7 @@ public class FungalSprouting extends CardImpl {
         super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{3}{G}");
 
 
-        // Put X 1/1 green Saproling creature tokens onto the battlefield, where X is the greatest power among creatures you control.
+        // create X 1/1 green Saproling creature tokens, where X is the greatest power among creatures you control.
         this.getSpellAbility().addEffect(new FungalSproutingEffect());
     }
 
@@ -80,7 +80,7 @@ class FungalSproutingEffect extends OneShotEffect {
 
     public FungalSproutingEffect() {
         super(Outcome.PutCreatureInPlay);
-        this.staticText = "Put X 1/1 green Saproling creature tokens onto the battlefield, where X is the greatest power among creatures you control";
+        this.staticText = "create X 1/1 green Saproling creature tokens, where X is the greatest power among creatures you control";
     }
 
     public FungalSproutingEffect(final FungalSproutingEffect effect) {

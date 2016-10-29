@@ -62,7 +62,7 @@ import mage.players.Player;
 public class AjaniGoldmane extends CardImpl {
 
     public AjaniGoldmane(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.PLANESWALKER},"{2}{W}{W}");
+        super(ownerId, setInfo, new CardType[]{CardType.PLANESWALKER}, "{2}{W}{W}");
         this.subtype.add("Ajani");
 
         this.addAbility(new PlanswalkerEntersWithLoyalityCountersAbility(4));
@@ -76,7 +76,7 @@ public class AjaniGoldmane extends CardImpl {
         effects1.add(new GainAbilityControlledEffect(VigilanceAbility.getInstance(), Duration.EndOfTurn, new FilterCreaturePermanent()));
         this.addAbility(new LoyaltyAbility(effects1, -1));
 
-        // -6: Put a white Avatar creature token onto the battlefield. It has "This creature's power and toughness are each equal to your life total."
+        // -6: Create a white Avatar creature token. It has "This creature's power and toughness are each equal to your life total."
         this.addAbility(new LoyaltyAbility(new CreateTokenEffect(new AvatarToken()), -6));
 
     }

@@ -52,7 +52,7 @@ public class Sarcomancy extends CardImpl {
         super(ownerId,setInfo,new CardType[]{CardType.ENCHANTMENT},"{B}");
 
 
-        // When Sarcomancy enters the battlefield, put a 2/2 black Zombie creature token onto the battlefield.
+        // When Sarcomancy enters the battlefield, create a 2/2 black Zombie creature token.
         this.addAbility(new EntersBattlefieldTriggeredAbility(new CreateTokenEffect(new ZombieToken(), 1), false));
         // At the beginning of your upkeep, if there are no Zombies on the battlefield, Sarcomancy deals 1 damage to you.
         this.addAbility(new ConditionalTriggeredAbility(

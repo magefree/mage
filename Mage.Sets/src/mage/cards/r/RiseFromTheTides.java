@@ -45,7 +45,7 @@ public class RiseFromTheTides extends CardImpl {
     public RiseFromTheTides(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{5}{U}");
 
-        // Put a 2/2 black Zombie creature token onto the battlefield tapped for each instant and sorcery card in your graveyard.
+        // Create a 2/2 black Zombie creature token tapped for each instant and sorcery card in your graveyard.
         CardsInControllerGraveyardCount value = new CardsInControllerGraveyardCount(new FilterInstantOrSorceryCard());
         this.getSpellAbility().addEffect(new CreateTokenEffect(new ZombieToken(), value, true, false));
     }

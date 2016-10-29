@@ -28,13 +28,13 @@
 package mage.cards.p;
 
 import java.util.UUID;
-import mage.constants.CardType;
 import mage.MageInt;
 import mage.abilities.common.DealsCombatDamageToAPlayerTriggeredAbility;
 import mage.abilities.effects.common.CreateTokenEffect;
 import mage.abilities.keyword.FirstStrikeAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
+import mage.constants.CardType;
 import mage.game.permanent.token.SoldierToken;
 
 /**
@@ -44,7 +44,7 @@ import mage.game.permanent.token.SoldierToken;
 public class PrecinctCaptain extends CardImpl {
 
     public PrecinctCaptain(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{W}{W}");
+        super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{W}{W}");
         this.subtype.add("Human");
         this.subtype.add("Soldier");
 
@@ -53,7 +53,7 @@ public class PrecinctCaptain extends CardImpl {
 
         // First strike
         this.addAbility(FirstStrikeAbility.getInstance());
-        // Whenever Precinct Captain deals combat damage to a player, put a 1/1 white Soldier creature token onto the battlefield.
+        // Whenever Precinct Captain deals combat damage to a player, create a 1/1 white Soldier creature token.
         this.addAbility(new DealsCombatDamageToAPlayerTriggeredAbility(new CreateTokenEffect(new SoldierToken()), false));
     }
 

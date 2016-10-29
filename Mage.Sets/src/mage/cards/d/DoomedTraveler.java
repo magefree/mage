@@ -50,7 +50,7 @@ public class DoomedTraveler extends CardImpl {
         this.power = new MageInt(1);
         this.toughness = new MageInt(1);
 
-        // When Doomed Traveler dies, put a 1/1 white Spirit creature token with flying onto the battlefield.
+        // When Doomed Traveler dies, create a 1/1 white Spirit creature token with flying.
         this.addAbility(new DiesTriggeredAbility(new CreateTokenEffect(new SpiritWhiteToken())));
     }
 

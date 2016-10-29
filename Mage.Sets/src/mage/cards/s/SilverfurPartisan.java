@@ -62,7 +62,7 @@ public class SilverfurPartisan extends CardImpl {
         // Trample
         this.addAbility(TrampleAbility.getInstance());
 
-        // Whenever a Wolf or Werewolf you control becomes the target of an instant or sorcery spell, put a 2/2 green Wolf creature token onto the battlefield.
+        // Whenever a Wolf or Werewolf you control becomes the target of an instant or sorcery spell, create a 2/2 green Wolf creature token.
         this.addAbility(new CreaturesYouControlBecomesTargetTriggeredAbility(new CreateTokenEffect(new WolfToken())));
     }
 
@@ -118,6 +118,6 @@ class CreaturesYouControlBecomesTargetTriggeredAbility extends TriggeredAbilityI
 
     @Override
     public String getRule() {
-        return "Whenever a Wolf or Werewolf you control becomes the target of an instant or sorcery spell, put a 2/2 green Wolf creature token onto the battlefield.";
+        return "Whenever a Wolf or Werewolf you control becomes the target of an instant or sorcery spell, create a 2/2 green Wolf creature token.";
     }
 }

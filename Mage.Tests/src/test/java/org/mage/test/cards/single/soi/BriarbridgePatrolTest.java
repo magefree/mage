@@ -46,7 +46,7 @@ public class BriarbridgePatrolTest extends CardTestPlayerBase {
      */
     @Test
     public void dealtNonCombatDamageToCreatureInvestigate() {
-        // Whenever Briarbridge Patrol deals damage to one or more creatures, investigate (Put a colorless Clue artifact token onto the battlefield with "2, Sacrifice this artifact: Draw a card.").
+        // Whenever Briarbridge Patrol deals damage to one or more creatures, investigate (Create a colorless Clue artifact token onto the battlefield with "2, Sacrifice this artifact: Draw a card.").
         // At the beginning of each end step, if you sacrificed three or more Clues this turn, you may put a creature card from your hand onto the battlefield.
         addCard(Zone.BATTLEFIELD, playerA, "Briarbridge Patrol", 1);
         addCard(Zone.BATTLEFIELD, playerB, "Wall of Roots", 1);

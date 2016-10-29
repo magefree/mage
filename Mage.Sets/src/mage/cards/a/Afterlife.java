@@ -50,7 +50,7 @@ public class Afterlife extends CardImpl {
         super(ownerId,setInfo,new CardType[]{CardType.INSTANT},"{2}{W}");
 
         // Destroy target creature. It can't be regenerated. Its controller puts a
-        // 1/1 white Spirit creature token with flying onto the battlefield.
+        // 1/1 white Spirit creature token with flying.
         this.getSpellAbility().addTarget(new TargetCreaturePermanent());
         this.getSpellAbility().addEffect(new DestroyTargetEffect(true));
         this.getSpellAbility().addEffect(new AfterlifeEffect());
@@ -70,7 +70,7 @@ class AfterlifeEffect extends OneShotEffect {
 
     public AfterlifeEffect() {
         super(Outcome.PutCreatureInPlay);
-        staticText = "Its controller puts a 1/1 white Spirit creature token with flying onto the battlefield";
+        staticText = "Its controller creates a 1/1 white Spirit creature token with flying";
     }
 
     public AfterlifeEffect(final AfterlifeEffect effect) {

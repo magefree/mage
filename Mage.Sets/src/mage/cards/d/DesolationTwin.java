@@ -53,7 +53,7 @@ public class DesolationTwin extends CardImpl {
         this.power = new MageInt(10);
         this.toughness = new MageInt(10);
 
-        // When you cast Desolation Twin, put a 10/10 colorless Eldrazi creature token onto the battlefield.
+        // When you cast Desolation Twin, create a 10/10 colorless Eldrazi creature token.
         this.addAbility(new DesolationTwinOnCastAbility());
     }
 

@@ -68,7 +68,7 @@ public class Mycologist extends CardImpl {
 
         // At the beginning of your upkeep, put a spore counter on Mycologist.
         this.addAbility(new BeginningOfUpkeepTriggeredAbility(new AddCountersSourceEffect(CounterType.SPORE.createInstance()), TargetController.YOU, false));
-        // Remove three spore counters from Mycologist: Put a 1/1 green Saproling creature token onto the battlefield.
+        // Remove three spore counters from Mycologist: Create a 1/1 green Saproling creature token.
         this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new CreateTokenEffect(new SaprolingToken()), new RemoveCountersSourceCost(CounterType.SPORE.createInstance(3))));
         // Sacrifice a Saproling: You gain 2 life.
         this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new GainLifeEffect(2),

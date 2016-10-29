@@ -56,11 +56,11 @@ public class FromUnderTheFloorboards extends CardImpl {
         ability.setRuleAtTheTop(true);
         this.addAbility(ability);
         
-        // Put three 2/2 black Zombie creature tokens onto the battlefield tapped and you gain 3 life.        
-        // If From Under the Floorboards's madness cost was paid, instead put X of those tokens onto the battlefield tapped and you gain X life.      
+        // Create three 2/2 black Zombie creature tokens tapped and you gain 3 life.        
+        // If From Under the Floorboards's madness cost was paid, instead create X of those tokens tapped and you gain X life.      
         DynamicValue xValue = new FromUnderTheFloorboardsManacostVariableValue();
         Effect effect = new CreateTokenEffect(new ZombieToken(), xValue, true, false);
-        effect.setText("Put three 2/2 black Zombie creature tokens onto the battlefield tapped and you gain 3 life. If {this} madness cost was paid, instead put X of those tokens onto the battlefield tapped and you gain X life.");
+        effect.setText("Create three 2/2 black Zombie creature tokens tapped and you gain 3 life. If {this} madness cost was paid, instead create X of those tokens tapped and you gain X life.");
         this.getSpellAbility().addEffect(effect);
         this.getSpellAbility().addEffect(new GainLifeEffect(xValue));        
     }

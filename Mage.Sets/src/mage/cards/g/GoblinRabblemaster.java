@@ -80,7 +80,7 @@ public class GoblinRabblemaster extends CardImpl {
         Effect effect = new AttacksIfAbleAllEffect(otherGoblinFilter);
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, effect), new AttackedThisTurnWatcher());
 
-        // At the beginning of combat on your turn, put a 1/1 red Goblin creature token with haste onto the battlefield.
+        // At the beginning of combat on your turn, create a 1/1 red Goblin creature token with haste.
         this.addAbility(new BeginningOfCombatTriggeredAbility(new CreateTokenEffect(new GoblinTokenWithHaste()), TargetController.YOU, false));
 
         // When Goblin Rabblemaster attacks, it gets +1/+0 until end of turn for each other attacking Goblin.

@@ -44,7 +44,7 @@ public class SpectralProcession extends CardImpl {
         super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{2/W}{2/W}{2/W}");
 
 
-        // Put three 1/1 white Spirit creature tokens with flying onto the battlefield.
+        // Create three 1/1 white Spirit creature tokens with flying.
         this.getSpellAbility().addEffect(new CreateTokenEffect(new SpiritWhiteToken(), 3));
     }
 

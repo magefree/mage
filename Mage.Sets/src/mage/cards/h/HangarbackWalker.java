@@ -61,7 +61,7 @@ public class HangarbackWalker extends CardImpl {
         // Hangarback Walker enters the battlefield with X +1/+1 counters on it.
         this.addAbility(new EntersBattlefieldAbility(new EntersBattlefieldWithXCountersEffect(CounterType.P1P1.createInstance())));
 
-        // When Hangarback Walker dies, put a 1/1 colorless Thopter artifact creature token with flying onto the battlefield for each +1/+1 counter on Hangarback Walker.
+        // When Hangarback Walker dies, create a 1/1 colorless Thopter artifact creature token with flying for each +1/+1 counter on Hangarback Walker.
         this.addAbility(new DiesTriggeredAbility(new CreateTokenEffect(new ThopterColorlessToken(), new CountersSourceCount(CounterType.P1P1)), false));
 
         // {1}, {t}: Put a +1/+1 counter on Hangarback Walker.

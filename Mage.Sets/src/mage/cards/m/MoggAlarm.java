@@ -55,7 +55,7 @@ public class MoggAlarm extends CardImpl {
 
         // You may sacrifice two Mountains rather than pay Mogg Alarm's mana cost.
         this.addAbility(new AlternativeCostSourceAbility(new SacrificeTargetCost(new TargetControlledPermanent(2, 2, filter, true))));
-        // Put two 1/1 red Goblin creature tokens onto the battlefield.
+        // Create two 1/1 red Goblin creature tokens.
         this.getSpellAbility().addEffect(new CreateTokenEffect(new GoblinToken(),2));
         
     }

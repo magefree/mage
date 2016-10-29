@@ -47,9 +47,9 @@ import mage.target.TargetPermanent;
 public class BeastWithin extends CardImpl {
 
     public BeastWithin(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.INSTANT},"{2}{G}");
+        super(ownerId, setInfo, new CardType[]{CardType.INSTANT}, "{2}{G}");
 
-        // Destroy target permanent. Its controller puts a 3/3 green Beast creature token onto the battlefield.
+        // Destroy target permanent. Its controller creates a 3/3 green Beast creature token.
         this.getSpellAbility().addTarget(new TargetPermanent());
         this.getSpellAbility().addEffect(new DestroyTargetEffect());
         this.getSpellAbility().addEffect(new BeastWithinEffect());
@@ -69,7 +69,7 @@ class BeastWithinEffect extends OneShotEffect {
 
     public BeastWithinEffect() {
         super(Outcome.PutCreatureInPlay);
-        staticText = "Its controller puts a 3/3 green Beast creature token onto the battlefield";
+        staticText = "Its controller creates a 3/3 green Beast creature token";
     }
 
     public BeastWithinEffect(final BeastWithinEffect effect) {

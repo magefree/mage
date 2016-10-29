@@ -46,10 +46,10 @@ public class GatherTheTownsfolk extends CardImpl {
         super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{1}{W}");
 
 
-        // Put two 1/1 white Human creature tokens onto the battlefield.
-        // Fateful hour - If you have 5 or less life, put five of those tokens onto the battlefield instead.
+        // Create two 1/1 white Human creature tokens.
+        // Fateful hour - If you have 5 or less life, create five of those tokens instead.
         this.getSpellAbility().addEffect(new ConditionalOneShotEffect(new CreateTokenEffect(new HumanToken(), 5), new CreateTokenEffect(new HumanToken(), 2),
-                FatefulHourCondition.getInstance(), "Put two 1/1 white Human creature tokens onto the battlefield. If you have 5 or less life, put five of those tokens onto the battlefield instead"));
+                FatefulHourCondition.getInstance(), "Create two 1/1 white Human creature tokens. If you have 5 or less life, create five of those tokens instead"));
     }
 
     public GatherTheTownsfolk(final GatherTheTownsfolk card) {

@@ -53,7 +53,7 @@ public class SpittingImage extends CardImpl {
     public SpittingImage(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{4}{G/U}{G/U}");
 
-        // Put a token that's a copy of target creature onto the battlefield.
+        // Create a token that's a copy of target creature.
         this.getSpellAbility().addEffect(new PutTokenOntoBattlefieldCopyTargetEffect());
         this.getSpellAbility().addTarget(new TargetCreaturePermanent());
 
@@ -76,7 +76,7 @@ class SpittingImageEffect extends OneShotEffect {
 
     public SpittingImageEffect() {
         super(Outcome.PutCreatureInPlay);
-        staticText = "Put a token that's a copy of target creature onto the battlefield";
+        staticText = "Create a token that's a copy of target creature";
     }
 
     public SpittingImageEffect(final SpittingImageEffect effect) {

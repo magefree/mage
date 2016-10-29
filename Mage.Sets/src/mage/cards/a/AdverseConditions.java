@@ -47,7 +47,7 @@ import mage.target.common.TargetCreaturePermanent;
 public class AdverseConditions extends CardImpl {
 
     public AdverseConditions(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.INSTANT},"{3}{U}");
+        super(ownerId, setInfo, new CardType[]{CardType.INSTANT}, "{3}{U}");
 
         // Devoid
         Ability ability = new DevoidAbility(this.color);
@@ -58,9 +58,9 @@ public class AdverseConditions extends CardImpl {
         this.getSpellAbility().addEffect(new TapTargetEffect());
         this.getSpellAbility().addTarget(new TargetCreaturePermanent(0, 2));
         this.getSpellAbility().addEffect(new DontUntapInControllersNextUntapStepTargetEffect("Those creatures"));
-        // Put a 1/1 colorless Eldrazi Scion creature token onto the battlefield. It has "Sacrifice this creature: Add {C} to your mana pool."
+        // Create a 1/1 colorless Eldrazi Scion creature token. It has "Sacrifice this creature: Add {C} to your mana pool."
         Effect effect = new CreateTokenEffect(new EldraziScionToken());
-        effect.setText("put a 1/1 colorless Eldrazi Scion creature token onto the battlefield. It has \"Sacrifice this creature: Add {C} to your mana pool.\"");
+        effect.setText("create a 1/1 colorless Eldrazi Scion creature token. It has \"Sacrifice this creature: Add {C} to your mana pool.\"");
         this.getSpellAbility().addEffect(effect);
 
     }

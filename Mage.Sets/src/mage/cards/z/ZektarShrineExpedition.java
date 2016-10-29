@@ -62,7 +62,7 @@ public class ZektarShrineExpedition extends CardImpl {
 
         // Landfall - Whenever a land enters the battlefield under your control, you may put a quest counter on Zektar Shrine Expedition.
         this.addAbility(new LandfallAbility(Zone.BATTLEFIELD, new AddCountersSourceEffect(CounterType.QUEST.createInstance()), true));
-        // Remove three quest counters from Zektar Shrine Expedition and sacrifice it: Put a 7/1 red Elemental creature token with trample and haste onto the battlefield. Exile it at the beginning of the next end step.
+        // Remove three quest counters from Zektar Shrine Expedition and sacrifice it: Create a 7/1 red Elemental creature token with trample and haste. Exile it at the beginning of the next end step.
         Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new ZektarShrineExpeditionEffect(), new RemoveCountersSourceCost(CounterType.QUEST.createInstance(3)));
         ability.addCost(new SacrificeSourceCost());
         this.addAbility(ability);
@@ -82,7 +82,7 @@ class ZektarShrineExpeditionEffect extends OneShotEffect {
 
     public ZektarShrineExpeditionEffect() {
         super(Outcome.PutCreatureInPlay);
-        this.staticText = "Put a 7/1 red Elemental creature token with trample and haste onto the battlefield. Exile it at the beginning of the next end step";
+        this.staticText = "Create a 7/1 red Elemental creature token with trample and haste. Exile it at the beginning of the next end step";
     }
 
     public ZektarShrineExpeditionEffect(final ZektarShrineExpeditionEffect effect) {

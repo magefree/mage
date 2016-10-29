@@ -48,7 +48,7 @@ public class RoarOfTheWurm extends CardImpl {
         super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{6}{G}");
 
 
-        // Put a 6/6 green Wurm creature token onto the battlefield.
+        // Create a 6/6 green Wurm creature token.
         this.getSpellAbility().addEffect(new CreateTokenEffect(new WurmToken()));
 
         // Flashback {3}{G}

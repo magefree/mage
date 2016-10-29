@@ -55,7 +55,7 @@ public class ReignOfThePit extends CardImpl {
     public ReignOfThePit(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{4}{B}{B}");
 
-        // Each player sacrifices a creature. Put an X/X black Demon creature token with flying onto the battlefield, where X is the total power of the creatures sacrificed this way.
+        // Each player sacrifices a creature. Create an X/X black Demon creature token with flying, where X is the total power of the creatures sacrificed this way.
         this.getSpellAbility().addEffect(new ReignOfThePitEffect());
     }
 
@@ -73,7 +73,7 @@ class ReignOfThePitEffect extends OneShotEffect {
     
     ReignOfThePitEffect() {
         super(Outcome.Sacrifice);
-        this.staticText = "Each player sacrifices a creature. Put an X/X black Demon creature token with flying onto the battlefield, where X is the total power of the creatures sacrificed this way";
+        this.staticText = "Each player sacrifices a creature. Create an X/X black Demon creature token with flying, where X is the total power of the creatures sacrificed this way";
     }
     
     ReignOfThePitEffect(final ReignOfThePitEffect effect) {

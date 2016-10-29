@@ -51,7 +51,7 @@ public class SelvalasCharge extends CardImpl {
     public SelvalasCharge(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{4}{G}");
 
-        // Parley - Each player reveals the top card of his or her library. For each nonland card revealed this way, you put a 3/3 green Elephant creature token onto the battlefield. Then each player draws a card.
+        // Parley - Each player reveals the top card of his or her library. For each nonland card revealed this way, you create a 3/3 green Elephant creature token. Then each player draws a card.
         this.getSpellAbility().addEffect(new SelvalasChargeEffect());
         Effect effect = new DrawCardAllEffect(1);
         effect.setText("Then each player draws a card");
@@ -72,7 +72,7 @@ class SelvalasChargeEffect extends OneShotEffect {
 
     public SelvalasChargeEffect() {
         super(Outcome.Benefit);
-        this.staticText = "<i>Parley &mdash; </i> Each player reveals the top card of his or her library. For each nonland card revealed this way, you put a 3/3 green Elephant creature token onto the battlefield";
+        this.staticText = "<i>Parley &mdash; </i> Each player reveals the top card of his or her library. For each nonland card revealed this way, you create a 3/3 green Elephant creature token";
     }
 
     public SelvalasChargeEffect(final SelvalasChargeEffect effect) {

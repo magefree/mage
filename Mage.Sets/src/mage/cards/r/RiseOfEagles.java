@@ -48,7 +48,7 @@ public class RiseOfEagles extends CardImpl {
         super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{4}{U}{U}");
 
 
-        // Put two 2/2 blue Bird enchantment creature tokens with flying onto the battlefield. Scry 1.
+        // Create two 2/2 blue Bird enchantment creature tokens with flying. Scry 1.
         this.getSpellAbility().addEffect(new CreateTokenEffect(new RiseOfEaglesBirdToken(), 2));
         this.getSpellAbility().addEffect(new ScryEffect(1));
     }

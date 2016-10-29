@@ -91,7 +91,7 @@ public class MarathWillOfTheWild extends CardImpl {
         mode.getTargets().add(new TargetCreatureOrPlayer());
         ability.addMode(mode);
 
-        // or put an X/X green Elemental creature token onto the battlefield.
+        // or create an X/X green Elemental creature token.
         mode = new Mode();
         mode.getEffects().add(new MarathWillOfTheWildCreateTokenEffect());
         ability.addMode(mode);
@@ -139,7 +139,7 @@ class MarathWillOfTheWildCreateTokenEffect extends OneShotEffect {
 
     public MarathWillOfTheWildCreateTokenEffect() {
         super(Outcome.PutCreatureInPlay);
-        staticText = "put an X/X green Elemental creature token onto the battlefield";
+        staticText = "create an X/X green Elemental creature token";
     }
 
     public MarathWillOfTheWildCreateTokenEffect(final MarathWillOfTheWildCreateTokenEffect effect) {

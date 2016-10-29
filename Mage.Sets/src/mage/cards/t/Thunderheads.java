@@ -56,7 +56,7 @@ public class Thunderheads extends CardImpl {
 
         // Replicate {2}{U}
         this.addAbility(new ReplicateAbility(this, "{2}{U}"));
-        // Put a 3/3 blue Weird creature token with defender and flying onto the battlefield. Exile it at the beginning of the next end step.
+        // Create a 3/3 blue Weird creature token with defender and flying. Exile it at the beginning of the next end step.
         this.getSpellAbility().addEffect(new ThunderheadsEffect());
     }
 
@@ -74,7 +74,7 @@ class ThunderheadsEffect extends OneShotEffect {
 
     public ThunderheadsEffect() {
         super(Outcome.PutCreatureInPlay);
-        this.staticText = "Put a 3/3 blue Weird creature token with defender and flying onto the battlefield. Exile it at the beginning of the next end step.";
+        this.staticText = "Create a 3/3 blue Weird creature token with defender and flying. Exile it at the beginning of the next end step.";
     }
 
     public ThunderheadsEffect(ThunderheadsEffect effect) {

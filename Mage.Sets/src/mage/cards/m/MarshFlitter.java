@@ -70,7 +70,7 @@ public class MarshFlitter extends CardImpl {
 
         // Flying
         this.addAbility(FlyingAbility.getInstance());
-        // When Marsh Flitter enters the battlefield, put two 1/1 black Goblin Rogue creature tokens onto the battlefield.
+        // When Marsh Flitter enters the battlefield, create two 1/1 black Goblin Rogue creature tokens.
         this.addAbility(new EntersBattlefieldTriggeredAbility(new CreateTokenEffect(new GoblinRogueToken(), 2), false));
         // Sacrifice a Goblin: Marsh Flitter has base power and toughness 3/3 until end of turn.
         Effect effect = new SetPowerToughnessSourceEffect(3, 3, Duration.EndOfTurn, SubLayer.SetPT_7b);

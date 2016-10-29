@@ -53,7 +53,7 @@ public class HanweirGarrison extends CardImpl {
         this.power = new MageInt(2);
         this.toughness = new MageInt(3);
 
-        // Whenever Hanweir Garrison attacks, put two 1/1 red Human creature tokens onto the battlefield tapped and attacking.
+        // Whenever Hanweir Garrison attacks, create two 1/1 red Human creature tokens tapped and attacking.
         this.addAbility(new AttacksTriggeredAbility(new CreateTokenEffect(new RedHumanToken(), 2, true, true), false));
 
         // <i>(Melds with Hanweir Battlements.)</i>

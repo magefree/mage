@@ -66,9 +66,9 @@ public class WhirlerRogue extends CardImpl {
         this.power = new MageInt(2);
         this.toughness = new MageInt(2);
 
-        // When Whirler Rogue enters the battlefield, put two 1/1 colorless Thopter artifact creature tokens with flying onto the battlefield.
+        // When Whirler Rogue enters the battlefield, create two 1/1 colorless Thopter artifact creature tokens with flying.
         Effect effect = new CreateTokenEffect(new ThopterColorlessToken(), 2);
-        effect.setText("put two 1/1 colorless Thopter artifact creature tokens with flying onto the battlefield");
+        effect.setText("create two 1/1 colorless Thopter artifact creature tokens with flying");
         this.addAbility(new EntersBattlefieldTriggeredAbility(effect));
 
         // Tap two untapped artifacts you control: Target creature can't be blocked this turn.

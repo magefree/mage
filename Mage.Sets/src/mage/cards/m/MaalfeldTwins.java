@@ -49,7 +49,7 @@ public class MaalfeldTwins extends CardImpl {
         this.power = new MageInt(4);
         this.toughness = new MageInt(4);
 
-        // When Maalfeld Twins dies, put two 2/2 black Zombie creature tokens onto the battlefield.
+        // When Maalfeld Twins dies, create two 2/2 black Zombie creature tokens.
         this.addAbility(new DiesTriggeredAbility(new CreateTokenEffect(new ZombieToken(), 2)));
     }
 

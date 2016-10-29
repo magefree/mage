@@ -55,7 +55,7 @@ public class WorldspineWurm extends CardImpl {
         // Trample
         this.addAbility(TrampleAbility.getInstance());
 
-        // When Worldspine Wurm dies, put three 5/5 green Wurm creature tokens with trample onto the battlefield.
+        // When Worldspine Wurm dies, create three 5/5 green Wurm creature tokens with trample.
         this.addAbility(new DiesTriggeredAbility(new CreateTokenEffect(new WurmToken2(), 3)));
 
         // When Worldspine Wurm is put into a graveyard from anywhere, shuffle it into its owner's library.

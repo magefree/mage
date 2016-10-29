@@ -57,7 +57,7 @@ public class PatagiaViper extends CardImpl {
         // Flying
         this.addAbility(FlyingAbility.getInstance());
         
-        // When Patagia Viper enters the battlefield, put two 1/1 green and blue Snake creature tokens onto the battlefield.
+        // When Patagia Viper enters the battlefield, create two 1/1 green and blue Snake creature tokens.
         this.addAbility(new EntersBattlefieldTriggeredAbility(new CreateTokenEffect(new PatagiaViperSnakeToken(), 2), false));
         
         // When Patagia Viper enters the battlefield, sacrifice it unless {U} was spent to cast it.

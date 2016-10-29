@@ -60,7 +60,7 @@ public class UtvaraHellkite extends CardImpl {
         // Flying
         this.addAbility(FlyingAbility.getInstance());
 
-        // Whenever a Dragon you control attacks, put a 6/6 red Dragon creature token with flying onto the battlefield.
+        // Whenever a Dragon you control attacks, create a 6/6 red Dragon creature token with flying.
         this.addAbility(new AttacksCreatureYouControlTriggeredAbility(new CreateTokenEffect(new UtvaraHellkiteDragonToken()),false, filter));
     }
 

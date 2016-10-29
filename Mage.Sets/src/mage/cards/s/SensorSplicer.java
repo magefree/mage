@@ -64,7 +64,7 @@ public class SensorSplicer extends CardImpl {
         this.power = new MageInt(1);
         this.toughness = new MageInt(1);
 
-        // When Sensor Splicer enters the battlefield, put a 3/3 colorless Golem artifact creature token onto the battlefield.
+        // When Sensor Splicer enters the battlefield, create a 3/3 colorless Golem artifact creature token.
         this.addAbility(new EntersBattlefieldTriggeredAbility(new CreateTokenEffect(new GolemToken(expansionSetCode))));
 
         // Golem creatures you control have vigilance.

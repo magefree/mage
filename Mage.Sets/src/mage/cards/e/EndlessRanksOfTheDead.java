@@ -51,7 +51,7 @@ public class EndlessRanksOfTheDead extends CardImpl {
     public EndlessRanksOfTheDead(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.ENCHANTMENT},"{2}{B}{B}");
 
-        // At the beginning of your upkeep, put X 2/2 black Zombie creature tokens onto the battlefield,
+        // At the beginning of your upkeep, create X 2/2 black Zombie creature tokens,
         // where X is half the number of Zombies you control, rounded down.
         this.addAbility(new OnEventTriggeredAbility(EventType.UPKEEP_STEP_PRE, "beginning of your upkeep",
                 new CreateTokenEffect(new ZombieToken(), new HalfZombiesCount())));

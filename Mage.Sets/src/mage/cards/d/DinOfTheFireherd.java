@@ -54,9 +54,9 @@ import mage.target.targetpointer.FixedTarget;
 public class DinOfTheFireherd extends CardImpl {
 
     public DinOfTheFireherd(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{5}{B/R}{B/R}{B/R}");
+        super(ownerId, setInfo, new CardType[]{CardType.SORCERY}, "{5}{B/R}{B/R}{B/R}");
 
-        // Put a 5/5 black and red Elemental creature token onto the battlefield. Target opponent sacrifices a creature for each black creature you control, then sacrifices a land for each red creature you control.
+        // Create a 5/5 black and red Elemental creature token. Target opponent sacrifices a creature for each black creature you control, then sacrifices a land for each red creature you control.
         this.getSpellAbility().addEffect(new DinOfTheFireherdEffect());
         this.getSpellAbility().addTarget(new TargetOpponent());
     }
@@ -83,7 +83,7 @@ class DinOfTheFireherdEffect extends OneShotEffect {
 
     public DinOfTheFireherdEffect() {
         super(Outcome.Neutral);
-        this.staticText = "Put a 5/5 black and red Elemental creature token onto the battlefield. Target opponent sacrifices a creature for each black creature you control, then sacrifices a land for each red creature you control";
+        this.staticText = "create a 5/5 black and red Elemental creature token. Target opponent sacrifices a creature for each black creature you control, then sacrifices a land for each red creature you control";
     }
 
     public DinOfTheFireherdEffect(final DinOfTheFireherdEffect effect) {

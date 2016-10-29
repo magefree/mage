@@ -67,7 +67,7 @@ public class MitoticSlime extends CardImpl {
 class Ooze2Token extends Token {
 
     public Ooze2Token() {
-        super("Ooze", "2/2 green Ooze creature tokens with \"When this creature is put into a graveyard, put two 1/1 green Ooze creature tokens onto the battlefield.\"");
+        super("Ooze", "2/2 green Ooze creature tokens with \"When this creature is put into a graveyard, create two 1/1 green Ooze creature tokens.\"");
         cardType.add(CardType.CREATURE);
         subtype.add("Ooze");
         color.setGreen(true);

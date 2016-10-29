@@ -50,7 +50,7 @@ public class SummoningStation extends CardImpl {
     public SummoningStation(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.ARTIFACT},"{7}");
 
-        // {tap}: Put a 2/2 colorless Pincher creature token onto the battlefield.
+        // {tap}: Create a 2/2 colorless Pincher creature token.
         this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD,new CreateTokenEffect(new PincherToken()), new TapSourceCost()));
         // Whenever an artifact is put into a graveyard from the battlefield, you may untap Summoning Station.
         this.addAbility(new PutIntoGraveFromBattlefieldAllTriggeredAbility(new UntapSourceEffect(),true, new FilterArtifactPermanent(), false));

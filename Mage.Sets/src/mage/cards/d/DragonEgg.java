@@ -59,7 +59,7 @@ public class DragonEgg extends CardImpl {
         // Defender
         this.addAbility(DefenderAbility.getInstance());
 
-        // When Dragon Egg dies, put a 2/2 red Dragon creature token with flying onto the battlefield. It has "{R}: This creature gets +1/+0 until end of turn".
+        // When Dragon Egg dies, create a 2/2 red Dragon creature token with flying. It has "{R}: This creature gets +1/+0 until end of turn".
         this.addAbility(new DiesTriggeredAbility(new CreateTokenEffect(new DragonToken()), false));
 
     }

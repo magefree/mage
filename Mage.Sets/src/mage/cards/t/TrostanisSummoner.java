@@ -28,7 +28,6 @@
 package mage.cards.t;
 
 import java.util.UUID;
-import mage.constants.CardType;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.EntersBattlefieldTriggeredAbility;
@@ -36,6 +35,7 @@ import mage.abilities.effects.common.CreateTokenEffect;
 import mage.abilities.keyword.TrampleAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
+import mage.constants.CardType;
 import mage.game.permanent.token.CentaurToken;
 import mage.game.permanent.token.KnightToken;
 import mage.game.permanent.token.Token;
@@ -47,14 +47,14 @@ import mage.game.permanent.token.Token;
 public class TrostanisSummoner extends CardImpl {
 
     public TrostanisSummoner(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{5}{G}{W}");
+        super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{5}{G}{W}");
         this.subtype.add("Elf");
         this.subtype.add("Shaman");
 
         this.power = new MageInt(1);
         this.toughness = new MageInt(1);
 
-        // When Trostani's Summoner enters the battlefield, put a 2/2 white Knight creature token with vigilance, a 3/3 green Centaur creature token, and a 4/4 green Rhino creature token with trample onto the battlefield.
+        // When Trostani's Summoner enters the battlefield, create a 2/2 white Knight creature token with vigilance, a 3/3 green Centaur creature token, and a 4/4 green Rhino creature token with trample.
         Ability ability = new EntersBattlefieldTriggeredAbility(new CreateTokenEffect(new KnightToken()));
         ability.addEffect(new CreateTokenEffect(new CentaurToken()));
         ability.addEffect(new CreateTokenEffect(new RhinoToken()));

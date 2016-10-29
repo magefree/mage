@@ -81,9 +81,9 @@ public class KioraMasterOfTheDepths extends CardImpl {
         // -2: Reveal the top four cards of your library. You may put a creature card and/or a land card from among them into your hand. Put the rest into your graveyard.
         this.addAbility(new LoyaltyAbility(new KioraRevealEffect(), -2));
 
-        // -8: You get an emblem with "Whenever a creature enters the battlefield under your control, you may have it fight target creature." Then put three 8/8 blue Octopus creature tokens onto the battlefield.
+        // -8: You get an emblem with "Whenever a creature enters the battlefield under your control, you may have it fight target creature." Then create three 8/8 blue Octopus creature tokens.
         Effect effect = new CreateTokenEffect(new OctopusToken(), 3);
-        effect.setText("Then put three 8/8 blue Octopus creature tokens onto the battlefield");
+        effect.setText("Then create three 8/8 blue Octopus creature tokens");
         LoyaltyAbility ability3 = new LoyaltyAbility(new GetEmblemEffect(new KioraMasterOfTheDepthsEmblem()), -8);
         ability3.addEffect(effect);
         this.addAbility(ability3);

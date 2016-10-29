@@ -46,7 +46,7 @@ public class AdventOfTheWurm extends CardImpl {
     public AdventOfTheWurm(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.INSTANT},"{1}{G}{G}{W}");
 
-        // Put a 5/5 green Wurm creature token with trample onto the battlefield.
+        // Create a 5/5 green Wurm creature token with trample.
         this.getSpellAbility().addEffect(new CreateTokenEffect(new WurmToken2()));
     }
 

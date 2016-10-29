@@ -72,7 +72,7 @@ public class GarrukRelentless extends CardImpl {
         ability1.addTarget(new TargetCreaturePermanent());
         this.addAbility(ability1);
 
-        // 0: Put a 2/2 green Wolf creature token onto the battlefield.
+        // 0: Create a 2/2 green Wolf creature token.
         LoyaltyAbility ability2 = new LoyaltyAbility(new CreateTokenEffect(new WolfToken()), 0);
         this.addAbility(ability2);
     }

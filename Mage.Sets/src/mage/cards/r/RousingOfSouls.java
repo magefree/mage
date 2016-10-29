@@ -52,7 +52,7 @@ public class RousingOfSouls extends CardImpl {
         super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{2}{W}");
 
         // Parley - Each player reveals the top card of his or her library. For each nonland card revealed this way, 
-        // you put a 1/1 white Spirit creature token with flying onto the battlefield. Then each player draws a card.
+        // you create a 1/1 white Spirit creature token with flying. Then each player draws a card.
         this.getSpellAbility().addEffect(new RousingOfSoulsEffect());
         Effect effect = new DrawCardAllEffect(1);
         effect.setText("Then each player draws a card");
@@ -73,7 +73,7 @@ class RousingOfSoulsEffect extends OneShotEffect {
 
     public RousingOfSoulsEffect() {
         super(Outcome.Benefit);
-        this.staticText = "<i>Parley &mdash; </i> Each player reveals the top card of his or her library. For each nonland card revealed this way, you put a 1/1 white Spirit creature token with flying onto the battlefield";
+        this.staticText = "<i>Parley &mdash; </i> Each player reveals the top card of his or her library. For each nonland card revealed this way, you create a 1/1 white Spirit creature token with flying";
     }
 
     public RousingOfSoulsEffect(final RousingOfSoulsEffect effect) {

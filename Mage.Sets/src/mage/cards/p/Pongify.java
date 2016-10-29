@@ -52,7 +52,7 @@ public class Pongify extends CardImpl {
         super(ownerId,setInfo,new CardType[]{CardType.INSTANT},"{U}");
 
 
-        // Destroy target creature. It can't be regenerated. That creature's controller puts a 3/3 green Ape creature token onto the battlefield.
+        // Destroy target creature. It can't be regenerated. That creature's controller creates a 3/3 green Ape creature token.
         this.getSpellAbility().addEffect(new DestroyTargetEffect(true));
         this.getSpellAbility().addEffect(new PongifyEffect());
         this.getSpellAbility().addTarget(new TargetCreaturePermanent());
@@ -72,7 +72,7 @@ class PongifyEffect extends OneShotEffect {
 
     public PongifyEffect() {
         super(Outcome.PutCreatureInPlay);
-        this.staticText = "That creature's controller puts a 3/3 green Ape creature token onto the battlefield";
+        this.staticText = "That creature's controller creates a 3/3 green Ape creature token";
     }
 
     public PongifyEffect(final PongifyEffect effect) {

@@ -56,7 +56,7 @@ public class DesperateSentry extends CardImpl {
         this.power = new MageInt(1);
         this.toughness = new MageInt(2);
 
-        // When Desperate Sentry dies, put a 3/2 colorless Eldrazi Horror creature token onto the battlefield.
+        // When Desperate Sentry dies, create a 3/2 colorless Eldrazi Horror creature token.
         this.addAbility(new DiesTriggeredAbility(new CreateTokenEffect(new EldraziHorrorToken()), false));
 
         // <i>Delirium</i> &mdash; Desperate Sentry gets +3/+0 as long as there are four or more card types among cards in your graveyard.

@@ -67,9 +67,9 @@ public class VileRedeemer extends CardImpl {
         this.addAbility(new DevoidAbility(this.color));
         // Flash
         this.addAbility(FlashAbility.getInstance());
-        // When you cast Vile Redeemer, you may pay {C}. If you do put a 1/1 colorless Eldrazi Scion creature token onto the battlefield for each nontoken creature that died under your control this turn. They have "Sacrifice this creature: Add {C} to your mana pool."
+        // When you cast Vile Redeemer, you may pay {C}. If you do create a 1/1 colorless Eldrazi Scion creature token for each nontoken creature that died under your control this turn. They have "Sacrifice this creature: Add {C} to your mana pool."
         this.addAbility(
-                new CastSourceTriggeredAbility(new DoIfCostPaid(new VileRedeemerEffect(), new ManaCostsImpl("{C}"), "Pay {C} to put 1/1 colorless Eldrazi Scion creature tokens onto the battlefield?"), false),
+                new CastSourceTriggeredAbility(new DoIfCostPaid(new VileRedeemerEffect(), new ManaCostsImpl("{C}"), "Pay {C} to create 1/1 colorless Eldrazi Scion creature tokens?"), false),
                 new VileRedeemerNonTokenCreaturesDiedWatcher());
     }
 
@@ -87,7 +87,7 @@ class VileRedeemerEffect extends OneShotEffect {
 
     public VileRedeemerEffect() {
         super(Outcome.PutCreatureInPlay);
-        this.staticText = "put a 1/1 colorless Eldrazi Scion creature token onto the battlefield for each nontoken creature that died under your control this turn. They have \"Sacrifice this creature: Add {C} to your mana pool";
+        this.staticText = "create a 1/1 colorless Eldrazi Scion creature token for each nontoken creature that died under your control this turn. They have \"Sacrifice this creature: Add {C} to your mana pool";
     }
 
     public VileRedeemerEffect(final VileRedeemerEffect effect) {

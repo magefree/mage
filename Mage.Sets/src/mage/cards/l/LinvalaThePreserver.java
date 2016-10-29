@@ -63,10 +63,10 @@ public class LinvalaThePreserver extends CardImpl {
                 new OpponentHasMoreLifeCondition(),
                 "When {this} enters the battlefield, if an opponent has more life than you, you gain 5 life."));
         
-        // When Linvala enters the battlefield, if an opponent controls more creatures than you, put a 3/3 white Angel creature token with flying onto the battlefield.
+        // When Linvala enters the battlefield, if an opponent controls more creatures than you, create a 3/3 white Angel creature token with flying.
         this.addAbility(new ConditionalTriggeredAbility(new EntersBattlefieldTriggeredAbility(new CreateTokenEffect(new LinvalaAngelToken()), false),
                 new OpponentControlsMoreCondition(new FilterCreaturePermanent()),
-                "When {this} enters the battlefield, if an opponent controls more creatures than you, put a 3/3 white Angel creature token with flying onto the battlefield."));
+                "When {this} enters the battlefield, if an opponent controls more creatures than you, create a 3/3 white Angel creature token with flying."));
     }
 
     public LinvalaThePreserver(final LinvalaThePreserver card) {

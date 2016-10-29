@@ -58,9 +58,9 @@ public class VitalityCharm extends CardImpl {
     }
 
     public VitalityCharm(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.INSTANT},"{G}");
+        super(ownerId, setInfo, new CardType[]{CardType.INSTANT}, "{G}");
 
-        // Choose one - Put a 1/1 green Insect creature token onto the battlefield
+        // Choose one - Create a 1/1 green Insect creature token
         this.getSpellAbility().addEffect(new CreateTokenEffect(new InsectToken()));
         // or target creature gets +1/+1 and gains trample until end of turn
         Mode mode = new Mode();

@@ -61,7 +61,7 @@ public class SquirrelWrangler extends CardImpl {
         this.power = new MageInt(2);
         this.toughness = new MageInt(2);
 
-        // {1}{G}, Sacrifice a land: Put two 1/1 green Squirrel creature tokens onto the battlefield.
+        // {1}{G}, Sacrifice a land: Create two 1/1 green Squirrel creature tokens.
         Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new CreateTokenEffect(new SquirrelToken(), 2), new ManaCostsImpl("{1}{G}"));
         ability.addCost(new SacrificeTargetCost(new TargetControlledPermanent(new FilterControlledLandPermanent("a land"))));
         this.addAbility(ability);

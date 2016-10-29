@@ -70,7 +70,7 @@ public class KinsbaileBorderguard extends CardImpl {
         // Kinsbaile Borderguard enters the battlefield with a +1/+1 counter on it for each other Kithkin you control.
         this.addAbility(new EntersBattlefieldAbility(new AddCountersSourceEffect(CounterType.P1P1.createInstance(0),
             new PermanentsOnBattlefieldCount(filter), true), "with a +1/+1 counter on it for each other Kithkin you control"));
-        // When Kinsbaile Borderguard dies, put a 1/1 white Kithkin Soldier creature token onto the battlefield for each counter on it.
+        // When Kinsbaile Borderguard dies, create a 1/1 white Kithkin Soldier creature token for each counter on it.
         this.addAbility(new DiesTriggeredAbility(new CreateTokenEffect(new KithkinToken(), new AllCountersCount())));
     }
 

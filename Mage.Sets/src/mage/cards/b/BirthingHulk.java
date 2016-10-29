@@ -58,9 +58,9 @@ public class BirthingHulk extends CardImpl {
         // Devoid
         this.addAbility(new DevoidAbility(this.color));
 
-        // When Birthing Hulk enters the battlefield, put two 1/1 colorless Eldrazi Scion creature tokens onto the battlefield. They have "Sacrifice this creature: Add {C} to your mana pool."
+        // When Birthing Hulk enters the battlefield, create two 1/1 colorless Eldrazi Scion creature tokens. They have "Sacrifice this creature: Add {C} to your mana pool."
         Effect effect = new CreateTokenEffect(new EldraziScionToken(), 2);
-        effect.setText("put two 1/1 colorless Eldrazi Scion creature tokens onto the battlefield. They have \"Sacrifice this creature: Add {C} to your mana pool.\"");
+        effect.setText("create two 1/1 colorless Eldrazi Scion creature tokens. They have \"Sacrifice this creature: Add {C} to your mana pool.\"");
         this.addAbility(new EntersBattlefieldTriggeredAbility(effect, false));
 
         // {1}{C}: Regenerate Birthing Hulk.

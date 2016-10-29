@@ -50,7 +50,7 @@ public class VileRebirth extends CardImpl {
         this.getSpellAbility().addEffect(new ExileTargetEffect());
         this.getSpellAbility().addTarget(new TargetCardInGraveyard(new FilterCreatureCard("creature card from a graveyard")));
 
-        // Put a 2/2 black Zombie creature token onto the battlefield.
+        // Create a 2/2 black Zombie creature token.
         this.getSpellAbility().addEffect(new CreateTokenEffect(new ZombieToken()));
     }
 

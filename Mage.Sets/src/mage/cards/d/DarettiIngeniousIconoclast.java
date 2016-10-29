@@ -69,12 +69,12 @@ public class DarettiIngeniousIconoclast extends CardImpl {
     }
 
     public DarettiIngeniousIconoclast(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.PLANESWALKER},"{1}{B}{R}");
+        super(ownerId, setInfo, new CardType[]{CardType.PLANESWALKER}, "{1}{B}{R}");
         this.subtype.add("Daretti");
 
         this.addAbility(new PlanswalkerEntersWithLoyalityCountersAbility(3));
 
-        // +1: Put a 1/1 colorless Construct artifact creature token with defender onto the battlefield.
+        // +1: Create a 1/1 colorless Construct artifact creature token with defender.
         LoyaltyAbility ability = new LoyaltyAbility(new CreateTokenEffect(new DarettiConstructToken()), 1);
         this.addAbility(ability);
 
@@ -85,7 +85,7 @@ public class DarettiIngeniousIconoclast extends CardImpl {
         ability.addTarget(new TargetPermanent(filter));
         this.addAbility(ability);
 
-        // -6: Choose target artifact card in a graveyard or artifact on the battlefield. Put three tokens that are copies of it onto the battlefield.
+        // -6: Choose target artifact card in a graveyard or artifact on the battlefield. Create three tokens that are copies of it.
         ability = new LoyaltyAbility(
                 new PutTokenOntoBattlefieldCopyTargetEffect(null, null, false, 3),
                 -6);
@@ -108,7 +108,7 @@ class DarettiIngeniousIconoclastEffect extends OneShotEffect {
 
     public DarettiIngeniousIconoclastEffect() {
         super(Outcome.Benefit);
-        this.staticText = "Choose target artifact card in a graveyard or artifact on the battlefield. Put three tokens that are copies of it onto the battlefield";
+        this.staticText = "Choose target artifact card in a graveyard or artifact on the battlefield. Create three tokens that are copies of it";
     }
 
     public DarettiIngeniousIconoclastEffect(final DarettiIngeniousIconoclastEffect effect) {

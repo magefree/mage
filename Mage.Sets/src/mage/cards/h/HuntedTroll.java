@@ -60,7 +60,7 @@ public class HuntedTroll extends CardImpl {
         this.power = new MageInt(8);
         this.toughness = new MageInt(4);
 
-        // When Hunted Troll enters the battlefield, put four 1/1 blue Faerie creature tokens with flying onto the battlefield under target opponent's control.
+        // When Hunted Troll enters the battlefield, create four 1/1 blue Faerie creature tokens with flying under target opponent's control.
         Ability ability = new EntersBattlefieldTriggeredAbility(new CreateTokenTargetEffect(new FaerieToken(), 4), false);
         Target target = new TargetOpponent();
         ability.addTarget(target);

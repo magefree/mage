@@ -67,7 +67,7 @@ public class GideonAllyOfZendikar extends CardImpl {
         ability.addEffect(effect);
         this.addAbility(ability);
 
-        // 0: Put a 2/2 white Knight Ally creature token onto the battlefield.
+        // 0: Create a 2/2 white Knight Ally creature token.
         this.addAbility(new LoyaltyAbility(new CreateTokenEffect(new KnightAllyToken()), 0));
 
         // -4: You get an emblem with "Creatures you control get +1/+1."

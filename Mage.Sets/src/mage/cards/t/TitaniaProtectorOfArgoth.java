@@ -70,7 +70,7 @@ public class TitaniaProtectorOfArgoth extends CardImpl {
         ability.addTarget(new TargetCardInYourGraveyard(new FilterLandCard("land card from your graveyard")));
         this.addAbility(ability);
 
-        // Whenever a land you control is put into a graveyard from the battlefield, put a 5/3 green Elemental creature token onto the battlefield.
+        // Whenever a land you control is put into a graveyard from the battlefield, create a 5/3 green Elemental creature token.
         ability = new PutIntoGraveFromBattlefieldAllTriggeredAbility(new CreateTokenEffect(new TitaniaProtectorOfArgothElementalToken()), false, filter, false);
         this.addAbility(ability);
 

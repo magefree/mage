@@ -53,12 +53,12 @@ public class KirtarsWrath extends CardImpl {
 
 
         // Destroy all creatures. They can't be regenerated.
-        // Threshold - If seven or more cards are in your graveyard, instead destroy all creatures, then put two 1/1 white Spirit creature tokens with flying onto the battlefield. Creatures destroyed this way can't be regenerated.
+        // Threshold - If seven or more cards are in your graveyard, instead destroy all creatures, then create two 1/1 white Spirit creature tokens with flying. Creatures destroyed this way can't be regenerated.
         this.getSpellAbility().addEffect(new ConditionalOneShotEffect(
                 new KirtarsWrathEffect(),
                 new DestroyAllEffect(new FilterCreaturePermanent("all creatures"), true),
                 new CardsInControllerGraveCondition(7),
-                "Destroy all creatures. They can't be regenerated.<br/><br/><i>Threshold</i> - If seven or more cards are in your graveyard, instead destroy all creatures, then put two 1/1 white Spirit creature tokens with flying onto the battlefield. Creatures destroyed this way can't be regenerated"));
+                "Destroy all creatures. They can't be regenerated.<br/><br/><i>Threshold</i> - If seven or more cards are in your graveyard, instead destroy all creatures, then create two 1/1 white Spirit creature tokens with flying. Creatures destroyed this way can't be regenerated"));
 
     }
 
@@ -76,7 +76,7 @@ class KirtarsWrathEffect extends OneShotEffect {
 
     public KirtarsWrathEffect() {
         super(Outcome.DestroyPermanent);
-        this.staticText = "destroy all creatures, then put two 1/1 white Spirit creature tokens with flying onto the battlefield. Creatures destroyed this way can't be regenerated";
+        this.staticText = "destroy all creatures, then create two 1/1 white Spirit creature tokens with flying. Creatures destroyed this way can't be regenerated";
     }
 
     public KirtarsWrathEffect(final KirtarsWrathEffect effect) {

@@ -54,7 +54,7 @@ public class RitualOfTheReturned extends CardImpl {
         super(ownerId,setInfo,new CardType[]{CardType.INSTANT},"{3}{B}");
 
 
-        // Exile target creature card from your graveyard. Put a black Zombie creature token onto the battlefield with power equal to the exiled card's power and toughness equal to the exiled card's toughness.
+        // Exile target creature card from your graveyard. Create a black Zombie creature token with power equal to the exiled card's power and toughness equal to the exiled card's toughness.
         this.getSpellAbility().addEffect(new RitualOfTheReturnedExileEffect());
         this.getSpellAbility().addTarget(new TargetCardInYourGraveyard(new FilterCreatureCard()));
     }
@@ -73,7 +73,7 @@ class RitualOfTheReturnedExileEffect extends OneShotEffect {
     
     public RitualOfTheReturnedExileEffect() {
         super(Outcome.PutCreatureInPlay);
-        this.staticText = "Exile target creature card from your graveyard. Put a black Zombie creature token onto the battlefield with power equal to the exiled card's power and toughness equal to the exiled card's toughness";
+        this.staticText = "Exile target creature card from your graveyard. Create a black Zombie creature token with power equal to the exiled card's power and toughness equal to the exiled card's toughness";
     }
     
     public RitualOfTheReturnedExileEffect(final RitualOfTheReturnedExileEffect effect) {
@@ -103,7 +103,7 @@ class RitualOfTheReturnedExileEffect extends OneShotEffect {
 class RitualOfTheReturnedZombieToken extends Token {
 
     public RitualOfTheReturnedZombieToken(int power, int toughness) {
-        super("Zombie", "black Zombie creature token onto the battlefield with power equal to the exiled card's power and toughness equal to the exiled card's toughness");
+        super("Zombie", "black Zombie creature token with power equal to the exiled card's power and toughness equal to the exiled card's toughness");
         this.setOriginalExpansionSetCode("JOU");
         cardType.add(CardType.CREATURE);
         color.setBlack(true);

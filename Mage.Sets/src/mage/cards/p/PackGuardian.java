@@ -56,7 +56,7 @@ public class PackGuardian extends CardImpl {
         // Flash
         this.addAbility(FlashAbility.getInstance());
         
-        // When Pack Guardian enters the battlefield, you may discard a land card. If you do, put a 2/2 green Wolf creature token onto the battlefield.
+        // When Pack Guardian enters the battlefield, you may discard a land card. If you do, create a 2/2 green Wolf creature token.
         this.addAbility(new EntersBattlefieldTriggeredAbility(new DoIfCostPaid(new CreateTokenEffect(new WolfToken()), new DiscardCardCost(new FilterLandCard()))));
     }
 

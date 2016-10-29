@@ -47,10 +47,10 @@ public class SeedTheLand extends CardImpl {
     public SeedTheLand(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.ENCHANTMENT},"{2}{G}{G}");
 
-        // Whenever a land enters the battlefield, its controller puts a 1/1 green Snake creature token onto the battlefield.
+        // Whenever a land enters the battlefield, its controller creates a 1/1 green Snake creature token.
         this.addAbility(new EntersBattlefieldAllTriggeredAbility(Zone.BATTLEFIELD,
                 new CreateTokenTargetEffect(new SnakeToken()), new FilterLandPermanent(), false, SetTargetPointer.PLAYER,
-                "Whenever a land enters the battlefield, its controller puts a 1/1 green Snake creature token onto the battlefield."));
+                "Whenever a land enters the battlefield, its controller creates a 1/1 green Snake creature token."));
     }
 
     public SeedTheLand(final SeedTheLand card) {

@@ -48,7 +48,7 @@ public class SymbioticElf extends CardImpl {
         this.power = new MageInt(2);
         this.toughness = new MageInt(2);
 
-        // When Symbiotic Elf dies, put two 1/1 green Insect creature tokens onto the battlefield.
+        // When Symbiotic Elf dies, create two 1/1 green Insect creature tokens.
         this.addAbility(new DiesTriggeredAbility(new CreateTokenEffect(new InsectToken(), 2)));
     }
 

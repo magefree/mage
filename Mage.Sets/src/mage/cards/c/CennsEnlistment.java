@@ -44,7 +44,7 @@ public class CennsEnlistment extends CardImpl {
     public CennsEnlistment(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{3}{W}");
 
-        // Put two 1/1 white Kithkin Soldier creature tokens onto the battlefield.
+        // Create two 1/1 white Kithkin Soldier creature tokens.
         this.getSpellAbility().addEffect(new CreateTokenEffect(new KithkinToken(), 2));
 
         // Retrace

@@ -56,7 +56,7 @@ public class Thragtusk extends CardImpl {
         // When Thragtusk enters the battlefield, you gain 5 life.
         this.addAbility(new EntersBattlefieldTriggeredAbility(new GainLifeEffect(5)));
 
-        // When Thragtusk leaves the battlefield, put a 3/3 green Beast creature token onto the battlefield.
+        // When Thragtusk leaves the battlefield, create a 3/3 green Beast creature token.
         this.addAbility(new LeavesBattlefieldTriggeredAbility(new CreateTokenEffect(new BeastToken()), false));
     }
 

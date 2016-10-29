@@ -61,7 +61,7 @@ public class TamiyosJournal extends CardImpl {
         super(ownerId, setInfo, new CardType[]{CardType.ARTIFACT}, "{5}");
         this.supertype.add("Legendary");
 
-        // At the beginning of your upkeep, investigate (Put a colorless Clue artifact token onto the battlefield with \"{2}, Sacrifice this artifact: Draw a card.\").
+        // At the beginning of your upkeep, investigate (Create a colorless Clue artifact token with \"{2}, Sacrifice this artifact: Draw a card.\").
         this.addAbility(new BeginningOfUpkeepTriggeredAbility(Zone.BATTLEFIELD, new InvestigateEffect(), TargetController.YOU, false));
 
         // {T}, Sacrifice three Clues: Search your library for a card and put that card into your hand. Then shuffle your library.

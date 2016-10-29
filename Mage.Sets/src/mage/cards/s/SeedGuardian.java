@@ -57,7 +57,7 @@ public class SeedGuardian extends CardImpl {
 
         // Reach
         this.addAbility(ReachAbility.getInstance());
-        // When Seed Guardian dies, put an X/X green Elemental creature token onto the battlefield, where X is the number of creature cards in your graveyard.
+        // When Seed Guardian dies, create an X/X green Elemental creature token, where X is the number of creature cards in your graveyard.
         this.addAbility(new DiesTriggeredAbility(new SeedGuardianEffect(), false));
     }
 
@@ -75,7 +75,7 @@ class SeedGuardianEffect extends OneShotEffect {
 
     public SeedGuardianEffect() {
         super(Outcome.PutCreatureInPlay);
-        this.staticText = "put an X/X green Elemental creature token onto the battlefield, where X is the number of creature cards in your graveyard";
+        this.staticText = "create an X/X green Elemental creature token, where X is the number of creature cards in your graveyard";
     }
 
     public SeedGuardianEffect(final SeedGuardianEffect effect) {

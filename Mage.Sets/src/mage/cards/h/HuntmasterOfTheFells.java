@@ -64,7 +64,7 @@ public class HuntmasterOfTheFells extends CardImpl {
         this.power = new MageInt(2);
         this.toughness = new MageInt(2);
 
-        // Whenever this creature enters the battlefield or transforms into Huntmaster of the Fells, put a 2/2 green Wolf creature token onto the battlefield and you gain 2 life.
+        // Whenever this creature enters the battlefield or transforms into Huntmaster of the Fells, create a 2/2 green Wolf creature token and you gain 2 life.
         this.addAbility(new HuntmasterOfTheFellsAbility());
 
         // At the beginning of each upkeep, if no spells were cast last turn, transform Huntmaster of the Fells.
@@ -120,6 +120,6 @@ class HuntmasterOfTheFellsAbility extends TriggeredAbilityImpl {
 
     @Override
     public String getRule() {
-        return "Whenever this creature enters the battlefield or transforms into {this}, put a 2/2 green Wolf creature token onto the battlefield and you gain 2 life.";
+        return "Whenever this creature enters the battlefield or transforms into {this}, create a 2/2 green Wolf creature token and you gain 2 life.";
     }
 }

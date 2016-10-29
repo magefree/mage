@@ -58,7 +58,7 @@ public class WayfaringTemple extends CardImpl {
         // Wayfaring Temple's power and toughness are each equal to the number of creatures you control.
         this.addAbility(new SimpleStaticAbility(Zone.ALL, new SetPowerToughnessSourceEffect(new PermanentsOnBattlefieldCount(new FilterControlledCreaturePermanent()), Duration.EndOfGame)));
 
-        // Whenever Wayfaring Temple deals combat damage to a player, populate. (Put a token onto the battlefield that's a copy of a creature token you control.)
+        // Whenever Wayfaring Temple deals combat damage to a player, populate. (Create a token that's a copy of a creature token you control.)
         this.addAbility(new DealsCombatDamageToAPlayerTriggeredAbility(new PopulateEffect(), false));
     }
 

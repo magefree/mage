@@ -52,13 +52,13 @@ import mage.target.common.TargetCreaturePermanent;
 public class SkirkRidgeExhumer extends CardImpl {
 
     public SkirkRidgeExhumer(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{1}{B}");
+        super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{1}{B}");
         this.subtype.add("Zombie");
         this.subtype.add("Spellshaper");
         this.power = new MageInt(1);
         this.toughness = new MageInt(1);
 
-        // {B}, {tap}, Discard a card: Put a 1/1 black Zombie Goblin creature token named Festering Goblin onto the battlefield. It has "When Festering Goblin dies, target creature gets -1/-1 until end of turn."
+        // {B}, {tap}, Discard a card: Create a 1/1 black Zombie Goblin creature token named Festering Goblin. It has "When Festering Goblin dies, target creature gets -1/-1 until end of turn."
         Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new CreateTokenEffect(new FesteringGoblinToken()), new ManaCostsImpl("{B}"));
         ability.addCost(new TapSourceCost());
         ability.addCost(new DiscardCardCost());

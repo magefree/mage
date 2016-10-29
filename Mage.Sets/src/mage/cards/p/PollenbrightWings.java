@@ -73,7 +73,7 @@ public class PollenbrightWings extends CardImpl {
         this.addAbility(ability);
         // Enchanted creature has flying.
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new GainAbilityAttachedEffect(FlyingAbility.getInstance(), AttachmentType.AURA, Duration.WhileOnBattlefield)));
-        // Whenever enchanted creature deals combat damage to a player, put that many 1/1 green Saproling creature tokens onto the battlefield.
+        // Whenever enchanted creature deals combat damage to a player, create that many 1/1 green Saproling creature tokens.
         this.addAbility(new PollenbrightWingsAbility());
     }
 
@@ -121,7 +121,7 @@ class PollenbrightWingsAbility extends TriggeredAbilityImpl {
 
     @Override
     public String getRule() {
-        return "Whenever enchanted creature deals combat damage to a player, put that many 1/1 green Saproling creature tokens onto the battlefield.";
+        return "Whenever enchanted creature deals combat damage to a player, create that many 1/1 green Saproling creature tokens.";
     }
 }
 
@@ -129,7 +129,7 @@ class PollenbrightWingsEffect extends OneShotEffect {
 
     public PollenbrightWingsEffect() {
         super(Outcome.Benefit);
-        this.staticText = "put that many 1/1 green Saproling creature tokens onto the battlefield";
+        this.staticText = "create that many 1/1 green Saproling creature tokens";
     }
 
     public PollenbrightWingsEffect(final PollenbrightWingsEffect effect) {

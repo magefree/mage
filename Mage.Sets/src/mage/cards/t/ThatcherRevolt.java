@@ -54,7 +54,7 @@ public class ThatcherRevolt extends CardImpl {
     public ThatcherRevolt(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{2}{R}");
 
-        // Put three 1/1 red Human creature tokens with haste onto the battlefield. Sacrifice those tokens at the beginning of the next end step.
+        // Create three 1/1 red Human creature tokens with haste. Sacrifice those tokens at the beginning of the next end step.
         this.getSpellAbility().addEffect(new ThatcherRevoltEffect());
     }
 
@@ -72,7 +72,7 @@ class ThatcherRevoltEffect extends OneShotEffect {
 
     public ThatcherRevoltEffect() {
         super(Outcome.PutCreatureInPlay);
-        this.staticText = "Put three 1/1 red Human creature tokens with haste onto the battlefield. Sacrifice those tokens at the beginning of the next end step";
+        this.staticText = "Create three 1/1 red Human creature tokens with haste. Sacrifice those tokens at the beginning of the next end step";
     }
 
     public ThatcherRevoltEffect(final ThatcherRevoltEffect effect) {

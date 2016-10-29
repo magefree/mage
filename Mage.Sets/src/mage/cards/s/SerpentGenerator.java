@@ -52,9 +52,9 @@ public class SerpentGenerator extends CardImpl {
     public SerpentGenerator(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.ARTIFACT},"{6}");
 
-        // {4}, {tap}: Put a 1/1 colorless Snake artifact creature token onto the battlefield. It has "Whenever this creature deals damage to a player, that player gets a poison counter."
+        // {4}, {tap}: Create a 1/1 colorless Snake artifact creature token. It has "Whenever this creature deals damage to a player, that player gets a poison counter."
         Effect effect = new CreateTokenEffect(new SnakeToken());
-        effect.setText("Put a 1/1 colorless Snake artifact creature token onto the battlefield. It has \"Whenever this creature deals damage to a player, that player gets a poison counter.\"");
+        effect.setText("Create a 1/1 colorless Snake artifact creature token. It has \"Whenever this creature deals damage to a player, that player gets a poison counter.\"");
         Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, effect, new ManaCostsImpl("{4}"));
         ability.addCost(new TapSourceCost());
         this.addAbility(ability);

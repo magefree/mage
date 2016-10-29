@@ -61,7 +61,7 @@ public class SidisiBroodTyrant extends CardImpl {
 
         // Whenever Sidisi, Brood Tyrant enters the battlefield or attacks, put the top three cards of your library into your graveyard.
         this.addAbility(new SidisiBroodTyrantAbility());
-        // Whenever one or more creature cards are put into your graveyard from your library, put a 2/2 black Zombie creature token onto the battlefield.
+        // Whenever one or more creature cards are put into your graveyard from your library, create a 2/2 black Zombie creature token.
         this.addAbility(new SidisiBroodTyrantTriggeredAbility());
     }
 
@@ -154,6 +154,6 @@ class SidisiBroodTyrantTriggeredAbility extends TriggeredAbilityImpl {
 
     @Override
     public String getRule() {
-        return "Whenever one or more creature cards are put into your graveyard from your library, put a 2/2 black Zombie creature token onto the battlefield.";
+        return "Whenever one or more creature cards are put into your graveyard from your library, create a 2/2 black Zombie creature token.";
     }
 }

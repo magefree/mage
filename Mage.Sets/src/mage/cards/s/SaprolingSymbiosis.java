@@ -55,7 +55,7 @@ public class SaprolingSymbiosis extends CardImpl {
         Ability ability = new PayMoreToCastAsThoughtItHadFlashAbility(this, new ManaCostsImpl("{2}"));
         ability.addEffect(effect);
         this.addAbility(ability);
-        // Put a 1/1 green Saproling creature token onto the battlefield for each creature you control.
+        // Create a 1/1 green Saproling creature token for each creature you control.
         this.getSpellAbility().addEffect(effect);
     }
 

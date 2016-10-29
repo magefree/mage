@@ -61,7 +61,7 @@ public class SummonTheSchool extends CardImpl {
         super(ownerId,setInfo,new CardType[]{CardType.TRIBAL,CardType.SORCERY},"{3}{W}");
         this.subtype.add("Merfolk");
         
-        // Put two 1/1 blue Merfolk Wizard creature tokens onto the battlefield.
+        // Create two 1/1 blue Merfolk Wizard creature tokens.
         this.getSpellAbility().addEffect(new CreateTokenEffect(new MerfolkWizardToken(), 2));
         // Tap four untapped Merfolk you control: Return Summon the School from your graveyard to your hand.
         this.addAbility(new SimpleActivatedAbility(Zone.GRAVEYARD, new ReturnToHandSourceEffect(), new TapTargetCost(new TargetControlledPermanent(4, 4, filter, false))));

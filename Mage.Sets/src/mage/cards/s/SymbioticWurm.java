@@ -43,13 +43,13 @@ import mage.game.permanent.token.InsectToken;
 public class SymbioticWurm extends CardImpl {
 
     public SymbioticWurm(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{5}{G}{G}{G}");
+        super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{5}{G}{G}{G}");
         this.subtype.add("Wurm");
 
         this.power = new MageInt(7);
         this.toughness = new MageInt(7);
 
-        // When Symbiotic Wurm dies, put seven 1/1 green Insect creature tokens onto the battlefield.
+        // When Symbiotic Wurm dies, create seven 1/1 green Insect creature tokens.
         this.addAbility(new DiesTriggeredAbility(new CreateTokenEffect(new InsectToken(), 7)));
 
     }

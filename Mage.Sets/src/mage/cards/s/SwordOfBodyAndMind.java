@@ -83,7 +83,7 @@ public class SwordOfBodyAndMind extends CardImpl {
         ability.addEffect(effect);
         this.addAbility(ability);
 
-        // Whenever equipped creature deals combat damage to a player, you put a 2/2 green Wolf creature token onto the battlefield and that player puts the top ten cards of his or her library into his or her graveyard.
+        // Whenever equipped creature deals combat damage to a player, you create a 2/2 green Wolf creature token and that player puts the top ten cards of his or her library into his or her graveyard.
         this.addAbility(new SwordOfBodyAndMindAbility());
 
         // Equip {2}
@@ -136,6 +136,6 @@ class SwordOfBodyAndMindAbility extends TriggeredAbilityImpl {
 
     @Override
     public String getRule() {
-        return "Whenever equipped creature deals combat damage to a player, you put a 2/2 green Wolf creature token onto the battlefield and that player puts the top ten cards of his or her library into his or her graveyard.";
+        return "Whenever equipped creature deals combat damage to a player, you create a 2/2 green Wolf creature token and that player puts the top ten cards of his or her library into his or her graveyard.";
     }
 }

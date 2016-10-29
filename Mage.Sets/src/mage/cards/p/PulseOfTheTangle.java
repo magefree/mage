@@ -56,7 +56,7 @@ public class PulseOfTheTangle extends CardImpl {
     public PulseOfTheTangle(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{1}{G}{G}");
 
-        // Put a 3/3 green Beast creature token onto the battlefield. Then if an opponent controls more creatures than you, return Pulse of the Tangle to its owner's hand.
+        // Create a 3/3 green Beast creature token. Then if an opponent controls more creatures than you, return Pulse of the Tangle to its owner's hand.
         this.getSpellAbility().addEffect(new CreateTokenEffect(new BeastToken()));
         this.getSpellAbility().addEffect(new PulseOfTheTangleReturnToHandEffect());
     }

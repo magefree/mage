@@ -52,7 +52,7 @@ public class RighteousConfluence extends CardImpl {
         this.getSpellAbility().getModes().setMaxModes(3);
         this.getSpellAbility().getModes().setEachModeMoreThanOnce(true);
 
-        // - Put a 2/2 white Knight creature token with vigilance onto the battlefield;
+        // - Create a 2/2 white Knight creature token with vigilance;
         this.getSpellAbility().addEffect(new CreateTokenEffect(new KnightToken()));
 
         //  - Exile target enchantment;

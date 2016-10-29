@@ -51,7 +51,7 @@ public class RithsCharm extends CardImpl {
         this.getSpellAbility().addEffect(new DestroyTargetEffect());
         this.getSpellAbility().addTarget(new TargetNonBasicLandPermanent());
 
-        // or put three 1/1 green Saproling creature tokens onto the battlefield;
+        // or create three 1/1 green Saproling creature tokens;
         Mode mode = new Mode();
         mode.getEffects().add(new CreateTokenEffect(new SaprolingToken(), 3));
         this.getSpellAbility().addMode(mode);

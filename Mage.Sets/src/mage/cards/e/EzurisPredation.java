@@ -53,7 +53,7 @@ public class EzurisPredation extends CardImpl {
     public EzurisPredation(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{5}{G}{G}{G}");
 
-        // For each creature your opponents control, put a 4/4 green Beast creature token onto the battlefield. Each of those Beasts fights a different one of those creatures.
+        // For each creature your opponents control, create a 4/4 green Beast creature token. Each of those Beasts fights a different one of those creatures.
         this.getSpellAbility().addEffect(new EzurisPredationEffect());
     }
 
@@ -71,7 +71,7 @@ class EzurisPredationEffect extends OneShotEffect {
 
     public EzurisPredationEffect() {
         super(Outcome.PutCreatureInPlay);
-        this.staticText = "For each creature your opponents control, put a 4/4 green Beast creature token onto the battlefield. Each of those Beasts fights a different one of those creatures";
+        this.staticText = "For each creature your opponents control, create a 4/4 green Beast creature token. Each of those Beasts fights a different one of those creatures";
     }
 
     public EzurisPredationEffect(final EzurisPredationEffect effect) {

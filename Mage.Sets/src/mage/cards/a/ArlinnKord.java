@@ -73,7 +73,7 @@ public class ArlinnKord extends CardImpl {
         ability.addTarget(new TargetCreaturePermanent(0, 1));
         this.addAbility(ability);
 
-        // 0: Put a 2/2 green Wolf creature token onto the battlefield. Transform Arlinn Kord.
+        // 0: Create a 2/2 green Wolf creature token. Transform Arlinn Kord.
         this.addAbility(new TransformAbility());
         ability = new LoyaltyAbility(new CreateTokenEffect(new WolfToken()), 0);
         ability.addEffect(new TransformSourceEffect(true));

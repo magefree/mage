@@ -66,7 +66,7 @@ public class Terastodon extends CardImpl {
         this.power = new MageInt(9);
         this.toughness = new MageInt(9);
 
-        // When Terastodon enters the battlefield, you may destroy up to three target noncreature permanents. For each permanent put into a graveyard this way, its controller puts a 3/3 green Elephant creature token onto the battlefield.
+        // When Terastodon enters the battlefield, you may destroy up to three target noncreature permanents. For each permanent put into a graveyard this way, its controller creates a 3/3 green Elephant creature token.
         Ability ability = new EntersBattlefieldTriggeredAbility(new TerastodonEffect(), true);
         ability.addTarget(new TargetPermanent(0, 3, filter, false));
         this.addAbility(ability);
@@ -86,7 +86,7 @@ class TerastodonEffect extends OneShotEffect {
 
     public TerastodonEffect() {
         super(Outcome.DestroyPermanent);
-        this.staticText = "you may destroy up to three target noncreature permanents. For each permanent put into a graveyard this way, its controller puts a 3/3 green Elephant creature token onto the battlefield";
+        this.staticText = "you may destroy up to three target noncreature permanents. For each permanent put into a graveyard this way, its controller creates a 3/3 green Elephant creature token";
     }
 
     public TerastodonEffect(final TerastodonEffect effect) {

@@ -69,7 +69,7 @@ public class DragonWhisperer extends CardImpl {
                 new BoostSourceEffect(1, 0, Duration.EndOfTurn),
                 new ManaCostsImpl("{1}{R}")));
         
-        // <Formidable</i> - {4}{R}{R}: Put a 4/4 red Dragon creature token with flying onto the battlefield. Activate this ability only if creatures you control have total power 8 or greater.
+        // <Formidable</i> - {4}{R}{R}: Create a 4/4 red Dragon creature token with flying. Activate this ability only if creatures you control have total power 8 or greater.
         Ability ability = new ActivateIfConditionActivatedAbility(
                 Zone.BATTLEFIELD, 
                 new CreateTokenEffect(new DragonToken()), 

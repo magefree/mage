@@ -61,7 +61,7 @@ public class HanweirTheWrithingTownship extends MeldCard {
         // Haste
         this.addAbility(HasteAbility.getInstance());
         
-        // Whenever Hanweir, the Writhing Township attacks, put two 3/2 colorless Eldrazi Horror creature tokens onto the battlefield tapped and attacking.
+        // Whenever Hanweir, the Writhing Township attacks, create two 3/2 colorless Eldrazi Horror creature tokens tapped and attacking.
         this.addAbility(new AttacksTriggeredAbility(new CreateTokenEffect(new EldraziHorrorToken(), 2, true, true), false));
     }
 

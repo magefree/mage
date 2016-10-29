@@ -66,7 +66,7 @@ public class MyrBattlesphere extends CardImpl {
         this.power = new MageInt(4);
         this.toughness = new MageInt(7);
 
-        // When Myr Battlesphere enters the battlefield, put four 1/1 colorless Myr artifact creature tokens onto the battlefield.
+        // When Myr Battlesphere enters the battlefield, create four 1/1 colorless Myr artifact creature tokens.
         this.addAbility(new EntersBattlefieldTriggeredAbility(new CreateTokenEffect(new MyrToken(), 4), false));
 
         // Whenever Myr Battlesphere attacks, you may tap X untapped Myr you control. If you do, Myr Battlesphere gets +X/+0 until end of turn and deals X damage to defending player.

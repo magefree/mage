@@ -75,7 +75,7 @@ public class SarkhanVol extends CardImpl {
         ability.addTarget(new TargetCreaturePermanent());
         this.addAbility(ability);
 
-        // -6: Put five 4/4 red Dragon creature tokens with flying onto the battlefield.
+        // -6: Create five 4/4 red Dragon creature tokens with flying.
         this.addAbility(new LoyaltyAbility(new CreateTokenEffect(dragonToken, 5), -6));
     }
 

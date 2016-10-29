@@ -72,7 +72,7 @@ public class HelmOfKaldra extends CardImpl {
     }
 
     public HelmOfKaldra(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.ARTIFACT},"{3}");
+        super(ownerId, setInfo, new CardType[]{CardType.ARTIFACT}, "{3}");
         this.supertype.add("Legendary");
         this.subtype.add("Equipment");
 
@@ -85,13 +85,13 @@ public class HelmOfKaldra extends CardImpl {
         effect.setText("and haste");
         ability.addEffect(effect);
         this.addAbility(ability);
-        // {1}: If you control Equipment named Helm of Kaldra, Sword of Kaldra, and Shield of Kaldra, put a legendary 4/4 colorless Avatar creature token named Kaldra onto the battlefield and attach those Equipment to it.
+        // {1}: If you control Equipment named Helm of Kaldra, Sword of Kaldra, and Shield of Kaldra, create a legendary 4/4 colorless Avatar creature token named Kaldra and attach those Equipment to it.
         this.addAbility(new ConditionalActivatedAbility(
                 Zone.BATTLEFIELD,
                 new HelmOfKaldraEffect(),
                 new GenericManaCost(1),
                 new HelmOfKaldraCondition(),
-                "{1}: If you control Equipment named Helm of Kaldra, Sword of Kaldra, and Shield of Kaldra, put a legendary 4/4 colorless Avatar creature token named Kaldra onto the battlefield and attach those Equipment to it"));
+                "{1}: If you control Equipment named Helm of Kaldra, Sword of Kaldra, and Shield of Kaldra, create a legendary 4/4 colorless Avatar creature token named Kaldra and attach those Equipment to it"));
         // Equip {2}
         this.addAbility(new EquipAbility(Outcome.Benefit, new ManaCostsImpl("{2}")));
     }
@@ -125,7 +125,7 @@ class HelmOfKaldraEffect extends OneShotEffect {
 
     public HelmOfKaldraEffect() {
         super(Outcome.Benefit);
-        this.staticText = "If you control Equipment named Helm of Kaldra, Sword of Kaldra, and Shield of Kaldra, put a legendary 4/4 colorless Avatar creature token named Kaldra onto the battlefield and attach those Equipment to it";
+        this.staticText = "If you control Equipment named Helm of Kaldra, Sword of Kaldra, and Shield of Kaldra, create a legendary 4/4 colorless Avatar creature token named Kaldra and attach those Equipment to it";
     }
 
     public HelmOfKaldraEffect(final HelmOfKaldraEffect effect) {

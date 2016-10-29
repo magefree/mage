@@ -45,14 +45,15 @@ import mage.game.permanent.token.Token;
  * @author fireshoes
  */
 public class MonasteryMentor extends CardImpl {
-    
+
     private static final FilterSpell filter = new FilterSpell("a noncreature spell");
+
     static {
         filter.add(Predicates.not(new CardTypePredicate(CardType.CREATURE)));
     }
 
     public MonasteryMentor(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{2}{W}");
+        super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{2}{W}");
         this.subtype.add("Human");
         this.subtype.add("Monk");
         this.power = new MageInt(2);
@@ -60,8 +61,8 @@ public class MonasteryMentor extends CardImpl {
 
         // Prowess
         this.addAbility(new ProwessAbility());
-        
-        // Whenever you cast a noncreature spell, put a 1/1 white Monk creature token with prowess onto the battlefield.
+
+        // Whenever you cast a noncreature spell, create a 1/1 white Monk creature token with prowess.
         this.addAbility(new SpellCastControllerTriggeredAbility(new CreateTokenEffect(new MonasteryMentorToken()), filter, false));
     }
 
@@ -74,8 +75,9 @@ public class MonasteryMentor extends CardImpl {
         return new MonasteryMentor(this);
     }
 }
-    
-    class MonasteryMentorToken extends Token {
+
+class MonasteryMentorToken extends Token {
+
     MonasteryMentorToken() {
         super("Monk", "1/1 white Monk creature token with prowess");
         cardType.add(CardType.CREATURE);

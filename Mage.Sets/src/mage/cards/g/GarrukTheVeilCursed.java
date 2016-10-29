@@ -27,6 +27,7 @@
  */
 package mage.cards.g;
 
+import java.util.UUID;
 import mage.abilities.Ability;
 import mage.abilities.LoyaltyAbility;
 import mage.abilities.dynamicvalue.DynamicValue;
@@ -43,6 +44,7 @@ import mage.cards.CardSetInfo;
 import mage.cards.Cards;
 import mage.cards.CardsImpl;
 import mage.constants.*;
+import mage.filter.common.FilterControlledCreaturePermanent;
 import mage.filter.common.FilterCreatureCard;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.game.Game;
@@ -53,16 +55,13 @@ import mage.target.Target;
 import mage.target.common.TargetCardInLibrary;
 import mage.target.common.TargetControlledPermanent;
 
-import java.util.UUID;
-import mage.filter.common.FilterControlledCreaturePermanent;
-
 /**
  * @author nantuko
  */
 public class GarrukTheVeilCursed extends CardImpl {
 
     public GarrukTheVeilCursed(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.PLANESWALKER},"");
+        super(ownerId, setInfo, new CardType[]{CardType.PLANESWALKER}, "");
         this.subtype.add("Garruk");
 
         // this card is the second face of double-faced card
@@ -72,7 +71,7 @@ public class GarrukTheVeilCursed extends CardImpl {
         this.color.setGreen(true);
         this.color.setBlack(true);
 
-        // +1 : Put a 1/1 black Wolf creature token with deathtouch onto the battlefield.
+        // +1 : Create a 1/1 black Wolf creature token with deathtouch.
         LoyaltyAbility ability1 = new LoyaltyAbility(new CreateTokenEffect(new WolfTokenWithDeathtouch()), 1);
         this.addAbility(ability1);
 
@@ -195,4 +194,3 @@ class GarrukTheVeilCursedEffect extends OneShotEffect {
         return new GarrukTheVeilCursedEffect(this);
     }
 }
-

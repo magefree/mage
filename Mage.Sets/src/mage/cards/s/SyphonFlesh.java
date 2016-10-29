@@ -51,7 +51,7 @@ public class SyphonFlesh extends CardImpl {
     public SyphonFlesh(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{4}{B}");
 
-        // Each other player sacrifices a creature. You put a 2/2 black Zombie creature token onto the battlefield for each creature sacrificed this way.
+        // Each other player sacrifices a creature. You create a 2/2 black Zombie creature token for each creature sacrificed this way.
         this.getSpellAbility().addEffect(new SyphonFleshEffect());
     }
 
@@ -69,7 +69,7 @@ class SyphonFleshEffect extends OneShotEffect {
 
     public SyphonFleshEffect() {
         super(Outcome.Sacrifice);
-        this.staticText = "each other player sacrifices a creature. You put a 2/2 black Zombie creature token onto the battlefield for each creature sacrificed this way.";
+        this.staticText = "each other player sacrifices a creature. You create a 2/2 black Zombie creature token for each creature sacrificed this way.";
     }
 
     public SyphonFleshEffect(final SyphonFleshEffect effect) {

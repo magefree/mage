@@ -43,9 +43,9 @@ import mage.game.permanent.token.ZombieToken;
 public class ArmyOfTheDamned extends CardImpl {
 
     public ArmyOfTheDamned(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{5}{B}{B}{B}");
+        super(ownerId, setInfo, new CardType[]{CardType.SORCERY}, "{5}{B}{B}{B}");
 
-        // Put thirteen 2/2 black Zombie creature tokens onto the battlefield tapped.
+        // Create thirteen 2/2 black Zombie creature tokens tapped.
         this.getSpellAbility().addEffect(new CreateTokenEffect(new ZombieToken(), 13, true, false));
 
         // Flashback {7}{B}{B}{B}

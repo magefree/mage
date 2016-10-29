@@ -50,13 +50,13 @@ import mage.target.common.TargetCreaturePermanent;
 public class GoldmeadowLookout extends CardImpl {
 
     public GoldmeadowLookout(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{3}{W}");
+        super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{3}{W}");
         this.subtype.add("Kithkin");
         this.subtype.add("Spellshaper");
         this.power = new MageInt(2);
         this.toughness = new MageInt(2);
 
-        // {W}, {tap}, Discard a card: Put a 1/1 white Kithkin Soldier creature token named Goldmeadow Harrier onto the battlefield. It has "{W}, {tap}: Tap target creature."
+        // {W}, {tap}, Discard a card: Create a 1/1 white Kithkin Soldier creature token named Goldmeadow Harrier. It has "{W}, {tap}: Tap target creature."
         Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new CreateTokenEffect(new GoldmeadowHarrierToken()), new ManaCostsImpl("{W}"));
         ability.addCost(new TapSourceCost());
         ability.addCost(new DiscardCardCost());

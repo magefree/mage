@@ -69,7 +69,7 @@ public class DiregrafColossus extends CardImpl {
         // Diregraf Colossus enters the battlefield with a +1/+1 counter on it for each Zombie card in your graveyard.
         this.addAbility(new EntersBattlefieldAbility(new DiregrafColossusEffect(), "with a +1/+1 counter on it for each Zombie card in your graveyard"));
 
-        // Whenever you cast a Zombie spell, put a 2/2 black Zombie creature token onto the battlefield tapped.
+        // Whenever you cast a Zombie spell, create a 2/2 black Zombie creature token tapped.
         this.addAbility(new SpellCastControllerTriggeredAbility(new CreateTokenEffect(new ZombieToken(), 1, true, false), filter, false));
 
     }

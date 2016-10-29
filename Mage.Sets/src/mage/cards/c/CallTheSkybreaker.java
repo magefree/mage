@@ -47,7 +47,7 @@ public class CallTheSkybreaker extends CardImpl {
     public CallTheSkybreaker(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{5}{U/R}{U/R}");
 
-        // Put a 5/5 blue and red Elemental creature token with flying onto the battlefield.
+        // Create a 5/5 blue and red Elemental creature token with flying.
         this.getSpellAbility().addEffect(new CreateTokenEffect(new ElementalToken()));
         
         // Retrace

@@ -85,7 +85,7 @@ public class GarrukApexPredator extends CardImpl {
         ability.addTarget(new TargetPermanent(filter));
         this.addAbility(ability);
 
-        // +1: Put a 3/3 black Beast creature token with deathtouch onto the battlefield.
+        // +1: Create a 3/3 black Beast creature token with deathtouch.
         ability = new LoyaltyAbility(new CreateTokenEffect(new GarrukApexPredatorBeastToken()), 1);
         this.addAbility(ability);
 

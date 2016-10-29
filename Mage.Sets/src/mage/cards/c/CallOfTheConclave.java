@@ -44,7 +44,7 @@ public class CallOfTheConclave extends CardImpl {
         super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{G}{W}");
 
 
-        // Put a 3/3 green Centaur creature token onto the battlefield.
+        // Create a 3/3 green Centaur creature token.
         this.getSpellAbility().addEffect(new CreateTokenEffect(new CentaurToken()));
     }
 

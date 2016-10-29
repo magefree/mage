@@ -61,7 +61,7 @@ public class RebellionOfTheFlamekin extends CardImpl {
         super(ownerId,setInfo,new CardType[]{CardType.TRIBAL,CardType.ENCHANTMENT},"{3}{R}");
         this.subtype.add("Elemental");
 
-        // Whenever you clash, you may pay {1}. If you do put a 3/1 Red Elemental Shaman creature token in play. If you won that token gains haste
+        // Whenever you clash, you may pay {1}. If you do create a 3/1 Red Elemental Shaman creature token in play. If you won that token gains haste
         this.addAbility(new RebellionOfTheFlamekinTriggeredAbility());
     }
 
@@ -112,7 +112,7 @@ class RebellionOfTheFlamekinTriggeredAbility extends TriggeredAbilityImpl {
 
     @Override
     public String getRule() {
-        return "Whenever you clash, you may pay {1}. If you do put a 3/1 Red Elemental Shaman creature token in play. If you won that token gains haste until end of turn";
+        return "Whenever you clash, you may pay {1}. If you do create a 3/1 Red Elemental Shaman creature token in play. If you won that token gains haste until end of turn";
     }
 }
 

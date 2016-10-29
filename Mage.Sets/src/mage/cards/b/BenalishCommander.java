@@ -62,7 +62,7 @@ public class BenalishCommander extends CardImpl {
     }
 
     public BenalishCommander(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{3}{W}");
+        super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{3}{W}");
         this.subtype.add("Human");
         this.subtype.add("Soldier");
 
@@ -75,7 +75,7 @@ public class BenalishCommander extends CardImpl {
         // Suspend X-{X}{W}{W}. X can't be 0.
         this.addAbility(new SuspendAbility(Integer.MAX_VALUE, new ManaCostsImpl("{W}{W}"), this, true));
 
-        // Whenever a time counter is removed from Benalish Commander while it's exiled, put a 1/1 white Soldier creature token onto the battlefield.
+        // Whenever a time counter is removed from Benalish Commander while it's exiled, create a 1/1 white Soldier creature token.
         this.addAbility(new BenalishCommanderTriggeredAbility());
     }
 

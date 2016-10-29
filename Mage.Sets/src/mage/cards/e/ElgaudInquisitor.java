@@ -52,7 +52,7 @@ public class ElgaudInquisitor extends CardImpl {
         this.toughness = new MageInt(2);
 
         this.addAbility(LifelinkAbility.getInstance());
-        // When Elgaud Inquisitor dies, put a 1/1 white Spirit creature token with flying onto the battlefield.
+        // When Elgaud Inquisitor dies, create a 1/1 white Spirit creature token with flying.
         this.addAbility(new DiesTriggeredAbility(new CreateTokenEffect(new SpiritWhiteToken())));
     }
 

@@ -52,9 +52,9 @@ import mage.target.common.TargetCreatureOrPlayer;
 public class AcornCatapult extends CardImpl {
 
     public AcornCatapult(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.ARTIFACT},"{4}");
+        super(ownerId, setInfo, new CardType[]{CardType.ARTIFACT}, "{4}");
 
-        // {1}, {tap}: Acorn Catapult deals 1 damage to target creature or player. That creature's controller or that player puts a 1/1 green Squirrel creature token onto the battlefield.
+        // {1}, {tap}: Acorn Catapult deals 1 damage to target creature or player. That creature's controller or that player creates a 1/1 green Squirrel creature token.
         Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new DamageTargetEffect(1), new ManaCostsImpl("{1}"));
         ability.addCost(new TapSourceCost());
         ability.addEffect(new AcornCatapultEffect());
@@ -72,12 +72,11 @@ public class AcornCatapult extends CardImpl {
     }
 }
 
-
 class AcornCatapultEffect extends OneShotEffect {
 
     public AcornCatapultEffect() {
         super(Outcome.PutCreatureInPlay);
-        staticText = "that creature's controller or that player puts a 1/1 green Squirrel creature token onto the battlefield";
+        staticText = "that creature's controller or that player creates a 1/1 green Squirrel creature token";
     }
 
     public AcornCatapultEffect(final AcornCatapultEffect effect) {
@@ -93,14 +92,14 @@ class AcornCatapultEffect extends OneShotEffect {
     public boolean apply(Game game, Ability source) {
         UUID targetId = getTargetPointer().getFirst(game, source);
         Player player = game.getPlayer(targetId);
-        if(player == null) {
+        if (player == null) {
             Permanent permanent = game.getPermanent(targetId);
-            if(permanent != null) {
+            if (permanent != null) {
                 player = game.getPlayer(permanent.getControllerId());
             }
         }
 
-        if(player != null) {
+        if (player != null) {
             new SquirrelToken().putOntoBattlefield(1, game, source.getSourceId(), player.getId());
             return true;
         }

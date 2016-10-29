@@ -59,7 +59,7 @@ public class GenesisChamber extends CardImpl {
     public GenesisChamber(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.ARTIFACT},"{2}");
 
-        // Whenever a nontoken creature enters the battlefield, if Genesis Chamber is untapped, that creature's controller puts a 1/1 colorless Myr artifact creature token onto the battlefield.
+        // Whenever a nontoken creature enters the battlefield, if Genesis Chamber is untapped, that creature's controller creates a 1/1 colorless Myr artifact creature token.
         this.addAbility(new GenesisChamberTriggeredAbility(new GenesisChamberEffect(), filter));
     }
 
@@ -75,7 +75,7 @@ public class GenesisChamber extends CardImpl {
 
 class GenesisChamberTriggeredAbility extends EntersBattlefieldAllTriggeredAbility
 {
-    private static final String rule =  "Whenever a nontoken creature enters the battlefield, if {this} is untapped, that creature's controller puts a 1/1 colorless Myr artifact creature token onto the battlefield";
+    private static final String rule =  "Whenever a nontoken creature enters the battlefield, if {this} is untapped, that creature's controller creates a 1/1 colorless Myr artifact creature token";
     public GenesisChamberTriggeredAbility(Effect effect, FilterPermanent filter)
     {
         super(Zone.BATTLEFIELD, effect, filter, false, SetTargetPointer.PERMANENT, rule);
@@ -109,7 +109,7 @@ class GenesisChamberEffect extends OneShotEffect {
 
     public GenesisChamberEffect() {
         super(Outcome.Benefit);
-        this.staticText = "that creature's controller puts a 1/1 colorless Myr artifact creature token onto the battlefield";
+        this.staticText = "that creature's controller creates a 1/1 colorless Myr artifact creature token";
     }
 
     public GenesisChamberEffect(final GenesisChamberEffect effect) {

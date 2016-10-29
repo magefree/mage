@@ -69,7 +69,7 @@ public class SanctifierOfSouls extends CardImpl {
         // Whenever another creature enters the battlefield under your control, Sanctifier of Souls gets +1/+1 until end of turn.
         this.addAbility(new EntersBattlefieldControlledTriggeredAbility(new BoostSourceEffect(1, 1, Duration.EndOfTurn), filter));
 
-        // {2}{W}, Exile a creature card from your graveyard: Put a 1/1 white Spirit creature token with flying onto the battlefield.
+        // {2}{W}, Exile a creature card from your graveyard: Create a 1/1 white Spirit creature token with flying.
         SimpleActivatedAbility ability = new SimpleActivatedAbility(Zone.BATTLEFIELD,
                 new CreateTokenEffect(new SpiritWhiteToken()),
                 new ManaCostsImpl("{2}{W}"));

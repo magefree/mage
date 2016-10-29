@@ -54,9 +54,9 @@ public class Metrognome extends CardImpl {
     public Metrognome(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.ARTIFACT},"{4}");
 
-        // When a spell or ability an opponent controls causes you to discard Metrognome, put four 1/1 colorless Gnome artifact creature tokens onto the battlefield.
+        // When a spell or ability an opponent controls causes you to discard Metrognome, create four 1/1 colorless Gnome artifact creature tokens.
         this.addAbility(new MetrognomeTriggeredAbility());
-        // {4}, {tap}: Put a 1/1 colorless Gnome artifact creature token onto the battlefield.
+        // {4}, {tap}: Create a 1/1 colorless Gnome artifact creature token.
         Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new CreateTokenEffect(new GnomeToken()), new ManaCostsImpl("{4}"));
         ability.addCost(new TapSourceCost());
         this.addAbility(ability);

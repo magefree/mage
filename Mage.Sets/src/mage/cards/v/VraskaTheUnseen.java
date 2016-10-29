@@ -83,7 +83,7 @@ public class VraskaTheUnseen extends CardImpl {
         ability.addTarget(new TargetNonlandPermanent());
         this.addAbility(ability);
 
-        // -7: Put three 1/1 black Assassin creature tokens onto the battlefield with "Whenever this creature deals combat damage to a player, that player loses the game."
+        // -7: Create three 1/1 black Assassin creature tokens with "Whenever this creature deals combat damage to a player, that player loses the game."
         this.addAbility(new LoyaltyAbility(new CreateTokenEffect(new AssassinToken(), 3), -7));
     }
 

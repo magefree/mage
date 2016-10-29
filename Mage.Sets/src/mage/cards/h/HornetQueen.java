@@ -55,7 +55,7 @@ public class HornetQueen extends CardImpl {
         this.addAbility(FlyingAbility.getInstance());
         // Deathtouch
         this.addAbility(DeathtouchAbility.getInstance());
-        // When Hornet Queen enters the battlefield, put four 1/1 green Insect creature tokens with flying and deathtouch onto the battlefield.
+        // When Hornet Queen enters the battlefield, create four 1/1 green Insect creature tokens with flying and deathtouch.
         this.addAbility(new EntersBattlefieldTriggeredAbility(new CreateTokenEffect(new HornetQueenInsectToken(), 4), false));
     }
 

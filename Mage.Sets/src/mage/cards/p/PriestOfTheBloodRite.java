@@ -52,7 +52,7 @@ public class PriestOfTheBloodRite extends CardImpl {
         this.power = new MageInt(2);
         this.toughness = new MageInt(2);
 
-        // When Priest of the Blood Rite enters the battlefield, put a 5/5 black Demon creature token with flying onto the battlefield.
+        // When Priest of the Blood Rite enters the battlefield, create a 5/5 black Demon creature token with flying.
         this.addAbility(new EntersBattlefieldTriggeredAbility(new CreateTokenEffect(new DemonToken())));
 
         // At the beginning of your upkeep, you lose 2 life.

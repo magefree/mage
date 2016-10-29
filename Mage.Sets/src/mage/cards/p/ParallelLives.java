@@ -51,7 +51,7 @@ public class ParallelLives extends CardImpl {
     public ParallelLives(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.ENCHANTMENT},"{3}{G}");
 
-        // If an effect would put one or more tokens onto the battlefield under your control, it puts twice that many of those tokens onto the battlefield instead.
+        // If an effect would create one or more tokens under your control, it creates twice that many of those tokens instead.
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new ParallelLivesEffect()));
     }
 
@@ -69,7 +69,7 @@ class ParallelLivesEffect extends ReplacementEffectImpl {
 
     public ParallelLivesEffect() {
         super(Duration.WhileOnBattlefield, Outcome.Copy);
-        staticText = "If an effect would put one or more tokens onto the battlefield under your control, it puts twice that many of those tokens onto the battlefield instead";
+        staticText = "If an effect would create one or more tokens under your control, it creates twice that many of those tokens instead";
     }
 
     public ParallelLivesEffect(final ParallelLivesEffect effect) {

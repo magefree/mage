@@ -61,7 +61,7 @@ public class StitchersApprentice extends CardImpl {
         this.power = new MageInt(1);
         this.toughness = new MageInt(2);
 
-        // {1}{U}, {tap}: Put a 2/2 blue Homunculus creature token onto the battlefield, then sacrifice a creature.
+        // {1}{U}, {tap}: Create a 2/2 blue Homunculus creature token, then sacrifice a creature.
         Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new CreateTokenEffect(new HomunculusToken()), new ManaCostsImpl("{1}{U}"));
         ability.addCost(new TapSourceCost());
         ability.addEffect(new StitchersApprenticeEffect());

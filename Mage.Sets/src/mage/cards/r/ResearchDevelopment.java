@@ -58,7 +58,7 @@ public class ResearchDevelopment extends SplitCard {
         // Choose up to four cards you own from outside the game and shuffle them into your library.
         getLeftHalfCard().getSpellAbility().addEffect(new ResearchEffect());
 
-        // Put a 3/1 red Elemental creature token onto the battlefield unless any opponent has you draw a card. Repeat this process two more times.
+        // Create a 3/1 red Elemental creature token unless any opponent has you draw a card. Repeat this process two more times.
         getRightHalfCard().getSpellAbility().addEffect(new DevelopmentEffect());
     }
 
@@ -153,7 +153,7 @@ class DevelopmentEffect extends OneShotEffect {
 
     public DevelopmentEffect() {
         super(Outcome.Benefit);
-        staticText = "Put a 3/1 red Elemental creature token onto the battlefield unless any opponent has you draw a card. Repeat this process two more times.";
+        staticText = "Create a 3/1 red Elemental creature token unless any opponent has you draw a card. Repeat this process two more times.";
     }
 
     DevelopmentEffect(final DevelopmentEffect effect) {

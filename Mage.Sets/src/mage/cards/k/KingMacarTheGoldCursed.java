@@ -40,8 +40,6 @@ import mage.constants.CardType;
 import mage.game.permanent.token.GoldToken;
 import mage.target.common.TargetCreaturePermanent;
 
-
-
 /**
  *
  * @author LevelX2
@@ -49,20 +47,20 @@ import mage.target.common.TargetCreaturePermanent;
 public class KingMacarTheGoldCursed extends CardImpl {
 
     public KingMacarTheGoldCursed(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{2}{B}{B}");
+        super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{2}{B}{B}");
         this.supertype.add("Legendary");
         this.subtype.add("Human");
 
         this.power = new MageInt(2);
         this.toughness = new MageInt(3);
 
-        // Inspired - Whenever King Macar, the Gold-Cursed becomes untapped, you may exile target creature. If you do, put a colorless artifact token named Gold onto the battlefield. It has "Sacrifice this artifact: Add one mana of any color to your mana pool."
+        // Inspired - Whenever King Macar, the Gold-Cursed becomes untapped, you may exile target creature. If you do, create a colorless artifact token named Gold. It has "Sacrifice this artifact: Add one mana of any color to your mana pool."
         Ability ability = new InspiredAbility(new ExileTargetEffect(), true);
         ability.addTarget(new TargetCreaturePermanent());
         Effect effect = new CreateTokenEffect(new GoldToken());
-        effect.setText("If you do, put a colorless artifact token named Gold onto the battlefield. It has \"Sacrifice this artifact: Add one mana of any color to your mana pool.\"");
-        ability.addEffect(effect);        
-        this.addAbility(ability);                
+        effect.setText("If you do, create a colorless artifact token named Gold. It has \"Sacrifice this artifact: Add one mana of any color to your mana pool.\"");
+        ability.addEffect(effect);
+        this.addAbility(ability);
     }
 
     public KingMacarTheGoldCursed(final KingMacarTheGoldCursed card) {
@@ -79,7 +77,7 @@ public class KingMacarTheGoldCursed extends CardImpl {
 //class GoldToken extends Token {
 //
 //    public GoldToken() {
-//        super("Gold", "colorless artifact token named Gold onto the battlefield. It has \"Sacrifice this artifact: Add one mana of any color to your mana pool.\"");
+//        super("Gold", "colorless artifact token named Gold. It has \"Sacrifice this artifact: Add one mana of any color to your mana pool.\"");
 //        this.setOriginalExpansionSetCode("BNG");
 //        cardType.add(CardType.ARTIFACT);
 //        subtype.add("Gold");

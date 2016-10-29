@@ -75,7 +75,7 @@ public class MarduCharm extends CardImpl {
         this.getSpellAbility().addEffect(new DamageTargetEffect(4));
         this.getSpellAbility().addTarget(new TargetCreaturePermanent());
 
-        // <strong>*</strong> Put two 1/1 white Warrior creature tokens onto the battlefield. They gain first strike until end of turn.
+        // <strong>*</strong> Create two 1/1 white Warrior creature tokens. They gain first strike until end of turn.
         Mode mode = new Mode();
         mode.getEffects().add(new MarduCharmCreateTokenEffect());
         this.getSpellAbility().addMode(mode);
@@ -102,7 +102,7 @@ class MarduCharmCreateTokenEffect extends OneShotEffect {
 
     public MarduCharmCreateTokenEffect() {
         super(Outcome.PutCreatureInPlay);
-        this.staticText = "Put two 1/1 white Warrior creature tokens onto the battlefield. They gain first strike until end of turn";
+        this.staticText = "Create two 1/1 white Warrior creature tokens. They gain first strike until end of turn";
     }
 
     public MarduCharmCreateTokenEffect(final MarduCharmCreateTokenEffect effect) {

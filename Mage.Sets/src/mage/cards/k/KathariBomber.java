@@ -59,7 +59,7 @@ public class KathariBomber extends CardImpl {
 
         // Flying
         this.addAbility(FlyingAbility.getInstance());
-        // When Kathari Bomber deals combat damage to a player, put two 1/1 red Goblin creature tokens onto the battlefield and sacrifice Kathari Bomber.
+        // When Kathari Bomber deals combat damage to a player, create two 1/1 red Goblin creature tokens and sacrifice Kathari Bomber.
         Ability ability = new DealsCombatDamageToAPlayerTriggeredAbility(new CreateTokenEffect(new GoblinToken(), 2), false);
         ability.addEffect(new SacrificeSourceEffect());
         this.addAbility(ability);

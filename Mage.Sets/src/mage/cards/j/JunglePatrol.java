@@ -53,28 +53,28 @@ import mage.target.common.TargetControlledPermanent;
  * @author fireshoes
  */
 public class JunglePatrol extends CardImpl {
-    
-    private static final FilterControlledPermanent  filter = new FilterControlledPermanent("a token named Wood");
-    
+
+    private static final FilterControlledPermanent filter = new FilterControlledPermanent("a token named Wood");
+
     static {
         filter.add(new NamePredicate("Wood"));
         filter.add(new TokenPredicate());
     }
 
     public JunglePatrol(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{3}{G}");
+        super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{3}{G}");
         this.subtype.add("Human");
         this.subtype.add("Soldier");
         this.power = new MageInt(3);
         this.toughness = new MageInt(2);
 
-        // {1}{G}, {tap}: Put a 0/1 green Wall creature token with defender named Wood onto the battlefield.
+        // {1}{G}, {tap}: Create a 0/1 green Wall creature token with defender named Wood.
         Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new CreateTokenEffect(new WoodToken()), new ManaCostsImpl("{1}{G}"));
         ability.addCost(new TapSourceCost());
         this.addAbility(ability);
-        
+
         // Sacrifice a token named Wood: Add {R} to your mana pool.
-        this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, 
+        this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD,
                 new BasicManaEffect(Mana.RedMana(1)),
                 new SacrificeTargetCost(new TargetControlledPermanent(1, 1, filter, true))));
     }

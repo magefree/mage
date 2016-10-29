@@ -63,12 +63,12 @@ public class OathOfLiliana extends CardImpl {
         // When Oath of Liliana enters the battlefield, each opponent sacrifices a creature.
         this.addAbility(new EntersBattlefieldTriggeredAbility(new SacrificeOpponentsEffect(new FilterControlledCreaturePermanent("a creature")), false));
 
-        // At the beginning of each end step, if a planeswalker entered the battlefield under your control this turn, put a 2/2 black Zombie creature token onto the battlefield.
+        // At the beginning of each end step, if a planeswalker entered the battlefield under your control this turn, create a 2/2 black Zombie creature token.
         this.addAbility(new ConditionalTriggeredAbility(new BeginningOfEndStepTriggeredAbility(
                 new CreateTokenEffect(new ZombieToken()),
                 TargetController.ANY, false), OathOfLilianaCondition.getInstance(),
                 "At the beginning of each end step, if a planeswalker entered the battlefield under your control this turn, "
-                        + "put a 2/2 black Zombie creature token onto the battlefield."), new OathOfLilianaWatcher());
+                        + "create a 2/2 black Zombie creature token."), new OathOfLilianaWatcher());
     }
 
     public OathOfLiliana(final OathOfLiliana card) {

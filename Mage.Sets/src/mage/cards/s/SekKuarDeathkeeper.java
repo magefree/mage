@@ -65,7 +65,7 @@ public class SekKuarDeathkeeper extends CardImpl {
         this.power = new MageInt(4);
         this.toughness = new MageInt(3);
 
-        // Whenever another nontoken creature you control dies, put a 3/1 black and red Graveborn creature token with haste onto the battlefield.
+        // Whenever another nontoken creature you control dies, create a 3/1 black and red Graveborn creature token with haste.
         this.addAbility(new DiesCreatureTriggeredAbility(new CreateTokenEffect(new SekKuarDeathkeeperGravebornToken()),false, filter));
     }
 

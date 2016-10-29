@@ -64,10 +64,10 @@ public class BrimazKingOfOreskos extends CardImpl {
         // Vigilance
         this.addAbility(VigilanceAbility.getInstance());
 
-        // Whenever Brimaz, King of Oreskos attacks, put a 1/1 white Cat Soldier creature token with vigilance onto the battlefield attacking.
+        // Whenever Brimaz, King of Oreskos attacks, create a 1/1 white Cat Soldier creature token with vigilance attacking.
         this.addAbility(new AttacksTriggeredAbility(new CreateTokenEffect(new CatSoldierCreatureToken(), 1, false, true), false));
 
-        // Whenever Brimaz blocks a creature, put a 1/1 white Cat Soldier creature token with vigilance onto the battlefield blocking that creature.
+        // Whenever Brimaz blocks a creature, create a 1/1 white Cat Soldier creature token with vigilance blocking that creature.
         this.addAbility(new BlocksCreatureTriggeredAbility(new BrimazKingOfOreskosEffect(), false, true));
     }
 
@@ -85,7 +85,7 @@ class BrimazKingOfOreskosEffect extends OneShotEffect {
 
     public BrimazKingOfOreskosEffect() {
         super(Outcome.Benefit);
-        this.staticText = "put a 1/1 white Cat Soldier creature token with vigilance onto the battlefield blocking that creature";
+        this.staticText = "create a 1/1 white Cat Soldier creature token with vigilance blocking that creature";
     }
 
     public BrimazKingOfOreskosEffect(final BrimazKingOfOreskosEffect effect) {
@@ -107,7 +107,7 @@ class BrimazKingOfOreskosEffect extends OneShotEffect {
             Permanent attackingCreature = game.getPermanent(getTargetPointer().getFirst(game, source));
             if (attackingCreature != null && game.getState().getCombat() != null) {
                 // Possible ruling (see Aetherplasm)
-                // The token you put onto the battlefield is blocking the attacking creature,
+                // The token you created is blocking the attacking creature,
                 // even if the block couldn't legally be declared (for example, if that creature
                 // enters the battlefield tapped, or it can't block, or the attacking creature
                 // has protection from it)

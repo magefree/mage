@@ -52,7 +52,7 @@ public class MorbidBloom extends CardImpl {
 
         
 
-        // Exile target creature card from a graveyard, then put X 1/1 green Saproling creature tokens onto the battlefield, where X is the exiled card's toughness.
+        // Exile target creature card from a graveyard, then create X 1/1 green Saproling creature tokens, where X is the exiled card's toughness.
         this.getSpellAbility().addEffect(new MorbidBloomEffect());
         this.getSpellAbility().addTarget(new TargetCardInGraveyard(new FilterCreatureCard("creature from a graveyard")));
         
@@ -72,7 +72,7 @@ class MorbidBloomEffect extends OneShotEffect {
 
     public MorbidBloomEffect() {
         super(Outcome.PutCreatureInPlay);
-        staticText = "Exile target creature card from a graveyard, then put X 1/1 green Saproling creature tokens onto the battlefield, where X is the exiled card's toughness";
+        staticText = "Exile target creature card from a graveyard, then create X 1/1 green Saproling creature tokens, where X is the exiled card's toughness";
     }
 
     public MorbidBloomEffect(final MorbidBloomEffect effect) {

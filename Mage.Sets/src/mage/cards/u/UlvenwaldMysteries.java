@@ -66,10 +66,10 @@ public class UlvenwaldMysteries extends CardImpl {
     public UlvenwaldMysteries(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.ENCHANTMENT},"{2}{G}");
 
-        // Whenever a nontoken creature you control dies, investigate. <i>(Put a colorless Clue artifact token onto the battlefield with "{2}, Sacrifice this artifact: Draw a card.")</i>
+        // Whenever a nontoken creature you control dies, investigate. <i>(Create a colorless Clue artifact token with "{2}, Sacrifice this artifact: Draw a card.")</i>
         this.addAbility(new DiesCreatureTriggeredAbility(new InvestigateEffect(), false, filter));
 
-        // Whenever you sacrifice a Clue, put a 1/1 white Human Soldier creature token onto the battlefield.
+        // Whenever you sacrifice a Clue, create a 1/1 white Human Soldier creature token.
         this.addAbility(new UlvenwaldMysteriesTriggeredAbility());
     }
 

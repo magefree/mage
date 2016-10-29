@@ -54,11 +54,11 @@ import mage.target.targetpointer.FixedTarget;
 public class BackFromTheBrink extends CardImpl {
 
     public BackFromTheBrink(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.ENCHANTMENT},"{4}{U}{U}");
+        super(ownerId, setInfo, new CardType[]{CardType.ENCHANTMENT}, "{4}{U}{U}");
 
-        // Exile a creature card from your graveyard and pay its mana cost: Put a token onto the battlefield that's a copy of that card. Activate this ability only any time you could cast a sorcery.
+        // Exile a creature card from your graveyard and pay its mana cost: Create a token that's a copy of that card. Activate this ability only any time you could cast a sorcery.
         Effect effect = new PutTokenOntoBattlefieldCopyTargetEffect();
-        effect.setText("Put a token onto the battlefield that's a copy of that card");
+        effect.setText("create a token that's a copy of that card");
         this.addAbility(new ActivateAsSorceryActivatedAbility(Zone.BATTLEFIELD, effect, new BackFromTheBrinkCost()));
 
     }

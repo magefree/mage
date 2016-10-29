@@ -57,7 +57,7 @@ public class SandsteppeOutcast extends CardImpl {
         // * Put a +1/+1 counter on Sandsteppe Outcast.
         Ability ability = new EntersBattlefieldTriggeredAbility(new AddCountersSourceEffect(CounterType.P1P1.createInstance()));
         
-        // * Put a 1/1 white Spirit creature token with flying onto the battlefield. 
+        // * Create a 1/1 white Spirit creature token with flying. 
         Mode mode = new Mode();
         mode.getEffects().add(new CreateTokenEffect(new SpiritWhiteToken("FRF")));
         ability.addMode(mode);

@@ -50,9 +50,9 @@ public class Gild extends CardImpl {
         // Exile target creature.
         this.getSpellAbility().addEffect(new ExileTargetEffect());
         this.getSpellAbility().addTarget(new TargetCreaturePermanent());
-        // Put a colorless artifact token named Gold onto the battlefield. It has "Sacrifice this artifact: Add one mana of any color to your mana pool."
+        // Create a colorless artifact token named Gold. It has "Sacrifice this artifact: Add one mana of any color to your mana pool."
         Effect effect = new CreateTokenEffect(new GoldToken());
-        effect.setText("Put a colorless artifact token named Gold onto the battlefield. It has \"Sacrifice this artifact: Add one mana of any color to your mana pool.\"");
+        effect.setText("Create a colorless artifact token named Gold. It has \"Sacrifice this artifact: Add one mana of any color to your mana pool.\"");
         this.getSpellAbility().addEffect(effect);
     }
 

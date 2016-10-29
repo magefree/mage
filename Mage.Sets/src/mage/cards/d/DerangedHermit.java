@@ -64,7 +64,7 @@ public class DerangedHermit extends CardImpl {
 
         // Echo {3}{G}{G}
         this.addAbility(new EchoAbility("{3}{G}{G}"));
-        // When Deranged Hermit enters the battlefield, put four 1/1 green Squirrel creature tokens onto the battlefield.
+        // When Deranged Hermit enters the battlefield, create four 1/1 green Squirrel creature tokens.
         this.addAbility(new EntersBattlefieldTriggeredAbility(new CreateTokenEffect(new SquirrelToken(), 4)));
         // Squirrel creatures get +1/+1.
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new BoostAllEffect(1, 1, Duration.WhileOnBattlefield, filter, false)));

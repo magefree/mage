@@ -69,7 +69,7 @@ public class HearthcageGiant extends CardImpl {
         this.power = new MageInt(5);
         this.toughness = new MageInt(5);
 
-        //When Hearthcage Giant enters the battlefield, put two 3/1 red Elemental Shaman creature tokens onto the battlefield.
+        //When Hearthcage Giant enters the battlefield, create two 3/1 red Elemental Shaman creature tokens.
         this.addAbility(new EntersBattlefieldTriggeredAbility(new CreateTokenEffect(new ElementalShamanToken("LRW"), 2), false));
 
         //Sacrifice an Elemental: Target Giant creature gets +3/+1 until end of turn.

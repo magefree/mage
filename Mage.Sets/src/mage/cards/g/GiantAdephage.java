@@ -52,7 +52,7 @@ public class GiantAdephage extends CardImpl {
         // Trample
         this.addAbility(TrampleAbility.getInstance());
 
-        // Whenever Giant Adephage deals combat damage to a player, put a token onto the battlefield that is a copy of Giant Adephage.
+        // Whenever Giant Adephage deals combat damage to a player, create a token that is a copy of Giant Adephage.
         this.addAbility(new DealsCombatDamageToAPlayerTriggeredAbility(new PutTokenOntoBattlefieldCopySourceEffect(), false));
 
     }

@@ -28,7 +28,6 @@
 package mage.cards.s;
 
 import java.util.UUID;
-
 import mage.abilities.Ability;
 import mage.abilities.LoyaltyAbility;
 import mage.abilities.common.PlanswalkerEntersWithLoyalityCountersAbility;
@@ -61,7 +60,7 @@ import mage.target.common.TargetCreatureOrPlaneswalker;
 public class SorinGrimNemesis extends CardImpl {
 
     public SorinGrimNemesis(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.PLANESWALKER},"{4}{W}{B}");
+        super(ownerId, setInfo, new CardType[]{CardType.PLANESWALKER}, "{4}{W}{B}");
         this.subtype.add("Sorin");
 
         this.addAbility(new PlanswalkerEntersWithLoyalityCountersAbility(6));
@@ -75,7 +74,7 @@ public class SorinGrimNemesis extends CardImpl {
         ability.addEffect(new GainLifeEffect(SorinXValue.getDefault()));
         this.addAbility(ability);
 
-        // -9: Put a number of 1/1 black Vampire Knight creature tokens with lifelink onto the battlefield equal to the highest life total among all players.
+        // -9: Create a number of 1/1 black Vampire Knight creature tokens with lifelink equal to the highest life total among all players.
         this.addAbility(new LoyaltyAbility(new SorinTokenEffect(), -9));
     }
 
@@ -118,8 +117,8 @@ class SorinGrimNemesisRevealEffect extends OneShotEffect {
             cards.add(card);
             player.revealCards("Sorin, Grim Nemesis", cards, game);
 
-            if (card != null &&
-                card.moveToZone(Zone.HAND, source.getSourceId(), game, false)) {
+            if (card != null
+                    && card.moveToZone(Zone.HAND, source.getSourceId(), game, false)) {
                 for (UUID playerId : game.getOpponents(source.getControllerId())) {
                     if (card.getConvertedManaCost() > 0) {
                         Player opponent = game.getPlayer(playerId);
@@ -128,7 +127,7 @@ class SorinGrimNemesisRevealEffect extends OneShotEffect {
                         }
                     }
                 }
-            return true;
+                return true;
             }
         }
         return false;
@@ -170,12 +169,13 @@ class SorinXValue implements DynamicValue {
 }
 
 class SorinTokenEffect extends OneShotEffect {
-   SorinTokenEffect() {
+
+    SorinTokenEffect() {
         super(Outcome.GainLife);
-        staticText = "Put a number of 1/1 black Vampire Knight creature tokens with lifelink onto the battlefield equal to the highest life total among all players";
+        staticText = "Create a number of 1/1 black Vampire Knight creature tokens with lifelink equal to the highest life total among all players";
     }
 
-   SorinTokenEffect(final SorinTokenEffect effect) {
+    SorinTokenEffect(final SorinTokenEffect effect) {
         super(effect);
     }
 
@@ -200,4 +200,3 @@ class SorinTokenEffect extends OneShotEffect {
         return new SorinTokenEffect(this);
     }
 }
-

@@ -44,7 +44,7 @@ public class KnightWatch extends CardImpl {
         super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{4}{W}");
 
 
-        //Put two 2/2 white Knight creature tokens with vigilance onto the battlefield.
+        //Create two 2/2 white Knight creature tokens with vigilance.
         this.getSpellAbility().addEffect(new CreateTokenEffect(new KnightToken(),2));
     }
 

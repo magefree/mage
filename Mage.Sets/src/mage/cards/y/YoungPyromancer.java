@@ -62,7 +62,7 @@ public class YoungPyromancer extends CardImpl {
         this.power = new MageInt(2);
         this.toughness = new MageInt(1);
 
-        // Whenever you cast an instant or sorcery spell, put a 1/1 red Elemental creature token onto the battlefield.
+        // Whenever you cast an instant or sorcery spell, create a 1/1 red Elemental creature token.
         this.addAbility(new SpellCastControllerTriggeredAbility(new CreateTokenEffect(new ElementalToken()), filter, false));
         
     }

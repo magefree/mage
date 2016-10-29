@@ -52,7 +52,7 @@ public class TimelyReinforcements extends CardImpl {
         super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{2}{W}");
 
 
-        // If you have less life than an opponent, you gain 6 life. If you control fewer creatures than an opponent, put three 1/1 white Soldier creature tokens onto the battlefield.
+        // If you have less life than an opponent, you gain 6 life. If you control fewer creatures than an opponent, create three 1/1 white Soldier creature tokens.
         this.getSpellAbility().addEffect(new TimelyReinforcementsEffect());
     }
 
@@ -70,7 +70,7 @@ class TimelyReinforcementsEffect extends OneShotEffect {
 
     public TimelyReinforcementsEffect() {
         super(Outcome.Benefit);
-        staticText = "If you have less life than an opponent, you gain 6 life. If you control fewer creatures than an opponent, put three 1/1 white Soldier creature tokens onto the battlefield";
+        staticText = "If you have less life than an opponent, you gain 6 life. If you control fewer creatures than an opponent, create three 1/1 white Soldier creature tokens";
     }
 
     public TimelyReinforcementsEffect(TimelyReinforcementsEffect effect) {

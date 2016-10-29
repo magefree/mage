@@ -70,7 +70,7 @@ public class TatsumasaTheDragonsFang extends CardImpl {
         // Equipped creature gets +5/+5.
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new BoostEquippedEffect(5, 5)));
 
-        // {6}, Exile Tatsumasa, the Dragon's Fang: Put a 5/5 blue Dragon Spirit creature token with flying onto the battlefield. Return Tatsumasa to the battlefield under its owner's control when that token dies.
+        // {6}, Exile Tatsumasa, the Dragon's Fang: Create a 5/5 blue Dragon Spirit creature token with flying. Return Tatsumasa to the battlefield under its owner's control when that token dies.
         Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new TatsumaTheDragonsFangEffect(), new GenericManaCost(6));
         ability.addCost(new ExileSourceCost(true));
         this.addAbility(ability);
@@ -93,7 +93,7 @@ class TatsumaTheDragonsFangEffect extends OneShotEffect {
 
     public TatsumaTheDragonsFangEffect() {
         super(Outcome.PutCreatureInPlay);
-        this.staticText = "Put a 5/5 blue Dragon Spirit creature token with flying onto the battlefield. Return Tatsumasa to the battlefield under its owner's control when that token dies";
+        this.staticText = "Create a 5/5 blue Dragon Spirit creature token with flying. Return Tatsumasa to the battlefield under its owner's control when that token dies";
     }
 
     public TatsumaTheDragonsFangEffect(final TatsumaTheDragonsFangEffect effect) {

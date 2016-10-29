@@ -56,7 +56,7 @@ public class CultOfTheWaxingMoon extends CardImpl {
         this.power = new MageInt(5);
         this.toughness = new MageInt(4);
 
-        // Whenever a permanent you control transforms into a non-Human creature, put a 2/2 green Wolf creature token onto the battlefield.
+        // Whenever a permanent you control transforms into a non-Human creature, create a 2/2 green Wolf creature token.
         this.addAbility(new CultOfTheWaxingMoonAbility());
     }
 

@@ -54,7 +54,7 @@ public class Batterskull extends CardImpl {
         super(ownerId,setInfo,new CardType[]{CardType.ARTIFACT},"{5}");
         this.subtype.add("Equipment");
 
-        // Living weapon (When this Equipment enters the battlefield, put a 0/0 black Germ creature token onto the battlefield, then attach this to it.)
+        // Living weapon (When this Equipment enters the battlefield, create a 0/0 black Germ creature token, then attach this to it.)
         this.addAbility(new LivingWeaponAbility());
         // Equipped creature gets +4/+4 and has vigilance and lifelink.
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new BoostEquippedEffect(4, 4)));

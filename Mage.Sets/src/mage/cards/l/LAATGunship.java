@@ -54,7 +54,7 @@ public class LAATGunship extends CardImpl {
         this.power = new MageInt(3);
         this.toughness = new MageInt(2);
 
-        // When LAAT Gunship attacks, put a 1/1 white Trooper creature token on to battlefield tapped and attacking.
+        // When LAAT Gunship attacks, create a 1/1 white Trooper creature token on to battlefield tapped and attacking.
         this.addAbility(new AttacksTriggeredAbility(new CreateTokenEffect(new TrooperToken(), 1, true, true), false));
 
         // {W}: LAAT Gunship attacks gains spaceflight until the end of turn.

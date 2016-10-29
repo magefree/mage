@@ -51,7 +51,7 @@ public class CloneLegion extends CardImpl {
     public CloneLegion(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{7}{U}{U}");
 
-        // For each creature target player controls, put a token onto the the battlefield that's a copy of that creature.
+        // For each creature target player controls, create a token that's a copy of that creature.
         this.getSpellAbility().addEffect(new CloneLegionEffect());
         this.getSpellAbility().addTarget(new TargetPlayer());
 
@@ -71,7 +71,7 @@ class CloneLegionEffect extends OneShotEffect {
 
     public CloneLegionEffect() {
         super(Outcome.Benefit);
-        this.staticText = "For each creature target player controls, put a token onto the the battlefield that's a copy of that creature";
+        this.staticText = "For each creature target player controls, create a token that's a copy of that creature";
     }
 
     public CloneLegionEffect(final CloneLegionEffect effect) {

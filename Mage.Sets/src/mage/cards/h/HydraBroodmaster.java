@@ -57,7 +57,7 @@ public class HydraBroodmaster extends CardImpl {
 
         // {X}{X}{G}: Monstrosity X
         this.addAbility(new MonstrosityAbility("{X}{X}{G}", Integer.MAX_VALUE));
-        // When Hydra Broodmaster becomes monstrous, put X X/X green Hydra creature tokens onto the battlefield.
+        // When Hydra Broodmaster becomes monstrous, create X X/X green Hydra creature tokens.
         this.addAbility(new BecomesMonstrousSourceTriggeredAbility(new HydraBroodmasterEffect()));        
     }
 
@@ -75,7 +75,7 @@ class HydraBroodmasterEffect extends OneShotEffect {
     
     public HydraBroodmasterEffect() {
         super(Outcome.PutCreatureInPlay);
-        this.staticText = "put X X/X green Hydra creature tokens onto the battlefield";
+        this.staticText = "create X X/X green Hydra creature tokens";
     }
     
     public HydraBroodmasterEffect(final HydraBroodmasterEffect effect) {

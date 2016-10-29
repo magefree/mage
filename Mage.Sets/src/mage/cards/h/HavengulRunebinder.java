@@ -67,7 +67,7 @@ public class HavengulRunebinder extends CardImpl {
         this.power = new MageInt(2);
         this.toughness = new MageInt(2);
 
-        // {2}{U}, {tap}, Exile a creature card from your graveyard: Put a 2/2 black Zombie creature token onto the battlefield,
+        // {2}{U}, {tap}, Exile a creature card from your graveyard: Create a 2/2 black Zombie creature token,
         // then put a +1/+1 counter on each Zombie creature you control.
         SimpleActivatedAbility ability = new SimpleActivatedAbility(Zone.BATTLEFIELD,
                 new CreateTokenEffect(new ZombieToken()),

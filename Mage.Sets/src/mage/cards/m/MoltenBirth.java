@@ -53,7 +53,7 @@ public class MoltenBirth extends CardImpl {
         super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{1}{R}{R}");
 
 
-        // Put two 1/1 red Elemental creature tokens onto the battlefield. Then flip a coin. If you win the flip, return Molten Birth to its owner's hand.
+        // Create two 1/1 red Elemental creature tokens. Then flip a coin. If you win the flip, return Molten Birth to its owner's hand.
         this.getSpellAbility().addEffect(new MoltenBirthEffect());
         
     }
@@ -72,7 +72,7 @@ class MoltenBirthEffect extends OneShotEffect {
 
     public MoltenBirthEffect() {
         super(Outcome.PutCreatureInPlay);
-        staticText = "Put two 1/1 red Elemental creature tokens onto the battlefield. Then flip a coin. If you win the flip, return {this} to its owner's hand";
+        staticText = "Create two 1/1 red Elemental creature tokens. Then flip a coin. If you win the flip, return {this} to its owner's hand";
     }
 
     public MoltenBirthEffect(final MoltenBirthEffect effect) {

@@ -57,7 +57,7 @@ public class SpoilsOfBlood extends CardImpl {
         super(ownerId,setInfo,new CardType[]{CardType.INSTANT},"{B}");
 
 
-        // Put an X/X black Horror creature token onto the battlefield, where X is the number of creatures that died this turn.
+        // Create an X/X black Horror creature token, where X is the number of creatures that died this turn.
         this.getSpellAbility().addEffect(new SpoilsOfBloodEffect());
         this.getSpellAbility().addWatcher(new CreaturesDiedThisTurnWatcher());
     }
@@ -76,7 +76,7 @@ class SpoilsOfBloodEffect extends OneShotEffect {
 
     public SpoilsOfBloodEffect() {
         super(Outcome.DestroyPermanent);
-        staticText = "Put an X/X black Horror creature token onto the battlefield, where X is the number of creatures that died this turn";
+        staticText = "Create an X/X black Horror creature token, where X is the number of creatures that died this turn";
     }
 
     public SpoilsOfBloodEffect(SpoilsOfBloodEffect ability) {

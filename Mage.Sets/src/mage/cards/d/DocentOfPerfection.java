@@ -80,7 +80,7 @@ public class DocentOfPerfection extends CardImpl {
         // Flying
         this.addAbility(FlyingAbility.getInstance());
 
-        // Whenever you cast an instant or sorcery spell, put a 1/1 blue Human Wizard creature token onto the battlefield.
+        // Whenever you cast an instant or sorcery spell, create a 1/1 blue Human Wizard creature token.
         // Then if you control three or more Wizards, transform Docent of Perfection.
         this.addAbility(new TransformAbility());
         Effect effect = new DocentOfPerfectionEffect();

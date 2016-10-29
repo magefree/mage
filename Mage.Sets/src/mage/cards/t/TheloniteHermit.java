@@ -70,7 +70,7 @@ public class TheloniteHermit extends CardImpl {
         // Morph {3}{G}{G}
         this.addAbility(new MorphAbility(this, new ManaCostsImpl("{3}{G}{G}")));
 
-        // When Thelonite Hermit is turned face up, put four 1/1 green Saproling creature tokens onto the battlefield.
+        // When Thelonite Hermit is turned face up, create four 1/1 green Saproling creature tokens.
         this.addAbility(new TurnedFaceUpSourceTriggeredAbility(new CreateTokenEffect(new SaprolingToken(), 4)));
     }
 

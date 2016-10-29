@@ -53,7 +53,7 @@ public class CoralBarrier extends CardImpl {
 
         // Defender
         this.addAbility(DefenderAbility.getInstance());
-        // When Coral Barrier enters the battlefield, put a 1/1 blue Squid creature token with islandwalk onto the battlefield.
+        // When Coral Barrier enters the battlefield, create a 1/1 blue Squid creature token with islandwalk.
         this.addAbility(new EntersBattlefieldTriggeredAbility(new CreateTokenEffect(new CoralBarrierSquidToken()), false));
         
     }

@@ -53,7 +53,7 @@ public class AllianceOfArms extends CardImpl {
         super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{W}");
 
 
-        // Join forces - Starting with you, each player may pay any amount of mana. Each player puts X 1/1 white Soldier creature tokens onto the battlefield, where X is the total amount of mana paid this way.
+        // Join forces - Starting with you, each player may pay any amount of mana. Each player creates X 1/1 white Soldier creature tokens, where X is the total amount of mana paid this way.
         this.getSpellAbility().addEffect(new AllianceOfArmsEffect());
     }
 
@@ -71,7 +71,7 @@ class AllianceOfArmsEffect extends OneShotEffect {
 
     public AllianceOfArmsEffect() {
         super(Outcome.Detriment);
-        this.staticText = "<i>Join forces</i> - Starting with you, each player may pay any amount of mana. Each player puts X 1/1 white Soldier creature tokens onto the battlefield, where X is the total amount of mana paid this way";
+        this.staticText = "<i>Join forces</i> - Starting with you, each player may pay any amount of mana. Each player creates X 1/1 white Soldier creature tokens, where X is the total amount of mana paid this way";
     }
 
     public AllianceOfArmsEffect(final AllianceOfArmsEffect effect) {

@@ -70,7 +70,7 @@ public class RakdosGuildmage extends CardImpl {
         ability.addCost(new DiscardCardCost());
         this.addAbility(ability);
 
-        // {3}{R}: Put a 2/1 red Goblin creature token with haste onto the battlefield. Exile it at the beginning of the next end step.
+        // {3}{R}: Create a 2/1 red Goblin creature token with haste. Exile it at the beginning of the next end step.
         SimpleActivatedAbility ability2 = new SimpleActivatedAbility(Zone.BATTLEFIELD, new RakdosGuildmageEffect(), new ManaCostsImpl("{3}{R}"));
         this.addAbility(ability2);
     }
@@ -89,7 +89,7 @@ class RakdosGuildmageEffect extends OneShotEffect {
 
     public RakdosGuildmageEffect() {
         super(Outcome.PutCreatureInPlay);
-        this.staticText = "Put a 2/1 red Goblin creature token with haste onto the battlefield. Exile it at the beginning of the next end step";
+        this.staticText = "Create a 2/1 red Goblin creature token with haste. Exile it at the beginning of the next end step";
     }
 
     public RakdosGuildmageEffect(final RakdosGuildmageEffect effect) {

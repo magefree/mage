@@ -49,7 +49,7 @@ public class EmptyThePits extends CardImpl {
         // Delve
         this.addAbility(new DelveAbility());
         
-        // Put X 2/2 black Zombie creature tokens onto the battlefield tapped.
+        // create X 2/2 black Zombie creature tokens tapped.
         this.getSpellAbility().addEffect(new CreateTokenEffect(new ZombieToken(), new ManacostVariableValue(), true, false));
     }
 

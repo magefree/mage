@@ -52,7 +52,7 @@ public class WolfcallersHowl extends CardImpl {
         super(ownerId,setInfo,new CardType[]{CardType.ENCHANTMENT},"{3}{G}");
 
 
-        // At the beginning of your upkeep, put X 2/2 green Wolf creature tokens onto the battlefield, where X is the number of your opponents with four or more cards in hand.
+        // At the beginning of your upkeep, create X 2/2 green Wolf creature tokens, where X is the number of your opponents with four or more cards in hand.
         this.addAbility(new BeginningOfUpkeepTriggeredAbility(Zone.BATTLEFIELD, new WolfcallersHowlEffect(), TargetController.YOU, false));
     }
 
@@ -70,7 +70,7 @@ class WolfcallersHowlEffect extends OneShotEffect {
 
     public WolfcallersHowlEffect() {
         super(Outcome.PutCreatureInPlay);
-        this.staticText = "put X 2/2 green Wolf creature tokens onto the battlefield, where X is the number of your opponents with four or more cards in hand";
+        this.staticText = "create X 2/2 green Wolf creature tokens, where X is the number of your opponents with four or more cards in hand";
     }
 
     public WolfcallersHowlEffect(final WolfcallersHowlEffect effect) {

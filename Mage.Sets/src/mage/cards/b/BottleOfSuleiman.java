@@ -54,7 +54,7 @@ public class BottleOfSuleiman extends CardImpl {
     public BottleOfSuleiman(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.ARTIFACT},"{4}");
 
-        // {1}, Sacrifice Bottle of Suleiman: Flip a coin. If you lose the flip, Bottle of Suleiman deals 5 damage to you. If you win the flip, put a 5/5 colorless Djinn artifact creature token with flying onto the battlefield.
+        // {1}, Sacrifice Bottle of Suleiman: Flip a coin. If you lose the flip, Bottle of Suleiman deals 5 damage to you. If you win the flip, create a 5/5 colorless Djinn artifact creature token with flying.
         Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new BottleOfSuleimanEffect(), new GenericManaCost(1));
         ability.addCost(new SacrificeSourceCost());
         this.addAbility(ability);
@@ -74,7 +74,7 @@ class BottleOfSuleimanEffect extends OneShotEffect {
 
     public BottleOfSuleimanEffect() {
         super(Outcome.PutCreatureInPlay);
-        staticText = "Flip a coin. If you lose the flip, {this} deals 5 damage to you. If you win the flip, put a 5/5 colorless Djinn artifact creature token with flying onto the battlefield.";
+        staticText = "Flip a coin. If you lose the flip, {this} deals 5 damage to you. If you win the flip, create a 5/5 colorless Djinn artifact creature token with flying.";
     }
 
     public BottleOfSuleimanEffect(final BottleOfSuleimanEffect effect) {

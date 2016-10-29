@@ -56,7 +56,7 @@ public class HourOfNeed extends CardImpl {
 
         // Strive — Hour of Need costs {1}{U} more to cast for each target beyond the first.
         this.addAbility(new StriveAbility("{1}{U}"));
-        // Exile any number of target creatures. For each creature exiled this way, its controller puts a 4/4 blue Sphinx creature token with flying onto the battlefield.
+        // Exile any number of target creatures. For each creature exiled this way, its controller creates a 4/4 blue Sphinx creature token with flying.
         this.getSpellAbility().addEffect(new HourOfNeedExileEffect());
         this.getSpellAbility().addTarget(new TargetCreaturePermanent(0, Integer.MAX_VALUE));
     }
@@ -75,7 +75,7 @@ class HourOfNeedExileEffect extends OneShotEffect {
 
     public HourOfNeedExileEffect() {
         super(Outcome.Benefit);
-        this.staticText = "Exile any number of target creatures. For each creature exiled this way, its controller puts a 4/4 blue Sphinx creature token with flying onto the battlefield";
+        this.staticText = "Exile any number of target creatures. For each creature exiled this way, its controller creates a 4/4 blue Sphinx creature token with flying";
     }
 
     public HourOfNeedExileEffect(final HourOfNeedExileEffect effect) {

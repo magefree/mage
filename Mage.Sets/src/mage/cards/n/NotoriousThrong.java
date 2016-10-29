@@ -57,7 +57,7 @@ public class NotoriousThrong extends CardImpl {
 
         // Prowl {5}{U}
         this.addAbility(new ProwlAbility(this, "{5}{U}"));
-        // Put X 1/1 black Faerie Rogue creature tokens with flying onto the battlefield, where X is the damage dealt to your opponents this turn.
+        // create X 1/1 black Faerie Rogue creature tokens with flying, where X is the damage dealt to your opponents this turn.
         this.getSpellAbility().addEffect(new NotoriousThrongEffect());
         this.getSpellAbility().addWatcher(new AmountOfDamageAPlayerReceivedThisTurnWatcher());
         // If Notorious Throng's prowl cost was paid, take an extra turn after this one.
@@ -80,7 +80,7 @@ class NotoriousThrongEffect extends OneShotEffect {
 
     public NotoriousThrongEffect() {
         super(Outcome.PutCreatureInPlay);
-        staticText = "Put X 1/1 black Faerie Rogue creature tokens with flying onto the battlefield, where X is the damage dealt to your opponents this turn";
+        staticText = "create X 1/1 black Faerie Rogue creature tokens with flying, where X is the damage dealt to your opponents this turn";
     }
 
     public NotoriousThrongEffect(NotoriousThrongEffect effect) {

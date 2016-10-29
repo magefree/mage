@@ -54,14 +54,16 @@ public class TolsimirWolfblood extends CardImpl {
 
     private static final FilterCreaturePermanent filterGreen = new FilterCreaturePermanent("green creatures you control");
     private static final FilterCreaturePermanent filterWhite = new FilterCreaturePermanent("white creatures you control");
+
     static {
         filterGreen.add(new ColorPredicate(ObjectColor.GREEN));
         filterGreen.add(new ControllerPredicate(TargetController.YOU));
         filterWhite.add(new ColorPredicate(ObjectColor.WHITE));
         filterWhite.add(new ControllerPredicate(TargetController.YOU));
     }
+
     public TolsimirWolfblood(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{4}{G}{W}");
+        super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{4}{G}{W}");
         this.supertype.add("Legendary");
         this.subtype.add("Elf");
         this.subtype.add("Warrior");
@@ -73,8 +75,8 @@ public class TolsimirWolfblood extends CardImpl {
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new BoostAllEffect(1, 1, Duration.WhileOnBattlefield, filterGreen, true)));
         // Other white creatures you control get +1/+1.
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new BoostAllEffect(1, 1, Duration.WhileOnBattlefield, filterWhite, true)));
-        // {tap}: Put a legendary 2/2 green and white Wolf creature token named Voja onto the battlefield.
-        this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new CreateTokenEffect(new VojaToken()),new TapSourceCost()));
+        // {tap}: Create a legendary 2/2 green and white Wolf creature token named Voja.
+        this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new CreateTokenEffect(new VojaToken()), new TapSourceCost()));
     }
 
     public TolsimirWolfblood(final TolsimirWolfblood card) {
@@ -87,8 +89,9 @@ public class TolsimirWolfblood extends CardImpl {
     }
 }
 
-class VojaToken extends Token{
-    public VojaToken(){
+class VojaToken extends Token {
+
+    public VojaToken() {
         super("Voja", "legendary 2/2 green and white Wolf creature token named Voja");
         this.cardType.add(CardType.CREATURE);
         this.supertype.add("Legendary");

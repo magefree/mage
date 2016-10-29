@@ -47,7 +47,7 @@ public class RevelOfTheFallenGod extends CardImpl {
         super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{3}{R}{R}{G}{G}");
 
 
-        // Put four 2/2 red and green Satyr creature tokens with haste onto the battlefield.
+        // Create four 2/2 red and green Satyr creature tokens with haste.
         this.getSpellAbility().addEffect(new CreateTokenEffect(new RevelOfTheFallenGodSatyrToken(), 4));
 
     }

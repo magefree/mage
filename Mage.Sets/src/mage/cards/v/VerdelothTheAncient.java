@@ -80,10 +80,10 @@ public class VerdelothTheAncient extends CardImpl {
                 
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new BoostAllEffect(1,1, Duration.WhileOnBattlefield, filter, false)));
         
-        // When Verdeloth the Ancient enters the battlefield, if it was kicked, put X 1/1 green Saproling creature tokens onto the battlefield.
+        // When Verdeloth the Ancient enters the battlefield, if it was kicked, create X 1/1 green Saproling creature tokens.
         EntersBattlefieldTriggeredAbility ability = new EntersBattlefieldTriggeredAbility(new CreateTokenEffect(new SaprolingToken(), new GetKickerXValue()), false);
         this.addAbility(new ConditionalTriggeredAbility(ability, KickedCondition.getInstance(), 
-                "When {this} enters the battlefield, if it was kicked, put X 1/1 green Saproling creature tokens onto the battlefield."));
+                "When {this} enters the battlefield, if it was kicked, create X 1/1 green Saproling creature tokens."));
         
     }
 

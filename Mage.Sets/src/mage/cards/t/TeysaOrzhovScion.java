@@ -79,7 +79,7 @@ public class TeysaOrzhovScion extends CardImpl {
         ability.addTarget(new TargetCreaturePermanent());
         this.addAbility(ability);
         
-        // Whenever another black creature you control dies, put a 1/1 white Spirit creature token with flying onto the battlefield.
+        // Whenever another black creature you control dies, create a 1/1 white Spirit creature token with flying.
         this.addAbility(new DiesCreatureTriggeredAbility(new CreateTokenEffect(new SpiritWhiteToken("GPT")), false, filterBlack));
     }
 

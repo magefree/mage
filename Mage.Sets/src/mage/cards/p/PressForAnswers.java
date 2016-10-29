@@ -51,9 +51,9 @@ public class PressForAnswers extends CardImpl {
         this.getSpellAbility().addEffect(new TapTargetEffect());
         this.getSpellAbility().addEffect(new DontUntapInControllersNextUntapStepTargetEffect("It"));
 
-        // Investigate. (Put a colorless Clue artifact token onto the battlefield with "2, Sacrifice this artifact: Draw a card.")
+        // Investigate. (Create a colorless Clue artifact token with "2, Sacrifice this artifact: Draw a card.")
         Effect effect = new InvestigateEffect();
-        effect.setText("<br>Investigate. (Put a colorless Clue artifact token onto the battlefield with \"2, Sacrifice this artifact: Draw a card.\")");
+        effect.setText("<br>Investigate. (Create a colorless Clue artifact token with \"2, Sacrifice this artifact: Draw a card.\")");
         this.getSpellAbility().addEffect(effect);
 
     }

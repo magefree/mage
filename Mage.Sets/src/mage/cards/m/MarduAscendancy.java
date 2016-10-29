@@ -63,7 +63,7 @@ public class MarduAscendancy extends CardImpl {
     public MarduAscendancy(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.ENCHANTMENT},"{R}{W}{B}");
 
-        // Whenever a nontoken creature you control attacks, put a 1/1 red Goblin creature token onto the battlefield tapped and attacking.
+        // Whenever a nontoken creature you control attacks, create a 1/1 red Goblin creature token tapped and attacking.
         this.addAbility(new AttacksCreatureYouControlTriggeredAbility(new CreateTokenEffect(new GoblinToken(), 1, true, true), false, attackFilter));
 
         // Sacrifice Mardu Ascendancy: Creatures you control get +0/+3 until end of turn.

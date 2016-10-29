@@ -60,7 +60,7 @@ import mage.target.common.TargetLandPermanent;
 public class NissaSageAnimist extends CardImpl {
 
     public NissaSageAnimist(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.PLANESWALKER},"");
+        super(ownerId, setInfo, new CardType[]{CardType.PLANESWALKER}, "");
         this.subtype.add("Nissa");
         this.color.setGreen(true);
 
@@ -71,7 +71,7 @@ public class NissaSageAnimist extends CardImpl {
         // +1: Reveal the top card of your library. If it's a land card, put it onto the battlefield. Otherwise, put it into your hand.
         this.addAbility(new LoyaltyAbility(new NissaSageAnimistPlusOneEffect(), 1));
 
-        // -2: Put a legendary 4/4 green Elemental creature token named Ashaya, the Awoken World onto the battlefield.
+        // -2: Create a legendary 4/4 green Elemental creature token named Ashaya, the Awoken World.
         this.addAbility(new LoyaltyAbility(new CreateTokenEffect(new NissaSageAnimistToken()), -2));
 
         // -7: Untap up to six target lands. They become 6/6 Elemental creatures. They're still lands.

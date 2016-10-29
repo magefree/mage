@@ -49,7 +49,7 @@ public class AssembleTheLegion extends CardImpl {
     public AssembleTheLegion(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.ENCHANTMENT},"{3}{R}{W}");
 
-        // At the beginning of your upkeep, put a muster counter on Assemble the Legion. Then put a 1/1 red and white Soldier creature token with haste onto the battlefield for each muster counter on Assemble the Legion.
+        // At the beginning of your upkeep, put a muster counter on Assemble the Legion. Then create a 1/1 red and white Soldier creature token with haste for each muster counter on Assemble the Legion.
         Ability ability = new BeginningOfUpkeepTriggeredAbility(new AddCountersSourceEffect(CounterType.MUSTER.createInstance()), TargetController.YOU, false);
         ability.addEffect(new CreateTokenEffect(new SoldierTokenWithHaste(), new CountersSourceCount(CounterType.MUSTER)));
         this.addAbility(ability);

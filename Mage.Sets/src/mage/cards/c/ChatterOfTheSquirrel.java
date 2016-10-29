@@ -47,7 +47,7 @@ public class ChatterOfTheSquirrel extends CardImpl {
         super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{G}");
 
 
-        // Put a 1/1 green Squirrel creature token onto the battlefield.
+        // Create a 1/1 green Squirrel creature token.
         this.getSpellAbility().addEffect(new CreateTokenEffect(new SquirrelToken()));
         
         // Flashback {1}{G}

@@ -47,7 +47,7 @@ public class TriplicateSpirits extends CardImpl {
 
         // Convoke
         this.addAbility(new ConvokeAbility());
-        // Put three 1/1 white Spirit creature tokens with flying onto the battlefield.
+        // Create three 1/1 white Spirit creature tokens with flying.
         this.getSpellAbility().addEffect(new CreateTokenEffect(new SpiritWhiteToken("M15"), 3));
         
     }

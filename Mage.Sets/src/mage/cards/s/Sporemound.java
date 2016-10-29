@@ -51,7 +51,7 @@ public class Sporemound extends CardImpl {
         this.power = new MageInt(3);
         this.toughness = new MageInt(3);
 
-        // Whenever a land enters the battlefield under your control, put a 1/1 green Saproling creature token onto the battlefield.
+        // Whenever a land enters the battlefield under your control, create a 1/1 green Saproling creature token.
         Effect effect = new CreateTokenEffect(new SaprolingToken());
         this.addAbility(new EntersBattlefieldControlledTriggeredAbility(effect, new FilterLandPermanent("a land")));
     }

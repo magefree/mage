@@ -50,7 +50,7 @@ public class SnakeBasket extends CardImpl {
     public SnakeBasket(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.ARTIFACT},"{4}");
 
-        // {X}, Sacrifice Snake Basket: Put X 1/1 green Snake creature tokens onto the battlefield. Activate this ability only any time you could cast a sorcery.
+        // {X}, Sacrifice Snake Basket: create X 1/1 green Snake creature tokens. Activate this ability only any time you could cast a sorcery.
         Effect effect = new CreateTokenEffect(new SnakeToken(), new ManacostVariableValue());
         Ability ability = new ActivateAsSorceryActivatedAbility(Zone.BATTLEFIELD, effect, new ManaCostsImpl("{X}"));
         ability.addCost(new SacrificeSourceCost());

@@ -68,7 +68,7 @@ public class MinionReflector extends CardImpl {
     public MinionReflector(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.ARTIFACT},"{5}");
 
-        // Whenever a nontoken creature enters the battlefield under your control, you may pay {2}. If you do, put a token that's a copy of that creature onto the battlefield. That token has haste and "At the beginning of the end step, sacrifice this permanent."
+        // Whenever a nontoken creature enters the battlefield under your control, you may pay {2}. If you do, create a token that's a copy of that creature. That token has haste and "At the beginning of the end step, sacrifice this permanent."
         Ability ability = new MinionReflectorTriggeredAbility();
         ability.addCost(new ManaCostsImpl("{2}"));
         this.addAbility(ability);
@@ -87,7 +87,7 @@ public class MinionReflector extends CardImpl {
 class MinionReflectorTriggeredAbility extends EntersBattlefieldAllTriggeredAbility {
 
     public MinionReflectorTriggeredAbility() {
-        super(new MinionReflectorEffect(), new FilterControlledCreaturePermanent(), "Whenever a nontoken creature enters the battlefield under your control, you may pay {2}. If you do, put a token that's a copy of that creature onto the battlefield. That token has haste and \"At the beginning of the end step, sacrifice this permanent");
+        super(new MinionReflectorEffect(), new FilterControlledCreaturePermanent(), "Whenever a nontoken creature enters the battlefield under your control, you may pay {2}. If you do, create a token that's a copy of that creature. That token has haste and \"At the beginning of the end step, sacrifice this permanent");
         filter.add(Predicates.not(new TokenPredicate()));
     }
 
@@ -121,7 +121,7 @@ class MinionReflectorEffect extends OneShotEffect {
 
     public MinionReflectorEffect() {
         super(Outcome.PutCreatureInPlay);
-        this.staticText = "put a token that's a copy of that creature onto the battlefield. That token has haste and \"At the beginning of the end step, sacrifice this permanent.";
+        this.staticText = "create a token that's a copy of that creature. That token has haste and \"At the beginning of the end step, sacrifice this permanent.";
     }
 
     public MinionReflectorEffect(final MinionReflectorEffect effect) {

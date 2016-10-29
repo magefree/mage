@@ -62,7 +62,7 @@ public class ThopterEngineer extends CardImpl {
         this.power = new MageInt(1);
         this.toughness = new MageInt(3);
 
-        // When Thopter Engineer enters the battlefield, put a 1/1 colorless Thopter artifact creature token with flying onto the battlefield.
+        // When Thopter Engineer enters the battlefield, create a 1/1 colorless Thopter artifact creature token with flying.
         this.addAbility(new EntersBattlefieldTriggeredAbility(new CreateTokenEffect(new ThopterColorlessToken(), 1)));
 
         // Artifact creatures you control have haste.

@@ -52,7 +52,7 @@ public class HellionEruption extends CardImpl {
         super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{5}{R}");
 
 
-        // Sacrifice all creatures you control, then put that many 4/4 red Hellion creature tokens onto the battlefield.
+        // Sacrifice all creatures you control, then create that many 4/4 red Hellion creature tokens.
         this.getSpellAbility().addEffect(new HellionEruptionEffect());
     }
 
@@ -70,7 +70,7 @@ class HellionEruptionEffect extends OneShotEffect {
 
     public HellionEruptionEffect() {
         super(Outcome.PutCreatureInPlay);
-        this.staticText = "Sacrifice all creatures you control, then put that many 4/4 red Hellion creature tokens onto the battlefield";
+        this.staticText = "Sacrifice all creatures you control, then create that many 4/4 red Hellion creature tokens";
     }
 
     public HellionEruptionEffect(final HellionEruptionEffect effect) {

@@ -62,7 +62,7 @@ import mage.target.targetpointer.FixedTarget;
 public class AkroanHorse extends CardImpl {
 
     public AkroanHorse(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.ARTIFACT,CardType.CREATURE},"{4}");
+        super(ownerId, setInfo, new CardType[]{CardType.ARTIFACT, CardType.CREATURE}, "{4}");
         this.subtype.add("Horse");
         this.power = new MageInt(0);
         this.toughness = new MageInt(4);
@@ -71,7 +71,7 @@ public class AkroanHorse extends CardImpl {
         this.addAbility(DefenderAbility.getInstance());
         // When Akroan Horse enters the battlefield, an opponent gains control of it.
         this.addAbility(new EntersBattlefieldTriggeredAbility(new AkroanHorseChangeControlEffect(), false));
-        // At the beginning of your upkeep, each opponent puts a 1/1 white Soldier creature token onto the battlefield.
+        // At the beginning of your upkeep, each opponent create a 1/1 white Soldier creature token.
         this.addAbility(new BeginningOfUpkeepTriggeredAbility(Zone.BATTLEFIELD, new AkroanHorseCreateTokenEffect(), TargetController.YOU, false));
     }
 
@@ -159,7 +159,7 @@ class AkroanHorseCreateTokenEffect extends OneShotEffect {
 
     public AkroanHorseCreateTokenEffect() {
         super(Outcome.Detriment);
-        this.staticText = "each opponent puts a 1/1 white Soldier creature token onto the battlefield";
+        this.staticText = "each opponent creates a 1/1 white Soldier creature token";
     }
 
     public AkroanHorseCreateTokenEffect(final AkroanHorseCreateTokenEffect effect) {
@@ -173,7 +173,7 @@ class AkroanHorseCreateTokenEffect extends OneShotEffect {
 
     @Override
     public boolean apply(Game game, Ability source) {
-        for (UUID opponentId: game.getOpponents(source.getControllerId())) {
+        for (UUID opponentId : game.getOpponents(source.getControllerId())) {
             Token token = new SoldierToken();
             token.putOntoBattlefield(1, game, source.getSourceId(), opponentId);
         }

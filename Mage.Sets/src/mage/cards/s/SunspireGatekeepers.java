@@ -62,11 +62,11 @@ public class SunspireGatekeepers extends CardImpl {
         this.power = new MageInt(2);
         this.toughness = new MageInt(4);
 
-        // When Sunspire Gatekeepers enter the battlefield, if you control two or more Gates, put a 2/2 white Knight creature token with vigilance onto the battlefield.
+        // When Sunspire Gatekeepers enter the battlefield, if you control two or more Gates, create a 2/2 white Knight creature token with vigilance.
         this.addAbility(new ConditionalTriggeredAbility(
                 new EntersBattlefieldTriggeredAbility(new CreateTokenEffect(new KnightToken())),
                 new PermanentsOnTheBattlefieldCondition(filter, PermanentsOnTheBattlefieldCondition.CountType.MORE_THAN, 1),
-                "When {this} enter the battlefield, if you control two or more Gates, put a 2/2 white Knight creature token with vigilance onto the battlefield."));
+                "When {this} enter the battlefield, if you control two or more Gates, create a 2/2 white Knight creature token with vigilance."));
     }
 
     public SunspireGatekeepers (final SunspireGatekeepers card) {

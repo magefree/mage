@@ -53,7 +53,7 @@ public class GoblinWarrens extends CardImpl {
         super(ownerId,setInfo,new CardType[]{CardType.ENCHANTMENT},"{2}{R}");
 
 
-        // {2}{R}, Sacrifice two Goblins: Put three 1/1 red Goblin creature tokens onto the battlefield.
+        // {2}{R}, Sacrifice two Goblins: Create three 1/1 red Goblin creature tokens.
         Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new CreateTokenEffect(new GoblinToken(), 3), new ManaCostsImpl("{2}{R}"));
         ability.addCost(new SacrificeTargetCost(new TargetControlledCreaturePermanent(2, 2, filter, true)));
         this.addAbility(ability);

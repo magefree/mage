@@ -47,7 +47,7 @@ public class ScatterTheSeeds extends CardImpl {
 
         // Convoke
         this.addAbility(new ConvokeAbility());
-        // Put three 1/1 green Saproling creature tokens onto the battlefield.
+        // Create three 1/1 green Saproling creature tokens.
         this.getSpellAbility().addEffect(new CreateTokenEffect(new SaprolingToken(), 3));
     }
 

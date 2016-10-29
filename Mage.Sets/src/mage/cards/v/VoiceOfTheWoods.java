@@ -65,7 +65,7 @@ public class VoiceOfTheWoods extends CardImpl {
         this.power = new MageInt(2);
         this.toughness = new MageInt(2);
 
-        // Tap five untapped Elves you control: Put a 7/7 green Elemental creature token with trample onto the battlefield.
+        // Tap five untapped Elves you control: Create a 7/7 green Elemental creature token with trample.
         Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD,
                 new CreateTokenEffect(new VoiceOfTheWoodsElementalToken()),
                 new TapTargetCost(new TargetControlledPermanent(5,5, filter, false)));

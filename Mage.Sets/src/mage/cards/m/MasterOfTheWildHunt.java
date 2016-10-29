@@ -69,7 +69,7 @@ public class MasterOfTheWildHunt extends CardImpl {
         this.power = new MageInt(3);
         this.toughness = new MageInt(3);
 
-        // At the beginning of your upkeep, put a 2/2 green Wolf creature token onto the battlefield.
+        // At the beginning of your upkeep, create a 2/2 green Wolf creature token.
         this.addAbility(new OnEventTriggeredAbility(EventType.UPKEEP_STEP_PRE, "beginning of your upkeep", new CreateTokenEffect(wolfToken)));
 
         // {T}: Tap all untapped Wolf creatures you control. Each Wolf tapped this way deals damage equal to its power to target creature. That creature deals damage equal to its power divided as its controller chooses among any number of those Wolves.

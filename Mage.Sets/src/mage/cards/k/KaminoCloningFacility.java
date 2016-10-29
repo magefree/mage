@@ -65,7 +65,7 @@ public class KaminoCloningFacility extends CardImpl {
         // {T} Add one mana of any color to your mana pool. Spend this mana only to cast a Trooper spell.
         this.addAbility(new ConditionalAnyColorManaAbility(new TapSourceCost(), 1, new ConditionalSpellManaBuilder(FILTER), true));
 
-        // {5}, {T}: Put a 1/1 white Trooper creature tokens onto the battlefield.
+        // {5}, {T}: Create a 1/1 white Trooper creature tokens.
         Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new CreateTokenEffect(new TrooperToken(), 1), new ManaCostsImpl("{5}"));
         ability.addCost(new TapSourceCost());
         this.addAbility(ability);

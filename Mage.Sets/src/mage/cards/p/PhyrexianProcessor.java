@@ -56,7 +56,7 @@ public class PhyrexianProcessor extends CardImpl {
 
         // As {this} enters the battlefield, pay any amount of life.
         this.addAbility(new EntersBattlefieldTriggeredAbility(new PhyrexianProcessorEffect()));
-        // {4}, {tap}: Put an X/X black Minion creature token onto the battlefield, where X is the life paid as {this} entered the battlefield.
+        // {4}, {tap}: Create an X/X black Minion creature token, where X is the life paid as {this} entered the battlefield.
         SimpleActivatedAbility ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new PhyrexianProcessorCreateTokenEffect(), new ManaCostsImpl("{4}"));
         ability.addCost(new TapSourceCost());
         this.addAbility(ability);
@@ -109,7 +109,7 @@ class PhyrexianProcessorCreateTokenEffect extends OneShotEffect {
     
     public PhyrexianProcessorCreateTokenEffect() {
         super(Outcome.PutCreatureInPlay);
-        staticText = "Put an X/X black Minion creature token onto the battlefield";
+        staticText = "Create an X/X black Minion creature token";
     }
 
     public PhyrexianProcessorCreateTokenEffect(PhyrexianProcessorCreateTokenEffect ability) {

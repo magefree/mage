@@ -48,7 +48,7 @@ public class EnlightenedManiac extends CardImpl {
         this.power = new MageInt(0);
         this.toughness = new MageInt(2);
 
-        // When Enlightened Maniac enters the battlefield, put a 3/2 colorless Eldrazi Horror creature token onto the battlefield.
+        // When Enlightened Maniac enters the battlefield, create a 3/2 colorless Eldrazi Horror creature token.
         this.addAbility(new EntersBattlefieldTriggeredAbility(new CreateTokenEffect(new EldraziHorrorToken()), false));
     }
 

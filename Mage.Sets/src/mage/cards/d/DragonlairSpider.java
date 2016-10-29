@@ -54,7 +54,7 @@ public class DragonlairSpider extends CardImpl {
         // Reach
         this.addAbility(ReachAbility.getInstance());
 
-        // Whenever an opponent casts a spell, put a 1/1 green Insect creature token onto the battlefield.
+        // Whenever an opponent casts a spell, create a 1/1 green Insect creature token.
         this.addAbility(new SpellCastOpponentTriggeredAbility(new CreateTokenEffect(new InsectToken()), false));
 
 

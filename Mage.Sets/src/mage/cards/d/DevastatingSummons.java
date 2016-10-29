@@ -53,7 +53,7 @@ public class DevastatingSummons extends CardImpl {
         // As an additional cost to cast Devastating Summons, sacrifice X lands.
         this.getSpellAbility().addCost(new SacrificeXTargetCost(new FilterControlledLandPermanent("lands"), true));
         
-        // Put two X/X red Elemental creature tokens onto the battlefield.
+        // Create two X/X red Elemental creature tokens.
         this.getSpellAbility().addEffect(new DevastatingSummonsEffect());
     }
 
@@ -71,7 +71,7 @@ class DevastatingSummonsEffect extends OneShotEffect {
 
     public DevastatingSummonsEffect() {
         super(Outcome.PutCreatureInPlay);
-        staticText = "Put two X/X red Elemental creature tokens onto the battlefield";
+        staticText = "Create two X/X red Elemental creature tokens";
     }
 
     public DevastatingSummonsEffect(final DevastatingSummonsEffect effect) {

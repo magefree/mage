@@ -51,11 +51,11 @@ public class InexorableBlob extends CardImpl {
         this.toughness = new MageInt(3);
 
         // <i>Delirium</i> &mdash; Whenever Inexorable Blob attacks and there are at least four card types among cards in your graveyard,
-        // put a 3/3 green Ooze creature token onto the battlefield tapped and attacking.
+        // create a 3/3 green Ooze creature token tapped and attacking.
         this.addAbility(new ConditionalTriggeredAbility(new AttacksTriggeredAbility(new CreateTokenEffect(new OozeToken(3, 3), 1, true, true), false),
                 DeliriumCondition.getInstance(),
                 "<i>Delirium</i> &mdash; Whenever {this} attacks and there are at least four card types among cards in your graveyard, "
-                + "put a 3/3 green Ooze creature token onto the battlefield tapped and attacking."));
+                + "create a 3/3 green Ooze creature token tapped and attacking."));
     }
 
     public InexorableBlob(final InexorableBlob card) {

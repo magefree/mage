@@ -80,7 +80,7 @@ public class Mirrorpool extends CardImpl {
         ability.addTarget(new TargetSpell(filter));
         this.addAbility(ability);
         
-        // {4}{C}, {T}, Sacrifice Mirrorpool: Put a token onto the battlefield that's a copy of target creature you control.
+        // {4}{C}, {T}, Sacrifice Mirrorpool: Create a token that's a copy of target creature you control.
         ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new PutTokenOntoBattlefieldCopyTargetEffect(), new ManaCostsImpl("{4}{C}"));
         ability.addCost(new TapSourceCost());
         ability.addCost(new SacrificeSourceCost());

@@ -27,6 +27,7 @@
  */
 package mage.cards.r;
 
+import java.util.UUID;
 import mage.abilities.Mode;
 import mage.abilities.common.LandfallAbility;
 import mage.abilities.effects.common.CreateTokenEffect;
@@ -37,8 +38,6 @@ import mage.constants.CardType;
 import mage.constants.Duration;
 import mage.game.permanent.token.KorAllyToken;
 
-import java.util.UUID;
-
 /**
  *
  * @author fireshoes
@@ -46,9 +45,9 @@ import java.util.UUID;
 public class RetreatToEmeria extends CardImpl {
 
     public RetreatToEmeria(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.ENCHANTMENT},"{3}{W}");
+        super(ownerId, setInfo, new CardType[]{CardType.ENCHANTMENT}, "{3}{W}");
 
-        // <i>Landfall</i> - Whenever a land enters the battlefield under you control, choose one - Put a 1/1 white Kor Ally creature token onto the battlefield; or Creatures you control get +1/+1 until end of turn.
+        // <i>Landfall</i> - Whenever a land enters the battlefield under you control, choose one - Create a 1/1 white Kor Ally creature token; or Creatures you control get +1/+1 until end of turn.
         LandfallAbility ability = new LandfallAbility(new CreateTokenEffect(new KorAllyToken()), false);
         Mode mode = new Mode();
         mode.getEffects().add(new BoostControlledEffect(1, 1, Duration.EndOfTurn));

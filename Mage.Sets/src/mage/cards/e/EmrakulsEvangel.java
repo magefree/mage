@@ -65,7 +65,7 @@ public class EmrakulsEvangel extends CardImpl {
         this.toughness = new MageInt(2);
 
         // {T}, Sacrifice Emrakul's Evangel and any number of other non-Eldrazi creatures:
-        // Put a 3/2 colorless Eldrazi Horror creature token onto the battlefield for each creature sacrificed this way.
+        // Create a 3/2 colorless Eldrazi Horror creature token for each creature sacrificed this way.
         Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new EmrakulsEvangelEffect(), new TapSourceCost());
         ability.addCost(new EmrakulsEvangelCost());
         this.addAbility(ability);
@@ -142,7 +142,7 @@ class EmrakulsEvangelEffect extends OneShotEffect {
 
     EmrakulsEvangelEffect() {
         super(Outcome.Sacrifice);
-        this.staticText = "Put a 3/2 colorless Eldrazi Horror creature token onto the battlefield for each creature sacrificed this way.";
+        this.staticText = "Create a 3/2 colorless Eldrazi Horror creature token for each creature sacrificed this way.";
     }
 
     EmrakulsEvangelEffect(final EmrakulsEvangelEffect effect) {

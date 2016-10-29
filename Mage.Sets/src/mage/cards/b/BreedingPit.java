@@ -55,7 +55,7 @@ public class BreedingPit extends CardImpl {
         // At the beginning of your upkeep, sacrifice Breeding Pit unless you pay {B}{B}.
         this.addAbility(new BeginningOfUpkeepTriggeredAbility(Zone.BATTLEFIELD, new SacrificeSourceUnlessPaysEffect(new ManaCostsImpl("{B}{B}")), TargetController.YOU, false));
         
-        // At the beginning of your end step, put a 0/1 black Thrull creature token onto the battlefield.
+        // At the beginning of your end step, create a 0/1 black Thrull creature token.
         this.addAbility(new BeginningOfYourEndStepTriggeredAbility(new CreateTokenEffect(new ThrullToken()), false));
     }
 

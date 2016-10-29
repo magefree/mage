@@ -58,10 +58,10 @@ public class Ornitharch extends CardImpl {
         this.addAbility(FlyingAbility.getInstance());
         // Tribute 2
         this.addAbility(new TributeAbility(2));
-        // When Ornitharch enters the battlefield, if tribute wasn't paid, put two 1/1 white Bird creature tokens with flying onto the battlefield.
+        // When Ornitharch enters the battlefield, if tribute wasn't paid, create two 1/1 white Bird creature tokens with flying.
         TriggeredAbility ability = new EntersBattlefieldTriggeredAbility(new CreateTokenEffect(new BirdToken(), 2), false);
         this.addAbility(new ConditionalTriggeredAbility(ability, TributeNotPaidCondition.getInstance(),
-                "When {this} enters the battlefield, if its tribute wasn't paid, put two 1/1 white Bird creature tokens with flying onto the battlefield."));
+                "When {this} enters the battlefield, if its tribute wasn't paid, create two 1/1 white Bird creature tokens with flying."));
     }
 
     public Ornitharch(final Ornitharch card) {

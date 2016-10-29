@@ -88,7 +88,7 @@ public class FinalIteration extends CardImpl {
         ability.addEffect(effect);
         this.addAbility(ability);
 
-        // Whenever you cast an instant or sorcery spell, put a 1/1 blue Human Wizard creature token onto the battlefield.
+        // Whenever you cast an instant or sorcery spell, create a 1/1 blue Human Wizard creature token.
         this.addAbility(new SpellCastControllerTriggeredAbility(new CreateTokenEffect(new HumanWizardToken()), filterSpell, false));
     }
 

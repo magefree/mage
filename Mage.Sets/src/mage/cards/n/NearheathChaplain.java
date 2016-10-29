@@ -57,7 +57,7 @@ public class NearheathChaplain extends CardImpl {
         // Lifelink
         this.addAbility(LifelinkAbility.getInstance());
         
-        // {2}{W}, Exile Neaheath Chaplain from your graveyard: Put two 1/1 white Spirit creature tokens with flying onto the battlefield. Activate this ability only any time you could cast a sorcery.
+        // {2}{W}, Exile Neaheath Chaplain from your graveyard: Create two 1/1 white Spirit creature tokens with flying. Activate this ability only any time you could cast a sorcery.
         Ability ability = new ActivateAsSorceryActivatedAbility(Zone.GRAVEYARD, new CreateTokenEffect(new SpiritWhiteToken(), 2), new ManaCostsImpl("{2}{W}"));
         ability.addCost(new ExileSourceFromGraveCost());
         this.addAbility(ability);

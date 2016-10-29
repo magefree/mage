@@ -63,7 +63,7 @@ public class PrimevalBounty extends CardImpl {
         super(ownerId,setInfo,new CardType[]{CardType.ENCHANTMENT},"{5}{G}");
 
 
-        // Whenever you cast a creature spell, put a 3/3 green Beast creature token onto the battlefield.
+        // Whenever you cast a creature spell, create a 3/3 green Beast creature token.
         this.addAbility(new SpellCastControllerTriggeredAbility(new CreateTokenEffect(new BeastToken()), filterCreature, false));
 
         // Whenever you cast a noncreature spell, put three +1/+1 counters on target creature you control.

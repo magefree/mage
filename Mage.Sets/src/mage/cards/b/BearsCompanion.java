@@ -50,7 +50,7 @@ public class BearsCompanion extends CardImpl {
         this.power = new MageInt(2);
         this.toughness = new MageInt(2);
 
-        // When Bear's Companion enters the battlefield, put a 4/4 green Bear creature token onto the battlefield.
+        // When Bear's Companion enters the battlefield, create a 4/4 green Bear creature token.
         this.addAbility(new EntersBattlefieldTriggeredAbility(new CreateTokenEffect(new BearsCompanionBearToken())));
     }
 

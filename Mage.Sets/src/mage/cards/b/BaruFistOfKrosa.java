@@ -58,9 +58,10 @@ import mage.game.permanent.token.Token;
  * @author emerald000
  */
 public class BaruFistOfKrosa extends CardImpl {
-    
+
     private static final FilterLandPermanent forestFilter = new FilterLandPermanent("Forest");
     private static final FilterCreaturePermanent greenCreatureFilter = new FilterCreaturePermanent("green creatures you control");
+
     static {
         forestFilter.add(new SubtypePredicate("Forest"));
         greenCreatureFilter.add(new ControllerPredicate(TargetController.YOU));
@@ -68,7 +69,7 @@ public class BaruFistOfKrosa extends CardImpl {
     }
 
     public BaruFistOfKrosa(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{3}{G}{G}");
+        super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{3}{G}{G}");
         this.supertype.add("Legendary");
         this.subtype.add("Human");
         this.subtype.add("Druid");
@@ -79,9 +80,9 @@ public class BaruFistOfKrosa extends CardImpl {
         // Whenever a Forest enters the battlefield, green creatures you control get +1/+1 and gain trample until end of turn.
         Ability ability = new EntersBattlefieldAllTriggeredAbility(new BoostControlledEffect(1, 1, Duration.EndOfTurn, greenCreatureFilter), forestFilter, "Whenever a Forest enters the battlefield, green creatures you control get +1/+1 and gain trample until end of turn.");
         ability.addEffect(new GainAbilityControlledEffect(TrampleAbility.getInstance(), Duration.EndOfTurn, greenCreatureFilter));
-        this.addAbility(ability);        
-        
-        // Grandeur - Discard another card named Baru, Fist of Krosa: Put an X/X green Wurm creature token onto the battlefield, where X is the number of lands you control.
+        this.addAbility(ability);
+
+        // Grandeur - Discard another card named Baru, Fist of Krosa: Create an X/X green Wurm creature token, where X is the number of lands you control.
         this.addAbility(new GrandeurAbility(new BaruFistOfKrosaEffect(), "Baru, Fist of Krosa"));
     }
 
@@ -96,23 +97,23 @@ public class BaruFistOfKrosa extends CardImpl {
 }
 
 class BaruFistOfKrosaEffect extends OneShotEffect {
-    
+
     final static FilterControlledPermanent filter = new FilterControlledLandPermanent("lands you control");
-    
+
     BaruFistOfKrosaEffect() {
         super(Outcome.PutCreatureInPlay);
-        this.staticText = "Put an X/X green Wurm creature token onto the battlefield, where X is the number of lands you control.";
+        this.staticText = "create an X/X green Wurm creature token, where X is the number of lands you control.";
     }
-    
+
     BaruFistOfKrosaEffect(final BaruFistOfKrosaEffect effect) {
         super(effect);
     }
-    
+
     @Override
     public BaruFistOfKrosaEffect copy() {
         return new BaruFistOfKrosaEffect(this);
     }
-    
+
     @Override
     public boolean apply(Game game, Ability source) {
         int xValue = game.getBattlefield().countAll(filter, source.getControllerId(), game);
@@ -123,9 +124,9 @@ class BaruFistOfKrosaEffect extends OneShotEffect {
 }
 
 class BaruFistOfKrosaToken extends Token {
-    
+
     BaruFistOfKrosaToken(int xValue) {
-        super("Wurm", "a X/X green Wurm creature token onto the battlefield, where X is the number of lands you control");
+        super("Wurm", "a X/X green Wurm creature token, where X is the number of lands you control");
         cardType.add(CardType.CREATURE);
         color.setGreen(true);
         subtype.add("Wurm");

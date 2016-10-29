@@ -46,13 +46,13 @@ import mage.constants.Zone;
 public class MyrPropagator extends CardImpl {
 
     public MyrPropagator(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.ARTIFACT,CardType.CREATURE},"{3}");
+        super(ownerId, setInfo, new CardType[]{CardType.ARTIFACT, CardType.CREATURE}, "{3}");
         this.subtype.add("Myr");
 
         this.power = new MageInt(1);
         this.toughness = new MageInt(1);
 
-        // {3}, {tap}: Put a token that's a copy of Myr Propagator onto the battlefield.
+        // {3}, {tap}: Create a token that's a copy of Myr Propagator.
         Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new PutTokenOntoBattlefieldCopySourceEffect(), new GenericManaCost(3));
         ability.addCost(new TapSourceCost());
         this.addAbility(ability);

@@ -56,7 +56,7 @@ public class MidnightRitual extends CardImpl {
         super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{X}{2}{B}");
 
         // Exile X target creature cards from your graveyard.
-        // For each creature card exiled this way, put a 2/2 black Zombie creature token onto the battlefield.
+        // For each creature card exiled this way, create a 2/2 black Zombie creature token.
         this.getSpellAbility().addTarget(new TargetCardInYourGraveyard(filter));
         this.getSpellAbility().addEffect(new MidnightRitualEffect());
     }
@@ -83,7 +83,7 @@ class MidnightRitualEffect extends OneShotEffect {
 
     public MidnightRitualEffect() {
         super(Outcome.Neutral);
-        this.staticText = "Exile X target creature cards from your graveyard. For each creature card exiled this way, put a 2/2 black Zombie creature token onto the battlefield";
+        this.staticText = "Exile X target creature cards from your graveyard. For each creature card exiled this way, create a 2/2 black Zombie creature token";
     }
 
     public MidnightRitualEffect(final MidnightRitualEffect effect) {

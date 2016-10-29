@@ -46,7 +46,7 @@ public class OjutaisSummons extends CardImpl {
     public OjutaisSummons(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{3}{U}{U}");
 
-        // Put a 2/2 blue Djinn Monk creature token with flying onto the battlefield.
+        // Create a 2/2 blue Djinn Monk creature token with flying.
         this.getSpellAbility().addEffect(new CreateTokenEffect(new DjinnMonkToken()));
         
         // Rebound

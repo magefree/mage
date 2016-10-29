@@ -63,7 +63,7 @@ public class ElementalAppeal extends CardImpl {
         // Kicker {5}
         this.addAbility(new KickerAbility("{5}"));
 
-        // Put a 7/1 red Elemental creature token with trample and haste onto the battlefield. Exile it at the beginning of the next end step.
+        // Create a 7/1 red Elemental creature token with trample and haste. Exile it at the beginning of the next end step.
         this.getSpellAbility().addEffect(new ElementalAppealEffect());
         // If Elemental Appeal was kicked, that creature gets +7/+0 until end of turn.
         this.getSpellAbility().addEffect(new ConditionalContinuousEffect(
@@ -86,7 +86,7 @@ class ElementalAppealEffect extends OneShotEffect {
 
     public ElementalAppealEffect() {
         super(Outcome.PutCreatureInPlay);
-        this.staticText = "Put a 7/1 red Elemental creature token with trample and haste onto the battlefield. Exile it at the beginning of the next end step";
+        this.staticText = "Create a 7/1 red Elemental creature token with trample and haste. Exile it at the beginning of the next end step";
     }
 
     public ElementalAppealEffect(final ElementalAppealEffect effect) {

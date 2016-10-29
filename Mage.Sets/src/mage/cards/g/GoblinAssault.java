@@ -58,7 +58,7 @@ public class GoblinAssault extends CardImpl {
     public GoblinAssault(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.ENCHANTMENT},"{2}{R}");
 
-        // At the beginning of your upkeep, put a 1/1 red Goblin creature token with haste onto the battlefield.
+        // At the beginning of your upkeep, create a 1/1 red Goblin creature token with haste.
         this.addAbility(new BeginningOfUpkeepTriggeredAbility(new CreateTokenEffect(new GoblinTokenWithHaste()), TargetController.YOU, false));
 
         // Goblin creatures attack each turn if able.

@@ -54,7 +54,7 @@ public class MonkeyCage extends CardImpl {
     public MonkeyCage(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.ARTIFACT},"{5}");
 
-        // When a creature enters the battlefield, sacrifice Monkey Cage and put X 2/2 green Ape creature tokens onto the battlefield, where X is that creature's converted mana cost.
+        // When a creature enters the battlefield, sacrifice Monkey Cage and create X 2/2 green Ape creature tokens, where X is that creature's converted mana cost.
         Ability ability = new EntersBattlefieldAllTriggeredAbility(Zone.BATTLEFIELD, new SacrificeSourceEffect(),
             new FilterCreaturePermanent("a creature"), false, SetTargetPointer.PERMANENT, "");
         ability.addEffect(new MonkeyCageEffect());
@@ -75,7 +75,7 @@ class MonkeyCageEffect extends OneShotEffect {
 
     public MonkeyCageEffect() {
         super(Outcome.Benefit);
-        staticText = "and put X 2/2 green Ape creature tokens onto the battlefield, where X is that creature's converted mana cost";
+        staticText = "and create X 2/2 green Ape creature tokens, where X is that creature's converted mana cost";
     }
 
     public MonkeyCageEffect(final MonkeyCageEffect effect) {

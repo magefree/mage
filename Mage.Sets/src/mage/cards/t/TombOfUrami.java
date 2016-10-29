@@ -28,8 +28,6 @@
 package mage.cards.t;
 
 import java.util.UUID;
-
-import mage.constants.CardType;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleActivatedAbility;
@@ -43,6 +41,7 @@ import mage.abilities.keyword.FlyingAbility;
 import mage.abilities.mana.BlackManaAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
+import mage.constants.CardType;
 import mage.constants.Zone;
 import mage.filter.common.FilterControlledLandPermanent;
 import mage.game.Game;
@@ -56,14 +55,14 @@ import mage.game.permanent.token.Token;
 public class TombOfUrami extends CardImpl {
 
     public TombOfUrami(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.LAND},"");
+        super(ownerId, setInfo, new CardType[]{CardType.LAND}, "");
         this.supertype.add("Legendary");
 
         // {tap}: Add {B} to your mana pool. Tomb of Urami deals 1 damage to you if you don't control an Ogre.
         Ability ability = new BlackManaAbility();
         ability.addEffect(new DamageControllerEffect(1));
         this.addAbility(ability);
-        // {2}{B}{B}, {tap}, Sacrifice all lands you control: Put a legendary 5/5 black Demon Spirit creature token with flying named Urami onto the battlefield.
+        // {2}{B}{B}, {tap}, Sacrifice all lands you control: Create a legendary 5/5 black Demon Spirit creature token with flying named Urami.
         Ability ability2 = new SimpleActivatedAbility(Zone.BATTLEFIELD, new CreateTokenEffect(new UramiToken()), new ManaCostsImpl("{2}{B}{B}"));
         ability2.addCost(new TapSourceCost());
         ability2.addCost(new SacrificeAllLandCost());
@@ -80,7 +79,6 @@ public class TombOfUrami extends CardImpl {
     }
 }
 
-
 class SacrificeAllLandCost extends CostImpl {
 
     public SacrificeAllLandCost() {
@@ -93,7 +91,7 @@ class SacrificeAllLandCost extends CostImpl {
 
     @Override
     public boolean pay(Ability ability, Game game, UUID sourceId, UUID controllerId, boolean noMana, Cost costToPay) {
-        for(Permanent permanent : game.getBattlefield().getActivePermanents(new FilterControlledLandPermanent(), ability.getControllerId(), game)){
+        for (Permanent permanent : game.getBattlefield().getActivePermanents(new FilterControlledLandPermanent(), ability.getControllerId(), game)) {
             paid |= permanent.sacrifice(sourceId, game);
         }
         return paid;
@@ -101,7 +99,7 @@ class SacrificeAllLandCost extends CostImpl {
 
     @Override
     public boolean canPay(Ability ability, UUID sourceId, UUID controllerId, Game game) {
-    	for(Permanent permanent : game.getBattlefield().getActivePermanents(new FilterControlledLandPermanent(), ability.getControllerId(), game)){
+        for (Permanent permanent : game.getBattlefield().getActivePermanents(new FilterControlledLandPermanent(), ability.getControllerId(), game)) {
             if (!game.getPlayer(controllerId).canPaySacrificeCost(permanent, sourceId, controllerId, game)) {
                 return false;
             }
@@ -116,7 +114,6 @@ class SacrificeAllLandCost extends CostImpl {
 
 }
 
-
 class UramiToken extends Token {
 
     public UramiToken() {
@@ -125,12 +122,11 @@ class UramiToken extends Token {
         subtype.add("Demon");
         subtype.add("Spirit");
         supertype.add("Legendary");
-        
 
         color.setBlack(true);
         power = new MageInt(5);
         toughness = new MageInt(5);
-        
+
         this.addAbility(FlyingAbility.getInstance());
     }
 }

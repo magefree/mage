@@ -72,7 +72,7 @@ public class SorinSolemnVisitor extends CardImpl {
         loyaltyAbility.addEffect(effect);
         this.addAbility(loyaltyAbility);
 
-        // -2: Put a 2/2 black Vampire creature token with flying onto the battlefield.
+        // -2: Create a 2/2 black Vampire creature token with flying.
         this.addAbility(new LoyaltyAbility(new CreateTokenEffect(new SorinSolemnVisitorVampireToken()), -2));
 
         // -6: You get an emblem with "At the beginning of each opponent's upkeep, that player sacrifices a creature."

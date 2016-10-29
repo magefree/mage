@@ -81,7 +81,7 @@ public class LilianaTheLastHope extends CardImpl {
         ability.addEffect(new LilianaTheLastHopeEffect());
         this.addAbility(ability);
 
-        // -7: You get an emblem with "At the beginning of your end step, put X 2/2 black Zombie creature tokens onto the battlefield,
+        // -7: You get an emblem with "At the beginning of your end step, create X 2/2 black Zombie creature tokens,
         // where X is two plus the number of Zombies you control."
         this.addAbility(new LoyaltyAbility(new GetEmblemEffect(new LilianaTheLastHopeEmblem()), -7));
     }

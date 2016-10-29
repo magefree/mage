@@ -46,7 +46,7 @@ public class BeastAttack extends CardImpl {
     public BeastAttack(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.INSTANT},"{2}{G}{G}{G}");
 
-        // Put a 4/4 green Beast creature token onto the battlefield.
+        // Create a 4/4 green Beast creature token.
         this.getSpellAbility().addEffect(new CreateTokenEffect(new BeastToken2()));
 
         // Flashback {2}{G}{G}{G}

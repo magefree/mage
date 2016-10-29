@@ -44,7 +44,7 @@ public class AlliedReinforcements extends CardImpl {
     public AlliedReinforcements(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{3}{W}");
 
-        // Put two 2/2 white Knight Ally creature tokens onto the battlefield.
+        // Create two 2/2 white Knight Ally creature tokens.
         this.getSpellAbility().addEffect(new CreateTokenEffect(new KnightAllyToken(), 2));
     }
 

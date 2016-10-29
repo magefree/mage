@@ -53,7 +53,7 @@ public class MongrelPack extends CardImpl {
         this.power = new MageInt(4);
         this.toughness = new MageInt(1);
 
-        // When Mongrel Pack dies during combat, put four 1/1 green Hound creature tokens onto the battlefield.
+        // When Mongrel Pack dies during combat, create four 1/1 green Hound creature tokens.
         this.addAbility(new MongrelPackAbility());
     }
 

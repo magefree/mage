@@ -53,7 +53,7 @@ public class WaitingInTheWeeds extends CardImpl {
         super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{1}{G}{G}");
 
 
-        // Each player puts a 1/1 green Cat creature token onto the battlefield for each untapped Forest he or she controls.
+        // Each player creates a 1/1 green Cat creature token for each untapped Forest he or she controls.
         this.getSpellAbility().addEffect(new WaitingInTheWeedsEffect());
     }
 
@@ -78,7 +78,7 @@ class WaitingInTheWeedsEffect extends OneShotEffect {
 
     public WaitingInTheWeedsEffect() {
         super(Outcome.PutCreatureInPlay);
-        staticText = "Each player puts a 1/1 green Cat creature token onto the battlefield for each untapped Forest he or she controls";
+        staticText = "Each player creates a 1/1 green Cat creature token for each untapped Forest he or she controls";
     }
 
     public WaitingInTheWeedsEffect(final WaitingInTheWeedsEffect effect) {

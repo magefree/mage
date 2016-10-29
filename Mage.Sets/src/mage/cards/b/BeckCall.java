@@ -53,7 +53,7 @@ public class BeckCall extends SplitCard {
         getLeftHalfCard().getSpellAbility().addEffect(new CreateDelayedTriggeredAbilityEffect(new BeckTriggeredAbility()));
 
         // Call
-        // Put four 1/1 white Bird creature tokens with flying onto the battlefield.
+        // Create four 1/1 white Bird creature tokens with flying.
         getRightHalfCard().getSpellAbility().addEffect(new CreateTokenEffect(new BirdToken(), 4));
 
     }

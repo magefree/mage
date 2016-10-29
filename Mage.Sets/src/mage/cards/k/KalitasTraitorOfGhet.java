@@ -83,7 +83,7 @@ public class KalitasTraitorOfGhet extends CardImpl {
         // Lifelink
         this.addAbility(LifelinkAbility.getInstance());
 
-        // If a nontoken creature an opponent controls would die, instead exile that card and put a 2/2 black Zombie creature token onto the battlefield.
+        // If a nontoken creature an opponent controls would die, instead exile that card and create a 2/2 black Zombie creature token.
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new KalitasTraitorOfGhetEffect()));
 
         // {2}{B}, Sacrifice another Vampire or Zombie: Put two +1/+1 counters on Kalitas, Traitor of Ghet.
@@ -106,7 +106,7 @@ class KalitasTraitorOfGhetEffect extends ReplacementEffectImpl {
 
     public KalitasTraitorOfGhetEffect() {
         super(Duration.WhileOnBattlefield, Outcome.Benefit);
-        staticText = "If a nontoken creature an opponent controls would die, instead exile that card and put a 2/2 black Zombie creature token onto the battlefield";
+        staticText = "If a nontoken creature an opponent controls would die, instead exile that card and create a 2/2 black Zombie creature token";
     }
 
     public KalitasTraitorOfGhetEffect(final KalitasTraitorOfGhetEffect effect) {

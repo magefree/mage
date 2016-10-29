@@ -44,7 +44,7 @@ public class SpontaneousGeneration extends CardImpl {
     public SpontaneousGeneration(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{3}{G}");
 
-        // Put a 1/1 green Saproling creature token onto the battlefield for each card in your hand.
+        // Create a 1/1 green Saproling creature token for each card in your hand.
         this.getSpellAbility().addEffect(new CreateTokenEffect(new SaprolingToken(), new CardsInControllerHandCount()));
     }
 

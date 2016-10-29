@@ -51,7 +51,7 @@ public class VoiceOfTheProvinces extends CardImpl {
         this.toughness = new MageInt(3);
 
         this.addAbility(FlyingAbility.getInstance());
-        // When Voice of the Provinces enters the battlefield, put a 1/1 white Human creature token onto the battlefield.
+        // When Voice of the Provinces enters the battlefield, create a 1/1 white Human creature token.
         this.addAbility(new EntersBattlefieldTriggeredAbility(new CreateTokenEffect(new HumanToken())));
     }
 

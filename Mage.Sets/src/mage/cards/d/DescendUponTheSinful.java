@@ -51,9 +51,9 @@ public class DescendUponTheSinful extends CardImpl {
         // Exile all creatures
         this.getSpellAbility().addEffect(new ExileAllEffect(new FilterCreaturePermanent()));
 
-        // <i>Delirium</i> &mdash; Put a 4/4 white Angel creature token with flying onto the battlefield if there are four or more card types among cards in your graveyard.
+        // <i>Delirium</i> &mdash; Create a 4/4 white Angel creature token with flying if there are four or more card types among cards in your graveyard.
         Effect effect = new ConditionalOneShotEffect(new CreateTokenEffect(new AngelToken()), DeliriumCondition.getInstance());
-        effect.setText("<br/><i>Delirium</i> &mdash; Put a 4/4 white Angel creature token with flying onto the battlefield if there are four or more card types among cards in your graveyard");
+        effect.setText("<br/><i>Delirium</i> &mdash; Create a 4/4 white Angel creature token with flying if there are four or more card types among cards in your graveyard");
         this.getSpellAbility().addEffect(effect);
     }
 

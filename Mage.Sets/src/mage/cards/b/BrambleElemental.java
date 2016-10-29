@@ -49,7 +49,7 @@ public class BrambleElemental extends CardImpl {
         this.power = new MageInt(4);
         this.toughness = new MageInt(4);
 
-        // Whenever an Aura becomes attached to Bramble Elemental, put two 1/1 green Saproling creature tokens onto the battlefield.
+        // Whenever an Aura becomes attached to Bramble Elemental, create two 1/1 green Saproling creature tokens.
         this.addAbility(new AuraAttachedTriggeredAbility(new CreateTokenEffect(new SaprolingToken(),2),false));
     }
 

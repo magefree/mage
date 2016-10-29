@@ -69,7 +69,7 @@ public class OrochiEggwatcher extends CardImpl {
         this.flipCard = true;
         this.flipCardName = "Shidako, Broodmistress";
 
-        // {2}{G}, {T}: Put a 1/1 green Snake creature token onto the battlefield. If you control ten or more creatures, flip Orochi Eggwatcher.
+        // {2}{G}, {T}: Create a 1/1 green Snake creature token. If you control ten or more creatures, flip Orochi Eggwatcher.
         Ability ability;
         ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new CreateTokenEffect(new SnakeToken()),new ManaCostsImpl("{2}{G}"));
         ability.addCost(new TapSourceCost());

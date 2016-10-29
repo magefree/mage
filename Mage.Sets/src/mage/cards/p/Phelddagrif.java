@@ -61,7 +61,7 @@ public class Phelddagrif extends CardImpl {
         this.power = new MageInt(4);
         this.toughness = new MageInt(4);
 
-        // {G}: Phelddagrif gains trample until end of turn. Target opponent puts a 1/1 green Hippo creature token onto the battlefield.
+        // {G}: Phelddagrif gains trample until end of turn. Target opponent creates a 1/1 green Hippo creature token.
         Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new GainAbilitySourceEffect(TrampleAbility.getInstance(), Duration.EndOfTurn),new ManaCostsImpl("{G}"));
         ability.addEffect(new CreateTokenTargetEffect(new HippoToken()));
         ability.addTarget(new TargetOpponent());

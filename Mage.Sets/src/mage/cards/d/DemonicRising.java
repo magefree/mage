@@ -44,12 +44,12 @@ import mage.constants.TargetController;
  */
 public class DemonicRising extends CardImpl {
 
-    private static final String ruleText = "At the beginning of your end step, if you control exactly one creature, put a 5/5 black Demon creature token with flying onto the battlefield";
+    private static final String ruleText = "At the beginning of your end step, if you control exactly one creature, create a 5/5 black Demon creature token with flying";
 
     public DemonicRising(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.ENCHANTMENT},"{3}{B}{B}");
 
-        // At the beginning of your end step, if you control exactly one creature, put a 5/5 black Demon creature token with flying onto the battlefield.
+        // At the beginning of your end step, if you control exactly one creature, create a 5/5 black Demon creature token with flying.
         TriggeredAbility ability = new BeginningOfYourEndStepTriggeredAbility(new CreateTokenEffect(new DemonToken()), false);
         this.addAbility(new ConditionalTriggeredAbility(ability, new CreatureCountCondition(1, TargetController.YOU), ruleText));
     }

@@ -68,7 +68,7 @@ public class ChandraFlamecaller extends CardImpl {
 
         this.addAbility(new PlanswalkerEntersWithLoyalityCountersAbility(4));
 
-        // +1: Put two 3/1 red Elemental creature tokens with haste onto the battlefield. Exile them at the beginning of the next end step.
+        // +1: Create two 3/1 red Elemental creature tokens with haste. Exile them at the beginning of the next end step.
         this.addAbility(new LoyaltyAbility(new ChandraElementalEffect(), 1));
 
         // 0: Discard all the cards in your hand, then draw that many cards plus one.
@@ -92,7 +92,7 @@ class ChandraElementalEffect extends OneShotEffect {
 
     public ChandraElementalEffect() {
         super(Outcome.PutCreatureInPlay);
-        this.staticText = "Put two 3/1 red Elemental creature tokens with haste onto the battlefield. Exile them at the beginning of the next end step";
+        this.staticText = "Create two 3/1 red Elemental creature tokens with haste. Exile them at the beginning of the next end step";
     }
 
     public ChandraElementalEffect(final ChandraElementalEffect effect) {

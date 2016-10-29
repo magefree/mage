@@ -71,7 +71,7 @@ public class WrensRunPackmaster extends CardImpl {
         // Champion an Elf
         this.addAbility(new ChampionAbility(this, "Elf", false));
         
-        // {2}{G}: Put a 2/2 green Wolf creature token onto the battlefield.
+        // {2}{G}: Create a 2/2 green Wolf creature token.
         this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new CreateTokenEffect(new WolfToken("LRW")), new ManaCostsImpl<>("{2}{G}")));
         
         // Each Wolf you control has deathtouch.

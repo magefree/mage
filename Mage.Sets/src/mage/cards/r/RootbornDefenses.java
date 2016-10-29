@@ -49,7 +49,7 @@ public class RootbornDefenses extends CardImpl {
 
 
         // Populate. Creatures you control are indestructible this turn. 
-        // (To populate, put a token onto the battlefield that's a copy of a creature 
+        // (To populate, create a token that's a copy of a creature 
         // token you control. Damage and effects that say "destroy" don't destroy 
         // indestructible creatures.)
         this.getSpellAbility().addEffect(new PopulateEffect());

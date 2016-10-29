@@ -51,7 +51,7 @@ public class RootOut extends CardImpl {
         this.getSpellAbility().addTarget(new TargetPermanent(new FilterArtifactOrEnchantmentPermanent()));
         // Investigate.
         Effect effect = new InvestigateEffect();
-        effect.setText("<br>Investigate. <i>(Put a colorless Clue artifact token onto the battlefield with \"{2}, Sacrifice this artifact: Draw a card.\")</i>");
+        effect.setText("<br>Investigate. <i>(Create a colorless Clue artifact token with \"{2}, Sacrifice this artifact: Draw a card.\")</i>");
         this.getSpellAbility().addEffect(effect);
     }
 

@@ -59,7 +59,7 @@ import mage.target.common.TargetControlledPermanent;
 public class Tetravus extends CardImpl {
 
     public Tetravus(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.ARTIFACT,CardType.CREATURE},"{6}");
+        super(ownerId, setInfo, new CardType[]{CardType.ARTIFACT, CardType.CREATURE}, "{6}");
         this.subtype.add("Construct");
         this.power = new MageInt(1);
         this.toughness = new MageInt(1);
@@ -68,14 +68,14 @@ public class Tetravus extends CardImpl {
         this.addAbility(FlyingAbility.getInstance());
         // Tetravus enters the battlefield with three +1/+1 counters on it.
         this.addAbility(new EntersBattlefieldAbility(new AddCountersSourceEffect(CounterType.P1P1.createInstance(3)), "{this} enters the battlefield with three +1/+1 counters on it"));
-        // At the beginning of your upkeep, you may remove any number of +1/+1 counters from Tetravus. If you do, put that many 1/1 colorless Tetravite artifact creature tokens onto the battlefield. They each have flying and "This creature can't be enchanted."
+        // At the beginning of your upkeep, you may remove any number of +1/+1 counters from Tetravus. If you do, create that many 1/1 colorless Tetravite artifact creature tokens. They each have flying and "This creature can't be enchanted."
         this.addAbility(new ConditionalTriggeredAbility(new BeginningOfUpkeepTriggeredAbility(new DoIfCostPaid(new CreateTokenEffect(new TetraviteToken()),
-            new RemoveCountersSourceCost(CounterType.P1P1.createInstance(1))), TargetController.YOU, true),
-            new SourceHasCounterCondition(CounterType.P1P1, 1), "At the beginning of your upkeep, you may remove any number of +1/+1 counters from Tetravus. If you do, put that many 1/1 colorless Tetravite artifact creature tokens onto the battlefield. They each have flying and \"This creature can't be enchanted.\""));
-        // At the beginning of your upkeep, you may exile any number of tokens put onto the battlefield with Tetravus. If you do, put that many +1/+1 counters on Tetravus.
+                new RemoveCountersSourceCost(CounterType.P1P1.createInstance(1))), TargetController.YOU, true),
+                new SourceHasCounterCondition(CounterType.P1P1, 1), "At the beginning of your upkeep, you may remove any number of +1/+1 counters from Tetravus. If you do, create that many 1/1 colorless Tetravite artifact creature tokens. They each have flying and \"This creature can't be enchanted.\""));
+        // At the beginning of your upkeep, you may exile any number of tokens created with Tetravus. If you do, put that many +1/+1 counters on Tetravus.
         this.addAbility(new BeginningOfUpkeepTriggeredAbility(new DoIfCostPaid(new AddCountersSourceEffect(CounterType.P1P1.createInstance(1)),
-            new ExileTargetCost(new TargetControlledPermanent(new FilterControlledPermanent("Tetravite")))), TargetController.YOU, true));
-        
+                new ExileTargetCost(new TargetControlledPermanent(new FilterControlledPermanent("Tetravite")))), TargetController.YOU, true));
+
     }
 
     public Tetravus(final Tetravus card) {
@@ -87,42 +87,43 @@ public class Tetravus extends CardImpl {
         return new Tetravus(this);
     }
 }
+
 class TetraviteToken extends Token {
 
     public TetraviteToken() {
         super("Tetravite", "1/1 colorless Tetravite artifact creature token");
         cardType.add(CardType.CREATURE);
-        cardType.add(CardType.ARTIFACT);        
-        subtype.add("Tetravite");        
+        cardType.add(CardType.ARTIFACT);
+        subtype.add("Tetravite");
         power = new MageInt(1);
         toughness = new MageInt(1);
-                
+
         this.addAbility(FlyingAbility.getInstance());
         this.addAbility(new CantBeEnchantedAbility());
     }
 }
 
 class CantBeEnchantedAbility extends StaticAbility {
-    
-    public CantBeEnchantedAbility(){
+
+    public CantBeEnchantedAbility() {
         super(Zone.BATTLEFIELD, null);
     }
-    
+
     public CantBeEnchantedAbility(final CantBeEnchantedAbility ability) {
-         super(ability);
+        super(ability);
     }
-           
+
     @Override
     public CantBeEnchantedAbility copy() {
         return new CantBeEnchantedAbility(this);
     }
-    
+
     public boolean canTarget(MageObject source, Game game) {
-        if (source.getCardType().contains(CardType.ENCHANTMENT) &&
-                source.hasSubtype("Aura", game)) {
+        if (source.getCardType().contains(CardType.ENCHANTMENT)
+                && source.hasSubtype("Aura", game)) {
             return false;
         }
         return true;
     }
-    
+
 }

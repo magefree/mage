@@ -48,7 +48,7 @@ public class CallTheBloodline extends CardImpl {
     public CallTheBloodline(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.ENCHANTMENT},"{1}{B}");
 
-        // {1}, Discard a card: Put a 1/1 black Vampire Knight token with lifelink onto the battlefield. Activate this ability only once each turn.
+        // {1}, Discard a card: Create a 1/1 black Vampire Knight token with lifelink. Activate this ability only once each turn.
         Ability ability = new LimitedTimesPerTurnActivatedAbility(Zone.BATTLEFIELD, new CreateTokenEffect(new VampireKnightToken()), new GenericManaCost(1));
         ability.addCost(new DiscardCardCost());
         this.addAbility(ability);

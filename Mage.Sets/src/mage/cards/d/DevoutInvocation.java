@@ -54,7 +54,7 @@ public class DevoutInvocation extends CardImpl {
     public DevoutInvocation(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{6}{W}");
 
-        // Tap any number of untapped creatures you control. Put a 4/4 white Angel creature token with flying onto the battlefield for each creature tapped this way.
+        // Tap any number of untapped creatures you control. Create a 4/4 white Angel creature token with flying for each creature tapped this way.
         this.getSpellAbility().addEffect(new DevoutInvocationEffect());
 
     }
@@ -79,7 +79,7 @@ class DevoutInvocationEffect extends OneShotEffect {
 
     public DevoutInvocationEffect() {
         super(Outcome.PutCreatureInPlay);
-        staticText = "Tap any number of untapped creatures you control. Put a 4/4 white Angel creature token with flying onto the battlefield for each creature tapped this way";
+        staticText = "Tap any number of untapped creatures you control. Create a 4/4 white Angel creature token with flying for each creature tapped this way";
     }
 
     public DevoutInvocationEffect(DevoutInvocationEffect effect) {

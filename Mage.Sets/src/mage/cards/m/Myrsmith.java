@@ -72,7 +72,7 @@ public class Myrsmith extends CardImpl {
 class MyrsmithEffect extends CreateTokenEffect {
     public MyrsmithEffect() {
         super(new MyrToken());
-        staticText = "you may pay {1}. If you do, put a 1/1 colorless Myr artifact creature token onto the battlefield";
+        staticText = "you may pay {1}. If you do, create a 1/1 colorless Myr artifact creature token";
     }
 
     public MyrsmithEffect(final MyrsmithEffect effect) {

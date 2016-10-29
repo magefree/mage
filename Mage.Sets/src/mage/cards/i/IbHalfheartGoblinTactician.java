@@ -82,7 +82,7 @@ public class IbHalfheartGoblinTactician extends CardImpl {
         // Whenever another Goblin you control becomes blocked, sacrifice it. If you do, it deals 4 damage to each creature blocking it.
         this.addAbility(new BecomesBlockedAllTriggeredAbility(new IbHalfheartGoblinTacticianEffect(), false, filterGoblin, true));
 
-        // Sacrifice two Mountains: Put two 1/1 red Goblin creature tokens onto the battlefield.
+        // Sacrifice two Mountains: Create two 1/1 red Goblin creature tokens.
         this.addAbility(new SimpleActivatedAbility(
                 Zone.BATTLEFIELD,
                 new CreateTokenEffect(new GoblinToken(), 2),

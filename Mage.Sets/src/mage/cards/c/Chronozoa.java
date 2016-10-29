@@ -53,7 +53,7 @@ import mage.counters.CounterType;
 public class Chronozoa extends CardImpl {
 
     public Chronozoa(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{3}{U}");
+        super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{3}{U}");
         this.subtype.add("Illusion");
         this.power = new MageInt(3);
         this.toughness = new MageInt(3);
@@ -66,12 +66,12 @@ public class Chronozoa extends CardImpl {
         this.addAbility(ability);
         this.addAbility(new VanishingUpkeepAbility(3));
         this.addAbility(new VanishingSacrificeAbility());
-        // When Chronozoa is put into a graveyard from play, if it had no time counters on it, put two tokens into play that are copies of it.
+        // When Chronozoa is put into a graveyard from play, if it had no time counters on it, create two tokens that are copies of it.
         Effect effect = new PutTokenOntoBattlefieldCopySourceEffect(2);
-        effect.setText("put two tokens into play that are copies of it");
+        effect.setText("create two tokens that are copies of it");
         this.addAbility(new ConditionalTriggeredAbility(new DiesCreatureTriggeredAbility(effect, false),
                 new LastTimeCounterRemovedCondition(),
-                "When {this} dies, if it had no time counters on it, put two tokens that are copies of it onto the battlefield."));
+                "When {this} dies, if it had no time counters on it, create two tokens that are copies of it."));
     }
 
     public Chronozoa(final Chronozoa card) {

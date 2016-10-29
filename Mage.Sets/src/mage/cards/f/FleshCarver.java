@@ -81,7 +81,7 @@ public class FleshCarver extends CardImpl {
         ability.addCost(new SacrificeTargetCost(new TargetControlledPermanent(filter)));
         this.addAbility(ability);
 
-        // When Flesh Carver dies, put an X/X black Horror creature token onto the battlefield, where X is Flesh Carver's power.
+        // When Flesh Carver dies, create an X/X black Horror creature token, where X is Flesh Carver's power.
         this.addAbility(new FleshCarverAbility());
     }
 
@@ -133,7 +133,7 @@ class FleshCarverEffect extends OneShotEffect {
 
     public FleshCarverEffect() {
         super(Outcome.DestroyPermanent);
-        staticText = "put an X/X black Horror creature token onto the battlefield, where X is {this}'s power";
+        staticText = "create an X/X black Horror creature token, where X is {this}'s power";
     }
 
     public FleshCarverEffect(FleshCarverEffect ability) {

@@ -62,7 +62,7 @@ public class SengirAutocrat extends CardImpl {
         this.power = new MageInt(2);
         this.toughness = new MageInt(2);
 
-        // When Sengir Autocrat enters the battlefield, put three 0/1 black Serf creature tokens onto the battlefield.
+        // When Sengir Autocrat enters the battlefield, create three 0/1 black Serf creature tokens.
         Ability ability = new EntersBattlefieldTriggeredAbility(new CreateTokenEffect(new SerfToken(), 3));
         this.addAbility(ability);
         // When Sengir Autocrat leaves the battlefield, exile all Serf tokens.

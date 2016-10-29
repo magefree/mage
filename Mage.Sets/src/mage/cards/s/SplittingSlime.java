@@ -51,7 +51,7 @@ public class SplittingSlime extends CardImpl {
         // {4}{G}{G}: Monstrosity 3.
         this.addAbility(new MonstrosityAbility("{4}{G}{G}", 3));
 
-        // When Splitting Slime becomes monstrous, put a token onto the battlefield that's a copy of Splitting Slime.
+        // When Splitting Slime becomes monstrous, create a token that's a copy of Splitting Slime.
         this.addAbility(new BecomesMonstrousSourceTriggeredAbility(new PutTokenOntoBattlefieldCopySourceEffect()));
 
     }

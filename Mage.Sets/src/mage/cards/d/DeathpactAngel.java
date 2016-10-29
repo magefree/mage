@@ -29,8 +29,6 @@
 package mage.cards.d;
 
 import java.util.UUID;
-
-import mage.constants.CardType;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.DiesTriggeredAbility;
@@ -43,6 +41,7 @@ import mage.abilities.effects.common.ReturnFromGraveyardToBattlefieldTargetEffec
 import mage.abilities.keyword.FlyingAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
+import mage.constants.CardType;
 import mage.constants.Zone;
 import mage.filter.common.FilterCreatureCard;
 import mage.filter.predicate.mageobject.NamePredicate;
@@ -56,7 +55,7 @@ import mage.target.common.TargetCardInYourGraveyard;
 public class DeathpactAngel extends CardImpl {
 
     public DeathpactAngel(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{3}{W}{B}{B}");
+        super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{3}{W}{B}{B}");
         this.subtype.add("Angel");
 
         this.power = new MageInt(5);
@@ -64,7 +63,7 @@ public class DeathpactAngel extends CardImpl {
 
         //Flying
         this.addAbility(FlyingAbility.getInstance());
-        //When Deathpact Angel dies, put a 1/1 white and black Cleric creature token onto the battlefield. It has "{3}{W}{B}{B}, {T}, Sacrifice this creature: Return a card named Deathpact Angel from your graveyard to the battlefield."
+        //When Deathpact Angel dies, create a 1/1 white and black Cleric creature token. It has "{3}{W}{B}{B}, {T}, Sacrifice this creature: Return a card named Deathpact Angel from your graveyard to the battlefield."
         this.addAbility(new DiesTriggeredAbility(new CreateTokenEffect(new DeathpactAngelToken())));
     }
 
@@ -78,25 +77,26 @@ public class DeathpactAngel extends CardImpl {
     }
 }
 
-
 class DeathpactAngelToken extends Token {
 
     private static final FilterCreatureCard filter = new FilterCreatureCard("card named Deathpact Angel from your graveyard");
+
     static {
         filter.add(new NamePredicate("Deathpact Angel"));
     }
+
     public DeathpactAngelToken() {
-        super("Cleric", "1/1 white and black Cleric creature token onto the battlefield. It has \"{3}{W}{B}{B}, {T}, Sacrifice this creature: Return a card named Deathpact Angel from your graveyard to the battlefield.\"");
+        super("Cleric", "1/1 white and black Cleric creature token. It has \"{3}{W}{B}{B}, {T}, Sacrifice this creature: Return a card named Deathpact Angel from your graveyard to the battlefield.\"");
         cardType.add(CardType.CREATURE);
 
         color.setWhite(true);
         color.setBlack(true);
-        
+
         subtype.add("Cleric");
-        
+
         power = new MageInt(1);
         toughness = new MageInt(1);
-        
+
         Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new ReturnFromGraveyardToBattlefieldTargetEffect(), new ManaCostsImpl("{3}{W}{B}{B}"));
         ability.addCost(new TapSourceCost());
         ability.addCost(new SacrificeSourceCost());

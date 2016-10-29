@@ -24,18 +24,17 @@
 * The views and conclusions contained in the software and documentation are those of the
 * authors and should not be interpreted as representing official policies, either expressed
 * or implied, of BetaSteward_at_googlemail.com.
-*/
-
+ */
 package mage.cards.c;
 
 import java.util.UUID;
-import mage.constants.CardType;
 import mage.abilities.condition.common.KickedCondition;
 import mage.abilities.decorator.ConditionalOneShotEffect;
 import mage.abilities.effects.common.CreateTokenEffect;
 import mage.abilities.keyword.KickerAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
+import mage.constants.CardType;
 import mage.game.permanent.token.KorSoldierToken;
 
 /**
@@ -45,14 +44,13 @@ import mage.game.permanent.token.KorSoldierToken;
 public class ConquerorsPledge extends CardImpl {
 
     public ConquerorsPledge(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{2}{W}{W}{W}");
-
+        super(ownerId, setInfo, new CardType[]{CardType.SORCERY}, "{2}{W}{W}{W}");
 
         this.addAbility(new KickerAbility("{6}"));
 
         this.getSpellAbility().addEffect(new ConditionalOneShotEffect(new CreateTokenEffect(new KorSoldierToken(), 12),
                 new CreateTokenEffect(new KorSoldierToken(), 6), KickedCondition.getInstance(),
-                "Put six 1/1 white Kor Soldier creature tokens onto the battlefield. If {this} was kicked, put twelve of those tokens onto the battlefield instead"));
+                "Create six 1/1 white Kor Soldier creature tokens. If {this} was kicked, create twelve of those tokens instead"));
     }
 
     public ConquerorsPledge(final ConquerorsPledge card) {

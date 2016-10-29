@@ -73,7 +73,7 @@ public class RaisedByWolves extends CardImpl {
         Ability ability = new EnchantAbility(auraTarget.getTargetName());
         this.addAbility(ability);
 
-        // When Raised by Wolves enters the battlefield, put two 2/2 green Wolf creature tokens onto the battlefield.
+        // When Raised by Wolves enters the battlefield, create two 2/2 green Wolf creature tokens.
         this.addAbility(new EntersBattlefieldTriggeredAbility(new CreateTokenEffect(new WolfToken(), 2)));
         // Enchanted creature gets +1/+1 for each Wolf you control.
         DynamicValue amountOfWolves = new PermanentsOnBattlefieldCount(filter);

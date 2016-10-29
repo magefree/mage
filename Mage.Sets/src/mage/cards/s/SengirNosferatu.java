@@ -67,9 +67,9 @@ public class SengirNosferatu extends CardImpl {
 
         // Flying
         this.addAbility(FlyingAbility.getInstance());
-        // {1}{B}, Exile Sengir Nosferatu: Put a 1/2 black Bat creature token with flying onto the battlefield. It has "{1}{B}, Sacrifice this creature: Return an exiled card named Sengir Nosferatu to the battlefield under its owner's control."
+        // {1}{B}, Exile Sengir Nosferatu: Create a 1/2 black Bat creature token with flying. It has "{1}{B}, Sacrifice this creature: Return an exiled card named Sengir Nosferatu to the battlefield under its owner's control."
         Effect effect = new CreateTokenEffect(new SengirNosferatuBatToken(), 1);
-        effect.setText("Put a 1/2 black Bat creature token with flying onto the battlefield. It has \"{1}{B}, Sacrifice this creature: Return an exiled card named Sengir Nosferatu to the battlefield under its owner's control.\"");
+        effect.setText("Create a 1/2 black Bat creature token with flying. It has \"{1}{B}, Sacrifice this creature: Return an exiled card named Sengir Nosferatu to the battlefield under its owner's control.\"");
         Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, effect, new ManaCostsImpl("{1}{B}"));
         ability.addCost(new ExileSourceCost());
         this.addAbility(ability);

@@ -65,7 +65,7 @@ public class ElspethKnightErrant extends CardImpl {
 
         this.addAbility(new PlanswalkerEntersWithLoyalityCountersAbility(4));
 
-        // +1: Put a 1/1 white Soldier creature token onto the battlefield.
+        // +1: Create a 1/1 white Soldier creature token.
         Token token = new SoldierToken();
         token.setOriginalExpansionSetCode("ALA"); // to get the right image
         this.addAbility(new LoyaltyAbility(new CreateTokenEffect(token), 1));

@@ -48,7 +48,7 @@ public class GelatinousGenesis extends CardImpl {
         super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{X}{X}{G}");
 
 
-        // Put X X/X green Ooze creature tokens onto the battlefield.
+        // create X X/X green Ooze creature tokens.
         this.getSpellAbility().addEffect(new GelatinousGenesisEffect());
     }
 
@@ -66,7 +66,7 @@ class GelatinousGenesisEffect extends OneShotEffect {
 
     public GelatinousGenesisEffect() {
         super(Outcome.PutCreatureInPlay);
-        staticText = "Put X X/X green Ooze creature tokens onto the battlefield";
+        staticText = "create X X/X green Ooze creature tokens";
     }
 
     public GelatinousGenesisEffect(GelatinousGenesisEffect ability) {

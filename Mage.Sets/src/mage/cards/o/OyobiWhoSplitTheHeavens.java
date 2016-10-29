@@ -54,7 +54,7 @@ public class OyobiWhoSplitTheHeavens extends CardImpl {
         this.power = new MageInt(3);
         this.toughness = new MageInt(6);
         this.addAbility(FlyingAbility.getInstance());
-        // Whenever you cast a Spirit or Arcane spell, put a 3/3 white Spirit creature token with flying onto the battlefield.
+        // Whenever you cast a Spirit or Arcane spell, create a 3/3 white Spirit creature token with flying.
         this.addAbility(new SpellCastControllerTriggeredAbility(new CreateTokenEffect(new AnotherSpiritToken()), filter, false));
     }
 

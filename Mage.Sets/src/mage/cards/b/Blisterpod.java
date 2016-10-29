@@ -45,7 +45,7 @@ import mage.game.permanent.token.EldraziScionToken;
 public class Blisterpod extends CardImpl {
 
     public Blisterpod(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{G}");
+        super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{G}");
         this.subtype.add("Eldrazi");
         this.subtype.add("Drone");
         this.power = new MageInt(1);
@@ -53,9 +53,9 @@ public class Blisterpod extends CardImpl {
 
         // Devoid
         this.addAbility(new DevoidAbility(this.color));
-        // When Blisterpod dies, put a 1/1 colorless Eldrazi Scion creature token onto the battlefield. It has "Sacrifice this creature: Add {C} to your mana pool."
+        // When Blisterpod dies, create a 1/1 colorless Eldrazi Scion creature token. It has "Sacrifice this creature: Add {C} to your mana pool."
         Effect effect = new CreateTokenEffect(new EldraziScionToken());
-        effect.setText("put a 1/1 colorless Eldrazi Scion creature token onto the battlefield. It has \"Sacrifice this creature: Add {C} to your mana pool.\"");
+        effect.setText("Create a 1/1 colorless Eldrazi Scion creature token. It has \"Sacrifice this creature: Add {C} to your mana pool.\"");
         this.addAbility(new DiesTriggeredAbility(effect, false));
     }
 

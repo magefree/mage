@@ -3,7 +3,6 @@ package mage.abilities.keyword;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
-
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.EntersBattlefieldTriggeredAbility;
@@ -15,17 +14,18 @@ import mage.game.permanent.token.Token;
 import mage.players.Player;
 
 public class LivingWeaponAbility extends EntersBattlefieldTriggeredAbility {
+
     public LivingWeaponAbility() {
         super(new LivingWeaponEffect());
     }
 
-     public LivingWeaponAbility(final LivingWeaponAbility ability) {
+    public LivingWeaponAbility(final LivingWeaponAbility ability) {
         super(ability);
     }
 
     @Override
     public String getRule() {
-        return "Living weapon <i>(When this Equipment enters the battlefield, put a 0/0 black Germ creature token onto the battlefield, then attach this to it.)</i>";
+        return "Living weapon <i>(When this Equipment enters the battlefield, create a 0/0 black Germ creature token, then attach this to it.)</i>";
     }
 
     @Override
@@ -35,6 +35,7 @@ public class LivingWeaponAbility extends EntersBattlefieldTriggeredAbility {
 }
 
 class LivingWeaponEffect extends CreateTokenEffect {
+
     LivingWeaponEffect() {
         super(new GermToken());
     }

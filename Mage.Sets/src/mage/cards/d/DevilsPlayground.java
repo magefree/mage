@@ -44,9 +44,9 @@ public class DevilsPlayground extends CardImpl {
     public DevilsPlayground(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{4}{R}{R}");
 
-        // Put four 1/1 red Devil creature tokens onto the battlefield. They have "When this creature dies, it deals 1 damage to target creature or player."
+        // Create four 1/1 red Devil creature tokens. They have "When this creature dies, it deals 1 damage to target creature or player."
         Effect effect = new CreateTokenEffect(new DevilToken(), 4);
-        effect.setText("Put four 1/1 red Devil creature tokens onto the battlefield. They have \"When this creature dies, it deals 1 damage to target creature or player.\"");
+        effect.setText("Create four 1/1 red Devil creature tokens. They have \"When this creature dies, it deals 1 damage to target creature or player.\"");
         this.getSpellAbility().addEffect(effect);
     }
 

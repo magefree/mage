@@ -48,14 +48,14 @@ import mage.game.permanent.token.Token;
 public class RukhEgg extends CardImpl {
 
     public RukhEgg(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{3}{R}");
+        super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{3}{R}");
         this.subtype.add("Bird");
         this.power = new MageInt(0);
         this.toughness = new MageInt(3);
 
-        // When Rukh Egg dies, put a 4/4 red Bird creature token with flying onto the battlefield at the beginning of the next end step.
+        // When Rukh Egg dies, create a 4/4 red Bird creature token with flying at the beginning of the next end step.
         Effect effect = new CreateDelayedTriggeredAbilityEffect(new AtTheBeginOfNextEndStepDelayedTriggeredAbility(new CreateTokenEffect(new BirdToken())));
-        effect.setText("put a 4/4 red Bird creature token with flying onto the battlefield at the beginning of the next end step");
+        effect.setText("create a 4/4 red Bird creature token with flying at the beginning of the next end step");
         Ability ability = new DiesTriggeredAbility(effect);
         this.addAbility(ability);
     }
@@ -71,9 +71,9 @@ public class RukhEgg extends CardImpl {
 }
 
 class BirdToken extends Token {
-    
+
     public BirdToken() {
-        this("ARN"); //there is no such token in either ARN, 8ED or 9ED 
+        this("ARN"); //there is no such token in either ARN, 8ED or 9ED
     }
 
     public BirdToken(String setCode) {

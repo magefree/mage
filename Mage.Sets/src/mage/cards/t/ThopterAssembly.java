@@ -62,8 +62,8 @@ public class ThopterAssembly extends CardImpl {
         this.addAbility(FlyingAbility.getInstance());
 
         // At the beginning of your upkeep, if you control no Thopters other than Thopter Assembly,
-        // return Thopter Assembly to its owner's hand and put five 1/1 colorless Thopter artifact
-        // creature tokens with flying onto the battlefield.
+        // return Thopter Assembly to its owner's hand and create five 1/1 colorless Thopter artifact
+        // creature tokens with flying.
         this.addAbility(new ThopterAssemblyTriggeredAbility());
     }
 
@@ -116,6 +116,6 @@ class ThopterAssemblyTriggeredAbility extends TriggeredAbilityImpl {
 
     @Override
     public String getRule() {
-        return "At the beginning of your upkeep, if you control no Thopters other than {this}, return {this} to its owner's hand and put five 1/1 colorless Thopter artifact creature tokens with flying onto the battlefield";
+        return "At the beginning of your upkeep, if you control no Thopters other than {this}, return {this} to its owner's hand and create five 1/1 colorless Thopter artifact creature tokens with flying";
     }
 }

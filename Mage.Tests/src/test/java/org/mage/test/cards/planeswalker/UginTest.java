@@ -54,7 +54,7 @@ public class UginTest extends CardTestPlayerBase {
         // When Nissa, Vastwood Seer enters the battlefield, you may search your library for a basic Forest card, reveal it, put it into your hand, then shuffle your library.
         // Whenever a land enters the battlefield under your control, if you control seven or more lands, exile Nissa, then return her to the battlefield transformed under her owner's control.
         // +1: Reveal the top card of your library. If it's a land card, put it onto the battlefield. Otherwise, put it into your hand.
-        // -2: Put a legendary 4/4 green Elemental creature token named Ashaya, the Awoken World onto the battlefield.
+        // -2: Create a legendary 4/4 green Elemental creature token named Ashaya, the Awoken World.
         // -7: Untap up to six target lands. They become 6/6 Elemental creatures. They're still lands.
         addCard(Zone.HAND, playerB, "Nissa, Vastwood Seer");
 
@@ -62,7 +62,7 @@ public class UginTest extends CardTestPlayerBase {
 
         castSpell(2, PhaseStep.PRECOMBAT_MAIN, playerB, "Nissa, Vastwood Seer");
         playLand(2, PhaseStep.PRECOMBAT_MAIN, playerB, "Forest");
-        activateAbility(2, PhaseStep.POSTCOMBAT_MAIN, playerB, "-2: Put a legendary 4/4 green Elemental creature token named Ashaya, the Awoken World onto the battlefield.");
+        activateAbility(2, PhaseStep.POSTCOMBAT_MAIN, playerB, "-2: Create a legendary 4/4 green Elemental creature token named Ashaya, the Awoken World.");
 
         attack(3, playerA, "Silvercoat Lion");
         block(3, playerB, "Ashaya, the Awoken World", "Silvercoat Lion");

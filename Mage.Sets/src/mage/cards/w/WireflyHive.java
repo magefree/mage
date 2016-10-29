@@ -51,7 +51,7 @@ public class WireflyHive extends CardImpl {
 
     public WireflyHive(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.ARTIFACT}, "{3}");
-        // {3}, {tap}: Flip a coin. If you win the flip, put a 2/2 colorless Insect artifact creature token with flying named Wirefly onto the battlefield.
+        // {3}, {tap}: Flip a coin. If you win the flip, create a 2/2 colorless Insect artifact creature token with flying named Wirefly.
         // If you lose the flip, destroy all permanents named Wirefly.
         FilterPermanent filter = new FilterPermanent("permanents named Wirefly");
         filter.add(new NamePredicate("Wirefly"));

@@ -70,7 +70,7 @@ public class SarkhanUnbroken extends CardImpl {
 
         // +1: Draw a card, then add one mana of any color to your mana pool.
         this.addAbility(new LoyaltyAbility(new SarkhanUnbrokenAbility1(), 1));
-        // -2: Put a 4/4 red Dragon creature token with flying onto the battlefield.
+        // -2: Create a 4/4 red Dragon creature token with flying.
         this.addAbility(new LoyaltyAbility(new CreateTokenEffect(new DragonToken(), 1), -2));
         // -8: Search your library for any number of Dragon creature cards and put them onto the battlefield. Then shuffle your library.
         this.addAbility(new LoyaltyAbility(new SearchLibraryPutInPlayEffect(new TargetCardInLibrary(0, Integer.MAX_VALUE, dragonFilter)), -8));

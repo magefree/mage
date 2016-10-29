@@ -55,7 +55,7 @@ public class CribSwap extends CardImpl {
 
         // Changeling
         this.addAbility(ChangelingAbility.getInstance());
-        // Exile target creature. Its controller puts a 1/1 colorless Shapeshifter creature token with changeling onto the battlefield.
+        // Exile target creature. Its controller creates a 1/1 colorless Shapeshifter creature token with changeling.
         this.getSpellAbility().addEffect(new ExileTargetEffect());
         this.getSpellAbility().addTarget(new TargetCreaturePermanent());
         this.getSpellAbility().addEffect(new CribSwapEffect());
@@ -76,7 +76,7 @@ class CribSwapEffect extends OneShotEffect {
 
     public CribSwapEffect() {
         super(Outcome.Benefit);
-        this.staticText = "Its controller puts a 1/1 colorless Shapeshifter creature token with changeling onto the battlefield";
+        this.staticText = "Its controller creates a 1/1 colorless Shapeshifter creature token with changeling";
     }
 
     public CribSwapEffect(final CribSwapEffect effect) {

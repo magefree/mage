@@ -62,7 +62,7 @@ public class ShardingSphinx extends CardImpl {
         // Flying
         this.addAbility(FlyingAbility.getInstance());
 
-        // Whenever an artifact creature you control deals combat damage to a player, you may put a 1/1 blue Thopter artifact creature token with flying onto the battlefield.
+        // Whenever an artifact creature you control deals combat damage to a player, you may create a 1/1 blue Thopter artifact creature token with flying.
         this.addAbility(new DealsDamageToAPlayerAllTriggeredAbility(
                 new CreateTokenEffect(new ThopterToken()), 
                 filter, true, SetTargetPointer.NONE, true));

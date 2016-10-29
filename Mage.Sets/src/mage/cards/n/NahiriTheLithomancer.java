@@ -70,20 +70,20 @@ import mage.target.common.TargetControlledPermanent;
 public class NahiriTheLithomancer extends CardImpl {
 
     public NahiriTheLithomancer(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.PLANESWALKER},"{3}{W}{W}");
+        super(ownerId, setInfo, new CardType[]{CardType.PLANESWALKER}, "{3}{W}{W}");
         this.subtype.add("Nahiri");
 
         this.addAbility(new PlanswalkerEntersWithLoyalityCountersAbility(3));
 
-        // +2: Put a 1/1 white Kor Soldier creature token onto the battlefield. You may attach an Equipment you control to it.
+        // +2: Create a 1/1 white Kor Soldier creature token. You may attach an Equipment you control to it.
         this.addAbility(new LoyaltyAbility(new NahiriTheLithomancerFirstAbilityEffect(), 2));
 
         // -2: You may put an Equipment card from your hand or graveyard onto the battlefield.
         this.addAbility(new LoyaltyAbility(new NahiriTheLithomancerSecondAbilityEffect(), -2));
 
-        // -10: Put a colorless Equipment artifact token named Stoneforged Blade onto the battlefield. It has indestructible, "Equipped creature gets +5/+5 and has double strike," and equip {0}.
+        // -10: Create a colorless Equipment artifact token named Stoneforged Blade. It has indestructible, "Equipped creature gets +5/+5 and has double strike," and equip {0}.
         Effect effect = new CreateTokenEffect(new NahiriTheLithomancerEquipmentToken());
-        effect.setText("Put a colorless Equipment artifact token named Stoneforged Blade onto the battlefield. It has indestructible, \"Equipped creature gets +5/+5 and has double strike,\" and equip {0}");
+        effect.setText("Create a colorless Equipment artifact token named Stoneforged Blade. It has indestructible, \"Equipped creature gets +5/+5 and has double strike,\" and equip {0}");
         this.addAbility(new LoyaltyAbility(effect, -10));
 
         // Nahiri, the Lithomancer can be your commander.
@@ -110,7 +110,7 @@ class NahiriTheLithomancerFirstAbilityEffect extends OneShotEffect {
 
     NahiriTheLithomancerFirstAbilityEffect() {
         super(Outcome.PutCreatureInPlay);
-        this.staticText = "Put a 1/1 white Kor Soldier creature token onto the battlefield. You may attach an Equipment you control to it";
+        this.staticText = "Create a 1/1 white Kor Soldier creature token. You may attach an Equipment you control to it";
     }
 
     NahiriTheLithomancerFirstAbilityEffect(final NahiriTheLithomancerFirstAbilityEffect effect) {

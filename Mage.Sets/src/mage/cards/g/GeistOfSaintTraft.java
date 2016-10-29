@@ -28,8 +28,6 @@
 package mage.cards.g;
 
 import java.util.UUID;
-
-import mage.constants.CardType;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.AttacksTriggeredAbility;
@@ -39,6 +37,7 @@ import mage.abilities.effects.common.ExileTargetEffect;
 import mage.abilities.keyword.HexproofAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
+import mage.constants.CardType;
 import mage.constants.Outcome;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
@@ -52,7 +51,7 @@ import mage.target.targetpointer.FixedTarget;
 public class GeistOfSaintTraft extends CardImpl {
 
     public GeistOfSaintTraft(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{1}{W}{U}");
+        super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{1}{W}{U}");
         this.supertype.add("Legendary");
         this.subtype.add("Spirit");
         this.subtype.add("Cleric");
@@ -62,7 +61,7 @@ public class GeistOfSaintTraft extends CardImpl {
 
         // Hexproof
         this.addAbility(HexproofAbility.getInstance());
-        // Whenever Geist of Saint Traft attacks, put a 4/4 white Angel creature token with flying onto the battlefield tapped and attacking. Exile that token at end of combat.
+        // Whenever Geist of Saint Traft attacks, create a 4/4 white Angel creature token with flying tapped and attacking. Exile that token at end of combat.
         this.addAbility(new AttacksTriggeredAbility(new GeistOfSaintTraftEffect(), false));
     }
 
@@ -80,7 +79,7 @@ class GeistOfSaintTraftEffect extends OneShotEffect {
 
     GeistOfSaintTraftEffect() {
         super(Outcome.PutCreatureInPlay);
-        staticText = "put a 4/4 white Angel creature token with flying onto the battlefield tapped and attacking. Exile that token at end of combat";
+        staticText = "create a 4/4 white Angel creature token with flying tapped and attacking. Exile that token at end of combat";
     }
 
     GeistOfSaintTraftEffect(final GeistOfSaintTraftEffect effect) {

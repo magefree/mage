@@ -64,7 +64,7 @@ public class TirelessTracker extends CardImpl {
         this.power = new MageInt(3);
         this.toughness = new MageInt(2);
 
-        // Whenever a land enters the battlefield under your control, investigate. <i>(Put a colorless Clue artifact token onto the battlefield with "{2}, Sacrifice this artifact: Draw a card.")</i>
+        // Whenever a land enters the battlefield under your control, investigate. <i>(Create a colorless Clue artifact token with "{2}, Sacrifice this artifact: Draw a card.")</i>
         this.addAbility(new EntersBattlefieldAllTriggeredAbility(Zone.BATTLEFIELD, new InvestigateEffect(), new FilterControlledLandPermanent("a land"), false, null, true));
 
         // Whenever you sacrifice a Clue, put a +1/+1 counter on Tireless Tracker.

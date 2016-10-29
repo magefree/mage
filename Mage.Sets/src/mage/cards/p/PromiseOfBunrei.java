@@ -59,7 +59,7 @@ public class PromiseOfBunrei extends CardImpl {
     public PromiseOfBunrei(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.ENCHANTMENT},"{2}{W}");
 
-        // When a creature you control dies, sacrifice Promise of Bunrei. If you do, put four 1/1 colorless Spirit creature tokens onto the battlefield.
+        // When a creature you control dies, sacrifice Promise of Bunrei. If you do, create four 1/1 colorless Spirit creature tokens.
         this.addAbility(new DiesCreatureTriggeredAbility(new PromiseOfBunreiEffect(), false, filter));
     }
 
@@ -77,7 +77,7 @@ class PromiseOfBunreiEffect extends OneShotEffect {
     
     public PromiseOfBunreiEffect() {
         super(Outcome.Benefit);
-        this.staticText = "sacrifice {this}. If you do, put four 1/1 colorless Spirit creature tokens onto the battlefield";
+        this.staticText = "sacrifice {this}. If you do, create four 1/1 colorless Spirit creature tokens";
     }
     
     public PromiseOfBunreiEffect(final PromiseOfBunreiEffect effect) {

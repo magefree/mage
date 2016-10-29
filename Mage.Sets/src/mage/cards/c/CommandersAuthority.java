@@ -63,7 +63,7 @@ public class CommandersAuthority extends CardImpl {
         this.getSpellAbility().addEffect(new AttachEffect(Outcome.AddAbility));
         Ability ability = new EnchantAbility(auraTarget.getTargetName());
         this.addAbility(ability);
-        // Enchanted creature has "At the beginning of your upkeep, put a 1/1 white Human creature token onto the battlefield."
+        // Enchanted creature has "At the beginning of your upkeep, create a 1/1 white Human creature token."
         ability = new BeginningOfUpkeepTriggeredAbility(new CreateTokenEffect(new HumanToken()), TargetController.YOU, false);
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new GainAbilityAttachedEffect(ability, AttachmentType.AURA)));
     }

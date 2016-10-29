@@ -43,7 +43,7 @@ import mage.constants.CardType;
 public class Spawnwrithe extends CardImpl {
 
     public Spawnwrithe(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{2}{G}");
+        super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{2}{G}");
         this.subtype.add("Elemental");
 
         this.power = new MageInt(2);
@@ -51,7 +51,7 @@ public class Spawnwrithe extends CardImpl {
 
         // Trample
         this.addAbility(TrampleAbility.getInstance());
-        // Whenever Spawnwrithe deals combat damage to a player, put a token that's a copy of Spawnwrithe onto the battlefield.
+        // Whenever Spawnwrithe deals combat damage to a player, create a token that's a copy of Spawnwrithe.
         this.addAbility(new DealsCombatDamageToAPlayerTriggeredAbility(new PutTokenOntoBattlefieldCopySourceEffect(), false));
 
     }

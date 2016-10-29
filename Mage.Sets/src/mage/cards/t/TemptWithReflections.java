@@ -53,7 +53,7 @@ public class TemptWithReflections extends CardImpl {
     public TemptWithReflections(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{3}{U}");
 
-        // Tempting offer - Choose target creature you control. Put a token onto the battlefield that's a copy of that creature. Each opponent may put a token onto the battlefield that's a copy of that creature. For each opponent who does, put a token onto the battlefield that's a copy of that creature.
+        // Tempting offer - Choose target creature you control. Create a token that's a copy of that creature. Each opponent may create a token that's a copy of that creature. For each opponent who does, create a token that's a copy of that creature.
         this.getSpellAbility().addEffect(new TemptWithReflectionsEffect());
         this.getSpellAbility().addTarget(new TargetControlledCreaturePermanent());
     }
@@ -72,7 +72,7 @@ class TemptWithReflectionsEffect extends OneShotEffect {
 
     public TemptWithReflectionsEffect() {
         super(Outcome.PutCreatureInPlay);
-        this.staticText = "<i>Tempting offer</i> - Choose target creature you control. Put a token onto the battlefield that's a copy of that creature. Each opponent may put a token onto the battlefield that's a copy of that creature. For each opponent who does, put a token onto the battlefield that's a copy of that creature";
+        this.staticText = "<i>Tempting offer</i> - Choose target creature you control. Create a token that's a copy of that creature. Each opponent may create a token that's a copy of that creature. For each opponent who does, create a token that's a copy of that creature";
     }
 
     public TemptWithReflectionsEffect(final TemptWithReflectionsEffect effect) {
@@ -99,7 +99,7 @@ class TemptWithReflectionsEffect extends OneShotEffect {
             do {
                 if (game.getOpponents(source.getControllerId()).contains(player.getId())) {
                     String decision;
-                    if (player.chooseUse(outcome, "Put a copy of target creature onto the battlefield for you?", source, game)) {
+                    if (player.chooseUse(outcome, "Create a copy of target creature for you?", source, game)) {
                         playersSaidYes.add(player.getId());
                         decision = " chooses to copy ";
                     } else {

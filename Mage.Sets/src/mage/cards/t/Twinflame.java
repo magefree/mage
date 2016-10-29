@@ -59,7 +59,7 @@ public class Twinflame extends CardImpl {
 
         // Strive - Twinflame costs 2R more to cast for each target beyond the first.
         this.addAbility(new StriveAbility("{2}{R}"));
-        // Choose any number of target creatures you control. For each of them, put a token that's a copy of that creature onto the battlefield. Those tokens have haste. Exile them at the beginning of the next end step.
+        // Choose any number of target creatures you control. For each of them, create a token that's a copy of that creature. Those tokens have haste. Exile them at the beginning of the next end step.
         this.getSpellAbility().addEffect(new TwinflameCopyEffect());
         this.getSpellAbility().addTarget(new TargetControlledCreaturePermanent(0, Integer.MAX_VALUE, new FilterControlledCreaturePermanent(), false));
 
@@ -79,7 +79,7 @@ class TwinflameCopyEffect extends OneShotEffect {
 
     public TwinflameCopyEffect() {
         super(Outcome.PutCreatureInPlay);
-        this.staticText = "Choose any number of target creatures you control. For each of them, put a token that's a copy of that creature onto the battlefield. Those tokens have haste. Exile them at the beginning of the next end step";
+        this.staticText = "Choose any number of target creatures you control. For each of them, create a token that's a copy of that creature. Those tokens have haste. Exile them at the beginning of the next end step";
     }
 
     public TwinflameCopyEffect(final TwinflameCopyEffect effect) {

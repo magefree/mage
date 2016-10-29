@@ -57,7 +57,7 @@ public class AssaultBattery extends SplitCard {
         getLeftHalfCard().getSpellAbility().addTarget(new TargetCreatureOrPlayer());
 
         // Battery
-        // Put a 3/3 green Elephant creature token onto the battlefield.
+        // Create a 3/3 green Elephant creature token.
         getRightHalfCard().getSpellAbility().addEffect(new CreateTokenEffect(new ElephantToken()));
 
     }

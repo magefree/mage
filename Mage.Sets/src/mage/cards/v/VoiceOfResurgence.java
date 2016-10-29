@@ -60,7 +60,7 @@ public class VoiceOfResurgence extends CardImpl {
         this.power = new MageInt(2);
         this.toughness = new MageInt(2);
 
-        // Whenever an opponent casts a spell during your turn or when Voice of Resurgence dies, put a green and white Elemental creature token onto the battlefield with "This creature's power and toughness are each equal to the number of creatures you control."
+        // Whenever an opponent casts a spell during your turn or when Voice of Resurgence dies, create a green and white Elemental creature token with "This creature's power and toughness are each equal to the number of creatures you control."
         this.addAbility(new VoiceOfResurgenceTriggeredAbility());
 
     }
@@ -112,7 +112,7 @@ class VoiceOfResurgenceTriggeredAbility extends TriggeredAbilityImpl {
 
     @Override
     public String getRule() {
-        return "Whenever an opponent casts a spell during your turn or when {this} dies, put a green and white Elemental creature token onto the battlefield with \"This creature's power and toughness are each equal to the number of creatures you control.";
+        return "Whenever an opponent casts a spell during your turn or when {this} dies, create a green and white Elemental creature token with \"This creature's power and toughness are each equal to the number of creatures you control.";
     }
 
     @Override

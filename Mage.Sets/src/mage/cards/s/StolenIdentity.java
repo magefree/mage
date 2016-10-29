@@ -53,7 +53,7 @@ public class StolenIdentity extends CardImpl {
     public StolenIdentity(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{4}{U}{U}");
 
-        // Put a token onto the battlefield that's a copy of target artifact or creature.
+        // Create a token that's a copy of target artifact or creature.
         this.getSpellAbility().addEffect(new PutTokenOntoBattlefieldCopyTargetEffect());
         this.getSpellAbility().addTarget(new TargetPermanent(filter));
         // Cipher

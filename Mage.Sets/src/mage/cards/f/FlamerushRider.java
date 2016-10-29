@@ -71,7 +71,7 @@ public class FlamerushRider extends CardImpl {
         this.power = new MageInt(3);
         this.toughness = new MageInt(3);
 
-        // Whenever Flamerush Rider attacks, put a token onto the battlefield tapped and attacking that's a copy of another target attacking creature. Exile the token at end of combat.
+        // Whenever Flamerush Rider attacks, create a token tapped and attacking that's a copy of another target attacking creature. Exile the token at end of combat.
         Ability ability = new AttacksTriggeredAbility(new FlamerushRiderEffect(), false);
         ability.addTarget(new TargetPermanent(filter));
         this.addAbility(ability);
@@ -94,7 +94,7 @@ class FlamerushRiderEffect extends OneShotEffect {
 
     public FlamerushRiderEffect() {
         super(Outcome.Copy);
-        this.staticText = "put a token onto the battlefield tapped and attacking that's a copy of another target attacking creature. Exile the token at end of combat";
+        this.staticText = "create a token tapped and attacking that's a copy of another target attacking creature. Exile the token at end of combat";
     }
 
     public FlamerushRiderEffect(final FlamerushRiderEffect effect) {

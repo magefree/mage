@@ -49,7 +49,7 @@ public class BrindleShoat extends CardImpl {
         this.power = new MageInt(1);
         this.toughness = new MageInt(1);
 
-        // When Brindle Shoat dies, put a 3/3 green Boar creature token onto the battlefield.
+        // When Brindle Shoat dies, create a 3/3 green Boar creature token.
         this.addAbility(new DiesTriggeredAbility(new CreateTokenEffect(new BoarToken())));
     }
 

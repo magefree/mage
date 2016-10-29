@@ -62,7 +62,7 @@ public class KrenkoMobBoss extends CardImpl {
         this.power = new MageInt(3);
         this.toughness = new MageInt(3);
 
-        // {tap}: Put X 1/1 red Goblin creature tokens onto the battlefield, where X is the number of Goblins you control.
+        // {tap}: create X 1/1 red Goblin creature tokens, where X is the number of Goblins you control.
         this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD,
                 new CreateTokenEffect(new GoblinToken(), new PermanentsOnBattlefieldCount(filter)),
                 new TapSourceCost()));

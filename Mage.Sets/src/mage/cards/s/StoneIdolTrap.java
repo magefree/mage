@@ -68,7 +68,7 @@ public class StoneIdolTrap extends CardImpl {
         ability.setRuleAtTheTop(true);
         this.addAbility(ability);
 
-        // Put a 6/12 colorless Construct artifact creature token with trample onto the battlefield. Exile it at the beginning of your next end step.
+        // Create a 6/12 colorless Construct artifact creature token with trample. Exile it at the beginning of your next end step.
         this.getSpellAbility().addEffect(new StoneIdolTrapEffect());
     }
 
@@ -124,7 +124,7 @@ class StoneIdolTrapEffect extends OneShotEffect {
 
     public StoneIdolTrapEffect() {
         super(Outcome.PutCreatureInPlay);
-        this.staticText = "Put a 6/12 colorless Construct artifact creature token with trample onto the battlefield. Exile it at the beginning of your next end step";
+        this.staticText = "Create a 6/12 colorless Construct artifact creature token with trample. Exile it at the beginning of your next end step";
     }
 
     public StoneIdolTrapEffect(final StoneIdolTrapEffect effect) {

@@ -63,7 +63,7 @@ public class GutterGrime extends CardImpl {
         super(ownerId,setInfo,new CardType[]{CardType.ENCHANTMENT},"{4}{G}");
 
 
-        // Whenever a nontoken creature you control dies, put a slime counter on Gutter Grime, then put a green Ooze creature token onto the battlefield with "This creature's power and toughness are each equal to the number of slime counters on Gutter Grime."
+        // Whenever a nontoken creature you control dies, put a slime counter on Gutter Grime, then create a green Ooze creature token with "This creature's power and toughness are each equal to the number of slime counters on Gutter Grime."
         this.addAbility(new GutterGrimeTriggeredAbility());
     }
 
@@ -118,7 +118,7 @@ class GutterGrimeTriggeredAbility extends TriggeredAbilityImpl {
 
     @Override
     public String getRule() {
-        return "Whenever a nontoken creature you control dies, put a slime counter on {this}, then put a green Ooze creature token onto the battlefield with \"This creature's power and toughness are each equal to the number of slime counters on {this}.\"";
+        return "Whenever a nontoken creature you control dies, put a slime counter on {this}, then create a green Ooze creature token with \"This creature's power and toughness are each equal to the number of slime counters on {this}.\"";
     }
 }
 

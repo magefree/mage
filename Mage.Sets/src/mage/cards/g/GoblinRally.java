@@ -45,7 +45,7 @@ public class GoblinRally extends CardImpl {
         super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{3}{R}{R}");
 
 
-        // Put four 1/1 red Goblin creature tokens onto the battlefield.
+        // Create four 1/1 red Goblin creature tokens.
         this.getSpellAbility().addEffect(new CreateTokenEffect(new GoblinToken(), 4));
     }
 

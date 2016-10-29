@@ -46,9 +46,9 @@ public class DeployToTheFront extends CardImpl {
     public DeployToTheFront(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{5}{W}{W}");
 
-        // Put X 1/1 white Soldier creature tokens onto the battlefield, where X is the number of creatures on the battlefield.
+        // create X 1/1 white Soldier creature tokens, where X is the number of creatures on the battlefield.
         Effect effect = new CreateTokenEffect(new SoldierToken(), new PermanentsOnBattlefieldCount(new FilterCreaturePermanent("the number of creatures on the battlefield")));
-        effect.setText("Put X 1/1 white Soldier creature tokens onto the battlefield, where X is the number of creatures on the battlefield");
+        effect.setText("create X 1/1 white Soldier creature tokens, where X is the number of creatures on the battlefield");
         this.getSpellAbility().addEffect(effect);
     }
 

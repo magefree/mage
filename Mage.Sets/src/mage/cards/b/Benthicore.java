@@ -69,7 +69,7 @@ public class Benthicore extends CardImpl {
         this.power = new MageInt(5);
         this.toughness = new MageInt(5);
         
-        // When Benthicore enters the battlefield, put two 1/1 blue Merfolk Wizard creature tokens onto the battlefield.
+        // When Benthicore enters the battlefield, create two 1/1 blue Merfolk Wizard creature tokens.
         this.addAbility(new EntersBattlefieldTriggeredAbility(new CreateTokenEffect(new MerfolkWizardToken(), 2), false));
         
         // Tap two untapped Merfolk you control: Untap Benthicore. It gains shroud until end of turn.

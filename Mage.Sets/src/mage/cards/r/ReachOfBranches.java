@@ -59,7 +59,7 @@ public class ReachOfBranches extends CardImpl {
         this.subtype.add("Treefolk");
 
 
-        // Put a 2/5 green Treefolk Shaman creature token onto the battlefield.
+        // Create a 2/5 green Treefolk Shaman creature token.
         this.getSpellAbility().addEffect(new CreateTokenEffect(new TreefolkShamanToken()));
         // Whenever a Forest enters the battlefield under your control, you may return Reach of Branches from your graveyard to your hand.
         this.addAbility(new EntersBattlefieldAllTriggeredAbility(Zone.GRAVEYARD, new ReturnSourceFromGraveyardToHandEffect(),filter, true, "", true));

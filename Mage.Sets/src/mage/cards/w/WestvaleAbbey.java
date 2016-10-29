@@ -64,7 +64,7 @@ public class WestvaleAbbey extends CardImpl {
         // {T}: Add {C} to your mana pool.
         this.addAbility(new ColorlessManaAbility());
 
-        // {5}, {T}, Pay 1 life: Put a 1/1 white and black Human Cleric creature token onto the battlefield.
+        // {5}, {T}, Pay 1 life: Create a 1/1 white and black Human Cleric creature token.
         Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new CreateTokenEffect(new HumanClericToken()), new GenericManaCost(5));
         ability.addCost(new TapSourceCost());
         ability.addCost(new PayLifeCost(1));

@@ -48,7 +48,7 @@ public class SlimeMolding extends CardImpl {
         super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{X}{G}");
 
 
-        // Put an X/X green Ooze creature token onto the battlefield.
+        // Create an X/X green Ooze creature token.
         this.getSpellAbility().addEffect(new SlimeMoldingEffect());
     }
 
@@ -66,7 +66,7 @@ class SlimeMoldingEffect extends OneShotEffect {
 
     public SlimeMoldingEffect() {
         super(Outcome.PutCreatureInPlay);
-        staticText = "Put an X/X green Ooze creature token onto the battlefield";
+        staticText = "Create an X/X green Ooze creature token";
     }
 
     public SlimeMoldingEffect(SlimeMoldingEffect ability) {

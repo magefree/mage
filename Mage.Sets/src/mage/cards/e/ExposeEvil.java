@@ -48,7 +48,7 @@ public class ExposeEvil extends CardImpl {
         this.getSpellAbility().addEffect(new TapTargetEffect());
         this.getSpellAbility().addTarget(new TargetCreaturePermanent(0, 2));
 
-        // Investigate (Put a colorless Clue artifact token onto the battlefield with \"{2}, Sacrifice this artifact: Draw a card.\")
+        // Investigate (Create a colorless Clue artifact token with \"{2}, Sacrifice this artifact: Draw a card.\")
         this.getSpellAbility().addEffect(new InvestigateEffect());
     }
 

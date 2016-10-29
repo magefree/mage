@@ -48,9 +48,9 @@ import mage.watchers.common.PlayerLostLifeWatcher;
 public class FirstResponse extends CardImpl {
 
     public FirstResponse(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.ENCHANTMENT},"{3}{W}");
+        super(ownerId, setInfo, new CardType[]{CardType.ENCHANTMENT}, "{3}{W}");
 
-        // At the beginning of each upkeep, if you lost life last turn, put a 1/1 white Soldier creature token onto the battlefield.
+        // At the beginning of each upkeep, if you lost life last turn, create a 1/1 white Soldier creature token.
         this.addAbility(new BeginningOfUpkeepTriggeredAbility(new FirstResponseEffect(), TargetController.ANY, false), new PlayerLostLifeWatcher());
 
     }
@@ -69,7 +69,7 @@ class FirstResponseEffect extends OneShotEffect {
 
     public FirstResponseEffect() {
         super(Outcome.PutCreatureInPlay);
-        this.staticText = "if you lost life last turn, put a 1/1 white Soldier creature token onto the battlefield";
+        this.staticText = "if you lost life last turn, create a 1/1 white Soldier creature token";
     }
 
     public FirstResponseEffect(final FirstResponseEffect effect) {

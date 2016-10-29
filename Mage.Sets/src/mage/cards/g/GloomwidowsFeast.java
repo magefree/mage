@@ -58,7 +58,7 @@ public class GloomwidowsFeast extends CardImpl {
         super(ownerId,setInfo,new CardType[]{CardType.INSTANT},"{3}{G}");
 
 
-        // Destroy target creature with flying. If that creature was blue or black, put a 1/2 green Spider creature token with reach onto the battlefield.
+        // Destroy target creature with flying. If that creature was blue or black, create a 1/2 green Spider creature token with reach.
         this.getSpellAbility().addEffect(new GloomwidowsFeastEffect());
         this.getSpellAbility().addTarget(new TargetPermanent(filter));
 
@@ -80,7 +80,7 @@ class GloomwidowsFeastEffect extends OneShotEffect {
 
     public GloomwidowsFeastEffect() {
         super(Outcome.DestroyPermanent);
-        this.staticText = "Destroy target creature with flying. If that creature was blue or black, put a 1/2 green Spider creature token with reach onto the battlefield";
+        this.staticText = "Destroy target creature with flying. If that creature was blue or black, create a 1/2 green Spider creature token with reach";
     }
 
     public GloomwidowsFeastEffect(final GloomwidowsFeastEffect effect) {

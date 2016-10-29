@@ -61,7 +61,7 @@ public class NoosegrafMob extends CardImpl {
         // Noosegraf Mob enters the battlefield with five +1/+1 counters on it.
         this.addAbility(new EntersBattlefieldAbility(new AddCountersSourceEffect(CounterType.P1P1.createInstance(5)), "with five +1/+1 counters on it"));
 
-        // Whenever a player casts a spell, remove a +1/+1 counter from Noosegraf Mob. If you do, put a 2/2 black Zombie creature token onto the battlefield.
+        // Whenever a player casts a spell, remove a +1/+1 counter from Noosegraf Mob. If you do, create a 2/2 black Zombie creature token.
         this.addAbility(new SpellCastAllTriggeredAbility(new NoosegrafMobEffect(), false));
     }
 
@@ -79,7 +79,7 @@ class NoosegrafMobEffect extends OneShotEffect {
 
     public NoosegrafMobEffect() {
         super(Outcome.Benefit);
-        staticText = "remove a +1/+1 counter from Noosegraf Mob. If you do, put a 2/2 black Zombie creature token onto the battlefield";
+        staticText = "remove a +1/+1 counter from Noosegraf Mob. If you do, create a 2/2 black Zombie creature token";
     }
 
     public NoosegrafMobEffect(final NoosegrafMobEffect effect) {

@@ -28,9 +28,6 @@
 package mage.cards.d;
 
 import java.util.UUID;
-import mage.constants.CardType;
-import mage.constants.Outcome;
-import mage.constants.Zone;
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.costs.common.TapSourceCost;
@@ -41,6 +38,9 @@ import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.cards.Cards;
 import mage.cards.CardsImpl;
+import mage.constants.CardType;
+import mage.constants.Outcome;
+import mage.constants.Zone;
 import mage.game.Game;
 import mage.game.permanent.token.SaprolingToken;
 import mage.game.permanent.token.Token;
@@ -53,7 +53,7 @@ import mage.players.Player;
 public class DruidicSatchel extends CardImpl {
 
     public DruidicSatchel(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.ARTIFACT},"{3}");
+        super(ownerId, setInfo, new CardType[]{CardType.ARTIFACT}, "{3}");
 
         Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new DruidicSatchelEffect(), new ManaCostsImpl("{2}"));
         ability.addCost(new TapSourceCost());
@@ -74,7 +74,7 @@ class DruidicSatchelEffect extends OneShotEffect {
 
     public DruidicSatchelEffect() {
         super(Outcome.Benefit);
-        staticText = "Reveal the top card of your library. If it's a creature card, put a 1/1 green Saproling creature token onto the battlefield. If it's a land card, put that card onto the battlefield under your control. If it's a noncreature, nonland card, you gain 2 life";
+        staticText = "Reveal the top card of your library. If it's a creature card, create a 1/1 green Saproling creature token. If it's a land card, put that card onto the battlefield under your control. If it's a noncreature, nonland card, you gain 2 life";
     }
 
     public DruidicSatchelEffect(final DruidicSatchelEffect effect) {

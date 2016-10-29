@@ -52,7 +52,7 @@ public class RiteOfTheSerpent extends CardImpl {
         super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{4}{B}{B}");
 
 
-        // Destroy target creature. If that creature had a +1/+1 counter on it, put a 1/1 green Snake creature token onto the battlefield.
+        // Destroy target creature. If that creature had a +1/+1 counter on it, create a 1/1 green Snake creature token.
         this.getSpellAbility().addEffect(new DestroyTargetEffect());
         this.getSpellAbility().addTarget(new TargetCreaturePermanent());
         this.getSpellAbility().addEffect(new RiteOfTheSerpentEffect());
@@ -72,7 +72,7 @@ class RiteOfTheSerpentEffect extends OneShotEffect {
 
     public RiteOfTheSerpentEffect() {
         super(Outcome.Benefit);
-        this.staticText = "If that creature had a +1/+1 counter on it, put a 1/1 green Snake creature token onto the battlefield";
+        this.staticText = "If that creature had a +1/+1 counter on it, create a 1/1 green Snake creature token";
     }
 
     public RiteOfTheSerpentEffect(final RiteOfTheSerpentEffect effect) {

@@ -70,12 +70,12 @@ public class SorinLordOfInnistrad extends CardImpl {
     }
 
     public SorinLordOfInnistrad(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.PLANESWALKER},"{2}{W}{B}");
+        super(ownerId, setInfo, new CardType[]{CardType.PLANESWALKER}, "{2}{W}{B}");
         this.subtype.add("Sorin");
 
         this.addAbility(new PlanswalkerEntersWithLoyalityCountersAbility(3));
 
-        // +1: Put a 1/1 black Vampire creature token with lifelink onto the battlefield.
+        // +1: Create a 1/1 black Vampire creature token with lifelink.
         this.addAbility(new LoyaltyAbility(new CreateTokenEffect(new VampireToken()), 1));
 
         // -2: You get an emblem with "Creatures you control get +1/+0."
@@ -97,6 +97,7 @@ public class SorinLordOfInnistrad extends CardImpl {
     }
 
     class VampireToken extends Token {
+
         VampireToken() {
             super("Vampire", "a 1/1 black Vampire creature token with lifelink");
             cardType.add(CardType.CREATURE);

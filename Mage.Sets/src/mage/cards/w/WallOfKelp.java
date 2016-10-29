@@ -48,7 +48,7 @@ import mage.game.permanent.token.Token;
 public class WallOfKelp extends CardImpl {
 
     public WallOfKelp(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{U}{U}");
+        super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{U}{U}");
         this.subtype.add("Plant");
         this.subtype.add("Wall");
         this.power = new MageInt(0);
@@ -56,8 +56,8 @@ public class WallOfKelp extends CardImpl {
 
         // Defender
         this.addAbility(DefenderAbility.getInstance());
-        
-        // {U}{U}, {tap}: Put a 0/1 blue Plant Wall creature token with defender named Kelp onto the battlefield.
+
+        // {U}{U}, {tap}: Create a 0/1 blue Plant Wall creature token with defender named Kelp.
         Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new CreateTokenEffect(new KelpToken()), new ManaCostsImpl("{U}{U}"));
         ability.addCost(new TapSourceCost());
         this.addAbility(ability);

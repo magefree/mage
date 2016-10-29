@@ -55,7 +55,7 @@ public class SupplyDemand extends SplitCard {
         super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{X}{G}{W}","{1}{W}{U}",false);
 
         // Supply
-        // Put X 1/1 green Saproling creature tokens onto the battlefield.
+        // create X 1/1 green Saproling creature tokens.
         getLeftHalfCard().getSpellAbility().addEffect(new CreateTokenEffect(new SaprolingToken(), new ManacostVariableValue()));
 
         // Demand

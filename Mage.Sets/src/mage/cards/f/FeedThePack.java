@@ -56,7 +56,7 @@ public class FeedThePack extends CardImpl {
         super(ownerId,setInfo,new CardType[]{CardType.ENCHANTMENT},"{5}{G}");
 
 
-        // At the beginning of your end step, you may sacrifice a nontoken creature. If you do, put X 2/2 green Wolf creature tokens onto the battlefield, where X is the sacrificed creature's toughness.
+        // At the beginning of your end step, you may sacrifice a nontoken creature. If you do, create X 2/2 green Wolf creature tokens, where X is the sacrificed creature's toughness.
         this.addAbility(new BeginningOfYourEndStepTriggeredAbility(new FeedThePackEffect(), true));
     }
 
@@ -80,7 +80,7 @@ class FeedThePackEffect extends OneShotEffect {
 
     public FeedThePackEffect() {
         super(Outcome.PutCreatureInPlay);
-        this.staticText = "sacrifice a nontoken creature. If you do, put X 2/2 green Wolf creature tokens onto the battlefield, where X is the sacrificed creature's toughness";
+        this.staticText = "sacrifice a nontoken creature. If you do, create X 2/2 green Wolf creature tokens, where X is the sacrificed creature's toughness";
     }
 
     public FeedThePackEffect(final FeedThePackEffect effect) {

@@ -54,7 +54,7 @@ public class ItOfTheHorridSwarm extends CardImpl {
         // Emerge {6}{G}
         this.addAbility(new EmergeAbility(this, new ManaCostsImpl<>("{6}{G}")));
         
-        // When you cast It of the Horrid Swarm, put two 1/1 green Insect creature tokens onto the battlefield.
+        // When you cast It of the Horrid Swarm, create two 1/1 green Insect creature tokens.
         this.addAbility(new CastSourceTriggeredAbility(new CreateTokenEffect(new InsectToken(), 2)));
     }
 

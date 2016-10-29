@@ -64,7 +64,7 @@ public class FollowedFootsteps extends CardImpl {
         Ability ability = new EnchantAbility(auraTarget.getTargetName());
         this.addAbility(ability);
 
-        // At the beginning of your upkeep, put a token that's a copy of enchanted creature onto the battlefield.
+        // At the beginning of your upkeep, create a token that's a copy of enchanted creature.
         this.addAbility(new OnEventTriggeredAbility(GameEvent.EventType.UPKEEP_STEP_PRE, "beginning of your upkeep", new FollowedFootstepsEffect(), false));
     }
 
@@ -82,7 +82,7 @@ class FollowedFootstepsEffect extends OneShotEffect {
 
     public FollowedFootstepsEffect() {
         super(Outcome.PutCreatureInPlay);
-        this.staticText = "You put a token onto the battlefield that's a copy of enchanted creature";
+        this.staticText = "You create a token that's a copy of enchanted creature";
     }
 
     public FollowedFootstepsEffect(final FollowedFootstepsEffect effect) {

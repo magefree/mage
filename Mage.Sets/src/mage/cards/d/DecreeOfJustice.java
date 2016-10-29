@@ -58,13 +58,13 @@ public class DecreeOfJustice extends CardImpl {
         super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{X}{X}{2}{W}{W}");
 
 
-        // Put X 4/4 white Angel creature tokens with flying onto the battlefield.
+        // create X 4/4 white Angel creature tokens with flying.
         this.getSpellAbility().addEffect(new CreateTokenEffect(new AngelToken(), new ManacostVariableValue()));
         
         // Cycling {2}{W}
         this.addAbility(new CyclingAbility(new ManaCostsImpl<>("{2}{W}")));
         
-        // When you cycle Decree of Justice, you may pay {X}. If you do, put X 1/1 white Soldier creature tokens onto the battlefield.
+        // When you cycle Decree of Justice, you may pay {X}. If you do, create X 1/1 white Soldier creature tokens.
         Ability ability = new CycleTriggeredAbility(new DecreeOfJusticeCycleEffect(), true);
         this.addAbility(ability);
     }
@@ -83,7 +83,7 @@ class DecreeOfJusticeCycleEffect extends OneShotEffect {
     
     DecreeOfJusticeCycleEffect() {
         super(Outcome.Benefit);
-        this.staticText = "you may pay {X}. If you do, put X 1/1 white Soldier creature tokens onto the battlefield";
+        this.staticText = "you may pay {X}. If you do, create X 1/1 white Soldier creature tokens";
     }
     
     DecreeOfJusticeCycleEffect(final DecreeOfJusticeCycleEffect effect) {

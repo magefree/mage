@@ -60,14 +60,14 @@ import mage.target.common.TargetCreaturePermanent;
 public class GoblinKaboomist extends CardImpl {
 
     public GoblinKaboomist(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{1}{R}");
+        super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{1}{R}");
         this.subtype.add("Goblin");
         this.subtype.add("Warrior");
 
         this.power = new MageInt(1);
         this.toughness = new MageInt(2);
 
-        // At the beginning of your upkeep, put a colorless artifact token named Land Mine onto the battlefield
+        // At the beginning of your upkeep, create a colorless artifact token named Land Mine
         // with "{R}, Sacrifice this artifact: This artifact deals 2 damage to target attacking creature without flying."
         // Then flip a coin.  If you lose the flip, Goblin Kaboomist deals 2 damage to itself.
         Ability ability = new BeginningOfUpkeepTriggeredAbility(new CreateTokenEffect(new LandMineToken()), TargetController.YOU, false);
@@ -85,13 +85,12 @@ public class GoblinKaboomist extends CardImpl {
     }
 }
 
-
 class GoblinKaboomistFlipCoinEffect extends OneShotEffect {
 
     public GoblinKaboomistFlipCoinEffect() {
         super(Outcome.Damage);
     }
-    
+
     public GoblinKaboomistFlipCoinEffect(final GoblinKaboomistFlipCoinEffect effect) {
         super(effect);
     }
@@ -100,7 +99,7 @@ class GoblinKaboomistFlipCoinEffect extends OneShotEffect {
     public GoblinKaboomistFlipCoinEffect copy() {
         return new GoblinKaboomistFlipCoinEffect(this);
     }
-    
+
     @Override
     public boolean apply(Game game, Ability source) {
         Player player = game.getPlayer(source.getControllerId());
@@ -115,17 +114,17 @@ class GoblinKaboomistFlipCoinEffect extends OneShotEffect {
         }
         return false;
     }
-    
+
 }
 
 class LandMineToken extends Token {
 
     private static final FilterAttackingCreature filter = new FilterAttackingCreature("attacking creature without flying");
-    
+
     static {
         filter.add(Predicates.not(new AbilityPredicate(FlyingAbility.class)));
     }
-    
+
     public LandMineToken() {
         super("Land Mine", "colorless artifact token named Land Mine with \"{R}, Sacrifice this artifact: This artifact deals 2 damage to target attacking creature without flying.\"");
         this.setOriginalExpansionSetCode("M15");

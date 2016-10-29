@@ -50,7 +50,7 @@ public class CallerOfThePack extends CardImpl {
         // Trample
         this.addAbility(TrampleAbility.getInstance());
 
-        // Myriad (Whenever this creature attacks, for each opponent other than the defending player, put a token that's a copy of this creature onto the battlefield tapped and attacking that player or a planeswalker he or she controls. Exile those tokens at the end of combat.)
+        // Myriad (Whenever this creature attacks, for each opponent other than the defending player, create a token that's a copy of this creature tapped and attacking that player or a planeswalker he or she controls. Exile those tokens at the end of combat.)
         this.addAbility(new MyriadAbility());
 
     }

@@ -64,7 +64,7 @@ public class NissaVoiceOfZendikar extends CardImpl {
         
         this.addAbility(new PlanswalkerEntersWithLoyalityCountersAbility(3));
 
-        // +1: Put a 0/1 green Plant creature token onto the battlefield.
+        // +1: Create a 0/1 green Plant creature token.
         this.addAbility(new LoyaltyAbility(new CreateTokenEffect(new PlantToken()), 1));
         
         // -2: Put a +1/+1 counter on each creature you control.

@@ -70,7 +70,7 @@ public class ObNixilisOfTheBlackOath extends CardImpl {
         // +2: Each opponent loses 1 life. You gain life equal to the life lost this way.
         this.addAbility(new LoyaltyAbility(new ObNixilisOfTheBlackOathEffect1(), 2));
 
-        // -2: Put a 5/5 black Demon creature token with flying onto the battlefield. You lose 2 life.
+        // -2: Create a 5/5 black Demon creature token with flying. You lose 2 life.
         LoyaltyAbility loyaltyAbility = new LoyaltyAbility(new CreateTokenEffect(new DemonToken()), -2);
         loyaltyAbility.addEffect(new LoseLifeSourceControllerEffect(2));
         this.addAbility(loyaltyAbility);

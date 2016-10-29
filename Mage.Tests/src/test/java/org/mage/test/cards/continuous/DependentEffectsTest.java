@@ -91,7 +91,7 @@ public class DependentEffectsTest extends CardTestPlayerBase {
         addCard(Zone.BATTLEFIELD, playerA, "Opalescence", 1);
         addCard(Zone.BATTLEFIELD, playerA, "Island", 9);
         // Kicker {5}
-        // Put a token that's a copy of target creature onto the battlefield. If Rite of Replication was kicked, put five of those tokens onto the battlefield instead.
+        // Create a tokenthat's a copy of target creature onto the battlefield. If Rite of Replication was kicked, put five of those tokens onto the battlefield instead.
         addCard(Zone.HAND, playerA, "Rite of Replication", 1); // This token can have a cmc
         // All permanents are enchantments in addition to their other types.
         addCard(Zone.HAND, playerA, "Enchanted Evening"); //  {3}{W/U}{W/U}

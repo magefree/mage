@@ -67,7 +67,7 @@ public class ElspethSunsChampion extends CardImpl {
 
         this.addAbility(new PlanswalkerEntersWithLoyalityCountersAbility(4));
 
-        // +1: Put three 1/1 white Soldier creature tokens onto the battlefield.
+        // +1: Create three 1/1 white Soldier creature tokens.
         this.addAbility(new LoyaltyAbility(new CreateTokenEffect(new SoldierToken(), 3), 1));
         // -3: Destroy all creatures with power 4 or greater.
         this.addAbility(new LoyaltyAbility(new DestroyAllEffect(filter), -3));

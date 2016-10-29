@@ -64,7 +64,7 @@ public class GarrukWildspeaker extends CardImpl {
         ability1.addTarget(new TargetLandPermanent(2));
         this.addAbility(ability1);
 
-        // −1: Put a 3/3 green Beast creature token onto the battlefield.
+        // −1: Create a 3/3 green Beast creature token.
         this.addAbility(new LoyaltyAbility(new CreateTokenEffect(beastToken), -1));
 
         // −4: Creatures you control get +3/+3 and gain trample until end of turn.

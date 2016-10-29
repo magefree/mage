@@ -66,7 +66,7 @@ public class SelesnyaEvangel extends CardImpl {
         this.power = new MageInt(1);
         this.toughness = new MageInt(2);
 
-        // {1}, {tap}, Tap an untapped creature you control: Put a 1/1 green Saproling creature token onto the battlefield.
+        // {1}, {tap}, Tap an untapped creature you control: Create a 1/1 green Saproling creature token.
         Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new CreateTokenEffect(new SaprolingToken()), new GenericManaCost(1));
         ability.addCost(new TapSourceCost());
         ability.addCost(new TapTargetCost(new TargetControlledCreaturePermanent(1, 1, filter, true)));

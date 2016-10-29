@@ -67,7 +67,7 @@ public class ThopterFoundry extends CardImpl {
         
 
 
-        // {1}, Sacrifice a nontoken artifact: Put a 1/1 blue Thopter artifact creature token with flying onto the battlefield. You gain 1 life.
+        // {1}, Sacrifice a nontoken artifact: Create a 1/1 blue Thopter artifact creature token with flying. You gain 1 life.
         Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new CreateTokenEffect(new ThopterToken()), new GenericManaCost(1));
         ability.addEffect(new GainLifeEffect(1));
         ability.addCost(new SacrificeTargetCost(new TargetControlledPermanent(filter)));

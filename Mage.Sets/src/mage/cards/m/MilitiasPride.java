@@ -55,7 +55,7 @@ public class MilitiasPride extends CardImpl {
         super(ownerId,setInfo,new CardType[]{CardType.TRIBAL,CardType.ENCHANTMENT},"{1}{W}");
         this.subtype.add("Kithkin");
 
-        // Whenever a creature you control attacks, you may pay {W}. If you do put a 1/1 white Kithkin Soldier creature token in play tapped and attacking
+        // Whenever a creature you control attacks, you may pay {W}. If you do create a 1/1 white Kithkin Soldier creature token in play tapped and attacking
         this.addAbility(new MilitiasPrideTriggerAbility());
 
     }
@@ -95,7 +95,7 @@ class MilitiasPrideTriggerAbility extends TriggeredAbilityImpl {
 
     @Override
     public String getRule() {
-        return "Whenever a creature you control attacks, you may pay {W}. If you do put a 1/1 white Kithkin Soldier creature token into play tapped and attacking.";
+        return "Whenever a creature you control attacks, you may pay {W}. If you do create a 1/1 white Kithkin Soldier creature token into play tapped and attacking.";
     }
 
     @Override

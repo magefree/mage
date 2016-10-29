@@ -55,7 +55,7 @@ public class BelfrySpirit extends CardImpl {
         this.addAbility(FlyingAbility.getInstance());
 
         // Haunt
-        // When Belfry Spirit enters the battlefield or the creature it haunts dies, put two 1/1 black Bat creature tokens with flying onto the battlefield.
+        // When Belfry Spirit enters the battlefield or the creature it haunts dies, create two 1/1 black Bat creature tokens with flying.
         Ability ability = new HauntAbility(this, new CreateTokenEffect(new BatToken(), 2));
         this.addAbility(ability);
     }

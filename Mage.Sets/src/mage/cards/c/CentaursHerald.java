@@ -55,7 +55,7 @@ public class CentaursHerald extends CardImpl {
         this.power = new MageInt(0);
         this.toughness = new MageInt(1);
 
-        // {2}{G}, Sacrifice Centaur's Herald: Put a 3/3 green Centaur creature token onto the battlefield.
+        // {2}{G}, Sacrifice Centaur's Herald: Create a 3/3 green Centaur creature token.
         Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new CreateTokenEffect(new CentaurToken()), new ManaCostsImpl("{2}{G}"));
         ability.addCost(new SacrificeSourceCost());
         this.addAbility(ability);

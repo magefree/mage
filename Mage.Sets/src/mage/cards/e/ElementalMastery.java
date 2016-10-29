@@ -70,7 +70,7 @@ public class ElementalMastery extends CardImpl {
         Ability ability = new EnchantAbility(auraTarget.getTargetName());
         this.addAbility(ability);
 
-        // Enchanted creature has "{tap}: Put X 1/1 red Elemental creature tokens with haste onto the battlefield, where X is this creature's power. Exile them at the beginning of the next end step."
+        // Enchanted creature has "{tap}: create X 1/1 red Elemental creature tokens with haste, where X is this creature's power. Exile them at the beginning of the next end step."
         Ability ability2 = new SimpleActivatedAbility(Zone.BATTLEFIELD, new ElementalMasteryEffect(), new TapSourceCost());
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new GainAbilityAttachedEffect(ability2, AttachmentType.AURA)));
 
@@ -90,7 +90,7 @@ class ElementalMasteryEffect extends OneShotEffect {
 
     public ElementalMasteryEffect() {
         super(Outcome.Benefit);
-        staticText = "Put X 1/1 red Elemental creature tokens with haste onto the battlefield, where X is this creature's power. Exile them at the beginning of the next end step";
+        staticText = "create X 1/1 red Elemental creature tokens with haste, where X is this creature's power. Exile them at the beginning of the next end step";
     }
 
     public ElementalMasteryEffect(final ElementalMasteryEffect effect) {

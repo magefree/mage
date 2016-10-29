@@ -44,7 +44,7 @@ public class SecureTheWastes extends CardImpl {
     public SecureTheWastes(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.INSTANT},"{X}{W}");
 
-        // Put X 1/1 white Warrior creature tokens onto the battlefield.
+        // create X 1/1 white Warrior creature tokens.
         this.getSpellAbility().addEffect(new CreateTokenEffect(new WarriorToken(), new ManacostVariableValue()));
     }
 

@@ -47,7 +47,7 @@ public class GodsEyeGateToTheReikai extends CardImpl {
         this.supertype.add("Legendary");
         // {tap}: Add {C} to your mana pool.
         this.addAbility(new ColorlessManaAbility());
-        // When Gods' Eye, Gate to the Reikai is put into a graveyard from the battlefield, put a 1/1 colorless Spirit creature token onto the battlefield.
+        // When Gods' Eye, Gate to the Reikai is put into a graveyard from the battlefield, create a 1/1 colorless Spirit creature token.
         this.addAbility(new PutIntoGraveFromBattlefieldSourceTriggeredAbility(new CreateTokenEffect(new SpiritToken(), 1), false));
     }
 

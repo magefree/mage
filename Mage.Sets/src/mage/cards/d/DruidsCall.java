@@ -63,9 +63,9 @@ public class DruidsCall extends CardImpl {
         Ability ability = new EnchantAbility(auraTarget.getTargetName());
         this.addAbility(ability);
 
-        // Whenever enchanted creature is dealt damage, its controller puts that many 1/1 green Squirrel creature tokens onto the battlefield.
+        // Whenever enchanted creature is dealt damage, its controller creates that many 1/1 green Squirrel creature tokens.
         Effect effect = new CreateTokenTargetEffect(new SquirrelToken(), new NumericSetToEffectValues("that much", "damage"));
-        effect.setText("its controller puts that many 1/1 green Squirrel creature tokens onto the battlefield");
+        effect.setText("its controller creates that many 1/1 green Squirrel creature tokens");
         this.addAbility(new DamageDealtToAttachedTriggeredAbility(Zone.BATTLEFIELD, effect, false, SetTargetPointer.PLAYER));
     }
 

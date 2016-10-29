@@ -65,7 +65,7 @@ public class Triskelavus extends CardImpl {
         // Triskelavus enters the battlefield with three +1/+1 counters on it.
         this.addAbility(new EntersBattlefieldAbility(new AddCountersSourceEffect(CounterType.P1P1.createInstance(3)), "with three +1/+1 counters on it"));
 
-        // {1}, Remove a +1/+1 counter from Triskelavus: Put a 1/1 colorless Triskelavite artifact creature token with flying onto the battlefield. It has "Sacrifice this creature: This creature deals 1 damage to target creature or player."
+        // {1}, Remove a +1/+1 counter from Triskelavus: Create a 1/1 colorless Triskelavite artifact creature token with flying. It has "Sacrifice this creature: This creature deals 1 damage to target creature or player."
         Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new CreateTokenEffect(new TriskelaviteToken()), new GenericManaCost(1));
         ability.addCost(new RemoveCountersSourceCost(CounterType.P1P1.createInstance()));
         this.addAbility(ability);
@@ -84,7 +84,7 @@ public class Triskelavus extends CardImpl {
 class TriskelaviteToken extends Token {
 
     public TriskelaviteToken() {
-        super("Triskelavite", "1/1 colorless Triskelavite artifact creature token with flying onto the battlefield. It has \"Sacrifice this creature: This creature deals 1 damage to target creature or player.\"");
+        super("Triskelavite", "1/1 colorless Triskelavite artifact creature token with flying. It has \"Sacrifice this creature: This creature deals 1 damage to target creature or player.\"");
         this.setOriginalExpansionSetCode("TSP");
         cardType.add(CardType.ARTIFACT);
         cardType.add(CardType.CREATURE);

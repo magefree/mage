@@ -49,18 +49,18 @@ import mage.game.permanent.token.Token;
 public class RenownedWeaver extends CardImpl {
 
     public RenownedWeaver(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{G}");
+        super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{G}");
         this.subtype.add("Human");
         this.subtype.add("Shaman");
 
         this.power = new MageInt(1);
         this.toughness = new MageInt(1);
 
-        // {1}{G}, Sacrifice Renowned Weaver: Put a 1/3 green Spider enchantment creature token with reach onto the battlefield.
-        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new CreateTokenEffect(new RenownedWeaverSpiderToken(), 1), new ManaCostsImpl("{1}{G}")) ;
+        // {1}{G}, Sacrifice Renowned Weaver: Create a 1/3 green Spider enchantment creature token with reach.
+        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new CreateTokenEffect(new RenownedWeaverSpiderToken(), 1), new ManaCostsImpl("{1}{G}"));
         ability.addCost(new SacrificeSourceCost());
         this.addAbility(ability);
-        
+
     }
 
     public RenownedWeaver(final RenownedWeaver card) {
@@ -79,7 +79,7 @@ class RenownedWeaverSpiderToken extends Token {
         super("Spider", "1/3 green Spider enchantment creature token with reach");
         this.setOriginalExpansionSetCode("JOU");
         cardType.add(CardType.ENCHANTMENT);
-        cardType.add(CardType.CREATURE);        
+        cardType.add(CardType.CREATURE);
         color.setColor(ObjectColor.GREEN);
         subtype.add("Spider");
         power = new MageInt(1);

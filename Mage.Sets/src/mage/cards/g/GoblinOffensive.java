@@ -44,7 +44,7 @@ public class GoblinOffensive extends CardImpl {
     public GoblinOffensive(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{X}{1}{R}{R}");
 
-        // Put X 1/1 red Goblin creature tokens onto the battlefield.
+        // create X 1/1 red Goblin creature tokens.
         this.getSpellAbility().addEffect(new CreateTokenEffect(new GoblinToken(), new ManacostVariableValue()));
     }
 

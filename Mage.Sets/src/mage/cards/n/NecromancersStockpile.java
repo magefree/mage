@@ -60,7 +60,7 @@ public class NecromancersStockpile extends CardImpl {
         super(ownerId,setInfo,new CardType[]{CardType.ENCHANTMENT},"{1}{B}");
 
         // {1}{B}, Discard a creature card: Draw a card.
-        // If the discarded card was a Zombie card, put a 2/2 black Zombie creature token onto the battlefield tapped.
+        // If the discarded card was a Zombie card, create a 2/2 black Zombie creature token tapped.
         Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new DrawCardSourceControllerEffect(1), new ManaCostsImpl("{1}{B}"));
         ability.addCost(new NecromancersStockpileDiscardTargetCost(new TargetCardInHand(filter)));
         ability.addEffect(new NecromancersStockpilePutTokenEffect());
@@ -128,7 +128,7 @@ class NecromancersStockpilePutTokenEffect extends OneShotEffect {
 
     NecromancersStockpilePutTokenEffect() {
         super(Outcome.Neutral);
-        staticText = "If the discarded card was a Zombie card, put a 2/2 black Zombie creature token onto the battlefield tapped";
+        staticText = "If the discarded card was a Zombie card, create a 2/2 black Zombie creature token tapped";
     }
 
     NecromancersStockpilePutTokenEffect(final NecromancersStockpilePutTokenEffect effect) {

@@ -63,7 +63,7 @@ public class XathridNecromancer extends CardImpl {
         this.power = new MageInt(2);
         this.toughness = new MageInt(2);
 
-        // Whenever Xathrid Necromancer or another Human creature you control dies, put a 2/2 black Zombie creature token onto the battlefield tapped.
+        // Whenever Xathrid Necromancer or another Human creature you control dies, create a 2/2 black Zombie creature token tapped.
         Effect effect = new CreateTokenEffect(new ZombieToken(), 1, true, false);
         Ability ability = new DiesThisOrAnotherCreatureTriggeredAbility(effect, false, filter);
         this.addAbility(ability);

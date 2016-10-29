@@ -64,7 +64,7 @@ public class MirrorMockery extends CardImpl {
         Ability ability = new EnchantAbility(auraTarget.getTargetName());
         this.addAbility(ability);
 
-        // Whenever enchanted creature attacks, you may put a token onto the battlefield that's a copy of that creature. Exile that token at the end of combat.
+        // Whenever enchanted creature attacks, you may create a token that's a copy of that creature. Exile that token at the end of combat.
         this.addAbility(new AttacksAttachedTriggeredAbility(new MirrorMockeryEffect(), AttachmentType.AURA, true));
     }
 
@@ -82,7 +82,7 @@ class MirrorMockeryEffect extends OneShotEffect {
 
     public MirrorMockeryEffect() {
         super(Outcome.Benefit);
-        this.staticText = "you may put a token onto the battlefield that's a copy of that creature. Exile that token at the end of combat";
+        this.staticText = "you may create a token that's a copy of that creature. Exile that token at the end of combat";
     }
 
     public MirrorMockeryEffect(final MirrorMockeryEffect effect) {

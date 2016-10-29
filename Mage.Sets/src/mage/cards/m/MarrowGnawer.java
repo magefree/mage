@@ -80,7 +80,7 @@ public class MarrowGnawer extends CardImpl {
         // Rat creatures have fear. (They can't be blocked except by artifact creatures and/or black creatures.)
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new GainAbilityAllEffect(FearAbility.getInstance(), Duration.WhileOnBattlefield, filterFear)));
 
-        // {T}, Sacrifice a Rat: Put X 1/1 black Rat creature tokens onto the battlefield, where X is the number of Rats you control.
+        // {T}, Sacrifice a Rat: create X 1/1 black Rat creature tokens, where X is the number of Rats you control.
         Ability ability;
         ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new CreateTokenEffect(new RatToken(),new PermanentsOnBattlefieldCount(filter3)), new SacrificeTargetCost(new TargetControlledPermanent(filterSacrifice)));
         ability.addCost(new TapSourceCost());

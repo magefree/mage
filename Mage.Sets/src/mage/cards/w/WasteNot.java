@@ -52,7 +52,7 @@ public class WasteNot extends CardImpl {
     public WasteNot(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.ENCHANTMENT},"{1}{B}");
 
-        // Whenever an opponent discards a creature card, put a 2/2 black Zombie creature token onto the battlefield.
+        // Whenever an opponent discards a creature card, create a 2/2 black Zombie creature token.
         this.addAbility(new WasteNotCreatureTriggeredAbility());
 
         // Whenever an opponent discards a land card, add {B}{B} to your mana pool.
@@ -105,7 +105,7 @@ class WasteNotCreatureTriggeredAbility extends TriggeredAbilityImpl {
 
     @Override
     public String getRule() {
-        return "Whenever an opponent discards a creature card, put a 2/2 black Zombie creature token onto the battlefield.";
+        return "Whenever an opponent discards a creature card, create a 2/2 black Zombie creature token.";
     }
 }
 

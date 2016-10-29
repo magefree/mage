@@ -59,7 +59,7 @@ public class GeistSnatch extends CardImpl {
         super(ownerId,setInfo,new CardType[]{CardType.INSTANT},"{2}{U}{U}");
 
 
-        // Counter target creature spell. Put a 1/1 blue Spirit creature token with flying onto the battlefield.
+        // Counter target creature spell. Create a 1/1 blue Spirit creature token with flying.
         this.getSpellAbility().addTarget(new TargetSpell(filter));
         this.getSpellAbility().addEffect(new GeistSnatchCounterTargetEffect());
     }
@@ -78,7 +78,7 @@ class GeistSnatchCounterTargetEffect extends OneShotEffect {
 
     public GeistSnatchCounterTargetEffect() {
         super(Outcome.Detriment);
-        staticText = "Counter target creature spell. Put a 1/1 blue Spirit creature token with flying onto the battlefield";
+        staticText = "Counter target creature spell. Create a 1/1 blue Spirit creature token with flying";
     }
 
     public GeistSnatchCounterTargetEffect(final GeistSnatchCounterTargetEffect effect) {

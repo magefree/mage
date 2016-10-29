@@ -63,7 +63,7 @@ public class MurderInvestigation extends CardImpl {
         Ability ability = new EnchantAbility(auraTarget.getTargetName());
         this.addAbility(ability);
 
-        // When enchanted creature dies, put X 1/1 white Soldier creature tokens onto the battlefield, where X is its power.
+        // When enchanted creature dies, create X 1/1 white Soldier creature tokens, where X is its power.
         this.addAbility(new DiesAttachedTriggeredAbility(new CreateTokenEffect(new SoldierToken(), new AttachedPermanentPowerCount()), "enchanted creature"));
     }
 

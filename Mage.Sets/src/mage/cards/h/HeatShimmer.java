@@ -54,7 +54,7 @@ public class HeatShimmer extends CardImpl {
     public HeatShimmer(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{2}{R}");
 
-        // Put a token that's a copy of target creature onto the battlefield. That token has haste and "At the beginning of the end step, exile this permanent."
+        // Create a token that's a copy of target creature. That token has haste and "At the beginning of the end step, exile this permanent."
         this.getSpellAbility().addEffect(new HeatShimmerEffect());
         this.getSpellAbility().addTarget(new TargetCreaturePermanent());
     }
@@ -73,7 +73,7 @@ class HeatShimmerEffect extends OneShotEffect {
 
     public HeatShimmerEffect() {
         super(Outcome.Copy);
-        this.staticText = "Put a token that's a copy of target creature onto the battlefield. That token has haste and \"At the beginning of the end step, exile this permanent.\"";
+        this.staticText = "Create a token that's a copy of target creature. That token has haste and \"At the beginning of the end step, exile this permanent.\"";
     }
 
     public HeatShimmerEffect(final HeatShimmerEffect effect) {

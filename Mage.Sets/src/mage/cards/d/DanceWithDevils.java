@@ -44,9 +44,9 @@ public class DanceWithDevils extends CardImpl {
     public DanceWithDevils(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.INSTANT},"{3}{R}");
 
-        // Put two 1/1 red Devil creature tokens onto the battlefield. They have "When this creature dies, it deals 1 damage to target creature or player."
+        // Create two 1/1 red Devil creature tokens. They have "When this creature dies, it deals 1 damage to target creature or player."
         Effect effect = new CreateTokenEffect(new DevilToken(), 2);
-        effect.setText("Put two 1/1 red Devil creature tokens onto the battlefield. They have \"When this creature dies, it deals 1 damage to target creature or player.\"");
+        effect.setText("Create two 1/1 red Devil creature tokens. They have \"When this creature dies, it deals 1 damage to target creature or player.\"");
         this.getSpellAbility().addEffect(effect);
     }
 

@@ -66,10 +66,10 @@ public class SifterOfSkulls extends CardImpl {
         // Devoid
         this.addAbility(new DevoidAbility(this.color));
         
-        // Whenever another nontoken creature you control dies, put a 1/1 colorless Eldrazi Scion creature token onto the battlefield.
+        // Whenever another nontoken creature you control dies, create a 1/1 colorless Eldrazi Scion creature token.
         // It has "Sacrifice this creature: Add {C} to your mana pool."
         Effect effect = new CreateTokenEffect(new EldraziScionToken());
-        effect.setText("put a 1/1 colorless Eldrazi Scion creature token onto the battlefield. It has \"Sacrifice this creature: Add {C} to your mana pool.\"");
+        effect.setText("create a 1/1 colorless Eldrazi Scion creature token. It has \"Sacrifice this creature: Add {C} to your mana pool.\"");
         this.addAbility(new DiesCreatureTriggeredAbility(effect, false, filter));
     }
 

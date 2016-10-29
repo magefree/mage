@@ -53,26 +53,26 @@ import mage.target.common.TargetCreatureOrPlayer;
  * @author fireshoes
  */
 public class Flamewright extends CardImpl {
-    
+
     private static final FilterControlledPermanent filter = new FilterControlledPermanent("creature with defender");
-    
+
     static {
         filter.add(new CardTypePredicate(CardType.CREATURE));
         filter.add(new AbilityPredicate(DefenderAbility.class));
     }
 
     public Flamewright(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{R}{W}");
+        super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{R}{W}");
         this.subtype.add("Human");
         this.subtype.add("Artificer");
         this.power = new MageInt(1);
         this.toughness = new MageInt(1);
 
-        // {1}, {tap}: Put a 1/1 colorless Construct artifact creature token with defender onto the battlefield.
+        // {1}, {tap}: Create a 1/1 colorless Construct artifact creature token with defender.
         Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new CreateTokenEffect(new ConstructToken()), new ManaCostsImpl("{1}"));
         ability.addCost(new TapSourceCost());
         this.addAbility(ability);
-        
+
         // {tap}, Sacrifice a creature with defender: Flamewright deals 1 damage to target creature or player.
         ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new DamageTargetEffect(1), new TapSourceCost());
         ability.addCost(new SacrificeTargetCost(new TargetControlledPermanent(filter)));
@@ -91,7 +91,7 @@ public class Flamewright extends CardImpl {
 }
 
 class ConstructToken extends Token {
-    
+
     public ConstructToken() {
         this("CNS");
     }

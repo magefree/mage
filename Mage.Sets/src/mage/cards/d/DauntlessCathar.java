@@ -53,7 +53,7 @@ public class DauntlessCathar extends CardImpl {
         this.power = new MageInt(3);
         this.toughness = new MageInt(2);
 
-        // {1}{W}, Exile Dauntless Cathar from your graveyard: Put a 1/1 white Spirit creature token with flying onto the battlefield. Activate this ability only any time you could cast a sorcery.
+        // {1}{W}, Exile Dauntless Cathar from your graveyard: Create a 1/1 white Spirit creature token with flying. Activate this ability only any time you could cast a sorcery.
         Ability ability = new ActivateAsSorceryActivatedAbility(Zone.GRAVEYARD, new CreateTokenEffect(new SpiritWhiteToken()), new ManaCostsImpl("{1}{W}"));
         ability.addCost(new ExileSourceFromGraveCost());
         this.addAbility(ability);

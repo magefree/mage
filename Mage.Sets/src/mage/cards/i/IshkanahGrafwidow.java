@@ -71,12 +71,12 @@ public class IshkanahGrafwidow extends CardImpl {
         this.addAbility(ReachAbility.getInstance());
 
         // <i>Delirium</i> &mdash When Ishkanah, Grafwidow enters the battlefield, if there are four or more card types among cards in your graveyard,
-        // put three 1/2 green Spider creature tokens with reach onto the battlefield.
+        // create three 1/2 green Spider creature tokens with reach.
         Ability ability = new ConditionalTriggeredAbility(
                 new EntersBattlefieldTriggeredAbility(new CreateTokenEffect(new SpiderToken(), 3), false),
                 new DeliriumCondition(),
                 "<i>Delirium</i> &mdash; When {this} enters the battlefield, if there are four or more card types among cards in your graveyard, "
-                + "put three 1/2 green Spider creature tokens with reach onto the battlefield.");
+                + "create three 1/2 green Spider creature tokens with reach.");
         this.addAbility(ability);
 
         // {5}{B}: Target opponent loses 1 life for each Spider you control.

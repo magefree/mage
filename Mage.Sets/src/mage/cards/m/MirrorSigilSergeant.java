@@ -57,10 +57,10 @@ public class MirrorSigilSergeant extends CardImpl {
         filter.add(new ColorPredicate(ObjectColor.BLUE));
     }
 
-    private static final String rule = "At the beginning of your upkeep, if you control a blue permanent, you may put a token that's a copy of Mirror-Sigil Sergeant onto the battlefield.";
+    private static final String rule = "At the beginning of your upkeep, if you control a blue permanent, you may create a token that's a copy of {this}.";
 
     public MirrorSigilSergeant(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{5}{W}");
+        super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{5}{W}");
         this.subtype.add("Rhino");
         this.subtype.add("Soldier");
 
@@ -70,9 +70,9 @@ public class MirrorSigilSergeant extends CardImpl {
         // Trample
         this.addAbility(TrampleAbility.getInstance());
 
-        // At the beginning of your upkeep, if you control a blue permanent, you may put a token that's a copy of Mirror-Sigil Sergeant onto the battlefield.
+        // At the beginning of your upkeep, if you control a blue permanent, you may create a token that's a copy of Mirror-Sigil Sergeant.
         Effect effect = new PutTokenOntoBattlefieldCopySourceEffect();
-        effect.setText("you may put a token that's a copy of {this} onto the battlefield");
+        effect.setText("you may create a token that's a copy of {this}");
         TriggeredAbility ability = new BeginningOfUpkeepTriggeredAbility(Zone.BATTLEFIELD, effect, TargetController.YOU, true);
         this.addAbility(new ConditionalTriggeredAbility(ability, new PermanentsOnTheBattlefieldCondition(filter), rule));
 

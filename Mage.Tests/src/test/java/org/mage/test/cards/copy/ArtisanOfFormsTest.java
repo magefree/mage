@@ -49,7 +49,7 @@ public class ArtisanOfFormsTest extends CardTestPlayerBase {
     public void testCopyTriggeredByCracklingCounterpart() {
         // Heroic - Whenever you cast a spell that targets Artisan of Forms, you may have Artisan of Forms become a copy of target creature and gain this ability.
         addCard(Zone.HAND, playerA, "Artisan of Forms"); // {1}{U}
-        // {1}{U}{U} Put a token onto the battlefield that's a copy of target creature you control.
+        // {1}{U}{U} Create a tokenonto the battlefield that's a copy of target creature you control.
         addCard(Zone.HAND, playerA, "Cackling Counterpart");
         addCard(Zone.BATTLEFIELD, playerA, "Island", 5);
 
@@ -88,7 +88,7 @@ public class ArtisanOfFormsTest extends CardTestPlayerBase {
         // Heroic - Whenever you cast a spell that targets Artisan of Forms, you may have
         // Artisan of Forms become a copy of target creature and gain this ability.
         addCard(Zone.BATTLEFIELD, playerA, "Artisan of Forms");
-        // {1}{U}{U} Put a token onto the battlefield that's a copy of target creature you control.
+        // {1}{U}{U} Create a tokenonto the battlefield that's a copy of target creature you control.
         addCard(Zone.HAND, playerA, "Cackling Counterpart");
         addCard(Zone.BATTLEFIELD, playerA, "Island", 3);
         addCard(Zone.HAND, playerA, "Eyes in the Skies");

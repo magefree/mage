@@ -54,9 +54,9 @@ public class IncubatorDrone extends CardImpl {
         // Devoid
         this.addAbility(new DevoidAbility(this.color));
 
-        // Whenever Incubator Drone enters the battlefield, put a 1/1 colorless Eldrazi Scion creature token onto the battlefield. It has "Sacrifice this creature: Add {C} to your mana pool."
+        // Whenever Incubator Drone enters the battlefield, create a 1/1 colorless Eldrazi Scion creature token. It has "Sacrifice this creature: Add {C} to your mana pool."
         Effect effect = new CreateTokenEffect(new EldraziScionToken());
-        effect.setText("put a 1/1 colorless Eldrazi Scion creature token onto the battlefield. It has \"Sacrifice this creature: Add {C} to your mana pool.\"");
+        effect.setText("create a 1/1 colorless Eldrazi Scion creature token. It has \"Sacrifice this creature: Add {C} to your mana pool.\"");
         this.addAbility(new EntersBattlefieldTriggeredAbility(effect, false));
     }
 

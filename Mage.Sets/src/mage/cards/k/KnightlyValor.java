@@ -68,7 +68,7 @@ public class KnightlyValor extends CardImpl {
         Ability ability = new EnchantAbility(auraTarget.getTargetName());
         this.addAbility(ability);
 
-        // When Knightly Valor enters the battlefield, put a 2/2 white Knight creature token with vigilance onto the battlefield.
+        // When Knightly Valor enters the battlefield, create a 2/2 white Knight creature token with vigilance.
         this.addAbility(new EntersBattlefieldTriggeredAbility(new CreateTokenEffect(new KnightToken())));
 
         // Enchanted creature gets +2/+2 and has vigilance.

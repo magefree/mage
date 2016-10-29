@@ -28,7 +28,6 @@
 package mage.cards.o;
 
 import java.util.UUID;
-
 import mage.abilities.common.EntersBattlefieldAllTriggeredAbility;
 import mage.abilities.effects.common.ReturnToHandChosenPermanentEffect;
 import mage.cards.CardImpl;
@@ -56,18 +55,17 @@ public class Overburden extends CardImpl {
     }
 
     public Overburden(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.ENCHANTMENT},"{1}{U}");
+        super(ownerId, setInfo, new CardType[]{CardType.ENCHANTMENT}, "{1}{U}");
 
-        // Whenever a player puts a nontoken creature onto the battlefield,
-        // that player returns a land he or she controls to its owner's hand.
+        // Whenever a player puts a nontoken creature onto the battlefield, that player returns a land he or she controls to its owner's hand.
         this.addAbility(new EntersBattlefieldAllTriggeredAbility(
                 Zone.BATTLEFIELD,
                 new ReturnToHandChosenPermanentEffect(RETURN_FILTER),
                 ENTERS_BATTLEFIELD_FILTER,
                 false,
                 SetTargetPointer.PLAYER,
-                "Whenever a player puts a nontoken creature onto the battlefield," +
-                        " that player returns a land he or she controls to its owner's hand."));
+                "Whenever a player puts a nontoken creature onto the battlefield,"
+                + " that player returns a land he or she controls to its owner's hand."));
     }
 
     public Overburden(final Overburden card) {

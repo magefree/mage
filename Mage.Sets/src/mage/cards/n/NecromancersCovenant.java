@@ -64,7 +64,7 @@ public class NecromancersCovenant extends CardImpl {
     public NecromancersCovenant(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.ENCHANTMENT},"{3}{W}{B}{B}");
 
-        // When Necromancer's Covenant enters the battlefield, exile all creature cards from target player's graveyard, then put a 2/2 black Zombie creature token onto the battlefield for each card exiled this way.
+        // When Necromancer's Covenant enters the battlefield, exile all creature cards from target player's graveyard, then create a 2/2 black Zombie creature token for each card exiled this way.
         Ability ability = new EntersBattlefieldTriggeredAbility(new NecromancersConvenantEffect(), false);
         ability.addTarget(new TargetPlayer());
         this.addAbility(ability);
@@ -87,7 +87,7 @@ class NecromancersConvenantEffect extends OneShotEffect {
 
     public NecromancersConvenantEffect() {
         super(Outcome.PutCreatureInPlay);
-        staticText = "exile all creature cards from target player's graveyard, then put a 2/2 black Zombie creature token onto the battlefield for each card exiled this way";
+        staticText = "exile all creature cards from target player's graveyard, then create a 2/2 black Zombie creature token for each card exiled this way";
     }
 
     public NecromancersConvenantEffect(NecromancersConvenantEffect effect) {

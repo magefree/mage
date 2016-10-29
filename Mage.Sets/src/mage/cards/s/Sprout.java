@@ -43,7 +43,7 @@ public class Sprout extends CardImpl {
     public Sprout(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.INSTANT},"{G}");
 
-        // Put a 1/1 green Saproling creature token onto the battlefield.
+        // Create a 1/1 green Saproling creature token.
         this.getSpellAbility().addEffect(new CreateTokenEffect(new SaprolingToken()));
     }
 

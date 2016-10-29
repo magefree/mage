@@ -54,7 +54,7 @@ public class HeroOfBladehold extends CardImpl {
         // Battle cry (Whenever this creature attacks, each other attacking creature gets +1/+0 until end of turn.)
         this.addAbility(new BattleCryAbility());
 
-        // Whenever Hero of Bladehold attacks, put two 1/1 white Soldier creature tokens onto the battlefield tapped and attacking.
+        // Whenever Hero of Bladehold attacks, create two 1/1 white Soldier creature tokens tapped and attacking.
         this.addAbility(new AttacksTriggeredAbility(new CreateTokenEffect(new SoldierToken(), 2, true, true), false));
 
     }

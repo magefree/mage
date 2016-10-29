@@ -59,12 +59,12 @@ import mage.target.targetpointer.FixedTarget;
 public class MimicVat extends CardImpl {
 
     public MimicVat(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.ARTIFACT},"{3}");
+        super(ownerId, setInfo, new CardType[]{CardType.ARTIFACT}, "{3}");
 
         // Imprint - Whenever a nontoken creature dies, you may exile that card. If you do, return each other card exiled with Mimic Vat to its owner's graveyard.
         this.addAbility(new MimicVatTriggeredAbility());
 
-        // {3}, {tap}: Put a token onto the battlefield that's a copy of the exiled card. It gains haste. Exile it at the beginning of the next end step.
+        // {3}, {tap}: Create a token that's a copy of the exiled card. It gains haste. Exile it at the beginning of the next end step.
         Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new MimicVatCreateTokenEffect(), new GenericManaCost(3));
         ability.addCost(new TapSourceCost());
         this.addAbility(ability);
@@ -179,7 +179,7 @@ class MimicVatCreateTokenEffect extends OneShotEffect {
 
     public MimicVatCreateTokenEffect() {
         super(Outcome.PutCreatureInPlay);
-        this.staticText = "Put a token onto the battlefield that's a copy of the exiled card. It gains haste. Exile it at the beginning of the next end step";
+        this.staticText = "Create a token that's a copy of a card exiled with {this}. It gains haste. Exile it at the beginning of the next end step";
     }
 
     public MimicVatCreateTokenEffect(final MimicVatCreateTokenEffect effect) {

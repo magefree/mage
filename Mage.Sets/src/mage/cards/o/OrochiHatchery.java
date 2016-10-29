@@ -54,7 +54,7 @@ public class OrochiHatchery extends CardImpl {
         // Orochi Hatchery enters the battlefield with X charge counters on it.
         this.addAbility(new EntersBattlefieldAbility(new EntersBattlefieldWithXCountersEffect(CounterType.CHARGE.createInstance())));
 
-        // {5}, {T}: Put a 1/1 green Snake creature token onto the battlefield for each charge counter on Orochi Hatchery.
+        // {5}, {T}: Create a 1/1 green Snake creature token for each charge counter on Orochi Hatchery.
         Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new CreateTokenEffect(new SnakeToken(), new CountersSourceCount(CounterType.CHARGE)), new GenericManaCost(5));
         ability.addCost(new TapSourceCost());
         this.addAbility(ability);

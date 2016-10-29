@@ -44,7 +44,7 @@ public class MidnightHaunting extends CardImpl {
         super(ownerId,setInfo,new CardType[]{CardType.INSTANT},"{2}{W}");
 
 
-        // Put two 1/1 white Spirit creature tokens with flying onto the battlefield.
+        // Create two 1/1 white Spirit creature tokens with flying.
         this.getSpellAbility().addEffect(new CreateTokenEffect(new SpiritWhiteToken("ISD"), 2));
     }
 

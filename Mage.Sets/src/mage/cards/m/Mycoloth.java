@@ -57,7 +57,7 @@ public class Mycoloth extends CardImpl {
         // Devour 2 (As this enters the battlefield, you may sacrifice any number of creatures. This creature enters the battlefield with twice that many +1/+1 counters on it.)
         this.addAbility(new DevourAbility(DevourFactor.Devour2));
 
-        // At the beginning of your upkeep, put a 1/1 green Saproling creature token onto the battlefield for each +1/+1 counter on Mycoloth.
+        // At the beginning of your upkeep, create a 1/1 green Saproling creature token for each +1/+1 counter on Mycoloth.
         this.addAbility(new BeginningOfUpkeepTriggeredAbility(
                 new CreateTokenEffect(new SaprolingToken(),new CountersSourceCount(CounterType.P1P1)),
                 TargetController.YOU,

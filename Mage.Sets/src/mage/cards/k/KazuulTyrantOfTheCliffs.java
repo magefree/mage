@@ -62,7 +62,7 @@ public class KazuulTyrantOfTheCliffs extends CardImpl {
         this.power = new MageInt(5);
         this.toughness = new MageInt(4);
 
-        // Whenever a creature an opponent controls attacks, if you're the defending player, put a 3/3 red Ogre creature token onto the battlefield unless that creature's controller pays {3}.
+        // Whenever a creature an opponent controls attacks, if you're the defending player, create a 3/3 red Ogre creature token unless that creature's controller pays {3}.
         this.addAbility(new KazuulTyrantOfTheCliffsTriggeredAbility());
     }
 
@@ -110,7 +110,7 @@ class KazuulTyrantOfTheCliffsTriggeredAbility extends TriggeredAbilityImpl {
 
     @Override
     public String getRule() {
-        return "Whenever a creature an opponent controls attacks, if you're the defending player, put a 3/3 red Ogre creature token onto the battlefield unless that creature's controller pays {3}";
+        return "Whenever a creature an opponent controls attacks, if you're the defending player, create a 3/3 red Ogre creature token unless that creature's controller pays {3}";
     }
 }
 

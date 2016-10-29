@@ -49,11 +49,11 @@ public class RiteOfReplication extends CardImpl {
         // Kicker {5}
         this.addAbility(new KickerAbility("{5}"));
 
-        // Put a token that's a copy of target creature onto the battlefield. If Rite of Replication was kicked, put five of those tokens onto the battlefield instead.
+        // Create a token that's a copy of target creature. If Rite of Replication was kicked, create five of those tokens instead.
         this.getSpellAbility().addTarget(new TargetCreaturePermanent());
         this.getSpellAbility().addEffect(new ConditionalOneShotEffect(new PutTokenOntoBattlefieldCopyTargetEffect(null, null, false, 5),
                 new PutTokenOntoBattlefieldCopyTargetEffect(), KickedCondition.getInstance(),
-                "Put a token that's a copy of target creature onto the battlefield. If {this} was kicked, put five of those tokens onto the battlefield instead"));
+                "Create a token that's a copy of target creature. If {this} was kicked, create five of those tokens instead"));
     }
 
     public RiteOfReplication(final RiteOfReplication card) {

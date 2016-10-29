@@ -64,7 +64,7 @@ public class OmnathLocusOfRage extends CardImpl {
         this.power = new MageInt(5);
         this.toughness = new MageInt(5);
 
-        // <i>Landfall</i> - Whenever a land enters the battlefield under your control, put a 5/5 red and green Elemental creature token onto the battlefield.
+        // <i>Landfall</i> - Whenever a land enters the battlefield under your control, create a 5/5 red and green Elemental creature token.
         this.addAbility(new LandfallAbility(new CreateTokenEffect(new OmnathElementalToken()), false));
 
         // Whenever Omnath, Locus of Rage or another Elemental you control dies, Omnath deals 3 damage to target creature or player.

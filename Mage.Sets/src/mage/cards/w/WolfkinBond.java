@@ -62,7 +62,7 @@ public class WolfkinBond extends CardImpl {
         Ability ability = new EnchantAbility(auraTarget.getTargetName());
         this.addAbility(ability);
 
-        // When Wolfkin Bond enters the battlefield, put a 2/2 green Wolf creature token onto the battlefield.
+        // When Wolfkin Bond enters the battlefield, create a 2/2 green Wolf creature token.
         this.addAbility(new EntersBattlefieldTriggeredAbility(new CreateTokenEffect(new WolfToken())));
 
         // Enchanted creature gets +2/+2.

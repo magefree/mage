@@ -59,7 +59,7 @@ public class BringerOfTheGreenDawn extends CardImpl {
         this.addAbility(new AlternativeCostSourceAbility(new ManaCostsImpl("{W}{U}{B}{R}{G}")));
         // Trample
         this.addAbility(TrampleAbility.getInstance());
-        // At the beginning of your upkeep,s you may put a 3/3 green Beast creature token onto the battlefield.
+        // At the beginning of your upkeep,s you may create a 3/3 green Beast creature token.
         Ability ability = new BeginningOfUpkeepTriggeredAbility(Zone.BATTLEFIELD, new CreateTokenEffect(new BeastToken()), TargetController.YOU, true);
         this.addAbility(ability);
     }

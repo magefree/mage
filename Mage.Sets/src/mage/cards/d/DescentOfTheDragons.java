@@ -51,7 +51,7 @@ public class DescentOfTheDragons extends CardImpl {
     public DescentOfTheDragons(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{4}{R}{R}");
 
-        // Destroy any number of target creatures.  For each creature destroyed this way, its controller puts a 4/4 red Dragon creature token with flying onto the battlefield.
+        // Destroy any number of target creatures.  For each creature destroyed this way, its controller creates a 4/4 red Dragon creature token with flying.
         this.getSpellAbility().addEffect(new DescentOfTheDragonsEffect());
         this.getSpellAbility().addTarget(new TargetCreaturePermanent(0, Integer.MAX_VALUE));
 
@@ -71,7 +71,7 @@ class DescentOfTheDragonsEffect extends OneShotEffect {
 
     public DescentOfTheDragonsEffect() {
         super(Outcome.Benefit);
-        staticText = "Destroy any number of target creatures.  For each creature destroyed this way, its controller puts a 4/4 red Dragon creature token with flying onto the battlefield";
+        staticText = "Destroy any number of target creatures.  For each creature destroyed this way, its controller creates a 4/4 red Dragon creature token with flying";
     }
 
     public DescentOfTheDragonsEffect(final DescentOfTheDragonsEffect effect) {

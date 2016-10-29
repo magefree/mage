@@ -28,8 +28,6 @@
 package mage.cards.d;
 
 import java.util.UUID;
-
-import mage.constants.CardType;
 import mage.MageInt;
 import mage.abilities.common.BeginningOfUpkeepTriggeredAbility;
 import mage.abilities.effects.common.CreateTokenEffect;
@@ -38,6 +36,7 @@ import mage.abilities.keyword.DevourAbility;
 import mage.abilities.keyword.FlyingAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
+import mage.constants.CardType;
 import mage.constants.TargetController;
 import mage.game.permanent.token.Token;
 
@@ -48,9 +47,8 @@ import mage.game.permanent.token.Token;
 public class DragonBroodmother extends CardImpl {
 
     public DragonBroodmother(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{2}{R}{R}{R}{G}");
+        super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{2}{R}{R}{R}{G}");
         this.subtype.add("Dragon");
-
 
         this.power = new MageInt(4);
         this.toughness = new MageInt(4);
@@ -58,7 +56,7 @@ public class DragonBroodmother extends CardImpl {
         // Flying
         this.addAbility(FlyingAbility.getInstance());
 
-        // At the beginning of each upkeep, put a 1/1 red and green Dragon creature token with flying and devour 2 onto the battlefield. (As the token enters the battlefield, you may sacrifice any number of creatures. It enters the battlefield with twice that many +1/+1 counters on it.)
+        // At the beginning of each upkeep, create a 1/1 red and green Dragon creature token with flying and devour 2. (As the token enters the battlefield, you may sacrifice any number of creatures. It enters the battlefield with twice that many +1/+1 counters on it.)
         this.addAbility(new BeginningOfUpkeepTriggeredAbility(new CreateTokenEffect(new DragonToken()), TargetController.ANY, false));
     }
 
@@ -72,6 +70,7 @@ public class DragonBroodmother extends CardImpl {
     }
 
     class DragonToken extends Token {
+
         DragonToken() {
             super("Dragon", "1/1 red and green Dragon creature token with flying and devour 2");
             cardType.add(CardType.CREATURE);

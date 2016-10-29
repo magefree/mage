@@ -55,7 +55,7 @@ public class SaberAnts extends CardImpl {
         this.power = new MageInt(2);
         this.toughness = new MageInt(3);
 
-        // Whenever Saber Ants is dealt damage, you may put that many 1/1 green Insect creature tokens onto the battlefield.
+        // Whenever Saber Ants is dealt damage, you may create that many 1/1 green Insect creature tokens.
         this.addAbility(new DealtDamageToSourceTriggeredAbility(Zone.BATTLEFIELD, new SaberAntsEffect(), true));
     }
 
@@ -73,7 +73,7 @@ class SaberAntsEffect extends OneShotEffect {
 
     public SaberAntsEffect() {
         super(Outcome.Benefit);
-        this.staticText = "you may put that many 1/1 green Insect creature tokens onto the battlefield";
+        this.staticText = "you may create that many 1/1 green Insect creature tokens";
     }
 
     public SaberAntsEffect(final SaberAntsEffect effect) {

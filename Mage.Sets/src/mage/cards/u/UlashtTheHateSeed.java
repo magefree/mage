@@ -77,10 +77,10 @@ public class UlashtTheHateSeed extends CardImpl {
         Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new DamageTargetEffect(1), new GenericManaCost(1));
         ability.addCost(new RemoveCountersSourceCost(CounterType.P1P1.createInstance()));
         ability.addTarget(new TargetCreaturePermanent());
-        // or put a 1/1 green Saproling creature token onto the battlefield.
+        // or create a 1/1 green Saproling creature token.
         Mode mode = new Mode();
         Effect effect = new CreateTokenEffect(new SaprolingToken());
-        effect.setText("Put a 1/1 green Saproling creature token onto the battlefield.");
+        effect.setText("Create a 1/1 green Saproling creature token.");
         mode.getEffects().add(effect);
         ability.addMode(mode);
         this.addAbility(ability);

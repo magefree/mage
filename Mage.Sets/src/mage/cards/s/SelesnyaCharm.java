@@ -76,7 +76,7 @@ public class SelesnyaCharm extends CardImpl {
         mode.getTargets().add(new TargetCreaturePermanent(filter));
         this.getSpellAbility().addMode(mode);
 
-        // or put a 2/2 white Knight creature token with vigilance onto the battlefield.
+        // or create a 2/2 white Knight creature token with vigilance.
         mode = new Mode();
         mode.getEffects().add(new CreateTokenEffect(new KnightToken()));
         this.getSpellAbility().addMode(mode);

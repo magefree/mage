@@ -69,9 +69,9 @@ public class WharfInfiltrator extends CardImpl {
         effect.setText("you may draw a card. If you do, discard a card");
         this.addAbility(new DealsCombatDamageToAPlayerTriggeredAbility(effect, true));
 
-        // Whenever you discard a creature card, you may pay {2}. If you do, put a 3/2 colorless Eldrazi Horror creature token onto the battlefield.
+        // Whenever you discard a creature card, you may pay {2}. If you do, create a 3/2 colorless Eldrazi Horror creature token.
         effect = new CreateTokenEffect(new EldraziHorrorToken());
-        effect.setText("put a 3/2 colorless Eldrazi Horror creature token onto the battlefield");
+        effect.setText("create a 3/2 colorless Eldrazi Horror creature token");
         DoIfCostPaid doIfCostPaid = new DoIfCostPaid(effect, new GenericManaCost(2));
         this.addAbility(new WharfInfiltratorDiscardAbility(doIfCostPaid));
     }

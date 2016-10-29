@@ -53,7 +53,7 @@ public class GrowingRanks extends CardImpl {
         super(ownerId,setInfo,new CardType[]{CardType.ENCHANTMENT},"{2}{G/W}{G/W}");
 
 
-        // At the beginning of your upkeep, populate. (Put a token onto the battlefield that's a copy of a creature token you control.)
+        // At the beginning of your upkeep, populate. (Create a token that's a copy of a creature token you control.)
         this.addAbility(new BeginningOfUpkeepTriggeredAbility(new PopulateEffect(""), TargetController.YOU, false));
     }
 

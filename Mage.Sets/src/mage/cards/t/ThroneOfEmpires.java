@@ -52,7 +52,7 @@ public class ThroneOfEmpires extends CardImpl {
     public ThroneOfEmpires(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.ARTIFACT},"{4}");
 
-        // {1}, {tap}: Put a 1/1 white Soldier creature token onto the battlefield. Put five of those tokens onto the battlefield instead if you control artifacts named Crown of Empires and Scepter of Empires.
+        // {1}, {tap}: Create a 1/1 white Soldier creature token. Create five of those tokens instead if you control artifacts named Crown of Empires and Scepter of Empires.
         Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new ThroneOfEmpiresEffect(), new GenericManaCost(1));
         ability.addCost(new TapSourceCost());
         this.addAbility(ability);
@@ -72,7 +72,7 @@ class ThroneOfEmpiresEffect extends OneShotEffect {
 
     public ThroneOfEmpiresEffect() {
         super(Outcome.PutCreatureInPlay);
-        staticText = "Put a 1/1 white Soldier creature token onto the battlefield. Put five of those tokens onto the battlefield instead if you control artifacts named Crown of Empires and Scepter of Empires";
+        staticText = "Create a 1/1 white Soldier creature token. Create five of those tokens instead if you control artifacts named Crown of Empires and Scepter of Empires";
     }
 
     public ThroneOfEmpiresEffect(ThroneOfEmpiresEffect effect) {

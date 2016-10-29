@@ -50,7 +50,7 @@ public class Wurmcalling extends CardImpl {
 
         // Buyback {2}{G}
         this.addAbility(new BuybackAbility("{2}{G}"));
-        // Put an X/X green Wurm creature token onto the battlefield.
+        // Create an X/X green Wurm creature token.
         this.getSpellAbility().addEffect(new WurmcallingEffect());
     }
 
@@ -68,7 +68,7 @@ class WurmcallingEffect extends OneShotEffect {
 
     public WurmcallingEffect() {
         super(Outcome.PutCreatureInPlay);
-        staticText = "Put an X/X green Wurm creature token onto the battlefield";
+        staticText = "Create an X/X green Wurm creature token";
     }
 
     public WurmcallingEffect(WurmcallingEffect ability) {

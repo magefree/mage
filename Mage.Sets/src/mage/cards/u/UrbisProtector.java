@@ -50,7 +50,7 @@ public class UrbisProtector extends CardImpl {
         this.power = new MageInt(1);
         this.toughness = new MageInt(1);
 
-        // When Urbis Protector enters the battlefield, put a 4/4 white Angel creature token with flying onto the battlefield.
+        // When Urbis Protector enters the battlefield, create a 4/4 white Angel creature token with flying.
         this.addAbility(new EntersBattlefieldTriggeredAbility(new CreateTokenEffect(new AngelToken())));
     }
 

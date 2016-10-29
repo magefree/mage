@@ -75,7 +75,7 @@ public class GhaveGuruOfSpores extends CardImpl {
         // Ghave, Guru of Spores enters the battlefield with five +1/+1 counters on it.
         this.addAbility(new EntersBattlefieldAbility(new AddCountersSourceEffect(CounterType.P1P1.createInstance(5))));
 
-        // {1}, Remove a +1/+1 counter from a creature you control: Put a 1/1 green Saproling creature token onto the battlefield.
+        // {1}, Remove a +1/+1 counter from a creature you control: Create a 1/1 green Saproling creature token.
         Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new CreateTokenEffect(new SaprolingToken()), new GenericManaCost(1));
         ability.addCost(new RemoveCounterCost(new TargetControlledCreaturePermanent(1, 1, new FilterControlledCreaturePermanent(), true), CounterType.P1P1));
         this.addAbility(ability);

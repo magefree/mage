@@ -57,7 +57,7 @@ public class StormfrontRiders extends CardImpl {
     }
 
     public StormfrontRiders(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{4}{W}");
+        super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{4}{W}");
         this.subtype.add("Human");
         this.subtype.add("Soldier");
 
@@ -68,10 +68,10 @@ public class StormfrontRiders extends CardImpl {
         this.addAbility(FlyingAbility.getInstance());
         // When Stormfront Riders enters the battlefield, return two creatures you control to their owner's hand.
         this.addAbility(new EntersBattlefieldTriggeredAbility(new ReturnToHandChosenControlledPermanentEffect(new FilterControlledCreaturePermanent("creatures you control"), 2)));
-        // Whenever Stormfront Riders or another creature is returned to your hand from the battlefield, put a 1/1 white Soldier creature token onto the battlefield.
+        // Whenever Stormfront Riders or another creature is returned to your hand from the battlefield, create a 1/1 white Soldier creature token.
         this.addAbility(new ZoneChangeAllTriggeredAbility(Zone.BATTLEFIELD, Zone.BATTLEFIELD, Zone.HAND, new CreateTokenEffect(new SoldierToken()),
-                filter,"Whenever {this} or another creature is returned to your hand from the battlefield, ", false));
-        
+                filter, "Whenever {this} or another creature is returned to your hand from the battlefield, ", false));
+
     }
 
     public StormfrontRiders(final StormfrontRiders card) {

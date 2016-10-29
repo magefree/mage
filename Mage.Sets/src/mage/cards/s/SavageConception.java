@@ -45,7 +45,7 @@ public class SavageConception extends CardImpl {
     public SavageConception(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{3}{G}{G}");
 
-        // Put a 3/3 green Beast creature token onto the battlefield.
+        // Create a 3/3 green Beast creature token.
         this.getSpellAbility().addEffect(new CreateTokenEffect(new BeastToken()));
         // Retrace
         this.addAbility(new RetraceAbility(this));

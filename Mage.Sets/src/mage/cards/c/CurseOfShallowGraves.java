@@ -57,7 +57,7 @@ import mage.target.targetpointer.FixedTarget;
 public class CurseOfShallowGraves extends CardImpl {
 
     public CurseOfShallowGraves(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.ENCHANTMENT},"{2}{B}");
+        super(ownerId, setInfo, new CardType[]{CardType.ENCHANTMENT}, "{2}{B}");
         this.subtype.add("Aura");
         this.subtype.add("Curse");
 
@@ -67,7 +67,7 @@ public class CurseOfShallowGraves extends CardImpl {
         this.getSpellAbility().addEffect(new AttachEffect(Outcome.Detriment));
         this.addAbility(new EnchantAbility(auraTarget.getTargetName()));
 
-        // Whenever a player attacks enchanted player with one or more creatures, that attacking player may put a 2/2 black Zombie creature token onto the battlefield tapped.
+        // Whenever a player attacks enchanted player with one or more creatures, that attacking player may create a 2/2 black Zombie creature token tapped.
         this.addAbility(new CurseOfShallowTriggeredAbility());
     }
 
@@ -116,7 +116,7 @@ class CurseOfShallowTriggeredAbility extends TriggeredAbilityImpl {
 
     @Override
     public String getRule() {
-        return "Whenever a player attacks enchanted player with one or more creatures, that attacking player may put a 2/2 black Zombie creature token onto the battlefield tapped.";
+        return "Whenever a player attacks enchanted player with one or more creatures, that attacking player may create a 2/2 black Zombie creature token tapped.";
     }
 
     @Override
@@ -130,7 +130,7 @@ class CurseOfShallowEffect extends OneShotEffect {
 
     public CurseOfShallowEffect() {
         super(Outcome.Benefit);
-        this.staticText = "that attacking player may put a 2/2 black Zombie creature token onto the battlefield tapped";
+        this.staticText = "that attacking player may create a 2/2 black Zombie creature token tapped";
     }
 
     public CurseOfShallowEffect(final CurseOfShallowEffect effect) {
@@ -145,7 +145,7 @@ class CurseOfShallowEffect extends OneShotEffect {
     @Override
     public boolean apply(Game game, Ability source) {
         Player attacker = game.getPlayer(this.getTargetPointer().getFirst(game, source));
-        if (attacker != null && attacker.chooseUse(outcome, "Put a 2/2 black Zombie creature token onto the battlefield tapped?", source, game)) {
+        if (attacker != null && attacker.chooseUse(outcome, "create a 2/2 black Zombie creature token tapped?", source, game)) {
             Effect effect = new CreateTokenTargetEffect(new ZombieToken(), new StaticValue(1), true, false);
             effect.setTargetPointer(targetPointer);
             return effect.apply(game, source);

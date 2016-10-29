@@ -52,7 +52,7 @@ public class NotForgotten extends CardImpl {
         super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{1}{W}");
 
         // Put target card from a graveyard on the top or bottom of its owner's library. 
-        // Put a 1/1 white Spirit creature token with flying onto the battlefield.
+        // Create a 1/1 white Spirit creature token with flying.
         this.getSpellAbility().addEffect(new NotForgottenEffect());
         this.getSpellAbility().addTarget(new TargetCardInGraveyard());
     }
@@ -71,7 +71,7 @@ class NotForgottenEffect extends OneShotEffect {
     
     public NotForgottenEffect() {
         super(Outcome.Benefit);
-        this.staticText = "Put target card from a graveyard on the top or bottom of its owner's library. Put a 1/1 white Spirit creature token with flying onto the battlefield.";
+        this.staticText = "Put target card from a graveyard on the top or bottom of its owner's library. Create a 1/1 white Spirit creature token with flying.";
     }
     
     public NotForgottenEffect(final NotForgottenEffect effect) {

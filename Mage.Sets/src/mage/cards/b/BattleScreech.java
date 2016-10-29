@@ -60,7 +60,7 @@ public class BattleScreech extends CardImpl {
         super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{2}{W}{W}");
 
 
-        // Put two 1/1 white Bird creature tokens with flying onto the battlefield.
+        // Create two 1/1 white Bird creature tokens with flying.
         this.getSpellAbility().addEffect(new CreateTokenEffect(new BirdToken(), 2));
 
         // Flashback-Tap three untapped white creatures you control.

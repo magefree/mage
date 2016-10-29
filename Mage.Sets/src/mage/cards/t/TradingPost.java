@@ -66,7 +66,7 @@ public class TradingPost extends CardImpl {
         ability1.addCost(new DiscardTargetCost(new TargetCardInHand()));
         this.addAbility(ability1);
 
-        // {1}, {tap}, Pay 1 life: Put a 0/1 white Goat creature token onto the battlefield.
+        // {1}, {tap}, Pay 1 life: Create a 0/1 white Goat creature token.
         Ability ability2 = new SimpleActivatedAbility(Zone.BATTLEFIELD, new CreateTokenEffect(new GoatToken()), new GenericManaCost(1));
         ability2.addCost(new TapSourceCost());
         ability2.addCost(new PayLifeCost(1));

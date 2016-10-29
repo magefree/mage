@@ -52,7 +52,7 @@ import mage.game.permanent.token.GoblinTokenWithHaste;
  */
 public class ChancellorOfTheForge extends CardImpl {
 
-    private static String abilityText = "at the beginning of the first upkeep, put a 1/1 red Goblin creature token with haste onto the battlefield";
+    private static String abilityText = "at the beginning of the first upkeep, create a 1/1 red Goblin creature token with haste";
     private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("creatures you control");
 
     static {
@@ -66,10 +66,10 @@ public class ChancellorOfTheForge extends CardImpl {
         this.power = new MageInt(5);
         this.toughness = new MageInt(5);
 
-        // You may reveal this card from your opening hand. If you do, at the beginning of the first upkeep, put a 1/1 red Goblin creature token with haste onto the battlefield.
+        // You may reveal this card from your opening hand. If you do, at the beginning of the first upkeep, create a 1/1 red Goblin creature token with haste.
         this.addAbility(new ChancellorAbility(new ChancellorOfTheForgeDelayedTriggeredAbility(), abilityText));
 
-        // When Chancellor of the Forge enters the battlefield, put X 1/1 red Goblin creature tokens with haste onto the battlefield, where X is the number of creatures you control.
+        // When Chancellor of the Forge enters the battlefield, create X 1/1 red Goblin creature tokens with haste, where X is the number of creatures you control.
         DynamicValue value = new PermanentsOnBattlefieldCount(filter);
         this.addAbility(new EntersBattlefieldTriggeredAbility(new CreateTokenEffect(new GoblinTokenWithHaste(), value), false));
     }

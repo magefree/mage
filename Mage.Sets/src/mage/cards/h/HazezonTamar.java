@@ -72,7 +72,7 @@ public class HazezonTamar extends CardImpl {
         this.power = new MageInt(2);
         this.toughness = new MageInt(4);
 
-        // When Hazezon Tamar enters the battlefield, put X 1/1 Sand Warrior creature tokens that are red, green, and white onto the battlefield at the beginning of your next upkeep, where X is the number of lands you control at that time.
+        // When Hazezon Tamar enters the battlefield, create X 1/1 Sand Warrior creature tokens that are red, green, and white at the beginning of your next upkeep, where X is the number of lands you control at that time.
         this.addAbility(new EntersBattlefieldTriggeredAbility(new HazezonTamarEntersEffect(), false));
         // When Hazezon leaves the battlefield, exile all Sand Warriors.
         this.addAbility(new LeavesBattlefieldTriggeredAbility(new ExileAllEffect(filter), false));
@@ -92,7 +92,7 @@ class HazezonTamarEntersEffect extends OneShotEffect {
 
     public HazezonTamarEntersEffect() {
         super(Outcome.PutCreatureInPlay);
-        this.staticText = "put X 1/1 Sand Warrior creature tokens that are red, green, and white onto the battlefield at the beginning of your next upkeep, where X is the number of lands you control at that time";
+        this.staticText = "create X 1/1 Sand Warrior creature tokens that are red, green, and white at the beginning of your next upkeep, where X is the number of lands you control at that time";
     }
 
     public HazezonTamarEntersEffect(final HazezonTamarEntersEffect effect) {
@@ -109,7 +109,7 @@ class HazezonTamarEntersEffect extends OneShotEffect {
         Player controller = game.getPlayer(source.getControllerId());
         if (controller != null) {
             Effect effect = new CreateTokenEffect(new HazezonTamarSandWarrior(), new PermanentsOnBattlefieldCount(new FilterControlledLandPermanent()));
-            effect.setText("put X 1/1 Sand Warrior creature tokens that are red, green, and white onto the battlefield, where X is the number of lands you control at that time");
+            effect.setText("create X 1/1 Sand Warrior creature tokens that are red, green, and white, where X is the number of lands you control at that time");
             DelayedTriggeredAbility delayedAbility = new AtTheBeginOfYourNextUpkeepDelayedTriggeredAbility(effect);
             game.addDelayedTriggeredAbility(delayedAbility, source);
             return true;

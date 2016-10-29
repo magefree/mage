@@ -66,7 +66,7 @@ public class GallowsAtWillowHill extends CardImpl {
     public GallowsAtWillowHill(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.ARTIFACT},"{3}");
 
-        // {3}, {tap}, Tap three untapped Humans you control: Destroy target creature. Its controller puts a 1/1 white Spirit creature token with flying onto the battlefield.
+        // {3}, {tap}, Tap three untapped Humans you control: Destroy target creature. Its controller creates a 1/1 white Spirit creature token with flying.
         Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new GallowsAtWillowHillEffect(), new GenericManaCost(3));
         ability.addCost(new TapSourceCost());
         ability.addCost(new TapTargetCost(new TargetControlledPermanent(3, 3, humanFilter, false)));
@@ -88,7 +88,7 @@ class GallowsAtWillowHillEffect extends OneShotEffect {
 
     public GallowsAtWillowHillEffect() {
         super(Outcome.DestroyPermanent);
-        staticText = "Destroy target creature. Its controller puts a 1/1 white Spirit creature token with flying onto the battlefield";
+        staticText = "Destroy target creature. Its controller creates a 1/1 white Spirit creature token with flying";
     }
 
     public GallowsAtWillowHillEffect(final GallowsAtWillowHillEffect effect) {

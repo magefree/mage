@@ -49,7 +49,7 @@ public class PactOfTheTitan extends CardImpl {
 
         this.color.setRed(true);
         
-        // Put a 4/4 red Giant creature token onto the battlefield.
+        // Create a 4/4 red Giant creature token.
         this.getSpellAbility().addEffect(new CreateTokenEffect(new GiantToken()));
         // At the beginning of your next upkeep, pay {4}{R}. If you don't, you lose the game.
         this.getSpellAbility().addEffect(new CreateDelayedTriggeredAbilityEffect(new PactDelayedTriggeredAbility(new ManaCostsImpl("{4}{R}"))));

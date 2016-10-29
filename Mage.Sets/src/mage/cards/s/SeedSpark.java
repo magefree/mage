@@ -53,10 +53,10 @@ public class SeedSpark extends CardImpl {
         this.getSpellAbility().addTarget(new TargetPermanent(new FilterArtifactOrEnchantmentPermanent()));
         this.getSpellAbility().addEffect(new DestroyTargetEffect());
         
-        //If {G} was spent to cast Seed Spark, put two 1/1 green Saproling creature tokens onto the battlefield.
+        //If {G} was spent to cast Seed Spark, create two 1/1 green Saproling creature tokens.
         this.getSpellAbility().addEffect(new ConditionalOneShotEffect(
                 new CreateTokenEffect(new SaprolingToken(), 2), 
-                new ManaWasSpentCondition(ColoredManaSymbol.G), "If {G} was spent to cast {this}, put two 1/1 green Saproling creature tokens onto the battlefield"));
+                new ManaWasSpentCondition(ColoredManaSymbol.G), "If {G} was spent to cast {this}, create two 1/1 green Saproling creature tokens"));
     }
 
     public SeedSpark(final SeedSpark card) {

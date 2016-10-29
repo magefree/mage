@@ -46,10 +46,9 @@ import mage.game.permanent.token.SpiderToken;
 public class SpiderSpawning extends CardImpl {
 
     public SpiderSpawning(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{4}{G}");
+        super(ownerId, setInfo, new CardType[]{CardType.SORCERY}, "{4}{G}");
 
-
-        // Put a 1/2 green Spider creature token with reach onto the battlefield for each creature card in your graveyard.
+        // Create a 1/2 green Spider creature token with reach for each creature card in your graveyard.
         this.getSpellAbility().addEffect(new CreateTokenEffect(new SpiderToken(), new CardsInControllerGraveyardCount(new FilterCreatureCard())));
         // Flashback {6}{B}
         this.addAbility(new FlashbackAbility(new ManaCostsImpl("{6}{B}"), TimingRule.SORCERY));
@@ -64,4 +63,3 @@ public class SpiderSpawning extends CardImpl {
         return new SpiderSpawning(this);
     }
 }
-

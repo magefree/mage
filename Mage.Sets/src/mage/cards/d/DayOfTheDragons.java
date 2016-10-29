@@ -63,7 +63,7 @@ public class DayOfTheDragons extends CardImpl {
     public DayOfTheDragons(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.ENCHANTMENT},"{4}{U}{U}{U}");
 
-        // When Day of the Dragons enters the battlefield, exile all creatures you control. Then put that many 5/5 red Dragon creature tokens with flying onto the battlefield.
+        // When Day of the Dragons enters the battlefield, exile all creatures you control. Then create that many 5/5 red Dragon creature tokens with flying.
         this.addAbility(new EntersBattlefieldTriggeredAbility(new DayOfTheDragonsEntersEffect(), false));
 
         // When Day of the Dragons leaves the battlefield, sacrifice all Dragons you control. Then return the exiled cards to the battlefield under your control.
@@ -91,7 +91,7 @@ class DayOfTheDragonsEntersEffect extends OneShotEffect {
 
     public DayOfTheDragonsEntersEffect() {
         super(Outcome.Benefit);
-        staticText = "exile all creatures you control. Then put that many 5/5 red Dragon creature tokens with flying onto the battlefield";
+        staticText = "exile all creatures you control. Then create that many 5/5 red Dragon creature tokens with flying";
     }
 
     public DayOfTheDragonsEntersEffect(final DayOfTheDragonsEntersEffect effect) {

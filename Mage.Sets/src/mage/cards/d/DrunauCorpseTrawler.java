@@ -57,7 +57,7 @@ public class DrunauCorpseTrawler extends CardImpl {
         this.power = new MageInt(1);
         this.toughness = new MageInt(1);
 
-        // When Drunau Corpse Trawler enters the battlefield, put a 2/2 black Zombie creature token onto the battlefield.
+        // When Drunau Corpse Trawler enters the battlefield, create a 2/2 black Zombie creature token.
         this.addAbility(new EntersBattlefieldTriggeredAbility(new CreateTokenEffect(new ZombieToken())));
 
         // {2}{B}: Target Zombie gains deathtouch until end of turn.

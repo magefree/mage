@@ -56,7 +56,7 @@ public class HauntedAngel extends CardImpl {
 
         // Flying
         this.addAbility(FlyingAbility.getInstance());
-        // When Haunted Angel dies, exile Haunted Angel and each other player puts a 3/3 black Angel creature token with flying onto the battlefield.
+        // When Haunted Angel dies, exile Haunted Angel and each other player creates a 3/3 black Angel creature token with flying.
         Ability ability = new DiesTriggeredAbility(new ExileSourceEffect());
         ability.addEffect(new HauntedAngelEffect());
         this.addAbility(ability);
@@ -76,7 +76,7 @@ class HauntedAngelEffect extends OneShotEffect {
 
     public HauntedAngelEffect() {
         super(Outcome.Detriment);
-        staticText = "and each other player puts a 3/3 black Angel creature token with flying onto the battlefield.";
+        staticText = "and each other player creates a 3/3 black Angel creature token with flying.";
     }
 
     public HauntedAngelEffect(HauntedAngelEffect copy) {

@@ -58,7 +58,7 @@ public class MirrorMatch extends CardImpl {
         // Cast Mirror Match only during the declare blockers step.
         this.addAbility(new CastOnlyDuringPhaseStepSourceAbility(PhaseStep.DECLARE_BLOCKERS));
 
-        // For each creature attacking you or a planeswalker you control, put a token that's a copy of that creature onto the battlefield blocking that creature. Exile those tokens at end of combat.
+        // For each creature attacking you or a planeswalker you control, create a token that's a copy of that creature blocking that creature. Exile those tokens at end of combat.
         this.getSpellAbility().addEffect(new MirrorMatchEffect());
 
     }
@@ -77,7 +77,7 @@ class MirrorMatchEffect extends OneShotEffect {
 
     public MirrorMatchEffect() {
         super(Outcome.Benefit);
-        this.staticText = "For each creature attacking you or a planeswalker you control, put a token that's a copy of that creature onto the battlefield blocking that creature. Exile those tokens at end of combat";
+        this.staticText = "For each creature attacking you or a planeswalker you control, create a token that's a copy of that creature blocking that creature. Exile those tokens at end of combat";
     }
 
     public MirrorMatchEffect(final MirrorMatchEffect effect) {

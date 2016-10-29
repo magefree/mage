@@ -45,7 +45,7 @@ public class SpiritualVisit extends CardImpl {
         super(ownerId,setInfo,new CardType[]{CardType.INSTANT},"{W}");
         this.subtype.add("Arcane");
 
-        // Put a 1/1 colorless Spirit creature token onto the battlefield.
+        // Create a 1/1 colorless Spirit creature token.
         this.getSpellAbility().addEffect(new CreateTokenEffect(new SpiritToken()));
         
         // Splice onto Arcane {W}

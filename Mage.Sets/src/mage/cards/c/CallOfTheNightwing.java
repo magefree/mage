@@ -47,7 +47,7 @@ public class CallOfTheNightwing extends CardImpl {
         super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{2}{U}{B}");
 
 
-        // Put a 1/1/ blue and black Horror creature token with flying onto the battlefield.
+        // Create a 1/1/ blue and black Horror creature token with flying.
         this.getSpellAbility().addEffect(new CreateTokenEffect(new NightwingHorrorToken(),1));
 
         // Cipher (Then you may exile this spell card encoded on a creature you control. Whenever that creature deals combat damage to a player, its controller may cast a copy of the encoded card without paying its mana cost.)

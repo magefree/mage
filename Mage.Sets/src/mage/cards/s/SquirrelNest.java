@@ -65,10 +65,10 @@ public class SquirrelNest extends CardImpl {
         Ability ability = new EnchantAbility(auraTarget.getTargetName());
         this.addAbility(ability);
         
-        // Enchanted land has "{tap}: Put a 1/1 green Squirrel creature token onto the battlefield."
+        // Enchanted land has "{tap}: Create a 1/1 green Squirrel creature token."
         Ability gainedAbility = new SimpleActivatedAbility(Zone.BATTLEFIELD, new CreateTokenEffect(new SquirrelToken()), new TapSourceCost());
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, 
-                new GainAbilityAttachedEffect(gainedAbility, AttachmentType.AURA, Duration.WhileOnBattlefield, "Enchanted land has \"{T}: Put a 1/1 green Squirrel creature token onto the battlefield.\"")));
+                new GainAbilityAttachedEffect(gainedAbility, AttachmentType.AURA, Duration.WhileOnBattlefield, "Enchanted land has \"{T}: Create a 1/1 green Squirrel creature token.\"")));
     }
 
     public SquirrelNest(final SquirrelNest card) {

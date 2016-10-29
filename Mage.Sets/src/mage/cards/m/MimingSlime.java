@@ -51,7 +51,7 @@ public class MimingSlime extends CardImpl {
     public MimingSlime(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{2}{G}");
 
-        // Put an X/X green Ooze creature token onto the battlefield, where X is the greatest power among creatures you control.
+        // Create an X/X green Ooze creature token, where X is the greatest power among creatures you control.
         this.getSpellAbility().addEffect(new MimingSlimeEffect());
     }
 
@@ -69,7 +69,7 @@ class MimingSlimeEffect extends OneShotEffect {
 
     public MimingSlimeEffect() {
         super(Outcome.PutCreatureInPlay);
-        staticText = "Put an X/X green Ooze creature token onto the battlefield, where X is the greatest power among creatures you control";
+        staticText = "Create an X/X green Ooze creature token, where X is the greatest power among creatures you control";
     }
 
     public MimingSlimeEffect(final MimingSlimeEffect effect) {

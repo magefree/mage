@@ -50,15 +50,15 @@ import mage.game.permanent.token.Token;
 public class GiantCaterpillar extends CardImpl {
 
     public GiantCaterpillar(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{3}{G}");
+        super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{3}{G}");
         this.subtype.add("Insect");
         this.power = new MageInt(3);
         this.toughness = new MageInt(3);
 
-        // {G}, Sacrifice Giant Caterpillar: Put a 1/1 green Insect creature token with flying named Butterfly onto the battlefield at the beginning of the next end step.
+        // {G}, Sacrifice Giant Caterpillar: Create a 1/1 green Insect creature token with flying named Butterfly at the beginning of the next end step.
         Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new CreateDelayedTriggeredAbilityEffect(
-            new AtTheBeginOfNextEndStepDelayedTriggeredAbility(new CreateTokenEffect(new ButterflyToken()))),
-            new ManaCostsImpl("{G}"));
+                new AtTheBeginOfNextEndStepDelayedTriggeredAbility(new CreateTokenEffect(new ButterflyToken()))),
+                new ManaCostsImpl("{G}"));
         ability.addCost(new SacrificeSourceCost());
         this.addAbility(ability);
     }

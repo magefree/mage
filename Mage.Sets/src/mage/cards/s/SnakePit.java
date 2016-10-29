@@ -54,7 +54,7 @@ public class SnakePit extends CardImpl {
     public SnakePit(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.ENCHANTMENT},"{3}{G}");
 
-        // Whenever an opponent casts a blue or black spell, you may put a 1/1 green Snake creature token onto the battlefield.
+        // Whenever an opponent casts a blue or black spell, you may create a 1/1 green Snake creature token.
         this.addAbility(new SpellCastOpponentTriggeredAbility(new CreateTokenEffect(new SnakeToken()), filter, true));
     }
 

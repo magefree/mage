@@ -80,7 +80,7 @@ public class DoublingSeasonTest extends CardTestPlayerBase {
 
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Pallid Mycoderm");
 
-        activateAbility(5, PhaseStep.PRECOMBAT_MAIN, playerA, "Remove three spore counters from {this}: Put a 1/1 green Saproling creature token onto the battlefield.");
+        activateAbility(5, PhaseStep.PRECOMBAT_MAIN, playerA, "Remove three spore counters from {this}: Create a 1/1 green Saproling creature token.");
 
         setStopAt(5, PhaseStep.END_TURN);
         execute();
@@ -117,7 +117,7 @@ public class DoublingSeasonTest extends CardTestPlayerBase {
         addCard(Zone.BATTLEFIELD, playerA, "Doubling Season");
         addCard(Zone.BATTLEFIELD, playerA, "Island", 9);
 
-        // Put a token that's a copy of target creature onto the battlefield. If Rite of Replication was kicked, put five of those tokens onto the battlefield instead.
+        // Create a tokenthat's a copy of target creature onto the battlefield. If Rite of Replication was kicked, put five of those tokens onto the battlefield instead.
         addCard(Zone.HAND, playerA, "Rite of Replication");
         // When Venerable Monk enters the battlefield, you gain 2 life.
         addCard(Zone.BATTLEFIELD, playerB, "Venerable Monk", 1);

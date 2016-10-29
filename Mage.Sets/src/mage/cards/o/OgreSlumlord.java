@@ -72,7 +72,7 @@ public class OgreSlumlord extends CardImpl {
         this.toughness = new MageInt(3);
 
 
-        // Whenever another nontoken creature dies, you may put a 1/1 black Rat creature token onto the battlefield.
+        // Whenever another nontoken creature dies, you may create a 1/1 black Rat creature token.
         this.addAbility(new DiesCreatureTriggeredAbility(new CreateTokenEffect(new RatToken()), true, filter));
         // Rats you control have deathtouch.
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new GainAbilityAllEffect(DeathtouchAbility.getInstance(), Duration.WhileOnBattlefield, filter2)));

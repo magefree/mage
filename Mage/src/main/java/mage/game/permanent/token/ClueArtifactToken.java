@@ -30,7 +30,6 @@ package mage.game.permanent.token;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
-import java.util.Random;
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.costs.common.SacrificeSourceCost;
@@ -52,7 +51,7 @@ public class ClueArtifactToken extends Token {
     }
 
     public ClueArtifactToken() {
-        super("Clue", "colorless Clue artifact token onto the battlefield with \"{2}, Sacrifice this artifact: Draw a card.\"");
+        super("Clue", "colorless Clue artifact token with \"{2}, Sacrifice this artifact: Draw a card.\"");
         availableImageSetCodes = tokenImageSets;
         cardType.add(CardType.ARTIFACT);
         subtype.add("Clue");
@@ -64,7 +63,6 @@ public class ClueArtifactToken extends Token {
         ability.addCost(cost);
         this.addAbility(ability);
     }
-
 
     @Override
     public void setExpansionSetCodeForImage(String code) {

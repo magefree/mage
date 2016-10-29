@@ -61,7 +61,7 @@ public class BlazeCommando extends CardImpl {
         this.power = new MageInt(5);
         this.toughness = new MageInt(3);
 
-        // Whenever an instant or sorcery spell you control deals damage, put two 1/1 red and white Soldier creature tokens with haste onto the battlefield.
+        // Whenever an instant or sorcery spell you control deals damage, create two 1/1 red and white Soldier creature tokens with haste.
         this.addAbility(new BlazeCommandoTriggeredAbility());
 
     }

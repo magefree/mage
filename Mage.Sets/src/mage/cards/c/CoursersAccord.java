@@ -45,8 +45,8 @@ public class CoursersAccord extends CardImpl {
         super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{4}{G}{W}");
 
 
-        // Put a 3/3 green Centaur creature token onto the battlefield, then populate.
-        // (Put a token onto the battlefield that's a copy of a creature token you control.)
+        // Create a 3/3 green Centaur creature token, then populate.
+        // (Create a token that's a copy of a creature token you control.)
         this.getSpellAbility().addEffect(new CreateTokenEffect(new CentaurToken()));
         this.getSpellAbility().addEffect(new PopulateEffect("then"));
     }

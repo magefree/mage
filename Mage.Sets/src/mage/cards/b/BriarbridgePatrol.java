@@ -59,7 +59,7 @@ public class BriarbridgePatrol extends CardImpl {
         this.power = new MageInt(3);
         this.toughness = new MageInt(3);
 
-        // Whenever Briarbridge Patrol deals damage to one or more creatures, investigate (Put a colorless Clue artifact token onto the battlefield with "2, Sacrifice this artifact: Draw a card.").
+        // Whenever Briarbridge Patrol deals damage to one or more creatures, investigate (Create a colorless Clue artifact token with "2, Sacrifice this artifact: Draw a card.").
         this.addAbility(new DealsDamageToOneOrMoreCreaturesTriggeredAbility(new InvestigateEffect(), false, false, false));
         // At the beginning of each end step, if you sacrificed three or more Clues this turn, you may put a creature card from your hand onto the battlefield.
         this.addAbility(new BeginningOfEndStepTriggeredAbility(Zone.BATTLEFIELD, new PutPermanentOnBattlefieldEffect(new FilterCreatureCard("a creature card")), TargetController.ANY,

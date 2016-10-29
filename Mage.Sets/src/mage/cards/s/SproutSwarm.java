@@ -49,7 +49,7 @@ public class SproutSwarm extends CardImpl {
         this.addAbility(new ConvokeAbility());
         // Buyback {3}
         this.addAbility(new BuybackAbility("{3}"));
-        // Put a 1/1 green Saproling creature token onto the battlefield.
+        // Create a 1/1 green Saproling creature token.
         this.getSpellAbility().addEffect(new CreateTokenEffect(new SaprolingToken()));
     }
 

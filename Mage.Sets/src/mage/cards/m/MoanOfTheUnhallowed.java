@@ -46,7 +46,7 @@ public class MoanOfTheUnhallowed extends CardImpl {
     public MoanOfTheUnhallowed(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{2}{B}{B}");
 
-        // Put two 2/2 black Zombie creature tokens onto the battlefield.
+        // Create two 2/2 black Zombie creature tokens.
         this.getSpellAbility().addEffect(new CreateTokenEffect(new ZombieToken(), 2));
 
         // Flashback {5}{B}{B}

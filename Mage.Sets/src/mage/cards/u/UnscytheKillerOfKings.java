@@ -71,7 +71,7 @@ public class UnscytheKillerOfKings extends CardImpl {
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new BoostEquippedEffect(3, 3)));
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new GainAbilityAttachedEffect(FirstStrikeAbility.getInstance(), AttachmentType.EQUIPMENT)));
 
-        // Whenever a creature dealt damage by equipped creature this turn dies, you may exile that card. If you do, put a 2/2 black Zombie creature token onto the battlefield.
+        // Whenever a creature dealt damage by equipped creature this turn dies, you may exile that card. If you do, create a 2/2 black Zombie creature token.
         this.addAbility(new UnscytheKillerOfKingsTriggeredAbility(new UnscytheEffect()));
 
         // Equip {2}
@@ -144,7 +144,7 @@ class UnscytheEffect extends OneShotEffect {
 
     public UnscytheEffect() {
         super(Outcome.PutCreatureInPlay);
-        this.staticText = "you may exile that card. If you do, put a 2/2 black Zombie creature token onto the battlefield";
+        this.staticText = "you may exile that card. If you do, create a 2/2 black Zombie creature token";
     }
 
     public UnscytheEffect(final UnscytheEffect effect) {

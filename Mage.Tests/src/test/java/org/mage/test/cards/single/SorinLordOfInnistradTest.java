@@ -10,7 +10,7 @@ import org.mage.test.serverside.base.CardTestPlayerBase;
 /**
  *
  * also tests emblems
- * 
+ *
  * @author BetaSteward
  */
 public class SorinLordOfInnistradTest extends CardTestPlayerBase {
@@ -19,7 +19,7 @@ public class SorinLordOfInnistradTest extends CardTestPlayerBase {
     public void testCard() {
         addCard(Zone.BATTLEFIELD, playerA, "Sorin, Lord of Innistrad");
 
-        activateAbility(1, PhaseStep.PRECOMBAT_MAIN, playerA, "+1: Put a a 1/1 black Vampire creature token with lifelink onto the battlefield.");
+        activateAbility(1, PhaseStep.PRECOMBAT_MAIN, playerA, "+1: Create a a 1/1 black Vampire creature token with lifelink.");
         setStopAt(1, PhaseStep.BEGIN_COMBAT);
         execute();
 
@@ -52,7 +52,7 @@ public class SorinLordOfInnistradTest extends CardTestPlayerBase {
     public void testCard3() {
         // Sorin, Lord of Innistrad English
         //  Planeswalker — Sorin (Loyalty: 3), 2WB
-        //  +1: Put a 1/1 black Vampire creature token with lifelink onto the battlefield.
+        //  +1: Create a 1/1 black Vampire creature token with lifelink.
         //  -2: You get an emblem with "Creatures you control get +1/+0."
         //  -6: Destroy up to three target creatures and/or other planeswalkers. Return each card put into a graveyard this way to the battlefield under your control.
         addCard(Zone.BATTLEFIELD, playerA, "Sorin, Lord of Innistrad");
@@ -73,7 +73,6 @@ public class SorinLordOfInnistradTest extends CardTestPlayerBase {
         assertPermanentCount(playerA, "Craw Wurm", 1);
         assertPermanentCount(playerA, "Angel of Mercy", 1);
 
-        
         assertLife(playerB, 20);
         assertLife(playerA, 23);
         assertPermanentCount(playerA, "Sorin, Lord of Innistrad", 0);

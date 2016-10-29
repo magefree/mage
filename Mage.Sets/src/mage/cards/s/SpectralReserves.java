@@ -45,9 +45,9 @@ public class SpectralReserves extends CardImpl {
     public SpectralReserves(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{3}{W}");
 
-        // Put two 1/1 white Spirit creature tokens with flying onto the battlefield. You gain 2 life.
+        // Create two 1/1 white Spirit creature tokens with flying. You gain 2 life.
         Effect effect = new CreateTokenEffect(new SpiritWhiteToken("EMN"), 2);
-        effect.setText("Put two 1/1 white Spirit creature tokens with flying onto the battlefield");
+        effect.setText("Create two 1/1 white Spirit creature tokens with flying");
         this.getSpellAbility().addEffect(effect);
         this.getSpellAbility().addEffect(new GainLifeEffect(2));
     }

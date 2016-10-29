@@ -43,7 +43,7 @@ public class HiveStirrings extends CardImpl {
     public HiveStirrings(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{2}{W}");
 
-        // Put two 1/1 colorless Sliver creature tokens onto the battlefield.
+        // Create two 1/1 colorless Sliver creature tokens.
         this.getSpellAbility().addEffect(new CreateTokenEffect(new SliverToken(), 2));
     }
 

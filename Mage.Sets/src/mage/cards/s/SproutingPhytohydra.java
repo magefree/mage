@@ -45,7 +45,7 @@ import mage.constants.Zone;
 public class SproutingPhytohydra extends CardImpl {
 
     public SproutingPhytohydra(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{4}{G}");
+        super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{4}{G}");
         this.subtype.add("Plant");
         this.subtype.add("Hydra");
         this.power = new MageInt(0);
@@ -53,9 +53,9 @@ public class SproutingPhytohydra extends CardImpl {
 
         // Defender
         this.addAbility(DefenderAbility.getInstance());
-        // Whenever Sprouting Phytohydra is dealt damage, you may put a token that's a copy of Sprouting Phytohydra onto the battlefield.
+        // Whenever Sprouting Phytohydra is dealt damage, you may create a token that's a copy of Sprouting Phytohydra.
         Effect effect = new PutTokenOntoBattlefieldCopySourceEffect();
-        effect.setText("you may put a token that's a copy of {this} onto the battlefield");
+        effect.setText("you may create a token that's a copy of {this}");
         this.addAbility(new DealtDamageToSourceTriggeredAbility(Zone.BATTLEFIELD, effect, true));
     }
 

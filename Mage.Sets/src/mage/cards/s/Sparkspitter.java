@@ -59,7 +59,7 @@ public class Sparkspitter extends CardImpl {
         this.power = new MageInt(1);
         this.toughness = new MageInt(3);
 
-        // {R}, {tap}, Discard a card: Put a 3/1 red Elemental creature token named Spark Elemental onto the battlefield. It has trample, haste, and "At the beginning of the end step, sacrifice Spark Elemental."
+        // {R}, {tap}, Discard a card: Create a 3/1 red Elemental creature token named Spark Elemental. It has trample, haste, and "At the beginning of the end step, sacrifice Spark Elemental."
         Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new CreateTokenEffect(new SparkElementalToken()), new ManaCostsImpl("{R}"));
         ability.addCost(new TapSourceCost());
         ability.addCost(new DiscardCardCost());

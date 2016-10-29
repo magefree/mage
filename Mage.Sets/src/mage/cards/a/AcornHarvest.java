@@ -48,7 +48,7 @@ public class AcornHarvest extends CardImpl {
         super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{3}{G}");
 
 
-        // Put two 1/1 green Squirrel creature tokens onto the battlefield.
+        // Create two 1/1 green Squirrel creature tokens.
         this.getSpellAbility().addEffect(new CreateTokenEffect(new SquirrelToken(), 2));
 
         // Flashback-{1}{G} - Pay 3 life.

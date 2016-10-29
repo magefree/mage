@@ -53,9 +53,9 @@ public class BroodMonitor extends CardImpl {
 
         // Devoid
         this.addAbility(new DevoidAbility(this.color));
-        // When Brood Monitor enters the battlefield, put three 1/1 colorless Eldrazi Scion creature tokens onto the battlefield. They have "Sacrifice this creature: Add {C} to your mana pool."
+        // When Brood Monitor enters the battlefield, create three 1/1 colorless Eldrazi Scion creature tokens. They have "Sacrifice this creature: Add {C} to your mana pool."
         Effect effect = new CreateTokenEffect(new EldraziScionToken(), 3);
-        effect.setText("put three 1/1 colorless Eldrazi Scion creature tokens onto the battlefield. They have \"Sacrifice this creature: Add {C} to your mana pool.\"");
+        effect.setText("create three 1/1 colorless Eldrazi Scion creature tokens. They have \"Sacrifice this creature: Add {C} to your mana pool.\"");
         this.addAbility(new EntersBattlefieldTriggeredAbility(effect, false));
 
     }

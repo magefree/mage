@@ -59,7 +59,7 @@ import mage.players.Player;
 public class BudokaGardener extends CardImpl {
 
     public BudokaGardener(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{1}{G}");
+        super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{1}{G}");
         this.subtype.add("Human");
         this.subtype.add("Monk");
 
@@ -113,7 +113,7 @@ class BudokaGardenerEffect extends OneShotEffect {
         return new BudokaGardenerEffect(this);
     }
 
- }
+}
 
 class DokaiWeaverofLife extends Token {
 
@@ -127,7 +127,7 @@ class DokaiWeaverofLife extends Token {
         power = new MageInt(3);
         toughness = new MageInt(3);
 
-        // {4}{G}{G}, {T}: Put an X/X green Elemental creature token onto the battlefield, where X is the number of lands you control.
+        // {4}{G}{G}, {T}: Create an X/X green Elemental creature token, where X is the number of lands you control.
         Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new CreateTokenEffect(new DokaiWeaverofLifeToken()), new ManaCostsImpl("{4}{G}{G}"));
         ability.addCost(new TapSourceCost());
         this.addAbility(ability);
@@ -135,11 +135,11 @@ class DokaiWeaverofLife extends Token {
 }
 
 class DokaiWeaverofLifeToken extends Token {
-    
+
     final static FilterControlledPermanent filterLands = new FilterControlledLandPermanent("lands you control");
 
     DokaiWeaverofLifeToken() {
-        super("Elemental", "a X/X green Elemental creature token onto the battlefield, where X is the number of lands you control");
+        super("Elemental", "a X/X green Elemental creature token, where X is the number of lands you control");
         cardType.add(CardType.CREATURE);
         color.setGreen(true);
         subtype.add("Elemental");

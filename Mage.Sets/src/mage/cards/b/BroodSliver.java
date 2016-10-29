@@ -49,13 +49,13 @@ import mage.players.Player;
 public class BroodSliver extends CardImpl {
 
     public BroodSliver(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{4}{G}");
+        super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{4}{G}");
         this.subtype.add("Sliver");
 
         this.power = new MageInt(3);
         this.toughness = new MageInt(3);
 
-        // Whenever a Sliver deals combat damage to a player, its controller may put a 1/1 colorless Sliver creature token onto the battlefield.
+        // Whenever a Sliver deals combat damage to a player, its controller may create a 1/1 colorless Sliver creature token.
         this.addAbility(new DealsDamageToAPlayerAllTriggeredAbility(new BroodSliverEffect(),
                 new FilterCreaturePermanent("Sliver", "a Sliver"), false, SetTargetPointer.PLAYER, true));
     }
@@ -74,7 +74,7 @@ class BroodSliverEffect extends OneShotEffect {
 
     public BroodSliverEffect() {
         super(Outcome.PutCardInPlay);
-        this.staticText = "its controller may put a 1/1 colorless Sliver creature token onto the battlefield";
+        this.staticText = "its controller may create a 1/1 colorless Sliver creature token";
     }
 
     public BroodSliverEffect(final BroodSliverEffect effect) {
@@ -90,7 +90,7 @@ class BroodSliverEffect extends OneShotEffect {
     public boolean apply(Game game, Ability source) {
         Player permanentController = game.getPlayer(getTargetPointer().getFirst(game, source));
         if (permanentController != null) {
-            if (permanentController.chooseUse(outcome, "put a 1/1 colorless Sliver creature token onto the battlefield", source, game)) {
+            if (permanentController.chooseUse(outcome, "create a 1/1 colorless Sliver creature token", source, game)) {
                 return new SliverToken().putOntoBattlefield(1, game, source.getSourceId(), permanentController.getId());
             }
             return true;

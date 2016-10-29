@@ -54,9 +54,9 @@ public class SylvanOffering extends CardImpl {
     public SylvanOffering(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{X}{G}");
 
-        // Choose an opponent. You and that player each put an X/X green Treefolk creature token onto the battlefield.
+        // Choose an opponent. You and that player each create an X/X green Treefolk creature token.
         this.getSpellAbility().addEffect(new SylvanOfferingEffect1());
-        // Choose an opponent. You and that player each put X 1/1 green Elf Warrior creature tokens onto the battlefield.
+        // Choose an opponent. You and that player each create X 1/1 green Elf Warrior creature tokens.
         this.getSpellAbility().addEffect(new SylvanOfferingEffect2());
     }
 
@@ -74,7 +74,7 @@ class SylvanOfferingEffect1 extends OneShotEffect {
 
     SylvanOfferingEffect1() {
         super(Outcome.Sacrifice);
-        this.staticText = "Choose an opponent. You and that player each put an X/X green Treefolk creature token onto the battlefield";
+        this.staticText = "Choose an opponent. You and that player each create an X/X green Treefolk creature token";
     }
 
     SylvanOfferingEffect1(final SylvanOfferingEffect1 effect) {
@@ -125,7 +125,7 @@ class SylvanOfferingEffect2 extends OneShotEffect {
 
     SylvanOfferingEffect2() {
         super(Outcome.Sacrifice);
-        this.staticText = "<br>Choose an opponent. You and that player each put X 1/1 green Elf Warrior creature tokens onto the battlefield";
+        this.staticText = "<br>Choose an opponent. You and that player each create X 1/1 green Elf Warrior creature tokens";
     }
 
     SylvanOfferingEffect2(final SylvanOfferingEffect2 effect) {

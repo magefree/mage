@@ -52,7 +52,7 @@ public class EvangelOfHeliod extends CardImpl {
         this.power = new MageInt(1);
         this.toughness = new MageInt(3);
 
-        // When Evangel of Heliod enters the battlefield, put a number of 1/1 white Soldier creature tokens onto the battlefield equal to your devotion to white.
+        // When Evangel of Heliod enters the battlefield, create a number of 1/1 white Soldier creature tokens equal to your devotion to white.
         this.addAbility(new EntersBattlefieldTriggeredAbility(new CreateTokenEffect(new SoldierToken(), new DevotionCount(ColoredManaSymbol.W))));
     }
 

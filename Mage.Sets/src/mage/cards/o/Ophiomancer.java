@@ -56,11 +56,11 @@ public class Ophiomancer extends CardImpl {
         this.power = new MageInt(2);
         this.toughness = new MageInt(2);
 
-        // At the beginning of each upkeep, if you control no Snakes, put a 1/1 black Snake creature token with deathtouch onto the battlefield.
+        // At the beginning of each upkeep, if you control no Snakes, create a 1/1 black Snake creature token with deathtouch.
         this.addAbility(new ConditionalTriggeredAbility(
                 new BeginningOfUpkeepTriggeredAbility(Zone.BATTLEFIELD, new CreateTokenEffect(new OphiomancerSnakeToken()), TargetController.ANY, false),
                 new PermanentsOnTheBattlefieldCondition(new FilterCreaturePermanent("Snake", "no Snakes"), PermanentsOnTheBattlefieldCondition.CountType.EQUAL_TO, 0),
-                "At the beginning of each upkeep, if you control no Snakes, put a 1/1 black Snake creature token with deathtouch onto the battlefield."));
+                "At the beginning of each upkeep, if you control no Snakes, create a 1/1 black Snake creature token with deathtouch."));
     }
 
     public Ophiomancer(final Ophiomancer card) {

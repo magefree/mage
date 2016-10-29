@@ -53,7 +53,7 @@ public class QuestForTheGravelord extends CardImpl {
 
         // Whenever a creature dies, you may put a quest counter on Quest for the Gravelord.
         this.addAbility(new DiesCreatureTriggeredAbility(new AddCountersSourceEffect(CounterType.QUEST.createInstance()), true));
-        // Remove three quest counters from Quest for the Gravelord and sacrifice it: Put a 5/5 black Zombie Giant creature token onto the battlefield.
+        // Remove three quest counters from Quest for the Gravelord and sacrifice it: Create a 5/5 black Zombie Giant creature token.
         SimpleActivatedAbility ability = new SimpleActivatedAbility(Zone.BATTLEFIELD,
                 new CreateTokenEffect(new ZombieToken()),
                 new RemoveCountersSourceCost(CounterType.QUEST.createInstance(3)));

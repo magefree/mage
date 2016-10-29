@@ -63,7 +63,7 @@ public class BalduvianDead extends CardImpl {
         this.power = new MageInt(2);
         this.toughness = new MageInt(3);
 
-        // {2}{R}, Exile a creature card from your graveyard: Put a 3/1 black and red Graveborn creature token with haste onto the battlefield. Sacrifice it at the beginning of the next end step.
+        // {2}{R}, Exile a creature card from your graveyard: Create a 3/1 black and red Graveborn creature token with haste. Sacrifice it at the beginning of the next end step.
         Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new BalduvianDeadEffect(), new ManaCostsImpl("{2}{R}"));
         TargetCardInYourGraveyard target = new TargetCardInYourGraveyard(new FilterCreatureCard());
         ability.addCost(new ExileFromGraveCost(target));
@@ -85,7 +85,7 @@ class BalduvianDeadEffect extends OneShotEffect {
 
     public BalduvianDeadEffect() {
         super(Outcome.PutCreatureInPlay);
-        this.staticText = "Put a 3/1 black and red Graveborn creature token with haste onto the battlefield. Sacrifice it at the beginning of the next end step";
+        this.staticText = "Create a 3/1 black and red Graveborn creature token with haste. Sacrifice it at the beginning of the next end step";
     }
 
     public BalduvianDeadEffect(final BalduvianDeadEffect effect) {

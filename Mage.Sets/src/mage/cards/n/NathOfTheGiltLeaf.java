@@ -65,9 +65,9 @@ public class NathOfTheGiltLeaf extends CardImpl {
         ability.addTarget(new TargetOpponent());
         this.addAbility(ability);
 
-        // Whenever an opponent discards a card, you may put a 1/1 green Elf Warrior creature token onto the battlefield.
+        // Whenever an opponent discards a card, you may create a 1/1 green Elf Warrior creature token.
         Effect effect2 = new CreateTokenEffect(new ElfToken());
-        effect2.setText("you may put a 1/1 green Elf Warrior creature token onto the battlefield");
+        effect2.setText("you may create a 1/1 green Elf Warrior creature token");
         this.addAbility(new DiscardsACardOpponentTriggeredAbility(effect2, true));
 
     }

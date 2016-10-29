@@ -50,7 +50,7 @@ import mage.game.permanent.token.Token;
 public class Cloudseeder extends CardImpl {
 
     public Cloudseeder(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{1}{U}");
+        super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{1}{U}");
         this.subtype.add("Faerie");
         this.subtype.add("Spellshaper");
         this.power = new MageInt(1);
@@ -58,7 +58,7 @@ public class Cloudseeder extends CardImpl {
 
         // Flying
         this.addAbility(FlyingAbility.getInstance());
-        // {U}, {tap}, Discard a card: Put a 1/1 blue Faerie creature token named Cloud Sprite onto the battlefield. It has flying and "Cloud Sprite can block only creatures with flying."
+        // {U}, {tap}, Discard a card: Create a 1/1 blue Faerie creature token named Cloud Sprite. It has flying and "Cloud Sprite can block only creatures with flying."
         Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new CreateTokenEffect(new CloudSpriteToken()), new ManaCostsImpl("{U}"));
         ability.addCost(new TapSourceCost());
         ability.addCost(new DiscardCardCost());

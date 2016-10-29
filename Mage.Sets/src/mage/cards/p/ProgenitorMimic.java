@@ -66,18 +66,18 @@ public class ProgenitorMimic extends CardImpl {
 
         // You may have Progenitor Mimic enter the battlefield as a copy of any creature on the battlefield
         // except it gains "At the beginning of your upkeep, if this creature isn't a token,
-        // put a token onto the battlefield that's a copy of this creature."
+        // create a token that's a copy of this creature."
         Effect effect = new PutTokenOntoBattlefieldCopySourceEffect();
-        effect.setText("put a token onto the battlefield that's a copy of this creature");
+        effect.setText("create a token that's a copy of this creature");
 
         AbilityApplier applier = new AbilityApplier(
                 new ConditionalTriggeredAbility(
                         new BeginningOfUpkeepTriggeredAbility(effect, TargetController.YOU, false),
                         new SourceMatchesFilterCondition(filter),
-                        "At the beginning of your upkeep, if this creature isn't a token, put a token onto the battlefield that's a copy of this creature.")
+                        "At the beginning of your upkeep, if this creature isn't a token, create a token that's a copy of this creature.")
         );
         effect = new CopyPermanentEffect(applier);
-        effect.setText("as a copy of any creature on the battlefield except it gains \"At the beginning of your upkeep, if this creature isn't a token, put a token onto the battlefield that's a copy of this creature.\"");
+        effect.setText("as a copy of any creature on the battlefield except it gains \"At the beginning of your upkeep, if this creature isn't a token, create a token that's a copy of this creature.\"");
         this.addAbility(new EntersBattlefieldAbility(effect, true));
     }
 

@@ -59,9 +59,9 @@ public class Arachnogenesis extends CardImpl {
     public Arachnogenesis(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.INSTANT},"{2}{G}");
 
-        // Put X 1/2 green Spider creature tokens with reach onto the battlefield, where X is the number of creatures attacking you.
+        // create X 1/2 green Spider creature tokens with reach, where X is the number of creatures attacking you.
         Effect effect = new CreateTokenEffect(new SpiderToken(), new ArachnogenesisCount());
-        effect.setText("Put X 1/2 green Spider creature tokens with reach onto the battlefield, where X is the number of creatures attacking you");
+        effect.setText("create X 1/2 green Spider creature tokens with reach, where X is the number of creatures attacking you");
         this.getSpellAbility().addEffect(effect);
         
         // Prevent all combat damage that would be dealt this turn by non-Spider creatures.

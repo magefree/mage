@@ -50,7 +50,7 @@ public class FlourishingDefenses extends CardImpl {
     public FlourishingDefenses(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.ENCHANTMENT},"{4}{G}");
 
-        // Whenever a -1/-1 counter is placed on a creature, you may put a 1/1 green Elf Warrior creature token onto the battlefield.
+        // Whenever a -1/-1 counter is placed on a creature, you may create a 1/1 green Elf Warrior creature token.
         this.addAbility(new FlourishingDefensesTriggeredAbility());
 
     }
@@ -98,6 +98,6 @@ class FlourishingDefensesTriggeredAbility extends TriggeredAbilityImpl {
 
     @Override
     public String getRule() {
-        return "Whenever a -1/-1 counter is placed on a creature, you may put a 1/1 green Elf Warrior creature token onto the battlefield.";
+        return "Whenever a -1/-1 counter is placed on a creature, you may create a 1/1 green Elf Warrior creature token.";
     }
 }

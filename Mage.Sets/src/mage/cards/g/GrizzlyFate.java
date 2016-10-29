@@ -50,12 +50,12 @@ public class GrizzlyFate extends CardImpl {
         super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{3}{G}{G}");
 
 
-        // Put two 2/2 green Bear creature tokens onto the battlefield.
-        // Threshold - Put four 2/2 green Bear creature tokens onto the battlefield instead if seven or more cards are in your graveyard.
+        // Create two 2/2 green Bear creature tokens.
+        // Threshold - Create four 2/2 green Bear creature tokens instead if seven or more cards are in your graveyard.
         Effect effect = new ConditionalOneShotEffect(new CreateTokenEffect(new BearToken(), 4),
                                                      new CreateTokenEffect(new BearToken(), 2),
                                                      new CardsInControllerGraveCondition(7),
-                                                     "Put two 2/2 green Bear creature tokens onto the battlefield.<br/><br/><i>Threshold</i> - Put four 2/2 green Bear creature tokens onto the battlefield instead if seven or more cards are in your graveyard.");
+                                                     "Create two 2/2 green Bear creature tokens.<br/><br/><i>Threshold</i> - Create four 2/2 green Bear creature tokens instead if seven or more cards are in your graveyard.");
         this.getSpellAbility().addEffect(effect);
 
         // Flashback {5}{G}{G}

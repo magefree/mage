@@ -61,7 +61,7 @@ public class GeistHonoredMonk extends CardImpl {
         // Geist-Honored Monk's power and toughness are each equal to the number of creatures you control.
         this.addAbility(new SimpleStaticAbility(Zone.ALL, new SetPowerToughnessSourceEffect(new PermanentsOnBattlefieldCount(new FilterControlledCreaturePermanent()), Duration.EndOfGame)));
 
-        // When Geist-Honored Monk enters the battlefield, put two 1/1 white Spirit creature tokens with flying onto the battlefield.
+        // When Geist-Honored Monk enters the battlefield, create two 1/1 white Spirit creature tokens with flying.
         this.addAbility(new EntersBattlefieldTriggeredAbility(new CreateTokenEffect(new SpiritWhiteToken("ISD"), 2)));
     }
 

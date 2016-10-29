@@ -48,12 +48,12 @@ import mage.game.permanent.token.Token;
 public class Sliversmith extends CardImpl {
 
     public Sliversmith(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.ARTIFACT,CardType.CREATURE},"{2}");
+        super(ownerId, setInfo, new CardType[]{CardType.ARTIFACT, CardType.CREATURE}, "{2}");
         this.subtype.add("Spellshaper");
         this.power = new MageInt(1);
         this.toughness = new MageInt(1);
 
-        // {1}, {tap}, Discard a card: Put a 1/1 colorless Sliver artifact creature token named Metallic Sliver onto the battlefield.
+        // {1}, {tap}, Discard a card: Create a 1/1 colorless Sliver artifact creature token named Metallic Sliver.
         Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new CreateTokenEffect(new SliversmithToken()), new ManaCostsImpl("{1}"));
         ability.addCost(new TapSourceCost());
         ability.addCost(new DiscardCardCost());

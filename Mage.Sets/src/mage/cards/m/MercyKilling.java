@@ -50,7 +50,7 @@ public class MercyKilling extends CardImpl {
     public MercyKilling(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.INSTANT},"{2}{G/W}");
         
-        // Target creature's controller sacrifices it, then puts X 1/1 green and white Elf Warrior creature tokens onto the battlefield, where X is that creature's power.
+        // Target creature's controller sacrifices it, then creates X 1/1 green and white Elf Warrior creature tokens, where X is that creature's power.
         this.getSpellAbility().addEffect(new SacrificeTargetEffect("Target creature's controller sacrifices it"));
         this.getSpellAbility().addEffect(new MercyKillingTokenEffect());
         this.getSpellAbility().addTarget(new TargetCreaturePermanent());
@@ -70,7 +70,7 @@ class MercyKillingTokenEffect extends OneShotEffect {
 
     public MercyKillingTokenEffect() {
         super(Outcome.PutCreatureInPlay);
-        staticText = ", then puts X 1/1 green and white Elf Warrior creature tokens onto the battlefield, where X is that creature's power";
+        staticText = ", then creates X 1/1 green and white Elf Warrior creature tokens, where X is that creature's power";
     }
 
     public MercyKillingTokenEffect(final MercyKillingTokenEffect effect) {

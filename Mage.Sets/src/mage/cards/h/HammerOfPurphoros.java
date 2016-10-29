@@ -62,7 +62,7 @@ public class HammerOfPurphoros extends CardImpl {
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD,
                 new GainAbilityControlledEffect(HasteAbility.getInstance(), Duration.WhileOnBattlefield, new FilterCreaturePermanent("Creatures"))));
         
-        // {2}{R}, {tap}, Sacrifice a land: Put a 3/3 colorless Golem enchantment artifact creature token onto the battlefield.
+        // {2}{R}, {tap}, Sacrifice a land: Create a 3/3 colorless Golem enchantment artifact creature token.
         Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new CreateTokenEffect(new HammerOfPurphorosGolemToken()), new ManaCostsImpl("{2}{R}"));
         ability.addCost(new TapSourceCost());
         ability.addCost(new SacrificeTargetCost(new TargetControlledPermanent(new FilterControlledLandPermanent("land"))));

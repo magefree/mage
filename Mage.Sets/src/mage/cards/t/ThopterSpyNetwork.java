@@ -53,7 +53,7 @@ public class ThopterSpyNetwork extends CardImpl {
     public ThopterSpyNetwork(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.ENCHANTMENT},"{2}{U}{U}");
 
-        // At the beginning of your upkeep, if you control an artifact, put a 1/1 colorless Thopter artifact creature token with flying onto the battlefield.
+        // At the beginning of your upkeep, if you control an artifact, create a 1/1 colorless Thopter artifact creature token with flying.
         this.addAbility(new ThopterSpyNetworkUpkeepTriggeredAbility());
 
         // Whenever one or more artifact creatures you control deals combat damage to a player, draw a card.
@@ -102,7 +102,7 @@ class ThopterSpyNetworkUpkeepTriggeredAbility extends TriggeredAbilityImpl {
 
     @Override
     public String getRule() {
-        return "At the beginning of your upkeep, if you control an artifact, put a 1/1 colorless Thopter artifact creature token with flying onto the battlefield";
+        return "At the beginning of your upkeep, if you control an artifact, create a 1/1 colorless Thopter artifact creature token with flying";
     }
 }
 

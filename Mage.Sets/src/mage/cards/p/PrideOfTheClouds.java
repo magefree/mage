@@ -73,7 +73,7 @@ public class PrideOfTheClouds extends CardImpl {
         DynamicValue xValue = new PermanentsOnBattlefieldCount(filter);
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new BoostSourceEffect(xValue, xValue, Duration.WhileOnBattlefield)));
 
-        // Forecast - {2}{W}{U}, Reveal Pride of the Clouds from your hand: Put a 1/1 white and blue Bird creature token with flying onto the battlefield.
+        // Forecast - {2}{W}{U}, Reveal Pride of the Clouds from your hand: Create a 1/1 white and blue Bird creature token with flying.
         this.addAbility(new ForecastAbility(new CreateTokenEffect(new BirdToken()), new ManaCostsImpl("{2}{W}{U}")));
     }
 

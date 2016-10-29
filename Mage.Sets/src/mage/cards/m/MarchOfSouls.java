@@ -51,7 +51,7 @@ public class MarchOfSouls extends CardImpl {
     public MarchOfSouls(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{4}{W}");
 
-        // Destroy all creatures. They can't be regenerated. For each creature destroyed this way, its controller puts a 1/1 white Spirit creature token with flying onto the battlefield.
+        // Destroy all creatures. They can't be regenerated. For each creature destroyed this way, its controller creates a 1/1 white Spirit creature token with flying.
         this.getSpellAbility().addEffect(new MarchOfSoulsEffect());
     }
 
@@ -69,7 +69,7 @@ class MarchOfSoulsEffect extends OneShotEffect {
 
     public MarchOfSoulsEffect() {
         super(Outcome.Benefit);
-        staticText = "Destroy all creatures. They can't be regenerated. For each creature destroyed this way, its controller puts a 1/1 white Spirit creature token with flying onto the battlefield.";
+        staticText = "Destroy all creatures. They can't be regenerated. For each creature destroyed this way, its controller creates a 1/1 white Spirit creature token with flying.";
     }
 
     public MarchOfSoulsEffect(final MarchOfSoulsEffect effect) {

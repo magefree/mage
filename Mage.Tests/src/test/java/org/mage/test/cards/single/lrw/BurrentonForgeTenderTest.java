@@ -131,7 +131,7 @@ public class BurrentonForgeTenderTest extends CardTestPlayerBase {
         addCard(Zone.HAND, playerA, "Orzhov Charm");
 
         // Kicker {5} (You may pay an additional as you cast this spell.)
-        // Put a token onto the battlefield that's a copy of target creature. If Rite of Replication was kicked, put five of those tokens onto the battlefield instead.
+        // Create a tokenonto the battlefield that's a copy of target creature. If Rite of Replication was kicked, put five of those tokens onto the battlefield instead.
         addCard(Zone.HAND, playerB, "Rite of Replication");
         addCard(Zone.BATTLEFIELD, playerB, "Island", 4);
 

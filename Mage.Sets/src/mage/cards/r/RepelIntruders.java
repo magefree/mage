@@ -52,12 +52,12 @@ public class RepelIntruders extends CardImpl {
         super(ownerId,setInfo,new CardType[]{CardType.INSTANT},"{3}{W/U}");
 
 
-        // Put two 1/1 white Kithkin Soldier creature tokens onto the battlefield if {W} was spent to cast Repel Intruders. Counter up to one target creature spell if {U} was spent to cast Repel Intruders.
+        // Create two 1/1 white Kithkin Soldier creature tokens if {W} was spent to cast Repel Intruders. Counter up to one target creature spell if {U} was spent to cast Repel Intruders.
         TargetSpell target = new TargetSpell(0,1, new FilterCreatureSpell());
         target.setRequired(false);
         this.getSpellAbility().addEffect(new ConditionalOneShotEffect(
                 new CreateTokenEffect(new KithkinToken(), 2),
-                new ManaWasSpentCondition(ColoredManaSymbol.W), "Put two 1/1 white Kithkin Soldier creature tokens onto the battlefield if {W} was spent to cast {this}"));
+                new ManaWasSpentCondition(ColoredManaSymbol.W), "Create two 1/1 white Kithkin Soldier creature tokens if {W} was spent to cast {this}"));
         this.getSpellAbility().addEffect(new ConditionalOneShotEffect(
                 new CounterTargetEffect(),
                 new ManaWasSpentCondition(ColoredManaSymbol.U), " Counter up to one target creature spell if {U} was spent to cast {this}"));

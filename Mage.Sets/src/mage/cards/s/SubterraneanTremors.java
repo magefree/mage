@@ -56,7 +56,7 @@ public class SubterraneanTremors extends CardImpl {
 
         // Subterranean Tremors deals X damage to each creature without flying. 
         // If X is 4 or more, destroy all artifacts. 
-        // If X is 8 or more, put an 8/8 red Lizard creature token onto the battlefield.
+        // If X is 8 or more, create an 8/8 red Lizard creature token.
         this.getSpellAbility().addEffect(new SubterraneanTremorsEffect());
     }
 
@@ -81,7 +81,7 @@ class SubterraneanTremorsEffect extends OneShotEffect {
 
     public SubterraneanTremorsEffect() {
         super(Outcome.Damage);
-        staticText = "{this} deals X damage to each creature without flying. If X is 4 or more, destroy all artifacts. If X is 8 or more, put an 8/8 red Lizard creature token onto the battlefield.";
+        staticText = "{this} deals X damage to each creature without flying. If X is 4 or more, destroy all artifacts. If X is 8 or more, create an 8/8 red Lizard creature token.";
     }
 
     public SubterraneanTremorsEffect(final SubterraneanTremorsEffect effect) {
@@ -113,7 +113,7 @@ class SubterraneanTremorsEffect extends OneShotEffect {
                 permanent.destroy(permanent.getId(), game, false);
             }
         }
-        // X 8 or more: put an 8/8 red lizard creature token on the battlefield
+        // X 8 or more: create an 8/8 red lizard creature token on the battlefield
         if (damage >= 8) {
             Token lizardToken = new LizardToken();
             lizardToken.putOntoBattlefield(1, game, sourceId, controllerId);

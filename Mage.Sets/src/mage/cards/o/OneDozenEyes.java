@@ -51,9 +51,9 @@ public class OneDozenEyes extends CardImpl {
         // Choose one -
         this.getSpellAbility().getModes().setMinModes(1);
         this.getSpellAbility().getModes().setMaxModes(1);
-        // Put a 5/5 green Beast creature token onto the battlefield;
+        // Create a 5/5 green Beast creature token;
         this.getSpellAbility().addEffect(new CreateTokenEffect(new OneDozenEyesBeastToken()));
-        // or put five 1/1 green Insect creature tokens onto the battlefield.
+        // or create five 1/1 green Insect creature tokens.
         Mode mode = new Mode();
         mode.getEffects().add(new CreateTokenEffect(new InsectToken(),5));
         this.getSpellAbility().addMode(mode);

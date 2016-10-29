@@ -41,9 +41,9 @@ import mage.game.permanent.token.GoblinToken;
 public class HordelingOutburst extends CardImpl {
 
     public HordelingOutburst(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{1}{R}{R}");
+        super(ownerId, setInfo, new CardType[]{CardType.SORCERY}, "{1}{R}{R}");
 
-        // Put 3 1/1 red Goblin creature tokens onto the battlefield.
+        // Put three 1/1 red Goblin creature tokens.
         this.getSpellAbility().addEffect(new CreateTokenEffect(new GoblinToken(), 3));
     }
 

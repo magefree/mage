@@ -46,13 +46,13 @@ public class PredatorsHowl extends CardImpl {
     public PredatorsHowl(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.INSTANT},"{3}{G}");
 
-        // Put a 2/2 green Wolf creature token onto the battlefield.
-        // Morbid - Put three 2/2 green Wolf creature tokens onto the battlefield instead if a creature died this turn.
+        // Create a 2/2 green Wolf creature token.
+        // Morbid - Create three 2/2 green Wolf creature tokens instead if a creature died this turn.
         Effect effect = new ConditionalOneShotEffect(
                 new CreateTokenEffect(new WolfToken(), 3),
                 new CreateTokenEffect(new WolfToken(), 1),
                 new MorbidCondition(),
-                "Put a 2/2 green Wolf creature token onto the battlefield. <br/><br/><i>Morbid</i> - Put three 2/2 green Wolf creature tokens onto the battlefield instead if a creature died this turn.");
+                "Create a 2/2 green Wolf creature token. <br/><br/><i>Morbid</i> - Create three 2/2 green Wolf creature tokens instead if a creature died this turn.");
         this.getSpellAbility().addEffect(effect);
     }
 

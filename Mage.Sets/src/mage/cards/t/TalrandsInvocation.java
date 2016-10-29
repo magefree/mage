@@ -44,7 +44,7 @@ public class TalrandsInvocation extends CardImpl {
         super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{2}{U}{U}");
 
 
-        // Put two 2/2 blue Drake creature tokens with flying onto the battlefield.
+        // Create two 2/2 blue Drake creature tokens with flying.
         this.getSpellAbility().addEffect(new CreateTokenEffect(new DrakeToken(), 2));
     }
 

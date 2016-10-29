@@ -60,12 +60,12 @@ import mage.util.CardUtil;
 public class SoulFoundry extends CardImpl {
 
     public SoulFoundry(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.ARTIFACT},"{4}");
+        super(ownerId, setInfo, new CardType[]{CardType.ARTIFACT}, "{4}");
 
         // Imprint - When Soul Foundry enters the battlefield, you may exile a creature card from your hand.
         this.addAbility(new EntersBattlefieldTriggeredAbility(new SoulFoundryImprintEffect(), true, "<i>Imprint - </i>"));
 
-        // {X}, {T}: Put a token that's a copy of the exiled card onto the battlefield. X is the converted mana cost of that card.
+        // {X}, {T}: Create a token that's a copy of the exiled card. X is the converted mana cost of that card.
         Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new SoulFoundryEffect(), new ManaCostsImpl("{X}"));
         ability.addCost(new TapSourceCost());
         this.addAbility(ability);
@@ -157,7 +157,7 @@ class SoulFoundryEffect extends OneShotEffect {
 
     public SoulFoundryEffect() {
         super(Outcome.PutCreatureInPlay);
-        this.staticText = "Put a token that's a copy of the exiled card onto the battlefield. X is the converted mana cost of that card";
+        this.staticText = "Create a token that's a copy of the exiled card. X is the converted mana cost of that card";
     }
 
     public SoulFoundryEffect(final SoulFoundryEffect effect) {

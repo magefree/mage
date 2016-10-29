@@ -47,11 +47,10 @@ import mage.players.Player;
 public class TemptWithVengeance extends CardImpl {
 
     public TemptWithVengeance(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{X}{R}");
+        super(ownerId, setInfo, new CardType[]{CardType.SORCERY}, "{X}{R}");
 
-
-        // Tempting offer - Put X 1/1 red Elemental creature tokens with haste onto the battlefield. Each opponent may put X 1/1 red Elemental creature tokens with haste onto the battlefield. For each player who does, put X 1/1 red Elemental creature tokens with haste onto the battlefield.
-       this.getSpellAbility().addEffect(new TemptWithVengeanceEffect());
+        // Tempting offer - create X 1/1 red Elemental creature tokens with haste. Each opponent may create X 1/1 red Elemental creature tokens with haste. For each player who does, create X 1/1 red Elemental creature tokens with haste.
+        this.getSpellAbility().addEffect(new TemptWithVengeanceEffect());
     }
 
     public TemptWithVengeance(final TemptWithVengeance card) {
@@ -68,7 +67,7 @@ class TemptWithVengeanceEffect extends OneShotEffect {
 
     public TemptWithVengeanceEffect() {
         super(Outcome.PutLandInPlay);
-        this.staticText = "<i>Tempting offer</i> - Put X 1/1 red Elemental creature tokens with haste onto the battlefield. Each opponent may put X 1/1 red Elemental creature tokens with haste onto the battlefield. For each player who does, put X 1/1 red Elemental creature tokens with haste onto the battlefield";
+        this.staticText = "<i>Tempting offer</i> - create X 1/1 red Elemental creature tokens with haste. Each opponent may create X 1/1 red Elemental creature tokens with haste. For each player who does, create X 1/1 red Elemental creature tokens with haste";
     }
 
     public TemptWithVengeanceEffect(final TemptWithVengeanceEffect effect) {
@@ -93,7 +92,7 @@ class TemptWithVengeanceEffect extends OneShotEffect {
             for (UUID playerId : game.getOpponents(controller.getId())) {
                 Player opponent = game.getPlayer(playerId);
                 if (opponent != null) {
-                    if (opponent.chooseUse(outcome, "Put " + xValue + " Elemental Tokens onto the battlefield?", source, game)) {
+                    if (opponent.chooseUse(outcome, "Create " + xValue + " Elemental tokens?", source, game)) {
                         opponentsAddedTokens += xValue;
                         tokenCopy.putOntoBattlefield(xValue, game, source.getSourceId(), playerId, false, false);
                     }

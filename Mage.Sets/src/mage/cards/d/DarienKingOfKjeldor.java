@@ -59,7 +59,7 @@ public class DarienKingOfKjeldor extends CardImpl {
         this.power = new MageInt(3);
         this.toughness = new MageInt(3);
 
-        // Whenever you're dealt damage, you may put that many 1/1 white Soldier creature tokens onto the battlefield.
+        // Whenever you're dealt damage, you may create that many 1/1 white Soldier creature tokens.
         this.addAbility(new DarienKingOfKjeldorTriggeredAbility());
     }
 
@@ -103,7 +103,7 @@ class DarienKingOfKjeldorTriggeredAbility extends TriggeredAbilityImpl {
 
     @Override
     public String getRule() {
-        return "Whenever you are dealt damage, you may put that many 1/1 white Soldier creature tokens onto the battlefield.";
+        return "Whenever you are dealt damage, you may create that many 1/1 white Soldier creature tokens.";
     }
 }
 

@@ -48,11 +48,10 @@ import mage.target.common.TargetCreaturePermanent;
 public class CurseOfTheSwine extends CardImpl {
 
     public CurseOfTheSwine(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{X}{U}{U}");
+        super(ownerId, setInfo, new CardType[]{CardType.SORCERY}, "{X}{U}{U}");
 
-
-        // Exile X target creatures. For each creature exiled this way, its controller puts a 2/2 green Boar creature token onto the battlefield.
-       this.getSpellAbility().addEffect(new CurseOfTheSwineEffect());
+        // Exile X target creatures. For each creature exiled this way, its controller creates a 2/2 green Boar creature token.
+        this.getSpellAbility().addEffect(new CurseOfTheSwineEffect());
         // Correct number of targets will be set in adjustTargets
         this.getSpellAbility().addTarget(new TargetCreaturePermanent());
     }
@@ -79,7 +78,7 @@ class CurseOfTheSwineEffect extends OneShotEffect {
 
     public CurseOfTheSwineEffect() {
         super(Outcome.Exile);
-        this.staticText = "Exile X target creatures. For each creature exiled this way, its controller puts a 2/2 green Boar creature token onto the battlefield";
+        this.staticText = "Exile X target creatures. For each creature exiled this way, its controller creates a 2/2 green Boar creature token";
     }
 
     public CurseOfTheSwineEffect(final CurseOfTheSwineEffect effect) {
@@ -93,7 +92,7 @@ class CurseOfTheSwineEffect extends OneShotEffect {
 
     @Override
     public boolean apply(Game game, Ability source) {
-        for(UUID targetId : this.getTargetPointer().getTargets(game, source)) {
+        for (UUID targetId : this.getTargetPointer().getTargets(game, source)) {
             Permanent creature = game.getPermanent(targetId);
             if (creature != null) {
                 if (creature.moveToExile(null, null, source.getSourceId(), game)) {
@@ -107,6 +106,7 @@ class CurseOfTheSwineEffect extends OneShotEffect {
 }
 
 class CurseOfTheSwineBoarToken extends Token {
+
     CurseOfTheSwineBoarToken() {
         super("Boar", "2/2 green Boar creature token");
         cardType.add(CardType.CREATURE);

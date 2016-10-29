@@ -71,7 +71,7 @@ public class LordOfLineage extends CardImpl {
         this.addAbility(FlyingAbility.getInstance());
         // Other Vampire creatures you control get +2/+2.
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new BoostControlledEffect(2, 2, Duration.WhileOnBattlefield, filter, true)));
-        // {tap}: Put a 2/2 black Vampire creature token with flying onto the battlefield.
+        // {tap}: Create a 2/2 black Vampire creature token with flying.
         this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new CreateTokenEffect(new VampireToken()), new TapSourceCost()));
     }
 

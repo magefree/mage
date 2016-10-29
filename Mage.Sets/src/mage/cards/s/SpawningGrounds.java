@@ -67,10 +67,10 @@ public class SpawningGrounds extends CardImpl {
         Ability ability = new EnchantAbility(auraTarget.getTargetName());
         this.addAbility(ability);
 
-        // Enchanted land has "{tap}: Put a 5/5 green Beast creature token with trample onto the battlefield."
+        // Enchanted land has "{tap}: Create a 5/5 green Beast creature token with trample."
         Ability abilityToGain = new SimpleActivatedAbility(Zone.BATTLEFIELD, new CreateTokenEffect(new SpawningGroundsBeastToken(), 1), new TapSourceCost());
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new GainAbilityAttachedEffect(abilityToGain, AttachmentType.AURA, Duration.WhileOnBattlefield,
-                "Enchanted land has \"{t}: Put a 5/5 green Beast creature token with trample onto the battlefield.\"")));
+                "Enchanted land has \"{t}: Create a 5/5 green Beast creature token with trample.\"")));
     }
 
     public SpawningGrounds(final SpawningGrounds card) {

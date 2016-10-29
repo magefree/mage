@@ -61,7 +61,7 @@ public class WirewoodHivemaster extends CardImpl {
         this.power = new MageInt(1);
         this.toughness = new MageInt(1);
 
-        // Whenever another nontoken Elf enters the battlefield, you may put a 1/1 green Insect creature token onto the battlefield.
+        // Whenever another nontoken Elf enters the battlefield, you may create a 1/1 green Insect creature token.
         this.addAbility(new EntersBattlefieldAllTriggeredAbility(Zone.BATTLEFIELD, new CreateTokenEffect(new InsectToken(), 1), filter, true));
     }
 

@@ -57,7 +57,7 @@ public class ArchdemonOfUnx extends CardImpl {
     }
 
     public ArchdemonOfUnx(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{5}{B}{B}");
+        super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{5}{B}{B}");
         this.subtype.add("Demon");
 
         this.power = new MageInt(6);
@@ -67,7 +67,7 @@ public class ArchdemonOfUnx extends CardImpl {
         this.addAbility(FlyingAbility.getInstance());
         // Trample
         this.addAbility(TrampleAbility.getInstance());
-        // At the beginning of your upkeep, sacrifice a non-Zombie creature, then put a 2/2 black Zombie creature token onto the battlefield.
+        // At the beginning of your upkeep, sacrifice a non-Zombie creature, then create a 2/2 black Zombie creature token.
         Ability ability = new BeginningOfUpkeepTriggeredAbility(new SacrificeControllerEffect(filter, 1, ""), TargetController.YOU, false);
         ability.addEffect(new CreateTokenEffect(new ZombieToken()));
         this.addAbility(ability);

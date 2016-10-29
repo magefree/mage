@@ -47,7 +47,7 @@ public class LabRats extends CardImpl {
 
         // Buyback {4}
         this.addAbility(new BuybackAbility("{4}"));
-        // Put a 1/1 black Rat creature token onto the battlefield.
+        // Create a 1/1 black Rat creature token.
         this.getSpellAbility().addEffect(new CreateTokenEffect(new RatToken()));
     }
 

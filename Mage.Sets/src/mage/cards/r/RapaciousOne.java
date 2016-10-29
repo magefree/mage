@@ -49,7 +49,7 @@ import mage.game.permanent.token.EldraziSpawnToken;
 public class RapaciousOne extends CardImpl {
 
     public RapaciousOne(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{5}{R}");
+        super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{5}{R}");
         this.subtype.add("Eldrazi");
         this.subtype.add("Drone");
 
@@ -102,6 +102,6 @@ class RapaciousOneTriggeredAbility extends TriggeredAbilityImpl {
 
     @Override
     public String getRule() {
-        return "Whenever {this} deals combat damage to a player, put that many 0/1 colorless Eldrazi Spawn creature tokens onto the battlefield. They have \"Sacrifice this creature: Add {C} to your mana pool.\"";
+        return "Whenever {this} deals combat damage to a player, create that many 0/1 colorless Eldrazi Spawn creature tokens. They have \"Sacrifice this creature: Add {C} to your mana pool.\"";
     }
 }

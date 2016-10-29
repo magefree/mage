@@ -51,7 +51,7 @@ public class DoublingSeason extends CardImpl {
     public DoublingSeason(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.ENCHANTMENT}, "{4}{G}");
 
-        // If an effect would put one or more tokens onto the battlefield under your control, it puts twice that many of those tokens onto the battlefield instead.
+        // If an effect would create one or more tokens under your control, it creates twice that many of those tokens instead.
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new DoublingSeasonTokenEffect()));
         // If an effect would place one or more counters on a permanent you control, it places twice that many of those counters on that permanent instead.
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new DoublingSeasonCounterEffect()));
@@ -72,7 +72,7 @@ class DoublingSeasonTokenEffect extends ReplacementEffectImpl {
 
     public DoublingSeasonTokenEffect() {
         super(Duration.WhileOnBattlefield, Outcome.Copy);
-        staticText = "If an effect would put one or more tokens onto the battlefield under your control, it puts twice that many of those tokens onto the battlefield instead";
+        staticText = "If an effect would create one or more tokens under your control, it creates twice that many of those tokens instead";
     }
 
     public DoublingSeasonTokenEffect(final DoublingSeasonTokenEffect effect) {

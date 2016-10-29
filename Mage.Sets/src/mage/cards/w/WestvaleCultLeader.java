@@ -64,7 +64,7 @@ public class WestvaleCultLeader extends CardImpl {
         // Westvale Cult Leader's power and toughness are each equal to the number of creatures you control.
         this.addAbility(new SimpleStaticAbility(Zone.ALL, new SetPowerToughnessSourceEffect(new PermanentsOnBattlefieldCount(filter), Duration.EndOfGame)));
 
-        // At the beginning of your end step, put a 1/1 white and black Human Cleric creature token onto the battlefield.
+        // At the beginning of your end step, create a 1/1 white and black Human Cleric creature token.
         this.addAbility(new BeginningOfEndStepTriggeredAbility(new CreateTokenEffect(new HumanClericToken()), TargetController.YOU, false));
     }
 

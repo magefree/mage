@@ -80,10 +80,10 @@ public class RikuOfTwoReflections extends CardImpl {
         effect.setText("copy that spell. You may choose new targets for the copy");
         this.addAbility(new SpellCastControllerTriggeredAbility(new DoIfCostPaid(effect, new ManaCostsImpl("{U}{R}")), filter, false, true));
 
-        // Whenever another nontoken creature enters the battlefield under your control, you may pay {G}{U}. If you do, put a token that's a copy of that creature onto the battlefield.
+        // Whenever another nontoken creature enters the battlefield under your control, you may pay {G}{U}. If you do, create a token that's a copy of that creature.
         effect = new DoIfCostPaid(new PutTokenOntoBattlefieldCopyTargetEffect(),
-                new ManaCostsImpl("{G}{U}"), "Put a token that's a copy of that creature onto the battlefield?");
-        effect.setText("you may pay {G}{U}. If you do, put a token that's a copy of that creature onto the battlefield");
+                new ManaCostsImpl("{G}{U}"), "Create a token that's a copy of that creature?");
+        effect.setText("you may pay {G}{U}. If you do, create a token that's a copy of that creature");
         this.addAbility(new EntersBattlefieldControlledTriggeredAbility(Zone.BATTLEFIELD, effect, filterPermanent, false, SetTargetPointer.PERMANENT, null));
     }
 

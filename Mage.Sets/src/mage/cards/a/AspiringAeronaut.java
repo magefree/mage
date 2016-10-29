@@ -53,7 +53,7 @@ public class AspiringAeronaut extends CardImpl {
         // Flying
         this.addAbility(FlyingAbility.getInstance());
 
-        // When Aspiring Aeronaut enters the battlefield, put a 1/1 colorless Thopter artifact creature token with flying onto the battlefield.
+        // When Aspiring Aeronaut enters the battlefield, create a 1/1 colorless Thopter artifact creature token with flying.
         this.addAbility(new EntersBattlefieldTriggeredAbility(new CreateTokenEffect(new ThopterColorlessToken())));
     }
 

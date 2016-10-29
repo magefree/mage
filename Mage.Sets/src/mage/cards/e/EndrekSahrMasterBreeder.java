@@ -70,7 +70,7 @@ public class EndrekSahrMasterBreeder extends CardImpl {
         this.power = new MageInt(2);
         this.toughness = new MageInt(2);
 
-        // Whenever you cast a creature spell, put X 1/1 black Thrull creature tokens onto the battlefield, where X is that spell's converted mana cost.
+        // Whenever you cast a creature spell, create X 1/1 black Thrull creature tokens, where X is that spell's converted mana cost.
         this.addAbility(new SpellCastControllerTriggeredAbility(new EndrekSahrMasterBreederEffect(), filter, false, true));
         // When you control seven or more Thrulls, sacrifice Endrek Sahr, Master Breeder.
         this.addAbility(new ControlsPermanentsControllerTriggeredAbility(
@@ -92,7 +92,7 @@ class EndrekSahrMasterBreederEffect extends OneShotEffect {
 
     public EndrekSahrMasterBreederEffect() {
         super(Outcome.PutCreatureInPlay);
-        this.staticText = "put X 1/1 black Thrull creature tokens onto the battlefield, where X is that spell's converted mana cost";
+        this.staticText = "create X 1/1 black Thrull creature tokens, where X is that spell's converted mana cost";
     }
 
     public EndrekSahrMasterBreederEffect(final EndrekSahrMasterBreederEffect effect) {

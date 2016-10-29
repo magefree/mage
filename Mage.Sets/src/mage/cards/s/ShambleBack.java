@@ -47,7 +47,7 @@ public class ShambleBack extends CardImpl {
     public ShambleBack(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{B}");
 
-        // Exile target creature card from a graveyard. Put a 2/2 black Zombie creature token onto the battlefield. You gain 2 life.
+        // Exile target creature card from a graveyard. Create a 2/2 black Zombie creature token. You gain 2 life.
         this.getSpellAbility().addEffect(new ExileTargetEffect());
         this.getSpellAbility().addTarget(new TargetCardInGraveyard(new FilterCreatureCard("creature card from a graveyard")));
         this.getSpellAbility().addEffect(new CreateTokenEffect(new ZombieToken()));

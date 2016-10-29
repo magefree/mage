@@ -60,7 +60,7 @@ public class Dovescape extends CardImpl {
         super(ownerId,setInfo,new CardType[]{CardType.ENCHANTMENT},"{3}{W/U}{W/U}{W/U}");
 
 
-        // Whenever a player casts a noncreature spell, counter that spell. That player puts X 1/1 white and blue Bird creature tokens with flying onto the battlefield, where X is the spell's converted mana cost.
+        // Whenever a player casts a noncreature spell, counter that spell. That player creates X 1/1 white and blue Bird creature tokens with flying, where X is the spell's converted mana cost.
         this.addAbility(new SpellCastAllTriggeredAbility(new DovescapeEffect(), filter, false, SetTargetPointer.SPELL));
     }
 
@@ -78,7 +78,7 @@ class DovescapeEffect extends OneShotEffect {
 
     DovescapeEffect() {
         super(Outcome.Benefit);
-        this.staticText = "counter that spell. That player puts X 1/1 white and blue Bird creature tokens with flying onto the battlefield, where X is the spell's converted mana cost";
+        this.staticText = "counter that spell. That player creates X 1/1 white and blue Bird creature tokens with flying, where X is the spell's converted mana cost";
     }
 
     DovescapeEffect(final DovescapeEffect effect) {

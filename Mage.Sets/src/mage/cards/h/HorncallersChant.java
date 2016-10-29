@@ -47,8 +47,8 @@ public class HorncallersChant extends CardImpl {
         super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{7}{G}");
 
 
-        // Put a 4/4 green Rhino creature token with trample onto the battlefield, then populate.
-        // (Put a token onto the battlefield that's a copy of a creature token you control.)
+        // Create a 4/4 green Rhino creature token with trample, then populate.
+        // (Create a token that's a copy of a creature token you control.)
         this.getSpellAbility().addEffect(new CreateTokenEffect(new RhinoToken()));
         this.getSpellAbility().addEffect(new PopulateEffect("then"));
     }

@@ -77,7 +77,7 @@ public class RiseOfTheHobgoblins extends CardImpl {
         super(ownerId,setInfo,new CardType[]{CardType.ENCHANTMENT},"{R/W}{R/W}");
 
 
-        // When Rise of the Hobgoblins enters the battlefield, you may pay {X}. If you do, put X 1/1 red and white Goblin Soldier creature tokens onto the battlefield.
+        // When Rise of the Hobgoblins enters the battlefield, you may pay {X}. If you do, create X 1/1 red and white Goblin Soldier creature tokens.
         this.addAbility(new EntersBattlefieldTriggeredAbility(new RiseOfTheHobgoblinsEffect()));
 
         // {RW}: Red creatures and white creatures you control gain first strike until end of turn.
@@ -99,7 +99,7 @@ class RiseOfTheHobgoblinsEffect extends OneShotEffect {
 
     public RiseOfTheHobgoblinsEffect() {
         super(Outcome.PutCreatureInPlay);
-        staticText = "you may pay {X}. If you do, put X 1/1 red and white Goblin Soldier creature tokens onto the battlefield";
+        staticText = "you may pay {X}. If you do, create X 1/1 red and white Goblin Soldier creature tokens";
     }
 
     public RiseOfTheHobgoblinsEffect(final RiseOfTheHobgoblinsEffect effect) {

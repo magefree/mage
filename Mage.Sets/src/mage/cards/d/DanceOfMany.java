@@ -75,7 +75,7 @@ public class DanceOfMany extends CardImpl {
     public DanceOfMany(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.ENCHANTMENT},"{U}{U}");
 
-        // When Dance of Many enters the battlefield, put a token that's a copy of target nontoken creature onto the battlefield.
+        // When Dance of Many enters the battlefield, create a token that's a copy of target nontoken creature.
         Ability ability = new EntersBattlefieldTriggeredAbility(new DanceOfManyCreateTokenCopyEffect(), false);
         ability.addTarget(new TargetCreaturePermanent(filter));
         this.addAbility(ability);
@@ -105,7 +105,7 @@ class DanceOfManyCreateTokenCopyEffect extends OneShotEffect {
 
     public DanceOfManyCreateTokenCopyEffect() {
         super(Outcome.PutCreatureInPlay);
-        staticText = "put a token that's a copy of target nontoken creature onto the battlefield";
+        staticText = "create a token that's a copy of target nontoken creature";
     }
 
     public DanceOfManyCreateTokenCopyEffect(final DanceOfManyCreateTokenCopyEffect effect) {

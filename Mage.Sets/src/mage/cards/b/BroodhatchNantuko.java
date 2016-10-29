@@ -57,7 +57,7 @@ public class BroodhatchNantuko extends CardImpl {
         this.power = new MageInt(1);
         this.toughness = new MageInt(1);
 
-        // Whenever Broodhatch Nantuko is dealt damage, you may put that many 1/1 green Insect creature tokens onto the battlefield.
+        // Whenever Broodhatch Nantuko is dealt damage, you may create that many 1/1 green Insect creature tokens.
         this.addAbility(new DealtDamageToSourceTriggeredAbility(Zone.BATTLEFIELD, new BroodhatchNantukoDealDamageEffect(), true));
         // Morph {2}{G}
         this.addAbility(new MorphAbility(this, new ManaCostsImpl("{2}{G}")));
@@ -77,7 +77,7 @@ class BroodhatchNantukoDealDamageEffect extends OneShotEffect {
 
     public BroodhatchNantukoDealDamageEffect() {
         super(Outcome.Damage);
-        this.staticText = "put that many 1/1 green Insect creature tokens onto the battlefield";
+        this.staticText = "create that many 1/1 green Insect creature tokens";
     }
 
     public BroodhatchNantukoDealDamageEffect(final BroodhatchNantukoDealDamageEffect effect) {

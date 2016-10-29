@@ -51,7 +51,7 @@ public class FeudkillersVerdict extends CardImpl {
         this.subtype.add("Giant");
 
 
-        // You gain 10 life. Then if you have more life than an opponent, put a 5/5 white Giant Warrior creature token onto the battlefield.
+        // You gain 10 life. Then if you have more life than an opponent, create a 5/5 white Giant Warrior creature token.
         this.getSpellAbility().addEffect(new FeudkillersVerdictEffect());
     }
 
@@ -69,7 +69,7 @@ class FeudkillersVerdictEffect extends OneShotEffect {
 
     public FeudkillersVerdictEffect() {
         super(Outcome.Benefit);
-        this.staticText = "You gain 10 life. Then if you have more life than an opponent, put a 5/5 white Giant Warrior creature token onto the battlefield";
+        this.staticText = "You gain 10 life. Then if you have more life than an opponent, create a 5/5 white Giant Warrior creature token";
     }
 
     public FeudkillersVerdictEffect(final FeudkillersVerdictEffect effect) {

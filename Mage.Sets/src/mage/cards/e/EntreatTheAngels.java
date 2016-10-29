@@ -49,7 +49,7 @@ public class EntreatTheAngels extends CardImpl {
         super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{X}{X}{W}{W}{W}");
 
 
-        // Put X 4/4 white Angel creature tokens with flying onto the battlefield.
+        // create X 4/4 white Angel creature tokens with flying.
         this.getSpellAbility().addEffect(new CreateTokenEffect(new AngelToken(), new ManacostVariableValue()));
 
         // Miracle {X}{W}{W}

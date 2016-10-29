@@ -55,7 +55,7 @@ public class OtherworldlyOutburst extends CardImpl {
     public OtherworldlyOutburst(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.INSTANT},"{R}");
 
-        // Target creature gets +1/+0 until end of turn. When that creature dies this turn, put a 3/2 colorless Eldrazi Horror creature token onto the battlefield.
+        // Target creature gets +1/+0 until end of turn. When that creature dies this turn, create a 3/2 colorless Eldrazi Horror creature token.
         this.getSpellAbility().addTarget(new TargetCreaturePermanent());
         this.getSpellAbility().addEffect(new BoostTargetEffect(1, 0, Duration.EndOfTurn));
         this.getSpellAbility().addEffect(new OtherworldlyOutburstEffect());
@@ -75,7 +75,7 @@ class OtherworldlyOutburstEffect extends OneShotEffect {
 
     public OtherworldlyOutburstEffect() {
         super(Outcome.UnboostCreature);
-        this.staticText = "When that creature dies this turn, put a 3/2 colorless Eldrazi Horror creature token onto the battlefield";
+        this.staticText = "When that creature dies this turn, create a 3/2 colorless Eldrazi Horror creature token";
     }
 
     public OtherworldlyOutburstEffect(final OtherworldlyOutburstEffect effect) {
@@ -131,6 +131,6 @@ class OtherworldlyOutburstDelayedTriggeredAbility extends DelayedTriggeredAbilit
 
     @Override
     public String getRule() {
-        return "When that creature dies this turn, put a 3/2 colorless Eldrazi Horror creature token onto the battlefield.";
+        return "When that creature dies this turn, create a 3/2 colorless Eldrazi Horror creature token.";
     }
 }

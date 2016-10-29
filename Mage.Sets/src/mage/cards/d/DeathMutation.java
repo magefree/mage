@@ -60,7 +60,7 @@ public class DeathMutation extends CardImpl {
         // Destroy target nonblack creature. It can't be regenerated.
         this.getSpellAbility().addEffect(new DestroyTargetEffect(true));
         this.getSpellAbility().addTarget(new TargetPermanent(filter));
-        // Put X 1/1 green Saproling creature tokens onto the battlefield, where X is that creature's converted mana cost.
+        // create X 1/1 green Saproling creature tokens, where X is that creature's converted mana cost.
         this.getSpellAbility().addEffect(new CreateTokenEffect(new SaprolingToken(), new TargetConvertedManaCost()));
     }
 

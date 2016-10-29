@@ -63,9 +63,9 @@ public class DeadlyGrub extends CardImpl {
         this.addAbility(ability);
         this.addAbility(new VanishingUpkeepAbility(3));
         this.addAbility(new VanishingSacrificeAbility());
-        // When Deadly Grub dies, if it had no time counters on it, put a 6/1 green Insect creature token with shroud onto the battlefield.
+        // When Deadly Grub dies, if it had no time counters on it, create a 6/1 green Insect creature token with shroud.
         this.addAbility(new ConditionalTriggeredAbility(new DiesTriggeredAbility(new CreateTokenEffect(new DeadlyGrubToken(), 1)),
-            new LastTimeCounterRemovedCondition(), "When {this} dies, if it had no time counters on it, put a 6/1 green Insect creature token with shroud onto the battlefield."));
+            new LastTimeCounterRemovedCondition(), "When {this} dies, if it had no time counters on it, create a 6/1 green Insect creature token with shroud."));
     }
 
     public DeadlyGrub(final DeadlyGrub card) {

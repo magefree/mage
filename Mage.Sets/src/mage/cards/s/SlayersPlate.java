@@ -59,7 +59,7 @@ public class SlayersPlate extends CardImpl {
         // Equipped creature gets +4/+2.
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new BoostEquippedEffect(4, 2)));
 
-        // Whenever equipped creature dies, if it was a Human, put a 1/1 white Spirit creature token with flying onto the battlefield.
+        // Whenever equipped creature dies, if it was a Human, create a 1/1 white Spirit creature token with flying.
         this.addAbility(new SlayersPlateTriggeredAbility());
 
         // Equip {3}
@@ -109,6 +109,6 @@ class SlayersPlateTriggeredAbility extends TriggeredAbilityImpl {
 
     @Override
     public String getRule() {
-        return "Whenever equipped creature dies, if it was a Human, put a 1/1 white Spirit creature token with flying onto the battlefield.";
+        return "Whenever equipped creature dies, if it was a Human, create a 1/1 white Spirit creature token with flying.";
     }
 }

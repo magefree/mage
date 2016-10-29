@@ -51,7 +51,7 @@ public class MimicVatTest extends CardTestPlayerBase {
     public void TestClone() {
         addCard(Zone.BATTLEFIELD, playerA, "Island", 6);
         // Imprint - Whenever a nontoken creature dies, you may exile that card. If you do, return each other card exiled with Mimic Vat to its owner's graveyard.
-        // {3}, {T}: Put a token onto the battlefield that's a copy of the exiled card. It gains haste. Exile it at the beginning of the next end step.
+        // {3}, {T}: Create a tokenonto the battlefield that's a copy of the exiled card. It gains haste. Exile it at the beginning of the next end step.
         addCard(Zone.BATTLEFIELD, playerA, "Mimic Vat", 1); // Artifact {3}
         // {2}, {T}, Sacrifice a creature: Draw a card.
         addCard(Zone.BATTLEFIELD, playerA, "Phyrexian Vault", 1);
@@ -66,7 +66,7 @@ public class MimicVatTest extends CardTestPlayerBase {
         activateAbility(1, PhaseStep.PRECOMBAT_MAIN, playerA, "{2},{T}, Sacrifice a creature");
         setChoice(playerA, "Yes");
 
-        activateAbility(3, PhaseStep.PRECOMBAT_MAIN, playerA, "{3},{T}: Put a token onto the battlefield");
+        activateAbility(3, PhaseStep.PRECOMBAT_MAIN, playerA, "{3},{T}: Create a token");
         setChoice(playerA, "Silvercoat Lion");
 
         setStopAt(3, PhaseStep.BEGIN_COMBAT);
@@ -82,7 +82,7 @@ public class MimicVatTest extends CardTestPlayerBase {
     public void TestPhyrexianMetamorph() {
         addCard(Zone.BATTLEFIELD, playerA, "Island", 6);
         // Imprint - Whenever a nontoken creature dies, you may exile that card. If you do, return each other card exiled with Mimic Vat to its owner's graveyard.
-        // {3}, {T}: Put a token onto the battlefield that's a copy of the exiled card. It gains haste. Exile it at the beginning of the next end step.
+        // {3}, {T}: Create a token that's a copy of a card exiled with Mimic Vat. It gains haste. Exile it at the beginning of the next end step.
         addCard(Zone.BATTLEFIELD, playerA, "Mimic Vat", 1); // Artifact {3}
         // {2}, {T}, Sacrifice a creature: Draw a card.
         addCard(Zone.BATTLEFIELD, playerA, "Phyrexian Vault", 1);
@@ -98,7 +98,7 @@ public class MimicVatTest extends CardTestPlayerBase {
         activateAbility(1, PhaseStep.PRECOMBAT_MAIN, playerA, "{2},{T}, Sacrifice a creature");
         setChoice(playerA, "Yes");
 
-        activateAbility(3, PhaseStep.PRECOMBAT_MAIN, playerA, "{3},{T}: Put a token onto the battlefield");
+        activateAbility(3, PhaseStep.PRECOMBAT_MAIN, playerA, "{3},{T}: Create a token that's a copy of a card exiled with ");
         setChoice(playerA, "Yes");
         setChoice(playerA, "Silvercoat Lion");
 

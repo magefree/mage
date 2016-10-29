@@ -51,7 +51,7 @@ public class Bearscape extends CardImpl {
         super(ownerId,setInfo,new CardType[]{CardType.ENCHANTMENT},"{1}{G}{G}");
 
 
-        // {1}{G}, Exile two cards from your graveyard: Put a 2/2 green Bear creature token onto the battlefield.
+        // {1}{G}, Exile two cards from your graveyard: Create a 2/2 green Bear creature token.
         Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new CreateTokenEffect(new BearToken()), new ManaCostsImpl("{1}{G}"));
         ability.addCost(new ExileFromGraveCost(new TargetCardInYourGraveyard(2, new FilterCard("cards from your graveyard"))));
         this.addAbility(ability);

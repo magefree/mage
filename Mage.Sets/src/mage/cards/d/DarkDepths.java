@@ -28,10 +28,8 @@
 package mage.cards.d;
 
 import java.util.UUID;
-
-import mage.abilities.Ability;
-import mage.constants.CardType;
 import mage.MageInt;
+import mage.abilities.Ability;
 import mage.abilities.StateTriggeredAbility;
 import mage.abilities.common.EntersBattlefieldAbility;
 import mage.abilities.common.SimpleActivatedAbility;
@@ -44,6 +42,7 @@ import mage.abilities.keyword.FlyingAbility;
 import mage.abilities.keyword.IndestructibleAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
+import mage.constants.CardType;
 import mage.constants.Zone;
 import mage.counters.CounterType;
 import mage.game.Game;
@@ -58,7 +57,7 @@ import mage.game.permanent.token.Token;
 public class DarkDepths extends CardImpl {
 
     public DarkDepths(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.LAND},"");
+        super(ownerId, setInfo, new CardType[]{CardType.LAND}, "");
         this.supertype.add("Legendary");
         this.supertype.add("Snow");
 
@@ -66,7 +65,7 @@ public class DarkDepths extends CardImpl {
         this.addAbility(new EntersBattlefieldAbility(new AddCountersSourceEffect(CounterType.ICE.createInstance(10)), "with ten ice counters on it"));
         // {3}: Remove an ice counter from Dark Depths.
         this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new RemoveCounterSourceEffect(CounterType.ICE.createInstance(1)), new ManaCostsImpl("{3}")));
-        // When Dark Depths has no ice counters on it, sacrifice it. If you do, put a legendary 20/20 black Avatar creature token with flying and "This creature is indestructible" named Marit Lage onto the battlefield.
+        // When Dark Depths has no ice counters on it, sacrifice it. If you do, create a legendary 20/20 black Avatar creature token with flying and "This creature is indestructible" named Marit Lage.
         this.addAbility(new DarkDepthsAbility());
     }
 
@@ -84,7 +83,7 @@ class DarkDepthsSacrificeEffect extends SacrificeSourceEffect {
 
     private boolean sacrificed = false;
 
-    public DarkDepthsSacrificeEffect(){
+    public DarkDepthsSacrificeEffect() {
         super();
     }
 
@@ -135,11 +134,10 @@ class DarkDepthsAbility extends StateTriggeredAbility {
 
     @Override
     public String getRule() {
-        return "When {this} has no ice counters on it, sacrifice it. If you do, put a legendary 20/20 black Avatar creature token with flying and indestructible named Marit Lage onto the battlefield.";
+        return "When {this} has no ice counters on it, sacrifice it. If you do, create a legendary 20/20 black Avatar creature token with flying and indestructible named Marit Lage.";
     }
 
 }
-
 
 class MaritLageToken extends Token {
 
@@ -153,7 +151,7 @@ class MaritLageToken extends Token {
         color.setBlack(true);
         power = new MageInt(20);
         toughness = new MageInt(20);
-        
+
         this.addAbility(FlyingAbility.getInstance());
         this.addAbility(IndestructibleAbility.getInstance());
 

@@ -65,7 +65,7 @@ public class PuppetConjurer extends CardImpl {
         this.power = new MageInt(1);
         this.toughness = new MageInt(2);
 
-        // {U}, {tap}: Put a 0/1 blue Homunculus artifact creature token onto the battlefield.
+        // {U}, {tap}: Create a 0/1 blue Homunculus artifact creature token.
         Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new CreateTokenEffect(new HomunculusToken()), new ManaCostsImpl("{U}"));
         ability.addCost(new TapSourceCost());
         this.addAbility(ability);

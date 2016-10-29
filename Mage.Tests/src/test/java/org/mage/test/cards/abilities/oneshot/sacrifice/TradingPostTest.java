@@ -47,7 +47,7 @@ public class TradingPostTest extends CardTestPlayerBase {
     public void testSacrifice() {
         addCard(Zone.BATTLEFIELD, playerA, "Mountain", 4);
         // {1}, {T}, Discard a card: You gain 4 life.
-        // {1}, {T}, Pay 1 life: Put a 0/1 white Goat creature token onto the battlefield.
+        // {1}, {T}, Pay 1 life: Create a 0/1 white Goat creature token onto the battlefield.
         // {1}, {T}, Sacrifice a creature: Return target artifact card from your graveyard to your hand.
         // {1}, {T}, Sacrifice an artifact: Draw a card.
         addCard(Zone.BATTLEFIELD, playerA, "Trading Post", 1);

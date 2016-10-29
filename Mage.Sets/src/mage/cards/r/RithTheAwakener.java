@@ -63,7 +63,7 @@ public class RithTheAwakener extends CardImpl {
 
         // Flying
         this.addAbility(FlyingAbility.getInstance());
-        // Whenever Rith, the Awakener deals combat damage to a player, you may pay {2}{G}. If you do, choose a color, then put a 1/1 green Saproling creature token onto the battlefield for each permanent of that color.
+        // Whenever Rith, the Awakener deals combat damage to a player, you may pay {2}{G}. If you do, choose a color, then create a 1/1 green Saproling creature token for each permanent of that color.
         this.addAbility(new DealsCombatDamageToAPlayerTriggeredAbility(
                 new DoIfCostPaid(new RithTheAwakenerEffect(), new ManaCostsImpl("{2}{G}")), false));        
     }
@@ -82,7 +82,7 @@ class RithTheAwakenerEffect extends OneShotEffect {
     
     public RithTheAwakenerEffect() {
         super(Outcome.Benefit);
-        this.staticText = "choose a color, then put a 1/1 green Saproling creature token onto the battlefield for each permanent of that color";
+        this.staticText = "choose a color, then create a 1/1 green Saproling creature token for each permanent of that color";
     }
     
     public RithTheAwakenerEffect(final RithTheAwakenerEffect effect) {

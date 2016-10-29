@@ -36,7 +36,6 @@ import org.mage.test.serverside.base.CardTestPlayerBase;
  *
  * @author LevelX2
  */
-
 public class SoulFoundryTest extends CardTestPlayerBase {
 
     /**
@@ -48,19 +47,19 @@ public class SoulFoundryTest extends CardTestPlayerBase {
     public void testBloodlineKeeper() {
         addCard(Zone.BATTLEFIELD, playerA, "Island", 8);
         // Imprint - When Soul Foundry enters the battlefield, you may exile a creature card from your hand.
-        // {X}, {T}: Put a token that's a copy of the exiled card onto the battlefield. X is the converted mana cost of that card.        
+        // {X}, {T}: Create a tokenthat's a copy of the exiled card onto the battlefield. X is the converted mana cost of that card.
         addCard(Zone.HAND, playerA, "Soul Foundry"); // {4}
         addCard(Zone.HAND, playerA, "Bloodline Keeper");
 
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Soul Foundry");
         setChoice(playerA, "Yes");
-        activateAbility(1, PhaseStep.POSTCOMBAT_MAIN, playerA, "{X},{T}: Put a token");
-        
+        activateAbility(1, PhaseStep.POSTCOMBAT_MAIN, playerA, "{X},{T}: Create a token");
+
         setStopAt(1, PhaseStep.END_TURN);
         execute();
 
         assertPermanentCount(playerA, "Soul Foundry", 1);
-        
+
         assertExileCount("Bloodline Keeper", 1);
         assertPermanentCount(playerA, "Bloodline Keeper", 1);
     }

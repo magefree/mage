@@ -54,7 +54,7 @@ public class JeditOjanenOfEfrava extends CardImpl {
         // Forestwalk
         this.addAbility(new ForestwalkAbility());
         
-        // Whenever Jedit Ojanen of Efrava attacks or blocks, put a 2/2 green Cat Warrior creature token with forestwalk onto the battlefield.
+        // Whenever Jedit Ojanen of Efrava attacks or blocks, create a 2/2 green Cat Warrior creature token with forestwalk.
         this.addAbility(new AttacksOrBlocksTriggeredAbility(new CreateTokenEffect(new CatWarriorToken()), false));
     }
 

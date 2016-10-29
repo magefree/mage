@@ -65,7 +65,7 @@ public class WarrenWeirding extends CardImpl {
         this.subtype.add("Goblin");
 
 
-        // Target player sacrifices a creature. If a Goblin is sacrificed this way, that player puts two 1/1 black Goblin Rogue creature tokens onto the battlefield, and those tokens gain haste until end of turn.
+        // Target player sacrifices a creature. If a Goblin is sacrificed this way, that player creates two 1/1 black Goblin Rogue creature tokens, and those tokens gain haste until end of turn.
         this.getSpellAbility().addEffect(new WarrenWeirdingEffect());
         this.getSpellAbility().addTarget(new TargetPlayer());
     }
@@ -90,7 +90,7 @@ class WarrenWeirdingEffect extends OneShotEffect {
 
     WarrenWeirdingEffect ( ) {
         super(Outcome.Sacrifice);
-        staticText = "Target player sacrifices a creature. If a Goblin is sacrificed this way, that player puts two 1/1 black Goblin Rogue creature tokens onto the battlefield, and those tokens gain haste until end of turn";
+        staticText = "Target player sacrifices a creature. If a Goblin is sacrificed this way, that player creates two 1/1 black Goblin Rogue creature tokens, and those tokens gain haste until end of turn";
     }
 
     WarrenWeirdingEffect ( WarrenWeirdingEffect effect ) {

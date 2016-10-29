@@ -57,7 +57,7 @@ public class LivingHive extends CardImpl {
 
         // Trample
         this.addAbility(TrampleAbility.getInstance());
-        // Whenever Living Hive deals combat damage to a player, put that many 1/1 green Insect creature tokens onto the battlefield.
+        // Whenever Living Hive deals combat damage to a player, create that many 1/1 green Insect creature tokens.
         this.addAbility(new DealsCombatDamageToAPlayerTriggeredAbility(new LivingHiveEffect(), false, true));
     }
 
@@ -75,7 +75,7 @@ class LivingHiveEffect extends OneShotEffect {
     
     public LivingHiveEffect() {
         super(Outcome.PutCreatureInPlay);
-        this.staticText = "put that many 1/1 green Insect creature tokens onto the battlefield";
+        this.staticText = "create that many 1/1 green Insect creature tokens";
     }
     
     public LivingHiveEffect(final LivingHiveEffect effect) {

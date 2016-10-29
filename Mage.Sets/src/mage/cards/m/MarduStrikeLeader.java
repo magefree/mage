@@ -50,7 +50,7 @@ public class MarduStrikeLeader extends CardImpl {
         this.power = new MageInt(3);
         this.toughness = new MageInt(2);
 
-        // Whenever Mardu Strike Leader attacks, put a 2/1 black Warrior creature token onto the battlefield.
+        // Whenever Mardu Strike Leader attacks, create a 2/1 black Warrior creature token.
         this.addAbility(new AttacksTriggeredAbility(new CreateTokenEffect(new MarduStrikeLeaderWarriorToken()), false));
 
         // Dash {3}{B}

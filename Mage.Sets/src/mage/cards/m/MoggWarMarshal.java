@@ -53,7 +53,7 @@ public class MoggWarMarshal extends CardImpl {
 
         // Echo {1}{R}
         this.addAbility(new EchoAbility("{1}{R}"));
-        // When Mogg War Marshal enters the battlefield or dies, put a 1/1 red Goblin creature token onto the battlefield.
+        // When Mogg War Marshal enters the battlefield or dies, create a 1/1 red Goblin creature token.
         this.addAbility(new EntersBattlefieldOrDiesSourceTriggeredAbility(new CreateTokenEffect(new GoblinToken(), 1), false));
     }
 

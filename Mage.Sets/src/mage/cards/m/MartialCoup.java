@@ -49,7 +49,7 @@ public class MartialCoup extends CardImpl {
     public MartialCoup(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{X}{W}{W}");
 
-        // Put X 1/1 white Soldier creature tokens onto the battlefield. If X is 5 or more, destroy all other creatures.
+        // create X 1/1 white Soldier creature tokens. If X is 5 or more, destroy all other creatures.
         this.getSpellAbility().addEffect(new MartialCoupEffect());
     }
 
@@ -69,7 +69,7 @@ class MartialCoupEffect extends OneShotEffect {
 
     public MartialCoupEffect() {
         super(Outcome.PutCreatureInPlay);
-        staticText = "Put X 1/1 white Soldier creature tokens onto the battlefield. If X is 5 or more, destroy all other creatures";
+        staticText = "create X 1/1 white Soldier creature tokens. If X is 5 or more, destroy all other creatures";
     }
 
     public MartialCoupEffect(final MartialCoupEffect effect) {

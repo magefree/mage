@@ -50,7 +50,7 @@ public class PegasusStampede extends CardImpl {
         // Buyback-Sacrifice a land.
         this.addAbility(new BuybackAbility(new SacrificeTargetCost(new TargetControlledPermanent(1,1, new FilterControlledLandPermanent(), true))));
 
-        // Put a 1/1 white Pegasus creature token with flying onto the battlefield.
+        // Create a 1/1 white Pegasus creature token with flying.
         this.getSpellAbility().addEffect(new CreateTokenEffect(new PegasusToken()));
     }
 

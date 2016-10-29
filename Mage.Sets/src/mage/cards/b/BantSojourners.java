@@ -57,7 +57,7 @@ public class BantSojourners extends CardImpl {
         this.power = new MageInt(2);
         this.toughness = new MageInt(4);
 
-        // When you cycle Bant Sojourners or it dies, you may put a 1/1 white Soldier creature token onto the battlefield.
+        // When you cycle Bant Sojourners or it dies, you may create a 1/1 white Soldier creature token.
         Ability ability1 = new CycleTriggeredAbility(new CreateTokenEffect(new SoldierToken()), true);
         Ability ability2 = new DiesTriggeredAbility(new CreateTokenEffect(new SoldierToken()), true);
         this.addAbility(ability1);

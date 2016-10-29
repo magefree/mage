@@ -64,7 +64,7 @@ public class HellionCrucible extends CardImpl {
         ability.addCost(new TapSourceCost());
         this.addAbility(ability);
         
-        // {1}{R}, {tap}, Remove two pressure counters from Hellion Crucible and sacrifice it: Put a 4/4 red Hellion creature token with haste onto the battlefield.
+        // {1}{R}, {tap}, Remove two pressure counters from Hellion Crucible and sacrifice it: Create a 4/4 red Hellion creature token with haste.
         ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new CreateTokenEffect(new HellionToken(), 1), new ManaCostsImpl("{1}{R}"));
         ability.addCost(new TapSourceCost());
         ability.addCost(new RemoveCountersSourceCost(CounterType.PRESSURE.createInstance(2)));

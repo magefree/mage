@@ -49,7 +49,7 @@ public class MausoleumGuard extends CardImpl {
         this.power = new MageInt(2);
         this.toughness = new MageInt(2);
 
-        // When Mausoleum Guard dies, put two 1/1 white Spirit creature tokens with flying onto the battlefield.
+        // When Mausoleum Guard dies, create two 1/1 white Spirit creature tokens with flying.
         this.addAbility(new DiesTriggeredAbility(new CreateTokenEffect(new SpiritWhiteToken("ISD"), 2)));
     }
 

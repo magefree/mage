@@ -52,7 +52,7 @@ public class PenumbraSpider extends CardImpl {
 
         // Reach
         this.addAbility(ReachAbility.getInstance());
-        // When Penumbra Spider dies, put a 2/4 black Spider creature token with reach onto the battlefield.
+        // When Penumbra Spider dies, create a 2/4 black Spider creature token with reach.
         this.addAbility(new DiesTriggeredAbility(new CreateTokenEffect(new SpiderToken()), false));
     }
 

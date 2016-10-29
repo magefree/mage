@@ -28,13 +28,13 @@
 package mage.cards.a;
 
 import java.util.UUID;
-import mage.constants.CardType;
-import mage.constants.Outcome;
 import mage.abilities.Ability;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.CreateTokenEffect;
 import mage.cards.CardSetInfo;
 import mage.cards.SplitCard;
+import mage.constants.CardType;
+import mage.constants.Outcome;
 import mage.filter.common.FilterControlledCreaturePermanent;
 import mage.game.Game;
 import mage.game.permanent.token.CentaurToken;
@@ -47,12 +47,11 @@ import mage.players.Player;
 public class AliveWell extends SplitCard {
 
     public AliveWell(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{3}{G}","{W}",true);
+        super(ownerId, setInfo, new CardType[]{CardType.SORCERY}, "{3}{G}", "{W}", true);
 
         // Alive
-        // Put a 3/3 green Centaur creature token onto the battlefield.
+        // Create a 3/3 green Centaur creature token.
         getLeftHalfCard().getSpellAbility().addEffect(new CreateTokenEffect(new CentaurToken()));
-
 
         // Well
         // You gain 2 life for each creature you control.

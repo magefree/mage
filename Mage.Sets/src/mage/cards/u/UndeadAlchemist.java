@@ -67,7 +67,7 @@ public class UndeadAlchemist extends CardImpl {
         // If a Zombie you control would deal combat damage to a player, instead that player puts that many cards from the top of his or her library into his or her graveyard.
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new UndeadAlchemistEffect()));
 
-        // Whenever a creature card is put into an opponent's graveyard from his or her library, exile that card and put a 2/2 black Zombie creature token onto the battlefield.
+        // Whenever a creature card is put into an opponent's graveyard from his or her library, exile that card and create a 2/2 black Zombie creature token.
         this.addAbility(new UndeadAlchemistTriggeredAbility());
     }
 
@@ -117,7 +117,7 @@ class UndeadAlchemistTriggeredAbility extends TriggeredAbilityImpl {
 
     @Override
     public String getRule() {
-        return "Whenever a creature card is put into an opponent's graveyard from his or her library, exile that card and put a 2/2 black Zombie creature token onto the battlefield.";
+        return "Whenever a creature card is put into an opponent's graveyard from his or her library, exile that card and create a 2/2 black Zombie creature token.";
     }
 }
 

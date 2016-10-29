@@ -53,7 +53,7 @@ public class PenumbraWurm extends CardImpl {
         // Trample
         this.addAbility(TrampleAbility.getInstance());
 
-        // When Penumbra Wurm dies, put a 6/6 black Wurm creature token with trample onto the battlefield.
+        // When Penumbra Wurm dies, create a 6/6 black Wurm creature token with trample.
         this.addAbility(new DiesTriggeredAbility(new CreateTokenEffect(new PenumbraWurmToken(), 1), false));
     }
 

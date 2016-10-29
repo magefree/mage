@@ -50,7 +50,7 @@ public class DeathByDragons extends CardImpl {
         super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{4}{R}{R}");
 
 
-        // Each player other than target player puts a 5/5 red Dragon creature token with flying onto the battlefield.
+        // Each player other than target player creates a 5/5 red Dragon creature token with flying.
         this.getSpellAbility().addEffect(new DeathByDragonsEffect());
         this.getSpellAbility().addTarget(new TargetPlayer());
     }
@@ -69,7 +69,7 @@ class DeathByDragonsEffect extends OneShotEffect {
 
     public DeathByDragonsEffect() {
         super(Outcome.Detriment);
-        this.staticText = "Each player other than target player puts a 5/5 red Dragon creature token with flying onto the battlefield";
+        this.staticText = "Each player other than target player creates a 5/5 red Dragon creature token with flying";
     }
 
     public DeathByDragonsEffect(final DeathByDragonsEffect effect) {

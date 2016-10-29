@@ -44,8 +44,8 @@ public class EyesInTheSkies extends CardImpl {
     public EyesInTheSkies(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.INSTANT},"{3}{W}");
 
-        // Put a 1/1 white Bird creature token with flying onto the battlefield, then populate.
-        // (Put a token onto the battlefield that's a copy of a creature token you control.)
+        // Create a 1/1 white Bird creature token with flying, then populate.
+        // (Create a token that's a copy of a creature token you control.)
         this.getSpellAbility().addEffect(new CreateTokenEffect(new BirdToken()));
         this.getSpellAbility().addEffect(new PopulateEffect("then"));
     }

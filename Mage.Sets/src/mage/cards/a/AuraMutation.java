@@ -51,7 +51,7 @@ public class AuraMutation extends CardImpl {
         // Destroy target enchantment.
         this.getSpellAbility().addEffect(new DestroyTargetEffect());
         this.getSpellAbility().addTarget(new TargetPermanent(new FilterEnchantmentPermanent()));
-        // Put X 1/1 green Saproling creature tokens onto the battlefield, where X is that enchantment's converted mana cost.
+        // create X 1/1 green Saproling creature tokens, where X is that enchantment's converted mana cost.
         this.getSpellAbility().addEffect(new CreateTokenEffect(new SaprolingToken(), new TargetConvertedManaCost()));
     }
 

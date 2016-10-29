@@ -46,7 +46,7 @@ public class JoinTheRanks extends CardImpl {
         super(ownerId,setInfo,new CardType[]{CardType.INSTANT},"{3}{W}");
         this.color.setWhite(true);        
         
-        // Put two 1/1 white Soldier Ally creature tokens onto the battlefield.
+        // Create two 1/1 white Soldier Ally creature tokens.
         this.getSpellAbility().addEffect(new CreateTokenEffect(new JoinTheRanksSoldierToken(), 2));
     }
 

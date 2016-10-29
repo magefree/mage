@@ -54,7 +54,7 @@ public class ThrabenStandardBearer extends CardImpl {
         this.power = new MageInt(1);
         this.toughness = new MageInt(1);
 
-        // {1}{W}, {T}, Discard a card: Put a 1/1 white Human Soldier creature token onto the battlefield.
+        // {1}{W}, {T}, Discard a card: Create a 1/1 white Human Soldier creature token.
         Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new CreateTokenEffect(new HumanSoldierToken()), new ManaCostsImpl<>("{1}{W}"));
         ability.addCost(new TapSourceCost());
         ability.addCost(new DiscardCardCost());

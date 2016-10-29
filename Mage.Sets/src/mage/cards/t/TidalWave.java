@@ -52,7 +52,7 @@ public class TidalWave extends CardImpl {
     public TidalWave(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.INSTANT},"{2}{U}");
 
-        // Put a 5/5 blue Wall creature token with defender onto the battlefield. Sacrifice it at the beginning of the next end step.
+        // Create a 5/5 blue Wall creature token with defender. Sacrifice it at the beginning of the next end step.
         this.getSpellAbility().addEffect(new TidalWaveEffect());
     }
 
@@ -70,7 +70,7 @@ class TidalWaveEffect extends OneShotEffect {
 
     public TidalWaveEffect() {
         super(Outcome.PutCreatureInPlay);
-        this.staticText = "Put a 5/5 blue Wall creature token with defender onto the battlefield. Sacrifice it at the beginning of the next end step.";
+        this.staticText = "Create a 5/5 blue Wall creature token with defender. Sacrifice it at the beginning of the next end step.";
     }
 
     public TidalWaveEffect(TidalWaveEffect effect) {

@@ -57,7 +57,7 @@ import mage.abilities.effects.Effect;
  */
 public class HowlpackAlpha extends CardImpl {
 
-    private static final String ruleText = "At the beginning of your end step, put a 2/2 green Wolf creature token onto the battlefield";
+    private static final String ruleText = "At the beginning of your end step, create a 2/2 green Wolf creature token";
 
     private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("Werewolf and Wolf creatures");
 
@@ -81,7 +81,7 @@ public class HowlpackAlpha extends CardImpl {
         Effect effect = new ConditionalContinuousEffect(new BoostControlledEffect(1, 1, Duration.WhileOnBattlefield, filter, true), new TransformedCondition(), null);
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, effect));
 
-        // At the beginning of your end step, put a 2/2 green Wolf creature token onto the battlefield.
+        // At the beginning of your end step, create a 2/2 green Wolf creature token.
         this.addAbility(new ConditionalTriggeredAbility(new BeginningOfYourEndStepTriggeredAbility(new CreateTokenEffect(new WolfToken()), false), new TransformedCondition(), ruleText));
 
         // At the beginning of each upkeep, if a player cast two or more spells last turn, transform Howlpack Alpha.

@@ -49,7 +49,7 @@ public class StonybrookSchoolmaster extends CardImpl {
         this.power = new MageInt(1);
         this.toughness = new MageInt(2);
 
-        // Whenever Stonybrook Schoolmaster becomes tapped, you may put a 1/1 blue Merfolk Wizard creature token onto the battlefield.
+        // Whenever Stonybrook Schoolmaster becomes tapped, you may create a 1/1 blue Merfolk Wizard creature token.
         this.addAbility(new BecomesTappedSourceTriggeredAbility(new CreateTokenEffect(new MerfolkWizardToken()), true));
     }
 

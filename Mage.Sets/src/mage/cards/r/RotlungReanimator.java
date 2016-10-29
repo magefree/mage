@@ -57,7 +57,7 @@ public class RotlungReanimator extends CardImpl {
         this.power = new MageInt(2);
         this.toughness = new MageInt(2);
 
-        // Whenever Rotlung Reanimator or another Cleric dies, put a 2/2 black Zombie creature token onto the battlefield.
+        // Whenever Rotlung Reanimator or another Cleric dies, create a 2/2 black Zombie creature token.
         this.addAbility(new DiesThisOrAnotherCreatureTriggeredAbility(new CreateTokenEffect(new ZombieToken()), false, filter));
     }
 

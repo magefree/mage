@@ -61,13 +61,13 @@ public class GarrukPrimalHunter extends CardImpl {
 
         this.addAbility(new PlanswalkerEntersWithLoyalityCountersAbility(3));
 
-        // +1: Put a 3/3 green Beast creature token onto the battlefield.
+        // +1: Create a 3/3 green Beast creature token.
         this.addAbility(new LoyaltyAbility(new CreateTokenEffect(new BeastToken()), 1));
 
         // -3: Draw cards equal to the greatest power among creatures you control.
         this.addAbility(new LoyaltyAbility(new GarrukPrimalHunterEffect(), -3));
 
-        // -6: Put a 6/6 green Wurm creature token onto the battlefield for each land you control.
+        // -6: Create a 6/6 green Wurm creature token for each land you control.
         this.addAbility(new LoyaltyAbility(new CreateTokenEffect(new WurmToken(), new PermanentsOnBattlefieldCount(filter)), -6));
     }
 

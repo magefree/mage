@@ -67,7 +67,7 @@ public class NutCollector extends CardImpl {
         this.power = new MageInt(1);
         this.toughness = new MageInt(1);
 
-        // At the beginning of your upkeep, you may put a 1/1 green Squirrel creature token onto the battlefield.
+        // At the beginning of your upkeep, you may create a 1/1 green Squirrel creature token.
         this.addAbility(new BeginningOfUpkeepTriggeredAbility(Zone.BATTLEFIELD, new CreateTokenEffect(new SquirrelToken()), TargetController.YOU, true));
         // Threshold - Squirrel creatures get +2/+2 as long as seven or more cards are in your graveyard.
         Ability ability = new SimpleStaticAbility(Zone.BATTLEFIELD,

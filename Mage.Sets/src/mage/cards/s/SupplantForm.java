@@ -45,11 +45,11 @@ public class SupplantForm extends CardImpl {
     public SupplantForm(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.INSTANT},"{4}{U}{U}");
 
-        // Return target creature to its owner's hand. You put a token onto the battlefield that's a copy of that creature.
+        // Return target creature to its owner's hand. You create a token that's a copy of that creature.
         this.getSpellAbility().addEffect(new ReturnToHandTargetEffect());
         this.getSpellAbility().addTarget(new TargetCreaturePermanent());
         Effect effect = new PutTokenOntoBattlefieldCopyTargetEffect();
-        effect.setText("You put a token onto the battlefield that's a copy of that creature");
+        effect.setText("You create a token that's a copy of that creature");
         this.getSpellAbility().addEffect(effect);
     }
 

@@ -66,7 +66,7 @@ public class TeysaEnvoyOfGhosts extends CardImpl {
         this.addAbility(VigilanceAbility.getInstance());
         // protection from creatures
         this.addAbility(new ProtectionAbility(new FilterCreaturePermanent("creatures")));
-        // Whenever a creature deals combat damage to you, destroy that creature. Put a 1/1 white and black Spirit creature token with flying onto the battlefield.
+        // Whenever a creature deals combat damage to you, destroy that creature. Create a 1/1 white and black Spirit creature token with flying.
         this.addAbility(new TeysaEnvoyOfGhostsTriggeredAbility());
 
     }
@@ -120,7 +120,7 @@ class TeysaEnvoyOfGhostsTriggeredAbility extends TriggeredAbilityImpl {
 
     @Override
     public String getRule() {
-        return "Whenever a creature deals combat damage to you, destroy that creature. Put a 1/1 white and black Spirit creature token with flying onto the battlefield.";
+        return "Whenever a creature deals combat damage to you, destroy that creature. Create a 1/1 white and black Spirit creature token with flying.";
     }
 
 }

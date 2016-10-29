@@ -52,7 +52,7 @@ public class RallyTheHorde extends CardImpl {
         super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{5}{R}");
 
 
-        // Exile the top card of your library. Exile the top card of your library. Exile the top card of your library. If the last card exiled isn't a land, repeat this process. Put a 1/1 red Warrior creature token onto the battlefield for each nonland card exiled this way.
+        // Exile the top card of your library. Exile the top card of your library. Exile the top card of your library. If the last card exiled isn't a land, repeat this process. Create a 1/1 red Warrior creature token for each nonland card exiled this way.
         this.getSpellAbility().addEffect(new RallyTheHordeEffect());
     }
 
@@ -70,7 +70,7 @@ class RallyTheHordeEffect extends OneShotEffect {
 
     public RallyTheHordeEffect() {
         super(Outcome.PutCreatureInPlay);
-        this.staticText = "Exile the top card of your library. Exile the top card of your library. Exile the top card of your library. If the last card exiled isn't a land, repeat this process. Put a 1/1 red Warrior creature token onto the battlefield for each nonland card exiled this way";
+        this.staticText = "Exile the top card of your library. Exile the top card of your library. Exile the top card of your library. If the last card exiled isn't a land, repeat this process. Create a 1/1 red Warrior creature token for each nonland card exiled this way";
     }
 
     public RallyTheHordeEffect(final RallyTheHordeEffect effect) {

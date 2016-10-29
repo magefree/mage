@@ -64,7 +64,7 @@ public class ChasmSkulker extends CardImpl {
         // Whenever you draw a card, put a +1/+1 counter on Chasm Skulker.
         this.addAbility(new DrawCardControllerTriggeredAbility(new AddCountersSourceEffect(CounterType.P1P1.createInstance()), false));
 
-        // When Chasm Skulker dies, put X 1/1 blue Squid creature tokens with islandwalk onto the battlefield, where X is the number of +1/+1 counters on Chasm Skulker.
+        // When Chasm Skulker dies, create X 1/1 blue Squid creature tokens with islandwalk, where X is the number of +1/+1 counters on Chasm Skulker.
         this.addAbility(new DiesTriggeredAbility(new ChasmSkulkerEffect(), false));
     }
 
@@ -82,7 +82,7 @@ class ChasmSkulkerEffect extends OneShotEffect {
 
     public ChasmSkulkerEffect() {
         super(Outcome.Benefit);
-        this.staticText = "put X 1/1 blue Squid creature tokens with islandwalk onto the battlefield, where X is the number of +1/+1 counters on Chasm Skulker";
+        this.staticText = "create X 1/1 blue Squid creature tokens with islandwalk, where X is the number of +1/+1 counters on Chasm Skulker";
     }
 
     public ChasmSkulkerEffect(final ChasmSkulkerEffect effect) {

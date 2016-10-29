@@ -44,7 +44,7 @@ public class TakeUpArms extends CardImpl {
         super(ownerId,setInfo,new CardType[]{CardType.INSTANT},"{4}{W}");
 
 
-        // Put three 1/1 white Warrior creature tokens onto the battlefield.
+        // Create three 1/1 white Warrior creature tokens.
         this.getSpellAbility().addEffect(new CreateTokenEffect(new WarriorToken(), 3));
     }
 

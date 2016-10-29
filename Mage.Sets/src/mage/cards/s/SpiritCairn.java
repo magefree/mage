@@ -48,7 +48,7 @@ public class SpiritCairn extends CardImpl {
     public SpiritCairn(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.ENCHANTMENT},"{2}{W}");
 
-        // Whenever a player discards a card, you may pay {W}. If you do, put a 1/1 white Spirit creature token with flying onto the battlefield.
+        // Whenever a player discards a card, you may pay {W}. If you do, create a 1/1 white Spirit creature token with flying.
         this.addAbility(new SimpleTriggeredAbility(Zone.BATTLEFIELD, GameEvent.EventType.DISCARDED_CARD, 
                 new DoIfCostPaid(new CreateTokenEffect(new SpiritWhiteToken()), new ManaCostsImpl("{W}")), 
                 "Whenever a player discards a card, you ", 

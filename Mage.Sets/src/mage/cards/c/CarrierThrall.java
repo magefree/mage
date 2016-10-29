@@ -44,14 +44,14 @@ import mage.game.permanent.token.EldraziScionToken;
 public class CarrierThrall extends CardImpl {
 
     public CarrierThrall(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{1}{B}");
+        super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{1}{B}");
         this.subtype.add("Vampire");
         this.power = new MageInt(2);
         this.toughness = new MageInt(1);
 
-        // When Carrier Thrall dies, put a 1/1 colorless Eldrazi Scion creature token onto the battlefield. It has "Sacrifice this creature. Add {C} to your mana pool."
+        // When Carrier Thrall dies, create a 1/1 colorless Eldrazi Scion creature token. It has "Sacrifice this creature. Add {C} to your mana pool."
         Effect effect = new CreateTokenEffect(new EldraziScionToken());
-        effect.setText("put a 1/1 colorless Eldrazi Scion creature token onto the battlefield. It has \"Sacrifice this creature: Add {C} to your mana pool.\"");
+        effect.setText("create a 1/1 colorless Eldrazi Scion creature token. It has \"Sacrifice this creature: Add {C} to your mana pool.\"");
         this.addAbility(new DiesTriggeredAbility(effect, false));
 
     }

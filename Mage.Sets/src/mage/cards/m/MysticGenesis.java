@@ -50,7 +50,7 @@ public class MysticGenesis extends CardImpl {
     public MysticGenesis(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.INSTANT},"{2}{G}{U}{U}");
 
-        // Counter target spell. Put an X/X green Ooze creature token onto the battlefield, where X is that spell's converted mana cost.
+        // Counter target spell. Create an X/X green Ooze creature token, where X is that spell's converted mana cost.
         this.getSpellAbility().addTarget(new TargetSpell());
         this.getSpellAbility().addEffect(new MysticGenesisEffect());
 
@@ -70,7 +70,7 @@ class MysticGenesisEffect extends OneShotEffect {
 
     public MysticGenesisEffect() {
         super(Outcome.Detriment);
-        staticText = "Counter target spell. Put an X/X green Ooze creature token onto the battlefield, where X is that spell's converted mana cost";
+        staticText = "Counter target spell. Create an X/X green Ooze creature token, where X is that spell's converted mana cost";
     }
 
     public MysticGenesisEffect(final MysticGenesisEffect effect) {

@@ -61,15 +61,15 @@ import mage.util.CardUtil;
 public class SaprolingBurst extends CardImpl {
 
     public SaprolingBurst(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.ENCHANTMENT},"{4}{G}");
+        super(ownerId, setInfo, new CardType[]{CardType.ENCHANTMENT}, "{4}{G}");
 
         // Fading 7
         this.addAbility(new FadingAbility(7, this));
-        
-        // Remove a fade counter from Saproling Burst: Put a green Saproling creature token onto the battlefield. It has "This creature's power and toughness are each equal to the number of fade counters on Saproling Burst."
+
+        // Remove a fade counter from Saproling Burst: create a green Saproling creature token. It has "This creature's power and toughness are each equal to the number of fade counters on Saproling Burst."
         this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new SaprolingBurstCreateTokenEffect(), new RemoveCountersSourceCost(CounterType.FADE.createInstance())));
-        
-        // When Saproling Burst leaves the battlefield, destroy all tokens put onto the battlefield with Saproling Burst. They can't be regenerated.
+
+        // When Saproling Burst leaves the battlefield, destroy all tokens created with Saproling Burst. They can't be regenerated.
         this.addAbility(new SaprolingBurstLeavesBattlefieldTriggeredAbility());
     }
 
@@ -84,21 +84,21 @@ public class SaprolingBurst extends CardImpl {
 }
 
 class SaprolingBurstCreateTokenEffect extends OneShotEffect {
-    
+
     SaprolingBurstCreateTokenEffect() {
         super(Outcome.PutCreatureInPlay);
-        this.staticText = "Put a green Saproling creature token onto the battlefield. It has \"This creature's power and toughness are each equal to the number of fade counters on {this}.\"";
+        this.staticText = "create a green Saproling creature token. It has \"This creature's power and toughness are each equal to the number of fade counters on {this}.\"";
     }
-    
+
     SaprolingBurstCreateTokenEffect(final SaprolingBurstCreateTokenEffect effect) {
         super(effect);
     }
-    
+
     @Override
     public SaprolingBurstCreateTokenEffect copy() {
         return new SaprolingBurstCreateTokenEffect(this);
     }
-    
+
     @Override
     @SuppressWarnings("unchecked")
     public boolean apply(Game game, Ability source) {
@@ -110,8 +110,7 @@ class SaprolingBurstCreateTokenEffect extends OneShotEffect {
             Set<UUID> tokensCreated;
             if (object != null) {
                 tokensCreated = (Set<UUID>) object;
-            }
-            else {
+            } else {
                 tokensCreated = new HashSet<>();
             }
             for (UUID tokenId : token.getLastAddedTokenIds()) {
@@ -124,7 +123,7 @@ class SaprolingBurstCreateTokenEffect extends OneShotEffect {
 }
 
 class SaprolingBurstToken extends Token {
-    
+
     SaprolingBurstToken(MageObjectReference saprolingBurstMOR) {
         super("Saproling", "green Saproling creature token with \"This creature's power and toughness are each equal to the number of fade counters on Saproling Burst.\"");
         this.color.setGreen(true);
@@ -201,24 +200,24 @@ class SaprolingBurstLeavesBattlefieldTriggeredAbility extends ZoneChangeTriggere
 }
 
 class SaprolingBurstDestroyEffect extends OneShotEffect {
-    
+
     private String cardZoneString;
-    
+
     SaprolingBurstDestroyEffect() {
         super(Outcome.Benefit);
-        this.staticText = "destroy all tokens put onto the battlefield with {this}. They can't be regenerated";
+        this.staticText = "destroy all tokens created with {this}. They can't be regenerated";
     }
-    
+
     SaprolingBurstDestroyEffect(final SaprolingBurstDestroyEffect effect) {
         super(effect);
         this.cardZoneString = effect.cardZoneString;
     }
-    
+
     @Override
     public SaprolingBurstDestroyEffect copy() {
         return new SaprolingBurstDestroyEffect(this);
     }
-    
+
     @Override
     @SuppressWarnings("unchecked")
     public boolean apply(Game game, Ability source) {
@@ -234,7 +233,7 @@ class SaprolingBurstDestroyEffect extends OneShotEffect {
         }
         return true;
     }
-    
+
     public void setCardZoneString(String cardZoneString) {
         this.cardZoneString = cardZoneString;
     }

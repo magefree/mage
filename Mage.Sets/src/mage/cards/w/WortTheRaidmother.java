@@ -66,7 +66,7 @@ public class WortTheRaidmother extends CardImpl {
         this.power = new MageInt(3);
         this.toughness = new MageInt(3);
 
-        // When Wort, the Raidmother enters the battlefield, put two 1/1 red and green Goblin Warrior creature tokens onto the battlefield.
+        // When Wort, the Raidmother enters the battlefield, create two 1/1 red and green Goblin Warrior creature tokens.
         this.addAbility(new EntersBattlefieldTriggeredAbility(new CreateTokenEffect(new WortTheRaidmotherToken(), 2), false));
 
         // Each red or green instant or sorcery spell you cast has conspire.

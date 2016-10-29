@@ -68,9 +68,9 @@ public class KalonianTwingrove extends CardImpl {
 
         // Kalonian Twingrove's power and toughness are each equal to the number of Forests you control.
         this.addAbility(new SimpleStaticAbility(Zone.ALL, new SetPowerToughnessSourceEffect(new PermanentsOnBattlefieldCount(filterLands), Duration.EndOfGame)));
-        // When Kalonian Twingrove enters the battlefield, put a green Treefolk Warrior creature token onto the battlefield with "This creature's power and toughness are each equal to the number of Forests you control."
+        // When Kalonian Twingrove enters the battlefield, create a green Treefolk Warrior creature token with "This creature's power and toughness are each equal to the number of Forests you control."
         Effect effect = new CreateTokenEffect(new KalonianTwingroveTreefolkWarriorToken());
-        effect.setText("put a green Treefolk Warrior creature token onto the battlefield with \"This creature's power and toughness are each equal to the number of Forests you control.\"");
+        effect.setText("create a green Treefolk Warrior creature token with \"This creature's power and toughness are each equal to the number of Forests you control.\"");
         this.addAbility(new EntersBattlefieldTriggeredAbility(effect,false));
     }
 
@@ -87,7 +87,7 @@ public class KalonianTwingrove extends CardImpl {
 class KalonianTwingroveTreefolkWarriorToken extends Token {
 
     public KalonianTwingroveTreefolkWarriorToken() {
-        super("Treefolk Warrior", "green Treefolk Warrior creature token onto the battlefield with \"This creature's power and toughness are each equal to the number of Forests you control.\"");
+        super("Treefolk Warrior", "green Treefolk Warrior creature token with \"This creature's power and toughness are each equal to the number of Forests you control.\"");
         this.setOriginalExpansionSetCode("M15");
         cardType.add(CardType.CREATURE);
         color.setGreen(true);

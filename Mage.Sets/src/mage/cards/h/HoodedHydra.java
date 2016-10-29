@@ -65,7 +65,7 @@ public class HoodedHydra extends CardImpl {
         // Hooded Hydra enters the battlefield with X +1/+1 counters on it.
         this.addAbility(new EntersBattlefieldAbility(new EntersBattlefieldWithXCountersEffect(CounterType.P1P1.createInstance())));
 
-        // When Hooded Hydra dies, put a 1/1 green Snake creature token onto the battlefield for each +1/+1 counter on it.
+        // When Hooded Hydra dies, create a 1/1 green Snake creature token for each +1/+1 counter on it.
         this.addAbility(new DiesTriggeredAbility(new CreateTokenEffect(new SnakeToken("KTK"), new CountersSourceCount(CounterType.P1P1)), false));
 
         // Morph {3}{G}{G}

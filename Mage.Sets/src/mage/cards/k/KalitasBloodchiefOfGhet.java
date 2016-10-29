@@ -57,7 +57,7 @@ public class KalitasBloodchiefOfGhet extends CardImpl {
         this.subtype.add("Vampire");
         this.subtype.add("Warrior");
 
-        // {B}{B}{B}, {T}: Destroy target creature. If that creature dies this way, put a black Vampire creature token onto the battlefield. Its power is equal to that creature's power and its toughness is equal to that creature's toughness.
+        // {B}{B}{B}, {T}: Destroy target creature. If that creature dies this way, create a black Vampire creature token. Its power is equal to that creature's power and its toughness is equal to that creature's toughness.
         Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new KalitasDestroyEffect(), new ManaCostsImpl("{B}{B}{B}"));
         ability.addCost(new TapSourceCost());
         this.power = new MageInt(5);
@@ -80,7 +80,7 @@ class KalitasDestroyEffect extends OneShotEffect {
 
     public KalitasDestroyEffect() {
         super(Outcome.DestroyPermanent);
-        this.staticText = "Destroy target creature. If that creature dies this way, put a black Vampire creature token onto the battlefield. Its power is equal to that creature's power and its toughness is equal to that creature's toughness";
+        this.staticText = "Destroy target creature. If that creature dies this way, create a black Vampire creature token. Its power is equal to that creature's power and its toughness is equal to that creature's toughness";
     }
 
     public KalitasDestroyEffect(final KalitasDestroyEffect effect) {

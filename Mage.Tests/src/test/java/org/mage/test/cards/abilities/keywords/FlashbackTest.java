@@ -192,7 +192,7 @@ public class FlashbackTest extends CardTestPlayerBase {
         addCard(Zone.BATTLEFIELD, playerA, "Forest", 1);
         addCard(Zone.HAND, playerA, "Snapcaster Mage", 1);
 
-        // Converge - Put a 1/1 white Kor Ally creature token onto the battlefield for each color of mana spent to cast Unified Front.
+        // Converge - Create a 1/1 white Kor Ally creature token for each color of mana spent to cast Unified Front.
         addCard(Zone.GRAVEYARD, playerA, "Unified Front"); // {3}{W}
 
         activateManaAbility(1, PhaseStep.PRECOMBAT_MAIN, playerA, "{T}: Add {W}");

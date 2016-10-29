@@ -47,7 +47,7 @@ public class FlurryOfHorns extends CardImpl {
         super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{4}{R}");
 
 
-        // Put two 2/3 red Minotaur creature tokens with haste onto the battlefield.
+        // Create two 2/3 red Minotaur creature tokens with haste.
         this.getSpellAbility().addEffect(new CreateTokenEffect(new FlurryOfHornsMinotaurToken(), 2));
     }
 

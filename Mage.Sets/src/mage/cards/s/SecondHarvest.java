@@ -51,7 +51,7 @@ public class SecondHarvest extends CardImpl {
     public SecondHarvest(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.INSTANT},"{2}{G}{G}");
 
-        // For each token you control, put a token onto the battlefield that's a copy of that permanent.
+        // For each token you control, create a token that's a copy of that permanent.
         this.getSpellAbility().addEffect(new SecondHarvestEffect());
     }
 
@@ -69,7 +69,7 @@ class SecondHarvestEffect extends OneShotEffect {
 
     public SecondHarvestEffect() {
         super(Outcome.Benefit);
-        this.staticText = "For each token you control, put a token onto the the battlefield that's a copy of that permanent";
+        this.staticText = "For each token you control, create a token that's a copy of that permanent";
     }
 
     public SecondHarvestEffect(final SecondHarvestEffect effect) {

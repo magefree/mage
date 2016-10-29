@@ -54,7 +54,7 @@ public class DuneBroodNephilim extends CardImpl {
         this.power = new MageInt(3);
         this.toughness = new MageInt(3);
 
-        // Whenever Dune-Brood Nephilim deals combat damage to a player, put a 1/1 colorless Sand creature token onto the battlefield for each land you control.
+        // Whenever Dune-Brood Nephilim deals combat damage to a player, create a 1/1 colorless Sand creature token for each land you control.
         this.addAbility(new DealsCombatDamageToAPlayerTriggeredAbility(new CreateTokenEffect(new DuneBroodNephilimToken(), new PermanentsOnBattlefieldCount(filterLands)), false));
     }
 

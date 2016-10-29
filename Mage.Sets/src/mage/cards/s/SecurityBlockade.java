@@ -72,7 +72,7 @@ public class SecurityBlockade extends CardImpl {
         Ability ability = new EnchantAbility(auraTarget.getTargetName());
         this.addAbility(ability);
 
-        // When Security Blockade enters the battlefield, put a 2/2 white Knight creature token with vigilance onto the battlefield.
+        // When Security Blockade enters the battlefield, create a 2/2 white Knight creature token with vigilance.
         this.addAbility(new EntersBattlefieldTriggeredAbility(new CreateTokenEffect(new KnightToken())));
 
         // Enchanted land has "{T}: Prevent the next 1 damage that would be dealt to you this turn."

@@ -49,7 +49,7 @@ public class SellerOfSongbirds extends CardImpl {
         this.toughness = new MageInt(2);
 
 
-        // When Seller of Songbirds enters the battlefield, put a 1/1 white Bird creature token with flying onto the battlefield.
+        // When Seller of Songbirds enters the battlefield, create a 1/1 white Bird creature token with flying.
         this.addAbility(new EntersBattlefieldTriggeredAbility(new CreateTokenEffect(new BirdToken())));
     }
 

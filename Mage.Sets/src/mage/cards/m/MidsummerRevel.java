@@ -56,7 +56,7 @@ public class MidsummerRevel extends CardImpl {
         // At the beginning of your upkeep, you may put a verse counter on Midsummer Revel.
         this.addAbility(new BeginningOfUpkeepTriggeredAbility(Zone.BATTLEFIELD,
             new AddCountersSourceEffect(CounterType.VERSE.createInstance(), true), TargetController.YOU, true));
-        // {G}, Sacrifice Midsummer Revel: Put X 3/3 green Beast creature tokens onto the battlefield, where X is the number of verse counters on Midsummer Revel.
+        // {G}, Sacrifice Midsummer Revel: create X 3/3 green Beast creature tokens, where X is the number of verse counters on Midsummer Revel.
         Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new CreateTokenEffect(new BeastToken(),
             new CountersSourceCount(CounterType.VERSE)), new ManaCostsImpl("{G}"));
         ability.addCost(new SacrificeSourceCost());

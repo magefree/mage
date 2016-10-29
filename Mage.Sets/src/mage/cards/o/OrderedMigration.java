@@ -40,14 +40,14 @@ import mage.game.permanent.token.Token;
 /**
  *
  * @author LoneFox
-
+ *
  */
 public class OrderedMigration extends CardImpl {
 
     public OrderedMigration(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{3}{W}{U}");
+        super(ownerId, setInfo, new CardType[]{CardType.SORCERY}, "{3}{W}{U}");
 
-        // Domain - Put a 1/1 blue Bird creature token with flying onto the battlefield for each basic land type among lands you control.
+        // Domain - Create a 1/1 blue Bird creature token with flying for each basic land type among lands you control.
         this.getSpellAbility().addEffect(new CreateTokenEffect(new BirdToken(), new DomainValue()));
     }
 
@@ -64,6 +64,7 @@ public class OrderedMigration extends CardImpl {
 // TODO: There is a player rewards token for this (http://magiccards.info/extra/token/player-rewards-2001/bird.html),
 // but player rewards tokens are not downloaded...
 class BirdToken extends Token {
+
     public BirdToken() {
         super("Bird", "1/1 blue Bird creature token with flying");
         cardType.add(CardType.CREATURE);

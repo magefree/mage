@@ -62,7 +62,7 @@ public class TalrandSkySummoner extends CardImpl {
         this.power = new MageInt(2);
         this.toughness = new MageInt(2);
 
-        // Whenever you cast an instant or sorcery spell, put a 2/2 blue Drake creature token with flying onto the battlefield.
+        // Whenever you cast an instant or sorcery spell, create a 2/2 blue Drake creature token with flying.
         this.addAbility(new SpellCastControllerTriggeredAbility(new CreateTokenEffect(new DrakeToken()), filter, false));
     }
 

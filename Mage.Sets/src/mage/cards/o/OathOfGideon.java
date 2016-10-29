@@ -56,7 +56,7 @@ public class OathOfGideon extends CardImpl {
         super(ownerId,setInfo,new CardType[]{CardType.ENCHANTMENT},"{2}{W}");
         this.supertype.add("Legendary");
 
-        // When Oath of Gideon enters the battlefield, put two 1/1 Kor Ally creature tokens onto the battlefield.
+        // When Oath of Gideon enters the battlefield, create two 1/1 Kor Ally creature tokens.
         this.addAbility(new EntersBattlefieldTriggeredAbility(new CreateTokenEffect(new KorAllyToken(), 2), false));
 
         // Each planeswalker you control enters the battlefield with an additional loyalty counter on it.

@@ -53,7 +53,7 @@ public class Giantbaiting extends CardImpl {
     public Giantbaiting(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{2}{R/G}");
 
-        // Put a 4/4 red and green Giant Warrior creature token with haste onto the battlefield. Exile it at the beginning of the next end step.
+        // Create a 4/4 red and green Giant Warrior creature token with haste. Exile it at the beginning of the next end step.
         this.getSpellAbility().addEffect(new GiantbaitingEffect());
 
         // Conspire
@@ -75,7 +75,7 @@ class GiantbaitingEffect extends OneShotEffect {
 
     public GiantbaitingEffect() {
         super(Outcome.PutCreatureInPlay);
-        this.staticText = "Put a 4/4 red and green Giant Warrior creature token with haste onto the battlefield. Exile it at the beginning of the next end step";
+        this.staticText = "Create a 4/4 red and green Giant Warrior creature token with haste. Exile it at the beginning of the next end step";
     }
 
     public GiantbaitingEffect(final GiantbaitingEffect effect) {

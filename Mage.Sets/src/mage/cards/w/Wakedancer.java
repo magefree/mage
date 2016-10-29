@@ -45,7 +45,7 @@ import mage.game.permanent.token.ZombieToken;
  */
 public class Wakedancer extends CardImpl {
 
-    private static final String staticText = "Morbid - When {this} enters the battlefield, if a creature died this turn, put a 2/2 black Zombie creature token onto the battlefield.";
+    private static final String staticText = "Morbid - When {this} enters the battlefield, if a creature died this turn, create a 2/2 black Zombie creature token.";
 
     public Wakedancer(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{2}{B}");
@@ -56,7 +56,7 @@ public class Wakedancer extends CardImpl {
         this.power = new MageInt(2);
         this.toughness = new MageInt(2);
 
-        // Morbid - When Wakedancer enters the battlefield, if a creature died this turn, put a 2/2 black Zombie creature token onto the battlefield.
+        // Morbid - When Wakedancer enters the battlefield, if a creature died this turn, create a 2/2 black Zombie creature token.
         TriggeredAbility ability = new EntersBattlefieldTriggeredAbility(new CreateTokenEffect(new ZombieToken()));
         this.addAbility(new ConditionalTriggeredAbility(ability, MorbidCondition.getInstance(), staticText));
     }

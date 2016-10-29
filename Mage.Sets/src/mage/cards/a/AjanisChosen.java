@@ -52,17 +52,17 @@ import mage.players.Player;
 public class AjanisChosen extends CardImpl {
 
     public AjanisChosen(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{2}{W}{W}");
+        super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{2}{W}{W}");
         this.subtype.add("Cat");
         this.subtype.add("Soldier");
 
         this.power = new MageInt(3);
         this.toughness = new MageInt(3);
 
-        // Whenever an enchantment enters the battlefield under your control, put a 2/2 white Cat creature token onto the battlefield. If that enchantment is an Aura, you may attach it to the token.
+        // Whenever an enchantment enters the battlefield under your control, create a 2/2 white Cat creature token. If that enchantment is an Aura, you may attach it to the token.
         this.addAbility(new EntersBattlefieldAllTriggeredAbility(
                 Zone.BATTLEFIELD, new AjanisChosenEffect(), new FilterControlledEnchantmentPermanent(), false, SetTargetPointer.PERMANENT,
-                "Whenever an enchantment enters the battlefield under your control, put a 2/2 white Cat creature token onto the battlefield. If that enchantment is an Aura, you may attach it to the token"));
+                "Whenever an enchantment enters the battlefield under your control, create a 2/2 white Cat creature token. If that enchantment is an Aura, you may attach it to the token"));
     }
 
     public AjanisChosen(final AjanisChosen card) {
@@ -79,7 +79,7 @@ class AjanisChosenEffect extends OneShotEffect {
 
     public AjanisChosenEffect() {
         super(Outcome.PutCreatureInPlay);
-        staticText = "put a 2/2 white Cat creature token onto the battlefield. If that enchantment is an Aura, you may attach it to the token";
+        staticText = "create a 2/2 white Cat creature token. If that enchantment is an Aura, you may attach it to the token";
     }
 
     public AjanisChosenEffect(final AjanisChosenEffect effect) {

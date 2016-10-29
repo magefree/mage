@@ -56,12 +56,12 @@ public class StrengthOfArms extends CardImpl {
         super(ownerId,setInfo,new CardType[]{CardType.INSTANT},"{W}");
 
         // Target creature gets +2/+2 until end of turn.
-        // If you control an Equipment, put a 1/1 white Human Soldier creature token onto the battlefield.
+        // If you control an Equipment, create a 1/1 white Human Soldier creature token.
         this.getSpellAbility().addEffect(new BoostTargetEffect(2, 2, Duration.EndOfTurn));
         this.getSpellAbility().addTarget(new TargetCreaturePermanent());
         this.getSpellAbility().addEffect(new ConditionalOneShotEffect(new CreateTokenEffect(new HumanSoldierToken()),
                 new PermanentsOnTheBattlefieldCondition(filter, PermanentsOnTheBattlefieldCondition.CountType.MORE_THAN, 0),
-                "If you control an Equipment, put a 1/1 white Human Soldier creature token onto the battlefield."));
+                "If you control an Equipment, create a 1/1 white Human Soldier creature token."));
     }
 
     public StrengthOfArms(final StrengthOfArms card) {

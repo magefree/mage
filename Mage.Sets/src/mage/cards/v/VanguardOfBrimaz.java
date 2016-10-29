@@ -53,7 +53,7 @@ public class VanguardOfBrimaz extends CardImpl {
 
         // Vigilance
         this.addAbility(VigilanceAbility.getInstance());
-        // <i>Heroic</i> - Whenever you cast a spell that targets Vanguard of Brimaz, put a 1/1 white Cat Soldier creature token with vigilance onto the battlefield.
+        // <i>Heroic</i> - Whenever you cast a spell that targets Vanguard of Brimaz, create a 1/1 white Cat Soldier creature token with vigilance.
         this.addAbility(new HeroicAbility(new CreateTokenEffect(new CatSoldierCreatureToken()), false));
     }
 

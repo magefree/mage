@@ -49,7 +49,7 @@ public class AwakenTheSkyTyrant extends CardImpl {
     public AwakenTheSkyTyrant(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.ENCHANTMENT},"{3}{R}");
 
-        // When a source an opponent controls deals damage to you, sacrifice Awaken the Sky Tyrant. If you do, put a 5/5 red Dragon creature token with flying onto the battlefield.
+        // When a source an opponent controls deals damage to you, sacrifice Awaken the Sky Tyrant. If you do, create a 5/5 red Dragon creature token with flying.
         this.addAbility(new AwakenTheSkyTyrantTriggeredAbility());
     }
 

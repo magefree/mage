@@ -53,7 +53,7 @@ public class GoblinMarshal extends CardImpl {
         this.toughness = new MageInt(3);
 
         this.addAbility(new EchoAbility("{4}{R}{R}"));
-        // When Goblin Marshal enters the battlefield or dies, put two 1/1 red Goblin creature tokens onto the battlefield.
+        // When Goblin Marshal enters the battlefield or dies, create two 1/1 red Goblin creature tokens.
         Ability enterAbility = new EntersBattlefieldOrDiesSourceTriggeredAbility(new CreateTokenEffect(new GoblinToken(), 2), false);
         this.addAbility(enterAbility);
     }

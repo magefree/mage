@@ -71,7 +71,7 @@ public class Pentavus extends CardImpl {
         this.addAbility(new EntersBattlefieldAbility(new AddCountersSourceEffect(CounterType.P1P1.createInstance(5)),
                 "with five +1/+1 counters on it"));        
 
-        // {1}, Remove a +1/+1 counter from Pentavus: Put a 1/1 colorless Pentavite artifact creature token with flying onto the battlefield.
+        // {1}, Remove a +1/+1 counter from Pentavus: Create a 1/1 colorless Pentavite artifact creature token with flying.
         Ability firstAbility = new SimpleActivatedAbility(Zone.BATTLEFIELD, new CreateTokenEffect(new PentaviteToken(), 1), new GenericManaCost(1));
         firstAbility.addCost(new RemoveCountersSourceCost(CounterType.P1P1.createInstance(1)));
         this.addAbility(firstAbility);

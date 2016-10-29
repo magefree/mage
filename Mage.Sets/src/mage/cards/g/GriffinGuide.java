@@ -70,7 +70,7 @@ public class GriffinGuide extends CardImpl {
         ability = new SimpleStaticAbility(Zone.BATTLEFIELD, new BoostEnchantedEffect(2,2, Duration.WhileOnBattlefield));
         ability.addEffect(new GainAbilityAttachedEffect(FlyingAbility.getInstance(), AttachmentType.AURA, Duration.WhileOnBattlefield, "and has flying"));
         this.addAbility(ability);
-        // When enchanted creature dies, put a 2/2 white Griffin creature token with flying onto the battlefield.
+        // When enchanted creature dies, create a 2/2 white Griffin creature token with flying.
         this.addAbility(new DiesAttachedTriggeredAbility(new CreateTokenEffect(new GriffinToken()), "enchanted creature"));
     }
 

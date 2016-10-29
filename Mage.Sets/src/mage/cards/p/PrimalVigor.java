@@ -50,7 +50,7 @@ public class PrimalVigor extends CardImpl {
     public PrimalVigor(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.ENCHANTMENT},"{4}{G}");
 
-        // If one or more tokens would be put onto the battlefield, twice that many of those tokens are put onto the battlefield instead.
+        // If one or more tokens would be created, twice that many of those tokens are created instead.
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new PrimalVigorTokenEffect()));
         // If one or more +1/+1 counters would be placed on a creature, twice that many +1/+1 counters are placed on that creature instead.
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new PrimalVigorCounterEffect()));
@@ -71,7 +71,7 @@ class PrimalVigorTokenEffect extends ReplacementEffectImpl {
 
     public PrimalVigorTokenEffect() {
         super(Duration.WhileOnBattlefield, Outcome.Copy);
-        staticText = "If one or more tokens would be put onto the battlefield, twice that many of those tokens are put onto the battlefield instead";
+        staticText = "If one or more tokens would be created, twice that many of those tokens are created instead";
     }
 
     public PrimalVigorTokenEffect(final PrimalVigorTokenEffect effect) {

@@ -55,7 +55,7 @@ public class HuntedPhantasm extends CardImpl {
 
         // Hunted Phantasm can't be blocked.
         this.addAbility(new CantBeBlockedSourceAbility());
-        // When Hunted Phantasm enters the battlefield, put five 1/1 red Goblin creature tokens onto the battlefield under target opponent's control.
+        // When Hunted Phantasm enters the battlefield, create five 1/1 red Goblin creature tokens under target opponent's control.
         Ability ability = new EntersBattlefieldTriggeredAbility(new CreateTokenTargetEffect(new GoblinToken(), 5), false);
         Target target = new TargetOpponent();
         ability.addTarget(target);

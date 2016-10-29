@@ -53,12 +53,13 @@ import mage.target.common.TargetControlledCreaturePermanent;
 public class ProsshSkyraiderOfKher extends CardImpl {
 
     private static final FilterControlledCreaturePermanent filter = new FilterControlledCreaturePermanent("another creature");
+
     static {
         filter.add(new AnotherPredicate());
     }
 
     public ProsshSkyraiderOfKher(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{3}{B}{R}{G}");
+        super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{3}{B}{R}{G}");
         this.supertype.add("Legendary");
         this.subtype.add("Dragon");
 
@@ -67,10 +68,10 @@ public class ProsshSkyraiderOfKher extends CardImpl {
 
         // Flying
         this.addAbility(FlyingAbility.getInstance());
-        // When you cast Prossh, Skyraider of Kher, put X 0/1 red Kobold creature tokens named Kobolds of Kher Keep onto the battlefield, where X is the amount of mana spent to cast Prossh.
+        // When you cast Prossh, Skyraider of Kher, create X 0/1 red Kobold creature tokens named Kobolds of Kher Keep, where X is the amount of mana spent to cast Prossh.
         this.addAbility(new CastSourceTriggeredAbility(new CreateTokenEffect(new ProsshKoboldToken(), new ManaSpentToCastCount()), false));
         // Sacrifice another creature: Prossh gets +1/+0 until end of turn.
-        this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new BoostSourceEffect(1,0, Duration.EndOfTurn), new SacrificeTargetCost(new TargetControlledCreaturePermanent(1,1,filter, true))));
+        this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new BoostSourceEffect(1, 0, Duration.EndOfTurn), new SacrificeTargetCost(new TargetControlledCreaturePermanent(1, 1, filter, true))));
     }
 
     public ProsshSkyraiderOfKher(final ProsshSkyraiderOfKher card) {

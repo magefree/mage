@@ -58,7 +58,7 @@ public class Seance extends CardImpl {
     public Seance(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.ENCHANTMENT},"{2}{W}{W}");
 
-        // At the beginning of each upkeep, you may exile target creature card from your graveyard. If you do, put a token onto the battlefield that's a copy of that card except it's a Spirit in addition to its other types. Exile it at the beginning of the next end step.
+        // At the beginning of each upkeep, you may exile target creature card from your graveyard. If you do, create a token that's a copy of that card except it's a Spirit in addition to its other types. Exile it at the beginning of the next end step.
         Ability ability = new BeginningOfUpkeepTriggeredAbility(new SeanceEffect(), TargetController.ANY, true);
         ability.addTarget(new TargetCardInYourGraveyard(new FilterCreatureCard()));
         this.addAbility(ability);
@@ -78,7 +78,7 @@ class SeanceEffect extends OneShotEffect {
 
     public SeanceEffect() {
         super(Outcome.PutCreatureInPlay);
-        this.staticText = "you may exile target creature card from your graveyard. If you do, put a token onto the battlefield that's a copy of that card except it's a Spirit in addition to its other types. Exile it at the beginning of the next end step";
+        this.staticText = "you may exile target creature card from your graveyard. If you do, create a token that's a copy of that card except it's a Spirit in addition to its other types. Exile it at the beginning of the next end step";
     }
 
     public SeanceEffect(final SeanceEffect effect) {

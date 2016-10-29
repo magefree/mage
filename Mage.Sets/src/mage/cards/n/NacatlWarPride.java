@@ -58,7 +58,7 @@ import mage.util.CardUtil;
 public class NacatlWarPride extends CardImpl {
 
     public NacatlWarPride(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{3}{G}{G}{G}");
+        super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{3}{G}{G}{G}");
         this.subtype.add("Cat");
         this.subtype.add("Warrior");
         this.power = new MageInt(3);
@@ -68,7 +68,7 @@ public class NacatlWarPride extends CardImpl {
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new CantBeBlockedByMoreThanOneSourceEffect()));
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new MustBeBlockedByAtLeastOneSourceEffect()));
 
-        // Whenever Nacatl War-Pride attacks, put X tokens that are copies of Nacatl War-Pride onto the battlefield tapped and attacking, where X is the number of creatures defending player controls. Exile the tokens at the beginning of the next end step.
+        // Whenever Nacatl War-Pride attacks, create X tokens that are copies of Nacatl War-Pride tapped and attacking, where X is the number of creatures defending player controls. Exile the tokens at the beginning of the next end step.
         this.addAbility(new AttacksTriggeredAbility(new NacatlWarPrideEffect(), false));
     }
 
@@ -86,7 +86,7 @@ class NacatlWarPrideEffect extends OneShotEffect {
 
     public NacatlWarPrideEffect() {
         super(Outcome.Benefit);
-        this.staticText = "Put X tokens onto the battlefield that are copies of Nacatl War-Pride onto the battlefield tapped and attacking, where X is the number of creatures defending player controls. Exile the tokens at the beginning of the next end step.";
+        this.staticText = "create X tokens that are copies of Nacatl War-Pride tapped and attacking, where X is the number of creatures defending player controls. Exile the tokens at the beginning of the next end step.";
     }
 
     public NacatlWarPrideEffect(final NacatlWarPrideEffect effect) {

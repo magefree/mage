@@ -66,7 +66,7 @@ public class TrostaniSelesnyasVoice extends CardImpl {
         // Whenever another creature enters the battlefield under your control, you gain life equal to that creature's toughness.
         this.addAbility(new TrostaniSelesnyasVoiceTriggeredAbility());
 
-        // {1}{G}{W}, {T}: Populate. (Put a token onto the battlefield that's a copy of a creature token you control.)
+        // {1}{G}{W}, {T}: Populate. (Create a token that's a copy of a creature token you control.)
         Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new PopulateEffect(), new ManaCostsImpl("{1}{G}{W}"));
         ability.addCost(new TapSourceCost());
         this.addAbility(ability);

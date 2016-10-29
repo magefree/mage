@@ -128,7 +128,7 @@ class SarkhanTheMadRevealAndDrawEffect extends OneShotEffect {
 
 class SarkhanTheMadSacEffect extends OneShotEffect {
 
-    private static final String effectText = "Target creature's controller sacrifices it, then that player puts a 5/5 red Dragon creature token with flying onto the battlefield";
+    private static final String effectText = "Target creature's controller sacrifices it, then that player creates a 5/5 red Dragon creature token with flying";
 
     SarkhanTheMadSacEffect() {
         super(Outcome.Sacrifice);

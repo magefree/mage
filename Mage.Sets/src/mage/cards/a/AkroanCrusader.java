@@ -51,7 +51,7 @@ public class AkroanCrusader extends CardImpl {
         this.power = new MageInt(1);
         this.toughness = new MageInt(1);
 
-        // <i>Heroic</i>  Whenever you cast a spell that targets Akroan Crusader, put a 1/1 red Soldier creature token with haste onto the battlefield.
+        // <i>Heroic</i>  Whenever you cast a spell that targets Akroan Crusader, create a 1/1 red Soldier creature token with haste.
         this.addAbility(new HeroicAbility(new CreateTokenEffect(new SoldierToken())));
     }
 

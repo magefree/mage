@@ -45,7 +45,7 @@ public class CacklingCounterpart extends CardImpl {
     public CacklingCounterpart(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.INSTANT},"{1}{U}{U}");
 
-        // Put a token onto the battlefield that's a copy of target creature you control.
+        // Create a token that's a copy of target creature you control.
         this.getSpellAbility().addEffect(new PutTokenOntoBattlefieldCopyTargetEffect());
         this.getSpellAbility().addTarget(new TargetControlledCreaturePermanent());
 

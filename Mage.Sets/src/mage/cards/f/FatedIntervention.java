@@ -47,7 +47,7 @@ public class FatedIntervention extends CardImpl {
         super(ownerId,setInfo,new CardType[]{CardType.INSTANT},"{2}{G}{G}{G}");
 
 
-        // Put two 3/3 green Centaur enchantment creature tokens onto the battlefield. If it's your turn, scry 2.
+        // Create two 3/3 green Centaur enchantment creature tokens. If it's your turn, scry 2.
         this.getSpellAbility().addEffect(new CreateTokenEffect(new CentaurEnchantmentCreatureToken(), 2));
         this.getSpellAbility().addEffect(new ConditionalOneShotEffect(new ScryEffect(2), MyTurnCondition.getInstance(), "If it's your turn, scry 2"));
     }

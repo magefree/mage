@@ -47,7 +47,7 @@ public class WormHarvest extends CardImpl {
     public WormHarvest(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{2}{B/G}{B/G}{B/G}");
 
-        // Put a 1/1 black and green Worm creature token onto the battlefield for each land card in your graveyard.
+        // Create a 1/1 black and green Worm creature token for each land card in your graveyard.
         CardsInControllerGraveyardCount value = new CardsInControllerGraveyardCount(new FilterLandCard());
         this.getSpellAbility().addEffect(new CreateTokenEffect(new WormHarvestToken(), value));
 

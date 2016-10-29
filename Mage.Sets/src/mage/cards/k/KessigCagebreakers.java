@@ -55,7 +55,7 @@ public class KessigCagebreakers extends CardImpl {
         this.power = new MageInt(3);
         this.toughness = new MageInt(4);
 
-        // Whenever Kessig Cagebreakers attacks, put a 2/2 green Wolf creature token onto the battlefield tapped and attacking for each creature card in your graveyard.
+        // Whenever Kessig Cagebreakers attacks, create a 2/2 green Wolf creature token tapped and attacking for each creature card in your graveyard.
         this.addAbility(new AttacksTriggeredAbility(new KessigCagebreakersEffect(), false));
     }
 
@@ -73,7 +73,7 @@ class KessigCagebreakersEffect extends OneShotEffect {
 
     public KessigCagebreakersEffect() {
         super(Outcome.PutCreatureInPlay);
-        this.staticText = "put a 2/2 green Wolf creature token onto the battlefield tapped and attacking for each creature card in your graveyard";
+        this.staticText = "create a 2/2 green Wolf creature token tapped and attacking for each creature card in your graveyard";
     }
 
     public KessigCagebreakersEffect(final KessigCagebreakersEffect effect) {

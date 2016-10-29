@@ -56,7 +56,7 @@ public class GoblinTrenches extends CardImpl {
 
 
 
-        // {2}, Sacrifice a land: Put two 1/1 red and white Goblin Soldier creature tokens onto the battlefield.
+        // {2}, Sacrifice a land: Create two 1/1 red and white Goblin Soldier creature tokens.
         Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new CreateTokenEffect(new GoblinTrenchesToken(), 2), new GenericManaCost(2));
         ability.addCost(new SacrificeTargetCost(new TargetControlledPermanent(filter)));
         this.addAbility(ability);

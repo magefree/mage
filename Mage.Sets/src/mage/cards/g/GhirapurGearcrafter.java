@@ -49,7 +49,7 @@ public class GhirapurGearcrafter extends CardImpl {
         this.power = new MageInt(2);
         this.toughness = new MageInt(1);
 
-        // When Ghirapur Gearcrafter enters the battlefield, put a 1/1 colorless Thopter artifact creature token with flying onto the battlefield.
+        // When Ghirapur Gearcrafter enters the battlefield, create a 1/1 colorless Thopter artifact creature token with flying.
         this.addAbility(new EntersBattlefieldTriggeredAbility(new CreateTokenEffect(new ThopterColorlessToken())));
     }
 

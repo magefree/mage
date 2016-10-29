@@ -45,7 +45,7 @@ public class GoblinScouts extends CardImpl {
     public GoblinScouts(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{3}{R}{R}");
 
-        // Put three 1/1 red Goblin Scout creature tokens with mountainwalk onto the battlefield.
+        // Create three 1/1 red Goblin Scout creature tokens with mountainwalk.
         this.getSpellAbility().addEffect(new CreateTokenEffect(new GoblinScoutsToken(), 3));
     }
 

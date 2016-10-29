@@ -68,7 +68,7 @@ public class FoulEmissary extends CardImpl {
         // When Foul Emissary enters the battlefield, look at the top four cards of your library. You may reveal a creature card from among them and put it into your hand. Put the rest on the bottom of your library in any order.
         this.addAbility(new EntersBattlefieldTriggeredAbility(new LookLibraryAndPickControllerEffect(new StaticValue(4), false, new StaticValue(1), filter, false)));
 
-        // When you sacrifice Foul Emissary while casting a spell with emerge, put a 3/2 colorless Eldrazi Horror creature token onto the battlefield.
+        // When you sacrifice Foul Emissary while casting a spell with emerge, create a 3/2 colorless Eldrazi Horror creature token.
         this.addAbility(new FoulEmissaryTriggeredAbility(new CreateTokenEffect(new EldraziHorrorToken()), false));
     }
 
@@ -108,6 +108,6 @@ class FoulEmissaryTriggeredAbility extends SacrificeSourceTriggeredAbility {
 
     @Override
     public String getRule() {
-        return "When you sacrifice {this} while casting a spell with emerge, put a 3/2 colorless Eldrazi Horror creature token onto the battlefield.";
+        return "When you sacrifice {this} while casting a spell with emerge, create a 3/2 colorless Eldrazi Horror creature token.";
     }
 }

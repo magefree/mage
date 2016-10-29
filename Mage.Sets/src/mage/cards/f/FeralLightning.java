@@ -55,7 +55,7 @@ public class FeralLightning extends CardImpl {
     public FeralLightning(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{3}{R}{R}{R}");
 
-        // Put three 3/1 red Elemental creature tokens with haste onto the battlefield. Exile them at the beginning of the next end step.
+        // Create three 3/1 red Elemental creature tokens with haste. Exile them at the beginning of the next end step.
         this.getSpellAbility().addEffect(new FeralLightningEffect());
 
     }
@@ -74,7 +74,7 @@ class FeralLightningEffect extends OneShotEffect {
 
     public FeralLightningEffect() {
         super(Outcome.PutCreatureInPlay);
-        this.staticText = "Put three 3/1 red Elemental creature tokens with haste onto the battlefield. Exile them at the beginning of the next end step";
+        this.staticText = "Create three 3/1 red Elemental creature tokens with haste. Exile them at the beginning of the next end step";
     }
 
     public FeralLightningEffect(final FeralLightningEffect effect) {

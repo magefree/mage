@@ -44,7 +44,7 @@ public class IcatianTown extends CardImpl {
         super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{5}{W}");
 
 
-        // Put four 1/1 white Citizen creature tokens onto the battlefield.
+        // Create four 1/1 white Citizen creature tokens.
         this.getSpellAbility().addEffect(new CreateTokenEffect(new CitizenToken(), 4));
     }
 

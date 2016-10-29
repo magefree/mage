@@ -61,7 +61,7 @@ public class SwanSong extends CardImpl {
         super(ownerId,setInfo,new CardType[]{CardType.INSTANT},"{U}");
 
 
-        // Counter target enchantment, instant or sorcery spell. Its controller puts a 2/2 blue Bird creature token with flying onto the battlefield.
+        // Counter target enchantment, instant or sorcery spell. Its controller creates a 2/2 blue Bird creature token with flying.
         this.getSpellAbility().addEffect(new SwanSongEffect());
         this.getSpellAbility().addTarget(new TargetSpell(filter));
     }
@@ -80,7 +80,7 @@ class SwanSongEffect extends OneShotEffect {
 
     public SwanSongEffect() {
         super(Outcome.Benefit);
-        this.staticText = "Counter target enchantment, instant or sorcery spell. Its controller puts a 2/2 blue Bird creature token with flying onto the battlefield";
+        this.staticText = "Counter target enchantment, instant or sorcery spell. Its controller creates a 2/2 blue Bird creature token with flying";
     }
 
     public SwanSongEffect(final SwanSongEffect effect) {

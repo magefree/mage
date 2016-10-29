@@ -56,9 +56,9 @@ public class HallowedSpiritkeeper extends CardImpl {
         // Vigilance
         this.addAbility(VigilanceAbility.getInstance());
 
-        // When Hallowed Spiritkeeper dies, put X 1/1 white Spirit creature tokens with flying onto the battlefield, where X is the number of creature cards in your graveyard.
+        // When Hallowed Spiritkeeper dies, create X 1/1 white Spirit creature tokens with flying, where X is the number of creature cards in your graveyard.
         Effect effect = new CreateTokenEffect(new SpiritWhiteToken(), new CardsInControllerGraveyardCount(new FilterCreatureCard("creature cards")));
-        effect.setText("put X 1/1 white Spirit creature tokens with flying onto the battlefield, where X is the number of creature cards in your graveyard");
+        effect.setText("create X 1/1 white Spirit creature tokens with flying, where X is the number of creature cards in your graveyard");
         this.addAbility(new DiesTriggeredAbility(effect, false));
 
     }

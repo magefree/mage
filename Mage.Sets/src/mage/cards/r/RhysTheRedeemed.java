@@ -65,12 +65,12 @@ public class RhysTheRedeemed extends CardImpl {
         this.power = new MageInt(1);
         this.toughness = new MageInt(1);
 
-        // {2}{GW}, {tap}: Put a 1/1 green and white Elf Warrior creature token onto the battlefield.
+        // {2}{GW}, {tap}: Create a 1/1 green and white Elf Warrior creature token.
         Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new CreateTokenEffect(new RhysTheRedeemedToken()), new ManaCostsImpl("{2}{G/W}"));
         ability.addCost(new TapSourceCost());
         this.addAbility(ability);
 
-        // {4}{GW}{GW}, {tap}: For each creature token you control, put a token that's a copy of that creature onto the battlefield.
+        // {4}{GW}{GW}, {tap}: For each creature token you control, create a token that's a copy of that creature.
         Ability ability2 = new SimpleActivatedAbility(Zone.BATTLEFIELD, new RhysTheRedeemedEffect(), new ManaCostsImpl("{4}{G/W}{G/W}"));
         ability2.addCost(new TapSourceCost());
         this.addAbility(ability2);
@@ -98,7 +98,7 @@ class RhysTheRedeemedEffect extends OneShotEffect {
 
     public RhysTheRedeemedEffect() {
         super(Outcome.Neutral);
-        this.staticText = "For each creature token you control, put a token that's a copy of that creature onto the battlefield";
+        this.staticText = "For each creature token you control, create a token that's a copy of that creature";
     }
 
     public RhysTheRedeemedEffect(final RhysTheRedeemedEffect effect) {

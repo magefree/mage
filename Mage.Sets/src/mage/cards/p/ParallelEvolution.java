@@ -56,7 +56,7 @@ public class ParallelEvolution extends CardImpl {
     public ParallelEvolution(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{3}{G}{G}");
 
-        // For each creature token on the battlefield, its controller puts a token that's a copy of that creature onto the battlefield.
+        // For each creature token on the battlefield, its controller creates a token that's a copy of that creature.
         this.getSpellAbility().addEffect(new ParallelEvolutionEffect());
 
         // Flashback {4}{G}{G}{G}
@@ -84,7 +84,7 @@ class ParallelEvolutionEffect extends OneShotEffect {
 
     public ParallelEvolutionEffect() {
         super(Outcome.Neutral);
-        this.staticText = "For each creature token on the battlefield, its controller puts a token that's a copy of that creature onto the battlefield";
+        this.staticText = "For each creature token on the battlefield, its controller creates a token that's a copy of that creature";
     }
 
     public ParallelEvolutionEffect(final ParallelEvolutionEffect effect) {

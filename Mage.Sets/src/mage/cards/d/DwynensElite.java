@@ -57,18 +57,18 @@ public class DwynensElite extends CardImpl {
     }
 
     public DwynensElite(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{1}{G}");
+        super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{1}{G}");
         this.subtype.add("Elf");
         this.subtype.add("Warrior");
         this.power = new MageInt(2);
         this.toughness = new MageInt(2);
 
-        // When Dwynen's Elite enters the battlefield, if you control another Elf, put a 1/1 green Elf Warrior creature token onto the battlefield.
+        // When Dwynen's Elite enters the battlefield, if you control another Elf, create a 1/1 green Elf Warrior creature token.
         TriggeredAbility triggeredAbility = new EntersBattlefieldTriggeredAbility(new CreateTokenEffect(new ElfToken()));
         this.addAbility(new ConditionalTriggeredAbility(
                 triggeredAbility,
                 new PermanentsOnTheBattlefieldCondition(filter, CountType.MORE_THAN, 0),
-                "When {this} enters the battlefield, if you control another Elf, put a 1/1 green Elf Warrior creature token onto the battlefield."));
+                "When {this} enters the battlefield, if you control another Elf, create a 1/1 green Elf Warrior creature token."));
     }
 
     public DwynensElite(final DwynensElite card) {

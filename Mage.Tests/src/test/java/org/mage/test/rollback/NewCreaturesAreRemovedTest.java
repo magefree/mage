@@ -49,7 +49,7 @@ public class NewCreaturesAreRemovedTest extends CardTestPlayerBase {
     @Test
     public void testTamiyosJournal() {
         addCard(Zone.BATTLEFIELD, playerA, "Swamp", 5);
-        // At the beginning of your upkeep, investigate (Put a colorless Clue artifact token onto the battlefield with \"{2}, Sacrifice this artifact: Draw a card.\").
+        // At the beginning of your upkeep, investigate (Create a colorless Clue artifact token onto the battlefield with \"{2}, Sacrifice this artifact: Draw a card.\").
         // {T}, Sacrifice three Clues: Search your library for a card and put that card into your hand. Then shuffle your library.
         addCard(Zone.HAND, playerA, "Tamiyo's Journal"); // Artifact {5}
         addCard(Zone.BATTLEFIELD, playerA, "Silvercoat Lion", 3);
@@ -89,7 +89,7 @@ public class NewCreaturesAreRemovedTest extends CardTestPlayerBase {
     @Test
     public void testTamiyosJournalAndRollback() {
         addCard(Zone.BATTLEFIELD, playerA, "Swamp", 5);
-        // At the beginning of your upkeep, investigate (Put a colorless Clue artifact token onto the battlefield with \"{2}, Sacrifice this artifact: Draw a card.\").
+        // At the beginning of your upkeep, investigate (Create a colorless Clue artifact token onto the battlefield with \"{2}, Sacrifice this artifact: Draw a card.\").
         // {T}, Sacrifice three Clues: Search your library for a card and put that card into your hand. Then shuffle your library.
         addCard(Zone.HAND, playerA, "Tamiyo's Journal"); // Artifact {5}
 

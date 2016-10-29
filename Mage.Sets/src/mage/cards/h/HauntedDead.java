@@ -56,7 +56,7 @@ public class HauntedDead extends CardImpl {
         this.power = new MageInt(2);
         this.toughness = new MageInt(2);
 
-        // When Haunted Dead enters the battlefield, put a 1/1 white Spirit creature token with flying onto the battlefield.
+        // When Haunted Dead enters the battlefield, create a 1/1 white Spirit creature token with flying.
         this.addAbility(new EntersBattlefieldTriggeredAbility(new CreateTokenEffect(new SpiritWhiteToken())));
 
         // {1}{B}, Discard two cards: Return Haunted Dead from your graveyard to the battlefield tapped.

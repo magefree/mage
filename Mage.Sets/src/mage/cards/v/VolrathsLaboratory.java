@@ -63,7 +63,7 @@ public class VolrathsLaboratory extends CardImpl {
         ability.addEffect(effect);
         this.addAbility(ability);
 
-        // {5}, {T}: Put a 2/2 creature token of the chosen color and type onto the battlefield.
+        // {5}, {T}: Create a 2/2 creature token of the chosen color and type.
         ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new VolrathsLaboratoryEffect(), new GenericManaCost(5));
         ability.addCost(new TapSourceCost());
         this.addAbility(ability);
@@ -83,7 +83,7 @@ class VolrathsLaboratoryEffect extends OneShotEffect {
 
     VolrathsLaboratoryEffect() {
         super(Outcome.PutCreatureInPlay);
-        this.staticText = "Put a 2/2 creature token of the chosen color and type onto the battlefield";
+        this.staticText = "Create a 2/2 creature token of the chosen color and type";
     }
 
     VolrathsLaboratoryEffect(final VolrathsLaboratoryEffect effect) {

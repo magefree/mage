@@ -51,7 +51,7 @@ public class GideonsPhalanx extends CardImpl {
     public GideonsPhalanx(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.INSTANT},"{5}{W}{W}");
 
-        // Put four 2/2 white Knight creature tokens with vigilance onto the battlefield.
+        // Create four 2/2 white Knight creature tokens with vigilance.
         this.getSpellAbility().addEffect(new CreateTokenEffect(new KnightToken(), 4));
 
         // <i>Spell mastery</i> - If there are two or more instant and/or sorcery cards in your graveyard, creatures you control gain indestructible until end of turn.

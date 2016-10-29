@@ -57,7 +57,7 @@ public class ScionOfVituGhazi extends CardImpl {
         TriggeredAbility ability = new EntersBattlefieldTriggeredAbility(new CreateTokenEffect(new BirdToken()), false);
         ability.addEffect(new PopulateEffect("then"));
         this.addAbility(new ConditionalTriggeredAbility(ability, new CastFromHandSourceCondition(),
-                "When {this} enters the battlefield, if you cast it from your hand, put a 1/1 white Bird creature token with flying onto the battlefield, then populate."),
+                "When {this} enters the battlefield, if you cast it from your hand, create a 1/1 white Bird creature token with flying, then populate."),
                 new CastFromHandWatcher());
     }
 

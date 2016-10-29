@@ -28,13 +28,13 @@
 package mage.cards.a;
 
 import java.util.UUID;
-import mage.constants.CardType;
 import mage.MageInt;
 import mage.abilities.common.EntersBattlefieldTriggeredAbility;
 import mage.abilities.effects.common.CreateTokenEffect;
 import mage.abilities.keyword.FirstStrikeAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
+import mage.constants.CardType;
 import mage.game.permanent.token.SoldierToken;
 
 /**
@@ -44,7 +44,7 @@ import mage.game.permanent.token.SoldierToken;
 public class AttendedKnight extends CardImpl {
 
     public AttendedKnight(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{2}{W}");
+        super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{2}{W}");
         this.subtype.add("Human");
         this.subtype.add("Knight");
 
@@ -56,7 +56,7 @@ public class AttendedKnight extends CardImpl {
     public void build() {
         // First strike
         this.addAbility(FirstStrikeAbility.getInstance());
-        // When Attended Knight enters the battlefield, put a 1/1 white Soldier creature token onto the battlefield.
+        // When Attended Knight enters the battlefield, create a 1/1 white Soldier creature token.
         this.addAbility(new EntersBattlefieldTriggeredAbility(new CreateTokenEffect(new SoldierToken())));
     }
 

@@ -25,10 +25,9 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-
 package mage.cards.w;
 
-import mage.constants.CardType;
+import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.DiesTriggeredAbility;
@@ -37,9 +36,8 @@ import mage.abilities.keyword.DeathtouchAbility;
 import mage.abilities.keyword.LifelinkAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
+import mage.constants.CardType;
 import mage.game.permanent.token.Token;
-
-import java.util.UUID;
 
 /**
  *
@@ -47,8 +45,8 @@ import java.util.UUID;
  */
 public class WurmcoilEngine extends CardImpl {
 
-    public WurmcoilEngine (UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.ARTIFACT,CardType.CREATURE},"{6}");
+    public WurmcoilEngine(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId, setInfo, new CardType[]{CardType.ARTIFACT, CardType.CREATURE}, "{6}");
         this.subtype.add("Wurm");
         this.power = new MageInt(6);
         this.toughness = new MageInt(6);
@@ -56,14 +54,14 @@ public class WurmcoilEngine extends CardImpl {
         // Deathtouch, lifelink
         this.addAbility(DeathtouchAbility.getInstance());
         this.addAbility(LifelinkAbility.getInstance());
-        
-        // When Wurmcoil Engine dies, put a 3/3 colorless Wurm artifact creature token with deathtouch and a 3/3 colorless Wurm artifact creature token with lifelink onto the battlefield.        
+
+        // When Wurmcoil Engine dies, create a 3/3 colorless Wurm artifact creature token with deathtouch and a 3/3 colorless Wurm artifact creature token with lifelink.
         Ability ability = new DiesTriggeredAbility(new CreateTokenEffect(new Wurm1Token(expansionSetCode)), false);
         ability.addEffect(new CreateTokenEffect(new Wurm2Token(expansionSetCode)));
         this.addAbility(ability);
     }
 
-    public WurmcoilEngine (final WurmcoilEngine card) {
+    public WurmcoilEngine(final WurmcoilEngine card) {
         super(card);
     }
 
@@ -75,6 +73,7 @@ public class WurmcoilEngine extends CardImpl {
 }
 
 class Wurm1Token extends Token {
+
     public Wurm1Token(String setCode) {
         super("Wurm", "a 3/3 colorless Wurm artifact creature token with deathtouch");
         setOriginalExpansionSetCode(setCode);
@@ -88,6 +87,7 @@ class Wurm1Token extends Token {
 }
 
 class Wurm2Token extends Token {
+
     public Wurm2Token(String setCode) {
         super("Wurm", "a 3/3 colorless Wurm artifact creature token with lifelink");
         setOriginalExpansionSetCode(setCode);

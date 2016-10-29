@@ -54,7 +54,7 @@ public class ForbiddenOrchard extends CardImpl {
         // {T}: Add one mana of any color to your mana pool.
         this.addAbility(new AnyColorManaAbility());
         
-        // Whenever you tap Forbidden Orchard for mana, put a 1/1 colorless Spirit creature token onto the battlefield under target opponent's control.
+        // Whenever you tap Forbidden Orchard for mana, create a 1/1 colorless Spirit creature token under target opponent's control.
         this.addAbility(new ForbiddenOrchardTriggeredAbility());
     }
 

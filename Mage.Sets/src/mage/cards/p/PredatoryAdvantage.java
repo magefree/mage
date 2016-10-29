@@ -58,7 +58,7 @@ public class PredatoryAdvantage extends CardImpl {
 
 
 
-        // At the beginning of each opponent's end step, if that player didn't cast a creature spell this turn, put a 2/2 green Lizard creature token onto the battlefield.
+        // At the beginning of each opponent's end step, if that player didn't cast a creature spell this turn, create a 2/2 green Lizard creature token.
         this.addAbility(new BeginningOfEndStepTriggeredAbility(Zone.BATTLEFIELD, new CreateTokenEffect(new LizardToken()), TargetController.OPPONENT, new DidNotCastCreatureCondition(), false), new CastCreatureWatcher());
     }
 
@@ -124,7 +124,7 @@ class CastCreatureWatcher extends Watcher {
 class LizardToken extends Token {
 
     public LizardToken() {
-        super("Lizard", "2/2 green Lizard creature token onto the battlefield");
+        super("Lizard", "2/2 green Lizard creature token");
         cardType.add(CardType.CREATURE);
         color.setGreen(true);
         subtype.add("Lizard");

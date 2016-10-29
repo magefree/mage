@@ -50,7 +50,7 @@ public class DruidsDeliverance extends CardImpl {
 
 
         // Prevent all combat damage that would be dealt to you this turn. Populate.
-        // (Put a token onto the battlefield that's a copy of a creature token you control.)
+        // (Create a token that's a copy of a creature token you control.)
         this.getSpellAbility().addEffect(new DruidsDeliverancePreventCombatDamageEffect());
         this.getSpellAbility().addEffect(new PopulateEffect());
     }

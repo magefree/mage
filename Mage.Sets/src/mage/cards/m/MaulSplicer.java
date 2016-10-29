@@ -65,7 +65,7 @@ public class MaulSplicer extends CardImpl {
         this.power = new MageInt(1);
         this.toughness = new MageInt(1);
 
-        // When Maul Splicer enters the battlefield, put two 3/3 colorless Golem artifact creature tokens onto the battlefield.        
+        // When Maul Splicer enters the battlefield, create two 3/3 colorless Golem artifact creature tokens.        
         this.addAbility(new EntersBattlefieldTriggeredAbility(new CreateTokenEffect(new GolemToken(expansionSetCode), 2)));
         
         // Golem creatures you control have trample.

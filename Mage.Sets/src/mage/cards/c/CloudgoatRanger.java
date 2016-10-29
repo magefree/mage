@@ -71,7 +71,7 @@ public class CloudgoatRanger extends CardImpl {
         this.power = new MageInt(3);
         this.toughness = new MageInt(3);
 
-        // When Cloudgoat Ranger enters the battlefield, put three 1/1 white Kithkin Soldier creature tokens onto the battlefield.
+        // When Cloudgoat Ranger enters the battlefield, create three 1/1 white Kithkin Soldier creature tokens.
         this.addAbility(new EntersBattlefieldTriggeredAbility(new CreateTokenEffect(new KithkinToken(), 3), false));
         //Tap three untapped Kithkin you control: Cloudgoat Ranger gets +2/+0 and gains flying until end of turn.
         Effect effect = new BoostSourceEffect(2, 0, Duration.EndOfTurn);

@@ -58,7 +58,7 @@ public class PonybackBrigade extends CardImpl {
         this.power = new MageInt(2);
         this.toughness = new MageInt(2);
 
-        // When Ponyback Brigade enters the battlefield or is turned face up, put three 1/1 red Goblin creature tokens onto the battlefield.
+        // When Ponyback Brigade enters the battlefield or is turned face up, create three 1/1 red Goblin creature tokens.
         this.addAbility(new PonybackBrigadeAbility(new GoblinToken()));
 
         // Morph {2}{R}{W}{B}

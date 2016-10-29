@@ -66,7 +66,7 @@ public class SpringjackPasture extends CardImpl {
         // {tap}: Add {C} to your mana pool.
         this.addAbility(new ColorlessManaAbility());
 
-        // {4}, {tap}: Put a 0/1 white Goat creature token onto the battlefield.
+        // {4}, {tap}: Create a 0/1 white Goat creature token.
         Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new CreateTokenEffect(new GoatToken()), new ManaCostsImpl("{4}"));
         ability.addCost(new TapSourceCost());
         this.addAbility(ability);

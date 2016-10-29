@@ -43,7 +43,7 @@ public class DragonFodder extends CardImpl {
     public DragonFodder(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{1}{R}");
 
-        // Put two 1/1 red Goblin creature tokens onto the battlefield.
+        // Create two 1/1 red Goblin creature tokens.
         this.getSpellAbility().addEffect(new CreateTokenEffect(new GoblinToken(), 2));
     }
 

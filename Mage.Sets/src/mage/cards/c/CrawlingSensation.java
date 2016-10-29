@@ -50,12 +50,12 @@ import mage.game.permanent.token.InsectToken;
 public class CrawlingSensation extends CardImpl {
 
     public CrawlingSensation(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.ENCHANTMENT},"{2}{G}");
+        super(ownerId, setInfo, new CardType[]{CardType.ENCHANTMENT}, "{2}{G}");
 
         // At the beginning of your upkeep, you may put the top two cards of your library into your graveyard.
         this.addAbility(new OnEventTriggeredAbility(GameEvent.EventType.UPKEEP_STEP_PRE, "beginning of your upkeep", new PutTopCardOfLibraryIntoGraveControllerEffect(2), true));
 
-        // Whenever one or more land cards are put into your graveyard from anywhere for the first time each turn, put a 1/1 green Insect creature token onto the battlefield.
+        // Whenever one or more land cards are put into your graveyard from anywhere for the first time each turn, create a 1/1 green Insect creature token.
         this.addAbility(new CrawlingSensationTriggeredAbility());
     }
 
@@ -90,13 +90,13 @@ class CrawlingSensationTriggeredAbility extends TriggeredAbilityImpl {
         if (zEvent != null && Zone.GRAVEYARD == zEvent.getToZone() && zEvent.getCards() != null) {
             Integer usedOnTurn = (Integer) game.getState().getValue("usedOnTurn" + getOriginalId());
             if (usedOnTurn == null || usedOnTurn < game.getTurnNum()) {
-                for (Card card : zEvent.getCards()) {                       
+                for (Card card : zEvent.getCards()) {
                     if (card != null) {
                         UUID cardOwnerId = card.getOwnerId();
                         List<CardType> cardType = card.getCardType();
 
-                        if (cardOwnerId != null 
-                                && card.getOwnerId().equals(getControllerId()) 
+                        if (cardOwnerId != null
+                                && card.getOwnerId().equals(getControllerId())
                                 && cardType != null
                                 && card.getCardType().contains(CardType.LAND)) {
                             game.getState().setValue("usedOnTurn" + getOriginalId(), game.getTurnNum());
@@ -116,6 +116,6 @@ class CrawlingSensationTriggeredAbility extends TriggeredAbilityImpl {
 
     @Override
     public String getRule() {
-        return "Whenever one or more land cards are put into your graveyard from anywhere for the first time each turn, put a 1/1 green Insect creature token onto the battlefield.";
+        return "Whenever one or more land cards are put into your graveyard from anywhere for the first time each turn, create a 1/1 green Insect creature token.";
     }
 }

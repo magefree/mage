@@ -52,7 +52,7 @@ public class MoggInfestation extends CardImpl {
     public MoggInfestation(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{3}{R}{R}");
 
-        // Destroy all creatures target player controls. For each creature that died this way, put two 1/1 red Goblin creature tokens onto the battlefield under that player's control.
+        // Destroy all creatures target player controls. For each creature that died this way, create two 1/1 red Goblin creature tokens under that player's control.
         getSpellAbility().addTarget(new TargetPlayer());
         getSpellAbility().addEffect(new MoggInfestationEffect());
 
@@ -72,7 +72,7 @@ class MoggInfestationEffect extends OneShotEffect {
 
     public MoggInfestationEffect() {
         super(Outcome.DestroyPermanent);
-        this.staticText = "Destroy all creatures target player controls. For each creature that died this way, put two 1/1 red Goblin creature tokens onto the battlefield under that player's control";
+        this.staticText = "Destroy all creatures target player controls. For each creature that died this way, create two 1/1 red Goblin creature tokens under that player's control";
     }
 
     public MoggInfestationEffect(final MoggInfestationEffect effect) {

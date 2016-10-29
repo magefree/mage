@@ -53,7 +53,7 @@ public class SpawningBed extends CardImpl {
         // {T}: Add {C} to your mana pool.
         this.addAbility(new ColorlessManaAbility());
 
-        // {6}, {T}, Sacrifice Spawning Bed: Put three 1/1 colorless Eldrazi Scion creature tokens onto the battlefield. They have "Sacrifice this creature: Add {C} to your mana pool."
+        // {6}, {T}, Sacrifice Spawning Bed: Create three 1/1 colorless Eldrazi Scion creature tokens. They have "Sacrifice this creature: Add {C} to your mana pool."
         Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new CreateTokenEffect(new EldraziScionToken(), 3), new ManaCostsImpl("{6}"));
         ability.addCost(new TapSourceCost());
         ability.addCost(new SacrificeSourceCost());

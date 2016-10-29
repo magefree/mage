@@ -58,7 +58,7 @@ public class FeastOrFamine extends CardImpl {
     public FeastOrFamine(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.INSTANT},"{3}{B}");
 
-        // Choose one - Put a 2/2 black Zombie creature token onto the battlefield; 
+        // Choose one - Create a 2/2 black Zombie creature token; 
         this.getSpellAbility().addEffect(new CreateTokenEffect(new ZombieToken()));
         
         // or destroy target nonartifact, nonblack creature and it can't be regenerated.

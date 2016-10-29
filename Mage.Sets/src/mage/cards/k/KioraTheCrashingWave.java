@@ -83,7 +83,7 @@ public class KioraTheCrashingWave extends CardImpl {
         ability.addEffect(new PlayAdditionalLandsControllerEffect(1, Duration.EndOfTurn));
         this.addAbility(ability);
 
-        // -5: You get an emblem with "At the beginning of your end step, put a 9/9 blue Kraken creature token onto the battlefield."
+        // -5: You get an emblem with "At the beginning of your end step, create a 9/9 blue Kraken creature token."
         this.addAbility(new LoyaltyAbility(new GetEmblemEffect(new KioraEmblem()), -5));
 
     }
@@ -158,8 +158,8 @@ class KioraPreventionEffect extends PreventionEffectImpl {
 }
 
 /**
- * Emblem: "At the beginning of your end step, put a 9/9 blue Kraken creature
- * token onto the battlefield."
+ * Emblem: "At the beginning of your end step, create a 9/9 blue Kraken creature
+ * token."
  */
 class KioraEmblem extends Emblem {
 

@@ -51,9 +51,9 @@ import mage.target.TargetPlayer;
 public class CellarDoor extends CardImpl {
 
     public CellarDoor(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.ARTIFACT},"{2}");
+        super(ownerId, setInfo, new CardType[]{CardType.ARTIFACT}, "{2}");
 
-        // {3}, {tap}: Target player puts the bottom card of his or her library into his or her graveyard. If it's a creature card, you put a 2/2 black Zombie creature token onto the battlefield.
+        // {3}, {tap}: Target player puts the bottom card of his or her library into his or her graveyard. If it's a creature card, you create a 2/2 black Zombie creature token.
         SimpleActivatedAbility ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new CellarDoorEffect(), new GenericManaCost(3));
         ability.addCost(new TapSourceCost());
         ability.addTarget(new TargetPlayer());
@@ -74,7 +74,7 @@ class CellarDoorEffect extends OneShotEffect {
 
     public CellarDoorEffect() {
         super(Outcome.PutCreatureInPlay);
-        this.staticText = "Target player puts the bottom card of his or her library into his or her graveyard. If it's a creature card, you put a 2/2 black Zombie creature token onto the battlefield";
+        this.staticText = "Target player puts the bottom card of his or her library into his or her graveyard. If it's a creature card, you create a 2/2 black Zombie creature token";
     }
 
     public CellarDoorEffect(final CellarDoorEffect effect) {

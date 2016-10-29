@@ -71,7 +71,7 @@ public class XenagosTheReveler extends CardImpl {
         // +1: Add X mana in any combination of {R} and/or {G} to your mana pool, where X is the number of creatures you control.
         this.addAbility(new LoyaltyAbility(new XenagosManaEffect(), +1));
 
-        // 0: Put a 2/2 red and green Satyr creature token with haste onto the battlefield.
+        // 0: Create a 2/2 red and green Satyr creature token with haste.
         this.addAbility(new LoyaltyAbility(new CreateTokenEffect(new XenagosSatyrToken()), 0));
 
         // -6: Exile the top seven cards of your library. You may put any number of creature and/or land cards from among them onto the battlefield.

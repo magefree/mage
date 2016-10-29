@@ -46,7 +46,7 @@ import mage.game.permanent.token.EldraziScionToken;
 public class EldraziSkyspawner extends CardImpl {
 
     public EldraziSkyspawner(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{2}{U}");
+        super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{2}{U}");
         this.subtype.add("Eldrazi");
         this.subtype.add("Drone");
         this.power = new MageInt(2);
@@ -56,9 +56,9 @@ public class EldraziSkyspawner extends CardImpl {
         this.addAbility(new DevoidAbility(this.color));
         // Flying
         this.addAbility(FlyingAbility.getInstance());
-        // When Eldrazi Skyspawner enters the battlefield, put a 1/1 colorless Eldrazi Scion creature token onto the battlefield. It has "Sacrifice this creature: Add {C} to your mana pool."
+        // When Eldrazi Skyspawner enters the battlefield, create a 1/1 colorless Eldrazi Scion creature token. It has "Sacrifice this creature: Add {C} to your mana pool."
         Effect effect = new CreateTokenEffect(new EldraziScionToken());
-        effect.setText("put a 1/1 colorless Eldrazi Scion creature token onto the battlefield. It has \"Sacrifice this creature: Add {C} to your mana pool.\"");
+        effect.setText("create a 1/1 colorless Eldrazi Scion creature token. It has \"Sacrifice this creature: Add {C} to your mana pool.\"");
         this.addAbility(new EntersBattlefieldTriggeredAbility(effect, false));
     }
 

@@ -54,10 +54,10 @@ public class VituGhaziGuildmage extends CardImpl {
         this.power = new MageInt(2);
         this.toughness = new MageInt(2);
 
-        // {4}{G}{W}: Put a 3/3 green Centaur creature token onto the battlefield.
+        // {4}{G}{W}: Create a 3/3 green Centaur creature token.
         this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new CreateTokenEffect(new mage.game.permanent.token.CentaurToken()), new ManaCostsImpl("{4}{G}{W}")));
 
-        // {2}{G}{W}: Populate. (Put a token onto the battlefield that's a copy of a creature token you control.)
+        // {2}{G}{W}: Populate. (Create a token that's a copy of a creature token you control.)
         this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new PopulateEffect(), new ManaCostsImpl("{2}{G}{W}")));
     }
 

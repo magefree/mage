@@ -50,7 +50,7 @@ public class VerdantForce extends CardImpl {
         this.power = new MageInt(7);
         this.toughness = new MageInt(7);
 
-        // At the beginning of each upkeep, put a 1/1 green Saproling creature token onto the battlefield.
+        // At the beginning of each upkeep, create a 1/1 green Saproling creature token.
         this.addAbility(new BeginningOfUpkeepTriggeredAbility(new CreateTokenEffect(new SaprolingToken()), TargetController.ANY, false));
     }
 

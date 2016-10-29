@@ -56,7 +56,7 @@ public class GolgariGermination extends CardImpl {
     public GolgariGermination(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.ENCHANTMENT},"{1}{B}{G}");
 
-        // Whenever a nontoken creature you control dies, put a 1/1 green Saproling creature token onto the battlefield.
+        // Whenever a nontoken creature you control dies, create a 1/1 green Saproling creature token.
         this.addAbility(new DiesCreatureTriggeredAbility(new CreateTokenEffect(new SaprolingToken()), false, filter));
     }
 

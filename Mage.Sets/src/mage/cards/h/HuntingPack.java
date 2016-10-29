@@ -44,7 +44,7 @@ public class HuntingPack extends CardImpl {
     public HuntingPack(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.INSTANT},"{5}{G}{G}");
 
-        // Put a 4/4 green Beast creature token onto the battlefield.
+        // Create a 4/4 green Beast creature token.
         this.getSpellAbility().addEffect(new CreateTokenEffect(new BeastToken2(), 1));
         // Storm
         this.addAbility(new StormAbility());

@@ -64,7 +64,7 @@ public class StitcherGeralf extends CardImpl {
         this.power = new MageInt(3);
         this.toughness = new MageInt(4);
 
-        // {2}{U}, {tap}: Each player puts the top three cards of his or her library into his or her graveyard. Exile up to two creature cards put into graveyards this way. Put an X/X blue Zombie creature token onto the battlefield, where X is the total power of the cards exiled this way.
+        // {2}{U}, {tap}: Each player puts the top three cards of his or her library into his or her graveyard. Exile up to two creature cards put into graveyards this way. Create an X/X blue Zombie creature token, where X is the total power of the cards exiled this way.
         Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new StitcherGeralfEffect(), new ManaCostsImpl("{2}{U}"));
         ability.addCost(new TapSourceCost());
         this.addAbility(ability);
@@ -84,7 +84,7 @@ class StitcherGeralfEffect extends OneShotEffect {
 
     public StitcherGeralfEffect() {
         super(Outcome.PutCreatureInPlay);
-        this.staticText = "Each player puts the top three cards of his or her library into his or her graveyard. Exile up to two creature cards put into graveyards this way. Put an X/X blue Zombie creature token onto the battlefield, where X is the total power of the cards exiled this way";
+        this.staticText = "Each player puts the top three cards of his or her library into his or her graveyard. Exile up to two creature cards put into graveyards this way. Create an X/X blue Zombie creature token, where X is the total power of the cards exiled this way";
     }
 
     public StitcherGeralfEffect(final StitcherGeralfEffect effect) {

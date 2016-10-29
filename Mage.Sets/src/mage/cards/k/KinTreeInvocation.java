@@ -52,7 +52,7 @@ public class KinTreeInvocation extends CardImpl {
         super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{B}{G}");
 
 
-        // Put an X/X black and green Spirit Warrior creature token onto the battlefield, where X is the greatest toughness among creatures you control.
+        // Create an X/X black and green Spirit Warrior creature token, where X is the greatest toughness among creatures you control.
         this.getSpellAbility().addEffect(new KinTreeInvocationCreateTokenEffect());
         
     }
@@ -71,7 +71,7 @@ class KinTreeInvocationCreateTokenEffect extends OneShotEffect {
 
     public KinTreeInvocationCreateTokenEffect() {
         super(Outcome.PutCreatureInPlay);
-        staticText = "Put an X/X black and green Spirit Warrior creature token onto the battlefield, where X is the greatest toughness among creatures you control";
+        staticText = "Create an X/X black and green Spirit Warrior creature token, where X is the greatest toughness among creatures you control";
     }
 
     public KinTreeInvocationCreateTokenEffect(final KinTreeInvocationCreateTokenEffect effect) {
@@ -98,7 +98,7 @@ class KinTreeInvocationCreateTokenEffect extends OneShotEffect {
         ObjectColor objectColor = new ObjectColor();
         objectColor.setBlack(true);
         objectColor.setGreen(true);
-        Token token = new Token("Spirit Warrior", "X/X black and green Spirit Warrior creature token onto the battlefield, where X is the greatest toughness among creatures you control",
+        Token token = new Token("Spirit Warrior", "X/X black and green Spirit Warrior creature token, where X is the greatest toughness among creatures you control",
                 objectColor, list, value, value, new AbilitiesImpl<>());
         token.getAbilities().newId(); // neccessary if token has ability like DevourAbility()
         token.putOntoBattlefield(1, game, source.getSourceId(), source.getControllerId());

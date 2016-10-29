@@ -54,7 +54,7 @@ public class BeaconOfCreation extends CardImpl {
         super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{3}{G}");
 
 
-        // Put a 1/1 green Insect creature token onto the battlefield for each Forest you control.
+        // Create a 1/1 green Insect creature token for each Forest you control.
         this.getSpellAbility().addEffect(new CreateTokenEffect(new InsectToken(), new PermanentsOnBattlefieldCount(filter)));
         // Shuffle Beacon of Creation into its owner's library.
         this.getSpellAbility().addEffect(ShuffleSpellEffect.getInstance());

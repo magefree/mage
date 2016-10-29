@@ -63,7 +63,7 @@ public class PrototypePortal extends CardImpl {
         // Imprint - When Prototype Portal enters the battlefield, you may exile an artifact card from your hand.
         this.addAbility(new EntersBattlefieldTriggeredAbility(new PrototypePortalEffect(), true));
 
-        // {X}, {tap}: Put a token that's a copy of the exiled card onto the battlefield. X is the converted mana cost of that card.
+        // {X}, {tap}: Create a token that's a copy of the exiled card. X is the converted mana cost of that card.
         Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new PrototypePortalCreateTokenEffect(), new ManaCostsImpl("{X}"));
         ability.addCost(new TapSourceCost());
         this.addAbility(ability);
@@ -143,7 +143,7 @@ class PrototypePortalCreateTokenEffect extends OneShotEffect {
 
     public PrototypePortalCreateTokenEffect() {
         super(Outcome.PutCreatureInPlay);
-        this.staticText = "Put a token that's a copy of the exiled card onto the battlefield. X is the converted mana cost of that card";
+        this.staticText = "Create a token that's a copy of the exiled card. X is the converted mana cost of that card";
     }
 
     public PrototypePortalCreateTokenEffect(final PrototypePortalCreateTokenEffect effect) {

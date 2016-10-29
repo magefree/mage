@@ -67,7 +67,7 @@ public class TwilightDrover extends CardImpl {
         // Whenever a creature token leaves the battlefield, put a +1/+1 counter on Twilight Drover.
         this.addAbility(new LeavesBattlefieldAllTriggeredAbility(new AddCountersSourceEffect(CounterType.P1P1.createInstance()), filter));
 
-        // {2}{W}, Remove a +1/+1 counter from Twilight Drover: Put two 1/1 white Spirit creature tokens with flying onto the battlefield.
+        // {2}{W}, Remove a +1/+1 counter from Twilight Drover: Create two 1/1 white Spirit creature tokens with flying.
         Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new CreateTokenEffect(new SpiritWhiteToken("RAV"), 2), new ManaCostsImpl<>("{2}{W}"));
         ability.addCost(new RemoveCountersSourceCost(CounterType.P1P1.createInstance()));
         this.addAbility(ability);

@@ -49,7 +49,7 @@ public class PhyrexianRebirth extends CardImpl {
     public PhyrexianRebirth(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{4}{W}{W}");
 
-        // Destroy all creatures, then put an X/X colorless Horror artifact creature token onto the battlefield, where X is the number of creatures destroyed this way.
+        // Destroy all creatures, then create an X/X colorless Horror artifact creature token, where X is the number of creatures destroyed this way.
         this.getSpellAbility().addEffect(new PhyrexianRebirthEffect());
     }
 
@@ -66,7 +66,7 @@ public class PhyrexianRebirth extends CardImpl {
 
         public PhyrexianRebirthEffect() {
             super(Outcome.DestroyPermanent);
-            staticText = "Destroy all creatures, then put an X/X colorless Horror artifact creature token onto the battlefield, where X is the number of creatures destroyed this way";
+            staticText = "Destroy all creatures, then create an X/X colorless Horror artifact creature token, where X is the number of creatures destroyed this way";
         }
 
         public PhyrexianRebirthEffect(PhyrexianRebirthEffect ability) {
