@@ -27,7 +27,9 @@
  */
 package mage.cards.t;
 
+import java.util.LinkedHashSet;
 import java.util.List;
+import java.util.Set;
 import java.util.UUID;
 import mage.MageObject;
 import mage.abilities.Ability;
@@ -54,7 +56,7 @@ import mage.target.common.TargetCardInLibrary;
 public class ThoughtHemorrhage extends CardImpl {
 
     public ThoughtHemorrhage(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{2}{B}{R}");
+        super(ownerId, setInfo, new CardType[]{CardType.SORCERY}, "{2}{B}{R}");
 
         // Name a nonland card. Target player reveals his or her hand. Thought Hemorrhage deals 3 damage to that player for each card with that name revealed this way. Search that player's graveyard, hand, and library for all cards with that name and exile them. Then that player shuffles his or her library.
         this.getSpellAbility().addTarget(new TargetPlayer());
@@ -108,12 +110,13 @@ class ThoughtHemorrhageEffect extends OneShotEffect {
                 FilterCard filterNamedCards = new FilterCard();
                 filterNamedCards.add(new NamePredicate(cardName));
 
+                Set<Card> toExile = new LinkedHashSet<>();
                 // The cards you're searching for must be found and exiled if they're in the graveyard because it's a public zone.
                 // Finding those cards in the hand and library is optional, because those zones are hidden (even if the hand is temporarily revealed).
                 // search cards in graveyard
                 for (Card checkCard : targetPlayer.getGraveyard().getCards(game)) {
                     if (checkCard.getName().equals(cardName)) {
-                        controller.moveCardToExileWithInfo(checkCard, null, "", source.getSourceId(), game, Zone.GRAVEYARD, true);
+                        toExile.add(checkCard);
                     }
                 }
 
@@ -124,7 +127,7 @@ class ThoughtHemorrhageEffect extends OneShotEffect {
                     for (UUID targetId : targets) {
                         Card targetCard = targetPlayer.getHand().get(targetId, game);
                         if (targetCard != null) {
-                            controller.moveCardToExileWithInfo(targetCard, null, "", source.getSourceId(), game, Zone.HAND, true);
+                            toExile.add(targetCard);
                         }
                     }
                 }
@@ -136,9 +139,10 @@ class ThoughtHemorrhageEffect extends OneShotEffect {
                 for (UUID cardId : targetCardsLibrary.getTargets()) {
                     Card card = game.getCard(cardId);
                     if (card != null) {
-                        controller.moveCardToExileWithInfo(card, null, "", source.getSourceId(), game, Zone.LIBRARY, true);
+                        toExile.add(card);
                     }
                 }
+                controller.moveCards(toExile, Zone.EXILED, source, game);
                 targetPlayer.shuffleLibrary(source, game);
                 return true;
             }
