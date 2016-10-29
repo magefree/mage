@@ -29,15 +29,12 @@ package mage.sets;
 
 import mage.cards.CardGraphicInfo;
 import mage.cards.ExpansionSet;
-<<<<<<< Updated upstream
-=======
 import mage.cards.h.HighTide;
-import mage.constants.SetType;
->>>>>>> Stashed changes
 import mage.constants.Rarity;
 import mage.constants.SetType;
 
 public class MediaInserts extends ExpansionSet {
+
     private static final MediaInserts fINSTANCE = new MediaInserts();
 
     public static MediaInserts getInstance() {
