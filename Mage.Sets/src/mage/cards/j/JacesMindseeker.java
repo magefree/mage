@@ -27,6 +27,7 @@
  */
 package mage.cards.j;
 
+import java.util.HashSet;
 import java.util.Set;
 import java.util.UUID;
 import mage.MageInt;
@@ -56,7 +57,7 @@ import mage.target.common.TargetOpponent;
 public class JacesMindseeker extends CardImpl {
 
     public JacesMindseeker(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{4}{U}{U}");
+        super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{4}{U}{U}");
         this.subtype.add("Fish");
         this.subtype.add("Illusion");
 
@@ -106,7 +107,9 @@ class JaceMindseekerEffect extends OneShotEffect {
         Player targetOpponent = game.getPlayer(targetPointer.getFirst(game, source));
         if (targetOpponent != null) {
             Set<Card> allCards = targetOpponent.getLibrary().getTopCards(game, 5);
-            targetOpponent.moveCards(allCards, Zone.GRAVEYARD, source, game);
+            Set<Card> toMove = new HashSet<>();
+            toMove.addAll(allCards);
+            targetOpponent.moveCards(toMove, Zone.GRAVEYARD, source, game);
             for (Card card : allCards) {
                 if (filter.match(card, game)) {
                     Zone zone = game.getState().getZone(card.getId());
@@ -117,25 +120,25 @@ class JaceMindseekerEffect extends OneShotEffect {
                     }
                 }
             }
-        }
 
-        // cast an instant or sorcery for free
-        if (cardsToCast.size() > 0) {
-            Player controller = game.getPlayer(source.getControllerId());
-            if (controller != null) {
-                TargetCard target = new TargetCard(Zone.GRAVEYARD, filter); // zone should be ignored here
-                target.setNotTarget(true);
-                if (controller.chooseUse(outcome, "Cast an instant or sorcery card from among them for free?", source, game)
-                        && controller.choose(outcome, cardsToCast, target, game)) {
-                    Card card = cardsToCast.get(target.getFirstTarget(), game);
-                    if (card != null) {
-                        controller.cast(card.getSpellAbility(), game, true);
+            // cast an instant or sorcery for free
+            if (cardsToCast.size() > 0) {
+                Player controller = game.getPlayer(source.getControllerId());
+                if (controller != null) {
+                    TargetCard target = new TargetCard(Zone.GRAVEYARD, filter); // zone should be ignored here
+                    target.setNotTarget(true);
+                    if (controller.chooseUse(outcome, "Cast an instant or sorcery card from among them for free?", source, game)
+                            && controller.choose(outcome, cardsToCast, target, game)) {
+                        Card card = cardsToCast.get(target.getFirstTarget(), game);
+                        if (card != null) {
+                            controller.cast(card.getSpellAbility(), game, true);
+                        }
                     }
                 }
+
             }
-
+            return true;
         }
-
         return false;
     }
 }
