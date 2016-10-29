@@ -65,6 +65,7 @@ public class Commander2016 extends ExpansionSet {
         cards.add(new SetCardInfo("Beast Within", 141, Rarity.UNCOMMON, mage.cards.b.BeastWithin.class));
         cards.add(new SetCardInfo("Beastmaster Ascension", 142, Rarity.RARE, mage.cards.b.BeastmasterAscension.class));
         cards.add(new SetCardInfo("Bituminous Blast", 182, Rarity.UNCOMMON, mage.cards.b.BituminousBlast.class));
+        cards.add(new SetCardInfo("Blasphemous Act", 120, Rarity.RARE, mage.cards.b.BlasphemousAct.class));
         cards.add(new SetCardInfo("Blazing Archon", 58, Rarity.RARE, mage.cards.b.BlazingArchon.class));
         cards.add(new SetCardInfo("Blind Obedience", 59, Rarity.RARE, mage.cards.b.BlindObedience.class));
         cards.add(new SetCardInfo("Blood Tyrant", 183, Rarity.RARE, mage.cards.b.BloodTyrant.class));
