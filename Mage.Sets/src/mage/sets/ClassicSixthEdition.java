@@ -28,6 +28,11 @@
 package mage.sets;
 
 import mage.cards.ExpansionSet;
+import mage.cards.d.DrySpell;
+import mage.cards.f.FeastOfTheUnicorn;
+import mage.cards.m.MesaFalcon;
+import mage.cards.s.SoldeviSage;
+import mage.cards.v.VodalianSoldiers;
 import mage.constants.SetType;
 import mage.constants.Rarity;
 import mage.cards.CardGraphicInfo;
@@ -128,7 +133,7 @@ public class ClassicSixthEdition extends ExpansionSet {
         cards.add(new SetCardInfo("Dread of Night", 122, Rarity.UNCOMMON, mage.cards.d.DreadOfNight.class));
         cards.add(new SetCardInfo("Dream Cache", 66, Rarity.COMMON, mage.cards.d.DreamCache.class));
         cards.add(new SetCardInfo("Drudge Skeletons", 123, Rarity.COMMON, mage.cards.d.DrudgeSkeletons.class));
-        cards.add(new SetCardInfo("Dry Spell", 124, Rarity.COMMON, mage.cards.d.DrySpell1.class));
+        cards.add(new SetCardInfo("Dry Spell", 124, Rarity.COMMON, DrySpell.class));
         cards.add(new SetCardInfo("Dwarven Ruins", 323, Rarity.UNCOMMON, mage.cards.d.DwarvenRuins.class));
         cards.add(new SetCardInfo("Early Harvest", 222, Rarity.RARE, mage.cards.e.EarlyHarvest.class));
         cards.add(new SetCardInfo("Earthquake", 173, Rarity.RARE, mage.cards.e.Earthquake.class));
@@ -148,7 +153,7 @@ public class ClassicSixthEdition extends ExpansionSet {
         cards.add(new SetCardInfo("Familiar Ground", 228, Rarity.UNCOMMON, mage.cards.f.FamiliarGround.class));
         cards.add(new SetCardInfo("Fatal Blow", 128, Rarity.COMMON, mage.cards.f.FatalBlow.class));
         cards.add(new SetCardInfo("Fear", 129, Rarity.COMMON, mage.cards.f.Fear.class));
-        cards.add(new SetCardInfo("Feast of the Unicorn", 130, Rarity.COMMON, mage.cards.f.FeastOfTheUnicorn1.class));
+        cards.add(new SetCardInfo("Feast of the Unicorn", 130, Rarity.COMMON, FeastOfTheUnicorn.class));
         cards.add(new SetCardInfo("Femeref Archers", 229, Rarity.UNCOMMON, mage.cards.f.FemerefArchers.class));
         cards.add(new SetCardInfo("Feral Shadow", 131, Rarity.COMMON, mage.cards.f.FeralShadow.class));
         cards.add(new SetCardInfo("Fervor", 174, Rarity.RARE, mage.cards.f.Fervor.class));
@@ -245,7 +250,7 @@ public class ClassicSixthEdition extends ExpansionSet {
         cards.add(new SetCardInfo("Meekstone", 299, Rarity.RARE, mage.cards.m.Meekstone.class));
         cards.add(new SetCardInfo("Memory Lapse", 81, Rarity.COMMON, mage.cards.m.MemoryLapse.class));
         cards.add(new SetCardInfo("Merfolk of the Pearl Trident", 82, Rarity.COMMON, mage.cards.m.MerfolkOfThePearlTrident.class));
-        cards.add(new SetCardInfo("Mesa Falcon", 31, Rarity.COMMON, mage.cards.m.MesaFalcon1.class));
+        cards.add(new SetCardInfo("Mesa Falcon", 31, Rarity.COMMON, MesaFalcon.class));
         cards.add(new SetCardInfo("Millstone", 300, Rarity.RARE, mage.cards.m.Millstone.class));
         cards.add(new SetCardInfo("Mind Warp", 143, Rarity.UNCOMMON, mage.cards.m.MindWarp.class));
         cards.add(new SetCardInfo("Mischievous Poltergeist", 144, Rarity.UNCOMMON, mage.cards.m.MischievousPoltergeist.class));
@@ -331,7 +336,7 @@ public class ClassicSixthEdition extends ExpansionSet {
         cards.add(new SetCardInfo("Skull Catapult", 310, Rarity.UNCOMMON, mage.cards.s.SkullCatapult.class));
         cards.add(new SetCardInfo("Sky Diamond", 311, Rarity.UNCOMMON, mage.cards.s.SkyDiamond.class));
         cards.add(new SetCardInfo("Snake Basket", 312, Rarity.RARE, mage.cards.s.SnakeBasket.class));
-        cards.add(new SetCardInfo("Soldevi Sage", 99, Rarity.UNCOMMON, mage.cards.s.SoldeviSage1.class));
+        cards.add(new SetCardInfo("Soldevi Sage", 99, Rarity.UNCOMMON, SoldeviSage.class));
         cards.add(new SetCardInfo("Soul Net", 313, Rarity.UNCOMMON, mage.cards.s.SoulNet.class));
         cards.add(new SetCardInfo("Spell Blast", 100, Rarity.COMMON, mage.cards.s.SpellBlast.class));
         cards.add(new SetCardInfo("Spirit Link", 43, Rarity.UNCOMMON, mage.cards.s.SpiritLink.class));
@@ -382,7 +387,7 @@ public class ClassicSixthEdition extends ExpansionSet {
         cards.add(new SetCardInfo("Vertigo", 212, Rarity.UNCOMMON, mage.cards.v.Vertigo.class));
         cards.add(new SetCardInfo("Viashino Warrior", 213, Rarity.COMMON, mage.cards.v.ViashinoWarrior.class));
         cards.add(new SetCardInfo("Vitalize", 265, Rarity.COMMON, mage.cards.v.Vitalize.class));
-        cards.add(new SetCardInfo("Vodalian Soldiers", 104, Rarity.COMMON, mage.cards.v.VodalianSoldiers1.class));
+        cards.add(new SetCardInfo("Vodalian Soldiers", 104, Rarity.COMMON, VodalianSoldiers.class));
         cards.add(new SetCardInfo("Volcanic Dragon", 214, Rarity.RARE, mage.cards.v.VolcanicDragon.class));
         cards.add(new SetCardInfo("Volcanic Geyser", 215, Rarity.UNCOMMON, mage.cards.v.VolcanicGeyser.class));
         cards.add(new SetCardInfo("Waiting in the Weeds", 266, Rarity.RARE, mage.cards.w.WaitingInTheWeeds.class));

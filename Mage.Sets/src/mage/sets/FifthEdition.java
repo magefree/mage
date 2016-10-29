@@ -1,6 +1,18 @@
 package mage.sets;
 
 import mage.cards.ExpansionSet;
+import mage.cards.b.BrassclawOrcs;
+import mage.cards.d.DwarvenSoldier;
+import mage.cards.g.GoblinWarDrums;
+import mage.cards.h.HomaridWarrior;
+import mage.cards.i.IcatianScout;
+import mage.cards.i.InitiatesOfTheEbonHand;
+import mage.cards.m.MesaFalcon;
+import mage.cards.m.MindstabThrull;
+import mage.cards.n.Necrite;
+import mage.cards.r.ReefPirates;
+import mage.cards.t.Torture;
+import mage.cards.v.VodalianSoldiers;
 import mage.constants.SetType;
 import mage.constants.Rarity;
 import mage.cards.CardGraphicInfo;
@@ -63,7 +75,7 @@ public class FifthEdition extends ExpansionSet {
         cards.add(new SetCardInfo("Bottle of Suleiman", 354, Rarity.RARE, mage.cards.b.BottleOfSuleiman.class));
         cards.add(new SetCardInfo("Bottomless Vault", 411, Rarity.RARE, mage.cards.b.BottomlessVault.class));
         cards.add(new SetCardInfo("Brainstorm", 76, Rarity.COMMON, mage.cards.b.Brainstorm.class));
-        cards.add(new SetCardInfo("Brassclaw Orcs", 213, Rarity.COMMON, mage.cards.b.BrassclawOrcs1.class));
+        cards.add(new SetCardInfo("Brassclaw Orcs", 213, Rarity.COMMON, BrassclawOrcs.class));
         cards.add(new SetCardInfo("Breeding Pit", 10, Rarity.UNCOMMON, mage.cards.b.BreedingPit.class));
         cards.add(new SetCardInfo("Brothers of Fire", 214, Rarity.COMMON, mage.cards.b.BrothersOfFire.class));
         cards.add(new SetCardInfo("Brushland", 412, Rarity.RARE, mage.cards.b.Brushland.class));
@@ -122,7 +134,7 @@ public class FifthEdition extends ExpansionSet {
         cards.add(new SetCardInfo("Dwarven Catapult", 220, Rarity.UNCOMMON, mage.cards.d.DwarvenCatapult.class));
         cards.add(new SetCardInfo("Dwarven Hold", 414, Rarity.RARE, mage.cards.d.DwarvenHold.class));
         cards.add(new SetCardInfo("Dwarven Ruins", 415, Rarity.UNCOMMON, mage.cards.d.DwarvenRuins.class));
-        cards.add(new SetCardInfo("Dwarven Soldier", 221, Rarity.COMMON, mage.cards.d.DwarvenSoldier1.class));
+        cards.add(new SetCardInfo("Dwarven Soldier", 221, Rarity.COMMON, DwarvenSoldier.class));
         cards.add(new SetCardInfo("Dwarven Warriors", 222, Rarity.COMMON, mage.cards.d.DwarvenWarriors.class));
         cards.add(new SetCardInfo("Earthquake", 223, Rarity.RARE, mage.cards.e.Earthquake.class));
         cards.add(new SetCardInfo("Ebon Stronghold", 416, Rarity.UNCOMMON, mage.cards.e.EbonStronghold.class));
@@ -176,7 +188,7 @@ public class FifthEdition extends ExpansionSet {
         cards.add(new SetCardInfo("Goblin Digging Team", 234, Rarity.COMMON, mage.cards.g.GoblinDiggingTeam.class));
         cards.add(new SetCardInfo("Goblin Hero", 235, Rarity.COMMON, mage.cards.g.GoblinHero.class));
         cards.add(new SetCardInfo("Goblin King", 236, Rarity.RARE, mage.cards.g.GoblinKing.class));
-        cards.add(new SetCardInfo("Goblin War Drums", 237, Rarity.COMMON, mage.cards.g.GoblinWarDrums1.class));
+        cards.add(new SetCardInfo("Goblin War Drums", 237, Rarity.COMMON, GoblinWarDrums.class));
         cards.add(new SetCardInfo("Goblin Warrens", 238, Rarity.RARE, mage.cards.g.GoblinWarrens.class));
         cards.add(new SetCardInfo("Grapeshot Catapult", 375, Rarity.COMMON, mage.cards.g.GrapeshotCatapult.class));
         cards.add(new SetCardInfo("Grizzly Bears", 163, Rarity.COMMON, mage.cards.g.GrizzlyBears.class));
@@ -187,7 +199,7 @@ public class FifthEdition extends ExpansionSet {
         cards.add(new SetCardInfo("Hill Giant", 239, Rarity.COMMON, mage.cards.h.HillGiant.class));
         cards.add(new SetCardInfo("Hollow Trees", 422, Rarity.RARE, mage.cards.h.HollowTrees.class));
         cards.add(new SetCardInfo("Holy Strength", 311, Rarity.COMMON, mage.cards.h.HolyStrength.class));
-        cards.add(new SetCardInfo("Homarid Warrior", 92, Rarity.COMMON, mage.cards.h.HomaridWarrior1.class));
+        cards.add(new SetCardInfo("Homarid Warrior", 92, Rarity.COMMON, HomaridWarrior.class));
         cards.add(new SetCardInfo("Howl from Beyond", 30, Rarity.COMMON, mage.cards.h.HowlFromBeyond.class));
         cards.add(new SetCardInfo("Howling Mine", 377, Rarity.RARE, mage.cards.h.HowlingMine.class));
         cards.add(new SetCardInfo("Hungry Mist", 164, Rarity.COMMON, mage.cards.h.HungryMist.class));
@@ -195,13 +207,13 @@ public class FifthEdition extends ExpansionSet {
         cards.add(new SetCardInfo("Hurloon Minotaur", 240, Rarity.COMMON, mage.cards.h.HurloonMinotaur.class));
         cards.add(new SetCardInfo("Hurricane", 165, Rarity.UNCOMMON, mage.cards.h.Hurricane.class));
         cards.add(new SetCardInfo("Hydroblast", 94, Rarity.UNCOMMON, mage.cards.h.Hydroblast.class));
-        cards.add(new SetCardInfo("Icatian Scout", 313, Rarity.COMMON, mage.cards.i.IcatianScout1.class));
+        cards.add(new SetCardInfo("Icatian Scout", 313, Rarity.COMMON, IcatianScout.class));
         cards.add(new SetCardInfo("Icatian Store", 423, Rarity.RARE, mage.cards.i.IcatianStore.class));
         cards.add(new SetCardInfo("Icatian Town", 314, Rarity.RARE, mage.cards.i.IcatianTown.class));
         cards.add(new SetCardInfo("Imposing Visage", 241, Rarity.COMMON, mage.cards.i.ImposingVisage.class));
         cards.add(new SetCardInfo("Incinerate", 242, Rarity.COMMON, mage.cards.i.Incinerate.class));
         cards.add(new SetCardInfo("Inferno", 243, Rarity.RARE, mage.cards.i.Inferno.class));
-        cards.add(new SetCardInfo("Initiates of the Ebon Hand", 31, Rarity.COMMON, mage.cards.i.InitiatesOfTheEbonHand1.class));
+        cards.add(new SetCardInfo("Initiates of the Ebon Hand", 31, Rarity.COMMON, InitiatesOfTheEbonHand.class));
         cards.add(new SetCardInfo("Instill Energy", 166, Rarity.UNCOMMON, mage.cards.i.InstillEnergy.class));
         cards.add(new SetCardInfo("Ironclaw Orcs", 245, Rarity.COMMON, mage.cards.i.IronclawOrcs.class));
         cards.add(new SetCardInfo("Ironroot Treefolk", 167, Rarity.COMMON, mage.cards.i.IronrootTreefolk.class));
@@ -254,10 +266,10 @@ public class FifthEdition extends ExpansionSet {
         cards.add(new SetCardInfo("Meekstone", 389, Rarity.RARE, mage.cards.m.Meekstone.class));
         cards.add(new SetCardInfo("Memory Lapse", 103, Rarity.COMMON, mage.cards.m.MemoryLapse.class));
         cards.add(new SetCardInfo("Merfolk of the Pearl Trident", 104, Rarity.COMMON, mage.cards.m.MerfolkOfThePearlTrident.class));
-        cards.add(new SetCardInfo("Mesa Falcon", 322, Rarity.COMMON, mage.cards.m.MesaFalcon1.class));
+        cards.add(new SetCardInfo("Mesa Falcon", 322, Rarity.COMMON, MesaFalcon.class));
         cards.add(new SetCardInfo("Millstone", 390, Rarity.RARE, mage.cards.m.Millstone.class));
         cards.add(new SetCardInfo("Mind Ravel", 38, Rarity.COMMON, mage.cards.m.MindRavel.class));
-        cards.add(new SetCardInfo("Mindstab Thrull", 40, Rarity.COMMON, mage.cards.m.MindstabThrull1.class));
+        cards.add(new SetCardInfo("Mindstab Thrull", 40, Rarity.COMMON, MindstabThrull.class));
         cards.add(new SetCardInfo("Mind Warp", 39, Rarity.UNCOMMON, mage.cards.m.MindWarp.class));
         cards.add(new SetCardInfo("Mole Worms", 41, Rarity.UNCOMMON, mage.cards.m.MoleWorms.class));
         cards.add(new SetCardInfo("Mons's Goblin Raiders", 251, Rarity.COMMON, mage.cards.m.MonssGoblinRaiders.class));
@@ -268,7 +280,7 @@ public class FifthEdition extends ExpansionSet {
         cards.add(new SetCardInfo("Mountain Goat", 252, Rarity.COMMON, mage.cards.m.MountainGoat.class));
         cards.add(new SetCardInfo("Murk Dwellers", 42, Rarity.COMMON, mage.cards.m.MurkDwellers.class));
         cards.add(new SetCardInfo("Nature's Lore", 178, Rarity.COMMON, mage.cards.n.NaturesLore.class));
-        cards.add(new SetCardInfo("Necrite", 43, Rarity.COMMON, mage.cards.n.Necrite1.class));
+        cards.add(new SetCardInfo("Necrite", 43, Rarity.COMMON, Necrite.class));
         cards.add(new SetCardInfo("Necropotence", 44, Rarity.RARE, mage.cards.n.Necropotence.class));
         cards.add(new SetCardInfo("Nether Shadow", 45, Rarity.RARE, mage.cards.n.NetherShadow.class));
         cards.add(new SetCardInfo("Nevinyrral's Disk", 391, Rarity.RARE, mage.cards.n.NevinyrralsDisk.class));
@@ -311,7 +323,7 @@ public class FifthEdition extends ExpansionSet {
         cards.add(new SetCardInfo("Raise Dead", 53, Rarity.COMMON, mage.cards.r.RaiseDead.class));
         cards.add(new SetCardInfo("Ray of Command", 114, Rarity.COMMON, mage.cards.r.RayOfCommand.class));
         cards.add(new SetCardInfo("Recall", 115, Rarity.RARE, mage.cards.r.Recall.class));
-        cards.add(new SetCardInfo("Reef Pirates", 116, Rarity.COMMON, mage.cards.r.ReefPirates1.class));
+        cards.add(new SetCardInfo("Reef Pirates", 116, Rarity.COMMON, ReefPirates.class));
         cards.add(new SetCardInfo("Regeneration", 183, Rarity.COMMON, mage.cards.r.Regeneration.class));
         cards.add(new SetCardInfo("Remove Soul", 117, Rarity.COMMON, mage.cards.r.RemoveSoul.class));
         cards.add(new SetCardInfo("Repentant Blacksmith", 330, Rarity.COMMON, mage.cards.r.RepentantBlacksmith.class));
@@ -373,7 +385,7 @@ public class FifthEdition extends ExpansionSet {
         cards.add(new SetCardInfo("Thrull Retainer", 60, Rarity.UNCOMMON, mage.cards.t.ThrullRetainer.class));
         cards.add(new SetCardInfo("Time Bomb", 404, Rarity.RARE, mage.cards.t.TimeBomb.class));
         cards.add(new SetCardInfo("Titania's Song", 194, Rarity.RARE, mage.cards.t.TitaniasSong.class));
-        cards.add(new SetCardInfo("Torture", 61, Rarity.COMMON, mage.cards.t.Torture1.class));
+        cards.add(new SetCardInfo("Torture", 61, Rarity.COMMON, Torture.class));
         cards.add(new SetCardInfo("Touch of Death", 62, Rarity.COMMON, mage.cards.t.TouchOfDeath.class));
         cards.add(new SetCardInfo("Tranquility", 195, Rarity.COMMON, mage.cards.t.Tranquility.class));
         cards.add(new SetCardInfo("Tsunami", 196, Rarity.UNCOMMON, mage.cards.t.Tsunami.class));
@@ -392,7 +404,7 @@ public class FifthEdition extends ExpansionSet {
         cards.add(new SetCardInfo("Vampire Bats", 64, Rarity.COMMON, mage.cards.v.VampireBats.class));
         cards.add(new SetCardInfo("Venom", 198, Rarity.COMMON, mage.cards.v.Venom.class));
         cards.add(new SetCardInfo("Verduran Enchantress", 199, Rarity.RARE, mage.cards.v.VerduranEnchantress.class));
-        cards.add(new SetCardInfo("Vodalian Soldiers", 134, Rarity.COMMON, mage.cards.v.VodalianSoldiers1.class));
+        cards.add(new SetCardInfo("Vodalian Soldiers", 134, Rarity.COMMON, VodalianSoldiers.class));
         cards.add(new SetCardInfo("Wall of Air", 135, Rarity.UNCOMMON, mage.cards.w.WallOfAir.class));
         cards.add(new SetCardInfo("Wall of Bone", 65, Rarity.UNCOMMON, mage.cards.w.WallOfBone.class));
         cards.add(new SetCardInfo("Wall of Brambles", 200, Rarity.UNCOMMON, mage.cards.w.WallOfBrambles.class));

@@ -28,6 +28,7 @@
 package mage.sets;
 
 import mage.cards.ExpansionSet;
+import mage.cards.f.FeveredStrength;
 import mage.constants.SetType;
 import mage.constants.Rarity;
 import mage.cards.CardGraphicInfo;
@@ -105,7 +106,7 @@ public class MastersEditionIII extends ExpansionSet {
         cards.add(new SetCardInfo("False Defeat", 11, Rarity.UNCOMMON, mage.cards.f.FalseDefeat.class));
         cards.add(new SetCardInfo("Famine", 65, Rarity.UNCOMMON, mage.cards.f.Famine.class));
         cards.add(new SetCardInfo("Fellwar Stone", 195, Rarity.COMMON, mage.cards.f.FellwarStone.class));
-        cards.add(new SetCardInfo("Fevered Strength", 66, Rarity.COMMON, mage.cards.f.FeveredStrength1.class));
+        cards.add(new SetCardInfo("Fevered Strength", 66, Rarity.COMMON, FeveredStrength.class));
         cards.add(new SetCardInfo("Fire Ambush", 97, Rarity.COMMON, mage.cards.f.FireAmbush.class));
         cards.add(new SetCardInfo("Fire Drake", 98, Rarity.COMMON, mage.cards.f.FireDrake.class));
         cards.add(new SetCardInfo("Fire Sprites", 118, Rarity.COMMON, mage.cards.f.FireSprites.class));

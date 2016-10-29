@@ -52,7 +52,6 @@ public abstract class ExpansionSet implements Serializable {
         private final String cardNumber;
         private final Rarity rarity;
         private final Class<?> cardClass;
-        private final boolean usesVariousArt;
         private final CardGraphicInfo graphicInfo;
 
         public SetCardInfo(String name, int cardNumber, Rarity rarity, Class<?> cardClass) {
@@ -72,11 +71,6 @@ public abstract class ExpansionSet implements Serializable {
             this.cardNumber = cardNumber;
             this.rarity = rarity;
             this.cardClass = cardClass;
-            if (graphicInfo != null) {
-                this.usesVariousArt = graphicInfo.getUsesVariousArt();
-            } else {
-                usesVariousArt = false;
-            }
             this.graphicInfo = graphicInfo;
         }
 
@@ -94,10 +88,6 @@ public abstract class ExpansionSet implements Serializable {
 
         public Class<?> getCardClass() {
             return this.cardClass;
-        }
-
-        public boolean getUsesVariousArt() {
-            return this.usesVariousArt;
         }
 
         public CardGraphicInfo getGraphicInfo() {
