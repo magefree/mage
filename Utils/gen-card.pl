@@ -96,7 +96,14 @@ if(!$cardName) {
     chomp $cardName;
 }
 
+
 if (!exists $cards{$cardName}) {
+    my $possible;
+    foreach $possible (sort keys (%cards)) {
+        if ($possible =~ m/^$cardName.*/img && $cardName =~ m/..../) {
+            print ("Did you mean $possible ?\n");
+        }
+    }
     die "Card name doesn't exist: $cardName\n";
 }
 
