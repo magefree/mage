@@ -55,7 +55,7 @@ public class StarWars extends ExpansionSet {
         this.numBoosterUncommon = 3;
         this.numBoosterRare = 1;
         this.ratioBoosterMythic = 8;
-        cards.add(new SetCardInfo("AAT-1", 179, Rarity.UNCOMMON, mage.cards.a.AAT1.class, new CardGraphicInfo(null, true)));
+        cards.add(new SetCardInfo("AAT-1", 179, Rarity.UNCOMMON, mage.cards.a.AAT1.class));
         cards.add(new SetCardInfo("Acklay of the Arena", 180, Rarity.RARE, mage.cards.a.AcklayOfTheArena.class));
         cards.add(new SetCardInfo("Acquire Target", 64, Rarity.COMMON, mage.cards.a.AcquireTarget.class));
         cards.add(new SetCardInfo("Admiral Ackbar", 34, Rarity.RARE, mage.cards.a.AdmiralAckbar.class));
@@ -80,7 +80,7 @@ public class StarWars extends ExpansionSet {
         cards.add(new SetCardInfo("Bounty Sniper", 98, Rarity.UNCOMMON, mage.cards.b.BountySniper.class));
         cards.add(new SetCardInfo("Bounty Spotter", 69, Rarity.UNCOMMON, mage.cards.b.BountySpotter.class));
         cards.add(new SetCardInfo("Bull Rancor", 186, Rarity.RARE, mage.cards.b.BullRancor.class));
-        cards.add(new SetCardInfo("C-3PO and R2D2", 160, Rarity.RARE, mage.cards.c.C3POAndR2D2.class, new CardGraphicInfo(null, true)));
+        cards.add(new SetCardInfo("C-3PO and R2D2", 160, Rarity.RARE, mage.cards.c.C3POAndR2D2.class));
         cards.add(new SetCardInfo("Cantina Band", 6, Rarity.COMMON, mage.cards.c.CantinaBand.class));
         cards.add(new SetCardInfo("Capture", 99, Rarity.COMMON, mage.cards.c.Capture.class));
         cards.add(new SetCardInfo("Carbonite Chamber", 161, Rarity.UNCOMMON, mage.cards.c.CarboniteChamber.class));
@@ -216,7 +216,7 @@ public class StarWars extends ExpansionSet {
         cards.add(new SetCardInfo("Nute Gunray", 208, Rarity.RARE, mage.cards.n.NuteGunray.class));
         cards.add(new SetCardInfo("Obi-Wan Kenobi", 163, Rarity.MYTHIC, mage.cards.o.ObiWanKenobi.class));
         cards.add(new SetCardInfo("Orbital Bombardment", 25, Rarity.RARE, mage.cards.o.OrbitalBombardment.class));
-        cards.add(new SetCardInfo("Order 66", 82, Rarity.RARE, mage.cards.o.Order66.class, new CardGraphicInfo(null, true)));
+        cards.add(new SetCardInfo("Order 66", 82, Rarity.RARE, mage.cards.o.Order66.class));
         cards.add(new SetCardInfo("Ortolan Keyboardist", 49, Rarity.COMMON, mage.cards.o.OrtolanKeyboardist.class));
         cards.add(new SetCardInfo("Outer Rim Slaver", 209, Rarity.COMMON, mage.cards.o.OuterRimSlaver.class));
         cards.add(new SetCardInfo("Outlaw Holocron", 235, Rarity.COMMON, mage.cards.o.OutlawHolocron.class));

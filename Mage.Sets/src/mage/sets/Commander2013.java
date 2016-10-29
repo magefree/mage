@@ -29,6 +29,7 @@
 package mage.sets;
 
 import mage.cards.ExpansionSet;
+import mage.cards.n.NightSoil;
 import mage.constants.SetType;
 import mage.constants.Rarity;
 import mage.cards.CardGraphicInfo;
@@ -242,7 +243,7 @@ public class Commander2013 extends ExpansionSet {
         cards.add(new SetCardInfo("Nevinyrral's Disk", 248, Rarity.RARE, mage.cards.n.NevinyrralsDisk.class));
         cards.add(new SetCardInfo("New Benalia", 309, Rarity.UNCOMMON, mage.cards.n.NewBenalia.class));
         cards.add(new SetCardInfo("Nightscape Familiar", 83, Rarity.COMMON, mage.cards.n.NightscapeFamiliar.class));
-        cards.add(new SetCardInfo("Night Soil", 158, Rarity.COMMON, mage.cards.n.NightSoil1.class));
+        cards.add(new SetCardInfo("Night Soil", 158, Rarity.COMMON, NightSoil.class));
         cards.add(new SetCardInfo("Nihil Spellbomb", 249, Rarity.COMMON, mage.cards.n.NihilSpellbomb.class));
         cards.add(new SetCardInfo("Nivix Guildmage", 202, Rarity.UNCOMMON, mage.cards.n.NivixGuildmage.class));
         cards.add(new SetCardInfo("Obelisk of Esper", 250, Rarity.COMMON, mage.cards.o.ObeliskOfEsper.class));

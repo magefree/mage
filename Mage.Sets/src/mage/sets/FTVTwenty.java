@@ -28,6 +28,7 @@
 package mage.sets;
 
 import mage.cards.ExpansionSet;
+import mage.cards.h.HymnToTourach;
 import mage.constants.Rarity;
 import mage.constants.SetType;
 
@@ -56,7 +57,7 @@ public class FTVTwenty extends ExpansionSet {
         cards.add(new SetCardInfo("Fyndhorn Elves", 4, Rarity.MYTHIC, mage.cards.f.FyndhornElves.class));
         cards.add(new SetCardInfo("Gilded Lotus", 12, Rarity.MYTHIC, mage.cards.g.GildedLotus.class));
         cards.add(new SetCardInfo("Green Sun's Zenith", 19, Rarity.MYTHIC, mage.cards.g.GreenSunsZenith.class));
-        cards.add(new SetCardInfo("Hymn to Tourach", 3, Rarity.SPECIAL, mage.cards.h.HymnToTourach1.class));
+        cards.add(new SetCardInfo("Hymn to Tourach", 3, Rarity.SPECIAL, HymnToTourach.class));
         cards.add(new SetCardInfo("Impulse", 5, Rarity.MYTHIC, mage.cards.i.Impulse.class));
         cards.add(new SetCardInfo("Ink-Eyes, Servant of Oni", 13, Rarity.MYTHIC, mage.cards.i.InkEyesServantOfOni.class));
         cards.add(new SetCardInfo("Jace, the Mind Sculptor", 18, Rarity.MYTHIC, mage.cards.j.JaceTheMindSculptor.class));

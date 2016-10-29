@@ -28,6 +28,8 @@
 package mage.sets;
 
 import mage.cards.ExpansionSet;
+import mage.cards.n.NafsAsp;
+import mage.cards.p.Piety;
 import mage.constants.SetType;
 import mage.constants.Rarity;
 import mage.cards.CardGraphicInfo;
@@ -251,7 +253,7 @@ public class FourthEdition extends ExpansionSet {
         cards.add(new SetCardInfo("Mountain", 183, Rarity.LAND, mage.cards.basiclands.Mountain.class, new CardGraphicInfo(null, true)));
         cards.add(new SetCardInfo("Mountain", 184, Rarity.LAND, mage.cards.basiclands.Mountain.class, new CardGraphicInfo(null, true)));
         cards.add(new SetCardInfo("Murk Dwellers", 32, Rarity.COMMON, mage.cards.m.MurkDwellers.class));
-        cards.add(new SetCardInfo("Nafs Asp", 148, Rarity.COMMON, mage.cards.n.NafsAsp1.class));
+        cards.add(new SetCardInfo("Nafs Asp", 148, Rarity.COMMON, NafsAsp.class));
         cards.add(new SetCardInfo("Nether Shadow", 33, Rarity.RARE, mage.cards.n.NetherShadow.class));
         cards.add(new SetCardInfo("Nevinyrral's Disk", 356, Rarity.RARE, mage.cards.n.NevinyrralsDisk.class));
         cards.add(new SetCardInfo("Nightmare", 34, Rarity.RARE, mage.cards.n.Nightmare.class));
@@ -269,7 +271,7 @@ public class FourthEdition extends ExpansionSet {
         cards.add(new SetCardInfo("Phantasmal Forces", 88, Rarity.UNCOMMON, mage.cards.p.PhantasmalForces.class));
         cards.add(new SetCardInfo("Phantasmal Terrain", 89, Rarity.COMMON, mage.cards.p.PhantasmalTerrain.class));
         cards.add(new SetCardInfo("Phantom Monster", 90, Rarity.UNCOMMON, mage.cards.p.PhantomMonster.class));
-        cards.add(new SetCardInfo("Piety", 291, Rarity.COMMON, mage.cards.p.Piety1.class));
+        cards.add(new SetCardInfo("Piety", 291, Rarity.COMMON, Piety.class));
         cards.add(new SetCardInfo("Pirate Ship", 91, Rarity.RARE, mage.cards.p.PirateShip.class));
         cards.add(new SetCardInfo("Pit Scorpion", 37, Rarity.COMMON, mage.cards.p.PitScorpion.class));
         cards.add(new SetCardInfo("Plague Rats", 38, Rarity.COMMON, mage.cards.p.PlagueRats.class));

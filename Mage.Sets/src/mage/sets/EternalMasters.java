@@ -29,6 +29,7 @@
 package mage.sets;
 
 import mage.cards.ExpansionSet;
+import mage.cards.h.HymnToTourach;
 import mage.constants.SetType;
 import mage.constants.Rarity;
 
@@ -154,7 +155,7 @@ public class EternalMasters extends ExpansionSet {
         cards.add(new SetCardInfo("Honden of Seeing Winds", 54, Rarity.UNCOMMON, mage.cards.h.HondenOfSeeingWinds.class));
         cards.add(new SetCardInfo("Humble", 14, Rarity.COMMON, mage.cards.h.Humble.class));
         cards.add(new SetCardInfo("Hydroblast", 55, Rarity.UNCOMMON, mage.cards.h.Hydroblast.class));
-        cards.add(new SetCardInfo("Hymn to Tourach", 92, Rarity.UNCOMMON, mage.cards.h.HymnToTourach1.class));
+        cards.add(new SetCardInfo("Hymn to Tourach", 92, Rarity.UNCOMMON, HymnToTourach.class));
         cards.add(new SetCardInfo("Ichorid", 93, Rarity.RARE, mage.cards.i.Ichorid.class));
         cards.add(new SetCardInfo("Imperious Perfect", 173, Rarity.RARE, mage.cards.i.ImperiousPerfect.class));
         cards.add(new SetCardInfo("Inkwell Leviathan", 56, Rarity.RARE, mage.cards.i.InkwellLeviathan.class));

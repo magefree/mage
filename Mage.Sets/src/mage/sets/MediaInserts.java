@@ -29,6 +29,11 @@ package mage.sets;
 
 import mage.cards.CardGraphicInfo;
 import mage.cards.ExpansionSet;
+<<<<<<< Updated upstream
+=======
+import mage.cards.h.HighTide;
+import mage.constants.SetType;
+>>>>>>> Stashed changes
 import mage.constants.Rarity;
 import mage.constants.SetType;
 
@@ -119,7 +124,7 @@ public class MediaInserts extends ExpansionSet {
         cards.add(new SetCardInfo("Hamletback Goliath", 71, Rarity.RARE, mage.cards.h.HamletbackGoliath.class));
         cards.add(new SetCardInfo("Harbinger of the Hunt", 116, Rarity.SPECIAL, mage.cards.h.HarbingerOfTheHunt.class));
         cards.add(new SetCardInfo("Hero of Goma Fada", 136, Rarity.SPECIAL, mage.cards.h.HeroOfGomaFada.class));
-        cards.add(new SetCardInfo("High Tide", 80, Rarity.COMMON, mage.cards.h.HighTide1.class));
+        cards.add(new SetCardInfo("High Tide", 80, Rarity.COMMON, HighTide.class));
         cards.add(new SetCardInfo("Hixus, Prison Warden", 126, Rarity.SPECIAL, mage.cards.h.HixusPrisonWarden.class));
         cards.add(new SetCardInfo("Honored Hierarch", 129, Rarity.SPECIAL, mage.cards.h.HonoredHierarch.class));
         cards.add(new SetCardInfo("Honor of the Pure", 20, Rarity.RARE, mage.cards.h.HonorOfThePure.class));

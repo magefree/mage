@@ -1,6 +1,7 @@
 package mage.sets;
 
 import mage.cards.ExpansionSet;
+import mage.cards.b.BrothersYamazaki;
 import mage.constants.SetType;
 import mage.constants.Rarity;
 import mage.cards.CardGraphicInfo;
@@ -39,8 +40,8 @@ public class ChampionsOfKamigawa extends ExpansionSet {
         cards.add(new SetCardInfo("Blood Speaker", 103, Rarity.UNCOMMON, mage.cards.b.BloodSpeaker.class));
         cards.add(new SetCardInfo("Bloodthirsty Ogre", 104, Rarity.UNCOMMON, mage.cards.b.BloodthirstyOgre.class));
         cards.add(new SetCardInfo("Boseiju, Who Shelters All", 273, Rarity.RARE, mage.cards.b.BoseijuWhoSheltersAll.class));
-        cards.add(new SetCardInfo("Brothers Yamazaki", "160a", Rarity.UNCOMMON, mage.cards.b.BrothersYamazaki1.class, new CardGraphicInfo(null, true)));
-        cards.add(new SetCardInfo("Brothers Yamazaki", "160b", Rarity.UNCOMMON, mage.cards.b.BrothersYamazaki1.class, new CardGraphicInfo(null, true)));
+        cards.add(new SetCardInfo("Brothers Yamazaki", "160a", Rarity.UNCOMMON, BrothersYamazaki.class, new CardGraphicInfo(null, true)));
+        cards.add(new SetCardInfo("Brothers Yamazaki", "160b", Rarity.UNCOMMON, BrothersYamazaki.class, new CardGraphicInfo(null, true)));
         cards.add(new SetCardInfo("Brutal Deceiver", 161, Rarity.COMMON, mage.cards.b.BrutalDeceiver.class));
         cards.add(new SetCardInfo("Budoka Gardener", 202, Rarity.RARE, mage.cards.b.BudokaGardener.class));
         cards.add(new SetCardInfo("Burr Grafter", 203, Rarity.COMMON, mage.cards.b.BurrGrafter.class));

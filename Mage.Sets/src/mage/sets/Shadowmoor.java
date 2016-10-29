@@ -27,6 +27,7 @@
  */
 package mage.sets;
 
+import mage.cards.t.Torture;
 import mage.constants.SetType;
 import mage.cards.ExpansionSet;
 import mage.constants.Rarity;
@@ -323,7 +324,7 @@ public class Shadowmoor extends ExpansionSet {
         cards.add(new SetCardInfo("Toil to Renown", 130, Rarity.COMMON, mage.cards.t.ToilToRenown.class));
         cards.add(new SetCardInfo("Torpor Dust", 177, Rarity.COMMON, mage.cards.t.TorporDust.class));
         cards.add(new SetCardInfo("Torrent of Souls", 199, Rarity.UNCOMMON, mage.cards.t.TorrentOfSouls.class));
-        cards.add(new SetCardInfo("Torture", 80, Rarity.COMMON, mage.cards.t.Torture1.class));
+        cards.add(new SetCardInfo("Torture", 80, Rarity.COMMON, Torture.class));
         cards.add(new SetCardInfo("Tower Above", 131, Rarity.UNCOMMON, mage.cards.t.TowerAbove.class));
         cards.add(new SetCardInfo("Traitor's Roar", 200, Rarity.COMMON, mage.cards.t.TraitorsRoar.class));
         cards.add(new SetCardInfo("Trip Noose", 266, Rarity.UNCOMMON, mage.cards.t.TripNoose.class));

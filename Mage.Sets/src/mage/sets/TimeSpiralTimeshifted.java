@@ -27,6 +27,8 @@
  */
 package mage.sets;
 
+import mage.cards.i.IcatianJavelineers;
+import mage.cards.s.SwampMosquito;
 import mage.constants.SetType;
 import mage.cards.ExpansionSet;
 import mage.constants.Rarity;
@@ -90,7 +92,7 @@ public class TimeSpiralTimeshifted extends ExpansionSet {
         cards.add(new SetCardInfo("Goblin Snowman", 64, Rarity.UNCOMMON, mage.cards.g.GoblinSnowman.class));
         cards.add(new SetCardInfo("Grinning Totem", 110, Rarity.SPECIAL, mage.cards.g.GrinningTotem.class));
         cards.add(new SetCardInfo("Hunting Moa", 80, Rarity.COMMON, mage.cards.h.HuntingMoa.class));
-        cards.add(new SetCardInfo("Icatian Javelineers", 10, Rarity.SPECIAL, mage.cards.i.IcatianJavelineers1.class));
+        cards.add(new SetCardInfo("Icatian Javelineers", 10, Rarity.SPECIAL, IcatianJavelineers.class));
         cards.add(new SetCardInfo("Jasmine Boreal", 93, Rarity.COMMON, mage.cards.j.JasmineBoreal.class));
         cards.add(new SetCardInfo("Jolrael, Empress of Beasts", 81, Rarity.SPECIAL, mage.cards.j.JolraelEmpressOfBeasts.class));
         cards.add(new SetCardInfo("Kobold Taskmaster", 65, Rarity.SPECIAL, mage.cards.k.KoboldTaskmaster.class));
@@ -131,7 +133,7 @@ public class TimeSpiralTimeshifted extends ExpansionSet {
         cards.add(new SetCardInfo("Stormscape Familiar", 32, Rarity.COMMON, mage.cards.s.StormscapeFamiliar.class));
         cards.add(new SetCardInfo("Stupor", 48, Rarity.COMMON, mage.cards.s.Stupor.class));
         cards.add(new SetCardInfo("Suq'Ata Lancer", 69, Rarity.COMMON, mage.cards.s.SuqAtaLancer.class));
-        cards.add(new SetCardInfo("Swamp Mosquito", 49, Rarity.SPECIAL, mage.cards.s.SwampMosquito1.class));
+        cards.add(new SetCardInfo("Swamp Mosquito", 49, Rarity.SPECIAL, SwampMosquito.class));
         cards.add(new SetCardInfo("Teferi's Moat", 103, Rarity.SPECIAL, mage.cards.t.TeferisMoat.class));
         cards.add(new SetCardInfo("Thallid", 86, Rarity.COMMON, mage.cards.t.Thallid.class));
         cards.add(new SetCardInfo("The Rack", 113, Rarity.SPECIAL, mage.cards.t.TheRack.class));

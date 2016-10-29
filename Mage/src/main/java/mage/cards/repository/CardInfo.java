@@ -101,6 +101,8 @@ public class CardInfo {
     @DatabaseField
     protected String frameStyle;
     @DatabaseField
+    protected boolean variousArt;
+    @DatabaseField
     protected boolean splitCard;
     @DatabaseField
     protected boolean splitCardHalf;
@@ -141,6 +143,7 @@ public class CardInfo {
 
         this.frameStyle = card.getFrameStyle().toString();
         this.frameColor = card.getFrameColor(null).toString();
+        this.variousArt = card.getUsesVariousArt();
         this.blue = card.getColor(null).isBlue();
         this.black = card.getColor(null).isBlack();
         this.green = card.getColor(null).isGreen();
@@ -211,11 +214,7 @@ public class CardInfo {
         }
     }
 
-    public boolean usesVariousArt() {
-        return getRarity().equals(Rarity.LAND)
-                || Character.isDigit(className.charAt(className.length() - 1))
-                || !Character.isDigit(cardNumber.charAt(cardNumber.length() - 1));
-    }
+    public boolean usesVariousArt() { return variousArt; }
 
     public ObjectColor getColor() {
         ObjectColor color = new ObjectColor();
