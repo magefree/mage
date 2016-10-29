@@ -44,7 +44,7 @@ public class UrzasLegacy extends ExpansionSet {
     }
 
     private UrzasLegacy() {
-        super("Urza's Legacy", "ULG", ExpansionSet.buildDate(1999, 3, 6), SetType.EXPANSION);
+        super("Urza's Legacy", "ULG", ExpansionSet.buildDate(1999, 2, 15), SetType.EXPANSION);
         this.blockName = "Urza";
         this.parentSet = UrzasSaga.getInstance();
         this.hasBasicLands = false;

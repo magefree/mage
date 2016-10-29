@@ -1,9 +1,9 @@
 package mage.sets;
 
-import mage.cards.ExpansionSet;
-import mage.constants.SetType;
-import mage.constants.Rarity;
 import mage.cards.CardGraphicInfo;
+import mage.cards.ExpansionSet;
+import mage.constants.Rarity;
+import mage.constants.SetType;
 
 /**
  *
@@ -18,7 +18,7 @@ public class LimitedEditionBeta extends ExpansionSet {
     }
 
     private LimitedEditionBeta() {
-        super("Limited Edition Beta", "LEB", ExpansionSet.buildDate(1993, 9, 1), SetType.CORE);
+        super("Limited Edition Beta", "LEB", ExpansionSet.buildDate(1993, 10, 1), SetType.CORE);
         this.hasBoosters = true;
         this.numBoosterLands = 0;
         this.numBoosterCommon = 11;

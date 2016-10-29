@@ -27,11 +27,11 @@
  */
 package mage.sets;
 
-import mage.cards.g.GoblinGrenade;
-import mage.constants.SetType;
-import mage.cards.ExpansionSet;
-import mage.constants.Rarity;
 import mage.cards.CardGraphicInfo;
+import mage.cards.ExpansionSet;
+import mage.cards.g.GoblinGrenade;
+import mage.constants.Rarity;
+import mage.constants.SetType;
 
 /**
  *
@@ -46,7 +46,7 @@ public class Magic2012 extends ExpansionSet {
     }
 
     private Magic2012() {
-        super("Magic 2012", "M12", ExpansionSet.buildDate(2011, 6, 9), SetType.CORE);
+        super("Magic 2012", "M12", ExpansionSet.buildDate(2011, 7, 15), SetType.CORE);
         this.hasBoosters = true;
         this.numBoosterLands = 1;
         this.numBoosterCommon = 10;

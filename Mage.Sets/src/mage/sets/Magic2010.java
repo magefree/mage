@@ -24,14 +24,13 @@
 * The views and conclusions contained in the software and documentation are those of the
 * authors and should not be interpreted as representing official policies, either expressed
 * or implied, of BetaSteward_at_googlemail.com.
-*/
-
+ */
 package mage.sets;
 
-import mage.constants.SetType;
+import mage.cards.CardGraphicInfo;
 import mage.cards.ExpansionSet;
 import mage.constants.Rarity;
-import mage.cards.CardGraphicInfo;
+import mage.constants.SetType;
 
 /**
  *
@@ -46,7 +45,7 @@ public class Magic2010 extends ExpansionSet {
     }
 
     private Magic2010() {
-        super("Magic 2010", "M10", ExpansionSet.buildDate(2009, 6, 17), SetType.CORE);
+        super("Magic 2010", "M10", ExpansionSet.buildDate(2009, 7, 17), SetType.CORE);
         this.hasBoosters = true;
         this.numBoosterLands = 1;
         this.numBoosterCommon = 10;
