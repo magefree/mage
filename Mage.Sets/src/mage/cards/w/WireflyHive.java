@@ -32,19 +32,16 @@ import mage.abilities.Ability;
 import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.costs.common.TapSourceCost;
 import mage.abilities.costs.mana.GenericManaCost;
-import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.CreateTokenEffect;
 import mage.abilities.effects.common.DestroyAllEffect;
+import mage.abilities.effects.common.FlipCoinEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.Outcome;
 import mage.constants.Zone;
 import mage.filter.FilterPermanent;
 import mage.filter.predicate.mageobject.NamePredicate;
-import mage.game.Game;
 import mage.game.permanent.token.Token;
-import mage.players.Player;
 
 /**
  *
@@ -53,11 +50,13 @@ import mage.players.Player;
 public class WireflyHive extends CardImpl {
 
     public WireflyHive(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.ARTIFACT},"{3}");
-
-        // {3}, {tap}: Flip a coin. If you win the flip, put a 2/2 colorless Insect artifact creature token with flying named Wirefly onto the battlefield. 
+        super(ownerId, setInfo, new CardType[]{CardType.ARTIFACT}, "{3}");
+        // {3}, {tap}: Flip a coin. If you win the flip, put a 2/2 colorless Insect artifact creature token with flying named Wirefly onto the battlefield.
         // If you lose the flip, destroy all permanents named Wirefly.
-        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new WireflyHiveEffect(), new GenericManaCost(3));
+        FilterPermanent filter = new FilterPermanent("permanents named Wirefly");
+        filter.add(new NamePredicate("Wirefly"));
+        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD,
+                new FlipCoinEffect(new CreateTokenEffect(new WireflyToken()), new DestroyAllEffect(filter)), new GenericManaCost(3));
         ability.addCost(new TapSourceCost());
         this.addAbility(ability);
     }
@@ -69,41 +68,6 @@ public class WireflyHive extends CardImpl {
     @Override
     public WireflyHive copy() {
         return new WireflyHive(this);
-    }
-}
-
-class WireflyHiveEffect extends OneShotEffect {
-
-    public WireflyHiveEffect() {
-        super(Outcome.Damage);
-        staticText = "Flip a coin. If you win the flip, put a 2/2 colorless Insect artifact creature token with flying named Wirefly onto the battlefield."
-                + "If you lose the flip, destroy all permanents named Wirefly";
-    }
-
-    public WireflyHiveEffect(WireflyHiveEffect effect) {
-        super(effect);
-    }
-
-    @Override
-    public boolean apply(Game game, Ability source) {
-        Player controller = game.getPlayer(source.getControllerId());
-        if (controller != null) {
-            if (controller.flipCoin(game)) {
-                new CreateTokenEffect(new WireflyToken()).apply(game, source);
-                return true;
-            } else {
-                FilterPermanent filter = new FilterPermanent("permanents named Wirefly");
-                filter.add(new NamePredicate("Wirefly"));
-                new DestroyAllEffect(filter).apply(game, source);
-                return true;
-            }
-        }
-        return false;
-    }
-
-    @Override
-    public WireflyHiveEffect copy() {
-        return new WireflyHiveEffect(this);
     }
 }
 
