@@ -27,6 +27,7 @@
  */
 package mage.cards.t;
 
+import java.util.List;
 import java.util.UUID;
 import mage.MageObject;
 import mage.abilities.Ability;
@@ -76,7 +77,7 @@ class ThoughtHemorrhageEffect extends OneShotEffect {
     final String rule = "Target player reveals his or her hand. {this} deals 3 damage to that player for each card with that name revealed this way. Search that player's graveyard, hand, and library for all cards with that name and exile them. Then that player shuffles his or her library";
 
     public ThoughtHemorrhageEffect() {
-        super(Outcome.Detriment);
+        super(Outcome.Exile);
         staticText = rule;
     }
 
@@ -116,13 +117,15 @@ class ThoughtHemorrhageEffect extends OneShotEffect {
                     }
                 }
 
-                // search cards in hand
-                TargetCardInHand targetCardsHand = new TargetCardInHand(0, Integer.MAX_VALUE, filterNamedCards);
-                controller.chooseTarget(outcome, targetPlayer.getGraveyard(), targetCardsHand, source, game);
-                for (UUID cardId : targetCardsHand.getTargets()) {
-                    Card card = game.getCard(cardId);
-                    if (card != null) {
-                        controller.moveCardToExileWithInfo(card, null, "", source.getSourceId(), game, Zone.HAND, true);
+                // search cards in in Hand
+                TargetCardInHand targetCardInHand = new TargetCardInHand(0, Integer.MAX_VALUE, filterNamedCards);
+                if (controller.chooseTarget(Outcome.Exile, targetPlayer.getHand(), targetCardInHand, source, game)) {
+                    List<UUID> targets = targetCardInHand.getTargets();
+                    for (UUID targetId : targets) {
+                        Card targetCard = targetPlayer.getHand().get(targetId, game);
+                        if (targetCard != null) {
+                            controller.moveCardToExileWithInfo(targetCard, null, "", source.getSourceId(), game, Zone.HAND, true);
+                        }
                     }
                 }
 
