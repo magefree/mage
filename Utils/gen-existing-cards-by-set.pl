@@ -163,13 +163,13 @@ foreach $name_collectorid (sort @setCards)
             if (!exists ($alreadyIn{$cardNr})) {
 # Go Looking for the existing implementation..
                 if (-e $fn) {
-                    $implemented {$str} = 1;
+                    $implementedButNotInSetYet {$str} = 1;
                 } else { 
                     $unimplemented {"$str"} = 1;
                 }
             } else {
                 if (-e $fn) {
-                    $implementedButNotInSetYet {$str} = 1;
+                    $implemented {$str} = 1;
                 } else { 
                     $unimplemented {$str} = 1;
                 }
