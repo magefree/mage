@@ -55,6 +55,7 @@ public class LambholtButcher extends CardImpl {
 
         // this card is the second face of double-faced card
         this.nightCard = true;
+        this.transformable = true;
 
         // At the beginning of each upkeep, if a player cast two or more spells last turn, transform Lambholt Butcher.
         TriggeredAbility ability = new BeginningOfUpkeepTriggeredAbility(new TransformSourceEffect(false), TargetController.ANY, false);
