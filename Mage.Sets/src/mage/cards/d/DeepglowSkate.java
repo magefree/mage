@@ -106,4 +106,5 @@ class DeepglowSkateEffect extends OneShotEffect {
         }
         return didOne;
     }
+
 }
