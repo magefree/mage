@@ -117,7 +117,7 @@ class ThoughtHemorrhageEffect extends OneShotEffect {
                     }
                 }
 
-                // search cards in in Hand
+                // search cards in Hand
                 TargetCardInHand targetCardInHand = new TargetCardInHand(0, Integer.MAX_VALUE, filterNamedCards);
                 if (controller.chooseTarget(Outcome.Exile, targetPlayer.getHand(), targetCardInHand, source, game)) {
                     List<UUID> targets = targetCardInHand.getTargets();
