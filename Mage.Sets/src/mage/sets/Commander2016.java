@@ -70,7 +70,6 @@ public class Commander2016 extends ExpansionSet {
         cards.add(new SetCardInfo("Blind Obedience", 59, Rarity.RARE, mage.cards.b.BlindObedience.class));
         cards.add(new SetCardInfo("Blood Tyrant", 183, Rarity.RARE, mage.cards.b.BloodTyrant.class));
         cards.add(new SetCardInfo("Bloodbraid Elf", 184, Rarity.UNCOMMON, mage.cards.b.BloodbraidElf.class));
-	cards.add(new SetCardInfo("Boompile", 52, Rarity.RARE, mage.cards.b.Boompile.class));
         cards.add(new SetCardInfo("Boros Charm", 185, Rarity.UNCOMMON, mage.cards.b.BorosCharm.class));
         cards.add(new SetCardInfo("Brave the Sands", 60, Rarity.UNCOMMON, mage.cards.b.BraveTheSands.class));
         cards.add(new SetCardInfo("Breath of Fury", 121, Rarity.RARE, mage.cards.b.BreathOfFury.class));
@@ -102,6 +101,7 @@ public class Commander2016 extends ExpansionSet {
         cards.add(new SetCardInfo("Darkwater Catacombs", 289, Rarity.RARE, mage.cards.d.DarkwaterCatacombs.class));
         cards.add(new SetCardInfo("Dauntless Escort", 192, Rarity.RARE, mage.cards.d.DauntlessEscort.class));
         cards.add(new SetCardInfo("Decimate", 193, Rarity.RARE, mage.cards.d.Decimate.class));
+        cards.add(new SetCardInfo("Deepglow Skate", 7, Rarity.RARE, mage.cards.d.DeepglowSkate.class));
         cards.add(new SetCardInfo("Den Protector", 147, Rarity.RARE, mage.cards.d.DenProtector.class));
         cards.add(new SetCardInfo("Devastation Tide", 87, Rarity.RARE, mage.cards.d.DevastationTide.class));
         cards.add(new SetCardInfo("Disdainful Stroke", 88, Rarity.COMMON, mage.cards.d.DisdainfulStroke.class));
