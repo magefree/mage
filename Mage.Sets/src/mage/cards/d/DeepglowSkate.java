@@ -31,27 +31,17 @@ import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.EntersBattlefieldTriggeredAbility;
-import mage.abilities.common.SimpleActivatedAbility;
-import mage.abilities.costs.common.UntapSourceCost;
-import mage.abilities.costs.mana.ManaCostsImpl;
-import mage.abilities.decorator.ConditionalTriggeredAbility;
 import mage.abilities.effects.OneShotEffect;
-import mage.abilities.effects.common.DamageTargetEffect;
-import mage.abilities.effects.common.TapTargetEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Outcome;
-import mage.constants.Zone;
 import mage.counters.Counter;
 import mage.filter.FilterPermanent;
-import mage.filter.common.FilterLandPermanent;
-import mage.filter.predicate.mageobject.SubtypePredicate;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.target.Target;
 import mage.target.TargetPermanent;
-import mage.target.TargetPlayer;
 
 /**
  *
@@ -86,7 +76,7 @@ class DeepglowSkateEffect extends OneShotEffect {
 
     public DeepglowSkateEffect() {
         super(Outcome.Benefit);
-        this.staticText = "Double the number of each kind of counter on any number of target permanents";
+        this.staticText = "{this} double the number of each kind of counter on any number of target permanents";
     }
 
     public DeepglowSkateEffect(final DeepglowSkateEffect effect) {
