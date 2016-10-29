@@ -46,15 +46,15 @@ if (-e $authorFile) {
 }
 
 my $cardsFound = 0;
+print ("Opening $dataFile\n");
 open (DATA, $dataFile) || die "can't open $dataFile";
 while(my $line = <DATA>) {
     my @data = split('\\|', $line);
     $cards{$data[0]}{$data[1]} = \@data;
 
     if ($data[1] eq $setName) {
-        my $cardInfo = {$data[0] ,$data[2]};
-        my $ref_cardInfo = \$cardInfo;
-        push(@setCards, $ref_cardInfo);
+        my $cardInfo = "$data[0],,,$data[2]";
+        push(@setCards, $cardInfo);
         $cardsFound = $cardsFound + 1;
     }
 }
@@ -83,6 +83,17 @@ $raritiesConversion{'R'} = 'RARE';
 $raritiesConversion{'M'} = 'MYTHIC';
 $raritiesConversion{'Special'} = 'SPECIAL';
 $raritiesConversion{'Bonus'} = 'BONUS';
+sub getRarity 
+{
+    my $val = $_ [0];
+    if (exists ($raritiesConversion {$val}))
+    {
+        return $raritiesConversion {$val};
+    }
+    print ("JSKLDFJSLKDFJLSKJDF --- $val,,,$_[1]\n");
+    sleep (10);
+    return "WHOKNOWS";
+}
 
 # Generate the cards
 
@@ -97,94 +108,79 @@ my $landSwamp = 0;
 my $landPlains = 0;
 my $landIsland = 0;
 
-print "Extended cards generated:\n";
+print ("Reading in existing cards in set\n");
+open (SET_FILE, "../../mage/Mage.Sets/src/mage/sets/$knownSets{$setName}.java") || die "can't open $dataFile";
+my %alreadyIn;
+while (<SET_FILE>) {
+    my $line = $_;
+    if ($line =~ m/SetCardInfo.*\("(.*)", (\d+).*/)
+    {
+        $alreadyIn {$2} = $1;
+    }
+}
+close SET_FILE;
 
-while ( my ($key, $value) = each(@setCards) ) {
-    while ( my ($cardName, $cardNr) = each($$value) ) {
+my $name_collectorid;
+my %implemented;
+my %implementedButNotInSetYet;
+my %unimplemented;
+
+foreach $name_collectorid (sort @setCards)
+{
+    my $cardName;
+    my $cardNr;
+    $name_collectorid =~ m/^(.*),,,(.*)$/; 
+    $cardName = $1;
+    $cardNr = $2;
+    {
         if($cardName eq "Forest" || $cardName eq "Island" || $cardName eq "Plains" || $cardName eq "Swamp" || $cardName eq "Mountain") {
             my $found = 0;
-            my $landNr = "";
             if ($cardName eq "Forest") {
                 $landForest++;
-                $landNr = $landForest;
             }
             if ($cardName eq "Mountain") {
                 $landMountain++;
-                $landNr = $landMountain;
             }
             if ($cardName eq "Swamp") {
                 $landSwamp++;
-                $landNr = $landSwamp;
             }
             if ($cardName eq "Plains") {
                 $landPlains++;
-                $landNr = $landPlains;
             }
             if ($cardName eq "Island") {
                 $landIsland++;
-                $landNr = $landIsland;
             }
-            if(!($landNr eq "")) {
-                $vars{'landNr'} = $landNr;
-                my $className = toCamelCase($cardName) . $landNr;
-                my $currentFileName = "../Mage.Sets/src/mage/sets/" . $knownSets{$setName} . "/" . $className . ".java";
-
-                if(! -e $currentFileName) {
-
-                    $vars{'className'} = toCamelCase($cardName);
-                    $vars{'cardNumber'} = $cardNr;
-
-                    my $result = $templateBasicLand->fill_in(HASH => \%vars);
-                    if (defined($result)) {
-                        print $vars{'set'} . "." . $vars{'className'} . " cardNr = " . $cardNr . "\n";
-                        open CARD, "> $currentFileName";
-                        print CARD $result;
-                        close CARD;
-                    } else {
-                        print "Error while creating " . $vars{'className'} ."\n";
-                    }
-                }
+            if (!exists ($alreadyIn{$cardNr})) {
+                print ("        cards.add(new SetCardInfo(\"$cardName\", $cardNr, Rarity.LAND, mage.cards.basiclands.$cardName.class, new CardGraphicInfo(null, true)));\n");
             }
-        } else {
+        }
+        else {
             my $className = toCamelCase($cardName);
-            my $currentFileName = "../Mage.Sets/src/mage/sets/" . $knownSets{$setName} . "/" . $className . ".java";
-            if(! -e $currentFileName) {
-                $vars{'className'} = $className;
-                $vars{'cardNumber'} = $cards{$cardName}{$setName}[2];
-
-                my $found = 0;
-                foreach my $keySet (keys %{$cards{$cardName}}) {
-                    if (exists $knownSets{$keySet} && $found eq 0) {
-                        my $fileName = "../Mage.Sets/src/mage/sets/" . $knownSets{$keySet} . "/" . $className . ".java";
-                        if(-e $fileName) {
-                            open (DATA, $fileName);
-                            while(my $line = <DATA>) {
-                                if ($line =~ /extends CardImpl / || $line =~ /extends LevelerCard /) {
-                                    $vars{'baseClassName'} = $1;
-                                    $vars{'baseSet'} = $knownSets{$keySet};
-
-                                    $vars{'rarityExtended'} = '';
-                                    if ($cards{$cardName}{$setName}[3] ne $cards{$cardName}{$keySet}[3]) {
-                                        $vars{'rarityExtended'} = "\n        this.rarity = Rarity.$raritiesConversion{$cards{$cardName}{$setName}[3]};";
-                                    }
-                                    $found = 1;
-                                }
-                            }
-                            close(DATA);
-                        }
-                    }
+            my $setId = lc($cardName);
+            $setId =~ s/^(.).*/$1/;
+            my $fn = "..\\Mage.Sets\\src\\mage\\cards\\$setId\\$className.java";
+            my $str = "        cards.add(new SetCardInfo(\"$cardName\", $cardNr, Rarity." . getRarity ($cards{$cardName}{$setName}[3], $cardName) . ", mage.cards.$setId.$className.class));\n";
+            if (!exists ($alreadyIn{$cardNr})) {
+# Go Looking for the existing implementation..
+                if (-e $fn) {
+                    $implemented {$str} = 1;
+                } else { 
+                    $unimplemented {"$str"} = 1;
                 }
-                if($found eq 1) {
-                    my $result = $template->fill_in(HASH => \%vars);
-                    if (defined($result)) {
-                        print $vars{'set'} . "." . $vars{'className'} . "\n";
-                        open CARD, "> $currentFileName";
-                        print CARD $result;
-                        close CARD;
-                    }
+            } else {
+                if (-e $fn) {
+                    $implementedButNotInSetYet {$str} = 1;
+                } else { 
+                    $unimplemented {$str} = 1;
                 }
             }
         }
-
     }
 }
+
+print "Implemented cards:\n";
+print (join ("", sort keys (%implemented)));
+print "\n\n\nImplemented but-not-yet-added-to-set cards:\n";
+print (join ("", sort keys (%implementedButNotInSetYet)));
+print "\n\n\nUnimplemented cards:\n";
+print (join ("", sort keys (%unimplemented)));
