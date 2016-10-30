@@ -70,6 +70,7 @@ public class Commander2016 extends ExpansionSet {
         cards.add(new SetCardInfo("Blind Obedience", 59, Rarity.RARE, mage.cards.b.BlindObedience.class));
         cards.add(new SetCardInfo("Blood Tyrant", 183, Rarity.RARE, mage.cards.b.BloodTyrant.class));
         cards.add(new SetCardInfo("Bloodbraid Elf", 184, Rarity.UNCOMMON, mage.cards.b.BloodbraidElf.class));
+        cards.add(new SetCardInfo("Boompile", 52, Rarity.RARE, mage.cards.b.Boompile.class));
         cards.add(new SetCardInfo("Boros Charm", 185, Rarity.UNCOMMON, mage.cards.b.BorosCharm.class));
         cards.add(new SetCardInfo("Brave the Sands", 60, Rarity.UNCOMMON, mage.cards.b.BraveTheSands.class));
         cards.add(new SetCardInfo("Breath of Fury", 121, Rarity.RARE, mage.cards.b.BreathOfFury.class));
