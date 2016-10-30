@@ -25,41 +25,48 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-
 package mage.abilities.effects.common;
 
-import mage.constants.Duration;
 import mage.abilities.Ability;
+import mage.abilities.dynamicvalue.DynamicValue;
 import mage.abilities.effects.PreventionEffectImpl;
+import mage.constants.Duration;
 import mage.game.Game;
 import mage.game.events.GameEvent;
 
-/**
- *
- * @author LevelX2
- */
+public class PreventDamageToControllerEffect extends PreventionEffectImpl {
 
+    public PreventDamageToControllerEffect(Duration duration) {
+        this(duration, false, false, Integer.MAX_VALUE);
+    }
 
-public class PreventAllDamageToControllerEffect extends PreventionEffectImpl {
+    public PreventDamageToControllerEffect(Duration duration, int amountToPrevent) {
+        this(duration, false, true, amountToPrevent);
+    }
 
-    public PreventAllDamageToControllerEffect(Duration duration) {
-        super(duration, Integer.MAX_VALUE, false);
+    public PreventDamageToControllerEffect(Duration duration, boolean onlyCombat, boolean consumable, int amountToPrevent) {
+        super(duration, amountToPrevent, onlyCombat, consumable, null);
+    }
+
+    public PreventDamageToControllerEffect(Duration duration, boolean onlyCombat, boolean consumable, DynamicValue amountToPreventDynamic) {
+        super(duration, 0, onlyCombat, consumable, amountToPreventDynamic);
         staticText = setText();
     }
 
-    public PreventAllDamageToControllerEffect(final PreventAllDamageToControllerEffect effect) {
+    public PreventDamageToControllerEffect(final PreventDamageToControllerEffect effect) {
         super(effect);
+        staticText = setText();
     }
 
     @Override
-    public PreventAllDamageToControllerEffect copy() {
-        return new PreventAllDamageToControllerEffect(this);
+    public PreventDamageToControllerEffect copy() {
+        return new PreventDamageToControllerEffect(this);
     }
 
     @Override
     public boolean applies(GameEvent event, Ability source, Game game) {
         if (super.applies(event, source, game)) {
-            if (event.getTargetId().equals(source.getControllerId())){
+            if (event.getTargetId().equals(source.getControllerId())) {
                 return true;
             }
 
@@ -68,9 +75,21 @@ public class PreventAllDamageToControllerEffect extends PreventionEffectImpl {
     }
 
     private String setText() {
-        StringBuilder sb = new StringBuilder("Prevent all damage that would be dealt to you");
+        // Prevent the next X damage that would be dealt to you this turn
+        StringBuilder sb = new StringBuilder("Prevent ");
+        if (amountToPrevent == Integer.MAX_VALUE) {
+            sb.append("all ");
+        } else if (amountToPreventDynamic != null) {
+            sb.append("the next ").append(amountToPreventDynamic.toString()).append(" ");
+        } else {
+            sb.append("the next ").append(amountToPrevent).append(" ");
+        }
+        if (onlyCombat) {
+            sb.append("combat ");
+        }
+        sb.append("damage that would be dealt to you");
         if (duration.equals(Duration.EndOfTurn)) {
-            sb.append("  this turn");
+            sb.append(" this turn");
         }
         return sb.toString();
     }

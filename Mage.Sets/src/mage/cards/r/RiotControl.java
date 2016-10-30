@@ -34,7 +34,7 @@ import mage.constants.CardType;
 import mage.constants.Duration;
 import mage.abilities.dynamicvalue.common.PermanentsOnBattlefieldCount;
 import mage.abilities.effects.common.GainLifeEffect;
-import mage.abilities.effects.common.PreventAllDamageToControllerEffect;
+import mage.abilities.effects.common.PreventDamageToControllerEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.TargetController;
@@ -60,7 +60,7 @@ public class RiotControl extends CardImpl {
 
         // Gain 1 life for each creature your opponents control. Prevent all damage that would be dealt to you this turn.
         this.getSpellAbility().addEffect(new GainLifeEffect(new PermanentsOnBattlefieldCount(filter)));
-        this.getSpellAbility().addEffect(new PreventAllDamageToControllerEffect(Duration.EndOfTurn));
+        this.getSpellAbility().addEffect(new PreventDamageToControllerEffect(Duration.EndOfTurn));
 
     }
 
