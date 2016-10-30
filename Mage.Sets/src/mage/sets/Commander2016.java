@@ -48,18 +48,20 @@ public class Commander2016 extends ExpansionSet {
     private Commander2016() {
         super("Commander 2016 Edition", "C16", ExpansionSet.buildDate(2016, 11, 11), SetType.SUPPLEMENTAL);
         this.blockName = "Command Zone";
-        cards.add(new SetCardInfo("AStral Cornucopia", 243, Rarity.RARE, mage.cards.a.AStralCornucopia.class));
+        cards.add(new SetCardInfo("AStral Cornucopia", 243, Rarity.RARE, mage.cards.a.AstralCornucopia.class));
         cards.add(new SetCardInfo("Abzan Charm", 177, Rarity.UNCOMMON, mage.cards.a.AbzanCharm.class));
         cards.add(new SetCardInfo("Abzan Falconer", 57, Rarity.UNCOMMON, mage.cards.a.AbzanFalconer.class));
         cards.add(new SetCardInfo("Academy Elite", 81, Rarity.RARE, mage.cards.a.AcademyElite.class));
         cards.add(new SetCardInfo("Aeon Chronicler", 82, Rarity.RARE, mage.cards.a.AeonChronicler.class));
         cards.add(new SetCardInfo("Akroan Horse", 241, Rarity.RARE, mage.cards.a.AkroanHorse.class));
         cards.add(new SetCardInfo("Alesha, Who Smiles at Death", 119, Rarity.RARE, mage.cards.a.AleshaWhoSmilesAtDeath.class));
+        cards.add(new SetCardInfo("Ancient Excavation", 27, Rarity.UNCOMMON, mage.cards.a.AncientExcavation.class));
         cards.add(new SetCardInfo("Ankle Shanker", 178, Rarity.RARE, mage.cards.a.AnkleShanker.class));
         cards.add(new SetCardInfo("Arcane Denial", 83, Rarity.COMMON, mage.cards.a.ArcaneDenial.class));
         cards.add(new SetCardInfo("Arcane Sanctum", 281, Rarity.UNCOMMON, mage.cards.a.ArcaneSanctum.class));
         cards.add(new SetCardInfo("Army of the Damned", 105, Rarity.MYTHIC, mage.cards.a.ArmyOfTheDamned.class));
         cards.add(new SetCardInfo("Artifact Mutation", 179, Rarity.RARE, mage.cards.a.ArtifactMutation.class));
+        cards.add(new SetCardInfo("Ash Barrens", 56, Rarity.COMMON, mage.cards.a.AshBarrens.class));
         cards.add(new SetCardInfo("Assault Suit", 242, Rarity.UNCOMMON, mage.cards.a.AssaultSuit.class));
         cards.add(new SetCardInfo("Atraxa, Praetors' Voice", 28, Rarity.MYTHIC, mage.cards.a.AtraxaPraetorsVoice.class));
         cards.add(new SetCardInfo("Aura Mutation", 180, Rarity.RARE, mage.cards.a.AuraMutation.class));
@@ -87,6 +89,7 @@ public class Commander2016 extends ExpansionSet {
         cards.add(new SetCardInfo("Brutal Hordechief", 108, Rarity.MYTHIC, mage.cards.b.BrutalHordechief.class));
         cards.add(new SetCardInfo("Burgeoning", 143, Rarity.RARE, mage.cards.b.Burgeoning.class));
         cards.add(new SetCardInfo("Buried Ruin", 284, Rarity.UNCOMMON, mage.cards.b.BuriedRuin.class));
+        cards.add(new SetCardInfo("Cauldron of Souls", 246, Rarity.RARE, mage.cards.c.CauldronOfSouls.class));
         cards.add(new SetCardInfo("Cathars' Crusade", 61, Rarity.RARE, mage.cards.c.CatharsCrusade.class));
         cards.add(new SetCardInfo("Caves of Koilos", 285, Rarity.RARE, mage.cards.c.CavesOfKoilos.class));
         cards.add(new SetCardInfo("Chain of Vapor", 84, Rarity.UNCOMMON, mage.cards.c.ChainOfVapor.class));
