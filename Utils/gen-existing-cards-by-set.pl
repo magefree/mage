@@ -125,6 +125,9 @@ my %implemented;
 my %implementedButNotInSetYet;
 my %unimplemented;
 
+
+my %githubTask;
+
 foreach $name_collectorid (sort @setCards)
 {
     my $cardName;
@@ -160,18 +163,25 @@ foreach $name_collectorid (sort @setCards)
             $setId =~ s/^(.).*/$1/;
             my $fn = "..\\Mage.Sets\\src\\mage\\cards\\$setId\\$className.java";
             my $str = "        cards.add(new SetCardInfo(\"$cardName\", $cardNr, Rarity." . getRarity ($cards{$cardName}{$setName}[3], $cardName) . ", mage.cards.$setId.$className.class));\n";
+            my $plus_cardName = $cardName;
+            $plus_cardName =~ s/ /+/img;
+
             if (!exists ($alreadyIn{$cardNr})) {
 # Go Looking for the existing implementation..
                 if (-e $fn) {
                     $implementedButNotInSetYet {$str} = 1;
+                    $githubTask {"- [ ] Implemented but have to add to set -- [$cardName](https://www.google.com.au/search?q=$plus_cardName+$setName+mtg&source=lnms&tbm=isch)\n"} = 1;
                 } else { 
                     $unimplemented {"$str"} = 1;
+                    $githubTask {"- [ ] Not done -- [$cardName](https://www.google.com.au/search?q=$plus_cardName+$setName+mtg&source=lnms&tbm=isch)\n"} = 1;
                 }
             } else {
                 if (-e $fn) {
                     $implemented {$str} = 1;
+                    $githubTask {"- [x] Done -- [$cardName](https://www.google.com.au/search?q=$plus_cardName+$setName+mtg&source=lnms&tbm=isch)\n"} = 1;
                 } else { 
                     $unimplemented {$str} = 1;
+                    $githubTask {"- [ ] Not Done -- [$cardName](https://www.google.com.au/search?q=$plus_cardName+$setName+mtg&source=lnms&tbm=isch)\n"} = 1;
                 }
             }
         }
@@ -184,4 +194,6 @@ print "\n\n\nImplemented but-not-yet-added-to-set cards:\n";
 print (join ("", sort keys (%implementedButNotInSetYet)));
 print "\n\n\nUnimplemented cards:\n";
 print (join ("", sort keys (%unimplemented)));
+print "\n\n\nGithub Task:\n";
+print (join ("", sort keys (%githubTask)));
 print ("\nData from reading: ../../mage/Mage.Sets/src/mage/sets/$knownSets{$setName}.java\n");
