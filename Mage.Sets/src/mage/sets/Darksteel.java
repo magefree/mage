@@ -157,6 +157,7 @@ public class Darksteel extends ExpansionSet {
         cards.add(new SetCardInfo("Test of Faith", 17, Rarity.UNCOMMON, mage.cards.t.TestOfFaith.class));
         cards.add(new SetCardInfo("Thunderstaff", 153, Rarity.UNCOMMON, mage.cards.t.Thunderstaff.class));
         cards.add(new SetCardInfo("Trinisphere", 154, Rarity.RARE, mage.cards.t.Trinisphere.class));
+	cards.add(new SetCardInfo("Turn the Tables", 18, Rarity.RARE, mage.cards.t.TurnTheTables.class));
         cards.add(new SetCardInfo("Unforge", 71, Rarity.COMMON, mage.cards.u.Unforge.class));
         cards.add(new SetCardInfo("Ur-Golem's Eye", 155, Rarity.COMMON, mage.cards.u.UrGolemsEye.class));
         cards.add(new SetCardInfo("Vedalken Engineer", 35, Rarity.COMMON, mage.cards.v.VedalkenEngineer.class));
