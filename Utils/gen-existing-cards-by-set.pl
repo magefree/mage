@@ -165,6 +165,8 @@ foreach $name_collectorid (sort @setCards)
             my $str = "        cards.add(new SetCardInfo(\"$cardName\", $cardNr, Rarity." . getRarity ($cards{$cardName}{$setName}[3], $cardName) . ", mage.cards.$setId.$className.class));\n";
             my $plus_cardName = $cardName;
             $plus_cardName =~ s/ /+/img;
+            $plus_cardName =~ s/,/+/img;
+            $plus_cardName = "intext:\"$plus_cardName\"";
 
             if (!exists ($alreadyIn{$cardNr})) {
 # Go Looking for the existing implementation..
