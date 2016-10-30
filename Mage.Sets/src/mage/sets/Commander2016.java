@@ -235,6 +235,7 @@ public class Commander2016 extends ExpansionSet {
         cards.add(new SetCardInfo("Oblation", 71, Rarity.RARE, mage.cards.o.Oblation.class));
         cards.add(new SetCardInfo("Opal Palace", 312, Rarity.COMMON, mage.cards.o.OpalPalace.class));
         cards.add(new SetCardInfo("Opulent Palace", 313, Rarity.UNCOMMON, mage.cards.o.OpulentPalace.class));
+        cards.add(new SetCardInfo("Order // Chaos", 240, Rarity.UNCOMMON, mage.cards.o.OrderChaos.class));
         cards.add(new SetCardInfo("Orzhov Basilica", 314, Rarity.UNCOMMON, mage.cards.o.OrzhovBasilica.class));
         cards.add(new SetCardInfo("Orzhov Signet", 266, Rarity.COMMON, mage.cards.o.OrzhovSignet.class));
         cards.add(new SetCardInfo("Past in Flames", 131, Rarity.MYTHIC, mage.cards.p.PastInFlames.class));
@@ -322,6 +323,7 @@ public class Commander2016 extends ExpansionSet {
         cards.add(new SetCardInfo("Trading Post", 278, Rarity.RARE, mage.cards.t.TradingPost.class));
         cards.add(new SetCardInfo("Trash for Treasure", 136, Rarity.RARE, mage.cards.t.TrashForTreasure.class));
         cards.add(new SetCardInfo("Treasure Cruise", 101, Rarity.COMMON, mage.cards.t.TreasureCruise.class));
+        cards.add(new SetCardInfo("Trial // Error", 239, Rarity.UNCOMMON, mage.cards.t.TrialError.class));
         cards.add(new SetCardInfo("Trinket Mage", 102, Rarity.COMMON, mage.cards.t.TrinketMage.class));
         cards.add(new SetCardInfo("Tuskguard Captain", 173, Rarity.UNCOMMON, mage.cards.t.TuskguardCaptain.class));
         cards.add(new SetCardInfo("Underground River", 335, Rarity.RARE, mage.cards.u.UndergroundRiver.class));
