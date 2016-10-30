@@ -48,7 +48,7 @@ public class Commander2016 extends ExpansionSet {
     private Commander2016() {
         super("Commander 2016 Edition", "C16", ExpansionSet.buildDate(2016, 11, 11), SetType.SUPPLEMENTAL);
         this.blockName = "Command Zone";
-        cards.add(new SetCardInfo("AStral Cornucopia", 243, Rarity.RARE, mage.cards.a.AstralCornucopia.class));
+        cards.add(new SetCardInfo("Astral Cornucopia", 243, Rarity.RARE, mage.cards.a.AstralCornucopia.class));
         cards.add(new SetCardInfo("Abzan Charm", 177, Rarity.UNCOMMON, mage.cards.a.AbzanCharm.class));
         cards.add(new SetCardInfo("Abzan Falconer", 57, Rarity.UNCOMMON, mage.cards.a.AbzanFalconer.class));
         cards.add(new SetCardInfo("Academy Elite", 81, Rarity.RARE, mage.cards.a.AcademyElite.class));
@@ -104,6 +104,7 @@ public class Commander2016 extends ExpansionSet {
         cards.add(new SetCardInfo("Collective Voyage", 145, Rarity.RARE, mage.cards.c.CollectiveVoyage.class));
         cards.add(new SetCardInfo("Command Tower", 286, Rarity.COMMON, mage.cards.c.CommandTower.class));
         cards.add(new SetCardInfo("Commander's Sphere", 248, Rarity.COMMON, mage.cards.c.CommandersSphere.class));
+	cards.add(new SetCardInfo("Conqueror's Flail", 53, Rarity.RARE, mage.cards.c.ConquerorsFlail.class));
         cards.add(new SetCardInfo("Consuming Aberration", 189, Rarity.RARE, mage.cards.c.ConsumingAberration.class));
         cards.add(new SetCardInfo("Corpsejack Menace", 190, Rarity.RARE, mage.cards.c.CorpsejackMenace.class));
         cards.add(new SetCardInfo("Crackling Doom", 191, Rarity.RARE, mage.cards.c.CracklingDoom.class));
