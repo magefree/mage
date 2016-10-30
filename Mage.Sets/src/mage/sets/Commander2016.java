@@ -338,6 +338,7 @@ public class Commander2016 extends ExpansionSet {
         cards.add(new SetCardInfo("Vedalken Engineer", 103, Rarity.COMMON, mage.cards.v.VedalkenEngineer.class));
         cards.add(new SetCardInfo("Venser's Journal", 279, Rarity.RARE, mage.cards.v.VensersJournal.class));
         cards.add(new SetCardInfo("Veteran Explorer", 174, Rarity.UNCOMMON, mage.cards.v.VeteranExplorer.class));
+	cards.add(new SetCardInfo("Vial Smasher the Fierce", 49, Rarity.MYTHIC, mage.cards.v.VialSmasherTheFierce.class));
         cards.add(new SetCardInfo("Volcanic Vision", 137, Rarity.RARE, mage.cards.v.VolcanicVision.class));
         cards.add(new SetCardInfo("Vorel of the Hull Clade", 227, Rarity.RARE, mage.cards.v.VorelOfTheHullClade.class));
         cards.add(new SetCardInfo("Vulturous Zombie", 228, Rarity.RARE, mage.cards.v.VulturousZombie.class));
