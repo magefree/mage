@@ -335,6 +335,7 @@ public class Tempest extends ExpansionSet {
         cards.add(new SetCardInfo("Tranquility", 155, Rarity.COMMON, mage.cards.t.Tranquility.class));
         cards.add(new SetCardInfo("Trumpeting Armodon", 156, Rarity.UNCOMMON, mage.cards.t.TrumpetingArmodon.class));
         cards.add(new SetCardInfo("Twitch", 99, Rarity.COMMON, mage.cards.t.Twitch.class));
+        cards.add(new SetCardInfo("Unstable Shapeshifter", 100, Rarity.RARE, mage.cards.u.UnstableShapeshifter.class));
         cards.add(new SetCardInfo("Vec Townships", 339, Rarity.UNCOMMON, mage.cards.v.VecTownships.class));
         cards.add(new SetCardInfo("Verdant Force", 157, Rarity.RARE, mage.cards.v.VerdantForce.class));
         cards.add(new SetCardInfo("Verdigris", 158, Rarity.UNCOMMON, mage.cards.v.Verdigris.class));
