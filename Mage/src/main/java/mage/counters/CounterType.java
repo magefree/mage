@@ -101,6 +101,7 @@ public enum CounterType {
     SHIELD("shield"),
     SHRED("shred"),
     SLIME("slime"),
+    SPITE("spite"),
     SPORE("spore"),
     STORAGE("storage"),
     STRIFE("strife"),
