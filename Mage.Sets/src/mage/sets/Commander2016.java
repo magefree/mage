@@ -48,7 +48,6 @@ public class Commander2016 extends ExpansionSet {
     private Commander2016() {
         super("Commander 2016 Edition", "C16", ExpansionSet.buildDate(2016, 11, 11), SetType.SUPPLEMENTAL);
         this.blockName = "Command Zone";
-        cards.add(new SetCardInfo("AStral Cornucopia", 243, Rarity.RARE, mage.cards.a.AstralCornucopia.class));
         cards.add(new SetCardInfo("Abzan Charm", 177, Rarity.UNCOMMON, mage.cards.a.AbzanCharm.class));
         cards.add(new SetCardInfo("Abzan Falconer", 57, Rarity.UNCOMMON, mage.cards.a.AbzanFalconer.class));
         cards.add(new SetCardInfo("Academy Elite", 81, Rarity.RARE, mage.cards.a.AcademyElite.class));
@@ -63,6 +62,7 @@ public class Commander2016 extends ExpansionSet {
         cards.add(new SetCardInfo("Artifact Mutation", 179, Rarity.RARE, mage.cards.a.ArtifactMutation.class));
         cards.add(new SetCardInfo("Ash Barrens", 56, Rarity.COMMON, mage.cards.a.AshBarrens.class));
         cards.add(new SetCardInfo("Assault Suit", 242, Rarity.UNCOMMON, mage.cards.a.AssaultSuit.class));
+        cards.add(new SetCardInfo("Astral Cornucopia", 243, Rarity.RARE, mage.cards.a.AstralCornucopia.class));
         cards.add(new SetCardInfo("Atraxa, Praetors' Voice", 28, Rarity.MYTHIC, mage.cards.a.AtraxaPraetorsVoice.class));
         cards.add(new SetCardInfo("Aura Mutation", 180, Rarity.RARE, mage.cards.a.AuraMutation.class));
         cards.add(new SetCardInfo("Azorius Chancery", 282, Rarity.UNCOMMON, mage.cards.a.AzoriusChancery.class));
@@ -105,6 +105,7 @@ public class Commander2016 extends ExpansionSet {
         cards.add(new SetCardInfo("Collective Voyage", 145, Rarity.RARE, mage.cards.c.CollectiveVoyage.class));
         cards.add(new SetCardInfo("Command Tower", 286, Rarity.COMMON, mage.cards.c.CommandTower.class));
         cards.add(new SetCardInfo("Commander's Sphere", 248, Rarity.COMMON, mage.cards.c.CommandersSphere.class));
+        cards.add(new SetCardInfo("Conqueror's Flail", 53, Rarity.RARE, mage.cards.c.ConquerorsFlail.class));
         cards.add(new SetCardInfo("Consuming Aberration", 189, Rarity.RARE, mage.cards.c.ConsumingAberration.class));
         cards.add(new SetCardInfo("Corpsejack Menace", 190, Rarity.RARE, mage.cards.c.CorpsejackMenace.class));
         cards.add(new SetCardInfo("Crackling Doom", 191, Rarity.RARE, mage.cards.c.CracklingDoom.class));
@@ -113,6 +114,7 @@ public class Commander2016 extends ExpansionSet {
         cards.add(new SetCardInfo("Crystalline Crawler", 54, Rarity.RARE, mage.cards.c.CrystallineCrawler.class));
         cards.add(new SetCardInfo("Cultivate", 146, Rarity.COMMON, mage.cards.c.Cultivate.class));
 	cards.add(new SetCardInfo("Curtains' Call", 13, Rarity.RARE, mage.cards.c.CurtainsCall.class));
+        cards.add(new SetCardInfo("Curse of Vengeance", 12, Rarity.RARE, mage.cards.c.CurseOfVengeance.class));
         cards.add(new SetCardInfo("Custodi Soulbinders", 63, Rarity.RARE, mage.cards.c.CustodiSoulbinders.class));
         cards.add(new SetCardInfo("Daretti, Scrap Savant", 123, Rarity.MYTHIC, mage.cards.d.DarettiScrapSavant.class));
         cards.add(new SetCardInfo("Darksteel Citadel", 288, Rarity.UNCOMMON, mage.cards.d.DarksteelCitadel.class));
@@ -236,7 +238,9 @@ public class Commander2016 extends ExpansionSet {
         cards.add(new SetCardInfo("Oath of Druids", 159, Rarity.RARE, mage.cards.o.OathOfDruids.class));
         cards.add(new SetCardInfo("Oblation", 71, Rarity.RARE, mage.cards.o.Oblation.class));
         cards.add(new SetCardInfo("Opal Palace", 312, Rarity.COMMON, mage.cards.o.OpalPalace.class));
+        cards.add(new SetCardInfo("Open the Vaults", 72, Rarity.RARE, mage.cards.o.OpenTheVaults.class));
         cards.add(new SetCardInfo("Opulent Palace", 313, Rarity.UNCOMMON, mage.cards.o.OpulentPalace.class));
+        cards.add(new SetCardInfo("Order // Chaos", 240, Rarity.UNCOMMON, mage.cards.o.OrderChaos.class));
         cards.add(new SetCardInfo("Orzhov Basilica", 314, Rarity.UNCOMMON, mage.cards.o.OrzhovBasilica.class));
         cards.add(new SetCardInfo("Orzhov Signet", 266, Rarity.COMMON, mage.cards.o.OrzhovSignet.class));
         cards.add(new SetCardInfo("Past in Flames", 131, Rarity.MYTHIC, mage.cards.p.PastInFlames.class));
@@ -326,6 +330,7 @@ public class Commander2016 extends ExpansionSet {
         cards.add(new SetCardInfo("Trading Post", 278, Rarity.RARE, mage.cards.t.TradingPost.class));
         cards.add(new SetCardInfo("Trash for Treasure", 136, Rarity.RARE, mage.cards.t.TrashForTreasure.class));
         cards.add(new SetCardInfo("Treasure Cruise", 101, Rarity.COMMON, mage.cards.t.TreasureCruise.class));
+        cards.add(new SetCardInfo("Trial // Error", 239, Rarity.UNCOMMON, mage.cards.t.TrialError.class));
         cards.add(new SetCardInfo("Trinket Mage", 102, Rarity.COMMON, mage.cards.t.TrinketMage.class));
         cards.add(new SetCardInfo("Tuskguard Captain", 173, Rarity.UNCOMMON, mage.cards.t.TuskguardCaptain.class));
         cards.add(new SetCardInfo("Underground River", 335, Rarity.RARE, mage.cards.u.UndergroundRiver.class));
