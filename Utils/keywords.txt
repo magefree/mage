@@ -74,6 +74,7 @@ Totem armor|new|
 Trample|instance|
 Tribute|number|
 Unblockable|new|
+Undaunted|new|
 Undying|new|
 Unearth|cost|
 Unleash|new|

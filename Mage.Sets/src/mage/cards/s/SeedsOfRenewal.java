@@ -25,39 +25,45 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.cards.d;
+package mage.cards.s;
 
 import java.util.UUID;
-import mage.abilities.costs.mana.ManaCostsImpl;
-import mage.abilities.effects.common.ReturnToHandFromBattlefieldAllEffect;
-import mage.abilities.keyword.MiracleAbility;
+import mage.abilities.effects.Effect;
+import mage.abilities.effects.common.ExileSpellEffect;
+import mage.abilities.effects.common.ReturnFromGraveyardToHandTargetEffect;
+import mage.abilities.keyword.UndauntedAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.filter.common.FilterNonlandPermanent;
+import mage.filter.FilterCard;
+import mage.target.common.TargetCardInYourGraveyard;
 
 /**
  *
- * @author noxx
+ * @author LevelX2
  */
-public class DevastationTide extends CardImpl {
+public class SeedsOfRenewal extends CardImpl {
 
-    public DevastationTide(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId, setInfo, new CardType[]{CardType.SORCERY}, "{3}{U}{U}");
+    public SeedsOfRenewal(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId, setInfo, new CardType[]{CardType.SORCERY}, "{6}{G}");
 
-        // Return all nonland permanents to their owners' hands.
-        this.getSpellAbility().addEffect(new ReturnToHandFromBattlefieldAllEffect(new FilterNonlandPermanent()));
+        // Undaunted
+        this.addAbility(new UndauntedAbility());
+        // Return up to two target cards from your graveyard to your hand. Exile Seeds of Renewal.
+        Effect effect = new ReturnFromGraveyardToHandTargetEffect();
+        effect.setText("Return up to two target cards from your graveyard to your hand");
+        this.getSpellAbility().addEffect(effect);
+        this.getSpellAbility().addTarget(new TargetCardInYourGraveyard(0, 2, new FilterCard("card from your graveyard")));
+        this.getSpellAbility().addEffect(ExileSpellEffect.getInstance());
 
-        // Miracle {1}{U}
-        this.addAbility(new MiracleAbility(this, new ManaCostsImpl("{1}{U}")));
     }
 
-    public DevastationTide(final DevastationTide card) {
+    public SeedsOfRenewal(final SeedsOfRenewal card) {
         super(card);
     }
 
     @Override
-    public DevastationTide copy() {
-        return new DevastationTide(this);
+    public SeedsOfRenewal copy() {
+        return new SeedsOfRenewal(this);
     }
 }

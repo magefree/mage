@@ -25,39 +25,38 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.cards.d;
+package mage.cards.s;
 
 import java.util.UUID;
-import mage.abilities.costs.mana.ManaCostsImpl;
-import mage.abilities.effects.common.ReturnToHandFromBattlefieldAllEffect;
-import mage.abilities.keyword.MiracleAbility;
+import mage.abilities.effects.common.DestroyAllEffect;
+import mage.abilities.keyword.UndauntedAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.filter.common.FilterNonlandPermanent;
+import mage.filter.common.FilterCreaturePermanent;
 
 /**
  *
- * @author noxx
+ * @author LevelX2
  */
-public class DevastationTide extends CardImpl {
+public class SublimeExhalation extends CardImpl {
 
-    public DevastationTide(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId, setInfo, new CardType[]{CardType.SORCERY}, "{3}{U}{U}");
+    public SublimeExhalation(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId, setInfo, new CardType[]{CardType.SORCERY}, "{6}{W}");
 
-        // Return all nonland permanents to their owners' hands.
-        this.getSpellAbility().addEffect(new ReturnToHandFromBattlefieldAllEffect(new FilterNonlandPermanent()));
+        // Undaunted (This spell costs {1} less to cast for each opponent.)
+        this.addAbility(new UndauntedAbility());
 
-        // Miracle {1}{U}
-        this.addAbility(new MiracleAbility(this, new ManaCostsImpl("{1}{U}")));
+        // Destroy all creatures.
+        getSpellAbility().addEffect(new DestroyAllEffect(new FilterCreaturePermanent("creatures")));
     }
 
-    public DevastationTide(final DevastationTide card) {
+    public SublimeExhalation(final SublimeExhalation card) {
         super(card);
     }
 
     @Override
-    public DevastationTide copy() {
-        return new DevastationTide(this);
+    public SublimeExhalation copy() {
+        return new SublimeExhalation(this);
     }
 }
