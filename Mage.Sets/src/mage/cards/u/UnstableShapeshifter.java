@@ -30,37 +30,42 @@ package mage.cards.u;
 import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.Ability;
-import mage.abilities.TriggeredAbilityImpl;
-import mage.abilities.effects.Effect;
+import mage.abilities.common.EntersBattlefieldAllTriggeredAbility;
 import mage.abilities.effects.OneShotEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
+import mage.constants.Duration;
 import mage.constants.Outcome;
+import mage.constants.SetTargetPointer;
 import mage.constants.Zone;
+import mage.filter.common.FilterCreaturePermanent;
+import mage.filter.predicate.permanent.AnotherPredicate;
 import mage.game.Game;
-import mage.game.events.GameEvent;
-import mage.game.events.GameEvent.EventType;
 import mage.game.permanent.Permanent;
-import mage.target.targetpointer.FixedTarget;
 import mage.util.functions.EmptyApplyToPermanent;
-        
 
 /**
- * 
+ *
  * @author HCrescent
  */
 public class UnstableShapeshifter extends CardImpl {
 
+    private final static FilterCreaturePermanent filter = new FilterCreaturePermanent();
+
+    static {
+        filter.add(new AnotherPredicate());
+    }
+
     public UnstableShapeshifter(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{3}{U}");
+        super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{3}{U}");
         this.subtype.add("Shapeshifter");
 
         this.power = new MageInt(0);
         this.toughness = new MageInt(1);
 
         // Whenever another creature enters the battlefield under your control, you may have Renegade Doppelganger become a copy of that creature until end of turn.
-        this.addAbility(new UnstableShapeshifterTriggeredAbility());
+        this.addAbility(new EntersBattlefieldAllTriggeredAbility(Zone.BATTLEFIELD, new UnstableShapeshifterEffect(), filter, true, SetTargetPointer.PERMANENT, ""));
     }
 
     public UnstableShapeshifter(final UnstableShapeshifter card) {
@@ -73,51 +78,11 @@ public class UnstableShapeshifter extends CardImpl {
     }
 }
 
-class UnstableShapeshifterTriggeredAbility extends TriggeredAbilityImpl {
-
-    UnstableShapeshifterTriggeredAbility() {
-        super(Zone.BATTLEFIELD, new UnstableShapeshifterEffect(), false);
-    }
-
-    UnstableShapeshifterTriggeredAbility(final UnstableShapeshifterTriggeredAbility ability) {
-        super(ability);
-    }
-
-    @Override
-    public UnstableShapeshifterTriggeredAbility copy() {
-        return new UnstableShapeshifterTriggeredAbility(this);
-    }
-
-    @Override
-    public boolean checkEventType(GameEvent event, Game game) {
-        return event.getType() == EventType.ENTERS_THE_BATTLEFIELD;
-    }
-
-    @Override
-    public boolean checkTrigger(GameEvent event, Game game) {
-        if (!event.getTargetId().equals(this.getSourceId())) {
-            Permanent permanent = game.getPermanent(event.getTargetId());
-            if (permanent != null && permanent.getCardType().contains(CardType.CREATURE)) {
-                for (Effect effect : this.getEffects()) {
-                    effect.setTargetPointer(new FixedTarget(permanent.getId()));
-                }
-                return true;
-            }
-        }
-        return false;
-    }
-
-    @Override
-    public String getRule() {
-        return "Whenever another creature enters the battlefield, {this} becomes a copy of that creature and gains this ability.";
-    }
-}
-
 class UnstableShapeshifterEffect extends OneShotEffect {
 
     public UnstableShapeshifterEffect() {
         super(Outcome.Copy);
-        this.staticText = "have {this} become a copy of that creature and gain this ability";
+        this.staticText = "you may have {this} become a copy of that creature until end of turn";
     }
 
     public UnstableShapeshifterEffect(final UnstableShapeshifterEffect effect) {
@@ -132,12 +97,11 @@ class UnstableShapeshifterEffect extends OneShotEffect {
     @Override
     public boolean apply(Game game, Ability source) {
         Permanent permanent = game.getPermanent(source.getSourceId());
-        Permanent targetCreature = game.getPermanent(getTargetPointer().getFirst(game, source));
-        if (targetCreature == null) {
-            targetCreature = (Permanent) game.getLastKnownInformation(getTargetPointer().getFirst(game, source), Zone.BATTLEFIELD);
+        Permanent targetCreature = game.getPermanentOrLKIBattlefield(getTargetPointer().getFirst(game, source));
+        if (targetCreature != null && permanent != null) {
+            game.copyPermanent(Duration.EndOfTurn, targetCreature, permanent.getId(), source, new EmptyApplyToPermanent());
+            return true;
         }
-        Permanent newPermanent = game.copyPermanent( targetCreature, permanent.getId(), source, new EmptyApplyToPermanent());
-        newPermanent.addAbility(new UnstableShapeshifterTriggeredAbility() , source.getSourceId(), game);
         return false;
     }
 }
