@@ -262,6 +262,7 @@ public class Commander2016 extends ExpansionSet {
         cards.add(new SetCardInfo("Quirion Explorer", 160, Rarity.COMMON, mage.cards.q.QuirionExplorer.class));
         cards.add(new SetCardInfo("Rakdos Carnarium", 315, Rarity.UNCOMMON, mage.cards.r.RakdosCarnarium.class));
         cards.add(new SetCardInfo("Rakdos Charm", 218, Rarity.UNCOMMON, mage.cards.r.RakdosCharm.class));
+        cards.add(new SetCardInfo("Rakdos Signet", 268, Rarity.COMMON, mage.cards.r.RakdosSignet.class));
         cards.add(new SetCardInfo("Rampant Growth", 161, Rarity.COMMON, mage.cards.r.RampantGrowth.class));
         cards.add(new SetCardInfo("Read the Runes", 95, Rarity.RARE, mage.cards.r.ReadTheRunes.class));
         cards.add(new SetCardInfo("Realm Seekers", 162, Rarity.RARE, mage.cards.r.RealmSeekers.class));
@@ -334,6 +335,7 @@ public class Commander2016 extends ExpansionSet {
         cards.add(new SetCardInfo("Thrummingbird", 100, Rarity.UNCOMMON, mage.cards.t.Thrummingbird.class));
         cards.add(new SetCardInfo("Thunderfoot Baloth", 172, Rarity.RARE, mage.cards.t.ThunderfootBaloth.class));
         cards.add(new SetCardInfo("Trading Post", 278, Rarity.RARE, mage.cards.t.TradingPost.class));
+        cards.add(new SetCardInfo("Transguild Promenade", 334, Rarity.COMMON, mage.cards.t.TransguildPromenade.class));
         cards.add(new SetCardInfo("Trash for Treasure", 136, Rarity.RARE, mage.cards.t.TrashForTreasure.class));
         cards.add(new SetCardInfo("Treasure Cruise", 101, Rarity.COMMON, mage.cards.t.TreasureCruise.class));
         cards.add(new SetCardInfo("Trial // Error", 239, Rarity.UNCOMMON, mage.cards.t.TrialError.class));
