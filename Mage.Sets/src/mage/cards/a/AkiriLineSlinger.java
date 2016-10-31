@@ -35,21 +35,27 @@ import mage.abilities.dynamicvalue.common.StaticValue;
 import mage.abilities.effects.Effect;
 import mage.abilities.effects.common.continuous.BoostSourceEffect;
 import mage.abilities.keyword.FirstStrikeAbility;
+import mage.abilities.keyword.PartnerAbility;
 import mage.abilities.keyword.VigilanceAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
-import static mage.cards.s.SpellstutterSprite.filter;
 import mage.constants.CardType;
 import mage.constants.Duration;
 import mage.constants.Zone;
-import mage.abilities.keyword.PartnerAbility;
-
+import mage.filter.common.FilterControlledPermanent;
+import mage.filter.predicate.mageobject.CardTypePredicate;
 
 /**
  *
  * @author spjspj
  */
 public class AkiriLineSlinger extends CardImpl {
+
+    private static final FilterControlledPermanent filter = new FilterControlledPermanent("artifact you control");
+
+    static {
+        filter.add(new CardTypePredicate(CardType.ARTIFACT));
+    }
 
     public AkiriLineSlinger(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{R}{W}");
