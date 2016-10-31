@@ -59,6 +59,7 @@ public class Commander2016 extends ExpansionSet {
         cards.add(new SetCardInfo("Ankle Shanker", 178, Rarity.RARE, mage.cards.a.AnkleShanker.class));
         cards.add(new SetCardInfo("Arcane Denial", 83, Rarity.COMMON, mage.cards.a.ArcaneDenial.class));
         cards.add(new SetCardInfo("Arcane Sanctum", 281, Rarity.UNCOMMON, mage.cards.a.ArcaneSanctum.class));
+        cards.add(new SetCardInfo("Armory Automaton", 51, Rarity.RARE, mage.cards.a.ArmoryAutomaton.class));
         cards.add(new SetCardInfo("Army of the Damned", 105, Rarity.MYTHIC, mage.cards.a.ArmyOfTheDamned.class));
         cards.add(new SetCardInfo("Artifact Mutation", 179, Rarity.RARE, mage.cards.a.ArtifactMutation.class));
         cards.add(new SetCardInfo("Ash Barrens", 56, Rarity.COMMON, mage.cards.a.AshBarrens.class));
@@ -101,7 +102,7 @@ public class Commander2016 extends ExpansionSet {
         cards.add(new SetCardInfo("Chromatic Lantern", 247, Rarity.RARE, mage.cards.c.ChromaticLantern.class));
         cards.add(new SetCardInfo("Citadel Siege", 62, Rarity.RARE, mage.cards.c.CitadelSiege.class));
         cards.add(new SetCardInfo("Clan Defiance", 187, Rarity.RARE, mage.cards.c.ClanDefiance.class));
-	cards.add(new SetCardInfo("Coastal Breach", 6, Rarity.RARE, mage.cards.c.CoastalBreach.class));
+        cards.add(new SetCardInfo("Coastal Breach", 6, Rarity.RARE, mage.cards.c.CoastalBreach.class));
         cards.add(new SetCardInfo("Coiling Oracle", 188, Rarity.COMMON, mage.cards.c.CoilingOracle.class));
         cards.add(new SetCardInfo("Collective Voyage", 145, Rarity.RARE, mage.cards.c.CollectiveVoyage.class));
         cards.add(new SetCardInfo("Command Tower", 286, Rarity.COMMON, mage.cards.c.CommandTower.class));
@@ -114,7 +115,7 @@ public class Commander2016 extends ExpansionSet {
         cards.add(new SetCardInfo("Crumbling Necropolis", 287, Rarity.UNCOMMON, mage.cards.c.CrumblingNecropolis.class));
         cards.add(new SetCardInfo("Crystalline Crawler", 54, Rarity.RARE, mage.cards.c.CrystallineCrawler.class));
         cards.add(new SetCardInfo("Cultivate", 146, Rarity.COMMON, mage.cards.c.Cultivate.class));
-	cards.add(new SetCardInfo("Curtains' Call", 13, Rarity.RARE, mage.cards.c.CurtainsCall.class));
+        cards.add(new SetCardInfo("Curtains' Call", 13, Rarity.RARE, mage.cards.c.CurtainsCall.class));
         cards.add(new SetCardInfo("Curse of Vengeance", 12, Rarity.RARE, mage.cards.c.CurseOfVengeance.class));
         cards.add(new SetCardInfo("Custodi Soulbinders", 63, Rarity.RARE, mage.cards.c.CustodiSoulbinders.class));
         cards.add(new SetCardInfo("Daretti, Scrap Savant", 123, Rarity.MYTHIC, mage.cards.d.DarettiScrapSavant.class));
@@ -130,17 +131,17 @@ public class Commander2016 extends ExpansionSet {
         cards.add(new SetCardInfo("Disdainful Stroke", 88, Rarity.COMMON, mage.cards.d.DisdainfulStroke.class));
         cards.add(new SetCardInfo("Dismal Backwater", 291, Rarity.COMMON, mage.cards.d.DismalBackwater.class));
         cards.add(new SetCardInfo("Dispeller's Capsule", 64, Rarity.COMMON, mage.cards.d.DispellersCapsule.class));
-	cards.add(new SetCardInfo("Divergent Transformations", 17, Rarity.RARE, mage.cards.d.DivergentTransformations.class));
+        cards.add(new SetCardInfo("Divergent Transformations", 17, Rarity.RARE, mage.cards.d.DivergentTransformations.class));
         cards.add(new SetCardInfo("Dragon Mage", 124, Rarity.RARE, mage.cards.d.DragonMage.class));
         cards.add(new SetCardInfo("Dragonskull Summit", 292, Rarity.RARE, mage.cards.d.DragonskullSummit.class));
         cards.add(new SetCardInfo("Dreadship Reef", 293, Rarity.UNCOMMON, mage.cards.d.DreadshipReef.class));
-	cards.add(new SetCardInfo("Duelist's Heritage", 1, Rarity.RARE, mage.cards.d.DuelistsHeritage.class));
+        cards.add(new SetCardInfo("Duelist's Heritage", 1, Rarity.RARE, mage.cards.d.DuelistsHeritage.class));
         cards.add(new SetCardInfo("Duneblast", 194, Rarity.RARE, mage.cards.d.Duneblast.class));
         cards.add(new SetCardInfo("Edric, Spymaster of Trest", 195, Rarity.RARE, mage.cards.e.EdricSpymasterOfTrest.class));
         cards.add(new SetCardInfo("Elite Scaleguard", 65, Rarity.UNCOMMON, mage.cards.e.EliteScaleguard.class));
         cards.add(new SetCardInfo("Empyrial Plate", 251, Rarity.RARE, mage.cards.e.EmpyrialPlate.class));
         cards.add(new SetCardInfo("Enduring Scalelord", 196, Rarity.UNCOMMON, mage.cards.e.EnduringScalelord.class));
-	cards.add(new SetCardInfo("Entrapment Maneuver", 2, Rarity.RARE, mage.cards.e.EntrapmentManeuver.class));
+        cards.add(new SetCardInfo("Entrapment Maneuver", 2, Rarity.RARE, mage.cards.e.EntrapmentManeuver.class));
         cards.add(new SetCardInfo("Etched Oracle", 252, Rarity.UNCOMMON, mage.cards.e.EtchedOracle.class));
         cards.add(new SetCardInfo("Etherium Sculptor", 89, Rarity.COMMON, mage.cards.e.EtheriumSculptor.class));
         cards.add(new SetCardInfo("Etherium-Horn Sorcerer", 197, Rarity.RARE, mage.cards.e.EtheriumHornSorcerer.class));
@@ -212,7 +213,7 @@ public class Commander2016 extends ExpansionSet {
         cards.add(new SetCardInfo("Lightning Greaves", 260, Rarity.UNCOMMON, mage.cards.l.LightningGreaves.class));
         cards.add(new SetCardInfo("Loxodon Warhammer", 261, Rarity.UNCOMMON, mage.cards.l.LoxodonWarhammer.class));
         cards.add(new SetCardInfo("Lurking Predators", 156, Rarity.RARE, mage.cards.l.LurkingPredators.class));
-	cards.add(new SetCardInfo("Magus of the Will", 14, Rarity.RARE, mage.cards.m.MagusOfTheWill.class));
+        cards.add(new SetCardInfo("Magus of the Will", 14, Rarity.RARE, mage.cards.m.MagusOfTheWill.class));
         cards.add(new SetCardInfo("Managorger Hydra", 157, Rarity.RARE, mage.cards.m.ManagorgerHydra.class));
         cards.add(new SetCardInfo("Master Biomancer", 210, Rarity.MYTHIC, mage.cards.m.MasterBiomancer.class));
         cards.add(new SetCardInfo("Master of Etherium", 92, Rarity.RARE, mage.cards.m.MasterOfEtherium.class));
@@ -256,6 +257,7 @@ public class Commander2016 extends ExpansionSet {
         cards.add(new SetCardInfo("Prismatic Geoscope", 55, Rarity.RARE, mage.cards.p.PrismaticGeoscope.class));
         cards.add(new SetCardInfo("Progenitor Mimic", 216, Rarity.MYTHIC, mage.cards.p.ProgenitorMimic.class));
         cards.add(new SetCardInfo("Propaganda", 94, Rarity.UNCOMMON, mage.cards.p.Propaganda.class));
+        cards.add(new SetCardInfo("Psychosis Crawler", 267, Rarity.RARE, mage.cards.p.PsychosisCrawler.class));
         cards.add(new SetCardInfo("Putrefy", 217, Rarity.UNCOMMON, mage.cards.p.Putrefy.class));
         cards.add(new SetCardInfo("Quirion Explorer", 160, Rarity.COMMON, mage.cards.q.QuirionExplorer.class));
         cards.add(new SetCardInfo("Rakdos Carnarium", 315, Rarity.UNCOMMON, mage.cards.r.RakdosCarnarium.class));
@@ -282,7 +284,7 @@ public class Commander2016 extends ExpansionSet {
         cards.add(new SetCardInfo("Scavenging Ooze", 166, Rarity.RARE, mage.cards.s.ScavengingOoze.class));
         cards.add(new SetCardInfo("Seaside Citadel", 322, Rarity.UNCOMMON, mage.cards.s.SeasideCitadel.class));
         cards.add(new SetCardInfo("Seat of the Synod", 323, Rarity.COMMON, mage.cards.s.SeatOfTheSynod.class));
-	cards.add(new SetCardInfo("Seeds of Renewal", 24, Rarity.RARE, mage.cards.s.SeedsOfRenewal.class));
+        cards.add(new SetCardInfo("Seeds of Renewal", 24, Rarity.RARE, mage.cards.s.SeedsOfRenewal.class));
         cards.add(new SetCardInfo("Selesnya Guildmage", 235, Rarity.UNCOMMON, mage.cards.s.SelesnyaGuildmage.class));
         cards.add(new SetCardInfo("Selesnya Sanctuary", 324, Rarity.UNCOMMON, mage.cards.s.SelesnyaSanctuary.class));
         cards.add(new SetCardInfo("Selvala, Explorer Returned", 220, Rarity.RARE, mage.cards.s.SelvalaExplorerReturned.class));
@@ -305,7 +307,7 @@ public class Commander2016 extends ExpansionSet {
         cards.add(new SetCardInfo("Spinerock Knoll", 327, Rarity.RARE, mage.cards.s.SpinerockKnoll.class));
         cards.add(new SetCardInfo("Spitting Image", 236, Rarity.RARE, mage.cards.s.SpittingImage.class));
         cards.add(new SetCardInfo("Stalking Vengeance", 134, Rarity.RARE, mage.cards.s.StalkingVengeance.class));
-	cards.add(new SetCardInfo("Sublime Exhalation", 5, Rarity.RARE, mage.cards.s.SublimeExhalation.class));
+        cards.add(new SetCardInfo("Sublime Exhalation", 5, Rarity.RARE, mage.cards.s.SublimeExhalation.class));
         cards.add(new SetCardInfo("Sunforger", 275, Rarity.RARE, mage.cards.s.Sunforger.class));
         cards.add(new SetCardInfo("Sungrass Prairie", 328, Rarity.RARE, mage.cards.s.SungrassPrairie.class));
         cards.add(new SetCardInfo("Sunpetal Grove", 329, Rarity.RARE, mage.cards.s.SunpetalGrove.class));
@@ -342,13 +344,13 @@ public class Commander2016 extends ExpansionSet {
         cards.add(new SetCardInfo("Vedalken Engineer", 103, Rarity.COMMON, mage.cards.v.VedalkenEngineer.class));
         cards.add(new SetCardInfo("Venser's Journal", 279, Rarity.RARE, mage.cards.v.VensersJournal.class));
         cards.add(new SetCardInfo("Veteran Explorer", 174, Rarity.UNCOMMON, mage.cards.v.VeteranExplorer.class));
-	cards.add(new SetCardInfo("Vial Smasher the Fierce", 49, Rarity.MYTHIC, mage.cards.v.VialSmasherTheFierce.class));
+        cards.add(new SetCardInfo("Vial Smasher the Fierce", 49, Rarity.MYTHIC, mage.cards.v.VialSmasherTheFierce.class));
         cards.add(new SetCardInfo("Volcanic Vision", 137, Rarity.RARE, mage.cards.v.VolcanicVision.class));
         cards.add(new SetCardInfo("Vorel of the Hull Clade", 227, Rarity.RARE, mage.cards.v.VorelOfTheHullClade.class));
         cards.add(new SetCardInfo("Vulturous Zombie", 228, Rarity.RARE, mage.cards.v.VulturousZombie.class));
         cards.add(new SetCardInfo("Wall of Blossoms", 175, Rarity.UNCOMMON, mage.cards.w.WallOfBlossoms.class));
         cards.add(new SetCardInfo("Waste Not", 117, Rarity.RARE, mage.cards.w.WasteNot.class));
-	cards.add(new SetCardInfo("Wave of Reckoning", 79, Rarity.RARE, mage.cards.w.WaveOfReckoning.class));
+        cards.add(new SetCardInfo("Wave of Reckoning", 79, Rarity.RARE, mage.cards.w.WaveOfReckoning.class));
         cards.add(new SetCardInfo("Wheel of Fate", 138, Rarity.RARE, mage.cards.w.WheelOfFate.class));
         cards.add(new SetCardInfo("Whims of the Fates", 139, Rarity.RARE, mage.cards.w.WhimsOfTheFates.class));
         cards.add(new SetCardInfo("Whipflare", 140, Rarity.UNCOMMON, mage.cards.w.Whipflare.class));
