@@ -38,9 +38,7 @@ import mage.cards.SplitCard;
 import mage.constants.CardType;
 import mage.constants.Outcome;
 import mage.constants.Zone;
-import mage.filter.FilterPermanent;
-import mage.filter.predicate.Predicates;
-import mage.filter.predicate.mageobject.CardTypePredicate;
+import mage.filter.common.FilterArtifactOrEnchantmentPermanent;
 import mage.game.Game;
 import mage.players.Player;
 import mage.target.TargetPermanent;
@@ -53,21 +51,13 @@ import mage.target.common.TargetOpponent;
  */
 public class HideSeek extends SplitCard {
 
-    private static final FilterPermanent filter = new FilterPermanent("artifact or enchantment");
-
-    static {
-        filter.add(Predicates.or(
-                new CardTypePredicate(CardType.ARTIFACT),
-                new CardTypePredicate(CardType.ENCHANTMENT)));
-    }
-
     public HideSeek(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.INSTANT},"{R}{W}","{W}{B}",false);
-        
+
         // Hide
         // Put target artifact or enchantment on the bottom of its owner's library.
         getLeftHalfCard().getSpellAbility().addEffect(new PutOnLibraryTargetEffect(false));
-        getLeftHalfCard().getSpellAbility().addTarget(new TargetPermanent(filter));
+        getLeftHalfCard().getSpellAbility().addTarget(new TargetPermanent(new FilterArtifactOrEnchantmentPermanent()));
 
         // Seek
         // Search target opponent's library for a card and exile it. You gain life equal to its converted mana cost. Then that player shuffles his or her library..

@@ -50,10 +50,7 @@ public class RavenousSkirge extends CardImpl {
 
         this.power = new MageInt(1);
         this.toughness = new MageInt(1);
-    }
 
-    @Override
-    public void build() {
         // Flying
         this.addAbility(FlyingAbility.getInstance());
         // Whenever Ravenous Skirge attacks, it gets +2/+0 until end of turn.

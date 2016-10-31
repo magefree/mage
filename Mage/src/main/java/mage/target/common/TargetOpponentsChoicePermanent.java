@@ -25,12 +25,10 @@ public class TargetOpponentsChoicePermanent extends TargetPermanent {
 
     public TargetOpponentsChoicePermanent(FilterPermanent filter) {
         super(1, 1, filter, false);
-        this.targetName = filter.getMessage();
     }
 
     public TargetOpponentsChoicePermanent(int minNumTargets, int maxNumTargets, FilterPermanent filter, boolean notTarget, boolean dontTargetPlayer) {
         super(minNumTargets, maxNumTargets, filter, notTarget);
-        this.targetName = filter.getMessage();
         this.dontTargetPlayer = dontTargetPlayer;
     }
 

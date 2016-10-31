@@ -44,7 +44,6 @@ import mage.constants.CardType;
 import mage.constants.Duration;
 import mage.constants.Outcome;
 import mage.constants.Zone;
-import mage.filter.common.FilterLandPermanent;
 import mage.game.permanent.token.Token;
 import mage.target.TargetPermanent;
 import mage.target.common.TargetLandPermanent;
@@ -55,15 +54,13 @@ import mage.target.common.TargetLandPermanent;
  */
 public class GenjuOfTheRealm extends CardImpl {
 
-    private static final FilterLandPermanent FILTER = new FilterLandPermanent();
-
     public GenjuOfTheRealm(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.ENCHANTMENT},"{W}{U}{B}{R}{G}");
         this.subtype.add("Aura");
         this.supertype.add("Legendary");
 
         // Enchant Land
-        TargetPermanent auraTarget = new TargetLandPermanent(FILTER);
+        TargetPermanent auraTarget = new TargetLandPermanent();
         this.getSpellAbility().addTarget(auraTarget);
         this.getSpellAbility().addEffect(new AttachEffect(Outcome.PutCreatureInPlay));
         Ability ability = new EnchantAbility(auraTarget.getTargetName());

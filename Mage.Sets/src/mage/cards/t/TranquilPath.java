@@ -61,4 +61,3 @@ public class TranquilPath extends CardImpl {
         return new TranquilPath(this);
     }
 }
-

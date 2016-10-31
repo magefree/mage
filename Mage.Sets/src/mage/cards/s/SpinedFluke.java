@@ -55,10 +55,7 @@ public class SpinedFluke extends CardImpl {
 
         this.power = new MageInt(5);
         this.toughness = new MageInt(1);
-    }
 
-    @Override
-    public void build() {
         // When Spined Fluke enters the battlefield, sacrifice a creature.
         this.addAbility(new EntersBattlefieldTriggeredAbility(new SacrificeControllerEffect(new FilterCreaturePermanent("a creature"), 1, "")));
         // {B}: Regenerate Spined Fluke.

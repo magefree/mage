@@ -33,9 +33,6 @@ import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.filter.common.FilterLandPermanent;
-import mage.filter.predicate.Predicates;
-import mage.filter.predicate.mageobject.CardTypePredicate;
-import mage.filter.predicate.mageobject.SupertypePredicate;
 
 /**
  *
@@ -43,18 +40,12 @@ import mage.filter.predicate.mageobject.SupertypePredicate;
  */
 public class Ruination extends CardImpl {
 
-    private static final FilterLandPermanent filter = new FilterLandPermanent("nonbasic lands");
-    static {
-        filter.add(new CardTypePredicate(CardType.LAND));
-        filter.add(Predicates.not(new SupertypePredicate("Basic")));
-    }
-
     public Ruination(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{3}{R}");
 
 
         // Destroy all nonbasic lands.
-        this.getSpellAbility().addEffect(new DestroyAllEffect(filter));
+        this.getSpellAbility().addEffect(new DestroyAllEffect(FilterLandPermanent.nonbasicLands()));
     }
 
     public Ruination(final Ruination card) {

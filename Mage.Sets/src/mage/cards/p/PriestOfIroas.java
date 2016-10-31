@@ -38,9 +38,7 @@ import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Zone;
-import mage.filter.common.FilterEnchantmentPermanent;
-import mage.target.Target;
-import mage.target.TargetPermanent;
+import mage.target.common.TargetEnchantmentPermanent;
 
 /**
  *
@@ -59,8 +57,7 @@ public class PriestOfIroas extends CardImpl {
         // {3}{W}, Sacrifice Priest of Iroas: Destroy target enchantment.
         Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new DestroyTargetEffect(), new ManaCostsImpl("{3}{W}"));
         ability.addCost(new SacrificeSourceCost());
-        Target target = new TargetPermanent(new FilterEnchantmentPermanent());
-        ability.addTarget(target);
+        ability.addTarget(new TargetEnchantmentPermanent());
         this.addAbility(ability);
 
     }

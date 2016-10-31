@@ -36,9 +36,7 @@ import mage.abilities.common.EntersBattlefieldTriggeredAbility;
 import mage.abilities.effects.common.ReturnToHandTargetEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
-import mage.filter.FilterPermanent;
-import mage.filter.predicate.Predicates;
-import mage.filter.predicate.mageobject.CardTypePredicate;
+import mage.filter.common.FilterArtifactOrEnchantmentPermanent;
 import mage.target.TargetPermanent;
 
 /**
@@ -46,13 +44,6 @@ import mage.target.TargetPermanent;
  * @author Loki
  */
 public class SternProctor extends CardImpl {
-    private static final FilterPermanent filter = new FilterPermanent("artifact or enchantment");
-
-    static {
-        filter.add(Predicates.or(
-                new CardTypePredicate(CardType.ARTIFACT),
-                new CardTypePredicate(CardType.ENCHANTMENT)));
-    }
 
     public SternProctor(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{U}{U}");
@@ -64,7 +55,7 @@ public class SternProctor extends CardImpl {
 
         // When Stern Proctor enters the battlefield, return target artifact or enchantment to its owner's hand.
         Ability ability = new EntersBattlefieldTriggeredAbility(new ReturnToHandTargetEffect(), false);
-        TargetPermanent target = new TargetPermanent(filter);
+        TargetPermanent target = new TargetPermanent(new FilterArtifactOrEnchantmentPermanent());
         ability.addTarget(target);
         this.addAbility(ability);
     }

@@ -30,7 +30,6 @@ package mage.cards.s;
 import java.util.UUID;
 import mage.constants.CardType;
 import mage.constants.Duration;
-import mage.constants.TargetController;
 import mage.constants.Zone;
 import mage.MageInt;
 import mage.abilities.Ability;
@@ -42,22 +41,15 @@ import mage.abilities.keyword.TrampleAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.filter.common.FilterControlledCreaturePermanent;
-import mage.filter.common.FilterLandPermanent;
-import mage.filter.predicate.permanent.ControllerPredicate;
+import mage.filter.common.FilterControlledLandPermanent;
 import mage.game.permanent.token.Token;
-import mage.target.common.TargetLandPermanent;
+import mage.target.TargetPermanent;
 
 /**
  *
  * @author LevelX2
  */
 public class SkarrgGuildmage extends CardImpl {
-
-    private static final FilterLandPermanent filter = new FilterLandPermanent("land you control");
-
-    static {
-        filter.add(new ControllerPredicate(TargetController.YOU));
-    }
 
     public SkarrgGuildmage(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{R}{G}");
@@ -73,7 +65,7 @@ public class SkarrgGuildmage extends CardImpl {
                 new ManaCostsImpl("{R}{G}")));
         // {1}{R}{G}: Target land you control becomes a 4/4 Elemental creature until end of turn. It's still a land.
         Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new BecomesCreatureTargetEffect(new SkarrgGuildmageToken(), false, true, Duration.EndOfTurn), new ManaCostsImpl("{1}{R}{G}") );
-        ability.addTarget(new TargetLandPermanent(filter));
+        ability.addTarget(new TargetPermanent(new FilterControlledLandPermanent()));
         this.addAbility(ability);
 
     }

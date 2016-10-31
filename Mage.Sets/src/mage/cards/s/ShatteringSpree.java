@@ -33,8 +33,7 @@ import mage.abilities.keyword.ReplicateAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.filter.common.FilterArtifactPermanent;
-import mage.target.TargetPermanent;
+import mage.target.common.TargetArtifactPermanent;
 
 /**
  *
@@ -49,7 +48,7 @@ public class ShatteringSpree extends CardImpl {
         this.addAbility(new ReplicateAbility(this, "{R}"));
         // Destroy target artifact.
         this.getSpellAbility().addEffect(new DestroyTargetEffect(true));
-        this.getSpellAbility().addTarget(new TargetPermanent(new FilterArtifactPermanent()));
+        this.getSpellAbility().addTarget(new TargetArtifactPermanent());
     }
 
     public ShatteringSpree(final ShatteringSpree card) {

@@ -40,10 +40,7 @@ import mage.abilities.effects.common.ReturnFromExileForSourceEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.Zone;
-import mage.filter.FilterPermanent;
-import mage.filter.predicate.Predicates;
-import mage.filter.predicate.mageobject.CardTypePredicate;
-import mage.target.Target;
+import mage.filter.common.FilterArtifactOrEnchantmentPermanent;
 import mage.target.TargetPermanent;
 
 /**
@@ -51,13 +48,6 @@ import mage.target.TargetPermanent;
  * @author Loki
  */
 public class LeoninRelicWarder extends CardImpl {
-    private static final FilterPermanent filter = new FilterPermanent("artifact or enchantment");
-
-    static {
-        filter.add(Predicates.or(
-                new CardTypePredicate(CardType.ARTIFACT),
-                new CardTypePredicate(CardType.ENCHANTMENT)));
-    }
 
     public LeoninRelicWarder (UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{W}{W}");
@@ -68,8 +58,7 @@ public class LeoninRelicWarder extends CardImpl {
         this.toughness = new MageInt(2);
 
         Ability ability = new EntersBattlefieldTriggeredAbility(new ExileTargetForSourceEffect(), true);
-        Target target = new TargetPermanent(filter);
-        ability.addTarget(target);
+        ability.addTarget(new TargetPermanent(new FilterArtifactOrEnchantmentPermanent()));
         this.addAbility(ability);
 
         Ability ability2 = new LeavesBattlefieldTriggeredAbility(new ReturnFromExileForSourceEffect(Zone.BATTLEFIELD), false);

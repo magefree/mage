@@ -34,9 +34,8 @@ import mage.abilities.effects.common.CreateTokenEffect;
 import mage.abilities.effects.common.DestroyTargetEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
-import mage.filter.common.FilterArtifactPermanent;
 import mage.game.permanent.token.SaprolingToken;
-import mage.target.TargetPermanent;
+import mage.target.common.TargetArtifactPermanent;
 
 /**
  *
@@ -50,7 +49,7 @@ public class ArtifactMutation extends CardImpl {
 
         // Destroy target artifact. It can't be regenerated.
         this.getSpellAbility().addEffect(new DestroyTargetEffect(true));
-        this.getSpellAbility().addTarget(new TargetPermanent(new FilterArtifactPermanent()));
+        this.getSpellAbility().addTarget(new TargetArtifactPermanent());
         // create X 1/1 green Saproling creature tokens, where X is that artifact's converted mana cost.
         this.getSpellAbility().addEffect(new CreateTokenEffect(new SaprolingToken(), new TargetConvertedManaCost()));
     }

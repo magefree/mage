@@ -190,7 +190,6 @@ public abstract class CardImpl extends MageObjectImpl implements Card {
                 Constructor<?> con = clazz.getConstructor(UUID.class, CardSetInfo.class);
                 card = (Card) con.newInstance(null, setInfo);
             }
-            card.build();
             return card;
         } catch (Exception e) {
             logger.fatal("Error loading card: " + clazz.getCanonicalName(), e);
@@ -595,10 +594,6 @@ public abstract class CardImpl extends MageObjectImpl implements Card {
     @Override
     public boolean isSplitCard() {
         return splitCard;
-    }
-
-    @Override
-    public void build() {
     }
 
     @Override

@@ -43,20 +43,16 @@ import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Duration;
 import mage.constants.Outcome;
-import mage.constants.TargetController;
 import mage.constants.Zone;
 import mage.filter.FilterPermanent;
 import mage.filter.common.FilterBasicLandCard;
-import mage.filter.common.FilterLandPermanent;
-import mage.filter.predicate.mageobject.SubtypePredicate;
-import mage.filter.predicate.permanent.ControllerPredicate;
+import mage.filter.common.FilterControlledLandPermanent;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.game.permanent.token.Token;
 import mage.players.Player;
 import mage.target.TargetPermanent;
 import mage.target.common.TargetCardInLibrary;
-import mage.target.common.TargetLandPermanent;
 import mage.target.targetpointer.FixedTarget;
 
 /**
@@ -65,13 +61,7 @@ import mage.target.targetpointer.FixedTarget;
  */
 public class NissaWorldwaker extends CardImpl {
 
-    private static final FilterLandPermanent filter = new FilterLandPermanent("land you control");
-    private static final FilterPermanent filterForest = new FilterPermanent("Forest");
-
-    static {
-        filter.add(new ControllerPredicate(TargetController.YOU));
-        filterForest.add(new SubtypePredicate("Forest"));
-    }
+    private static final FilterPermanent filterForest = new FilterPermanent("Forest", "Forest");
 
     public NissaWorldwaker(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.PLANESWALKER},"{3}{G}{G}");
@@ -81,7 +71,7 @@ public class NissaWorldwaker extends CardImpl {
 
         // +1: Target land you control becomes a 4/4 Elemental creature with trample.  It's still a land.
         LoyaltyAbility ability = new LoyaltyAbility(new BecomesCreatureTargetEffect(new NissaWorldwakerToken(), false, true, Duration.Custom), 1);
-        ability.addTarget(new TargetLandPermanent(filter));
+        ability.addTarget(new TargetPermanent(new FilterControlledLandPermanent()));
         this.addAbility(ability);
 
         // +1: Untap up to four target Forests.

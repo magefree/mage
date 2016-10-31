@@ -43,10 +43,6 @@ public class CaptainsCall extends CardImpl {
     public CaptainsCall(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{3}{W}");
 
-    }
-
-    @Override
-    public void build() {
         // Create three 1/1 white Soldier creature tokens.
         this.getSpellAbility().addEffect(new CreateTokenEffect(new SoldierToken(), 3));
     }
