@@ -334,6 +334,7 @@ public class Commander2016 extends ExpansionSet {
         cards.add(new SetCardInfo("Thrummingbird", 100, Rarity.UNCOMMON, mage.cards.t.Thrummingbird.class));
         cards.add(new SetCardInfo("Thunderfoot Baloth", 172, Rarity.RARE, mage.cards.t.ThunderfootBaloth.class));
         cards.add(new SetCardInfo("Trading Post", 278, Rarity.RARE, mage.cards.t.TradingPost.class));
+        cards.add(new SetCardInfo("Transguild Promenade", 334, Rarity.COMMON, mage.cards.t.TransguildPromenade.class));
         cards.add(new SetCardInfo("Trash for Treasure", 136, Rarity.RARE, mage.cards.t.TrashForTreasure.class));
         cards.add(new SetCardInfo("Treasure Cruise", 101, Rarity.COMMON, mage.cards.t.TreasureCruise.class));
         cards.add(new SetCardInfo("Trial // Error", 239, Rarity.UNCOMMON, mage.cards.t.TrialError.class));
