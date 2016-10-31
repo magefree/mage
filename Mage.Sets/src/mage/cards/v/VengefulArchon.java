@@ -32,6 +32,7 @@ import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.costs.mana.ManaCostsImpl;
+import mage.abilities.dynamicvalue.common.ManacostVariableValue;
 import mage.abilities.effects.PreventionEffectData;
 import mage.abilities.effects.common.PreventDamageToControllerEffect;
 import mage.abilities.keyword.FlyingAbility;
@@ -81,7 +82,7 @@ public class VengefulArchon extends CardImpl {
 class VengefulArchonEffect extends PreventDamageToControllerEffect {
 
     public VengefulArchonEffect() {
-        super(Duration.EndOfTurn, 0, false, true, new ManacostVariableValue());
+        super(Duration.EndOfTurn, false, true, new ManacostVariableValue());
         staticText = "Prevent the next X damage that would be dealt to you this turn. If damage is prevented this way, {this} deals that much damage to target player";
     }
 
