@@ -53,6 +53,11 @@ public class TurnMod implements Serializable {
     private TurnPhase afterPhase;
     private PhaseStep afterStep;
 
+    // Turn mod that should be applied after current turn mod.
+    // Implemented only for control player turn mod!
+    // Added for Emrakul, the Promised End.
+    private TurnMod subsequentTurnMod;
+
     /**
      * Used to define if a player skips the next turn or gets an extra turn.
      *
@@ -142,6 +147,9 @@ public class TurnMod implements Serializable {
         this.skipStep = mod.skipStep;
         this.afterPhase = mod.afterPhase;
         this.afterStep = mod.afterStep;
+        if (mod.subsequentTurnMod != null) {
+            this.subsequentTurnMod = mod.subsequentTurnMod.copy();
+        }
     }
 
     public UUID getPlayerId() {
@@ -190,5 +198,13 @@ public class TurnMod implements Serializable {
 
     public UUID getId() {
         return id;
+    }
+
+    public TurnMod getSubsequentTurnMod() {
+        return subsequentTurnMod;
+    }
+
+    public void setSubsequentTurnMod(TurnMod subsequentTurnMod) {
+        this.subsequentTurnMod = subsequentTurnMod;
     }
 }
