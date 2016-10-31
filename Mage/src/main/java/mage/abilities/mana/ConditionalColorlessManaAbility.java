@@ -24,7 +24,7 @@ public class ConditionalColorlessManaAbility extends ManaAbility {
 
     public ConditionalColorlessManaAbility(Cost cost, int amount, ConditionalManaBuilder manaBuilder) {
         super(Zone.BATTLEFIELD, new AddConditionalColorlessManaEffect(amount, manaBuilder), cost);
-        this.netMana.add(new Mana(0, 0, 0, 0, 0, 0, 0, amount));
+        this.netMana.add(Mana.ColorlessMana(amount));
     }
 
     public ConditionalColorlessManaAbility(final ConditionalColorlessManaAbility ability) {

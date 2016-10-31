@@ -43,7 +43,7 @@ public class DarkRitual extends CardImpl {
     public DarkRitual(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.INSTANT},"{B}");
 
-        this.getSpellAbility().addEffect(new BasicManaEffect(new Mana(0, 0, 0, 0, 3, 0, 0, 0)));
+        this.getSpellAbility().addEffect(new BasicManaEffect(Mana.BlackMana(3)));
     }
 
     public DarkRitual(final DarkRitual card) {

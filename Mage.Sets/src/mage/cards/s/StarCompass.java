@@ -202,7 +202,7 @@ class StarCompassManaEffect extends ManaEffect {
             netManas.add(new Mana(ColoredManaSymbol.W));
         }
         if (types.getGeneric() > 0) {
-            netManas.add(new Mana(0, 0, 0, 0, 0, 0, 0, 1));
+            netManas.add(Mana.ColorlessMana(1));
         }
         return netManas;
     }

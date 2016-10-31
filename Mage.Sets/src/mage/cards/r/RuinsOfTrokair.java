@@ -33,7 +33,6 @@ import mage.abilities.Ability;
 import mage.abilities.common.EntersBattlefieldTappedAbility;
 import mage.abilities.costs.common.SacrificeSourceCost;
 import mage.abilities.costs.common.TapSourceCost;
-import mage.abilities.effects.common.BasicManaEffect;
 import mage.abilities.mana.SimpleManaAbility;
 import mage.abilities.mana.WhiteManaAbility;
 import mage.cards.CardImpl;
@@ -55,7 +54,7 @@ public class RuinsOfTrokair extends CardImpl {
         // {tap}: Add {W} to your mana pool.
         this.addAbility(new WhiteManaAbility());
         // {tap}, Sacrifice Ruins of Trokair: Add {W}{W} to your mana pool.
-        Ability ability = new SimpleManaAbility(Zone.BATTLEFIELD, new BasicManaEffect(Mana.WhiteMana(2)), new TapSourceCost());
+        Ability ability = new SimpleManaAbility(Zone.BATTLEFIELD, Mana.WhiteMana(2), new TapSourceCost());
         ability.addCost(new SacrificeSourceCost());
         this.addAbility(ability);
     }

@@ -31,7 +31,6 @@ import java.util.UUID;
 import mage.MageInt;
 import mage.Mana;
 import mage.abilities.costs.common.TapTargetCost;
-import mage.abilities.effects.common.BasicManaEffect;
 import mage.abilities.mana.SimpleManaAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
@@ -66,9 +65,8 @@ public class SetonKrosanProtector extends CardImpl {
         this.toughness = new MageInt(2);
 
         // Tap an untapped Druid you control: Add {G} to your mana pool.
-        this.addAbility(new SimpleManaAbility(Zone.BATTLEFIELD, 
-                                                  new BasicManaEffect(Mana.GreenMana(1)),
-                                                  new TapTargetCost(new TargetControlledCreaturePermanent(1, 1, filter, true))));
+        this.addAbility(new SimpleManaAbility(Zone.BATTLEFIELD, Mana.GreenMana(1),
+                new TapTargetCost(new TargetControlledCreaturePermanent(1, 1, filter, true))));
     }
 
     public SetonKrosanProtector(final SetonKrosanProtector card) {

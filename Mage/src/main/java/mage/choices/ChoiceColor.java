@@ -29,6 +29,8 @@
 package mage.choices;
 
 import java.util.ArrayList;
+
+import mage.Mana;
 import mage.ObjectColor;
 
 /**
@@ -90,4 +92,33 @@ public class ChoiceColor extends ChoiceImpl {
         return color;
     }
 
+    public Mana getMana(int amount) {
+        Mana mana = null;
+        if (getColor().isBlack()) {
+            mana = Mana.BlackMana(amount);
+        } else if (getColor().isBlue()) {
+            mana = Mana.BlueMana(amount);
+        } else if (getColor().isRed()) {
+            mana = Mana.RedMana(amount);
+        } else if (getColor().isGreen()) {
+            mana = Mana.GreenMana(amount);
+        } else if (getColor().isWhite()) {
+            mana = Mana.WhiteMana(amount);
+        }
+        return mana;
+    }
+
+    public void increaseMana(Mana mana) {
+        if (getColor().isBlack()) {
+            mana.increaseBlack();
+        } else if (getColor().isBlue()) {
+            mana.increaseBlue();
+        } else if (getColor().isRed()) {
+            mana.increaseRed();
+        } else if (getColor().isGreen()) {
+            mana.increaseGreen();
+        } else if (getColor().isWhite()) {
+            mana.increaseWhite();
+        }
+    }
 }

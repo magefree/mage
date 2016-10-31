@@ -92,7 +92,7 @@ class ManaDrainCounterEffect extends OneShotEffect {
             game.getStack().counter(getTargetPointer().getFirst(game, source), source.getSourceId(), game);
             // mana gets added also if counter is not successful
             int cmc = spell.getConvertedManaCost();
-            Effect effect = new AddManaToManaPoolTargetControllerEffect(new Mana(0, 0, 0, 0, 0, 0, 0, cmc), "your");
+            Effect effect = new AddManaToManaPoolTargetControllerEffect(Mana.ColorlessMana(cmc), "your");
             effect.setTargetPointer(new FixedTarget(source.getControllerId()));
             AtTheBeginOfMainPhaseDelayedTriggeredAbility delayedAbility
                     = new AtTheBeginOfMainPhaseDelayedTriggeredAbility(effect, false, TargetController.YOU, PhaseSelection.NEXT_MAIN);

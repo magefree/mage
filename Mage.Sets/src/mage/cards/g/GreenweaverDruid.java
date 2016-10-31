@@ -33,7 +33,6 @@ import mage.constants.Zone;
 import mage.MageInt;
 import mage.Mana;
 import mage.abilities.costs.common.TapSourceCost;
-import mage.abilities.effects.common.BasicManaEffect;
 import mage.abilities.mana.SimpleManaAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
@@ -53,7 +52,7 @@ public class GreenweaverDruid extends CardImpl {
         this.toughness = new MageInt(1);
 
         // {T}: Add {G}{G} to your mana pool.
-        this.addAbility(new SimpleManaAbility(Zone.BATTLEFIELD, new BasicManaEffect(Mana.GreenMana(2)), new TapSourceCost()));
+        this.addAbility(new SimpleManaAbility(Zone.BATTLEFIELD, Mana.GreenMana(2), new TapSourceCost()));
     }
 
     public GreenweaverDruid(final GreenweaverDruid card) {

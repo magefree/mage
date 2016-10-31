@@ -75,7 +75,7 @@ class RosheenMeandererManaAbility extends BasicManaAbility {
 
     RosheenMeandererManaAbility() {
         super(new BasicManaEffect(new RosheenMeandererConditionalMana()));
-        this.netMana.add(new Mana(0, 0, 0, 0, 0, 0, 0, 4));
+        this.netMana.add(Mana.ColorlessMana(4));
     }
 
     RosheenMeandererManaAbility(RosheenMeandererManaAbility ability) {

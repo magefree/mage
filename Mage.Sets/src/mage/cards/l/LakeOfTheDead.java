@@ -65,7 +65,7 @@ public class LakeOfTheDead extends CardImpl {
         this.addAbility(new BlackManaAbility());
 
         // {tap}, Sacrifice a Swamp: Add {B}{B}{B}{B} to your mana pool.
-        Ability ability = new SimpleManaAbility(Zone.BATTLEFIELD, new Mana(0, 0, 0, 0, 4, 0, 0, 0), new TapSourceCost());
+        Ability ability = new SimpleManaAbility(Zone.BATTLEFIELD, Mana.BlackMana(4), new TapSourceCost());
         ability.addCost(new SacrificeTargetCost(new TargetControlledPermanent(filter)));
         this.addAbility(ability);
 

@@ -33,7 +33,6 @@ import mage.Mana;
 import mage.abilities.Ability;
 import mage.abilities.costs.common.SacrificeSourceCost;
 import mage.abilities.costs.common.TapSourceCost;
-import mage.abilities.effects.common.BasicManaEffect;
 import mage.abilities.mana.SimpleManaAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
@@ -53,7 +52,7 @@ public class BasalThrull extends CardImpl {
         this.toughness = new MageInt(2);
 
         // {T}, Sacrifice Basal Thrull: Add {B}{B} to your mana pool.
-        Ability ability = new SimpleManaAbility(Zone.BATTLEFIELD, new BasicManaEffect(new Mana(0, 0, 0, 0, 2, 0, 0, 0)), new TapSourceCost());
+        Ability ability = new SimpleManaAbility(Zone.BATTLEFIELD, Mana.BlackMana(2), new TapSourceCost());
         ability.addCost(new SacrificeSourceCost());
         this.addAbility(ability);
     }

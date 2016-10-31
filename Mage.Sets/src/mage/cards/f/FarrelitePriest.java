@@ -29,14 +29,13 @@ package mage.cards.f;
 
 import java.util.UUID;
 import mage.MageInt;
-import static mage.Mana.WhiteMana;
+import mage.Mana;
 import mage.abilities.Ability;
 import mage.abilities.ActivationInfo;
 import mage.abilities.DelayedTriggeredAbility;
 import mage.abilities.common.delayed.AtTheBeginOfNextEndStepDelayedTriggeredAbility;
 import mage.abilities.costs.mana.ManaCostsImpl;
 import mage.abilities.effects.OneShotEffect;
-import mage.abilities.effects.common.BasicManaEffect;
 import mage.abilities.effects.common.SacrificeSourceEffect;
 import mage.abilities.mana.SimpleManaAbility;
 import mage.cards.CardImpl;
@@ -60,9 +59,7 @@ public class FarrelitePriest extends CardImpl {
         this.toughness = new MageInt(3);
 
         // {1}: Add {W} to your mana pool. If this ability has been activated four or more times this turn, sacrifice Farrelite Priest at the beginning of the next end step.
-        SimpleManaAbility ability = new SimpleManaAbility(Zone.BATTLEFIELD,
-                new BasicManaEffect(WhiteMana(1)),
-                new ManaCostsImpl("{1}"));
+        SimpleManaAbility ability = new SimpleManaAbility(Zone.BATTLEFIELD, Mana.WhiteMana(1), new ManaCostsImpl("{1}"));
         ability.addEffect(new FarrelitePriestEffect());
         this.addAbility(ability);
     }
