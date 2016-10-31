@@ -52,6 +52,7 @@ public class Commander2016 extends ExpansionSet {
         cards.add(new SetCardInfo("Abzan Falconer", 57, Rarity.UNCOMMON, mage.cards.a.AbzanFalconer.class));
         cards.add(new SetCardInfo("Academy Elite", 81, Rarity.RARE, mage.cards.a.AcademyElite.class));
         cards.add(new SetCardInfo("Aeon Chronicler", 82, Rarity.RARE, mage.cards.a.AeonChronicler.class));
+        cards.add(new SetCardInfo("Akiri, Line-Slinger", 26, Rarity.RARE, mage.cards.a.AkiriLineSlinger.class));
         cards.add(new SetCardInfo("Akroan Horse", 241, Rarity.RARE, mage.cards.a.AkroanHorse.class));
         cards.add(new SetCardInfo("Alesha, Who Smiles at Death", 119, Rarity.RARE, mage.cards.a.AleshaWhoSmilesAtDeath.class));
         cards.add(new SetCardInfo("Ancient Excavation", 27, Rarity.UNCOMMON, mage.cards.a.AncientExcavation.class));
