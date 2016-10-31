@@ -133,11 +133,13 @@ public class Commander2016 extends ExpansionSet {
         cards.add(new SetCardInfo("Dragon Mage", 124, Rarity.RARE, mage.cards.d.DragonMage.class));
         cards.add(new SetCardInfo("Dragonskull Summit", 292, Rarity.RARE, mage.cards.d.DragonskullSummit.class));
         cards.add(new SetCardInfo("Dreadship Reef", 293, Rarity.UNCOMMON, mage.cards.d.DreadshipReef.class));
+	cards.add(new SetCardInfo("Duelist's Heritage", 1, Rarity.RARE, mage.cards.d.DuelistsHeritage.class));
         cards.add(new SetCardInfo("Duneblast", 194, Rarity.RARE, mage.cards.d.Duneblast.class));
         cards.add(new SetCardInfo("Edric, Spymaster of Trest", 195, Rarity.RARE, mage.cards.e.EdricSpymasterOfTrest.class));
         cards.add(new SetCardInfo("Elite Scaleguard", 65, Rarity.UNCOMMON, mage.cards.e.EliteScaleguard.class));
         cards.add(new SetCardInfo("Empyrial Plate", 251, Rarity.RARE, mage.cards.e.EmpyrialPlate.class));
         cards.add(new SetCardInfo("Enduring Scalelord", 196, Rarity.UNCOMMON, mage.cards.e.EnduringScalelord.class));
+	cards.add(new SetCardInfo("Entrapment Maneuver", 2, Rarity.RARE, mage.cards.e.EntrapmentManeuver.class));
         cards.add(new SetCardInfo("Etched Oracle", 252, Rarity.UNCOMMON, mage.cards.e.EtchedOracle.class));
         cards.add(new SetCardInfo("Etherium Sculptor", 89, Rarity.COMMON, mage.cards.e.EtheriumSculptor.class));
         cards.add(new SetCardInfo("Etherium-Horn Sorcerer", 197, Rarity.RARE, mage.cards.e.EtheriumHornSorcerer.class));
@@ -209,6 +211,7 @@ public class Commander2016 extends ExpansionSet {
         cards.add(new SetCardInfo("Lightning Greaves", 260, Rarity.UNCOMMON, mage.cards.l.LightningGreaves.class));
         cards.add(new SetCardInfo("Loxodon Warhammer", 261, Rarity.UNCOMMON, mage.cards.l.LoxodonWarhammer.class));
         cards.add(new SetCardInfo("Lurking Predators", 156, Rarity.RARE, mage.cards.l.LurkingPredators.class));
+	cards.add(new SetCardInfo("Magus of the Will", 14, Rarity.RARE, mage.cards.m.MagusOfTheWill.class));
         cards.add(new SetCardInfo("Managorger Hydra", 157, Rarity.RARE, mage.cards.m.ManagorgerHydra.class));
         cards.add(new SetCardInfo("Master Biomancer", 210, Rarity.MYTHIC, mage.cards.m.MasterBiomancer.class));
         cards.add(new SetCardInfo("Master of Etherium", 92, Rarity.RARE, mage.cards.m.MasterOfEtherium.class));
@@ -344,6 +347,7 @@ public class Commander2016 extends ExpansionSet {
         cards.add(new SetCardInfo("Vulturous Zombie", 228, Rarity.RARE, mage.cards.v.VulturousZombie.class));
         cards.add(new SetCardInfo("Wall of Blossoms", 175, Rarity.UNCOMMON, mage.cards.w.WallOfBlossoms.class));
         cards.add(new SetCardInfo("Waste Not", 117, Rarity.RARE, mage.cards.w.WasteNot.class));
+	cards.add(new SetCardInfo("Wave of Reckoning", 79, Rarity.RARE, mage.cards.w.WaveOfReckoning.class));
         cards.add(new SetCardInfo("Wheel of Fate", 138, Rarity.RARE, mage.cards.w.WheelOfFate.class));
         cards.add(new SetCardInfo("Whims of the Fates", 139, Rarity.RARE, mage.cards.w.WhimsOfTheFates.class));
         cards.add(new SetCardInfo("Whipflare", 140, Rarity.UNCOMMON, mage.cards.w.Whipflare.class));
