@@ -3,7 +3,7 @@ package com.anygo.ws.rest;
 import com.xmage.ws.model.DomainErrors;
 import com.xmage.ws.rest.services.XMageStatsService;
 import com.xmage.ws.util.json.JSONParser;
-import junit.framework.Assert;
+import org.junit.Assert;
 import org.junit.Test;
 
 import javax.ws.rs.core.Response;
@@ -25,7 +25,7 @@ public class XMageStatsServiceTest {
         JSONParser parser = new JSONParser();
         parser.parseJSON((String) response.getEntity());
 
-        Assert.assertEquals(DomainErrors.Errors.STATUS_OK.getCode(), parser.getInt("code"));
+        Assert.assertEquals(DomainErrors.Errors.STATUS_NOT_FOUND.getCode(), parser.getInt("code"));
         System.out.println("response = " + response.getEntity().toString());
     }
 
