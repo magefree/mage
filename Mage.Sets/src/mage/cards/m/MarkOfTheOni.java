@@ -44,8 +44,7 @@ import mage.abilities.keyword.EnchantAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.TargetController;
-import mage.filter.common.FilterCreaturePermanent;
-import mage.filter.predicate.mageobject.SubtypePredicate;
+import mage.filter.common.FilterControlledCreaturePermanent;
 import mage.target.TargetPermanent;
 import mage.target.common.TargetCreaturePermanent;
 
@@ -54,10 +53,6 @@ import mage.target.common.TargetCreaturePermanent;
  * @author LevelX2
  */
 public class MarkOfTheOni extends CardImpl {
-    private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("if you control no Demons");
-    static {
-        filter.add(new SubtypePredicate("Demon"));
-    }
 
     public MarkOfTheOni(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.ENCHANTMENT},"{2}{B}");
@@ -78,7 +73,9 @@ public class MarkOfTheOni extends CardImpl {
         this.addAbility(new BeginningOfEndStepTriggeredAbility(Zone.BATTLEFIELD,
                 new SacrificeSourceEffect(),
                 TargetController.ANY,
-                new PermanentsOnTheBattlefieldCondition(filter, PermanentsOnTheBattlefieldCondition.CountType.FEWER_THAN, 1),
+                new PermanentsOnTheBattlefieldCondition(
+                        new FilterControlledCreaturePermanent("Demon", "if you control no Demons"),
+                        PermanentsOnTheBattlefieldCondition.CountType.FEWER_THAN, 1),
                 false));
     }
 

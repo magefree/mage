@@ -29,16 +29,11 @@ package mage.cards.e;
 
 import java.util.UUID;
 
+import mage.abilities.effects.common.ReturnToHandFromBattlefieldAllEffect;
 import mage.constants.CardType;
-import mage.abilities.Ability;
-import mage.abilities.effects.OneShotEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
-import mage.constants.Outcome;
-import mage.constants.Zone;
 import mage.filter.common.FilterCreaturePermanent;
-import mage.game.Game;
-import mage.game.permanent.Permanent;
 
 /**
  *
@@ -51,7 +46,7 @@ public class Evacuation extends CardImpl {
 
 
         // Return all creatures to their owners' hands.
-        this.getSpellAbility().addEffect(new EvacuationEffect());
+        this.getSpellAbility().addEffect(new ReturnToHandFromBattlefieldAllEffect(new FilterCreaturePermanent("creatures")));
     }
 
     public Evacuation(final Evacuation card) {
@@ -63,32 +58,3 @@ public class Evacuation extends CardImpl {
         return new Evacuation(this);
     }
 }
-
-
-class EvacuationEffect extends OneShotEffect {
-
-
-    
-    public EvacuationEffect() {
-        super(Outcome.ReturnToHand);
-        staticText = "Return all creatures to their owners' hands";
-    }
-
-    public EvacuationEffect(final EvacuationEffect effect) {
-        super(effect);
-    }
-
-    @Override
-    public boolean apply(Game game, Ability source) {
-        for (Permanent creature : game.getBattlefield().getActivePermanents(new FilterCreaturePermanent(), source.getControllerId(), source.getSourceId(), game)) {
-            creature.moveToZone(Zone.HAND, source.getSourceId(), game, true);
-        }
-        return true;
-    }
-
-    @Override
-    public EvacuationEffect copy() {
-        return new EvacuationEffect(this);
-    }
-}
-

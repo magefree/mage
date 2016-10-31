@@ -42,18 +42,14 @@ public class OnEventTriggeredAbility extends TriggeredAbilityImpl {
 
     private final EventType eventType;
     private final String eventName;
-    private boolean allPlayers = false;
+    private final boolean allPlayers;
 
     public OnEventTriggeredAbility(EventType eventType, String eventName, Effect effect) {
-        super(Zone.BATTLEFIELD, effect);
-        this.eventType = eventType;
-        this.eventName = eventName;
+        this(eventType, eventName, effect, false);
     }
 
     public OnEventTriggeredAbility(EventType eventType, String eventName, Effect effect, boolean optional) {
-        super(Zone.BATTLEFIELD, effect, optional);
-        this.eventType = eventType;
-        this.eventName = eventName;
+        this(eventType, eventName, false, effect, optional);
     }
 
     public OnEventTriggeredAbility(EventType eventType, String eventName, boolean allPlayers, Effect effect) {
@@ -61,7 +57,7 @@ public class OnEventTriggeredAbility extends TriggeredAbilityImpl {
     }
 
     public OnEventTriggeredAbility(EventType eventType, String eventName, boolean allPlayers, Effect effect, boolean optional) {
-        super(Zone.BATTLEFIELD, effect);
+        super(Zone.BATTLEFIELD, effect, optional);
         this.eventType = eventType;
         this.eventName = eventName;
         this.allPlayers = allPlayers;

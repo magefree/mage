@@ -29,18 +29,13 @@ package mage.cards.h;
 
 import java.util.UUID;
 
+import mage.abilities.effects.common.ReturnToHandFromBattlefieldAllEffect;
 import mage.constants.CardType;
 import mage.ObjectColor;
-import mage.abilities.Ability;
-import mage.abilities.effects.OneShotEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
-import mage.constants.Outcome;
-import mage.constants.Zone;
 import mage.filter.FilterPermanent;
 import mage.filter.predicate.mageobject.ColorPredicate;
-import mage.game.Game;
-import mage.game.permanent.Permanent;
 
 /**
  *
@@ -48,12 +43,17 @@ import mage.game.permanent.Permanent;
  */
 public class Hibernation extends CardImpl {
 
+    private static final FilterPermanent filter = new FilterPermanent("green permanents");
+    static {
+        filter.add(new ColorPredicate(ObjectColor.GREEN));
+    }
+
     public Hibernation(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.INSTANT},"{2}{U}");
 
 
         // Return all green permanents to their owners' hands.
-        this.getSpellAbility().addEffect(new HibernationEffect());
+        this.getSpellAbility().addEffect(new ReturnToHandFromBattlefieldAllEffect(filter));
     }
 
     public Hibernation(final Hibernation card) {
@@ -63,36 +63,5 @@ public class Hibernation extends CardImpl {
     @Override
     public Hibernation copy() {
         return new Hibernation(this);
-    }
-}
-
-
-class HibernationEffect extends OneShotEffect {
-
-    private static final FilterPermanent filter = new FilterPermanent("green permanents");
-    static {
-        filter.add(new ColorPredicate(ObjectColor.GREEN));
-    }
-    
-    public HibernationEffect() {
-        super(Outcome.ReturnToHand);
-        staticText = "Return all green permanents to their owners' hands";
-    }
-
-    public HibernationEffect(final HibernationEffect effect) {
-        super(effect);
-    }
-
-    @Override
-    public boolean apply(Game game, Ability source) {
-        for (Permanent permanent : game.getBattlefield().getActivePermanents(filter, source.getControllerId(), source.getSourceId(), game)) {
-            permanent.moveToZone(Zone.HAND, source.getSourceId(), game, true);
-        }
-        return true;
-    }
-
-    @Override
-    public HibernationEffect copy() {
-        return new HibernationEffect(this);
     }
 }

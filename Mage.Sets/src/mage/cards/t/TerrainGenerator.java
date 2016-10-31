@@ -33,6 +33,7 @@ import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.costs.common.TapSourceCost;
 import mage.abilities.costs.mana.ManaCostsImpl;
 import mage.abilities.effects.OneShotEffect;
+import mage.abilities.effects.common.PutLandFromHandOntoBattlefieldEffect;
 import mage.abilities.mana.ColorlessManaAbility;
 import mage.cards.Card;
 import mage.cards.CardImpl;
@@ -41,6 +42,7 @@ import mage.constants.CardType;
 import mage.constants.Outcome;
 import mage.constants.Zone;
 import mage.filter.FilterCard;
+import mage.filter.common.FilterLandCard;
 import mage.filter.predicate.Predicates;
 import mage.filter.predicate.mageobject.CardTypePredicate;
 import mage.filter.predicate.mageobject.SupertypePredicate;
@@ -62,7 +64,7 @@ public class TerrainGenerator extends CardImpl {
         this.addAbility(new ColorlessManaAbility());
         
         // {2}, {tap}: You may put a basic land card from your hand onto the battlefield tapped.
-        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new PutLandOnBattlefieldEffect(), new ManaCostsImpl("{2}"));
+        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new PutLandFromHandOntoBattlefieldEffect(true, FilterLandCard.basicLandCard()), new ManaCostsImpl("{2}"));
         ability.addCost(new TapSourceCost());
         this.addAbility(ability);
     }
@@ -74,52 +76,5 @@ public class TerrainGenerator extends CardImpl {
     @Override
     public TerrainGenerator copy() {
         return new TerrainGenerator(this);
-    }
-}
-
-class PutLandOnBattlefieldEffect extends OneShotEffect {
-    
-    private static final FilterCard filter = new FilterCard("card other than a basic land card");
-
-    static {
-        filter.add(Predicates.and(new CardTypePredicate(CardType.LAND), new SupertypePredicate("Basic")));
-    }
-
-    private static final String choiceText = "Put a basic land card from your hand onto the battlefield?";
-
-    public PutLandOnBattlefieldEffect() {
-        super(Outcome.PutLandInPlay);
-        this.staticText = "put a basic land card from your hand onto the battlefield";
-    }
-
-    public PutLandOnBattlefieldEffect(final PutLandOnBattlefieldEffect effect) {
-        super(effect);
-    }
-
-    @Override
-    public PutLandOnBattlefieldEffect copy() {
-        return new PutLandOnBattlefieldEffect(this);
-    }
-
-    @Override
-    public boolean apply(Game game, Ability source) {
-        Player player = game.getPlayer(source.getControllerId());
-        if (player == null || !player.chooseUse(Outcome.PutLandInPlay, choiceText, source, game)) {
-            return false;
-        }
-
-        TargetCardInHand target = new TargetCardInHand(filter);
-        if (player.choose(Outcome.PutLandInPlay, target, source.getSourceId(), game)) {
-            Card card = game.getCard(target.getFirstTarget());
-            if (card != null) {
-                card.putOntoBattlefield(game, Zone.HAND, source.getSourceId(), source.getControllerId());
-                Permanent permanent = game.getPermanent(card.getId());
-                if (permanent != null) {
-                        permanent.setTapped(true);
-                }
-                return true;
-            }
-        }
-        return false;
     }
 }

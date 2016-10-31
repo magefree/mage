@@ -65,7 +65,7 @@ public class MarkOfFury extends CardImpl {
         // Enchanted creature has haste.
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new GainAbilityAttachedEffect(HasteAbility.getInstance(), AttachmentType.AURA)));
         // At the beginning of the end step, return Mark of Fury to its owner's hand.
-        this.addAbility(new BeginningOfEndStepTriggeredAbility(new ReturnToHandSourceEffect(true), TargetController.YOU, false));
+        this.addAbility(new BeginningOfEndStepTriggeredAbility(new ReturnToHandSourceEffect(true), TargetController.ANY, false));
     }
 
     public MarkOfFury(final MarkOfFury card) {

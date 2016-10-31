@@ -27,21 +27,17 @@
  */
 package mage.cards.a;
 
-import java.util.List;
 import java.util.UUID;
 import mage.abilities.Ability;
-import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.RequirementEffect;
+import mage.abilities.effects.common.DamageAllControlledTargetEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Duration;
-import mage.constants.Outcome;
 import mage.filter.common.FilterCreaturePermanent;
-import mage.filter.predicate.permanent.ControllerIdPredicate;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
-import mage.players.Player;
 import mage.target.TargetPlayer;
 import mage.watchers.common.DamagedByWatcher;
 
@@ -56,7 +52,7 @@ public class Aggravate extends CardImpl {
 
 
         // Aggravate deals 1 damage to each creature target player controls.
-        this.getSpellAbility().addEffect(new AggravateEffect());
+        this.getSpellAbility().addEffect(new DamageAllControlledTargetEffect(1, new FilterCreaturePermanent()));
         this.getSpellAbility().addTarget(new TargetPlayer());
         // Each creature dealt damage this way attacks this turn if able.
         this.getSpellAbility().addEffect(new AggravateRequirementEffect());
@@ -70,38 +66,6 @@ public class Aggravate extends CardImpl {
     @Override
     public Aggravate copy() {
         return new Aggravate(this);
-    }
-}
-
-class AggravateEffect extends OneShotEffect {
-
-    public AggravateEffect() {
-        super(Outcome.Damage);
-        this.staticText = "{this} deals 1 damage to each creature target player controls";
-    }
-
-    public AggravateEffect(final AggravateEffect effect) {
-        super(effect);
-    }
-
-    @Override
-    public AggravateEffect copy() {
-        return new AggravateEffect(this);
-    }
-
-    @Override
-    public boolean apply(Game game, Ability source) {
-        Player player = game.getPlayer(source.getFirstTarget());
-        if (player != null) {
-            FilterCreaturePermanent filter = new FilterCreaturePermanent();
-            filter.add(new ControllerIdPredicate(player.getId()));
-            List<Permanent> creatures = game.getBattlefield().getActivePermanents(filter, source.getControllerId(), source.getSourceId(), game);
-            for (Permanent creature : creatures) {
-                creature.damage(1, source.getSourceId(), game, false, true);
-            }
-            return true;
-        }
-        return false;
     }
 }
 

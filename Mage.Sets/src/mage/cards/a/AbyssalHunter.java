@@ -33,14 +33,14 @@ import mage.abilities.Ability;
 import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.costs.common.TapSourceCost;
 import mage.abilities.costs.mana.ManaCostsImpl;
-import mage.abilities.effects.OneShotEffect;
+import mage.abilities.dynamicvalue.common.SourcePermanentPowerCount;
+import mage.abilities.effects.Effect;
+import mage.abilities.effects.common.DamageTargetEffect;
+import mage.abilities.effects.common.TapTargetEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.Outcome;
 import mage.constants.Zone;
-import mage.game.Game;
-import mage.game.permanent.Permanent;
 import mage.target.common.TargetCreaturePermanent;
 
 /**
@@ -58,7 +58,10 @@ public class AbyssalHunter extends CardImpl {
         this.toughness = new MageInt(1);
 
         // {B}, {tap}: Tap target creature. Abyssal Hunter deals damage equal to Abyssal Hunter's power to that creature.
-        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new AbyssalHunterEffect(), new ManaCostsImpl("{B}"));
+        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new TapTargetEffect(), new ManaCostsImpl("{B}"));
+        Effect effect = new DamageTargetEffect(new SourcePermanentPowerCount());
+        effect.setText("{source} deals damage equal to {source}'s power to that creature.");
+        ability.addEffect(effect);
         ability.addCost(new TapSourceCost());
         ability.addTarget(new TargetCreaturePermanent());
         this.addAbility(ability);
@@ -71,39 +74,5 @@ public class AbyssalHunter extends CardImpl {
     @Override
     public AbyssalHunter copy() {
         return new AbyssalHunter(this);
-    }
-}
-
-class AbyssalHunterEffect extends OneShotEffect {
-
-    public AbyssalHunterEffect() {
-        super(Outcome.Damage);
-        staticText = "Tap target creature. Abyssal Hunter deals damage equal to Abyssal Hunter's power to that creature";
-    }
-
-    public AbyssalHunterEffect(final AbyssalHunterEffect effect) {
-        super(effect);
-    }
-
-    @Override
-    public boolean apply(Game game, Ability source) {
-        Permanent hunter = game.getPermanent(source.getSourceId());
-        if (hunter == null) {
-            hunter = (Permanent) game.getLastKnownInformation(source.getSourceId(), Zone.BATTLEFIELD);
-        }
-        Permanent targetCreature = game.getPermanent(source.getTargets().getFirstTarget());
-        if (targetCreature != null) {
-            targetCreature.tap(game);
-            if (hunter != null) {
-                targetCreature.damage(hunter.getPower().getValue(), hunter.getId(), game, false, true);
-            }
-            return true;
-        }
-        return false;
-    }
-
-    @Override
-    public AbyssalHunterEffect copy() {
-        return new AbyssalHunterEffect(this);
     }
 }

@@ -38,7 +38,6 @@ import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.AttachmentType;
 import mage.constants.CardType;
-import mage.constants.Duration;
 import mage.constants.Outcome;
 import mage.constants.Zone;
 import mage.target.TargetPermanent;
@@ -62,7 +61,7 @@ public class FishliverOil extends CardImpl {
 
         // Enchanted creature has islandwalk.        
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, 
-                new GainAbilityAttachedEffect(new IslandwalkAbility(), AttachmentType.AURA, Duration.WhileOnBattlefield)));
+                new GainAbilityAttachedEffect(new IslandwalkAbility(), AttachmentType.AURA)));
     }
 
     public FishliverOil(final FishliverOil card) {
