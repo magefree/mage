@@ -350,7 +350,6 @@ public class Main {
 
         @Override
         public void setInvoker(ServerInvoker invoker) {
-            logger.info("Invoker version: " + ((BisocketServerInvoker) invoker).getVersion());
             ((BisocketServerInvoker) invoker).setSecondaryBindPort(ConfigSettings.getInstance().getSecondaryBindPort());
             ((BisocketServerInvoker) invoker).setBacklog(ConfigSettings.getInstance().getBacklogSize());
             ((BisocketServerInvoker) invoker).setNumAcceptThreads(ConfigSettings.getInstance().getNumAcceptThreads());
