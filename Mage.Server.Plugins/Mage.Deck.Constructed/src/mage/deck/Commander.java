@@ -34,9 +34,12 @@ import java.util.List;
 import java.util.Map;
 import mage.abilities.common.CanBeYourCommanderAbility;
 import mage.cards.Card;
+import mage.cards.ExpansionSet;
+import mage.cards.Sets;
+import mage.cards.decks.Constructed;
 import mage.cards.decks.Deck;
-import mage.cards.decks.DeckValidator;
 import mage.constants.CardType;
+import mage.constants.SetType;
 import mage.filter.FilterMana;
 import mage.util.CardUtil;
 
@@ -44,13 +47,17 @@ import mage.util.CardUtil;
  *
  * @author Plopman
  */
-public class Commander extends DeckValidator {
+public class Commander extends Constructed {
 
-    protected List<String> banned = new ArrayList<>();
     protected List<String> bannedCommander = new ArrayList<>();
 
     public Commander() {
         this("Commander");
+        for (ExpansionSet set : Sets.getInstance().values()) {
+            if (set.getSetType() != SetType.CUSTOM_SET) {
+                setCodes.add(set.getCode());
+            }
+        }
         banned.add("Ancestral Recall");
         banned.add("Balance");
         banned.add("Biorhythm");
@@ -153,19 +160,32 @@ public class Commander extends DeckValidator {
             invalid.put("Commander", "Sideboard must contain only the commander");
         }
 
+        for (Card card : deck.getCards()) {
+            if (!isSetAllowed(card.getExpansionSetCode())) {
+                if (!legalSets(card)) {
+                    invalid.put(card.getName(), "Not allowed Set: " + card.getExpansionSetCode());
+                    valid = false;
+                }
+            }
+        }
+        for (Card card : deck.getSideboard()) {
+            if (!isSetAllowed(card.getExpansionSetCode())) {
+                if (!legalSets(card)) {
+                    invalid.put(card.getName(), "Not allowed Set: " + card.getExpansionSetCode());
+                    valid = false;
+                }
+            }
+        }
         return valid;
     }
 
     public boolean cardHasValidColor(FilterMana commander, Card card) {
         FilterMana cardColor = CardUtil.getColorIdentity(card);
-        if (cardColor.isBlack() && !commander.isBlack()
+        return !(cardColor.isBlack() && !commander.isBlack()
                 || cardColor.isBlue() && !commander.isBlue()
                 || cardColor.isGreen() && !commander.isGreen()
                 || cardColor.isRed() && !commander.isRed()
-                || cardColor.isWhite() && !commander.isWhite()) {
-            return false;
-        }
-        return true;
+                || cardColor.isWhite() && !commander.isWhite());
     }
 
 }

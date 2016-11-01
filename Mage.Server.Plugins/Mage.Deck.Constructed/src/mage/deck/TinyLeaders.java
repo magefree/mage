@@ -34,10 +34,13 @@ import java.util.List;
 import java.util.Map;
 import mage.abilities.common.CanBeYourCommanderAbility;
 import mage.cards.Card;
+import mage.cards.ExpansionSet;
+import mage.cards.Sets;
 import mage.cards.SplitCard;
+import mage.cards.decks.Constructed;
 import mage.cards.decks.Deck;
-import mage.cards.decks.DeckValidator;
 import mage.constants.CardType;
+import mage.constants.SetType;
 import mage.filter.FilterMana;
 import mage.game.GameTinyLeadersImpl;
 import mage.util.CardUtil;
@@ -46,13 +49,17 @@ import mage.util.CardUtil;
  *
  * @author JRHerlehy
  */
-public class TinyLeaders extends DeckValidator {
+public class TinyLeaders extends Constructed {
 
-    protected List<String> banned = new ArrayList<>();
     protected List<String> bannedCommander = new ArrayList<>();
 
     public TinyLeaders() {
         this("Tiny Leaders");
+        for (ExpansionSet set : Sets.getInstance().values()) {
+            if (set.getSetType() != SetType.CUSTOM_SET) {
+                setCodes.add(set.getCode());
+            }
+        }
         //Banned list from tinyleaders.blodspot.ca/p/ban-list.html
         //Ban list updated as of 11/08/14
         banned.add("Ancestral Recall");
@@ -193,7 +200,22 @@ public class TinyLeaders extends DeckValidator {
             invalid.put("Commander", "Sideboard must contain only a maximum of 10 sideboard cards (the Tiny Leader name must be written to the deck name)");
             valid = false;
         }
-
+        for (Card card : deck.getCards()) {
+            if (!isSetAllowed(card.getExpansionSetCode())) {
+                if (!legalSets(card)) {
+                    invalid.put(card.getName(), "Not allowed Set " + card.getExpansionSetCode());
+                    valid = false;
+                }
+            }
+        }
+        for (Card card : deck.getSideboard()) {
+            if (!isSetAllowed(card.getExpansionSetCode())) {
+                if (!legalSets(card)) {
+                    invalid.put(card.getName(), "Not allowed Set " + card.getExpansionSetCode());
+                    valid = false;
+                }
+            }
+        }
         return valid;
     }
 
@@ -213,11 +235,9 @@ public class TinyLeaders extends DeckValidator {
                 invalid.put(card.getName(), "Invalid cost (" + ((SplitCard) card).getRightHalfCard().getManaCost().convertedManaCost() + ")");
                 return false;
             }
-        } else {
-            if (card.getManaCost().convertedManaCost() > 3) {
-                invalid.put(card.getName(), "Invalid cost (" + card.getManaCost().convertedManaCost() + ")");
-                return false;
-            }
+        } else if (card.getManaCost().convertedManaCost() > 3) {
+            invalid.put(card.getName(), "Invalid cost (" + card.getManaCost().convertedManaCost() + ")");
+            return false;
         }
         return true;
     }
