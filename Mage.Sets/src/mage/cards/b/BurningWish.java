@@ -29,8 +29,10 @@ package mage.cards.b;
 
 import java.util.Set;
 import java.util.UUID;
+import mage.MageObject;
 import mage.abilities.Ability;
 import mage.abilities.effects.OneShotEffect;
+import mage.abilities.effects.common.ExileSpellEffect;
 import mage.cards.Card;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
@@ -52,11 +54,11 @@ import mage.target.TargetCard;
 public class BurningWish extends CardImpl {
 
     public BurningWish(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{1}{R}");
-
+        super(ownerId, setInfo, new CardType[]{CardType.SORCERY}, "{1}{R}");
 
         // You may choose a sorcery card you own from outside the game, reveal that card, and put it into your hand. Exile Burning Wish.
         this.getSpellAbility().addEffect(new BurningWishEffect());
+        this.getSpellAbility().addEffect(ExileSpellEffect.getInstance());
     }
 
     public BurningWish(final BurningWish card) {
@@ -74,13 +76,14 @@ class BurningWishEffect extends OneShotEffect {
     private static final String choiceText = "Choose a sorcery card you own from outside the game, and put it into your hand";
 
     private static final FilterCard filter = new FilterCard("sorcery card");
-    static{
-         filter.add(new CardTypePredicate(CardType.SORCERY));
+
+    static {
+        filter.add(new CardTypePredicate(CardType.SORCERY));
     }
 
     public BurningWishEffect() {
         super(Outcome.Benefit);
-        this.staticText = "You may choose a sorcery card you own from outside the game, reveal that card, and put it into your hand. Exile Burning Wish";
+        this.staticText = "You may choose a sorcery card you own from outside the game, reveal that card, and put it into your hand";
     }
 
     public BurningWishEffect(final BurningWishEffect effect) {
@@ -94,18 +97,19 @@ class BurningWishEffect extends OneShotEffect {
 
     @Override
     public boolean apply(Game game, Ability source) {
-        Player player = game.getPlayer(source.getControllerId());
-        if (player != null) {
-            while (player.chooseUse(Outcome.Benefit, choiceText, source, game)) {
-                Cards cards = player.getSideboard();
-                if(cards.isEmpty()) {
-                    game.informPlayer(player, "You have no cards outside the game.");
+        Player controller = game.getPlayer(source.getControllerId());
+        MageObject sourceObject = source.getSourceObject(game);
+        if (controller != null && sourceObject != null) {
+            while (controller.chooseUse(Outcome.Benefit, choiceText, source, game)) {
+                Cards cards = controller.getSideboard();
+                if (cards.isEmpty()) {
+                    game.informPlayer(controller, "You have no cards outside the game.");
                     break;
                 }
 
                 Set<Card> filtered = cards.getCards(filter, game);
                 if (filtered.isEmpty()) {
-                    game.informPlayer(player, "You have no " + filter.getMessage() + " outside the game.");
+                    game.informPlayer(controller, "You have no " + filter.getMessage() + " outside the game.");
                     break;
                 }
 
@@ -115,25 +119,21 @@ class BurningWishEffect extends OneShotEffect {
                 }
 
                 TargetCard target = new TargetCard(Zone.OUTSIDE, filter);
-                if (player.choose(Outcome.Benefit, filteredCards, target, game)) {
-                    Card card = player.getSideboard().get(target.getFirstTarget(), game);
+                if (controller.choose(Outcome.Benefit, filteredCards, target, game)) {
+                    Card card = controller.getSideboard().get(target.getFirstTarget(), game);
                     if (card != null) {
 
                         card.moveToZone(Zone.HAND, source.getSourceId(), game, false);
                         Cards revealCard = new CardsImpl();
                         revealCard.add(card);
-                        player.revealCards("Burning Wish", revealCard, game);
+                        controller.revealCards(sourceObject.getIdName(), revealCard, game);
                         break;
                     }
                 }
             }
-            Card cardToExile = game.getCard(source.getSourceId());
-            if(cardToExile != null)
-            {
-                cardToExile.moveToExile(null, "", source.getSourceId(), game);
-            }
+            return true;
         }
-        return true;
+        return false;
     }
 
 }

@@ -29,6 +29,7 @@ package mage.cards.g;
 
 import java.util.Set;
 import java.util.UUID;
+import mage.MageObject;
 import mage.abilities.Ability;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.ExileSpellEffect;
@@ -53,7 +54,7 @@ import mage.target.TargetCard;
 public class GlitteringWish extends CardImpl {
 
     public GlitteringWish(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{G}{W}");
+        super(ownerId, setInfo, new CardType[]{CardType.SORCERY}, "{G}{W}");
 
         // You may choose a multicolored card you own from outside the game, reveal that card, and put it into your hand. Exile Glittering Wish.
         this.getSpellAbility().addEffect(new GlitteringWishEffect());
@@ -97,7 +98,8 @@ class GlitteringWishEffect extends OneShotEffect {
     @Override
     public boolean apply(Game game, Ability source) {
         Player controller = game.getPlayer(source.getControllerId());
-        if (controller != null) {
+        MageObject sourceObject = source.getSourceObject(game);
+        if (controller != null && sourceObject != null) {
             while (controller.chooseUse(Outcome.Benefit, choiceText, source, game)) {
                 Cards cards = controller.getSideboard();
                 if (cards.isEmpty()) {
@@ -124,7 +126,7 @@ class GlitteringWishEffect extends OneShotEffect {
                         card.moveToZone(Zone.HAND, source.getSourceId(), game, false);
                         Cards revealCard = new CardsImpl();
                         revealCard.add(card);
-                        controller.revealCards("Glittering Wish", revealCard, game);
+                        controller.revealCards(sourceObject.getIdName(), revealCard, game);
                         break;
                     }
                 }
