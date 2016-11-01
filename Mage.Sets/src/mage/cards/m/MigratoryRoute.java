@@ -25,59 +25,40 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.cards.c;
+package mage.cards.m;
 
 import java.util.UUID;
-import mage.MageInt;
+import mage.abilities.costs.mana.ManaCostsImpl;
 import mage.abilities.effects.common.CreateTokenEffect;
-import mage.abilities.keyword.FlyingAbility;
-import mage.abilities.keyword.RetraceAbility;
+import mage.abilities.keyword.BasicLandcyclingAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.game.permanent.token.Token;
+import mage.game.permanent.token.BirdToken;
 
 /**
  *
- * @author jeffwadsworth
-
+ * @author fireshoes
  */
-public class CallTheSkybreaker extends CardImpl {
+public class MigratoryRoute extends CardImpl {
 
-    public CallTheSkybreaker(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{5}{U/R}{U/R}");
+    public MigratoryRoute(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId, setInfo, new CardType[]{CardType.SORCERY}, "{3}{W}{U}");
 
-        // Create a 5/5 blue and red Elemental creature token with flying.
-        this.getSpellAbility().addEffect(new CreateTokenEffect(new ElementalToken()));
 
-        // Retrace
-        this.addAbility(new RetraceAbility(this));
+        // Create four 1/1 white Bird creature tokens with flying.
+        getSpellAbility().addEffect(new CreateTokenEffect(new BirdToken(), 4));
 
+        // Basic landcycling {2}
+        this.addAbility(new BasicLandcyclingAbility(new ManaCostsImpl("{2}")));
     }
 
-    public CallTheSkybreaker(final CallTheSkybreaker card) {
+    public MigratoryRoute(final MigratoryRoute card) {
         super(card);
     }
 
     @Override
-    public CallTheSkybreaker copy() {
-        return new CallTheSkybreaker(this);
-    }
-
-    class ElementalToken extends Token {
-
-        public ElementalToken() {
-            super("Elemental", "a 5/5 blue and red Elemental creature token with flying");
-            cardType.add(CardType.CREATURE);
-            color.setBlue(true);
-            color.setRed(true);
-            subtype.add("Elemental");
-            if (getOriginalExpansionSetCode() != null && getOriginalExpansionSetCode().equals("EMA")) {
-                setTokenType(2);
-            }
-            power = new MageInt(5);
-            toughness = new MageInt(5);
-            this.addAbility(FlyingAbility.getInstance());
-        }
+    public MigratoryRoute copy() {
+        return new MigratoryRoute(this);
     }
 }

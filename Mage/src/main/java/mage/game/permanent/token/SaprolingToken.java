@@ -33,6 +33,7 @@ import java.util.Arrays;
 import java.util.List;
 import mage.MageInt;
 import mage.constants.CardType;
+import mage.util.RandomUtil;
 
 /**
  *
@@ -58,6 +59,9 @@ public class SaprolingToken extends Token {
         super("Saproling", "1/1 green Saproling creature token");
         availableImageSetCodes = tokenImageSets;
         setOriginalExpansionSetCode(setCode);
+        if (getOriginalExpansionSetCode() != null && getOriginalExpansionSetCode().equals("C16")) {
+            this.setTokenType(RandomUtil.nextInt(2) + 1);
+        }
         cardType.add(CardType.CREATURE);
         color.setGreen(true);
         subtype.add("Saproling");

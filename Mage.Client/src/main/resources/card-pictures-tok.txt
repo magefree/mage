@@ -1,7 +1,37 @@
+|Generate|TOK:C16|Beast||
+|Generate|TOK:C16|Bird|1|
+|Generate|TOK:C16|Bird|2|
+|Generate|TOK:C16|Elemental||
+|Generate|TOK:C16|Elf Warrior||
+|Generate|TOK:C16|Germ||
+|Generate|TOK:C16|Goat||
+|Generate|TOK:C16|Goblin||
+|Generate|TOK:C16|Horror||
+|Generate|TOK:C16|Myr||
+|Generate|TOK:C16|Ogre||
+|Generate|TOK:C16|Saproling|1|
+|Generate|TOK:C16|Saproling|2|
+|Generate|TOK:C16|Soldier||
+|Generate|TOK:C16|Spirit|1|
+|Generate|TOK:C16|Spirit|2|
+|Generate|TOK:C16|Squid||
+|Generate|TOK:C16|Thopter||
+|Generate|TOK:C16|Worm||
+|Generate|TOK:C16|Zombie||
+|Generate|EMBLEM!:C16|Emblem Daretti||
+
 |Generate|TOK:KLD|Beast||
-|Generate|TOK:KLD|Construct||
-|Generate|TOK:KLD|Servo||
-|Generate|TOK:KLD|Thopter||
+|Generate|TOK:KLD|Construct|1|
+|Generate|TOK:KLD|Construct|2|
+|Generate|TOK:KLD|Servo|1|
+|Generate|TOK:KLD|Servo|2|
+|Generate|TOK:KLD|Servo|3|
+|Generate|TOK:KLD|Thopter|1|
+|Generate|TOK:KLD|Thopter|2|
+|Generate|TOK:KLD|Thopter|3|
+|Generate|EMBLEM!:KLD|Emblem Chandra, Torch of Defiance||
+|Generate|EMBLEM!:KLD|Emblem Nissa, Vital Force||
+|Generate|EMBLEM!:KLD|Emblem Dovin Baan||
 
 |Generate|TOK:CN2|Assassin||
 |Generate|TOK:CN2|Beast||

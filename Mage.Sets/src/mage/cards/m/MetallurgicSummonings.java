@@ -52,6 +52,7 @@ import mage.game.permanent.token.Token;
 import mage.game.stack.Spell;
 import mage.players.Player;
 import mage.target.targetpointer.FixedTarget;
+import mage.util.RandomUtil;
 
 /**
  *
@@ -158,6 +159,7 @@ class MetallurgicSummoningsConstructToken extends Token {
     public MetallurgicSummoningsConstructToken(int xValue) {
         super("Construct", "X/X colorless Construct artifact creature token");
         setOriginalExpansionSetCode("KLD");
+        setTokenType(RandomUtil.nextInt(2) + 1);
         cardType.add(CardType.ARTIFACT);
         cardType.add(CardType.CREATURE);
         subtype.add("Construct");

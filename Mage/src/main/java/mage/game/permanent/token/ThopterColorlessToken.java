@@ -44,7 +44,7 @@ public class ThopterColorlessToken extends Token {
     final static private List<String> tokenImageSets = new ArrayList<>();
 
     static {
-        tokenImageSets.addAll(Arrays.asList("MBS", "ORI"));
+        tokenImageSets.addAll(Arrays.asList("MBS", "ORI", "KLD"));
     }
 
     public ThopterColorlessToken() {
@@ -62,8 +62,11 @@ public class ThopterColorlessToken extends Token {
     @Override
     public void setExpansionSetCodeForImage(String code) {
         super.setExpansionSetCodeForImage(code);
-        if (getOriginalExpansionSetCode().equals("ORI")) {
+        if (getOriginalExpansionSetCode() != null && getOriginalExpansionSetCode().equals("ORI")) {
             this.setTokenType(RandomUtil.nextInt(2) + 1);
+        }
+        if (getOriginalExpansionSetCode() != null && getOriginalExpansionSetCode().equals("KLD")) {
+            this.setTokenType(RandomUtil.nextInt(3) + 1);
         }
     }
 
