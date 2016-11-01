@@ -141,7 +141,7 @@ public class UserManager {
                     @Override
                     public void run() {
                         try {
-                            LOGGER.info("USER REMOVE - " + user.getName() + " (" + reason.toString() + ")  userId: " + userId);
+                            LOGGER.info("USER REMOVE - " + user.getName() + " (" + reason.toString() + ")  userId: " + userId + " [" + user.getGameInfo() + "]");
                             user.remove(reason);
                             LOGGER.debug("USER REMOVE END - " + user.getName());
                         } catch (Exception ex) {

@@ -214,33 +214,34 @@ public class SessionImpl implements Session {
 
     @Override
     public synchronized boolean connect(final Connection connection) {
-        return establishJBossRemotingConnection(connection) && handleRemotingTaskExceptions(new RemotingTask() {
-            @Override
-            public boolean run() throws Throwable {
-                logger.info("Trying to log-in as " + getUserName() + " to XMAGE server at " + connection.getHost() + ":" + connection.getPort());
-                boolean registerResult;
-                if (connection.getAdminPassword() == null) {
-                    // for backward compatibility. don't remove twice call - first one does nothing but for version checking
-                    registerResult = server.connectUser(connection.getUsername(), connection.getPassword(), sessionId, client.getVersion());
-                    if (registerResult) {
-                        server.setUserData(connection.getUsername(), sessionId, connection.getUserData(), client.getVersion().toString());
+        return establishJBossRemotingConnection(connection)
+                && handleRemotingTaskExceptions(new RemotingTask() {
+                    @Override
+                    public boolean run() throws Throwable {
+                        logger.info("Trying to log-in as " + getUserName() + " to XMAGE server at " + connection.getHost() + ":" + connection.getPort());
+                        boolean registerResult;
+                        if (connection.getAdminPassword() == null) {
+                            // for backward compatibility. don't remove twice call - first one does nothing but for version checking
+                            registerResult = server.connectUser(connection.getUsername(), connection.getPassword(), sessionId, client.getVersion());
+                            if (registerResult) {
+                                server.setUserData(connection.getUsername(), sessionId, connection.getUserData(), client.getVersion().toString());
+                            }
+                        } else {
+                            registerResult = server.connectAdmin(connection.getAdminPassword(), sessionId, client.getVersion());
+                        }
+                        if (registerResult) {
+                            serverState = server.getServerState();
+                            if (!connection.getUsername().equals("Admin")) {
+                                updateDatabase(connection.isForceDBComparison(), serverState);
+                            }
+                            logger.info("Logged-in as " + getUserName() + " to MAGE server at " + connection.getHost() + ":" + connection.getPort());
+                            client.connected(getUserName() + "@" + connection.getHost() + ":" + connection.getPort() + " ");
+                            return true;
+                        }
+                        disconnect(false);
+                        return false;
                     }
-                } else {
-                    registerResult = server.connectAdmin(connection.getAdminPassword(), sessionId, client.getVersion());
-                }
-                if (registerResult) {
-                    serverState = server.getServerState();
-                    if (!connection.getUsername().equals("Admin")) {
-                        updateDatabase(connection.isForceDBComparison(), serverState);
-                    }
-                    logger.info("Logged-in as " + getUserName() + " to MAGE server at " + connection.getHost() + ":" + connection.getPort());
-                    client.connected(getUserName() + "@" + connection.getHost() + ":" + connection.getPort() + " ");
-                    return true;
-                }
-                disconnect(false);
-                return false;
-            }
-        });
+                });
     }
 
     @Override
@@ -489,7 +490,7 @@ public class SessionImpl implements Session {
             sessionState = SessionState.DISCONNECTED;
             logger.info("Disconnected ... ");
             if (askForReconnect) {
-                client.showError("Network error.  You have been disconnected");
+                client.showError("Network error.  You have been disconnected from " + connection.getHost());
             }
             client.disconnected(askForReconnect); // MageFrame with check to reconnect
             pingTime.clear();

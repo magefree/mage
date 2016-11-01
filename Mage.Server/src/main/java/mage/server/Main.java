@@ -278,7 +278,7 @@ public class Main {
                 StringBuilder sessionInfo = new StringBuilder();
                 User user = UserManager.getInstance().getUser(session.getUserId());
                 if (user != null) {
-                    sessionInfo.append(user.getName());
+                    sessionInfo.append(user.getName()).append(" [").append(user.getGameInfo()).append("]");
                 } else {
                     sessionInfo.append("[user missing] ");
                 }
@@ -309,9 +309,9 @@ public class Main {
 
         protected Connector connector;
 
-        public MageTransporterServer(InvokerLocator locator, Object target, String subsystem, MageServerInvocationHandler callback) throws Exception {
+        public MageTransporterServer(InvokerLocator locator, Object target, String subsystem, MageServerInvocationHandler serverInvocationHandler) throws Exception {
             super(locator, target, subsystem);
-            connector.addInvocationHandler("callback", callback);
+            connector.addInvocationHandler("callback", serverInvocationHandler);
             connector.setLeasePeriod(ConfigSettings.getInstance().getLeasePeriod());
             connector.addConnectionListener(new ClientConnectionListener());
         }
@@ -332,18 +332,45 @@ public class Main {
 
         @Override
         public void setMBeanServer(MBeanServer server) {
-
+            /**
+             * An MBean is a managed Java object, similar to a JavaBeans
+             * component, that follows the design patterns set forth in the JMX
+             * specification. An MBean can represent a device, an application,
+             * or any resource that needs to be managed. MBeans expose a
+             * management interface that consists of the following:
+             *
+             * A set of readable or writable attributes, or both. A set of
+             * invokable operations. A self-description.
+             *
+             */
+            if (server != null) {
+                logger.info("Default domain: " + server.getDefaultDomain());
+            }
         }
 
         @Override
         public void setInvoker(ServerInvoker invoker) {
+            logger.info("Invoker version: " + ((BisocketServerInvoker) invoker).getVersion());
             ((BisocketServerInvoker) invoker).setSecondaryBindPort(ConfigSettings.getInstance().getSecondaryBindPort());
             ((BisocketServerInvoker) invoker).setBacklog(ConfigSettings.getInstance().getBacklogSize());
             ((BisocketServerInvoker) invoker).setNumAcceptThreads(ConfigSettings.getInstance().getNumAcceptThreads());
         }
 
         @Override
+        public void addListener(InvokerCallbackHandler callbackHandler) {
+            // Called for every client connecting to the server
+            ServerInvokerCallbackHandler handler = (ServerInvokerCallbackHandler) callbackHandler;
+            try {
+                String sessionId = handler.getClientSessionId();
+                SessionManager.getInstance().createSession(sessionId, callbackHandler);
+            } catch (Throwable ex) {
+                logger.fatal("", ex);
+            }
+        }
+
+        @Override
         public Object invoke(final InvocationRequest invocation) throws Throwable {
+            // Called for every client connecting to the server (after add Listener)
             String sessionId = invocation.getSessionId();
             Map map = invocation.getRequestPayload();
             String host;
@@ -355,17 +382,6 @@ public class Main {
             }
             SessionManager.getInstance().getSession(sessionId).setHost(host);
             return null;
-        }
-
-        @Override
-        public void addListener(InvokerCallbackHandler callbackHandler) {
-            ServerInvokerCallbackHandler handler = (ServerInvokerCallbackHandler) callbackHandler;
-            try {
-                String sessionId = handler.getClientSessionId();
-                SessionManager.getInstance().createSession(sessionId, callbackHandler);
-            } catch (Throwable ex) {
-                logger.fatal("", ex);
-            }
         }
 
         @Override
