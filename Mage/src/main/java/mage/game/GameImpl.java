@@ -1489,6 +1489,18 @@ public abstract class GameImpl implements Game, Serializable {
         Ability newAbility = source.copy();
         newEffect.init(newAbility, this);
 
+        // If there are already copy effects with dration = Custom to the same object, remove the existing effects because they no longer have any effect
+        if (Duration.Custom.equals(duration)) {
+            for (Effect effect : getState().getContinuousEffects().getLayeredEffects(this)) {
+                if (effect instanceof CopyEffect) {
+                    CopyEffect copyEffect = (CopyEffect) effect;
+                    // there is another copy effect that copies to the same permanent
+                    if (copyEffect.getSourceId().equals(copyToPermanentId) && copyEffect.getDuration().equals(Duration.Custom)) {
+                        copyEffect.discard();
+                    }
+                }
+            }
+        }
         state.addEffect(newEffect, newAbility);
         return newBluePrint;
     }

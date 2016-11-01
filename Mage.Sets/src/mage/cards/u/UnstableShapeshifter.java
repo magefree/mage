@@ -34,6 +34,7 @@ import mage.abilities.common.EntersBattlefieldAllTriggeredAbility;
 import mage.abilities.effects.OneShotEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
+import static mage.cards.u.UnstableShapeshifter.filterAnotherCreature;
 import mage.constants.CardType;
 import mage.constants.Duration;
 import mage.constants.Outcome;
@@ -51,10 +52,10 @@ import mage.util.functions.EmptyApplyToPermanent;
  */
 public class UnstableShapeshifter extends CardImpl {
 
-    private final static FilterCreaturePermanent filter = new FilterCreaturePermanent();
+    public final static FilterCreaturePermanent filterAnotherCreature = new FilterCreaturePermanent("another creature");
 
     static {
-        filter.add(new AnotherPredicate());
+        filterAnotherCreature.add(new AnotherPredicate());
     }
 
     public UnstableShapeshifter(UUID ownerId, CardSetInfo setInfo) {
@@ -64,8 +65,8 @@ public class UnstableShapeshifter extends CardImpl {
         this.power = new MageInt(0);
         this.toughness = new MageInt(1);
 
-        // Whenever another creature enters the battlefield under your control, you may have Renegade Doppelganger become a copy of that creature until end of turn.
-        this.addAbility(new EntersBattlefieldAllTriggeredAbility(Zone.BATTLEFIELD, new UnstableShapeshifterEffect(), filter, true, SetTargetPointer.PERMANENT, ""));
+        // Whenever another creature enters the battlefield, Unstable Shapeshifter becomes a copy of that creature and gains this ability.
+        this.addAbility(new EntersBattlefieldAllTriggeredAbility(Zone.BATTLEFIELD, new UnstableShapeshifterEffect(), filterAnotherCreature, false, SetTargetPointer.PERMANENT, ""));
     }
 
     public UnstableShapeshifter(final UnstableShapeshifter card) {
@@ -82,7 +83,7 @@ class UnstableShapeshifterEffect extends OneShotEffect {
 
     public UnstableShapeshifterEffect() {
         super(Outcome.Copy);
-        this.staticText = "you may have {this} become a copy of that creature until end of turn";
+        this.staticText = "{this} becomes a copy of that creature and gains this ability";
     }
 
     public UnstableShapeshifterEffect(final UnstableShapeshifterEffect effect) {
@@ -99,7 +100,9 @@ class UnstableShapeshifterEffect extends OneShotEffect {
         Permanent permanent = game.getPermanent(source.getSourceId());
         Permanent targetCreature = game.getPermanentOrLKIBattlefield(getTargetPointer().getFirst(game, source));
         if (targetCreature != null && permanent != null) {
-            game.copyPermanent(Duration.EndOfTurn, targetCreature, permanent.getId(), source, new EmptyApplyToPermanent());
+            Permanent blueprintPermanent = game.copyPermanent(Duration.Custom, targetCreature, permanent.getId(), source, new EmptyApplyToPermanent());
+            blueprintPermanent.addAbility(new EntersBattlefieldAllTriggeredAbility(Zone.BATTLEFIELD,
+                    new UnstableShapeshifterEffect(), filterAnotherCreature, false, SetTargetPointer.PERMANENT, ""), game);
             return true;
         }
         return false;
