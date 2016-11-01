@@ -73,7 +73,7 @@ public class CunningBandit extends CardImpl {
 
         // At the beginning of the end step, if there are two or more ki counters on Cunning Bandit, you may flip it.
         this.addAbility(new ConditionalTriggeredAbility(
-                new OnEventTriggeredAbility(GameEvent.EventType.END_TURN_STEP_PRE, "beginning of the end step", true, new FlipSourceEffect(new AzamukiTreacheryIncarnate())),
+                new OnEventTriggeredAbility(GameEvent.EventType.END_TURN_STEP_PRE, "beginning of the end step", true, new FlipSourceEffect(new AzamukiTreacheryIncarnate()), true),
                 new SourceHasCounterCondition(CounterType.KI, 2, Integer.MAX_VALUE),
                 "At the beginning of the end step, if there are two or more ki counters on {this}, you may flip it."));
     }

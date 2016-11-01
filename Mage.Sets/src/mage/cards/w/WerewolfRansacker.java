@@ -44,14 +44,12 @@ import mage.constants.CardType;
 import mage.constants.Outcome;
 import mage.constants.TargetController;
 import mage.constants.Zone;
-import mage.filter.common.FilterArtifactPermanent;
 import mage.game.Game;
 import mage.game.events.GameEvent;
 import mage.game.events.GameEvent.EventType;
 import mage.game.permanent.Permanent;
 import mage.players.Player;
-import mage.target.Target;
-import mage.target.TargetPermanent;
+import mage.target.common.TargetArtifactPermanent;
 
 /**
  *
@@ -95,8 +93,7 @@ class WerewolfRansackerAbility extends TriggeredAbilityImpl {
 
     public WerewolfRansackerAbility() {
         super(Zone.BATTLEFIELD, new WerewolfRansackerEffect(), true);
-        Target target = new TargetPermanent(new FilterArtifactPermanent());
-        this.addTarget(target);
+        this.addTarget(new TargetArtifactPermanent());
     }
 
     public WerewolfRansackerAbility(final WerewolfRansackerAbility ability) {

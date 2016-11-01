@@ -34,8 +34,6 @@ import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.filter.common.FilterLandPermanent;
-import mage.filter.predicate.Predicates;
-import mage.filter.predicate.mageobject.SupertypePredicate;
 
 /**
  *
@@ -51,7 +49,7 @@ public class DryadSophisticate extends CardImpl {
         this.toughness = new MageInt(1);
 
         // Nonbasic landwalk
-        this.addAbility(new NonbasicLandwalkAbility());
+        this.addAbility(new LandwalkAbility(FilterLandPermanent.nonbasicLand()));
     }
 
     public DryadSophisticate(final DryadSophisticate card) {
@@ -61,27 +59,5 @@ public class DryadSophisticate extends CardImpl {
     @Override
     public DryadSophisticate copy() {
         return new DryadSophisticate(this);
-    }
-}
-
-class NonbasicLandwalkAbility extends LandwalkAbility {
-
-    private static final FilterLandPermanent filter = new FilterLandPermanent("nonbasic land");
-
-    static {
-        filter.add(Predicates.not(new SupertypePredicate("Basic")));
-    }
-
-    public NonbasicLandwalkAbility() {
-        super(filter);
-    }
-
-    public NonbasicLandwalkAbility(final NonbasicLandwalkAbility ability) {
-        super(ability);
-    }
-
-    @Override
-    public NonbasicLandwalkAbility copy() {
-        return new NonbasicLandwalkAbility(this);
     }
 }

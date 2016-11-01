@@ -43,21 +43,13 @@ import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.Zone;
 import mage.counters.CounterType;
-import mage.filter.FilterPermanent;
-import mage.filter.predicate.mageobject.CardTypePredicate;
-import mage.target.TargetPermanent;
+import mage.target.common.TargetEnchantmentPermanent;
 
 /**
  *
  * @author Loki
  */
 public class Shinewend extends CardImpl {
-
-    private static final FilterPermanent filter = new FilterPermanent("enchantment");
-
-    static {
-        filter.add(new CardTypePredicate(CardType.ENCHANTMENT));
-    }
 
     public Shinewend(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{1}{W}");
@@ -75,7 +67,7 @@ public class Shinewend extends CardImpl {
         // {1}{W}, Remove a +1/+1 counter from Shinewend: Destroy target enchantment.
         Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new DestroyTargetEffect(), new ManaCostsImpl("{1}{W}"));
         ability.addCost(new RemoveCountersSourceCost(CounterType.P1P1.createInstance(1)));
-        ability.addTarget(new TargetPermanent(filter));
+        ability.addTarget(new TargetEnchantmentPermanent());
         this.addAbility(ability);
     }
 

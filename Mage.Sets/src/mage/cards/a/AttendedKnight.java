@@ -50,10 +50,7 @@ public class AttendedKnight extends CardImpl {
 
         this.power = new MageInt(2);
         this.toughness = new MageInt(2);
-    }
 
-    @Override
-    public void build() {
         // First strike
         this.addAbility(FirstStrikeAbility.getInstance());
         // When Attended Knight enters the battlefield, create a 1/1 white Soldier creature token.

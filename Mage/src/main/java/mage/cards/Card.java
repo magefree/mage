@@ -147,8 +147,6 @@ public interface Card extends MageObject {
 
     List<Mana> getMana();
 
-    void build();
-
     /**
      *
      * @return true if there exists various art images for this card

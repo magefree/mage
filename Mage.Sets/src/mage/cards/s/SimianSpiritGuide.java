@@ -35,7 +35,6 @@ import mage.Mana;
 import mage.abilities.Ability;
 import mage.abilities.costs.Cost;
 import mage.abilities.costs.CostImpl;
-import mage.abilities.effects.common.BasicManaEffect;
 import mage.abilities.mana.SimpleManaAbility;
 import mage.cards.Card;
 import mage.cards.CardImpl;
@@ -59,7 +58,7 @@ public class SimianSpiritGuide extends CardImpl {
         this.toughness = new MageInt(2);
 
         // Exile Simian Spirit Guide from your hand: Add {R} to your mana pool.
-        this.addAbility(new SimpleManaAbility(Zone.HAND, new BasicManaEffect(Mana.RedMana(1)), new ExileSourceFromHandCost()));
+        this.addAbility(new SimpleManaAbility(Zone.HAND, Mana.RedMana(1), new ExileSourceFromHandCost()));
     }
 
     public SimianSpiritGuide(final SimianSpiritGuide card) {

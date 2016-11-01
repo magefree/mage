@@ -38,10 +38,9 @@ import mage.abilities.costs.common.TapTargetCost;
 import mage.abilities.effects.common.ExileTargetEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
-import mage.filter.FilterPermanent;
+import mage.filter.common.FilterArtifactOrEnchantmentPermanent;
 import mage.filter.common.FilterControlledPermanent;
 import mage.filter.predicate.Predicates;
-import mage.filter.predicate.mageobject.CardTypePredicate;
 import mage.filter.predicate.mageobject.SubtypePredicate;
 import mage.filter.predicate.permanent.TappedPredicate;
 import mage.target.TargetPermanent;
@@ -52,15 +51,6 @@ import mage.target.common.TargetControlledPermanent;
  * @author noxx
  */
 public class DevoutChaplain extends CardImpl {
-
-    private static final FilterPermanent filter = new FilterPermanent("artifact or enchantment");
-
-    static {
-        filter.add(Predicates.or(
-                new CardTypePredicate(CardType.ARTIFACT),
-                new CardTypePredicate(CardType.ENCHANTMENT)));
-    }
-
     private static final FilterControlledPermanent humanFilter = new FilterControlledPermanent("untapped Human you control");
 
     static {
@@ -80,7 +70,7 @@ public class DevoutChaplain extends CardImpl {
         // {T}, Tap two untapped Humans you control: Exile target artifact or enchantment.
         Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new ExileTargetEffect(), new TapSourceCost());
         ability.addCost(new TapTargetCost(new TargetControlledPermanent(2, 2, humanFilter, false)));
-        ability.addTarget(new TargetPermanent(filter));
+        ability.addTarget(new TargetPermanent(new FilterArtifactOrEnchantmentPermanent()));
         this.addAbility(ability);
     }
 

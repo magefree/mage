@@ -46,7 +46,7 @@ public class MyrMoonvessel extends CardImpl {
         this.subtype.add("Myr");
         this.power = new MageInt(1);
         this.toughness = new MageInt(1);
-        this.addAbility(new DiesTriggeredAbility(new BasicManaEffect(new Mana(0, 0, 0, 0, 0, 0, 0, 1))));
+        this.addAbility(new DiesTriggeredAbility(new BasicManaEffect(Mana.ColorlessMana(1))));
     }
 
     public MyrMoonvessel(final MyrMoonvessel card) {

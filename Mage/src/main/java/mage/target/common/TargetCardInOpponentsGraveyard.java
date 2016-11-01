@@ -26,7 +26,6 @@ public class TargetCardInOpponentsGraveyard extends TargetCard {
 
     public TargetCardInOpponentsGraveyard(int minNumTargets, int maxNumTargets, FilterCard filter, boolean allFromOneOpponent) {
         super(minNumTargets, maxNumTargets, Zone.GRAVEYARD, filter);
-        this.targetName = filter.getMessage();
         this.allFromOneOpponent = allFromOneOpponent;
     }
 

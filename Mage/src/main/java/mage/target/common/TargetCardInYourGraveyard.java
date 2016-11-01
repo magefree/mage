@@ -60,7 +60,6 @@ public class TargetCardInYourGraveyard extends TargetCard {
 
     public TargetCardInYourGraveyard(int minNumTargets, int maxNumTargets, FilterCard filter) {
         super(minNumTargets, maxNumTargets, Zone.GRAVEYARD, filter);
-        this.targetName = filter.getMessage();
     }
 
     public TargetCardInYourGraveyard(final TargetCardInYourGraveyard target) {

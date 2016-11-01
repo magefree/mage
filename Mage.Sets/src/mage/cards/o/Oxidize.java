@@ -32,8 +32,7 @@ import mage.constants.CardType;
 import mage.abilities.effects.common.DestroyTargetEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
-import mage.filter.common.FilterArtifactPermanent;
-import mage.target.TargetPermanent;
+import mage.target.common.TargetArtifactPermanent;
 
 /**
  * @author Loki
@@ -44,7 +43,7 @@ public class Oxidize extends CardImpl {
         super(ownerId,setInfo,new CardType[]{CardType.INSTANT},"{G}");
 
         this.getSpellAbility().addEffect(new DestroyTargetEffect(true));
-        this.getSpellAbility().addTarget(new TargetPermanent(new FilterArtifactPermanent()));
+        this.getSpellAbility().addTarget(new TargetArtifactPermanent());
     }
 
     public Oxidize(final Oxidize card) {

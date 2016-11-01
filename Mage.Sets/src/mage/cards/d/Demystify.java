@@ -33,9 +33,7 @@ import mage.constants.CardType;
 import mage.abilities.effects.common.DestroyTargetEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
-import mage.filter.FilterPermanent;
-import mage.filter.predicate.mageobject.CardTypePredicate;
-import mage.target.TargetPermanent;
+import mage.target.common.TargetEnchantmentPermanent;
 
 /**
  *
@@ -43,17 +41,11 @@ import mage.target.TargetPermanent;
  */
 public class Demystify extends CardImpl {
 
-    private static final FilterPermanent filter = new FilterPermanent("enchantment");
-
-    static {
-        filter.add(new CardTypePredicate(CardType.ENCHANTMENT));
-    }
-
     public Demystify (UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.INSTANT},"{W}");
 
         this.getSpellAbility().addEffect(new DestroyTargetEffect());
-        this.getSpellAbility().addTarget(new TargetPermanent(filter));
+        this.getSpellAbility().addTarget(new TargetEnchantmentPermanent());
     }
 
     public Demystify (final Demystify card) {
@@ -64,5 +56,4 @@ public class Demystify extends CardImpl {
     public Demystify copy() {
         return new Demystify(this);
     }
-
 }

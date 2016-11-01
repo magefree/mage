@@ -38,9 +38,8 @@ import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.filter.FilterPermanent;
-import mage.filter.common.FilterArtifactPermanent;
 import mage.filter.predicate.mageobject.SubtypePredicate;
-import mage.target.TargetPermanent;
+import mage.target.common.TargetArtifactPermanent;
 
 /**
  *
@@ -67,7 +66,7 @@ public class MoggSalvage extends CardImpl {
 
         // Destroy target artifact.
         this.getSpellAbility().addEffect(new DestroyTargetEffect());
-        this.getSpellAbility().addTarget(new TargetPermanent(new FilterArtifactPermanent()));
+        this.getSpellAbility().addTarget(new TargetArtifactPermanent());
     }
 
     public MoggSalvage(final MoggSalvage card) {

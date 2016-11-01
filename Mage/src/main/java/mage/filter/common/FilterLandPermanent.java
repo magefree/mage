@@ -30,8 +30,10 @@ package mage.filter.common;
 
 import mage.constants.CardType;
 import mage.filter.FilterPermanent;
+import mage.filter.predicate.Predicates;
 import mage.filter.predicate.mageobject.CardTypePredicate;
 import mage.filter.predicate.mageobject.SubtypePredicate;
+import mage.filter.predicate.mageobject.SupertypePredicate;
 
 /**
  *
@@ -52,6 +54,18 @@ public class FilterLandPermanent extends FilterPermanent {
         super(name);
         this.add(new CardTypePredicate(CardType.LAND));
         this.add(new SubtypePredicate(subtype));
+    }
+
+    public static FilterLandPermanent nonbasicLand() {
+        FilterLandPermanent filter = new FilterLandPermanent("nonbasic land");
+        filter.add(Predicates.not(new SupertypePredicate("Basic")));
+        return filter;
+    }
+
+    public static FilterLandPermanent nonbasicLands() {
+        FilterLandPermanent filter = new FilterLandPermanent("nonbasic lands");
+        filter.add(Predicates.not(new SupertypePredicate("Basic")));
+        return filter;
     }
     
     public FilterLandPermanent(final FilterLandPermanent filter) {

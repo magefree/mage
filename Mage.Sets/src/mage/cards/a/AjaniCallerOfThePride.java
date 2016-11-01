@@ -57,10 +57,6 @@ public class AjaniCallerOfThePride extends CardImpl {
         super(ownerId,setInfo,new CardType[]{CardType.PLANESWALKER},"{1}{W}{W}");
         this.subtype.add("Ajani");
 
-    }
-
-    @Override
-    public void build() {
         this.addAbility(new PlanswalkerEntersWithLoyalityCountersAbility(4));
         // +1: Put a +1/+1 counter on up to one target creature.
         Effect effect = new AddCountersTargetEffect(CounterType.P1P1.createInstance());

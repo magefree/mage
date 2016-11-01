@@ -39,14 +39,12 @@ import mage.abilities.effects.common.ReturnToHandTargetEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.TargetController;
 import mage.constants.Zone;
+import mage.filter.common.FilterControlledLandPermanent;
 import mage.filter.common.FilterLandCard;
-import mage.filter.common.FilterLandPermanent;
-import mage.filter.predicate.permanent.ControllerPredicate;
 import mage.target.Target;
+import mage.target.TargetPermanent;
 import mage.target.common.TargetCardInHand;
-import mage.target.common.TargetLandPermanent;
 
 /**
  *
@@ -54,19 +52,13 @@ import mage.target.common.TargetLandPermanent;
  */
 public class TradeRoutes extends CardImpl {
 
-    private static final FilterLandPermanent landYouControl =  new FilterLandPermanent("land you control");
-
-    static {
-        landYouControl.add(new ControllerPredicate(TargetController.YOU));
-    }
-
     public TradeRoutes(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.ENCHANTMENT},"{1}{U}");
 
 
         // {1}: Return target land you control to its owner's hand.
         Effect returnToHand = new ReturnToHandTargetEffect();
-        Target targetLandYouControl = new TargetLandPermanent(landYouControl);
+        Target targetLandYouControl = new TargetPermanent(new FilterControlledLandPermanent());
         Ability returnLandToHand = new SimpleActivatedAbility(Zone.BATTLEFIELD, returnToHand, new GenericManaCost(1));
         returnLandToHand.addTarget(targetLandYouControl);
         this.addAbility(returnLandToHand);

@@ -39,8 +39,6 @@ import mage.constants.Outcome;
 import mage.constants.TargetController;
 import mage.constants.Zone;
 import mage.filter.common.FilterLandPermanent;
-import mage.filter.predicate.Predicates;
-import mage.filter.predicate.mageobject.SupertypePredicate;
 import mage.game.Game;
 import mage.players.Player;
 
@@ -69,11 +67,7 @@ public class PrimalOrder extends CardImpl {
 
 class PrimalOrderDamageTargetEffect extends OneShotEffect{
     
-    private static final FilterLandPermanent filter = new FilterLandPermanent("nonbasic lands");
-
-    static {
-        filter.add(Predicates.not(new SupertypePredicate("Basic")));
-    }
+    private static final FilterLandPermanent filter = FilterLandPermanent.nonbasicLands();
     
     public PrimalOrderDamageTargetEffect()
     {

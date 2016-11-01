@@ -29,22 +29,20 @@ package mage.cards.g;
 
 import java.util.UUID;
 
+import mage.abilities.effects.Effect;
+import mage.abilities.effects.common.continuous.BoostEnchantedEffect;
+import mage.abilities.effects.common.continuous.GainAbilityAttachedEffect;
+import mage.constants.AttachmentType;
 import mage.constants.CardType;
-import mage.constants.Duration;
 import mage.constants.Outcome;
 import mage.constants.Zone;
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleStaticAbility;
-import mage.abilities.effects.ContinuousEffectImpl;
 import mage.abilities.effects.common.AttachEffect;
 import mage.abilities.keyword.EnchantAbility;
 import mage.abilities.keyword.HasteAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
-import mage.constants.Layer;
-import mage.constants.SubLayer;
-import mage.game.Game;
-import mage.game.permanent.Permanent;
 import mage.target.TargetPermanent;
 import mage.target.common.TargetCreaturePermanent;
 
@@ -59,12 +57,19 @@ public class GoblinWarPaint extends CardImpl {
         this.subtype.add("Aura");
 
 
+        // Enchant creature
         TargetPermanent auraTarget = new TargetCreaturePermanent();
         this.getSpellAbility().addTarget(auraTarget);
         this.getSpellAbility().addEffect(new AttachEffect(Outcome.BoostCreature));
         Ability ability = new EnchantAbility(auraTarget.getTargetName());
         this.addAbility(ability);
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new GoblinWarPaintEffect()));
+
+        // Enchanted creature gets +2/+2 and has haste.
+        Effect effect = new GainAbilityAttachedEffect(HasteAbility.getInstance(), AttachmentType.AURA);
+        effect.setText("and has haste");
+        ability = new SimpleStaticAbility(Zone.BATTLEFIELD, new BoostEnchantedEffect(2, 2));
+        ability.addEffect(effect);
+        this.addAbility(ability);
     }
 
     public GoblinWarPaint(final GoblinWarPaint card) {
@@ -75,57 +80,4 @@ public class GoblinWarPaint extends CardImpl {
     public GoblinWarPaint copy() {
         return new GoblinWarPaint(this);
     }
-}
-
-class GoblinWarPaintEffect extends ContinuousEffectImpl {
-
-    public GoblinWarPaintEffect() {
-        super(Duration.WhileOnBattlefield, Outcome.Benefit);
-        staticText = "Enchanted creature gets +2/+2 and has haste";
-    }
-
-    public GoblinWarPaintEffect(final GoblinWarPaintEffect effect) {
-        super(effect);
-    }
-
-    @Override
-    public boolean apply(Layer layer, SubLayer sublayer, Ability source, Game game) {
-        Permanent enchantment = game.getPermanent(source.getSourceId());
-        if (enchantment != null && enchantment.getAttachedTo() != null) {
-            Permanent creature = game.getPermanent(enchantment.getAttachedTo());
-            if (creature != null) {
-                switch (layer) {
-                    case PTChangingEffects_7:
-                        if (sublayer == SubLayer.ModifyPT_7c) {
-                            creature.addPower(2);
-                            creature.addToughness(2);
-                        }
-                        break;
-                    case AbilityAddingRemovingEffects_6:
-                        if (sublayer == SubLayer.NA) {
-                            creature.addAbility(HasteAbility.getInstance(), game);
-                        }
-                        break;
-                }
-                return true;
-            }
-        }
-        return false;
-    }
-
-    @Override
-    public boolean apply(Game game, Ability source) {
-        return false;
-    }
-
-    @Override
-    public boolean hasLayer(Layer layer) {
-        return layer == Layer.AbilityAddingRemovingEffects_6 || layer == layer.PTChangingEffects_7;
-    }
-
-    @Override
-    public GoblinWarPaintEffect copy() {
-        return new GoblinWarPaintEffect(this);
-    }
-
 }

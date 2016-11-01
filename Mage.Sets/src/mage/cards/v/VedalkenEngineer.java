@@ -156,24 +156,13 @@ class VedalkenEngineerEffect extends ManaEffect {
             return false;
         }
 
-        Mana mana = new Mana();
         ChoiceColor choiceColor = new ChoiceColor(true);
         while (!controller.choose(Outcome.Benefit, choiceColor, game)) {
             if (!controller.canRespond()) {
                 return false;
             }
         }
-        if (choiceColor.getColor().isBlack()) {
-            mana.setBlack(amount);
-        } else if (choiceColor.getColor().isBlue()) {
-            mana.setBlue(amount);
-        } else if (choiceColor.getColor().isRed()) {
-            mana.setRed(amount);
-        } else if (choiceColor.getColor().isGreen()) {
-            mana.setGreen(amount);
-        } else if (choiceColor.getColor().isWhite()) {
-            mana.setWhite(amount);
-        }
+        Mana mana = choiceColor.getMana(amount);
         Mana condMana = manaBuilder.setMana(mana, source, game).build();
         checkToFirePossibleEvents(condMana, game, source);
         controller.getManaPool().addMana(condMana, game, source);

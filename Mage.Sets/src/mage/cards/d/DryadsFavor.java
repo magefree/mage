@@ -31,20 +31,16 @@ package mage.cards.d;
 import java.util.UUID;
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleStaticAbility;
-import mage.abilities.effects.ContinuousEffectImpl;
 import mage.abilities.effects.common.AttachEffect;
+import mage.abilities.effects.common.continuous.GainAbilityAttachedEffect;
 import mage.abilities.keyword.EnchantAbility;
 import mage.abilities.keyword.ForestwalkAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
+import mage.constants.AttachmentType;
 import mage.constants.CardType;
-import mage.constants.Duration;
-import mage.constants.Layer;
 import mage.constants.Outcome;
-import mage.constants.SubLayer;
 import mage.constants.Zone;
-import mage.game.Game;
-import mage.game.permanent.Permanent;
 import mage.target.TargetPermanent;
 import mage.target.common.TargetCreaturePermanent;
 
@@ -61,11 +57,13 @@ public class DryadsFavor extends CardImpl {
         // Enchant creature
         TargetPermanent auraTarget = new TargetCreaturePermanent();
         this.getSpellAbility().addTarget(auraTarget);
-        this.getSpellAbility().addEffect(new AttachEffect(Outcome.Benefit));
+        this.getSpellAbility().addEffect(new AttachEffect(Outcome.AddAbility));
         Ability ability = new EnchantAbility(auraTarget.getTargetName());
         this.addAbility(ability);
+
         // Enchanted creature has forestwalk.
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new DryadsFavorEffect()));
+        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD,
+                new GainAbilityAttachedEffect(new ForestwalkAbility(), AttachmentType.AURA)));
     }
 
     public DryadsFavor(final DryadsFavor card) {
@@ -76,51 +74,4 @@ public class DryadsFavor extends CardImpl {
     public DryadsFavor copy() {
         return new DryadsFavor(this);
     }
-}
-
-class DryadsFavorEffect extends ContinuousEffectImpl {
-
-    public DryadsFavorEffect() {
-        super(Duration.WhileOnBattlefield, Outcome.Detriment);
-        staticText = "Enchanted creature has forestwalk";
-    }
-
-    public DryadsFavorEffect(final DryadsFavorEffect effect) {
-        super(effect);
-    }
-
-    @Override
-    public DryadsFavorEffect copy() {
-        return new DryadsFavorEffect(this);
-    }
-
-    @Override
-    public boolean apply(Layer layer, SubLayer sublayer, Ability source, Game game) {
-        Permanent enchantment = game.getPermanent(source.getSourceId());
-        if (enchantment != null && enchantment.getAttachedTo() != null) {
-            Permanent creature = game.getPermanent(enchantment.getAttachedTo());
-            if (creature != null) {
-                switch (layer) {
-                    case AbilityAddingRemovingEffects_6:
-                        if (sublayer == SubLayer.NA) {
-                            creature.addAbility(new ForestwalkAbility(), source.getSourceId(), game);
-                        }
-                        break;
-                }
-                return true;
-            }
-        }
-        return false;
-    }
-
-    @Override
-    public boolean apply(Game game, Ability source) {
-        return false;
-    }
-
-    @Override
-    public boolean hasLayer(Layer layer) {
-        return layer == Layer.AbilityAddingRemovingEffects_6;
-    }
-    
 }

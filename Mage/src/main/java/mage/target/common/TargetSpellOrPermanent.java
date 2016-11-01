@@ -75,7 +75,6 @@ public class TargetSpellOrPermanent extends TargetImpl {
         this.minNumberOfTargets = minNumTargets;
         this.maxNumberOfTargets = maxNumTargets;
         this.zone = Zone.ALL;
-        this.targetName = filter.getMessage();
         this.notTarget = notTarget;
         this.filter = filter;
         this.targetName = filter.getMessage();

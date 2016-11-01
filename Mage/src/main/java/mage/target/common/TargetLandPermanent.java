@@ -51,7 +51,6 @@ public class TargetLandPermanent extends TargetPermanent {
 
     public TargetLandPermanent(int minNumTargets, int maxNumTargets, FilterLandPermanent filter, boolean notTarget) {
         super(minNumTargets, maxNumTargets, filter, notTarget);
-        this.targetName = filter.getMessage();
     }
 
     public TargetLandPermanent(final TargetLandPermanent target) {

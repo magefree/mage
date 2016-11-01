@@ -56,7 +56,7 @@ public class LivingTerrain extends CardImpl {
 
         // Enchant land
         
-        TargetPermanent auraTarget = new TargetLandPermanent(new FilterLandPermanent());
+        TargetPermanent auraTarget = new TargetLandPermanent();
         this.getSpellAbility().addTarget(auraTarget);
         this.getSpellAbility().addEffect(new AttachEffect(Outcome.PutCreatureInPlay));
         Ability ability = new EnchantAbility(auraTarget.getTargetName());

@@ -572,7 +572,6 @@ public abstract class GameImpl implements Game, Serializable {
     public void saveState(boolean bookmark) {
         if (!simulation && gameStates != null) {
             if (bookmark || saveGame) {
-                state.getPlayerList().setCurrent(playerList.get());
                 gameStates.save(state);
             }
         }
@@ -678,7 +677,7 @@ public abstract class GameImpl implements Game, Serializable {
                 GameState restore = gameStates.rollback(stateNum);
                 if (restore != null) {
                     state.restore(restore);
-                    playerList.setCurrent(state.getPlayerList().get());
+                    playerList.setCurrent(state.getPlayerByOrderId());
                 }
             }
         }
@@ -758,6 +757,7 @@ public abstract class GameImpl implements Game, Serializable {
         if (!isPaused() && !gameOver(null)) {
             playerList = state.getPlayerList(nextPlayerId);
             Player playerByOrder = getPlayer(playerList.get());
+            state.setPlayerByOrderId(playerByOrder.getId());
             while (!isPaused() && !gameOver(null)) {
                 playExtraTurns();
                 GameEvent event = new GameEvent(GameEvent.EventType.PLAY_TURN, null, null, playerByOrder.getId());
@@ -768,6 +768,7 @@ public abstract class GameImpl implements Game, Serializable {
                 }
                 playExtraTurns();
                 playerByOrder = playerList.getNext(this);
+                state.setPlayerByOrderId(playerByOrder.getId());
             }
         }
         if (gameOver(null) && !isSimulation()) {
@@ -1488,6 +1489,18 @@ public abstract class GameImpl implements Game, Serializable {
         Ability newAbility = source.copy();
         newEffect.init(newAbility, this);
 
+        // If there are already copy effects with dration = Custom to the same object, remove the existing effects because they no longer have any effect
+        if (Duration.Custom.equals(duration)) {
+            for (Effect effect : getState().getContinuousEffects().getLayeredEffects(this)) {
+                if (effect instanceof CopyEffect) {
+                    CopyEffect copyEffect = (CopyEffect) effect;
+                    // there is another copy effect that copies to the same permanent
+                    if (copyEffect.getSourceId().equals(copyToPermanentId) && copyEffect.getDuration().equals(Duration.Custom)) {
+                        copyEffect.discard();
+                    }
+                }
+            }
+        }
         state.addEffect(newEffect, newAbility);
         return newBluePrint;
     }
@@ -2820,7 +2833,7 @@ public abstract class GameImpl implements Game, Serializable {
                 if (restore != null) {
                     informPlayers(GameLog.getPlayerRequestColoredText("Player request: Rolling back to start of turn " + restore.getTurnNum()));
                     state.restoreForRollBack(restore);
-                    playerList.setCurrent(state.getPlayerList().get());
+                    playerList.setCurrent(state.getPlayerByOrderId());
                     // because restore uses the objects without copy each copy the state again
                     gameStatesRollBack.put(getTurnNum(), state.copy());
                     executingRollback = true;

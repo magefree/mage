@@ -34,9 +34,7 @@ import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Zone;
-import mage.filter.FilterPermanent;
-import mage.filter.predicate.Predicates;
-import mage.filter.predicate.mageobject.CardTypePredicate;
+import mage.filter.common.FilterArtifactOrEnchantmentPermanent;
 import mage.game.Game;
 import mage.game.events.GameEvent;
 import mage.game.events.GameEvent.EventType;
@@ -68,14 +66,6 @@ public class Scrapheap extends CardImpl {
 
 class ScrapheapTriggeredAbility extends TriggeredAbilityImpl {
 
-    private static final FilterPermanent filter = new FilterPermanent("artifact or enchantment");
-
-    static {
-        filter.add(Predicates.or(
-                new CardTypePredicate(CardType.ARTIFACT),
-                new CardTypePredicate(CardType.ENCHANTMENT)));
-    }
-    
     @Override
     public ScrapheapTriggeredAbility copy() {
         return new ScrapheapTriggeredAbility(this);
@@ -96,15 +86,15 @@ class ScrapheapTriggeredAbility extends TriggeredAbilityImpl {
 
     @Override
     public boolean checkTrigger(GameEvent event, Game game) {
-            ZoneChangeEvent zEvent = (ZoneChangeEvent) event;
-            if (zEvent.getFromZone() == Zone.BATTLEFIELD && zEvent.getToZone() == Zone.GRAVEYARD) {
-                Permanent permanent = (Permanent) game.getLastKnownInformation(event.getTargetId(), Zone.BATTLEFIELD);
-                if (permanent != null && permanent.getOwnerId().equals(this.getControllerId())) {
-                    if (filter.match(permanent, sourceId, controllerId, game)) {
-                        return true;
-                    }
+        ZoneChangeEvent zEvent = (ZoneChangeEvent) event;
+        if (zEvent.getFromZone() == Zone.BATTLEFIELD && zEvent.getToZone() == Zone.GRAVEYARD) {
+            Permanent permanent = (Permanent) game.getLastKnownInformation(event.getTargetId(), Zone.BATTLEFIELD);
+            if (permanent != null && permanent.getOwnerId().equals(this.getControllerId())) {
+                if (new FilterArtifactOrEnchantmentPermanent().match(permanent, sourceId, controllerId, game)) {
+                    return true;
                 }
             }
+        }
         return false;
     }
     

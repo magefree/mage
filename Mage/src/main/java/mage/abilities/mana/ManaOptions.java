@@ -317,7 +317,7 @@ public class ManaOptions extends ArrayList<Mana> {
                 }
             }
         } else {
-            payCombinations.add(new Mana(0, 0, 0, 0, 0, 0, 0, number));
+            payCombinations.add(Mana.ColorlessMana(number));
         }
         return payCombinations;
     }

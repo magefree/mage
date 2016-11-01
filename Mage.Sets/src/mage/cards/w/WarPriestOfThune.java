@@ -36,22 +36,13 @@ import mage.abilities.common.EntersBattlefieldTriggeredAbility;
 import mage.abilities.effects.common.DestroyTargetEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
-import mage.filter.FilterPermanent;
-import mage.filter.predicate.mageobject.CardTypePredicate;
-import mage.target.Target;
-import mage.target.TargetPermanent;
+import mage.target.common.TargetEnchantmentPermanent;
 
 /**
  *
  * @author BetaSteward_at_googlemail.com
  */
 public class WarPriestOfThune extends CardImpl {
-
-    private static final FilterPermanent filter = new FilterPermanent("enchantment");
-
-    static {
-        filter.add(new CardTypePredicate(CardType.ENCHANTMENT));
-    }
 
     public WarPriestOfThune(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{1}{W}");
@@ -63,8 +54,7 @@ public class WarPriestOfThune extends CardImpl {
 
         // When War Priest of Thune enters the battlefield, you may destroy target enchantment.
         Ability ability = new EntersBattlefieldTriggeredAbility(new DestroyTargetEffect(), true);
-        Target target = new TargetPermanent(filter);
-        ability.addTarget(target);
+        ability.addTarget(new TargetEnchantmentPermanent());
         this.addAbility(ability);
     }
 

@@ -109,6 +109,7 @@ public class GameState implements Serializable, Copyable<GameState> {
     private TurnMods turnMods;
     private UUID activePlayerId; // playerId which turn it is
     private UUID priorityPlayerId; // player that has currently priority
+    private UUID playerByOrderId; // player that has currently priority
     private SpellStack stack;
     private Command command;
     private Exile exile;
@@ -162,6 +163,7 @@ public class GameState implements Serializable, Copyable<GameState> {
 
         this.activePlayerId = state.activePlayerId;
         this.priorityPlayerId = state.priorityPlayerId;
+        this.playerByOrderId = state.playerByOrderId;
         this.turn = state.turn.copy();
 
         this.stack = state.stack.copy();
@@ -209,7 +211,8 @@ public class GameState implements Serializable, Copyable<GameState> {
 
     public void restore(GameState state) {
         this.activePlayerId = state.activePlayerId;
-        this.playerList.setCurrent(state.playerList.get());
+        this.playerList.setCurrent(state.activePlayerId);
+        this.playerByOrderId = state.playerByOrderId;
         this.priorityPlayerId = state.priorityPlayerId;
         this.stack = state.stack;
         this.command = state.command;
@@ -255,7 +258,7 @@ public class GameState implements Serializable, Copyable<GameState> {
         StringBuilder sb = threadLocalBuilder.get();
 
         sb.append(turn.getValue(turnNum));
-        sb.append(activePlayerId).append(priorityPlayerId);
+        sb.append(activePlayerId).append(priorityPlayerId).append(playerByOrderId);
 
         for (Player player : players.values()) {
             sb.append("player").append(player.getLife()).append("hand");
@@ -293,7 +296,7 @@ public class GameState implements Serializable, Copyable<GameState> {
         StringBuilder sb = threadLocalBuilder.get();
 
         sb.append(turn.getValue(turnNum));
-        sb.append(activePlayerId).append(priorityPlayerId);
+        sb.append(activePlayerId).append(priorityPlayerId).append(playerByOrderId);
 
         for (Player player : players.values()) {
             sb.append("player").append(player.isPassed()).append(player.getLife()).append("hand");
@@ -346,7 +349,7 @@ public class GameState implements Serializable, Copyable<GameState> {
         StringBuilder sb = threadLocalBuilder.get();
 
         sb.append(turn.getValue(turnNum));
-        sb.append(activePlayerId).append(priorityPlayerId);
+        sb.append(activePlayerId).append(priorityPlayerId).append(playerByOrderId);
 
         for (Player player : players.values()) {
             sb.append("player").append(player.isPassed()).append(player.getLife()).append("hand");
@@ -409,6 +412,14 @@ public class GameState implements Serializable, Copyable<GameState> {
 
     public void setActivePlayerId(UUID activePlayerId) {
         this.activePlayerId = activePlayerId;
+    }
+
+    public UUID getPlayerByOrderId() {
+        return playerByOrderId;
+    }
+
+    public void setPlayerByOrderId(UUID playerByOrderId) {
+        this.playerByOrderId = playerByOrderId;
     }
 
     public UUID getPriorityPlayerId() {

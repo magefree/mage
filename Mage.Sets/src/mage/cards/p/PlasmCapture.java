@@ -134,17 +134,7 @@ class PlasmCaptureManaEffect extends ManaEffect {
                     }
                 }
 
-                if (choiceColor.getColor().isBlack()) {
-                    mana.increaseBlack();
-                } else if (choiceColor.getColor().isBlue()) {
-                    mana.increaseBlue();
-                } else if (choiceColor.getColor().isRed()) {
-                    mana.increaseRed();
-                } else if (choiceColor.getColor().isGreen()) {
-                    mana.increaseGreen();
-                } else if (choiceColor.getColor().isWhite()) {
-                    mana.increaseWhite();
-                }
+                choiceColor.increaseMana(mana);
             }
 
             player.getManaPool().addMana(mana, game, source);

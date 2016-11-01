@@ -49,7 +49,7 @@ public class LiturgyOfBlood extends CardImpl {
         // Destroy target creature. Add {B}{B}{B} to your mana pool.
         this.getSpellAbility().addEffect(new DestroyTargetEffect());
         this.getSpellAbility().addTarget(new TargetCreaturePermanent());
-        this.getSpellAbility().addEffect(new BasicManaEffect(new Mana(0, 0, 0, 0, 3, 0, 0, 0)));
+        this.getSpellAbility().addEffect(new BasicManaEffect(Mana.BlackMana(3)));
     }
 
     public LiturgyOfBlood(final LiturgyOfBlood card) {

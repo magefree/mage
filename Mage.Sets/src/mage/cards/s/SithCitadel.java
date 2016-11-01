@@ -51,7 +51,7 @@ public class SithCitadel extends CardImpl {
         this.addAbility(new EntersBattlefieldTappedAbility());
 
         // When Sith Citadel enters the battlefield , add {B} to your mana pool.
-        this.addAbility(new EntersBattlefieldTriggeredAbility(new AddManaToManaPoolSourceControllerEffect(new Mana(0, 0, 0, 0, 1, 0, 0, 0))));
+        this.addAbility(new EntersBattlefieldTriggeredAbility(new AddManaToManaPoolSourceControllerEffect(Mana.BlackMana(1))));
 
         // {T}: Add {U} or {R} to you mana pool.
         this.addAbility(new BlueManaAbility());

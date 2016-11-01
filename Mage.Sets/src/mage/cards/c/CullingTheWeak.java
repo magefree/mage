@@ -51,7 +51,7 @@ public class CullingTheWeak extends CardImpl {
         this.getSpellAbility().addCost(new SacrificeTargetCost(new TargetControlledCreaturePermanent(new FilterControlledCreaturePermanent("a creature"))));
         
         // Add {B}{B}{B}{B} to your mana pool.
-        this.getSpellAbility().addEffect(new BasicManaEffect(new Mana(0, 0, 0, 0, 4, 0, 0, 0)));
+        this.getSpellAbility().addEffect(new BasicManaEffect(Mana.BlackMana(4)));
     }
 
     public CullingTheWeak(final CullingTheWeak card) {

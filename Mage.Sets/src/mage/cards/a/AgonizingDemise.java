@@ -29,22 +29,18 @@ package mage.cards.a;
 
 import java.util.UUID;
 import mage.ObjectColor;
-import mage.abilities.Ability;
 import mage.abilities.condition.common.KickedCondition;
 import mage.abilities.decorator.ConditionalOneShotEffect;
-import mage.abilities.effects.OneShotEffect;
+import mage.abilities.dynamicvalue.common.TargetPermanentPowerCount;
+import mage.abilities.effects.common.DamageTargetControllerEffect;
 import mage.abilities.effects.common.DestroyTargetEffect;
 import mage.abilities.keyword.KickerAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.Outcome;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.filter.predicate.Predicates;
 import mage.filter.predicate.mageobject.ColorPredicate;
-import mage.game.Game;
-import mage.game.permanent.Permanent;
-import mage.players.Player;
 import mage.target.common.TargetCreaturePermanent;
 
 /**
@@ -70,7 +66,7 @@ public class AgonizingDemise extends CardImpl {
         
         //If Agonizing Demise was kicked, it deals damage equal to that creature's power to the creature's controller.
         this.getSpellAbility().addEffect(new ConditionalOneShotEffect(
-                new AgonizingDemiseEffect(),
+                new DamageTargetControllerEffect(new TargetPermanentPowerCount()),
                 KickedCondition.getInstance(),
                 "If {this} was kicked, it deals damage equal to that creature's power to the creature's controller."));
         
@@ -83,35 +79,5 @@ public class AgonizingDemise extends CardImpl {
     @Override
     public AgonizingDemise copy() {
         return new AgonizingDemise(this);
-    }
-}
-
-class AgonizingDemiseEffect extends OneShotEffect {
-    
-    public AgonizingDemiseEffect() {
-        super(Outcome.Damage);
-    }
-    
-    public AgonizingDemiseEffect(final AgonizingDemiseEffect effect) {
-        super(effect);
-    }
-    
-    @Override
-    public AgonizingDemiseEffect copy() {
-        return new AgonizingDemiseEffect(this);
-    }
-    
-    @Override
-    public boolean apply(Game game, Ability source) {
-        Permanent permanent = game.getPermanentOrLKIBattlefield(this.getTargetPointer().getFirst(game, source));
-        if(permanent != null) {
-            Player controller = game.getPlayer(permanent.getControllerId());
-            if(controller != null) {
-                int amount = permanent.getPower().getValue();
-                controller.damage(amount, source.getSourceId(), game, false, true);
-                return true;
-            }
-        }
-        return false;
     }
 }

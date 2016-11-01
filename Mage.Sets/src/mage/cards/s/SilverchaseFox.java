@@ -37,9 +37,7 @@ import mage.abilities.effects.common.ExileTargetEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.Zone;
-import mage.filter.FilterPermanent;
-import mage.filter.predicate.mageobject.CardTypePredicate;
-import mage.target.TargetPermanent;
+import mage.target.common.TargetEnchantmentPermanent;
 
 import java.util.UUID;
 
@@ -47,12 +45,6 @@ import java.util.UUID;
  * @author nantuko
  */
 public class SilverchaseFox extends CardImpl {
-
-    private static final FilterPermanent filter = new FilterPermanent("enchantment");
-
-    static {
-        filter.add(new CardTypePredicate(CardType.ENCHANTMENT));
-    }
 
     public SilverchaseFox(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{1}{W}");
@@ -63,7 +55,7 @@ public class SilverchaseFox extends CardImpl {
 
         // {1}{W}, Sacrifice Silverchase Fox: Exile target enchantment.
         Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new ExileTargetEffect(), new ManaCostsImpl("{1}{W}"));
-        ability.addTarget(new TargetPermanent(filter));
+        ability.addTarget(new TargetEnchantmentPermanent());
         ability.addCost(new SacrificeSourceCost());
         this.addAbility(ability);
     }

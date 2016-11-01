@@ -28,22 +28,18 @@
 package mage.cards.r;
 
 import java.util.UUID;
-import mage.abilities.Ability;
 import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.costs.mana.ManaCostsImpl;
-import mage.abilities.effects.PreventionEffectImpl;
+import mage.abilities.effects.Effect;
+import mage.abilities.effects.common.PreventNextDamageFromChosenSourceToYouEffect;
 import mage.abilities.keyword.CyclingAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Duration;
-import mage.constants.Outcome;
 import mage.constants.Zone;
 import mage.filter.FilterObject;
 import mage.filter.predicate.mageobject.CardTypePredicate;
-import mage.game.Game;
-import mage.game.events.GameEvent;
-import mage.target.TargetSource;
 
 /**
  *
@@ -51,14 +47,20 @@ import mage.target.TargetSource;
  */
 public class RuneOfProtectionLands extends CardImpl {
 
+    private static final FilterObject filter = new FilterObject("land source");
+    static {
+        filter.add(new CardTypePredicate(CardType.LAND));
+    }
+
     public RuneOfProtectionLands(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.ENCHANTMENT},"{1}{W}");
 
 
-		// {W}: The next time a black source of your choice would deal damage to you this turn, prevent that damage.
-        this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new RuneOfProtectionLandsEffect() , new ManaCostsImpl("W")));
-		// Cycling {2} ({2}, Discard this card: Draw a card.)
-		this.addAbility(new CyclingAbility(new ManaCostsImpl("{2}")));
+        // {W}: The next time a land source of your choice would deal damage to you this turn, prevent that damage.
+        Effect effect = new PreventNextDamageFromChosenSourceToYouEffect(Duration.EndOfTurn, filter);
+        this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, effect, new ManaCostsImpl("W")));
+        // Cycling {2} ({2}, Discard this card: Draw a card.)
+        this.addAbility(new CyclingAbility(new ManaCostsImpl("{2}")));
     }
 
     public RuneOfProtectionLands(final RuneOfProtectionLands card) {
@@ -69,72 +71,4 @@ public class RuneOfProtectionLands extends CardImpl {
     public RuneOfProtectionLands copy() {
         return new RuneOfProtectionLands(this);
     }
-}
-
-class RuneOfProtectionLandsEffect extends PreventionEffectImpl {
-
-    private static final FilterObject filter = new FilterObject("land source");
-
-    static {
-        filter.add(new CardTypePredicate(CardType.LAND));
-    } 
-
-    private TargetSource target;
-
-    public RuneOfProtectionLandsEffect() {
-        super(Duration.EndOfTurn);
-        target = new TargetSource(filter);
-        
-        staticText = "The next time a land source of your choice would deal damage to you this turn, prevent that damage";
-    }
-
-    public RuneOfProtectionLandsEffect(final RuneOfProtectionLandsEffect effect) {
-        super(effect);
-        this.target = effect.target.copy();
-    }
-
-    @Override
-    public RuneOfProtectionLandsEffect copy() {
-        return new RuneOfProtectionLandsEffect(this);
-    }
-
-    @Override
-    public boolean apply(Game game, Ability source) {
-        return true;
-    }
-
-    @Override
-    public void init(Ability source, Game game) {
-        this.target.choose(Outcome.PreventDamage, source.getControllerId(), source.getSourceId(), game);
-    }
-
-    @Override
-    public boolean replaceEvent(GameEvent event, Ability source, Game game) {
-        if (event.getTargetId().equals(source.getControllerId()) && event.getSourceId().equals(target.getFirstTarget())) {
-            preventDamage(event, source, target.getFirstTarget(), game);
-            return true;
-        }
-        return false;
-    }
-
-    private void preventDamage(GameEvent event, Ability source, UUID target, Game game) {
-        GameEvent preventEvent = new GameEvent(GameEvent.EventType.PREVENT_DAMAGE, target, source.getSourceId(), source.getControllerId(), event.getAmount(), false);
-        if (!game.replaceEvent(preventEvent)) {
-            int damage = event.getAmount();
-            event.setAmount(0);
-            this.used = true;
-            game.fireEvent(GameEvent.getEvent(GameEvent.EventType.PREVENTED_DAMAGE, target, source.getSourceId(), source.getControllerId(), damage));
-        }
-    }
-
-    @Override
-    public boolean applies(GameEvent event, Ability source, Game game) {
-        if (!this.used && super.applies(event, source, game)) {
-            if (event.getTargetId().equals(source.getControllerId()) && event.getSourceId().equals(target.getFirstTarget())) {
-                return true;
-            }
-        }
-        return false;
-    }
-
 }

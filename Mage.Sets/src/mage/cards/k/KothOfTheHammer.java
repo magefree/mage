@@ -68,12 +68,10 @@ import mage.target.common.TargetLandPermanent;
  */
 public class KothOfTheHammer extends CardImpl {
 
-    static final FilterLandPermanent filter = new FilterLandPermanent("Mountain");
+    static final FilterLandPermanent filter = new FilterLandPermanent("Mountain", "Mountain");
     static final FilterLandPermanent filterCount = new FilterLandPermanent("Mountain you control");
 
     static {
-        filter.add(new SubtypePredicate("Mountain"));
-
         filterCount.add(new SubtypePredicate("Mountain"));
         filterCount.add(new ControllerPredicate(TargetController.YOU));
     }

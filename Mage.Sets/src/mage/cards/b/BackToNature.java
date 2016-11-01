@@ -33,8 +33,7 @@ import mage.constants.CardType;
 import mage.abilities.effects.common.DestroyAllEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
-import mage.filter.FilterPermanent;
-import mage.filter.predicate.mageobject.CardTypePredicate;
+import mage.filter.common.FilterEnchantmentPermanent;
 
 /**
  *
@@ -42,16 +41,10 @@ import mage.filter.predicate.mageobject.CardTypePredicate;
  */
 public class BackToNature extends CardImpl {
 
-    private static final FilterPermanent filter = new FilterPermanent("enchantments");
-
-    static {
-        filter.add(new CardTypePredicate(CardType.ENCHANTMENT));
-    }
-
     public BackToNature(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.INSTANT},"{1}{G}");
 
-        this.getSpellAbility().addEffect(new DestroyAllEffect(filter));
+        this.getSpellAbility().addEffect(new DestroyAllEffect(new FilterEnchantmentPermanent("enchantments")));
     }
 
     public BackToNature(final BackToNature card) {

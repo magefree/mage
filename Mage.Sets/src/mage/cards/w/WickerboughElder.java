@@ -42,23 +42,13 @@ import mage.constants.CardType;
 import mage.constants.ColoredManaSymbol;
 import mage.constants.Zone;
 import mage.counters.CounterType;
-import mage.filter.FilterPermanent;
-import mage.filter.predicate.Predicates;
-import mage.filter.predicate.mageobject.CardTypePredicate;
+import mage.filter.common.FilterArtifactOrEnchantmentPermanent;
 import mage.target.TargetPermanent;
 
 /**
  * @author Loki
  */
 public class WickerboughElder extends CardImpl {
-
-    private static final FilterPermanent filter = new FilterPermanent("artifact or enchantment");
-
-    static {
-        filter.add(Predicates.or(
-                new CardTypePredicate(CardType.ARTIFACT),
-                new CardTypePredicate(CardType.ENCHANTMENT)));
-    }
 
     public WickerboughElder(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{3}{G}");
@@ -73,7 +63,7 @@ public class WickerboughElder extends CardImpl {
         // {G}, Remove a -1/-1 counter from Wickerbough Elder: Destroy target artifact or enchantment.
         Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new DestroyTargetEffect(), new ColoredManaCost(ColoredManaSymbol.G));
         ability.addCost(new RemoveCountersSourceCost(CounterType.M1M1.createInstance(1)));
-        ability.addTarget(new TargetPermanent(filter));
+        ability.addTarget(new TargetPermanent(new FilterArtifactOrEnchantmentPermanent()));
         this.addAbility(ability);
     }
 

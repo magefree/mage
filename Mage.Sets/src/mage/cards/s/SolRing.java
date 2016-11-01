@@ -29,11 +29,12 @@ package mage.cards.s;
 
 import java.util.UUID;
 import mage.Mana;
-import mage.abilities.effects.common.BasicManaEffect;
-import mage.abilities.mana.BasicManaAbility;
+import mage.abilities.costs.common.TapSourceCost;
+import mage.abilities.mana.SimpleManaAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
+import mage.constants.Zone;
 
 /**
  *
@@ -43,7 +44,7 @@ public class SolRing extends CardImpl {
 
     public SolRing(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.ARTIFACT},"{1}");
-        this.addAbility(new SolRingAbility());
+        this.addAbility(new SimpleManaAbility(Zone.BATTLEFIELD, Mana.ColorlessMana(2), new TapSourceCost()));
     }
 
     public SolRing(final SolRing card) {
@@ -53,22 +54,5 @@ public class SolRing extends CardImpl {
     @Override
     public SolRing copy() {
         return new SolRing(this);
-    }
-}
-
-class SolRingAbility extends BasicManaAbility {
-
-    public SolRingAbility() {
-        super(new BasicManaEffect(Mana.ColorlessMana(2)));
-        this.netMana.add(new Mana(0, 0, 0, 0, 0, 0, 0, 2));
-    }
-
-    public SolRingAbility(final SolRingAbility ability) {
-        super(ability);
-    }
-
-    @Override
-    public SolRingAbility copy() {
-        return new SolRingAbility(this);
     }
 }

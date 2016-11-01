@@ -48,7 +48,6 @@ import mage.constants.Duration;
 import mage.constants.Outcome;
 import mage.constants.Zone;
 import mage.filter.common.FilterLandPermanent;
-import mage.filter.predicate.mageobject.SubtypePredicate;
 import mage.game.permanent.token.Token;
 import mage.target.TargetPermanent;
 import mage.target.common.TargetLandPermanent;
@@ -59,11 +58,7 @@ import mage.target.common.TargetLandPermanent;
  */
 public class GenjuOfTheFields extends CardImpl {
 
-    private static final FilterLandPermanent FILTER = new FilterLandPermanent("Plains");
-
-    static {
-        FILTER.add(new SubtypePredicate("Plains"));
-    }
+    private static final FilterLandPermanent FILTER = new FilterLandPermanent("Plains", "Plains");
 
     public GenjuOfTheFields(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.ENCHANTMENT},"{W}");

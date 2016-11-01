@@ -34,7 +34,6 @@ import mage.abilities.Ability;
 import mage.abilities.costs.common.DiscardCardCost;
 import mage.abilities.costs.common.TapSourceCost;
 import mage.abilities.costs.mana.ManaCostsImpl;
-import mage.abilities.effects.common.BasicManaEffect;
 import mage.abilities.mana.SimpleManaAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
@@ -55,7 +54,7 @@ public class BogWitch extends CardImpl {
         this.toughness = new MageInt(1);
 
         // {B}, {tap}, Discard a card: Add {B}{B}{B} to your mana pool.
-        Ability ability = new SimpleManaAbility(Zone.BATTLEFIELD, new BasicManaEffect(new Mana(0, 0, 0, 0, 3, 0, 0, 0)), new ManaCostsImpl("{B}"));
+        Ability ability = new SimpleManaAbility(Zone.BATTLEFIELD, Mana.BlackMana(3), new ManaCostsImpl("{B}"));
         ability.addCost(new TapSourceCost());
         ability.addCost(new DiscardCardCost());
         this.addAbility(ability);

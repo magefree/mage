@@ -100,7 +100,7 @@ class SakikoMotherOfSummerTriggeredAbility extends TriggeredAbilityImpl {
             Permanent creature = game.getPermanent(event.getSourceId());
             if (creature != null && creature.getControllerId().equals(controllerId)) {
                 this.getEffects().clear();
-                Effect effect = new AddManaToManaPoolTargetControllerEffect(new Mana(0,event.getAmount(),0,0,0,0,0, 0), "that player", true);
+                Effect effect = new AddManaToManaPoolTargetControllerEffect(Mana.GreenMana(event.getAmount()), "that player", true);
                 effect.setTargetPointer(new FixedTarget(creature.getControllerId()));
                 effect.setText("add that much {G} to your mana pool. Until end of turn, this mana doesn't empty from your mana pool as steps and phases end");        
                 this.addEffect(effect);

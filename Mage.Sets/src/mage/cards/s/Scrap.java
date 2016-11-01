@@ -34,8 +34,7 @@ import mage.abilities.effects.common.DestroyTargetEffect;
 import mage.abilities.keyword.CyclingAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
-import mage.filter.common.FilterArtifactPermanent;
-import mage.target.TargetPermanent;
+import mage.target.common.TargetArtifactPermanent;
 
 /**
  *
@@ -47,7 +46,7 @@ public class Scrap extends CardImpl {
         super(ownerId,setInfo,new CardType[]{CardType.INSTANT},"{2}{R}");
 
         this.getSpellAbility().addEffect(new DestroyTargetEffect());
-        this.getSpellAbility().addTarget(new TargetPermanent(new FilterArtifactPermanent()));
+        this.getSpellAbility().addTarget(new TargetArtifactPermanent());
         this.addAbility(new CyclingAbility(new ManaCostsImpl("{2}")));
     }
 

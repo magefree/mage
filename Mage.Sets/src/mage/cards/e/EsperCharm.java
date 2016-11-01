@@ -35,10 +35,8 @@ import mage.abilities.effects.common.discard.DiscardTargetEffect;
 import mage.abilities.effects.common.DrawCardSourceControllerEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
-import mage.filter.FilterPermanent;
-import mage.filter.predicate.mageobject.CardTypePredicate;
-import mage.target.TargetPermanent;
 import mage.target.TargetPlayer;
+import mage.target.common.TargetEnchantmentPermanent;
 
 /**
  *
@@ -46,19 +44,13 @@ import mage.target.TargetPlayer;
  */
 public class EsperCharm extends CardImpl {
 
-    private static final FilterPermanent filter = new FilterPermanent("enchantment");
-
-    static {
-        filter.add(new CardTypePredicate(CardType.ENCHANTMENT));
-    }
-
     public EsperCharm(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.INSTANT},"{W}{U}{B}");
 
 
         // Choose one - Destroy target enchantment;
         this.getSpellAbility().addEffect(new DestroyTargetEffect());
-        this.getSpellAbility().addTarget(new TargetPermanent(filter));
+        this.getSpellAbility().addTarget(new TargetEnchantmentPermanent());
         // or draw two cards;
         Mode mode = new Mode();
         mode.getEffects().add(new DrawCardSourceControllerEffect(2));

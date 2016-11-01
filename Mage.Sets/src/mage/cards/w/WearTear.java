@@ -32,10 +32,9 @@ import mage.constants.CardType;
 import mage.abilities.effects.common.DestroyTargetEffect;
 import mage.cards.CardSetInfo;
 import mage.cards.SplitCard;
-import mage.filter.common.FilterEnchantmentPermanent;
 import mage.target.Target;
-import mage.target.TargetPermanent;
 import mage.target.common.TargetArtifactPermanent;
+import mage.target.common.TargetEnchantmentPermanent;
 
 /**
  *
@@ -55,7 +54,7 @@ public class WearTear extends SplitCard {
         // Tear
         // Destroy target enchantment.
         getRightHalfCard().getSpellAbility().addEffect(new DestroyTargetEffect());
-        target = new TargetPermanent(new FilterEnchantmentPermanent());
+        target = new TargetEnchantmentPermanent();
         getRightHalfCard().getSpellAbility().addTarget(target);
     }
 

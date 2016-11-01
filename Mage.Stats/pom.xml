@@ -141,7 +141,7 @@
                             <basedir>${project.basedir}/src/main/java</basedir>
                         </source>
                     </sources>
-                    <complianceLevel>1.6</complianceLevel>
+                    <complianceLevel>1.7</complianceLevel>
                 </configuration>
                 <executions>
                     <execution>

@@ -56,8 +56,8 @@ public class OuterRimSlaver extends CardImpl {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{B}{R}{G}");
         this.subtype.add("Trandoshan");
         this.subtype.add("Hunter");
-        this.power = new MageInt(2);
-        this.toughness = new MageInt(2);
+        this.power = new MageInt(3);
+        this.toughness = new MageInt(3);
 
         // When Outer Rim Slaver enters the battlefield, you may have another target creature you control fight target creature an opponent controls.
         Ability ability = new EntersBattlefieldTriggeredAbility(new FightTargetsEffect("another target creature you control fight target creature an opponent controls"), true);

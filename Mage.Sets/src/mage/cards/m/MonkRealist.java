@@ -35,22 +35,13 @@ import mage.abilities.effects.common.DestroyTargetEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.filter.FilterPermanent;
-import mage.filter.predicate.mageobject.CardTypePredicate;
-import mage.target.Target;
-import mage.target.TargetPermanent;
+import mage.target.common.TargetEnchantmentPermanent;
 
 /**
  *
  * @author fireshoes
  */
 public class MonkRealist extends CardImpl {
-    
-    private static final FilterPermanent filter = new FilterPermanent("enchantment");
-
-    static {
-        filter.add(new CardTypePredicate(CardType.ENCHANTMENT));
-    }
 
     public MonkRealist(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{1}{W}");
@@ -62,8 +53,7 @@ public class MonkRealist extends CardImpl {
 
         // When Monk Realist enters the battlefield, destroy target enchantment.
         Ability ability = new EntersBattlefieldTriggeredAbility(new DestroyTargetEffect(), false);
-        Target target = new TargetPermanent(filter);
-        ability.addTarget(target);
+        ability.addTarget(new TargetEnchantmentPermanent());
         this.addAbility(ability);
     }
 

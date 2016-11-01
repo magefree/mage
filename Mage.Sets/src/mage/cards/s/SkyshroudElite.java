@@ -39,20 +39,12 @@ import mage.constants.CardType;
 import mage.constants.Duration;
 import mage.constants.Zone;
 import mage.filter.common.FilterLandPermanent;
-import mage.filter.predicate.Predicates;
-import mage.filter.predicate.mageobject.SupertypePredicate;
 
 /**
  *
  * @author LoneFox
  */
 public class SkyshroudElite extends CardImpl {
-
-    private static final FilterLandPermanent filter = new FilterLandPermanent("nonbasic land");
-
-    static {
-        filter.add(Predicates.not(new SupertypePredicate("Basic")));
-    }
 
     public SkyshroudElite(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{G}");
@@ -63,7 +55,7 @@ public class SkyshroudElite extends CardImpl {
         // Skyshroud Elite gets +1/+2 as long as an opponent controls a nonbasic land.
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new ConditionalContinuousEffect(
                 new BoostSourceEffect(1, 2, Duration.WhileOnBattlefield),
-                new OpponentControlsPermanentCondition(filter),
+                new OpponentControlsPermanentCondition(FilterLandPermanent.nonbasicLand()),
                 "{this} gets +1/+2 as long as an opponent controls a nonbasic land")));
     }
 

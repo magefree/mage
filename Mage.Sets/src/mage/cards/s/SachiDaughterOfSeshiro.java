@@ -32,7 +32,6 @@ import mage.MageInt;
 import mage.Mana;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.costs.common.TapSourceCost;
-import mage.abilities.effects.common.BasicManaEffect;
 import mage.abilities.effects.common.continuous.BoostControlledEffect;
 import mage.abilities.effects.common.continuous.GainAbilityControlledEffect;
 import mage.abilities.mana.SimpleManaAbility;
@@ -71,7 +70,7 @@ public class SachiDaughterOfSeshiro extends CardImpl {
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new BoostControlledEffect(0, 1, Duration.WhileOnBattlefield, snakeFilter, true)));
         // Shamans you control have "{T}: Add {G}{G} to your mana pool."
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new GainAbilityControlledEffect(
-                new SimpleManaAbility(Zone.BATTLEFIELD, new BasicManaEffect(Mana.GreenMana(2)), new TapSourceCost()), Duration.WhileOnBattlefield, shamanFilter, false)));
+                new SimpleManaAbility(Zone.BATTLEFIELD, Mana.GreenMana(2), new TapSourceCost()), Duration.WhileOnBattlefield, shamanFilter, false)));
     }
 
     public SachiDaughterOfSeshiro(final SachiDaughterOfSeshiro card) {

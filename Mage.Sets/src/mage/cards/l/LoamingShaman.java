@@ -112,7 +112,6 @@ class LoamingShamanTargetCardsInGraveyard extends TargetCardInGraveyard {
 
     public LoamingShamanTargetCardsInGraveyard(int minNumTargets, int maxNumTargets, FilterCard filter) {
         super(minNumTargets, maxNumTargets, filter);
-        this.targetName = filter.getMessage();
     }
 
     public LoamingShamanTargetCardsInGraveyard(final LoamingShamanTargetCardsInGraveyard target) {

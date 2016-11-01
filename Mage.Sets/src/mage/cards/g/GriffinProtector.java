@@ -50,10 +50,7 @@ public class GriffinProtector extends CardImpl {
 
         this.power = new MageInt(2);
         this.toughness = new MageInt(3);
-    }
 
-    @Override
-    public void build() {
         // Flying
         this.addAbility(FlyingAbility.getInstance());
         // Whenever another creature enters the battlefield under your control, Griffin Protector gets +1/+1 until end of turn.
