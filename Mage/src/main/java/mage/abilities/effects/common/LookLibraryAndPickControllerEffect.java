@@ -57,6 +57,7 @@ public class LookLibraryAndPickControllerEffect extends LookLibraryControllerEff
     protected int foundCardsToPick = 0;
     protected boolean optional;
     private boolean upTo;
+    private boolean putOnTopSelected;
 
     public LookLibraryAndPickControllerEffect(DynamicValue numberOfCards, boolean mayShuffleAfter, DynamicValue numberToPick, FilterCard pickFilter, boolean putOnTop) {
         this(numberOfCards, mayShuffleAfter, numberToPick, pickFilter, putOnTop, true);
@@ -98,7 +99,8 @@ public class LookLibraryAndPickControllerEffect extends LookLibraryControllerEff
      * @param numberToPick
      * @param pickFilter
      * @param targetZoneLookedCards
-     * @param putOnTop
+     * @param putOnTop if zone for the rest is library decide if cards go to top
+     * or butoom
      * @param reveal
      * @param upTo
      */
@@ -114,7 +116,8 @@ public class LookLibraryAndPickControllerEffect extends LookLibraryControllerEff
      * @param numberToPick
      * @param pickFilter
      * @param targetZoneLookedCards
-     * @param putOnTop
+     * @param putOnTop if zone for the rest is library decide if cards go to top
+     * or butoom
      * @param reveal
      * @param upTo
      * @param targetZonePickedCards
@@ -122,6 +125,26 @@ public class LookLibraryAndPickControllerEffect extends LookLibraryControllerEff
      */
     public LookLibraryAndPickControllerEffect(DynamicValue numberOfCards, boolean mayShuffleAfter, DynamicValue numberToPick,
             FilterCard pickFilter, Zone targetZoneLookedCards, boolean putOnTop, boolean reveal, boolean upTo, Zone targetZonePickedCards, boolean optional) {
+        this(numberOfCards, mayShuffleAfter, numberToPick, pickFilter, targetZoneLookedCards, putOnTop, reveal, upTo, targetZonePickedCards, optional, true);
+    }
+
+    /**
+     *
+     * @param numberOfCards
+     * @param mayShuffleAfter
+     * @param numberToPick
+     * @param pickFilter
+     * @param targetZoneLookedCards
+     * @param putOnTop if zone for the rest is library decide if cards go to top
+     * or butoom
+     * @param reveal
+     * @param upTo
+     * @param targetZonePickedCards
+     * @param optional
+     * @param putOnTopSelected
+     */
+    public LookLibraryAndPickControllerEffect(DynamicValue numberOfCards, boolean mayShuffleAfter, DynamicValue numberToPick,
+            FilterCard pickFilter, Zone targetZoneLookedCards, boolean putOnTop, boolean reveal, boolean upTo, Zone targetZonePickedCards, boolean optional, boolean putOnTopSelected) {
         super(Outcome.DrawCard, numberOfCards, mayShuffleAfter, targetZoneLookedCards, putOnTop);
         this.numberToPick = numberToPick;
         this.filter = pickFilter;
@@ -129,6 +152,7 @@ public class LookLibraryAndPickControllerEffect extends LookLibraryControllerEff
         this.targetPickedCards = targetZonePickedCards;
         this.upTo = upTo;
         this.optional = optional;
+        this.putOnTopSelected = putOnTopSelected;
     }
 
     public LookLibraryAndPickControllerEffect(final LookLibraryAndPickControllerEffect effect) {
@@ -139,6 +163,7 @@ public class LookLibraryAndPickControllerEffect extends LookLibraryControllerEff
         this.targetPickedCards = effect.targetPickedCards;
         this.upTo = effect.upTo;
         this.optional = effect.optional;
+        this.putOnTopSelected = effect.putOnTopSelected;
     }
 
     @Override
@@ -165,7 +190,11 @@ public class LookLibraryAndPickControllerEffect extends LookLibraryControllerEff
                 if (player.choose(Outcome.DrawCard, cards, target, game)) {
                     Cards pickedCards = new CardsImpl(target.getTargets());
                     cards.removeAll(pickedCards);
-                    player.moveCards(pickedCards.getCards(game), targetPickedCards, source, game);
+                    if (targetPickedCards.equals(Zone.LIBRARY) && !putOnTopSelected) {
+                        player.putCardsOnBottomOfLibrary(pickedCards, game, source, true);
+                    } else {
+                        player.moveCards(pickedCards.getCards(game), targetPickedCards, source, game);
+                    }
                     if (revealPickedCards) {
                         player.revealCards(windowName, pickedCards, game);
                     }
@@ -199,6 +228,13 @@ public class LookLibraryAndPickControllerEffect extends LookLibraryControllerEff
     private String getPickText() {
         StringBuilder sb = new StringBuilder(filter.getMessage()).append(" to ");
         switch (targetPickedCards) {
+            case LIBRARY:
+                if (putOnTopSelected) {
+                    sb.append("put on the top of your library");
+                } else {
+                    sb.append("put on the buttom of your library");
+                }
+                break;
             case HAND:
                 if (revealPickedCards) {
                     sb.append("reveal and put into your hand");
