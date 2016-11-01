@@ -42,16 +42,16 @@ import mage.game.permanent.token.Token;
 /**
  *
  * @author LoneFox
-
+ *
  */
 public class NaturesRevolt extends CardImpl {
 
     public NaturesRevolt(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.ENCHANTMENT},"{3}{G}{G}");
+        super(ownerId, setInfo, new CardType[]{CardType.ENCHANTMENT}, "{3}{G}{G}");
 
         // All lands are 2/2 creatures that are still lands.
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new BecomesCreatureAllEffect(new NaturesRevoltToken(),
-            "lands", new FilterLandPermanent(), Duration.WhileOnBattlefield)));
+                "lands", new FilterLandPermanent(), Duration.WhileOnBattlefield)));
     }
 
     public NaturesRevolt(final NaturesRevolt card) {
@@ -65,8 +65,9 @@ public class NaturesRevolt extends CardImpl {
 }
 
 class NaturesRevoltToken extends Token {
+
     public NaturesRevoltToken() {
-        super("Land", "2/2 creature");
+        super("Land", "2/2 creatures");
         cardType.add(CardType.CREATURE);
         power = new MageInt(2);
         toughness = new MageInt(2);

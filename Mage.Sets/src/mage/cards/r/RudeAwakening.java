@@ -40,7 +40,6 @@ import mage.constants.Duration;
 import mage.filter.common.FilterControlledLandPermanent;
 import mage.game.permanent.token.Token;
 
-
 /**
  *
  * @author LevelX2
@@ -48,8 +47,7 @@ import mage.game.permanent.token.Token;
 public class RudeAwakening extends CardImpl {
 
     public RudeAwakening(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{4}{G}");
-
+        super(ownerId, setInfo, new CardType[]{CardType.SORCERY}, "{4}{G}");
 
         // Choose one -
         this.getSpellAbility().getModes().setMinModes(1);
@@ -76,8 +74,9 @@ public class RudeAwakening extends CardImpl {
 }
 
 class RudeAwakeningToken extends Token {
+
     public RudeAwakeningToken() {
-        super("", "2/2 creature");
+        super("", "2/2 creatures");
         cardType.add(CardType.CREATURE);
         power = new MageInt(2);
         toughness = new MageInt(2);

@@ -873,8 +873,11 @@ public abstract class PlayerImpl implements Player, Serializable {
             } else {
                 TargetCard target = new TargetCard(Zone.ALL, new FilterCard("card to put on the bottom of your library (last one chosen will be bottommost)"));
                 target.setRequired(true);
-                while (isInGame() && cards.size() > 1) {
+                while (cards.size() > 1) {
                     this.choose(Outcome.Neutral, cards, target, game);
+                    if (!canRespond()) {
+                        return false;
+                    }
                     UUID targetObjectId = target.getFirstTarget();
                     cards.remove(targetObjectId);
                     moveObjectToLibrary(targetObjectId, source == null ? null : source.getSourceId(), game, false, false);
@@ -2376,11 +2379,15 @@ public abstract class PlayerImpl implements Player, Serializable {
         List<Abilities<ManaAbility>> sourceWithoutManaCosts = new ArrayList<>();
         List<Abilities<ManaAbility>> sourceWithCosts = new ArrayList<>();
         for (Permanent permanent : game.getBattlefield().getAllActivePermanents(playerId)) {
+            Boolean canUse = null;
             boolean canAdd = false;
             boolean withCost = false;
             Abilities<ManaAbility> manaAbilities = permanent.getAbilities().getAvailableManaAbilities(Zone.BATTLEFIELD, game);
             for (ManaAbility ability : manaAbilities) {
-                if (ability.canActivate(playerId, game)) {
+                if (canUse == null) {
+                    canUse = permanent.canUseActivatedAbilities(game);
+                }
+                if (canUse && ability.canActivate(playerId, game)) {
                     canAdd = true;
                     if (!ability.getManaCosts().isEmpty()) {
                         withCost = true;
@@ -2410,13 +2417,17 @@ public abstract class PlayerImpl implements Player, Serializable {
     protected List<MageObject> getAvailableManaProducers(Game game) {
         List<MageObject> result = new ArrayList<>();
         for (Permanent permanent : game.getBattlefield().getAllActivePermanents(playerId)) {
+            Boolean canUse = null;
             boolean canAdd = false;
             for (ManaAbility ability : permanent.getAbilities().getManaAbilities(Zone.BATTLEFIELD)) {
                 if (!ability.getManaCosts().isEmpty()) {
                     canAdd = false;
                     break;
                 }
-                if (ability.canActivate(playerId, game)) {
+                if (canUse == null) {
+                    canUse = permanent.canUseActivatedAbilities(game);
+                }
+                if (canUse && ability.canActivate(playerId, game)) {
                     canAdd = true;
                 }
             }
@@ -2446,8 +2457,12 @@ public abstract class PlayerImpl implements Player, Serializable {
     public List<Permanent> getAvailableManaProducersWithCost(Game game) {
         List<Permanent> result = new ArrayList<>();
         for (Permanent permanent : game.getBattlefield().getAllActivePermanents(playerId)) {
+            Boolean canUse = null;
             for (ManaAbility ability : permanent.getAbilities().getManaAbilities(Zone.BATTLEFIELD)) {
-                if (ability.canActivate(playerId, game) && !ability.getManaCosts().isEmpty()) {
+                if (canUse == null) {
+                    canUse = permanent.canUseActivatedAbilities(game);
+                }
+                if (canUse && ability.canActivate(playerId, game) && !ability.getManaCosts().isEmpty()) {
                     result.add(permanent);
                     break;
                 }

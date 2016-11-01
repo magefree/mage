@@ -49,7 +49,7 @@ import mage.game.permanent.token.Token;
 public class KormusBell extends CardImpl {
 
     public KormusBell(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.ARTIFACT},"{4}");
+        super(ownerId, setInfo, new CardType[]{CardType.ARTIFACT}, "{4}");
 
         // All Swamps are 1/1 black creatures that are still lands.
         ContinuousEffect effect = new BecomesCreatureAllEffect(new KormusBellToken(), "lands", new FilterPermanent("Swamp", "Swamps"), Duration.WhileOnBattlefield);
@@ -70,7 +70,7 @@ public class KormusBell extends CardImpl {
 class KormusBellToken extends Token {
 
     public KormusBellToken() {
-        super("", "1/1 creature");
+        super("", "1/1 black creatures");
         cardType.add(CardType.CREATURE);
         power = new MageInt(1);
         toughness = new MageInt(1);

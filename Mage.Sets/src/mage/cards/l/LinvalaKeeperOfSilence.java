@@ -48,7 +48,7 @@ import mage.game.permanent.Permanent;
 public class LinvalaKeeperOfSilence extends CardImpl {
 
     public LinvalaKeeperOfSilence(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{2}{W}{W}");
+        super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{2}{W}{W}");
         this.supertype.add("Legendary");
         this.subtype.add("Angel");
 
@@ -85,7 +85,8 @@ class LinvalaKeeperOfSilenceCantActivateEffect extends RestrictionEffect {
 
     @Override
     public boolean applies(Permanent permanent, Ability source, Game game) {
-        return permanent.getCardType().contains(CardType.CREATURE) && game.getOpponents(source.getControllerId()).contains(permanent.getControllerId());
+        return permanent.getCardType().contains(CardType.CREATURE)
+                && game.getOpponents(source.getControllerId()).contains(permanent.getControllerId());
     }
 
     @Override

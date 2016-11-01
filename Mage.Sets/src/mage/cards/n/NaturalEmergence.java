@@ -50,7 +50,7 @@ import mage.game.permanent.token.Token;
 /**
  *
  * @author LoneFox
-
+ *
  */
 public class NaturalEmergence extends CardImpl {
 
@@ -61,7 +61,7 @@ public class NaturalEmergence extends CardImpl {
     }
 
     public NaturalEmergence(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.ENCHANTMENT},"{2}{R}{G}");
+        super(ownerId, setInfo, new CardType[]{CardType.ENCHANTMENT}, "{2}{R}{G}");
 
         // When Natural Emergence enters the battlefield, return a red or green enchantment you control to its owner's hand.
         Effect effect = new ReturnToHandChosenControlledPermanentEffect(filter);
@@ -69,7 +69,7 @@ public class NaturalEmergence extends CardImpl {
         this.addAbility(new EntersBattlefieldTriggeredAbility(effect, false));
         // Lands you control are 2/2 creatures with first strike. They're still lands.
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new BecomesCreatureAllEffect(new NaturalEmergenceToken(),
-            "lands", new FilterControlledLandPermanent("lands you control"), Duration.WhileOnBattlefield)));
+                "lands", new FilterControlledLandPermanent("lands you control"), Duration.WhileOnBattlefield)));
     }
 
     public NaturalEmergence(final NaturalEmergence card) {
@@ -83,8 +83,9 @@ public class NaturalEmergence extends CardImpl {
 }
 
 class NaturalEmergenceToken extends Token {
+
     public NaturalEmergenceToken() {
-        super("Land", "2/2 creature with first strike");
+        super("Land", "2/2 creatures with first strike");
         cardType.add(CardType.CREATURE);
         power = new MageInt(2);
         toughness = new MageInt(2);
