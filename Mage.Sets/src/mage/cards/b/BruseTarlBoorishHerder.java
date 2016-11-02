@@ -30,7 +30,6 @@ package mage.cards.b;
 import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.TriggeredAbilityImpl;
-import mage.abilities.effects.common.continuous.GainAbilitySourceEffect;
 import mage.abilities.effects.common.continuous.GainAbilityTargetEffect;
 import mage.abilities.keyword.DoubleStrikeAbility;
 import mage.abilities.keyword.LifelinkAbility;
@@ -84,7 +83,7 @@ class BruseTarlAbility extends TriggeredAbilityImpl {
 
     public BruseTarlAbility() {
         super(Zone.BATTLEFIELD, new GainAbilityTargetEffect(DoubleStrikeAbility.getInstance(), Duration.EndOfTurn), false);
-        addEffect(new GainAbilitySourceEffect(LifelinkAbility.getInstance(), Duration.EndOfTurn));
+        addEffect(new GainAbilityTargetEffect(LifelinkAbility.getInstance(), Duration.EndOfTurn));
         this.addTarget(new TargetControlledCreaturePermanent(filter));
     }
 
