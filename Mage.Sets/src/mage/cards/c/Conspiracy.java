@@ -127,17 +127,19 @@ class ConspiracyEffect extends ContinuousEffectImpl {
                 }
             }
             // commander in command zone
-            if (controller.getCommanderId() != null && game.getState().getZone(controller.getCommanderId()).equals(Zone.COMMAND)) {
-                Card card = game.getCard(controller.getCommanderId());
-                if (card.getCardType().contains(CardType.CREATURE)) {
-                    setCreatureSubtype(card, choice, game);
+            for (UUID commanderId : controller.getCommandersIds()) {
+                if (game.getState().getZone(commanderId).equals(Zone.COMMAND)) {
+                    Card card = game.getCard(commanderId);
+                    if (card.getCardType().contains(CardType.CREATURE)) {
+                        setCreatureSubtype(card, choice, game);
+                    }
                 }
             }
             // creature spells you control
             for (Iterator<StackObject> iterator = game.getStack().iterator(); iterator.hasNext();) {
                 StackObject stackObject = iterator.next();
                 if (stackObject instanceof Spell &&
-                        stackObject.getControllerId().equals(source.getControllerId()) && 
+                        stackObject.getControllerId().equals(source.getControllerId()) &&
                         stackObject.getCardType().contains(CardType.CREATURE)) {
                     Card card = ((Spell) stackObject).getCard();
                     setCreatureSubtype(card, choice, game);
@@ -153,20 +155,20 @@ class ConspiracyEffect extends ContinuousEffectImpl {
         }
         return false;
     }
-    
+
     private void setCreatureSubtype(MageObject object, String subtype, Game game) {
         if (object != null) {
             if (object instanceof Card) {
                 Card card = (Card) object;
                 setChosenSubtype(
-                        game.getState().getCreateCardAttribute(card).getSubtype(), 
+                        game.getState().getCreateCardAttribute(card).getSubtype(),
                         subtype);
             } else {
                 setChosenSubtype(object.getSubtype(game), subtype);
             }
         }
     }
-    
+
     private void setChosenSubtype(List<String> subtype, String choice) {
         if (subtype.size() != 1 ||  !subtype.contains(choice)) {
             subtype.removeAll(CardRepository.instance.getCreatureTypes());

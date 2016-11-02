@@ -27,6 +27,7 @@
  */
 package mage.abilities.condition.common;
 
+import java.util.UUID;
 import mage.abilities.Ability;
 import mage.abilities.condition.Condition;
 import mage.game.Game;
@@ -56,8 +57,12 @@ public class CommanderInPlayCondition implements Condition {
     public boolean apply(Game game, Ability source) {
         Player controller = game.getPlayer(source.getControllerId());
         if (controller != null) {
-            Permanent commander = game.getPermanent(controller.getCommanderId());
-            return commander != null && commander.getControllerId().equals(source.getControllerId());
+            for (UUID commanderId : controller.getCommandersIds()) {
+                Permanent commander = game.getPermanent(commanderId);
+                if (commander != null && commander.getControllerId().equals(source.getControllerId())) {
+                    return true;
+                }
+            }
         }
         return false;
     }
