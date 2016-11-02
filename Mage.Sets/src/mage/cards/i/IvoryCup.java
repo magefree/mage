@@ -88,7 +88,7 @@ class IvoryCupAbility extends TriggeredAbilityImpl {
     @Override
     public boolean checkTrigger(GameEvent event, Game game) {
         Spell spell = game.getStack().getSpell(event.getTargetId());
-        return spell != null && spell.getColor(game).contains(ObjectColor.WHITE);
+        return spell != null && spell.getColor(game).isWhite();
     }
 
     @Override

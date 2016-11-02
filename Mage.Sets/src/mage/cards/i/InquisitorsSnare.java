@@ -28,7 +28,6 @@
 package mage.cards.i;
 
 import java.util.UUID;
-import mage.ObjectColor;
 import mage.abilities.Ability;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.PreventAllDamageByAllPermanentsEffect;
@@ -95,8 +94,7 @@ class InquisitorsSnareEffect extends OneShotEffect {
             FilterCreaturePermanent filter = new FilterCreaturePermanent();
             filter.add(new PermanentIdPredicate(targetCreature.getId()));
             game.addEffect(new PreventAllDamageByAllPermanentsEffect(filter, Duration.EndOfTurn, false), source);
-            if (targetCreature.getColor(game).contains(ObjectColor.BLACK)
-                    || targetCreature.getColor(game).contains(ObjectColor.RED)) {
+            if (targetCreature.getColor(game).isBlack() || targetCreature.getColor(game).isRed()) {
                 return targetCreature.destroy(source.getSourceId(), game, false);
             }
         }

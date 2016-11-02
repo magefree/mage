@@ -645,16 +645,16 @@ public interface Player extends MageItem, Copyable<Player> {
     /**
      * Set the commanderId of the player
      *
-     * @param commanderId
+     * @param commandersIds
      */
-    void setCommanderId(UUID commanderId);
+    void addCommanderId(UUID commanderId);
 
     /**
      * Get the commanderId of the player
      *
      * @return
      */
-    UUID getCommanderId();
+    Set<UUID> getCommandersIds();
 
     /**
      * Moves cards from one zone to another
