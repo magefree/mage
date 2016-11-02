@@ -50,7 +50,15 @@ public class AudioManager {
      * AudioManager singleton.
      */
     private static final AudioManager audioManager = new AudioManager();
-    private final LinePool linePool = new LinePool();
+    private LinePool linePool;
+
+    public AudioManager() {
+        try {
+            linePool = new LinePool();
+        } catch (Exception e) {
+            log.warn("Failed to initialize AudioManager. No sounds will be played.", e);
+        }
+    }
 
     public static AudioManager getManager() {
         return audioManager;
@@ -297,7 +305,9 @@ public class AudioManager {
     }
 
     public void play(final MageClip mageClip) {
-        linePool.playSound(mageClip);
+        if (linePool != null) {
+            linePool.playSound(mageClip);
+        }
     }
 
 }
