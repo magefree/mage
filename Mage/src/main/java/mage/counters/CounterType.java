@@ -62,6 +62,7 @@ public enum CounterType {
     FATE("fate"),
     FEATHER("feather"),
     FLOOD("flood"),
+    FURY("fury"),
     FUSE("fuse"),
     GOLD("gold"),
     HATCHLING("hatchling"),
