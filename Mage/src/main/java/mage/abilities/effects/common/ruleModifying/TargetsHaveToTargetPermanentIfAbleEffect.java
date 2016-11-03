@@ -87,7 +87,7 @@ public class TargetsHaveToTargetPermanentIfAbleEffect extends ContinuousRuleModi
                                 if (target.getTargets().contains(allowedPermanent.getId())) {
                                     return false;
                                 }
-                                if (target.canTarget(allowedPermanent.getId(), source, game)) {
+                                if (target.canTarget(stackObject.getControllerId(), allowedPermanent.getId(), source, game)) {
                                     canTargetAllowedPermanent = true;
                                 }
                             }
