@@ -41,7 +41,7 @@ import mage.constants.Zone;
 import mage.filter.common.FilterLandPermanent;
 import mage.game.Game;
 import mage.game.events.GameEvent;
-import mage.game.events.ZoneChangeEvent;
+import mage.game.permanent.Permanent;
 import mage.target.TargetPlayer;
 
 /**
@@ -51,7 +51,7 @@ import mage.target.TargetPlayer;
 public class MistbindClique extends CardImpl {
 
     public MistbindClique(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{3}{U}");
+        super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{3}{U}");
         this.subtype.add("Faerie");
         this.subtype.add("Wizard");
 
@@ -98,7 +98,7 @@ class MistbindCliqueAbility extends ZoneChangeTriggeredAbility {
 
     @Override
     public boolean checkEventType(GameEvent event, Game game) {
-        return event.getType() == GameEvent.EventType.ZONE_CHANGE;
+        return event.getType() == GameEvent.EventType.CREATURE_CHAMPIONED;
     }
 
     @Override
@@ -106,8 +106,8 @@ class MistbindCliqueAbility extends ZoneChangeTriggeredAbility {
         if (event.getSourceId() != null
                 && event.getSourceId().equals(getSourceId())
                 && !event.getSourceId().equals(event.getTargetId())) {
-            ZoneChangeEvent zEvent = (ZoneChangeEvent) event;
-            if (zEvent.getTarget() != null && zEvent.getTarget().hasSubtype("Faerie", game)) {
+            Permanent sacrificed = game.getPermanentOrLKIBattlefield(event.getTargetId());
+            if (sacrificed != null && sacrificed.hasSubtype("Faerie", game)) {
                 return true;
             }
         }

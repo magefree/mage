@@ -117,6 +117,12 @@ public class GameEvent implements Serializable {
          flag        true = from comabat damage - other from non combat damage
          */
         PLAY_LAND, LAND_PLAYED,
+        CREATURE_CHAMPIONED,
+        /* CREATURE_CHAMPIONED
+         targetId    the id of the creature that was championed
+         sourceId    sourceId of the creature using the champion ability
+         playerId    the id of the controlling player
+         */
         CREW_VEHICLE,
         /* CREW_VEHICLE
          targetId    the id of the creature that crewed a vehicle
