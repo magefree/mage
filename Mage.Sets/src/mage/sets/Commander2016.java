@@ -73,6 +73,7 @@ public class Commander2016 extends ExpansionSet {
         cards.add(new SetCardInfo("Beacon of Unrest", 107, Rarity.RARE, mage.cards.b.BeaconOfUnrest.class));
         cards.add(new SetCardInfo("Beast Within", 141, Rarity.UNCOMMON, mage.cards.b.BeastWithin.class));
         cards.add(new SetCardInfo("Beastmaster Ascension", 142, Rarity.RARE, mage.cards.b.BeastmasterAscension.class));
+	cards.add(new SetCardInfo("Benefactor's Draught", 21, Rarity.RARE, mage.cards.b.BenefactorsDraught.class));
         cards.add(new SetCardInfo("Bituminous Blast", 182, Rarity.UNCOMMON, mage.cards.b.BituminousBlast.class));
         cards.add(new SetCardInfo("Blasphemous Act", 120, Rarity.RARE, mage.cards.b.BlasphemousAct.class));
         cards.add(new SetCardInfo("Blazing Archon", 58, Rarity.RARE, mage.cards.b.BlazingArchon.class));
@@ -98,6 +99,7 @@ public class Commander2016 extends ExpansionSet {
         cards.add(new SetCardInfo("Chain of Vapor", 84, Rarity.UNCOMMON, mage.cards.c.ChainOfVapor.class));
         cards.add(new SetCardInfo("Champion of Lambholt", 144, Rarity.RARE, mage.cards.c.ChampionOfLambholt.class));
         cards.add(new SetCardInfo("Chaos Warp", 122, Rarity.RARE, mage.cards.c.ChaosWarp.class));
+        cards.add(new SetCardInfo("Charging Cinderhorn", 16, Rarity.RARE, mage.cards.c.ChargingCinderhorn.class));
         cards.add(new SetCardInfo("Chasm Skulker", 85, Rarity.RARE, mage.cards.c.ChasmSkulker.class));
         cards.add(new SetCardInfo("Chief Engineer", 86, Rarity.RARE, mage.cards.c.ChiefEngineer.class));
         cards.add(new SetCardInfo("Chromatic Lantern", 247, Rarity.RARE, mage.cards.c.ChromaticLantern.class));
@@ -150,6 +152,7 @@ public class Commander2016 extends ExpansionSet {
         cards.add(new SetCardInfo("Evacuation", 91, Rarity.RARE, mage.cards.e.Evacuation.class));
         cards.add(new SetCardInfo("Everflowing Chalice", 253, Rarity.UNCOMMON, mage.cards.e.EverflowingChalice.class));
         cards.add(new SetCardInfo("Everlasting Torment", 233, Rarity.RARE, mage.cards.e.EverlastingTorment.class));
+        cards.add(new SetCardInfo("Evolutionary Escalation", 22, Rarity.UNCOMMON, mage.cards.e.EvolutionaryEscalation.class));
         cards.add(new SetCardInfo("Evolving Wilds", 294, Rarity.COMMON, mage.cards.e.EvolvingWilds.class));
         cards.add(new SetCardInfo("Executioner's Capsule", 109, Rarity.COMMON, mage.cards.e.ExecutionersCapsule.class));
         cards.add(new SetCardInfo("Exotic Orchard", 295, Rarity.RARE, mage.cards.e.ExoticOrchard.class));

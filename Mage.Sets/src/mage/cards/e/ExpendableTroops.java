@@ -60,6 +60,7 @@ public class ExpendableTroops extends CardImpl {
         Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new DamageTargetEffect(2), new TapSourceCost());
         ability.addCost(new SacrificeSourceCost());
         ability.addTarget(new TargetCreaturePermanent(new FilterAttackingOrBlockingCreature()));
+        this.addAbility(ability);
     }
 
     public ExpendableTroops(final ExpendableTroops card) {

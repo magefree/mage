@@ -57,6 +57,7 @@ public class PhyrexianBroodlings extends CardImpl {
         // {1}, Sacrifice a creature: Put a +1/+1 counter on Phyrexian Broodlings.
         Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new AddCountersSourceEffect(CounterType.P1P1.createInstance(1)), new TapSourceCost());
         ability.addCost(new SacrificeTargetCost(new TargetControlledCreaturePermanent()));
+        this.addAbility(ability);
     }
 
     public PhyrexianBroodlings(final PhyrexianBroodlings card) {
