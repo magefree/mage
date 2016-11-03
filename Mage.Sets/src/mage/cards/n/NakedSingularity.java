@@ -37,7 +37,7 @@ import mage.abilities.keyword.CumulativeUpkeepAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.choices.Choice;
-import mage.choices.ChoiceImpl;
+import mage.choices.ChoiceColor;
 import mage.constants.CardType;
 import mage.constants.Duration;
 import mage.constants.Outcome;
@@ -55,7 +55,7 @@ import mage.players.Player;
 public class NakedSingularity extends CardImpl {
 
     public NakedSingularity(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.ARTIFACT},"{5}");
+        super(ownerId, setInfo, new CardType[]{CardType.ARTIFACT}, "{5}");
 
         // Cumulative upkeep {3}
         this.addAbility(new CumulativeUpkeepAbility(new GenericManaCost(3)));
@@ -100,7 +100,8 @@ class NakedSingularityEffect extends ReplacementEffectImpl {
         Player controller = game.getPlayer(source.getControllerId());
         if (controller != null) {
             Permanent permanent = game.getPermanent(event.getSourceId());
-            Choice choice = new ChoiceImpl(true);
+            Choice choice = new ChoiceColor(true);
+            choice.getChoices().clear();
             choice.setMessage("Pick a color to produce");
             if (permanent.hasSubtype("Plains", game)) {
                 choice.getChoices().add("Red");
@@ -120,8 +121,7 @@ class NakedSingularityEffect extends ReplacementEffectImpl {
             String chosenColor;
             if (choice.getChoices().size() == 1) {
                 chosenColor = choice.getChoices().iterator().next();
-            }
-            else {
+            } else {
                 controller.choose(Outcome.PutManaInPool, choice, game);
                 chosenColor = choice.getChoice();
             }
@@ -159,9 +159,9 @@ class NakedSingularityEffect extends ReplacementEffectImpl {
         Permanent permanent = game.getPermanent(event.getSourceId());
         return permanent != null
                 && (permanent.hasSubtype("Plains", game)
-                        || permanent.hasSubtype("Island", game)
-                        || permanent.hasSubtype("Swamp", game)
-                        || permanent.hasSubtype("Mountain", game)
-                        || permanent.hasSubtype("Forest", game));
+                || permanent.hasSubtype("Island", game)
+                || permanent.hasSubtype("Swamp", game)
+                || permanent.hasSubtype("Mountain", game)
+                || permanent.hasSubtype("Forest", game));
     }
 }

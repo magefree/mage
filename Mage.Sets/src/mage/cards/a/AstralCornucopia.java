@@ -35,7 +35,7 @@ import mage.abilities.common.EntersBattlefieldAbility;
 import mage.abilities.costs.common.TapSourceCost;
 import mage.abilities.effects.common.EntersBattlefieldWithXCountersEffect;
 import mage.abilities.effects.common.ManaEffect;
-import mage.abilities.mana.ManaAbility;
+import mage.abilities.mana.ActivatedManaAbilityImpl;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.choices.ChoiceColor;
@@ -72,7 +72,7 @@ public class AstralCornucopia extends CardImpl {
     }
 }
 
-class AstralCornucopiaManaAbility extends ManaAbility {
+class AstralCornucopiaManaAbility extends ActivatedManaAbilityImpl {
 
     public AstralCornucopiaManaAbility() {
         super(Zone.BATTLEFIELD, new AstralCornucopiaManaEffect(), new TapSourceCost());

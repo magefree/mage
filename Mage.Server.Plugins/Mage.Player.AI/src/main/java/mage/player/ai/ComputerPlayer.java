@@ -70,7 +70,7 @@ import mage.abilities.keyword.EquipAbility;
 import mage.abilities.keyword.FirstStrikeAbility;
 import mage.abilities.keyword.FlashAbility;
 import mage.abilities.keyword.TrampleAbility;
-import mage.abilities.mana.ManaAbility;
+import mage.abilities.mana.ActivatedManaAbilityImpl;
 import mage.abilities.mana.ManaOptions;
 import mage.cards.Card;
 import mage.cards.Cards;
@@ -942,7 +942,7 @@ public class ComputerPlayer extends PlayerImpl implements Player {
         //play a land that will allow us to play an unplayable
         for (Mana mana : unplayable.keySet()) {
             for (Card card : lands) {
-                for (ManaAbility ability : card.getAbilities().getManaAbilities(Zone.BATTLEFIELD)) {
+                for (ActivatedManaAbilityImpl ability : card.getAbilities().getActivatedManaAbilities(Zone.BATTLEFIELD)) {
                     for (Mana netMana : ability.getNetMana(game)) {
                         if (netMana.enough(mana)) {
                             this.playLand(card, game, false);
@@ -956,7 +956,7 @@ public class ComputerPlayer extends PlayerImpl implements Player {
         //play a land that will get us closer to playing an unplayable
         for (Mana mana : unplayable.keySet()) {
             for (Card card : lands) {
-                for (ManaAbility ability : card.getAbilities().getManaAbilities(Zone.BATTLEFIELD)) {
+                for (ActivatedManaAbilityImpl ability : card.getAbilities().getActivatedManaAbilities(Zone.BATTLEFIELD)) {
                     for (Mana netMana : ability.getNetMana(game)) {
                         if (mana.contains(netMana)) {
                             this.playLand(card, game, false);
@@ -1010,7 +1010,7 @@ public class ComputerPlayer extends PlayerImpl implements Player {
         }
         for (Permanent permanent : game.getBattlefield().getAllActivePermanents(playerId)) {
             for (ActivatedAbility ability : permanent.getAbilities().getActivatedAbilities(Zone.BATTLEFIELD)) {
-                if (!(ability instanceof ManaAbility) && ability.canActivate(playerId, game)) {
+                if (!(ability instanceof ActivatedManaAbilityImpl) && ability.canActivate(playerId, game)) {
                     if (ability instanceof EquipAbility && permanent.getAttachedTo() != null) {
                         continue;
                     }
@@ -1086,7 +1086,7 @@ public class ComputerPlayer extends PlayerImpl implements Player {
             // use color producing mana abilities with costs first that produce all color manas that are needed to pay
             // otherwise the computer may not be able to pay the cost for that source
             ManaAbility:
-            for (ManaAbility manaAbility : mageObject.getAbilities().getAvailableManaAbilities(Zone.BATTLEFIELD, game)) {
+            for (ActivatedManaAbilityImpl manaAbility : mageObject.getAbilities().getAvailableActivatedManaAbilities(Zone.BATTLEFIELD, game)) {
                 int colored = 0;
                 for (Mana mana : manaAbility.getNetMana(game)) {
                     if (!unpaid.getMana().includesMana(mana)) {
@@ -1109,7 +1109,7 @@ public class ComputerPlayer extends PlayerImpl implements Player {
 
         for (MageObject mageObject : producers) {
             // pay all colored costs first
-            for (ManaAbility manaAbility : mageObject.getAbilities().getAvailableManaAbilities(Zone.BATTLEFIELD, game)) {
+            for (ActivatedManaAbilityImpl manaAbility : mageObject.getAbilities().getAvailableActivatedManaAbilities(Zone.BATTLEFIELD, game)) {
                 if (cost instanceof ColoredManaCost) {
                     for (Mana netMana : manaAbility.getNetMana(game)) {
                         if (cost.testPay(netMana) || spendAnyMana) {
@@ -1121,7 +1121,7 @@ public class ComputerPlayer extends PlayerImpl implements Player {
                 }
             }
             // then pay hybrid
-            for (ManaAbility manaAbility : mageObject.getAbilities().getAvailableManaAbilities(Zone.BATTLEFIELD, game)) {
+            for (ActivatedManaAbilityImpl manaAbility : mageObject.getAbilities().getAvailableActivatedManaAbilities(Zone.BATTLEFIELD, game)) {
                 if (cost instanceof HybridManaCost) {
                     for (Mana netMana : manaAbility.getNetMana(game)) {
                         if (cost.testPay(netMana) || spendAnyMana) {
@@ -1133,7 +1133,7 @@ public class ComputerPlayer extends PlayerImpl implements Player {
                 }
             }
             // then pay mono hybrid
-            for (ManaAbility manaAbility : mageObject.getAbilities().getAvailableManaAbilities(Zone.BATTLEFIELD, game)) {
+            for (ActivatedManaAbilityImpl manaAbility : mageObject.getAbilities().getAvailableActivatedManaAbilities(Zone.BATTLEFIELD, game)) {
                 if (cost instanceof MonoHybridManaCost) {
                     for (Mana netMana : manaAbility.getNetMana(game)) {
                         if (cost.testPay(netMana) || spendAnyMana) {
@@ -1145,7 +1145,7 @@ public class ComputerPlayer extends PlayerImpl implements Player {
                 }
             }
             // pay colorless
-            for (ManaAbility manaAbility : mageObject.getAbilities().getAvailableManaAbilities(Zone.BATTLEFIELD, game)) {
+            for (ActivatedManaAbilityImpl manaAbility : mageObject.getAbilities().getAvailableActivatedManaAbilities(Zone.BATTLEFIELD, game)) {
                 if (cost instanceof ColorlessManaCost) {
                     for (Mana netMana : manaAbility.getNetMana(game)) {
                         if (cost.testPay(netMana) || spendAnyMana) {
@@ -1157,7 +1157,7 @@ public class ComputerPlayer extends PlayerImpl implements Player {
                 }
             }
             // finally pay generic
-            for (ManaAbility manaAbility : mageObject.getAbilities().getAvailableManaAbilities(Zone.BATTLEFIELD, game)) {
+            for (ActivatedManaAbilityImpl manaAbility : mageObject.getAbilities().getAvailableActivatedManaAbilities(Zone.BATTLEFIELD, game)) {
                 if (cost instanceof GenericManaCost) {
                     for (Mana netMana : manaAbility.getNetMana(game)) {
                         if (cost.testPay(netMana) || spendAnyMana) {
@@ -1200,7 +1200,7 @@ public class ComputerPlayer extends PlayerImpl implements Player {
             int score = 0;
             for (ManaCost cost : unpaid) {
                 Abilities:
-                for (ManaAbility ability : mageObject.getAbilities().getAvailableManaAbilities(Zone.BATTLEFIELD, game)) {
+                for (ActivatedManaAbilityImpl ability : mageObject.getAbilities().getAvailableActivatedManaAbilities(Zone.BATTLEFIELD, game)) {
                     for (Mana netMana : ability.getNetMana(game)) {
                         if (cost.testPay(netMana)) {
                             score++;
@@ -1210,7 +1210,7 @@ public class ComputerPlayer extends PlayerImpl implements Player {
                 }
             }
             if (score > 0) { // score mana producers that produce other mana types and have other uses higher
-                score += mageObject.getAbilities().getAvailableManaAbilities(Zone.BATTLEFIELD, game).size();
+                score += mageObject.getAbilities().getAvailableActivatedManaAbilities(Zone.BATTLEFIELD, game).size();
                 score += mageObject.getAbilities().getActivatedAbilities(Zone.BATTLEFIELD).size();
                 if (!mageObject.getCardType().contains(CardType.LAND)) {
                     score += 2;
@@ -1310,6 +1310,10 @@ public class ComputerPlayer extends PlayerImpl implements Player {
             }
             if (currentUnpaidMana.containsColor(ColoredManaSymbol.B) && choice.getChoices().contains("Black")) {
                 choice.setChoice("Black");
+                return true;
+            }
+            if (currentUnpaidMana.getMana().getColorless() > 0 && choice.getChoices().contains("Colorless")) {
+                choice.setChoice("Colorless");
                 return true;
             }
         }

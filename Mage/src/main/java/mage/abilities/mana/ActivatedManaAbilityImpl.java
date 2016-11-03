@@ -24,67 +24,84 @@
 * The views and conclusions contained in the software and documentation are those of the
 * authors and should not be interpreted as representing official policies, either expressed
 * or implied, of BetaSteward_at_googlemail.com.
-*/
+ */
 package mage.abilities.mana;
 
+import java.util.ArrayList;
 import java.util.List;
+import java.util.UUID;
 import mage.Mana;
+import mage.abilities.ActivatedAbilityImpl;
 import mage.abilities.costs.Cost;
-import mage.abilities.costs.common.TapSourceCost;
-import mage.abilities.dynamicvalue.DynamicValue;
-import mage.abilities.dynamicvalue.common.StaticValue;
-import mage.abilities.effects.common.AddConditionalManaOfAnyColorEffect;
-import mage.abilities.mana.builder.ConditionalManaBuilder;
+import mage.abilities.effects.common.ManaEffect;
+import mage.constants.AbilityType;
 import mage.constants.Zone;
 import mage.game.Game;
 
 /**
- * For cards like:
- *   {tap}: Add three mana of any one color to your mana pool. Spend this mana only to cast creature spells.
  *
- * @author noxx
+ * @author BetaSteward_at_googlemail.com
  */
-public class ConditionalAnyColorManaAbility extends ActivatedManaAbilityImpl {
+public abstract class ActivatedManaAbilityImpl extends ActivatedAbilityImpl implements ManaAbility {
 
-    private DynamicValue amount;
+    protected List<Mana> netMana = new ArrayList<>();
+    protected boolean undoPossible;
 
-    public ConditionalAnyColorManaAbility(int amount, ConditionalManaBuilder manaBuilder) {
-        this(new TapSourceCost(), amount, manaBuilder);
+    public ActivatedManaAbilityImpl(Zone zone, ManaEffect effect, Cost cost) {
+        super(AbilityType.MANA, zone);
+        this.usesStack = false;
+        this.undoPossible = true;
+        if (effect != null) {
+            this.addEffect(effect);
+        }
+        if (cost != null) {
+            this.addCost(cost);
+        }
     }
 
-    public ConditionalAnyColorManaAbility(Cost cost, int amount, ConditionalManaBuilder manaBuilder) {
-        this(cost, amount, manaBuilder, false);
-    }
-
-    public ConditionalAnyColorManaAbility(Cost cost, int amount, ConditionalManaBuilder manaBuilder, boolean oneChoice) {
-        this(cost, new StaticValue(amount), manaBuilder, oneChoice);
-    }
-
-    public ConditionalAnyColorManaAbility(Cost cost, DynamicValue amount, ConditionalManaBuilder manaBuilder, boolean oneChoice) {
-        super(Zone.BATTLEFIELD, new AddConditionalManaOfAnyColorEffect(amount, manaBuilder, oneChoice), cost);
-        this.amount = amount;
-    }
-
-    public ConditionalAnyColorManaAbility(final ConditionalAnyColorManaAbility ability) {
+    public ActivatedManaAbilityImpl(final ActivatedManaAbilityImpl ability) {
         super(ability);
-        this.amount = ability.amount;
+        this.netMana.addAll(ability.netMana);
+        this.undoPossible = ability.undoPossible;
     }
 
+    @Override
+    public boolean canActivate(UUID playerId, Game game) {
+        if (!controlsAbility(playerId, game)) {
+            return false;
+        }
+        //20091005 - 605.3a
+        return costs.canPay(this, sourceId, controllerId, game);
+    }
+
+    /**
+     * Used to check the possible mana production to determine which spells
+     * and/or abilities can be used. (player.getPlayable()).
+     *
+     * @param game
+     * @return
+     */
     @Override
     public List<Mana> getNetMana(Game game) {
-        this.netMana.clear();
-        this.netMana.add(new Mana(0,0,0,0,0,0, amount.calculate(game, this, null), 0));
-        return super.getNetMana(game);
+        return netMana;
     }
 
+    /**
+     * Used to check if the ability itself defines mana types it can produce.
+     *
+     * @return
+     */
     @Override
     public boolean definesMana() {
-        return true;
+        return netMana.size() > 0;
     }
 
-    
-    @Override
-    public ConditionalAnyColorManaAbility copy() {
-        return new ConditionalAnyColorManaAbility(this);
+    public boolean isUndoPossible() {
+        return undoPossible;
     }
+
+    public void setUndoPossible(boolean undoPossible) {
+        this.undoPossible = undoPossible;
+    }
+
 }

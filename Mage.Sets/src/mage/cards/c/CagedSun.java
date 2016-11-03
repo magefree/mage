@@ -60,7 +60,7 @@ import mage.players.Player;
 public class CagedSun extends CardImpl {
 
     public CagedSun(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.ARTIFACT},"{6}");
+        super(ownerId, setInfo, new CardType[]{CardType.ARTIFACT}, "{6}");
 
         // As Caged Sun enters the battlefield, choose a color.
         this.addAbility(new AsEntersBattlefieldAbility(new ChooseColorEffect(Outcome.Benefit)));
@@ -106,7 +106,7 @@ class CagedSunEffect2 extends ContinuousEffectImpl {
         if (permanent != null) {
             ObjectColor color = (ObjectColor) game.getState().getValue(permanent.getId() + "_color");
             if (color != null) {
-                for (Permanent perm: game.getBattlefield().getAllActivePermanents(filter, source.getControllerId(), game)) {
+                for (Permanent perm : game.getBattlefield().getAllActivePermanents(filter, source.getControllerId(), game)) {
                     if (perm.getColor(game).contains(color)) {
                         perm.addPower(1);
                         perm.addToughness(1);
@@ -161,7 +161,6 @@ class CagedSunTriggeredAbility extends TriggeredManaAbility {
     }
 }
 
-
 class CagedSunEffect extends ManaEffect {
 
     public CagedSunEffect() {
@@ -191,7 +190,6 @@ class CagedSunEffect extends ManaEffect {
             return null;
         }
     }
-
 
     @Override
     public CagedSunEffect copy() {

@@ -47,7 +47,7 @@ import mage.util.CardUtil;
  *
  * @author LevelX2
  */
-public class CommanderColorIdentityManaAbility extends ManaAbility {
+public class CommanderColorIdentityManaAbility extends ActivatedManaAbilityImpl {
 
     private FilterMana commanderMana;
 

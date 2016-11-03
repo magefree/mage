@@ -35,11 +35,12 @@ import mage.abilities.Abilities;
 import mage.abilities.Ability;
 import mage.abilities.costs.common.TapSourceCost;
 import mage.abilities.effects.common.ManaEffect;
+import mage.abilities.mana.ActivatedManaAbilityImpl;
 import mage.abilities.mana.ManaAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.choices.Choice;
-import mage.choices.ChoiceImpl;
+import mage.choices.ChoiceColor;
 import mage.constants.CardType;
 import mage.constants.ColoredManaSymbol;
 import mage.constants.Zone;
@@ -56,7 +57,7 @@ import mage.players.Player;
 public class ReflectingPool extends CardImpl {
 
     public ReflectingPool(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.LAND},"");
+        super(ownerId, setInfo, new CardType[]{CardType.LAND}, "");
 
         // {T}: Add to your mana pool one mana of any type that a land you control could produce.
         this.addAbility(new ReflectingPoolManaAbility());
@@ -72,7 +73,7 @@ public class ReflectingPool extends CardImpl {
     }
 }
 
-class ReflectingPoolManaAbility extends ManaAbility {
+class ReflectingPoolManaAbility extends ActivatedManaAbilityImpl {
 
     public ReflectingPoolManaAbility() {
         super(Zone.BATTLEFIELD, new ReflectingPoolEffect(), new TapSourceCost());
@@ -109,7 +110,8 @@ class ReflectingPoolEffect extends ManaEffect {
     @Override
     public boolean apply(Game game, Ability source) {
         Mana types = getManaTypes(game, source);
-        Choice choice = new ChoiceImpl(false);
+        Choice choice = new ChoiceColor(true);
+        choice.getChoices().clear();
         choice.setMessage("Pick a mana color");
         if (types.getBlack() > 0) {
             choice.getChoices().add("Black");
@@ -207,8 +209,9 @@ class ReflectingPoolEffect extends ManaEffect {
         List<Permanent> lands = game.getBattlefield().getActivePermanents(filter, source.getControllerId(), game);
         Mana types = new Mana();
         for (Permanent land : lands) {
-            Abilities<ManaAbility> manaAbilities = land.getAbilities().getManaAbilities(Zone.BATTLEFIELD);
-            for (ManaAbility ability : manaAbilities) {
+            Abilities<Ability> manaAbilities = land.getAbilities().getManaAbilities(Zone.BATTLEFIELD);
+            for (Ability basicAbility : manaAbilities) {
+                ManaAbility ability = (ManaAbility) basicAbility;
                 if (!ability.equals(source) && ability.definesMana()) {
                     for (Mana netMana : ability.getNetMana(game)) {
                         types.add(netMana);

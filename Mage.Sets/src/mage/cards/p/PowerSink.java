@@ -34,7 +34,7 @@ import mage.abilities.Abilities;
 import mage.abilities.Ability;
 import mage.abilities.costs.mana.GenericManaCost;
 import mage.abilities.effects.OneShotEffect;
-import mage.abilities.mana.ManaAbility;
+import mage.abilities.mana.ActivatedManaAbilityImpl;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
@@ -116,7 +116,7 @@ class PowerSinkCounterUnlessPaysEffect extends OneShotEffect {
                     for (Permanent land : lands) {
                         Abilities<Ability> landAbilities = land.getAbilities();
                         for (Ability ability : landAbilities) {
-                            if (ability instanceof ManaAbility) {
+                            if (ability instanceof ActivatedManaAbilityImpl) {
                                 land.tap(game);
                                 break;
                             }

@@ -41,7 +41,7 @@ import mage.util.CardUtil;
  *
  * @author LevelX2
  */
-public class ActivateOncePerTurnManaAbility extends ManaAbility {
+public class ActivateOncePerTurnManaAbility extends ActivatedManaAbilityImpl {
 
     class ActivationInfo {
         

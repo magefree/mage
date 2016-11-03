@@ -34,7 +34,7 @@ import mage.abilities.costs.common.DiscardHandCost;
 import mage.abilities.costs.common.SacrificeSourceCost;
 import mage.abilities.effects.common.AddManaOfAnyColorEffect;
 import mage.abilities.effects.common.BasicManaEffect;
-import mage.abilities.mana.ManaAbility;
+import mage.abilities.mana.ActivatedManaAbilityImpl;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
@@ -66,7 +66,7 @@ public class LionsEyeDiamond extends CardImpl {
 }
 
 
-class LionsEyeDiamondAbility extends ManaAbility {
+class LionsEyeDiamondAbility extends ActivatedManaAbilityImpl {
 
     public LionsEyeDiamondAbility() {
         super(Zone.BATTLEFIELD, new AddManaOfAnyColorEffect(3), new SacrificeSourceCost());

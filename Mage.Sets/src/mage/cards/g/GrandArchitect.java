@@ -42,7 +42,7 @@ import mage.abilities.costs.mana.ManaCostsImpl;
 import mage.abilities.effects.ContinuousEffectImpl;
 import mage.abilities.effects.common.BasicManaEffect;
 import mage.abilities.effects.common.continuous.BoostControlledEffect;
-import mage.abilities.mana.ManaAbility;
+import mage.abilities.mana.ActivatedManaAbilityImpl;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
@@ -134,7 +134,7 @@ class GrandArchitectEffect extends ContinuousEffectImpl {
 
 }
 
-class GrandArchitectManaAbility extends ManaAbility {
+class GrandArchitectManaAbility extends ActivatedManaAbilityImpl {
 
     private static final FilterControlledCreaturePermanent filter = new FilterControlledCreaturePermanent("untapped blue creature");
 

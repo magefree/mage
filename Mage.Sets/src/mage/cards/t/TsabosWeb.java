@@ -35,7 +35,7 @@ import mage.abilities.common.EntersBattlefieldTriggeredAbility;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.effects.ContinuousRuleModifyingEffectImpl;
 import mage.abilities.effects.common.DrawCardSourceControllerEffect;
-import mage.abilities.mana.ManaAbility;
+import mage.abilities.mana.ActivatedManaAbilityImpl;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
@@ -100,7 +100,7 @@ class TsabosWebPreventUntapEffect extends ContinuousRuleModifyingEffectImpl {
             if (permanent != null && permanent.getCardType().contains(CardType.LAND)) {
                 for (Ability ability :permanent.getAbilities()) {
                     if (!(ability instanceof PlayLandAbility)
-                            && !(ability instanceof ManaAbility)
+                            && !(ability instanceof ActivatedManaAbilityImpl)
                             && ability instanceof ActivatedAbility) {
                         return true;
                     }

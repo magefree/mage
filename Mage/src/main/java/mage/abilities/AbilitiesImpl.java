@@ -36,7 +36,8 @@ import java.util.UUID;
 import mage.abilities.common.ZoneChangeTriggeredAbility;
 import mage.abilities.costs.Cost;
 import mage.abilities.keyword.ProtectionAbility;
-import mage.abilities.mana.ManaAbility;
+import mage.abilities.mana.ActivatedManaAbilityImpl;
+import mage.constants.AbilityType;
 import mage.constants.Zone;
 import mage.game.Game;
 import mage.util.ThreadLocalStringBuilder;
@@ -48,7 +49,7 @@ import org.apache.log4j.Logger;
  * @param <T>
  */
 public class AbilitiesImpl<T extends Ability> extends ArrayList<T> implements Abilities<T> {
-    
+
     private static final Logger logger = Logger.getLogger(AbilitiesImpl.class);
 
     private static final ThreadLocalStringBuilder threadLocalBuilder = new ThreadLocalStringBuilder(200);
@@ -143,24 +144,35 @@ public class AbilitiesImpl<T extends Ability> extends ArrayList<T> implements Ab
     }
 
     @Override
-    public Abilities<ManaAbility> getManaAbilities(Zone zone) {
-        Abilities<ManaAbility> abilities = new AbilitiesImpl<>();
+    public Abilities<ActivatedManaAbilityImpl> getActivatedManaAbilities(Zone zone) {
+        Abilities<ActivatedManaAbilityImpl> abilities = new AbilitiesImpl<>();
         for (T ability : this) {
-            if (ability instanceof ManaAbility && ability.getZone().match(zone)) {
-                abilities.add((ManaAbility) ability);
+            if (ability instanceof ActivatedManaAbilityImpl && ability.getZone().match(zone)) {
+                abilities.add((ActivatedManaAbilityImpl) ability);
             }
         }
         return abilities;
     }
 
     @Override
-    public Abilities<ManaAbility> getAvailableManaAbilities(Zone zone, Game game) {
-        Abilities<ManaAbility> abilities = new AbilitiesImpl<>();
+    public Abilities<ActivatedManaAbilityImpl> getAvailableActivatedManaAbilities(Zone zone, Game game) {
+        Abilities<ActivatedManaAbilityImpl> abilities = new AbilitiesImpl<>();
         for (T ability : this) {
-            if (ability instanceof ManaAbility && ability.getZone().match(zone)) {
-                if ((((ManaAbility) ability).canActivate(ability.getControllerId(), game))) {
-                    abilities.add((ManaAbility) ability);
+            if (ability instanceof ActivatedManaAbilityImpl && ability.getZone().match(zone)) {
+                if ((((ActivatedManaAbilityImpl) ability).canActivate(ability.getControllerId(), game))) {
+                    abilities.add((ActivatedManaAbilityImpl) ability);
                 }
+            }
+        }
+        return abilities;
+    }
+
+    @Override
+    public Abilities<Ability> getManaAbilities(Zone zone) {
+        Abilities<Ability> abilities = new AbilitiesImpl<>();
+        for (T ability : this) {
+            if (ability.getAbilityType().equals(AbilityType.MANA) && ability.getZone().match(zone)) {
+                abilities.add(ability);
             }
         }
         return abilities;

@@ -16,7 +16,7 @@ import mage.constants.Zone;
  *
  * @author LevelX2
  */
-public class ConditionalColorlessManaAbility extends ManaAbility {
+public class ConditionalColorlessManaAbility extends ActivatedManaAbilityImpl {
 
     public ConditionalColorlessManaAbility(int amount, ConditionalManaBuilder manaBuilder) {
         this(new TapSourceCost(), amount, manaBuilder);

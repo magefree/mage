@@ -35,7 +35,7 @@ import mage.abilities.effects.common.BasicManaEffect;
 import mage.constants.Zone;
 import mage.game.Game;
 
-public class ActivateIfConditionManaAbility extends ManaAbility {
+public class ActivateIfConditionManaAbility extends ActivatedManaAbilityImpl {
 
     private final Condition condition;
 

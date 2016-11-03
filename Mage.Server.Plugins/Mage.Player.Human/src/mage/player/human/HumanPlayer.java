@@ -52,7 +52,7 @@ import mage.abilities.costs.mana.ManaCost;
 import mage.abilities.costs.mana.ManaCostsImpl;
 import mage.abilities.costs.mana.PhyrexianManaCost;
 import mage.abilities.effects.RequirementEffect;
-import mage.abilities.mana.ManaAbility;
+import mage.abilities.mana.ActivatedManaAbilityImpl;
 import mage.cards.Card;
 import mage.cards.Cards;
 import mage.cards.decks.Deck;
@@ -896,7 +896,7 @@ public class HumanPlayer extends PlayerImpl {
         }
         Zone zone = game.getState().getZone(object.getId());
         if (zone != null) {
-            LinkedHashMap<UUID, ManaAbility> useableAbilities = getUseableManaAbilities(object, zone, game);
+            LinkedHashMap<UUID, ActivatedManaAbilityImpl> useableAbilities = getUseableManaAbilities(object, zone, game);
             if (useableAbilities != null && useableAbilities.size() > 0) {
                 useableAbilities = ManaUtil.tryToAutoPay(unpaid, useableAbilities); // eliminates other abilities if one fits perfectly
                 currentlyUnpaidMana = unpaid;
@@ -1269,7 +1269,7 @@ public class HumanPlayer extends PlayerImpl {
         }
         if (userData.isUseFirstManaAbility() && object instanceof Permanent && object.getCardType().contains(CardType.LAND)) {
             ActivatedAbility ability = abilities.values().iterator().next();
-            if (ability instanceof ManaAbility) {
+            if (ability instanceof ActivatedManaAbilityImpl) {
                 activateAbility(ability, game);
                 return;
             }
@@ -1293,7 +1293,7 @@ public class HumanPlayer extends PlayerImpl {
             if (!ability.getSourceId().equals(getCastSourceIdWithAlternateMana()) && ability.getManaCostsToPay().convertedManaCost() > 0) {
                 return true;
             }
-            return ability instanceof ManaAbility;
+            return ability instanceof ActivatedManaAbilityImpl;
         }
         return true;
     }

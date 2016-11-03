@@ -40,7 +40,7 @@ import mage.abilities.effects.common.ManaEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.choices.Choice;
-import mage.choices.ChoiceImpl;
+import mage.choices.ChoiceColor;
 import mage.constants.CardType;
 import mage.constants.Outcome;
 import mage.constants.SetTargetPointer;
@@ -64,7 +64,7 @@ import mage.players.Player;
 public class SasayaOrochiAscendant extends CardImpl {
 
     public SasayaOrochiAscendant(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{1}{G}{G}");
+        super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{1}{G}{G}");
         this.supertype.add("Legendary");
         this.subtype.add("Snake");
         this.subtype.add("Monk");
@@ -161,7 +161,8 @@ class SasayasEssenceManaEffectEffect extends ManaEffect {
             filter.add(new NamePredicate(permanent.getName()));
             int count = game.getBattlefield().countAll(filter, controller.getId(), game);
             if (count > 0) {
-                Choice choice = new ChoiceImpl(true);
+                Choice choice = new ChoiceColor(true);
+                choice.getChoices().clear();
                 choice.setMessage("Pick the type of mana to produce");
                 if (mana.getBlack() > 0) {
                     choice.getChoices().add("Black");

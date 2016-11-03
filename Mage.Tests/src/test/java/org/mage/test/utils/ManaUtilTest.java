@@ -10,7 +10,7 @@ import mage.abilities.costs.mana.ManaCost;
 import mage.abilities.costs.mana.ManaCostsImpl;
 import mage.abilities.mana.BasicManaAbility;
 import mage.abilities.mana.BlackManaAbility;
-import mage.abilities.mana.ManaAbility;
+import mage.abilities.mana.ActivatedManaAbilityImpl;
 import mage.abilities.mana.RedManaAbility;
 import mage.abilities.mana.WhiteManaAbility;
 import mage.cards.Card;
@@ -188,10 +188,10 @@ public class ManaUtilTest extends CardTestPlayerBase {
         Card card = CardRepository.instance.findCard(landName).getCard();
         Assert.assertNotNull(card);
 
-        HashMap<UUID, ManaAbility> useableAbilities = getManaAbilities(card);
+        HashMap<UUID, ActivatedManaAbilityImpl> useableAbilities = getManaAbilities(card);
         Assert.assertEquals(expected1, useableAbilities.size());
 
-        useableAbilities = ManaUtil.tryToAutoPay(unpaid, (LinkedHashMap<UUID, ManaAbility>) useableAbilities);
+        useableAbilities = ManaUtil.tryToAutoPay(unpaid, (LinkedHashMap<UUID, ActivatedManaAbilityImpl>) useableAbilities);
         Assert.assertEquals(expected2, useableAbilities.size());
     }
 
@@ -216,12 +216,12 @@ public class ManaUtilTest extends CardTestPlayerBase {
         Card card = CardRepository.instance.findCard(landName).getCard();
         Assert.assertNotNull(card);
 
-        HashMap<UUID, ManaAbility> useableAbilities = getManaAbilities(card);
+        HashMap<UUID, ActivatedManaAbilityImpl> useableAbilities = getManaAbilities(card);
         Assert.assertEquals(expected1, useableAbilities.size());
 
-        useableAbilities = ManaUtil.tryToAutoPay(unpaid, (LinkedHashMap<UUID, ManaAbility>) useableAbilities);
+        useableAbilities = ManaUtil.tryToAutoPay(unpaid, (LinkedHashMap<UUID, ActivatedManaAbilityImpl>) useableAbilities);
         Assert.assertEquals(1, useableAbilities.size());
-        ManaAbility ability = useableAbilities.values().iterator().next();
+        ActivatedManaAbilityImpl ability = useableAbilities.values().iterator().next();
         Assert.assertTrue("Wrong mana ability has been chosen", expectedChosen.isInstance(ability));
     }
 
@@ -251,12 +251,12 @@ public class ManaUtilTest extends CardTestPlayerBase {
      * @param card Card to extract mana abilities from.
      * @return
      */
-    private HashMap<UUID, ManaAbility> getManaAbilities(Card card) {
-        HashMap<UUID, ManaAbility> useableAbilities = new LinkedHashMap<>();
+    private HashMap<UUID, ActivatedManaAbilityImpl> getManaAbilities(Card card) {
+        HashMap<UUID, ActivatedManaAbilityImpl> useableAbilities = new LinkedHashMap<>();
         for (Ability ability : card.getAbilities()) {
-            if (ability instanceof ManaAbility) {
+            if (ability instanceof ActivatedManaAbilityImpl) {
                 ability.newId(); // we need to assign id manually as we are not in game
-                useableAbilities.put(ability.getId(), (ManaAbility) ability);
+                useableAbilities.put(ability.getId(), (ActivatedManaAbilityImpl) ability);
             }
         }
         return useableAbilities;

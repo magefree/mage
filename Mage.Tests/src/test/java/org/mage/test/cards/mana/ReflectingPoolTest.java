@@ -25,45 +25,46 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
+package org.mage.test.cards.mana;
 
-package mage.abilities.mana;
-
-import java.util.ArrayList;
-import java.util.List;
-import mage.Mana;
-import mage.abilities.costs.Cost;
-import mage.abilities.decorator.ConditionalManaEffect;
+import mage.constants.PhaseStep;
 import mage.constants.Zone;
-import mage.game.Game;
+import org.junit.Test;
+import org.mage.test.serverside.base.CardTestPlayerBase;
 
 /**
  *
  * @author LevelX2
  */
+public class ReflectingPoolTest extends CardTestPlayerBase {
 
-public class ConditionalManaAbility extends ActivatedManaAbilityImpl {
+    /**
+     * Reflecting Pool does not count Crumbling Vestige as a source of all mana
+     * colors
+     */
+    @Test
+    public void testTriggeredManaAbility() {
+        addCard(Zone.HAND, playerA, "Lightning Bolt", 1); // {R}
 
-    ConditionalManaEffect conditionalManaEffect;
+        // {T}: Add to your mana pool one mana of any type that a land you control could produce.
+        addCard(Zone.BATTLEFIELD, playerA, "Reflecting Pool", 1);
+        // Crumbling Vestige enters the battlefield tapped.
+        // When Crumbling Vestige enters the battlefield, add one mana of any color to your mana pool.
+        // {T}: Add {C} to you mana pool.
+        addCard(Zone.HAND, playerA, "Crumbling Vestige", 1);
 
-    public ConditionalManaAbility(Zone zone, ConditionalManaEffect effect, Cost cost) {
-        super(zone, effect, cost);
-        this.conditionalManaEffect = effect;
+        playLand(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Crumbling Vestige");
+        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Lightning Bolt", playerB);
+
+        setStopAt(1, PhaseStep.BEGIN_COMBAT);
+        execute();
+
+        assertPermanentCount(playerA, "Crumbling Vestige", 1);
+        assertGraveyardCount(playerA, "Lightning Bolt", 1);
+
+        assertLife(playerA, 20);
+        assertLife(playerB, 17);
+
     }
 
-    public ConditionalManaAbility(final ConditionalManaAbility ability) {
-        super(ability);
-        this.conditionalManaEffect = ability.conditionalManaEffect;
-    }
-
-    @Override
-    public ConditionalManaAbility copy() {
-        return new ConditionalManaAbility(this);
-    }
-
-    @Override
-    public List<Mana> getNetMana(Game game) {
-        List<Mana> newNetMana = new ArrayList<>();
-        newNetMana.add(conditionalManaEffect.getMana(game, this));
-        return newNetMana;
-    }
 }

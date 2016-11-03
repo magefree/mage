@@ -32,7 +32,7 @@ import mage.MageObject;
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.effects.ContinuousRuleModifyingEffectImpl;
-import mage.abilities.mana.ManaAbility;
+import mage.abilities.mana.ActivatedManaAbilityImpl;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
@@ -107,7 +107,7 @@ class HandToHandEffect extends ContinuousRuleModifyingEffectImpl {
             }
             if (event.getType() == GameEvent.EventType.ACTIVATE_ABILITY) {
                 Ability ability = game.getAbility(event.getTargetId(), event.getSourceId());
-                if (ability != null && !(ability instanceof ManaAbility)) {
+                if (ability != null && !(ability instanceof ActivatedManaAbilityImpl)) {
                     return true;
                 }
             }

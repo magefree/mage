@@ -52,7 +52,7 @@ import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.BasicManaEffect;
 import mage.abilities.effects.common.DynamicManaEffect;
 import mage.abilities.keyword.FlashbackAbility;
-import mage.abilities.mana.ManaAbility;
+import mage.abilities.mana.ActivatedManaAbilityImpl;
 import mage.cards.Card;
 import mage.constants.AbilityType;
 import mage.constants.AbilityWord;
@@ -369,7 +369,7 @@ public abstract class AbilityImpl implements Ability {
         }
 
         // this is a hack to prevent mana abilities with mana costs from causing endless loops - pay other costs first
-        if (this instanceof ManaAbility && !costs.pay(this, game, sourceId, controllerId, noMana, null)) {
+        if (this instanceof ActivatedManaAbilityImpl && !costs.pay(this, game, sourceId, controllerId, noMana, null)) {
             logger.debug("activate mana ability failed - non mana costs");
             return false;
         }

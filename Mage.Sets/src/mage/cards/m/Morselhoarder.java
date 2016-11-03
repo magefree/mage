@@ -35,7 +35,7 @@ import mage.abilities.costs.Cost;
 import mage.abilities.costs.common.RemoveCountersSourceCost;
 import mage.abilities.effects.common.AddManaOfAnyColorEffect;
 import mage.abilities.effects.common.counter.AddCountersSourceEffect;
-import mage.abilities.mana.ManaAbility;
+import mage.abilities.mana.ActivatedManaAbilityImpl;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
@@ -72,7 +72,7 @@ public class Morselhoarder extends CardImpl {
     }
 }
 
-class MorselhoarderAbility extends ManaAbility {
+class MorselhoarderAbility extends ActivatedManaAbilityImpl {
     public MorselhoarderAbility() {
         this(new RemoveCountersSourceCost(CounterType.M1M1.createInstance()));
     }

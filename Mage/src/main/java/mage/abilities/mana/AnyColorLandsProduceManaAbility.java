@@ -35,7 +35,7 @@ import mage.abilities.Ability;
 import mage.abilities.costs.common.TapSourceCost;
 import mage.abilities.effects.common.ManaEffect;
 import mage.choices.Choice;
-import mage.choices.ChoiceImpl;
+import mage.choices.ChoiceColor;
 import mage.constants.ColoredManaSymbol;
 import mage.constants.TargetController;
 import mage.constants.Zone;
@@ -50,7 +50,7 @@ import mage.players.Player;
  *
  * @author LevelX2
  */
-public class AnyColorLandsProduceManaAbility extends ManaAbility {
+public class AnyColorLandsProduceManaAbility extends ActivatedManaAbilityImpl {
 
     public AnyColorLandsProduceManaAbility(TargetController targetController) {
         super(Zone.BATTLEFIELD, new AnyColorLandsProduceManaEffect(targetController), new TapSourceCost());
@@ -91,7 +91,8 @@ class AnyColorLandsProduceManaEffect extends ManaEffect {
     @Override
     public boolean apply(Game game, Ability source) {
         Mana types = getManaTypes(game, source);
-        Choice choice = new ChoiceImpl(true);
+        Choice choice = new ChoiceColor(true);
+        choice.getChoices().clear();
         choice.setMessage("Pick a mana color");
         if (types.getBlack() > 0) {
             choice.getChoices().add("Black");
@@ -157,8 +158,8 @@ class AnyColorLandsProduceManaEffect extends ManaEffect {
         List<Permanent> lands = game.getBattlefield().getActivePermanents(filter, source.getControllerId(), game);
         Mana types = new Mana();
         for (Permanent land : lands) {
-            Abilities<ManaAbility> mana = land.getAbilities().getManaAbilities(Zone.BATTLEFIELD);
-            for (ManaAbility ability : mana) {
+            Abilities<ActivatedManaAbilityImpl> mana = land.getAbilities().getActivatedManaAbilities(Zone.BATTLEFIELD);
+            for (ActivatedManaAbilityImpl ability : mana) {
                 if (!ability.equals(source) && ability.definesMana()) {
                     for (Mana netMana : ability.getNetMana(game)) {
                         types.add(netMana);

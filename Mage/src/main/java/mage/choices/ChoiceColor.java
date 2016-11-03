@@ -24,12 +24,10 @@
 * The views and conclusions contained in the software and documentation are those of the
 * authors and should not be interpreted as representing official policies, either expressed
 * or implied, of BetaSteward_at_googlemail.com.
-*/
-
+ */
 package mage.choices;
 
 import java.util.ArrayList;
-
 import mage.Mana;
 import mage.ObjectColor;
 
@@ -40,6 +38,7 @@ import mage.ObjectColor;
 public class ChoiceColor extends ChoiceImpl {
 
     public static final ArrayList<String> colorChoices = new ArrayList<>();
+
     static {
         colorChoices.add("Green");
         colorChoices.add("Blue");
@@ -47,7 +46,7 @@ public class ChoiceColor extends ChoiceImpl {
         colorChoices.add("Red");
         colorChoices.add("White");
     }
-    
+
     public ChoiceColor() {
         this(true);
     }
@@ -93,7 +92,7 @@ public class ChoiceColor extends ChoiceImpl {
     }
 
     public Mana getMana(int amount) {
-        Mana mana = null;
+        Mana mana;
         if (getColor().isBlack()) {
             mana = Mana.BlackMana(amount);
         } else if (getColor().isBlue()) {
@@ -104,6 +103,8 @@ public class ChoiceColor extends ChoiceImpl {
             mana = Mana.GreenMana(amount);
         } else if (getColor().isWhite()) {
             mana = Mana.WhiteMana(amount);
+        } else {
+            mana = Mana.ColorlessMana(amount);
         }
         return mana;
     }
@@ -119,6 +120,8 @@ public class ChoiceColor extends ChoiceImpl {
             mana.increaseGreen();
         } else if (getColor().isWhite()) {
             mana.increaseWhite();
+        } else {
+            mana.increaseColorless();
         }
     }
 }

@@ -42,7 +42,7 @@ import mage.cards.Card;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.choices.Choice;
-import mage.choices.ChoiceImpl;
+import mage.choices.ChoiceColor;
 import mage.constants.CardType;
 import mage.constants.Outcome;
 import mage.constants.Zone;
@@ -63,7 +63,7 @@ import mage.util.GameLog;
 public class ChromeMox extends CardImpl {
 
     public ChromeMox(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.ARTIFACT},"{0}");
+        super(ownerId, setInfo, new CardType[]{CardType.ARTIFACT}, "{0}");
 
         // Imprint - When Chrome Mox enters the battlefield, you may exile a nonartifact, nonland card from your hand.
         this.addAbility(new EntersBattlefieldTriggeredAbility(new ChromeMoxEffect(), true));
@@ -157,7 +157,8 @@ class ChromeMoxManaEffect extends ManaEffect {
             if (imprinted.size() > 0) {
                 Card imprintedCard = game.getCard(imprinted.get(0));
                 if (imprintedCard != null) {
-                    Choice choice = new ChoiceImpl(true);
+                    Choice choice = new ChoiceColor(true);
+                    choice.getChoices().clear();
                     choice.setMessage("Pick a mana color");
                     ObjectColor color = imprintedCard.getColor(game);
                     if (color.isBlack()) {
@@ -183,18 +184,27 @@ class ChromeMoxManaEffect extends ManaEffect {
                         } else {
                             player.choose(outcome, choice, game);
                         }
-                        if (choice.getChoice().equals("Black")) {
-                            player.getManaPool().addMana(Mana.BlackMana(1), game, source);
-                        } else if (choice.getChoice().equals("Blue")) {
-                            player.getManaPool().addMana(Mana.BlueMana(1), game, source);
-                        } else if (choice.getChoice().equals("Red")) {
-                            player.getManaPool().addMana(Mana.RedMana(1), game, source);
-                        } else if (choice.getChoice().equals("Green")) {
-                            player.getManaPool().addMana(Mana.GreenMana(1), game, source);
-                        } else if (choice.getChoice().equals("White")) {
-                            player.getManaPool().addMana(Mana.WhiteMana(1), game, source);
-                        } else if (choice.getChoice().equals("Colorless")) {
-                            player.getManaPool().addMana(Mana.ColorlessMana(1), game, source);
+                        switch (choice.getChoice()) {
+                            case "Black":
+                                player.getManaPool().addMana(Mana.BlackMana(1), game, source);
+                                break;
+                            case "Blue":
+                                player.getManaPool().addMana(Mana.BlueMana(1), game, source);
+                                break;
+                            case "Red":
+                                player.getManaPool().addMana(Mana.RedMana(1), game, source);
+                                break;
+                            case "Green":
+                                player.getManaPool().addMana(Mana.GreenMana(1), game, source);
+                                break;
+                            case "White":
+                                player.getManaPool().addMana(Mana.WhiteMana(1), game, source);
+                                break;
+                            case "Colorless":
+                                player.getManaPool().addMana(Mana.ColorlessMana(1), game, source);
+                                break;
+                            default:
+                                break;
                         }
                         checkToFirePossibleEvents(mana, game, source);
                         player.getManaPool().addMana(mana, game, source);

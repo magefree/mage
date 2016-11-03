@@ -36,7 +36,7 @@ import mage.abilities.costs.mana.GenericManaCost;
 import mage.abilities.dynamicvalue.common.DevotionCount;
 import mage.abilities.effects.common.ManaEffect;
 import mage.abilities.mana.ColorlessManaAbility;
-import mage.abilities.mana.ManaAbility;
+import mage.abilities.mana.ActivatedManaAbilityImpl;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.choices.ChoiceColor;
@@ -73,7 +73,7 @@ public class NykthosShrineToNyx extends CardImpl {
     }
 }
 
-class NykthosShrineToNyxManaAbility extends ManaAbility {
+class NykthosShrineToNyxManaAbility extends ActivatedManaAbilityImpl {
 
     public NykthosShrineToNyxManaAbility() {
         super(Zone.BATTLEFIELD, new NykthosDynamicManaEffect(), new GenericManaCost(2));

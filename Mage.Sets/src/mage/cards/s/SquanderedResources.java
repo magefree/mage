@@ -37,11 +37,11 @@ import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.costs.Cost;
 import mage.abilities.costs.common.SacrificeTargetCost;
 import mage.abilities.effects.common.ManaEffect;
-import mage.abilities.mana.ManaAbility;
+import mage.abilities.mana.ActivatedManaAbilityImpl;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.choices.Choice;
-import mage.choices.ChoiceImpl;
+import mage.choices.ChoiceColor;
 import mage.constants.CardType;
 import mage.constants.ColoredManaSymbol;
 import mage.constants.Zone;
@@ -58,11 +58,11 @@ import mage.target.common.TargetControlledPermanent;
  * @author escplan9 (Derek Monturo - dmontur1 at gmail dot com)
  */
 public class SquanderedResources extends CardImpl {
-    
+
     private static final FilterControlledPermanent filter = new FilterControlledLandPermanent("a land");
 
     public SquanderedResources(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.ENCHANTMENT},"{B}{G}");
+        super(ownerId, setInfo, new CardType[]{CardType.ENCHANTMENT}, "{B}{G}");
 
         // Sacrifice a land: Add to your mana pool one mana of any type the sacrificed land could produce.
         this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new SquanderedResourcesEffect(), new SacrificeTargetCost(new TargetControlledPermanent(filter))));
@@ -97,9 +97,10 @@ class SquanderedResourcesEffect extends ManaEffect {
 
     @Override
     public boolean apply(Game game, Ability source) {
-        
+
         Mana types = getManaTypes(game, source);
-        Choice choice = new ChoiceImpl(false);
+        Choice choice = new ChoiceColor(true);
+        choice.getChoices().clear();
         choice.setMessage("Pick a mana color");
         if (types.getBlack() > 0) {
             choice.getChoices().add("Black");
@@ -190,14 +191,14 @@ class SquanderedResourcesEffect extends ManaEffect {
     }
 
     private Mana getManaTypes(Game game, Ability source) {
-                
+
         Mana types = new Mana();
         for (Cost cost : source.getCosts()) {
-            if (cost instanceof SacrificeTargetCost && ((SacrificeTargetCost)cost).getPermanents().size() > 0) {
-                Permanent land = ((SacrificeTargetCost)cost).getPermanents().get(0);
-                if (land != null) {                    
-                    Abilities<ManaAbility> manaAbilities = land.getAbilities().getManaAbilities(Zone.BATTLEFIELD);
-                    for (ManaAbility ability : manaAbilities) {
+            if (cost instanceof SacrificeTargetCost && ((SacrificeTargetCost) cost).getPermanents().size() > 0) {
+                Permanent land = ((SacrificeTargetCost) cost).getPermanents().get(0);
+                if (land != null) {
+                    Abilities<ActivatedManaAbilityImpl> manaAbilities = land.getAbilities().getActivatedManaAbilities(Zone.BATTLEFIELD);
+                    for (ActivatedManaAbilityImpl ability : manaAbilities) {
                         if (!ability.equals(source) && ability.definesMana()) {
                             for (Mana netMana : ability.getNetMana(game)) {
                                 types.add(netMana);

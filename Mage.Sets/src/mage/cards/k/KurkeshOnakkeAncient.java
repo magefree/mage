@@ -34,7 +34,7 @@ import mage.abilities.TriggeredAbilityImpl;
 import mage.abilities.costs.mana.ColoredManaCost;
 import mage.abilities.effects.Effect;
 import mage.abilities.effects.OneShotEffect;
-import mage.abilities.mana.ManaAbility;
+import mage.abilities.mana.ActivatedManaAbilityImpl;
 import mage.cards.Card;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
@@ -104,7 +104,7 @@ class KurkeshOnakkeAncientTriggeredAbility extends TriggeredAbilityImpl {
             Card source = game.getPermanentOrLKIBattlefield(event.getSourceId());
             if (source != null && source.getCardType().contains(CardType.ARTIFACT)) {
                 StackAbility stackAbility = (StackAbility) game.getStack().getStackObject(event.getSourceId());
-                if (!(stackAbility.getStackAbility() instanceof ManaAbility)) {
+                if (!(stackAbility.getStackAbility() instanceof ActivatedManaAbilityImpl)) {
                     Effect effect = this.getEffects().get(0);
                     effect.setValue("stackAbility", stackAbility);
                     return true;

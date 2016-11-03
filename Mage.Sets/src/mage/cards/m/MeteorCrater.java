@@ -39,7 +39,7 @@ import mage.abilities.mana.SimpleManaAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.choices.Choice;
-import mage.choices.ChoiceImpl;
+import mage.choices.ChoiceColor;
 import mage.constants.CardType;
 import mage.constants.ColoredManaSymbol;
 import mage.constants.Zone;
@@ -55,7 +55,7 @@ import mage.players.Player;
 public class MeteorCrater extends CardImpl {
 
     public MeteorCrater(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.LAND},"");
+        super(ownerId, setInfo, new CardType[]{CardType.LAND}, "");
 
         // {tap}: Choose a color of a permanent you control. Add one mana of that color to your mana pool.
         this.addAbility(new SimpleManaAbility(Zone.BATTLEFIELD, new MeteorCraterEffect(), new TapSourceCost()));
@@ -73,10 +73,11 @@ public class MeteorCrater extends CardImpl {
 
 class MeteorCraterEffect extends ManaEffect {
 
-    /***
-     * 04/10/2004 	You can't choose "colorless". You have to choose one of the five colors.
+    /**
+     * *
+     * 04/10/2004 You can't choose "colorless". You have to choose one of the
+     * five colors.
      */
-    
     private static final FilterControlledPermanent filter = new FilterControlledPermanent();
 
     public MeteorCraterEffect() {
@@ -91,29 +92,31 @@ class MeteorCraterEffect extends ManaEffect {
     @Override
     public boolean apply(Game game, Ability source) {
         Mana types = getManaTypes(game, source);
-        Choice choice = new ChoiceImpl(false);
+        Choice choice = new ChoiceColor(true);
+        choice.getChoices().clear();
         choice.setMessage("Pick a mana color");
-        if (types.getBlack() > 0) {
-            choice.getChoices().add("Black");
-        }
-        if (types.getRed() > 0) {
-            choice.getChoices().add("Red");
-        }
-        if (types.getBlue() > 0) {
-            choice.getChoices().add("Blue");
-        }
-        if (types.getGreen() > 0) {
-            choice.getChoices().add("Green");
-        }
-        if (types.getWhite() > 0) {
-            choice.getChoices().add("White");
-        }
         if (types.getAny() > 0) {
             choice.getChoices().add("Black");
             choice.getChoices().add("Red");
             choice.getChoices().add("Blue");
             choice.getChoices().add("Green");
             choice.getChoices().add("White");
+        } else {
+            if (types.getBlack() > 0) {
+                choice.getChoices().add("Black");
+            }
+            if (types.getRed() > 0) {
+                choice.getChoices().add("Red");
+            }
+            if (types.getBlue() > 0) {
+                choice.getChoices().add("Blue");
+            }
+            if (types.getGreen() > 0) {
+                choice.getChoices().add("Green");
+            }
+            if (types.getWhite() > 0) {
+                choice.getChoices().add("White");
+            }
         }
         if (choice.getChoices().size() > 0) {
             Player player = game.getPlayer(source.getControllerId());
@@ -150,7 +153,7 @@ class MeteorCraterEffect extends ManaEffect {
         return true;
     }
 
-    public  List<Mana> getNetMana(Game game, Ability source) {
+    public List<Mana> getNetMana(Game game, Ability source) {
         List<Mana> netManas = new ArrayList<>();
         Mana types = getManaTypes(game, source);
         if (types.getBlack() > 0) {
@@ -185,10 +188,10 @@ class MeteorCraterEffect extends ManaEffect {
             if (color.isGreen()) {
                 types.add(Mana.GreenMana(1));
             }
-            if(color.isRed()) {
+            if (color.isRed()) {
                 types.add(Mana.RedMana(1));
             }
-            if(color.isWhite()) {
+            if (color.isWhite()) {
                 types.add(Mana.WhiteMana(1));
             }
         }

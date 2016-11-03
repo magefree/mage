@@ -43,7 +43,7 @@ import mage.abilities.effects.common.ManaEffect;
 import mage.abilities.effects.common.continuous.BoostSourceEffect;
 import mage.abilities.effects.common.continuous.GainAbilitySourceEffect;
 import mage.abilities.effects.common.continuous.PlayWithTheTopCardRevealedEffect;
-import mage.abilities.mana.ManaAbility;
+import mage.abilities.mana.ActivatedManaAbilityImpl;
 import mage.abilities.mana.SimpleManaAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
@@ -95,7 +95,7 @@ public class MulDayaChannelers extends CardImpl {
 }
 
 
-class MulDayaChannelersActivateIfConditionManaAbility extends ManaAbility {
+class MulDayaChannelersActivateIfConditionManaAbility extends ActivatedManaAbilityImpl {
 
     private Condition condition;
 
