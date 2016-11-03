@@ -56,7 +56,7 @@ import mage.util.CardUtil;
 public class VillainousWealth extends CardImpl {
 
     public VillainousWealth(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{X}{B}{G}{U}");
+        super(ownerId, setInfo, new CardType[]{CardType.SORCERY}, "{X}{B}{G}{U}");
 
         // Target opponent exiles the top X cards of his or her library. You may cast any number of nonland cards with converted mana cost X or less from among them without paying their mana cost.
         this.getSpellAbility().addTarget(new TargetOpponent());
@@ -106,6 +106,9 @@ class VillainousWealthEffect extends OneShotEffect {
                 if (controller.chooseUse(Outcome.PlayForFree, "Cast cards exiled with " + mageObject.getLogName() + "  without paying its mana cost?", source, game)) {
                     OuterLoop:
                     while (cardsToExile.count(filter, game) > 0) {
+                        if (!controller.canRespond()) {
+                            return false;
+                        }
                         TargetCardInExile target = new TargetCardInExile(0, 1, filter, exileId, false);
                         target.setNotTarget(true);
                         while (cardsToExile.count(filter, game) > 0 && controller.choose(Outcome.PlayForFree, cardsToExile, target, game)) {
