@@ -73,6 +73,7 @@ public class Commander2016 extends ExpansionSet {
         cards.add(new SetCardInfo("Beacon of Unrest", 107, Rarity.RARE, mage.cards.b.BeaconOfUnrest.class));
         cards.add(new SetCardInfo("Beast Within", 141, Rarity.UNCOMMON, mage.cards.b.BeastWithin.class));
         cards.add(new SetCardInfo("Beastmaster Ascension", 142, Rarity.RARE, mage.cards.b.BeastmasterAscension.class));
+	cards.add(new SetCardInfo("Benefactor's Draught", 21, Rarity.RARE, mage.cards.b.BenefactorsDraught.class));
         cards.add(new SetCardInfo("Bituminous Blast", 182, Rarity.UNCOMMON, mage.cards.b.BituminousBlast.class));
         cards.add(new SetCardInfo("Blasphemous Act", 120, Rarity.RARE, mage.cards.b.BlasphemousAct.class));
         cards.add(new SetCardInfo("Blazing Archon", 58, Rarity.RARE, mage.cards.b.BlazingArchon.class));
@@ -88,6 +89,7 @@ public class Commander2016 extends ExpansionSet {
         cards.add(new SetCardInfo("Breath of Fury", 121, Rarity.RARE, mage.cards.b.BreathOfFury.class));
         cards.add(new SetCardInfo("Bred for the Hunt", 186, Rarity.UNCOMMON, mage.cards.b.BredForTheHunt.class));
         cards.add(new SetCardInfo("Breya, Etherium Shaper", 29, Rarity.MYTHIC, mage.cards.b.BreyaEtheriumShaper.class));
+        cards.add(new SetCardInfo("Bruse Tarl, Boorish Herder", 30, Rarity.MYTHIC, mage.cards.b.BruseTarlBoorishHerder.class));
         cards.add(new SetCardInfo("Brutal Hordechief", 108, Rarity.MYTHIC, mage.cards.b.BrutalHordechief.class));
         cards.add(new SetCardInfo("Burgeoning", 143, Rarity.RARE, mage.cards.b.Burgeoning.class));
         cards.add(new SetCardInfo("Buried Ruin", 284, Rarity.UNCOMMON, mage.cards.b.BuriedRuin.class));
@@ -97,6 +99,7 @@ public class Commander2016 extends ExpansionSet {
         cards.add(new SetCardInfo("Chain of Vapor", 84, Rarity.UNCOMMON, mage.cards.c.ChainOfVapor.class));
         cards.add(new SetCardInfo("Champion of Lambholt", 144, Rarity.RARE, mage.cards.c.ChampionOfLambholt.class));
         cards.add(new SetCardInfo("Chaos Warp", 122, Rarity.RARE, mage.cards.c.ChaosWarp.class));
+        cards.add(new SetCardInfo("Charging Cinderhorn", 16, Rarity.RARE, mage.cards.c.ChargingCinderhorn.class));
         cards.add(new SetCardInfo("Chasm Skulker", 85, Rarity.RARE, mage.cards.c.ChasmSkulker.class));
         cards.add(new SetCardInfo("Chief Engineer", 86, Rarity.RARE, mage.cards.c.ChiefEngineer.class));
         cards.add(new SetCardInfo("Chromatic Lantern", 247, Rarity.RARE, mage.cards.c.ChromaticLantern.class));
@@ -149,6 +152,7 @@ public class Commander2016 extends ExpansionSet {
         cards.add(new SetCardInfo("Evacuation", 91, Rarity.RARE, mage.cards.e.Evacuation.class));
         cards.add(new SetCardInfo("Everflowing Chalice", 253, Rarity.UNCOMMON, mage.cards.e.EverflowingChalice.class));
         cards.add(new SetCardInfo("Everlasting Torment", 233, Rarity.RARE, mage.cards.e.EverlastingTorment.class));
+        cards.add(new SetCardInfo("Evolutionary Escalation", 22, Rarity.UNCOMMON, mage.cards.e.EvolutionaryEscalation.class));
         cards.add(new SetCardInfo("Evolving Wilds", 294, Rarity.COMMON, mage.cards.e.EvolvingWilds.class));
         cards.add(new SetCardInfo("Executioner's Capsule", 109, Rarity.COMMON, mage.cards.e.ExecutionersCapsule.class));
         cards.add(new SetCardInfo("Exotic Orchard", 295, Rarity.RARE, mage.cards.e.ExoticOrchard.class));
@@ -169,6 +173,7 @@ public class Commander2016 extends ExpansionSet {
         cards.add(new SetCardInfo("Ghave, Guru of Spores", 200, Rarity.MYTHIC, mage.cards.g.GhaveGuruOfSpores.class));
         cards.add(new SetCardInfo("Ghostly Prison", 66, Rarity.UNCOMMON, mage.cards.g.GhostlyPrison.class));
         cards.add(new SetCardInfo("Glint-Eye Nephilim", 201, Rarity.RARE, mage.cards.g.GlintEyeNephilim.class));
+        cards.add(new SetCardInfo("Goblin Spymaster", 19, Rarity.RARE, mage.cards.g.GoblinSpymaster.class));
         cards.add(new SetCardInfo("Godo, Bandit Warlord", 125, Rarity.RARE, mage.cards.g.GodoBanditWarlord.class));
         cards.add(new SetCardInfo("Golgari Rot Farm", 298, Rarity.UNCOMMON, mage.cards.g.GolgariRotFarm.class));
         cards.add(new SetCardInfo("Golgari Signet", 255, Rarity.COMMON, mage.cards.g.GolgariSignet.class));
@@ -219,7 +224,7 @@ public class Commander2016 extends ExpansionSet {
         cards.add(new SetCardInfo("Master of Etherium", 92, Rarity.RARE, mage.cards.m.MasterOfEtherium.class));
         cards.add(new SetCardInfo("Mentor of the Meek", 69, Rarity.RARE, mage.cards.m.MentorOfTheMeek.class));
         cards.add(new SetCardInfo("Merciless Eviction", 211, Rarity.RARE, mage.cards.m.MercilessEviction.class));
-	cards.add(new SetCardInfo("Migratory Route", 38, Rarity.UNCOMMON, mage.cards.m.MigratoryRoute.class));
+        cards.add(new SetCardInfo("Migratory Route", 38, Rarity.UNCOMMON, mage.cards.m.MigratoryRoute.class));
         cards.add(new SetCardInfo("Minds Aglow", 93, Rarity.RARE, mage.cards.m.MindsAglow.class));
         cards.add(new SetCardInfo("Mirror Entity", 70, Rarity.RARE, mage.cards.m.MirrorEntity.class));
         cards.add(new SetCardInfo("Mirrorweave", 234, Rarity.RARE, mage.cards.m.Mirrorweave.class));
@@ -338,6 +343,7 @@ public class Commander2016 extends ExpansionSet {
         cards.add(new SetCardInfo("Trading Post", 278, Rarity.RARE, mage.cards.t.TradingPost.class));
         cards.add(new SetCardInfo("Transguild Promenade", 334, Rarity.COMMON, mage.cards.t.TransguildPromenade.class));
         cards.add(new SetCardInfo("Trash for Treasure", 136, Rarity.RARE, mage.cards.t.TrashForTreasure.class));
+        cards.add(new SetCardInfo("Treacherous Terrain", 47, Rarity.UNCOMMON, mage.cards.t.TreacherousTerrain.class));
         cards.add(new SetCardInfo("Treasure Cruise", 101, Rarity.COMMON, mage.cards.t.TreasureCruise.class));
         cards.add(new SetCardInfo("Trial // Error", 239, Rarity.UNCOMMON, mage.cards.t.TrialError.class));
         cards.add(new SetCardInfo("Trinket Mage", 102, Rarity.COMMON, mage.cards.t.TrinketMage.class));

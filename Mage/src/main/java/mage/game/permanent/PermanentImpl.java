@@ -265,12 +265,6 @@ public abstract class PermanentImpl extends CardImpl implements Permanent {
         return abilities;
     }
 
-    @Override
-    @Deprecated
-    public void addAbility(Ability ability) {
-        throw new UnsupportedOperationException("Unsupported operation: use addAbility(Ability ability, Game game) instead");
-    }
-
     /**
      *
      * @param ability

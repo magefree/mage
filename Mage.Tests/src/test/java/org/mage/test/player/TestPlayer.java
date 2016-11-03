@@ -1868,13 +1868,13 @@ public class TestPlayer implements Player {
     }
 
     @Override
-    public void setCommanderId(UUID commanderId) {
-        computerPlayer.setCommanderId(commanderId);
+    public void addCommanderId(UUID commanderId) {
+        computerPlayer.addCommanderId(commanderId);
     }
 
     @Override
-    public UUID getCommanderId() {
-        return computerPlayer.getCommanderId();
+    public Set<UUID> getCommandersIds() {
+        return computerPlayer.getCommandersIds();
     }
 
     @Override

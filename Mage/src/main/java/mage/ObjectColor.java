@@ -32,11 +32,8 @@ import java.util.ArrayList;
 import java.util.List;
 import mage.constants.ColoredManaSymbol;
 import mage.util.Copyable;
-import mage.util.ThreadLocalStringBuilder;
 
 public class ObjectColor implements Serializable, Copyable<ObjectColor>, Comparable<ObjectColor> {
-
-    private static final ThreadLocalStringBuilder threadLocalBuilder = new ThreadLocalStringBuilder(10);
 
     public static final ObjectColor WHITE = new ObjectColor("W");
     public static final ObjectColor BLUE = new ObjectColor("U");
@@ -232,7 +229,7 @@ public class ObjectColor implements Serializable, Copyable<ObjectColor>, Compara
 
     @Override
     public String toString() {
-        StringBuilder sb = threadLocalBuilder.get();
+        StringBuilder sb = new StringBuilder(5);
         if (white) {
             sb.append("W");
         }

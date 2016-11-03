@@ -28,7 +28,6 @@
 package mage.cards.t;
 
 import java.util.UUID;
-import mage.ObjectColor;
 import mage.abilities.TriggeredAbilityImpl;
 import mage.abilities.costs.mana.GenericManaCost;
 import mage.abilities.effects.common.DoIfCostPaid;
@@ -89,7 +88,7 @@ class ThroneOfBoneAbility extends TriggeredAbilityImpl {
     @Override
     public boolean checkTrigger(GameEvent event, Game game) {
         Spell spell = game.getStack().getSpell(event.getTargetId());
-        return spell != null && spell.getColor(game).contains(ObjectColor.BLACK);
+        return spell != null && spell.getColor(game).isBlack();
     }
 
     @Override

@@ -83,7 +83,7 @@ public abstract class GameTinyLeadersImpl extends GameImpl {
                     Set<Card> cards = new HashSet<>();
                     cards.add(commander);
                     this.loadCards(cards, playerId);
-                    player.setCommanderId(commander.getId());
+                    player.addCommanderId(commander.getId());
                     commander.moveToZone(Zone.COMMAND, null, this, true);
                     ability.addEffect(new CommanderReplacementEffect(commander.getId(), alsoHand, alsoLibrary));
                     ability.addEffect(new CommanderCostModification(commander.getId()));

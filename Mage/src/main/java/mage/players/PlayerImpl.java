@@ -105,7 +105,12 @@ import mage.filter.common.FilterCreatureForCombat;
 import mage.filter.common.FilterCreatureForCombatBlock;
 import mage.filter.predicate.Predicates;
 import mage.filter.predicate.permanent.PermanentIdPredicate;
-import mage.game.*;
+import mage.game.ExileZone;
+import mage.game.Game;
+import mage.game.Graveyard;
+import mage.game.Table;
+import mage.game.ZoneChangeInfo;
+import mage.game.ZonesHandler;
 import mage.game.combat.CombatGroup;
 import mage.game.command.CommandObject;
 import mage.game.events.DamagePlayerEvent;
@@ -153,7 +158,7 @@ public abstract class PlayerImpl implements Player, Serializable {
     protected Cards sideboard;
     protected Cards hand;
     protected Graveyard graveyard;
-    protected UUID commanderId;
+    protected Set<UUID> commandersIds = new HashSet<>(0);
     protected Abilities<Ability> abilities;
     protected Counters counters;
     protected int landsPlayed;
@@ -273,7 +278,7 @@ public abstract class PlayerImpl implements Player, Serializable {
         this.sideboard = player.sideboard.copy();
         this.hand = player.hand.copy();
         this.graveyard = player.graveyard.copy();
-        this.commanderId = player.commanderId;
+        this.commandersIds = player.commandersIds;
         this.abilities = player.abilities.copy();
         this.counters = player.counters.copy();
 
@@ -359,7 +364,7 @@ public abstract class PlayerImpl implements Player, Serializable {
         this.sideboard = player.getSideboard().copy();
         this.hand = player.getHand().copy();
         this.graveyard = player.getGraveyard().copy();
-        this.commanderId = player.getCommanderId();
+        this.commandersIds = player.getCommandersIds();
         this.abilities = player.getAbilities().copy();
         this.counters = player.getCounters().copy();
 
@@ -3124,13 +3129,13 @@ public abstract class PlayerImpl implements Player, Serializable {
     }
 
     @Override
-    public void setCommanderId(UUID commanderId) {
-        this.commanderId = commanderId;
+    public void addCommanderId(UUID commanderId) {
+        this.commandersIds.add(commanderId);
     }
 
     @Override
-    public UUID getCommanderId() {
-        return this.commanderId;
+    public Set<UUID> getCommandersIds() {
+        return this.commandersIds;
     }
 
     @Override
