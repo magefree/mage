@@ -313,6 +313,7 @@ public class Commander2016 extends ExpansionSet {
         cards.add(new SetCardInfo("Spinerock Knoll", 327, Rarity.RARE, mage.cards.s.SpinerockKnoll.class));
         cards.add(new SetCardInfo("Spitting Image", 236, Rarity.RARE, mage.cards.s.SpittingImage.class));
         cards.add(new SetCardInfo("Stalking Vengeance", 134, Rarity.RARE, mage.cards.s.StalkingVengeance.class));
+        cards.add(new SetCardInfo("Stonehoof Chieftain", 25, Rarity.RARE, mage.cards.s.StonehoofChieftain.class));
         cards.add(new SetCardInfo("Sublime Exhalation", 5, Rarity.RARE, mage.cards.s.SublimeExhalation.class));
         cards.add(new SetCardInfo("Sunforger", 275, Rarity.RARE, mage.cards.s.Sunforger.class));
         cards.add(new SetCardInfo("Sungrass Prairie", 328, Rarity.RARE, mage.cards.s.SungrassPrairie.class));
