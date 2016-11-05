@@ -45,13 +45,13 @@ import mage.players.Player;
 
 /**
  *
- * @author LevelX2
+ * @author spjspj
  */
 public class TanaTheBloodsower extends CardImpl {
 
     public TanaTheBloodsower(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{2}{R}{G}");
-
+        
         this.supertype.add("Legendary");
         this.subtype.add("Elf");
         this.subtype.add("Druid");
@@ -61,7 +61,8 @@ public class TanaTheBloodsower extends CardImpl {
         // Trample
         this.addAbility(TrampleAbility.getInstance());
         // Whenever Tana, the Bloodsower deals combat damage to a player, create that many 1/1 green Saproling creature tokens.
-        this.addAbility(new DealsCombatDamageToAPlayerTriggeredAbility(new TanaTheBloodsowerEffect(), false));
+        this.addAbility(new DealsCombatDamageToAPlayerTriggeredAbility(new TanaTheBloodsowerEffect(), false, true));
+
         // Partner
         this.addAbility(PartnerAbility.getInstance());
     }
@@ -77,29 +78,30 @@ public class TanaTheBloodsower extends CardImpl {
 }
 
 class TanaTheBloodsowerEffect extends OneShotEffect {
-
+    
     public TanaTheBloodsowerEffect() {
         super(Outcome.PutCreatureInPlay);
         this.staticText = "create that many 1/1 green Saproling creature tokens";
     }
-
+    
     public TanaTheBloodsowerEffect(final TanaTheBloodsowerEffect effect) {
         super(effect);
     }
-
+    
     @Override
     public TanaTheBloodsowerEffect copy() {
         return new TanaTheBloodsowerEffect(this);
     }
-
+    
     @Override
     public boolean apply(Game game, Ability source) {
-        Player controller = game.getPlayer(source.getControllerId());
-        if (controller != null) {
-            Integer damage = (Integer) getValue("damage");
-            if (damage > 0) {
-                return new CreateTokenEffect(new SaprolingToken(), damage).apply(game, source);
+        Player player = game.getPlayer(targetPointer.getFirst(game, source));
+        if (player != null) {
+            int amount = (Integer)getValue("damage");
+            if (amount > 0) {
+               return new CreateTokenEffect(new SaprolingToken(), amount).apply(game, source);
             }
+            return true;
         }
         return false;
     }
