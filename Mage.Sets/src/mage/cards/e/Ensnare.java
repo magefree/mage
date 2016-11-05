@@ -59,7 +59,7 @@ public class Ensnare extends CardImpl {
         this.addAbility(ability);
         
         // Tap all creatures.
-        this.getSpellAbility().addEffect(new TapAllEffect(new FilterCreaturePermanent()));
+        this.getSpellAbility().addEffect(new TapAllEffect(new FilterCreaturePermanent("creatures")));
     }
 
     public Ensnare(final Ensnare card) {

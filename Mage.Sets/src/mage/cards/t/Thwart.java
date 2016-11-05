@@ -44,7 +44,7 @@ import mage.target.common.TargetControlledPermanent;
  * @author markedagain
  */
 public class Thwart extends CardImpl {
-    private static final FilterControlledLandPermanent filter = new FilterControlledLandPermanent("Island");
+    private static final FilterControlledLandPermanent filter = new FilterControlledLandPermanent("Islands");
     static{
         filter.add(new SubtypePredicate("Island"));
     }
