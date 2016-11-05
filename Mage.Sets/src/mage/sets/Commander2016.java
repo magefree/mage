@@ -180,6 +180,7 @@ public class Commander2016 extends ExpansionSet {
         cards.add(new SetCardInfo("Grab the Reins", 126, Rarity.UNCOMMON, mage.cards.g.GrabTheReins.class));
         cards.add(new SetCardInfo("Grand Coliseum", 299, Rarity.RARE, mage.cards.g.GrandColiseum.class));
         cards.add(new SetCardInfo("Grave Upheaval", 31, Rarity.UNCOMMON, mage.cards.g.GraveUpheaval.class));
+        cards.add(new SetCardInfo("Grip of Phyresis", 9, Rarity.UNCOMMON, mage.cards.g.GripOfPhyresis.class));
         cards.add(new SetCardInfo("Gruul Signet", 256, Rarity.COMMON, mage.cards.g.GruulSignet.class));
         cards.add(new SetCardInfo("Gruul Turf", 300, Rarity.UNCOMMON, mage.cards.g.GruulTurf.class));
         cards.add(new SetCardInfo("Guiltfeeder", 112, Rarity.RARE, mage.cards.g.Guiltfeeder.class));

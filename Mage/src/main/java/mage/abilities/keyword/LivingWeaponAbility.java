@@ -10,6 +10,7 @@ import mage.abilities.effects.common.CreateTokenEffect;
 import mage.constants.CardType;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
+import mage.game.permanent.token.GermToken;
 import mage.game.permanent.token.Token;
 import mage.players.Player;
 
@@ -62,24 +63,5 @@ class LivingWeaponEffect extends CreateTokenEffect {
     @Override
     public LivingWeaponEffect copy() {
         return new LivingWeaponEffect(this);
-    }
-}
-
-class GermToken extends Token {
-
-    final static private List<String> tokenImageSets = new ArrayList<>();
-
-    static {
-        tokenImageSets.addAll(Arrays.asList("C14", "MBS", "MM2"));
-    }
-
-    public GermToken() {
-        super("Germ", "a 0/0 black Germ creature token");
-        availableImageSetCodes = tokenImageSets;
-        cardType.add(CardType.CREATURE);
-        color.setBlack(true);
-        subtype.add("Germ");
-        power = new MageInt(0);
-        toughness = new MageInt(0);
     }
 }
