@@ -332,6 +332,7 @@ public class Commander2016 extends ExpansionSet {
         cards.add(new SetCardInfo("Sydri, Galvanic Genius", 224, Rarity.MYTHIC, mage.cards.s.SydriGalvanicGenius.class));
         cards.add(new SetCardInfo("Sylvan Reclamation", 44, Rarity.UNCOMMON, mage.cards.s.SylvanReclamation.class));
         cards.add(new SetCardInfo("Sylvok Explorer", 169, Rarity.COMMON, mage.cards.s.SylvokExplorer.class));
+        cards.add(new SetCardInfo("Tana, the Bloodsower", 45, Rarity.MYTHIC, mage.cards.t.TanaTheBloodsower.class));
         cards.add(new SetCardInfo("Taurean Mauler", 135, Rarity.RARE, mage.cards.t.TaureanMauler.class));
         cards.add(new SetCardInfo("Temple Bell", 277, Rarity.RARE, mage.cards.t.TempleBell.class));
         cards.add(new SetCardInfo("Temple of the False God", 331, Rarity.UNCOMMON, mage.cards.t.TempleOfTheFalseGod.class));
@@ -342,6 +343,7 @@ public class Commander2016 extends ExpansionSet {
         cards.add(new SetCardInfo("Thelonite Hermit", 171, Rarity.RARE, mage.cards.t.TheloniteHermit.class));
         cards.add(new SetCardInfo("Thopter Foundry", 237, Rarity.UNCOMMON, mage.cards.t.ThopterFoundry.class));
         cards.add(new SetCardInfo("Thornwood Falls", 333, Rarity.COMMON, mage.cards.t.ThornwoodFalls.class));
+        cards.add(new SetCardInfo("Thrasios, Triton Hero", 46, Rarity.RARE, mage.cards.t.ThrasiosTritonHero.class));
         cards.add(new SetCardInfo("Thrummingbird", 100, Rarity.UNCOMMON, mage.cards.t.Thrummingbird.class));
         cards.add(new SetCardInfo("Thunderfoot Baloth", 172, Rarity.RARE, mage.cards.t.ThunderfootBaloth.class));
         cards.add(new SetCardInfo("Trading Post", 278, Rarity.RARE, mage.cards.t.TradingPost.class));
