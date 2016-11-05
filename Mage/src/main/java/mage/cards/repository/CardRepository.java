@@ -141,7 +141,7 @@ public enum CardRepository {
                     classNames.add(card.getClassName());
                 }
             }
-            return classNames.contains(className);
+            return classNames.contains(className.getName());
         } catch (SQLException ex) {
         }
         return false;
@@ -462,6 +462,15 @@ public enum CardRepository {
 
         } catch (SQLException ex) {
 
+        }
+    }
+
+    public void openDB() {
+        try {
+            ConnectionSource connectionSource = new JdbcConnectionSource(JDBC_URL);
+            cardDao = DaoManager.createDao(connectionSource, CardInfo.class);
+        } catch (SQLException ex) {
+            Logger.getLogger(CardRepository.class).error("Error opening card repository - ", ex);
         }
     }
 }

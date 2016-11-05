@@ -38,6 +38,7 @@ import mage.cards.repository.CardInfo;
 import mage.cards.repository.CardRepository;
 import mage.game.GameException;
 import mage.util.DeckUtil;
+import org.apache.log4j.Logger;
 
 public class Deck implements Serializable {
 
@@ -89,9 +90,19 @@ public class Deck implements Serializable {
     }
 
     private static GameException createCardNotFoundGameException(DeckCardInfo deckCardInfo, String deckName) {
+        // Try WORKAROUND for Card DB error: Try to read a card that does exist
+        CardInfo cardInfo = CardRepository.instance.findCard("Silvercoat Lion");
+        if (cardInfo == null) {
+            // DB seems to have a problem - try to restart the DB
+            CardRepository.instance.closeDB();
+            CardRepository.instance.openDB();
+            cardInfo = CardRepository.instance.findCard("Silvercoat Lion");
+            Logger.getLogger(Deck.class).error("Tried to restart the DB: " + (cardInfo == null ? "not successful" : "successful"));
+        }
         return new GameException("Card not found - " + deckCardInfo.getCardName() + " - " + deckCardInfo.getSetCode() + " for deck - " + deckName + "\n"
                 + "Possible reason is, that you use cards in your deck, that are only supported in newer versions of the server.\n"
                 + "So it can help to use the same card from another set, that's already supported from this server.");
+
     }
 
     private static Card createCard(DeckCardInfo deckCardInfo, boolean mockCards) {
@@ -164,7 +175,7 @@ public class Deck implements Serializable {
     public void setDeckHashCode(long deckHashCode) {
         this.deckHashCode = deckHashCode;
     }
-    
+
     public void clearLayouts() {
         this.cardsLayout = null;
         this.sideboardLayout = null;
