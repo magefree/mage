@@ -73,7 +73,7 @@ public class Commander2016 extends ExpansionSet {
         cards.add(new SetCardInfo("Beacon of Unrest", 107, Rarity.RARE, mage.cards.b.BeaconOfUnrest.class));
         cards.add(new SetCardInfo("Beast Within", 141, Rarity.UNCOMMON, mage.cards.b.BeastWithin.class));
         cards.add(new SetCardInfo("Beastmaster Ascension", 142, Rarity.RARE, mage.cards.b.BeastmasterAscension.class));
-	cards.add(new SetCardInfo("Benefactor's Draught", 21, Rarity.RARE, mage.cards.b.BenefactorsDraught.class));
+        cards.add(new SetCardInfo("Benefactor's Draught", 21, Rarity.RARE, mage.cards.b.BenefactorsDraught.class));
         cards.add(new SetCardInfo("Bituminous Blast", 182, Rarity.UNCOMMON, mage.cards.b.BituminousBlast.class));
         cards.add(new SetCardInfo("Blasphemous Act", 120, Rarity.RARE, mage.cards.b.BlasphemousAct.class));
         cards.add(new SetCardInfo("Blazing Archon", 58, Rarity.RARE, mage.cards.b.BlazingArchon.class));
@@ -196,6 +196,7 @@ public class Commander2016 extends ExpansionSet {
         cards.add(new SetCardInfo("Humble Defector", 129, Rarity.UNCOMMON, mage.cards.h.HumbleDefector.class));
         cards.add(new SetCardInfo("Hushwing Gryff", 68, Rarity.RARE, mage.cards.h.HushwingGryff.class));
         cards.add(new SetCardInfo("Ichor Wellspring", 258, Rarity.COMMON, mage.cards.i.IchorWellspring.class));
+        cards.add(new SetCardInfo("Ikra Shidiqi, the Usurper", 32, Rarity.MYTHIC, mage.cards.i.IkraShidiqiTheUsurper.class));
         cards.add(new SetCardInfo("In Garruk's Wake", 113, Rarity.RARE, mage.cards.i.InGarruksWake.class));
         cards.add(new SetCardInfo("Inspiring Call", 153, Rarity.UNCOMMON, mage.cards.i.InspiringCall.class));
         cards.add(new SetCardInfo("Iroas, God of Victory", 205, Rarity.MYTHIC, mage.cards.i.IroasGodOfVictory.class));
