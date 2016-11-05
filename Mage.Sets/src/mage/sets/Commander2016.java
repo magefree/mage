@@ -275,6 +275,7 @@ public class Commander2016 extends ExpansionSet {
         cards.add(new SetCardInfo("Rakdos Charm", 218, Rarity.UNCOMMON, mage.cards.r.RakdosCharm.class));
         cards.add(new SetCardInfo("Rakdos Signet", 268, Rarity.COMMON, mage.cards.r.RakdosSignet.class));
         cards.add(new SetCardInfo("Rampant Growth", 161, Rarity.COMMON, mage.cards.r.RampantGrowth.class));
+        cards.add(new SetCardInfo("Ravos, Soultender", 39, Rarity.MYTHIC, mage.cards.r.RavosSoultender.class));
         cards.add(new SetCardInfo("Read the Runes", 95, Rarity.RARE, mage.cards.r.ReadTheRunes.class));
         cards.add(new SetCardInfo("Realm Seekers", 162, Rarity.RARE, mage.cards.r.RealmSeekers.class));
         cards.add(new SetCardInfo("Reforge the Soul", 132, Rarity.RARE, mage.cards.r.ReforgeTheSoul.class));
@@ -286,6 +287,7 @@ public class Commander2016 extends ExpansionSet {
         cards.add(new SetCardInfo("Rootbound Crag", 317, Rarity.RARE, mage.cards.r.RootboundCrag.class));
         cards.add(new SetCardInfo("Rubblehulk", 219, Rarity.RARE, mage.cards.r.Rubblehulk.class));
         cards.add(new SetCardInfo("Rugged Highlands", 318, Rarity.COMMON, mage.cards.r.RuggedHighlands.class));
+        cards.add(new SetCardInfo("Runehorn Hellkite", 20, Rarity.RARE, mage.cards.r.RunehornHellkite.class));
         cards.add(new SetCardInfo("Rupture Spire", 319, Rarity.COMMON, mage.cards.r.RuptureSpire.class));
         cards.add(new SetCardInfo("Sakura-Tribe Elder", 164, Rarity.COMMON, mage.cards.s.SakuraTribeElder.class));
         cards.add(new SetCardInfo("Sanctum Gargoyle", 76, Rarity.COMMON, mage.cards.s.SanctumGargoyle.class));
