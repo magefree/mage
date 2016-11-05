@@ -100,7 +100,7 @@ if(!$cardName) {
 if (!exists $cards{$cardName}) {
     my $possible;
     foreach $possible (sort keys (%cards)) {
-        if ($possible =~ m/^$cardName.*/img && $cardName =~ m/..../) {
+        if ($possible =~ m/$cardName/img && $cardName =~ m/..../) {
             print ("Did you mean $possible ?\n");
         }
     }
