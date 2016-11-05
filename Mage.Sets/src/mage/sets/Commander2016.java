@@ -215,6 +215,7 @@ public class Commander2016 extends ExpansionSet {
         cards.add(new SetCardInfo("Korozda Guildmage", 208, Rarity.UNCOMMON, mage.cards.k.KorozdaGuildmage.class));
 	cards.add(new SetCardInfo("Kraum, Ludevic's Opus", 34, Rarity.RARE, mage.cards.k.KraumLudevicsOpus.class));
         cards.add(new SetCardInfo("Krosan Verge", 306, Rarity.UNCOMMON, mage.cards.k.KrosanVerge.class));
+        cards.add(new SetCardInfo("Kynaios and Tiro of Meletis", 36, Rarity.MYTHIC, mage.cards.k.KynaiosAndTiroOfMeletis.class));
         cards.add(new SetCardInfo("Languish", 114, Rarity.RARE, mage.cards.l.Languish.class));
         cards.add(new SetCardInfo("Lavalanche", 209, Rarity.RARE, mage.cards.l.Lavalanche.class));
         cards.add(new SetCardInfo("Lightning Greaves", 260, Rarity.UNCOMMON, mage.cards.l.LightningGreaves.class));
