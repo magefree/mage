@@ -289,6 +289,7 @@ public class Commander2016 extends ExpansionSet {
         cards.add(new SetCardInfo("Sanctum Gargoyle", 76, Rarity.COMMON, mage.cards.s.SanctumGargoyle.class));
         cards.add(new SetCardInfo("Sandsteppe Citadel", 320, Rarity.UNCOMMON, mage.cards.s.SandsteppeCitadel.class));
         cards.add(new SetCardInfo("Sangromancer", 116, Rarity.RARE, mage.cards.s.Sangromancer.class));
+        cards.add(new SetCardInfo("Saskia the Unyielding", 41, Rarity.MYTHIC, mage.cards.s.SaskiaTheUnyielding.class));
         cards.add(new SetCardInfo("Satyr Wayfinder", 165, Rarity.COMMON, mage.cards.s.SatyrWayfinder.class));
         cards.add(new SetCardInfo("Savage Lands", 321, Rarity.UNCOMMON, mage.cards.s.SavageLands.class));
         cards.add(new SetCardInfo("Scavenging Ooze", 166, Rarity.RARE, mage.cards.s.ScavengingOoze.class));
@@ -302,6 +303,8 @@ public class Commander2016 extends ExpansionSet {
         cards.add(new SetCardInfo("Shamanic Revelation", 167, Rarity.RARE, mage.cards.s.ShamanicRevelation.class));
         cards.add(new SetCardInfo("Sharuum the Hegemon", 221, Rarity.MYTHIC, mage.cards.s.SharuumTheHegemon.class));
         cards.add(new SetCardInfo("Shimmer Myr", 269, Rarity.RARE, mage.cards.s.ShimmerMyr.class));
+        cards.add(new SetCardInfo("Sidar Kondo of Jamuraa", 42, Rarity.MYTHIC, mage.cards.s.SidarKondoOfJamuraa.class));
+        cards.add(new SetCardInfo("Silas Renn, Seeker Adept", 43, Rarity.MYTHIC, mage.cards.s.SilasRennSeekerAdept.class));
         cards.add(new SetCardInfo("Simic Growth Chamber", 326, Rarity.UNCOMMON, mage.cards.s.SimicGrowthChamber.class));
         cards.add(new SetCardInfo("Simic Signet", 270, Rarity.COMMON, mage.cards.s.SimicSignet.class));
         cards.add(new SetCardInfo("Skullclamp", 271, Rarity.UNCOMMON, mage.cards.s.Skullclamp.class));
@@ -332,6 +335,7 @@ public class Commander2016 extends ExpansionSet {
         cards.add(new SetCardInfo("Sydri, Galvanic Genius", 224, Rarity.MYTHIC, mage.cards.s.SydriGalvanicGenius.class));
         cards.add(new SetCardInfo("Sylvan Reclamation", 44, Rarity.UNCOMMON, mage.cards.s.SylvanReclamation.class));
         cards.add(new SetCardInfo("Sylvok Explorer", 169, Rarity.COMMON, mage.cards.s.SylvokExplorer.class));
+        cards.add(new SetCardInfo("Tana, the Bloodsower", 45, Rarity.MYTHIC, mage.cards.t.TanaTheBloodsower.class));
         cards.add(new SetCardInfo("Taurean Mauler", 135, Rarity.RARE, mage.cards.t.TaureanMauler.class));
         cards.add(new SetCardInfo("Temple Bell", 277, Rarity.RARE, mage.cards.t.TempleBell.class));
         cards.add(new SetCardInfo("Temple of the False God", 331, Rarity.UNCOMMON, mage.cards.t.TempleOfTheFalseGod.class));
@@ -342,6 +346,7 @@ public class Commander2016 extends ExpansionSet {
         cards.add(new SetCardInfo("Thelonite Hermit", 171, Rarity.RARE, mage.cards.t.TheloniteHermit.class));
         cards.add(new SetCardInfo("Thopter Foundry", 237, Rarity.UNCOMMON, mage.cards.t.ThopterFoundry.class));
         cards.add(new SetCardInfo("Thornwood Falls", 333, Rarity.COMMON, mage.cards.t.ThornwoodFalls.class));
+        cards.add(new SetCardInfo("Thrasios, Triton Hero", 46, Rarity.RARE, mage.cards.t.ThrasiosTritonHero.class));
         cards.add(new SetCardInfo("Thrummingbird", 100, Rarity.UNCOMMON, mage.cards.t.Thrummingbird.class));
         cards.add(new SetCardInfo("Thunderfoot Baloth", 172, Rarity.RARE, mage.cards.t.ThunderfootBaloth.class));
         cards.add(new SetCardInfo("Trading Post", 278, Rarity.RARE, mage.cards.t.TradingPost.class));
@@ -352,6 +357,7 @@ public class Commander2016 extends ExpansionSet {
         cards.add(new SetCardInfo("Trial // Error", 239, Rarity.UNCOMMON, mage.cards.t.TrialError.class));
         cards.add(new SetCardInfo("Trinket Mage", 102, Rarity.COMMON, mage.cards.t.TrinketMage.class));
         cards.add(new SetCardInfo("Tuskguard Captain", 173, Rarity.UNCOMMON, mage.cards.t.TuskguardCaptain.class));
+        cards.add(new SetCardInfo("Tymna the Weaver", 48, Rarity.RARE, mage.cards.t.TymnaTheWeaver.class));
         cards.add(new SetCardInfo("Underground River", 335, Rarity.RARE, mage.cards.u.UndergroundRiver.class));
         cards.add(new SetCardInfo("Utter End", 226, Rarity.RARE, mage.cards.u.UtterEnd.class));
         cards.add(new SetCardInfo("Vedalken Engineer", 103, Rarity.COMMON, mage.cards.v.VedalkenEngineer.class));
@@ -376,6 +382,7 @@ public class Commander2016 extends ExpansionSet {
         cards.add(new SetCardInfo("Windbrisk Heights", 336, Rarity.RARE, mage.cards.w.WindbriskHeights.class));
         cards.add(new SetCardInfo("Windfall", 104, Rarity.UNCOMMON, mage.cards.w.Windfall.class));
         cards.add(new SetCardInfo("Worm Harvest", 238, Rarity.RARE, mage.cards.w.WormHarvest.class));
+        cards.add(new SetCardInfo("Yidris, Maelstrom Wielder", 50, Rarity.MYTHIC, mage.cards.y.YidrisMaelstromWielder.class));
         cards.add(new SetCardInfo("Zedruu the Greathearted", 231, Rarity.MYTHIC, mage.cards.z.ZedruuTheGreathearted.class));
         cards.add(new SetCardInfo("Zhur-Taa Druid", 232, Rarity.COMMON, mage.cards.z.ZhurTaaDruid.class));
     }
