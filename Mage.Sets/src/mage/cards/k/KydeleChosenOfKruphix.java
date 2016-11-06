@@ -56,7 +56,7 @@ public class KydeleChosenOfKruphix extends CardImpl {
 
     public KydeleChosenOfKruphix(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{2}{G}{U}");
-        
+
         this.supertype.add("Legendary");
         this.subtype.add("Human");
         this.subtype.add("Wizard");
@@ -135,6 +135,9 @@ class CardsDrawnThisTurnWatcher extends Watcher {
     }
 
     public int getNumCardsDrawnThisTurn(UUID playerId) {
+        if (cardsDrawnThisTurn.get(playerId) == null) {
+            return 0;
+        }
         return cardsDrawnThisTurn.get(playerId).size();
     }
 
@@ -142,6 +145,7 @@ class CardsDrawnThisTurnWatcher extends Watcher {
     public void reset() {
         super.reset();
         cardsDrawnThisTurn.clear();
+        
     }
 
     @Override
