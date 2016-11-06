@@ -36,7 +36,6 @@ import mage.constants.SetType;
  *
  * @author fireshoeS
  */
-
 public class Commander2016 extends ExpansionSet {
 
     private static final Commander2016 fINSTANCE = new Commander2016();
@@ -259,6 +258,7 @@ public class Commander2016 extends ExpansionSet {
         cards.add(new SetCardInfo("Open the Vaults", 72, Rarity.RARE, mage.cards.o.OpenTheVaults.class));
         cards.add(new SetCardInfo("Opulent Palace", 313, Rarity.UNCOMMON, mage.cards.o.OpulentPalace.class));
         cards.add(new SetCardInfo("Order // Chaos", 240, Rarity.UNCOMMON, mage.cards.o.OrderChaos.class));
+        cards.add(new SetCardInfo("Orzhov Advokist", 3, Rarity.UNCOMMON, mage.cards.o.OrzhovAdvokist.class));
         cards.add(new SetCardInfo("Orzhov Basilica", 314, Rarity.UNCOMMON, mage.cards.o.OrzhovBasilica.class));
         cards.add(new SetCardInfo("Orzhov Signet", 266, Rarity.COMMON, mage.cards.o.OrzhovSignet.class));
         cards.add(new SetCardInfo("Past in Flames", 131, Rarity.MYTHIC, mage.cards.p.PastInFlames.class));
