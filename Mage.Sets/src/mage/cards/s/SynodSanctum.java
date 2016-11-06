@@ -65,7 +65,7 @@ public class SynodSanctum extends CardImpl {
     }
 
     public SynodSanctum(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.ARTIFACT},"{1}");
+        super(ownerId, setInfo, new CardType[]{CardType.ARTIFACT}, "{1}");
 
         // {2}, {tap}: Exile target permanent you control.
         SynodSanctumEffect effect = new SynodSanctumEffect();
@@ -112,11 +112,12 @@ class SynodSanctumEffect extends OneShotEffect {
                 Permanent permanent = game.getPermanent(getTargetPointer().getFirst(game, source));
                 if (permanent != null) {
                     UUID exileZone = CardUtil.getExileZoneId(game, source.getSourceId(), source.getSourceObjectZoneChangeCounter());
-                    if (exileZone != null && controller.moveCardToExileWithInfo(permanent, exileZone, sourceObject.getIdName(), source.getId(), game, Zone.BATTLEFIELD, true)) {
-                        return true;
+                    if (exileZone != null) {
+                        controller.moveCardToExileWithInfo(permanent, exileZone, sourceObject.getIdName(), source.getSourceId(), game, Zone.BATTLEFIELD, true);
                     }
                 }
             }
+            return true;
         }
         return false;
     }
