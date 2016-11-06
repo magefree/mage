@@ -34,7 +34,7 @@ import mage.constants.SetType;
 
 /**
  *
- * @author fireshoes
+ * @author fireshoeS
  */
 
 public class Commander2016 extends ExpansionSet {
@@ -200,7 +200,7 @@ public class Commander2016 extends ExpansionSet {
         cards.add(new SetCardInfo("In Garruk's Wake", 113, Rarity.RARE, mage.cards.i.InGarruksWake.class));
         cards.add(new SetCardInfo("Inspiring Call", 153, Rarity.UNCOMMON, mage.cards.i.InspiringCall.class));
         cards.add(new SetCardInfo("Iroas, God of Victory", 205, Rarity.MYTHIC, mage.cards.i.IroasGodOfVictory.class));
-	cards.add(new SetCardInfo("Ishai, Ojutai Dragonspeaker", 33, Rarity.MYTHIC, mage.cards.i.IshaiOjutaiDragonspeaker.class));
+        cards.add(new SetCardInfo("Ishai, Ojutai Dragonspeaker", 33, Rarity.MYTHIC, mage.cards.i.IshaiOjutaiDragonspeaker.class));
         cards.add(new SetCardInfo("Island", 340, Rarity.LAND, mage.cards.basiclands.Island.class, new CardGraphicInfo(null, true)));
         cards.add(new SetCardInfo("Island", 341, Rarity.LAND, mage.cards.basiclands.Island.class, new CardGraphicInfo(null, true)));
         cards.add(new SetCardInfo("Island", 342, Rarity.LAND, mage.cards.basiclands.Island.class, new CardGraphicInfo(null, true)));
@@ -215,7 +215,7 @@ public class Commander2016 extends ExpansionSet {
         cards.add(new SetCardInfo("Keening Stone", 259, Rarity.RARE, mage.cards.k.KeeningStone.class));
         cards.add(new SetCardInfo("Kodama's Reach", 155, Rarity.COMMON, mage.cards.k.KodamasReach.class));
         cards.add(new SetCardInfo("Korozda Guildmage", 208, Rarity.UNCOMMON, mage.cards.k.KorozdaGuildmage.class));
-	cards.add(new SetCardInfo("Kraum, Ludevic's Opus", 34, Rarity.RARE, mage.cards.k.KraumLudevicsOpus.class));
+        cards.add(new SetCardInfo("Kraum, Ludevic's Opus", 34, Rarity.RARE, mage.cards.k.KraumLudevicsOpus.class));
         cards.add(new SetCardInfo("Krosan Verge", 306, Rarity.UNCOMMON, mage.cards.k.KrosanVerge.class));
         cards.add(new SetCardInfo("Kydele, Chosen of Kruphix", 35, Rarity.MYTHIC, mage.cards.k.KydeleChosenOfKruphix.class));
         cards.add(new SetCardInfo("Kynaios and Tiro of Meletis", 36, Rarity.MYTHIC, mage.cards.k.KynaiosAndTiroOfMeletis.class));
@@ -223,6 +223,7 @@ public class Commander2016 extends ExpansionSet {
         cards.add(new SetCardInfo("Lavalanche", 209, Rarity.RARE, mage.cards.l.Lavalanche.class));
         cards.add(new SetCardInfo("Lightning Greaves", 260, Rarity.UNCOMMON, mage.cards.l.LightningGreaves.class));
         cards.add(new SetCardInfo("Loxodon Warhammer", 261, Rarity.UNCOMMON, mage.cards.l.LoxodonWarhammer.class));
+        cards.add(new SetCardInfo("Ludevic, Necro-Alchemist", 37, Rarity.MYTHIC, mage.cards.l.LudevicNecroAlchemist.class));
         cards.add(new SetCardInfo("Lurking Predators", 156, Rarity.RARE, mage.cards.l.LurkingPredators.class));
         cards.add(new SetCardInfo("Magus of the Will", 14, Rarity.RARE, mage.cards.m.MagusOfTheWill.class));
         cards.add(new SetCardInfo("Managorger Hydra", 157, Rarity.RARE, mage.cards.m.ManagorgerHydra.class));
