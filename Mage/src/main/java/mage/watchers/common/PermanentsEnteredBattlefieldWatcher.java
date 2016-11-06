@@ -43,6 +43,9 @@ public class PermanentsEnteredBattlefieldWatcher extends Watcher {
     public void watch(GameEvent event, Game game) {
         if (event.getType() == GameEvent.EventType.ENTERS_THE_BATTLEFIELD) {
             Permanent perm = game.getPermanentEntering(event.getTargetId());
+            if (perm == null) {
+                perm = game.getPermanent(event.getTargetId());
+            }
             if (perm != null) {
                 List<Permanent> permanents;
                 if (!enteringBattlefield.containsKey(perm.getControllerId())) {
@@ -69,10 +72,12 @@ public class PermanentsEnteredBattlefieldWatcher extends Watcher {
     }
 
     public boolean AnotherCreatureEnteredBattlefieldUnderPlayersControlLastTurn(Permanent sourcePermanent, Game game) {
-        for (Permanent permanent : enteringBattlefield.get(sourcePermanent.getControllerId())) {
-            if (!permanent.getId().equals(sourcePermanent.getId())
-                    || permanent.getZoneChangeCounter(game) != sourcePermanent.getZoneChangeCounter(game)) {
-                return true;
+        if (enteringBattlefieldLastTurn.containsKey(sourcePermanent.getControllerId())) {
+            for (Permanent permanent : enteringBattlefieldLastTurn.get(sourcePermanent.getControllerId())) {
+                if (!permanent.getId().equals(sourcePermanent.getId())
+                        || permanent.getZoneChangeCounter(game) != sourcePermanent.getZoneChangeCounter(game)) {
+                    return true;
+                }
             }
         }
         return false;
