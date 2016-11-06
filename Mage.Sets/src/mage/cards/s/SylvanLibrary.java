@@ -60,11 +60,11 @@ import mage.watchers.Watcher;
 public class SylvanLibrary extends CardImpl {
 
     public SylvanLibrary(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.ENCHANTMENT},"{1}{G}");
+        super(ownerId, setInfo, new CardType[]{CardType.ENCHANTMENT}, "{1}{G}");
 
         // At the beginning of your draw step, you may draw two additional cards. If you do, choose two cards in your hand drawn this turn. For each of those cards, pay 4 life or put the card on top of your library.
         this.addAbility(new BeginningOfDrawTriggeredAbility(new SylvanLibraryEffect(), TargetController.YOU, true),
-                new CardsDrawnThisTurnWatcher());
+                new SylvanLibraryCardsDrawnThisTurnWatcher());
 
     }
 
@@ -99,7 +99,7 @@ class SylvanLibraryEffect extends OneShotEffect {
         Player controller = game.getPlayer(source.getControllerId());
         if (controller != null) {
             controller.drawCards(2, game);
-            CardsDrawnThisTurnWatcher watcher = (CardsDrawnThisTurnWatcher) game.getState().getWatchers().get("CardsDrawnThisTurnWatcher");
+            SylvanLibraryCardsDrawnThisTurnWatcher watcher = (SylvanLibraryCardsDrawnThisTurnWatcher) game.getState().getWatchers().get("SylvanLibraryCardsDrawnThisTurnWatcher");
             if (watcher != null) {
                 Cards cards = new CardsImpl();
                 Set<UUID> cardsDrawnThisTurn = watcher.getCardsDrawnThisTurn(controller.getId());
@@ -141,15 +141,15 @@ class SylvanLibraryEffect extends OneShotEffect {
     }
 }
 
-class CardsDrawnThisTurnWatcher extends Watcher {
+class SylvanLibraryCardsDrawnThisTurnWatcher extends Watcher {
 
     private final Map<UUID, Set<UUID>> cardsDrawnThisTurn = new HashMap<>();
 
-    public CardsDrawnThisTurnWatcher() {
-        super("CardsDrawnThisTurnWatcher", WatcherScope.GAME);
+    public SylvanLibraryCardsDrawnThisTurnWatcher() {
+        super("SylvanLibraryCardsDrawnThisTurnWatcher", WatcherScope.GAME);
     }
 
-    public CardsDrawnThisTurnWatcher(final CardsDrawnThisTurnWatcher watcher) {
+    public SylvanLibraryCardsDrawnThisTurnWatcher(final SylvanLibraryCardsDrawnThisTurnWatcher watcher) {
         super(watcher);
         this.cardsDrawnThisTurn.putAll(watcher.cardsDrawnThisTurn);
     }
@@ -177,8 +177,8 @@ class CardsDrawnThisTurnWatcher extends Watcher {
     }
 
     @Override
-    public CardsDrawnThisTurnWatcher copy() {
-        return new CardsDrawnThisTurnWatcher(this);
+    public SylvanLibraryCardsDrawnThisTurnWatcher copy() {
+        return new SylvanLibraryCardsDrawnThisTurnWatcher(this);
     }
 }
 

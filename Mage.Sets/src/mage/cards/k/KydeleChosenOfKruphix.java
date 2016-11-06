@@ -65,7 +65,7 @@ public class KydeleChosenOfKruphix extends CardImpl {
 
         // {T}: Add {C} to your mana pool for each card you've drawn this turn.
         DynamicManaAbility ability = new DynamicManaAbility(Mana.ColorlessMana(1), new CardsDrawnThisTurnDynamicValue(), new TapSourceCost());
-        this.addAbility(ability, new CardsDrawnThisTurnWatcher());
+        this.addAbility(ability, new KydeleCardsDrawnThisTurnWatcher());
 
         // Partner
         this.addAbility(PartnerAbility.getInstance());
@@ -85,7 +85,7 @@ class CardsDrawnThisTurnDynamicValue implements DynamicValue {
 
     @Override
     public int calculate(Game game, Ability sourceAbility, Effect effect) {
-        CardsDrawnThisTurnWatcher watcher = (CardsDrawnThisTurnWatcher) game.getState().getWatchers().get("CardsDrawnThisTurnWatcher");
+        KydeleCardsDrawnThisTurnWatcher watcher = (KydeleCardsDrawnThisTurnWatcher) game.getState().getWatchers().get(KydeleCardsDrawnThisTurnWatcher.class.getName());
         return watcher.getNumCardsDrawnThisTurn(sourceAbility.getControllerId());
     }
 
@@ -105,15 +105,15 @@ class CardsDrawnThisTurnDynamicValue implements DynamicValue {
     }
 }
 
-class CardsDrawnThisTurnWatcher extends Watcher {
+class KydeleCardsDrawnThisTurnWatcher extends Watcher {
 
     private final Map<UUID, Set<UUID>> cardsDrawnThisTurn = new HashMap<>();
 
-    public CardsDrawnThisTurnWatcher() {
-        super("CardsDrawnThisTurnWatcher", WatcherScope.GAME);
+    public KydeleCardsDrawnThisTurnWatcher() {
+        super(KydeleCardsDrawnThisTurnWatcher.class.getName(), WatcherScope.GAME);
     }
 
-    public CardsDrawnThisTurnWatcher(final CardsDrawnThisTurnWatcher watcher) {
+    public KydeleCardsDrawnThisTurnWatcher(final KydeleCardsDrawnThisTurnWatcher watcher) {
         super(watcher);
         this.cardsDrawnThisTurn.putAll(watcher.cardsDrawnThisTurn);
     }
@@ -130,10 +130,6 @@ class CardsDrawnThisTurnWatcher extends Watcher {
         }
     }
 
-    private Set<UUID> getCardsDrawnThisTurn(UUID playerId) {
-        return cardsDrawnThisTurn.get(playerId);
-    }
-
     public int getNumCardsDrawnThisTurn(UUID playerId) {
         if (cardsDrawnThisTurn.get(playerId) == null) {
             return 0;
@@ -145,11 +141,11 @@ class CardsDrawnThisTurnWatcher extends Watcher {
     public void reset() {
         super.reset();
         cardsDrawnThisTurn.clear();
-        
+
     }
 
     @Override
-    public CardsDrawnThisTurnWatcher copy() {
-        return new CardsDrawnThisTurnWatcher(this);
+    public KydeleCardsDrawnThisTurnWatcher copy() {
+        return new KydeleCardsDrawnThisTurnWatcher(this);
     }
 }
