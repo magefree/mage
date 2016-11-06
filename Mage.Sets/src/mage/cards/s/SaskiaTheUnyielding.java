@@ -106,7 +106,10 @@ class SaskiaTheUnyieldingEffect extends OneShotEffect {
             UUID playerId = (UUID) game.getState().getValue(source.getSourceId() + "_player");
             Player player = game.getPlayer(playerId);
             if (player != null && player.canRespond()) {
-                player.damage((Integer) this.getValue("damage"), source.getSourceId(), game, false, true);
+                Integer damage = (Integer) this.getValue("damage");
+                if (damage > 0) {
+                    player.damage(damage, source.getSourceId(), game, false, true);
+                }
             }
             return true;
         }
