@@ -158,6 +158,7 @@ public class TimeSpiral extends ExpansionSet {
         cards.add(new SetCardInfo("Lotus Bloom", 259, Rarity.RARE, mage.cards.l.LotusBloom.class));
         cards.add(new SetCardInfo("Magus of the Candelabra", 203, Rarity.RARE, mage.cards.m.MagusOfTheCandelabra.class));
         cards.add(new SetCardInfo("Magus of the Disk", 27, Rarity.RARE, mage.cards.m.MagusOfTheDisk.class));
+        cards.add(new SetCardInfo("Magus of the Jar", 67, Rarity.RARE, mage.cards.m.MagusOfTheJar.class));
         cards.add(new SetCardInfo("Magus of the Mirror", 116, Rarity.RARE, mage.cards.m.MagusOfTheMirror.class));
         cards.add(new SetCardInfo("Magus of the Scroll", 169, Rarity.RARE, mage.cards.m.MagusOfTheScroll.class));
         cards.add(new SetCardInfo("Mana Skimmer", 117, Rarity.COMMON, mage.cards.m.ManaSkimmer.class));
