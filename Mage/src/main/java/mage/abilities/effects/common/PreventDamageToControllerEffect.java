@@ -46,6 +46,7 @@ public class PreventDamageToControllerEffect extends PreventionEffectImpl {
 
     public PreventDamageToControllerEffect(Duration duration, boolean onlyCombat, boolean consumable, int amountToPrevent) {
         super(duration, amountToPrevent, onlyCombat, consumable, null);
+        staticText = setText();
     }
 
     public PreventDamageToControllerEffect(Duration duration, boolean onlyCombat, boolean consumable, DynamicValue amountToPreventDynamic) {
@@ -55,7 +56,6 @@ public class PreventDamageToControllerEffect extends PreventionEffectImpl {
 
     public PreventDamageToControllerEffect(final PreventDamageToControllerEffect effect) {
         super(effect);
-        staticText = setText();
     }
 
     @Override
@@ -76,7 +76,7 @@ public class PreventDamageToControllerEffect extends PreventionEffectImpl {
 
     private String setText() {
         // Prevent the next X damage that would be dealt to you this turn
-        StringBuilder sb = new StringBuilder("Prevent ");
+        StringBuilder sb = new StringBuilder("prevent ");
         if (amountToPrevent == Integer.MAX_VALUE) {
             sb.append("all ");
         } else if (amountToPreventDynamic != null) {

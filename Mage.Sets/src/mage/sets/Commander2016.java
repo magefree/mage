@@ -155,6 +155,7 @@ public class Commander2016 extends ExpansionSet {
         cards.add(new SetCardInfo("Evolving Wilds", 294, Rarity.COMMON, mage.cards.e.EvolvingWilds.class));
         cards.add(new SetCardInfo("Executioner's Capsule", 109, Rarity.COMMON, mage.cards.e.ExecutionersCapsule.class));
         cards.add(new SetCardInfo("Exotic Orchard", 295, Rarity.RARE, mage.cards.e.ExoticOrchard.class));
+        cards.add(new SetCardInfo("Faerie Artisans", 8, Rarity.RARE, mage.cards.f.FaerieArtisans.class));
         cards.add(new SetCardInfo("Far Wanderings", 148, Rarity.COMMON, mage.cards.f.FarWanderings.class));
         cards.add(new SetCardInfo("Farseek", 149, Rarity.COMMON, mage.cards.f.Farseek.class));
         cards.add(new SetCardInfo("Fathom Mage", 198, Rarity.RARE, mage.cards.f.FathomMage.class));
@@ -166,6 +167,7 @@ public class Commander2016 extends ExpansionSet {
         cards.add(new SetCardInfo("Forest", 350, Rarity.LAND, mage.cards.basiclands.Forest.class, new CardGraphicInfo(null, true)));
         cards.add(new SetCardInfo("Forest", 351, Rarity.LAND, mage.cards.basiclands.Forest.class, new CardGraphicInfo(null, true)));
         cards.add(new SetCardInfo("Forgotten Ancient", 150, Rarity.RARE, mage.cards.f.ForgottenAncient.class));
+        cards.add(new SetCardInfo("Frenzied Fugue", 18, Rarity.UNCOMMON, mage.cards.f.FrenziedFugue.class));
         cards.add(new SetCardInfo("Frontier Bivouac", 297, Rarity.UNCOMMON, mage.cards.f.FrontierBivouac.class));
         cards.add(new SetCardInfo("Gamekeeper", 151, Rarity.UNCOMMON, mage.cards.g.Gamekeeper.class));
         cards.add(new SetCardInfo("Ghastly Conscription", 111, Rarity.MYTHIC, mage.cards.g.GhastlyConscription.class));
@@ -226,6 +228,7 @@ public class Commander2016 extends ExpansionSet {
         cards.add(new SetCardInfo("Lurking Predators", 156, Rarity.RARE, mage.cards.l.LurkingPredators.class));
         cards.add(new SetCardInfo("Magus of the Will", 14, Rarity.RARE, mage.cards.m.MagusOfTheWill.class));
         cards.add(new SetCardInfo("Managorger Hydra", 157, Rarity.RARE, mage.cards.m.ManagorgerHydra.class));
+        cards.add(new SetCardInfo("Manifold Insights", 10, Rarity.RARE, mage.cards.m.ManifoldInsights.class));
         cards.add(new SetCardInfo("Master Biomancer", 210, Rarity.MYTHIC, mage.cards.m.MasterBiomancer.class));
         cards.add(new SetCardInfo("Master of Etherium", 92, Rarity.RARE, mage.cards.m.MasterOfEtherium.class));
         cards.add(new SetCardInfo("Mentor of the Meek", 69, Rarity.RARE, mage.cards.m.MentorOfTheMeek.class));
@@ -261,6 +264,7 @@ public class Commander2016 extends ExpansionSet {
         cards.add(new SetCardInfo("Orzhov Advokist", 3, Rarity.UNCOMMON, mage.cards.o.OrzhovAdvokist.class));
         cards.add(new SetCardInfo("Orzhov Basilica", 314, Rarity.UNCOMMON, mage.cards.o.OrzhovBasilica.class));
         cards.add(new SetCardInfo("Orzhov Signet", 266, Rarity.COMMON, mage.cards.o.OrzhovSignet.class));
+        cards.add(new SetCardInfo("Parting Thoughts", 15, Rarity.UNCOMMON, mage.cards.p.PartingThoughts.class));
         cards.add(new SetCardInfo("Past in Flames", 131, Rarity.MYTHIC, mage.cards.p.PastInFlames.class));
         cards.add(new SetCardInfo("Phyrexian Rebirth", 73, Rarity.RARE, mage.cards.p.PhyrexianRebirth.class));
         cards.add(new SetCardInfo("Plains", 337, Rarity.LAND, mage.cards.basiclands.Plains.class, new CardGraphicInfo(null, true)));
@@ -304,6 +308,7 @@ public class Commander2016 extends ExpansionSet {
         cards.add(new SetCardInfo("Seeds of Renewal", 24, Rarity.RARE, mage.cards.s.SeedsOfRenewal.class));
         cards.add(new SetCardInfo("Selesnya Guildmage", 235, Rarity.UNCOMMON, mage.cards.s.SelesnyaGuildmage.class));
         cards.add(new SetCardInfo("Selesnya Sanctuary", 324, Rarity.UNCOMMON, mage.cards.s.SelesnyaSanctuary.class));
+        cards.add(new SetCardInfo("Selfless Squire", 4, Rarity.RARE, mage.cards.s.SelflessSquire.class));
         cards.add(new SetCardInfo("Selvala, Explorer Returned", 220, Rarity.RARE, mage.cards.s.SelvalaExplorerReturned.class));
         cards.add(new SetCardInfo("Shadowblood Ridge", 325, Rarity.RARE, mage.cards.s.ShadowbloodRidge.class));
         cards.add(new SetCardInfo("Shamanic Revelation", 167, Rarity.RARE, mage.cards.s.ShamanicRevelation.class));
