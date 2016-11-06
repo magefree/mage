@@ -51,7 +51,7 @@ public class PortalSecondAge extends ExpansionSet {
     }
 
     private PortalSecondAge() {
-        super("Portal Second Age", "PO2", ExpansionSet.buildDate(1998, 6, 24), SetType.SUPPLEMENTAL);
+        super("Portal Second Age", "P02", ExpansionSet.buildDate(1998, 6, 24), SetType.SUPPLEMENTAL);
         this.blockName = "Beginner";
         this.hasBasicLands = true;
         this.hasBoosters = true;
