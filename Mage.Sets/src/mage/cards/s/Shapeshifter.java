@@ -30,44 +30,48 @@ package mage.cards.s;
 import java.util.HashSet;
 import java.util.UUID;
 import mage.MageInt;
+import mage.MageObject;
 import mage.abilities.Ability;
+import mage.abilities.common.AsEntersBattlefieldAbility;
 import mage.abilities.common.BeginningOfUpkeepTriggeredAbility;
-import mage.abilities.common.EntersBattlefieldAbility;
 import mage.abilities.common.SimpleStaticAbility;
+import mage.abilities.effects.ContinuousEffectImpl;
 import mage.abilities.effects.OneShotEffect;
-import mage.abilities.effects.common.continuous.SetPowerToughnessSourceEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.choices.Choice;
 import mage.choices.ChoiceImpl;
 import mage.constants.CardType;
 import mage.constants.Duration;
+import mage.constants.Layer;
+import mage.constants.SubLayer;
 import mage.constants.Outcome;
 import mage.constants.TargetController;
 import mage.constants.Zone;
 import mage.game.Game;
+import mage.game.permanent.Permanent;
 import mage.players.Player;
+import mage.util.CardUtil;
 
 /**
  *
- * @author MarcoMarin
+ * @author MarcoMarin / HCrescent
  */
 public class Shapeshifter extends CardImpl {
 
-    public Integer lastChosenNumber = 0;
-    
     public Shapeshifter(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.ARTIFACT,CardType.CREATURE},"{6}");
+        super(ownerId, setInfo, new CardType[]{CardType.ARTIFACT, CardType.CREATURE}, "{6}");
+        
         this.subtype.add("Shapeshifter");
         this.power = new MageInt(0);
         this.toughness = new MageInt(7);
 
         // As Shapeshifter enters the battlefield, choose a number between 0 and 7.
-        this.addAbility(new EntersBattlefieldAbility(new ShapeshifterEffect()));
+        this.addAbility(new AsEntersBattlefieldAbility(new ShapeshifterEffect()));
         // At the beginning of your upkeep, you may choose a number between 0 and 7.
         this.addAbility(new BeginningOfUpkeepTriggeredAbility(new ShapeshifterEffect(), TargetController.YOU, true));        
         // Shapeshifter's power is equal to the last chosen number and its toughness is equal to 7 minus that number.
-        this.addAbility(new SimpleStaticAbility(Zone.ALL, new SetPowerToughnessSourceEffect(lastChosenNumber, 7-lastChosenNumber, Duration.EndOfGame)));
+        this.addAbility(new SimpleStaticAbility(Zone.ALL, new ShapeshifterContinuousEffect()));
     }
 
     public Shapeshifter(final Shapeshifter card) {
@@ -80,47 +84,76 @@ public class Shapeshifter extends CardImpl {
     }
 }
 class ShapeshifterEffect extends OneShotEffect {
-    ShapeshifterEffect() {
-        super(Outcome.Damage);
-        staticText = "Name a nonland card and choose a number greater than 0. Target player reveals his or her library. If that library contains exactly the chosen number of the named card, {this} deals 8 damage to that player. Then that player shuffles his or her library";
+    
+    public ShapeshifterEffect() {
+        super(Outcome.Benefit);
+        this.staticText = "Choose a number between 0 and 7.";
     }
-
-    ShapeshifterEffect(final ShapeshifterEffect effect) {
+    
+    public ShapeshifterEffect(final ShapeshifterEffect effect) {
         super(effect);
     }
-
-    @Override
-    public boolean apply(Game game, Ability source) {
-        Player playerControls = game.getPlayer(source.getControllerId());
-        if (playerControls != null) {
-            
-            Choice numberChoice = new ChoiceImpl();
-            numberChoice.setMessage("Choose a number beween 0 and 7");
-            HashSet<String> numbers = new HashSet<String>();
-            for (int i = 1; i <= 7; i++) {
-                numbers.add(Integer.toString(i));
-            }
-            numberChoice.setChoices(numbers);
-
-            while (!playerControls.choose(Outcome.Neutral, numberChoice, game)) {
-                if (!playerControls.canRespond()) {
-                    return false;
-                }
-            }
-            game.informPlayers("Shapeshifter, chosen number: [" + numberChoice.getChoice() + "]");
-            
-            Shapeshifter shapeShifter = (Shapeshifter) game.getCard(source.getSourceId());
-            if(shapeShifter!=null){
-                shapeShifter.lastChosenNumber = Integer.parseInt(numberChoice.getChoice());
-                return true;            
-            }
-        }
-        return false;
-    }
-
+    
     @Override
     public ShapeshifterEffect copy() {
         return new ShapeshifterEffect(this);
     }
-
+    
+    @Override
+    public boolean apply(Game game, Ability source) {
+        Player Controller = game.getPlayer(source.getControllerId());
+        MageObject mageObject = game.getPermanentEntering(source.getSourceId());
+        if (mageObject == null) {
+            mageObject = game.getPermanent(source.getSourceId());
+        }
+        if (Controller != null) {           
+            Choice numberChoice = new ChoiceImpl();
+            numberChoice.setMessage("Choose a number beween 0 and 7");
+            HashSet<String> numbers = new HashSet<>();
+            for (int i = 0; i <= 7; i++) {
+                numbers.add(Integer.toString(i));
+            }
+            numberChoice.setChoices(numbers);
+            while (!Controller.choose(Outcome.Neutral, numberChoice, game)) {
+                if (!Controller.canRespond()) {
+                    return false;
+                }
+            }
+            game.informPlayers("Shapeshifter, chosen number: [" + numberChoice.getChoice() + "]");
+            game.getState().setValue(source.getSourceId().toString() + "_Shapeshifter", numberChoice.getChoice());
+                if (mageObject instanceof Permanent) {
+                    ((Permanent) mageObject).addInfo("lastChosenNumber", CardUtil.addToolTipMarkTags("Last chosen number: " + numberChoice.getChoice()), game);
+                }
+        }
+        return false;
+    }
+}
+class ShapeshifterContinuousEffect extends ContinuousEffectImpl {
+    
+    public ShapeshifterContinuousEffect() {
+        super(Duration.WhileOnBattlefield, Layer.PTChangingEffects_7, SubLayer.CharacteristicDefining_7a, Outcome.BoostCreature);
+        staticText = "{this}'s power is equal to the last chosen number and its toughness is equal to 7 minus that number.";
+    }
+    
+    public ShapeshifterContinuousEffect(final ShapeshifterContinuousEffect effect) {
+        super(effect);
+    }
+    
+    @Override
+    public ShapeshifterContinuousEffect copy() {
+        return new ShapeshifterContinuousEffect(this);
+    }
+    
+    @Override
+    public boolean apply(Game game, Ability source) {
+        Permanent permanent = game.getPermanent(source.getSourceId());
+            if(permanent!=null){
+                String lastChosen = (String) game.getState().getValue(source.getSourceId().toString() + "_Shapeshifter");
+                int lastChosenNumber = Integer.parseInt(lastChosen);
+                permanent.getPower().modifyBaseValue(lastChosenNumber);
+                permanent.getToughness().modifyBaseValue(7 - lastChosenNumber);
+                return true;
+            }
+        return false;
+    }
 }
