@@ -114,6 +114,7 @@ public class Commander2016 extends ExpansionSet {
         cards.add(new SetCardInfo("Corpsejack Menace", 190, Rarity.RARE, mage.cards.c.CorpsejackMenace.class));
         cards.add(new SetCardInfo("Crackling Doom", 191, Rarity.RARE, mage.cards.c.CracklingDoom.class));
         cards.add(new SetCardInfo("Cranial Plating", 249, Rarity.UNCOMMON, mage.cards.c.CranialPlating.class));
+        cards.add(new SetCardInfo("Cruel Entertainment", 11, Rarity.RARE, mage.cards.c.CruelEntertainment.class));
         cards.add(new SetCardInfo("Crumbling Necropolis", 287, Rarity.UNCOMMON, mage.cards.c.CrumblingNecropolis.class));
         cards.add(new SetCardInfo("Crystalline Crawler", 54, Rarity.RARE, mage.cards.c.CrystallineCrawler.class));
         cards.add(new SetCardInfo("Cultivate", 146, Rarity.COMMON, mage.cards.c.Cultivate.class));
@@ -289,6 +290,7 @@ public class Commander2016 extends ExpansionSet {
         cards.add(new SetCardInfo("Reliquary Tower", 316, Rarity.UNCOMMON, mage.cards.r.ReliquaryTower.class));
         cards.add(new SetCardInfo("Reveillark", 74, Rarity.RARE, mage.cards.r.Reveillark.class));
         cards.add(new SetCardInfo("Reverse the Sands", 75, Rarity.RARE, mage.cards.r.ReverseTheSands.class));
+        cards.add(new SetCardInfo("Reyhan, Last of the Abzan", 40, Rarity.RARE, mage.cards.r.ReyhanLastOfTheAbzan.class));
         cards.add(new SetCardInfo("Rites of Flourishing", 163, Rarity.RARE, mage.cards.r.RitesOfFlourishing.class));
         cards.add(new SetCardInfo("Rootbound Crag", 317, Rarity.RARE, mage.cards.r.RootboundCrag.class));
         cards.add(new SetCardInfo("Rubblehulk", 219, Rarity.RARE, mage.cards.r.Rubblehulk.class));

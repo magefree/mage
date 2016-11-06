@@ -24,26 +24,24 @@
 * The views and conclusions contained in the software and documentation are those of the
 * authors and should not be interpreted as representing official policies, either expressed
 * or implied, of BetaSteward_at_googlemail.com.
-*/
+ */
 package mage.abilities.effects.common.turn;
 
 import java.util.UUID;
-import mage.constants.Outcome;
 import mage.abilities.Ability;
 import mage.abilities.effects.OneShotEffect;
+import mage.constants.Outcome;
 import mage.game.Game;
 import mage.game.turn.TurnMod;
-
-
 
 /**
  * @author nantuko
  */
-public class ControlTargetPlayerNextTurnEffect extends OneShotEffect  {
+public class ControlTargetPlayerNextTurnEffect extends OneShotEffect {
 
     public ControlTargetPlayerNextTurnEffect() {
         super(Outcome.Benefit);
-        staticText = "You control target player during that player's next turn. (You see all cards that player could see and make all decisions for the player.)";
+        staticText = "You control target player during that player's next turn. <i>(You see all cards that player could see and make all decisions for the player.)</i>";
     }
 
     public ControlTargetPlayerNextTurnEffect(ControlTargetPlayerNextTurnEffect effect) {
