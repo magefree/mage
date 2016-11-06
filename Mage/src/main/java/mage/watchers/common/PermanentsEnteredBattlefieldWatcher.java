@@ -22,6 +22,7 @@ import mage.watchers.Watcher;
 public class PermanentsEnteredBattlefieldWatcher extends Watcher {
 
     private final HashMap<UUID, List<Permanent>> enteringBattlefield = new HashMap<>();
+    private final HashMap<UUID, List<Permanent>> enteringBattlefieldLastTurn = new HashMap<>();
 
     public PermanentsEnteredBattlefieldWatcher() {
         super(PermanentsEnteredBattlefieldWatcher.class.getName(), WatcherScope.GAME);
@@ -29,6 +30,8 @@ public class PermanentsEnteredBattlefieldWatcher extends Watcher {
 
     public PermanentsEnteredBattlefieldWatcher(final PermanentsEnteredBattlefieldWatcher watcher) {
         super(watcher);
+        this.enteringBattlefield.putAll(watcher.enteringBattlefield);
+        this.enteringBattlefieldLastTurn.putAll(watcher.enteringBattlefieldLastTurn);
     }
 
     @Override
@@ -56,10 +59,22 @@ public class PermanentsEnteredBattlefieldWatcher extends Watcher {
     @Override
     public void reset() {
         super.reset();
+        enteringBattlefieldLastTurn.clear();
+        enteringBattlefieldLastTurn.putAll(enteringBattlefield);
         enteringBattlefield.clear();
     }
 
     public List<Permanent> getThisTurnEnteringPermanents(UUID playerId) {
         return enteringBattlefield.get(playerId);
+    }
+
+    public boolean AnotherCreatureEnteredBattlefieldUnderPlayersControlLastTurn(Permanent sourcePermanent, Game game) {
+        for (Permanent permanent : enteringBattlefield.get(sourcePermanent.getControllerId())) {
+            if (!permanent.getId().equals(sourcePermanent.getId())
+                    || permanent.getZoneChangeCounter(game) != sourcePermanent.getZoneChangeCounter(game)) {
+                return true;
+            }
+        }
+        return false;
     }
 }
