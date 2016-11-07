@@ -45,6 +45,7 @@ import java.util.List;
 import java.util.Set;
 import java.util.TreeSet;
 import java.util.concurrent.Callable;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.SetType;
 import mage.util.RandomUtil;
@@ -61,9 +62,9 @@ public enum CardRepository {
     private static final String JDBC_URL = "jdbc:h2:file:./db/cards.h2;AUTO_SERVER=TRUE";
     private static final String VERSION_ENTITY_NAME = "card";
     // raise this if db structure was changed
-    private static final long CARD_DB_VERSION = 47;
+    private static final long CARD_DB_VERSION = 48;
     // raise this if new cards were added to the server
-    private static final long CARD_CONTENT_VERSION = 61;
+    private static final long CARD_CONTENT_VERSION = 65;
 
     private Dao<CardInfo, Object> cardDao;
     private Set<String> classNames;
@@ -124,6 +125,23 @@ public enum CardRepository {
                 }
             }
             return classNames.contains(className);
+        } catch (SQLException ex) {
+        }
+        return false;
+    }
+
+    public boolean cardExists(CardSetInfo className) {
+        try {
+            if (classNames == null) {
+                QueryBuilder<CardInfo, Object> qb = cardDao.queryBuilder();
+                qb.distinct().selectColumns("className").where().isNotNull("className");
+                List<CardInfo> results = cardDao.query(qb.prepare());
+                classNames = new TreeSet<>();
+                for (CardInfo card : results) {
+                    classNames.add(card.getClassName());
+                }
+            }
+            return classNames.contains(className.getName());
         } catch (SQLException ex) {
         }
         return false;
@@ -444,6 +462,15 @@ public enum CardRepository {
 
         } catch (SQLException ex) {
 
+        }
+    }
+
+    public void openDB() {
+        try {
+            ConnectionSource connectionSource = new JdbcConnectionSource(JDBC_URL);
+            cardDao = DaoManager.createDao(connectionSource, CardInfo.class);
+        } catch (SQLException ex) {
+            Logger.getLogger(CardRepository.class).error("Error opening card repository - ", ex);
         }
     }
 }

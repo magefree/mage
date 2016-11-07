@@ -41,7 +41,7 @@ public class SpiritToken extends Token {
     final static private List<String> tokenImageSets = new ArrayList<>();
 
     static {
-        tokenImageSets.addAll(Arrays.asList("CHK", "EMA"));
+        tokenImageSets.addAll(Arrays.asList("CHK", "EMA", "C16"));
     }
 
     public SpiritToken() {
@@ -69,6 +69,9 @@ public class SpiritToken extends Token {
     public void setExpansionSetCodeForImage(String code) {
         super.setExpansionSetCodeForImage(code);
         if (getOriginalExpansionSetCode() != null && getOriginalExpansionSetCode().equals("EMA")) {
+            setTokenType(1);
+        }
+        if (getOriginalExpansionSetCode() != null && getOriginalExpansionSetCode().equals("C16")) {
             setTokenType(1);
         }
     }

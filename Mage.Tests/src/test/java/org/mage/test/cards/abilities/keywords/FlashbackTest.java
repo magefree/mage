@@ -192,7 +192,7 @@ public class FlashbackTest extends CardTestPlayerBase {
         addCard(Zone.BATTLEFIELD, playerA, "Forest", 1);
         addCard(Zone.HAND, playerA, "Snapcaster Mage", 1);
 
-        // Converge - Put a 1/1 white Kor Ally creature token onto the battlefield for each color of mana spent to cast Unified Front.
+        // Converge - Create a 1/1 white Kor Ally creature token for each color of mana spent to cast Unified Front.
         addCard(Zone.GRAVEYARD, playerA, "Unified Front"); // {3}{W}
 
         activateManaAbility(1, PhaseStep.PRECOMBAT_MAIN, playerA, "{T}: Add {W}");
@@ -364,6 +364,31 @@ public class FlashbackTest extends CardTestPlayerBase {
         assertTappedCount("Mountain", true, 2);
         assertTappedCount("Island", true, 2);
         assertTappedCount("Swamp", true, 2);
+
+    }
+
+    @Test
+    public void testSnapcasterMageWithBuyback() {
+        addCard(Zone.BATTLEFIELD, playerA, "Island", 8);
+        addCard(Zone.HAND, playerA, "Snapcaster Mage", 1);
+
+        // Buyback {5}(You may pay an additional {5} as you cast this spell. If you do, put this card into your hand as it resolves.)
+        // Draw a card.
+        addCard(Zone.GRAVEYARD, playerA, "Whispers of the Muse", 1); // {U}
+
+        // When Snapcaster Mage enters the battlefield, target instant or sorcery card in your graveyard gains flashback until end of turn. The flashback cost is equal to its mana cost.
+        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Snapcaster Mage");
+        setChoice(playerA, "Whispers of the Muse");
+
+        activateAbility(1, PhaseStep.POSTCOMBAT_MAIN, playerA, "Flashback"); // Flashback Whispers of the Muse
+        setChoice(playerA, "Yes");
+        setStopAt(1, PhaseStep.END_TURN);
+        execute();
+
+        assertPermanentCount(playerA, "Snapcaster Mage", 1);
+        assertGraveyardCount(playerA, "Whispers of the Muse", 0);
+        assertHandCount(playerA, 1);
+        assertExileCount("Whispers of the Muse", 1);
 
     }
 

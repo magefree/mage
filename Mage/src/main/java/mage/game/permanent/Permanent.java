@@ -37,7 +37,6 @@ import mage.abilities.Ability;
 import mage.cards.Card;
 import mage.constants.Rarity;
 import mage.constants.Zone;
-import mage.counters.Counters;
 import mage.game.Controllable;
 import mage.game.Game;
 import mage.game.GameState;
@@ -163,9 +162,6 @@ public interface Permanent extends Card, Controllable {
     String getValue(GameState state);
 
     @Deprecated
-    void addAbility(Ability ability);
-
-    @Deprecated
     void addAbility(Ability ability, Game game);
 
     void addAbility(Ability ability, UUID sourceId, Game game);
@@ -251,10 +247,11 @@ public interface Permanent extends Card, Controllable {
     /**
      * Checks by restriction effects if the permanent can transform
      *
+     * @param ability the ability that causes the transform
      * @param game
      * @return true - permanent can transform
      */
-    boolean canTransform(Game game);
+    boolean canTransform(Ability ability, Game game);
 
     boolean removeFromCombat(Game game);
 

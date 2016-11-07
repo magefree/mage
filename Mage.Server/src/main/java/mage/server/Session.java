@@ -27,6 +27,7 @@
  */
 package mage.server;
 
+import java.util.Calendar;
 import java.util.Date;
 import java.util.LinkedList;
 import java.util.List;
@@ -42,6 +43,7 @@ import mage.players.net.UserData;
 import mage.players.net.UserGroup;
 import mage.server.game.GamesRoomManager;
 import mage.server.util.ConfigSettings;
+import mage.server.util.SystemUtil;
 import org.apache.log4j.Logger;
 import org.jboss.remoting.callback.AsynchInvokerCallbackHandler;
 import org.jboss.remoting.callback.Callback;
@@ -180,14 +182,27 @@ public class Session {
 
     public String connectUserHandling(String userName, String password) throws MageException {
         this.isAdmin = false;
+        AuthorizedUser authorizedUser = null;
         if (ConfigSettings.getInstance().isAuthenticationActivated()) {
-            AuthorizedUser authorizedUser = AuthorizedUserRepository.instance.getByName(userName);
+            authorizedUser = AuthorizedUserRepository.instance.getByName(userName);
             if (authorizedUser == null || !authorizedUser.doCredentialsMatch(userName, password)) {
                 return "Wrong username or password. In case you haven't, please register your account first.";
             }
+            if (!authorizedUser.active) {
+                return "Your profile is deactivated, you can't sign on.";
+            }
+            if (authorizedUser.lockedUntil != null) {
+                if (authorizedUser.lockedUntil.compareTo(Calendar.getInstance().getTime()) > 0) {
+                    return "Your profile is deactivated until " + SystemUtil.dateFormat.format(authorizedUser.lockedUntil);
+                } else {
+                    User user = UserManager.getInstance().createUser(userName, host, authorizedUser);
+                    if (user != null && authorizedUser.lockedUntil != null) {
+                        user.setLockedUntil(null);
+                    }
+                }
+            }
         }
-
-        User user = UserManager.getInstance().createUser(userName, host);
+        User user = UserManager.getInstance().createUser(userName, host, authorizedUser);
         boolean reconnect = false;
         if (user == null) {  // user already exists
             user = UserManager.getInstance().getUserByName(userName);
@@ -223,7 +238,7 @@ public class Session {
 
     public void connectAdmin() {
         this.isAdmin = true;
-        User user = UserManager.getInstance().createUser("Admin", host);
+        User user = UserManager.getInstance().createUser("Admin", host, null);
         if (user == null) {
             user = UserManager.getInstance().getUserByName("Admin");
         }
@@ -236,9 +251,12 @@ public class Session {
         this.userId = user.getId();
     }
 
-    public boolean setUserData(String userName, UserData userData) {
+    public boolean setUserData(String userName, UserData userData, String clientVersion) {
         User user = UserManager.getInstance().getUserByName(userName);
         if (user != null) {
+            if (clientVersion != null) {
+                user.setClientVersion(clientVersion);
+            }
             if (user.getUserData() == null || user.getUserData().getGroupId() == UserGroup.DEFAULT.getGroupId()) {
                 user.setUserData(userData);
             } else {
@@ -284,7 +302,7 @@ public class Session {
                 lockSet = true;
                 logger.debug("SESSION LOCK SET sessionId: " + sessionId);
             } else {
-                logger.error("CAN'T GET LOCK - userId: " + userId);
+                logger.error("CAN'T GET LOCK - userId: " + userId + " hold count: " + lock.getHoldCount());
             }
             User user = UserManager.getInstance().getUser(userId);
             if (user == null || !user.isConnected()) {

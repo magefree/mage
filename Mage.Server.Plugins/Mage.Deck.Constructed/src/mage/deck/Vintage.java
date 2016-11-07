@@ -27,7 +27,10 @@
  */
 package mage.deck;
 
+import mage.cards.ExpansionSet;
+import mage.cards.Sets;
 import mage.cards.decks.Constructed;
+import mage.constants.SetType;
 
 /**
  *
@@ -37,7 +40,11 @@ public class Vintage extends Constructed {
 
     public Vintage() {
         super("Constructed - Vintage");
-
+        for (ExpansionSet set : Sets.getInstance().values()) {
+            if (set.getSetType() != SetType.CUSTOM_SET) {
+                setCodes.add(set.getCode());
+            }
+        }
         banned.add("Advantageous Proclamation");
         banned.add("Amulet of Quoz");
         banned.add("Backup Plan");

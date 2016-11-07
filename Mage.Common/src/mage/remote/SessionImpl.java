@@ -27,6 +27,12 @@
  */
 package mage.remote;
 
+import java.io.IOException;
+import java.lang.reflect.UndeclaredThrowableException;
+import java.net.*;
+import java.util.*;
+import java.util.concurrent.TimeUnit;
+import javax.swing.JOptionPane;
 import mage.MageException;
 import mage.cards.decks.DeckCardLists;
 import mage.cards.decks.InvalidDeckException;
@@ -55,12 +61,6 @@ import org.jboss.remoting.callback.InvokerCallbackHandler;
 import org.jboss.remoting.transport.bisocket.Bisocket;
 import org.jboss.remoting.transport.socket.SocketWrapper;
 import org.jboss.remoting.transporter.TransporterClient;
-
-import java.io.IOException;
-import java.lang.reflect.UndeclaredThrowableException;
-import java.net.*;
-import java.util.*;
-import java.util.concurrent.TimeUnit;
 
 /**
  *
@@ -103,6 +103,7 @@ public class SessionImpl implements Session {
     // intended to be used with handleRemotingTaskExceptions for sharing the common exception
     // handling.
     public interface RemotingTask {
+
         public boolean run() throws Throwable;
     }
 
@@ -127,8 +128,8 @@ public class SessionImpl implements Session {
             } else if (cause instanceof NoSuchMethodException) {
                 // NoSuchMethodException is thrown on an invocation of an unknow JBoss remoting
                 // method, so it's likely to be because of a version incompatibility.
-                addMessage = "The following method is not available in the server, probably the " +
-                        "server version is not compatible to the client: " + cause.getMessage();
+                addMessage = "The following method is not available in the server, probably the "
+                        + "server version is not compatible to the client: " + cause.getMessage();
             }
             if (addMessage.isEmpty()) {
                 logger.fatal("", ex);
@@ -213,33 +214,34 @@ public class SessionImpl implements Session {
 
     @Override
     public synchronized boolean connect(final Connection connection) {
-        return establishJBossRemotingConnection(connection) && handleRemotingTaskExceptions(new RemotingTask() {
-            @Override
-            public boolean run() throws Throwable {
-                logger.info("Trying to log-in as " + getUserName() + " to XMAGE server at " + connection.getHost() + ":" + connection.getPort());
-                boolean registerResult;
-                if (connection.getAdminPassword() == null) {
-                    // for backward compatibility. don't remove twice call - first one does nothing but for version checking
-                    registerResult = server.connectUser(connection.getUsername(), connection.getPassword(), sessionId, client.getVersion());
-                    if (registerResult) {
-                        server.setUserData(connection.getUsername(), sessionId, connection.getUserData());
+        return establishJBossRemotingConnection(connection)
+                && handleRemotingTaskExceptions(new RemotingTask() {
+                    @Override
+                    public boolean run() throws Throwable {
+                        logger.info("Trying to log-in as " + getUserName() + " to XMAGE server at " + connection.getHost() + ":" + connection.getPort());
+                        boolean registerResult;
+                        if (connection.getAdminPassword() == null) {
+                            // for backward compatibility. don't remove twice call - first one does nothing but for version checking
+                            registerResult = server.connectUser(connection.getUsername(), connection.getPassword(), sessionId, client.getVersion());
+                            if (registerResult) {
+                                server.setUserData(connection.getUsername(), sessionId, connection.getUserData(), client.getVersion().toString());
+                            }
+                        } else {
+                            registerResult = server.connectAdmin(connection.getAdminPassword(), sessionId, client.getVersion());
+                        }
+                        if (registerResult) {
+                            serverState = server.getServerState();
+                            if (!connection.getUsername().equals("Admin")) {
+                                updateDatabase(connection.isForceDBComparison(), serverState);
+                            }
+                            logger.info("Logged-in as " + getUserName() + " to MAGE server at " + connection.getHost() + ":" + connection.getPort());
+                            client.connected(getUserName() + "@" + connection.getHost() + ":" + connection.getPort() + " ");
+                            return true;
+                        }
+                        disconnect(false);
+                        return false;
                     }
-                } else {
-                    registerResult = server.connectAdmin(connection.getAdminPassword(), sessionId, client.getVersion());
-                }
-                if (registerResult) {
-                    serverState = server.getServerState();
-                    if (!connection.getUsername().equals("Admin")) {
-                        updateDatabase(connection.isForceDBComparison(), serverState);
-                    }
-                    logger.info("Logged-in as " + getUserName() + " to MAGE server at " + connection.getHost() + ":" + connection.getPort());
-                    client.connected(getUserName() + "@" + connection.getHost() + ":" + connection.getPort() + " ");
-                    return true;
-                }
-                disconnect(false);
-                return false;
-            }
-        });
+                });
     }
 
     @Override
@@ -341,24 +343,25 @@ public class SessionImpl implements Session {
 
                 /**
                  * I'll explain the meaning of "secondaryBindPort" and
-                 * "secondaryConnectPort", and maybe that will help. The Remoting
-                 * bisocket transport creates two ServerSockets on the server. The
-                 * "primary" ServerSocket is used to create connections used for
-                 * ordinary invocations, e.g., a request to create a JMS consumer,
-                 * and the "secondary" ServerSocket is used to create "control"
-                 * connections for internal Remoting messages. The port for the
-                 * primary ServerSocket is configured by the "serverBindPort"
-                 * parameter, and the port for the secondary ServerSocket is, by
-                 * default, chosen randomly. The "secondaryBindPort" parameter can
-                 * be used to assign a specific port to the secondary ServerSocket.
-                 * Now, if there is a translating firewall between the client and
-                 * server, the client should be given the value of the port that is
+                 * "secondaryConnectPort", and maybe that will help. The
+                 * Remoting bisocket transport creates two ServerSockets on the
+                 * server. The "primary" ServerSocket is used to create
+                 * connections used for ordinary invocations, e.g., a request to
+                 * create a JMS consumer, and the "secondary" ServerSocket is
+                 * used to create "control" connections for internal Remoting
+                 * messages. The port for the primary ServerSocket is configured
+                 * by the "serverBindPort" parameter, and the port for the
+                 * secondary ServerSocket is, by default, chosen randomly. The
+                 * "secondaryBindPort" parameter can be used to assign a
+                 * specific port to the secondary ServerSocket. Now, if there is
+                 * a translating firewall between the client and server, the
+                 * client should be given the value of the port that is
                  * translated to the actual binding port of the secondary
                  * ServerSocket. For example, your configuration will tell the
-                 * secondary ServerSocket to bind to port 14000, and it will tell
-                 * the client to connect to port 14001. It assumes that there is a
-                 * firewall which will translate 14001 to 14000. Apparently, that's
-                 * not happening.
+                 * secondary ServerSocket to bind to port 14000, and it will
+                 * tell the client to connect to port 14001. It assumes that
+                 * there is a firewall which will translate 14001 to 14000.
+                 * Apparently, that's not happening.
                  */
                 // secondaryBindPort - the port to which the secondary server socket is to be bound. By default, an arbitrary port is selected.
                 // secondaryConnectPort - the port clients are to use to connect to the secondary server socket.
@@ -487,7 +490,7 @@ public class SessionImpl implements Session {
             sessionState = SessionState.DISCONNECTED;
             logger.info("Disconnected ... ");
             if (askForReconnect) {
-                client.showError("Network error.  You have been disconnected");
+                client.showError("Network error.  You have been disconnected from " + connection.getHost());
             }
             client.disconnected(askForReconnect); // MageFrame with check to reconnect
             pingTime.clear();
@@ -674,6 +677,11 @@ public class SessionImpl implements Session {
     public boolean joinTable(UUID roomId, UUID tableId, String playerName, String playerType, int skill, DeckCardLists deckList, String password) {
         try {
             if (isConnected()) {
+                // Workaround to fix Can't join table problem
+                if (deckList != null) {
+                    deckList.setCardLayout(null);
+                    deckList.setSideboardLayout(null);
+                }
                 return server.joinTable(sessionId, roomId, tableId, playerName, playerType, skill, deckList, password);
             }
         } catch (InvalidDeckException iex) {
@@ -692,6 +700,11 @@ public class SessionImpl implements Session {
     public boolean joinTournamentTable(UUID roomId, UUID tableId, String playerName, String playerType, int skill, DeckCardLists deckList, String password) {
         try {
             if (isConnected()) {
+                // Workaround to fix Can't join table problem
+                if (deckList != null) {
+                    deckList.setCardLayout(null);
+                    deckList.setSideboardLayout(null);
+                }
                 return server.joinTournamentTable(sessionId, roomId, tableId, playerName, playerType, skill, deckList, password);
             }
         } catch (GameException ex) {
@@ -1174,6 +1187,11 @@ public class SessionImpl implements Session {
     public boolean submitDeck(UUID tableId, DeckCardLists deck) {
         try {
             if (isConnected()) {
+                // Workaround to fix Can't join table problem
+                if (deck != null) {
+                    deck.setCardLayout(null);
+                    deck.setSideboardLayout(null);
+                }
                 return server.submitDeck(sessionId, tableId, deck);
             }
         } catch (GameException ex) {
@@ -1190,6 +1208,10 @@ public class SessionImpl implements Session {
     public boolean updateDeck(UUID tableId, DeckCardLists deck) {
         try {
             if (isConnected()) {
+                if (deck != null) {
+                    deck.setCardLayout(null);
+                    deck.setSideboardLayout(null);
+                }
                 server.updateDeck(sessionId, tableId, deck);
                 return true;
             }
@@ -1412,9 +1434,66 @@ public class SessionImpl implements Session {
     @Override
     public boolean endUserSession(String userSessionId) {
         try {
-            if (isConnected()) {
-                server.endUserSession(sessionId, userSessionId);
-                return true;
+            if (JOptionPane.showConfirmDialog(null, "Are you sure you mean to mute userSessionId " + userSessionId + "?", "WARNING",
+                    JOptionPane.YES_NO_OPTION) == JOptionPane.YES_OPTION) {
+                if (isConnected()) {
+                    server.endUserSession(sessionId, userSessionId);
+                    return true;
+                }
+            }
+        } catch (MageException ex) {
+            handleMageException(ex);
+        } catch (Throwable t) {
+            handleThrowable(t);
+        }
+        return false;
+    }
+
+    @Override
+    public boolean muteUserChat(String userName, long durationMinutes) {
+        try {
+            if (JOptionPane.showConfirmDialog(null, "Are you sure you mean to mute user " + userName + " for " + durationMinutes + " minutes?", "WARNING",
+                    JOptionPane.YES_NO_OPTION) == JOptionPane.YES_OPTION) {
+                if (isConnected()) {
+                    server.muteUser(sessionId, userName, durationMinutes);
+                    return true;
+                }
+            }
+        } catch (MageException ex) {
+            handleMageException(ex);
+        } catch (Throwable t) {
+            handleThrowable(t);
+        }
+        return false;
+    }
+
+    @Override
+    public boolean toggleActivation(String userName) {
+        try {
+            if (JOptionPane.showConfirmDialog(null, "Are you sure you mean to activate/deactivate user: " + userName + " for?", "WARNING",
+                    JOptionPane.YES_NO_OPTION) == JOptionPane.YES_OPTION) {
+                if (isConnected()) {
+                    server.toggleActivation(sessionId, userName);
+                    return true;
+                }
+            }
+        } catch (MageException ex) {
+            handleMageException(ex);
+        } catch (Throwable t) {
+            handleThrowable(t);
+        }
+        return false;
+    }
+
+    @Override
+    public boolean lockUser(String userName, long durationMinute) {
+        try {
+            if (JOptionPane.showConfirmDialog(null, "Are you sure you mean to lock user: " + userName + " for " + durationMinute + " minutes?", "WARNING",
+                    JOptionPane.YES_NO_OPTION) == JOptionPane.YES_OPTION) {
+                if (isConnected()) {
+                    server.lockUser(sessionId, userName, durationMinute);
+                    return true;
+                }
             }
         } catch (MageException ex) {
             handleMageException(ex);
@@ -1456,17 +1535,17 @@ public class SessionImpl implements Session {
         String email = connection.getEmail();
         return email == null ? "" : email;
     }
- 
+
     private String getAuthToken() {
         String authToken = connection.getAuthToken();
         return authToken == null ? "" : authToken;
     }
- 
+
     @Override
     public boolean updatePreferencesForServer(UserData userData) {
         try {
             if (isConnected()) {
-                server.setUserData(connection.getUsername(), sessionId, userData);
+                server.setUserData(connection.getUsername(), sessionId, userData, null);
             }
             return true;
         } catch (MageException ex) {

@@ -1,4 +1,4 @@
-    /*
+/*
  * Copyright 2011 BetaSteward_at_googlemail.com. All rights reserved.
  *
  * Redistribution and use in source and binary forms, with or without modification, are
@@ -33,10 +33,14 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import mage.abilities.common.CanBeYourCommanderAbility;
+import mage.abilities.keyword.PartnerAbility;
 import mage.cards.Card;
+import mage.cards.ExpansionSet;
+import mage.cards.Sets;
+import mage.cards.decks.Constructed;
 import mage.cards.decks.Deck;
-import mage.cards.decks.DeckValidator;
 import mage.constants.CardType;
+import mage.constants.SetType;
 import mage.filter.FilterMana;
 import mage.util.CardUtil;
 
@@ -44,13 +48,17 @@ import mage.util.CardUtil;
  *
  * @author Plopman
  */
-public class Commander extends DeckValidator {
+public class Commander extends Constructed {
 
-    protected List<String> banned = new ArrayList<>();
     protected List<String> bannedCommander = new ArrayList<>();
 
     public Commander() {
         this("Commander");
+        for (ExpansionSet set : Sets.getInstance().values()) {
+            if (set.getSetType() != SetType.CUSTOM_SET) {
+                setCodes.add(set.getCode());
+            }
+        }
         banned.add("Ancestral Recall");
         banned.add("Balance");
         banned.add("Biorhythm");
@@ -98,9 +106,10 @@ public class Commander extends DeckValidator {
     @Override
     public boolean validate(Deck deck) {
         boolean valid = true;
+        FilterMana colorIdentity = new FilterMana();
 
-        if (deck.getCards().size() != 99) {
-            invalid.put("Deck", "Must contain 99 cards: has " + deck.getCards().size() + " cards");
+        if (deck.getCards().size() + deck.getSideboard().size() != 100) {
+            invalid.put("Deck", "Must contain 100 cards: has " + (deck.getCards().size() + deck.getSideboard().size()) + " cards");
             valid = false;
         }
 
@@ -125,47 +134,74 @@ public class Commander extends DeckValidator {
             }
         }
 
-        if (deck.getSideboard().size() == 1) {
-            Card commander = (Card) deck.getSideboard().toArray()[0];
-            if (commander == null) {
-                invalid.put("Commander", "Commander invalid ");
-                return false;
-            }
-            if ((commander.getCardType().contains(CardType.CREATURE) && commander.getSupertype().contains("Legendary"))
-                    || (commander.getCardType().contains(CardType.PLANESWALKER) && commander.getAbilities().contains(CanBeYourCommanderAbility.getInstance()))) {
-                if (!bannedCommander.contains(commander.getName())) {
-                    FilterMana color = CardUtil.getColorIdentity(commander);
-                    for (Card card : deck.getCards()) {
-                        if (!cardHasValidColor(color, card)) {
-                            invalid.put(card.getName(), "Invalid color (" + commander.getName() + ")");
-                            valid = false;
-                        }
-                    }
-                } else {
+        if (deck.getSideboard().size() < 1 || deck.getSideboard().size() > 2) {
+            invalid.put("Commander", "Sideboard must contain only the commander(s)");
+            valid = false;
+        } else {
+            for (Card commander : deck.getSideboard()) {
+                if (bannedCommander.contains(commander.getName())) {
                     invalid.put("Commander", "Commander banned (" + commander.getName() + ")");
                     valid = false;
                 }
-            } else {
-                invalid.put("Commander", "Commander invalid (" + commander.getName() + ")");
+                if ((!commander.getCardType().contains(CardType.CREATURE) || !commander.getSupertype().contains("Legendary"))
+                        && (!commander.getCardType().contains(CardType.PLANESWALKER) || !commander.getAbilities().contains(CanBeYourCommanderAbility.getInstance()))) {
+                    invalid.put("Commander", "Commander invalid (" + commander.getName() + ")");
+                    valid = false;
+                }
+                if (deck.getSideboard().size() == 2 && !commander.getAbilities().contains(PartnerAbility.getInstance())) {
+                    invalid.put("Commander", "Commander without Partner (" + commander.getName() + ")");
+                    valid = false;
+                }
+                FilterMana commanderColor = CardUtil.getColorIdentity(commander);
+                if (commanderColor.isWhite()) {
+                    colorIdentity.setWhite(true);
+                }
+                if (commanderColor.isBlue()) {
+                    colorIdentity.setBlue(true);
+                }
+                if (commanderColor.isBlack()) {
+                    colorIdentity.setBlack(true);
+                }
+                if (commanderColor.isRed()) {
+                    colorIdentity.setRed(true);
+                }
+                if (commanderColor.isGreen()) {
+                    colorIdentity.setGreen(true);
+                }
+            }
+        }
+        for (Card card : deck.getCards()) {
+            if (!cardHasValidColor(colorIdentity, card)) {
+                invalid.put(card.getName(), "Invalid color (" + colorIdentity.toString() + ")");
                 valid = false;
             }
-        } else {
-            invalid.put("Commander", "Sideboard must contain only the commander");
         }
-
+        for (Card card : deck.getCards()) {
+            if (!isSetAllowed(card.getExpansionSetCode())) {
+                if (!legalSets(card)) {
+                    invalid.put(card.getName(), "Not allowed Set: " + card.getExpansionSetCode());
+                    valid = false;
+                }
+            }
+        }
+        for (Card card : deck.getSideboard()) {
+            if (!isSetAllowed(card.getExpansionSetCode())) {
+                if (!legalSets(card)) {
+                    invalid.put(card.getName(), "Not allowed Set: " + card.getExpansionSetCode());
+                    valid = false;
+                }
+            }
+        }
         return valid;
     }
 
     public boolean cardHasValidColor(FilterMana commander, Card card) {
         FilterMana cardColor = CardUtil.getColorIdentity(card);
-        if (cardColor.isBlack() && !commander.isBlack()
+        return !(cardColor.isBlack() && !commander.isBlack()
                 || cardColor.isBlue() && !commander.isBlue()
                 || cardColor.isGreen() && !commander.isGreen()
                 || cardColor.isRed() && !commander.isRed()
-                || cardColor.isWhite() && !commander.isWhite()) {
-            return false;
-        }
-        return true;
+                || cardColor.isWhite() && !commander.isWhite());
     }
 
 }

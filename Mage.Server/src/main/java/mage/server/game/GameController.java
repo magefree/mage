@@ -166,11 +166,11 @@ public class GameController implements GameCallback {
                             updateGame();
                             break;
                         case INFO:
-                            ChatManager.getInstance().broadcast(chatId, "", event.getMessage(), MessageColor.BLACK, true, ChatMessage.MessageType.GAME);
+                            ChatManager.getInstance().broadcast(chatId, "", event.getMessage(), MessageColor.BLACK, true, ChatMessage.MessageType.GAME, null);
                             logger.trace(game.getId() + " " + event.getMessage());
                             break;
                         case STATUS:
-                            ChatManager.getInstance().broadcast(chatId, "", event.getMessage(), MessageColor.ORANGE, event.getWithTime(), ChatMessage.MessageType.GAME);
+                            ChatManager.getInstance().broadcast(chatId, "", event.getMessage(), MessageColor.ORANGE, event.getWithTime(), ChatMessage.MessageType.GAME, null);
                             logger.trace(game.getId() + " " + event.getMessage());
                             break;
                         case ERROR:
@@ -346,7 +346,7 @@ public class GameController implements GameCallback {
         }
         user.addGame(playerId, gameSession);
         logger.debug("Player " + player.getName() + " " + playerId + " has " + joinType + " gameId: " + game.getId());
-        ChatManager.getInstance().broadcast(chatId, "", game.getPlayer(playerId).getLogName() + " has " + joinType + " the game", MessageColor.ORANGE, true, MessageType.GAME);
+        ChatManager.getInstance().broadcast(chatId, "", game.getPlayer(playerId).getLogName() + " has " + joinType + " the game", MessageColor.ORANGE, true, MessageType.GAME, null);
         checkStart();
     }
 
@@ -372,7 +372,7 @@ public class GameController implements GameCallback {
                             GameManager.getInstance().joinGame(game.getId(), user.getId());
                             logger.debug("Player " + player.getName() + " (disconnected) has joined gameId: " + game.getId());
                         }
-                        ChatManager.getInstance().broadcast(chatId, player.getName(), user.getPingInfo() + " is pending to join the game", MessageColor.BLUE, true, ChatMessage.MessageType.STATUS);
+                        ChatManager.getInstance().broadcast(chatId, player.getName(), user.getPingInfo() + " is pending to join the game", MessageColor.BLUE, true, ChatMessage.MessageType.STATUS, null);
                         if (user.getSecondsDisconnected() > 240) {
                             // Cancel player join possibility lately after 4 minutes
                             logger.debug("Player " + player.getName() + " - canceled game (after 240 seconds) gameId: " + game.getId());
@@ -443,7 +443,7 @@ public class GameController implements GameCallback {
             watchers.put(userId, gameWatcher);
             gameWatcher.init();
             user.addGameWatchInfo(game.getId());
-            ChatManager.getInstance().broadcast(chatId, user.getName(), " has started watching", MessageColor.BLUE, true, ChatMessage.MessageType.STATUS);
+            ChatManager.getInstance().broadcast(chatId, user.getName(), " has started watching", MessageColor.BLUE, true, ChatMessage.MessageType.STATUS, null);
         }
     }
 
@@ -451,7 +451,7 @@ public class GameController implements GameCallback {
         watchers.remove(userId);
         User user = UserManager.getInstance().getUser(userId);
         if (user != null) {
-            ChatManager.getInstance().broadcast(chatId, user.getName(), " has stopped watching", MessageColor.BLUE, true, ChatMessage.MessageType.STATUS);
+            ChatManager.getInstance().broadcast(chatId, user.getName(), " has stopped watching", MessageColor.BLUE, true, ChatMessage.MessageType.STATUS, null);
         }
     }
 
@@ -678,7 +678,7 @@ public class GameController implements GameCallback {
             String sb = player.getLogName()
                     + " has timed out (player had priority and was not active for "
                     + ConfigSettings.getInstance().getMaxSecondsIdle() + " seconds ) - Auto concede.";
-            ChatManager.getInstance().broadcast(chatId, "", sb, MessageColor.BLACK, true, MessageType.STATUS);
+            ChatManager.getInstance().broadcast(chatId, "", sb, MessageColor.BLACK, true, MessageType.STATUS, null);
             game.idleTimeout(playerId);
         }
     }

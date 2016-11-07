@@ -29,12 +29,18 @@ package mage.server;
 
 import java.io.File;
 import java.io.FilenameFilter;
+import java.io.IOException;
 import java.net.InetAddress;
 import java.net.MalformedURLException;
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 import javax.management.MBeanServer;
+import mage.cards.ExpansionSet;
+import mage.cards.Sets;
 import mage.cards.repository.CardScanner;
+import mage.cards.repository.PluginClassloaderRegistery;
 import mage.game.match.MatchType;
 import mage.game.tournament.TournamentType;
 import mage.interfaces.MageServer;
@@ -82,7 +88,9 @@ public class Main {
     private static final String testModeArg = "-testMode=";
     private static final String fastDBModeArg = "-fastDbMode=";
     private static final String adminPasswordArg = "-adminPassword=";
-    private static final String pluginFolder = "plugins";
+
+    private static final File pluginFolder = new File("plugins");
+    private static final File extensionFolder = new File("extensions");
 
     public static PluginClassLoader classLoader = new PluginClassLoader();
     public static TransporterServer server;
@@ -109,6 +117,49 @@ public class Main {
             }
         }
 
+        if (ConfigSettings.getInstance().isAuthenticationActivated()) {
+            logger.info("Check authorized user DB version ...");
+            if (!AuthorizedUserRepository.instance.checkAlterAndMigrateAuthorizedUser()) {
+                logger.fatal("Failed to start server.");
+                return;
+            }
+            logger.info("Done.");
+        }
+
+        logger.info("Loading extension packages...");
+        List<ExtensionPackage> extensions = new ArrayList<>();
+        if (!extensionFolder.exists()) {
+            if (!extensionFolder.mkdirs()) {
+                logger.error("Could not create extensions directory.");
+            }
+        }
+        File[] extensionDirectories = extensionFolder.listFiles();
+        if (extensionDirectories != null) {
+            for (File f : extensionDirectories) {
+                if (f.isDirectory()) {
+                    try {
+                        logger.info(" - Loading extension from " + f);
+                        extensions.add(ExtensionPackageLoader.loadExtension(f));
+                    } catch (IOException e) {
+                        logger.error("Could not load extension in " + f + "!", e);
+                    }
+                }
+            }
+        }
+        logger.info("Done.");
+
+        if (!extensions.isEmpty()) {
+            logger.info("Registering custom sets...");
+            for (ExtensionPackage pkg : extensions) {
+                for (ExpansionSet set : pkg.getSets()) {
+                    logger.info("- Loading " + set.getName() + " (" + set.getCode() + ")");
+                    Sets.getInstance().addSet(set);
+                }
+                PluginClassloaderRegistery.registerPluginClassloader(pkg.getClassLoader());
+            }
+            logger.info("Done.");
+        }
+
         logger.info("Loading cards...");
         if (fastDbMode) {
             CardScanner.scanned = true;
@@ -120,7 +171,6 @@ public class Main {
         logger.info("Updating user stats DB...");
         UserStatsRepository.instance.updateUserStats();
         logger.info("Done.");
-
         deleteSavedGames();
         ConfigSettings config = ConfigSettings.getInstance();
         for (GamePlugin plugin : config.getGameTypes()) {
@@ -137,6 +187,19 @@ public class Main {
         }
         for (Plugin plugin : config.getDeckTypes()) {
             DeckValidatorFactory.getInstance().addDeckType(plugin.getName(), loadPlugin(plugin));
+        }
+
+        for (ExtensionPackage pkg : extensions) {
+            Map<String, Class> draftCubes = pkg.getDraftCubes();
+            for (String name : draftCubes.keySet()) {
+                logger.info("Loading extension: [" + name + "] " + draftCubes.get(name).toString());
+                CubeFactory.getInstance().addDraftCube(name, draftCubes.get(name));
+            }
+            Map<String, Class> deckTypes = pkg.getDeckTypes();
+            for (String name : deckTypes.keySet()) {
+                logger.info("Loading extension: [" + name + "] " + deckTypes.get(name));
+                DeckValidatorFactory.getInstance().addDeckType(name, deckTypes.get(name));
+            }
         }
 
         logger.info("Config - max seconds idle: " + config.getMaxSecondsIdle());
@@ -215,7 +278,7 @@ public class Main {
                 StringBuilder sessionInfo = new StringBuilder();
                 User user = UserManager.getInstance().getUser(session.getUserId());
                 if (user != null) {
-                    sessionInfo.append(user.getName());
+                    sessionInfo.append(user.getName()).append(" [").append(user.getGameInfo()).append("]");
                 } else {
                     sessionInfo.append("[user missing] ");
                 }
@@ -246,9 +309,9 @@ public class Main {
 
         protected Connector connector;
 
-        public MageTransporterServer(InvokerLocator locator, Object target, String subsystem, MageServerInvocationHandler callback) throws Exception {
+        public MageTransporterServer(InvokerLocator locator, Object target, String subsystem, MageServerInvocationHandler serverInvocationHandler) throws Exception {
             super(locator, target, subsystem);
-            connector.addInvocationHandler("callback", callback);
+            connector.addInvocationHandler("callback", serverInvocationHandler);
             connector.setLeasePeriod(ConfigSettings.getInstance().getLeasePeriod());
             connector.addConnectionListener(new ClientConnectionListener());
         }
@@ -269,7 +332,20 @@ public class Main {
 
         @Override
         public void setMBeanServer(MBeanServer server) {
-
+            /**
+             * An MBean is a managed Java object, similar to a JavaBeans
+             * component, that follows the design patterns set forth in the JMX
+             * specification. An MBean can represent a device, an application,
+             * or any resource that needs to be managed. MBeans expose a
+             * management interface that consists of the following:
+             *
+             * A set of readable or writable attributes, or both. A set of
+             * invokable operations. A self-description.
+             *
+             */
+            if (server != null) {
+                logger.info("Default domain: " + server.getDefaultDomain());
+            }
         }
 
         @Override
@@ -280,7 +356,20 @@ public class Main {
         }
 
         @Override
+        public void addListener(InvokerCallbackHandler callbackHandler) {
+            // Called for every client connecting to the server
+            ServerInvokerCallbackHandler handler = (ServerInvokerCallbackHandler) callbackHandler;
+            try {
+                String sessionId = handler.getClientSessionId();
+                SessionManager.getInstance().createSession(sessionId, callbackHandler);
+            } catch (Throwable ex) {
+                logger.fatal("", ex);
+            }
+        }
+
+        @Override
         public Object invoke(final InvocationRequest invocation) throws Throwable {
+            // Called for every client connecting to the server (after add Listener)
             String sessionId = invocation.getSessionId();
             Map map = invocation.getRequestPayload();
             String host;
@@ -295,17 +384,6 @@ public class Main {
         }
 
         @Override
-        public void addListener(InvokerCallbackHandler callbackHandler) {
-            ServerInvokerCallbackHandler handler = (ServerInvokerCallbackHandler) callbackHandler;
-            try {
-                String sessionId = handler.getClientSessionId();
-                SessionManager.getInstance().createSession(sessionId, callbackHandler);
-            } catch (Throwable ex) {
-                logger.fatal("", ex);
-            }
-        }
-
-        @Override
         public void removeListener(InvokerCallbackHandler callbackHandler) {
             ServerInvokerCallbackHandler handler = (ServerInvokerCallbackHandler) callbackHandler;
             String sessionId = handler.getClientSessionId();
@@ -316,7 +394,7 @@ public class Main {
 
     private static Class<?> loadPlugin(Plugin plugin) {
         try {
-            classLoader.addURL(new File(pluginFolder + "/" + plugin.getJar()).toURI().toURL());
+            classLoader.addURL(new File(pluginFolder, plugin.getJar()).toURI().toURL());
             logger.debug("Loading plugin: " + plugin.getClassName());
             return Class.forName(plugin.getClassName(), true, classLoader);
         } catch (ClassNotFoundException ex) {
@@ -329,7 +407,7 @@ public class Main {
 
     private static MatchType loadGameType(GamePlugin plugin) {
         try {
-            classLoader.addURL(new File(pluginFolder + "/" + plugin.getJar()).toURI().toURL());
+            classLoader.addURL(new File(pluginFolder, plugin.getJar()).toURI().toURL());
             logger.debug("Loading game type: " + plugin.getClassName());
             return (MatchType) Class.forName(plugin.getTypeName(), true, classLoader).newInstance();
         } catch (ClassNotFoundException ex) {
@@ -342,7 +420,7 @@ public class Main {
 
     private static TournamentType loadTournamentType(GamePlugin plugin) {
         try {
-            classLoader.addURL(new File(pluginFolder + "/" + plugin.getJar()).toURI().toURL());
+            classLoader.addURL(new File(pluginFolder, plugin.getJar()).toURI().toURL());
             logger.debug("Loading tournament type: " + plugin.getClassName());
             return (TournamentType) Class.forName(plugin.getTypeName(), true, classLoader).newInstance();
         } catch (ClassNotFoundException ex) {
@@ -360,11 +438,11 @@ public class Main {
         }
         File[] files = directory.listFiles(
                 new FilenameFilter() {
-                    @Override
-                    public boolean accept(File dir, String name) {
-                        return name.endsWith(".game");
-                    }
-                }
+            @Override
+            public boolean accept(File dir, String name) {
+                return name.endsWith(".game");
+            }
+        }
         );
         for (File file : files) {
             file.delete();

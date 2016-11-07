@@ -1,6 +1,5 @@
 package org.mage.plugins.card.images;
 
-import mage.client.util.TransformedImageCache;
 import com.google.common.base.Function;
 import com.google.common.collect.ComputationException;
 import com.google.common.collect.MapMaker;
@@ -13,6 +12,7 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 import javax.imageio.ImageIO;
 import mage.client.dialog.PreferencesDialog;
+import mage.client.util.TransformedImageCache;
 import mage.view.CardView;
 import net.java.truevfs.access.TFile;
 import net.java.truevfs.access.TFileInputStream;
@@ -27,11 +27,12 @@ import org.mage.plugins.card.utils.CardImageUtils;
  * that the images may be garbage collected when they are not needed any more,
  * but will be kept as long as possible.
  *
- * Key format: "<cardname>#<setname>#<type>#<collectorID>#<param>"
+ * Key format: "[cardname]#[setname]#[type]#[collectorID]#[param]"
  *
  * where param is:
- *
  * <ul>
+ * <li>size of image</li>
+ *
  * <li>#Normal: request for unrotated image</li>
  * <li>#Tapped: request for rotated image</li>
  * <li>#Cropped: request for cropped image that is used for Shandalar like card
@@ -127,7 +128,9 @@ public class ImageCache {
                                 return makeThumbnailByFile(key, file, thumbnailPath);
                             }
                         } else {
-                            return getWizardsCard(loadImage(file));
+                            BufferedImage image = loadImage(file);
+                            image = getWizardsCard(image);
+                            return image;
                         }
                     } else {
                         throw new RuntimeException(
@@ -201,7 +204,7 @@ public class ImageCache {
     public static BufferedImage getThumbnail(CardView card) {
         return getImage(getKey(card, card.getName(), "#thumb"));
     }
-    
+
     public static BufferedImage tryGetThumbnail(CardView card) {
         return tryGetImage(getKey(card, card.getName(), "#thumb"));
     }
@@ -235,10 +238,10 @@ public class ImageCache {
             return null;
         }
     }
- 
+
     /**
-     * Returns the Image corresponding to the key only if it already exists
-     * in the cache.
+     * Returns the Image corresponding to the key only if it already exists in
+     * the cache.
      */
     private static BufferedImage tryGetImage(String key) {
         if (IMAGE_CACHE.containsKey(key)) {
@@ -360,15 +363,16 @@ public class ImageCache {
 
         return TransformedImageCache.getResizedImage(original, (int) (original.getWidth() * scale), (int) (original.getHeight() * scale));
     }
-    
+
     /**
-     * Returns the image appropriate to display for a card in a picture panel, but
-     * only it was ALREADY LOADED. That is, the call is immediate and will not block
-     * on file IO.
+     * Returns the image appropriate to display for a card in a picture panel,
+     * but only it was ALREADY LOADED. That is, the call is immediate and will
+     * not block on file IO.
+     *
      * @param card
      * @param width
      * @param height
-     * @return 
+     * @return
      */
     public static BufferedImage tryGetImage(CardView card, int width, int height) {
         if (Constants.THUMBNAIL_SIZE_FULL.width + 10 > width) {
@@ -386,7 +390,7 @@ public class ImageCache {
             return original;
         }
 
-        return TransformedImageCache.getResizedImage(original, (int) (original.getWidth() * scale), (int) (original.getHeight() * scale));       
+        return TransformedImageCache.getResizedImage(original, (int) (original.getWidth() * scale), (int) (original.getHeight() * scale));
     }
 
     public static TFile getTFile(String path) {

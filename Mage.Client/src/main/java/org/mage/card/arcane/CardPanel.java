@@ -320,6 +320,8 @@ public abstract class CardPanel extends MagePermanent implements MouseListener, 
 
     /**
      * Overridden by different card rendering styles
+     *
+     * @param g
      */
     protected abstract void paintCard(Graphics2D g);
 
@@ -510,6 +512,8 @@ public abstract class CardPanel extends MagePermanent implements MouseListener, 
      * However, they should ALSO call repaint() after the superclass call to
      * this function, that can't be done here as the overriders may need to do
      * things both before and after this call before repainting.
+     *
+     * @param card
      */
     @Override
     public void update(CardView card) {
@@ -560,8 +564,10 @@ public abstract class CardPanel extends MagePermanent implements MouseListener, 
             } else {
                 transformIcon = ImageManagerImpl.getInstance().getDayImage();
             }
-            dayNightButton.setVisible(!isPermanent);
-            dayNightButton.setIcon(new ImageIcon(transformIcon));
+            if (dayNightButton != null) {
+                dayNightButton.setVisible(!isPermanent);
+                dayNightButton.setIcon(new ImageIcon(transformIcon));
+            }
         }
     }
 
@@ -720,7 +726,7 @@ public abstract class CardPanel extends MagePermanent implements MouseListener, 
                 sb.append("\n").append(card.getLoyalty());
             }
             if (card.getRules() == null) {
-                card.overrideRules(new ArrayList<String>());
+                card.overrideRules(new ArrayList<>());
             }
             for (String rule : card.getRules()) {
                 sb.append("\n").append(rule);

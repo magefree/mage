@@ -40,8 +40,9 @@ import mage.game.Game;
  */
 public class ActivationInfo {
 
-    protected int turnNum;
-    protected int activationCounter;
+    protected int turnNum = 0;
+    protected int activationCounter = 0;
+    protected String key;
 
     public static ActivationInfo getInstance(Game game, UUID sourceId) {
         return ActivationInfo.getInstance(game, sourceId, game.getState().getZoneChangeCounter(sourceId));
@@ -49,17 +50,25 @@ public class ActivationInfo {
 
     public static ActivationInfo getInstance(Game game, UUID sourceId, int zoneChangeCounter) {
         String key = "ActivationInfo" + sourceId.toString() + zoneChangeCounter;
-        ActivationInfo activationInfo = (ActivationInfo) game.getState().getValue(key);
-        if (activationInfo == null) {
-            activationInfo = new ActivationInfo(game);
-            game.getState().setValue(key, activationInfo);
+        Integer activations = (Integer) game.getState().getValue(key);
+        ActivationInfo activationInfo;
+        if (activations != null) {
+            Integer turnNum = (Integer) game.getState().getValue(key + "T");
+            activationInfo = new ActivationInfo(game, turnNum, activations);
+        } else {
+            activationInfo = new ActivationInfo(game, game.getTurnNum(), 0);
         }
+        activationInfo.setKey(key);
         return activationInfo;
     }
 
-    protected ActivationInfo(Game game) {
-        this.turnNum = game.getTurnNum();
-        this.activationCounter = 0;
+    public void setKey(String key) {
+        this.key = key;
+    }
+
+    protected ActivationInfo(Game game, int turnNum, int activationCounter) {
+        this.turnNum = turnNum;
+        this.activationCounter = activationCounter;
     }
 
     public void addActivation(Game game) {
@@ -69,6 +78,8 @@ public class ActivationInfo {
         } else {
             activationCounter++;
         }
+        game.getState().setValue(key, activationCounter);
+        game.getState().setValue(key + "T", turnNum);
     }
 
     public int getActivationCounter() {

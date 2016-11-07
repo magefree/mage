@@ -4,7 +4,6 @@ import com.google.common.base.Function;
 import com.google.common.collect.MapMaker;
 import java.awt.BasicStroke;
 import java.awt.Color;
-import java.awt.Dimension;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
 import java.awt.RenderingHints;
@@ -16,10 +15,8 @@ import mage.client.util.ImageCaches;
 import org.jdesktop.swingx.graphics.GraphicsUtilities;
 import org.jdesktop.swingx.graphics.ShadowRenderer;
 
-
 /**
- * Mage round pane with transparency.
- * Used for tooltips.
+ * Mage round pane with transparency. Used for tooltips.
  *
  * @author nantuko
  */
@@ -31,7 +28,7 @@ public class MageRoundPane extends JPanel {
     private Color backgroundColor = defaultBackgroundColor;
     private final int alpha = 0;
     private static Map<ShadowKey, BufferedImage> SHADOW_IMAGE_CACHE;
-    private static Map<Key, BufferedImage> IMAGE_CACHE;
+    private static final Map<Key, BufferedImage> IMAGE_CACHE;
 
     static {
         SHADOW_IMAGE_CACHE = ImageCaches.register(new MapMaker().softValues().makeComputingMap(new Function<ShadowKey, BufferedImage>() {
@@ -49,8 +46,8 @@ public class MageRoundPane extends JPanel {
         }));
     }
 
-    private final static class ShadowKey
-    {
+    private final static class ShadowKey {
+
         final int width;
         final int height;
 
@@ -89,8 +86,8 @@ public class MageRoundPane extends JPanel {
         }
     }
 
-    private final static class Key
-    {
+    private final static class Key {
+
         final int width;
         final int height;
         final int xOffset;
@@ -173,7 +170,6 @@ public class MageRoundPane extends JPanel {
 
         //////////////////////////////////////////////////////////////////
         // fill content
-
         /**
          * Add white translucent substrate
          */
@@ -181,7 +177,6 @@ public class MageRoundPane extends JPanel {
             g2.setColor(new Color(255, 255, 255, alpha));
             g2.fillRoundRect(x, y, w, h, arc, arc);
         }*/
-
         g2.setColor(key.backgroundColor);
         g2.fillRoundRect(x, y, w, h, arc, arc);
         //////////////////////////////////////////////////////////////////
@@ -229,7 +224,7 @@ public class MageRoundPane extends JPanel {
     public void resetBackgroundColor() {
         this.backgroundColor = defaultBackgroundColor;
     }
-    
+
     public void setBackgroundColor(Color backgroundColor) {
         this.backgroundColor = backgroundColor;
     }

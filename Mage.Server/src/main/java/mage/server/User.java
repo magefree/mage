@@ -91,15 +91,31 @@ public class User {
     private UserState userState;
     private UserData userData;
     private UserStats userStats;
+    private Date chatLockedUntil;
+    private boolean active;
+    private Date lockedUntil;
+    private final AuthorizedUser authorizedUser;
+    private String clientVersion;
 
-    public User(String userName, String host) {
+    public User(String userName, String host, AuthorizedUser authorizedUser) {
         this.userId = UUID.randomUUID();
         this.userName = userName;
         this.host = host;
         this.userState = UserState.Created;
-
         this.connectionTime = new Date();
         this.lastActivity = new Date();
+        if (authorizedUser != null) {
+            this.active = authorizedUser.active;
+            this.chatLockedUntil = authorizedUser.chatLockedUntil;
+            this.lockedUntil = authorizedUser.lockedUntil;
+            this.authorizedUser = authorizedUser;
+            updateAuthorizedUser();
+        } else {
+            this.active = true;
+            this.chatLockedUntil = null;
+            this.lockedUntil = null;
+            this.authorizedUser = null;
+        }
 
         this.tables = new ConcurrentHashMap<>();
         this.gameSessions = new ConcurrentHashMap<>();
@@ -110,6 +126,7 @@ public class User {
         this.watchedGames = new ArrayList<>();
         this.tablesToDelete = new ArrayList<>();
         this.sessionId = "";
+        this.clientVersion = "";
     }
 
     public String getName() {
@@ -128,6 +145,18 @@ public class User {
         return sessionId;
     }
 
+    public Date getChatLockedUntil() {
+        return chatLockedUntil;
+    }
+
+    public boolean isActive() {
+        return active;
+    }
+
+    public Date getLockedUntil() {
+        return lockedUntil;
+    }
+
     public void setSessionId(String sessionId) {
         this.sessionId = sessionId;
         if (sessionId.isEmpty()) {
@@ -143,6 +172,29 @@ public class User {
             reconnect();
             logger.trace("USER - reconnected: " + userName + " id: " + userId);
         }
+    }
+
+    public void setClientVersion(String clientVersion) {
+        this.clientVersion = clientVersion;
+    }
+
+    public String getClientVersion() {
+        return clientVersion;
+    }
+
+    public void setChatLockedUntil(Date chatLockedUntil) {
+        this.chatLockedUntil = chatLockedUntil;
+        updateAuthorizedUser();
+    }
+
+    public void setActive(boolean active) {
+        this.active = active;
+        updateAuthorizedUser();
+    }
+
+    public void setLockedUntil(Date lockedUntil) {
+        this.lockedUntil = lockedUntil;
+        updateAuthorizedUser();
     }
 
     public void lostConnection() {
@@ -730,5 +782,15 @@ public class User {
             }
         }
         return number;
+    }
+
+    private void updateAuthorizedUser() {
+        if (authorizedUser != null) {
+            authorizedUser.lastConnection = this.connectionTime;
+            authorizedUser.chatLockedUntil = this.chatLockedUntil;
+            authorizedUser.lockedUntil = this.lockedUntil;
+            authorizedUser.active = this.active;
+            AuthorizedUserRepository.instance.update(authorizedUser);
+        }
     }
 }

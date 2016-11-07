@@ -51,49 +51,63 @@ public class MageCardComparator implements Comparator<CardView> {
         Comparable aCom = null;
         Comparable bCom = null;
 
-        if (column == 0)// #skip
-        {
-            aCom = 1;
-            bCom = 1;
-        } else if (column == 1)// Name
-        {
-            aCom = a.getName();
-            bCom = b.getName();
-            if (aCom.equals(bCom) && a.getExpansionSetCode().equals(b.getExpansionSetCode())) {
-                aCom = a.getCardNumber();
-                bCom = b.getCardNumber();
-            }
-        } else if (column == 2)// Cost
-        {
-            aCom = a.getConvertedManaCost();
-            bCom = b.getConvertedManaCost();
-        } else if (column == 3)// Color
-        {
-            aCom = CardHelper.getColor(a);
-            bCom = CardHelper.getColor(b);
-        } else if (column == 4)// Type
-        {
-            aCom = CardHelper.getType(a);
-            bCom = CardHelper.getType(b);
-        } else if (column == 5)// Stats, attack and defense
-        {
-            aCom = (float) -1;
-            bCom = (float) -1;
-
-            if (CardHelper.isCreature(a)) {
-                aCom = new Float(a.getPower() + "." + (a.getToughness().startsWith("-") ? "0" : a.getToughness()));
-            }
-            if (CardHelper.isCreature(b)) {
-                bCom = new Float(b.getPower() + "." + (b.getToughness().startsWith("-") ? "0" : b.getToughness()));
-            }
-        } else if (column == 6)// Rarity
-        {
-            aCom = a.getRarity().toString();
-            bCom = b.getRarity().toString();
-        } else if (column == 7)// Set name
-        {
-            aCom = a.getExpansionSetCode();
-            bCom = b.getExpansionSetCode();
+        switch (column) {
+            // #skip
+            case 0:
+                aCom = 1;
+                bCom = 1;
+                break;
+            // Name
+            case 1:
+                aCom = a.getName();
+                bCom = b.getName();
+                if (aCom.equals(bCom) && a.getExpansionSetCode().equals(b.getExpansionSetCode())) {
+                    aCom = a.getCardNumber();
+                    bCom = b.getCardNumber();
+                }
+                break;
+            // Cost
+            case 2:
+                aCom = a.getConvertedManaCost();
+                bCom = b.getConvertedManaCost();
+                break;
+            // Color
+            case 3:
+                aCom = CardHelper.getColor(a);
+                bCom = CardHelper.getColor(b);
+                break;
+            // Type
+            case 4:
+                aCom = CardHelper.getType(a);
+                bCom = CardHelper.getType(b);
+                break;
+            // Stats, attack and defense
+            case 5:
+                aCom = (float) -1;
+                bCom = (float) -1;
+                if (CardHelper.isCreature(a)) {
+                    aCom = new Float(a.getPower() + "." + (a.getToughness().startsWith("-") ? "0" : a.getToughness()));
+                }
+                if (CardHelper.isCreature(b)) {
+                    bCom = new Float(b.getPower() + "." + (b.getToughness().startsWith("-") ? "0" : b.getToughness()));
+                }
+                break;
+            // Rarity
+            case 6:
+                aCom = a.getRarity().toString();
+                bCom = b.getRarity().toString();
+                break;
+            // Set name
+            case 7:
+                aCom = a.getExpansionSetCode();
+                bCom = b.getExpansionSetCode();
+                break;
+            case 8:
+                aCom = Integer.parseInt(a.getCardNumber().replaceAll("[\\D]", ""));
+                bCom = Integer.parseInt(b.getCardNumber().replaceAll("[\\D]", ""));
+                break;
+            default:
+                break;
         }
 
         if (ascending) {

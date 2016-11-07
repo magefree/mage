@@ -521,4 +521,8 @@ public class WizardCardsImageSource implements CardImageSource {
     public Boolean isTokenSource() {
         return false;
     }
+    
+    @Override
+    public void doPause(String httpImageUrl) {
+    }
 }

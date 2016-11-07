@@ -38,7 +38,8 @@ import mage.abilities.AbilitiesImpl;
 import mage.abilities.Ability;
 import mage.abilities.PlayLandAbility;
 import mage.abilities.SpellAbility;
-import mage.abilities.mana.ManaAbility;
+import mage.abilities.mana.ActivatedManaAbilityImpl;
+import mage.cards.repository.PluginClassloaderRegistery;
 import mage.constants.CardType;
 import mage.constants.ColoredManaSymbol;
 import mage.constants.Rarity;
@@ -70,7 +71,8 @@ public abstract class CardImpl extends MageObjectImpl implements Card {
     protected String tokenSetCode;
     protected String tokenDescriptor;
     protected Rarity rarity;
-    protected boolean canTransform;
+    protected boolean transformable;
+    protected Class<?> secondSideCardClazz;
     protected Card secondSideCard;
     protected boolean nightCard;
     protected SpellAbility spellAbility;
@@ -80,18 +82,15 @@ public abstract class CardImpl extends MageObjectImpl implements Card {
     protected boolean splitCard;
     protected boolean morphCard;
 
-    public CardImpl(UUID ownerId, int cardNumber, String name, Rarity rarity, CardType[] cardTypes, String costs) {
-        this(ownerId, String.valueOf(cardNumber), name, rarity, cardTypes, costs, SpellAbilityType.BASE);
+    public CardImpl(UUID ownerId, CardSetInfo setInfo, CardType[] cardTypes, String costs) {
+        this(ownerId, setInfo, cardTypes, costs, SpellAbilityType.BASE);
     }
 
-    public CardImpl(UUID ownerId, String cardNumber, String name, Rarity rarity, CardType[] cardTypes, String costs) {
-        this(ownerId, cardNumber, name, rarity, cardTypes, costs, SpellAbilityType.BASE);
-    }
-
-    public CardImpl(UUID ownerId, String cardNumber, String name, Rarity rarity, CardType[] cardTypes, String costs, SpellAbilityType spellAbilityType) {
-        this(ownerId, name);
-        this.rarity = rarity;
-        this.cardNumber = cardNumber;
+    public CardImpl(UUID ownerId, CardSetInfo setInfo, CardType[] cardTypes, String costs, SpellAbilityType spellAbilityType) {
+        this(ownerId, setInfo.getName());
+        this.rarity = setInfo.getRarity();
+        this.cardNumber = setInfo.getCardNumber();
+        this.expansionSetCode = setInfo.getExpansionSetCode();
         this.cardType.addAll(Arrays.asList(cardTypes));
         this.manaCost.load(costs);
         setDefaultColor();
@@ -107,7 +106,18 @@ public abstract class CardImpl extends MageObjectImpl implements Card {
             ability.setSourceId(this.getId());
             abilities.add(ability);
         }
-        this.usesVariousArt = Character.isDigit(this.getClass().getName().charAt(this.getClass().getName().length() - 1));
+
+        CardGraphicInfo graphicInfo = setInfo.getGraphicInfo();
+        if (graphicInfo != null) {
+            this.usesVariousArt = graphicInfo.getUsesVariousArt();
+            if (graphicInfo.getFrameColor() != null) {
+                this.frameColor = graphicInfo.getFrameColor().copy();
+            }
+            if (graphicInfo.getFrameStyle() != null) {
+                this.frameStyle = graphicInfo.getFrameStyle();
+            }
+        }
+
         this.morphCard = false;
     }
 
@@ -138,9 +148,9 @@ public abstract class CardImpl extends MageObjectImpl implements Card {
         tokenDescriptor = card.tokenDescriptor;
         rarity = card.rarity;
 
-        canTransform = card.canTransform;
-        if (canTransform) {
-            secondSideCard = card.secondSideCard;
+        transformable = card.transformable;
+        if (transformable) {
+            secondSideCardClazz = card.secondSideCardClazz;
             nightCard = card.nightCard;
         }
         flipCard = card.flipCard;
@@ -156,20 +166,30 @@ public abstract class CardImpl extends MageObjectImpl implements Card {
         this.abilities.setSourceId(objectId);
     }
 
-    public static Card createCard(String name) {
+    public static Card createCard(String name, CardSetInfo setInfo) {
         try {
-            return createCard(Class.forName(name));
+            return createCard(Class.forName(name), setInfo);
         } catch (ClassNotFoundException ex) {
+            try {
+                return createCard(PluginClassloaderRegistery.forName(name), setInfo);
+            } catch (ClassNotFoundException ex2) {
+                // ignored
+            }
             logger.fatal("Error loading card: " + name, ex);
             return null;
         }
     }
 
-    public static Card createCard(Class<?> clazz) {
+    public static Card createCard(Class<?> clazz, CardSetInfo setInfo) {
         try {
-            Constructor<?> con = clazz.getConstructor(new Class[]{UUID.class});
-            Card card = (Card) con.newInstance(new Object[]{null});
-            card.build();
+            Card card;
+            if (setInfo == null) {
+                Constructor<?> con = clazz.getConstructor(UUID.class);
+                card = (Card) con.newInstance(new Object[]{null});
+            } else {
+                Constructor<?> con = clazz.getConstructor(UUID.class, CardSetInfo.class);
+                card = (Card) con.newInstance(null, setInfo);
+            }
             return card;
         } catch (Exception e) {
             logger.fatal("Error loading card: " + clazz.getCanonicalName(), e);
@@ -321,7 +341,7 @@ public abstract class CardImpl extends MageObjectImpl implements Card {
     @Override
     public List<Mana> getMana() {
         List<Mana> mana = new ArrayList<>();
-        for (ManaAbility ability : this.abilities.getManaAbilities(Zone.BATTLEFIELD)) {
+        for (ActivatedManaAbilityImpl ability : this.abilities.getActivatedManaAbilities(Zone.BATTLEFIELD)) {
             for (Mana netMana : ability.getNetMana(null)) {
                 mana.add(netMana);
             }
@@ -526,13 +546,34 @@ public abstract class CardImpl extends MageObjectImpl implements Card {
     }
 
     @Override
-    public boolean canTransform() {
-        return this.canTransform;
+    public boolean isTransformable() {
+        return this.transformable;
     }
 
     @Override
-    public Card getSecondCardFace() {
-        return this.secondSideCard;
+    public void setTransformable(boolean transformable) {
+        this.transformable = transformable;
+    }
+
+    @Override
+    public final Card getSecondCardFace() {
+        if (secondSideCardClazz == null && secondSideCard == null) {
+            return null;
+        }
+
+        if (secondSideCard != null) {
+            return secondSideCard;
+        }
+
+        List<ExpansionSet.SetCardInfo> cardInfo = Sets.findSet(expansionSetCode).findCardInfoByClass(secondSideCardClazz);
+        assert cardInfo.size() == 1;    // should find 1 second side card
+        if (cardInfo.isEmpty()) {
+            return null;
+        }
+
+        ExpansionSet.SetCardInfo info = cardInfo.get(0);
+        return secondSideCard = createCard(secondSideCardClazz,
+                new CardSetInfo(info.getName(), expansionSetCode, info.getCardNumber(), info.getRarity(), info.getGraphicInfo()));
     }
 
     @Override
@@ -553,10 +594,6 @@ public abstract class CardImpl extends MageObjectImpl implements Card {
     @Override
     public boolean isSplitCard() {
         return splitCard;
-    }
-
-    @Override
-    public void build() {
     }
 
     @Override

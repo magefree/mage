@@ -47,26 +47,19 @@ import mage.util.CardUtil;
  */
 public class ReturnToHandTargetEffect extends OneShotEffect {
 
-    boolean withName;
     protected boolean multitargetHandling;
 
     public ReturnToHandTargetEffect() {
-        this(true);
+        this(false);
     }
 
-    public ReturnToHandTargetEffect(boolean withName) {
-        this(withName, false);
-    }
-
-    public ReturnToHandTargetEffect(boolean withName, boolean multitargetHandling) {
+    public ReturnToHandTargetEffect(boolean multitargetHandling) {
         super(Outcome.ReturnToHand);
-        this.withName = withName;
         this.multitargetHandling = multitargetHandling;
     }
 
     public ReturnToHandTargetEffect(final ReturnToHandTargetEffect effect) {
         super(effect);
-        this.withName = effect.withName;
         this.multitargetHandling = effect.multitargetHandling;
     }
 

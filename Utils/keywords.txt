@@ -42,6 +42,7 @@ Level up|cost|
 Lifelink|instance|
 Living weapon|new|
 Madness|card, cost|
+Melee|new|
 Menace|new|
 Miracle|cost|
 Mountaincycling|cost|
@@ -73,6 +74,7 @@ Totem armor|new|
 Trample|instance|
 Tribute|number|
 Unblockable|new|
+Undaunted|new|
 Undying|new|
 Unearth|cost|
 Unleash|new|

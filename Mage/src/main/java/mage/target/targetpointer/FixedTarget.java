@@ -41,6 +41,18 @@ public class FixedTarget implements TargetPointer {
         this.zoneChangeCounter = zoneChangeCounter;
     }
 
+    /**
+     * Use this to set the target to exactly the zone the target is currently in
+     *
+     * @param targetId
+     * @param game
+     */
+    public FixedTarget(UUID targetId, Game game) {
+        this.targetId = targetId;
+        this.initialized = true;
+        this.zoneChangeCounter = game.getState().getZoneChangeCounter(targetId);
+    }
+
     public FixedTarget(final FixedTarget fixedTarget) {
         this.targetId = fixedTarget.targetId;
         this.zoneChangeCounter = fixedTarget.zoneChangeCounter;

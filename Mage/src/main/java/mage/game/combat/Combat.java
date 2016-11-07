@@ -237,6 +237,9 @@ public class Combat implements Serializable, Copyable<Combat> {
             possibleDefenders = new HashSet<>(defenders);
         }
         Player player = game.getPlayer(attackerId);
+        if (player == null) {
+            return false;
+        }
         if (possibleDefenders.size() == 1) {
             addAttackerToCombat(creatureId, possibleDefenders.iterator().next(), game);
             return true;
@@ -866,7 +869,8 @@ public class Combat implements Serializable, Copyable<Combat> {
                                 blockIsValid = true;
                                 break CombatGroups;
                             } else // check if the blocker blocks a attacker that must be blocked at least by one and is the only blocker, this block is also valid
-                             if (combatGroup.getBlockers().size() == 1) {
+                            {
+                                if (combatGroup.getBlockers().size() == 1) {
                                     if (mustBeBlockedByAtLeastOne.containsKey(forcingAttackerId)) {
                                         if (mustBeBlockedByAtLeastOne.get(forcingAttackerId).contains(creatureForcedToBlock.getId())) {
                                             blockIsValid = true;
@@ -874,6 +878,7 @@ public class Combat implements Serializable, Copyable<Combat> {
                                         }
                                     }
                                 }
+                            }
                         }
                     }
                 }
@@ -921,8 +926,8 @@ public class Combat implements Serializable, Copyable<Combat> {
                             if (mustBeBlockedByAtLeastOne.containsKey(blockedAttackerId)) {
                                 // blocks a creature that has to be blocked by at least one
                                 if (combatGroupOfPossibleBlocker.getBlockers().size() == 1) {
-                                    Set <UUID> blockedSet = mustBeBlockedByAtLeastOne.get(blockedAttackerId);
-                                    Set <UUID> toBlockSet = mustBeBlockedByAtLeastOne.get(toBeBlockedCreatureId);
+                                    Set<UUID> blockedSet = mustBeBlockedByAtLeastOne.get(blockedAttackerId);
+                                    Set<UUID> toBlockSet = mustBeBlockedByAtLeastOne.get(toBeBlockedCreatureId);
                                     if (toBlockSet == null) {
                                         // This should never happen. 
                                         return null;
@@ -1281,13 +1286,21 @@ public class Combat implements Serializable, Copyable<Combat> {
         return defenderId;
     }
 
+    /**
+     * Returns the playerId of the player that is attacked by given attacking
+     * creature
+     *
+     * @param attackingCreatureId
+     * @param game
+     * @return
+     */
     public UUID getDefendingPlayerId(UUID attackingCreatureId, Game game) {
         UUID defenderId = null;
         for (CombatGroup group : groups) {
             if (group.getAttackers().contains(attackingCreatureId)) {
                 defenderId = group.getDefenderId();
                 if (group.defenderIsPlaneswalker) {
-                    Permanent permanent = game.getPermanent(defenderId);
+                    Permanent permanent = game.getPermanentOrLKIBattlefield(defenderId);
                     if (permanent != null) {
                         defenderId = permanent.getControllerId();
                     } else {

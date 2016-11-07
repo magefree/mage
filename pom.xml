@@ -6,7 +6,7 @@
 
     <groupId>org.mage</groupId>
     <artifactId>mage-root</artifactId>
-    <version>1.4.15</version>
+    <version>1.4.18</version>
     <packaging>pom</packaging>
     <name>Mage Root</name>
     <description>Mage Root POM</description>
@@ -15,10 +15,10 @@
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-compiler-plugin</artifactId>
-                <version>3.2</version>
+                <version>3.5.1</version>
                 <configuration>
-                    <source>1.7</source>
-                    <target>1.7</target>
+                    <source>1.8</source>
+                    <target>1.8</target>
                     <encoding>UTF-8</encoding>
                     <!--
                     Because of known error in maven-compiler-plugin 3.2 useIncrementalCompilation is inverted
@@ -26,26 +26,26 @@
                     https://jira.codehaus.org/browse/MCOMPILER-209
                     -->
                     <useIncrementalCompilation>false</useIncrementalCompilation>
-<!--                    <compilerArgument>-Xlint:all</compilerArgument> -->
+                    <!--                    <compilerArgument>-Xlint:all</compilerArgument> -->
                 </configuration>
             </plugin>
             <plugin>
                 <artifactId>maven-resources-plugin</artifactId>
                 <version>2.7</version>
                 <configuration>
-                <encoding>UTF-8</encoding>
+                    <encoding>UTF-8</encoding>
                 </configuration>
             </plugin>
             <plugin>
                 <artifactId>maven-jar-plugin</artifactId>
                 <version>2.5</version>
-				<configuration>
-					<archive>
-						<manifestEntries>
-							<Built-By>MageTeam</Built-By>
-						</manifestEntries>
-					</archive>
-				</configuration>
+                <configuration>
+                    <archive>
+                        <manifestEntries>
+                            <Built-By>MageTeam</Built-By>
+                        </manifestEntries>
+                    </archive>
+                </configuration>
             </plugin>
         </plugins>
     </build>
@@ -61,6 +61,7 @@
         <module>Mage.Tests</module>
         <module>Mage.Updater</module>
         <module>Mage.Stats</module>
+        <module>Mage.Verify</module>
     </modules>
 
     <repositories>
@@ -83,7 +84,7 @@
     </repositories>
 
     <properties>
-        <mage-version>1.4.15</mage-version>
+        <mage-version>1.4.18</mage-version>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
     </properties>
 
@@ -102,7 +103,7 @@
             <dependency>
                 <groupId>org.slf4j</groupId>
                 <artifactId>slf4j-log4j12</artifactId>
-                <version>1.7.10</version>
+                <version>1.7.19</version>
             </dependency>
         </dependencies>
     </dependencyManagement>

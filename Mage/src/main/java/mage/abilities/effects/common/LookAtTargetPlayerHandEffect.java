@@ -34,7 +34,6 @@ import mage.constants.Outcome;
 import mage.game.Game;
 import mage.players.Player;
 
-
 /**
  *
  * @author Quercitron
@@ -45,7 +44,7 @@ public class LookAtTargetPlayerHandEffect extends OneShotEffect {
         super(Outcome.Benefit);
         this.staticText = "Look at target player's hand";
     }
-    
+
     public LookAtTargetPlayerHandEffect(final LookAtTargetPlayerHandEffect effect) {
         super(effect);
     }
@@ -54,17 +53,17 @@ public class LookAtTargetPlayerHandEffect extends OneShotEffect {
     public LookAtTargetPlayerHandEffect copy() {
         return new LookAtTargetPlayerHandEffect(this);
     }
-    
+
     @Override
     public boolean apply(Game game, Ability source) {
         Player you = game.getPlayer(source.getControllerId());
         Player targetPlayer = game.getPlayer(source.getFirstTarget());
         MageObject sourceObject = game.getObject(source.getSourceId());
         if (you != null && targetPlayer != null) {
-            you.lookAtCards(sourceObject != null ? sourceObject.getName() : null, targetPlayer.getHand(), game);
+            you.lookAtCards(sourceObject != null ? sourceObject.getIdName() : null, targetPlayer.getHand(), game);
             return true;
         }
         return false;
     }
-    
+
 }

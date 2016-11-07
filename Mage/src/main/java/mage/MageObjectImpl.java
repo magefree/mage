@@ -38,7 +38,7 @@ import mage.abilities.costs.mana.ManaCost;
 import mage.abilities.costs.mana.ManaCosts;
 import mage.abilities.costs.mana.ManaCostsImpl;
 import mage.abilities.keyword.ChangelingAbility;
-import mage.abilities.mana.ManaAbility;
+import mage.abilities.mana.ActivatedManaAbilityImpl;
 import mage.cards.FrameStyle;
 import mage.constants.CardType;
 import mage.game.Game;
@@ -187,8 +187,8 @@ public abstract class MageObjectImpl implements MageObject {
         if (getCardType().contains(CardType.LAND)) {
             ObjectColor cl = frameColor.copy();
             for (Ability ab: getAbilities()) {
-                if (ab instanceof ManaAbility) {
-                    ManaAbility mana = (ManaAbility)ab;
+                if (ab instanceof ActivatedManaAbilityImpl) {
+                    ActivatedManaAbilityImpl mana = (ActivatedManaAbilityImpl)ab;
                     try {
                         List<Mana> manaAdded = mana.getNetMana(game);
                         for (Mana m: manaAdded) {

@@ -51,7 +51,7 @@ public class LookLibraryControllerEffect extends OneShotEffect {
 
     protected DynamicValue numberOfCards;
     protected boolean mayShuffleAfter = false;
-    protected boolean putOnTop = true; // if false on put back on bottom of library
+    protected boolean putOnTop = true; // if false on put rest back on bottom of library
     protected Zone targetZoneLookedCards; // GRAVEYARD, LIBRARY
 
     public LookLibraryControllerEffect() {

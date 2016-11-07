@@ -28,11 +28,9 @@
 package mage.client.deckeditor;
 
 import java.awt.*;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
-import java.awt.event.WindowAdapter;
-import java.awt.event.WindowEvent;
+import java.awt.event.*;
 import java.io.File;
+import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.util.*;
 import java.util.List;
@@ -49,6 +47,7 @@ import javax.swing.filechooser.FileFilter;
 import mage.cards.Card;
 import mage.cards.Sets;
 import mage.cards.decks.Deck;
+import mage.cards.decks.DeckCardLists;
 import mage.cards.decks.importer.DeckImporter;
 import mage.cards.decks.importer.DeckImporterUtil;
 import mage.cards.repository.CardInfo;
@@ -61,6 +60,7 @@ import mage.client.constants.Constants.DeckEditorMode;
 import mage.client.deck.generator.DeckGenerator.DeckGeneratorException;
 import mage.client.deck.generator.DeckGenerator;
 import mage.client.dialog.AddLandDialog;
+import mage.client.dialog.PreferencesDialog;
 import mage.client.plugins.impl.Plugins;
 import mage.client.util.Event;
 import mage.client.util.Listener;
@@ -81,6 +81,7 @@ public class DeckEditorPanel extends javax.swing.JPanel {
     private final JFileChooser fcSelectDeck;
     private final JFileChooser fcImportDeck;
     private Deck deck = new Deck();
+    private Map<UUID, Card> temporaryCards = new HashMap<>(); // Cards dragged out of one part of the view into another
     private boolean isShowCardInfo = false;
     private UUID tableId;
     private DeckEditorMode mode;
@@ -104,6 +105,7 @@ public class DeckEditorPanel extends javax.swing.JPanel {
         deckArea.setOpaque(false);
         jPanel1.setOpaque(false);
         jSplitPane1.setOpaque(false);
+        restoreDividerLocationsAndDeckAreaSettings();
         countdown = new Timer(1000,
                 new ActionListener() {
             @Override
@@ -120,12 +122,22 @@ public class DeckEditorPanel extends javax.swing.JPanel {
                 }
             }
         });
+
+        // Set up tracking to save the deck editor settings when the deck editor is hidden.
+        addHierarchyListener((HierarchyEvent e) -> {
+            if ((e.getChangeFlags() & HierarchyEvent.SHOWING_CHANGED) != 0) {
+                if (!isShowing()) {
+                    saveDividerLocationsAndDeckAreaSettings();
+                }
+            }
+        });
     }
 
     /**
      * Free resources so GC can remove unused objects from memory
      */
     public void cleanUp() {
+        saveDividerLocationsAndDeckAreaSettings();
         if (updateDeckTask != null) {
             updateDeckTask.cancel(true);
         }
@@ -144,6 +156,24 @@ public class DeckEditorPanel extends javax.swing.JPanel {
         this.bigCard = null;
     }
 
+    private void saveDividerLocationsAndDeckAreaSettings() {
+        PreferencesDialog.saveValue(PreferencesDialog.KEY_EDITOR_HORIZONTAL_DIVIDER_LOCATION, Integer.toString(jSplitPane1.getDividerLocation()));
+        PreferencesDialog.saveValue(PreferencesDialog.KEY_EDITOR_DECKAREA_SETTINGS, this.deckArea.saveSettings().toString());
+    }
+
+    private void restoreDividerLocationsAndDeckAreaSettings() {
+        // Load horizontal split position setting
+        String dividerLocation = PreferencesDialog.getCachedValue(PreferencesDialog.KEY_EDITOR_HORIZONTAL_DIVIDER_LOCATION, "");
+        if (!dividerLocation.isEmpty()) {
+            jSplitPane1.setDividerLocation(Integer.parseInt(dividerLocation));
+        }
+
+        // Load deck area settings
+        this.deckArea.loadSettings(
+                DeckArea.Settings.parse(
+                        PreferencesDialog.getCachedValue(PreferencesDialog.KEY_EDITOR_DECKAREA_SETTINGS, "")));
+    }
+
     public void changeGUISize() {
         this.cardSelector.changeGUISize();
         this.deckArea.changeGUISize();
@@ -159,25 +189,25 @@ public class DeckEditorPanel extends javax.swing.JPanel {
 
         switch (mode) {
             case LIMITED_BUILDING:
-                this.deckArea.setOrientation(/*limitedBuildingOrientation = */true);
                 this.btnAddLand.setVisible(true);
                 this.txtTimeRemaining.setVisible(true);
+                // Fall through to sideboarding
             case SIDEBOARDING:
                 this.btnSubmit.setVisible(true);
                 this.btnSubmitTimer.setVisible(true);
-                if (deck != null) {
-                    this.cardSelector.loadSideboard(new ArrayList<>(deck.getSideboard()), this.bigCard);
+                if (mode == DeckEditorMode.SIDEBOARDING) {
+                    this.deckArea.setOrientation(/*limitedBuildingOrientation = */false);
+                } else /*(if (mode == LIMITED_BUILDING)*/ {
+                    this.deckArea.setOrientation(/*limitedBuildingOrientation = */true);
                 }
-                // TODO: take from preferences
-                this.deckArea.setOrientation(/*limitedBuildingOrientation = */false);
-                this.cardSelector.switchToGrid();
+                this.cardSelector.setVisible(false);
                 this.btnExit.setVisible(false);
                 this.btnImport.setVisible(false);
                 this.btnGenDeck.setVisible(false);
                 if (!SessionHandler.isTestMode()) {
                     this.btnLoad.setVisible(false);
                 }
-                this.deckArea.showSideboard(false);
+                this.deckArea.showSideboard(true);
                 countdown.stop();
                 this.timeout = time;
                 setTimeout(timeout);
@@ -194,6 +224,7 @@ public class DeckEditorPanel extends javax.swing.JPanel {
                 this.btnSubmit.setVisible(false);
                 this.btnSubmitTimer.setVisible(false);
                 this.btnAddLand.setVisible(true);
+                this.cardSelector.setVisible(true);
                 this.cardSelector.loadCards(this.bigCard);
                 //this.cardTableSelector.loadCards(this.bigCard);
                 this.btnExit.setVisible(true);
@@ -210,8 +241,25 @@ public class DeckEditorPanel extends javax.swing.JPanel {
         this.deckArea.setDeckEditorMode(mode);
     }
 
+    private Card retrieveTemporaryCard(SimpleCardView cardView) {
+        Card card = temporaryCards.get(cardView.getId());
+        if (card == null) {
+            // Need to make a new card
+            Logger.getLogger(DeckEditorPanel.class).info("Retrieve " + cardView.getCardNumber() + " Failed");
+            card = CardRepository.instance.findCard(cardView.getExpansionSetCode(), cardView.getCardNumber()).getCard();
+        } else {
+            // Only need a temporary card once
+            temporaryCards.remove(cardView.getId());
+        }
+        return card;
+    }
+
+    private void storeTemporaryCard(Card card) {
+        temporaryCards.put(card.getId(), card);
+    }
+
     private void init() {
-        this.cardSelector.setVisible(true);
+        //this.cardSelector.setVisible(true);
         this.jPanel1.setVisible(true);
         for (ICardGrid component : this.cardSelector.getCardGridComponents()) {
             component.clearCardEventListeners();
@@ -232,10 +280,10 @@ public class DeckEditorPanel extends javax.swing.JPanel {
                             }
                             break;
                         case "remove-main":
-                            DeckEditorPanel.this.deckArea.getDeckList().handleDoubleClick();
+                            DeckEditorPanel.this.deckArea.getDeckList().removeSelection();
                             break;
                         case "remove-sideboard":
-                            DeckEditorPanel.this.deckArea.getSideboardList().handleDoubleClick();
+                            DeckEditorPanel.this.deckArea.getSideboardList().removeSelection();
                             break;
                     }
                     refreshDeck();
@@ -276,6 +324,23 @@ public class DeckEditorPanel extends javax.swing.JPanel {
                         }
                         case "set-number": {
                             setCardNumberToCardsList(event, deck.getCards());
+                            break;
+                        }
+                        case "remove-specific-card": {
+                            SimpleCardView cardView = (SimpleCardView) event.getSource();
+                            for (Card card : deck.getCards()) {
+                                if (card.getId().equals(cardView.getId())) {
+                                    deck.getCards().remove(card);
+                                    storeTemporaryCard(card);
+                                    break;
+                                }
+                            }
+                            break;
+                        }
+                        case "add-specific-card": {
+                            SimpleCardView cardView = (CardView) event.getSource();
+                            deck.getCards().add(retrieveTemporaryCard(cardView));
+                            break;
                         }
                     }
                 } else {
@@ -296,10 +361,27 @@ public class DeckEditorPanel extends javax.swing.JPanel {
                             refreshDeck();
                             break;
                         }
+                        case "remove-specific-card": {
+                            SimpleCardView cardView = (SimpleCardView) event.getSource();
+                            for (Card card : deck.getCards()) {
+                                if (card.getId().equals(cardView.getId())) {
+                                    deck.getCards().remove(card);
+                                    storeTemporaryCard(card);
+                                    break;
+                                }
+                            }
+                            break;
+                        }
+                        case "add-specific-card": {
+                            SimpleCardView cardView = (CardView) event.getSource();
+                            deck.getCards().add(retrieveTemporaryCard(cardView));
+                            break;
+                        }
                     }
                 }
             }
         });
+        this.deckArea.clearSideboardEventListeners();
         this.deckArea.addSideboardEventListener(
                 new Listener<Event>() {
             @Override
@@ -334,11 +416,44 @@ public class DeckEditorPanel extends javax.swing.JPanel {
                             break;
                         case "set-number": {
                             setCardNumberToCardsList(event, deck.getSideboard());
+                            break;
+                        }
+                        case "remove-specific-card": {
+                            cardView = (SimpleCardView) event.getSource();
+                            for (Card card : deck.getSideboard()) {
+                                if (card.getId().equals(cardView.getId())) {
+                                    deck.getSideboard().remove(card);
+                                    storeTemporaryCard(card);
+                                    break;
+                                }
+                            }
+                            break;
+                        }
+                        case "add-specific-card": {
+                            cardView = (CardView) event.getSource();
+                            deck.getSideboard().add(retrieveTemporaryCard(cardView));
+                            break;
                         }
                     }
                 } else {
                     // construct phase or sideboarding during match
                     switch (event.getEventName()) {
+                        case "remove-specific-card": {
+                            SimpleCardView cardView = (SimpleCardView) event.getSource();
+                            for (Card card : deck.getSideboard()) {
+                                if (card.getId().equals(cardView.getId())) {
+                                    deck.getSideboard().remove(card);
+                                    storeTemporaryCard(card);
+                                    break;
+                                }
+                            }
+                            break;
+                        }
+                        case "add-specific-card": {
+                            SimpleCardView cardView = (CardView) event.getSource();
+                            deck.getSideboard().add(retrieveTemporaryCard(cardView));
+                            break;
+                        }
                         case "double-click":
                         case "alt-double-click":
                             SimpleCardView cardView = (SimpleCardView) event.getSource();
@@ -463,10 +578,14 @@ public class DeckEditorPanel extends javax.swing.JPanel {
     }
 
     private void refreshDeck() {
+        refreshDeck(false);
+    }
+
+    private void refreshDeck(boolean useLayout) {
         try {
             setCursor(new Cursor(Cursor.WAIT_CURSOR));
             this.txtDeckName.setText(deck.getName());
-            deckArea.loadDeck(deck, bigCard);
+            deckArea.loadDeck(deck, useLayout, bigCard);
         } finally {
             setCursor(new Cursor(Cursor.DEFAULT_CURSOR));
         }
@@ -521,13 +640,6 @@ public class DeckEditorPanel extends javax.swing.JPanel {
         jSplitPane1.setResizeWeight(0.5);
         jSplitPane1.setTopComponent(cardSelector);
         jSplitPane1.setBottomComponent(deckArea);
-
-        SwingUtilities.invokeLater(new Runnable() {
-            @Override
-            public void run() {
-                jSplitPane1.setDividerLocation(0.6);
-            }
-        });
 
         bigCard.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
 
@@ -754,6 +866,7 @@ public class DeckEditorPanel extends javax.swing.JPanel {
     }
 
     private void btnLoadActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLoadActionPerformed
+        //fcSelectDeck.setCurrentDirectory(new File());
         String lastFolder = MageFrame.getPreferences().get("lastDeckFolder", "");
         if (!lastFolder.isEmpty()) {
             fcSelectDeck.setCurrentDirectory(new File(lastFolder));
@@ -761,17 +874,30 @@ public class DeckEditorPanel extends javax.swing.JPanel {
         int ret = fcSelectDeck.showOpenDialog(this);
         if (ret == JFileChooser.APPROVE_OPTION) {
             File file = fcSelectDeck.getSelectedFile();
+            {
+                /**
+                 * Work around a JFileChooser bug on Windows 7-10 with JRT 7+
+                 * In the case where the user selects the exact same file as was previously
+                 * selected without touching anything else in the dialog, getSelectedFile()
+                 * will erroneously return null due to some combination of our settings.
+                 *
+                 * We manually sub in the last selected file in this case.
+                 */
+                if (file == null) {
+                    if (!lastFolder.isEmpty()) {
+                        file = new File(lastFolder);
+                    }
+                }
+            }
             try {
                 setCursor(new Cursor(Cursor.WAIT_CURSOR));
                 deck = Deck.load(DeckImporterUtil.importDeck(file.getPath()), true, true);
             } catch (GameException ex) {
                 JOptionPane.showMessageDialog(MageFrame.getDesktop(), ex.getMessage(), "Error loading deck", JOptionPane.ERROR_MESSAGE);
-            } catch (Exception ex) {
-                logger.fatal(ex);
             } finally {
                 setCursor(new Cursor(Cursor.DEFAULT_CURSOR));
             }
-            refreshDeck();
+            refreshDeck(true);
             try {
                 if (file != null) {
                     MageFrame.getPreferences().put("lastDeckFolder", file.getCanonicalPath());
@@ -791,21 +917,40 @@ public class DeckEditorPanel extends javax.swing.JPanel {
         int ret = fcSelectDeck.showSaveDialog(this);
         if (ret == JFileChooser.APPROVE_OPTION) {
             File file = fcSelectDeck.getSelectedFile();
+            {
+                /**
+                 * Work around a JFileChooser bug on Windows 7-10 with JRT 7+
+                 * In the case where the user selects the exact same file as was previously
+                 * selected without touching anything else in the dialog, getSelectedFile()
+                 * will erroneously return null due to some combination of our settings.
+                 *
+                 * We manually sub in the last selected file in this case.
+                 */
+                if (file == null) {
+                    if (!lastFolder.isEmpty()) {
+                        file = new File(lastFolder);
+                    }
+                }
+            }
             try {
                 String fileName = file.getPath();
                 if (!fileName.endsWith(".dck")) {
                     fileName += ".dck";
                 }
                 setCursor(new Cursor(Cursor.WAIT_CURSOR));
-                Sets.saveDeck(fileName, deck.getDeckCardLists());
-            } catch (Exception ex) {
-                logger.fatal(ex);
+                DeckCardLists cardLists = deck.getDeckCardLists();
+                cardLists.setCardLayout(deckArea.getCardLayout());
+                cardLists.setSideboardLayout(deckArea.getSideboardLayout());
+                Sets.saveDeck(fileName, cardLists);
+            } catch (FileNotFoundException ex) {
+                JOptionPane.showMessageDialog(MageFrame.getDesktop(), ex.getMessage() + "\nTry ensuring that the selected directory is writable.", "Error saving deck", JOptionPane.ERROR_MESSAGE);
             } finally {
                 setCursor(new Cursor(Cursor.DEFAULT_CURSOR));
             }
             try {
                 MageFrame.getPreferences().put("lastDeckFolder", file.getCanonicalPath());
             } catch (IOException ex) {
+                ex.printStackTrace();
             }
         }
     }//GEN-LAST:event_btnSaveActionPerformed

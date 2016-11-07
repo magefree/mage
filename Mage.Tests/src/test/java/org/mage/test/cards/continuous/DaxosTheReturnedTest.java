@@ -50,7 +50,7 @@ public class DaxosTheReturnedTest extends CardTestPlayerBase {
         addCard(Zone.BATTLEFIELD, playerA, "Swamp", 8);
         addCard(Zone.BATTLEFIELD, playerA, "Plains", 1);
         // Whenever you cast an enchantment spell, you get an experience counter.
-        // {1}{W}{B}: Put a white and black Spirit enchantment creature token onto the battlefield. It has
+        // {1}{W}{B}: Create a white and black Spirit enchantment creature token onto the battlefield. It has
         // "This creature's power and toughness are each equal to the number of experience counters you have."
         addCard(Zone.BATTLEFIELD, playerA, "Daxos the Returned");
 

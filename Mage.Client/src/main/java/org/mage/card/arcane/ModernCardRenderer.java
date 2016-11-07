@@ -22,12 +22,9 @@ import java.text.CharacterIterator;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
-import java.util.Random;
 import javax.swing.ImageIcon;
-
 import mage.ObjectColor;
 import mage.cards.FrameStyle;
-import mage.client.cards.Permanent;
 import mage.client.dialog.PreferencesDialog;
 import mage.constants.CardType;
 import mage.view.CardView;
@@ -221,7 +218,7 @@ public class ModernCardRenderer extends CardRenderer {
                 BOX_HEIGHT_FRAC * cardHeight);
 
         // Type line at
-        typeLineY = (int)(getTypeLineYFrac() * cardHeight);
+        typeLineY = (int) (getTypeLineYFrac() * cardHeight);
 
         // Box text height
         boxTextHeight = getTextHeightForBoxHeight(boxHeight);
@@ -230,8 +227,7 @@ public class ModernCardRenderer extends CardRenderer {
         //boxTextFont = BASE_BELEREN_FONT.deriveFont(Font.PLAIN, boxTextHeight);
         boxTextFont = new Font("Arial", Font.PLAIN, boxTextHeight);
         boxTextFontNarrow = new Font("Arial Narrow", Font.PLAIN, boxTextHeight);
-        
-        
+
         // Box text height
         ptTextHeight = getPTTextHeightForLineHeight(boxHeight);
         ptTextOffset = (boxHeight - ptTextHeight) / 2;
@@ -254,11 +250,11 @@ public class ModernCardRenderer extends CardRenderer {
         } else {
             borderColor = Color.BLACK;
         }
-        
+
         // Draw border as one rounded rectangle
         g.setColor(borderColor);
         g.fillRoundRect(0, 0, cardWidth, cardHeight, cornerRadius, cornerRadius);
-        
+
         /* // Separate selection highlight border from card itself. Not used right now
         if (borderColor != null) {
             float hwidth = borderWidth / 2.0f;
@@ -273,7 +269,7 @@ public class ModernCardRenderer extends CardRenderer {
             g2.draw(rect);
             g2.dispose();
         }
-        */
+         */
     }
 
     @Override
@@ -308,6 +304,7 @@ public class ModernCardRenderer extends CardRenderer {
 
     /**
      * Get the region to slice out of a source art image for the card
+     *
      * @return
      */
     private Rectangle2D getArtRect() {
@@ -334,9 +331,9 @@ public class ModernCardRenderer extends CardRenderer {
 
     protected boolean isSourceArtFullArt() {
         int color = artImage.getRGB(0, artImage.getHeight() / 2);
-        return (((color & 0x00FF0000) > 0x00200000) ||
-                ((color & 0x0000FF00) > 0x00002000) ||
-                ((color & 0x000000FF) > 0x00000020));
+        return (((color & 0x00FF0000) > 0x00200000)
+                || ((color & 0x0000FF00) > 0x00002000)
+                || ((color & 0x000000FF) > 0x00000020));
     }
 
     private boolean useInventionFrame() {
@@ -365,24 +362,22 @@ public class ModernCardRenderer extends CardRenderer {
             double targetAspect = targetWidth / targetHeight;
             if (useInventionFrame()) {
                 // No adjustment to art
+            } else if (targetAspect * artHeight < artWidth) {
+                // Trim off some width
+                artWidth = targetAspect * artHeight;
             } else {
-                if (targetAspect * artHeight < artWidth) {
-                    // Trim off some width
-                    artWidth = targetAspect * artHeight;
-                } else {
-                    // Trim off some height
-                    artHeight = artWidth / targetAspect;
-                }
+                // Trim off some height
+                artHeight = artWidth / targetAspect;
             }
             try {
                 BufferedImage subImg
                         = artImage.getSubimage(
-                        (int) (artRect.getX() * fullCardImgWidth), (int) (artRect.getY() * fullCardImgHeight),
-                        (int) artWidth, (int) artHeight);
+                                (int) (artRect.getX() * fullCardImgWidth), (int) (artRect.getY() * fullCardImgHeight),
+                                (int) artWidth, (int) artHeight);
                 if (useInventionFrame()) {
                     g.drawImage(subImg,
                             borderWidth, borderWidth,
-                            cardWidth - 2*borderWidth, cardHeight - 2*borderWidth,
+                            cardWidth - 2 * borderWidth, cardHeight - 2 * borderWidth,
                             null);
                 } else {
                     g.drawImage(subImg,
@@ -727,6 +722,7 @@ public class ModernCardRenderer extends CardRenderer {
     protected boolean loyaltyAbilityColorToggle = false;
 
     private class RuleLayout {
+
         public List<AttributedString> attributedRules;
         public int remainingHeight;
         public boolean fits;
@@ -735,7 +731,8 @@ public class ModernCardRenderer extends CardRenderer {
     }
 
     /**
-     * Figure out if a given text size will work for laying out the rules in a card textbox
+     * Figure out if a given text size will work for laying out the rules in a
+     * card textbox
      */
     protected RuleLayout layoutRules(Graphics2D g, List<TextboxRule> rules, int w, int h, int fontSize) {
         // The fonts to try
@@ -749,7 +746,7 @@ public class ModernCardRenderer extends CardRenderer {
         for (TextboxRule rule : rules) {
             AttributedString attributed = rule.generateAttributedString(font, fontItalic);
             attributedRules.add(attributed);
-            remaining -= drawSingleRule(g, attributed, rule, 0, 0, w, remaining, /*doDraw=*/false);
+            remaining -= drawSingleRule(g, attributed, rule, 0, 0, w, remaining, /*doDraw=*/ false);
             if (remaining < 0) {
                 fits = false;
                 break;
@@ -779,13 +776,13 @@ public class ModernCardRenderer extends CardRenderer {
 
         // Basic mana draw mana symbol in textbox (for basic lands)
         if (allRules.size() == 1 && (allRules.get(0) instanceof TextboxBasicManaRule) && cardView.getCardTypes().contains(CardType.LAND)) {
-            drawBasicManaTextbox(g, x, y, w, h, ((TextboxBasicManaRule)allRules.get(0)).getBasicManaSymbol());
+            drawBasicManaTextbox(g, x, y, w, h, ((TextboxBasicManaRule) allRules.get(0)).getBasicManaSymbol());
             return;
         }
 
         // Go through possible font sizes in descending order to find the best fit
         RuleLayout bestLayout = null;
-        for (int fontSize: RULES_TEXT_FONT_SIZES) {
+        for (int fontSize : RULES_TEXT_FONT_SIZES) {
             bestLayout = layoutRules(g, allRules, w, h, fontSize);
 
             // Stop, we found a good fit
@@ -803,7 +800,7 @@ public class ModernCardRenderer extends CardRenderer {
         // If so, calculate the padding based on how much space was left over
         int padding;
         if (bestLayout.fits) {
-            padding = (int) (((float)bestLayout.remainingHeight) / (1 + allRules.size()));
+            padding = (int) (((float) bestLayout.remainingHeight) / (1 + allRules.size()));
         } else {
             // When the text doesn't fit to begin with there's no room for padding
             padding = 0;
@@ -828,9 +825,9 @@ public class ModernCardRenderer extends CardRenderer {
     // Draw a basic mana symbol
     private void drawBasicManaTextbox(Graphics2D g, int x, int y, int w, int h, String symbol) {
         String symbs = symbol;
-        int symbHeight = (int)(0.8*h);
+        int symbHeight = (int) (0.8 * h);
         int manaCostWidth = CardRendererUtils.getManaCostWidth(symbs, symbHeight);
-        ManaSymbols.draw(g, symbs, x + (w - manaCostWidth)/2, y + (h - symbHeight)/2, symbHeight);
+        ManaSymbols.draw(g, symbs, x + (w - manaCostWidth) / 2, y + (h - symbHeight) / 2, symbHeight);
     }
 
     // Get the first line of the textbox, the keyword string
@@ -1205,12 +1202,10 @@ public class ModernCardRenderer extends CardRenderer {
                         0, 0, width, 0,
                         new float[]{0.4f, 0.6f},
                         translatedColors);
+            } else if (types.contains(CardType.LAND)) {
+                return LAND_TEXTBOX_GOLD;
             } else {
-                if (types.contains(CardType.LAND)) {
-                    return LAND_TEXTBOX_GOLD;
-                } else {
-                    return TEXTBOX_GOLD;
-                }
+                return TEXTBOX_GOLD;
             }
         } else if (colors.isColorless()) {
             if (types.contains(CardType.LAND)) {
@@ -1218,12 +1213,10 @@ public class ModernCardRenderer extends CardRenderer {
             } else {
                 return TEXTBOX_COLORLESS;
             }
+        } else if (types.contains(CardType.LAND)) {
+            return getLandTextboxColor(colors);
         } else {
-            if (types.contains(CardType.LAND)) {
-                return getLandTextboxColor(colors);
-            } else {
-                return getTextboxColor(colors);
-            }
+            return getTextboxColor(colors);
         }
     }
 }

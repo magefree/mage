@@ -31,6 +31,7 @@ import java.awt.AWTEvent;
 import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Component;
+import static java.awt.Component.LEFT_ALIGNMENT;
 import java.awt.Container;
 import java.awt.Dimension;
 import java.awt.Font;
@@ -90,6 +91,7 @@ import mage.client.cards.BigCard;
 import mage.client.chat.ChatPanelBasic;
 import mage.client.combat.CombatManager;
 import mage.client.components.HoverButton;
+import mage.client.components.KeyboundButton;
 import mage.client.components.MageComponents;
 import mage.client.components.ext.dlg.DialogManager;
 import mage.client.components.layout.RelativeLayout;
@@ -99,9 +101,7 @@ import mage.client.dialog.PickChoiceDialog;
 import mage.client.dialog.PickNumberDialog;
 import mage.client.dialog.PickPileDialog;
 import mage.client.dialog.PreferencesDialog;
-import static mage.client.dialog.PreferencesDialog.KEY_GAME_MANA_AUTOPAYMENT;
-import static mage.client.dialog.PreferencesDialog.KEY_GAME_MANA_AUTOPAYMENT_ONLY_ONE;
-import static mage.client.dialog.PreferencesDialog.KEY_USE_FIRST_MANA_ABILITY;
+import static mage.client.dialog.PreferencesDialog.*;
 import mage.client.dialog.ShowCardsDialog;
 import mage.client.game.FeedbackPanel.FeedbackMode;
 import mage.client.plugins.adapters.MageActionCallback;
@@ -342,7 +342,7 @@ public final class GamePanel extends javax.swing.JPanel {
             pickTargetDialog.cleanUp();
             pickTargetDialog.removeDialog();
         }
-        Plugins.getInstance().getActionCallback().hideTooltipPopup();
+        Plugins.getInstance().getActionCallback().hideOpenComponents();
         try {
             Component popupContainer = MageFrame.getUI().getComponent(MageComponents.POPUP_CONTAINER);
             popupContainer.setVisible(false);
@@ -1177,7 +1177,7 @@ public final class GamePanel extends javax.swing.JPanel {
             }
         }
         updateGame(gameView);
-        Map<String, Serializable> options0 = options == null ? new HashMap<String, Serializable>() : options;
+        Map<String, Serializable> options0 = options == null ? new HashMap<>() : options;
         ShowCardsDialog dialog = null;
         if (cardView != null && cardView.size() > 0) {
             dialog = showCards(message, cardView, required, options0, popupMenuType);
@@ -1355,13 +1355,13 @@ public final class GamePanel extends javax.swing.JPanel {
         txtHoldPriority.setToolTipText("Holding priority after the next spell cast or ability activation");
         txtHoldPriority.setVisible(false);
 
-        btnCancelSkip = new javax.swing.JButton(); // F3
-        btnSkipToNextTurn = new javax.swing.JButton(); // F4
-        btnSkipToEndTurn = new javax.swing.JButton(); // F5
-        btnSkipToNextMain = new javax.swing.JButton(); // F7
-        btnSkipStack = new javax.swing.JButton(); // F8
-        btnSkipToYourTurn = new javax.swing.JButton(); // F9
-        btnSkipToEndStepBeforeYourTurn = new javax.swing.JButton(); // F11
+        btnCancelSkip = new KeyboundButton(KEY_CONTROL_CANCEL_SKIP); // F3
+        btnSkipToNextTurn = new KeyboundButton(KEY_CONTROL_NEXT_TURN); // F4
+        btnSkipToEndTurn = new KeyboundButton(KEY_CONTROL_END_STEP); // F5
+        btnSkipToNextMain = new KeyboundButton(KEY_CONTROL_MAIN_STEP); // F7
+        btnSkipStack = new KeyboundButton(KEY_CONTROL_SKIP_STACK); // F10
+        btnSkipToYourTurn = new KeyboundButton(KEY_CONTROL_YOUR_TURN); // F9
+        btnSkipToEndStepBeforeYourTurn = new KeyboundButton(KEY_CONTROL_PRIOR_END); // F11
 
         btnConcede = new javax.swing.JButton();
         btnSwitchHands = new javax.swing.JButton();
@@ -1446,7 +1446,7 @@ public final class GamePanel extends javax.swing.JPanel {
 
         int c = JComponent.WHEN_IN_FOCUSED_WINDOW;
 
-        KeyStroke ks3 = KeyStroke.getKeyStroke(KeyEvent.VK_F3, 0);
+        KeyStroke ks3 = getCachedKeystroke(KEY_CONTROL_CANCEL_SKIP);
         this.getInputMap(c).put(ks3, "F3_PRESS");
         this.getActionMap().put("F3_PRESS", new AbstractAction() {
             @Override
@@ -1458,7 +1458,8 @@ public final class GamePanel extends javax.swing.JPanel {
         btnCancelSkip.setContentAreaFilled(false);
         btnCancelSkip.setBorder(new EmptyBorder(BORDER_SIZE, BORDER_SIZE, BORDER_SIZE, BORDER_SIZE));
         btnCancelSkip.setIcon(new ImageIcon(ImageManagerImpl.getInstance().getCancelSkipButtonImage()));
-        btnCancelSkip.setToolTipText("Cancel all skip actions (F3).");
+        btnCancelSkip.setToolTipText("Cancel all skip actions ("
+                + getCachedKeyText(KEY_CONTROL_CANCEL_SKIP) + ").");
         btnCancelSkip.setFocusable(false);
         btnCancelSkip.addMouseListener(new MouseAdapter() {
             @Override
@@ -1472,7 +1473,8 @@ public final class GamePanel extends javax.swing.JPanel {
         btnSkipToNextTurn.setContentAreaFilled(false);
         btnSkipToNextTurn.setBorder(new EmptyBorder(BORDER_SIZE, BORDER_SIZE, BORDER_SIZE, BORDER_SIZE));
         btnSkipToNextTurn.setIcon(new ImageIcon(ImageManagerImpl.getInstance().getSkipNextTurnButtonImage()));
-        btnSkipToNextTurn.setToolTipText("Skip to next turn (F4).");
+        btnSkipToNextTurn.setToolTipText("Skip to next turn ("
+                + getCachedKeyText(KEY_CONTROL_NEXT_TURN) + ").");
         btnSkipToNextTurn.setFocusable(false);
         btnSkipToNextTurn.addMouseListener(new MouseAdapter() {
             @Override
@@ -1483,7 +1485,7 @@ public final class GamePanel extends javax.swing.JPanel {
             }
         });
 
-        KeyStroke ks = KeyStroke.getKeyStroke(KeyEvent.VK_F4, 0);
+        KeyStroke ks = getCachedKeystroke(KEY_CONTROL_NEXT_TURN);
         this.getInputMap(c).put(ks, "F4_PRESS");
         this.getActionMap().put("F4_PRESS", new AbstractAction() {
             @Override
@@ -1495,7 +1497,8 @@ public final class GamePanel extends javax.swing.JPanel {
         btnSkipToEndTurn.setContentAreaFilled(false);
         btnSkipToEndTurn.setBorder(new EmptyBorder(BORDER_SIZE, BORDER_SIZE, BORDER_SIZE, BORDER_SIZE));
         btnSkipToEndTurn.setIcon(new ImageIcon(ImageManagerImpl.getInstance().getSkipEndTurnButtonImage()));
-        btnSkipToEndTurn.setToolTipText("Skip to (opponents/next) end of turn step (F5) - adjust using preferences.");
+        btnSkipToEndTurn.setToolTipText("Skip to (opponents/next) end of turn step ("
+                + getCachedKeyText(KEY_CONTROL_END_STEP) + ") - adjust using preferences.");
         btnSkipToEndTurn.setFocusable(false);
         btnSkipToEndTurn.addMouseListener(new MouseAdapter() {
             @Override
@@ -1506,7 +1509,7 @@ public final class GamePanel extends javax.swing.JPanel {
             }
         });
 
-        ks = KeyStroke.getKeyStroke(KeyEvent.VK_F5, 0);
+        ks = getCachedKeystroke(KEY_CONTROL_END_STEP);
         this.getInputMap(c).put(ks, "F5_PRESS");
         this.getActionMap().put("F5_PRESS", new AbstractAction() {
             @Override
@@ -1515,7 +1518,7 @@ public final class GamePanel extends javax.swing.JPanel {
             }
         });
 
-        ks = KeyStroke.getKeyStroke(KeyEvent.VK_F6, 0);
+        ks = getCachedKeystroke(KEY_CONTROL_SKIP_STEP);
         this.getInputMap(c).put(ks, "F6_PRESS");
         this.getActionMap().put("F6_PRESS", new AbstractAction() {
             @Override
@@ -1527,7 +1530,8 @@ public final class GamePanel extends javax.swing.JPanel {
         btnSkipToNextMain.setContentAreaFilled(false);
         btnSkipToNextMain.setBorder(new EmptyBorder(BORDER_SIZE, BORDER_SIZE, BORDER_SIZE, BORDER_SIZE));
         btnSkipToNextMain.setIcon(new ImageIcon(ImageManagerImpl.getInstance().getSkipMainButtonImage()));
-        btnSkipToNextMain.setToolTipText("Skip to (your) next main phase (F7) - adjust using preferences.");
+        btnSkipToNextMain.setToolTipText("Skip to (your) next main phase ("
+                + getCachedKeyText(KEY_CONTROL_MAIN_STEP) + ") - adjust using preferences.");
         btnSkipToNextMain.setFocusable(false);
         btnSkipToNextMain.addMouseListener(new MouseAdapter() {
             @Override
@@ -1538,7 +1542,7 @@ public final class GamePanel extends javax.swing.JPanel {
             }
         });
 
-        ks = KeyStroke.getKeyStroke(KeyEvent.VK_F7, 0);
+        ks = getCachedKeystroke(KEY_CONTROL_MAIN_STEP);
         this.getInputMap(c).put(ks, "F7_PRESS");
         this.getActionMap().put("F7_PRESS", new AbstractAction() {
             @Override
@@ -1550,7 +1554,8 @@ public final class GamePanel extends javax.swing.JPanel {
         btnSkipToYourTurn.setContentAreaFilled(false);
         btnSkipToYourTurn.setBorder(new EmptyBorder(BORDER_SIZE, BORDER_SIZE, BORDER_SIZE, BORDER_SIZE));
         btnSkipToYourTurn.setIcon(new ImageIcon(ImageManagerImpl.getInstance().getSkipYourNextTurnButtonImage()));
-        btnSkipToYourTurn.setToolTipText("Skip to your next turn (F9).");
+        btnSkipToYourTurn.setToolTipText("Skip to your next turn ("
+                + getCachedKeyText(KEY_CONTROL_YOUR_TURN) + ").");
         btnSkipToYourTurn.setFocusable(false);
         btnSkipToYourTurn.addMouseListener(new MouseAdapter() {
             @Override
@@ -1561,7 +1566,7 @@ public final class GamePanel extends javax.swing.JPanel {
             }
         });
 
-        KeyStroke ks9 = KeyStroke.getKeyStroke(KeyEvent.VK_F9, 0);
+        KeyStroke ks9 = getCachedKeystroke(KEY_CONTROL_YOUR_TURN);
         this.getInputMap(c).put(ks9, "F9_PRESS");
         this.getActionMap().put("F9_PRESS", new AbstractAction() {
             @Override
@@ -1573,7 +1578,8 @@ public final class GamePanel extends javax.swing.JPanel {
         btnSkipToEndStepBeforeYourTurn.setContentAreaFilled(false);
         btnSkipToEndStepBeforeYourTurn.setBorder(new EmptyBorder(BORDER_SIZE, BORDER_SIZE, BORDER_SIZE, BORDER_SIZE));
         btnSkipToEndStepBeforeYourTurn.setIcon(new ImageIcon(ImageManagerImpl.getInstance().getSkipEndStepBeforeYourTurnButtonImage()));
-        btnSkipToEndStepBeforeYourTurn.setToolTipText("Skip to the end step before your turn (F11) - adjust using preferences.");
+        btnSkipToEndStepBeforeYourTurn.setToolTipText("Skip to the end step before your turn ("
+                + getCachedKeyText(KEY_CONTROL_PRIOR_END) + ") - adjust using preferences.");
         btnSkipToEndStepBeforeYourTurn.setFocusable(false);
         btnSkipToEndStepBeforeYourTurn.addMouseListener(new MouseAdapter() {
             @Override
@@ -1584,7 +1590,7 @@ public final class GamePanel extends javax.swing.JPanel {
             }
         });
 
-        KeyStroke ks11 = KeyStroke.getKeyStroke(KeyEvent.VK_F11, 0);
+        KeyStroke ks11 = getCachedKeystroke(KEY_CONTROL_PRIOR_END);
         this.getInputMap(c).put(ks11, "F11_PRESS");
         this.getActionMap().put("F11_PRESS", new AbstractAction() {
             @Override
@@ -1596,7 +1602,8 @@ public final class GamePanel extends javax.swing.JPanel {
         btnSkipStack.setContentAreaFilled(false);
         btnSkipStack.setBorder(new EmptyBorder(BORDER_SIZE, BORDER_SIZE, BORDER_SIZE, BORDER_SIZE));
         btnSkipStack.setIcon(new ImageIcon(ImageManagerImpl.getInstance().getSkipStackButtonImage()));
-        btnSkipStack.setToolTipText("Skip until stack is resolved (F10).");
+        btnSkipStack.setToolTipText("Skip until stack is resolved ("
+                + getCachedKeyText(KEY_CONTROL_SKIP_STACK) + ").");
         btnSkipStack.setFocusable(false);
         btnSkipStack.addMouseListener(new MouseAdapter() {
             @Override
@@ -1607,7 +1614,7 @@ public final class GamePanel extends javax.swing.JPanel {
             }
         });
 
-        ks = KeyStroke.getKeyStroke(KeyEvent.VK_F10, 0);
+        ks = getCachedKeystroke(KEY_CONTROL_SKIP_STACK);
         this.getInputMap(c).put(ks, "F10_PRESS");
         this.getActionMap().put("F10_PRESS", new AbstractAction() {
             @Override
@@ -1630,7 +1637,7 @@ public final class GamePanel extends javax.swing.JPanel {
             }
         });
 
-        KeyStroke ks2 = KeyStroke.getKeyStroke(KeyEvent.VK_F2, 0);
+        KeyStroke ks2 = getCachedKeystroke(KEY_CONTROL_CONFIRM);
         this.getInputMap(c).put(ks2, "F2_PRESS");
         this.getActionMap().put("F2_PRESS", new AbstractAction() {
             @Override
@@ -2346,7 +2353,6 @@ public final class GamePanel extends javax.swing.JPanel {
         return gameChatPanel.getText();
     }
 
-
     public Map<String, Card> getLoadedCards() {
         return loadedCards;
     }
@@ -2406,13 +2412,13 @@ public final class GamePanel extends javax.swing.JPanel {
     private mage.client.cards.BigCard bigCard;
 
 //    private JPanel cancelSkipPanel;
-    private javax.swing.JButton btnCancelSkip;
-    private javax.swing.JButton btnSkipToNextTurn; // F4
-    private javax.swing.JButton btnSkipToEndTurn; // F5
-    private javax.swing.JButton btnSkipToNextMain; // F7
-    private javax.swing.JButton btnSkipStack; // F8
-    private javax.swing.JButton btnSkipToYourTurn; // F9
-    private javax.swing.JButton btnSkipToEndStepBeforeYourTurn; // F11
+    private KeyboundButton btnCancelSkip;
+    private KeyboundButton btnSkipToNextTurn; // F4
+    private KeyboundButton btnSkipToEndTurn; // F5
+    private KeyboundButton btnSkipToNextMain; // F7
+    private KeyboundButton btnSkipStack; // F8
+    private KeyboundButton btnSkipToYourTurn; // F9
+    private KeyboundButton btnSkipToEndStepBeforeYourTurn; // F11
 
     private javax.swing.JButton btnConcede;
     private javax.swing.JButton btnSwitchHands;

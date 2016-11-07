@@ -64,22 +64,10 @@ public class AddManaAnyColorAttachedControllerEffect extends ManaEffect {
                             return false;
                         }
                     }
-                    int amount = 1;
-                    Mana mana = null;
-                    if (choice.getColor().isBlack()) {
-                        mana = Mana.BlackMana(amount);
-                    } else if (choice.getColor().isBlue()) {
-                        mana = Mana.BlueMana(amount);
-                    } else if (choice.getColor().isRed()) {
-                        mana = Mana.RedMana(amount);
-                    } else if (choice.getColor().isGreen()) {
-                        mana = Mana.GreenMana(amount);
-                    } else if (choice.getColor().isWhite()) {
-                        mana = Mana.WhiteMana(amount);
-                    }
+                    Mana mana = choice.getMana(1);
                     if (mana != null) {
                         checkToFirePossibleEvents(mana, game, source);
-                        player.getManaPool().addMana(mana, game, source);                        
+                        player.getManaPool().addMana(mana, game, source);
                         return true;
                     }
                 }

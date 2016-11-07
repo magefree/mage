@@ -24,11 +24,11 @@
 * The views and conclusions contained in the software and documentation are those of the
 * authors and should not be interpreted as representing official policies, either expressed
 * or implied, of BetaSteward_at_googlemail.com.
-*/
-
+ */
 package mage.abilities;
 
 import java.util.UUID;
+import mage.abilities.mana.ManaOptions;
 import mage.game.Game;
 
 /**
@@ -38,20 +38,30 @@ import mage.game.Game;
 public interface ActivatedAbility extends Ability {
 
     boolean canActivate(UUID playerId, Game game);
-    
+
+    /**
+     * Returns the minimal possible cost for what the ability can be activated
+     * or cast
+     *
+     * @param playerId
+     * @param game
+     * @return
+     */
+    ManaOptions getMinimumCostToActivate(UUID playerId, Game game);
+
     /**
      * Creates a fresh copy of this activated ability.
-     * 
+     *
      * @return A new copy of this ability.
      */
     @Override
-    ActivatedAbility copy();   
-    
+    ActivatedAbility copy();
+
     /**
-     * Set a flag to know, that the ability is only created adn used to check 
+     * Set a flag to know, that the ability is only created adn used to check
      * what's playbable for the player.
      */
     void setCheckPlayableMode();
-    
+
     boolean isCheckPlayableMode();
 }

@@ -43,7 +43,7 @@ public class ManaSymbols {
     private static String cachedPath;
     private static final String[] symbols = new String[]{"0", "1", "10", "11", "12", "15", "16", "2", "3", "4", "5", "6", "7", "8", "9", "B", "BG",
         "BR", "G", "GU", "GW", "R", "RG", "RW", "S", "T", "U", "UB", "UR", "W", "WB", "WU",
-        "WP", "UP", "BP", "RP", "GP", "X", "C"};
+        "WP", "UP", "BP", "RP", "GP", "X", "C", "E"};
 
     public static void loadImages() {
         renameSymbols(getSymbolsPath() + File.separator + "symbols");
@@ -58,11 +58,11 @@ public class ManaSymbols {
         }
         for (String set : setCodes) {
             String[] codes = new String[]{"C", "U", "R", "M"};
-            
+
             Map<String, Image> rarityImages = new HashMap<>();
             setImages.put(set, rarityImages);
-            
-            for (String rarityCode: codes) {
+
+            for (String rarityCode : codes) {
                 File file = new File(getSymbolsPath() + Constants.RESOURCE_PATH_SET + set + "-" + rarityCode + ".jpg");
                 try {
                     Image image = UI.getImageIcon(file.getAbsolutePath()).getImage();
@@ -80,7 +80,7 @@ public class ManaSymbols {
                 } catch (Exception e) {
                 }
             }
-            
+
             try {
                 File file = new File(getSymbolsPath() + Constants.RESOURCE_PATH_SET_SMALL);
                 if (!file.exists()) {
@@ -153,11 +153,15 @@ public class ManaSymbols {
                     sizedSymbols.put(symbol, notResized);
                 } else {
                     Rectangle r = new Rectangle(size, size);
-                    Image image = UI.getImageIcon(file.getAbsolutePath()).getImage();
-                    BufferedImage resized = ImageHelper.getResizedImage(BufferedImageBuilder.bufferImage(image, BufferedImage.TYPE_INT_ARGB), r);
-                    sizedSymbols.put(symbol, resized);
+                    //Image image = UI.getImageIcon(file.getAbsolutePath()).getImage();
+                    BufferedImage image = ImageIO.read(file);
+                    //BufferedImage resized = ImageHelper.getResizedImage(BufferedImageBuilder.bufferImage(image, BufferedImage.TYPE_INT_ARGB), r);
+                    if (image != null) {
+                        BufferedImage resized = ImageHelper.getResizedImage(image, r);
+                        sizedSymbols.put(symbol, resized);
+                    }
                 }
-            } catch (Exception e) {
+            } catch (IOException e) {
                 LOGGER.error("Error for symbol:" + symbol);
                 fileErrors = true;
             }
@@ -285,7 +289,7 @@ public class ManaSymbols {
         if (symbolFilesFound) {
             replaced = REPLACE_SYMBOLS_PATTERN.matcher(value).replaceAll(
                     "<img src='file:" + getSymbolsPath(true) + "/symbols/" + resourcePath + "/$1$2.gif' alt='$1$2' width=" + symbolSize
-                            + " height=" + symbolSize + ">");
+                    + " height=" + symbolSize + ">");
         }
         replaced = replaced.replace("|source|", "{source}");
         replaced = replaced.replace("|this|", "{this}");
@@ -307,20 +311,20 @@ public class ManaSymbols {
     public static Image getSetSymbolImage(String set) {
         return getSetSymbolImage(set, "C");
     }
-    
+
     public static Image getSetSymbolImage(String set, String rarity) {
         Map<String, Image> rarityImages = setImages.get(set);
         if (rarityImages != null) {
             return rarityImages.get(rarity);
         } else {
             return null;
-        }       
+        }
     }
 
     public static BufferedImage getSizedManaSymbol(String symbol) {
         return getSizedManaSymbol(symbol, GUISizeHelper.symbolDialogSize);
     }
-    
+
     public static BufferedImage getSizedManaSymbol(String symbol, int size) {
         if (!manaImages.containsKey(size)) {
             loadSymbolsImages(size);

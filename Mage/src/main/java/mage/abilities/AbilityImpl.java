@@ -52,7 +52,7 @@ import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.BasicManaEffect;
 import mage.abilities.effects.common.DynamicManaEffect;
 import mage.abilities.keyword.FlashbackAbility;
-import mage.abilities.mana.ManaAbility;
+import mage.abilities.mana.ActivatedManaAbilityImpl;
 import mage.cards.Card;
 import mage.constants.AbilityType;
 import mage.constants.AbilityWord;
@@ -307,8 +307,7 @@ public abstract class AbilityImpl implements Ability {
             return false;
         }
         for (UUID modeId : this.getModes().getSelectedModes()) {
-            Mode mode = this.getModes().get(modeId);
-            this.getModes().setActiveMode(mode);
+            this.getModes().setActiveMode(modeId);
             //20121001 - 601.2c
             // 601.2c The player announces his or her choice of an appropriate player, object, or zone for
             // each target the spell requires. A spell may require some targets only if an alternative or
@@ -329,13 +328,16 @@ public abstract class AbilityImpl implements Ability {
             if (sourceObject != null && !this.getAbilityType().equals(AbilityType.TRIGGERED)) { // triggered abilities check this already in playerImpl.triggerAbility
                 sourceObject.adjustTargets(this, game);
             }
-            // Flashback abilities haven't made the choices the underlying spell might need for targetting.
-            if (!(this instanceof FlashbackAbility) && mode.getTargets().size() > 0 && mode.getTargets().chooseTargets(
-                    getEffects().get(0).getOutcome(), this.controllerId, this, noMana, game) == false) {
-                if ((variableManaCost != null || announceString != null) && !game.isSimulation()) {
-                    game.informPlayer(controller, (sourceObject != null ? sourceObject.getIdName() : "") + ": no valid targets with this value of X");
+            // Flashback abilities haven't made the choices the underlying spell might need for targeting.
+            if (!(this instanceof FlashbackAbility)
+                    && getTargets().size() > 0) {
+                Outcome outcome = getEffects().isEmpty() ? Outcome.Detriment : getEffects().get(0).getOutcome();
+                if (getTargets().chooseTargets(outcome, this.controllerId, this, noMana, game) == false) {
+                    if ((variableManaCost != null || announceString != null) && !game.isSimulation()) {
+                        game.informPlayer(controller, (sourceObject != null ? sourceObject.getIdName() : "") + ": no valid targets with this value of X");
+                    }
+                    return false; // when activation of ability is canceled during target selection
                 }
-                return false; // when activation of ability is canceled during target selection
             }
         } // end modes
 
@@ -367,7 +369,7 @@ public abstract class AbilityImpl implements Ability {
         }
 
         // this is a hack to prevent mana abilities with mana costs from causing endless loops - pay other costs first
-        if (this instanceof ManaAbility && !costs.pay(this, game, sourceId, controllerId, noMana, null)) {
+        if (this instanceof ActivatedManaAbilityImpl && !costs.pay(this, game, sourceId, controllerId, noMana, null)) {
             logger.debug("activate mana ability failed - non mana costs");
             return false;
         }

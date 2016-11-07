@@ -41,7 +41,7 @@ import mage.game.permanent.Permanent;
 public class SacrificeSourceCost extends CostImpl {
 
     public SacrificeSourceCost() {
-        this.text = "Sacrifice {this}";
+        this.text = "sacrifice {this}";
     }
 
     public SacrificeSourceCost(SacrificeSourceCost cost) {

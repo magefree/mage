@@ -27,15 +27,9 @@
  */
 package mage.game.permanent;
 
-import java.util.ArrayList;
 import java.util.UUID;
 import mage.cards.Card;
-import mage.cards.CardsImpl;
-import mage.cards.MeldCard;
-import mage.constants.Zone;
 import mage.game.Game;
-import mage.game.events.ZoneChangeEvent;
-import mage.players.Player;
 
 /**
  *

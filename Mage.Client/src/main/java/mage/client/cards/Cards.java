@@ -265,7 +265,7 @@ public class Cards extends javax.swing.JPanel {
     }
 
     private void addCard(CardView card, BigCard bigCard, UUID gameId) {
-        MageCard mageCard = Plugins.getInstance().getMageCard(card, bigCard, getCardDimension(), gameId, true);
+        MageCard mageCard = Plugins.getInstance().getMageCard(card, bigCard, getCardDimension(), gameId, true, true);
         if (zone != null) {
             mageCard.setZone(zone);
         }

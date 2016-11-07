@@ -124,7 +124,7 @@ public class StackDialog extends IDialogPanel {
                 card = tmp;
             }
 
-            MageCard cardImg = Plugins.getInstance().getMageCard(card, bigCard, getCardDimension(), gameId, true);
+            MageCard cardImg = Plugins.getInstance().getMageCard(card, bigCard, getCardDimension(), gameId, true, true);
             //cardImg.setBorder(BorderFactory.createLineBorder(Color.red));
             cardImg.setLocation(dx, dy);
 

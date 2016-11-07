@@ -29,9 +29,11 @@
 package mage.cards.basiclands;
 
 import java.util.UUID;
+
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Rarity;
-import mage.abilities.mana.ManaAbility;
+import mage.abilities.mana.ActivatedManaAbilityImpl;
 import mage.cards.CardImpl;
 
 /**
@@ -40,12 +42,8 @@ import mage.cards.CardImpl;
  */
 public abstract class BasicLand extends CardImpl {
 
-    public BasicLand(UUID ownerId, int cardNumber, String name, ManaAbility mana) {
-        this(ownerId, String.valueOf(cardNumber), name, mana);
-    }
-
-    public BasicLand(UUID ownerId, String cardNumber, String name, ManaAbility mana) {
-        super(ownerId, cardNumber, name, Rarity.LAND, new CardType[]{CardType.LAND}, null);
+    public BasicLand(UUID ownerId, CardSetInfo setInfo, ActivatedManaAbilityImpl mana) {
+        super(ownerId, setInfo, new CardType[]{CardType.LAND}, null);
         this.supertype.add("Basic");
         this.subtype.add(name);
         this.addAbility(mana);

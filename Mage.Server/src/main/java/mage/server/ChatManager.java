@@ -28,9 +28,11 @@
 package mage.server;
 
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.Locale;
 import java.util.UUID;
 import java.util.concurrent.ConcurrentHashMap;
+import mage.server.util.SystemUtil;
 import mage.view.ChatMessage.MessageColor;
 import mage.view.ChatMessage.MessageType;
 import mage.view.ChatMessage.SoundToPlay;
@@ -94,10 +96,6 @@ public class ChatManager {
         }
     }
 
-    public void broadcast(UUID chatId, String userName, String message, MessageColor color) {
-        this.broadcast(chatId, userName, message, color, true);
-    }
-
     public void broadcast(UUID chatId, String userName, String message, MessageColor color, boolean withTime) {
         this.broadcast(chatId, userName, message, color, withTime, MessageType.TALK);
     }
@@ -107,6 +105,7 @@ public class ChatManager {
     }
 
     static String lastMessage = "";
+
     public void broadcast(UUID chatId, String userName, String message, MessageColor color, boolean withTime, MessageType messageType, SoundToPlay soundToPlay) {
         ChatSession chatSession = chatSessions.get(chatId);
         if (chatSession != null) {
@@ -119,21 +118,38 @@ public class ChatManager {
                     return;
                 }
             }
-            
-            if (message.equals(lastMessage)) {
-                return;
+
+            if (!messageType.equals(MessageType.GAME)) {
+                if (message.equals(lastMessage)) {
+                    // prevent identical messages
+                    return;
+                }
+                if (messageType.equals(MessageType.TALK)) {
+                    User user = UserManager.getInstance().getUserByName(userName);
+                    if (user != null) {
+                        if (user.getChatLockedUntil() != null) {
+                            if (user.getChatLockedUntil().compareTo(Calendar.getInstance().getTime()) > 0) {
+                                chatSessions.get(chatId).broadcastInfoToUser(user, "Your chat is muted until " + SystemUtil.dateFormat.format(user.getChatLockedUntil()));
+                                return;
+                            } else {
+                                user.setChatLockedUntil(null);
+                            }
+                        }
+                    }
+                }
+
             }
             lastMessage = message;
             chatSession.broadcast(userName, message, color, withTime, messageType, soundToPlay);
         }
     }
 
-    private static final String COMMANDS_LIST =
-            "<br/>List of commands:" +
-            "<br/>\\history or \\h [username] - shows the history of a player" +
-            "<br/>\\me - shows the history of the current player" +
-            "<br/>\\list or \\l - Show a list of commands" +
-            "<br/>\\whisper or \\w [player name] [text] - whisper to the player with the given name";
+    private static final String COMMANDS_LIST
+            = "<br/>List of commands:"
+            + "<br/>\\history or \\h [username] - shows the history of a player"
+            + "<br/>\\me - shows the history of the current player"
+            + "<br/>\\list or \\l - Show a list of commands"
+            + "<br/>\\whisper or \\w [player name] [text] - whisper to the player with the given name";
 
     private boolean performUserCommand(User user, String message, UUID chatId, boolean doError) {
         String command = message.substring(1).trim().toUpperCase(Locale.ENGLISH);
@@ -194,7 +210,7 @@ public class ChatManager {
         if (user != null) {
             for (ChatSession chat : chatSessions.values()) {
                 if (chat.hasUser(userId)) {
-                    chat.broadcast(user.getName(), message, color);
+                    chat.broadcast(user.getName(), message, color, true, MessageType.TALK, null);
                 }
             }
         }
@@ -205,7 +221,7 @@ public class ChatManager {
         if (user != null) {
             for (ChatSession chat : chatSessions.values()) {
                 if (chat.hasUser(userId)) {
-                    chat.broadcast(null, user.getName() + " has reconnected", MessageColor.BLUE, true, MessageType.STATUS);
+                    chat.broadcast(null, user.getName() + " has reconnected", MessageColor.BLUE, true, MessageType.STATUS, null);
                 }
             }
         }

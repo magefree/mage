@@ -47,6 +47,7 @@ public class GameEvent implements Serializable {
     protected String data;
     protected Zone zone;
     protected ArrayList<UUID> appliedEffects = new ArrayList<>();
+    protected UUID customEventType = null;
 
     public enum EventType {
 
@@ -108,7 +109,20 @@ public class GameEvent implements Serializable {
         PLAYER_LIFE_CHANGE,
         GAIN_LIFE, GAINED_LIFE,
         LOSE_LIFE, LOST_LIFE,
+        /* LOSE_LIFE + LOST_LIFE
+         targetId    the id of the player loosing life
+         sourceId    the id of the player loosing life
+         playerId    the id of the player loosing life
+         amount      amount of life loss
+         flag        true = from comabat damage - other from non combat damage
+         */
         PLAY_LAND, LAND_PLAYED,
+        CREATURE_CHAMPIONED,
+        /* CREATURE_CHAMPIONED
+         targetId    the id of the creature that was championed
+         sourceId    sourceId of the creature using the champion ability
+         playerId    the id of the controlling player
+         */
         CREW_VEHICLE,
         /* CREW_VEHICLE
          targetId    the id of the creature that crewed a vehicle
@@ -163,6 +177,13 @@ public class GameEvent implements Serializable {
         MANA_PAYED,
         LOSES, LOST, WINS,
         TARGET, TARGETED,
+        /* TARGETS_VALID
+         targetId    id of the spell or id of stack ability the targets were set to
+         sourceId    = targetId
+         playerId    controller of the spell or stack ability
+         amount      not used for this event
+         */
+        TARGETS_VALID,
         /* COUNTER
          targetId    id of the spell or id of stack ability
          sourceId    sourceId of the ability countering the spell or stack ability
@@ -216,6 +237,7 @@ public class GameEvent implements Serializable {
         TRANSFORM, TRANSFORMED,
         BECOMES_MONSTROUS,
         BECOMES_RENOWNED,
+        MEDITATED,
         PHASE_OUT, PHASED_OUT,
         PHASE_IN, PHASED_IN,
         TURNFACEUP, TURNEDFACEUP,
@@ -269,20 +291,36 @@ public class GameEvent implements Serializable {
         NUMBER_OF_TRIGGERS,
         //combat events
         COMBAT_DAMAGE_APPLIED,
-        SELECTED_ATTACKER, SELECTED_BLOCKER;
+        SELECTED_ATTACKER, SELECTED_BLOCKER,
+        //custom events
+        CUSTOM_EVENT;
     }
 
-    public GameEvent(EventType type, UUID targetId, UUID sourceId, UUID playerId) {
-        this(type, targetId, sourceId, playerId, 0, false);
-    }
-
-    public GameEvent(EventType type, UUID targetId, UUID sourceId, UUID playerId, int amount, boolean flag) {
+    private GameEvent(EventType type, UUID customEventType,
+            UUID targetId, UUID sourceId, UUID playerId, int amount, boolean flag) {
         this.type = type;
+        this.customEventType = customEventType;
         this.targetId = targetId;
         this.sourceId = sourceId;
         this.amount = amount;
         this.playerId = playerId;
         this.flag = flag;
+    }
+
+    public GameEvent(EventType type, UUID targetId, UUID sourceId, UUID playerId) {
+        this(type, null, targetId, sourceId, playerId, 0, false);
+    }
+
+    public GameEvent(EventType type, UUID targetId, UUID sourceId, UUID playerId, int amount, boolean flag) {
+        this(type, null, targetId, sourceId, playerId, amount, flag);
+    }
+
+    public GameEvent(UUID customEventType, UUID targetId, UUID sourceId, UUID playerId) {
+        this(EventType.CUSTOM_EVENT, customEventType, targetId, sourceId, playerId, 0, false);
+    }
+
+    public GameEvent(UUID customEventType, UUID targetId, UUID sourceId, UUID playerId, int amount, boolean flag) {
+        this(EventType.CUSTOM_EVENT, customEventType, targetId, sourceId, playerId, amount, flag);
     }
 
     public static GameEvent getEvent(EventType type, UUID targetId, UUID sourceId, UUID playerId, int amount) {
@@ -304,8 +342,31 @@ public class GameEvent implements Serializable {
         return event;
     }
 
+    public static GameEvent getEvent(UUID customEventType, UUID targetId, UUID sourceId, UUID playerId, int amount) {
+        return new GameEvent(customEventType, targetId, sourceId, playerId, amount, false);
+    }
+
+    public static GameEvent getEvent(UUID customEventType, UUID targetId, UUID sourceId, UUID playerId) {
+        return new GameEvent(customEventType, targetId, sourceId, playerId);
+    }
+
+    public static GameEvent getEvent(UUID customEventType, UUID targetId, UUID playerId) {
+        return new GameEvent(customEventType, targetId, null, playerId);
+    }
+
+    public static GameEvent getEvent(UUID customEventType, UUID targetId, UUID playerId, String data, int amount) {
+        GameEvent event = getEvent(customEventType, targetId, playerId);
+        event.setAmount(amount);
+        event.setData(data);
+        return event;
+    }
+
     public EventType getType() {
         return type;
+    }
+
+    public UUID getCustomEventType() {
+        return customEventType;
     }
 
     public UUID getTargetId() {
@@ -372,6 +433,10 @@ public class GameEvent implements Serializable {
      */
     public ArrayList<UUID> getAppliedEffects() {
         return appliedEffects;
+    }
+
+    public boolean isCustomEvent(UUID customEventType) {
+        return type == EventType.CUSTOM_EVENT && this.customEventType.equals(customEventType);
     }
 
     public void setAppliedEffects(ArrayList<UUID> appliedEffects) {

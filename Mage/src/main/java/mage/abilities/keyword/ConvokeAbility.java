@@ -39,7 +39,7 @@ import mage.abilities.costs.mana.AlternateManaPaymentAbility;
 import mage.abilities.costs.mana.ManaCost;
 import mage.abilities.effects.OneShotEffect;
 import mage.choices.Choice;
-import mage.choices.ChoiceImpl;
+import mage.choices.ChoiceColor;
 import mage.constants.AbilityType;
 import mage.constants.ManaType;
 import mage.constants.Outcome;
@@ -263,7 +263,8 @@ class ConvokeEffect extends OneShotEffect {
     }
 
     private Choice buildChoice(ObjectColor creatureColor, Mana mana) {
-        Choice choice = new ChoiceImpl();
+        Choice choice = new ChoiceColor();
+        choice.getChoices().clear();
         if (creatureColor.isBlack() && mana.getBlack() > 0) {
             choice.getChoices().add("Black");
         }

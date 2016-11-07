@@ -78,7 +78,7 @@ public class ReturnToHandEffectsTest extends CardTestPlayerBase {
         // Whenever Stormfront Riders or another creature is returned to your hand from the battlefield, put a 1/1 white Soldier creature token onto the battlefield.
         addCard(Zone.HAND, playerA, "Stormfront Riders"); // {4}{W}
         // Buyback {4} (You may pay an additional {4} as you cast this spell. If you do, put this card into your hand as it resolves.)
-        // Put a 1/1 black Rat creature token onto the battlefield.
+        // Create a 1/1 black Rat creature token.
         addCard(Zone.HAND, playerA, "Lab Rats"); // {B}
 
         addCard(Zone.BATTLEFIELD, playerB, "Island", 2);

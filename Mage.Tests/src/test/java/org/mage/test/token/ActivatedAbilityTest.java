@@ -39,6 +39,7 @@ import org.mage.test.serverside.base.CardTestPlayerBase;
  * @author LevelX2
  */
 public class ActivatedAbilityTest extends CardTestPlayerBase {
+
     /**
      * Check that activated ability of created token works
      */
@@ -49,14 +50,14 @@ public class ActivatedAbilityTest extends CardTestPlayerBase {
         addCard(Zone.BATTLEFIELD, playerA, "Omnath, Locus of Mana", 1);
 
         addCard(Zone.BATTLEFIELD, playerA, "Freyalise, Llanowar's Fury");
-        activateAbility(1, PhaseStep.PRECOMBAT_MAIN, playerA, "+2: Put a 1/1 green Elf Druid creature token with \"{t}: Add {G} to your mana pool.\" onto the battlefield.");
-        activateAbility(3, PhaseStep.PRECOMBAT_MAIN, playerA, "+2: Put a 1/1 green Elf Druid creature token with \"{t}: Add {G} to your mana pool.\" onto the battlefield.");
+        activateAbility(1, PhaseStep.PRECOMBAT_MAIN, playerA, "+2: Create a 1/1 green Elf Druid creature token with \"{T}: Add {G} to your mana pool.\"");
+        activateAbility(3, PhaseStep.PRECOMBAT_MAIN, playerA, "+2: Create a 1/1 green Elf Druid creature token with \"{T}: Add {G} to your mana pool.\"");
         activateManaAbility(3, PhaseStep.PRECOMBAT_MAIN, playerA, "{T}: Add {G} to your mana pool.");
         setStopAt(3, PhaseStep.PRECOMBAT_MAIN);
         execute();
 
         assertPermanentCount(playerA, "Elf Druid", 2);
         assertPermanentCount(playerA, "Freyalise, Llanowar's Fury", 1);
-        Assert.assertEquals("one green mana has to be in the mana pool",1,playerA.getManaPool().get(ManaType.GREEN));
+        Assert.assertEquals("one green mana has to be in the mana pool", 1, playerA.getManaPool().get(ManaType.GREEN));
     }
 }

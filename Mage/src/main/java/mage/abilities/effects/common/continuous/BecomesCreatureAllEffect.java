@@ -138,8 +138,14 @@ public class BecomesCreatureAllEffect extends ContinuousEffectImpl {
         if (!"".equals(duration.toString())) {
             sb.append(duration.toString()).append(", ");
         }
+        sb.append("all ");
         sb.append(filter.getMessage());
-        sb.append(" become a ").append(token.getDescription());
+        if ("".equals(duration.toString())) {
+            sb.append(" are ");
+        } else {
+            sb.append(" become ");
+        }
+        sb.append(token.getDescription());
         if (type != null && type.length() > 0) {
             sb.append(". They are still ").append(type);
         }

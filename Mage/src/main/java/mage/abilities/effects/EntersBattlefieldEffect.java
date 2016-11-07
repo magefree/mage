@@ -104,7 +104,10 @@ public class EntersBattlefieldEffect extends ReplacementEffectImpl {
     public boolean replaceEvent(GameEvent event, Ability source, Game game) {
         if (optional) {
             Player controller = game.getPlayer(source.getControllerId());
-            MageObject object = game.getObject(source.getSourceId());
+            MageObject object = game.getPermanentEntering(source.getSourceId());
+            if (object == null) {
+                object = game.getObject(source.getSourceId());
+            }
             if (controller == null || object == null) {
                 return false;
             }

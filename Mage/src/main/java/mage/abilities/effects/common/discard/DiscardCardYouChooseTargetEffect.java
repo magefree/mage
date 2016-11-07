@@ -197,7 +197,7 @@ public class DiscardCardYouChooseTargetEffect extends OneShotEffect {
             sb.append(" reveals his or her hand");
         } else {
             if (numberCardsToReveal instanceof StaticValue) {
-                sb.append(" reveales ");
+                sb.append(" reveals ");
                 sb.append(numberCardsToReveal.getMessage());
                 sb.append(" from his or her hand");
             } else {

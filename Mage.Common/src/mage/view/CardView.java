@@ -89,7 +89,7 @@ public class CardView extends SimpleCardView {
     protected CardView ability;
     protected int type;
 
-    protected boolean canTransform;
+    protected boolean transformable;
     protected CardView secondCardFace;
     protected boolean transformed;
 
@@ -137,6 +137,79 @@ public class CardView extends SimpleCardView {
     public CardView(Card card, Game game, UUID cardId) {
         this(card, game, false);
         this.id = cardId;
+    }
+    
+    
+    public CardView(CardView cardView) {
+        super(cardView.id, cardView.expansionSetCode, cardView.cardNumber, cardView.usesVariousArt, cardView.tokenSetCode, cardView.gameObject, cardView.tokenDescriptor);
+
+        this.id = UUID.randomUUID();
+        this.parentId = cardView.parentId;
+        this.name = cardView.name;
+        this.displayName = cardView.displayName;
+        this.rules = cardView.rules;
+        this.power = cardView.power;
+        this.toughness = cardView.toughness;
+        this.loyalty = cardView.loyalty;
+        this.startingLoyalty = cardView.startingLoyalty;
+        this.cardTypes = cardView.cardTypes;
+        this.subTypes = cardView.subTypes;
+        this.superTypes = cardView.superTypes;
+        this.color = cardView.color;
+        this.frameColor = cardView.frameColor;
+        this.frameStyle = cardView.frameStyle;
+        this.manaCost = cardView.manaCost;
+        this.convertedManaCost = cardView.convertedManaCost;
+        this.rarity = cardView.rarity;
+
+        this.mageObjectType = cardView.mageObjectType;
+
+        this.isAbility = cardView.isAbility;
+        this.abilityType = cardView.abilityType;
+        this.isToken = cardView.isToken;
+
+        this.ability = null;
+        this.type = cardView.type;
+
+        this.transformable = cardView.transformable;
+        if (cardView.secondCardFace != null) {
+            this.secondCardFace = new CardView(cardView.secondCardFace);
+        } else {
+            this.secondCardFace = null;
+        }
+        this.transformed = cardView.transformed;
+
+        this.flipCard = cardView.flipCard;
+        this.faceDown = cardView.faceDown;
+
+        this.alternateName = cardView.alternateName;
+        this.originalName = cardView.originalName;
+
+        this.isSplitCard = cardView.isSplitCard;
+        this.leftSplitName = cardView.leftSplitName;
+        this.leftSplitCosts = cardView.leftSplitCosts;
+        this.leftSplitRules = null;
+        this.rightSplitName = cardView.rightSplitName;
+        this.rightSplitCosts = cardView.rightSplitCosts;
+        this.rightSplitRules = null;
+
+        this.targets = null;
+
+        this.pairedCard = cardView.pairedCard;
+        this.paid = cardView.paid;
+        this.counters = null;
+
+        this.controlledByOwner = cardView.controlledByOwner;
+
+        this.zone = cardView.zone;
+
+        this.rotate = cardView.rotate;
+        this.hideInfo = cardView.hideInfo;
+
+        this.isPlayable = cardView.isPlayable;
+        this.isChoosable = cardView.isChoosable;
+        this.selected = cardView.selected;
+        this.canAttack = cardView.canAttack;
     }
 
     /**
@@ -279,7 +352,7 @@ public class CardView extends SimpleCardView {
         this.subTypes = card.getSubtype(game);
         this.superTypes = card.getSupertype();
         this.color = card.getColor(game);
-        this.canTransform = card.canTransform();
+        this.transformable = card.isTransformable();
         this.flipCard = card.isFlipCard();
         this.faceDown = !showFaceUp;
 
@@ -324,7 +397,7 @@ public class CardView extends SimpleCardView {
                 for (UUID modeId : spellAbility.getModes().getSelectedModes()) {
                     Mode mode = spellAbility.getModes().get(modeId);
                     if (mode.getTargets().size() > 0) {
-                        setTargets(spellAbility.getTargets());
+                        setTargets(mode.getTargets());
                     }
                 }
             }
@@ -652,7 +725,7 @@ public class CardView extends SimpleCardView {
     }
 
     public boolean canTransform() {
-        return this.canTransform;
+        return this.transformable;
     }
 
     public boolean isSplitCard() {

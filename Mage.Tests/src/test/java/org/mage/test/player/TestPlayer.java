@@ -48,7 +48,7 @@ import mage.abilities.costs.Costs;
 import mage.abilities.costs.VariableCost;
 import mage.abilities.costs.mana.ManaCost;
 import mage.abilities.costs.mana.ManaCosts;
-import mage.abilities.mana.ManaAbility;
+import mage.abilities.mana.ActivatedManaAbilityImpl;
 import mage.abilities.mana.ManaOptions;
 import mage.cards.Card;
 import mage.cards.Cards;
@@ -282,19 +282,14 @@ public class TestPlayer implements Player {
             Mode selectedMode = null;
             if (targetName.startsWith("mode=")) {
                 int modeNr = Integer.parseInt(targetName.substring(5, 6));
-                if (modeNr == 0 || modeNr > ability.getModes().size()) {
+                if (modeNr == 0 || modeNr > (ability.getModes().isEachModeMoreThanOnce() ? ability.getModes().getSelectedModes().size() : ability.getModes().size())) {
                     throw new UnsupportedOperationException("Given mode number (" + modeNr + ") not available for " + ability.toString());
                 }
                 UUID modeId = ability.getModes().getModeId(modeNr);
-
-                for (UUID currentModeId : ability.getModes().getSelectedModes()) {
-                    Mode mode = ability.getModes().get(currentModeId);
-                    if (mode.getId().equals(modeId)) {
-                        selectedMode = mode;
-                        ability.getModes().setActiveMode(mode);
-                        index = 0; // reset target index if mode changes
-                        break;
-                    }
+                selectedMode = ability.getModes().get(modeId);
+                if (modeId != ability.getModes().getMode().getId()) {
+                    ability.getModes().setActiveMode(modeId);
+                    index = 0; // reset target index if mode changes
                 }
                 targetName = targetName.substring(6);
             } else {
@@ -419,7 +414,7 @@ public class TestPlayer implements Player {
 
                     for (MageObject mageObject : manaObjects) {
                         if (mageObject instanceof Permanent) {
-                            for (Ability manaAbility : ((Permanent) mageObject).getAbilities(game).getAvailableManaAbilities(Zone.BATTLEFIELD, game)) {
+                            for (Ability manaAbility : ((Permanent) mageObject).getAbilities(game).getAvailableActivatedManaAbilities(Zone.BATTLEFIELD, game)) {
                                 if (manaAbility.toString().startsWith(groups[0])) {
                                     Ability newManaAbility = manaAbility.copy();
                                     computerPlayer.activateAbility((ActivatedAbility) newManaAbility, game);
@@ -428,7 +423,7 @@ public class TestPlayer implements Player {
                                 }
                             }
                         } else if (mageObject instanceof Card) {
-                            for (Ability manaAbility : ((Card) mageObject).getAbilities(game).getAvailableManaAbilities(game.getState().getZone(mageObject.getId()), game)) {
+                            for (Ability manaAbility : ((Card) mageObject).getAbilities(game).getAvailableActivatedManaAbilities(game.getState().getZone(mageObject.getId()), game)) {
                                 if (manaAbility.toString().startsWith(groups[0])) {
                                     Ability newManaAbility = manaAbility.copy();
                                     computerPlayer.activateAbility((ActivatedAbility) newManaAbility, game);
@@ -437,7 +432,7 @@ public class TestPlayer implements Player {
                                 }
                             }
                         } else {
-                            for (Ability manaAbility : mageObject.getAbilities().getAvailableManaAbilities(game.getState().getZone(mageObject.getId()), game)) {
+                            for (Ability manaAbility : mageObject.getAbilities().getAvailableActivatedManaAbilities(game.getState().getZone(mageObject.getId()), game)) {
                                 if (manaAbility.toString().startsWith(groups[0])) {
                                     Ability newManaAbility = manaAbility.copy();
                                     computerPlayer.activateAbility((ActivatedAbility) newManaAbility, game);
@@ -449,7 +444,7 @@ public class TestPlayer implements Player {
                     }
                     List<Permanent> manaPermsWithCost = computerPlayer.getAvailableManaProducersWithCost(game);
                     for (Permanent perm : manaPermsWithCost) {
-                        for (ManaAbility manaAbility : perm.getAbilities().getAvailableManaAbilities(Zone.BATTLEFIELD, game)) {
+                        for (ActivatedManaAbilityImpl manaAbility : perm.getAbilities().getAvailableActivatedManaAbilities(Zone.BATTLEFIELD, game)) {
                             if (manaAbility.toString().startsWith(groups[0]) && manaAbility.canActivate(computerPlayer.getId(), game)) {
                                 Ability newManaAbility = manaAbility.copy();
                                 computerPlayer.activateAbility((ActivatedAbility) newManaAbility, game);
@@ -1439,8 +1434,8 @@ public class TestPlayer implements Player {
     }
 
     @Override
-    public int loseLife(int amount, Game game) {
-        return computerPlayer.loseLife(amount, game);
+    public int loseLife(int amount, Game game, boolean atCombat) {
+        return computerPlayer.loseLife(amount, game, atCombat);
     }
 
     @Override
@@ -1873,13 +1868,13 @@ public class TestPlayer implements Player {
     }
 
     @Override
-    public void setCommanderId(UUID commanderId) {
-        computerPlayer.setCommanderId(commanderId);
+    public void addCommanderId(UUID commanderId) {
+        computerPlayer.addCommanderId(commanderId);
     }
 
     @Override
-    public UUID getCommanderId() {
-        return computerPlayer.getCommanderId();
+    public Set<UUID> getCommandersIds() {
+        return computerPlayer.getCommandersIds();
     }
 
     @Override

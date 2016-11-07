@@ -30,7 +30,6 @@ package mage.game.permanent.token;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
-import java.util.Random;
 import mage.MageInt;
 import mage.abilities.keyword.FlyingAbility;
 import mage.constants.CardType;
@@ -45,7 +44,7 @@ public class ThopterColorlessToken extends Token {
     final static private List<String> tokenImageSets = new ArrayList<>();
 
     static {
-        tokenImageSets.addAll(Arrays.asList("MBS", "ORI"));
+        tokenImageSets.addAll(Arrays.asList("MBS", "ORI", "KLD"));
     }
 
     public ThopterColorlessToken() {
@@ -63,8 +62,11 @@ public class ThopterColorlessToken extends Token {
     @Override
     public void setExpansionSetCodeForImage(String code) {
         super.setExpansionSetCodeForImage(code);
-        if (getOriginalExpansionSetCode().equals("ORI")) {
+        if (getOriginalExpansionSetCode() != null && getOriginalExpansionSetCode().equals("ORI")) {
             this.setTokenType(RandomUtil.nextInt(2) + 1);
+        }
+        if (getOriginalExpansionSetCode() != null && getOriginalExpansionSetCode().equals("KLD")) {
+            this.setTokenType(RandomUtil.nextInt(3) + 1);
         }
     }
 

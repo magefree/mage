@@ -68,7 +68,7 @@ public class LoseLifeSourceControllerEffect extends OneShotEffect {
     public boolean apply(Game game, Ability source) {
         Player player = game.getPlayer(source.getControllerId());
         if (player != null) {
-            player.loseLife(amount.calculate(game, source, this), game);
+            player.loseLife(amount.calculate(game, source, this), game, false);
             return true;
         }
         return false;

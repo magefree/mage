@@ -42,7 +42,6 @@ import mage.players.Player;
  */
 public class DynamicManaEffect extends BasicManaEffect {
 
-    private final Mana computedMana;
     private final DynamicValue amount;
     private final DynamicValue netAmount;
     private String text = null;
@@ -73,7 +72,6 @@ public class DynamicManaEffect extends BasicManaEffect {
     public DynamicManaEffect(Mana mana, DynamicValue amount, String text, boolean oneChoice, DynamicValue netAmount) {
         super(mana);
         this.amount = amount;
-        computedMana = new Mana();
         this.text = text;
         this.oneChoice = oneChoice;
         this.netAmount = netAmount;
@@ -81,7 +79,6 @@ public class DynamicManaEffect extends BasicManaEffect {
 
     public DynamicManaEffect(final DynamicManaEffect effect) {
         super(effect);
-        this.computedMana = effect.computedMana.copy();
         this.amount = effect.amount.copy();
         this.text = effect.text;
         this.oneChoice = effect.oneChoice;
@@ -99,7 +96,7 @@ public class DynamicManaEffect extends BasicManaEffect {
 
     @Override
     public boolean apply(Game game, Ability source) {
-        computeMana(false, game, source);
+        Mana computedMana = computeMana(false, game, source);
         checkToFirePossibleEvents(computedMana, game, source);
         game.getPlayer(source.getControllerId()).getManaPool().addMana(computedMana, game, source);
         return true;
@@ -119,7 +116,7 @@ public class DynamicManaEffect extends BasicManaEffect {
     }
 
     public Mana computeMana(boolean netMana, Game game, Ability source) {
-        this.computedMana.clear();
+        Mana computedMana = new Mana();
         int count;
         if (netMana && netAmount != null) {
             // calculate the maximum available mana
@@ -146,7 +143,7 @@ public class DynamicManaEffect extends BasicManaEffect {
             } else {
                 Player controller = game.getPlayer(source.getControllerId());
                 if (controller != null) {
-                    ChoiceColor choiceColor = new ChoiceColor();
+                    ChoiceColor choiceColor = new ChoiceColor(true);
                     for (int i = 0; i < count; i++) {
                         if (!choiceColor.isChosen()) {
                             while (!controller.choose(Outcome.Benefit, choiceColor, game)) {
@@ -155,17 +152,7 @@ public class DynamicManaEffect extends BasicManaEffect {
                                 }
                             }
                         }
-                        if (choiceColor.getColor().isBlack()) {
-                            computedMana.increaseBlack();
-                        } else if (choiceColor.getColor().isBlue()) {
-                            computedMana.increaseBlue();
-                        } else if (choiceColor.getColor().isRed()) {
-                            computedMana.increaseRed();
-                        } else if (choiceColor.getColor().isGreen()) {
-                            computedMana.increaseGreen();
-                        } else if (choiceColor.getColor().isWhite()) {
-                            computedMana.increaseWhite();
-                        }
+                        choiceColor.increaseMana(computedMana);
                         if (!oneChoice) {
                             choiceColor.clearChoice();
                         }

@@ -10,6 +10,7 @@ import mage.abilities.effects.common.counter.AddCountersTargetEffect;
 import mage.constants.Zone;
 import mage.counters.CounterType;
 import mage.target.common.TargetCreaturePermanent;
+import mage.util.CardUtil;
 
 public class ReinforceAbility extends SimpleActivatedAbility {
     private DynamicValue count;
@@ -44,8 +45,13 @@ public class ReinforceAbility extends SimpleActivatedAbility {
         StringBuilder sb = new StringBuilder("Reinforce ");
         sb.append(count.toString()).append(" - ");
         sb.append(cost.getText());
-        sb.append(" <i>(").append(cost.getText()).append("Discard this card: Put ");
-        sb.append(count.toString()).append(" +1/+1 counters on target creature.");
+        sb.append(" <i>(").append(cost.getText()).append(", Discard this card: Put ");
+        if (count.toString().equals("1")) {
+            sb.append("a +1/+1 counter");
+        } else {
+            sb.append(CardUtil.numberToText(count.toString())).append(" +1/+1 counters");
+        }
+        sb.append(" on target creature.)</i>");
         return sb.toString();
     }
 }

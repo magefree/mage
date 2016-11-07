@@ -159,7 +159,7 @@ public class PlayerStub implements Player {
     }
 
     @Override
-    public int loseLife(int amount, Game game) {
+    public int loseLife(int amount, Game game, boolean at) {
         return 0;
     }
 
@@ -1083,12 +1083,12 @@ public class PlayerStub implements Player {
     }
 
     @Override
-    public void setCommanderId(UUID commanderId) {
+    public void addCommanderId(UUID commanderId) {
 
     }
 
     @Override
-    public UUID getCommanderId() {
+    public Set<UUID> getCommandersIds() {
         return null;
     }
 

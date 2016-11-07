@@ -53,12 +53,12 @@ public class TamiyoTest extends CardTestPlayerBase {
         /* Gideon, Ally of Zendikar {2}{W}{W} - 4 loyalty
          * +1: Until end of turn, Gideon, Ally of Zendikar becomes a 5/5 Human Soldier Ally creature with indestructible
          * that's still a planeswalker. Prevent all damage that would be dealt to him this turn.
-         * 0: Put a 2/2 white Knight Ally creature token onto the battlefield.
+         * 0: Create a 2/2 white Knight Ally creature token.
         **/
         addCard(Zone.BATTLEFIELD, playerA, "Gideon, Ally of Zendikar", 1);
 
         // put 2/2 knight ally token on battlefield
-        activateAbility(1, PhaseStep.PRECOMBAT_MAIN, playerA, "+0: Put a");
+        activateAbility(1, PhaseStep.PRECOMBAT_MAIN, playerA, "+0: Create a");
 
         // next, activate Gideon to make him a 5/5 human soldier ally creature
         activateAbility(3, PhaseStep.PRECOMBAT_MAIN, playerA, "+1: Until end of turn");

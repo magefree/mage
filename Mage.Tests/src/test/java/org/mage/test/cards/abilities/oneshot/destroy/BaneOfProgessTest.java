@@ -43,7 +43,7 @@ public class BaneOfProgessTest extends CardTestPlayerBase {
         // You may play land cards from your graveyard.
         addCard(Zone.BATTLEFIELD, playerA, "Crucible of Worlds");
         addCard(Zone.BATTLEFIELD, playerA, "Island", 6);
-        // Put a token onto the battlefield that's a copy of target artifact or creature.
+        // Create a tokenonto the battlefield that's a copy of target artifact or creature.
         // Cipher (Then you may exile this spell card encoded on a creature you control. Whenever that creature deals combat damage to a player, its controller may cast a copy of the encoded card without paying its mana cost.)
         addCard(Zone.HAND, playerA, "Stolen Identity"); // {4}{U}{U}
 

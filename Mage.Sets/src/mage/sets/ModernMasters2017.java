@@ -28,11 +28,8 @@
 
 package mage.sets;
 
-import java.util.GregorianCalendar;
 import mage.cards.ExpansionSet;
 import mage.constants.SetType;
-
-
 
 /**
  *
@@ -40,14 +37,14 @@ import mage.constants.SetType;
  */
 public class ModernMasters2017 extends ExpansionSet {
 
-    private static final ModernMasters2017 fINSTANCE =  new ModernMasters2017();
+    private static final ModernMasters2017 fINSTANCE = new ModernMasters2017();
 
     public static ModernMasters2017 getInstance() {
         return fINSTANCE;
     }
 
     private ModernMasters2017() {
-        super("Modern Masters 2017", "MM3", "mage.sets.modernmasters2017", new GregorianCalendar(2017, 3, 17).getTime(), SetType.SUPPLEMENTAL);
+        super("Modern Masters 2017", "MM3", ExpansionSet.buildDate(2017, 3, 17), SetType.SUPPLEMENTAL);
         this.blockName = "Reprint";
         this.hasBasicLands = false;
         this.hasBoosters = true;

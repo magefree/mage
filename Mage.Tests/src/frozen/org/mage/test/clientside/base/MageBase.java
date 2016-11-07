@@ -1,16 +1,5 @@
 package org.mage.test.clientside.base;
 
-import mage.interfaces.MageException;
-import mage.interfaces.Server;
-import mage.interfaces.ServerState;
-import mage.interfaces.callback.CallbackClient;
-import mage.interfaces.callback.CallbackClientDaemon;
-import mage.interfaces.callback.ClientCallback;
-import mage.server.Main;
-import mage.sets.Sets;
-import mage.util.Logging;
-import mage.view.*;
-
 import java.rmi.NotBoundException;
 import java.rmi.RemoteException;
 import java.rmi.registry.LocateRegistry;
@@ -22,14 +11,25 @@ import java.util.logging.Logger;
 import mage.constants.MultiplayerAttackOption;
 import mage.constants.RangeOfInfluence;
 import mage.game.match.MatchOptions;
+import mage.interfaces.MageException;
+import mage.interfaces.Server;
+import mage.interfaces.ServerState;
+import mage.interfaces.callback.CallbackClient;
+import mage.interfaces.callback.CallbackClientDaemon;
+import mage.interfaces.callback.ClientCallback;
+import mage.server.Main;
+import mage.sets.Sets;
+import mage.util.Logging;
+import mage.view.*;
 
 /**
- * Base for starting Mage server.
- * Controls interactions between MageAPI and Mage Server.
+ * Base for starting Mage server. Controls interactions between MageAPI and Mage
+ * Server.
  *
  * @author nantuko
  */
 public class MageBase {
+
     /**
      * MageBase single instance
      */
@@ -96,10 +96,10 @@ public class MageBase {
             Registry reg = LocateRegistry.getRegistry(serverName, port);
             server = (Server) reg.lookup("mage-server");
             sessionId = server.registerClient(userName, UUID.randomUUID());
-            CallbackClient client = new CallbackClient(){
+            CallbackClient client = new CallbackClient() {
                 @Override
                 public void processCallback(ClientCallback callback) {
-                    logger.info("IN >> " + callback.getMessageId() + " - " + callback.getMethod());
+                    logger.log(Level.INFO, "IN >> {0} - {1}", new Object[]{callback.getMessageId(), callback.getMethod()});
                     try {
                         if (callback.getMethod().equals("startGame")) {
                             TableClientMessage data = (TableClientMessage) callback.getData();
@@ -119,14 +119,14 @@ public class MageBase {
                             }
                         } else if (callback.getMethod().equals("gameTarget")) {
                             GameClientMessage message = (GameClientMessage) callback.getData();
-                            logger.info("TARGET >> " + message.getMessage() + " >> " + message.getTargets());
+                            logger.log(Level.INFO, "TARGET >> {0} >> {1}", new Object[]{message.getMessage(), message.getTargets()});
                             if (message.getMessage().equals("Select a starting player")) {
-                                logger.info("  Sending >> " + playerId);
+                                logger.log(Level.INFO, "  Sending >> {0}", playerId);
                                 server.sendPlayerUUID(gameId, sessionId, playerId);
                             }
                         } else if (callback.getMethod().equals("gameSelect")) {
                             GameClientMessage message = (GameClientMessage) callback.getData();
-                            logger.info("SELECT >> " + message.getMessage());
+                            logger.log(Level.INFO, "SELECT >> {0}", message.getMessage());
                             if (phaseToWait == null) {
                                 synchronized (sync) {
                                     sync.wait();
@@ -195,7 +195,6 @@ public class MageBase {
         }
     }
 
-
     public boolean giveme(String cardName) throws Exception {
         return server.cheat(gameId, sessionId, playerId, cardName);
     }
@@ -239,9 +238,9 @@ public class MageBase {
         }
     }
 
-     public boolean checkBattlefield(String cardName) throws Exception {
-         gameView = server.getGameView(gameId, sessionId, playerId);
-         for (PlayerView player: gameView.getPlayers()) {
+    public boolean checkBattlefield(String cardName) throws Exception {
+        gameView = server.getGameView(gameId, sessionId, playerId);
+        for (PlayerView player : gameView.getPlayers()) {
             if (player.getPlayerId().equals(playerId)) {
                 for (PermanentView permanent : player.getBattlefield().values()) {
                     if (permanent.getName().equals(cardName)) {
@@ -249,17 +248,17 @@ public class MageBase {
                     }
                 }
             }
-         }
-         return false;
-     }
+        }
+        return false;
+    }
 
-     public boolean checkGraveyardsEmpty() throws Exception {
-         gameView = server.getGameView(gameId, sessionId, playerId);
-         for (PlayerView player: gameView.getPlayers()) {
+    public boolean checkGraveyardsEmpty() throws Exception {
+        gameView = server.getGameView(gameId, sessionId, playerId);
+        for (PlayerView player : gameView.getPlayers()) {
             if (player.getGraveyard().size() > 0) {
                 return false;
             }
-         }
-         return true;
-     }
+        }
+        return true;
+    }
 }

@@ -82,9 +82,7 @@ class ChancellorEffect extends OneShotEffect {
 
     @Override
     public boolean apply(Game game, Ability source) {
-        ability.setSourceId(source.getSourceId());
-        ability.setControllerId(source.getControllerId());
-        game.addDelayedTriggeredAbility(ability);
+        game.addDelayedTriggeredAbility(ability, source);
         return true;
     }
 

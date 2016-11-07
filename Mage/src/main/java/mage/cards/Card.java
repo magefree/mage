@@ -66,7 +66,7 @@ public interface Card extends MageObject {
     String getExpansionSetCode();
 
     String getTokenSetCode();
-    
+
     String getTokenDescriptor();
 
     void checkForCountersToAdd(Permanent permanent, Game game);
@@ -85,7 +85,9 @@ public interface Card extends MageObject {
 
     boolean isSplitCard();
 
-    boolean canTransform();
+    boolean isTransformable();
+
+    void setTransformable(boolean transformable);
 
     Card getSecondCardFace();
 
@@ -144,8 +146,6 @@ public interface Card extends MageObject {
     void setZone(Zone zone, Game game);
 
     List<Mana> getMana();
-
-    void build();
 
     /**
      *

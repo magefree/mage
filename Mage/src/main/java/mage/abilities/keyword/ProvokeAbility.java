@@ -53,7 +53,11 @@ import mage.target.common.TargetCreaturePermanent;
 public class ProvokeAbility extends AttacksTriggeredAbility {
 
     public ProvokeAbility() {
-        super(new UntapTargetEffect(), true, "Provoke <i>(Whenever this attacks, you may have target creature defending player controls untap and block it if able.)</i>");
+        this("Provoke <i>(Whenever this attacks, you may have target creature defending player controls untap and block it if able.)</i>");
+    }
+
+    public ProvokeAbility(String text) {
+        super(new UntapTargetEffect(), true, text);
         this.addEffect(new ProvokeRequirementEffect());
     }
 

@@ -28,7 +28,7 @@ public class GlowText extends JLabel {
     private Color glowColor;
     private boolean wrap;
     private int lineCount = 0;
-    private static Map<Key, BufferedImage> IMAGE_CACHE;
+    private final static Map<Key, BufferedImage> IMAGE_CACHE;
 
     private final static class Key {
 

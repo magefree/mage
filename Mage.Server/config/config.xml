@@ -95,8 +95,12 @@
         <draftCube name="Ben's Cube (720 cards)" jar="mage-tournament-booster-draft.jar" className="mage.tournament.cubes.BensCube"/>
         <draftCube name="Cube Tutor 360 Pauper" jar="mage-tournament-booster-draft.jar" className="mage.tournament.cubes.CubeTutor360Pauper"/>
         <draftCube name="Cube Tutor 720" jar="mage-tournament-booster-draft.jar" className="mage.tournament.cubes.CubeTutor720"/>
+        <draftCube name="Eric Klug's Pro Tour Cube" jar="mage-tournament-booster-draft.jar" className="mage.tournament.cubes.EricKlugsProTourCube"/>
+        <draftCube name="Guillaume Matignon's Jenny's/Johnny's Cube" jar="mage-tournament-booster-draft.jar" className="mage.tournament.cubes.GuillaumeMatignonsJennysJohnnysCube"/>
         <draftCube name="Jim Davis's Cube (469 cards)" jar="mage-tournament-booster-draft-${project.version}.jar" className="mage.tournament.cubes.JimDavisCube"/>
+        <draftCube name="Joseph Vasoli's Peasant Cube" jar="mage-tournament-booster-draft.jar" className="mage.tournament.cubes.JosephVasolisPeasantCube"/>
         <draftCube name="Mono Blue Cube" jar="mage-tournament-booster-draft.jar" className="mage.tournament.cubes.MonoBlueCube"/>
+        <draftCube name="Timothee Simonot's Twisted Color Pie Cube" jar="mage-tournament-booster-draft.jar" className="mage.tournament.cubes.TimotheeSimonotsTwistedColorPieCube"/>
         <draftCube name="MTGO Cube March 2014" jar="mage-tournament-booster-draft.jar" className="mage.tournament.cubes.MTGOMarchCube2014"/>
         <draftCube name="MTGO Legacy Cube" jar="mage-tournament-booster-draft.jar" className="mage.tournament.cubes.LegacyCube"/>
         <draftCube name="MTGO Legacy Cube March 2015" jar="mage-tournament-booster-draft.jar" className="mage.tournament.cubes.LegacyCubeMarch2015"/>
@@ -117,6 +121,7 @@
     <deckTypes>
         <deckType name="Constructed - Standard" jar="mage-deck-constructed.jar" className="mage.deck.Standard"/>
         <deckType name="Constructed - Extended" jar="mage-deck-constructed.jar" className="mage.deck.Extended"/>
+        <deckType name="Constructed - Frontier" jar="mage-deck-constructed.jar" className="mage.deck.Frontier"/>
         <deckType name="Constructed - Modern" jar="mage-deck-constructed.jar" className="mage.deck.Modern"/>
         <deckType name="Constructed - Eternal" jar="mage-deck-constructed.jar" className="mage.deck.Eternal"/>
         <deckType name="Constructed - Legacy" jar="mage-deck-constructed.jar" className="mage.deck.Legacy"/>
@@ -131,6 +136,7 @@
         <deckType name="Variant Magic - Momir Basic" jar="mage-deck-constructed.jar" className="mage.deck.Momir"/>
         <deckType name="Block Constructed - Battle for Zendikar" jar="mage-deck-constructed.jar" className="mage.deck.BattleForZendikarBlock"/>
         <deckType name="Block Constructed - Innistrad" jar="mage-deck-constructed.jar" className="mage.deck.InnistradBlock"/>
+        <deckType name="Block Constructed - Kaladesh" jar="mage-deck-constructed.jar" className="mage.deck.KaladeshBlock"/>
         <deckType name="Block Constructed - Kamigawa" jar="mage-deck-constructed.jar" className="mage.deck.KamigawaBlock"/>
         <deckType name="Block Constructed - Khans of Tarkir" jar="mage-deck-constructed.jar" className="mage.deck.KhansOfTarkirBlock"/>
         <deckType name="Block Constructed - Return to Ravnica" jar="mage-deck-constructed.jar" className="mage.deck.ReturnToRavnicaBlock"/>
@@ -140,6 +146,7 @@
         <deckType name="Block Constructed - Shards of Alara" jar="mage-deck-constructed.jar" className="mage.deck.ShardsOfAlaraBlock"/>
         <deckType name="Block Constructed - Theros" jar="mage-deck-constructed.jar" className="mage.deck.TherosBlock"/>
         <deckType name="Block Constructed - Zendikar" jar="mage-deck-constructed.jar" className="mage.deck.ZendikarBlock"/>
+        <deckType name="Block Constructed Custom - Star Wars" jar="mage-deck-constructed.jar" className="mage.deck.StarWarsBlock"/>
         <deckType name="Limited" jar="mage-deck-limited.jar" className="mage.deck.Limited"/>
     </deckTypes>
 </config>

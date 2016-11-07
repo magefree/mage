@@ -27,7 +27,6 @@
  */
 package mage.sets;
 
-import java.util.GregorianCalendar;
 import mage.cards.ExpansionSet;
 import mage.constants.SetType;
 
@@ -44,7 +43,7 @@ public class Amonkhet extends ExpansionSet {
     }
 
     private Amonkhet() {
-        super("Amonkhet", "AKH", "mage.sets.amonkhet", new GregorianCalendar(2017, 4, 28).getTime(), SetType.EXPANSION);
+        super("Amonkhet", "AKH", ExpansionSet.buildDate(2017, 4, 28), SetType.EXPANSION);
         this.blockName = "Amonkhet";
         this.hasBoosters = true;
         this.numBoosterLands = 1;

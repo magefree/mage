@@ -118,7 +118,7 @@ public class SpendOtherManaTest extends CardTestPlayerBase {
         // <i>Spell mastery</i> - If there are two or more instant and/or sorcery cards in your graveyard, add {B}{B}{B} to your mana pool.
         addCard(Zone.HAND, playerA, "Dark Petition"); // {3}{B}{B}
 
-        // +1: Put a 0/1 green Plant creature token onto the battlefield.
+        // +1: Create a 0/1 green Plant creature token onto the battlefield.
         // -2: Put a +1/+1 counter on each creature you control.
         // -7: You gain X life and draw X cards, where X is the number of lands you control.
         addCard(Zone.LIBRARY, playerA, "Nissa, Voice of Zendikar"); // {1}{G}{G}

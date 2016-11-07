@@ -51,7 +51,6 @@ public class TargetEnchantmentPermanent extends TargetPermanent {
 
     public TargetEnchantmentPermanent(int minNumTargets, int maxNumTargets, FilterEnchantmentPermanent filter, boolean notTarget) {
         super(minNumTargets, maxNumTargets, filter, notTarget);
-        this.targetName = filter.getMessage();
     }
 
     public TargetEnchantmentPermanent(final TargetEnchantmentPermanent target) {

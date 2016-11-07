@@ -111,7 +111,14 @@ public interface Player extends MageItem, Copyable<Player> {
 
     void setLife(int life, Game game);
 
-    int loseLife(int amount, Game game);
+    /**
+     *
+     * @param amount amount of life loss
+     * @param game
+     * @param atCombat was the source combat damage
+     * @return
+     */
+    int loseLife(int amount, Game game, boolean atCombat);
 
     int gainLife(int amount, Game game);
 
@@ -638,16 +645,16 @@ public interface Player extends MageItem, Copyable<Player> {
     /**
      * Set the commanderId of the player
      *
-     * @param commanderId
+     * @param commandersIds
      */
-    void setCommanderId(UUID commanderId);
+    void addCommanderId(UUID commanderId);
 
     /**
      * Get the commanderId of the player
      *
      * @return
      */
-    UUID getCommanderId();
+    Set<UUID> getCommandersIds();
 
     /**
      * Moves cards from one zone to another

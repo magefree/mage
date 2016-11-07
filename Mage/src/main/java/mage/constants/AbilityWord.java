@@ -46,6 +46,7 @@ public enum AbilityWord {
     FEROCIOUS("Ferocious"),
     FORMIDABLE("Formidable"),
     GRANDEUR("Grandeur"),
+    HATE("Hate"),
     HELLBENT("Hellbent"),
     HEROIC("Heroic"),
     IMPRINT("Imprint"),

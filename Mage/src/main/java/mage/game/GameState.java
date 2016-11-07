@@ -32,6 +32,7 @@ import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Collections;
 import java.util.HashMap;
+import java.util.HashSet;
 import java.util.Iterator;
 import java.util.LinkedHashSet;
 import java.util.LinkedList;
@@ -108,6 +109,7 @@ public class GameState implements Serializable, Copyable<GameState> {
     private TurnMods turnMods;
     private UUID activePlayerId; // playerId which turn it is
     private UUID priorityPlayerId; // player that has currently priority
+    private UUID playerByOrderId; // player that has currently priority
     private SpellStack stack;
     private Command command;
     private Exile exile;
@@ -161,6 +163,7 @@ public class GameState implements Serializable, Copyable<GameState> {
 
         this.activePlayerId = state.activePlayerId;
         this.priorityPlayerId = state.priorityPlayerId;
+        this.playerByOrderId = state.playerByOrderId;
         this.turn = state.turn.copy();
 
         this.stack = state.stack.copy();
@@ -182,7 +185,11 @@ public class GameState implements Serializable, Copyable<GameState> {
         this.turnMods = state.turnMods.copy();
         this.watchers = state.watchers.copy();
         for (Map.Entry<String, Object> entry : state.values.entrySet()) {
-            this.values.put(entry.getKey(), entry.getValue());
+            if (entry.getValue() instanceof HashSet) {
+                this.values.put(entry.getKey(), (HashSet) ((HashSet) entry.getValue()).clone());
+            } else {
+                this.values.put(entry.getKey(), entry.getValue());
+            }
         }
         this.zones.putAll(state.zones);
         this.simultaneousEvents.addAll(state.simultaneousEvents);
@@ -204,7 +211,8 @@ public class GameState implements Serializable, Copyable<GameState> {
 
     public void restore(GameState state) {
         this.activePlayerId = state.activePlayerId;
-        this.playerList.setCurrent(state.playerList.get());
+        this.playerList.setCurrent(state.activePlayerId);
+        this.playerByOrderId = state.playerByOrderId;
         this.priorityPlayerId = state.priorityPlayerId;
         this.stack = state.stack;
         this.command = state.command;
@@ -250,7 +258,7 @@ public class GameState implements Serializable, Copyable<GameState> {
         StringBuilder sb = threadLocalBuilder.get();
 
         sb.append(turn.getValue(turnNum));
-        sb.append(activePlayerId).append(priorityPlayerId);
+        sb.append(activePlayerId).append(priorityPlayerId).append(playerByOrderId);
 
         for (Player player : players.values()) {
             sb.append("player").append(player.getLife()).append("hand");
@@ -288,7 +296,7 @@ public class GameState implements Serializable, Copyable<GameState> {
         StringBuilder sb = threadLocalBuilder.get();
 
         sb.append(turn.getValue(turnNum));
-        sb.append(activePlayerId).append(priorityPlayerId);
+        sb.append(activePlayerId).append(priorityPlayerId).append(playerByOrderId);
 
         for (Player player : players.values()) {
             sb.append("player").append(player.isPassed()).append(player.getLife()).append("hand");
@@ -341,7 +349,7 @@ public class GameState implements Serializable, Copyable<GameState> {
         StringBuilder sb = threadLocalBuilder.get();
 
         sb.append(turn.getValue(turnNum));
-        sb.append(activePlayerId).append(priorityPlayerId);
+        sb.append(activePlayerId).append(priorityPlayerId).append(playerByOrderId);
 
         for (Player player : players.values()) {
             sb.append("player").append(player.isPassed()).append(player.getLife()).append("hand");
@@ -404,6 +412,14 @@ public class GameState implements Serializable, Copyable<GameState> {
 
     public void setActivePlayerId(UUID activePlayerId) {
         this.activePlayerId = activePlayerId;
+    }
+
+    public UUID getPlayerByOrderId() {
+        return playerByOrderId;
+    }
+
+    public void setPlayerByOrderId(UUID playerByOrderId) {
+        this.playerByOrderId = playerByOrderId;
     }
 
     public UUID getPriorityPlayerId() {
@@ -893,8 +909,10 @@ public class GameState implements Serializable, Copyable<GameState> {
 
     /**
      * Best only use immutable objects, otherwise the states/values of the
-     * object may be changed by AI simulation, because the Value objects are not
-     * copied as the state class is copied.
+     * object may be changed by AI simulation or rollbacks, because the Value
+     * objects are not copied as the state class is copied. Mutable supported:
+     * HashSet with immutable entries (e.g. HashSet< UUID > or HashSet< String
+     * >)
      *
      * @param valueId
      * @param value

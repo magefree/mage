@@ -211,9 +211,8 @@ public class Spell extends StackObjImpl implements Card {
                 for (SpellAbility spellAbility : this.spellAbilities) {
                     if (spellAbilityHasLegalParts(spellAbility, game)) {
                         for (UUID modeId : spellAbility.getModes().getSelectedModes()) {
-                            Mode mode = spellAbility.getModes().get(modeId);
-                            spellAbility.getModes().setActiveMode(mode);
-                            if (mode.getTargets().stillLegal(spellAbility, game)) {
+                            spellAbility.getModes().setActiveMode(modeId);
+                            if (spellAbility.getTargets().stillLegal(spellAbility, game)) {
                                 if (!spellAbility.getSpellAbilityType().equals(SpellAbilityType.SPLICE)) {
                                     updateOptionalCosts(index);
                                 }
@@ -646,7 +645,7 @@ public class Spell extends StackObjImpl implements Card {
     }
 
     @Override
-    public boolean canTransform() {
+    public boolean isTransformable() {
         return false;
     }
 
@@ -805,6 +804,11 @@ public class Spell extends StackObjImpl implements Card {
     }
 
     @Override
+    public void setTransformable(boolean value) {
+        throw new UnsupportedOperationException("Unsupported operation");
+    }
+
+    @Override
     public int getZoneChangeCounter(Game game) {
         return card.getZoneChangeCounter(game);
     }
@@ -834,10 +838,6 @@ public class Spell extends StackObjImpl implements Card {
     @Override
     public boolean isCopy() {
         return isCopiedSpell();
-    }
-
-    @Override
-    public void build() {
     }
 
     @Override
@@ -895,7 +895,7 @@ public class Spell extends StackObjImpl implements Card {
 
     @Override
     public void checkForCountersToAdd(Permanent permanent, Game game) {
-        throw new UnsupportedOperationException("Not supported for Spell");
+        card.checkForCountersToAdd(permanent, game);
     }
 
     @Override

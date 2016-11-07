@@ -28,9 +28,9 @@
 
 package mage.sets;
 
-import java.util.GregorianCalendar;
 import mage.constants.SetType;
 import mage.cards.ExpansionSet;
+import mage.constants.Rarity;
 
 /**
  *
@@ -38,16 +38,22 @@ import mage.cards.ExpansionSet;
  */
 public class WorldMagicCupQualifier extends ExpansionSet {
 
-    private static final WorldMagicCupQualifier fINSTANCE =  new WorldMagicCupQualifier();
+    private static final WorldMagicCupQualifier fINSTANCE = new WorldMagicCupQualifier();
 
     public static WorldMagicCupQualifier getInstance() {
         return fINSTANCE;
     }
 
     private WorldMagicCupQualifier() {
-        super("World Magic Cup Qualifier", "WMCQ", "mage.sets.worldmagiccupqualifier", new GregorianCalendar(2011, 6, 17).getTime(), SetType.PROMOTIONAL);
+        super("World Magic Cup Qualifier", "WMCQ", ExpansionSet.buildDate(2011, 6, 17), SetType.PROMOTIONAL);
         this.hasBoosters = false;
         this.hasBasicLands = false;
+        cards.add(new SetCardInfo("Abrupt Decay", 6, Rarity.RARE, mage.cards.a.AbruptDecay.class));
+        cards.add(new SetCardInfo("Geist of Saint Traft", 2, Rarity.MYTHIC, mage.cards.g.GeistOfSaintTraft.class));
+        cards.add(new SetCardInfo("Liliana of the Veil", 4, Rarity.MYTHIC, mage.cards.l.LilianaOfTheVeil.class));
+        cards.add(new SetCardInfo("Snapcaster Mage", 5, Rarity.RARE, mage.cards.s.SnapcasterMage.class));
+        cards.add(new SetCardInfo("Thalia, Guardian of Thraben", 3, Rarity.RARE, mage.cards.t.ThaliaGuardianOfThraben.class));
+        cards.add(new SetCardInfo("Vengevine", 1, Rarity.MYTHIC, mage.cards.v.Vengevine.class));
     }
 
 }

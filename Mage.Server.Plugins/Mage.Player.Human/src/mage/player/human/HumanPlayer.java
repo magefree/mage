@@ -52,7 +52,7 @@ import mage.abilities.costs.mana.ManaCost;
 import mage.abilities.costs.mana.ManaCostsImpl;
 import mage.abilities.costs.mana.PhyrexianManaCost;
 import mage.abilities.effects.RequirementEffect;
-import mage.abilities.mana.ManaAbility;
+import mage.abilities.mana.ActivatedManaAbilityImpl;
 import mage.cards.Card;
 import mage.cards.Cards;
 import mage.cards.decks.Deck;
@@ -65,9 +65,14 @@ import mage.constants.ManaType;
 import mage.constants.Outcome;
 import mage.constants.PhaseStep;
 import mage.constants.PlayerAction;
+import static mage.constants.PlayerAction.HOLD_PRIORITY;
+import static mage.constants.PlayerAction.REQUEST_AUTO_ANSWER_ID_NO;
 import static mage.constants.PlayerAction.REQUEST_AUTO_ANSWER_RESET_ALL;
+import static mage.constants.PlayerAction.TRIGGER_AUTO_ORDER_NAME_LAST;
 import static mage.constants.PlayerAction.TRIGGER_AUTO_ORDER_RESET_ALL;
 import mage.constants.RangeOfInfluence;
+import static mage.constants.SpellAbilityType.SPLIT;
+import static mage.constants.SpellAbilityType.SPLIT_FUSED;
 import mage.constants.Zone;
 import mage.filter.common.FilterAttackingCreature;
 import mage.filter.common.FilterBlockingCreature;
@@ -730,12 +735,14 @@ public class HumanPlayer extends PlayerImpl {
     }
 
     private boolean checkPassStep(Game game) {
-        if (game.getStep() != null) {
+        try {
             if (playerId.equals(game.getActivePlayerId())) {
                 return !this.getUserData().getUserSkipPrioritySteps().getYourTurn().isPhaseStepSet(game.getStep().getType());
             } else {
                 return !this.getUserData().getUserSkipPrioritySteps().getOpponentTurn().isPhaseStepSet(game.getStep().getType());
             }
+        } catch (NullPointerException ex) {
+            logger.error("null pointer exception  UserData = " + userData == null ? "null" : "not null");
         }
         return true;
     }
@@ -889,7 +896,7 @@ public class HumanPlayer extends PlayerImpl {
         }
         Zone zone = game.getState().getZone(object.getId());
         if (zone != null) {
-            LinkedHashMap<UUID, ManaAbility> useableAbilities = getUseableManaAbilities(object, zone, game);
+            LinkedHashMap<UUID, ActivatedManaAbilityImpl> useableAbilities = getUseableManaAbilities(object, zone, game);
             if (useableAbilities != null && useableAbilities.size() > 0) {
                 useableAbilities = ManaUtil.tryToAutoPay(unpaid, useableAbilities); // eliminates other abilities if one fits perfectly
                 currentlyUnpaidMana = unpaid;
@@ -1262,7 +1269,7 @@ public class HumanPlayer extends PlayerImpl {
         }
         if (userData.isUseFirstManaAbility() && object instanceof Permanent && object.getCardType().contains(CardType.LAND)) {
             ActivatedAbility ability = abilities.values().iterator().next();
-            if (ability instanceof ManaAbility) {
+            if (ability instanceof ActivatedManaAbilityImpl) {
                 activateAbility(ability, game);
                 return;
             }
@@ -1286,7 +1293,7 @@ public class HumanPlayer extends PlayerImpl {
             if (!ability.getSourceId().equals(getCastSourceIdWithAlternateMana()) && ability.getManaCostsToPay().convertedManaCost() > 0) {
                 return true;
             }
-            return ability instanceof ManaAbility;
+            return ability instanceof ActivatedManaAbilityImpl;
         }
         return true;
     }
@@ -1459,6 +1466,11 @@ public class HumanPlayer extends PlayerImpl {
 
     protected void updateGameStatePriority(String methodName, Game game) {
         if (game.getState().getPriorityPlayerId() != null) { // don't do it if priority was set to null before (e.g. discard in cleanaup)
+            if (getId() == null) {
+                logger.fatal("Player with no ID: " + name);
+                this.quit(game);
+                return;
+            }
             logger.debug("Setting game priority to " + getId() + " [" + methodName + "]");
             game.getState().setPriorityPlayerId(getId());
         }

@@ -43,20 +43,29 @@ import mage.game.permanent.Permanent;
 public class CantAttackYouAllEffect extends RestrictionEffect {
 
     private final FilterCreaturePermanent filterAttacker;
+    private final boolean alsoPlaneswalker;
 
     public CantAttackYouAllEffect(Duration duration) {
         this(duration, new FilterCreaturePermanent("creatures"));
     }
 
     public CantAttackYouAllEffect(Duration duration, FilterCreaturePermanent filter) {
+        this(duration, filter, false);
+    }
+
+    public CantAttackYouAllEffect(Duration duration, FilterCreaturePermanent filter, boolean alsoPlaneswalker) {
         super(duration, Outcome.Benefit);
         this.filterAttacker = filter;
-        staticText = filterAttacker.getMessage() + " can't attack you";
+        this.alsoPlaneswalker = alsoPlaneswalker;
+        staticText = filterAttacker.getMessage() + " can't attack you"
+                + (alsoPlaneswalker ? " or a planeswalker you control" : "")
+                + (duration.equals(Duration.UntilYourNextTurn) ? " until your next turn" : "");
     }
 
     CantAttackYouAllEffect(final CantAttackYouAllEffect effect) {
         super(effect);
         this.filterAttacker = effect.filterAttacker;
+        this.alsoPlaneswalker = effect.alsoPlaneswalker;
     }
 
     @Override
@@ -66,7 +75,8 @@ public class CantAttackYouAllEffect extends RestrictionEffect {
 
     @Override
     public boolean canAttack(Permanent attacker, UUID defenderId, Ability source, Game game) {
-        return !defenderId.equals(source.getControllerId());
+        return (!alsoPlaneswalker && !defenderId.equals(source.getControllerId()))
+                || (alsoPlaneswalker && !game.getCombat().getDefendingPlayerId(attacker.getId(), game).equals(source.getControllerId()));
     }
 
     @Override

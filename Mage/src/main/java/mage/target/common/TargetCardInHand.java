@@ -60,7 +60,6 @@ public class TargetCardInHand extends TargetCard {
 
     public TargetCardInHand(int minNumTargets, int maxNumTargets, FilterCard filter) {
         super(minNumTargets, maxNumTargets, Zone.HAND, filter);
-        this.targetName = filter.getMessage();
     }
 
     public TargetCardInHand(final TargetCardInHand target) {

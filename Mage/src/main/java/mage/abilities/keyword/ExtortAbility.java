@@ -106,7 +106,7 @@ class ExtortEffect extends OneShotEffect {
                 if (cost.pay(source, game, source.getSourceId(), player.getId(), false, null)) {
                     int loseLife = 0;
                     for (UUID opponentId : game.getOpponents(source.getControllerId())) {
-                        loseLife += game.getPlayer(opponentId).loseLife(1, game);
+                        loseLife += game.getPlayer(opponentId).loseLife(1, game, false);
                     }
                     if (loseLife > 0) {
                         game.getPlayer(source.getControllerId()).gainLife(loseLife, game);

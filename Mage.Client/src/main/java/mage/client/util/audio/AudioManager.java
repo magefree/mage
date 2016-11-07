@@ -50,7 +50,15 @@ public class AudioManager {
      * AudioManager singleton.
      */
     private static final AudioManager audioManager = new AudioManager();
-    private final LinePool linePool = new LinePool();
+    private LinePool linePool;
+
+    public AudioManager() {
+        try {
+            linePool = new LinePool();
+        } catch (Exception e) {
+            log.warn("Failed to initialize AudioManager. No sounds will be played.", e);
+        }
+    }
 
     public static AudioManager getManager() {
         return audioManager;
@@ -269,35 +277,37 @@ public class AudioManager {
         checkAndPlayClip(getManager().playerWon);
     }
 
+    private static boolean audioGroupEnabled(AudioGroup audioGroup) {
+        switch (audioGroup) {
+            case GameSounds:
+                return "true".equals(PreferencesDialog.getCachedValue(PreferencesDialog.KEY_SOUNDS_GAME_ON, "true"));
+            case DraftSounds:
+                return "true".equals(PreferencesDialog.getCachedValue(PreferencesDialog.KEY_SOUNDS_DRAFT_ON, "true"));
+            case SkipSounds:
+                return "true".equals(PreferencesDialog.getCachedValue(PreferencesDialog.KEY_SOUNDS_SKIP_BUTTONS_ON, "true"));
+            case OtherSounds:
+                return "true".equals(PreferencesDialog.getCachedValue(PreferencesDialog.KEY_SOUNDS_OTHER_ON, "true"));
+        }
+        return false;
+    }
+
     private static void checkAndPlayClip(MageClip mageClip) {
         try {
-            if (mageClip != null) {
-                boolean playSound = false;
-                switch (mageClip.getAudioGroup()) {
-                case GameSounds:
-                    playSound = PreferencesDialog.getCachedValue(PreferencesDialog.KEY_SOUNDS_GAME_ON, "true").equals("true");
-                    break;
-                case DraftSounds:
-                    playSound = PreferencesDialog.getCachedValue(PreferencesDialog.KEY_SOUNDS_DRAFT_ON, "true").equals("true");
-                    break;
-                case SkipSounds:
-                    playSound = PreferencesDialog.getCachedValue(PreferencesDialog.KEY_SOUNDS_SKIP_BUTTONS_ON, "true").equals("true");
-                    break;
-                case OtherSounds:
-                    playSound = PreferencesDialog.getCachedValue(PreferencesDialog.KEY_SOUNDS_OTHER_ON, "true").equals("true");
-                }
-
-                if (playSound) {
-                    audioManager.play(mageClip);
-                }
+            if (mageClip == null || mageClip.getBuffer() == null) {
+                return;
+            }
+            if (audioGroupEnabled(mageClip.getAudioGroup())) {
+                audioManager.play(mageClip);
             }
         } catch (Exception e) {
-            Logger.getLogger(AudioManager.class).fatal("Error while playing sound clip.", e);
+            log.warn("Error while playing sound clip.", e);
         }
     }
 
     public void play(final MageClip mageClip) {
-        linePool.playSound(mageClip);
+        if (linePool != null) {
+            linePool.playSound(mageClip);
+        }
     }
 
 }

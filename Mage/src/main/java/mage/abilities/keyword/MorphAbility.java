@@ -100,7 +100,7 @@ public class MorphAbility extends StaticAbility implements AlternativeSourceCost
     protected static final String ABILITY_KEYWORD = "Morph";
     protected static final String ABILITY_KEYWORD_MEGA = "Megamorph";
     protected static final String REMINDER_TEXT = "<i>(You may cast this card face down as a 2/2 creature for {3}. Turn it face up any time for its morph cost.)</i>";
-    protected static final String REMINDER_TEXT_MEGA = "<i>(You may cast this card face down as a 2/2 creature for {3}. Turn it face up at any time for its megamorph cost and put a +1/+1 counter on it.)</i>";
+    protected static final String REMINDER_TEXT_MEGA = "<i>(You may cast this card face down as a 2/2 creature for {3}. Turn it face up any time for its megamorph cost and put a +1/+1 counter on it.)</i>";
     protected String ruleText;
     protected AlternativeCost2Impl alternateCosts = new AlternativeCost2Impl(ABILITY_KEYWORD, REMINDER_TEXT, new GenericManaCost(3));
     protected Costs<Cost> morphCosts;

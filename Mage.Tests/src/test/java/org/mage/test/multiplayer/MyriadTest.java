@@ -100,7 +100,7 @@ public class MyriadTest extends CardTestMultiPlayerBase {
 
         // +1: You gain 2 life.
         // -1: Put a +1/+1 counter on each creature you control. Those creatures gain vigilance until end of turn.
-        // -6: Put a white Avatar creature token onto the battlefield. It has "This creature's power and toughness are each equal to your life total."
+        // -6: Create a white Avatar creature token. It has "This creature's power and toughness are each equal to your life total."
         addCard(Zone.BATTLEFIELD, playerA, "Ajani Goldmane");
 
         activateAbility(1, PhaseStep.PRECOMBAT_MAIN, playerA, "+1:");

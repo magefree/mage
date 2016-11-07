@@ -35,6 +35,7 @@ import mage.constants.Outcome;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.target.Target;
+import mage.util.CardUtil;
 
 /**
  *
@@ -80,7 +81,7 @@ public class UntapTargetEffect extends OneShotEffect {
         }
 
         if (target.getMaxNumberOfTargets() > 1 || target.getNumberOfTargets() == 0) {
-            sb.append(target.getMaxNumberOfTargets()).append(" target ").append(target.getTargetName()).append("s");
+            sb.append(CardUtil.numberToText(target.getMaxNumberOfTargets())).append(" target ").append(target.getTargetName()).append("s");
         } else {
             if (!target.getTargetName().startsWith("another")) {
                 sb.append("target ");

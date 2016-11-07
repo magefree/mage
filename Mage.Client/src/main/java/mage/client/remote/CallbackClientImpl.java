@@ -27,6 +27,7 @@
  */
 package mage.client.remote;
 
+import java.awt.event.KeyEvent;
 import java.util.List;
 import java.util.UUID;
 import javax.swing.JOptionPane;
@@ -35,6 +36,7 @@ import mage.cards.decks.Deck;
 import mage.client.MageFrame;
 import mage.client.chat.ChatPanelBasic;
 import mage.client.constants.Constants.DeckEditorMode;
+import mage.client.dialog.PreferencesDialog;
 import mage.client.draft.DraftPanel;
 import mage.client.game.GamePanel;
 import mage.client.plugins.impl.Plugins;
@@ -388,19 +390,35 @@ public class CallbackClientImpl implements CallbackClient {
                 usedPanel.receiveMessage("", new StringBuilder("You may use hot keys to play faster:")
                         .append("<br/>Turn mousewheel up (ALT-e) - enlarge image of card the mousepointer hovers over")
                         .append("<br/>Turn mousewheel down (ALT-s) - enlarge original/alternate image of card the mousepointer hovers over")
-                        .append("<br/><b>F2</b> - Confirm \"Ok\", \"Yes\" or \"Done\" button")
-                        .append("<br/><b>F4</b> - Skip current turn but stop on declare attackers/blockers and something on the stack")
-                        .append("<br/><b>F5</b> - Skip to next end step but stop on declare attackers/blockers and something on the stack")
-                        .append("<br/><b>F6</b> - Skip current turn but stop on declare attackers/blockers")
-                        .append("<br/><b>F7</b> - Skip to next main phase but stop on declare attackers/blockers and something on the stack")
-                        .append("<br/><b>F9</b> - Skip everything until your next turn")
-                        .append("<br/><b>F11</b> - Skip everything until the end step just prior to your turn")
-                        .append("<br/><b>F3</b> - Undo F4/F5/F7/F9/F11")
+                        .append("<br/><b>")
+                        .append(KeyEvent.getKeyText((Integer) PreferencesDialog.getCachedValue(PreferencesDialog.KEY_CONTROL_CONFIRM, 113)))
+                        .append("</b> - Confirm \"Ok\", \"Yes\" or \"Done\" button")
+                        .append("<br/><b>")
+                        .append(KeyEvent.getKeyText((Integer) PreferencesDialog.getCachedValue(PreferencesDialog.KEY_CONTROL_NEXT_TURN, 115)))
+                        .append("</b> - Skip current turn but stop on declare attackers/blockers and something on the stack")
+                        .append("<br/><b>")
+                        .append(KeyEvent.getKeyText((Integer) PreferencesDialog.getCachedValue(PreferencesDialog.KEY_CONTROL_END_STEP, 116)))
+                        .append("</b> - Skip to next end step but stop on declare attackers/blockers and something on the stack")
+                        .append("<br/><b>")
+                        .append(KeyEvent.getKeyText((Integer) PreferencesDialog.getCachedValue(PreferencesDialog.KEY_CONTROL_SKIP_STEP, 117)))
+                        .append("</b> - Skip current turn but stop on declare attackers/blockers")
+                        .append("<br/><b>")
+                        .append(KeyEvent.getKeyText((Integer) PreferencesDialog.getCachedValue(PreferencesDialog.KEY_CONTROL_MAIN_STEP, 118)))
+                        .append("</b> - Skip to next main phase but stop on declare attackers/blockers and something on the stack")
+                        .append("<br/><b>")
+                        .append(KeyEvent.getKeyText((Integer) PreferencesDialog.getCachedValue(PreferencesDialog.KEY_CONTROL_YOUR_TURN, 120)))
+                        .append("</b> - Skip everything until your next turn")
+                        .append("<br/><b>")
+                        .append(KeyEvent.getKeyText((Integer) PreferencesDialog.getCachedValue(PreferencesDialog.KEY_CONTROL_PRIOR_END, 122)))
+                        .append("</b> - Skip everything until the end step just prior to your turn")
+                        .append("<br/><b>")
+                        .append(KeyEvent.getKeyText((Integer) PreferencesDialog.getCachedValue(PreferencesDialog.KEY_CONTROL_CANCEL_SKIP, 114)))
+                        .append("</b> - Undo F4/F5/F7/F9/F11")
                         .append("<br/><b>").append(System.getProperty("os.name").contains("Mac OS X") ? "Cmd" : "Ctrl").append(" + click</b> - Hold priority while casting a spell or activating an ability").toString(),
                         null, MessageType.USER_INFO, ChatMessage.MessageColor.BLUE);
                 break;
             case TOURNAMENT:
-                usedPanel.receiveMessage("", new StringBuilder("On this panel you can see the players, their state and the results of the games of the tournament. Also you can chat with the competitors of the tournament.").toString(),
+                usedPanel.receiveMessage("", "On this panel you can see the players, their state and the results of the games of the tournament. Also you can chat with the competitors of the tournament.",
                         null, MessageType.USER_INFO, ChatMessage.MessageColor.BLUE);
                 break;
             case TABLES:

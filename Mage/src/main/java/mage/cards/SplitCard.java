@@ -49,14 +49,11 @@ public abstract class SplitCard extends CardImpl {
     protected Card leftHalfCard;
     protected Card rightHalfCard;
 
-    public SplitCard(UUID ownerId, int cardNumber, String nameLeft, String nameRight, Rarity rarity, CardType[] cardTypes, String costsLeft, String costsRight, boolean fused) {
-        this(ownerId, String.valueOf(cardNumber), nameLeft, nameRight, rarity, cardTypes, costsLeft, costsRight, fused);
-    }
-
-    public SplitCard(UUID ownerId, String cardNumber, String nameLeft, String nameRight, Rarity rarity, CardType[] cardTypes, String costsLeft, String costsRight, boolean fused) {
-        super(ownerId, cardNumber, new StringBuilder(nameLeft).append(" // ").append(nameRight).toString(), rarity, cardTypes, costsLeft + costsRight, (fused ? SpellAbilityType.SPLIT_FUSED : SpellAbilityType.SPLIT));
-        leftHalfCard = new SplitCardHalfImpl(this.getOwnerId(), this.getCardNumber(), nameLeft, this.rarity, cardTypes, costsLeft, this, SpellAbilityType.SPLIT_LEFT);
-        rightHalfCard = new SplitCardHalfImpl(this.getOwnerId(), this.getCardNumber(), nameRight, this.rarity, cardTypes, costsRight, this, SpellAbilityType.SPLIT_RIGHT);
+    public SplitCard(UUID ownerId, CardSetInfo setInfo, CardType[] cardTypes, String costsLeft, String costsRight, boolean fused) {
+        super(ownerId, setInfo, cardTypes, costsLeft + costsRight, (fused ? SpellAbilityType.SPLIT_FUSED : SpellAbilityType.SPLIT));
+        String[] names = setInfo.getName().split(" // ");
+        leftHalfCard = new SplitCardHalfImpl(this.getOwnerId(), new CardSetInfo(names[0], setInfo.getExpansionSetCode(), setInfo.getCardNumber(), setInfo.getRarity(), setInfo.getGraphicInfo()), cardTypes, costsLeft, this, SpellAbilityType.SPLIT_LEFT);
+        rightHalfCard = new SplitCardHalfImpl(this.getOwnerId(), new CardSetInfo(names[1], setInfo.getExpansionSetCode(), setInfo.getCardNumber(), setInfo.getRarity(), setInfo.getGraphicInfo()), cardTypes, costsRight, this, SpellAbilityType.SPLIT_RIGHT);
         this.splitCard = true;
     }
 

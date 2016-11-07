@@ -189,6 +189,9 @@ public class CombatGroup implements Serializable, Copyable<CombatGroup> {
      * @return
      */
     private boolean canDamage(Permanent perm, boolean first) {
+        if (perm == null) {
+            return false;
+        }
         // if now first strike combat damage step
         if (first) {
             // should have first strike or double strike

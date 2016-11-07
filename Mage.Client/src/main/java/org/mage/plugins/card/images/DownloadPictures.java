@@ -23,7 +23,6 @@ import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.Iterator;
 import java.util.List;
-import java.util.Random;
 import java.util.Set;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
@@ -57,11 +56,11 @@ import net.java.truevfs.access.TFileOutputStream;
 import net.java.truevfs.access.TVFS;
 import net.java.truevfs.kernel.spec.FsSyncException;
 import org.apache.log4j.Logger;
+import org.mage.plugins.card.dl.sources.AltMtgOnlTokensImageSource;
 import org.mage.plugins.card.dl.sources.CardImageSource;
+import org.mage.plugins.card.dl.sources.GrabbagImageSource;
 import org.mage.plugins.card.dl.sources.MagicCardsImageSource;
 import org.mage.plugins.card.dl.sources.MtgOnlTokensImageSource;
-import org.mage.plugins.card.dl.sources.AltMtgOnlTokensImageSource;
-import org.mage.plugins.card.dl.sources.GrabbagImageSource;
 import org.mage.plugins.card.dl.sources.MythicspoilerComSource;
 import org.mage.plugins.card.dl.sources.TokensMtgImageSource;
 import org.mage.plugins.card.dl.sources.WizardCardsImageSource;
@@ -183,15 +182,12 @@ public class DownloadPictures extends DefaultBoundedRangeModel implements Runnab
                         break;
                     case 5:
                         cardImageSource = AltMtgOnlTokensImageSource.getInstance();
-                        break;                        
+                        break;
                     case 6:
                         cardImageSource = GrabbagImageSource.getInstance();
-                        break;                   
+                        break;
                 }
-                int count = DownloadPictures.this.cards.size();
-                float mb = (count * cardImageSource.getAverageSize()) / 1024;
-                bar.setString(String.format(cardIndex == count ? "%d of %d cards finished! Please close!"
-                        : "%d of %d cards finished! Please wait! [%.1f Mb]", 0, count, mb));
+                updateCardsToDownload();
             }
         });
         p0.add(jComboBox1);
@@ -228,20 +224,7 @@ public class DownloadPictures extends DefaultBoundedRangeModel implements Runnab
         checkBox.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                ArrayList<CardDownloadData> cardsToDownload = DownloadPictures.this.cards;
-                if (checkBox.isSelected()) {
-                    DownloadPictures.this.type2cards = new ArrayList<>();
-                    for (CardDownloadData data : DownloadPictures.this.cards) {
-                        if (data.isType2() || data.isToken()) {
-                            DownloadPictures.this.type2cards.add(data);
-                        }
-                    }
-                    cardsToDownload = DownloadPictures.this.type2cards;
-                }
-                int count = cardsToDownload.size();
-                float mb = (count * cardImageSource.getAverageSize()) / 1024;
-                bar.setString(String.format(cardIndex == count ? "%d of %d cards finished! Please close!"
-                        : "%d of %d cards finished! Please wait! [%.1f Mb]", 0, count, mb));
+                updateCardsToDownload();
             }
         });
 
@@ -263,6 +246,36 @@ public class DownloadPictures extends DefaultBoundedRangeModel implements Runnab
             }
         }
         return false;
+    }
+
+    private void updateCardsToDownload() {
+        ArrayList<CardDownloadData> cardsToDownload = cards;
+        if (type2cardsOnly()) {
+            selectType2andTokenCardsIfNotYetDone();
+            cardsToDownload = type2cards;
+        }
+        updateProgressText(cardsToDownload.size());
+    }
+
+    private boolean type2cardsOnly() {
+        return checkBox.isSelected();
+    }
+
+    private void selectType2andTokenCardsIfNotYetDone() {
+        if (type2cards == null) {
+            type2cards = new ArrayList<>();
+            for (CardDownloadData data : cards) {
+                if (data.isType2() || data.isToken()) {
+                    type2cards.add(data);
+                }
+            }
+        }
+    }
+
+    private void updateProgressText(int cardCount) {
+        float mb = (cardCount * cardImageSource.getAverageSize()) / 1024;
+        bar.setString(String.format(cardIndex == cardCount ? "%d of %d cards finished! Please close!"
+            : "%d of %d cards finished! Please wait! [%.1f Mb]", 0, cardCount, mb));
     }
 
     private static String createDownloadName(CardInfo card) {
@@ -350,6 +363,7 @@ public class DownloadPictures extends DefaultBoundedRangeModel implements Runnab
         for (CardDownloadData card : allCardsUrls) {
             file = new TFile(CardImageUtils.generateImagePath(card));
             if (!file.exists()) {
+                logger.debug("Missing: " + file.getAbsolutePath());
                 cardsToDownload.add(card);
             }
         }
@@ -565,7 +579,7 @@ public class DownloadPictures extends DefaultBoundedRangeModel implements Runnab
         private final URL url;
         private final int count;
         private final String actualFilename;
-        private boolean useSpecifiedPaths;
+        private final boolean useSpecifiedPaths;
 
         public DownloadTask(CardDownloadData card, URL url, int count) {
             this.card = card;
@@ -597,17 +611,15 @@ public class DownloadPictures extends DefaultBoundedRangeModel implements Runnab
                 String imagePath;
                 if (useSpecifiedPaths) {
                     if (card != null && card.isToken()) {
-                        imagePath = CardImageUtils.getTokenBasePath() + actualFilename;;
+                        imagePath = CardImageUtils.getTokenBasePath() + actualFilename;
+                    } else if (card != null) {
+                        imagePath = CardImageUtils.getImageBasePath() + actualFilename;
                     } else {
-                        if (card != null) {
-                            imagePath = CardImageUtils.getImageBasePath() + actualFilename;
-                        } else {
-                            imagePath = Constants.IO.imageBaseDir;
-                        }
+                        imagePath = Constants.IO.imageBaseDir;
                     }
-                    
+
                     String tmpFile = filePath + "temporary" + actualFilename;
-                    temporaryFile = new File(tmpFile.toString());
+                    temporaryFile = new File(tmpFile);
                     if (!temporaryFile.exists()) {
                         temporaryFile.getParentFile().mkdirs();
                     }
@@ -635,32 +647,43 @@ public class DownloadPictures extends DefaultBoundedRangeModel implements Runnab
                 BufferedOutputStream out;
 
                 // Logger.getLogger(this.getClass()).info(url.toString());
-                URLConnection httpConn = url.openConnection(p);
-                setUpConnection(httpConn);
-
-                httpConn.connect();
-                int responseCode = ((HttpURLConnection) httpConn).getResponseCode();
-                if (responseCode == 200) {
-                    try (BufferedInputStream in = new BufferedInputStream(((HttpURLConnection) httpConn).getInputStream())) {
-                        //try (BufferedInputStream in = new BufferedInputStream(url.openConnection(p).getInputStream())) {
-                        out = new BufferedOutputStream(new TFileOutputStream(temporaryFile));
-                        byte[] buf = new byte[1024];
-                        int len;
-                        while ((len = in.read(buf)) != -1) {
-                            // user cancelled
-                            if (cancel) {
-                                in.close();
-                                out.flush();
-                                out.close();
-                                temporaryFile.delete();
-                                return;
+                boolean useTempFile = false;
+                int responseCode = 0;
+                URLConnection httpConn = null;
+                
+                if (temporaryFile != null && temporaryFile.length() > 100) {
+                    useTempFile = true;
+                } else {
+                    cardImageSource.doPause(url.getPath());
+                    httpConn = url.openConnection(p);
+                    setUpConnection(httpConn);
+                    httpConn.connect();
+                    responseCode = ((HttpURLConnection) httpConn).getResponseCode();
+                }
+                
+                if (responseCode == 200 || useTempFile) {
+                    if (!useTempFile) {
+                        try (BufferedInputStream in = new BufferedInputStream(((HttpURLConnection) httpConn).getInputStream())) {
+                            //try (BufferedInputStream in = new BufferedInputStream(url.openConnection(p).getInputStream())) {
+                            out = new BufferedOutputStream(new TFileOutputStream(temporaryFile));
+                            byte[] buf = new byte[1024];
+                            int len;
+                            while ((len = in.read(buf)) != -1) {
+                                // user cancelled
+                                if (cancel) {
+                                    in.close();
+                                    out.flush();
+                                    out.close();
+                                    temporaryFile.delete();
+                                    return;
+                                }
+                                out.write(buf, 0, len);
                             }
-                            out.write(buf, 0, len);
-                        }
 
+                        }
+                        out.flush();
+                        out.close();
                     }
-                    out.flush();
-                    out.close();
 
                     if (card != null && card.isTwoFacedCard()) {
                         BufferedImage image = ImageIO.read(temporaryFile);
@@ -679,7 +702,7 @@ public class DownloadPictures extends DefaultBoundedRangeModel implements Runnab
                             outputFile.getParentFile().mkdirs();
                             new TFile(temporaryFile).cp_rp(outputFile);
                         }
-                        temporaryFile.delete();
+                        //temporaryFile.delete();
                     } else {
                         outputFile.getParentFile().mkdirs();
                         new TFile(temporaryFile).cp_rp(outputFile);
@@ -701,7 +724,7 @@ public class DownloadPictures extends DefaultBoundedRangeModel implements Runnab
                 logger.error(e, e);
             } finally {
                 if (temporaryFile != null) {
-                    temporaryFile.delete();
+                    //temporaryFile.delete();
                 }
             }
             synchronized (sync) {

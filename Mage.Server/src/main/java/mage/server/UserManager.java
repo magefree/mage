@@ -59,7 +59,7 @@ public class UserManager {
     private final ConcurrentHashMap<UUID, User> users = new ConcurrentHashMap<>();
     private final ConcurrentHashMap<String, User> usersByName = new ConcurrentHashMap<>();
 
-    private static final ExecutorService CALL_EXECUTOR = ThreadExecutor.getInstance().getCallExecutor();
+    private static final ExecutorService USER_EXECUTOR = ThreadExecutor.getInstance().getCallExecutor();
 
     private static final UserManager INSTANCE = new UserManager();
 
@@ -76,11 +76,11 @@ public class UserManager {
         }, 60, 60, TimeUnit.SECONDS);
     }
 
-    public User createUser(String userName, String host) {
+    public User createUser(String userName, String host, AuthorizedUser authorizedUser) {
         if (getUserByName(userName) != null) {
             return null; //user already exists
         }
-        User user = new User(userName, host);
+        User user = new User(userName, host, authorizedUser);
         users.put(user.getId(), user);
         usersByName.put(userName, user);
         return user;
@@ -136,12 +136,12 @@ public class UserManager {
         if (userId != null) {
             final User user = users.get(userId);
             if (user != null) {
-                CALL_EXECUTOR.execute(
+                USER_EXECUTOR.execute(
                         new Runnable() {
                     @Override
                     public void run() {
                         try {
-                            LOGGER.info("USER REMOVE - " + user.getName() + " (" + reason.toString() + ")  userId: " + userId);
+                            LOGGER.info("USER REMOVE - " + user.getName() + " (" + reason.toString() + ")  userId: " + userId + " [" + user.getGameInfo() + "]");
                             user.remove(reason);
                             LOGGER.debug("USER REMOVE END - " + user.getName());
                         } catch (Exception ex) {
@@ -212,7 +212,7 @@ public class UserManager {
     }
 
     public void updateUserHistory() {
-        CALL_EXECUTOR.execute(new Runnable() {
+        USER_EXECUTOR.execute(new Runnable() {
             @Override
             public void run() {
                 for (String updatedUser : UserStatsRepository.instance.updateUserStats()) {

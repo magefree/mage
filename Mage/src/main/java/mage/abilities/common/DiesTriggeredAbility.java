@@ -83,7 +83,7 @@ public class DiesTriggeredAbility extends ZoneChangeTriggeredAbility {
     public boolean checkTrigger(GameEvent event, Game game) {
         if (super.checkTrigger(event, game)) {
             ZoneChangeEvent zEvent = (ZoneChangeEvent) event;
-            if (zEvent.getTarget().canTransform()) {
+            if (zEvent.getTarget().isTransformable()) {
                 if (!zEvent.getTarget().getAbilities().contains(this)) {
                     return false;
                 }

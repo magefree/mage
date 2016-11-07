@@ -36,7 +36,7 @@ import mage.abilities.effects.common.ManaEffect;
  *
  * @author BetaSteward_at_googlemail.com
  */
-public abstract class BasicManaAbility extends ManaAbility {
+public abstract class BasicManaAbility extends ActivatedManaAbilityImpl {
 
     public BasicManaAbility(ManaEffect effect) {
         super(Zone.BATTLEFIELD, effect, new TapSourceCost());

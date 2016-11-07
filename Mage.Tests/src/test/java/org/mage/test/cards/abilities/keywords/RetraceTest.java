@@ -134,7 +134,7 @@ public class RetraceTest extends CardTestPlayerBase {
         addCard(Zone.GRAVEYARD, playerA, "Swamp", 2);
         addCard(Zone.HAND, playerA, "Mountain", 1);
 
-        // Put a 1/1 black and green Worm creature token onto the battlefield for each land card in your graveyard.
+        // Create a 1/1 black and green Worm creature token for each land card in your graveyard.
         // Retrace (You may cast this card from your graveyard by discarding a land card in addition to paying its other costs.)
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Worm Harvest");
 

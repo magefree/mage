@@ -30,12 +30,10 @@ package mage;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
+import mage.constants.ColoredManaSymbol;
 import mage.util.Copyable;
-import mage.util.ThreadLocalStringBuilder;
 
 public class ObjectColor implements Serializable, Copyable<ObjectColor>, Comparable<ObjectColor> {
-
-    private static final ThreadLocalStringBuilder threadLocalBuilder = new ThreadLocalStringBuilder(10);
 
     public static final ObjectColor WHITE = new ObjectColor("W");
     public static final ObjectColor BLUE = new ObjectColor("U");
@@ -81,19 +79,20 @@ public class ObjectColor implements Serializable, Copyable<ObjectColor>, Compara
         red = color.red;
         green = color.green;
     }
-    
+
     /**
      * Returns a new color which contains all of the colors of this ObjectColor
      * in addition to all of the colors of the other ObjectColor.
+     *
      * @param other The other ObjectColor to union with
      * @return A new color which is the union of this and other
      */
     public ObjectColor union(ObjectColor other) {
         ObjectColor newColor = new ObjectColor();
         newColor.white = white | other.white;
-        newColor.blue  = blue  | other.blue;
+        newColor.blue = blue | other.blue;
         newColor.black = black | other.black;
-        newColor.red   = red   | other.red;
+        newColor.red = red | other.red;
         newColor.green = green | other.green;
         return newColor;
     }
@@ -144,6 +143,24 @@ public class ObjectColor implements Serializable, Copyable<ObjectColor>, Compara
         this.setGreen(color.isGreen());
         this.setRed(color.isRed());
         this.setWhite(color.isWhite());
+    }
+
+    public void addColor(ObjectColor color) {
+        if (color.isWhite()) {
+            setWhite(true);
+        }
+        if (color.isBlue()) {
+            setBlue(true);
+        }
+        if (color.isBlack()) {
+            setBlack(true);
+        }
+        if (color.isRed()) {
+            setRed(true);
+        }
+        if (color.isGreen()) {
+            setGreen(true);
+        }
     }
 
     public boolean isColorless() {
@@ -212,7 +229,7 @@ public class ObjectColor implements Serializable, Copyable<ObjectColor>, Compara
 
     @Override
     public String toString() {
-        StringBuilder sb = threadLocalBuilder.get();
+        StringBuilder sb = new StringBuilder(5);
         if (white) {
             sb.append("W");
         }
@@ -361,6 +378,31 @@ public class ObjectColor implements Serializable, Copyable<ObjectColor>, Compara
         return o1 - o2;
     }
 
+    /**
+     * Returns a ColoredManaSymbol of a color included If multicolor only one
+     * symbol is returned
+     *
+     * @return null or
+     */
+    public ColoredManaSymbol getColoredManaSymbol() {
+        if (isBlack()) {
+            return ColoredManaSymbol.B;
+        }
+        if (isRed()) {
+            return ColoredManaSymbol.R;
+        }
+        if (isBlue()) {
+            return ColoredManaSymbol.U;
+        }
+        if (isGreen()) {
+            return ColoredManaSymbol.G;
+        }
+        if (isWhite()) {
+            return ColoredManaSymbol.W;
+        }
+        return null;
+    }
+
     public static List<ObjectColor> getAllColors() {
         List<ObjectColor> colors = new ArrayList<>();
         colors.add(ObjectColor.WHITE);
@@ -370,4 +412,5 @@ public class ObjectColor implements Serializable, Copyable<ObjectColor>, Compara
         colors.add(ObjectColor.GREEN);
         return colors;
     }
+
 }

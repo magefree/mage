@@ -96,12 +96,12 @@ public final class Constants {
     }
 
     public enum SortBy {
-
+        CARD_TYPE("Card Type"),
         CASTING_COST("Casting Cost"),
-        RARITY("Rarity"),
         COLOR("Color"),
         COLOR_IDENTITY("Color Identity"),
         NAME("Name"),
+        RARITY("Rarity"),
         UNSORTED("Unsorted");
 
         private final String text;
@@ -117,6 +117,8 @@ public final class Constants {
 
         public static SortBy getByString(String text) {
             switch (text) {
+                case "Card Type":
+                    return CARD_TYPE;
                 case "Casting Cost":
                     return CASTING_COST;
                 case "Rarity":

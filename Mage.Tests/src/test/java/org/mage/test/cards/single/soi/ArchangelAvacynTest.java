@@ -39,7 +39,7 @@ public class ArchangelAvacynTest extends CardTestPlayerBase {
         addCard(Zone.BATTLEFIELD, playerA, "Wall of Omens"); // 0/4
         addCard(Zone.HAND, playerA, "Elite Vanguard"); // 2/1
         addCard(Zone.BATTLEFIELD, playerA, "Plains", 2);
-        addCard(Zone.BATTLEFIELD, playerB, "Hill Giant"); // 3/1
+        addCard(Zone.BATTLEFIELD, playerB, "Hill Giant"); // 3/3
         addCard(Zone.BATTLEFIELD, playerB, "Wall of Roots"); // 0/5
         addCard(Zone.HAND, playerB, "Shock");
         addCard(Zone.BATTLEFIELD, playerB, "Mountain", 2);
@@ -60,5 +60,40 @@ public class ArchangelAvacynTest extends CardTestPlayerBase {
 
         assertGraveyardCount(playerB, "Hill Giant", 1);
 
+    }
+
+    /**
+     * Reported Bug: If more than 1(in my case 3) non-angel creature dies, she
+     * flips various times dealing the 3 damage more than 1 time.
+     */
+    @Test
+    public void TransformOnlyOnceTest() {
+        // Flash
+        // Flying
+        // Vigilance
+        // When Archangel Avacyn enters the battlefield, creatures you control gain indestructible until end of turn.
+        // When a non-Angel creature you control dies, transform Archangel Avacyn at the beginning of the next upkeep.
+        // Transformed side: Avacyn, the Purifier - Creature 6/5
+        // Flying
+        // When this creature transforms into Avacyn, the Purifier, it deals 3 damage to each other creature and each opponent.
+        addCard(Zone.BATTLEFIELD, playerA, "Archangel Avacyn");
+        addCard(Zone.BATTLEFIELD, playerA, "Wall of Roots"); // 0/5
+        addCard(Zone.BATTLEFIELD, playerA, "Mountain", 2);
+        // Seismic Shudder deals 1 damage to each creature without flying.
+        addCard(Zone.HAND, playerA, "Seismic Shudder"); // {1}{R}
+
+        addCard(Zone.BATTLEFIELD, playerA, "Elite Vanguard", 3); // 2/1
+
+        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Seismic Shudder");
+        setStopAt(2, PhaseStep.DRAW);
+        execute();
+
+        assertGraveyardCount(playerA, "Seismic Shudder", 1);
+        assertGraveyardCount(playerA, "Elite Vanguard", 3);
+
+        assertPermanentCount(playerA, "Wall of Roots", 1);
+
+        assertLife(playerA, 20);
+        assertLife(playerB, 17);
     }
 }

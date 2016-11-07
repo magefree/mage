@@ -73,7 +73,6 @@ public class TargetCardInExile extends TargetCard {
         } else {
             this.allExileZones = allExileZones;
         }
-        this.targetName = filter.getMessage();
     }
 
     public TargetCardInExile(final TargetCardInExile target) {

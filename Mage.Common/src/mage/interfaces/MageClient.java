@@ -24,8 +24,7 @@
 * The views and conclusions contained in the software and documentation are those of the
 * authors and should not be interpreted as representing official policies, either expressed
 * or implied, of BetaSteward_at_googlemail.com.
-*/
-
+ */
 package mage.interfaces;
 
 import mage.interfaces.callback.CallbackClient;
@@ -38,9 +37,13 @@ import mage.utils.MageVersion;
 public interface MageClient extends CallbackClient {
 
     MageVersion getVersion();
+
     void connected(String message);
+
     void disconnected(boolean errorCall);
+
     void showMessage(String message);
+
     void showError(String message);
 
 }

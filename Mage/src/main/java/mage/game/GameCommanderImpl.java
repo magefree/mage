@@ -76,16 +76,14 @@ public abstract class GameCommanderImpl extends GameImpl {
         for (UUID playerId : state.getPlayerList(startingPlayerId)) {
             Player player = getPlayer(playerId);
             if (player != null) {
-                if (player.getSideboard().size() > 0) {
-                    Card commander = getCard((UUID) player.getSideboard().toArray()[0]);
+                while (player.getSideboard().size() > 0) {
+                    Card commander = this.getCard(player.getSideboard().iterator().next());
                     if (commander != null) {
-                        player.setCommanderId(commander.getId());
+                        player.addCommanderId(commander.getId());
                         commander.moveToZone(Zone.COMMAND, null, this, true);
                         commander.getAbilities().setControllerId(player.getId());
                         ability.addEffect(new CommanderReplacementEffect(commander.getId(), alsoHand, alsoLibrary));
                         ability.addEffect(new CommanderCostModification(commander.getId()));
-                        // Commander rule #4 was removed Jan. 18, 2016
-                        // ability.addEffect(new CommanderManaReplacementEffect(player.getId(), CardUtil.getColorIdentity(commander)));
                         getState().setValue(commander.getId() + "_castCount", 0);
                         CommanderInfoWatcher watcher = new CommanderInfoWatcher(commander.getId(), CHECK_COMMANDER_DAMAGE);
                         getState().getWatchers().add(watcher);
@@ -93,7 +91,6 @@ public abstract class GameCommanderImpl extends GameImpl {
                     }
                 }
             }
-
         }
         this.getState().addAbility(ability, null);
         super.init(choosingPlayerId);
@@ -189,15 +186,17 @@ public abstract class GameCommanderImpl extends GameImpl {
     @Override
     protected boolean checkStateBasedActions() {
         for (Player player : getPlayers().values()) {
-            CommanderInfoWatcher damageWatcher = (CommanderInfoWatcher) getState().getWatchers().get("CommanderCombatDamageWatcher", player.getCommanderId());
-            if (damageWatcher == null) {
-                continue;
-            }
-            for (Map.Entry<UUID, Integer> entrySet : damageWatcher.getDamageToPlayer().entrySet()) {
-                if (entrySet.getValue() > 20) {
-                    Player opponent = getPlayer(entrySet.getKey());
-                    if (opponent != null && !opponent.hasLost() && player.isInGame()) {
-                        opponent.lost(this);
+            for (UUID commanderId : player.getCommandersIds()) {
+                CommanderInfoWatcher damageWatcher = (CommanderInfoWatcher) getState().getWatchers().get("CommanderCombatDamageWatcher", commanderId);
+                if (damageWatcher == null) {
+                    continue;
+                }
+                for (Map.Entry<UUID, Integer> entrySet : damageWatcher.getDamageToPlayer().entrySet()) {
+                    if (entrySet.getValue() > 20) {
+                        Player opponent = getPlayer(entrySet.getKey());
+                        if (opponent != null && !opponent.hasLost() && player.isInGame()) {
+                            opponent.lost(this);
+                        }
                     }
                 }
             }

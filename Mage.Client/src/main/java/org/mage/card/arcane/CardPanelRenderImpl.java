@@ -63,7 +63,12 @@ public class CardPanelRenderImpl extends CardPanel {
         if (!a.getRules().equals(b.getRules())) {
             return false;
         }
-
+        if (!a.getRarity().equals(b.getRarity())) {
+            return false;
+        }
+        if (a.getCardNumber() != null && !a.getCardNumber().equals(b.getCardNumber())) {
+            return false;
+        }
         // Expansion set code, with null checking:
         // TODO: The null checks should not be necessary, but thanks to Issue #2260
         // some tokens / commandobjects will be missing expansion set codes.
@@ -329,6 +334,7 @@ public class CardPanelRenderImpl extends CardPanel {
                         } else {
                             srcImage = ImageCache.getThumbnail(gameCard);
                         }
+
                         UI.invokeLater(new Runnable() {
                             @Override
                             public void run() {
@@ -393,7 +399,7 @@ public class CardPanelRenderImpl extends CardPanel {
             return ImageCache.loadImage(new TFile(DirectLinksForDownload.outDir + File.separator + DirectLinksForDownload.cardbackFilename));
         }
     }
-    
+
     @Override
     public void setSelected(boolean selected) {
         if (selected != isSelected()) {
@@ -403,7 +409,7 @@ public class CardPanelRenderImpl extends CardPanel {
             repaint();
         }
     }
-    
+
     @Override
     public void setChoosable(boolean choosable) {
         if (choosable != isChoosable()) {

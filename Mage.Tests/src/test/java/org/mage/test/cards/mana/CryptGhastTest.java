@@ -72,7 +72,7 @@ public class CryptGhastTest extends CardTestPlayerBase {
         // Whenever you tap a Swamp for mana, add {B} to your mana pool (in addition to the mana the land produces).
         addCard(Zone.BATTLEFIELD, playerA, "Crypt Ghast", 1);
         // Imprint - Whenever a nontoken creature dies, you may exile that card. If you do, return each other card exiled with Mimic Vat to its owner's graveyard.
-        // {3},{T}: Put a token onto the battlefield that's a copy of the exiled card. It gains haste. Exile it at the beginning of the next end step.
+        // {3},{T}: Create a tokenonto the battlefield that's a copy of the exiled card. It gains haste. Exile it at the beginning of the next end step.
         addCard(Zone.BATTLEFIELD, playerA, "Mimic Vat", 1);
         addCard(Zone.BATTLEFIELD, playerA, "Swamp", 1);
         // Swamp Mountain

@@ -41,7 +41,7 @@ import mage.game.Game;
  *
  * @author BetaSteward_at_googlemail.com
  */
-public class SimpleManaAbility extends ManaAbility {
+public class SimpleManaAbility extends ActivatedManaAbilityImpl {
 
     public SimpleManaAbility(Zone zone, ManaEffect effect, Cost cost) {
         super(zone, effect, cost);

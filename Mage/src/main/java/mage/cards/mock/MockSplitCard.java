@@ -3,6 +3,7 @@ package mage.cards.mock;
 import java.util.List;
 import mage.MageInt;
 import mage.abilities.Ability;
+import mage.cards.CardSetInfo;
 import mage.cards.SplitCard;
 import mage.cards.repository.CardInfo;
 import mage.cards.repository.CardRepository;
@@ -15,11 +16,7 @@ import mage.constants.CardType;
 public class MockSplitCard extends SplitCard {
 
     public MockSplitCard(CardInfo card) {
-        super(null,
-                card.getCardNumber(),
-                getLeftHalfName(card),
-                getRightHalfName(card),
-                card.getRarity(),
+        super(null, new CardSetInfo(card.getName(), card.getSetCode(), card.getCardNumber(), card.getRarity()),
                 card.getTypes().toArray(new CardType[0]),
                 join(card.getManaCosts()),
                 "",
@@ -31,13 +28,15 @@ public class MockSplitCard extends SplitCard {
         this.subtype = card.getSubTypes();
         this.supertype = card.getSupertypes();
 
+        this.frameColor = card.getFrameColor();
+        this.frameStyle = card.getFrameStyle();
         this.usesVariousArt = card.usesVariousArt();
 
         this.color = card.getColor();
         this.splitCard = card.isSplitCard();
         this.flipCard = card.isFlipCard();
 
-        this.canTransform = card.isDoubleFaced();
+        this.transformable = card.isDoubleFaced();
         this.nightCard = card.isNightCard();
         if (card.getSecondSideName() != null && !card.getSecondSideName().isEmpty()) {
             this.secondSideCard = new MockCard(CardRepository.instance.findCard(card.getSecondSideName()));

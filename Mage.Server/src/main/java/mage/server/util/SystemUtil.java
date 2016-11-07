@@ -1,5 +1,16 @@
 package mage.server.util;
 
+import java.io.File;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
+import java.util.Date;
+import java.util.HashSet;
+import java.util.List;
+import java.util.Scanner;
+import java.util.Set;
+import java.util.concurrent.TimeUnit;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 import mage.cards.Card;
 import mage.cards.repository.CardInfo;
 import mage.cards.repository.CardRepository;
@@ -8,36 +19,30 @@ import mage.game.Game;
 import mage.players.Player;
 import mage.util.RandomUtil;
 
-import java.io.File;
-import java.util.Date;
-import java.util.HashSet;
-import java.util.List;
-import java.util.Random;
-import java.util.Scanner;
-import java.util.Set;
-import java.util.concurrent.TimeUnit;
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
-
 /**
  * @author nantuko
  */
 public class SystemUtil {
 
+    public static final DateFormat dateFormat = new SimpleDateFormat("yy-M-dd HH:mm:ss");
+
     private static final String INIT_FILE_PATH = "config" + File.separator + "init.txt";
-    private static final org.apache.log4j.Logger logger =  org.apache.log4j.Logger.getLogger(SystemUtil.class);
+    private static final org.apache.log4j.Logger logger = org.apache.log4j.Logger.getLogger(SystemUtil.class);
 
     /**
      * Replaces cards in player's hands by specified in config/init.txt.<br/>
      * <br/>
      * <b>Implementation note:</b><br/>
      * 1. Read init.txt line by line<br/>
-     * 2. Parse line using the following format: line ::= <zone>:<nickname>:<card name>:<amount><br/>
+     * 2. Parse line using the following format: line ::=
+     * <zone>:<nickname>:<card name>:<amount><br/>
      * 3. If zone equals to 'hand', add card to player's library<br/>
-     *   3a. Then swap added card with any card in player's hand<br/>
-     *   3b. Parse next line (go to 2.), If EOF go to 4.<br/>
-     * 4. Log message to all players that cards were added (to prevent unfair play).<br/>
+     * 3a. Then swap added card with any card in player's hand<br/>
+     * 3b. Parse next line (go to 2.), If EOF go to 4.<br/>
+     * 4. Log message to all players that cards were added (to prevent unfair
+     * play).<br/>
      * 5. Exit<br/>
+     *
      * @param game
      */
     public static void addCardsForTesting(Game game) {
@@ -109,8 +114,7 @@ public class SystemUtil {
                         swapWithAnyCard(game, player, card, gameZone);
                     }
                 }
-            }
-            finally {
+            } finally {
                 scanner.close();
             }
         } catch (Exception e) {
@@ -137,7 +141,7 @@ public class SystemUtil {
         } else {
             card.moveToZone(zone, null, game, false);
         }
-        logger.info("Added card to player's " + zone.toString() + ": " + card.getName() +", player = " + player.getName());
+        logger.info("Added card to player's " + zone.toString() + ": " + card.getName() + ", player = " + player.getName());
     }
 
     /**
@@ -148,7 +152,7 @@ public class SystemUtil {
      * @return
      */
     private static Player findPlayer(Game game, String name) {
-        for (Player player: game.getPlayers().values()) {
+        for (Player player : game.getPlayers().values()) {
             if (player.getName().equals(name)) {
                 return player;
             }
@@ -162,7 +166,7 @@ public class SystemUtil {
         //return matcher.replaceAll("");
         return input.replaceAll("[^a-zA-Z0-9]", "");
     }
-    
+
     public static void main(String... args) {
         System.out.println(sanitize("123"));
         System.out.println(sanitize("AaAaD_123"));

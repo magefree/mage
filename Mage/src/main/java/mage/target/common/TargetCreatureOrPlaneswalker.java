@@ -46,7 +46,6 @@ public class TargetCreatureOrPlaneswalker extends TargetPermanent {
 
     public TargetCreatureOrPlaneswalker(int minNumTargets, int maxNumTargets, FilterCreatureOrPlaneswalkerPermanent filter, boolean notTarget) {
         super(minNumTargets, maxNumTargets, filter, notTarget);
-        this.targetName = filter.getMessage();
     }
 
     public TargetCreatureOrPlaneswalker(final TargetCreatureOrPlaneswalker target) {

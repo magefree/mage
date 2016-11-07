@@ -27,7 +27,6 @@
  */
 package mage.sets;
 
-import java.util.GregorianCalendar;
 import mage.cards.ExpansionSet;
 import mage.constants.SetType;
 
@@ -38,14 +37,14 @@ import mage.constants.SetType;
 
 public class ArchenemyNicolBolas extends ExpansionSet {
 
-    private static final ArchenemyNicolBolas fINSTANCE =  new ArchenemyNicolBolas();
+    private static final ArchenemyNicolBolas fINSTANCE = new ArchenemyNicolBolas();
 
     public static ArchenemyNicolBolas getInstance() {
         return fINSTANCE;
     }
 
     private ArchenemyNicolBolas() {
-        super("Archenemy: Nicol Bolas", "ANB", "mage.sets.archenemynicolbolas", new GregorianCalendar(2017, 6, 16).getTime(), SetType.SUPPLEMENTAL);
+        super("Archenemy: Nicol Bolas", "ANB", ExpansionSet.buildDate(2017, 6, 16), SetType.SUPPLEMENTAL);
         this.blockName = "Command Zone";
     }
 

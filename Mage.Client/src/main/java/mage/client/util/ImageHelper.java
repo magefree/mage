@@ -27,32 +27,21 @@
  */
 package mage.client.util;
 
-import com.mortennobel.imagescaling.ResampleOp;
 import java.awt.Graphics2D;
-import java.awt.GraphicsConfiguration;
-import java.awt.GraphicsDevice;
-import java.awt.GraphicsEnvironment;
 import java.awt.Image;
 import java.awt.Rectangle;
-import java.awt.RenderingHints;
-import java.awt.Transparency;
-import java.awt.geom.AffineTransform;
 import java.awt.image.BufferedImage;
 import java.awt.image.ImageObserver;
-import java.awt.image.MemoryImageSource;
-import java.awt.image.PixelGrabber;
 import java.io.IOException;
 import java.io.InputStream;
 import java.util.HashMap;
 import java.util.List;
 import javax.imageio.ImageIO;
-import mage.cards.CardDimensions;
 import static mage.client.constants.Constants.FRAME_MAX_HEIGHT;
 import static mage.client.constants.Constants.FRAME_MAX_WIDTH;
 import static mage.client.constants.Constants.SYMBOL_MAX_SPACE;
 import mage.view.CardView;
 import org.mage.card.arcane.UI;
-import org.mage.plugins.card.images.ImageCache;
 
 /**
  *

@@ -31,19 +31,16 @@ package mage.cards.basiclands;
 import java.util.UUID;
 import mage.ObjectColor;
 import mage.abilities.mana.BlueManaAbility;
+import mage.cards.Card;
+import mage.cards.CardSetInfo;
 
 /**
  *
  * @author BetaSteward_at_googlemail.com
  */
-public abstract class Island extends BasicLand {
-
-    public Island(UUID ownerId, int cardNumber) {
-        this(ownerId, String.valueOf(cardNumber));
-    }
-
-    public Island(UUID ownerId, String cardNumber) {
-        super(ownerId, cardNumber, "Island", new BlueManaAbility());
+public class Island extends BasicLand {
+    public Island(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId, setInfo, new BlueManaAbility());
         this.frameColor = ObjectColor.BLUE;
     }
 
@@ -51,4 +48,8 @@ public abstract class Island extends BasicLand {
         super(land);
     }
 
+    @Override
+    public Card copy() {
+        return new Island(this);
+    }
 }

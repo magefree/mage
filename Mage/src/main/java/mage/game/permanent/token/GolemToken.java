@@ -51,7 +51,7 @@ public class GolemToken extends Token {
     }
 
     public GolemToken(String setCode) {
-        super("Golem", "a 3/3 colorless Golem artifact creature token");
+        super("Golem", "3/3 colorless Golem artifact creature token");
         setOriginalExpansionSetCode(setCode);
         cardType.add(CardType.ARTIFACT);
         cardType.add(CardType.CREATURE);

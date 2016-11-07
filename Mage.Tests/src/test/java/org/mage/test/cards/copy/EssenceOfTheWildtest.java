@@ -84,7 +84,7 @@ public class EssenceOfTheWildtest extends CardTestPlayerBase {
         addCard(Zone.BATTLEFIELD, playerA, "Plains", 2);
         // Creatures you control enter the battlefield as a copy of Essence of the Wild.
         addCard(Zone.BATTLEFIELD, playerA, "Essence of the Wild"); // 6/6
-        // Exile a creature card from your graveyard and pay its mana cost: Put a token onto the battlefield that's a copy of that card. Activate this ability only any time you could cast a sorcery.
+        // Exile a creature card from your graveyard and pay its mana cost: Create a tokenonto the battlefield that's a copy of that card. Activate this ability only any time you could cast a sorcery.
         addCard(Zone.BATTLEFIELD, playerA, "Back from the Brink"); // Enchantment
 
         addCard(Zone.GRAVEYARD, playerA, "Silvercoat Lion");

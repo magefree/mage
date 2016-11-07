@@ -54,7 +54,7 @@ public class ManaOptions extends ArrayList<Mana> {
         }
     }
 
-    public void addMana(List<ManaAbility> abilities, Game game) {
+    public void addMana(List<ActivatedManaAbilityImpl> abilities, Game game) {
         if (isEmpty()) {
             this.add(new Mana());
         }
@@ -81,7 +81,7 @@ public class ManaOptions extends ArrayList<Mana> {
                 //perform a union of all existing options and the new options
                 List<Mana> copy = copy();
                 this.clear();
-                for (ManaAbility ability : abilities) {
+                for (ActivatedManaAbilityImpl ability : abilities) {
                     for (Mana netMana : ability.getNetMana(game)) {
                         SkipAddMana:
                         for (Mana mana : copy) {
@@ -107,14 +107,14 @@ public class ManaOptions extends ArrayList<Mana> {
         }
     }
 
-    public void addManaWithCost(List<ManaAbility> abilities, Game game) {
+    public void addManaWithCost(List<ActivatedManaAbilityImpl> abilities, Game game) {
         if (isEmpty()) {
             this.add(new Mana());
         }
         if (!abilities.isEmpty()) {
             if (abilities.size() == 1) {
                 //if there is only one mana option available add it to all the existing options
-                ManaAbility ability = abilities.get(0);
+                ActivatedManaAbilityImpl ability = abilities.get(0);
                 List<Mana> netManas = abilities.get(0).getNetMana(game);
                 // no mana costs
                 if (ability.getManaCosts().isEmpty()) {
@@ -151,7 +151,7 @@ public class ManaOptions extends ArrayList<Mana> {
                 //perform a union of all existing options and the new options
                 List<Mana> copy = copy();
                 this.clear();
-                for (ManaAbility ability : abilities) {
+                for (ActivatedManaAbilityImpl ability : abilities) {
 
                     List<Mana> netManas = ability.getNetMana(game);
 
@@ -317,7 +317,7 @@ public class ManaOptions extends ArrayList<Mana> {
                 }
             }
         } else {
-            payCombinations.add(new Mana(0, 0, 0, 0, 0, 0, 0, number));
+            payCombinations.add(Mana.ColorlessMana(number));
         }
         return payCombinations;
     }

@@ -84,7 +84,7 @@ public abstract class RestrictionEffect extends ContinuousEffectImpl {
     public boolean canBeBlocked(Permanent attacker, Permanent blocker, Ability source, Game game) {
         return true;
     }
-    
+
     /**
      * Called for all attackers after all blocking decisions are made
      *
@@ -106,7 +106,7 @@ public abstract class RestrictionEffect extends ContinuousEffectImpl {
         return true;
     }
 
-    public boolean canTransform(Game game) {
+    public boolean canTransform(Permanent permanent, Ability source, Game game) {
         return true;
     }
 

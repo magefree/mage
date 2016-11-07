@@ -30,12 +30,8 @@ package mage.cards.repository;
 
 import java.util.ArrayList;
 import java.util.List;
-import mage.cards.Card;
-import mage.cards.CardImpl;
-import mage.cards.ExpansionSet;
-import mage.cards.Sets;
-import mage.cards.SplitCard;
-import mage.util.ClassScanner;
+
+import mage.cards.*;
 import org.apache.log4j.Logger;
 
 /**
@@ -55,32 +51,34 @@ public class CardScanner {
         scanned = true;
 
         List<CardInfo> cardsToAdd = new ArrayList<>();
-        List<String> packages = new ArrayList<>();
 
         for (ExpansionSet set : Sets.getInstance().values()) {
-            packages.add(set.getPackageName());
             ExpansionRepository.instance.add(new ExpansionInfo(set));
         }
         ExpansionRepository.instance.setContentVersion(ExpansionRepository.instance.getContentVersionConstant());
 
-        for (Class c : ClassScanner.findClasses(packages, CardImpl.class)) {
-            if (!CardRepository.instance.cardExists(c.getCanonicalName())) {
-                Card card = CardImpl.createCard(c);
-                if (card != null) {
-                    cardsToAdd.add(new CardInfo(card));
-                    if (card instanceof SplitCard) {
-                        SplitCard splitCard = (SplitCard) card;
-                        cardsToAdd.add(new CardInfo(splitCard.getLeftHalfCard()));
-                        cardsToAdd.add(new CardInfo(splitCard.getRightHalfCard()));
+        for (ExpansionSet set : Sets.getInstance().values()) {
+            for (ExpansionSet.SetCardInfo setInfo : set.getSetCardInfo()) {
+                if (CardRepository.instance.findCard(set.getCode(), setInfo.getCardNumber()) == null) {
+                    Card card = CardImpl.createCard(setInfo.getCardClass(),
+                            new CardSetInfo(setInfo.getName(), set.getCode(), setInfo.getCardNumber(),
+                                            setInfo.getRarity(), setInfo.getGraphicInfo()));
+                    if (card != null) {
+                        cardsToAdd.add(new CardInfo(card));
+                        if (card instanceof SplitCard) {
+                            SplitCard splitCard = (SplitCard) card;
+                            cardsToAdd.add(new CardInfo(splitCard.getLeftHalfCard()));
+                            cardsToAdd.add(new CardInfo(splitCard.getRightHalfCard()));
+                        }
                     }
                 }
             }
         }
+
         if (!cardsToAdd.isEmpty()) {
             logger.info("Cards need storing in DB: " + cardsToAdd.size());
             CardRepository.instance.addCards(cardsToAdd);
         }
         CardRepository.instance.setContentVersion(CardRepository.instance.getContentVersionConstant());
-
     }
 }
