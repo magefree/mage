@@ -28,18 +28,13 @@
 package mage.cards.c;
 
 import java.util.UUID;
-import mage.Mana;
 import mage.abilities.common.EntersBattlefieldTappedAbility;
+import mage.abilities.common.EntersBattlefieldTriggeredAbility;
 import mage.abilities.effects.common.AddManaOfAnyColorEffect;
-import mage.abilities.effects.common.ManaEffect;
 import mage.abilities.mana.ColorlessManaAbility;
-import mage.abilities.mana.TriggeredManaAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.Zone;
-import mage.game.Game;
-import mage.game.events.GameEvent;
 
 /**
  *
@@ -54,7 +49,7 @@ public class CrumblingVestige extends CardImpl {
         this.addAbility(new EntersBattlefieldTappedAbility());
 
         // When Crumbling Vestige enters the battlefield, add one mana of any color to your mana pool.
-        this.addAbility(new CrumblingVestigeTriggeredManaAbility(new AddManaOfAnyColorEffect()));
+        this.addAbility(new EntersBattlefieldTriggeredAbility(new AddManaOfAnyColorEffect(), false));
 
         // {T}: Add {C} to you mana pool.
         this.addAbility(new ColorlessManaAbility());
@@ -67,37 +62,5 @@ public class CrumblingVestige extends CardImpl {
     @Override
     public CrumblingVestige copy() {
         return new CrumblingVestige(this);
-    }
-}
-
-class CrumblingVestigeTriggeredManaAbility extends TriggeredManaAbility {
-
-    public CrumblingVestigeTriggeredManaAbility(ManaEffect effect) {
-        super(Zone.ALL, effect, false);
-        this.netMana.add(new Mana(0, 0, 0, 0, 0, 0, 1, 0));
-    }
-
-    public CrumblingVestigeTriggeredManaAbility(final CrumblingVestigeTriggeredManaAbility ability) {
-        super(ability);
-    }
-
-    @Override
-    public boolean checkEventType(GameEvent event, Game game) {
-        return event.getType() == GameEvent.EventType.ENTERS_THE_BATTLEFIELD;
-    }
-
-    @Override
-    public boolean checkTrigger(GameEvent event, Game game) {
-        return event.getTargetId().equals(getSourceId());
-    }
-
-    @Override
-    public String getRule() {
-        return "When {this} enters the battlefield, " + super.getRule();
-    }
-
-    @Override
-    public CrumblingVestigeTriggeredManaAbility copy() {
-        return new CrumblingVestigeTriggeredManaAbility(this);
     }
 }
