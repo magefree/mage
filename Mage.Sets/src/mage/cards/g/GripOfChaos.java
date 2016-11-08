@@ -55,7 +55,7 @@ import mage.util.RandomUtil;
 public class GripOfChaos extends CardImpl {
 
     public GripOfChaos(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.ENCHANTMENT},"{4}{R}{R}");
+        super(ownerId, setInfo, new CardType[]{CardType.ENCHANTMENT}, "{4}{R}{R}");
 
         // Whenever a spell or ability is put onto the stack, if it has a single target, reselect its target at random.
         this.addAbility(new GripOfChaosTriggeredAbility());
@@ -152,7 +152,7 @@ class GripOfChaosEffect extends OneShotEffect {
                 Mode mode = stackObject.getStackAbility().getModes().get(modeId);
                 for (Target target : mode.getTargets()) {
                     UUID oldTargetId = target.getFirstTarget();
-                    Set<UUID> possibleTargets = target.possibleTargets(source.getSourceId(), source.getControllerId(), game);
+                    Set<UUID> possibleTargets = target.possibleTargets(stackObject.getSourceId(), stackObject.getControllerId(), game);
                     if (possibleTargets.size() > 0) {
                         int i = 0;
                         int rnd = RandomUtil.nextInt(possibleTargets.size());
