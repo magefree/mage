@@ -1,0 +1,113 @@
+#!/usr/bin/perl -w
+
+#author: spjspj
+
+use strict;
+
+my $addedCards;
+my $GIT_CMD = "C:\\Program Files (x86)\\Git\\bin\\git.exe";
+
+my $text = `\"$GIT_CMD\" tag`;
+my @lines = split /\n/, $text;
+my %order_of_tags;
+
+my $tag;
+foreach $tag (@lines)
+{
+    my $num = $tag;
+    if ($num =~ m/(\d+)\.(\d+).(\d+)v(\d+)/img)
+    {
+        $num = $1 * 2000 + $2 * 100 + $3 * 20 + $1;
+        $order_of_tags {$num} = $tag;
+    }
+}
+
+my $num;
+my $number = 0;
+my %new_order;
+foreach $num (sort {$a<=>$b} keys (%order_of_tags))
+{
+    $number++;
+    $new_order{$number} = "$order_of_tags{$num}, press $number:\n";
+}
+
+print ("To generate from head to :\n");
+foreach $num (sort {$a<=>$b} keys (%new_order))
+{
+    if ($num > $number - 10)
+    {
+        print ("   $new_order{$num}");
+    }
+}
+
+print ("Choose your preferred tag: "); 
+
+my $cmd = <STDIN>;
+chomp $cmd;
+
+sub get_name_of_card_from_class
+{
+    my $line = $_ [0];
+    if($line =~ m/Mage.Sets.*[\/\\]([^\/\\]+)\.java/img)
+    {
+        my $class_name = $1;
+        my $card_name = $class_name;
+        $card_name =~ s/(.)([A-Z])/$1 $2/g;
+        $card_name =~ s/\d//g;
+        return $card_name;
+    }
+    return "";
+}
+
+if (exists ($new_order{$cmd}))
+{
+    my $tag = $new_order{$cmd};
+    $tag =~ s/You chose //; 
+    $tag =~ s/,.*//; 
+    chomp $tag;
+    print ("You chose $tag\n");
+
+    print "Command is \"$GIT_CMD\" diff $tag..HEAD\n";
+    $text = `\"$GIT_CMD\" diff $tag..HEAD`;
+    @lines = split /\n/, $text;
+    my $line;
+    my $use_next_line = 0;
+    my $past_line = 0;
+    my %new_cards;
+
+    foreach $line (@lines)
+    {
+        chomp $line;
+        if ($line =~ m/\-\-\-.*dev.*null/)
+        {
+            $use_next_line = 1;
+        }
+        elsif ($use_next_line)
+        {
+            if ($line =~ m/sets.*mage.cards\/[a-z]\//img)
+            {
+                $new_cards {get_name_of_card_from_class($line)} ++;
+                #print (get_name_of_card_from_class($line),"++\n");
+            }
+            $use_next_line = 0;
+        }
+        if ($line =~ m/deleted file/)
+        {
+            if ($past_line =~ m/sets.*mage.cards\/[a-z]\//img)
+            {
+                $new_cards {get_name_of_card_from_class($past_line)} --;
+                #print (">>> Minus - $past_line ---", get_name_of_card_from_class($past_line),"--\n");
+            }
+        }
+        $past_line = $line;
+    }
+
+    print ("Found these new card names!\n");
+    foreach $line (sort keys (%new_cards))
+    {
+        if ($new_cards {$line} > 0)
+        {
+            print ($line, "\n");
+        }
+    }
+}
