@@ -209,6 +209,7 @@ public class LimitedEditionAlpha extends ExpansionSet {
         cards.add(new SetCardInfo("Reverse Damage", 219, Rarity.RARE, mage.cards.r.ReverseDamage.class));
         cards.add(new SetCardInfo("Righteousness", 220, Rarity.RARE, mage.cards.r.Righteousness.class));
         cards.add(new SetCardInfo("Roc of Kher Ridges", 171, Rarity.RARE, mage.cards.r.RocOfKherRidges.class));
+        cards.add(new SetCardInfo("Rock Hydra", 172, Rarity.RARE, mage.cards.r.RockHydra.class));
         cards.add(new SetCardInfo("Rod of Ruin", 268, Rarity.UNCOMMON, mage.cards.r.RodOfRuin.class));
         cards.add(new SetCardInfo("Royal Assassin", 32, Rarity.RARE, mage.cards.r.RoyalAssassin.class));
         cards.add(new SetCardInfo("Sacrifice", 33, Rarity.UNCOMMON, mage.cards.s.Sacrifice.class));
