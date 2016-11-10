@@ -61,6 +61,7 @@ public class Guildpact extends ExpansionSet {
         cards.add(new SetCardInfo("Battering Wurm", 79, Rarity.UNCOMMON, mage.cards.b.BatteringWurm.class));
         cards.add(new SetCardInfo("Beastmaster's Magemark", 80, Rarity.COMMON, mage.cards.b.BeastmastersMagemark.class));
         cards.add(new SetCardInfo("Belfry Spirit", 2, Rarity.UNCOMMON, mage.cards.b.BelfrySpirit.class));
+        cards.add(new SetCardInfo("Benediction of Moons", 3, Rarity.COMMON, mage.cards.b.BenedictionOfMoons.class));
         cards.add(new SetCardInfo("Blind Hunter", 102, Rarity.COMMON, mage.cards.b.BlindHunter.class));
         cards.add(new SetCardInfo("Bloodscale Prowler", 64, Rarity.COMMON, mage.cards.b.BloodscaleProwler.class));
         cards.add(new SetCardInfo("Borborygmos", 103, Rarity.RARE, mage.cards.b.Borborygmos.class));

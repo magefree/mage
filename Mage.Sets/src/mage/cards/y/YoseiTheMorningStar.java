@@ -56,7 +56,7 @@ import mage.target.Targets;
 public class YoseiTheMorningStar extends CardImpl {
 
     public YoseiTheMorningStar(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{4}{W}{W}");
+        super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{4}{W}{W}");
         this.supertype.add("Legendary");
         this.subtype.add("Dragon");
         this.subtype.add("Spirit");
@@ -66,8 +66,9 @@ public class YoseiTheMorningStar extends CardImpl {
 
         // Flying
         this.addAbility(FlyingAbility.getInstance());
+
         // When Yosei, the Morning Star dies, target player skips his or her next untap step. Tap up to five target permanents that player controls.
-        Ability ability = new DiesTriggeredAbility(new SkipNextPlayerUntapStepEffect());
+        Ability ability = new DiesTriggeredAbility(new SkipNextPlayerUntapStepEffect("target "));
         ability.addTarget(new TargetPlayer());
         ability.addTarget(new YoseiTheMorningStarTarget());
         ability.addEffect(new YoseiTheMorningStarTapEffect());
@@ -84,9 +85,9 @@ public class YoseiTheMorningStar extends CardImpl {
     }
 }
 
- class YoseiTheMorningStarTarget extends TargetPermanent {
+class YoseiTheMorningStarTarget extends TargetPermanent {
 
-     private static final FilterPermanent filterTemplate = new FilterPermanent("up to five target permanents that player controls that will be tapped");
+    private static final FilterPermanent filterTemplate = new FilterPermanent("up to five target permanents that player controls that will be tapped");
 
     public YoseiTheMorningStarTarget() {
         super(0, 5, filterTemplate, false);
@@ -96,14 +97,14 @@ public class YoseiTheMorningStar extends CardImpl {
         super(target);
     }
 
-        @Override
-        public boolean canTarget(UUID controllerId, UUID id, Ability source, Game game) {
-                Player player = game.getPlayer(source.getFirstTarget());
-                if (player != null) {
-                    this.filter = filterTemplate.copy();
-                    this.filter.add(new ControllerIdPredicate(player.getId()));
-                    return super.canTarget(controllerId, id, source, game);
-                }
+    @Override
+    public boolean canTarget(UUID controllerId, UUID id, Ability source, Game game) {
+        Player player = game.getPlayer(source.getFirstTarget());
+        if (player != null) {
+            this.filter = filterTemplate.copy();
+            this.filter.add(new ControllerIdPredicate(player.getId()));
+            return super.canTarget(controllerId, id, source, game);
+        }
         return false;
     }
 
@@ -118,7 +119,7 @@ class YoseiTheMorningStarTapEffect extends OneShotEffect {
 
     public YoseiTheMorningStarTapEffect() {
         super(Outcome.Tap);
-                staticText = "Tap up to five target permanents that player controls";
+        staticText = "Tap up to five target permanents that player controls";
     }
 
     public YoseiTheMorningStarTapEffect(final YoseiTheMorningStarTapEffect effect) {
@@ -132,9 +133,9 @@ class YoseiTheMorningStarTapEffect extends OneShotEffect {
 
     @Override
     public boolean apply(Game game, Ability source) {
-                Targets targets = source.getTargets();
-                Target target1 = targets.get(1);
-                for (UUID target: target1.getTargets()) {
+        Targets targets = source.getTargets();
+        Target target1 = targets.get(1);
+        for (UUID target : target1.getTargets()) {
             Permanent permanent = game.getPermanent(target);
             if (permanent != null) {
                 permanent.tap(game);
@@ -147,7 +148,7 @@ class YoseiTheMorningStarTapEffect extends OneShotEffect {
 
     @Override
     public String getText(Mode mode) {
-            return staticText;
+        return staticText;
     }
 
 }
