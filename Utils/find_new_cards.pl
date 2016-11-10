@@ -45,13 +45,35 @@ print ("Choose your preferred tag: ");
 my $cmd = <STDIN>;
 chomp $cmd;
 
+my %cn_classes;
+sub read_all_card_names
+{
+    print ("find \"cards.add\" ../Mage.Sets/src/mage/sets/*.java\n");
+    print ("find \"add\" ..\\Mage.Sets\\src\\mage\\sets\\*.java\n");
+    my $all_cards = `find \"add\" ..\\Mage.Sets\\src\\mage\\sets\\*.java`;
+    my @cards = split /\n/, $all_cards;
+    my $card;
+    foreach $card (sort @cards)
+    {
+        if ($card =~ m/.*SetCardInfo."([^"]+)".*\.([^\.]+).class/)
+        {
+            $cn_classes {$2} = $1;
+        }
+    }
+}
+read_all_card_names();
+
 sub get_name_of_card_from_class
 {
     my $line = $_ [0];
-    if($line =~ m/Mage.Sets.*[\/\\]([^\/\\]+)\.java/img)
+    if ($line =~ m/Mage.Sets.*[\/\\]([^\/\\]+)\.java/img)
     {
         my $class_name = $1;
         my $card_name = $class_name;
+        if (exists ($cn_classes {$card_name}))
+        {
+            return ($cn_classes {$card_name});
+        }
         $card_name =~ s/(.)([A-Z])/$1 $2/g;
         $card_name =~ s/\d//g;
         return $card_name;
@@ -87,7 +109,6 @@ if (exists ($new_order{$cmd}))
             if ($line =~ m/sets.*mage.cards\/[a-z]\//img)
             {
                 $new_cards {get_name_of_card_from_class($line)} ++;
-                #print (get_name_of_card_from_class($line),"++\n");
             }
             $use_next_line = 0;
         }
@@ -96,7 +117,6 @@ if (exists ($new_order{$cmd}))
             if ($past_line =~ m/sets.*mage.cards\/[a-z]\//img)
             {
                 $new_cards {get_name_of_card_from_class($past_line)} --;
-                #print (">>> Minus - $past_line ---", get_name_of_card_from_class($past_line),"--\n");
             }
         }
         $past_line = $line;
