@@ -213,8 +213,10 @@ public class MastersEditionIV extends ExpansionSet {
         cards.add(new SetCardInfo("Regrowth", 163, Rarity.RARE, mage.cards.r.Regrowth.class));
         cards.add(new SetCardInfo("Righteous Charge", 23, Rarity.COMMON, mage.cards.r.RighteousCharge.class));
         cards.add(new SetCardInfo("Ring of Renewal", 224, Rarity.RARE, mage.cards.r.RingOfRenewal.class));
+        cards.add(new SetCardInfo("Rock Hydra", 133, Rarity.RARE, mage.cards.r.RockHydra.class));
         cards.add(new SetCardInfo("Rockslide Ambush", 134, Rarity.COMMON, mage.cards.r.RockslideAmbush.class));
         cards.add(new SetCardInfo("Roc of Kher Ridges", 132, Rarity.UNCOMMON, mage.cards.r.RocOfKherRidges.class));
+        cards.add(new SetCardInfo("Rock Hydra", 133, Rarity.RARE, mage.cards.r.RockHydra.class));
         cards.add(new SetCardInfo("Sandstorm", 164, Rarity.COMMON, mage.cards.s.Sandstorm.class));
         cards.add(new SetCardInfo("Savannah", 250, Rarity.RARE, mage.cards.s.Savannah.class));
         cards.add(new SetCardInfo("Savannah Lions", 24, Rarity.UNCOMMON, mage.cards.s.SavannahLions.class));
