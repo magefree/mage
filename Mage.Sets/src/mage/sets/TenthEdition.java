@@ -234,6 +234,7 @@ public class TenthEdition extends ExpansionSet {
         cards.add(new SetCardInfo("Loxodon Warhammer", 332, Rarity.RARE, mage.cards.l.LoxodonWarhammer.class));
         cards.add(new SetCardInfo("Loyal Sentry", 27, Rarity.RARE, mage.cards.l.LoyalSentry.class));
         cards.add(new SetCardInfo("Lumengrid Warden", 89, Rarity.COMMON, mage.cards.l.LumengridWarden.class));
+        cards.add(new SetCardInfo("Luminesce", 28, Rarity.UNCOMMON, mage.cards.l.Luminesce.class));
         cards.add(new SetCardInfo("Lure", 276, Rarity.UNCOMMON, mage.cards.l.Lure.class));
         cards.add(new SetCardInfo("Mahamoti Djinn", 90, Rarity.RARE, mage.cards.m.MahamotiDjinn.class));
         cards.add(new SetCardInfo("Manabarbs", 218, Rarity.RARE, mage.cards.m.Manabarbs.class));
