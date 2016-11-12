@@ -77,6 +77,7 @@ public class Visions extends ExpansionSet {
         cards.add(new SetCardInfo("Emerald Charm", 56, Rarity.COMMON, mage.cards.e.EmeraldCharm.class));
         cards.add(new SetCardInfo("Equipoise", 103, Rarity.RARE, mage.cards.e.Equipoise.class));
         cards.add(new SetCardInfo("Everglades", 162, Rarity.UNCOMMON, mage.cards.e.Everglades.class));
+        cards.add(new SetCardInfo("Eye of Singularity", 104, Rarity.RARE, mage.cards.e.EyeOfSingularity.class));
         cards.add(new SetCardInfo("Fallen Askari", 9, Rarity.COMMON, mage.cards.f.FallenAskari.class));
         cards.add(new SetCardInfo("Femeref Enchantress", 129, Rarity.RARE, mage.cards.f.FemerefEnchantress.class));
         cards.add(new SetCardInfo("Feral Instinct", 57, Rarity.COMMON, mage.cards.f.FeralInstinct.class));
