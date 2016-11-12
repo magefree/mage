@@ -87,6 +87,7 @@ public class TimeSpiralTimeshifted extends ExpansionSet {
         cards.add(new SetCardInfo("Flying Men", 20, Rarity.COMMON, mage.cards.f.FlyingMen.class));
         cards.add(new SetCardInfo("Funeral Charm", 44, Rarity.COMMON, mage.cards.f.FuneralCharm.class));
         cards.add(new SetCardInfo("Gaea's Blessing", 77, Rarity.SPECIAL, mage.cards.g.GaeasBlessing.class));
+        cards.add(new SetCardInfo("Gaea's Liege", 78, Rarity.SPECIAL, mage.cards.g.GaeasLiege.class));
         cards.add(new SetCardInfo("Gemstone Mine", 119, Rarity.RARE, mage.cards.g.GemstoneMine.class));
         cards.add(new SetCardInfo("Ghost Ship", 21, Rarity.SPECIAL, mage.cards.g.GhostShip.class));
         cards.add(new SetCardInfo("Goblin Snowman", 64, Rarity.UNCOMMON, mage.cards.g.GoblinSnowman.class));
