@@ -26,7 +26,7 @@
     <DimensionLayout dim="0">
       <Group type="103" groupAlignment="0" attributes="0">
           <Group type="102" attributes="0">
-              <EmptySpace max="-2" attributes="0"/>
+              <EmptySpace min="-2" max="-2" attributes="0"/>
               <Group type="103" groupAlignment="0" attributes="0">
                   <Group type="102" alignment="0" attributes="0">
                       <Group type="103" groupAlignment="0" attributes="0">
@@ -38,23 +38,32 @@
                           </Group>
                           <Component id="lblFlag" alignment="1" min="-2" max="-2" attributes="0"/>
                       </Group>
-                      <EmptySpace max="-2" attributes="0"/>
+                      <EmptySpace min="-2" max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="0" attributes="0">
                           <Component id="lblStatus" alignment="1" max="32767" attributes="0"/>
+                          <Component id="chkForceUpdateDB" alignment="0" max="32767" attributes="0"/>
+                          <Component id="chkAutoConnect" alignment="0" pref="386" max="32767" attributes="0"/>
                           <Component id="jProxySettingsButton" min="-2" max="-2" attributes="0"/>
                           <Component id="cbFlag" min="-2" max="-2" attributes="0"/>
                           <Group type="102" alignment="0" attributes="0">
-                              <Group type="103" groupAlignment="1" max="-2" attributes="0">
-                                  <Component id="txtServer" pref="286" max="32767" attributes="0"/>
-                                  <Component id="txtPort" alignment="0" min="-2" pref="71" max="-2" attributes="0"/>
+                              <Group type="103" groupAlignment="0" max="-2" attributes="0">
+                                  <Component id="txtServer" alignment="1" pref="286" max="32767" attributes="0"/>
                                   <Component id="txtUserName" alignment="1" max="32767" attributes="0"/>
                                   <Component id="txtPassword" alignment="1" max="32767" attributes="0"/>
+                                  <Group type="102" alignment="0" attributes="0">
+                                      <Component id="txtPort" min="-2" pref="71" max="-2" attributes="0"/>
+                                      <EmptySpace max="-2" attributes="0"/>
+                                      <Component id="btnFind1" max="32767" attributes="0"/>
+                                      <EmptySpace max="-2" attributes="0"/>
+                                      <Component id="btnFind3" min="-2" pref="42" max="-2" attributes="0"/>
+                                      <EmptySpace min="-2" max="-2" attributes="0"/>
+                                      <Component id="btnFind2" min="-2" pref="42" max="-2" attributes="0"/>
+                                      <EmptySpace min="69" pref="69" max="-2" attributes="0"/>
+                                  </Group>
                               </Group>
-                              <EmptySpace max="-2" attributes="0"/>
-                              <Component id="btnFind" min="-2" max="-2" attributes="0"/>
+                              <EmptySpace min="-2" pref="8" max="-2" attributes="0"/>
+                              <Component id="btnFind" pref="92" max="32767" attributes="0"/>
                           </Group>
-                          <Component id="chkForceUpdateDB" alignment="0" max="32767" attributes="0"/>
-                          <Component id="chkAutoConnect" alignment="0" pref="375" max="32767" attributes="0"/>
                       </Group>
                   </Group>
                   <Group type="102" alignment="1" attributes="0">
@@ -72,7 +81,7 @@
                       <EmptySpace min="-2" pref="26" max="-2" attributes="0"/>
                   </Group>
               </Group>
-              <EmptySpace max="-2" attributes="0"/>
+              <EmptySpace min="-2" max="-2" attributes="0"/>
           </Group>
       </Group>
     </DimensionLayout>
@@ -89,6 +98,9 @@
               <Group type="103" groupAlignment="3" attributes="0">
                   <Component id="txtPort" alignment="3" min="-2" max="-2" attributes="0"/>
                   <Component id="lblPort" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="btnFind1" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="btnFind2" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="btnFind3" alignment="3" min="-2" max="-2" attributes="0"/>
               </Group>
               <EmptySpace min="-2" max="-2" attributes="0"/>
               <Group type="103" groupAlignment="0" attributes="0">
@@ -111,7 +123,7 @@
               <Component id="chkForceUpdateDB" min="-2" max="-2" attributes="0"/>
               <EmptySpace max="-2" attributes="0"/>
               <Component id="jProxySettingsButton" min="-2" max="-2" attributes="0"/>
-              <EmptySpace pref="38" max="32767" attributes="0"/>
+              <EmptySpace pref="47" max="32767" attributes="0"/>
               <Component id="lblStatus" min="-2" pref="24" max="-2" attributes="0"/>
               <EmptySpace max="-2" attributes="0"/>
               <Group type="103" groupAlignment="3" attributes="0">
@@ -253,6 +265,63 @@
       </Properties>
       <Events>
         <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnForgotPasswordActionPerformed"/>
+      </Events>
+    </Component>
+    <Component class="javax.swing.JButton" name="btnFind1">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="X"/>
+        <Property name="toolTipText" type="java.lang.String" value="Connect to xmage.de"/>
+        <Property name="actionCommand" type="java.lang.String" value="connectXmageDe"/>
+        <Property name="alignmentY" type="float" value="0.0"/>
+        <Property name="horizontalAlignment" type="int" value="2"/>
+        <Property name="horizontalTextPosition" type="int" value="2"/>
+        <Property name="maximumSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
+          <Dimension value="[42, 23]"/>
+        </Property>
+        <Property name="minimumSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
+          <Dimension value="[42, 23]"/>
+        </Property>
+        <Property name="name" type="java.lang.String" value="connectXmageDeBtn" noResource="true"/>
+        <Property name="preferredSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
+          <Dimension value="[23, 23]"/>
+        </Property>
+      </Properties>
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="connectXmageDe"/>
+      </Events>
+    </Component>
+    <Component class="javax.swing.JButton" name="btnFind2">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="L"/>
+        <Property name="toolTipText" type="java.lang.String" value="Connect to localhost"/>
+        <Property name="actionCommand" type="java.lang.String" value="connectLocalhost"/>
+        <Property name="alignmentY" type="float" value="0.0"/>
+        <Property name="horizontalAlignment" type="int" value="2"/>
+        <Property name="horizontalTextPosition" type="int" value="2"/>
+        <Property name="name" type="java.lang.String" value="connectLocalhostBtn" noResource="true"/>
+        <Property name="preferredSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
+          <Dimension value="[23, 23]"/>
+        </Property>
+      </Properties>
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="connectLocalhost"/>
+      </Events>
+    </Component>
+    <Component class="javax.swing.JButton" name="btnFind3">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="W"/>
+        <Property name="toolTipText" type="java.lang.String" value="Connect to woogerworks"/>
+        <Property name="actionCommand" type="java.lang.String" value="connectWoogerworks"/>
+        <Property name="alignmentY" type="float" value="0.0"/>
+        <Property name="horizontalAlignment" type="int" value="2"/>
+        <Property name="horizontalTextPosition" type="int" value="2"/>
+        <Property name="name" type="java.lang.String" value="connectWoogerworksBtn" noResource="true"/>
+        <Property name="preferredSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
+          <Dimension value="[23, 23]"/>
+        </Property>
+      </Properties>
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="connectWoogerworks"/>
       </Events>
     </Component>
   </SubComponents>
