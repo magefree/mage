@@ -54,10 +54,10 @@ import mage.game.permanent.Permanent;
  */
 public class SidarKondoOfJamuraa extends CardImpl {
 
-    private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("creatures with power 2 or greater");
+    private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("creatures with power 2 or less");
 
     static {
-        filter.add(new PowerPredicate(Filter.ComparisonType.GreaterThan, 1));
+        filter.add(new PowerPredicate(Filter.ComparisonType.LessThan, 3));
     }
 
     public SidarKondoOfJamuraa(UUID ownerId, CardSetInfo setInfo) {
