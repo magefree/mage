@@ -25,17 +25,16 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-
 package mage.cards.p;
 
 import java.util.UUID;
-import mage.constants.CardType;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.DiesTriggeredAbility;
 import mage.abilities.effects.common.DamageTargetEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
+import mage.constants.CardType;
 import mage.target.common.TargetCreatureOrPlayer;
 
 /**
@@ -44,17 +43,19 @@ import mage.target.common.TargetCreatureOrPlayer;
  */
 public class PerilousMyr extends CardImpl {
 
-    public PerilousMyr (UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.ARTIFACT,CardType.CREATURE},"{2}");
+    public PerilousMyr(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId, setInfo, new CardType[]{CardType.ARTIFACT, CardType.CREATURE}, "{2}");
         this.subtype.add("Myr");
         this.power = new MageInt(1);
         this.toughness = new MageInt(1);
+
+        // When Perilous Myr dies, it deals 2 damage to target creature or player.
         Ability ability = new DiesTriggeredAbility(new DamageTargetEffect(2), false);
         ability.addTarget(new TargetCreatureOrPlayer());
         this.addAbility(ability);
     }
 
-    public PerilousMyr (final PerilousMyr card) {
+    public PerilousMyr(final PerilousMyr card) {
         super(card);
     }
 
