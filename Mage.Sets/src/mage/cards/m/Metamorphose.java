@@ -105,7 +105,7 @@ class MetamorphoseEffect extends OneShotEffect {
         Permanent permanent = game.getPermanentOrLKIBattlefield(source.getFirstTarget());
         if (permanent != null) {
             Player controller = game.getPlayer(permanent.getControllerId());
-            if (controller.chooseUse(Outcome.PutCardInPlay, "Do you wish to put an artifact, creature, enchantment, or land card onto the battlefield?", source, game)) {
+            if (controller != null && controller.canRespond() && controller.chooseUse(Outcome.PutCardInPlay, "Do you wish to put an artifact, creature, enchantment, or land card onto the battlefield?", source, game)) {
                 TargetCardInHand target = new TargetCardInHand(filter);
                 target.clearChosen();
                 if (controller.chooseTarget(outcome, target, source, game)) {
