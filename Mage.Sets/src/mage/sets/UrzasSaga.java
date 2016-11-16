@@ -199,6 +199,7 @@ public class UrzasSaga extends ExpansionSet {
         cards.add(new SetCardInfo("Karn, Silver Golem", 298, Rarity.RARE, mage.cards.k.KarnSilverGolem.class));
         cards.add(new SetCardInfo("Launch", 82, Rarity.COMMON, mage.cards.l.Launch.class));
         cards.add(new SetCardInfo("Lay Waste", 201, Rarity.COMMON, mage.cards.l.LayWaste.class));
+        cards.add(new SetCardInfo("Lifeline", 299, Rarity.RARE, mage.cards.l.Lifeline.class));
         cards.add(new SetCardInfo("Lightning Dragon", 202, Rarity.RARE, mage.cards.l.LightningDragon.class));
         cards.add(new SetCardInfo("Lilting Refrain", 83, Rarity.UNCOMMON, mage.cards.l.LiltingRefrain.class));
         cards.add(new SetCardInfo("Lingering Mirage", 84, Rarity.UNCOMMON, mage.cards.l.LingeringMirage.class));
