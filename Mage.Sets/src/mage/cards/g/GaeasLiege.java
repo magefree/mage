@@ -30,10 +30,11 @@ package mage.cards.g;
 import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.Ability;
-import mage.abilities.common.AttacksTriggeredAbility;
 import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.common.SimpleStaticAbility;
+import mage.abilities.condition.common.AttackingCondition;
 import mage.abilities.costs.common.TapSourceCost;
+import mage.abilities.decorator.ConditionalContinuousEffect;
 import mage.abilities.dynamicvalue.DynamicValue;
 import mage.abilities.dynamicvalue.common.PermanentsOnBattlefieldCount;
 import mage.abilities.effects.Effect;
@@ -72,8 +73,11 @@ public class GaeasLiege extends CardImpl {
         this.toughness = new MageInt(0);
 
         // As long as Gaea's Liege isn't attacking, its power and toughness are each equal to the number of Forests you control. As long as Gaea's Liege is attacking, its power and toughness are each equal to the number of Forests defending player controls.
-        this.addAbility(new SimpleStaticAbility(Zone.ALL, new SetPowerToughnessSourceEffect(new PermanentsOnBattlefieldCount(filterLands), Duration.EndOfGame)));
-        this.addAbility(new AttacksTriggeredAbility(new SetPowerToughnessSourceEffect(new DefendersForestCount(), Duration.EndOfCombat), false));
+        this.addAbility(new SimpleStaticAbility(Zone.ALL, new ConditionalContinuousEffect(
+                new SetPowerToughnessSourceEffect(new DefendersForestCount(), Duration.EndOfCombat),
+                new SetPowerToughnessSourceEffect(new PermanentsOnBattlefieldCount(filterLands), Duration.EndOfGame),
+                AttackingCondition.getInstance(),
+                "As long as {this} isn't attacking, its power and toughness are each equal to the number of Forests you control. As long as {this} is attacking, its power and toughness are each equal to the number of Forests defending player controls.")));
         // {tap}: Target land becomes a Forest until Gaea's Liege leaves the battlefield.
         Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new BecomesBasicLandTargetEffect(Duration.WhileOnBattlefield, "Forest"), new TapSourceCost());
         ability.addTarget(new TargetLandPermanent());
