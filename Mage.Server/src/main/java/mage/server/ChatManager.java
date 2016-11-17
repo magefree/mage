@@ -107,7 +107,7 @@ public class ChatManager {
     }
     
     private boolean containsSwearing(String message) {
-        if (message != null && message.toLowerCase().matches("^.*(anal|asshole|balls|bastard|bitch|blowjob|cock|crap|cunt|damn|dick|douche|fag|fuck|idiot|moron|piss|prick|pussy|rape|rapist|sex|screw you|shit|slut|vagina).*$")) {
+        if (message != null && message.toLowerCase().matches("^.*(anal|asshole|balls|bastard|bitch|blowjob|cock|crap|cunt|cum|damn|dick|dildo|douche|fag|fuck|idiot|moron|piss|prick|pussy|rape|rapist|sex|screw|shit|slut|vagina).*$")) {
             return true;
         }
         return false;
