@@ -564,7 +564,6 @@ public class DragCardGrid extends JPanel implements DragCardSource, DragCardTarg
         artifactCounter,
         enchantmentCounter,
         instantCounter,
-        sorceryCounter,
         planeswalkerCounter,
         sorceryCounter,
         tribalCounter
