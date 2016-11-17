@@ -185,9 +185,15 @@ public class Session {
         AuthorizedUser authorizedUser = null;
         if (ConfigSettings.getInstance().isAuthenticationActivated()) {
             authorizedUser = AuthorizedUserRepository.instance.getByName(userName);
-            if (authorizedUser == null || !authorizedUser.doCredentialsMatch(userName, password)) {
-                return "Wrong username or password. In case you haven't, please register your account first.";
+            String errorMsg = "Wrong username or password. In case you haven't, please register your account first.";
+            if (authorizedUser == null) {
+                return errorMsg;
             }
+
+            if (!Main.isTestMode() && !authorizedUser.doCredentialsMatch(userName, password)) {
+                return errorMsg;
+            }
+
             if (!authorizedUser.active) {
                 return "Your profile is deactivated, you can't sign on.";
             }
