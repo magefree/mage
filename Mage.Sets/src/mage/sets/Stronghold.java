@@ -121,6 +121,7 @@ public class Stronghold extends ExpansionSet {
         cards.add(new SetCardInfo("Mogg Infestation", 93, Rarity.RARE, mage.cards.m.MoggInfestation.class));
         cards.add(new SetCardInfo("Mogg Maniac", 94, Rarity.UNCOMMON, mage.cards.m.MoggManiac.class));
         cards.add(new SetCardInfo("Morgue Thrull", 15, Rarity.COMMON, mage.cards.m.MorgueThrull.class));
+        cards.add(new SetCardInfo("Mortuary", 16, Rarity.RARE, mage.cards.m.Mortuary.class));
         cards.add(new SetCardInfo("Mox Diamond", 132, Rarity.RARE, mage.cards.m.MoxDiamond.class));
         cards.add(new SetCardInfo("Mulch", 60, Rarity.COMMON, mage.cards.m.Mulch.class));
         cards.add(new SetCardInfo("Nomads en-Kor", 109, Rarity.COMMON, mage.cards.n.NomadsEnKor.class));
