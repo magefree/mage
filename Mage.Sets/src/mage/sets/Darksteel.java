@@ -44,6 +44,7 @@ public class Darksteel extends ExpansionSet {
         cards.add(new SetCardInfo("Barbed Lightning", 55, Rarity.COMMON, mage.cards.b.BarbedLightning.class));
         cards.add(new SetCardInfo("Blinkmoth Nexus", 163, Rarity.RARE, mage.cards.b.BlinkmothNexus.class));
         cards.add(new SetCardInfo("Burden of Greed", 38, Rarity.COMMON, mage.cards.b.BurdenOfGreed.class));
+        cards.add(new SetCardInfo("Chimeric Egg", 106, Rarity.UNCOMMON, mage.cards.c.ChimericEgg.class));
         cards.add(new SetCardInfo("Chittering Rats", 39, Rarity.COMMON, mage.cards.c.ChitteringRats.class));
         cards.add(new SetCardInfo("Chromescale Drake", 20, Rarity.RARE, mage.cards.c.ChromescaleDrake.class));
         cards.add(new SetCardInfo("Coretapper", 107, Rarity.UNCOMMON, mage.cards.c.Coretapper.class));
