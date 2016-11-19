@@ -48,17 +48,15 @@ import mage.MageObject;
 import mage.abilities.Ability;
 import mage.abilities.ActivatedAbility;
 import mage.abilities.DelayedTriggeredAbility;
+import mage.abilities.OpeningHandAction;
 import mage.abilities.SpellAbility;
 import mage.abilities.TriggeredAbility;
 import mage.abilities.common.AttachableToRestrictedAbility;
-import mage.abilities.common.ChancellorAbility;
-import mage.abilities.common.GemstoneCavernsAbility;
 import mage.abilities.effects.ContinuousEffect;
 import mage.abilities.effects.ContinuousEffects;
 import mage.abilities.effects.Effect;
 import mage.abilities.effects.PreventionEffectData;
 import mage.abilities.effects.common.CopyEffect;
-import mage.abilities.keyword.LeylineAbility;
 import mage.abilities.keyword.MorphAbility;
 import mage.abilities.keyword.TransformAbility;
 import mage.abilities.mana.DelayedTriggeredManaAbility;
@@ -84,6 +82,7 @@ import mage.constants.Zone;
 import mage.counters.CounterType;
 import mage.counters.Counters;
 import mage.filter.Filter;
+import mage.filter.FilterCard;
 import mage.filter.FilterPermanent;
 import mage.filter.common.FilterControlledCreaturePermanent;
 import mage.filter.common.FilterPlaneswalkerPermanent;
@@ -119,6 +118,7 @@ import mage.players.Player;
 import mage.players.PlayerList;
 import mage.players.Players;
 import mage.target.Target;
+import mage.target.TargetCard;
 import mage.target.TargetPermanent;
 import mage.target.TargetPlayer;
 import mage.util.GameLog;
@@ -1028,34 +1028,38 @@ public abstract class GameImpl implements Game, Serializable {
         //20100716 - 103.5
         for (UUID playerId : state.getPlayerList(startingPlayerId)) {
             Player player = getPlayer(playerId);
+            Cards cardsWithOpeningAction = new CardsImpl();
             for (Card card : player.getHand().getCards(this)) {
-                if (player.getHand().contains(card.getId())) {
-                    if (card.getAbilities().containsKey(LeylineAbility.getInstance().getId())) {
-                        if (player.chooseUse(Outcome.PutCardInPlay, "Do you wish to put " + card.getName() + " on the battlefield?", null, this)) {
-                            card.putOntoBattlefield(this, Zone.HAND, null, player.getId());
-                        }
-                    }
-                    for (Ability ability : card.getAbilities()) {
-                        if (ability instanceof ChancellorAbility) {
-                            if (player.chooseUse(Outcome.PutCardInPlay, "Do you wish to reveal " + card.getName() + "?", ability, this)) {
-                                Cards cards = new CardsImpl();
-                                cards.add(card);
-                                player.revealCards("Revealed", cards, this);
-                                ability.resolve(this);
-                            }
-                        }
-                        if (ability instanceof GemstoneCavernsAbility) {
-                            if (!playerId.equals(startingPlayerId)) {
-                                if (player.chooseUse(Outcome.PutCardInPlay, "Do you wish to put " + card.getName() + " into play?", ability, this)) {
-                                    Cards cards = new CardsImpl();
-                                    cards.add(card);
-                                    player.revealCards("Revealed", cards, this);
-                                    ability.resolve(this);
-                                }
-                            }
+                for (Ability ability : card.getAbilities()) {
+                    if (ability instanceof OpeningHandAction) {
+                        OpeningHandAction action = (OpeningHandAction) ability;
+                        if (action.isOpeningHandActionAllowed(card, player, this)) {
+                            cardsWithOpeningAction.add(card);
                         }
                     }
                 }
+            }
+            while (!cardsWithOpeningAction.isEmpty() && player.canRespond()) {
+                Card card;
+                if (cardsWithOpeningAction.size() > 1) {
+                    TargetCard targetCard = new TargetCard(1, Zone.HAND, new FilterCard("card for opening hand action"));
+                    player.chooseTarget(Outcome.Benefit, cardsWithOpeningAction, targetCard, null, this);
+                    card = getCard(targetCard.getFirstTarget());
+                } else {
+                    card = cardsWithOpeningAction.getRandom(this);
+                }
+                if (card != null) {
+                    for (Ability ability : card.getAbilities()) {
+                        if (ability instanceof OpeningHandAction) {
+                            OpeningHandAction action = (OpeningHandAction) ability;
+                            if (action.askUseOpeningHandAction(card, player, this)) {
+                                action.doOpeningHandAction(card, player, this);
+                            }
+                        }
+
+                    }
+                }
+                cardsWithOpeningAction.remove(card);
             }
         }
 
