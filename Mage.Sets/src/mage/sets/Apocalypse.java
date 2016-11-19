@@ -34,6 +34,7 @@ public class Apocalypse extends ExpansionSet {
         cards.add(new SetCardInfo("Brass Herald", 133, Rarity.UNCOMMON, mage.cards.b.BrassHerald.class));
         cards.add(new SetCardInfo("Caves of Koilos", 140, Rarity.RARE, mage.cards.c.CavesOfKoilos.class));
         cards.add(new SetCardInfo("Ceta Disciple", 19, Rarity.COMMON, mage.cards.c.CetaDisciple.class));
+        cards.add(new SetCardInfo("Ceta Sanctuary", 20, Rarity.UNCOMMON, mage.cards.c.CetaSanctuary.class));
         cards.add(new SetCardInfo("Cetavolver", 21, Rarity.RARE, mage.cards.c.Cetavolver.class));
 	cards.add(new SetCardInfo("Coalition Flag", 2, Rarity.UNCOMMON, mage.cards.c.CoalitionFlag.class));
 	cards.add(new SetCardInfo("Coalition Honor Guard", 3, Rarity.COMMON, mage.cards.c.CoalitionHonorGuard.class));
