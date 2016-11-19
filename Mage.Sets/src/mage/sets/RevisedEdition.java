@@ -120,6 +120,7 @@ public class RevisedEdition extends ExpansionSet {
         cards.add(new SetCardInfo("Fork", 152, Rarity.RARE, mage.cards.f.Fork.class));
         cards.add(new SetCardInfo("Frozen Shade", 20, Rarity.COMMON, mage.cards.f.FrozenShade.class));
         cards.add(new SetCardInfo("Fungusaur", 104, Rarity.RARE, mage.cards.f.Fungusaur.class));
+        cards.add(new SetCardInfo("Gaea's Liege", 105, Rarity.RARE, mage.cards.g.GaeasLiege.class));
         cards.add(new SetCardInfo("Giant Growth", 106, Rarity.COMMON, mage.cards.g.GiantGrowth.class));
         cards.add(new SetCardInfo("Giant Spider", 107, Rarity.COMMON, mage.cards.g.GiantSpider.class));
         cards.add(new SetCardInfo("Glasses of Urza", 249, Rarity.UNCOMMON, mage.cards.g.GlassesOfUrza.class));

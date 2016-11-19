@@ -170,6 +170,7 @@ public class FourthEdition extends ExpansionSet {
         cards.add(new SetCardInfo("Forest", 177, Rarity.LAND, mage.cards.basiclands.Forest.class, new CardGraphicInfo(null, true)));
         cards.add(new SetCardInfo("Frozen Shade", 22, Rarity.COMMON, mage.cards.f.FrozenShade.class));
         cards.add(new SetCardInfo("Fungusaur", 130, Rarity.RARE, mage.cards.f.Fungusaur.class));
+        cards.add(new SetCardInfo("Gaea's Liege", 131, Rarity.RARE, mage.cards.g.GaeasLiege.class));
         cards.add(new SetCardInfo("Gaseous Form", 74, Rarity.COMMON, mage.cards.g.GaseousForm.class));
         cards.add(new SetCardInfo("Ghost Ship", 75, Rarity.UNCOMMON, mage.cards.g.GhostShip.class));
         cards.add(new SetCardInfo("Giant Growth", 132, Rarity.COMMON, mage.cards.g.GiantGrowth.class));

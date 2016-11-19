@@ -87,7 +87,7 @@ public class RockHydra extends CardImpl {
 
         public RockHydraEffect() {
             super(Duration.WhileOnBattlefield, Integer.MAX_VALUE, false, false);
-            staticText = "For each 1 damage that would be dealt to Rock Hydra, if it has a +1/+1 counter on it, remove a +1/+1 counter from it and prevent that 1 damage.";
+            staticText = "For each 1 damage that would be dealt to {this}, if it has a +1/+1 counter on it, remove a +1/+1 counter from it and prevent that 1 damage.";
         }
 
         public RockHydraEffect(final RockHydraEffect effect) {
