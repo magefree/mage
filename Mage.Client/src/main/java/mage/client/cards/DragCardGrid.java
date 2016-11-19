@@ -613,6 +613,7 @@ public class DragCardGrid extends JPanel implements DragCardSource, DragCardTarg
     JPopupMenu selectByPopup;
     JCheckBox separateCreaturesCb;
     JTextField searchByTextField;
+    JToggleButton multiplesButton;
 
     JSlider cardSizeSlider;
     JLabel cardSizeSliderLabel;
@@ -952,8 +953,20 @@ public class DragCardGrid extends JPanel implements DragCardSource, DragCardTarg
 
             ButtonGroup selectByTypeModeGroup = new ButtonGroup();
             for (final CardType cardType : CardType.values()) {
-                JToggleButton button = new JToggleButton(cardType.toString());
 
+                if (cardType == cardType.CONSPIRACY) { 
+                    multiplesButton = new JToggleButton("Multiples");
+                    selectByTypeButtons.put(cardType, multiplesButton);
+                    selectByTypeMode.add(multiplesButton);
+                    selectByTypeModeGroup.add(multiplesButton);
+                    multiplesButton.addActionListener(e -> {
+                            multiplesButton.setSelected(!multiplesButton.isSelected());
+                            reselectBy();
+                            });
+                    continue;
+                }
+
+                JToggleButton button = new JToggleButton(cardType.toString());
                 selectByTypeButtons.put(cardType, button);
                 selectByTypeMode.add(button);
                 selectByTypeModeGroup.add(button);
@@ -1232,6 +1245,29 @@ public class DragCardGrid extends JPanel implements DragCardSource, DragCardTarg
             AbstractButton button = selectByTypeButtons.get(cardType);
             if (button != null) {
                 if (button.isSelected()) {
+                    // Special case - "Multiples"  (CONSPIRACY type)
+                    if (cardType == CardType.CONSPIRACY) {
+                        HashMap<String, CardView> cardNames = new HashMap<>();
+
+                        for (ArrayList<ArrayList<CardView>> gridRow : cardGrid) {
+                            for (ArrayList<CardView> stack : gridRow) {
+                                for (CardView card : stack) {
+                                    if (cardNames.get(card.getName()) == null) {
+                                        cardNames.put(card.getName(), card);
+                                    } else {
+                                        card.setSelected(true);
+                                        cardViews.get(card.getId()).update(card);
+
+                                        CardView origCard = cardNames.get(card.getName());
+                                        origCard.setSelected(true);
+                                        cardViews.get(origCard.getId()).update(origCard);
+                                    }
+                                }
+                            }
+                        }
+                        continue;
+                    }
+
                     for (ArrayList<ArrayList<CardView>> gridRow : cardGrid) {
                         for (ArrayList<CardView> stack : gridRow) {
                             for (CardView card : stack) {
@@ -1590,6 +1626,10 @@ public class DragCardGrid extends JPanel implements DragCardSource, DragCardTarg
             AbstractButton button = selectByTypeButtons.get(cardType);
             String text = cardType.toString();
             int numCards = getCount(cardType);
+            if (cardType == cardType.CONSPIRACY) { 
+                continue;
+            }
+            
             if (numCards > 0) {
                 button.setForeground(Color.BLACK);
                 text = text + " - " + numCards;
