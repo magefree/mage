@@ -62,7 +62,7 @@ import mage.target.targetpointer.FixedTarget;
 public class KaronaFalseGod extends CardImpl {
 
     public KaronaFalseGod(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{1}{W}{U}{B}{R}{G}");
+        super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{1}{W}{U}{B}{R}{G}");
         this.supertype.add("Legendary");
         this.subtype.add("Avatar");
 
@@ -71,10 +71,10 @@ public class KaronaFalseGod extends CardImpl {
 
         // Haste
         this.addAbility(HasteAbility.getInstance());
-        
+
         // At the beginning of each player's upkeep, that player untaps Karona, False God and gains control of it.
         this.addAbility(new BeginningOfUpkeepTriggeredAbility(Zone.BATTLEFIELD, new KaronaFalseGodUntapGetControlEffect(), TargetController.ANY, false, true));
-        
+
         // Whenever Karona attacks, creatures of the creature type of your choice get +3/+3 until end of turn.
         this.addAbility(new AttacksTriggeredAbility(new KaronaFalseGodEffect(), false));
     }
@@ -93,7 +93,7 @@ class KaronaFalseGodUntapGetControlEffect extends OneShotEffect {
 
     public KaronaFalseGodUntapGetControlEffect() {
         super(Outcome.GainControl);
-        this.staticText = "that player untaps Karona, False God and gains control of it";
+        this.staticText = "that player untaps {this} and gains control of it";
     }
 
     public KaronaFalseGodUntapGetControlEffect(final KaronaFalseGodUntapGetControlEffect effect) {
@@ -110,9 +110,23 @@ class KaronaFalseGodUntapGetControlEffect extends OneShotEffect {
         Player controller = game.getPlayer(source.getControllerId());
         MageObject sourceObject = source.getSourceObject(game);
         Permanent sourcePermanent = game.getPermanent(source.getSourceId());
-        if (controller != null && sourceObject != null && sourceObject.equals(sourcePermanent)) {
+        Player newController = game.getPlayer(getTargetPointer().getFirst(game, source));
+        if (newController != null && controller != null && sourceObject != null && sourceObject.equals(sourcePermanent)) {
             sourcePermanent.untap(game);
-            ContinuousEffect effect = new GainControlTargetEffect(Duration.Custom, true, getTargetPointer().getFirst(game, source));
+            game.informPlayers(newController.getLogName() + " untaps " + sourceObject.getIdName());
+            // remove old control effects of the same player
+            for (ContinuousEffect effect : game.getState().getContinuousEffects().getLayeredEffects(game)) {
+                if (effect instanceof GainControlTargetEffect) {
+                    UUID checkId = (UUID) ((GainControlTargetEffect) effect).getValue("KaronaFalseGodSourceId");
+                    UUID controllerId = (UUID) ((GainControlTargetEffect) effect).getValue("KaronaFalseGodControllerId");
+                    if (source.getSourceId().equals(checkId) && newController.getId().equals(controllerId)) {
+                        effect.discard();
+                    }
+                }
+            }
+            ContinuousEffect effect = new GainControlTargetEffect(Duration.Custom, true, newController.getId());
+            effect.setValue("KaronaFalseGodSourceId", source.getSourceId());
+            effect.setValue("KaronaFalseGodControllerId", newController.getId());
             effect.setTargetPointer(new FixedTarget(sourcePermanent.getId()));
             effect.setText("and gains control of it");
             game.addEffect(effect, source);
@@ -123,21 +137,21 @@ class KaronaFalseGodUntapGetControlEffect extends OneShotEffect {
 }
 
 class KaronaFalseGodEffect extends OneShotEffect {
-    
+
     public KaronaFalseGodEffect() {
         super(Outcome.BoostCreature);
         this.staticText = "creatures of the creature type of your choice get +3/+3 until end of turn";
     }
-    
+
     public KaronaFalseGodEffect(final KaronaFalseGodEffect effect) {
         super(effect);
     }
-    
+
     @Override
     public KaronaFalseGodEffect copy() {
         return new KaronaFalseGodEffect(this);
     }
-    
+
     @Override
     public boolean apply(Game game, Ability source) {
         Player controller = game.getPlayer(source.getControllerId());
@@ -156,7 +170,7 @@ class KaronaFalseGodEffect extends OneShotEffect {
                 game.informPlayers(controller.getLogName() + " has chosen " + typeChosen);
                 FilterCreaturePermanent filter = new FilterCreaturePermanent();
                 filter.add(new SubtypePredicate(typeChosen));
-                game.addEffect(new BoostAllEffect(3,3,Duration.EndOfTurn, filter, false), source);
+                game.addEffect(new BoostAllEffect(3, 3, Duration.EndOfTurn, filter, false), source);
             }
             return true;
         }
