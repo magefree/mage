@@ -27,21 +27,26 @@
  */
 package mage.cards.c;
 
+import java.util.UUID;
 import mage.ObjectColor;
 import mage.abilities.Ability;
-import mage.abilities.TriggeredAbilityImpl;
+import mage.abilities.TriggeredAbility;
+import mage.abilities.common.BeginningOfUpkeepTriggeredAbility;
+import mage.abilities.condition.common.PermanentsOnTheBattlefieldCondition;
+import mage.abilities.decorator.ConditionalTriggeredAbility;
 import mage.abilities.effects.OneShotEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Outcome;
+import mage.constants.TargetController;
 import mage.constants.Zone;
+import mage.filter.common.FilterControlledPermanent;
+import mage.filter.predicate.Predicates;
+import mage.filter.predicate.mageobject.ColorPredicate;
 import mage.game.Game;
-import mage.game.events.GameEvent;
 import mage.game.permanent.Permanent;
 import mage.players.Player;
-
-import java.util.UUID;
 
 /**
  *
@@ -49,11 +54,20 @@ import java.util.UUID;
  */
 public class CetaSanctuary extends CardImpl {
 
+    private static final FilterControlledPermanent filter = new FilterControlledPermanent("a red or green permanent");
+
+    static {
+        filter.add(Predicates.or(new ColorPredicate(ObjectColor.RED), new ColorPredicate(ObjectColor.GREEN)));
+    }
+
     public CetaSanctuary(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.ENCHANTMENT}, "{2}{U}");
 
         // At the beginning of your upkeep, if you control a red or green permanent, draw a card, then discard a card. If you control a red permanent and a green permanent, instead draw two cards, then discard a card.
-        this.addAbility(new CetaSanctuaryTriggeredAbility());
+        TriggeredAbility ability = new BeginningOfUpkeepTriggeredAbility(Zone.BATTLEFIELD, new CetaSanctuaryEffect(), TargetController.YOU, true);
+        this.addAbility(new ConditionalTriggeredAbility(ability, new PermanentsOnTheBattlefieldCondition(filter),
+                "At the beginning of your upkeep, if you control a red or green permanent, draw a card, then discard a card. If you control a red permanent and a green permanent, instead draw two cards, then discard a card."));
+
     }
 
     public CetaSanctuary(final CetaSanctuary card) {
@@ -72,75 +86,42 @@ class CetaSanctuaryEffect extends OneShotEffect {
         super(Outcome.DrawCard);
     }
 
-    public CetaSanctuaryEffect(final CetaSanctuaryEffect effect) { super(effect); }
+    public CetaSanctuaryEffect(final CetaSanctuaryEffect effect) {
+        super(effect);
+    }
 
     @Override
     public boolean apply(Game game, Ability source) {
         Player controller = game.getPlayer(source.getControllerId());
-        int red = 0;
-        int green = 0;
-
         if (controller != null) {
+            int red = 0;
+            int green = 0;
             for (Permanent permanent : game.getBattlefield().getAllActivePermanents(controller.getId())) {
                 ObjectColor color = permanent.getColor(game);
-                if (color.isRed()) { red = 1; }
-                if (color.isGreen()) { green = 1; }
+                if (color.isRed()) {
+                    red = 1;
+                }
+                if (color.isGreen()) {
+                    green = 1;
+                }
 
                 if (red == 1 && green == 1) {
                     break;
                 }
             }
-        }
 
-        if (red != 0 || green != 0) {
-            controller.drawCards((red+green), game);
-            controller.discard(1, false, source, game);
-            return true;
-        } else {
-            return false;
-        }
-    }
-
-    @Override
-    public CetaSanctuaryEffect copy() { return new CetaSanctuaryEffect(this); }
-}
-
-class CetaSanctuaryTriggeredAbility extends TriggeredAbilityImpl {
-
-    public CetaSanctuaryTriggeredAbility() {
-        super(Zone.BATTLEFIELD, new CetaSanctuaryEffect());
-    }
-
-    public CetaSanctuaryTriggeredAbility(final CetaSanctuaryTriggeredAbility ability) {
-        super(ability);
-    }
-
-    @Override
-    public CetaSanctuaryTriggeredAbility copy() {
-        return new CetaSanctuaryTriggeredAbility(this);
-    }
-
-    @Override
-    public boolean checkEventType(GameEvent event, Game game) {
-        return event.getType() == GameEvent.EventType.UPKEEP_STEP_PRE;
-    }
-
-    @Override
-    public boolean checkTrigger(GameEvent event, Game game) {
-        if (event.getPlayerId().equals(this.getControllerId())) {
-            for (Permanent permanent : game.getBattlefield().getAllActivePermanents(this.getControllerId())) {
-                ObjectColor color = permanent.getColor(game);
-                if (color.isRed() || color.isGreen()) {
-                    return true;
-                }
+            if (red != 0 || green != 0) {
+                controller.drawCards((red + green), game);
+                controller.discard(1, false, source, game);
+                return true;
             }
         }
         return false;
+
     }
 
     @Override
-    public String getRule() {
-        return "At the beginning of your upkeep, if you control a red or green permanent, draw a card, then discard a card. If you control a red permanent and a green permanent, instead draw two cards, then discard a card.";
+    public CetaSanctuaryEffect copy() {
+        return new CetaSanctuaryEffect(this);
     }
 }
-
