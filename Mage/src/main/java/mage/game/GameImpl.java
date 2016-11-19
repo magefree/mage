@@ -1397,6 +1397,7 @@ public abstract class GameImpl implements Game, Serializable {
 
     @Override
     public synchronized void applyEffects() {
+        resetShortLivingLKI();
         state.applyEffects(this);
     }
 
