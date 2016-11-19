@@ -32,11 +32,12 @@ import javax.swing.JComboBox;
 
 /**
  * A custom combo box with its own renderer and editor.
+ *
  * @author wwww.codejava.net
  *
  */
 public class CountryComboBox extends JComboBox {
-    
+
     private final DefaultComboBoxModel model;
 
     public static String[][] countryList = {
@@ -60,6 +61,7 @@ public class CountryComboBox extends JComboBox {
         {"Bahrain", "bh"},
         {"Bangladesh", "bd"},
         {"Barbados", "bb"},
+        {"Basque", "bq"},
         {"Belarus", "by"},
         {"Belgium", "be"},
         {"Belize", "bz"},
@@ -285,9 +287,8 @@ public class CountryComboBox extends JComboBox {
         {"Western Sahara", "eh"},
         {"Yemen", "ye"},
         {"Zambia", "zm"},
-        {"Zimbabwe", "zw"},
-    };    
-    
+        {"Zimbabwe", "zw"},};
+
     @SuppressWarnings("unchecked")
     public CountryComboBox() {
         model = new DefaultComboBoxModel();
@@ -296,12 +297,12 @@ public class CountryComboBox extends JComboBox {
         setEditor(new CountryItemEditor());
         addItems(countryList);
     }
-     
+
     /**
-     * Add an array items to this combo box.
-     * Each item is an array of two String elements:
-     * - first element is country name.
-     * - second element is path of an image file for country flag.
+     * Add an array items to this combo box. Each item is an array of two String
+     * elements: - first element is country name. - second element is path of an
+     * image file for country flag.
+     *
      * @param items
      */
     @SuppressWarnings("unchecked")
@@ -315,6 +316,5 @@ public class CountryComboBox extends JComboBox {
     public Object getSelectedItem() {
         return super.getSelectedItem(); //To change body of generated methods, choose Tools | Templates.
     }
-    
 
 }
