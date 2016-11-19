@@ -28,6 +28,7 @@
 package mage.cards.d;
 
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 import java.util.UUID;
@@ -99,7 +100,7 @@ class DivergentTransformationsEffect extends OneShotEffect {
         MageObject sourceObject = source.getSourceObject(game);
         if (controller != null && sourceObject != null) {
             List<UUID> controllerList = new ArrayList<>();
-            Cards toExile = new CardsImpl();
+            Set<Card> toExile = new HashSet<>();
             for (UUID targetId : getTargetPointer().getTargets(game, source)) {
                 Permanent permanent = game.getPermanent(targetId);
                 if (permanent != null) {
