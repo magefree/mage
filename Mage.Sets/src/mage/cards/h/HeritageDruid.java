@@ -36,18 +36,18 @@ import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Zone;
-import mage.filter.common.FilterControlledCreaturePermanent;
+import mage.filter.common.FilterControlledPermanent;
 import mage.filter.predicate.Predicates;
 import mage.filter.predicate.mageobject.SubtypePredicate;
 import mage.filter.predicate.permanent.TappedPredicate;
-import mage.target.common.TargetControlledCreaturePermanent;
+import mage.target.common.TargetControlledPermanent;
 
 /**
  * @author Loki
  */
 public class HeritageDruid extends CardImpl {
 
-    private static final FilterControlledCreaturePermanent filter = new FilterControlledCreaturePermanent("untapped Elves you control");
+    private static final FilterControlledPermanent filter = new FilterControlledPermanent("untapped Elves you control");
 
     static {
         filter.add(Predicates.not(new TappedPredicate()));
@@ -63,7 +63,7 @@ public class HeritageDruid extends CardImpl {
         this.toughness = new MageInt(1);
 
         // Tap three untapped Elves you control: Add {G}{G}{G} to your mana pool.
-        this.addAbility(new SimpleManaAbility(Zone.BATTLEFIELD, Mana.GreenMana(3), new TapTargetCost(new TargetControlledCreaturePermanent(3, 3, filter, true))));
+        this.addAbility(new SimpleManaAbility(Zone.BATTLEFIELD, Mana.GreenMana(3), new TapTargetCost(new TargetControlledPermanent(3, 3, filter, true))));
     }
 
     public HeritageDruid(final HeritageDruid card) {
