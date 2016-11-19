@@ -173,6 +173,7 @@ public class NinthEdition extends ExpansionSet {
         cards.add(new SetCardInfo("Island", 337, Rarity.LAND, mage.cards.basiclands.Island.class, new CardGraphicInfo(null, true)));
         cards.add(new SetCardInfo("Island", 338, Rarity.LAND, mage.cards.basiclands.Island.class, new CardGraphicInfo(null, true)));
         cards.add(new SetCardInfo("Ivory Mask", 23, Rarity.RARE, mage.cards.i.IvoryMask.class));
+        cards.add(new SetCardInfo("Jade Statue", 300, Rarity.RARE, mage.cards.j.JadeStatue.class));
         cards.add(new SetCardInfo("Jester's Cap", 301, Rarity.RARE, mage.cards.j.JestersCap.class));
         cards.add(new SetCardInfo("Kami of Old Stone", 24, Rarity.UNCOMMON, mage.cards.k.KamiOfOldStone.class));
         cards.add(new SetCardInfo("Karplusan Forest", 321, Rarity.RARE, mage.cards.k.KarplusanForest.class));

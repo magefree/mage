@@ -143,6 +143,7 @@ public class UnlimitedEdition extends ExpansionSet {
         cards.add(new SetCardInfo("Island Sanctuary", 210, Rarity.RARE, mage.cards.i.IslandSanctuary.class));
         cards.add(new SetCardInfo("Ivory Cup", 252, Rarity.UNCOMMON, mage.cards.i.IvoryCup.class));
         cards.add(new SetCardInfo("Jade Monolith", 253, Rarity.RARE, mage.cards.j.JadeMonolith.class));
+        cards.add(new SetCardInfo("Jade Statue", 254, Rarity.UNCOMMON, mage.cards.j.JadeStatue.class));
         cards.add(new SetCardInfo("Jayemdae Tome", 255, Rarity.RARE, mage.cards.j.JayemdaeTome.class));
         cards.add(new SetCardInfo("Juggernaut", 256, Rarity.UNCOMMON, mage.cards.j.Juggernaut.class));
         cards.add(new SetCardInfo("Jump", 61, Rarity.COMMON, mage.cards.j.Jump.class));

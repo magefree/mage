@@ -143,6 +143,7 @@ public class LimitedEditionBeta extends ExpansionSet {
         cards.add(new SetCardInfo("Island Sanctuary", 211, Rarity.RARE, mage.cards.i.IslandSanctuary.class));
         cards.add(new SetCardInfo("Ivory Cup", 253, Rarity.UNCOMMON, mage.cards.i.IvoryCup.class));
         cards.add(new SetCardInfo("Jade Monolith", 254, Rarity.RARE, mage.cards.j.JadeMonolith.class));
+        cards.add(new SetCardInfo("Jade Statue", 255, Rarity.UNCOMMON, mage.cards.j.JadeStatue.class));
         cards.add(new SetCardInfo("Jayemdae Tome", 256, Rarity.RARE, mage.cards.j.JayemdaeTome.class));
         cards.add(new SetCardInfo("Juggernaut", 257, Rarity.UNCOMMON, mage.cards.j.Juggernaut.class));
         cards.add(new SetCardInfo("Jump", 61, Rarity.COMMON, mage.cards.j.Jump.class));
