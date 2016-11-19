@@ -27,6 +27,7 @@
  */
 package mage.cards.s;
 
+import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleActivatedAbility;
@@ -39,14 +40,11 @@ import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Outcome;
 import mage.constants.Zone;
-import mage.filter.common.FilterControlledPermanent;
+import mage.filter.common.FilterControlledCreaturePermanent;
 import mage.filter.common.FilterCreaturePermanent;
-import mage.filter.predicate.mageobject.CardTypePredicate;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.target.common.TargetControlledPermanent;
-
-import java.util.UUID;
 
 /**
  *
@@ -54,28 +52,19 @@ import java.util.UUID;
  */
 public class SanguinePraetor extends CardImpl {
 
-    private static final FilterControlledPermanent controlledCreatureFilter = new FilterControlledPermanent("creature");
-
-    static {
-        controlledCreatureFilter.add(new CardTypePredicate(CardType.CREATURE));
-    }
-
     public SanguinePraetor(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{6}{B}{B}");
-        
+
         this.subtype.add("Avatar");
         this.subtype.add("Praetor");
         this.power = new MageInt(7);
         this.toughness = new MageInt(5);
 
-        ManaCostsImpl blackManaCost = new ManaCostsImpl("{B}");
-        SacrificeTargetCost sacrificeCost = new SacrificeTargetCost(new TargetControlledPermanent(controlledCreatureFilter));
-
-        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new SanguinePraetorEffect(), blackManaCost);
-        ability.addCost(sacrificeCost);
+        // {B}, Sacrifice a creature: Destroy each creature with the same converted mana cost as the sacrificed creature.
+        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new SanguinePraetorEffect(), new ManaCostsImpl("{B}"));
+        ability.addCost(new SacrificeTargetCost(new TargetControlledPermanent(new FilterControlledCreaturePermanent())));
         this.addAbility(ability);
 
-        // {B}, Sacrifice a creature: Destroy each creature with the same converted mana cost as the sacrificed creature.
     }
 
     public SanguinePraetor(final SanguinePraetor card) {
@@ -90,34 +79,35 @@ public class SanguinePraetor extends CardImpl {
 
 class SanguinePraetorEffect extends OneShotEffect {
 
-    private static final FilterCreaturePermanent creatureFilter = new FilterCreaturePermanent();
-
     public SanguinePraetorEffect() {
         super(Outcome.Damage);
         staticText = "Destroy each creature with the same converted mana cost as the sacrificed creature.";
     }
 
-    public SanguinePraetorEffect(final SanguinePraetorEffect effect) { super(effect); }
+    public SanguinePraetorEffect(final SanguinePraetorEffect effect) {
+        super(effect);
+    }
 
     @Override
     public boolean apply(Game game, Ability source) {
         int cmc = 0;
-        for (Cost cost: source.getCosts()) {
-            if (cost instanceof SacrificeTargetCost && ((SacrificeTargetCost)cost).getPermanents().size() > 0) {
-                cmc = ((SacrificeTargetCost)cost).getPermanents().get(0).getConvertedManaCost();
+        for (Cost cost : source.getCosts()) {
+            if (cost instanceof SacrificeTargetCost && ((SacrificeTargetCost) cost).getPermanents().size() > 0) {
+                cmc = ((SacrificeTargetCost) cost).getPermanents().get(0).getConvertedManaCost();
                 break;
             }
         }
 
-        for (Permanent permanent : game.getBattlefield().getActivePermanents(creatureFilter, source.getControllerId(), source.getSourceId(), game)) {
+        for (Permanent permanent : game.getBattlefield().getAllActivePermanents(new FilterCreaturePermanent(), source.getControllerId(), game)) {
             if (permanent.getConvertedManaCost() == cmc) {
                 permanent.destroy(source.getSourceId(), game, false);
             }
         }
-
         return true;
     }
 
     @Override
-    public SanguinePraetorEffect copy() { return new SanguinePraetorEffect(this); }
+    public SanguinePraetorEffect copy() {
+        return new SanguinePraetorEffect(this);
+    }
 }
