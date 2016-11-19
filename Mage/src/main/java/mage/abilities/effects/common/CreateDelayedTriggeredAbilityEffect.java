@@ -32,6 +32,7 @@ import mage.abilities.DelayedTriggeredAbility;
 import mage.abilities.Mode;
 import mage.abilities.effects.Effect;
 import mage.abilities.effects.OneShotEffect;
+import mage.constants.Outcome;
 import mage.game.Game;
 
 /**
@@ -53,7 +54,7 @@ public class CreateDelayedTriggeredAbilityEffect extends OneShotEffect {
     }
 
     public CreateDelayedTriggeredAbilityEffect(DelayedTriggeredAbility ability, boolean copyTargets, boolean initAbility) {
-        super(ability.getEffects().get(0).getOutcome());
+        super(ability.getEffects().isEmpty() ? Outcome.Detriment : ability.getEffects().get(0).getOutcome());
         this.ability = ability;
         this.copyTargets = copyTargets;
         this.initAbility = initAbility;
