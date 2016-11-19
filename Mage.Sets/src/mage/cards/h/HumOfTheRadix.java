@@ -27,6 +27,7 @@
  */
 package mage.cards.h;
 
+import java.util.UUID;
 import mage.MageObject;
 import mage.abilities.Ability;
 import mage.abilities.SpellAbility;
@@ -34,12 +35,14 @@ import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.effects.common.cost.CostModificationEffectImpl;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
-import mage.constants.*;
-import mage.filter.common.FilterControlledArtifactPermanent;
+import mage.constants.CardType;
+import mage.constants.CostModificationType;
+import mage.constants.Duration;
+import mage.constants.Outcome;
+import mage.constants.Zone;
+import mage.filter.common.FilterArtifactPermanent;
 import mage.game.Game;
 import mage.util.CardUtil;
-
-import java.util.UUID;
 
 /**
  *
@@ -68,8 +71,8 @@ public class HumOfTheRadix extends CardImpl {
 class HumOfTheRadixCostIncreaseEffect extends CostModificationEffectImpl {
 
     HumOfTheRadixCostIncreaseEffect() {
-        super(Duration.Custom, Outcome.Detriment, CostModificationType.INCREASE_COST);
-        staticText = "Each artifact spell costs {1} more to cast for each artifact its controller controls.";
+        super(Duration.WhileOnBattlefield, Outcome.Detriment, CostModificationType.INCREASE_COST);
+        staticText = "each artifact spell costs {1} more to cast for each artifact its controller controls";
     }
 
     HumOfTheRadixCostIncreaseEffect(final HumOfTheRadixCostIncreaseEffect effect) {
@@ -78,8 +81,7 @@ class HumOfTheRadixCostIncreaseEffect extends CostModificationEffectImpl {
 
     @Override
     public boolean apply(Game game, Ability source, Ability abilityToModify) {
-        FilterControlledArtifactPermanent filter = new FilterControlledArtifactPermanent("artifacts you control");
-        int additionalCost = game.getBattlefield().getActivePermanents(filter, abilityToModify.getControllerId(), game).size();
+        int additionalCost = game.getBattlefield().getAllActivePermanents(new FilterArtifactPermanent(), abilityToModify.getControllerId(), game).size();
         if (additionalCost > 0) {
             CardUtil.increaseCost(abilityToModify, additionalCost);
         }
