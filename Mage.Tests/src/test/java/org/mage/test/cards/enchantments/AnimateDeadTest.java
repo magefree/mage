@@ -121,4 +121,37 @@ public class AnimateDeadTest extends CardTestPlayerBase {
         assertGraveyardCount(playerA, "Animate Dead", 1);
         assertPermanentCount(playerA, "Animate Dead", 0);
     }
+
+    /**
+     * Animate Dead is incorrectly not entering the graveyard when the animated
+     * target is sacrificed.
+     */
+    @Test
+    public void testAnimateAndSacrificeTarget() {
+        // Target opponent sacrifices a creature.
+        addCard(Zone.HAND, playerB, "Cruel Edict"); // {1}{B}
+        addCard(Zone.BATTLEFIELD, playerB, "Swamp", 2);
+        addCard(Zone.GRAVEYARD, playerB, "Silvercoat Lion", 1);
+
+        addCard(Zone.BATTLEFIELD, playerA, "Swamp", 2);
+        // Enchant creature card in a graveyard
+        // When Animate Dead enters the battlefield, if it's on the battlefield, it loses "enchant creature card in a graveyard"
+        // and gains "enchant creature put onto the battlefield with Animate Dead." Return enchanted creature card to the battlefield
+        // under your control and attach Animate Dead to it. When Animate Dead leaves the battlefield, that creature's controller sacrifices it.
+        // Enchanted creature gets -1/-0.
+        addCard(Zone.HAND, playerA, "Animate Dead"); // {1}{B}
+
+        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Animate Dead", "Silvercoat Lion");
+
+        castSpell(2, PhaseStep.PRECOMBAT_MAIN, playerB, "Cruel Edict", playerA);
+
+        setStopAt(2, PhaseStep.BEGIN_COMBAT);
+        execute();
+
+        assertGraveyardCount(playerB, "Cruel Edict", 1);
+        assertGraveyardCount(playerB, "Silvercoat Lion", 1);
+
+        assertGraveyardCount(playerA, "Animate Dead", 1);
+    }
+
 }
