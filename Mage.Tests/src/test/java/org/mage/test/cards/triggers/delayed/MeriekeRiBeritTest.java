@@ -25,51 +25,45 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.abilities.effects.common;
+package org.mage.test.cards.triggers.delayed;
 
-import mage.abilities.Ability;
-import mage.abilities.Mode;
-import mage.abilities.SpecialAction;
-import mage.abilities.effects.OneShotEffect;
-import mage.constants.Outcome;
-import mage.game.Game;
+import mage.constants.PhaseStep;
+import mage.constants.Zone;
+import org.junit.Test;
+import org.mage.test.serverside.base.CardTestPlayerBase;
 
 /**
  *
- * @author BetaSteward_at_googlemail.com
+ * @author LevelX2
  */
-public class CreateSpecialActionEffect extends OneShotEffect {
+public class MeriekeRiBeritTest extends CardTestPlayerBase {
 
-    protected SpecialAction action;
+    /**
+     * Opponent-controlled Merieke Ri Berit, and it had stolen a creature of
+     * mine. When I killed Merieke, I got my creature back instead of it being
+     * destroyed.
+     */
+    @Test
+    public void testCreatureWasDestroyed() {
+        addCard(Zone.HAND, playerA, "Lightning Bolt", 1);
+        addCard(Zone.BATTLEFIELD, playerA, "Mountain", 1);
+        addCard(Zone.BATTLEFIELD, playerA, "Silvercoat Lion", 1);
 
-    public CreateSpecialActionEffect(SpecialAction action) {
-        super(action.getEffects().isEmpty() ? Outcome.Detriment : action.getEffects().get(0).getOutcome());
-        this.action = action;
-    }
+        // Merieke Ri Berit doesn't untap during your untap step.
+        // {T}: Gain control of target creature for as long as you control Merieke Ri Berit. When Merieke Ri Berit leaves the battlefield or becomes untapped, destroy that creature. It can't be regenerated.
+        addCard(Zone.BATTLEFIELD, playerB, "Merieke Ri Berit", 1); // Creature 1/1
 
-    public CreateSpecialActionEffect(final CreateSpecialActionEffect effect) {
-        super(effect);
-        this.action = (SpecialAction) effect.action.copy();
-    }
+        activateAbility(2, PhaseStep.PRECOMBAT_MAIN, playerB, "{T}: Gain control", "Silvercoat Lion");
 
-    @Override
-    public CreateSpecialActionEffect copy() {
-        return new CreateSpecialActionEffect(this);
-    }
+        castSpell(2, PhaseStep.POSTCOMBAT_MAIN, playerA, "Lightning Bolt", "Merieke Ri Berit");
 
-    @Override
-    public boolean apply(Game game, Ability source) {
-        SpecialAction newAction = (SpecialAction) action.copy();
-        newAction.setSourceId(source.getSourceId());
-        newAction.setControllerId(source.getControllerId());
-        newAction.getTargets().addAll(source.getTargets());
-        game.getState().getSpecialActions().add(newAction);
-        return true;
-    }
+        setStopAt(2, PhaseStep.END_TURN);
+        execute();
 
-    @Override
-    public String getText(Mode mode) {
-        return action.getRule();
+        assertGraveyardCount(playerA, "Lightning Bolt", 1);
+        assertGraveyardCount(playerB, "Merieke Ri Berit", 1);
+        assertPermanentCount(playerA, "Silvercoat Lion", 0);
+        assertGraveyardCount(playerA, "Silvercoat Lion", 1);
     }
 
 }

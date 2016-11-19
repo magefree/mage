@@ -131,10 +131,10 @@ public class AlternativeCostSourceAbility extends StaticAbility implements Alter
 
     @Override
     public boolean isAvailable(Ability source, Game game) {
-        if (condition != null) {
-            return condition.apply(game, source);
-        }
-        return true;
+        boolean conditionApplies = condition == null || condition.apply(game, source);
+        boolean filterApplies = filter == null || filter.match(game.getCard(source.getSourceId()), game);
+
+        return conditionApplies && filterApplies;
     }
 
     @Override

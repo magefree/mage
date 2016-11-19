@@ -544,11 +544,10 @@ public class GameState implements Serializable, Copyable<GameState> {
     // 608.2e
     public void processAction(Game game) {
         game.getState().handleSimultaneousEvent(game);
-        applyEffects(game);
+        game.applyEffects();
     }
 
     public void applyEffects(Game game) {
-        game.resetShortLivingLKI();
         for (Player player : players.values()) {
             player.reset();
         }
@@ -563,13 +562,13 @@ public class GameState implements Serializable, Copyable<GameState> {
     public void removeEocEffects(Game game) {
         effects.removeEndOfCombatEffects();
         delayed.removeEndOfCombatAbilities();
-        applyEffects(game);
+        game.applyEffects();
     }
 
     public void removeEotEffects(Game game) {
         effects.removeEndOfTurnEffects();
         delayed.removeEndOfTurnAbilities();
-        applyEffects(game);
+        game.applyEffects();
     }
 
     public void addEffect(ContinuousEffect effect, Ability source) {

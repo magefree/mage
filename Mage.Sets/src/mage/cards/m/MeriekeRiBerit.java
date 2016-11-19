@@ -37,9 +37,9 @@ import mage.abilities.condition.common.SourceOnBattlefieldControlUnchangedCondit
 import mage.abilities.costs.common.TapSourceCost;
 import mage.abilities.decorator.ConditionalContinuousEffect;
 import mage.abilities.effects.OneShotEffect;
+import mage.abilities.effects.common.DestroyTargetEffect;
 import mage.abilities.effects.common.DontUntapInControllersUntapStepSourceEffect;
 import mage.abilities.effects.common.continuous.GainControlTargetEffect;
-import mage.abilities.effects.common.DestroyTargetEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
@@ -62,7 +62,7 @@ import mage.target.targetpointer.FixedTarget;
 public class MeriekeRiBerit extends CardImpl {
 
     public MeriekeRiBerit(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{W}{U}{B}");
+        super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{W}{U}{B}");
         this.supertype.add("Legendary");
         this.subtype.add("Human");
         this.power = new MageInt(1);
@@ -97,7 +97,7 @@ class MeriekeRiBeritCreateDelayedTriggerEffect extends OneShotEffect {
 
     public MeriekeRiBeritCreateDelayedTriggerEffect() {
         super(Outcome.Detriment);
-        this.staticText = "When {this} leaves the battlefield or becomes untapped, destroy that creature.  It can't be regenerated.";
+        this.staticText = "When {this} leaves the battlefield or becomes untapped, destroy that creature. It can't be regenerated";
     }
 
     public MeriekeRiBeritCreateDelayedTriggerEffect(final MeriekeRiBeritCreateDelayedTriggerEffect effect) {
@@ -114,12 +114,8 @@ class MeriekeRiBeritCreateDelayedTriggerEffect extends OneShotEffect {
         Permanent controlledCreature = game.getPermanent(source.getFirstTarget());
         if (controlledCreature != null) {
             DelayedTriggeredAbility delayedAbility = new MeriekeRiBeritDelayedTriggeredAbility();
-            delayedAbility.getEffects().get(0).setTargetPointer(new FixedTarget(controlledCreature.getId()));
-            delayedAbility.setSourceId(source.getSourceId());
-            delayedAbility.setControllerId(source.getControllerId());
-            delayedAbility.setSourceObject(source.getSourceObject(game), game);
-            delayedAbility.init(game);
-            game.addDelayedTriggeredAbility(delayedAbility);
+            delayedAbility.getEffects().get(0).setTargetPointer(new FixedTarget(controlledCreature, game));
+            game.addDelayedTriggeredAbility(delayedAbility, source);
             return true;
         }
         return false;
@@ -129,7 +125,7 @@ class MeriekeRiBeritCreateDelayedTriggerEffect extends OneShotEffect {
 class MeriekeRiBeritDelayedTriggeredAbility extends DelayedTriggeredAbility {
 
     MeriekeRiBeritDelayedTriggeredAbility() {
-        super(new DestroyTargetEffect(true), Duration.EndOfGame, true);
+        super(new DestroyTargetEffect(true), Duration.Custom, true);
     }
 
     MeriekeRiBeritDelayedTriggeredAbility(MeriekeRiBeritDelayedTriggeredAbility ability) {
@@ -143,8 +139,14 @@ class MeriekeRiBeritDelayedTriggeredAbility extends DelayedTriggeredAbility {
     }
 
     @Override
+    public boolean isInactive(Game game) {
+        return getSourceObjectIfItStillExists(game) == null
+                && game.getLastKnownInformation(getSourceId(), Zone.BATTLEFIELD, getSourceObjectZoneChangeCounter()) == null;
+    }
+
+    @Override
     public boolean checkTrigger(GameEvent event, Game game) {
-        if (event.getSourceId() != null) {
+        if (event.getTargetId() != null) {
             if (GameEvent.EventType.ZONE_CHANGE.equals(event.getType())
                     && event.getTargetId().equals(getSourceId())) {
                 ZoneChangeEvent zEvent = (ZoneChangeEvent) event;

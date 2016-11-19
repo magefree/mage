@@ -115,6 +115,7 @@ public class Mirrodin extends ExpansionSet {
         cards.add(new SetCardInfo("Groffskithur", 121, Rarity.COMMON, mage.cards.g.Groffskithur.class));
         cards.add(new SetCardInfo("Heartwood Shard", 184, Rarity.UNCOMMON, mage.cards.h.HeartwoodShard.class));
         cards.add(new SetCardInfo("Hematite Golem", 185, Rarity.COMMON, mage.cards.h.HematiteGolem.class));
+        cards.add(new SetCardInfo("Hum of the Radix", 122, Rarity.RARE, mage.cards.h.HumOfTheRadix.class));
         cards.add(new SetCardInfo("Icy Manipulator", 186, Rarity.UNCOMMON, mage.cards.i.IcyManipulator.class));
         cards.add(new SetCardInfo("Incite War", 96, Rarity.COMMON, mage.cards.i.InciteWar.class));
         cards.add(new SetCardInfo("Inertia Bubble", 37, Rarity.COMMON, mage.cards.i.InertiaBubble.class));

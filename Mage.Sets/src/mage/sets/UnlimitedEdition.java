@@ -109,6 +109,7 @@ public class UnlimitedEdition extends ExpansionSet {
         cards.add(new SetCardInfo("Fork", 153, Rarity.RARE, mage.cards.f.Fork.class));
         cards.add(new SetCardInfo("Frozen Shade", 18, Rarity.COMMON, mage.cards.f.FrozenShade.class));
         cards.add(new SetCardInfo("Fungusaur", 104, Rarity.RARE, mage.cards.f.Fungusaur.class));
+        cards.add(new SetCardInfo("Gaea's Liege", 105, Rarity.RARE, mage.cards.g.GaeasLiege.class));
         cards.add(new SetCardInfo("Gauntlet of Might", 245, Rarity.RARE, mage.cards.g.GauntletOfMight.class));
         cards.add(new SetCardInfo("Giant Growth", 106, Rarity.COMMON, mage.cards.g.GiantGrowth.class));
         cards.add(new SetCardInfo("Giant Spider", 107, Rarity.COMMON, mage.cards.g.GiantSpider.class));
@@ -142,6 +143,7 @@ public class UnlimitedEdition extends ExpansionSet {
         cards.add(new SetCardInfo("Island Sanctuary", 210, Rarity.RARE, mage.cards.i.IslandSanctuary.class));
         cards.add(new SetCardInfo("Ivory Cup", 252, Rarity.UNCOMMON, mage.cards.i.IvoryCup.class));
         cards.add(new SetCardInfo("Jade Monolith", 253, Rarity.RARE, mage.cards.j.JadeMonolith.class));
+        cards.add(new SetCardInfo("Jade Statue", 254, Rarity.UNCOMMON, mage.cards.j.JadeStatue.class));
         cards.add(new SetCardInfo("Jayemdae Tome", 255, Rarity.RARE, mage.cards.j.JayemdaeTome.class));
         cards.add(new SetCardInfo("Juggernaut", 256, Rarity.UNCOMMON, mage.cards.j.Juggernaut.class));
         cards.add(new SetCardInfo("Jump", 61, Rarity.COMMON, mage.cards.j.Jump.class));

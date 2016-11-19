@@ -146,7 +146,6 @@ public class BoostControlledEffect extends ContinuousEffectImpl {
                     perm.addToughness(toughness.calculate(game, source, this));
                 }
             }
-
         }
         return true;
     }

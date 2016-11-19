@@ -25,51 +25,39 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.abilities.effects.common;
+package mage.cards.m;
 
+import java.util.UUID;
 import mage.abilities.Ability;
-import mage.abilities.Mode;
-import mage.abilities.SpecialAction;
-import mage.abilities.effects.OneShotEffect;
-import mage.constants.Outcome;
-import mage.game.Game;
+import mage.abilities.common.PutIntoGraveFromBattlefieldAllTriggeredAbility;
+import mage.abilities.effects.common.PutOnLibraryTargetEffect;
+import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
+import mage.constants.CardType;
+import mage.filter.common.FilterCreaturePermanent;
 
 /**
  *
- * @author BetaSteward_at_googlemail.com
+ * @author HCrescent
  */
-public class CreateSpecialActionEffect extends OneShotEffect {
+public class Mortuary extends CardImpl {
+    
+    private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("creature");
 
-    protected SpecialAction action;
-
-    public CreateSpecialActionEffect(SpecialAction action) {
-        super(action.getEffects().isEmpty() ? Outcome.Detriment : action.getEffects().get(0).getOutcome());
-        this.action = action;
+    public Mortuary(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId, setInfo, new CardType[]{CardType.ENCHANTMENT}, "{3}{B}");
+        
+        Ability ability = new PutIntoGraveFromBattlefieldAllTriggeredAbility(new PutOnLibraryTargetEffect(true, "put that card on top of your library."), false, filter, true, true);
+        // Whenever a creature is put into your graveyard from the battlefield, put that card on top of your library.
+        this.addAbility(ability);
     }
 
-    public CreateSpecialActionEffect(final CreateSpecialActionEffect effect) {
-        super(effect);
-        this.action = (SpecialAction) effect.action.copy();
-    }
-
-    @Override
-    public CreateSpecialActionEffect copy() {
-        return new CreateSpecialActionEffect(this);
+    public Mortuary(final Mortuary card) {
+        super(card);
     }
 
     @Override
-    public boolean apply(Game game, Ability source) {
-        SpecialAction newAction = (SpecialAction) action.copy();
-        newAction.setSourceId(source.getSourceId());
-        newAction.setControllerId(source.getControllerId());
-        newAction.getTargets().addAll(source.getTargets());
-        game.getState().getSpecialActions().add(newAction);
-        return true;
+    public Mortuary copy() {
+        return new Mortuary(this);
     }
-
-    @Override
-    public String getText(Mode mode) {
-        return action.getRule();
-    }
-
 }

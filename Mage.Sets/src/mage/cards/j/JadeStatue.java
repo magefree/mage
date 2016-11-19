@@ -25,51 +25,53 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.abilities.effects.common;
+package mage.cards.j;
 
-import mage.abilities.Ability;
-import mage.abilities.Mode;
-import mage.abilities.SpecialAction;
-import mage.abilities.effects.OneShotEffect;
-import mage.constants.Outcome;
-import mage.game.Game;
+import java.util.UUID;
+import mage.MageInt;
+import mage.abilities.condition.common.IsPhaseCondition;
+import mage.abilities.costs.mana.ManaCostsImpl;
+import mage.abilities.decorator.ConditionalActivatedAbility;
+import mage.abilities.effects.common.continuous.BecomesCreatureSourceEffect;
+import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
+import mage.constants.CardType;
+import mage.constants.Duration;
+import mage.constants.TurnPhase;
+import mage.constants.Zone;
+import mage.game.permanent.token.Token;
 
 /**
  *
- * @author BetaSteward_at_googlemail.com
+ * @author anonymous
  */
-public class CreateSpecialActionEffect extends OneShotEffect {
+public class JadeStatue extends CardImpl {
 
-    protected SpecialAction action;
+    public JadeStatue(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId, setInfo, new CardType[]{CardType.ARTIFACT}, "{4}");
+        
 
-    public CreateSpecialActionEffect(SpecialAction action) {
-        super(action.getEffects().isEmpty() ? Outcome.Detriment : action.getEffects().get(0).getOutcome());
-        this.action = action;
+        // {2}: Jade Statue becomes a 3/6 Golem artifact creature until end of combat. Activate this ability only during combat.
+        this.addAbility(new ConditionalActivatedAbility(Zone.BATTLEFIELD, new BecomesCreatureSourceEffect (new JadeStatueToken(), "", Duration.EndOfCombat), new ManaCostsImpl("{2}"), new IsPhaseCondition(TurnPhase.COMBAT), "{this} becomes a 3/6 Golem artifact creature until end of combat. Activate this ability only during combat."));
     }
 
-    public CreateSpecialActionEffect(final CreateSpecialActionEffect effect) {
-        super(effect);
-        this.action = (SpecialAction) effect.action.copy();
-    }
-
-    @Override
-    public CreateSpecialActionEffect copy() {
-        return new CreateSpecialActionEffect(this);
+    public JadeStatue(final JadeStatue card) {
+        super(card);
     }
 
     @Override
-    public boolean apply(Game game, Ability source) {
-        SpecialAction newAction = (SpecialAction) action.copy();
-        newAction.setSourceId(source.getSourceId());
-        newAction.setControllerId(source.getControllerId());
-        newAction.getTargets().addAll(source.getTargets());
-        game.getState().getSpecialActions().add(newAction);
-        return true;
+    public JadeStatue copy() {
+        return new JadeStatue(this);
     }
-
-    @Override
-    public String getText(Mode mode) {
-        return action.getRule();
+    
+    private class JadeStatueToken extends Token {
+        JadeStatueToken() {
+            super("", "3/6 Golem artifact creature");
+            cardType.add(CardType.ARTIFACT);
+            cardType.add(CardType.CREATURE);
+            this.subtype.add("Golem");
+            power = new MageInt(3);
+            toughness = new MageInt(6);
+	}
     }
-
 }

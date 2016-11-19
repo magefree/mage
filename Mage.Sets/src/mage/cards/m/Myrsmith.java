@@ -28,8 +28,6 @@
 package mage.cards.m;
 
 import java.util.UUID;
-
-import mage.constants.CardType;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.SpellCastControllerTriggeredAbility;
@@ -38,6 +36,7 @@ import mage.abilities.costs.mana.GenericManaCost;
 import mage.abilities.effects.common.CreateTokenEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
+import mage.constants.CardType;
 import mage.filter.common.FilterArtifactSpell;
 import mage.game.Game;
 import mage.game.permanent.token.MyrToken;
@@ -47,19 +46,21 @@ import mage.game.permanent.token.MyrToken;
  * @author Loki, North
  */
 public class Myrsmith extends CardImpl {
-    public Myrsmith (UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{1}{W}");
+
+    public Myrsmith(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{1}{W}");
         this.subtype.add("Human");
         this.subtype.add("Artificer");
 
         this.power = new MageInt(2);
         this.toughness = new MageInt(1);
 
+        // Whenever you cast an artifact spell, you may pay {1}. If you do, put a 1/1 colorless Myr artifact creature token onto the battlefield.
         FilterArtifactSpell filter = new FilterArtifactSpell("an artifact spell");
         this.addAbility(new SpellCastControllerTriggeredAbility(new MyrsmithEffect(), filter, false));
     }
 
-    public Myrsmith (final Myrsmith card) {
+    public Myrsmith(final Myrsmith card) {
         super(card);
     }
 
@@ -70,6 +71,7 @@ public class Myrsmith extends CardImpl {
 }
 
 class MyrsmithEffect extends CreateTokenEffect {
+
     public MyrsmithEffect() {
         super(new MyrToken());
         staticText = "you may pay {1}. If you do, create a 1/1 colorless Myr artifact creature token";

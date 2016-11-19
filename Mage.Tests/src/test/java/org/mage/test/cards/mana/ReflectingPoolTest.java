@@ -54,6 +54,7 @@ public class ReflectingPoolTest extends CardTestPlayerBase {
         addCard(Zone.HAND, playerA, "Crumbling Vestige", 1);
 
         playLand(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Crumbling Vestige");
+        setChoice(playerA, "Red");
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Lightning Bolt", playerB);
 
         setStopAt(1, PhaseStep.BEGIN_COMBAT);

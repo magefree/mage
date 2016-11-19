@@ -98,7 +98,7 @@ class MyriadEffect extends OneShotEffect {
             }
             List<Permanent> tokens = new ArrayList<>();
             for (UUID playerId : game.getState().getPlayersInRange(controller.getId(), game)) {
-                if (playerId != defendingPlayerId && controller.hasOpponent(playerId, game)) {
+                if (!playerId.equals(defendingPlayerId) && controller.hasOpponent(playerId, game)) {
                     Player opponent = game.getPlayer(playerId);
                     if (opponent != null && controller.chooseUse(Outcome.PutCreatureInPlay,
                             "Put a copy of " + sourceObject.getIdName() + " onto battlefield attacking " + opponent.getName() + "?", source, game)) {
