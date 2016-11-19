@@ -1059,7 +1059,14 @@ public class HumanPlayer extends PlayerImpl {
                 }
             }
             if (chooseTarget(Outcome.Damage, target, null, game)) {
-                declareAttacker(attackerId, response.getUUID(), game, true);
+                UUID defenderId = response.getUUID();
+                for (Player player : game.getPlayers().values()) {
+                    if (player.getId().equals(response.getUUID())) {
+                        defenderId = player.getId(); // get the correct player object
+                        break;
+                    }
+                }
+                declareAttacker(attackerId, defenderId, game, true);
                 return true;
             }
         }
