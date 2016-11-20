@@ -58,6 +58,7 @@ public class MatchOptions implements Serializable {
     protected SkillLevel skillLevel;
     protected boolean rollbackTurnsAllowed;
     protected int quitRatio;
+    protected int edhPowerLevel;
     protected boolean rated;
     protected int numSeatsForMatch;
 
@@ -207,6 +208,14 @@ public class MatchOptions implements Serializable {
 
     public void setQuitRatio(int quitRatio) {
         this.quitRatio = quitRatio;
+    }
+    
+    public int getEdhPowerLevel() {
+        return edhPowerLevel;
+    }
+
+    public void setEdhPowerLevel(int edhPowerLevel) {
+        this.edhPowerLevel = edhPowerLevel;
     }
 
     public boolean isRated() {
