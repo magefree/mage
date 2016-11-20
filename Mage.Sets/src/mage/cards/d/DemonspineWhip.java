@@ -27,6 +27,7 @@
  */
 package mage.cards.d;
 
+import java.util.UUID;
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.costs.mana.GenericManaCost;
@@ -41,8 +42,6 @@ import mage.cards.CardSetInfo;
 import mage.constants.*;
 import mage.game.Game;
 
-import java.util.UUID;
-
 /**
  *
  * @author jeffwadsworth
@@ -50,11 +49,8 @@ import java.util.UUID;
 public class DemonspineWhip extends CardImpl {
 
     public DemonspineWhip(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.ARTIFACT},"{B}{R}");
+        super(ownerId, setInfo, new CardType[]{CardType.ARTIFACT}, "{B}{R}");
         this.subtype.add("Equipment");
-
-
-        
 
         // {X}: Equipped creature gets +X/+0 until end of turn.
         this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new BoostEquippedEffect(new XPaid(), new StaticValue(0), Duration.EndOfTurn), new ManaCostsImpl("{X}")));
@@ -88,7 +84,7 @@ class XPaid implements DynamicValue {
 
     @Override
     public String getMessage() {
-        return "X paid";
+        return "";
     }
 
     @Override
