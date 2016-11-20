@@ -98,7 +98,7 @@ class SanguinePraetorEffect extends OneShotEffect {
             }
         }
 
-        for (Permanent permanent : game.getBattlefield().getAllActivePermanents(new FilterCreaturePermanent(), source.getControllerId(), game)) {
+        for (Permanent permanent : game.getBattlefield().getAllActivePermanents(new FilterCreaturePermanent(), game)) {
             if (permanent.getConvertedManaCost() == cmc) {
                 permanent.destroy(source.getSourceId(), game, false);
             }
