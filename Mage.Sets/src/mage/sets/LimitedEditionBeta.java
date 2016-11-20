@@ -272,6 +272,7 @@ public class LimitedEditionBeta extends ExpansionSet {
         cards.add(new SetCardInfo("Uthden Troll", 182, Rarity.UNCOMMON, mage.cards.u.UthdenTroll.class));
         cards.add(new SetCardInfo("Verduran Enchantress", 131, Rarity.RARE, mage.cards.v.VerduranEnchantress.class));
         cards.add(new SetCardInfo("Vesuvan Doppelganger", 88, Rarity.RARE, mage.cards.v.VesuvanDoppelganger.class));
+        cards.add(new SetCardInfo("Veteran Bodyguard", 227, Rarity.RARE, mage.cards.v.VeteranBodyguard.class));
         cards.add(new SetCardInfo("Volcanic Eruption", 89, Rarity.RARE, mage.cards.v.VolcanicEruption.class));
         cards.add(new SetCardInfo("Volcanic Island", 302, Rarity.RARE, mage.cards.v.VolcanicIsland.class));
         cards.add(new SetCardInfo("Wall of Air", 90, Rarity.UNCOMMON, mage.cards.w.WallOfAir.class));
