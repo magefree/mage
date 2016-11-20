@@ -50,8 +50,8 @@ import mage.target.common.TargetControlledCreaturePermanent;
  * @author escplan9 (Derek Monturo - dmontur1 at gmail dot com)
  */
 public class GravespawnSovereign extends CardImpl {
-    
-    private static final FilterControlledCreaturePermanent filter = new FilterControlledCreaturePermanent("untapped Vampires you control");
+
+    private static final FilterControlledCreaturePermanent filter = new FilterControlledCreaturePermanent("untapped Zombies you control");
 
     static {
         filter.add(new SubtypePredicate("Zombie"));
@@ -59,7 +59,7 @@ public class GravespawnSovereign extends CardImpl {
     }
 
     public GravespawnSovereign(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{4}{B}{B}");
+        super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{4}{B}{B}");
         this.subtype.add("Zombie");
         this.power = new MageInt(3);
         this.toughness = new MageInt(3);
@@ -68,7 +68,7 @@ public class GravespawnSovereign extends CardImpl {
         Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new ReturnFromGraveyardToBattlefieldTargetEffect(), new TapTargetCost(new TargetControlledCreaturePermanent(5, 5, filter, true)));
         ability.addTarget(new TargetCardInGraveyard(new FilterCreatureCard("creature card from a graveyard")));
         this.addAbility(ability);
-        
+
     }
 
     public GravespawnSovereign(final GravespawnSovereign card) {
