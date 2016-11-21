@@ -193,7 +193,9 @@ class GontiLordOfLuxuryCastFromExileEffect extends AsThoughEffectImpl {
             this.discard();
         } else if (objectId.equals(targetId)
                 && affectedControllerId.equals(source.getControllerId())) {
-            return true;
+            Card card = game.getCard(objectId);
+            // TODO: Allow to cast Zoetic Cavern face down
+            return card != null && !card.getCardType().contains(CardType.LAND);
         }
         return false;
     }
