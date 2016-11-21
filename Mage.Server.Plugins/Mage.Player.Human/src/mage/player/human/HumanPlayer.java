@@ -584,98 +584,106 @@ public class HumanPlayer extends PlayerImpl {
     public boolean priority(Game game) {
         passed = false;
         if (!abort) {
+            HumanPlayer controllingPlayer = this;
+            if (isGameUnderControl()) {
+                Player player = game.getPlayer(getTurnControlledBy());
+                if (player instanceof HumanPlayer) {
+                    controllingPlayer = (HumanPlayer) player;
+                }
+            }
             if (getJustActivatedType() != null && !holdingPriority) {
-                if (userData.isPassPriorityCast() && getJustActivatedType().equals(AbilityType.SPELL)) {
+                if (controllingPlayer.getUserData().isPassPriorityCast() && getJustActivatedType().equals(AbilityType.SPELL)) {
                     setJustActivatedType(null);
                     pass(game);
                     return false;
                 }
-                if (userData.isPassPriorityActivation() && getJustActivatedType().equals(AbilityType.ACTIVATED)) {
+                if (controllingPlayer.getUserData().isPassPriorityActivation() && getJustActivatedType().equals(AbilityType.ACTIVATED)) {
                     setJustActivatedType(null);
                     pass(game);
                     return false;
                 }
             }
-
-            if (passedAllTurns || passedTurnSkipStack) {
-                if (passWithManaPoolCheck(game)) {
-                    return false;
-                }
-            }
-            if (passedUntilEndStepBeforeMyTurn) {
-
-                if (!game.getTurn().getStepType().equals(PhaseStep.END_TURN)) {
+            if (isGameUnderControl()) { // Use the skip actions only if the player itself controls its turn
+                if (passedAllTurns || passedTurnSkipStack) {
                     if (passWithManaPoolCheck(game)) {
                         return false;
                     }
-                } else {
-                    PlayerList playerList = game.getState().getPlayerList(playerId);
-                    if (!playerList.getPrevious().equals(game.getActivePlayerId())) {
+                }
+                if (passedUntilEndStepBeforeMyTurn) {
+
+                    if (!game.getTurn().getStepType().equals(PhaseStep.END_TURN)) {
                         if (passWithManaPoolCheck(game)) {
                             return false;
                         }
-                    }
-                }
-            }
-            if (game.getStack().isEmpty()) {
-                passedUntilStackResolved = false;
-                boolean dontCheckPassStep = false;
-                if (passedTurn || passedTurnSkipStack) {
-                    if (passWithManaPoolCheck(game)) {
-                        return false;
-                    }
-                }
-                if (passedUntilNextMain) {
-                    if (game.getTurn().getStepType().equals(PhaseStep.POSTCOMBAT_MAIN) || game.getTurn().getStepType().equals(PhaseStep.PRECOMBAT_MAIN)) {
-                        // it's a main phase
-                        if (!skippedAtLeastOnce || (!playerId.equals(game.getActivePlayerId()) && !this.getUserData().getUserSkipPrioritySteps().isStopOnAllMainPhases())) {
-                            skippedAtLeastOnce = true;
+                    } else {
+                        PlayerList playerList = game.getState().getPlayerList(playerId);
+                        if (!playerList.getPrevious().equals(game.getActivePlayerId())) {
                             if (passWithManaPoolCheck(game)) {
                                 return false;
                             }
-                        } else {
-                            dontCheckPassStep = true;
-                            passedUntilNextMain = false; // reset skip action
-                        }
-                    } else {
-                        skippedAtLeastOnce = true;
-                        if (passWithManaPoolCheck(game)) {
-                            return false;
                         }
                     }
                 }
-                if (passedUntilEndOfTurn) {
-                    if (game.getTurn().getStepType().equals(PhaseStep.END_TURN)) {
-                        // It's end of turn phase
-                        if (!skippedAtLeastOnce || (playerId.equals(game.getActivePlayerId()) && !this.getUserData().getUserSkipPrioritySteps().isStopOnAllEndPhases())) {
-                            skippedAtLeastOnce = true;
-                            if (passWithManaPoolCheck(game)) {
-                                return false;
-                            }
-                        } else {
-                            dontCheckPassStep = true;
-                            passedUntilEndOfTurn = false;
-                        }
-                    } else {
-                        skippedAtLeastOnce = true;
-                        if (passWithManaPoolCheck(game)) {
-                            return false;
-                        }
-                    }
-                }
-                if (!dontCheckPassStep && checkPassStep(game)) {
-                    if (passWithManaPoolCheck(game)) {
-                        return false;
-                    }
-                }
-            } else if (passedUntilStackResolved) {
-                if (dateLastAddedToStack == game.getStack().getDateLastAdded()) {
-                    dateLastAddedToStack = game.getStack().getDateLastAdded();
-                    if (passWithManaPoolCheck(game)) {
-                        return false;
-                    }
-                } else {
+                if (game.getStack().isEmpty()) {
                     passedUntilStackResolved = false;
+                    boolean dontCheckPassStep = false;
+                    if (passedTurn || passedTurnSkipStack) {
+                        if (passWithManaPoolCheck(game)) {
+                            return false;
+                        }
+                    }
+                    if (passedUntilNextMain) {
+                        if (game.getTurn().getStepType().equals(PhaseStep.POSTCOMBAT_MAIN) || game.getTurn().getStepType().equals(PhaseStep.PRECOMBAT_MAIN)) {
+                            // it's a main phase
+                            if (!skippedAtLeastOnce || (!playerId.equals(game.getActivePlayerId()) && !this.getUserData().getUserSkipPrioritySteps().isStopOnAllMainPhases())) {
+                                skippedAtLeastOnce = true;
+                                if (passWithManaPoolCheck(game)) {
+                                    return false;
+                                }
+                            } else {
+                                dontCheckPassStep = true;
+                                passedUntilNextMain = false; // reset skip action
+                            }
+                        } else {
+                            skippedAtLeastOnce = true;
+                            if (passWithManaPoolCheck(game)) {
+                                return false;
+                            }
+                        }
+                    }
+                    if (passedUntilEndOfTurn) {
+                        if (game.getTurn().getStepType().equals(PhaseStep.END_TURN)) {
+                            // It's end of turn phase
+                            if (!skippedAtLeastOnce || (playerId.equals(game.getActivePlayerId()) && !this.getUserData().getUserSkipPrioritySteps().isStopOnAllEndPhases())) {
+                                skippedAtLeastOnce = true;
+                                if (passWithManaPoolCheck(game)) {
+                                    return false;
+                                }
+                            } else {
+                                dontCheckPassStep = true;
+                                passedUntilEndOfTurn = false;
+                            }
+                        } else {
+                            skippedAtLeastOnce = true;
+                            if (passWithManaPoolCheck(game)) {
+                                return false;
+                            }
+                        }
+                    }
+                    if (!dontCheckPassStep && checkPassStep(game, controllingPlayer)) {
+                        if (passWithManaPoolCheck(game)) {
+                            return false;
+                        }
+                    }
+                } else if (passedUntilStackResolved) {
+                    if (dateLastAddedToStack == game.getStack().getDateLastAdded()) {
+                        dateLastAddedToStack = game.getStack().getDateLastAdded();
+                        if (passWithManaPoolCheck(game)) {
+                            return false;
+                        }
+                    } else {
+                        passedUntilStackResolved = false;
+                    }
                 }
             }
             while (canRespond()) {
@@ -734,12 +742,13 @@ public class HumanPlayer extends PlayerImpl {
         return false;
     }
 
-    private boolean checkPassStep(Game game) {
+    private boolean checkPassStep(Game game, HumanPlayer controllingPlayer) {
         try {
+
             if (playerId.equals(game.getActivePlayerId())) {
-                return !this.getUserData().getUserSkipPrioritySteps().getYourTurn().isPhaseStepSet(game.getStep().getType());
+                return !controllingPlayer.getUserData().getUserSkipPrioritySteps().getYourTurn().isPhaseStepSet(game.getStep().getType());
             } else {
-                return !this.getUserData().getUserSkipPrioritySteps().getOpponentTurn().isPhaseStepSet(game.getStep().getType());
+                return !controllingPlayer.getUserData().getUserSkipPrioritySteps().getOpponentTurn().isPhaseStepSet(game.getStep().getType());
             }
         } catch (NullPointerException ex) {
             logger.error("null pointer exception  UserData = " + userData == null ? "null" : "not null");
