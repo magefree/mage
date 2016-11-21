@@ -656,7 +656,9 @@ public abstract class CardImpl extends MageObjectImpl implements Card {
     @Override
     public void removeCounters(String name, int amount, Game game) {
         for (int i = 0; i < amount; i++) {
-            getCounters(game).removeCounter(name, 1);
+            if (!getCounters(game).removeCounter(name, 1)) {
+                break;
+            }
             GameEvent event = GameEvent.getEvent(GameEvent.EventType.COUNTER_REMOVED, objectId, getControllerOrOwner());
             event.setData(name);
             game.fireEvent(event);
