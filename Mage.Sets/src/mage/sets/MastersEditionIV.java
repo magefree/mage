@@ -272,6 +272,7 @@ public class MastersEditionIV extends ExpansionSet {
         cards.add(new SetCardInfo("Urza's Miter", 237, Rarity.RARE, mage.cards.u.UrzasMiter.class));
         cards.add(new SetCardInfo("Urza's Power Plant", 258, Rarity.LAND, mage.cards.u.UrzasPowerPlant.class));
         cards.add(new SetCardInfo("Urza's Tower", 259, Rarity.LAND, mage.cards.u.UrzasTower.class));
+        cards.add(new SetCardInfo("Veteran Bodyguard", 32, Rarity.RARE, mage.cards.v.VeteranBodyguard.class));
         cards.add(new SetCardInfo("Volcanic Island", 260, Rarity.RARE, mage.cards.v.VolcanicIsland.class));
         cards.add(new SetCardInfo("War Mammoth", 172, Rarity.COMMON, mage.cards.w.WarMammoth.class));
         cards.add(new SetCardInfo("Warp Artifact", 100, Rarity.COMMON, mage.cards.w.WarpArtifact.class));
