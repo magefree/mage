@@ -163,6 +163,7 @@ public class PlanarChaos extends ExpansionSet {
         cards.add(new SetCardInfo("Reflex Sliver", 138, Rarity.COMMON, mage.cards.r.ReflexSliver.class));
         cards.add(new SetCardInfo("Revered Dead", 29, Rarity.COMMON, mage.cards.r.ReveredDead.class));
         cards.add(new SetCardInfo("Ridged Kusite", 78, Rarity.COMMON, mage.cards.r.RidgedKusite.class));
+        cards.add(new SetCardInfo("Riftmarked Knight", 14, Rarity.UNCOMMON, mage.cards.r.RiftmarkedKnight.class));
         cards.add(new SetCardInfo("Riptide Pilferer", 60, Rarity.UNCOMMON, mage.cards.r.RiptidePilferer.class));
         cards.add(new SetCardInfo("Roiling Horror", 79, Rarity.RARE, mage.cards.r.RoilingHorror.class));
         cards.add(new SetCardInfo("Rough // Tumble", 114, Rarity.UNCOMMON, mage.cards.r.RoughTumble.class));
