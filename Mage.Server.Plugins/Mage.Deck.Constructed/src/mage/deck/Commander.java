@@ -232,6 +232,7 @@ public class Commander extends Constructed {
             boolean gainControl = false;
             boolean infect = false;
             boolean mayCastForFree = false;
+            boolean miracle = false;
             boolean overload = false;
             boolean persist = false;
             boolean proliferate = false;
@@ -262,6 +263,7 @@ public class Commander extends Constructed {
                 gainControl |= s.contains("gain control");
                 infect |= s.contains("infect");
                 mayCastForFree |= s.contains("may cast") && s.contains("without paying");
+                miracle |= s.contains("miracle");
                 overload |= s.contains("overload");
                 persist |= s.contains("persist");
                 proliferate |= s.contains("proliferate");
@@ -332,6 +334,9 @@ public class Commander extends Constructed {
             if (exile) {
                 thisMaxPower = Math.max(thisMaxPower, 2);
             }
+            if (miracle) {
+                thisMaxPower = Math.max(thisMaxPower, 2);
+            }
             if (sliver) {
                 thisMaxPower = Math.max(thisMaxPower, 2);
             }
@@ -369,27 +374,79 @@ public class Commander extends Constructed {
                 thisMaxPower = 0;
             }
 
-            // Banned in french
+            // Banned in french or unfair cards
             String cn = card.getName().toLowerCase();
-            if (cn.equals("ancient tomb") || cn.equals("armageddon")
-                    || cn.equals("aura shards") || cn.equals("back to basics")
-                    || cn.equals("bane of progress") || cn.equals("basalt monolith")
-                    || cn.equals("blightsteel collossus") || cn.equals("cabal coffers")
-                    || cn.equals("craterhoof behemoth") || cn.equals("deepglow skate")
-                    || cn.equals("dig through time") || cn.equals("entomb")
-                    || cn.equals("food chain") || cn.equals("gaea's cradle")
-                    || cn.equals("grim monolith") || cn.equals("hermit druid")
-                    || cn.equals("humility") || cn.equals("imperial seal")
-                    || cn.equals("karakas") || cn.equals("living death")
-                    || cn.equals("loyal retainers") || cn.equals("mana crypt")
-                    || cn.equals("mana drain") || cn.equals("mana vault")
-                    || cn.equals("necrotic ooze") || cn.equals("oath of druids")
-                    || cn.equals("protean hulk") || cn.equals("ravages of war")
-                    || cn.equals("reclamation sage") || cn.equals("sensei's divning top")
-                    || cn.equals("sol ring") || cn.equals("spore frog")
-                    || cn.equals("strip mine") || cn.equals("the tabernacle at pendrell vale")
-                    || cn.equals("tinker") || cn.equals("tolarian academy")
-                    || cn.equals("winter orb") || cn.equals("treasure cruise")) {
+            if (cn.equals("ancient tomb")
+                    || cn.equals("anafenza, the foremost")
+                    || cn.equals("arcum dagsson")
+                    || cn.equals("armageddon")
+                    || cn.equals("aura shards")
+                    || cn.equals("azami, lady of scrolls")
+                    || cn.equals("back to basics")
+                    || cn.equals("bane of progress")
+                    || cn.equals("basalt monolith")
+                    || cn.equals("blightsteel collossus")
+                    || cn.equals("braids, cabal minion")
+                    || cn.equals("cabal coffers")
+                    || cn.equals("captain sisay")
+                    || cn.equals("celestial dawn")
+                    || cn.equals("child of alara")
+                    || cn.equals("coalition relic")
+                    || cn.equals("craterhoof behemoth")
+                    || cn.equals("deepglow skate")
+                    || cn.equals("derevi, empyrial tactician")
+                    || cn.equals("dig through time")
+                    || cn.equals("edric, spymaster of trest")
+                    || cn.equals("elesh norn, grand cenobite")
+                    || cn.equals("entomb")
+                    || cn.equals("food chain")
+                    || cn.equals("gaddock teeg")
+                    || cn.equals("gaea's cradle")
+                    || cn.equals("grand arbiter augustin iv")
+                    || cn.equals("grim monolith")
+                    || cn.equals("hermit druid")
+                    || cn.equals("hokori, dust drinker")
+                    || cn.equals("humility")
+                    || cn.equals("imperial seal")
+                    || cn.equals("iona, shield of emeria")
+                    || cn.equals("jin-gitaxias, core augur")
+                    || cn.equals("karador, ghost chieftain")
+                    || cn.equals("karakas")
+                    || cn.equals("kataki, war's wage")
+                    || cn.equals("knowledge pool")
+                    || cn.equals("linvala, keeper of silence")
+                    || cn.equals("living death")
+                    || cn.equals("llawan, cephalid empress")
+                    || cn.equals("loyal retainers")
+                    || cn.equals("malfegor")
+                    || cn.equals("mana crypt")
+                    || cn.equals("mana drain")
+                    || cn.equals("mana vault")
+                    || cn.equals("michiko konda, truth seeker")
+                    || cn.equals("nath of the gilt-leaf")
+                    || cn.equals("necrotic ooze")
+                    || cn.equals("nicol bolas")
+                    || cn.equals("numot, the devastator")
+                    || cn.equals("oath of druids")
+                    || cn.equals("protean hulk")
+                    || cn.equals("purphoros, god of the forge")
+                    || cn.equals("ravages of war")
+                    || cn.equals("reclamation sage")
+                    || cn.equals("sen triplets")
+                    || cn.equals("serra's sanctum")
+                    || cn.equals("sheoldred, whispering one")
+                    || cn.equals("sol ring")
+                    || cn.equals("spore frog")
+                    || cn.equals("stasis")
+                    || cn.equals("strip mine")
+                    || cn.equals("the tabernacle at pendrell vale")
+                    || cn.equals("tinker")
+                    || cn.equals("tolarian academy")
+                    || cn.equals("treasure cruise")
+                    || cn.equals("urabrask the hidden")
+                    || cn.equals("vorinclex, voice of hunger")
+                    || cn.equals("winter orb")
+                    || cn.equals("zur the enchanter")) {
                 thisMaxPower = Math.max(thisMaxPower, 4);
             }
 
@@ -437,34 +494,55 @@ public class Commander extends Constructed {
                     || cn.equals("zealous conscripts")) {
                 thisMaxPower = Math.max(thisMaxPower, 6);
             }
-            System.out.println(thisMaxPower + "Card:" + cn + " " + thisMaxPower);
-
             edhPowerLevel += thisMaxPower;
         }
 
         for (Card commander : deck.getSideboard()) {
             int thisMaxPower = 0;
             String cn = commander.getName().toLowerCase();
+
             // Least fun commanders
-            if (cn.equals("memnarch")
-                    || cn.equals("derevi, empyrial tactician")
-                    || cn.equals("narset, enlightened master")
-                    || cn.equals("nekusar, the mindrazer")
-                    || cn.equals("norin the wary")) {
+            if (cn.equals("azami, lady of scrolls")
+                || cn.equals("braids, cabal minion")
+                || cn.equals("child of alara")
+                || cn.equals("derevi, empyrial tactician")
+                || cn.equals("edric, spymaster of trest")
+                || cn.equals("gaddock teeg")
+                || cn.equals("grand arbiter augustin iv")
+                || cn.equals("hokori, dust drinker")
+                || cn.equals("iona, shield of emeria")
+                || cn.equals("jin-gitaxias, core augur")
+                || cn.equals("karador, ghost chieftain")
+                || cn.equals("linvala, keeper of silence")
+                || cn.equals("llawan, cephalid empress")
+                || cn.equals("memnarch")
+                || cn.equals("meren of clan nel toth")
+                || cn.equals("michiko konda, truth seeker")
+                || cn.equals("narset, enlightened master")
+                || cn.equals("nekusar, the mindrazer")
+                || cn.equals("norin the wary")
+                || cn.equals("numot, the devastator")
+                || cn.equals("sheoldred, whispering one")
+                || cn.equals("teferi, mage of zhalfir")
+                || cn.equals("zur the enchanter")) {
                 thisMaxPower = Math.max(thisMaxPower, 15);
             }
 
             // Next least fun commanders
-            if (cn.equals("meren of clan nel toth")
-                    || cn.equals("teferi, mage of zhalfir")
-                    || cn.equals("azami, lady of scrolls")
-                    || cn.equals("brago, king eternal")
-                    || cn.equals("mikaeus the unhallowed")
-                    || cn.equals("memnarch")) {
+            if (cn.equals("anafenza, the foremost")
+                || cn.equals("arcum dagsson")
+                || cn.equals("brago, king eternal")
+                || cn.equals("captain sisay")
+                || cn.equals("elesh norn, grand cenobite")
+                || cn.equals("malfegor")
+                || cn.equals("mikaeus the unhallowed")
+                || cn.equals("nath of the gilt-leaf")
+                || cn.equals("purphoros, god of the forge")
+                || cn.equals("sen triplets")
+                || cn.equals("urabrask the hidden")
+                || cn.equals("vorinclex, voice of hunger")) {
                 thisMaxPower = Math.max(thisMaxPower, 10);
             }
-
-            System.out.println(thisMaxPower + "Card:" + cn + " bad commander" + thisMaxPower);
             edhPowerLevel += thisMaxPower;
         }
 
