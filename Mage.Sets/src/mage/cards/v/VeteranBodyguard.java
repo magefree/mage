@@ -57,7 +57,7 @@ public class VeteranBodyguard extends CardImpl {
 
     public VeteranBodyguard(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{3}{W}{W}");
-        
+
         this.subtype.add("Human");
         this.power = new MageInt(2);
         this.toughness = new MageInt(5);
@@ -79,14 +79,14 @@ public class VeteranBodyguard extends CardImpl {
 class VeteranBodyguardEffect extends ReplacementEffectImpl {
 
     private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("unblocked creatures");
-    
+
     static {
         filter.add(new UnblockedPredicate());
     }
-    
+
     VeteranBodyguardEffect() {
-        super(Duration.EndOfTurn, Outcome.RedirectDamage);
-        staticText = "all combat damage that would be dealt to you by unblocked creatures is dealt to {source} instead.";
+        super(Duration.WhileOnBattlefield, Outcome.RedirectDamage);
+        staticText = "all combat damage that would be dealt to you by unblocked creatures is dealt to {source} instead";
     }
 
     VeteranBodyguardEffect(final VeteranBodyguardEffect effect) {
@@ -96,23 +96,23 @@ class VeteranBodyguardEffect extends ReplacementEffectImpl {
     @Override
     public boolean replaceEvent(GameEvent event, Ability source, Game game) {
         DamagePlayerEvent damageEvent = (DamagePlayerEvent) event;
-        Permanent p = game.getPermanent(source.getSourceId());
-        if (p != null) {
-            p.damage(damageEvent.getAmount(), event.getSourceId(), game, damageEvent.isCombatDamage(), damageEvent.isPreventable());
+        Permanent permanent = game.getPermanent(source.getSourceId());
+        if (permanent != null) {
+            permanent.damage(damageEvent.getAmount(), event.getSourceId(), game, damageEvent.isCombatDamage(), damageEvent.isPreventable());
             return true;
         }
         return true;
     }
-    
+
     @Override
     public boolean checksEventType(GameEvent event, Game game) {
         return event.getType() == GameEvent.EventType.DAMAGE_PLAYER;
     }
-    
+
     @Override
     public boolean applies(GameEvent event, Ability source, Game game) {
         if (event.getPlayerId().equals(source.getControllerId())
-                && ((DamageEvent)event).isCombatDamage()) {
+                && ((DamageEvent) event).isCombatDamage()) {
             Permanent p = game.getPermanent(source.getSourceId());
             if (p != null) {
                 for (Permanent permanent : game.getBattlefield().getActivePermanents(filter, source.getControllerId(), source.getSourceId(), game)) {
