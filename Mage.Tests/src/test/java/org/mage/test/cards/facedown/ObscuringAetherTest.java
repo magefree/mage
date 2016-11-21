@@ -25,54 +25,45 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.cards.o;
+package org.mage.test.cards.facedown;
 
-import java.util.UUID;
-import mage.abilities.common.SimpleActivatedAbility;
-import mage.abilities.common.SimpleStaticAbility;
-import mage.abilities.costs.mana.ManaCostsImpl;
-import mage.abilities.effects.Effect;
-import mage.abilities.effects.common.continuous.BecomesFaceDownCreatureEffect;
-import mage.abilities.effects.common.cost.SpellsCostReductionControllerEffect;
-import mage.cards.CardImpl;
-import mage.cards.CardSetInfo;
-import mage.constants.CardType;
-import mage.constants.Duration;
+import mage.constants.PhaseStep;
 import mage.constants.Zone;
-import mage.filter.common.FilterCreatureCard;
-import mage.filter.predicate.other.FaceDownPredicate;
+import org.junit.Test;
+import org.mage.test.serverside.base.CardTestPlayerBase;
 
 /**
  *
  * @author LevelX2
  */
-public class ObscuringAether extends CardImpl {
+public class ObscuringAetherTest extends CardTestPlayerBase {
 
-    private static final FilterCreatureCard filter = new FilterCreatureCard("Face-down creature spells");
-
-    static {
-        filter.add(new FaceDownPredicate());
-    }
-
-    public ObscuringAether(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId, setInfo, new CardType[]{CardType.ENCHANTMENT}, "{G}");
-
+    /**
+     * Obscuring Aether cannot turn into a face down 2/2 like it should. When
+     * activating the ability to turn it over it, it dies immediately.
+     *
+     */
+    // test that cards exiled using Ghastly Conscription return face down
+    @Test
+    public void testTurnFaceDown() {
+        addCard(Zone.BATTLEFIELD, playerA, "Forest", 3);
         // Face-down creature spells you cast cost {1} less to cast.
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new SpellsCostReductionControllerEffect(filter, 1)));
-
         // {1}{G}: Turn Obscuring Aether face down.
-        Effect effect = new BecomesFaceDownCreatureEffect(Duration.Custom, BecomesFaceDownCreatureEffect.FaceDownType.MANUAL);
-        effect.setText("Turn {this} face down. <i>(It becomes a 2/2 creature.)</i>");
-        this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, effect, new ManaCostsImpl("{1}{G}")));
+        addCard(Zone.HAND, playerA, "Obscuring Aether");
+
+        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Obscuring Aether");
+
+        activateAbility(1, PhaseStep.PRECOMBAT_MAIN, playerA, "{1}{G}: Turn");
+
+        setStopAt(1, PhaseStep.BEGIN_COMBAT);
+        execute();
+
+        assertHandCount(playerA, "Obscuring Aether", 0);
+        assertGraveyardCount(playerA, "Obscuring Aether", 0);
+
+        assertPermanentCount(playerA, "", 1);
+        assertPowerToughness(playerA, "", 2, 2);
 
     }
 
-    public ObscuringAether(final ObscuringAether card) {
-        super(card);
-    }
-
-    @Override
-    public ObscuringAether copy() {
-        return new ObscuringAether(this);
-    }
 }

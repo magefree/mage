@@ -69,6 +69,12 @@ public class AnyColorLandsProduceManaAbility extends ActivatedManaAbilityImpl {
     public List<Mana> getNetMana(Game game) {
         return ((AnyColorLandsProduceManaEffect) getEffects().get(0)).getNetMana(game, this);
     }
+
+    @Override
+    public boolean definesMana() {
+        return true;
+    }
+
 }
 
 class AnyColorLandsProduceManaEffect extends ManaEffect {
@@ -155,7 +161,7 @@ class AnyColorLandsProduceManaEffect extends ManaEffect {
     }
 
     private Mana getManaTypes(Game game, Ability source) {
-        List<Permanent> lands = game.getBattlefield().getActivePermanents(filter, source.getControllerId(), game);
+        List<Permanent> lands = game.getBattlefield().getActivePermanents(filter, source.getControllerId(), source.getSourceId(), game);
         Mana types = new Mana();
         for (Permanent land : lands) {
             Abilities<ActivatedManaAbilityImpl> mana = land.getAbilities().getActivatedManaAbilities(Zone.BATTLEFIELD);

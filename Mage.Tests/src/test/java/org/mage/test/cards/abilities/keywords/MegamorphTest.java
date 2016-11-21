@@ -25,54 +25,42 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.cards.o;
+package org.mage.test.cards.abilities.keywords;
 
-import java.util.UUID;
-import mage.abilities.common.SimpleActivatedAbility;
-import mage.abilities.common.SimpleStaticAbility;
-import mage.abilities.costs.mana.ManaCostsImpl;
-import mage.abilities.effects.Effect;
-import mage.abilities.effects.common.continuous.BecomesFaceDownCreatureEffect;
-import mage.abilities.effects.common.cost.SpellsCostReductionControllerEffect;
-import mage.cards.CardImpl;
-import mage.cards.CardSetInfo;
-import mage.constants.CardType;
-import mage.constants.Duration;
+import mage.constants.PhaseStep;
 import mage.constants.Zone;
-import mage.filter.common.FilterCreatureCard;
-import mage.filter.predicate.other.FaceDownPredicate;
+import mage.game.permanent.Permanent;
+import org.junit.Assert;
+import org.junit.Test;
+import org.mage.test.serverside.base.CardTestPlayerBase;
 
 /**
  *
  * @author LevelX2
  */
-public class ObscuringAether extends CardImpl {
+public class MegamorphTest extends CardTestPlayerBase {
 
-    private static final FilterCreatureCard filter = new FilterCreatureCard("Face-down creature spells");
+    @Test
+    public void testManifestMegamorph() {
+        // Reach (This creature can block creatures with flying.)
+        // Megamorph {5}{G}
+        addCard(Zone.HAND, playerA, "Aerie Bowmasters", 1);
+        addCard(Zone.BATTLEFIELD, playerA, "Forest", 6);
 
-    static {
-        filter.add(new FaceDownPredicate());
+        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Aerie Bowmasters");
+        setChoice(playerA, "Yes"); // cast it face down as 2/2 creature
+
+        activateAbility(3, PhaseStep.PRECOMBAT_MAIN, playerA, "{5}{G}: Turn");
+
+        setStopAt(3, PhaseStep.BEGIN_COMBAT);
+        execute();
+
+        assertPermanentCount(playerA, "Aerie Bowmasters", 1);
+        assertPowerToughness(playerA, "Aerie Bowmasters", 4, 5); // 3/4  and the +1/+1 counter from Megamorph
+
+        Permanent aerie = getPermanent("Aerie Bowmasters", playerA);
+        Assert.assertTrue("Aerie Bowmasters has to be green", aerie != null && aerie.getColor(currentGame).isGreen());
+
     }
 
-    public ObscuringAether(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId, setInfo, new CardType[]{CardType.ENCHANTMENT}, "{G}");
-
-        // Face-down creature spells you cast cost {1} less to cast.
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new SpellsCostReductionControllerEffect(filter, 1)));
-
-        // {1}{G}: Turn Obscuring Aether face down.
-        Effect effect = new BecomesFaceDownCreatureEffect(Duration.Custom, BecomesFaceDownCreatureEffect.FaceDownType.MANUAL);
-        effect.setText("Turn {this} face down. <i>(It becomes a 2/2 creature.)</i>");
-        this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, effect, new ManaCostsImpl("{1}{G}")));
-
-    }
-
-    public ObscuringAether(final ObscuringAether card) {
-        super(card);
-    }
-
-    @Override
-    public ObscuringAether copy() {
-        return new ObscuringAether(this);
-    }
 }

@@ -61,7 +61,7 @@ public class NaturesWay extends CardImpl {
     }
 
     public NaturesWay(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{1}{G}");
+        super(ownerId, setInfo, new CardType[]{CardType.SORCERY}, "{1}{G}");
 
         // Target creature you control gains vigilance and trample until end of turn. It deals damage equal to its power to target creature you don't control.
         Effect effect = new GainAbilityTargetEffect(VigilanceAbility.getInstance(), Duration.EndOfTurn);
@@ -69,6 +69,7 @@ public class NaturesWay extends CardImpl {
         this.getSpellAbility().addEffect(effect);
         effect = new GainAbilityTargetEffect(TrampleAbility.getInstance(), Duration.EndOfTurn);
         effect.setText("and trample until end of turn");
+        this.getSpellAbility().addEffect(effect);
         this.getSpellAbility().addEffect(new NaturesWayEffect());
         this.getSpellAbility().addTarget(new TargetControlledCreaturePermanent());
         this.getSpellAbility().addTarget(new TargetCreaturePermanent(filter));
