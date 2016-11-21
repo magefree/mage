@@ -59,6 +59,10 @@
                               <Component id="lblQuitRatio" min="-2" max="-2" attributes="0"/>
                               <EmptySpace max="-2" attributes="0"/>
                               <Component id="spnQuitRatio" min="-2" pref="60" max="-2" attributes="0"/>
+                              <EmptySpace max="-2" attributes="0"/>
+                              <Component id="lblEdhPowerLevel" min="-2" max="-2" attributes="0"/>
+                              <EmptySpace max="-2" attributes="0"/>
+                              <Component id="spnEdhPowerLevel" min="-2" pref="60" max="-2" attributes="0"/>
                           </Group>
                       </Group>
                   </Group>
@@ -133,6 +137,8 @@
                   <Component id="lbDeckType" alignment="3" min="-2" max="-2" attributes="0"/>
                   <Component id="lblQuitRatio" alignment="3" min="-2" max="-2" attributes="0"/>
                   <Component id="spnQuitRatio" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="lblEdhPowerLevel" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="spnEdhPowerLevel" alignment="3" min="-2" max="-2" attributes="0"/>
               </Group>
               <EmptySpace min="-2" max="-2" attributes="0"/>
               <Group type="103" groupAlignment="0" attributes="0">
@@ -388,6 +394,13 @@
       </Properties>
     </Component>
     <Component class="javax.swing.JSpinner" name="spnQuitRatio">
+    </Component>
+    <Component class="javax.swing.JLabel" name="lblEdhPowerLevel">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="EDH power level"/>
+      </Properties>
+    </Component>
+    <Component class="javax.swing.JSpinner" name="spnEdhPowerLevel">
     </Component>
   </SubComponents>
 </Form>

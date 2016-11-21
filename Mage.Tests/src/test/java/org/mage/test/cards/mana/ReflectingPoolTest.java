@@ -27,8 +27,10 @@
  */
 package org.mage.test.cards.mana;
 
+import mage.abilities.mana.ManaOptions;
 import mage.constants.PhaseStep;
 import mage.constants.Zone;
+import org.junit.Assert;
 import org.junit.Test;
 import org.mage.test.serverside.base.CardTestPlayerBase;
 
@@ -54,6 +56,7 @@ public class ReflectingPoolTest extends CardTestPlayerBase {
         addCard(Zone.HAND, playerA, "Crumbling Vestige", 1);
 
         playLand(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Crumbling Vestige");
+        setChoice(playerA, "Red");
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Lightning Bolt", playerB);
 
         setStopAt(1, PhaseStep.BEGIN_COMBAT);
@@ -67,4 +70,23 @@ public class ReflectingPoolTest extends CardTestPlayerBase {
 
     }
 
+    /**
+     * Reflecting Pool does not see what mana Exotic Orchard can produce
+     */
+    @Test
+    public void testWithExoticOrchard() {
+        addCard(Zone.BATTLEFIELD, playerB, "Mountain", 1);
+
+        // {T}: Add to your mana pool one mana of any type that a land you control could produce.
+        addCard(Zone.BATTLEFIELD, playerA, "Reflecting Pool", 1);
+        // {T}: Add to your mana pool one mana of any color that a land an opponent controls could produce.
+        addCard(Zone.BATTLEFIELD, playerA, "Exotic Orchard", 1);
+
+        setStopAt(1, PhaseStep.PRECOMBAT_MAIN);
+        execute();
+
+        ManaOptions options = playerA.getAvailableManaTest(currentGame);
+        Assert.assertEquals("Player should be able to create 2 red mana", "{R}{R}", options.get(0).toString());
+
+    }
 }

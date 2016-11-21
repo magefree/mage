@@ -97,6 +97,7 @@ public class CreateTokenEffect extends OneShotEffect {
         token.putOntoBattlefield(value, game, source.getSourceId(), source.getControllerId(), tapped, attacking);
         this.lastAddedTokenId = token.getLastAddedToken();
         this.lastAddedTokenIds = token.getLastAddedTokenIds();
+
         return true;
     }
 

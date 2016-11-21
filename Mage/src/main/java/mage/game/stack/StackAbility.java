@@ -54,6 +54,7 @@ import mage.constants.AbilityType;
 import mage.constants.AbilityWord;
 import mage.constants.CardType;
 import mage.constants.EffectType;
+import mage.constants.Outcome;
 import mage.constants.Zone;
 import mage.constants.ZoneDetail;
 import mage.game.Game;
@@ -194,7 +195,7 @@ public class StackAbility extends StackObjImpl implements Ability {
     public ObjectColor getColor(Game game) {
         return emptyColor;
     }
-    
+
     @Override
     public ObjectColor getFrameColor(Game game) {
         return ability.getSourceObject(game).getFrameColor(game);
@@ -220,7 +221,7 @@ public class StackAbility extends StackObjImpl implements Ability {
     public MageInt getToughness() {
         return MageInt.EmptyMageInt;
     }
-    
+
     @Override
     public int getStartingLoyalty() {
         return 0;
@@ -590,9 +591,10 @@ public class StackAbility extends StackObjImpl implements Ability {
         game.getStack().push(newStackAbility);
         if (chooseNewTargets && newAbility.getTargets().size() > 0) {
             Player controller = game.getPlayer(newControllerId);
-            if (controller.chooseUse(newAbility.getEffects().get(0).getOutcome(), "Choose new targets?", source, game)) {
+            Outcome outcome = newAbility.getEffects().isEmpty() ? Outcome.Detriment : newAbility.getEffects().get(0).getOutcome();
+            if (controller.chooseUse(outcome, "Choose new targets?", source, game)) {
                 newAbility.getTargets().clearChosen();
-                newAbility.getTargets().chooseTargets(newAbility.getEffects().get(0).getOutcome(), newControllerId, newAbility, false, game);
+                newAbility.getTargets().chooseTargets(outcome, newControllerId, newAbility, false, game);
             }
         }
         game.fireEvent(new GameEvent(GameEvent.EventType.COPIED_STACKOBJECT, newStackAbility.getId(), this.getId(), newControllerId));

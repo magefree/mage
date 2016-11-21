@@ -120,6 +120,7 @@ public class RevisedEdition extends ExpansionSet {
         cards.add(new SetCardInfo("Fork", 152, Rarity.RARE, mage.cards.f.Fork.class));
         cards.add(new SetCardInfo("Frozen Shade", 20, Rarity.COMMON, mage.cards.f.FrozenShade.class));
         cards.add(new SetCardInfo("Fungusaur", 104, Rarity.RARE, mage.cards.f.Fungusaur.class));
+        cards.add(new SetCardInfo("Gaea's Liege", 105, Rarity.RARE, mage.cards.g.GaeasLiege.class));
         cards.add(new SetCardInfo("Giant Growth", 106, Rarity.COMMON, mage.cards.g.GiantGrowth.class));
         cards.add(new SetCardInfo("Giant Spider", 107, Rarity.COMMON, mage.cards.g.GiantSpider.class));
         cards.add(new SetCardInfo("Glasses of Urza", 249, Rarity.UNCOMMON, mage.cards.g.GlassesOfUrza.class));
@@ -224,8 +225,10 @@ public class RevisedEdition extends ExpansionSet {
         cards.add(new SetCardInfo("Resurrection", 218, Rarity.UNCOMMON, mage.cards.r.Resurrection.class));
         cards.add(new SetCardInfo("Reverse Damage", 219, Rarity.RARE, mage.cards.r.ReverseDamage.class));
         cards.add(new SetCardInfo("Righteousness", 221, Rarity.RARE, mage.cards.r.Righteousness.class));
+        cards.add(new SetCardInfo("Rock Hydra", 172, Rarity.RARE, mage.cards.r.RockHydra.class));
         cards.add(new SetCardInfo("Rocket Launcher", 272, Rarity.RARE, mage.cards.r.RocketLauncher.class));
         cards.add(new SetCardInfo("Roc of Kher Ridges", 171, Rarity.RARE, mage.cards.r.RocOfKherRidges.class));
+        cards.add(new SetCardInfo("Rock Hydra", 172, Rarity.RARE, mage.cards.r.RockHydra.class));
         cards.add(new SetCardInfo("Rod of Ruin", 273, Rarity.UNCOMMON, mage.cards.r.RodOfRuin.class));
         cards.add(new SetCardInfo("Royal Assassin", 33, Rarity.RARE, mage.cards.r.RoyalAssassin.class));
         cards.add(new SetCardInfo("Sacrifice", 34, Rarity.UNCOMMON, mage.cards.s.Sacrifice.class));

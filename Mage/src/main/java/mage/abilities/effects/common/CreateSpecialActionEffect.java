@@ -25,13 +25,13 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-
 package mage.abilities.effects.common;
 
 import mage.abilities.Ability;
 import mage.abilities.Mode;
 import mage.abilities.SpecialAction;
 import mage.abilities.effects.OneShotEffect;
+import mage.constants.Outcome;
 import mage.game.Game;
 
 /**
@@ -43,7 +43,7 @@ public class CreateSpecialActionEffect extends OneShotEffect {
     protected SpecialAction action;
 
     public CreateSpecialActionEffect(SpecialAction action) {
-        super(action.getEffects().get(0).getOutcome());
+        super(action.getEffects().isEmpty() ? Outcome.Detriment : action.getEffects().get(0).getOutcome());
         this.action = action;
     }
 

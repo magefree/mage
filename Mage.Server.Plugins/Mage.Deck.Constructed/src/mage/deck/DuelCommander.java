@@ -37,7 +37,6 @@ public class DuelCommander extends Commander {
         super("Duel Commander");
         banned.add("Ancestral Recall");
         banned.add("Ancient Tomb");
-        banned.add("Balance");
         banned.add("Back to Basics");
         banned.add("Black Lotus");
         banned.add("Channel");
@@ -48,7 +47,6 @@ public class DuelCommander extends Commander {
         banned.add("Gaea's Cradle");
         banned.add("Gifts Ungiven");
         banned.add("Grim Monolith");
-        banned.add("Grindstone");
         banned.add("Hermit Druid");
         banned.add("Humility");
         banned.add("Imperial Seal");
@@ -67,12 +65,10 @@ public class DuelCommander extends Commander {
         banned.add("Mox Sapphire");
         banned.add("Mystical Tutor");
         banned.add("Natural Order");
-        banned.add("Necropotence");
         banned.add("Necrotic Oooze");
         banned.add("Oath of Druids");
         banned.add("Protean Hulk");
         banned.add("Sensei's Divining Top");
-        banned.add("Serra Ascendant");
         banned.add("Shahrazad");
         banned.add("Sol Ring");
         banned.add("Strip Mine");
@@ -83,7 +79,6 @@ public class DuelCommander extends Commander {
         banned.add("Tolarian Academy");
         banned.add("Treasure Cruise");
         banned.add("Vampiric Tutor");
-        banned.add("Yawgmoth’s Bargain");
 
         bannedCommander.add("Derevi, Empyrial Tactician");
         bannedCommander.add("Edric, Spymaster of Trest");

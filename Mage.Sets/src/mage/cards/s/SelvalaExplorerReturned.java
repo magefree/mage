@@ -52,7 +52,7 @@ import mage.players.Player;
 public class SelvalaExplorerReturned extends CardImpl {
 
     public SelvalaExplorerReturned(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{1}{G}{W}");
+        super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{1}{G}{W}");
         this.supertype.add("Legendary");
         this.subtype.add("Elf");
         this.subtype.add("Scout");
@@ -101,7 +101,7 @@ class SelvalaExplorerReturnedEffect extends ManaEffect {
             Mana parley = getMana(game, source);
             if (parley.getGreen() > 0) {
                 controller.getManaPool().addMana(parley, game, source);
-                controller.gainLife(parley.getAny(), game);
+                controller.gainLife(parley.getGreen(), game);
             }
             return true;
         }

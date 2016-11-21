@@ -40,7 +40,6 @@ import mage.constants.Zone;
 import mage.game.Game;
 import mage.game.events.GameEvent;
 import mage.game.permanent.Permanent;
-import mage.game.stack.StackObject;
 
 /**
  *
@@ -91,8 +90,7 @@ class DoublingSeasonTokenEffect extends ReplacementEffectImpl {
 
     @Override
     public boolean applies(GameEvent event, Ability source, Game game) {
-        StackObject stackObject = game.getStack().getStackObject(event.getSourceId());
-        return stackObject != null && event.getPlayerId().equals(source.getControllerId());
+        return event.getPlayerId().equals(source.getControllerId());
     }
 
     @Override

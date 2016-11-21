@@ -912,10 +912,7 @@ public class HumanPlayer extends PlayerImpl {
         FilterCreatureForCombat filter = filterCreatureForCombat.copy();
         filter.add(new ControllerIdPredicate(attackingPlayerId));
         while (!abort) {
-            if (passedAllTurns || passedUntilEndStepBeforeMyTurn
-                    || (!getUserData().getUserSkipPrioritySteps().isStopOnDeclareAttackersDuringSkipAction() && (passedTurn || passedTurnSkipStack || passedUntilEndOfTurn || passedUntilNextMain))) {
-                return;
-            }
+
             Map<String, Serializable> options = new HashMap<>();
 
             List<UUID> possibleAttackers = new ArrayList<>();
@@ -927,6 +924,12 @@ public class HumanPlayer extends PlayerImpl {
             options.put(Constants.Option.POSSIBLE_ATTACKERS, (Serializable) possibleAttackers);
             if (possibleAttackers.size() > 0) {
                 options.put(Constants.Option.SPECIAL_BUTTON, (Serializable) "All attack");
+                if (getUserData().getUserSkipPrioritySteps().isStopOnDeclareAttackersDuringSkipAction()) {
+                    resetPlayerPassedActions();
+                }
+            } else if (passedAllTurns || passedUntilEndStepBeforeMyTurn
+                    || (!getUserData().getUserSkipPrioritySteps().isStopOnDeclareAttackersDuringSkipAction() && (passedTurn || passedTurnSkipStack || passedUntilEndOfTurn || passedUntilNextMain))) {
+                return;
             }
 
             game.fireSelectEvent(playerId, "Select attackers", options);
@@ -1056,7 +1059,14 @@ public class HumanPlayer extends PlayerImpl {
                 }
             }
             if (chooseTarget(Outcome.Damage, target, null, game)) {
-                declareAttacker(attackerId, response.getUUID(), game, true);
+                UUID defenderId = response.getUUID();
+                for (Player player : game.getPlayers().values()) {
+                    if (player.getId().equals(response.getUUID())) {
+                        defenderId = player.getId(); // get the correct player object
+                        break;
+                    }
+                }
+                declareAttacker(attackerId, defenderId, game, true);
                 return true;
             }
         }

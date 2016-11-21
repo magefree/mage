@@ -177,6 +177,7 @@ public class Mirage extends ExpansionSet {
         cards.add(new SetCardInfo("Lion's Eye Diamond", 272, Rarity.RARE, mage.cards.l.LionsEyeDiamond.class));
         cards.add(new SetCardInfo("Locust Swarm", 124, Rarity.UNCOMMON, mage.cards.l.LocustSwarm.class));
         cards.add(new SetCardInfo("Mana Prism", 273, Rarity.UNCOMMON, mage.cards.m.ManaPrism.class));
+        cards.add(new SetCardInfo("Mangara's Tome", 274, Rarity.RARE, mage.cards.m.MangarasTome.class));
         cards.add(new SetCardInfo("Marble Diamond", 275, Rarity.UNCOMMON, mage.cards.m.MarbleDiamond.class));
         cards.add(new SetCardInfo("Maro", 126, Rarity.RARE, mage.cards.m.Maro.class));
         cards.add(new SetCardInfo("Melesse Spirit", 231, Rarity.UNCOMMON, mage.cards.m.MelesseSpirit.class));

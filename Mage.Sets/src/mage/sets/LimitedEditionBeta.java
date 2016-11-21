@@ -109,6 +109,7 @@ public class LimitedEditionBeta extends ExpansionSet {
         cards.add(new SetCardInfo("Fork", 154, Rarity.RARE, mage.cards.f.Fork.class));
         cards.add(new SetCardInfo("Frozen Shade", 18, Rarity.COMMON, mage.cards.f.FrozenShade.class));
         cards.add(new SetCardInfo("Fungusaur", 104, Rarity.RARE, mage.cards.f.Fungusaur.class));
+        cards.add(new SetCardInfo("Gaea's Liege", 105, Rarity.RARE, mage.cards.g.GaeasLiege.class));
         cards.add(new SetCardInfo("Gauntlet of Might", 246, Rarity.RARE, mage.cards.g.GauntletOfMight.class));
         cards.add(new SetCardInfo("Giant Growth", 106, Rarity.COMMON, mage.cards.g.GiantGrowth.class));
         cards.add(new SetCardInfo("Giant Spider", 107, Rarity.COMMON, mage.cards.g.GiantSpider.class));
@@ -142,6 +143,7 @@ public class LimitedEditionBeta extends ExpansionSet {
         cards.add(new SetCardInfo("Island Sanctuary", 211, Rarity.RARE, mage.cards.i.IslandSanctuary.class));
         cards.add(new SetCardInfo("Ivory Cup", 253, Rarity.UNCOMMON, mage.cards.i.IvoryCup.class));
         cards.add(new SetCardInfo("Jade Monolith", 254, Rarity.RARE, mage.cards.j.JadeMonolith.class));
+        cards.add(new SetCardInfo("Jade Statue", 255, Rarity.UNCOMMON, mage.cards.j.JadeStatue.class));
         cards.add(new SetCardInfo("Jayemdae Tome", 256, Rarity.RARE, mage.cards.j.JayemdaeTome.class));
         cards.add(new SetCardInfo("Juggernaut", 257, Rarity.UNCOMMON, mage.cards.j.Juggernaut.class));
         cards.add(new SetCardInfo("Jump", 61, Rarity.COMMON, mage.cards.j.Jump.class));
@@ -214,6 +216,7 @@ public class LimitedEditionBeta extends ExpansionSet {
         cards.add(new SetCardInfo("Reverse Damage", 221, Rarity.RARE, mage.cards.r.ReverseDamage.class));
         cards.add(new SetCardInfo("Righteousness", 222, Rarity.RARE, mage.cards.r.Righteousness.class));
         cards.add(new SetCardInfo("Roc of Kher Ridges", 172, Rarity.RARE, mage.cards.r.RocOfKherRidges.class));
+        cards.add(new SetCardInfo("Rock Hydra", 173, Rarity.RARE, mage.cards.r.RockHydra.class));
         cards.add(new SetCardInfo("Rod of Ruin", 270, Rarity.UNCOMMON, mage.cards.r.RodOfRuin.class));
         cards.add(new SetCardInfo("Royal Assassin", 32, Rarity.RARE, mage.cards.r.RoyalAssassin.class));
         cards.add(new SetCardInfo("Sacrifice", 33, Rarity.UNCOMMON, mage.cards.s.Sacrifice.class));

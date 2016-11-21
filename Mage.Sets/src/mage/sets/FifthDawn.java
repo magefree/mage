@@ -85,7 +85,7 @@ public class FifthDawn extends ExpansionSet {
         cards.add(new SetCardInfo("Cackling Imp", 44, Rarity.COMMON, mage.cards.c.CacklingImp.class));
         cards.add(new SetCardInfo("Channel the Suns", 84, Rarity.UNCOMMON, mage.cards.c.ChannelTheSuns.class));
         cards.add(new SetCardInfo("Chimeric Coils", 108, Rarity.UNCOMMON, mage.cards.c.ChimericCoils.class));
-        cards.add(new SetCardInfo("Circle of Protection: Artifacts", 8, Rarity.COMMON, mage.cards.c.CircleOfProtectionArtifacts.class));
+        cards.add(new SetCardInfo("Circle of Protection: Artifacts", 8, Rarity.UNCOMMON, mage.cards.c.CircleOfProtectionArtifacts.class));
         cards.add(new SetCardInfo("Clearwater Goblet", 109, Rarity.RARE, mage.cards.c.ClearwaterGoblet.class));
         cards.add(new SetCardInfo("Clock of Omens", 110, Rarity.UNCOMMON, mage.cards.c.ClockOfOmens.class));
         cards.add(new SetCardInfo("Composite Golem", 111, Rarity.UNCOMMON, mage.cards.c.CompositeGolem.class));

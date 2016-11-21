@@ -51,14 +51,14 @@ import mage.target.common.TargetCreaturePermanent;
  * @author escplan9 (Derek Monturo - dmontur1 at gmail dot com)
  */
 public class DeclarationInStone extends CardImpl {
-    
+
     public DeclarationInStone(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{1}{W}");
 
         // Exile target creature and all other creatures its controller controls with the same name as that creature.
         // That player investigates for each nontoken creature exiled this way.
         this.getSpellAbility().addEffect(new DeclarationInStoneEffect());
-        this.getSpellAbility().addTarget(new TargetCreaturePermanent());        
+        this.getSpellAbility().addTarget(new TargetCreaturePermanent());
     }
 
     public DeclarationInStone(final DeclarationInStone card) {
@@ -72,7 +72,7 @@ public class DeclarationInStone extends CardImpl {
 }
 
 class DeclarationInStoneEffect extends OneShotEffect {
-    
+
     private static final FilterCreaturePermanent creaturesOnly = new FilterCreaturePermanent();
     private static final FilterCreaturePermanent nonTokenFilter = new FilterCreaturePermanent("nontoken creature");
     static{
@@ -106,20 +106,20 @@ class DeclarationInStoneEffect extends OneShotEffect {
                     String name = targetPermanent.getName();
                     for (Permanent permanent : game.getBattlefield().getAllActivePermanents(controllerPermanentId)) {
                         if (permanent != null && permanent.getName().equals(name)) {
-                            
+
                             // only exile creatures (reported bug on awakened lands targetted exiling all other lands of same name)
                             if (creaturesOnly.match(permanent, game)) {
-                                you.moveCardToExileWithInfo(permanent, exileId, sourceObject.getIdName(), source.getSourceId(), game, Zone.BATTLEFIELD, true);
+                                you.moveCardToExileWithInfo(permanent, null, "", source.getSourceId(), game, Zone.BATTLEFIELD, true);
                             }
-                                                        
+
                             // exiled count only matters for non-tokens
-                            if (nonTokenFilter.match(permanent, game)) {                                
+                            if (nonTokenFilter.match(permanent, game)) {
                                 exiledCount++;
                             }
                         }
                     }
                 }
-                
+
                 if (exiledCount > 0) {
                     Token token = new ClueArtifactToken();
                     token.putOntoBattlefield(exiledCount, game, source.getSourceId(), controllerPermanentId, false, false);

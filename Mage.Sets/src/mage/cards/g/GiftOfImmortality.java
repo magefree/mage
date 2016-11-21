@@ -55,7 +55,7 @@ import mage.target.targetpointer.FixedTarget;
 public class GiftOfImmortality extends CardImpl {
 
     public GiftOfImmortality(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.ENCHANTMENT},"{2}{W}");
+        super(ownerId, setInfo, new CardType[]{CardType.ENCHANTMENT}, "{2}{W}");
         this.subtype.add("Aura");
 
         // Enchant creature
@@ -99,25 +99,27 @@ class GiftOfImmortalityEffect extends OneShotEffect {
     @Override
     public boolean apply(Game game, Ability source) {
         Permanent enchantment = (Permanent) game.getLastKnownInformation(source.getSourceId(), Zone.BATTLEFIELD);
-        if (enchantment != null && enchantment.getAttachedTo() != null) {
+        Player controller = game.getPlayer(source.getControllerId());
+        if (controller != null && enchantment != null && enchantment.getAttachedTo() != null) {
+            Permanent enchanted = (Permanent) game.getLastKnownInformation(enchantment.getAttachedTo(), Zone.BATTLEFIELD);
             Card card = game.getCard(enchantment.getAttachedTo());
-            if (card != null) {
-                Zone currentZone = game.getState().getZone(card.getId());
-                if (card.putOntoBattlefield(game, currentZone, source.getSourceId(), card.getOwnerId())) {
-                    Permanent permanent = game.getPermanent(card.getId());
-                    if (permanent != null) {
-                        //create delayed triggered ability
-                        Effect effect = new GiftOfImmortalityReturnEnchantmentEffect();
-                        effect.setTargetPointer(new FixedTarget(permanent, game));
-                        game.addDelayedTriggeredAbility(new AtTheBeginOfNextEndStepDelayedTriggeredAbility(effect), source);
-                    }
+            if (card != null && enchanted != null && card.getZoneChangeCounter(game) == enchanted.getZoneChangeCounter(game) + 1) {
+                controller.moveCards(card, Zone.BATTLEFIELD, source, game, false, false, true, null);
+                Permanent permanent = game.getPermanent(card.getId());
+                if (permanent != null) {
+                    //create delayed triggered ability
+                    Effect effect = new GiftOfImmortalityReturnEnchantmentEffect();
+                    effect.setTargetPointer(new FixedTarget(permanent, game));
+                    game.addDelayedTriggeredAbility(new AtTheBeginOfNextEndStepDelayedTriggeredAbility(effect), source);
                 }
-                return true;
+
             }
+            return true;
         }
 
         return false;
     }
+
 }
 
 class GiftOfImmortalityReturnEnchantmentEffect extends OneShotEffect {

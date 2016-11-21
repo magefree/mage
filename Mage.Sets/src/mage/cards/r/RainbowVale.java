@@ -53,7 +53,7 @@ import mage.target.common.TargetOpponent;
 public class RainbowVale extends CardImpl {
 
     public RainbowVale(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.LAND},"");
+        super(ownerId, setInfo, new CardType[]{CardType.LAND}, "");
 
         // {tap}: Add one mana of any color to your mana pool. An opponent gains control of Rainbow Vale at the beginning of the next end step.
         Ability ability = new AnyColorManaAbility();
@@ -74,7 +74,7 @@ public class RainbowVale extends CardImpl {
 
         public RainbowValeEffect() {
             super(Outcome.PutManaInPool);
-            staticText = "An opponent gains control of {this} at the beginning of the next end step.";
+            staticText = "an opponent gains control of {this} at the beginning of the next end step";
         }
 
         public RainbowValeEffect(final RainbowValeEffect effect) {
@@ -85,7 +85,7 @@ public class RainbowVale extends CardImpl {
         public boolean apply(Game game, Ability source) {
             Permanent permanent = game.getPermanent(source.getSourceId());
             if (permanent != null) {
-                game.addDelayedTriggeredAbility(new AtTheBeginOfNextEndStepDelayedTriggeredAbility(new OpponentGainControlEffect()));
+                game.addDelayedTriggeredAbility(new AtTheBeginOfNextEndStepDelayedTriggeredAbility(new OpponentGainControlEffect()), source);
                 return true;
             }
             return false;

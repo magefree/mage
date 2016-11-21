@@ -28,7 +28,6 @@
 package mage.cards.c;
 
 import java.util.UUID;
-
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.costs.mana.ManaCosts;
@@ -49,7 +48,7 @@ import mage.game.events.GameEvent;
 public class CollectiveRestraint extends CardImpl {
 
     public CollectiveRestraint(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.ENCHANTMENT},"{3}{U}");
+        super(ownerId, setInfo, new CardType[]{CardType.ENCHANTMENT}, "{3}{U}");
 
         // Domain - Creatures can't attack you unless their controller pays {X} for each creature he or she controls that's attacking you, where X is the number of basic land types you control.
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new CollectiveRestraintPayManaToAttackAllEffect()));
@@ -69,7 +68,7 @@ public class CollectiveRestraint extends CardImpl {
 class CollectiveRestraintPayManaToAttackAllEffect extends CantAttackYouUnlessPayManaAllEffect {
 
     CollectiveRestraintPayManaToAttackAllEffect() {
-        super(null, true);
+        super(null, false);
         staticText = "Creatures can't attack you unless their controller pays {X} for each creature he or she controls that's attacking you, where X is the number of basic land types you control.";
     }
 

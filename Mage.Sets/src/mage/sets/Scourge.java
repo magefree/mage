@@ -68,7 +68,8 @@ public class Scourge extends ExpansionSet {
         cards.add(new SetCardInfo("Brain Freeze", 29, Rarity.UNCOMMON, mage.cards.b.BrainFreeze.class));
         cards.add(new SetCardInfo("Break Asunder", 113, Rarity.COMMON, mage.cards.b.BreakAsunder.class));
         cards.add(new SetCardInfo("Cabal Conditioning", 56, Rarity.RARE, mage.cards.c.CabalConditioning.class));
-	cards.add(new SetCardInfo("Cabal Interrogator", 57, Rarity.UNCOMMON, mage.cards.c.CabalInterrogator.class));
+	    cards.add(new SetCardInfo("Cabal Interrogator", 57, Rarity.UNCOMMON, mage.cards.c.CabalInterrogator.class));
+        cards.add(new SetCardInfo("Dawn Elemental", 7, Rarity.RARE, mage.cards.d.DawnElemental.class));
         cards.add(new SetCardInfo("Call to the Grave", 58, Rarity.RARE, mage.cards.c.CallToTheGrave.class));
         cards.add(new SetCardInfo("Carbonize", 83, Rarity.UNCOMMON, mage.cards.c.Carbonize.class));
         cards.add(new SetCardInfo("Carrion Feeder", 59, Rarity.COMMON, mage.cards.c.CarrionFeeder.class));
@@ -119,6 +120,7 @@ public class Scourge extends ExpansionSet {
         cards.add(new SetCardInfo("Kurgadon", 124, Rarity.UNCOMMON, mage.cards.k.Kurgadon.class));
         cards.add(new SetCardInfo("Long-Term Plans", 38, Rarity.UNCOMMON, mage.cards.l.LongTermPlans.class));
         cards.add(new SetCardInfo("Mercurial Kite", 39, Rarity.COMMON, mage.cards.m.MercurialKite.class));
+        cards.add(new SetCardInfo("Metamorphose", 40, Rarity.UNCOMMON, mage.cards.m.Metamorphose.class));
         cards.add(new SetCardInfo("Mind's Desire", 41, Rarity.RARE, mage.cards.m.MindsDesire.class));
         cards.add(new SetCardInfo("Mischievous Quanar", 42, Rarity.RARE, mage.cards.m.MischievousQuanar.class));
         cards.add(new SetCardInfo("Misguided Rage", 99, Rarity.COMMON, mage.cards.m.MisguidedRage.class));

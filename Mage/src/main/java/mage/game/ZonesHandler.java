@@ -288,7 +288,7 @@ public class ZonesHandler {
     private static Card takeAttributesFromSpell(Card card, ZoneChangeEvent event, Game game) {
         if (Zone.STACK.equals(event.getFromZone())) {
             Spell spell = game.getStack().getSpell(event.getTargetId());
-            if (spell != null) {
+            if (spell != null && !spell.isFaceDown(game)) {
                 boolean doCopy = false;
                 if (!card.getColor(game).equals(spell.getColor(game))) {
                     doCopy = true;

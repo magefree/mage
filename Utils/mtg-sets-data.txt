@@ -35,7 +35,7 @@ Champions of Kamigawa|CHK|
 Chronicles|CHR|
 Clash Pack|CLASH|
 Commander Anthology|CMA|
-Commander's Arsenal|CMA|
+Commander's Arsenal|CM1|
 Conspiracy: Take the Crown|CN2|
 Conflux|CON|
 Champs|CP|

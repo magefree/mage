@@ -61,6 +61,7 @@ public class Guildpact extends ExpansionSet {
         cards.add(new SetCardInfo("Battering Wurm", 79, Rarity.UNCOMMON, mage.cards.b.BatteringWurm.class));
         cards.add(new SetCardInfo("Beastmaster's Magemark", 80, Rarity.COMMON, mage.cards.b.BeastmastersMagemark.class));
         cards.add(new SetCardInfo("Belfry Spirit", 2, Rarity.UNCOMMON, mage.cards.b.BelfrySpirit.class));
+        cards.add(new SetCardInfo("Benediction of Moons", 3, Rarity.COMMON, mage.cards.b.BenedictionOfMoons.class));
         cards.add(new SetCardInfo("Blind Hunter", 102, Rarity.COMMON, mage.cards.b.BlindHunter.class));
         cards.add(new SetCardInfo("Bloodscale Prowler", 64, Rarity.COMMON, mage.cards.b.BloodscaleProwler.class));
         cards.add(new SetCardInfo("Borborygmos", 103, Rarity.RARE, mage.cards.b.Borborygmos.class));
@@ -152,6 +153,7 @@ public class Guildpact extends ExpansionSet {
         cards.add(new SetCardInfo("Revenant Patriarch", 59, Rarity.UNCOMMON, mage.cards.r.RevenantPatriarch.class));
         cards.add(new SetCardInfo("Rumbling Slum", 126, Rarity.RARE, mage.cards.r.RumblingSlum.class));
         cards.add(new SetCardInfo("Runeboggle", 33, Rarity.COMMON, mage.cards.r.Runeboggle.class));
+        cards.add(new SetCardInfo("Sanguine Praetor", 60, Rarity.RARE, mage.cards.s.SanguinePraetor.class));
         cards.add(new SetCardInfo("Savage Twister", 127, Rarity.UNCOMMON, mage.cards.s.SavageTwister.class));
         cards.add(new SetCardInfo("Scab-Clan Mauler", 128, Rarity.COMMON, mage.cards.s.ScabClanMauler.class));
         cards.add(new SetCardInfo("Schismotivate", 129, Rarity.UNCOMMON, mage.cards.s.Schismotivate.class));

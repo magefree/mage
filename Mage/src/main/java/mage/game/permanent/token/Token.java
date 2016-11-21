@@ -234,6 +234,7 @@ public class Token extends MageObjectImpl {
                 }
 
             }
+            game.getState().applyEffects(game); // Needed to do it here without LKIReset i.e. do get SwordOfTheMeekTest running correctly.
             return true;
         }
         return false;
