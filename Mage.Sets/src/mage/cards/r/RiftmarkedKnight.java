@@ -83,9 +83,6 @@ public class RiftmarkedKnight extends CardImpl {
 }
 
 class RiftmarkedKnightTriggeredAbility extends TriggeredAbilityImpl {
-    /* We want this to only trigger once due to edge cases allowing it to fire multiple times
-     * if more counters are removed than remain on the suspended card. */
-    private boolean eventTriggered = false;
 
     public RiftmarkedKnightTriggeredAbility() { super(Zone.EXILED, new CreateTokenEffect(new RiftmarkedKnightToken()), false); }
 
@@ -98,14 +95,7 @@ class RiftmarkedKnightTriggeredAbility extends TriggeredAbilityImpl {
 
     @Override
     public boolean checkTrigger(GameEvent event, Game game) {
-        boolean trigger = false;
-
-        if (event.getTargetId().equals(this.getSourceId()) && !eventTriggered &&
-                game.getCard(event.getTargetId()).getCounters(game).getCount(CounterType.TIME) == 0) {
-            eventTriggered = true;
-            trigger = true;
-        }
-        return trigger;
+        return (event.getTargetId().equals(this.getSourceId()) && game.getCard(event.getTargetId()).getCounters(game).getCount(CounterType.TIME) == 0);
     }
 
     @Override
