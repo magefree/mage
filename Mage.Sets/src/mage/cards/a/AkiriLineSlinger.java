@@ -61,7 +61,7 @@ public class AkiriLineSlinger extends CardImpl {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{R}{W}");
         
         this.supertype.add("Legendary");
-        this.subtype.add("Kod");
+        this.subtype.add("Kor");
         this.subtype.add("Soldier");
         this.subtype.add("Ally");
         this.power = new MageInt(0);

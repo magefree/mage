@@ -517,6 +517,7 @@ public class Commander extends Constructed {
                 || cn.equals("iona, shield of emeria")
                 || cn.equals("jin-gitaxias, core augur")
                 || cn.equals("karador, ghost chieftain")
+                || cn.equals("leovold, emissary of trest")
                 || cn.equals("linvala, keeper of silence")
                 || cn.equals("llawan, cephalid empress")
                 || cn.equals("memnarch")
