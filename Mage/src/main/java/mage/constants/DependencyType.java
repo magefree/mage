@@ -41,6 +41,7 @@ package mage.constants;
 public enum DependencyType {
 
     AuraAddingRemoving,
+    ArtifactAddingRemoving,
     BecomeForest,
     BecomeIsland,
     BecomeMountain,
