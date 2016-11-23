@@ -260,6 +260,7 @@ public class Lorwyn extends ExpansionSet {
         cards.add(new SetCardInfo("Profane Command", 135, Rarity.RARE, mage.cards.p.ProfaneCommand.class));
         cards.add(new SetCardInfo("Protective Bubble", 80, Rarity.COMMON, mage.cards.p.ProtectiveBubble.class));
         cards.add(new SetCardInfo("Prowess of the Fair", 136, Rarity.UNCOMMON, mage.cards.p.ProwessOfTheFair.class));
+        cards.add(new SetCardInfo("Purity", 37, Rarity.RARE, mage.cards.p.Purity.class));
         cards.add(new SetCardInfo("Quill-Slinger Boggart", 137, Rarity.COMMON, mage.cards.q.QuillSlingerBoggart.class));
         cards.add(new SetCardInfo("Rebellion of the Flamekin", 188, Rarity.UNCOMMON, mage.cards.r.RebellionOfTheFlamekin.class));
         cards.add(new SetCardInfo("Ringskipper", 81, Rarity.COMMON, mage.cards.r.Ringskipper.class));
