@@ -70,6 +70,7 @@ public class RevisedEdition extends ExpansionSet {
         cards.add(new SetCardInfo("Copy Artifact", 53, Rarity.RARE, mage.cards.c.CopyArtifact.class));
         cards.add(new SetCardInfo("Counterspell", 54, Rarity.UNCOMMON, mage.cards.c.Counterspell.class));
         cards.add(new SetCardInfo("Craw Wurm", 97, Rarity.COMMON, mage.cards.c.CrawWurm.class));
+        cards.add(new SetCardInfo("Creature Bond", 55, Rarity.COMMON, mage.cards.c.CreatureBond.class));
         cards.add(new SetCardInfo("Crumble", 98, Rarity.UNCOMMON, mage.cards.c.Crumble.class));
         cards.add(new SetCardInfo("Crusade", 199, Rarity.RARE, mage.cards.c.Crusade.class));
         cards.add(new SetCardInfo("Crystal Rod", 242, Rarity.UNCOMMON, mage.cards.c.CrystalRod.class));

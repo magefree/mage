@@ -82,6 +82,7 @@ public class Chronicles extends ExpansionSet {
         cards.add(new SetCardInfo("Dandan", 18, Rarity.COMMON, mage.cards.d.Dandan.class));
         cards.add(new SetCardInfo("D'Avenant Archer", 61, Rarity.COMMON, mage.cards.d.DAvenantArcher.class));
         cards.add(new SetCardInfo("Divine Offering", 62, Rarity.COMMON, mage.cards.d.DivineOffering.class));
+        cards.add(new SetCardInfo("Emerald Dragonfly", 35, Rarity.COMMON, mage.cards.e.EmeraldDragonfly.class));
         cards.add(new SetCardInfo("Erhnam Djinn", 36, Rarity.UNCOMMON, mage.cards.e.ErhnamDjinn.class));
         cards.add(new SetCardInfo("Fallen Angel", 4, Rarity.UNCOMMON, mage.cards.f.FallenAngel.class));
         cards.add(new SetCardInfo("Feldon's Cane", 77, Rarity.COMMON, mage.cards.f.FeldonsCane.class));
