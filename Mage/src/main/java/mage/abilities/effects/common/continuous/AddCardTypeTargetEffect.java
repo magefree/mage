@@ -52,6 +52,8 @@ public class AddCardTypeTargetEffect extends ContinuousEffectImpl {
         this.addedCardType = addedCardType;
         if (addedCardType.equals(CardType.ENCHANTMENT)) {
             dependencyTypes.add(DependencyType.EnchantmentAddingRemoving);
+        } else if (addedCardType.equals(CardType.ARTIFACT)) {
+            dependencyTypes.add(DependencyType.ArtifactAddingRemoving);
         }
     }
 

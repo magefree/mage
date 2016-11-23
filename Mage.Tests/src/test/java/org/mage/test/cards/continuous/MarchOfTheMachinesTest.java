@@ -127,5 +127,22 @@ public class MarchOfTheMachinesTest extends CardTestPlayerBase {
         assertPermanentCount(playerA, "Accorder's Shield", 0);
         assertGraveyardCount(playerA, "Accorder's Shield", 1);
     }
-    
+
+    @Test
+    public void testLiquimetalCoatingLandIsDestroyed() {
+        addCard(Zone.BATTLEFIELD, playerA, "Island", 4);
+        addCard(Zone.BATTLEFIELD, playerA, "Forest");
+        addCard(Zone.BATTLEFIELD, playerA, "Liquimetal Coating");
+        addCard(Zone.HAND, playerA, "March of the Machines");
+
+        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "March of the Machines");
+        activateAbility(2, PhaseStep.PRECOMBAT_MAIN, playerA, "{T}: Target permanent", "Forest");
+
+        setStopAt(2, PhaseStep.BEGIN_COMBAT);
+        execute();
+
+        assertPermanentCount(playerA, "Forest", 0);
+        assertGraveyardCount(playerA, "Forest", 1);
+    }
+
 }
