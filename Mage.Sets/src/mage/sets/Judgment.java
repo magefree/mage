@@ -158,6 +158,7 @@ public class Judgment extends ExpansionSet {
         cards.add(new SetCardInfo("Valor", 32, Rarity.UNCOMMON, mage.cards.v.Valor.class));
         cards.add(new SetCardInfo("Venomous Vines", 136, Rarity.COMMON, mage.cards.v.VenomousVines.class));
         cards.add(new SetCardInfo("Vigilant Sentry", 33, Rarity.COMMON, mage.cards.v.VigilantSentry.class));
+        cards.add(new SetCardInfo("Web of Inertia", 53, Rarity.UNCOMMON, mage.cards.w.WebOfInertia.class));
         cards.add(new SetCardInfo("Wonder", 54, Rarity.UNCOMMON, mage.cards.w.Wonder.class));
         cards.add(new SetCardInfo("Worldgorger Dragon", 103, Rarity.RARE, mage.cards.w.WorldgorgerDragon.class));
         cards.add(new SetCardInfo("Wormfang Drake", 57, Rarity.COMMON, mage.cards.w.WormfangDrake.class));
