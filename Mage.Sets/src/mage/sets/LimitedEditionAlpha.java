@@ -67,6 +67,7 @@ public class LimitedEditionAlpha extends ExpansionSet {
         cards.add(new SetCardInfo("Copy Artifact", 54, Rarity.RARE, mage.cards.c.CopyArtifact.class));
         cards.add(new SetCardInfo("Counterspell", 55, Rarity.UNCOMMON, mage.cards.c.Counterspell.class));
         cards.add(new SetCardInfo("Craw Wurm", 99, Rarity.COMMON, mage.cards.c.CrawWurm.class));
+        cards.add(new SetCardInfo("Creature Bond", 56, Rarity.COMMON, mage.cards.c.CreatureBond.class));
         cards.add(new SetCardInfo("Crusade", 200, Rarity.RARE, mage.cards.c.Crusade.class));
         cards.add(new SetCardInfo("Crystal Rod", 239, Rarity.UNCOMMON, mage.cards.c.CrystalRod.class));
         cards.add(new SetCardInfo("Cursed Land", 6, Rarity.UNCOMMON, mage.cards.c.CursedLand.class));

@@ -114,6 +114,7 @@ public class FourthEdition extends ExpansionSet {
         cards.add(new SetCardInfo("Cosmic Horror", 10, Rarity.RARE, mage.cards.c.CosmicHorror.class));
         cards.add(new SetCardInfo("Counterspell", 65, Rarity.UNCOMMON, mage.cards.c.Counterspell.class));
         cards.add(new SetCardInfo("Craw Wurm", 122, Rarity.COMMON, mage.cards.c.CrawWurm.class));
+        cards.add(new SetCardInfo("Creature Bond", 66, Rarity.COMMON, mage.cards.c.CreatureBond.class));
         cards.add(new SetCardInfo("Crimson Manticore", 201, Rarity.RARE, mage.cards.c.CrimsonManticore.class));
         cards.add(new SetCardInfo("Crumble", 123, Rarity.UNCOMMON, mage.cards.c.Crumble.class));
         cards.add(new SetCardInfo("Crusade", 270, Rarity.RARE, mage.cards.c.Crusade.class));
