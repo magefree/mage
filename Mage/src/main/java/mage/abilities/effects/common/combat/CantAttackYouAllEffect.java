@@ -76,7 +76,7 @@ public class CantAttackYouAllEffect extends RestrictionEffect {
     @Override
     public boolean canAttack(Permanent attacker, UUID defenderId, Ability source, Game game) {
         return (!alsoPlaneswalker && !defenderId.equals(source.getControllerId()))
-                || (alsoPlaneswalker && !game.getCombat().getDefendingPlayerId(attacker.getId(), game).equals(source.getControllerId()));
+                || (alsoPlaneswalker && !(source.getControllerId().equals(game.getCombat().getDefendingPlayerId(attacker.getId(), game))));
     }
 
     @Override
