@@ -30,6 +30,7 @@ package mage.cards.c;
 import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.Ability;
+import mage.abilities.MageSingleton;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.effects.ContinuousEffectImpl;
 import mage.abilities.keyword.ChangelingAbility;
@@ -64,17 +65,18 @@ import mage.players.Player;
  * @author psykad
  */
 public class CairnWanderer extends CardImpl {
+
     public CairnWanderer(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{4}{B}");
-        
+        super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{4}{B}");
+
         this.subtype.add("Shapeshifter");
         this.power = new MageInt(4);
-        this.toughness = new MageInt(4);        
-        
+        this.toughness = new MageInt(4);
+
         // Changeling
         this.addAbility(ChangelingAbility.getInstance());
-        
-        // As long as a creature card with flying is in a graveyard, {this} has flying. The same is true for fear, first strike, double strike, deathtouch, haste, landwalk, lifelink, protection, reach, trample, shroud, and vigilance.
+
+        // As long as a creature card with flying is in a graveyard, Cairn Wanderer has flying. The same is true for fear, first strike, double strike, deathtouch, haste, landwalk, lifelink, protection, reach, trample, shroud, and vigilance.
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new CairnWandererEffect()));
     }
 
@@ -86,51 +88,57 @@ public class CairnWanderer extends CardImpl {
     public CairnWanderer copy() {
         return new CairnWanderer(this);
     }
-    
+
     class CairnWandererEffect extends ContinuousEffectImpl {
+
         public CairnWandererEffect() {
             super(Duration.WhileOnBattlefield, Layer.AbilityAddingRemovingEffects_6, SubLayer.NA, Outcome.AddAbility);
             staticText = "As long as a creature card with flying is in a graveyard, {this} has flying. The same is true for fear, first strike, double strike, deathtouch, haste, landwalk, lifelink, protection, reach, trample, shroud, and vigilance.";
         }
-        
+
         public CairnWandererEffect(final CairnWandererEffect effect) {
             super(effect);
         }
 
         @Override
         public boolean apply(Game game, Ability source) {
-            Permanent perm = game.getPermanent(source.getSourceId());
-            
-            if (perm == null) return false;
-            
+            Permanent sourcePermanent = game.getPermanent(source.getSourceId());
+
+            if (sourcePermanent == null) {
+                return false;
+            }
+
             for (UUID playerId : game.getState().getPlayersInRange(source.getControllerId(), game)) {
                 Player player = game.getPlayer(playerId);
-                
+
                 if (player != null) {
                     for (Card card : player.getGraveyard().getCards(game)) {
                         if (card.getCardType().contains(CardType.CREATURE)) {
-                            for (Ability ability : card.getAbilities()) {
-                                if (ability instanceof FlyingAbility ||
-                                    ability instanceof FearAbility ||
-                                    ability instanceof FirstStrikeAbility ||
-                                    ability instanceof DoubleStrikeAbility ||
-                                    ability instanceof DeathtouchAbility ||
-                                    ability instanceof HasteAbility ||
-                                    ability instanceof LandwalkAbility ||
-                                    ability instanceof LifelinkAbility ||
-                                    ability instanceof ProtectionAbility ||
-                                    ability instanceof ReachAbility ||
-                                    ability instanceof TrampleAbility ||
-                                    ability instanceof ShroudAbility ||
-                                    ability instanceof VigilanceAbility) {
-                                    perm.addAbility(ability, game);
+                            for (Ability ability : card.getAbilities(game)) {
+                                if (ability instanceof MageSingleton) {
+                                    if (ability instanceof FlyingAbility
+                                            || ability instanceof FearAbility
+                                            || ability instanceof FirstStrikeAbility
+                                            || ability instanceof DoubleStrikeAbility
+                                            || ability instanceof DeathtouchAbility
+                                            || ability instanceof HasteAbility
+                                            || ability instanceof LifelinkAbility
+                                            || ability instanceof ReachAbility
+                                            || ability instanceof TrampleAbility
+                                            || ability instanceof ShroudAbility
+                                            || ability instanceof VigilanceAbility) {
+                                        sourcePermanent.addAbility(ability, game);
+                                    }
+                                } else if (ability instanceof ProtectionAbility
+                                        || ability instanceof LandwalkAbility) {
+                                    sourcePermanent.addAbility(ability, game);
                                 }
                             }
                         }
                     }
                 }
             }
-            
+
             return true;
         }
 
@@ -138,5 +146,5 @@ public class CairnWanderer extends CardImpl {
         public CairnWandererEffect copy() {
             return new CairnWandererEffect(this);
         }
-    }            
+    }
 }
