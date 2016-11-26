@@ -387,6 +387,7 @@ public class Commander extends Constructed {
                     || cn.equals("bane of progress")
                     || cn.equals("basalt monolith")
                     || cn.equals("blightsteel collossus")
+                    || cn.equals("blood moon")
                     || cn.equals("braids, cabal minion")
                     || cn.equals("cabal coffers")
                     || cn.equals("captain sisay")
@@ -451,7 +452,7 @@ public class Commander extends Constructed {
                     || cn.equals("vorinclex, voice of hunger")
                     || cn.equals("winter orb")
                     || cn.equals("zur the enchanter")) {
-                thisMaxPower = Math.max(thisMaxPower, 4);
+                thisMaxPower = Math.max(thisMaxPower, 5);
             }
 
             // Parts of infinite combos

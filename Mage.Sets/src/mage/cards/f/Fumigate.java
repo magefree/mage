@@ -84,7 +84,7 @@ class FumigateEffect extends OneShotEffect {
         if (controller != null) {
             int destroyedCreature = 0;
             for(Permanent creature: game.getState().getBattlefield().getActivePermanents(new FilterCreaturePermanent(), controller.getId(), game)) {
-                if (creature.destroy(source.getSourceId(), game, true)) {
+                if (creature.destroy(source.getSourceId(), game, false)) {
                     destroyedCreature++;
                 }
             }
