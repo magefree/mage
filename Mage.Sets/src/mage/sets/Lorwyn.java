@@ -86,6 +86,7 @@ public class Lorwyn extends ExpansionSet {
         cards.add(new SetCardInfo("Brion Stoutarm", 246, Rarity.RARE, mage.cards.b.BrionStoutarm.class));
         cards.add(new SetCardInfo("Broken Ambitions", 54, Rarity.COMMON, mage.cards.b.BrokenAmbitions.class));
         cards.add(new SetCardInfo("Burrenton Forge-Tender", 7, Rarity.UNCOMMON, mage.cards.b.BurrentonForgeTender.class));
+        cards.add(new SetCardInfo("Cairn Wanderer", 105, Rarity.RARE, mage.cards.c.CairnWanderer.class));
         cards.add(new SetCardInfo("Caterwauling Boggart", 157, Rarity.COMMON, mage.cards.c.CaterwaulingBoggart.class));
         cards.add(new SetCardInfo("Ceaseless Searblades", 158, Rarity.UNCOMMON, mage.cards.c.CeaselessSearblades.class));
         cards.add(new SetCardInfo("Cenn's Heir", 8, Rarity.COMMON, mage.cards.c.CennsHeir.class));
