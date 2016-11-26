@@ -29,42 +29,38 @@ package mage.cards.c;
 
 import java.util.UUID;
 import mage.abilities.Ability;
-import mage.abilities.Mode;
 import mage.abilities.common.DiesAttachedTriggeredAbility;
-import mage.abilities.effects.OneShotEffect;
+import mage.abilities.dynamicvalue.common.AttachedPermanentToughnessValue;
 import mage.abilities.effects.common.AttachEffect;
+import mage.abilities.effects.common.DamageAttachedControllerEffect;
 import mage.abilities.keyword.EnchantAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Outcome;
-import mage.game.Game;
-import mage.game.permanent.Permanent;
-import mage.players.Player;
 import mage.target.TargetPermanent;
 import mage.target.common.TargetCreaturePermanent;
 
 /**
  *
- * @author Styxo
+ * @author MTGfan
  */
 public class CreatureBond extends CardImpl {
 
     public CreatureBond(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.ENCHANTMENT}, "{1}{U}");
-
+        
         this.subtype.add("Aura");
 
         // Enchant creature
         TargetPermanent auraTarget = new TargetCreaturePermanent();
         this.getSpellAbility().addTarget(auraTarget);
-        this.getSpellAbility().addEffect(new AttachEffect(Outcome.Benefit));
+        this.getSpellAbility().addEffect(new AttachEffect(Outcome.BoostCreature));
         Ability ability = new EnchantAbility(auraTarget.getTargetName());
         this.addAbility(ability);
 
         // When enchanted creature dies, Creature Bond deals damage equal to that creature's toughness to the creature's controller.
-        this.addAbility(new DiesAttachedTriggeredAbility(new CreatureBondEffect(), "enchanted creature"));
-
+	this.addAbility( new DiesAttachedTriggeredAbility(new DamageAttachedControllerEffect(new AttachedPermanentToughnessValue()), "enchanted creature"));
     }
 
     public CreatureBond(final CreatureBond card) {
@@ -75,39 +71,4 @@ public class CreatureBond extends CardImpl {
     public CreatureBond copy() {
         return new CreatureBond(this);
     }
-}
-
-class CreatureBondEffect extends OneShotEffect {
-
-    public CreatureBondEffect() {
-        super(Outcome.Damage);
-    }
-
-    public CreatureBondEffect(CreatureBondEffect copy) {
-        super(copy);
-    }
-
-    @Override
-    public CreatureBondEffect copy() {
-        return new CreatureBondEffect(this);
-    }
-
-    @Override
-    public boolean apply(Game game, Ability source) {
-        Permanent creature = (Permanent) getValue("attachedTo");
-        if (creature != null) {
-            Player player = game.getPlayer(creature.getOwnerId());
-            if (player != null) {
-                player.damage(creature.getToughness().getValue(), source.getId(), game, false, true);
-                return true;
-            }
-        }
-        return false;
-    }
-
-    @Override
-    public String getText(Mode mode) {
-        return "{this} deals damage equal to that creature's toughness to the creature's controller";
-    }
-
 }
