@@ -202,6 +202,7 @@ public class RevisedEdition extends ExpansionSet {
         cards.add(new SetCardInfo("Ornithopter", 270, Rarity.UNCOMMON, mage.cards.o.Ornithopter.class));
         cards.add(new SetCardInfo("Paralyze", 29, Rarity.COMMON, mage.cards.p.Paralyze.class));
         cards.add(new SetCardInfo("Pearled Unicorn", 214, Rarity.COMMON, mage.cards.p.PearledUnicorn.class));
+        cards.add(new SetCardInfo("Personal Incarnation", 215, Rarity.RARE, mage.cards.p.PersonalIncarnation.class));
         cards.add(new SetCardInfo("Pestilence", 30, Rarity.COMMON, mage.cards.p.Pestilence.class));
         cards.add(new SetCardInfo("Phantasmal Forces", 69, Rarity.UNCOMMON, mage.cards.p.PhantasmalForces.class));
         cards.add(new SetCardInfo("Phantasmal Terrain", 70, Rarity.COMMON, mage.cards.p.PhantasmalTerrain.class));

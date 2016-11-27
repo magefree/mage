@@ -193,6 +193,7 @@ public class LimitedEditionBeta extends ExpansionSet {
         cards.add(new SetCardInfo("Orcish Oriflamme", 168, Rarity.UNCOMMON, mage.cards.o.OrcishOriflamme.class));
         cards.add(new SetCardInfo("Paralyze", 28, Rarity.COMMON, mage.cards.p.Paralyze.class));
         cards.add(new SetCardInfo("Pearled Unicorn", 216, Rarity.COMMON, mage.cards.p.PearledUnicorn.class));
+        cards.add(new SetCardInfo("Personal Incarnation", 217, Rarity.RARE, mage.cards.p.PersonalIncarnation.class));
         cards.add(new SetCardInfo("Pestilence", 29, Rarity.COMMON, mage.cards.p.Pestilence.class));
         cards.add(new SetCardInfo("Phantasmal Forces", 68, Rarity.UNCOMMON, mage.cards.p.PhantasmalForces.class));
         cards.add(new SetCardInfo("Phantasmal Terrain", 69, Rarity.COMMON, mage.cards.p.PhantasmalTerrain.class));
