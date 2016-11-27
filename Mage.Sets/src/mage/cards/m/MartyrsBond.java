@@ -137,10 +137,9 @@ class MartyrsBondEffect extends OneShotEffect {
     public boolean apply(Game game, Ability source) {
         List<UUID> perms = new ArrayList<>();
         if (source != null) {
-            Card sourceCard = game.getCard(source.getSourceId());
             Permanent saccedPermanent = game.getPermanentOrLKIBattlefield(getTargetPointer().getFirst(game, source));
             Player controller = game.getPlayer(source.getControllerId());
-            if (controller != null && sourceCard != null && saccedPermanent != null) {
+            if (controller != null && saccedPermanent != null) {
                 FilterControlledPermanent filter = new FilterControlledPermanent();
                 String message = "permanent with type (";
                 boolean firstType = true;
@@ -162,23 +161,25 @@ class MartyrsBondEffect extends OneShotEffect {
 
                 for (UUID playerId : game.getState().getPlayersInRange(controller.getId(), game)) {
                     Player player = game.getPlayer(playerId);
-                    if (player != null && !playerId.equals(source.getControllerId())) {
-                        TargetControlledPermanent target = new TargetControlledPermanent(filter);
-                        target.setNotTarget(true);
-                        if (target.canChoose(player.getId(), game)) {
+                    if (player != null && !playerId.equals(controller.getId())) {
+                        TargetControlledPermanent target = new TargetControlledPermanent(1, 1, filter, false);                        
+                        if (target.canChoose(playerId, game)) {
                             player.chooseTarget(Outcome.Sacrifice, target, source, game);
-                            perms.addAll(target.getTargets());
+                            perms.add(target.getFirstTarget());
                         }
                     }
                 }
 
+                boolean saccedPermaents = false;
                 for (UUID permID : perms) {
                     Permanent permanent = game.getPermanent(permID);
                     if (permanent != null) {
                         permanent.sacrifice(source.getSourceId(), game);
-                        return true;
+                        saccedPermaents = true;
                     }
                 }
+                
+                return saccedPermaents;
             }
         }
         return false;
