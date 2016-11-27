@@ -25,56 +25,44 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.cards.p;
+package mage.cards.t;
 
 import java.util.UUID;
-import mage.abilities.Ability;
-import mage.abilities.common.EntersBattlefieldAllTriggeredAbility;
-import mage.abilities.effects.Effect;
-import mage.abilities.effects.common.GainLifeEffect;
-import mage.abilities.effects.common.LoseLifeTargetEffect;
+import mage.MageInt;
+import mage.abilities.common.EntersBattlefieldTriggeredAbility;
+import mage.abilities.effects.common.BecomesMonarchSourceEffect;
+import mage.abilities.keyword.DeathtouchAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.SetTargetPointer;
-import mage.constants.TargetController;
-import mage.constants.Zone;
-import mage.filter.common.FilterLandPermanent;
-import mage.filter.predicate.permanent.ControllerPredicate;
 
 /**
  *
- * @author jeffwadsworth
- *
+ * @author LevelX2
  */
-public class PollutedBonds extends CardImpl {
+public class ThornOfTheBlackRose extends CardImpl {
 
-    private static final FilterLandPermanent filter = new FilterLandPermanent("a land");
+    public ThornOfTheBlackRose(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{3}{B}");
 
-    static {
-        filter.add(new ControllerPredicate(TargetController.OPPONENT));
-    }
+        this.subtype.add("Human");
+        this.subtype.add("Assassin");
+        this.power = new MageInt(1);
+        this.toughness = new MageInt(3);
 
-    public PollutedBonds(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId, setInfo, new CardType[]{CardType.ENCHANTMENT}, "{3}{B}{B}");
-
-        // Whenever a land enters the battlefield under an opponent's control, that player loses 2 life and you gain 2 life.
-        Effect effect = new LoseLifeTargetEffect(2);
-        effect.setText("that player loses 2 life");
-        Ability ability = new EntersBattlefieldAllTriggeredAbility(Zone.BATTLEFIELD, effect, filter, false, SetTargetPointer.PLAYER, "");
-        effect = new GainLifeEffect(2);
-        effect.setText("and you gain 2 life");
-        ability.addEffect(effect);
-        this.addAbility(ability);
+        // Deathtouch
+        this.addAbility(DeathtouchAbility.getInstance());
+        // When Thorn of the Black Rose enters the battlefield, you become the monarch.
+        this.addAbility(new EntersBattlefieldTriggeredAbility(new BecomesMonarchSourceEffect(), false));
 
     }
 
-    public PollutedBonds(final PollutedBonds card) {
+    public ThornOfTheBlackRose(final ThornOfTheBlackRose card) {
         super(card);
     }
 
     @Override
-    public PollutedBonds copy() {
-        return new PollutedBonds(this);
+    public ThornOfTheBlackRose copy() {
+        return new ThornOfTheBlackRose(this);
     }
 }

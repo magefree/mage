@@ -25,56 +25,42 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.cards.p;
+package mage.abilities.effects.common;
 
-import java.util.UUID;
 import mage.abilities.Ability;
-import mage.abilities.common.EntersBattlefieldAllTriggeredAbility;
-import mage.abilities.effects.Effect;
-import mage.abilities.effects.common.GainLifeEffect;
-import mage.abilities.effects.common.LoseLifeTargetEffect;
-import mage.cards.CardImpl;
-import mage.cards.CardSetInfo;
-import mage.constants.CardType;
-import mage.constants.SetTargetPointer;
-import mage.constants.TargetController;
-import mage.constants.Zone;
-import mage.filter.common.FilterLandPermanent;
-import mage.filter.predicate.permanent.ControllerPredicate;
+import mage.abilities.effects.OneShotEffect;
+import mage.constants.Outcome;
+import mage.game.Game;
+import mage.players.Player;
 
 /**
  *
- * @author jeffwadsworth
- *
+ * @author LevelX2
  */
-public class PollutedBonds extends CardImpl {
+public class BecomesMonarchSourceEffect extends OneShotEffect {
 
-    private static final FilterLandPermanent filter = new FilterLandPermanent("a land");
-
-    static {
-        filter.add(new ControllerPredicate(TargetController.OPPONENT));
+    public BecomesMonarchSourceEffect() {
+        super(Outcome.Benefit);
+        staticText = "you become the monarch";
     }
 
-    public PollutedBonds(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId, setInfo, new CardType[]{CardType.ENCHANTMENT}, "{3}{B}{B}");
-
-        // Whenever a land enters the battlefield under an opponent's control, that player loses 2 life and you gain 2 life.
-        Effect effect = new LoseLifeTargetEffect(2);
-        effect.setText("that player loses 2 life");
-        Ability ability = new EntersBattlefieldAllTriggeredAbility(Zone.BATTLEFIELD, effect, filter, false, SetTargetPointer.PLAYER, "");
-        effect = new GainLifeEffect(2);
-        effect.setText("and you gain 2 life");
-        ability.addEffect(effect);
-        this.addAbility(ability);
-
-    }
-
-    public PollutedBonds(final PollutedBonds card) {
-        super(card);
+    public BecomesMonarchSourceEffect(final BecomesMonarchSourceEffect effect) {
+        super(effect);
     }
 
     @Override
-    public PollutedBonds copy() {
-        return new PollutedBonds(this);
+    public BecomesMonarchSourceEffect copy() {
+        return new BecomesMonarchSourceEffect(this);
     }
+
+    @Override
+    public boolean apply(Game game, Ability source) {
+        Player controller = game.getPlayer(source.getControllerId());
+        if (controller != null) {
+            game.setMonarchId(source, source.getControllerId());
+            return true;
+        }
+        return false;
+    }
+
 }

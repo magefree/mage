@@ -84,6 +84,7 @@ public class PlayerView implements Serializable {
     private final boolean passedUntilStackResolved; // F8
     private final boolean passedAllTurns; // F9
     private final boolean passedUntilEndStepBeforeMyTurn; // F11
+    private final boolean monarch;
 
     public PlayerView(Player player, GameState state, Game game, UUID createdForPlayerId, UUID watcherUserId) {
         this.playerId = player.getId();
@@ -172,6 +173,7 @@ public class PlayerView implements Serializable {
         this.passedAllTurns = player.getPassedAllTurns();
         this.passedUntilStackResolved = player.getPassedUntilStackResolved();
         this.passedUntilEndStepBeforeMyTurn = player.getPassedUntilEndStepBeforeMyTurn();
+        this.monarch = player.getId().equals(game.getMonarchId());
     }
 
     private boolean showInBattlefield(Permanent permanent, GameState state) {
@@ -308,4 +310,9 @@ public class PlayerView implements Serializable {
     public boolean isPassedUntilEndStepBeforeMyTurn() {
         return passedUntilEndStepBeforeMyTurn;
     }
+
+    public boolean isMonarch() {
+        return monarch;
+    }
+
 }

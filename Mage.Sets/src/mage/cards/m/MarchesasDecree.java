@@ -25,56 +25,44 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.cards.p;
+package mage.cards.m;
 
 import java.util.UUID;
-import mage.abilities.Ability;
-import mage.abilities.common.EntersBattlefieldAllTriggeredAbility;
+import mage.abilities.common.AttacksAllTriggeredAbility;
+import mage.abilities.common.EntersBattlefieldTriggeredAbility;
 import mage.abilities.effects.Effect;
-import mage.abilities.effects.common.GainLifeEffect;
+import mage.abilities.effects.common.BecomesMonarchSourceEffect;
 import mage.abilities.effects.common.LoseLifeTargetEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.SetTargetPointer;
-import mage.constants.TargetController;
-import mage.constants.Zone;
-import mage.filter.common.FilterLandPermanent;
-import mage.filter.predicate.permanent.ControllerPredicate;
+import mage.filter.common.FilterCreaturePermanent;
 
 /**
  *
- * @author jeffwadsworth
- *
+ * @author LevelX2
  */
-public class PollutedBonds extends CardImpl {
+public class MarchesasDecree extends CardImpl {
 
-    private static final FilterLandPermanent filter = new FilterLandPermanent("a land");
+    public MarchesasDecree(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId, setInfo, new CardType[]{CardType.ENCHANTMENT}, "{3}{B}");
 
-    static {
-        filter.add(new ControllerPredicate(TargetController.OPPONENT));
+        // When Marchesa's Decree enters the battlefield, you become the monarch.
+        this.addAbility(new EntersBattlefieldTriggeredAbility(new BecomesMonarchSourceEffect(), false));
+
+        // Whenever a creature attacks you or a planeswalker you control, the controller of that creature loses 1 life.
+        Effect effect = new LoseLifeTargetEffect(1);
+        effect.setText("that creature's controller loses 1 life");
+        this.addAbility(new AttacksAllTriggeredAbility(effect, false, new FilterCreaturePermanent(), SetTargetPointer.PLAYER, true, true));
     }
 
-    public PollutedBonds(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId, setInfo, new CardType[]{CardType.ENCHANTMENT}, "{3}{B}{B}");
-
-        // Whenever a land enters the battlefield under an opponent's control, that player loses 2 life and you gain 2 life.
-        Effect effect = new LoseLifeTargetEffect(2);
-        effect.setText("that player loses 2 life");
-        Ability ability = new EntersBattlefieldAllTriggeredAbility(Zone.BATTLEFIELD, effect, filter, false, SetTargetPointer.PLAYER, "");
-        effect = new GainLifeEffect(2);
-        effect.setText("and you gain 2 life");
-        ability.addEffect(effect);
-        this.addAbility(ability);
-
-    }
-
-    public PollutedBonds(final PollutedBonds card) {
+    public MarchesasDecree(final MarchesasDecree card) {
         super(card);
     }
 
     @Override
-    public PollutedBonds copy() {
-        return new PollutedBonds(this);
+    public MarchesasDecree copy() {
+        return new MarchesasDecree(this);
     }
 }

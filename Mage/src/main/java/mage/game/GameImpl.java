@@ -2348,7 +2348,18 @@ public abstract class GameImpl implements Game, Serializable {
                 it.remove();
             }
         }
-
+        // If the current monarch leaves the game. When that happens, the player whose turn it is becomes the monarch.
+        // If the monarch leaves the game on their turn, the next player in turn order becomes the monarch.
+        if (playerId.equals(getMonarchId())) {
+            if (!getActivePlayerId().equals(playerId)) {
+                setMonarchId(null, getActivePlayerId());
+            } else {
+                Player nextPlayer = getPlayerList().getNext(this);
+                if (nextPlayer != null) {
+                    setMonarchId(null, nextPlayer.getId());
+                }
+            }
+        }
         // 801.2c The particular players within each player‘s range of influence are determined as each turn begins.
         // So no update of range if influence yet
     }
@@ -2896,4 +2907,20 @@ public abstract class GameImpl implements Game, Serializable {
         }
         return options;
     }
+
+    @Override
+    public UUID getMonarchId() {
+        return getState().getMonarchId();
+    }
+
+    @Override
+    public void setMonarchId(Ability source, UUID monarchId) {
+        Player newMonarch = getPlayer(monarchId);
+        if (newMonarch != null) {
+            getState().setMonarchId(monarchId);
+            informPlayers(newMonarch.getLogName() + " is the monarch");
+            fireEvent(new GameEvent(GameEvent.EventType.BECOMES_MONARCH, monarchId, source == null ? null : source.getSourceId(), monarchId));
+        }
+    }
+
 }

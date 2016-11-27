@@ -25,56 +25,45 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.cards.p;
+package mage.cards.t;
 
 import java.util.UUID;
-import mage.abilities.Ability;
-import mage.abilities.common.EntersBattlefieldAllTriggeredAbility;
-import mage.abilities.effects.Effect;
-import mage.abilities.effects.common.GainLifeEffect;
-import mage.abilities.effects.common.LoseLifeTargetEffect;
+import mage.MageInt;
+import mage.abilities.common.BeginningOfEndStepTriggeredAbility;
+import mage.abilities.condition.common.MonarchIsSourceControllerCondition;
+import mage.abilities.effects.common.counter.AddCountersSourceEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.SetTargetPointer;
 import mage.constants.TargetController;
 import mage.constants.Zone;
-import mage.filter.common.FilterLandPermanent;
-import mage.filter.predicate.permanent.ControllerPredicate;
+import mage.counters.CounterType;
 
 /**
  *
- * @author jeffwadsworth
- *
+ * @author LevelX2
  */
-public class PollutedBonds extends CardImpl {
+public class ThroneWarden extends CardImpl {
 
-    private static final FilterLandPermanent filter = new FilterLandPermanent("a land");
+    public ThroneWarden(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{1}{W}");
 
-    static {
-        filter.add(new ControllerPredicate(TargetController.OPPONENT));
+        this.subtype.add("Human");
+        this.subtype.add("Soldier");
+        this.power = new MageInt(2);
+        this.toughness = new MageInt(2);
+
+        // At the beginning of your end step, if you're the monarch, put a +1/+1 counter on Throne Warden.
+        this.addAbility(new BeginningOfEndStepTriggeredAbility(Zone.BATTLEFIELD, new AddCountersSourceEffect(CounterType.P1P1.createInstance()),
+                TargetController.YOU, MonarchIsSourceControllerCondition.getInstance(), false));
     }
 
-    public PollutedBonds(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId, setInfo, new CardType[]{CardType.ENCHANTMENT}, "{3}{B}{B}");
-
-        // Whenever a land enters the battlefield under an opponent's control, that player loses 2 life and you gain 2 life.
-        Effect effect = new LoseLifeTargetEffect(2);
-        effect.setText("that player loses 2 life");
-        Ability ability = new EntersBattlefieldAllTriggeredAbility(Zone.BATTLEFIELD, effect, filter, false, SetTargetPointer.PLAYER, "");
-        effect = new GainLifeEffect(2);
-        effect.setText("and you gain 2 life");
-        ability.addEffect(effect);
-        this.addAbility(ability);
-
-    }
-
-    public PollutedBonds(final PollutedBonds card) {
+    public ThroneWarden(final ThroneWarden card) {
         super(card);
     }
 
     @Override
-    public PollutedBonds copy() {
-        return new PollutedBonds(this);
+    public ThroneWarden copy() {
+        return new ThroneWarden(this);
     }
 }
