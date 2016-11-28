@@ -61,6 +61,7 @@ public class FourthEdition extends ExpansionSet {
         cards.add(new SetCardInfo("Ali Baba", 193, Rarity.UNCOMMON, mage.cards.a.AliBaba.class));
         cards.add(new SetCardInfo("Amrou Kithkin", 252, Rarity.COMMON, mage.cards.a.AmrouKithkin.class));
         cards.add(new SetCardInfo("Amulet of Kroog", 311, Rarity.COMMON, mage.cards.a.AmuletOfKroog.class));
+        cards.add(new SetCardInfo("Angry Mob", 253, Rarity.UNCOMMON, mage.cards.a.AngryMob.class));
         cards.add(new SetCardInfo("Animate Dead", 2, Rarity.UNCOMMON, mage.cards.a.AnimateDead.class));
         cards.add(new SetCardInfo("Animate Wall", 254, Rarity.RARE, mage.cards.a.AnimateWall.class));
         cards.add(new SetCardInfo("Ankh of Mishra", 312, Rarity.RARE, mage.cards.a.AnkhOfMishra.class));

@@ -42,6 +42,7 @@ public class FifthEdition extends ExpansionSet {
         cards.add(new SetCardInfo("Ambush Party", 208, Rarity.COMMON, mage.cards.a.AmbushParty.class));
         cards.add(new SetCardInfo("Amulet of Kroog", 347, Rarity.COMMON, mage.cards.a.AmuletOfKroog.class));
         cards.add(new SetCardInfo("An-Havva Constable", 139, Rarity.RARE, mage.cards.a.AnHavvaConstable.class));
+        cards.add(new SetCardInfo("Angry Mob", 280, Rarity.UNCOMMON, mage.cards.a.AngryMob.class));
         cards.add(new SetCardInfo("Animate Dead", 2, Rarity.UNCOMMON, mage.cards.a.AnimateDead.class));
         cards.add(new SetCardInfo("Animate Wall", 281, Rarity.RARE, mage.cards.a.AnimateWall.class));
         cards.add(new SetCardInfo("Ankh of Mishra", 348, Rarity.RARE, mage.cards.a.AnkhOfMishra.class));

@@ -53,6 +53,7 @@ public class TheDark extends ExpansionSet {
         this.numBoosterRare = 1;
         this.ratioBoosterMythic = 0;
         cards.add(new SetCardInfo("Amnesia", 19, Rarity.UNCOMMON, mage.cards.a.Amnesia.class));
+        cards.add(new SetCardInfo("Angry Mob", 74, Rarity.UNCOMMON, mage.cards.a.AngryMob.class));
         cards.add(new SetCardInfo("Apprentice Wizard", 20, Rarity.RARE, mage.cards.a.ApprenticeWizard.class));
         cards.add(new SetCardInfo("Ashes to Ashes", 1, Rarity.COMMON, mage.cards.a.AshesToAshes.class));
         cards.add(new SetCardInfo("Ball Lightning", 56, Rarity.RARE, mage.cards.b.BallLightning.class));
