@@ -298,6 +298,7 @@ public class FifthEdition extends ExpansionSet {
         cards.add(new SetCardInfo("Paralyze", 47, Rarity.COMMON, mage.cards.p.Paralyze.class));
         cards.add(new SetCardInfo("Pearled Unicorn", 326, Rarity.COMMON, mage.cards.p.PearledUnicorn.class));
         cards.add(new SetCardInfo("Pentagram of the Ages", 394, Rarity.RARE, mage.cards.p.PentagramOfTheAges.class));
+        cards.add(new SetCardInfo("Personal Incarnation", 327, Rarity.RARE, mage.cards.p.PersonalIncarnation.class));
         cards.add(new SetCardInfo("Pestilence", 48, Rarity.COMMON, mage.cards.p.Pestilence.class));
         cards.add(new SetCardInfo("Phantasmal Forces", 106, Rarity.UNCOMMON, mage.cards.p.PhantasmalForces.class));
         cards.add(new SetCardInfo("Phantasmal Terrain", 107, Rarity.COMMON, mage.cards.p.PhantasmalTerrain.class));
