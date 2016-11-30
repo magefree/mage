@@ -74,6 +74,7 @@ public class ConspiracyTakeTheCrown extends ExpansionSet {
         cards.add(new SetCardInfo("Burning Wish", 152, Rarity.RARE, mage.cards.b.BurningWish.class));
         cards.add(new SetCardInfo("Caller of Gales", 103, Rarity.COMMON, mage.cards.c.CallerOfGales.class));
         cards.add(new SetCardInfo("Canal Courier", 28, Rarity.COMMON, mage.cards.c.CanalCourier.class));
+        cards.add(new SetCardInfo("Capital Punishment", 40, Rarity.RARE, mage.cards.c.CapitalPunishment.class));
         cards.add(new SetCardInfo("Carnage Gladiator", 199, Rarity.UNCOMMON, mage.cards.c.CarnageGladiator.class));
         cards.add(new SetCardInfo("Charmbreaker Devils", 153, Rarity.RARE, mage.cards.c.CharmbreakerDevils.class));
         cards.add(new SetCardInfo("Child of Night", 130, Rarity.COMMON, mage.cards.c.ChildOfNight.class));
@@ -155,11 +156,13 @@ public class ConspiracyTakeTheCrown extends ExpansionSet {
         cards.add(new SetCardInfo("Lace with Moonglove", 184, Rarity.COMMON, mage.cards.l.LaceWithMoonglove.class));
         cards.add(new SetCardInfo("Lay of the Land", 185, Rarity.COMMON, mage.cards.l.LayOfTheLand.class));
         cards.add(new SetCardInfo("Leovold, Emissary of Trest", 77, Rarity.MYTHIC, mage.cards.l.LeovoldEmissaryOfTrest.class));
+        cards.add(new SetCardInfo("Lieutenants of the Guard", 16, Rarity.COMMON, mage.cards.l.LieutenantsOfTheGuard.class));
         cards.add(new SetCardInfo("Manaplasm", 186, Rarity.UNCOMMON, mage.cards.m.Manaplasm.class));
         cards.add(new SetCardInfo("Marchesa's Decree", 44, Rarity.UNCOMMON, mage.cards.m.MarchesasDecree.class));
         cards.add(new SetCardInfo("Menagerie Liberator", 67, Rarity.COMMON, mage.cards.m.MenagerieLiberator.class));
         cards.add(new SetCardInfo("Merfolk Looter", 114, Rarity.UNCOMMON, mage.cards.m.MerfolkLooter.class));
         cards.add(new SetCardInfo("Merfolk Skyscout", 115, Rarity.UNCOMMON, mage.cards.m.MerfolkSkyscout.class));
+        cards.add(new SetCardInfo("Messenger Jays", 35, Rarity.COMMON, mage.cards.m.MessengerJays.class));
         cards.add(new SetCardInfo("Mnemonic Wall", 116, Rarity.COMMON, mage.cards.m.MnemonicWall.class));
         cards.add(new SetCardInfo("Murder", 143, Rarity.COMMON, mage.cards.m.Murder.class));
         cards.add(new SetCardInfo("Negate", 117, Rarity.COMMON, mage.cards.n.Negate.class));
@@ -168,6 +171,7 @@ public class ConspiracyTakeTheCrown extends ExpansionSet {
         cards.add(new SetCardInfo("Ogre Sentry", 168, Rarity.COMMON, mage.cards.o.OgreSentry.class));
         cards.add(new SetCardInfo("Omenspeaker", 118, Rarity.COMMON, mage.cards.o.Omenspeaker.class));
         cards.add(new SetCardInfo("Opaline Unicorn", 213, Rarity.COMMON, mage.cards.o.OpalineUnicorn.class));
+        cards.add(new SetCardInfo("Orchard Elemental", 68, Rarity.COMMON, mage.cards.o.OrchardElemental.class));
         cards.add(new SetCardInfo("Overrun", 189, Rarity.UNCOMMON, mage.cards.o.Overrun.class));
         cards.add(new SetCardInfo("Palace Jailer", 18, Rarity.UNCOMMON, mage.cards.p.PalaceJailer.class));
         cards.add(new SetCardInfo("Palace Sentinels", 19, Rarity.COMMON, mage.cards.p.PalaceSentinels.class));
@@ -192,6 +196,7 @@ public class ConspiracyTakeTheCrown extends ExpansionSet {
         cards.add(new SetCardInfo("Runed Servitor", 216, Rarity.UNCOMMON, mage.cards.r.RunedServitor.class));
         cards.add(new SetCardInfo("Sanctum Prelate", 23, Rarity.MYTHIC, mage.cards.s.SanctumPrelate.class));
         cards.add(new SetCardInfo("Sangromancer", 147, Rarity.RARE, mage.cards.s.Sangromancer.class));
+        cards.add(new SetCardInfo("Selvala's Stampede", 71, Rarity.RARE, mage.cards.s.SelvalasStampede.class));
         cards.add(new SetCardInfo("Selvala, Heart of the Wilds", 70, Rarity.MYTHIC, mage.cards.s.SelvalaHeartOfTheWilds.class));
         cards.add(new SetCardInfo("Serum Visions", 120, Rarity.UNCOMMON, mage.cards.s.SerumVisions.class));
         cards.add(new SetCardInfo("Shambling Goblin", 148, Rarity.COMMON, mage.cards.s.ShamblingGoblin.class));
