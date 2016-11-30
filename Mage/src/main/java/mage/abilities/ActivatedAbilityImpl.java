@@ -174,6 +174,12 @@ public abstract class ActivatedAbilityImpl extends AbilityImpl implements Activa
                     return false;
                 }
                 break;
+            case OWNER:
+                Permanent permanent = game.getPermanent(getSourceId());
+                if (!permanent.getOwnerId().equals(playerId)) {
+                    return false;
+                }
+                break;
             case YOU:
                 if (!controlsAbility(playerId, game)) {
                     return false;
