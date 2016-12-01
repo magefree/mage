@@ -61,6 +61,7 @@ public class LimitedEditionBeta extends ExpansionSet {
         cards.add(new SetCardInfo("Clockwork Beast", 238, Rarity.RARE, mage.cards.c.ClockworkBeast.class));
         cards.add(new SetCardInfo("Clone", 52, Rarity.UNCOMMON, mage.cards.c.Clone.class));
         cards.add(new SetCardInfo("Cockatrice", 98, Rarity.RARE, mage.cards.c.Cockatrice.class));
+        cards.add(new SetCardInfo("Consecrate Land", 200, Rarity.UNCOMMON, mage.cards.c.ConsecrateLand.class));
         cards.add(new SetCardInfo("Conservator", 239, Rarity.UNCOMMON, mage.cards.c.Conservator.class));
         cards.add(new SetCardInfo("Control Magic", 53, Rarity.UNCOMMON, mage.cards.c.ControlMagic.class));
         cards.add(new SetCardInfo("Conversion", 201, Rarity.UNCOMMON, mage.cards.c.Conversion.class));
