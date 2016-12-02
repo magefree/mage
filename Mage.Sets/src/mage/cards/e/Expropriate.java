@@ -28,21 +28,15 @@
 
 package mage.cards.e;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.UUID;
-
 import mage.abilities.Ability;
 import mage.abilities.effects.ContinuousEffect;
 import mage.abilities.effects.ContinuousEffectImpl;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.ExileSpellEffect;
-import mage.abilities.effects.common.continuous.GainControlTargetEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.*;
 import mage.filter.FilterPermanent;
-import mage.filter.predicate.Predicates;
 import mage.filter.predicate.other.OwnerIdPredicate;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
@@ -53,8 +47,11 @@ import mage.target.Target;
 import mage.target.TargetPermanent;
 import mage.target.targetpointer.FixedTarget;
 
+import java.util.ArrayList;
+import java.util.List;
+import java.util.UUID;
+
 /**
- *
  * @author JRHerlehy
  */
 public class Expropriate extends CardImpl {
@@ -150,6 +147,7 @@ class ExpropriateDilemmaEffect extends OneShotEffect {
                 ContinuousEffect effect = new ExpropriateControlEffect(controller.getId());
                 effect.setTargetPointer(new FixedTarget(permanent.getId()));
                 game.addEffect(effect, source);
+                game.informPlayers(controller.getName() + " gained control of " + permanent.getName() + " owned by " + game.getPlayer(permanent.getOwnerId()).getName());
             }
         } //End moneyCount if statement
 
