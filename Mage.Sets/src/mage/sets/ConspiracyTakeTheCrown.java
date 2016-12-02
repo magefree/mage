@@ -105,6 +105,7 @@ public class ConspiracyTakeTheCrown extends ExpansionSet {
         cards.add(new SetCardInfo("Evolving Wilds", 218, Rarity.COMMON, mage.cards.e.EvolvingWilds.class));
         cards.add(new SetCardInfo("Exotic Orchard", 219, Rarity.RARE, mage.cards.e.ExoticOrchard.class));
         cards.add(new SetCardInfo("Explosive Vegetation", 180, Rarity.UNCOMMON, mage.cards.e.ExplosiveVegetation.class));
+        cards.add(new SetCardInfo("Expropriate", 30, Rarity.MYTHIC, mage.cards.e.Expropriate.class));
         cards.add(new SetCardInfo("Fade into Antiquity", 181, Rarity.COMMON, mage.cards.f.FadeIntoAntiquity.class));
         cards.add(new SetCardInfo("Faith's Reward", 84, Rarity.RARE, mage.cards.f.FaithsReward.class));
         cards.add(new SetCardInfo("Farbog Boneflinger", 134, Rarity.UNCOMMON, mage.cards.f.FarbogBoneflinger.class));
