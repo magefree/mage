@@ -30,7 +30,7 @@ package mage.abilities.condition.common;
 import mage.abilities.Ability;
 import mage.abilities.condition.Condition;
 import mage.constants.Zone;
-import mage.filter.common.FilterCreaturePermanent;
+import mage.filter.FilterPermanent;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 
@@ -42,9 +42,9 @@ import mage.game.permanent.Permanent;
  */
 public class EquippedMatchesFilterCondition implements Condition {
 
-    private final FilterCreaturePermanent filter;
+    private final FilterPermanent filter;
 
-    public EquippedMatchesFilterCondition(FilterCreaturePermanent filter) {
+    public EquippedMatchesFilterCondition(FilterPermanent filter) {
         this.filter = filter;
     }
 
