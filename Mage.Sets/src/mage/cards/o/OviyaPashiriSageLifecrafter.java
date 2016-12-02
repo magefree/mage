@@ -46,6 +46,7 @@ import mage.game.Game;
 import mage.game.permanent.token.ServoToken;
 import mage.game.permanent.token.Token;
 import mage.players.Player;
+import mage.util.RandomUtil;
 
 /**
  *
@@ -117,6 +118,8 @@ class OviyaPashiriSageLifecrafterToken extends Token {
         cardType.add(CardType.ARTIFACT);
         cardType.add(CardType.CREATURE);
         subtype.add("Construct");
+        setOriginalExpansionSetCode("KLD");
+        setTokenType(RandomUtil.nextInt(2) + 1);
         power = new MageInt(number);
         toughness = new MageInt(number);
     }

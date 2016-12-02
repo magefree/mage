@@ -51,7 +51,7 @@ import mage.target.common.TargetCreaturePermanent;
  */
 public class AquastrandSpider extends CardImpl {
     
-    private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("a creature with a +1/+1 counter on it");
+    private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("creature with a +1/+1 counter on it");
     static {
         filter.add(new CounterPredicate(CounterType.P1P1)); 
     }

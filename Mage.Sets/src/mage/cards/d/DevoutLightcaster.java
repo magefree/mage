@@ -36,7 +36,6 @@ import mage.abilities.effects.common.ExileTargetEffect;
 import mage.abilities.keyword.ProtectionAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
-import mage.filter.FilterCard;
 import mage.filter.FilterPermanent;
 import mage.filter.predicate.mageobject.ColorPredicate;
 import mage.target.TargetPermanent;
@@ -47,11 +46,9 @@ import mage.target.TargetPermanent;
  */
 public class DevoutLightcaster extends CardImpl {
 
-    private static final FilterCard filterProtection = new FilterCard("Black");
     private static final FilterPermanent filterTarget = new FilterPermanent("black permanent");
 
     static {
-        filterProtection.add(new ColorPredicate(ObjectColor.BLACK));
         filterTarget.add(new ColorPredicate(ObjectColor.BLACK));
     }
 
@@ -63,7 +60,7 @@ public class DevoutLightcaster extends CardImpl {
         this.power = new MageInt(2);
         this.toughness = new MageInt(2);
 
-        this.addAbility(new ProtectionAbility(filterProtection));
+        this.addAbility(ProtectionAbility.from(ObjectColor.BLACK));
         EntersBattlefieldTriggeredAbility ability = new EntersBattlefieldTriggeredAbility(new ExileTargetEffect());
         ability.addTarget(new TargetPermanent(filterTarget));
         this.addAbility(ability);

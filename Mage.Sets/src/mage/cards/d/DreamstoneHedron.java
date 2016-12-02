@@ -33,9 +33,8 @@ import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.costs.common.SacrificeSourceCost;
 import mage.abilities.costs.common.TapSourceCost;
 import mage.abilities.costs.mana.GenericManaCost;
-import mage.abilities.effects.common.BasicManaEffect;
 import mage.abilities.effects.common.DrawCardSourceControllerEffect;
-import mage.abilities.mana.BasicManaAbility;
+import mage.abilities.mana.SimpleManaAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
@@ -50,7 +49,7 @@ public class DreamstoneHedron extends CardImpl {
     public DreamstoneHedron(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.ARTIFACT},"{6}");
 
-        this.addAbility(new DreamstoneHedronFirstManaAbility());
+        this.addAbility(new SimpleManaAbility(Zone.BATTLEFIELD, Mana.ColorlessMana(3), new TapSourceCost()));
         SimpleActivatedAbility ability = new SimpleActivatedAbility(Zone.BATTLEFIELD,
                 new DrawCardSourceControllerEffect(3),
                 new GenericManaCost(3));
@@ -68,20 +67,4 @@ public class DreamstoneHedron extends CardImpl {
         return new DreamstoneHedron(this);
     }
 
-    class DreamstoneHedronFirstManaAbility extends BasicManaAbility {
-
-        public DreamstoneHedronFirstManaAbility() {
-            super(new BasicManaEffect(new Mana(0, 0, 0, 0, 0, 0, 0, 3)));
-            this.netMana.add(new Mana(0, 0, 0, 0, 0, 0, 0, 3));
-        }
-
-        public DreamstoneHedronFirstManaAbility(final DreamstoneHedronFirstManaAbility ability) {
-            super(ability);
-        }
-
-        @Override
-        public DreamstoneHedronFirstManaAbility copy() {
-            return new DreamstoneHedronFirstManaAbility(this);
-        }
-    }
 }

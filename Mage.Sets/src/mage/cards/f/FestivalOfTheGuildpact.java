@@ -25,53 +25,39 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
+package mage.cards.f;
 
-package mage.abilities.effects.common;
-
+import java.util.UUID;
+import mage.abilities.dynamicvalue.common.ManacostVariableValue;
+import mage.abilities.effects.common.DrawCardSourceControllerEffect;
+import mage.abilities.effects.common.PreventDamageToControllerEffect;
+import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
+import mage.constants.CardType;
 import mage.constants.Duration;
-import mage.abilities.Ability;
-import mage.abilities.effects.PreventionEffectImpl;
-import mage.game.Game;
-import mage.game.events.GameEvent;
 
 /**
  *
  * @author LevelX2
  */
+public class FestivalOfTheGuildpact extends CardImpl {
 
+    public FestivalOfTheGuildpact(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId, setInfo, new CardType[]{CardType.INSTANT}, "{X}{W}");
 
-public class PreventAllDamageToControllerEffect extends PreventionEffectImpl {
+        // Prevent the next X damage that would be dealt to you this turn.
+        this.getSpellAbility().addEffect(new PreventDamageToControllerEffect(Duration.EndOfTurn, false, true, new ManacostVariableValue()));
 
-    public PreventAllDamageToControllerEffect(Duration duration) {
-        super(duration, Integer.MAX_VALUE, false);
-        staticText = setText();
+        // Draw a card.
+        this.getSpellAbility().addEffect(new DrawCardSourceControllerEffect(1));
     }
 
-    public PreventAllDamageToControllerEffect(final PreventAllDamageToControllerEffect effect) {
-        super(effect);
+    public FestivalOfTheGuildpact(final FestivalOfTheGuildpact card) {
+        super(card);
     }
 
     @Override
-    public PreventAllDamageToControllerEffect copy() {
-        return new PreventAllDamageToControllerEffect(this);
-    }
-
-    @Override
-    public boolean applies(GameEvent event, Ability source, Game game) {
-        if (super.applies(event, source, game)) {
-            if (event.getTargetId().equals(source.getControllerId())){
-                return true;
-            }
-
-        }
-        return false;
-    }
-
-    private String setText() {
-        StringBuilder sb = new StringBuilder("Prevent all damage that would be dealt to you");
-        if (duration.equals(Duration.EndOfTurn)) {
-            sb.append("  this turn");
-        }
-        return sb.toString();
+    public FestivalOfTheGuildpact copy() {
+        return new FestivalOfTheGuildpact(this);
     }
 }

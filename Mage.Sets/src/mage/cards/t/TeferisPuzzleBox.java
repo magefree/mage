@@ -48,10 +48,7 @@ public class TeferisPuzzleBox extends CardImpl {
 
     public TeferisPuzzleBox(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.ARTIFACT},"{4}");
-    }
 
-    @Override
-    public void build() {
         // At the beginning of each player's draw step, that player puts the cards in his or her hand on the bottom of his or her library in any order, then draws that many cards.
         Ability ability = new BeginningOfDrawTriggeredAbility(new TeferisPuzzleBoxEffect(), TargetController.ANY, false);
         this.addAbility(ability);

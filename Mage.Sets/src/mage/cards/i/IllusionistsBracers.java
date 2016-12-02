@@ -34,7 +34,7 @@ import mage.abilities.costs.mana.GenericManaCost;
 import mage.abilities.effects.Effect;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.keyword.EquipAbility;
-import mage.abilities.mana.ManaAbility;
+import mage.abilities.mana.ActivatedManaAbilityImpl;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
@@ -99,7 +99,7 @@ class AbilityActivatedTriggeredAbility extends TriggeredAbilityImpl {
         Permanent equipment = game.getPermanent(this.getSourceId());
         if (equipment != null && equipment.getAttachedTo() != null && equipment.getAttachedTo().equals(event.getSourceId())) {
             StackAbility stackAbility = (StackAbility) game.getStack().getStackObject(event.getSourceId());
-            if (!(stackAbility.getStackAbility() instanceof ManaAbility)) {
+            if (!(stackAbility.getStackAbility() instanceof ActivatedManaAbilityImpl)) {
                 Effect effect = this.getEffects().get(0);
                 effect.setValue("stackAbility", stackAbility);
                 return true;

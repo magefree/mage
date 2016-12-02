@@ -132,6 +132,7 @@ public class IceAge extends ExpansionSet {
         cards.add(new SetCardInfo("Gorilla Pack", 135, Rarity.COMMON, mage.cards.g.GorillaPack.class));
         cards.add(new SetCardInfo("Gravebind", 17, Rarity.RARE, mage.cards.g.Gravebind.class));
         cards.add(new SetCardInfo("Green Scarab", 252, Rarity.UNCOMMON, mage.cards.g.GreenScarab.class));
+        cards.add(new SetCardInfo("Hallowed Ground", 253, Rarity.UNCOMMON, mage.cards.h.HallowedGround.class));
         cards.add(new SetCardInfo("Heal", 254, Rarity.COMMON, mage.cards.h.Heal.class));
         cards.add(new SetCardInfo("Hecatomb", 18, Rarity.RARE, mage.cards.h.Hecatomb.class));
         cards.add(new SetCardInfo("Hematite Talisman", 295, Rarity.UNCOMMON, mage.cards.h.HematiteTalisman.class));

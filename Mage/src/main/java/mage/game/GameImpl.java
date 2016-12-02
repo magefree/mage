@@ -48,17 +48,15 @@ import mage.MageObject;
 import mage.abilities.Ability;
 import mage.abilities.ActivatedAbility;
 import mage.abilities.DelayedTriggeredAbility;
+import mage.abilities.OpeningHandAction;
 import mage.abilities.SpellAbility;
 import mage.abilities.TriggeredAbility;
 import mage.abilities.common.AttachableToRestrictedAbility;
-import mage.abilities.common.ChancellorAbility;
-import mage.abilities.common.GemstoneCavernsAbility;
 import mage.abilities.effects.ContinuousEffect;
 import mage.abilities.effects.ContinuousEffects;
 import mage.abilities.effects.Effect;
 import mage.abilities.effects.PreventionEffectData;
 import mage.abilities.effects.common.CopyEffect;
-import mage.abilities.keyword.LeylineAbility;
 import mage.abilities.keyword.MorphAbility;
 import mage.abilities.keyword.TransformAbility;
 import mage.abilities.mana.DelayedTriggeredManaAbility;
@@ -84,6 +82,7 @@ import mage.constants.Zone;
 import mage.counters.CounterType;
 import mage.counters.Counters;
 import mage.filter.Filter;
+import mage.filter.FilterCard;
 import mage.filter.FilterPermanent;
 import mage.filter.common.FilterControlledCreaturePermanent;
 import mage.filter.common.FilterPlaneswalkerPermanent;
@@ -119,6 +118,7 @@ import mage.players.Player;
 import mage.players.PlayerList;
 import mage.players.Players;
 import mage.target.Target;
+import mage.target.TargetCard;
 import mage.target.TargetPermanent;
 import mage.target.TargetPlayer;
 import mage.util.GameLog;
@@ -572,7 +572,6 @@ public abstract class GameImpl implements Game, Serializable {
     public void saveState(boolean bookmark) {
         if (!simulation && gameStates != null) {
             if (bookmark || saveGame) {
-                state.getPlayerList().setCurrent(playerList.get());
                 gameStates.save(state);
             }
         }
@@ -678,7 +677,7 @@ public abstract class GameImpl implements Game, Serializable {
                 GameState restore = gameStates.rollback(stateNum);
                 if (restore != null) {
                     state.restore(restore);
-                    playerList.setCurrent(state.getPlayerList().get());
+                    playerList.setCurrent(state.getPlayerByOrderId());
                 }
             }
         }
@@ -758,16 +757,22 @@ public abstract class GameImpl implements Game, Serializable {
         if (!isPaused() && !gameOver(null)) {
             playerList = state.getPlayerList(nextPlayerId);
             Player playerByOrder = getPlayer(playerList.get());
+            state.setPlayerByOrderId(playerByOrder.getId());
             while (!isPaused() && !gameOver(null)) {
-                playExtraTurns();
+                if (!playExtraTurns()) {
+                    break;
+                }
                 GameEvent event = new GameEvent(GameEvent.EventType.PLAY_TURN, null, null, playerByOrder.getId());
                 if (!replaceEvent(event)) {
                     if (!playTurn(playerByOrder)) {
                         break;
                     }
                 }
-                playExtraTurns();
+                if (!playExtraTurns()) {
+                    break;
+                }
                 playerByOrder = playerList.getNext(this);
+                state.setPlayerByOrderId(playerByOrder.getId());
             }
         }
         if (gameOver(null) && !isSimulation()) {
@@ -791,7 +796,7 @@ public abstract class GameImpl implements Game, Serializable {
         }
     }
 
-    private void playExtraTurns() {
+    private boolean playExtraTurns() {
         //20091005 - 500.7
         TurnMod extraTurn = getNextExtraTurn();
         while (extraTurn != null) {
@@ -804,14 +809,16 @@ public abstract class GameImpl implements Game, Serializable {
                     if (!this.isSimulation()) {
                         informPlayers(extraPlayer.getLogName() + " takes an extra turn");
                     }
-                    playTurn(extraPlayer);
+                    if (!playTurn(extraPlayer)) {
+                        return false;
+                    }
                 }
             }
             extraTurn = getNextExtraTurn();
         }
         state.setTurnId(null);
         state.setExtraTurn(false);
-
+        return true;
     }
 
     private TurnMod getNextExtraTurn() {
@@ -1027,34 +1034,38 @@ public abstract class GameImpl implements Game, Serializable {
         //20100716 - 103.5
         for (UUID playerId : state.getPlayerList(startingPlayerId)) {
             Player player = getPlayer(playerId);
+            Cards cardsWithOpeningAction = new CardsImpl();
             for (Card card : player.getHand().getCards(this)) {
-                if (player.getHand().contains(card.getId())) {
-                    if (card.getAbilities().containsKey(LeylineAbility.getInstance().getId())) {
-                        if (player.chooseUse(Outcome.PutCardInPlay, "Do you wish to put " + card.getName() + " on the battlefield?", null, this)) {
-                            card.putOntoBattlefield(this, Zone.HAND, null, player.getId());
-                        }
-                    }
-                    for (Ability ability : card.getAbilities()) {
-                        if (ability instanceof ChancellorAbility) {
-                            if (player.chooseUse(Outcome.PutCardInPlay, "Do you wish to reveal " + card.getName() + "?", ability, this)) {
-                                Cards cards = new CardsImpl();
-                                cards.add(card);
-                                player.revealCards("Revealed", cards, this);
-                                ability.resolve(this);
-                            }
-                        }
-                        if (ability instanceof GemstoneCavernsAbility) {
-                            if (!playerId.equals(startingPlayerId)) {
-                                if (player.chooseUse(Outcome.PutCardInPlay, "Do you wish to put " + card.getName() + " into play?", ability, this)) {
-                                    Cards cards = new CardsImpl();
-                                    cards.add(card);
-                                    player.revealCards("Revealed", cards, this);
-                                    ability.resolve(this);
-                                }
-                            }
+                for (Ability ability : card.getAbilities()) {
+                    if (ability instanceof OpeningHandAction) {
+                        OpeningHandAction action = (OpeningHandAction) ability;
+                        if (action.isOpeningHandActionAllowed(card, player, this)) {
+                            cardsWithOpeningAction.add(card);
                         }
                     }
                 }
+            }
+            while (!cardsWithOpeningAction.isEmpty() && player.canRespond()) {
+                Card card;
+                if (cardsWithOpeningAction.size() > 1) {
+                    TargetCard targetCard = new TargetCard(1, Zone.HAND, new FilterCard("card for opening hand action"));
+                    player.chooseTarget(Outcome.Benefit, cardsWithOpeningAction, targetCard, null, this);
+                    card = getCard(targetCard.getFirstTarget());
+                } else {
+                    card = cardsWithOpeningAction.getRandom(this);
+                }
+                if (card != null) {
+                    for (Ability ability : card.getAbilities()) {
+                        if (ability instanceof OpeningHandAction) {
+                            OpeningHandAction action = (OpeningHandAction) ability;
+                            if (action.askUseOpeningHandAction(card, player, this)) {
+                                action.doOpeningHandAction(card, player, this);
+                            }
+                        }
+
+                    }
+                }
+                cardsWithOpeningAction.remove(card);
             }
         }
 
@@ -1396,6 +1407,7 @@ public abstract class GameImpl implements Game, Serializable {
 
     @Override
     public synchronized void applyEffects() {
+        resetShortLivingLKI();
         state.applyEffects(this);
     }
 
@@ -1488,6 +1500,18 @@ public abstract class GameImpl implements Game, Serializable {
         Ability newAbility = source.copy();
         newEffect.init(newAbility, this);
 
+        // If there are already copy effects with dration = Custom to the same object, remove the existing effects because they no longer have any effect
+        if (Duration.Custom.equals(duration)) {
+            for (Effect effect : getState().getContinuousEffects().getLayeredEffects(this)) {
+                if (effect instanceof CopyEffect) {
+                    CopyEffect copyEffect = (CopyEffect) effect;
+                    // there is another copy effect that copies to the same permanent
+                    if (copyEffect.getSourceId().equals(copyToPermanentId) && copyEffect.getDuration().equals(Duration.Custom)) {
+                        copyEffect.discard();
+                    }
+                }
+            }
+        }
         state.addEffect(newEffect, newAbility);
         return newBluePrint;
     }
@@ -2257,7 +2281,7 @@ public abstract class GameImpl implements Game, Serializable {
      *
      * @param playerId
      */
-    protected void leave(UUID playerId) {
+    protected void leave(UUID playerId) { // needs to be executed from the game thread, not from the concede thread of conceding player!
 
         Player player = getPlayer(playerId);
         if (player == null || player.hasLeft()) {
@@ -2324,7 +2348,18 @@ public abstract class GameImpl implements Game, Serializable {
                 it.remove();
             }
         }
-
+        // If the current monarch leaves the game. When that happens, the player whose turn it is becomes the monarch.
+        // If the monarch leaves the game on their turn, the next player in turn order becomes the monarch.
+        if (playerId.equals(getMonarchId())) {
+            if (!getActivePlayerId().equals(playerId)) {
+                setMonarchId(null, getActivePlayerId());
+            } else {
+                Player nextPlayer = getPlayerList().getNext(this);
+                if (nextPlayer != null) {
+                    setMonarchId(null, nextPlayer.getId());
+                }
+            }
+        }
         // 801.2c The particular players within each player‘s range of influence are determined as each turn begins.
         // So no update of range if influence yet
     }
@@ -2820,7 +2855,7 @@ public abstract class GameImpl implements Game, Serializable {
                 if (restore != null) {
                     informPlayers(GameLog.getPlayerRequestColoredText("Player request: Rolling back to start of turn " + restore.getTurnNum()));
                     state.restoreForRollBack(restore);
-                    playerList.setCurrent(state.getPlayerList().get());
+                    playerList.setCurrent(state.getPlayerByOrderId());
                     // because restore uses the objects without copy each copy the state again
                     gameStatesRollBack.put(getTurnNum(), state.copy());
                     executingRollback = true;
@@ -2872,4 +2907,20 @@ public abstract class GameImpl implements Game, Serializable {
         }
         return options;
     }
+
+    @Override
+    public UUID getMonarchId() {
+        return getState().getMonarchId();
+    }
+
+    @Override
+    public void setMonarchId(Ability source, UUID monarchId) {
+        Player newMonarch = getPlayer(monarchId);
+        if (newMonarch != null) {
+            getState().setMonarchId(monarchId);
+            informPlayers(newMonarch.getLogName() + " is the monarch");
+            fireEvent(new GameEvent(GameEvent.EventType.BECOMES_MONARCH, monarchId, source == null ? null : source.getSourceId(), monarchId));
+        }
+    }
+
 }

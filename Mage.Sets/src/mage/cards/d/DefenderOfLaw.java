@@ -34,8 +34,6 @@ import mage.abilities.keyword.FlashAbility;
 import mage.abilities.keyword.ProtectionAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
-import mage.filter.FilterCard;
-import mage.filter.predicate.mageobject.ColorPredicate;
 
 import java.util.UUID;
 
@@ -43,12 +41,6 @@ import java.util.UUID;
  * @author Backfir3
  */
 public class DefenderOfLaw extends CardImpl {
-
-    private static final FilterCard filter = new FilterCard("Red");
-
-    static {
-        filter.add(new ColorPredicate(ObjectColor.RED));
-    }
 
     public DefenderOfLaw(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{2}{W}");
@@ -59,7 +51,7 @@ public class DefenderOfLaw extends CardImpl {
         this.toughness = new MageInt(1);
 
         this.addAbility(FlashAbility.getInstance());
-        this.addAbility(new ProtectionAbility(filter));
+        this.addAbility(ProtectionAbility.from(ObjectColor.RED));
     }
 
     public DefenderOfLaw(final DefenderOfLaw card) {

@@ -29,20 +29,15 @@ package mage.cards.h;
 
 import java.util.UUID;
 import mage.MageInt;
-import mage.abilities.Ability;
-import mage.abilities.common.AttacksTriggeredAbility;
 import mage.abilities.common.SimpleStaticAbility;
+import mage.abilities.keyword.ProvokeAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Duration;
-import mage.game.Game;
-import mage.game.permanent.Permanent;
-import mage.abilities.effects.RequirementEffect;
 import mage.abilities.effects.common.continuous.GainAbilityAllEffect;
 import mage.constants.Zone;
 import mage.filter.common.FilterCreaturePermanent;
-import mage.target.common.TargetCreaturePermanent;
 
 /**
  *
@@ -58,9 +53,8 @@ public class HunterSliver extends CardImpl {
         this.toughness = new MageInt(1);
 
         // All Sliver creatures have provoke.
-        Ability ability = new AttacksTriggeredAbility(new ProvokeEffect(), true, "may have target creature untap and block if able");
-        ability.addTarget(new TargetCreaturePermanent());
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new GainAbilityAllEffect(ability, Duration.WhileOnBattlefield, new FilterCreaturePermanent("Sliver", "Sliver creatures"))));
+        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new GainAbilityAllEffect(new ProvokeAbility(),
+                Duration.WhileOnBattlefield, new FilterCreaturePermanent("Sliver", "Sliver creatures"))));
     }
 
     public HunterSliver(final HunterSliver card) {
@@ -71,55 +65,4 @@ public class HunterSliver extends CardImpl {
     public HunterSliver copy() {
         return new HunterSliver(this);
     }
-}
-
-class ProvokeEffect extends RequirementEffect {
-
-    public ProvokeEffect() {
-        this(Duration.EndOfTurn);
-    }
-
-    public ProvokeEffect(Duration duration) {
-        super(duration);
-        staticText = "Target creature untaps and blocks {this} this turn if able";
-    }
-
-    public ProvokeEffect(final ProvokeEffect effect) {
-        super(effect);
-    }
-
-    @Override
-    public boolean applies(Permanent permanent, Ability source, Game game) {
-        if (permanent.getId().equals(targetPointer.getFirst(game, source))) {
-            Permanent blocker = game.getPermanent(source.getFirstTarget());
-            if (blocker != null && blocker.isTapped()) {
-                blocker.untap(game);
-                if (blocker.canBlock(source.getSourceId(), game)) {
-                    return true;
-                }
-            }
-        }
-        return false;
-    }
-
-    @Override
-    public boolean mustAttack(Game game) {
-        return false;
-    }
-
-    @Override
-    public boolean mustBlock(Game game) {
-        return true;
-    }
-
-    @Override
-    public UUID mustBlockAttacker(Ability source, Game game) {
-        return source.getSourceId();
-    }
-
-    @Override
-    public ProvokeEffect copy() {
-        return new ProvokeEffect(this);
-    }
-
 }

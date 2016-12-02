@@ -133,11 +133,11 @@ public abstract class Phase implements Serializable {
     }
 
     private boolean checkStopOnStepOption(Game game) {
-        if (game.getOptions().stopOnTurn != null && game.getOptions().stopAtStep == getStep().getType()) {
-            if (game.getOptions().stopOnTurn <= game.getState().getTurnNum()) {
-                game.pause();
-                return true;
-            }
+        if (game.getOptions().stopOnTurn != null
+                && game.getOptions().stopOnTurn <= game.getState().getTurnNum()
+                && game.getOptions().stopAtStep == getStep().getType()) {
+            game.pause();
+            return true;
         }
         return false;
     }

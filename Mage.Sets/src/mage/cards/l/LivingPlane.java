@@ -46,7 +46,7 @@ import mage.game.permanent.token.Token;
 public class LivingPlane extends CardImpl {
 
     public LivingPlane(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.ENCHANTMENT},"{2}{G}{G}");
+        super(ownerId, setInfo, new CardType[]{CardType.ENCHANTMENT}, "{2}{G}{G}");
         this.supertype.add("World");
 
         // All lands are 1/1 creatures that are still lands.
@@ -64,8 +64,9 @@ public class LivingPlane extends CardImpl {
 }
 
 class LivingPlaneToken extends Token {
+
     public LivingPlaneToken() {
-        super("Land", "1/1 creature");
+        super("Land", "1/1 creatures");
         cardType.add(CardType.CREATURE);
         power = new MageInt(1);
         toughness = new MageInt(1);

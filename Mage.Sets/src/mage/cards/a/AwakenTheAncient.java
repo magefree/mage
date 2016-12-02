@@ -42,7 +42,6 @@ import mage.constants.Duration;
 import mage.constants.Outcome;
 import mage.constants.Zone;
 import mage.filter.common.FilterLandPermanent;
-import mage.filter.predicate.mageobject.SubtypePredicate;
 import mage.game.permanent.token.Token;
 import mage.target.TargetPermanent;
 import mage.target.common.TargetLandPermanent;
@@ -53,11 +52,7 @@ import mage.target.common.TargetLandPermanent;
  */
 public class AwakenTheAncient extends CardImpl {
 
-    private static final FilterLandPermanent filter = new FilterLandPermanent("Mountain");
-
-    static {
-        filter.add(new SubtypePredicate("Mountain"));
-    }
+    private static final FilterLandPermanent filter = new FilterLandPermanent("Mountain", "Mountain");
 
     public AwakenTheAncient(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.ENCHANTMENT},"{1}{R}{R}{R}");

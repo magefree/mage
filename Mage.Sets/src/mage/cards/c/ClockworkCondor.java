@@ -57,7 +57,7 @@ public class ClockworkCondor extends CardImpl {
         this.power = new MageInt(0);
         this.toughness = new MageInt(0);
         this.addAbility(FlyingAbility.getInstance());
-        this.addAbility(new EntersBattlefieldAbility(new AddCountersSourceEffect(CounterType.P1P1.createInstance(3)), "{this} enters the battlefield with three +1/+1 counters on it"));
+        this.addAbility(new EntersBattlefieldAbility(new AddCountersSourceEffect(CounterType.P1P1.createInstance(3)), "with three +1/+1 counters on it"));
         this.addAbility(new AttacksOrBlocksTriggeredAbility(new ClockworkCondorEffect(), false));
     }
 

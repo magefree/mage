@@ -71,7 +71,7 @@ public class ChimericIdol extends CardImpl {
 class ChimericIdolToken extends Token {
 
     public ChimericIdolToken() {
-        super("Turtle", "a 3/3 Turtle artifact creature token");
+        super("Turtle", "3/3 Turtle artifact creature token");
         cardType.add(CardType.ARTIFACT);
         cardType.add(CardType.CREATURE);
         subtype.add("Turtle");

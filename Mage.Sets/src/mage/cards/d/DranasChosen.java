@@ -67,7 +67,7 @@ public class DranasChosen extends CardImpl {
         this.power = new MageInt(2);
         this.toughness = new MageInt(2);
 
-        // <i>Cohort</i> &mdash; {T}, Tap an untapped Ally you control: Create a 2/2 black Zombie creature token tapped.
+        // <i>Cohort</i> &mdash; {T}, Tap an untapped Ally you control: Create a tapped 2/2 black Zombie creature token.
         Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new CreateTokenEffect(new ZombieToken(), 1, true, false), new TapSourceCost());
         ability.addCost(new TapTargetCost(new TargetControlledPermanent(filter)));
         ability.setAbilityWord(AbilityWord.COHORT);

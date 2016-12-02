@@ -38,9 +38,7 @@ import mage.abilities.keyword.ProtectionAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.filter.FilterCard;
 import mage.filter.FilterPermanent;
-import mage.filter.predicate.mageobject.ColorPredicate;
 import mage.filter.predicate.mageobject.SubtypePredicate;
 import mage.target.Target;
 import mage.target.TargetPermanent;
@@ -51,12 +49,10 @@ import mage.target.TargetPermanent;
  */
 public class TivadarOfThorn extends CardImpl {
     
-    private static final FilterCard filter = new FilterCard("Red");
-    private static final FilterPermanent filter2 = new FilterPermanent("Goblin");
+    private static final FilterPermanent filter = new FilterPermanent("Goblin");
     
     static {
-        filter.add(new ColorPredicate(ObjectColor.RED));
-        filter2.add(new SubtypePredicate("Goblin"));
+        filter.add(new SubtypePredicate("Goblin"));
     }
 
     public TivadarOfThorn(UUID ownerId, CardSetInfo setInfo) {
@@ -71,11 +67,11 @@ public class TivadarOfThorn extends CardImpl {
         this.addAbility(FirstStrikeAbility.getInstance());
         
         // protection from red
-        this.addAbility(new ProtectionAbility(filter));
+        this.addAbility(ProtectionAbility.from(ObjectColor.RED));
         
         // When Tivadar of Thorn enters the battlefield, destroy target Goblin.
         Ability ability = new EntersBattlefieldTriggeredAbility(new DestroyTargetEffect(),false);
-        Target target = new TargetPermanent(filter2);
+        Target target = new TargetPermanent(filter);
         ability.addTarget(target);
         this.addAbility(ability);
     }

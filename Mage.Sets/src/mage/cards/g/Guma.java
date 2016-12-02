@@ -35,8 +35,6 @@ import mage.ObjectColor;
 import mage.abilities.keyword.ProtectionAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
-import mage.filter.FilterCard;
-import mage.filter.predicate.mageobject.ColorPredicate;
 
 /**
  *
@@ -44,20 +42,14 @@ import mage.filter.predicate.mageobject.ColorPredicate;
  */
 public class Guma extends CardImpl {
 
-    private static final FilterCard filter = new FilterCard("Blue");
-
-    static {
-        filter.add(new ColorPredicate(ObjectColor.BLUE));
-    }
-
     public Guma(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{2}{R}");
         this.subtype.add("Cat");
 
         this.power = new MageInt(2);
         this.toughness = new MageInt(2);
-        this.addAbility(new ProtectionAbility(filter));
-        }
+        this.addAbility(ProtectionAbility.from(ObjectColor.BLUE));
+    }
 
     public Guma(final Guma card) {
         super(card);

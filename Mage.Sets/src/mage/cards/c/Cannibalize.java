@@ -116,7 +116,6 @@ class TargetCreaturePermanentSameController extends TargetCreaturePermanent {
 
     public TargetCreaturePermanentSameController(int minNumTargets, int maxNumTargets, FilterCreaturePermanent filter, boolean notTarget) {
         super(minNumTargets, maxNumTargets, filter, notTarget);
-        this.targetName = filter.getMessage();
     }
 
     public TargetCreaturePermanentSameController(final TargetCreaturePermanentSameController target) {

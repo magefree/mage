@@ -34,8 +34,7 @@ import mage.abilities.Ability;
 import mage.abilities.effects.OneShotEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
-import mage.filter.FilterPermanent;
-import mage.filter.predicate.mageobject.CardTypePredicate;
+import mage.filter.common.FilterEnchantmentPermanent;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.players.Player;
@@ -63,12 +62,8 @@ public class MultanisDecree extends CardImpl {
         return new MultanisDecree(this);
     }
 }
-class MultanisDecreeDestroyEffect extends OneShotEffect {
 
-    private static final FilterPermanent filter = new FilterPermanent();
-    static {
-        filter.add(new CardTypePredicate(CardType.ENCHANTMENT));
-    }
+class MultanisDecreeDestroyEffect extends OneShotEffect {
     public MultanisDecreeDestroyEffect() {
         super(Outcome.DestroyPermanent);
         this.staticText = "Destroy all enchantments. You gain 2 life for each enchantment destroyed this way";
@@ -87,7 +82,7 @@ class MultanisDecreeDestroyEffect extends OneShotEffect {
     public boolean apply(Game game, Ability source) {
         Player controller = game.getPlayer(source.getControllerId());
 		int enchantmentsDestoyed = 0;
-        for (Permanent permanent: game.getState().getBattlefield().getActivePermanents(filter, source.getControllerId(), source.getSourceId(), game)) {
+        for (Permanent permanent: game.getState().getBattlefield().getActivePermanents(new FilterEnchantmentPermanent(), source.getControllerId(), source.getSourceId(), game)) {
             if (permanent.destroy(source.getSourceId(), game, false)) {
                 enchantmentsDestoyed++;
             }

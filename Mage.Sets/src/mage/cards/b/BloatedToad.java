@@ -36,20 +36,12 @@ import mage.abilities.keyword.CyclingAbility;
 import mage.abilities.keyword.ProtectionAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
-import mage.filter.FilterCard;
-import mage.filter.predicate.mageobject.ColorPredicate;
 
 /**
  *
  * @author Backfir3
  */
 public class BloatedToad extends CardImpl {
-
-    private static final FilterCard filter = new FilterCard("Blue");
-
-    static {
-        filter.add(new ColorPredicate(ObjectColor.BLUE));
-    }
 
     public BloatedToad(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{2}{G}");
@@ -58,7 +50,7 @@ public class BloatedToad extends CardImpl {
         this.power = new MageInt(2);
         this.toughness = new MageInt(2);
 
-        this.addAbility(new ProtectionAbility(filter));
+        this.addAbility(ProtectionAbility.from(ObjectColor.BLUE));
         this.addAbility(new CyclingAbility(new ManaCostsImpl("{2}")));
     }
 

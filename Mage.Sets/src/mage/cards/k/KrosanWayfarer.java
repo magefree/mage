@@ -52,8 +52,7 @@ public class KrosanWayfarer extends CardImpl {
         this.toughness = new MageInt(1);
 
         // Sacrifice Krosan Wayfarer: You may put a land card from your hand onto the battlefield.
-        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new PutLandFromHandOntoBattlefieldEffect(), new SacrificeSourceCost());
-        this.addAbility(ability);
+        this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new PutLandFromHandOntoBattlefieldEffect(), new SacrificeSourceCost()));
     }
 
     public KrosanWayfarer(final KrosanWayfarer card) {

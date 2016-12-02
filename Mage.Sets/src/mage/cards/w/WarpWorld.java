@@ -54,7 +54,7 @@ import mage.players.Player;
 public class WarpWorld extends CardImpl {
 
     public WarpWorld(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{5}{R}{R}{R}");
+        super(ownerId, setInfo, new CardType[]{CardType.SORCERY}, "{5}{R}{R}{R}");
 
         // Each player shuffles all permanents he or she owns into his or her library, then reveals that many cards from the top of his or her library. Each player puts all artifact, creature, and land cards revealed this way onto the battlefield, then does the same for enchantment cards, then puts all cards revealed this way that weren't put onto the battlefield on the bottom of his or her library.
         this.getSpellAbility().addEffect(new WarpWorldEffect());
@@ -130,14 +130,8 @@ class WarpWorldEffect extends OneShotEffect {
         for (UUID playerId : game.getState().getPlayersInRange(source.getControllerId(), game)) {
             Player player = game.getPlayer(playerId);
             if (player != null) {
-                Integer count = Math.min(permanentsCount.get(player.getId()), player.getLibrary().size());
                 CardsImpl cards = new CardsImpl();
-                for (int i = 0; i < count; i++) {
-                    Card card = player.getLibrary().removeFromTop(game);
-                    if (card != null) {
-                        cards.add(card);
-                    }
-                }
+                cards.addAll(player.getLibrary().getTopCards(game, permanentsCount.get(player.getId())));
                 player.revealCards(sourceObject.getIdName() + " (" + player.getName() + ")", cards, game);
                 cardsRevealed.put(player.getId(), cards);
             }
@@ -152,7 +146,7 @@ class WarpWorldEffect extends OneShotEffect {
                     if (card != null && (card.getCardType().contains(CardType.ARTIFACT)
                             || card.getCardType().contains(CardType.CREATURE)
                             || card.getCardType().contains(CardType.LAND))) {
-                        card.putOntoBattlefield(game, Zone.HAND, source.getSourceId(), player.getId());
+                        card.putOntoBattlefield(game, Zone.LIBRARY, source.getSourceId(), player.getId());
                         cards.remove(card);
                     }
                 }
@@ -166,7 +160,7 @@ class WarpWorldEffect extends OneShotEffect {
                 CardsImpl cards = cardsRevealed.get(player.getId());
                 for (Card card : cards.getCards(game)) {
                     if (card != null && card.getCardType().contains(CardType.ENCHANTMENT)) {
-                        card.putOntoBattlefield(game, Zone.HAND, source.getSourceId(), player.getId());
+                        card.putOntoBattlefield(game, Zone.LIBRARY, source.getSourceId(), player.getId());
                         cards.remove(card);
                     }
                 }

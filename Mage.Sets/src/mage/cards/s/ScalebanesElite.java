@@ -34,19 +34,12 @@ import mage.abilities.keyword.ProtectionAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.filter.FilterCard;
-import mage.filter.predicate.mageobject.ColorPredicate;
 
 /**
  *
  * @author anonymous
  */
 public class ScalebanesElite extends CardImpl {
-
-    private static final FilterCard filter = new FilterCard("black");
-    static {
-        filter.add(new ColorPredicate(ObjectColor.BLACK));
-    }
 
     public ScalebanesElite(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{3}{G}{W}");
@@ -57,7 +50,7 @@ public class ScalebanesElite extends CardImpl {
         this.toughness = new MageInt(4);
 
         // Protection from black
-        this.addAbility(new ProtectionAbility(filter));
+        this.addAbility(ProtectionAbility.from(ObjectColor.BLACK));
     }
 
     public ScalebanesElite(final ScalebanesElite card) {

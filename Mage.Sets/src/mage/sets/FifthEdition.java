@@ -42,6 +42,7 @@ public class FifthEdition extends ExpansionSet {
         cards.add(new SetCardInfo("Ambush Party", 208, Rarity.COMMON, mage.cards.a.AmbushParty.class));
         cards.add(new SetCardInfo("Amulet of Kroog", 347, Rarity.COMMON, mage.cards.a.AmuletOfKroog.class));
         cards.add(new SetCardInfo("An-Havva Constable", 139, Rarity.RARE, mage.cards.a.AnHavvaConstable.class));
+        cards.add(new SetCardInfo("Angry Mob", 280, Rarity.UNCOMMON, mage.cards.a.AngryMob.class));
         cards.add(new SetCardInfo("Animate Dead", 2, Rarity.UNCOMMON, mage.cards.a.AnimateDead.class));
         cards.add(new SetCardInfo("Animate Wall", 281, Rarity.RARE, mage.cards.a.AnimateWall.class));
         cards.add(new SetCardInfo("Ankh of Mishra", 348, Rarity.RARE, mage.cards.a.AnkhOfMishra.class));
@@ -297,6 +298,7 @@ public class FifthEdition extends ExpansionSet {
         cards.add(new SetCardInfo("Paralyze", 47, Rarity.COMMON, mage.cards.p.Paralyze.class));
         cards.add(new SetCardInfo("Pearled Unicorn", 326, Rarity.COMMON, mage.cards.p.PearledUnicorn.class));
         cards.add(new SetCardInfo("Pentagram of the Ages", 394, Rarity.RARE, mage.cards.p.PentagramOfTheAges.class));
+        cards.add(new SetCardInfo("Personal Incarnation", 327, Rarity.RARE, mage.cards.p.PersonalIncarnation.class));
         cards.add(new SetCardInfo("Pestilence", 48, Rarity.COMMON, mage.cards.p.Pestilence.class));
         cards.add(new SetCardInfo("Phantasmal Forces", 106, Rarity.UNCOMMON, mage.cards.p.PhantasmalForces.class));
         cards.add(new SetCardInfo("Phantasmal Terrain", 107, Rarity.COMMON, mage.cards.p.PhantasmalTerrain.class));

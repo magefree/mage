@@ -46,8 +46,6 @@ import mage.constants.CardType;
 import mage.constants.Duration;
 import mage.constants.Outcome;
 import mage.constants.Zone;
-import mage.filter.FilterCard;
-import mage.filter.predicate.mageobject.ColorPredicate;
 import mage.target.TargetPermanent;
 import mage.target.common.TargetCreaturePermanent;
 
@@ -56,12 +54,6 @@ import mage.target.common.TargetCreaturePermanent;
  * @author LoneFox
  */
 public class StrengthOfLunacy extends CardImpl {
-
-    private static final FilterCard filter = new FilterCard("white");
-
-    static {
-        filter.add(new ColorPredicate(ObjectColor.WHITE));
-    }
 
     public StrengthOfLunacy(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.ENCHANTMENT},"{1}{B}");
@@ -75,7 +67,7 @@ public class StrengthOfLunacy extends CardImpl {
         this.addAbility(ability);
         // Enchanted creature gets +2/+1 and has protection from white.
         ability = new SimpleStaticAbility(Zone.BATTLEFIELD, new BoostEnchantedEffect(2, 1, Duration.WhileOnBattlefield));
-        Effect effect = new GainAbilityAttachedEffect(new ProtectionAbility(filter), AttachmentType.AURA);
+        Effect effect = new GainAbilityAttachedEffect(ProtectionAbility.from(ObjectColor.WHITE), AttachmentType.AURA);
         effect.setText("and has protection from white");
         ability.addEffect(effect);
         this.addAbility(ability);

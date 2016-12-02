@@ -64,7 +64,7 @@ public enum CardRepository {
     // raise this if db structure was changed
     private static final long CARD_DB_VERSION = 48;
     // raise this if new cards were added to the server
-    private static final long CARD_CONTENT_VERSION = 64;
+    private static final long CARD_CONTENT_VERSION = 65;
 
     private Dao<CardInfo, Object> cardDao;
     private Set<String> classNames;
@@ -141,7 +141,7 @@ public enum CardRepository {
                     classNames.add(card.getClassName());
                 }
             }
-            return classNames.contains(className);
+            return classNames.contains(className.getName());
         } catch (SQLException ex) {
         }
         return false;
@@ -462,6 +462,15 @@ public enum CardRepository {
 
         } catch (SQLException ex) {
 
+        }
+    }
+
+    public void openDB() {
+        try {
+            ConnectionSource connectionSource = new JdbcConnectionSource(JDBC_URL);
+            cardDao = DaoManager.createDao(connectionSource, CardInfo.class);
+        } catch (SQLException ex) {
+            Logger.getLogger(CardRepository.class).error("Error opening card repository - ", ex);
         }
     }
 }

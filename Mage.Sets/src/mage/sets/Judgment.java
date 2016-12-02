@@ -82,6 +82,7 @@ public class Judgment extends ExpansionSet {
         cards.add(new SetCardInfo("Death Wish", 64, Rarity.RARE, mage.cards.d.DeathWish.class));
         cards.add(new SetCardInfo("Defy Gravity", 38, Rarity.COMMON, mage.cards.d.DefyGravity.class));
         cards.add(new SetCardInfo("Dwarven Bloodboiler", 84, Rarity.RARE, mage.cards.d.DwarvenBloodboiler.class));
+        cards.add(new SetCardInfo("Dwarven Driller", 85, Rarity.UNCOMMON, mage.cards.d.DwarvenDriller.class));
         cards.add(new SetCardInfo("Earsplitting Rats", 65, Rarity.COMMON, mage.cards.e.EarsplittingRats.class));
         cards.add(new SetCardInfo("Elephant Guide", 111, Rarity.UNCOMMON, mage.cards.e.ElephantGuide.class));
         cards.add(new SetCardInfo("Ember Shot", 87, Rarity.COMMON, mage.cards.e.EmberShot.class));
@@ -90,6 +91,7 @@ public class Judgment extends ExpansionSet {
         cards.add(new SetCardInfo("Erhnam Djinn", 113, Rarity.RARE, mage.cards.e.ErhnamDjinn.class));
         cards.add(new SetCardInfo("Exoskeletal Armor", 114, Rarity.UNCOMMON, mage.cards.e.ExoskeletalArmor.class));
         cards.add(new SetCardInfo("Filth", 66, Rarity.UNCOMMON, mage.cards.f.Filth.class));
+        cards.add(new SetCardInfo("Firecat Blitz", 88, Rarity.UNCOMMON, mage.cards.f.FirecatBlitz.class));
         cards.add(new SetCardInfo("Flaring Pain", 89, Rarity.COMMON, mage.cards.f.FlaringPain.class));
         cards.add(new SetCardInfo("Flash of Insight", 40, Rarity.UNCOMMON, mage.cards.f.FlashOfInsight.class));
         cards.add(new SetCardInfo("Fledgling Dragon", 90, Rarity.RARE, mage.cards.f.FledglingDragon.class));
@@ -158,6 +160,7 @@ public class Judgment extends ExpansionSet {
         cards.add(new SetCardInfo("Valor", 32, Rarity.UNCOMMON, mage.cards.v.Valor.class));
         cards.add(new SetCardInfo("Venomous Vines", 136, Rarity.COMMON, mage.cards.v.VenomousVines.class));
         cards.add(new SetCardInfo("Vigilant Sentry", 33, Rarity.COMMON, mage.cards.v.VigilantSentry.class));
+        cards.add(new SetCardInfo("Web of Inertia", 53, Rarity.UNCOMMON, mage.cards.w.WebOfInertia.class));
         cards.add(new SetCardInfo("Wonder", 54, Rarity.UNCOMMON, mage.cards.w.Wonder.class));
         cards.add(new SetCardInfo("Worldgorger Dragon", 103, Rarity.RARE, mage.cards.w.WorldgorgerDragon.class));
         cards.add(new SetCardInfo("Wormfang Drake", 57, Rarity.COMMON, mage.cards.w.WormfangDrake.class));

@@ -45,21 +45,13 @@ import mage.constants.AbilityWord;
 import mage.constants.CardType;
 import mage.constants.Duration;
 import mage.constants.Zone;
-import mage.filter.FilterCard;
 import mage.filter.common.FilterCreaturePermanent;
-import mage.filter.predicate.mageobject.ColorPredicate;
 
 /**
  *
  * @author LoneFox
  */
 public class TerohsVanguard extends CardImpl {
-
-    private static final FilterCard filter = new FilterCard("black");
-
-    static {
-        filter.add(new ColorPredicate(ObjectColor.BLACK));
-    }
 
     public TerohsVanguard(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{3}{W}");
@@ -73,7 +65,7 @@ public class TerohsVanguard extends CardImpl {
         // Threshold - As long as seven or more cards are in your graveyard, Teroh's Vanguard has "When Teroh's Vanguard enters the battlefield, creatures you control gain protection from black until end of turn."
         Ability ability = new SimpleStaticAbility(Zone.BATTLEFIELD, new ConditionalContinuousEffect(
             new GainAbilitySourceEffect(new EntersBattlefieldTriggeredAbility(
-            new GainAbilityControlledEffect(new ProtectionAbility(filter), Duration.EndOfTurn, new FilterCreaturePermanent()))),
+            new GainAbilityControlledEffect(ProtectionAbility.from(ObjectColor.BLACK), Duration.EndOfTurn, new FilterCreaturePermanent()))),
             new CardsInControllerGraveCondition(7),
             "As long as seven or more cards are in your graveyard, {this} has \"When {this} enters the battlefield, creatures you control gain protection from black until end of turn.\""));
             ability.setAbilityWord(AbilityWord.THRESHOLD);

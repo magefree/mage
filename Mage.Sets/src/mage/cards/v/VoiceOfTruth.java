@@ -35,19 +35,12 @@ import mage.abilities.keyword.ProtectionAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.filter.FilterCard;
-import mage.filter.predicate.mageobject.ColorPredicate;
+
 /**
  *
  * @author LoneFox
  */
 public class VoiceOfTruth extends CardImpl {
-
-    private static final FilterCard filter = new FilterCard("white");
-
-    static {
-        filter.add(new ColorPredicate(ObjectColor.WHITE));
-    }
 
     public VoiceOfTruth(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{3}{W}");
@@ -58,7 +51,7 @@ public class VoiceOfTruth extends CardImpl {
         // Flying
         this.addAbility(FlyingAbility.getInstance());
         // protection from white
-        this.addAbility(new ProtectionAbility(filter));
+        this.addAbility(ProtectionAbility.from(ObjectColor.WHITE));
     }
 
     public VoiceOfTruth(final VoiceOfTruth card) {

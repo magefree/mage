@@ -68,7 +68,7 @@ public class FaerieConclave extends CardImpl {
 
 class FaerieConclaveToken extends Token {
     FaerieConclaveToken() {
-        super("Faerie", "a 2/1 blue Faerie creature with flying");
+        super("Faerie", "2/1 blue Faerie creature with flying");
         cardType.add(CardType.CREATURE);
         this.subtype.add("Faerie");
         color.setBlue(true);

@@ -28,17 +28,18 @@
 package mage.cards.t;
 
 import java.util.UUID;
-import mage.abilities.TriggeredAbilityImpl;
+
+import mage.abilities.TriggeredAbility;
+import mage.abilities.common.OnEventTriggeredAbility;
+import mage.abilities.condition.common.CreatureCountCondition;
+import mage.abilities.decorator.ConditionalTriggeredAbility;
 import mage.abilities.effects.common.SacrificeSourceEffect;
 import mage.abilities.mana.AnyColorManaAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.Zone;
-import mage.filter.common.FilterCreaturePermanent;
-import mage.game.Game;
+import mage.constants.TargetController;
 import mage.game.events.GameEvent;
-import mage.game.events.GameEvent.EventType;
 
 /**
  *
@@ -50,7 +51,9 @@ public class ThranQuarry extends CardImpl {
         super(ownerId,setInfo,new CardType[]{CardType.LAND},"");
 
         // At the beginning of the end step, if you control no creatures, sacrifice Thran Quarry.
-        this.addAbility(new ThranQuarryTriggeredAbility());
+        TriggeredAbility triggered = new OnEventTriggeredAbility(GameEvent.EventType.END_TURN_STEP_PRE, "beginning of the end step", true, new SacrificeSourceEffect());
+        this.addAbility(new ConditionalTriggeredAbility(triggered, new CreatureCountCondition(0, TargetController.YOU),
+                "At the beginning of the end step, if you control no creatures, sacrifice {this}."));
 
         // {tap}: Add one mana of any color to your mana pool.
         this.addAbility(new AnyColorManaAbility());
@@ -64,37 +67,5 @@ public class ThranQuarry extends CardImpl {
     @Override
     public ThranQuarry copy() {
         return new ThranQuarry(this);
-    }
-}
-
-class ThranQuarryTriggeredAbility extends TriggeredAbilityImpl {
-
-    ThranQuarryTriggeredAbility() {
-        super(Zone.BATTLEFIELD, new SacrificeSourceEffect());
-    }
-
-    ThranQuarryTriggeredAbility(final ThranQuarryTriggeredAbility ability) {
-        super(ability);
-    }
-
-    @Override
-    public ThranQuarryTriggeredAbility copy() {
-        return new ThranQuarryTriggeredAbility(this);
-    }
-
-    @Override
-    public boolean checkEventType(GameEvent event, Game game) {
-        return event.getType() == EventType.END_TURN_STEP_PRE;
-    }
-
-    @Override
-    public boolean checkTrigger(GameEvent event, Game game) {
-        FilterCreaturePermanent filter = new FilterCreaturePermanent();
-        return !game.getBattlefield().contains(filter, controllerId, 1, game);
-    }
-
-    @Override
-    public String getRule() {
-        return "At the beginning of the end step, if you control no creatures, sacrifice {this}.";
     }
 }

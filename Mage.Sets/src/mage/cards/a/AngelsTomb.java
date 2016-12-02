@@ -65,7 +65,7 @@ public class AngelsTomb extends CardImpl {
 class AngelTombToken extends Token {
 
     public AngelTombToken() {
-        super("", "a 3/3 white Angel artifact creature with flying");
+        super("", "3/3 white Angel artifact creature with flying");
         cardType.add(CardType.ARTIFACT);
         cardType.add(CardType.CREATURE);
         color.setWhite(true);

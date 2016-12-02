@@ -36,8 +36,6 @@ import mage.abilities.keyword.FlyingAbility;
 import mage.abilities.keyword.ProtectionAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
-import mage.filter.FilterCard;
-import mage.filter.predicate.mageobject.ColorPredicate;
 
 /**
  *
@@ -45,21 +43,16 @@ import mage.filter.predicate.mageobject.ColorPredicate;
  */
 public class VoiceOfLaw extends CardImpl {
 
-    private static final FilterCard filter = new FilterCard("Red");
-
-    static {
-        filter.add(new ColorPredicate(ObjectColor.RED));
-    }
-
     public VoiceOfLaw(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{3}{W}");
         this.subtype.add("Angel");
 
         this.power = new MageInt(2);
         this.toughness = new MageInt(2);
-                this.addAbility(FlyingAbility.getInstance());
-        this.addAbility(new ProtectionAbility(filter));
-        }
+
+        this.addAbility(FlyingAbility.getInstance());
+        this.addAbility(ProtectionAbility.from(ObjectColor.RED));
+    }
 
     public VoiceOfLaw(final VoiceOfLaw card) {
         super(card);

@@ -53,7 +53,7 @@ import mage.target.TargetCard;
 public class SatyrWayfinder extends CardImpl {
 
     public SatyrWayfinder(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{1}{G}");
+        super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{1}{G}");
         this.subtype.add("Satyr");
 
         this.power = new MageInt(1);
@@ -100,7 +100,7 @@ class SatyrWayfinderEffect extends OneShotEffect {
             cards.addAll(controller.getLibrary().getTopCards(game, 4));
             boolean properCardFound = cards.count(filterPutInHand, source.getControllerId(), source.getSourceId(), game) > 0;
             if (!cards.isEmpty()) {
-                controller.revealCards(sourceObject.getName(), cards, game);
+                controller.revealCards(sourceObject.getIdName(), cards, game);
                 TargetCard target = new TargetCard(Zone.LIBRARY, filterPutInHand);
                 if (properCardFound
                         && controller.chooseUse(outcome, "Put a land card into your hand?", source, game)

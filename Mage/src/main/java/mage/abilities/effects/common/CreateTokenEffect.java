@@ -97,6 +97,7 @@ public class CreateTokenEffect extends OneShotEffect {
         token.putOntoBattlefield(value, game, source.getSourceId(), source.getControllerId(), tapped, attacking);
         this.lastAddedTokenId = token.getLastAddedToken();
         this.lastAddedTokenIds = token.getLastAddedTokenIds();
+
         return true;
     }
 
@@ -111,19 +112,24 @@ public class CreateTokenEffect extends OneShotEffect {
     private void setText() {
         StringBuilder sb = new StringBuilder("create ");
         if (amount.toString().equals("1")) {
-            sb.append("a ").append(token.getDescription());
+            sb.append("a ");
+            if (tapped && !attacking) {
+                sb.append("tapped ");
+            }
+            sb.append(token.getDescription());
         } else {
-            sb.append(CardUtil.numberToText(amount.toString())).append(" ").append(token.getDescription());
+            sb.append(CardUtil.numberToText(amount.toString())).append(" ");
+            if (tapped && !attacking) {
+                sb.append("tapped ");
+            }
+            sb.append(token.getDescription());
             if (token.getDescription().endsWith("token")) {
                 sb.append("s ");
             }
         }
-        if (tapped) {
-            sb.append(" tapped");
-        }
         if (attacking) {
             if (tapped) {
-                sb.append(" and");
+                sb.append(" tapped and");
             }
             sb.append(" attacking");
         }

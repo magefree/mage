@@ -41,7 +41,7 @@ import mage.game.Game;
  *
  * @author North
  */
-public class DynamicManaAbility extends ManaAbility {
+public class DynamicManaAbility extends ActivatedManaAbilityImpl {
 
     private DynamicManaEffect manaEffect;
     private String rule;

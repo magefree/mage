@@ -17,8 +17,6 @@ import mage.constants.CardType;
 import mage.constants.Duration;
 import mage.constants.Outcome;
 import mage.constants.Zone;
-import mage.filter.FilterCard;
-import mage.filter.predicate.mageobject.ColorPredicate;
 import mage.game.Game;
 import mage.game.events.DamagedPlayerEvent;
 import mage.game.events.GameEvent.EventType;
@@ -90,13 +88,6 @@ class AkkiLavarunnerAbility extends TriggeredAbilityImpl {
 }
 
 class TokTokVolcanoBorn extends Token {
-
-    private static final FilterCard filter = new FilterCard("red");
-
-    static {
-        filter.add(new ColorPredicate(ObjectColor.RED));
-    }
-
     TokTokVolcanoBorn() {
         super("Tok-Tok, Volcano Born", "");
         supertype.add("Legendary");
@@ -106,7 +97,7 @@ class TokTokVolcanoBorn extends Token {
         subtype.add("Shaman");
         power = new MageInt(2);
         toughness = new MageInt(2);
-        this.addAbility(new ProtectionAbility(filter));
+        this.addAbility(ProtectionAbility.from(ObjectColor.RED));
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new TokTokVolcanoBornEffect()));
     }
 }

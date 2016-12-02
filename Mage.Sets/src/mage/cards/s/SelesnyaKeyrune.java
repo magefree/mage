@@ -69,7 +69,7 @@ public class SelesnyaKeyrune extends CardImpl {
 
     private class SelesnyaKeyruneToken extends Token {
         SelesnyaKeyruneToken() {
-            super("", "a 3/3 green and white Wolf artifact creature");
+            super("", "3/3 green and white Wolf artifact creature");
             cardType.add(CardType.ARTIFACT);
             cardType.add(CardType.CREATURE);
             color.setWhite(true);

@@ -67,6 +67,7 @@ public class MastersEdition extends ExpansionSet {
         this.ratioBoosterMythic = 0;
         cards.add(new SetCardInfo("Adun Oakenshield", 141, Rarity.RARE, mage.cards.a.AdunOakenshield.class));
         cards.add(new SetCardInfo("Amnesia", 29, Rarity.RARE, mage.cards.a.Amnesia.class));
+        cards.add(new SetCardInfo("Angry Mob", 1, Rarity.UNCOMMON, mage.cards.a.AngryMob.class));
         cards.add(new SetCardInfo("Animate Dead", 57, Rarity.UNCOMMON, mage.cards.a.AnimateDead.class));
         cards.add(new SetCardInfo("Animate Wall", 2, Rarity.UNCOMMON, mage.cards.a.AnimateWall.class));
         cards.add(new SetCardInfo("Ankh of Mishra", 151, Rarity.RARE, mage.cards.a.AnkhOfMishra.class));
@@ -128,6 +129,7 @@ public class MastersEdition extends ExpansionSet {
         cards.add(new SetCardInfo("Goblins of the Flarg", 98, Rarity.COMMON, mage.cards.g.GoblinsOfTheFlarg.class));
         cards.add(new SetCardInfo("Goblin Wizard", 97, Rarity.RARE, mage.cards.g.GoblinWizard.class));
         cards.add(new SetCardInfo("Granite Gargoyle", 99, Rarity.UNCOMMON, mage.cards.g.GraniteGargoyle.class));
+        cards.add(new SetCardInfo("Hallowed Ground", 14, Rarity.UNCOMMON, mage.cards.h.HallowedGround.class));
         cards.add(new SetCardInfo("Hand of Justice", 15, Rarity.RARE, mage.cards.h.HandOfJustice.class));
         cards.add(new SetCardInfo("Hecatomb", 71, Rarity.RARE, mage.cards.h.Hecatomb.class));
         cards.add(new SetCardInfo("High Tide", 35, Rarity.UNCOMMON, HighTide.class));

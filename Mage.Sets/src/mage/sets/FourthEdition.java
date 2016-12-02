@@ -61,6 +61,7 @@ public class FourthEdition extends ExpansionSet {
         cards.add(new SetCardInfo("Ali Baba", 193, Rarity.UNCOMMON, mage.cards.a.AliBaba.class));
         cards.add(new SetCardInfo("Amrou Kithkin", 252, Rarity.COMMON, mage.cards.a.AmrouKithkin.class));
         cards.add(new SetCardInfo("Amulet of Kroog", 311, Rarity.COMMON, mage.cards.a.AmuletOfKroog.class));
+        cards.add(new SetCardInfo("Angry Mob", 253, Rarity.UNCOMMON, mage.cards.a.AngryMob.class));
         cards.add(new SetCardInfo("Animate Dead", 2, Rarity.UNCOMMON, mage.cards.a.AnimateDead.class));
         cards.add(new SetCardInfo("Animate Wall", 254, Rarity.RARE, mage.cards.a.AnimateWall.class));
         cards.add(new SetCardInfo("Ankh of Mishra", 312, Rarity.RARE, mage.cards.a.AnkhOfMishra.class));
@@ -114,6 +115,7 @@ public class FourthEdition extends ExpansionSet {
         cards.add(new SetCardInfo("Cosmic Horror", 10, Rarity.RARE, mage.cards.c.CosmicHorror.class));
         cards.add(new SetCardInfo("Counterspell", 65, Rarity.UNCOMMON, mage.cards.c.Counterspell.class));
         cards.add(new SetCardInfo("Craw Wurm", 122, Rarity.COMMON, mage.cards.c.CrawWurm.class));
+        cards.add(new SetCardInfo("Creature Bond", 66, Rarity.COMMON, mage.cards.c.CreatureBond.class));
         cards.add(new SetCardInfo("Crimson Manticore", 201, Rarity.RARE, mage.cards.c.CrimsonManticore.class));
         cards.add(new SetCardInfo("Crumble", 123, Rarity.UNCOMMON, mage.cards.c.Crumble.class));
         cards.add(new SetCardInfo("Crusade", 270, Rarity.RARE, mage.cards.c.Crusade.class));
@@ -170,6 +172,7 @@ public class FourthEdition extends ExpansionSet {
         cards.add(new SetCardInfo("Forest", 177, Rarity.LAND, mage.cards.basiclands.Forest.class, new CardGraphicInfo(null, true)));
         cards.add(new SetCardInfo("Frozen Shade", 22, Rarity.COMMON, mage.cards.f.FrozenShade.class));
         cards.add(new SetCardInfo("Fungusaur", 130, Rarity.RARE, mage.cards.f.Fungusaur.class));
+        cards.add(new SetCardInfo("Gaea's Liege", 131, Rarity.RARE, mage.cards.g.GaeasLiege.class));
         cards.add(new SetCardInfo("Gaseous Form", 74, Rarity.COMMON, mage.cards.g.GaseousForm.class));
         cards.add(new SetCardInfo("Ghost Ship", 75, Rarity.UNCOMMON, mage.cards.g.GhostShip.class));
         cards.add(new SetCardInfo("Giant Growth", 132, Rarity.COMMON, mage.cards.g.GiantGrowth.class));
@@ -267,6 +270,7 @@ public class FourthEdition extends ExpansionSet {
         cards.add(new SetCardInfo("Osai Vultures", 288, Rarity.UNCOMMON, mage.cards.o.OsaiVultures.class));
         cards.add(new SetCardInfo("Paralyze", 35, Rarity.COMMON, mage.cards.p.Paralyze.class));
         cards.add(new SetCardInfo("Pearled Unicorn", 289, Rarity.COMMON, mage.cards.p.PearledUnicorn.class));
+        cards.add(new SetCardInfo("Personal Incarnation", 290, Rarity.RARE, mage.cards.p.PersonalIncarnation.class));
         cards.add(new SetCardInfo("Pestilence", 36, Rarity.COMMON, mage.cards.p.Pestilence.class));
         cards.add(new SetCardInfo("Phantasmal Forces", 88, Rarity.UNCOMMON, mage.cards.p.PhantasmalForces.class));
         cards.add(new SetCardInfo("Phantasmal Terrain", 89, Rarity.COMMON, mage.cards.p.PhantasmalTerrain.class));

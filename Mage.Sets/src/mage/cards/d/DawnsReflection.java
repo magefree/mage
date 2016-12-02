@@ -140,17 +140,7 @@ class DawnsReflectionManaEffect extends ManaEffect {
                 while (controller.canRespond() && !controller.choose(Outcome.Benefit, choiceColor, game)) {
                 }
 
-                if (choiceColor.getColor().isBlack()) {
-                    mana.increaseBlack();
-                } else if (choiceColor.getColor().isBlue()) {
-                    mana.increaseBlue();
-                } else if (choiceColor.getColor().isRed()) {
-                    mana.increaseRed();
-                } else if (choiceColor.getColor().isGreen()) {
-                    mana.increaseGreen();
-                } else if (choiceColor.getColor().isWhite()) {
-                    mana.increaseWhite();
-                }
+                choiceColor.increaseMana(mana);
             }
 
             controller.getManaPool().addMana(mana, game, source);

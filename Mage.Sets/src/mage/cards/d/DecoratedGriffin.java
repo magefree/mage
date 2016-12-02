@@ -29,18 +29,15 @@ package mage.cards.d;
 
 import java.util.UUID;
 import mage.MageInt;
-import mage.abilities.Ability;
 import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.costs.mana.ManaCostsImpl;
-import mage.abilities.effects.PreventionEffectImpl;
+import mage.abilities.effects.common.PreventDamageToControllerEffect;
 import mage.abilities.keyword.FlyingAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Duration;
 import mage.constants.Zone;
-import mage.game.Game;
-import mage.game.events.GameEvent;
 
 /**
  *
@@ -49,7 +46,7 @@ import mage.game.events.GameEvent;
 public class DecoratedGriffin extends CardImpl {
 
     public DecoratedGriffin(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{4}{W}");
+        super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{4}{W}");
         this.subtype.add("Griffin");
 
         this.power = new MageInt(2);
@@ -57,8 +54,8 @@ public class DecoratedGriffin extends CardImpl {
 
         // Flying
         this.addAbility(FlyingAbility.getInstance());
-        // {1}{W}: Prevent the next 1 damage that would be dealt to you this turn.
-        this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new DecoratedGriffinPreventEffect(), new ManaCostsImpl("{1}{W}")));
+        // {1}{W}: Prevent the next 1 combat damage that would be dealt to you this turn.
+        this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new PreventDamageToControllerEffect(Duration.EndOfTurn, true, true, 1), new ManaCostsImpl("{1}{W}")));
     }
 
     public DecoratedGriffin(final DecoratedGriffin card) {
@@ -68,35 +65,5 @@ public class DecoratedGriffin extends CardImpl {
     @Override
     public DecoratedGriffin copy() {
         return new DecoratedGriffin(this);
-    }
-}
-
-class DecoratedGriffinPreventEffect extends PreventionEffectImpl {
-
-    public DecoratedGriffinPreventEffect() {
-        super(Duration.EndOfTurn, 1, false, true);
-        this.staticText = "Prevent the next 1 damage that would be dealt to you this turn";
-    }
-
-    public DecoratedGriffinPreventEffect(final DecoratedGriffinPreventEffect effect) {
-        super(effect);
-    }
-
-    @Override
-    public DecoratedGriffinPreventEffect copy() {
-        return new DecoratedGriffinPreventEffect(this);
-    }
-
-    @Override
-    public boolean apply(Game game, Ability source) {
-        return true;
-    }
-
-    @Override
-    public boolean applies(GameEvent event, Ability source, Game game) {
-        if (super.applies(event, source, game) && event.getTargetId().equals(source.getControllerId())) {
-            return true;
-        }
-        return false;
     }
 }

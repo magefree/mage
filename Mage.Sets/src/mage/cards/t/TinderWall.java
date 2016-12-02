@@ -34,7 +34,6 @@ import mage.abilities.Ability;
 import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.costs.common.SacrificeSourceCost;
 import mage.abilities.costs.mana.ManaCostsImpl;
-import mage.abilities.effects.common.BasicManaEffect;
 import mage.abilities.effects.common.DamageTargetEffect;
 import mage.abilities.keyword.DefenderAbility;
 import mage.abilities.mana.SimpleManaAbility;
@@ -70,7 +69,7 @@ public class TinderWall extends CardImpl {
         // Defender
         this.addAbility(DefenderAbility.getInstance());
         // Sacrifice Tinder Wall: Add {R}{R} to your mana pool.
-        this.addAbility(new SimpleManaAbility(Zone.BATTLEFIELD, new BasicManaEffect(Mana.RedMana(2)), new SacrificeSourceCost()));
+        this.addAbility(new SimpleManaAbility(Zone.BATTLEFIELD, Mana.RedMana(2), new SacrificeSourceCost()));
         // {R}, Sacrifice Tinder Wall: Tinder Wall deals 2 damage to target creature it's blocking.
         FilterAttackingCreature filter = new FilterAttackingCreature("creature it's blocking");
         filter.add(new BlockedByIdPredicate(this.getId()));

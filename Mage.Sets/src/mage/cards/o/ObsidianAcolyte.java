@@ -40,22 +40,13 @@ import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Duration;
 import mage.constants.Zone;
-import mage.filter.FilterCard;
-import mage.filter.predicate.mageobject.ColorPredicate;
 import mage.target.common.TargetCreaturePermanent;
 
 /**
  *
  * @author LoneFox
-
  */
 public class ObsidianAcolyte extends CardImpl {
-
-    private static final FilterCard filter = new FilterCard("black");
-
-    static {
-      filter.add(new ColorPredicate(ObjectColor.BLACK));
-    }
 
     public ObsidianAcolyte(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{1}{W}");
@@ -65,10 +56,10 @@ public class ObsidianAcolyte extends CardImpl {
         this.toughness = new MageInt(1);
 
         // Protection from black
-        this.addAbility(new ProtectionAbility(filter));
+        this.addAbility(ProtectionAbility.from(ObjectColor.BLACK));
         // {W}: Target creature gains protection from black until end of turn.
         Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD,
-            new GainAbilityTargetEffect(new ProtectionAbility(filter), Duration.EndOfTurn), new ManaCostsImpl("{W}"));
+            new GainAbilityTargetEffect(ProtectionAbility.from(ObjectColor.BLACK), Duration.EndOfTurn), new ManaCostsImpl("{W}"));
         ability.addTarget(new TargetCreaturePermanent());
         this.addAbility(ability);
 

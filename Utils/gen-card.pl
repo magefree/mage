@@ -100,7 +100,7 @@ if(!$cardName) {
 if (!exists $cards{$cardName}) {
     my $possible;
     foreach $possible (sort keys (%cards)) {
-        if ($possible =~ m/^$cardName.*/img && $cardName =~ m/..../) {
+        if ($possible =~ m/$cardName/img && $cardName =~ m/..../) {
             print ("Did you mean $possible ?\n");
         }
     }
@@ -122,7 +122,7 @@ my @card;
 foreach my $setName (keys %{$cards{$cardName}}) {
   my $setFileName = "../Mage.Sets/src/mage/sets/".$knownSets{$setName}.".java";
   @card = @{${cards{$cardName}{$setName}}}; 
-  my $line = "\tcards.add(new SetCardInfo(\"".$card[0]."\", ".$card[2].", Rarity.".$raritiesConversion{$card[3]}.", mage.cards.".$vars{'cardNameFirstLetter'}.".".$vars{'className'}.".class));\n";  
+  my $line = "        cards.add(new SetCardInfo(\"".$card[0]."\", ".$card[2].", Rarity.".$raritiesConversion{$card[3]}.", mage.cards.".$vars{'cardNameFirstLetter'}.".".$vars{'className'}.".class));\n";  
   
   @ARGV = ($setFileName);
   $^I = '.bak';

@@ -135,13 +135,13 @@ public class SessionManager {
                 logger.debug("DISCONNECT  " + reason.toString() + " - sessionId: " + sessionId);
                 sessions.remove(sessionId);
                 switch (reason) {
-                    case Disconnected:
+                    case Disconnected: // regular session end
                         session.kill(reason);
                         break;
-                    case SessionExpired:
+                    case SessionExpired: // session ends after no reconnect happens in the defined time span
                         session.kill(reason);
                         break;
-                    case LostConnection:
+                    case LostConnection: // user lost connection - session expires countdaoun starts
                         session.userLostConnection();
                         break;
                     default:

@@ -41,7 +41,7 @@ import mage.game.Game;
  * @author LevelX2
  */
 
-public class ConditionalManaAbility extends ManaAbility {
+public class ConditionalManaAbility extends ActivatedManaAbilityImpl {
 
     ConditionalManaEffect conditionalManaEffect;
 

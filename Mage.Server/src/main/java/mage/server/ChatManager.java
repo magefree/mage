@@ -29,6 +29,7 @@ package mage.server;
 
 import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.HashMap;
 import java.util.Locale;
 import java.util.UUID;
 import java.util.concurrent.ConcurrentHashMap;
@@ -45,6 +46,7 @@ import org.apache.log4j.Logger;
 public class ChatManager {
 
     private static final Logger logger = Logger.getLogger(ChatManager.class);
+    private static HashMap<String, String> userMessages = new HashMap<>();
 
     private static final ChatManager INSTANCE = new ChatManager();
 
@@ -103,8 +105,13 @@ public class ChatManager {
     public void broadcast(UUID chatId, String userName, String message, MessageColor color, boolean withTime, MessageType messageType) {
         this.broadcast(chatId, userName, message, color, withTime, messageType, null);
     }
-
-    static String lastMessage = "";
+    
+    private boolean containsSwearing(String message) {
+        if (message != null && message.toLowerCase().matches("^.*(anal|asshole|balls|bastard|bitch|blowjob|cock|crap|cunt|cum|damn|dick|dildo|douche|fag|fuck|idiot|moron|piss|prick|pussy|rape|rapist|sex|screw|shit|slut|vagina).*$")) {
+            return true;
+        }
+        return false;
+    }
 
     public void broadcast(UUID chatId, String userName, String message, MessageColor color, boolean withTime, MessageType messageType, SoundToPlay soundToPlay) {
         ChatSession chatSession = chatSessions.get(chatId);
@@ -120,10 +127,18 @@ public class ChatManager {
             }
 
             if (!messageType.equals(MessageType.GAME)) {
-                if (message.equals(lastMessage)) {
-                    // prevent identical messages
-                    return;
+
+                if (message != null && userName != null && !userName.equals("")) {
+                    if (message.equals(userMessages.get(userName))) {
+                        // prevent identical messages
+                        return;
+                    }
+                    userMessages.put(userName, message);
+                    if (containsSwearing(message)) {
+                        return;
+                    }
                 }
+
                 if (messageType.equals(MessageType.TALK)) {
                     User user = UserManager.getInstance().getUserByName(userName);
                     if (user != null) {
@@ -139,7 +154,6 @@ public class ChatManager {
                 }
 
             }
-            lastMessage = message;
             chatSession.broadcast(userName, message, color, withTime, messageType, soundToPlay);
         }
     }

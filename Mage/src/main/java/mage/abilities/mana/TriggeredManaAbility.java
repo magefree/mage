@@ -27,17 +27,25 @@
  */
 package mage.abilities.mana;
 
+import java.util.ArrayList;
+import java.util.List;
+import mage.Mana;
 import mage.abilities.TriggeredAbilityImpl;
+import mage.abilities.effects.Effect;
+import mage.abilities.effects.common.DynamicManaEffect;
 import mage.abilities.effects.common.ManaEffect;
 import mage.constants.AbilityType;
 import mage.constants.Zone;
+import mage.game.Game;
 
 /**
  * see 20110715 - 605.1b
  *
  * @author BetaSteward_at_googlemail.com
  */
-public abstract class TriggeredManaAbility extends TriggeredAbilityImpl {
+public abstract class TriggeredManaAbility extends TriggeredAbilityImpl implements ManaAbility {
+
+    protected List<Mana> netMana = new ArrayList<>();
 
     public TriggeredManaAbility(Zone zone, ManaEffect effect) {
         this(zone, effect, false);
@@ -47,9 +55,48 @@ public abstract class TriggeredManaAbility extends TriggeredAbilityImpl {
         super(zone, effect, optional);
         this.usesStack = false;
         this.abilityType = AbilityType.MANA;
+
     }
 
     public TriggeredManaAbility(final TriggeredManaAbility ability) {
         super(ability);
+        this.netMana.addAll(ability.netMana);
+    }
+
+    /**
+     * Used to check the possible mana production to determine which spells
+     * and/or abilities can be used. (player.getPlayable()).
+     *
+     * @param game
+     * @return
+     */
+    @Override
+    public List<Mana> getNetMana(Game game) {
+        if (!getEffects().isEmpty()) {
+            Effect effect = getEffects().get(0);
+            if (effect != null && game != null) {
+                ArrayList<Mana> newNetMana = new ArrayList<>();
+                if (effect instanceof DynamicManaEffect) {
+
+                    // TODO: effects from replacement effects like Mana Reflection are not considered yet
+                    // TODO: effects that need a X payment (e.g. Mage-Ring Network) return always 0
+                    newNetMana.add(((DynamicManaEffect) effect).computeMana(true, game, this));
+                } else if (effect instanceof Effect) {
+                    newNetMana.add(((ManaEffect) effect).getMana(game, this));
+                }
+                return newNetMana;
+            }
+        }
+        return netMana;
+    }
+
+    /**
+     * Used to check if the ability itself defines mana types it can produce.
+     *
+     * @return
+     */
+    @Override
+    public boolean definesMana() {
+        return netMana.size() > 0;
     }
 }

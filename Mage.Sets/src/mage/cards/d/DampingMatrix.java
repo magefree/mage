@@ -36,7 +36,7 @@ import mage.MageObject;
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.effects.ReplacementEffectImpl;
-import mage.abilities.mana.ManaAbility;
+import mage.abilities.mana.ActivatedManaAbilityImpl;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.filter.FilterPermanent;
@@ -108,7 +108,7 @@ class DampingMatrixEffect extends ReplacementEffectImpl {
         MageObject object = game.getObject(event.getSourceId());
         if (object instanceof Permanent && filter.match((Permanent)object, game)) {
             Ability ability = object.getAbilities().get(event.getTargetId());
-            if (ability != null && !(ability instanceof ManaAbility)) {
+            if (ability != null && !(ability instanceof ActivatedManaAbilityImpl)) {
                 return true;
             }
         }

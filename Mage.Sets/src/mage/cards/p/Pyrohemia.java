@@ -49,7 +49,7 @@ import mage.game.events.GameEvent;
  */
 public class Pyrohemia extends CardImpl {
 
-    private static final String ruleText = "At the beginning of the end step, if no creatures are on the battlefield, sacrifice Pyrohemia.";
+    private static final String ruleText = "At the beginning of the end step, if no creatures are on the battlefield, sacrifice {this}.";
 
     public Pyrohemia(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.ENCHANTMENT},"{2}{R}{R}");

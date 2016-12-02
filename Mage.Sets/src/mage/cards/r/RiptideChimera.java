@@ -46,7 +46,7 @@ import mage.filter.predicate.mageobject.CardTypePredicate;
  */
 public class RiptideChimera extends CardImpl {
 
-    private static final FilterControlledPermanent filter = new FilterControlledPermanent("an enchanment you control");
+    private static final FilterControlledPermanent filter = new FilterControlledPermanent("an enchantment you control");
     
     static {
         filter.add(new CardTypePredicate(CardType.ENCHANTMENT));
@@ -62,7 +62,7 @@ public class RiptideChimera extends CardImpl {
 
         // Flying
         this.addAbility(FlyingAbility.getInstance());
-        // At the beginning of your upkeep, return an enchanment you control to its owner's hand.
+        // At the beginning of your upkeep, return an enchantment you control to its owner's hand.
         Effect effect = new ReturnToHandChosenControlledPermanentEffect(filter, 1);
         effect.setText("return an enchanment you control to its owner's hand");
         this.addAbility(new BeginningOfUpkeepTriggeredAbility(effect, TargetController.YOU, false));

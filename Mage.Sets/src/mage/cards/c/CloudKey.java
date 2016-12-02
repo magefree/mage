@@ -36,11 +36,10 @@ public class CloudKey extends CardImpl {
     public CloudKey(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.ARTIFACT},"{3}");
 
-        // As Cloud Key enters the battlefield, choose artifact, creature,
-        // enchantment, instant, or sorcery.
+        // As Cloud Key enters the battlefield, choose artifact, creature, enchantment, instant, or sorcery.
         this.addAbility(new AsEntersBattlefieldAbility(new CloudKeyChooseTypeEffect()));
 
-        // Spells of the chosen type cost {1} less to cast
+        // Spells you cast of the chosen type cost {1} less to cast.
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new CloudKeyCostModificationEffect()));
     }
 
@@ -103,7 +102,7 @@ class CloudKeyCostModificationEffect extends CostModificationEffectImpl {
 
     public CloudKeyCostModificationEffect() {
         super(Duration.WhileOnBattlefield, Outcome.Benefit, CostModificationType.REDUCE_COST);
-        this.staticText = "Spells of the chosen type cost {1} less to cast.";
+        this.staticText = "Spells you cast of the chosen type cost {1} less to cast.";
     }
 
     public CloudKeyCostModificationEffect(final CloudKeyCostModificationEffect effect) {

@@ -16,7 +16,7 @@ import mage.abilities.mana.BasicManaAbility;
 import mage.abilities.mana.BlackManaAbility;
 import mage.abilities.mana.BlueManaAbility;
 import mage.abilities.mana.GreenManaAbility;
-import mage.abilities.mana.ManaAbility;
+import mage.abilities.mana.ActivatedManaAbilityImpl;
 import mage.abilities.mana.RedManaAbility;
 import mage.abilities.mana.WhiteManaAbility;
 import mage.cards.Card;
@@ -56,10 +56,10 @@ public class ManaUtil {
      * @return List of mana abilities permanent may produce and are reasonable
      * for unpaid mana
      */
-    public static LinkedHashMap<UUID, ManaAbility> tryToAutoPay(ManaCost unpaid, LinkedHashMap<UUID, ManaAbility> useableAbilities) {
+    public static LinkedHashMap<UUID, ActivatedManaAbilityImpl> tryToAutoPay(ManaCost unpaid, LinkedHashMap<UUID, ActivatedManaAbilityImpl> useableAbilities) {
 
         // first check if we have only basic mana abilities
-        for (ManaAbility ability : useableAbilities.values()) {
+        for (ActivatedManaAbilityImpl ability : useableAbilities.values()) {
             if (!(ability instanceof BasicManaAbility)) {
                 // return map as-is without any modification
                 return useableAbilities;
@@ -130,12 +130,12 @@ public class ManaUtil {
         return false;
     }
 
-    private static LinkedHashMap<UUID, ManaAbility> getManaAbilitiesUsingManaSymbols(LinkedHashMap<UUID, ManaAbility> useableAbilities, ManaSymbols symbols, Mana unpaidMana) {
+    private static LinkedHashMap<UUID, ActivatedManaAbilityImpl> getManaAbilitiesUsingManaSymbols(LinkedHashMap<UUID, ActivatedManaAbilityImpl> useableAbilities, ManaSymbols symbols, Mana unpaidMana) {
         Set<ManaSymbol> countColored = new HashSet<>();
 
-        ManaAbility chosenManaAbility = null;
-        ManaAbility chosenManaAbilityForHybrid;
-        for (ManaAbility ability : useableAbilities.values()) {
+        ActivatedManaAbilityImpl chosenManaAbility = null;
+        ActivatedManaAbilityImpl chosenManaAbilityForHybrid;
+        for (ActivatedManaAbilityImpl ability : useableAbilities.values()) {
             chosenManaAbility = getManaAbility(symbols, countColored, chosenManaAbility, ability);
 
             chosenManaAbilityForHybrid = checkRedMana(symbols, countColored, ability);
@@ -181,7 +181,7 @@ public class ManaUtil {
 
             // we got another chance for auto pay
             if (temp.size() == 1) {
-                for (ManaAbility ability : useableAbilities.values()) {
+                for (ActivatedManaAbilityImpl ability : useableAbilities.values()) {
                     chosenManaAbility = getManaAbility(symbols, countColored, chosenManaAbility, ability);
                 }
                 return replace(useableAbilities, chosenManaAbility);
@@ -195,7 +195,7 @@ public class ManaUtil {
         return replace(useableAbilities, chosenManaAbility);
     }
 
-    private static ManaAbility getManaAbility(ManaSymbols symbols, Set<ManaSymbol> countColored, ManaAbility chosenManaAbility, ManaAbility ability) {
+    private static ActivatedManaAbilityImpl getManaAbility(ManaSymbols symbols, Set<ManaSymbol> countColored, ActivatedManaAbilityImpl chosenManaAbility, ActivatedManaAbilityImpl ability) {
         if (ability instanceof RedManaAbility && symbols.contains(ManaSymbol.R)) {
             chosenManaAbility = ability;
             countColored.add(ManaSymbol.R);
@@ -235,8 +235,8 @@ public class ManaUtil {
         return count;
     }
 
-    private static ManaAbility checkBlackMana(ManaSymbols symbols, Set<ManaSymbol> countColored, ManaAbility ability) {
-        ManaAbility chosenManaAbilityForHybrid = null;
+    private static ActivatedManaAbilityImpl checkBlackMana(ManaSymbols symbols, Set<ManaSymbol> countColored, ActivatedManaAbilityImpl ability) {
+        ActivatedManaAbilityImpl chosenManaAbilityForHybrid = null;
         if (ability instanceof BlackManaAbility) {
             if (symbols.contains(ManaSymbol.HYBRID_BR)) {
                 chosenManaAbilityForHybrid = ability;
@@ -256,8 +256,8 @@ public class ManaUtil {
         return chosenManaAbilityForHybrid;
     }
 
-    private static ManaAbility checkRedMana(ManaSymbols symbols, Set<ManaSymbol> countColored, ManaAbility ability) {
-        ManaAbility chosenManaAbilityForHybrid = null;
+    private static ActivatedManaAbilityImpl checkRedMana(ManaSymbols symbols, Set<ManaSymbol> countColored, ActivatedManaAbilityImpl ability) {
+        ActivatedManaAbilityImpl chosenManaAbilityForHybrid = null;
         if (ability instanceof RedManaAbility) {
             if (symbols.contains(ManaSymbol.HYBRID_BR)) {
                 chosenManaAbilityForHybrid = ability;
@@ -276,8 +276,8 @@ public class ManaUtil {
         return chosenManaAbilityForHybrid;
     }
 
-    private static ManaAbility checkBlueMana(ManaSymbols symbols, Set<ManaSymbol> countColored, ManaAbility ability) {
-        ManaAbility chosenManaAbilityForHybrid = null;
+    private static ActivatedManaAbilityImpl checkBlueMana(ManaSymbols symbols, Set<ManaSymbol> countColored, ActivatedManaAbilityImpl ability) {
+        ActivatedManaAbilityImpl chosenManaAbilityForHybrid = null;
         if (ability instanceof BlueManaAbility) {
             if (symbols.contains(ManaSymbol.HYBRID_UB)) {
                 chosenManaAbilityForHybrid = ability;
@@ -296,8 +296,8 @@ public class ManaUtil {
         return chosenManaAbilityForHybrid;
     }
 
-    private static ManaAbility checkWhiteMana(ManaSymbols symbols, Set<ManaSymbol> countColored, ManaAbility ability) {
-        ManaAbility chosenManaAbilityForHybrid = null;
+    private static ActivatedManaAbilityImpl checkWhiteMana(ManaSymbols symbols, Set<ManaSymbol> countColored, ActivatedManaAbilityImpl ability) {
+        ActivatedManaAbilityImpl chosenManaAbilityForHybrid = null;
         if (ability instanceof WhiteManaAbility) {
             if (symbols.contains(ManaSymbol.HYBRID_WU)) {
                 chosenManaAbilityForHybrid = ability;
@@ -316,8 +316,8 @@ public class ManaUtil {
         return chosenManaAbilityForHybrid;
     }
 
-    private static ManaAbility checkGreenMana(ManaSymbols symbols, Set<ManaSymbol> countColored, ManaAbility ability) {
-        ManaAbility chosenManaAbilityForHybrid = null;
+    private static ActivatedManaAbilityImpl checkGreenMana(ManaSymbols symbols, Set<ManaSymbol> countColored, ActivatedManaAbilityImpl ability) {
+        ActivatedManaAbilityImpl chosenManaAbilityForHybrid = null;
         if (ability instanceof GreenManaAbility) {
             if (symbols.contains(ManaSymbol.HYBRID_GW)) {
                 chosenManaAbilityForHybrid = ability;
@@ -344,13 +344,13 @@ public class ManaUtil {
      * @param useableAbilities
      * @return
      */
-    private static LinkedHashMap<UUID, ManaAbility> getManaAbilitiesUsingMana(ManaCost unpaid, LinkedHashMap<UUID, ManaAbility> useableAbilities) {
+    private static LinkedHashMap<UUID, ActivatedManaAbilityImpl> getManaAbilitiesUsingMana(ManaCost unpaid, LinkedHashMap<UUID, ActivatedManaAbilityImpl> useableAbilities) {
         Mana mana = unpaid.getMana();
 
         int countColorfull = 0;
         int countColorless = 0;
-        ManaAbility chosenManaAbility = null;
-        for (ManaAbility ability : useableAbilities.values()) {
+        ActivatedManaAbilityImpl chosenManaAbility = null;
+        for (ActivatedManaAbilityImpl ability : useableAbilities.values()) {
             if (ability instanceof RedManaAbility && mana.contains(Mana.RedMana(1))) {
                 chosenManaAbility = ability;
                 countColorfull++;
@@ -392,7 +392,7 @@ public class ManaUtil {
         return replace(useableAbilities, chosenManaAbility);
     }
 
-    private static LinkedHashMap<UUID, ManaAbility> replace(LinkedHashMap<UUID, ManaAbility> useableAbilities, ManaAbility chosenManaAbility) {
+    private static LinkedHashMap<UUID, ActivatedManaAbilityImpl> replace(LinkedHashMap<UUID, ActivatedManaAbilityImpl> useableAbilities, ActivatedManaAbilityImpl chosenManaAbility) {
         // modify the map with the chosen mana ability
         useableAbilities.clear();
         useableAbilities.put(chosenManaAbility.getId(), chosenManaAbility);

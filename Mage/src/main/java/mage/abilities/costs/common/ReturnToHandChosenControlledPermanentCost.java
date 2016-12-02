@@ -40,6 +40,7 @@ import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.players.Player;
 import mage.target.common.TargetControlledPermanent;
+import mage.util.CardUtil;
 
 /**
  *
@@ -51,9 +52,9 @@ public class ReturnToHandChosenControlledPermanentCost extends CostImpl {
         target.setNotTarget(true);
         this.addTarget(target);
         if (target.getMaxNumberOfTargets() > 1 && target.getMaxNumberOfTargets() == target.getNumberOfTargets()) {
-            this.text = new StringBuilder("return ").append(target.getMaxNumberOfTargets()).append(" ").append(target.getTargetName()).append(" you control to its owner's hand").toString();
+            this.text = "return " + CardUtil.numberToText(target.getMaxNumberOfTargets()) + " " + target.getTargetName() + " you control to their owner's hand";
         } else {
-            this.text = new StringBuilder("return ").append(target.getTargetName()).append(" you control to its owner's hand").toString();
+            this.text = "return " + target.getTargetName() + " you control to its owner's hand";
         }
     }
 

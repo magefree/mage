@@ -230,10 +230,11 @@ public class Token extends MageObjectImpl {
                     game.getCombat().addAttackingCreature(permanent.getId(), game, attackedPlayer);
                 }
                 if (!game.isSimulation()) {
-                    game.informPlayers(controller.getLogName() + " puts a " + permanent.getLogName() + " token");
+                    game.informPlayers(controller.getLogName() + " creates a " + permanent.getLogName() + " token");
                 }
 
             }
+            game.getState().applyEffects(game); // Needed to do it here without LKIReset i.e. do get SwordOfTheMeekTest running correctly.
             return true;
         }
         return false;
@@ -287,9 +288,11 @@ public class Token extends MageObjectImpl {
             if (availableImageSetCodes.contains(code)) {
                 setOriginalExpansionSetCode(code);
             } else // we should not set random set if appropriate set is already used
-            if (getOriginalExpansionSetCode() == null || getOriginalExpansionSetCode().isEmpty()
-                    || !availableImageSetCodes.contains(getOriginalExpansionSetCode())) {
-                setOriginalExpansionSetCode(availableImageSetCodes.get(RandomUtil.nextInt(availableImageSetCodes.size())));
+            {
+                if (getOriginalExpansionSetCode() == null || getOriginalExpansionSetCode().isEmpty()
+                        || !availableImageSetCodes.contains(getOriginalExpansionSetCode())) {
+                    setOriginalExpansionSetCode(availableImageSetCodes.get(RandomUtil.nextInt(availableImageSetCodes.size())));
+                }
             }
         } else if (getOriginalExpansionSetCode() == null || getOriginalExpansionSetCode().isEmpty()) {
             setOriginalExpansionSetCode(code);

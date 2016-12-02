@@ -40,8 +40,6 @@ import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Duration;
 import mage.constants.Zone;
-import mage.filter.FilterCard;
-import mage.filter.predicate.mageobject.ColorPredicate;
 import mage.target.common.TargetCreaturePermanent;
 
 /**
@@ -50,12 +48,6 @@ import mage.target.common.TargetCreaturePermanent;
  */
 public class CrimsonAcolyte extends CardImpl {
 
-    private static final FilterCard protectionFilter = new FilterCard("Red");
-    
-    static {
-      protectionFilter.add(new ColorPredicate(ObjectColor.RED));
-    }
-  
     public CrimsonAcolyte(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{1}{W}");
         this.subtype.add("Human");
@@ -64,11 +56,11 @@ public class CrimsonAcolyte extends CardImpl {
         this.toughness = new MageInt(1);
 
         // Protection from red
-        this.addAbility(new ProtectionAbility(protectionFilter));
+        this.addAbility(ProtectionAbility.from(ObjectColor.RED));
         
         // {W}: Target creature gains protection from red until end of turn.
         Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, 
-                new GainAbilityTargetEffect(new ProtectionAbility(protectionFilter), Duration.EndOfTurn), 
+                new GainAbilityTargetEffect(ProtectionAbility.from(ObjectColor.RED), Duration.EndOfTurn),
                 new ManaCostsImpl("{W}"));
         ability.addTarget(new TargetCreaturePermanent());
         this.addAbility(ability);

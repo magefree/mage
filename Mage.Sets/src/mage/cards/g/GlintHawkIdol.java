@@ -85,7 +85,7 @@ public class GlintHawkIdol extends CardImpl {
 
 class GlintHawkIdolToken extends Token {
     GlintHawkIdolToken() {
-        super("", "a 2/2 Bird artifact creature with flying");
+        super("", "2/2 Bird artifact creature with flying");
         cardType.add(CardType.ARTIFACT);
         cardType.add(CardType.CREATURE);
         subtype.add("Bird");

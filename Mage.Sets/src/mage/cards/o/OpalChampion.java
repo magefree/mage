@@ -73,7 +73,7 @@ public class OpalChampion extends CardImpl {
 class OpalChampionKnight extends Token {
 
     public OpalChampionKnight() {
-        super("Knight", "a 3/3 Knight creature with first strike");
+        super("Knight", "3/3 Knight creature with first strike");
         cardType.add(CardType.CREATURE);
         subtype.add("Knight");
         power = new MageInt(3);

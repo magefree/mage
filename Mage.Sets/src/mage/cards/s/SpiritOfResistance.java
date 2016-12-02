@@ -36,7 +36,7 @@ import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.condition.Condition;
 import mage.abilities.decorator.ConditionalReplacementEffect;
 import mage.abilities.effects.Effect;
-import mage.abilities.effects.common.PreventAllDamageToControllerEffect;
+import mage.abilities.effects.common.PreventDamageToControllerEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
@@ -57,7 +57,7 @@ public class SpiritOfResistance extends CardImpl {
 
         // As long as you control a permanent of each color, prevent all damage that would be dealt to you.
         Effect effect = new ConditionalReplacementEffect(
-                new PreventAllDamageToControllerEffect(Duration.WhileOnBattlefield),
+                new PreventDamageToControllerEffect(Duration.WhileOnBattlefield),
                 SpiritOfResistanceCondition.getInstance());
         effect.setText("As long as you control a permanent of each color, prevent all damage that would be dealt to you.");
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, effect));

@@ -52,7 +52,7 @@ public class CranialArchive extends CardImpl {
     public CranialArchive(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.ARTIFACT},"{2}");
 
-        // {2}, Exile Cranial Archive: Target player shuffles his or her gravyeard into his or her library. Draw a card.
+        // {2}, Exile Cranial Archive: Target player shuffles his or her graveyard into his or her library. Draw a card.
         Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new CranialArchiveEffect(), new GenericManaCost(2));
         ability.addCost(new ExileSourceCost());
         ability.addTarget(new TargetPlayer());
@@ -74,7 +74,7 @@ class CranialArchiveEffect extends OneShotEffect {
 
     public CranialArchiveEffect() {
         super(Outcome.Benefit);
-        this.staticText = "Target player shuffles his or her gravyeard into his or her library. Draw a card";
+        this.staticText = "Target player shuffles his or her graveyard into his or her library. Draw a card";
     }
 
     public CranialArchiveEffect(final CranialArchiveEffect effect) {

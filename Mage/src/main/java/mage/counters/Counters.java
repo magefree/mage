@@ -74,26 +74,30 @@ public class Counters extends HashMap<String, Counter> implements Serializable {
         }
     }
 
-    public void removeCounter(String name) {
-        removeCounter(name, 1);
+    public boolean removeCounter(String name) {
+        return removeCounter(name, 1);
     }
 
-    public void removeCounter(CounterType counterType, int amount) {
+    public boolean removeCounter(CounterType counterType, int amount) {
         if (this.containsKey(counterType.getName())) {
             get(counterType.getName()).remove(amount);
             if (get(counterType.getName()).count == 0) {
                 this.remove(counterType.getName());
-            }              
+            }
+            return true;
         }
+        return false;
     }
 
-    public void removeCounter(String name, int amount) {
+    public boolean removeCounter(String name, int amount) {
         if (this.containsKey(name)) {
             this.get(name).remove(amount);
             if (this.get(name).getCount() == 0) {
                 this.remove(name);
             }
+            return true;
         }
+        return false;
     }
 
     public void removeAllCounters(CounterType counterType){

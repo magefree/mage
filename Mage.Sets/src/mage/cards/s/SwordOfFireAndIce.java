@@ -45,9 +45,6 @@ import mage.constants.AttachmentType;
 import mage.constants.CardType;
 import mage.constants.Outcome;
 import mage.constants.Zone;
-import mage.filter.FilterCard;
-import mage.filter.predicate.Predicates;
-import mage.filter.predicate.mageobject.ColorPredicate;
 import mage.game.Game;
 import mage.game.events.DamagedPlayerEvent;
 import mage.game.events.GameEvent;
@@ -60,22 +57,13 @@ import mage.target.common.TargetCreatureOrPlayer;
  */
 public class SwordOfFireAndIce extends CardImpl {
 
-    private static final FilterCard filter = new FilterCard("red and from blue");
-
-    static {
-        filter.add(Predicates.or(
-                new ColorPredicate(ObjectColor.RED),
-                new ColorPredicate(ObjectColor.BLUE)));
-    }
-
-
     public SwordOfFireAndIce(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.ARTIFACT},"{3}");
         this.subtype.add("Equipment");
 
         // Equipped creature gets +2/+2 and has protection from red and from blue.
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new BoostEquippedEffect(2, 2)));
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new GainAbilityAttachedEffect(new ProtectionAbility(filter), AttachmentType.EQUIPMENT)));
+        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new GainAbilityAttachedEffect(ProtectionAbility.from(ObjectColor.RED, ObjectColor.BLUE), AttachmentType.EQUIPMENT)));
         // Whenever equipped creature deals combat damage to a player, Sword of Fire and Ice deals 2 damage to target creature or player and you draw a card.
         this.addAbility(new SwordOfFireAndIceAbility());
         // Equip

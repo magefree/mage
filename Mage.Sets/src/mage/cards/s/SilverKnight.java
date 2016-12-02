@@ -35,20 +35,12 @@ import mage.abilities.keyword.ProtectionAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.filter.FilterCard;
-import mage.filter.predicate.mageobject.ColorPredicate;
 
 /**
  *
  * @author LevelX2
  */
 public class SilverKnight extends CardImpl {
-
-    private static final FilterCard filter = new FilterCard("red");
-
-    static {
-        filter.add(new ColorPredicate(ObjectColor.RED));
-    }
 
     public SilverKnight(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{W}{W}");
@@ -61,7 +53,7 @@ public class SilverKnight extends CardImpl {
         // First strike
         this.addAbility(FirstStrikeAbility.getInstance());
         // protection from red
-        this.addAbility(new ProtectionAbility(filter));
+        this.addAbility(ProtectionAbility.from(ObjectColor.RED));
     }
 
     public SilverKnight(final SilverKnight card) {

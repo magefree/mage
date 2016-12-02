@@ -28,7 +28,6 @@
 package mage.cards.i;
 
 import java.util.UUID;
-import mage.ObjectColor;
 import mage.abilities.TriggeredAbilityImpl;
 import mage.abilities.costs.mana.GenericManaCost;
 import mage.abilities.effects.common.DoIfCostPaid;
@@ -45,7 +44,6 @@ import mage.game.stack.Spell;
 /**
  *
  * @author KholdFuzion
-
  */
 public class IronStar extends CardImpl {
 
@@ -89,7 +87,7 @@ class IronStarAbility extends TriggeredAbilityImpl {
     @Override
     public boolean checkTrigger(GameEvent event, Game game) {
         Spell spell = game.getStack().getSpell(event.getTargetId());
-        return spell != null && spell.getColor(game).contains(ObjectColor.RED);
+        return spell != null && spell.getColor(game).isRed();
     }
 
     @Override

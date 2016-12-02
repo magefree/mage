@@ -59,6 +59,7 @@ public class Weatherlight extends ExpansionSet {
         cards.add(new SetCardInfo("Abduction", 30, Rarity.UNCOMMON, mage.cards.a.Abduction.class));
         cards.add(new SetCardInfo("Abeyance", 117, Rarity.RARE, mage.cards.a.Abeyance.class));
         cards.add(new SetCardInfo("Abjure", 31, Rarity.COMMON, mage.cards.a.Abjure.class));
+        cards.add(new SetCardInfo("Aboroth", 59, Rarity.RARE, mage.cards.a.Aboroth.class));
         cards.add(new SetCardInfo("Abyssal Gatekeeper", 1, Rarity.COMMON, mage.cards.a.AbyssalGatekeeper.class));
         cards.add(new SetCardInfo("Aether Flash", 88, Rarity.UNCOMMON, mage.cards.a.AetherFlash.class));
         cards.add(new SetCardInfo("Agonizing Memories", 2, Rarity.UNCOMMON, mage.cards.a.AgonizingMemories.class));
@@ -71,6 +72,7 @@ public class Weatherlight extends ExpansionSet {
         cards.add(new SetCardInfo("Argivian Find", 122, Rarity.UNCOMMON, mage.cards.a.ArgivianFind.class));
         cards.add(new SetCardInfo("Argivian Restoration", 34, Rarity.UNCOMMON, mage.cards.a.ArgivianRestoration.class));
         cards.add(new SetCardInfo("Aura of Silence", 123, Rarity.UNCOMMON, mage.cards.a.AuraOfSilence.class));
+        cards.add(new SetCardInfo("Avizoa", 35, Rarity.RARE, mage.cards.a.Avizoa.class));
         cards.add(new SetCardInfo("Barrow Ghoul", 3, Rarity.COMMON, mage.cards.b.BarrowGhoul.class));
         cards.add(new SetCardInfo("Benalish Knight", 125, Rarity.COMMON, mage.cards.b.BenalishKnight.class));
         cards.add(new SetCardInfo("Benalish Missionary", 126, Rarity.COMMON, mage.cards.b.BenalishMissionary.class));
@@ -122,6 +124,7 @@ public class Weatherlight extends ExpansionSet {
         cards.add(new SetCardInfo("Heavy Ballista", 133, Rarity.COMMON, mage.cards.h.HeavyBallista.class));
         cards.add(new SetCardInfo("Hidden Horror", 14, Rarity.UNCOMMON, mage.cards.h.HiddenHorror.class));
         cards.add(new SetCardInfo("Hurloon Shaman", 108, Rarity.UNCOMMON, mage.cards.h.HurloonShaman.class));
+        cards.add(new SetCardInfo("Infernal Tribute", 15, Rarity.RARE, mage.cards.i.InfernalTribute.class));
         cards.add(new SetCardInfo("Jabari's Banner", 150, Rarity.UNCOMMON, mage.cards.j.JabarisBanner.class));
         cards.add(new SetCardInfo("Lava Hounds", 109, Rarity.UNCOMMON, mage.cards.l.LavaHounds.class));
         cards.add(new SetCardInfo("Llanowar Behemoth", 74, Rarity.UNCOMMON, mage.cards.l.LlanowarBehemoth.class));

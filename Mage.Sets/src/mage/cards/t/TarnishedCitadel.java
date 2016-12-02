@@ -32,7 +32,7 @@ import mage.Mana;
 import mage.abilities.costs.common.TapSourceCost;
 import mage.abilities.effects.common.DamageControllerEffect;
 import mage.abilities.mana.AnyColorManaAbility;
-import mage.abilities.mana.ManaAbility;
+import mage.abilities.mana.ActivatedManaAbilityImpl;
 import mage.abilities.mana.SimpleManaAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
@@ -51,7 +51,7 @@ public class TarnishedCitadel extends CardImpl {
         // {tap}: Add {C} to your mana pool.
         this.addAbility(new SimpleManaAbility(Zone.BATTLEFIELD, Mana.ColorlessMana(1), new TapSourceCost()));
         // {tap}: Add one mana of any color to your mana pool. Tarnished Citadel deals 3 damage to you.
-        ManaAbility ability = new AnyColorManaAbility(new TapSourceCost());
+        ActivatedManaAbilityImpl ability = new AnyColorManaAbility(new TapSourceCost());
         ability.addEffect(new DamageControllerEffect(3));
         this.addAbility(ability);
     }

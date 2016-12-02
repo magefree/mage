@@ -55,7 +55,7 @@ public class CovetousDragon extends CardImpl {
         
         // When you control no artifacts, sacrifice Covetous Dragon.
         this.addAbility(new ControlsPermanentsControllerTriggeredAbility(
-                new FilterArtifactPermanent(), Filter.ComparisonType.Equal, 0,
+                new FilterArtifactPermanent("no artifacts"), Filter.ComparisonType.Equal, 0,
                 new SacrificeSourceEffect()));
     }
 

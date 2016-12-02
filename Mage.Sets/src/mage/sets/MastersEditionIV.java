@@ -197,6 +197,7 @@ public class MastersEditionIV extends ExpansionSet {
         cards.add(new SetCardInfo("Overwhelming Forces", 92, Rarity.RARE, mage.cards.o.OverwhelmingForces.class));
         cards.add(new SetCardInfo("Owl Familiar", 54, Rarity.COMMON, mage.cards.o.OwlFamiliar.class));
         cards.add(new SetCardInfo("Pentagram of the Ages", 220, Rarity.UNCOMMON, mage.cards.p.PentagramOfTheAges.class));
+        cards.add(new SetCardInfo("Personal Incarnation", 22, Rarity.RARE, mage.cards.p.PersonalIncarnation.class));
         cards.add(new SetCardInfo("Phantasmal Forces", 55, Rarity.COMMON, mage.cards.p.PhantasmalForces.class));
         cards.add(new SetCardInfo("Phantasmal Terrain", 56, Rarity.COMMON, mage.cards.p.PhantasmalTerrain.class));
         cards.add(new SetCardInfo("Planar Gate", 221, Rarity.UNCOMMON, mage.cards.p.PlanarGate.class));
@@ -213,8 +214,10 @@ public class MastersEditionIV extends ExpansionSet {
         cards.add(new SetCardInfo("Regrowth", 163, Rarity.RARE, mage.cards.r.Regrowth.class));
         cards.add(new SetCardInfo("Righteous Charge", 23, Rarity.COMMON, mage.cards.r.RighteousCharge.class));
         cards.add(new SetCardInfo("Ring of Renewal", 224, Rarity.RARE, mage.cards.r.RingOfRenewal.class));
+        cards.add(new SetCardInfo("Rock Hydra", 133, Rarity.RARE, mage.cards.r.RockHydra.class));
         cards.add(new SetCardInfo("Rockslide Ambush", 134, Rarity.COMMON, mage.cards.r.RockslideAmbush.class));
         cards.add(new SetCardInfo("Roc of Kher Ridges", 132, Rarity.UNCOMMON, mage.cards.r.RocOfKherRidges.class));
+        cards.add(new SetCardInfo("Rock Hydra", 133, Rarity.RARE, mage.cards.r.RockHydra.class));
         cards.add(new SetCardInfo("Sandstorm", 164, Rarity.COMMON, mage.cards.s.Sandstorm.class));
         cards.add(new SetCardInfo("Savannah", 250, Rarity.RARE, mage.cards.s.Savannah.class));
         cards.add(new SetCardInfo("Savannah Lions", 24, Rarity.UNCOMMON, mage.cards.s.SavannahLions.class));
@@ -270,6 +273,7 @@ public class MastersEditionIV extends ExpansionSet {
         cards.add(new SetCardInfo("Urza's Miter", 237, Rarity.RARE, mage.cards.u.UrzasMiter.class));
         cards.add(new SetCardInfo("Urza's Power Plant", 258, Rarity.LAND, mage.cards.u.UrzasPowerPlant.class));
         cards.add(new SetCardInfo("Urza's Tower", 259, Rarity.LAND, mage.cards.u.UrzasTower.class));
+        cards.add(new SetCardInfo("Veteran Bodyguard", 32, Rarity.RARE, mage.cards.v.VeteranBodyguard.class));
         cards.add(new SetCardInfo("Volcanic Island", 260, Rarity.RARE, mage.cards.v.VolcanicIsland.class));
         cards.add(new SetCardInfo("War Mammoth", 172, Rarity.COMMON, mage.cards.w.WarMammoth.class));
         cards.add(new SetCardInfo("Warp Artifact", 100, Rarity.COMMON, mage.cards.w.WarpArtifact.class));

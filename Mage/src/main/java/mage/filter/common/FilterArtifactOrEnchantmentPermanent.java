@@ -44,7 +44,7 @@ public class FilterArtifactOrEnchantmentPermanent extends FilterPermanent {
 
     public FilterArtifactOrEnchantmentPermanent(String name) {
         super(name);
-        this.add(Predicates.or(new CardTypePredicate(CardType.ARTIFACT),new CardTypePredicate(CardType.ENCHANTMENT)));
+        this.add(Predicates.or(new CardTypePredicate(CardType.ARTIFACT), new CardTypePredicate(CardType.ENCHANTMENT)));
     }
 
     public FilterArtifactOrEnchantmentPermanent(final FilterArtifactOrEnchantmentPermanent filter) {

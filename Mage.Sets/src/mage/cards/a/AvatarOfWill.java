@@ -78,7 +78,7 @@ class AvatarOfWillCostReductionEffect extends CostModificationEffectImpl {
 
     AvatarOfWillCostReductionEffect() {
         super(Duration.Custom, Outcome.Benefit, CostModificationType.REDUCE_COST);
-        staticText = "If an opponent has no cards in hand, {this} will costs {6} less to cast";
+        staticText = "If an opponent has no cards in hand, {this} costs {6} less to cast";
     }
 
     AvatarOfWillCostReductionEffect(final AvatarOfWillCostReductionEffect effect) {

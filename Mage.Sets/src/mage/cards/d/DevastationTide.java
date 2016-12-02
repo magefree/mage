@@ -46,7 +46,7 @@ public class DevastationTide extends CardImpl {
         super(ownerId, setInfo, new CardType[]{CardType.SORCERY}, "{3}{U}{U}");
 
         // Return all nonland permanents to their owners' hands.
-        this.getSpellAbility().addEffect(new ReturnToHandFromBattlefieldAllEffect(new FilterNonlandPermanent()));
+        this.getSpellAbility().addEffect(new ReturnToHandFromBattlefieldAllEffect(new FilterNonlandPermanent("nonland permanents")));
 
         // Miracle {1}{U}
         this.addAbility(new MiracleAbility(this, new ManaCostsImpl("{1}{U}")));

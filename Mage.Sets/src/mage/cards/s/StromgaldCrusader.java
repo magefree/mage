@@ -41,8 +41,6 @@ import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Duration;
 import mage.constants.Zone;
-import mage.filter.FilterCard;
-import mage.filter.predicate.mageobject.ColorPredicate;
 
 /**
  *
@@ -50,12 +48,6 @@ import mage.filter.predicate.mageobject.ColorPredicate;
  */
 public class StromgaldCrusader extends CardImpl {
 
-    private static final FilterCard filter = new FilterCard("White");
-
-    static {
-        filter.add(new ColorPredicate(ObjectColor.WHITE));
-    }
-    
     public StromgaldCrusader(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{B}{B}");
         this.subtype.add("Zombie");
@@ -65,7 +57,7 @@ public class StromgaldCrusader extends CardImpl {
         this.toughness = new MageInt(1);
 
         // Protection from white
-        this.addAbility(new ProtectionAbility(filter));
+        this.addAbility(ProtectionAbility.from(ObjectColor.WHITE));
         
         // {B}: Stromgald Crusader gains flying until end of turn.
         this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new GainAbilitySourceEffect(FlyingAbility.getInstance(), Duration.EndOfTurn), new ManaCostsImpl("{B}")));        

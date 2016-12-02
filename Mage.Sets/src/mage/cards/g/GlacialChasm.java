@@ -31,7 +31,7 @@ import java.util.UUID;
 import mage.abilities.common.EntersBattlefieldTriggeredAbility;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.costs.common.PayLifeCost;
-import mage.abilities.effects.common.PreventAllDamageToControllerEffect;
+import mage.abilities.effects.common.PreventDamageToControllerEffect;
 import mage.abilities.effects.common.SacrificeControllerEffect;
 import mage.abilities.effects.common.combat.CantAttackAnyPlayerAllEffect;
 import mage.abilities.keyword.CumulativeUpkeepAbility;
@@ -63,7 +63,7 @@ public class GlacialChasm extends CardImpl {
         filter.add(new ControllerPredicate(TargetController.YOU));
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new CantAttackAnyPlayerAllEffect(Duration.WhileOnBattlefield, filter)));
         // Prevent all damage that would be dealt to you.
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new PreventAllDamageToControllerEffect(Duration.WhileOnBattlefield)));
+        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new PreventDamageToControllerEffect(Duration.WhileOnBattlefield)));
     }
 
     public GlacialChasm(final GlacialChasm card) {

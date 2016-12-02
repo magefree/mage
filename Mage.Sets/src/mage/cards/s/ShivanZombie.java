@@ -31,8 +31,6 @@ import java.util.UUID;
 import mage.MageInt;
 import mage.ObjectColor;
 import mage.abilities.keyword.ProtectionAbility;
-import mage.filter.FilterCard;
-import mage.filter.predicate.mageobject.ColorPredicate;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
@@ -42,11 +40,7 @@ import mage.constants.CardType;
  * @author Jgod
  */
 public class ShivanZombie extends CardImpl {
-    private static final FilterCard protectionFilter = new FilterCard("white");
-    static {
-        protectionFilter.add(new ColorPredicate(ObjectColor.WHITE));
-    }
-    
+
     public ShivanZombie(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{B}{R}");
         this.subtype.add("Barbarian");
@@ -55,7 +49,7 @@ public class ShivanZombie extends CardImpl {
         this.toughness = new MageInt(2);
 
         // Protection from white
-        this.addAbility(new ProtectionAbility(protectionFilter));
+        this.addAbility(ProtectionAbility.from(ObjectColor.WHITE));
     }
 
     public ShivanZombie(final ShivanZombie card) {

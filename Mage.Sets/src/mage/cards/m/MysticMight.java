@@ -47,7 +47,6 @@ import mage.constants.Outcome;
 import mage.constants.Zone;
 import mage.filter.common.FilterControlledLandPermanent;
 import mage.target.TargetPermanent;
-import mage.target.common.TargetControlledPermanent;
 import mage.target.common.TargetCreaturePermanent;
 
 /**
@@ -61,7 +60,7 @@ public class MysticMight extends CardImpl {
         this.subtype.add("Aura");
 
         // Enchant land you control
-        TargetPermanent auraTarget = new TargetControlledPermanent(new FilterControlledLandPermanent("land you control"));
+        TargetPermanent auraTarget = new TargetPermanent(new FilterControlledLandPermanent());
         this.getSpellAbility().addTarget(auraTarget);
         this.getSpellAbility().addEffect(new AttachEffect(Outcome.AddAbility));
         Ability ability = new EnchantAbility(auraTarget.getTargetName());

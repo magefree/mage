@@ -44,7 +44,7 @@ import mage.target.common.TargetControlledPermanent;
  */
 public class Gush extends CardImpl {
 
-    private static final FilterControlledLandPermanent filter = new FilterControlledLandPermanent("Island");
+    private static final FilterControlledLandPermanent filter = new FilterControlledLandPermanent("Islands");
     static{
         filter.add(new SubtypePredicate("Island"));
     }

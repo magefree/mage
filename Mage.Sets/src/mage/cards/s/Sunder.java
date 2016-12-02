@@ -28,16 +28,11 @@
 package mage.cards.s;
 
 import java.util.UUID;
-import mage.abilities.Ability;
-import mage.abilities.effects.OneShotEffect;
+import mage.abilities.effects.common.ReturnToHandFromBattlefieldAllEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.Outcome;
-import mage.constants.Zone;
 import mage.filter.common.FilterLandPermanent;
-import mage.game.Game;
-import mage.game.permanent.Permanent;
 
 /**
  *
@@ -49,7 +44,7 @@ public class Sunder extends CardImpl {
         super(ownerId,setInfo,new CardType[]{CardType.INSTANT},"{3}{U}{U}");
 
         // Return all lands to their owners' hands.
-        this.getSpellAbility().addEffect(new SunderEffect());
+        this.getSpellAbility().addEffect(new ReturnToHandFromBattlefieldAllEffect(new FilterLandPermanent("lands")));
     }
 
     public Sunder(final Sunder card) {
@@ -59,30 +54,5 @@ public class Sunder extends CardImpl {
     @Override
     public Sunder copy() {
         return new Sunder(this);
-    }
-}
-
-class SunderEffect extends OneShotEffect {
-    
-    public SunderEffect() {
-        super(Outcome.ReturnToHand);
-        staticText = "Return all lands to their owners' hands";
-    }
-
-    public SunderEffect(final SunderEffect effect) {
-        super(effect);
-    }
-
-    @Override
-    public boolean apply(Game game, Ability source) {
-        for (Permanent land : game.getBattlefield().getActivePermanents(new FilterLandPermanent(), source.getControllerId(), source.getSourceId(), game)) {
-            land.moveToZone(Zone.HAND, source.getSourceId(), game, true);
-        }
-        return true;
-    }
-
-    @Override
-    public SunderEffect copy() {
-        return new SunderEffect(this);
     }
 }

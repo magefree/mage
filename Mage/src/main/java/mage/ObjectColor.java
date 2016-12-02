@@ -30,12 +30,10 @@ package mage;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
+import mage.constants.ColoredManaSymbol;
 import mage.util.Copyable;
-import mage.util.ThreadLocalStringBuilder;
 
 public class ObjectColor implements Serializable, Copyable<ObjectColor>, Comparable<ObjectColor> {
-
-    private static final ThreadLocalStringBuilder threadLocalBuilder = new ThreadLocalStringBuilder(10);
 
     public static final ObjectColor WHITE = new ObjectColor("W");
     public static final ObjectColor BLUE = new ObjectColor("U");
@@ -231,7 +229,7 @@ public class ObjectColor implements Serializable, Copyable<ObjectColor>, Compara
 
     @Override
     public String toString() {
-        StringBuilder sb = threadLocalBuilder.get();
+        StringBuilder sb = new StringBuilder(5);
         if (white) {
             sb.append("W");
         }
@@ -380,6 +378,31 @@ public class ObjectColor implements Serializable, Copyable<ObjectColor>, Compara
         return o1 - o2;
     }
 
+    /**
+     * Returns a ColoredManaSymbol of a color included If multicolor only one
+     * symbol is returned
+     *
+     * @return null or
+     */
+    public ColoredManaSymbol getColoredManaSymbol() {
+        if (isBlack()) {
+            return ColoredManaSymbol.B;
+        }
+        if (isRed()) {
+            return ColoredManaSymbol.R;
+        }
+        if (isBlue()) {
+            return ColoredManaSymbol.U;
+        }
+        if (isGreen()) {
+            return ColoredManaSymbol.G;
+        }
+        if (isWhite()) {
+            return ColoredManaSymbol.W;
+        }
+        return null;
+    }
+
     public static List<ObjectColor> getAllColors() {
         List<ObjectColor> colors = new ArrayList<>();
         colors.add(ObjectColor.WHITE);
@@ -389,4 +412,5 @@ public class ObjectColor implements Serializable, Copyable<ObjectColor>, Compara
         colors.add(ObjectColor.GREEN);
         return colors;
     }
+
 }

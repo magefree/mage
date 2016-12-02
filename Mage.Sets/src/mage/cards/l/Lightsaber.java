@@ -53,14 +53,15 @@ import mage.util.CardUtil;
 public class Lightsaber extends CardImpl {
 
     public Lightsaber(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.ARTIFACT},"{1}");
-
-        // Equip 3
-        this.addAbility(new EquipAbility(Outcome.BoostCreature, new GenericManaCost(3)));
+        super(ownerId, setInfo, new CardType[]{CardType.ARTIFACT}, "{1}");
+        this.subtype.add("Equipment");
 
         // Equiped creature gets +1/+0 and has firsttrike
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new BoostEquippedEffect(1, 0)));
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new GainAbilityAttachedEffect(FirstStrikeAbility.getInstance(), AttachmentType.EQUIPMENT)));
+
+        // Equip 3
+        this.addAbility(new EquipAbility(Outcome.BoostCreature, new GenericManaCost(3)));
 
         // Lightsaber's equip ability costs {1} if it targets a Jedi or Sith.
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new InfoEffect("{this}'s equip ability costs {1} if it targets a Jedi or Sith")));

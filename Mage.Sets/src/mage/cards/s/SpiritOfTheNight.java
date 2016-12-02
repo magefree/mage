@@ -31,33 +31,22 @@ import mage.constants.CardType;
 import mage.MageInt;
 import mage.ObjectColor;
 import mage.abilities.common.SimpleStaticAbility;
-import mage.abilities.condition.common.SourceMatchesFilterCondition;
 import mage.abilities.decorator.ConditionalContinuousEffect;
 import mage.abilities.effects.common.continuous.GainAbilitySourceEffect;
 import mage.abilities.keyword.*;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.Zone;
-import mage.filter.FilterCard;
-import mage.filter.common.FilterAttackingCreature;
-import mage.filter.predicate.mageobject.ColorPredicate;
 
 import java.util.UUID;
+import mage.abilities.condition.common.SourceAttackingCondition;
 
 /**
  *
  * @author jeffwadsworth
-
  */
 public class SpiritOfTheNight extends CardImpl {
     
-    private static final String rule = "Spirit of the Night has first strike as long as it's attacking";
-    private static final FilterCard filter = new FilterCard("Black");
-    
-    static {
-        filter.add(new ColorPredicate(ObjectColor.BLACK));
-    }
-
     public SpiritOfTheNight(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{6}{B}{B}{B}");
         this.supertype.add("Legendary");
@@ -77,11 +66,10 @@ public class SpiritOfTheNight extends CardImpl {
         this.addAbility(HasteAbility.getInstance());
         
         // protection from black
-        this.addAbility(new ProtectionAbility(filter));
+        this.addAbility(ProtectionAbility.from(ObjectColor.BLACK));
         
         // Spirit of the Night has first strike as long as it's attacking.
-        ConditionalContinuousEffect effect = new ConditionalContinuousEffect(new GainAbilitySourceEffect(FirstStrikeAbility.getInstance()), new SourceMatchesFilterCondition(new FilterAttackingCreature()), rule);
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, effect));
+        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new ConditionalContinuousEffect(new GainAbilitySourceEffect(FirstStrikeAbility.getInstance()), SourceAttackingCondition.getInstance(), "{this} has first strike as long as it's attacking")));
     }
 
     public SpiritOfTheNight(final SpiritOfTheNight card) {

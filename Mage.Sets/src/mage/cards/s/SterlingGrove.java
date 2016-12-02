@@ -41,9 +41,8 @@ import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Duration;
 import mage.constants.Zone;
-import mage.filter.FilterCard;
-import mage.filter.common.FilterControlledPermanent;
-import mage.filter.predicate.mageobject.CardTypePredicate;
+import mage.filter.common.FilterEnchantmentCard;
+import mage.filter.common.FilterEnchantmentPermanent;
 import mage.target.common.TargetCardInLibrary;
 
 /**
@@ -52,24 +51,14 @@ import mage.target.common.TargetCardInLibrary;
  */
 public class SterlingGrove extends CardImpl {
     
-    private static final FilterControlledPermanent filterPermanent = new FilterControlledPermanent("enchantments");
-    private static final FilterCard filterCard = new FilterCard("enchantment card");
-    static {
-        filterPermanent.add(new CardTypePredicate(CardType.ENCHANTMENT));
-        filterCard.add(new CardTypePredicate(CardType.ENCHANTMENT));
-    }
-
-
     public SterlingGrove(UUID ownerId, CardSetInfo setInfo) {
-        
         super(ownerId,setInfo,new CardType[]{CardType.ENCHANTMENT},"{G}{W}");
 
-
         // Other enchantments you control have shroud.
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new GainAbilityControlledEffect(ShroudAbility.getInstance(), Duration.WhileOnBattlefield, filterPermanent, true)));
+        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new GainAbilityControlledEffect(ShroudAbility.getInstance(), Duration.WhileOnBattlefield, new FilterEnchantmentPermanent("enchantments"), true)));
         
         // {1}, Sacrifice Sterling Grove: Search your library for an enchantment card and reveal that card. Shuffle your library, then put the card on top of it.
-        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new SearchLibraryPutOnLibraryEffect(new TargetCardInLibrary(filterCard), true, true), new GenericManaCost(1));
+        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new SearchLibraryPutOnLibraryEffect(new TargetCardInLibrary(new FilterEnchantmentCard("enchantment card")), true, true), new GenericManaCost(1));
         ability.addCost(new SacrificeSourceCost());
         this.addAbility(ability);
     }

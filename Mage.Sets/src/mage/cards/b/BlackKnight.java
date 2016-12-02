@@ -36,20 +36,12 @@ import mage.abilities.keyword.FirstStrikeAbility;
 import mage.abilities.keyword.ProtectionAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
-import mage.filter.FilterCard;
-import mage.filter.predicate.mageobject.ColorPredicate;
 
 /**
  *
  * @author BetaSteward_at_googlemail.com
  */
 public class BlackKnight extends CardImpl {
-
-    private static final FilterCard filter = new FilterCard("White");
-
-    static {
-        filter.add(new ColorPredicate(ObjectColor.WHITE));
-    }
 
     public BlackKnight(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{B}{B}");
@@ -60,7 +52,7 @@ public class BlackKnight extends CardImpl {
         this.toughness = new MageInt(2);
 
         this.addAbility(FirstStrikeAbility.getInstance());
-        this.addAbility(new ProtectionAbility(filter));
+        this.addAbility(ProtectionAbility.from(ObjectColor.WHITE));
     }
 
     public BlackKnight(final BlackKnight card) {

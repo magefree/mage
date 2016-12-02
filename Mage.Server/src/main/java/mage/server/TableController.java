@@ -297,6 +297,19 @@ public class TableController {
             user.showUserMessage("Join Table", message);
             return false;
         }
+        
+        // Check power level for table (currently only used for EDH/Commander table)
+        int edhPowerLevel = table.getMatch().getOptions().getEdhPowerLevel();
+        if (edhPowerLevel > 0 && table.getValidator().getName().toLowerCase().equals("commander")) {
+            int deckEdhPowerLevel = table.getValidator().getEdhPowerLevel(deck);
+            if (deckEdhPowerLevel > edhPowerLevel) {
+                String message = new StringBuilder("Your deck appears to be too powerful for this table.\n\nReduce the number of extra turn cards, infect, counters, fogs, reconsider your commander. ")
+                        .append("\nThe table requirement has a maximum power level of ").append(edhPowerLevel).append (" whilst your deck has a calculated power level of ")
+                        .append(deckEdhPowerLevel).toString();
+                user.showUserMessage("Join Table", message);
+                return false;
+            }
+        }
 
         Player player = createPlayer(name, seat.getPlayerType(), skill);
         if (player == null) {

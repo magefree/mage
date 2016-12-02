@@ -37,9 +37,7 @@ import mage.abilities.keyword.ProtectionAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.*;
-import mage.filter.FilterCard;
 import mage.filter.common.FilterLandPermanent;
-import mage.filter.predicate.mageobject.ColorPredicate;
 import mage.filter.predicate.mageobject.SubtypePredicate;
 import mage.filter.predicate.permanent.ControllerPredicate;
 
@@ -49,10 +47,8 @@ import mage.filter.predicate.permanent.ControllerPredicate;
  */
 public class MaraudingKnight extends CardImpl {
 
-    private static final FilterCard protectionFilter = new FilterCard("White");
     private static final FilterLandPermanent plainsFilter = new FilterLandPermanent("Plains your opponent controls");
     static {
-      protectionFilter.add(new ColorPredicate(ObjectColor.WHITE));
       plainsFilter.add(new SubtypePredicate("Plains"));
       plainsFilter.add(new ControllerPredicate(TargetController.OPPONENT));
     }
@@ -65,7 +61,7 @@ public class MaraudingKnight extends CardImpl {
         this.toughness = new MageInt(2);
 
         // Protection from white
-        this.addAbility(new ProtectionAbility(protectionFilter));
+        this.addAbility(ProtectionAbility.from(ObjectColor.WHITE));
 
         // Marauding Knight gets +1/+1 for each Plains your opponents control.
         PermanentsOnBattlefieldCount amount = new PermanentsOnBattlefieldCount(plainsFilter, 1);

@@ -47,7 +47,7 @@ import mage.target.targetpointer.FixedTarget;
 public class BurningSands extends CardImpl {
 
     private final UUID originalId;
-    private static final FilterLandPermanent filter = new FilterLandPermanent("a land");
+    private static final FilterLandPermanent filter = new FilterLandPermanent();
 
     public BurningSands(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.ENCHANTMENT},"{3}{R}{R}");

@@ -71,7 +71,7 @@ public class DromokaMonument extends CardImpl {
     
     private class DromokaMonumentToken extends Token {
         DromokaMonumentToken() {
-            super("", "a 4/4 green and white Dragon artifact creature with flying");
+            super("", "4/4 green and white Dragon artifact creature with flying");
             cardType.add(CardType.ARTIFACT);
             cardType.add(CardType.CREATURE);
             color.setGreen(true);

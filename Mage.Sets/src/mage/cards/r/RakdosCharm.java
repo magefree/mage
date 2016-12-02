@@ -93,10 +93,10 @@ public class RakdosCharm extends CardImpl {
         @Override
         public boolean apply(Game game, Ability source) {
 
-            FilterPermanent filterEnchantments = new FilterPermanent();
-            filterEnchantments.add(new CardTypePredicate(CardType.CREATURE));
+            FilterPermanent filter = new FilterPermanent();
+            filter.add(new CardTypePredicate(CardType.CREATURE));
 
-            for (Permanent permanent : game.getBattlefield().getActivePermanents(filterEnchantments, source.getControllerId(), source.getSourceId(), game)) {
+            for (Permanent permanent : game.getBattlefield().getActivePermanents(filter, source.getControllerId(), source.getSourceId(), game)) {
                 Player controller = game.getPlayer(permanent.getControllerId());
                 if (controller != null) {
                     controller.damage(1, permanent.getId(), game, false, true);

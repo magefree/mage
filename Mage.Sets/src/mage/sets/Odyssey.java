@@ -199,6 +199,7 @@ public class Odyssey extends ExpansionSet {
         cards.add(new SetCardInfo("Krosan Avenger", 247, Rarity.COMMON, mage.cards.k.KrosanAvenger.class));
         cards.add(new SetCardInfo("Krosan Beast", 248, Rarity.RARE, mage.cards.k.KrosanBeast.class));
         cards.add(new SetCardInfo("Laquatus's Creativity", 88, Rarity.UNCOMMON, mage.cards.l.LaquatussCreativity.class));
+        cards.add(new SetCardInfo("Lava Blister", 200, Rarity.UNCOMMON, mage.cards.l.LavaBlister.class));
         cards.add(new SetCardInfo("Leaf Dancer", 249, Rarity.COMMON, mage.cards.l.LeafDancer.class));
         cards.add(new SetCardInfo("Lieutenant Kirtar", 29, Rarity.RARE, mage.cards.l.LieutenantKirtar.class));
         cards.add(new SetCardInfo("Life Burst", 30, Rarity.COMMON, mage.cards.l.LifeBurst.class));

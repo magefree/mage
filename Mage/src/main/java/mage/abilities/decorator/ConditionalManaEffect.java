@@ -90,17 +90,7 @@ public class ConditionalManaEffect extends ManaEffect {
                     return false; // it happens, don't know how
                 }
 
-                if (choice.getColor().isBlack()) {
-                    createdMana = Mana.BlackMana(amount);
-                } else if (choice.getColor().isBlue()) {
-                    createdMana = Mana.BlueMana(amount);
-                } else if (choice.getColor().isRed()) {
-                    createdMana = Mana.RedMana(amount);
-                } else if (choice.getColor().isGreen()) {
-                    createdMana = Mana.GreenMana(amount);
-                } else if (choice.getColor().isWhite()) {
-                    createdMana = Mana.WhiteMana(amount);
-                }
+                createdMana = choice.getMana(amount);
             }
             mana = createdMana;
         }
@@ -117,8 +107,7 @@ public class ConditionalManaEffect extends ManaEffect {
     }
 
     @Override
-    public Mana getMana(Game game, Ability source
-    ) {
+    public Mana getMana(Game game, Ability source) {
         Mana mana = null;
         if (condition.apply(game, source)) {
             mana = effect.getMana();

@@ -36,12 +36,12 @@ import mage.abilities.Ability;
 import mage.abilities.common.EntersBattlefieldTappedAbility;
 import mage.abilities.costs.common.TapSourceCost;
 import mage.abilities.effects.common.ManaEffect;
-import mage.abilities.mana.ManaAbility;
+import mage.abilities.mana.ActivatedManaAbilityImpl;
 import mage.cards.Card;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.choices.Choice;
-import mage.choices.ChoiceImpl;
+import mage.choices.ChoiceColor;
 import mage.constants.CardType;
 import mage.constants.ColoredManaSymbol;
 import mage.constants.Zone;
@@ -55,7 +55,7 @@ import mage.players.Player;
 public class CorruptedGrafstone extends CardImpl {
 
     public CorruptedGrafstone(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.ARTIFACT},"{2}");
+        super(ownerId, setInfo, new CardType[]{CardType.ARTIFACT}, "{2}");
 
         // Corrupted Grafstone enters the battlefield tapped.
         this.addAbility(new EntersBattlefieldTappedAbility());
@@ -74,7 +74,7 @@ public class CorruptedGrafstone extends CardImpl {
     }
 }
 
-class CorruptedGrafstoneManaAbility extends ManaAbility {
+class CorruptedGrafstoneManaAbility extends ActivatedManaAbilityImpl {
 
     public CorruptedGrafstoneManaAbility() {
         super(Zone.BATTLEFIELD, new CorruptedGrafstoneManaEffect(), new TapSourceCost());
@@ -118,7 +118,8 @@ class CorruptedGrafstoneManaEffect extends ManaEffect {
     @Override
     public boolean apply(Game game, Ability source) {
         Mana types = getManaTypesInGraveyard(game, source);
-        Choice choice = new ChoiceImpl(true);
+        Choice choice = new ChoiceColor(true);
+        choice.getChoices().clear();
         choice.setMessage("Pick a mana color");
         if (types.getBlack() > 0) {
             choice.getChoices().add("Black");

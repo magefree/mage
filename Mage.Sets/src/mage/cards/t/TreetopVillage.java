@@ -68,7 +68,7 @@ public class TreetopVillage extends CardImpl {
 
 class ApeToken extends Token {
     ApeToken() {
-        super("Ape", "a 3/3 green Ape creature with trample");
+        super("Ape", "3/3 green Ape creature with trample");
         cardType.add(CardType.CREATURE);
         this.subtype.add("Ape");
         color.setGreen(true);

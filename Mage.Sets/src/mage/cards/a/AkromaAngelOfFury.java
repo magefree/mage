@@ -43,21 +43,12 @@ import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Duration;
 import mage.constants.Zone;
-import mage.filter.FilterCard;
-import mage.filter.predicate.Predicates;
-import mage.filter.predicate.mageobject.ColorPredicate;
 
 /**
  *
  * @author LevelX2
  */
 public class AkromaAngelOfFury extends CardImpl {
-
-    private static final FilterCard protectionFilter = new FilterCard("white and from blue");
-
-    static {
-        protectionFilter.add(Predicates.or(new ColorPredicate(ObjectColor.WHITE),new ColorPredicate(ObjectColor.BLUE)));
-    }
 
     public AkromaAngelOfFury(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{5}{R}{R}{R}");
@@ -74,7 +65,7 @@ public class AkromaAngelOfFury extends CardImpl {
         // Trample
         this.addAbility(TrampleAbility.getInstance());
         // protection from white and from blue
-        this.addAbility(new ProtectionAbility(protectionFilter));
+        this.addAbility(ProtectionAbility.from(ObjectColor.WHITE, ObjectColor.BLUE));
         // {R}: Akroma, Angel of Fury gets +1/+0 until end of turn.
         this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new BoostSourceEffect(1,0, Duration.EndOfTurn), new ManaCostsImpl("{R}")));
         // Morph {3}{R}{R}{R}

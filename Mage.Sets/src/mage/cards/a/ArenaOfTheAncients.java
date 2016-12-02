@@ -26,7 +26,7 @@ import mage.filter.predicate.mageobject.SupertypePredicate;
  */
 public class ArenaOfTheAncients extends CardImpl {
     
-    final static FilterCreaturePermanent legendaryFilter = new FilterCreaturePermanent("legendary creatures");
+    private final static FilterCreaturePermanent legendaryFilter = new FilterCreaturePermanent("legendary creatures");
     static {
         legendaryFilter.add(new SupertypePredicate("Legendary"));
     }
@@ -34,13 +34,12 @@ public class ArenaOfTheAncients extends CardImpl {
     public ArenaOfTheAncients(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.ARTIFACT},"{3}");
         
+        // Legendary creatures don't untap during their controllers' untap steps
+        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new DontUntapInControllersUntapStepAllEffect(Duration.WhileOnBattlefield, TargetController.ANY, legendaryFilter)));
+
         // When Arena of the Ancients enters the battlefield, tap all Legendary creatures
         Ability tapAllLegendsAbility = new EntersBattlefieldTriggeredAbility(new TapAllEffect(legendaryFilter));
         this.addAbility(tapAllLegendsAbility);
-        
-        // Legendary creatures don't untap during their controllers' untap steps
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new DontUntapInControllersUntapStepAllEffect(Duration.WhileOnBattlefield, TargetController.ANY, legendaryFilter)));
-        
     }
     
     public ArenaOfTheAncients(final ArenaOfTheAncients card) {

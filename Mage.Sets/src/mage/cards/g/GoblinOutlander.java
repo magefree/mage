@@ -35,29 +35,22 @@ import mage.ObjectColor;
 import mage.abilities.keyword.ProtectionAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
-import mage.filter.FilterCard;
-import mage.filter.predicate.mageobject.ColorPredicate;
 
 /**
  *
  * @author Loki
  */
 public class GoblinOutlander extends CardImpl {
-    private static final FilterCard filter = new FilterCard("white");
-
-    static {
-        filter.add(new ColorPredicate(ObjectColor.WHITE));
-    }
 
     public GoblinOutlander(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{B}{R}");
-
-
         this.subtype.add("Goblin");
         this.subtype.add("Scout");
+
         this.power = new MageInt(2);
-    this.toughness = new MageInt(2);
-        this.addAbility(new ProtectionAbility(filter));
+        this.toughness = new MageInt(2);
+
+        this.addAbility(ProtectionAbility.from(ObjectColor.WHITE));
     }
 
     public GoblinOutlander(final GoblinOutlander card) {

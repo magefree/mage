@@ -35,8 +35,6 @@ import mage.abilities.keyword.ProtectionAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.filter.FilterObject;
-import mage.filter.predicate.mageobject.ColorPredicate;
 
 /**
  *
@@ -44,11 +42,6 @@ import mage.filter.predicate.mageobject.ColorPredicate;
  */
 public class AbbeyGargoyles extends CardImpl {
 
-    private static final FilterObject filter = new FilterObject("red");
-    static {
-        filter.add(new ColorPredicate(ObjectColor.RED));
-    }
-    
     public AbbeyGargoyles(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{2}{W}{W}{W}");
         this.subtype.add("Gargoyle");
@@ -58,7 +51,7 @@ public class AbbeyGargoyles extends CardImpl {
         // Flying
         this.addAbility(FlyingAbility.getInstance());
         // protection from red
-        this.addAbility(new ProtectionAbility(filter));
+        this.addAbility(ProtectionAbility.from(ObjectColor.RED));
     }
 
     public AbbeyGargoyles(final AbbeyGargoyles card) {

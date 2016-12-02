@@ -61,7 +61,7 @@ import mage.target.TargetCard;
 public class OathOfNissa extends CardImpl {
 
     public OathOfNissa(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.ENCHANTMENT},"{G}");
+        super(ownerId, setInfo, new CardType[]{CardType.ENCHANTMENT}, "{G}");
         this.supertype.add("Legendary");
 
         // When Oath of Nissa enters the battlefield, look at the top three cards of your library. You may reveal a creature, land, or planeswalker card from among them and put it into your hand. Put the rest on the bottom of your library in any order.
@@ -143,7 +143,7 @@ class OathOfNissaEffect extends OneShotEffect {
 class OathOfNissaSpendAnyManaEffect extends AsThoughEffectImpl implements AsThoughManaEffect {
 
     public OathOfNissaSpendAnyManaEffect() {
-        super(AsThoughEffectType.SPEND_OTHER_MANA, Duration.Custom, Outcome.Benefit);
+        super(AsThoughEffectType.SPEND_OTHER_MANA, Duration.WhileOnBattlefield, Outcome.Benefit);
         staticText = "you may spend mana as though it were mana of any color to cast planeswalker spells";
     }
 

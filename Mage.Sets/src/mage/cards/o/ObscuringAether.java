@@ -55,14 +55,14 @@ public class ObscuringAether extends CardImpl {
     }
 
     public ObscuringAether(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.ENCHANTMENT},"{G}");
+        super(ownerId, setInfo, new CardType[]{CardType.ENCHANTMENT}, "{G}");
 
         // Face-down creature spells you cast cost {1} less to cast.
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new SpellsCostReductionControllerEffect(filter, 1)));
 
         // {1}{G}: Turn Obscuring Aether face down.
         Effect effect = new BecomesFaceDownCreatureEffect(Duration.Custom, BecomesFaceDownCreatureEffect.FaceDownType.MANUAL);
-        effect.setText("Turn Obscuring Aether face down. <i>(It becomes a 2/2 creature.)</i>");
+        effect.setText("Turn {this} face down. <i>(It becomes a 2/2 creature.)</i>");
         this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, effect, new ManaCostsImpl("{1}{G}")));
 
     }

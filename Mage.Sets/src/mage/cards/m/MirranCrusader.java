@@ -36,23 +36,14 @@ import mage.abilities.keyword.DoubleStrikeAbility;
 import mage.abilities.keyword.ProtectionAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
-import mage.filter.FilterCard;
-import mage.filter.predicate.mageobject.ColorPredicate;
 
 /**
  *
  * @author ayratn
  */
 public class MirranCrusader extends CardImpl {
-    private static final FilterCard filter = new FilterCard("Black");
-    private static final FilterCard filter2 = new FilterCard("Green");
 
-    static {
-        filter.add(new ColorPredicate(ObjectColor.BLACK));
-        filter2.add(new ColorPredicate(ObjectColor.GREEN));
-    }
-
-    public MirranCrusader (UUID ownerId, CardSetInfo setInfo) {
+    public MirranCrusader(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{1}{W}{W}");
         this.subtype.add("Human");
         this.subtype.add("Knight");
@@ -60,11 +51,10 @@ public class MirranCrusader extends CardImpl {
         this.power = new MageInt(2);
         this.toughness = new MageInt(2);
         this.addAbility(DoubleStrikeAbility.getInstance());
-        this.addAbility(new ProtectionAbility(filter));
-        this.addAbility(new ProtectionAbility(filter2));
+        this.addAbility(ProtectionAbility.from(ObjectColor.BLACK, ObjectColor.GREEN));
     }
 
-    public MirranCrusader (final MirranCrusader card) {
+    public MirranCrusader(final MirranCrusader card) {
         super(card);
     }
 

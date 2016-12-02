@@ -37,19 +37,12 @@ import mage.abilities.keyword.ProtectionAbility;
 import mage.abilities.keyword.SuspendAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
-import mage.filter.FilterCard;
-import mage.filter.predicate.mageobject.ColorPredicate;
 
 /**
  *
  * @author LevelX2
  */
 public class DuskriderPeregrine extends CardImpl {
-
-    private static final FilterCard filter = new FilterCard("Black");
-    static {
-        filter.add(new ColorPredicate(ObjectColor.BLACK));
-    }
 
     public DuskriderPeregrine(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{5}{W}");
@@ -61,7 +54,7 @@ public class DuskriderPeregrine extends CardImpl {
         // Flying
         this.addAbility(FlyingAbility.getInstance());
         // protection from black
-        this.addAbility(new ProtectionAbility(filter));
+        this.addAbility(ProtectionAbility.from(ObjectColor.BLACK));
 
         // Suspend 3-{1}{W}
         this.addAbility(new SuspendAbility(3, new ManaCostsImpl("{1}{W}"), this));

@@ -37,9 +37,7 @@ import mage.abilities.keyword.MorphAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.filter.FilterPermanent;
-import mage.filter.predicate.Predicates;
-import mage.filter.predicate.mageobject.CardTypePredicate;
+import mage.filter.common.FilterArtifactOrEnchantmentPermanent;
 import mage.target.TargetPermanent;
 
 /**
@@ -47,14 +45,6 @@ import mage.target.TargetPermanent;
  * @author LevelX2
  */
 public class NantukoVigilante extends CardImpl {
-
-    private static final FilterPermanent filter = new FilterPermanent("artifact or enchantment");
-
-    static {
-        filter.add(Predicates.or(
-                new CardTypePredicate(CardType.ARTIFACT),
-                new CardTypePredicate(CardType.ENCHANTMENT)));
-    }
 
     public NantukoVigilante(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{3}{G}");
@@ -69,7 +59,7 @@ public class NantukoVigilante extends CardImpl {
         this.addAbility(new MorphAbility(this,new ManaCostsImpl("{1}{G}")));
         // When Nantuko Vigilante is turned face up, destroy target artifact or enchantment.
         Ability ability = new TurnedFaceUpSourceTriggeredAbility(new DestroyTargetEffect());
-        ability.addTarget(new TargetPermanent(filter));
+        ability.addTarget(new TargetPermanent(new FilterArtifactOrEnchantmentPermanent()));
         this.addAbility(ability);
     }
 

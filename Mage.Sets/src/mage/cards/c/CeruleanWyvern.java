@@ -44,12 +44,6 @@ import mage.filter.predicate.mageobject.ColorPredicate;
  */
 public class CeruleanWyvern extends CardImpl {
 
-    private static final FilterCard filter = new FilterCard("green");
-
-    static {
-        filter.add(new ColorPredicate(ObjectColor.GREEN));
-    }
-
     public CeruleanWyvern(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{4}{U}");
         this.subtype.add("Drake");
@@ -59,7 +53,7 @@ public class CeruleanWyvern extends CardImpl {
         // Flying
         this.addAbility(FlyingAbility.getInstance());
         // protection from green
-        this.addAbility(new ProtectionAbility(filter));
+        this.addAbility(ProtectionAbility.from(ObjectColor.GREEN));
     }
 
     public CeruleanWyvern(final CeruleanWyvern card) {

@@ -72,7 +72,7 @@ public class ThunderTotem extends CardImpl {
 
 private class ThunderTotemToken extends Token {
         ThunderTotemToken() {
-            super("", "a 2/2 white Spirit artifact creature with flying and first strike");
+            super("", "2/2 white Spirit artifact creature with flying and first strike");
             cardType.add(CardType.ARTIFACT);
             cardType.add(CardType.CREATURE);
             color.setWhite(true);

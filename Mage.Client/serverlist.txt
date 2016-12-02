@@ -1,6 +1,6 @@
 XMage.de 1    (Europe/Germany) fast :xmage.de:17171
 woogerworks   (North America/USA)       :xmage.woogerworks.com:17171
-XMage.tahiti                         :xmage.tahiti.one:443
 XMageBr.      (South America/Brazil) :magic.ncs3sistemas.com.br:17171
+XMage.tahiti                         :xmage.tahiti.one:443
 Seedds Server (Asia)                :115.29.203.80:17171
 localhost -> connect to your local server (must be started):localhost:17171

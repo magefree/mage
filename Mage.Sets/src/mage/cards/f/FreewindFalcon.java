@@ -35,8 +35,6 @@ import mage.abilities.keyword.ProtectionAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.filter.FilterCard;
-import mage.filter.predicate.mageobject.ColorPredicate;
 
 
 /**
@@ -44,11 +42,6 @@ import mage.filter.predicate.mageobject.ColorPredicate;
  * @author anonymous
  */
 public class FreewindFalcon extends CardImpl {
-
-    private static final FilterCard filter = new FilterCard("red");
-    static {
-        filter.add(new ColorPredicate(ObjectColor.RED));
-    }
 
     public FreewindFalcon(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{1}{W}");
@@ -60,7 +53,7 @@ public class FreewindFalcon extends CardImpl {
         // Flying
         this.addAbility(FlyingAbility.getInstance());
         // protection from red
-        this.addAbility(new ProtectionAbility(filter));
+        this.addAbility(ProtectionAbility.from(ObjectColor.RED));
     }
 
     public FreewindFalcon(final FreewindFalcon card) {

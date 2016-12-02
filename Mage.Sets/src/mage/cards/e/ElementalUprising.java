@@ -37,11 +37,9 @@ import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Duration;
-import mage.constants.TargetController;
-import mage.filter.common.FilterLandPermanent;
-import mage.filter.predicate.permanent.ControllerPredicate;
+import mage.filter.common.FilterControlledLandPermanent;
 import mage.game.permanent.token.Token;
-import mage.target.common.TargetLandPermanent;
+import mage.target.TargetPermanent;
 
 /**
  *
@@ -49,18 +47,12 @@ import mage.target.common.TargetLandPermanent;
  */
 public class ElementalUprising extends CardImpl {
 
-    private static final FilterLandPermanent filter = new FilterLandPermanent("land you control");
-
-    static {
-        filter.add(new ControllerPredicate(TargetController.YOU));
-    }
-
     public ElementalUprising(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.INSTANT},"{1}{G}");
 
         // Target land you control becomes a 4/4 Elemental creature with haste until end of turn. It's still a land. It must be blocked this turn if able.
         getSpellAbility().addEffect(new BecomesCreatureTargetEffect(new ElementalUprisingToken(), false, true, Duration.EndOfTurn));
-        getSpellAbility().addTarget(new TargetLandPermanent(filter));
+        getSpellAbility().addTarget(new TargetPermanent(new FilterControlledLandPermanent()));
         Effect effect = new MustBeBlockedByAtLeastOneTargetEffect(Duration.EndOfTurn);
         effect.setText("It must be blocked this turn if able");
         getSpellAbility().addEffect(effect);

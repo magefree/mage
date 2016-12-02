@@ -40,8 +40,6 @@ import mage.abilities.keyword.LandwalkAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.filter.common.FilterLandPermanent;
-import mage.filter.predicate.Predicates;
-import mage.filter.predicate.mageobject.SupertypePredicate;
 
 /**
  *
@@ -54,7 +52,7 @@ public class TrailblazersBoots extends CardImpl {
         this.subtype.add("Equipment");
 
         // Equipped creature has nonbasic landwalk.
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new GainAbilityAttachedEffect(new NonbasicLandwalkAbility(), AttachmentType.EQUIPMENT)));
+        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new GainAbilityAttachedEffect(new LandwalkAbility(FilterLandPermanent.nonbasicLand()), AttachmentType.EQUIPMENT)));
         // Equip {2}
         this.addAbility(new EquipAbility(Outcome.AddAbility, new GenericManaCost(2)));
     }
@@ -66,27 +64,5 @@ public class TrailblazersBoots extends CardImpl {
     @Override
     public TrailblazersBoots copy() {
         return new TrailblazersBoots(this);
-    }
-}
-
-class NonbasicLandwalkAbility extends LandwalkAbility {
-
-    private static final FilterLandPermanent filter = new FilterLandPermanent("nonbasic land");
-
-    static {
-        filter.add(Predicates.not(new SupertypePredicate("Basic")));
-    }
-
-    public NonbasicLandwalkAbility() {
-        super(filter);
-    }
-
-    public NonbasicLandwalkAbility(final NonbasicLandwalkAbility ability) {
-        super(ability);
-    }
-
-    @Override
-    public NonbasicLandwalkAbility copy() {
-        return new NonbasicLandwalkAbility(this);
     }
 }

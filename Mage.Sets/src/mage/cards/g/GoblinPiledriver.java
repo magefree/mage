@@ -39,9 +39,7 @@ import mage.abilities.effects.common.continuous.BoostSourceEffect;
 import mage.abilities.keyword.ProtectionAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
-import mage.filter.FilterCard;
 import mage.filter.common.FilterAttackingCreature;
-import mage.filter.predicate.mageobject.ColorPredicate;
 import mage.filter.predicate.mageobject.SubtypePredicate;
 import mage.filter.predicate.permanent.AnotherPredicate;
 
@@ -51,13 +49,11 @@ import mage.filter.predicate.permanent.AnotherPredicate;
  */
 public class GoblinPiledriver extends CardImpl {
 
-    private static final FilterCard filter1 = new FilterCard("blue");
-    private static final FilterAttackingCreature filter2 = new FilterAttackingCreature("other attacking Goblin");
+    private static final FilterAttackingCreature filter = new FilterAttackingCreature("other attacking Goblin");
 
     static {
-        filter1.add(new ColorPredicate(ObjectColor.BLUE));
-        filter2.add(new SubtypePredicate("Goblin"));
-        filter2.add(new AnotherPredicate());
+        filter.add(new SubtypePredicate("Goblin"));
+        filter.add(new AnotherPredicate());
     }
 
     public GoblinPiledriver(UUID ownerId, CardSetInfo setInfo) {
@@ -69,9 +65,9 @@ public class GoblinPiledriver extends CardImpl {
         this.toughness = new MageInt(2);
 
         // Protection from blue
-        this.addAbility(new ProtectionAbility(filter1));
+        this.addAbility(ProtectionAbility.from(ObjectColor.BLUE));
         // Whenever Goblin Piledriver attacks, it gets +2/+0 until end of turn for each other attacking Goblin.
-        PermanentsOnBattlefieldCount value = new PermanentsOnBattlefieldCount(filter2, 2);
+        PermanentsOnBattlefieldCount value = new PermanentsOnBattlefieldCount(filter, 2);
         this.addAbility(new AttacksTriggeredAbility(new BoostSourceEffect(value, new StaticValue(0), Duration.EndOfTurn, true), false));
     }
 

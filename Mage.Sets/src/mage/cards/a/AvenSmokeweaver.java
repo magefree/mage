@@ -35,8 +35,6 @@ import mage.abilities.keyword.ProtectionAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.filter.FilterCard;
-import mage.filter.predicate.mageobject.ColorPredicate;
 
 /**
  *
@@ -44,12 +42,6 @@ import mage.filter.predicate.mageobject.ColorPredicate;
  */
 public class AvenSmokeweaver extends CardImpl {
 
-    static final FilterCard filter = new FilterCard("red");
-    
-    static{
-        filter.add(new ColorPredicate(ObjectColor.RED));
-    }
-            
     public AvenSmokeweaver(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{2}{U}{U}");
         this.subtype.add("Bird");
@@ -61,7 +53,7 @@ public class AvenSmokeweaver extends CardImpl {
         // Flying
         this.addAbility(FlyingAbility.getInstance());
         // protection from red
-        this.addAbility(new ProtectionAbility(filter));
+        this.addAbility(ProtectionAbility.from(ObjectColor.RED));
     }
 
     public AvenSmokeweaver(final AvenSmokeweaver card) {

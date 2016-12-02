@@ -91,7 +91,7 @@ public class LichLordOfUnx extends CardImpl {
 
 class ZombieWizardToken extends Token {
     ZombieWizardToken() {
-        super("Zombie Wizard", "a 1/1 blue and black Zombie Wizard creature token");
+        super("Zombie Wizard", "1/1 blue and black Zombie Wizard creature token");
         cardType.add(CardType.CREATURE);
         color.setBlue(true);
         color.setBlack(true);

@@ -58,7 +58,7 @@ import mage.target.common.TargetOpponent;
 public class ThoughtpickerWitch extends CardImpl {
 
     public ThoughtpickerWitch(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{B}");
+        super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{B}");
         this.subtype.add("Human");
         this.subtype.add("Wizard");
 
@@ -83,40 +83,36 @@ public class ThoughtpickerWitch extends CardImpl {
 }
 
 class ThoughtpickerWitchEffect extends OneShotEffect {
-    
+
     ThoughtpickerWitchEffect() {
         super(Outcome.Exile);
         this.staticText = "Look at the top two cards of target opponent's library, then exile one of them";
     }
-    
+
     ThoughtpickerWitchEffect(final ThoughtpickerWitchEffect effect) {
         super(effect);
     }
-    
+
     @Override
     public ThoughtpickerWitchEffect copy() {
         return new ThoughtpickerWitchEffect(this);
     }
-    
+
     @Override
     public boolean apply(Game game, Ability source) {
         Player controller = game.getPlayer(source.getControllerId());
         Player opponent = game.getPlayer(this.getTargetPointer().getFirst(game, source));
         if (controller != null && opponent != null) {
             Cards cards = new CardsImpl();
-            int numLooked = Math.min(2, opponent.getLibrary().size());
-            if (numLooked > 0) {
-                for (int i = 0; i < numLooked; i++) {
-                    cards.add(opponent.getLibrary().removeFromTop(game));
-                }
+            cards.addAll(opponent.getLibrary().getTopCards(game, 2));
+            if (cards.size() > 0) {
                 TargetCard target = new TargetCardInLibrary(new FilterCard("card to exile"));
-                controller.choose(Outcome.Exile, cards, target, game);
-                Card card = cards.get(target.getFirstTarget(), game);
-                cards.remove(card);
-                opponent.moveCardToExileWithInfo(card, null, "", source.getSourceId(), game, Zone.LIBRARY, true);
-                if (cards.size() == 1) {
-                    card = cards.get(cards.iterator().next(), game);
-                    opponent.moveCardToLibraryWithInfo(card, source.getSourceId(), game, Zone.LIBRARY, true, false);
+                if (controller.choose(Outcome.Exile, cards, target, game)) {
+                    Card card = cards.get(target.getFirstTarget(), game);
+                    if (card != null) {
+                        cards.remove(card);
+                        opponent.moveCards(card, Zone.EXILED, source, game);
+                    }
                 }
             }
             return true;

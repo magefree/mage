@@ -41,7 +41,6 @@ import mage.cards.CardSetInfo;
 import mage.constants.Layer;
 import mage.constants.SubLayer;
 import mage.filter.common.FilterLandPermanent;
-import mage.filter.predicate.mageobject.SubtypePredicate;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.game.permanent.token.Token;
@@ -53,11 +52,7 @@ import mage.target.common.TargetLandPermanent;
  */
 public class AwakenerDruid extends CardImpl {
 
-    private static final FilterLandPermanent filter = new FilterLandPermanent("Forest");
-
-    static {
-        filter.add(new SubtypePredicate("Forest"));
-    }
+    private static final FilterLandPermanent filter = new FilterLandPermanent("Forest", "Forest");
 
     public AwakenerDruid(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{2}{G}");

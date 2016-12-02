@@ -96,7 +96,7 @@ class ManaEchoesEffect extends OneShotEffect {
                 }
             }
             if (foundCreatures > 0) {
-                controller.getManaPool().addMana(new Mana(0, 0, 0, 0, 0, 0, 0, foundCreatures), game, source);
+                controller.getManaPool().addMana(Mana.ColorlessMana(foundCreatures), game, source);
             }
             return true;
         }

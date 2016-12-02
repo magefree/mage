@@ -38,7 +38,7 @@ import mage.abilities.condition.Condition;
 import mage.abilities.costs.Cost;
 import mage.abilities.costs.common.TapSourceCost;
 import mage.abilities.effects.common.ManaEffect;
-import mage.abilities.mana.ManaAbility;
+import mage.abilities.mana.ActivatedManaAbilityImpl;
 import mage.abilities.mana.builder.ConditionalManaBuilder;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
@@ -109,7 +109,7 @@ class VedalkenEngineerManaCondition implements Condition {
     }
 }
 
-class VedalkenEngineerAbility extends ManaAbility {
+class VedalkenEngineerAbility extends ActivatedManaAbilityImpl {
 
     public VedalkenEngineerAbility(Cost cost, int amount, ConditionalManaBuilder manaBuilder) {
         super(Zone.BATTLEFIELD, new VedalkenEngineerEffect(amount, manaBuilder), cost);
@@ -156,24 +156,13 @@ class VedalkenEngineerEffect extends ManaEffect {
             return false;
         }
 
-        Mana mana = new Mana();
         ChoiceColor choiceColor = new ChoiceColor(true);
         while (!controller.choose(Outcome.Benefit, choiceColor, game)) {
             if (!controller.canRespond()) {
                 return false;
             }
         }
-        if (choiceColor.getColor().isBlack()) {
-            mana.setBlack(amount);
-        } else if (choiceColor.getColor().isBlue()) {
-            mana.setBlue(amount);
-        } else if (choiceColor.getColor().isRed()) {
-            mana.setRed(amount);
-        } else if (choiceColor.getColor().isGreen()) {
-            mana.setGreen(amount);
-        } else if (choiceColor.getColor().isWhite()) {
-            mana.setWhite(amount);
-        }
+        Mana mana = choiceColor.getMana(amount);
         Mana condMana = manaBuilder.setMana(mana, source, game).build();
         checkToFirePossibleEvents(condMana, game, source);
         controller.getManaPool().addMana(condMana, game, source);

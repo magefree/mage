@@ -41,10 +41,8 @@ import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Duration;
-import mage.filter.FilterCard;
 import mage.filter.common.FilterCreatureSpell;
 import mage.filter.common.FilterEnchantmentPermanent;
-import mage.filter.predicate.mageobject.ColorPredicate;
 import mage.game.permanent.token.Token;
 
 /**
@@ -75,20 +73,13 @@ public class OpalGuardian extends CardImpl {
 }
 
 class OpalGuardianGargoyle extends Token {
-
-    private static final FilterCard filter = new FilterCard("red");
-
-    static {
-        filter.add(new ColorPredicate(ObjectColor.RED));
-    }
-
     public OpalGuardianGargoyle() {
-        super("Gargoyle", "a 3/4 Gargoyle creature with flying and protection from red");
+        super("Gargoyle", "3/4 Gargoyle creature with flying and protection from red");
         cardType.add(CardType.CREATURE);
         subtype.add("Gargoyle");
         power = new MageInt(3);
         toughness = new MageInt(4);
         this.addAbility(FlyingAbility.getInstance());
-        this.addAbility(new ProtectionAbility(filter));
+        this.addAbility(ProtectionAbility.from(ObjectColor.RED));
     }
 }

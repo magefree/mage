@@ -37,8 +37,6 @@ import mage.constants.Duration;
 import mage.constants.TargetController;
 import mage.constants.Zone;
 import mage.filter.common.FilterLandPermanent;
-import mage.filter.predicate.Predicates;
-import mage.filter.predicate.mageobject.SupertypePredicate;
 
 /**
  *
@@ -46,18 +44,12 @@ import mage.filter.predicate.mageobject.SupertypePredicate;
  */
 public class BackToBasics extends CardImpl {
 
-    private static final FilterLandPermanent filter = new FilterLandPermanent("Nonbasic lands");
-
-    static {
-        filter.add(Predicates.not(new SupertypePredicate("Basic")));
-    }
-
     public BackToBasics(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.ENCHANTMENT},"{2}{U}");
 
 
         // Nonbasic lands don't untap during their controllers' untap steps.
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new DontUntapInControllersUntapStepAllEffect(Duration.WhileOnBattlefield, TargetController.ANY, filter)));
+        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new DontUntapInControllersUntapStepAllEffect(Duration.WhileOnBattlefield, TargetController.ANY, FilterLandPermanent.nonbasicLands())));
     }
 
     public BackToBasics(final BackToBasics card) {

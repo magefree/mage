@@ -35,9 +35,7 @@ import mage.abilities.effects.common.ExileTargetEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.filter.FilterPermanent;
-import mage.filter.predicate.Predicates;
-import mage.filter.predicate.mageobject.CardTypePredicate;
+import mage.filter.common.FilterArtifactOrEnchantmentPermanent;
 import mage.game.Game;
 import mage.target.TargetPermanent;
 
@@ -46,12 +44,6 @@ import mage.target.TargetPermanent;
  * @author emerald000
  */
 public class ReturnToDust extends CardImpl {
-    
-    private static final FilterPermanent filter = new FilterPermanent("artifact or enchantment");
-    static {
-        filter.add(Predicates.or(new CardTypePredicate(CardType.ARTIFACT),
-                                 new CardTypePredicate(CardType.ENCHANTMENT)));
-    }
 
     public ReturnToDust(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.INSTANT},"{2}{W}{W}");
@@ -71,10 +63,10 @@ public class ReturnToDust extends CardImpl {
     public void adjustTargets(Ability ability, Game game) {
         if (ability instanceof SpellAbility) {
             if (game.getActivePlayerId().equals(ability.getControllerId()) && game.isMainPhase()) {
-                ability.addTarget(new TargetPermanent(1, 2, filter, false));
+                ability.addTarget(new TargetPermanent(1, 2, new FilterArtifactOrEnchantmentPermanent(), false));
             }
             else {
-                ability.addTarget(new TargetPermanent(filter));
+                ability.addTarget(new TargetPermanent(new FilterArtifactOrEnchantmentPermanent()));
             }
         }
     }

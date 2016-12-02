@@ -35,29 +35,21 @@ import mage.ObjectColor;
 import mage.abilities.keyword.ProtectionAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
-import mage.filter.FilterCard;
-import mage.filter.predicate.mageobject.ColorPredicate;
 
 /**
  *
  * @author Loki
  */
 public class VedalkenOutlander extends CardImpl {
-    private static final FilterCard filter = new FilterCard("red");
-
-    static {
-        filter.add(new ColorPredicate(ObjectColor.RED));
-    }
 
     public VedalkenOutlander(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.ARTIFACT,CardType.CREATURE},"{W}{U}");
-
-
         this.subtype.add("Vedalken");
         this.subtype.add("Scout");
         this.power = new MageInt(2);
-    this.toughness = new MageInt(2);
-        this.addAbility(new ProtectionAbility(filter));
+        this.toughness = new MageInt(2);
+
+        this.addAbility(ProtectionAbility.from(ObjectColor.RED));
     }
 
     public VedalkenOutlander(final VedalkenOutlander card) {

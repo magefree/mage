@@ -42,7 +42,7 @@ public class CommanderAnthology extends ExpansionSet {
     }
 
     private CommanderAnthology() {
-        super("Commander Anthology", "CMA2", ExpansionSet.buildDate(2017, 6, 9), SetType.SUPPLEMENTAL);
+        super("Commander Anthology", "CMA", ExpansionSet.buildDate(2017, 6, 9), SetType.SUPPLEMENTAL);
         this.blockName = "Commander Anthology";
         this.hasBasicLands = false;
     }

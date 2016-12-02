@@ -42,7 +42,6 @@ import mage.constants.CardType;
 import mage.constants.Duration;
 import mage.constants.Outcome;
 import mage.constants.Zone;
-import mage.filter.FilterCard;
 import mage.filter.FilterObject;
 import mage.filter.predicate.mageobject.ColorPredicate;
 import mage.game.Game;
@@ -55,12 +54,6 @@ import mage.target.TargetSource;
  */
 public class PilgrimOfJustice extends CardImpl {
     
-    static final FilterCard filter = new FilterCard("red");
-    
-    static{
-        filter.add(new ColorPredicate(ObjectColor.RED));
-    }
-
     public PilgrimOfJustice(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{2}{W}");
         this.subtype.add("Human");
@@ -70,7 +63,7 @@ public class PilgrimOfJustice extends CardImpl {
         this.toughness = new MageInt(3);
 
         // Protection from red
-        this.addAbility(new ProtectionAbility(filter));
+        this.addAbility(ProtectionAbility.from(ObjectColor.RED));
         // {W}, Sacrifice Pilgrim of Justice: The next time a red source of your choice would deal damage this turn, prevent that damage.
         Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new PilgrimOfJusticeEffect(), new ManaCostsImpl("{W}"));
         ability.addCost(new SacrificeSourceCost());
@@ -92,7 +85,7 @@ class PilgrimOfJusticeEffect extends PreventionEffectImpl {
     private static final FilterObject filter = new FilterObject("red source");
     static{
         filter.add(new ColorPredicate(ObjectColor.RED));
-    } 
+    }
     private TargetSource target;
 
     public PilgrimOfJusticeEffect() {

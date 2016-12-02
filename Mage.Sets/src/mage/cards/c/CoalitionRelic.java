@@ -107,17 +107,7 @@ class CoalitionRelicEffect extends OneShotEffect {
                     }
                     player.choose(outcome, choice, game);
                 }
-                if (choice.getColor().isBlack()) {
-                    mana.increaseBlack();
-                } else if (choice.getColor().isBlue()) {
-                    mana.increaseBlue();
-                } else if (choice.getColor().isRed()) {
-                    mana.increaseRed();
-                } else if (choice.getColor().isGreen()) {
-                    mana.increaseGreen();
-                } else if (choice.getColor().isWhite()) {
-                    mana.increaseWhite();
-                }
+                choice.increaseMana(mana);
                 choice.clearChoice();
             }
             player.getManaPool().addMana(mana, game, source);

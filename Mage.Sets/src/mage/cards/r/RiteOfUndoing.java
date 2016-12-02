@@ -83,7 +83,7 @@ class RiteOfUndoingEffect extends OneShotEffect {
 
     public RiteOfUndoingEffect() {
         super(Outcome.ReturnToHand);
-        this.staticText = "Return target nonland permanent you control and target onland permanent you don't control to their owners' hands";
+        this.staticText = "Return target nonland permanent you control and target nonland permanent you don't control to their owners' hands";
     }
 
     public RiteOfUndoingEffect(final RiteOfUndoingEffect effect) {

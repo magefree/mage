@@ -61,7 +61,7 @@ import mage.watchers.Watcher;
  * @author LevelX2
  */
 public class LullmageMentor extends CardImpl {
-    private static final FilterControlledCreaturePermanent filter = new FilterControlledCreaturePermanent("untapped Merfolks you control");
+    private static final FilterControlledCreaturePermanent filter = new FilterControlledCreaturePermanent("untapped Merfolk you control");
 
     static {
         filter.add(new SubtypePredicate("Merfolk"));

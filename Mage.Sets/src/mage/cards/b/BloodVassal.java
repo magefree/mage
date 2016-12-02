@@ -33,7 +33,6 @@ import mage.constants.Zone;
 import mage.MageInt;
 import mage.Mana;
 import mage.abilities.costs.common.SacrificeSourceCost;
-import mage.abilities.effects.common.BasicManaEffect;
 import mage.abilities.mana.SimpleManaAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
@@ -53,7 +52,7 @@ public class BloodVassal extends CardImpl {
         this.toughness = new MageInt(2);
 
         // Sacrifice Blood Vassal: Add {B}{B} to your mana pool.
-        this.addAbility(new SimpleManaAbility(Zone.BATTLEFIELD, new BasicManaEffect(Mana.BlackMana(2)), new SacrificeSourceCost()));
+        this.addAbility(new SimpleManaAbility(Zone.BATTLEFIELD, Mana.BlackMana(2), new SacrificeSourceCost()));
     }
 
     public BloodVassal(final BloodVassal card) {

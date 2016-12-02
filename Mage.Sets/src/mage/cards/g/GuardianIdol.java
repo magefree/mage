@@ -71,7 +71,7 @@ public class GuardianIdol extends CardImpl {
 class GuardianIdolGolemToken extends Token {
 
     public GuardianIdolGolemToken() {
-        super("Golem", "a 2/2 Golem artifact creature token");
+        super("Golem", "2/2 Golem artifact creature token");
         cardType.add(CardType.ARTIFACT);
         cardType.add(CardType.CREATURE);
         subtype.add("Golem");

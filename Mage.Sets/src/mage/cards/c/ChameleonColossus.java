@@ -42,20 +42,12 @@ import mage.abilities.keyword.ChangelingAbility;
 import mage.abilities.keyword.ProtectionAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
-import mage.filter.FilterCard;
-import mage.filter.predicate.mageobject.ColorPredicate;
 
 /**
  *
  * @author Loki
  */
 public class ChameleonColossus extends CardImpl {
-
-    private static final FilterCard filter = new FilterCard("black");
-
-    static {
-        filter.add(new ColorPredicate(ObjectColor.BLACK));
-    }
 
     public ChameleonColossus(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{2}{G}{G}");
@@ -68,7 +60,7 @@ public class ChameleonColossus extends CardImpl {
         this.addAbility(ChangelingAbility.getInstance());
 
         // Protection from black
-        this.addAbility(new ProtectionAbility(filter));
+        this.addAbility(ProtectionAbility.from(ObjectColor.BLACK));
 
         // {2}{G}{G}: Chameleon Colossus gets +X/+X until end of turn, where X is its power.
         SourcePermanentPowerCount x = new SourcePermanentPowerCount();

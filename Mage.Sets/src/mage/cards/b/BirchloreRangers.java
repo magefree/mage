@@ -48,7 +48,7 @@ import mage.target.common.TargetControlledCreaturePermanent;
  */
 public class BirchloreRangers extends CardImpl {
 
-    private static final FilterControlledCreaturePermanent filter = new FilterControlledCreaturePermanent("two untapped Elves you control");
+    private static final FilterControlledCreaturePermanent filter = new FilterControlledCreaturePermanent("untapped Elves you control");
 
     static {
         filter.add(Predicates.not(new TappedPredicate()));

@@ -95,7 +95,7 @@ class MilitiasPrideTriggerAbility extends TriggeredAbilityImpl {
 
     @Override
     public String getRule() {
-        return "Whenever a creature you control attacks, you may pay {W}. If you do create a 1/1 white Kithkin Soldier creature token into play tapped and attacking.";
+        return "Whenever a nontoken creature you control attacks, you may pay {W}. If you do, create a 1/1 white Kithkin Soldier creature token that's tapped and attacking.";
     }
 
     @Override

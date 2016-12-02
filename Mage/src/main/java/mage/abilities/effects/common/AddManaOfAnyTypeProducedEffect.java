@@ -30,7 +30,7 @@ package mage.abilities.effects.common;
 import mage.Mana;
 import mage.abilities.Ability;
 import mage.choices.Choice;
-import mage.choices.ChoiceImpl;
+import mage.choices.ChoiceColor;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.players.Player;
@@ -59,7 +59,8 @@ public class AddManaOfAnyTypeProducedEffect extends ManaEffect {
                 return false;
             }
             Mana types = (Mana) this.getValue("mana");
-            Choice choice = new ChoiceImpl(true);
+            Choice choice = new ChoiceColor(true);
+            choice.getChoices().clear();
             choice.setMessage("Pick the type of mana to produce");
             if (types.getBlack() > 0) {
                 choice.getChoices().add("Black");

@@ -58,7 +58,8 @@ public class GainControlTargetEffect extends ContinuousEffectImpl {
     /**
      *
      * @param duration
-     * @param fixedControl Controlling player is fixed even if the controller of the ability changes later
+     * @param fixedControl Controlling player is fixed even if the controller of
+     * the ability changes later
      */
     public GainControlTargetEffect(Duration duration, boolean fixedControl) {
         this(duration, fixedControl, null);
@@ -104,23 +105,22 @@ public class GainControlTargetEffect extends ContinuousEffectImpl {
         Player controller = game.getPlayer(source.getControllerId());
         if (controller != null) {
             boolean targetStillExists = false;
-            for (UUID permanentId: getTargetPointer().getTargets(game, source)) {
+            for (UUID permanentId : getTargetPointer().getTargets(game, source)) {
                 Permanent permanent = game.getPermanent(permanentId);
                 if (permanent != null) {
                     targetStillExists = true;
-
-                    GameEvent loseControlEvent = GameEvent.getEvent(GameEvent.EventType.LOSE_CONTROL, permanentId, source.getId(), permanent.getControllerId());
-
-                    if (game.replaceEvent(loseControlEvent)) {
-                        return false;
-                    }
-
-                    if (controllingPlayerId != null) {
-                        permanent.changeControllerId(controllingPlayerId, game);
-                        permanent.getAbilities().setControllerId(controllingPlayerId);
-                    } else {
-                        permanent.changeControllerId(source.getControllerId(), game);
-                        permanent.getAbilities().setControllerId(source.getControllerId());
+                    if (!permanent.getControllerId().equals(controllingPlayerId)) {
+                        GameEvent loseControlEvent = GameEvent.getEvent(GameEvent.EventType.LOSE_CONTROL, permanentId, source.getId(), permanent.getControllerId());
+                        if (game.replaceEvent(loseControlEvent)) {
+                            return false;
+                        }
+                        if (controllingPlayerId != null) {
+                            permanent.changeControllerId(controllingPlayerId, game);
+                            permanent.getAbilities().setControllerId(controllingPlayerId);
+                        } else {
+                            permanent.changeControllerId(source.getControllerId(), game);
+                            permanent.getAbilities().setControllerId(source.getControllerId());
+                        }
                     }
                 }
             }
@@ -140,15 +140,13 @@ public class GainControlTargetEffect extends ContinuousEffectImpl {
         }
         Target target = mode.getTargets().get(0);
         StringBuilder sb = new StringBuilder("gain control of ");
-        if (target.getMaxNumberOfTargets() > 1){
+        if (target.getMaxNumberOfTargets() > 1) {
             if (target.getNumberOfTargets() < target.getMaxNumberOfTargets()) {
                 sb.append("up to ");
             }
             sb.append(CardUtil.numberToText(target.getMaxNumberOfTargets())).append(" target ");
-        } else {
-            if (!target.getTargetName().startsWith("another")) {
+        } else if (!target.getTargetName().startsWith("another")) {
             sb.append("target ");
-        }
         }
         sb.append(mode.getTargets().get(0).getTargetName());
         if (!duration.toString().isEmpty()) {

@@ -71,7 +71,7 @@ public class OjutaiMonument extends CardImpl {
     
     private class OjutaiMonumentToken extends Token {
         OjutaiMonumentToken() {
-            super("", "a 4/4 white and blue Dragon artifact creature with flying");
+            super("", "4/4 white and blue Dragon artifact creature with flying");
             cardType.add(CardType.ARTIFACT);
             cardType.add(CardType.CREATURE);
             color.setWhite(true);

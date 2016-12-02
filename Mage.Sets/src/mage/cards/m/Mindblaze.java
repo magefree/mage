@@ -25,13 +25,10 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-
 package mage.cards.m;
 
 import java.util.HashSet;
 import java.util.UUID;
-
-import mage.constants.CardType;
 import mage.abilities.Ability;
 import mage.abilities.effects.OneShotEffect;
 import mage.cards.CardImpl;
@@ -41,6 +38,7 @@ import mage.cards.CardsImpl;
 import mage.cards.repository.CardRepository;
 import mage.choices.Choice;
 import mage.choices.ChoiceImpl;
+import mage.constants.CardType;
 import mage.constants.Outcome;
 import mage.filter.FilterCard;
 import mage.filter.predicate.mageobject.NamePredicate;
@@ -48,16 +46,14 @@ import mage.game.Game;
 import mage.players.Player;
 import mage.target.TargetPlayer;
 
-
 /**
  *
  * @author Loki
  */
 public class Mindblaze extends CardImpl {
 
-    public Mindblaze (UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{5}{R}");
-
+    public Mindblaze(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId, setInfo, new CardType[]{CardType.SORCERY}, "{5}{R}");
 
         // Name a nonland card and choose a number greater than 0. Target player reveals his or her library.
         // If that library contains exactly the chosen number of the named card,
@@ -67,7 +63,7 @@ public class Mindblaze extends CardImpl {
         this.getSpellAbility().addTarget(new TargetPlayer());
     }
 
-    public Mindblaze (final Mindblaze card) {
+    public Mindblaze(final Mindblaze card) {
         super(card);
     }
 
@@ -79,6 +75,7 @@ public class Mindblaze extends CardImpl {
 }
 
 class MindblazeEffect extends OneShotEffect {
+
     MindblazeEffect() {
         super(Outcome.Damage);
         staticText = "Name a nonland card and choose a number greater than 0. Target player reveals his or her library. If that library contains exactly the chosen number of the named card, {this} deals 8 damage to that player. Then that player shuffles his or her library";
@@ -98,7 +95,7 @@ class MindblazeEffect extends OneShotEffect {
             cardChoice.clearChoice();
             Choice numberChoice = new ChoiceImpl();
             numberChoice.setMessage("Choose a number greater than 0");
-            HashSet<String> numbers = new HashSet<String>();
+            HashSet<String> numbers = new HashSet<>();
             for (int i = 1; i <= 4; i++) {
                 numbers.add(Integer.toString(i));
             }

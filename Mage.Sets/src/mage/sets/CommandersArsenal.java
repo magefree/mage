@@ -45,7 +45,7 @@ public class CommandersArsenal extends ExpansionSet {
     }
 
     private CommandersArsenal() {
-        super("Commander's Arsenal", "CMA", ExpansionSet.buildDate(2012, 11, 2), SetType.SUPPLEMENTAL);
+        super("Commander's Arsenal", "CM1", ExpansionSet.buildDate(2012, 11, 2), SetType.SUPPLEMENTAL);
         this.blockName = "Command Zone";
         cards.add(new SetCardInfo("Chaos Warp", 1, Rarity.SPECIAL, mage.cards.c.ChaosWarp.class));
         cards.add(new SetCardInfo("Command Tower", 2, Rarity.COMMON, mage.cards.c.CommandTower.class));

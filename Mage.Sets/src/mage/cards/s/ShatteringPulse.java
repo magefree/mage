@@ -30,11 +30,10 @@ package mage.cards.s;
 import java.util.UUID;
 import mage.abilities.effects.common.DestroyTargetEffect;
 import mage.abilities.keyword.BuybackAbility;
-import mage.target.TargetPermanent;
-import mage.filter.common.FilterArtifactPermanent;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
+import mage.target.common.TargetArtifactPermanent;
 
 /**
  *
@@ -50,7 +49,7 @@ public class ShatteringPulse extends CardImpl {
         
         // Destroy target artifact.
         this.getSpellAbility().addEffect(new DestroyTargetEffect());
-        this.getSpellAbility().addTarget(new TargetPermanent(new FilterArtifactPermanent()));
+        this.getSpellAbility().addTarget(new TargetArtifactPermanent());
     }
 
     public ShatteringPulse(final ShatteringPulse card) {

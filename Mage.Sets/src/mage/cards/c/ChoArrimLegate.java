@@ -39,9 +39,7 @@ import mage.abilities.keyword.ProtectionAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.filter.FilterCard;
 import mage.filter.FilterPermanent;
-import mage.filter.predicate.mageobject.ColorPredicate;
 import mage.filter.predicate.mageobject.SubtypePredicate;
 
 /**
@@ -52,12 +50,10 @@ public class ChoArrimLegate extends CardImpl {
     
     private static final FilterPermanent filterPlains = new FilterPermanent();
     private static final FilterPermanent filterSwamp = new FilterPermanent();
-    private static final FilterCard filter = new FilterCard("black");
 
     static {
         filterPlains.add(new SubtypePredicate(("Plains")));
         filterSwamp.add(new SubtypePredicate(("Swamp")));
-        filter.add(new ColorPredicate(ObjectColor.BLACK));
     }
 
     public ChoArrimLegate(UUID ownerId, CardSetInfo setInfo) {
@@ -68,7 +64,7 @@ public class ChoArrimLegate extends CardImpl {
         this.toughness = new MageInt(2);
 
         // Protection from black
-        this.addAbility(new ProtectionAbility(filter));
+        this.addAbility(ProtectionAbility.from(ObjectColor.BLACK));
         
         // If an opponent controls a Swamp and you control a Plains, you may cast Cho-Arrim Legate without paying its mana cost.
         Condition condition = new CompoundCondition("If an opponent controls a Swamp and you control a Plains", 

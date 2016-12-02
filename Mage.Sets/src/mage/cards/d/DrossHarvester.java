@@ -39,20 +39,12 @@ import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.TargetController;
-import mage.filter.FilterCard;
-import mage.filter.predicate.mageobject.ColorPredicate;
 
 /**
  *
  * @author LoneFox
  */
 public class DrossHarvester extends CardImpl {
-
-    private static final FilterCard filter = new FilterCard("white");
-
-    static {
-        filter.add(new ColorPredicate(ObjectColor.WHITE));
-    }
 
     public DrossHarvester(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{1}{B}{B}");
@@ -61,7 +53,7 @@ public class DrossHarvester extends CardImpl {
         this.toughness = new MageInt(4);
 
         // Protection from white
-        this.addAbility(new ProtectionAbility(filter));
+        this.addAbility(ProtectionAbility.from(ObjectColor.WHITE));
         // At the beginning of your end step, you lose 4 life.
         this.addAbility(new BeginningOfEndStepTriggeredAbility(new LoseLifeSourceControllerEffect(4),
            TargetController.YOU, false));

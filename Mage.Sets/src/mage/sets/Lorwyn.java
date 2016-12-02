@@ -86,6 +86,7 @@ public class Lorwyn extends ExpansionSet {
         cards.add(new SetCardInfo("Brion Stoutarm", 246, Rarity.RARE, mage.cards.b.BrionStoutarm.class));
         cards.add(new SetCardInfo("Broken Ambitions", 54, Rarity.COMMON, mage.cards.b.BrokenAmbitions.class));
         cards.add(new SetCardInfo("Burrenton Forge-Tender", 7, Rarity.UNCOMMON, mage.cards.b.BurrentonForgeTender.class));
+        cards.add(new SetCardInfo("Cairn Wanderer", 105, Rarity.RARE, mage.cards.c.CairnWanderer.class));
         cards.add(new SetCardInfo("Caterwauling Boggart", 157, Rarity.COMMON, mage.cards.c.CaterwaulingBoggart.class));
         cards.add(new SetCardInfo("Ceaseless Searblades", 158, Rarity.UNCOMMON, mage.cards.c.CeaselessSearblades.class));
         cards.add(new SetCardInfo("Cenn's Heir", 8, Rarity.COMMON, mage.cards.c.CennsHeir.class));
@@ -260,6 +261,7 @@ public class Lorwyn extends ExpansionSet {
         cards.add(new SetCardInfo("Profane Command", 135, Rarity.RARE, mage.cards.p.ProfaneCommand.class));
         cards.add(new SetCardInfo("Protective Bubble", 80, Rarity.COMMON, mage.cards.p.ProtectiveBubble.class));
         cards.add(new SetCardInfo("Prowess of the Fair", 136, Rarity.UNCOMMON, mage.cards.p.ProwessOfTheFair.class));
+        cards.add(new SetCardInfo("Purity", 37, Rarity.RARE, mage.cards.p.Purity.class));
         cards.add(new SetCardInfo("Quill-Slinger Boggart", 137, Rarity.COMMON, mage.cards.q.QuillSlingerBoggart.class));
         cards.add(new SetCardInfo("Rebellion of the Flamekin", 188, Rarity.UNCOMMON, mage.cards.r.RebellionOfTheFlamekin.class));
         cards.add(new SetCardInfo("Ringskipper", 81, Rarity.COMMON, mage.cards.r.Ringskipper.class));

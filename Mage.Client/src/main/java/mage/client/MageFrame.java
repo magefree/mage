@@ -136,8 +136,6 @@ import mage.interfaces.callback.CallbackClient;
 import mage.interfaces.callback.ClientCallback;
 import mage.remote.Connection;
 import mage.remote.Connection.ProxyType;
-import mage.remote.Session;
-import mage.remote.SessionImpl;
 import mage.utils.MageVersion;
 import mage.view.GameEndView;
 import mage.view.UserRequestMessage;
@@ -174,7 +172,7 @@ public class MageFrame extends javax.swing.JFrame implements MageClient {
     private JLabel title;
     private Rectangle titleRectangle;
     private static final MageVersion VERSION = new MageVersion(MageVersion.MAGE_VERSION_MAJOR, MageVersion.MAGE_VERSION_MINOR, MageVersion.MAGE_VERSION_PATCH, MageVersion.MAGE_VERSION_MINOR_PATCH, MageVersion.MAGE_VERSION_INFO);
-    private UUID clientId;
+    private Connection currentConnection;
     private static MagePane activeFrame;
     private static boolean liteMode = false;
     //TODO: make gray theme, implement theme selector in preferences dialog
@@ -198,7 +196,6 @@ public class MageFrame extends javax.swing.JFrame implements MageClient {
     /**
      * @return the session
      */
-
     public static JDesktopPane getDesktop() {
         return desktopPane;
     }
@@ -251,7 +248,6 @@ public class MageFrame extends javax.swing.JFrame implements MageClient {
     public MageFrame() {
         setWindowTitle();
 
-        clientId = UUID.randomUUID();
         EDTExceptionHandler.registerExceptionHandler();
         addWindowListener(new WindowAdapter() {
             @Override
@@ -829,38 +825,40 @@ public class MageFrame extends javax.swing.JFrame implements MageClient {
         boolean autoConnectParamValue = Boolean.parseBoolean(PREFS.get("autoConnect", "false"));
         boolean status = false;
         if (autoConnectParamValue) {
-            status = performConnect();
+            status = performConnect(false);
         }
         return status;
     }
 
-    private boolean performConnect() {
-        String server = MagePreferences.getServerAddress();
-        int port = MagePreferences.getServerPort();
-        String userName = MagePreferences.getUserName(server);
-        String password = MagePreferences.getPassword(server);
-        String proxyServer = PREFS.get("proxyAddress", "");
-        int proxyPort = Integer.parseInt(PREFS.get("proxyPort", "0"));
-        ProxyType proxyType = ProxyType.valueByText(PREFS.get("proxyType", "None"));
-        String proxyUsername = PREFS.get("proxyUsername", "");
-        String proxyPassword = PREFS.get("proxyPassword", "");
-        try {
+    private boolean performConnect(boolean reconnect) {
+        if (currentConnection == null || !reconnect) {
+            String server = MagePreferences.getServerAddress();
+            int port = MagePreferences.getServerPort();
+            String userName = MagePreferences.getUserName(server);
+            String password = MagePreferences.getPassword(server);
+            String proxyServer = PREFS.get("proxyAddress", "");
+            int proxyPort = Integer.parseInt(PREFS.get("proxyPort", "0"));
+            ProxyType proxyType = ProxyType.valueByText(PREFS.get("proxyType", "None"));
+            String proxyUsername = PREFS.get("proxyUsername", "");
+            String proxyPassword = PREFS.get("proxyPassword", "");
             setCursor(new Cursor(Cursor.WAIT_CURSOR));
-            Connection connection = new Connection();
-            connection.setUsername(userName);
-            connection.setPassword(password);
-            connection.setHost(server);
-            connection.setPort(port);
-            connection.setProxyType(proxyType);
-            connection.setProxyHost(proxyServer);
-            connection.setProxyPort(proxyPort);
-            connection.setProxyUsername(proxyUsername);
-            connection.setProxyPassword(proxyPassword);
+            currentConnection = new Connection();
+            currentConnection.setUsername(userName);
+            currentConnection.setPassword(password);
+            currentConnection.setHost(server);
+            currentConnection.setPort(port);
+            currentConnection.setProxyType(proxyType);
+            currentConnection.setProxyHost(proxyServer);
+            currentConnection.setProxyPort(proxyPort);
+            currentConnection.setProxyUsername(proxyUsername);
+            currentConnection.setProxyPassword(proxyPassword);
+            setUserPrefsToConnection(currentConnection);
+        }
 
-            setUserPrefsToConnection(connection);
-
-            LOGGER.debug("connecting (auto): " + proxyType + " " + proxyServer + " " + proxyPort + " " + proxyUsername);
-            if (MageFrame.connect(connection)) {
+        try {
+            LOGGER.debug("connecting (auto): " + currentConnection.getProxyType().toString()
+                    + " " + currentConnection.getProxyHost() + " " + currentConnection.getProxyPort() + " " + currentConnection.getProxyUsername());
+            if (MageFrame.connect(currentConnection)) {
                 showGames(false);
                 return true;
             } else {
@@ -1422,7 +1420,7 @@ public class MageFrame extends javax.swing.JFrame implements MageClient {
                     hideTables();
                     SessionHandler.disconnect(false);
                     if (errorCall) {
-                        UserRequestMessage message = new UserRequestMessage("Connection lost", "The connection to server was lost. Reconnect?");
+                        UserRequestMessage message = new UserRequestMessage("Connection lost", "The connection to server was lost. Reconnect to " + currentConnection.getHost() + "?");
                         message.setButton1("No", null);
                         message.setButton2("Yes", PlayerAction.CLIENT_RECONNECT);
                         showUserRequestDialog(message);
@@ -1501,7 +1499,7 @@ public class MageFrame extends javax.swing.JFrame implements MageClient {
                 SessionHandler.removeTable(userRequestMessage.getRoomId(), userRequestMessage.getTableId());
                 break;
             case CLIENT_RECONNECT:
-                if (performConnect()) {
+                if (performConnect(true)) {
                     enableButtons();
                 }
                 break;

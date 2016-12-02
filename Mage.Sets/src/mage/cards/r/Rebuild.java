@@ -29,18 +29,13 @@ package mage.cards.r;
 
 import java.util.UUID;
 
+import mage.abilities.effects.common.ReturnToHandFromBattlefieldAllEffect;
 import mage.constants.CardType;
-import mage.abilities.Ability;
 import mage.abilities.costs.mana.ManaCostsImpl;
-import mage.abilities.effects.OneShotEffect;
 import mage.abilities.keyword.CyclingAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
-import mage.constants.Outcome;
-import mage.constants.Zone;
 import mage.filter.common.FilterArtifactPermanent;
-import mage.game.Game;
-import mage.game.permanent.Permanent;
 
 /**
  *
@@ -53,7 +48,7 @@ public class Rebuild extends CardImpl {
 
 
         // Return all artifacts to their owners' hands.
-        this.getSpellAbility().addEffect(new RebuildEffect());
+        this.getSpellAbility().addEffect(new ReturnToHandFromBattlefieldAllEffect(new FilterArtifactPermanent("artifacts")));
         // Cycling {2}
         this.addAbility(new CyclingAbility(new ManaCostsImpl("{2}")));
     }
@@ -66,29 +61,4 @@ public class Rebuild extends CardImpl {
     public Rebuild copy() {
         return new Rebuild(this);
     }
-}
-
-class RebuildEffect extends OneShotEffect {
-    public RebuildEffect() {
-        super(Outcome.ReturnToHand);
-        staticText = "Return all artifacts to their owner's hand.";
-    }
-
-    public RebuildEffect(final RebuildEffect effect) {
-        super(effect);
-    }
-
-    @Override
-    public boolean apply(Game game, Ability source) {
-        for (Permanent creature : game.getBattlefield().getActivePermanents(new FilterArtifactPermanent(), source.getControllerId(), source.getSourceId(), game)) {
-            creature.moveToZone(Zone.HAND, source.getSourceId(), game, true);
-        }
-        return true;
-    }
-
-    @Override
-    public RebuildEffect copy() {
-        return new RebuildEffect(this);
-    }
-
 }

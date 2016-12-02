@@ -21,7 +21,7 @@ public class CantBeBlockedByAllTargetEffect extends RestrictionEffect {
     private final FilterCreaturePermanent filterBlockedBy;
 
     public CantBeBlockedByAllTargetEffect(FilterCreaturePermanent filterBlockedBy, Duration duration) {
-        super(Duration.WhileOnBattlefield);
+        super(duration);
         this.filterBlockedBy = filterBlockedBy;
         staticText = "Target creature"
                 + " can't be blocked "

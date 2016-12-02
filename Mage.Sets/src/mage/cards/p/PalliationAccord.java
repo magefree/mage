@@ -28,11 +28,10 @@
 package mage.cards.p;
 
 import java.util.UUID;
-import mage.abilities.Ability;
 import mage.abilities.common.BecomesTappedTriggeredAbility;
 import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.costs.common.RemoveCountersSourceCost;
-import mage.abilities.effects.PreventionEffectImpl;
+import mage.abilities.effects.common.PreventDamageToControllerEffect;
 import mage.abilities.effects.common.counter.AddCountersSourceEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
@@ -43,8 +42,6 @@ import mage.constants.Zone;
 import mage.counters.CounterType;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.filter.predicate.permanent.ControllerPredicate;
-import mage.game.Game;
-import mage.game.events.GameEvent;
 
 /**
  *
@@ -59,13 +56,15 @@ public class PalliationAccord extends CardImpl {
     }
 
     public PalliationAccord(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.ENCHANTMENT},"{3}{W}{U}");
+        super(ownerId, setInfo, new CardType[]{CardType.ENCHANTMENT}, "{3}{W}{U}");
 
         // Whenever a creature an opponent controls becomes tapped, put a shield counter on Palliation Accord.
         this.addAbility(new BecomesTappedTriggeredAbility(new AddCountersSourceEffect(CounterType.SHIELD.createInstance()), false, filter));
 
         // Remove a shield counter from Palliation Accord: Prevent the next 1 damage that would be dealt to you this turn.
-        this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new PalliationAccordPreventionEffect(), new RemoveCountersSourceCost(CounterType.SHIELD.createInstance())));
+        this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD,
+                new PreventDamageToControllerEffect(Duration.EndOfTurn, 1),
+                new RemoveCountersSourceCost(CounterType.SHIELD.createInstance())));
     }
 
     public PalliationAccord(final PalliationAccord card) {
@@ -75,51 +74,5 @@ public class PalliationAccord extends CardImpl {
     @Override
     public PalliationAccord copy() {
         return new PalliationAccord(this);
-    }
-}
-
-class PalliationAccordPreventionEffect extends PreventionEffectImpl {
-
-    public PalliationAccordPreventionEffect() {
-        super(Duration.EndOfTurn);
-        this.staticText = "Prevent the next 1 damage that would be dealt to you this turn";
-    }
-
-    public PalliationAccordPreventionEffect(final PalliationAccordPreventionEffect effect) {
-        super(effect);
-    }
-
-    @Override
-    public PalliationAccordPreventionEffect copy() {
-        return new PalliationAccordPreventionEffect(this);
-    }
-
-    @Override
-    public boolean apply(Game game, Ability source) {
-        return true;
-    }
-
-    @Override
-    public boolean replaceEvent(GameEvent event, Ability source, Game game) {
-        GameEvent preventEvent = new GameEvent(GameEvent.EventType.PREVENT_DAMAGE,
-                source.getControllerId(), source.getSourceId(), source.getControllerId(), event.getAmount(), false);
-        if (!game.replaceEvent(preventEvent)) {
-            int damage = event.getAmount();
-            if (damage > 0) {
-                event.setAmount(damage - 1);
-                this.used = true;
-                game.fireEvent(GameEvent.getEvent(GameEvent.EventType.PREVENTED_DAMAGE,
-                        source.getControllerId(), source.getSourceId(), source.getControllerId(), 1));
-            }
-        }
-        return false;
-    }
-
-    @Override
-    public boolean applies(GameEvent event, Ability source, Game game) {
-        if (!this.used && super.applies(event, source, game) && event.getTargetId().equals(source.getControllerId())) {
-            return true;
-        }
-        return false;
     }
 }

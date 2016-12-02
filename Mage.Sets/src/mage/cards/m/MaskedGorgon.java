@@ -57,12 +57,10 @@ public class MaskedGorgon extends CardImpl {
 
     private static final FilterCreaturePermanent filter1 = new FilterCreaturePermanent("green creatures and white creatures");
     private static final FilterCard filter2 = new FilterCard("Gorgons");
-    private static final FilterCard filter3 = new FilterCard("green and from white");
 
     static {
         filter1.add(Predicates.or(new ColorPredicate(ObjectColor.GREEN), new ColorPredicate(ObjectColor.WHITE)));
         filter2.add(new SubtypePredicate("Gorgon"));
-        filter3.add(Predicates.or(new ColorPredicate(ObjectColor.GREEN), new ColorPredicate(ObjectColor.WHITE)));
     }
 
     public MaskedGorgon(UUID ownerId, CardSetInfo setInfo) {
@@ -76,7 +74,7 @@ public class MaskedGorgon extends CardImpl {
             new ProtectionAbility(filter2), Duration.WhileOnBattlefield, filter1)));
         // Threshold - Masked Gorgon has protection from green and from white as long as seven or more cards are in your graveyard.
         Ability ability = new SimpleStaticAbility(Zone.BATTLEFIELD, new ConditionalContinuousEffect(
-            new GainAbilitySourceEffect(new ProtectionAbility(filter3), Duration.WhileOnBattlefield), new CardsInControllerGraveCondition(7),
+            new GainAbilitySourceEffect(ProtectionAbility.from(ObjectColor.GREEN, ObjectColor.WHITE), Duration.WhileOnBattlefield), new CardsInControllerGraveCondition(7),
             "{this} has protection from green and from white as long as seven or more cards are in your graveyard"));
         ability.setAbilityWord(AbilityWord.THRESHOLD);
         this.addAbility(ability);

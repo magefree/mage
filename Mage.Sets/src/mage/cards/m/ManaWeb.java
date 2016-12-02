@@ -32,7 +32,7 @@ import mage.Mana;
 import mage.abilities.Ability;
 import mage.abilities.TriggeredAbilityImpl;
 import mage.abilities.effects.OneShotEffect;
-import mage.abilities.mana.ManaAbility;
+import mage.abilities.mana.ActivatedManaAbilityImpl;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
@@ -137,7 +137,7 @@ class ManaWebeffect extends OneShotEffect {
         if (permanent != null && game != null) {
             Mana mana = new Mana();
 
-            for (ManaAbility ability : permanent.getAbilities().getManaAbilities(Zone.BATTLEFIELD)) {
+            for (ActivatedManaAbilityImpl ability : permanent.getAbilities().getActivatedManaAbilities(Zone.BATTLEFIELD)) {
                 for (Mana netMana : ability.getNetMana(game)) {
                     mana.add(netMana);
                 }
@@ -148,7 +148,7 @@ class ManaWebeffect extends OneShotEffect {
                 if (opponentPermanent.getControllerId() == permanent.getControllerId()) {
                     Mana opponentLandMana = new Mana();
 
-                    for (ManaAbility ability : opponentPermanent.getAbilities().getAvailableManaAbilities(Zone.BATTLEFIELD, game)) {
+                    for (ActivatedManaAbilityImpl ability : opponentPermanent.getAbilities().getAvailableActivatedManaAbilities(Zone.BATTLEFIELD, game)) {
                         for (Mana netMana : ability.getNetMana(game)) {
                             opponentLandMana.add(netMana);
                         }

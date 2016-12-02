@@ -68,7 +68,7 @@ public class PactOfTheTitan extends CardImpl {
 class GiantToken extends Token {
 
     public GiantToken() {
-        super("Giant", "a 4/4 red Giant creature token");
+        super("Giant", "4/4 red Giant creature token");
         cardType.add(CardType.CREATURE);
         subtype.add("Giant");
         color.setRed(true);

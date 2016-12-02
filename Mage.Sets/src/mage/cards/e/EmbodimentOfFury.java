@@ -43,10 +43,12 @@ import mage.constants.Duration;
 import mage.constants.TargetController;
 import mage.constants.Zone;
 import mage.filter.FilterPermanent;
+import mage.filter.common.FilterControlledLandPermanent;
 import mage.filter.common.FilterLandPermanent;
 import mage.filter.predicate.mageobject.CardTypePredicate;
 import mage.filter.predicate.permanent.ControllerPredicate;
 import mage.game.permanent.token.Token;
+import mage.target.TargetPermanent;
 import mage.target.common.TargetLandPermanent;
 
 /**
@@ -56,13 +58,10 @@ import mage.target.common.TargetLandPermanent;
 public class EmbodimentOfFury extends CardImpl {
     
     private static final FilterPermanent filterLandCreatures = new FilterPermanent("Land creatures");
-    private static final FilterLandPermanent filterLand = new FilterLandPermanent("land you control");
 
     static {
         filterLandCreatures.add(new CardTypePredicate(CardType.LAND));
         filterLandCreatures.add(new CardTypePredicate(CardType.CREATURE));
-        filterLand.add(new ControllerPredicate(TargetController.YOU));
-
     }
 
     public EmbodimentOfFury(UUID ownerId, CardSetInfo setInfo) {
@@ -80,7 +79,7 @@ public class EmbodimentOfFury extends CardImpl {
         // <i>Landfall</i> - Whenever a land enters the battlefield under your control, you may have target land you control 
         // become a 3/3 Elemental creature with haste until end of turn. It's still a land.
         Ability ability = new LandfallAbility(new BecomesCreatureTargetEffect(new EmbodimentOfFuryToken(), false, true, Duration.EndOfTurn), true);
-        ability.addTarget(new TargetLandPermanent(filterLand));
+        ability.addTarget(new TargetPermanent(new FilterControlledLandPermanent()));
         this.addAbility(ability);
     }
 

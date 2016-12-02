@@ -35,8 +35,6 @@ import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Outcome;
 import mage.filter.common.FilterLandPermanent;
-import mage.filter.predicate.Predicates;
-import mage.filter.predicate.mageobject.SupertypePredicate;
 import mage.game.Game;
 import mage.players.Player;
 
@@ -66,11 +64,7 @@ public class PriceOfProgress extends CardImpl {
 
 class PriceOfProgressEffect extends OneShotEffect {
 
-    private static final FilterLandPermanent filter = new FilterLandPermanent("nonbasic lands");
-
-    static {
-        filter.add(Predicates.not(new SupertypePredicate("Basic")));
-    }
+    private static final FilterLandPermanent filter = FilterLandPermanent.nonbasicLands();
 
     public PriceOfProgressEffect() {
         super(Outcome.Benefit);

@@ -35,36 +35,25 @@ import mage.ObjectColor;
 import mage.abilities.keyword.*;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
-import mage.filter.FilterCard;
-import mage.filter.predicate.Predicates;
-import mage.filter.predicate.mageobject.ColorPredicate;
 
 /**
  *
  * @author Loki
  */
 public class SphinxOfTheSteelWind extends CardImpl {
-     private static final FilterCard filter = new FilterCard("red and from green");
-
-    static {
-        filter.add(Predicates.or(
-                new ColorPredicate(ObjectColor.RED),
-                new ColorPredicate(ObjectColor.GREEN)));
-    }
 
     public SphinxOfTheSteelWind (UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.ARTIFACT,CardType.CREATURE},"{5}{W}{U}{B}");
         this.subtype.add("Sphinx");
 
-
-        
         this.power = new MageInt(6);
         this.toughness = new MageInt(6);
+
         this.addAbility(FlyingAbility.getInstance());
         this.addAbility(FirstStrikeAbility.getInstance());
         this.addAbility(VigilanceAbility.getInstance());
         this.addAbility(LifelinkAbility.getInstance());
-        this.addAbility(new ProtectionAbility(filter));
+        this.addAbility(ProtectionAbility.from(ObjectColor.RED, ObjectColor.GREEN));
     }
 
     public SphinxOfTheSteelWind (final SphinxOfTheSteelWind card) {

@@ -87,7 +87,7 @@ public class ThopterFoundry extends CardImpl {
 class ThopterToken extends Token {
 
     ThopterToken() {
-        super("Thopter", "a 1/1 blue Thopter artifact creature token with flying");
+        super("Thopter", "1/1 blue Thopter artifact creature token with flying");
         cardType.add(CardType.CREATURE);
         cardType.add(CardType.ARTIFACT);
         color.setBlue(true);

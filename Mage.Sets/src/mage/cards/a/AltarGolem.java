@@ -56,7 +56,7 @@ import mage.target.common.TargetControlledCreaturePermanent;
  */
 public class AltarGolem extends CardImpl {
     
-    private static final FilterControlledCreaturePermanent filter = new FilterControlledCreaturePermanent("untapped creatures");
+    private static final FilterControlledCreaturePermanent filter = new FilterControlledCreaturePermanent("untapped creatures you control");
     
     static {
         filter.add(Predicates.not(new TappedPredicate()));

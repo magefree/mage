@@ -29,7 +29,6 @@ package mage.cards.b;
 
 import java.util.UUID;
 import mage.abilities.abilityword.StriveAbility;
-import mage.abilities.effects.Effect;
 import mage.abilities.effects.common.combat.CantBlockTargetEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
@@ -50,8 +49,6 @@ public class BlindingFlare extends CardImpl {
         // Strive — Blinding Flare costs {R} more to cast for each target beyond the first.
         this.addAbility(new StriveAbility("{R}"));
         // Any number of target creatures can't block this turn.
-        Effect effect = new CantBlockTargetEffect(Duration.EndOfTurn);
-        effect.setText("Any number of target creatures can't block this turn");
         this.getSpellAbility().addEffect(new CantBlockTargetEffect(Duration.EndOfTurn));
         this.getSpellAbility().addTarget(new TargetCreaturePermanent(0, Integer.MAX_VALUE));
     }

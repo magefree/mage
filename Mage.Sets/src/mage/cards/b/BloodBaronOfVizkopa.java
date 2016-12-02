@@ -44,22 +44,11 @@ import mage.constants.Layer;
 import mage.constants.Outcome;
 import mage.constants.SubLayer;
 import mage.constants.Zone;
-import mage.filter.FilterCard;
-import mage.filter.predicate.Predicates;
-import mage.filter.predicate.mageobject.ColorPredicate;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.players.Player;
 
 public class BloodBaronOfVizkopa extends CardImpl {
-
-    private static final FilterCard filter = new FilterCard("white and from black");
-
-    static {
-        filter.add(Predicates.or(
-                new ColorPredicate(ObjectColor.WHITE),
-                new ColorPredicate(ObjectColor.BLACK)));
-    }
 
     public BloodBaronOfVizkopa(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{3}{W}{B}");
@@ -70,7 +59,7 @@ public class BloodBaronOfVizkopa extends CardImpl {
 
         // Lifelink, protection from white and from black.
         this.addAbility(LifelinkAbility.getInstance());
-        this.addAbility(new ProtectionAbility(filter));
+        this.addAbility(ProtectionAbility.from(ObjectColor.WHITE, ObjectColor.BLACK));
 
         // As long as you have 30 or more life and an opponent has 10 or less life, Blood Baron of Vizkopa gets +6/+6 and has flying.
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new BloodBaronOfVizkopaEffect()));

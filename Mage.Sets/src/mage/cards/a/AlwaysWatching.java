@@ -49,7 +49,7 @@ import mage.filter.predicate.permanent.TokenPredicate;
  */
 public class AlwaysWatching extends CardImpl {
 
-    private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("nontoken creatures you control");
+    private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("nontoken creatures");
 
     static {
         filter.add(Predicates.not(new TokenPredicate()));

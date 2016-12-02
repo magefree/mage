@@ -6,5 +6,5 @@ package mage.constants;
  */
 public enum TargetController {
 
-    ANY, YOU, NOT_YOU, OPPONENT, CONTROLLER_ATTACHED_TO, NEXT
+    ANY, YOU, NOT_YOU, OPPONENT, OWNER, CONTROLLER_ATTACHED_TO, NEXT
 }

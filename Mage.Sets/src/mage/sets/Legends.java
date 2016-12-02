@@ -99,6 +99,7 @@ public class Legends extends ExpansionSet {
         cards.add(new SetCardInfo("Durkwood Boars", 96, Rarity.COMMON, mage.cards.d.DurkwoodBoars.class));
         cards.add(new SetCardInfo("Dwarven Song", 141, Rarity.UNCOMMON, mage.cards.d.DwarvenSong.class));
         cards.add(new SetCardInfo("Elven Riders", 97, Rarity.RARE, mage.cards.e.ElvenRiders.class));
+        cards.add(new SetCardInfo("Emerald Dragonfly", 98, Rarity.COMMON, mage.cards.e.EmeraldDragonfly.class));
         cards.add(new SetCardInfo("Energy Tap", 54, Rarity.COMMON, mage.cards.e.EnergyTap.class));
         cards.add(new SetCardInfo("Eternal Warrior", 142, Rarity.UNCOMMON, mage.cards.e.EternalWarrior.class));
         cards.add(new SetCardInfo("Eureka", 99, Rarity.RARE, mage.cards.e.Eureka.class));
@@ -114,6 +115,7 @@ public class Legends extends ExpansionSet {
         cards.add(new SetCardInfo("Ghosts of the Damned", 12, Rarity.COMMON, mage.cards.g.GhostsOfTheDamned.class));
         cards.add(new SetCardInfo("Giant Strength", 147, Rarity.COMMON, mage.cards.g.GiantStrength.class));
         cards.add(new SetCardInfo("Gravity Sphere", 149, Rarity.RARE, mage.cards.g.GravitySphere.class));
+        cards.add(new SetCardInfo("Great Defender", 185, Rarity.UNCOMMON, mage.cards.g.GreatDefender.class));
         cards.add(new SetCardInfo("Greed", 15, Rarity.RARE, mage.cards.g.Greed.class));
         cards.add(new SetCardInfo("Gwendlyn Di Corci", 268, Rarity.RARE, mage.cards.g.GwendlynDiCorci.class));
         cards.add(new SetCardInfo("Hazezon Tamar", 270, Rarity.RARE, mage.cards.h.HazezonTamar.class));

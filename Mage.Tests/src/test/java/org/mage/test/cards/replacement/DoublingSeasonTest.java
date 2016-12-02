@@ -132,4 +132,64 @@ public class DoublingSeasonTest extends CardTestPlayerBase {
         assertPermanentCount(playerA, "Venerable Monk", 10);
 
     }
+
+    /**
+     * Doubling Season doesn't create two tokens from opponent's Rite of Raging
+     * Storm
+     */
+    @Test
+    public void testDoubleRiteOfRagingStorm() {
+        // At the beginning of each player's upkeep, that player creates a 5/1 red Elemental creature token named Lightning Rager.
+        // It has trample, haste, and "At the beginning of the end step, sacrifice this creature."
+        addCard(Zone.HAND, playerA, "Rite of the Raging Storm");// {3}{R}{R}
+        addCard(Zone.BATTLEFIELD, playerA, "Mountain", 5);
+        // If an effect would put one or more tokens onto the battlefield under your control, it puts twice that many of those tokens onto the battlefield instead.
+        // If an effect would place one or more counters on a permanent you control, it places twice that many of those counters on that permanent instead.
+        addCard(Zone.BATTLEFIELD, playerA, "Doubling Season");
+
+        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Rite of the Raging Storm");
+
+        attack(2, playerB, "Lightning Rager"); // Can't attack
+
+        attack(3, playerA, "Lightning Rager");
+        attack(3, playerA, "Lightning Rager");
+
+        setStopAt(3, PhaseStep.POSTCOMBAT_MAIN);
+        execute();
+
+        assertPermanentCount(playerA, "Rite of the Raging Storm", 1);
+
+        assertPermanentCount(playerA, "Lightning Rager", 2);
+
+        assertLife(playerB, 10);
+        assertLife(playerA, 20);
+
+    }
+
+    @Test
+    public void testDoubleRiteOfRagingStormOpponent() {
+        // At the beginning of each player's upkeep, that player creates a 5/1 red Elemental creature token named Lightning Rager.
+        // It has trample, haste, and "At the beginning of the end step, sacrifice this creature."
+        addCard(Zone.HAND, playerA, "Rite of the Raging Storm");// {3}{R}{R}
+        addCard(Zone.BATTLEFIELD, playerA, "Mountain", 5);
+        // If an effect would put one or more tokens onto the battlefield under your control, it puts twice that many of those tokens onto the battlefield instead.
+        // If an effect would place one or more counters on a permanent you control, it places twice that many of those counters on that permanent instead.
+        addCard(Zone.BATTLEFIELD, playerB, "Doubling Season");
+
+        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Rite of the Raging Storm");
+
+        attack(2, playerB, "Lightning Rager"); // Can't attack
+        attack(2, playerA, "Lightning Rager"); // Can't attack
+
+        setStopAt(2, PhaseStep.POSTCOMBAT_MAIN);
+        execute();
+
+        assertPermanentCount(playerA, "Rite of the Raging Storm", 1);
+
+        assertPermanentCount(playerB, "Lightning Rager", 2);
+
+        assertLife(playerB, 20);
+        assertLife(playerA, 20);
+
+    }
 }

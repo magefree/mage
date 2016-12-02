@@ -44,12 +44,10 @@ import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.ColoredManaSymbol;
 import mage.constants.TargetController;
-import mage.constants.WatcherScope;
 import mage.constants.Zone;
 import mage.game.Game;
-import mage.game.events.GameEvent;
 import mage.game.permanent.Permanent;
-import mage.watchers.Watcher;
+import mage.watchers.common.PermanentsEnteredBattlefieldWatcher;
 
 /**
  *
@@ -58,7 +56,7 @@ import mage.watchers.Watcher;
 public class EpharaGodOfThePolis extends CardImpl {
 
     public EpharaGodOfThePolis(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.ENCHANTMENT,CardType.CREATURE},"{2}{W}{U}");
+        super(ownerId, setInfo, new CardType[]{CardType.ENCHANTMENT, CardType.CREATURE}, "{2}{W}{U}");
         this.supertype.add("Legendary");
         this.subtype.add("God");
 
@@ -75,8 +73,8 @@ public class EpharaGodOfThePolis extends CardImpl {
         this.addAbility(new ConditionalTriggeredAbility(
                 new BeginningOfUpkeepTriggeredAbility(Zone.BATTLEFIELD, new DrawCardSourceControllerEffect(1), TargetController.ANY, false),
                 HadAnotherCreatureEnterTheBattlefieldCondition.getInstance(),
-                "At the beginning of each upkeep, if you had another creature enter the battlefield under your control last turn, draw a card."), 
-                new CreatureEnteredBattlefieldLastTurnWatcher());
+                "At the beginning of each upkeep, if you had another creature enter the battlefield under your control last turn, draw a card."),
+                new PermanentsEnteredBattlefieldWatcher());
 
     }
 
@@ -92,7 +90,7 @@ public class EpharaGodOfThePolis extends CardImpl {
 
 class HadAnotherCreatureEnterTheBattlefieldCondition implements Condition {
 
-    private static HadAnotherCreatureEnterTheBattlefieldCondition fInstance = new HadAnotherCreatureEnterTheBattlefieldCondition();
+    private final static HadAnotherCreatureEnterTheBattlefieldCondition fInstance = new HadAnotherCreatureEnterTheBattlefieldCondition();
 
     public static HadAnotherCreatureEnterTheBattlefieldCondition getInstance() {
         return fInstance;
@@ -100,44 +98,10 @@ class HadAnotherCreatureEnterTheBattlefieldCondition implements Condition {
 
     @Override
     public boolean apply(Game game, Ability source) {
-        Watcher watcher = game.getState().getWatchers().get("CreatureEnteredBattlefieldLastTurnWatcher", source.getSourceId());
-        return watcher != null && watcher.conditionMet();
-    }
-}
-
-class CreatureEnteredBattlefieldLastTurnWatcher extends Watcher {
-
-    private boolean anotherCreatureEntered = false;
-
-    public CreatureEnteredBattlefieldLastTurnWatcher() {
-        super("CreatureEnteredBattlefieldLastTurnWatcher", WatcherScope.CARD);
-    }
-
-    public CreatureEnteredBattlefieldLastTurnWatcher(final CreatureEnteredBattlefieldLastTurnWatcher watcher) {
-        super(watcher);
-        this.anotherCreatureEntered = watcher.anotherCreatureEntered;
-    }
-
-    @Override
-    public void watch(GameEvent event, Game game) {
-        if (!anotherCreatureEntered && event.getType() == GameEvent.EventType.ENTERS_THE_BATTLEFIELD) {
-            if (!event.getTargetId().equals(this.getSourceId()) && event.getPlayerId().equals(this.getControllerId())) {
-                Permanent permanent = game.getPermanent(event.getTargetId());
-                if (permanent != null && permanent.getCardType().contains(CardType.CREATURE)) {
-                    anotherCreatureEntered = true;
-                }
-            }
-        }
-    }
-
-    @Override
-    public void reset() {
-        condition = anotherCreatureEntered;
-        anotherCreatureEntered = false;
-    }
-
-    @Override
-    public CreatureEnteredBattlefieldLastTurnWatcher copy() {
-        return new CreatureEnteredBattlefieldLastTurnWatcher(this);
+        Permanent sourcePermanent = game.getPermanentOrLKIBattlefield(source.getSourceId());
+        PermanentsEnteredBattlefieldWatcher watcher = (PermanentsEnteredBattlefieldWatcher) game.getState().getWatchers().get(PermanentsEnteredBattlefieldWatcher.class.getName());
+        return sourcePermanent != null
+                && watcher != null
+                && watcher.AnotherCreatureEnteredBattlefieldUnderPlayersControlLastTurn(sourcePermanent, game);
     }
 }

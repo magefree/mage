@@ -43,14 +43,14 @@ import mage.constants.CardType;
 public class CrumblingVestige extends CardImpl {
 
     public CrumblingVestige(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.LAND},"");
+        super(ownerId, setInfo, new CardType[]{CardType.LAND}, "");
 
         // Crumbling Vestige enters the battlefield tapped.
         this.addAbility(new EntersBattlefieldTappedAbility());
-        
+
         // When Crumbling Vestige enters the battlefield, add one mana of any color to your mana pool.
-        this.addAbility(new EntersBattlefieldTriggeredAbility(new AddManaOfAnyColorEffect()));
-        
+        this.addAbility(new EntersBattlefieldTriggeredAbility(new AddManaOfAnyColorEffect(), false));
+
         // {T}: Add {C} to you mana pool.
         this.addAbility(new ColorlessManaAbility());
     }

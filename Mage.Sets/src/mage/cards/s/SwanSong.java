@@ -115,6 +115,9 @@ class SwanSongBirdToken extends Token {
         cardType.add(CardType.CREATURE);
         color.setBlue(true);
         subtype.add("Bird");
+        if (getOriginalExpansionSetCode() != null && getOriginalExpansionSetCode().equals("C16")) {
+            setTokenType(2);
+        }
         power = new MageInt(2);
         toughness = new MageInt(2);
         this.addAbility(FlyingAbility.getInstance());

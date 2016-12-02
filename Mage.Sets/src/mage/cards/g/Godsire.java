@@ -70,7 +70,7 @@ public class Godsire extends CardImpl {
 
 class BeastToken extends Token {
     BeastToken() {
-        super("Beast", "an 8/8 Beast creature token that's red, green, and white");
+        super("Beast", "8/8 Beast creature token that's red, green, and white");
         cardType.add(CardType.CREATURE);
         color.setGreen(true);
         color.setWhite(true);

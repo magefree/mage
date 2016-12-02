@@ -66,7 +66,7 @@ public class CrusherZendikon extends CardImpl {
         Ability ability2 = new SimpleStaticAbility(Zone.BATTLEFIELD, new BecomesCreatureAttachedEffect(new BeastToken(), "Enchanted land is a 4/2 red Beast creature with trample. It's still a land.", Duration.WhileOnBattlefield));
         this.addAbility(ability2);
         // When enchanted land dies, return that card to its owner's hand.
-        Ability ability3 = new DiesAttachedTriggeredAbility(new ReturnToHandAttachedEffect(), "enchanted land", false, false);
+        Ability ability3 = new DiesAttachedTriggeredAbility(new ReturnToHandAttachedEffect(), "enchanted land", false);
         this.addAbility(ability3);
     }
 

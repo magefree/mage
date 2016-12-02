@@ -83,7 +83,7 @@ class TangleWireEffect extends OneShotEffect {
                 new CardTypePredicate(CardType.CREATURE),
                 new CardTypePredicate(CardType.LAND)));
     }
-    
+
     TangleWireEffect() {
         super(Outcome.Sacrifice);
         staticText = "that player taps an untapped artifact, creature, or land he or she controls for each fade counter on Tangle Wire";
@@ -96,15 +96,15 @@ class TangleWireEffect extends OneShotEffect {
     @Override
     public boolean apply(Game game, Ability source) {
         Player player = game.getPlayer(targetPointer.getFirst(game, source));
-        Permanent permanent = game.getPermanent(source.getSourceId());
+        Permanent permanent = game.getPermanentOrLKIBattlefield(source.getSourceId());
         if (player == null || permanent == null) {
             return false;
         }
-        
+
         int targetCount = game.getBattlefield().countAll(filter, player.getId(), game);
         int counterCount = permanent.getCounters(game).getCount(CounterType.FADE);
         int amount = Math.min(counterCount, targetCount);
-        
+
         Target target = new TargetControlledPermanent(amount, amount, filter, true);
         target.setNotTarget(true);
 

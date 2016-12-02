@@ -104,7 +104,7 @@ public class IzzetKeyrune extends CardImpl {
 
     private class IzzetKeyruneToken extends Token {
         IzzetKeyruneToken() {
-            super("", "a 2/1 blue and red Elemental artifact creature");
+            super("", "2/1 blue and red Elemental artifact creature");
             cardType.add(CardType.ARTIFACT);
             cardType.add(CardType.CREATURE);
             color.setBlue(true);

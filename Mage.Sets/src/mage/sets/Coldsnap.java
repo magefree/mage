@@ -116,6 +116,7 @@ public class Coldsnap extends ExpansionSet {
         cards.add(new SetCardInfo("Lightning Serpent", 88, Rarity.RARE, mage.cards.l.LightningSerpent.class));
         cards.add(new SetCardInfo("Lightning Storm", 89, Rarity.UNCOMMON, mage.cards.l.LightningStorm.class));
         cards.add(new SetCardInfo("Lovisa Coldeyes", 90, Rarity.RARE, mage.cards.l.LovisaColdeyes.class));
+        cards.add(new SetCardInfo("Luminesce", 14, Rarity.UNCOMMON, mage.cards.l.Luminesce.class));
         cards.add(new SetCardInfo("Martyr of Ashes", 92, Rarity.COMMON, mage.cards.m.MartyrOfAshes.class));
         cards.add(new SetCardInfo("Martyr of Bones", 65, Rarity.COMMON, mage.cards.m.MartyrOfBones.class));
         cards.add(new SetCardInfo("Martyr of Frost", 40, Rarity.COMMON, mage.cards.m.MartyrOfFrost.class));

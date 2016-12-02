@@ -67,7 +67,7 @@ public class BoseijuWhoSheltersAll extends CardImpl {
         this.addAbility(new EntersBattlefieldTappedAbility());
 
         // {tap}, Pay 2 life: Add {C} to your mana pool. If that mana is spent on an instant or sorcery spell, that spell can't be countered by spells or abilities.
-        Mana mana = new Mana(0, 0, 0, 0, 0, 0, 0, 1);
+        Mana mana = Mana.ColorlessMana(1);
         mana.setFlag(true); // used to indicate this mana ability
         SimpleManaAbility ability = new SimpleManaAbility(Zone.BATTLEFIELD, mana, new TapSourceCost());
         ability.addCost(new PayLifeCost(2));

@@ -28,7 +28,6 @@
 package mage.cards.c;
 
 import java.util.UUID;
-import mage.ObjectColor;
 import mage.abilities.Ability;
 import mage.abilities.effects.OneShotEffect;
 import mage.cards.CardImpl;
@@ -69,8 +68,6 @@ public class ConsignToDream extends CardImpl {
 
 class ConsignToDreamEffect extends OneShotEffect {
 
-    boolean applied = false;
-
     public ConsignToDreamEffect() {
         super(Outcome.ReturnToHand);
         this.staticText = "Return target permanent to its owner's hand. If that permanent is red or green, put it on top of its owner's library instead";
@@ -87,10 +84,10 @@ class ConsignToDreamEffect extends OneShotEffect {
 
     @Override
     public boolean apply(Game game, Ability source) {
+        boolean applied = false;
         Permanent target = game.getPermanent(source.getFirstTarget());
         if (target != null) {
-            if (target.getColor(game).contains(ObjectColor.RED)
-                    || target.getColor(game).contains(ObjectColor.GREEN)) {
+            if (target.getColor(game).isRed() || target.getColor(game).isGreen()) {
                 applied = target.moveToZone(Zone.LIBRARY, source.getSourceId(), game, true);
             } else {
                 applied = target.moveToZone(Zone.HAND, source.getSourceId(), game, false);

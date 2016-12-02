@@ -71,7 +71,7 @@ public class GhituEncampment extends CardImpl {
 class GhituEncampmentToken extends Token {
 
     public GhituEncampmentToken() {
-        super("Warrior", "a 2/1 red Warrior creature with first strike");
+        super("Warrior", "2/1 red Warrior creature with first strike");
         cardType.add(CardType.CREATURE);
         this.subtype.add("Warrior");
 

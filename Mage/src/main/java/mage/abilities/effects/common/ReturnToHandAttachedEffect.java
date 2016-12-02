@@ -44,7 +44,7 @@ public class ReturnToHandAttachedEffect extends OneShotEffect {
 
     public ReturnToHandAttachedEffect() {
         super(Outcome.ReturnToHand);
-        staticText = "return that card to owner's hand";
+        staticText = "return that card to its owner's hand";
     }
 
     public ReturnToHandAttachedEffect(final ReturnToHandAttachedEffect effect) {

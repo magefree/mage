@@ -30,7 +30,7 @@ package mage.cards.k;
 import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.common.SimpleStaticAbility;
-import mage.abilities.condition.common.SourceMatchesFilterCondition;
+import mage.abilities.condition.common.SourceAttackingCondition;
 import mage.abilities.decorator.ConditionalContinuousEffect;
 import mage.abilities.effects.common.continuous.GainAbilitySourceEffect;
 import mage.abilities.keyword.FirstStrikeAbility;
@@ -38,15 +38,12 @@ import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Zone;
-import mage.filter.common.FilterAttackingCreature;
 
 /**
  *
  * @author fireshoes
  */
 public class KorScythemaster extends CardImpl {
-
-    private static final String rule = "{this} has first strike as long as it's attacking";
 
     public KorScythemaster(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{2}{W}");
@@ -57,9 +54,7 @@ public class KorScythemaster extends CardImpl {
         this.toughness = new MageInt(1);
 
         // Kor Scythemaster has first strike as long as its attacking.
-        ConditionalContinuousEffect effect = new ConditionalContinuousEffect(new GainAbilitySourceEffect(FirstStrikeAbility.getInstance()),
-                new SourceMatchesFilterCondition(new FilterAttackingCreature()), rule);
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, effect));
+        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new ConditionalContinuousEffect(new GainAbilitySourceEffect(FirstStrikeAbility.getInstance()), SourceAttackingCondition.getInstance(), "{this} has first strike as long as it's attacking")));
     }
 
     public KorScythemaster(final KorScythemaster card) {

@@ -55,7 +55,7 @@ public class LivingLands extends CardImpl {
     }
 
     public LivingLands(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.ENCHANTMENT},"{3}{G}");
+        super(ownerId, setInfo, new CardType[]{CardType.ENCHANTMENT}, "{3}{G}");
 
         // All Forests are 1/1 creatures that are still lands.
         ContinuousEffect effect = new BecomesCreatureAllEffect(new LivingLandsToken(), "lands", filter, Duration.WhileOnBattlefield);
@@ -76,7 +76,7 @@ public class LivingLands extends CardImpl {
 class LivingLandsToken extends Token {
 
     public LivingLandsToken() {
-        super("", "1/1 creature");
+        super("", "1/1 creatures");
         cardType.add(CardType.CREATURE);
         power = new MageInt(1);
         toughness = new MageInt(1);

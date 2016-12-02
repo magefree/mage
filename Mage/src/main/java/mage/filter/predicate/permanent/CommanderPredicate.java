@@ -22,7 +22,7 @@ public class CommanderPredicate implements Predicate<Permanent> {
         Player owner = game.getPlayer(input.getOwnerId());
         return input.getCardType().contains(CardType.CREATURE)
                 && owner != null
-                && input.getId().equals(owner.getCommanderId());
+                && owner.getCommandersIds().contains(input.getId());
     }
 
     @Override

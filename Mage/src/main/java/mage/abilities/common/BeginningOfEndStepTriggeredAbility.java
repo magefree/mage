@@ -156,7 +156,11 @@ public class BeginningOfEndStepTriggeredAbility extends TriggeredAbilityImpl {
 
     private String generateConditionString() {
         if (interveningIfClauseCondition != null) {
-            return "if {this} is " + interveningIfClauseCondition.toString() + ", ";
+            if (interveningIfClauseCondition.toString().startsWith("if")) {
+                return interveningIfClauseCondition.toString() + ", ";
+            } else {
+                return "if {this} is " + interveningIfClauseCondition.toString() + ", ";
+            }
         }
         switch (getZone()) {
             case GRAVEYARD:

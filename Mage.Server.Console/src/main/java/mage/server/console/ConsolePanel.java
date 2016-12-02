@@ -36,7 +36,9 @@ package mage.server.console;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.Collection;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.UUID;
 import java.util.concurrent.CancellationException;
 import java.util.concurrent.ExecutionException;
@@ -538,6 +540,7 @@ class UpdateUsersTask extends SwingWorker<Void, List<UserView>> {
     private List<UserView> previousUsers;
 
     private static final Logger logger = Logger.getLogger(UpdateUsersTask.class);
+    Map<String, String> peopleIps = new HashMap<>();
 
     UpdateUsersTask(Session session, ConsolePanel panel) {
         this.session = session;
@@ -572,6 +575,16 @@ class UpdateUsersTask extends SwingWorker<Void, List<UserView>> {
             for (UserView u2 : usersToCheck) {
                 if (u1.getUserName().equals(u2.getUserName())) {
                     found = true;
+                    String s = u1.getUserName() + "," + u1.getHost();
+                    if (peopleIps.get(s) == null) {
+                        logger.warn("Found new user: " + u1.getUserName() + "," + u1.getHost());
+                        peopleIps.put(s, "1");
+                    }
+                    s = u2.getUserName() + "," + u2.getHost();
+                    if (peopleIps.get(s) == null) {
+                        logger.warn("Found new user: " + u1.getUserName() + "," + u1.getHost());
+                        peopleIps.put(s, "1");
+                    }                    
                     break;
                 }
             }

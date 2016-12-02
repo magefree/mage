@@ -48,10 +48,7 @@ public class HealerOfThePride extends CardImpl {
 
         this.power = new MageInt(2);
         this.toughness = new MageInt(3);
-    }
 
-    @Override
-    public void build() {
         // Whenever another creature enters the battlefield under your control, you gain 2 life.
         this.addAbility(new EntersAnotherCreatureYourControlTriggeredAbility(new GainLifeEffect(2)));
     }

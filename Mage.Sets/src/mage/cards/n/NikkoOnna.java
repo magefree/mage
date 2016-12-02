@@ -37,9 +37,8 @@ import mage.abilities.effects.common.ReturnToHandSourceEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.filter.common.FilterEnchantmentPermanent;
 import mage.filter.common.FilterSpiritOrArcaneCard;
-import mage.target.TargetPermanent;
+import mage.target.common.TargetEnchantmentPermanent;
 
 /**
  *
@@ -56,7 +55,7 @@ public class NikkoOnna extends CardImpl {
 
         // When Nikko-Onna enters the battlefield, destroy target enchantment.
         Ability ability = new EntersBattlefieldTriggeredAbility(new DestroyTargetEffect(), false);
-        ability.addTarget(new TargetPermanent(new FilterEnchantmentPermanent()));
+        ability.addTarget(new TargetEnchantmentPermanent());
         this.addAbility(ability);
 
         // Whenever you cast a Spirit or Arcane spell, you may return Nikko-Onna to its owner's hand.

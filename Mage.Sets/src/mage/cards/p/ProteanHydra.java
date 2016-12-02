@@ -34,7 +34,6 @@ import mage.abilities.DelayedTriggeredAbility;
 import mage.abilities.TriggeredAbilityImpl;
 import mage.abilities.common.EntersBattlefieldAbility;
 import mage.abilities.common.SimpleStaticAbility;
-import mage.abilities.effects.PreventionEffectData;
 import mage.abilities.effects.PreventionEffectImpl;
 import mage.abilities.effects.common.CreateDelayedTriggeredAbilityEffect;
 import mage.abilities.effects.common.EntersBattlefieldWithXCountersEffect;
@@ -106,12 +105,11 @@ public class ProteanHydra extends CardImpl {
 
         @Override
         public boolean replaceEvent(GameEvent event, Ability source, Game game) {
-            PreventionEffectData preventionEffectData = preventDamageAction(event, source, game);
-            if (preventionEffectData.getPreventedDamage() > 0) {
-                Permanent permanent = game.getPermanent(source.getSourceId());
-                if (permanent != null) {
-                    permanent.removeCounters(CounterType.P1P1.createInstance(preventionEffectData.getPreventedDamage()), game);
-                }
+            int damage = event.getAmount();
+            preventDamageAction(event, source, game);
+            Permanent permanent = game.getPermanent(source.getSourceId());
+            if (permanent != null) {
+                permanent.removeCounters(CounterType.P1P1.createInstance(damage), game); //MTG ruling Protean Hydra loses counters even if the damage isn't prevented
             }
             return false;
         }

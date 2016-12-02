@@ -79,6 +79,7 @@ public class NewTableDialog extends MageDialog {
         this.spnNumWins.setModel(new SpinnerNumberModel(1, 1, 5, 1));
         this.spnFreeMulligans.setModel(new SpinnerNumberModel(0, 0, 5, 1));
         this.spnQuitRatio.setModel(new SpinnerNumberModel(100, 0, 100, 5));
+        this.spnEdhPowerLevel.setModel(new SpinnerNumberModel(100, 0, 100, 5));
         MageFrame.getUI().addButton(MageComponents.NEW_TABLE_OK_BUTTON, btnOK);
     }
 
@@ -125,7 +126,9 @@ public class NewTableDialog extends MageDialog {
         btnOK = new javax.swing.JButton();
         btnCancel = new javax.swing.JButton();
         lblQuitRatio = new javax.swing.JLabel();
+        lblEdhPowerLevel = new javax.swing.JLabel();
         spnQuitRatio = new javax.swing.JSpinner();
+        spnEdhPowerLevel = new javax.swing.JSpinner();
 
         setTitle("New Table");
 
@@ -214,8 +217,10 @@ public class NewTableDialog extends MageDialog {
         });
 
         lblQuitRatio.setText("Allowed quit %");
+        lblEdhPowerLevel.setText("EDH power level");
 
         spnQuitRatio.setToolTipText("Players with quit % more than this value can't join this table");
+        spnEdhPowerLevel.setToolTipText("Players with decks with a higher power level can't join this table");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -256,7 +261,10 @@ public class NewTableDialog extends MageDialog {
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                                 .addComponent(lblQuitRatio)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(spnQuitRatio, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                                .addComponent(spnQuitRatio, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(lblEdhPowerLevel)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(spnEdhPowerLevel, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE))))
                     .addComponent(jLabel1, javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jLabel2, javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
@@ -314,7 +322,10 @@ public class NewTableDialog extends MageDialog {
                     .addComponent(lbDeckType)
                     .addComponent(lblQuitRatio)
                     .addComponent(chkRated)
-                    .addComponent(spnQuitRatio, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(spnQuitRatio, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(lblEdhPowerLevel)
+                    .addComponent(chkRated)
+                    .addComponent(spnEdhPowerLevel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
@@ -395,6 +406,7 @@ public class NewTableDialog extends MageDialog {
         options.setFreeMulligans((Integer) this.spnFreeMulligans.getValue());
         options.setPassword(this.txtPassword.getText());
         options.setQuitRatio((Integer) this.spnQuitRatio.getValue());
+        options.setEdhPowerLevel((Integer) this.spnEdhPowerLevel.getValue());
         if (!checkMatchOptions(options)) {
             return;
         }
@@ -658,6 +670,7 @@ public class NewTableDialog extends MageDialog {
         }
 
         this.spnQuitRatio.setValue(Integer.parseInt(PreferencesDialog.getCachedValue(PreferencesDialog.KEY_NEW_TABLE_QUIT_RATIO, "100")));
+        this.spnEdhPowerLevel.setValue(0);
     }
 
     /**
@@ -721,6 +734,7 @@ public class NewTableDialog extends MageDialog {
     private javax.swing.JLabel lblNumWins;
     private javax.swing.JLabel lblPassword;
     private javax.swing.JLabel lblQuitRatio;
+    private javax.swing.JLabel lblEdhPowerLevel;
     private javax.swing.JLabel lblRange;
     private javax.swing.JLabel lblSkillLevel;
     private mage.client.table.NewPlayerPanel player1Panel;
@@ -729,6 +743,7 @@ public class NewTableDialog extends MageDialog {
     private javax.swing.JSpinner spnNumPlayers;
     private javax.swing.JSpinner spnNumWins;
     private javax.swing.JSpinner spnQuitRatio;
+    private javax.swing.JSpinner spnEdhPowerLevel;
     private javax.swing.JTextField txtName;
     private javax.swing.JTextField txtPassword;
     // End of variables declaration//GEN-END:variables

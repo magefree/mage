@@ -33,7 +33,6 @@ import mage.Mana;
 import mage.abilities.Ability;
 import mage.abilities.costs.Cost;
 import mage.abilities.costs.CostImpl;
-import mage.abilities.effects.common.BasicManaEffect;
 import mage.abilities.mana.SimpleManaAbility;
 import mage.cards.Card;
 import mage.cards.CardImpl;
@@ -58,7 +57,7 @@ public class ElvishSpiritGuide extends CardImpl {
         this.toughness = new MageInt(2);
 
         // Exile Elvish Spirit Guide from your hand: Add {G} to your mana pool.
-        this.addAbility(new SimpleManaAbility(Zone.HAND, new BasicManaEffect(Mana.GreenMana(1)), new ExileSourceFromHandCost()));
+        this.addAbility(new SimpleManaAbility(Zone.HAND, Mana.GreenMana(1), new ExileSourceFromHandCost()));
     }
 
     public ElvishSpiritGuide(final ElvishSpiritGuide card) {

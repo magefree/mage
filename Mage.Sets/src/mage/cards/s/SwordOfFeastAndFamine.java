@@ -46,9 +46,6 @@ import mage.constants.AttachmentType;
 import mage.constants.CardType;
 import mage.constants.Outcome;
 import mage.constants.Zone;
-import mage.filter.FilterCard;
-import mage.filter.predicate.Predicates;
-import mage.filter.predicate.mageobject.ColorPredicate;
 import mage.game.Game;
 import mage.game.events.DamagedPlayerEvent;
 import mage.game.events.GameEvent;
@@ -61,25 +58,17 @@ import mage.target.targetpointer.FixedTarget;
  * @author Viserion
  */
 public class SwordOfFeastAndFamine extends CardImpl {
-    private static final FilterCard filter = new FilterCard("green and from black");
 
-    static {
-        filter.add(Predicates.or(
-                new ColorPredicate(ObjectColor.GREEN),
-                new ColorPredicate(ObjectColor.BLACK)));
-    }
-
-
-    public SwordOfFeastAndFamine (UUID ownerId, CardSetInfo setInfo) {
+    public SwordOfFeastAndFamine(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.ARTIFACT},"{3}");
         this.subtype.add("Equipment");
         this.addAbility(new EquipAbility(Outcome.AddAbility, new GenericManaCost(2)));
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new BoostEquippedEffect(2, 2)));
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new GainAbilityAttachedEffect(new ProtectionAbility(filter), AttachmentType.EQUIPMENT)));
+        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new GainAbilityAttachedEffect(ProtectionAbility.from(ObjectColor.GREEN, ObjectColor.BLACK), AttachmentType.EQUIPMENT)));
         this.addAbility(new SwordOfFeastAndFamineAbility());
     }
 
-    public SwordOfFeastAndFamine (final SwordOfFeastAndFamine card) {
+    public SwordOfFeastAndFamine(final SwordOfFeastAndFamine card) {
         super(card);
     }
 

@@ -49,7 +49,7 @@ import mage.filter.predicate.permanent.AnotherPredicate;
  */
 public class AcidSpewerDragon extends CardImpl {
     
-    private static final FilterControlledCreaturePermanent filter = new FilterControlledCreaturePermanent("each other Dragon creature you control");
+    private static final FilterControlledCreaturePermanent filter = new FilterControlledCreaturePermanent("other Dragon creature you control");
 
     static {
         filter.add(new AnotherPredicate());

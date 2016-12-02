@@ -65,7 +65,7 @@ public class DaxossTorment extends CardImpl {
 class DaxossTormentToken extends Token {
 
     public DaxossTormentToken() {
-        super("", "a 5/5 Demon creature with flying and haste");
+        super("", "5/5 Demon creature with flying and haste");
         cardType.add(CardType.CREATURE);
         
         subtype.add("Demon");

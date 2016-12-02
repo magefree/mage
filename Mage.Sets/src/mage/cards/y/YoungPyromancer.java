@@ -45,9 +45,9 @@ import mage.util.RandomUtil;
  * @author jeffwadsworth
  */
 public class YoungPyromancer extends CardImpl {
-    
+
     private static final FilterSpell filter = new FilterSpell("instant or sorcery spell");
-    
+
     static {
         filter.add(Predicates.or(
                 new CardTypePredicate(CardType.INSTANT),
@@ -64,7 +64,7 @@ public class YoungPyromancer extends CardImpl {
 
         // Whenever you cast an instant or sorcery spell, create a 1/1 red Elemental creature token.
         this.addAbility(new SpellCastControllerTriggeredAbility(new CreateTokenEffect(new ElementalToken()), filter, false));
-        
+
     }
 
     public YoungPyromancer(final YoungPyromancer card) {
@@ -80,8 +80,12 @@ public class YoungPyromancer extends CardImpl {
 
         public ElementalToken() {
             super("Elemental", "1/1 red Elemental creature");
-            this.setOriginalExpansionSetCode("M14");
-            this.setTokenType(RandomUtil.nextInt(2) + 1);
+            if (getOriginalExpansionSetCode() != null && getOriginalExpansionSetCode().equals("M14")) {
+                setTokenType(RandomUtil.nextInt(2) + 1);
+            }
+            if (getOriginalExpansionSetCode() != null && getOriginalExpansionSetCode().equals("EMA")) {
+                setTokenType(1);
+            }
             cardType.add(CardType.CREATURE);
             color.setRed(true);
             subtype.add("Elemental");

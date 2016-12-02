@@ -78,19 +78,17 @@ public class DealsDamageToAPlayerAllTriggeredAbility extends TriggeredAbilityImp
             Permanent permanent = game.getPermanent(event.getSourceId());
             if (permanent != null) {
                 if (filter.match(permanent, getSourceId(), getControllerId(), game)) {
-                    if (!setTargetPointer.equals(SetTargetPointer.NONE)) {
-                        for (Effect effect : this.getEffects()) {
-                            effect.setValue("damage", event.getAmount());
-                            switch (setTargetPointer) {
-                                case PLAYER:
-                                    effect.setTargetPointer(new FixedTarget(permanent.getControllerId()));
-                                    break;
-                                case PERMANENT:
-                                    effect.setTargetPointer(new FixedTarget(permanent.getId(), permanent.getZoneChangeCounter(game)));
-                                    break;
-                            }
-
+                    for (Effect effect : this.getEffects()) {
+                        effect.setValue("damage", event.getAmount());
+                        switch (setTargetPointer) {
+                            case PLAYER:
+                                effect.setTargetPointer(new FixedTarget(permanent.getControllerId()));
+                                break;
+                            case PERMANENT:
+                                effect.setTargetPointer(new FixedTarget(permanent.getId(), permanent.getZoneChangeCounter(game)));
+                                break;
                         }
+
                     }
                     return true;
                 }

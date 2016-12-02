@@ -28,16 +28,12 @@
 package mage.cards.d;
 
 import java.util.UUID;
-import mage.constants.CardType;
-import mage.constants.Duration;
-import mage.abilities.Ability;
-import mage.abilities.effects.PreventionEffectImpl;
 import mage.abilities.effects.common.PopulateEffect;
+import mage.abilities.effects.common.PreventDamageToControllerEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
-import mage.game.Game;
-import mage.game.events.DamageEvent;
-import mage.game.events.GameEvent;
+import mage.constants.CardType;
+import mage.constants.Duration;
 
 /**
  *
@@ -46,12 +42,11 @@ import mage.game.events.GameEvent;
 public class DruidsDeliverance extends CardImpl {
 
     public DruidsDeliverance(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.INSTANT},"{1}{G}");
-
+        super(ownerId, setInfo, new CardType[]{CardType.INSTANT}, "{1}{G}");
 
         // Prevent all combat damage that would be dealt to you this turn. Populate.
         // (Create a token that's a copy of a creature token you control.)
-        this.getSpellAbility().addEffect(new DruidsDeliverancePreventCombatDamageEffect());
+        this.getSpellAbility().addEffect(new PreventDamageToControllerEffect(Duration.EndOfTurn, true, false, Integer.MAX_VALUE));
         this.getSpellAbility().addEffect(new PopulateEffect());
     }
 
@@ -63,50 +58,4 @@ public class DruidsDeliverance extends CardImpl {
     public DruidsDeliverance copy() {
         return new DruidsDeliverance(this);
     }
-}
-
-class DruidsDeliverancePreventCombatDamageEffect extends PreventionEffectImpl {
-
-    public DruidsDeliverancePreventCombatDamageEffect() {
-            super(Duration.EndOfTurn);
-            staticText = "Prevent all combat damage that would be dealt to you this turn";
-    }
-
-    public DruidsDeliverancePreventCombatDamageEffect(final DruidsDeliverancePreventCombatDamageEffect effect) {
-            super(effect);
-    }
-
-    @Override
-    public DruidsDeliverancePreventCombatDamageEffect copy() {
-            return new DruidsDeliverancePreventCombatDamageEffect(this);
-    }
-
-    @Override
-    public boolean apply(Game game, Ability source) {
-            return true;
-    }
-
-    @Override
-    public boolean replaceEvent(GameEvent event, Ability source, Game game) {
-            GameEvent preventEvent = new GameEvent(GameEvent.EventType.PREVENT_DAMAGE, source.getFirstTarget(), source.getSourceId(), source.getControllerId(), event.getAmount(), false);
-            if (!game.replaceEvent(preventEvent)) {
-                int damage = event.getAmount();
-                event.setAmount(0);
-                game.fireEvent(GameEvent.getEvent(GameEvent.EventType.PREVENTED_DAMAGE, source.getFirstTarget(), source.getSourceId(), source.getControllerId(), damage));
-                return true;
-            }
-            return false;
-        }
-
-    @Override
-    public boolean applies(GameEvent event, Ability source, Game game) {
-            if (super.applies(event, source, game)) {
-                DamageEvent damageEvent = (DamageEvent) event;
-                if (event.getTargetId().equals(source.getControllerId()) && damageEvent.isCombatDamage()) {
-                    return true;
-                }
-            }
-            return false;
-    }
-
 }

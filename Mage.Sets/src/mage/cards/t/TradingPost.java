@@ -58,28 +58,28 @@ import mage.target.common.TargetControlledPermanent;
 public class TradingPost extends CardImpl {
 
     public TradingPost(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.ARTIFACT},"{4}");
+        super(ownerId, setInfo, new CardType[]{CardType.ARTIFACT}, "{4}");
 
-        // {1}, {tap}, Discard a card: You gain 4 life.
+        // {1}, {T}, Discard a card: You gain 4 life.
         Ability ability1 = new SimpleActivatedAbility(Zone.BATTLEFIELD, new GainLifeEffect(4), new GenericManaCost(1));
         ability1.addCost(new TapSourceCost());
         ability1.addCost(new DiscardTargetCost(new TargetCardInHand()));
         this.addAbility(ability1);
 
-        // {1}, {tap}, Pay 1 life: Create a 0/1 white Goat creature token.
+        // {1}, {T}, Pay 1 life: Create a 0/1 white Goat creature token.
         Ability ability2 = new SimpleActivatedAbility(Zone.BATTLEFIELD, new CreateTokenEffect(new GoatToken()), new GenericManaCost(1));
         ability2.addCost(new TapSourceCost());
         ability2.addCost(new PayLifeCost(1));
         this.addAbility(ability2);
 
-        // {1}, {tap}, Sacrifice a creature: Return target artifact card from your graveyard to your hand.
+        // {1}, {T}, Sacrifice a creature: Return target artifact card from your graveyard to your hand.
         Ability ability3 = new SimpleActivatedAbility(Zone.BATTLEFIELD, new ReturnFromGraveyardToHandTargetEffect(), new GenericManaCost(1));
         ability3.addTarget(new TargetCardInGraveyard(new FilterArtifactCard("an artifact card in your graveyard")));
         ability3.addCost(new TapSourceCost());
         ability3.addCost(new SacrificeTargetCost(new TargetControlledPermanent(new FilterControlledCreaturePermanent("a creature"))));
         this.addAbility(ability3);
 
-        // {1}, {tap}, Sacrifice an artifact: Draw a card.
+        // {1}, {T}, Sacrifice an artifact: Draw a card.
         Ability ability4 = new SimpleActivatedAbility(Zone.BATTLEFIELD, new DrawCardSourceControllerEffect(1), new GenericManaCost(1));
         ability4.addCost(new TapSourceCost());
         ability4.addCost(new SacrificeTargetCost(new TargetControlledPermanent(new FilterControlledArtifactPermanent("an artifact"))));

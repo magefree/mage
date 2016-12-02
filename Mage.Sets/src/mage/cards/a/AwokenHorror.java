@@ -111,6 +111,6 @@ class AwokenHorrorAbility extends TriggeredAbilityImpl {
 
     @Override
     public String getRule() {
-        return "Whenever this creature transforms into Awoken Horrow, return all non-Horror creatures to their owners' hands.";
+        return "Whenever this creature transforms into Awoken Horror, return all non-Horror creatures to their owners' hands.";
     }
 }

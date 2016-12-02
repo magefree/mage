@@ -75,7 +75,7 @@ public class ReinsOfTheVinesteed extends CardImpl {
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new BoostEnchantedEffect(2, 2, Duration.WhileOnBattlefield)));
 
         // When enchanted creature dies, you may return Reins of the Vinesteed from your graveyard to the battlefield attached to a creature that shares a creature type with that creature.
-        this.addAbility(new DiesAttachedTriggeredAbility(new ReinsOfTheVinesteedEffect(), "enchanted creature", true, true));
+        this.addAbility(new DiesAttachedTriggeredAbility(new ReinsOfTheVinesteedEffect(), "enchanted creature", true));
 
     }
 

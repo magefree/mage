@@ -75,7 +75,9 @@ public class CantBlockTargetEffect extends RestrictionEffect {
         }
         StringBuilder sb = new StringBuilder();
         Target target = mode.getTargets().get(0);
-        if (target.getMaxNumberOfTargets() > 1) {
+        if (target.getMaxNumberOfTargets() == Integer.MAX_VALUE) {
+            sb.append("any number of ");
+        } else if (target.getMaxNumberOfTargets() > 1) {
             if (target.getMaxNumberOfTargets() != target.getNumberOfTargets()) {
                 sb.append("up to ");
             }

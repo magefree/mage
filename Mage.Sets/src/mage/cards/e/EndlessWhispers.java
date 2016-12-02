@@ -84,16 +84,8 @@ public class EndlessWhispers extends CardImpl {
 class ReturnSourceToBattlefieldEffect extends OneShotEffect {
 
     public ReturnSourceToBattlefieldEffect() {
-        this(false);
-    }
-
-    public ReturnSourceToBattlefieldEffect(boolean tapped) {
         super(Outcome.PutCreatureInPlay);
         staticText = "That player puts this card from its owner's graveyard onto the battlefield under his or her control";
-    }
-
-    public ReturnSourceToBattlefieldEffect(boolean tapped, boolean ownerControl) {
-        super(Outcome.PutCreatureInPlay);
     }
 
     public ReturnSourceToBattlefieldEffect(final ReturnSourceToBattlefieldEffect effect) {
@@ -121,7 +113,7 @@ class ReturnSourceToBattlefieldEffect extends OneShotEffect {
             return false;
         }
 
-        return player.moveCards(card, Zone.BATTLEFIELD, source, game, true, false, false, null);
+        return player.moveCards(card, Zone.BATTLEFIELD, source, game, false, false, false, null);
     }
 
 }

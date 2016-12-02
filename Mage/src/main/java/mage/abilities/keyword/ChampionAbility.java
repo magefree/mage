@@ -49,6 +49,7 @@ import mage.filter.predicate.mageobject.CardTypePredicate;
 import mage.filter.predicate.mageobject.SubtypePredicate;
 import mage.filter.predicate.permanent.AnotherPredicate;
 import mage.game.Game;
+import mage.game.events.GameEvent;
 import mage.game.permanent.Permanent;
 import mage.players.Player;
 import mage.target.common.TargetControlledPermanent;
@@ -87,7 +88,8 @@ public class ChampionAbility extends StaticAbility {
      * @param card
      * @param subtypes subtypes to champion with, if empty all creatures can be
      * used
-     * @param requiresCreature for cards that specifically require championing another creature
+     * @param requiresCreature for cards that specifically require championing
+     * another creature
      */
     public ChampionAbility(Card card, String[] subtypes, boolean requiresCreature) {
         super(Zone.BATTLEFIELD, null);
@@ -121,7 +123,7 @@ public class ChampionAbility extends StaticAbility {
 
         // When this permanent enters the battlefield, sacrifice it unless you exile another [object] you control.
         Ability ability1 = new EntersBattlefieldTriggeredAbility(
-                new SacrificeSourceUnlessPaysEffect(new ChampionExileCost(filter, new StringBuilder(card.getName()).append(" championed permanents").toString())), false);
+                new SacrificeSourceUnlessPaysEffect(new ChampionExileCost(filter, card.getName() + " championed permanents")), false);
         ability1.setRuleVisible(false);
         addSubAbility(ability1);
 
@@ -180,6 +182,9 @@ class ChampionExileCost extends CostImpl {
                         return false;
                     }
                     paid |= controller.moveCardToExileWithInfo(permanent, exileId, sourceObject.getIdName() + " championed permanents", sourceId, game, Zone.BATTLEFIELD, true);
+                    if (paid) {
+                        game.fireEvent(GameEvent.getEvent(GameEvent.EventType.CREATURE_CHAMPIONED, permanent.getId(), sourceId, controllerId));
+                    }
                 }
             }
         }

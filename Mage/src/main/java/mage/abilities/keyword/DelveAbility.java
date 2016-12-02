@@ -93,7 +93,7 @@ public class DelveAbility extends SimpleStaticAbility implements AlternateManaPa
 
     @Override
     public String getRule() {
-        return "Delve <i>(Each card you exile from your graveyard while casting this spell pays for {1})</i>";
+        return "Delve <i>(Each card you exile from your graveyard while casting this spell pays for {1}.)</i>";
     }
 
     @Override

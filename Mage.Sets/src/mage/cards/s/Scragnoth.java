@@ -35,8 +35,6 @@ import mage.abilities.keyword.ProtectionAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.filter.FilterObject;
-import mage.filter.predicate.mageobject.ColorPredicate;
 
 /**
  *
@@ -44,11 +42,6 @@ import mage.filter.predicate.mageobject.ColorPredicate;
  */
 public class Scragnoth extends CardImpl {
 
-    private static final FilterObject filter = new FilterObject("from blue");
-    static {
-        filter.add(new ColorPredicate(ObjectColor.BLUE));
-    }
-    
     public Scragnoth(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{4}{G}");
         this.subtype.add("Beast");
@@ -59,7 +52,7 @@ public class Scragnoth extends CardImpl {
         // Scragnoth can't be countered.
         this.addAbility(new CantBeCounteredAbility());
         // Protection from blue
-        this.addAbility(new ProtectionAbility(filter));
+        this.addAbility(ProtectionAbility.from(ObjectColor.BLUE));
     }
 
     public Scragnoth(final Scragnoth card) {

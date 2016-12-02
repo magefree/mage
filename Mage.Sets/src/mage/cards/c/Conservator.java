@@ -32,28 +32,26 @@ import mage.abilities.Ability;
 import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.costs.common.TapSourceCost;
 import mage.abilities.costs.mana.GenericManaCost;
-import mage.abilities.effects.PreventionEffectImpl;
+import mage.abilities.effects.common.PreventDamageToControllerEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Duration;
 import mage.constants.Zone;
-import mage.game.Game;
-import mage.game.events.GameEvent;
 import mage.target.TargetPlayer;
 
 /**
  *
  * @author KholdFuzion
-
+ *
  */
 public class Conservator extends CardImpl {
 
     public Conservator(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.ARTIFACT},"{4}");
+        super(ownerId, setInfo, new CardType[]{CardType.ARTIFACT}, "{4}");
 
         // {3}, {tap}: Prevent the next 2 damage that would be dealt to you this turn.
-        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new ConservatorEffect(), new GenericManaCost(3));
+        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new PreventDamageToControllerEffect(Duration.EndOfTurn, 2), new GenericManaCost(3));
         ability.addTarget(new TargetPlayer());
         ability.addCost(new TapSourceCost());
         this.addAbility(ability);
@@ -66,58 +64,5 @@ public class Conservator extends CardImpl {
     @Override
     public Conservator copy() {
         return new Conservator(this);
-    }
-}
-
-class ConservatorEffect extends PreventionEffectImpl {
-
-    private int amount = 2;
-
-    public ConservatorEffect() {
-        super(Duration.EndOfTurn);
-        this.staticText = "Prevent the next 2 damage that would be dealt to you this turn";
-    }
-
-    public ConservatorEffect(final ConservatorEffect effect) {
-        super(effect);
-        this.amount = effect.amount;
-    }
-
-    @Override
-    public ConservatorEffect copy() {
-        return new ConservatorEffect(this);
-    }
-
-    @Override
-    public boolean apply(Game game, Ability source) {
-        return true;
-    }
-
-    @Override
-    public boolean replaceEvent(GameEvent event, Ability source, Game game) {
-        GameEvent preventEvent = new GameEvent(GameEvent.EventType.PREVENT_DAMAGE,
-                source.getControllerId(), source.getSourceId(), source.getControllerId(), event.getAmount(), false);
-        if (!game.replaceEvent(preventEvent)) {
-            int damage = event.getAmount();
-            if (damage >= this.amount) {
-                event.setAmount(damage - this.amount);
-                damage = this.amount;
-                this.used = true;
-            } else {
-                event.setAmount(0);
-                this.amount -= damage;
-            }
-            game.fireEvent(GameEvent.getEvent(GameEvent.EventType.PREVENTED_DAMAGE,
-                    source.getControllerId(), source.getSourceId(), source.getControllerId(), damage));
-        }
-        return false;
-    }
-
-    @Override
-    public boolean applies(GameEvent event, Ability source, Game game) {
-        if (!this.used && super.applies(event, source, game) && event.getTargetId().equals(source.getControllerId())) {
-            return true;
-        }
-        return false;
     }
 }

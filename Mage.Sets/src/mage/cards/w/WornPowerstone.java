@@ -30,11 +30,12 @@ package mage.cards.w;
 import java.util.UUID;
 import mage.Mana;
 import mage.abilities.common.EntersBattlefieldTappedAbility;
-import mage.abilities.effects.common.BasicManaEffect;
-import mage.abilities.mana.BasicManaAbility;
+import mage.abilities.costs.common.TapSourceCost;
+import mage.abilities.mana.SimpleManaAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
+import mage.constants.Zone;
 
 /**
  *
@@ -45,7 +46,7 @@ public class WornPowerstone extends CardImpl {
     public WornPowerstone(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.ARTIFACT},"{3}");
         this.addAbility(new EntersBattlefieldTappedAbility());
-        this.addAbility(new WornPowerstoneAbility());
+        this.addAbility(new SimpleManaAbility(Zone.BATTLEFIELD, Mana.ColorlessMana(2), new TapSourceCost()));
     }
 
     public WornPowerstone(final WornPowerstone card) {
@@ -55,22 +56,5 @@ public class WornPowerstone extends CardImpl {
     @Override
     public WornPowerstone copy() {
         return new WornPowerstone(this);
-    }
-}
-
-class WornPowerstoneAbility extends BasicManaAbility {
-
-    public WornPowerstoneAbility() {
-        super(new BasicManaEffect(Mana.ColorlessMana(2)));
-        this.netMana.add(new Mana(0, 0, 0, 0, 0, 0, 0, 2));
-    }
-
-    public WornPowerstoneAbility(final WornPowerstoneAbility ability) {
-        super(ability);
-    }
-
-    @Override
-    public WornPowerstoneAbility copy() {
-        return new WornPowerstoneAbility(this);
     }
 }

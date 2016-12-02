@@ -162,9 +162,6 @@ public interface Permanent extends Card, Controllable {
     String getValue(GameState state);
 
     @Deprecated
-    void addAbility(Ability ability);
-
-    @Deprecated
     void addAbility(Ability ability, Game game);
 
     void addAbility(Ability ability, UUID sourceId, Game game);

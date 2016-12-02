@@ -52,7 +52,7 @@ import mage.target.common.TargetCreaturePermanent;
  */
 public class LoathsomeCatoblepas extends CardImpl {
 
-    private static final FilterCreaturePermanent filter = new FilterCreaturePermanent();
+    private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("creature an opponent controls");
     static {
         filter.add(new ControllerPredicate(TargetController.OPPONENT));
     }

@@ -64,6 +64,7 @@ import org.mage.plugins.card.dl.sources.MtgOnlTokensImageSource;
 import org.mage.plugins.card.dl.sources.MythicspoilerComSource;
 import org.mage.plugins.card.dl.sources.TokensMtgImageSource;
 import org.mage.plugins.card.dl.sources.WizardCardsImageSource;
+import org.mage.plugins.card.dl.sources.MagidexImageSource;
 import org.mage.plugins.card.properties.SettingsManager;
 import org.mage.plugins.card.utils.CardImageUtils;
 
@@ -149,7 +150,8 @@ public class DownloadPictures extends DefaultBoundedRangeModel implements Runnab
             "tokens.mtg.onl", //"mtgimage.com (HQ)",
             "mtg.onl",
             "alternative.mtg.onl",
-            "GrabBag"
+            "GrabBag",
+            "magidex.com"
         //"mtgathering.ru HQ",
         //"mtgathering.ru MQ",
         //"mtgathering.ru LQ",
@@ -185,6 +187,9 @@ public class DownloadPictures extends DefaultBoundedRangeModel implements Runnab
                         break;
                     case 6:
                         cardImageSource = GrabbagImageSource.getInstance();
+                        break;
+                    case 7:
+                        cardImageSource = MagidexImageSource.getInstance();
                         break;
                 }
                 updateCardsToDownload();

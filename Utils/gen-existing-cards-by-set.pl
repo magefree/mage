@@ -46,6 +46,8 @@ if (-e $authorFile) {
 }
 
 my $cardsFound = 0;
+my %all_sets;
+
 print ("Opening $dataFile\n");
 open (DATA, $dataFile) || die "can't open $dataFile";
 while(my $line = <DATA>) {
@@ -56,10 +58,24 @@ while(my $line = <DATA>) {
         my $cardInfo = "$data[0],,,$data[2]";
         push(@setCards, $cardInfo);
         $cardsFound = $cardsFound + 1;
+    } else { 
+        $all_sets {$data[1]} = 1;
     }
 }
 close(DATA);
 print "Number of cards found for set " . $setName . ": " . $cardsFound . "\n";
+
+
+if ($cardsFound == 0) {
+    $setName =~ s/^(...).*/$1/;
+    my $poss;
+    foreach $poss (sort keys (%all_sets)) {
+        if ($poss =~ m/^$setName/i) {
+            print ("Did you possibly mean: $poss ?\n");
+        }
+    }
+    exit;
+}
 
 open (DATA, $setsFile) || die "can't open $setsFile";
 
@@ -90,9 +106,9 @@ sub getRarity
     {
         return $raritiesConversion {$val};
     }
-    print ("JSKLDFJSLKDFJLSKJDF --- $val,,,$_[1]\n");
+    print ("ERROR DETECTED! - Incorrect rarity.. --- $val,,,$_[1]\n");
     sleep (10);
-    return "WHOKNOWS";
+    exit;
 }
 
 # Generate the cards
