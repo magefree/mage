@@ -339,8 +339,17 @@ public class Combat implements Serializable, Copyable<Combat> {
                     // No need to attack a special defender
                     if (defendersForcedToAttack.isEmpty()) {
                         if (defendersForcedToAttack.isEmpty()) {
-                            if (defendersCostlessAttackable.size() == 1) {
-                                player.declareAttacker(creature.getId(), defenders.iterator().next(), game, false);
+                            if (defendersCostlessAttackable.size() >= 1) {
+                                if (defenders.size() == 1) {
+                                    player.declareAttacker(creature.getId(), defenders.iterator().next(), game, false);
+                                } else {
+                                    TargetDefender target = new TargetDefender(defenders, creature.getId());
+                                    target.setRequired(true);
+                                    target.setTargetName("planeswalker or player for " + creature.getLogName() + " to attack");
+                                    if (player.chooseTarget(Outcome.Damage, target, null, game)) {
+                                        player.declareAttacker(creature.getId(), target.getFirstTarget(), game, false);
+                                    }
+                                }
                             }
                         } else {
                             TargetDefender target = new TargetDefender(defendersCostlessAttackable, creature.getId());
