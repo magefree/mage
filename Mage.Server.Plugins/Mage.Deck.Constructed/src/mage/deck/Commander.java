@@ -220,6 +220,7 @@ public class Commander extends Constructed {
             boolean buyback = false;
             boolean cascade = false;
             boolean copy = false;
+            boolean costLessEach = false;
             boolean exile = false;
             boolean exileAll = false;
             boolean counter = false;
@@ -227,20 +228,25 @@ public class Commander extends Constructed {
             boolean destroyAll = false;
             boolean each = false;
             boolean exalted = false;
+            boolean doesntUntap = false;
             boolean drawCards = false;
             boolean extraTurns = false;
             boolean gainControl = false;
+            boolean hexproof = false;
             boolean infect = false;
             boolean mayCastForFree = false;
             boolean miracle = false;
             boolean overload = false;
             boolean persist = false;
             boolean proliferate = false;
+            boolean protection = false;
             boolean retrace = false;
             boolean sacrifice = false;
+            boolean shroud = false;
             boolean skip = false;
             boolean sliver = false;
             boolean tutor = false;
+            boolean unblockable = false;
             boolean undying = false;
             boolean wheneverEnters = false;
             boolean youControlTarget = false;
@@ -251,9 +257,12 @@ public class Commander extends Constructed {
                 buyback |= s.contains("buyback");
                 cascade |= s.contains("cascade");
                 copy |= s.contains("copy");
+                costLessEach |= s.contains("cost") || s.contains("less") || s.contains("each");
                 counter |= s.contains("counter") && s.contains("target");
                 destroy |= s.contains("destroy");
                 destroyAll |= s.contains("destroy all");
+                doesntUntap |= s.contains("doesn't untap");
+                doesntUntap |= s.contains("don't untap");
                 drawCards |= s.contains("draw cards");
                 each |= s.contains("each");
                 exalted |= s.contains("exalted");
@@ -261,17 +270,21 @@ public class Commander extends Constructed {
                 exileAll |= s.contains("exile") && s.contains(" all ");
                 extraTurns |= s.contains("extra turn");
                 gainControl |= s.contains("gain control");
+                hexproof |= s.contains("hexproof");
                 infect |= s.contains("infect");
                 mayCastForFree |= s.contains("may cast") && s.contains("without paying");
                 miracle |= s.contains("miracle");
                 overload |= s.contains("overload");
                 persist |= s.contains("persist");
                 proliferate |= s.contains("proliferate");
+                protection |= s.contains("protection");
                 retrace |= s.contains("retrace");
                 sacrifice |= s.contains("sacrifice");
-                skip |= s.contains("skip") && s.contains("each");
+                shroud |= s.contains("shroud");
+                skip |= s.contains("skip");
                 sliver |= s.contains("sliver");
                 tutor |= s.contains("search your library");
+                unblockable |= s.contains("can't be blocked");
                 undying |= s.contains("undying");
                 wheneverEnters |= s.contains("when") && s.contains("another") && s.contains("enters");
                 youControlTarget |= s.contains("you control target");
@@ -292,7 +305,13 @@ public class Commander extends Constructed {
             if (overload) {
                 thisMaxPower = Math.max(thisMaxPower, 5);
             }
+            if (costLessEach) {
+                thisMaxPower = Math.max(thisMaxPower, 5);
+            }
             if (cascade) {
+                thisMaxPower = Math.max(thisMaxPower, 4);
+            }
+            if (doesntUntap) {
                 thisMaxPower = Math.max(thisMaxPower, 4);
             }
             if (each) {
@@ -310,7 +329,13 @@ public class Commander extends Constructed {
             if (proliferate) {
                 thisMaxPower = Math.max(thisMaxPower, 4);
             }
+            if (protection) {
+                thisMaxPower = Math.max(thisMaxPower, 4);
+            }
             if (skip) {
+                thisMaxPower = Math.max(thisMaxPower, 4);
+            }
+            if (unblockable) {
                 thisMaxPower = Math.max(thisMaxPower, 4);
             }
             if (wheneverEnters) {
@@ -323,6 +348,12 @@ public class Commander extends Constructed {
                 thisMaxPower = Math.max(thisMaxPower, 3);
             }
             if (destroyAll) {
+                thisMaxPower = Math.max(thisMaxPower, 3);
+            }
+            if (hexproof) {
+                thisMaxPower = Math.max(thisMaxPower, 3);
+            }
+            if (shroud) {
                 thisMaxPower = Math.max(thisMaxPower, 3);
             }
             if (undying) {
@@ -401,6 +432,7 @@ public class Commander extends Constructed {
                     || cn.equals("edric, spymaster of trest")
                     || cn.equals("elesh norn, grand cenobite")
                     || cn.equals("entomb")
+                    || cn.equals("force of will")
                     || cn.equals("food chain")
                     || cn.equals("gaddock teeg")
                     || cn.equals("gaea's cradle")
@@ -456,7 +488,8 @@ public class Commander extends Constructed {
             }
 
             // Parts of infinite combos
-            if (cn.equals("animate artifact") || cn.equals("archaeomancer")
+            if (cn.equals("animate artifact") || cn.equals("animar, soul of element")
+                    || cn.equals("archaeomancer")
                     || cn.equals("ashnod's altar") || cn.equals("azami, lady of scrolls")
                     || cn.equals("basalt monolith") || cn.equals("brago, king eternal")
                     || cn.equals("candelabra of tawnos") || cn.equals("cephalid aristocrat")
@@ -483,6 +516,7 @@ public class Commander extends Constructed {
                     || cn.equals("myr turbine") || cn.equals("narset, enlightened master")
                     || cn.equals("nekusar, the mindrazer") || cn.equals("norin the wary")
                     || cn.equals("opalescence") || cn.equals("ornithopter")
+                    || cn.equals("peregrine drake") || cn.equals("palinchron")
                     || cn.equals("planar portal") || cn.equals("power artifact")
                     || cn.equals("rings of brighthearth") || cn.equals("rite of replication")
                     || cn.equals("sanguine bond") || cn.equals("sensei's divining top")
@@ -497,7 +531,7 @@ public class Commander extends Constructed {
                     || cn.equals("workhorse") || cn.equals("worldgorger dragon")
                     || cn.equals("worthy cause") || cn.equals("yawgmoth's will")
                     || cn.equals("zealous conscripts")) {
-                thisMaxPower = Math.max(thisMaxPower, 6);
+                thisMaxPower = Math.max(thisMaxPower, 7);
             }
             edhPowerLevel += thisMaxPower;
         }
@@ -507,48 +541,49 @@ public class Commander extends Constructed {
             String cn = commander.getName().toLowerCase();
 
             // Least fun commanders
-            if (cn.equals("azami, lady of scrolls")
-                || cn.equals("braids, cabal minion")
-                || cn.equals("child of alara")
-                || cn.equals("derevi, empyrial tactician")
-                || cn.equals("edric, spymaster of trest")
-                || cn.equals("gaddock teeg")
-                || cn.equals("grand arbiter augustin iv")
-                || cn.equals("hokori, dust drinker")
-                || cn.equals("iona, shield of emeria")
-                || cn.equals("jin-gitaxias, core augur")
-                || cn.equals("karador, ghost chieftain")
-                || cn.equals("leovold, emissary of trest")
-                || cn.equals("linvala, keeper of silence")
-                || cn.equals("llawan, cephalid empress")
-                || cn.equals("memnarch")
-                || cn.equals("meren of clan nel toth")
-                || cn.equals("michiko konda, truth seeker")
-                || cn.equals("narset, enlightened master")
-                || cn.equals("nekusar, the mindrazer")
-                || cn.equals("norin the wary")
-                || cn.equals("numot, the devastator")
-                || cn.equals("sheoldred, whispering one")
-                || cn.equals("teferi, mage of zhalfir")
-                || cn.equals("zur the enchanter")) {
+            if (cn.equals("animar, soul of element")
+                    || cn.equals("azami, lady of scrolls")
+                    || cn.equals("braids, cabal minion")
+                    || cn.equals("child of alara")
+                    || cn.equals("derevi, empyrial tactician")
+                    || cn.equals("edric, spymaster of trest")
+                    || cn.equals("gaddock teeg")
+                    || cn.equals("grand arbiter augustin iv")
+                    || cn.equals("hokori, dust drinker")
+                    || cn.equals("iona, shield of emeria")
+                    || cn.equals("jin-gitaxias, core augur")
+                    || cn.equals("karador, ghost chieftain")
+                    || cn.equals("leovold, emissary of trest")
+                    || cn.equals("linvala, keeper of silence")
+                    || cn.equals("llawan, cephalid empress")
+                    || cn.equals("memnarch")
+                    || cn.equals("meren of clan nel toth")
+                    || cn.equals("michiko konda, truth seeker")
+                    || cn.equals("narset, enlightened master")
+                    || cn.equals("nekusar, the mindrazer")
+                    || cn.equals("norin the wary")
+                    || cn.equals("numot, the devastator")
+                    || cn.equals("sheoldred, whispering one")
+                    || cn.equals("teferi, mage of zhalfir")
+                    || cn.equals("zur the enchanter")) {
                 thisMaxPower = Math.max(thisMaxPower, 15);
             }
 
             // Next least fun commanders
             if (cn.equals("anafenza, the foremost")
-                || cn.equals("arcum dagsson")
-                || cn.equals("azusa, lost but seeking")
-                || cn.equals("brago, king eternal")
-                || cn.equals("captain sisay")
-                || cn.equals("elesh norn, grand cenobite")
-                || cn.equals("malfegor")
-                || cn.equals("maelstrom wanderer")
-                || cn.equals("mikaeus the unhallowed")
-                || cn.equals("nath of the gilt-leaf")
-                || cn.equals("purphoros, god of the forge")
-                || cn.equals("sen triplets")
-                || cn.equals("urabrask the hidden")
-                || cn.equals("vorinclex, voice of hunger")) {
+                    || cn.equals("arcum dagsson")
+                    || cn.equals("azusa, lost but seeking")
+                    || cn.equals("brago, king eternal")
+                    || cn.equals("captain sisay")
+                    || cn.equals("elesh norn, grand cenobite")
+                    || cn.equals("malfegor")
+                    || cn.equals("maelstrom wanderer")
+                    || cn.equals("mikaeus the unhallowed")
+                    || cn.equals("nath of the gilt-leaf")
+                    || cn.equals("purphoros, god of the forge")
+                    || cn.equals("sen triplets")
+                    || cn.equals("urabrask the hidden")
+                    || cn.equals("vorinclex, voice of hunger")) {
                 thisMaxPower = Math.max(thisMaxPower, 10);
             }
             edhPowerLevel += thisMaxPower;
