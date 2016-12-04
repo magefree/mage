@@ -237,6 +237,14 @@ public class GameEvent implements Serializable {
         TRANSFORM, TRANSFORMED,
         BECOMES_MONSTROUS,
         BECOMES_RENOWNED,
+        /* BECOMES_MONARCH
+         targetId    playerId of the player that becomes the monarch
+         sourceId    id of the source object that created that effect, if no effect exist it's null
+         playerId    playerId of the player that becomes the monarch
+         amount      not used for this event
+         flag        not used for this event
+         */
+        BECOMES_MONARCH,
         MEDITATED,
         PHASE_OUT, PHASED_OUT,
         PHASE_IN, PHASED_IN,

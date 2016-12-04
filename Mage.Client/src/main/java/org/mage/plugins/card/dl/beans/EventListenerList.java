@@ -1,39 +1,37 @@
 /**
  * EventListenerList.java
- * 
+ *
  * Created on 08.04.2010
  */
-
 package org.mage.plugins.card.dl.beans;
-
-
-import static java.util.Arrays.*;
-
-import java.util.ArrayList;
-import java.util.EventListener;
-import java.util.HashSet;
-import java.util.Iterator;
-import java.util.List;
 
 import com.google.common.base.Function;
 import com.google.common.collect.AbstractIterator;
 import com.google.common.collect.Iterables;
 import com.google.common.collect.Lists;
-
+import java.util.ArrayList;
+import static java.util.Arrays.*;
+import java.util.EventListener;
+import java.util.HashSet;
+import java.util.Iterator;
+import java.util.List;
 
 /**
  * The class EventListenerList.
- * 
+ *
  * @version V0.0 08.04.2010
  * @author Clemens Koza
  */
 public class EventListenerList extends javax.swing.event.EventListenerList {
+
     private static final long serialVersionUID = -7545754245081842909L;
 
     /**
-     * Returns an iterable over all listeners for the specified classes. the listener classes are in the specified
-     * order. for every class, listeners are in the reverse order of registering. A listener contained multiple
-     * times (for a single or multiple classes) is only returned the first time it occurs.
+     * Returns an iterable over all listeners for the specified classes. the
+     * listener classes are in the specified order. for every class, listeners
+     * are in the reverse order of registering. A listener contained multiple
+     * times (for a single or multiple classes) is only returned the first time
+     * it occurs.
      */
     public <T extends EventListener> Iterable<T> getIterable(final Class<? extends T>... listenerClass) {
         //transform class -> iterable
@@ -51,22 +49,30 @@ public class EventListenerList extends javax.swing.event.EventListenerList {
     }
 
     /**
-     * Returns an iterator over all listeners for the specified classes. the listener classes are in the specified
-     * order. for every class, listeners are in the reverse order of registering. A listener contained multiple
-     * times (for a single or multiple classes) is only returned the first time it occurs.
+     * Returns an iterator over all listeners for the specified classes. the
+     * listener classes are in the specified order. for every class, listeners
+     * are in the reverse order of registering. A listener contained multiple
+     * times (for a single or multiple classes) is only returned the first time
+     * it occurs.
+     *
+     * @param <T>
+     * @param listenerClass
+     * @return
      */
     public <T extends EventListener> Iterator<T> getIterator(Class<? extends T>... listenerClass) {
         return getIterable(listenerClass).iterator();
     }
 
     /**
-     * Iterates backwards over the listeners registered for a class by using the original array. The Listener runs
-     * backwards, just as listener notification usually works.
+     * Iterates backwards over the listeners registered for a class by using the
+     * original array. The Listener runs backwards, just as listener
+     * notification usually works.
      */
     private class ListenerIterator<T> extends AbstractIterator<T> {
+
         private final Class<? extends T> listenerClass;
-        private Object[]                 listeners = listenerList;
-        private int                      index     = listeners.length;
+        private Object[] listeners = listenerList;
+        private int index = listeners.length;
 
         private ListenerIterator(Class<? extends T> listenerClass) {
             this.listenerClass = listenerClass;
@@ -75,8 +81,10 @@ public class EventListenerList extends javax.swing.event.EventListenerList {
         @Override
         @SuppressWarnings("unchecked")
         protected T computeNext() {
-            for(index -= 2; index >= 0; index -= 2) {
-                if(listenerClass == listeners[index]) return (T) listeners[index + 1];
+            for (index -= 2; index >= 0; index -= 2) {
+                if (listenerClass == listeners[index]) {
+                    return (T) listeners[index + 1];
+                }
             }
             return endOfData();
         }
@@ -98,22 +106,25 @@ public class EventListenerList extends javax.swing.event.EventListenerList {
     }
 
     /**
-     * Filters the delegate iterator so that every but the first occurrence of every element is ignored.
+     * Filters the delegate iterator so that every but the first occurrence of
+     * every element is ignored.
      */
     private static class SingletonIterator<T> extends AbstractIterator<T> {
+
         private Iterator<T> it;
-        private HashSet<T>  previous = new HashSet<T>();
+        private HashSet<T> previous = new HashSet<T>();
 
         public SingletonIterator(Iterator<T> it) {
             this.it = it;
         }
 
-
         @Override
         protected T computeNext() {
-            while(it.hasNext()) {
+            while (it.hasNext()) {
                 T next = it.next();
-                if(previous.add(next)) return next;
+                if (previous.add(next)) {
+                    return next;
+                }
             }
             return endOfData();
         }

@@ -61,6 +61,7 @@ public class FourthEdition extends ExpansionSet {
         cards.add(new SetCardInfo("Ali Baba", 193, Rarity.UNCOMMON, mage.cards.a.AliBaba.class));
         cards.add(new SetCardInfo("Amrou Kithkin", 252, Rarity.COMMON, mage.cards.a.AmrouKithkin.class));
         cards.add(new SetCardInfo("Amulet of Kroog", 311, Rarity.COMMON, mage.cards.a.AmuletOfKroog.class));
+        cards.add(new SetCardInfo("Angry Mob", 253, Rarity.UNCOMMON, mage.cards.a.AngryMob.class));
         cards.add(new SetCardInfo("Animate Dead", 2, Rarity.UNCOMMON, mage.cards.a.AnimateDead.class));
         cards.add(new SetCardInfo("Animate Wall", 254, Rarity.RARE, mage.cards.a.AnimateWall.class));
         cards.add(new SetCardInfo("Ankh of Mishra", 312, Rarity.RARE, mage.cards.a.AnkhOfMishra.class));
@@ -269,6 +270,7 @@ public class FourthEdition extends ExpansionSet {
         cards.add(new SetCardInfo("Osai Vultures", 288, Rarity.UNCOMMON, mage.cards.o.OsaiVultures.class));
         cards.add(new SetCardInfo("Paralyze", 35, Rarity.COMMON, mage.cards.p.Paralyze.class));
         cards.add(new SetCardInfo("Pearled Unicorn", 289, Rarity.COMMON, mage.cards.p.PearledUnicorn.class));
+        cards.add(new SetCardInfo("Personal Incarnation", 290, Rarity.RARE, mage.cards.p.PersonalIncarnation.class));
         cards.add(new SetCardInfo("Pestilence", 36, Rarity.COMMON, mage.cards.p.Pestilence.class));
         cards.add(new SetCardInfo("Phantasmal Forces", 88, Rarity.UNCOMMON, mage.cards.p.PhantasmalForces.class));
         cards.add(new SetCardInfo("Phantasmal Terrain", 89, Rarity.COMMON, mage.cards.p.PhantasmalTerrain.class));

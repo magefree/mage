@@ -1,12 +1,11 @@
 package mage.client.components.tray;
 
-import mage.client.MageFrame;
-import org.apache.log4j.Logger;
-import org.mage.plugins.card.utils.impl.ImageManagerImpl;
-
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import mage.client.MageFrame;
+import org.apache.log4j.Logger;
+import org.mage.plugins.card.utils.impl.ImageManagerImpl;
 
 /**
  * @author noxx
@@ -63,14 +62,14 @@ public class MageTray {
             imagesItem.addActionListener(new ActionListener() {
                 @Override
                 public void actionPerformed(ActionEvent e) {
-                    MageFrame.getInstance().btnImagesActionPerformed(null);
+                    MageFrame.getInstance().downloadImages();
                 }
             });
 
             iconsItem.addActionListener(new ActionListener() {
                 @Override
                 public void actionPerformed(ActionEvent e) {
-                    MageFrame.getInstance().btnSymbolsActionPerformed(null);
+                    MageFrame.getInstance().downloadAdditionalResources();
                 }
             });
 

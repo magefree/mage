@@ -79,7 +79,7 @@ public class Combat implements Serializable, Copyable<Combat> {
     protected Set<UUID> defenders = new HashSet<>();
     // how many creatures attack defending player
     protected Map<UUID, Set<UUID>> numberCreaturesDefenderAttackedBy = new HashMap<>();
-    protected UUID attackerId; //the player that is attacking
+    protected UUID attackingPlayerId; //the player that is attacking
     // <creature that can block, <all attackers that force the creature to block it>>
     protected Map<UUID, Set<UUID>> creatureMustBlockAttackers = new HashMap<>();
 
@@ -94,7 +94,7 @@ public class Combat implements Serializable, Copyable<Combat> {
     }
 
     public Combat(final Combat combat) {
-        this.attackerId = combat.attackerId;
+        this.attackingPlayerId = combat.attackingPlayerId;
         for (CombatGroup group : combat.groups) {
             groups.add(group.copy());
         }
@@ -188,7 +188,7 @@ public class Combat implements Serializable, Copyable<Combat> {
         groups.clear();
         blockingGroups.clear();
         defenders.clear();
-        attackerId = null;
+        attackingPlayerId = null;
         creatureMustBlockAttackers.clear();
         numberCreaturesDefenderAttackedBy.clear();
         creaturesForcedToAttack.clear();
@@ -197,7 +197,7 @@ public class Combat implements Serializable, Copyable<Combat> {
 
     public String getValue() {
         StringBuilder sb = new StringBuilder();
-        sb.append(attackerId).append(defenders);
+        sb.append(attackingPlayerId).append(defenders);
         for (CombatGroup group : groups) {
             sb.append(group.defenderId).append(group.attackers).append(group.attackerOrder).append(group.blockers).append(group.blockerOrder);
         }
@@ -205,7 +205,7 @@ public class Combat implements Serializable, Copyable<Combat> {
     }
 
     public void setAttacker(UUID playerId) {
-        this.attackerId = playerId;
+        this.attackingPlayerId = playerId;
     }
 
     /**
@@ -236,7 +236,7 @@ public class Combat implements Serializable, Copyable<Combat> {
         } else {
             possibleDefenders = new HashSet<>(defenders);
         }
-        Player player = game.getPlayer(attackerId);
+        Player player = game.getPlayer(attackingPlayerId);
         if (player == null) {
             return false;
         }
@@ -257,14 +257,14 @@ public class Combat implements Serializable, Copyable<Combat> {
     }
 
     public void selectAttackers(Game game) {
-        if (!game.replaceEvent(GameEvent.getEvent(GameEvent.EventType.DECLARING_ATTACKERS, attackerId, attackerId))) {
-            Player player = game.getPlayer(attackerId);
+        if (!game.replaceEvent(GameEvent.getEvent(GameEvent.EventType.DECLARING_ATTACKERS, attackingPlayerId, attackingPlayerId))) {
+            Player player = game.getPlayer(attackingPlayerId);
             //20101001 - 508.1d
             game.getCombat().checkAttackRequirements(player, game);
             boolean firstTime = true;
             do {
                 if (!firstTime || !game.getPlayer(game.getActivePlayerId()).getAvailableAttackers(game).isEmpty()) {
-                    player.selectAttackers(game, attackerId);
+                    player.selectAttackers(game, attackingPlayerId);
                 }
                 firstTime = false;
                 if (game.isPaused() || game.gameOver(null) || game.executingRollback()) {
@@ -288,13 +288,13 @@ public class Combat implements Serializable, Copyable<Combat> {
                         attackingPermanent.tap(game); // to tap with event finally here is needed to prevent abusing of Vampire Envoy like cards
                     }
                 }
-                game.fireEvent(GameEvent.getEvent(GameEvent.EventType.ATTACKER_DECLARED, group.defenderId, attacker, attackerId));
+                game.fireEvent(GameEvent.getEvent(GameEvent.EventType.ATTACKER_DECLARED, group.defenderId, attacker, attackingPlayerId));
             }
         }
         attackersTappedByAttack.clear();
-        game.fireEvent(GameEvent.getEvent(GameEvent.EventType.DECLARED_ATTACKERS, attackerId, attackerId));
+        game.fireEvent(GameEvent.getEvent(GameEvent.EventType.DECLARED_ATTACKERS, attackingPlayerId, attackingPlayerId));
         if (!game.isSimulation()) {
-            Player player = game.getPlayer(attackerId);
+            Player player = game.getPlayer(attackingPlayerId);
             if (player != null) {
                 game.informPlayers(player.getLogName() + " attacks with " + groups.size() + (groups.size() == 1 ? " creature" : " creatures"));
             }
@@ -339,8 +339,17 @@ public class Combat implements Serializable, Copyable<Combat> {
                     // No need to attack a special defender
                     if (defendersForcedToAttack.isEmpty()) {
                         if (defendersForcedToAttack.isEmpty()) {
-                            if (defendersCostlessAttackable.size() == 1) {
-                                player.declareAttacker(creature.getId(), defenders.iterator().next(), game, false);
+                            if (defendersCostlessAttackable.size() >= 1) {
+                                if (defenders.size() == 1) {
+                                    player.declareAttacker(creature.getId(), defenders.iterator().next(), game, false);
+                                } else {
+                                    TargetDefender target = new TargetDefender(defenders, creature.getId());
+                                    target.setRequired(true);
+                                    target.setTargetName("planeswalker or player for " + creature.getLogName() + " to attack");
+                                    if (player.chooseTarget(Outcome.Damage, target, null, game)) {
+                                        player.declareAttacker(creature.getId(), target.getFirstTarget(), game, false);
+                                    }
+                                }
                             }
                         } else {
                             TargetDefender target = new TargetDefender(defendersCostlessAttackable, creature.getId());
@@ -378,7 +387,7 @@ public class Combat implements Serializable, Copyable<Combat> {
             for (CombatGroup group : groups) {
                 numberAttackers += group.getAttackers().size();
             }
-            Player attackingPlayer = game.getPlayer(attackerId);
+            Player attackingPlayer = game.getPlayer(attackingPlayerId);
             if (attackerToRemove != null) {
                 removeAttacker(attackerToRemove, game);
             }
@@ -416,13 +425,13 @@ public class Combat implements Serializable, Copyable<Combat> {
     }
 
     public void selectBlockers(Game game) {
-        if (!game.replaceEvent(GameEvent.getEvent(GameEvent.EventType.DECLARING_BLOCKERS, attackerId, attackerId))) {
+        if (!game.replaceEvent(GameEvent.getEvent(GameEvent.EventType.DECLARING_BLOCKERS, attackingPlayerId, attackingPlayerId))) {
             game.getCombat().selectBlockers(null, game);
         }
         for (UUID attackingCreatureID : game.getCombat().getAttackers()) {
             Permanent permanent = game.getPermanent(attackingCreatureID);
             if (permanent != null && permanent.getBlocking() == 0) {
-                game.fireEvent(GameEvent.getEvent(EventType.UNBLOCKED_ATTACKER, attackingCreatureID, attackerId));
+                game.fireEvent(GameEvent.getEvent(EventType.UNBLOCKED_ATTACKER, attackingCreatureID, attackingPlayerId));
             }
         }
     }
@@ -435,7 +444,7 @@ public class Combat implements Serializable, Copyable<Combat> {
      * @param game
      */
     public void selectBlockers(Player blockController, Game game) {
-        Player attacker = game.getPlayer(attackerId);
+        Player attacker = game.getPlayer(attackingPlayerId);
         //20101001 - 509.1c
         game.getCombat().retrieveMustBlockAttackerRequirements(attacker, game);
         Player controller;
@@ -634,7 +643,7 @@ public class Combat implements Serializable, Copyable<Combat> {
      */
     public boolean checkBlockRequirementsAfter(Player player, Player controller, Game game) {
         // Get once a list of all opponents in range
-        Set<UUID> opponents = game.getOpponents(attackerId);
+        Set<UUID> opponents = game.getOpponents(attackingPlayerId);
         //20101001 - 509.1c
         // map with attackers (UUID) that must be blocked by at least one blocker and a set of all creatures that can block it and don't block yet
         Map<UUID, Set<UUID>> mustBeBlockedByAtLeastOne = new HashMap<>();
@@ -1015,34 +1024,36 @@ public class Combat implements Serializable, Copyable<Combat> {
     }
 
     public void setDefenders(Game game) {
-        Set<UUID> opponents = game.getOpponents(attackerId);
-        PlayerList players;
-        switch (game.getAttackOption()) {
-            case LEFT:
-                players = game.getState().getPlayerList(attackerId);
-                while (true) {
-                    Player opponent = players.getNext(game);
-                    if (opponents.contains(opponent.getId())) {
-                        addDefender(opponent.getId(), game);
-                        break;
+        Player attackingPlayer = game.getPlayer(attackingPlayerId);
+        if (attackingPlayer != null) {
+            PlayerList players;
+            switch (game.getAttackOption()) {
+                case LEFT:
+                    players = game.getState().getPlayerList(attackingPlayerId);
+                    while (true && attackingPlayer.isInGame()) {
+                        Player opponent = players.getNext(game);
+                        if (attackingPlayer.hasOpponent(opponent.getId(), game)) {
+                            addDefender(opponent.getId(), game);
+                            break;
+                        }
                     }
-                }
-                break;
-            case RIGHT:
-                players = game.getState().getPlayerList(attackerId);
-                while (true) {
-                    Player opponent = players.getPrevious(game);
-                    if (opponents.contains(opponent.getId())) {
-                        addDefender(opponent.getId(), game);
-                        break;
+                    break;
+                case RIGHT:
+                    players = game.getState().getPlayerList(attackingPlayerId);
+                    while (true && attackingPlayer.isInGame()) {
+                        Player opponent = players.getPrevious(game);
+                        if (attackingPlayer.hasOpponent(opponent.getId(), game)) {
+                            addDefender(opponent.getId(), game);
+                            break;
+                        }
                     }
-                }
-                break;
-            case MULTIPLE:
-                for (UUID opponentId : game.getOpponents(attackerId)) {
-                    addDefender(opponentId, game);
-                }
-                break;
+                    break;
+                case MULTIPLE:
+                    for (UUID opponentId : game.getOpponents(attackingPlayerId)) {
+                        addDefender(opponentId, game);
+                    }
+                    break;
+            }
         }
     }
 
@@ -1330,7 +1341,7 @@ public class Combat implements Serializable, Copyable<Combat> {
 
     public void damageAssignmentOrder(Game game) {
         for (CombatGroup group : groups) {
-            group.pickBlockerOrder(attackerId, game);
+            group.pickBlockerOrder(attackingPlayerId, game);
         }
         for (Map.Entry<UUID, CombatGroup> blockingGroup : blockingGroups.entrySet()) {
             Permanent blocker = game.getPermanent(blockingGroup.getKey());
@@ -1402,7 +1413,7 @@ public class Combat implements Serializable, Copyable<Combat> {
     }
 
     public UUID getAttackerId() {
-        return attackerId;
+        return attackingPlayerId;
     }
 
     public Map<UUID, Set<UUID>> getCreaturesForcedToAttack() {

@@ -176,7 +176,7 @@ public class PlayerPanelExt extends javax.swing.JPanel {
 
     }
 
-    private void setTextForLabel (JLabel label, int amount, boolean alwaysBlack) {
+    private void setTextForLabel(JLabel label, int amount, boolean alwaysBlack) {
         label.setText(Integer.toString(amount));
         if (amount != 0 || alwaysBlack) {
             label.setForeground(Color.BLACK);
@@ -342,6 +342,12 @@ public class PlayerPanelExt extends javax.swing.JPanel {
         }
         // Extend tooltip
         StringBuilder tooltipText = new StringBuilder(basicTooltipText);
+        if (player.isMonarch()) {
+            tooltipText.append("<br/>Monarch");
+            this.avatar.setTopTextImageRight(ImageHelper.getImageFromResources("/info/crown.png"));
+        } else {
+            this.avatar.setTopTextImageRight(null);
+        }
         for (Counter counter : player.getCounters().values()) {
             tooltipText.append("<br/>").append(counter.getName()).append(" counters: ").append(counter.getCount());
         }
@@ -381,7 +387,8 @@ public class PlayerPanelExt extends javax.swing.JPanel {
         panelBackground = new MageRoundPane();
         panelBackground.setPreferredSize(new Dimension(PANEL_WIDTH - 2, PANEL_HEIGHT));
         Rectangle r = new Rectangle(80, 80);
-        avatarFlag = new JLabel();
+//        avatarFlag = new JLabel();
+//        monarchIcon = new JLabel();
         timerLabel = new JLabel();
         lifeLabel = new JLabel();
         handLabel = new JLabel();
@@ -462,7 +469,7 @@ public class PlayerPanelExt extends javax.swing.JPanel {
             }
         });
 
-       // Grave count and open graveyard button
+        // Grave count and open graveyard button
         r = new Rectangle(21, 21);
         graveLabel.setToolTipText("Card Types: 0");
         Image imageGrave = ImageHelper.getImageFromResources("/info/grave.png");
@@ -547,7 +554,7 @@ public class PlayerPanelExt extends javax.swing.JPanel {
         energy = new ImagePanel(resizedEnergy, ImagePanel.ACTUAL);
         energy.setToolTipText("Energy");
         energy.setOpaque(false);
-        
+
         // Experience count
         setTextForLabel(experienceLabel, 0, false);
         r = new Rectangle(18, 18);
@@ -807,7 +814,7 @@ public class PlayerPanelExt extends javax.swing.JPanel {
                                         .addGap(2)
                                         .addComponent(energy, GroupLayout.PREFERRED_SIZE, 18, GroupLayout.PREFERRED_SIZE)
                                         .addGap(2)
-                                         .addComponent(btnWhiteMana, GroupLayout.PREFERRED_SIZE, 15, GroupLayout.PREFERRED_SIZE)
+                                        .addComponent(btnWhiteMana, GroupLayout.PREFERRED_SIZE, 15, GroupLayout.PREFERRED_SIZE)
                                         .addGap(2)
                                         .addComponent(btnBlueMana, GroupLayout.PREFERRED_SIZE, 15, GroupLayout.PREFERRED_SIZE)
                                         .addGap(2)
@@ -821,7 +828,7 @@ public class PlayerPanelExt extends javax.swing.JPanel {
                                                         .addGroup(gl_panelBackground.createParallelGroup(Alignment.LEADING)
                                                                 .addGroup(gl_panelBackground.createSequentialGroup()
                                                                         .addGap(1)
-                                                                .addComponent(experience, GroupLayout.PREFERRED_SIZE, 19, GroupLayout.PREFERRED_SIZE))
+                                                                        .addComponent(experience, GroupLayout.PREFERRED_SIZE, 19, GroupLayout.PREFERRED_SIZE))
                                                                 .addComponent(energyLabel, GroupLayout.PREFERRED_SIZE, 20, GroupLayout.PREFERRED_SIZE))
                                                         .addGap(2)
                                                         .addComponent(btnRedMana, GroupLayout.PREFERRED_SIZE, 15, GroupLayout.PREFERRED_SIZE))
@@ -886,14 +893,16 @@ public class PlayerPanelExt extends javax.swing.JPanel {
     protected void sizePlayerPanel(boolean smallMode) {
         if (smallMode) {
             avatar.setVisible(false);
-            avatarFlag.setVisible(false);
+//            avatarFlag.setVisible(false);
+//            monarchIcon.setVisible(false);
             btnPlayer.setVisible(true);
             timerLabel.setVisible(true);
             panelBackground.setPreferredSize(new Dimension(PANEL_WIDTH - 2, PANEL_HEIGHT_SMALL));
             panelBackground.setBounds(0, 0, PANEL_WIDTH - 2, PANEL_HEIGHT_SMALL);
         } else {
             avatar.setVisible(true);
-            avatarFlag.setVisible(true);
+//            avatarFlag.setVisible(true);
+//            monarchIcon.setVisible(true);
             btnPlayer.setVisible(false);
             timerLabel.setVisible(false);
             panelBackground.setPreferredSize(new Dimension(PANEL_WIDTH - 2, PANEL_HEIGHT));
@@ -947,7 +956,8 @@ public class PlayerPanelExt extends javax.swing.JPanel {
     }
 
     private HoverButton avatar;
-    private JLabel avatarFlag;
+//    private JLabel avatarFlag;
+//    private JLabel monarchIcon;
     private JButton btnPlayer;
     private ImagePanel life;
     private ImagePanel poison;

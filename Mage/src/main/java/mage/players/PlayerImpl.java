@@ -1829,6 +1829,9 @@ public abstract class PlayerImpl implements Player, Serializable {
                     if (sourceAbilities != null && sourceAbilities.containsKey(InfectAbility.getInstance().getId())) {
                         addCounters(CounterType.POISON.createInstance(actualDamage), game);
                     } else {
+                        if (getId().equals(game.getMonarchId()) && sourceControllerId != null) {
+                            game.setMonarchId(null, sourceControllerId);
+                        }
                         GameEvent damageToLifeLossEvent = new GameEvent(EventType.DAMAGE_CAUSES_LIFE_LOSS, playerId, sourceId, playerId, actualDamage, combatDamage);
                         if (!game.replaceEvent(damageToLifeLossEvent)) {
                             this.loseLife(damageToLifeLossEvent.getAmount(), game, combatDamage);

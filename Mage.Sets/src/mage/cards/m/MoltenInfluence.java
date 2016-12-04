@@ -57,7 +57,7 @@ public class MoltenInfluence extends CardImpl {
     }
 
     public MoltenInfluence(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.INSTANT},"{1}{R}");
+        super(ownerId, setInfo, new CardType[]{CardType.INSTANT}, "{1}{R}");
 
         // Counter target instant or sorcery spell unless its controller has Molten Influence deal 4 damage to him or her.
         this.getSpellAbility().addTarget(new TargetSpell(filter));
@@ -99,8 +99,9 @@ class MoltenInfluenceEffect extends OneShotEffect {
             String message = "Have Molten Influence do 4 damage to you?";
             if (player.chooseUse(Outcome.Damage, message, source, game)) {
                 player.damage(4, source.getSourceId(), game, false, true);
+                return true;
             } else {
-                spell.counter(source.getSourceId(), game);
+                return game.getStack().counter(source.getFirstTarget(), source.getSourceId(), game);
             }
         }
         return false;

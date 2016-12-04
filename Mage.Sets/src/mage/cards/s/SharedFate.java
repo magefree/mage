@@ -51,7 +51,7 @@ import mage.util.CardUtil;
 
 /**
  *
- * @author emerald000
+ * @author emerald000 / HCrescent
  */
 public class SharedFate extends CardImpl {
 
@@ -63,6 +63,7 @@ public class SharedFate extends CardImpl {
 
         // Each player may look at and play cards he or she exiled with Shared Fate.
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new SharedFatePlayEffect()));
+        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new SharedFateLookEffect()));
     }
 
     public SharedFate(final SharedFate card) {
@@ -151,16 +152,56 @@ class SharedFatePlayEffect extends AsThoughEffectImpl {
 
     @Override
     public boolean applies(UUID objectId, Ability source, UUID affectedControllerId, Game game) {
-        Permanent sourcePermanent = game.getPermanent(source.getSourceId());
-        if (sourcePermanent != null) {
-            ExileZone exileZone = game.getExile().getExileZone(CardUtil.getExileZoneId(source.getSourceId().toString() + sourcePermanent.getZoneChangeCounter(game) + affectedControllerId.toString(), game));
-            if (exileZone != null) {
-                Card card = exileZone.get(objectId, game);
-                Player player = game.getPlayer(affectedControllerId);
-                if (card != null && player != null) {
-                    player.lookAtCards(card.getName(), card, game);
-                    // You already get asked to confirm when casting a spell, but not when playing a land.
-                    return !card.getCardType().contains(CardType.LAND) || player.chooseUse(Outcome.Benefit, "Play " + card.getName() + "?", source, game);
+       if (game.getState().getZone(objectId).equals(Zone.EXILED)) {
+            Player player = game.getPlayer(affectedControllerId);
+            Permanent sourcePermanent = game.getPermanent(source.getSourceId());
+            UUID exileId = CardUtil.getExileZoneId(source.getSourceId().toString() + sourcePermanent.getZoneChangeCounter(game) + affectedControllerId.toString(), game);
+            if (exileId != null) {
+                ExileZone exileZone = game.getExile().getExileZone(exileId);
+                if (exileZone != null && exileZone.contains(objectId)) {
+                    if (player.chooseUse(outcome, "Play " + game.getCard(objectId).getIdName() + "?", source, game)) {
+                        return true;
+                    }
+                }
+            }
+        }
+        return false;
+    }
+}
+
+class SharedFateLookEffect extends AsThoughEffectImpl {
+
+    public SharedFateLookEffect() {
+        super(AsThoughEffectType.LOOK_AT_FACE_DOWN, Duration.WhileOnBattlefield, Outcome.Benefit);
+        staticText = "Each player may look at the cards exiled with {this}";
+    }
+
+    public SharedFateLookEffect(final SharedFateLookEffect effect) {
+        super(effect);
+    }
+
+    @Override
+    public boolean apply(Game game, Ability source) {
+        return true;
+    }
+
+    @Override
+    public SharedFateLookEffect copy() {
+        return new SharedFateLookEffect(this);
+    }
+
+    @Override
+    public boolean applies(UUID objectId, Ability source, UUID affectedControllerId, Game game) {
+       if (game.getState().getZone(objectId).equals(Zone.EXILED)) {
+            Permanent sourcePermanent = game.getPermanent(source.getSourceId());
+            UUID exileId = CardUtil.getExileZoneId(source.getSourceId().toString() + sourcePermanent.getZoneChangeCounter(game) + affectedControllerId.toString(), game);
+            if (exileId != null) {
+                ExileZone exileZone = game.getExile().getExileZone(exileId);
+                if (exileZone != null && exileZone.contains(objectId)) {
+                    Card card = game.getCard(objectId);
+                    if (card != null && game.getState().getZone(objectId) == Zone.EXILED) {
+                        return true;
+                    }
                 }
             }
         }

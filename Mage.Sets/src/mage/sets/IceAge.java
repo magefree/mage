@@ -87,6 +87,7 @@ public class IceAge extends ExpansionSet {
         cards.add(new SetCardInfo("Cold Snap", 241, Rarity.UNCOMMON, mage.cards.c.ColdSnap.class));
         cards.add(new SetCardInfo("Conquer", 180, Rarity.UNCOMMON, mage.cards.c.Conquer.class));
         cards.add(new SetCardInfo("Counterspell", 64, Rarity.COMMON, mage.cards.c.Counterspell.class));
+        cards.add(new SetCardInfo("Crown of the Ages", 290, Rarity.RARE, mage.cards.c.CrownOfTheAges.class));
         cards.add(new SetCardInfo("Curse of Marit Lage", 181, Rarity.RARE, mage.cards.c.CurseOfMaritLage.class));
         cards.add(new SetCardInfo("Dance of the Dead", 6, Rarity.UNCOMMON, mage.cards.d.DanceOfTheDead.class));
         cards.add(new SetCardInfo("Dark Banishing", 7, Rarity.COMMON, mage.cards.d.DarkBanishing.class));
@@ -132,6 +133,7 @@ public class IceAge extends ExpansionSet {
         cards.add(new SetCardInfo("Gorilla Pack", 135, Rarity.COMMON, mage.cards.g.GorillaPack.class));
         cards.add(new SetCardInfo("Gravebind", 17, Rarity.RARE, mage.cards.g.Gravebind.class));
         cards.add(new SetCardInfo("Green Scarab", 252, Rarity.UNCOMMON, mage.cards.g.GreenScarab.class));
+        cards.add(new SetCardInfo("Hallowed Ground", 253, Rarity.UNCOMMON, mage.cards.h.HallowedGround.class));
         cards.add(new SetCardInfo("Heal", 254, Rarity.COMMON, mage.cards.h.Heal.class));
         cards.add(new SetCardInfo("Hecatomb", 18, Rarity.RARE, mage.cards.h.Hecatomb.class));
         cards.add(new SetCardInfo("Hematite Talisman", 295, Rarity.UNCOMMON, mage.cards.h.HematiteTalisman.class));

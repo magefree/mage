@@ -335,10 +335,10 @@ public interface Game extends MageItem, Serializable {
     void end();
 
     void cleanUp();
+
     /*
      * Gives back the number of cards the player has after the next mulligan
      */
-
     int mulliganDownTo(UUID playerId);
 
     void mulligan(UUID playerId);
@@ -463,4 +463,8 @@ public interface Game extends MageItem, Serializable {
     void setEnterWithCounters(UUID sourceId, Counters counters);
 
     Counters getEnterWithCounters(UUID sourceId);
+
+    UUID getMonarchId();
+
+    void setMonarchId(Ability source, UUID monarchId);
 }
