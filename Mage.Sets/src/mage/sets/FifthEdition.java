@@ -103,6 +103,7 @@ public class FifthEdition extends ExpansionSet {
         cards.add(new SetCardInfo("Craw Giant", 147, Rarity.UNCOMMON, mage.cards.c.CrawGiant.class));
         cards.add(new SetCardInfo("Craw Wurm", 148, Rarity.COMMON, mage.cards.c.CrawWurm.class));
         cards.add(new SetCardInfo("Crimson Manticore", 217, Rarity.RARE, mage.cards.c.CrimsonManticore.class));
+        cards.add(new SetCardInfo("Crown of the Ages", 360, Rarity.RARE, mage.cards.c.CrownOfTheAges.class));
         cards.add(new SetCardInfo("Crumble", 149, Rarity.UNCOMMON, mage.cards.c.Crumble.class));
         cards.add(new SetCardInfo("Crusade", 298, Rarity.RARE, mage.cards.c.Crusade.class));
         cards.add(new SetCardInfo("Crystal Rod", 361, Rarity.UNCOMMON, mage.cards.c.CrystalRod.class));

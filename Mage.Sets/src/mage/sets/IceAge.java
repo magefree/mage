@@ -87,6 +87,7 @@ public class IceAge extends ExpansionSet {
         cards.add(new SetCardInfo("Cold Snap", 241, Rarity.UNCOMMON, mage.cards.c.ColdSnap.class));
         cards.add(new SetCardInfo("Conquer", 180, Rarity.UNCOMMON, mage.cards.c.Conquer.class));
         cards.add(new SetCardInfo("Counterspell", 64, Rarity.COMMON, mage.cards.c.Counterspell.class));
+        cards.add(new SetCardInfo("Crown of the Ages", 290, Rarity.RARE, mage.cards.c.CrownOfTheAges.class));
         cards.add(new SetCardInfo("Curse of Marit Lage", 181, Rarity.RARE, mage.cards.c.CurseOfMaritLage.class));
         cards.add(new SetCardInfo("Dance of the Dead", 6, Rarity.UNCOMMON, mage.cards.d.DanceOfTheDead.class));
         cards.add(new SetCardInfo("Dark Banishing", 7, Rarity.COMMON, mage.cards.d.DarkBanishing.class));
