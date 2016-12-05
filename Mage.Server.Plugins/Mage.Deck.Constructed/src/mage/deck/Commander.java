@@ -217,8 +217,10 @@ public class Commander extends Constructed {
 
             // Examine rules to work out most egregious functions in edh
             boolean anyNumberOfTarget = false;
+            boolean annihilator = false;
             boolean buyback = false;
             boolean cascade = false;
+            boolean cantBe = false;
             boolean copy = false;
             boolean costLessEach = false;
             boolean exile = false;
@@ -240,11 +242,14 @@ public class Commander extends Constructed {
             boolean persist = false;
             boolean proliferate = false;
             boolean protection = false;
+            boolean putUnderYourControl = false;
             boolean retrace = false;
             boolean sacrifice = false;
             boolean shroud = false;
             boolean skip = false;
             boolean sliver = false;
+            boolean storm = false;
+            boolean trample = false;
             boolean tutor = false;
             boolean unblockable = false;
             boolean undying = false;
@@ -253,8 +258,10 @@ public class Commander extends Constructed {
 
             for (String str : card.getRules()) {
                 String s = str.toLowerCase();
+                annihilator |= s.contains("annihilator");
                 anyNumberOfTarget |= s.contains("any number");
                 buyback |= s.contains("buyback");
+                cantBe |= s.contains("can't be");
                 cascade |= s.contains("cascade");
                 copy |= s.contains("copy");
                 costLessEach |= s.contains("cost") || s.contains("less") || s.contains("each");
@@ -278,11 +285,14 @@ public class Commander extends Constructed {
                 persist |= s.contains("persist");
                 proliferate |= s.contains("proliferate");
                 protection |= s.contains("protection");
+                putUnderYourControl |= s.contains("put") && s.contains("under your control");
                 retrace |= s.contains("retrace");
                 sacrifice |= s.contains("sacrifice");
                 shroud |= s.contains("shroud");
                 skip |= s.contains("skip");
                 sliver |= s.contains("sliver");
+                storm |= s.contains("storm");
+                trample |= s.contains("trample");
                 tutor |= s.contains("search your library");
                 unblockable |= s.contains("can't be blocked");
                 undying |= s.contains("undying");
@@ -299,13 +309,16 @@ public class Commander extends Constructed {
             if (tutor) {
                 thisMaxPower = Math.max(thisMaxPower, 6);
             }
+            if (annihilator) {
+                thisMaxPower = Math.max(thisMaxPower, 5);
+            }
+            if (costLessEach) {
+                thisMaxPower = Math.max(thisMaxPower, 5);
+            }
             if (infect) {
                 thisMaxPower = Math.max(thisMaxPower, 5);
             }
             if (overload) {
-                thisMaxPower = Math.max(thisMaxPower, 5);
-            }
-            if (costLessEach) {
                 thisMaxPower = Math.max(thisMaxPower, 5);
             }
             if (cascade) {
@@ -332,7 +345,13 @@ public class Commander extends Constructed {
             if (protection) {
                 thisMaxPower = Math.max(thisMaxPower, 4);
             }
+            if (putUnderYourControl) {
+                thisMaxPower = Math.max(thisMaxPower, 4);
+            }            
             if (skip) {
+                thisMaxPower = Math.max(thisMaxPower, 4);
+            }
+            if (storm) {
                 thisMaxPower = Math.max(thisMaxPower, 4);
             }
             if (unblockable) {
@@ -361,6 +380,9 @@ public class Commander extends Constructed {
             }
             if (persist) {
                 thisMaxPower = Math.max(thisMaxPower, 3);
+            }
+            if (cantBe) {
+                thisMaxPower = Math.max(thisMaxPower, 2);
             }
             if (exile) {
                 thisMaxPower = Math.max(thisMaxPower, 2);
@@ -392,11 +414,17 @@ public class Commander extends Constructed {
             if (retrace) {
                 thisMaxPower = Math.max(thisMaxPower, 1);
             }
+            if (trample) {
+                thisMaxPower = Math.max(thisMaxPower, 1);
+            }
 
             // Planeswalkers
             if (card.getCardType().contains(CardType.PLANESWALKER)) {
                 if (card.getName().toLowerCase().equals("jace, the mind sculptor")) {
                     thisMaxPower = Math.max(thisMaxPower, 5);
+                }
+                if (card.getName().toLowerCase().equals("ugin, the spirit dragon")) {
+                    thisMaxPower = Math.max(thisMaxPower, 4);
                 }
                 thisMaxPower = Math.max(thisMaxPower, 3);
             }
@@ -478,7 +506,6 @@ public class Commander extends Constructed {
                     || cn.equals("strip mine")
                     || cn.equals("the tabernacle at pendrell vale")
                     || cn.equals("tinker")
-                    || cn.equals("tolarian academy")
                     || cn.equals("treasure cruise")
                     || cn.equals("urabrask the hidden")
                     || cn.equals("vorinclex, voice of hunger")
