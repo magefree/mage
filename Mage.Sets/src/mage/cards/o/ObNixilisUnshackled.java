@@ -47,7 +47,7 @@ import mage.game.Game;
 import mage.game.events.GameEvent;
 import mage.game.events.GameEvent.EventType;
 import mage.players.Player;
-import mage.target.TargetPlayer;
+import mage.target.targetpointer.FixedTarget;
 
 /**
  *
@@ -110,8 +110,7 @@ class ObNixilisUnshackledTriggeredAbility extends TriggeredAbilityImpl {
     public boolean checkTrigger(GameEvent event, Game game) {
         Player controller = game.getPlayer(this.getControllerId());
         if (controller != null && game.isOpponent(controller, event.getTargetId())) {
-            this.addTarget(new TargetPlayer());
-            getTargets().get(0).add(event.getPlayerId(), game);
+            getEffects().get(0).setTargetPointer(new FixedTarget(event.getPlayerId()));
             return true;
         }
         return false;
