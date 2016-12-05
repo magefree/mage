@@ -18,7 +18,9 @@
 1 [C16:259] Keening Stone
 1 [C16:55] Prismatic Geoscope
 1 [C16:216] Progenitor Mimic
-5 [C16:337] Plains
+2 [C16:337] Plains
+2 [C16:338] Plains
+1 [C16:339] Plains
 1 [C16:219] Rubblehulk
 1 [C16:4] Selfless Squire
 1 [C16:3] Orzhov Advokist
@@ -66,7 +68,9 @@
 1 [C16:83] Arcane Denial
 1 [C16:141] Beast Within
 1 [C16:80] Windborn Muse
-5 [C16:340] Island
+2 [C16:340] Island
+1 [C16:341] Island
+2 [C16:342] Island
 1 [C16:220] Selvala, Explorer Returned
 1 [C16:145] Collective Voyage
 1 [C16:146] Cultivate
@@ -75,10 +79,14 @@
 1 [C16:301] Homeward Path
 1 [C16:47] Treacherous Terrain
 1 [C16:302] Izzet Boilerworks
-5 [C16:346] Mountain
+1 [C16:346] Mountain
+2 [C16:347] Mountain
+2 [C16:348] Mountain
 1 [C16:304] Jungle Shrine
 1 [C16:44] Sylvan Reclamation
-5 [C16:349] Forest
+1 [C16:349] Forest
+2 [C16:350] Forest
+2 [C16:351] Forest
 1 [C16:306] Krosan Verge
 1 [C16:309] Myriad Landscape
 SB: 1 [C16:36] Kynaios and Tiro of Meletis
