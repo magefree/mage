@@ -27,13 +27,15 @@
  */
 package mage.sets;
 
-import java.util.ArrayList;
-import java.util.List;
 import mage.cards.ExpansionSet;
 import mage.cards.repository.CardCriteria;
 import mage.cards.repository.CardInfo;
 import mage.cards.repository.CardRepository;
+import mage.constants.Rarity;
 import mage.constants.SetType;
+
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  *
@@ -64,6 +66,7 @@ public class AetherRevolt extends ExpansionSet {
          premium mythic rare. These ratios may change for future sets. */
         this.ratioBoosterSpecialLand = 144;
         this.parentSet = Kaladesh.getInstance();
+        cards.add(new SetCardInfo("Disallow", 31, Rarity.RARE, mage.cards.d.Disallow.class));
     }
 
     @Override
