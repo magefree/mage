@@ -64,9 +64,12 @@ public class AetherRevolt extends ExpansionSet {
         this.maxCardNumberInBooster = 184;
         this.ratioBoosterSpecialLand = 144;
         this.parentSet = Kaladesh.getInstance();
+        cards.add(new SetCardInfo("Ajani Unyielding", 127, Rarity.MYTHIC, mage.cards.a.AjaniUnyielding.class));
         cards.add(new SetCardInfo("Ajani, Valiant Protector", 185, Rarity.MYTHIC, mage.cards.a.AjaniValiantProtector.class));
         cards.add(new SetCardInfo("Disallow", 31, Rarity.RARE, mage.cards.d.Disallow.class));
         cards.add(new SetCardInfo("Tezzeret, Master of Metal", 190, Rarity.MYTHIC, mage.cards.t.TezzeretMasterOfMetal.class));
+        cards.add(new SetCardInfo("Pia's Revolution", 91, Rarity.RARE, mage.cards.p.PiasRevolution.class));
+        cards.add(new SetCardInfo("Trophy Mage", 48, Rarity.UNCOMMON, mage.cards.t.TrophyMage.class));
         cards.add(new SetCardInfo("Yaheeni's Expertise", 75, Rarity.RARE, mage.cards.y.YaheenisExpertise.class));
     }
 

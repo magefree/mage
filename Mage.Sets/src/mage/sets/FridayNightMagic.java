@@ -126,6 +126,7 @@ public class FridayNightMagic extends ExpansionSet {
         cards.add(new SetCardInfo("Forbid", 27, Rarity.UNCOMMON, mage.cards.f.Forbid.class));
         cards.add(new SetCardInfo("Forbidden Alchemy", 146, Rarity.COMMON, mage.cards.f.ForbiddenAlchemy.class));
         cards.add(new SetCardInfo("Force Spike", 91, Rarity.COMMON, mage.cards.f.ForceSpike.class));
+        cards.add(new SetCardInfo("Fortune's Favor", 201, Rarity.COMMON, mage.cards.f.FortunesFavor.class));
         cards.add(new SetCardInfo("Frenzied Goblin", 176, Rarity.UNCOMMON, mage.cards.f.FrenziedGoblin.class));
         cards.add(new SetCardInfo("Frost Walker", 181, Rarity.UNCOMMON, mage.cards.f.FrostWalker.class));
         cards.add(new SetCardInfo("Gatekeeper of Malakir", 126, Rarity.UNCOMMON, mage.cards.g.GatekeeperOfMalakir.class));

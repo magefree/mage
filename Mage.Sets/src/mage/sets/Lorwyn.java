@@ -97,6 +97,8 @@ public class Lorwyn extends ExpansionSet {
         cards.add(new SetCardInfo("Cloudcrown Oak", 201, Rarity.COMMON, mage.cards.c.CloudcrownOak.class));
         cards.add(new SetCardInfo("Cloudgoat Ranger", 10, Rarity.UNCOMMON, mage.cards.c.CloudgoatRanger.class));
         cards.add(new SetCardInfo("Cloudthresher", 202, Rarity.RARE, mage.cards.c.Cloudthresher.class));
+        cards.add(new SetCardInfo("Colfenor's Plans", 106, Rarity.RARE, mage.cards.c.ColfenorsPlans.class));
+        cards.add(new SetCardInfo("Colfenor's Urn", 254, Rarity.RARE, mage.cards.c.ColfenorsUrn.class));
         cards.add(new SetCardInfo("Consuming Bonfire", 161, Rarity.COMMON, mage.cards.c.ConsumingBonfire.class));
         cards.add(new SetCardInfo("Crib Swap", 11, Rarity.UNCOMMON, mage.cards.c.CribSwap.class));
         cards.add(new SetCardInfo("Crush Underfoot", 162, Rarity.UNCOMMON, mage.cards.c.CrushUnderfoot.class));

@@ -34,6 +34,7 @@ import mage.abilities.effects.common.ReturnToHandSourceEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
+import mage.constants.SetTargetPointer;
 import mage.constants.TargetController;
 import mage.constants.Zone;
 import mage.filter.FilterPermanent;
@@ -53,14 +54,14 @@ public class OvalchaseDaredevil extends CardImpl {
     }
 
     public OvalchaseDaredevil(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{3}{B}");
+        super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{3}{B}");
         this.subtype.add("Human");
         this.subtype.add("Pilot");
         this.power = new MageInt(4);
         this.toughness = new MageInt(2);
 
         // Whenever an artifact enters the battlefield under your control, you may return Ovalchase Daredevil from your graveyard to your hand.
-        this.addAbility(new EntersBattlefieldAllTriggeredAbility(Zone.GRAVEYARD, new ReturnToHandSourceEffect(), filter, true));
+        this.addAbility(new EntersBattlefieldAllTriggeredAbility(Zone.GRAVEYARD, new ReturnToHandSourceEffect(), filter, true, SetTargetPointer.NONE, null, true));
     }
 
     public OvalchaseDaredevil(final OvalchaseDaredevil card) {

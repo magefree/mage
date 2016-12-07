@@ -49,7 +49,7 @@ import mage.filter.common.FilterAttackingCreature;
 public class JazalGoldmane extends CardImpl {
 
     public JazalGoldmane(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{2}{W}{W}");
+        super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{2}{W}{W}");
         this.supertype.add("Legendary");
         this.subtype.add("Cat");
         this.subtype.add("Warrior");
@@ -63,7 +63,7 @@ public class JazalGoldmane extends CardImpl {
         DynamicValue xValue = new AttackingCreatureCount("the number of attacking creatures");
         this.addAbility(new SimpleActivatedAbility(
                 Zone.BATTLEFIELD,
-                new BoostControlledEffect(xValue, xValue , Duration.EndOfTurn, new FilterAttackingCreature("Attacking creatures"), false),
+                new BoostControlledEffect(xValue, xValue, Duration.EndOfTurn, new FilterAttackingCreature("Attacking creatures"), false, true),
                 new ManaCostsImpl("{3}{W}{W}")));
     }
 
