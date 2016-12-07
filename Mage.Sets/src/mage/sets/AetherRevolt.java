@@ -27,13 +27,15 @@
  */
 package mage.sets;
 
-import java.util.ArrayList;
-import java.util.List;
 import mage.cards.ExpansionSet;
 import mage.cards.repository.CardCriteria;
 import mage.cards.repository.CardInfo;
 import mage.cards.repository.CardRepository;
+import mage.constants.Rarity;
 import mage.constants.SetType;
+
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  *
@@ -59,11 +61,16 @@ public class AetherRevolt extends ExpansionSet {
         this.numBoosterUncommon = 3;
         this.numBoosterRare = 1;
         this.ratioBoosterMythic = 8;
-        /* The Masterpiece Series will exist at a rarity higher than mythic rare. For example, in Kaladesh, you will open a Kaladesh Inventions card roughly
-         1 out of every 144 boosters. (Technically, the Kaladesh booster pack says the ratio is 1:2,160 cards.) This is slightly more often than opening a
-         premium mythic rare. These ratios may change for future sets. */
+        this.maxCardNumberInBooster = 184;
         this.ratioBoosterSpecialLand = 144;
         this.parentSet = Kaladesh.getInstance();
+        cards.add(new SetCardInfo("Ajani Unyielding", 127, Rarity.MYTHIC, mage.cards.a.AjaniUnyielding.class));
+        cards.add(new SetCardInfo("Ajani, Valiant Protector", 185, Rarity.MYTHIC, mage.cards.a.AjaniValiantProtector.class));
+        cards.add(new SetCardInfo("Disallow", 31, Rarity.RARE, mage.cards.d.Disallow.class));
+        cards.add(new SetCardInfo("Tezzeret, Master of Metal", 190, Rarity.MYTHIC, mage.cards.t.TezzeretMasterOfMetal.class));
+        cards.add(new SetCardInfo("Pia's Revolution", 91, Rarity.RARE, mage.cards.p.PiasRevolution.class));
+        cards.add(new SetCardInfo("Trophy Mage", 48, Rarity.UNCOMMON, mage.cards.t.TrophyMage.class));
+        cards.add(new SetCardInfo("Yaheeni's Expertise", 75, Rarity.RARE, mage.cards.y.YaheenisExpertise.class));
     }
 
     @Override
