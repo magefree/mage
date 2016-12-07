@@ -211,6 +211,8 @@ public class Commander extends Constructed {
         }
 
         int edhPowerLevel = 0;
+        int numberInfinitePieces = 0;
+        
         for (Card card : deck.getCards()) {
 
             int thisMaxPower = 0;
@@ -223,6 +225,7 @@ public class Commander extends Constructed {
             boolean cantBe = false;
             boolean copy = false;
             boolean costLessEach = false;
+            boolean dredge = false;
             boolean exile = false;
             boolean exileAll = false;
             boolean counter = false;
@@ -232,11 +235,14 @@ public class Commander extends Constructed {
             boolean exalted = false;
             boolean doesntUntap = false;
             boolean drawCards = false;
+            boolean evoke = false;
             boolean extraTurns = false;
+            boolean flicker = false;
             boolean gainControl = false;
             boolean hexproof = false;
             boolean infect = false;
             boolean mayCastForFree = false;
+            boolean menace = false;
             boolean miracle = false;
             boolean overload = false;
             boolean persist = false;
@@ -244,6 +250,7 @@ public class Commander extends Constructed {
             boolean protection = false;
             boolean putUnderYourControl = false;
             boolean retrace = false;
+            boolean returnFromYourGY = false;
             boolean sacrifice = false;
             boolean shroud = false;
             boolean skip = false;
@@ -251,9 +258,11 @@ public class Commander extends Constructed {
             boolean storm = false;
             boolean trample = false;
             boolean tutor = false;
+            boolean twiceAs = false;
             boolean unblockable = false;
             boolean undying = false;
             boolean wheneverEnters = false;
+            boolean whenCounterThatSpell = false;
             boolean youControlTarget = false;
 
             for (String str : card.getRules()) {
@@ -271,15 +280,19 @@ public class Commander extends Constructed {
                 doesntUntap |= s.contains("doesn't untap");
                 doesntUntap |= s.contains("don't untap");
                 drawCards |= s.contains("draw cards");
+                dredge |= s.contains("dredge");
                 each |= s.contains("each");
+                evoke |= s.contains("evoke");
                 exalted |= s.contains("exalted");
                 exile |= s.contains("exile");
                 exileAll |= s.contains("exile") && s.contains(" all ");
                 extraTurns |= s.contains("extra turn");
+                flicker |= s.contains("exile") && s.contains("return") && s.contains("to the battlefield under");
                 gainControl |= s.contains("gain control");
                 hexproof |= s.contains("hexproof");
                 infect |= s.contains("infect");
                 mayCastForFree |= s.contains("may cast") && s.contains("without paying");
+                menace |= s.contains("menace");
                 miracle |= s.contains("miracle");
                 overload |= s.contains("overload");
                 persist |= s.contains("persist");
@@ -287,6 +300,7 @@ public class Commander extends Constructed {
                 protection |= s.contains("protection");
                 putUnderYourControl |= s.contains("put") && s.contains("under your control");
                 retrace |= s.contains("retrace");
+                returnFromYourGY |= s.contains("return") && s.contains("from your graveyard");
                 sacrifice |= s.contains("sacrifice");
                 shroud |= s.contains("shroud");
                 skip |= s.contains("skip");
@@ -294,8 +308,10 @@ public class Commander extends Constructed {
                 storm |= s.contains("storm");
                 trample |= s.contains("trample");
                 tutor |= s.contains("search your library");
+                twiceAs |= s.contains("twice that many") || s.contains("twice as much");
                 unblockable |= s.contains("can't be blocked");
                 undying |= s.contains("undying");
+                whenCounterThatSpell |= s.contains("when") && s.contains("counter that spell");
                 wheneverEnters |= s.contains("when") && s.contains("another") && s.contains("enters");
                 youControlTarget |= s.contains("you control target");
             }
@@ -321,6 +337,9 @@ public class Commander extends Constructed {
             if (overload) {
                 thisMaxPower = Math.max(thisMaxPower, 5);
             }
+            if (twiceAs) {
+                thisMaxPower = Math.max(thisMaxPower, 5);
+            }
             if (cascade) {
                 thisMaxPower = Math.max(thisMaxPower, 4);
             }
@@ -331,6 +350,9 @@ public class Commander extends Constructed {
                 thisMaxPower = Math.max(thisMaxPower, 4);
             }
             if (exileAll) {
+                thisMaxPower = Math.max(thisMaxPower, 4);
+            }
+            if (flicker) {
                 thisMaxPower = Math.max(thisMaxPower, 4);
             }
             if (gainControl) {
@@ -347,7 +369,10 @@ public class Commander extends Constructed {
             }
             if (putUnderYourControl) {
                 thisMaxPower = Math.max(thisMaxPower, 4);
-            }            
+            }
+            if (returnFromYourGY) {
+                thisMaxPower = Math.max(thisMaxPower, 4);
+            }
             if (skip) {
                 thisMaxPower = Math.max(thisMaxPower, 4);
             }
@@ -355,6 +380,9 @@ public class Commander extends Constructed {
                 thisMaxPower = Math.max(thisMaxPower, 4);
             }
             if (unblockable) {
+                thisMaxPower = Math.max(thisMaxPower, 4);
+            }
+            if (whenCounterThatSpell) {
                 thisMaxPower = Math.max(thisMaxPower, 4);
             }
             if (wheneverEnters) {
@@ -367,6 +395,9 @@ public class Commander extends Constructed {
                 thisMaxPower = Math.max(thisMaxPower, 3);
             }
             if (destroyAll) {
+                thisMaxPower = Math.max(thisMaxPower, 3);
+            }
+            if (dredge) {
                 thisMaxPower = Math.max(thisMaxPower, 3);
             }
             if (hexproof) {
@@ -384,7 +415,13 @@ public class Commander extends Constructed {
             if (cantBe) {
                 thisMaxPower = Math.max(thisMaxPower, 2);
             }
+            if (evoke) {
+                thisMaxPower = Math.max(thisMaxPower, 2);
+            }
             if (exile) {
+                thisMaxPower = Math.max(thisMaxPower, 2);
+            }
+            if (menace) {
                 thisMaxPower = Math.max(thisMaxPower, 2);
             }
             if (miracle) {
@@ -421,12 +458,12 @@ public class Commander extends Constructed {
             // Planeswalkers
             if (card.getCardType().contains(CardType.PLANESWALKER)) {
                 if (card.getName().toLowerCase().equals("jace, the mind sculptor")) {
-                    thisMaxPower = Math.max(thisMaxPower, 5);
+                    thisMaxPower = Math.max(thisMaxPower, 6);
                 }
                 if (card.getName().toLowerCase().equals("ugin, the spirit dragon")) {
-                    thisMaxPower = Math.max(thisMaxPower, 4);
+                    thisMaxPower = Math.max(thisMaxPower, 5);
                 }
-                thisMaxPower = Math.max(thisMaxPower, 3);
+                thisMaxPower = Math.max(thisMaxPower, 4);
             }
 
             if (card.getCardType().contains(CardType.LAND)) {
@@ -521,12 +558,14 @@ public class Commander extends Constructed {
                     || cn.equals("basalt monolith") || cn.equals("brago, king eternal")
                     || cn.equals("candelabra of tawnos") || cn.equals("cephalid aristocrat")
                     || cn.equals("cephalid illusionist") || cn.equals("changeling berserker")
+                    || cn.equals("the chain veil")
                     || cn.equals("cinderhaze wretch") || cn.equals("cryptic gateway")
                     || cn.equals("deadeye navigator") || cn.equals("derevi, empyrial tactician")
                     || cn.equals("doubling season") || cn.equals("dross scorpion")
                     || cn.equals("earthcraft") || cn.equals("erratic portal")
                     || cn.equals("enter the infinite") || cn.equals("omniscience")
                     || cn.equals("exquisite blood") || cn.equals("future sight")
+                    || cn.equals("ghave, guru of spores")
                     || cn.equals("grave titan") || cn.equals("great whale")
                     || cn.equals("grim monolith") || cn.equals("gush")
                     || cn.equals("hellkite charger") || cn.equals("intruder alarm")
@@ -559,6 +598,7 @@ public class Commander extends Constructed {
                     || cn.equals("worthy cause") || cn.equals("yawgmoth's will")
                     || cn.equals("zealous conscripts")) {
                 thisMaxPower = Math.max(thisMaxPower, 7);
+                numberInfinitePieces ++;
             }
             edhPowerLevel += thisMaxPower;
         }
@@ -593,7 +633,7 @@ public class Commander extends Constructed {
                     || cn.equals("sheoldred, whispering one")
                     || cn.equals("teferi, mage of zhalfir")
                     || cn.equals("zur the enchanter")) {
-                thisMaxPower = Math.max(thisMaxPower, 15);
+                thisMaxPower = Math.max(thisMaxPower, 25);
             }
 
             // Next least fun commanders
@@ -611,12 +651,13 @@ public class Commander extends Constructed {
                     || cn.equals("sen triplets")
                     || cn.equals("urabrask the hidden")
                     || cn.equals("vorinclex, voice of hunger")) {
-                thisMaxPower = Math.max(thisMaxPower, 10);
+                thisMaxPower = Math.max(thisMaxPower, 15);
             }
             edhPowerLevel += thisMaxPower;
         }
 
-        edhPowerLevel = (int) Math.round(edhPowerLevel / 2.5);
+        edhPowerLevel += numberInfinitePieces * 10;
+        edhPowerLevel = (int) Math.round(edhPowerLevel / 3.5);
         if (edhPowerLevel > 100) {
             edhPowerLevel = 100;
         }
