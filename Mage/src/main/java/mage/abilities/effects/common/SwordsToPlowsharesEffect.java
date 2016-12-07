@@ -25,41 +25,45 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.cards.s;
 
-import mage.abilities.effects.common.ExileTargetEffect;
-import mage.abilities.effects.common.SwordsToPlowsharesEffect;
-import mage.cards.CardImpl;
-import mage.cards.CardSetInfo;
-import mage.constants.CardType;
-import mage.target.common.TargetCreaturePermanent;
+package mage.abilities.effects.common;
 
-import java.util.UUID;
+import mage.abilities.Ability;
+import mage.abilities.effects.OneShotEffect;
+import mage.constants.Outcome;
+import mage.game.Game;
+import mage.game.permanent.Permanent;
+import mage.players.Player;
 
 /**
- *
- * @author jonubuu
+ * @author JRHerlehy
  */
-public class SwordsToPlowshares extends CardImpl {
+public class SwordsToPlowsharesEffect extends OneShotEffect {
 
-    public SwordsToPlowshares(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.INSTANT},"{W}");
-
-
-        // Exile target creature.
-        this.getSpellAbility().addTarget(new TargetCreaturePermanent());
-        this.getSpellAbility().addEffect(new ExileTargetEffect());
-        // Its controller gains life equal to its power.
-        this.getSpellAbility().addEffect(new SwordsToPlowsharesEffect());
-
+    public SwordsToPlowsharesEffect() {
+        super(Outcome.GainLife);
+        staticText = "Its controller gains life equal to its power";
     }
 
-    public SwordsToPlowshares(final SwordsToPlowshares card) {
-        super(card);
+    public SwordsToPlowsharesEffect(final SwordsToPlowsharesEffect effect) {
+        super(effect);
     }
 
     @Override
-    public SwordsToPlowshares copy() {
-        return new SwordsToPlowshares(this);
+    public SwordsToPlowsharesEffect copy() {
+        return new SwordsToPlowsharesEffect(this);
+    }
+
+    @Override
+    public boolean apply(Game game, Ability source) {
+        Permanent permanent = game.getPermanentOrLKIBattlefield(getTargetPointer().getFirst(game, source));
+        if (permanent != null) {
+            Player player = game.getPlayer(permanent.getControllerId());
+            if (player != null) {
+                player.gainLife(permanent.getPower().getValue(), game);
+            }
+            return true;
+        }
+        return false;
     }
 }
