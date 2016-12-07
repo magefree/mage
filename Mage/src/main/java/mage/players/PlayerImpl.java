@@ -1231,14 +1231,14 @@ public abstract class PlayerImpl implements Player, Serializable {
     }
 
     @Override
-    public boolean triggerAbility(TriggeredAbility source, Game game) {
-        if (source == null) {
+    public boolean triggerAbility(TriggeredAbility triggeredAbility, Game game) {
+        if (triggeredAbility == null) {
             logger.warn("Null source in triggerAbility method");
             throw new IllegalArgumentException("source TriggeredAbility  must not be null");
         }
         //20091005 - 603.3c, 603.3d
         int bookmark = game.bookmarkState();
-        TriggeredAbility ability = source.copy();
+        TriggeredAbility ability = triggeredAbility.copy();
         MageObject sourceObject = ability.getSourceObject(game);
         if (sourceObject != null) {
             sourceObject.adjustTargets(ability, game);
@@ -1260,7 +1260,7 @@ public abstract class PlayerImpl implements Player, Serializable {
                 return true;
             }
         }
-        restoreState(bookmark, source.getRule(), game); // why restore is needed here? (to remove the triggered ability from the stack)
+        restoreState(bookmark, triggeredAbility.getRule(), game); // why restore is needed here? (to remove the triggered ability from the stack)
         return false;
     }
 
@@ -1829,9 +1829,6 @@ public abstract class PlayerImpl implements Player, Serializable {
                     if (sourceAbilities != null && sourceAbilities.containsKey(InfectAbility.getInstance().getId())) {
                         addCounters(CounterType.POISON.createInstance(actualDamage), game);
                     } else {
-                        if (getId().equals(game.getMonarchId()) && sourceControllerId != null) {
-                            game.setMonarchId(null, sourceControllerId);
-                        }
                         GameEvent damageToLifeLossEvent = new GameEvent(EventType.DAMAGE_CAUSES_LIFE_LOSS, playerId, sourceId, playerId, actualDamage, combatDamage);
                         if (!game.replaceEvent(damageToLifeLossEvent)) {
                             this.loseLife(damageToLifeLossEvent.getAmount(), game, combatDamage);

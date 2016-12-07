@@ -39,6 +39,7 @@ import java.util.concurrent.ConcurrentHashMap;
 import mage.MageObject;
 import mage.cards.Card;
 import mage.constants.Zone;
+import mage.designations.Designation;
 import mage.game.Game;
 import mage.game.events.GameEvent;
 import mage.game.events.NumberOfTriggersEvent;
@@ -146,6 +147,8 @@ public class TriggeredAbilities extends ConcurrentHashMap<String, TriggeredAbili
     public void add(TriggeredAbility ability, UUID sourceId, MageObject attachedTo) {
         if (sourceId == null) {
             add(ability, attachedTo);
+        } else if (attachedTo == null) {
+            this.put(ability.getId() + "_" + sourceId, ability);
         } else {
             this.add(ability, attachedTo);
             List<UUID> uuidList = new LinkedList<>();
@@ -190,8 +193,14 @@ public class TriggeredAbilities extends ConcurrentHashMap<String, TriggeredAbili
     public void removeAbilitiesOfNonExistingSources(Game game) {
         // e.g. Token that had triggered abilities
         List<String> keysToRemove = new ArrayList<>();
+        Abilities:
         for (Entry<String, TriggeredAbility> entry : this.entrySet()) {
             if (game.getObject(entry.getValue().getSourceId()) == null) {
+                for (Designation designation : game.getState().getDesignations()) {
+                    if (designation.getId().equals(entry.getValue().getSourceId())) {
+                        continue Abilities;
+                    }
+                }
                 keysToRemove.add(entry.getKey());
             }
         }

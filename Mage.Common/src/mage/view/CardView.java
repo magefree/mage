@@ -45,6 +45,7 @@ import mage.constants.Rarity;
 import mage.constants.Zone;
 import mage.counters.Counter;
 import mage.counters.CounterType;
+import mage.designations.Designation;
 import mage.game.Game;
 import mage.game.command.Emblem;
 import mage.game.permanent.Permanent;
@@ -138,8 +139,7 @@ public class CardView extends SimpleCardView {
         this(card, game, false);
         this.id = cardId;
     }
-    
-    
+
     public CardView(CardView cardView) {
         super(cardView.id, cardView.expansionSetCode, cardView.cardNumber, cardView.usesVariousArt, cardView.tokenSetCode, cardView.gameObject, cardView.tokenDescriptor);
 
@@ -485,6 +485,20 @@ public class CardView extends SimpleCardView {
         // emblem images are always with common (black) symbol
         this.frameStyle = FrameStyle.M15_NORMAL;
         this.expansionSetCode = emblem.getExpansionSetCode();
+        this.rarity = Rarity.COMMON;
+    }
+
+    public CardView(Designation designation, StackAbility stackAbility) {
+        this(true);
+        this.gameObject = true;
+        this.id = designation.getId();
+        this.mageObjectType = MageObjectType.NULL;
+        this.name = designation.getName();
+        this.displayName = name;
+        this.rules = new ArrayList<>();
+        this.rules.add(stackAbility.getRule(designation.getName()));
+        this.frameStyle = FrameStyle.M15_NORMAL;
+        this.expansionSetCode = designation.getExpansionSetCodeForImage();
         this.rarity = Rarity.COMMON;
     }
 
