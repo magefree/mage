@@ -225,6 +225,7 @@ public class Commander extends Constructed {
             boolean cantBe = false;
             boolean copy = false;
             boolean costLessEach = false;
+            boolean createToken = false;
             boolean dredge = false;
             boolean exile = false;
             boolean exileAll = false;
@@ -275,6 +276,7 @@ public class Commander extends Constructed {
                 copy |= s.contains("copy");
                 costLessEach |= s.contains("cost") || s.contains("less") || s.contains("each");
                 counter |= s.contains("counter") && s.contains("target");
+                createToken |= s.contains("create") && s.contains("token");
                 destroy |= s.contains("destroy");
                 destroyAll |= s.contains("destroy all");
                 doesntUntap |= s.contains("doesn't untap");
@@ -392,6 +394,9 @@ public class Commander extends Constructed {
                 thisMaxPower = Math.max(thisMaxPower, 4);
             }
             if (anyNumberOfTarget) {
+                thisMaxPower = Math.max(thisMaxPower, 3);
+            }
+            if (createToken) {
                 thisMaxPower = Math.max(thisMaxPower, 3);
             }
             if (destroyAll) {
