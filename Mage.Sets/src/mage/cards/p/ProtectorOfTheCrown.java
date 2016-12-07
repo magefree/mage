@@ -55,6 +55,7 @@ public class ProtectorOfTheCrown extends CardImpl {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{5}{W}");
 
         this.subtype.add("Giant");
+        this.subtype.add("Soldier");
         this.power = new MageInt(2);
         this.toughness = new MageInt(5);
 
