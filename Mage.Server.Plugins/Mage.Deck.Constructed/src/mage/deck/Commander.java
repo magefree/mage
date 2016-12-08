@@ -32,7 +32,9 @@ import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import mage.abilities.Ability;
 import mage.abilities.common.CanBeYourCommanderAbility;
+import mage.abilities.costs.mana.ManaCost;
 import mage.abilities.keyword.PartnerAbility;
 import mage.cards.Card;
 import mage.cards.ExpansionSet;
@@ -212,7 +214,7 @@ public class Commander extends Constructed {
 
         int edhPowerLevel = 0;
         int numberInfinitePieces = 0;
-        
+
         for (Card card : deck.getCards()) {
 
             int thisMaxPower = 0;
@@ -262,8 +264,10 @@ public class Commander extends Constructed {
             boolean twiceAs = false;
             boolean unblockable = false;
             boolean undying = false;
+            boolean untapTarget = false;
             boolean wheneverEnters = false;
             boolean whenCounterThatSpell = false;
+            boolean xCost = false;
             boolean youControlTarget = false;
 
             for (String str : card.getRules()) {
@@ -313,9 +317,23 @@ public class Commander extends Constructed {
                 twiceAs |= s.contains("twice that many") || s.contains("twice as much");
                 unblockable |= s.contains("can't be blocked");
                 undying |= s.contains("undying");
+                untapTarget |= s.contains("untap target");
                 whenCounterThatSpell |= s.contains("when") && s.contains("counter that spell");
                 wheneverEnters |= s.contains("when") && s.contains("another") && s.contains("enters");
                 youControlTarget |= s.contains("you control target");
+            }
+
+            for (ManaCost cost : card.getManaCost()) {
+                if (cost.getText().contains("X")) {
+                    xCost = true;
+                }
+            }
+            for (Ability a : card.getAbilities()) {
+                for (ManaCost cost : a.getManaCosts()) {
+                    if (cost.getText().contains("X")) {
+                        xCost = true;
+                    }
+                }
             }
 
             if (extraTurns) {
@@ -390,6 +408,9 @@ public class Commander extends Constructed {
             if (wheneverEnters) {
                 thisMaxPower = Math.max(thisMaxPower, 4);
             }
+            if (xCost) {
+                thisMaxPower = Math.max(thisMaxPower, 4);
+            }
             if (youControlTarget) {
                 thisMaxPower = Math.max(thisMaxPower, 4);
             }
@@ -436,6 +457,9 @@ public class Commander extends Constructed {
                 thisMaxPower = Math.max(thisMaxPower, 2);
             }
             if (sacrifice) {
+                thisMaxPower = Math.max(thisMaxPower, 2);
+            }
+            if (untapTarget) {
                 thisMaxPower = Math.max(thisMaxPower, 2);
             }
             if (copy) {
@@ -603,7 +627,7 @@ public class Commander extends Constructed {
                     || cn.equals("worthy cause") || cn.equals("yawgmoth's will")
                     || cn.equals("zealous conscripts")) {
                 thisMaxPower = Math.max(thisMaxPower, 7);
-                numberInfinitePieces ++;
+                numberInfinitePieces++;
             }
             edhPowerLevel += thisMaxPower;
         }
@@ -662,7 +686,7 @@ public class Commander extends Constructed {
         }
 
         edhPowerLevel += numberInfinitePieces * 10;
-        edhPowerLevel = (int) Math.round(edhPowerLevel / 3.5);
+        edhPowerLevel = (int) Math.round(edhPowerLevel / 4.5);
         if (edhPowerLevel > 100) {
             edhPowerLevel = 100;
         }
