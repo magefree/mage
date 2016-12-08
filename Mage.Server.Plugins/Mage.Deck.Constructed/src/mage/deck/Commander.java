@@ -249,6 +249,7 @@ public class Commander extends Constructed {
             boolean miracle = false;
             boolean overload = false;
             boolean persist = false;
+            boolean preventDamage = false;
             boolean proliferate = false;
             boolean protection = false;
             boolean putUnderYourControl = false;
@@ -261,6 +262,7 @@ public class Commander extends Constructed {
             boolean storm = false;
             boolean trample = false;
             boolean tutor = false;
+            boolean tutorBasic = false;
             boolean twiceAs = false;
             boolean unblockable = false;
             boolean undying = false;
@@ -302,7 +304,8 @@ public class Commander extends Constructed {
                 miracle |= s.contains("miracle");
                 overload |= s.contains("overload");
                 persist |= s.contains("persist");
-                proliferate |= s.contains("proliferate");
+                preventDamage |= s.contains("prevent") && s.contains("all") && s.contains("damage");
+                proliferate |= s.contains("proliferate");                
                 protection |= s.contains("protection");
                 putUnderYourControl |= s.contains("put") && s.contains("under your control");
                 retrace |= s.contains("retrace");
@@ -313,7 +316,8 @@ public class Commander extends Constructed {
                 sliver |= s.contains("sliver");
                 storm |= s.contains("storm");
                 trample |= s.contains("trample");
-                tutor |= s.contains("search your library");
+                tutor |= s.contains("search your library") && !s.contains("basic land");
+                tutorBasic |= s.contains("search your library") && s.contains("basic land");
                 twiceAs |= s.contains("twice that many") || s.contains("twice as much");
                 unblockable |= s.contains("can't be blocked");
                 undying |= s.contains("undying");
@@ -379,6 +383,9 @@ public class Commander extends Constructed {
                 thisMaxPower = Math.max(thisMaxPower, 4);
             }
             if (mayCastForFree) {
+                thisMaxPower = Math.max(thisMaxPower, 4);
+            }
+            if (preventDamage) {
                 thisMaxPower = Math.max(thisMaxPower, 4);
             }
             if (proliferate) {
@@ -481,6 +488,9 @@ public class Commander extends Constructed {
                 thisMaxPower = Math.max(thisMaxPower, 1);
             }
             if (trample) {
+                thisMaxPower = Math.max(thisMaxPower, 1);
+            }
+            if (tutorBasic) {
                 thisMaxPower = Math.max(thisMaxPower, 1);
             }
 
