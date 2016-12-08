@@ -27,9 +27,9 @@
  */
 package mage.sets;
 
-import mage.constants.SetType;
 import mage.cards.ExpansionSet;
 import mage.constants.Rarity;
+import mage.constants.SetType;
 
 /**
  *
@@ -78,6 +78,7 @@ public class Judgment extends ExpansionSet {
         cards.add(new SetCardInfo("Cephalid Constable", 35, Rarity.RARE, mage.cards.c.CephalidConstable.class));
         cards.add(new SetCardInfo("Chastise", 8, Rarity.UNCOMMON, mage.cards.c.Chastise.class));
         cards.add(new SetCardInfo("Commander Eesha", 9, Rarity.RARE, mage.cards.c.CommanderEesha.class));
+        cards.add(new SetCardInfo("Crush of Wurms", 110, Rarity.RARE, mage.cards.c.CrushOfWurms.class));
         cards.add(new SetCardInfo("Cunning Wish", 37, Rarity.RARE, mage.cards.c.CunningWish.class));
         cards.add(new SetCardInfo("Death Wish", 64, Rarity.RARE, mage.cards.d.DeathWish.class));
         cards.add(new SetCardInfo("Defy Gravity", 38, Rarity.COMMON, mage.cards.d.DefyGravity.class));
