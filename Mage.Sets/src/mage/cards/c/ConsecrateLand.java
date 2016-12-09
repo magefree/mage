@@ -75,7 +75,7 @@ public class ConsecrateLand extends CardImpl {
         Ability ability2 = new SimpleStaticAbility(Zone.BATTLEFIELD, new GainAbilityAttachedEffect(IndestructibleAbility.getInstance(), AttachmentType.AURA, Duration.WhileOnBattlefield, "{this} is indestructible and can't be enchanted by other Auras."));
         ability2.addEffect(new CantBeEnchantedSourceEffect());
         ability2.addEffect(new ConsecrateLandEffect());
-        this.addAbility(ability);
+        this.addAbility(ability2);
     }
 
     public ConsecrateLand(final ConsecrateLand card) {
