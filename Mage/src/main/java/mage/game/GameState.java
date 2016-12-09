@@ -58,6 +58,7 @@ import mage.abilities.effects.Effect;
 import mage.cards.Card;
 import mage.cards.SplitCard;
 import mage.constants.Zone;
+import mage.designations.Designation;
 import mage.game.combat.Combat;
 import mage.game.combat.CombatGroup;
 import mage.game.command.Command;
@@ -113,6 +114,7 @@ public class GameState implements Serializable, Copyable<GameState> {
     private UUID monarchId; // player that is the monarch
     private SpellStack stack;
     private Command command;
+    private List<Designation> designations = new ArrayList<>();
     private Exile exile;
     private Battlefield battlefield;
     private int turnNum = 1;
@@ -170,6 +172,7 @@ public class GameState implements Serializable, Copyable<GameState> {
 
         this.stack = state.stack.copy();
         this.command = state.command.copy();
+        this.designations.addAll(state.designations);
         this.exile = state.exile.copy();
         this.battlefield = state.battlefield.copy();
         this.turnNum = state.turnNum;
@@ -219,6 +222,7 @@ public class GameState implements Serializable, Copyable<GameState> {
         this.monarchId = state.monarchId;
         this.stack = state.stack;
         this.command = state.command;
+        this.designations = state.designations;
         this.exile = state.exile;
         this.battlefield = state.battlefield;
         this.turnNum = state.turnNum;
@@ -459,6 +463,10 @@ public class GameState implements Serializable, Copyable<GameState> {
 
     public Exile getExile() {
         return exile;
+    }
+
+    public List<Designation> getDesignations() {
+        return designations;
     }
 
     public Command getCommand() {
@@ -859,6 +867,14 @@ public class GameState implements Serializable, Copyable<GameState> {
         }
     }
 
+    public void addDesignation(Designation designation, Game game, UUID controllerId) {
+        getDesignations().add(designation);
+        for (Ability ability : designation.getAbilities()) {
+            ability.setControllerId(controllerId);
+            addAbility(ability, designation.getId(), null);
+        }
+    }
+
     public void addCommandObject(CommandObject commandObject) {
         getCommand().add(commandObject);
         setZone(commandObject.getId(), Zone.COMMAND);
@@ -1026,6 +1042,7 @@ public class GameState implements Serializable, Copyable<GameState> {
         stack.clear();
         exile.clear();
         command.clear();
+        designations.clear();
         revealed.clear();
         lookedAt.clear();
         turnNum = 0;

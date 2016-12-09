@@ -71,7 +71,7 @@ public class EpharaGodOfThePolis extends CardImpl {
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, effect));
         // At the beginning of each upkeep, if you had another creature enter the battlefield under your control last turn, draw a card.
         this.addAbility(new ConditionalTriggeredAbility(
-                new BeginningOfUpkeepTriggeredAbility(Zone.BATTLEFIELD, new DrawCardSourceControllerEffect(1), TargetController.ANY, false),
+                new BeginningOfUpkeepTriggeredAbility(Zone.BATTLEFIELD, new DrawCardSourceControllerEffect(1), TargetController.ANY, false, false),
                 HadAnotherCreatureEnterTheBattlefieldCondition.getInstance(),
                 "At the beginning of each upkeep, if you had another creature enter the battlefield under your control last turn, draw a card."),
                 new PermanentsEnteredBattlefieldWatcher());

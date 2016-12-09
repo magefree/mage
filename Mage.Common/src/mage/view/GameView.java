@@ -40,6 +40,7 @@ import mage.constants.CardType;
 import mage.constants.PhaseStep;
 import mage.constants.TurnPhase;
 import mage.constants.Zone;
+import mage.designations.Designation;
 import mage.game.ExileZone;
 import mage.game.Game;
 import mage.game.GameState;
@@ -143,6 +144,14 @@ public class GameView implements Serializable {
                         stack.put(stackObject.getId(),
                                 new StackAbilityView(game, (StackAbility) stackObject, object.getName(), cardView));
                         checkPaid(stackObject.getId(), ((StackAbility) stackObject));
+                    } else if (object instanceof Designation) {
+                        Designation designation = (Designation) game.getObject(object.getId());
+                        if (designation != null) {
+                            stack.put(stackObject.getId(), new CardView(designation, (StackAbility) stackObject));
+                        } else {
+                            LOGGER.fatal("Designation object not found: " + object.getName() + " " + object.toString() + " " + object.getClass().toString());
+                        }
+
                     } else if (object instanceof StackAbility) {
                         StackAbility stackAbility = ((StackAbility) object);
                         stackAbility.newId();

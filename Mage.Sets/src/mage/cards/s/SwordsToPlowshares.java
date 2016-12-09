@@ -27,18 +27,14 @@
  */
 package mage.cards.s;
 
-import java.util.UUID;
-import mage.constants.CardType;
-import mage.constants.Outcome;
-import mage.abilities.Ability;
-import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.ExileTargetEffect;
+import mage.abilities.effects.common.SwordsToPlowsharesEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
-import mage.game.Game;
-import mage.game.permanent.Permanent;
-import mage.players.Player;
+import mage.constants.CardType;
 import mage.target.common.TargetCreaturePermanent;
+
+import java.util.UUID;
 
 /**
  *
@@ -65,35 +61,5 @@ public class SwordsToPlowshares extends CardImpl {
     @Override
     public SwordsToPlowshares copy() {
         return new SwordsToPlowshares(this);
-    }
-}
-
-class SwordsToPlowsharesEffect extends OneShotEffect {
-
-    public SwordsToPlowsharesEffect() {
-        super(Outcome.GainLife);
-        staticText = "Its controller gains life equal to its power";
-    }
-
-    public SwordsToPlowsharesEffect(final SwordsToPlowsharesEffect effect) {
-        super(effect);
-    }
-
-    @Override
-    public SwordsToPlowsharesEffect copy() {
-        return new SwordsToPlowsharesEffect(this);
-    }
-
-    @Override
-    public boolean apply(Game game, Ability source) {
-        Permanent permanent = game.getPermanentOrLKIBattlefield(getTargetPointer().getFirst(game, source));
-        if (permanent != null) {
-            Player player = game.getPlayer(permanent.getControllerId());
-            if (player != null) {
-                player.gainLife(permanent.getPower().getValue(), game);
-            }
-            return true;
-        }
-        return false;
     }
 }

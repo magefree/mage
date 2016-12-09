@@ -42,7 +42,7 @@ public class CardImageUtils {
                 return filePath;
             }
         }
-        log.warn("Token image file not found: " + card.getTokenSetCode() + " - " + card.getName());
+        log.warn("Token image file not found: " + card.getSet() + " - " + card.getTokenSetCode() + " - " + card.getName());
         return null;
     }
 
@@ -117,7 +117,7 @@ public class CardImageUtils {
             return buildPath(imagesDir, set);
         }
     }
-    
+
     public static String getImageBasePath() {
         String useDefault = PreferencesDialog.getCachedValue(PreferencesDialog.KEY_CARD_IMAGES_USE_DEFAULT, "true");
         String imagesPath = useDefault.equals("true") ? Constants.IO.imageBaseDir : PreferencesDialog.getCachedValue(PreferencesDialog.KEY_CARD_IMAGES_PATH, null);
@@ -126,7 +126,7 @@ public class CardImageUtils {
         }
         return imagesPath;
     }
-    
+
     public static String getTokenBasePath() {
         String imagesPath = getImageBasePath();
 

@@ -56,7 +56,7 @@ import mage.target.targetpointer.FixedTargets;
 public class Seance extends CardImpl {
 
     public Seance(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.ENCHANTMENT},"{2}{W}{W}");
+        super(ownerId, setInfo, new CardType[]{CardType.ENCHANTMENT}, "{2}{W}{W}");
 
         // At the beginning of each upkeep, you may exile target creature card from your graveyard. If you do, create a token that's a copy of that card except it's a Spirit in addition to its other types. Exile it at the beginning of the next end step.
         Ability ability = new BeginningOfUpkeepTriggeredAbility(new SeanceEffect(), TargetController.ANY, true);
@@ -95,16 +95,15 @@ class SeanceEffect extends OneShotEffect {
         Card card = game.getCard(source.getFirstTarget());
         Player controller = game.getPlayer(source.getControllerId());
         if (controller != null && card != null) {
-            if (controller.moveCards(card, Zone.EXILED, source, game)) {
-                PutTokenOntoBattlefieldCopyTargetEffect effect = new PutTokenOntoBattlefieldCopyTargetEffect(source.getControllerId(), null, false);
-                effect.setTargetPointer(new FixedTarget(card.getId(), card.getZoneChangeCounter(game)));
-                effect.setAdditionalSubType("Spirit");
-                effect.apply(game, source);
-                ExileTargetEffect exileEffect = new ExileTargetEffect();
-                exileEffect.setTargetPointer(new FixedTargets(effect.getAddedPermanent(), game));
-                DelayedTriggeredAbility delayedAbility = new AtTheBeginOfNextEndStepDelayedTriggeredAbility(exileEffect);
-                game.addDelayedTriggeredAbility(delayedAbility, source);
-            }
+            controller.moveCards(card, Zone.EXILED, source, game); // Also if the move to exile is replaced, the copy takes place
+            PutTokenOntoBattlefieldCopyTargetEffect effect = new PutTokenOntoBattlefieldCopyTargetEffect(source.getControllerId(), null, false);
+            effect.setTargetPointer(new FixedTarget(card.getId(), card.getZoneChangeCounter(game)));
+            effect.setAdditionalSubType("Spirit");
+            effect.apply(game, source);
+            ExileTargetEffect exileEffect = new ExileTargetEffect();
+            exileEffect.setTargetPointer(new FixedTargets(effect.getAddedPermanent(), game));
+            DelayedTriggeredAbility delayedAbility = new AtTheBeginOfNextEndStepDelayedTriggeredAbility(exileEffect);
+            game.addDelayedTriggeredAbility(delayedAbility, source);
             return true;
         }
 

@@ -81,6 +81,8 @@ import mage.constants.SpellAbilityType;
 import mage.constants.Zone;
 import mage.counters.CounterType;
 import mage.counters.Counters;
+import mage.designations.Designation;
+import mage.designations.Monarch;
 import mage.filter.Filter;
 import mage.filter.FilterCard;
 import mage.filter.FilterPermanent;
@@ -385,11 +387,11 @@ public abstract class GameImpl implements Game, Serializable {
         object = getCard(objectId);
 
         if (object == null) {
-//            for (CommandObject commandObject : state.getCommand()) {
-//                if (commandObject.getId().equals(objectId)) {
-//                    return commandObject;
-//                }
-//            }
+            for (Designation designation : state.getDesignations()) {
+                if (designation.getId().equals(objectId)) {
+                    return designation;
+                }
+            }
             // can be an ability of a sacrificed Token trying to get it's source object
             object = getLastKnownInformation(objectId, Zone.BATTLEFIELD);
         }
@@ -2916,6 +2918,9 @@ public abstract class GameImpl implements Game, Serializable {
     @Override
     public void setMonarchId(Ability source, UUID monarchId) {
         Player newMonarch = getPlayer(monarchId);
+        if (getMonarchId() == null) {
+            getState().addDesignation(new Monarch(), this, monarchId);
+        }
         if (newMonarch != null) {
             getState().setMonarchId(monarchId);
             informPlayers(newMonarch.getLogName() + " is the monarch");

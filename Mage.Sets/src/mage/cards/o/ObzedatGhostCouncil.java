@@ -49,7 +49,6 @@ import mage.constants.Duration;
 import mage.constants.Outcome;
 import mage.constants.TargetController;
 import mage.constants.Zone;
-import mage.game.ExileZone;
 import mage.game.Game;
 import mage.game.events.GameEvent;
 import mage.game.events.GameEvent.EventType;
@@ -64,7 +63,7 @@ import mage.target.common.TargetOpponent;
 public class ObzedatGhostCouncil extends CardImpl {
 
     public ObzedatGhostCouncil(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{1}{W}{W}{B}{B}");
+        super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{1}{W}{W}{B}{B}");
         this.subtype.add("Spirit");
         this.subtype.add("Advisor");
         this.supertype.add("Legendary");
@@ -175,14 +174,15 @@ class ObzedatGhostCouncilReturnEffect extends OneShotEffect {
     public boolean apply(Game game, Ability source) {
         Card card = game.getCard(source.getSourceId());
         if (card != null) {
-            ExileZone currentZone = game.getState().getExile().getExileZone(source.getSourceId());
-            // return it only from the own exile zone
-            if (currentZone != null && currentZone.size() > 0) {
+            Zone zone = game.getState().getZone(source.getSourceId());
+            // return it from every public zone - http://www.mtgsalvation.com/forums/magic-fundamentals/magic-rulings/magic-rulings-archives/513186-obzedat-gc-as-edh-commander
+            if (!zone.equals(Zone.BATTLEFIELD) && !zone.equals(Zone.LIBRARY) && !zone.equals(Zone.HAND)) {
                 Player owner = game.getPlayer(card.getOwnerId());
-                if (owner != null && owner.moveCards(card, Zone.BATTLEFIELD, source, game)) {
-                    return true;
+                if (owner != null) {
+                    owner.moveCards(card, Zone.BATTLEFIELD, source, game);
                 }
             }
+            return true;
         }
         return false;
     }

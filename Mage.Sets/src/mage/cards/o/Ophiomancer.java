@@ -49,7 +49,7 @@ import mage.game.permanent.token.Token;
 public class Ophiomancer extends CardImpl {
 
     public Ophiomancer(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{2}{B}");
+        super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{2}{B}");
         this.subtype.add("Human");
         this.subtype.add("Shaman");
 
@@ -58,7 +58,7 @@ public class Ophiomancer extends CardImpl {
 
         // At the beginning of each upkeep, if you control no Snakes, create a 1/1 black Snake creature token with deathtouch.
         this.addAbility(new ConditionalTriggeredAbility(
-                new BeginningOfUpkeepTriggeredAbility(Zone.BATTLEFIELD, new CreateTokenEffect(new OphiomancerSnakeToken()), TargetController.ANY, false),
+                new BeginningOfUpkeepTriggeredAbility(Zone.BATTLEFIELD, new CreateTokenEffect(new OphiomancerSnakeToken()), TargetController.ANY, false, false),
                 new PermanentsOnTheBattlefieldCondition(new FilterCreaturePermanent("Snake", "no Snakes"), PermanentsOnTheBattlefieldCondition.CountType.EQUAL_TO, 0),
                 "At the beginning of each upkeep, if you control no Snakes, create a 1/1 black Snake creature token with deathtouch."));
     }

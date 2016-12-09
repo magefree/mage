@@ -32,7 +32,9 @@ import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import mage.abilities.Ability;
 import mage.abilities.common.CanBeYourCommanderAbility;
+import mage.abilities.costs.mana.ManaCost;
 import mage.abilities.keyword.PartnerAbility;
 import mage.cards.Card;
 import mage.cards.ExpansionSet;
@@ -211,15 +213,22 @@ public class Commander extends Constructed {
         }
 
         int edhPowerLevel = 0;
+        int numberInfinitePieces = 0;
+
         for (Card card : deck.getCards()) {
 
             int thisMaxPower = 0;
 
             // Examine rules to work out most egregious functions in edh
             boolean anyNumberOfTarget = false;
+            boolean annihilator = false;
             boolean buyback = false;
             boolean cascade = false;
+            boolean cantBe = false;
             boolean copy = false;
+            boolean costLessEach = false;
+            boolean createToken = false;
+            boolean dredge = false;
             boolean exile = false;
             boolean exileAll = false;
             boolean counter = false;
@@ -227,54 +236,108 @@ public class Commander extends Constructed {
             boolean destroyAll = false;
             boolean each = false;
             boolean exalted = false;
+            boolean doesntUntap = false;
             boolean drawCards = false;
+            boolean evoke = false;
             boolean extraTurns = false;
+            boolean flicker = false;
             boolean gainControl = false;
+            boolean hexproof = false;
             boolean infect = false;
             boolean mayCastForFree = false;
+            boolean menace = false;
             boolean miracle = false;
             boolean overload = false;
             boolean persist = false;
+            boolean preventDamage = false;
             boolean proliferate = false;
+            boolean protection = false;
+            boolean putUnderYourControl = false;
             boolean retrace = false;
+            boolean returnFromYourGY = false;
             boolean sacrifice = false;
+            boolean shroud = false;
             boolean skip = false;
             boolean sliver = false;
+            boolean storm = false;
+            boolean trample = false;
             boolean tutor = false;
+            boolean tutorBasic = false;
+            boolean twiceAs = false;
+            boolean unblockable = false;
             boolean undying = false;
+            boolean untapTarget = false;
             boolean wheneverEnters = false;
+            boolean whenCounterThatSpell = false;
+            boolean xCost = false;
             boolean youControlTarget = false;
 
             for (String str : card.getRules()) {
                 String s = str.toLowerCase();
+                annihilator |= s.contains("annihilator");
                 anyNumberOfTarget |= s.contains("any number");
                 buyback |= s.contains("buyback");
+                cantBe |= s.contains("can't be");
                 cascade |= s.contains("cascade");
                 copy |= s.contains("copy");
+                costLessEach |= s.contains("cost") || s.contains("less") || s.contains("each");
                 counter |= s.contains("counter") && s.contains("target");
+                createToken |= s.contains("create") && s.contains("token");
                 destroy |= s.contains("destroy");
                 destroyAll |= s.contains("destroy all");
+                doesntUntap |= s.contains("doesn't untap");
+                doesntUntap |= s.contains("don't untap");
                 drawCards |= s.contains("draw cards");
+                dredge |= s.contains("dredge");
                 each |= s.contains("each");
+                evoke |= s.contains("evoke");
                 exalted |= s.contains("exalted");
                 exile |= s.contains("exile");
                 exileAll |= s.contains("exile") && s.contains(" all ");
                 extraTurns |= s.contains("extra turn");
+                flicker |= s.contains("exile") && s.contains("return") && s.contains("to the battlefield under");
                 gainControl |= s.contains("gain control");
+                hexproof |= s.contains("hexproof");
                 infect |= s.contains("infect");
                 mayCastForFree |= s.contains("may cast") && s.contains("without paying");
+                menace |= s.contains("menace");
                 miracle |= s.contains("miracle");
                 overload |= s.contains("overload");
                 persist |= s.contains("persist");
-                proliferate |= s.contains("proliferate");
+                preventDamage |= s.contains("prevent") && s.contains("all") && s.contains("damage");
+                proliferate |= s.contains("proliferate");                
+                protection |= s.contains("protection");
+                putUnderYourControl |= s.contains("put") && s.contains("under your control");
                 retrace |= s.contains("retrace");
+                returnFromYourGY |= s.contains("return") && s.contains("from your graveyard");
                 sacrifice |= s.contains("sacrifice");
-                skip |= s.contains("skip") && s.contains("each");
+                shroud |= s.contains("shroud");
+                skip |= s.contains("skip");
                 sliver |= s.contains("sliver");
-                tutor |= s.contains("search your library");
+                storm |= s.contains("storm");
+                trample |= s.contains("trample");
+                tutor |= s.contains("search your library") && !s.contains("basic land");
+                tutorBasic |= s.contains("search your library") && s.contains("basic land");
+                twiceAs |= s.contains("twice that many") || s.contains("twice as much");
+                unblockable |= s.contains("can't be blocked");
                 undying |= s.contains("undying");
+                untapTarget |= s.contains("untap target");
+                whenCounterThatSpell |= s.contains("when") && s.contains("counter that spell");
                 wheneverEnters |= s.contains("when") && s.contains("another") && s.contains("enters");
                 youControlTarget |= s.contains("you control target");
+            }
+
+            for (ManaCost cost : card.getManaCost()) {
+                if (cost.getText().contains("X")) {
+                    xCost = true;
+                }
+            }
+            for (Ability a : card.getAbilities()) {
+                for (ManaCost cost : a.getManaCosts()) {
+                    if (cost.getText().contains("X")) {
+                        xCost = true;
+                    }
+                }
             }
 
             if (extraTurns) {
@@ -286,13 +349,25 @@ public class Commander extends Constructed {
             if (tutor) {
                 thisMaxPower = Math.max(thisMaxPower, 6);
             }
+            if (annihilator) {
+                thisMaxPower = Math.max(thisMaxPower, 5);
+            }
+            if (costLessEach) {
+                thisMaxPower = Math.max(thisMaxPower, 5);
+            }
             if (infect) {
                 thisMaxPower = Math.max(thisMaxPower, 5);
             }
             if (overload) {
                 thisMaxPower = Math.max(thisMaxPower, 5);
             }
+            if (twiceAs) {
+                thisMaxPower = Math.max(thisMaxPower, 5);
+            }
             if (cascade) {
+                thisMaxPower = Math.max(thisMaxPower, 4);
+            }
+            if (doesntUntap) {
                 thisMaxPower = Math.max(thisMaxPower, 4);
             }
             if (each) {
@@ -301,19 +376,46 @@ public class Commander extends Constructed {
             if (exileAll) {
                 thisMaxPower = Math.max(thisMaxPower, 4);
             }
+            if (flicker) {
+                thisMaxPower = Math.max(thisMaxPower, 4);
+            }
             if (gainControl) {
                 thisMaxPower = Math.max(thisMaxPower, 4);
             }
             if (mayCastForFree) {
                 thisMaxPower = Math.max(thisMaxPower, 4);
             }
+            if (preventDamage) {
+                thisMaxPower = Math.max(thisMaxPower, 4);
+            }
             if (proliferate) {
+                thisMaxPower = Math.max(thisMaxPower, 4);
+            }
+            if (protection) {
+                thisMaxPower = Math.max(thisMaxPower, 4);
+            }
+            if (putUnderYourControl) {
+                thisMaxPower = Math.max(thisMaxPower, 4);
+            }
+            if (returnFromYourGY) {
                 thisMaxPower = Math.max(thisMaxPower, 4);
             }
             if (skip) {
                 thisMaxPower = Math.max(thisMaxPower, 4);
             }
+            if (storm) {
+                thisMaxPower = Math.max(thisMaxPower, 4);
+            }
+            if (unblockable) {
+                thisMaxPower = Math.max(thisMaxPower, 4);
+            }
+            if (whenCounterThatSpell) {
+                thisMaxPower = Math.max(thisMaxPower, 4);
+            }
             if (wheneverEnters) {
+                thisMaxPower = Math.max(thisMaxPower, 4);
+            }
+            if (xCost) {
                 thisMaxPower = Math.max(thisMaxPower, 4);
             }
             if (youControlTarget) {
@@ -322,7 +424,19 @@ public class Commander extends Constructed {
             if (anyNumberOfTarget) {
                 thisMaxPower = Math.max(thisMaxPower, 3);
             }
+            if (createToken) {
+                thisMaxPower = Math.max(thisMaxPower, 3);
+            }
             if (destroyAll) {
+                thisMaxPower = Math.max(thisMaxPower, 3);
+            }
+            if (dredge) {
+                thisMaxPower = Math.max(thisMaxPower, 3);
+            }
+            if (hexproof) {
+                thisMaxPower = Math.max(thisMaxPower, 3);
+            }
+            if (shroud) {
                 thisMaxPower = Math.max(thisMaxPower, 3);
             }
             if (undying) {
@@ -331,7 +445,16 @@ public class Commander extends Constructed {
             if (persist) {
                 thisMaxPower = Math.max(thisMaxPower, 3);
             }
+            if (cantBe) {
+                thisMaxPower = Math.max(thisMaxPower, 2);
+            }
+            if (evoke) {
+                thisMaxPower = Math.max(thisMaxPower, 2);
+            }
             if (exile) {
+                thisMaxPower = Math.max(thisMaxPower, 2);
+            }
+            if (menace) {
                 thisMaxPower = Math.max(thisMaxPower, 2);
             }
             if (miracle) {
@@ -341,6 +464,9 @@ public class Commander extends Constructed {
                 thisMaxPower = Math.max(thisMaxPower, 2);
             }
             if (sacrifice) {
+                thisMaxPower = Math.max(thisMaxPower, 2);
+            }
+            if (untapTarget) {
                 thisMaxPower = Math.max(thisMaxPower, 2);
             }
             if (copy) {
@@ -361,13 +487,22 @@ public class Commander extends Constructed {
             if (retrace) {
                 thisMaxPower = Math.max(thisMaxPower, 1);
             }
+            if (trample) {
+                thisMaxPower = Math.max(thisMaxPower, 1);
+            }
+            if (tutorBasic) {
+                thisMaxPower = Math.max(thisMaxPower, 1);
+            }
 
             // Planeswalkers
             if (card.getCardType().contains(CardType.PLANESWALKER)) {
                 if (card.getName().toLowerCase().equals("jace, the mind sculptor")) {
+                    thisMaxPower = Math.max(thisMaxPower, 6);
+                }
+                if (card.getName().toLowerCase().equals("ugin, the spirit dragon")) {
                     thisMaxPower = Math.max(thisMaxPower, 5);
                 }
-                thisMaxPower = Math.max(thisMaxPower, 3);
+                thisMaxPower = Math.max(thisMaxPower, 4);
             }
 
             if (card.getCardType().contains(CardType.LAND)) {
@@ -401,6 +536,7 @@ public class Commander extends Constructed {
                     || cn.equals("edric, spymaster of trest")
                     || cn.equals("elesh norn, grand cenobite")
                     || cn.equals("entomb")
+                    || cn.equals("force of will")
                     || cn.equals("food chain")
                     || cn.equals("gaddock teeg")
                     || cn.equals("gaea's cradle")
@@ -446,7 +582,6 @@ public class Commander extends Constructed {
                     || cn.equals("strip mine")
                     || cn.equals("the tabernacle at pendrell vale")
                     || cn.equals("tinker")
-                    || cn.equals("tolarian academy")
                     || cn.equals("treasure cruise")
                     || cn.equals("urabrask the hidden")
                     || cn.equals("vorinclex, voice of hunger")
@@ -456,17 +591,20 @@ public class Commander extends Constructed {
             }
 
             // Parts of infinite combos
-            if (cn.equals("animate artifact") || cn.equals("archaeomancer")
+            if (cn.equals("animate artifact") || cn.equals("animar, soul of element")
+                    || cn.equals("archaeomancer")
                     || cn.equals("ashnod's altar") || cn.equals("azami, lady of scrolls")
                     || cn.equals("basalt monolith") || cn.equals("brago, king eternal")
                     || cn.equals("candelabra of tawnos") || cn.equals("cephalid aristocrat")
                     || cn.equals("cephalid illusionist") || cn.equals("changeling berserker")
+                    || cn.equals("the chain veil")
                     || cn.equals("cinderhaze wretch") || cn.equals("cryptic gateway")
                     || cn.equals("deadeye navigator") || cn.equals("derevi, empyrial tactician")
                     || cn.equals("doubling season") || cn.equals("dross scorpion")
                     || cn.equals("earthcraft") || cn.equals("erratic portal")
                     || cn.equals("enter the infinite") || cn.equals("omniscience")
                     || cn.equals("exquisite blood") || cn.equals("future sight")
+                    || cn.equals("ghave, guru of spores")
                     || cn.equals("grave titan") || cn.equals("great whale")
                     || cn.equals("grim monolith") || cn.equals("gush")
                     || cn.equals("hellkite charger") || cn.equals("intruder alarm")
@@ -483,6 +621,7 @@ public class Commander extends Constructed {
                     || cn.equals("myr turbine") || cn.equals("narset, enlightened master")
                     || cn.equals("nekusar, the mindrazer") || cn.equals("norin the wary")
                     || cn.equals("opalescence") || cn.equals("ornithopter")
+                    || cn.equals("peregrine drake") || cn.equals("palinchron")
                     || cn.equals("planar portal") || cn.equals("power artifact")
                     || cn.equals("rings of brighthearth") || cn.equals("rite of replication")
                     || cn.equals("sanguine bond") || cn.equals("sensei's divining top")
@@ -497,7 +636,8 @@ public class Commander extends Constructed {
                     || cn.equals("workhorse") || cn.equals("worldgorger dragon")
                     || cn.equals("worthy cause") || cn.equals("yawgmoth's will")
                     || cn.equals("zealous conscripts")) {
-                thisMaxPower = Math.max(thisMaxPower, 6);
+                thisMaxPower = Math.max(thisMaxPower, 7);
+                numberInfinitePieces++;
             }
             edhPowerLevel += thisMaxPower;
         }
@@ -507,54 +647,56 @@ public class Commander extends Constructed {
             String cn = commander.getName().toLowerCase();
 
             // Least fun commanders
-            if (cn.equals("azami, lady of scrolls")
-                || cn.equals("braids, cabal minion")
-                || cn.equals("child of alara")
-                || cn.equals("derevi, empyrial tactician")
-                || cn.equals("edric, spymaster of trest")
-                || cn.equals("gaddock teeg")
-                || cn.equals("grand arbiter augustin iv")
-                || cn.equals("hokori, dust drinker")
-                || cn.equals("iona, shield of emeria")
-                || cn.equals("jin-gitaxias, core augur")
-                || cn.equals("karador, ghost chieftain")
-                || cn.equals("leovold, emissary of trest")
-                || cn.equals("linvala, keeper of silence")
-                || cn.equals("llawan, cephalid empress")
-                || cn.equals("memnarch")
-                || cn.equals("meren of clan nel toth")
-                || cn.equals("michiko konda, truth seeker")
-                || cn.equals("narset, enlightened master")
-                || cn.equals("nekusar, the mindrazer")
-                || cn.equals("norin the wary")
-                || cn.equals("numot, the devastator")
-                || cn.equals("sheoldred, whispering one")
-                || cn.equals("teferi, mage of zhalfir")
-                || cn.equals("zur the enchanter")) {
-                thisMaxPower = Math.max(thisMaxPower, 15);
+            if (cn.equals("animar, soul of element")
+                    || cn.equals("azami, lady of scrolls")
+                    || cn.equals("braids, cabal minion")
+                    || cn.equals("child of alara")
+                    || cn.equals("derevi, empyrial tactician")
+                    || cn.equals("edric, spymaster of trest")
+                    || cn.equals("gaddock teeg")
+                    || cn.equals("grand arbiter augustin iv")
+                    || cn.equals("hokori, dust drinker")
+                    || cn.equals("iona, shield of emeria")
+                    || cn.equals("jin-gitaxias, core augur")
+                    || cn.equals("karador, ghost chieftain")
+                    || cn.equals("leovold, emissary of trest")
+                    || cn.equals("linvala, keeper of silence")
+                    || cn.equals("llawan, cephalid empress")
+                    || cn.equals("memnarch")
+                    || cn.equals("meren of clan nel toth")
+                    || cn.equals("michiko konda, truth seeker")
+                    || cn.equals("narset, enlightened master")
+                    || cn.equals("nekusar, the mindrazer")
+                    || cn.equals("norin the wary")
+                    || cn.equals("numot, the devastator")
+                    || cn.equals("sheoldred, whispering one")
+                    || cn.equals("teferi, mage of zhalfir")
+                    || cn.equals("zur the enchanter")) {
+                thisMaxPower = Math.max(thisMaxPower, 25);
             }
 
             // Next least fun commanders
             if (cn.equals("anafenza, the foremost")
-                || cn.equals("arcum dagsson")
-                || cn.equals("azusa, lost but seeking")
-                || cn.equals("brago, king eternal")
-                || cn.equals("captain sisay")
-                || cn.equals("elesh norn, grand cenobite")
-                || cn.equals("malfegor")
-                || cn.equals("maelstrom wanderer")
-                || cn.equals("mikaeus the unhallowed")
-                || cn.equals("nath of the gilt-leaf")
-                || cn.equals("purphoros, god of the forge")
-                || cn.equals("sen triplets")
-                || cn.equals("urabrask the hidden")
-                || cn.equals("vorinclex, voice of hunger")) {
-                thisMaxPower = Math.max(thisMaxPower, 10);
+                    || cn.equals("arcum dagsson")
+                    || cn.equals("azusa, lost but seeking")
+                    || cn.equals("brago, king eternal")
+                    || cn.equals("captain sisay")
+                    || cn.equals("elesh norn, grand cenobite")
+                    || cn.equals("malfegor")
+                    || cn.equals("maelstrom wanderer")
+                    || cn.equals("mikaeus the unhallowed")
+                    || cn.equals("nath of the gilt-leaf")
+                    || cn.equals("purphoros, god of the forge")
+                    || cn.equals("sen triplets")
+                    || cn.equals("urabrask the hidden")
+                    || cn.equals("vorinclex, voice of hunger")) {
+                thisMaxPower = Math.max(thisMaxPower, 15);
             }
             edhPowerLevel += thisMaxPower;
         }
 
-        edhPowerLevel = (int) Math.round(edhPowerLevel / 2.5);
+        edhPowerLevel += numberInfinitePieces * 10;
+        edhPowerLevel = (int) Math.round(edhPowerLevel / 4.5);
         if (edhPowerLevel > 100) {
             edhPowerLevel = 100;
         }

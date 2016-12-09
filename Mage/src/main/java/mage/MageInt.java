@@ -32,7 +32,7 @@ import mage.util.Copyable;
 
 public class MageInt implements Serializable, Copyable<MageInt> {
 
-    public static MageInt EmptyMageInt = new MageInt(Integer.MIN_VALUE, null) {
+    public static MageInt EmptyMageInt = new MageInt(Integer.MIN_VALUE, "") {
 
         private static final String exceptionMessage = "MageInt.EmptyMageInt can't be modified.";
 

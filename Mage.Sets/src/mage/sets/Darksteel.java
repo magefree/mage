@@ -138,6 +138,7 @@ public class Darksteel extends ExpansionSet {
         cards.add(new SetCardInfo("Slobad, Goblin Tinkerer", 69, Rarity.RARE, mage.cards.s.SlobadGoblinTinkerer.class));
         cards.add(new SetCardInfo("Soulscour", 14, Rarity.RARE, mage.cards.s.Soulscour.class));
         cards.add(new SetCardInfo("Spawning Pit", 141, Rarity.UNCOMMON, mage.cards.s.SpawningPit.class));
+        cards.add(new SetCardInfo("Specter's Shroud", 142, Rarity.UNCOMMON, mage.cards.s.SpectersShroud.class));
         cards.add(new SetCardInfo("Spellbinder", 143, Rarity.RARE, mage.cards.s.Spellbinder.class));
         cards.add(new SetCardInfo("Spincrusher", 144, Rarity.UNCOMMON, mage.cards.s.Spincrusher.class));
         cards.add(new SetCardInfo("Spire Golem", 145, Rarity.COMMON, mage.cards.s.SpireGolem.class));
