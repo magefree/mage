@@ -38,9 +38,9 @@ import mage.constants.CardType;
 import mage.constants.Outcome;
 import mage.constants.TargetController;
 import mage.constants.Zone;
-import mage.filter.common.FilterControlledUntappedLandPermanent;
 import mage.game.Game;
 import mage.players.Player;
+import mage.watchers.common.UntappedLandsAtBeginningOfTurnWatcher;
 
 /**
  *
@@ -53,7 +53,7 @@ public class PowerSurge extends CardImpl {
         
 
         // At the beginning of each player's upkeep, Power Surge deals X damage to that player, where X is the number of untapped lands he or she controlled at the beginning of this turn.
-        this.addAbility(new BeginningOfUpkeepTriggeredAbility(Zone.BATTLEFIELD, new PowerSurgeDamageEffect(), TargetController.ANY, false, true));
+        this.addAbility(new BeginningOfUpkeepTriggeredAbility(Zone.BATTLEFIELD, new PowerSurgeDamageEffect(), TargetController.ANY, false, true), new UntappedLandsAtBeginningOfTurnWatcher());
     }
 
     public PowerSurge(final PowerSurge card) {
@@ -87,7 +87,8 @@ class PowerSurgeDamageEffect extends OneShotEffect{
     public boolean apply(Game game, Ability source) {
         Player player = game.getPlayer(targetPointer.getFirst(game, source));
         if (player != null) {
-            int damage = game.getBattlefield().getAllActivePermanents(new FilterControlledUntappedLandPermanent(), targetPointer.getFirst(game, source), game).size();
+            UntappedLandsAtBeginningOfTurnWatcher watcher = (UntappedLandsAtBeginningOfTurnWatcher) game.getState().getWatchers().get("UntappedLandsAtBeginningOfTurn");
+            int damage = watcher.getUntappedLandCount(targetPointer.getFirst(game, source));
             player.damage(damage, source.getSourceId(), game, false, true);
             return true;
         }

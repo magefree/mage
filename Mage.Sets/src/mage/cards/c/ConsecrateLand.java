@@ -30,7 +30,7 @@ package mage.cards.c;
 import java.util.UUID;
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleStaticAbility;
-import mage.abilities.effects.OneShotEffect;
+import mage.abilities.effects.ContinuousEffectImpl;
 import mage.abilities.effects.common.AttachEffect;
 import mage.abilities.effects.common.CantBeEnchantedSourceEffect;
 import mage.abilities.effects.common.continuous.GainAbilityAttachedEffect;
@@ -90,7 +90,7 @@ public class ConsecrateLand extends CardImpl {
 
 // 9/25/2006 ruling: If Consecrate Land enters the battlefield attached to a land that’s enchanted by other Auras, those Auras are put into their owners’ graveyards.
 
-class ConsecrateLandEffect extends OneShotEffect {
+class ConsecrateLandEffect extends ContinuousEffectImpl {
 
     private static final FilterEnchantmentPermanent filter = new FilterEnchantmentPermanent();
 
@@ -99,7 +99,7 @@ class ConsecrateLandEffect extends OneShotEffect {
     }
 
     public ConsecrateLandEffect() {
-        super(Outcome.Benefit);
+        super(Duration.WhileOnBattlefield, Outcome.Benefit);
     }
 
     public ConsecrateLandEffect(final ConsecrateLandEffect effect) {
