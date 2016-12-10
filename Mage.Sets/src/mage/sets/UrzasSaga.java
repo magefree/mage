@@ -204,6 +204,7 @@ public class UrzasSaga extends ExpansionSet {
         cards.add(new SetCardInfo("Lilting Refrain", 83, Rarity.UNCOMMON, mage.cards.l.LiltingRefrain.class));
         cards.add(new SetCardInfo("Lingering Mirage", 84, Rarity.UNCOMMON, mage.cards.l.LingeringMirage.class));
         cards.add(new SetCardInfo("Looming Shade", 139, Rarity.COMMON, mage.cards.l.LoomingShade.class));
+        cards.add(new SetCardInfo("Lotus Blossom", 300, Rarity.RARE, mage.cards.l.LotusBlossom.class));
         cards.add(new SetCardInfo("Lull", 267, Rarity.COMMON, mage.cards.l.Lull.class));
         cards.add(new SetCardInfo("Lurking Evil", 140, Rarity.RARE, mage.cards.l.LurkingEvil.class));
         cards.add(new SetCardInfo("Mana Leech", 141, Rarity.UNCOMMON, mage.cards.m.ManaLeech.class));
