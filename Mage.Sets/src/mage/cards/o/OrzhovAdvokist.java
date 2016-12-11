@@ -121,9 +121,11 @@ class OrzhovAdvokistEffect extends OneShotEffect {
                 }
             }
             for (UUID playerId : players) {
-                FilterCreaturePermanent filter = new FilterCreaturePermanent();
-                filter.add(new ControllerIdPredicate(playerId));
-                game.addEffect(new CantAttackYouAllEffect(Duration.UntilYourNextTurn, filter, true), source);
+                if (playerId != source.getControllerId()) {
+                    FilterCreaturePermanent filter = new FilterCreaturePermanent();
+                    filter.add(new ControllerIdPredicate(playerId));
+                    game.addEffect(new CantAttackYouAllEffect(Duration.UntilYourNextTurn, filter, true), source);
+                }
             }
             return true;
         }

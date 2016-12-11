@@ -140,4 +140,31 @@ public class CantAttackTest extends CardTestPlayerBase {
 
         assertTapped("Battle-Mad Ronin", false);
     }
+
+    // Orzhov Advokist's ability does not work. Your opponents get the counters but they can still attack you.
+    @Test
+    public void testOrzhovAdvokist() {
+        addCard(Zone.BATTLEFIELD, playerA, "Plains", 3);
+        // At the beginning of your upkeep, each player may put two +1/+1 counters on a creature he or she controls.
+        // If a player does, creatures that player controls can't attack you or a planeswalker you control until your next turn.
+        addCard(Zone.HAND, playerA, "Orzhov Advokist"); // Creature {2}{W} 1/4
+
+        addCard(Zone.BATTLEFIELD, playerB, "Silvercoat Lion");
+
+        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Orzhov Advokist");
+        setChoice(playerA, "Yes");
+        setChoice(playerB, "Yes");
+        attack(2, playerB, "Silvercoat Lion");
+        attack(4, playerB, "Silvercoat Lion");
+        setStopAt(4, PhaseStep.POSTCOMBAT_MAIN);
+
+        execute();
+
+        assertPermanentCount(playerA, "Orzhov Advokist", 1);
+        assertPowerToughness(playerA, "Orzhov Advokist", 3, 6);
+        assertLife(playerA, 18);
+        assertTapped("Silvercoat Lion", false);
+        assertPowerToughness(playerB, "Silvercoat Lion", 4, 4);
+    }
+
 }
