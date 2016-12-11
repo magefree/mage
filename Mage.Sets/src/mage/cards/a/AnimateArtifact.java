@@ -28,20 +28,18 @@
 package mage.cards.a;
 
 import java.util.UUID;
-import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleStaticAbility;
-import mage.abilities.condition.common.EquippedMatchesFilterCondition;
-import mage.abilities.decorator.ConditionalContinuousEffect;
-import mage.abilities.effects.Effect;
+import mage.abilities.effects.ContinuousEffectImpl;
 import mage.abilities.effects.common.AttachEffect;
-import mage.abilities.effects.common.continuous.BecomesCreatureAttachedEffect;
 import mage.abilities.keyword.EnchantAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Duration;
+import mage.constants.Layer;
 import mage.constants.Outcome;
+import mage.constants.SubLayer;
 import mage.constants.Zone;
 import mage.filter.FilterPermanent;
 import mage.filter.common.FilterArtifactPermanent;
@@ -49,7 +47,6 @@ import mage.filter.predicate.Predicates;
 import mage.filter.predicate.mageobject.CardTypePredicate;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
-import mage.game.permanent.token.Token;
 import mage.target.TargetPermanent;
 import mage.target.common.TargetArtifactPermanent;
 
@@ -64,23 +61,20 @@ public class AnimateArtifact extends CardImpl {
     static {
         filter.add(Predicates.not(new CardTypePredicate(CardType.CREATURE)));
     }
-    
+
     public AnimateArtifact(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.ENCHANTMENT}, "{3}{U}");
-        
         this.subtype.add("Aura");
 
         // Enchant artifact
-       TargetPermanent auraTarget = new TargetArtifactPermanent();
+        TargetPermanent auraTarget = new TargetArtifactPermanent();
         this.getSpellAbility().addTarget(auraTarget);
         this.getSpellAbility().addEffect(new AttachEffect(Outcome.Benefit));
         Ability ability = new EnchantAbility(auraTarget.getTargetName());
         this.addAbility(ability);
 
         // As long as enchanted artifact isn't a creature, it's an artifact creature with power and toughness each equal to its converted mana cost.
-	ConvertedManaCost cost = new ConvertedManaCost();
-	int amount = cost.getConvertedManaCost();
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new ConditionalContinuousEffect(new BecomesCreatureAttachedEffect(new AnimateArtifactToken(amount, amount), "it's an artifact creature with power and toughness each equal to its converted mana cost.", Duration.WhileOnBattlefield), new EquippedMatchesFilterCondition(filter), "As long as enchanted artifact isn't a creature")));
+        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new AnimateArtifactContinuousEffect(Duration.WhileOnBattlefield)));
     }
 
     public AnimateArtifact(final AnimateArtifact card) {
@@ -93,28 +87,49 @@ public class AnimateArtifact extends CardImpl {
     }
 }
 
-class AnimateArtifactToken extends Token {
+class AnimateArtifactContinuousEffect extends ContinuousEffectImpl {
 
-    AnimateArtifactToken(int power, int toughness) {
-        super("", "");
-        cardType.add(CardType.CREATURE);
-        this.power = new MageInt(power);
-        this.toughness = new MageInt(toughness);
-    }
-}
-
-class ConvertedManaCost {//need to figure out how this can be used to return CMC to variable amount in animate artifact token
-    
-    int cmc;
-
-    int calculate(Game game, Ability source, Effect effect) {
-        Permanent enchantment = game.getPermanentOrLKIBattlefield(source.getSourceId());
-        Permanent enchanted = game.getPermanentOrLKIBattlefield(enchantment.getAttachedTo());
-        cmc = enchanted.getConvertedManaCost();
-        return cmc;
+    public AnimateArtifactContinuousEffect(Duration duration) {
+        super(duration, Outcome.Benefit);
+        staticText = "As long as enchanted artifact isn't a creature, it's an artifact creature with power and toughness each equal to its converted mana cost";
     }
 
-    int getConvertedManaCost () {
-        return cmc;
+    public AnimateArtifactContinuousEffect(final AnimateArtifactContinuousEffect effect) {
+        super(effect);
     }
+
+    @Override
+    public AnimateArtifactContinuousEffect copy() {
+        return new AnimateArtifactContinuousEffect(this);
+    }
+
+    @Override
+    public boolean apply(Layer layer, SubLayer sublayer, Ability source, Game game) {
+        // Not sure, if this is layerwise handled absolutely correctly
+        Permanent enchantment = game.getPermanent(source.getSourceId());
+        if (enchantment != null) {
+            Permanent permanent = game.getPermanent(enchantment.getAttachedTo());
+            if (permanent != null && !permanent.getCardType().contains(CardType.CREATURE)) {
+                if (sublayer == SubLayer.NA) {
+                    permanent.getCardType().add(CardType.CREATURE);
+                    permanent.getPower().setValue(permanent.getConvertedManaCost());
+                    permanent.getToughness().setValue(permanent.getConvertedManaCost());
+                }
+            }
+            return true;
+        }
+
+        return false;
+    }
+
+    @Override
+    public boolean apply(Game game, Ability source) {
+        return false;
+    }
+
+    @Override
+    public boolean hasLayer(Layer layer) {
+        return layer == Layer.TypeChangingEffects_4;
+    }
+
 }

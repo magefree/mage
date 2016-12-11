@@ -714,8 +714,9 @@ public abstract class CardTestPlayerAPIImpl extends MageTestPlayerBase implement
         Assert.assertNotNull("There is no such permanent on the battlefield, cardName=" + cardName, found);
 
         Assert.assertTrue("(Battlefield) card type not found (" + cardName + ":" + type + ")", found.getCardType().contains(type));
-
-        Assert.assertTrue("(Battlefield) card sub-type not equal (" + cardName + ":" + subType + ")", found.getSubtype(currentGame).contains(subType));
+        if (subType != null) {
+            Assert.assertTrue("(Battlefield) card sub-type not equal (" + cardName + ":" + subType + ")", found.getSubtype(currentGame).contains(subType));
+        }
     }
 
     /**
