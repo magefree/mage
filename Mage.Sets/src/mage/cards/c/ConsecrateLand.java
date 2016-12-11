@@ -30,26 +30,22 @@ package mage.cards.c;
 import java.util.UUID;
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleStaticAbility;
-import mage.abilities.effects.ContinuousEffectImpl;
+import mage.abilities.effects.ContinuousRuleModifyingEffectImpl;
 import mage.abilities.effects.common.AttachEffect;
-import mage.abilities.effects.common.CantBeEnchantedSourceEffect;
 import mage.abilities.effects.common.continuous.GainAbilityAttachedEffect;
 import mage.abilities.keyword.EnchantAbility;
 import mage.abilities.keyword.IndestructibleAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
-import mage.cards.Cards;
-import mage.cards.CardsImpl;
 import mage.constants.AttachmentType;
 import mage.constants.CardType;
 import mage.constants.Duration;
 import mage.constants.Outcome;
 import mage.constants.Zone;
-import mage.filter.common.FilterEnchantmentPermanent;
-import mage.filter.predicate.mageobject.SubtypePredicate;
 import mage.game.Game;
+import mage.game.events.GameEvent;
+import mage.game.events.GameEvent.EventType;
 import mage.game.permanent.Permanent;
-import mage.players.Player;
 import mage.target.TargetPermanent;
 import mage.target.common.TargetLandPermanent;
 
@@ -61,7 +57,7 @@ public class ConsecrateLand extends CardImpl {
 
     public ConsecrateLand(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.ENCHANTMENT}, "{W}");
-        
+
         this.subtype.add("Aura");
 
         // Enchant land
@@ -72,9 +68,8 @@ public class ConsecrateLand extends CardImpl {
         this.addAbility(ability);
 
         // Enchanted land is indestructible and can't be enchanted by other Auras.
-        Ability ability2 = new SimpleStaticAbility(Zone.BATTLEFIELD, new GainAbilityAttachedEffect(IndestructibleAbility.getInstance(), AttachmentType.AURA, Duration.WhileOnBattlefield, "{this} is indestructible and can't be enchanted by other Auras."));
-        ability2.addEffect(new CantBeEnchantedSourceEffect());
-        ability2.addEffect(new ConsecrateLandEffect());
+        Ability ability2 = new SimpleStaticAbility(Zone.BATTLEFIELD, new GainAbilityAttachedEffect(IndestructibleAbility.getInstance(), AttachmentType.AURA));
+        ability2.addEffect(new ConsecrateLandRuleEffect());
         this.addAbility(ability2);
     }
 
@@ -89,39 +84,34 @@ public class ConsecrateLand extends CardImpl {
 }
 
 // 9/25/2006 ruling: If Consecrate Land enters the battlefield attached to a land that’s enchanted by other Auras, those Auras are put into their owners’ graveyards.
+class ConsecrateLandRuleEffect extends ContinuousRuleModifyingEffectImpl {
 
-class ConsecrateLandEffect extends ContinuousEffectImpl {
-
-    private static final FilterEnchantmentPermanent filter = new FilterEnchantmentPermanent();
-
-    static {
-        filter.add(new SubtypePredicate("Aura"));
+    public ConsecrateLandRuleEffect() {
+        super(Duration.WhileOnBattlefield, Outcome.Detriment);
+        staticText = "and can't be enchanted by other Auras";
     }
 
-    public ConsecrateLandEffect() {
-        super(Duration.WhileOnBattlefield, Outcome.Benefit);
-    }
-
-    public ConsecrateLandEffect(final ConsecrateLandEffect effect) {
+    public ConsecrateLandRuleEffect(final ConsecrateLandRuleEffect effect) {
         super(effect);
     }
 
     @Override
-    public ConsecrateLandEffect copy() {
-        return new ConsecrateLandEffect(this);
+    public ConsecrateLandRuleEffect copy() {
+        return new ConsecrateLandRuleEffect(this);
     }
 
     @Override
-    public boolean apply(Game game, Ability source) {
-        Player controller = game.getPlayer(source.getControllerId());
-        if (controller != null) {
-        	Permanent enchantment = game.getPermanentOrLKIBattlefield(source.getSourceId());
-        	Permanent enchanted = game.getPermanentOrLKIBattlefield(enchantment.getAttachedTo());
-                if (enchanted != null) {
-                    Cards removeAuras = new CardsImpl(enchanted.getAttachments());
-                    controller.moveCards(removeAuras, Zone.GRAVEYARD, source, game);
-                }
-            return true;
+    public boolean checksEventType(GameEvent event, Game game) {
+        return event.getType().equals(EventType.ATTACH) || event.getType().equals(EventType.STAY_ATTACHED);
+    }
+
+    @Override
+    public boolean applies(GameEvent event, Ability source, Game game) {
+        Permanent sourceObject = game.getPermanent(source.getSourceId());
+        if (sourceObject != null && sourceObject.getAttachedTo() != null) {
+            if (event.getTargetId().equals(sourceObject.getAttachedTo())) {
+                return !event.getSourceId().equals(source.getSourceId());
+            }
         }
         return false;
     }
