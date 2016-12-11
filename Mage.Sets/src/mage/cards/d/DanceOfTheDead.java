@@ -74,7 +74,7 @@ import mage.target.common.TargetCreaturePermanent;
 public class DanceOfTheDead extends CardImpl {
 
     public DanceOfTheDead(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.ENCHANTMENT},"{1}{B}");
+        super(ownerId, setInfo, new CardType[]{CardType.ENCHANTMENT}, "{1}{B}");
         this.subtype.add("Aura");
 
         // Enchant creature card in a graveyard
@@ -296,14 +296,18 @@ class DanceOfTheDeadDoIfCostPaidEffect extends DoIfCostPaid {
 
     @Override
     protected Player getPayingPlayer(Game game, Ability source) {
-        Permanent attachment = game.getPermanent(source.getSourceId());
-        Permanent attachedTo = game.getPermanent(attachment.getAttachedTo());
-        return game.getPlayer(attachedTo.getControllerId());
+        Permanent attachment = game.getPermanentOrLKIBattlefield(source.getSourceId());
+        if (attachment != null) {
+            Permanent attachedTo = game.getPermanentOrLKIBattlefield(attachment.getAttachedTo());
+            if (attachedTo != null) {
+                return game.getPlayer(attachedTo.getControllerId());
+            }
+        }
+        return null;
     }
 
     @Override
     public String getText(Mode mode) {
-        return new StringBuilder("that player may ").append(getCostText())
-                .append(". If he or she does, ").append(executingEffects.getText(mode)).toString();
+        return "that player may " + getCostText() + ". If he or she does, " + executingEffects.getText(mode);
     }
 }
