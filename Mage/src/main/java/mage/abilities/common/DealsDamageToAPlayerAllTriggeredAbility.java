@@ -80,6 +80,7 @@ public class DealsDamageToAPlayerAllTriggeredAbility extends TriggeredAbilityImp
                 if (filter.match(permanent, getSourceId(), getControllerId(), game)) {
                     for (Effect effect : this.getEffects()) {
                         effect.setValue("damage", event.getAmount());
+                        effect.setValue("sourceId", event.getSourceId());
                         switch (setTargetPointer) {
                             case PLAYER:
                                 effect.setTargetPointer(new FixedTarget(permanent.getControllerId()));
