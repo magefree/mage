@@ -25,37 +25,32 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
+package org.mage.test.cards.abilities.oneshot.damage;
 
-package mage.filter.common;
-
-import mage.constants.CardType;
-import mage.filter.predicate.Predicates;
-import mage.filter.predicate.mageobject.CardTypePredicate;
-import mage.filter.predicate.permanent.TappedPredicate;
+import mage.constants.PhaseStep;
+import mage.constants.Zone;
+import org.junit.Test;
+import org.mage.test.serverside.base.CardTestPlayerBase;
 
 /**
  *
- * @author MTGfan
+ * @author LevelX2
  */
-public class FilterControlledUntappedLandPermanent extends FilterControlledPermanent {
+public class PowerSurgeTest extends CardTestPlayerBase {
 
-    public FilterControlledUntappedLandPermanent() {
-        this("untapped land you control");
+    @Test
+    public void testDamageInPlayer() {
+        addCard(Zone.BATTLEFIELD, playerA, "Mountain", 3);
+        // At the beginning of each player's upkeep, Power Surge deals X damage to that player, where X is the number of untapped lands he or she controlled at the beginning of this turn.
+        addCard(Zone.HAND, playerA, "Power Surge");
+
+        addCard(Zone.BATTLEFIELD, playerB, "Mountain", 3);
+
+        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Power Surge");
+        setStopAt(3, PhaseStep.PRECOMBAT_MAIN);
+        execute();
+
+        assertLife(playerA, 19);
+        assertLife(playerB, 17);
     }
-
-    public FilterControlledUntappedLandPermanent(String name) {
-        super(name);
-        this.add(new CardTypePredicate(CardType.LAND));
-        this.add(Predicates.not(new TappedPredicate()));
-    }
-
-    public FilterControlledUntappedLandPermanent(final FilterControlledUntappedLandPermanent filter) {
-        super(filter);
-    }
-
-    @Override
-    public FilterControlledUntappedLandPermanent copy() {
-        return new FilterControlledUntappedLandPermanent(this);
-    }
-
 }

@@ -37,10 +37,16 @@ import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Outcome;
 import mage.constants.TargetController;
+import mage.constants.WatcherScope;
 import mage.constants.Zone;
+import mage.filter.FilterPermanent;
+import mage.filter.common.FilterControlledLandPermanent;
+import mage.filter.predicate.Predicates;
+import mage.filter.predicate.permanent.TappedPredicate;
 import mage.game.Game;
+import mage.game.events.GameEvent;
 import mage.players.Player;
-import mage.watchers.common.UntappedLandsAtBeginningOfTurnWatcher;
+import mage.watchers.Watcher;
 
 /**
  *
@@ -50,10 +56,9 @@ public class PowerSurge extends CardImpl {
 
     public PowerSurge(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.ENCHANTMENT}, "{R}{R}");
-        
 
         // At the beginning of each player's upkeep, Power Surge deals X damage to that player, where X is the number of untapped lands he or she controlled at the beginning of this turn.
-        this.addAbility(new BeginningOfUpkeepTriggeredAbility(Zone.BATTLEFIELD, new PowerSurgeDamageEffect(), TargetController.ANY, false, true), new UntappedLandsAtBeginningOfTurnWatcher());
+        this.addAbility(new BeginningOfUpkeepTriggeredAbility(Zone.BATTLEFIELD, new PowerSurgeDamageEffect(), TargetController.ANY, false, true), new PowerSurgeWatcher());
     }
 
     public PowerSurge(final PowerSurge card) {
@@ -66,18 +71,16 @@ public class PowerSurge extends CardImpl {
     }
 }
 
-class PowerSurgeDamageEffect extends OneShotEffect{
-    
-    public PowerSurgeDamageEffect()
-    {
+class PowerSurgeDamageEffect extends OneShotEffect {
+
+    public PowerSurgeDamageEffect() {
         super(Outcome.Damage);
     }
-    
-    public PowerSurgeDamageEffect(PowerSurgeDamageEffect copy)
-    {
+
+    public PowerSurgeDamageEffect(PowerSurgeDamageEffect copy) {
         super(copy);
     }
-        
+
     @Override
     public String getText(Mode mode) {
         return "{this} deals X damage to that player where X is the number of untapped lands he or she controlled at the beginning of this turn";
@@ -87,8 +90,8 @@ class PowerSurgeDamageEffect extends OneShotEffect{
     public boolean apply(Game game, Ability source) {
         Player player = game.getPlayer(targetPointer.getFirst(game, source));
         if (player != null) {
-            UntappedLandsAtBeginningOfTurnWatcher watcher = (UntappedLandsAtBeginningOfTurnWatcher) game.getState().getWatchers().get("UntappedLandsAtBeginningOfTurn");
-            int damage = watcher.getUntappedLandCount(targetPointer.getFirst(game, source));
+            PowerSurgeWatcher watcher = (PowerSurgeWatcher) game.getState().getWatchers().get(PowerSurgeWatcher.class.getName());
+            int damage = watcher.getUntappedLandCount();
             player.damage(damage, source.getSourceId(), game, false, true);
             return true;
         }
@@ -98,5 +101,47 @@ class PowerSurgeDamageEffect extends OneShotEffect{
     @Override
     public PowerSurgeDamageEffect copy() {
         return new PowerSurgeDamageEffect(this);
+    }
+}
+
+class PowerSurgeWatcher extends Watcher {
+
+    private static final FilterPermanent filter = new FilterControlledLandPermanent();
+
+    static {
+        filter.add(Predicates.not(new TappedPredicate()));
+    }
+
+    private int untappedLandCount;
+
+    public PowerSurgeWatcher() {
+        super(PowerSurgeWatcher.class.getName(), WatcherScope.GAME);
+    }
+
+    public PowerSurgeWatcher(final PowerSurgeWatcher watcher) {
+        super(watcher);
+        untappedLandCount = watcher.untappedLandCount;
+    }
+
+    @Override
+    public void watch(GameEvent event, Game game) {
+        if (event.getType() == GameEvent.EventType.BEGINNING_PHASE_PRE
+                && game.getPhase() != null) {
+            untappedLandCount = game.getBattlefield().countAll(filter, game.getActivePlayerId(), game);
+        }
+    }
+
+    public int getUntappedLandCount() {
+        return untappedLandCount;
+    }
+
+    @Override
+    public void reset() {
+        untappedLandCount = 0;
+    }
+
+    @Override
+    public PowerSurgeWatcher copy() {
+        return new PowerSurgeWatcher(this);
     }
 }
