@@ -30,8 +30,9 @@ public class CostModificationTest extends CardTestPlayerBase {
     }
 
     @Test
-    public void testCard1() {
-        addCard(Zone.BATTLEFIELD, playerA, "Trinisphere");  // Set mana cost to min 3
+    public void testCardTrinisphere() {
+        // As long as Trinisphere is untapped, each spell that would cost less than three mana to cast costs three mana to cast.
+        addCard(Zone.BATTLEFIELD, playerA, "Trinisphere");
         addCard(Zone.BATTLEFIELD, playerA, "Thalia, Guardian of Thraben"); //+1
         addCard(Zone.BATTLEFIELD, playerA, "Mountain", 3);
         addCard(Zone.HAND, playerA, "Lightning Bolt");
@@ -43,6 +44,27 @@ public class CostModificationTest extends CardTestPlayerBase {
         assertLife(playerA, 20);
         assertLife(playerB, 17);
         assertGraveyardCount(playerA, 1);
+    }
+
+    // Trinisphere interacts incorrectly with Phyrexian mana. As implemented, Gitaxian Probe gets a required cost of {2}{U/P},
+    // which allows paying 2 life and only 2 mana. This is incorrect: Trinisphere requires that at least 3 mana be paid, and
+    // payment through life doesn't count. (Source: http://blogs.magicjudges.org/rulestips/2012/08/how-trinisphere-works-with-phyrexian-mana/)
+    @Test
+    public void testCardTrinispherePhyrexianMana() {
+        // As long as Trinisphere is untapped, each spell that would cost less than three mana to cast costs three mana to cast.
+        addCard(Zone.BATTLEFIELD, playerA, "Trinisphere");
+
+        addCard(Zone.BATTLEFIELD, playerB, "Plains", 2);
+        // Look at target player's hand.
+        // Draw a card.
+        addCard(Zone.HAND, playerB, "Gitaxian Probe"); // Sorcery {UP}
+
+        castSpell(2, PhaseStep.PRECOMBAT_MAIN, playerB, "Gitaxian Probe", playerA);
+        setStopAt(2, PhaseStep.BEGIN_COMBAT);
+        execute();
+
+        assertHandCount(playerB, "Gitaxian Probe", 1);
+        assertGraveyardCount(playerB, "Gitaxian Probe", 0);
     }
 
     /**

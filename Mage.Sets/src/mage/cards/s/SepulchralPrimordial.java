@@ -27,10 +27,9 @@
  */
 package mage.cards.s;
 
+import java.util.HashSet;
+import java.util.Set;
 import java.util.UUID;
-import mage.constants.CardType;
-import mage.constants.Outcome;
-import mage.constants.Zone;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.EntersBattlefieldTriggeredAbility;
@@ -39,6 +38,9 @@ import mage.abilities.keyword.IntimidateAbility;
 import mage.cards.Card;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
+import mage.constants.CardType;
+import mage.constants.Outcome;
+import mage.constants.Zone;
 import mage.filter.FilterCard;
 import mage.filter.common.FilterCreatureCard;
 import mage.filter.predicate.other.OwnerIdPredicate;
@@ -54,7 +56,7 @@ import mage.target.common.TargetCardInOpponentsGraveyard;
 public class SepulchralPrimordial extends CardImpl {
 
     public SepulchralPrimordial(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{5}{B}{B}");
+        super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{5}{B}{B}");
         this.subtype.add("Avatar");
 
         this.power = new MageInt(5);
@@ -65,19 +67,19 @@ public class SepulchralPrimordial extends CardImpl {
 
         // When Sepulchral Primordial enters the battlefield, for each opponent, you may put up to one
         // target creature card from that player's graveyard onto the battlefield under your control.
-        this.addAbility(new EntersBattlefieldTriggeredAbility(new SepulchralPrimordialEffect(),false));
+        this.addAbility(new EntersBattlefieldTriggeredAbility(new SepulchralPrimordialEffect(), false));
     }
 
     @Override
     public void adjustTargets(Ability ability, Game game) {
         if (ability instanceof EntersBattlefieldTriggeredAbility) {
             ability.getTargets().clear();
-            for(UUID opponentId : game.getOpponents(ability.getControllerId())) {
+            for (UUID opponentId : game.getOpponents(ability.getControllerId())) {
                 Player opponent = game.getPlayer(opponentId);
                 if (opponent != null) {
-                    FilterCard filter = new FilterCreatureCard("creature card from " + opponent.getLogName() + "'s graveyard");
+                    FilterCard filter = new FilterCreatureCard("creature card from " + opponent.getName() + "'s graveyard");
                     filter.add(new OwnerIdPredicate(opponentId));
-                    TargetCardInOpponentsGraveyard target = new TargetCardInOpponentsGraveyard(0,1, filter);
+                    TargetCardInOpponentsGraveyard target = new TargetCardInOpponentsGraveyard(0, 1, filter);
                     ability.addTarget(target);
                 }
             }
@@ -113,14 +115,18 @@ class SepulchralPrimordialEffect extends OneShotEffect {
     @Override
     public boolean apply(Game game, Ability source) {
         Player controller = game.getPlayer(source.getControllerId());
-        if (controller != null) {        
-            for (Target target: source.getTargets()) {
+        if (controller != null) {
+            Set<Card> cardsToBattlefield = new HashSet<>();
+            for (Target target : source.getTargets()) {
                 if (target instanceof TargetCardInOpponentsGraveyard) {
                     Card targetCard = game.getCard(target.getFirstTarget());
                     if (targetCard != null) {
-                        targetCard.putOntoBattlefield(game, Zone.GRAVEYARD, source.getSourceId(), source.getControllerId());
+                        cardsToBattlefield.add(targetCard);
                     }
                 }
+            }
+            if (!cardsToBattlefield.isEmpty()) {
+                controller.moveCards(cardsToBattlefield, Zone.BATTLEFIELD, source, game);
             }
             return true;
         }

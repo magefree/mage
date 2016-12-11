@@ -57,7 +57,7 @@ public class PhyrexianManaCost extends ColoredManaCost {
 
     @Override
     public String getText() {
-        return new StringBuilder("{").append(mana.toString()).append("P}").toString();
+        return "{" + mana.toString() + "P}";
     }
 
     @Override

@@ -51,7 +51,7 @@ import mage.util.CardUtil;
 public class Trinisphere extends CardImpl {
 
     public Trinisphere(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.ARTIFACT},"{3}");
+        super(ownerId, setInfo, new CardType[]{CardType.ARTIFACT}, "{3}");
 
         // As long as Trinisphere is untapped, each spell that would cost less than three mana to cast costs three mana to cast.
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new TrinisphereEffect()));
@@ -81,7 +81,7 @@ class TrinisphereEffect extends CostModificationEffectImpl {
     @Override
     public boolean apply(Game game, Ability source, Ability abilityToModify) {
         int manaCost = abilityToModify.getManaCostsToPay().convertedManaCost();
-        if(manaCost < 3){
+        if (manaCost < 3) {
             CardUtil.increaseCost(abilityToModify, 3 - manaCost);
         }
         return true;
@@ -91,10 +91,7 @@ class TrinisphereEffect extends CostModificationEffectImpl {
     public boolean applies(Ability abilityToModify, Ability source, Game game) {
         if ((abilityToModify instanceof SpellAbility || abilityToModify instanceof FlashbackAbility)) {
             Permanent permanent = game.getPermanent(source.getSourceId());
-            if(permanent != null && !permanent.isTapped())
-            {
-                return true;
-            }
+            return permanent != null && !permanent.isTapped();
         }
         return false;
     }
