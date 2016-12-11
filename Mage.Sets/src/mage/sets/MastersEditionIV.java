@@ -65,6 +65,7 @@ public class MastersEditionIV extends ExpansionSet {
         cards.add(new SetCardInfo("Ali from Cairo", 107, Rarity.RARE, mage.cards.a.AliFromCairo.class));
         cards.add(new SetCardInfo("Alluring Scent", 141, Rarity.COMMON, mage.cards.a.AlluringScent.class));
         cards.add(new SetCardInfo("Amulet of Kroog", 179, Rarity.COMMON, mage.cards.a.AmuletOfKroog.class));
+        cards.add(new SetCardInfo("Animate Artifact", 38, Rarity.UNCOMMON, mage.cards.a.AnimateArtifact.class));
         cards.add(new SetCardInfo("Argivian Blacksmith", 4, Rarity.UNCOMMON, mage.cards.a.ArgivianBlacksmith.class));
         cards.add(new SetCardInfo("Argothian Pixies", 142, Rarity.COMMON, mage.cards.a.ArgothianPixies.class));
         cards.add(new SetCardInfo("Argothian Treefolk", 143, Rarity.UNCOMMON, mage.cards.a.ArgothianTreefolk.class));

@@ -28,6 +28,7 @@ public class RevisedEdition extends ExpansionSet {
         cards.add(new SetCardInfo("Air Elemental", 47, Rarity.UNCOMMON, mage.cards.a.AirElemental.class));
         cards.add(new SetCardInfo("Aladdin's Lamp", 231, Rarity.RARE, mage.cards.a.AladdinsLamp.class));
         cards.add(new SetCardInfo("Aladdin's Ring", 232, Rarity.RARE, mage.cards.a.AladdinsRing.class));
+        cards.add(new SetCardInfo("Animate Artifact", 48, Rarity.UNCOMMON, mage.cards.a.AnimateArtifact.class));
         cards.add(new SetCardInfo("Animate Dead", 1, Rarity.UNCOMMON, mage.cards.a.AnimateDead.class));
         cards.add(new SetCardInfo("Animate Wall", 185, Rarity.RARE, mage.cards.a.AnimateWall.class));
         cards.add(new SetCardInfo("Ankh of Mishra", 233, Rarity.RARE, mage.cards.a.AnkhOfMishra.class));
@@ -214,6 +215,7 @@ public class RevisedEdition extends ExpansionSet {
         cards.add(new SetCardInfo("Plains", 295, Rarity.LAND, mage.cards.basiclands.Plains.class, new CardGraphicInfo(null, true)));
         cards.add(new SetCardInfo("Plateau", 296, Rarity.RARE, mage.cards.p.Plateau.class));
         cards.add(new SetCardInfo("Power Sink", 74, Rarity.COMMON, mage.cards.p.PowerSink.class));
+        cards.add(new SetCardInfo("Power Surge", 169, Rarity.RARE, mage.cards.p.PowerSurge.class));
         cards.add(new SetCardInfo("Primal Clay", 271, Rarity.RARE, mage.cards.p.PrimalClay.class));
         cards.add(new SetCardInfo("Prodigal Sorcerer", 75, Rarity.COMMON, mage.cards.p.ProdigalSorcerer.class));
         cards.add(new SetCardInfo("Psychic Venom", 76, Rarity.COMMON, mage.cards.p.PsychicVenom.class));

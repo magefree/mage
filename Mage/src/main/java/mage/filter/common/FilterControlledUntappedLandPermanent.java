@@ -25,44 +25,37 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.abilities.condition.common;
 
-import mage.abilities.Ability;
-import mage.abilities.condition.Condition;
-import mage.constants.Zone;
-import mage.filter.FilterPermanent;
-import mage.game.Game;
-import mage.game.permanent.Permanent;
+package mage.filter.common;
 
+import mage.constants.CardType;
+import mage.filter.predicate.Predicates;
+import mage.filter.predicate.mageobject.CardTypePredicate;
+import mage.filter.predicate.permanent.TappedPredicate;
 
 /**
- * Describes condition when equipped permanent has superType
  *
- * @author LevelX
+ * @author MTGfan
  */
-public class EquippedMatchesFilterCondition implements Condition {
+public class FilterControlledUntappedLandPermanent extends FilterControlledPermanent {
 
-    private final FilterPermanent filter;
+    public FilterControlledUntappedLandPermanent() {
+        this("untapped land you control");
+    }
 
-    public EquippedMatchesFilterCondition(FilterPermanent filter) {
-        this.filter = filter;
+    public FilterControlledUntappedLandPermanent(String name) {
+        super(name);
+        this.add(new CardTypePredicate(CardType.LAND));
+        this.add(Predicates.not(new TappedPredicate()));
+    }
+
+    public FilterControlledUntappedLandPermanent(final FilterControlledUntappedLandPermanent filter) {
+        super(filter);
     }
 
     @Override
-    public boolean apply(Game game, Ability source) {
-        Permanent permanent = game.getBattlefield().getPermanent(source.getSourceId());
-        if (permanent != null && permanent.getAttachedTo() != null) {
-            Permanent attachedTo = game.getBattlefield().getPermanent(permanent.getAttachedTo());
-            if (attachedTo == null) {
-                attachedTo = (Permanent) game.getLastKnownInformation(permanent.getAttachedTo(), Zone.BATTLEFIELD);
-            }
-            if (attachedTo != null) {
-                if (filter.match(attachedTo, attachedTo.getId(),attachedTo.getControllerId(), game)) {
-                    return true;
-                }
-
-            }
-        }
-        return false;
+    public FilterControlledUntappedLandPermanent copy() {
+        return new FilterControlledUntappedLandPermanent(this);
     }
+
 }

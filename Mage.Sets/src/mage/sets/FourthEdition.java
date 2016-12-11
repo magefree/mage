@@ -62,6 +62,7 @@ public class FourthEdition extends ExpansionSet {
         cards.add(new SetCardInfo("Amrou Kithkin", 252, Rarity.COMMON, mage.cards.a.AmrouKithkin.class));
         cards.add(new SetCardInfo("Amulet of Kroog", 311, Rarity.COMMON, mage.cards.a.AmuletOfKroog.class));
         cards.add(new SetCardInfo("Angry Mob", 253, Rarity.UNCOMMON, mage.cards.a.AngryMob.class));
+        cards.add(new SetCardInfo("Animate Artifact", 60, Rarity.UNCOMMON, mage.cards.a.AnimateArtifact.class));
         cards.add(new SetCardInfo("Animate Dead", 2, Rarity.UNCOMMON, mage.cards.a.AnimateDead.class));
         cards.add(new SetCardInfo("Animate Wall", 254, Rarity.RARE, mage.cards.a.AnimateWall.class));
         cards.add(new SetCardInfo("Ankh of Mishra", 312, Rarity.RARE, mage.cards.a.AnkhOfMishra.class));
@@ -283,6 +284,7 @@ public class FourthEdition extends ExpansionSet {
         cards.add(new SetCardInfo("Plains", 187, Rarity.LAND, mage.cards.basiclands.Plains.class, new CardGraphicInfo(null, true)));
         cards.add(new SetCardInfo("Plains", 188, Rarity.LAND, mage.cards.basiclands.Plains.class, new CardGraphicInfo(null, true)));
         cards.add(new SetCardInfo("Power Sink", 93, Rarity.COMMON, mage.cards.p.PowerSink.class));
+        cards.add(new SetCardInfo("Power Surge", 234, Rarity.RARE, mage.cards.p.PowerSurge.class));
         cards.add(new SetCardInfo("Pradesh Gypsies", 149, Rarity.COMMON, mage.cards.p.PradeshGypsies.class));
         cards.add(new SetCardInfo("Primal Clay", 360, Rarity.RARE, mage.cards.p.PrimalClay.class));
         cards.add(new SetCardInfo("Prodigal Sorcerer", 94, Rarity.COMMON, mage.cards.p.ProdigalSorcerer.class));

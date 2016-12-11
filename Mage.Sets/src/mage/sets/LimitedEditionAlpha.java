@@ -27,6 +27,7 @@ public class LimitedEditionAlpha extends ExpansionSet {
         this.ratioBoosterMythic = 0;
         cards.add(new SetCardInfo("Air Elemental", 47, Rarity.UNCOMMON, mage.cards.a.AirElemental.class));
         cards.add(new SetCardInfo("Ancestral Recall", 48, Rarity.RARE, mage.cards.a.AncestralRecall.class));
+        cards.add(new SetCardInfo("Animate Artifact", 49, Rarity.UNCOMMON, mage.cards.a.AnimateArtifact.class));
         cards.add(new SetCardInfo("Animate Dead", 1, Rarity.UNCOMMON, mage.cards.a.AnimateDead.class));
         cards.add(new SetCardInfo("Animate Wall", 185, Rarity.RARE, mage.cards.a.AnimateWall.class));
         cards.add(new SetCardInfo("Ankh of Mishra", 230, Rarity.RARE, mage.cards.a.AnkhOfMishra.class));
@@ -60,6 +61,7 @@ public class LimitedEditionAlpha extends ExpansionSet {
         cards.add(new SetCardInfo("Clockwork Beast", 236, Rarity.RARE, mage.cards.c.ClockworkBeast.class));
         cards.add(new SetCardInfo("Clone", 52, Rarity.UNCOMMON, mage.cards.c.Clone.class));
         cards.add(new SetCardInfo("Cockatrice", 98, Rarity.RARE, mage.cards.c.Cockatrice.class));
+        cards.add(new SetCardInfo("Consecrate Land", 198, Rarity.UNCOMMON, mage.cards.c.ConsecrateLand.class));
         cards.add(new SetCardInfo("Conservator", 237, Rarity.UNCOMMON, mage.cards.c.Conservator.class));
         cards.add(new SetCardInfo("Control Magic", 53, Rarity.UNCOMMON, mage.cards.c.ControlMagic.class));
         cards.add(new SetCardInfo("Conversion", 199, Rarity.UNCOMMON, mage.cards.c.Conversion.class));
@@ -200,6 +202,7 @@ public class LimitedEditionAlpha extends ExpansionSet {
         cards.add(new SetCardInfo("Plains", 286, Rarity.LAND, mage.cards.basiclands.Plains.class, new CardGraphicInfo(null, true)));
         cards.add(new SetCardInfo("Plateau", 287, Rarity.RARE, mage.cards.p.Plateau.class));
         cards.add(new SetCardInfo("Power Sink", 73, Rarity.COMMON, mage.cards.p.PowerSink.class));
+        cards.add(new SetCardInfo("Power Surge", 168, Rarity.RARE, mage.cards.p.PowerSurge.class));
         cards.add(new SetCardInfo("Prodigal Sorcerer", 74, Rarity.COMMON, mage.cards.p.ProdigalSorcerer.class));
         cards.add(new SetCardInfo("Psionic Blast", 75, Rarity.UNCOMMON, mage.cards.p.PsionicBlast.class));
         cards.add(new SetCardInfo("Psychic Venom", 76, Rarity.COMMON, mage.cards.p.PsychicVenom.class));

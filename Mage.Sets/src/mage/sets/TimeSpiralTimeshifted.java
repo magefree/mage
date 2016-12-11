@@ -63,6 +63,7 @@ public class TimeSpiralTimeshifted extends ExpansionSet {
         cards.add(new SetCardInfo("Claws of Gix", 107, Rarity.COMMON, mage.cards.c.ClawsOfGix.class));
         cards.add(new SetCardInfo("Coalition Victory", 91, Rarity.RARE, mage.cards.c.CoalitionVictory.class));
         cards.add(new SetCardInfo("Cockatrice", 75, Rarity.SPECIAL, mage.cards.c.Cockatrice.class));
+        cards.add(new SetCardInfo("Consecrate Land", 4, Rarity.SPECIAL, mage.cards.c.ConsecrateLand.class));
         cards.add(new SetCardInfo("Conspiracy", 39, Rarity.SPECIAL, mage.cards.c.Conspiracy.class));
         cards.add(new SetCardInfo("Craw Giant", 76, Rarity.SPECIAL, mage.cards.c.CrawGiant.class));
         cards.add(new SetCardInfo("Dandan", 19, Rarity.SPECIAL, mage.cards.d.Dandan.class));
