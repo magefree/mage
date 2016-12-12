@@ -187,7 +187,7 @@ public class DeckArea extends javax.swing.JPanel {
             public void invertCardSelection(Collection<CardView> cards) {
                 // Invert Selection
                 for (CardView card : cards) {
-                    card.setSelected(card.isSelected());
+                    card.setSelected(!card.isSelected());
                 }
             }
 
