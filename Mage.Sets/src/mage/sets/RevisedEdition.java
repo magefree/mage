@@ -193,6 +193,7 @@ public class RevisedEdition extends ExpansionSet {
         cards.add(new SetCardInfo("Mountain", 291, Rarity.LAND, mage.cards.basiclands.Mountain.class, new CardGraphicInfo(null, true)));
         cards.add(new SetCardInfo("Mountain", 292, Rarity.LAND, mage.cards.basiclands.Mountain.class, new CardGraphicInfo(null, true)));
         cards.add(new SetCardInfo("Nether Shadow", 26, Rarity.RARE, mage.cards.n.NetherShadow.class));
+        cards.add(new SetCardInfo("Nettling Imp", 27, Rarity.UNCOMMON, mage.cards.n.NettlingImp.class));
         cards.add(new SetCardInfo("Nevinyrral's Disk", 267, Rarity.RARE, mage.cards.n.NevinyrralsDisk.class));
         cards.add(new SetCardInfo("Nightmare", 28, Rarity.RARE, mage.cards.n.Nightmare.class));
         cards.add(new SetCardInfo("Northern Paladin", 213, Rarity.RARE, mage.cards.n.NorthernPaladin.class));

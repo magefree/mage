@@ -183,6 +183,7 @@ public class LimitedEditionAlpha extends ExpansionSet {
         cards.add(new SetCardInfo("Mox Sapphire", 265, Rarity.RARE, mage.cards.m.MoxSapphire.class));
         cards.add(new SetCardInfo("Natural Selection", 121, Rarity.RARE, mage.cards.n.NaturalSelection.class));
         cards.add(new SetCardInfo("Nether Shadow", 25, Rarity.RARE, mage.cards.n.NetherShadow.class));
+        cards.add(new SetCardInfo("Nettling Imp", 26, Rarity.UNCOMMON, mage.cards.n.NettlingImp.class));
         cards.add(new SetCardInfo("Nevinyrral's Disk", 266, Rarity.RARE, mage.cards.n.NevinyrralsDisk.class));
         cards.add(new SetCardInfo("Nightmare", 27, Rarity.RARE, mage.cards.n.Nightmare.class));
         cards.add(new SetCardInfo("Northern Paladin", 213, Rarity.RARE, mage.cards.n.NorthernPaladin.class));
