@@ -229,10 +229,10 @@ public class ConstructedFormats {
 
         return builder.toString();
     }
-
-    private static final Date extendedDate = new GregorianCalendar(2009, 8, 20).getTime();
-    private static final Date frontierDate = new GregorianCalendar(2014, 7, 17).getTime();
-    private static final Date modernDate = new GregorianCalendar(2003, 7, 20).getTime();
+    // Attention -Month is 0 Based so Feb = 1 for example.
+    private static final Date extendedDate = new GregorianCalendar(2009, 7, 20).getTime();
+    private static final Date frontierDate = new GregorianCalendar(2014, 6, 17).getTime();
+    private static final Date modernDate = new GregorianCalendar(2003, 6, 20).getTime();
 
     // for all sets just return empty list
     private static final List<String> all = new ArrayList<>();
