@@ -144,6 +144,14 @@ public class DeckArea extends javax.swing.JPanel {
                     deckList.addCardView(newCard, true);
                 }
             }
+
+            @Override
+            public void invertCardSelection(Collection<CardView> cards) {
+                // Invert Selection
+                for (CardView card : cards) {
+                    card.setSelected(!card.isSelected());
+                }
+            }
         });
         sideboardList.addDragCardGridListener(new DragCardGrid.DragCardGridListener() {
             @Override
@@ -174,6 +182,15 @@ public class DeckArea extends javax.swing.JPanel {
                     sideboardList.addCardView(newCard, true);
                 }                
             }
+
+            @Override
+            public void invertCardSelection(Collection<CardView> cards) {
+                // Invert Selection
+                for (CardView card : cards) {
+                    card.setSelected(!card.isSelected());
+                }
+            }
+
         });
     }
 

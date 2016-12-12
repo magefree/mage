@@ -577,6 +577,8 @@ public class DragCardGrid extends JPanel implements DragCardSource, DragCardTarg
         void hideCards(Collection<CardView> card);
 
         void duplicateCards(Collection<CardView> cards);
+        
+        void invertCardSelection(Collection<CardView> cards);
 
         void showAll();
     };
@@ -1105,6 +1107,18 @@ public class DragCardGrid extends JPanel implements DragCardSource, DragCardTarg
         for (DragCardGridListener l : listeners) {
             l.duplicateCards(toDuplicate);
         }
+    }
+    
+    private void invertSelection() {
+        Collection<CardView> toInvert = allCards;
+        for (DragCardGridListener l : listeners) {
+            l.invertCardSelection(toInvert);
+            for (CardView card : allCards) {
+                MageCard view = cardViews.get(card.getId());
+                view.update(card);
+            }
+        }
+        repaint();
     }
 
     private void showAll() {
@@ -1645,6 +1659,10 @@ public class DragCardGrid extends JPanel implements DragCardSource, DragCardTarg
         JMenuItem hide = new JMenuItem("Hide");
         hide.addActionListener(e2 -> hideSelection());
         menu.add(hide);
+        
+        JMenuItem invertSelection = new JMenuItem("Invert Selection");
+        invertSelection.addActionListener(e2 -> invertSelection());
+        menu.add(invertSelection);
 
         // Show 'Duplicate Selection' for FREE_BUILDING
         if (this.mode == Constants.DeckEditorMode.FREE_BUILDING) {
