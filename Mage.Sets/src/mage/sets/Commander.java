@@ -78,6 +78,7 @@ public class Commander extends ExpansionSet {
         cards.add(new SetCardInfo("Baloth Woodcrasher", 143, Rarity.UNCOMMON, mage.cards.b.BalothWoodcrasher.class));
         cards.add(new SetCardInfo("Barren Moor", 266, Rarity.COMMON, mage.cards.b.BarrenMoor.class));
         cards.add(new SetCardInfo("Basandra, Battle Seraph", 184, Rarity.RARE, mage.cards.b.BasandraBattleSeraph.class));
+        cards.add(new SetCardInfo("Bathe in Light", 9, Rarity.UNCOMMON, mage.cards.b.BatheInLight.class));
         cards.add(new SetCardInfo("Bestial Menace", 144, Rarity.UNCOMMON, mage.cards.b.BestialMenace.class));
         cards.add(new SetCardInfo("Bladewing the Risen", 185, Rarity.RARE, mage.cards.b.BladewingTheRisen.class));
         cards.add(new SetCardInfo("Bojuka Bog", 267, Rarity.COMMON, mage.cards.b.BojukaBog.class));

@@ -25,16 +25,16 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.cards.r;
+package mage.cards.w;
 
 import java.util.UUID;
 import mage.MageObjectReference;
 import mage.ObjectColor;
 import mage.abilities.Ability;
 import mage.abilities.effects.ContinuousEffectImpl;
-import mage.abilities.effects.OneShotEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
+import mage.constants.AbilityWord;
 import mage.constants.CardType;
 import mage.constants.Duration;
 import mage.constants.Layer;
@@ -46,70 +46,39 @@ import mage.game.permanent.Permanent;
 import mage.target.common.TargetCreaturePermanent;
 
 /**
- * @author duncant
+ *
+ * @author LevelX2
  */
-public class RallyTheRighteous extends CardImpl {
+public class WojekSiren extends CardImpl {
 
-    public RallyTheRighteous(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId, setInfo, new CardType[]{CardType.INSTANT}, "{1}{R}{W}");
+    public WojekSiren(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId, setInfo, new CardType[]{CardType.INSTANT}, "{W}");
 
-        // Radiance — Untap target creature and each other creature that shares a color with it. Those creatures get +2/+0 until end of turn.
+        // Radiance - Target creature and each other creature that shares a color with it get +1/+1 until end of turn.
         this.getSpellAbility().addTarget(new TargetCreaturePermanent());
-        this.getSpellAbility().addEffect(new RallyTheRighteousUntapEffect());
-        this.getSpellAbility().addEffect(new RallyTheRighteousBoostEffect());
+        this.getSpellAbility().addEffect(new WojekSirenBoostEffect());
+        this.getSpellAbility().setAbilityWord(AbilityWord.RADIANCE);
+
     }
 
-    public RallyTheRighteous(final RallyTheRighteous card) {
+    public WojekSiren(final WojekSiren card) {
         super(card);
     }
 
     @Override
-    public RallyTheRighteous copy() {
-        return new RallyTheRighteous(this);
+    public WojekSiren copy() {
+        return new WojekSiren(this);
     }
 }
 
-class RallyTheRighteousUntapEffect extends OneShotEffect {
+class WojekSirenBoostEffect extends ContinuousEffectImpl {
 
-    public RallyTheRighteousUntapEffect() {
-        super(Outcome.Untap);
-        staticText = "<i>Radiance</i> — Untap target creature and each other creature that shares a color with it";
-    }
-
-    public RallyTheRighteousUntapEffect(final RallyTheRighteousUntapEffect effect) {
-        super(effect);
-    }
-
-    @Override
-    public RallyTheRighteousUntapEffect copy() {
-        return new RallyTheRighteousUntapEffect(this);
-    }
-
-    @Override
-    public boolean apply(Game game, Ability source) {
-        Permanent target = game.getPermanent(getTargetPointer().getFirst(game, source));
-        if (target != null) {
-            ObjectColor color = target.getColor(game);
-            target.untap(game);
-            for (Permanent permanent : game.getBattlefield().getActivePermanents(new FilterCreaturePermanent(), source.getControllerId(), source.getSourceId(), game)) {
-                if (permanent.getColor(game).shares(color) && !permanent.getId().equals(target.getId())) {
-                    permanent.untap(game);
-                }
-            }
-            return true;
-        }
-        return false;
-    }
-}
-
-class RallyTheRighteousBoostEffect extends ContinuousEffectImpl {
-
-    public RallyTheRighteousBoostEffect() {
+    public WojekSirenBoostEffect() {
         super(Duration.EndOfTurn, Layer.PTChangingEffects_7, SubLayer.ModifyPT_7c, Outcome.BoostCreature);
-        staticText = "Those creatures get +2/+0 until end of turn";
+        staticText = "Target creature and each other creature that shares a color with it get +1/+1 until end of turn";
     }
 
-    public RallyTheRighteousBoostEffect(final RallyTheRighteousBoostEffect effect) {
+    public WojekSirenBoostEffect(final WojekSirenBoostEffect effect) {
         super(effect);
     }
 
@@ -140,7 +109,7 @@ class RallyTheRighteousBoostEffect extends ContinuousEffectImpl {
     }
 
     @Override
-    public RallyTheRighteousBoostEffect copy() {
-        return new RallyTheRighteousBoostEffect(this);
+    public WojekSirenBoostEffect copy() {
+        return new WojekSirenBoostEffect(this);
     }
 }
