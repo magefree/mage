@@ -33,8 +33,6 @@ import org.apache.log4j.Logger;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.concurrent.ExecutorService;
-import java.util.concurrent.Executors;
 
 /**
  *
@@ -50,43 +48,32 @@ public class CardScanner {
             return;
         }
         scanned = true;
-        final int availableProcessors = Runtime.getRuntime().availableProcessors();
-        ExecutorService exec = Executors.newFixedThreadPool(availableProcessors);
 
         List<CardInfo> cardsToAdd = new ArrayList<>();
 
         for (ExpansionSet set : Sets.getInstance().values()) {
-            exec.submit(new Runnable() {
-                @Override
-                public void run() {
-                    ExpansionRepository.instance.add(new ExpansionInfo(set));
-                }
-            });
+            ExpansionRepository.instance.add(new ExpansionInfo(set));
         }
-
         ExpansionRepository.instance.setContentVersion(ExpansionRepository.instance.getContentVersionConstant());
+
         for (ExpansionSet set : Sets.getInstance().values()) {
-            exec.submit(new Runnable() {
-                @Override
-                public void run() {
-                    for (ExpansionSet.SetCardInfo setInfo : set.getSetCardInfo()) {
-                        if (CardRepository.instance.findCard(set.getCode(), setInfo.getCardNumber()) == null) {
-                            Card card = CardImpl.createCard(setInfo.getCardClass(),
-                                    new CardSetInfo(setInfo.getName(), set.getCode(), setInfo.getCardNumber(),
-                                            setInfo.getRarity(), setInfo.getGraphicInfo()));
-                            if (card != null) {
-                                cardsToAdd.add(new CardInfo(card));
-                                if (card instanceof SplitCard) {
-                                    SplitCard splitCard = (SplitCard) card;
-                                    cardsToAdd.add(new CardInfo(splitCard.getLeftHalfCard()));
-                                    cardsToAdd.add(new CardInfo(splitCard.getRightHalfCard()));
-                                }
-                            }
+            for (ExpansionSet.SetCardInfo setInfo : set.getSetCardInfo()) {
+                if (CardRepository.instance.findCard(set.getCode(), setInfo.getCardNumber()) == null) {
+                    Card card = CardImpl.createCard(setInfo.getCardClass(),
+                            new CardSetInfo(setInfo.getName(), set.getCode(), setInfo.getCardNumber(),
+                                    setInfo.getRarity(), setInfo.getGraphicInfo()));
+                    if (card != null) {
+                        cardsToAdd.add(new CardInfo(card));
+                        if (card instanceof SplitCard) {
+                            SplitCard splitCard = (SplitCard) card;
+                            cardsToAdd.add(new CardInfo(splitCard.getLeftHalfCard()));
+                            cardsToAdd.add(new CardInfo(splitCard.getRightHalfCard()));
                         }
                     }
                 }
-            });
+            }
         }
+
         if (!cardsToAdd.isEmpty()) {
             logger.info("Cards need storing in DB: " + cardsToAdd.size());
             CardRepository.instance.addCards(cardsToAdd);
