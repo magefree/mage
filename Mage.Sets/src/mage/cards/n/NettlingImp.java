@@ -50,6 +50,7 @@ import mage.filter.predicate.mageobject.SubtypePredicate;
 import mage.filter.predicate.permanent.ControlledFromStartOfControllerTurnPredicate;
 import mage.filter.predicate.permanent.ControllerPredicate;
 import mage.game.Game;
+import mage.players.Player;
 import mage.target.common.TargetCreaturePermanent;
 import mage.watchers.common.AttackedThisTurnWatcher;
 
@@ -65,6 +66,7 @@ public class NettlingImp extends CardImpl {
         filter.add(Predicates.not(new SubtypePredicate("Wall")));
 	filter.add(new ControlledFromStartOfControllerTurnPredicate());
         filter.add(new ControllerPredicate(TargetController.ACTIVE));
+        filter.setMessage("non-Wall creature the active player has controlled continuously since the beginning of the turn.");
     }
 
 
@@ -76,7 +78,7 @@ public class NettlingImp extends CardImpl {
         this.toughness = new MageInt(1);
 
         // {tap}: Choose target non-Wall creature the active player has controlled continuously since the beginning of the turn. That creature attacks this turn if able. If it doesn't, destroy it at the beginning of the next end step. Activate this ability only during an opponent's turn, before attackers are declared.
-        Ability ability = new ConditionalActivatedAbility(Zone.BATTLEFIELD, new AttacksIfAbleTargetEffect(Duration.EndOfTurn), new TapSourceCost(), new TurnCondition(), "{tap}: Choose target non-Wall creature the active player has controlled continuously since the beginning of the turn. That creature attacks this turn if able. If it doesn't, destroy it at the beginning of the next end step. Activate this ability only during an opponent's turn, before attackers are declared.");
+        Ability ability = new ConditionalActivatedAbility(Zone.BATTLEFIELD, new AttacksIfAbleTargetEffect(Duration.EndOfTurn), new TapSourceCost(), new NettlingImpTurnCondition(), "{tap}: Choose target non-Wall creature the active player has controlled continuously since the beginning of the turn. That creature attacks this turn if able. If it doesn't, destroy it at the beginning of the next end step. Activate this ability only during an opponent's turn, before attackers are declared.");
         ability.addEffect(new ConditionalOneShotEffect(new DestroyTargetAtBeginningOfNextEndStepEffect(), new InvertCondition(new TargetAttackedThisTurnCondition())));
         ability.addTarget(new TargetCreaturePermanent(filter));
         this.addAbility(ability, new AttackedThisTurnWatcher());
@@ -93,12 +95,12 @@ public class NettlingImp extends CardImpl {
     }
 }
 
-class TurnCondition implements Condition {
+class NettlingImpTurnCondition implements Condition {
 
     @Override
     public boolean apply(Game game, Ability source) {
-	UUID activePlayerId = game.getActivePlayerId();
-        return activePlayerId != null && game.getPlayer(activePlayerId).hasOpponent(source.getControllerId(), game) && game.getPhase().getStep().getType().getIndex() < 5;
+	Player activePlayer = game.getPlayer(game.getActivePlayerId());
+        return activePlayer != null && game.getPlayer(game.getActivePlayerId()).hasOpponent(source.getControllerId(), game) && game.getPhase().getStep().getType().getIndex() < 5;
     }
 
     @Override
