@@ -29,28 +29,21 @@ package mage.cards.j;
 
 import java.util.UUID;
 import mage.MageInt;
-import mage.MageObject;
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.costs.common.SacrificeTargetCost;
 import mage.abilities.costs.common.TapSourceCost;
 import mage.abilities.costs.mana.ManaCostsImpl;
-import mage.abilities.effects.OneShotEffect;
-import mage.cards.Card;
+import mage.abilities.effects.common.RevealCardsFromLibraryUntilEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
-import mage.cards.CardsImpl;
 import mage.constants.CardType;
-import mage.constants.Outcome;
 import mage.constants.Zone;
 import mage.filter.common.FilterControlledCreaturePermanent;
 import mage.filter.common.FilterCreatureCard;
 import mage.filter.predicate.Predicates;
 import mage.filter.predicate.mageobject.SupertypePredicate;
 import mage.filter.predicate.permanent.AnotherPredicate;
-import mage.game.Game;
-import mage.players.Library;
-import mage.players.Player;
 import mage.target.common.TargetControlledCreaturePermanent;
 
 /**
@@ -59,14 +52,16 @@ import mage.target.common.TargetControlledCreaturePermanent;
  */
 public class JaliraMasterPolymorphist extends CardImpl {
 
-    private static final FilterControlledCreaturePermanent filter = new FilterControlledCreaturePermanent("another creature");
+    private static final FilterCreatureCard filterCard = new FilterCreatureCard("nonlegendary creature card");
+    private static final FilterControlledCreaturePermanent filterPermanent = new FilterControlledCreaturePermanent("another creature");
 
     static {
-        filter.add(new AnotherPredicate());
+        filterPermanent.add(new AnotherPredicate());
+        filterCard.add(Predicates.not(new SupertypePredicate("Legendary")));
     }
 
     public JaliraMasterPolymorphist(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{3}{U}");
+        super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{3}{U}");
         this.supertype.add("Legendary");
         this.subtype.add("Human");
         this.subtype.add("Wizard");
@@ -76,9 +71,9 @@ public class JaliraMasterPolymorphist extends CardImpl {
 
         // {2}{U}, {T}, Sacrifice another creature: Reveal cards from the top of your library until you reveal a nonlegendary creature card.
         // Put that card onto the battlefield and the rest on the bottom of your library in a random order.
-        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new JaliraMasterPolymorphistEffect(), new ManaCostsImpl("{2}{U}"));
+        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new RevealCardsFromLibraryUntilEffect(filterCard, Zone.BATTLEFIELD, Zone.LIBRARY), new ManaCostsImpl("{2}{U}"));
         ability.addCost(new TapSourceCost());
-        ability.addCost(new SacrificeTargetCost(new TargetControlledCreaturePermanent(1, 1, filter, true)));
+        ability.addCost(new SacrificeTargetCost(new TargetControlledCreaturePermanent(1, 1, filterPermanent, true)));
         this.addAbility(ability);
 
     }
@@ -90,65 +85,5 @@ public class JaliraMasterPolymorphist extends CardImpl {
     @Override
     public JaliraMasterPolymorphist copy() {
         return new JaliraMasterPolymorphist(this);
-    }
-}
-
-class JaliraMasterPolymorphistEffect extends OneShotEffect {
-
-    private static final FilterCreatureCard filter = new FilterCreatureCard("nonlegendary creature card");
-
-    static {
-        filter.add(Predicates.not(new SupertypePredicate("Legendary")));
-    }
-
-    public JaliraMasterPolymorphistEffect() {
-        super(Outcome.PutCardInPlay);
-        this.staticText = "Reveal cards from the top of your library until you reveal a nonlegendary creature card. Put that card onto the battlefield and the rest on the bottom of your library in a random order";
-    }
-
-    public JaliraMasterPolymorphistEffect(final JaliraMasterPolymorphistEffect effect) {
-        super(effect);
-    }
-
-    @Override
-    public JaliraMasterPolymorphistEffect copy() {
-        return new JaliraMasterPolymorphistEffect(this);
-    }
-
-    @Override
-    public boolean apply(Game game, Ability source) {
-        Player controller = game.getPlayer(source.getControllerId());
-        MageObject sourceObject = game.getObject(source.getSourceId());
-        if (controller != null && controller.getLibrary().size() > 0) {
-            CardsImpl cards = new CardsImpl();
-            Library library = controller.getLibrary();
-            Card card = null;
-            do {
-                card = library.removeFromTop(game);
-                if (card != null) {
-                    cards.add(card);
-                }
-            } while (library.size() > 0 && card != null && !filter.match(card, game));
-            // reveal cards
-            if (!cards.isEmpty()) {
-                controller.revealCards(sourceObject.getIdName(), cards, game);
-            }
-            if (card != null && filter.match(card, game)) {
-                // put nonlegendary creature card to battlefield
-                controller.moveCards(card, Zone.BATTLEFIELD, source, game);
-                // remove it from revealed card list
-                cards.remove(card);
-            }
-            // Put the rest on the bottom of your library in a random order
-            while (cards.size() > 0) {
-                card = cards.getRandom(game);
-                if (card != null) {
-                    cards.remove(card);
-                    controller.moveCardToLibraryWithInfo(card, source.getSourceId(), game, Zone.HAND, false, false);
-                }
-            }
-            return true;
-        }
-        return false;
     }
 }

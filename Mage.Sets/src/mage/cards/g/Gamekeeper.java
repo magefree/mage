@@ -29,23 +29,16 @@ package mage.cards.g;
 
 import java.util.UUID;
 import mage.MageInt;
-import mage.MageObject;
 import mage.abilities.Ability;
 import mage.abilities.common.DiesTriggeredAbility;
 import mage.abilities.costs.common.ExileSourceFromGraveCost;
-import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.DoIfCostPaid;
-import mage.abilities.effects.common.ExileSourceEffect;
-import mage.cards.Card;
+import mage.abilities.effects.common.RevealCardsFromLibraryUntilEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
-import mage.cards.Cards;
-import mage.cards.CardsImpl;
 import mage.constants.CardType;
-import mage.constants.Outcome;
 import mage.constants.Zone;
-import mage.game.Game;
-import mage.players.Player;
+import mage.filter.common.FilterCreatureCard;
 
 /**
  *
@@ -54,13 +47,13 @@ import mage.players.Player;
 public class Gamekeeper extends CardImpl {
 
     public Gamekeeper(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{3}{G}");
+        super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{3}{G}");
         this.subtype.add("Elf");
         this.power = new MageInt(2);
         this.toughness = new MageInt(2);
 
         // When Gamekeeper dies, you may exile it. If you do, reveal cards from the top of your library until you reveal a creature card. Put that card onto the battlefield and put all other cards revealed this way into your graveyard.
-        Ability ability = new DiesTriggeredAbility(new DoIfCostPaid(new GamekeeperEffect(), new ExileSourceFromGraveCost(), "Exile to reveal cards from the top of your library until you reveal a creature card?"), false);
+        Ability ability = new DiesTriggeredAbility(new DoIfCostPaid(new RevealCardsFromLibraryUntilEffect(new FilterCreatureCard(), Zone.BATTLEFIELD, Zone.GRAVEYARD), new ExileSourceFromGraveCost(), "Exile to reveal cards from the top of your library until you reveal a creature card?"), false);
         this.addAbility(ability);
     }
 
@@ -71,44 +64,5 @@ public class Gamekeeper extends CardImpl {
     @Override
     public Gamekeeper copy() {
         return new Gamekeeper(this);
-    }
-}
-
-class GamekeeperEffect extends OneShotEffect {
-
-    public GamekeeperEffect() {
-        super(Outcome.Benefit);
-        staticText = "reveal cards from the top of your library until you reveal a creature card. Put that card onto the battlefield and put all other cards revealed this way into your graveyard";
-    }
-
-    public GamekeeperEffect(final GamekeeperEffect effect) {
-        super(effect);
-    }
-
-    @Override
-    public boolean apply(Game game, Ability source) {
-        Player controller = game.getPlayer(source.getControllerId());
-        MageObject sourceObject = game.getObject(source.getSourceId());
-        if (controller != null && sourceObject != null) {
-            new ExileSourceEffect().apply(game, source);
-            Cards revealedCards = new CardsImpl();
-            while (controller.getLibrary().size() > 0) {
-                Card card = controller.getLibrary().removeFromTop(game);
-                if (card.getCardType().contains(CardType.CREATURE)) {
-                    controller.moveCards(card, Zone.BATTLEFIELD, source, game);
-                    break;
-                }
-                revealedCards.add(card);
-            }
-            controller.revealCards(sourceObject.getIdName(), revealedCards, game);
-            controller.moveCards(revealedCards, Zone.GRAVEYARD, source, game);
-            return true;
-        }
-        return false;
-    }
-
-    @Override
-    public GamekeeperEffect copy() {
-        return new GamekeeperEffect(this);
     }
 }

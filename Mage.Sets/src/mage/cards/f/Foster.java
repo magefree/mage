@@ -28,26 +28,19 @@
 package mage.cards.f;
 
 import java.util.UUID;
-import mage.MageObject;
 import mage.abilities.Ability;
 import mage.abilities.common.DiesCreatureTriggeredAbility;
 import mage.abilities.costs.mana.GenericManaCost;
-import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.DoIfCostPaid;
-import mage.cards.Card;
+import mage.abilities.effects.common.RevealCardsFromLibraryUntilEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
-import mage.cards.Cards;
-import mage.cards.CardsImpl;
 import mage.constants.CardType;
-import mage.constants.Outcome;
 import mage.constants.TargetController;
 import mage.constants.Zone;
 import mage.filter.common.FilterCreatureCard;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.filter.predicate.permanent.ControllerPredicate;
-import mage.game.Game;
-import mage.players.Player;
 
 /**
  *
@@ -56,17 +49,17 @@ import mage.players.Player;
 public class Foster extends CardImpl {
 
     private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("a creature you control");
-    
+
     static {
         filter.add(new ControllerPredicate(TargetController.YOU));
     }
 
     public Foster(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.ENCHANTMENT},"{2}{G}{G}");
+        super(ownerId, setInfo, new CardType[]{CardType.ENCHANTMENT}, "{2}{G}{G}");
 
         // Whenever a creature you control dies, you may pay {1}. If you do, reveal cards from the top of your library until you reveal a creature card. Put that card into your hand and the rest into your graveyard.
         Ability ability = new DiesCreatureTriggeredAbility(
-                new DoIfCostPaid(new FosterEffect(), new GenericManaCost(1)),
+                new DoIfCostPaid(new RevealCardsFromLibraryUntilEffect(new FilterCreatureCard(), Zone.HAND, Zone.GRAVEYARD), new GenericManaCost(1)),
                 false, filter);
         this.addAbility(ability);
     }
@@ -78,55 +71,5 @@ public class Foster extends CardImpl {
     @Override
     public Foster copy() {
         return new Foster(this);
-    }
-}
-
-class FosterEffect extends OneShotEffect {
-
-    private static final FilterCreatureCard filter = new FilterCreatureCard();
-
-    public FosterEffect() {
-        super(Outcome.ReturnToHand);
-        this.staticText = "reveal cards from the top of your library until you reveal a creature card. Put that card into your hand and the rest into your graveyard";
-    }
-
-    public FosterEffect(final FosterEffect effect) {
-        super(effect);
-    }
-
-    @Override
-    public FosterEffect copy() {
-        return new FosterEffect(this);
-    }
-
-    @Override
-    public boolean apply(Game game, Ability source) {
-        Player controller = game.getPlayer(source.getControllerId());
-        MageObject sourceObject = source.getSourceObject(game);
-        if (controller == null || sourceObject == null) {
-            return false;
-        }
-        
-        Cards cards = new CardsImpl();
-        Card cardFound = null;
-        while (controller.getLibrary().size() > 0) {
-            Card card = controller.getLibrary().removeFromTop(game);
-            if (card != null) {
-                cards.add(card);                
-                if (filter.match(card, game)){
-                    cardFound = card;
-                    break;
-                }
-            }            
-        }
-        if (!cards.isEmpty()) {
-            controller.revealCards(sourceObject.getName(), cards, game);
-            if (cardFound != null) {
-                controller.moveCards(cardFound, Zone.HAND, source, game);
-                cards.remove(cardFound);
-            }
-            controller.moveCards(cards, Zone.GRAVEYARD, source, game);
-        }
-        return true;
     }
 }

@@ -41,6 +41,7 @@ import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Duration;
+import mage.constants.Zone;
 import mage.counters.CounterType;
 import mage.filter.common.FilterCreatureCard;
 import mage.target.common.TargetCreaturePermanent;
@@ -63,7 +64,7 @@ public class AjaniValiantProtector extends CardImpl {
         this.addAbility(ability);
 
         // +1: Reveal cards from the top of your library until you reveal a creature card. Put that card into your hand and the rest on the bottom of your library in a random order.
-        this.addAbility(new LoyaltyAbility(new RevealCardsFromLibraryUntilEffect(new FilterCreatureCard()), 1));
+        this.addAbility(new LoyaltyAbility(new RevealCardsFromLibraryUntilEffect(new FilterCreatureCard(), Zone.HAND, Zone.LIBRARY), 1));
 
         // -11: Put X +1/+1 counters on target creature, where X is your life total. That creature gains trample until end of turn.
         Effect effect = new AddCountersTargetEffect(CounterType.P1P1.createInstance(), new ControllerLifeCount());

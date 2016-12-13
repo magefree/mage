@@ -29,24 +29,17 @@ package mage.cards.t;
 
 import java.util.UUID;
 import mage.MageInt;
-import mage.MageObject;
-import mage.abilities.Ability;
 import mage.abilities.TriggeredAbility;
 import mage.abilities.common.EntersBattlefieldTriggeredAbility;
 import mage.abilities.condition.common.KickedCondition;
 import mage.abilities.decorator.ConditionalTriggeredAbility;
-import mage.abilities.effects.OneShotEffect;
+import mage.abilities.effects.common.RevealCardsFromLibraryUntilEffect;
 import mage.abilities.keyword.KickerAbility;
-import mage.cards.Card;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
-import mage.cards.Cards;
-import mage.cards.CardsImpl;
 import mage.constants.CardType;
-import mage.constants.Outcome;
 import mage.constants.Zone;
-import mage.game.Game;
-import mage.players.Player;
+import mage.filter.common.FilterCreatureCard;
 
 /**
  *
@@ -55,7 +48,7 @@ import mage.players.Player;
 public class ThicketElemental extends CardImpl {
 
     public ThicketElemental(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{3}{G}{G}");
+        super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{3}{G}{G}");
         this.subtype.add("Elemental");
         this.power = new MageInt(4);
         this.toughness = new MageInt(4);
@@ -64,7 +57,7 @@ public class ThicketElemental extends CardImpl {
         this.addAbility(new KickerAbility("{1}{G}"));
 
         // When Thicket Elemental enters the battlefield, if it was kicked, you may reveal cards from the top of your library until you reveal a creature card. If you do, put that card onto the battlefield and shuffle all other cards revealed this way into your library.
-        TriggeredAbility ability = new EntersBattlefieldTriggeredAbility(new ThicketElementalEffect());
+        TriggeredAbility ability = new EntersBattlefieldTriggeredAbility(new RevealCardsFromLibraryUntilEffect(new FilterCreatureCard(), Zone.BATTLEFIELD, Zone.LIBRARY, true));
         this.addAbility(new ConditionalTriggeredAbility(ability, KickedCondition.getInstance(),
                 "When {this} enters the battlefield, if it was kicked, you may reveal cards from the top of your library until you reveal a creature card. If you do, put that card onto the battlefield and shuffle all other cards revealed this way into your library."));
     }
@@ -76,44 +69,5 @@ public class ThicketElemental extends CardImpl {
     @Override
     public ThicketElemental copy() {
         return new ThicketElemental(this);
-    }
-}
-
-class ThicketElementalEffect extends OneShotEffect {
-
-    public ThicketElementalEffect() {
-        super(Outcome.Benefit);
-        staticText = "if {this} was kicked, reveal cards from the top of your library until you reveal a creature card. Put that card onto the battlefield and shuffle all other cards revealed this way into your library";
-    }
-
-    public ThicketElementalEffect(final ThicketElementalEffect effect) {
-        super(effect);
-    }
-
-    @Override
-    public boolean apply(Game game, Ability source) {
-        Player controller = game.getPlayer(source.getControllerId());
-        MageObject sourceObject = game.getObject(source.getSourceId());
-        if (controller != null && sourceObject != null) {
-            Cards revealedCards = new CardsImpl();
-            while (controller.getLibrary().size() > 0) {
-                Card card = controller.getLibrary().removeFromTop(game);
-                if (card.getCardType().contains(CardType.CREATURE)) {
-                    controller.moveCards(card, Zone.BATTLEFIELD, source, game);
-                    break;
-                }
-                revealedCards.add(card);
-            }
-            controller.revealCards(sourceObject.getIdName(), revealedCards, game);
-            controller.moveCards(revealedCards, Zone.LIBRARY, source, game);
-            controller.shuffleLibrary(source, game);
-            return true;
-        }
-        return false;
-    }
-
-    @Override
-    public ThicketElementalEffect copy() {
-        return new ThicketElementalEffect(this);
     }
 }

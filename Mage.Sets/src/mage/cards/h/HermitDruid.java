@@ -29,23 +29,16 @@ package mage.cards.h;
 
 import java.util.UUID;
 import mage.MageInt;
-import mage.MageObject;
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.costs.common.TapSourceCost;
 import mage.abilities.costs.mana.ManaCostsImpl;
-import mage.abilities.effects.OneShotEffect;
-import mage.cards.Card;
+import mage.abilities.effects.common.RevealCardsFromLibraryUntilEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
-import mage.cards.CardsImpl;
 import mage.constants.CardType;
-import mage.constants.Outcome;
 import mage.constants.Zone;
 import mage.filter.common.FilterBasicLandCard;
-import mage.game.Game;
-import mage.players.Library;
-import mage.players.Player;
 
 /**
  *
@@ -54,7 +47,7 @@ import mage.players.Player;
 public class HermitDruid extends CardImpl {
 
     public HermitDruid(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{1}{G}");
+        super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{1}{G}");
         this.subtype.add("Human");
         this.subtype.add("Druid");
 
@@ -62,7 +55,7 @@ public class HermitDruid extends CardImpl {
         this.toughness = new MageInt(1);
 
         // {G}, {tap}: Reveal cards from the top of your library until you reveal a basic land card. Put that card into your hand and all other cards revealed this way into your graveyard.
-        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new HermitDruidEffect(), new ManaCostsImpl("{G}"));
+        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new RevealCardsFromLibraryUntilEffect(new FilterBasicLandCard(), Zone.HAND, Zone.GRAVEYARD), new ManaCostsImpl("{G}"));
         ability.addCost(new TapSourceCost());
         this.addAbility(ability);
     }
@@ -74,59 +67,5 @@ public class HermitDruid extends CardImpl {
     @Override
     public HermitDruid copy() {
         return new HermitDruid(this);
-    }
-}
-
-class HermitDruidEffect extends OneShotEffect {
-
-    public HermitDruidEffect() {
-        super(Outcome.Benefit);
-        this.staticText = "Reveal cards from the top of your library until you reveal a basic land card. Put that card into your hand and all other cards revealed this way into your graveyard";
-    }
-
-    public HermitDruidEffect(final HermitDruidEffect effect) {
-        super(effect);
-    }
-
-    @Override
-    public HermitDruidEffect copy() {
-        return new HermitDruidEffect(this);
-    }
-
-    @Override
-    public boolean apply(Game game, Ability source) {
-        Player player = game.getPlayer(source.getControllerId());
-        MageObject sourceObject= game.getObject(source.getSourceId());
-        if (player != null) {
-
-            Library library = player.getLibrary();
-            if (library.size() < 1) {
-                return true;
-            }
-            CardsImpl cards = new CardsImpl();
-            Card card;
-            FilterBasicLandCard filter = new FilterBasicLandCard();
-            do {
-                card = library.removeFromTop(game);
-                if (card != null) {
-                    
-                    if (filter.match(card, game)) {
-                        player.moveCards(card, Zone.HAND, source, game);
-                    } else {
-                        cards.add(card);
-                    }
-                }
-            } while (library.size() > 0 && card != null && !filter.match(card, game));
-
-            if (!cards.isEmpty()) {
-                player.moveCards(cards, Zone.GRAVEYARD, source, game);
-                if (card != null) {
-                    cards.add(card);
-                }
-                player.revealCards(sourceObject.getName(), cards, game);
-            }
-            return true;
-        }
-        return false;
     }
 }

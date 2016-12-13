@@ -47,16 +47,37 @@ import mage.players.Player;
 public class RevealCardsFromLibraryUntilEffect extends OneShotEffect {
 
     private FilterCard filter;
+    private Zone zoneToPutRest;
+    private Zone zoneToPutCard;
+    private boolean shuffleRestInto;
+    private boolean anyOrder;
 
-    public RevealCardsFromLibraryUntilEffect(FilterCard filter) {
-        super(Outcome.ReturnToHand);
+    public RevealCardsFromLibraryUntilEffect(FilterCard filter, Zone zoneToPutCard, Zone zoneToPutRest) {
+        this(filter, zoneToPutCard, zoneToPutRest, false, false);
+    }
+
+    public RevealCardsFromLibraryUntilEffect(FilterCard filter, Zone zoneToPutCard, Zone zoneToPutRest, boolean shuffleRestInto) {
+        this(filter, zoneToPutCard, zoneToPutRest, shuffleRestInto, false);
+    }
+
+    public RevealCardsFromLibraryUntilEffect(FilterCard filter, Zone zoneToPutCard, Zone zoneToPutRest, boolean shuffleRestInto, boolean anyOrder) {
+        super(Outcome.Benefit);
         this.filter = filter;
-        this.staticText = "reveal cards from the top of your library until you reveal a " + filter.getMessage() + ". Put that card into your hand and the rest on the bottom of your library in a random order";
+        this.zoneToPutCard = zoneToPutCard;
+        this.zoneToPutRest = zoneToPutRest;
+        this.shuffleRestInto = shuffleRestInto;
+        this.anyOrder = anyOrder;
+        setText();
     }
 
     public RevealCardsFromLibraryUntilEffect(final RevealCardsFromLibraryUntilEffect effect) {
         super(effect);
         this.filter = effect.filter;
+        this.zoneToPutCard = effect.zoneToPutCard;
+        this.zoneToPutRest = effect.zoneToPutRest;
+        this.shuffleRestInto = effect.shuffleRestInto;
+        this.anyOrder = effect.anyOrder;
+        setText();
     }
 
     @Override
@@ -82,25 +103,73 @@ public class RevealCardsFromLibraryUntilEffect extends OneShotEffect {
             if (!cards.isEmpty()) {
                 controller.revealCards(sourceObject.getIdName(), cards, game);
                 if (filter.match(card, game)) {
-                    // put creature card in hand
-                    controller.moveCards(card, Zone.HAND, source, game);
+                    // put card in correct zone
+                    controller.moveCards(card, zoneToPutCard, source, game);
                     // remove it from revealed card list
                     cards.remove(card);
                 }
-                // Put the rest on the bottom of your library in a random order
-                Cards randomOrder = new CardsImpl();
-                while (cards.size() > 0) {
-                    card = cards.getRandom(game);
-                    if (card != null) {
-                        cards.remove(card);
-                        randomOrder.add(card);
-                        controller.moveCardToLibraryWithInfo(card, source.getSourceId(), game, Zone.HAND, false, false);
+                // Put the rest in correct zone
+                switch (zoneToPutRest) {
+                    case LIBRARY: {
+                        if (cards.size() > 0) {
+                            if (shuffleRestInto) {
+                                library.addAll(cards.getCards(game), game);
+                            } else {
+                                controller.putCardsOnBottomOfLibrary(cards, game, source, anyOrder);
+                            }
+                        }
+                        break;
                     }
+                    default:
+                        if (cards.size() > 0) {
+                            controller.moveCards(cards, zoneToPutRest, source, game);
+                        }
                 }
-                controller.putCardsOnBottomOfLibrary(randomOrder, game, source, false);
             }
             return true;
         }
         return false;
+    }
+
+    private void setText() {
+        StringBuilder sb = new StringBuilder("reveal cards from the top of your library until you reveal a " + filter.getMessage() + ". Put that card ");
+
+        switch (zoneToPutCard) {
+            case HAND: {
+                sb.append("into your hand ");
+                break;
+            }
+            case BATTLEFIELD: {
+                sb.append("onto the battlefield");
+                break;
+            }
+        }
+
+        switch (zoneToPutRest) {
+            case GRAVEYARD: {
+                sb.append(" and put all other cards revealed this way into your graveyard.");
+                break;
+            }
+            case LIBRARY: {
+                if (shuffleRestInto) {
+                    sb.append(", then shuffles the rest into his or her library.");
+                } else {
+                    sb.append(" and the rest on the bottom of your library in ");
+                    if (anyOrder) {
+                        sb.append("any");
+                    } else {
+                        sb.append("random");
+
+                    }
+                    sb.append(" order.");
+                }
+                break;
+            }
+            case EXILED: {
+                sb.append(" and exile all other cards revealed this way.");
+                break;
+            }
+        }
+        staticText = sb.toString();
     }
 }

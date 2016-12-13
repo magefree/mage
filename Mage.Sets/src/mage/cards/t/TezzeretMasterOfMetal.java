@@ -45,6 +45,7 @@ import mage.constants.Duration;
 import mage.constants.Layer;
 import mage.constants.Outcome;
 import mage.constants.SubLayer;
+import mage.constants.Zone;
 import mage.filter.FilterPermanent;
 import mage.filter.common.FilterArtifactCard;
 import mage.filter.common.FilterControlledArtifactPermanent;
@@ -68,7 +69,7 @@ public class TezzeretMasterOfMetal extends CardImpl {
         this.addAbility(new PlanswalkerEntersWithLoyalityCountersAbility(5));
 
         // +1: Reveal cards from the top of your library until you reveal an artifact card. Put that card into your hand and the rest on the bottom of your library in a random order.
-        this.addAbility(new LoyaltyAbility(new RevealCardsFromLibraryUntilEffect(new FilterArtifactCard()), 1));
+        this.addAbility(new LoyaltyAbility(new RevealCardsFromLibraryUntilEffect(new FilterArtifactCard(), Zone.HAND, Zone.LIBRARY), 1));
 
         // -3: Target opponent loses life equal to the number of artifacts you control.
         Ability ability = new LoyaltyAbility(new LoseLifeTargetEffect(new PermanentsOnBattlefieldCount(new FilterControlledArtifactPermanent())), -3);

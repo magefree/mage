@@ -28,21 +28,13 @@
 package mage.cards.r;
 
 import java.util.UUID;
-import mage.MageObject;
-import mage.abilities.Ability;
-import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.ClashWinReturnToHandSpellEffect;
-import mage.cards.Card;
+import mage.abilities.effects.common.RevealCardsFromLibraryUntilEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
-import mage.cards.Cards;
-import mage.cards.CardsImpl;
 import mage.constants.CardType;
-import mage.constants.Outcome;
 import mage.constants.Zone;
 import mage.filter.common.FilterLandCard;
-import mage.game.Game;
-import mage.players.Player;
 
 /**
  *
@@ -51,10 +43,10 @@ import mage.players.Player;
 public class RecrossThePaths extends CardImpl {
 
     public RecrossThePaths(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{2}{G}");
+        super(ownerId, setInfo, new CardType[]{CardType.SORCERY}, "{2}{G}");
 
         // Reveal cards from the top of your library until you reveal a land card. Put that card onto the battlefield and the rest on the bottom of your library in any order.
-        this.getSpellAbility().addEffect(new RecrossThePathsEffect());
+        this.getSpellAbility().addEffect(new RevealCardsFromLibraryUntilEffect(new FilterLandCard(), Zone.BATTLEFIELD, Zone.LIBRARY, false, true));
 
         // Clash with an opponent. If you win, return Recross the Paths to its owner's hand.
         this.getSpellAbility().addEffect(ClashWinReturnToHandSpellEffect.getInstance());
@@ -67,55 +59,5 @@ public class RecrossThePaths extends CardImpl {
     @Override
     public RecrossThePaths copy() {
         return new RecrossThePaths(this);
-    }
-}
-
-class RecrossThePathsEffect extends OneShotEffect {
-
-    private static final FilterLandCard filter = new FilterLandCard();
-
-    public RecrossThePathsEffect() {
-        super(Outcome.ReturnToHand);
-        this.staticText = "reveal cards from the top of your library until you reveal a land card. Put that card onto the battlefield and the rest on the bottom of your library in any order";
-    }
-
-    public RecrossThePathsEffect(final RecrossThePathsEffect effect) {
-        super(effect);
-    }
-
-    @Override
-    public RecrossThePathsEffect copy() {
-        return new RecrossThePathsEffect(this);
-    }
-
-    @Override
-    public boolean apply(Game game, Ability source) {
-        Player controller = game.getPlayer(source.getControllerId());
-        MageObject sourceObject = source.getSourceObject(game);
-        if (controller == null || sourceObject == null) {
-            return false;
-        }
-
-        Cards cards = new CardsImpl();
-        Card cardFound = null;
-        while (controller.getLibrary().size() > 0) {
-            Card card = controller.getLibrary().removeFromTop(game);
-            if (card != null) {
-                cards.add(card);
-                if (filter.match(card, game)) {
-                    cardFound = card;
-                    break;
-                }
-            }
-        }
-        if (!cards.isEmpty()) {
-            controller.revealCards(sourceObject.getIdName(), cards, game);
-            if (cardFound != null) {
-                controller.moveCards(cardFound, Zone.BATTLEFIELD, source, game);
-                cards.remove(cardFound);
-            }
-            controller.putCardsOnBottomOfLibrary(cards, game, source, true);
-        }
-        return true;
     }
 }
