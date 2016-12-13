@@ -90,8 +90,6 @@ class OrchardElementalDilemmaEffect extends CouncilsDilemmaVoteEffect {
 
         this.vote("sprout", "harvest", controller, game, source);
 
-        int sproutCount = 0, harvestCount = 0;
-
         Permanent permanent = game.getPermanent(source.getSourceId());
 
         //Sprout Votes
