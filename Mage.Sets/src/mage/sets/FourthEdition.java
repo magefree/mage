@@ -315,6 +315,7 @@ public class FourthEdition extends ExpansionSet {
         cards.add(new SetCardInfo("Shapeshifter", 363, Rarity.UNCOMMON, mage.cards.s.Shapeshifter.class));
         cards.add(new SetCardInfo("Shatter", 237, Rarity.COMMON, mage.cards.s.Shatter.class));
         cards.add(new SetCardInfo("Shivan Dragon", 238, Rarity.RARE, mage.cards.s.ShivanDragon.class));
+        cards.add(new SetCardInfo("Simulacrum", 45, Rarity.UNCOMMON, mage.cards.s.Simulacrum.class));
         cards.add(new SetCardInfo("Sindbad", 100, Rarity.UNCOMMON, mage.cards.s.Sindbad.class));
         cards.add(new SetCardInfo("Siren's Call", 101, Rarity.UNCOMMON, mage.cards.s.SirensCall.class));
         cards.add(new SetCardInfo("Sisters of the Flame", 239, Rarity.COMMON, mage.cards.s.SistersOfTheFlame.class));
