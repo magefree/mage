@@ -25,64 +25,24 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.filter.predicate.permanent;
+package mage.abilities.condition.common;
 
-import mage.constants.TargetController;
-import mage.filter.predicate.ObjectPlayer;
-import mage.filter.predicate.ObjectPlayerPredicate;
-import mage.game.Controllable;
+import mage.abilities.Ability;
+import mage.abilities.condition.Condition;
 import mage.game.Game;
-
-import java.util.UUID;
+import mage.game.permanent.Permanent;
+import mage.watchers.common.AttackedThisTurnWatcher;
 
 /**
  *
- * @author North
+ * @author MTGfan
  */
-public class ControllerPredicate implements ObjectPlayerPredicate<ObjectPlayer<Controllable>> {
-
-    private final TargetController controller;
-
-    public ControllerPredicate(TargetController controller) {
-        this.controller = controller;
-    }
+public class TargetAttackedThisTurnCondition implements Condition {
 
     @Override
-    public boolean apply(ObjectPlayer<Controllable> input, Game game) {
-        Controllable object = input.getObject();
-        UUID playerId = input.getPlayerId();
-
-        switch (controller) {
-            case YOU:
-                if (object.getControllerId().equals(playerId)) {
-                    return true;
-                }
-                break;
-            case OPPONENT:
-                if (!object.getControllerId().equals(playerId) &&
-                        game.getPlayer(playerId).hasOpponent(object.getControllerId(), game)) {
-                    return true;
-                }
-                break;
-            case NOT_YOU:
-                if (!object.getControllerId().equals(playerId)) {
-                    return true;
-                }
-                break;
-            case ACTIVE:
-                if (object.getControllerId().equals(game.getActivePlayerId())) {
-                    return true;
-                }
-                break;
-            case ANY:
-                return true;
-        }
-
-        return false;
-    }
-
-    @Override
-    public String toString() {
-        return "TargetController(" + controller.toString() + ')';
+    public boolean apply(Game game, Ability source) {
+        Permanent creature = game.getPermanentOrLKIBattlefield(source.getTargets().getFirstTarget());
+        AttackedThisTurnWatcher watcher = (AttackedThisTurnWatcher) game.getState().getWatchers().get("AttackedThisTurn");
+        return watcher.getAttackedThisTurnCreatures().contains(creature.getId());
     }
 }

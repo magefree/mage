@@ -27,62 +27,23 @@
  */
 package mage.filter.predicate.permanent;
 
-import mage.constants.TargetController;
-import mage.filter.predicate.ObjectPlayer;
-import mage.filter.predicate.ObjectPlayerPredicate;
-import mage.game.Controllable;
+import mage.filter.predicate.Predicate;
 import mage.game.Game;
-
-import java.util.UUID;
+import mage.game.permanent.Permanent;
 
 /**
  *
- * @author North
+ * @author MTGfan
  */
-public class ControllerPredicate implements ObjectPlayerPredicate<ObjectPlayer<Controllable>> {
-
-    private final TargetController controller;
-
-    public ControllerPredicate(TargetController controller) {
-        this.controller = controller;
-    }
+public class ControlledFromStartOfControllerTurnPredicate implements Predicate<Permanent> {
 
     @Override
-    public boolean apply(ObjectPlayer<Controllable> input, Game game) {
-        Controllable object = input.getObject();
-        UUID playerId = input.getPlayerId();
-
-        switch (controller) {
-            case YOU:
-                if (object.getControllerId().equals(playerId)) {
-                    return true;
-                }
-                break;
-            case OPPONENT:
-                if (!object.getControllerId().equals(playerId) &&
-                        game.getPlayer(playerId).hasOpponent(object.getControllerId(), game)) {
-                    return true;
-                }
-                break;
-            case NOT_YOU:
-                if (!object.getControllerId().equals(playerId)) {
-                    return true;
-                }
-                break;
-            case ACTIVE:
-                if (object.getControllerId().equals(game.getActivePlayerId())) {
-                    return true;
-                }
-                break;
-            case ANY:
-                return true;
-        }
-
-        return false;
+    public boolean apply(Permanent input, Game game) {
+        return input.wasControlledFromStartOfControllerTurn();
     }
 
     @Override
     public String toString() {
-        return "TargetController(" + controller.toString() + ')';
+        return "has controlled since the beginning of the turn";
     }
 }
