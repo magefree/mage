@@ -82,6 +82,7 @@
               <Image iconType="3" name="/menu/preferences.png"/>
             </Property>
             <Property name="text" type="java.lang.String" value="Preferences"/>
+            <Property name="toolTipText" type="java.lang.String" value="Change the settings for the different areas of XMage."/>
             <Property name="focusable" type="boolean" value="false"/>
             <Property name="horizontalTextPosition" type="int" value="4"/>
             <Property name="verticalTextPosition" type="int" value="3"/>
@@ -122,6 +123,7 @@
               <Image iconType="3" name="/menu/deck_editor.png"/>
             </Property>
             <Property name="text" type="java.lang.String" value="Deck Editor"/>
+            <Property name="toolTipText" type="java.lang.String" value="Start the deck editor to create or modify decks."/>
             <Property name="focusable" type="boolean" value="false"/>
             <Property name="horizontalTextPosition" type="int" value="4"/>
             <Property name="verticalTextPosition" type="int" value="3"/>
@@ -138,6 +140,7 @@
               <Image iconType="3" name="/menu/collection.png"/>
             </Property>
             <Property name="text" type="java.lang.String" value="Viewer"/>
+            <Property name="toolTipText" type="java.lang.String" value="Card viewer to show the cards of sets. "/>
             <Property name="focusable" type="boolean" value="false"/>
             <Property name="horizontalTextPosition" type="int" value="4"/>
             <Property name="verticalTextPosition" type="int" value="3"/>
@@ -154,6 +157,7 @@
               <Image iconType="3" name="/menu/feedback.png"/>
             </Property>
             <Property name="text" type="java.lang.String" value="Feedback"/>
+            <Property name="toolTipText" type="java.lang.String" value="Send some feedback to the developers."/>
             <Property name="focusable" type="boolean" value="false"/>
             <Property name="horizontalTextPosition" type="int" value="4"/>
             <Property name="verticalTextPosition" type="int" value="3"/>
@@ -204,6 +208,7 @@
               <Image iconType="3" name="/menu/about.png"/>
             </Property>
             <Property name="text" type="java.lang.String" value="About"/>
+            <Property name="toolTipText" type="java.lang.String" value="Some information about the developers."/>
             <Property name="focusable" type="boolean" value="false"/>
             <Property name="horizontalTextPosition" type="int" value="4"/>
             <Property name="verticalTextPosition" type="int" value="3"/>
