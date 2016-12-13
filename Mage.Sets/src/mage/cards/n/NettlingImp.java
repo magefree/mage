@@ -78,7 +78,7 @@ public class NettlingImp extends CardImpl {
         this.toughness = new MageInt(1);
 
         // {tap}: Choose target non-Wall creature the active player has controlled continuously since the beginning of the turn. That creature attacks this turn if able. If it doesn't, destroy it at the beginning of the next end step. Activate this ability only during an opponent's turn, before attackers are declared.
-        Ability ability = new ConditionalActivatedAbility(Zone.BATTLEFIELD, new AttacksIfAbleTargetEffect(Duration.EndOfTurn), new TapSourceCost(), new NettlingImpTurnCondition(), "{tap}: Choose target non-Wall creature the active player has controlled continuously since the beginning of the turn. That creature attacks this turn if able. If it doesn't, destroy it at the beginning of the next end step. Activate this ability only during an opponent's turn, before attackers are declared.");
+        Ability ability = new ConditionalActivatedAbility(Zone.BATTLEFIELD, new AttacksIfAbleTargetEffect(Duration.EndOfTurn), new TapSourceCost(), new NettlingImpTurnCondition(), "{T}: Choose target non-Wall creature the active player has controlled continuously since the beginning of the turn. That creature attacks this turn if able. If it doesn't, destroy it at the beginning of the next end step. Activate this ability only during an opponent's turn, before attackers are declared.");
         ability.addEffect(new ConditionalOneShotEffect(new DestroyTargetAtBeginningOfNextEndStepEffect(), new InvertCondition(new TargetAttackedThisTurnCondition())));
         ability.addTarget(new TargetCreaturePermanent(filter));
         this.addAbility(ability, new AttackedThisTurnWatcher());
@@ -100,7 +100,7 @@ class NettlingImpTurnCondition implements Condition {
     @Override
     public boolean apply(Game game, Ability source) {
 	Player activePlayer = game.getPlayer(game.getActivePlayerId());
-        return activePlayer != null && game.getPlayer(game.getActivePlayerId()).hasOpponent(source.getControllerId(), game) && game.getPhase().getStep().getType().getIndex() < 5;
+        return activePlayer != null && activePlayer.hasOpponent(source.getControllerId(), game) && game.getPhase().getStep().getType().getIndex() < 5;
     }
 
     @Override
