@@ -240,6 +240,7 @@ public class LimitedEditionBeta extends ExpansionSet {
         cards.add(new SetCardInfo("Shanodin Dryads", 125, Rarity.COMMON, mage.cards.s.ShanodinDryads.class));
         cards.add(new SetCardInfo("Shatter", 175, Rarity.COMMON, mage.cards.s.Shatter.class));
         cards.add(new SetCardInfo("Shivan Dragon", 176, Rarity.RARE, mage.cards.s.ShivanDragon.class));
+        cards.add(new SetCardInfo("Simulacrum", 37, Rarity.UNCOMMON, mage.cards.s.Simulacrum.class));
         cards.add(new SetCardInfo("Sinkhole", 38, Rarity.COMMON, mage.cards.s.Sinkhole.class));
         cards.add(new SetCardInfo("Siren's Call", 78, Rarity.UNCOMMON, mage.cards.s.SirensCall.class));
         cards.add(new SetCardInfo("Smoke", 177, Rarity.RARE, mage.cards.s.Smoke.class));

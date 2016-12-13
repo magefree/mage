@@ -253,6 +253,7 @@ public class RevisedEdition extends ExpansionSet {
         cards.add(new SetCardInfo("Shatter", 174, Rarity.COMMON, mage.cards.s.Shatter.class));
         cards.add(new SetCardInfo("Shatterstorm", 175, Rarity.UNCOMMON, mage.cards.s.Shatterstorm.class));
         cards.add(new SetCardInfo("Shivan Dragon", 176, Rarity.RARE, mage.cards.s.ShivanDragon.class));
+        cards.add(new SetCardInfo("Simulacrum", 38, Rarity.UNCOMMON, mage.cards.s.Simulacrum.class));
         cards.add(new SetCardInfo("Siren's Call", 80, Rarity.UNCOMMON, mage.cards.s.SirensCall.class));
         cards.add(new SetCardInfo("Smoke", 177, Rarity.RARE, mage.cards.s.Smoke.class));
         cards.add(new SetCardInfo("Sol Ring", 274, Rarity.UNCOMMON, mage.cards.s.SolRing.class));
