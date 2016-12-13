@@ -31,7 +31,7 @@ package mage.cards.e;
 import mage.abilities.Ability;
 import mage.abilities.effects.ContinuousEffect;
 import mage.abilities.effects.ContinuousEffectImpl;
-import mage.abilities.effects.OneShotEffect;
+import mage.abilities.effects.common.CouncilsDilemmaVoteEffect;
 import mage.abilities.effects.common.ExileSpellEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
@@ -74,7 +74,9 @@ public class Expropriate extends CardImpl {
     }
 }
 
-class ExpropriateDilemmaEffect extends OneShotEffect {
+class ExpropriateDilemmaEffect extends CouncilsDilemmaVoteEffect {
+
+    private Players moneyVoters = new Players();
 
     public ExpropriateDilemmaEffect() {
         super(Outcome.Benefit);
@@ -96,62 +98,74 @@ class ExpropriateDilemmaEffect extends OneShotEffect {
         //If not controller, exit out here and do not vote.
         if (controller == null) return false;
 
-        int timeCount = 0, moneyCount = 0;
-        Players moneyVoters = new Players();
+        this.vote("time", "money", controller, game, source);
 
+        //Time Votes
+        if (voteOneCount > 0) {
+            this.turnsForTimeVote(voteOneCount, controller, game, source);
+        }
+
+        //Money Votes
+        if (voteTwoCount > 0) {
+            this.controlForMoneyVote(controller, game, source);
+        }
+
+        return true;
+    }
+
+    private void turnsForTimeVote(int timeCount, Player controller, Game game, Ability source) {
+        if (timeCount == 1) {
+            game.informPlayers(controller.getName() + " will take an extra turn");
+        } else {
+            game.informPlayers(controller.getName() + " will take " + timeCount + " extra turns");
+        }
+
+        do {
+            game.getState().getTurnMods().add(new TurnMod(source.getControllerId(), false));
+            timeCount--;
+        } while (timeCount > 0);
+    }
+
+    private void controlForMoneyVote(Player controller, Game game, Ability source) {
+        List<Permanent> chosenCards = new ArrayList<>();
+
+        for (UUID playerId : moneyVoters.keySet()) {
+            FilterPermanent filter = new FilterPermanent("permanent owned by " + game.getPlayer(playerId).getName());
+            filter.add(new OwnerIdPredicate(playerId));
+
+            Target target = new TargetPermanent(filter);
+            target.setNotTarget(true);
+
+            if (controller.choose(Outcome.GainControl, target, source.getSourceId(), game)) {
+                Permanent targetPermanent = game.getPermanent(target.getFirstTarget());
+
+                if (targetPermanent != null) chosenCards.add(targetPermanent);
+            }
+        }
+
+        for (Permanent permanent : chosenCards) {
+            ContinuousEffect effect = new ExpropriateControlEffect(controller.getId());
+            effect.setTargetPointer(new FixedTarget(permanent.getId()));
+            game.addEffect(effect, source);
+            game.informPlayers(controller.getName() + " gained control of " + permanent.getName() + " owned by " + game.getPlayer(permanent.getOwnerId()).getName());
+        }
+    }
+
+    @Override
+    protected void vote(String choiceOne, String choiceTwo, Player controller, Game game, Ability source) {
         for (UUID playerId : game.getState().getPlayersInRange(controller.getId(), game)) {
             Player player = game.getPlayer(playerId);
             if (player != null) {
-                if (player.chooseUse(Outcome.Benefit, "Choose time?", source, game)) {
-                    timeCount++;
-                    game.informPlayers(player.getName() + " has voted for time");
+                if (player.chooseUse(Outcome.Vote, "Choose " + choiceOne + "?", source, game)) {
+                    voteOneCount++;
+                    game.informPlayers(player.getName() + " has voted for " + choiceOne);
                 } else {
-                    moneyCount++;
                     moneyVoters.addPlayer(player);
-                    game.informPlayers(player.getName() + " has voted for money");
+                    voteTwoCount++;
+                    game.informPlayers(player.getName() + " has voted for " + choiceTwo);
                 }
             }
         }
-
-        if (timeCount > 0) {
-            if (timeCount == 1) {
-                game.informPlayers(controller.getName() + " will take an extra turn");
-            } else {
-                game.informPlayers(controller.getName() + " will take " + timeCount + " extra turns");
-            }
-
-            do {
-                game.getState().getTurnMods().add(new TurnMod(source.getControllerId(), false));
-                timeCount--;
-            } while (timeCount > 0);
-        }
-
-        if (moneyCount > 0) {
-            List<Permanent> chosenCards = new ArrayList<>();
-
-            for (UUID playerId : moneyVoters.keySet()) {
-                FilterPermanent filter = new FilterPermanent("permanent owned by " + game.getPlayer(playerId).getName());
-                filter.add(new OwnerIdPredicate(playerId));
-
-                Target target = new TargetPermanent(filter);
-                target.setNotTarget(true);
-
-                if (controller.choose(Outcome.GainControl, target, source.getSourceId(), game)) {
-                    Permanent targetPermanent = game.getPermanent(target.getFirstTarget());
-
-                    if (targetPermanent != null) chosenCards.add(targetPermanent);
-                }
-            }
-
-            for (Permanent permanent : chosenCards) {
-                ContinuousEffect effect = new ExpropriateControlEffect(controller.getId());
-                effect.setTargetPointer(new FixedTarget(permanent.getId()));
-                game.addEffect(effect, source);
-                game.informPlayers(controller.getName() + " gained control of " + permanent.getName() + " owned by " + game.getPlayer(permanent.getOwnerId()).getName());
-            }
-        } //End moneyCount if statement
-
-        return true;
     }
 
     @Override
@@ -183,9 +197,7 @@ class ExpropriateControlEffect extends ContinuousEffectImpl {
     @Override
     public boolean apply(Game game, Ability source) {
         Permanent permanent = game.getPermanent(targetPointer.getFirst(game, source));
-        if (permanent != null && controllerId != null) {
-            return permanent.changeControllerId(controllerId, game);
-        }
-        return false;
+        return permanent != null && controllerId != null &&
+                permanent.changeControllerId(controllerId, game);
     }
 }

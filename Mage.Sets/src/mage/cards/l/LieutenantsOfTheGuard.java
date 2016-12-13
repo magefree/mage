@@ -31,7 +31,7 @@ import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.EntersBattlefieldTriggeredAbility;
 import mage.abilities.effects.Effect;
-import mage.abilities.effects.OneShotEffect;
+import mage.abilities.effects.common.CouncilsDilemmaVoteEffect;
 import mage.abilities.effects.common.CreateTokenEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
@@ -73,7 +73,7 @@ public class LieutenantsOfTheGuard extends CardImpl {
     }
 }
 
-class LieutenantsOfTheGuardDilemmaEffect extends OneShotEffect {
+class LieutenantsOfTheGuardDilemmaEffect extends CouncilsDilemmaVoteEffect {
     public LieutenantsOfTheGuardDilemmaEffect() {
         super(Outcome.Benefit);
         this.staticText = "starting with you, each player votes for strength or numbers. Put a +1/+1 counter on {this} for each strength vote and put a 1/1 white Soldier creature token onto the battlefield for each numbers vote.";
@@ -90,29 +90,18 @@ class LieutenantsOfTheGuardDilemmaEffect extends OneShotEffect {
         //If no controller, exit out here and do not vote.
         if (controller == null) return false;
 
-        int strengthCount = 0, numbersCount = 0;
-
-        for (UUID playerId : game.getState().getPlayersInRange(controller.getId(), game)) {
-            Player player = game.getPlayer(playerId);
-            if (player != null) {
-                if (player.chooseUse(Outcome.BoostCreature, "Choose strength?", source, game)) {
-                    strengthCount++;
-                    game.informPlayers(player.getName() + " has voted for strength");
-                } else {
-                    numbersCount++;
-                    game.informPlayers(player.getName() + " has voted for numbers");
-                }
-            }
-        }
+        this.vote("strength", "numbers", controller, game, source);
 
         Permanent permanent = game.getPermanent(source.getSourceId());
 
+        //Strength Votes
         //If strength received zero votes or the permanent is no longer on the battlefield, do not attempt to put P1P1 counters on it.
-        if (strengthCount > 0 && permanent != null) permanent.addCounters(CounterType.P1P1.createInstance(strengthCount), game);
+        if (voteOneCount > 0 && permanent != null)
+            permanent.addCounters(CounterType.P1P1.createInstance(voteOneCount), game);
 
-        //Create the appropriate number of tokens for the controller.
-        if (numbersCount > 0) {
-            Effect tokenEffect = new CreateTokenEffect(new SoldierToken(), numbersCount);
+        //Numbers Votes
+        if (voteTwoCount > 0) {
+            Effect tokenEffect = new CreateTokenEffect(new SoldierToken(), voteTwoCount);
             tokenEffect.apply(game, source);
         }
 

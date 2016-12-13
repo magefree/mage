@@ -31,7 +31,7 @@ import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.EntersBattlefieldTriggeredAbility;
 import mage.abilities.effects.Effect;
-import mage.abilities.effects.OneShotEffect;
+import mage.abilities.effects.common.CouncilsDilemmaVoteEffect;
 import mage.abilities.effects.common.DrawDiscardControllerEffect;
 import mage.abilities.keyword.FlyingAbility;
 import mage.cards.CardImpl;
@@ -74,7 +74,7 @@ public class MessengerJays extends CardImpl {
     }
 }
 
-class MessengerJaysDilemmaEffect extends OneShotEffect {
+class MessengerJaysDilemmaEffect extends CouncilsDilemmaVoteEffect {
 
     public MessengerJaysDilemmaEffect() {
         super(Outcome.Benefit);
@@ -92,29 +92,19 @@ class MessengerJaysDilemmaEffect extends OneShotEffect {
         //If no controller, exit out here and do not vote.
         if (controller == null) return false;
 
-        int featherCount = 0, quillCount = 0;
-
-        for (UUID playerId : game.getState().getPlayersInRange(controller.getId(), game)) {
-            Player player = game.getPlayer(playerId);
-            if (player != null) {
-                if (player.chooseUse(Outcome.BoostCreature, "Choose feather?", source, game)) {
-                    featherCount++;
-                    game.informPlayers(player.getName() + " has voted for feather");
-                } else {
-                    quillCount++;
-                    game.informPlayers(player.getName() + " has voted for quill");
-                }
-            }
-        }
+        this.vote("feather", "quill", controller, game, source);
 
         Permanent permanent = game.getPermanent(source.getSourceId());
 
+        //Feathers Votes
         //If feathers received zero votes or the permanent is no longer on the battlefield, do not attempt to put P1P1 counter on it.
-        if (featherCount > 0 && permanent != null) permanent.addCounters(CounterType.P1P1.createInstance(featherCount), game);
+        if (voteOneCount > 0 && permanent != null)
+            permanent.addCounters(CounterType.P1P1.createInstance(voteOneCount), game);
 
+        //Quill Votes
         //Only let the controller loot the appropriate amount of cards if it was voted for.
-        if (quillCount > 0) {
-            Effect lootCardsEffect = new DrawDiscardControllerEffect(quillCount, quillCount);
+        if (voteTwoCount > 0) {
+            Effect lootCardsEffect = new DrawDiscardControllerEffect(voteTwoCount, voteTwoCount);
             lootCardsEffect.apply(game, source);
         }
 

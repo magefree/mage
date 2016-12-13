@@ -27,11 +27,8 @@
  */
 package mage.cards.s;
 
-import java.util.UUID;
-
 import mage.abilities.Ability;
-import mage.abilities.effects.Effect;
-import mage.abilities.effects.OneShotEffect;
+import mage.abilities.effects.common.CouncilsDilemmaVoteEffect;
 import mage.cards.*;
 import mage.constants.CardType;
 import mage.constants.Outcome;
@@ -40,6 +37,8 @@ import mage.filter.common.FilterPermanentCard;
 import mage.game.Game;
 import mage.players.Player;
 import mage.target.common.TargetCardInHand;
+
+import java.util.UUID;
 
 /**
  *
@@ -65,7 +64,7 @@ public class SelvalasStampede extends CardImpl {
     }
 }
 
-class SelvalasStampedeDilemmaEffect extends OneShotEffect {
+class SelvalasStampedeDilemmaEffect extends CouncilsDilemmaVoteEffect {
 
     public SelvalasStampedeDilemmaEffect() {
         super(Outcome.Benefit);
@@ -83,29 +82,18 @@ class SelvalasStampedeDilemmaEffect extends OneShotEffect {
         //If no controller, exit here and do not vote.
         if (controller == null) return false;
 
-        int wildCount = 0, freeCount = 0;
+        this.vote("wild", "free", controller, game, source);
 
-        for (UUID playerId : game.getState().getPlayersInRange(controller.getId(), game)) {
-            Player player = game.getPlayer(playerId);
-            if (player != null) {
-                if (player.chooseUse(Outcome.Benefit, "Choose wild?", source, game)) {
-                    wildCount++;
-                    game.informPlayers(player.getName() + " has voted for wild");
-                } else {
-                    freeCount++;
-                    game.informPlayers(player.getName() + " has voted for free");
-                }
-            }
-        }
-
-        if (wildCount > 0) {
+        //Wild Votes
+        if (voteOneCount > 0) {
             Cards revealedCards = new CardsImpl();
+            int cardsToReveal = voteOneCount;
 
-            while (wildCount > 0 && controller.getLibrary().size() > 0) {
+            while (cardsToReveal > 0 && controller.getLibrary().size() > 0) {
                 Card card = controller.getLibrary().removeFromTop(game);
                 if (card.getCardType().contains(CardType.CREATURE)) {
                     controller.moveCards(card, Zone.BATTLEFIELD, source, game);
-                    wildCount--;
+                    cardsToReveal--;
                 } else {
                     revealedCards.add(card);
                 }
@@ -116,8 +104,9 @@ class SelvalasStampedeDilemmaEffect extends OneShotEffect {
             controller.shuffleLibrary(source, game);
         }
 
-        if (freeCount > 0) {
-            TargetCardInHand target = new TargetCardInHand(0, freeCount, new FilterPermanentCard("permanent cards"));
+        //Free Votes
+        if (voteTwoCount > 0) {
+            TargetCardInHand target = new TargetCardInHand(0, voteTwoCount, new FilterPermanentCard("permanent cards"));
             if (controller.choose(Outcome.PutCardInPlay, target, source.getSourceId(), game)) {
                 controller.moveCards(new CardsImpl(target.getTargets()), Zone.BATTLEFIELD, source, game);
             }
