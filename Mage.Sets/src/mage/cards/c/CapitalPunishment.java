@@ -27,12 +27,10 @@
  */
 package mage.cards.c;
 
-import java.util.UUID;
-
 import mage.abilities.Ability;
 import mage.abilities.dynamicvalue.common.StaticValue;
 import mage.abilities.effects.Effect;
-import mage.abilities.effects.OneShotEffect;
+import mage.abilities.effects.common.CouncilsDilemmaVoteEffect;
 import mage.abilities.effects.common.SacrificeOpponentsEffect;
 import mage.abilities.effects.common.discard.DiscardEachPlayerEffect;
 import mage.cards.CardImpl;
@@ -43,6 +41,8 @@ import mage.constants.TargetController;
 import mage.filter.common.FilterControlledCreaturePermanent;
 import mage.game.Game;
 import mage.players.Player;
+
+import java.util.UUID;
 
 /**
  *
@@ -68,7 +68,7 @@ public class CapitalPunishment extends CardImpl {
     }
 }
 
-class CapitalPunishmentDilemmaEffect extends OneShotEffect {
+class CapitalPunishmentDilemmaEffect extends CouncilsDilemmaVoteEffect {
 
     public CapitalPunishmentDilemmaEffect() {
         super(Outcome.Detriment);
@@ -86,28 +86,17 @@ class CapitalPunishmentDilemmaEffect extends OneShotEffect {
         //If no controller, exit out here and do not vote.
         if (controller == null) return false;
 
-        int deathCount = 0, taxesCount = 0;
+        this.vote("death", "taxes", controller, game, source);
 
-        for (UUID playerId : game.getState().getPlayersInRange(controller.getId(), game)) {
-            Player player = game.getPlayer(playerId);
-            if (player != null) {
-                if (player.chooseUse(Outcome.Detriment, "Choose death?", source, game)) {
-                    deathCount++;
-                    game.informPlayers(player.getName() + " has voted for death");
-                } else {
-                    taxesCount++;
-                    game.informPlayers(player.getName() + " has voted for taxes");
-                }
-            }
+        //Death Votes
+        if (voteOneCount > 0) {
+            Effect sacrificeEffect = new SacrificeOpponentsEffect(voteOneCount, new FilterControlledCreaturePermanent());
+            sacrificeEffect.apply(game, source);
         }
 
-        if (deathCount > 0) {
-            Effect sacraficeEffect = new SacrificeOpponentsEffect(deathCount, new FilterControlledCreaturePermanent());
-            sacraficeEffect.apply(game, source);
-        }
-
-        if (taxesCount > 0) {
-            Effect discardEffect = new DiscardEachPlayerEffect(new StaticValue(taxesCount), false, TargetController.OPPONENT);
+        //Taxes Votes
+        if (voteTwoCount > 0) {
+            Effect discardEffect = new DiscardEachPlayerEffect(new StaticValue(voteTwoCount), false, TargetController.OPPONENT);
             discardEffect.apply(game, source);
         }
 

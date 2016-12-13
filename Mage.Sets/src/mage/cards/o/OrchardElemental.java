@@ -27,12 +27,11 @@
  */
 package mage.cards.o;
 
-import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.EntersBattlefieldTriggeredAbility;
 import mage.abilities.effects.Effect;
-import mage.abilities.effects.OneShotEffect;
+import mage.abilities.effects.common.CouncilsDilemmaVoteEffect;
 import mage.abilities.effects.common.GainLifeEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
@@ -42,6 +41,8 @@ import mage.counters.CounterType;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.players.Player;
+
+import java.util.UUID;
 
 /**
  *
@@ -70,7 +71,7 @@ public class OrchardElemental extends CardImpl {
     }
 }
 
-class OrchardElementalDilemmaEffect extends OneShotEffect {
+class OrchardElementalDilemmaEffect extends CouncilsDilemmaVoteEffect {
 
     public OrchardElementalDilemmaEffect() {
         super(Outcome.Benefit);
@@ -87,27 +88,20 @@ class OrchardElementalDilemmaEffect extends OneShotEffect {
 
         if (controller == null) return false;
 
-        int sproutCount = 0, harvestCount = 0;
+        this.vote("sprout", "harvest", controller, game, source);
 
-        for (UUID playerId : game.getState().getPlayersInRange(controller.getId(), game)) {
-            Player player = game.getPlayer(playerId);
-            if (player != null) {
-                if (player.chooseUse(Outcome.BoostCreature, "Choose sprout?", source, game)) {
-                    sproutCount++;
-                    game.informPlayers(player.getName() + " has voted for sprout");
-                } else {
-                    harvestCount++;
-                    game.informPlayers(player.getName() + " has voted for harvest");
-                }
-            }
-        }
+        int sproutCount = 0, harvestCount = 0;
 
         Permanent permanent = game.getPermanent(source.getSourceId());
 
-        if (sproutCount > 0 && permanent != null) permanent.addCounters(CounterType.P1P1.createInstance(sproutCount * 2), game);
+        //Sprout Votes
+        //If sprout received zero votes or the permanent is no longer on the battlefield, do not attempt to put P1P1 counter on it.
+        if (voteOneCount > 0 && permanent != null)
+            permanent.addCounters(CounterType.P1P1.createInstance(voteOneCount * 2), game);
 
-        if (harvestCount > 0) {
-            Effect gainLifeEffect = new GainLifeEffect(harvestCount * 3);
+        //Harvest Votes
+        if (voteTwoCount > 0) {
+            Effect gainLifeEffect = new GainLifeEffect(voteTwoCount * 3);
             gainLifeEffect.apply(game, source);
         }
 
