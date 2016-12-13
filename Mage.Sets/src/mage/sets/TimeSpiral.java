@@ -50,6 +50,7 @@ public class TimeSpiral extends ExpansionSet {
         cards.add(new SetCardInfo("Calciform Pools", 270, Rarity.UNCOMMON, mage.cards.c.CalciformPools.class));
         cards.add(new SetCardInfo("Call to the Netherworld", 97, Rarity.COMMON, mage.cards.c.CallToTheNetherworld.class));
         cards.add(new SetCardInfo("Cancel", 51, Rarity.COMMON, mage.cards.c.Cancel.class));
+        cards.add(new SetCardInfo("Candles of Leng", 250, Rarity.RARE, mage.cards.c.CandlesOfLeng.class));
         cards.add(new SetCardInfo("Careful Consideration", 52, Rarity.UNCOMMON, mage.cards.c.CarefulConsideration.class));
         cards.add(new SetCardInfo("Castle Raptors", 5, Rarity.COMMON, mage.cards.c.CastleRaptors.class));
         cards.add(new SetCardInfo("Cavalry Master", 6, Rarity.UNCOMMON, mage.cards.c.CavalryMaster.class));

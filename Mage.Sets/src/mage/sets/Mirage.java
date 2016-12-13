@@ -234,6 +234,7 @@ public class Mirage extends ExpansionSet {
         cards.add(new SetCardInfo("Searing Spear Askari", 191, Rarity.COMMON, mage.cards.s.SearingSpearAskari.class));
         cards.add(new SetCardInfo("Sea Scryer", 90, Rarity.COMMON, mage.cards.s.SeaScryer.class));
         cards.add(new SetCardInfo("Seedling Charm", 138, Rarity.COMMON, mage.cards.s.SeedlingCharm.class));
+        cards.add(new SetCardInfo("Seeds of Innocence", 139, Rarity.RARE, mage.cards.s.SeedsOfInnocence.class));
         cards.add(new SetCardInfo("Serene Heart", 140, Rarity.COMMON, mage.cards.s.SereneHeart.class));
         cards.add(new SetCardInfo("Sewer Rats", 37, Rarity.COMMON, mage.cards.s.SewerRats.class));
         cards.add(new SetCardInfo("Shadow Guildmage", 38, Rarity.COMMON, mage.cards.s.ShadowGuildmage.class));

@@ -161,6 +161,7 @@ public class UrzasDestiny extends ExpansionSet {
         cards.add(new SetCardInfo("Urza's Incubator", 142, Rarity.RARE, mage.cards.u.UrzasIncubator.class));
         cards.add(new SetCardInfo("Voice of Duty", 23, Rarity.UNCOMMON, mage.cards.v.VoiceOfDuty.class));
         cards.add(new SetCardInfo("Voice of Reason", 24, Rarity.UNCOMMON, mage.cards.v.VoiceOfReason.class));
+        cards.add(new SetCardInfo("Wake of Destruction", 99, Rarity.RARE, mage.cards.w.WakeOfDestruction.class));
         cards.add(new SetCardInfo("Wall of Glare", 25, Rarity.COMMON, mage.cards.w.WallOfGlare.class));
         cards.add(new SetCardInfo("Wild Colos", 100, Rarity.COMMON, mage.cards.w.WildColos.class));
         cards.add(new SetCardInfo("Yavimaya Elder", 124, Rarity.COMMON, mage.cards.y.YavimayaElder.class));
