@@ -28,11 +28,11 @@
 
 package mage.cards.repository;
 
-import mage.cards.*;
-import org.apache.log4j.Logger;
-
 import java.util.ArrayList;
 import java.util.List;
+
+import mage.cards.*;
+import org.apache.log4j.Logger;
 
 /**
  *
@@ -62,7 +62,7 @@ public class CardScanner {
                 if (CardRepository.instance.findCard(set.getCode(), setInfo.getCardNumber()) == null) {
                     Card card = CardImpl.createCard(setInfo.getCardClass(),
                             new CardSetInfo(setInfo.getName(), set.getCode(), setInfo.getCardNumber(),
-                                    setInfo.getRarity(), setInfo.getGraphicInfo()));
+                                            setInfo.getRarity(), setInfo.getGraphicInfo()));
                     if (card != null) {
                         cardsToAdd.add(new CardInfo(card));
                         if (card instanceof SplitCard) {
