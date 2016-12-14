@@ -133,6 +133,7 @@ public class RevisedEdition extends ExpansionSet {
         cards.add(new SetCardInfo("Gray Ogre", 156, Rarity.COMMON, mage.cards.g.GrayOgre.class));
         cards.add(new SetCardInfo("Green Ward", 204, Rarity.UNCOMMON, mage.cards.g.GreenWard.class));
         cards.add(new SetCardInfo("Grizzly Bears", 108, Rarity.COMMON, mage.cards.g.GrizzlyBears.class));
+        cards.add(new SetCardInfo("Guardian Angel", 205, Rarity.COMMON, mage.cards.g.GuardianAngel.class));
         cards.add(new SetCardInfo("Healing Salve", 206, Rarity.COMMON, mage.cards.h.HealingSalve.class));
         cards.add(new SetCardInfo("Hill Giant", 157, Rarity.COMMON, mage.cards.h.HillGiant.class));
         cards.add(new SetCardInfo("Holy Armor", 207, Rarity.COMMON, mage.cards.h.HolyArmor.class));

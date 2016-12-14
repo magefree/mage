@@ -31,6 +31,7 @@ package mage.abilities.effects.common;
 import mage.constants.Duration;
 import mage.abilities.Ability;
 import mage.abilities.Mode;
+import mage.abilities.dynamicvalue.DynamicValue;
 import mage.abilities.effects.PreventionEffectImpl;
 import mage.game.Game;
 import mage.game.events.GameEvent;
@@ -55,6 +56,10 @@ public class PreventDamageToTargetEffect extends PreventionEffectImpl {
     
     public PreventDamageToTargetEffect(Duration duration, int amount, boolean onlyCombat) {
         super(duration, amount, onlyCombat);
+    }
+    
+    public PreventDamageToTargetEffect(Duration duration, boolean onlyCombat, boolean consumable, DynamicValue amountToPreventDynamic) {
+        super(duration, 0, onlyCombat, consumable, amountToPreventDynamic);
     }
     
     public PreventDamageToTargetEffect(final PreventDamageToTargetEffect effect) {
