@@ -77,7 +77,7 @@ class ConsulateCracksownExileEffect extends OneShotEffect {
     private static final FilterArtifactPermanent filter = new FilterArtifactPermanent("artifacts your opponents control");
 
     static {
-        filter.add(new ControllerPredicate(TargetController.NOT_YOU));
+        filter.add(new ControllerPredicate(TargetController.OPPONENT));
     }
 
     public ConsulateCracksownExileEffect() {
