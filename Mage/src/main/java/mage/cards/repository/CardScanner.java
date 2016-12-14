@@ -40,8 +40,9 @@ import java.util.List;
  */
 public class CardScanner {
 
-    private static final Logger logger = Logger.getLogger(CardScanner.class);
     public static boolean scanned = false;
+
+    private static final Logger logger = Logger.getLogger(CardScanner.class);
 
     public static void scan() {
         if (scanned) {
