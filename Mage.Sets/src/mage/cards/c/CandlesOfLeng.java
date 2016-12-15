@@ -105,7 +105,7 @@ class CandlesOfLengEffect extends OneShotEffect {
             }
 
             if (hasTheSameName) {
-                return controller.moveCards(card, Zone.GRAVEYARD, source, game);
+                controller.moveCards(card, Zone.GRAVEYARD, source, game);
             } else {
                 controller.moveCards(card, Zone.HAND, source, game);
             }
