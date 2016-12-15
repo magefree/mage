@@ -63,7 +63,7 @@ import mage.util.CardUtil;
 public class EyeOfTheStorm extends CardImpl {
 
     public EyeOfTheStorm(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.ENCHANTMENT},"{5}{U}{U}");
+        super(ownerId, setInfo, new CardType[]{CardType.ENCHANTMENT}, "{5}{U}{U}");
 
         // Whenever a player casts an instant or sorcery card, exile it. Then that player copies each instant or sorcery card exiled with Eye of the Storm. For each copy, the player may cast the copy without paying its mana cost.
         this.addAbility(new EyeOfTheStormAbility());
@@ -101,7 +101,7 @@ class EyeOfTheStormAbility extends TriggeredAbilityImpl {
 
     @Override
     public boolean checkTrigger(GameEvent event, Game game) {
-        if (event.getZone() == Zone.HAND) {
+        if (event.getZone() != Zone.OUTSIDE) {
             Spell spell = game.getStack().getSpell(event.getTargetId());
             if (spell != null && !spell.isCopy()
                     && (spell.getCardType().contains(CardType.INSTANT) || spell.getCardType().contains(CardType.SORCERY))) {
