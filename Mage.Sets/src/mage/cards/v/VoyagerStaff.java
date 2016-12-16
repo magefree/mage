@@ -35,7 +35,7 @@ import mage.abilities.costs.common.SacrificeSourceCost;
 import mage.abilities.costs.mana.GenericManaCost;
 import mage.abilities.effects.Effect;
 import mage.abilities.effects.OneShotEffect;
-import mage.abilities.effects.common.ReturnToBattlefieldUnderYourControlTargetEffect;
+import mage.abilities.effects.common.ReturnToBattlefieldUnderOwnerControlTargetEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
@@ -86,15 +86,15 @@ class VoyagerStaffEffect extends OneShotEffect {
 
     @Override
     public boolean apply(Game game, Ability source) {
-        Permanent creature = game.getPermanent(source.getFirstTarget());
+        Permanent creature = game.getPermanent(getTargetPointer().getFirst(game, source));
         Player controller = game.getPlayer(source.getControllerId());
         Permanent sourcePermanent = game.getPermanentOrLKIBattlefield(source.getSourceId());
         if (controller != null && creature != null && sourcePermanent != null) {
             if (controller.moveCardToExileWithInfo(creature, source.getSourceId(), sourcePermanent.getIdName(), source.getSourceId(), game, Zone.BATTLEFIELD, true)) {
                 //create delayed triggered ability
-                Effect effect = new ReturnToBattlefieldUnderYourControlTargetEffect();
+                Effect effect = new ReturnToBattlefieldUnderOwnerControlTargetEffect();
                 effect.setText("Return the exiled card to the battlefield under its owner's control at the beginning of the next end step");
-                effect.setTargetPointer(new FixedTarget(creature.getId(), game));
+                effect.setTargetPointer(new FixedTarget(creature.getId(), game.getState().getZoneChangeCounter(creature.getId())));
                 game.addDelayedTriggeredAbility(new AtTheBeginOfNextEndStepDelayedTriggeredAbility(effect), source);
                 return true;
             }
