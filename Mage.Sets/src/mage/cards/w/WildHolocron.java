@@ -52,7 +52,7 @@ import mage.counters.CounterType;
 public class WildHolocron extends CardImpl {
 
     public WildHolocron(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.ARTIFACT},"{2}");
+        super(ownerId, setInfo, new CardType[]{CardType.ARTIFACT}, "{2}");
 
         // {T}: Put a charge counter on Wild Holocron.
         this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new AddCountersSourceEffect(CounterType.CHARGE.createInstance(1)), new TapSourceCost()));
@@ -71,7 +71,7 @@ public class WildHolocron extends CardImpl {
         ability.addCost(cost);
         this.addAbility(ability);
 
-        // {T}, Remove two charge counters from Sith Holocron: Add RG or GW to your mana pool.
+        // {T}, Remove two charge counters from Wild Holocron: Add RG or GW to your mana pool.
         cost = new RemoveCountersSourceCost(CounterType.CHARGE.createInstance(2));
 
         ability = new SimpleManaAbility(Zone.BATTLEFIELD, new Mana(1, 1, 0, 0, 0, 0, 0, 0), new TapSourceCost());

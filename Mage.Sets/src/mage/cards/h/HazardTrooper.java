@@ -53,9 +53,9 @@ public class HazardTrooper extends CardImpl {
     }
 
     public HazardTrooper(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{3}{B}");
+        super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{4}{B}");
         this.subtype.add("Human");
-        this.subtype.add("Zyborg");
+        this.subtype.add("Cyborg");
         this.subtype.add("Trooper");
         this.power = new MageInt(3);
         this.toughness = new MageInt(3);

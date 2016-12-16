@@ -33,6 +33,7 @@ import mage.abilities.common.EntersBattlefieldTriggeredAbility;
 import mage.abilities.costs.common.SacrificeTargetCost;
 import mage.abilities.effects.common.DoIfCostPaid;
 import mage.abilities.effects.common.DrawCardSourceControllerEffect;
+import mage.abilities.effects.common.GainLifeEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
@@ -46,14 +47,16 @@ import mage.target.common.TargetControlledPermanent;
 public class SalvageSquad extends CardImpl {
 
     public SalvageSquad(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{W}{U}{B}");
+        super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{W}{U}{B}");
         this.subtype.add("Jawa");
         this.subtype.add("Artificier");
         this.power = new MageInt(2);
         this.toughness = new MageInt(2);
 
-        // When you Salvage Squad enters the battlefied, you may sacrifice an artifcat. If you do, draw two cards.
-        this.addAbility(new EntersBattlefieldTriggeredAbility(new DoIfCostPaid(new DrawCardSourceControllerEffect(2), new SacrificeTargetCost(new TargetControlledPermanent(new FilterControlledArtifactPermanent())))));
+        // When you Salvage Squad enters the battlefied, you may sacrifice an artifact. If you do, you gain 2 life and draw two cards.
+        DoIfCostPaid effect = new DoIfCostPaid(new GainLifeEffect(2), new SacrificeTargetCost(new TargetControlledPermanent(new FilterControlledArtifactPermanent())));
+        effect.addEffect(new DrawCardSourceControllerEffect(2));
+        this.addAbility(new EntersBattlefieldTriggeredAbility(effect));
     }
 
     public SalvageSquad(final SalvageSquad card) {

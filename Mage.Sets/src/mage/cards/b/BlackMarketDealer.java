@@ -54,23 +54,21 @@ import mage.target.common.TargetOpponentsCreaturePermanent;
  */
 public class BlackMarketDealer extends CardImpl {
 
-    private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("a Rogue or Hunter creature you controle");
+    private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("a Rogue or Hunter creature you control");
 
     static {
-
         filter.add(new ControllerPredicate(TargetController.YOU));
         filter.add(Predicates.or(new SubtypePredicate("Rogue"), new SubtypePredicate("Hunter")));
-
     }
 
     public BlackMarketDealer(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{2}{B}");
+        super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{2}{B}");
         this.subtype.add("Human");
         this.subtype.add("Rogue");
         this.power = new MageInt(2);
         this.toughness = new MageInt(2);
 
-        // Whenever a Rogue or Hunter creature you controle dies, put a bounty counter on target creature an opponent controls.
+        // Whenever a Rogue or Hunter creature you control dies, put a bounty counter on target creature an opponent controls.
         Ability ability = new DiesCreatureTriggeredAbility(new AddCountersTargetEffect(CounterType.BOUNTY.createInstance()), false, filter);
         ability.addTarget(new TargetOpponentsCreaturePermanent());
         this.addAbility(ability);

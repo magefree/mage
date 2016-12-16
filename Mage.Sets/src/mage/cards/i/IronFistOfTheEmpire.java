@@ -50,10 +50,10 @@ import mage.watchers.common.LifeLossOtherFromCombatWatcher;
 public class IronFistOfTheEmpire extends CardImpl {
 
     public IronFistOfTheEmpire(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.ENCHANTMENT},"{U}{B}{R}");
+        super(ownerId, setInfo, new CardType[]{CardType.ENCHANTMENT}, "{U}{B}{R}");
 
-        // <i>Hate</i> &mdash; At the beggining of each end step, if opponent lost life from a source other than combat damage this turn, you gain 1 life and create a 2/2 red Soldier creature token with first strike name Royal Guard.
-        TriggeredAbility triggeredAbility = new BeginningOfEndStepTriggeredAbility(new GainLifeEffect(1), TargetController.ANY, false);
+        // <i>Hate</i> &mdash; At the beggining of each end step, if opponent lost life from a source other than combat damage this turn, you gain 2 life and create a 2/2 red Soldier creature token with first strike name Royal Guard.
+        TriggeredAbility triggeredAbility = new BeginningOfEndStepTriggeredAbility(new GainLifeEffect(2), TargetController.ANY, false);
         triggeredAbility.addEffect(new CreateTokenEffect(new RoyalGuardToken()));
         Ability ability = new ConditionalTriggeredAbility(
                 triggeredAbility,

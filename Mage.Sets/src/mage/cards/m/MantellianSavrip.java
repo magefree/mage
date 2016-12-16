@@ -48,14 +48,14 @@ import mage.game.permanent.Permanent;
 public class MantellianSavrip extends CardImpl {
 
     public MantellianSavrip(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{3}{G}{G}");
+        super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{4}{G}");
         this.subtype.add("Mantellian");
         this.subtype.add("Berserker");
         this.power = new MageInt(4);
         this.toughness = new MageInt(4);
 
-        // {5}{G}{G}: Monstrosity 3.
-        this.addAbility(new MonstrosityAbility("{5}{G}{G}", 3));
+        // {5}{G}{G}: Monstrosity 2.
+        this.addAbility(new MonstrosityAbility("{5}{G}{G}", 2));
 
         // Creatures with power less than Mantellian Savrip's power can't block it.
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new MantellianSavripRestrictionEffect()));

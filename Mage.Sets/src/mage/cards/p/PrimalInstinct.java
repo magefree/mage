@@ -44,9 +44,9 @@ import mage.target.common.TargetCreaturePermanent;
  *
  * @author Styxo
  */
-public class PrimalInstict extends CardImpl {
+public class PrimalInstinct extends CardImpl {
 
-    public PrimalInstict(UUID ownerId, CardSetInfo setInfo) {
+    public PrimalInstinct(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.INSTANT},"{1}{R}{G}");
 
         // Put a +1/+1 counter on target creature, then double the number of +1/+1 counters on that creature.
@@ -54,13 +54,13 @@ public class PrimalInstict extends CardImpl {
         this.getSpellAbility().addTarget(new TargetCreaturePermanent());
     }
 
-    public PrimalInstict(final PrimalInstict card) {
+    public PrimalInstinct(final PrimalInstinct card) {
         super(card);
     }
 
     @Override
-    public PrimalInstict copy() {
-        return new PrimalInstict(this);
+    public PrimalInstinct copy() {
+        return new PrimalInstinct(this);
     }
 }
 

@@ -31,7 +31,7 @@ import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.DealsCombatDamageToAPlayerTriggeredAbility;
-import mage.abilities.costs.mana.GenericManaCost;
+import mage.abilities.costs.mana.ManaCostsImpl;
 import mage.abilities.effects.Effect;
 import mage.abilities.effects.common.DoIfCostPaid;
 import mage.abilities.effects.common.ExileTargetForSourceEffect;
@@ -57,7 +57,7 @@ public class N1Starfighter extends CardImpl {
     }
 
     public N1Starfighter(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.ARTIFACT,CardType.CREATURE},"{1}{W/U}{W/U}");
+        super(ownerId, setInfo, new CardType[]{CardType.ARTIFACT, CardType.CREATURE}, "{1}{W/U}{W/U}");
         this.subtype.add("Starship");
         this.power = new MageInt(2);
         this.toughness = new MageInt(2);
@@ -65,8 +65,8 @@ public class N1Starfighter extends CardImpl {
         // Spaceflight
         this.addAbility(SpaceflightAbility.getInstance());
 
-        // Whenever N-1 Starfighter deals combat damage to a player, you may pay {1}. If you do, exile another creature you control, then return that card to the battlefield under its owner's control.
-        Ability ability = new DealsCombatDamageToAPlayerTriggeredAbility(new DoIfCostPaid(new ExileTargetForSourceEffect(), new GenericManaCost(1)), false);
+        // Whenever N-1 Starfighter deals combat damage to a player, you may pay {1}{W/U}. If you do, exile another creature you control, then return that card to the battlefield under its owner's control.
+        Ability ability = new DealsCombatDamageToAPlayerTriggeredAbility(new DoIfCostPaid(new ExileTargetForSourceEffect(), new ManaCostsImpl("{1}{W/U}")), false);
         Effect effect = new ReturnToBattlefieldUnderOwnerControlTargetEffect(false, true);
         effect.setText(", then return the card to the battlefield under their owner's control");
         ability.addEffect(effect);

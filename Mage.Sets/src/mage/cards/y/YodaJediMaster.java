@@ -90,8 +90,8 @@ public class YodaJediMaster extends CardImpl {
         ability.addTarget(new TargetPermanent(filter));
         this.addAbility(ability);
 
-        // -7: You get an emblem with "Hexproof, you and your creatures have."
-        this.addAbility(new LoyaltyAbility(new GetEmblemEffect(new YodaEmblem()), -7));
+        // -5: You get an emblem with "Hexproof, you and your creatures have."
+        this.addAbility(new LoyaltyAbility(new GetEmblemEffect(new YodaEmblem()), -5));
 
     }
 

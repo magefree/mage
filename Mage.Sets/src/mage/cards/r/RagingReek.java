@@ -42,7 +42,7 @@ import mage.constants.CardType;
 public class RagingReek extends CardImpl {
 
     public RagingReek(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{4}{R}");
+        super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{4}{R}");
         this.subtype.add("Beast");
         this.power = new MageInt(4);
         this.toughness = new MageInt(4);
@@ -50,8 +50,8 @@ public class RagingReek extends CardImpl {
         // Raging Reek attacks each turn if able.
         this.addAbility(new AttacksEachTurnStaticAbility());
 
-        //{4}{R}{R}: Monstrosity 2
-        this.addAbility(new MonstrosityAbility("{4}{R}{R}", 2));
+        //{5}{R}: Monstrosity 2
+        this.addAbility(new MonstrosityAbility("{5}{R}", 2));
     }
 
     public RagingReek(final RagingReek card) {

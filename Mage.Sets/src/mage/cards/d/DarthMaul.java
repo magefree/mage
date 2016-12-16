@@ -33,7 +33,7 @@ import mage.abilities.Ability;
 import mage.abilities.common.AttacksTriggeredAbility;
 import mage.abilities.condition.common.HateCondition;
 import mage.abilities.decorator.ConditionalTriggeredAbility;
-import mage.abilities.effects.common.combat.CantBlockTargetEffect;
+import mage.abilities.effects.common.combat.CantBeBlockedByTargetSourceEffect;
 import mage.abilities.keyword.DoubleStrikeAbility;
 import mage.abilities.keyword.HasteAbility;
 import mage.cards.CardImpl;
@@ -50,7 +50,7 @@ import mage.watchers.common.LifeLossOtherFromCombatWatcher;
 public class DarthMaul extends CardImpl {
 
     public DarthMaul(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{1}{B}{R}");
+        super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{1}{B}{R}");
         this.supertype.add("Legendary");
         this.subtype.add("Zabrak");
         this.subtype.add("Sith");
@@ -65,7 +65,7 @@ public class DarthMaul extends CardImpl {
 
         // <i>Hate</i> &mdash; Whenever Darth Maul attacks, if an opponent loses life from a source other than combat damage this turn, target creature can't block this turn.
         Ability ability = new ConditionalTriggeredAbility(
-                new AttacksTriggeredAbility(new CantBlockTargetEffect(Duration.EndOfTurn), false),
+                new AttacksTriggeredAbility(new CantBeBlockedByTargetSourceEffect(Duration.EndOfTurn), false),
                 HateCondition.getInstance(),
                 "<i>Hate</i> &mdash; Whenever Darth Maul attacks, if an opponent loses life from a source other than combat damage this turn, target creature can't block this turn.");
         ability.addTarget(new TargetCreaturePermanent());

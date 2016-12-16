@@ -51,9 +51,9 @@ import mage.target.common.TargetOpponent;
  *
  * @author Styxo
  */
-public class ZamWessel extends CardImpl {
+public class ZamWesell extends CardImpl {
 
-    public ZamWessel(UUID ownerId, CardSetInfo setInfo) {
+    public ZamWesell(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{2}{U}{U}");
         this.supertype.add("Legendary");
         this.subtype.add("Shapeshifter");
@@ -67,13 +67,13 @@ public class ZamWessel extends CardImpl {
         this.addAbility(ability);
     }
 
-    public ZamWessel(final ZamWessel card) {
+    public ZamWesell(final ZamWesell card) {
         super(card);
     }
 
     @Override
-    public ZamWessel copy() {
-        return new ZamWessel(this);
+    public ZamWesell copy() {
+        return new ZamWesell(this);
     }
 }
 

@@ -25,62 +25,60 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.cards.t;
+package mage.cards.i;
 
+import java.util.List;
 import java.util.UUID;
-import mage.MageInt;
 import mage.abilities.Ability;
-import mage.abilities.common.EntersBattlefieldTriggeredAbility;
-import mage.abilities.condition.common.PermanentHasCounterCondition;
+import mage.abilities.costs.common.DiscardCardCost;
 import mage.abilities.effects.Effect;
 import mage.abilities.effects.OneShotEffect;
-import mage.abilities.effects.common.SacrificeControllerEffect;
+import mage.abilities.effects.common.counter.AddCountersTargetEffect;
+import mage.cards.Card;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Outcome;
 import mage.counters.CounterType;
-import mage.filter.common.FilterControlledCreaturePermanent;
-import mage.filter.common.FilterOpponentsCreaturePermanent;
 import mage.game.Game;
 import mage.players.Player;
+import mage.target.common.TargetOpponentsCreaturePermanent;
 
 /**
  *
  * @author Styxo
  */
-public class TreacherousBountyHunter extends CardImpl {
+public class ImpulsiveWager extends CardImpl {
 
-    public TreacherousBountyHunter(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{B}");
-        this.subtype.add("Rodian");
-        this.subtype.add("Hunter");
-        this.power = new MageInt(3);
-        this.toughness = new MageInt(3);
+    public ImpulsiveWager(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId, setInfo, new CardType[]{CardType.SORCERY}, "{R}");
 
-        // When Treacherous Bounty Hunter enters the battlefield, sacrifice a creature unless an opponet controls a creature with a bounty counter on it.
-        this.addAbility(new EntersBattlefieldTriggeredAbility(new TreacherousBountyHunterSacrificeUnlessConditionEffect()));
+        // As an additional cost to cast Irresponsible Gambling, discard a card at random.
+        this.getSpellAbility().addCost(new DiscardCardCost(true));
 
+        // If the discarded card was a nonland card, draw two cards. Otherwise, put a bounty counter on target creature.
+        this.getSpellAbility().addEffect(new ImpulsiveWagerEffect());
+        this.getSpellAbility().addTarget(new TargetOpponentsCreaturePermanent());
     }
 
-    public TreacherousBountyHunter(final TreacherousBountyHunter card) {
+    public ImpulsiveWager(final ImpulsiveWager card) {
         super(card);
     }
 
     @Override
-    public TreacherousBountyHunter copy() {
-        return new TreacherousBountyHunter(this);
+    public ImpulsiveWager copy() {
+        return new ImpulsiveWager(this);
     }
 }
 
-class TreacherousBountyHunterSacrificeUnlessConditionEffect extends OneShotEffect {
+class ImpulsiveWagerEffect extends OneShotEffect {
 
-    public TreacherousBountyHunterSacrificeUnlessConditionEffect() {
-        super(Outcome.Sacrifice);
-        staticText = "sacrifice a creature unless an opponet controls a creature with a bounty counter on it";
+    public ImpulsiveWagerEffect() {
+        super(Outcome.Benefit);
+        staticText = "If the discarded card was a nonland card, draw two cards. Otherwise, put a bounty counter on target creature";
     }
 
-    public TreacherousBountyHunterSacrificeUnlessConditionEffect(final TreacherousBountyHunterSacrificeUnlessConditionEffect effect) {
+    public ImpulsiveWagerEffect(final ImpulsiveWagerEffect effect) {
         super(effect);
     }
 
@@ -88,18 +86,25 @@ class TreacherousBountyHunterSacrificeUnlessConditionEffect extends OneShotEffec
     public boolean apply(Game game, Ability source) {
         Player player = game.getPlayer(source.getControllerId());
         if (player != null) {
-            if (new PermanentHasCounterCondition(CounterType.BOUNTY, 0, new FilterOpponentsCreaturePermanent(), PermanentHasCounterCondition.CountType.MORE_THAN).apply(game, source)) {
-                return true;
+            DiscardCardCost cost = (DiscardCardCost) source.getCosts().get(0);
+            if (cost != null) {
+                List<Card> cards = cost.getCards();
+                if (cards.size() == 1 && cards.get(0).getCardType().contains(CardType.LAND)) {
+                    Effect effect = new AddCountersTargetEffect(CounterType.BOUNTY.createInstance());
+                    effect.setTargetPointer(getTargetPointer());
+                    effect.apply(game, source);
+                } else {
+                    player.drawCards(2, game);
+                }
+
             }
-            Effect effect = new SacrificeControllerEffect(new FilterControlledCreaturePermanent(), 1, "");
-            effect.apply(game, source);
             return true;
         }
         return false;
     }
 
     @Override
-    public TreacherousBountyHunterSacrificeUnlessConditionEffect copy() {
-        return new TreacherousBountyHunterSacrificeUnlessConditionEffect(this);
+    public ImpulsiveWagerEffect copy() {
+        return new ImpulsiveWagerEffect(this);
     }
 }

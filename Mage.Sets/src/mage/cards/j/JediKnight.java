@@ -29,7 +29,8 @@ package mage.cards.j;
 
 import java.util.UUID;
 import mage.MageInt;
-import mage.abilities.common.EntersBattlefieldTriggeredAbility;
+import mage.abilities.Ability;
+import mage.abilities.common.LeavesBattlefieldTriggeredAbility;
 import mage.abilities.costs.mana.ManaCostsImpl;
 import mage.abilities.effects.common.ReturnToHandTargetEffect;
 import mage.abilities.keyword.MeditateAbility;
@@ -47,22 +48,22 @@ import mage.target.common.TargetNonlandPermanent;
  */
 public class JediKnight extends CardImpl {
 
-    private static final FilterNonlandPermanent filter = new FilterNonlandPermanent("nonland permanent you don't contro");
+    private static final FilterNonlandPermanent filter = new FilterNonlandPermanent("nonland permanent you don't control");
 
     static {
         filter.add(new ControllerPredicate(TargetController.NOT_YOU));
     }
 
     public JediKnight(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{G}{U}{W}");
+        super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{G}{U}{W}");
         this.subtype.add("Human");
         this.subtype.add("Jedi");
         this.subtype.add("Knight");
         this.power = new MageInt(3);
         this.toughness = new MageInt(3);
 
-        // When Jedi Knight enters the battlefield, return another target nonland permanent you don't control to its owner's hands.
-        EntersBattlefieldTriggeredAbility ability = new EntersBattlefieldTriggeredAbility(new ReturnToHandTargetEffect());
+        // When Jedi Knight leaves the battlefield, return target nonland permanent you don't control to its owner's hands.
+        Ability ability = new LeavesBattlefieldTriggeredAbility(new ReturnToHandTargetEffect(), false);
         ability.addTarget(new TargetNonlandPermanent(filter));
         this.addAbility(ability);
 

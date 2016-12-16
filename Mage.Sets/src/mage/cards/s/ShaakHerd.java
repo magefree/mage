@@ -52,9 +52,9 @@ public class ShaakHerd extends CardImpl {
     }
 
     public ShaakHerd(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{2}{G}");
+        super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{1}{G}");
         this.subtype.add("Beast");
-        this.power = new MageInt(2);
+        this.power = new MageInt(1);
         this.toughness = new MageInt(2);
 
         // When Shaak Herd dies, you may return another target creature card from your graveyard to your hand.

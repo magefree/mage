@@ -31,7 +31,6 @@ import java.util.UUID;
 import mage.abilities.TriggeredAbilityImpl;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.effects.common.cost.AbilitiesCostReductionControllerEffect;
-import mage.abilities.effects.common.cost.SpellsCostReductionControllerEffect;
 import mage.abilities.effects.keyword.ScryEffect;
 import mage.abilities.keyword.MeditateAbility;
 import mage.cards.Card;
@@ -58,12 +57,9 @@ public class JediTraining extends CardImpl {
     }
 
     public JediTraining(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.ENCHANTMENT},"{2}{U}");
+        super(ownerId,setInfo,new CardType[]{CardType.ENCHANTMENT},"{U}");
 
-        // Jedi spells you cast cost {1} less to cast.
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new SpellsCostReductionControllerEffect(filter, 1)));
-
-        // Meditate costs you pay cost {1} less.
+        // Meditate abilities you activate costs {1} less to activate.
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new AbilitiesCostReductionControllerEffect(MeditateAbility.class, "Meditate")));
 
         // Whenever a Jedi creature you control meditates, scry 1.
@@ -103,11 +99,7 @@ class JediTrainingTriggeredAbility extends TriggeredAbilityImpl {
     @Override
     public boolean checkTrigger(GameEvent event, Game game) {        
         Card source = game.getPermanentOrLKIBattlefield(event.getSourceId());
-        game.informPlayers("3 " + source.getLogName());
-        if (event.getPlayerId().equals(getControllerId()) && source != null && JediTraining.filter.match(source, game)) {
-            return true;
-        }
-        return false;
+        return event.getPlayerId().equals(getControllerId()) && source != null && JediTraining.filter.match(source, game);
     }
 
     public String getRule() {

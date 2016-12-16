@@ -29,22 +29,20 @@ package mage.cards.p;
 
 import java.util.UUID;
 import mage.abilities.Ability;
-import mage.abilities.Mode;
-import mage.abilities.common.EntersBattlefieldAllTriggeredAbility;
-import mage.abilities.effects.OneShotEffect;
-import mage.abilities.keyword.MeditateAbility;
+import mage.abilities.common.SimpleStaticAbility;
+import mage.abilities.effects.ReplacementEffectImpl;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
+import mage.constants.Duration;
 import mage.constants.Outcome;
 import mage.constants.Zone;
-import mage.filter.common.FilterControlledCreaturePermanent;
-import mage.filter.predicate.mageobject.AbilityPredicate;
 import mage.game.Game;
-import mage.game.permanent.Permanent;
-import mage.game.stack.StackAbility;
-import mage.players.Player;
-import mage.target.common.TargetTriggeredAbility;
+import mage.game.events.EntersTheBattlefieldEvent;
+import mage.game.events.GameEvent;
+import mage.game.events.GameEvent.EventType;
+import mage.game.events.NumberOfTriggersEvent;
+import mage.game.events.ZoneChangeEvent;
 
 /**
  *
@@ -52,19 +50,12 @@ import mage.target.common.TargetTriggeredAbility;
  */
 public class PrecipiceOfMortis extends CardImpl {
 
-    protected static final FilterControlledCreaturePermanent filter = new FilterControlledCreaturePermanent("creature with meditate");
-
-    static {
-        filter.add(new AbilityPredicate(MeditateAbility.class));
-    }
-
     public PrecipiceOfMortis(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.ENCHANTMENT},"{G}{U}{W}");
+        super(ownerId, setInfo, new CardType[]{CardType.ENCHANTMENT}, "{G}{U}{W}");
 
-        // Whenever a creature with meditate enters the battlefield under your control, you may copy target triggered ability you control. You may choose new targets for that ability.
-        Ability ability = new EntersBattlefieldAllTriggeredAbility(Zone.BATTLEFIELD, new PrecipiceOfMortisEffect(), filter, true);
-        ability.addTarget(new TargetTriggeredAbility());
-        this.addAbility(ability);
+        // If a Jedi entering or leaving the battlefield causes a triggered ability of a permanent you control to trigger, that ability triggers additional time
+        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new PrecipiceOfMortisEffect()));
+
     }
 
     public PrecipiceOfMortis(final PrecipiceOfMortis card) {
@@ -77,29 +68,15 @@ public class PrecipiceOfMortis extends CardImpl {
     }
 }
 
-class PrecipiceOfMortisEffect extends OneShotEffect {
+class PrecipiceOfMortisEffect extends ReplacementEffectImpl {
 
     public PrecipiceOfMortisEffect() {
-        super(Outcome.Copy);
+        super(Duration.WhileOnBattlefield, Outcome.Benefit);
+        staticText = "If a Jedi entering or leaving the battlefield causes a triggered ability of a permanent you control to trigger, that ability triggers additional time";
     }
 
     public PrecipiceOfMortisEffect(final PrecipiceOfMortisEffect effect) {
         super(effect);
-    }
-
-    @Override
-    public boolean apply(Game game, Ability source) {
-        StackAbility stackAbility = (StackAbility) game.getStack().getStackObject(targetPointer.getFirst(game, source));
-        if (stackAbility != null) {
-            Player controller = game.getPlayer(source.getControllerId());
-            Permanent sourcePermanent = game.getPermanent(source.getSourceId());
-            if (controller != null && sourcePermanent != null) {
-                stackAbility.createCopyOnStack(game, source, source.getControllerId(), true);
-                return true;
-            }
-        }
-        return false;
-
     }
 
     @Override
@@ -108,9 +85,50 @@ class PrecipiceOfMortisEffect extends OneShotEffect {
     }
 
     @Override
-    public String getText(Mode mode) {
-        StringBuilder sb = new StringBuilder();
-        sb.append("copy ").append(mode.getTargets().get(0).getTargetName()).append(". You may choose new targets for that ability");
-        return sb.toString();
+    public boolean checksEventType(GameEvent event, Game game) {
+        return event.getType() == EventType.NUMBER_OF_TRIGGERS;
+    }
+
+    @Override
+    public boolean applies(GameEvent event, Ability source, Game game) {
+        if (event instanceof NumberOfTriggersEvent) {
+            NumberOfTriggersEvent numberOfTriggersEvent = (NumberOfTriggersEvent) event;
+            // Only triggers of the controller of Precipice of Mortis
+            if (source.getControllerId().equals(event.getPlayerId())) {
+                GameEvent sourceEvent = numberOfTriggersEvent.getSourceEvent();
+                // enters triggers
+                if (sourceEvent.getType() == EventType.ENTERS_THE_BATTLEFIELD && sourceEvent instanceof EntersTheBattlefieldEvent) {
+                    EntersTheBattlefieldEvent entersTheBattlefieldEvent = (EntersTheBattlefieldEvent) sourceEvent;
+                    // Only for entering Jedis
+                    if (entersTheBattlefieldEvent.getTarget().getSubtype(game).contains("Jedi")) {
+                        // Only for triggers of permanents
+                        if (game.getPermanent(numberOfTriggersEvent.getSourceId()) != null) {
+                            return true;
+                        }
+                    }
+                }
+                // leaves triggers
+                if (sourceEvent.getType() == EventType.ZONE_CHANGE && sourceEvent instanceof ZoneChangeEvent) {
+                    ZoneChangeEvent leavesTheBattlefieldEvent = (ZoneChangeEvent) sourceEvent;
+                    if (leavesTheBattlefieldEvent.getFromZone() == Zone.BATTLEFIELD) {
+                        // Only for leaving Jedis
+                        if (leavesTheBattlefieldEvent.getTarget().getSubtype(game).contains("Jedi")) {
+                            // Only for triggers of permanents
+                            if (game.getPermanent(numberOfTriggersEvent.getSourceId()) != null) {
+                                return true;
+                            }
+                        }
+                    }
+
+                }
+            }
+        }
+        return false;
+    }
+
+    @Override
+    public boolean replaceEvent(GameEvent event, Ability source, Game game) {
+        event.setAmount(event.getAmount() + 1);
+        return false;
     }
 }

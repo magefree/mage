@@ -29,22 +29,17 @@ package mage.cards.t;
 
 import java.util.UUID;
 import mage.MageInt;
-import mage.abilities.Ability;
-import mage.abilities.common.EntersBattlefieldAbility;
 import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.common.SimpleStaticAbility;
-import mage.abilities.costs.common.RemoveCountersSourceCost;
 import mage.abilities.costs.common.TapSourceCost;
 import mage.abilities.effects.common.CreateTokenEffect;
 import mage.abilities.effects.common.continuous.BoostControlledEffect;
-import mage.abilities.effects.common.counter.AddCountersSourceEffect;
 import mage.abilities.keyword.SpaceflightAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Duration;
 import mage.constants.Zone;
-import mage.counters.CounterType;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.filter.predicate.mageobject.SubtypePredicate;
 import mage.game.permanent.token.DroidToken;
@@ -73,14 +68,8 @@ public class TradeFederationBattleship extends CardImpl {
         // Droid creatures you control get +1/+1
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new BoostControlledEffect(1, 1, Duration.WhileOnBattlefield, filter, false)));
 
-        // Trade Federation Battleship enters the battlefield with three charge counters on it.
-        this.addAbility(new EntersBattlefieldAbility(new AddCountersSourceEffect(CounterType.CHARGE.createInstance(3), true),
-                "with three charge counters on it"));
-
-        // {T}, Remove a charge counter forom Trade Federation Battleship: Create two 1/1 colorless Droid artifact token cretures.
-        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new CreateTokenEffect(new DroidToken(), 2), new TapSourceCost());
-        ability.addCost(new RemoveCountersSourceCost(CounterType.CHARGE.createInstance()));
-        this.addAbility(ability);
+        // {T}: Create two 1/1 colorless Droid artifact token cretures.
+        this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new CreateTokenEffect(new DroidToken(), 2), new TapSourceCost()));
     }
 
     public TradeFederationBattleship(final TradeFederationBattleship card) {

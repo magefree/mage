@@ -28,6 +28,10 @@
 package mage.cards.c;
 
 import java.util.UUID;
+import mage.Mana;
+import mage.abilities.condition.common.TargetHasCounterCondition;
+import mage.abilities.decorator.ConditionalOneShotEffect;
+import mage.abilities.effects.common.BasicManaEffect;
 import mage.abilities.effects.common.UntapTargetEffect;
 import mage.abilities.effects.common.continuous.GainAbilityTargetEffect;
 import mage.abilities.effects.common.continuous.GainControlTargetEffect;
@@ -36,6 +40,7 @@ import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Duration;
+import mage.counters.CounterType;
 import mage.target.common.TargetCreaturePermanent;
 
 /**
@@ -45,7 +50,7 @@ import mage.target.common.TargetCreaturePermanent;
 public class Capture extends CardImpl {
 
     public Capture(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{2}{R}");
+        super(ownerId, setInfo, new CardType[]{CardType.SORCERY}, "{2}{R}");
 
         // Gain control of target creature until end of turn.
         this.getSpellAbility().addTarget(new TargetCreaturePermanent());
@@ -57,6 +62,8 @@ public class Capture extends CardImpl {
         // It gains haste until end of turn.
         this.getSpellAbility().addEffect(new GainAbilityTargetEffect(HasteAbility.getInstance(), Duration.EndOfTurn));
 
+        // If it has a bounty counter on it, add {R}{R}{R} to your mana pool
+        this.getSpellAbility().addEffect(new ConditionalOneShotEffect(new BasicManaEffect(Mana.RedMana(3)), new TargetHasCounterCondition(CounterType.BOUNTY)));
     }
 
     public Capture(final Capture card) {

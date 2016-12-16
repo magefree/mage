@@ -25,47 +25,53 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.cards.i;
+package mage.cards.n;
 
 import java.util.UUID;
 import mage.MageInt;
-import mage.abilities.Ability;
-import mage.abilities.common.SimpleActivatedAbility;
-import mage.abilities.costs.common.TapSourceCost;
-import mage.abilities.costs.mana.ManaCostsImpl;
-import mage.abilities.effects.common.LookLibraryTopCardTargetPlayerEffect;
+import mage.abilities.common.EntersBattlefieldTriggeredAbility;
+import mage.abilities.effects.common.continuous.GainAbilityControlledEffect;
+import mage.abilities.keyword.SpaceflightAbility;
+import mage.abilities.keyword.VigilanceAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.Zone;
-import mage.target.TargetPlayer;
+import mage.constants.Duration;
+import mage.filter.common.FilterControlledCreaturePermanent;
+import mage.filter.common.FilterCreaturePermanent;
+import mage.filter.predicate.permanent.AnotherPredicate;
 
 /**
  *
  * @author Styxo
  */
-public class ImperialSpy extends CardImpl {
+public class NebulonBFrigate extends CardImpl {
 
-    public ImperialSpy(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{1}{U}");
-        this.subtype.add("Kubaz");
-        this.subtype.add("Rogue");
-        this.power = new MageInt(1);
-        this.toughness = new MageInt(1);
+    private static final FilterControlledCreaturePermanent filter = new FilterControlledCreaturePermanent("another creature you control");
 
-        // {1}{B},{T}: Look at the top card of target player's library. You may put that card into that player's graveyard.
-        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new LookLibraryTopCardTargetPlayerEffect(1, true), new ManaCostsImpl("{1}{B}"));
-        ability.addCost(new TapSourceCost());
-        ability.addTarget(new TargetPlayer());
-        this.addAbility(ability);
+    static {
+        filter.add(new AnotherPredicate());
     }
 
-    public ImperialSpy(final ImperialSpy card) {
+    public NebulonBFrigate(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId, setInfo, new CardType[]{CardType.ARTIFACT, CardType.CREATURE}, "{3}{W}{W}");
+        this.subtype.add("Starship");
+        this.power = new MageInt(4);
+        this.toughness = new MageInt(2);
+
+        // Spaceflight
+        this.addAbility(SpaceflightAbility.getInstance());
+
+        // Whenever Nebulon-B Frigate enters the battlefield, creatures you control gain vigilance until end of turn.
+        this.addAbility(new EntersBattlefieldTriggeredAbility(new GainAbilityControlledEffect(VigilanceAbility.getInstance(), Duration.EndOfTurn, new FilterCreaturePermanent("creatures you control")), false));
+    }
+
+    public NebulonBFrigate(final NebulonBFrigate card) {
         super(card);
     }
 
     @Override
-    public ImperialSpy copy() {
-        return new ImperialSpy(this);
+    public NebulonBFrigate copy() {
+        return new NebulonBFrigate(this);
     }
 }

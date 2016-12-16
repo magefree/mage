@@ -60,7 +60,7 @@ public class DarthSidiousSithLord extends CardImpl {
     }
 
     public DarthSidiousSithLord(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.PLANESWALKER},"{3}{U}{B}{B}{R}");
+        super(ownerId,setInfo,new CardType[]{CardType.PLANESWALKER},"{4}{U}{B}{B}{R}");
         this.subtype.add("Sidious");
 
         this.addAbility(new PlanswalkerEntersWithLoyalityCountersAbility(5));

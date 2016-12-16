@@ -46,7 +46,7 @@ import mage.target.TargetSpell;
  *
  * @author Styxo
  */
-public class PersonalEnergyField extends CardImpl {
+public class PersonalEnergyShield extends CardImpl {
 
     private final static FilterSpell filter = new FilterSpell("spell that targets you or a permanent you control");
 
@@ -54,7 +54,7 @@ public class PersonalEnergyField extends CardImpl {
         filter.add(new PersonalEnergyFieldPredicate());
     }
 
-    public PersonalEnergyField(UUID ownerId, CardSetInfo setInfo) {
+    public PersonalEnergyShield(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.INSTANT},"{U}");
 
         // Counter target spell that targets you or a permanent you control.
@@ -62,13 +62,13 @@ public class PersonalEnergyField extends CardImpl {
         this.getSpellAbility().addTarget(new TargetSpell(filter));
     }
 
-    public PersonalEnergyField(final PersonalEnergyField card) {
+    public PersonalEnergyShield(final PersonalEnergyShield card) {
         super(card);
     }
 
     @Override
-    public PersonalEnergyField copy() {
-        return new PersonalEnergyField(this);
+    public PersonalEnergyShield copy() {
+        return new PersonalEnergyShield(this);
     }
 }
 

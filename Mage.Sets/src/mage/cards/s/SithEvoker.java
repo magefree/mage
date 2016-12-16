@@ -58,14 +58,14 @@ import mage.target.common.TargetControlledCreaturePermanent;
 public class SithEvoker extends CardImpl {
 
     public SithEvoker(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{3}{B}");
+        super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{3}{B}");
         this.subtype.add("Chiss");
         this.subtype.add("Sith");
         this.power = new MageInt(3);
         this.toughness = new MageInt(3);
 
-        // {T}, {2}, Sacrifice a creature: You gain life equal to that creature's power or toughness.
-        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new SithEvokerEffect(), new ManaCostsImpl("{2}"));
+        // {T}, {B}, Sacrifice a creature: You gain life equal to that creature's power or toughness.
+        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new SithEvokerEffect(), new ManaCostsImpl("{B}"));
         ability.addCost(new TapSourceCost());
         ability.addCost(new SacrificeTargetCost(new TargetControlledCreaturePermanent(new FilterControlledCreaturePermanent("a creature"))));
 

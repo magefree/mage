@@ -29,23 +29,22 @@ package mage.cards.m;
 
 import java.util.UUID;
 import mage.abilities.Ability;
-import mage.abilities.effects.AsThoughEffectImpl;
-import mage.abilities.effects.ContinuousEffect;
+import mage.abilities.dynamicvalue.common.PermanentsOnBattlefieldCount;
 import mage.abilities.effects.OneShotEffect;
-import mage.abilities.effects.common.DrawCardSourceControllerEffect;
+import mage.abilities.effects.common.CreateTokenEffect;
 import mage.cards.Card;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.cards.Cards;
 import mage.cards.CardsImpl;
-import mage.constants.AsThoughEffectType;
 import mage.constants.CardType;
-import mage.constants.Duration;
 import mage.constants.Outcome;
+import mage.constants.Zone;
 import mage.counters.CounterType;
+import mage.filter.FilterPermanent;
 import mage.game.Game;
+import mage.game.permanent.token.DroidToken;
 import mage.players.Player;
-import mage.target.targetpointer.FixedTargets;
 
 /**
  *
@@ -54,12 +53,13 @@ import mage.target.targetpointer.FixedTargets;
 public class MarchOfTheDroids extends CardImpl {
 
     public MarchOfTheDroids(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{W}{U}{B}");
+        super(ownerId, setInfo, new CardType[]{CardType.SORCERY}, "{2}{W}{U}{B}");
 
-        // Remove all repair counters from each exiled card you own. You may cast each card with repair counter removed this way without paying its mana cost until end of turn.
+        // Remove all repair counters from all cards in your graveyard. Return each card with a repair counter removed this way from graveyard to the battlefield.
         this.getSpellAbility().addEffect(new MarchOfTheDroidsEffect());
-        // Draw a card.
-        this.getSpellAbility().addEffect(new DrawCardSourceControllerEffect(1));
+
+        // Create 1/1 colorles Droid artifact creature token for each Droid you control.
+        this.getSpellAbility().addEffect(new CreateTokenEffect(new DroidToken(), new PermanentsOnBattlefieldCount(new FilterPermanent("Droid", "Droid you control"))));
     }
 
     public MarchOfTheDroids(final MarchOfTheDroids card) {
@@ -76,7 +76,7 @@ class MarchOfTheDroidsEffect extends OneShotEffect {
 
     public MarchOfTheDroidsEffect() {
         super(Outcome.Benefit);
-        this.staticText = "Remove all repair counters from each exiled card you own. You may cast each card with repair counter removed this way without paying its mana cost until end of turn";
+        this.staticText = "Remove all repair counters from all cards in your graveyard. Return each card with a repair counter removed this way from graveyard to the battlefield";
     }
 
     public MarchOfTheDroidsEffect(final MarchOfTheDroidsEffect effect) {
@@ -92,60 +92,20 @@ class MarchOfTheDroidsEffect extends OneShotEffect {
     public boolean apply(Game game, Ability source) {
         Player controller = game.getPlayer(source.getControllerId());
         if (controller != null) {
-            Cards castable = new CardsImpl();
+            Cards cardsToReturn = new CardsImpl();
             for (Card card : controller.getGraveyard().getCards(game)) {
                 if (card.getOwnerId().equals(controller.getId()) && card.getCounters(game).getCount(CounterType.REPAIR) > 0) {
                     int number = card.getCounters(game).getCount(CounterType.REPAIR);
                     if (number > 0) {
-                        castable.add(card);
+                        cardsToReturn.add(card);
                         card.removeCounters(CounterType.REPAIR.createInstance(number), game);
                     }
                 }
             }
-            if (!castable.isEmpty()) {
-                ContinuousEffect effect = new MarchOfTheDroidsCastFromExileEffect();
-                effect.setTargetPointer(new FixedTargets(castable, game));
-                game.addEffect(effect, source);
+            if (!cardsToReturn.isEmpty()) {
+                controller.moveCards(cardsToReturn, Zone.BATTLEFIELD, source, game);
             }
             return true;
-        }
-        return false;
-    }
-}
-
-class MarchOfTheDroidsCastFromExileEffect extends AsThoughEffectImpl {
-
-    public MarchOfTheDroidsCastFromExileEffect() {
-        super(AsThoughEffectType.PLAY_FROM_NOT_OWN_HAND_ZONE, Duration.EndOfTurn, Outcome.Benefit);
-        staticText = "You may play the card from exile without paying its mana cost until end of turn";
-    }
-
-    public MarchOfTheDroidsCastFromExileEffect(final MarchOfTheDroidsCastFromExileEffect effect) {
-        super(effect);
-    }
-
-    @Override
-    public boolean apply(Game game, Ability source) {
-        return true;
-    }
-
-    @Override
-    public MarchOfTheDroidsCastFromExileEffect copy() {
-        return new MarchOfTheDroidsCastFromExileEffect(this);
-    }
-
-    @Override
-    public boolean applies(UUID objectId, Ability source, UUID affectedControllerId, Game game) {
-        if (source.getControllerId().equals(affectedControllerId)
-                && getTargetPointer().getTargets(game, source).contains(objectId)) {
-            Card card = game.getCard(objectId);
-            Player controller = game.getPlayer(source.getControllerId());
-            if (card != null && controller != null) {
-                if (!card.getCardType().contains(CardType.LAND)) {
-                    controller.setCastSourceIdWithAlternateMana(objectId, null, null);
-                    return true;
-                }
-            }
         }
         return false;
     }

@@ -46,15 +46,15 @@ import mage.constants.Zone;
 public class NeophyteHateflayer extends CardImpl {
 
     public NeophyteHateflayer(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{B}");
+        super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{B}");
         this.subtype.add("Human");
         this.subtype.add("Sith");
         this.power = new MageInt(1);
         this.toughness = new MageInt(1);
 
-        // {T}, Pay 2 life: Each opponent loses 1 life.
+        // {T}, Pay 1 life: Each opponent loses 1 life.
         Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new LoseLifeOpponentsEffect(1), new TapSourceCost());
-        ability.addCost(new PayLifeCost(2));
+        ability.addCost(new PayLifeCost(1));
         this.addAbility(ability);
     }
 

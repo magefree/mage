@@ -49,13 +49,13 @@ import mage.players.Player;
 public class BanthaHerd extends CardImpl {
 
     public BanthaHerd(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{2}{W}");
+        super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{1}{W}{W}");
         this.subtype.add("Beast");
         this.power = new MageInt(2);
         this.toughness = new MageInt(2);
 
-        // {X}{1}{W}{W}: Monstrosity X.
-        this.addAbility(new MonstrosityAbility("{X}{1}{W}{W}", Integer.MAX_VALUE));
+        // {X}{W}{W}: Monstrosity X.
+        this.addAbility(new MonstrosityAbility("{X}{W}{W}", Integer.MAX_VALUE));
 
         // When Batha Herd becomes monstrous, create X 1/1 white Tusken Raider tokens.
         this.addAbility(new BecomesMonstrousSourceTriggeredAbility(new BathaHerdEffect()));

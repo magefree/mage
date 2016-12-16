@@ -25,82 +25,94 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.cards.p;
+package mage.cards.s;
 
 import java.util.UUID;
+import mage.MageInt;
 import mage.abilities.Ability;
+import mage.abilities.TriggeredAbilityImpl;
 import mage.abilities.common.EntersBattlefieldTriggeredAbility;
-import mage.abilities.effects.OneShotEffect;
+import mage.abilities.effects.Effect;
+import mage.abilities.effects.common.combat.CantBlockTargetEffect;
 import mage.abilities.effects.common.counter.AddCountersTargetEffect;
-import mage.abilities.keyword.BountyAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.Outcome;
+import mage.constants.Duration;
+import mage.constants.Zone;
 import mage.counters.CounterType;
 import mage.game.Game;
-import mage.players.Player;
-import mage.players.PlayerList;
+import mage.game.events.GameEvent;
+import mage.game.permanent.Permanent;
 import mage.target.common.TargetOpponentsCreaturePermanent;
 
 /**
  *
  * @author Styxo
  */
-public class PublicArrangement extends CardImpl {
+public class SyndicateEnforcerSWS extends CardImpl {
 
-    public PublicArrangement(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.ENCHANTMENT},"{1}{B}");
+    public SyndicateEnforcerSWS(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{3}{R}");
+        this.subtype.add("Gand");
+        this.subtype.add("Hunter");
+        this.power = new MageInt(3);
+        this.toughness = new MageInt(2);
 
-        // When Public Arrangement enters the battlefield, put a bounty counter on up to two target creatures your opponents control.
+        // When {this} enters the battlefield, put a bounty counter on target creature an opponent controls 
         Ability ability = new EntersBattlefieldTriggeredAbility(new AddCountersTargetEffect(CounterType.BOUNTY.createInstance()));
-        ability.addTarget(new TargetOpponentsCreaturePermanent(0, 2));
+        ability.addTarget(new TargetOpponentsCreaturePermanent());
         this.addAbility(ability);
 
-        // <i>Bounty</i> &mdash; Whenever a creature an opponent controls with a bounty counter on it dies, that creature's controler loses 2 life. Each other player gains 2 life.
-        this.addAbility(new BountyAbility(new PublicArrangementEffect(), false, true));
+        // Whenever a bounty counter is placed on a creature an opponents controls, that creature can't block this turn.
+        this.addAbility(new SyndicateEnforcerTriggeredAbility());
     }
 
-    public PublicArrangement(final PublicArrangement card) {
+    public SyndicateEnforcerSWS(final SyndicateEnforcerSWS card) {
         super(card);
     }
 
     @Override
-    public PublicArrangement copy() {
-        return new PublicArrangement(this);
+    public SyndicateEnforcerSWS copy() {
+        return new SyndicateEnforcerSWS(this);
     }
 }
 
-class PublicArrangementEffect extends OneShotEffect {
+class SyndicateEnforcerTriggeredAbility extends TriggeredAbilityImpl {
 
-    public PublicArrangementEffect() {
-        super(Outcome.LoseLife);
-        staticText = "that creature's controler loses 2 life. Each other player gains 2 life";
+    private static final Effect effect = new CantBlockTargetEffect(Duration.EndOfTurn);
+
+    public SyndicateEnforcerTriggeredAbility() {
+        super(Zone.BATTLEFIELD, effect, false);
     }
 
-    public PublicArrangementEffect(final PublicArrangementEffect effect) {
-        super(effect);
-    }
-
-    @Override
-    public PublicArrangementEffect copy() {
-        return new PublicArrangementEffect(this);
+    public SyndicateEnforcerTriggeredAbility(final SyndicateEnforcerTriggeredAbility ability) {
+        super(ability);
     }
 
     @Override
-    public boolean apply(Game game, Ability source) {
-        UUID controller = game.getControllerId(source.getFirstTarget());
-        if (controller != null) {
-            game.getPlayer(controller).loseLife(2, game, false);
-            for (UUID playerId : game.getOpponents(controller)) {
-                Player player = game.getPlayer(playerId);
-                if (player != null) {
-                    player.gainLife(2, game);
-                }
+    public SyndicateEnforcerTriggeredAbility copy() {
+        return new SyndicateEnforcerTriggeredAbility(this);
+    }
+
+    @Override
+    public boolean checkEventType(GameEvent event, Game game) {
+        return event.getType() == GameEvent.EventType.COUNTERS_ADDED;
+    }
+
+    @Override
+    public boolean checkTrigger(GameEvent event, Game game) {
+        if (event.getData().equals(CounterType.BOUNTY.getName())) {
+            Permanent permanent = game.getPermanentOrLKIBattlefield(event.getTargetId());
+            if (permanent != null) {
+                return true;
             }
-            return true;
         }
         return false;
     }
 
+    @Override
+    public String getRule() {
+        return "Whenever a bounty counter is placed on a creature an opponents controls, that creature can't block this turn.";
+    }
 }

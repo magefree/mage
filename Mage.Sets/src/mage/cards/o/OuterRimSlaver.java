@@ -32,13 +32,12 @@ import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.EntersBattlefieldTriggeredAbility;
 import mage.abilities.effects.common.FightTargetsEffect;
+import mage.abilities.effects.common.counter.AddCountersTargetEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.filter.common.FilterControlledCreaturePermanent;
-import mage.filter.predicate.permanent.AnotherPredicate;
-import mage.target.common.TargetControlledCreaturePermanent;
-import mage.target.common.TargetOpponentsCreaturePermanent;
+import mage.counters.CounterType;
+import mage.target.common.TargetCreaturePermanent;
 
 /**
  *
@@ -46,23 +45,18 @@ import mage.target.common.TargetOpponentsCreaturePermanent;
  */
 public class OuterRimSlaver extends CardImpl {
 
-    private static final FilterControlledCreaturePermanent controlledCreature = new FilterControlledCreaturePermanent("another target creature you control");
-
-    static {
-        controlledCreature.add(new AnotherPredicate());
-    }
-
     public OuterRimSlaver(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{B}{R}{G}");
+        super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{B}{R}{G}");
         this.subtype.add("Trandoshan");
-        this.subtype.add("Hunter");
+        this.subtype.add("Rogue");
         this.power = new MageInt(3);
         this.toughness = new MageInt(3);
 
-        // When Outer Rim Slaver enters the battlefield, you may have another target creature you control fight target creature an opponent controls.
-        Ability ability = new EntersBattlefieldTriggeredAbility(new FightTargetsEffect("another target creature you control fight target creature an opponent controls"), true);
-        ability.addTarget(new TargetControlledCreaturePermanent(controlledCreature));
-        ability.addTarget(new TargetOpponentsCreaturePermanent());
+        // When Outer Rim Slaver enters the battlefield, you may put a bounty counter on target creature. If you do, another target creature fights that creature
+        Ability ability = new EntersBattlefieldTriggeredAbility(new AddCountersTargetEffect(CounterType.BOUNTY.createInstance()), true);
+        ability.addEffect(new FightTargetsEffect("another target creature fights that creature"));
+        ability.addTarget(new TargetCreaturePermanent());
+        ability.addTarget(new TargetCreaturePermanent());
         this.addAbility(ability);
     }
 

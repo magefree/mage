@@ -43,7 +43,7 @@ import mage.target.common.TargetControlledCreaturePermanent;
 public class SurpriseManeuver extends CardImpl {
 
     public SurpriseManeuver(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.INSTANT},"{2}{U}");
+        super(ownerId, setInfo, new CardType[]{CardType.INSTANT}, "{1}{U}");
 
         // Untap up to two target creatures you control.
         this.getSpellAbility().addTarget(new TargetControlledCreaturePermanent(0, 2));

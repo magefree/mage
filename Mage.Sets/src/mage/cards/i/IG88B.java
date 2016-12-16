@@ -51,7 +51,7 @@ import mage.game.permanent.Permanent;
 public class IG88B extends CardImpl {
 
     public IG88B(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.ARTIFACT,CardType.CREATURE},"{2}{B}");
+        super(ownerId, setInfo, new CardType[]{CardType.ARTIFACT, CardType.CREATURE}, "{1}{B}{B}");
         this.supertype.add("Legendary");
         this.subtype.add("Droid");
         this.subtype.add("Hunter");

@@ -41,7 +41,7 @@ import mage.constants.CardType;
 import mage.constants.Duration;
 import mage.constants.Zone;
 import mage.filter.common.FilterCreaturePermanent;
-import mage.target.common.TargetCreatureOrPlayer;
+import mage.target.common.TargetOpponentsCreaturePermanent;
 
 /**
  *
@@ -50,17 +50,17 @@ import mage.target.common.TargetCreatureOrPlayer;
 public class RocketTrooper extends CardImpl {
 
     public RocketTrooper(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{1}{R}");
+        super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{1}{R}");
         this.subtype.add("Human");
         this.subtype.add("Trooper");
         this.power = new MageInt(2);
         this.toughness = new MageInt(2);
 
-        // Trooper creatures you control have "Whenever this creature enters the battlefield, it deals 1 damage to target creature or player".
+        // Trooper creatures you control have "Whenever this creature enters the battlefield, it deals 1 damage to target creature an opponent controls".
         Effect effect = new DamageTargetEffect(1);
-        effect.setText("Whenever this creature enters the battlefield, it deals 1 damage to target creature or player");
+        effect.setText("Whenever this creature enters the battlefield, it deals 1 damage to target creature an opponent controls");
         Ability ability = new EntersBattlefieldTriggeredAbility(effect, false, true);
-        ability.addTarget(new TargetCreatureOrPlayer());
+        ability.addTarget(new TargetOpponentsCreaturePermanent());
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD,
                 new GainAbilityControlledEffect(ability, Duration.WhileOnBattlefield,
                         new FilterCreaturePermanent("Trooper", "Trooper creatures"), false)));

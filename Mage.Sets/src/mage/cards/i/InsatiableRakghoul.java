@@ -52,10 +52,10 @@ import mage.watchers.Watcher;
 public class InsatiableRakghoul extends CardImpl {
 
     public InsatiableRakghoul(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{5}{B}");
+        super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{5}{B}");
         this.subtype.add("Zombie");
         this.subtype.add("Mutant");
-        this.power = new MageInt(5);
+        this.power = new MageInt(4);
         this.toughness = new MageInt(6);
 
         // Insatiable Rakghoul enters the battlefield with a +1/+1 counter on it, if a non-artifact creature died this turn.

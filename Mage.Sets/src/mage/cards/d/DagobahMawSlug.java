@@ -34,7 +34,7 @@ import mage.abilities.condition.common.MonstrousCondition;
 import mage.abilities.decorator.ConditionalContinuousEffect;
 import mage.abilities.effects.common.continuous.GainAbilitySourceEffect;
 import mage.abilities.keyword.MonstrosityAbility;
-import mage.abilities.keyword.TrampleAbility;
+import mage.abilities.keyword.SwampwalkAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
@@ -47,19 +47,19 @@ import mage.constants.Zone;
 public class DagobahMawSlug extends CardImpl {
 
     public DagobahMawSlug(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{R}{G}{W}");
+        super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{R}{G}{W}");
         this.subtype.add("Slug");
         this.power = new MageInt(4);
-        this.toughness = new MageInt(3);
+        this.toughness = new MageInt(2);
 
-        // {6}{G}: Monstrosity 3.
-        this.addAbility(new MonstrosityAbility("{6}{G}", 3));
+        // {3}{R}{G}{W}: Monstrosity 2.
+        this.addAbility(new MonstrosityAbility("{3}{R}{G}{W}", 2));
 
-        // As long as Dagobah Maw Slug is monstrous. it has trample.
+        // As long as Dagobah Maw Slug is monstrous it has swampwalk.
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new ConditionalContinuousEffect(
-                new GainAbilitySourceEffect(TrampleAbility.getInstance()),
+                new GainAbilitySourceEffect(new SwampwalkAbility()),
                 MonstrousCondition.getInstance(),
-                "As long as Dagobah Maw Slug is monstrous it has trample")
+                "As long as Dagobah Maw Slug is monstrous it has swampwalk")
         ));
     }
 

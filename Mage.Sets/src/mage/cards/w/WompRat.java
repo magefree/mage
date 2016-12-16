@@ -31,11 +31,12 @@ import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.BecomesMonstrousSourceTriggeredAbility;
-import mage.abilities.effects.common.GainLifeEffect;
+import mage.abilities.effects.common.ExileTargetEffect;
 import mage.abilities.keyword.MonstrosityAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
+import mage.target.common.TargetCardInGraveyard;
 
 /**
  *
@@ -44,7 +45,7 @@ import mage.constants.CardType;
 public class WompRat extends CardImpl {
 
     public WompRat(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{2}{W}");
+        super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{2}{W}");
         this.subtype.add("Rat");
         this.subtype.add("Beast");
         this.power = new MageInt(3);
@@ -53,8 +54,10 @@ public class WompRat extends CardImpl {
         // {4}{W}: Monstrosity 1
         this.addAbility(new MonstrosityAbility("{4}{W}", 1));
 
-        // When Womp Rat becomes monstrous you gain two life.
-        this.addAbility(new BecomesMonstrousSourceTriggeredAbility(new GainLifeEffect(2)));
+        // When Womp Rat becomes monstrous you may exilte target card from a graveyard
+        Ability ability = new BecomesMonstrousSourceTriggeredAbility(new ExileTargetEffect(), true);
+        ability.addTarget(new TargetCardInGraveyard());
+        this.addAbility(ability);
     }
 
     public WompRat(final WompRat card) {

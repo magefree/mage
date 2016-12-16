@@ -54,18 +54,18 @@ import mage.watchers.common.PlayerLostLifeWatcher;
 public class Revenge extends CardImpl {
 
     public Revenge(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.INSTANT},"{1}{R}");
+        super(ownerId, setInfo, new CardType[]{CardType.INSTANT}, "{1}{R}");
+
+        // Target creature you control gets +4/+0 until end of turn before it fights if you lost life this turn.
+        this.getSpellAbility().addEffect(new ConditionalOneShotEffect(
+                new RevengeEffect(),
+                LostLifeCondition.getInstance(),
+                "Target creature you control gets +4/+0 until end of turn before it fights if you lost life this turn"));
 
         // Target creature you control fights target creature an opponent controls.
         this.getSpellAbility().addEffect(new FightTargetsEffect());
         this.getSpellAbility().addTarget(new TargetControlledCreaturePermanent());
         this.getSpellAbility().addTarget(new TargetOpponentsCreaturePermanent());
-
-        // If you lost life this turn, that creature you control gets +4/+0 until end of turn.
-        this.getSpellAbility().addEffect(new ConditionalOneShotEffect(
-                new RevengeEffect(),
-                LostLifeCondition.getInstance(),
-                "If you lost life this turn, that creature you control gets +4/+0 until end of turn"));
 
         this.getSpellAbility().addWatcher(new PlayerLostLifeWatcher());
 

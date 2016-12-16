@@ -60,7 +60,7 @@ public class DarkDecision extends CardImpl {
         // As an additional cost to cast Dark Decision, pay 1 life.
         this.getSpellAbility().addCost(new PayLifeCost(1));
 
-        // Search the top 10 cards of your library for a nonland cardId, exile it, then shuffle your library. Until end of turn, you may cast that cardId.
+        // Search the top 10 cards of your library for a nonland card, exile it, then shuffle your library. Until end of turn, you may cast that card.
         this.getSpellAbility().addEffect(new DarkDecisionEffect());
     }
 

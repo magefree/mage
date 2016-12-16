@@ -52,12 +52,12 @@ import mage.counters.CounterType;
 public class JediHolocron extends CardImpl {
 
     public JediHolocron(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.ARTIFACT},"{2}");
+        super(ownerId, setInfo, new CardType[]{CardType.ARTIFACT}, "{2}");
 
-        // {T}: Put a charge counter on Wild Holocron.
+        // {T}: Put a charge counter on Jedi Holocron.
         this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new AddCountersSourceEffect(CounterType.CHARGE.createInstance(1)), new TapSourceCost()));
 
-        // {T}, Remove a charge counter from Wild Holocron: Add {G}, {W} or {U} to your mana pool.
+        // {T}, Remove a charge counter from Jedi Holocron: Add {G}, {W} or {U} to your mana pool.
         Cost cost = new RemoveCountersSourceCost(CounterType.CHARGE.createInstance(1));
         Ability ability = new GreenManaAbility();
         ability.addCost(cost);
@@ -71,7 +71,7 @@ public class JediHolocron extends CardImpl {
         ability.addCost(cost);
         this.addAbility(ability);
 
-        // {T}, Remove two charge counters from Sith Holocron: Add GW or WU to your mana pool.
+        // {T}, Remove two charge counters from Jedi Holocron: Add GW or WU to your mana pool.
         cost = new RemoveCountersSourceCost(CounterType.CHARGE.createInstance(2));
 
         ability = new SimpleManaAbility(Zone.BATTLEFIELD, new Mana(0, 1, 0, 1, 0, 0, 0, 0), new TapSourceCost());

@@ -28,6 +28,7 @@
 package mage.cards.t;
 
 import java.util.UUID;
+import mage.abilities.dynamicvalue.IntPlusDynamicValue;
 import mage.abilities.dynamicvalue.common.ManacostVariableValue;
 import mage.abilities.dynamicvalue.common.StaticValue;
 import mage.abilities.effects.Effect;
@@ -40,8 +41,7 @@ import mage.constants.CardType;
 import mage.constants.Duration;
 import mage.constants.Outcome;
 import mage.constants.TargetController;
-import mage.filter.common.FilterCreaturePermanent;
-import mage.filter.predicate.permanent.ControllerPredicate;
+import mage.filter.common.FilterOpponentsCreaturePermanent;
 
 /**
  *
@@ -49,21 +49,15 @@ import mage.filter.predicate.permanent.ControllerPredicate;
  */
 public class TheBattleOfGeonosis extends CardImpl {
 
-    private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("creature you don't control");
-
-    static {
-        filter.add(new ControllerPredicate(TargetController.NOT_YOU));
-    }
-
     public TheBattleOfGeonosis(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{X}{X}{R}{R}");
+        super(ownerId, setInfo, new CardType[]{CardType.SORCERY}, "{X}{X}{R}{R}");
 
-        // The Battle of Geonosis deals X damage to each opponent and each creature you don't control.
-        Effect effect = new DamagePlayersEffect(Outcome.Damage, new ManacostVariableValue(), TargetController.OPPONENT);
-        effect.setText("The Battle of Geonosis deals X damage to each opponent");
+        // The Battle of Geonosis deals X + 1 damage to each opponent and each creature your opponents control.
+        Effect effect = new DamagePlayersEffect(Outcome.Damage, new IntPlusDynamicValue(1, new ManacostVariableValue()), TargetController.OPPONENT);
+        effect.setText("The Battle of Geonosis deals X plus 1 damage to each opponent");
         this.getSpellAbility().addEffect(effect);
-        effect = new DamageAllEffect(new ManacostVariableValue(), filter);
-        effect.setText("and each creature you don't control");
+        effect = new DamageAllEffect(new IntPlusDynamicValue(1, new ManacostVariableValue()), new FilterOpponentsCreaturePermanent());
+        effect.setText("and each creature your opponents control");
         this.getSpellAbility().addEffect(effect);
 
         // Creatures you control get +X/+0 until end of turn.
