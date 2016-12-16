@@ -41,14 +41,14 @@ import mage.constants.CardType;
 public class DarkTrooper extends CardImpl {
 
     public DarkTrooper(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.ARTIFACT,CardType.CREATURE},"{3}");
+        super(ownerId, setInfo, new CardType[]{CardType.ARTIFACT, CardType.CREATURE}, "{3}");
         this.subtype.add("Droid");
         this.subtype.add("Trooper");
         this.power = new MageInt(2);
         this.toughness = new MageInt(2);
 
-        // Repair 4
-        this.addAbility(new RepairAbility(4));
+        // Repair 2
+        this.addAbility(new RepairAbility(2));
     }
 
     public DarkTrooper(final DarkTrooper card) {

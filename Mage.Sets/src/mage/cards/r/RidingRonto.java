@@ -29,11 +29,17 @@ package mage.cards.r;
 
 import java.util.UUID;
 import mage.MageInt;
+import mage.abilities.common.SimpleStaticAbility;
+import mage.abilities.condition.common.MonstrousCondition;
+import mage.abilities.decorator.ConditionalContinuousEffect;
+import mage.abilities.effects.common.continuous.GainAbilityControlledEffect;
 import mage.abilities.keyword.MonstrosityAbility;
 import mage.abilities.keyword.VigilanceAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
+import mage.constants.Duration;
+import mage.constants.Zone;
 
 /**
  *
@@ -42,16 +48,21 @@ import mage.constants.CardType;
 public class RidingRonto extends CardImpl {
 
     public RidingRonto(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{3}{W}");
+        super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{2}{W}");
         this.subtype.add("Beast");
         this.power = new MageInt(2);
         this.toughness = new MageInt(4);
 
-        // Vigilance
-        this.addAbility(VigilanceAbility.getInstance());
-
-        // {3}{W}{W}: Monstrosity 3.
+        // {3}{W}{W}: Monstrosity 2.
         this.addAbility(new MonstrosityAbility("{3}{W}{W}", 3));
+
+        // As long as Riding Ronto is monstrous, it has vigilance
+        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new ConditionalContinuousEffect(
+                new GainAbilityControlledEffect(VigilanceAbility.getInstance(), Duration.WhileOnBattlefield),
+                MonstrousCondition.getInstance(),
+                "As long as Riding Ronto is monstrous, it has vigilance")
+        ));
+
     }
 
     public RidingRonto(final RidingRonto card) {

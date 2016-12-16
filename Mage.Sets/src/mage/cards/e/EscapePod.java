@@ -33,7 +33,7 @@ import mage.abilities.Ability;
 import mage.abilities.common.delayed.AtTheBeginOfNextEndStepDelayedTriggeredAbility;
 import mage.abilities.effects.Effect;
 import mage.abilities.effects.OneShotEffect;
-import mage.abilities.effects.common.ReturnToBattlefieldUnderOwnerControlTargetEffect;
+import mage.abilities.effects.common.ReturnToBattlefieldUnderYourControlTargetEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
@@ -52,7 +52,7 @@ public class EscapePod extends CardImpl {
     public EscapePod(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.INSTANT}, "{W}");
 
-        // Exile target creature you control. Return that card to the battlefield under its owner's control at the beginning of the next end step.
+        // Exile target creature you control. Return that card to the battlefield under your control at the beginning of the next end step.
         this.getSpellAbility().addEffect(new EscapePodEffect());
         this.getSpellAbility().addTarget(new TargetControlledCreaturePermanent());
 
@@ -72,7 +72,7 @@ class EscapePodEffect extends OneShotEffect {
 
     public EscapePodEffect() {
         super(Outcome.Detriment);
-        staticText = "Exile target creature you control. Return that card to the battlefield under its owner's control at the beginning of the next end step";
+        staticText = "Exile target creature you control. Return that card to the battlefield under your control at the beginning of the next end step";
     }
 
     public EscapePodEffect(final EscapePodEffect effect) {
@@ -85,8 +85,8 @@ class EscapePodEffect extends OneShotEffect {
         MageObject sourceObject = game.getObject(source.getSourceId());
         if (permanent != null && sourceObject != null) {
             if (permanent.moveToExile(source.getSourceId(), sourceObject.getIdName(), source.getSourceId(), game)) {
-                Effect effect = new ReturnToBattlefieldUnderOwnerControlTargetEffect();
-                effect.setText("Return that card to the battlefield under its owner's control at the beginning of the next end step");
+                Effect effect = new ReturnToBattlefieldUnderYourControlTargetEffect();
+                effect.setText("Return that card to the battlefield under your control at the beginning of the next end step");
                 effect.setTargetPointer(new FixedTarget(source.getFirstTarget(), game));
                 game.addDelayedTriggeredAbility(new AtTheBeginOfNextEndStepDelayedTriggeredAbility(effect), source);
                 return true;

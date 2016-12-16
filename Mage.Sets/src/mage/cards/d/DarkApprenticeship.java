@@ -47,13 +47,13 @@ import mage.watchers.common.LifeLossOtherFromCombatWatcher;
 public class DarkApprenticeship extends CardImpl {
 
     public DarkApprenticeship(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.ENCHANTMENT},"{1}{R}");
+        super(ownerId, setInfo, new CardType[]{CardType.ENCHANTMENT}, "{1}{R}");
 
-        // <i>Hate</i> &mdash; At the beggining of each end step, if an opponent lost life from source other than combat damage this turn, Dark Apprenticeship deals 2 damage to target player.
+        // <i>Hate</i> &mdash; At the beggining of your end step, if an opponent lost life from source other than combat damage this turn, Dark Apprenticeship deals 2 damage to target player.
         Ability ability = new ConditionalTriggeredAbility(
-                new BeginningOfEndStepTriggeredAbility(new DamageTargetEffect(2), TargetController.ANY, false),
+                new BeginningOfEndStepTriggeredAbility(new DamageTargetEffect(2), TargetController.YOU, false),
                 HateCondition.getInstance(),
-                "<i>Hate</i> &mdash; At the beggining of each end step, if an opponent lost life from source other than combat damage this turn, Dark Apprenticeship deals 2 damage to target player.");
+                "<i>Hate</i> &mdash; At the beggining of your end step, if an opponent lost life from source other than combat damage this turn, Dark Apprenticeship deals 2 damage to target player.");
         ability.addTarget(new TargetPlayer());
         this.addAbility(ability, new LifeLossOtherFromCombatWatcher());
     }

@@ -64,11 +64,11 @@ public class FlamesOfRemembrance extends CardImpl {
     public FlamesOfRemembrance(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.ENCHANTMENT},"{R}");
 
-        // At the beggining of your upkeep, you may exile a card from your graveyard. If you do, put a charge counter on Flames of Remembrance.
-        this.addAbility(new BeginningOfUpkeepTriggeredAbility(new DoIfCostPaid(new AddCountersSourceEffect(CounterType.CHARGE.createInstance()), new ExileFromGraveCost(new TargetCardInYourGraveyard()), null, true), TargetController.YOU, false));
+        // At the beggining of your upkeep, you may exile a card from your graveyard. If you do, put a lore counter on Flames of Remembrance.
+        this.addAbility(new BeginningOfUpkeepTriggeredAbility(new DoIfCostPaid(new AddCountersSourceEffect(CounterType.LORE.createInstance()), new ExileFromGraveCost(new TargetCardInYourGraveyard()), null, true), TargetController.YOU, false));
 
-        // Sacrifice Flames of Remembrance: Exile top X cards of your library, where X is the number of charge counters on Flames of Remembrance. Until end of turn you play cards exile this way.
-        this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new FlamesOfRemembranceExileEffect(new CountersSourceCount(CounterType.CHARGE)), new SacrificeSourceCost()));
+        // Sacrifice Flames of Remembrance: Exile top X cards of your library, where X is the number of lore counters on Flames of Remembrance. Until end of turn you play cards exile this way.
+        this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new FlamesOfRemembranceExileEffect(new CountersSourceCount(CounterType.LORE)), new SacrificeSourceCost()));
     }
 
     public FlamesOfRemembrance(final FlamesOfRemembrance card) {
@@ -88,7 +88,7 @@ class FlamesOfRemembranceExileEffect extends OneShotEffect {
     public FlamesOfRemembranceExileEffect(CountersSourceCount amount) {
         super(Outcome.Benefit);
         this.amount = amount;
-        this.staticText = "Exile top X cards of your library, where X is the number of charge counters on Flames of Remembrance. Until end of turn you play cards exile this way";
+        this.staticText = "Exile top X cards of your library, where X is the number of lore counters on Flames of Remembrance. Until end of turn you play cards exile this way";
     }
 
     public FlamesOfRemembranceExileEffect(final FlamesOfRemembranceExileEffect effect) {

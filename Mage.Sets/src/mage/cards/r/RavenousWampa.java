@@ -64,13 +64,13 @@ public class RavenousWampa extends CardImpl {
     public static final String RAVENOUS_WAMPA_STATE_VALUE_KEY_PREFIX = "TOU_SAC_CRE";
 
     public RavenousWampa(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{2}{R/W}{R/W}");
+        super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{2}{R/W}{R/W}");
         this.subtype.add("Beast");
         this.power = new MageInt(4);
         this.toughness = new MageInt(4);
 
-        // {1}{G}, Sacrifice another creature: Monstrosity 2.
-        Ability ability = new MonstrosityAbility("{1}{G}", 2);
+        // {2}{G}, Sacrifice another creature: Monstrosity 2.
+        Ability ability = new MonstrosityAbility("{2}{G}", 2);
         ability.addCost(new RavenousWampaSacrificeTargetCost(new TargetControlledCreaturePermanent(filter)));
         this.addAbility(ability);
 

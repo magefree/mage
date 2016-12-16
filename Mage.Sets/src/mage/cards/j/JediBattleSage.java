@@ -48,7 +48,7 @@ public class JediBattleSage extends CardImpl {
 
     public JediBattleSage(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{3}{G}");
-        this.subtype.add("Human");
+        this.subtype.add("Sullustan");
         this.subtype.add("Jedi");
         this.power = new MageInt(3);
         this.toughness = new MageInt(3);

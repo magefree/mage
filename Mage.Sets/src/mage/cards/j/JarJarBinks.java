@@ -27,8 +27,6 @@
  */
 package mage.cards.j;
 
-import java.util.ArrayList;
-import java.util.List;
 import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.Ability;
@@ -54,8 +52,7 @@ import mage.game.permanent.Permanent;
 import mage.players.Player;
 import mage.target.Target;
 import mage.target.TargetPermanent;
-import mage.target.targetpointer.FixedTarget;
-import mage.util.RandomUtil;
+import mage.target.common.TargetOpponent;
 
 /**
  *
@@ -64,7 +61,7 @@ import mage.util.RandomUtil;
 public class JarJarBinks extends CardImpl {
 
     public JarJarBinks(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{2}{U}");
+        super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{2}{U}");
         this.supertype.add("Legendary");
         this.subtype.add("Gungan");
         this.power = new MageInt(0);
@@ -73,8 +70,10 @@ public class JarJarBinks extends CardImpl {
         // Jar jar Binks can't block.
         this.addAbility(new CantBlockAbility());
 
-        // When Jar Jar Binks enter the battlefield, an opponent gains control of it.
-        this.addAbility(new EntersBattlefieldTriggeredAbility(new JarJarBinksEffect()));
+        // When Jar Jar Binks enter the battlefield, target opponent gains control of it.
+        Ability ability = new EntersBattlefieldTriggeredAbility(new JarJarBinksEffect());
+        ability.addTarget(new TargetOpponent());
+        this.addAbility(ability);
 
         // At the beggining of combat on your turn, tap the creature you control with the highest power. If two or more creatures are tied for the greatest power, you choose one of them.
         this.addAbility(new BeginningOfCombatTriggeredAbility(new JarJarBinksTapEffect(), TargetController.YOU, false));
@@ -94,7 +93,7 @@ class JarJarBinksEffect extends OneShotEffect {
 
     public JarJarBinksEffect() {
         super(Outcome.GainControl);
-        this.staticText = "an opponent gains control of it";
+        this.staticText = "target opponent gains control of it";
     }
 
     public JarJarBinksEffect(final JarJarBinksEffect effect) {
@@ -109,13 +108,13 @@ class JarJarBinksEffect extends OneShotEffect {
     @Override
     public boolean apply(Game game, Ability source) {
         Permanent jarJar = (Permanent) source.getSourceObjectIfItStillExists(game);
-        List<UUID> list = new ArrayList<UUID>(game.getOpponents(source.getControllerId()));
-        UUID player = list.get(RandomUtil.nextInt(list.size()));
-        if (player != null && jarJar != null) {
+        Player player = game.getPlayer(source.getControllerId());
+        Player opponent = game.getPlayer(getTargetPointer().getFirst(game, source));
+        if (player != null && jarJar != null && opponent != null) {
             ContinuousEffect effect = new JarJarBinksGainControlSourceEffect();
-            effect.setTargetPointer(new FixedTarget(player));
+            effect.setTargetPointer(getTargetPointer());
             game.addEffect(effect, source);
-            game.informPlayers(jarJar.getName() + " is now controlled by " + game.getPlayer(player).getLogName());
+            game.informPlayers(jarJar.getName() + " is now controlled by " + opponent.getLogName());
             return true;
         }
         return false;

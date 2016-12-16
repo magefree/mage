@@ -28,13 +28,22 @@
 package mage.cards.f;
 
 import java.util.UUID;
-import mage.abilities.effects.common.DestroyTargetEffect;
+import mage.abilities.Ability;
+import mage.abilities.effects.OneShotEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
+import mage.constants.Outcome;
 import mage.counters.CounterType;
+import mage.filter.common.FilterControlledCreaturePermanent;
 import mage.filter.common.FilterCreaturePermanent;
+import mage.filter.predicate.Predicates;
+import mage.filter.predicate.mageobject.SubtypePredicate;
 import mage.filter.predicate.permanent.CounterPredicate;
+import mage.game.Game;
+import mage.game.permanent.Permanent;
+import mage.players.Player;
+import mage.target.common.TargetControlledCreaturePermanent;
 import mage.target.common.TargetCreaturePermanent;
 
 /**
@@ -43,18 +52,22 @@ import mage.target.common.TargetCreaturePermanent;
  */
 public class FulfillContract extends CardImpl {
 
-    private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("creature with a bounty counter on it");
+    private static final FilterCreaturePermanent filterBountyCreature = new FilterCreaturePermanent("creature with a bounty counter on it");
+    private static final FilterControlledCreaturePermanent filterRogueOrHunter = new FilterControlledCreaturePermanent("Rogue or Hunter you control");
 
     static {
-        filter.add(new CounterPredicate(CounterType.BOUNTY));
+        filterBountyCreature.add(new CounterPredicate(CounterType.BOUNTY));
+        filterRogueOrHunter.add(Predicates.or(new SubtypePredicate("Rogue"), new SubtypePredicate("Hunter")));
     }
 
     public FulfillContract(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.INSTANT},"{B/R}{B/R}");
+        super(ownerId, setInfo, new CardType[]{CardType.INSTANT}, "{B/R}{B/R}");
 
-        // Destroy target creature with a bounty counter on it.
-        this.getSpellAbility().addEffect(new DestroyTargetEffect());
-        this.getSpellAbility().addTarget(new TargetCreaturePermanent(filter));
+        // Destroy target creature with a bounty counter on it. If that creature is destroyed this way, you may put a +1/+1 counter on target Rogue or Hunter you control.
+        this.getSpellAbility().addEffect(new FulfillContractEffect());
+        this.getSpellAbility().addTarget(new TargetCreaturePermanent(filterBountyCreature));
+        this.getSpellAbility().addTarget(new TargetControlledCreaturePermanent(filterRogueOrHunter));
+
     }
 
     public FulfillContract(final FulfillContract card) {
@@ -64,5 +77,38 @@ public class FulfillContract extends CardImpl {
     @Override
     public FulfillContract copy() {
         return new FulfillContract(this);
+    }
+}
+
+class FulfillContractEffect extends OneShotEffect {
+
+    public FulfillContractEffect() {
+        super(Outcome.Benefit);
+        this.staticText = "Destroy target creature with a bounty counter on it. If that creature is destroyed this way, you may put a +1/+1 counter on target Rogue or Hunter you control";
+    }
+
+    public FulfillContractEffect(final FulfillContractEffect effect) {
+        super(effect);
+    }
+
+    @Override
+    public FulfillContractEffect copy() {
+        return new FulfillContractEffect(this);
+    }
+
+    @Override
+    public boolean apply(Game game, Ability source) {
+        Player controller = game.getPlayer(source.getControllerId());
+        Permanent permanentToDestroy = game.getPermanent(getTargetPointer().getFirst(game, source));
+        Permanent permanentToPutCounter = game.getPermanent(getTargetPointer().getTargets(game, source).get(1));
+        if (controller != null) {
+            if (permanentToDestroy != null && permanentToDestroy.destroy(source.getSourceId(), game, false)) {
+                if (permanentToPutCounter != null) {
+                    permanentToPutCounter.addCounters(CounterType.P1P1.createInstance(), game);
+                }
+            }
+            return true;
+        }
+        return false;
     }
 }

@@ -27,7 +27,6 @@
  */
 package mage.cards.a;
 
-import java.util.HashSet;
 import java.util.List;
 import java.util.UUID;
 import mage.abilities.Ability;
@@ -44,8 +43,6 @@ import mage.abilities.effects.common.discard.DiscardControllerEffect;
 import mage.abilities.effects.common.discard.DiscardHandAllEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
-import mage.choices.Choice;
-import mage.choices.ChoiceImpl;
 import mage.constants.CardType;
 import mage.constants.Outcome;
 import mage.constants.TargetController;
@@ -68,14 +65,14 @@ import mage.target.common.TargetCreaturePermanent;
 public class AurraSingBaneOfJedi extends CardImpl {
 
     public AurraSingBaneOfJedi(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.PLANESWALKER},"{2}{B}{R}");
+        super(ownerId, setInfo, new CardType[]{CardType.PLANESWALKER}, "{2}{B}{R}");
         this.subtype.add("Aurra");
 
         this.addAbility(new PlanswalkerEntersWithLoyalityCountersAbility(3));
 
-        // +1:Aurra Sing deals 2 damage to target creature or 1 damage to you.
+        // +1:You may have {this} deal 2 damage to target creature. If you don't, {this} deals 1 damage to you.
         Ability ability = new LoyaltyAbility(new AurraSingBaneOfJediEffect(), +1);
-        ability.addTarget(new TargetCreaturePermanent(1));
+        ability.addTarget(new TargetCreaturePermanent());
         this.addAbility(ability);
 
         // -4:Target player gets an emblem wiht "Whenever a nontoken creature you control leave the battlefied, discard a card.".
@@ -103,16 +100,9 @@ public class AurraSingBaneOfJedi extends CardImpl {
 
 class AurraSingBaneOfJediEffect extends OneShotEffect {
 
-    private static final HashSet<String> choices = new HashSet<>();
-
-    static {
-        choices.add("Deal 2 damage to target creature");
-        choices.add("Deal 1 damage to you");
-    }
-
     public AurraSingBaneOfJediEffect() {
         super(Outcome.Damage);
-        staticText = "{this} deals 2 damage to target creature or 1 damage to you";
+        staticText = "You may have {this} deal 2 damage to target creature. If you don't, {this} deals 1 damage to you";
     }
 
     public AurraSingBaneOfJediEffect(final AurraSingBaneOfJediEffect effect) {
@@ -128,23 +118,10 @@ class AurraSingBaneOfJediEffect extends OneShotEffect {
     public boolean apply(Game game, Ability source) {
         Player controller = game.getPlayer(source.getControllerId());
         if (controller != null) {
-            Choice choice = new ChoiceImpl(true);
-            choice.setMessage("Choose mode");
-            choice.setChoices(choices);
-            while (!controller.choose(outcome, choice, game)) {
-                if (!controller.canRespond()) {
-                    return false;
-                }
-            }
-
-            String chosen = choice.getChoice();
-            switch (chosen) {
-                case "Deal 2 damage to target creature":
-                    new DamageTargetEffect(2).apply(game, source);
-                    break;
-                default: //"Deal 1 damage to you"
-                    new DamageControllerEffect(1).apply(game, source);
-                    break;
+            if (controller.chooseUse(outcome, "Deal 2 damage to " + game.getPermanent(getTargetPointer().getFirst(game, source)).getName() + "?", source, game)) {
+                new DamageTargetEffect(2).apply(game, source);
+            } else {
+                new DamageControllerEffect(1).apply(game, source);
             }
             return true;
         }

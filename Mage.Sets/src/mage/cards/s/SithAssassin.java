@@ -57,17 +57,17 @@ public class SithAssassin extends CardImpl {
     }
 
     public SithAssassin(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{2}{B}");
+        super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{2}{B}");
         this.subtype.add("Pureblood");
         this.subtype.add("Sith");
-        this.power = new MageInt(1);
-        this.toughness = new MageInt(1);
+        this.power = new MageInt(3);
+        this.toughness = new MageInt(2);
 
-        // <i>Hate</i> &mdash; When Sith Assassin enters the battlefield, if opponent lost life from source other than combat damage this turn, destroy target nonblack creature.
+        // <i>Hate</i> &mdash; When Sith Assassin enters the battlefield, if opponent lost life from source other than combat damage this turn, you may destroy target nonblack creature.
         Ability ability = new ConditionalTriggeredAbility(
-                new EntersBattlefieldTriggeredAbility(new DestroyTargetEffect()),
+                new EntersBattlefieldTriggeredAbility(new DestroyTargetEffect(), true),
                 HateCondition.getInstance(),
-                "<i>Hate</i> - When {this} enters the battlefield, if an opponent lost life from a source other than combat damage this turn, destroy target nonblack creature.");
+                "<i>Hate</i> - When {this} enters the battlefield, if an opponent lost life from a source other than combat damage this turn, you may destroy target nonblack creature.");
         ability.addTarget(new TargetCreaturePermanent(filter));
         this.addAbility(ability, new LifeLossOtherFromCombatWatcher());
     }

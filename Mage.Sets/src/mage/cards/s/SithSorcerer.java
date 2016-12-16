@@ -51,7 +51,7 @@ public class SithSorcerer extends CardImpl {
         this.subtype.add("Human");
         this.subtype.add("Sith");
         this.power = new MageInt(2);
-        this.toughness = new MageInt(3);
+        this.toughness = new MageInt(2);
 
         // When Sith Sorcerer enters the battlefield, scry 2.
         this.addAbility(new EntersBattlefieldTriggeredAbility(new ScryEffect(2)));

@@ -31,7 +31,7 @@ import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.TriggeredAbilityImpl;
-import mage.abilities.costs.mana.GenericManaCost;
+import mage.abilities.costs.mana.ManaCostsImpl;
 import mage.abilities.effects.Effect;
 import mage.abilities.effects.common.DoIfCostPaid;
 import mage.abilities.effects.common.GainLifeEffect;
@@ -53,14 +53,14 @@ import mage.target.TargetPlayer;
 public class AAT1 extends CardImpl {
 
     public AAT1(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.ARTIFACT,CardType.CREATURE},"{1}{W}{U}{B}");
+        super(ownerId, setInfo, new CardType[]{CardType.ARTIFACT, CardType.CREATURE}, "{1}{W}{U}{B}");
         this.subtype.add("Droid");
         this.subtype.add("Construct");
         this.power = new MageInt(4);
         this.toughness = new MageInt(4);
 
-        // Whenever a repair counter is removed from a creature card your graveyard, you may pay {1}. If you do, target player loses 1 life and you gain 1 life. 
-        DoIfCostPaid effect = new DoIfCostPaid(new LoseLifeTargetEffect(1), new GenericManaCost(1));
+        // Whenever a repair counter is removed from a creature card your graveyard, you may pay {W/B}. If you do, target player loses 1 life and you gain 1 life. 
+        DoIfCostPaid effect = new DoIfCostPaid(new LoseLifeTargetEffect(1), new ManaCostsImpl("{W/B}"));
         Effect additionalEffect = new GainLifeEffect(1);
         additionalEffect.setText("and you gain 1 life");
         effect.addEffect(additionalEffect);

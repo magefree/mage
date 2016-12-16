@@ -46,7 +46,7 @@ import mage.game.permanent.token.DroidToken;
 public class TankDroid extends CardImpl {
 
     public TankDroid(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.ARTIFACT,CardType.CREATURE},"{4}{W}{U}{B}");
+        super(ownerId, setInfo, new CardType[]{CardType.ARTIFACT, CardType.CREATURE}, "{4}{W}{U}{B}");
         this.subtype.add("Droid");
         this.power = new MageInt(5);
         this.toughness = new MageInt(5);
@@ -56,6 +56,7 @@ public class TankDroid extends CardImpl {
         this.addAbility(ability);
         ability = new EntersBattlefieldOrDiesSourceTriggeredAbility(new CreateTokenEffect(new DroidToken()), false);
         this.addAbility(ability);
+
         // Repair 3
         this.addAbility(new RepairAbility(3));
     }

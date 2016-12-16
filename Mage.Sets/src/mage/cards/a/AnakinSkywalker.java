@@ -69,7 +69,7 @@ public class AnakinSkywalker extends CardImpl {
     }
 
     public AnakinSkywalker(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{3}{U}{B}{R}");
+        super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{3}{U}{B}{R}");
         this.supertype.add("Legendary");
         this.subtype.add("Human");
         this.subtype.add("Sith");
@@ -87,7 +87,7 @@ public class AnakinSkywalker extends CardImpl {
         ability.addTarget(new TargetCreaturePermanent());
         this.addAbility(ability);
 
-        // If Anakin Skywalker would die, regenerate and transform him instead.
+        // If Anakin Skywalker would be destroyed, regenerate, then transform him instead.
         this.addAbility(new TransformAbility());
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new AnakinSkywalkerEffect()));
 

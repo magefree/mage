@@ -52,12 +52,12 @@ import mage.counters.CounterType;
 public class DroneHolocron extends CardImpl {
 
     public DroneHolocron(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.ARTIFACT},"{2}");
+        super(ownerId, setInfo, new CardType[]{CardType.ARTIFACT}, "{2}");
 
-        // {T}: Put a charge counter on Wild Holocron.
+        // {T}: Put a charge counter on Drone Holocron.
         this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new AddCountersSourceEffect(CounterType.CHARGE.createInstance(1)), new TapSourceCost()));
 
-        // {T}, Remove a charge counter from Wild Holocron: Add {W}, {U} or {B} to your mana pool.
+        // {T}, Remove a charge counter from Drone Holocron: Add {W}, {U} or {B} to your mana pool.
         Cost cost = new RemoveCountersSourceCost(CounterType.CHARGE.createInstance(1));
         Ability ability = new WhiteManaAbility();
         ability.addCost(cost);
@@ -71,7 +71,7 @@ public class DroneHolocron extends CardImpl {
         ability.addCost(cost);
         this.addAbility(ability);
 
-        // {T}, Remove two charge counters from Sith Holocron: Add WU or UB to your mana pool.
+        // {T}, Remove two charge counters from Drone Holocron: Add WU or UB to your mana pool.
         cost = new RemoveCountersSourceCost(CounterType.CHARGE.createInstance(2));
 
         ability = new SimpleManaAbility(Zone.BATTLEFIELD, new Mana(0, 0, 1, 1, 0, 0, 0, 0), new TapSourceCost());

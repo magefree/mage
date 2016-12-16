@@ -32,7 +32,7 @@ import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.costs.common.TapSourceCost;
-import mage.abilities.costs.mana.ManaCostsImpl;
+import mage.abilities.costs.mana.GenericManaCost;
 import mage.abilities.effects.common.TapTargetEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
@@ -56,13 +56,13 @@ public class CantinaBand extends CardImpl {
     }
 
     public CantinaBand(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{1}{W}");
+        super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{W}");
         this.subtype.add("Bith");
-        this.power = new MageInt(1);
+        this.power = new MageInt(0);
         this.toughness = new MageInt(1);
 
-        // {T}, {W}: Tap target nonartifact creature.
-        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new TapTargetEffect(), new ManaCostsImpl("{W}"));
+        // {T}, {1}: Tap target nonartifact creature.
+        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new TapTargetEffect(), new GenericManaCost(1));
         ability.addCost(new TapSourceCost());
         ability.addTarget(new TargetCreaturePermanent(filter));
         this.addAbility(ability);

@@ -44,14 +44,14 @@ import mage.target.common.TargetOpponentsCreaturePermanent;
 public class HeadHunting extends CardImpl {
 
     public HeadHunting(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.INSTANT},"{1}{B}");
-
-        // Each opponent loses 1 life.
-        this.getSpellAbility().addEffect(new LoseLifeOpponentsEffect(1));
+        super(ownerId, setInfo, new CardType[]{CardType.INSTANT}, "{1}{B}");
 
         // Put a bounty counter on target creature an opponent controls.
         this.getSpellAbility().addTarget(new TargetOpponentsCreaturePermanent());
         this.getSpellAbility().addEffect(new AddCountersTargetEffect(CounterType.BOUNTY.createInstance()));
+
+        // Each opponent loses 1 life.
+        this.getSpellAbility().addEffect(new LoseLifeOpponentsEffect(1));
 
         // Draw a card.
         this.getSpellAbility().addEffect(new DrawCardSourceControllerEffect(1));

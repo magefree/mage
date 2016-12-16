@@ -41,7 +41,7 @@ import mage.target.TargetPlayer;
 public class JediMindTrick extends CardImpl {
 
     public JediMindTrick(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{7}{U}");
+        super(ownerId, setInfo, new CardType[]{CardType.SORCERY}, "{6}{U}");
 
         // You control target player during that player's next turn.
         this.getSpellAbility().addEffect(new ControlTargetPlayerNextTurnEffect());

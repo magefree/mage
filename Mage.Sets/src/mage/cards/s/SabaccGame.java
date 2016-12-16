@@ -62,8 +62,6 @@ public class SabaccGame extends CardImpl {
     public SabaccGame(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.SORCERY}, "{1}{U}");
 
-        // Almost the same as unimplemented Mogg Assassin from Exodus
-        // Not exactly. Because the permanent choosen by opponent does not have the target word in rule text it is chosen during resolution.
         /*
          * Choose target permanent an opponent controls. That opponent chooses a permanent you control.
          * Flip a coin. If you win the flip, gain control of the permanent you chose.

@@ -42,15 +42,15 @@ import mage.constants.CardType;
 public class TriFighter extends CardImpl {
 
     public TriFighter(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.ARTIFACT,CardType.CREATURE},"{2}{U/B}{U/B}");
+        super(ownerId, setInfo, new CardType[]{CardType.ARTIFACT, CardType.CREATURE}, "{1}{U/B}{U/B}");
         this.subtype.add("Droid");
         this.subtype.add("Starship");
-        this.power = new MageInt(3);
+        this.power = new MageInt(2);
         this.toughness = new MageInt(2);
 
         // Spaceflight
         this.addAbility(SpaceflightAbility.getInstance());
-        
+
         // Repair 3
         this.addAbility(new RepairAbility(3));
     }

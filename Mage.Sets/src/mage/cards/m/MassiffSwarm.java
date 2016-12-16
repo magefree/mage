@@ -25,11 +25,11 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.cards.i;
+package mage.cards.m;
 
 import java.util.UUID;
-import mage.abilities.costs.common.DiscardCardCost;
-import mage.abilities.effects.common.DrawCardSourceControllerEffect;
+import mage.MageInt;
+import mage.abilities.keyword.MonstrosityAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
@@ -38,24 +38,26 @@ import mage.constants.CardType;
  *
  * @author Styxo
  */
-public class IrresponsibleGambling extends CardImpl {
+public class MassiffSwarm extends CardImpl {
 
-    public IrresponsibleGambling(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{R}");
+    public MassiffSwarm(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{2}{G}");
+        this.subtype.add("Crocodile");
+        this.subtype.add("Beast");
+        this.power = new MageInt(3);
+        this.toughness = new MageInt(3);
 
-        // As an additional cost to cast Irresponsible Gambling, discard a card at random.
-        this.getSpellAbility().addCost(new DiscardCardCost(true));
+        // {6}{G}: Monstrosity 3.
+        this.addAbility(new MonstrosityAbility("{6}{G}", 3));
 
-        // Draw two cards.
-        this.getSpellAbility().addEffect(new DrawCardSourceControllerEffect(2));
     }
 
-    public IrresponsibleGambling(final IrresponsibleGambling card) {
+    public MassiffSwarm(final MassiffSwarm card) {
         super(card);
     }
 
     @Override
-    public IrresponsibleGambling copy() {
-        return new IrresponsibleGambling(this);
+    public MassiffSwarm copy() {
+        return new MassiffSwarm(this);
     }
 }

@@ -25,48 +25,52 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.cards.g;
+package mage.cards.f;
 
 import java.util.UUID;
-import mage.MageInt;
-import mage.abilities.Ability;
-import mage.abilities.common.DealsCombatDamageToAPlayerTriggeredAbility;
-import mage.abilities.effects.common.counter.AddCountersTargetEffect;
-import mage.abilities.keyword.HasteAbility;
+import mage.abilities.effects.Effect;
+import mage.abilities.effects.common.UntapTargetEffect;
+import mage.abilities.effects.common.continuous.BoostTargetEffect;
+import mage.abilities.effects.common.continuous.GainAbilityTargetEffect;
+import mage.abilities.effects.keyword.ScryEffect;
+import mage.abilities.keyword.FirstStrikeAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.counters.CounterType;
-import mage.target.common.TargetOpponentsCreaturePermanent;
+import mage.constants.Duration;
+import mage.target.common.TargetCreaturePermanent;
 
 /**
  *
  * @author Styxo
  */
-public class GamorreanEnforcer extends CardImpl {
+public class ForceReflex extends CardImpl {
 
-    public GamorreanEnforcer(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{2}{R}");
-        this.subtype.add("Gamorrean");
-        this.subtype.add("Warrior");
-        this.power = new MageInt(3);
-        this.toughness = new MageInt(1);
+    public ForceReflex(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.INSTANT},"{1}{W}");
 
-        // Haste
-        this.addAbility(HasteAbility.getInstance());
+        // Untap target creature. It gets +1/+0 and gains first strike until end of turn.
+        this.getSpellAbility().addEffect(new UntapTargetEffect());
 
-        // Whenever Gamorrean Enforcer deals combat damage to a player, put a bounty counter on target creature an opponent controls.
-        Ability ability = new DealsCombatDamageToAPlayerTriggeredAbility(new AddCountersTargetEffect(CounterType.BOUNTY.createInstance()), false);
-        ability.addTarget(new TargetOpponentsCreaturePermanent());
-        this.addAbility(ability);
+        Effect effect = new BoostTargetEffect(1, 0, Duration.EndOfTurn);
+        effect.setText("It gets +1/+0");
+        this.getSpellAbility().addEffect(effect);
+
+        effect = new GainAbilityTargetEffect(FirstStrikeAbility.getInstance(), Duration.EndOfTurn);
+        effect.setText("and gains first strike until end of turn");
+        this.getSpellAbility().addEffect(effect);
+        this.getSpellAbility().addTarget(new TargetCreaturePermanent());
+
+        // Scry 1
+        this.getSpellAbility().addEffect(new ScryEffect(1));
     }
 
-    public GamorreanEnforcer(final GamorreanEnforcer card) {
+    public ForceReflex(final ForceReflex card) {
         super(card);
     }
 
     @Override
-    public GamorreanEnforcer copy() {
-        return new GamorreanEnforcer(this);
+    public ForceReflex copy() {
+        return new ForceReflex(this);
     }
 }

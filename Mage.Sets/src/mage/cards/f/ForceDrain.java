@@ -28,12 +28,16 @@
 package mage.cards.f;
 
 import java.util.UUID;
-import mage.abilities.effects.common.DamageTargetEffect;
-import mage.abilities.effects.common.GainLifeEffect;
+import mage.abilities.Ability;
+import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.keyword.ScryEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
+import mage.constants.Outcome;
+import mage.game.Game;
+import mage.game.permanent.Permanent;
+import mage.players.Player;
 import mage.target.common.TargetCreatureOrPlayer;
 
 /**
@@ -43,12 +47,11 @@ import mage.target.common.TargetCreatureOrPlayer;
 public class ForceDrain extends CardImpl {
 
     public ForceDrain(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{2}{B}");
+        super(ownerId, setInfo, new CardType[]{CardType.SORCERY}, "{2}{B}");
 
-        // ForceDrain deals 2 damage to target creature or player, you gain 2 life.
+        // ForceDrain deals 2 damage to target creature or player. If player was dealt damage this way, you gain 2 life.
         this.getSpellAbility().addTarget(new TargetCreatureOrPlayer());
-        this.getSpellAbility().addEffect(new DamageTargetEffect(2));
-        this.getSpellAbility().addEffect(new GainLifeEffect(2));
+        this.getSpellAbility().addEffect(new ForceDrainEffect());
 
         // Scry 1
         this.getSpellAbility().addEffect(new ScryEffect(1));
@@ -61,5 +64,43 @@ public class ForceDrain extends CardImpl {
     @Override
     public ForceDrain copy() {
         return new ForceDrain(this);
+    }
+}
+
+class ForceDrainEffect extends OneShotEffect {
+
+    public ForceDrainEffect() {
+        super(Outcome.Damage);
+        this.staticText = "ForceDrain deals 2 damage to target creature or player. If player was dealt damage this way, you gain 2 life";
+    }
+
+    public ForceDrainEffect(final ForceDrainEffect effect) {
+        super(effect);
+    }
+
+    @Override
+    public ForceDrainEffect copy() {
+        return new ForceDrainEffect(this);
+    }
+
+    @Override
+    public boolean apply(Game game, Ability source) {
+        Player controller = game.getPlayer(source.getControllerId());
+        if (controller != null) {
+            Permanent permanent = game.getPermanent(getTargetPointer().getFirst(game, source));
+            if (permanent != null) {
+                permanent.damage(2, source.getId(), game, false, true);
+                return true;
+            }
+
+            Player player = game.getPlayer(getTargetPointer().getFirst(game, source));
+            if (player != null) {
+                if (player.damage(2, source.getId(), game, false, true) > 0) {
+                    controller.gainLife(2, game);
+                }
+                return true;
+            }
+        }
+        return false;
     }
 }

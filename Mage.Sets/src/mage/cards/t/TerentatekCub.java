@@ -25,49 +25,61 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.cards.l;
+package mage.cards.t;
 
 import java.util.UUID;
 import mage.MageInt;
-import mage.abilities.common.ActivateAsSorceryActivatedAbility;
-import mage.abilities.common.AttacksTriggeredAbility;
-import mage.abilities.costs.mana.ManaCostsImpl;
-import mage.abilities.effects.common.CreateTokenEffect;
-import mage.abilities.effects.common.continuous.GainAbilitySourceEffect;
-import mage.abilities.keyword.SpaceflightAbility;
+import mage.abilities.common.SimpleStaticAbility;
+import mage.abilities.condition.common.OpponentControlsPermanentCondition;
+import mage.abilities.decorator.ConditionalContinuousEffect;
+import mage.abilities.effects.common.combat.AttacksIfAbleSourceEffect;
+import mage.abilities.effects.common.continuous.BoostSourceEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Duration;
 import mage.constants.Zone;
-import mage.game.permanent.token.TrooperToken;
+import mage.filter.common.FilterCreaturePermanent;
+import mage.filter.predicate.Predicates;
+import mage.filter.predicate.mageobject.SubtypePredicate;
 
 /**
  *
  * @author Styxo
  */
-public class LAATGunship extends CardImpl {
+public class TerentatekCub extends CardImpl {
 
-    public LAATGunship(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId, setInfo, new CardType[]{CardType.ARTIFACT, CardType.CREATURE}, "{3}{W}");
-        this.subtype.add("Starship");
-        this.power = new MageInt(3);
-        this.toughness = new MageInt(2);
+    private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("Hunter or Rogue card");
 
-        // When LAAT Gunship attacks, create a 1/1 white Trooper creature token on to battlefield tapped and attacking.
-        this.addAbility(new AttacksTriggeredAbility(new CreateTokenEffect(new TrooperToken(), 1, true, true), false));
-
-        // {W}: LAAT Gunship gains spaceflight until the end of turn. Activate this ability only as a sorcery
-        this.addAbility(new ActivateAsSorceryActivatedAbility(Zone.BATTLEFIELD, new GainAbilitySourceEffect(SpaceflightAbility.getInstance(), Duration.EndOfTurn), new ManaCostsImpl("{W}")));
-
+    static {
+        filter.add(Predicates.or(new SubtypePredicate("Jedi"), new SubtypePredicate("Sith")));
     }
 
-    public LAATGunship(final LAATGunship card) {
+    public TerentatekCub(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{1}{R}");
+        this.subtype.add("Beast");
+        this.power = new MageInt(2);
+        this.toughness = new MageInt(2);
+
+        // As long as an opponent controls a Jedi or Sith, {this} gets +1/+1 and attacks each turn if able 
+        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new ConditionalContinuousEffect(
+                new BoostSourceEffect(1, 1, Duration.Custom),
+                new OpponentControlsPermanentCondition(filter),
+                "As long as an opponent controls a Jedi or Sith, {this} gets +1/+1 ")
+        ));
+        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new ConditionalContinuousEffect(
+                new AttacksIfAbleSourceEffect(Duration.Custom),
+                new OpponentControlsPermanentCondition(filter),
+                "and attacks each turn if able.")
+        ));
+    }
+
+    public TerentatekCub(final TerentatekCub card) {
         super(card);
     }
 
     @Override
-    public LAATGunship copy() {
-        return new LAATGunship(this);
+    public TerentatekCub copy() {
+        return new TerentatekCub(this);
     }
 }

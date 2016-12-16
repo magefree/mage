@@ -36,7 +36,7 @@ import mage.abilities.effects.Effect;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.counter.AddCountersTargetEffect;
 import mage.abilities.keyword.HasteAbility;
-import mage.abilities.keyword.IntimidateAbility;
+import mage.abilities.keyword.MenaceAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
@@ -54,7 +54,6 @@ import mage.target.TargetPermanent;
 import mage.target.common.TargetOpponentsCreaturePermanent;
 import mage.filter.predicate.permanent.CounterPredicate;
 
-
 /**
  *
  * @author Styxo/spjspj
@@ -62,15 +61,15 @@ import mage.filter.predicate.permanent.CounterPredicate;
 public class JangoFett extends CardImpl {
 
     public JangoFett(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{2}{R}{R}");
+        super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{1}{R}{R}");
         this.supertype.add("Legendary");
         this.subtype.add("Human");
         this.subtype.add("Hunter");
         this.power = new MageInt(2);
         this.toughness = new MageInt(2);
 
-        // Intimidate
-        this.addAbility(IntimidateAbility.getInstance());
+        // Menace
+        this.addAbility(new MenaceAbility());
 
         // Haste
         this.addAbility(HasteAbility.getInstance());
@@ -169,7 +168,7 @@ class JangoFettEffect extends OneShotEffect {
         if (creature == null) {
             return false;
         }
-        
+
         // Count the number of creatures attacked opponent controls with a bounty counter
         UUID defenderId = game.getCombat().getDefendingPlayerId(creature.getId(), game);
         int count = 0;
@@ -182,14 +181,14 @@ class JangoFettEffect extends OneShotEffect {
         if (count == 0) {
             return false;
         }
-        
+
         Permanent targetCreature = game.getPermanent(source.getFirstTarget());
         if (targetCreature != null) {
             targetCreature.damage(count, source.getSourceId(), game, false, true);
         }
         Player defender = game.getPlayer(defenderId);
         defender.damage(count, source.getSourceId(), game, false, true);
-        
+
         return true;
     }
 

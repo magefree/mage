@@ -65,7 +65,7 @@ public class EchoBaseCommando extends CardImpl {
     }
 
     public EchoBaseCommando(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{1}{G}{W}");
+        super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{1}{G}{W}");
         this.subtype.add("Human");
         this.subtype.add("Rebel");
         this.power = new MageInt(3);
@@ -91,7 +91,7 @@ public class EchoBaseCommando extends CardImpl {
 
 class EchoBaseCommandoEffect extends CostModificationEffectImpl {
 
-    private static final String effectText = "Activated abilities of creatures your opponent controls cost {2} more to activate";
+    private static final String effectText = "Activated abilities of creatures your opponent control cost {2} more to activate";
     private static final FilterCreaturePermanent filter = new FilterCreaturePermanent();
 
     static {

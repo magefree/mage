@@ -31,23 +31,17 @@ import java.util.UUID;
 import mage.abilities.Ability;
 import mage.abilities.common.EntersBattlefieldTriggeredAbility;
 import mage.abilities.common.SimpleStaticAbility;
-import mage.abilities.effects.Effect;
-import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.AttachEffect;
 import mage.abilities.effects.common.combat.CantBlockAttackActivateAttachedEffect;
 import mage.abilities.effects.common.continuous.ControlEnchantedEffect;
-import mage.abilities.effects.common.continuous.GainAbilityAttachedEffect;
-import mage.abilities.effects.common.ruleModifying.CantHaveCountersSourceEffect;
+import mage.abilities.effects.common.counter.RemoveCounterTargetEffect;
 import mage.abilities.keyword.EnchantAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
-import mage.constants.AttachmentType;
 import mage.constants.CardType;
 import mage.constants.Outcome;
 import mage.constants.Zone;
-import mage.filter.common.FilterCreaturePermanent;
-import mage.game.Game;
-import mage.game.permanent.Permanent;
+import mage.counters.CounterType;
 import mage.target.TargetPermanent;
 import mage.target.common.TargetCreaturePermanent;
 
@@ -58,7 +52,7 @@ import mage.target.common.TargetCreaturePermanent;
 public class CarboniteChamber extends CardImpl {
 
     public CarboniteChamber(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.ENCHANTMENT},"{1}{W}{U}");
+        super(ownerId, setInfo, new CardType[]{CardType.ENCHANTMENT}, "{1}{W}{U}");
         this.subtype.add("Aura");
 
         // Enchant creature
@@ -68,19 +62,15 @@ public class CarboniteChamber extends CardImpl {
         Ability ability = new EnchantAbility(auraTarget.getTargetName());
         this.addAbility(ability);
 
-        // When Carbonite Chamber enters the battlefield, remove all bounty counters from all creatures.
-        this.addAbility(new EntersBattlefieldTriggeredAbility(new RemoveAllCountersEffect()));
+        // When Carbonite Chamber enters the battlefield, you may remove a bounty counter from target creature.
+        ability = new EntersBattlefieldTriggeredAbility(new RemoveCounterTargetEffect(CounterType.BOUNTY.createInstance()), true);
+        ability.addTarget(new TargetCreaturePermanent());
+        this.addAbility(ability);
 
         // You control enchanted creature.
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new ControlEnchantedEffect()));
 
-        // It can't have counters placed on it.
-        Ability attachedAbility = new SimpleStaticAbility(Zone.BATTLEFIELD, new CantHaveCountersSourceEffect());
-        Effect effect = new GainAbilityAttachedEffect(attachedAbility, AttachmentType.AURA);
-        effect.setText("It can't have counters placed on it");
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, effect));
-
-        // Enchanted creature can't attack or block, and its activated abilities can't be activated.
+        // It can't attack or block, and its activated abilities can't be activated.
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new CantBlockAttackActivateAttachedEffect()));
 
     }
@@ -92,30 +82,5 @@ public class CarboniteChamber extends CardImpl {
     @Override
     public CarboniteChamber copy() {
         return new CarboniteChamber(this);
-    }
-}
-
-class RemoveAllCountersEffect extends OneShotEffect {
-
-    public RemoveAllCountersEffect() {
-        super(Outcome.Detriment);
-        staticText = "remove all bounty counters from all creatures";
-    }
-
-    public RemoveAllCountersEffect(final RemoveAllCountersEffect effect) {
-        super(effect);
-    }
-
-    @Override
-    public boolean apply(Game game, Ability source) {
-        for (Permanent permanent : game.getBattlefield().getActivePermanents(new FilterCreaturePermanent(), source.getControllerId(), source.getSourceId(), game)) {
-            permanent.getCounters(game).removeAllCounters("bounty");
-        }
-        return true;
-    }
-
-    @Override
-    public RemoveAllCountersEffect copy() {
-        return new RemoveAllCountersEffect(this);
     }
 }

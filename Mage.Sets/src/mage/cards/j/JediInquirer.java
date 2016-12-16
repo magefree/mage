@@ -31,7 +31,7 @@ import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.common.LeavesBattlefieldTriggeredAbility;
 import mage.abilities.costs.mana.ManaCostsImpl;
-import mage.abilities.effects.common.DestroyTargetEffect;
+import mage.abilities.effects.common.ExileTargetEffect;
 import mage.abilities.keyword.MeditateAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
@@ -45,14 +45,14 @@ import mage.target.common.TargetEnchantmentPermanent;
 public class JediInquirer extends CardImpl {
 
     public JediInquirer(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{2}{W}");
+        super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{2}{W}");
         this.subtype.add("Human");
         this.subtype.add("Jedi");
         this.power = new MageInt(2);
         this.toughness = new MageInt(2);
 
-        // When Jedi Inquirer enters the battlefield, you may destroy target enchantment.
-        LeavesBattlefieldTriggeredAbility ability = new LeavesBattlefieldTriggeredAbility(new DestroyTargetEffect(), true);
+        // When Jedi Inquirer leaves the battlefield, you may exile target enchantment.
+        LeavesBattlefieldTriggeredAbility ability = new LeavesBattlefieldTriggeredAbility(new ExileTargetEffect(), true);
         ability.addTarget(new TargetEnchantmentPermanent());
         this.addAbility(ability);
 

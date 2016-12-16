@@ -47,12 +47,12 @@ import mage.target.common.TargetCardInLibrary;
 public class BibFortuna extends CardImpl {
 
     public BibFortuna(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{1}{B}");
+        super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{1}{B}");
         this.supertype.add("Legendary");
         this.subtype.add("Twi'lek");
         this.subtype.add("Advisor");
         this.power = new MageInt(2);
-        this.toughness = new MageInt(2);
+        this.toughness = new MageInt(1);
 
         // When Bib Fortuna enters the battlefield search your library for a card then shuffle your library and put in on top. You lose 1 life.
         Ability ability = new EntersBattlefieldTriggeredAbility(new SearchLibraryPutOnLibraryEffect(new TargetCardInLibrary()), false);

@@ -44,7 +44,7 @@ import mage.constants.CardType;
 public class MonCalamariInitiate extends CardImpl {
 
     public MonCalamariInitiate(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{3}{U}");
+        super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{2}{U}{U}");
         this.subtype.add("Calamari");
         this.subtype.add("Jedi");
         this.power = new MageInt(3);

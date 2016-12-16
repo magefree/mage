@@ -38,9 +38,6 @@ import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Zone;
-import mage.filter.common.FilterCreaturePermanent;
-import mage.filter.predicate.Predicates;
-import mage.filter.predicate.mageobject.CardTypePredicate;
 import mage.target.common.TargetCreaturePermanent;
 
 /**
@@ -49,22 +46,16 @@ import mage.target.common.TargetCreaturePermanent;
  */
 public class LoyalTauntaun extends CardImpl {
 
-    private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("nonartifact creature");
-
-    static {
-        filter.add(Predicates.not(new CardTypePredicate(CardType.ARTIFACT)));
-    }
-
     public LoyalTauntaun(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{2}{W}");
+        super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{2}{W}");
         this.subtype.add("Beast");
         this.power = new MageInt(2);
         this.toughness = new MageInt(3);
 
-        // {1}{G}, sacrifice Loyal Tauntaun: Regenerate target nonartifact creature.
+        // {1}{G}, sacrifice Loyal Tauntaun: Regenerate target creature.
         Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new RegenerateTargetEffect(), new ManaCostsImpl("{1}{G}"));
         ability.addCost(new SacrificeSourceCost());
-        ability.addTarget(new TargetCreaturePermanent(filter));
+        ability.addTarget(new TargetCreaturePermanent());
         this.addAbility(ability);
     }
 

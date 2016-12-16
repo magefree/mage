@@ -47,7 +47,7 @@ import mage.constants.Zone;
 public class XWing extends CardImpl {
 
     public XWing(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.ARTIFACT,CardType.CREATURE},"{2}{W}");
+        super(ownerId, setInfo, new CardType[]{CardType.ARTIFACT, CardType.CREATURE}, "{2}{W}");
         this.subtype.add("Rebel");
         this.subtype.add("Starship");
         this.power = new MageInt(2);
@@ -56,8 +56,8 @@ public class XWing extends CardImpl {
         // Spaceflight
         this.addAbility(SpaceflightAbility.getInstance());
 
-        // {1}{W}: X-Wing gains viginlance until end of turn.
-        this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new GainAbilitySourceEffect(VigilanceAbility.getInstance(), Duration.EndOfTurn), new ManaCostsImpl("{1}{W}")));
+        // {W}: X-Wing gains viginlance until end of turn.
+        this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new GainAbilitySourceEffect(VigilanceAbility.getInstance(), Duration.EndOfTurn), new ManaCostsImpl("{W}")));
 
     }
 
