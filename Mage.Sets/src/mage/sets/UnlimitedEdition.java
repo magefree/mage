@@ -124,6 +124,7 @@ public class UnlimitedEdition extends ExpansionSet {
         cards.add(new SetCardInfo("Gray Ogre", 157, Rarity.COMMON, mage.cards.g.GrayOgre.class));
         cards.add(new SetCardInfo("Green Ward", 205, Rarity.UNCOMMON, mage.cards.g.GreenWard.class));
         cards.add(new SetCardInfo("Grizzly Bears", 108, Rarity.COMMON, mage.cards.g.GrizzlyBears.class));
+        cards.add(new SetCardInfo("Guardian Angel", 206, Rarity.COMMON, mage.cards.g.GuardianAngel.class));
         cards.add(new SetCardInfo("Healing Salve", 207, Rarity.COMMON, mage.cards.h.HealingSalve.class));
         cards.add(new SetCardInfo("Hill Giant", 158, Rarity.COMMON, mage.cards.h.HillGiant.class));
         cards.add(new SetCardInfo("Holy Armor", 208, Rarity.COMMON, mage.cards.h.HolyArmor.class));
