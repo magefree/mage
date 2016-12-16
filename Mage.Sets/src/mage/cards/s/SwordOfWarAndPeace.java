@@ -25,7 +25,6 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-
 package mage.cards.s;
 
 import java.util.UUID;
@@ -62,25 +61,25 @@ import mage.target.TargetPlayer;
  */
 public class SwordOfWarAndPeace extends CardImpl {
 
-    public SwordOfWarAndPeace (UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.ARTIFACT},"{3}");
+    public SwordOfWarAndPeace(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId, setInfo, new CardType[]{CardType.ARTIFACT}, "{3}");
         this.subtype.add("Equipment");
-        
-        // Equipped creature gets +2/+2 and has protection from red and from white.        
+
+        // Equipped creature gets +2/+2 and has protection from red and from white.
         Ability ability = new SimpleStaticAbility(Zone.BATTLEFIELD, new BoostEquippedEffect(2, 2));
         Effect effect = new GainAbilityAttachedEffect(ProtectionAbility.from(ObjectColor.RED, ObjectColor.WHITE), AttachmentType.EQUIPMENT);
         effect.setText("and has protection from red and from white");
         ability.addEffect(effect);
         this.addAbility(ability);
-        
-        // Whenever equipped creature deals combat damage to a player, Sword of War and Peace deals damage to that player equal to the number of cards in his or her hand and you gain 1 life for each card in your hand.        
+
+        // Whenever equipped creature deals combat damage to a player, Sword of War and Peace deals damage to that player equal to the number of cards in his or her hand and you gain 1 life for each card in your hand.
         this.addAbility(new SwordOfWarAndPeaceAbility());
-        
+
         // Equip {2}
         this.addAbility(new EquipAbility(Outcome.AddAbility, new GenericManaCost(2)));
     }
 
-    public SwordOfWarAndPeace (final SwordOfWarAndPeace card) {
+    public SwordOfWarAndPeace(final SwordOfWarAndPeace card) {
         super(card);
     }
 
@@ -116,8 +115,9 @@ class SwordOfWarAndPeaceAbility extends TriggeredAbilityImpl {
     @Override
     public boolean checkTrigger(GameEvent event, Game game) {
         DamagedPlayerEvent damageEvent = (DamagedPlayerEvent) event;
-        Permanent p = game.getPermanent(event.getSourceId());
-        if (damageEvent.isCombatDamage() && p != null && p.getAttachments().contains(this.getSourceId())) {
+        Permanent damageSource = game.getPermanentOrLKIBattlefield(event.getSourceId());
+        if (damageEvent.isCombatDamage() && damageSource != null && damageSource.getAttachments().contains(this.getSourceId())) {
+            getTargets().get(0).clearChosen();
             getTargets().get(0).add(event.getPlayerId(), game);
             return true;
         }
@@ -131,6 +131,7 @@ class SwordOfWarAndPeaceAbility extends TriggeredAbilityImpl {
 }
 
 class SwordOfWarAndPeaceDamageEffect extends OneShotEffect {
+
     SwordOfWarAndPeaceDamageEffect() {
         super(Outcome.Damage);
         staticText = "{this} deals damage to that player equal to the number of cards in his or her hand";
@@ -146,7 +147,7 @@ class SwordOfWarAndPeaceDamageEffect extends OneShotEffect {
         if (target != null) {
             target.damage(target.getHand().size(), source.getSourceId(), game, false, true);
         }
-        return false;
+        return true;
     }
 
     @Override
