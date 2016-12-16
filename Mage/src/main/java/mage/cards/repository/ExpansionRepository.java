@@ -7,12 +7,13 @@ import com.j256.ormlite.stmt.QueryBuilder;
 import com.j256.ormlite.stmt.SelectArg;
 import com.j256.ormlite.support.ConnectionSource;
 import com.j256.ormlite.table.TableUtils;
+import org.apache.log4j.Logger;
+
 import java.io.File;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.List;
-import org.apache.log4j.Logger;
 
 /**
  *
@@ -112,7 +113,7 @@ public enum ExpansionRepository {
         ExpansionInfo set = null;
         try {
             QueryBuilder<ExpansionInfo, Object> qb = expansionDao.queryBuilder();
-            qb.where().eq("code", new SelectArg(setCode));
+            qb.limit(1L).where().eq("code", new SelectArg(setCode));
             List<ExpansionInfo> expansions = expansionDao.query(qb.prepare());
             if (expansions.size() > 0) {
                 set = expansions.get(0);
@@ -126,7 +127,7 @@ public enum ExpansionRepository {
         ExpansionInfo set = null;
         try {
             QueryBuilder<ExpansionInfo, Object> qb = expansionDao.queryBuilder();
-            qb.where().eq("name", new SelectArg(setName));
+            qb.limit(1L).where().eq("name", new SelectArg(setName));
             List<ExpansionInfo> expansions = expansionDao.query(qb.prepare());
             if (expansions.size() > 0) {
                 set = expansions.get(0);
