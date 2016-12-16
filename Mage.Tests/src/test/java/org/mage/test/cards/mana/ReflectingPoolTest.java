@@ -89,4 +89,25 @@ public class ReflectingPoolTest extends CardTestPlayerBase {
         Assert.assertEquals("Player should be able to create 2 red mana", "{R}{R}", options.get(0).toString());
 
     }
+
+    /**
+     * Reflecting Pool does not see Gaea's Cradle or Serra's Sanctum as
+     * producing mana
+     */
+    @Test
+    public void testWithGaeasCradle() {
+        addCard(Zone.BATTLEFIELD, playerA, "Silvercoat Lion", 1);
+
+        // {T}: Add to your mana pool one mana of any type that a land you control could produce.
+        addCard(Zone.BATTLEFIELD, playerA, "Reflecting Pool", 1);
+        // {T}: Add {G} to your mana pool for each creature you control.
+        addCard(Zone.BATTLEFIELD, playerA, "Gaea's Cradle", 1);
+
+        setStopAt(1, PhaseStep.PRECOMBAT_MAIN);
+        execute();
+
+        ManaOptions options = playerA.getAvailableManaTest(currentGame);
+        Assert.assertEquals("Player should be able to create 2 red mana", "{G}{G}", options.get(0).toString());
+
+    }
 }

@@ -115,4 +115,9 @@ public class DynamicManaAbility extends ActivatedManaAbilityImpl {
         }
         return newNetMana;
     }
+
+    @Override
+    public boolean definesMana() {
+        return true;
+    }
 }
