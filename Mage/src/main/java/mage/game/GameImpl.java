@@ -1523,6 +1523,11 @@ public abstract class GameImpl implements Game, Serializable {
         return state.copyCard(cardToCopy, source, this);
     }
 
+    /**
+     * For internal use only
+     *
+     * @param ability
+     */
     @Override
     public void addTriggeredAbility(TriggeredAbility ability) {
         if (ability.getControllerId() == null) {

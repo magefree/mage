@@ -50,7 +50,7 @@ import mage.target.targetpointer.FixedTarget;
 public class UndiscoveredParadise extends CardImpl {
 
     public UndiscoveredParadise(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.LAND},"");
+        super(ownerId, setInfo, new CardType[]{CardType.LAND}, "");
 
         // {T}: Add one mana of any color to your mana pool. During your next untap step, as you untap your permanents, return Undiscovered Paradise to its owner's hand.
         Ability ability = new AnyColorManaAbility();
@@ -85,7 +85,7 @@ class UndiscoveredParadiseEffect extends OneShotEffect {
         if (permanent != null) {
             Effect effect = new ReturnToHandTargetEffect();
             effect.setTargetPointer(new FixedTarget(permanent, game));
-            game.addDelayedTriggeredAbility(new AtBeginningOfUntapDelayedTriggeredAbility(effect));
+            game.addDelayedTriggeredAbility(new AtBeginningOfUntapDelayedTriggeredAbility(effect), source);
             return true;
         }
         return false;
