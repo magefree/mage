@@ -45,7 +45,6 @@ import mage.game.permanent.Permanent;
 import mage.target.Target;
 import mage.target.common.TargetControlledCreaturePermanent;
 import mage.target.common.TargetCreaturePermanent;
-import mage.target.targetpointer.SecondTargetPointer;
 
 /**
  *
@@ -60,7 +59,7 @@ public class ClearShot extends CardImpl {
     }
 
     public ClearShot(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.INSTANT},"{2}{G}");
+        super(ownerId, setInfo, new CardType[]{CardType.INSTANT}, "{2}{G}");
 
         // Target creature you control gets +1/+1 until end of turn. It deals damage equal to its power to target creature you don't control.
         Effect effect = new BoostTargetEffect(1, 1, Duration.EndOfTurn);
@@ -70,7 +69,6 @@ public class ClearShot extends CardImpl {
 
         effect = new ClearShotDamageEffect();
         effect.setText("It deals damage equal to its power to target creature you don't control");
-        effect.setTargetPointer(new SecondTargetPointer());
         this.getSpellAbility().addEffect(effect);
         Target target = new TargetCreaturePermanent(filter);
         this.getSpellAbility().addTarget(target);
@@ -110,8 +108,8 @@ class ClearShotDamageEffect extends OneShotEffect {
             Permanent targetCreature = game.getPermanent(source.getTargets().get(1).getFirstTarget());
             if (targetCreature != null) {
                 targetCreature.damage(damage, ownCreature.getId(), game, false, true);
-                return true;
             }
+            return true;
         }
         return false;
     }
