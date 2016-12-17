@@ -101,7 +101,10 @@ class EyeOfTheStormAbility extends TriggeredAbilityImpl {
     @Override
     public boolean checkTrigger(GameEvent event, Game game) {
         Spell spell = game.getStack().getSpell(event.getTargetId());
-        if (spell != null && !spell.isCopy()
+        if (spell != null
+                && !spell.isCopy()
+                && spell.getCard() != null
+                && !spell.getCard().isCopy()
                 && (spell.getCardType().contains(CardType.INSTANT) || spell.getCardType().contains(CardType.SORCERY))) {
             for (Effect effect : this.getEffects()) {
                 effect.setTargetPointer(new FixedTarget(event.getTargetId()));
