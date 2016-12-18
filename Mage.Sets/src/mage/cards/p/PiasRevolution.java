@@ -36,9 +36,11 @@ import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Outcome;
+import mage.constants.TargetController;
 import mage.constants.Zone;
 import mage.filter.common.FilterArtifactPermanent;
 import mage.filter.predicate.Predicates;
+import mage.filter.predicate.other.OwnerPredicate;
 import mage.filter.predicate.permanent.TokenPredicate;
 import mage.game.Game;
 import mage.game.events.GameEvent;
@@ -97,12 +99,12 @@ class PiasRevolutionReturnEffect extends OneShotEffect {
             if (permanent != null) {
                 Player opponent = game.getPlayer(source.getFirstTarget());
                 if (opponent != null) {
-                    if (opponent.chooseUse(outcome, new StringBuilder("Have Pia's Revolution deal 3 damage to you to prevent that ").append(permanent.getLogName()).append(" returns to ").append(controller.getLogName()).append("'s hand?").toString(), source, game)) {
-                        opponent.damage(3, source.getId(), game, false, true);
-                    } else {
-                        if (game.getState().getZone(permanent.getId()).equals(Zone.GRAVEYARD)) {
-                            controller.moveCards(game.getCard(permanentId), Zone.HAND, source, game);
-                        }
+                    if (opponent.chooseUse(outcome,
+                            "Have Pia's Revolution deal 3 damage to you to prevent that " + permanent.getIdName() + " returns to " + controller.getName() + "'s hand?",
+                            source, game)) {
+                        opponent.damage(3, source.getSourceId(), game, false, true);
+                    } else if (game.getState().getZone(permanent.getId()).equals(Zone.GRAVEYARD)) {
+                        controller.moveCards(game.getCard(permanentId), Zone.HAND, source, game);
                     }
                 }
             }
@@ -118,6 +120,7 @@ class PiasRevolutionTriggeredAbility extends TriggeredAbilityImpl {
 
     static {
         filter.add(Predicates.not(new TokenPredicate()));
+        filter.add(new OwnerPredicate(TargetController.YOU));
     }
 
     public PiasRevolutionTriggeredAbility() {
