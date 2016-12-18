@@ -67,7 +67,7 @@ class DarkSuspicionsEffect extends OneShotEffect {
 
     public DarkSuspicionsEffect() {
         super(Outcome.LoseLife);
-        staticText = "that player loses X life, where X is the number of cards in that player's hand minus the number of cards in your hand.";
+        staticText = "that player loses X life, where X is the number of cards in that player's hand minus the number of cards in your hand";
     }
 
     public DarkSuspicionsEffect(final mage.cards.d.DarkSuspicionsEffect effect) {
@@ -83,7 +83,7 @@ class DarkSuspicionsEffect extends OneShotEffect {
     public boolean apply(Game game, Ability source) {
         Player controller = game.getPlayer(source.getControllerId());
         Player opponent = game.getPlayer(this.getTargetPointer().getFirst(game, source));
-        if (opponent != null) {
+        if (controller != null && opponent != null) {
             int xValue = opponent.getHand().size() - controller.getHand().size();
             if (xValue > 0) {
                 opponent.loseLife(xValue, game, false);
