@@ -62,7 +62,7 @@ import mage.target.common.TargetCardInGraveyard;
 public class WrexialTheRisenDeep extends CardImpl {
 
     public WrexialTheRisenDeep(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{3}{U}{U}{B}");
+        super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{3}{U}{U}{B}");
         this.supertype.add("Legendary");
         this.subtype.add("Kraken");
 
@@ -90,8 +90,6 @@ public class WrexialTheRisenDeep extends CardImpl {
 
 class WrexialEffect extends OneShotEffect {
 
-    static final private FilterCard filter = new FilterCard("target instant or sorcery card from damaged player's graveyard");
-
     public WrexialEffect() {
         super(Outcome.PlayForFree);
         staticText = "you may cast target instant or sorcery card from that player's graveyard without paying its mana cost. If that card would be put into a graveyard this turn, exile it instead";
@@ -108,24 +106,27 @@ class WrexialEffect extends OneShotEffect {
 
     @Override
     public boolean apply(Game game, Ability source) {
-        Player you = game.getPlayer(source.getControllerId());
-        Player damagedPlayer = game.getPlayer(targetPointer.getFirst(game, source));
+        Player controller = game.getPlayer(source.getControllerId());
+        if (controller != null) {
+            Player damagedPlayer = game.getPlayer(targetPointer.getFirst(game, source));
+            if (damagedPlayer == null) {
+                return false;
+            }
+            FilterCard filter = new FilterCard("target instant or sorcery card from " + damagedPlayer.getName() + "'s graveyard");
+            filter.add(new OwnerIdPredicate(damagedPlayer.getId()));
+            filter.add(Predicates.or(
+                    new CardTypePredicate(CardType.INSTANT),
+                    new CardTypePredicate(CardType.SORCERY)));
 
-        filter.add(new OwnerIdPredicate(damagedPlayer.getId()));
-        filter.add(Predicates.or(
-                new CardTypePredicate(CardType.INSTANT),
-                new CardTypePredicate(CardType.SORCERY)));
-
-        Target target = new TargetCardInGraveyard(filter);
-
-        if (you != null) {
-            if (you.chooseTarget(Outcome.PlayForFree, target, source, game)) {
+            Target target = new TargetCardInGraveyard(filter);
+            if (controller.chooseTarget(Outcome.PlayForFree, target, source, game)) {
                 Card card = game.getCard(target.getFirstTarget());
                 if (card != null) {
-                    you.cast(card.getSpellAbility(), game, true);
+                    controller.cast(card.getSpellAbility(), game, true);
                     game.addEffect(new WrexialReplacementEffect(card.getId()), source);
                 }
             }
+            return true;
         }
         return false;
     }
