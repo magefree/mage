@@ -74,6 +74,7 @@ public class Planeshift extends ExpansionSet {
         cards.add(new SetCardInfo("Darigaaz's Caldera", 137, Rarity.UNCOMMON, mage.cards.d.DarigaazsCaldera.class));
         cards.add(new SetCardInfo("Darigaaz's Charm", 100, Rarity.UNCOMMON, mage.cards.d.DarigaazsCharm.class));
         cards.add(new SetCardInfo("Daring Leap", 101, Rarity.COMMON, mage.cards.d.DaringLeap.class));
+        cards.add(new SetCardInfo("Dark Suspicions", 40, Rarity.RARE, mage.cards.d.DarkSuspicions.class));
         cards.add(new SetCardInfo("Deadapult", 59, Rarity.RARE, mage.cards.d.Deadapult.class));
         cards.add(new SetCardInfo("Death Bomb", 41, Rarity.COMMON, mage.cards.d.DeathBomb.class));
         cards.add(new SetCardInfo("Destructive Flow", 102, Rarity.RARE, mage.cards.d.DestructiveFlow.class));
