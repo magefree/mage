@@ -126,8 +126,9 @@ public class PlayerView implements Serializable {
         } catch (ConcurrentModificationException e) {
             // can happen as a player left battlefield while PlayerView is created
         }
-        this.topCard = (player.isTopCardRevealed() && player.getLibrary().size() > 0)
-                ? new CardView(player.getLibrary().getFromTop(game)) : null;
+        Card cardOnTop = (player.isTopCardRevealed() && player.getLibrary().size() > 0)
+                ? player.getLibrary().getFromTop(game) : null;
+        this.topCard = cardOnTop != null ? new CardView(cardOnTop) : null;
         if (player.getUserData() != null) {
             this.userData = player.getUserData();
         } else {

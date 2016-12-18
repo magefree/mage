@@ -56,7 +56,7 @@ import mage.target.common.TargetOpponent;
 public class CarpetOfFlowers extends CardImpl {
 
     public CarpetOfFlowers(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.ENCHANTMENT},"{G}");
+        super(ownerId, setInfo, new CardType[]{CardType.ENCHANTMENT}, "{G}");
 
         // At the beginning of each of your main phases, if you haven't added mana to your mana pool with this ability this turn, you may add up to X mana of any one color to your mana pool, where X is the number of Islands target opponent controls.
         this.addAbility(new CarpetOfFlowersTriggeredAbility());
@@ -104,8 +104,7 @@ class CarpetOfFlowersTriggeredAbility extends TriggeredAbilityImpl {
         Boolean activatedThisTurn = (Boolean) game.getState().getValue(this.originalId.toString() + "addMana");
         if (activatedThisTurn == null) {
             return true;
-        }
-        else {
+        } else {
             return !activatedThisTurn;
         }
     }
@@ -170,7 +169,10 @@ class CarpetOfFlowersEffect extends ManaEffect {
             choiceCount.setChoices(set);
             choiceCount.setMessage("Choose number of mana");
             controller.choose(Outcome.PutManaInPool, choiceCount, game);
-            int count = Integer.parseInt(choiceCount.getChoice());
+            int count = 0;
+            if (choiceCount.getChoice() != null) {
+                count = Integer.parseInt(choiceCount.getChoice());
+            }
             if (count > 0) {
                 Mana mana = new Mana();
                 switch (choice.getChoice()) {

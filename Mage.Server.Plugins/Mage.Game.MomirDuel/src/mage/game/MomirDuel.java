@@ -29,7 +29,6 @@ package mage.game;
 
 import java.util.HashSet;
 import java.util.List;
-import java.util.Random;
 import java.util.Set;
 import java.util.UUID;
 import mage.abilities.Ability;
@@ -135,7 +134,6 @@ class MomirEmblem extends Emblem {
 }
 
 class MomirEffect extends OneShotEffect {
-
 
     public MomirEffect() {
         super(Outcome.PutCreatureInPlay);
