@@ -72,6 +72,7 @@ import mage.cards.decks.Deck;
 import mage.choices.Choice;
 import mage.constants.CardType;
 import mage.constants.Duration;
+import mage.constants.Layer;
 import mage.constants.MultiplayerAttackOption;
 import mage.constants.Outcome;
 import mage.constants.PhaseStep;
@@ -2321,6 +2322,23 @@ public abstract class GameImpl implements Game, Serializable {
                     perm.removeFromCombat(this, true);
                 }
                 it.remove();
+            } else if (perm.getControllerId().equals(player.getId())) {
+                // and any effects which give that player control of any objects or players end
+                Effects:
+                for (ContinuousEffect effect : getContinuousEffects().getLayeredEffects(this)) {
+                    if (effect.hasLayer(Layer.ControlChangingEffects_2)) {
+                        for (Ability ability : getContinuousEffects().getLayeredEffectAbilities(effect)) {
+                            for (Target target : ability.getTargets()) {
+                                for (UUID targetId : target.getTargets()) {
+                                    if (targetId.equals(perm.getId())) {
+                                        effect.discard();
+                                        continue Effects;
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
             }
         }
         // Then, if that player controlled any objects on the stack not represented by cards, those objects cease to exist.
@@ -2332,6 +2350,7 @@ public abstract class GameImpl implements Game, Serializable {
             }
         }
         // Then, if there are any objects still controlled by that player, those objects are exiled.
+        applyEffects(); // to remove control from effects removed meanwhile
         List<Permanent> permanents = this.getBattlefield().getAllActivePermanents(playerId);
         for (Permanent permanent : permanents) {
             permanent.moveToExile(null, "", null, this);

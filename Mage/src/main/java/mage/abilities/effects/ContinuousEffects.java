@@ -1066,6 +1066,10 @@ public class ContinuousEffects implements Serializable {
         }
     }
 
+    public HashSet<Ability> getLayeredEffectAbilities(ContinuousEffect effect) {
+        return layeredEffects.getAbility(effect.getId());
+    }
+
     /**
      * Adds a continuous ability with a reference to a sourceId. It's used for
      * effects that cease to exist again So this effects were removed again
