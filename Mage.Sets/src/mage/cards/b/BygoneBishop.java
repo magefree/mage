@@ -54,7 +54,7 @@ public class BygoneBishop extends CardImpl {
     }
 
     public BygoneBishop(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{2}{W}");
+        super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{2}{W}");
         this.subtype.add("Spirit");
         this.subtype.add("Cleric");
         this.power = new MageInt(2);
@@ -64,6 +64,7 @@ public class BygoneBishop extends CardImpl {
         this.addAbility(FlyingAbility.getInstance());
 
         // Whenever you cast a creature spell with converted mana cost 3 or less, investigate.
+        // (Put a colorless Clue artifact token onto the battlefield with "{2}, Sacrifice this artifact: Draw a card.")
         this.addAbility(new SpellCastControllerTriggeredAbility(new InvestigateEffect(), filterSpell, false));
     }
 
