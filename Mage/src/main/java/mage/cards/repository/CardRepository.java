@@ -37,15 +37,16 @@ import com.j256.ormlite.stmt.Where;
 import com.j256.ormlite.support.ConnectionSource;
 import com.j256.ormlite.support.DatabaseConnection;
 import com.j256.ormlite.table.TableUtils;
-import java.io.File;
-import java.sql.SQLException;
-import java.util.*;
-import java.util.concurrent.Callable;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.SetType;
 import mage.util.RandomUtil;
 import org.apache.log4j.Logger;
+
+import java.io.File;
+import java.sql.SQLException;
+import java.util.*;
+import java.util.concurrent.Callable;
 
 /**
  *
@@ -339,7 +340,7 @@ public enum CardRepository {
             return cardDao.query(queryBuilder.prepare());
         } catch (SQLException ex) {
         }
-        return new ArrayList<>();
+        return Collections.emptyList();
     }
 
     /**
@@ -392,7 +393,7 @@ public enum CardRepository {
             return cardDao.query(queryBuilder.prepare());
         } catch (SQLException ex) {
         }
-        return new ArrayList<>();
+        return Collections.emptyList();
     }
 
     public List<CardInfo> findCardsCaseInsensitive(String name) {
@@ -409,7 +410,7 @@ public enum CardRepository {
         } catch (SQLException ex) {
             Logger.getLogger(CardRepository.class).error("Error during execution of raw sql statement", ex);
         }
-        return new ArrayList<>();
+        return Collections.emptyList();
     }
 
     public List<CardInfo> findCards(CardCriteria criteria) {
@@ -421,7 +422,7 @@ public enum CardRepository {
         } catch (SQLException ex) {
             Logger.getLogger(CardRepository.class).error("Error during execution of card repository query statement", ex);
         }
-        return new ArrayList<>();
+        return Collections.emptyList();
     }
 
     public long getContentVersionFromDB() {
