@@ -115,7 +115,7 @@ public enum ExpansionRepository {
             QueryBuilder<ExpansionInfo, Object> qb = expansionDao.queryBuilder();
             qb.limit(1L).where().eq("code", new SelectArg(setCode));
             List<ExpansionInfo> expansions = expansionDao.query(qb.prepare());
-            if (expansions.size() > 0) {
+            if (!expansions.isEmpty()) {
                 set = expansions.get(0);
             }
         } catch (SQLException ex) {
@@ -129,7 +129,7 @@ public enum ExpansionRepository {
             QueryBuilder<ExpansionInfo, Object> qb = expansionDao.queryBuilder();
             qb.limit(1L).where().eq("name", new SelectArg(setName));
             List<ExpansionInfo> expansions = expansionDao.query(qb.prepare());
-            if (expansions.size() > 0) {
+            if (!expansions.isEmpty()) {
                 set = expansions.get(0);
             }
         } catch (SQLException ex) {

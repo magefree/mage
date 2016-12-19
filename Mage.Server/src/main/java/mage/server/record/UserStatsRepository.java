@@ -71,7 +71,7 @@ public enum UserStatsRepository {
             QueryBuilder<UserStats, Object> qb = dao.queryBuilder();
             qb.limit(1L).where().eq("userName", userName);
             List<UserStats> users = dao.query(qb.prepare());
-            if (users.size() == 1) {
+            if (!users.isEmpty()) {
                 return users.get(0);
             }
         } catch (SQLException ex) {
@@ -95,7 +95,7 @@ public enum UserStatsRepository {
           QueryBuilder<UserStats, Object> qb = dao.queryBuilder();
             qb.orderBy("endTimeMs", false).limit(1L);
           List<UserStats> users = dao.query(qb.prepare());
-          if (users.size() == 1) {
+            if (!users.isEmpty()) {
               return users.get(0).getEndTimeMs();
           }
         } catch (SQLException ex) {
