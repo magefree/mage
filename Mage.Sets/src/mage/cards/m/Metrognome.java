@@ -30,7 +30,7 @@ package mage.cards.m;
 import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.Ability;
-import mage.abilities.TriggeredAbilityImpl;
+import mage.abilities.common.DiscardedByOpponentTrigger;
 import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.costs.common.TapSourceCost;
 import mage.abilities.costs.mana.ManaCostsImpl;
@@ -39,11 +39,7 @@ import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Zone;
-import mage.game.Game;
-import mage.game.events.GameEvent.EventType;
-import mage.game.events.GameEvent;
 import mage.game.permanent.token.Token;
-import mage.game.stack.StackObject;
 
 /**
  *
@@ -52,10 +48,11 @@ import mage.game.stack.StackObject;
 public class Metrognome extends CardImpl {
 
     public Metrognome(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.ARTIFACT},"{4}");
+        super(ownerId, setInfo, new CardType[]{CardType.ARTIFACT}, "{4}");
 
         // When a spell or ability an opponent controls causes you to discard Metrognome, create four 1/1 colorless Gnome artifact creature tokens.
-        this.addAbility(new MetrognomeTriggeredAbility());
+        this.addAbility(new DiscardedByOpponentTrigger(new CreateTokenEffect(new GnomeToken(), 4)));
+
         // {4}, {tap}: Create a 1/1 colorless Gnome artifact creature token.
         Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new CreateTokenEffect(new GnomeToken()), new ManaCostsImpl("{4}"));
         ability.addCost(new TapSourceCost());
@@ -69,43 +66,6 @@ public class Metrognome extends CardImpl {
     @Override
     public Metrognome copy() {
         return new Metrognome(this);
-    }
-}
-
-class MetrognomeTriggeredAbility extends TriggeredAbilityImpl {
-
-    MetrognomeTriggeredAbility() {
-        super(Zone.ALL, new CreateTokenEffect(new GnomeToken(), 4));
-    }
-
-    MetrognomeTriggeredAbility(final MetrognomeTriggeredAbility ability) {
-        super(ability);
-    }
-
-    @Override
-    public MetrognomeTriggeredAbility copy() {
-        return new MetrognomeTriggeredAbility(this);
-    }
-
-    @Override
-    public boolean checkEventType(GameEvent event, Game game) {
-        return event.getType() == EventType.DISCARDED_CARD;
-    }
-
-    @Override
-    public boolean checkTrigger(GameEvent event, Game game) {
-        if (getSourceId().equals(event.getTargetId())) {
-            StackObject stackObject = game.getStack().getStackObject(event.getSourceId());
-            if (stackObject != null) {
-                return game.getOpponents(this.getControllerId()).contains(stackObject.getControllerId());
-            }
-        }
-        return false;
-    }
-
-    @Override
-    public String getRule() {
-        return "When a spell or ability an opponent controls causes you to discard {this}, " + super.getRule();
     }
 }
 

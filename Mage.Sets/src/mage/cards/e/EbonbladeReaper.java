@@ -29,21 +29,16 @@ package mage.cards.e;
 
 import java.util.UUID;
 import mage.MageInt;
-import mage.abilities.Ability;
 import mage.abilities.common.AttacksTriggeredAbility;
 import mage.abilities.common.DealsCombatDamageToAPlayerTriggeredAbility;
 import mage.abilities.costs.mana.ManaCostsImpl;
-import mage.abilities.effects.Effect;
-import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.LoseHalfLifeEffect;
+import mage.abilities.effects.common.LoseHalfLifeTargetEffect;
 import mage.abilities.keyword.MorphAbility;
 import mage.cards.Card;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.Outcome;
-import mage.game.Game;
-import mage.players.Player;
 
 /**
  *
@@ -52,7 +47,7 @@ import mage.players.Player;
 public class EbonbladeReaper extends CardImpl {
 
     public EbonbladeReaper(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{2}{B}");
+        super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{2}{B}");
         this.subtype.add("Human");
         this.subtype.add("Cleric");
 
@@ -63,7 +58,7 @@ public class EbonbladeReaper extends CardImpl {
         this.addAbility(new AttacksTriggeredAbility(new LoseHalfLifeEffect(), false));
 
         //Whenever Ebonblade Reaper deals combat damage to a player, that player loses half his or her life, rounded up.
-        this.addAbility(new DealsCombatDamageToAPlayerTriggeredAbility(new EbonbladeReaperEffect(), false, true));
+        this.addAbility(new DealsCombatDamageToAPlayerTriggeredAbility(new LoseHalfLifeTargetEffect(), false, true));
 
         //Morph {3}{B}{B}
         this.addAbility(new MorphAbility(this, new ManaCostsImpl<>("{3}{B}{B}")));
@@ -76,35 +71,5 @@ public class EbonbladeReaper extends CardImpl {
     @Override
     public Card copy() {
         return new EbonbladeReaper(this);
-    }
-}
-
-class EbonbladeReaperEffect extends OneShotEffect {
-
-    public EbonbladeReaperEffect() {
-        super(Outcome.Damage);
-        this.staticText = "that player loses half his or her life, rounded up";
-    }
-
-    public EbonbladeReaperEffect(final EbonbladeReaperEffect effect) {
-        super(effect);
-    }
-
-    @Override
-    public Effect copy() {
-        return new EbonbladeReaperEffect(this);
-    }
-
-    @Override
-    public boolean apply(Game game, Ability source) {
-        Player player = game.getPlayer(getTargetPointer().getFirst(game, source));
-        if (player != null) {
-            Integer amount = (int) Math.ceil(player.getLife() / 2f);
-            if (amount > 0) {
-                player.loseLife(amount, game, false);
-            }
-            return true;
-        }
-        return false;
     }
 }

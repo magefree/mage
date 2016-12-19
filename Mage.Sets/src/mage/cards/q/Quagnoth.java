@@ -29,18 +29,13 @@ package mage.cards.q;
 
 import java.util.UUID;
 import mage.MageInt;
-import mage.abilities.TriggeredAbilityImpl;
+import mage.abilities.common.DiscardedByOpponentTrigger;
 import mage.abilities.effects.common.ReturnToHandSourceEffect;
 import mage.abilities.keyword.ShroudAbility;
 import mage.abilities.keyword.SplitSecondAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.Zone;
-import mage.game.Game;
-import mage.game.events.GameEvent;
-import mage.game.events.GameEvent.EventType;
-import mage.game.stack.StackObject;
 
 /**
  *
@@ -49,7 +44,7 @@ import mage.game.stack.StackObject;
 public class Quagnoth extends CardImpl {
 
     public Quagnoth(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{5}{G}");
+        super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{5}{G}");
         this.subtype.add("Beast");
         this.power = new MageInt(4);
         this.toughness = new MageInt(5);
@@ -61,7 +56,7 @@ public class Quagnoth extends CardImpl {
         this.addAbility(ShroudAbility.getInstance());
 
         // When a spell or ability an opponent controls causes you to discard Quagnoth, return it to your hand.
-        this.addAbility(new QuagnothTriggeredAbility());
+        this.addAbility(new DiscardedByOpponentTrigger(new ReturnToHandSourceEffect()));
     }
 
     public Quagnoth(final Quagnoth card) {
@@ -71,42 +66,5 @@ public class Quagnoth extends CardImpl {
     @Override
     public Quagnoth copy() {
         return new Quagnoth(this);
-    }
-}
-
-class QuagnothTriggeredAbility extends TriggeredAbilityImpl {
-
-    QuagnothTriggeredAbility() {
-        super(Zone.GRAVEYARD, new ReturnToHandSourceEffect());
-    }
-
-    QuagnothTriggeredAbility(final QuagnothTriggeredAbility ability) {
-        super(ability);
-    }
-
-    @Override
-    public QuagnothTriggeredAbility copy() {
-        return new QuagnothTriggeredAbility(this);
-    }
-
-    @Override
-    public boolean checkEventType(GameEvent event, Game game) {
-        return event.getType() == EventType.DISCARDED_CARD;
-    }
-
-    @Override
-    public boolean checkTrigger(GameEvent event, Game game) {
-        if (getSourceId().equals(event.getTargetId())) {
-            StackObject stackObject = game.getStack().getStackObject(event.getSourceId());
-            if (stackObject != null) {
-                return game.getOpponents(this.getControllerId()).contains(stackObject.getControllerId());
-            }
-        }
-        return false;
-    }
-
-    @Override
-    public String getRule() {
-        return "When a spell or ability an opponent controls causes you to discard {this}, " + super.getRule();
     }
 }

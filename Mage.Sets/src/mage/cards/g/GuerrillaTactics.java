@@ -28,16 +28,12 @@
 package mage.cards.g;
 
 import java.util.UUID;
-import mage.abilities.TriggeredAbilityImpl;
+import mage.abilities.Ability;
+import mage.abilities.common.DiscardedByOpponentTrigger;
 import mage.abilities.effects.common.DamageTargetEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.Zone;
-import mage.game.Game;
-import mage.game.events.GameEvent;
-import mage.game.events.GameEvent.EventType;
-import mage.game.stack.StackObject;
 import mage.target.common.TargetCreatureOrPlayer;
 
 /**
@@ -47,13 +43,16 @@ import mage.target.common.TargetCreatureOrPlayer;
 public class GuerrillaTactics extends CardImpl {
 
     public GuerrillaTactics(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.INSTANT},"{1}{R}");
+        super(ownerId, setInfo, new CardType[]{CardType.INSTANT}, "{1}{R}");
 
         // Guerrilla Tactics deals 2 damage to target creature or player.
         this.getSpellAbility().addEffect(new DamageTargetEffect(2));
         this.getSpellAbility().addTarget(new TargetCreatureOrPlayer());
+
         // When a spell or ability an opponent controls causes you to discard Guerrilla Tactics, Guerrilla Tactics deals 4 damage to target creature or player.
-        this.addAbility(new GuerrillaTacticsTriggeredAbility());
+        Ability ability = new DiscardedByOpponentTrigger(new DamageTargetEffect(4));
+        ability.addTarget(new TargetCreatureOrPlayer());
+        this.addAbility(ability);
     }
 
     public GuerrillaTactics(final GuerrillaTactics card) {
@@ -63,43 +62,5 @@ public class GuerrillaTactics extends CardImpl {
     @Override
     public GuerrillaTactics copy() {
         return new GuerrillaTactics(this);
-    }
-}
-
-class GuerrillaTacticsTriggeredAbility extends TriggeredAbilityImpl {
-
-    GuerrillaTacticsTriggeredAbility() {
-        super(Zone.ALL, new DamageTargetEffect(4));
-        this.addTarget(new TargetCreatureOrPlayer());
-    }
-
-    GuerrillaTacticsTriggeredAbility(final GuerrillaTacticsTriggeredAbility ability) {
-        super(ability);
-    }
-
-    @Override
-    public GuerrillaTacticsTriggeredAbility copy() {
-        return new GuerrillaTacticsTriggeredAbility(this);
-    }
-
-    @Override
-    public boolean checkEventType(GameEvent event, Game game) {
-        return event.getType() == EventType.DISCARDED_CARD;
-    }
-
-    @Override
-    public boolean checkTrigger(GameEvent event, Game game) {
-        if (getSourceId().equals(event.getTargetId())) {
-            StackObject stackObject = game.getStack().getStackObject(event.getSourceId());
-            if (stackObject != null) {
-                return game.getOpponents(this.getControllerId()).contains(stackObject.getControllerId());
-            }
-        }
-        return false;
-    }
-
-    @Override
-    public String getRule() {
-        return "When a spell or ability an opponent controls causes you to discard {this}, " + super.getRule();
     }
 }

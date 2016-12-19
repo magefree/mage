@@ -29,6 +29,7 @@ package mage.cards.q;
 
 import java.util.UUID;
 import mage.abilities.TriggeredAbilityImpl;
+import mage.abilities.common.DiscardsACardOpponentTriggeredAbility;
 import mage.abilities.effects.Effect;
 import mage.abilities.effects.common.LoseLifeTargetEffect;
 import mage.abilities.effects.common.counter.AddCountersSourceEffect;
@@ -51,14 +52,13 @@ import mage.target.targetpointer.FixedTarget;
 public class QuestForTheNihilStone extends CardImpl {
 
     public QuestForTheNihilStone(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.ENCHANTMENT},"{B}");
-
+        super(ownerId, setInfo, new CardType[]{CardType.ENCHANTMENT}, "{B}");
 
         // Whenever an opponent discards a card, you may put a quest counter on Quest for the Nihil Stone.
-        this.addAbility(new QuestForTheNihilStoneTriggeredAbility());
+        this.addAbility(new DiscardsACardOpponentTriggeredAbility(new AddCountersSourceEffect(CounterType.QUEST.createInstance(), true), true));
 
         // At the beginning of each opponent's upkeep, if that player has no cards in hand and Quest for the Nihil Stone has two or more quest counters on it, you may have that player lose 5 life.
-        this.addAbility(new QuestForTheNihilStoneTriggeredAbility2());
+        this.addAbility(new QuestForTheNihilStoneTriggeredAbility());
     }
 
     public QuestForTheNihilStone(final QuestForTheNihilStone card) {
@@ -74,7 +74,7 @@ public class QuestForTheNihilStone extends CardImpl {
 class QuestForTheNihilStoneTriggeredAbility extends TriggeredAbilityImpl {
 
     public QuestForTheNihilStoneTriggeredAbility() {
-        super(Zone.BATTLEFIELD, new AddCountersSourceEffect(CounterType.QUEST.createInstance(), true), true);
+        super(Zone.BATTLEFIELD, new LoseLifeTargetEffect(5), true);
     }
 
     public QuestForTheNihilStoneTriggeredAbility(final QuestForTheNihilStoneTriggeredAbility ability) {
@@ -84,37 +84,6 @@ class QuestForTheNihilStoneTriggeredAbility extends TriggeredAbilityImpl {
     @Override
     public QuestForTheNihilStoneTriggeredAbility copy() {
         return new QuestForTheNihilStoneTriggeredAbility(this);
-    }
-
-    @Override
-    public boolean checkEventType(GameEvent event, Game game) {
-        return event.getType() == EventType.DISCARDED_CARD;
-    }
-
-    @Override
-    public boolean checkTrigger(GameEvent event, Game game) {
-        return game.getOpponents(controllerId).contains(event.getPlayerId());
-    }
-
-    @Override
-    public String getRule() {
-        return "Whenever an opponent discards a card, you may put a quest counter on {this}.";
-    }
-}
-
-class QuestForTheNihilStoneTriggeredAbility2 extends TriggeredAbilityImpl {
-
-    public QuestForTheNihilStoneTriggeredAbility2() {
-        super(Zone.BATTLEFIELD, new LoseLifeTargetEffect(5), true);
-    }
-
-    public QuestForTheNihilStoneTriggeredAbility2(final QuestForTheNihilStoneTriggeredAbility2 ability) {
-        super(ability);
-    }
-
-    @Override
-    public QuestForTheNihilStoneTriggeredAbility2 copy() {
-        return new QuestForTheNihilStoneTriggeredAbility2(this);
     }
 
     @Override

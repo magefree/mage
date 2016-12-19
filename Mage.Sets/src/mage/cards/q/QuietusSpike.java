@@ -28,12 +28,10 @@
 package mage.cards.q;
 
 import java.util.UUID;
-import mage.abilities.Ability;
-import mage.abilities.TriggeredAbilityImpl;
+import mage.abilities.common.DealsDamageToAPlayerAttachedTriggeredAbility;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.costs.mana.GenericManaCost;
-import mage.abilities.effects.Effect;
-import mage.abilities.effects.OneShotEffect;
+import mage.abilities.effects.common.LoseHalfLifeTargetEffect;
 import mage.abilities.effects.common.continuous.GainAbilityAttachedEffect;
 import mage.abilities.keyword.DeathtouchAbility;
 import mage.abilities.keyword.EquipAbility;
@@ -43,13 +41,6 @@ import mage.constants.AttachmentType;
 import mage.constants.CardType;
 import mage.constants.Outcome;
 import mage.constants.Zone;
-import mage.game.Game;
-import mage.game.events.DamagedPlayerEvent;
-import mage.game.events.GameEvent;
-import mage.game.events.GameEvent.EventType;
-import mage.game.permanent.Permanent;
-import mage.players.Player;
-import mage.target.targetpointer.FixedTarget;
 
 /**
  *
@@ -58,13 +49,15 @@ import mage.target.targetpointer.FixedTarget;
 public class QuietusSpike extends CardImpl {
 
     public QuietusSpike(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.ARTIFACT},"{3}");
+        super(ownerId, setInfo, new CardType[]{CardType.ARTIFACT}, "{3}");
         this.subtype.add("Equipment");
 
         // Equipped creature has deathtouch.
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new GainAbilityAttachedEffect(DeathtouchAbility.getInstance(), AttachmentType.EQUIPMENT)));
+
         // Whenever equipped creature deals combat damage to a player, that player loses half his or her life, rounded up.
-        this.addAbility(new QuietusSpikeTriggeredAbility());
+        this.addAbility(new DealsDamageToAPlayerAttachedTriggeredAbility(new LoseHalfLifeTargetEffect(), "equipped", false, true));
+
         // Equip {3}
         this.addAbility(new EquipAbility(Outcome.AddAbility, new GenericManaCost(3)));
     }
@@ -76,74 +69,5 @@ public class QuietusSpike extends CardImpl {
     @Override
     public QuietusSpike copy() {
         return new QuietusSpike(this);
-    }
-}
-
-class QuietusSpikeTriggeredAbility extends TriggeredAbilityImpl {
-
-    public QuietusSpikeTriggeredAbility() {
-        super(Zone.BATTLEFIELD, new QuietusSpikeEffect());
-    }
-
-    public QuietusSpikeTriggeredAbility(final QuietusSpikeTriggeredAbility ability) {
-        super(ability);
-    }
-
-    @Override
-    public QuietusSpikeTriggeredAbility copy() {
-        return new QuietusSpikeTriggeredAbility(this);
-    }
-
-    @Override
-    public boolean checkEventType(GameEvent event, Game game) {
-        return event.getType() == EventType.DAMAGED_PLAYER;
-    }
-
-    @Override
-    public boolean checkTrigger(GameEvent event, Game game) {
-        DamagedPlayerEvent damageEvent = (DamagedPlayerEvent) event;
-        Permanent p = game.getPermanent(event.getSourceId());
-        if (damageEvent.isCombatDamage() && p != null && p.getAttachments().contains(this.getSourceId())) {
-            for (Effect effect : this.getEffects()) {
-                effect.setTargetPointer(new FixedTarget(event.getPlayerId()));
-            }
-            return true;
-        }
-        return false;
-    }
-
-    @Override
-    public String getRule() {
-        return "Whenever equipped creature deals combat damage to a player, " + super.getRule();
-    }
-}
-
-class QuietusSpikeEffect extends OneShotEffect {
-
-    public QuietusSpikeEffect() {
-        super(Outcome.Damage);
-        this.staticText = "that player loses half his or her life, rounded up";
-    }
-
-    public QuietusSpikeEffect(final QuietusSpikeEffect effect) {
-        super(effect);
-    }
-
-    @Override
-    public QuietusSpikeEffect copy() {
-        return new QuietusSpikeEffect(this);
-    }
-
-    @Override
-    public boolean apply(Game game, Ability source) {
-        Player player = game.getPlayer(getTargetPointer().getFirst(game, source));
-        if (player != null) {
-            Integer amount = (int) Math.ceil(player.getLife() / 2f);
-            if (amount > 0) {
-                player.loseLife(amount, game, false);
-            }
-            return true;
-        }
-        return false;
     }
 }
