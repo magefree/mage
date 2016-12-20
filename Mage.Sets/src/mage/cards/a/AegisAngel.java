@@ -25,7 +25,6 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-
 package mage.cards.a;
 
 import java.util.UUID;
@@ -44,7 +43,6 @@ import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.filter.FilterPermanent;
 import mage.filter.predicate.permanent.AnotherPredicate;
-import mage.target.Target;
 import mage.target.TargetPermanent;
 
 /**
@@ -59,7 +57,7 @@ public class AegisAngel extends CardImpl {
     }
 
     public AegisAngel(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{4}{W}{W}");
+        super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{4}{W}{W}");
         this.subtype.add("Angel");
 
         this.power = new MageInt(5);
@@ -69,14 +67,12 @@ public class AegisAngel extends CardImpl {
         this.addAbility(FlyingAbility.getInstance());
 
         // When Aegis Angel enters the battlefield, another target permanent is indestructible for as long as you control Aegis Angel.
-
         ConditionalContinuousEffect effect = new ConditionalContinuousEffect(
                 new GainAbilityTargetEffect(IndestructibleAbility.getInstance(), Duration.Custom),
                 new SourceOnBattlefieldControlUnchangedCondition(),
                 "another target permanent is indestructible for as long as you control Aegis Angel");
         Ability ability = new EntersBattlefieldTriggeredAbility(effect, false);
-        Target target = new TargetPermanent(filter);
-        ability.addTarget(target);
+        ability.addTarget(new TargetPermanent(filter));
         this.addAbility(ability);
     }
 
