@@ -27,25 +27,14 @@
  */
 package mage.cards.c;
 
-import java.util.Set;
 import java.util.UUID;
-import mage.MageObject;
-import mage.abilities.Ability;
-import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.ExileSpellEffect;
-import mage.cards.Card;
+import mage.abilities.effects.common.WishEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
-import mage.cards.Cards;
-import mage.cards.CardsImpl;
 import mage.constants.CardType;
-import mage.constants.Outcome;
-import mage.constants.Zone;
 import mage.filter.FilterCard;
 import mage.filter.predicate.mageobject.CardTypePredicate;
-import mage.game.Game;
-import mage.players.Player;
-import mage.target.TargetCard;
 
 /**
  *
@@ -53,11 +42,19 @@ import mage.target.TargetCard;
  */
 public class CunningWish extends CardImpl {
 
+    private static final FilterCard filter = new FilterCard("an instant card");
+
+    static {
+        filter.add(new CardTypePredicate(CardType.INSTANT));
+    }
+
     public CunningWish(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.INSTANT}, "{2}{U}");
 
-        // You may choose an instant card you own from outside the game, reveal that card, and put it into your hand. Exile Cunning Wish.
-        this.getSpellAbility().addEffect(new CunningWishEffect());
+        // You may choose an instant card you own from outside the game, reveal that card, and put it into your hand.
+        this.getSpellAbility().addEffect(new WishEffect(filter));
+
+        // Exile Cunning Wish.
         this.getSpellAbility().addEffect(ExileSpellEffect.getInstance());
     }
 
@@ -69,71 +66,4 @@ public class CunningWish extends CardImpl {
     public CunningWish copy() {
         return new CunningWish(this);
     }
-}
-
-class CunningWishEffect extends OneShotEffect {
-
-    private static final String choiceText = "Choose an instant card you own from outside the game, and put it into your hand";
-
-    private static final FilterCard filter = new FilterCard("instant card");
-
-    static {
-        filter.add(new CardTypePredicate(CardType.INSTANT));
-    }
-
-    public CunningWishEffect() {
-        super(Outcome.Benefit);
-        this.staticText = "You may choose an instant card you own from outside the game, reveal that card, and put it into your hand";
-    }
-
-    public CunningWishEffect(final CunningWishEffect effect) {
-        super(effect);
-    }
-
-    @Override
-    public CunningWishEffect copy() {
-        return new CunningWishEffect(this);
-    }
-
-    @Override
-    public boolean apply(Game game, Ability source) {
-        Player controller = game.getPlayer(source.getControllerId());
-        MageObject sourceObject = source.getSourceObject(game);
-        if (controller != null && sourceObject != null) {
-            while (controller.chooseUse(Outcome.Benefit, choiceText, source, game)) {
-                Cards cards = controller.getSideboard();
-                if (cards.isEmpty()) {
-                    game.informPlayer(controller, "You have no cards outside the game.");
-                    break;
-                }
-
-                Set<Card> filtered = cards.getCards(filter, game);
-                if (filtered.isEmpty()) {
-                    game.informPlayer(controller, "You have no " + filter.getMessage() + " outside the game.");
-                    break;
-                }
-
-                Cards filteredCards = new CardsImpl();
-                for (Card card : filtered) {
-                    filteredCards.add(card.getId());
-                }
-
-                TargetCard target = new TargetCard(Zone.OUTSIDE, filter);
-                if (controller.choose(Outcome.Benefit, filteredCards, target, game)) {
-                    Card card = controller.getSideboard().get(target.getFirstTarget(), game);
-                    if (card != null) {
-
-                        card.moveToZone(Zone.HAND, source.getSourceId(), game, false);
-                        Cards revealCard = new CardsImpl();
-                        revealCard.add(card);
-                        controller.revealCards(sourceObject.getIdName(), revealCard, game);
-                        break;
-                    }
-                }
-            }
-            return true;
-        }
-        return false;
-    }
-
 }

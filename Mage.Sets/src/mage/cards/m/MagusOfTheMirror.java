@@ -34,15 +34,12 @@ import mage.abilities.condition.common.IsStepCondition;
 import mage.abilities.costs.common.SacrificeSourceCost;
 import mage.abilities.costs.common.TapSourceCost;
 import mage.abilities.decorator.ConditionalActivatedAbility;
-import mage.abilities.effects.OneShotEffect;
+import mage.abilities.effects.common.ExchangeLifeTargetEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.Outcome;
 import mage.constants.PhaseStep;
 import mage.constants.Zone;
-import mage.game.Game;
-import mage.players.Player;
 import mage.target.common.TargetOpponent;
 
 /**
@@ -52,7 +49,7 @@ import mage.target.common.TargetOpponent;
 public class MagusOfTheMirror extends CardImpl {
 
     public MagusOfTheMirror(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{4}{B}{B}");
+        super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{4}{B}{B}");
         this.subtype.add("Human");
         this.subtype.add("Wizard");
         this.power = new MageInt(4);
@@ -60,8 +57,8 @@ public class MagusOfTheMirror extends CardImpl {
 
         // {tap}, Sacrifice Magus of the Mirror: Exchange life totals with target opponent. Activate this ability only during your upkeep.
         Ability ability = new ConditionalActivatedAbility(
-                Zone.BATTLEFIELD, 
-                new MagusOfTheMirrorEffect(), 
+                Zone.BATTLEFIELD,
+                new ExchangeLifeTargetEffect(),
                 new TapSourceCost(),
                 new IsStepCondition(PhaseStep.UPKEEP),
                 null);
@@ -77,50 +74,5 @@ public class MagusOfTheMirror extends CardImpl {
     @Override
     public MagusOfTheMirror copy() {
         return new MagusOfTheMirror(this);
-    }
-}
-
-class MagusOfTheMirrorEffect extends OneShotEffect {
-
-    public MagusOfTheMirrorEffect() {
-        super(Outcome.Neutral);
-        this.staticText = "Exchange life totals with target opponent";
-    }
-
-    public MagusOfTheMirrorEffect(final MagusOfTheMirrorEffect effect) {
-        super(effect);
-    }
-
-    @Override
-    public MagusOfTheMirrorEffect copy() {
-        return new MagusOfTheMirrorEffect(this);
-    }
-
-    @Override
-    public boolean apply(Game game, Ability source) {
-        Player controller = game.getPlayer(source.getControllerId());
-        Player opponent = game.getPlayer(source.getFirstTarget());
-        if (controller != null && opponent != null) {
-            int lifeController = controller.getLife();
-            int lifeOpponent = opponent.getLife();
-
-            if (lifeController == lifeOpponent)
-                return false;
-
-            if (!controller.isLifeTotalCanChange() || !opponent.isLifeTotalCanChange())
-                return false;
-
-            // 20110930 - 118.7, 118.8
-            if (lifeController < lifeOpponent && (!controller.isCanGainLife() || !opponent.isCanLoseLife()))
-                return false;
-
-            if (lifeController > lifeOpponent && (!controller.isCanLoseLife() || !opponent.isCanGainLife()))
-                return false;
-
-            controller.setLife(lifeOpponent, game);
-            opponent.setLife(lifeController, game);
-            return true;
-        }
-        return false;
     }
 }

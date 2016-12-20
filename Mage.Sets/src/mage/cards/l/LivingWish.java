@@ -27,26 +27,15 @@
  */
 package mage.cards.l;
 
-import java.util.Set;
 import java.util.UUID;
-import mage.MageObject;
-import mage.abilities.Ability;
-import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.ExileSpellEffect;
-import mage.cards.Card;
+import mage.abilities.effects.common.WishEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
-import mage.cards.Cards;
-import mage.cards.CardsImpl;
 import mage.constants.CardType;
-import mage.constants.Outcome;
-import mage.constants.Zone;
 import mage.filter.FilterCard;
 import mage.filter.predicate.Predicates;
 import mage.filter.predicate.mageobject.CardTypePredicate;
-import mage.game.Game;
-import mage.players.Player;
-import mage.target.TargetCard;
 
 /**
  *
@@ -54,11 +43,21 @@ import mage.target.TargetCard;
  */
 public class LivingWish extends CardImpl {
 
+    private static final FilterCard filter = new FilterCard("creature or land card");
+
+    static {
+        filter.add(Predicates.or(
+                new CardTypePredicate(CardType.CREATURE),
+                new CardTypePredicate(CardType.LAND)));
+    }
+
     public LivingWish(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.SORCERY}, "{1}{G}");
 
-        // You may choose a creature or land card you own from outside the game, reveal that card, and put it into your hand. Exile Living Wish.
-        this.getSpellAbility().addEffect(new LivingWishEffect());
+        // You may choose a creature or land card you own from outside the game, reveal that card, and put it into your hand.
+        this.getSpellAbility().addEffect(new WishEffect(filter));
+
+        // Exile Living Wish.
         this.getSpellAbility().addEffect(ExileSpellEffect.getInstance());
     }
 
@@ -70,73 +69,4 @@ public class LivingWish extends CardImpl {
     public LivingWish copy() {
         return new LivingWish(this);
     }
-}
-
-class LivingWishEffect extends OneShotEffect {
-
-    private static final String choiceText = "Choose a creature or land card you own from outside the game, and put it into your hand";
-
-    private static final FilterCard filter = new FilterCard("creature or land card");
-
-    static {
-        filter.add(Predicates.or(
-                new CardTypePredicate(CardType.CREATURE),
-                new CardTypePredicate(CardType.LAND)));
-    }
-
-    public LivingWishEffect() {
-        super(Outcome.Benefit);
-        this.staticText = "You may choose a creature or land card you own from outside the game, reveal that card, and put it into your hand";
-    }
-
-    public LivingWishEffect(final LivingWishEffect effect) {
-        super(effect);
-    }
-
-    @Override
-    public LivingWishEffect copy() {
-        return new LivingWishEffect(this);
-    }
-
-    @Override
-    public boolean apply(Game game, Ability source) {
-        Player controller = game.getPlayer(source.getControllerId());
-        MageObject sourceObject = source.getSourceObject(game);
-        if (controller != null && sourceObject != null) {
-            while (controller.chooseUse(Outcome.Benefit, choiceText, source, game)) {
-                Cards cards = controller.getSideboard();
-                if (cards.isEmpty()) {
-                    game.informPlayer(controller, "You have no cards outside the game.");
-                    break;
-                }
-
-                Set<Card> filtered = cards.getCards(filter, game);
-                if (filtered.isEmpty()) {
-                    game.informPlayer(controller, "You have no " + filter.getMessage() + " outside the game.");
-                    break;
-                }
-
-                Cards filteredCards = new CardsImpl();
-                for (Card card : filtered) {
-                    filteredCards.add(card.getId());
-                }
-
-                TargetCard target = new TargetCard(Zone.OUTSIDE, filter);
-                if (controller.choose(Outcome.Benefit, filteredCards, target, game)) {
-                    Card card = controller.getSideboard().get(target.getFirstTarget(), game);
-                    if (card != null) {
-
-                        card.moveToZone(Zone.HAND, source.getSourceId(), game, false);
-                        Cards revealCard = new CardsImpl();
-                        revealCard.add(card);
-                        controller.revealCards(sourceObject.getIdName(), revealCard, game);
-                        break;
-                    }
-                }
-            }
-            return true;
-        }
-        return false;
-    }
-
 }

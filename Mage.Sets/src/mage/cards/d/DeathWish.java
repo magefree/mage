@@ -28,20 +28,13 @@
 package mage.cards.d;
 
 import java.util.UUID;
-import mage.abilities.Ability;
-import mage.abilities.effects.OneShotEffect;
-import mage.abilities.effects.common.ExileSourceEffect;
-import mage.cards.Card;
+import mage.abilities.effects.common.ExileSpellEffect;
+import mage.abilities.effects.common.LoseHalfLifeEffect;
+import mage.abilities.effects.common.WishEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
-import mage.cards.Cards;
 import mage.constants.CardType;
-import mage.constants.Outcome;
-import mage.constants.Zone;
 import mage.filter.FilterCard;
-import mage.game.Game;
-import mage.players.Player;
-import mage.target.TargetCard;
 
 /**
  *
@@ -50,11 +43,16 @@ import mage.target.TargetCard;
 public class DeathWish extends CardImpl {
 
     public DeathWish(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{1}{B}{B}");
+        super(ownerId, setInfo, new CardType[]{CardType.SORCERY}, "{1}{B}{B}");
 
-        // You may choose a card you own from outside the game and put it into your hand. You lose half your life, rounded up. Exile Death Wish.
-        this.getSpellAbility().addEffect(new DeathWishEffect());
-        this.getSpellAbility().addEffect(new ExileSourceEffect());
+        // You may choose a card you own from outside the game and put it into your hand. 
+        this.getSpellAbility().addEffect(new WishEffect(new FilterCard(), false));
+
+        // You lose half your life, rounded up. 
+        this.getSpellAbility().addEffect(new LoseHalfLifeEffect());
+
+        // Exile Death Wish.
+        this.getSpellAbility().addEffect(ExileSpellEffect.getInstance());
     }
 
     public DeathWish(final DeathWish card) {
@@ -65,52 +63,4 @@ public class DeathWish extends CardImpl {
     public DeathWish copy() {
         return new DeathWish(this);
     }
-}
-
-class DeathWishEffect extends OneShotEffect {
-
-    private static final String choiceText = "Choose a card you own from outside the game, and put it into your hand";
-
-    public DeathWishEffect() {
-        super(Outcome.Benefit);
-        this.staticText = "You may choose a card you own from outside the game, reveal that card, and put it into your hand. You lose half your life, rounded up";
-    }
-
-    public DeathWishEffect(final DeathWishEffect effect) {
-        super(effect);
-    }
-
-    @Override
-    public DeathWishEffect copy() {
-        return new DeathWishEffect(this);
-    }
-
-    @Override
-    public boolean apply(Game game, Ability source) {
-        Player controller = game.getPlayer(source.getControllerId());
-        if (controller != null) {
-            if (controller.chooseUse(Outcome.Benefit, choiceText, source, game)) {
-                Cards cards = controller.getSideboard();
-                if (cards.isEmpty()) {
-                    game.informPlayer(controller, "You have no cards outside the game.");
-                } else {
-                    TargetCard target = new TargetCard(Zone.OUTSIDE, new FilterCard());
-                    if (controller.choose(Outcome.Benefit, cards, target, game)) {
-                        Card card = controller.getSideboard().get(target.getFirstTarget(), game);
-                        if (card != null) {
-                            controller.moveCards(card, Zone.HAND, source, game);
-                        }
-                    }
-                }
-            }
-
-            int amount = (controller.getLife() + 1) / 2;
-            if (amount > 0) {
-                controller.loseLife(amount, game, false);
-            }
-            return true;
-        }
-        return false;
-    }
-
 }

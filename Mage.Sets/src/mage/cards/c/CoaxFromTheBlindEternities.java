@@ -27,25 +27,13 @@
  */
 package mage.cards.c;
 
-import java.util.List;
-import java.util.Set;
 import java.util.UUID;
-import mage.MageObject;
-import mage.abilities.Ability;
-import mage.abilities.effects.OneShotEffect;
-import mage.cards.Card;
+import mage.abilities.effects.common.WishEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
-import mage.cards.Cards;
-import mage.cards.CardsImpl;
 import mage.constants.CardType;
-import mage.constants.Outcome;
-import mage.constants.Zone;
 import mage.filter.FilterCard;
 import mage.filter.predicate.mageobject.SubtypePredicate;
-import mage.game.Game;
-import mage.players.Player;
-import mage.target.TargetCard;
 
 /**
  *
@@ -53,11 +41,17 @@ import mage.target.TargetCard;
  */
 public class CoaxFromTheBlindEternities extends CardImpl {
 
+    private static final FilterCard filter = new FilterCard("an Eldrazi card");
+
+    static {
+        filter.add(new SubtypePredicate("Eldrazi"));
+    }
+
     public CoaxFromTheBlindEternities(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{2}{U}");
+        super(ownerId, setInfo, new CardType[]{CardType.SORCERY}, "{2}{U}");
 
         // You may choose an Eldrazi card you own from outside the game or in exile, reveal that card, and put it into your hand.
-        this.getSpellAbility().addEffect(new CoaxFromTheBlindEternitiesEffect());
+        this.getSpellAbility().addEffect(new WishEffect(filter, true, true));
     }
 
     public CoaxFromTheBlindEternities(final CoaxFromTheBlindEternities card) {
@@ -67,74 +61,5 @@ public class CoaxFromTheBlindEternities extends CardImpl {
     @Override
     public CoaxFromTheBlindEternities copy() {
         return new CoaxFromTheBlindEternities(this);
-    }
-}
-
-class CoaxFromTheBlindEternitiesEffect extends OneShotEffect {
-
-    private static final String choiceText = "Choose a Eldrazi card you own from outside the game (sideboard) or in exile, and put it into your hand?";
-
-    private static final FilterCard filter = new FilterCard("Eldrazi card");
-
-    static {
-        filter.add(new SubtypePredicate("Eldrazi"));
-    }
-
-    public CoaxFromTheBlindEternitiesEffect() {
-        super(Outcome.Benefit);
-        this.staticText = "You may choose an Eldrazi card you own from outside the game or in exile, reveal that card, and put it into your hand";
-    }
-
-    public CoaxFromTheBlindEternitiesEffect(final CoaxFromTheBlindEternitiesEffect effect) {
-        super(effect);
-    }
-
-    @Override
-    public CoaxFromTheBlindEternitiesEffect copy() {
-        return new CoaxFromTheBlindEternitiesEffect(this);
-    }
-
-    @Override
-    public boolean apply(Game game, Ability source) {
-        Player controller = game.getPlayer(source.getControllerId());
-        MageObject sourceObject = source.getSourceObject(game);
-        if (controller != null && sourceObject != null) {
-            if (controller.chooseUse(Outcome.Benefit, choiceText, source, game)) {
-                Set<Card> sideboard = controller.getSideboard().getCards(filter, game);
-                List<Card> exile = game.getExile().getAllCards(game);
-                Cards filteredCards = new CardsImpl();
-                Card card = null;
-
-                for (Card sideboardCard : sideboard) {
-                    filteredCards.add(sideboardCard.getId());
-                }
-                for (Card exileCard : exile) {
-                    if (exileCard.getOwnerId().equals(source.getControllerId()) && exileCard.hasSubtype("Eldrazi", game)) {
-                        filteredCards.add(exileCard);
-                    }
-                }
-
-                if (filteredCards.isEmpty()) {
-                    game.informPlayer(controller, "You have no " + filter.getMessage() + " outside the game (your sideboard) or in exile.");
-                }
-                else {
-                    TargetCard target = new TargetCard(Zone.OUTSIDE, filter);
-                    target.setNotTarget(true);
-                    if (controller.choose(outcome, filteredCards, target, game)) {
-                        card = controller.getSideboard().get(target.getFirstTarget(), game);
-                        if (card == null) {
-                            card = game.getCard(target.getFirstTarget());
-                        }
-                    }
-                }
-
-                if (card != null) {
-                    card.moveToZone(Zone.HAND, source.getSourceId(), game, false);
-                    controller.revealCards(sourceObject.getIdName(), new CardsImpl(card), game);
-                }
-            }
-            return true;
-        }
-        return false;
     }
 }

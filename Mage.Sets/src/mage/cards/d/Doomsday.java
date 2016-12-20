@@ -30,6 +30,7 @@ package mage.cards.d;
 import java.util.UUID;
 import mage.abilities.Ability;
 import mage.abilities.effects.OneShotEffect;
+import mage.abilities.effects.common.LoseHalfLifeEffect;
 import mage.cards.Card;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
@@ -50,11 +51,13 @@ import mage.target.TargetCard;
 public class Doomsday extends CardImpl {
 
     public Doomsday(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{B}{B}{B}");
+        super(ownerId, setInfo, new CardType[]{CardType.SORCERY}, "{B}{B}{B}");
 
-
-        // Search your library and graveyard for five cards and exile the rest. Put the chosen cards on top of your library in any order. You lose half your life, rounded up.
+        // Search your library and graveyard for five cards and exile the rest. Put the chosen cards on top of your library in any order.
         this.getSpellAbility().addEffect(new DoomsdayEffect());
+
+        // You lose half your life, rounded up.
+        this.getSpellAbility().addEffect(new LoseHalfLifeEffect());
     }
 
     public Doomsday(final Doomsday card) {
@@ -66,7 +69,6 @@ public class Doomsday extends CardImpl {
         return new Doomsday(this);
     }
 }
-
 
 class DoomsdayEffect extends OneShotEffect {
 
@@ -87,7 +89,7 @@ class DoomsdayEffect extends OneShotEffect {
     @Override
     public boolean apply(Game game, Ability source) {
         Player player = game.getPlayer(source.getControllerId());
-        
+
         if (player != null) {
             //Search your library and graveyard for five cards
             Cards allCards = new CardsImpl();
@@ -96,20 +98,19 @@ class DoomsdayEffect extends OneShotEffect {
             allCards.addAll(player.getGraveyard());
             int number = Math.min(5, allCards.size());
             TargetCard target = new TargetCard(number, number, Zone.ALL, new FilterCard());
-            
-            if (player.choose(Outcome.Benefit, allCards, target, game)){
+
+            if (player.choose(Outcome.Benefit, allCards, target, game)) {
                 // exile the rest
-                for(UUID uuid : allCards){
-                    if(!target.getTargets().contains(uuid)){
+                for (UUID uuid : allCards) {
+                    if (!target.getTargets().contains(uuid)) {
                         Card card = game.getCard(uuid);
-                        if(card != null){
+                        if (card != null) {
                             card.moveToExile(null, "Doomsday", source.getSourceId(), game);
-                        }      
-                    }
-                    else{
+                        }
+                    } else {
                         cards.add(uuid);
                     }
-                    
+
                 }
                 //Put the chosen cards on top of your library in any order
                 target = new TargetCard(Zone.ALL, new FilterCard("Card to put on top"));
@@ -126,12 +127,6 @@ class DoomsdayEffect extends OneShotEffect {
                     Card card = cards.get(cards.iterator().next(), game);
                     card.moveToZone(Zone.LIBRARY, source.getSourceId(), game, true);
                 }
-            }
-            
-            //You lose half your life, rounded up
-            int amount = (player.getLife() + 1) / 2;
-            if (amount > 0) {
-                player.loseLife(amount, game, false);
             }
 
             return true;

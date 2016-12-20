@@ -321,6 +321,7 @@ public class FifthEdition extends ExpansionSet {
         cards.add(new SetCardInfo("Psychic Venom", 113, Rarity.COMMON, mage.cards.p.PsychicVenom.class));
         cards.add(new SetCardInfo("Pyroblast", 262, Rarity.UNCOMMON, mage.cards.p.Pyroblast.class));
         cards.add(new SetCardInfo("Pyrotechnics", 263, Rarity.UNCOMMON, mage.cards.p.Pyrotechnics.class));
+        cards.add(new SetCardInfo("Rabid Wombat", 181, Rarity.UNCOMMON, mage.cards.r.RabidWombat.class));
         cards.add(new SetCardInfo("Radjan Spirit", 182, Rarity.UNCOMMON, mage.cards.r.RadjanSpirit.class));
         cards.add(new SetCardInfo("Rag Man", 52, Rarity.RARE, mage.cards.r.RagMan.class));
         cards.add(new SetCardInfo("Raise Dead", 53, Rarity.COMMON, mage.cards.r.RaiseDead.class));

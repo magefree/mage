@@ -165,6 +165,7 @@ public class MastersEdition extends ExpansionSet {
         cards.add(new SetCardInfo("Mana Flare", 103, Rarity.RARE, mage.cards.m.ManaFlare.class));
         cards.add(new SetCardInfo("Marton Stromgald", 104, Rarity.RARE, mage.cards.m.MartonStromgald.class));
         cards.add(new SetCardInfo("Mindstab Thrull", 76, Rarity.COMMON, MindstabThrull.class));
+        cards.add(new SetCardInfo("Mirror Universe", 159, Rarity.RARE, mage.cards.m.MirrorUniverse.class));
         cards.add(new SetCardInfo("Mishra's Factory", 178, Rarity.UNCOMMON, mage.cards.m.MishrasFactory.class));
         cards.add(new SetCardInfo("Moat", 21, Rarity.RARE, mage.cards.m.Moat.class));
         cards.add(new SetCardInfo("Mountain", 190, Rarity.LAND, mage.cards.basiclands.Mountain.class, new CardGraphicInfo(null, true)));
@@ -193,6 +194,7 @@ public class MastersEdition extends ExpansionSet {
         cards.add(new SetCardInfo("Primal Order", 125, Rarity.RARE, mage.cards.p.PrimalOrder.class));
         cards.add(new SetCardInfo("Psychic Venom", 46, Rarity.COMMON, mage.cards.p.PsychicVenom.class));
         cards.add(new SetCardInfo("Pyroblast", 107, Rarity.COMMON, mage.cards.p.Pyroblast.class));
+        cards.add(new SetCardInfo("Rabid Wombat", 126, Rarity.UNCOMMON, mage.cards.r.RabidWombat.class));
         cards.add(new SetCardInfo("Rainbow Vale", 179, Rarity.RARE, mage.cards.r.RainbowVale.class));
         cards.add(new SetCardInfo("Righteous Avengers", 25, Rarity.COMMON, mage.cards.r.RighteousAvengers.class));
         cards.add(new SetCardInfo("River Merfolk", 47, Rarity.COMMON, mage.cards.r.RiverMerfolk.class));

@@ -108,6 +108,7 @@ public class Chronicles extends ExpansionSet {
         cards.add(new SetCardInfo("Nicol Bolas", 116, Rarity.RARE, mage.cards.n.NicolBolas.class));
         cards.add(new SetCardInfo("Obelisk of Undoing", 84, Rarity.RARE, mage.cards.o.ObeliskOfUndoing.class));
         cards.add(new SetCardInfo("Palladia-Mors", 117, Rarity.RARE, mage.cards.p.PalladiaMors.class));
+        cards.add(new SetCardInfo("Rabid Wombat", 39, Rarity.UNCOMMON, mage.cards.r.RabidWombat.class));
         cards.add(new SetCardInfo("Rakalite", 85, Rarity.RARE, mage.cards.r.Rakalite.class));
         cards.add(new SetCardInfo("Recall", 24, Rarity.UNCOMMON, mage.cards.r.Recall.class));
         cards.add(new SetCardInfo("Remove Soul", 25, Rarity.COMMON, mage.cards.r.RemoveSoul.class));
