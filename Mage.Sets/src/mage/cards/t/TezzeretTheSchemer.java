@@ -82,8 +82,6 @@ public class TezzeretTheSchemer extends CardImpl {
         Effect effect = new BoostTargetEffect(count, new SignInversionDynamicValue(count), Duration.EndOfTurn);
         effect.setText("Target creature gets +X/-X until end of turn, where X is the number of artifacts you control");
         Ability ability = new LoyaltyAbility(effect, -2);
-
-        //Ability ability = new LoyaltyAbility(new TezzeretTheSchemerEffect2(), -2);
         ability.addTarget(new TargetCreaturePermanent());
         this.addAbility(ability);
 
