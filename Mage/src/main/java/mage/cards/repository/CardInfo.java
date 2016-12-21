@@ -30,9 +30,6 @@ package mage.cards.repository;
 import com.j256.ormlite.field.DataType;
 import com.j256.ormlite.field.DatabaseField;
 import com.j256.ormlite.table.DatabaseTable;
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
 import mage.ObjectColor;
 import mage.abilities.Ability;
 import mage.abilities.SpellAbility;
@@ -47,6 +44,11 @@ import mage.constants.CardType;
 import mage.constants.Rarity;
 import mage.constants.SpellAbilityType;
 import org.apache.log4j.Logger;
+
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Collections;
+import java.util.List;
 
 /**
  *
@@ -244,7 +246,7 @@ public class CardInfo {
 
     private List<String> parseList(String list) {
         if (list.isEmpty()) {
-            return new ArrayList<>();
+            return Collections.emptyList();
         }
         return Arrays.asList(list.split(SEPARATOR));
     }
