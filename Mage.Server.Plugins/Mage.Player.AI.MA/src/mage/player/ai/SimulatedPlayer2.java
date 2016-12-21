@@ -27,15 +27,6 @@
  */
 package mage.player.ai;
 
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.Comparator;
-import java.util.HashMap;
-import java.util.Iterator;
-import java.util.List;
-import java.util.Map;
-import java.util.UUID;
-import java.util.concurrent.ConcurrentLinkedQueue;
 import mage.MageObject;
 import mage.abilities.Ability;
 import mage.abilities.TriggeredAbility;
@@ -56,6 +47,9 @@ import mage.players.net.UserData;
 import mage.target.Target;
 import org.apache.log4j.Logger;
 
+import java.util.*;
+import java.util.concurrent.ConcurrentLinkedQueue;
+
 /**
  *
  * @author BetaSteward_at_googlemail.com
@@ -63,12 +57,11 @@ import org.apache.log4j.Logger;
 public class SimulatedPlayer2 extends ComputerPlayer {
 
     private static final Logger logger = Logger.getLogger(SimulatedPlayer2.class);
+    private static PassAbility pass = new PassAbility();
     private final boolean isSimulatedPlayer;
+    private final List<String> suggested;
     private transient ConcurrentLinkedQueue<Ability> allActions;
     private boolean forced;
-    private static PassAbility pass = new PassAbility();
-
-    private final List<String> suggested;
 
     public SimulatedPlayer2(UUID id, boolean isSimulatedPlayer, List<String> suggested) {
         super(id);
@@ -375,7 +368,7 @@ public class SimulatedPlayer2 extends ComputerPlayer {
         Map<Integer, Combat> engagements = new HashMap<>();
         int numGroups = game.getCombat().getGroups().size();
         if (numGroups == 0) {
-            return new ArrayList<>();
+            return Collections.emptyList();
         }
 
         //add a node with no blockers

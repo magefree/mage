@@ -12,6 +12,7 @@ import org.apache.log4j.Logger;
 import java.io.File;
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.LinkedList;
 import java.util.List;
 
@@ -115,7 +116,7 @@ public enum ExpansionRepository {
             QueryBuilder<ExpansionInfo, Object> qb = expansionDao.queryBuilder();
             qb.limit(1L).where().eq("code", new SelectArg(setCode));
             List<ExpansionInfo> expansions = expansionDao.query(qb.prepare());
-            if (expansions.size() > 0) {
+            if (!expansions.isEmpty()) {
                 set = expansions.get(0);
             }
         } catch (SQLException ex) {
@@ -129,7 +130,7 @@ public enum ExpansionRepository {
             QueryBuilder<ExpansionInfo, Object> qb = expansionDao.queryBuilder();
             qb.limit(1L).where().eq("name", new SelectArg(setName));
             List<ExpansionInfo> expansions = expansionDao.query(qb.prepare());
-            if (expansions.size() > 0) {
+            if (!expansions.isEmpty()) {
                 set = expansions.get(0);
             }
         } catch (SQLException ex) {
@@ -144,7 +145,7 @@ public enum ExpansionRepository {
             return expansionDao.query(qb.prepare());
         } catch (SQLException ex) {
         }
-        return new ArrayList<>();
+        return Collections.emptyList();
     }
 
     public List<String> getAllSetNames() {
@@ -159,7 +160,7 @@ public enum ExpansionRepository {
             return setNames;
         } catch (SQLException ex) {
         }
-        return new ArrayList<>();
+        return Collections.emptyList();
     }
 
     public long getContentVersionFromDB() {
