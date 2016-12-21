@@ -19,11 +19,7 @@ import java.net.Proxy;
 import java.net.URL;
 import java.net.URLConnection;
 import java.nio.file.AccessDeniedException;
-import java.util.ArrayList;
-import java.util.HashSet;
-import java.util.Iterator;
-import java.util.List;
-import java.util.Set;
+import java.util.*;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 import javax.imageio.IIOImage;
@@ -78,8 +74,8 @@ public class DownloadPictures extends DefaultBoundedRangeModel implements Runnab
     private final JButton closeButton;
     private JButton startDownloadButton;
     private int cardIndex;
-    private ArrayList<CardDownloadData> cards;
-    private ArrayList<CardDownloadData> type2cards;
+    private List<CardDownloadData> cards;
+    private List<CardDownloadData> type2cards;
     private final JComboBox jComboBox1;
     private final JLabel jLabel1;
     private static boolean offlineMode = false;
@@ -96,7 +92,7 @@ public class DownloadPictures extends DefaultBoundedRangeModel implements Runnab
     }
 
     public static void startDownload(JFrame frame, List<CardInfo> allCards) {
-        ArrayList<CardDownloadData> cards = getNeededCards(allCards);
+        List<CardDownloadData> cards = getNeededCards(allCards);
 
         /*
          * if (cards == null || cards.isEmpty()) {
@@ -127,7 +123,7 @@ public class DownloadPictures extends DefaultBoundedRangeModel implements Runnab
         this.cancel = cancel;
     }
 
-    public DownloadPictures(ArrayList<CardDownloadData> cards) {
+    public DownloadPictures(List<CardDownloadData> cards) {
         this.cards = cards;
 
         bar = new JProgressBar(this);
@@ -254,7 +250,7 @@ public class DownloadPictures extends DefaultBoundedRangeModel implements Runnab
     }
 
     private void updateCardsToDownload() {
-        ArrayList<CardDownloadData> cardsToDownload = cards;
+        List<CardDownloadData> cardsToDownload = cards;
         if (type2cardsOnly()) {
             selectType2andTokenCardsIfNotYetDone();
             cardsToDownload = type2cards;
@@ -288,9 +284,9 @@ public class DownloadPictures extends DefaultBoundedRangeModel implements Runnab
         return className.substring(className.lastIndexOf('.') + 1);
     }
 
-    private static ArrayList<CardDownloadData> getNeededCards(List<CardInfo> allCards) {
+    private static List<CardDownloadData> getNeededCards(List<CardInfo> allCards) {
 
-        ArrayList<CardDownloadData> cardsToDownload = new ArrayList<>();
+        List<CardDownloadData> cardsToDownload = Collections.synchronizedList(new ArrayList<>());
 
         /**
          * read all card names and urls
@@ -360,18 +356,18 @@ public class DownloadPictures extends DefaultBoundedRangeModel implements Runnab
         }
 
         int numberTokenImages = allCardsUrls.size() - numberCardImages;
-        TFile file;
+
 
         /**
          * check to see which cards we already have
          */
-        for (CardDownloadData card : allCardsUrls) {
-            file = new TFile(CardImageUtils.generateImagePath(card));
+        allCardsUrls.parallelStream().forEach(card -> {
+            TFile file = new TFile(CardImageUtils.generateImagePath(card));
             if (!file.exists()) {
                 logger.debug("Missing: " + file.getAbsolutePath());
                 cardsToDownload.add(card);
             }
-        }
+        });
 
         logger.info("Check download images (total cards: " + numberCardImages + ", total tokens: " + numberTokenImages + ") => Missing images: " + cardsToDownload.size());
         if (logger.isDebugEnabled()) {
@@ -388,7 +384,7 @@ public class DownloadPictures extends DefaultBoundedRangeModel implements Runnab
             }
         }
 
-        return cardsToDownload;
+        return new ArrayList<>(cardsToDownload);
     }
 
     private static ArrayList<CardDownloadData> getTokenCardUrls() throws RuntimeException {
@@ -502,7 +498,7 @@ public class DownloadPictures extends DefaultBoundedRangeModel implements Runnab
         if (p != null) {
             HashSet<String> ignoreUrls = SettingsManager.getIntance().getIgnoreUrls();
 
-            ArrayList<CardDownloadData> cardsToDownload = this.checkBox.isSelected() ? type2cards : cards;
+            List<CardDownloadData> cardsToDownload = this.checkBox.isSelected() ? type2cards : cards;
 
             update(0, cardsToDownload.size());
 
