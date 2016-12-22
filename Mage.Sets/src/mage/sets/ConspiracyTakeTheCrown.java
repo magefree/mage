@@ -87,6 +87,7 @@ public class ConspiracyTakeTheCrown extends ExpansionSet {
         cards.add(new SetCardInfo("Crown-Hunter Hireling", 50, Rarity.COMMON, mage.cards.c.CrownHunterHireling.class));
         cards.add(new SetCardInfo("Custodi Lich", 41, Rarity.RARE, mage.cards.c.CustodiLich.class));
         cards.add(new SetCardInfo("Daretti, Ingenious Iconoclast", 74, Rarity.MYTHIC, mage.cards.d.DarettiIngeniousIconoclast.class));
+        cards.add(new SetCardInfo("Deadly Designs", 42, Rarity.UNCOMMON, mage.cards.d.DeadlyDesigns.class));
         cards.add(new SetCardInfo("Death Wind", 131, Rarity.COMMON, mage.cards.d.DeathWind.class));
         cards.add(new SetCardInfo("Deceiver Exarch", 106, Rarity.UNCOMMON, mage.cards.d.DeceiverExarch.class));
         cards.add(new SetCardInfo("Deputized Protester", 51, Rarity.COMMON, mage.cards.d.DeputizedProtester.class));
@@ -109,6 +110,7 @@ public class ConspiracyTakeTheCrown extends ExpansionSet {
         cards.add(new SetCardInfo("Expropriate", 30, Rarity.MYTHIC, mage.cards.e.Expropriate.class));
         cards.add(new SetCardInfo("Fade into Antiquity", 181, Rarity.COMMON, mage.cards.f.FadeIntoAntiquity.class));
         cards.add(new SetCardInfo("Faith's Reward", 84, Rarity.RARE, mage.cards.f.FaithsReward.class));
+        cards.add(new SetCardInfo("Fang of the Pack", 65, Rarity.UNCOMMON, mage.cards.f.FangOfThePack.class));
         cards.add(new SetCardInfo("Farbog Boneflinger", 134, Rarity.UNCOMMON, mage.cards.f.FarbogBoneflinger.class));
         cards.add(new SetCardInfo("Festergloom", 135, Rarity.COMMON, mage.cards.f.Festergloom.class));
         cards.add(new SetCardInfo("Fiery Fall", 156, Rarity.COMMON, mage.cards.f.FieryFall.class));

@@ -93,6 +93,7 @@ public enum CounterType {
     PETAL("petal"),
     PETRIFICATION("petrification"),
     PLAGUE("plague"),
+    PLOT("plot"),
     POLYP("polyp"),
     POISON("poison"),
     PRESSURE("pressure"),
