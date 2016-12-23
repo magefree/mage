@@ -48,8 +48,7 @@ import mage.target.targetpointer.FixedTarget;
 public class SacredGround extends CardImpl {
 
     public SacredGround(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.ENCHANTMENT},"{1}{W}");
-
+        super(ownerId, setInfo, new CardType[]{CardType.ENCHANTMENT}, "{1}{W}");
 
         // Whenever a spell or ability an opponent controls causes a land to be put into your graveyard from the battlefield, return that card to the battlefield.
         this.addAbility(new SacredGroundTriggeredAbility());
@@ -92,7 +91,7 @@ class SacredGroundTriggeredAbility extends TriggeredAbilityImpl {
             if (Zone.BATTLEFIELD.equals(zce.getFromZone()) && Zone.GRAVEYARD.equals(zce.getToZone())) {
                 Permanent targetPermanent = zce.getTarget();
                 if (targetPermanent.getCardType().contains(CardType.LAND) && targetPermanent.getControllerId().equals(getControllerId())) {
-                    getEffects().get(0).setTargetPointer(new FixedTarget(targetPermanent.getId()));
+                    getEffects().get(0).setTargetPointer(new FixedTarget(targetPermanent.getId(), game.getState().getZoneChangeCounter(targetPermanent.getId())));
                     return true;
                 }
             }
