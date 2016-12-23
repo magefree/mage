@@ -67,6 +67,7 @@ import mage.game.permanent.Permanent;
 import mage.players.Player;
 import mage.target.common.TargetLandPermanent;
 import mage.target.targetpointer.FixedTarget;
+import mage.util.CardUtil;
 
 /**
  *
@@ -74,8 +75,8 @@ import mage.target.targetpointer.FixedTarget;
  */
 public class CyclopeanTomb extends CardImpl {
     
-    private static final FilterLandPermanent filter = new FilterLandPermanent();
     public List<UUID> lands = new ArrayList<>();
+    private static final FilterLandPermanent filter = new FilterLandPermanent();
     
     static {
         filter.add(Predicates.not(new SubtypePredicate("Swamp")));
@@ -94,7 +95,7 @@ public class CyclopeanTomb extends CardImpl {
         //add the targets UUID to an array to track which specific lands the instance of Cyclopean Tomb added a mire counter to.
         lands.add(ability.getTargets().getFirstTarget());
         // When Cyclopean Tomb is put into a graveyard from the battlefield, at the beginning of each of your upkeeps for the rest of the game, remove all mire counters from a land that a mire counter was put onto with Cyclopean Tomb but that a mire counter has not been removed from with Cyclopean Tomb.
-        Effect effect = new CreateDelayedTriggeredAbilityEffect(new CycleDelayedTriggeredAbility(lands));
+        Effect effect = new CreateDelayedTriggeredAbilityEffect(new CyclopeanTombDelayedTriggeredAbility(lands));
         effect.setText("at the beginning of each of your upkeeps for the rest of the game, remove all mire counters from a land that a mire counter was put onto with {this} but that a mire counter has not been removed from with {this}.");
         this.addAbility(new PutIntoGraveFromBattlefieldSourceTriggeredAbility(effect));
     }
@@ -139,19 +140,19 @@ class BecomeSwampEffect extends BecomesBasicLandTargetEffect {
     }
 }
 
-class CycleDelayedTriggeredAbility extends DelayedTriggeredAbility {
+class CyclopeanTombDelayedTriggeredAbility extends DelayedTriggeredAbility {
 
-    CycleDelayedTriggeredAbility(List<UUID> lands) {
+    CyclopeanTombDelayedTriggeredAbility(List<UUID> lands) {
         super(new CyclopeanTombEffect(lands), Duration.OneUse, true, false);
     }
 
-    CycleDelayedTriggeredAbility(CycleDelayedTriggeredAbility ability) {
+    CyclopeanTombDelayedTriggeredAbility(CyclopeanTombDelayedTriggeredAbility ability) {
         super(ability);
     }
 
     @Override
-    public CycleDelayedTriggeredAbility copy() {
-        return new CycleDelayedTriggeredAbility(this);
+    public CyclopeanTombDelayedTriggeredAbility copy() {
+        return new CyclopeanTombDelayedTriggeredAbility(this);
     }
 
     @Override
@@ -193,18 +194,13 @@ class CyclopeanTombEffect extends OneShotEffect {
     public boolean apply(Game game, Ability source) {
         Player controller = game.getPlayer(source.getControllerId());
         if(controller != null){
-            /*
-            *
-            *Remove all counters from target code goes here. Created a RemoveAllCountersTargetEffect for that.
-            *
-            */
             new ChooseLandEffect(lands).apply(game, source);
             Effect effect = new RemoveAllCountersTargetEffect(CounterType.MIRE);
             effect.setTargetPointer(new FixedTarget((UUID) game.getState().getValue(source.getSourceId().toString() + "_land")));
             effect.apply(game, source);
-            //CyclopianTombEffect and CycleDelayedTriggeredAbility will maintain a loop
+            //CyclopianTombEffect and CyclopeanTombDelayedTriggeredAbility will maintain a loop
             //as long as there are one or more mire counters left to be removed
-            new ConditionalOneShotEffect(new CreateDelayedTriggeredAbilityEffect(new CycleDelayedTriggeredAbility(lands), false), new CyclopeanTombCounterCondition(lands)).apply(game, source);
+            new ConditionalOneShotEffect(new CreateDelayedTriggeredAbilityEffect(new CyclopeanTombDelayedTriggeredAbility(lands), false), new CyclopeanTombCounterCondition(lands)).apply(game, source);
             return true;
         }
     return false;
@@ -251,19 +247,25 @@ class ChooseLandEffect extends OneShotEffect {
     public ChooseLandEffect copy() {
         return new ChooseLandEffect(this);
     }
-    //UUID chosenLand = ; use with addTarget or setTargetPointer
+    
     @Override
     public boolean apply(Game game, Ability source) {
         Player controller = game.getPlayer(source.getControllerId());
-        MageObject mageObject = game.getObject(source.getSourceId());
+        MageObject mageObject = game.getPermanentEntering(source.getSourceId());
+        if (mageObject == null) {
+            mageObject = game.getObject(source.getSourceId());
+        }
         FilterLandPermanent filter = new FilterLandPermanent();
         filter.add(new LandIdPredicate(lands));
-        if(controller != null){
-            TargetLandPermanent target = new TargetLandPermanent(filter);
-            if (controller.choose(this.outcome, target, source.getSourceId(), game)) {
+        if(controller != null && mageObject != null){
+            TargetLandPermanent target = new TargetLandPermanent(1, 1, filter, true);
+            if (controller.chooseTarget(Outcome.Neutral, target, source, game)) {
                 Permanent chosenLand = game.getPermanent(target.getFirstTarget());
                 if(chosenLand != null) {
                     game.getState().setValue(mageObject.getId() + "_land", target.getFirstTarget());
+                    if (mageObject instanceof Permanent) {
+                        ((Permanent) mageObject).addInfo("chosen land", CardUtil.addToolTipMarkTags("Chosen player: " + chosenLand.getLogName()), game);
+                    }
                     return true;
                 }
             }
