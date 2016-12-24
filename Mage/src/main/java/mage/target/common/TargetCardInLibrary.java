@@ -69,6 +69,7 @@ public class TargetCardInLibrary extends TargetCard {
         // with a certain card type or color, that player isn’t required to find some or all of those cards
         // even if they’re present in that zone.
         this.setRequired(!filter.hasPredicates());
+        this.setNotTarget(true);
         this.librarySearchLimit = Integer.MAX_VALUE;
     }
 
