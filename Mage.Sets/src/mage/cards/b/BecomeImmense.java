@@ -43,13 +43,12 @@ import mage.target.common.TargetCreaturePermanent;
 public class BecomeImmense extends CardImpl {
 
     public BecomeImmense(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.INSTANT},"{5}{G}");
+        super(ownerId, setInfo, new CardType[]{CardType.INSTANT}, "{5}{G}");
 
-
-        // Delve
+        // Delve (Each card you exile from your graveyard while casting this spell pays for {1}.)
         this.addAbility(new DelveAbility());
         // Target creature gets +6/+6 until end of turn
-        this.getSpellAbility().addEffect(new BoostTargetEffect(6,6,Duration.EndOfTurn));
+        this.getSpellAbility().addEffect(new BoostTargetEffect(6, 6, Duration.EndOfTurn));
         this.getSpellAbility().addTarget(new TargetCreaturePermanent());
     }
 

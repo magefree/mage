@@ -570,6 +570,7 @@ public abstract class PlayerImpl implements Player, Serializable {
             if (!player.hasLeft() && !player.hasLost()) {
                 player.setGameUnderYourControl(false);
                 player.setTurnControlledBy(this.getId());
+                game.informPlayers(getLogName() + " controlls the turn of " + player.getLogName());
             }
             DelayedTriggeredAbility ability = new AtTheEndOfTurnStepPostDelayedTriggeredAbility(new LoseControlOnOtherPlayersControllerEffect(this.getLogName(), player.getLogName()));
             ability.setSourceId(getId());

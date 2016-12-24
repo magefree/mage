@@ -81,10 +81,10 @@ public class GameView implements Serializable {
     private final PhaseStep step;
     private final UUID activePlayerId;
     private String activePlayerName = "";
-    private String priorityPlayerName = "";
+    private String priorityPlayerName;
     private final int turn;
     private boolean special = false;
-    private final boolean isPlayer;
+    private final boolean isPlayer; // false = watching user
     private final int spellsCastCurrentTurn;
     private final boolean rollbackTurnsAllowed;
 
@@ -187,18 +187,22 @@ public class GameView implements Serializable {
         } else {
             this.activePlayerName = "";
         }
+        Player priorityPlayer = null;
         if (state.getPriorityPlayerId() != null) {
-            this.priorityPlayerName = state.getPlayer(state.getPriorityPlayerId()).getName();
+            priorityPlayer = state.getPlayer(state.getPriorityPlayerId());
+            this.priorityPlayerName = priorityPlayer != null ? priorityPlayer.getName() : "";
         } else {
             this.priorityPlayerName = "";
         }
         for (CombatGroup combatGroup : state.getCombat().getGroups()) {
             combat.add(new CombatGroupView(combatGroup, game));
         }
-        if (isPlayer) {
-            // has only to be set for active palyer with priority (e.g. pay mana by delve or Quenchable Fire special action)
-            if (createdForPlayer != null && createdForPlayerId != null && createdForPlayerId.equals(state.getPriorityPlayerId())) {
-                this.special = state.getSpecialActions().getControlledBy(state.getPriorityPlayerId(), createdForPlayer.isInPayManaMode()).size() > 0;
+        if (isPlayer) { // no watcher
+            // has only to be set for active player with priority (e.g. pay mana by delve or Quenchable Fire special action)
+            if (priorityPlayer != null && createdForPlayer != null && createdForPlayerId != null && createdForPlayer.isGameUnderControl()
+                    && (createdForPlayerId.equals(priorityPlayer.getId()) // player controls the turn
+                    || createdForPlayer.getPlayersUnderYourControl().contains(priorityPlayer.getId()))) { // player controls active players turn
+                this.special = state.getSpecialActions().getControlledBy(priorityPlayer.getId(), priorityPlayer.isInPayManaMode()).size() > 0;
             }
         } else {
             this.special = false;
