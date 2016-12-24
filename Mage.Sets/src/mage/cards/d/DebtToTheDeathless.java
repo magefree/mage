@@ -28,13 +28,14 @@
 package mage.cards.d;
 
 import java.util.UUID;
-import mage.constants.CardType;
-import mage.constants.Outcome;
 import mage.abilities.Ability;
 import mage.abilities.effects.OneShotEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
+import mage.constants.CardType;
+import mage.constants.Outcome;
 import mage.game.Game;
+import mage.players.Player;
 
 /**
  *
@@ -43,13 +44,10 @@ import mage.game.Game;
 public class DebtToTheDeathless extends CardImpl {
 
     public DebtToTheDeathless(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{X}{W}{W}{B}{B}");
-
+        super(ownerId, setInfo, new CardType[]{CardType.SORCERY}, "{X}{W}{W}{B}{B}");
 
         // Each opponent loses two times X life. You gain life equal to the life lost this way.
         this.getSpellAbility().addEffect(new DebtToTheDeathlessEffect());
-
-
     }
 
     public DebtToTheDeathless(final DebtToTheDeathless card) {
@@ -80,12 +78,19 @@ class DebtToTheDeathlessEffect extends OneShotEffect {
 
     @Override
     public boolean apply(Game game, Ability source) {
-        int damage = 0;
-        int xValue = source.getManaCostsToPay().getX();
-        for (UUID opponentId: game.getOpponents(source.getControllerId())) {
-            damage += game.getPlayer(opponentId).damage(xValue * 2, source.getSourceId(), game, false, true);
+        Player controller = game.getPlayer(source.getControllerId());
+        if (controller != null) {
+            int lifeLost = 0;
+            int xValue = source.getManaCostsToPay().getX();
+            for (UUID opponentId : game.getOpponents(source.getControllerId())) {
+                Player opponent = game.getPlayer(opponentId);
+                if (opponent != null) {
+                    lifeLost += opponent.loseLife(xValue * 2, game, false);
+                }
+            }
+            controller.gainLife(lifeLost, game);
+            return true;
         }
-        game.getPlayer(source.getControllerId()).gainLife(damage, game);
-        return true;
+        return false;
     }
 }
