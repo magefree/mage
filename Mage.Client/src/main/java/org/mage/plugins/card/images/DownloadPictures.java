@@ -22,6 +22,7 @@ import java.nio.file.AccessDeniedException;
 import java.util.*;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
+import java.util.concurrent.atomic.AtomicBoolean;
 import javax.imageio.IIOImage;
 import javax.imageio.ImageIO;
 import javax.imageio.ImageWriteParam;
@@ -235,18 +236,20 @@ public class DownloadPictures extends DefaultBoundedRangeModel implements Runnab
     }
 
     public static boolean checkForNewCards(List<CardInfo> allCards) {
-        TFile file;
-        for (CardInfo card : allCards) {
-            if (!card.getCardNumber().isEmpty() && !"0".equals(card.getCardNumber()) && !card.getSetCode().isEmpty()) {
-                CardDownloadData url = new CardDownloadData(card.getName(), card.getSetCode(), card.getCardNumber(), card.usesVariousArt(),
-                        0, "", "", false, card.isDoubleFaced(), card.isNightCard());
-                file = new TFile(CardImageUtils.generateImagePath(url));
-                if (!file.exists()) {
-                    return true;
+        AtomicBoolean missedCardTFiles = new AtomicBoolean();
+        allCards.parallelStream().forEach(card -> {
+            if (!missedCardTFiles.get()) {
+                if (!card.getCardNumber().isEmpty() && !"0".equals(card.getCardNumber()) && !card.getSetCode().isEmpty()) {
+                    CardDownloadData url = new CardDownloadData(card.getName(), card.getSetCode(), card.getCardNumber(), card.usesVariousArt(),
+                            0, "", "", false, card.isDoubleFaced(), card.isNightCard());
+                    TFile file = new TFile(CardImageUtils.generateImagePath(url));
+                    if (!file.exists()) {
+                        missedCardTFiles.set(true);
+                    }
                 }
             }
-        }
-        return false;
+        });
+        return missedCardTFiles.get();
     }
 
     private void updateCardsToDownload() {
@@ -291,7 +294,7 @@ public class DownloadPictures extends DefaultBoundedRangeModel implements Runnab
         /**
          * read all card names and urls
          */
-        ArrayList<CardDownloadData> allCardsUrls = new ArrayList<>();
+        List<CardDownloadData> allCardsUrls = Collections.synchronizedList(new ArrayList<>());
         HashSet<String> ignoreUrls = SettingsManager.getIntance().getIgnoreUrls();
 
         /**
@@ -309,47 +312,47 @@ public class DownloadPictures extends DefaultBoundedRangeModel implements Runnab
 
         try {
             offlineMode = true;
-            for (CardInfo card : allCards) {
-                if (!card.getCardNumber().isEmpty() && !"0".equals(card.getCardNumber()) && !card.getSetCode().isEmpty()
-                        && !ignoreUrls.contains(card.getSetCode())) {
-                    String cardName = card.getName();
-                    boolean isType2 = type2SetsFilter.contains(card.getSetCode());
-                    CardDownloadData url = new CardDownloadData(cardName, card.getSetCode(), card.getCardNumber(), card.usesVariousArt(), 0, "", "", false, card.isDoubleFaced(), card.isNightCard());
-                    if (url.getUsesVariousArt()) {
-                        url.setDownloadName(createDownloadName(card));
-                    }
+           allCards.parallelStream().forEach(card -> {
+               if (!card.getCardNumber().isEmpty() && !"0".equals(card.getCardNumber()) && !card.getSetCode().isEmpty()
+                       && !ignoreUrls.contains(card.getSetCode())) {
+                   String cardName = card.getName();
+                   boolean isType2 = type2SetsFilter.contains(card.getSetCode());
+                   CardDownloadData url = new CardDownloadData(cardName, card.getSetCode(), card.getCardNumber(), card.usesVariousArt(), 0, "", "", false, card.isDoubleFaced(), card.isNightCard());
+                   if (url.getUsesVariousArt()) {
+                       url.setDownloadName(createDownloadName(card));
+                   }
 
-                    url.setFlipCard(card.isFlipCard());
-                    url.setSplitCard(card.isSplitCard());
-                    url.setType2(isType2);
+                   url.setFlipCard(card.isFlipCard());
+                   url.setSplitCard(card.isSplitCard());
+                   url.setType2(isType2);
 
-                    allCardsUrls.add(url);
-                    if (card.isDoubleFaced()) {
-                        if (card.getSecondSideName() == null || card.getSecondSideName().trim().isEmpty()) {
-                            throw new IllegalStateException("Second side card can't have empty name.");
-                        }
-                        url = new CardDownloadData(card.getSecondSideName(), card.getSetCode(), card.getCardNumber(), card.usesVariousArt(), 0, "", "", false, card.isDoubleFaced(), true);
-                        url.setType2(isType2);
-                        allCardsUrls.add(url);
-                    }
-                    if (card.isFlipCard()) {
-                        if (card.getFlipCardName() == null || card.getFlipCardName().trim().isEmpty()) {
-                            throw new IllegalStateException("Flipped card can't have empty name.");
-                        }
-                        url = new CardDownloadData(card.getFlipCardName(), card.getSetCode(), card.getCardNumber(), card.usesVariousArt(), 0, "", "", false, card.isDoubleFaced(), card.isNightCard());
-                        url.setFlipCard(true);
-                        url.setFlippedSide(true);
-                        url.setType2(isType2);
-                        allCardsUrls.add(url);
-                    }
-                } else if (card.getCardNumber().isEmpty() || "0".equals(card.getCardNumber())) {
-                    System.err.println("There was a critical error!");
-                    logger.error("Card has no collector ID and won't be sent to client: " + card);
-                } else if (card.getSetCode().isEmpty()) {
-                    System.err.println("There was a critical error!");
-                    logger.error("Card has no set name and won't be sent to client:" + card);
-                }
-            }
+                   allCardsUrls.add(url);
+                   if (card.isDoubleFaced()) {
+                       if (card.getSecondSideName() == null || card.getSecondSideName().trim().isEmpty()) {
+                           throw new IllegalStateException("Second side card can't have empty name.");
+                       }
+                       url = new CardDownloadData(card.getSecondSideName(), card.getSetCode(), card.getCardNumber(), card.usesVariousArt(), 0, "", "", false, card.isDoubleFaced(), true);
+                       url.setType2(isType2);
+                       allCardsUrls.add(url);
+                   }
+                   if (card.isFlipCard()) {
+                       if (card.getFlipCardName() == null || card.getFlipCardName().trim().isEmpty()) {
+                           throw new IllegalStateException("Flipped card can't have empty name.");
+                       }
+                       url = new CardDownloadData(card.getFlipCardName(), card.getSetCode(), card.getCardNumber(), card.usesVariousArt(), 0, "", "", false, card.isDoubleFaced(), card.isNightCard());
+                       url.setFlipCard(true);
+                       url.setFlippedSide(true);
+                       url.setType2(isType2);
+                       allCardsUrls.add(url);
+                   }
+               } else if (card.getCardNumber().isEmpty() || "0".equals(card.getCardNumber())) {
+                   System.err.println("There was a critical error!");
+                   logger.error("Card has no collector ID and won't be sent to client: " + card);
+               } else if (card.getSetCode().isEmpty()) {
+                   System.err.println("There was a critical error!");
+                   logger.error("Card has no set name and won't be sent to client:" + card);
+               }
+           });
             allCardsUrls.addAll(getTokenCardUrls());
         } catch (Exception e) {
             logger.error(e);
@@ -651,7 +654,7 @@ public class DownloadPictures extends DefaultBoundedRangeModel implements Runnab
                 boolean useTempFile = false;
                 int responseCode = 0;
                 URLConnection httpConn = null;
-                
+
                 if (temporaryFile != null && temporaryFile.length() > 100) {
                     useTempFile = true;
                 } else {
@@ -661,7 +664,7 @@ public class DownloadPictures extends DefaultBoundedRangeModel implements Runnab
                     httpConn.connect();
                     responseCode = ((HttpURLConnection) httpConn).getResponseCode();
                 }
-                
+
                 if (responseCode == 200 || useTempFile) {
                     if (!useTempFile) {
                         try (BufferedInputStream in = new BufferedInputStream(((HttpURLConnection) httpConn).getInputStream())) {
@@ -741,21 +744,21 @@ public class DownloadPictures extends DefaultBoundedRangeModel implements Runnab
                     httpConn.setRequestProperty("Accept", "text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,*/*;q=0.8");
                     httpConn.setRequestProperty("Accept-Encoding", "gzip, deflate, sdch");
                     httpConn.setRequestProperty("Accept-Language", "en-US,en;q=0.8");
-                    httpConn.setRequestProperty("User-Agent", "Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/48.0.2564.116 Safari/537.36");
+                    httpConn.setRequestProperty("User-Agent", "Mozilla/5.0 (Windows NT 6.3; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/55.0.2883.87 Safari/537.36");
                     break;
                 // ff
                 case 1:
                     httpConn.setRequestProperty("Accept", "text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8");
                     httpConn.setRequestProperty("Accept-Encoding", "gzip, deflate");
                     httpConn.setRequestProperty("Accept-Language", "en-US;q=0.5,en;q=0.3");
-                    httpConn.setRequestProperty("User-Agent", "Mozilla/5.0 (Windows NT 6.1; WOW64; rv:44.0) Gecko/20100101 Firefox/44.0");
+                    httpConn.setRequestProperty("User-Agent", "Mozilla/5.0 (Windows NT 6.3; Win64; x64; rv:50.0) Gecko/20100101 Firefox/50.0");
                     break;
                 // ie
                 case 2:
                     httpConn.setRequestProperty("Accept", "text/html, application/xhtml+xml, */*");
                     httpConn.setRequestProperty("Accept-Encoding", "gzip, deflate");
                     httpConn.setRequestProperty("Accept-Language", "en-US");
-                    httpConn.setRequestProperty("User-Agent", "Mozilla/5.0 (Windows NT 6.1; WOW64; Trident/7.0; rv:11.0) like Gecko");
+                    httpConn.setRequestProperty("User-Agent", "Mozilla/5.0 (Windows NT 6.3; WOW64; Trident/7.0; rv:11.0) like Gecko");
                     break;
             }
         }
@@ -789,14 +792,16 @@ public class DownloadPictures extends DefaultBoundedRangeModel implements Runnab
             bar.setString(String.format("%d of %d cards finished! Please wait! [%.1f Mb]",
                     card, count, mb));
         } else {
-            Iterator<CardDownloadData> cardsIterator = DownloadPictures.this.cards.iterator();
-            while (cardsIterator.hasNext()) {
-                CardDownloadData cardDownloadData = cardsIterator.next();
+            List<CardDownloadData> remainingCards = Collections.synchronizedList(new ArrayList<>());
+            DownloadPictures.this.cards.parallelStream().forEach(cardDownloadData -> {
                 TFile file = new TFile(CardImageUtils.generateImagePath(cardDownloadData));
-                if (file.exists()) {
-                    cardsIterator.remove();
+                if (!file.exists()) {
+                    remainingCards.add(cardDownloadData);
                 }
-            }
+            });
+
+            DownloadPictures.this.cards = new ArrayList<>(remainingCards);
+
             count = DownloadPictures.this.cards.size();
 
             if (count == 0) {
