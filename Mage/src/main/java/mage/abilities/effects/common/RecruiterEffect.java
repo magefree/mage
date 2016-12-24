@@ -44,7 +44,7 @@ import mage.target.common.TargetCardInLibrary;
  */
 public class RecruiterEffect extends OneShotEffect {
 
-    private static FilterCard filter;
+    private final FilterCard filter;
 
     public RecruiterEffect(FilterCard filter) {
         super(Outcome.Benefit);
@@ -64,7 +64,7 @@ public class RecruiterEffect extends OneShotEffect {
     @Override
     public boolean apply(Game game, Ability source) {
         Player controller = game.getPlayer(source.getControllerId());
-        if(controller != null) {
+        if (controller != null) {
             TargetCardInLibrary targetCards = new TargetCardInLibrary(0, Integer.MAX_VALUE, filter);
             Cards cards = new CardsImpl();
             if (controller.searchLibrary(targetCards, game)) {
@@ -73,7 +73,7 @@ public class RecruiterEffect extends OneShotEffect {
             controller.revealCards(staticText, cards, game);
             controller.shuffleLibrary(source, game);
 
-            if(cards.size() > 0) {
+            if (cards.size() > 0) {
                 controller.putCardsOnTopOfLibrary(cards, game, source, true);
             }
             return true;
@@ -83,10 +83,10 @@ public class RecruiterEffect extends OneShotEffect {
 
     @Override
     public String getText(Mode mode) {
-        if(staticText != null && !staticText.isEmpty()) {
+        if (staticText != null && !staticText.isEmpty()) {
             return staticText;
         }
-        return "search your library for any number of " + filter.getMessage() +
-            " and reveal those cards. Shuffle your library, then put them on top of it in any order.";
+        return "search your library for any number of " + filter.getMessage()
+                + " and reveal those cards. Shuffle your library, then put them on top of it in any order.";
     }
 }
