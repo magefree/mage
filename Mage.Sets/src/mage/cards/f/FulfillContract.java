@@ -100,7 +100,7 @@ class FulfillContractEffect extends OneShotEffect {
     public boolean apply(Game game, Ability source) {
         Player controller = game.getPlayer(source.getControllerId());
         Permanent permanentToDestroy = game.getPermanent(getTargetPointer().getFirst(game, source));
-        Permanent permanentToPutCounter = game.getPermanent(getTargetPointer().getTargets(game, source).get(1));
+        Permanent permanentToPutCounter = game.getPermanent(source.getTargets().get(1).getFirstTarget());
         if (controller != null) {
             if (permanentToDestroy != null && permanentToDestroy.destroy(source.getSourceId(), game, false)) {
                 if (permanentToPutCounter != null) {
