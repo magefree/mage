@@ -27,10 +27,13 @@
  */
 package mage.cards.c;
 
-import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
+import java.util.Set;
 import java.util.UUID;
 import mage.MageObject;
+import mage.MageObjectReference;
 import mage.abilities.Ability;
 import mage.abilities.DelayedTriggeredAbility;
 import mage.abilities.common.PutIntoGraveFromBattlefieldSourceTriggeredAbility;
@@ -64,7 +67,6 @@ import mage.filter.predicate.mageobject.SubtypePredicate;
 import mage.filter.predicate.permanent.CounterPredicate;
 import mage.game.Game;
 import mage.game.events.GameEvent;
-import mage.game.events.GameEvent.EventType;
 import mage.game.permanent.Permanent;
 import mage.players.Player;
 import mage.target.common.TargetLandPermanent;
@@ -213,10 +215,10 @@ class CyclopeanTombCounterCondition implements Condition {
     public boolean apply(Game game, Ability source) {
 
         List<Permanent> permanents = game.getBattlefield().getAllActivePermanents(mireFilter, game);
-        CyclopeanTombCounterWatcher watcher = (CyclopeanTombCounterWatcher) game.getState().getWatchers().get("TombCounterWatcher");
+        CyclopeanTombCounterWatcher watcher = (CyclopeanTombCounterWatcher) game.getState().getWatchers().get(CyclopeanTombCounterWatcher.class.getName());
 
         for(Permanent permanent : permanents) {
-            if(watcher.getKey().equals(source.getSourceId().toString() + "TombCounterWatcher") && watcher.lands.contains(permanent.getId())) {
+            if(/* true that watcher is the instance of tomb  && true that watcher contains iteration of permanent*/) {
                 return permanent.getCounters(game).getCount(CounterType.MIRE) > 0;
             }
         }
@@ -251,7 +253,7 @@ class ChooseLandEffect extends OneShotEffect {
         }
         
         FilterLandPermanent filter = new FilterLandPermanent();
-        filter.add(new LandIdPredicate());
+        filter.add(new LandIdPredicate(source));
         
         if(controller != null && mageObject != null){
             TargetLandPermanent target = new TargetLandPermanent(1, 1, filter, true);
@@ -272,27 +274,29 @@ class ChooseLandEffect extends OneShotEffect {
 
 class LandIdPredicate implements Predicate<Permanent> {
     
-    public LandIdPredicate() {
+    public Ability source;
+    
+    public LandIdPredicate(Ability source) {
+        this.source = source;
     }
 
     @Override
     public boolean apply(Permanent input, Game game) {
-        CyclopeanTombCounterWatcher watcher = (CyclopeanTombCounterWatcher) game.getState().getWatchers().get("TombCounterWatcher");
-        return watcher.lands.contains(input.getId());
+        CyclopeanTombCounterWatcher watcher = (CyclopeanTombCounterWatcher) game.getState().getWatchers().get(CyclopeanTombCounterWatcher.class.getName());
+        return /* true that watcher is the instance of tomb && true that watcher contains the targeted land*/;
     }
 }
 
 class CyclopeanTombCounterWatcher extends Watcher {
     
-    public List<UUID> lands = new ArrayList<>();
+    Map<MageObjectReference, Set> lands = new HashMap<>();
     
     public CyclopeanTombCounterWatcher() {
-        super("TombPutCounterOnWatcher", WatcherScope.CARD);
+        super(CyclopeanTombCounterWatcher.class.getName(), WatcherScope.GAME);
     }
     
     public CyclopeanTombCounterWatcher(final CyclopeanTombCounterWatcher watcher) {
         super(watcher);
-        this.lands.addAll(watcher.lands);
     }
     
     @Override
@@ -302,10 +306,10 @@ class CyclopeanTombCounterWatcher extends Watcher {
 
     @Override
     public void watch(GameEvent event, Game game) {
-        if(event.getType() == EventType.ADD_COUNTER || event.getType() == EventType.ADD_COUNTERS) {
-            if(!lands.contains(event.getTargetId())) {
-                lands.add(event.getTargetId());
+        if(event.getType() == GameEvent.EventType.COUNTER_ADDED || event.getType() == GameEvent.EventType.COUNTERS_ADDED) {
+/*            if(land counter was added not in lands) {
+                lands.put(the stuff needed to identify the instance of tomb and the land the counter was added);
             }
-        }
+*/        }
     }
 }
