@@ -103,7 +103,7 @@ public class GameDay extends ExpansionSet {
         cards.add(new SetCardInfo("Trostani's Summoner", 27, Rarity.UNCOMMON, mage.cards.t.TrostanisSummoner.class));
         cards.add(new SetCardInfo("Unsubstantiate", 53, Rarity.UNCOMMON, mage.cards.u.Unsubstantiate.class));
         cards.add(new SetCardInfo("Utter End", 38, Rarity.RARE, mage.cards.u.UtterEnd.class));
-        cards.add(new SetCardInfo("Yaheeni's Expertise", 58, Rarity.RARE, mage.cards.y.YaheenisExpertise.class));
+        cards.add(new SetCardInfo("Yahenni's Expertise", 58, Rarity.RARE, mage.cards.y.YahennisExpertise.class));
         cards.add(new SetCardInfo("Zameck Guildmage", 25, Rarity.UNCOMMON, mage.cards.z.ZameckGuildmage.class));
         cards.add(new SetCardInfo("Zombie Apocalypse", 14, Rarity.RARE, mage.cards.z.ZombieApocalypse.class));
     }

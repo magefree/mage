@@ -49,9 +49,9 @@ import mage.target.common.TargetCardInHand;
  *
  * @author fireshoes
  */
-public class YaheenisExpertise extends CardImpl {
+public class YahennisExpertise extends CardImpl {
 
-    public YaheenisExpertise(UUID ownerId, CardSetInfo setInfo) {
+    public YahennisExpertise(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.SORCERY}, "{2}{B}{B}");
 
 
@@ -59,20 +59,20 @@ public class YaheenisExpertise extends CardImpl {
         getSpellAbility().addEffect(new BoostAllEffect(-3, -3, Duration.EndOfTurn));
 
         // You may cast a card with converted mana cost 3 or less from your hand without paying its mana cost.
-        getSpellAbility().addEffect(new YaheenisExpertiseCastEffect());
+        getSpellAbility().addEffect(new YahennisExpertiseCastEffect());
     }
 
-    public YaheenisExpertise(final YaheenisExpertise card) {
+    public YahennisExpertise(final YahennisExpertise card) {
         super(card);
     }
 
     @Override
-    public YaheenisExpertise copy() {
-        return new YaheenisExpertise(this);
+    public YahennisExpertise copy() {
+        return new YahennisExpertise(this);
     }
 }
 
-class YaheenisExpertiseCastEffect extends OneShotEffect {
+class YahennisExpertiseCastEffect extends OneShotEffect {
 
     private static final FilterCard filter = new FilterCard("card with converted mana cost 3 or less from your hand");
 
@@ -80,18 +80,18 @@ class YaheenisExpertiseCastEffect extends OneShotEffect {
         filter.add(new ConvertedManaCostPredicate(Filter.ComparisonType.LessThan, 4));
     }
 
-    public YaheenisExpertiseCastEffect() {
+    public YahennisExpertiseCastEffect() {
         super(Outcome.PlayForFree);
         this.staticText = "you may cast a card with converted mana cost 3 or less from your hand without paying its mana cost";
     }
 
-    public YaheenisExpertiseCastEffect(final YaheenisExpertiseCastEffect effect) {
+    public YahennisExpertiseCastEffect(final YahennisExpertiseCastEffect effect) {
         super(effect);
     }
 
     @Override
-    public YaheenisExpertiseCastEffect copy() {
-        return new YaheenisExpertiseCastEffect(this);
+    public YahennisExpertiseCastEffect copy() {
+        return new YahennisExpertiseCastEffect(this);
     }
 
     @Override
