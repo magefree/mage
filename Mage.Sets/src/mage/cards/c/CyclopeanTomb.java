@@ -28,6 +28,7 @@
 package mage.cards.c;
 
 import java.util.HashMap;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
@@ -215,11 +216,12 @@ class CyclopeanTombCounterCondition implements Condition {
     public boolean apply(Game game, Ability source) {
 
         List<Permanent> permanents = game.getBattlefield().getAllActivePermanents(mireFilter, game);
+        Permanent cyclopeanTombInstance = game.getPermanentOrLKIBattlefield(source.getSourceId());
         CyclopeanTombCounterWatcher watcher = (CyclopeanTombCounterWatcher) game.getState().getWatchers().get(CyclopeanTombCounterWatcher.class.getName());
-
-        for(Permanent permanent : permanents) {
-            if(/* true that watcher is the instance of tomb  && true that watcher contains iteration of permanent*/) {
-                return permanent.getCounters(game).getCount(CounterType.MIRE) > 0;
+        
+        for(Permanent land : permanents) {
+            if(watcher.landMiredByCyclopeanTombInstance(land, cyclopeanTombInstance, game)) {
+                return land.getCounters(game).getCount(CounterType.MIRE) > 0;
             }
         }
         return false;
@@ -257,7 +259,11 @@ class ChooseLandEffect extends OneShotEffect {
         
         if(controller != null && mageObject != null){
             TargetLandPermanent target = new TargetLandPermanent(1, 1, filter, true);
-            if (controller.chooseTarget(Outcome.Neutral, target, source, game)) {
+            /*Player must choose a land each upkeep. Using the message are above the player hand where frequent interactions
+            * take place is the most logical way to prompt for this scenario. A new constructor added to provide a not optional
+            * option for any cards like this where the player must choose a target in such the way this card requires.
+            */
+            if (controller.chooseTarget(Outcome.Neutral, target, source, game, false)) {
                 Permanent chosenLand = game.getPermanent(target.getFirstTarget());
                 if(chosenLand != null) {
                     game.getState().setValue(mageObject.getId() + "_land", target.getFirstTarget());
@@ -282,14 +288,15 @@ class LandIdPredicate implements Predicate<Permanent> {
 
     @Override
     public boolean apply(Permanent input, Game game) {
+        Permanent cyclopeanTombInstance = game.getPermanentOrLKIBattlefield(source.getSourceId());
         CyclopeanTombCounterWatcher watcher = (CyclopeanTombCounterWatcher) game.getState().getWatchers().get(CyclopeanTombCounterWatcher.class.getName());
-        return /* true that watcher is the instance of tomb && true that watcher contains the targeted land*/;
+        return watcher.landMiredByCyclopeanTombInstance(input, cyclopeanTombInstance, game);
     }
 }
 
 class CyclopeanTombCounterWatcher extends Watcher {
     
-    Map<MageObjectReference, Set> lands = new HashMap<>();
+    public HashMap<MageObjectReference, Set<MageObjectReference>> counterData = new HashMap<>();
     
     public CyclopeanTombCounterWatcher() {
         super(CyclopeanTombCounterWatcher.class.getName(), WatcherScope.GAME);
@@ -297,6 +304,11 @@ class CyclopeanTombCounterWatcher extends Watcher {
     
     public CyclopeanTombCounterWatcher(final CyclopeanTombCounterWatcher watcher) {
         super(watcher);
+        for (MageObjectReference mageObjectReference : watcher.counterData.keySet()) {
+            Set<MageObjectReference> miredLands = new HashSet<>();
+            miredLands.addAll(watcher.counterData.get(mageObjectReference));
+            counterData.put(mageObjectReference, miredLands);
+        }
     }
     
     @Override
@@ -307,9 +319,26 @@ class CyclopeanTombCounterWatcher extends Watcher {
     @Override
     public void watch(GameEvent event, Game game) {
         if(event.getType() == GameEvent.EventType.COUNTER_ADDED || event.getType() == GameEvent.EventType.COUNTERS_ADDED) {
-/*            if(land counter was added not in lands) {
-                lands.put(the stuff needed to identify the instance of tomb and the land the counter was added);
+            MageObjectReference cylopeanTombInstance = new MageObjectReference(/*ID needs to go here*/, game);
+            Set<MageObjectReference> miredLands = counterData.get(cylopeanTombInstance);
+            if (miredLands != null) {
+                miredLands.add(new MageObjectReference(event.getTargetId(), game));
+            } else {
+                miredLands = new HashSet<>();
+                miredLands.add(new MageObjectReference(event.getTargetId(), game));
+                counterData.put(cylopeanTombInstance, miredLands);
             }
-*/        }
+        }
+    }
+    
+    @Override
+    public void reset() {
+        super.reset();
+        counterData.clear();
+    }
+
+    public boolean landMiredByCyclopeanTombInstance(Permanent land, Permanent cylopeanTombInstance, Game game) {
+        Set<MageObjectReference> miredLands = counterData.get(new MageObjectReference(cylopeanTombInstance, game));
+        return miredLands != null && miredLands.contains(new MageObjectReference(land, game));
     }
 }
