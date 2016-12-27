@@ -27,7 +27,6 @@
  */
 package mage.cards.t;
 
-import java.util.UUID;
 import mage.MageInt;
 import mage.MageObject;
 import mage.abilities.Ability;
@@ -45,6 +44,8 @@ import mage.constants.Outcome;
 import mage.constants.Zone;
 import mage.game.Game;
 import mage.players.Player;
+
+import java.util.UUID;
 
 /**
  *
@@ -111,7 +112,7 @@ class ThrasiosTritonHeroEffect extends OneShotEffect {
             cards.add(card);
             controller.revealCards(sourceObject.getName(), cards, game);
             if (card.getCardType().contains(CardType.LAND)) {
-                controller.moveCards(card, Zone.BATTLEFIELD, source, game);
+                controller.moveCards(card, Zone.BATTLEFIELD, source, game, true, false, false, null);
             } else {
                 controller.drawCards(1, game);
             }
