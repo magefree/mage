@@ -64,7 +64,7 @@ import mage.target.common.TargetCreaturePermanent;
 public class LilianaTheLastHope extends CardImpl {
 
     public LilianaTheLastHope(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.PLANESWALKER},"{1}{B}{B}");
+        super(ownerId, setInfo, new CardType[]{CardType.PLANESWALKER}, "{1}{B}{B}");
         this.subtype.add("Liliana");
 
         this.addAbility(new PlanswalkerEntersWithLoyalityCountersAbility(3));
@@ -131,10 +131,11 @@ class LilianaTheLastHopeEffect extends OneShotEffect {
         return true;
     }
 }
+
 class LilianaTheLastHopeEmblem extends Emblem {
 
     public LilianaTheLastHopeEmblem() {
-        this.setName("EMBLEM: Liliana, the Last Hope");
+        this.setName("Emblem Liliana");
         Ability ability = new BeginningOfEndStepTriggeredAbility(Zone.COMMAND, new CreateTokenEffect(new ZombieToken(), new LilianaZombiesCount()),
                 TargetController.YOU, null, false);
         this.getAbilities().add(ability);

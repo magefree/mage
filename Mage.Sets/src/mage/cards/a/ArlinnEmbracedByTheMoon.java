@@ -63,7 +63,7 @@ public class ArlinnEmbracedByTheMoon extends CardImpl {
     private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("Creatures you control");
 
     public ArlinnEmbracedByTheMoon(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.PLANESWALKER},"");
+        super(ownerId, setInfo, new CardType[]{CardType.PLANESWALKER}, "");
         this.subtype.add("Arlinn");
         this.color.setRed(true);
         this.color.setGreen(true);
@@ -105,7 +105,7 @@ class ArlinnEmbracedByTheMoonEmblem extends Emblem {
 
     // "Creatures you control have haste and '{T}: This creature deals damage equal to its power to target creature or player.'"
     public ArlinnEmbracedByTheMoonEmblem() {
-        this.setName("EMBLEM: Arlinn, Embraced by the Moon");
+        this.setName("Emblem Arlinn");
         FilterPermanent filter = new FilterControlledCreaturePermanent("Creatures");
         GainAbilityControlledEffect effect = new GainAbilityControlledEffect(HasteAbility.getInstance(), Duration.EndOfGame, filter);
         effect.setText("Creatures you control have haste");

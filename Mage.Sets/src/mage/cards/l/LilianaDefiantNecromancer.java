@@ -74,7 +74,7 @@ public class LilianaDefiantNecromancer extends CardImpl {
     UUID ability2Id;
 
     public LilianaDefiantNecromancer(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.PLANESWALKER},"");
+        super(ownerId, setInfo, new CardType[]{CardType.PLANESWALKER}, "");
         this.subtype.add("Liliana");
         this.color.setBlack(true);
 
@@ -128,7 +128,7 @@ class LilianaDefiantNecromancerEmblem extends Emblem {
 
     //  You get an emblem with "Whenever a creature you control dies, return it to the battlefield under your control at the beginning of the next end step."
     public LilianaDefiantNecromancerEmblem() {
-        this.setName("Emblem - Liliana");
+        this.setName("Emblem Liliana");
         Ability ability = new DiesCreatureTriggeredAbility(Zone.COMMAND, new LilianaDefiantNecromancerEmblemEffect(), false, filter, true);
         this.getAbilities().add(ability);
     }

@@ -60,7 +60,7 @@ import mage.target.common.TargetCreaturePermanent;
 public class ElspethKnightErrant extends CardImpl {
 
     public ElspethKnightErrant(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.PLANESWALKER},"{2}{W}{W}");
+        super(ownerId, setInfo, new CardType[]{CardType.PLANESWALKER}, "{2}{W}{W}");
         this.subtype.add("Elspeth");
 
         this.addAbility(new PlanswalkerEntersWithLoyalityCountersAbility(4));
@@ -100,7 +100,7 @@ public class ElspethKnightErrant extends CardImpl {
 class ElspethKnightErrantEmblem extends Emblem {
 
     public ElspethKnightErrantEmblem() {
-        this.setName("EMBLEM: Elspeth, Knight-Errant");
+        this.setName("Emblem Elspeth");
         FilterControlledPermanent filter = new FilterControlledPermanent("Artifacts, creatures, enchantments, and lands you control");
         filter.add(Predicates.or(
                 new CardTypePredicate(CardType.ARTIFACT),

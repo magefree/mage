@@ -65,7 +65,7 @@ import mage.target.common.TargetCreaturePermanent;
 public class SarkhanTheDragonspeaker extends CardImpl {
 
     public SarkhanTheDragonspeaker(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.PLANESWALKER},"{3}{R}{R}");
+        super(ownerId, setInfo, new CardType[]{CardType.PLANESWALKER}, "{3}{R}{R}");
         this.subtype.add("Sarkhan");
 
         this.addAbility(new PlanswalkerEntersWithLoyalityCountersAbility(4));
@@ -166,7 +166,7 @@ class SarkhanTheDragonspeakerEffect extends ContinuousEffectImpl {
 class SarkhanTheDragonspeakerEmblem extends Emblem {
 
     SarkhanTheDragonspeakerEmblem() {
-        setName("EMBLEM: Sarkhan, the Dragonspeaker");
+        setName("Emblem Sarkhan");
         this.setExpansionSetCodeForImage("KTK");
 
         this.getAbilities().add(new BeginningOfDrawTriggeredAbility(Zone.COMMAND, new DrawCardSourceControllerEffect(2), TargetController.YOU, false));

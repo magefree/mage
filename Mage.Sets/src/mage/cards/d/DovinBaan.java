@@ -60,7 +60,7 @@ import mage.target.common.TargetCreaturePermanent;
 public class DovinBaan extends CardImpl {
 
     public DovinBaan(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.PLANESWALKER},"{2}{W}{U}");
+        super(ownerId, setInfo, new CardType[]{CardType.PLANESWALKER}, "{2}{W}{U}");
         this.subtype.add("Dovin");
 
         this.addAbility(new PlanswalkerEntersWithLoyalityCountersAbility(3));
@@ -129,7 +129,7 @@ class DovinBaanCantActivateAbilitiesEffect extends ContinuousRuleModifyingEffect
 class DovinBaanEmblem extends Emblem {
 
     DovinBaanEmblem() {
-        this.setName("EMBLEM: Dovin Baan");
+        this.setName("Emblem Dovin");
         Ability ability = new SimpleStaticAbility(Zone.COMMAND, new DovinBaanCantUntapEffect());
         this.getAbilities().add(ability);
     }

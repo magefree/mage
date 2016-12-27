@@ -66,7 +66,7 @@ import mage.target.common.TargetCreaturePermanent;
 public class DomriRade extends CardImpl {
 
     public DomriRade(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.PLANESWALKER},"{1}{R}{G}");
+        super(ownerId, setInfo, new CardType[]{CardType.PLANESWALKER}, "{1}{R}{G}");
         this.subtype.add("Domri");
 
         this.addAbility(new PlanswalkerEntersWithLoyalityCountersAbility(3));
@@ -79,7 +79,7 @@ public class DomriRade extends CardImpl {
         TargetControlledCreaturePermanent target = new TargetControlledCreaturePermanent();
         target.setTargetTag(1);
         ability2.addTarget(target);
-        
+
         FilterCreaturePermanent filter = new FilterCreaturePermanent("another creature to fight");
         filter.add(new AnotherTargetPredicate(2));
         TargetCreaturePermanent target2 = new TargetCreaturePermanent(filter);
@@ -145,7 +145,7 @@ class DomriRadeEmblem extends Emblem {
 
     // "Creatures you control have double strike, trample, hexproof and haste."
     public DomriRadeEmblem() {
-        this.setName("EMBLEM: Domri Rade");
+        this.setName("Emblem Domri");
         FilterPermanent filter = new FilterControlledCreaturePermanent("Creatures");
         GainAbilityControlledEffect effect = new GainAbilityControlledEffect(DoubleStrikeAbility.getInstance(), Duration.EndOfGame, filter);
         Ability ability = new SimpleStaticAbility(Zone.COMMAND, effect);

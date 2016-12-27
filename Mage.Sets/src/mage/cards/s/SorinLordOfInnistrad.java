@@ -98,6 +98,7 @@ public class SorinLordOfInnistrad extends CardImpl {
 }
 
 class VampireToken extends Token {
+
     VampireToken() {
         super("Vampire", "1/1 black Vampire creature token with lifelink");
         cardType.add(CardType.CREATURE);
@@ -112,7 +113,7 @@ class VampireToken extends Token {
 class SorinLordOfInnistradEmblem extends Emblem {
 
     public SorinLordOfInnistradEmblem() {
-        this.setName("EMBLEM: Sorin, Lord of Innistrad");
+        this.setName("Emblem Sorin");
         BoostControlledEffect effect = new BoostControlledEffect(1, 0, Duration.EndOfGame);
         Ability ability = new SimpleStaticAbility(Zone.COMMAND, effect);
         this.getAbilities().add(ability);

@@ -54,7 +54,7 @@ import mage.target.common.TargetOpponent;
 public class ZamWesell extends CardImpl {
 
     public ZamWesell(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{2}{U}{U}");
+        super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{2}{U}{U}");
         this.supertype.add("Legendary");
         this.subtype.add("Shapeshifter");
         this.subtype.add("Hunter");
@@ -63,6 +63,7 @@ public class ZamWesell extends CardImpl {
 
         // When you cast Zam Wessel, target opponent reveals his or her hand. You may choose a creature card from it and have Zam Wessel enter the battlefield as a copy of that creature card.
         Ability ability = new CastSourceTriggeredAbility(new RevealHandTargetEffect());
+        ability.addEffect(new ZamWesselEffect());
         ability.addTarget(new TargetOpponent());
         this.addAbility(ability);
     }

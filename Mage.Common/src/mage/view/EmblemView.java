@@ -24,7 +24,7 @@ public class EmblemView implements CommandObjectView, Serializable {
         } else {
             expansionSetCode = emblem.getExpansionSetCodeForImage();
         }
-        
+
         rules = emblem.getAbilities().getRules(sourceCard.getName());
     }
 

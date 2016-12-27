@@ -68,7 +68,7 @@ import mage.target.targetpointer.FixedTarget;
 public class DarettiScrapSavant extends CardImpl {
 
     public DarettiScrapSavant(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.PLANESWALKER},"{3}{R}");
+        super(ownerId, setInfo, new CardType[]{CardType.PLANESWALKER}, "{3}{R}");
         this.subtype.add("Daretti");
 
         this.addAbility(new PlanswalkerEntersWithLoyalityCountersAbility(3));
@@ -176,7 +176,6 @@ class DarettiScrapSavantEmblem extends Emblem {
 
     // You get an emblem with "Whenever an artifact is put into your graveyard from the battlefield, return that card to the battlefield at the beginning of the next end step."
     public DarettiScrapSavantEmblem() {
-        this.setName("Emblem - Daretti");
         this.getAbilities().add(new DarettiScrapSavantTriggeredAbility());
     }
 }

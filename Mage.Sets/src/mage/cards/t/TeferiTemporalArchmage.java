@@ -53,7 +53,7 @@ import mage.target.TargetPermanent;
 public class TeferiTemporalArchmage extends CardImpl {
 
     public TeferiTemporalArchmage(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.PLANESWALKER},"{4}{U}{U}");
+        super(ownerId, setInfo, new CardType[]{CardType.PLANESWALKER}, "{4}{U}{U}");
         this.subtype.add("Teferi");
 
         this.addAbility(new PlanswalkerEntersWithLoyalityCountersAbility(5));
@@ -89,7 +89,7 @@ class TeferiTemporalArchmageEmblem extends Emblem {
 
     // "You may activate loyalty abilities of planeswalkers you control on any player's turn any time you could cast an instant."
     public TeferiTemporalArchmageEmblem() {
-        this.setName("EMBLEM: Teferi, Temporal Archmage");
+        this.setName("Emblem Teferi");
         this.getAbilities().add(new SimpleStaticAbility(Zone.COMMAND, new ActivateAbilitiesAnyTimeYouCouldCastInstantEffect(LoyaltyAbility.class, "loyalty abilities of planeswalkers you control on any player's turn")));
     }
 }

@@ -36,7 +36,6 @@ import java.util.UUID;
 import mage.MageObject;
 import mage.abilities.costs.Cost;
 import mage.cards.Card;
-import mage.constants.CardType;
 import mage.constants.PhaseStep;
 import mage.constants.TurnPhase;
 import mage.constants.Zone;
@@ -127,20 +126,10 @@ public class GameView implements Serializable {
                         stack.put(stackObject.getId(), new StackAbilityView(game, (StackAbility) stackObject, token.getName(), new CardView(token)));
                         checkPaid(stackObject.getId(), (StackAbility) stackObject);
                     } else if (object instanceof Emblem) {
-                        Card sourceCard = game.getCard(((Emblem) object).getSourceId());
-                        CardView cardView;
-                        if (sourceCard != null) {
-                            if (!sourceCard.getCardType().contains(CardType.PLANESWALKER)) {
-                                if (sourceCard.getSecondCardFace() != null) {
-                                    sourceCard = sourceCard.getSecondCardFace();
-                                }
-                            }
-                            ((StackAbility) stackObject).setName("Emblem " + sourceCard.getName());
-                            ((StackAbility) stackObject).setExpansionSetCode(sourceCard.getExpansionSetCode());
-                            cardView = new CardView(new EmblemView(((Emblem) object), sourceCard));
-                        } else {
-                            cardView = new CardView(new EmblemView((Emblem) object));
-                        }
+                        CardView cardView = new CardView(new EmblemView((Emblem) object));
+                        // Card sourceCard = (Card) ((Emblem) object).getSourceObject();
+                        ((StackAbility) stackObject).setName(((Emblem) object).getName());
+                        // ((StackAbility) stackObject).setExpansionSetCode(sourceCard.getExpansionSetCode());
                         stack.put(stackObject.getId(),
                                 new StackAbilityView(game, (StackAbility) stackObject, object.getName(), cardView));
                         checkPaid(stackObject.getId(), ((StackAbility) stackObject));

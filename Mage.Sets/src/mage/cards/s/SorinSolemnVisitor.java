@@ -58,7 +58,7 @@ import mage.game.permanent.token.Token;
 public class SorinSolemnVisitor extends CardImpl {
 
     public SorinSolemnVisitor(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.PLANESWALKER},"{2}{W}{B}");
+        super(ownerId, setInfo, new CardType[]{CardType.PLANESWALKER}, "{2}{W}{B}");
         this.subtype.add("Sorin");
 
         this.addAbility(new PlanswalkerEntersWithLoyalityCountersAbility(4));
@@ -97,7 +97,7 @@ public class SorinSolemnVisitor extends CardImpl {
 class SorinSolemnVisitorEmblem extends Emblem {
 
     public SorinSolemnVisitorEmblem() {
-        this.setName("EMBLEM: Sorin, Solemn Visitor");
+        this.setName("Emblem Sorin");
         Ability ability = new BeginningOfUpkeepTriggeredAbility(Zone.COMMAND, new SacrificeEffect(new FilterCreaturePermanent(), 1, "that player"), TargetController.OPPONENT, false, true);
         this.getAbilities().add(ability);
     }

@@ -62,7 +62,7 @@ import mage.target.common.TargetControlledCreaturePermanent;
 public class ObNixilisOfTheBlackOath extends CardImpl {
 
     public ObNixilisOfTheBlackOath(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.PLANESWALKER},"{3}{B}{B}");
+        super(ownerId, setInfo, new CardType[]{CardType.PLANESWALKER}, "{3}{B}{B}");
         this.subtype.add("Nixilis");
 
         this.addAbility(new PlanswalkerEntersWithLoyalityCountersAbility(3));
@@ -131,9 +131,8 @@ class ObNixilisOfTheBlackOathEffect1 extends OneShotEffect {
 class ObNixilisOfTheBlackOathEmblem extends Emblem {
 
     // You get an emblem with "{1}{B}, Sacrifice a creature: You gain X life and draw X cards, where X is the sacrificed creature's power."
-
     public ObNixilisOfTheBlackOathEmblem() {
-        this.setName("EMBLEM: Ob Nixilis of the Black Oath");
+        this.setName("Emblem Nixilis");
         DynamicValue xValue = new SacrificeCostCreaturesPower();
         Effect effect = new GainLifeEffect(xValue);
         effect.setText("You gain X life");

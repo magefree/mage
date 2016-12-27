@@ -68,7 +68,7 @@ public class KioraTheCrashingWave extends CardImpl {
     }
 
     public KioraTheCrashingWave(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.PLANESWALKER},"{2}{G}{U}");
+        super(ownerId, setInfo, new CardType[]{CardType.PLANESWALKER}, "{2}{G}{U}");
         this.subtype.add("Kiora");
 
         this.addAbility(new PlanswalkerEntersWithLoyalityCountersAbility(2));
@@ -164,7 +164,7 @@ class KioraPreventionEffect extends PreventionEffectImpl {
 class KioraEmblem extends Emblem {
 
     public KioraEmblem() {
-        this.setName("EMBLEM: Kiora, the Crashing Wave");
+        this.setName("Emblem Kiora");
         Ability ability = new BeginningOfEndStepTriggeredAbility(Zone.COMMAND, new CreateTokenEffect(new KioraKrakenToken()), TargetController.YOU, null, false);
         this.getAbilities().add(ability);
     }

@@ -62,7 +62,7 @@ public class ElspethSunsChampion extends CardImpl {
     }
 
     public ElspethSunsChampion(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.PLANESWALKER},"{4}{W}{W}");
+        super(ownerId, setInfo, new CardType[]{CardType.PLANESWALKER}, "{4}{W}{W}");
         this.subtype.add("Elspeth");
 
         this.addAbility(new PlanswalkerEntersWithLoyalityCountersAbility(4));
@@ -91,7 +91,7 @@ class ElspethSunsChampionEmblem extends Emblem {
     private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("Creatures");
 
     public ElspethSunsChampionEmblem() {
-        this.setName("EMBLEM: Elspeth, Sun's Champion");
+        this.setName("Emblem Elspeth");
         Ability ability = new SimpleStaticAbility(Zone.COMMAND, new BoostControlledEffect(2, 2, Duration.EndOfGame, filter, false));
         ability.addEffect(new GainAbilityControlledEffect(FlyingAbility.getInstance(), Duration.EndOfGame, filter));
         this.getAbilities().add(ability);

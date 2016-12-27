@@ -63,7 +63,7 @@ public class GarrukCallerOfBeasts extends CardImpl {
     }
 
     public GarrukCallerOfBeasts(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.PLANESWALKER},"{4}{G}{G}");
+        super(ownerId, setInfo, new CardType[]{CardType.PLANESWALKER}, "{4}{G}{G}");
         this.subtype.add("Garruk");
 
         this.addAbility(new PlanswalkerEntersWithLoyalityCountersAbility(4));
@@ -102,7 +102,7 @@ class GarrukCallerOfBeastsEmblem extends Emblem {
     }
 
     public GarrukCallerOfBeastsEmblem() {
-        this.setName("EMBLEM: Garruk, Caller of Beasts");
+        this.setName("Emblem Garruk");
         Effect effect = new SearchLibraryPutInPlayEffect(new TargetCardInLibrary(new FilterCreatureCard("creature card")), false, true, Outcome.PutCreatureInPlay);
         Ability ability = new SpellCastControllerTriggeredAbility(Zone.COMMAND, effect, filter, true, false);
         this.getAbilities().add(ability);

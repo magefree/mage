@@ -87,7 +87,8 @@ public class MomirDuel extends GameImpl {
         for (UUID playerId : state.getPlayerList(startingPlayerId)) {
             Player player = getPlayer(playerId);
             if (player != null) {
-                addEmblem(new MomirEmblem(), ability, playerId);
+                CardInfo cardInfo = CardRepository.instance.findCard("Momir Vig, Simic Visionary");
+                addEmblem(new MomirEmblem(), cardInfo.getCard(), playerId);
             }
         }
         getState().addAbility(ability, null);
@@ -122,8 +123,8 @@ public class MomirDuel extends GameImpl {
 class MomirEmblem extends Emblem {
 
     public MomirEmblem() {
-        setName("Momir Vig, Simic Visionary");
-        //TODO: setExpansionSetCodeForImage(???);
+        setName("Emblem Momir Vig, Simic Visionary");
+        setExpansionSetCodeForImage("DIS");
         // {X}, Discard a card: Put a token into play as a copy of a random creature card with converted mana cost X. Play this ability only any time you could play a sorcery and only once each turn.
         LimitedTimesPerTurnActivatedAbility ability = new LimitedTimesPerTurnActivatedAbility(Zone.COMMAND, new MomirEffect(), new VariableManaCost());
         ability.addCost(new DiscardCardCost());

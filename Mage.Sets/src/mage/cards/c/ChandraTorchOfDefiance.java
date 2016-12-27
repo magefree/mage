@@ -63,7 +63,7 @@ import mage.target.common.TargetCreaturePermanent;
 public class ChandraTorchOfDefiance extends CardImpl {
 
     public ChandraTorchOfDefiance(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.PLANESWALKER},"{2}{R}{R}");
+        super(ownerId, setInfo, new CardType[]{CardType.PLANESWALKER}, "{2}{R}{R}");
         this.subtype.add("Chandra");
 
         this.addAbility(new PlanswalkerEntersWithLoyalityCountersAbility(4));
@@ -142,7 +142,7 @@ class ChandraTorchOfDefianceEmblem extends Emblem {
 
     //  You get an emblem with "Whenever you cast a spell, this emblem deals 5 damage to target creature or player."
     public ChandraTorchOfDefianceEmblem() {
-        this.setName("Emblem - Chandra, Torch of Defiance");
+        this.setName("Emblem Chandra");
         Effect effect = new DamageTargetEffect(5);
         effect.setText("this emblem deals 5 damage to target creature or player");
         Ability ability = new SpellCastControllerTriggeredAbility(Zone.COMMAND, effect, new FilterSpell("a spell"), false, false);

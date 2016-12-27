@@ -1426,19 +1426,21 @@ public abstract class GameImpl implements Game, Serializable {
     }
 
     @Override
-    public void addEmblem(Emblem emblem, Ability source) {
-        addEmblem(emblem, source, null);
+    public void addEmblem(Emblem emblem, MageObject sourceObject, Ability source) {
+        addEmblem(emblem, sourceObject, source.getControllerId());
     }
 
+    /**
+     *
+     * @param emblem
+     * @param sourceObject
+     * @param toPlayerId controller and owner of the emblem
+     */
     @Override
-    public void addEmblem(Emblem emblem, Ability source, UUID toPlayerId) {
+    public void addEmblem(Emblem emblem, MageObject sourceObject, UUID toPlayerId) {
         Emblem newEmblem = emblem.copy();
-        newEmblem.setSourceId(source.getSourceId());
-        if (toPlayerId == null) {
-            newEmblem.setControllerId(source.getControllerId());
-        } else {
-            newEmblem.setControllerId(toPlayerId);
-        }
+        newEmblem.setSourceObject(sourceObject);
+        newEmblem.setControllerId(toPlayerId);
         newEmblem.assignNewId();
         newEmblem.getAbilities().newId();
         for (Ability ability : newEmblem.getAbilities()) {

@@ -749,9 +749,9 @@ public final class GamePanel extends javax.swing.JPanel {
                 if (change) {
                     handCardsOfOpponentAvailable = !handCardsOfOpponentAvailable;
                     if (handCardsOfOpponentAvailable) {
-                        JOptionPane.showMessageDialog(null, "You control other player's turn. \nUse \"Switch Hand\" button to switch between cards in different hands.");
+                        MageFrame.getInstance().showMessage("You control other player's turn. \nUse \"Switch Hand\" button to switch between cards in different hands.");
                     } else {
-                        JOptionPane.showMessageDialog(null, "You lost control on other player's turn.");
+                        MageFrame.getInstance().showMessage("You lost control on other player's turn.");
                     }
                 }
             } else {
