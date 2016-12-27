@@ -57,7 +57,7 @@ import mage.target.common.TargetCreaturePermanent;
 public class ObiWanKenobi extends CardImpl {
 
     public ObiWanKenobi(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.PLANESWALKER},"{3}{W}{U}");
+        super(ownerId, setInfo, new CardType[]{CardType.PLANESWALKER}, "{3}{W}{U}");
         this.subtype.add("Obi-Wan");
 
         this.addAbility(new PlanswalkerEntersWithLoyalityCountersAbility(5));
@@ -96,13 +96,14 @@ class ObiWanKenobiEmblem extends Emblem {
 
     // Creatures you control get +1/+1 and have vigilance, first strike, and lifelink
     public ObiWanKenobiEmblem() {
-        this.setName("Emblem - Obi-Wan");
+        this.setName("Emblem Obi-Wan Kenobi");
+        this.setExpansionSetCodeForImage("SWS");
         Ability ability = new SimpleStaticAbility(Zone.COMMAND, new BoostControlledEffect(1, 1, Duration.EndOfGame));
         Effect effect = new GainAbilityControlledEffect(VigilanceAbility.getInstance(), Duration.EndOfGame);
-        effect.setText("and have vigilance,");
+        effect.setText("and have vigilance");
         ability.addEffect(effect);
         effect = new GainAbilityControlledEffect(FirstStrikeAbility.getInstance(), Duration.WhileOnBattlefield);
-        effect.setText("first strike,");
+        effect.setText(", first strike");
         ability.addEffect(effect);
         effect = new GainAbilityControlledEffect(LifelinkAbility.getInstance(), Duration.WhileOnBattlefield);
         effect.setText("and lifelink.");

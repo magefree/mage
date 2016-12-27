@@ -165,7 +165,7 @@ class AurraSingBaneOfJediEmblem extends Emblem {
 
     //  Whenever a nontoken creature you control leave the battlefied, discard a card."
     public AurraSingBaneOfJediEmblem() {
-        this.setName("Emblem - Aurra");
+        this.setName("Emblem Aurra Sing, Bane of Jedi");
         getAbilities().add(new LeavesBattlefieldAllTriggeredAbility(Zone.COMMAND, new DiscardControllerEffect(1), filter, false));
     }
 }
