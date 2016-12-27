@@ -25,48 +25,47 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.cards.c;
-
-import java.util.UUID;
+package mage.abilities.effects.common.counter;
 
 import mage.abilities.Ability;
-import mage.abilities.common.SimpleActivatedAbility;
-import mage.abilities.common.delayed.AtTheBeginOfNextEndStepDelayedTriggeredAbility;
-import mage.abilities.costs.common.TapSourceCost;
-import mage.abilities.costs.mana.GenericManaCost;
-import mage.abilities.effects.common.CreateDelayedTriggeredAbilityEffect;
-import mage.abilities.effects.common.SacrificeTargetEffect;
-import mage.abilities.effects.common.continuous.BoostTargetEffect;
-import mage.cards.CardImpl;
-import mage.cards.CardSetInfo;
-import mage.constants.CardType;
-import mage.constants.Duration;
-import mage.constants.Zone;
-import mage.target.common.TargetControlledCreaturePermanent;
+import mage.abilities.effects.OneShotEffect;
+import mage.constants.Outcome;
+import mage.counters.CounterType;
+import mage.game.Game;
+import mage.game.permanent.Permanent;
 
 /**
  *
- * @author choiseul11
+ * @author MTGfan
  */
-public class CelestialSword extends CardImpl {
+public class RemoveAllCountersTargetEffect extends OneShotEffect {
+    
+    private final CounterType counterType;
 
-    public CelestialSword(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.ARTIFACT},"{6}");
-
-        // {3}, {tap}: Target creature you control gets +3/+3 until end of turn. Its controller sacrifices it at the beginning of the next end step.
-        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new BoostTargetEffect(3, 3, Duration.EndOfTurn), new GenericManaCost(3));
-        ability.addCost(new TapSourceCost());
-        ability.addTarget(new TargetControlledCreaturePermanent());
-        ability.addEffect(new CreateDelayedTriggeredAbilityEffect(new AtTheBeginOfNextEndStepDelayedTriggeredAbility(new SacrificeTargetEffect())));
-        this.addAbility(ability);
+    public RemoveAllCountersTargetEffect(CounterType counterType) {
+        super(Outcome.Neutral);
+        this.counterType = counterType;
+        staticText = "remove all " + counterType.getName() + " counters from it.";
     }
 
-    public CelestialSword(final CelestialSword card) {
-        super(card);
+    public RemoveAllCountersTargetEffect(RemoveAllCountersTargetEffect effect) {
+        super(effect);
+        this.counterType = effect.counterType;
     }
 
     @Override
-    public CelestialSword copy() {
-        return new CelestialSword(this);
+    public boolean apply(Game game, Ability source) {
+      Permanent permanent = game.getPermanent(targetPointer.getFirst(game, source));
+      if(permanent != null) {
+          int count = permanent.getCounters(game).getCount(counterType);
+          permanent.removeCounters(counterType.getName(), count, game);
+          return true;
+      }
+      return false;
+    }
+
+    @Override
+    public RemoveAllCountersTargetEffect copy() {
+        return new RemoveAllCountersTargetEffect(this);
     }
 }

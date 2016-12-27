@@ -49,9 +49,11 @@ public class PermanentHasCounterCondition implements Condition {
     private int amount;
     private FilterPermanent filter;
     private CountType type;
+    private boolean anyPlayer;
 
     public PermanentHasCounterCondition(CounterType counterType, int amount, FilterPermanent filter) {
         this(counterType, amount, filter, CountType.EQUAL_TO);
+        this.anyPlayer = false;
     }
 
     public PermanentHasCounterCondition(CounterType counterType, int amount, FilterPermanent filter, CountType type) {
@@ -59,11 +61,22 @@ public class PermanentHasCounterCondition implements Condition {
         this.amount = amount;
         this.filter = filter;
         this.type = type;
+        this.anyPlayer = false;
     }
 
+    public PermanentHasCounterCondition(CounterType counterType, int amount, FilterPermanent filter, CountType type, boolean any) {
+        this.counterType = counterType;
+        this.amount = amount;
+        this.filter = filter;
+        this.type = type;
+        this.anyPlayer = any; 
+    }
     @Override
     public boolean apply(Game game, Ability source) {
         List<Permanent> permanents = game.getBattlefield().getActivePermanents(this.filter, source.getControllerId(), game);
+        if(this.anyPlayer == true) {
+            permanents = game.getBattlefield().getAllActivePermanents(this.filter, game);
+        }
         for (Permanent permanent : permanents) {
             switch (this.type) {
                 case FEWER_THAN:

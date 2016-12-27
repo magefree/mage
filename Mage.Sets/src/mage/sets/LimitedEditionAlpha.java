@@ -73,6 +73,7 @@ public class LimitedEditionAlpha extends ExpansionSet {
         cards.add(new SetCardInfo("Crusade", 200, Rarity.RARE, mage.cards.c.Crusade.class));
         cards.add(new SetCardInfo("Crystal Rod", 239, Rarity.UNCOMMON, mage.cards.c.CrystalRod.class));
         cards.add(new SetCardInfo("Cursed Land", 6, Rarity.UNCOMMON, mage.cards.c.CursedLand.class));
+        cards.add(new SetCardInfo("Cyclopean Tomb", 240, Rarity.RARE, mage.cards.c.CyclopeanTomb.class));
         cards.add(new SetCardInfo("Dark Ritual", 7, Rarity.COMMON, mage.cards.d.DarkRitual.class));
         cards.add(new SetCardInfo("Deathgrip", 9, Rarity.UNCOMMON, mage.cards.d.Deathgrip.class));
         cards.add(new SetCardInfo("Deathlace", 10, Rarity.RARE, mage.cards.d.Deathlace.class));

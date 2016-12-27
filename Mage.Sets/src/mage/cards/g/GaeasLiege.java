@@ -32,6 +32,7 @@ import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.common.SimpleStaticAbility;
+import mage.abilities.condition.InvertCondition;
 import mage.abilities.condition.common.SourceAttackingCondition;
 import mage.abilities.costs.common.TapSourceCost;
 import mage.abilities.decorator.ConditionalContinuousEffect;
@@ -74,9 +75,9 @@ public class GaeasLiege extends CardImpl {
 
         // As long as Gaea's Liege isn't attacking, its power and toughness are each equal to the number of Forests you control. As long as Gaea's Liege is attacking, its power and toughness are each equal to the number of Forests defending player controls.
         this.addAbility(new SimpleStaticAbility(Zone.ALL, new ConditionalContinuousEffect(
-                new SetPowerToughnessSourceEffect(new DefendersForestCount(), Duration.EndOfCombat),
                 new SetPowerToughnessSourceEffect(new PermanentsOnBattlefieldCount(filterLands), Duration.EndOfGame),
-                SourceAttackingCondition.getInstance(),
+                new SetPowerToughnessSourceEffect(new DefendersForestCount(), Duration.EndOfCombat),
+                new InvertCondition(SourceAttackingCondition.getInstance()),
                 "As long as {this} isn't attacking, its power and toughness are each equal to the number of Forests you control. As long as {this} is attacking, its power and toughness are each equal to the number of Forests defending player controls.")));
         // {tap}: Target land becomes a Forest until Gaea's Liege leaves the battlefield.
         Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new BecomesBasicLandTargetEffect(Duration.WhileOnBattlefield, "Forest"), new TapSourceCost());

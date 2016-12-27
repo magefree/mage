@@ -105,6 +105,7 @@ public class MastersEditionIV extends ExpansionSet {
         cards.add(new SetCardInfo("Crumble", 147, Rarity.COMMON, mage.cards.c.Crumble.class));
         cards.add(new SetCardInfo("Cyclone", 148, Rarity.RARE, mage.cards.c.Cyclone.class));
         cards.add(new SetCardInfo("Cyclopean Mummy", 72, Rarity.COMMON, mage.cards.c.CyclopeanMummy.class));
+        cards.add(new SetCardInfo("Cyclopean Tomb", 195, Rarity.RARE, mage.cards.c.CyclopeanTomb.class));
         cards.add(new SetCardInfo("Dakmor Plague", 73, Rarity.UNCOMMON, mage.cards.d.DakmorPlague.class));
         cards.add(new SetCardInfo("Dark Ritual", 74, Rarity.COMMON, mage.cards.d.DarkRitual.class));
         cards.add(new SetCardInfo("Deathcoil Wurm", 149, Rarity.RARE, mage.cards.d.DeathcoilWurm.class));

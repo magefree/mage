@@ -40,11 +40,11 @@ import mage.filter.FilterPermanent;
 import mage.filter.predicate.mageobject.ColorPredicate;
 import mage.ObjectColor;
 import mage.abilities.Ability;
-import mage.abilities.TriggeredAbility;
-import mage.abilities.common.OnEventTriggeredAbility;
+import mage.abilities.StateTriggeredAbility;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.condition.Condition;
-import mage.abilities.decorator.ConditionalTriggeredAbility;
+import mage.abilities.decorator.ConditionalContinuousEffect;
+import mage.abilities.effects.Effect;
 import mage.abilities.effects.common.SacrificeSourceEffect;
 import mage.abilities.effects.common.continuous.BoostAllEffect;
 import mage.constants.Duration;
@@ -74,15 +74,10 @@ public class Jihad extends CardImpl {
         this.addAbility(new AsEntersBattlefieldAbility(new ChooseOpponentEffect(Outcome.Detriment)));
         
         // White creatures get +2/+1 as long as the chosen player controls a nontoken permanent of the chosen color.
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new BoostAllEffect(2, 1, Duration.WhileOnBattlefield, filter, false)));
+        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new ConditionalContinuousEffect(new BoostAllEffect(2, 1, Duration.WhileOnBattlefield, filter, false), new JihadOpponentCondition(), "White creatures get +2/+1 as long as the chosen player controls a nontoken permanent of the chosen color.")));
         
         // When the chosen player controls no nontoken permanents of the chosen color, sacrifice Jihad.
-        
-        // Not quite as immediate as I'd like but.. Static doesnt accept that effect and probably only work upon casting (maybe a continuous ability would, if not hog the system)
-        TriggeredAbility triggered = new OnEventTriggeredAbility(GameEvent.EventType.STEP_CHANGED, "end Jihad", true, new SacrificeSourceEffect());
-        this.addAbility(new ConditionalTriggeredAbility(triggered, new NoColoredPermanentOpponentCondition(), "no nontoken permanents of the chosen color, sacrifice Jihad"));
-        //this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new ConditionalOneShotEffect(new SacrificeSourceEffect()), new NoColoredPermanentOpponentCondition(), "Jihad ending"));
-        
+        this.addAbility(new JihadTriggeredAbility(new SacrificeSourceEffect()));
     }
 
     public Jihad(final Jihad card) {
@@ -95,24 +90,44 @@ public class Jihad extends CardImpl {
     }
 }
 
-class NoColoredPermanentOpponentCondition implements Condition {
+class JihadTriggeredAbility extends StateTriggeredAbility {
 
-    private static NoColoredPermanentOpponentCondition fInstance = new NoColoredPermanentOpponentCondition();
-           
-    public static Condition getInstance() {
-        return fInstance;
+    public JihadTriggeredAbility(Effect effect) {
+        super(Zone.BATTLEFIELD, effect);
     }
+
+    public JihadTriggeredAbility(final JihadTriggeredAbility ability) {
+        super(ability);
+    }
+
+    @Override
+    public JihadTriggeredAbility copy() {
+        return new JihadTriggeredAbility(this);
+    }
+
+    @Override
+    public boolean checkTrigger(GameEvent event, Game game) {
+        UUID chosenOpponent = (UUID) game.getState().getValue(getSourceId().toString() + ChooseOpponentEffect.VALUE_KEY);
+        FilterPermanent filter = new FilterPermanent();
+        filter.add(new ColorPredicate((ObjectColor) game.getState().getValue(getSourceId() + "_color")));
+        filter.add(Predicates.not(new TokenPredicate()));        
+        return game.getBattlefield().countAll(filter, chosenOpponent, game) == 0;
+    }
+    
+    @Override
+    public String getRule() {
+        return "When the chosen player controls no nontoken permanents of the chosen color, " + super.getRule();
+    }
+}
+
+class JihadOpponentCondition implements Condition {
 
     @Override
     public boolean apply(Game game, Ability source) {
         UUID chosenOpponent = (UUID) game.getState().getValue(source.getSourceId().toString() + ChooseOpponentEffect.VALUE_KEY);
-        
         FilterPermanent filter = new FilterPermanent();
         filter.add(new ColorPredicate((ObjectColor) game.getState().getValue(source.getSourceId() + "_color")));
         filter.add(Predicates.not(new TokenPredicate()));        
-        //filter.add(new ColorPredicate(ObjectColor.WHITE)); // Given this typing, somehow the above doesn't seem right, but I copied from StoryCircle card
-            
-        return game.getBattlefield().countAll(filter, chosenOpponent, game)==0;
-        
+        return game.getBattlefield().countAll(filter, chosenOpponent, game) > 0;
     }
 }
