@@ -150,6 +150,7 @@ public class Invasion extends ExpansionSet {
         cards.add(new SetCardInfo("Goblin Spy", 145, Rarity.UNCOMMON, mage.cards.g.GoblinSpy.class));
         cards.add(new SetCardInfo("Hanna, Ship's Navigator", 249, Rarity.RARE, mage.cards.h.HannaShipsNavigator.class));
         cards.add(new SetCardInfo("Harrow", 189, Rarity.COMMON, mage.cards.h.Harrow.class));
+        cards.add(new SetCardInfo("Harsh Judgment", 19, Rarity.RARE, mage.cards.h.HarshJudgment.class));
         cards.add(new SetCardInfo("Hate Weaver", 108, Rarity.UNCOMMON, mage.cards.h.HateWeaver.class));
         cards.add(new SetCardInfo("Heroes' Reunion", 250, Rarity.UNCOMMON, mage.cards.h.HeroesReunion.class));
         cards.add(new SetCardInfo("Holy Day", 20, Rarity.COMMON, mage.cards.h.HolyDay.class));
