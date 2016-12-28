@@ -40,8 +40,6 @@ import mage.constants.CardType;
 import mage.constants.Outcome;
 import mage.constants.Zone;
 import mage.counters.Counter;
-import mage.filter.FilterPermanent;
-import mage.filter.predicate.permanent.CounterAnyPredicate;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.target.TargetPermanent;
@@ -51,12 +49,6 @@ import mage.target.TargetPermanent;
  * @author LevelX2
  */
 public class GilderBairn extends CardImpl {
-    
-    private static final FilterPermanent filter = new FilterPermanent();
-    
-    static {
-        filter.add(new CounterAnyPredicate());
-    }
 
     public GilderBairn(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{1}{G/U}{G/U}");
@@ -68,7 +60,7 @@ public class GilderBairn extends CardImpl {
         // {2}{GU}, {untap}: For each counter on target permanent, put another of those counters on that permanent.
         Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new GilderBairnEffect(), new ManaCostsImpl("{2}{G/U}"));
         ability.addCost(new UntapSourceCost());
-        ability.addTarget(new TargetPermanent(filter));
+        ability.addTarget(new TargetPermanent());
         this.addAbility(ability);
 
     }
