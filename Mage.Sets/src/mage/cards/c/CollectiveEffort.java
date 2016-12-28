@@ -131,7 +131,7 @@ class CollectiveEffortEffect extends OneShotEffect {
         Player target = game.getPlayer(source.getFirstTarget());
         if (target != null) {
             for (Permanent p : game.getBattlefield().getAllActivePermanents(new FilterCreaturePermanent(), target.getId(), game)) {
-                p.addCounters(CounterType.P1P1.createInstance(), game);
+                p.addCounters(CounterType.P1P1.createInstance(), source, game);
             }
             return true;
         }

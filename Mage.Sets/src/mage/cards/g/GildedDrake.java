@@ -61,7 +61,7 @@ public class GildedDrake extends CardImpl {
     }
 
     public GildedDrake(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{1}{U}");
+        super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{1}{U}");
         this.subtype.add("Drake");
 
         this.power = new MageInt(3);
@@ -105,20 +105,22 @@ class GildedDrakeEffect extends OneShotEffect {
 
     @Override
     public boolean apply(Game game, Ability source) {
-        Permanent sourceObject = game.getPermanent(source.getSourceId());
-        Permanent targetPermanent;
+
         Player controller = game.getPlayer(source.getControllerId());
         if (controller != null) {
-            if (targetPointer.getFirst(game, source) != null) {
-                targetPermanent = game.getPermanent(targetPointer.getFirst(game, source));
-                if (targetPermanent != null) {
-                    ContinuousEffect effect = new ExchangeControlTargetEffect(Duration.EndOfGame, "", true);
-                    effect.setTargetPointer(targetPointer);
-                    game.addEffect(effect, source);
-                    return true;
+            Permanent sourceObject = game.getPermanent(source.getSourceId());
+            if (sourceObject != null) {
+                if (targetPointer.getFirst(game, source) != null) {
+                    Permanent targetPermanent = game.getPermanent(targetPointer.getFirst(game, source));
+                    if (targetPermanent != null) {
+                        ContinuousEffect effect = new ExchangeControlTargetEffect(Duration.EndOfGame, "", true);
+                        effect.setTargetPointer(targetPointer);
+                        game.addEffect(effect, source);
+                        return true;
+                    }
                 }
+                sourceObject.sacrifice(source.getSourceId(), game);
             }
-            sourceObject.sacrifice(source.getSourceId(), game);
             return true;
         }
         return false;

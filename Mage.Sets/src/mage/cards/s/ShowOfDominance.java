@@ -59,7 +59,7 @@ import mage.target.targetpointer.FixedTarget;
 public class ShowOfDominance extends CardImpl {
 
     public ShowOfDominance(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{3}{G}");
+        super(ownerId, setInfo, new CardType[]{CardType.SORCERY}, "{3}{G}");
 
         // Put four +1/+1 counters on the creature with the highest power. If two or more creatures are tied for the greatest power, you choose one of them. That creature gains trample.
         this.getSpellAbility().addEffect(new ShowOfDominanceEffect());
@@ -102,7 +102,7 @@ class ShowOfDominanceEffect extends OneShotEffect {
                     highestPower = permanent.getPower().getValue();
                     selectedCreature = permanent;
                 } else if (highestPower == permanent.getPower().getValue()) {
-                    highestPower = permanent.getToughness().getValue();
+                    highestPower = permanent.getPower().getValue();
                     selectedCreature = null;
                 }
             }

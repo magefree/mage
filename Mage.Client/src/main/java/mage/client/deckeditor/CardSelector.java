@@ -43,7 +43,6 @@ import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.util.*;
 import javax.swing.DefaultComboBoxModel;
-import javax.swing.JOptionPane;
 import javax.swing.JTable;
 import javax.swing.SwingUtilities;
 import javax.swing.table.DefaultTableCellRenderer;
@@ -55,6 +54,7 @@ import mage.cards.Sets;
 import mage.cards.repository.CardCriteria;
 import mage.cards.repository.CardInfo;
 import mage.cards.repository.CardRepository;
+import mage.client.MageFrame;
 import mage.client.cards.*;
 import mage.client.constants.Constants.SortBy;
 import mage.client.deckeditor.table.TableModel;
@@ -960,7 +960,7 @@ public class CardSelector extends javax.swing.JPanel implements ComponentListene
                 filterCards();
             }
         } else {
-            JOptionPane.showMessageDialog(null, "An expansion set must be selected to be able to generate a booster.");
+            MageFrame.getInstance().showMessage("An expansion set must be selected to be able to generate a booster.");
         }
     }//GEN-LAST:event_btnBoosterActionPerformed
 
@@ -993,7 +993,7 @@ public class CardSelector extends javax.swing.JPanel implements ComponentListene
         if (currentView.cardsSize() > CardGrid.MAX_IMAGES) {
             jToggleCardView.setSelected(false);
             jToggleListView.setSelected(true);
-            JOptionPane.showMessageDialog(this, new StringBuilder("The card view can't be used for more than ").append(CardGrid.MAX_IMAGES).append(" cards.").toString());
+            MageFrame.getInstance().showMessage("The card view can't be used for more than " + CardGrid.MAX_IMAGES + " cards.");
         } else {
             if (!(currentView instanceof CardGrid)) {
                 toggleViewMode();

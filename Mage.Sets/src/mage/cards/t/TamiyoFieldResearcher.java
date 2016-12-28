@@ -85,7 +85,7 @@ public class TamiyoFieldResearcher extends CardImpl {
     }
 
     public TamiyoFieldResearcher(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.PLANESWALKER},"{1}{G}{W}{U}");
+        super(ownerId, setInfo, new CardType[]{CardType.PLANESWALKER}, "{1}{G}{W}{U}");
         this.subtype.add("Tamiyo");
 
         this.addAbility(new PlanswalkerEntersWithLoyalityCountersAbility(4));
@@ -152,7 +152,7 @@ class TamiyoFieldResearcherEffect1 extends OneShotEffect {
 }
 
 class TamiyoFieldResearcherDelayedTriggeredAbility extends DelayedTriggeredAbility {
-    
+
     private int startingTurn;
     private List<MageObjectReference> creatures;
 
@@ -160,7 +160,7 @@ class TamiyoFieldResearcherDelayedTriggeredAbility extends DelayedTriggeredAbili
         super(new DrawCardSourceControllerEffect(1), Duration.Custom, false);
         this.creatures = creatures;
         this.startingTurn = startingTurn;
-     }
+    }
 
     public TamiyoFieldResearcherDelayedTriggeredAbility(final TamiyoFieldResearcherDelayedTriggeredAbility ability) {
         super(ability);
@@ -183,7 +183,7 @@ class TamiyoFieldResearcherDelayedTriggeredAbility extends DelayedTriggeredAbili
         }
         return false;
     }
-    
+
     @Override
     public boolean isInactive(Game game) {
         return game.getActivePlayerId().equals(getControllerId()) && game.getTurnNum() != startingTurn;
@@ -205,7 +205,7 @@ class TamiyoFieldResearcherEmblem extends Emblem {
 
     public TamiyoFieldResearcherEmblem() {
 
-        this.setName("EMBLEM: Tamiyo, Field Researcher");
+        this.setName("Emblem Tamiyo");
 
         this.getAbilities().add(new SimpleStaticAbility(Zone.COMMAND, new TamiyoFieldResearcherCastingEffect()));
     }

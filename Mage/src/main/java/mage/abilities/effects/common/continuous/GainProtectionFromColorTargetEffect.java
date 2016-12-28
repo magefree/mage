@@ -63,7 +63,7 @@ public class GainProtectionFromColorTargetEffect extends GainAbilityTargetEffect
 
     public GainProtectionFromColorTargetEffect(final GainProtectionFromColorTargetEffect effect) {
         super(effect);
-        choice = effect.choice;
+        this.choice = effect.choice.copy();
     }
 
     @Override

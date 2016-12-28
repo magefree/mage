@@ -109,7 +109,7 @@ class VastwoodHydraDistributeEffect extends OneShotEffect {
             for (UUID target : multiTarget.getTargets()) {
                 Permanent permanent = game.getPermanent(target);
                 if (permanent != null) {
-                    permanent.addCounters(CounterType.P1P1.createInstance(multiTarget.getTargetAmount(target)), game);
+                    permanent.addCounters(CounterType.P1P1.createInstance(multiTarget.getTargetAmount(target)), source, game);
                 }
             }
         }

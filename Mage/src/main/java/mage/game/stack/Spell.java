@@ -851,13 +851,13 @@ public class Spell extends StackObjImpl implements Card {
     }
 
     @Override
-    public boolean addCounters(Counter counter, Game game) {
-        return card.addCounters(counter, game);
+    public boolean addCounters(Counter counter, Ability source, Game game) {
+        return card.addCounters(counter, source, game);
     }
 
     @Override
-    public boolean addCounters(Counter counter, Game game, ArrayList<UUID> appliedEffects) {
-        return card.addCounters(counter, game, appliedEffects);
+    public boolean addCounters(Counter counter, Ability source, Game game, ArrayList<UUID> appliedEffects) {
+        return card.addCounters(counter, source, game, appliedEffects);
     }
 
     @Override

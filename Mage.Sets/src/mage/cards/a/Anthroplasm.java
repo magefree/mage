@@ -101,7 +101,7 @@ class AnthroplasmEffect extends OneShotEffect {
             //Remove all +1/+1 counters
             permanent.removeCounters(permanent.getCounters(game).get(CounterType.P1P1.getName()), game);
             //put X +1/+1 counters
-            permanent.addCounters(CounterType.P1P1.createInstance(source.getManaCostsToPay().getX()), game);
+            permanent.addCounters(CounterType.P1P1.createInstance(source.getManaCostsToPay().getX()), source, game);
             return true;
         }
         return false;

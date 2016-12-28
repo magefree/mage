@@ -144,9 +144,9 @@ class OranRiefHydraEffect extends OneShotEffect {
         Permanent sourcePermanent = game.getPermanent(source.getSourceId());
         if (land != null && sourcePermanent != null) {
             if (land.hasSubtype("Forest", game)) {
-                sourcePermanent.addCounters(CounterType.P1P1.createInstance(2), game);
+                sourcePermanent.addCounters(CounterType.P1P1.createInstance(2), source, game);
             } else {
-                sourcePermanent.addCounters(CounterType.P1P1.createInstance(), game);
+                sourcePermanent.addCounters(CounterType.P1P1.createInstance(), source, game);
             }
             return true;
         }

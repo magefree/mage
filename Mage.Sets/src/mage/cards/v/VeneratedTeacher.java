@@ -91,7 +91,7 @@ class VeneratedTeacherEffect extends OneShotEffect {
             for (Permanent permanent : permanents) {
                 for (Ability ability : permanent.getAbilities()) {
                     if (ability instanceof LevelUpAbility) {
-                        permanent.addCounters(CounterType.LEVEL.createInstance(2), game);
+                        permanent.addCounters(CounterType.LEVEL.createInstance(2), source, game);
                     }
                 }
             }

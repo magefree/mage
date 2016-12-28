@@ -24,8 +24,7 @@
 * The views and conclusions contained in the software and documentation are those of the
 * authors and should not be interpreted as representing official policies, either expressed
 * or implied, of BetaSteward_at_googlemail.com.
-*/
-
+ */
 package mage.abilities.effects.common;
 
 import mage.MageObject;
@@ -71,7 +70,7 @@ public class GetEmblemTargetPlayerEffect extends OneShotEffect {
         if (toPlayer == null) {
             return false;
         }
-        game.addEmblem(emblem, source, toPlayer.getId());
+        game.addEmblem(emblem, sourceObject, toPlayer.getId());
         return true;
     }
 

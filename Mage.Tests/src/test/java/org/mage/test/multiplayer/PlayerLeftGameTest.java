@@ -32,6 +32,7 @@ import mage.constants.MultiplayerAttackOption;
 import mage.constants.PhaseStep;
 import mage.constants.RangeOfInfluence;
 import mage.constants.Zone;
+import mage.counters.CounterType;
 import mage.game.FreeForAll;
 import mage.game.Game;
 import mage.game.GameException;
@@ -141,4 +142,59 @@ public class PlayerLeftGameTest extends CardTestMultiPlayerBase {
         assertPermanentCount(playerA, "Rootwater Commando", 0); // Goes to graveyard becuase player C left
         assertPermanentCount(playerA, "Rootwater Commando", 0); // Returned back to player A
     }
+
+    /**
+     * Xmage throws an error involving an emblem unable to find the initial
+     * source if it has a proc. To reproduce, a Planeswalker was taken from an
+     * original player's control, such as using Scrambleverse to shuffle Jace,
+     * Unraveler of Secrets, to a second player and then the second player uses
+     * Jace's ability to create an emblem ("Whenever an opponent casts his or
+     * her first spell each turn, counter that spell."). Then the original
+     * player concedes the game and removes the Planeswalker. Once it becomes an
+     * opponent of the original player's turn and that opponent plays a spell,
+     * Xmage throws an error and rollsback the turn.
+     *
+     * I don't have the actual error report on my due to negligence, but what I
+     * can recollect is that the error message was along the lines of "The
+     * emblem cannot find the original source. This turn will be rolled back".
+     * This error message will always appear when an opponent tries to play a
+     * spell. Player order: A -> D -> C -> B
+     */
+    @Test
+    public void TestOtherPlayerPlaneswalkerCreatedEmblem() {
+        // +1: Scry 1, then draw a card.
+        // -2: Return target creature to its owner's hand.
+        // -8: You get an emblem with "Whenever an opponent casts his or her first spell each turn, counter that spell."
+        addCard(Zone.BATTLEFIELD, playerC, "Jace, Unraveler of Secrets");
+        addCounters(1, PhaseStep.DRAW, playerC, "Jace, Unraveler of Secrets", CounterType.LOYALTY, 8);
+
+        addCard(Zone.BATTLEFIELD, playerA, "Island", 6);
+        // Enchant permanent (Target a permanent as you cast this. This card enters the battlefield attached to that permanent.)
+        // You control enchanted permanent.
+        addCard(Zone.HAND, playerA, "Confiscate"); // Enchantment Aura
+
+        addCard(Zone.BATTLEFIELD, playerB, "Plains", 2);
+        addCard(Zone.HAND, playerB, "Silvercoat Lion");
+
+        addCard(Zone.BATTLEFIELD, playerD, "Silvercoat Lion");
+
+        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Confiscate", "Jace, Unraveler of Secrets");
+        activateAbility(1, PhaseStep.POSTCOMBAT_MAIN, playerA, "-8: You get an emblem with");
+
+        castSpell(2, PhaseStep.PRECOMBAT_MAIN, playerA, "Blind with Anger", "Rootwater Commando");
+        attack(2, playerD, "Silvercoat Lion", playerC);
+
+        castSpell(3, PhaseStep.PRECOMBAT_MAIN, playerB, "Silvercoat Lion");
+
+        setStopAt(3, PhaseStep.BEGIN_COMBAT);
+        execute();
+
+        assertLife(playerC, 0);
+        assertPermanentCount(playerC, 0);
+        assertGraveyardCount(playerA, "Confiscate", 1);
+        assertPermanentCount(playerA, "Jace, Unraveler of Secrets", 0); // Removed from game because player C left the game
+        assertEmblemCount(playerA, 1);
+        assertGraveyardCount(playerB, "Silvercoat Lion", 1);
+    }
+
 }

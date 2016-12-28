@@ -148,7 +148,7 @@ class WookieeMysticWatcher extends Watcher {
         if (event.getType() == GameEvent.EventType.ENTERS_THE_BATTLEFIELD) {
             if (creatures.contains(event.getSourceId())) {
                 Permanent creature = game.getPermanent(event.getSourceId());
-                creature.addCounters(CounterType.P1P1.createInstance(), game);
+                creature.addCounters(CounterType.P1P1.createInstance(), source, game);
                 creatures.remove(event.getSourceId());
             }
         }

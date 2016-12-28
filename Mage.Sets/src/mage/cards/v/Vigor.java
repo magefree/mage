@@ -99,7 +99,7 @@ class VigorReplacementEffect extends ReplacementEffectImpl {
             event.setAmount(0);
             Permanent permanent = game.getPermanent(event.getTargetId());
             if (permanent != null) {
-                permanent.addCounters(CounterType.P1P1.createInstance(preventedDamage), game);
+                permanent.addCounters(CounterType.P1P1.createInstance(preventedDamage), source, game);
             }
             game.fireEvent(GameEvent.getEvent(GameEvent.EventType.PREVENTED_DAMAGE, source.getFirstTarget(), source.getSourceId(), source.getControllerId(), preventedDamage));
             return true;

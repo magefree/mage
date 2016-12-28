@@ -54,7 +54,7 @@ import mage.target.common.TargetOpponent;
 public class ObNixilisReignited extends CardImpl {
 
     public ObNixilisReignited(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.PLANESWALKER},"{3}{B}{B}");
+        super(ownerId, setInfo, new CardType[]{CardType.PLANESWALKER}, "{3}{B}{B}");
         this.subtype.add("Nixilis");
 
         this.addAbility(new PlanswalkerEntersWithLoyalityCountersAbility(5));
@@ -94,7 +94,7 @@ public class ObNixilisReignited extends CardImpl {
 class ObNixilisReignitedEmblem extends Emblem {
 
     public ObNixilisReignitedEmblem() {
-        setName("EMBLEM: Ob Nixilis Reignited");
+        setName("Emblem Nixilis");
 
         this.getAbilities().add(new ObNixilisEmblemTriggeredAbility(new LoseLifeSourceControllerEffect(2), false));
         this.setExpansionSetCodeForImage("BFZ");

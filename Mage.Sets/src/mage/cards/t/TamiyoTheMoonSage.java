@@ -65,7 +65,7 @@ import mage.target.TargetPlayer;
 public class TamiyoTheMoonSage extends CardImpl {
 
     public TamiyoTheMoonSage(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.PLANESWALKER},"{3}{U}{U}");
+        super(ownerId, setInfo, new CardType[]{CardType.PLANESWALKER}, "{3}{U}{U}");
         this.subtype.add("Tamiyo");
 
         this.addAbility(new PlanswalkerEntersWithLoyalityCountersAbility(4));
@@ -132,7 +132,7 @@ class TappedCreaturesControlledByTargetCount implements DynamicValue {
 class TamiyoTheMoonSageEmblem extends Emblem {
 
     public TamiyoTheMoonSageEmblem() {
-        this.setName("EMBLEM: Tamiyo, the Moon Sage");
+        this.setName("Emblem Tamiyo");
         Ability ability = new SimpleStaticAbility(Zone.COMMAND, new MaximumHandSizeControllerEffect(Integer.MAX_VALUE, Duration.EndOfGame, HandSizeModification.SET));
         this.getAbilities().add(ability);
         Effect effect = new ReturnToHandTargetEffect();

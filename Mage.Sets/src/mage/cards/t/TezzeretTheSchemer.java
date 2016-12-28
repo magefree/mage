@@ -27,6 +27,7 @@
  */
 package mage.cards.t;
 
+import java.util.UUID;
 import mage.abilities.Ability;
 import mage.abilities.LoyaltyAbility;
 import mage.abilities.common.BeginningOfCombatTriggeredAbility;
@@ -57,8 +58,6 @@ import mage.game.command.Emblem;
 import mage.game.permanent.token.Token;
 import mage.target.common.TargetArtifactPermanent;
 import mage.target.common.TargetCreaturePermanent;
-
-import java.util.UUID;
 
 /**
  * @author JRHerlehy
@@ -108,7 +107,7 @@ class TezzeretTheSchemerEmblem extends Emblem {
     }
 
     public TezzeretTheSchemerEmblem() {
-        this.setName("EMBLEM: Tezzeret The Schemer");
+        this.setName("Emblem Tezzeret");
 
         Effect effect = new AddCardTypeTargetEffect(CardType.CREATURE, Duration.EndOfGame);
         effect.setText("target artifact you control becomes an artifact creature");

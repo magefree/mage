@@ -40,11 +40,13 @@ import mage.cards.CardsImpl;
 import mage.constants.CardType;
 import mage.constants.Outcome;
 import mage.constants.SetTargetPointer;
+import mage.constants.TargetController;
 import mage.constants.Zone;
 import mage.filter.Filter;
 import mage.filter.common.FilterCreatureCard;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.filter.predicate.IntComparePredicate;
+import mage.filter.predicate.other.OwnerPredicate;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.game.stack.Spell;
@@ -58,12 +60,18 @@ import mage.watchers.common.CastFromHandWatcher;
  */
 public class WildPair extends CardImpl {
 
+    private final static FilterCreaturePermanent filter = new FilterCreaturePermanent("a creature");
+
+    static {
+        filter.add(new OwnerPredicate(TargetController.YOU));
+    }
+
     public WildPair(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.ENCHANTMENT},"{4}{G}{G}");
+        super(ownerId, setInfo, new CardType[]{CardType.ENCHANTMENT}, "{4}{G}{G}");
 
         // Whenever a creature enters the battlefield, if you cast it from your hand, you may search your library for a creature card with the same total power and toughness and put it onto the battlefield. If you do, shuffle your library.
         this.addAbility(new ConditionalTriggeredAbility(
-                new EntersBattlefieldAllTriggeredAbility(Zone.BATTLEFIELD, new WildPairEffect(), new FilterCreaturePermanent("a creature"), true, SetTargetPointer.PERMANENT, ""),
+                new EntersBattlefieldAllTriggeredAbility(Zone.BATTLEFIELD, new WildPairEffect(), filter, true, SetTargetPointer.PERMANENT, ""),
                 new CastFromHandTargetCondition(),
                 "Whenever a creature enters the battlefield, if you cast it from your hand, you may search your library for a creature card with the same total power and toughness and put it onto the battlefield. If you do, shuffle your library."
         ), new CastFromHandWatcher());

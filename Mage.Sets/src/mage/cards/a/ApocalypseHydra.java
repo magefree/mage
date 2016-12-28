@@ -103,9 +103,9 @@ class ApocalypseHydraEffect extends OneShotEffect {
                 int amount = spellAbility.getManaCostsToPay().getX();
                 if (amount > 0) {
                     if (amount < 5) {
-                        permanent.addCounters(CounterType.P1P1.createInstance(amount), game);
+                        permanent.addCounters(CounterType.P1P1.createInstance(amount), source, game);
                     } else {
-                        permanent.addCounters(CounterType.P1P1.createInstance(amount * 2), game);
+                        permanent.addCounters(CounterType.P1P1.createInstance(amount * 2), source, game);
                     }
                 }
             }

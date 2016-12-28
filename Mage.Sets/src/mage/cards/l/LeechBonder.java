@@ -129,7 +129,7 @@ class LeechBonderEffect extends OneShotEffect {
                 if (counterType != null) {
                     Counter counter = counterType.createInstance();
                     fromPermanent.removeCounters(counter, game);
-                    toPermanent.addCounters(counter, game);
+                    toPermanent.addCounters(counter, source, game);
                     return true;
                 }
             }

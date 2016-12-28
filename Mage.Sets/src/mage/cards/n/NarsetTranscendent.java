@@ -65,7 +65,7 @@ import mage.target.targetpointer.FixedTarget;
 public class NarsetTranscendent extends CardImpl {
 
     public NarsetTranscendent(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.PLANESWALKER},"{2}{W}{U}");
+        super(ownerId, setInfo, new CardType[]{CardType.PLANESWALKER}, "{2}{W}{U}");
         this.subtype.add("Narset");
 
         this.addAbility(new PlanswalkerEntersWithLoyalityCountersAbility(6));
@@ -226,7 +226,7 @@ class NarsetTranscendentEmblem extends Emblem {
 
     public NarsetTranscendentEmblem() {
 
-        this.setName("EMBLEM: Narset Transcendent");
+        this.setName("Emblem Narset");
 
         this.getAbilities().add(new SimpleStaticAbility(Zone.COMMAND, new NarsetTranscendentCantCastEffect()));
     }

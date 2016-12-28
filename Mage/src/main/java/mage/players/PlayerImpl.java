@@ -570,6 +570,7 @@ public abstract class PlayerImpl implements Player, Serializable {
             if (!player.hasLeft() && !player.hasLost()) {
                 player.setGameUnderYourControl(false);
                 player.setTurnControlledBy(this.getId());
+                game.informPlayers(getLogName() + " controlls the turn of " + player.getLogName());
             }
             DelayedTriggeredAbility ability = new AtTheEndOfTurnStepPostDelayedTriggeredAbility(new LoseControlOnOtherPlayersControllerEffect(this.getLogName(), player.getLogName()));
             ability.setSourceId(getId());
@@ -1849,24 +1850,24 @@ public abstract class PlayerImpl implements Player, Serializable {
     @Override
     public boolean addCounters(Counter counter, Game game) {
         boolean returnCode = true;
-        GameEvent countersEvent = GameEvent.getEvent(EventType.ADD_COUNTERS, playerId, playerId, counter.getName(), counter.getCount());
+        GameEvent countersEvent = GameEvent.getEvent(EventType.ADD_COUNTERS, playerId, null, playerId, counter.getName(), counter.getCount());
         if (!game.replaceEvent(countersEvent)) {
             int amount = countersEvent.getAmount();
             int finalAmount = amount;
             for (int i = 0; i < amount; i++) {
                 Counter eventCounter = counter.copy();
                 eventCounter.remove(amount - 1);
-                GameEvent event = GameEvent.getEvent(EventType.ADD_COUNTER, playerId, playerId, counter.getName(), 1);
+                GameEvent event = GameEvent.getEvent(EventType.ADD_COUNTER, playerId, null, playerId, counter.getName(), 1);
                 if (!game.replaceEvent(event)) {
                     getCounters().addCounter(eventCounter);
-                    game.fireEvent(GameEvent.getEvent(EventType.COUNTER_ADDED, playerId, playerId, counter.getName(), 1));
+                    game.fireEvent(GameEvent.getEvent(EventType.COUNTER_ADDED, playerId, null, playerId, counter.getName(), 1));
                 } else {
                     finalAmount--;
                     returnCode = false;
                 }
             }
             if (finalAmount > 0) {
-                game.fireEvent(GameEvent.getEvent(EventType.COUNTERS_ADDED, playerId, playerId, counter.getName(), amount));
+                game.fireEvent(GameEvent.getEvent(EventType.COUNTERS_ADDED, playerId, null, playerId, counter.getName(), amount));
             }
         } else {
             returnCode = false;

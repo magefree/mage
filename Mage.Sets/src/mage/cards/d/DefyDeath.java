@@ -87,7 +87,7 @@ class DefyDeathEffect extends OneShotEffect {
     public boolean apply(Game game, Ability source) {
         Permanent permanent = game.getPermanent(source.getFirstTarget());
         if (permanent != null && permanent.hasSubtype("Angel", game)) {
-            permanent.addCounters(CounterType.P1P1.createInstance(2), game);
+            permanent.addCounters(CounterType.P1P1.createInstance(2), source, game);
             return true;
         }
         return false;

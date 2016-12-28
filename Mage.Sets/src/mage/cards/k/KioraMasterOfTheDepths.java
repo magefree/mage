@@ -67,7 +67,7 @@ import mage.target.common.TargetLandPermanent;
 public class KioraMasterOfTheDepths extends CardImpl {
 
     public KioraMasterOfTheDepths(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.PLANESWALKER},"{2}{G}{U}");
+        super(ownerId, setInfo, new CardType[]{CardType.PLANESWALKER}, "{2}{G}{U}");
         this.subtype.add("Kiora");
 
         this.addAbility(new PlanswalkerEntersWithLoyalityCountersAbility(4));
@@ -203,7 +203,7 @@ class KioraMasterOfTheDepthsEmblem extends Emblem {
     private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("Creatures");
 
     public KioraMasterOfTheDepthsEmblem() {
-        this.setName("EMBLEM: Kiora, Master of the Depths");
+        this.setName("Emblem Kiora");
 
         Ability ability = new EntersBattlefieldControlledTriggeredAbility(Zone.COMMAND,
                 new KioraFightEffect(), filter, true, SetTargetPointer.PERMANENT,

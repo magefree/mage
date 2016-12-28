@@ -84,7 +84,7 @@ class SoulsMightEffect extends OneShotEffect {
     public boolean apply(Game game, Ability source) {
         Permanent permanent = game.getPermanent(source.getFirstTarget());
         if (permanent != null && permanent.getPower().getValue() > 0) {
-            permanent.addCounters(CounterType.P1P1.createInstance(permanent.getPower().getValue()), game);
+            permanent.addCounters(CounterType.P1P1.createInstance(permanent.getPower().getValue()), source, game);
             return true;
         }
         return false;

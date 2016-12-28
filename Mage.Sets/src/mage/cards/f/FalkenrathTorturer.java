@@ -102,7 +102,7 @@ class FalkenrathTorturerEffect extends OneShotEffect {
                 Permanent sacrificedCreature = ((SacrificeTargetCost) cost).getPermanents().get(0);
                 Permanent sourceCreature = game.getPermanent(source.getSourceId());
                 if (sacrificedCreature.hasSubtype("Human", game) && sourceCreature != null) {
-                    sourceCreature.addCounters(CounterType.P1P1.createInstance(), game);
+                    sourceCreature.addCounters(CounterType.P1P1.createInstance(), source, game);
                     return true;
                 }
             }

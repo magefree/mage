@@ -47,11 +47,11 @@ import mage.util.GameLog;
 
 public class Commander implements CommandObject {
 
-    private final Card card;
+    private final Card sourceObject;
     private final Abilities<Ability> abilites = new AbilitiesImpl<>();
 
     public Commander(Card card) {
-        this.card = card;
+        this.sourceObject = card;
         abilites.add(new CastCommanderAbility(card));
         for (Ability ability : card.getAbilities()) {
             if (!(ability instanceof SpellAbility)) {
@@ -62,21 +62,22 @@ public class Commander implements CommandObject {
     }
 
     private Commander(Commander copy) {
-        this.card = copy.card;
+        this.sourceObject = copy.sourceObject;
     }
 
-    public Card getCard() {
-        return card;
+    @Override
+    public Card getSourceObject() {
+        return sourceObject;
     }
 
     @Override
     public UUID getSourceId() {
-        return card.getId();
+        return sourceObject.getId();
     }
 
     @Override
     public UUID getControllerId() {
-        return card.getOwnerId();
+        return sourceObject.getOwnerId();
     }
 
     @Override
@@ -90,12 +91,12 @@ public class Commander implements CommandObject {
 
     @Override
     public String getName() {
-        return card.getName();
+        return sourceObject.getName();
     }
 
     @Override
     public String getIdName() {
-        return card.getName() + " [" + card.getId().toString().substring(0, 3) + "]";
+        return sourceObject.getName() + " [" + sourceObject.getId().toString().substring(0, 3) + "]";
     }
 
     @Override
@@ -110,22 +111,22 @@ public class Commander implements CommandObject {
 
     @Override
     public List<CardType> getCardType() {
-        return card.getCardType();
+        return sourceObject.getCardType();
     }
 
     @Override
     public List<String> getSubtype(Game game) {
-        return card.getSubtype(game);
+        return sourceObject.getSubtype(game);
     }
 
     @Override
     public boolean hasSubtype(String subtype, Game game) {
-        return card.hasSubtype(subtype, game);
+        return sourceObject.hasSubtype(subtype, game);
     }
 
     @Override
     public List<String> getSupertype() {
-        return card.getSupertype();
+        return sourceObject.getSupertype();
     }
 
     @Override
@@ -144,42 +145,42 @@ public class Commander implements CommandObject {
 
     @Override
     public ObjectColor getColor(Game game) {
-        return card.getColor(game);
+        return sourceObject.getColor(game);
     }
-    
+
     @Override
     public ObjectColor getFrameColor(Game game) {
-        return card.getFrameColor(game);
+        return sourceObject.getFrameColor(game);
     }
 
     @Override
     public FrameStyle getFrameStyle() {
-        return card.getFrameStyle();
+        return sourceObject.getFrameStyle();
     }
 
     @Override
     public ManaCosts<ManaCost> getManaCost() {
-        return card.getManaCost();
+        return sourceObject.getManaCost();
     }
 
     @Override
     public int getConvertedManaCost() {
-        return card.getConvertedManaCost();
+        return sourceObject.getConvertedManaCost();
     }
 
     @Override
     public MageInt getPower() {
-        return card.getPower();
+        return sourceObject.getPower();
     }
 
     @Override
     public MageInt getToughness() {
-        return card.getToughness();
+        return sourceObject.getToughness();
     }
-    
+
     @Override
     public int getStartingLoyalty() {
-        return card.getStartingLoyalty();
+        return sourceObject.getStartingLoyalty();
     }
 
     @Override
@@ -201,27 +202,27 @@ public class Commander implements CommandObject {
 
     @Override
     public UUID getId() {
-        return card.getId();
+        return sourceObject.getId();
     }
 
     @Override
     public String getImageName() {
-        return card.getImageName();
+        return sourceObject.getImageName();
     }
 
     @Override
     public int getZoneChangeCounter(Game game) {
-        return card.getZoneChangeCounter(game);
+        return sourceObject.getZoneChangeCounter(game);
     }
 
     @Override
     public void updateZoneChangeCounter(Game game, ZoneChangeEvent event) {
-        card.updateZoneChangeCounter(game, event);
+        sourceObject.updateZoneChangeCounter(game, event);
     }
 
     @Override
     public void setZoneChangeCounter(int value, Game game) {
-        card.setZoneChangeCounter(value, game);
+        sourceObject.setZoneChangeCounter(value, game);
     }
 
 }

@@ -29,8 +29,8 @@ package mage.cards;
 
 import java.util.ArrayList;
 import java.util.UUID;
+import mage.abilities.Ability;
 import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.constants.Zone;
 import mage.counters.Counter;
 import mage.game.Game;
@@ -133,17 +133,17 @@ public abstract class MeldCard extends CardImpl {
     }
 
     @Override
-    public boolean addCounters(Counter counter, Game game, ArrayList<UUID> appliedEffects) {
+    public boolean addCounters(Counter counter, Ability source, Game game, ArrayList<UUID> appliedEffects) {
         if (this.isMelded()) {
-            return super.addCounters(counter, game, appliedEffects);
+            return super.addCounters(counter, source, game, appliedEffects);
         } else {
             // can this really happen?
             boolean returnState = true;
             if (hasTopHalf(game)) {
-                returnState |= topHalfCard.addCounters(counter, game, appliedEffects);
+                returnState |= topHalfCard.addCounters(counter, source, game, appliedEffects);
             }
             if (hasBottomHalf(game)) {
-                returnState |= bottomHalfCard.addCounters(counter, game, appliedEffects);
+                returnState |= bottomHalfCard.addCounters(counter, source, game, appliedEffects);
             }
             return returnState;
         }
@@ -176,12 +176,12 @@ public abstract class MeldCard extends CardImpl {
             Permanent permanent = game.getPermanent(objectId);
             return permanent != null && permanent.removeFromZone(game, fromZone, sourceId);
         }
-        boolean  topRemoved = hasTopHalf(game) && topHalfCard.removeFromZone(game, fromZone, sourceId);
+        boolean topRemoved = hasTopHalf(game) && topHalfCard.removeFromZone(game, fromZone, sourceId);
         if (!topRemoved) {
             // The top half isn't being moved with the pair anymore.
             halves.remove(topHalfCard);
         }
-        boolean  bottomRemoved = hasBottomHalf(game) && bottomHalfCard.removeFromZone(game, fromZone, sourceId);
+        boolean bottomRemoved = hasBottomHalf(game) && bottomHalfCard.removeFromZone(game, fromZone, sourceId);
         if (!bottomRemoved) {
             // The bottom half isn't being moved with the pair anymore.
             halves.remove(bottomHalfCard);

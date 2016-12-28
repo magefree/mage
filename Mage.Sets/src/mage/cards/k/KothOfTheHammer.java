@@ -77,7 +77,7 @@ public class KothOfTheHammer extends CardImpl {
     }
 
     public KothOfTheHammer(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.PLANESWALKER},"{2}{R}{R}");
+        super(ownerId, setInfo, new CardType[]{CardType.PLANESWALKER}, "{2}{R}{R}");
         this.subtype.add("Koth");
 
         this.addAbility(new PlanswalkerEntersWithLoyalityCountersAbility(3));
@@ -122,7 +122,7 @@ class KothOfTheHammerEmblem extends Emblem {
 
     // "Mountains you control have '{T}: This land deals 1 damage to target creature or player.'"
     public KothOfTheHammerEmblem() {
-        this.setName("EMBLEM: Koth of the Hammer");
+        this.setName("Emblem Koth");
         this.getAbilities().add(new SimpleStaticAbility(Zone.COMMAND, new KothOfTheHammerThirdEffect()));
     }
 }

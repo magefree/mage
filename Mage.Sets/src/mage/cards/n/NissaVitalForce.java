@@ -67,7 +67,7 @@ public class NissaVitalForce extends CardImpl {
     }
 
     public NissaVitalForce(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.PLANESWALKER},"{3}{G}{G}");
+        super(ownerId, setInfo, new CardType[]{CardType.PLANESWALKER}, "{3}{G}{G}");
         this.subtype.add("Nissa");
 
         this.addAbility(new PlanswalkerEntersWithLoyalityCountersAbility(5));
@@ -114,9 +114,9 @@ class NissaVitalForceEmblem extends Emblem {
 
     //  You get an emblem with "Whenever a land enters the battlefield under your control, you may draw a card."
     public NissaVitalForceEmblem() {
-        this.setName("Emblem - Nissa, Vital Force");
-       Ability ability = new EntersBattlefieldAllTriggeredAbility(Zone.COMMAND, new DrawCardSourceControllerEffect(1), new FilterControlledLandPermanent("a land"),
+        this.setName("Emblem Nissa");
+        Ability ability = new EntersBattlefieldAllTriggeredAbility(Zone.COMMAND, new DrawCardSourceControllerEffect(1), new FilterControlledLandPermanent("a land"),
                 true, null, true);
-       getAbilities().add(ability);
+        getAbilities().add(ability);
     }
 }

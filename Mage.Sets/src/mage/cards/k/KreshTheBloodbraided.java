@@ -89,7 +89,7 @@ class KreshTheBloodbraidedEffect extends OneShotEffect {
         if (permanent != null && kreshTheBloodbraided != null) {
             int amount = permanent.getPower().getValue();
             if (amount > 0) {
-                kreshTheBloodbraided.addCounters(CounterType.P1P1.createInstance(amount), game);
+                kreshTheBloodbraided.addCounters(CounterType.P1P1.createInstance(amount), source, game);
             }
             return true;
         }

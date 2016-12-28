@@ -59,7 +59,7 @@ import mage.watchers.common.SpellsCastWatcher;
 public class JaceUnravelerOfSecrets extends CardImpl {
 
     public JaceUnravelerOfSecrets(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.PLANESWALKER},"{3}{U}{U}");
+        super(ownerId, setInfo, new CardType[]{CardType.PLANESWALKER}, "{3}{U}{U}");
         this.subtype.add("Jace");
 
         this.addAbility(new PlanswalkerEntersWithLoyalityCountersAbility(5));
@@ -99,7 +99,8 @@ public class JaceUnravelerOfSecrets extends CardImpl {
 class JaceUnravelerOfSecretsEmblem extends Emblem {
 
     public JaceUnravelerOfSecretsEmblem() {
-        this.setName("EMBLEM: Jace, Unraveler of Secrets");
+        this.setName("Emblem Jace");
+        setExpansionSetCodeForImage("SOI");
         Effect effect = new CounterTargetEffect();
         effect.setText("counter that spell");
         this.getAbilities().add(new JaceUnravelerOfSecretsTriggeredAbility(effect, false));

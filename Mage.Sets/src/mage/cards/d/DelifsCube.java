@@ -112,7 +112,7 @@ class DelifsCubeEffect extends OneShotEffect{
     public boolean apply(Game game, Ability source) {
         Permanent perm = game.getPermanent(cubeId);
         if (perm == null) return false;
-        perm.addCounters(CounterType.CUBE.createInstance(), game);
+        perm.addCounters(CounterType.CUBE.createInstance(), source, game);
         return true;         
     }
 }

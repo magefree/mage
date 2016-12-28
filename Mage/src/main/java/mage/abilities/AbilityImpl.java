@@ -1172,10 +1172,11 @@ public abstract class AbilityImpl implements Ability {
     public void setSourceObject(MageObject sourceObject, Game game) {
         if (sourceObject == null) {
             this.sourceObject = game.getObject(sourceId);
+            this.sourceObjectZoneChangeCounter = game.getState().getZoneChangeCounter(sourceId);
         } else {
             this.sourceObject = sourceObject;
+            this.sourceObjectZoneChangeCounter = this.sourceObject.getZoneChangeCounter(game);
         }
-        this.sourceObjectZoneChangeCounter = game.getState().getZoneChangeCounter(sourceId);
     }
 
     @Override

@@ -29,7 +29,6 @@ package mage.abilities.effects.common.counter;
 
 import java.util.ArrayList;
 import java.util.List;
-
 import mage.MageObject;
 import mage.abilities.Ability;
 import mage.abilities.effects.OneShotEffect;
@@ -51,11 +50,11 @@ public class AddRemoveAllTimeSuspentCountersEffect extends OneShotEffect {
     private final boolean removeCounter;
     private final String actionStr;
 
-  public AddRemoveAllTimeSuspentCountersEffect(Counter counter, Filter<Card> filter, boolean removeCounter) {
+    public AddRemoveAllTimeSuspentCountersEffect(Counter counter, Filter<Card> filter, boolean removeCounter) {
         super(Outcome.Benefit);
         this.counter = counter;
         this.filter = filter;
-        this.removeCounter= removeCounter;
+        this.removeCounter = removeCounter;
         actionStr = removeCounter ? " removes " : " puts ";
         setText();
     }
@@ -74,38 +73,39 @@ public class AddRemoveAllTimeSuspentCountersEffect extends OneShotEffect {
         MageObject sourceObject = game.getObject(source.getSourceId());
         if (controller != null && sourceObject != null) {
             if (counter != null) {
-                List<Card> permanents = new ArrayList<Card>(game.getBattlefield().getAllActivePermanents());
-                execute(game, controller, sourceObject, permanents, removeCounter);
+                List<Card> permanents = new ArrayList<>(game.getBattlefield().getAllActivePermanents());
+                execute(game, controller, sourceObject, source, permanents, removeCounter);
                 final List<Card> exiledCards = game.getExile().getAllCards(game);
-                execute(game, controller, sourceObject, exiledCards, removeCounter);
+                execute(game, controller, sourceObject, source, exiledCards, removeCounter);
             }
             return true;
-        }        
+        }
         return false;
     }
 
-  private void execute(final Game game, final Player controller, final MageObject sourceObject, final List<Card> cards, final boolean removeCounter) {
-    for (Card card : cards) {
-        if (filter.match(card, game)) {
-            final String counterName = counter.getName();
-            if (removeCounter) {
-                final Counter existingCounterOfSameType = card.getCounters(game).get(counterName);
-                final int countersToRemove = Math.min(existingCounterOfSameType.getCount(), counter.getCount());
-                final Counter modifiedCounter = new Counter(counterName, countersToRemove);
-                card.removeCounters(modifiedCounter, game);
-            } else {
-                card.addCounters(counter, game);
+    private void execute(final Game game, final Player controller, final MageObject sourceObject, Ability source, final List<Card> cards, final boolean removeCounter) {
+        for (Card card : cards) {
+            if (filter.match(card, game)) {
+                final String counterName = counter.getName();
+                if (removeCounter) {
+                    final Counter existingCounterOfSameType = card.getCounters(game).get(counterName);
+                    final int countersToRemove = Math.min(existingCounterOfSameType.getCount(), counter.getCount());
+                    final Counter modifiedCounter = new Counter(counterName, countersToRemove);
+                    card.removeCounters(modifiedCounter, game);
+                } else {
+                    card.addCounters(counter, source, game);
+                }
+                if (!game.isSimulation()) {
+                    game.informPlayers(new StringBuilder(sourceObject.getName()).append(": ")
+                            .append(controller.getLogName()).append(actionStr)
+                            .append(counter.getCount()).append(" ").append(counterName.toLowerCase())
+                            .append(" counter on ").append(card.getName()).toString());
+                }
             }
-            if (!game.isSimulation())
-                game.informPlayers(new StringBuilder(sourceObject.getName()).append(": ")
-                        .append(controller.getLogName()).append(actionStr)
-                        .append(counter.getCount()).append(" ").append(counterName.toLowerCase())
-                        .append(" counter on ").append(card.getName()).toString());
         }
     }
-  }
 
-  private void setText() {
+    private void setText() {
         StringBuilder sb = new StringBuilder();
         final String actionsStr2 = removeCounter ? "remove " : " put ";
         sb.append(actionsStr2);

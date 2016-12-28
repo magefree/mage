@@ -35,6 +35,8 @@ import mage.abilities.effects.OneShotEffect;
 import mage.cards.Card;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
+import mage.cards.Cards;
+import mage.cards.CardsImpl;
 import mage.constants.CardType;
 import mage.constants.Outcome;
 import mage.constants.Zone;
@@ -51,7 +53,7 @@ import mage.target.common.TargetCardInGraveyard;
 public class LoamingShaman extends CardImpl {
 
     public LoamingShaman(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{2}{G}");
+        super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{2}{G}");
         this.subtype.add("Centaur");
         this.subtype.add("Shaman");
 
@@ -95,12 +97,8 @@ class LoamingShamanEffect extends OneShotEffect {
     public boolean apply(Game game, Ability source) {
         Player targetPlayer = game.getPlayer(source.getFirstTarget());
         if (targetPlayer != null) {
-            for (UUID targetCard : source.getTargets().get(1).getTargets()) {
-                Card card = targetPlayer.getGraveyard().get(targetCard, game);
-                if (card != null) {
-                    card.moveToZone(Zone.LIBRARY, source.getSourceId(), game, true);
-                }
-            }
+            Cards cards = new CardsImpl(source.getTargets().get(1).getTargets());
+            targetPlayer.moveCards(cards, Zone.LIBRARY, source, game);
             targetPlayer.shuffleLibrary(source, game);
             return true;
         }

@@ -787,7 +787,7 @@ public abstract class PermanentImpl extends CardImpl implements Permanent {
             return 0;
         }
         for (Counter counter : markedDamage) {
-            addCounters(counter, game);
+            addCounters(counter, null, game);
         }
         markedDamage.clear();
         return 0;
@@ -832,7 +832,7 @@ public abstract class PermanentImpl extends CardImpl implements Permanent {
                         markDamage(CounterType.M1M1.createInstance(actualDamage));
                     } else {
                         // deal damage immediately
-                        addCounters(CounterType.M1M1.createInstance(actualDamage), game);
+                        addCounters(CounterType.M1M1.createInstance(actualDamage), null, game);
                     }
                 } else {
                     this.damage += actualDamage;

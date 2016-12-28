@@ -132,7 +132,7 @@ class AngelheartVialEffect extends OneShotEffect {
     public boolean apply(Game game, Ability source) {
         Permanent permanent = game.getPermanent(source.getSourceId());
         if (permanent != null) {
-            permanent.addCounters(CounterType.CHARGE.createInstance((Integer) this.getValue("damageAmount")), game);
+            permanent.addCounters(CounterType.CHARGE.createInstance((Integer) this.getValue("damageAmount")), source, game);
         }
         return true;
     }

@@ -103,7 +103,7 @@ class CankerAbominationEffect extends OneShotEffect {
                 game.informPlayers(cankerAbomination.getName() + ": " + controller.getLogName() + " has chosen " + opponent.getLogName());
                 int amount = game.getBattlefield().getAllActivePermanents(new FilterCreaturePermanent(), opponent.getId(), game).size();
                 if (amount > 0) {
-                    cankerAbomination.addCounters(CounterType.M1M1.createInstance(amount), game);
+                    cankerAbomination.addCounters(CounterType.M1M1.createInstance(amount), source, game);
                 }
                 return true;
             }

@@ -90,7 +90,7 @@ class VigorMortisAddCounterEffect extends OneShotEffect {
         // targetPointer can't be used because target moved from graveyard to battlefield
         Permanent permanent = game.getPermanent(source.getFirstTarget());
         if (permanent != null) {
-                permanent.addCounters(CounterType.P1P1.createInstance(), game);
+                permanent.addCounters(CounterType.P1P1.createInstance(), source, game);
         }
         return false;
     }

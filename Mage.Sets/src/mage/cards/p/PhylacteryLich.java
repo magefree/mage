@@ -141,7 +141,7 @@ class PhylacteryLichEffect extends OneShotEffect {
                 if (player.choose(Outcome.Neutral, target, source.getSourceId(), game)) {
                     Permanent permanent = game.getPermanent(target.getFirstTarget());
                     if (permanent != null) {
-                        permanent.addCounters(new Counter("phylactery"), game);
+                        permanent.addCounters(new Counter("phylactery"), source, game);
                     }
                 }
             }

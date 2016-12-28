@@ -110,7 +110,7 @@ class DesecrationDemonEffect extends OneShotEffect {
                                 permanent.sacrifice(source.getSourceId(), game);
                                 game.informPlayers(opponent.getLogName() + " sacrifices " + permanent.getLogName() + " to tap " + descrationDemon.getLogName() + ". A +1/+1 counter was put on it");
                                 descrationDemon.tap(game);
-                                descrationDemon.addCounters(CounterType.P1P1.createInstance(), game);
+                                descrationDemon.addCounters(CounterType.P1P1.createInstance(), source, game);
                             }
                         }
                     }

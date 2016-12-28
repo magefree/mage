@@ -67,7 +67,7 @@ import mage.target.common.TargetArtifactPermanent;
 public class DackFayden extends CardImpl {
 
     public DackFayden(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.PLANESWALKER},"{1}{U}{R}");
+        super(ownerId, setInfo, new CardType[]{CardType.PLANESWALKER}, "{1}{U}{R}");
         this.subtype.add("Dack");
 
         this.addAbility(new PlanswalkerEntersWithLoyalityCountersAbility(3));
@@ -107,7 +107,7 @@ public class DackFayden extends CardImpl {
 class DackFaydenEmblem extends Emblem {
 
     DackFaydenEmblem() {
-        this.setName("EMBLEM: Dack Fayden");
+        this.setName("Emblem Dack");
         this.getAbilities().add(new DackFaydenEmblemTriggeredAbility());
     }
 }

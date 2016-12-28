@@ -71,7 +71,7 @@ class BloodthirstEffect extends OneShotEffect {
             if (watcher != null && watcher.conditionMet()) {
                 Permanent permanent = game.getPermanentEntering(source.getSourceId());
                 if (permanent != null) {
-                    permanent.addCounters(CounterType.P1P1.createInstance(amount), game);
+                    permanent.addCounters(CounterType.P1P1.createInstance(amount), source, game);
                 }
             }
             return true;

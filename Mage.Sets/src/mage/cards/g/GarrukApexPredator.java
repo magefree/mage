@@ -75,7 +75,7 @@ public class GarrukApexPredator extends CardImpl {
     }
 
     public GarrukApexPredator(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.PLANESWALKER},"{5}{B}{G}");
+        super(ownerId, setInfo, new CardType[]{CardType.PLANESWALKER}, "{5}{B}{G}");
         this.subtype.add("Garruk");
 
         this.addAbility(new PlanswalkerEntersWithLoyalityCountersAbility(5));
@@ -166,7 +166,7 @@ class GarrukApexPredatorBeastToken extends Token {
 class GarrukApexPredatorEmblem extends Emblem {
 
     public GarrukApexPredatorEmblem() {
-        setName("EMBLEM: Garruk, Apex Predator");
+        setName("Emblem Garruk");
         Effect effect = new BoostTargetEffect(5, 5, Duration.EndOfTurn);
         effect.setText("it gets +5/+5");
         Ability ability = new AttackedByCreatureTriggeredAbility(Zone.COMMAND, effect, false, SetTargetPointer.PERMANENT);

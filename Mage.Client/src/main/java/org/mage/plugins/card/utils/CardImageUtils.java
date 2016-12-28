@@ -167,7 +167,7 @@ public class CardImageUtils {
         String imageName;
 
         String type = card.getType() != 0 ? " " + Integer.toString(card.getType()) : "";
-        String name = card.getName().replace(":", "").replace("//", "-");
+        String name = card.getFileName().isEmpty() ? card.getName().replace(":", "").replace("//", "-") : card.getFileName();
 
         if (card.getUsesVariousArt()) {
             imageName = name + "." + card.getCollectorId() + ".full.jpg";

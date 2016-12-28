@@ -24,8 +24,7 @@
 * The views and conclusions contained in the software and documentation are those of the
 * authors and should not be interpreted as representing official policies, either expressed
 * or implied, of BetaSteward_at_googlemail.com.
-*/
-
+ */
 package mage.abilities.effects.common;
 
 import mage.MageObject;
@@ -37,7 +36,7 @@ import mage.game.command.Emblem;
 
 /**
  *
- * @author  nantuko
+ * @author nantuko
  */
 public class GetEmblemEffect extends OneShotEffect {
 
@@ -65,7 +64,7 @@ public class GetEmblemEffect extends OneShotEffect {
         if (sourceObject == null) {
             return false;
         }
-        game.addEmblem(emblem, source);
+        game.addEmblem(emblem, sourceObject, source);
         return true;
     }
 

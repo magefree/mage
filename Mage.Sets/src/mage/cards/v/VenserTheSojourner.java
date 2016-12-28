@@ -153,7 +153,7 @@ class VenserTheSojournerEffect extends OneShotEffect {
 class VenserTheSojournerEmblem extends Emblem {
 
     public VenserTheSojournerEmblem() {
-        this.setName("EMBLEM: Venser, the Sojourner");
+        this.setName("Emblem Venser");
         Ability ability = new VenserTheSojournerSpellCastTriggeredAbility(new ExileTargetEffect(), false);
         Target target = new TargetPermanent();
         ability.addTarget(target);

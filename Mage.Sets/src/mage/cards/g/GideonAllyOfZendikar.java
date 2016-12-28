@@ -55,7 +55,7 @@ import mage.game.permanent.token.Token;
 public class GideonAllyOfZendikar extends CardImpl {
 
     public GideonAllyOfZendikar(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.PLANESWALKER},"{2}{W}{W}");
+        super(ownerId, setInfo, new CardType[]{CardType.PLANESWALKER}, "{2}{W}{W}");
         this.subtype.add("Gideon");
 
         this.addAbility(new PlanswalkerEntersWithLoyalityCountersAbility(4));
@@ -87,7 +87,7 @@ public class GideonAllyOfZendikar extends CardImpl {
 class GideonAllyOfZendikarEmblem extends Emblem {
 
     public GideonAllyOfZendikarEmblem() {
-        this.setName("EMBLEM: Gideon, Ally of Zendikar");
+        this.setName("Emblem Gideon");
         BoostControlledEffect effect = new BoostControlledEffect(1, 1, Duration.EndOfGame);
         Ability ability = new SimpleStaticAbility(Zone.COMMAND, effect);
         this.getAbilities().add(ability);

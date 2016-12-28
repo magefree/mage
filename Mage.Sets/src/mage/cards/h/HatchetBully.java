@@ -56,7 +56,7 @@ import mage.target.common.TargetCreatureOrPlayer;
 public class HatchetBully extends CardImpl {
 
     public HatchetBully(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{3}{R}");
+        super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{3}{R}");
         this.subtype.add("Goblin");
         this.subtype.add("Warrior");
 
@@ -104,7 +104,7 @@ class HatchetBullyCost extends CostImpl {
     public boolean pay(Ability ability, Game game, UUID sourceId, UUID controllerId, boolean noMana, Cost costToPay) {
         Permanent permanent = game.getPermanent(ability.getTargets().get(1).getFirstTarget());
         if (permanent != null) {
-            permanent.addCounters(CounterType.M1M1.createInstance(), game);
+            permanent.addCounters(CounterType.M1M1.createInstance(), ability, game);
             this.paid = true;
         }
         return paid;
@@ -117,7 +117,7 @@ class HatchetBullyCost extends CostImpl {
 }
 
 class HatchetBullyEffect extends OneShotEffect {
-    
+
     public HatchetBullyEffect() {
         super(Outcome.Damage);
         staticText = "{this} deals 2 damage to target creature or player";

@@ -67,7 +67,7 @@ import mage.target.targetpointer.FixedTarget;
 public class JaceTelepathUnbound extends CardImpl {
 
     public JaceTelepathUnbound(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.PLANESWALKER},"");
+        super(ownerId, setInfo, new CardType[]{CardType.PLANESWALKER}, "");
         this.subtype.add("Jace");
 
         this.color.setBlue(true);
@@ -207,7 +207,7 @@ class JaceTelepathUnboundEmblem extends Emblem {
 
     //  You get an emblem with "Whenever you cast a spell, target opponent puts the top five cards of his or her library into his or her graveyard".
     public JaceTelepathUnboundEmblem() {
-        this.setName("Emblem - Jace");
+        this.setName("Emblem Jace");
         Effect effect = new PutTopCardOfLibraryIntoGraveTargetEffect(5);
         effect.setText("target opponent puts the top five cards of his or her library into his or her graveyard");
         Ability ability = new SpellCastControllerTriggeredAbility(Zone.COMMAND, effect, new FilterSpell("a spell"), false, false);

@@ -77,7 +77,7 @@ class AborothCost extends CostImpl {
     public boolean pay(Ability ability, Game game, UUID sourceId, UUID controllerId, boolean noMana, Cost costToPay) {
         Permanent permanent = game.getPermanent(sourceId);
         if (permanent != null) {
-            permanent.addCounters(CounterType.M1M1.createInstance(), game);
+            permanent.addCounters(CounterType.M1M1.createInstance(), ability, game);
             this.paid = true;
             return true;
         }

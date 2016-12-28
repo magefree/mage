@@ -107,7 +107,7 @@ class QuestForUlasTempleEffect extends OneShotEffect {
                     controller.revealCards(sourcePermanent.getName(), cards, game);
                     Permanent questForUlasTemple = game.getPermanent(source.getSourceId());
                     if (questForUlasTemple != null) {
-                        questForUlasTemple.addCounters(CounterType.QUEST.createInstance(), game);
+                        questForUlasTemple.addCounters(CounterType.QUEST.createInstance(), source, game);
                         return true;
                     }
                 }

@@ -72,7 +72,7 @@ public class AjaniSteadfast extends CardImpl {
     }
 
     public AjaniSteadfast(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.PLANESWALKER},"{3}{W}");
+        super(ownerId, setInfo, new CardType[]{CardType.PLANESWALKER}, "{3}{W}");
         this.subtype.add("Ajani");
 
         this.addAbility(new PlanswalkerEntersWithLoyalityCountersAbility(4));
@@ -117,7 +117,7 @@ public class AjaniSteadfast extends CardImpl {
 class AjaniSteadfastEmblem extends Emblem {
 
     public AjaniSteadfastEmblem() {
-        setName("EMBLEM: Ajani Steadfast");
+        setName("Emblem Ajani");
         this.getAbilities().add(new SimpleStaticAbility(Zone.COMMAND, new AjaniSteadfastPreventEffect()));
         this.setExpansionSetCodeForImage("M15");
     }

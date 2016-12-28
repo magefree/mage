@@ -72,7 +72,7 @@ public class LilianaOfTheDarkRealms extends CardImpl {
     }
 
     public LilianaOfTheDarkRealms(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.PLANESWALKER},"{2}{B}{B}");
+        super(ownerId, setInfo, new CardType[]{CardType.PLANESWALKER}, "{2}{B}{B}");
         this.subtype.add("Liliana");
 
         this.addAbility(new PlanswalkerEntersWithLoyalityCountersAbility(3));
@@ -155,7 +155,7 @@ class LilianaOfTheDarkRealmsEmblem extends Emblem {
     }
 
     public LilianaOfTheDarkRealmsEmblem() {
-        this.setName("EMBLEM: Liliana of the Dark Realms");
+        this.setName("Emblem Liliana");
         SimpleManaAbility manaAbility = new SimpleManaAbility(Zone.BATTLEFIELD, Mana.BlackMana(4), new TapSourceCost());
         Ability ability = new SimpleStaticAbility(Zone.COMMAND, new GainAbilityControlledEffect(manaAbility, Duration.WhileOnBattlefield, filter));
         this.getAbilities().add(ability);

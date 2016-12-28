@@ -364,9 +364,9 @@ public interface Game extends MageItem, Serializable {
 
     void addEffect(ContinuousEffect continuousEffect, Ability source);
 
-    void addEmblem(Emblem emblem, Ability source);
+    void addEmblem(Emblem emblem, MageObject sourceObject, Ability source);
 
-    void addEmblem(Emblem emblem, Ability source, UUID toPlayerId);
+    void addEmblem(Emblem emblem, MageObject sourceObject, UUID toPlayerId);
 
     void addCommander(Commander commander);
 

@@ -35,7 +35,6 @@ import java.util.List;
 import java.util.Map;
 import java.util.UUID;
 import mage.cards.Card;
-import mage.constants.CardType;
 import mage.counters.Counters;
 import mage.game.ExileZone;
 import mage.game.Game;
@@ -139,17 +138,7 @@ public class PlayerView implements Serializable {
             if (commandObject instanceof Emblem) {
                 Emblem emblem = (Emblem) commandObject;
                 if (emblem.getControllerId().equals(this.playerId)) {
-                    Card sourceCard = game.getCard(((CommandObject) emblem).getSourceId());
-                    if (sourceCard != null) {
-                        if (!sourceCard.getCardType().contains(CardType.PLANESWALKER)) {
-                            if (sourceCard.getSecondCardFace() != null) {
-                                sourceCard = sourceCard.getSecondCardFace();
-                            }
-                        }
-                        commandList.add(new EmblemView(emblem, sourceCard));
-                    } else {
-                        commandList.add(new EmblemView(emblem));
-                    }
+                    commandList.add(new EmblemView(emblem));
                 }
             } else if (commandObject instanceof Commander) {
                 Commander commander = (Commander) commandObject;

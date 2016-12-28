@@ -91,7 +91,7 @@ class CryptbornHorrorEffect extends OneShotEffect {
         if (permanent != null) {
             int oll = new OpponentsLostLifeCount().calculate(game, source, this);
             if (oll > 0) {
-                permanent.addCounters(CounterType.P1P1.createInstance(oll), game);
+                permanent.addCounters(CounterType.P1P1.createInstance(oll), source, game);
             }
             return true;
         }

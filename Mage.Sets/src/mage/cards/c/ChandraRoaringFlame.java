@@ -56,7 +56,7 @@ import mage.target.common.TargetCreaturePermanent;
 public class ChandraRoaringFlame extends CardImpl {
 
     public ChandraRoaringFlame(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.PLANESWALKER},"");
+        super(ownerId, setInfo, new CardType[]{CardType.PLANESWALKER}, "");
         this.subtype.add("Chandra");
         this.color.setRed(true);
 
@@ -120,7 +120,7 @@ class ChandraRoaringFlameEmblemEffect extends OneShotEffect {
                 }
             }
             for (Player opponent : opponentsEmblem) {
-                game.addEmblem(new ChandraRoaringFlameEmblem(), source, opponent.getId());
+                game.addEmblem(new ChandraRoaringFlameEmblem(), source.getSourceObject(game), opponent.getId());
             }
         }
         return false;
@@ -134,7 +134,8 @@ class ChandraRoaringFlameEmblemEffect extends OneShotEffect {
 class ChandraRoaringFlameEmblem extends Emblem {
 
     public ChandraRoaringFlameEmblem() {
-        setName("EMBLEM: Chandra, Roaring Flame");
+        setName("Emblem Chandra");
+        setExpansionSetCodeForImage("ORI");
         Effect effect = new DamageTargetEffect(3);
         effect.setText("this emblem deals 3 damage to you");
         this.getAbilities().add(new BeginningOfUpkeepTriggeredAbility(Zone.COMMAND, effect, TargetController.YOU, false, true));

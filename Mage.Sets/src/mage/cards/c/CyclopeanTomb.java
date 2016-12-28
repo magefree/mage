@@ -29,24 +29,19 @@ package mage.cards.c;
 
 import java.util.HashMap;
 import java.util.HashSet;
-import java.util.List;
-import java.util.Map;
 import java.util.Set;
 import java.util.UUID;
-import mage.MageObject;
 import mage.MageObjectReference;
 import mage.abilities.Ability;
 import mage.abilities.DelayedTriggeredAbility;
 import mage.abilities.common.PutIntoGraveFromBattlefieldSourceTriggeredAbility;
-import mage.abilities.condition.Condition;
+import mage.abilities.common.delayed.AtTheBeginOfYourNextUpkeepDelayedTriggeredAbility;
 import mage.abilities.condition.common.IsStepCondition;
 import mage.abilities.costs.common.TapSourceCost;
 import mage.abilities.costs.mana.GenericManaCost;
 import mage.abilities.decorator.ConditionalActivatedAbility;
-import mage.abilities.decorator.ConditionalOneShotEffect;
 import mage.abilities.effects.Effect;
 import mage.abilities.effects.OneShotEffect;
-import mage.abilities.effects.common.CreateDelayedTriggeredAbilityEffect;
 import mage.abilities.effects.common.continuous.BecomesBasicLandTargetEffect;
 import mage.abilities.effects.common.counter.AddCountersTargetEffect;
 import mage.abilities.effects.common.counter.RemoveAllCountersTargetEffect;
@@ -62,17 +57,15 @@ import mage.constants.WatcherScope;
 import mage.constants.Zone;
 import mage.counters.CounterType;
 import mage.filter.common.FilterLandPermanent;
-import mage.filter.predicate.Predicate;
 import mage.filter.predicate.Predicates;
 import mage.filter.predicate.mageobject.SubtypePredicate;
-import mage.filter.predicate.permanent.CounterPredicate;
+import mage.filter.predicate.permanent.PermanentIdPredicate;
 import mage.game.Game;
 import mage.game.events.GameEvent;
 import mage.game.permanent.Permanent;
 import mage.players.Player;
 import mage.target.common.TargetLandPermanent;
 import mage.target.targetpointer.FixedTarget;
-import mage.util.CardUtil;
 import mage.watchers.Watcher;
 
 /**
@@ -80,9 +73,9 @@ import mage.watchers.Watcher;
  * @author MTGfan
  */
 public class CyclopeanTomb extends CardImpl {
-    
+
     private static final FilterLandPermanent filter = new FilterLandPermanent();
-    
+
     static {
         filter.add(Predicates.not(new SubtypePredicate("Swamp")));
     }
@@ -97,9 +90,7 @@ public class CyclopeanTomb extends CardImpl {
         ability.addEffect(new BecomeSwampEffect(Duration.Custom, false, true, "Swamp"));
         this.addAbility(ability, new CyclopeanTombCounterWatcher());
         // When Cyclopean Tomb is put into a graveyard from the battlefield, at the beginning of each of your upkeeps for the rest of the game, remove all mire counters from a land that a mire counter was put onto with Cyclopean Tomb but that a mire counter has not been removed from with Cyclopean Tomb.
-        Effect effect = new CreateDelayedTriggeredAbilityEffect(new CyclopeanTombDelayedTriggeredAbility());
-        effect.setText("at the beginning of each of your upkeeps for the rest of the game, remove all mire counters from a land that a mire counter was put onto with {this} but that a mire counter has not been removed from with {this}.");
-        this.addAbility(new PutIntoGraveFromBattlefieldSourceTriggeredAbility(effect));
+        this.addAbility(new PutIntoGraveFromBattlefieldSourceTriggeredAbility(new CyclopeanTombCreateTriggeredEffect()));
     }
 
     public CyclopeanTomb(final CyclopeanTomb card) {
@@ -113,16 +104,16 @@ public class CyclopeanTomb extends CardImpl {
 }
 
 class BecomeSwampEffect extends BecomesBasicLandTargetEffect {
-    
+
     public BecomeSwampEffect(Duration duration, boolean chooseLandType, boolean loseOther, String... landNames) {
         super(duration, chooseLandType, loseOther, landNames);
-        staticText = "That land is a Swamp for as long as it has a mire counter on it.";
+        staticText = "That land is a Swamp for as long as it has a mire counter on it";
     }
-    
+
     public BecomeSwampEffect(final BecomeSwampEffect effect) {
         super(effect);
     }
-    
+
     @Override
     public boolean apply(Layer layer, SubLayer sublayer, Ability source, Game game) {
         Permanent land = game.getPermanent(this.targetPointer.getFirst(game, source));
@@ -135,36 +126,42 @@ class BecomeSwampEffect extends BecomesBasicLandTargetEffect {
         }
         return true;
     }
-    
+
     @Override
     public BecomeSwampEffect copy() {
         return new BecomeSwampEffect(this);
     }
 }
 
-class CyclopeanTombDelayedTriggeredAbility extends DelayedTriggeredAbility {
+class CyclopeanTombCreateTriggeredEffect extends OneShotEffect {
 
-    CyclopeanTombDelayedTriggeredAbility() {
-        super(new CyclopeanTombEffect(), Duration.OneUse, true, false);
+    public CyclopeanTombCreateTriggeredEffect() {
+        super(Outcome.Benefit);
+        this.staticText = "At the beginning of each of your upkeeps for the rest of the game, remove all mire counters from a land that a mire counter was put onto with {this} but that a mire counter has not been removed from with {this}";
     }
 
-    CyclopeanTombDelayedTriggeredAbility(CyclopeanTombDelayedTriggeredAbility ability) {
-        super(ability);
-    }
-
-    @Override
-    public CyclopeanTombDelayedTriggeredAbility copy() {
-        return new CyclopeanTombDelayedTriggeredAbility(this);
+    public CyclopeanTombCreateTriggeredEffect(final CyclopeanTombCreateTriggeredEffect effect) {
+        super(effect);
     }
 
     @Override
-    public boolean checkEventType(GameEvent event, Game game) {
-        return event.getType() == GameEvent.EventType.BEGINNING_PHASE_PRE;
+    public CyclopeanTombCreateTriggeredEffect copy() {
+        return new CyclopeanTombCreateTriggeredEffect(this);
     }
 
     @Override
-    public boolean checkTrigger(GameEvent event, Game game) {
-        return  event.getPlayerId().equals(this.controllerId);
+    public boolean apply(Game game, Ability source) {
+        Player controller = game.getPlayer(source.getControllerId());
+        if (controller != null) {
+            Permanent tomb = game.getPermanentOrLKIBattlefield(source.getSourceId()); // we need to set the correct source object
+            DelayedTriggeredAbility ability = new AtTheBeginOfYourNextUpkeepDelayedTriggeredAbility(new CyclopeanTombEffect(), Duration.EndOfGame, false);
+            ability.setSourceObject(tomb, game);
+            ability.setControllerId(source.getControllerId());
+            ability.setSourceId(source.getSourceId());
+            game.addDelayedTriggeredAbility(ability);
+            return true;
+        }
+        return false;
     }
 }
 
@@ -172,9 +169,9 @@ class CyclopeanTombEffect extends OneShotEffect {
 
     public CyclopeanTombEffect() {
         super(Outcome.Benefit);
-        this.staticText = "at the beginning of each of your upkeeps for the rest of the game, remove all mire counters from a land that a mire counter was put onto with {this} but that a mire counter has not been removed from with {this}.";
+        this.staticText = "At the beginning of each of your upkeeps for the rest of the game, remove all mire counters from a land that a mire counter was put onto with {this} but that a mire counter has not been removed from with {this}";
     }
-    
+
     public CyclopeanTombEffect(final CyclopeanTombEffect effect) {
         super(effect);
     }
@@ -187,121 +184,52 @@ class CyclopeanTombEffect extends OneShotEffect {
     @Override
     public boolean apply(Game game, Ability source) {
         Player controller = game.getPlayer(source.getControllerId());
-        if(controller != null){
-            new ChooseLandEffect().apply(game, source);
-            Effect effect = new RemoveAllCountersTargetEffect(CounterType.MIRE);
-            effect.setTargetPointer(new FixedTarget((UUID) game.getState().getValue(source.getSourceId().toString() + "_land")));
-            effect.apply(game, source);
-            //CyclopianTombEffect and CyclopeanTombDelayedTriggeredAbility will maintain a loop
-            //as long as there are one or more mire counters left to be removed
-            new ConditionalOneShotEffect(new CreateDelayedTriggeredAbilityEffect(new CyclopeanTombDelayedTriggeredAbility(), false), new CyclopeanTombCounterCondition()).apply(game, source);
-            return true;
-        }
-    return false;
-    }
-}
-
-class CyclopeanTombCounterCondition implements Condition {
-
-    private static final FilterLandPermanent mireFilter = new FilterLandPermanent();
-
-    static {
-        mireFilter.add(new CounterPredicate(CounterType.MIRE));
-    }
-
-    public CyclopeanTombCounterCondition() {
-    }
-    
-    @Override
-    public boolean apply(Game game, Ability source) {
-
-        List<Permanent> permanents = game.getBattlefield().getAllActivePermanents(mireFilter, game);
-        Permanent cyclopeanTombInstance = game.getPermanentOrLKIBattlefield(source.getSourceId());
+        MageObjectReference mor = new MageObjectReference(source.getSourceId(), source.getSourceObjectZoneChangeCounter(), game);
         CyclopeanTombCounterWatcher watcher = (CyclopeanTombCounterWatcher) game.getState().getWatchers().get(CyclopeanTombCounterWatcher.class.getName());
-        
-        for(Permanent land : permanents) {
-            if(watcher.landMiredByCyclopeanTombInstance(land, cyclopeanTombInstance, game)) {
-                return land.getCounters(game).getCount(CounterType.MIRE) > 0;
+        if (controller != null && watcher != null) {
+
+            Set<MageObjectReference> landRef = watcher.landMiredByCyclopeanTombInstance(mor, game);
+            if (landRef == null || landRef.isEmpty()) { // no lands got mire counter from that instance
+                return true;
             }
-        }
-        return false;
-    }
-}
-
-class ChooseLandEffect extends OneShotEffect {
-    
-    public ChooseLandEffect() {
-        super(Outcome.Neutral);
-        this.staticText = "choose a land that a mire counter was put onto with Cyclopean Tomb but that a mire counter has not been removed from with Cyclopean Tomb";
-    }
-
-    public ChooseLandEffect(final ChooseLandEffect effect) {
-        super(effect);
-    }
-
-    @Override
-    public ChooseLandEffect copy() {
-        return new ChooseLandEffect(this);
-    }
-    
-    @Override
-    public boolean apply(Game game, Ability source) {
-        
-        Player controller = game.getPlayer(source.getControllerId());
-        MageObject mageObject = game.getPermanentEntering(source.getSourceId());
-        
-        if (mageObject == null) {
-            mageObject = game.getObject(source.getSourceId());
-        }
-        
-        FilterLandPermanent filter = new FilterLandPermanent();
-        filter.add(new LandIdPredicate(source));
-        
-        if(controller != null && mageObject != null){
+            FilterLandPermanent filter = new FilterLandPermanent("a land with a mire counter added from the Cyclopean Tomb instance (" + landRef.size() + " left)");
+            Set<PermanentIdPredicate> idPref = new HashSet<>();
+            for (MageObjectReference ref : landRef) {
+                Permanent land = ref.getPermanent(game);
+                if (land != null) {
+                    idPref.add(new PermanentIdPredicate(land.getId()));
+                }
+            }
+            filter.add(Predicates.or(idPref));
             TargetLandPermanent target = new TargetLandPermanent(1, 1, filter, true);
             /*Player must choose a land each upkeep. Using the message are above the player hand where frequent interactions
             * take place is the most logical way to prompt for this scenario. A new constructor added to provide a not optional
             * option for any cards like this where the player must choose a target in such the way this card requires.
-            */
-            if (controller.chooseTarget(Outcome.Neutral, target, source, game, false)) {
+             */
+            if (controller.chooseTarget(Outcome.Neutral, target, source, game)) {
                 Permanent chosenLand = game.getPermanent(target.getFirstTarget());
-                if(chosenLand != null) {
-                    game.getState().setValue(mageObject.getId() + "_land", target.getFirstTarget());
-                    if (mageObject instanceof Permanent) {
-                        ((Permanent) mageObject).addInfo("chosen land", CardUtil.addToolTipMarkTags("Chosen player: " + chosenLand.getLogName()), game);
-                    }
-                    return true;
+                if (chosenLand != null) {
+                    Effect effect = new RemoveAllCountersTargetEffect(CounterType.MIRE);
+                    effect.setTargetPointer(new FixedTarget(chosenLand, game));
+                    effect.apply(game, source);
+                    landRef.remove(new MageObjectReference(chosenLand, game));
                 }
             }
+
+            return true;
         }
         return false;
     }
 }
 
-class LandIdPredicate implements Predicate<Permanent> {
-    
-    public Ability source;
-    
-    public LandIdPredicate(Ability source) {
-        this.source = source;
-    }
-
-    @Override
-    public boolean apply(Permanent input, Game game) {
-        Permanent cyclopeanTombInstance = game.getPermanentOrLKIBattlefield(source.getSourceId());
-        CyclopeanTombCounterWatcher watcher = (CyclopeanTombCounterWatcher) game.getState().getWatchers().get(CyclopeanTombCounterWatcher.class.getName());
-        return watcher.landMiredByCyclopeanTombInstance(input, cyclopeanTombInstance, game);
-    }
-}
-
 class CyclopeanTombCounterWatcher extends Watcher {
-    
+
     public HashMap<MageObjectReference, Set<MageObjectReference>> counterData = new HashMap<>();
-    
+
     public CyclopeanTombCounterWatcher() {
         super(CyclopeanTombCounterWatcher.class.getName(), WatcherScope.GAME);
     }
-    
+
     public CyclopeanTombCounterWatcher(final CyclopeanTombCounterWatcher watcher) {
         super(watcher);
         for (MageObjectReference mageObjectReference : watcher.counterData.keySet()) {
@@ -310,7 +238,7 @@ class CyclopeanTombCounterWatcher extends Watcher {
             counterData.put(mageObjectReference, miredLands);
         }
     }
-    
+
     @Override
     public CyclopeanTombCounterWatcher copy() {
         return new CyclopeanTombCounterWatcher(this);
@@ -318,27 +246,32 @@ class CyclopeanTombCounterWatcher extends Watcher {
 
     @Override
     public void watch(GameEvent event, Game game) {
-        if(event.getType() == GameEvent.EventType.COUNTER_ADDED || event.getType() == GameEvent.EventType.COUNTERS_ADDED) {
-            MageObjectReference cylopeanTombInstance = new MageObjectReference(/*ID needs to go here*/, game);
-            Set<MageObjectReference> miredLands = counterData.get(cylopeanTombInstance);
-            if (miredLands != null) {
+        if (event.getType() == GameEvent.EventType.COUNTERS_ADDED && event.getData().equals(CounterType.MIRE.getName()) && event.getAmount() > 0) {
+            Permanent tomb = game.getPermanentOrLKIBattlefield(event.getSourceId());
+            if (tomb != null) {
+                MageObjectReference cylopeanTombInstance = new MageObjectReference(tomb, game);
+                Set<MageObjectReference> miredLands;
+                if (counterData.containsKey(cylopeanTombInstance)) {
+                    miredLands = counterData.get(cylopeanTombInstance);
+                } else {
+                    miredLands = new HashSet<>();
+                    counterData.put(cylopeanTombInstance, miredLands);
+                }
                 miredLands.add(new MageObjectReference(event.getTargetId(), game));
-            } else {
-                miredLands = new HashSet<>();
-                miredLands.add(new MageObjectReference(event.getTargetId(), game));
-                counterData.put(cylopeanTombInstance, miredLands);
             }
+
         }
     }
-    
+
     @Override
     public void reset() {
         super.reset();
-        counterData.clear();
     }
 
-    public boolean landMiredByCyclopeanTombInstance(Permanent land, Permanent cylopeanTombInstance, Game game) {
-        Set<MageObjectReference> miredLands = counterData.get(new MageObjectReference(cylopeanTombInstance, game));
-        return miredLands != null && miredLands.contains(new MageObjectReference(land, game));
+    public Set<MageObjectReference> landMiredByCyclopeanTombInstance(MageObjectReference mor, Game game) {
+        if (counterData.containsKey(mor)) {
+            return counterData.get(mor);
+        }
+        return null;
     }
 }

@@ -95,7 +95,7 @@ class OranRiefTheVastwoodEffect extends OneShotEffect {
         filter.add(new ColorPredicate(ObjectColor.GREEN));
         for (Permanent permanent: game.getBattlefield().getActivePermanents(filter, source.getControllerId(), game)) {
             if (permanent.getTurnsOnBattlefield() == 0) {
-                permanent.addCounters(CounterType.P1P1.createInstance(), game);
+                permanent.addCounters(CounterType.P1P1.createInstance(), source, game);
             }
         }
         return true;

@@ -95,7 +95,7 @@ class PyrrhicRevivalEffect extends OneShotEffect {
                         if (card.putOntoBattlefield(game, Zone.GRAVEYARD, source.getSourceId(), card.getOwnerId(), false)) {
                             Permanent permanent = game.getPermanent(card.getId());
                             if (permanent != null) {
-                                permanent.addCounters(CounterType.M1M1.createInstance(), game);
+                                permanent.addCounters(CounterType.M1M1.createInstance(), source, game);
                             }
                             result = true;
                         }

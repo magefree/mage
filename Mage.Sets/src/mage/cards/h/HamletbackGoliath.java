@@ -131,7 +131,7 @@ class HamletbackGoliathEffect extends OneShotEffect {
             creature = (Permanent) game.getLastKnownInformation(targetPointer.getFirst(game, source), Zone.BATTLEFIELD);
         }
         if (creature != null && sourceObject != null) {
-            sourceObject.addCounters(CounterType.P1P1.createInstance(creature.getPower().getValue()), game);
+            sourceObject.addCounters(CounterType.P1P1.createInstance(creature.getPower().getValue()), source, game);
         }
         return true;
     }

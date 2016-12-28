@@ -29,9 +29,9 @@
 |Generate|TOK:KLD|Thopter|1|
 |Generate|TOK:KLD|Thopter|2|
 |Generate|TOK:KLD|Thopter|3|
-|Generate|EMBLEM!:KLD|Emblem Chandra, Torch of Defiance||
-|Generate|EMBLEM!:KLD|Emblem Nissa, Vital Force||
-|Generate|EMBLEM!:KLD|Emblem Dovin Baan||
+|Generate|EMBLEM!:KLD|Emblem Chandra||
+|Generate|EMBLEM!:KLD|Emblem Nissa||
+|Generate|EMBLEM!:KLD|Emblem Dovin||
 
 |Generate|TOK:CN2|Assassin||
 |Generate|TOK:CN2|Beast||
@@ -60,7 +60,7 @@
 |Generate|TOK:EMA|Wall||
 |Generate|TOK:EMA|Wurm||
 |Generate|TOK:EMA|Zombie||
-|Generate|EMBLEM!:EMA|Emblem Dack Fayden||
+|Generate|EMBLEM!:EMA|Emblem Dack||
 
 |Generate|TOK:EMN|Eldrazi Horror||
 |Generate|TOK:EMN|Human||
@@ -70,8 +70,8 @@
 |Generate|TOK:EMN|Zombie|2|
 |Generate|TOK:EMN|Zombie|3|
 |Generate|TOK:EMN|Zombie|4|
-|Generate|EMBLEM!:EMN|Emblem Liliana, the Last Hope||
-|Generate|EMBLEM!:EMN|Emblem Tamiyo, Field Researcher||
+|Generate|EMBLEM!:EMN|Emblem Liliana||
+|Generate|EMBLEM!:EMN|Emblem Tamiyo||
 
 |Generate|TOK:SOI|Angel||
 |Generate|TOK:SOI|Clue|1|
@@ -89,8 +89,8 @@
 |Generate|TOK:SOI|Vampire Knight||
 |Generate|TOK:SOI|Wolf||
 |Generate|TOK:SOI|Zombie||
-|Generate|EMBLEM!:SOI|Emblem Arlinn, Embraced by the Moon||
-|Generate|EMBLEM!:SOI|Emblem Jace, Unraveler of Secrets||
+|Generate|EMBLEM!:SOI|Emblem Arlinn||
+|Generate|EMBLEM!:SOI|Emblem Jace||
 
 |Generate|TOK:OGW|Angel||
 |Generate|TOK:OGW|Elemental|1|
@@ -123,7 +123,7 @@
 |Generate|TOK:C15|Gold||
 |Generate|TOK:C15|Knight|1|
 |Generate|TOK:C15|Knight|2|
-|Generate|TOK:C15|Lightning Rager||
+|Generate|TOK:C15|Lightning Ranger||
 |Generate|TOK:C15|Saproling||
 |Generate|TOK:C15|Shapeshifter||
 |Generate|TOK:C15|Snake|1|
@@ -145,9 +145,9 @@
 |Generate|TOK:BFZ|Kor Ally||
 |Generate|TOK:BFZ|Octopus||
 |Generate|TOK:BFZ|Plant||
-|Generate|EMBLEM!:BFZ|Emblem Gideon, Ally of Zendikar||
-|Generate|EMBLEM!:BFZ|Emblem Kiora, Master of the Depths||
-|Generate|EMBLEM!:BFZ|Emblem Ob Nixilis Reignited||
+|Generate|EMBLEM!:BFZ|Emblem Gideon||
+|Generate|EMBLEM!:BFZ|Emblem Kiora||
+|Generate|EMBLEM!:BFZ|Emblem Nixilis||
 
 |Generate|TOK:DDP|Eldrazi Spawn|1|
 |Generate|TOK:DDP|Eldrazi Spawn|2|
@@ -194,9 +194,9 @@
 |Generate|TOK:ORI|Thopter|1|
 |Generate|TOK:ORI|Thopter|2|
 |Generate|TOK:ORI|Zombie||
-|Generate|EMBLEM!:ORI|Emblem Chandra, Roaring Flame||
-|Generate|EMBLEM!:ORI|Emblem Jace, Telepath Unbound||
-|Generate|EMBLEM!:ORI|Emblem Liliana, Defiant Necromancer||
+|Generate|EMBLEM!:ORI|Emblem Chandra||
+|Generate|EMBLEM!:ORI|Emblem Jace||
+|Generate|EMBLEM!:ORI|Emblem Liliana||
 
 #|Generate|TOK:PTC|Angel||
 #|Generate|TOK:PTC|Avatar||
@@ -356,7 +356,7 @@
 |Generate|TOK:CNS|Squirrel||
 |Generate|TOK:CNS|Wolf||
 |Generate|TOK:CNS|Construct||
-|Generate|EMBLEM!:CNS|Emblem Dack Fayden||
+|Generate|EMBLEM!:CNS|Emblem Dack Fayden||Emblem Dack|
 
 |Generate|TOK:JOU|Sphinx||
 |Generate|TOK:JOU|Zombie||
@@ -379,7 +379,7 @@
 |Generate|TOK:BNG|Centaur||
 |Generate|TOK:BNG|Wolf||
 |Generate|TOK:BNG|Gold||
-|Generate|EMBLEM:BNG|Kiora, the Crashing Wave||
+|Generate|EMBLEM:BNG|Kiora, the Crashing Wave||Emblem Kiora|
 
 |Generate|TOK:THS|Cleric||
 |Generate|TOK:THS|Soldier|1|
@@ -393,7 +393,7 @@
 |Generate|TOK:THS|Satyr||
 |Generate|TOK:THS|Golem|1|
 |Generate|TOK:THS|Golem|2|
-|Generate|EMBLEM-:THS|Elspeth, Suns Champion||
+|Generate|EMBLEM-:THS|Elspeth, Suns Champion||Emblem Elspeth|
 
 |Generate|TOK:M14|Sliver|1|
 |Generate|TOK:M14|Sliver|2|
@@ -407,8 +407,8 @@
 |Generate|TOK:M14|Beast||
 |Generate|TOK:M14|Saproling||
 |Generate|TOK:M14|Wolf||
-|Generate|EMBLEM:M14|Liliana of the Dark Realms||
-|Generate|EMBLEM:M14|Garruk, Caller of Beasts||
+|Generate|EMBLEM:M14|Liliana of the Dark Realms||Emblem Liliana|
+|Generate|EMBLEM:M14|Garruk, Caller of Beasts||Emblem Garruk|
 
 |Generate|TOK:DDL|Griffin||
 |Generate|TOK:DDL|Beast||
@@ -428,7 +428,7 @@
 |Generate|TOK:MMA|Treefolk Shaman||
 |Generate|TOK:MMA|Faerie Rogue||
 |Generate|TOK:MMA|Worm||
-|Generate|EMBLEM:MMA|Elspeth, Knight Errant||
+|Generate|EMBLEM:MMA|Elspeth, Knight Errant||Emblem Elspeth|
 
 |Generate|TOK:DGM|Elemental||
 |Generate|TOK:DGM|Bird||
@@ -443,7 +443,7 @@
 |Generate|TOK:GTC|Soldier|1|
 |Generate|TOK:GTC|Soldier|2|
 |Generate|TOK:GTC|Spirit||
-|Generate|EMBLEM:GTC|Domri Rade||
+|Generate|EMBLEM:GTC|Domri Rade||Emblem Domri|
 
 |Generate|TOK:RTR|Bird||
 |Generate|TOK:RTR|Knight|1|
@@ -462,7 +462,7 @@
 
 |Generate|TOK:DDJ|Saproling||
 
-|Generate|EMBLEM-:M13|Liliana of the Dark Realms||
+|Generate|EMBLEM-:M13|Liliana of the Dark Realms||Emblem Liliana|
 |Generate|TOK:M13|Cat||
 |Generate|TOK:M13|Goat||
 |Generate|TOK:M13|Soldier||
@@ -475,7 +475,7 @@
 |Generate|TOK:M13|Saproling||
 |Generate|TOK:M13|Wurm||
 
-|Generate|EMBLEM:AVR|Tamiyo, the Moon Sage||
+|Generate|EMBLEM:AVR|Tamiyo, the Moon Sage||Emblem Tamiyo|
 |Generate|TOK:AVR|Angel|1|
 |Generate|TOK:AVR|Angel|2|
 |Generate|TOK:AVR|Angel|3|
@@ -488,12 +488,12 @@
 |Generate|TOK:AVR|Demon|3|
 |Generate|TOK:AVR|Zombie||
 
-|Generate|EMBLEM:DDI|Venser, the Sojourner||
-|Generate|EMBLEM:DDI|Koth of the Hammer||
+|Generate|EMBLEM:DDI|Venser, the Sojourner||Emblem Venser|
+|Generate|EMBLEM:DDI|Koth of the Hammer||Emblem Koth|
 
 |Generate|TOK:DKA|Human||
 |Generate|TOK:DKA|Vampire||
-|Generate|EMBLEM:DKA|Sorin, Lord of Innistrad|
+|Generate|EMBLEM:DKA|Sorin, Lord of Innistrad||Emblem Sorin|
 
 |Generate|TOK:ISD|Angel||
 |Generate|TOK:ISD|Spirit||
