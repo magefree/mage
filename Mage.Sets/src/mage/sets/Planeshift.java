@@ -82,6 +82,7 @@ public class Planeshift extends ExpansionSet {
         cards.add(new SetCardInfo("Disciple of Kangee", 3, Rarity.COMMON, mage.cards.d.DiscipleOfKangee.class));
         cards.add(new SetCardInfo("Doomsday Specter", 103, Rarity.RARE, mage.cards.d.DoomsdaySpecter.class));
         cards.add(new SetCardInfo("Draco", 131, Rarity.RARE, mage.cards.d.Draco.class));
+        cards.add(new SetCardInfo("Dralnu's Crusade", 104, Rarity.RARE, mage.cards.d.DralnusCrusade.class));
         cards.add(new SetCardInfo("Dralnu's Pet", 23, Rarity.RARE, mage.cards.d.DralnusPet.class));
         cards.add(new SetCardInfo("Dromar's Cavern", 138, Rarity.UNCOMMON, mage.cards.d.DromarsCavern.class));
         cards.add(new SetCardInfo("Dromar's Charm", 105, Rarity.UNCOMMON, mage.cards.d.DromarsCharm.class));
