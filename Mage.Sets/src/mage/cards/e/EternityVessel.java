@@ -86,7 +86,7 @@ class EternityVesselEffect extends OneShotEffect {
         if (vessel != null && controller != null) {
             int amount = controller.getLife();
             if (amount > 0) {
-                vessel.addCounters(CounterType.CHARGE.createInstance(amount), game);
+                vessel.addCounters(CounterType.CHARGE.createInstance(amount), source, game);
 
             }
             return true;

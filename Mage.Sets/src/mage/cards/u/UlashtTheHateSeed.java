@@ -125,7 +125,7 @@ class UlashtTheHateSeedEffect extends OneShotEffect {
             int amount = game.getBattlefield().count(filterRed, source.getSourceId(), source.getControllerId(), game);
             amount += game.getBattlefield().count(filterGreen, source.getSourceId(), source.getControllerId(), game);
             if (amount > 0) {
-                permanent.addCounters(CounterType.P1P1.createInstance(amount), game);
+                permanent.addCounters(CounterType.P1P1.createInstance(amount), source, game);
             }
             return true;
         }

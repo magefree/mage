@@ -157,9 +157,9 @@ public interface Card extends MageObject {
 
     Counters getCounters(GameState state);
 
-    boolean addCounters(Counter counter, Game game);
+    boolean addCounters(Counter counter, Ability source, Game game);
 
-    boolean addCounters(Counter counter, Game game, ArrayList<UUID> appliedEffects);
+    boolean addCounters(Counter counter, Ability source, Game game, ArrayList<UUID> appliedEffects);
 
     void removeCounters(String name, int amount, Game game);
 

@@ -119,7 +119,7 @@ class AetherbornMarauderEffect extends OneShotEffect {
                             }
                             if (numberToMove > 0) {
                                 fromPermanent.removeCounters(CounterType.P1P1.createInstance(numberToMove), game);
-                                sourceObject.addCounters(CounterType.P1P1.createInstance(numberToMove), game);
+                                sourceObject.addCounters(CounterType.P1P1.createInstance(numberToMove), source, game);
                             }
                         }
                     }

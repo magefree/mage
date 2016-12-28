@@ -104,7 +104,7 @@ class MoveCounterFromSourceToTargetEffect extends OneShotEffect {
             Permanent targetPermanent = game.getPermanent(targetPointer.getFirst(game, source));
             if (targetPermanent != null) {
                 sourcePermanent.removeCounters(CounterType.P1P1.createInstance(), game);
-                targetPermanent.addCounters(CounterType.P1P1.createInstance(), game);
+                targetPermanent.addCounters(CounterType.P1P1.createInstance(), source, game);
                 return true;
             }
         }

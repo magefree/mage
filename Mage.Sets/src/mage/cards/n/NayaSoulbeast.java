@@ -154,7 +154,7 @@ class NayaSoulbeastReplacementEffect extends ReplacementEffectImpl {
         Permanent permanent = game.getPermanentEntering(source.getSourceId());
         if (permanent != null && object instanceof Integer) {
             int amount = ((Integer) object);
-            permanent.addCounters(CounterType.P1P1.createInstance(amount), game);
+            permanent.addCounters(CounterType.P1P1.createInstance(amount), source, game);
         }
         return false;
     }

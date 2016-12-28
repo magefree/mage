@@ -184,7 +184,7 @@ class OtherworldlyJourneyEntersBattlefieldEffect extends ReplacementEffectImpl {
     public boolean replaceEvent(GameEvent event, Ability source, Game game) {
         Permanent permanent = ((EntersTheBattlefieldEvent) event).getTarget();
         if (permanent != null) {
-            permanent.addCounters(CounterType.P1P1.createInstance(), game);
+            permanent.addCounters(CounterType.P1P1.createInstance(), source, game);
             discard(); // use only once
         }
         return false;

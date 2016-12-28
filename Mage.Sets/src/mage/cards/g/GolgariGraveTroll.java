@@ -107,7 +107,7 @@ class GolgariGraveTrollEffect extends OneShotEffect {
         if (permanent != null && player != null) {
             int amount = player.getGraveyard().count(filter, game);
             if (amount > 0) {
-                permanent.addCounters(CounterType.P1P1.createInstance(amount), game);
+                permanent.addCounters(CounterType.P1P1.createInstance(amount), source, game);
             }
             return true;
         }

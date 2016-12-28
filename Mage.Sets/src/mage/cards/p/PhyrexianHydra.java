@@ -105,7 +105,7 @@ class PhyrexianHydraEffect extends PreventionEffectImpl {
         }
         Permanent permanent = game.getPermanent(source.getSourceId());
         if (permanent != null) {
-            permanent.addCounters(CounterType.M1M1.createInstance(damage), game);
+            permanent.addCounters(CounterType.M1M1.createInstance(damage), source, game);
         }
         return retValue;
     }

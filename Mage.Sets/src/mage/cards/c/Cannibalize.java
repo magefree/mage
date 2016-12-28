@@ -100,7 +100,7 @@ class CannibalizeEffect extends OneShotEffect {
                         controller.moveCardToExileWithInfo(creature, null, "", source.getSourceId(), game, Zone.BATTLEFIELD, true);
                         exileDone = true;
                     } else {
-                        creature.addCounters(CounterType.P1P1.createInstance(2), game);
+                        creature.addCounters(CounterType.P1P1.createInstance(2), source, game);
                         game.informPlayers("Added two +1/+1 counters on " + creature.getLogName());
                     }
                     count++;

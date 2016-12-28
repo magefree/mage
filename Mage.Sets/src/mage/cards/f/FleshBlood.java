@@ -104,7 +104,7 @@ class FleshEffect extends OneShotEffect {
             if (power > 0) {
                 Permanent targetCreature = game.getPermanent(source.getTargets().get(1).getFirstTarget());
                 if (targetCreature != null) {
-                    targetCreature.addCounters(CounterType.P1P1.createInstance(power), game);
+                    targetCreature.addCounters(CounterType.P1P1.createInstance(power), source, game);
                 }
             }
             return true;

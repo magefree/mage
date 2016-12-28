@@ -107,7 +107,7 @@ class BloodsporeThrinaxEntersBattlefieldEffect extends ReplacementEffectImpl {
         if (sourceCreature != null && creature != null) {
             int amount = sourceCreature.getCounters(game).getCount(CounterType.P1P1);
             if (amount > 0) {
-                creature.addCounters(CounterType.P1P1.createInstance(amount), game);
+                creature.addCounters(CounterType.P1P1.createInstance(amount), source, game);
             }
         }
         return false;

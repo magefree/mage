@@ -141,7 +141,7 @@ public class WorldheartPhoenix extends CardImpl {
                         && permanent.getZoneChangeCounter(game) == spellAbility.getSourceObjectZoneChangeCounter()) {
                     // TODO: No perfect solution because there could be other effects that allow to cast the card for this mana cost
                     if (spellAbility.getManaCosts().getText().equals("{W}{U}{B}{R}{G}")) {
-                        permanent.addCounters(CounterType.P1P1.createInstance(2), game);
+                        permanent.addCounters(CounterType.P1P1.createInstance(2), source, game);
                     }
                 }
             }

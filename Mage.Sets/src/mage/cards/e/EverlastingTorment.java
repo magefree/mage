@@ -105,7 +105,7 @@ class DamageDealtAsIfSourceHadWitherEffect extends ReplacementEffectImpl {
             Counter counter = CounterType.M1M1.createInstance(damageAmount);
             Permanent creatureDamaged = game.getPermanent(event.getTargetId());
             if (creatureDamaged != null) {
-                creatureDamaged.addCounters(counter, game);
+                creatureDamaged.addCounters(counter, source, game);
             }
         }
         return true;

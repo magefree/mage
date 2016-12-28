@@ -133,7 +133,7 @@ public class DevourEffect extends ReplacementEffectImpl {
                     } else {
                         amountCounters = devouredCreatures * devourFactor.getFactor();
                     }
-                    creature.addCounters(CounterType.P1P1.createInstance(amountCounters), game);
+                    creature.addCounters(CounterType.P1P1.createInstance(amountCounters), source, game);
                     game.getState().setValue(creature.getId().toString() + "devoured", cardSubtypes);
                 }
 

@@ -99,7 +99,7 @@ class ScavengingOozeEffect extends OneShotEffect {
             if (card.getCardType().contains(CardType.CREATURE)) {
                 Permanent sourcePermanent = game.getPermanent(source.getSourceId());
                 if (sourcePermanent != null) {
-                    sourcePermanent.addCounters(CounterType.P1P1.createInstance(), game);
+                    sourcePermanent.addCounters(CounterType.P1P1.createInstance(), source, game);
                 }
                 controller.gainLife(1, game);
             }

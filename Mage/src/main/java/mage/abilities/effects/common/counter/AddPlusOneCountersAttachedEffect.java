@@ -70,7 +70,7 @@ public class AddPlusOneCountersAttachedEffect extends OneShotEffect {
         if (enchantment != null && enchantment.getAttachedTo() != null) {
             Permanent creature = game.getPermanent(enchantment.getAttachedTo());
             if (creature != null) {
-                creature.addCounters(CounterType.P1P1.createInstance(amount), game);
+                creature.addCounters(CounterType.P1P1.createInstance(amount), source, game);
             }
         }
         return true;

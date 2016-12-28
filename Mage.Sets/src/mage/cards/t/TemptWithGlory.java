@@ -48,8 +48,7 @@ import mage.players.Player;
 public class TemptWithGlory extends CardImpl {
 
     public TemptWithGlory(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{5}{W}");
-
+        super(ownerId, setInfo, new CardType[]{CardType.SORCERY}, "{5}{W}");
 
         // Tempting offer - Put a +1/+1 counter on each creature you control. Each opponent may put a +1/+1 counter on each creature he or she controls. For each opponent who does, put a +1/+1 counter on each creature you control.
         this.getSpellAbility().addEffect(new TemptWithGloryEffect());
@@ -88,20 +87,20 @@ class TemptWithGloryEffect extends OneShotEffect {
     public boolean apply(Game game, Ability source) {
         Player controller = game.getPlayer(source.getControllerId());
         if (controller != null) {
-            addCounterToEachCreature(controller.getId(), counter, game);
+            addCounterToEachCreature(controller.getId(), counter, source, game);
             int opponentsAddedCounters = 0;
             for (UUID playerId : game.getOpponents(controller.getId())) {
                 Player opponent = game.getPlayer(playerId);
                 if (opponent != null) {
                     if (opponent.chooseUse(outcome, "Put a +1/+1 counter on each creature you control?", source, game)) {
                         opponentsAddedCounters++;
-                        addCounterToEachCreature(playerId, counter, game);
+                        addCounterToEachCreature(playerId, counter, source, game);
                         game.informPlayers(opponent.getLogName() + " added a +1/+1 counter on each of its creatures");
                     }
                 }
             }
             if (opponentsAddedCounters > 0) {
-                addCounterToEachCreature(controller.getId(), CounterType.P1P1.createInstance(opponentsAddedCounters), game);
+                addCounterToEachCreature(controller.getId(), CounterType.P1P1.createInstance(opponentsAddedCounters), source, game);
             }
             return true;
         }
@@ -109,9 +108,9 @@ class TemptWithGloryEffect extends OneShotEffect {
         return false;
     }
 
-    private void addCounterToEachCreature(UUID playerId, Counter counter, Game game) {
-        for(Permanent permanent: game.getBattlefield().getAllActivePermanents(filter, playerId, game)) {
-            permanent.addCounters(counter, game);
+    private void addCounterToEachCreature(UUID playerId, Counter counter, Ability source, Game game) {
+        for (Permanent permanent : game.getBattlefield().getAllActivePermanents(filter, playerId, game)) {
+            permanent.addCounters(counter, source, game);
         }
     }
 }

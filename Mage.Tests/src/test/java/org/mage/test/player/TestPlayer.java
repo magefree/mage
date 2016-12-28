@@ -460,7 +460,7 @@ public class TestPlayer implements Player {
                     for (Permanent permanent : game.getBattlefield().getAllActivePermanents()) {
                         if (permanent.getName().equals(groups[0])) {
                             Counter counter = new Counter(groups[1], Integer.parseInt(groups[2]));
-                            permanent.addCounters(counter, game);
+                            permanent.addCounters(counter, null, game);
                             break;
                         }
                     }

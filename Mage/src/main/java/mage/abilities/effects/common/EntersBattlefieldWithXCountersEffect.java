@@ -75,7 +75,7 @@ public class EntersBattlefieldWithXCountersEffect extends OneShotEffect {
                     if (amount > 0) {
                         Counter counterToAdd = counter.copy();
                         counterToAdd.add(amount - counter.getCount());
-                        permanent.addCounters(counterToAdd, game);
+                        permanent.addCounters(counterToAdd, source, game);
                     }
                 }
             }

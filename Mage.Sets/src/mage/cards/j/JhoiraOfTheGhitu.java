@@ -118,7 +118,7 @@ class JhoiraOfTheGhituSuspendEffect extends OneShotEffect {
 
             UUID exileId = SuspendAbility.getSuspendExileId(controller.getId(), game);
             if (controller.moveCardToExileWithInfo(card, exileId, "Suspended cards of " + controller.getName(), source.getSourceId(), game, Zone.HAND, true)) {
-                card.addCounters(CounterType.TIME.createInstance(4), game);
+                card.addCounters(CounterType.TIME.createInstance(4), source, game);
                 if (!hasSuspend) {
                     game.addEffect(new GainSuspendEffect(new MageObjectReference(card, game)), source);
                 }

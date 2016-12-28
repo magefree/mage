@@ -105,7 +105,7 @@ class IncrementalBlightEffect extends OneShotEffect {
             i++;
             Permanent creature = game.getPermanent(target.getFirstTarget());
             if (creature != null) {
-                creature.addCounters(CounterType.M1M1.createInstance(i), game);
+                creature.addCounters(CounterType.M1M1.createInstance(i), source, game);
             }
         }
         return false;

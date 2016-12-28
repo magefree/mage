@@ -86,7 +86,7 @@ class PhytohydraEffect extends ReplacementEffectImpl {
         DamageCreatureEvent damageEvent = (DamageCreatureEvent) event;
         Permanent p = game.getPermanent(source.getSourceId());
         if (p != null) {
-            p.addCounters(CounterType.P1P1.createInstance(damageEvent.getAmount()), game);
+            p.addCounters(CounterType.P1P1.createInstance(damageEvent.getAmount()), source, game);
         }
         return true;
     }

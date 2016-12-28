@@ -55,14 +55,14 @@ import mage.target.common.TargetCreaturePermanent;
 public class ShelteringAncient extends CardImpl {
 
     public ShelteringAncient(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{1}{G}");
+        super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{1}{G}");
         this.subtype.add("Treefolk");
         this.power = new MageInt(5);
         this.toughness = new MageInt(5);
 
         // Trample
         this.addAbility(TrampleAbility.getInstance());
-        
+
         // Cumulative upkeep-Put a +1/+1 counter on a creature an opponent controls.
         this.addAbility(new CumulativeUpkeepAbility(new ShelteringAncientCost()));
     }
@@ -78,12 +78,13 @@ public class ShelteringAncient extends CardImpl {
 }
 
 class ShelteringAncientCost extends CostImpl {
-    
+
     private static final FilterCreaturePermanent filter = new FilterCreaturePermanent();
+
     static {
         filter.add(new ControllerPredicate(TargetController.OPPONENT));
     }
-    
+
     ShelteringAncientCost() {
         this.text = "Put a +1/+1 counter on a creature an opponent controls";
     }
@@ -96,7 +97,7 @@ class ShelteringAncientCost extends CostImpl {
             if (target.choose(Outcome.BoostCreature, controllerId, sourceId, game)) {
                 Permanent permanent = game.getPermanent(target.getFirstTarget());
                 if (permanent != null) {
-                    permanent.addCounters(CounterType.P1P1.createInstance(), game);
+                    permanent.addCounters(CounterType.P1P1.createInstance(), ability, game);
                     this.paid = true;
                     return true;
                 }

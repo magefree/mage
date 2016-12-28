@@ -121,7 +121,7 @@ class ChargingCinderhornDamageTargetEffect extends OneShotEffect{
     public boolean apply(Game game, Ability source) {
         Permanent chargingCinderhoof = game.getPermanent(source.getSourceId());
         if (chargingCinderhoof != null) {
-            chargingCinderhoof.addCounters(CounterType.FURY.createInstance(), game);
+            chargingCinderhoof.addCounters(CounterType.FURY.createInstance(), source, game);
         } else {
             chargingCinderhoof = game.getPermanentOrLKIBattlefield(source.getSourceId());
         }

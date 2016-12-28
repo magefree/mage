@@ -99,7 +99,7 @@ class MessengerJaysDilemmaEffect extends CouncilsDilemmaVoteEffect {
         //Feathers Votes
         //If feathers received zero votes or the permanent is no longer on the battlefield, do not attempt to put P1P1 counter on it.
         if (voteOneCount > 0 && permanent != null)
-            permanent.addCounters(CounterType.P1P1.createInstance(voteOneCount), game);
+            permanent.addCounters(CounterType.P1P1.createInstance(voteOneCount), source, game);
 
         //Quill Votes
         //Only let the controller loot the appropriate amount of cards if it was voted for.

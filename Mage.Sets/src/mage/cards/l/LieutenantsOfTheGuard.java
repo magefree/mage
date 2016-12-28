@@ -97,7 +97,7 @@ class LieutenantsOfTheGuardDilemmaEffect extends CouncilsDilemmaVoteEffect {
         //Strength Votes
         //If strength received zero votes or the permanent is no longer on the battlefield, do not attempt to put P1P1 counters on it.
         if (voteOneCount > 0 && permanent != null)
-            permanent.addCounters(CounterType.P1P1.createInstance(voteOneCount), game);
+            permanent.addCounters(CounterType.P1P1.createInstance(voteOneCount), source, game);
 
         //Numbers Votes
         if (voteTwoCount > 0) {

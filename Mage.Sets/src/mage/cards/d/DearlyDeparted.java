@@ -103,7 +103,7 @@ class DearlyDepartedEntersBattlefieldEffect extends ReplacementEffectImpl {
     public boolean replaceEvent(GameEvent event, Ability source, Game game) {
         Permanent target = ((EntersTheBattlefieldEvent) event).getTarget();
         if (target != null) {
-            target.addCounters(CounterType.P1P1.createInstance(), game);
+            target.addCounters(CounterType.P1P1.createInstance(), source, game);
         }
         return false;
     }

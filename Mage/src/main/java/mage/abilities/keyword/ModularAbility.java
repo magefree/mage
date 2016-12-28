@@ -159,7 +159,7 @@ class ModularDistributeCounterEffect extends OneShotEffect {
         if (sourcePermanent != null && targetArtifact != null && player != null) {
             int numberOfCounters = sourcePermanent.getCounters(game).getCount(CounterType.P1P1);
             if (numberOfCounters > 0) {
-                targetArtifact.addCounters(CounterType.P1P1.createInstance(numberOfCounters), game);
+                targetArtifact.addCounters(CounterType.P1P1.createInstance(numberOfCounters), source, game);
             }
             return true;
         }

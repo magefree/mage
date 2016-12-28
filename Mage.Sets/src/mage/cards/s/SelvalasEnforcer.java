@@ -100,7 +100,7 @@ class SelvalasEnforcerEffect extends OneShotEffect {
             if (parley > 0) {
                 Permanent sourcePermanent = game.getPermanent(source.getSourceId());
                 if (sourcePermanent != null) {
-                    sourcePermanent.addCounters(CounterType.P1P1.createInstance(parley), game);
+                    sourcePermanent.addCounters(CounterType.P1P1.createInstance(parley), source, game);
                 }
             }
             return true;

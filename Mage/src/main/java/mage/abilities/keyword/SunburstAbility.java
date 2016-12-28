@@ -98,7 +98,7 @@ class SunburstEffect extends OneShotEffect {
             }
             if (counter != null) {
 
-                permanent.addCounters(counter, game);
+                permanent.addCounters(counter, source, game);
                 if (!game.isSimulation()) {
                     Player player = game.getPlayer(source.getControllerId());
                     if (player != null) {

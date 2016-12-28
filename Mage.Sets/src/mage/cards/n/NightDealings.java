@@ -143,7 +143,7 @@ public class NightDealings extends CardImpl {
             if (damageAmount != null) {
                 Permanent permanent = game.getPermanent(source.getSourceId());
                 if (permanent != null) {
-                    permanent.addCounters(CounterType.THEFT.createInstance(damageAmount), game);
+                    permanent.addCounters(CounterType.THEFT.createInstance(damageAmount), source, game);
                     return true;
                 }
             }

@@ -51,7 +51,7 @@ import mage.target.common.TargetControlledCreaturePermanent;
 public class ScarscaleRitual extends CardImpl {
 
     public ScarscaleRitual(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{1}{U/B}");
+        super(ownerId, setInfo, new CardType[]{CardType.SORCERY}, "{1}{U/B}");
 
         // As an additional cost to cast Scarscale Ritual, put a -1/-1 counter on a creature you control.
         this.getSpellAbility().addCost(new ScarscaleRitualCost());
@@ -98,7 +98,7 @@ class ScarscaleRitualCost extends CostImpl {
             controller.chooseTarget(Outcome.UnboostCreature, target, ability, game);
             Permanent permanent = game.getPermanent(target.getFirstTarget());
             if (permanent != null) {
-                permanent.addCounters(CounterType.M1M1.createInstance(), game);
+                permanent.addCounters(CounterType.M1M1.createInstance(), ability, game);
                 game.informPlayers(controller.getLogName() + " puts a -1/-1 counter on " + permanent.getLogName());
                 this.paid = true;
             }

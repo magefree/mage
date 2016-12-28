@@ -344,8 +344,8 @@ public class GameEvent implements Serializable {
         return new GameEvent(type, targetId, null, playerId);
     }
 
-    public static GameEvent getEvent(EventType type, UUID targetId, UUID playerId, String data, int amount) {
-        GameEvent event = getEvent(type, targetId, playerId);
+    public static GameEvent getEvent(EventType type, UUID targetId, UUID sourceId, UUID playerId, String data, int amount) {
+        GameEvent event = getEvent(type, targetId, sourceId, playerId);
         event.setAmount(amount);
         event.setData(data);
         return event;

@@ -108,7 +108,7 @@ class VorelOfTheHullCladeEffect extends OneShotEffect {
         }
         for (Counter counter : target.getCounters(game).values()) {
             Counter newCounter = new Counter(counter.getName(), counter.getCount());
-            target.addCounters(newCounter, game);
+            target.addCounters(newCounter, source, game);
         }
         return true;
     }

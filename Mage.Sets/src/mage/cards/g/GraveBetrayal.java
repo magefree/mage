@@ -146,7 +146,7 @@ class GraveBetrayalEffect extends OneShotEffect {
             Zone currentZone = game.getState().getZone(card.getId());
             if (card.putOntoBattlefield(game, currentZone, source.getSourceId(), source.getControllerId())) {
                 Permanent creature = game.getPermanent(card.getId());
-                creature.addCounters(CounterType.P1P1.createInstance(), game);
+                creature.addCounters(CounterType.P1P1.createInstance(), source, game);
                 ContinuousEffect effect = new GraveBetrayalContiniousEffect();
                 effect.setTargetPointer(new FixedTarget(creature.getId()));
                 game.addEffect(effect, source);

@@ -109,7 +109,7 @@ class ThiefOfBloodEffect extends OneShotEffect {
         if (countersRemoved > 0) {
             Permanent sourcePermanent = game.getPermanentEntering(source.getSourceId());
             if (sourcePermanent != null) {
-                sourcePermanent.addCounters(CounterType.P1P1.createInstance(countersRemoved), game);
+                sourcePermanent.addCounters(CounterType.P1P1.createInstance(countersRemoved), source, game);
             }
         }
         return true;

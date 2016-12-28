@@ -140,7 +140,7 @@ class MoveCounterFromTargetToTargetEffect extends OneShotEffect {
                 return false;
             }
             fromPermanent.removeCounters(CounterType.P1P1.createInstance(1), game);
-            toPermanent.addCounters(CounterType.P1P1.createInstance(1), game);
+            toPermanent.addCounters(CounterType.P1P1.createInstance(1), source, game);
             return true;
         }
         return false;

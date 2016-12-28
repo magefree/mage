@@ -104,7 +104,7 @@ class FulfillContractEffect extends OneShotEffect {
         if (controller != null) {
             if (permanentToDestroy != null && permanentToDestroy.destroy(source.getSourceId(), game, false)) {
                 if (permanentToPutCounter != null) {
-                    permanentToPutCounter.addCounters(CounterType.P1P1.createInstance(), game);
+                    permanentToPutCounter.addCounters(CounterType.P1P1.createInstance(), source, game);
                 }
             }
             return true;

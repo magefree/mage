@@ -147,7 +147,7 @@ class TalusPaladinEffect extends OneShotEffect {
             if (!player.chooseUse(Outcome.Benefit, sb.toString(), source, game)) {
                 return false;
             }
-            taluspPaladin.addCounters(CounterType.P1P1.createInstance(), game);
+            taluspPaladin.addCounters(CounterType.P1P1.createInstance(), source, game);
         }
         return false;
     }

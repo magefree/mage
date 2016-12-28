@@ -57,7 +57,7 @@ import mage.target.common.TargetCreaturePermanent;
  * @author fireshoes
  */
 public class WanderingMage extends CardImpl {
-    
+
     private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("Cleric or Wizard");
 
     static {
@@ -67,7 +67,7 @@ public class WanderingMage extends CardImpl {
     }
 
     public WanderingMage(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{W}{U}{B}");
+        super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{W}{U}{B}");
         this.subtype.add("Human");
         this.subtype.add("Cleric");
         this.subtype.add("Wizard");
@@ -75,20 +75,20 @@ public class WanderingMage extends CardImpl {
         this.toughness = new MageInt(3);
 
         // {W}, Pay 1 life: Prevent the next 2 damage that would be dealt to target creature this turn.
-        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, 
+        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD,
                 new PreventDamageToTargetEffect(Duration.EndOfTurn, 2), new ManaCostsImpl("{W}"));
         ability.addCost(new PayLifeCost(1));
         ability.addTarget(new TargetCreaturePermanent());
         this.addAbility(ability);
-        
+
         // {U}: Prevent the next 1 damage that would be dealt to target Cleric or Wizard creature this turn.
-        ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, 
+        ability = new SimpleActivatedAbility(Zone.BATTLEFIELD,
                 new PreventDamageToTargetEffect(Duration.EndOfTurn, 1), new ManaCostsImpl("{U}"));
         ability.addTarget(new TargetCreaturePermanent(filter));
         this.addAbility(ability);
-        
+
         // {B}, Put a -1/-1 counter on a creature you control: Prevent the next 2 damage that would be dealt to target player this turn.
-        ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, 
+        ability = new SimpleActivatedAbility(Zone.BATTLEFIELD,
                 new PreventDamageToTargetEffect(Duration.EndOfTurn, 2), new ManaCostsImpl("{B}"));
         ability.addCost(new WanderingMageCost());
         ability.addTarget(new TargetPlayer());
@@ -127,7 +127,7 @@ class WanderingMageCost extends CostImpl {
     public boolean pay(Ability ability, Game game, UUID sourceId, UUID controllerId, boolean noMana, Cost costToPay) {
         Permanent permanent = game.getPermanent(ability.getTargets().get(1).getFirstTarget());
         if (permanent != null) {
-            permanent.addCounters(CounterType.M1M1.createInstance(), game);
+            permanent.addCounters(CounterType.M1M1.createInstance(), ability, game);
             this.paid = true;
         }
         return paid;

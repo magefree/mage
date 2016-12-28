@@ -127,7 +127,7 @@ class AzorsElocutorsEffect extends OneShotEffect {
     public boolean apply(Game game, Ability source) {
         Permanent permanent = game.getPermanent(source.getSourceId());
         if (permanent != null) {
-            permanent.addCounters(new Counter("filibuster"), game);
+            permanent.addCounters(new Counter("filibuster"), source, game);
             if (permanent.getCounters(game).getCount("filibuster") > 4) {
                 Player player = game.getPlayer(permanent.getControllerId());
                 if (player != null) {

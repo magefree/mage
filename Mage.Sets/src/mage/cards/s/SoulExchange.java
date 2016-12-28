@@ -102,7 +102,7 @@ class SoulExchangeEffect extends OneShotEffect{
                 for (Permanent exiled : ((ExileTargetCost) c).getPermanents()) {
                   if (exiled != null){
                       if(exiled.getSubtype(game).contains("Thrull")){
-                        game.getPermanent(source.getFirstTarget()).addCounters(CounterType.P2P2.createInstance(), game);
+                        game.getPermanent(source.getFirstTarget()).addCounters(CounterType.P2P2.createInstance(), source, game);
                         return true;
                         }
                   } else return false;                   

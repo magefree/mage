@@ -108,7 +108,7 @@ class ArsenalThresherEffect extends OneShotEffect {
                     }
                     if (arsenalThresher != null) {
                         controller.revealCards(arsenalThresher.getIdName(), cards, game);
-                        arsenalThresher.addCounters(CounterType.P1P1.createInstance(cards.size()), game);
+                        arsenalThresher.addCounters(CounterType.P1P1.createInstance(cards.size()), source, game);
                     }
                 }
             }

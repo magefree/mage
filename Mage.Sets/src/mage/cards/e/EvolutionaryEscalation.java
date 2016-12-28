@@ -96,7 +96,7 @@ class EvolutionaryEscalationEffect extends OneShotEffect {
         for (Target target: source.getTargets()) {
             Permanent targetPermanent = game.getPermanent(target.getFirstTarget());
             if (targetPermanent != null) {
-                targetPermanent.addCounters(counter.copy(), game);
+                targetPermanent.addCounters(counter.copy(), source, game);
                 addedCounters = true;
             }
         }
