@@ -39,7 +39,7 @@ import mage.constants.CardType;
 import mage.constants.Duration;
 import mage.constants.TargetController;
 import mage.filter.FilterPermanent;
-import mage.filter.common.FilterCreaturePermanent;
+import mage.filter.StaticFilters;
 import mage.filter.predicate.mageobject.SubtypePredicate;
 
 /**
@@ -47,16 +47,15 @@ import mage.filter.predicate.mageobject.SubtypePredicate;
  * @author emerald000
  */
 public class GoblinPyromancer extends CardImpl {
-    
-    private static final FilterCreaturePermanent filterCreature = new FilterCreaturePermanent("Goblin creatures");
+
     private static final FilterPermanent filterPermanent = new FilterPermanent("Goblins");
+
     static {
-        filterCreature.add(new SubtypePredicate("Goblin"));
         filterPermanent.add(new SubtypePredicate("Goblin"));
     }
 
     public GoblinPyromancer(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{3}{R}");
+        super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{3}{R}");
         this.subtype.add("Goblin");
         this.subtype.add("Wizard");
 
@@ -64,8 +63,8 @@ public class GoblinPyromancer extends CardImpl {
         this.toughness = new MageInt(2);
 
         // When Goblin Pyromancer enters the battlefield, Goblin creatures get +3/+0 until end of turn.
-        this.addAbility(new EntersBattlefieldTriggeredAbility(new BoostControlledEffect(3, 0, Duration.EndOfTurn, filterCreature)));
-        
+        this.addAbility(new EntersBattlefieldTriggeredAbility(new BoostControlledEffect(3, 0, Duration.EndOfTurn, StaticFilters.FILTER_PERMANENT_CREATURE_GOBLINS)));
+
         // At the beginning of the end step, destroy all Goblins.
         this.addAbility(new BeginningOfEndStepTriggeredAbility(new DestroyAllEffect(filterPermanent, false), TargetController.ANY, false));
     }

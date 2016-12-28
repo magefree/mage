@@ -28,7 +28,6 @@
 package mage.cards.d;
 
 import java.util.UUID;
-
 import mage.ObjectColor;
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleStaticAbility;
@@ -36,10 +35,15 @@ import mage.abilities.effects.ContinuousEffectImpl;
 import mage.abilities.effects.common.continuous.BoostAllEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
-import mage.constants.*;
-import mage.filter.common.FilterCreaturePermanent;
-import mage.filter.predicate.mageobject.CardTypePredicate;
-import mage.filter.predicate.mageobject.SubtypePredicate;
+import mage.constants.CardType;
+import mage.constants.Duration;
+import mage.constants.Layer;
+import static mage.constants.Layer.ColorChangingEffects_5;
+import static mage.constants.Layer.TypeChangingEffects_4;
+import mage.constants.Outcome;
+import mage.constants.SubLayer;
+import mage.constants.Zone;
+import mage.filter.StaticFilters;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 
@@ -49,17 +53,11 @@ import mage.game.permanent.Permanent;
  */
 public class DralnusCrusade extends CardImpl {
 
-    private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("Goblin creatures");
-
-    static {
-        filter.add(new SubtypePredicate("Goblin"));
-    }
-
     public DralnusCrusade(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.ENCHANTMENT}, "{1}{B}{R}");
 
         // Goblin creatures get +1/+1.
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new BoostAllEffect(1, 1, Duration.WhileOnBattlefield, filter, false)));
+        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new BoostAllEffect(1, 1, Duration.WhileOnBattlefield, StaticFilters.FILTER_PERMANENT_CREATURE_GOBLINS, false)));
 
         // All Goblins are black and are Zombies in addition to their other creature types.
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new DralnusCrusadeEffect()));
@@ -77,12 +75,6 @@ public class DralnusCrusade extends CardImpl {
 
 class DralnusCrusadeEffect extends ContinuousEffectImpl {
 
-    private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("Goblin creatures");
-
-    static {
-        filter.add(new SubtypePredicate("Goblin"));
-    }
-
     public DralnusCrusadeEffect() {
         super(Duration.WhileOnBattlefield, Outcome.Neutral);
         staticText = "All Goblins are black and are Zombies in addition to their other creature types";
@@ -90,10 +82,10 @@ class DralnusCrusadeEffect extends ContinuousEffectImpl {
 
     @Override
     public boolean apply(Layer layer, SubLayer sublayer, Ability source, Game game) {
-        for(Permanent permanent : game.getState().getBattlefield().getActivePermanents(filter, source.getControllerId(), source.getSourceId(), game)) {
+        for (Permanent permanent : game.getState().getBattlefield().getActivePermanents(StaticFilters.FILTER_PERMANENT_CREATURE_GOBLINS, source.getControllerId(), source.getSourceId(), game)) {
             switch (layer) {
                 case TypeChangingEffects_4:
-                    if(!permanent.hasSubtype("Zombie", game)) {
+                    if (!permanent.getSubtype(game).contains("Zombie")) {
                         permanent.getSubtype(game).add("Zombie");
                     }
                     break;
