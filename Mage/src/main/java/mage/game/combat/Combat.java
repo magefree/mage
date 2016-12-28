@@ -1164,7 +1164,14 @@ public class Combat implements Serializable, Copyable<Combat> {
                 blockingGroups.put(blockerId, newGroup);
             } else {
                 //TODO: handle banding
-                blockingGroups.get(blockerId).attackers.add(attackerId);
+                //blockingGroups.get(blockerId).attackers.add(attackerId);
+                for (CombatGroup group : groups) {
+                    if (group.getBlockers().contains(blockerId)) {
+                        for (UUID attacker : group.attackers) {
+                            blockingGroups.get(blockerId).attackers.add(attacker);
+                        }
+                    }
+                }
             }
         }
     }
