@@ -29,6 +29,7 @@ package mage.cards.u;
 
 import java.util.UUID;
 import mage.MageInt;
+import mage.MageObject;
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.effects.common.PreventAllDamageToSourceEffect;
@@ -47,13 +48,13 @@ import mage.game.events.GameEvent;
 public class UncleIstvan extends CardImpl {
 
     public UncleIstvan(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{1}{B}{B}{B}");
+        super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{1}{B}{B}{B}");
         this.subtype.add("Human");
         this.power = new MageInt(1);
         this.toughness = new MageInt(3);
 
         // Prevent all damage that would be dealt to Uncle Istvan by creatures.
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new PreventDamageToSourceByCardTypeEffect(CardType.CREATURE)));
+        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new PreventDamageToSourceByCardTypeEffect()));
     }
 
     public UncleIstvan(final UncleIstvan card) {
@@ -67,22 +68,20 @@ public class UncleIstvan extends CardImpl {
 }
 
 class PreventDamageToSourceByCardTypeEffect extends PreventAllDamageToSourceEffect {
-    
-    private CardType cardType;
-      
-    public PreventDamageToSourceByCardTypeEffect(){
-        this(null);
+
+    public PreventDamageToSourceByCardTypeEffect() {
+        super(Duration.WhileOnBattlefield);
     }
 
-    public PreventDamageToSourceByCardTypeEffect(CardType cardT){
-        super(Duration.WhileOnBattlefield);
-        cardType = cardT;
+    public PreventDamageToSourceByCardTypeEffect(final PreventDamageToSourceByCardTypeEffect effect) {
+        super(effect.duration);
     }
-    
+
     @Override
     public boolean applies(GameEvent event, Ability source, Game game) {
         if (super.applies(event, source, game)) {
-            if (game.getObject(event.getSourceId()).getCardType().contains(cardType)){
+            MageObject sourceObject = game.getObject(event.getSourceId());
+            if (sourceObject != null && sourceObject.getCardType().contains(CardType.CREATURE)) {
                 if (event.getTargetId().equals(source.getSourceId())) {
                     return true;
                 }
@@ -90,4 +89,10 @@ class PreventDamageToSourceByCardTypeEffect extends PreventAllDamageToSourceEffe
         }
         return false;
     }
+
+    @Override
+    public PreventAllDamageToSourceEffect copy() {
+        return new PreventAllDamageToSourceEffect(this);
+    }
+
 }
