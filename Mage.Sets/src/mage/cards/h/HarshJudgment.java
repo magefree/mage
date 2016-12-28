@@ -55,7 +55,7 @@ import mage.target.TargetPlayer;
 
 /**
  *
- * @author anonymous
+ * @author brikr
  */
 public class HarshJudgment extends CardImpl {
 
