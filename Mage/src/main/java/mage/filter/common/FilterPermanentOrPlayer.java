@@ -42,8 +42,8 @@ import mage.players.Player;
  */
 public class FilterPermanentOrPlayer extends FilterImpl<MageItem> implements FilterInPlay<MageItem> {
 
-    protected FilterPermanent permanentFilter;
-    protected FilterPlayer playerFilter;
+    protected final FilterPermanent permanentFilter;
+    protected final FilterPlayer playerFilter;
 
     public FilterPermanentOrPlayer() {
         this("player or permanent");

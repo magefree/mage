@@ -51,6 +51,6 @@ public class PermanentIdPredicate implements Predicate<Permanent> {
 
     @Override
     public String toString() {
-        return new StringBuilder("PermanentId(").append(permanentId).append(")").toString() ;
+        return "PermanentId(" + permanentId + ")";
     }
 }

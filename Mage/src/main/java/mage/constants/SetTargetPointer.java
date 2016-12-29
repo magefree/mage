@@ -33,5 +33,5 @@ package mage.constants;
  */
 public enum SetTargetPointer {
 
-    NONE, PLAYER, SPELL, CARD, PERMANENT, ATTACHED_TO_CONTROLLER;
+    NONE, PLAYER, SPELL, CARD, PERMANENT, ATTACHED_TO_CONTROLLER
 }

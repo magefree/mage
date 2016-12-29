@@ -41,7 +41,7 @@ import java.util.Set;
 public class ChoiceImpl implements Choice, Serializable {
 
     protected boolean chosen;
-    protected boolean required;
+    protected final boolean required;
     protected String choice;
     protected String choiceKey;
     protected Set<String> choices = new LinkedHashSet<>();
