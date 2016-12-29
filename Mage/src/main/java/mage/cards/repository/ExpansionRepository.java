@@ -33,7 +33,7 @@ public enum ExpansionRepository {
 
     private Dao<ExpansionInfo, Object> expansionDao;
 
-    private ExpansionRepository() {
+    ExpansionRepository() {
         File file = new File("db");
         if (!file.exists()) {
             file.mkdirs();
@@ -57,6 +57,7 @@ public enum ExpansionRepository {
         try {
             expansionDao.create(expansion);
         } catch (SQLException ex) {
+            logger.error(ex);
         }
     }
 
@@ -83,6 +84,7 @@ public enum ExpansionRepository {
             List<ExpansionInfo> expansions = expansionDao.query(qb.prepare());
             sets = expansions.toArray(new ExpansionInfo[0]);
         } catch (SQLException ex) {
+            logger.error(ex);
         }
         return sets;
     }
@@ -95,6 +97,7 @@ public enum ExpansionRepository {
             qb.where().eq("basicLands", new SelectArg(true));
             sets = expansionDao.query(qb.prepare());
         } catch (SQLException ex) {
+            logger.error(ex);
         }
         return sets;
     }
@@ -106,6 +109,7 @@ public enum ExpansionRepository {
             qb.where().eq("blockName", new SelectArg(blockName));
             return expansionDao.query(qb.prepare());
         } catch (SQLException ex) {
+            logger.error(ex);
         }
         return sets;
     }
@@ -120,6 +124,7 @@ public enum ExpansionRepository {
                 set = expansions.get(0);
             }
         } catch (SQLException ex) {
+            logger.error(ex);
         }
         return set;
     }
@@ -134,6 +139,7 @@ public enum ExpansionRepository {
                 set = expansions.get(0);
             }
         } catch (SQLException ex) {
+            logger.error(ex);
         }
         return set;
     }
@@ -144,6 +150,7 @@ public enum ExpansionRepository {
             qb.orderBy("releaseDate", true);
             return expansionDao.query(qb.prepare());
         } catch (SQLException ex) {
+            logger.error(ex);
         }
         return Collections.emptyList();
     }
@@ -159,6 +166,7 @@ public enum ExpansionRepository {
             }
             return setNames;
         } catch (SQLException ex) {
+            logger.error(ex);
         }
         return Collections.emptyList();
     }
