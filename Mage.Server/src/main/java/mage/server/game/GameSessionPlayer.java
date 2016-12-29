@@ -74,8 +74,8 @@ public class GameSessionPlayer extends GameSessionWatcher {
     }
 
     @Override
-    public void CleanUp() {
-        super.CleanUp();
+    public void cleanUp() {
+        super.cleanUp();
     }
 
     public void ask(final String question, final Map<String, Serializable> options) {

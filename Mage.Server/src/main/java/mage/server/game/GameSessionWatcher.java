@@ -114,7 +114,7 @@ public class GameSessionWatcher {
      * Cleanup if Session ends
      * 
      */
-    public void CleanUp() {
+    public void cleanUp() {
 
     }
 
