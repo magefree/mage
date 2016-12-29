@@ -162,4 +162,36 @@ public class CascadeTest extends CardTestPlayerBase {
 
     }
 
+    /**
+     * Tooth and Nail off a cascade is bugged. It let me pay the entwine cost
+     * for free even though I had no mana open and the entwine is an additional
+     * cost.
+     */
+    @Test
+    public void testHaveToPayAdditionalCosts() {
+
+        playerA.getLibrary().clear();
+        // Choose one - You draw five cards and you lose 5 life;
+        //    or put an X/X black Demon creature token with flying onto the battlefield, where X is the number of cards in your hand as the token enters the battlefield.
+        // Entwine {4} (Choose both if you pay the entwine cost.)
+        //addCard(Zone.LIBRARY, playerA, "Promise of Power", 10);
+        addCard(Zone.LIBRARY, playerA, "Silvercoat Lion", 2);
+
+        addCard(Zone.BATTLEFIELD, playerA, "Plains", 3);
+        addCard(Zone.BATTLEFIELD, playerA, "Forest", 3);
+
+        // Cascade
+        addCard(Zone.HAND, playerA, "Enlisted Wurm"); // Creature {4}{G}{W}  5/5
+
+        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Enlisted Wurm");
+
+        setStopAt(1, PhaseStep.END_TURN);
+        execute();
+
+        assertPermanentCount(playerA, "Enlisted Wurm", 1);
+        assertLife(playerA, 15);
+        assertHandCount(playerA, 5);
+        assertPermanentCount(playerA, "Demon", 1);
+
+    }
 }

@@ -107,24 +107,24 @@ class CascadeEffect extends OneShotEffect {
     @Override
     public boolean apply(Game game, Ability source) {
         Card card;
-        Player player = game.getPlayer(source.getControllerId());
-        if (player == null) {
+        Player controller = game.getPlayer(source.getControllerId());
+        if (controller == null) {
             return false;
         }
-        ExileZone exile = game.getExile().createZone(source.getSourceId(), player.getName() + " Cascade");
+        ExileZone exile = game.getExile().createZone(source.getSourceId(), controller.getName() + " Cascade");
         int sourceCost = game.getCard(source.getSourceId()).getConvertedManaCost();
         do {
-            card = player.getLibrary().getFromTop(game);
+            card = controller.getLibrary().getFromTop(game);
             if (card == null) {
                 break;
             }
-            player.moveCardsToExile(card, source, game, true, exile.getId(), exile.getName());
-        } while (player.isInGame() && card.getCardType().contains(CardType.LAND) || card.getConvertedManaCost() >= sourceCost);
-        player.getLibrary().reset();
+            controller.moveCardsToExile(card, source, game, true, exile.getId(), exile.getName());
+        } while (controller.isInGame() && card.getCardType().contains(CardType.LAND) || card.getConvertedManaCost() >= sourceCost);
+        controller.getLibrary().reset(); // set back empty draw state if that caused an empty draw
 
         if (card != null) {
-            if (player.chooseUse(outcome, "Use cascade effect on " + card.getLogName() + "?", source, game)) {
-                if (player.cast(card.getSpellAbility(), game, true)) {
+            if (controller.chooseUse(outcome, "Use cascade effect on " + card.getLogName() + "?", source, game)) {
+                if (controller.cast(card.getSpellAbility(), game, true)) {
                     exile.remove(card.getId());
                 }
             }
@@ -138,7 +138,7 @@ class CascadeEffect extends OneShotEffect {
             cardsFromExile.remove(card.getId());
             cardsToLibrary.add(card);
         }
-        player.putCardsOnBottomOfLibrary(cardsToLibrary, game, source, false);
+        controller.putCardsOnBottomOfLibrary(cardsToLibrary, game, source, false);
         return true;
     }
 
