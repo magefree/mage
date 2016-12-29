@@ -78,10 +78,7 @@ public abstract class TargetObject extends TargetImpl {
     @Override
     public boolean canTarget(UUID id, Game game) {
         MageObject object = game.getObject(id);
-        if (object != null && game.getState().getZone(id).match(zone)) {
-            return getFilter().match(object, game);
-        }
-        return false;
+        return object != null && game.getState().getZone(id).match(zone) && getFilter().match(object, game);
     }
 
     @Override

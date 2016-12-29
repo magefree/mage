@@ -20,7 +20,7 @@ import mage.watchers.Watcher;
 
 public class AttackedThisCombatWatcher extends Watcher {
 
-    public Set<MageObjectReference> attackedThisTurnCreatures = new HashSet<>();
+    public final Set<MageObjectReference> attackedThisTurnCreatures = new HashSet<>();
 
     public AttackedThisCombatWatcher() {
         super("AttackedThisCombat", WatcherScope.GAME);

@@ -35,8 +35,8 @@ import java.io.Serializable;
  */
 
 public class UserSkipPrioritySteps implements Serializable {
-    SkipPrioritySteps yourTurn;
-    SkipPrioritySteps opponentTurn;
+    final SkipPrioritySteps yourTurn;
+    final SkipPrioritySteps opponentTurn;
 
     boolean stopOnDeclareAttackersDuringSkipAction;
     boolean stopOnDeclareBlockerIfNoneAvailable;

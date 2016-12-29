@@ -40,10 +40,7 @@ public class TargetOpponentsChoicePermanent extends TargetPermanent {
 
     @Override
     public boolean canTarget(UUID controllerId, UUID id, UUID sourceId, Game game, boolean flag) {
-        if (opponentId != null) {
-            return super.canTarget(opponentId, id, sourceId, game, flag);
-        }
-        return false;
+        return opponentId != null && super.canTarget(opponentId, id, sourceId, game, flag);
     }
 
     @Override

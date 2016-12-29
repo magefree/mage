@@ -34,7 +34,6 @@ import java.util.Iterator;
 import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
-import java.util.Random;
 import java.util.Set;
 import java.util.UUID;
 import mage.MageObject;
@@ -55,8 +54,8 @@ import mage.util.RandomUtil;
  */
 public abstract class TargetImpl implements Target {
 
-    protected Map<UUID, Integer> targets = new LinkedHashMap<>();
-    protected Map<UUID, Integer> zoneChangeCounters = new HashMap<>();
+    protected final Map<UUID, Integer> targets = new LinkedHashMap<>();
+    protected final Map<UUID, Integer> zoneChangeCounters = new HashMap<>();
 
     protected String targetName;
     protected Zone zone;
@@ -199,18 +198,12 @@ public abstract class TargetImpl implements Target {
         if (getMaxNumberOfTargets() == 0 && getNumberOfTargets() == 0) {
             return true;
         }
-        if (getMaxNumberOfTargets() != 0 && targets.size() == getMaxNumberOfTargets()) {
-            return true;
-        }
-        return chosen;
+        return getMaxNumberOfTargets() != 0 && targets.size() == getMaxNumberOfTargets() || chosen;
     }
 
     @Override
     public boolean doneChosing() {
-        if (getMaxNumberOfTargets() == 0) {
-            return false;
-        }
-        return targets.size() == getMaxNumberOfTargets();
+        return getMaxNumberOfTargets() != 0 && targets.size() == getMaxNumberOfTargets();
     }
 
     @Override

@@ -42,7 +42,7 @@ import mage.players.Player;
  */
 public class TargetPlayer extends TargetImpl {
 
-    protected FilterPlayer filter;
+    protected final FilterPlayer filter;
 
     public TargetPlayer() {
         this(1, 1, false);
@@ -169,10 +169,7 @@ public class TargetPlayer extends TargetImpl {
     @Override
     public boolean canTarget(UUID id, Game game) {
         Player player = game.getPlayer(id);
-        if (player != null) {
-            return filter.match(player, game);
-        }
-        return false;
+        return player != null && filter.match(player, game);
     }
 
     @Override

@@ -41,7 +41,7 @@ import java.io.StreamCorruptedException;
 public class CopierObjectInputStream extends ObjectInputStream {
     ClassLoader myLoader = null;
 
-    public CopierObjectInputStream(ClassLoader newLoader, InputStream theStream) throws IOException, StreamCorruptedException {
+    public CopierObjectInputStream(ClassLoader newLoader, InputStream theStream) throws IOException {
         super(theStream);
         myLoader = newLoader;
     }

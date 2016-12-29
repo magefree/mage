@@ -11,7 +11,7 @@ import mage.game.Game;
 
 public class SecondTargetPointer implements TargetPointer {
 
-    private Map<UUID, Integer> zoneChangeCounter = new HashMap<UUID, Integer>();
+    private Map<UUID, Integer> zoneChangeCounter = new HashMap<>();
 
     public static SecondTargetPointer getInstance() {
         return new SecondTargetPointer();
@@ -41,7 +41,7 @@ public class SecondTargetPointer implements TargetPointer {
 
     @Override
     public List<UUID> getTargets(Game game, Ability source) {
-        ArrayList<UUID> target = new ArrayList<UUID>();
+        ArrayList<UUID> target = new ArrayList<>();
         if (source.getTargets().size() > 1) {
             for (UUID targetId : source.getTargets().get(1).getTargets()) {
                 Card card = game.getCard(targetId);

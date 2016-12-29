@@ -104,10 +104,7 @@ public class ProwlWatcher extends Watcher {
             return true;
         }
         Set<String> subtypes = damagingSubtypes.get(playerId);
-        if (subtypes != null) {
-            return subtypes.contains(subtype);
-        }
-        return false;
+        return subtypes != null && subtypes.contains(subtype);
     }
 
 }

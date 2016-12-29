@@ -49,8 +49,8 @@ import java.util.UUID;
  */
 public class TargetDefender extends TargetImpl {
 
-    protected FilterPlaneswalkerOrPlayer filter;
-    protected UUID attackerId;
+    protected final FilterPlaneswalkerOrPlayer filter;
+    protected final UUID attackerId;
 
     public TargetDefender(Set<UUID> defenders, UUID attackerId) {
         this(1, 1, defenders, attackerId);
@@ -187,10 +187,7 @@ public class TargetDefender extends TargetImpl {
             return filter.match(player, game);
         }
         Permanent permanent = game.getPermanent(id);
-        if (permanent != null) {
-            return filter.match(permanent, game);
-        }
-        return false;
+        return permanent != null && filter.match(permanent, game);
     }
 
     @Override

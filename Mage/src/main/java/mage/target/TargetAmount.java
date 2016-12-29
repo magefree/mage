@@ -76,10 +76,7 @@ public abstract class TargetAmount extends TargetImpl {
 
     @Override
     public boolean doneChosing() {
-        if (amountWasSet == false) {
-            return false;
-        }
-        return remainingAmount == 0;
+        return amountWasSet && remainingAmount == 0;
     }
 
     @Override
