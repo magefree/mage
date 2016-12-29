@@ -39,6 +39,7 @@ import mage.constants.CardType;
 import mage.constants.Outcome;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
+import mage.players.Player;
 import mage.target.common.TargetControlledCreaturePermanent;
 
 /**
@@ -48,11 +49,8 @@ import mage.target.common.TargetControlledCreaturePermanent;
 public class MageSlayer extends CardImpl {
 
     public MageSlayer(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.ARTIFACT},"{1}{R}{G}");
+        super(ownerId, setInfo, new CardType[]{CardType.ARTIFACT}, "{1}{R}{G}");
         this.subtype.add("Equipment");
-
-
-
 
         // Whenever equipped creature attacks, it deals damage equal to its power to defending player.
         this.addAbility(new AttacksAttachedTriggeredAbility(new MageSlayerEffect(), false));
@@ -94,10 +92,15 @@ class MageSlayerEffect extends OneShotEffect {
         if (equipment != null && equipment.getAttachedTo() != null) {
             int power = game.getPermanent(equipment.getAttachedTo()).getPower().getValue();
             UUID defendingPlayerId = game.getCombat().getDefendingPlayerId(equipment.getAttachedTo(), game);
-            if (defendingPlayerId != null) {
-                game.getPlayer(defendingPlayerId).damage(power, source.getSourceId(), game, false, true);
-                return true;
+            if (power > 0 && defendingPlayerId != null) {
+                Player defendingPlayer = game.getPlayer(defendingPlayerId);
+
+                UUID sourceId = (UUID) this.getValue("sourceId");
+                if (sourceId != null && defendingPlayer != null) {
+                    defendingPlayer.damage(power, source.getSourceId(), game, false, true);
+                }
             }
+            return true;
         }
         return false;
     }
