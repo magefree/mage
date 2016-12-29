@@ -302,7 +302,7 @@ public class GameEvent implements Serializable {
         COMBAT_DAMAGE_APPLIED,
         SELECTED_ATTACKER, SELECTED_BLOCKER,
         //custom events
-        CUSTOM_EVENT;
+        CUSTOM_EVENT
     }
 
     private GameEvent(EventType type, UUID customEventType,

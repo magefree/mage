@@ -49,7 +49,7 @@ public abstract class Step implements Serializable {
     protected StepPart stepPart;
 
     public enum StepPart {
-        PRE, PRIORITY, POST;
+        PRE, PRIORITY, POST
     }
 
     public abstract Step copy();

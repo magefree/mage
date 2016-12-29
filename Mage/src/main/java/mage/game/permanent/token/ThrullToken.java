@@ -30,6 +30,7 @@ package mage.game.permanent.token;
 
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Collections;
 import java.util.List;
 import mage.MageInt;
 import mage.constants.CardType;
@@ -43,7 +44,7 @@ public class ThrullToken extends Token {
     final static private List<String> tokenImageSets = new ArrayList<>();
 
     static {
-        tokenImageSets.addAll(Arrays.asList("MM2"));
+        tokenImageSets.addAll(Collections.singletonList("MM2"));
     }
 
     public ThrullToken() {
