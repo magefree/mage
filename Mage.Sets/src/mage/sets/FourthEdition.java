@@ -88,6 +88,7 @@ public class FourthEdition extends ExpansionSet {
         cards.add(new SetCardInfo("Bog Imp", 7, Rarity.COMMON, mage.cards.b.BogImp.class));
         cards.add(new SetCardInfo("Bog Wraith", 8, Rarity.UNCOMMON, mage.cards.b.BogWraith.class));
         cards.add(new SetCardInfo("Bottle of Suleiman", 319, Rarity.RARE, mage.cards.b.BottleOfSuleiman.class));
+        cards.add(new SetCardInfo("Brainwash", 261, Rarity.COMMON, mage.cards.b.Brainwash.class));
         cards.add(new SetCardInfo("Brass Man", 320, Rarity.UNCOMMON, mage.cards.b.BrassMan.class));
         cards.add(new SetCardInfo("Brothers of Fire", 197, Rarity.COMMON, mage.cards.b.BrothersOfFire.class));
         cards.add(new SetCardInfo("Burrowing", 198, Rarity.UNCOMMON, mage.cards.b.Burrowing.class));

@@ -232,6 +232,7 @@ public class UrzasSaga extends ExpansionSet {
         cards.add(new SetCardInfo("Pariah", 28, Rarity.RARE, mage.cards.p.Pariah.class));
         cards.add(new SetCardInfo("Pegasus Charger", 30, Rarity.COMMON, mage.cards.p.PegasusCharger.class));
         cards.add(new SetCardInfo("Pendrell Drake", 86, Rarity.COMMON, mage.cards.p.PendrellDrake.class));
+        cards.add(new SetCardInfo("Pendrell Flux", 87, Rarity.COMMON, mage.cards.p.PendrellFlux.class));
         cards.add(new SetCardInfo("Peregrine Drake", 88, Rarity.UNCOMMON, mage.cards.p.PeregrineDrake.class));
         cards.add(new SetCardInfo("Persecute", 146, Rarity.RARE, mage.cards.p.Persecute.class));
         cards.add(new SetCardInfo("Pestilence", 147, Rarity.COMMON, mage.cards.p.Pestilence.class));

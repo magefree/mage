@@ -76,10 +76,12 @@ public class FifthEdition extends ExpansionSet {
         cards.add(new SetCardInfo("Bottle of Suleiman", 354, Rarity.RARE, mage.cards.b.BottleOfSuleiman.class));
         cards.add(new SetCardInfo("Bottomless Vault", 411, Rarity.RARE, mage.cards.b.BottomlessVault.class));
         cards.add(new SetCardInfo("Brainstorm", 76, Rarity.COMMON, mage.cards.b.Brainstorm.class));
+        cards.add(new SetCardInfo("Brainwash", 289, Rarity.COMMON, mage.cards.b.Brainwash.class));
         cards.add(new SetCardInfo("Brassclaw Orcs", 213, Rarity.COMMON, BrassclawOrcs.class));
         cards.add(new SetCardInfo("Breeding Pit", 10, Rarity.UNCOMMON, mage.cards.b.BreedingPit.class));
         cards.add(new SetCardInfo("Brothers of Fire", 214, Rarity.COMMON, mage.cards.b.BrothersOfFire.class));
         cards.add(new SetCardInfo("Brushland", 412, Rarity.RARE, mage.cards.b.Brushland.class));
+        cards.add(new SetCardInfo("Carapace", 143, Rarity.COMMON, mage.cards.c.Carapace.class));
         cards.add(new SetCardInfo("Caribou Range", 290, Rarity.RARE, mage.cards.c.CaribouRange.class));
         cards.add(new SetCardInfo("Carrion Ants", 12, Rarity.UNCOMMON, mage.cards.c.CarrionAnts.class));
         cards.add(new SetCardInfo("Castle", 291, Rarity.UNCOMMON, mage.cards.c.Castle.class));
