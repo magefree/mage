@@ -44,7 +44,7 @@ import mage.filter.predicate.other.OwnerIdPredicate;
  */
 public class TargetDiscard extends TargetCard {
 
-    private UUID playerId;
+    private final UUID playerId;
 
     public TargetDiscard(UUID playerId) {
         this(1, 1, new FilterCard(), playerId);
@@ -73,10 +73,7 @@ public class TargetDiscard extends TargetCard {
     @Override
     public boolean canTarget(UUID id, Ability source, Game game) {
         Card card = game.getPlayer(playerId).getHand().get(id, game);
-        if (card != null) {
-            return filter.match(card, source.getControllerId(), game);
-        }
-        return false;
+        return card != null && filter.match(card, source.getControllerId(), game);
     }
 
     @Override

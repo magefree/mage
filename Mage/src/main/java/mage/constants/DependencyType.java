@@ -48,5 +48,5 @@ public enum DependencyType {
     BecomePlains,
     BecomeSwamp,
     EnchantmentAddingRemoving,
-    LooseDefenderEffect;
+    LooseDefenderEffect
 }

@@ -335,7 +335,7 @@ public abstract class GameImpl implements Game, Serializable {
     }
 
     @Override
-    public void addPlayer(Player player, Deck deck) throws GameException {
+    public void addPlayer(Player player, Deck deck) {
         player.useDeck(deck, this);
         state.addPlayer(player);
     }
@@ -1937,7 +1937,7 @@ public abstract class GameImpl implements Game, Serializable {
                         Player controller = this.getPlayer(planeswalker.getControllerId());
                         if (controller != null) {
                             Target targetPlaneswalkerToKeep = new TargetPermanent(filterPlaneswalker);
-                            targetPlaneswalkerToKeep.setTargetName(new StringBuilder(planeswalker.getName()).append(" to keep?").toString());
+                            targetPlaneswalkerToKeep.setTargetName(planeswalker.getName() + " to keep?");
                             controller.chooseTarget(Outcome.Benefit, targetPlaneswalkerToKeep, null, this);
                             for (Permanent dupPlaneswalker : this.getBattlefield().getActivePermanents(filterPlaneswalker, planeswalker.getControllerId(), this)) {
                                 if (!targetPlaneswalkerToKeep.getTargets().contains(dupPlaneswalker.getId())) {
@@ -2345,12 +2345,7 @@ public abstract class GameImpl implements Game, Serializable {
         }
         // Then, if that player controlled any objects on the stack not represented by cards, those objects cease to exist.
         this.getState().getContinuousEffects().removeInactiveEffects(this);
-        for (Iterator<StackObject> it = getStack().iterator(); it.hasNext();) {
-            StackObject object = it.next();
-            if (object.getControllerId().equals(playerId)) {
-                it.remove();
-            }
-        }
+        getStack().removeIf(object -> object.getControllerId().equals(playerId));
         // Then, if there are any objects still controlled by that player, those objects are exiled.
         applyEffects(); // to remove control from effects removed meanwhile
         List<Permanent> permanents = this.getBattlefield().getAllActivePermanents(playerId);
@@ -2594,10 +2589,10 @@ public abstract class GameImpl implements Game, Serializable {
             if (object instanceof Permanent) {
                 Map<Integer, MageObject> lkiExtendedMap = lkiExtended.get(objectId);
                 if (lkiExtendedMap != null) {
-                    lkiExtendedMap.put(((Permanent) object).getZoneChangeCounter(this), copy);
+                    lkiExtendedMap.put(object.getZoneChangeCounter(this), copy);
                 } else {
                     lkiExtendedMap = new HashMap<>();
-                    lkiExtendedMap.put(((Permanent) object).getZoneChangeCounter(this), copy);
+                    lkiExtendedMap.put(object.getZoneChangeCounter(this), copy);
                     lkiExtended.put(objectId, lkiExtendedMap);
                 }
             }
@@ -2689,7 +2684,7 @@ public abstract class GameImpl implements Game, Serializable {
                 permanent.entersBattlefield(permanent.getId(), this, Zone.OUTSIDE, false);
                 getBattlefield().addPermanent(permanent);
                 getPermanentsEntering().remove(permanent.getId());
-                ((PermanentImpl) permanent).removeSummoningSickness();
+                permanent.removeSummoningSickness();
                 if (card.isTapped()) {
                     permanent.setTapped(true);
                 }

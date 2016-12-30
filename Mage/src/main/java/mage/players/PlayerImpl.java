@@ -141,7 +141,7 @@ public abstract class PlayerImpl implements Player, Serializable {
 
     private static final Logger logger = Logger.getLogger(PlayerImpl.class);
 
-    private static SimpleDateFormat sdf = new SimpleDateFormat("HH:mm:ss.SSS");
+    private static final SimpleDateFormat sdf = new SimpleDateFormat("HH:mm:ss.SSS");
 
     /**
      * Used to cancel waiting requests send to the player
@@ -987,7 +987,7 @@ public abstract class PlayerImpl implements Player, Serializable {
         } else {
             result = cast(card.getSpellAbility(), game, noMana);
         }
-        if (result == false) {
+        if (!result) {
             game.informPlayer(this, "You can't play " + card.getIdName() + ".");
         }
         return result;
@@ -2026,7 +2026,7 @@ public abstract class PlayerImpl implements Player, Serializable {
         quit = true;
         idleTimeout = true;
         this.concede(game);
-        game.informPlayers(new StringBuilder(getLogName()).append(" was idle for too long, losing the Match.").toString());
+        game.informPlayers(getLogName() + " was idle for too long, losing the Match.");
     }
 
     @Override
@@ -2241,11 +2241,7 @@ public abstract class PlayerImpl implements Player, Serializable {
 
     @Override
     public boolean hasWon() {
-        if (!this.loses) {
-            return this.wins;
-        } else {
-            return false;
-        }
+        return !this.loses && this.wins;
     }
 
     @Override
@@ -2364,20 +2360,14 @@ public abstract class PlayerImpl implements Player, Serializable {
     public List<Permanent> getAvailableAttackers(UUID defenderId, Game game) {
         FilterCreatureForCombat filter = new FilterCreatureForCombat();
         List<Permanent> attackers = game.getBattlefield().getAllActivePermanents(filter, playerId, game);
-        for (Iterator<Permanent> i = attackers.iterator(); i.hasNext();) {
-            Permanent entry = i.next();
-            if (!entry.canAttack(defenderId, game)) {
-                i.remove();
-            }
-        }
+        attackers.removeIf(entry -> !entry.canAttack(defenderId, game));
         return attackers;
     }
 
     @Override
     public List<Permanent> getAvailableBlockers(Game game) {
         FilterCreatureForCombatBlock blockFilter = new FilterCreatureForCombatBlock();
-        List<Permanent> blockers = game.getBattlefield().getAllActivePermanents(blockFilter, playerId, game);
-        return blockers;
+        return game.getBattlefield().getAllActivePermanents(blockFilter, playerId, game);
     }
 
     @Override
@@ -2766,8 +2756,7 @@ public abstract class PlayerImpl implements Player, Serializable {
             // activated abilities from stack objects
             for (StackObject stackObject : game.getState().getStack()) {
                 for (ActivatedAbility ability : stackObject.getAbilities().getActivatedAbilities(Zone.STACK)) {
-                    if (ability instanceof ActivatedAbility
-                            && canPlay(ability, availableMana, game.getObject(ability.getSourceId()), game)) {
+                    if (ability != null && canPlay(ability, availableMana, game.getObject(ability.getSourceId()), game)) {
                         playableActivated.put(ability.toString(), ability);
                     }
 
@@ -2776,9 +2765,7 @@ public abstract class PlayerImpl implements Player, Serializable {
             // activated abilities from objects in the command zone (emblems or commanders)
             for (CommandObject commandObject : game.getState().getCommand()) {
                 for (ActivatedAbility ability : commandObject.getAbilities().getActivatedAbilities(Zone.COMMAND)) {
-                    if (ability.getControllerId().equals(getId())
-                            && ability instanceof ActivatedAbility
-                            && canPlay(ability, availableMana, game.getObject(ability.getSourceId()), game)) {
+                    if (ability.getControllerId().equals(getId()) && canPlay(ability, availableMana, game.getObject(ability.getSourceId()), game)) {
                         playableActivated.put(ability.toString(), ability);
                     }
 

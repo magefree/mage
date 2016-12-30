@@ -30,7 +30,7 @@ package mage.game.permanent.token;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
-import java.util.Random;
+
 import mage.MageInt;
 import mage.constants.CardType;
 import mage.util.RandomUtil;

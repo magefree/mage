@@ -79,10 +79,7 @@ public class CastFromGraveyardWatcher extends Watcher {
 
     public boolean spellWasCastFromGraveyard(UUID sourceId, int zcc) {
         Set zccSet = spellsCastFromGraveyard.get(sourceId);
-        if (zccSet != null) {
-            return zccSet.contains(zcc);
-        }
-        return false;
+        return zccSet != null && zccSet.contains(zcc);
 
     }
 

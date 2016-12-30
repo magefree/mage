@@ -52,11 +52,7 @@ public class ZonesHandler {
                 }
             }
         }
-        for (Iterator<ZoneChangeInfo> itr = zoneChangeInfos.iterator(); itr.hasNext();) {
-            if (!maybeRemoveFromSourceZone(itr.next(), game)) {
-                itr.remove();
-            }
-        }
+        zoneChangeInfos.removeIf(zoneChangeInfo -> !maybeRemoveFromSourceZone(zoneChangeInfo, game));
         for (ZoneChangeInfo zoneChangeInfo : zoneChangeInfos) {
             placeInDestinationZone(zoneChangeInfo, game);
             if (game.getPhase() != null) { // moving cards to zones before game started does not need events

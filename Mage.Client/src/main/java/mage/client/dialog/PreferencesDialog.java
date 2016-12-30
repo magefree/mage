@@ -2608,7 +2608,7 @@ public class PreferencesDialog extends javax.swing.JDialog {
 
         tabsPanel.addTab("Controls", tabControls);
 
-        saveButton.setLabel("Save");
+        saveButton.setText("Save");
         saveButton.setMaximumSize(new java.awt.Dimension(100, 30));
         saveButton.setMinimumSize(new java.awt.Dimension(100, 30));
         saveButton.setPreferredSize(new java.awt.Dimension(100, 30));
@@ -2619,7 +2619,7 @@ public class PreferencesDialog extends javax.swing.JDialog {
             }
         });
 
-        exitButton.setLabel("Exit");
+        exitButton.setText("Exit");
         exitButton.setMaximumSize(new java.awt.Dimension(100, 30));
         exitButton.setMinimumSize(new java.awt.Dimension(100, 30));
         exitButton.setPreferredSize(new java.awt.Dimension(100, 30));

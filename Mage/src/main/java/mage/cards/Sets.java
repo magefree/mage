@@ -65,6 +65,7 @@ public class Sets extends HashMap<String, ExpansionSet> {
             try {
                 addSet((ExpansionSet) c.getMethod("getInstance").invoke(null));
             } catch (Exception ex) {
+                logger.error(ex);
             }
         }
     }
@@ -142,10 +143,9 @@ public class Sets extends HashMap<String, ExpansionSet> {
     }
 
     public static void saveDeck(String file, DeckCardLists deck) throws FileNotFoundException {
-        PrintWriter out = new PrintWriter(file);
         Map<String, DeckCardInfo> deckCards = new HashMap<>();
         Map<String, DeckCardInfo> sideboard = new HashMap<>();
-        try {
+        try (PrintWriter out = new PrintWriter(file)) {
             if (deck.getName() != null && deck.getName().length() > 0) {
                 out.println("NAME:" + deck.getName());
             }
@@ -169,10 +169,10 @@ public class Sets extends HashMap<String, ExpansionSet> {
             }
 
             // Write out all of the cards
-            for (Map.Entry<String, DeckCardInfo> entry : deckCards.entrySet()) {
+            for (Entry<String, DeckCardInfo> entry : deckCards.entrySet()) {
                 out.printf("%d [%s:%s] %s%n", entry.getValue().getQuantity(), entry.getValue().getSetCode(), entry.getValue().getCardNum(), entry.getValue().getCardName());
             }
-            for (Map.Entry<String, DeckCardInfo> entry : sideboard.entrySet()) {
+            for (Entry<String, DeckCardInfo> entry : sideboard.entrySet()) {
                 out.printf("SB: %d [%s:%s] %s%n", entry.getValue().getQuantity(), entry.getValue().getSetCode(), entry.getValue().getCardNum(), entry.getValue().getCardName());
             }
 
@@ -183,8 +183,6 @@ public class Sets extends HashMap<String, ExpansionSet> {
             out.print("LAYOUT SIDEBOARD:");
             writeCardLayout(out, deck.getSideboardLayout());
             out.print("\n");
-        } finally {
-            out.close();
         }
     }
 

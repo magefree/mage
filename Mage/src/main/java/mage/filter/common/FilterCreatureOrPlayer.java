@@ -43,7 +43,7 @@ import mage.players.Player;
 public class FilterCreatureOrPlayer extends FilterImpl<MageItem> implements FilterInPlay<MageItem> {
 
     protected FilterCreaturePermanent creatureFilter;
-    protected FilterPlayer playerFilter;
+    protected final FilterPlayer playerFilter;
 
     public FilterCreatureOrPlayer() {
         this("creature or player");

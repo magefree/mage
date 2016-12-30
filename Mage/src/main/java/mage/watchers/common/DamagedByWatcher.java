@@ -45,7 +45,7 @@ import mage.watchers.Watcher;
  */
 public class DamagedByWatcher extends Watcher {
 
-    public Set<MageObjectReference> damagedBySource = new HashSet<>();
+    public final Set<MageObjectReference> damagedBySource = new HashSet<>();
 
     private final boolean watchPlaneswalkers;
 

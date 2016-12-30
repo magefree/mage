@@ -92,7 +92,7 @@ public class TargetCardInLibrary extends TargetCard {
         } else {
             cards = new ArrayList<>(targetPlayer.getLibrary().getTopCards(game, librarySearchLimit));
         }
-        Collections.sort(cards, new CardNameComparator());
+        cards.sort(new CardNameComparator());
         Cards cardsId = new CardsImpl();
         for (Card card : cards) {
             cardsId.add(card);
@@ -111,10 +111,7 @@ public class TargetCardInLibrary extends TargetCard {
     @Override
     public boolean canTarget(UUID id, Ability source, Game game) {
         Card card = game.getPlayer(source.getControllerId()).getLibrary().getCard(id, game);
-        if (card != null) {
-            return filter.match(card, game);
-        }
-        return false;
+        return card != null && filter.match(card, game);
     }
 
     @Override

@@ -38,7 +38,7 @@ import mage.game.Game;
  */
 public class FromSetPredicate<T extends MageItem> implements Predicate<T> {
     
-    protected Set<UUID> set;
+    protected final Set<UUID> set;
 
     public FromSetPredicate(Set<UUID> set) {
         this.set = set;

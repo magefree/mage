@@ -48,7 +48,7 @@ import mage.target.TargetImpl;
  */
 public class TargetPermanentOrSuspendedCard extends TargetImpl {
     
-    protected FilterPermanentOrSuspendedCard filter;
+    protected final FilterPermanentOrSuspendedCard filter;
     
     public TargetPermanentOrSuspendedCard() {
         this(new FilterPermanentOrSuspendedCard(), false);
@@ -118,10 +118,7 @@ public class TargetPermanentOrSuspendedCard extends TargetImpl {
             return filter.match(permanent, game);
         }
         Card card = game.getExile().getCard(id, game);
-        if (card != null) {
-            return filter.match(card, game);
-        }
-        return false;
+        return card != null && filter.match(card, game);
     }
 
     @Override
@@ -137,10 +134,7 @@ public class TargetPermanentOrSuspendedCard extends TargetImpl {
             }
         }
         Card card = game.getExile().getCard(id, game);
-        if (card != null) {
-            return filter.match(card, game);
-        }
-        return false;
+        return card != null && filter.match(card, game);
     }
 
     @Override

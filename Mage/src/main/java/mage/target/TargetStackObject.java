@@ -44,7 +44,7 @@ import java.util.UUID;
  */
 public class TargetStackObject extends TargetObject {
 
-    protected FilterStackObject filter;
+    protected final FilterStackObject filter;
 
     public TargetStackObject() {
         this(1, 1, new FilterStackObject());
@@ -79,10 +79,7 @@ public class TargetStackObject extends TargetObject {
     @Override
     public boolean canTarget(UUID id, Ability source, Game game) {
         StackObject stackObject = game.getStack().getStackObject(id);
-        if (stackObject != null) {
-            return filter.match(stackObject, source.getSourceId(), source.getControllerId(), game);
-        }
-        return false;
+        return stackObject != null && filter.match(stackObject, source.getSourceId(), source.getControllerId(), game);
     }
 
     @Override

@@ -62,7 +62,7 @@ public interface Match {
 
     void submitDeck(UUID playerId, Deck deck);
     void updateDeck(UUID playerId, Deck deck);
-    void startMatch() throws GameException;
+    void startMatch();
     void startGame() throws GameException;
     void sideboard();
     void endGame();

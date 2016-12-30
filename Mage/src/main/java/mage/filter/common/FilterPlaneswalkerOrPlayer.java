@@ -46,8 +46,8 @@ import mage.players.Player;
  */
 public class FilterPlaneswalkerOrPlayer extends FilterImpl<Object> {
 
-    protected FilterPlaneswalkerPermanent planeswalkerFilter;
-    protected FilterPlayer playerFilter;
+    protected final FilterPlaneswalkerPermanent planeswalkerFilter;
+    protected final FilterPlayer playerFilter;
 
     public FilterPlaneswalkerOrPlayer(Set<UUID> defenders) {
         super("planeswalker or player");

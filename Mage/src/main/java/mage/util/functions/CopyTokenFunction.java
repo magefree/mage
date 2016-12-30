@@ -83,9 +83,7 @@ public class CopyTokenFunction implements Function<Token, Card> {
         } else {
             target.setOriginalExpansionSetCode(source.getExpansionSetCode());
             target.setOriginalCardNumber(source.getCardNumber());
-            if (source instanceof Card) {
-                target.setCopySourceCard(source);
-            }
+            target.setCopySourceCard(source);
         }
 
         target.setName(sourceObj.getName());

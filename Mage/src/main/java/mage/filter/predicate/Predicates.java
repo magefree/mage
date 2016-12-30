@@ -168,8 +168,8 @@ public final class Predicates {
 
         @Override
         public boolean apply(T t, Game game) {
-            for (int i = 0; i < components.size(); i++) {
-                if (!components.get(i).apply(t, game)) {
+            for (Predicate<? super T> component : components) {
+                if (!component.apply(t, game)) {
                     return false;
                 }
             }
@@ -196,8 +196,8 @@ public final class Predicates {
 
         @Override
         public boolean apply(T t, Game game) {
-            for (int i = 0; i < components.size(); i++) {
-                if (components.get(i).apply(t, game)) {
+            for (Predicate<? super T> component : components) {
+                if (component.apply(t, game)) {
                     return true;
                 }
             }
@@ -244,8 +244,8 @@ public final class Predicates {
 
     private static String commaJoin(List components) {
         StringBuilder sb = new StringBuilder();
-        for (int i = 0; i < components.size(); i++) {
-            sb.append(components.get(i).toString());
+        for (Object component : components) {
+            sb.append(component.toString());
         }
         sb.deleteCharAt(sb.length() - 1);
         return sb.toString();

@@ -28,6 +28,8 @@
 package mage.game.permanent.token;
 
 import java.util.Arrays;
+import java.util.Collections;
+
 import mage.MageInt;
 import mage.constants.CardType;
 
@@ -39,7 +41,7 @@ public class TrooperToken extends Token {
 
     public TrooperToken() {
         super("Trooper", "1/1 white Trooper creature token");
-        availableImageSetCodes.addAll(Arrays.asList("SWS"));
+        availableImageSetCodes.addAll(Collections.singletonList("SWS"));
 
         cardType.add(CardType.CREATURE);
         subtype.add("Trooper");

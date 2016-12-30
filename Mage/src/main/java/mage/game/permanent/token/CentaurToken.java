@@ -28,7 +28,6 @@
 
 package mage.game.permanent.token;
 
-import java.util.Random;
 import mage.constants.CardType;
 import mage.MageInt;
 import mage.util.RandomUtil;

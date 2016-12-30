@@ -16,7 +16,7 @@ import mage.watchers.Watcher;
  */
 public class LandfallWatcher extends Watcher {
 
-    Set<UUID> playerPlayedLand = new HashSet<>();
+    final Set<UUID> playerPlayedLand = new HashSet<>();
 
     public LandfallWatcher() {
         super("LandPlayed", WatcherScope.GAME);

@@ -14,7 +14,7 @@ import mage.players.Player;
 
 public class TargetCardInOpponentsGraveyard extends TargetCard {
 
-    protected boolean allFromOneOpponent;
+    protected final boolean allFromOneOpponent;
 
     public TargetCardInOpponentsGraveyard(FilterCard filter) {
         this(1, 1, filter, false);

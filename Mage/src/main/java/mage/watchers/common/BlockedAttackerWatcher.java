@@ -44,7 +44,7 @@ import mage.watchers.Watcher;
  */
 public class BlockedAttackerWatcher extends Watcher {
 
-    public HashMap<MageObjectReference, Set<MageObjectReference>> blockData = new HashMap<>();
+    public final HashMap<MageObjectReference, Set<MageObjectReference>> blockData = new HashMap<>();
 
     public BlockedAttackerWatcher() {
         super("BlockedAttackerWatcher", WatcherScope.GAME);

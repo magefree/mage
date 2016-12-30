@@ -45,8 +45,8 @@ import mage.target.TargetCard;
  */
 public class TargetCardInExile extends TargetCard {
 
-    private UUID zoneId;
-    private boolean allExileZones;
+    private final UUID zoneId;
+    private final boolean allExileZones;
 
     public TargetCardInExile(FilterCard filter) {
         this(1, 1, filter, null);
@@ -68,11 +68,7 @@ public class TargetCardInExile extends TargetCard {
     public TargetCardInExile(int minNumTargets, int maxNumTargets, FilterCard filter, UUID zoneId, boolean allExileZones) {
         super(minNumTargets, maxNumTargets, Zone.EXILED, filter);
         this.zoneId = zoneId;
-        if (zoneId == null) {
-            this.allExileZones = true;
-        } else {
-            this.allExileZones = allExileZones;
-        }
+        this.allExileZones = zoneId == null || allExileZones;
     }
 
     public TargetCardInExile(final TargetCardInExile target) {

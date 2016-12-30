@@ -97,10 +97,7 @@ public class TargetPermanentOrPlayer extends TargetImpl {
             return filter.match(permanent, game);
         }
         Player player = game.getPlayer(id);
-        if (player != null) {
-            return filter.match(player, game);
-        }
-        return false;
+        return player != null && filter.match(player, game);
     }
 
     @Override
@@ -118,7 +115,7 @@ public class TargetPermanentOrPlayer extends TargetImpl {
             if (permanent != null) {
                 if (!isNotTarget()) {
                     if (!permanent.canBeTargetedBy(game.getObject(source.getId()), source.getControllerId(), game) ||
-                        !permanent.canBeTargetedBy(game.getObject(source.getSourceId()), source.getControllerId(), game)) {
+                            !permanent.canBeTargetedBy(game.getObject(source.getSourceId()), source.getControllerId(), game)) {
                         return false;
                     }
                 }
@@ -137,10 +134,7 @@ public class TargetPermanentOrPlayer extends TargetImpl {
         if (permanent != null) {
             return filter.match(permanent, game);
         }
-        if (player != null) {
-            return filter.match(player, game);
-        }
-        return false;
+        return player != null && filter.match(player, game);
     }
 
     /**

@@ -74,7 +74,7 @@ public class DeckCardInfo implements Serializable {
     }
 
     public String getCardKey() {
-        return new StringBuilder(setCode).append(cardNum).toString();
+        return setCode + cardNum;
     }
 
 }

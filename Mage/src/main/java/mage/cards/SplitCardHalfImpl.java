@@ -8,7 +8,6 @@ package mage.cards;
 import java.util.ArrayList;
 import java.util.UUID;
 import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.constants.SpellAbilityType;
 import mage.constants.Zone;
 import mage.game.Game;

@@ -43,9 +43,7 @@ public class Watchers extends HashMap<String, Watcher> {
     }
 
     public Watchers(final Watchers watchers) {
-        watchers.entrySet().stream().forEach((entry) -> {
-            this.put(entry.getKey(), entry.getValue().copy());
-        });
+        watchers.entrySet().stream().forEach((entry) -> this.put(entry.getKey(), entry.getValue().copy()));
     }
 
     public Watchers copy() {
@@ -59,16 +57,13 @@ public class Watchers extends HashMap<String, Watcher> {
     }
 
     public void watch(GameEvent event, Game game) {
-        for (Iterator<Watcher> it = this.values().iterator(); it.hasNext();) {
-            Watcher watcher = it.next();
+        for (Watcher watcher : this.values()) {
             watcher.watch(event, game);
         }
     }
 
     public void reset() {
-        this.values().stream().forEach((watcher) -> {
-            watcher.reset();
-        });
+        this.values().stream().forEach(Watcher::reset);
     }
 
     public Watcher get(String key, UUID id) {

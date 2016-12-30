@@ -123,7 +123,7 @@ public enum CounterType {
 
     private final String name;
 
-    private CounterType(String name) {
+    CounterType(String name) {
         this.name = name;
     }
 

@@ -132,7 +132,7 @@ public interface Game extends MageItem, Serializable {
 
     void setZone(UUID objectId, Zone zone);
 
-    void addPlayer(Player player, Deck deck) throws GameException;
+    void addPlayer(Player player, Deck deck);
 
     Player getPlayer(UUID playerId);
 
@@ -437,7 +437,7 @@ public interface Game extends MageItem, Serializable {
     // controlling the behaviour of replacement effects while permanents entering the battlefield
     void setScopeRelevant(boolean scopeRelevant);
 
-    public boolean getScopeRelevant();
+    boolean getScopeRelevant();
 
     // players' timers
     void initTimer(UUID playerId);
