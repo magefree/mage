@@ -25,9 +25,9 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
+
 package mage.cards.c;
 
-import java.util.UUID;
 import mage.abilities.Ability;
 import mage.abilities.TriggeredAbilityImpl;
 import mage.abilities.effects.Effect;
@@ -50,8 +50,9 @@ import mage.players.Player;
 import mage.target.TargetPlayer;
 import mage.target.targetpointer.FixedTarget;
 
+import java.util.UUID;
+
 /**
- *
  * @author spjspj
  */
 public class CurseOfVengeance extends CardImpl {
@@ -147,13 +148,12 @@ class CurseOfVengeancePlayerLosesTriggeredAbility extends TriggeredAbilityImpl {
 
     @Override
     public boolean checkEventType(GameEvent event, Game game) {
-        System.out.println("Saw event of type: " + event.getType());
         return event.getType() == EventType.LOST;
     }
 
     @Override
     public boolean checkTrigger(GameEvent event, Game game) {
-        return true;
+        return game.getPermanent(this.getSourceId()).getAttachedTo().equals(event.getPlayerId());
     }
 
     @Override
