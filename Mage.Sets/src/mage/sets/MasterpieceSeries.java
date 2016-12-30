@@ -52,8 +52,7 @@ public class MasterpieceSeries extends ExpansionSet {
         cards.add(new SetCardInfo("Aether Vial", 6, Rarity.MYTHIC, mage.cards.a.AetherVial.class, new CardGraphicInfo(FrameStyle.KLD_INVENTION, false)));
         cards.add(new SetCardInfo("Arcbound Ravager", 31, Rarity.MYTHIC, mage.cards.a.ArcboundRavager.class, new CardGraphicInfo(FrameStyle.KLD_INVENTION, false)));
         cards.add(new SetCardInfo("Black Vise", 32, Rarity.MYTHIC, mage.cards.b.BlackVise.class, new CardGraphicInfo(FrameStyle.KLD_INVENTION, false)));
-        cards.add(new SetCardInfo("Cataclysmic Gearhulk", 1, Rarity.MYTHIC, mage.cards.c.CataclysmicGearhulk.class, new CardGraphicInfo(
-                FrameStyle.KLD_INVENTION, false)));
+        cards.add(new SetCardInfo("Cataclysmic Gearhulk", 1, Rarity.MYTHIC, mage.cards.c.CataclysmicGearhulk.class, new CardGraphicInfo(FrameStyle.KLD_INVENTION, false)));
         cards.add(new SetCardInfo("Chalice of the Void", 33, Rarity.MYTHIC, mage.cards.c.ChaliceOfTheVoid.class, new CardGraphicInfo(FrameStyle.KLD_INVENTION, false)));
         cards.add(new SetCardInfo("Champion's Helm", 7, Rarity.MYTHIC, mage.cards.c.ChampionsHelm.class, new CardGraphicInfo(FrameStyle.KLD_INVENTION, false)));
         cards.add(new SetCardInfo("Chromatic Lantern", 8, Rarity.MYTHIC, mage.cards.c.ChromaticLantern.class, new CardGraphicInfo(FrameStyle.KLD_INVENTION,
@@ -87,7 +86,9 @@ public class MasterpieceSeries extends ExpansionSet {
         cards.add(new SetCardInfo("Ornithopter", 42, Rarity.MYTHIC, mage.cards.o.Ornithopter.class, new CardGraphicInfo(FrameStyle.KLD_INVENTION, false)));
         cards.add(new SetCardInfo("Painter's Servant", 20, Rarity.MYTHIC, mage.cards.p.PaintersServant.class, new CardGraphicInfo(FrameStyle.KLD_INVENTION,
                 false)));
+        cards.add(new SetCardInfo("Paradox Engine", 43, Rarity.MYTHIC, mage.cards.p.ParadoxEngine.class));
         cards.add(new SetCardInfo("Pithing Needle", 44, Rarity.MYTHIC, mage.cards.p.PithingNeedle.class, new CardGraphicInfo(FrameStyle.KLD_INVENTION, false)));
+        cards.add(new SetCardInfo("Planar Bridge", 45, Rarity.MYTHIC, mage.cards.p.PlanarBridge.class));
         cards.add(new SetCardInfo("Platinum Angel", 46, Rarity.MYTHIC, mage.cards.p.PlatinumAngel.class, new CardGraphicInfo(FrameStyle.KLD_INVENTION, false)));
         cards.add(new SetCardInfo("Rings of Brighthearth", 21, Rarity.MYTHIC, mage.cards.r.RingsOfBrighthearth.class, new CardGraphicInfo(
                 FrameStyle.KLD_INVENTION, false)));
