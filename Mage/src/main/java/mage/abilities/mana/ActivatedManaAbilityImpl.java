@@ -70,8 +70,10 @@ public abstract class ActivatedManaAbilityImpl extends ActivatedAbilityImpl impl
         if (!controlsAbility(playerId, game)) {
             return false;
         }
+        // check if player is in the process of playing spell costs and he is no longer allowed to use activated mana abilities (e.g. becaus he started to use improvise)
         //20091005 - 605.3a
         return costs.canPay(this, sourceId, controllerId, game);
+
     }
 
     /**

@@ -88,6 +88,8 @@ public class Spell extends StackObjImpl implements Card {
     private boolean faceDown;
     private boolean countered;
 
+    private boolean doneActivatingManaAbilities; // if this is true, the player is no longer allowed to pay the spell costs with activating of mana abilies
+
     public Spell(Card card, SpellAbility ability, UUID controllerId, Zone fromZone) {
         this.card = card;
         this.color = card.getColor(null).copy();
@@ -108,6 +110,7 @@ public class Spell extends StackObjImpl implements Card {
         this.controllerId = controllerId;
         this.fromZone = fromZone;
         this.countered = false;
+        this.doneActivatingManaAbilities = false;
     }
 
     public Spell(final Spell spell) {
@@ -135,6 +138,7 @@ public class Spell extends StackObjImpl implements Card {
         this.color = spell.color.copy();
         this.frameColor = spell.color.copy();
         this.frameStyle = spell.frameStyle;
+        this.doneActivatingManaAbilities = spell.doneActivatingManaAbilities;
     }
 
     public boolean activate(Game game, boolean noMana) {
@@ -381,6 +385,14 @@ public class Spell extends StackObjImpl implements Card {
         } else {
             card.removeFromZone(game, Zone.STACK, sourceId);
         }
+    }
+
+    public boolean isDoneActivatingManaAbilities() {
+        return doneActivatingManaAbilities;
+    }
+
+    public void setDoneActivatingManaAbilities(boolean doneActivatingManaAbilities) {
+        this.doneActivatingManaAbilities = doneActivatingManaAbilities;
     }
 
     @Override
