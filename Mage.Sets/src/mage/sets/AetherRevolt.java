@@ -27,15 +27,14 @@
  */
 package mage.sets;
 
+import java.util.ArrayList;
+import java.util.List;
 import mage.cards.ExpansionSet;
 import mage.cards.repository.CardCriteria;
 import mage.cards.repository.CardInfo;
 import mage.cards.repository.CardRepository;
 import mage.constants.Rarity;
 import mage.constants.SetType;
-
-import java.util.ArrayList;
-import java.util.List;
 
 /**
  *
@@ -72,7 +71,10 @@ public class AetherRevolt extends ExpansionSet {
         cards.add(new SetCardInfo("Disallow", 31, Rarity.RARE, mage.cards.d.Disallow.class));
         cards.add(new SetCardInfo("Heart of Kiran", 153, Rarity.MYTHIC, mage.cards.h.HeartOfKiran.class));
         cards.add(new SetCardInfo("Oath of Ajani", 131, Rarity.RARE, mage.cards.o.OathOfAjani.class));
+        cards.add(new SetCardInfo("Paradox Engine", 170, Rarity.MYTHIC, mage.cards.p.ParadoxEngine.class));
         cards.add(new SetCardInfo("Pia's Revolution", 91, Rarity.RARE, mage.cards.p.PiasRevolution.class));
+        // Check card # 171 it's just a guess
+        cards.add(new SetCardInfo("Planar Bridge", 171, Rarity.MYTHIC, mage.cards.p.PlanarBridge.class));
         cards.add(new SetCardInfo("Quicksmith Rebel", 93, Rarity.RARE, mage.cards.q.QuicksmithRebel.class));
         cards.add(new SetCardInfo("Quicksmith Spy", 41, Rarity.RARE, mage.cards.q.QuicksmithSpy.class));
         cards.add(new SetCardInfo("Scrap Trawler", 175, Rarity.RARE, mage.cards.s.ScrapTrawler.class));
