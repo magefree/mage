@@ -223,6 +223,7 @@ public class MercadianMasques extends ExpansionSet {
         cards.add(new SetCardInfo("Ramosian Captain", 35, Rarity.UNCOMMON, mage.cards.r.RamosianCaptain.class));
         cards.add(new SetCardInfo("Ramosian Commander", 36, Rarity.UNCOMMON, mage.cards.r.RamosianCommander.class));
         cards.add(new SetCardInfo("Ramosian Lieutenant", 37, Rarity.COMMON, mage.cards.r.RamosianLieutenant.class));
+        cards.add(new SetCardInfo("Ramosian Rally", 38, Rarity.COMMON, mage.cards.r.RamosianRally.class));
         cards.add(new SetCardInfo("Ramosian Sergeant", 39, Rarity.COMMON, mage.cards.r.RamosianSergeant.class));
         cards.add(new SetCardInfo("Ramosian Sky Marshal", 40, Rarity.RARE, mage.cards.r.RamosianSkyMarshal.class));
         cards.add(new SetCardInfo("Rampart Crawler", 156, Rarity.COMMON, mage.cards.r.RampartCrawler.class));

@@ -1838,7 +1838,7 @@ public abstract class GameImpl implements Game, Serializable {
                             }
                         } else if (target instanceof TargetPlayer) {
                             Player attachedToPlayer = getPlayer(perm.getAttachedTo());
-                            if (attachedToPlayer.hasLost() || attachedToPlayer == null) {
+                            if (attachedToPlayer == null || attachedToPlayer.hasLost()) {
                                 if (movePermanentToGraveyardWithInfo(perm)) {
                                     somethingHappened = true;
                                 }
