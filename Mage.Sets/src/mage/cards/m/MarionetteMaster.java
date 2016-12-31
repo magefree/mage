@@ -48,7 +48,7 @@ import mage.target.common.TargetOpponent;
 public class MarionetteMaster extends CardImpl {
 
     public MarionetteMaster(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{4}{B}{B}");
+        super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{4}{B}{B}");
         this.subtype.add("Human");
         this.subtype.add("Artificer");
         this.power = new MageInt(1);
@@ -58,7 +58,7 @@ public class MarionetteMaster extends CardImpl {
         this.addAbility(new FabricateAbility(3));
 
         // Whenever an artifact you control is put into a graveyard from the battlefield, target opponent loses life equal to Marionette Master's power.
-        Effect effect = new LoseLifeTargetEffect(new SourcePermanentPowerCount());
+        Effect effect = new LoseLifeTargetEffect(new SourcePermanentPowerCount(false));
         effect.setText("target opponent loses life equal to Marionette Master's power");
         Ability ability = new PutIntoGraveFromBattlefieldAllTriggeredAbility(effect, false, new FilterControlledArtifactPermanent("an artifact you control"), false);
         ability.addTarget(new TargetOpponent());
