@@ -35,6 +35,7 @@ public class Mirrodin extends ExpansionSet {
         cards.add(new SetCardInfo("Auriok Bladewarden", 3, Rarity.UNCOMMON, mage.cards.a.AuriokBladewarden.class));
         cards.add(new SetCardInfo("Auriok Steelshaper", 4, Rarity.RARE, mage.cards.a.AuriokSteelshaper.class));
         cards.add(new SetCardInfo("Auriok Transfixer", 5, Rarity.COMMON, mage.cards.a.AuriokTransfixer.class));
+        cards.add(new SetCardInfo("Awe Strike", 6, Rarity.COMMON, mage.cards.a.AweStrike.class));
         cards.add(new SetCardInfo("Banshee's Blade", 144, Rarity.UNCOMMON, mage.cards.b.BansheesBlade.class));
         cards.add(new SetCardInfo("Barter in Blood", 57, Rarity.UNCOMMON, mage.cards.b.BarterInBlood.class));
         cards.add(new SetCardInfo("Battlegrowth", 113, Rarity.COMMON, mage.cards.b.Battlegrowth.class));
