@@ -29,12 +29,15 @@ package mage.cards.a;
 
 import java.util.UUID;
 import mage.MageInt;
+import mage.abilities.Ability;
 import mage.abilities.TriggeredAbilityImpl;
 import mage.abilities.costs.mana.ManaCostsImpl;
+import mage.abilities.effects.OneShotEffect;
 import mage.abilities.keyword.MadnessAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
+import mage.constants.Outcome;
 import mage.constants.Zone;
 import mage.game.Game;
 import mage.game.events.GameEvent;
@@ -72,12 +75,12 @@ public class AsylumVisitor extends CardImpl {
 }
 
 class AsylumVisitorTriggeredAbility extends TriggeredAbilityImpl {
-    
+
     public AsylumVisitorTriggeredAbility() {
-        super(Zone.BATTLEFIELD, null);
+        super(Zone.BATTLEFIELD, new AsylumVisitorEffect());
     }
 
-    public AsylumVisitorTriggeredAbility(final AsylumVisitorTriggeredAbility ability) {        
+    public AsylumVisitorTriggeredAbility(final AsylumVisitorTriggeredAbility ability) {
         super(ability);
     }
 
@@ -93,21 +96,44 @@ class AsylumVisitorTriggeredAbility extends TriggeredAbilityImpl {
 
     @Override
     public boolean checkTrigger(GameEvent event, Game game) {
-        
-        Player you = game.getPlayer(this.getControllerId());
         Player upkeepPlayer = game.getPlayer(event.getPlayerId());
-
-        if (you != null && upkeepPlayer != null && upkeepPlayer.getHand().isEmpty()) {
-            you.drawCards(1, game);
-            you.loseLife(1, game, false);
+        if (upkeepPlayer != null && upkeepPlayer.getHand().isEmpty()) {
             return true;
         }
-        
         return false;
     }
 
     @Override
     public String getRule() {
-        return "At the beginning of each player's upkeep, if that player has no cards in hand, you draw a card and you lose 1 life.";
+        return "At the beginning of each player's upkeep, if that player has no cards in hand, you draw a card and you lose 1 life";
+    }
+}
+
+class AsylumVisitorEffect extends OneShotEffect {
+
+    public AsylumVisitorEffect() {
+        super(Outcome.DrawCard);
+        this.staticText = "you draw a card and you lose 1 life";
+    }
+
+    public AsylumVisitorEffect(final AsylumVisitorEffect effect) {
+        super(effect);
+    }
+
+    @Override
+    public AsylumVisitorEffect copy() {
+        return new AsylumVisitorEffect(this);
+    }
+
+    @Override
+    public boolean apply(Game game, Ability source) {
+        Player you = game.getPlayer(source.getControllerId());
+        Player upkeepPlayer = game.getPlayer(game.getActivePlayerId());
+        if (you != null && upkeepPlayer != null && upkeepPlayer.getHand().isEmpty()) {
+            you.drawCards(1, game);
+            you.loseLife(1, game, false);
+            return true;
+        }
+        return false;
     }
 }
