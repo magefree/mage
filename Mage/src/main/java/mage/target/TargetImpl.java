@@ -554,4 +554,9 @@ public abstract class TargetImpl implements Target {
         this.targetTag = targetTag;
     }
 
+    @Override
+    public Target getOriginalTarget() {
+        return this;
+    }
+
 }
