@@ -105,7 +105,7 @@ class AsylumVisitorTriggeredAbility extends TriggeredAbilityImpl {
 
     @Override
     public String getRule() {
-        return "At the beginning of each player's upkeep, if that player has no cards in hand, you draw a card and you lose 1 life";
+        return "At the beginning of each player's upkeep, if that player has no cards in hand, you draw a card and you lose 1 life.";
     }
 }
 
