@@ -40,6 +40,7 @@ import mage.cards.CardSetInfo;
 import mage.constants.*;
 import mage.target.TargetPermanent;
 import mage.target.common.TargetCreaturePermanent;
+import mage.abilities.effects.Effect;
 
 /**
  *
@@ -59,8 +60,11 @@ public class Cagemail extends CardImpl {
         Ability ability = new EnchantAbility(auraTarget.getTargetName());
         this.addAbility(ability);
         // Enchanted creature gets +2/+2 and can't block.
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new BoostEnchantedEffect(2, 2, Duration.WhileOnBattlefield)));
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new CantBlockAttachedEffect(AttachmentType.AURA)));
+        Ability ability1 = new SimpleStaticAbility(Zone.BATTLEFIELD, new BoostEnchantedEffect(2, 2, Duration.WhileOnBattlefield));
+        Effect effect = new CantBlockAttachedEffect(AttachmentType.AURA);
+        effect.setText("and can't block.");
+        ability1.addEffect(effect);
+        this.addAbility(ability1);
     }
 
     public Cagemail(final Cagemail card) {

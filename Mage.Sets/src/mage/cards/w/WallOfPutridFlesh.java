@@ -99,7 +99,7 @@ class PreventDamageToSourceByEnchantedCreatures extends PreventAllDamageToSource
     }
 
     public boolean isEnchantedCreature(MageObject input, Game game) {
-        if (!input.getCardType().contains(CardType.CREATURE)) {
+        if (input != null && !input.getCardType().contains(CardType.CREATURE)) {
             return false;
         }
         for (UUID attachmentId : ((Permanent)input).getAttachments()) {

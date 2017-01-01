@@ -45,7 +45,7 @@ import mage.game.permanent.Permanent;
 public class CantAttackUnlessPaysAttachedEffect extends PayCostToAttackBlockEffectImpl {
 
     public CantAttackUnlessPaysAttachedEffect(ManaCosts manaCosts, AttachmentType attachmentType) {
-        super(Duration.WhileOnBattlefield, Outcome.Detriment, RestrictType.ATTACK_AND_BLOCK, manaCosts);
+        super(Duration.WhileOnBattlefield, Outcome.Detriment, RestrictType.ATTACK, manaCosts);
         staticText = (attachmentType.equals(AttachmentType.AURA) ? "Enchanted " : "Equipped ")
                 + "creature can't attack unless its controller pays "
                 + (manaCosts == null ? "" : manaCosts.getText());
