@@ -34,13 +34,12 @@ import mage.abilities.common.EntersBattlefieldTriggeredAbility;
 import mage.abilities.condition.common.PermanentsOnTheBattlefieldCondition;
 import mage.abilities.condition.common.PermanentsOnTheBattlefieldCondition.CountType;
 import mage.abilities.decorator.ConditionalTriggeredAbility;
-import mage.abilities.effects.common.DamagePlayersEffect;
+import mage.abilities.effects.common.LoseLifeOpponentsEffect;
 import mage.abilities.keyword.DevoidAbility;
 import mage.abilities.keyword.IngestAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.TargetController;
 import mage.filter.common.FilterControlledCreaturePermanent;
 import mage.filter.predicate.mageobject.ColorlessPredicate;
 import mage.filter.predicate.permanent.AnotherPredicate;
@@ -59,7 +58,7 @@ public class DominatorDrone extends CardImpl {
     }
 
     public DominatorDrone(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{2}{B}");
+        super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{2}{B}");
         this.subtype.add("Eldrazi");
         this.subtype.add("Drone");
         this.power = new MageInt(3);
@@ -72,7 +71,7 @@ public class DominatorDrone extends CardImpl {
         this.addAbility(new IngestAbility());
 
         // When Dominator Drone enters the battlefield, if you control another colorless creature, each opponent loses 2 life.
-        TriggeredAbility triggeredAbility = new EntersBattlefieldTriggeredAbility(new DamagePlayersEffect(2, TargetController.OPPONENT));
+        TriggeredAbility triggeredAbility = new EntersBattlefieldTriggeredAbility(new LoseLifeOpponentsEffect(2));
         this.addAbility(new ConditionalTriggeredAbility(
                 triggeredAbility,
                 new PermanentsOnTheBattlefieldCondition(filter, CountType.MORE_THAN, 0),
