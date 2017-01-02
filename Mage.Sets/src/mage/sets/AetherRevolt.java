@@ -81,7 +81,7 @@ public class AetherRevolt extends ExpansionSet {
         cards.add(new SetCardInfo("Tezzeret the Schemer", 137, Rarity.MYTHIC, mage.cards.t.TezzeretTheSchemer.class));
         cards.add(new SetCardInfo("Tezzeret, Master of Metal", 190, Rarity.MYTHIC, mage.cards.t.TezzeretMasterOfMetal.class));
         cards.add(new SetCardInfo("Trophy Mage", 48, Rarity.UNCOMMON, mage.cards.t.TrophyMage.class));
-        cards.add(new SetCardInfo("Yaheeni's Expertise", 75, Rarity.RARE, mage.cards.y.YahennisExpertise.class));
+        cards.add(new SetCardInfo("Yahenni's Expertise", 75, Rarity.RARE, mage.cards.y.YahennisExpertise.class));
     }
 
     @Override
