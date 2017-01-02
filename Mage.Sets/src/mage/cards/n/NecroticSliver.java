@@ -41,8 +41,7 @@ import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Duration;
 import mage.constants.Zone;
-import mage.filter.common.FilterCreaturePermanent;
-import mage.filter.predicate.mageobject.SubtypePredicate;
+import mage.filter.StaticFilters;
 import mage.target.TargetPermanent;
 
 /**
@@ -51,14 +50,8 @@ import mage.target.TargetPermanent;
  */
 public class NecroticSliver extends CardImpl {
 
-    private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("Sliver creatures");
-
-    static {
-        filter.add(new SubtypePredicate("Sliver"));
-    }
-
     public NecroticSliver(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{1}{W}{B}");
+        super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{1}{W}{B}");
         this.subtype.add("Sliver");
 
         this.power = new MageInt(2);
@@ -70,7 +63,7 @@ public class NecroticSliver extends CardImpl {
         ability.addTarget(new TargetPermanent());
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD,
                 new GainAbilityAllEffect(ability,
-                        Duration.WhileOnBattlefield, filter,
+                        Duration.WhileOnBattlefield, StaticFilters.FILTER_PERMANENT_CREATURE_SLIVERS,
                         "All Slivers have \"{3}, Sacrifice this permanent: Destroy target permanent.\"")));
     }
 

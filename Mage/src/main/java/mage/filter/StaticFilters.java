@@ -30,6 +30,7 @@ public class StaticFilters {
     public static final FilterCard FILTER_CARD_ARTIFACT_OR_CREATURE = new FilterCard("artifact or creature card");
 
     public static final FilterCreaturePermanent FILTER_PERMANENT_CREATURE_GOBLINS = new FilterCreaturePermanent("Goblin", "Goblin creatures");
+    public static final FilterCreaturePermanent FILTER_PERMANENT_CREATURE_SLIVERS = new FilterCreaturePermanent("Sliver", "Sliver creatures");
 
     static {
         FILTER_PERMANENT_ARTIFACT_OR_CREATURE.add(Predicates.or(

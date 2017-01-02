@@ -38,11 +38,9 @@ import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Duration;
-import mage.filter.common.FilterCreaturePermanent;
-import mage.filter.predicate.mageobject.SubtypePredicate;
+import mage.filter.StaticFilters;
 import mage.game.Game;
 import mage.game.combat.CombatGroup;
-import mage.target.targetpointer.TargetPointer;
 
 /**
  *
@@ -50,14 +48,8 @@ import mage.target.targetpointer.TargetPointer;
  */
 public class SpinedSliver extends CardImpl {
 
-    private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("Sliver creatures");
-
-    static {
-        filter.add(new SubtypePredicate("Sliver"));
-    }
-
     public SpinedSliver(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{R}{G}");
+        super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{R}{G}");
         this.subtype.add("Sliver");
 
         this.power = new MageInt(2);
@@ -67,7 +59,7 @@ public class SpinedSliver extends CardImpl {
         BlockersCount value = new BlockersCount();
         Effect effect = new BoostTargetEffect(value, value, Duration.EndOfTurn, true);
         effect.setText("it gets +1/+1 until end of turn for each creature blocking it");
-        this.addAbility(new BecomesBlockedAllTriggeredAbility(effect, false, filter, true));
+        this.addAbility(new BecomesBlockedAllTriggeredAbility(effect, false, StaticFilters.FILTER_PERMANENT_CREATURE_SLIVERS, true));
     }
 
     public SpinedSliver(final SpinedSliver card) {
@@ -82,7 +74,7 @@ public class SpinedSliver extends CardImpl {
 
 class BlockersCount implements DynamicValue {
 
-    private String message;
+    private final String message;
 
     public BlockersCount() {
         this.message = "each creature blocking it";
@@ -95,8 +87,7 @@ class BlockersCount implements DynamicValue {
 
     @Override
     public int calculate(Game game, Ability sourceAbility, Effect effect) {
-        TargetPointer attacker = effect.getTargetPointer();
-        UUID attackerId = attacker.getFirst(game, sourceAbility);
+        UUID attackerId = effect.getTargetPointer().getFirst(game, sourceAbility);
         for (CombatGroup combatGroup : game.getCombat().getGroups()) {
             if (combatGroup.getAttackers().contains(attackerId)) {
                 return combatGroup.getBlockers().size();

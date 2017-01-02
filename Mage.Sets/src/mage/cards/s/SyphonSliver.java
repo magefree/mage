@@ -37,7 +37,7 @@ import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Duration;
 import mage.constants.Zone;
-import mage.filter.common.FilterCreaturePermanent;
+import mage.filter.StaticFilters;
 
 /**
  *
@@ -46,7 +46,7 @@ import mage.filter.common.FilterCreaturePermanent;
 public class SyphonSliver extends CardImpl {
 
     public SyphonSliver(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{2}{B}");
+        super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{2}{B}");
         this.subtype.add("Sliver");
 
         this.power = new MageInt(2);
@@ -55,7 +55,7 @@ public class SyphonSliver extends CardImpl {
         // Sliver creatures you control have lifelink.
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD,
                 new GainAbilityControlledEffect(LifelinkAbility.getInstance(),
-                Duration.WhileOnBattlefield, new FilterCreaturePermanent("Sliver","Sliver creatures"))));
+                        Duration.WhileOnBattlefield, StaticFilters.FILTER_PERMANENT_CREATURE_SLIVERS)));
     }
 
     public SyphonSliver(final SyphonSliver card) {

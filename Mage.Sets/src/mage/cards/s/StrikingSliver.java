@@ -37,7 +37,7 @@ import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Duration;
 import mage.constants.Zone;
-import mage.filter.common.FilterCreaturePermanent;
+import mage.filter.StaticFilters;
 
 /**
  *
@@ -46,7 +46,7 @@ import mage.filter.common.FilterCreaturePermanent;
 public class StrikingSliver extends CardImpl {
 
     public StrikingSliver(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{R}");
+        super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{R}");
         this.subtype.add("Sliver");
 
         this.power = new MageInt(1);
@@ -55,7 +55,7 @@ public class StrikingSliver extends CardImpl {
         // Sliver creatures you control have first strike.
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD,
                 new GainAbilityControlledEffect(FirstStrikeAbility.getInstance(),
-                Duration.WhileOnBattlefield, new FilterCreaturePermanent("Sliver","Sliver creatures"))));
+                        Duration.WhileOnBattlefield, StaticFilters.FILTER_PERMANENT_CREATURE_SLIVERS)));
     }
 
     public StrikingSliver(final StrikingSliver card) {

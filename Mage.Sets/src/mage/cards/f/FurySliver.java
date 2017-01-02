@@ -37,7 +37,7 @@ import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Duration;
 import mage.constants.Zone;
-import mage.filter.common.FilterCreaturePermanent;
+import mage.filter.StaticFilters;
 
 /**
  *
@@ -46,7 +46,7 @@ import mage.filter.common.FilterCreaturePermanent;
 public class FurySliver extends CardImpl {
 
     public FurySliver(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{5}{R}");
+        super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{5}{R}");
         this.subtype.add("Sliver");
         this.power = new MageInt(3);
         this.toughness = new MageInt(3);
@@ -55,7 +55,7 @@ public class FurySliver extends CardImpl {
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD,
                 new GainAbilityAllEffect(DoubleStrikeAbility.getInstance(),
                         Duration.WhileOnBattlefield,
-                        new FilterCreaturePermanent("Sliver","Sliver creatures")
+                        StaticFilters.FILTER_PERMANENT_CREATURE_SLIVERS
                 )
         ));
     }

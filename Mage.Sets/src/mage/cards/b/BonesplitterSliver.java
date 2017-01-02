@@ -36,7 +36,7 @@ import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Duration;
 import mage.constants.Zone;
-import mage.filter.common.FilterCreaturePermanent;
+import mage.filter.StaticFilters;
 
 /**
  *
@@ -45,18 +45,14 @@ import mage.filter.common.FilterCreaturePermanent;
 public class BonesplitterSliver extends CardImpl {
 
     public BonesplitterSliver(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{3}{R}");
+        super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{3}{R}");
         this.subtype.add("Sliver");
         this.power = new MageInt(2);
         this.toughness = new MageInt(2);
 
         // All Sliver creatures get +2/+0.
-        this.addAbility(
-                new SimpleStaticAbility(
-                        Zone.BATTLEFIELD,
-                        new BoostAllEffect(2, 0, Duration.WhileOnBattlefield, new FilterCreaturePermanent("Sliver","Sliver creatures"), false)
-                )
-        );
+        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD,
+                new BoostAllEffect(2, 0, Duration.WhileOnBattlefield, StaticFilters.FILTER_PERMANENT_CREATURE_SLIVERS, false)));
     }
 
     public BonesplitterSliver(final BonesplitterSliver card) {

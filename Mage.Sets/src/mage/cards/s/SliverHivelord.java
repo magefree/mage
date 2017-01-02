@@ -37,7 +37,7 @@ import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Duration;
 import mage.constants.Zone;
-import mage.filter.common.FilterCreaturePermanent;
+import mage.filter.StaticFilters;
 
 /**
  *
@@ -46,7 +46,7 @@ import mage.filter.common.FilterCreaturePermanent;
 public class SliverHivelord extends CardImpl {
 
     public SliverHivelord(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{W}{U}{B}{R}{G}");
+        super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{W}{U}{B}{R}{G}");
         this.supertype.add("Legendary");
         this.subtype.add("Sliver");
 
@@ -56,7 +56,7 @@ public class SliverHivelord extends CardImpl {
         // Sliver creatures you control have indestructible.
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD,
                 new GainAbilityControlledEffect(IndestructibleAbility.getInstance(),
-                        Duration.WhileOnBattlefield, new FilterCreaturePermanent("Sliver", "Sliver creatures"))));
+                        Duration.WhileOnBattlefield, StaticFilters.FILTER_PERMANENT_CREATURE_SLIVERS)));
 
     }
 

@@ -38,7 +38,7 @@ import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Duration;
 import mage.constants.Zone;
-import mage.filter.common.FilterControlledCreaturePermanent;
+import mage.filter.StaticFilters;
 
 /**
  *
@@ -47,7 +47,7 @@ import mage.filter.common.FilterControlledCreaturePermanent;
 public class ManaweftSliver extends CardImpl {
 
     public ManaweftSliver(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{1}{G}");
+        super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{1}{G}");
         this.subtype.add("Sliver");
 
         this.power = new MageInt(1);
@@ -57,8 +57,8 @@ public class ManaweftSliver extends CardImpl {
         Ability ability = new AnyColorManaAbility();
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD,
                 new GainAbilityAllEffect(ability,
-                Duration.WhileOnBattlefield, new FilterControlledCreaturePermanent("Sliver","Sliver creatures"),
-                "Sliver creatures you control have \"{T}: Add one mana of any color to your mana pool.\"")));
+                        Duration.WhileOnBattlefield, StaticFilters.FILTER_PERMANENT_CREATURE_SLIVERS,
+                        "Sliver creatures you control have \"{T}: Add one mana of any color to your mana pool.\"")));
     }
 
     public ManaweftSliver(final ManaweftSliver card) {

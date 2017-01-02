@@ -40,8 +40,7 @@ import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Duration;
 import mage.constants.Zone;
-import mage.filter.common.FilterCreaturePermanent;
-import mage.filter.predicate.mageobject.SubtypePredicate;
+import mage.filter.StaticFilters;
 
 /**
  *
@@ -49,14 +48,8 @@ import mage.filter.predicate.mageobject.SubtypePredicate;
  */
 public class DarkheartSliver extends CardImpl {
 
-    private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("Sliver creatures");
-
-    static {
-        filter.add(new SubtypePredicate("Sliver"));
-    }
-
     public DarkheartSliver(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{B}{G}");
+        super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{B}{G}");
         this.subtype.add("Sliver");
 
         this.power = new MageInt(2);
@@ -66,7 +59,7 @@ public class DarkheartSliver extends CardImpl {
         Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new GainLifeEffect(3), new SacrificeSourceCost());
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD,
                 new GainAbilityAllEffect(ability,
-                        Duration.WhileOnBattlefield, filter,
+                        Duration.WhileOnBattlefield, StaticFilters.FILTER_PERMANENT_CREATURE_SLIVERS,
                         "All Slivers have \"Sacrifice this permanent: You gain 3 life.\"")));
     }
 

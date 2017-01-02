@@ -28,17 +28,16 @@
 package mage.cards.a;
 
 import java.util.UUID;
-
-import mage.MageObject;
 import mage.abilities.Ability;
-import mage.abilities.effects.*;
+import mage.abilities.effects.PreventionEffectData;
+import mage.abilities.effects.PreventionEffectImpl;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Duration;
-import mage.constants.Outcome;
 import mage.game.Game;
 import mage.game.events.GameEvent;
+import mage.game.permanent.Permanent;
 import mage.players.Player;
 import mage.target.common.TargetCreaturePermanent;
 
@@ -79,22 +78,21 @@ class AweStrikeEffect extends PreventionEffectImpl {
 
     @Override
     public boolean replaceEvent(GameEvent event, Ability source, Game game) {
-        this.used = true;
-        this.discard();
-
         PreventionEffectData preventionData = preventDamageAction(event, source, game);
         Player player = game.getPlayer(source.getControllerId());
         if (player != null) {
             player.gainLife(preventionData.getPreventedDamage(), game);
         }
+        this.used = true;
+        this.discard();
         return true;
     }
 
     @Override
     public boolean applies(GameEvent event, Ability source, Game game) {
         if (!this.used && super.applies(event, source, game)) {
-            MageObject mageObject = game.getObject(event.getSourceId());
-            return this.getTargetPointer().getFirst(game, source).equals(mageObject.getId());
+            Permanent targetCreature = game.getPermanentOrLKIBattlefield(getTargetPointer().getFirst(game, source));
+            return targetCreature != null && targetCreature.getId().equals(event.getSourceId());
         }
         return false;
     }

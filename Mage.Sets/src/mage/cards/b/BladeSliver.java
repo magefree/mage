@@ -36,7 +36,7 @@ import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Duration;
 import mage.constants.Zone;
-import mage.filter.common.FilterCreaturePermanent;
+import mage.filter.StaticFilters;
 
 /**
  *
@@ -45,14 +45,15 @@ import mage.filter.common.FilterCreaturePermanent;
 public class BladeSliver extends CardImpl {
 
     public BladeSliver(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{2}{R}");
+        super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{2}{R}");
         this.subtype.add("Sliver");
 
         this.power = new MageInt(2);
         this.toughness = new MageInt(2);
 
         // All Sliver creatures get +1/+0.
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new BoostAllEffect(1, 0, Duration.WhileOnBattlefield, new FilterCreaturePermanent("Sliver", "Sliver creatures"), false)));
+        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD,
+                new BoostAllEffect(1, 0, Duration.WhileOnBattlefield, StaticFilters.FILTER_PERMANENT_CREATURE_SLIVERS, false)));
     }
 
     public BladeSliver(final BladeSliver card) {
