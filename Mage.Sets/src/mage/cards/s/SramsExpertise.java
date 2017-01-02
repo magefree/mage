@@ -25,22 +25,22 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.cards.y;
+package mage.cards.s;
 
 import java.util.UUID;
 import mage.abilities.Ability;
 import mage.abilities.effects.OneShotEffect;
-import mage.abilities.effects.common.continuous.BoostAllEffect;
+import mage.abilities.effects.common.CreateTokenEffect;
 import mage.cards.Card;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.Duration;
 import mage.constants.Outcome;
 import mage.filter.Filter;
 import mage.filter.common.FilterNonlandCard;
 import mage.filter.predicate.mageobject.ConvertedManaCostPredicate;
 import mage.game.Game;
+import mage.game.permanent.token.ServoToken;
 import mage.players.Player;
 import mage.target.Target;
 import mage.target.common.TargetCardInHand;
@@ -49,30 +49,30 @@ import mage.target.common.TargetCardInHand;
  *
  * @author fireshoes
  */
-public class YahennisExpertise extends CardImpl {
+public class SramsExpertise extends CardImpl {
 
-    public YahennisExpertise(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId, setInfo, new CardType[]{CardType.SORCERY}, "{2}{B}{B}");
+    public SramsExpertise(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId, setInfo, new CardType[]{CardType.SORCERY}, "{2}{W}{W}");
 
 
-        // All creatures get -3/-3 until end of turn.
-        getSpellAbility().addEffect(new BoostAllEffect(-3, -3, Duration.EndOfTurn));
+        // Create three 1/1 colorless Servo artifact creature tokens.
+        getSpellAbility().addEffect(new CreateTokenEffect(new ServoToken(), 3));
 
         // You may cast a card with converted mana cost 3 or less from your hand without paying its mana cost.
-        getSpellAbility().addEffect(new YahennisExpertiseCastEffect());
+        getSpellAbility().addEffect(new SramsExpertiseCastEffect());
     }
 
-    public YahennisExpertise(final YahennisExpertise card) {
+    public SramsExpertise(final SramsExpertise card) {
         super(card);
     }
 
     @Override
-    public YahennisExpertise copy() {
-        return new YahennisExpertise(this);
+    public SramsExpertise copy() {
+        return new SramsExpertise(this);
     }
 }
 
-class YahennisExpertiseCastEffect extends OneShotEffect {
+class SramsExpertiseCastEffect extends OneShotEffect {
 
     private static final FilterNonlandCard filter = new FilterNonlandCard("card with converted mana cost 3 or less from your hand");
 
@@ -80,18 +80,18 @@ class YahennisExpertiseCastEffect extends OneShotEffect {
         filter.add(new ConvertedManaCostPredicate(Filter.ComparisonType.LessThan, 4));
     }
 
-    public YahennisExpertiseCastEffect() {
+    public SramsExpertiseCastEffect() {
         super(Outcome.PlayForFree);
         this.staticText = "you may cast a card with converted mana cost 3 or less from your hand without paying its mana cost";
     }
 
-    public YahennisExpertiseCastEffect(final YahennisExpertiseCastEffect effect) {
+    public SramsExpertiseCastEffect(final SramsExpertiseCastEffect effect) {
         super(effect);
     }
 
     @Override
-    public YahennisExpertiseCastEffect copy() {
-        return new YahennisExpertiseCastEffect(this);
+    public SramsExpertiseCastEffect copy() {
+        return new SramsExpertiseCastEffect(this);
     }
 
     @Override
