@@ -73,6 +73,7 @@ public class Judgment extends ExpansionSet {
         cards.add(new SetCardInfo("Burning Wish", 83, Rarity.RARE, mage.cards.b.BurningWish.class));
         cards.add(new SetCardInfo("Cabal Therapy", 62, Rarity.UNCOMMON, mage.cards.c.CabalTherapy.class));
         cards.add(new SetCardInfo("Cabal Trainee", 63, Rarity.COMMON, mage.cards.c.CabalTrainee.class));
+        cards.add(new SetCardInfo("Cagemail", 7, Rarity.COMMON, mage.cards.c.Cagemail.class));
         cards.add(new SetCardInfo("Canopy Claws", 108, Rarity.COMMON, mage.cards.c.CanopyClaws.class));
         cards.add(new SetCardInfo("Centaur Rootcaster", 109, Rarity.COMMON, mage.cards.c.CentaurRootcaster.class));
         cards.add(new SetCardInfo("Cephalid Constable", 35, Rarity.RARE, mage.cards.c.CephalidConstable.class));

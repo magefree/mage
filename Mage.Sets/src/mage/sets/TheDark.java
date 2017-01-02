@@ -63,6 +63,7 @@ public class TheDark extends ExpansionSet {
         cards.add(new SetCardInfo("Bog Rats", 4, Rarity.COMMON, mage.cards.b.BogRats.class));
         cards.add(new SetCardInfo("Bone Flute", 94, Rarity.UNCOMMON, mage.cards.b.BoneFlute.class));
         cards.add(new SetCardInfo("Book of Rass", 95, Rarity.UNCOMMON, mage.cards.b.BookOfRass.class));
+        cards.add(new SetCardInfo("Brainwash", 76, Rarity.COMMON, mage.cards.b.Brainwash.class));
         cards.add(new SetCardInfo("Brothers of Fire", 58, Rarity.UNCOMMON, mage.cards.b.BrothersOfFire.class));
         cards.add(new SetCardInfo("Carnivorous Plant", 38, Rarity.COMMON, mage.cards.c.CarnivorousPlant.class));
         cards.add(new SetCardInfo("Cave People", 59, Rarity.UNCOMMON, mage.cards.c.CavePeople.class));
@@ -118,6 +119,7 @@ public class TheDark extends ExpansionSet {
         cards.add(new SetCardInfo("Sisters of the Flame", 73, Rarity.UNCOMMON, mage.cards.s.SistersOfTheFlame.class));
         cards.add(new SetCardInfo("Skull of Orm", 106, Rarity.UNCOMMON, mage.cards.s.SkullOfOrm.class));
         cards.add(new SetCardInfo("Squire", 90, Rarity.COMMON, mage.cards.s.Squire.class));
+        cards.add(new SetCardInfo("Standing Stones", 107, Rarity.UNCOMMON, mage.cards.s.StandingStones.class));
         cards.add(new SetCardInfo("Stone Calendar", 108, Rarity.RARE, mage.cards.s.StoneCalendar.class));
         cards.add(new SetCardInfo("Sunken City", 35, Rarity.COMMON, mage.cards.s.SunkenCity.class));
         cards.add(new SetCardInfo("Tivadar's Crusade", 91, Rarity.UNCOMMON, mage.cards.t.TivadarsCrusade.class));

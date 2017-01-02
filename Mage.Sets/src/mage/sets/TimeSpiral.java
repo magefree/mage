@@ -277,6 +277,7 @@ public class TimeSpiral extends ExpansionSet {
         cards.add(new SetCardInfo("Thrill of the Hunt", 229, Rarity.COMMON, mage.cards.t.ThrillOfTheHunt.class));
         cards.add(new SetCardInfo("Thunder Totem", 265, Rarity.UNCOMMON, mage.cards.t.ThunderTotem.class));
         cards.add(new SetCardInfo("Tivadar of Thorn", 44, Rarity.RARE, mage.cards.t.TivadarOfThorn.class));
+        cards.add(new SetCardInfo("Tolarian Sentinel", 87, Rarity.COMMON, mage.cards.t.TolarianSentinel.class));
         cards.add(new SetCardInfo("Traitor's Clutch", 137, Rarity.COMMON, mage.cards.t.TraitorsClutch.class));
         cards.add(new SetCardInfo("Trespasser il-Vec", 138, Rarity.COMMON, mage.cards.t.TrespasserIlVec.class));
         cards.add(new SetCardInfo("Trickbind", 88, Rarity.RARE, mage.cards.t.Trickbind.class));
