@@ -45,9 +45,9 @@ public class StompAndHowl extends CardImpl {
         super(ownerId, setInfo, new CardType[]{CardType.SORCERY}, "{2}{G}");
         
         // Destroy target artifact and target enchantment.
-		this.getSpellAbility().addTarget(new TargetArtifactPermanent());
-		this.getSpellAbility().addTarget(new TargetEnchantmentPermanent());
-		this.getSpellAbility().addEffect(new DestroyMultiTargetEffect());
+        this.getSpellAbility().addTarget(new TargetArtifactPermanent());
+        this.getSpellAbility().addTarget(new TargetEnchantmentPermanent());
+        this.getSpellAbility().addEffect(new DestroyMultiTargetEffect());
     }
 
     public StompAndHowl(final StompAndHowl card) {
