@@ -29,22 +29,15 @@ package mage.cards.c;
 
 import java.util.UUID;
 import mage.MageInt;
-import mage.MageObject;
-import mage.abilities.Ability;
 import mage.abilities.common.EntersBattlefieldTriggeredAbility;
-import mage.abilities.effects.OneShotEffect;
+import mage.abilities.effects.common.RevealLibraryPutIntoHandEffect;
 import mage.abilities.keyword.AffinityForArtifactsAbility;
 import mage.abilities.keyword.FlyingAbility;
-import mage.cards.Card;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
-import mage.cards.Cards;
-import mage.cards.CardsImpl;
 import mage.constants.CardType;
-import mage.constants.Outcome;
 import mage.constants.Zone;
-import mage.game.Game;
-import mage.players.Player;
+import mage.filter.common.FilterArtifactCard;
 
 /**
  *
@@ -53,19 +46,19 @@ import mage.players.Player;
 public class ChromescaleDrake extends CardImpl {
 
     public ChromescaleDrake(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{6}{U}{U}{U}");
+        super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{6}{U}{U}{U}");
         this.subtype.add("Drake");
         this.power = new MageInt(3);
         this.toughness = new MageInt(4);
 
         // Affinity for artifacts
         this.addAbility(new AffinityForArtifactsAbility());
-        
+
         // Flying
         this.addAbility(FlyingAbility.getInstance());
-        
+
         // When Chromescale Drake enters the battlefield, reveal the top three cards of your library. Put all artifact cards revealed this way into your hand and the rest into your graveyard.
-        this.addAbility(new EntersBattlefieldTriggeredAbility(new ChromescaleDrakeEffect()));
+        this.addAbility(new EntersBattlefieldTriggeredAbility(new RevealLibraryPutIntoHandEffect(3, new FilterArtifactCard("artifact cards"), Zone.GRAVEYARD)));
     }
 
     public ChromescaleDrake(final ChromescaleDrake card) {
@@ -75,47 +68,5 @@ public class ChromescaleDrake extends CardImpl {
     @Override
     public ChromescaleDrake copy() {
         return new ChromescaleDrake(this);
-    }
-}
-
-class ChromescaleDrakeEffect extends OneShotEffect {
-
-    public ChromescaleDrakeEffect() {
-        super(Outcome.Benefit);
-        staticText = "Reveal the top three cards of your library. Put all artifacts cards revealed this way into your hand and the rest into your graveyard";
-    }
-
-    public ChromescaleDrakeEffect(final ChromescaleDrakeEffect effect) {
-        super(effect);
-    }
-
-    @Override
-    public boolean apply(Game game, Ability source) {
-        Player controller = game.getPlayer(source.getControllerId());
-        MageObject sourceObject = game.getObject(source.getSourceId());
-        if (controller == null || sourceObject ==  null) {
-            return false;
-        }
-
-        Cards cards = new CardsImpl();
-        Cards cardsToHand = new CardsImpl();
-        cards.addAll(controller.getLibrary().getTopCards(game, 3));
-        if (!cards.isEmpty()) {
-            controller.revealCards(sourceObject.getName(), cards, game);
-            for (Card card: cards.getCards(game)) {
-                if (card.getCardType().contains(CardType.ARTIFACT)) {
-                    cardsToHand.add(card);
-                    cards.remove(card);
-                }
-            }
-            controller.moveCards(cardsToHand, Zone.HAND, source, game);
-            controller.moveCards(cards, Zone.GRAVEYARD, source, game);
-        }
-        return true;
-    }
-
-    @Override
-    public ChromescaleDrakeEffect copy() {
-        return new ChromescaleDrakeEffect(this);
     }
 }

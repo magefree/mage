@@ -182,6 +182,7 @@ public class Dissension extends ExpansionSet {
         cards.add(new SetCardInfo("Stalking Vengeance", 73, Rarity.RARE, mage.cards.s.StalkingVengeance.class));
         cards.add(new SetCardInfo("Steeling Stance", 18, Rarity.COMMON, mage.cards.s.SteelingStance.class));
         cards.add(new SetCardInfo("Stoic Ephemera", 19, Rarity.UNCOMMON, mage.cards.s.StoicEphemera.class));
+        cards.add(new SetCardInfo("Stomp and Howl", 96, Rarity.UNCOMMON, mage.cards.s.StompAndHowl.class));
         cards.add(new SetCardInfo("Supply // Demand", 157, Rarity.UNCOMMON, mage.cards.s.SupplyDemand.class));
         cards.add(new SetCardInfo("Taste for Mayhem", 75, Rarity.COMMON, mage.cards.t.TasteForMayhem.class));
         cards.add(new SetCardInfo("Thrive", 98, Rarity.COMMON, mage.cards.t.Thrive.class));

@@ -34,8 +34,7 @@ import mage.abilities.effects.common.search.SearchLibraryPutInPlayEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.filter.common.FilterArtifactCard;
-import mage.filter.common.FilterControlledPermanent;
-import mage.filter.predicate.mageobject.CardTypePredicate;
+import mage.filter.common.FilterControlledArtifactPermanent;
 import mage.target.common.TargetCardInLibrary;
 import mage.target.common.TargetControlledPermanent;
 
@@ -45,21 +44,14 @@ import mage.target.common.TargetControlledPermanent;
  */
 public class Tinker extends CardImpl {
 
-    private static final FilterControlledPermanent filter = new FilterControlledPermanent("an artifact");
-
-    static {
-        filter.add(new CardTypePredicate(CardType.ARTIFACT));
-    }
-
     public Tinker(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{2}{U}");
-
+        super(ownerId, setInfo, new CardType[]{CardType.SORCERY}, "{2}{U}");
 
         // As an additional cost to cast Tinker, sacrifice an artifact.
-        this.getSpellAbility().addCost(new SacrificeTargetCost(new TargetControlledPermanent(filter)));
+        this.getSpellAbility().addCost(new SacrificeTargetCost(new TargetControlledPermanent(new FilterControlledArtifactPermanent("an artifact"))));
+
         // Search your library for an artifact card and put that card onto the battlefield. Then shuffle your library.
-        TargetCardInLibrary target = new TargetCardInLibrary(new FilterArtifactCard());
-        this.getSpellAbility().addEffect(new SearchLibraryPutInPlayEffect(target));
+        this.getSpellAbility().addEffect(new SearchLibraryPutInPlayEffect(new TargetCardInLibrary(new FilterArtifactCard("an artifact card"))));
     }
 
     public Tinker(final Tinker card) {

@@ -25,50 +25,37 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.cards.g;
+package mage.cards.s;
 
-import java.util.UUID;
-import mage.MageInt;
-import mage.abilities.Ability;
-import mage.abilities.common.SimpleActivatedAbility;
-import mage.abilities.costs.common.TapSourceCost;
-import mage.abilities.costs.mana.ManaCostsImpl;
-import mage.abilities.effects.common.ExileTargetEffect;
-import mage.abilities.effects.common.GainLifeEffect;
+import mage.abilities.effects.common.DestroyMultiTargetEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.Zone;
-import mage.filter.common.FilterArtifactCard;
-import mage.target.common.TargetCardInGraveyard;
+import mage.target.common.TargetArtifactPermanent;
+import mage.target.common.TargetEnchantmentPermanent;
 
+import java.util.UUID;
 /**
  *
- * @author fireshoes
+ * @author vereena42
  */
-public class GraveRobbers extends CardImpl {
+public class StompAndHowl extends CardImpl {
 
-    public GraveRobbers(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{1}{B}{B}");
-        this.subtype.add("Human");
-        this.subtype.add("Rogue");
-        this.power = new MageInt(1);
-        this.toughness = new MageInt(1);
-
-        // {B}, {tap}: Exile target artifact card from a graveyard. You gain 2 life.
-        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new ExileTargetEffect(), new ManaCostsImpl("{B}"));
-        ability.addCost(new TapSourceCost());
-        ability.addTarget(new TargetCardInGraveyard(new FilterArtifactCard("artifact card from your graveyard")));
-        ability.addEffect(new GainLifeEffect(2));
-        this.addAbility(ability);
+    public StompAndHowl(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId, setInfo, new CardType[]{CardType.SORCERY}, "{2}{G}");
+        
+        // Destroy target artifact and target enchantment.
+        this.getSpellAbility().addTarget(new TargetArtifactPermanent());
+        this.getSpellAbility().addTarget(new TargetEnchantmentPermanent());
+        this.getSpellAbility().addEffect(new DestroyMultiTargetEffect());
     }
 
-    public GraveRobbers(final GraveRobbers card) {
+    public StompAndHowl(final StompAndHowl card) {
         super(card);
     }
 
     @Override
-    public GraveRobbers copy() {
-        return new GraveRobbers(this);
+    public StompAndHowl copy() {
+        return new StompAndHowl(this);
     }
 }

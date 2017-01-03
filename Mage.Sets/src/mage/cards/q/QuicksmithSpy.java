@@ -37,16 +37,12 @@ import mage.abilities.costs.common.TapSourceCost;
 import mage.abilities.decorator.ConditionalContinuousEffect;
 import mage.abilities.effects.common.DrawCardSourceControllerEffect;
 import mage.abilities.effects.common.continuous.GainAbilityTargetEffect;
-import mage.abilities.keyword.IndestructibleAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Duration;
-import mage.constants.TargetController;
 import mage.constants.Zone;
-import mage.filter.common.FilterArtifactPermanent;
-import mage.filter.predicate.permanent.ControllerPredicate;
-import mage.target.Target;
+import mage.filter.common.FilterControlledArtifactPermanent;
 import mage.target.TargetPermanent;
 
 /**
@@ -54,12 +50,6 @@ import mage.target.TargetPermanent;
  * @author Styxo
  */
 public class QuicksmithSpy extends CardImpl {
-
-    private static final FilterArtifactPermanent filter = new FilterArtifactPermanent("artifact you control");
-
-    static {
-        filter.add(new ControllerPredicate(TargetController.YOU));
-    }
 
     public QuicksmithSpy(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{3}{U}");
@@ -76,7 +66,7 @@ public class QuicksmithSpy extends CardImpl {
                 new SourceOnBattlefieldControlUnchangedCondition(),
                 "target artifact you control gains \"{T}: Draw a card\" for as long as you control {this}");
         Ability ability = new EntersBattlefieldTriggeredAbility(effect, false);
-        ability.addTarget(new TargetPermanent(filter));
+        ability.addTarget(new TargetPermanent(new FilterControlledArtifactPermanent()));
         this.addAbility(ability);
     }
 

@@ -25,7 +25,6 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-
 package mage.cards.s;
 
 import java.util.UUID;
@@ -46,22 +45,20 @@ import mage.filter.common.FilterArtifactCard;
  */
 public class ShimmerMyr extends CardImpl {
 
-    private static final FilterArtifactCard filter = new FilterArtifactCard("artifact cards");
-
-    public ShimmerMyr (UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.ARTIFACT,CardType.CREATURE},"{3}");
+    public ShimmerMyr(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId, setInfo, new CardType[]{CardType.ARTIFACT, CardType.CREATURE}, "{3}");
         this.subtype.add("Myr");
         this.power = new MageInt(2);
         this.toughness = new MageInt(2);
-        
+
         // Flash
         this.addAbility(FlashAbility.getInstance());
-        
+
         // You may cast artifact cards as though they had flash.
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new CastAsThoughItHadFlashAllEffect(Duration.WhileOnBattlefield, filter, false)));
+        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new CastAsThoughItHadFlashAllEffect(Duration.WhileOnBattlefield, new FilterArtifactCard("artifact cards"), false)));
     }
 
-    public ShimmerMyr (final ShimmerMyr card) {
+    public ShimmerMyr(final ShimmerMyr card) {
         super(card);
     }
 
