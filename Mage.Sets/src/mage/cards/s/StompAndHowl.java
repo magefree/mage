@@ -31,9 +31,8 @@ import mage.abilities.effects.common.DestroyMultiTargetEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.filter.FilterPermanent;
-import mage.filter.predicate.mageobject.CardTypePredicate;
-import mage.target.TargetPermanent;
+import mage.target.common.TargetArtifactPermanent;
+import mage.target.common.TargetEnchantmentPermanent;
 
 import java.util.UUID;
 /**
@@ -42,20 +41,12 @@ import java.util.UUID;
  */
 public class StompAndHowl extends CardImpl {
 
-	private static final FilterPermanent filterArtifact = new FilterPermanent("artifact");
-	private static final FilterPermanent filterEnchantment = new FilterPermanent("enchantment");
-
-	static {
-		filterArtifact.add(new CardTypePredicate(CardType.ARTIFACT));
-		filterEnchantment.add(new CardTypePredicate(CardType.ENCHANTMENT));
-	}
-
     public StompAndHowl(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.SORCERY}, "{2}{G}");
         
         // Destroy target artifact and target enchantment.
-		this.getSpellAbility().addTarget(new TargetPermanent(filterArtifact));
-		this.getSpellAbility().addTarget(new TargetPermanent(filterEnchantment));
+		this.getSpellAbility().addTarget(new TargetArtifactPermanent());
+		this.getSpellAbility().addTarget(new TargetEnchantmentPermanent());
 		this.getSpellAbility().addEffect(new DestroyMultiTargetEffect());
     }
 
