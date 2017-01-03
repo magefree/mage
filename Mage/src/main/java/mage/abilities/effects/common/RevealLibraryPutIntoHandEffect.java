@@ -51,16 +51,22 @@ public class RevealLibraryPutIntoHandEffect extends OneShotEffect {
 
     private DynamicValue amountCards;
     private FilterCard filter;
+    private Zone zoneToPutRest;
     private boolean anyOrder;
 
-    public RevealLibraryPutIntoHandEffect(int amountCards, FilterCard filter, boolean anyOrder) {
-        this(new StaticValue(amountCards), filter, anyOrder);
+    public RevealLibraryPutIntoHandEffect(int amountCards, FilterCard filter, Zone zoneToPutRest) {
+        this(amountCards, filter, zoneToPutRest, true);
     }
 
-    public RevealLibraryPutIntoHandEffect(DynamicValue amountCards, FilterCard filter, boolean anyOrder) {
+    public RevealLibraryPutIntoHandEffect(int amountCards, FilterCard filter, Zone zoneToPutRest, boolean anyOrder) {
+        this(new StaticValue(amountCards), filter, zoneToPutRest, anyOrder);
+    }
+
+    public RevealLibraryPutIntoHandEffect(DynamicValue amountCards, FilterCard filter, Zone zoneToPutRest, boolean anyOrder) {
         super(Outcome.DrawCard);
         this.amountCards = amountCards;
         this.filter = filter;
+        this.zoneToPutRest = zoneToPutRest;
         this.anyOrder = anyOrder;
         this.staticText = setText();
     }
@@ -69,6 +75,7 @@ public class RevealLibraryPutIntoHandEffect extends OneShotEffect {
         super(effect);
         this.amountCards = effect.amountCards;
         this.filter = effect.filter;
+        this.zoneToPutRest = effect.zoneToPutRest;
         this.anyOrder = effect.anyOrder;
     }
 
@@ -98,7 +105,14 @@ public class RevealLibraryPutIntoHandEffect extends OneShotEffect {
             }
         }
         controller.moveCards(cardsToHand, Zone.HAND, source, game);
-        controller.putCardsOnBottomOfLibrary(cards, game, source, anyOrder);
+        switch (zoneToPutRest) {
+            case LIBRARY: {
+                controller.putCardsOnBottomOfLibrary(cards, game, source, anyOrder);
+                break;
+            }
+            default:
+                controller.moveCards(cards, zoneToPutRest, source, game);
+        }
         return true;
     }
 
@@ -106,10 +120,21 @@ public class RevealLibraryPutIntoHandEffect extends OneShotEffect {
         StringBuilder sb = new StringBuilder("Reveal the top ");
         sb.append(CardUtil.numberToText(amountCards.toString())).append(" cards of your library. Put all ");
         sb.append(filter.getMessage());
-        sb.append(" revealed this way into your hand and the rest on the bottom of your library");
-        if (anyOrder) {
-            sb.append(" in any order");
+        sb.append(" revealed this way into your hand and the rest ");
+        switch (zoneToPutRest) {
+            case LIBRARY: {
+                sb.append("on the bottom of your library");
+                if (anyOrder) {
+                    sb.append(" in any order");
+                } else {
+                    sb.append(" in a random order");
+                }
+                break;
+            }
+            case GRAVEYARD:
+                sb.append("into your graveyard");
         }
+
         return sb.toString();
     }
 }

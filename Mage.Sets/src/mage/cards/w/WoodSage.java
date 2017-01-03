@@ -34,17 +34,17 @@ import mage.abilities.Ability;
 import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.costs.common.TapSourceCost;
 import mage.abilities.effects.OneShotEffect;
-import mage.cards.Card;
+import mage.abilities.effects.common.RevealLibraryPutIntoHandEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
-import mage.cards.Cards;
-import mage.cards.CardsImpl;
 import mage.cards.repository.CardRepository;
 import mage.choices.Choice;
 import mage.choices.ChoiceImpl;
 import mage.constants.CardType;
 import mage.constants.Outcome;
 import mage.constants.Zone;
+import mage.filter.common.FilterCreatureCard;
+import mage.filter.predicate.mageobject.NamePredicate;
 import mage.game.Game;
 import mage.players.Player;
 
@@ -55,7 +55,7 @@ import mage.players.Player;
 public class WoodSage extends CardImpl {
 
     public WoodSage(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{G}{U}");
+        super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{G}{U}");
         this.subtype.add("Human");
         this.subtype.add("Druid");
         this.power = new MageInt(1);
@@ -75,7 +75,6 @@ public class WoodSage extends CardImpl {
         return new WoodSage(this);
     }
 }
-
 
 class WoodSageEffect extends OneShotEffect {
 
@@ -111,20 +110,10 @@ class WoodSageEffect extends OneShotEffect {
                 game.informPlayers(sourceObject.getLogName() + ", named card: [" + cardName + "]");
             }
 
-            Cards cards = new CardsImpl();
-            cards.addAll(controller.getLibrary().getTopCards(game, 4));
-            if (!cards.isEmpty()) {
-                Cards cardsToHand = new CardsImpl();
-                controller.revealCards(sourceObject.getName(), cards, game);
-                for (Card card: cards.getCards(game)) {
-                    if (card.getName().equals(cardName)) {
-                        cardsToHand.add(card);
-                        cards.remove(card);
-                    }
-                }
-                controller.moveCards(cardsToHand, Zone.HAND, source, game);
-                controller.moveCards(cards, Zone.GRAVEYARD, source, game);
-            }
+            FilterCreatureCard filter = new FilterCreatureCard("all of them with that name");
+            filter.add(new NamePredicate(cardName));
+            new RevealLibraryPutIntoHandEffect(4, filter, Zone.GRAVEYARD).apply(game, source);
+
             return true;
         }
 

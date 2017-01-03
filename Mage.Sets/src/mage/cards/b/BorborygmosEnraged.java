@@ -35,19 +35,13 @@ import mage.abilities.Ability;
 import mage.abilities.common.DealsCombatDamageToAPlayerTriggeredAbility;
 import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.costs.common.DiscardTargetCost;
-import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.DamageTargetEffect;
+import mage.abilities.effects.common.RevealLibraryPutIntoHandEffect;
 import mage.abilities.keyword.TrampleAbility;
-import mage.cards.Card;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
-import mage.cards.Cards;
-import mage.cards.CardsImpl;
-import mage.constants.Outcome;
 import mage.constants.Zone;
 import mage.filter.common.FilterLandCard;
-import mage.game.Game;
-import mage.players.Player;
 import mage.target.common.TargetCardInHand;
 import mage.target.common.TargetCreatureOrPlayer;
 
@@ -58,21 +52,20 @@ import mage.target.common.TargetCreatureOrPlayer;
 public class BorborygmosEnraged extends CardImpl {
 
     public BorborygmosEnraged(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{4}{R}{R}{G}{G}");
+        super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{4}{R}{R}{G}{G}");
         this.subtype.add("Cyclops");
-        
+
         this.supertype.add("Legendary");
 
-        
         this.power = new MageInt(7);
         this.toughness = new MageInt(6);
 
         //Trample
         this.addAbility(TrampleAbility.getInstance());
-        
+
         //Whenever Borborygmous Enraged deals combat damage to a player, reveal the top three cards of your library. Put all land cards revealed this way into your hand and the rest into your graveyard.
-        this.addAbility(new DealsCombatDamageToAPlayerTriggeredAbility(new BorborygmosEnragedEffect(), false, false));
-        
+        this.addAbility(new DealsCombatDamageToAPlayerTriggeredAbility(new RevealLibraryPutIntoHandEffect(3, new FilterLandCard(), Zone.GRAVEYARD), false, false));
+
         //Discard a land card: Borborygmos Enraged deals 3 damage to target creature or player
         Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new DamageTargetEffect(3), new DiscardTargetCost(new TargetCardInHand(new FilterLandCard())));
         ability.addTarget(new TargetCreatureOrPlayer());
@@ -86,45 +79,5 @@ public class BorborygmosEnraged extends CardImpl {
     @Override
     public BorborygmosEnraged copy() {
         return new BorborygmosEnraged(this);
-    }
-}
-
-class BorborygmosEnragedEffect extends OneShotEffect {
-
-    public BorborygmosEnragedEffect() {
-        super(Outcome.DrawCard);
-        this.staticText = "reveal the top three cards of your library. Put all land cards revealed this way into your hand and the rest into your graveyard";
-    }
-
-    public BorborygmosEnragedEffect(final BorborygmosEnragedEffect effect) {
-        super(effect);
-    }
-
-    @Override
-    public BorborygmosEnragedEffect copy() {
-        return new BorborygmosEnragedEffect(this);
-    }
-
-    @Override
-    public boolean apply(Game game, Ability source) {
-        Player controller = game.getPlayer(source.getControllerId());
-        if (controller != null) {
-            Cards cards = new CardsImpl();
-            cards.addAll(controller.getLibrary().getTopCards(game, 3));
-            if (!cards.isEmpty()) {
-                controller.revealCards("Borborygmous Enraged", cards, game);
-                Cards landCards = new CardsImpl();
-                for(Card card: cards.getCards(game) ) {
-                    if (card.getCardType().contains(CardType.LAND)) {
-                        landCards.add(card);
-                        cards.remove(card);
-                    }                    
-                }
-                controller.moveCards(landCards, Zone.HAND, source, game);
-                controller.moveCards(cards, Zone.GRAVEYARD, source, game);
-            }
-            return true;
-        }
-        return false;
     }
 }

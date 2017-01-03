@@ -34,7 +34,8 @@ import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.abilities.common.EntersBattlefieldTriggeredAbility;
-import mage.abilities.effects.common.EnvoyEffect;
+import mage.abilities.effects.common.RevealLibraryPutIntoHandEffect;
+import mage.constants.Zone;
 import mage.filter.FilterCard;
 import mage.filter.predicate.mageobject.SubtypePredicate;
 
@@ -51,7 +52,7 @@ public class EnlistmentOfficer extends CardImpl {
     }
 
     public EnlistmentOfficer(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{3}{W}");
+        super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{3}{W}");
         this.subtype.add("Human");
         this.subtype.add("Soldier");
 
@@ -60,8 +61,9 @@ public class EnlistmentOfficer extends CardImpl {
 
         // First strike
         this.addAbility(FirstStrikeAbility.getInstance());
+
         // When Enlistment Officer enters the battlefield, reveal the top four cards of your library. Put all Soldier cards revealed this way into your hand and the rest on the bottom of your library in any order.
-        this.addAbility(new EntersBattlefieldTriggeredAbility(new EnvoyEffect(filter, 4)));
+        this.addAbility(new EntersBattlefieldTriggeredAbility(new RevealLibraryPutIntoHandEffect(4, filter, Zone.LIBRARY)));
     }
 
     public EnlistmentOfficer(final EnlistmentOfficer card) {

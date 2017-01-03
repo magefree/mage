@@ -28,19 +28,12 @@
 package mage.cards.b;
 
 import java.util.UUID;
-import mage.MageObject;
 import mage.constants.CardType;
-import mage.constants.Outcome;
 import mage.constants.Zone;
-import mage.abilities.Ability;
-import mage.abilities.effects.OneShotEffect;
-import mage.cards.Card;
+import mage.abilities.effects.common.RevealLibraryPutIntoHandEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
-import mage.cards.Cards;
-import mage.cards.CardsImpl;
-import mage.game.Game;
-import mage.players.Player;
+import mage.filter.common.FilterCreatureCard;
 
 /**
  *
@@ -49,10 +42,9 @@ import mage.players.Player;
 public class BeastHunt extends CardImpl {
 
     public BeastHunt(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{3}{G}");
+        super(ownerId, setInfo, new CardType[]{CardType.SORCERY}, "{3}{G}");
 
-
-        this.getSpellAbility().addEffect(new BeastHuntEffect());
+        this.getSpellAbility().addEffect(new RevealLibraryPutIntoHandEffect(3, new FilterCreatureCard(), Zone.GRAVEYARD));
     }
 
     public BeastHunt(final BeastHunt card) {
@@ -62,47 +54,5 @@ public class BeastHunt extends CardImpl {
     @Override
     public BeastHunt copy() {
         return new BeastHunt(this);
-    }
-}
-
-class BeastHuntEffect extends OneShotEffect {
-
-    public BeastHuntEffect() {
-        super(Outcome.Benefit);
-        staticText = "Reveal the top three cards of your library. Put all creature cards revealed this way into your hand and the rest into your graveyard";
-    }
-
-    public BeastHuntEffect(final BeastHuntEffect effect) {
-        super(effect);
-    }
-
-    @Override
-    public boolean apply(Game game, Ability source) {
-        Player controller = game.getPlayer(source.getControllerId());
-        MageObject sourceObject = game.getObject(source.getSourceId());
-        if (controller == null || sourceObject ==  null) {
-            return false;
-        }
-
-        Cards cards = new CardsImpl();
-        Cards cardsToHand = new CardsImpl();
-        cards.addAll(controller.getLibrary().getTopCards(game, 3));
-        if (!cards.isEmpty()) {
-            controller.revealCards(sourceObject.getName(), cards, game);
-            for (Card card: cards.getCards(game)) {
-                if (card.getCardType().contains(CardType.CREATURE)) {
-                    cardsToHand.add(card);
-                    cards.remove(card);
-                }
-            }
-            controller.moveCards(cardsToHand, Zone.HAND, source, game);
-            controller.moveCards(cards, Zone.GRAVEYARD, source, game);
-        }
-        return true;
-    }
-
-    @Override
-    public BeastHuntEffect copy() {
-        return new BeastHuntEffect(this);
     }
 }

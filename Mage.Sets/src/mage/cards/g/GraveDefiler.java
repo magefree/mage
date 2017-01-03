@@ -37,7 +37,7 @@ import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Zone;
 import mage.abilities.common.EntersBattlefieldTriggeredAbility;
-import mage.abilities.effects.common.EnvoyEffect;
+import mage.abilities.effects.common.RevealLibraryPutIntoHandEffect;
 import mage.filter.FilterCard;
 import mage.filter.predicate.mageobject.SubtypePredicate;
 
@@ -54,15 +54,17 @@ public class GraveDefiler extends CardImpl {
     }
 
     public GraveDefiler(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{3}{B}");
+        super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{3}{B}");
         this.subtype.add("Zombie");
         this.power = new MageInt(2);
         this.toughness = new MageInt(1);
 
         // When Grave Defiler enters the battlefield, reveal the top four cards of your library. Put all Zombie cards revealed this way into your hand and the rest on the bottom of your library in any order.
-        this.addAbility(new EntersBattlefieldTriggeredAbility(new EnvoyEffect(filter, 4)));
+        this.addAbility(new EntersBattlefieldTriggeredAbility(new RevealLibraryPutIntoHandEffect(4, filter, Zone.LIBRARY)));
+
         // {1}{B}: Regenerate Grave Defiler.
-        this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new RegenerateSourceEffect(), new ManaCostsImpl("{1}{B}")));                                                                              }
+        this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new RegenerateSourceEffect(), new ManaCostsImpl("{1}{B}")));
+    }
 
     public GraveDefiler(final GraveDefiler card) {
         super(card);

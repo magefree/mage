@@ -34,7 +34,8 @@ import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.abilities.common.EntersBattlefieldTriggeredAbility;
-import mage.abilities.effects.common.EnvoyEffect;
+import mage.abilities.effects.common.RevealLibraryPutIntoHandEffect;
+import mage.constants.Zone;
 import mage.filter.FilterCard;
 import mage.filter.predicate.mageobject.SubtypePredicate;
 
@@ -51,7 +52,7 @@ public class GoblinRingleader extends CardImpl {
     }
 
     public GoblinRingleader(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{3}{R}");
+        super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{3}{R}");
         this.subtype.add("Goblin");
 
         this.power = new MageInt(2);
@@ -59,8 +60,9 @@ public class GoblinRingleader extends CardImpl {
 
         // Haste
         this.addAbility(HasteAbility.getInstance());
+
         // When Goblin Ringleader enters the battlefield, reveal the top four cards of your library. Put all Goblin cards revealed this way into your hand and the rest on the bottom of your library in any order.
-        this.addAbility(new EntersBattlefieldTriggeredAbility(new EnvoyEffect(filter, 4)));
+        this.addAbility(new EntersBattlefieldTriggeredAbility(new RevealLibraryPutIntoHandEffect(4, filter, Zone.LIBRARY)));
     }
 
     public GoblinRingleader(final GoblinRingleader card) {

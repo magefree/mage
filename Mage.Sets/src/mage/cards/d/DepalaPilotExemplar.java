@@ -60,7 +60,7 @@ import mage.players.Player;
 public class DepalaPilotExemplar extends CardImpl {
 
     public DepalaPilotExemplar(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{1}{R}{W}");
+        super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{1}{R}{W}");
         this.supertype.add("Legendary");
         this.subtype.add("Dwarf");
         this.subtype.add("Pilot");
@@ -92,6 +92,7 @@ public class DepalaPilotExemplar extends CardImpl {
 class DepalaPilotExemplarEffect extends OneShotEffect {
 
     private static final FilterCard filter = new FilterCard("Dwarf and Vehicle cards");
+
     static {
         filter.add(Predicates.or(new SubtypePredicate("Dwarf"), new SubtypePredicate("Vehicle")));
     }
@@ -118,7 +119,7 @@ class DepalaPilotExemplarEffect extends OneShotEffect {
             int xValue = controller.announceXMana(0, Integer.MAX_VALUE, "Choose the amount of mana to pay", game, source);
             cost.add(new GenericManaCost(xValue));
             if (cost.pay(source, game, source.getSourceId(), source.getControllerId(), false) && xValue > 0) {
-                new RevealLibraryPutIntoHandEffect(xValue, filter, false).apply(game, source);
+                new RevealLibraryPutIntoHandEffect(xValue, filter, Zone.LIBRARY, false).apply(game, source);
             }
             return true;
         }

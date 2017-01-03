@@ -28,19 +28,12 @@
 package mage.cards.m;
 
 import java.util.UUID;
-import mage.MageObject;
-import mage.abilities.Ability;
-import mage.abilities.effects.OneShotEffect;
-import mage.cards.Card;
+import mage.abilities.effects.common.RevealLibraryPutIntoHandEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
-import mage.cards.Cards;
-import mage.cards.CardsImpl;
 import mage.constants.CardType;
-import mage.constants.Outcome;
 import mage.constants.Zone;
-import mage.game.Game;
-import mage.players.Player;
+import mage.filter.common.FilterLandCard;
 
 /**
  *
@@ -49,11 +42,10 @@ import mage.players.Player;
 public class Mulch extends CardImpl {
 
     public Mulch(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{1}{G}");
-
+        super(ownerId, setInfo, new CardType[]{CardType.SORCERY}, "{1}{G}");
 
         // Reveal the top four cards of your library. Put all land cards revealed this way into your hand and the rest into your graveyard.
-        this.getSpellAbility().addEffect(new MulchEffect());
+        this.getSpellAbility().addEffect(new RevealLibraryPutIntoHandEffect(4, new FilterLandCard(), Zone.GRAVEYARD));
     }
 
     public Mulch(final Mulch card) {
@@ -63,49 +55,5 @@ public class Mulch extends CardImpl {
     @Override
     public Mulch copy() {
         return new Mulch(this);
-    }
-}
-
-class MulchEffect extends OneShotEffect {
-
-    public MulchEffect() {
-        super(Outcome.DrawCard);
-        this.staticText = "Reveal the top four cards of your library. Put all land cards revealed this way into your hand and the rest into your graveyard";
-    }
-
-    public MulchEffect(final MulchEffect effect) {
-        super(effect);
-    }
-
-    @Override
-    public MulchEffect copy() {
-        return new MulchEffect(this);
-    }
-
-    @Override
-    public boolean apply(Game game, Ability source) {
-        Player controller = game.getPlayer(source.getControllerId());
-        MageObject sourceObject = game.getObject(source.getSourceId());
-        if (controller != null && sourceObject != null) {
-            Cards cards = new CardsImpl();
-            cards.addAll(controller.getLibrary().getTopCards(game, 4));
-            if (!cards.isEmpty()) {
-                controller.revealCards(sourceObject.getName(), cards, game);
-                Cards landCards = new CardsImpl();
-                Cards otherCards = new CardsImpl();
-                for (Card card: cards.getCards(game)) {
-                    if (card.getCardType().contains(CardType.LAND)) {
-                        landCards.add(card);
-                    } else {
-                        otherCards.add(card);
-                    }
-                }
-                controller.moveCards(landCards, Zone.HAND, source, game);
-                controller.moveCards(otherCards, Zone.GRAVEYARD, source, game);
-                
-            }
-            return true;
-        }
-        return false;
     }
 }

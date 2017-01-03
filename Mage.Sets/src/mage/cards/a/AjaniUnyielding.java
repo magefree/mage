@@ -48,13 +48,14 @@ import mage.filter.predicate.permanent.ControllerPredicate;
 import mage.target.common.TargetCreaturePermanent;
 
 import java.util.UUID;
+import mage.constants.Zone;
 
 /**
  * @author JRHerlehy
  */
 public class AjaniUnyielding extends CardImpl {
 
-    private static final FilterPermanentCard nonlandPermanentFilter = new FilterPermanentCard("nonland permanent card");
+    private static final FilterPermanentCard nonlandPermanentFilter = new FilterPermanentCard("nonland permanent cards");
     private static final FilterCreaturePermanent creatureFilter = new FilterCreaturePermanent("creature you control");
     private static final FilterPlaneswalkerPermanent planeswalkerFilter = new FilterPlaneswalkerPermanent("other planeswalker you control");
 
@@ -72,7 +73,7 @@ public class AjaniUnyielding extends CardImpl {
         this.addAbility(new PlanswalkerEntersWithLoyalityCountersAbility(4));
 
         // +2: Reveal the top three cards of your library. Put all nonland permanent cards revealed this way into your hand and the rest on the bottom of your library in any order.
-        this.addAbility(new LoyaltyAbility(new RevealLibraryPutIntoHandEffect(3, nonlandPermanentFilter, true), 2));
+        this.addAbility(new LoyaltyAbility(new RevealLibraryPutIntoHandEffect(3, nonlandPermanentFilter, Zone.LIBRARY), 2));
 
         // -2: Exile target creature. Its controller gains life equal to its power.
         LoyaltyAbility ajaniAbility2 = new LoyaltyAbility(new SwordsToPlowsharesEffect(), -2);

@@ -69,7 +69,7 @@ public class GarrukCallerOfBeasts extends CardImpl {
         this.addAbility(new PlanswalkerEntersWithLoyalityCountersAbility(4));
 
         // +1: Reveal the top 5 cards of your library. Put all creature cards revealed this way into your hand and the rest on the bottom of your library in any order.
-        this.addAbility(new LoyaltyAbility(new RevealLibraryPutIntoHandEffect(5, new FilterCreatureCard("all creature cards"), true), 1));
+        this.addAbility(new LoyaltyAbility(new RevealLibraryPutIntoHandEffect(5, new FilterCreatureCard(), Zone.LIBRARY), 1));
 
         // -3: You may put a green creature card from your hand onto the battlefield.
         this.addAbility(new LoyaltyAbility(new PutPermanentOnBattlefieldEffect(filterGreenCreature), -3));

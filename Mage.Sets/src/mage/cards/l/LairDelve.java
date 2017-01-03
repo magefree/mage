@@ -27,19 +27,15 @@
  */
 package mage.cards.l;
 
-import java.util.Set;
 import java.util.UUID;
 import mage.constants.CardType;
-import mage.constants.Outcome;
 import mage.constants.Zone;
-import mage.abilities.Ability;
-import mage.abilities.effects.OneShotEffect;
-import mage.cards.Card;
+import mage.abilities.effects.common.RevealLibraryPutIntoHandEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
-import mage.cards.CardsImpl;
-import mage.game.Game;
-import mage.players.Player;
+import mage.filter.FilterCard;
+import mage.filter.predicate.Predicates;
+import mage.filter.predicate.mageobject.CardTypePredicate;
 
 /**
  *
@@ -47,12 +43,18 @@ import mage.players.Player;
  */
 public class LairDelve extends CardImpl {
 
-    public LairDelve(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{2}{G}");
+    private static final FilterCard filter = new FilterCard("all creature and land cards");
 
+    static {
+        filter.add(Predicates.or(new CardTypePredicate(CardType.LAND), new CardTypePredicate(CardType.CREATURE)));
+
+    }
+
+    public LairDelve(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId, setInfo, new CardType[]{CardType.SORCERY}, "{2}{G}");
 
         // Reveal the top two cards of your library. Put all creature and land cards revealed this way into your hand and the rest on the bottom of your library in any order.
-        this.getSpellAbility().addEffect(new LairDelveEffect());
+        this.getSpellAbility().addEffect(new RevealLibraryPutIntoHandEffect(2, filter, Zone.LIBRARY));
     }
 
     public LairDelve(final LairDelve card) {
@@ -62,49 +64,5 @@ public class LairDelve extends CardImpl {
     @Override
     public LairDelve copy() {
         return new LairDelve(this);
-    }
-}
-
-class LairDelveEffect extends OneShotEffect {
-
-    public LairDelveEffect() {
-        super(Outcome.DrawCard);
-        this.staticText = "Reveal the top two cards of your library. Put all creature and land cards revealed this way into your hand and the rest on the bottom of your library in any order";
-    }
-
-    public LairDelveEffect(final LairDelveEffect effect) {
-        super(effect);
-    }
-
-    @Override
-    public LairDelveEffect copy() {
-        return new LairDelveEffect(this);
-    }
-
-    @Override
-    public boolean apply(Game game, Ability source) {
-        Player player = game.getPlayer(source.getControllerId());
-        if (player == null) {
-            return false;
-        }
-
-        CardsImpl cards = new CardsImpl();
-        int amount = Math.min(2, player.getLibrary().size());
-        for (int i = 0; i < amount; i++) {
-            cards.add(player.getLibrary().removeFromTop(game));
-        }
-        player.revealCards("Lair Delve", cards, game);
-
-        Set<Card> cardsList = cards.getCards(game);
-        for (Card card : cardsList) {
-            if (card.getCardType().contains(CardType.CREATURE) || card.getCardType().contains(CardType.LAND)) {
-                card.moveToZone(Zone.HAND, source.getSourceId(), game, true);
-                cards.remove(card);
-            }
-        }
-
-        player.putCardsOnBottomOfLibrary(cards, game, source, true);
-
-        return true;
     }
 }
