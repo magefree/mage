@@ -44,7 +44,14 @@ import java.util.List;
 public class AetherRevolt extends ExpansionSet {
 
     private static final AetherRevolt fINSTANCE = new AetherRevolt();
+
+    public static AetherRevolt getInstance() {
+        return fINSTANCE;
+    }
+
     protected final List<CardInfo> savedSpecialLand = new ArrayList<>();
+
+    //TODO: Check Paradox Engine's card number
 
     private AetherRevolt() {
         super("Aether Revolt", "AER", ExpansionSet.buildDate(2017, 1, 20), SetType.EXPANSION);
@@ -90,12 +97,6 @@ public class AetherRevolt extends ExpansionSet {
         cards.add(new SetCardInfo("Untethered Express", 179, Rarity.UNCOMMON, mage.cards.u.UntetheredExpress.class));
         cards.add(new SetCardInfo("Whir of Invention", 49, Rarity.RARE, mage.cards.w.WhirOfInvention.class));
         cards.add(new SetCardInfo("Yahenni's Expertise", 75, Rarity.RARE, mage.cards.y.YahennisExpertise.class));
-    }
-
-    //TODO: Check Paradox Engine's card number
-
-    public static AetherRevolt getInstance() {
-        return fINSTANCE;
     }
 
     @Override
