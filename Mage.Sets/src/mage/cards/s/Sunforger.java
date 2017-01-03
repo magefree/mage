@@ -32,8 +32,6 @@ import mage.ObjectColor;
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.common.SimpleStaticAbility;
-import mage.abilities.costs.Cost;
-import mage.abilities.costs.CostImpl;
 import mage.abilities.costs.mana.GenericManaCost;
 import mage.abilities.costs.mana.ManaCostsImpl;
 import mage.abilities.effects.OneShotEffect;
@@ -53,10 +51,9 @@ import mage.filter.predicate.mageobject.CardTypePredicate;
 import mage.filter.predicate.mageobject.ColorPredicate;
 import mage.filter.predicate.mageobject.ConvertedManaCostPredicate;
 import mage.game.Game;
-import mage.game.events.GameEvent;
-import mage.game.permanent.Permanent;
 import mage.players.Player;
 import mage.target.common.TargetCardInLibrary;
+import mage.abilities.costs.common.UnattachCost;
 
 /**
  *
@@ -73,7 +70,7 @@ public class Sunforger extends CardImpl {
 
         // {R}{W}, Unattach Sunforger: Search your library for a red or white instant card with converted mana cost 4 or less and cast that card without paying its mana cost. Then shuffle your library.
         Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new SunforgerEffect(), new ManaCostsImpl("{R}{W}"));
-        ability.addCost(new UnattachSourceCost());
+        ability.addCost(new UnattachCost(this.getName(), this.getId()));
         this.addAbility(ability);
 
         // Equip {3}
@@ -135,43 +132,5 @@ class SunforgerEffect extends OneShotEffect {
             return true;
         }
         return false;
-    }
-}
-
-class UnattachSourceCost extends CostImpl {
-
-    public UnattachSourceCost() {
-        this.text = "Unattach Sunforger";
-    }
-
-    public UnattachSourceCost(UnattachSourceCost cost) {
-        super(cost);
-    }
-
-    @Override
-    public boolean pay(Ability ability, Game game, UUID sourceId, UUID controllerId, boolean noMana, Cost costToPay) {
-        Permanent attachment = game.getPermanent(sourceId);
-        Permanent permanent = game.getPermanent(attachment.getAttachedTo());
-        if (permanent != null) {
-            paid = permanent.removeAttachment(attachment.getId(), game);
-            if (paid) {
-                game.fireEvent(GameEvent.getEvent(GameEvent.EventType.UNATTACHED, sourceId, sourceId, controllerId));
-            }
-        }
-        return paid;
-    }
-
-    @Override
-    public boolean canPay(Ability ability, UUID sourceId, UUID controllerId, Game game) {
-        Permanent attachment = game.getPermanent(sourceId);
-        if (attachment != null) {
-            return attachment.getAttachedTo() != null;
-        }
-        return false;
-    }
-
-    @Override
-    public UnattachSourceCost copy() {
-        return new UnattachSourceCost(this);
     }
 }

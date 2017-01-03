@@ -25,51 +25,57 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.cards.b;
+package mage.cards.h;
 
 import java.util.UUID;
+
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.common.SimpleStaticAbility;
+import mage.abilities.costs.common.TapSourceCost;
 import mage.abilities.costs.mana.GenericManaCost;
-import mage.abilities.effects.Effect;
-import mage.abilities.effects.common.PreventCombatDamageToSourceEffect;
+import mage.abilities.effects.common.continuous.BoostEnchantedEffect;
 import mage.abilities.effects.common.continuous.GainAbilityAttachedEffect;
 import mage.abilities.keyword.EquipAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
-import mage.constants.AttachmentType;
-import mage.constants.CardType;
-import mage.constants.Duration;
-import mage.constants.Outcome;
-import mage.constants.Zone;
 import mage.abilities.costs.common.UnattachCost;
+import mage.constants.*;
+import mage.target.common.TargetCreaturePermanent;
+import mage.abilities.effects.Effect;
+import mage.abilities.effects.common.DestroyTargetEffect;
 
 /**
  *
- * @author LevelX2
+ * @author Galatolol
  */
-public class BlindingPowder extends CardImpl {
+public class Heartseeker extends CardImpl {
 
-    public BlindingPowder(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.ARTIFACT},"{1}");
+    public Heartseeker(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId, setInfo, new CardType[]{CardType.ARTIFACT}, "{4}");
+        
         this.subtype.add("Equipment");
 
-        // Equipped creature has "Unattach Blinding Powder: Prevent all combat damage that would be dealt to this creature this turn."
-        Effect effect = new PreventCombatDamageToSourceEffect(Duration.EndOfTurn);
-        effect.setText("Prevent all combat damage that would be dealt to this creature this turn");
-        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, effect, new UnattachCost(this.getName(), this.getId()));
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new GainAbilityAttachedEffect(ability, AttachmentType.EQUIPMENT, Duration.WhileOnBattlefield)));
-        // Equip {2}
-        this.addAbility(new EquipAbility(Outcome.PreventDamage, new GenericManaCost(2)));
+        // Equipped creature gets +2/+1 and has "{tap}, Unattach Heartseeker: Destroy target creature."
+        Ability ability = new SimpleStaticAbility(Zone.BATTLEFIELD, new BoostEnchantedEffect(2, 1, Duration.WhileOnBattlefield));
+        Ability gainedAbility = new SimpleActivatedAbility(Zone.BATTLEFIELD, new DestroyTargetEffect(), new TapSourceCost());
+        gainedAbility.addCost(new UnattachCost(this.getName(), this.getId()));
+        gainedAbility.addTarget(new TargetCreaturePermanent());
+        Effect effect = new GainAbilityAttachedEffect(gainedAbility, AttachmentType.EQUIPMENT);
+        effect.setText("and has \"{T}, Unattach {this}: Destroy target creature.\"");
+        ability.addEffect(effect);
+        this.addAbility(ability);
+
+        // Equip {5}
+        this.addAbility(new EquipAbility(Outcome.AddAbility, new GenericManaCost(5)));
     }
 
-    public BlindingPowder(final BlindingPowder card) {
+    public Heartseeker(final Heartseeker card) {
         super(card);
     }
 
     @Override
-    public BlindingPowder copy() {
-        return new BlindingPowder(this);
+    public Heartseeker copy() {
+        return new Heartseeker(this);
     }
 }
