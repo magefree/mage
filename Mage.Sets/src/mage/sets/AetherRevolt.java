@@ -64,6 +64,7 @@ public class AetherRevolt extends ExpansionSet {
         this.ratioBoosterSpecialLand = 144;
         this.parentSet = Kaladesh.getInstance();
         cards.add(new SetCardInfo("Aeronaut Admiral", 2, Rarity.UNCOMMON, mage.cards.a.AeronautAdmiral.class));
+        cards.add(new SetCardInfo("Aethergeode Miner", 4, Rarity.RARE, mage.cards.a.AethergeodeMiner.class));
         cards.add(new SetCardInfo("Ajani Unyielding", 127, Rarity.MYTHIC, mage.cards.a.AjaniUnyielding.class));
         cards.add(new SetCardInfo("Ajani, Valiant Protector", 185, Rarity.MYTHIC, mage.cards.a.AjaniValiantProtector.class));
         cards.add(new SetCardInfo("Battle at the Bridge", 53, Rarity.RARE, mage.cards.b.BattleAtTheBridge.class));
@@ -75,6 +76,7 @@ public class AetherRevolt extends ExpansionSet {
         cards.add(new SetCardInfo("Fatal Push", 57, Rarity.UNCOMMON, mage.cards.f.FatalPush.class));
         cards.add(new SetCardInfo("Foundry Assembler", 151, Rarity.COMMON, mage.cards.f.FoundryAssembler.class));
         cards.add(new SetCardInfo("Freejam Regent", 81, Rarity.RARE, mage.cards.f.FreejamRegent.class));
+        cards.add(new SetCardInfo("Glint-Sleeve Siphoner", 62, Rarity.RARE, mage.cards.g.GlintSleeveSiphoner.class));
         cards.add(new SetCardInfo("Gonti's Aether Heart", 152, Rarity.MYTHIC, mage.cards.g.GontisAetherHeart.class));
         cards.add(new SetCardInfo("Greenbelt Rampager", 107, Rarity.RARE, mage.cards.g.GreenbeltRampager.class));
         cards.add(new SetCardInfo("Heart of Kiran", 153, Rarity.MYTHIC, mage.cards.h.HeartOfKiran.class));
@@ -88,6 +90,7 @@ public class AetherRevolt extends ExpansionSet {
         cards.add(new SetCardInfo("Planar Bridge", 171, Rarity.MYTHIC, mage.cards.p.PlanarBridge.class));
         cards.add(new SetCardInfo("Quicksmith Rebel", 93, Rarity.RARE, mage.cards.q.QuicksmithRebel.class));
         cards.add(new SetCardInfo("Quicksmith Spy", 41, Rarity.RARE, mage.cards.q.QuicksmithSpy.class));
+        cards.add(new SetCardInfo("Reverse Engineer", 42, Rarity.UNCOMMON, mage.cards.r.ReverseEngineer.class));
         cards.add(new SetCardInfo("Scrap Trawler", 175, Rarity.RARE, mage.cards.s.ScrapTrawler.class));
         cards.add(new SetCardInfo("Shipwreck Moray", 45, Rarity.COMMON, mage.cards.s.ShipwreckMoray.class));
         cards.add(new SetCardInfo("Siege Modification", 99, Rarity.UNCOMMON, mage.cards.s.SiegeModification.class));
@@ -100,6 +103,7 @@ public class AetherRevolt extends ExpansionSet {
         cards.add(new SetCardInfo("Untethered Express", 179, Rarity.UNCOMMON, mage.cards.u.UntetheredExpress.class));
         cards.add(new SetCardInfo("Whir of Invention", 49, Rarity.RARE, mage.cards.w.WhirOfInvention.class));
         cards.add(new SetCardInfo("Yahenni's Expertise", 75, Rarity.RARE, mage.cards.y.YahennisExpertise.class));
+        cards.add(new SetCardInfo("Yahenni, Undying Partisan", 74, Rarity.RARE, mage.cards.y.YahenniUndyingPartisan.class));
     }
 
     @Override
