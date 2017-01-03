@@ -106,7 +106,6 @@ public class SiegeModification extends CardImpl {
 
         public BecomesCreatureIfVehicleEffect(final BecomesCreatureIfVehicleEffect effect) {
             super(effect);
-            this.staticText = effect.staticText;
         }
 
         @Override
