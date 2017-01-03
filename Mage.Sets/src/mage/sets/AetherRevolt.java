@@ -73,7 +73,9 @@ public class AetherRevolt extends ExpansionSet {
         cards.add(new SetCardInfo("Consulate Crackdown", 11, Rarity.RARE, mage.cards.c.ConsulateCrackdown.class));
         cards.add(new SetCardInfo("Consulate Dreadnought", 146, Rarity.UNCOMMON, mage.cards.c.ConsulateDreadnought.class));
         cards.add(new SetCardInfo("Dark Intimations", 128, Rarity.RARE, mage.cards.d.DarkIntimations.class));
+        cards.add(new SetCardInfo("Decommission", 16, Rarity.COMMON, mage.cards.d.Decommission.class));
         cards.add(new SetCardInfo("Disallow", 31, Rarity.RARE, mage.cards.d.Disallow.class));
+        cards.add(new SetCardInfo("Fatal Push", 57, Rarity.UNCOMMON, mage.cards.f.FatalPush.class));
         cards.add(new SetCardInfo("Foundry Assembler", 151, Rarity.COMMON, mage.cards.f.FoundryAssembler.class));
         cards.add(new SetCardInfo("Freejam Regent", 81, Rarity.RARE, mage.cards.f.FreejamRegent.class));
         cards.add(new SetCardInfo("Gonti's Aether Heart", 152, Rarity.MYTHIC, mage.cards.g.GontisAetherHeart.class));
