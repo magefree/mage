@@ -94,7 +94,9 @@ public class AetherRevolt extends ExpansionSet {
         cards.add(new SetCardInfo("Planar Bridge", 171, Rarity.MYTHIC, mage.cards.p.PlanarBridge.class));
         cards.add(new SetCardInfo("Quicksmith Rebel", 93, Rarity.RARE, mage.cards.q.QuicksmithRebel.class));
         cards.add(new SetCardInfo("Quicksmith Spy", 41, Rarity.RARE, mage.cards.q.QuicksmithSpy.class));
+        cards.add(new SetCardInfo("Renegade Map", 173, Rarity.COMMON, mage.cards.r.RenegadeMap.class));
         cards.add(new SetCardInfo("Reverse Engineer", 42, Rarity.UNCOMMON, mage.cards.r.ReverseEngineer.class));
+        cards.add(new SetCardInfo("Rogue Refiner", 135, Rarity.UNCOMMON, mage.cards.r.RogueRefiner.class));
         cards.add(new SetCardInfo("Scrap Trawler", 175, Rarity.RARE, mage.cards.s.ScrapTrawler.class));
         cards.add(new SetCardInfo("Shipwreck Moray", 45, Rarity.COMMON, mage.cards.s.ShipwreckMoray.class));
         cards.add(new SetCardInfo("Siege Modification", 99, Rarity.UNCOMMON, mage.cards.s.SiegeModification.class));
@@ -103,6 +105,7 @@ public class AetherRevolt extends ExpansionSet {
         cards.add(new SetCardInfo("Sram, Senior Edificer", 23, Rarity.RARE, mage.cards.s.SramSeniorEdificer.class));
         cards.add(new SetCardInfo("Sweatworks Brawler", 100, Rarity.COMMON, mage.cards.s.SweatworksBrawler.class));
         cards.add(new SetCardInfo("Tezzeret the Schemer", 137, Rarity.MYTHIC, mage.cards.t.TezzeretTheSchemer.class));
+        cards.add(new SetCardInfo("Tezzeret's Touch", 138, Rarity.UNCOMMON, mage.cards.t.TezzeretsTouch.class));
         cards.add(new SetCardInfo("Tezzeret, Master of Metal", 190, Rarity.MYTHIC, mage.cards.t.TezzeretMasterOfMetal.class));
         cards.add(new SetCardInfo("Trophy Mage", 48, Rarity.UNCOMMON, mage.cards.t.TrophyMage.class));
         cards.add(new SetCardInfo("Untethered Express", 179, Rarity.UNCOMMON, mage.cards.u.UntetheredExpress.class));
