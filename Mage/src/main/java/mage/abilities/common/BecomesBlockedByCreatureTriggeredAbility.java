@@ -27,9 +27,9 @@
  */
 package mage.abilities.common;
 
-import mage.constants.Zone;
 import mage.abilities.TriggeredAbilityImpl;
 import mage.abilities.effects.Effect;
+import mage.constants.Zone;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.game.Game;
 import mage.game.events.GameEvent;
@@ -55,6 +55,7 @@ public class BecomesBlockedByCreatureTriggeredAbility extends TriggeredAbilityIm
 
     public BecomesBlockedByCreatureTriggeredAbility(final BecomesBlockedByCreatureTriggeredAbility ability) {
         super(ability);
+        this.filter = ability.filter;
     }
 
     @Override

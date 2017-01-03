@@ -29,9 +29,7 @@ package mage.cards.t;
 
 import java.util.UUID;
 import mage.MageInt;
-import mage.abilities.common.BecomesBlockedAllTriggeredAbility;
 import mage.abilities.common.BecomesBlockedByCreatureTriggeredAbility;
-import mage.abilities.common.BecomesBlockedTriggeredAbility;
 import mage.abilities.effects.common.continuous.BoostSourceEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
@@ -45,15 +43,15 @@ import mage.filter.predicate.mageobject.CardTypePredicate;
  * @author wetterlicht
  */
 public class TelJiladWolf extends CardImpl {
-    
-    private static FilterCreaturePermanent filter = new FilterCreaturePermanent("artifact creature");
-    
-    static{
+
+    private final static FilterCreaturePermanent filter = new FilterCreaturePermanent("artifact creature");
+
+    static {
         filter.add(new CardTypePredicate(CardType.ARTIFACT));
     }
 
     public TelJiladWolf(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{2}{G}");
+        super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{2}{G}");
         this.subtype.add("Wolf");
         this.power = new MageInt(2);
         this.toughness = new MageInt(2);
