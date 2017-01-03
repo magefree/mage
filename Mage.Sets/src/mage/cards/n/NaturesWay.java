@@ -28,9 +28,8 @@
 package mage.cards.n;
 
 import java.util.UUID;
-import mage.abilities.Ability;
 import mage.abilities.effects.Effect;
-import mage.abilities.effects.OneShotEffect;
+import mage.abilities.effects.common.DamageWithPowerTargetEffect;
 import mage.abilities.effects.common.continuous.GainAbilityTargetEffect;
 import mage.abilities.keyword.TrampleAbility;
 import mage.abilities.keyword.VigilanceAbility;
@@ -38,13 +37,9 @@ import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Duration;
-import mage.constants.Outcome;
 import mage.constants.TargetController;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.filter.predicate.permanent.ControllerPredicate;
-import mage.game.Game;
-import mage.game.permanent.Permanent;
-import mage.players.Player;
 import mage.target.common.TargetControlledCreaturePermanent;
 import mage.target.common.TargetCreaturePermanent;
 
@@ -63,16 +58,20 @@ public class NaturesWay extends CardImpl {
     public NaturesWay(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.SORCERY}, "{1}{G}");
 
-        // Target creature you control gains vigilance and trample until end of turn. It deals damage equal to its power to target creature you don't control.
+        // Target creature you control gains vigilance and trample until end of turn.
         Effect effect = new GainAbilityTargetEffect(VigilanceAbility.getInstance(), Duration.EndOfTurn);
         effect.setText("Target creature you control gains vigilance");
         this.getSpellAbility().addEffect(effect);
         effect = new GainAbilityTargetEffect(TrampleAbility.getInstance(), Duration.EndOfTurn);
         effect.setText("and trample until end of turn");
         this.getSpellAbility().addEffect(effect);
-        this.getSpellAbility().addEffect(new NaturesWayEffect());
         this.getSpellAbility().addTarget(new TargetControlledCreaturePermanent());
+
+        // It deals damage equal to its power to target creature you don't control.
+        effect = new DamageWithPowerTargetEffect();
+        effect.setText("It deals damage equal to its power to target creature you don't control");
         this.getSpellAbility().addTarget(new TargetCreaturePermanent(filter));
+        this.getSpellAbility().addEffect(effect);
     }
 
     public NaturesWay(final NaturesWay card) {
@@ -82,36 +81,5 @@ public class NaturesWay extends CardImpl {
     @Override
     public NaturesWay copy() {
         return new NaturesWay(this);
-    }
-}
-
-class NaturesWayEffect extends OneShotEffect {
-
-    public NaturesWayEffect() {
-        super(Outcome.Damage);
-        this.staticText = "It deals damage equal to its power to target creature you don't control";
-    }
-
-    public NaturesWayEffect(final NaturesWayEffect effect) {
-        super(effect);
-    }
-
-    @Override
-    public NaturesWayEffect copy() {
-        return new NaturesWayEffect(this);
-    }
-
-    @Override
-    public boolean apply(Game game, Ability source) {
-        Player controller = game.getPlayer(source.getControllerId());
-        Permanent controlledCreature = game.getPermanentOrLKIBattlefield(getTargetPointer().getFirst(game, source));
-        if (controller != null && controlledCreature != null) {
-            Permanent targetCreature = game.getPermanent(source.getTargets().get(1).getFirstTarget());
-            if (targetCreature != null) {
-                targetCreature.damage(controlledCreature.getPower().getValue(), controlledCreature.getId(), game, false, true);
-            }
-            return true;
-        }
-        return false;
     }
 }

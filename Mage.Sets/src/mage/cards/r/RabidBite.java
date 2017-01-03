@@ -28,17 +28,13 @@
 package mage.cards.r;
 
 import java.util.UUID;
-import mage.abilities.Ability;
-import mage.abilities.effects.OneShotEffect;
+import mage.abilities.effects.common.DamageWithPowerTargetEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.Outcome;
 import mage.constants.TargetController;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.filter.predicate.permanent.ControllerPredicate;
-import mage.game.Game;
-import mage.game.permanent.Permanent;
 import mage.target.common.TargetControlledCreaturePermanent;
 import mage.target.common.TargetCreaturePermanent;
 
@@ -55,12 +51,12 @@ public class RabidBite extends CardImpl {
     }
 
     public RabidBite(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{1}{G}");
+        super(ownerId, setInfo, new CardType[]{CardType.SORCERY}, "{1}{G}");
 
         // Target creature you control deals damage equal to its power to target creature you don't control.
         this.getSpellAbility().addTarget(new TargetControlledCreaturePermanent());
         this.getSpellAbility().addTarget(new TargetCreaturePermanent(filter));
-        this.getSpellAbility().addEffect(new RabidBiteEffect());
+        this.getSpellAbility().addEffect(new DamageWithPowerTargetEffect());
     }
 
     public RabidBite(final RabidBite card) {
@@ -71,32 +67,4 @@ public class RabidBite extends CardImpl {
     public RabidBite copy() {
         return new RabidBite(this);
     }
-}
-
-class RabidBiteEffect extends OneShotEffect {
-
-    public RabidBiteEffect() {
-        super(Outcome.Damage);
-        staticText = "Target creature you control deals damage equal to its power to target creature you don't control";
-    }
-
-    public RabidBiteEffect(final RabidBiteEffect effect) {
-        super(effect);
-    }
-
-    @Override
-    public boolean apply(Game game, Ability source) {
-        Permanent sourcePermanent = game.getPermanentOrLKIBattlefield(getTargetPointer().getFirst(game, source));
-        Permanent targetPermanent = game.getPermanent(source.getTargets().get(1).getFirstTarget());
-        if (sourcePermanent != null && targetPermanent != null) {
-            targetPermanent.damage(sourcePermanent.getPower().getValue(), sourcePermanent.getId(), game, false, true);
-        }
-        return true;
-    }
-
-    @Override
-    public RabidBiteEffect copy() {
-        return new RabidBiteEffect(this);
-    }
-
 }
